@@ -1,6 +1,16 @@
 {
   "benchmark_id": "thiamine_cys_xylose_145C_Cerny2008",
-  "source_doi": "10.1021/jf800268t",
+  "source_doi": "10.1021/jf801762c",
+  "source_metadata": {
+    "citation": "Cerny, C.; Guntz-Dubini, R. Formation of Cysteine-S-Conjugates in the Maillard Reaction of Cysteine, Xylose and Thiamine. J. Agric. Food Chem. 2008, 56 (23), 10237-10241.",
+    "doi_repair": {
+      "old": "10.1021/jf800268t",
+      "new": "10.1021/jf801762c",
+      "date": "2026-08-26",
+      "basis": "The 2026-08-26 citation sweep found 10.1021/jf800268t dead (does not resolve in CrossRef). 10.1021/jf801762c is the real Cerny & Guntz-Dubini 2008 paper on the cysteine/xylose/thiamine system and was already recorded as the correct identifier in data/lit/benchmark_intake_registry.json; the two anchors are now consistent."
+    },
+    "VALUES_NEED_RE_EXAMINATION": "WARNING (2026-08-26): the DOI is now correct but the VALUES ARE NOT YET VERIFIED AGAINST IT. The paper's main subject is the cysteine-S-conjugate 5-hydroxy-3-mercapto-2-pentanone, NOT 2-methyl-3-furanthiol. The 2.47 ppb MFT figure below was inherited from the pre-repair file and has not been located in the actual paper. Someone with ACS access must re-examine the paper's MFT reporting (if any) and either re-anchor, re-scale or remove this reference_volatiles block. Until then this benchmark must not be cited as an MFT anchor, and it must not be used to constrain the sulfur-branch barriers (see the sulfur re-anchoring item in tasks/audit_remediation.md). Values are left UNCHANGED for now so the repair is a pure provenance fix with no silent recalibration."
+  },
   "precursors": {
     "Thiamine": {
       "concentration_mM": 10.0
@@ -22,7 +32,7 @@
     "tier": "PRIMARY",
     "family": "thiamine_fragmentation_support",
     "execution_path": "free_precursor",
-    "notes": "Family 03 reference anchor for the mixed thiamine, cysteine, and xylose system from Cerny & Guntz-Dubini 2008. The reported MFT value is retained as a reference-scale ug/g reaction-mixture anchor for directional and pH-window comparison, not as a strict ppb-equivalent quantitative benchmark."
+    "notes": "Family 03 reference anchor for the mixed thiamine, cysteine, and xylose system from Cerny & Guntz-Dubini 2008. The reported MFT value is retained as a reference-scale ug/g reaction-mixture anchor for directional and pH-window comparison, not as a strict ppb-equivalent quantitative benchmark. PROVENANCE FLAG 2026-08-26: DOI repaired to 10.1021/jf801762c, but that paper's main subject is 5-hydroxy-3-mercapto-2-pentanone rather than MFT, so the MFT value itself still needs re-examination against the actual paper -- see source_metadata.VALUES_NEED_RE_EXAMINATION."
   },
   "reference_volatiles": {
     "2-Methyl-3-furanthiol (MFT)": {

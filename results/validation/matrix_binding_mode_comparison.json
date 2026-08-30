@@ -1,0 +1,1979 @@
+{
+  "generated_by": "scripts/generators/generate_matrix_binding_mode_comparison.py",
+  "wave": "S4",
+  "git_head": "c6b6be3",
+  "fitted_parameters_in_this_wave": 0,
+  "model": {
+    "module": "src/protein_binding.py",
+    "form": "f_free = 1 / (1 + K_eff * c_p)  [single-site Langmuir, dilute-ligand limit]",
+    "k_eff_route": "K_eff = a_p * Pow  (Harrison & Hills partition model, a_p in L per g protein)",
+    "fitted_parameters": 0,
+    "fitted_parameters_note": "Every constant is a literature transcription with a verbatim quote in data/lit/binding_constants.yml. Nothing in this module was chosen to make any prediction match any benchmark.",
+    "denaturation_modelled": false,
+    "denaturation_not_modelled_because": "the two retrieved sources disagree in sign (Barallat-Perez 2023: heat raises hexanal binding, qualitative; Heng 2005: heat lowers octanal binding to purified vicilin, 96% -> 32%)",
+    "covalent_binding_modelled": false,
+    "record_count": 26,
+    "source_count": 12,
+    "modes": [
+      "fitted_factors",
+      "binding_physics",
+      "binding_physics_out_of_domain",
+      "unit_observability"
+    ],
+    "default_mode": "fitted_factors"
+  },
+  "binding_constants_file": "data/lit/binding_constants.yml",
+  "binding_constants_sources": [
+    "snel_2023_heliyon",
+    "barallat_perez_2023_jafc",
+    "harrison_hills_1997",
+    "pratap_singh_2021_molecules",
+    "liu_2021_ncsu_thesis",
+    "pubchem_logp",
+    "wang_2015_umanitoba_thesis",
+    "heng_2005_wur_thesis",
+    "barallat_perez_2025_npjsf",
+    "liu_2026_ilc_spi",
+    "okeefe_1988_isu_thesis",
+    "bi_2022_foodchem"
+  ],
+  "modes": [
+    "fitted_factors",
+    "unit_observability",
+    "binding_physics"
+  ],
+  "deterministic": {
+    "fitted_factors": {
+      "holdout": {
+        "rows": [
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "Hexanal",
+            "measured_ppb": 1260.0,
+            "predicted_ppb": 1125.278339411831,
+            "net_observability_factor": 4.31725,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1.119722966193934
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "Hexanal",
+            "measured_ppb": 324.0,
+            "predicted_ppb": 890491.8026330344,
+            "net_observability_factor": 0.228776,
+            "fitted_registry_factor": 0.228776,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 2748.431489608131
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 185613.20687201884,
+            "net_observability_factor": 0.0194733,
+            "fitted_registry_factor": 0.0194733,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 1196206.4834935179,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 12024.968207302889,
+            "net_observability_factor": 0.00959565,
+            "fitted_registry_factor": 0.00959565,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "Hexanal",
+            "measured_ppb": 605.6,
+            "predicted_ppb": 62657.498349624904,
+            "net_observability_factor": 1.7571140814819015,
+            "fitted_registry_factor": 2.8047805800000005,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 103.46350454033174
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 5625.8,
+            "predicted_ppb": 12261.118440108941,
+            "net_observability_factor": 0.14041294213724712,
+            "fitted_registry_factor": 0.17760956175298803,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 2.1794444239235204
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "1-Hexanol",
+            "measured_ppb": 20.04,
+            "predicted_ppb": 24874.552050239898,
+            "net_observability_factor": 2.2698412698412698,
+            "fitted_registry_factor": 2.2698412698412698,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1241.2451122874202
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "Nonanal",
+            "measured_ppb": 72.66,
+            "predicted_ppb": 9548.430182669466,
+            "net_observability_factor": 0.8432755729373179,
+            "fitted_registry_factor": 1.0666666666666667,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 131.41247154788695
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "Hexanal",
+            "measured_ppb": 11320.0,
+            "predicted_ppb": 1125.278339411831,
+            "net_observability_factor": 4.31725,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 10.05973331532963
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "Nonanal",
+            "measured_ppb": 0.8018,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 104.65904886288462
+          }
+        ],
+        "summary": {
+          "scored_rows": 8,
+          "median_fold_error": 104.06127670160818,
+          "median_abs_log10_error": 2.0172819842095118,
+          "within_10x": 2,
+          "worst_fold_error": 2748.431489608131
+        }
+      },
+      "in_panel": {
+        "rows": [
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "Hexanal",
+            "measured_ppb": 1138.0,
+            "predicted_ppb": 1125.278339411831,
+            "net_observability_factor": 4.31725,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1.0113053456576961
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 638.0,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1.0004190163362536
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "Hexanal",
+            "measured_ppb": 1621.71,
+            "predicted_ppb": 1640.0447759486174,
+            "net_observability_factor": 9.54007,
+            "fitted_registry_factor": 9.54007,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1.0113058290006336
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 2492.0,
+            "predicted_ppb": 2492.2929435575757,
+            "net_observability_factor": 5.920318725099602,
+            "fitted_registry_factor": 5.920318725099602,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1.0001175535945328
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 119.91853665165993,
+            "net_observability_factor": 2.2698412698412698,
+            "fitted_registry_factor": 2.2698412698412698,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 58.226707333171724,
+            "net_observability_factor": 1.0666666666666667,
+            "fitted_registry_factor": 1.0666666666666667,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "Hexanal",
+            "measured_ppb": 782.0,
+            "predicted_ppb": 782.0056135695185,
+            "net_observability_factor": 0.17666289328730833,
+            "fitted_registry_factor": 0.228776,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1.0000071784776452
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 163.0,
+            "predicted_ppb": 163.00045581258945,
+            "net_observability_factor": 0.015037458124330091,
+            "fitted_registry_factor": 0.0194733,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 1.0000027963962543
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 1360.3517518216247,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "Nonanal",
+            "measured_ppb": 24.0,
+            "predicted_ppb": 10.559999107572926,
+            "net_observability_factor": 0.007409847588787112,
+            "fitted_registry_factor": 0.00959565,
+            "binding_f_free": null,
+            "binding_in_domain": null,
+            "binding_mechanism": null,
+            "binding_reasons": null,
+            "fold_error": 2.272727464795788
+          }
+        ],
+        "summary": {
+          "scored_rows": 7,
+          "median_fold_error": 1.0004190163362536,
+          "median_abs_log10_error": 0.00018193836774955344,
+          "within_10x": 7,
+          "worst_fold_error": 2.272727464795788
+        }
+      }
+    },
+    "unit_observability": {
+      "holdout": {
+        "rows": [
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "Hexanal",
+            "measured_ppb": 1260.0,
+            "predicted_ppb": 260.6470182203558,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 4.834123975800762
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "Hexanal",
+            "measured_ppb": 324.0,
+            "predicted_ppb": 3892417.9224789073,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 0.228776,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 12013.635563206504
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 9531677.058948347,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 0.0194733,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 1196206.4834935179,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 1253168.6969932092,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 0.00959565,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "Hexanal",
+            "measured_ppb": 605.6,
+            "predicted_ppb": 28191.221177908636,
+            "net_observability_factor": 0.7905708496287356,
+            "fitted_registry_factor": 2.8047805800000005,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 46.5508936227025
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 5625.8,
+            "predicted_ppb": 69034.1123478543,
+            "net_observability_factor": 0.7905708496287356,
+            "fitted_registry_factor": 0.17760956175298803,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 12.270985877182676
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "1-Hexanol",
+            "measured_ppb": 20.04,
+            "predicted_ppb": 10958.718735420374,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 2.2698412698412698,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 546.8422522664857
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "Nonanal",
+            "measured_ppb": 72.66,
+            "predicted_ppb": 8951.653296252625,
+            "net_observability_factor": 0.7905708496287356,
+            "fitted_registry_factor": 1.0666666666666667,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 123.19919207614403
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "Hexanal",
+            "measured_ppb": 11320.0,
+            "predicted_ppb": 260.6470182203558,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 43.430383655606846
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "Nonanal",
+            "measured_ppb": 0.8018,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 104.65904886288462
+          }
+        ],
+        "summary": {
+          "scored_rows": 8,
+          "median_fold_error": 75.60497124279357,
+          "median_abs_log10_error": 1.8438524029908567,
+          "within_10x": 1,
+          "worst_fold_error": 12013.635563206504
+        }
+      },
+      "in_panel": {
+        "rows": [
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "Hexanal",
+            "measured_ppb": 1138.0,
+            "predicted_ppb": 260.6470182203558,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 4.366058003540688
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 638.0,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 1.0004190163362536
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "Hexanal",
+            "measured_ppb": 1621.71,
+            "predicted_ppb": 171.91118890622582,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 9.54007,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 9.433417396028894
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 2492.0,
+            "predicted_ppb": 420.9727650289042,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 5.920318725099602,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 5.919622852155051
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 52.83124341996207,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 2.2698412698412698,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 54.58753812484849,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0666666666666667,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "Hexanal",
+            "measured_ppb": 782.0,
+            "predicted_ppb": 3418.215256711886,
+            "net_observability_factor": 0.7722090310491849,
+            "fitted_registry_factor": 0.228776,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 4.371119254107271
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 163.0,
+            "predicted_ppb": 8370.458823753008,
+            "net_observability_factor": 0.7722090310491849,
+            "fitted_registry_factor": 0.0194733,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 51.352508121184094
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 1360.3517518216247,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "Nonanal",
+            "measured_ppb": 24.0,
+            "predicted_ppb": 1100.498570453583,
+            "net_observability_factor": 0.7722090310491849,
+            "fitted_registry_factor": 0.00959565,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "unit_null_model",
+            "binding_reasons": [
+              "null model: no observability correction of any kind"
+            ],
+            "fold_error": 45.854107102232625
+          }
+        ],
+        "summary": {
+          "scored_rows": 7,
+          "median_fold_error": 5.919622852155051,
+          "median_abs_log10_error": 0.7722940380665743,
+          "within_10x": 5,
+          "worst_fold_error": 51.352508121184094
+        }
+      }
+    },
+    "binding_physics": {
+      "holdout": {
+        "rows": [
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "Hexanal",
+            "measured_ppb": 1260.0,
+            "predicted_ppb": 260.6470182203558,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 4.834123975800762
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "Hexanal",
+            "measured_ppb": 324.0,
+            "predicted_ppb": 3892417.9224789073,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 0.228776,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 12013.635563206504
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 9531677.058948347,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 0.0194733,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 1196206.4834935179,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 1253168.6969932092,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 0.00959565,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "Hexanal",
+            "measured_ppb": 605.6,
+            "predicted_ppb": 28191.221177908636,
+            "net_observability_factor": 0.7905708496287356,
+            "fitted_registry_factor": 2.8047805800000005,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 46.5508936227025
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 5625.8,
+            "predicted_ppb": 69034.1123478543,
+            "net_observability_factor": 0.7905708496287356,
+            "fitted_registry_factor": 0.17760956175298803,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 12.270985877182676
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "1-Hexanol",
+            "measured_ppb": 20.04,
+            "predicted_ppb": 10958.718735420374,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 2.2698412698412698,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 546.8422522664857
+          },
+          {
+            "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+            "compound": "Nonanal",
+            "measured_ppb": 72.66,
+            "predicted_ppb": 8951.653296252625,
+            "net_observability_factor": 0.7905708496287356,
+            "fitted_registry_factor": 1.0666666666666667,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 123.19919207614403
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "Hexanal",
+            "measured_ppb": 11320.0,
+            "predicted_ppb": 103.98843735102965,
+            "net_observability_factor": 0.39896269698783166,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": 0.39896269698783166,
+            "binding_in_domain": true,
+            "binding_mechanism": "harrison_hills_ap_pow",
+            "binding_reasons": [
+              "c_p is on an ISOLATE-POWDER basis while a_p is per gram of PROTEIN; c_p is therefore an upper bound (<=1.3x) and f_free a lower bound",
+              "c_p 100.0 g/L extrapolates 2.0x above the highest protein level a_p was fitted at (50 g/kg); the model is linear in c_p so this is an extrapolation of the fit range, not of the form",
+              "a_p was measured on 2-alkanones; applying it to a non-ketone is a declared class transfer and makes f_free an UPPER bound (aldehydes also bind covalently)"
+            ],
+            "fold_error": 108.85825663277856
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": null,
+            "predicted_ppb": 5.053711456728141,
+            "net_observability_factor": 0.007917860119124206,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 0.007917860119124206,
+            "binding_in_domain": true,
+            "binding_mechanism": "harrison_hills_ap_pow",
+            "binding_reasons": [
+              "Pow for 2-Pentylfuran is computed_xlogp3, not an experimental measurement",
+              "c_p is on an ISOLATE-POWDER basis while a_p is per gram of PROTEIN; c_p is therefore an upper bound (<=1.3x) and f_free a lower bound",
+              "c_p 100.0 g/L extrapolates 2.0x above the highest protein level a_p was fitted at (50 g/kg); the model is linear in c_p so this is an extrapolation of the fit range, not of the form",
+              "a_p was measured on 2-alkanones; applying it to a non-ketone is a declared class transfer and makes f_free an UPPER bound (aldehydes also bind covalently)"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 21.774047915775228,
+            "net_observability_factor": 0.2718314644920149,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 0.2718314644920149,
+            "binding_in_domain": true,
+            "binding_mechanism": "harrison_hills_ap_pow",
+            "binding_reasons": [
+              "c_p is on an ISOLATE-POWDER basis while a_p is per gram of PROTEIN; c_p is therefore an upper bound (<=1.3x) and f_free a lower bound",
+              "c_p 100.0 g/L extrapolates 2.0x above the highest protein level a_p was fitted at (50 g/kg); the model is linear in c_p so this is an extrapolation of the fit range, not of the form",
+              "a_p was measured on 2-alkanones; applying it to a non-ketone is a declared class transfer and makes f_free an UPPER bound (aldehydes also bind covalently)"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+            "compound": "Nonanal",
+            "measured_ppb": 0.8018,
+            "predicted_ppb": 1.6492364686233874,
+            "net_observability_factor": 0.019653508642630425,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 0.019653508642630425,
+            "binding_in_domain": true,
+            "binding_mechanism": "harrison_hills_ap_pow",
+            "binding_reasons": [
+              "Pow for Nonanal is computed_xlogp3, not an experimental measurement",
+              "c_p is on an ISOLATE-POWDER basis while a_p is per gram of PROTEIN; c_p is therefore an upper bound (<=1.3x) and f_free a lower bound",
+              "c_p 100.0 g/L extrapolates 2.0x above the highest protein level a_p was fitted at (50 g/kg); the model is linear in c_p so this is an extrapolation of the fit range, not of the form",
+              "a_p was measured on 2-alkanones; applying it to a non-ketone is a declared class transfer and makes f_free an UPPER bound (aldehydes also bind covalently)"
+            ],
+            "fold_error": 2.056917521356183
+          }
+        ],
+        "summary": {
+          "scored_rows": 8,
+          "median_fold_error": 77.70457512774053,
+          "median_abs_log10_error": 1.8523946986060666,
+          "within_10x": 2,
+          "worst_fold_error": 12013.635563206504
+        }
+      },
+      "in_panel": {
+        "rows": [
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "Hexanal",
+            "measured_ppb": 1138.0,
+            "predicted_ppb": 260.6470182203558,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 4.31725,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": 4.366058003540688
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 638.0,
+            "predicted_ppb": 638.2673324225299,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": 1.0004190163362536
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 80.10127877015813,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 83.91562537826088,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "Hexanal",
+            "measured_ppb": 1621.71,
+            "predicted_ppb": 171.91118890622582,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 9.54007,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": 9.433417396028894
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 2492.0,
+            "predicted_ppb": 420.9727650289042,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 5.920318725099602,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": 5.919622852155051
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 52.83124341996207,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 2.2698412698412698,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+            "compound": "Nonanal",
+            "measured_ppb": null,
+            "predicted_ppb": 54.58753812484849,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0666666666666667,
+            "binding_f_free": 1.0,
+            "binding_in_domain": true,
+            "binding_mechanism": "matrix_matched_reports_total",
+            "binding_reasons": [
+              "the reference quantification is matrix-matched, so it reports the TOTAL analyte and no binding correction applies"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "Hexanal",
+            "measured_ppb": 782.0,
+            "predicted_ppb": 3418.215256711886,
+            "net_observability_factor": 0.7722090310491849,
+            "fitted_registry_factor": 0.228776,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 4.371119254107271
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "2-Pentylfuran",
+            "measured_ppb": 163.0,
+            "predicted_ppb": 8370.458823753008,
+            "net_observability_factor": 0.7722090310491849,
+            "fitted_registry_factor": 0.0194733,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 51.352508121184094
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "1-Hexanol",
+            "measured_ppb": null,
+            "predicted_ppb": 1360.3517518216247,
+            "net_observability_factor": 1.0,
+            "fitted_registry_factor": 1.0,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": null
+          },
+          {
+            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "compound": "Nonanal",
+            "measured_ppb": 24.0,
+            "predicted_ppb": 1100.498570453583,
+            "net_observability_factor": 0.7722090310491849,
+            "fitted_registry_factor": 0.00959565,
+            "binding_f_free": 1.0,
+            "binding_in_domain": false,
+            "binding_mechanism": "none",
+            "binding_reasons": [
+              "the reference's quantification basis is not established, so it is not known whether the reported number is a total or a free concentration"
+            ],
+            "fold_error": 45.854107102232625
+          }
+        ],
+        "summary": {
+          "scored_rows": 7,
+          "median_fold_error": 5.919622852155051,
+          "median_abs_log10_error": 0.7722940380665743,
+          "within_10x": 5,
+          "worst_fold_error": 51.352508121184094
+        }
+      }
+    }
+  },
+  "holdout_monte_carlo": {
+    "fitted_factors": {
+      "rows": [
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "hexanal",
+          "measured_ppb": 1260.0,
+          "predicted_p50": 1013.0762208543294,
+          "fold_error": 1.2437366252042112,
+          "abs_log10_error": 0.09472842349750889,
+          "inside_ci": true,
+          "value_provenance": "primary_source_table_value_verified"
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "hexanal",
+          "measured_ppb": 324.0,
+          "predicted_p50": 801700.3780458169,
+          "fold_error": 2474.3838828574594,
+          "abs_log10_error": 3.393467078184556,
+          "inside_ci": false,
+          "value_provenance": "primary_source_table_value_verified"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "1-hexanol",
+          "measured_ppb": 20.04,
+          "predicted_p50": 22394.29686318585,
+          "fold_error": 1117.4798833925074,
+          "abs_log10_error": 3.0482397138082113,
+          "inside_ci": false,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "2-pentylfuran",
+          "measured_ppb": 5625.8,
+          "predicted_p50": 11038.555615711428,
+          "fold_error": 1.9621308286308485,
+          "abs_log10_error": 0.29272796138143414,
+          "inside_ci": true,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "hexanal",
+          "measured_ppb": 605.6,
+          "predicted_p50": 56409.88492625116,
+          "fold_error": 93.147101925778,
+          "abs_log10_error": 1.9691693472921417,
+          "inside_ci": false,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "nonanal",
+          "measured_ppb": 72.66,
+          "predicted_p50": 8596.350987797654,
+          "fold_error": 118.30926214970623,
+          "abs_log10_error": 2.0730187458371265,
+          "inside_ci": false,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "hexanal",
+          "measured_ppb": 11320.0,
+          "predicted_p50": 1013.0762208543294,
+          "fold_error": 11.173887775644184,
+          "abs_log10_error": 1.0482043052321985,
+          "inside_ci": true,
+          "value_provenance": "band_geometric_midpoint"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "nonanal",
+          "measured_ppb": 0.8018,
+          "predicted_p50": 75.54835248430304,
+          "fold_error": 94.22343787017091,
+          "abs_log10_error": 1.974158946015635,
+          "inside_ci": false,
+          "value_provenance": "band_geometric_midpoint"
+        }
+      ],
+      "median_fold_error": 93.68372415254433,
+      "median_abs_log10_error": 1.9716641466538882,
+      "ci_coverage_hits": 3,
+      "ci_coverage_total": 8
+    },
+    "unit_observability": {
+      "rows": [
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "hexanal",
+          "measured_ppb": 1260.0,
+          "predicted_p50": 234.6577615042746,
+          "fold_error": 5.369521945162881,
+          "abs_log10_error": 0.7299356216735393,
+          "inside_ci": true,
+          "value_provenance": "primary_source_table_value_verified"
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "hexanal",
+          "measured_ppb": 324.0,
+          "predicted_p50": 3504302.802941816,
+          "fold_error": 10815.749391795729,
+          "abs_log10_error": 4.034056615818239,
+          "inside_ci": false,
+          "value_provenance": "primary_source_table_value_verified"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "1-hexanol",
+          "measured_ppb": 20.04,
+          "predicted_p50": 9866.018897767193,
+          "fold_error": 492.316312263832,
+          "abs_log10_error": 2.6922442257967316,
+          "inside_ci": false,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "2-pentylfuran",
+          "measured_ppb": 5625.8,
+          "predicted_p50": 62150.68325580012,
+          "fold_error": 11.047439165238742,
+          "abs_log10_error": 1.0432616187182535,
+          "inside_ci": true,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "hexanal",
+          "measured_ppb": 605.6,
+          "predicted_p50": 25380.259098484108,
+          "fold_error": 41.909278564207575,
+          "abs_log10_error": 1.6223101848548316,
+          "inside_ci": true,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "nonanal",
+          "measured_ppb": 72.66,
+          "predicted_p50": 8059.079051060302,
+          "fold_error": 110.9149332653496,
+          "abs_log10_error": 2.044990022236883,
+          "inside_ci": false,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "hexanal",
+          "measured_ppb": 11320.0,
+          "predicted_p50": 234.6577615042746,
+          "fold_error": 48.24046699939986,
+          "abs_log10_error": 1.683411503408229,
+          "inside_ci": true,
+          "value_provenance": "band_geometric_midpoint"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "nonanal",
+          "measured_ppb": 0.8018,
+          "predicted_p50": 75.54835248430304,
+          "fold_error": 94.22343787017091,
+          "abs_log10_error": 1.974158946015635,
+          "inside_ci": false,
+          "value_provenance": "band_geometric_midpoint"
+        }
+      ],
+      "median_fold_error": 67.41945301725595,
+      "median_abs_log10_error": 1.828785224711932,
+      "ci_coverage_hits": 4,
+      "ci_coverage_total": 8
+    },
+    "binding_physics": {
+      "rows": [
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "hexanal",
+          "measured_ppb": 1260.0,
+          "predicted_p50": 234.6577615042746,
+          "fold_error": 5.369521945162881,
+          "abs_log10_error": 0.7299356216735393,
+          "inside_ci": true,
+          "value_provenance": "primary_source_table_value_verified"
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "hexanal",
+          "measured_ppb": 324.0,
+          "predicted_p50": 3504302.802941816,
+          "fold_error": 10815.749391795729,
+          "abs_log10_error": 4.034056615818239,
+          "inside_ci": false,
+          "value_provenance": "primary_source_table_value_verified"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "1-hexanol",
+          "measured_ppb": 20.04,
+          "predicted_p50": 9866.018897767193,
+          "fold_error": 492.316312263832,
+          "abs_log10_error": 2.6922442257967316,
+          "inside_ci": false,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "2-pentylfuran",
+          "measured_ppb": 5625.8,
+          "predicted_p50": 62150.68325580012,
+          "fold_error": 11.047439165238742,
+          "abs_log10_error": 1.0432616187182535,
+          "inside_ci": true,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "hexanal",
+          "measured_ppb": 605.6,
+          "predicted_p50": 25380.259098484108,
+          "fold_error": 41.909278564207575,
+          "abs_log10_error": 1.6223101848548316,
+          "inside_ci": true,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "nonanal",
+          "measured_ppb": 72.66,
+          "predicted_p50": 8059.079051060302,
+          "fold_error": 110.9149332653496,
+          "abs_log10_error": 2.044990022236883,
+          "inside_ci": false,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "hexanal",
+          "measured_ppb": 11320.0,
+          "predicted_p50": 93.61969339887278,
+          "fold_error": 120.91473053399571,
+          "abs_log10_error": 2.0824792123573017,
+          "inside_ci": true,
+          "value_provenance": "band_geometric_midpoint"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "nonanal",
+          "measured_ppb": 0.8018,
+          "predicted_p50": 1.4847901984867393,
+          "fold_error": 1.8518211505197548,
+          "abs_log10_error": 0.267599040071024,
+          "inside_ci": true,
+          "value_provenance": "band_geometric_midpoint"
+        }
+      ],
+      "median_fold_error": 68.17891782030593,
+      "median_abs_log10_error": 1.8336501035458572,
+      "ci_coverage_hits": 5,
+      "ci_coverage_total": 8
+    }
+  },
+  "fabricated_factor_rows": {
+    "fitted_factors": [
+      {
+        "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+        "compound": "1-Hexanol",
+        "measured_ppb": null,
+        "predicted_ppb": 80.10127877015813,
+        "net_observability_factor": 1.0,
+        "fitted_registry_factor": 1.0,
+        "binding_f_free": null,
+        "binding_in_domain": null,
+        "fold_error": null
+      },
+      {
+        "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+        "compound": "1-Hexanol",
+        "measured_ppb": null,
+        "predicted_ppb": 119.91853665165993,
+        "net_observability_factor": 2.2698412698412698,
+        "fitted_registry_factor": 2.2698412698412698,
+        "binding_f_free": null,
+        "binding_in_domain": null,
+        "fold_error": null
+      },
+      {
+        "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+        "compound": "1-Hexanol",
+        "measured_ppb": 20.04,
+        "predicted_ppb": 24874.552050239898,
+        "net_observability_factor": 2.2698412698412698,
+        "fitted_registry_factor": 2.2698412698412698,
+        "binding_f_free": null,
+        "binding_in_domain": null,
+        "fold_error": 1241.2451122874202
+      }
+    ],
+    "unit_observability": [
+      {
+        "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+        "compound": "1-Hexanol",
+        "measured_ppb": null,
+        "predicted_ppb": 80.10127877015813,
+        "net_observability_factor": 1.0,
+        "fitted_registry_factor": 1.0,
+        "binding_f_free": 1.0,
+        "binding_in_domain": true,
+        "fold_error": null
+      },
+      {
+        "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+        "compound": "1-Hexanol",
+        "measured_ppb": null,
+        "predicted_ppb": 52.83124341996207,
+        "net_observability_factor": 1.0,
+        "fitted_registry_factor": 2.2698412698412698,
+        "binding_f_free": 1.0,
+        "binding_in_domain": true,
+        "fold_error": null
+      },
+      {
+        "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+        "compound": "1-Hexanol",
+        "measured_ppb": 20.04,
+        "predicted_ppb": 10958.718735420374,
+        "net_observability_factor": 1.0,
+        "fitted_registry_factor": 2.2698412698412698,
+        "binding_f_free": 1.0,
+        "binding_in_domain": true,
+        "fold_error": 546.8422522664857
+      }
+    ],
+    "binding_physics": [
+      {
+        "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+        "compound": "1-Hexanol",
+        "measured_ppb": null,
+        "predicted_ppb": 80.10127877015813,
+        "net_observability_factor": 1.0,
+        "fitted_registry_factor": 1.0,
+        "binding_f_free": 1.0,
+        "binding_in_domain": true,
+        "fold_error": null
+      },
+      {
+        "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+        "compound": "1-Hexanol",
+        "measured_ppb": null,
+        "predicted_ppb": 52.83124341996207,
+        "net_observability_factor": 1.0,
+        "fitted_registry_factor": 2.2698412698412698,
+        "binding_f_free": 1.0,
+        "binding_in_domain": true,
+        "fold_error": null
+      },
+      {
+        "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+        "compound": "1-Hexanol",
+        "measured_ppb": 20.04,
+        "predicted_ppb": 10958.718735420374,
+        "net_observability_factor": 1.0,
+        "fitted_registry_factor": 2.2698412698412698,
+        "binding_f_free": 1.0,
+        "binding_in_domain": false,
+        "fold_error": 546.8422522664857
+      }
+    ]
+  },
+  "cross_check_percent_bound": [
+    {
+      "record_id": "bi2022_hexanal_pea_protein_prv",
+      "compound": "hexanal",
+      "compound_class": "aldehyde",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 71.72,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 13.09259983487594,
+      "residual_points_pea_iso": -58.62740016512406,
+      "predicted_percent_bound_soy_iso": 8.79374252108689,
+      "residual_points_soy_iso": -62.92625747891311
+    },
+    {
+      "record_id": "bi2022_z2penten1ol_pea_protein_prv",
+      "compound": "(Z)-2-penten-1-ol",
+      "compound_class": "alcohol",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 29.29,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": null,
+      "unavailable_because_pea_iso": "no content-verified octanol-water partition coefficient for '(Z)-2-penten-1-ol'",
+      "predicted_percent_bound_soy_iso": null,
+      "unavailable_because_soy_iso": "no content-verified octanol-water partition coefficient for '(Z)-2-penten-1-ol'"
+    },
+    {
+      "record_id": "bi2022_e2octenal_pea_protein_prv",
+      "compound": "(E)-2-octenal",
+      "compound_class": "aldehyde",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 79.31,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": null,
+      "unavailable_because_pea_iso": "no content-verified octanol-water partition coefficient for '(E)-2-octenal'",
+      "predicted_percent_bound_soy_iso": null,
+      "unavailable_because_soy_iso": "no content-verified octanol-water partition coefficient for '(E)-2-octenal'"
+    },
+    {
+      "record_id": "barallat2023_octanal_plant_isolates_pooled",
+      "compound": "octanal",
+      "compound_class": "aldehyde",
+      "protein_source_declared": "plant_isolates_pooled",
+      "measured_percent_bound": 52.76,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 55.614243389296384,
+      "residual_points_pea_iso": 2.8542433892963857,
+      "predicted_percent_bound_soy_iso": 44.50314778145783,
+      "residual_points_soy_iso": -8.256852218542171
+    },
+    {
+      "record_id": "barallat2023_2octanone_plant_isolates_pooled",
+      "compound": "2-octanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "plant_isolates_pooled",
+      "measured_percent_bound": 14.73,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 36.95028529995902,
+      "residual_points_pea_iso": 22.22028529995902,
+      "predicted_percent_bound_soy_iso": 27.27653533778596,
+      "residual_points_soy_iso": 12.546535337785958
+    },
+    {
+      "record_id": "barallat2023_heptanal_plant_isolates_pooled",
+      "compound": "heptanal",
+      "compound_class": "aldehyde",
+      "protein_source_declared": "plant_isolates_pooled",
+      "measured_percent_bound": 13.73,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 33.281070171634454,
+      "residual_points_pea_iso": 19.551070171634453,
+      "predicted_percent_bound_soy_iso": 24.199240779595645,
+      "residual_points_soy_iso": 10.469240779595644
+    },
+    {
+      "record_id": "barallat2023_trans2heptenal_plant_isolates_pooled",
+      "compound": "trans-2-heptenal",
+      "compound_class": "alkenal",
+      "protein_source_declared": "plant_isolates_pooled",
+      "measured_percent_bound": 54.6,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": null,
+      "unavailable_because_pea_iso": "no content-verified octanol-water partition coefficient for 'trans-2-heptenal'",
+      "predicted_percent_bound_soy_iso": null,
+      "unavailable_because_soy_iso": "no content-verified octanol-water partition coefficient for 'trans-2-heptenal'"
+    },
+    {
+      "record_id": "barallat2023_cis4heptenal_plant_isolates_pooled",
+      "compound": "cis-4-heptenal",
+      "compound_class": "alkenal",
+      "protein_source_declared": "plant_isolates_pooled",
+      "measured_percent_bound": 18.19,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": null,
+      "unavailable_because_pea_iso": "no content-verified octanol-water partition coefficient for 'cis-4-heptenal'",
+      "predicted_percent_bound_soy_iso": null,
+      "unavailable_because_soy_iso": "no content-verified octanol-water partition coefficient for 'cis-4-heptenal'"
+    },
+    {
+      "record_id": "wang2015_ppi_2octanone_ph7",
+      "compound": "2-octanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 31.9,
+      "protein_concentration_g_per_l_used": 8.268,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 32.63934524796919,
+      "residual_points_pea_iso": 0.7393452479691902,
+      "predicted_percent_bound_soy_iso": 23.67050407569221,
+      "residual_points_soy_iso": -8.229495924307788
+    },
+    {
+      "record_id": "wang2015_ppi_2heptanone_ph7",
+      "compound": "2-heptanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 13.9,
+      "protein_concentration_g_per_l_used": 8.268,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 16.485614438301035,
+      "residual_points_pea_iso": 2.585614438301034,
+      "predicted_percent_bound_soy_iso": 11.216470722601334,
+      "residual_points_soy_iso": -2.683529277398666
+    },
+    {
+      "record_id": "wang2015_ppi_2hexanone_ph7",
+      "compound": "2-hexanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 7.15,
+      "protein_concentration_g_per_l_used": 8.268,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 4.724459659778857,
+      "residual_points_pea_iso": -2.4255403402211435,
+      "predicted_percent_bound_soy_iso": 3.075970456265553,
+      "residual_points_soy_iso": -4.074029543734447
+    },
+    {
+      "record_id": "wang2015_ppi_octanal_native",
+      "compound": "octanal",
+      "compound_class": "aldehyde",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 61.87,
+      "protein_concentration_g_per_l_used": 8.268,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 50.88311496220017,
+      "residual_points_pea_iso": -10.98688503779983,
+      "predicted_percent_bound_soy_iso": 39.8682233955575,
+      "residual_points_soy_iso": -22.001776604442497
+    },
+    {
+      "record_id": "wang2015_ppi_2octanone_ph8",
+      "compound": "2-octanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 23.76,
+      "protein_concentration_g_per_l_used": 8.268,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 32.63934524796919,
+      "residual_points_pea_iso": 8.879345247969187,
+      "predicted_percent_bound_soy_iso": 23.67050407569221,
+      "residual_points_soy_iso": -0.08949592430779063
+    },
+    {
+      "record_id": "heng2005_vicilin_2octanone",
+      "compound": "2-octanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "pea_vicilin",
+      "measured_percent_bound": 33.0,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_protein",
+      "predicted_percent_bound_pea_iso": 36.95028529995902,
+      "residual_points_pea_iso": 3.9502852999590203,
+      "predicted_percent_bound_soy_iso": 27.27653533778596,
+      "residual_points_soy_iso": -5.723464662214042
+    },
+    {
+      "record_id": "heng2005_vicilin_2heptanone",
+      "compound": "2-heptanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "pea_vicilin",
+      "measured_percent_bound": 19.0,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_protein",
+      "predicted_percent_bound_pea_iso": 19.273461150353178,
+      "residual_points_pea_iso": 0.2734611503531781,
+      "predicted_percent_bound_soy_iso": 13.254684247050664,
+      "residual_points_soy_iso": -5.745315752949336
+    },
+    {
+      "record_id": "heng2005_vicilin_2hexanone",
+      "compound": "2-hexanone",
+      "compound_class": "ketone",
+      "protein_source_declared": "pea_vicilin",
+      "measured_percent_bound": 13.0,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_protein",
+      "predicted_percent_bound_pea_iso": 5.658152314913078,
+      "residual_points_pea_iso": -7.341847685086922,
+      "predicted_percent_bound_soy_iso": 3.696513043344274,
+      "residual_points_soy_iso": -9.303486956655727
+    }
+  ],
+  "pratap_vs_liu_binding_test": {
+    "question": "Does protein binding explain why Liu's water-calibrated pea hexanal numbers differ from Pratap-Singh's matrix-matched one?",
+    "binding_prediction": {
+      "liu_protein_loading_g_per_l": 100.0,
+      "liu_protein_basis": "g_isolate_powder",
+      "pratap_protein_loading_g_per_l": 142.86,
+      "f_free_hexanal_pea_at_liu_loading": 0.39896269698783166,
+      "k_eff_l_per_g": 0.015065,
+      "predicted_water_calibrated_under_read_fold": 2.5065,
+      "direction": "Liu's reported values must be LOWER than a matrix-matched measurement of the same material by this factor."
+    },
+    "observed": {
+      "pratap_singh_matrix_matched_ppb": 1138.0,
+      "liu_water_calibrated_band_ppb": [
+        2445.0,
+        52454.0
+      ],
+      "liu_geometric_mid_ppb": 11324.752977438404,
+      "liu_lowest_lot_over_pratap_fold": 2.148506151142355,
+      "liu_geo_mid_over_pratap_fold": 9.951452528504749
+    },
+    "verdict_inputs": {
+      "liu_band_corrected_to_total_ppb": [
+        6128.3925,
+        131475.951
+      ],
+      "liu_geo_mid_corrected_ppb": 28385.49333794936,
+      "gap_before_correction_fold": 9.951452528504749,
+      "gap_after_correction_fold": 24.943315762697154
+    }
+  },
+  "attribution": {
+    "holdout_rows_total": 16,
+    "holdout_rows_where_binding_actually_applied": 4,
+    "holdout_rows_where_binding_reduces_to_null_model": 12,
+    "rows_where_binding_applied": [
+      {
+        "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+        "compound": "Hexanal",
+        "f_free": 0.39896269698783166
+      },
+      {
+        "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+        "compound": "2-Pentylfuran",
+        "f_free": 0.007917860119124206
+      },
+      {
+        "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+        "compound": "1-Hexanol",
+        "f_free": 0.2718314644920149
+      },
+      {
+        "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+        "compound": "Nonanal",
+        "f_free": 0.019653508642630425
+      }
+    ],
+    "reading": "Any difference between `unit_observability` and `binding_physics` is the binding physics. Any difference between `fitted_factors` and `unit_observability` is the fitted factors being better or worse than no factor at all. Report the two separately."
+  },
+  "monte_carlo_settings": {
+    "n_samples": 200,
+    "seed": 0
+  }
+}

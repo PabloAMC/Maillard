@@ -1,0 +1,398 @@
+{
+  "artifact": "maillard_path_holdout_wave_y_prepost",
+  "wave": "Y",
+  "generated_on": "2026-08-28",
+  "baseline": {
+    "file": "results/validation/maillard_path_holdout_frozen_predictions.json",
+    "commit": "12f43dd",
+    "note": "READ, never regenerated. Comparing a wave against a baseline the same wave produced proves nothing, which is why this file is committed and append-only."
+  },
+  "pre_registration": {
+    "file": "results/validation/wave_y_prereg_predictions.json",
+    "predictions_scored_here": [
+      "Y-P1",
+      "Y-P2"
+    ]
+  },
+  "maillard_path": {
+    "targets_changed": 8,
+    "targets_total": 22,
+    "targets_added_since_freeze": [
+      "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 / 2-Furfurylthiol (FFT)",
+      "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 / 2-Methyl-3-furanthiol (MFT)",
+      "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 / 2-Furfurylthiol (FFT)",
+      "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 / 2-Methyl-3-furanthiol (MFT)",
+      "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / 2-Furfurylthiol (FFT)",
+      "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / 2-Methyl-3-furanthiol (MFT)",
+      "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / 2-Furfurylthiol (FFT)",
+      "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / 2-Methyl-3-furanthiol (MFT)",
+      "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 / 2-Furfurylthiol (FFT)",
+      "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 / 2-Methyl-3-furanthiol (MFT)"
+    ],
+    "targets_removed_since_freeze": [],
+    "comparison_scope": "The 22 targets the frozen pre-registration itself carries. Bundles added after 12f43dd (Waves W and X) are listed under targets_added_since_freeze and are NOT counted as movement -- they have no frozen counterpart to move from.",
+    "frozen_summary": {
+      "bundle_count": 12,
+      "target_count": 22,
+      "quantitatively_scored_count": 21,
+      "ordinal_only_count": 0,
+      "structural_zero_count": 1,
+      "median_fold_error": 6.038752949192657,
+      "worst_fold_error": 52.58641429978577,
+      "best_fold_error": 1.5167561508937306,
+      "median_abs_log10_error": 0.7809472625943955,
+      "within_10x": 12,
+      "within_10x_rate": 0.5714285714285714,
+      "ordinal_pairs_correct": 8,
+      "ordinal_pairs_total": 12,
+      "series_directions_correct": 3,
+      "series_directions_total": 6
+    },
+    "wave_y_summary": {
+      "bundle_count": 17,
+      "target_count": 32,
+      "quantitatively_scored_count": 31,
+      "ordinal_only_count": 0,
+      "structural_zero_count": 1,
+      "median_fold_error": 10.86381837964712,
+      "worst_fold_error": 506.424391151322,
+      "best_fold_error": 1.2435497830531987,
+      "median_abs_log10_error": 1.0359824965004563,
+      "within_10x": 15,
+      "within_10x_rate": 0.4838709677419355,
+      "ordinal_pairs_correct": 10,
+      "ordinal_pairs_total": 17,
+      "series_directions_correct": 3,
+      "series_directions_total": 6
+    },
+    "rows": [
+      {
+        "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "target_value": 12280.0,
+        "frozen_predicted": 61206.665187108825,
+        "wave_y_predicted": 61206.665187108825,
+        "frozen_fold_error": 4.984256122728731,
+        "wave_y_fold_error": 4.984256122728731,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+        "compound": "Acrylamide",
+        "target_value": 1859.0,
+        "frozen_predicted": 100.5584933430374,
+        "wave_y_predicted": 100.5584933430374,
+        "frozen_fold_error": 18.48675271673326,
+        "wave_y_fold_error": 18.48675271673326,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "target_value": 57253.94,
+        "frozen_predicted": 24232.973694254357,
+        "wave_y_predicted": 24232.973694254357,
+        "frozen_fold_error": 2.3626460673943175,
+        "wave_y_fold_error": 2.3626460673943175,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "DMHF",
+        "target_value": 1153.17,
+        "frozen_predicted": 6963.708738420496,
+        "wave_y_predicted": 6963.708738420496,
+        "frozen_fold_error": 6.038752949192657,
+        "wave_y_fold_error": 6.038752949192657,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "Furfural",
+        "target_value": 1633.36,
+        "frozen_predicted": 18463.30040529716,
+        "wave_y_predicted": 18463.30040529716,
+        "frozen_fold_error": 11.30387691953835,
+        "wave_y_fold_error": 11.30387691953835,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "target_value": 100635.78,
+        "frozen_predicted": 18763.669018766024,
+        "wave_y_predicted": 18763.669018766024,
+        "frozen_fold_error": 5.363331654344978,
+        "wave_y_fold_error": 5.363331654344978,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "compound": "DMHF",
+        "target_value": 5893.98,
+        "frozen_predicted": 17263.137376539737,
+        "wave_y_predicted": 17263.137376539737,
+        "frozen_fold_error": 2.928944003294843,
+        "wave_y_fold_error": 2.928944003294843,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "compound": "Furfural",
+        "target_value": 2402.0,
+        "frozen_predicted": 14296.192542031491,
+        "wave_y_predicted": 14296.192542031491,
+        "frozen_fold_error": 5.951787069954825,
+        "wave_y_fold_error": 5.951787069954825,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+        "compound": "Acrylamide",
+        "target_value": 28.0,
+        "frozen_predicted": 61.32083711913466,
+        "wave_y_predicted": 61.32083711913466,
+        "frozen_fold_error": 2.1900298971119523,
+        "wave_y_fold_error": 2.1900298971119523,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+        "compound": "Acrylamide",
+        "target_value": 1459.0,
+        "frozen_predicted": 76.03662871126568,
+        "wave_y_predicted": 76.03662871126568,
+        "frozen_fold_error": 19.18812057725848,
+        "wave_y_fold_error": 19.18812057725848,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "target_value": 7000.0,
+        "frozen_predicted": 43128.26545648947,
+        "wave_y_predicted": 43128.26545648947,
+        "frozen_fold_error": 6.161180779498496,
+        "wave_y_fold_error": 6.161180779498496,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "Acrylamide",
+        "target_value": 832.0,
+        "frozen_predicted": 76.03662871126568,
+        "wave_y_predicted": 76.03662871126568,
+        "frozen_fold_error": 10.942094804851992,
+        "wave_y_fold_error": 10.942094804851992,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_asparagine_180C_Ye2024",
+        "compound": "Acrylamide",
+        "target_value": 140.58,
+        "frozen_predicted": 80.37784396410122,
+        "wave_y_predicted": 80.37784396410122,
+        "frozen_fold_error": 1.7489894362280556,
+        "wave_y_fold_error": 1.7489894362280556,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "target_value": 17400.0,
+        "frozen_predicted": 0.0,
+        "wave_y_predicted": 0.0,
+        "frozen_fold_error": null,
+        "wave_y_fold_error": null,
+        "changed": false
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "target_value": 1.28,
+        "frozen_predicted": 15.559603988705325,
+        "wave_y_predicted": 15.43934132907918,
+        "frozen_fold_error": 12.155940616176034,
+        "wave_y_fold_error": 12.061985413343109,
+        "changed": true
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "target_value": 6.88,
+        "frozen_predicted": 4.535996109820317,
+        "wave_y_predicted": 8.555622507406007,
+        "frozen_fold_error": 1.5167561508937306,
+        "wave_y_fold_error": 1.2435497830531987,
+        "changed": true
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "target_value": 1.46,
+        "frozen_predicted": 33.517542910781415,
+        "wave_y_predicted": 33.174756204391144,
+        "frozen_fold_error": 22.957221171768094,
+        "wave_y_fold_error": 22.72243575643229,
+        "changed": true
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "target_value": 3.29,
+        "frozen_predicted": 8.490127310987353,
+        "wave_y_predicted": 15.70902971000651,
+        "frozen_fold_error": 2.5805858088107456,
+        "wave_y_fold_error": 4.774781066871279,
+        "changed": true
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "target_value": 1.68,
+        "frozen_predicted": 62.075063043156405,
+        "wave_y_predicted": 61.28098212094799,
+        "frozen_fold_error": 36.9494422875931,
+        "wave_y_fold_error": 36.476775071992854,
+        "changed": true
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "target_value": 2.4,
+        "frozen_predicted": 14.37462009088175,
+        "wave_y_predicted": 26.073164111153087,
+        "frozen_fold_error": 5.989425037867396,
+        "wave_y_fold_error": 10.86381837964712,
+        "changed": true
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "target_value": 1.62,
+        "frozen_predicted": 85.18999116565296,
+        "wave_y_predicted": 83.9926871854059,
+        "frozen_fold_error": 52.58641429978577,
+        "wave_y_fold_error": 51.84733776876907,
+        "changed": true
+      },
+      {
+        "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "target_value": 1.71,
+        "frozen_predicted": 20.645018442692226,
+        "wave_y_predicted": 36.734806615858105,
+        "frozen_fold_error": 12.07311020040481,
+        "wave_y_fold_error": 21.48234305020942,
+        "changed": true
+      }
+    ],
+    "series": [
+      {
+        "series_id": "acrylamide_time_series_Chang2021",
+        "compound": "Acrylamide",
+        "frozen_direction_correct": true,
+        "wave_y_direction_correct": true
+      },
+      {
+        "series_id": "ph_pair_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "frozen_direction_correct": false,
+        "wave_y_direction_correct": false
+      },
+      {
+        "series_id": "ph_pair_Schibilsky2019",
+        "compound": "DMHF",
+        "frozen_direction_correct": true,
+        "wave_y_direction_correct": true
+      },
+      {
+        "series_id": "ph_pair_Schibilsky2019",
+        "compound": "Furfural",
+        "frozen_direction_correct": false,
+        "wave_y_direction_correct": false
+      },
+      {
+        "series_id": "sulfur_temperature_series_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "frozen_direction_correct": true,
+        "wave_y_direction_correct": true
+      },
+      {
+        "series_id": "sulfur_temperature_series_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "frozen_direction_correct": false,
+        "wave_y_direction_correct": false
+      }
+    ]
+  },
+  "attribution": {
+    "targets_moved_since_the_freeze": 8,
+    "targets_moved_with_wave_x_norfuraneol_channel_ablated": 0,
+    "wave_y_own_contribution_targets": 0,
+    "wave_y_ablation_method": "MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal'] restored to 0.205 and all four hexanal observability constants restored to their pre-Wave-Y values, in memory; the hold-out then reproduced the shipped run on every target. Measured, not argued.",
+    "verdict": "EVERY target that has moved since the freeze is attributable to Wave X's norfuraneol parallel channel and to nothing else: with that one template ablated, all 22 frozen targets are bit-identical to the pre-registration. Wave Y moves none of them, which is what its pre-registration Y-P1 claimed mechanistically -- but Y-P1's literal wording ('0 of 22 targets move') is FALSIFIED against the frozen file, because it assumed the frozen file was still current. It was not, and nobody had scored it.",
+    "the_finding": "Wave X priced its norfuraneol channel against the Wave W panel (0.9241 -> 0.9518 dex) and did not re-score the frozen maillard_path hold-out. The unmeasured price is 8 of 22 frozen targets and a median fold error of 6.0388x -> 10.8638x on the repository's only free-precursor out-of-sample surface. All eight are PENTOSE (ribose/cysteine) rows, which is exactly what a norfuraneol channel should touch: MFT rises 1.78-1.89x on all four bundles and FFT falls 0.992x. That is the channel's fingerprint, and it is why the ablation closes the gap to zero."
+  },
+  "step_level": {
+    "rows": [
+      {
+        "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured_ppb": 11016.0,
+        "predicted_ppb": 2413.654816088318,
+        "fold": 0.2191044676913869,
+        "abs_log10": 0.6593487667846435,
+        "is_fit_target": false
+      },
+      {
+        "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured_ppb": 4224.0,
+        "predicted_ppb": 1533.0615022911259,
+        "fold": 0.36294069656513395,
+        "abs_log10": 0.440164331599049,
+        "is_fit_target": true
+      },
+      {
+        "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured_ppb": 1016.0,
+        "predicted_ppb": 1745.3138504664676,
+        "fold": 1.7178285929788066,
+        "abs_log10": 0.23497982722674093,
+        "is_fit_target": false
+      },
+      {
+        "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured_ppb": 310.0,
+        "predicted_ppb": 2180.342107023836,
+        "fold": 7.0333616355607615,
+        "abs_log10": 0.8471629481813194,
+        "is_fit_target": false
+      },
+      {
+        "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured_ppb": 5362.0,
+        "predicted_ppb": 2180.342107023836,
+        "fold": 0.4066285167892271,
+        "abs_log10": 0.39080216763126874,
+        "is_fit_target": false
+      },
+      {
+        "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured_ppb": 6230.0,
+        "predicted_ppb": 2180.342107023836,
+        "fold": 0.34997465602308764,
+        "abs_log10": 0.45596340464357754,
+        "is_fit_target": false
+      }
+    ],
+    "scored_row_count": 5,
+    "mean_abs_log10": 0.5176514228935101,
+    "wave_x_reported_mean_abs_log10": 0.518
+  }
+}

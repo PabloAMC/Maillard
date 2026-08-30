@@ -238,34 +238,67 @@ class TestTypeValidation:
         engine = SmirksEngine(ReactionConditions(pH=6.0, temperature_celsius=150.0))
         assert isinstance(engine.conditions, ReactionConditions)
 
-    def test_barriers_dict_non_numeric_values(self):
-        """Barriers dict should have numeric values."""
-        invalid_barriers = {
-            "R+R->P": "not_a_number",  # String instead of float
-        }
-        
-        # Implementation should validate this
-        recommender = Recommender()
-        try:
-            recommender.predict_from_steps([], invalid_barriers, {})
-            pytest.skip("Implementation may not validate barrier types")
-        except (TypeError, ValueError):
-            # Expected: type error for non-numeric barrier
-            pass
+    def test_non_numeric_barrier_is_not_validated_at_the_api_boundary(self):
+        """KNOWN GAP, stated rather than skipped: barriers_dict values are never type-checked.
 
-    def test_concentration_dict_non_numeric_values(self):
-        """Concentration dict should have numeric values."""
-        invalid_conc = {
-            "C": "not_a_number"  # String instead of float
-        }
-        
+        REWRITTEN 2026-08-27 (Wave J2, red-team finding: self-excusing skips). This was:
+
+            try:
+                recommender.predict_from_steps([], invalid_barriers, {})
+                pytest.skip("Implementation may not validate barrier types")
+            except (TypeError, ValueError):
+                pass
+
+        which skips EXACTLY when the defect it exists to detect is present, and passes
+        silently when it is not. Either way it reports nothing. A skip whose condition is
+        "the thing under test is broken" can never fail.
+
+        Worse, the setup was vacuous independently of the skip: the step list is ``[]``, so
+        no step ever looks a barrier up and ``invalid_barriers`` is dead input. Even a fully
+        validating implementation would only catch this at the lookup site, which is never
+        reached. So the original test could not have detected barrier validation whether or
+        not it existed.
+
+        What is asserted now is the measured truth (2026-08-27): the call RETURNS NORMALLY,
+        producing a well-formed empty result, and the garbage barrier is silently ignored.
+        There is no boundary validation on barriers_dict. If someone adds it, this test goes
+        red and they must decide deliberately whether the new behaviour is right -- which is
+        what a test is for.
+        """
+        invalid_barriers = {"R+R->P": "not_a_number"}  # String instead of float
         recommender = Recommender()
-        try:
+
+        result = recommender.predict_from_steps([], invalid_barriers, {})
+
+        assert isinstance(result, dict), (
+            "predict_from_steps now rejects a non-numeric barrier. That is an improvement, "
+            "but it is a behaviour change: re-pin this test to assert the exception."
+        )
+        assert result.get("targets") == [], (
+            f"expected no targets from an empty step list, got {result.get('targets')!r}"
+        )
+
+    def test_non_numeric_concentration_raises_rather_than_being_coerced(self):
+        """Concentration dict values ARE rejected -- via arithmetic, not validation.
+
+        REWRITTEN 2026-08-27 (Wave J2, red-team finding: self-excusing skips). Same
+        `pytest.skip("Implementation may not validate concentration types")` escape hatch as
+        the test above. Here the skip was never reached, because the call does raise -- but
+        the test would have gone quietly green-by-skip the moment it stopped raising, which
+        is precisely when someone should have been told.
+
+        Measured 2026-08-27: this raises ``TypeError: can't multiply sequence by non-int of
+        type 'float'``. Note what that message reveals -- the string is not REJECTED by a
+        validator, it is fed into the matrix-correction arithmetic and blows up there. The
+        protection is incidental. It is asserted here because incidental protection is still
+        protection, and losing it must be visible; the message itself is deliberately NOT
+        asserted, since a real validator would raise something better worded.
+        """
+        invalid_conc = {"C": "not_a_number"}  # String instead of float
+        recommender = Recommender()
+
+        with pytest.raises((TypeError, ValueError)):
             recommender.predict_from_steps([], {}, invalid_conc)
-            pytest.skip("Implementation may not validate concentration types")
-        except (TypeError, ValueError):
-            # Expected: type error for non-numeric concentration
-            pass
 
 
 class TestDataConsistency:

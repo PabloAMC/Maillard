@@ -21,7 +21,7 @@ from src.experiment_value import ExperimentCandidate
 def _candidate(**overrides: Any) -> ExperimentCandidate:
     base: Dict[str, Any] = dict(
         rank=1,
-        benchmark_id="cys_ribose_150C_Mottram1994",
+        benchmark_id="cys_ribose_140C_Hofmann1998",
         compound="2-methyl-3-furanthiol",
         measured_ppb=10.0,
         predicted_p5=0.001,

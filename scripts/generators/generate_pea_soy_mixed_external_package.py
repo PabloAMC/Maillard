@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -16,8 +17,21 @@ from src.pea_soy_mixed_external_package import (  # noqa: E402
 )
 
 
-def main() -> int:
-    output_dir = ROOT / "results" / "validation"
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Assemble the mixed pea / soy external package; writes "
+            "results/validation/pea_soy_mixed_external_package.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
+    output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     payload = build_pea_soy_mixed_external_package_artifact()
     (output_dir / "pea_soy_mixed_external_package.md").write_text(

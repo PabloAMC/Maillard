@@ -1,0 +1,86 @@
+{
+  "source": "Hyun Hee Hong, Mina K. Kim (2020). \"Comparison of orthonasal thresholds of key volatile flavor compounds responsible for traditional doenjang flavor in two matrices: Water-based and soybean-based model system\". Journal of Sensory Studies 2020;e12567 (article number; no volume/page). DOI 10.1111/joss.12567. Short Contribution, 5 pages. Fermented Food Research Center, Jeonbuk (Chonbuk) National University, Jeonju-si, South Korea.",
+  "firewall_notice": "PUBLIC MANIFEST. This file is the ONLY part of the Hong 2020 paired dataset that a model-building wave may read. It deliberately contains no threshold values, no ratios, no fold-changes, no signs and no directions. The frozen outcome data live in hong2020_paired_thresholds.json, which is GATING HOLD-OUT under Declaration Amendment 4 and must not be opened by any fitting or model-development wave.",
+  "method": "Orthonasal best-estimate thresholds (BET) by 7-series 3-Ascending Forced Choice (7-3AFC), ASTM E679-91 (ASTM 1997), 7-step ascending series at a factor-3 dilution. Panel n = 20, recruited by campus flyers and word of mouth among departmental friends, staff and faculty; instructed on proper sniffing technique; no screening or performance criterion reported; number of replicate sessions per panellist not stated. 1 min rest between each set of three; panellists instructed to sniff their sleeves between cups. Cups: 70 mL (70 mm x 30 mm) white opaque lidded plastic, three-digit random codes. Matrix-matched blanks. Individual BET = geometric mean of the last incorrect and first correct concentration, with a 'not sure' on a correct choice multiplied by 1.41 first; group BET = geometric mean of the individual BETs. Serving temperature not stated (room temperature implied). Both matrices were run by the SAME panel, the same day, the same protocol and the same BET rule, so the pairing is same_study_same_method (cross_study_cross_method: FALSE). Compounds all from Sigma-Aldrich (St. Louis, MO), purities not stated; stock solutions in 70% ethanol, vortex-homogenised. Compound selection basis cited to Jo, Cho, Song, Shin & Kim (2011), previously reported key doenjang volatiles. Reported units are ug/kg in both matrices.",
+  "matrix_description": "Two matrices, 12 units per cup each. WATER MATRIX: distilled water, 12 mL per cup; an aliquot of the ethanolic stock was spiked in and the sample served immediately, with no equilibration hold, at room temperature (~22 C). SOYBEAN MATRIX: 2.5 kg whole soybeans (local grocery, Jeonju) soaked in 3 L distilled water for 20 h at room temperature, autoclaved 40 min at 121 C and 0.1 MPa, cooled to room temperature, then ground in a food processor for 1 min at 24000 rpm to a paste; 12 g per cup; spiked one compound at a time, bagged in polyethylene, stomached 30 s at 8 strokes/second, vacuum-sealed and stored 24 h at 4 C before testing. The soybean model preparation follows the 'standard method of manufacturing soybean paste' cited to Park, Hwang, Jung & Lee (2002). PROTOCOL ASYMMETRY: the water arm had a 0 h hold at ~22 C while the soybean arm had a 24 h hold at 4 C -- an experimental asymmetry, not a matrix property, and it is confounded with the pairing. COMPOSITION: the soybean matrix's pH, protein content, fat content, moisture and solids are ALL unreported (matrix_composition: not_stated), so nothing from this dataset can be rescaled to another protein or lipid loading, nor decomposed into protein and lipid terms.",
+  "n_compounds": 10,
+  "compounds": [
+    {
+      "name": "2,3-dimethyl pyrazine",
+      "cas": null,
+      "class": "alkylpyrazine (nitrogen heteroaromatic)",
+      "structure_notes": "C6H8N2. Six-membered 1,4-diazine aromatic ring bearing two methyl groups on adjacent ring carbons. No amino group (contrary to a chemically incorrect sentence in the paper's discussion), no carbonyl, no thiol, no ester. Fully saturated substituents; smallest heavy-atom count of the ring compounds in the set."
+    },
+    {
+      "name": "Ethyl-4-methylpentanoate",
+      "cas": null,
+      "class": "aliphatic ester (branched-chain)",
+      "structure_notes": "C8H16O2. Ethyl ester of 4-methylpentanoic acid: a branched C6 acyl chain (isohexanoyl, methyl branch at the 4-position) esterified to an ethyl alcohol moiety. Fully saturated; no alpha,beta-unsaturation; no free acid, aldehyde, thiol or ring. The only ester in the set."
+    },
+    {
+      "name": "2-pentyl furan",
+      "cas": null,
+      "class": "alkylfuran (oxygen heteroaromatic)",
+      "structure_notes": "C9H14O. Aromatic five-membered furan ring substituted at C2 by a straight-chain saturated n-pentyl group. No carbonyl, no hydroxyl, no thiol. Lipid-oxidation-derived structural motif; the longest saturated alkyl substituent on a ring in the set."
+    },
+    {
+      "name": "4-vinyl phenol",
+      "cas": null,
+      "class": "vinyl-substituted phenol",
+      "structure_notes": "C8H8O. Benzene ring bearing a hydroxyl and, para to it, a vinyl (-CH=CH2) group. Contains a carbon-carbon double bond conjugated to the aromatic ring (styrenic), but it is NOT an alpha,beta-unsaturated carbonyl -- there is no carbonyl. Phenolic OH is the only heteroatom-bearing group."
+    },
+    {
+      "name": "Hexanal",
+      "cas": null,
+      "class": "aliphatic aldehyde (straight chain)",
+      "structure_notes": "C6H12O. Straight-chain, fully saturated six-carbon aliphatic aldehyde. Terminal -CHO; no branching, no unsaturation in the chain, no other functional group. The longest-chain n-alkanal in the set."
+    },
+    {
+      "name": "3-methyl butanal",
+      "cas": null,
+      "class": "aliphatic aldehyde (branched chain)",
+      "structure_notes": "C5H10O. Branched, fully saturated five-carbon aldehyde: isobutyl group attached to -CHO, i.e. the methyl branch sits at the 3-position (beta to the carbonyl). Structurally the Strecker aldehyde of leucine. A chain isomer of 2-methyl butanal, differing only in branch position."
+    },
+    {
+      "name": "2-methyl butanal",
+      "cas": null,
+      "class": "aliphatic aldehyde (branched chain)",
+      "structure_notes": "C5H10O. Branched, fully saturated five-carbon aldehyde with the methyl branch at the 2-position (alpha to the carbonyl), giving a stereocentre. Structurally the Strecker aldehyde of isoleucine. A chain isomer of 3-methyl butanal, differing only in branch position."
+    },
+    {
+      "name": "Butyric acid",
+      "cas": null,
+      "class": "short-chain carboxylic acid",
+      "structure_notes": "C4H8O2. Straight-chain, fully saturated four-carbon aliphatic carboxylic acid (n-butanoic acid). Ionisable -COOH is the only functional group; the only acid in the set and the only compound with pH-dependent speciation. Shortest carbon chain of the non-branched aliphatic members."
+    },
+    {
+      "name": "4-ethyl phenol",
+      "cas": null,
+      "class": "alkyl-substituted phenol",
+      "structure_notes": "C8H10O. Benzene ring bearing a hydroxyl and, para to it, a saturated ethyl group. Differs from 4-vinyl phenol only by saturation of the two-carbon para substituent (ethyl vs vinyl). Phenolic OH; no carbonyl, no thiol."
+    },
+    {
+      "name": "Dimethyl disulfide",
+      "cas": null,
+      "class": "aliphatic disulfide (organosulfur)",
+      "structure_notes": "C2H6S2. CH3-S-S-CH3: two methyl groups joined by a disulfide bond. NOT a free thiol -- no -SH is present. Smallest and only sulfur-containing compound in the set; no carbonyl, no ring, no unsaturation."
+    }
+  ],
+  "declared_pass_criterion": "As printed in docs/reference/FIT_HOLDOUT_DECLARATION.md, Amendment 4 (2026-08-28): Hong 2020's 10 paired soy/water threshold ratios are GATING HOLD-OUT, with the pass criterion '>=7/10 within 5x AND correct sign on all 10 [remainder of the printed clause withheld -- hold-out]'. The dossier's own §9 proposal, adopted by the amendment, phrases it as: a matrix model is acceptable only if it reproduces >=7/10 of the paired ratios to within a factor of 5 AND reproduces the sign on all 10. NOTE FOR MODEL BUILDERS: every per-compound sign and every ratio magnitude is withheld from this manifest by the firewall; all ten signs and magnitudes must be predicted blind.",
+  "additional_declared_holdout_guard": "Dossier §9 freezes one further item from the same table as a falsification guard rather than a fit target: a stated relationship between a molecular descriptor already available to the model and the paired matrix shift. Its content, magnitude and sign are withheld -- hold-out. Model builders should not tune any descriptor-dependent matrix term against expectations about this dataset.",
+  "structural_and_methodological_caveats_no_outcome_information": [
+    "CAS registry numbers are not printed in the paper or the dossier; all cas fields are null. Chemical classes and structure notes here are derived from the compound names alone, not printed by the authors.",
+    "The paper's dispersion column is labelled 'SD of individual threshold value' but its scale is never stated and cannot be linear; the only self-consistent reading is a log-scale SD with the base unstated. It must not be ingested as a linear SD, and it is declared NOT FITTABLE / NOT INGESTIBLE pending clarification of the log base.",
+    "The printed Z-statistic column is arithmetically not the formula the paper defines for it; the declaration marks it printed_Z_statistic: DO_NOT_INGEST. Do not use it to decide significance.",
+    "The paper reports a p-value claim that is not supported by any statistic computable from the paper: no p-value is computed anywhere in it.",
+    "Equilibration is asymmetric between the two arms (0 h at room temperature vs 24 h at 4 C); this is confounded with the pairing and is a protocol property, not a matrix property.",
+    "The soybean matrix composition is entirely unreported (pH, protein, fat, moisture, solids), so the dataset cannot be rescaled to other loadings.",
+    "The number of replicate sessions per panellist is never stated.",
+    "The panel was untrained-but-instructed, drawn from a single Korean university department in 2019, with no screening or performance criterion -- population- and site-specific.",
+    "Three of the twenty printed dosing series are inconsistent with the stated 7-step, factor-3 design (shorter or mis-stated spans), and one printed series bound is not an exact member of its own geometric series. All twenty group BETs nonetheless fall inside their own printed series ranges, checked cell by cell, so no reported value is an extrapolation beyond its series.",
+    "Reference-list defects: the paper mis-cites Guadagni, Buttery & Turnbaugh (1972) to the wrong journal (correct venue: Journal of the Science of Food and Agriculture 23, 1435-1444), and cites a 2003 year in text against a 2004 reference-list entry for Karagul-Yuceer et al.; neither is resolvable from the PDF.",
+    "Cross-study reproducibility context (no information about this dataset's own outcomes): aqueous orthonasal thresholds for the same compound reported by different laboratories in the cited literature disagree by more than three orders of magnitude, which is why only within-study pairings such as this one are treated as load-bearing.",
+    "The authors offer a mechanistic interpretation of their own results in the discussion; its content is withheld from this manifest (hold-out). Methodologically relevant fact only: they measured no background volatile concentrations in the soybean matrix, so no mechanistic claim in the paper is supported by matrix-composition data.",
+    "Source PDF has a clean digital text layer and was fully machine-readable; Tables 1 and 2 were re-read at 400 dpi. No cell was unreadable, so there is no digitisation uncertainty in this record."
+  ]
+}

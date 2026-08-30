@@ -1,166 +1,364 @@
 # Henry's Law & Partitioning Constants for Maillard Volatiles
-# Values are dimensionless air-water partition coefficients (Kaw = C_air / C_water)
-# and lipid-water partition coefficients (Kfat = C_fat / C_water).
 #
-# Sources: 
+# Kaw_25c  = dimensionless air-water partition coefficient C_air / C_water at 298.15 K,
+#            for the PURE COMPOUND in dilute aqueous solution. It is an intrinsic
+#            physical property. Matrix effects (lipid/protein sequestration, melanoidin
+#            trapping, protein binding) are applied SEPARATELY downstream and must never
+#            be folded into this number — see the FFT entry for the mistake this note
+#            exists to prevent.
+# Kfat     = lipid-water partition coefficient C_fat / C_water (matrix property).
+# delta_H_sol_kj_mol = enthalpy of dissolution, used for the van't Hoff extrapolation in
+#            src/headspace.py (which clamps the extrapolation to 273.15-373.15 K).
+#
+# PROVENANCE (rebuilt 2026-08-26, audit remediation "Kaw table correction")
+# Primary source: R. Sander, "Compilation of Henry's law constants (version 5.0.0) for
+# water as solvent", Atmos. Chem. Phys. 23, 10901-10440 (2023); database at
+# https://henrys-law.org. Sander publishes H_cp in mol/(m^3 Pa); the conversion used is
+#     Kaw = 1 / (H_cp * R * T) = 1 / (H_cp * 2478.9)   [R = 8.314 J/(mol K), T = 298.15 K]
+# verified against the H2S entry (H_cp = 1.0e-3 -> Kaw = 0.403).
+# Where Sander tabulates the temperature dependence B = d(ln H_cp)/d(1/T) in K,
+#     delta_H_sol = -R * B  (kJ/mol).
+# Sander source-type codes quoted below: L = literature review/evaluation, M = measured,
+# V = derived from vapour pressure + solubility, Q/X = QSAR/estimated.
+#
+# `previous_value` records the pre-audit number that was in this file. `estimated: true`
+# marks entries with no measured value anywhere; those carry a `source` note describing
+# the estimation route and an order-of-magnitude uncertainty.
+#
+# THRESHOLD-CROSSING VALUES ACTIVATED 2026-08-26 (owner-approved): the corrected
+# literature values for HMF and acrylamide cross the 1.0e-8 "headspace observable"
+# threshold in src/recommend.py. Measured panel impact at activation: acrylamide is
+# produced via src/safety.py (not the Henry-gated loop) so nothing moves; HMF affects
+# one unscored row. The previous placeholders are kept as previous_value.
+#
+# Superseded sources retained for context:
 # [1] Buttery et al. (1969), Air-Water Partition Coefficients of Some Volatiles
 # [2] Roberts & Acree (1995), Modified Henry's Law for Foods
 # [3] NIST Chemistry WebBook (Henry's Law Constants)
-#
 
 constants:
   - name: "2-Furfurylthiol (FFT)"
-    Kaw_25c: 0.000084  # Very low volatility in water, sequestered by matrix
-    delta_H_sol_kj_mol: -55.0  # Estimated enthalpy of solution
+    Kaw_25c: 0.002
+    previous_value: 0.000084
+    estimated: true
+    # The old value conflated two different things. FFT's *pure-compound* volatility is
+    # high (it is a small thiol); what makes it hard to detect in a cooked matrix is
+    # sequestration by melanoidins/protein, which this project already models elsewhere
+    # (melanoidin trapping in src/recommend.py, Kfat below, protein binding via Kprot).
+    # Kaw_25c must carry only the intrinsic term.
+    source: >-
+      Not in Sander 5.0.0; no pure-compound measurement exists (no experimental vapour
+      pressure or solubility in EPA CompTox either). Estimated from furfuryl alcohol
+      (Sander, type V, Kaw 3.4e-6) scaled by the mean OH->SH factor of ~730 taken from six
+      Sander alcohol/thiol pairs (methanol 525 ... pentanol 1024, phenol 621) -> 2.5e-3;
+      a benzyl-alcohol/benzyl-mercaptan route gives 2.0e-3. Weakest number in this table:
+      plausible range 4e-4 to 1e-2.
+    delta_H_sol_kj_mol: -55.0  # estimated, not from Sander
     Kfat: 120.0        # Hydrophobic, partitions into fat phases
 
   - name: "Furfural"
-    Kaw_25c: 0.000015
-    delta_H_sol_kj_mol: -48.0
+    Kaw_25c: 0.00015
+    previous_value: 0.000015
+    source: >-
+      Sander 5.0.0, H_cp = 2.6 mol/(m^3 Pa) (type V, HSDB 2015; Mackay 2006c gives 2.7,
+      Yaws 3.0). No measured value exists - all entries are vapour-pressure/solubility or
+      QSAR derived, but they cluster tightly (2.6-3.0).
+    delta_H_sol_kj_mol: -48.0  # no measured B in Sander; retained pre-audit estimate
     Kfat: 5.0          # Relatively polar, stays in aqueous phase
 
   - name: "Methional"
-    Kaw_25c: 0.000018
-    delta_H_sol_kj_mol: -50.0
-    Kfat: 15.0         
-    
+    Kaw_25c: 0.0003
+    previous_value: 0.000018
+    estimated: true
+    source: >-
+      Not in Sander 5.0.0. Structure-analogue estimate from the aliphatic
+      aldehyde/sulfide series; plausible range 5e-5 to 1.5e-3.
+    delta_H_sol_kj_mol: -50.0  # estimated
+    Kfat: 15.0
+
   - name: "2,3-Dimethylpyrazine"
-    Kaw_25c: 0.00012
-    delta_H_sol_kj_mol: -45.0
+    Kaw_25c: 0.00015
+    previous_value: 0.00012
+    estimated: true
+    source: >-
+      Not in Sander 5.0.0. Estimated from the measured 2,5-isomer (6.5e-5) and the
+      pyrazine homologue series; plausible range 6e-5 to 4e-4.
+    delta_H_sol_kj_mol: -45.0  # estimated
     Kfat: 8.0
 
   - name: "2,5-Dimethylpyrazine"
-    Kaw_25c: 0.00014
-    delta_H_sol_kj_mol: -45.0
+    Kaw_25c: 0.000065
+    previous_value: 0.00014
+    source: >-
+      Sander 5.0.0, H_cp = 7.1 mol/(m^3 Pa) (type M, Marin 1999); Druaux 1998 gives 5.5.
+    delta_H_sol_kj_mol: -45.0  # no B tabulated for this entry; retained estimate
     Kfat: 8.0
 
   - name: "Hexanal"
-    Kaw_25c: 0.015     # High volatility
-    delta_H_sol_kj_mol: -40.0
+    Kaw_25c: 0.009
+    previous_value: 0.015
+    source: >-
+      Sander 5.0.0, H_cp = 0.045 mol/(m^3 Pa), B = 6400 K (type L, Brockbank 2013);
+      EPA PhysProp experimental H = 2.13e-4 atm m^3/mol gives 8.7e-3 independently.
+      The 11 measured entries span 2.5e-3 to 2.5e-2, but the wide end is food-matrix work
+      (van Ruth, Meynier) reporting apparent, not intrinsic, partitioning.
+    delta_H_sol_kj_mol: -53.2  # -R*B, B = 6400 K (Brockbank 2013)
     Kfat: 450.0        # Extremely hydrophobic, heavily suppressed by lipid phase
 
   - name: "Nonanal"
-    Kaw_25c: 0.045     # Very high inherent volatility
-    delta_H_sol_kj_mol: -35.0
+    Kaw_25c: 0.035
+    previous_value: 0.045
+    source: >-
+      Sander 5.0.0, H_cp = 0.011 mol/(m^3 Pa), B = 6800 K (type L, Brockbank 2013).
+    delta_H_sol_kj_mol: -56.5  # -R*B, B = 6800 K (Brockbank 2013)
     Kfat: 1200.0       # Trapped in fat
 
   - name: "1-Octen-3-ol"
-    Kaw_25c: 0.0003
-    delta_H_sol_kj_mol: -50.0
+    Kaw_25c: 0.0021
+    previous_value: 0.0003
+    source: >-
+      Sander 5.0.0, H_cp = 0.19 mol/(m^3 Pa), B = 7900 K (type M, Wu 2022a);
+      Druaux 0.25, Roberts & Pollien 0.13.
+    delta_H_sol_kj_mol: -65.7  # -R*B, B = 7900 K (Wu 2022a)
     Kfat: 80.0
 
   - name: "2-Pentylfuran"
-    Kaw_25c: 0.005
-    delta_H_sol_kj_mol: -42.0
+    Kaw_25c: 0.2
+    previous_value: 0.005
+    estimated: true
+    source: >-
+      Not in Sander 5.0.0. Sander's furan and benzene series are near-superimposable
+      (furan 0.224 vs benzene 0.224; 2-methylfuran 0.269 vs toluene 0.269), which puts
+      2-pentylfuran near pentylbenzene (0.67) as an upper bound, against 0.01-0.08 from
+      the vapour-pressure/solubility route. Adopted 0.2; plausible range 0.05 to 0.7.
+      OPERA was NOT used here: it is ~40x low and near-degenerate on furans.
+    delta_H_sol_kj_mol: -42.0  # estimated
     Kfat: 450.0
 
   - name: "3-Methylbutanal"
-    Kaw_25c: 0.008
-    delta_H_sol_kj_mol: -42.0
+    Kaw_25c: 0.017
+    previous_value: 0.008
+    source: >-
+      Sander 5.0.0, H_cp = 0.024 mol/(m^3 Pa), B = 6100 K (type M, Wieland 2015);
+      Pollien 0.026, Kim 0.021.
+    delta_H_sol_kj_mol: -50.7  # -R*B, B = 6100 K (Wieland 2015)
     Kfat: 80.0
 
   - name: "2-Methylbutanal"
-    Kaw_25c: 0.012
-    delta_H_sol_kj_mol: -42.0
+    Kaw_25c: 0.016
+    previous_value: 0.012
+    source: >-
+      Sander 5.0.0, H_cp = 0.025 mol/(m^3 Pa), B = 5600 K (type L, Brockbank 2013).
+    delta_H_sol_kj_mol: -46.6  # -R*B, B = 5600 K (Brockbank 2013)
     Kfat: 80.0
 
   - name: "2-Methylpropanal (isobutyraldehyde)"
-    Kaw_25c: 0.007
-    delta_H_sol_kj_mol: -40.0
+    Kaw_25c: 0.0079
+    previous_value: 0.007
+    source: >-
+      Sander 5.0.0, H_cp = 0.051 mol/(m^3 Pa) (type L, Burkholder 2019 / JPL evaluation;
+      Brockbank 2013 concurs).
+    delta_H_sol_kj_mol: -41.6  # estimated from the homologous aldehyde series
     Kfat: 45.0
 
   - name: "Phenylacetaldehyde"
-    Kaw_25c: 0.00015
-    delta_H_sol_kj_mol: -55.0
+    Kaw_25c: 0.0003
+    previous_value: 0.00015
+    estimated: true
+    source: >-
+      In Sander only as QSAR (type Q, H_cp 1.6-3.6); no measured value. Estimated from the
+      experimental vapour pressure (0.392 mmHg) plus solubility, with benzaldehyde
+      (measured Kaw 1.03e-3) as a firm upper anchor since phenylacetaldehyde has both a
+      lower vapour pressure and a higher water solubility. Range 1.1e-4 to 1.2e-3.
+    delta_H_sol_kj_mol: -55.0  # estimated
     Kfat: 15.0
 
   - name: "2-Methyl-3-furanthiol (MFT)"
-    Kaw_25c: 0.000095
-    delta_H_sol_kj_mol: -52.0
+    Kaw_25c: 0.015
+    previous_value: 0.000095
+    estimated: true
+    # Same correction as FFT: the old value was an apparent, matrix-suppressed number.
+    source: >-
+      Not in Sander 5.0.0. Estimated from 2-methylfuran (measured Kaw 0.269) with the
+      alcohol/thiol-calibrated ring-substituent correction; plausible range 4e-3 to 3e-2.
+    delta_H_sol_kj_mol: -52.0  # estimated
     Kfat: 140.0
 
   - name: "Hydrogen Sulfide"
-    Kaw_25c: 0.45      # Gas phase dominant
-    delta_H_sol_kj_mol: -18.0
+    Kaw_25c: 0.403
+    previous_value: 0.45
+    source: >-
+      Sander 5.0.0, H_cp = 1.0e-3 mol/(m^3 Pa), B = 2100 K (type L, Burkholder 2019 /
+      Sander 2011). This entry is the conversion sanity check for the whole table.
+    delta_H_sol_kj_mol: -17.5  # -R*B, B = 2100 K
     Kfat: 1.0          # Does not partition significantly into lipids
 
   - name: "Methanethiol"
-    Kaw_25c: 0.12      # High volatility
-    delta_H_sol_kj_mol: -22.0
+    Kaw_25c: 0.106
+    previous_value: 0.12
+    source: >-
+      Sander 5.0.0, H_cp = 3.8e-3 mol/(m^3 Pa), B = 3400 K (type L, Burkholder 2019 /
+      Sander 2011, 2006).
+    delta_H_sol_kj_mol: -28.3  # -R*B, B = 3400 K
     Kfat: 1.5
 
   - name: "Dimethyl disulfide"
-    Kaw_25c: 0.005
-    delta_H_sol_kj_mol: -35.0
+    Kaw_25c: 0.06
+    previous_value: 0.005
+    source: >-
+      Sander 5.0.0, H_cp = 5.8e-3 mol/(m^3 Pa) (type L, Burkholder 2019) and 8.3e-3 with
+      B = 3700 K (type L, Brockbank 2013); the two reviews give 7.0e-2 and 4.9e-2.
+      Measured cluster favours ~6e-2.
+    delta_H_sol_kj_mol: -30.8  # -R*B, B = 3700 K (Brockbank 2013)
     Kfat: 35.0
 
   - name: "Dimethyl trisulfide"
-    Kaw_25c: 0.0008
-    delta_H_sol_kj_mol: -40.0
+    Kaw_25c: 0.029
+    previous_value: 0.0008
+    source: >-
+      Sander 5.0.0, H_cp = 0.012 mol/(m^3 Pa) (type L, Plyasunova 2004) and 0.014
+      (type M, Souchon 2004).
+    delta_H_sol_kj_mol: -40.0  # no B tabulated; retained estimate
     Kfat: 150.0
 
   - name: "2-Methylthiophene"
-    Kaw_25c: 0.035
-    delta_H_sol_kj_mol: -38.0
+    Kaw_25c: 0.098
+    previous_value: 0.035
+    source: >-
+      Sander 5.0.0, H_cp = 4.1e-3 mol/(m^3 Pa), B = 4300 K (types L/M, Brockbank 2013;
+      Przyjazny 1983).
+    delta_H_sol_kj_mol: -35.8  # -R*B, B = 4300 K
     Kfat: 45.0
 
   - name: "2-Ethyl-3,5-dimethylpyrazine"
-    Kaw_25c: 0.00018
-    delta_H_sol_kj_mol: -48.0
+    Kaw_25c: 0.000139
+    previous_value: 0.00018
+    source: >-
+      Sander 5.0.0, H_cp = 2.9 mol/(m^3 Pa), B = 8500 K (type M, Wieland 2015).
+      Steepest measured temperature dependence in this table.
+    delta_H_sol_kj_mol: -70.7  # -R*B, B = 8500 K (Wieland 2015)
     Kfat: 30.0
 
   - name: "4,5-Dihydro-2-methylthiazole"
-    Kaw_25c: 0.00005
-    delta_H_sol_kj_mol: -55.0
+    Kaw_25c: 0.0007
+    previous_value: 0.00005
+    estimated: true
+    source: >-
+      Not in Sander 5.0.0. Structure-analogue estimate from the thiazole/thiophene series;
+      plausible range 3e-4 to 2e-3.
+    delta_H_sol_kj_mol: -55.0  # estimated
     Kfat: 25.0
 
   - name: "2-pentyl-4-methylthiazole"
-    Kaw_25c: 0.0002
-    delta_H_sol_kj_mol: -60.0
+    Kaw_25c: 0.0015
+    previous_value: 0.0002
+    estimated: true
+    source: >-
+      Not in Sander 5.0.0. Alkylthiazole homologue extrapolation; range 3e-4 to 5e-3.
+    delta_H_sol_kj_mol: -60.0  # estimated
     Kfat: 800.0
 
   - name: "2-hexyl-4-methylthiazole"
-    Kaw_25c: 0.0003
-    delta_H_sol_kj_mol: -60.0
+    Kaw_25c: 0.0025
+    previous_value: 0.0003
+    estimated: true
+    source: >-
+      Not in Sander 5.0.0 and not in EPA CompTox. Alkylthiazole homologue extrapolation
+      one CH2 above the pentyl analogue; range 5e-4 to 8e-3.
+    delta_H_sol_kj_mol: -60.0  # estimated
     Kfat: 1500.0
 
   - name: "Acrolein"
-    Kaw_25c: 0.0001
-    delta_H_sol_kj_mol: -45.0
+    Kaw_25c: 0.004
+    previous_value: 0.0001
+    source: >-
+      Sander 5.0.0, H_cp = 0.13 mol/(m^3 Pa), B = 5500 K (type L, Burkholder 2019) vs the
+      only measurement, Snider & Dawson 1985 (0.072, B = 5100 K) giving 5.6e-3. EPA
+      PhysProp experimental (4.99e-3) sits between; adopted 4e-3.
+    delta_H_sol_kj_mol: -45.7  # -R*B, B = 5500 K
     Kfat: 2.0
 
   - name: "Acetaldehyde"
-    Kaw_25c: 0.001
-    delta_H_sol_kj_mol: -30.0
+    Kaw_25c: 0.0031
+    previous_value: 0.001
+    source: >-
+      Sander 5.0.0, H_cp = 0.13 mol/(m^3 Pa), B = 5900 K (type L, Burkholder 2019 /
+      Sander 2011, 2006).
+    delta_H_sol_kj_mol: -49.1  # -R*B, B = 5900 K
     Kfat: 1.5
 
   - name: "1-Hexanol"
-    Kaw_25c: 0.00003
-    delta_H_sol_kj_mol: -52.0
+    Kaw_25c: 0.0006
+    previous_value: 0.00003
+    source: >-
+      Sander 5.0.0, H_cp = 0.76 mol/(m^3 Pa), B = 7800 K (type L, Brockbank 2013);
+      Plyasunov & Shock 2000 give 0.66 with B = 8200 K.
+    delta_H_sol_kj_mol: -65.0  # -R*B, B = 7800-8200 K (-64.8 to -68.2)
     Kfat: 25.0
 
   - name: "Acetone"
-    Kaw_25c: 0.000011 # Low Kaw, highly water-soluble
-    delta_H_sol_kj_mol: -42.0
+    Kaw_25c: 0.0015
+    previous_value: 0.000011
+    source: >-
+      Sander 5.0.0, H_cp = 0.27 mol/(m^3 Pa), B = 5500 K (type L, Burkholder 2019 /
+      Sander 2011, 2006) -> 1.49e-3. Independently: EPA PhysProp experimental
+      H = 3.5e-5 atm m^3/mol -> 1.43e-3; Taft 1985 -> 1.62e-3. The pre-audit value was
+      ~136x too low; acetone is water soluble but far from involatile.
+    delta_H_sol_kj_mol: -45.7  # -R*B, B = 5500 K
     Kfat: 1.2
 
-  # Non-volatile markers (effectively zero volatility)
+  # ---------------------------------------------------------------------------
+  # Non-volatile / low-headspace markers.
+  #
+  # src/recommend.py treats Kaw_25c < 1.0e-8 as "not headspace observable" and applies a
+  # volatility penalty relative to furfural instead of returning the species as an aroma
+  # target. The four entries below are the only ones under that threshold, so they are the
+  # only entries in this file whose Kaw currently changes any prediction.
+  # ---------------------------------------------------------------------------
+
   - name: "5-Hydroxymethylfurfural (HMF)"
-    Kaw_25c: 1.0e-10
-    delta_H_sol_kj_mol: -60.0
+    Kaw_25c: 5.0e-8
+    previous_value: 1.0e-10
+    literature_value_range: [1.5e-8, 2.0e-7]
+    estimated: true
+    source: >-
+      No measurement exists anywhere. Sander 5.0.0 has a single entry (HSDB 2015, type Q,
+      H_cp 1.8e4 -> Kaw 2.2e-8); OPERA 2.6 gives 9.4e-8; a vapour-pressure/solubility
+      calculation spans 1.7e-8 to 1.4e-6. All routes land ABOVE 1e-8, i.e. the shipped
+      1e-10 is 200-1000x low, but activating the corrected value flips the gate.
+    delta_H_sol_kj_mol: -60.0  # estimated
     Kfat: 0.5
 
   - name: "Nε-(Carboxymethyl)lysine (CML)"
     Kaw_25c: 1.0e-12
-    delta_H_sol_kj_mol: -80.0
+    source: >-
+      Not in Sander 5.0.0. Zwitterionic at food pH: the neutral microspecies fraction of
+      an alpha-amino acid at pH 5-7 is <= 1e-6, so the effective Kaw is <= ~4e-14. The
+      shipped placeholder is already conservative and stays well below the 1e-8 gate.
+      (An OPERA value of 4.2e-8 exists but predicts the neutral species and is not
+      applicable here.)
+    estimated: true
+    delta_H_sol_kj_mol: -80.0  # estimated
     Kfat: 0.1
 
   - name: "Nε-(Carboxyethyl)lysine (CEL)"
     Kaw_25c: 1.0e-12
-    delta_H_sol_kj_mol: -80.0
+    source: >-
+      Not in Sander 5.0.0, no DTXSID, no data. Same zwitterion argument as CML.
+    estimated: true
+    delta_H_sol_kj_mol: -80.0  # estimated
     Kfat: 0.1
 
   - name: "Acrylamide"
-    Kaw_25c: 1.0e-9
-    delta_H_sol_kj_mol: -55.0
+    Kaw_25c: 6.0e-8
+    previous_value: 1.0e-9
+    literature_value_range: [1.3e-8, 1.0e-7]
+    source: >-
+      Sander 5.0.0 type-V cluster: H_cp 5500-6900 mol/(m^3 Pa) (Mackay 2006d,
+      Duchowicz 2020, HSDB 2015) -> Kaw 5.9e-8, 7.0e-8, 7.3e-8. Independent check from
+      experimental vapour pressure (0.007 mmHg) and experimental solubility (9.00 mol/L)
+      gives 4.2e-8. Published spread 1.3e-8 (Lide & Frederikse, Yaws) to 1e-6 (QSAR /
+      OPERA); the high outliers are all QSAR and are discounted. The shipped 1e-9 is
+      ~60x low, but the corrected value crosses the 1e-8 gate.
+    delta_H_sol_kj_mol: -55.0  # estimated (literature suggests -66 to -70)
     Kfat: 0.2

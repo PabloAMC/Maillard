@@ -43,7 +43,12 @@ from src.family_validation_overview import (  # noqa: E402
     render_family_validation_overview_markdown,
 )
 
-configure_science_plot_style()
+# AUDIT 2026-08-27 (Wave H): `configure_science_plot_style()` used to run at IMPORT
+# time, which raises when dvipng is missing and therefore made this module
+# unimportable — even `--help`, and even the md/json half of the artifact, which needs
+# no plotting at all. Same wart Wave G3 removed from generate_validated_envelope_report.py.
+# It now runs inside the figure path only, so the markdown/JSON overview can be
+# regenerated on a machine without the LaTeX toolchain.
 
 # ---------------------------------------------------------------------------
 # Human-readable label tables (LaTeX-safe: & → \&, % → \%)
@@ -383,6 +388,15 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="results/validation")
     parser.add_argument("--docs-asset-dir", default="docs/assets")
+    parser.add_argument(
+        "--skip-figures",
+        action="store_true",
+        help=(
+            "write family_validation_overview.md/.json only. Added 2026-08-27 (Wave H) so "
+            "the artifact can be regenerated on a machine without dvipng; the PNGs stay "
+            "stale and the staleness is stated in the artifact rather than hidden."
+        ),
+    )
     args = parser.parse_args()
 
     output_dir = ROOT / args.output_dir
@@ -400,6 +414,13 @@ def main() -> int:
     md_path.write_text(markdown, encoding="utf-8")
     json_path.write_text(json.dumps(json_payload, indent=2), encoding="utf-8")
 
+    if args.skip_figures:
+        print(f"Wrote {md_path}")
+        print(f"Wrote {json_path}")
+        print("Figures skipped (--skip-figures).")
+        return 0
+
+    configure_science_plot_style()
     figures = [
         ("family_parity.png",             _render_parity),
         ("family_benchmark_accuracy.png", _render_benchmark_accuracy),

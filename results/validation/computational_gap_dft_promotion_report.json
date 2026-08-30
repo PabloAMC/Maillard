@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-04-13T07:49:46+00:00",
+  "summary": {
+    "candidate_result_count": 0,
+    "promoted_count": 0,
+    "wrote_priors": false,
+    "priors_path": "data/lit/computational_priors.json"
+  },
+  "promotions": []
+}

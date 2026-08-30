@@ -240,29 +240,6 @@ def render_flavor_axis_markdown(
     return "\n".join(lines)
 
 
-def render_domain_warnings_markdown(warnings: List['DomainWarning']) -> str:
-    if not warnings:
-        return "> [!NOTE]\n> Run is within the validated scientific envelope.\n"
-        
-    lines = ["## Scientific Domain Warnings", ""]
-    for w in warnings:
-        icon = "⚠️" if w.level == "WARNING" else "🚨"
-        lines.append(f"- **{icon} {w.level} [{w.category}]**: {w.message}")
-    return "\n".join(lines) + "\n"
-
-
-def render_domain_warnings_cli(warnings: List['DomainWarning']):
-    if not warnings:
-        print("\n  ✅ Scientific Envelope: Trusted (matches PRIMARY benchmarks)")
-        return
-
-    print("\n  ⚠️  SCIENTIFIC DOMAIN WARNINGS:")
-    for w in warnings:
-        icon = "!" if w.level == "WARNING" else "!!"
-        print(f"    [{icon}] {w.category.ljust(15)}: {w.message}")
-    print("  " + "─" * 60)
-
-
 def render_decision_summary_cli(result: 'FormulationResult', warnings: List['DomainWarning']):
     """
     Renders a premium, consolidated scientist-facing summary of the simulation run.
@@ -341,7 +318,15 @@ def render_decision_summary_cli(result: 'FormulationResult', warnings: List['Dom
     print("\n  [2] TOP-LINE METRICS:")
     print(f"      Target Score     : {float(result.target_score):.2f}")
     print(f"      Off-Flavour Risk : {float(result.off_flavour_risk):.2f}")
-    print(f"      Safety Score     : {float(result.safety_score):.2f}")
+    # 2026-08-27 (Wave I): the bare number reads like a score out of 1 or a grade, and
+    # readers assumed higher was better. It is 2x the band-relative risk from
+    # src/safety.py (see src/pipeline.py, `s_penalty = safety_val * 2.0`): the range is
+    # [0, 2], HIGHER IS WORSE, and anything above 1.0 means the formulation sits above the
+    # action band. Label it at the point of reading.
+    print(
+        f"      Safety Score     : {float(result.safety_score):.2f}"
+        "  (2x band-relative risk; higher is worse; >1.0 = above the action band)"
+    )
     
     print("\n" + "═" * 80 + "\n")
 
@@ -587,13 +572,26 @@ def render_benchmark_index_markdown(entries: Iterable['BenchmarkIndexEntry']) ->
     return "\n".join(lines) + "\n"
 
 
+# 2026-08-27 (Wave I). Short cell labels for BenchmarkSummary.evidence_role.
+_EVIDENCE_ROLE_LABELS = {
+    "predictive": "predictive",
+    "fit_recovery": "fit-recovery (not predictive)",
+    "internal_synthetic": "synthetic (reproducibility)",
+}
+
+
 def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -> str:
     rows = list(summaries)
     lines = [
         "# Benchmark Summary",
         "",
-        "| Benchmark | Tier | Family | Chemistry Families | Payload Roles | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | Mean |log10 ratio| | MAE ppb | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        # 2026-08-27 (Wave I): `Evidence Role` added. The cold-start red team found six rows
+        # reporting Pearson R = 1.000 / max ratio 1.000 that were not predictions at all --
+        # three benchmarks whose observable factors had been back-solved from their own
+        # measured values, and four synthetic snapshots of the model's own output. Reading
+        # `Status` without this column overstates the panel.
+        "| Benchmark | Evidence Role | Tier | Family | Chemistry Families | Payload Roles | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | Mean |log10 ratio| | MAE ppb | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for summary in rows:
@@ -615,17 +613,54 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
             coverage = f"{summary.coverage:.1%}"
             strict_ready = "yes" if summary.strict_ready else "no"
 
+        evidence_role = getattr(summary, "evidence_role", "predictive")
+        role_cell = _EVIDENCE_ROLE_LABELS.get(evidence_role, evidence_role)
+        status_cell = summary.overall_status
+        if evidence_role == "fit_recovery":
+            # 2026-08-27 (Wave I): a mechanical "pass" on a lane whose constants were
+            # solved from this benchmark is not a pass in any useful sense. Say so at the
+            # point of reading, not only in a column the eye can skip.
+            status_cell = f"{status_cell} (fit-recovery, not predictive)"
+        elif evidence_role == "internal_synthetic":
+            status_cell = f"{status_cell} (reproducibility, not predictive)"
+
         lines.append(
-            f"| {benchmark_display} | {summary.tier} | {summary.family} | {', '.join(summary.chemistry_families) or 'none'} | {', '.join(summary.payload_roles) or 'none'} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
+            f"| {benchmark_display} | {role_cell} | {summary.tier} | {summary.family} | {', '.join(summary.chemistry_families) or 'none'} | {', '.join(summary.payload_roles) or 'none'} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {status_cell} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
         )
 
     supported_count = sum(1 for summary in rows if summary.supported)
-    pass_count = sum(1 for summary in rows if summary.overall_status in {"pass", "pass-no-ranking", "partial-pass"})
     strict_ready_count = sum(1 for summary in rows if summary.strict_ready)
+
+    def _passes(summary: 'BenchmarkSummary') -> bool:
+        return summary.overall_status in {"pass", "pass-no-ranking", "partial-pass"}
+
+    def _role(summary: 'BenchmarkSummary') -> str:
+        return getattr(summary, "evidence_role", "predictive")
+
+    predictive_rows = [s for s in rows if _role(s) == "predictive"]
+    fit_recovery_rows = [s for s in rows if _role(s) == "fit_recovery"]
+    synthetic_rows = [s for s in rows if _role(s) == "internal_synthetic"]
+
+    pass_count = sum(1 for summary in rows if _passes(summary))
+    predictive_pass = sum(1 for summary in predictive_rows if _passes(summary))
+    fit_recovery_pass = sum(1 for summary in fit_recovery_rows if _passes(summary))
+    synthetic_pass = sum(1 for summary in synthetic_rows if _passes(summary))
+
     lines.extend([
         "",
         f"Supported benchmarks: {supported_count}/{len(rows)}",
-        f"Benchmarks without blocking coverage/ranking gaps: {pass_count}/{len(rows)}",
+        # 2026-08-27 (Wave I): this line used to be a bare N/16 that silently mixed
+        # predictions with fit recoveries and with the model reproducing its own frozen
+        # output. The headline number is now the PREDICTIVE one, and the other two
+        # populations are stated inline rather than folded in.
+        f"Benchmarks without blocking coverage/ranking gaps (PREDICTIVE rows only): "
+        f"{predictive_pass}/{len(predictive_rows)}",
+        f"  + fit-recovery rows (constants back-solved from the benchmark; NOT evidence): "
+        f"{fit_recovery_pass}/{len(fit_recovery_rows)}",
+        f"  + internal synthetic reproducibility rows (model vs its own frozen output; NOT evidence): "
+        f"{synthetic_pass}/{len(synthetic_rows)}",
+        f"  = all rows, mixed population, retained only for continuity with older reports: "
+        f"{pass_count}/{len(rows)}",
         f"Strict-ready benchmarks: {strict_ready_count}/{len(rows)}",
     ])
     return "\n".join(lines) + "\n"

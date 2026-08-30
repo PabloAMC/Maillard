@@ -8,6 +8,15 @@ from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional
 
 from src.benchmark_validation import DEFAULT_TARGET_TAG, evaluate_benchmark, get_benchmark_files, get_benchmark_metadata, load_benchmark, summarize_evaluation
 
+# 2026-08-27 (Wave I): `get_barrier()` resolves BARRIER_OFFSETS against the
+# *normalised raw* reaction-family label (`_normalize_family_key`) BEFORE it
+# canonicalises that label (`_canonical_fast_family`). We therefore have to
+# canonicalise here, on the producing side, to know which offset keys can
+# actually reach a step. These two helpers are private to `barrier_constants`
+# but re-implementing them here would let the two copies drift silently, which
+# is exactly the failure mode this fix is repairing.
+from src.barrier_constants import _canonical_fast_family, _normalize_family_key
+
 
 DEFAULT_FAMILY_OFFSET_KEYS: Dict[str, str] = {
     "schiff_condensation": "schiff",
@@ -20,6 +29,110 @@ DEFAULT_FAMILY_OFFSET_KEYS: Dict[str, str] = {
     "aminoketone_condensation": "aminoketone_condensation",
     "retro_aldol": "retro_aldol",
 }
+
+# Raw `reaction_family` labels actually emitted by the template engine
+# (`src/reaction_templates.py`) and the curated pathway layer
+# (`src/curated_pathways.py`). BARRIER_OFFSETS is keyed on the NORMALISED form
+# of these strings, not on the canonical family name, so the sensitivity sweep
+# has to expand a canonical family into the labels that canonicalise to it.
+#
+# 2026-08-27 (Wave I): this list is asserted to be a superset of the labels
+# found by AST-scanning `src/` in
+# tests/unit/test_wave_i_tooling.py::test_engine_family_labels_cover_sources,
+# so a newly added family cannot silently reintroduce a false zero.
+ENGINE_FAMILY_LABELS: tuple[str, ...] = (
+    "Additive_Thermal_Degradation",
+    "Amadori_Rearrangement",
+    "Aminoketone_Condensation",
+    "Beta_Elimination",
+    "Cysteine_Degradation",
+    "DHA_Crosslinking",
+    # Wave N 2026-08-27: corrected MFT route (Cerny & Davidek 2003/2004).
+    "Deoxyosone_Reduction",
+    "Enolisation",
+    "Enolisation_1_2",
+    "Enolisation_2_3",
+    "Enolisation_2_3_Amadori",
+    "Enolisation_Intermediate",
+    "Fructofuranosyl_Dehydration",  # Wave P 2026-08-27: fructose HMF route correction
+    "Furan_Ring_Aromatisation",
+    "Furanone_Amino_Acid_Reduction",  # Wave P 2026-08-27: DMHF [HH] gate removed
+    "Furanone_Cyclisation",
+    "Furanone_Formation",
+    "Furanone_Reductive_Opening",  # Wave P 2026-08-27: norfuraneol -> 2,3-pentanedione
+    # Wave X 2026-08-28: norfuraneol + H2S + 2[H] -> MFT, re-added as a SLOW
+    # PARALLEL channel constrained by Hofmann & Schieberle 1998 Table 4. NOT the
+    # retired `Thiol_Addition_Norfuraneol`; new name, new barrier key.
+    "Furanone_Reductive_Sulfhydrylation",
+    "Generalized_Deamination",
+    # Wave T4 2026-08-27: the ketose rearrangement. Emitted since before Wave I
+    # (`reaction_templates.py:60`) and missing here the whole time, because the
+    # guard test below AST-scans only string literals passed to
+    # `ElementaryStep(...)` and this one is bound to a local variable first.
+    "Heyns_Rearrangement",
+    "Lipid_Homolysis",
+    "Lipid_Schiff_Base",
+    "Lipid_Strecker_Synergy",
+    "Lipid_Thiazole_Condensation",
+    # Wave P 2026-08-27: the C2+C3 recombination lane (Hofmann & Schieberle 1998).
+    "Mercaptoketone_Aldol_Addition",
+    "Mercaptoketone_Cyclodehydration",
+    "Mercaptoketone_Formation",
+    "Retro_Aldol_Fragmentation",
+    "Safety_Risk_AGE",
+    "Safety_Risk_Acrylamide",
+    "Schiff_Base_Formation",
+    "Strecker_Degradation",
+    "Sugar_Dehydration",
+    "Sugar_Ring_Opening",
+    "Thiohemiacetal_Formation",
+    "Thiol_Addition",
+    "Thiol_Addition_H2",
+    "Thiol_Addition_Hexose_Legacy_Shortcut",
+    "Thiol_Addition_Legacy_Shortcut",
+    "Thiol_Addition_Norfuraneol",  # retired Wave N 2026-08-27; kept: superset is harmless
+    "Thiol_Addition_Pentodiulose",  # Wave N 2026-08-27: corrected MFT route
+    "Thiol_Dehydration",
+    "Thiol_Oxidation",
+)
+
+
+def resolve_offset_keys(reaction_family: str, offset_key: str) -> tuple[str, ...]:
+    """Expand a canonical family + its short offset key into every BARRIER_OFFSETS key that bites.
+
+    2026-08-27 (Wave I) -- FIX 6. The sweep used to publish a single short key
+    (`schiff`, `enol`, `cys`, ...) into BARRIER_OFFSETS. `get_barrier()` matches
+    those short keys through a hard-coded `offset_map` whose *values* must appear
+    as a SUBSTRING of the normalised raw family label, and it does that match
+    before canonicalisation. The result:
+
+      * `schiff` -> needs "schiff_condensation" inside the label, but the engine
+        emits `Schiff_Base_Formation` -> "schiff_base_formation". No match.
+      * `enol` -> needs the literal "1,2-enolisation" inside the label, but
+        normalisation has already turned every "-" into "_". Can never match.
+      * `cys` -> needs "cysteine_thermolysis" inside the label, but the engine
+        emits `Cysteine_Degradation`. No match.
+
+    Those three offsets were therefore exact no-ops, and the sweep reported a
+    sensitivity of 0.00 for them -- a false zero, not a finding. `retro_aldol`
+    and `thiol_addition` were no-ops for the same reason via the exact-match
+    branch (`Retro_Aldol_Fragmentation`, `Thiol_Addition_H2`, ...).
+
+    The fix keeps the short key (harmless, and preserves the pre-existing
+    behaviour for `amadori`/`strecker`, which did match) and adds the canonical
+    family name plus every normalised engine label that canonicalises to it.
+    """
+    canonical_target = _canonical_fast_family(reaction_family) or _normalize_family_key(reaction_family)
+    keys = {
+        str(offset_key),
+        str(reaction_family),
+        _normalize_family_key(reaction_family),
+        _normalize_family_key(canonical_target),
+    }
+    for label in ENGINE_FAMILY_LABELS:
+        if _canonical_fast_family(label) == canonical_target:
+            keys.add(_normalize_family_key(label))
+    return tuple(sorted(key for key in keys if key))
 
 
 def _status_score(status: str) -> int:
@@ -97,6 +210,10 @@ def build_family_sensitivity_artifact(
 
     family_rows: List[Dict[str, Any]] = []
     for family, offset_key in family_map.items():
+        # 2026-08-27 (Wave I) -- FIX 6: see `resolve_offset_keys`. Writing the
+        # short key alone left schiff/enolisation/cysteine (and retro_aldol,
+        # thiol_addition) as silent no-ops.
+        offset_keys = resolve_offset_keys(family, offset_key)
         scenario_rows: List[Dict[str, Any]] = []
         max_weighted_impact = 0.0
         dominant_direction = "none"
@@ -111,7 +228,7 @@ def build_family_sensitivity_artifact(
             relative_mae_terms = 0
             weighted_impact_score = 0.0
 
-            with _barrier_offsets({offset_key: signed_delta}):
+            with _barrier_offsets({key: signed_delta for key in offset_keys}):
                 for context in benchmark_contexts:
                     scenario_eval = evaluate_benchmark(context["bench_file"], target_tag=target_tag)
                     scenario_summary = summarize_evaluation(
@@ -176,6 +293,10 @@ def build_family_sensitivity_artifact(
             {
                 "reaction_family": family,
                 "offset_key": offset_key,
+                # 2026-08-27 (Wave I): the keys actually written into
+                # BARRIER_OFFSETS, so a reader can tell a real zero from a
+                # routing no-op.
+                "offset_keys": list(offset_keys),
                 "dominant_direction": dominant_direction,
                 "max_weighted_impact_score": float(max_weighted_impact),
                 "affected_benchmark_ids": sorted(affected_benchmark_ids),

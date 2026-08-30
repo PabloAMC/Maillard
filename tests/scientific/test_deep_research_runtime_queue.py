@@ -20,7 +20,20 @@ def test_deep_research_runtime_queue_selects_non_benchmark_runtime_batch_from_ba
     assert summary["selected_candidate_count"] == len(rows)
     assert summary["selected_candidate_count"] == 0
     assert summary["process_state_calibration_count"] == 0
-    assert summary["landed_runtime_citation_count"] == 6
+    # UPDATED 2026-08-27 (cause: citation repair in data/lit/computational_priors.json,
+    # reference-repair partition B, 2026-08-27). The prior
+    # `blank_devaud_grosch_2003_g6p_hdmf_uplift_v1` had its `source` string corrected from
+    # "Blank, Devaud & Grosch (2003), DOI:10.1021/jf026123f" to the CrossRef-verified
+    # "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358" -- no Blank/Devaud/Grosch 2003
+    # G6P/HDMF publication exists, and the old DOI resolves to an unrelated Cerny &
+    # Davidek ribose/cysteine paper.
+    # Consequence: the registry no longer emits the old citation string, so
+    # `_citation_is_landed` no longer matches it and the candidate is classified from its
+    # backlog status instead. Landed-citation count 6 -> 5; that one candidate's exclusion
+    # reason moves from "already_landed_in_runtime_registry" to "already_runtime_bound".
+    # It is still excluded, and the total excluded count is unchanged at 6 -- the queue
+    # behaviour is identical, only the provenance label is now accurate.
+    assert summary["landed_runtime_citation_count"] == 5
     assert summary["computational_prior_count"] == 0
     assert summary["safety_reference_count"] == 0
     assert summary["excluded_candidate_count"] == 6
@@ -30,7 +43,7 @@ def test_deep_research_runtime_queue_selects_non_benchmark_runtime_batch_from_ba
     assert excluded["Ordoudi et al. (2014 / PMC12484514)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Hrncirik & Zeelenberg (2014)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Aliani & Farmer (2005)"]["reason"] == "already_landed_in_runtime_registry"
-    assert excluded["Blank, Devaud & Grosch (2003)"]["reason"] == "already_landed_in_runtime_registry"
+    assert excluded["Blank, Devaud & Grosch (2003)"]["reason"] == "already_runtime_bound"
     assert excluded["Glomb & Monnier (1995)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Hidalgo & Zamora (2004)"]["reason"] == "already_landed_in_runtime_registry"
 

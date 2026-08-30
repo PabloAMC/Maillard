@@ -15,6 +15,110 @@ from src.conditions import ReactionConditions  # noqa: E402
 from src.barrier_constants import get_donor_reactivity_multiplier  # noqa: E402
 from src.thermo import JobackEstimator  # noqa: E402
 
+# ---------------------------------------------------------------------------
+# Thermodynamic basis bookkeeping (audit 2026-08-26, item 3.3)
+# ---------------------------------------------------------------------------
+# Joback returns *formation* properties at 298.15 K: dfH298 and dfG298, i.e.
+# both are referenced to the constituent elements in their standard states.
+# Therefore
+#     s298 := (dfH298 - dfG298) / 298.15  ==  dfS298  ==  S(compound) - sum_e n_e S(element_e)
+# is likewise a formation-basis entropy, NOT the compound's absolute entropy.
+#
+# `get_reaction_thermo` builds per-species
+#     h_i(T) = dfH298_i + int_298^T Cp_i dT          (= H_i(T) - sum_e n_ei H_e(298))
+#     s_i(T) = dfS298_i + int_298^T Cp_i/T' dT'      (= S_i(T) - sum_e n_ei S_e(298))
+# so each species carries a *constant* element offset frozen at 298.15 K.
+# Summing over a reaction with stoichiometric coefficients nu_i:
+#     sum_i nu_i h_i(T) = dH_rxn(T) - sum_e (delta n_e) H_e(298)
+#     sum_i nu_i s_i(T) = dS_rxn(T) - sum_e (delta n_e) S_e(298)
+# The element offsets cancel EXACTLY when the reaction is atom balanced
+# (delta n_e = 0 for every element), so dG_rxn(T) = dH_rxn(T) - T dS_rxn(T) is
+# correct on a single, consistent basis at every temperature. The audit's
+# "mismatched bases" concern is therefore a false positive for balanced steps
+# (verified numerically in tests/unit/test_thermo_basis_and_guards.py).
+#
+# What is NOT safe is an atom-UNBALANCED step: there the leftover element terms
+# survive, and they are large (a silently dropped H2O leaves roughly
+# +58 kcal/mol of dfH residual plus a temperature-proportional element-entropy
+# residual). Such a dG is not a property of the chemistry at all, so it is
+# labelled explicitly in the returned payload.
+#
+# NEUTRALIZE_UNBALANCED_THERMO_GATE controls what happens to that number.
+#   False (default, current shipped behaviour): the raw element-contaminated
+#     value is returned unchanged. Downstream gates (benchmark_validation,
+#     cantera_export) then usually kill unbalanced steps,
+#     which is accidentally protective — tests/unit/test_advanced_kinetics.py
+#     ::test_thermo_gating relies on exactly this to reject mass-creating
+#     reactions (CH4 -> decane).
+#   True: unbalanced steps return dG = 0 (gate-neutral) and rely on an explicit
+#     mass-balance check upstream instead. Flipping this is a science-owner
+#     decision, because it removes the accidental mass-creation guard.
+# Measured exposure on the current panel: 197/198 enumerated SMIRKS steps are
+# atom balanced; the single unbalanced step
+# (thiamine Additive_Thermal_Degradation, dG = 17.4 kcal/mol) is below the
+# 30 kcal/mol gate, and thermodynamic gating currently resolves to "off" for
+# every benchmark in data/benchmarks. Impact of flipping today: zero.
+NEUTRALIZE_UNBALANCED_THERMO_GATE = False
+
+# Standard-state absolute entropies of the elements at 298.15 K, J/(mol K).
+# Source: CODATA / NIST-JANAF. Used only to expose the element reference that
+# the formation basis carries, and by the unit tests that assert the basis.
+ELEMENT_STANDARD_ENTROPY_J_MOL_K = {
+    "C": 5.74,      # graphite
+    "H": 130.68 / 2.0,   # 1/2 S(H2, g)
+    "O": 205.15 / 2.0,   # 1/2 S(O2, g)
+    "N": 191.61 / 2.0,   # 1/2 S(N2, g)
+    "S": 32.05,     # rhombic
+    "P": 41.09,     # white
+    "Cl": 223.08 / 2.0,
+}
+
+
+def reaction_element_balance(
+    reactants: Sequence[str], products: Sequence[str]
+) -> Dict[str, object]:
+    """
+    Element/charge balance of a reaction written as SMILES lists.
+
+    Returns a payload with `balanced` (bool), `element_imbalance`
+    (products minus reactants, per element symbol, non-zero entries only) and
+    `charge_imbalance` (net formal charge of products minus reactants).
+    `balanced` is None when a SMILES cannot be parsed.
+    """
+    from collections import Counter
+    from rdkit import Chem
+
+    def _tally(smiles_list: Sequence[str]):
+        atoms: "Counter[str]" = Counter()
+        charge = 0
+        for smi in smiles_list:
+            mol = Chem.MolFromSmiles(smi)
+            if mol is None:
+                return None, None
+            charge += Chem.GetFormalCharge(mol)
+            mol = Chem.AddHs(mol)
+            for atom in mol.GetAtoms():
+                atoms[atom.GetSymbol()] += 1
+        return atoms, charge
+
+    r_atoms, r_charge = _tally(reactants)
+    p_atoms, p_charge = _tally(products)
+    if r_atoms is None or p_atoms is None:
+        return {"balanced": None, "element_imbalance": {}, "charge_imbalance": None}
+
+    imbalance = {
+        symbol: p_atoms.get(symbol, 0) - r_atoms.get(symbol, 0)
+        for symbol in set(r_atoms) | set(p_atoms)
+        if p_atoms.get(symbol, 0) != r_atoms.get(symbol, 0)
+    }
+    charge_imbalance = p_charge - r_charge
+    return {
+        "balanced": not imbalance and charge_imbalance == 0,
+        "element_imbalance": imbalance,
+        "charge_imbalance": charge_imbalance,
+    }
+
+
 class KineticsEngine:
     def __init__(self, temperature_k: float = 423.15):
         self.T = temperature_k
@@ -111,61 +215,113 @@ class KineticsEngine:
         """
         Phase 1: Thermodynamic Governance.
         Calculates Delta G, Delta H, and Delta S for a reaction using Joback increments.
+
+        Basis (audit 2026-08-26, item 3.3 — see the module header for the full
+        derivation): Joback supplies formation properties at 298.15 K, so both
+        the enthalpy and the entropy carried per species are element-referenced
+        at 298.15 K. Enthalpy and entropy are therefore on the *same* basis, and
+        the element reference cancels exactly when the reaction is atom and
+        charge balanced. The reaction quantities returned here are then the true
+            dH_rxn(T) = dH_rxn(298) + int_298^T dCp_rxn dT
+            dS_rxn(T) = dS_rxn(298) + int_298^T dCp_rxn/T dT
+            dG_rxn(T) = dH_rxn(T) - T * dS_rxn(T)
+        For an atom-unbalanced step the element reference does not cancel; the
+        payload flags this via `atom_balanced` / `thermo_basis` and
+        NEUTRALIZE_UNBALANCED_THERMO_GATE decides whether the contaminated
+        number is still handed to the caller's gate.
         """
         T = temperature_k or self.T
+
+        balance = reaction_element_balance(reactants, products)
+        atom_balanced = balance.get("balanced")
+
         try:
             r_res = [JobackEstimator.estimate(s) for s in reactants]
             p_res = [JobackEstimator.estimate(s) for s in products]
-            
-            # Sum enthalpies and Gibbs energies (J/mol)
-            # Joback gives H298 and G298. 
-            # For H(T): H(T) = H298 + integral(Cp dt)
-            # For G(T): G(T) = H(T) - T*S(T)
-            
-            def get_properties(res_list, temp):
-                total_h = 0.0
-                total_g = 0.0
-                for r in res_list:
-                    # Very simplified T-correction for H and S
-                    # cp = a + bT + cT^2 + dT^3
-                    cp_coeffs = r["cp_coeffs"]
-                    # integral(cp) from 298 to T
-                    def int_cp(t):
-                        return cp_coeffs[0]*t + 0.5*cp_coeffs[1]*t**2 + (1/3)*cp_coeffs[2]*t**3 + 0.25*cp_coeffs[3]*t**4
-                    
-                    dh = int_cp(temp) - int_cp(298.15)
-                    h_t = r["H298"] + dh
-                    
-                    # Entropy S(T) = S298 + integral(cp/T dt)
-                    # S298 derived from (H298 - G298)/298.15
-                    s298 = (r["H298"] - r["G298"]) / 298.15
-                    # integral(cp/T) = a*ln(T) + b*T + 0.5*c*T^2 + (1/3)*d*T^3
-                    def int_cp_over_t(t):
-                        return cp_coeffs[0]*np.log(t) + cp_coeffs[1]*t + 0.5*cp_coeffs[2]*t**2 + (1/3)*cp_coeffs[3]*t**3
-                    
-                    ds = int_cp_over_t(temp) - int_cp_over_t(298.15)
-                    s_t = s298 + ds
-                    
-                    g_t = h_t - temp * s_t
-                    total_h += h_t
-                    total_g += g_t
-                return total_h, total_g
 
-            rh, rg = get_properties(r_res, T)
-            ph, pg = get_properties(p_res, T)
-            
-            delta_g = pg - rg
+            def _sensible_h(cp_coeffs, temp: float) -> float:
+                """int_298^T Cp dT for Cp = a + bT + cT^2 + dT^3 (J/mol)."""
+                def int_cp(t):
+                    return (cp_coeffs[0]*t + 0.5*cp_coeffs[1]*t**2
+                            + (1/3)*cp_coeffs[2]*t**3 + 0.25*cp_coeffs[3]*t**4)
+                return int_cp(temp) - int_cp(298.15)
+
+            def _sensible_s(cp_coeffs, temp: float) -> float:
+                """int_298^T Cp/T dT for the same polynomial (J/(mol K))."""
+                def int_cp_over_t(t):
+                    return (cp_coeffs[0]*np.log(t) + cp_coeffs[1]*t
+                            + 0.5*cp_coeffs[2]*t**2 + (1/3)*cp_coeffs[3]*t**3)
+                return int_cp_over_t(temp) - int_cp_over_t(298.15)
+
+            def side_totals(res_list, temp: float) -> Tuple[float, float]:
+                """Element-referenced H(T) and S(T) summed over one side."""
+                total_h = 0.0
+                total_s = 0.0
+                for r in res_list:
+                    cp_coeffs = r["cp_coeffs"]
+                    # H on the formation basis: dfH(298) plus sensible heat.
+                    total_h += r["H298"] + _sensible_h(cp_coeffs, temp)
+                    # S on the SAME formation basis: dfS(298) = (dfH - dfG)/298.15
+                    # plus the sensible entropy of the same species.
+                    s298 = (r["H298"] - r["G298"]) / 298.15
+                    total_s += s298 + _sensible_s(cp_coeffs, temp)
+                return total_h, total_s
+
+            rh, rs = side_totals(r_res, T)
+            ph, ps = side_totals(p_res, T)
+
             delta_h = ph - rh
-            
-            return {
+            delta_s = ps - rs
+            delta_g = delta_h - T * delta_s
+
+            payload = {
                 "delta_g_j_mol": delta_g,
                 "delta_g_kcal_mol": delta_g / 4184.0,
                 "delta_h_j_mol": delta_h,
                 "delta_h_kcal_mol": delta_h / 4184.0,
-                "is_spontaneous": delta_g < 0
+                "delta_s_j_mol_k": delta_s,
+                "is_spontaneous": delta_g < 0,
+                "atom_balanced": atom_balanced,
+                "element_imbalance": balance.get("element_imbalance", {}),
+                "charge_imbalance": balance.get("charge_imbalance"),
+                "thermo_basis": (
+                    "formation_298K_element_referenced"
+                    if atom_balanced
+                    else "element_reference_uncancelled"
+                ),
             }
-        except Exception:
-            return {"delta_g_kcal_mol": 0.0, "is_spontaneous": True}
+
+            if atom_balanced is not True:
+                # The element reference survives: dG here also contains the
+                # formation free energy of the atoms that appear or vanish.
+                logger.debug(
+                    "Unbalanced reaction thermo %s -> %s: imbalance=%s charge=%s dG=%.2f kcal/mol",
+                    reactants, products, balance.get("element_imbalance"),
+                    balance.get("charge_imbalance"), payload["delta_g_kcal_mol"],
+                )
+                payload["delta_g_kcal_mol_raw"] = payload["delta_g_kcal_mol"]
+                if NEUTRALIZE_UNBALANCED_THERMO_GATE:
+                    payload["delta_g_j_mol"] = 0.0
+                    payload["delta_g_kcal_mol"] = 0.0
+                    payload["is_spontaneous"] = True
+                    payload["thermo_basis"] = "unavailable_unbalanced"
+
+            return payload
+        except Exception as exc:
+            logger.debug("Joback thermo failed for %s -> %s: %s", reactants, products, exc)
+            # Gate-neutral fallback: an unknown dG must not silently kill a step.
+            return {
+                "delta_g_j_mol": 0.0,
+                "delta_g_kcal_mol": 0.0,
+                "delta_h_j_mol": 0.0,
+                "delta_h_kcal_mol": 0.0,
+                "delta_s_j_mol_k": 0.0,
+                "is_spontaneous": True,
+                "atom_balanced": atom_balanced,
+                "element_imbalance": balance.get("element_imbalance", {}),
+                "charge_imbalance": balance.get("charge_imbalance"),
+                "thermo_basis": "unavailable_estimator_error",
+            }
 
     def is_reaction_feasible(self, reactants: List[str], products: List[str], 
                              threshold_kcal_mol: float = 30.0,

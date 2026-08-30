@@ -1,7 +1,12 @@
 # Toxic / Harmful Maillard Reaction Marker Compounds
 #
 # These compounds form in advanced Maillard stages and must be FLAGGED and MINIMISED.
-# Sources: Maillard_meat.md, Maillard_Plant_based.md, Elicit reports.
+# Sources: data/Gemini_Deep_Research/maillard_meat.md,
+#          data/Gemini_Deep_Research/maillard_plant_based.md,
+#          data/Gemini_Deep_Research/elicit_meat_cooking.md.
+#          (2026-08-28, Wave S5: repointed from bare filenames; the docs/research/archives/
+#          copies were byte-identical duplicates and were deleted. No value was changed.
+#          All three are LLM digests, not papers -- see that directory's README.)
 # SMILES validated against PubChem.
 #
 # Fields:

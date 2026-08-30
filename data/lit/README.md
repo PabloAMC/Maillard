@@ -12,13 +12,13 @@ To ensure model transparency and traceabilty, all reference files are organised 
 These files contain the fundamental physical chemistry constants parameterising the thermodynamic and rate equation calculations.
 *   **[`arrhenius_params.yml`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/arrhenius_params.yml)**: Canonical pre-exponential factors ($A$) and activation energies ($E_a$) parameterising the baseline chemical reactions in `src/smirks_engine.py`.
 *   **[`henry_constants.yml`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/henry_constants.yml)**: Henry's law constants ($K_H$) used by the headspace module (`src/headspace.py`) to resolve gas-liquid partitioning coefficients.
-*   **[`calibration_offsets.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/calibration_offsets.json)**: Global energy offsets resolving systematic discrepancies between Machine Learning Potential (MLP/xTB) gas-phase paths and high-level DFT/r2SCAN structures.
+*   **[`calibration_offsets.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/calibration_offsets.json)**: Per-family barrier offsets produced by an Optuna fit against two benchmarks (`cys_ribose_150C_Mottram1994`, `cys_glucose_150C_Farmer1999`) via `scripts/calibrate_barriers.py`. NOT MLP/xTB-vs-DFT offsets (earlier description was wrong), and currently unwired — no runtime path reads this file (`get_barrier` reads only the `BARRIER_OFFSETS` env var and `refinement_surrogate_patches.json`). **Both fit targets were quarantined on 2026-08-26** (fabricated/unlocatable sources — see `data/benchmarks/quarantined/README.md`) and are no longer in the validation panel. This file must stay unwired until verified sources replace them.
 
 ### Category B: Literature & SLR Integration Registries
 Registries translating qualitative literature reviews and systematic surveys into machine-readable status trackers.
 *   **[`benchmark_intake_registry.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/benchmark_intake_registry.json)**: The authoritative catalogue of literature papers and experimental datasets evaluated against quality thresholds.
 *   **[`slr_incorporation_matrix.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/slr_incorporation_matrix.json)**: The ledger tracking which papers from the Systematic Literature Review (SLR) are currently integrated into runtime modules.
-*   **[`family_ingestion_plan.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/family_ingestion_plan.json)**: The implementation roadmap mapping the 16 reaction families to their target modules, preferred payload formats, and development waves.
+*   **[`family_ingestion_plan.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/family_ingestion_plan.json)**: The implementation roadmap mapping the 16 SLR chemistry lanes to their target modules, preferred payload formats, and development waves. NOTE 2026-08-27: these are literature lanes, not 16 implemented mechanisms — only 5 carry generative reaction templates. See `results/validation/family_implementation_status.md`, derived from the engine by enumeration.
 *   **[`deep_research_backlog.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/deep_research_backlog.json)**: Non-ingested candidate entries identified during automated research passes awaiting manual curation.
 
 ### Category C: Theoretical Priors & Sensory Bounds
@@ -66,7 +66,7 @@ graph TD
 
 ### Steps for Registering New Papers
 
-1.  **Quality Assessment**: Assess the paper against the 8 quality criteria (found in [docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md](file:///Users/pabloantoniomorenocasares/Developer/Maillard/docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md)):
+1.  **Quality Assessment**: Assess the paper against the 8 quality criteria (found in [docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md](../../docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md)):
     *   **C1**: Exact reactant identities specified.
     *   **C2**: Precursor concentrations/ratios specified.
     *   **C3**: Reaction conditions ($pH, T, t, a_w$) reported.

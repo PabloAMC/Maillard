@@ -19,8 +19,6 @@ from src.benchmark_labels import benchmark_label_list
 from src.plot_style import configure_science_plot_style
 from src.presentation import render_validated_envelope_markdown
 
-configure_science_plot_style()
-
 
 def _render_validated_envelope_figure(report, output_path: Path) -> None:
     strict_count = len(report.strict_ready_benchmarks)
@@ -74,10 +72,21 @@ def _render_validated_envelope_figure(report, output_path: Path) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser = argparse.ArgumentParser(
+        description="Render the validated-envelope report (markdown + JSON + figure)."
+    )
+    parser.add_argument(
+        "--output-dir",
+        default="results/validation",
+        help="Directory for validated_envelope.{md,json,png} (default: results/validation).",
+    )
     parser.add_argument("--target-tag", default="meaty")
     args = parser.parse_args()
+
+    # Configure the plotting style AFTER argument parsing: it asserts a full
+    # LaTeX/dvipng toolchain, and doing it at import time made even `--help`
+    # fail on machines without dvipng.
+    configure_science_plot_style()
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)

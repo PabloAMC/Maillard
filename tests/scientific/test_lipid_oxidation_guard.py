@@ -23,7 +23,10 @@ def test_free_amino_acid_benchmark_does_not_inject_lipid_oxidation_products():
 
 
 def test_free_amino_acid_benchmark_predicted_ppb_excludes_input_precursors():
-    bench = load_benchmark(ROOT / "data" / "benchmarks" / "cys_ribose_150C_Mottram1994.json")
+    # Retargeted from cys_ribose_150C_Mottram1994 (quarantined 2026-08-26) to the surviving
+    # free_precursor cys+ribose panel benchmark; this test is about generic pipeline
+    # behaviour, not about this benchmark's numbers.
+    bench = load_benchmark(ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json")
     formulation = benchmark_to_formulation(bench)
     conditions = benchmark_to_conditions(bench)
 

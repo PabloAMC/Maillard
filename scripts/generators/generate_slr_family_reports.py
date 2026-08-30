@@ -10,6 +10,7 @@ Writes files to data/Gemini_Deep_Research/slr_family_<num>_<family_id>.md
 Deletes old manually created files to avoid duplicates.
 """
 
+import argparse
 import json
 import os
 import glob
@@ -214,7 +215,17 @@ def score_matrix_entry(entry):
             
     return score_val, assessments
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser(
+        description=(
+            "Regenerate the 16 systematic-literature-review family reports from "
+            "the JSON databases in data/lit/ into "
+            "data/Gemini_Deep_Research/slr_family_<num>_<family_id>.md, "
+            "deleting the older hand-written copies."
+        )
+    )
+    parser.parse_args(argv)
+
     print("Loading databases...")
     plan_data = load_json(FAMILY_PLAN_PATH)
     registry_data = load_json(REGISTRY_PATH)

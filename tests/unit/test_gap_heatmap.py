@@ -48,7 +48,7 @@ def test_generate_html_briefs_writes_html(tmp_path: Path):
     payload = {
         "candidates": [
             {
-                "benchmark_id": "cys_glucose_150C_Farmer1999",
+                "benchmark_id": "cys_ribose_140C_Hofmann1998",
                 "compound": "2-methyl-3-furanthiol",
                 "voi_score": 7.7,
                 "inside_ci": True,

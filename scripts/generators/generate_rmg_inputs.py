@@ -7,9 +7,10 @@ This creates the `input.py` configuration files for three critical test cases:
 2. D-Glucose + Glycine     (Target: Furfural, Amadori intermediates)
 3. Ribose + Cys + Leucine  (Target: FFT, MFT, 3-methylbutanal, pyrazines)
 
-Usage: python scripts/generate_rmg_inputs.py
+Usage: python scripts/generators/generate_rmg_inputs.py
 """
 
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -91,11 +92,25 @@ def generate_species_block(species_list):
         concs.append(f"'{name}': ({conc}, 'mol/l')")
     return "\n\n".join(blocks), ", ".join(concs)
 
-def main():
-    CASES_DIR.mkdir(parents=True, exist_ok=True)
+def main(argv=None):
+    parser = argparse.ArgumentParser(
+        description=(
+            "Write the RMG-Py input.py files for the three Maillard validation "
+            "cases under data/reactions/rmg_validation_cases/."
+        )
+    )
+    parser.add_argument(
+        "--cases-dir",
+        default=str(CASES_DIR),
+        help="directory the per-case input.py files are written under",
+    )
+    args = parser.parse_args(argv)
+
+    cases_dir = Path(args.cases_dir)
+    cases_dir.mkdir(parents=True, exist_ok=True)
     
     for case_name, data in CASES.items():
-        case_path = CASES_DIR / case_name
+        case_path = cases_dir / case_name
         case_path.mkdir(exist_ok=True)
         
         species_block, concs_str = generate_species_block(data["species"])

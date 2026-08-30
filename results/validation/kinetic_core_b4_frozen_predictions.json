@@ -1,0 +1,664 @@
+{
+  "frozen_on": "2026-08-28",
+  "declaration": "Amendment 4 gating hold-out: Hong 2020 paired ratios.",
+  "rule": "These predictions were written BEFORE any read of hong2020_paired_thresholds.json by this wave. The hold-out scorer reads this file and changes nothing in it.",
+  "pre_registered_expectations": {
+    "gating_criterion": "Declaration Amendment 4: >=7/10 of the paired soy/water ratios within 5x AND correct sign on all 10, including the ethyl-4-methylpentanoate inversion.",
+    "overall_expectation": "FAIL, and by construction rather than by accident.",
+    "expected_failures": [
+      {
+        "compound": "ethyl_4_methylpentanoate",
+        "expect": "SIGN WRONG",
+        "confidence": "very high (~95%)",
+        "why": "The declaration names this compound as carrying an INVERSION. The only term this layer has for an ester is Meynier's measured ester SUPPRESSION (1.07-1.33x at 33.9 g/L dairy protein), which can only push the ratio ABOVE 1. Nothing in the FIT column produces a sign reversal for an ester: the two measured enhancements in the corpus are a lactone and a furanone, not an ester. The one mechanism that could -- background-odour masking -- is unimplementable, because Hong measured no background volatiles in the soy matrix. So this single compound fails the 'correct sign on all 10' clause on its own, and therefore the gate fails whatever the magnitudes do."
+      },
+      {
+        "compounds": [
+          "2_3_dimethylpyrazine",
+          "2_pentylfuran",
+          "4_vinylphenol",
+          "butyric_acid",
+          "4_ethylphenol",
+          "dimethyl_disulfide"
+        ],
+        "expect": "NO PREDICTION AT ALL -> scored as sign-fail",
+        "confidence": "certain (structural)",
+        "why": "Six of the ten compounds belong to classes for which the entire FIT column contains NO per-gram binding constant: alkylpyrazine, alkylfuran, phenol (x2), carboxylic acid, disulfide. The layer reports `no_measured_constant_for_this_class` and emits 1.0, which is the ABSENCE of a prediction, not a prediction of no shift. Imputing a constant for them would be inventing a parameter, and a class-mean over unrelated chemistry would be the general correction factor k2 sec. D.1 refutes. This is the single most informative thing the hold-out will show: the corpus supports a matrix prediction for 4 of Hong's 10 compounds and no more."
+      },
+      {
+        "compounds": [
+          "hexanal",
+          "3_methylbutanal",
+          "2_methylbutanal"
+        ],
+        "expect": "SIGN RIGHT, MAGNITUDE FAR TOO SMALL",
+        "confidence": "high (~85%)",
+        "why": "These three do get a term. But Amendment 6 ruling 2 already computed the answer: reversible binding explains ~25 % of a hexanal matrix log-shift and covalent ~0.06 %. A model whose only active term is reversible binding must therefore UNDER-PREDICT a real matrix shift by roughly the remaining 0.75 of the log, which for a shift of order 100x is a fold error of order 20-30x -- far outside the 5x window. If any of these three lands inside 5x it will be because the true shift is small, not because the model captured a large one."
+      },
+      {
+        "compounds": [
+          "2_methylbutanal",
+          "3_methylbutanal"
+        ],
+        "expect": "IDENTICAL PREDICTIONS FOR TWO DIFFERENT COMPOUNDS",
+        "confidence": "certain (structural)",
+        "why": "Both are C5 branched alkanals reached by the same chain-length surrogate from the C6 n-alkanal. Branch position is unmeasured anywhere in the corpus, so the layer CANNOT distinguish them. Any difference Hong measured between the two is, for this layer, pure unexplained residual by construction."
+      },
+      {
+        "compound": "dimethyl_disulfide",
+        "expect": "carries an unresolved SOURCE CONTRADICTION",
+        "confidence": "certain",
+        "why": "anantharamkrishnan2020b's Table 2 and its own Results text disagree on whether DMDS forms a covalent adduct. Resolved conservatively in favour of the table (no covalent term) and reported on the row rather than decided silently. It changes nothing numerically here, because the covalent term is inert anyway."
+      }
+    ],
+    "what_would_falsify_the_expectation": "If the ester's measured ratio turns out to be ABOVE 1 the sign call would pass and this pre-registration would be wrong in the model's favour. If several of the six no-constant compounds happen to sit within 5x of 1.0, the magnitude count could reach 7/10 while the sign clause still fails -- that would be a pass on one half of a criterion that requires both, and it must not be reported as a partial pass.",
+    "declared_before": "any read of results/validation/holdout_frozen/hong2020_paired_thresholds.json by this wave."
+  },
+  "predictions": [
+    {
+      "compound": "2_3_dimethylpyrazine",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.0,
+      "predicted_interval": [
+        1.0,
+        1.0
+      ],
+      "predicted_sign": "flat",
+      "terms": {
+        "reversible_binding": {
+          "state": "no_measured_constant_for_this_class",
+          "chem_class": "alkylpyrazine",
+          "factor_x": null,
+          "why": "No per-gram binding constant exists anywhere in the FIT column for the class 'alkylpyrazine'. The corpus measures binding for esters, n-alkanals, methyl ketones, diketones, lactones and furanones and for nothing else. Imputing one would be inventing a parameter."
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. "
+        },
+        "covalent_ceiling": {
+          "state": "blocked_by_negative_gate_class",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Not applicable: the compound is outside the structurally allowed set, so there is no covalent channel to activate at any temperature."
+        }
+      },
+      "state": "no_binding_constant_for_class",
+      "warnings": [
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "2,3-dimethyl pyrazine",
+      "binding_class": "alkylpyrazine",
+      "covalent_gate": "blocked_by_negative_gate_class"
+    },
+    {
+      "compound": "ethyl_4_methylpentanoate",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.696999,
+      "predicted_interval": [
+        1.490845,
+        1.981689
+      ],
+      "predicted_sign": "elevated",
+      "terms": {
+        "reversible_binding": {
+          "state": "measured",
+          "chem_class": "ester",
+          "k_g_l_per_g": 0.004908446074631294,
+          "factor_x": 1.6969993425976437,
+          "factor_interval": [
+            1.4908446074631294,
+            1.9816892149262588
+          ],
+          "protein_g_per_l": 142.0,
+          "protein_band_g_per_l": [
+            100.0,
+            200.0
+          ],
+          "reference_loading_g_per_l": 33.9,
+          "n_fit_rows": 3,
+          "surrogate": null,
+          "sources": [
+            "Meynier2002_extraction.md"
+          ]
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. Branched C6 acyl chain esterified to ethanol; the closest structural homologue in the corpus is Meynier's ethyl pentanoate (same ester, unbranched, one carbon shorter)."
+        },
+        "covalent_ceiling": {
+          "state": "blocked_by_negative_gate_class",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Not applicable: the compound is outside the structurally allowed set, so there is no covalent channel to activate at any temperature."
+        }
+      },
+      "state": "predicted",
+      "warnings": [
+        "EXTRAPOLATION WARNING: the protein loading used (142 g/L) is 4.2x the loading the constant was measured at (33.9 g/L). The linear binding form has been validated only to ~2.5x (Andriot's own 4 % -> 10 % extrapolation).",
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "ethyl-4-methylpentanoate",
+      "binding_class": "ester",
+      "covalent_gate": "blocked_by_negative_gate_class"
+    },
+    {
+      "compound": "2_pentylfuran",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.0,
+      "predicted_interval": [
+        1.0,
+        1.0
+      ],
+      "predicted_sign": "flat",
+      "terms": {
+        "reversible_binding": {
+          "state": "no_measured_constant_for_this_class",
+          "chem_class": "alkylfuran",
+          "factor_x": null,
+          "why": "No per-gram binding constant exists anywhere in the FIT column for the class 'alkylfuran'. The corpus measures binding for esters, n-alkanals, methyl ketones, diketones, lactones and furanones and for nothing else. Imputing one would be inventing a parameter."
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. "
+        },
+        "covalent_ceiling": {
+          "state": "unknown_class_no_gate_evidence",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Not applicable: the compound is outside the structurally allowed set, so there is no covalent channel to activate at any temperature."
+        }
+      },
+      "state": "no_binding_constant_for_class",
+      "warnings": [
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "2-pentyl furan",
+      "binding_class": "alkylfuran",
+      "covalent_gate": "unknown_class_no_gate_evidence"
+    },
+    {
+      "compound": "4_vinylphenol",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.0,
+      "predicted_interval": [
+        1.0,
+        1.0
+      ],
+      "predicted_sign": "flat",
+      "terms": {
+        "reversible_binding": {
+          "state": "no_measured_constant_for_this_class",
+          "chem_class": "phenol",
+          "factor_x": null,
+          "why": "No per-gram binding constant exists anywhere in the FIT column for the class 'phenol'. The corpus measures binding for esters, n-alkanals, methyl ketones, diketones, lactones and furanones and for nothing else. Imputing one would be inventing a parameter."
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. Conjugated C=C but NO carbonyl -> NOT an alpha,beta-unsaturated carbonyl, so the unsaturation penalty does NOT apply."
+        },
+        "covalent_ceiling": {
+          "state": "blocked_by_negative_gate_named_compound",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Not applicable: the compound is outside the structurally allowed set, so there is no covalent channel to activate at any temperature."
+        }
+      },
+      "state": "no_binding_constant_for_class",
+      "warnings": [
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "4-vinyl phenol",
+      "binding_class": "phenol",
+      "covalent_gate": "blocked_by_negative_gate_named_compound"
+    },
+    {
+      "compound": "hexanal",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 2.63442,
+      "predicted_interval": [
+        2.151,
+        3.302
+      ],
+      "predicted_sign": "elevated",
+      "terms": {
+        "reversible_binding": {
+          "state": "measured",
+          "chem_class": "n_alkanal",
+          "k_g_l_per_g": 0.01151,
+          "factor_x": 2.63442,
+          "factor_interval": [
+            2.151,
+            3.302
+          ],
+          "protein_g_per_l": 142.0,
+          "protein_band_g_per_l": [
+            100.0,
+            200.0
+          ],
+          "reference_loading_g_per_l": 33.9,
+          "n_fit_rows": 1,
+          "surrogate": null,
+          "sources": [
+            "Meynier2002_extraction.md"
+          ]
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. "
+        },
+        "covalent_ceiling": {
+          "state": "structurally_allowed",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Could matter at process temperature IF Ea >= 70.0 kJ/mol -- 36x would arrive in 36 min to 2.2 h at 140 C, and the extent is UNCAPPED (lysine in 360-36 000x excess). THAT Ea IS UNMEASURED IN EVERY CORPUS SOURCE. Named wet-lab gap, Amendment 6."
+        }
+      },
+      "state": "predicted",
+      "warnings": [
+        "EXTRAPOLATION WARNING: the protein loading used (142 g/L) is 4.2x the loading the constant was measured at (33.9 g/L). The linear binding form has been validated only to ~2.5x (Andriot's own 4 % -> 10 % extrapolation).",
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "hexanal",
+      "binding_class": "n_alkanal",
+      "covalent_gate": "structurally_allowed"
+    },
+    {
+      "compound": "3_methylbutanal",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.581644,
+      "predicted_interval": [
+        1.409609,
+        1.819217
+      ],
+      "predicted_sign": "elevated",
+      "terms": {
+        "reversible_binding": {
+          "state": "measured",
+          "chem_class": "branched_alkanal",
+          "k_g_l_per_g": 0.004096085409252668,
+          "factor_x": 1.5816441281138789,
+          "factor_interval": [
+            1.4096085409252668,
+            1.8192170818505335
+          ],
+          "protein_g_per_l": 142.0,
+          "protein_band_g_per_l": [
+            100.0,
+            200.0
+          ],
+          "reference_loading_g_per_l": 33.9,
+          "n_fit_rows": 0,
+          "surrogate": "CHAIN-LENGTH EXTRAPOLATED from the C6 n-alkanal by the measured 2.81x/CH2 slope (Andriot 2.72, Damodaran 2.9, agreeing to 6 %). The slope is measured on BINDING CONSTANTS. It is NOT applied to any threshold shift, because k2 sec. D.3 shows the chain-length structure of the shift does not transfer between matrices. Branch position is unmeasured anywhere, so 2-methyl and 3-methyl butanal get the SAME value and the layer cannot distinguish them.",
+          "sources": [
+            "Meynier2002_extraction.md"
+          ]
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. "
+        },
+        "covalent_ceiling": {
+          "state": "structurally_allowed",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Could matter at process temperature IF Ea >= 70.0 kJ/mol -- 36x would arrive in 36 min to 2.2 h at 140 C, and the extent is UNCAPPED (lysine in 360-36 000x excess). THAT Ea IS UNMEASURED IN EVERY CORPUS SOURCE. Named wet-lab gap, Amendment 6."
+        }
+      },
+      "state": "predicted_with_chain_length_surrogate",
+      "warnings": [
+        "EXTRAPOLATION WARNING: the protein loading used (142 g/L) is 4.2x the loading the constant was measured at (33.9 g/L). The linear binding form has been validated only to ~2.5x (Andriot's own 4 % -> 10 % extrapolation).",
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "3-methyl butanal",
+      "binding_class": "branched_alkanal",
+      "covalent_gate": "structurally_allowed"
+    },
+    {
+      "compound": "2_methylbutanal",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.581644,
+      "predicted_interval": [
+        1.409609,
+        1.819217
+      ],
+      "predicted_sign": "elevated",
+      "terms": {
+        "reversible_binding": {
+          "state": "measured",
+          "chem_class": "branched_alkanal",
+          "k_g_l_per_g": 0.004096085409252668,
+          "factor_x": 1.5816441281138789,
+          "factor_interval": [
+            1.4096085409252668,
+            1.8192170818505335
+          ],
+          "protein_g_per_l": 142.0,
+          "protein_band_g_per_l": [
+            100.0,
+            200.0
+          ],
+          "reference_loading_g_per_l": 33.9,
+          "n_fit_rows": 0,
+          "surrogate": "CHAIN-LENGTH EXTRAPOLATED from the C6 n-alkanal by the measured 2.81x/CH2 slope (Andriot 2.72, Damodaran 2.9, agreeing to 6 %). The slope is measured on BINDING CONSTANTS. It is NOT applied to any threshold shift, because k2 sec. D.3 shows the chain-length structure of the shift does not transfer between matrices. Branch position is unmeasured anywhere, so 2-methyl and 3-methyl butanal get the SAME value and the layer cannot distinguish them.",
+          "sources": [
+            "Meynier2002_extraction.md"
+          ]
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. "
+        },
+        "covalent_ceiling": {
+          "state": "structurally_allowed",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Could matter at process temperature IF Ea >= 70.0 kJ/mol -- 36x would arrive in 36 min to 2.2 h at 140 C, and the extent is UNCAPPED (lysine in 360-36 000x excess). THAT Ea IS UNMEASURED IN EVERY CORPUS SOURCE. Named wet-lab gap, Amendment 6."
+        }
+      },
+      "state": "predicted_with_chain_length_surrogate",
+      "warnings": [
+        "EXTRAPOLATION WARNING: the protein loading used (142 g/L) is 4.2x the loading the constant was measured at (33.9 g/L). The linear binding form has been validated only to ~2.5x (Andriot's own 4 % -> 10 % extrapolation).",
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "2-methyl butanal",
+      "binding_class": "branched_alkanal",
+      "covalent_gate": "structurally_allowed"
+    },
+    {
+      "compound": "butyric_acid",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.0,
+      "predicted_interval": [
+        1.0,
+        1.0
+      ],
+      "predicted_sign": "flat",
+      "terms": {
+        "reversible_binding": {
+          "state": "no_measured_constant_for_this_class",
+          "chem_class": "carboxylic_acid",
+          "factor_x": null,
+          "why": "No per-gram binding constant exists anywhere in the FIT column for the class 'carboxylic_acid'. The corpus measures binding for esters, n-alkanals, methyl ketones, diketones, lactones and furanones and for nothing else. Imputing one would be inventing a parameter."
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. The only ionisable member of the Hong panel; pH-dependent speciation, and the soy matrix pH is unreported."
+        },
+        "covalent_ceiling": {
+          "state": "blocked_by_negative_gate_named_compound",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Not applicable: the compound is outside the structurally allowed set, so there is no covalent channel to activate at any temperature."
+        }
+      },
+      "state": "no_binding_constant_for_class",
+      "warnings": [
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "butyric acid",
+      "binding_class": "carboxylic_acid",
+      "covalent_gate": "blocked_by_negative_gate_named_compound"
+    },
+    {
+      "compound": "4_ethylphenol",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.0,
+      "predicted_interval": [
+        1.0,
+        1.0
+      ],
+      "predicted_sign": "flat",
+      "terms": {
+        "reversible_binding": {
+          "state": "no_measured_constant_for_this_class",
+          "chem_class": "phenol",
+          "factor_x": null,
+          "why": "No per-gram binding constant exists anywhere in the FIT column for the class 'phenol'. The corpus measures binding for esters, n-alkanals, methyl ketones, diketones, lactones and furanones and for nothing else. Imputing one would be inventing a parameter."
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. "
+        },
+        "covalent_ceiling": {
+          "state": "blocked_by_negative_gate_class",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Not applicable: the compound is outside the structurally allowed set, so there is no covalent channel to activate at any temperature."
+        }
+      },
+      "state": "no_binding_constant_for_class",
+      "warnings": [
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "4-ethyl phenol",
+      "binding_class": "phenol",
+      "covalent_gate": "blocked_by_negative_gate_class"
+    },
+    {
+      "compound": "dimethyl_disulfide",
+      "matrix": "soy_paste_hong",
+      "predicted_matrix_over_water_ratio": 1.0,
+      "predicted_interval": [
+        1.0,
+        1.0
+      ],
+      "predicted_sign": "flat",
+      "terms": {
+        "reversible_binding": {
+          "state": "no_measured_constant_for_this_class",
+          "chem_class": "disulfide",
+          "factor_x": null,
+          "why": "No per-gram binding constant exists anywhere in the FIT column for the class 'disulfide'. The corpus measures binding for esters, n-alkanals, methyl ketones, diketones, lactones and furanones and for nothing else. Imputing one would be inventing a parameter."
+        },
+        "alpha_beta_unsaturation": {
+          "state": "not_applicable",
+          "factor_x": 1.0,
+          "why": "not an alpha,beta-unsaturated carbonyl. NOT a free thiol. Carries the anantharamkrishnan2020b Table-2-vs-text contradiction (table: no adduct; text: names a +46 Da adduct)."
+        },
+        "covalent_ceiling": {
+          "state": "blocked_by_negative_gate_named_compound",
+          "ph_state": "not_gated",
+          "contribution_to_point_prediction": 0.0,
+          "why_zero": "INERT BY RULING. Amendment 6 ruling 2: the covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale and does NOT close the matrix gap. It is carried as a ceiling, not a term.",
+          "ceiling_k2_M_per_s_at_20C": 2.5e-05,
+          "ambient_half_life_days": [
+            37.0,
+            760.0
+          ],
+          "process_temperature_report": "Not applicable: the compound is outside the structurally allowed set, so there is no covalent channel to activate at any temperature.",
+          "source_contradiction": "anantharamkrishnan2020b Table 2 says DMDS forms NO adduct (it is one of the 32); its own Results text says DMDS DOES, and names +46 Da (BLG-CysSSMe). Resolved CONSERVATIVELY here in favour of the table. Reported on every DMDS prediction."
+        }
+      },
+      "state": "no_binding_constant_for_class",
+      "warnings": [
+        "The protein loading for 'soy_paste_hong' is a DECLARED ASSUMPTION, not a corpus value: THE SINGLE LARGEST ASSUMPTION IN THIS LAYER. The composition numbers are generic food-composition knowledge, NOT corpus values, and the band is propagated into every soy prediction interval. It is also why k2 sec. D.4.1's lookup-table key must include matrix LOADING and not just matrix identity -- and this matrix's loading is unknowable from its own paper. Band 100-200 g/L propagated into the interval.",
+        "pH not supplied and not stated by the matrix's source. The covalent gate is pH-dependent (abolished at pH 3), so its state is reported as ungated rather than assumed."
+      ],
+      "compound_display": "dimethyl disulfide",
+      "binding_class": "disulfide",
+      "covalent_gate": "blocked_by_negative_gate_named_compound"
+    }
+  ],
+  "class_binding_constants": {
+    "ester": {
+      "k_g_l_per_g": 0.004908446074631294,
+      "n_fit_rows": 3,
+      "members": [
+        "isoamyl_acetate",
+        "amyl_acetate",
+        "ethyl_pentanoate"
+      ],
+      "reference_loading_g_per_l": 33.9,
+      "method_family": "headspace",
+      "sign": "suppression",
+      "sources": [
+        "Meynier2002_extraction.md"
+      ]
+    },
+    "n_alkanal": {
+      "k_g_l_per_g": 0.01151,
+      "n_fit_rows": 1,
+      "members": [
+        "hexanal"
+      ],
+      "reference_loading_g_per_l": 33.9,
+      "method_family": "headspace",
+      "sign": "suppression",
+      "sources": [
+        "Meynier2002_extraction.md"
+      ]
+    },
+    "diketone": {
+      "k_g_l_per_g": 0.07300000000000001,
+      "n_fit_rows": 1,
+      "members": [
+        "diacetyl"
+      ],
+      "reference_loading_g_per_l": 10.0,
+      "method_family": "headspace",
+      "sign": "suppression",
+      "sources": [
+        "leksrisompong2010_extraction.md"
+      ]
+    },
+    "lactone": {
+      "k_g_l_per_g": -0.023,
+      "n_fit_rows": 1,
+      "members": [
+        "delta_decalactone"
+      ],
+      "reference_loading_g_per_l": 10.0,
+      "method_family": "headspace",
+      "sign": "enhancement_measured",
+      "sources": [
+        "leksrisompong2010_extraction.md"
+      ]
+    },
+    "furanone": {
+      "k_g_l_per_g": -0.062,
+      "n_fit_rows": 1,
+      "members": [
+        "furaneol"
+      ],
+      "reference_loading_g_per_l": 10.0,
+      "method_family": "headspace",
+      "sign": "enhancement_measured",
+      "sources": [
+        "leksrisompong2010_extraction.md"
+      ]
+    },
+    "methyl_ketone": {
+      "k_g_l_per_g": 0.024848979576924935,
+      "n_fit_rows": 3,
+      "members": [
+        "2_heptanone",
+        "2_octanone",
+        "2_nonanone"
+      ],
+      "reference_loading_g_per_l": 0.0,
+      "method_family": "headspace",
+      "sign": "suppression",
+      "sources": [
+        "andriot2000 via k2"
+      ]
+    },
+    "branched_alkanal": {
+      "k_g_l_per_g": 0.004096085409252668,
+      "n_fit_rows": 0,
+      "members": [],
+      "reference_loading_g_per_l": 33.9,
+      "method_family": "headspace",
+      "sign": "suppression",
+      "surrogate": "CHAIN-LENGTH EXTRAPOLATED from the C6 n-alkanal by the measured 2.81x/CH2 slope (Andriot 2.72, Damodaran 2.9, agreeing to 6 %). The slope is measured on BINDING CONSTANTS. It is NOT applied to any threshold shift, because k2 sec. D.3 shows the chain-length structure of the shift does not transfer between matrices. Branch position is unmeasured anywhere, so 2-methyl and 3-methyl butanal get the SAME value and the layer cannot distinguish them.",
+      "sources": [
+        "Meynier2002_extraction.md"
+      ]
+    }
+  },
+  "unsaturation_penalty": {
+    "penalty_x": 3.7295442080769066,
+    "n_fit_rows": 2,
+    "observations": {
+      "unsat_penalty_gelatin": 2.81,
+      "unsat_penalty_dairy_headspace": 4.95
+    },
+    "excluded": {
+      "unsat_penalty_beef": 2.01
+    },
+    "spread_x": 1.7615658362989324,
+    "caveat": "k2 sec. D.3 states the penalty as ~2-3x. This FIT-only estimate is ABOVE that band, and it is above it BECAUSE the observation that would pull it down (beef, 2.01x) is hold-out and excluded. k4b records the same disagreement: 'the term's magnitude is matrix-dependent'. Reported, not smoothed.",
+    "applies_to": "alpha,beta-unsaturated CARBONYLS only (Michael acceptors). A conjugated C=C without a carbonyl -- 4-vinyl phenol -- does NOT qualify."
+  }
+}

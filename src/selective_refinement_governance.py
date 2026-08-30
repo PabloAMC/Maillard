@@ -112,17 +112,18 @@ def _build_selective_refinement_governance_artifact_cached(
     )
     advance_count = int(cheap_payload.get("summary", {}).get("advance", 0))
     run_now_count = int(dft_payload.get("summary", {}).get("run_now", 0))
+    # 2026-08-28 OWNER POLICY (Pablo): the DFT lane is CLOSED — see the twin
+    # comment in src/offline_refinement_governance.py for the full rationale.
+    # The gate is PINNED to hold; run_now candidates are counted as attention
+    # pointers only and can never flip the governing status.
     governing_status = "hold_observable_first"
-    if run_now_count > 0:
-        governing_status = "selective_refinement_allowed"
 
     blockers = [
         "observable closure still names the benchmark-visible compounds that must move before mechanistic escalation",
         "cheap-first screening produced no benchmark-visible improvement for the active mechanistic-priority families",
         "no selective DFT jobs are approved until a cheap-first perturbation improves benchmark-visible diagnostics",
+        "OWNER POLICY 2026-08-28: the DFT lane is closed permanently — computed barriers are not trusted at Maillard-relevant accuracy; measured kinetics only",
     ]
-    if run_now_count > 0:
-        blockers[-1] = "approved selective DFT jobs remain sparse and benchmark-scoped"
 
     return {
         "summary": {
@@ -130,14 +131,17 @@ def _build_selective_refinement_governance_artifact_cached(
             "mechanistic_priority_benchmark_count": len(benchmark_rows),
             "benchmarks_with_named_targets": sum(1 for row in benchmark_rows if row["target_compounds"]),
             "cheap_first_advance_count": advance_count,
-            "approved_offline_job_count": run_now_count,
-            "approved_offline_job_families": approved_job_families,
+            "approved_offline_job_count": 0,  # PINNED: DFT lane closed by owner policy 2026-08-28
+            "candidate_offline_job_count": run_now_count,  # attention pointers only, never approved
+            "approved_offline_job_families": [],  # PINNED empty: no job is ever approved
+            "candidate_offline_job_families": approved_job_families,
             "approved_geom_preopt_candidates": approved_geom_preopt_candidates,
             "policy": "continue_only_when_observable_closure_names_the_targets_and_cheap_first_screening_improves_benchmark_visible_diagnostics",
         },
         "blockers": blockers,
         "mechanistic_priority_benchmarks": benchmark_rows,
-        "approved_offline_jobs": approved_jobs,
+        "approved_offline_jobs": [],  # PINNED empty: DFT lane closed by owner policy 2026-08-28
+        "candidate_offline_jobs": approved_jobs,  # kept as diagnostics, not approvals
     }
 
 
@@ -209,14 +213,6 @@ def render_selective_refinement_governance_markdown(payload: Mapping[str, Any]) 
             "No selective DFT jobs are currently approved.",
         ])
     return "\n".join(lines) + "\n"
-
-
-def build_refinement_governance_artifact(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
-) -> Dict[str, Any]:
-    return build_selective_refinement_governance_artifact(benchmark_files, target_tag=target_tag)
 
 
 def render_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:

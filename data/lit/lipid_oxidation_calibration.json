@@ -1,0 +1,48 @@
+{
+  "_provenance": {
+    "description": "Calibration constants for the lipid-oxidation hydroperoxide kinetics in src/lipid_oxidation.py. Externalized 2026-06-22 (S27 Workstream A) from previously hardcoded magic numbers so the kinetics can be recalibrated without code edits.",
+    "kinetics_source": "Frankel (1998) radical-chain framing; Arrhenius prefactor/Ea are order-of-magnitude literature values, NOT a fitted barrier. The absolute observable scale is pinned downstream by the per-(matrix, process_state) calibration registry, so these constants set the SHAPE of the temperature/time response, not the final ppb.",
+    "saturation_rationale": "max_conversion_fraction (when set to a number) caps the first-order oxidation extent via conversion = c*(1-exp(-progress/c)), linear when progress << c. EMPIRICAL FINDING (2026-06-22): the validated benchmark envelope reaches progress ~= 0.06 (100C/45min) and the external hold-out failures sit in the SAME progress regime (HME ~0.07), so a cap aggressive enough to bend the hold-out also perturbs in-panel trace points (Hexanal/Nonanal ~2e-4 ppb with near-zero-width Monte-Carlo CIs) and regressed the headline 37/48 -> 31/48 even at c=12. The hold-out over-prediction is therefore a per-(matrix, process_state) CALIBRATION gap (owned by Workstream B: process-state-aware uncertainty + curation), NOT a kinetic-shape problem. The cap is therefore SHIPPED DISABLED (null): predict_hexanal_generation/predict_lop_generation are byte-identical to the pre-S27 linear model by default, so the headline stays 37/48. The mechanism + _saturated_extent are retained, unit-tested, and ready to be re-enabled alongside the Workstream-B CI re-sizing.",
+    "do_not_invent_numbers": "Branching ratios and lipid profiles are literature-typical values already present in the codebase prior to this change; they were moved here verbatim. Refit only against real measured_volatiles via scripts/calibrate_lipid_oxidation.py."
+  },
+  "kinetics": {
+    "prefactor_per_min": 1.0e8,
+    "activation_energy_j_per_mol": 80000.0,
+    "gas_constant_j_per_mol_k": 8.314,
+    "iron_pro_oxidant_coefficient_per_ppm": 0.05,
+    "antioxidant_ic50_mM": 5.0,
+    "hydroperoxide_scale": 1.0e6,
+    "max_conversion_fraction": null
+  },
+  "branching_ratios": {
+    "formulation_path": {
+      "comment": "Used by predict_lop_generation: proxy LOP loads injected into the recommend engine (initial_concentrations).",
+      "CCCCCC=O": 0.37,
+      "CCCCCc1ccco1": 0.08,
+      "CCCCCCO": 0.05,
+      "CCCCCCCCC=O": 0.12
+    },
+    "hexanal_path": {
+      "comment": "Used by predict_hexanal_generation for its named secondary-product outputs. Note: the matrix-benchmark path consumes only total_hydroperoxide and applies MATRIX_BENCHMARK_BASE_MARKER_YIELDS separately, so these named ratios do not drive matrix-only ppb.",
+      "hexanal": 0.37,
+      "2-pentylfuran": 0.08,
+      "nonanal": 0.15
+    }
+  },
+  "matrix_lipid_profiles": {
+    "pea_iso": {
+      "linoleic_acid_pct": 50.0,
+      "alpha_linolenic_pct": 12.0,
+      "oleic_acid_pct": 22.0,
+      "total_lipid_pct": 2.5,
+      "pro_oxidant_iron_ppm": 25.0
+    },
+    "soy_iso": {
+      "linoleic_acid_pct": 53.0,
+      "alpha_linolenic_pct": 8.0,
+      "oleic_acid_pct": 23.0,
+      "total_lipid_pct": 2.0,
+      "pro_oxidant_iron_ppm": 15.0
+    }
+  }
+}

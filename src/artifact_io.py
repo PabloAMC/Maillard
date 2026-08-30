@@ -18,10 +18,3 @@ def load_json_mapping(path: Path | str) -> dict[str, Any]:
     with open(Path(path), "r", encoding="utf-8") as handle:
         return json.load(handle)
 
-
-def load_optional_json_mapping(path: Path | str) -> dict[str, Any]:
-    candidate = Path(path)
-    if not candidate.exists():
-        return {}
-    return load_json_mapping(candidate)
-

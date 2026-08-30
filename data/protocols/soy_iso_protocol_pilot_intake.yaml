@@ -1,5 +1,6 @@
 experiment_id: soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026
-source_kind: internal_experiment
+source_kind: synthetic_diagnostic
+evidence_class: diagnostic_only
 protein_type: soy_iso
 process_state: aqueous_pre_extrusion_model
 matrix_format: soy isolate slurry with exogenous ribose and cysteine
@@ -18,60 +19,62 @@ formulation:
       concentration_mM: 1.0
 measured_volatiles:
   2-furfurylthiol:
-    conc_ppb: 0.007072756598907859
-    uncertainty_pct: 10.0
+    conc_ppb: 0.005572340764894084
   2-methyl-3-furanthiol:
-    conc_ppb: 0.004816100561427539
-    uncertainty_pct: 10.0
+    conc_ppb: 0.002098340293790535
   bis(2-methyl-3-furyl) disulfide:
-    conc_ppb: 0.00045570502391166165
-    uncertainty_pct: 12.0
+    conc_ppb: 0.0007797817940929268
   2,5-dimethylpyrazine:
-    conc_ppb: 0.0003321444251217266
-    uncertainty_pct: 12.0
+    conc_ppb: 1.4819050084758518e-05
   Hexanal:
-    conc_ppb: 0.00020274490850644448
-    uncertainty_pct: 8.0
+    conc_ppb: 1.700615783970017
   Nonanal:
-    conc_ppb: 0.00010527516039223936
-    uncertainty_pct: 8.0
+    conc_ppb: 0.042515132218226476
 provenance:
-  origin: internal_experiment
-  source_reference: Internal protocol-pilot intake aligned to the selected soy mixed-matrix lane.
+  origin: synthetic_diagnostic
+  source_reference: Synthetic protocol-pilot intake aligned to the selected soy mixed-matrix
+    lane; volatile values are frozen model output, not laboratory measurements.
   source_doi: null
-  measurement_date: 2026-03-25
-  notes: Internal pilot measurement package derived through the matrix experiment intake contract. Not external literature and not the full time-series benchmark campaign.
+  measurement_date: not_applicable_synthetic
+  notes: SYNTHETIC DIAGNOSTIC - volatile concentrations were frozen from the model's
+    own Docker run path (audit 2026-08-26); no wet-lab measurement was performed.
+    Retained solely as an intake-contract ingestion example and reproducibility comparator.
+    Not external literature, not calibration evidence.
 comparison_contract:
   observable_targets:
-    - name: 2-furfurylthiol
-      role: desirable_marker
-      expected_rank: 1
-      direction: higher
-    - name: 2-methyl-3-furanthiol
-      role: desirable_marker
-      expected_rank: 2
-      direction: higher
-    - name: bis(2-methyl-3-furyl) disulfide
-      role: desirable_marker
-      expected_rank: 3
-      direction: higher
-    - name: 2,5-dimethylpyrazine
-      role: desirable_marker
-      expected_rank: 4
-      direction: higher
-    - name: Hexanal
-      role: adverse_marker
-      expected_rank: 5
-      direction: lower
-    - name: Nonanal
-      role: adverse_marker
-      expected_rank: 6
-      direction: lower
+  - name: Hexanal
+    role: adverse_marker
+    expected_rank: 1
+    direction: lower
+  - name: Nonanal
+    role: adverse_marker
+    expected_rank: 2
+    direction: lower
+  - name: 2-furfurylthiol
+    role: desirable_marker
+    expected_rank: 3
+    direction: higher
+  - name: 2-methyl-3-furanthiol
+    role: desirable_marker
+    expected_rank: 4
+    direction: higher
+  - name: bis(2-methyl-3-furyl) disulfide
+    role: desirable_marker
+    expected_rank: 5
+    direction: higher
+  - name: 2,5-dimethylpyrazine
+    role: desirable_marker
+    expected_rank: 6
+    direction: higher
   adverse_markers:
-    - furfural
-    - Hexanal
-    - Nonanal
+  - furfural
+  - Hexanal
+  - Nonanal
   citation_provenance:
-    - Internal protocol-pilot intake aligned to the selected soy mixed-matrix lane.
-  notes: Single-point protocol pilot intake. Useful as a measured comparator and ingestion example, but not external benchmark promotion evidence.
+  - Synthetic protocol-pilot intake (model-derived values) aligned to the selected
+    soy mixed-matrix lane.
+  notes: Single-point synthetic protocol pilot intake (model-derived values). Useful
+    as an ingestion example and reproducibility comparator only; not measured data
+    and not external benchmark promotion evidence. Expected ranks track the current
+    model snapshot (drift baseline), not measured truth.
 denaturation_state: 0.5

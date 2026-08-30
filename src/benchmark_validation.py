@@ -6,19 +6,34 @@ import re
 from collections import defaultdict
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src.conditions import ReactionConditions
 from src.barrier_constants import effective_barrier_from_rate_constant
 from src.headspace import HeadspaceModel
 from src.kinetics import KineticsEngine
-from src.lipid_oxidation import PEA_LIPID_PROFILE, SOY_LIPID_PROFILE, predict_hexanal_generation
+from src.lipid_oxidation import (
+    HYDROPEROXIDE_POOL_KEYS,
+    MARKER_HYDROPEROXIDE_POOL,
+    PEA_LIPID_PROFILE,
+    SOY_LIPID_PROFILE,
+    hydroperoxide_pool_key_for_marker,
+    predict_hexanal_generation,
+)
+from src.fit_target_index import fit_target_records_for, is_per_row_fit_target
 from src.matrix_calibration_registry import (
     describe_matrix_calibration,
     determine_matrix_process_state,
+    is_fit_recovery_benchmark,
 )
 from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve_many
+from src.protein_binding import (
+    binding_mode_active,
+    observability_factor as binding_observability_factor,
+    observability_mode,
+    resolve_binding_context,
+)
 from src.projection_metadata import make_projection_metadata_row
 from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
@@ -129,9 +144,59 @@ MATRIX_BENCHMARK_BASE_MARKER_YIELDS = {
     # Pea-referenced observable yields from the Pratap-Singh 2021 ambient-slurry
     # family. Soy-vs-pea release differences now live explicitly in HeadspaceModel
     # so the matrix-only path separates oxidation intake from headspace observability.
-    "Hexanal": 0.205,
+    #
+    # WHAT THESE ARE, DIMENSIONALLY (2026-08-28, Wave Y). The matrix_only lane computes
+    #
+    #     observable_ppb = L(pool, lane, T, t) * Y(compound) * release * cal
+    #
+    # so `Y` converts a pseudo-hydroperoxide load into marker ppb. `Y` is DEGENERATE with
+    # `kinetics.hydroperoxide_scale` (1.0e6, a round unanchored number in
+    # data/lit/lipid_oxidation_calibration.json): only the product is identified. So a
+    # `Y` above 1 is NOT a unit violation -- which is exactly the asymmetry that makes the
+    # relocation below correct. An OBSERVABILITY factor is a fraction of a total and
+    # cannot exceed 1 (Wave S4 (b)); a marker yield against an arbitrary scale can.
+    #
+    # 2026-08-28 (Wave Y) -- Hexanal 0.205 -> 0.885036. THE SCALE MOVED SIDES; NO NEW
+    # PARAMETER WAS INTRODUCED. Wave O fitted ONE shared scale s = 4.317249 against the
+    # two CONTENT-VERIFIED Pratap-Singh anchors (pea 1138.00, soy 1621.71 ppb, Molecules
+    # 2021, 26, 4104 Table 1 via PMC8271896) and wrote it into the ambient-slurry HEXANAL
+    # observability factors, which took the pea reference lane's factor from its
+    # by-construction 1.0 to 4.31725 -- "a fraction of the total that the measurement
+    # sees", equal to 4.32. Wave S4 (b) named that as the tell that the deficit lived
+    # here instead. This wave moves the same single constant to this side of the product:
+    #
+    #     0.205 * 4.317249 = 0.885036       and every hexanal `cal` is divided by 4.317249
+    #     (src/matrix_calibration_registry.py: 4.31725 -> 1.0, 0.228776 -> 0.0529912,
+    #      9.54007 -> 0.453/0.205, 2.80478 -> (0.453/0.205)*(1-0.7060))
+    #
+    # The CALIBRATED tier is preserved to 6 significant figures on every lane (measured;
+    # every hexanal lane in the repository resolves to a compound_specific record, so
+    # none reaches the class-level aldehyde anchor, which is deliberately not moved). The
+    # UNCALIBRATED tier -- `_uncalibrated_prediction_ppb`, which reads this dict and never
+    # reads an observability factor -- moves by the full 4.317249x, and that movement is
+    # the point: it is the first time the matrix sigma derivation has been able to see
+    # the correction at all.
+    #
+    # Derivation, corpus and identifiability:
+    #   scripts/generators/rederive_matrix_marker_yields.py
+    #   results/validation/matrix_marker_yield_rederivation.{json,md}
+    #
+    # previous_value: 0.205 (Wave O era and earlier; itself 260/1268.3, i.e. back-solved
+    # from a hexanal figure Wave K proved is not in the paper).
+    "Hexanal": 0.885036,
+    # CONFIRMED, NOT MOVED (Wave Y). 638 ppb was verified VERBATIM against the paper, and
+    # the pea-reference requirement re-derives to 0.5017897 -- 0.000182 dex from the
+    # shipped value, below the 0.01 dex materiality floor Wave O used. Moving it would be
+    # fitting rounding.
     "2-Pentylfuran": 0.502,
+    # UNANCHORED (Wave Y, restating Wave T3). Pratap-Singh report n.d. for hexanol in BOTH
+    # matrices; 0.063 is 80/1269.8 and Wave T3 traced the 80 to the repository's own
+    # abstract-reconstructed brief. There is nothing to fit against, so it was NOT fitted.
+    # The 1-hexanol lane is unanchored end to end -- yield AND factor. [P]
     "1-Hexanol": 0.063,
+    # UNANCHORED (Wave Y). Pratap-Singh report no nonanal on either ambient lane, so the
+    # only nonanal target in the repository is Trikusuma 2019 (content-unverified) and its
+    # observability factor is back-solved from that very row. Nothing here is fitted.
     "Nonanal": 0.150,
 }
 
@@ -685,7 +750,13 @@ def _run_benchmark_recommendation(
             time_min=float(formulation.get("time_minutes", 60.0)),
             oxygen_availability=1.0,
         )
-        oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+        # SUBSTRATE CORRECTION 2026-08-27 (Wave P item 4): the load is now
+        # PER MARKER, because nonanal comes off the oleate pool and the other
+        # three come off the linoleate pool. See
+        # `src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL` for the evidence.
+        def _oxidation_load_ppb_for(compound_name: str) -> float:
+            return float(oxidation[hydroperoxide_pool_key_for_marker(compound_name)]) * 1000.0
+
         # Convert ppb to a proxy molar concentration. The framework's recommend engine converts molar -> ppb using ppb_conversion_factor later.
         # But wait, predict_hexanal_generation gives total_hydroperoxide load which drives hexanal and nonanal.
         # Since the matrix_only path uses MATRIX_BENCHMARK_BASE_MARKER_YIELDS, and recommend.py applies its own logic,
@@ -699,21 +770,32 @@ def _run_benchmark_recommendation(
         from src.projection import DEFAULT_PROJECTION_STRATEGY
         for compound_name, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
             from rdkit import Chem
+            from rdkit.Chem import Descriptors
             smiles_map = {
                 "Hexanal": "CCCCCC=O",
                 "Nonanal": "CCCCCCCCC=O",
                 "1-Hexanol": "CCCCCCO",
-                "2-Pentylfuran": "CCCCC1=CC=CO1"
+                # Audit 2026-08-26: was CCCCC1=CC=CO1 (2-butylfuran, C8); the curated
+                # registry uses the correct C9 pentyl form, so canonical matching failed.
+                "2-Pentylfuran": "CCCCCC1=CC=CO1",
             }
             smi = smiles_map.get(compound_name)
             if smi:
                 mol = Chem.MolFromSmiles(smi)
-                mw = sum(atom.GetMass() for atom in mol.GetAtoms()) if mol else 100.0
-                target_proxy_ppb = oxidation_load_ppb * float(yield_factor)
+                # Full molecular weight (implicit H included) to mirror the reverse
+                # molar->ppb transform in recommend.py; the previous heavy-atom-only
+                # sum inflated the injected molarity by 11-16%.
+                mw = float(Descriptors.MolWt(mol)) if mol else 100.0
+                target_proxy_ppb = _oxidation_load_ppb_for(compound_name) * float(yield_factor)
                 # target_proxy_ppb = molar_concentration * mw * ppb_conversion_factor
                 molar_conc = target_proxy_ppb / (mw * DEFAULT_PROJECTION_STRATEGY.ppb_conversion_factor)
+                # initial_concentrations is consumed downstream in mM (projection.py
+                # applies limiting_pool_to_molar_factor=1e-3); molar_conc above is in
+                # mol/L. The missing x1000 silently suppressed the whole volatile
+                # budget by 1000^(k/n) via the geometric-mean pool (audit 2026-08-26).
+                conc_mM = molar_conc * 1000.0
                 canon = canonicalize_smiles(smi, fallback_to_original=True, strip_salts=True)
-                initial_concentrations[canon] = initial_concentrations.get(canon, 0.0) + molar_conc
+                initial_concentrations[canon] = initial_concentrations.get(canon, 0.0) + conc_mM
 
     rec = Recommender()
     return rec.predict_from_steps(
@@ -751,13 +833,26 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         time_min=float(conditions["time_min"]),
         oxygen_availability=1.0,
     )
-    oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+    # SUBSTRATE CORRECTION 2026-08-27 (Wave P item 4): per-marker oxidation load.
+    # Nonanal is the C9 fragment of the OLEATE double bond and is now scaled off
+    # `oleic_acid_pct`; hexanal / 2-pentylfuran / 1-hexanol stay on the linoleate
+    # pool, which is what Miyazaki 2023's isomer-resolved product lists support.
+    # See `src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL`.
+    oxidation_load_ppb_by_pool = {
+        key: float(oxidation[key]) * 1000.0 for key in HYDROPEROXIDE_POOL_KEYS.values()
+    }
     headspace_model = HeadspaceModel()
     pH = conditions.get("ph")
+
+    # 2026-08-27 (Wave S4): the per-lane binding context, built from
+    # data/lit/binding_constants.yml -- i.e. from each lane's OWN source, never from a
+    # repository guess. It is inert unless the binding observability mode is selected.
+    binding_context = resolve_binding_context(bench)
 
     predicted_ppb: Dict[str, float] = {}
     predicted_proxy_ppb: Dict[str, float] = {}
     projection_metadata: Dict[str, Dict[str, Any]] = {}
+    binding_residual_ratios: Dict[str, float] = {}
     for compound, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
         headspace_factor = headspace_model.get_matrix_benchmark_headspace_factor(
             compound,
@@ -766,6 +861,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
             water_activity=water_activity,
+            binding_context=binding_context,
         )
         calibration = describe_matrix_calibration(
             compound,
@@ -775,8 +871,45 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         panel_entry = get_compound_panel_entry(compound) or {}
         calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
         release_factor = headspace_factor / calibration_factor if calibration_factor > 0.0 else headspace_factor
-        proxy_ppb = oxidation_load_ppb * float(yield_factor) * release_factor
+        marker_load_ppb = oxidation_load_ppb_by_pool[hydroperoxide_pool_key_for_marker(compound)]
+        proxy_ppb = marker_load_ppb * float(yield_factor) * release_factor
         observable_ppb = proxy_ppb * calibration_factor
+        binding_row: Dict[str, Any] = {}
+        if binding_mode_active():
+            # 2026-08-27 (Wave S4) -- THE NO-DOUBLE-COUNT CHECK (assembled here, asserted
+            # after the loop).
+            #
+            # `calibration_factor` (the FITTED / back-solved observability constant) is
+            # divided out of `release_factor` above and multiplied back in here, so it
+            # cancels exactly. In binding mode the surviving net observability must
+            # therefore be the BINDING factor times the pH release factor, with NO
+            # contribution from the fitted registry and none from the dynamic-retention
+            # composition -- the latter matters most, because
+            # `compose_dynamic_retention` routes through `resolve_compound_matrix_retention`
+            # whose `volatile_retention` is documented as "fraction escaping matrix (rest
+            # is bound)", i.e. it is itself an unanchored binding model.
+            #
+            # The test is the RATIO net / (f_free x pH), collected per compound. It cannot
+            # be asserted to equal 1.0 point-by-point because
+            # `src.uncertainty_propagation._observable_multipliers` legitimately wraps this
+            # method with a sampled scalar during Monte-Carlo propagation. But that scalar
+            # is GLOBAL to the sample, while every factor this check is guarding against
+            # (registry factor, dynamic retention) is PER COMPOUND. So the invariant that
+            # survives the sampler and still catches a leak is: the ratio must be the SAME
+            # for every compound on the lane.
+            binding = binding_observability_factor(compound, context=binding_context)
+            ph_factor = headspace_model.get_matrix_ph_release_factor(
+                compound, protein_type=protein_type, pH=pH
+            )
+            expected_net = float(binding.f_free) * float(ph_factor)
+            if expected_net <= 0.0:
+                raise AssertionError(
+                    f"binding observability for {compound!r} on {bench.get('benchmark_id')!r} "
+                    "is non-positive; f_free must be in (0, 1]."
+                )
+            binding_residual_ratios[compound] = float(headspace_factor) / expected_net
+            binding_row = binding.to_dict()
+            binding_row["binding_ph_release_factor"] = float(ph_factor)
         predicted_proxy_ppb[compound] = proxy_ppb
         predicted_ppb[compound] = observable_ppb
         projection_metadata[compound] = make_projection_metadata_row(
@@ -785,24 +918,58 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             observable_ppb=observable_ppb,
             extras={
                 "matrix_factor": 1.0,
+                # Wave P item 4: which fatty-acid pool this marker was cleaved
+                # from. Nonanal = oleate, everything else = linoleate.
+                "hydroperoxide_pool": MARKER_HYDROPEROXIDE_POOL.get(compound, "linoleate"),
+                "oxidation_load_ppb": marker_load_ppb,
                 "headspace_factor": release_factor,
                 "total_observable_factor": headspace_factor,
                 "process_state": process_state,
+                "observability_mode": observability_mode(),
                 **panel_entry,
                 **calibration,
+                **binding_row,
             },
         )
+
+    if binding_residual_ratios:
+        ratios = list(binding_residual_ratios.values())
+        reference = ratios[0]
+        for compound, ratio in binding_residual_ratios.items():
+            if not math.isclose(ratio, reference, rel_tol=1e-9, abs_tol=1e-12):
+                raise AssertionError(
+                    "binding-physics observability mode is active but the net matrix "
+                    f"observability on {bench.get('benchmark_id')!r} is not a single global "
+                    "multiple of (binding f_free x pH release factor): "
+                    f"{binding_residual_ratios!r}. A COMPOUND-SPECIFIC term other than the "
+                    "measured binding model is contributing -- most likely the fitted "
+                    "registry factor or the dynamic-retention composition. Double counting "
+                    "refused."
+                )
 
     return {
         "targets": [],
         "metrics": {
             "matrix_model": protein_type,
-            "oxidation_load_ppb": oxidation_load_ppb,
+            "observability_mode": observability_mode(),
+            "binding_no_double_count_ratio": (
+                sorted(binding_residual_ratios.values())[0] if binding_residual_ratios else None
+            ),
+            # Wave P item 4: the LINOLEATE load keeps the historical key, so existing
+            # readers keep the meaning they had; the oleate pool that now drives
+            # nonanal is reported alongside it.
+            "oxidation_load_ppb": oxidation_load_ppb_by_pool["total_hydroperoxide"],
+            "oxidation_load_ppb_oleate": oxidation_load_ppb_by_pool["total_hydroperoxide_oleate"],
         },
         "predicted_ppb": predicted_ppb,
         "predicted_proxy_ppb": predicted_proxy_ppb,
         "projection_metadata": projection_metadata,
         "debug_paths": {},
+        # 2026-08-27 (Wave S1): mirrors `predict_from_steps`'s per-channel flux breakdown so
+        # the two execution paths return the same key set. It is EMPTY here and always will
+        # be: the matrix-only lane never enumerates a reaction network, so it has no channels
+        # to break down -- which is also why neither Wave S1 fix reaches this path.
+        "debug_channel_flux": {},
         "species_names": {compound: compound for compound in predicted_ppb},
     }
 
@@ -1129,6 +1296,10 @@ def summarize_evaluation_for_benchmark(
         calibration_mode=matrix_contract.get("calibration_mode"),
         reference_signal_origin=evaluation.reference_signal_origin,
         mean_abs_log10_error=mean_abs_log10_error,
+        # 2026-08-27 (Wave I): the honesty column. `overall_status` above is mechanical --
+        # it says whether predictions and measurements agree. This says whether that
+        # agreement is evidence about the model or a recovery of the model's own inputs.
+        evidence_role=benchmark_evidence_role(evaluation.benchmark_id, evaluation.bench_file),
     )
 
 
@@ -1212,20 +1383,104 @@ def build_matrix_benchmark_deltas(
     return rows
 
 
+def matrix_source_anchor(bench: Mapping[str, Any]) -> str:
+    """Return the benchmark's citable external anchor, or "" if it has none.
+
+    2026-08-27 (audit remediation, DOI-less identifier retyping): four sources in
+    this repo are genuinely DOI-less (two theses, a US patent, a journal with no
+    DOI registration) and their identifiers used to be stored in fields named
+    ``doi`` / ``source_doi``, which is both dishonest and a citation-gate
+    violation. They now carry a typed ``identifier`` + ``identifier_scheme``
+    pair. A typed non-DOI identifier is exactly as much an external anchor as a
+    DOI, so every consumer that tested ``source_doi`` truthiness reads this
+    helper instead — otherwise retyping an identifier would silently *downgrade*
+    a real external source to "unspecified origin".
+    """
+    doi = str(bench.get("source_doi") or "").strip()
+    if doi:
+        return doi
+    identifier = str(bench.get("identifier") or "").strip()
+    if identifier:
+        return identifier
+    return ""
+
+
+# 2026-08-27 (Wave I). Canonical home of the signal-origin classifier. It used to live
+# only in `uncertainty_propagation._benchmark_signal_origin`, but the benchmark summary
+# layer needs it too and `uncertainty_propagation` imports THIS module, so keeping the
+# implementation there would have meant a cycle or a second, drifting copy.
+SYNTHETIC_BENCHMARK_ORIGINS = frozenset(
+    {
+        "synthetic_diagnostic",
+        "internal_reproducibility_candidate",
+        "internal_experiment",
+    }
+)
+
+
+def benchmark_signal_origin(bench_file: Path) -> str:
+    """Classify a benchmark's comparator signal as literature-measured or internal/synthetic.
+
+    Returns ``"external_literature"`` or ``"internal_synthetic"``.
+    """
+    try:
+        bench = json.loads(Path(bench_file).read_text())
+    except (OSError, json.JSONDecodeError):
+        return "internal_synthetic"
+    origin = str((bench.get("source_metadata") or {}).get("origin", "")).strip().lower()
+    if origin in SYNTHETIC_BENCHMARK_ORIGINS:
+        return "internal_synthetic"
+    # `matrix_source_anchor` also accepts the typed `identifier`/`identifier_scheme` pair
+    # that DOI-less sources (theses, patents, DOI-free journals) now carry, so retyping an
+    # identifier out of a `doi`-named field cannot reclassify a literature row as
+    # internal/synthetic.
+    if matrix_source_anchor(bench) or origin.startswith("external"):
+        return "external_literature"
+    return "internal_synthetic"
+
+
+def benchmark_evidence_role(benchmark_id: str, bench_file: Path) -> str:
+    """What KIND of claim this benchmark can support: see BenchmarkSummary.evidence_role.
+
+    2026-08-27 (Wave I). The mechanical status says whether predictions and measurements
+    agree; this says whether that agreement is evidence. Fit-recovery is checked FIRST and
+    beats signal origin: a lane whose observable factor was solved from a literature
+    benchmark is still literature-sourced, and is still not a prediction.
+
+    Two independent sources of fit-recovery are consulted:
+
+    * the calibration registry's own `fitted_to_benchmark` declarations (the matrix
+      observability factors, one free factor per compound per lane); and
+    * `src.fit_target_index`, which reads the fit records under `results/validation/` and
+      classifies each by LEVERAGE. Only high-leverage fits (enough free parameters to
+      reproduce their target row by row) make a benchmark fit-recovery. A low-leverage
+      global fit -- two constants across two dozen rows -- does NOT, because excluding
+      those rows would delete genuine failures from the count rather than expose them.
+    """
+    if is_fit_recovery_benchmark(benchmark_id):
+        return "fit_recovery"
+    if is_per_row_fit_target(benchmark_id):
+        return "fit_recovery"
+    if benchmark_signal_origin(Path(bench_file)) == "internal_synthetic":
+        return "internal_synthetic"
+    return "predictive"
+
+
 def _matrix_source_origin(bench: dict) -> str:
     source_metadata = bench.get("source_metadata") or {}
     origin = str(source_metadata.get("origin", "")).strip()
     if origin:
         return origin
-    if bench.get("source_doi"):
+    if matrix_source_anchor(bench):
         return "external_literature"
     return "unspecified"
 
 
 def _matrix_source_reference(bench: dict) -> str:
     source_metadata = bench.get("source_metadata") or {}
-    if bench.get("source_doi"):
-        return str(bench["source_doi"])
+    anchor = matrix_source_anchor(bench)
+    if anchor:
+        return anchor
     generator = str(source_metadata.get("generator", "")).strip()
     origin = str(source_metadata.get("origin", "")).strip()
     if origin and generator:
@@ -1284,6 +1539,9 @@ def _increment_matrix_support_counts(counts: Dict[str, int], support_status: str
 
 
 def _matrix_external_data_status(bench: dict) -> str:
+    # This module is the single live implementation. A drifted duplicate family
+    # (benchmark_registry/evaluator/reporting/assertions/markdown) was confirmed
+    # dead code and deleted on 2026-08-27 — see tasks/audit_remediation.md.
     evidence_class = str(
         (bench.get("source_metadata") or {}).get(
             "evidence_class",
@@ -1295,8 +1553,18 @@ def _matrix_external_data_status(bench: dict) -> str:
 
     source_origin = _matrix_source_origin(bench)
     has_measured = bool(bench.get("measured_volatiles"))
-    if has_measured and (bench.get("source_doi") or source_origin.startswith("external")):
+    # 2026-08-27: reads the typed identifier as well as `source_doi` (see
+    # matrix_source_anchor) so a DOI-less external source is not downgraded.
+    if has_measured and (matrix_source_anchor(bench) or source_origin.startswith("external")):
         return "external_quantitative"
+    if has_measured and source_origin.strip().lower() == "synthetic_diagnostic":
+        # Audit 2026-08-26: payloads whose "measured" values are frozen model
+        # output (e.g. the ProtocolPilot intakes) must surface as synthetic,
+        # never as measured evidence of any grade.
+        return _CompatibilityStatus(
+            "synthetic_diagnostic_only",
+            aliases=("quantitative_unspecified_origin",),
+        )
     if has_measured and _is_internal_measured_matrix_source(source_origin):
         return _CompatibilityStatus(
             "internal_measured_quantitative",
@@ -1333,6 +1601,8 @@ def assess_matrix_benchmark_evidence(bench: dict | Path | str) -> MatrixBenchmar
         blocker = "benchmark only anchors adverse/off-flavour markers; no external meaty-positive targets are present"
     elif external_data_status == "external_validation_only":
         blocker = "external-validation hold-out only; explicitly excluded from calibration and promotion"
+    elif external_data_status == "synthetic_diagnostic_only":
+        blocker = "missing external quantitative matrix evidence for meaty-positive targets; current comparator is synthetic model output (diagnostic only)"
     elif external_data_status == "internal_measured_quantitative":
         blocker = "missing external quantitative matrix evidence for meaty-positive targets; current comparator is an internal measured experiment"
     elif external_data_status == "internal_reference_only":
@@ -1392,18 +1662,6 @@ def _matrix_assertion_thresholds(
         "top_k": float(configured.get("top_k", len(observable_targets))),
         "max_ratio": float(configured.get("max_ratio", thresholds.ratio_threshold_for(protein_type))),
     }
-
-
-def _predicted_order_lookup(evaluation: BenchmarkEvaluation) -> List[str]:
-    normalized_rows = []
-    seen: set[str] = set()
-    for name, value in sorted(evaluation.predicted_ppb.items(), key=lambda item: item[1], reverse=True):
-        normalized = _normalize_name(name)
-        if normalized in seen:
-            continue
-        seen.add(normalized)
-        normalized_rows.append(name)
-    return normalized_rows
 
 
 def _matched_contract_prediction_rows(
@@ -1602,6 +1860,10 @@ def _matrix_compound_support_status(
         return "quantitative_closed"
     if signal_origin == "reference_volatiles":
         return "internal_reference_candidate"
+    if origin == "synthetic_diagnostic":
+        # Frozen model output carries reference-grade support at most, never
+        # measured-grade (audit 2026-08-26).
+        return "internal_reference_candidate"
     if evidence in {"internally_benchmarked", "conditional_calibration"} and _is_internal_measured_matrix_source(origin):
         return "internal_measured_candidate"
     if evidence in {"internally_benchmarked", "conditional_calibration"}:
@@ -1687,7 +1949,9 @@ def build_matrix_target_status_artifact(
         elif summary.ranking_contract_status != "pass":
             promotion_blocker = "ranking contract not yet passing"
         elif benchmark_counts["quantitative_closed"] < 2:
-            if evidence.external_data_status == "internal_measured_quantitative":
+            if evidence.external_data_status == "synthetic_diagnostic_only":
+                promotion_blocker = "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)"
+            elif evidence.external_data_status == "internal_measured_quantitative":
                 promotion_blocker = "insufficient externally measured target closure; current comparator is internal measured only"
             elif evidence.external_data_status == "internal_reference_only":
                 promotion_blocker = "insufficient externally measured target closure; current comparator is internal reference-only"
@@ -2172,6 +2436,10 @@ def summarize_benchmarks(
                 strict_ready=summary.strict_ready,
                 blocking_issues=summary.blocking_issues,
                 conditions=bench.get("conditions", {}),
+                # 2026-08-27 (Wave I): an unsupported benchmark still has an evidence role,
+                # and losing it here would make an unsupported fit-recovery row read as
+                # "predictive" in the summary.
+                evidence_role=benchmark_evidence_role(summary.benchmark_id, bench_path),
             )
         summaries.append(_enrich_benchmark_summary_family_metadata(summary, bench))
     return summaries
@@ -2274,6 +2542,10 @@ def _enrich_benchmark_summary_family_metadata(summary: BenchmarkSummary, bench: 
         slr_families=sorted(dict.fromkeys(slr_families)),
         payload_roles=sorted(dict.fromkeys(payload_roles)),
         family_lane_names=sorted(dict.fromkeys(family_lane_names)),
+        # 2026-08-27 (Wave I): this rebuild-with-families constructor is the one the
+        # summary generator actually returns, so the evidence role must be carried
+        # through here or every row silently reports "predictive".
+        evidence_role=summary.evidence_role,
     )
 
 

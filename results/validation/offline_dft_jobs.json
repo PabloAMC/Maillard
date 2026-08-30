@@ -1,0 +1,60 @@
+[
+  {
+    "reaction_id": "family::strecker_degradation",
+    "priority_tier": "tier1_barrier_refinement",
+    "solvent_name": "water",
+    "temperature_k": 423.15,
+    "charge": 0,
+    "spin": 0,
+    "use_explicit_solvent": false,
+    "n_water": 0,
+    "generate_irc": true,
+    "expected_outputs": [
+      "optimized_reactant.xyz",
+      "optimized_ts.xyz",
+      "barrier_summary.json",
+      "quasi_harmonic_thermo.json",
+      "surrogate_patch.json",
+      "irc_path.xyz"
+    ],
+    "artifact_prefix": "watchlist_strecker_degradation"
+  },
+  {
+    "reaction_id": "family::thiol_oxidation",
+    "priority_tier": "tier1_barrier_refinement",
+    "solvent_name": "water",
+    "temperature_k": 423.15,
+    "charge": 0,
+    "spin": 0,
+    "use_explicit_solvent": false,
+    "n_water": 0,
+    "generate_irc": false,
+    "expected_outputs": [
+      "optimized_reactant.xyz",
+      "optimized_ts.xyz",
+      "barrier_summary.json",
+      "quasi_harmonic_thermo.json",
+      "surrogate_patch.json"
+    ],
+    "artifact_prefix": "watchlist_thiol_oxidation"
+  },
+  {
+    "reaction_id": "family::generalized_deamination",
+    "priority_tier": "tier1_barrier_refinement",
+    "solvent_name": "water",
+    "temperature_k": 423.15,
+    "charge": 0,
+    "spin": 0,
+    "use_explicit_solvent": false,
+    "n_water": 0,
+    "generate_irc": false,
+    "expected_outputs": [
+      "optimized_reactant.xyz",
+      "optimized_ts.xyz",
+      "barrier_summary.json",
+      "quasi_harmonic_thermo.json",
+      "surrogate_patch.json"
+    ],
+    "artifact_prefix": "watchlist_generalized_deamination"
+  }
+]

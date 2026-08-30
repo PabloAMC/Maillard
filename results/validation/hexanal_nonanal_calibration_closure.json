@@ -1,0 +1,144 @@
+{
+  "summary": {
+    "lane_count": 2,
+    "closed_lane_count": 2,
+    "hazard_lane_count": 0,
+    "closed_marker_count": 4,
+    "marker_count": 4,
+    "default_ratio_bounds": [
+      0.5,
+      2.0
+    ],
+    "policy": "hexanal_nonanal_protocol_pilot_to_internal2026_ratio_check_closes_internal_calibration_routes_but_not_external_promotion_claims",
+    "comparator_nature": "synthetic_model_output_vs_synthetic_model_output",
+    "evidence_disclaimer": "Both lanes compare frozen model output against frozen model output (audit 2026-08-26); 'closed' is a reproducibility statement, not agreement with any measurement."
+  },
+  "lanes": [
+    {
+      "lane_id": "pea_protocol_pilot_vs_internal2026",
+      "protein_type": "pea_iso",
+      "primary_benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+      "reference_benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "closure_action": "calibration_closed",
+      "passed": true,
+      "acceptance_bounds": {
+        "hexanal_ratio": [
+          0.5,
+          2.0
+        ],
+        "nonanal_ratio": [
+          0.5,
+          2.0
+        ]
+      },
+      "compounds": {
+        "Hexanal": {
+          "primary_ppb": 0.7425330938848701,
+          "reference_ppb": 0.7425330938848701,
+          "primary_uncertainty_pct": null,
+          "reference_uncertainty_pct": 0.0,
+          "ratio": 1.0,
+          "in_bounds": true
+        },
+        "Nonanal": {
+          "primary_ppb": 0.03899145957513976,
+          "reference_ppb": 0.03899145957513976,
+          "primary_uncertainty_pct": null,
+          "reference_uncertainty_pct": 0.0,
+          "ratio": 1.0,
+          "in_bounds": true
+        }
+      },
+      "scientific_basis": [
+        "ProtocolPilot2026 is a SYNTHETIC diagnostic payload whose volatile values were frozen from the model's own run path (audit 2026-08-26); it is not measured evidence of any kind.",
+        "Internal2026 is the frozen internal reference lane for matrix-calibration drift checks; it is likewise model output, not a measurement.",
+        "Closure here therefore means only that two snapshots of the model agree with each other (a reproducibility/drift check); it carries zero calibration evidence and does not unlock any promotion."
+      ],
+      "next_best_action": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
+    },
+    {
+      "lane_id": "soy_protocol_pilot_vs_internal2026",
+      "protein_type": "soy_iso",
+      "primary_benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+      "reference_benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "closure_action": "calibration_closed",
+      "passed": true,
+      "acceptance_bounds": {
+        "hexanal_ratio": [
+          0.5,
+          2.0
+        ],
+        "nonanal_ratio": [
+          0.5,
+          2.0
+        ]
+      },
+      "compounds": {
+        "Hexanal": {
+          "primary_ppb": 1.700615783970017,
+          "reference_ppb": 1.700615783970017,
+          "primary_uncertainty_pct": null,
+          "reference_uncertainty_pct": 0.0,
+          "ratio": 1.0,
+          "in_bounds": true
+        },
+        "Nonanal": {
+          "primary_ppb": 0.042515132218226476,
+          "reference_ppb": 0.042515132218226476,
+          "primary_uncertainty_pct": null,
+          "reference_uncertainty_pct": 0.0,
+          "ratio": 1.0,
+          "in_bounds": true
+        }
+      },
+      "scientific_basis": [
+        "ProtocolPilot2026 is a SYNTHETIC diagnostic payload whose volatile values were frozen from the model's own run path (audit 2026-08-26); it is not measured evidence of any kind.",
+        "Internal2026 is the frozen internal reference lane for matrix-calibration drift checks; it is likewise model output, not a measurement.",
+        "Closure here therefore means only that two snapshots of the model agree with each other (a reproducibility/drift check); it carries zero calibration evidence and does not unlock any promotion."
+      ],
+      "next_best_action": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
+    }
+  ],
+  "prediction_change_cascade": [
+    {
+      "lane_id": "pea_protocol_pilot_vs_internal2026",
+      "protein_type": "pea_iso",
+      "compound": "Hexanal",
+      "internal2026_ppb": 0.7425330938848701,
+      "protocolpilot2026_ppb": 0.7425330938848701,
+      "ratio": 1.0,
+      "closure_state": "calibration_closed",
+      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
+    },
+    {
+      "lane_id": "pea_protocol_pilot_vs_internal2026",
+      "protein_type": "pea_iso",
+      "compound": "Nonanal",
+      "internal2026_ppb": 0.03899145957513976,
+      "protocolpilot2026_ppb": 0.03899145957513976,
+      "ratio": 1.0,
+      "closure_state": "calibration_closed",
+      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
+    },
+    {
+      "lane_id": "soy_protocol_pilot_vs_internal2026",
+      "protein_type": "soy_iso",
+      "compound": "Hexanal",
+      "internal2026_ppb": 1.700615783970017,
+      "protocolpilot2026_ppb": 1.700615783970017,
+      "ratio": 1.0,
+      "closure_state": "calibration_closed",
+      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
+    },
+    {
+      "lane_id": "soy_protocol_pilot_vs_internal2026",
+      "protein_type": "soy_iso",
+      "compound": "Nonanal",
+      "internal2026_ppb": 0.042515132218226476,
+      "protocolpilot2026_ppb": 0.042515132218226476,
+      "ratio": 1.0,
+      "closure_state": "calibration_closed",
+      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
+    }
+  ]
+}

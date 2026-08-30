@@ -304,10 +304,38 @@ def _render_protocol_markdown(
         f"- `internal_standards`:\n{is_lines}"
     )
 
+    # 2026-08-27 (Wave I). The dynamic-range line used to quote ONLY the model's own
+    # predicted midpoint. Where the benchmark already carries a published measurement,
+    # that is the number a lab must be able to see: on the rank-1 card the model midpoint
+    # was 0.017 ppb against a published 13 ppb -- a ~760x window -- and a CRO calibrating
+    # to the model's figure could have set a range that cannot detect the real value.
+    # Lead with the measurement, and state the model's figure as the disagreement it is.
+    _measured = float(getattr(candidate, "measured_ppb", 0.0) or 0.0)
+    _predicted = float(candidate.predicted_p50 or 0.0)
+    if _measured > 0.0 and _predicted > 0.0:
+        _fold = max(_measured, _predicted) / max(min(_measured, _predicted), 1e-12)
+        dynamic_range_line = (
+            "- [ ] Confirm target compound identity and calibrate over a range spanning "
+            f"BOTH the published value (≈ {_measured:g} ppb) and the model's 90% CI "
+            f"midpoint (≈ {_predicted:g} ppb). They differ by {_fold:.3g}× — that "
+            "disagreement is *why* this experiment is ranked, so a calibration range "
+            "covering only one of them cannot resolve it.\n"
+        )
+    elif _measured > 0.0:
+        dynamic_range_line = (
+            "- [ ] Confirm target compound identity and calibrate around the published "
+            f"value (≈ {_measured:g} ppb); the model predicts effectively zero here.\n"
+        )
+    else:
+        dynamic_range_line = (
+            "- [ ] Confirm target compound identity and expected dynamic range. No "
+            "published value exists for this row, so the model's 90% CI midpoint "
+            f"(≈ {_predicted:g} ppb) is the only guide — a starting point, not a target.\n"
+        )
+
     cro_checklist = (
-        "- [ ] Confirm target compound identity and expected dynamic range "
-        f"(model 90% CI midpoint ≈ {candidate.predicted_p50:g} ppb).\n"
-        "- [ ] Procure or confirm availability of the suggested isotopically-labeled "
+        dynamic_range_line
+        + "- [ ] Procure or confirm availability of the suggested isotopically-labeled "
         "internal standards above; substitute and **note the swap** in `analytical_context.notes`.\n"
         f"- [ ] Run ≥ {analytical['replicates']} biological replicates plus a process blank and a "
         "matrix blank.\n"

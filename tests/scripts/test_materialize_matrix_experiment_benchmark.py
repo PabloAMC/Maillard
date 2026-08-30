@@ -27,5 +27,5 @@ def test_materialize_script_writes_benchmark_json(tmp_path, monkeypatch):
 
     payload = json.loads(output_path.read_text(encoding="utf-8"))
     assert payload["benchmark_id"] == "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
-    assert payload["evidence_class"] == "calibration_candidate"
-    assert payload["source_metadata"]["evidence_class"] == "calibration_candidate"
+    assert payload["evidence_class"] == "diagnostic_only"
+    assert payload["source_metadata"]["evidence_class"] == "diagnostic_only"

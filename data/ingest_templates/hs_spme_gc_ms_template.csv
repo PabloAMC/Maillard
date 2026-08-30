@@ -1,0 +1,4 @@
+compound,observed_ppb,rsd_pct,temperature_c,time_min,ph,water_activity,protein_type,process_state,source_reference
+hexanal,52.0,12,95,30,6.5,0.95,pea_iso,heated_matrix,Liu 2023 PPI off-note baseline (replace with your citation)
+nonanal,15.8,15,95,30,6.5,0.95,pea_iso,heated_matrix,Liu 2023 PPI off-note baseline
+2-pentylfuran,8.4,18,95,30,6.5,0.95,pea_iso,heated_matrix,Liu 2023 PPI off-note baseline

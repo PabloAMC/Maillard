@@ -43,6 +43,20 @@ class ValidationContract:
     formulation_utility: str
     benchmark_policy: str
     strict_gate_execution_paths: tuple[str, ...] = ("free_precursor",)
+    # Benchmark tier vocabulary, as it stands 2026-08-27:
+    #   PRIMARY   -- a quantitative literature anchor; the only tier the strict gate admits.
+    #   SECONDARY -- useful for bounding or reproducibility; outside the strict gate.
+    #   REFERENCE -- added by Wave S2c. A benchmark kept in the tree and still EXECUTED for
+    #                its mechanistic value, whose comparator values carry no evidential
+    #                weight. First and so far only holder: cys_ribose_140C_Hofmann1998,
+    #                demoted from PRIMARY when Wave S2b showed its MFT 342 / FFT 200 ppb are
+    #                a repo-internal derivation (interior points of two invented mol % bands
+    #                in data/benchmarks/maillard_validation_benchmarks.md section 1.3) rather
+    #                than a measurement from 10.1021/jf9705983.
+    # This tuple is the whole mechanism of the demotion: a tier outside it cannot contribute
+    # a strict-ready pass. It deliberately does NOT remove the benchmark from the scored
+    # panel -- see that file's metadata.tier_history for what the demotion does and does not
+    # do, and why taking it out of the scored population is a separate owner decision.
     strict_gate_tiers: tuple[str, ...] = ("PRIMARY",)
     execution_policies: tuple[BenchmarkExecutionPolicy, ...] = field(default_factory=tuple)
     thresholds: BenchmarkThresholds = field(default_factory=BenchmarkThresholds)

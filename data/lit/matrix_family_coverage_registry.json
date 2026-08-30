@@ -189,7 +189,7 @@
       ],
       "next_best_action": "rank_next_family_by_product_impact_and_literature_closability",
       "artifacts": [
-        "docs/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md"
+        "data/Gemini_Deep_Research/elicit_plant_based_cooking.md"
       ]
     }
   ]

@@ -1,0 +1,310 @@
+{
+  "artifact": "maillard_model_card",
+  "benchmark_panel": {
+    "available": true,
+    "source": "recomputed live from data/benchmarks/",
+    "status_counts": {
+      "pass-no-ranking": 2,
+      "scale-gap": 21
+    },
+    "strict_ready": 0,
+    "total": 23
+  },
+  "directional": {
+    "categories": {
+      "additive_cysteine": [
+        4,
+        4
+      ],
+      "lipid_lane": [
+        2,
+        2
+      ],
+      "matrix_identity": [
+        1,
+        1
+      ],
+      "moisture_aw": [
+        0,
+        3
+      ],
+      "ph": [
+        6,
+        10
+      ],
+      "ranking": [
+        0,
+        1
+      ],
+      "sugar_identity": [
+        9,
+        11
+      ],
+      "temperature": [
+        6,
+        8
+      ],
+      "time": [
+        2,
+        2
+      ]
+    },
+    "category_bucket_note": "Category rows sum to the SCREENING bucket (independent + system-overlap); the headline and the excluding-pH/aw rows are strictly independent. Different denominators -- see the report's CURRENT STANDING section.",
+    "excluding_ph_aw": [
+      18,
+      23
+    ],
+    "fit_adjacent": [
+      9,
+      11
+    ],
+    "headline": [
+      24,
+      36
+    ],
+    "ph_aw": [
+      6,
+      13
+    ],
+    "system_overlap": [
+      6,
+      6
+    ]
+  },
+  "free_precursor_holdout": {
+    "available": true,
+    "best_fold_error": 1.5167561508937306,
+    "bundles": 12,
+    "generated_on": "2026-08-27",
+    "git": "12f43dd",
+    "median_fold_error": 6.038752949192657,
+    "ordinal_pairs_correct": 8,
+    "ordinal_pairs_total": 12,
+    "path": "results/validation/maillard_path_holdout_frozen_predictions.json",
+    "scored": 21,
+    "series_directions_correct": 3,
+    "series_directions_total": 6,
+    "structural_zeroes": 1,
+    "targets": 22,
+    "within_10x": 12,
+    "worst_fold_error": 52.58641429978577
+  },
+  "gates": [
+    {
+      "detail": "holdout_guard: PASS",
+      "gate": "scripts/ci/holdout_guard.py",
+      "status": "PASS"
+    },
+    {
+      "detail": "citation_gate: PASS",
+      "gate": "scripts/ci/citation_gate.py",
+      "status": "PASS"
+    },
+    {
+      "detail": "fit_target_gate: PASS",
+      "gate": "scripts/ci/fit_target_gate.py",
+      "status": "PASS"
+    }
+  ],
+  "generated_by": "scripts/generators/generate_model_card.py",
+  "headline_sentences": [
+    "**Absolute concentrations are unreliable.** Out of sample the free-precursor lane lands at a 6.04x median fold error (worst 52.6x) and the matrix lane at 67.4x-93.7x across all three observability modes. Nothing in this repository licenses a ppb number as a specification.",
+    "**Directional and ranking claims are the measured product**, at 24/36 on strictly independent claims -- 18/23 (78%) once pH and water activity are set aside, and 6/13 on pH and water activity themselves, which is at or below chance.",
+    "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question."
+  ],
+  "matrix_holdout": {
+    "available": true,
+    "ci_coverage_hits": 3,
+    "ci_level_pct": 90,
+    "genuine_hits": 1,
+    "genuine_total": 5,
+    "in_panel_hits": 2,
+    "in_panel_total": 3,
+    "median_ci_width_log10": 4.0176770887691,
+    "path": "results/validation/external_validation_report.json"
+  },
+  "no_verifiable_source": {
+    "available": true,
+    "by_status_key": {
+      "source_status": 120,
+      "status": 38,
+      "value_anchor_status": 4,
+      "value_status": 4
+    },
+    "files": 12,
+    "records": 166,
+    "with_numeric_payload": 68
+  },
+  "observability_modes": {
+    "available": true,
+    "modes": {
+      "binding_physics": {
+        "ci_coverage_hits": 5,
+        "ci_coverage_total": 8,
+        "median_fold_error": 68.17891782030593
+      },
+      "fitted_factors": {
+        "ci_coverage_hits": 3,
+        "ci_coverage_total": 8,
+        "median_fold_error": 93.68372415254433
+      },
+      "unit_observability": {
+        "ci_coverage_hits": 4,
+        "ci_coverage_total": 8,
+        "median_fold_error": 67.41945301725595
+      }
+    },
+    "path": "results/validation/matrix_binding_mode_comparison.json",
+    "shipped_mode": "fitted_factors"
+  },
+  "sulfur_anchor": {
+    "available": true,
+    "fit_target_note": "Rows listed under `..._that_are_fit_targets` carry a `fit_target_declaration` block, i.e. a constant was selected by looking at them. They are primary-source verified and they are NOT counted as anchors: agreement on a fitted row carries no information about the model. They are listed rather than deleted because excluding a fitted row removes its MISSES as well as its hits, and at the time of writing the one row here is a miss.",
+    "panel_verified_sulfur_benchmarks": [
+      "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "hofmann1998_fructose_cysteine_145C_20min_pH5",
+      "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "hofmann1998_glucose_cysteine_145C_20min_pH5",
+      "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "hofmann1998_ribose_cysteine_145C_20min_pH5"
+    ],
+    "panel_verified_sulfur_values": [
+      "hofmann1998_c2c3_recombination_145C_20min_pH3/2-Methyl-3-furanthiol (MFT)",
+      "hofmann1998_c2c3_recombination_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)",
+      "hofmann1998_c2c3_recombination_145C_20min_pH7/2-Methyl-3-furanthiol (MFT)",
+      "hofmann1998_fructose_cysteine_145C_20min_pH5/2-Furfurylthiol (FFT)",
+      "hofmann1998_fructose_cysteine_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)",
+      "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5/2-Furfurylthiol (FFT)",
+      "hofmann1998_glucose_cysteine_145C_20min_pH5/2-Furfurylthiol (FFT)",
+      "hofmann1998_glucose_cysteine_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)",
+      "hofmann1998_norfuraneol_cysteine_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)",
+      "hofmann1998_ribose_cysteine_145C_20min_pH5/2-Furfurylthiol (FFT)",
+      "hofmann1998_ribose_cysteine_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)"
+    ],
+    "panel_verified_sulfur_values_that_are_fit_targets": [
+      "hofmann1998_norfuraneol_h2s_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)"
+    ],
+    "path": "data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "tier": "REFERENCE",
+    "values_with_an_anchor": [],
+    "values_without_verifiable_source": [
+      "2-furfurylthiol",
+      "2-methyl-3-furanthiol"
+    ],
+    "zero_absolute_anchors": false
+  },
+  "thresholds": {
+    "caution": ">= 60% agreement, or too few claims to establish",
+    "do_not_use": "< 60% agreement, or unmeasured",
+    "trust": ">= 80% agreement on >= 3 claims"
+  },
+  "validity_domain": [
+    {
+      "basis": "12-point pre-registered hold-out, frozen before any calibration wave saw it",
+      "claim_type": "Absolute concentration (ppb)",
+      "evidence": "median 6.04x, 12/21 within 10x",
+      "system_class": "free precursor (sugar + amino acid, aqueous)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "8-point external hold-out; the shipped fitted factors LOSE to applying no observability factor at all",
+      "claim_type": "Absolute concentration (ppb)",
+      "evidence": "median 93.7x, CI coverage 3/8",
+      "system_class": "protein matrix (pea / soy isolate)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "the only rows that test transfer; the interval that does cover is ~4 decades wide",
+      "claim_type": "Absolute concentration (ppb)",
+      "evidence": "1/5 inside the 90% CI",
+      "system_class": "genuine extrapolation (roasting, HME extrusion)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `sugar_identity`",
+      "evidence": "9/11 on the directional panel",
+      "system_class": "any (sugar swap, conditions held)",
+      "verdict": "trust"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `additive_cysteine`",
+      "evidence": "4/4 on the directional panel",
+      "system_class": "free precursor (cysteine present vs absent)",
+      "verdict": "trust"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `temperature`",
+      "evidence": "6/8 on the directional panel",
+      "system_class": "any (temperature moved, everything else held)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `time`",
+      "evidence": "2/2 on the directional panel",
+      "system_class": "any (time moved, everything else held)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `lipid_lane`",
+      "evidence": "2/2 on the directional panel",
+      "system_class": "protein matrix (lipid-derived aldehydes)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `matrix_identity`",
+      "evidence": "1/1 on the directional panel",
+      "system_class": "protein matrix (pea vs soy)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `ph`",
+      "evidence": "6/10 on the directional panel",
+      "system_class": "any (pH moved)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `moisture_aw`",
+      "evidence": "0/3 on the directional panel",
+      "system_class": "any (water activity moved)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "measured on the hold-out, independently of the panel",
+      "claim_type": "Ordering of two compounds in one system",
+      "evidence": "8/12 pairs correct",
+      "system_class": "free precursor",
+      "verdict": "caution"
+    },
+    {
+      "basis": "the sulfur temperature dependence is inverted and acrylamide is ~40x under-responsive in time",
+      "claim_type": "Response direction across a condition series",
+      "evidence": "3/6 correct",
+      "system_class": "free precursor",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "recomputed live; strict-ready is the repository's own passing bar",
+      "claim_type": "Any claim of benchmark-grade agreement",
+      "evidence": "0/23 strict-ready",
+      "system_class": "the in-panel benchmarks themselves",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is",
+      "claim_type": "Which experiment to run next (value of information)",
+      "evidence": "every ranked row is a measured model failure",
+      "system_class": "any system the uncertainty panel covers",
+      "verdict": "trust"
+    }
+  ]
+}

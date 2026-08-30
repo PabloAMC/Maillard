@@ -1,0 +1,51 @@
+experiment_id: requested_cys_ribose_140c_hofmann1998_2_methyl_3_furanthiol_rank5
+status: pending_lab
+source_kind: model_requested_experiment
+protein_type: free
+process_state: aqueous_pre_extrusion_model
+matrix_format: null
+conditions:
+  temp_C: 140
+  ph: 5.0
+  water_activity: 0.98
+  time_min: 30
+formulation:
+  precursors:
+    L-Cysteine:
+      concentration_mM: 10.0
+    D-Ribose:
+      concentration_mM: 10.0
+measured_volatiles:
+  2-methyl-3-furanthiol:
+    conc_ppb: null
+    uncertainty_pct: null
+    _target_role: primary_request_target
+request_metadata:
+  originating_voi_rank: 5
+  voi_score: 3.773298531742101
+  voi_rationale: CI width 2.68 dex; ≈5e+04× ODT (decision_relevance=4.69); critical
+    meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield
+    vs precursor dose and temperature, not matrix transfer
+  envelope_miss_log10: 0.0
+  ci_width_log10: 2.6824173020617494
+  decision_relevance: 4.688928066041878
+  p5_predicted_ppb: 1.218729727770969
+  p50_predicted_ppb: 166.62253229366866
+  p95_predicted_ppb: 586.5765634172453
+  previous_measured_ppb: 342.0
+  odour_threshold_ug_per_kg: 0.007
+  suggested_doe_template: free_precursor_sulfur_yield
+  goal: null
+  budget_label: null
+benchmark_alignment:
+  target_benchmark_id: cys_ribose_140C_Hofmann1998
+  notes: Re-measure to constrain the model envelope at this benchmark.
+analytical_context:
+  headspace_method: HS-SPME-GC-MS
+  quantification_mode: internal_standard_calibrated
+  replicates: 3
+  non_detect_policy: report_lod_and_do_not_backfill
+  internal_standards:
+  - 13C-2-methyl-3-furanthiol
+  notes: Defaults emitted by next-experiment; lab is expected to confirm or override
+    before returning the intake YAML.

@@ -1,19 +1,32 @@
 """
 doe_generator.py
 
-S12.3: Model-Guided Active Learning (DoE Loop)
-This module formalizes "Structural Gaps" into explicit Design of Experiments (DoE) workflows.
-When the pipeline identifies unresolvable literature gaps in the process registry, 
-it generates a formal lab protocol optimized for calibration gain.
+S12.3: Gap-driven Design of Experiments (DoE) request generator.
+
+This module turns registered "structural gaps" into wet-lab request artifacts.
+
+HONESTY NOTE (2026-08-27): this is a TEMPLATE LOOKUP, not an information-gain
+optimizer.  `generate_active_learning_requests` maps `gap_type` onto a fixed
+protocol template in DOE_TEMPLATES; it does not score candidate designs, does
+not compute expected information gain, and does not consult the model at all.
+The previous docstring ("optimized for calibration gain") claimed otherwise.
+The one place where the model is consulted is the extrusion benchmark protocol
+below, which now checks that its proposed process arms are actually predicted
+to differ (see `_evaluate_arm_discrimination`) instead of proposing two arms the
+model scores identically.
 """
 
 import json
 import os
 import logging
 from pathlib import Path
-from typing import Any, Dict, Mapping
+from typing import Any, Dict, List, Mapping, Sequence
 
-from src.extrusion import build_extrusion_process_profile
+from src.extrusion import (
+    SME_WINDOW_REFERENCE_KJ_PER_KG,
+    build_extrusion_process_profile,
+    compute_extrusion_headspace_adjustment,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +48,31 @@ DOE_TEMPLATES = {
         "factors": ["Precursor Load (1x, 5x)", "Temperature (90C, 130C)", "Matrix (SPI, PPI)"],
         "instructions": "Standard PBMA formulation baseline. Use Safe+SPME extraction to capture both highly volatile (H2S) and semi-volatile (pyrazines) simultaneously with SIDA quantitation."
     },
+    # 2026-08-27 (Wave I). Added because the selector was handing `blocking_benchmark_gap`
+    # -- whose defining factor is "Matrix (SPI, PPI)" -- to free-precursor aqueous
+    # benchmarks that contain no protein matrix at all. A card is a set of instructions
+    # somebody may actually follow at a CRO; prescribing the wrong system is not a
+    # cosmetic defect. Factors here span the axes a free-precursor sulfur system actually
+    # has: precursor dose, temperature and pH.
+    "free_precursor_sulfur_yield": {
+        "method": "Quantitative Headspace SIDA, free-precursor aqueous model system",
+        "factors": [
+            "Precursor Load (1x, 5x of the benchmark's stated molarities)",
+            "Temperature (100C, 120C, 140C)",
+            "pH (4.5, 5.0, 6.0)",
+        ],
+        "instructions": (
+            "Aqueous buffered model system ONLY -- do NOT add a protein isolate; this "
+            "benchmark's system is free precursors in buffer and adding a matrix would "
+            "answer a different question. Reproduce the benchmark's stated precursor set "
+            "and molarities as the 1x arm, in sealed vials at the stated headspace ratio. "
+            "Add deuterated/13C internal standards before heating, not after. Report "
+            "absolute concentrations against the internal standards, plus LoD/LoQ. Where "
+            "the benchmark records a value as `assumed_not_from_source` (commonly pH and "
+            "the molarities), pin it explicitly in the returned YAML so the next "
+            "comparison is not against an assumption."
+        ),
+    },
     "missing_positive_flavor_anchor": {
         "method": "Targeted GC-MS (Furanone band)",
         "factors": ["Water Activity", "pH (5.5, 6.5)"],
@@ -53,7 +91,11 @@ DOE_TEMPLATES = {
 }
 
 def generate_active_learning_requests(gap_registry_path: str) -> dict:
-    """Read the structural gaps and generate explicit DoE requests."""
+    """Read the structural gaps and emit one templated DoE request per gap.
+
+    Template lookup keyed on `gap_type` (see the module docstring): no design
+    scoring, no expected-information-gain calculation.
+    """
     
     if not os.path.exists(gap_registry_path):
         logger.warning(f"Gap registry not found at {gap_registry_path}. Cannot generate DoE.")
@@ -125,6 +167,77 @@ def _resolve_hme_control_anchor(root: Path) -> Dict[str, Any]:
     return {}
 
 
+def _arm_prediction_signature(profile: Mapping[str, Any]) -> Dict[str, float]:
+    """The model quantities an SME arm is supposed to move.
+
+    Used to verify that two proposed arms are not predicted identically.
+    """
+    damage = dict(profile.get("total_damage_load", {}))
+    return {
+        "sme_temperature_offset_celsius": float(profile.get("sme_temperature_offset_celsius", 0.0)),
+        "effective_temperature_celsius": float(profile.get("effective_temperature_celsius", 0.0)),
+        "die_exit_temperature_celsius": float(profile.get("die_exit_temperature_celsius", 0.0)),
+        "mean_residence_time_seconds": float(profile.get("mean_residence_time_seconds", 0.0)),
+        "relative_rtd_spread": float(profile.get("relative_rtd_spread", 0.0)),
+        "hexanal_headspace_factor": float(
+            compute_extrusion_headspace_adjustment("Hexanal", profile)["combined_headspace_factor"]
+        ),
+        "mft_headspace_factor": float(
+            compute_extrusion_headspace_adjustment("2-methyl-3-furanthiol", profile)["combined_headspace_factor"]
+        ),
+        "predicted_furosine_mg_per_kg": float(damage.get("furosine_mg_per_kg", 0.0)),
+        "predicted_lal_mg_per_kg": float(damage.get("lal_mg_per_kg", 0.0)),
+    }
+
+
+def _evaluate_arm_discrimination(
+    signatures: Sequence[Mapping[str, float]],
+    *,
+    relative_tolerance: float = 1e-3,
+) -> Dict[str, Any]:
+    """Check that the proposed arms are predicted to differ, field by field.
+
+    A DoE arm the model scores identically to its neighbour buys no information,
+    whatever the protocol text says.  Fields that do not move are reported
+    explicitly rather than hidden.
+    """
+    if len(signatures) < 2:
+        return {
+            "arms_predicted_distinct": False,
+            "reason": "fewer_than_two_arms",
+            "discriminating_fields": [],
+            "non_discriminating_fields": [],
+        }
+
+    discriminating: List[str] = []
+    non_discriminating: List[str] = []
+    deltas: Dict[str, float] = {}
+    for field in signatures[0]:
+        values = [float(sig.get(field, 0.0)) for sig in signatures]
+        spread = max(values) - min(values)
+        scale = max(abs(value) for value in values) or 1.0
+        relative = spread / scale
+        deltas[field] = relative
+        if relative > relative_tolerance:
+            discriminating.append(field)
+        else:
+            non_discriminating.append(field)
+
+    return {
+        "arms_predicted_distinct": bool(discriminating),
+        "relative_tolerance": relative_tolerance,
+        "discriminating_fields": discriminating,
+        "non_discriminating_fields": non_discriminating,
+        "relative_spread_by_field": {key: round(value, 6) for key, value in deltas.items()},
+        "note": (
+            "Predicted-delta check across the proposed SME arms. Damage-marker fields are "
+            "expected in non_discriminating_fields: the shipped furosine/LAL model responds "
+            "to ingredient provenance and sterilization history only, not to SME, so those "
+            "readouts are measured to CLOSE that gap rather than to confirm a prediction."
+        ),
+    }
+
+
 def build_extrusion_benchmark_protocol(root: Path = ROOT) -> Dict[str, Any]:
     contract = _load_json(root / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json")
     acrylamide_reference = _resolve_acrylamide_reference(root)
@@ -134,8 +247,14 @@ def build_extrusion_benchmark_protocol(root: Path = ROOT) -> Dict[str, Any]:
     barrel_temperature_celsius = 145.0
     water_activity = 0.75
     moisture_regime = "hme"
-    sme_levels = [120.0, 180.0]
+    # Arm levels regenerated 2026-08-27 against the DESATURATED extrusion model.
+    # The previous [120, 180] kJ/kg pair sat inside the old saturated region
+    # (min(1, SME/180) and the 40 C offset cap), so the model predicted the two
+    # arms byte-identically. 300 and 700 kJ/kg span the real twin-screw window
+    # and are separated by ~13 C of predicted melt temperature.
+    sme_levels = [SME_WINDOW_REFERENCE_KJ_PER_KG, 700.0]
     process_arms = []
+    arm_signatures: List[Dict[str, float]] = []
     for sme in sme_levels:
         profile = build_extrusion_process_profile(
             base_temperature_celsius=barrel_temperature_celsius,
@@ -144,6 +263,8 @@ def build_extrusion_benchmark_protocol(root: Path = ROOT) -> Dict[str, Any]:
             sme_kj_per_kg=sme,
             moisture_regime=moisture_regime,
         )
+        signature = _arm_prediction_signature(profile)
+        arm_signatures.append(signature)
         process_arms.append(
             {
                 "arm_id": f"spi_hme_{int(sme)}_kj_per_kg",
@@ -153,9 +274,20 @@ def build_extrusion_benchmark_protocol(root: Path = ROOT) -> Dict[str, Any]:
                 "moisture_regime": moisture_regime,
                 "water_activity": water_activity,
                 "effective_temperature_celsius": float(profile.get("effective_temperature_celsius", barrel_temperature_celsius)),
+                "mean_residence_time_seconds": float(profile.get("mean_residence_time_seconds", 0.0)),
+                "relative_rtd_spread": float(profile.get("relative_rtd_spread", 0.0)),
+                "die_exit_temperature_celsius": float(profile.get("die_exit_temperature_celsius", 0.0)),
                 "predicted_damage_load": dict(profile.get("total_damage_load", {})),
+                "predicted_signature": signature,
                 "zone_profile": list(profile.get("zone_profile", [])),
             }
+        )
+
+    arm_discrimination = _evaluate_arm_discrimination(arm_signatures)
+    if not arm_discrimination["arms_predicted_distinct"]:
+        logger.warning(
+            "Extrusion DoE arms are predicted identically by the current model: %s",
+            arm_discrimination,
         )
 
     required_panel = {
@@ -186,6 +318,7 @@ def build_extrusion_benchmark_protocol(root: Path = ROOT) -> Dict[str, Any]:
             "shared_precursors": dict(contract.get("precursor_addition", {})),
         },
         "process_arms": process_arms,
+        "arm_discrimination": arm_discrimination,
         "closest_repo_backed_hme_anchor": {
             "citation": str(hme_control_anchor.get("citation", "Li et al. (2026), Foods 15(5):912")),
             "matrix_family": str(hme_control_anchor.get("matrix_family", "spi_wheat_gluten_hme")),
@@ -288,14 +421,29 @@ def render_extrusion_benchmark_protocol_markdown(payload: Mapping[str, Any]) -> 
         f"Core panel: {', '.join(design_targets.get('required_panel', {}).get('core', [])) or 'none'}",
         f"Recommended extensions: {', '.join(design_targets.get('required_panel', {}).get('recommended_same_run_extensions', [])) or 'none'}",
         "",
-        "| Arm | SME kJ/kg | Effective Temp C | Furosine mg/kg | LAL mg/kg |",
-        "| --- | ---: | ---: | ---: | ---: |",
+        "| Arm | SME kJ/kg | Effective Temp C | Mean residence s | Furosine mg/kg | LAL mg/kg |",
+        "| --- | ---: | ---: | ---: | ---: | ---: |",
     ])
     for row in payload.get("process_arms", []):
         damage = dict(row.get("predicted_damage_load", {}))
         lines.append(
-            f"| {row.get('arm_id', 'unknown')} | {float(row.get('sme_kj_per_kg', 0.0)):.0f} | {float(row.get('effective_temperature_celsius', 0.0)):.1f} | {float(damage.get('furosine_mg_per_kg', 0.0)):.1f} | {float(damage.get('lal_mg_per_kg', 0.0)):.1f} |"
+            f"| {row.get('arm_id', 'unknown')} | {float(row.get('sme_kj_per_kg', 0.0)):.0f} | "
+            f"{float(row.get('effective_temperature_celsius', 0.0)):.1f} | "
+            f"{float(row.get('mean_residence_time_seconds', 0.0)):.1f} | "
+            f"{float(damage.get('furosine_mg_per_kg', 0.0)):.1f} | {float(damage.get('lal_mg_per_kg', 0.0)):.1f} |"
         )
+
+    discrimination = dict(payload.get("arm_discrimination", {}))
+    if discrimination:
+        lines.extend([
+            "",
+            "### Arm Discrimination Check",
+            "",
+            f"Arms predicted distinct: {discrimination.get('arms_predicted_distinct', False)}",
+            f"Discriminating predictions: {', '.join(discrimination.get('discriminating_fields', [])) or 'none'}",
+            f"Predicted identically across arms: {', '.join(discrimination.get('non_discriminating_fields', [])) or 'none'}",
+            f"Note: {discrimination.get('note', '')}",
+        ])
 
     lines.extend([
         "",

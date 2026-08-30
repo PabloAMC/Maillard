@@ -101,6 +101,36 @@ def test_acidic_ph_increases_plant_matrix_release_for_acid_sensitive_off_flavour
 
 
 def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace_layer():
+    """The soy-vs-pea RELEASE GAP is what this test is about, and it did not move.
+
+    RE-PINNED 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+    The ambient hexanal factors were refitted against the verified Pratap-Singh values
+    (pea 1.0 -> 4.31725, soy 0.453/0.205 -> 9.54007) using ONE shared scale of 4.317249x --
+    see scripts/generators/refit_matrix_observability_pratap_singh.py and
+    results/validation/matrix_observability_refit_pratap_singh.{json,md}.
+
+    Because a SINGLE scale served both lanes, the soy/pea hexanal ratio this test exists to
+    guard is UNCHANGED at 0.453/0.205 = 2.2098 -- and that invariance is now asserted
+    directly at the end, which is a stronger statement of the test's own claim than the two
+    absolute pins were. The absolute pea value is re-pinned to the fitted constant; the
+    2-pentylfuran and 1-hexanol lanes were not refitted at all (verified verbatim, and
+    unanchored, respectively).
+
+    RE-PINNED AGAIN 2026-08-28 (Wave Y): 4.31725 -> 1.0. Wave O's shared scale is NOT
+    withdrawn -- it moved to the other side of the product, into
+    `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` (0.205 -> 0.885036), on the unit
+    argument that an observability factor is a fraction of a total and cannot exceed 1
+    (Wave S4 (b)) while a marker yield multiplying an arbitrary `hydroperoxide_scale` can.
+    The pea ambient lane is the REFERENCE lane, so 1.0 is what its own definition requires,
+    and it is independently what Wave S4 (c) evidenced from Pratap-Singh's verbatim methods
+    (matrix-matched quantification reads the TOTAL). The predicted ppb on this lane is
+    unchanged to 6 significant figures. Record:
+    results/validation/matrix_marker_yield_rederivation.{json,md}.
+
+    The soy/pea RATIO -- the thing this test is named after -- is unchanged for the second
+    time in two waves, which is the point: it survived the Wave O refit AND the Wave Y
+    relocation, because neither touched relative structure.
+    """
     model = HeadspaceModel()
 
     assert model.get_matrix_benchmark_headspace_factor(
@@ -119,6 +149,12 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
         pH=6.0,
     ) == pytest.approx(1.0)
 
+    # RE-PINNED 2026-08-28 (Wave Y): 9.54007 -> 0.453/0.205, the same relocation as the pea
+    # lane above. AND NOTE WHAT DID NOT HAPPEN: this factor is still ABOVE 1, so the Wave S4
+    # prediction that fixing the yields would bring every factor under 1 is only half right.
+    # Every factor that remains above 1 after the relocation is a SOY factor, because a
+    # marker yield is shared across matrices and can absorb a global scale error but never a
+    # lane one. See results/validation/matrix_marker_yield_rederivation.md.
     assert model.get_matrix_benchmark_headspace_factor(
         "Hexanal",
         protein_type="soy_iso",
@@ -134,6 +170,17 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
         protein_type="soy_iso",
         pH=6.0,
     ) == pytest.approx(0.143 / 0.063)
+
+    # 2026-08-27 (Wave O): the property this test is named for, asserted as a property.
+    # One shared scale was applied to BOTH ambient hexanal factors, so the soy-vs-pea release
+    # gap is bit-for-bit what it was before the refit. If a future refit gives the two lanes
+    # independent freedom, this is the assertion that will say so.
+    pea = model.get_matrix_benchmark_headspace_factor("Hexanal", protein_type="pea_iso", pH=6.0)
+    soy = model.get_matrix_benchmark_headspace_factor("Hexanal", protein_type="soy_iso", pH=6.0)
+    assert soy / pea == pytest.approx(0.453 / 0.205, rel=1e-5), (
+        "the soy-vs-pea ambient hexanal release ratio moved away from the 2.2098 the "
+        "registry has always encoded; a per-lane refit would do exactly this."
+    )
 
 
 def test_shu_heated_soy_calibration_suppresses_2_pentylfuran_to_detection_floor_surrogate():

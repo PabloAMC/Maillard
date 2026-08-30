@@ -1,0 +1,1944 @@
+{
+  "generated_by": "scripts/generators/refit_sulfur_barriers_hofmann.py",
+  "fit_target": "cys_ribose_140C_Hofmann1998.json",
+  "fit_target_doi": "10.1021/jf9705983",
+  "objective": "mean |log10(predicted_ppb / measured_ppb)| over the matched rows of cys_ribose_140C_Hofmann1998",
+  "unscored_row_penalty_dex": 3.0,
+  "forbidden_as_fit_targets": [
+    "data/benchmarks/external_validation/** (hold-out; excluded by assertion)",
+    "*Internal2026*  (synthetic reproducibility lane; excluded by assertion)",
+    "*ProtocolPilot2026*  (synthetic reproducibility lane; excluded by assertion)",
+    "spi_hvp_xylose_120C_PMC9905368 / wheat_gluten_hvp_xylose_120C_PMC9905368 (QUARANTINED 2026-08-27 as fabricated; they were already excluded here before that, because they are constrained by their own per-lane upstream_observability_factor)",
+    "thiamine_cys_xylose_145C_Cerny2008 (VALUES_NEED_RE_EXAMINATION)",
+    "thiamine_cys_glucose_120C_Bolton1994 (kept as an honest failure)"
+  ],
+  "contamination_review": {
+    "date": "2026-08-27",
+    "verdict": "THIS REFIT IS UNCONTAMINATED \u2014 its result STANDS.",
+    "basis": "The fit target is the single benchmark cys_ribose_140C_Hofmann1998 (10.1021/jf9705983, Hofmann & Schieberle, JAFC 46:235-241), a real, verified paper. The two quarantined PMC9905368 files were already on this script's forbidden list before the quarantine and contributed exactly zero rows to the objective, so the adopted value thiol_addition_norfuraneol 28.60 -> 26.85 and every 'keep the incumbent' decision here are unaffected.",
+    "what_does_NOT_stand": "The separate hydrolysate-observability re-derivation (scripts/generators/rederive_hydrolysate_observability.py) IS retracted: its only targets were the two quarantined files. Its one applied value, the Methional base_factor, is reverted 0.05623 -> 0.0045. That layer sits DOWNSTREAM of these barriers and does not feed back into this objective.",
+    "SUPERSEDED_BY_A_LATER_WAVE_I_FIX": "READ THIS BEFORE CITING ANY CONCLUSION FROM AN EARLIER VERSION OF THIS RECORD. Wave H's headline finding -- 'the profiles saturate; no barrier value in any defensible range reproduces the measured absolute yields; the residual is an ALLOCATION deficit, not a barrier deficit' -- was measured against a network in which the MFT route was throttled by a defect. The norfuraneol + H2S step consumed a pool reducing equivalent whose only source in a ribose/cysteine system was pyrazine chemistry, so MFT was structurally starved regardless of barrier value -- which is exactly what a saturating profile looks like. Wave I sourced that reductant from the thiol redox couple instead, and MFT went from 5.58x under to 1.45x under on this very benchmark WITH NO BARRIER CHANGED. The saturation was an artifact of the defect. `thiol_addition_norfuraneol` still ships at Wave H's 26.85, which is now a value fitted against a network that no longer exists. Re-running this refit is an OPEN OWNER ITEM and was deliberately NOT done inside Wave I: a refit here would be a recalibration event on top of a chemistry change, and the two must not be entangled in one pass.",
+    "standing_caveat_unrelated_to_the_quarantine": "Hofmann1998's own validation contract (max_ratio 1.45 / mean_abs_log10_error 0.09) is the 3rd-tightest in the collection -- the same fitting-tell pattern flagged for the quarantined files. The tolerance has NOT been widened, and the panel currently fails it, so nothing is being hidden; but a single benchmark with a suspiciously tight contract is a thin anchor for the whole sulfur branch, and that remains an open owner item. | RESOLVED 2026-08-27 (Wave S2c), and worse than the caveat guessed: the 'suspiciously tight contract' was tight because it was ~1.7x tighter than the 2.5x spread of the invented band its own target value was interpolated from. The contract 1.45x / 0.09 dex is now RETIRED in the benchmark file and metadata.tier is demoted PRIMARY -> REFERENCE. 'A thin anchor for the whole sulfur branch' understated it: it was not an anchor.",
+    "SUPERSEDED_AGAIN_BY_WAVE_S2c_2026_08_27": "READ THIS BEFORE THE VERDICT ABOVE. The verdict 'THIS REFIT IS UNCONTAMINATED -- its result STANDS' is WITHDRAWN. It was reached by checking that the fit target was not one of the quarantined files; nobody checked whether the fit target's VALUES came from the paper it cites. They do not. Wave S2b (~90% confidence, arithmetic exact) traced cys_ribose_140C_Hofmann1998's MFT 342 ppb and FFT 200 ppb to data/benchmarks/maillard_validation_benchmarks.md section 1.3, an abstract-reconstructed range table committed in c7efbbc -- the SAME commit that created the benchmark JSON. Its row reads 'Ribose + Cys, pH 5 aqueous | 140 | 30 min | ~0.02-0.05 | ~0.01-0.03' (MFT / FFT mol %). On the benchmark's declared 10 mM basis with MW 114.17: 0.0300 mol % -> 342.5 -> 342 ppb; the geometric mean of the FFT band, 0.017321 mol % -> 197.8 -> 200 ppb. Both targets are interior points of two invented, OVERLAPPING bands. So the header line of the companion .md -- 'the ONLY surviving literature constraint on the sulfur branch' -- is false in the word LITERATURE: it was a repo-internal derivation wearing a real DOI. THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.",
+    "WHY_THIS_RECORD_IS_ANNOTATED_AND_NOT_RETRACTED": "Wave S2c retracted the companion record results/validation/sulfur_barrier_refit_pentodiulose.{json,md} and REVERTED the constant it moved (thiol_addition_pentodiulose 26.35 -> 28.60), because that constant is live on the shipping network. This record's constant, thiol_addition_norfuraneol = 26.85, sits on a family NO STEP EMITS since Wave N removed the norfuraneol -> MFT step on isotope evidence. Reverting a barrier that reaches nothing would move no prediction while making the provenance record harder to read, so the value is left at 26.85 and annotated instead -- in this file and in src/barrier_constants.py. A SECOND, DELIBERATE CONSEQUENCE: this record stays LIVE for scripts/ci/fit_target_gate.py, so cys_ribose_140C_Hofmann1998 remains a declared fit target and stays flagged fitted_row: true in prediction_uncertainty.json -- i.e. OUT of the honest literature-coverage numerator and denominator. That is the right place for it: a value with no verifiable source must not be counted as literature evidence in either direction. Retracting this record too would have let the benchmark back into the coverage denominator as if it were literature. The gate is not weakened."
+  },
+  "decision_rules": {
+    "grid_step_kcal_per_mol": 0.05,
+    "flat_profile_dex": 1e-06,
+    "min_objective_gain_dex": 0.02,
+    "indifference_dex": 0.01,
+    "conservative_edge": "among values within indifference_dex of the profile minimum, adopt the LARGEST barrier (the least sulfur-favourable point the data cannot distinguish from the optimum)"
+  },
+  "applied_history": [
+    {
+      "date": "2026-08-27",
+      "knob": "thiol_addition_norfuraneol",
+      "from": 28.6,
+      "to": 26.85,
+      "objective_before": 0.6987,
+      "objective_after": 0.6298,
+      "hofmann_mft_fold_error_before": 7.83,
+      "hofmann_mft_fold_error_after": 5.58,
+      "hofmann_fft_fold_error_before": 3.19,
+      "hofmann_fft_fold_error_after": 3.26,
+      "basis": "conservative edge of the 23.30-26.85 indifference band over the defensible range [23.30, 29.65]; the 28.60 it replaced had been inherited from `thiol_addition` and from that key's PRE-Wave-G1 Hofmann window, which did not survive the MFT route change"
+    }
+  ],
+  "incumbent_values": {
+    "thiol_addition_norfuraneol": 26.85,
+    "furanone_cyclisation": 28.0,
+    "thiohemiacetal_formation": 23.3,
+    "thiol_dehydration": 26.8
+  },
+  "incumbent_objective": 0.10183383760463752,
+  "incumbent_rows": [
+    {
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 342.0,
+      "predicted_ppb": 235.32253335764761,
+      "ratio": 0.6880775829170983,
+      "scored": true,
+      "abs_log10_error": 0.16236259093139072
+    },
+    {
+      "compound": "2-furfurylthiol",
+      "measured_ppb": 200.0,
+      "predicted_ppb": 219.95562860932807,
+      "ratio": 1.0997781430466405,
+      "scored": true,
+      "abs_log10_error": 0.041305084277884305
+    }
+  ],
+  "reported_not_fitted": {
+    "thiol_addition": {
+      "reason_not_fitted": "After Wave G1 this key labels only `Thiol_Addition_Legacy_Shortcut` (the demoted fabricated one-step MFT route) and the lumped `Thiol_Addition_H2` step. Fitting it would tune the route this wave exists to retire; its derivative is reported instead.",
+      "incumbent": 28.6,
+      "probe": [
+        {
+          "value": 26.6,
+          "objective": 0.20292788362647746
+        },
+        {
+          "value": 27.6,
+          "objective": 0.10183383760463752
+        },
+        {
+          "value": 29.6,
+          "objective": 0.10183383760463752
+        },
+        {
+          "value": 30.6,
+          "objective": 0.10183383760463752
+        }
+      ],
+      "objective_span_over_probe_dex": 0.10109404602183994,
+      "identifiable": true
+    }
+  },
+  "profiles": {
+    "thiol_addition_norfuraneol": {
+      "range_kcal_per_mol": [
+        23.3,
+        29.65
+      ],
+      "range_basis": "H2S/thiol addition to a carbonyl; low = thiohemiacetal_formation (23.30), high = thiol_addition_hexose (29.65), both already in FAST_BARRIERS",
+      "incumbent": 26.85,
+      "profile_min_objective": 0.08355446877097175,
+      "profile_max_objective": 0.4488449493810023,
+      "profile_span_dex": 0.36529048061003055,
+      "identifiable": true,
+      "achievable_gain_dex": 0.018279368833665766,
+      "profile": [
+        {
+          "value": 23.3,
+          "objective": 0.08355446877097175
+        },
+        {
+          "value": 23.35,
+          "objective": 0.08357020215120649
+        },
+        {
+          "value": 23.4,
+          "objective": 0.08358692295740192
+        },
+        {
+          "value": 23.45,
+          "objective": 0.08360469311867957
+        },
+        {
+          "value": 23.5,
+          "objective": 0.08362357844283089
+        },
+        {
+          "value": 23.55,
+          "objective": 0.08364364885851346
+        },
+        {
+          "value": 23.6,
+          "objective": 0.08366497867254673
+        },
+        {
+          "value": 23.65,
+          "objective": 0.0836876468431115
+        },
+        {
+          "value": 23.7,
+          "objective": 0.08371173726991114
+        },
+        {
+          "value": 23.75,
+          "objective": 0.08373733910229321
+        },
+        {
+          "value": 23.8,
+          "objective": 0.08376454706645098
+        },
+        {
+          "value": 23.85,
+          "objective": 0.0837934618128223
+        },
+        {
+          "value": 23.9,
+          "objective": 0.08382419028498471
+        },
+        {
+          "value": 23.95,
+          "objective": 0.08385684611126248
+        },
+        {
+          "value": 24.0,
+          "objective": 0.08389155002050429
+        },
+        {
+          "value": 24.05,
+          "objective": 0.08392843028343787
+        },
+        {
+          "value": 24.1,
+          "objective": 0.08396762318113159
+        },
+        {
+          "value": 24.15,
+          "objective": 0.0840092735022469
+        },
+        {
+          "value": 24.2,
+          "objective": 0.08405353507073512
+        },
+        {
+          "value": 24.25,
+          "objective": 0.08410057130587598
+        },
+        {
+          "value": 24.3,
+          "objective": 0.08415055581646684
+        },
+        {
+          "value": 24.35,
+          "objective": 0.08420367303132144
+        },
+        {
+          "value": 24.4,
+          "objective": 0.08426011886807636
+        },
+        {
+          "value": 24.45,
+          "objective": 0.08432010144270644
+        },
+        {
+          "value": 24.5,
+          "objective": 0.08438384182198805
+        },
+        {
+          "value": 24.55,
+          "objective": 0.08445157482150163
+        },
+        {
+          "value": 24.6,
+          "objective": 0.08452354985178895
+        },
+        {
+          "value": 24.65,
+          "objective": 0.08460003181541084
+        },
+        {
+          "value": 24.7,
+          "objective": 0.08468130205785379
+        },
+        {
+          "value": 24.75,
+          "objective": 0.08476765937533284
+        },
+        {
+          "value": 24.8,
+          "objective": 0.08485942108269692
+        },
+        {
+          "value": 24.85,
+          "objective": 0.08495692414481547
+        },
+        {
+          "value": 24.9,
+          "objective": 0.08506052637499392
+        },
+        {
+          "value": 24.95,
+          "objective": 0.08517060770403875
+        },
+        {
+          "value": 25.0,
+          "objective": 0.08528757152398117
+        },
+        {
+          "value": 25.05,
+          "objective": 0.08541184611029523
+        },
+        {
+          "value": 25.1,
+          "objective": 0.08554388612700922
+        },
+        {
+          "value": 25.15,
+          "objective": 0.08568417421892702
+        },
+        {
+          "value": 25.2,
+          "objective": 0.08583322269563425
+        },
+        {
+          "value": 25.25,
+          "objective": 0.08599157531189373
+        },
+        {
+          "value": 25.3,
+          "objective": 0.08615980914941954
+        },
+        {
+          "value": 25.35,
+          "objective": 0.08633853660500121
+        },
+        {
+          "value": 25.4,
+          "objective": 0.0865284074902295
+        },
+        {
+          "value": 25.45,
+          "objective": 0.08673011124813676
+        },
+        {
+          "value": 25.5,
+          "objective": 0.0869443792922446
+        },
+        {
+          "value": 25.55,
+          "objective": 0.08717198747364908
+        },
+        {
+          "value": 25.6,
+          "objective": 0.08741375868176357
+        },
+        {
+          "value": 25.65,
+          "objective": 0.08767056558455256
+        },
+        {
+          "value": 25.7,
+          "objective": 0.08794333351404723
+        },
+        {
+          "value": 25.75,
+          "objective": 0.08823304350296836
+        },
+        {
+          "value": 25.8,
+          "objective": 0.08854073547823864
+        },
+        {
+          "value": 25.85,
+          "objective": 0.08886751161713519
+        },
+        {
+          "value": 25.9,
+          "objective": 0.08921453987165859
+        },
+        {
+          "value": 25.95,
+          "objective": 0.0895830576665197
+        },
+        {
+          "value": 26.0,
+          "objective": 0.0899743757759164
+        },
+        {
+          "value": 26.05,
+          "objective": 0.0903898823838577
+        },
+        {
+          "value": 26.1,
+          "objective": 0.09083104733243194
+        },
+        {
+          "value": 26.15,
+          "objective": 0.09129942656182088
+        },
+        {
+          "value": 26.2,
+          "objective": 0.09179666674527381
+        },
+        {
+          "value": 26.25,
+          "objective": 0.09232451012133958
+        },
+        {
+          "value": 26.3,
+          "objective": 0.09288479952485679
+        },
+        {
+          "value": 26.35,
+          "objective": 0.0934794836169773
+        },
+        {
+          "value": 26.4,
+          "objective": 0.09411062231333328
+        },
+        {
+          "value": 26.45,
+          "objective": 0.09478039240780026
+        },
+        {
+          "value": 26.5,
+          "objective": 0.09549109338776597
+        },
+        {
+          "value": 26.55,
+          "objective": 0.09624515343473566
+        },
+        {
+          "value": 26.6,
+          "objective": 0.097045135601949
+        },
+        {
+          "value": 26.65,
+          "objective": 0.09789374415811372
+        },
+        {
+          "value": 26.7,
+          "objective": 0.09879383108358754
+        },
+        {
+          "value": 26.75,
+          "objective": 0.09974840270219454
+        },
+        {
+          "value": 26.8,
+          "objective": 0.10076062642824249
+        },
+        {
+          "value": 26.85,
+          "objective": 0.10183383760463752
+        },
+        {
+          "value": 26.9,
+          "objective": 0.10297154640345899
+        },
+        {
+          "value": 26.95,
+          "objective": 0.10417744475592938
+        },
+        {
+          "value": 27.0,
+          "objective": 0.1054554132734311
+        },
+        {
+          "value": 27.05,
+          "objective": 0.10680952811582248
+        },
+        {
+          "value": 27.1,
+          "objective": 0.10824406775733736
+        },
+        {
+          "value": 27.15,
+          "objective": 0.10976351959399949
+        },
+        {
+          "value": 27.2,
+          "objective": 0.11137258632974716
+        },
+        {
+          "value": 27.25,
+          "objective": 0.1130761920714451
+        },
+        {
+          "value": 27.3,
+          "objective": 0.11487948805545621
+        },
+        {
+          "value": 27.35,
+          "objective": 0.11678785792086589
+        },
+        {
+          "value": 27.4,
+          "objective": 0.11880692243662608
+        },
+        {
+          "value": 27.45,
+          "objective": 0.12094254358200295
+        },
+        {
+          "value": 27.5,
+          "objective": 0.12320082787177243
+        },
+        {
+          "value": 27.55,
+          "objective": 0.1255881288102088
+        },
+        {
+          "value": 27.6,
+          "objective": 0.1281110483503626
+        },
+        {
+          "value": 27.65,
+          "objective": 0.13077643722868415
+        },
+        {
+          "value": 27.7,
+          "objective": 0.13359139403901155
+        },
+        {
+          "value": 27.75,
+          "objective": 0.13656326290525483
+        },
+        {
+          "value": 27.8,
+          "objective": 0.13969962960851287
+        },
+        {
+          "value": 27.85,
+          "objective": 0.14300831602267955
+        },
+        {
+          "value": 27.9,
+          "objective": 0.14649737271265714
+        },
+        {
+          "value": 27.95,
+          "objective": 0.15017506955192206
+        },
+        {
+          "value": 28.0,
+          "objective": 0.1540498842211725
+        },
+        {
+          "value": 28.05,
+          "objective": 0.15813048845820984
+        },
+        {
+          "value": 28.1,
+          "objective": 0.1624257319405567
+        },
+        {
+          "value": 28.15,
+          "objective": 0.16694462369761223
+        },
+        {
+          "value": 28.2,
+          "objective": 0.17169631096822108
+        },
+        {
+          "value": 28.25,
+          "objective": 0.176690055442709
+        },
+        {
+          "value": 28.3,
+          "objective": 0.1819352068558815
+        },
+        {
+          "value": 28.35,
+          "objective": 0.18744117392911575
+        },
+        {
+          "value": 28.4,
+          "objective": 0.19321739269536073
+        },
+        {
+          "value": 28.45,
+          "objective": 0.19927329228053525
+        },
+        {
+          "value": 28.5,
+          "objective": 0.20561825825783098
+        },
+        {
+          "value": 28.55,
+          "objective": 0.21226159373734793
+        },
+        {
+          "value": 28.6,
+          "objective": 0.21921247840154998
+        },
+        {
+          "value": 28.65,
+          "objective": 0.22647992574640124
+        },
+        {
+          "value": 28.7,
+          "objective": 0.23407273883739432
+        },
+        {
+          "value": 28.75,
+          "objective": 0.24199946493798044
+        },
+        {
+          "value": 28.8,
+          "objective": 0.2502683494139504
+        },
+        {
+          "value": 28.85,
+          "objective": 0.25888728935912153
+        },
+        {
+          "value": 28.9,
+          "objective": 0.26786378742458056
+        },
+        {
+          "value": 28.95,
+          "objective": 0.27720490636328154
+        },
+        {
+          "value": 29.0,
+          "objective": 0.28691722482373005
+        },
+        {
+          "value": 29.05,
+          "objective": 0.29700679493843335
+        },
+        {
+          "value": 29.1,
+          "objective": 0.30747910225465536
+        },
+        {
+          "value": 29.15,
+          "objective": 0.31833902854535345
+        },
+        {
+          "value": 29.2,
+          "objective": 0.3295908180169746
+        },
+        {
+          "value": 29.25,
+          "objective": 0.3412380473976138
+        },
+        {
+          "value": 29.3,
+          "objective": 0.35328360034448475
+        },
+        {
+          "value": 29.35,
+          "objective": 0.36572964655419893
+        },
+        {
+          "value": 29.4,
+          "objective": 0.3785776258943304
+        },
+        {
+          "value": 29.45,
+          "objective": 0.39182823780111786
+        },
+        {
+          "value": 29.5,
+          "objective": 0.40548143610872395
+        },
+        {
+          "value": 29.55,
+          "objective": 0.4195364293909478
+        },
+        {
+          "value": 29.6,
+          "objective": 0.433991686810028
+        },
+        {
+          "value": 29.65,
+          "objective": 0.4488449493810023
+        }
+      ],
+      "decision": "IMMATERIAL \u2014 best achievable gain 0.0183 dex < 0.02 dex; incumbent kept"
+    },
+    "furanone_cyclisation": {
+      "range_kcal_per_mol": [
+        26.0,
+        30.0
+      ],
+      "range_basis": "cyclodehydration class; dehydration / 2,3-enolisation / furanone_formation are all 28.0 in FAST_BARRIERS, taken +/- 2 kcal/mol",
+      "incumbent": 28.0,
+      "profile_min_objective": 0.0288466371612843,
+      "profile_max_objective": 0.5440343523476042,
+      "profile_span_dex": 0.5151877151863199,
+      "identifiable": true,
+      "achievable_gain_dex": 0.07298720044335322,
+      "profile": [
+        {
+          "value": 26.0,
+          "objective": 0.0288466371612843
+        },
+        {
+          "value": 26.05,
+          "objective": 0.029324908272392286
+        },
+        {
+          "value": 26.1,
+          "objective": 0.02983263794946934
+        },
+        {
+          "value": 26.15,
+          "objective": 0.030371602996803027
+        },
+        {
+          "value": 26.2,
+          "objective": 0.03094368261970424
+        },
+        {
+          "value": 26.25,
+          "objective": 0.031550863723950995
+        },
+        {
+          "value": 26.3,
+          "objective": 0.032195246412657925
+        },
+        {
+          "value": 26.35,
+          "objective": 0.03287904967751579
+        },
+        {
+          "value": 26.4,
+          "objective": 0.03360461727962334
+        },
+        {
+          "value": 26.45,
+          "objective": 0.03437442381301288
+        },
+        {
+          "value": 26.5,
+          "objective": 0.0351910809416937
+        },
+        {
+          "value": 26.55,
+          "objective": 0.03605734379832923
+        },
+        {
+          "value": 26.6,
+          "objective": 0.03697611752993528
+        },
+        {
+          "value": 26.65,
+          "objective": 0.037950463972425866
+        },
+        {
+          "value": 26.7,
+          "objective": 0.03898360843244503
+        },
+        {
+          "value": 26.75,
+          "objective": 0.040078946550755175
+        },
+        {
+          "value": 26.8,
+          "objective": 0.041240051217124304
+        },
+        {
+          "value": 26.85,
+          "objective": 0.042470679501800786
+        },
+        {
+          "value": 26.9,
+          "objective": 0.04377477956336853
+        },
+        {
+          "value": 26.95,
+          "objective": 0.04515649748727082
+        },
+        {
+          "value": 27.0,
+          "objective": 0.04662018400303699
+        },
+        {
+          "value": 27.05,
+          "objective": 0.04817040102187731
+        },
+        {
+          "value": 27.1,
+          "objective": 0.04981192792942651
+        },
+        {
+          "value": 27.15,
+          "objective": 0.05154976756117187
+        },
+        {
+          "value": 27.2,
+          "objective": 0.053389151780714315
+        },
+        {
+          "value": 27.25,
+          "objective": 0.05533554657313504
+        },
+        {
+          "value": 27.3,
+          "objective": 0.05739465655801919
+        },
+        {
+          "value": 27.35,
+          "objective": 0.059572428818775926
+        },
+        {
+          "value": 27.4,
+          "objective": 0.06187505593701585
+        },
+        {
+          "value": 27.45,
+          "objective": 0.06430897811336742
+        },
+        {
+          "value": 27.5,
+          "objective": 0.06688088424893288
+        },
+        {
+          "value": 27.55,
+          "objective": 0.06959771185515615
+        },
+        {
+          "value": 27.6,
+          "objective": 0.07246664565444406
+        },
+        {
+          "value": 27.65,
+          "objective": 0.07549511472933895
+        },
+        {
+          "value": 27.7,
+          "objective": 0.07869078807526622
+        },
+        {
+          "value": 27.75,
+          "objective": 0.08206156841070117
+        },
+        {
+          "value": 27.8,
+          "objective": 0.08561558409941653
+        },
+        {
+          "value": 27.85,
+          "objective": 0.08936117904307565
+        },
+        {
+          "value": 27.9,
+          "objective": 0.09330690040842876
+        },
+        {
+          "value": 27.95,
+          "objective": 0.09746148406285493
+        },
+        {
+          "value": 28.0,
+          "objective": 0.10183383760463752
+        },
+        {
+          "value": 28.05,
+          "objective": 0.10643302089105316
+        },
+        {
+          "value": 28.1,
+          "objective": 0.11126822398765349
+        },
+        {
+          "value": 28.15,
+          "objective": 0.11634874248705718
+        },
+        {
+          "value": 28.2,
+          "objective": 0.121683950174163
+        },
+        {
+          "value": 28.25,
+          "objective": 0.12728326904804457
+        },
+        {
+          "value": 28.3,
+          "objective": 0.13315613674775062
+        },
+        {
+          "value": 28.35,
+          "objective": 0.13931197147009
+        },
+        {
+          "value": 28.4,
+          "objective": 0.14576013451181133
+        },
+        {
+          "value": 28.45,
+          "objective": 0.15250989061501413
+        },
+        {
+          "value": 28.5,
+          "objective": 0.1595703663436241
+        },
+        {
+          "value": 28.55,
+          "objective": 0.16695050676792378
+        },
+        {
+          "value": 28.6,
+          "objective": 0.17465903078352013
+        },
+        {
+          "value": 28.65,
+          "objective": 0.18270438543865647
+        },
+        {
+          "value": 28.7,
+          "objective": 0.19109469968854847
+        },
+        {
+          "value": 28.75,
+          "objective": 0.19983773803566823
+        },
+        {
+          "value": 28.8,
+          "objective": 0.20894085454939212
+        },
+        {
+          "value": 28.85,
+          "objective": 0.21841094778551123
+        },
+        {
+          "value": 28.9,
+          "objective": 0.22825441714460415
+        },
+        {
+          "value": 28.95,
+          "objective": 0.23847712121684675
+        },
+        {
+          "value": 29.0,
+          "objective": 0.24908433865875215
+        },
+        {
+          "value": 29.05,
+          "objective": 0.26008073213364613
+        },
+        {
+          "value": 29.1,
+          "objective": 0.27147031582229586
+        },
+        {
+          "value": 29.15,
+          "objective": 0.2832564269729157
+        },
+        {
+          "value": 29.2,
+          "objective": 0.295441701911315
+        },
+        {
+          "value": 29.25,
+          "objective": 0.3080280568729742
+        },
+        {
+          "value": 29.3,
+          "objective": 0.32101667395068656
+        },
+        {
+          "value": 29.35,
+          "objective": 0.334407992375493
+        },
+        {
+          "value": 29.4,
+          "objective": 0.3482017052671453
+        },
+        {
+          "value": 29.45,
+          "objective": 0.3623967619050431
+        },
+        {
+          "value": 29.5,
+          "objective": 0.3769913754840198
+        },
+        {
+          "value": 29.55,
+          "objective": 0.39198303623370157
+        },
+        {
+          "value": 29.6,
+          "objective": 0.4073685296977928
+        },
+        {
+          "value": 29.65,
+          "objective": 0.4231439598926465
+        },
+        {
+          "value": 29.7,
+          "objective": 0.4393047769947571
+        },
+        {
+          "value": 29.75,
+          "objective": 0.45584580914618367
+        },
+        {
+          "value": 29.8,
+          "objective": 0.4727612979164306
+        },
+        {
+          "value": 29.85,
+          "objective": 0.49004493692017304
+        },
+        {
+          "value": 29.9,
+          "objective": 0.5076899130626422
+        },
+        {
+          "value": 29.95,
+          "objective": 0.5256889498686789
+        },
+        {
+          "value": 30.0,
+          "objective": 0.5440343523476042
+        }
+      ],
+      "indifference_band_kcal_per_mol": [
+        26.0,
+        26.65
+      ],
+      "adopted": 26.65,
+      "decision": "MOVED 28.00 -> 26.65 (conservative edge of the 26.00-26.65 indifference band; gain 0.0730 dex)"
+    },
+    "thiohemiacetal_formation": {
+      "range_kcal_per_mol": [
+        21.0,
+        26.8
+      ],
+      "range_basis": "thiohemiacetal formation must stay below its own dehydration step, thiol_dehydration (26.80)",
+      "incumbent": 23.3,
+      "profile_min_objective": 0.0819758864018467,
+      "profile_max_objective": 0.10210635618168079,
+      "profile_span_dex": 0.020130469779834084,
+      "identifiable": true,
+      "achievable_gain_dex": 0.01985795120279081,
+      "profile": [
+        {
+          "value": 21.0,
+          "objective": 0.10210635618168079
+        },
+        {
+          "value": 21.05,
+          "objective": 0.10210524975342851
+        },
+        {
+          "value": 21.1,
+          "objective": 0.10210407384496507
+        },
+        {
+          "value": 21.15,
+          "objective": 0.10210282409335285
+        },
+        {
+          "value": 21.2,
+          "objective": 0.10210149586171804
+        },
+        {
+          "value": 21.25,
+          "objective": 0.10210008422206009
+        },
+        {
+          "value": 21.3,
+          "objective": 0.10209858393696145
+        },
+        {
+          "value": 21.35,
+          "objective": 0.10209698944016572
+        },
+        {
+          "value": 21.4,
+          "objective": 0.10209529481594684
+        },
+        {
+          "value": 21.45,
+          "objective": 0.10209349377718133
+        },
+        {
+          "value": 21.5,
+          "objective": 0.10209157964199497
+        },
+        {
+          "value": 21.55,
+          "objective": 0.10208954530904635
+        },
+        {
+          "value": 21.6,
+          "objective": 0.10208738323114981
+        },
+        {
+          "value": 21.65,
+          "objective": 0.10208508538732258
+        },
+        {
+          "value": 21.7,
+          "objective": 0.10208264325303834
+        },
+        {
+          "value": 21.75,
+          "objective": 0.10208004776863458
+        },
+        {
+          "value": 21.8,
+          "objective": 0.1020772893057272
+        },
+        {
+          "value": 21.85,
+          "objective": 0.10207435763153344
+        },
+        {
+          "value": 21.9,
+          "objective": 0.10207124187092063
+        },
+        {
+          "value": 21.95,
+          "objective": 0.10206793046614078
+        },
+        {
+          "value": 22.0,
+          "objective": 0.10206441113398702
+        },
+        {
+          "value": 22.05,
+          "objective": 0.10206067082028075
+        },
+        {
+          "value": 22.1,
+          "objective": 0.1020566956514951
+        },
+        {
+          "value": 22.15,
+          "objective": 0.10205247088339497
+        },
+        {
+          "value": 22.2,
+          "objective": 0.10204798084640049
+        },
+        {
+          "value": 22.25,
+          "objective": 0.10204320888754513
+        },
+        {
+          "value": 22.3,
+          "objective": 0.10203813730883413
+        },
+        {
+          "value": 22.35,
+          "objective": 0.10203274730168885
+        },
+        {
+          "value": 22.4,
+          "objective": 0.10202701887731849
+        },
+        {
+          "value": 22.45,
+          "objective": 0.10202093079274532
+        },
+        {
+          "value": 22.5,
+          "objective": 0.10201446047215308
+        },
+        {
+          "value": 22.55,
+          "objective": 0.10200758392337718
+        },
+        {
+          "value": 22.6,
+          "objective": 0.10200027564910856
+        },
+        {
+          "value": 22.65,
+          "objective": 0.1019925085526019
+        },
+        {
+          "value": 22.7,
+          "objective": 0.10198425383743648
+        },
+        {
+          "value": 22.75,
+          "objective": 0.101975480901057
+        },
+        {
+          "value": 22.8,
+          "objective": 0.10196615722161692
+        },
+        {
+          "value": 22.85,
+          "objective": 0.10195624823780218
+        },
+        {
+          "value": 22.9,
+          "objective": 0.10194571722112106
+        },
+        {
+          "value": 22.95,
+          "objective": 0.10193452514021573
+        },
+        {
+          "value": 23.0,
+          "objective": 0.10192263051673212
+        },
+        {
+          "value": 23.05,
+          "objective": 0.10190998927218048
+        },
+        {
+          "value": 23.1,
+          "objective": 0.10189655456525384
+        },
+        {
+          "value": 23.15,
+          "objective": 0.10188227661901492
+        },
+        {
+          "value": 23.2,
+          "objective": 0.10186710253731196
+        },
+        {
+          "value": 23.25,
+          "objective": 0.10185097610977209
+        },
+        {
+          "value": 23.3,
+          "objective": 0.10183383760463752
+        },
+        {
+          "value": 23.35,
+          "objective": 0.1018156235487758
+        },
+        {
+          "value": 23.4,
+          "objective": 0.10179626649392846
+        },
+        {
+          "value": 23.45,
+          "objective": 0.10177569476855726
+        },
+        {
+          "value": 23.5,
+          "objective": 0.1017538322141878
+        },
+        {
+          "value": 23.55,
+          "objective": 0.10173059790545053
+        },
+        {
+          "value": 23.6,
+          "objective": 0.10170590585279439
+        },
+        {
+          "value": 23.65,
+          "objective": 0.10167966468672825
+        },
+        {
+          "value": 23.7,
+          "objective": 0.10165177732261338
+        },
+        {
+          "value": 23.75,
+          "objective": 0.1016221406046734
+        },
+        {
+          "value": 23.8,
+          "objective": 0.10159064492806964
+        },
+        {
+          "value": 23.85,
+          "objective": 0.10155717383766144
+        },
+        {
+          "value": 23.9,
+          "objective": 0.10152160360204371
+        },
+        {
+          "value": 23.95,
+          "objective": 0.1014838027613883
+        },
+        {
+          "value": 24.0,
+          "objective": 0.10144363164752272
+        },
+        {
+          "value": 24.05,
+          "objective": 0.10140094187453225
+        },
+        {
+          "value": 24.1,
+          "objective": 0.1013555757981928
+        },
+        {
+          "value": 24.15,
+          "objective": 0.10130736594232417
+        },
+        {
+          "value": 24.2,
+          "objective": 0.1012561343901282
+        },
+        {
+          "value": 24.25,
+          "objective": 0.10120169213842863
+        },
+        {
+          "value": 24.3,
+          "objective": 0.10114383841263394
+        },
+        {
+          "value": 24.35,
+          "objective": 0.10108235994011328
+        },
+        {
+          "value": 24.4,
+          "objective": 0.10101703017958237
+        },
+        {
+          "value": 24.45,
+          "objective": 0.10094760850389975
+        },
+        {
+          "value": 24.5,
+          "objective": 0.10087383933362175
+        },
+        {
+          "value": 24.55,
+          "objective": 0.1007954512184762
+        },
+        {
+          "value": 24.6,
+          "objective": 0.1007121558637627
+        },
+        {
+          "value": 24.65,
+          "objective": 0.10062364709859574
+        },
+        {
+          "value": 24.7,
+          "objective": 0.10052959978267023
+        },
+        {
+          "value": 24.75,
+          "objective": 0.10042966864813362
+        },
+        {
+          "value": 24.8,
+          "objective": 0.10032348707300706
+        },
+        {
+          "value": 24.85,
+          "objective": 0.10021066578230098
+        },
+        {
+          "value": 24.9,
+          "objective": 0.10009079147299597
+        },
+        {
+          "value": 24.95,
+          "objective": 0.09996342535872453
+        },
+        {
+          "value": 25.0,
+          "objective": 0.09982810162987502
+        },
+        {
+          "value": 25.05,
+          "objective": 0.0996843258247477
+        },
+        {
+          "value": 25.1,
+          "objective": 0.09953157310703861
+        },
+        {
+          "value": 25.15,
+          "objective": 0.09936928644494267
+        },
+        {
+          "value": 25.2,
+          "objective": 0.09919687468688919
+        },
+        {
+          "value": 25.25,
+          "objective": 0.09901371052881464
+        },
+        {
+          "value": 25.3,
+          "objective": 0.09881912836770013
+        },
+        {
+          "value": 25.35,
+          "objective": 0.09861242203596994
+        },
+        {
+          "value": 25.4,
+          "objective": 0.09839284241122162
+        },
+        {
+          "value": 25.45,
+          "objective": 0.09815959489566822
+        },
+        {
+          "value": 25.5,
+          "objective": 0.09791183675952711
+        },
+        {
+          "value": 25.55,
+          "objective": 0.09764867434259562
+        },
+        {
+          "value": 25.6,
+          "objective": 0.09736916010820981
+        },
+        {
+          "value": 25.65,
+          "objective": 0.09707228954368122
+        },
+        {
+          "value": 25.7,
+          "objective": 0.09675699790156647
+        },
+        {
+          "value": 25.75,
+          "objective": 0.09642215677599089
+        },
+        {
+          "value": 25.8,
+          "objective": 0.09606657050851186
+        },
+        {
+          "value": 25.85,
+          "objective": 0.09568897241828203
+        },
+        {
+          "value": 25.9,
+          "objective": 0.09528802085142427
+        },
+        {
+          "value": 25.95,
+          "objective": 0.09486229504501348
+        },
+        {
+          "value": 26.0,
+          "objective": 0.09441029080149765
+        },
+        {
+          "value": 26.05,
+          "objective": 0.09393041597000354
+        },
+        {
+          "value": 26.1,
+          "objective": 0.09342098573164584
+        },
+        {
+          "value": 26.15,
+          "objective": 0.0928802176868191
+        },
+        {
+          "value": 26.2,
+          "objective": 0.09230622674350943
+        },
+        {
+          "value": 26.25,
+          "objective": 0.09169701980674778
+        },
+        {
+          "value": 26.3,
+          "objective": 0.09105049027078205
+        },
+        {
+          "value": 26.35,
+          "objective": 0.09036441231705954
+        },
+        {
+          "value": 26.4,
+          "objective": 0.08963643502296893
+        },
+        {
+          "value": 26.45,
+          "objective": 0.08886407628836071
+        },
+        {
+          "value": 26.5,
+          "objective": 0.08804471658911148
+        },
+        {
+          "value": 26.55,
+          "objective": 0.08717559256976594
+        },
+        {
+          "value": 26.6,
+          "objective": 0.08625379049018803
+        },
+        {
+          "value": 26.65,
+          "objective": 0.08527623954434155
+        },
+        {
+          "value": 26.7,
+          "objective": 0.08423970507321839
+        },
+        {
+          "value": 26.75,
+          "objective": 0.08314078169771301
+        },
+        {
+          "value": 26.8,
+          "objective": 0.0819758864018467
+        }
+      ],
+      "decision": "IMMATERIAL \u2014 best achievable gain 0.0199 dex < 0.02 dex; incumbent kept"
+    },
+    "thiol_dehydration": {
+      "range_kcal_per_mol": [
+        23.3,
+        28.0
+      ],
+      "range_basis": "bounded below by thiohemiacetal_formation (23.30) and above by the generic dehydration barrier (28.00)",
+      "incumbent": 26.8,
+      "profile_min_objective": 0.077638557970568,
+      "profile_max_objective": 0.1226434735158208,
+      "profile_span_dex": 0.04500491554525281,
+      "identifiable": true,
+      "achievable_gain_dex": 0.02419527963406952,
+      "profile": [
+        {
+          "value": 23.3,
+          "objective": 0.1226434735158208
+        },
+        {
+          "value": 23.35,
+          "objective": 0.12262436549030067
+        },
+        {
+          "value": 23.4,
+          "objective": 0.12260405840903114
+        },
+        {
+          "value": 23.45,
+          "objective": 0.12258247709101396
+        },
+        {
+          "value": 23.5,
+          "objective": 0.12255954164934808
+        },
+        {
+          "value": 23.55,
+          "objective": 0.12253516719767188
+        },
+        {
+          "value": 23.6,
+          "objective": 0.12250926353848958
+        },
+        {
+          "value": 23.65,
+          "objective": 0.12248173483215254
+        },
+        {
+          "value": 23.7,
+          "objective": 0.12245247924541273
+        },
+        {
+          "value": 23.75,
+          "objective": 0.12242138857826909
+        },
+        {
+          "value": 23.8,
+          "objective": 0.12238834786779534
+        },
+        {
+          "value": 23.85,
+          "objective": 0.12235323496758127
+        },
+        {
+          "value": 23.9,
+          "objective": 0.12231592010124766
+        },
+        {
+          "value": 23.95,
+          "objective": 0.12227626538859335
+        },
+        {
+          "value": 24.0,
+          "objective": 0.12223412434259734
+        },
+        {
+          "value": 24.05,
+          "objective": 0.12218934133564
+        },
+        {
+          "value": 24.1,
+          "objective": 0.12214175103305674
+        },
+        {
+          "value": 24.15,
+          "objective": 0.1220911777920953
+        },
+        {
+          "value": 24.2,
+          "objective": 0.1220374350242063
+        },
+        {
+          "value": 24.25,
+          "objective": 0.12198032451859486
+        },
+        {
+          "value": 24.3,
+          "objective": 0.12191963572460501
+        },
+        {
+          "value": 24.35,
+          "objective": 0.1218551449906927
+        },
+        {
+          "value": 24.4,
+          "objective": 0.12178661475733862
+        },
+        {
+          "value": 24.45,
+          "objective": 0.12171379270133867
+        },
+        {
+          "value": 24.5,
+          "objective": 0.12163641082856834
+        },
+        {
+          "value": 24.55,
+          "objective": 0.12155418451238627
+        },
+        {
+          "value": 24.6,
+          "objective": 0.12146681147449859
+        },
+        {
+          "value": 24.65,
+          "objective": 0.12137397070509373
+        },
+        {
+          "value": 24.7,
+          "objective": 0.12127532131882929
+        },
+        {
+          "value": 24.75,
+          "objective": 0.1211705013430921
+        },
+        {
+          "value": 24.8,
+          "objective": 0.12105912643486169
+        },
+        {
+          "value": 24.85,
+          "objective": 0.12094078852219146
+        },
+        {
+          "value": 24.9,
+          "objective": 0.12081505436634495
+        },
+        {
+          "value": 24.95,
+          "objective": 0.1206814640402598
+        },
+        {
+          "value": 25.0,
+          "objective": 0.12053952931900078
+        },
+        {
+          "value": 25.05,
+          "objective": 0.12038873197756772
+        },
+        {
+          "value": 25.1,
+          "objective": 0.12022852199135245
+        },
+        {
+          "value": 25.15,
+          "objective": 0.12005831563426897
+        },
+        {
+          "value": 25.2,
+          "objective": 0.11987749346955304
+        },
+        {
+          "value": 25.25,
+          "objective": 0.11968539822793364
+        },
+        {
+          "value": 25.3,
+          "objective": 0.1194813325678501
+        },
+        {
+          "value": 25.35,
+          "objective": 0.1192645567121578
+        },
+        {
+          "value": 25.4,
+          "objective": 0.11903428595577528
+        },
+        {
+          "value": 25.45,
+          "objective": 0.11878968803850373
+        },
+        {
+          "value": 25.5,
+          "objective": 0.11852988037726624
+        },
+        {
+          "value": 25.55,
+          "objective": 0.11825392715193281
+        },
+        {
+          "value": 25.6,
+          "objective": 0.11796083623894843
+        },
+        {
+          "value": 25.65,
+          "objective": 0.11764955598690607
+        },
+        {
+          "value": 25.7,
+          "objective": 0.11731897182843218
+        },
+        {
+          "value": 25.75,
+          "objective": 0.11696790272280817
+        },
+        {
+          "value": 25.8,
+          "objective": 0.11659509742390503
+        },
+        {
+          "value": 25.85,
+          "objective": 0.1161992305684392
+        },
+        {
+          "value": 25.9,
+          "objective": 0.1157788985797599
+        },
+        {
+          "value": 25.95,
+          "objective": 0.11533261538292192
+        },
+        {
+          "value": 26.0,
+          "objective": 0.11485880792734265
+        },
+        {
+          "value": 26.05,
+          "objective": 0.1143558115140034
+        },
+        {
+          "value": 26.1,
+          "objective": 0.11382186492499718
+        },
+        {
+          "value": 26.15,
+          "objective": 0.11325510535420644
+        },
+        {
+          "value": 26.2,
+          "objective": 0.11265356313895888
+        },
+        {
+          "value": 26.25,
+          "objective": 0.11201515629399407
+        },
+        {
+          "value": 26.3,
+          "objective": 0.1113376848504006
+        },
+        {
+          "value": 26.35,
+          "objective": 0.11061882500411285
+        },
+        {
+          "value": 26.4,
+          "objective": 0.10985612308047513
+        },
+        {
+          "value": 26.45,
+          "objective": 0.10904698932373452
+        },
+        {
+          "value": 26.5,
+          "objective": 0.10818869152274822
+        },
+        {
+          "value": 26.55,
+          "objective": 0.10727834848727388
+        },
+        {
+          "value": 26.6,
+          "objective": 0.10631292339228866
+        },
+        {
+          "value": 26.65,
+          "objective": 0.10528921701137489
+        },
+        {
+          "value": 26.7,
+          "objective": 0.10420386086425362
+        },
+        {
+          "value": 26.75,
+          "objective": 0.10305331030779177
+        },
+        {
+          "value": 26.8,
+          "objective": 0.10183383760463752
+        },
+        {
+          "value": 26.85,
+          "objective": 0.10054152500876007
+        },
+        {
+          "value": 26.9,
+          "objective": 0.09917225791279799
+        },
+        {
+          "value": 26.95,
+          "objective": 0.09772171810813024
+        },
+        {
+          "value": 27.0,
+          "objective": 0.09618537721500414
+        },
+        {
+          "value": 27.05,
+          "objective": 0.09455849034680658
+        },
+        {
+          "value": 27.1,
+          "objective": 0.09283609007978007
+        },
+        {
+          "value": 27.15,
+          "objective": 0.091012980806947
+        },
+        {
+          "value": 27.2,
+          "objective": 0.08908373356258925
+        },
+        {
+          "value": 27.25,
+          "objective": 0.08704268141161883
+        },
+        {
+          "value": 27.3,
+          "objective": 0.08488391550593377
+        },
+        {
+          "value": 27.35,
+          "objective": 0.08260128191775709
+        },
+        {
+          "value": 27.4,
+          "objective": 0.08018837936745588
+        },
+        {
+          "value": 27.45,
+          "objective": 0.077638557970568
+        },
+        {
+          "value": 27.5,
+          "objective": 0.07798355410575354
+        },
+        {
+          "value": 27.55,
+          "objective": 0.0798855324713714
+        },
+        {
+          "value": 27.6,
+          "objective": 0.08190451882458599
+        },
+        {
+          "value": 27.65,
+          "objective": 0.08404738264608953
+        },
+        {
+          "value": 27.7,
+          "objective": 0.08632133912626913
+        },
+        {
+          "value": 27.75,
+          "objective": 0.08873395703195575
+        },
+        {
+          "value": 27.8,
+          "objective": 0.09129316513704724
+        },
+        {
+          "value": 27.85,
+          "objective": 0.09400725692381635
+        },
+        {
+          "value": 27.9,
+          "objective": 0.09688489323670213
+        },
+        {
+          "value": 27.95,
+          "objective": 0.09993510254724827
+        },
+        {
+          "value": 28.0,
+          "objective": 0.10316727846884755
+        }
+      ],
+      "indifference_band_kcal_per_mol": [
+        27.25,
+        27.7
+      ],
+      "adopted": 27.7,
+      "decision": "MOVED 26.80 -> 27.70 (conservative edge of the 27.25-27.70 indifference band; gain 0.0242 dex)"
+    }
+  },
+  "adopted_values": {
+    "thiol_addition_norfuraneol": 26.85,
+    "furanone_cyclisation": 26.65,
+    "thiohemiacetal_formation": 23.3,
+    "thiol_dehydration": 27.7
+  },
+  "objective_at_adopted": 0.05581427339493021,
+  "rows_at_adopted": [
+    {
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 342.0,
+      "predicted_ppb": 301.65434550281265,
+      "ratio": 0.8820302500082241,
+      "scored": true,
+      "abs_log10_error": 0.054516520099056574
+    },
+    {
+      "compound": "2-furfurylthiol",
+      "measured_ppb": 200.0,
+      "predicted_ppb": 175.35492541797157,
+      "ratio": 0.8767746270898579,
+      "scored": true,
+      "abs_log10_error": 0.057112026690803855
+    }
+  ],
+  "objective_gain_dex": 0.046019564209707306,
+  "fit_leverage": {
+    "free_parameters": 4,
+    "fitted_rows": 2,
+    "parameters_per_row": 2.0,
+    "class": "per_row_recovery",
+    "interpretation": "4 free barriers against 2 rows. The fit has more freedom than the data constrains, so cys_ribose_140C_Hofmann1998 cannot be scored as out-of-sample evidence: its rows are excluded from the literature-coverage numerator AND denominator and reported in the fitted-row bucket instead.",
+    "why_this_exclusion_does_not_flatter_the_model": "Excluding a fitted row removes its MISSES as well as its hits, and this row is a miss: even with four free barriers the fit cannot reproduce the measurement (MFT stays ~5.6x under, the profiles saturate inside their defensible ranges). The fitted-row bucket therefore has to be read, not skipped -- 'the model fails a benchmark it was fitted to' is a stronger negative result than any coverage number. See `irreducible_residual` below.",
+    "what_would_fix_the_leverage": "A second independent literature benchmark of the sulfur branch. After the Mottram1994 / Farmer1999 quarantine there is exactly one, and it is this one."
+  },
+  "irreducible_residual": {
+    "definition": "objective with EVERY fitted knob pinned at the bottom of its defensible range \u2014 the best the sulfur branch can do on this benchmark by barrier moves alone",
+    "values": {
+      "thiol_addition_norfuraneol": 23.3,
+      "furanone_cyclisation": 26.0,
+      "thiohemiacetal_formation": 21.0,
+      "thiol_dehydration": 23.3
+    },
+    "objective": 0.02823265600234856,
+    "rows": [
+      {
+        "compound": "2-methyl-3-furanthiol",
+        "measured_ppb": 342.0,
+        "predicted_ppb": 318.7393838470337,
+        "ratio": 0.9319865024767068,
+        "scored": true,
+        "abs_log10_error": 0.030590377283714963
+      },
+      {
+        "compound": "2-furfurylthiol",
+        "measured_ppb": 200.0,
+        "predicted_ppb": 212.27797221752454,
+        "ratio": 1.0613898610876227,
+        "scored": true,
+        "abs_log10_error": 0.025874934720982158
+      }
+    ],
+    "reading": "The profiles saturate well inside the defensible ranges: the MFT ceiling is set by the shared upstream span (Schiff/Amadori) and by the volatile-budget allocation, in which furfural \u2014 unmeasured in this benchmark \u2014 takes ~78% of a total budget that is itself the right order of magnitude (~1050 ppb against a measured MFT+FFT of 542 ppb). No barrier value in any defensible range reproduces the measured absolute sulfur yields; the remaining factor of ~5 on MFT and ~3 on FFT is an allocation deficit, not a barrier deficit. That is the finding this refit exists to produce, and it is reported rather than tuned away."
+  },
+  "applied_to_runtime": false,
+  "shipped_constants": {
+    "thiol_addition_norfuraneol": 26.85,
+    "furanone_cyclisation": 28.0,
+    "thiohemiacetal_formation": 23.3,
+    "thiol_dehydration": 26.8
+  },
+  "adopted_but_NOT_APPLIED": {
+    "constants": {
+      "furanone_cyclisation": {
+        "shipped": 28.0,
+        "adopted": 26.65
+      },
+      "thiol_dehydration": {
+        "shipped": 26.8,
+        "adopted": 27.7
+      }
+    },
+    "objective_shipped_dex": 0.10183383760463752,
+    "objective_if_applied_dex": 0.05581427339493021,
+    "why_not_applied": "Wave I (2026-08-27) re-ran this record because the network changed underneath it: decoupling the MFT step from the pyrazine-supplied hydrogen pool took cys_ribose_140C_Hofmann1998 from 5.58x under to 1.45x under with NO barrier changed. Applying a barrier refit on top of a chemistry change, in the same pass, would entangle the two and make it impossible to say afterwards which one produced the agreement. The record is written; the constants are not moved. Applying it is an OPEN OWNER ITEM."
+  }
+}

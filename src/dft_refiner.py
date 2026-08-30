@@ -127,6 +127,28 @@ def _normalize_reaction_side(value: Any) -> List[str]:
         return [str(item) for item in value]
     return [str(value)]
 
+
+# Producers of `reaction_meta` do not agree on key names, and the two that
+# drive the DFT campaigns (scripts/run_computational_gap_dft.py and
+# src/elementary_step_runner.py) supply neither 'reactants' nor 'products'.
+# `.get('reactants', [])` therefore silently filed every DFT barrier under the
+# same empty-identity reaction ([] -> []), which is unaddressable by any lookup.
+# Accept the known aliases, and refuse to persist a row that has no identity at
+# all rather than writing another one into that bucket.
+_REACTION_SIDE_ALIASES: Dict[str, Tuple[str, ...]] = {
+    "reactants": ("reactants", "reactant_smiles", "reactants_smiles"),
+    "products": ("products", "product_smiles", "products_smiles"),
+}
+
+
+def _resolve_reaction_side(reaction_meta: Optional[Dict], side: str) -> List[str]:
+    meta = reaction_meta or {}
+    for key in _REACTION_SIDE_ALIASES[side]:
+        value = meta.get(key)
+        if value:
+            return _normalize_reaction_side(value)
+    return []
+
 @dataclass
 class DFTResult:
     method: str
@@ -3080,16 +3102,25 @@ class DFTRefiner:
             # Accurate data provenance: ensure the database reflects if this was
             # a fully converged optimization or a watchdog-saved "best guess"
             is_fully_converged = res_r.converged and res_ts.converged
-            self.db.add_barrier(
-                reactants=_normalize_reaction_side(reaction_meta.get('reactants', [])),
-                products=_normalize_reaction_side(reaction_meta.get('products', [])),
-                family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
-                delta_g_kcal=barrier_kcal,
-                method=res_ts.method,
-                basis=self.refinement_basis,
-                solvation=self.solvent_name,
-                converged=is_fully_converged
-            )
+            db_reactants = _resolve_reaction_side(reaction_meta, "reactants")
+            db_products = _resolve_reaction_side(reaction_meta, "products")
+            if not db_reactants and not db_products:
+                logger.warning(
+                    "[DB] Not persisting barrier for %s: reaction_meta carries no reactant/product "
+                    "SMILES, so the row would have no addressable reaction identity.",
+                    reaction_meta.get('target_id', 'unknown'),
+                )
+            else:
+                self.db.add_barrier(
+                    reactants=db_reactants,
+                    products=db_products,
+                    family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
+                    delta_g_kcal=barrier_kcal,
+                    method=res_ts.method,
+                    basis=self.refinement_basis,
+                    solvation=self.solvent_name,
+                    converged=is_fully_converged
+                )
             
         return barrier_kcal
 
@@ -3104,16 +3135,25 @@ class DFTRefiner:
         barrier_kcal = self.mlp_barrier.estimate_barrier(reactant_xyz, product_xyz)
         
         if barrier_kcal is not None and self.db and reaction_meta:
-            self.db.add_barrier(
-                reactants=_normalize_reaction_side(reaction_meta.get('reactants', [])),
-                products=_normalize_reaction_side(reaction_meta.get('products', [])),
-                family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
-                delta_g_kcal=barrier_kcal,
-                method="mace-off",
-                basis="OFF23_medium", # Default model name
-                solvation=self.solvent_name,
-                converged=True
-            )
+            db_reactants = _resolve_reaction_side(reaction_meta, "reactants")
+            db_products = _resolve_reaction_side(reaction_meta, "products")
+            if not db_reactants and not db_products:
+                logger.warning(
+                    "[DB] Not persisting MLP barrier for %s: reaction_meta carries no "
+                    "reactant/product SMILES.",
+                    reaction_meta.get('target_id', 'unknown'),
+                )
+            else:
+                self.db.add_barrier(
+                    reactants=db_reactants,
+                    products=db_products,
+                    family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
+                    delta_g_kcal=barrier_kcal,
+                    method="mace-off",
+                    basis="OFF23_medium", # Default model name
+                    solvation=self.solvent_name,
+                    converged=True
+                )
             
         return barrier_kcal
 

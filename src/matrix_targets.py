@@ -113,24 +113,6 @@ def _load_panel() -> tuple[Dict[str, TargetCompound], Dict[str, str]]:
 
 MATRIX_TARGET_PANEL, MATRIX_TARGET_ALIASES = _load_panel()
 
-def export_matrix_target_panel(path: Path) -> None:
-    data = {}
-    for name, compound in MATRIX_TARGET_PANEL.items():
-        data[name] = {
-            "name": compound.name,
-            "display_name": compound.display_name,
-            "target_class": compound.target_class,
-            "evidence_state": compound.evidence_state,
-            "chemistry_family": compound.chemistry_family,
-            "supporting_families": list(compound.supporting_families),
-            "observable_panel_tags": list(compound.observable_panel_tags),
-            "panel_role": compound.panel_role,
-            "observable_kind": compound.observable_kind,
-            "modeling_regimes": list(compound.modeling_regimes),
-        }
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, sort_keys=True)
-
 def get_compound_evidence_state(name: str) -> str:
     n = _normalize_name(name)
     canonical = MATRIX_TARGET_ALIASES.get(n)

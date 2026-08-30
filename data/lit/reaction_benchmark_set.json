@@ -56,7 +56,7 @@
       "reference_barrier_kcal": 15.0,
       "barrier_uncertainty_kcal": 3.5,
       "reference_method": "literature_bounded_estimate",
-      "source": "Maillard_meat synthesis prior",
+      "source": "data/Gemini_Deep_Research/maillard_meat.md synthesis prior (LLM digest, not a paper)",
       "candidate_aliases": ["trapping", "thiol_capture"],
       "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
     },

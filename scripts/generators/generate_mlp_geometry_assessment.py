@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -13,8 +14,22 @@ from src.geometry_benchmark import build_geometry_benchmark_artifact, render_geo
 from src.geometry_benchmark_validator import build_geometry_assessment_artifact, render_geometry_assessment_markdown
 
 
-def main() -> None:
-    output_dir = ROOT / "results" / "validation"
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build the MLP geometry benchmark and its assessment; writes "
+            "results/validation/mlp_geometry_benchmark.{json,md} and "
+            "mlp_geometry_assessment.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
+    output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     benchmark_payload = build_geometry_benchmark_artifact()

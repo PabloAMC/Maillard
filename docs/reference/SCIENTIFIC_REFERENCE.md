@@ -258,5 +258,5 @@ If you want the machine-readable calibration payloads, read:
 
 If you want the missing-data packages that would close the main benchmark gaps, read:
 
-1. [../use_cases/pea_matrix_meaty_benchmark.md](../use_cases/pea_matrix_meaty_benchmark.md)
-2. [../use_cases/soy_matrix_meaty_benchmark.md](../use_cases/soy_matrix_meaty_benchmark.md)
+1. [../protocols/pea_matrix_meaty_benchmark.md](../protocols/pea_matrix_meaty_benchmark.md)
+2. [../protocols/soy_matrix_meaty_benchmark.md](../protocols/soy_matrix_meaty_benchmark.md)

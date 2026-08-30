@@ -37,7 +37,10 @@ xTB is a pathfinder, not a barrier authority. Its key failure modes for this che
 - **Open-shell sulfur radicals** — disulfide/trisulfide radical recombination is GFN2-xTB's
   weakest lane; treat as MLP-first.
 
-See `docs/architecture.md` for the full trust-tier context.
+See README's "Architecture and computational methods" section for the two-lane design, and
+its generated model card for the current, measured trust surface. (`docs/architecture.md` was
+folded into README and deleted on 2026-08-28, Wave S5: its trust table opened with "High
+trust — use freely", which the evidence had withdrawn.)
 
 The current official DFT-ready queue is:
 

@@ -47,7 +47,11 @@ def test_calibration_loop_improves_mae():
     # Mock the guardrails so we don't run pytest inside pytest
     import src.matrix_calibration_optimizer
     original_guardrail = src.matrix_calibration_optimizer._run_guardrail_tests
-    src.matrix_calibration_optimizer._run_guardrail_tests = lambda: True
+    # 2026-08-27 (Wave I): `_run_guardrail_tests` now takes the candidate
+    # constants (and optional test paths) so that the guardrail subprocess
+    # validates the CANDIDATE rather than the on-disk baseline -- see FIX 17 in
+    # src/matrix_calibration_optimizer.py. The stub has to accept them.
+    src.matrix_calibration_optimizer._run_guardrail_tests = lambda *args, **kwargs: True
 
     try:
         # Run calibration

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-scripts/generate_mace_training_data.py
+scripts/generators/generate_mace_training_data.py
 
 Phase 10: Fine-tuning data pipeline for MACE MLP.
 

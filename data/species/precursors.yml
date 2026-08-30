@@ -4,7 +4,26 @@
 # These are the starting materials for RMG-Py reaction network generation.
 # SMILES validated against PubChem.
 #
-# Categories: amino_acids | sugars | exogenous_precursors
+# Categories: amino_acids | sugars | exogenous_precursors | lipids |
+#             maillard_intermediates
+#
+# 2026-08-28 (Wave X) — `maillard_intermediates` added.  Every species in that
+# block is a MID-CASCADE compound that the reaction network already builds and
+# consumes internally; the block exists so those compounds can also be FED as
+# precursors, which is the only way the step-level model systems of Hofmann &
+# Schieberle 1998 (10.1021/jf9705983, Tables 3, 4, 6, 7, 8 and 10) can be
+# executed at all.  Two rules that make this honest and are enforced by
+# tests/scientific/test_wave_x_step_level_2026_08.py:
+#   * every SMILES here is byte-identical, after RDKit canonicalisation, to the
+#     form the engine already uses internally (src/smirks_engine.py constants or
+#     src/curated_pathways.py species).  A precursor that canonicalises to a
+#     DIFFERENT string from the engine's own copy would be a silent duplicate:
+#     the pool would carry two molecules where chemistry has one, and the
+#     templates match on canonical SMILES, so the fed copy would be inert.
+#   * being resolvable is NOT the same as being reachable.  Adding a name here
+#     lets the resolver answer; whether the network has a STEP that consumes it
+#     is a separate question, measured per system and recorded in
+#     tasks/audit_remediation.md "## Wave X".
 
 amino_acids:
 
@@ -178,6 +197,90 @@ exogenous_precursors:
     pathway_relevance: ["C — S-Maillard"]
     plant_matrix_status: "added exogenously; also present in trace amounts in pea/soy"
     notes: "Optimal heating at 131.53°C, 94.85 min, pH 4.79 maximises meat-like odorants. Preferable to free Cys alone for sensory quality."
+
+maillard_intermediates:
+
+  # ── Wave X (2026-08-28) ────────────────────────────────────────────────
+  # Formulae and canonical SMILES RDKit-verified; InChIKeys printed by the
+  # verification and reproduced here so a future reader can re-check without
+  # re-running it.  "engine copy" names the constant this SMILES must equal.
+
+  - name: "Hydroxyacetaldehyde"
+    aliases: ["glycolaldehyde", "hydroxyethanal"]
+    cas: "141-46-8"
+    smiles: "OCC=O"
+    formula: "C2H4O2"
+    inchikey: "WGCNASOHLSPBMP-UHFFFAOYSA-N"
+    engine_copy: "src/reaction_templates.py::_enolisation_steps p2 (label 'glycolaldehyde', SMILES 'O=CCO'); identical canonical form 'O=CCO'"
+    role: "C2 half of the Hofmann C2+C3 recombination lane; retro-aldol fragment of the pentose 3-deoxyosone"
+    pathway_relevance: ["C — S-Maillard", "A — Core Maillard Cascade"]
+    notes: "Fed as a precursor in Hofmann & Schieberle 1998 Tables 6, 8 and 10 (1 mmol in 50 mL). The network already emits it from the pentose 3-deoxyosone and, in hexose systems, via glyoxal -> Strecker -> deamination (Wave P)."
+
+  - name: "2-Oxopropanal"
+    aliases: ["pyruvaldehyde", "methylglyoxal", "2 oxopropanal"]
+    cas: "78-98-8"
+    smiles: "CC(=O)C=O"
+    formula: "C3H4O2"
+    inchikey: "AIJULSRZWUXGPQ-UHFFFAOYSA-N"
+    engine_copy: "src/curated_pathways.py::PYRUVALDEHYDE and src/reaction_templates.py::_enolisation_steps product_23 — both 'CC(=O)C=O'"
+    role: "C3 alpha-dicarbonyl; H2S acceptor that gives mercapto-2-propanone"
+    pathway_relevance: ["C — S-Maillard", "A — Core Maillard Cascade"]
+    notes: "Fed as a precursor in Hofmann & Schieberle 1998 Tables 6 and 7. NOT a new molecule for this repository - the same canonical form is already emitted by 2,3-enolisation and consumed by Strecker degradation."
+
+  - name: "Mercapto-2-propanone"
+    aliases: ["1-mercapto-2-propanone", "mercaptopropanone", "1 mercapto 2 propanone"]
+    cas: "24653-75-6"
+    smiles: "CC(=O)CS"
+    formula: "C3H6OS"
+    inchikey: "USVCRBGYQRVTNK-UHFFFAOYSA-N"
+    engine_copy: "src/smirks_engine.py::_MERCAPTO_2_PROPANONE (Wave P) — 'CC(=O)CS'"
+    role: "C3 sulfur-bearing half of the Hofmann C2+C3 lane; the highest-yielding measured MFT precursor pair"
+    pathway_relevance: ["C — S-Maillard"]
+    notes: "Fed as a precursor in Hofmann & Schieberle 1998 Tables 8 and 10; also the MEASURED product of Table 7 and Table 9. Wave P added it as an internal intermediate; Wave X makes it feedable."
+
+  - name: "Norfuraneol"
+    aliases: ["nf", "4-hydroxy-5-methyl-3(2h)-furanone", "4 hydroxy 5 methyl 3 2h furanone"]
+    cas: "19322-27-1"
+    smiles: "CC1=C(O)C(=O)CO1"
+    formula: "C5H6O3"
+    inchikey: "DLVYTANECMRFGX-UHFFFAOYSA-N"
+    engine_copy: "src/smirks_engine.py::_NORFURANEOL_CANONICAL — 'CC1=C(O)C(=O)CO1'"
+    role: "Major pentose degradation product; SYNTHETIC precursor of MFT when fed with H2S (Hofmann Table 4), a MINOR in-situ route (Cerny & Davidek 2003)"
+    pathway_relevance: ["C — S-Maillard"]
+    notes: "READ THE WAVE X LEDGER ENTRY BEFORE TOUCHING THIS. Wave N retired the in-situ norfuraneol -> MFT step on isotope evidence; Wave X re-added it as a SLOW PARALLEL route constrained by Hofmann Table 4 and guarded by an isotope-share regression test. Feeding norfuraneol directly is exactly the experiment Hofmann Table 4 and Table 10 performed."
+
+  - name: "Furan-2-aldehyde"
+    aliases: ["furfural", "2-furaldehyde", "fa"]
+    cas: "98-01-1"
+    smiles: "O=Cc1ccco1"
+    formula: "C5H4O2"
+    inchikey: "HYBBIBNJHNGZAN-UHFFFAOYSA-N"
+    engine_copy: "src/curated_pathways.py::FURFURAL and src/reaction_templates.py::_enolisation_steps product_12 — both 'O=Cc1ccco1'"
+    role: "The dominant FFT precursor: 60x ribose and 7x the 3-deoxyosone in Hofmann Table 3"
+    pathway_relevance: ["C — S-Maillard", "A — Core Maillard Cascade"]
+    notes: "Already a network PRODUCT; Wave X makes it resolvable as an INPUT. The `Thiol_Addition` templates used to select their substrate by the literal label 'furfural', so a fed furan-2-aldehyde would have been inert; Wave X changed that match to canonical SMILES."
+
+  - name: "3-Deoxyribosulose"
+    aliases: ["3-deoxypentosone", "3-deoxypentulose", "3 deoxyribosulose", "3-deoxy-d-erythro-pentos-2-ulose"]
+    cas: null
+    smiles: "O=CC(=O)CC(O)CO"
+    formula: "C5H8O4"
+    inchikey: "QFNWRVAZZYFNCF-UHFFFAOYSA-N"
+    engine_copy: "src/curated_pathways.py::DEOXYOSONE_3 and src/reaction_templates.py::_enolisation_steps deoxy_smi (pentose branch) — both 'O=CC(=O)CC(O)CO'"
+    role: "The 1,2-enolisation branch point of pentoses; cyclodehydrates to furan-2-aldehyde"
+    pathway_relevance: ["A — Core Maillard Cascade", "C — S-Maillard"]
+    notes: "NO CAS is asserted: the paper says '3-deoxyribosulose' and the repository has no verified registry number for the open-chain 3-deoxy-pentos-2-ulose. A null is honest; a guessed CAS would not be. Fed as a precursor in Hofmann Table 3."
+
+  - name: "Hydrogen sulfide"
+    aliases: ["h2s", "hydrogen sulphide", "sulfide"]
+    cas: "7783-06-4"
+    smiles: "S"
+    formula: "H2S"
+    inchikey: "RWSOTUBLDIXVET-UHFFFAOYSA-N"
+    engine_copy: "matched throughout src/reaction_templates.py as `s.smiles == 'S'`; src/curated_pathways.py::H2S"
+    role: "The sulfur donor of every step-level row in Hofmann & Schieberle 1998"
+    pathway_relevance: ["C — S-Maillard"]
+    notes: "In every other benchmark in this repository H2S is GENERATED in situ from cysteine (Cysteine_Degradation / Beta_Elimination). Hofmann's Tables 3, 4 and 7 feed it directly at a stated 1 or 2 mmol in 50 mL, so it has to be an input. CAVEAT CARRIED INTO EVERY ROW THAT USES IT: at 145 degC in a closed autoclave a large share of the charged H2S is in the headspace, and the engine has no gas-liquid partition term, so the aqueous H2S the model reacts with is an UPPER BOUND on the real one. Recorded, not corrected."
 
 lipids:
 

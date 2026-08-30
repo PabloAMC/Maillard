@@ -85,6 +85,8 @@ the maillard conda env (Python 3.12) in the validated container.
   objective-progress                 Strategic objective progress.
   scope-guard                        Out-of-scope demotion guard.
   family-priority                    Matrix family priority ranking.
+  family-implementation              Which of the 16 lanes actually carry reaction templates
+                                     (derived by engine enumeration; backs the README table).
   family-next-action                 Per-family next-action recommendation.
   family-promotion-state             Family promotion state.
   family-ingestion-plan              Family ingestion plan.
@@ -275,6 +277,7 @@ run_generator_alias() {
     family-priority) run_generator_script generate_matrix_family_priority_ranking ;;
     family-next-action) run_generator_script generate_matrix_family_next_action ;;
     scope-guard) run_generator_script generate_scope_gap_guard ;;
+    family-implementation) run_generator_script generate_family_implementation_status ;;
   esac
 }
 
@@ -395,7 +398,7 @@ quickstart_lane() {
     --report --output-dir results/quickstart/baseline"
   echo "[quickstart] 2/2 baseline vs cysteine-enrichment comparison -> results/quickstart/comparison/"
   run_in_env "python scripts/run_campaign.py \
-    --names 'Baseline,Cysteine Enrichment' \
+    --names 'Soy/Pea Base (Untreated),Cysteine Enrichment (Basic)' \
     --ph 5.5 --temp 105 \
     --target-tag meaty --minimize-tag beany \
     --campaign-name 'Quickstart pea-isolate head-to-head' \
@@ -472,7 +475,7 @@ case "$cmd" in
     fi
     targets_snapshot "$1" "${2:-desirable}"
     ;;
-  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary|objective-progress|refinement-watchlist|external-inventory|family-priority|family-next-action|scope-guard)
+  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary|objective-progress|refinement-watchlist|external-inventory|family-priority|family-next-action|scope-guard|family-implementation)
     run_generator_alias "$cmd"
     ;;
   ingest)

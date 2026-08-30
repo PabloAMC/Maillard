@@ -181,7 +181,13 @@ def main(output_dir: str = "results/validation") -> None:
 
     if not results:
         print(f"  No completed DFT results found in {DFT_OUTPUT_DIR}")
-        print("  Run scripts/run_dft_c4_c5.py first.")
+        # 2026-08-27 (Wave R): this used to read "Run scripts/run_dft_c4_c5.py first."
+        # No such script exists, in the working tree or anywhere in git history, so the
+        # instruction sent a stuck user to a file that was never written. Stating the
+        # gap is more useful than naming a phantom runner.
+        print("  No runner for the C4/C5 DFT jobs exists in this repository "
+              "(scripts/run_dft_c4_c5.py has never been written); the inputs must be "
+              "produced by hand before this ingester can read them.")
         # Still write an empty report so the pipeline doesn't fail
         report_json = {"ingested": 0, "results": []}
         report_md = "# DFT C4/C5 Ingestion Report\n\nNo DFT results available yet.\n"

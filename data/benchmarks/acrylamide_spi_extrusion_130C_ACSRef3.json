@@ -27,16 +27,35 @@
     "execution_path": "free_precursor",
     "notes": "Short-residence extrusion-context acrylamide benchmark. The literature point is wired through the SME-corrected effective temperature surface introduced in Priority 5.1."
   },
+  "model_change_note": {
+    "date": "2026-08-27",
+    "status": "unchanged_now_expected_to_fail",
+    "what_changed": "Nothing in this file. src/extrusion.py's SME response was DESATURATED (Wave G4, audit item 3.1): every SME quantity in that module used to be constant across the entire real 300-800 kJ/kg twin-screw window, and the temperature offset in particular hit its 40 C cap at 250 kJ/kg -- exactly this benchmark's SME. The offset is now an explicit melt energy balance dT = retained_fraction * SME / cp with a tanh soft ceiling, which at 250 kJ/kg / LME gives 18.04 C instead of 40 C. Effective temperature therefore fell 170.0 C -> 148.0 C. On the Knol 2009 lumped acrylamide anchor (Ea = 129 kJ/mol, 10.1016/j.foodchem.2009.11.049) that is a factor exp(-(Ea/R)(1/421.2 - 1/443.2)) = 0.16, i.e. 6.2x -- which is the whole of the observed move.",
+    "expected_miss": "This benchmark is now EXPECTED TO FAIL. Predicted acrylamide 9.75 ppb against the 62.62 ppb reference: ratio 6.42x under, against an unchanged 1.5x / 0.2 dex contract. Before the desaturation it read 1.04x.",
+    "policy": "The contract tolerance is deliberately UNCHANGED and the SME model is deliberately NOT bent back. The old 1.04x agreement was read off a saturated surface: the 40 C offset was the cap, not a computed value, so this benchmark was matching a constant rather than a model. Recovering agreement means either a real calorimetric anchor for the melt heat capacity and retained fraction (both ESTIMATED TIER, see src/extrusion.py) or a correctly SME-resolved acrylamide dataset -- not a wider tolerance."
+  },
   "validation_contract": {
     "scale_thresholds": {
       "max_ratio": 1.5,
       "mean_abs_log10_error": 0.2
     }
   },
+  "content_correction_note": {
+    "date": "2026-08-27",
+    "wave": "Wave K/M content verification",
+    "verified_against": "Ma et al. 2024, Int J Mol Sci 25:8668 (PMC11354377), Figure 2D, read directly from the published figure image",
+    "corrections": [
+      "acrylamide 62.62 ppb -> 150 ppb (figure_readoff). The paper reports acrylamide ONLY in Figure 2 (no table); its text says the HIGHEST acrylamide content was at 130 C, and the Fig 2D bar for 130 C reads ~150 ug/kg on a 0-160 axis. The previous 62.62 ppb matches no bar in any panel and no derivable statistic (companion Fu 2023 mean/median/geometric-mean all ruled out); its origin is unknown. The benchmark_id's 'ACSRef3' suggests the value predates the current MDPI DOI and was never re-checked against it.",
+      "uncertainty_pct 15 -> 20: a bar-chart readoff cannot support a 15% claim; 20% covers the readoff resolution plus the printed SD whiskers.",
+      "NOTE: the model_change_note above still quotes the old 62.62 reference in its expected_miss line; with the corrected 150 ppb reference the expected miss WIDENS (predicted 9.75 ppb -> ~15.4x under). The benchmark remains expected_to_fail for the same desaturation reason."
+    ],
+    "value_provenance": "figure_readoff",
+    "report": "results/validation/content_verification_wave_k.md"
+  },
   "measured_volatiles": {
     "acrylamide": {
-      "conc_ppb": 62.62,
-      "uncertainty_pct": 15
+      "conc_ppb": 150,
+      "uncertainty_pct": 20
     }
   }
 }

@@ -1,0 +1,102 @@
+{
+  "active_learning_requests": [
+    {
+      "request_id": "doe_request_intact_spi_ppi_quantified_mft_fft",
+      "priority": "HIGH",
+      "target_chemistry_family": "amino_acid_sugar_core",
+      "observables": [
+        "core_meaty",
+        "benchmark_gap"
+      ],
+      "justification": "No benchmark-eligible paper reports intact aqueous SPI or PPI plus cysteine and ribose with absolute MFT and FFT quantification.",
+      "suggested_next_step": "Run the primary wet-lab benchmark protocol already defined in the repo.",
+      "experimental_design": {
+        "method": "Multi-factorial Quantitative Headspace SIDA",
+        "factors": [
+          "Precursor Load (1x, 5x)",
+          "Temperature (90C, 130C)",
+          "Matrix (SPI, PPI)"
+        ],
+        "instructions": "Standard PBMA formulation baseline. Use Safe+SPME extraction to capture both highly volatile (H2S) and semi-volatile (pyrazines) simultaneously with SIDA quantitation."
+      }
+    },
+    {
+      "request_id": "doe_request_pipi_spi_pyrazine_absolute_quantitation",
+      "priority": "MEDIUM",
+      "target_chemistry_family": "amino_acid_sugar_core",
+      "observables": [
+        "pyrazine",
+        "benchmark_gap"
+      ],
+      "justification": "PPI and SPI pyrazine studies in the SLR provide relative areas, OAVs, or non-matrix analogues rather than absolute internal-standard quantitation.",
+      "suggested_next_step": "Add pyrazines to the same GC-MS internal-standard panel as the primary benchmark experiment.",
+      "experimental_design": {
+        "method": "SIDA GC-MS/O",
+        "factors": [
+          "Temperature (95C, 120C)",
+          "Time (10m, 30m)"
+        ],
+        "instructions": "Prepare standard aqueous target matrix. Add isotopically labeled internal standards (e.g. 13C-MFT, d3-methional) before extraction. Heat uniformly."
+      }
+    },
+    {
+      "request_id": "doe_request_pipi_spi_furanone_reference_band",
+      "priority": "MEDIUM",
+      "target_chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "observables": [
+        "furanone",
+        "severity_marker",
+        "benchmark_gap"
+      ],
+      "justification": "HEMF and DMHF are mechanistically supported but not measured in PPI or SPI ribose systems.",
+      "suggested_next_step": "Add HEMF and DMHF to the primary benchmark analytical panel.",
+      "experimental_design": {
+        "method": "Targeted GC-MS (Furanone band)",
+        "factors": [
+          "Water Activity",
+          "pH (5.5, 6.5)"
+        ],
+        "instructions": "Focus resolution on HEMF and DMHF specifically. Ensure SPME fiber captures polar furanones effectively without early saturation by aldehydes."
+      }
+    },
+    {
+      "request_id": "doe_request_aqueous_pipi_spi_acrylamide_kinetics",
+      "priority": "MEDIUM",
+      "target_chemistry_family": "off_note_and_maillard_suppression",
+      "observables": [
+        "safety",
+        "acrylamide",
+        "benchmark_gap"
+      ],
+      "justification": "Acrylamide kinetics are available in free systems and dry matrices, not in aqueous SPI or PPI benchmark-like conditions.",
+      "suggested_next_step": "Measure a small T and t design in wet SPI and PPI with acrylamide and free asparagine.",
+      "experimental_design": {
+        "method": "Time-course LC-MS/MS",
+        "factors": [
+          "Time (0, 5, 10, 20, 60 min)",
+          "Temp (80C, 100C, 120C)"
+        ],
+        "instructions": "Sample dynamically during the heating phase to capture pseudo-first-order formation rates. Quench immediately in ice bath."
+      }
+    },
+    {
+      "request_id": "doe_request_ellman_opa_dsc_same_experiment",
+      "priority": "MEDIUM",
+      "target_chemistry_family": "alternative_protein_matrix_scope",
+      "observables": [
+        "matrix_state_support",
+        "process_state_gap"
+      ],
+      "justification": "No open study simultaneously measures free SH, free amino groups, and denaturation in the same non-hydrolyzed PPI or SPI thermal experiment.",
+      "suggested_next_step": "Run a compact process-state calibration experiment with Ellman, OPA, and DSC or equivalent.",
+      "experimental_design": {
+        "method": "Simultaneous Ellman/OPA and DSC",
+        "factors": [
+          "Heating time",
+          "Moisture Content (Extrusion regime)"
+        ],
+        "instructions": "Run Differential Scanning Calorimetry alongside Ellman's reagent for free thiols and OPA for primary amines on the exact same homogenized samples to eliminate lot-to-lot variance."
+      }
+    }
+  ]
+}

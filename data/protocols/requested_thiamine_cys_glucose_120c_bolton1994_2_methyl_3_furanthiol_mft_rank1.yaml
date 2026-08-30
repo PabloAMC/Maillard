@@ -1,0 +1,54 @@
+experiment_id: requested_thiamine_cys_glucose_120c_bolton1994_2_methyl_3_furanthiol_mft_rank1
+status: pending_lab
+source_kind: model_requested_experiment
+protein_type: free
+process_state: aqueous_pre_extrusion_model
+matrix_format: null
+conditions:
+  temp_C: 120.0
+  ph: 5.0
+  water_activity: 0.98
+  time_min: 60.0
+formulation:
+  precursors:
+    Thiamine:
+      concentration_mM: 1.0
+    L-Cysteine:
+      concentration_mM: 10.0
+    D-Glucose:
+      concentration_mM: 10.0
+measured_volatiles:
+  2-Methyl-3-furanthiol (MFT):
+    conc_ppb: null
+    uncertainty_pct: null
+    _target_role: primary_request_target
+request_metadata:
+  originating_voi_rank: 1
+  voi_score: 13.359718184695032
+  voi_rationale: measured outside 90% CI by 2.83 dex; CI width 0.85 dex; ≈2e+03× ODT
+    (decision_relevance=3.27); critical meaty odorant in a FREE-PRECURSOR system —
+    the open question is absolute yield vs precursor dose and temperature, not matrix
+    transfer
+  envelope_miss_log10: 2.832124137794129
+  ci_width_log10: 0.8495325628804017
+  decision_relevance: 3.26884531229258
+  p5_predicted_ppb: 0.0027057436733029894
+  p50_predicted_ppb: 0.017803186847516493
+  p95_predicted_ppb: 0.01913459235943245
+  previous_measured_ppb: 13.0
+  odour_threshold_ug_per_kg: 0.007
+  suggested_doe_template: free_precursor_sulfur_yield
+  goal: null
+  budget_label: null
+benchmark_alignment:
+  target_benchmark_id: thiamine_cys_glucose_120C_Bolton1994
+  notes: Re-measure to constrain the model envelope at this benchmark.
+analytical_context:
+  headspace_method: HS-SPME-GC-MS
+  quantification_mode: internal_standard_calibrated
+  replicates: 3
+  non_detect_policy: report_lod_and_do_not_backfill
+  internal_standards:
+  - 13C-2-methyl-3-furanthiol
+  notes: Defaults emitted by next-experiment; lab is expected to confirm or override
+    before returning the intake YAML.

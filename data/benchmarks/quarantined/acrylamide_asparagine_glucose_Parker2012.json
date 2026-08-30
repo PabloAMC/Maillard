@@ -1,0 +1,43 @@
+{
+    "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
+    "source_doi": "10.1021/jf3032779",
+    "source_metadata": {
+        "quarantined": true,
+        "quarantine_reason": "DOI 10.1021/jf3032779 does not resolve (CrossRef HTTP 404) and no source could be identified. The real Parker 2012 acrylamide paper (10.1021/jf302415n) is a kinetic model of COMMERCIAL French fries during finish frying, not a 10 mM asparagine/glucose aqueous model system, so the DOI cannot simply be repointed. The file also carries the TIGHTEST validation contract in the whole collection (max_ratio 1.05, mean_abs_log10_error 0.02) -- a tolerance that narrow is a fitting tell, not an earned measurement uncertainty. Same pattern as the three files quarantined earlier on this date.",
+        "quarantine_date": "2026-08-26"
+    },
+    "tier": "PRIMARY",
+    "benchmark_type": "safety",
+    "conditions": {
+        "temp_C": 180,
+        "time_min": 20,
+        "ph": 6.8,
+        "water_activity": 0.3
+    },
+    "precursors": {
+        "L-Asparagine": {
+            "concentration_mM": 10.0
+        },
+        "D-Glucose": {
+            "concentration_mM": 10.0
+        }
+    },
+    "measured_volatiles": {
+        "acrylamide": {
+            "conc_ppb": 1500.0,
+            "uncertainty_pct": 20
+        }
+    },
+    "metadata": {
+        "tier": "PRIMARY",
+        "family": "safety",
+        "execution_path": "free_precursor",
+        "notes": "Acrylamide formation/elimination benchmark at 180°C."
+    },
+    "validation_contract": {
+        "scale_thresholds": {
+            "max_ratio": 1.05,
+            "mean_abs_log10_error": 0.02
+        }
+    }
+}

@@ -17,11 +17,29 @@ formulation:
 measured_volatiles:
   hexanal:
     conc_ppb: 324.0
+    value_provenance: derived_from_oav_and_repo_threshold
+    value_provenance_note: '2026-08-27 (Wave I, cold-start red-team finding): this
+      value is NOT an independently measured concentration in this repo''s chain of
+      custody. The arithmetic is exact: OAV 72 (the value the intake registry records
+      for this anchor, the roasted-pea carryover point, 324 ug/kg) x 4.5 ppb, where
+      4.5 ppb is THIS REPO''S OWN hexanal odour-detection threshold -- itself a compilation-level
+      number that has never been read off a primary table (see the hexanal ODT anchor''s
+      harmonization_note in this file; published aqueous hexanal ODTs span 0.3-14
+      ug/L). 72 x 4.5 = 324.0 to the digit. It is therefore possible that the source
+      reports 324 ug/kg directly and the OAV is the derived quantity -- but that has
+      NOT been confirmed against the paper, and the exact divisibility by our own
+      unsourced constant is precisely why the two readings cannot be told apart from
+      inside the repo. Scored as a hold-out point it is a consistency check against
+      our own threshold, not an external measurement, and it MOVES if that threshold
+      is ever corrected.'
 provenance:
   origin: external_literature
   source_reference: Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727
   source_doi: 10.1021/acs.jafc.9b07711
-  measurement_date: '2020-01-01'
+  measurement_date: not_applicable
+  measurement_date_note: This bundle is SYNTHESIZED from published anchors; no measurement
+    date exists. Until 2026-08-27 this field carried a fabricated '<publication year>-01-01'.
+  source_publication_year: '2020'
   notes: 'External validation hold-out synthesized from flavor_reference_payloads.json;
     never use for calibration or promotion. bi_2020_roasted_pea_hexanal_point: report_roasting_driven_hexanal_drop_in_raw_pea_ingredients'
 benchmark_alignment:

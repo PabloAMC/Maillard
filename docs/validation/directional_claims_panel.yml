@@ -1,0 +1,1824 @@
+# Directional-accuracy claims panel
+#
+# WHY THIS FILE EXISTS
+# --------------------
+# The model's ABSOLUTE accuracy is documented and poor (see AUDIT.md and
+# results/validation/). Its actual use case is ORDINAL: screening formulations,
+# ranking off-flavour markers, choosing a direction to move a process knob.
+# Nobody had ever measured whether it gets DIRECTIONS right. This panel is the
+# evidence base for that question.
+#
+# EVERY claim here carries a verbatim quote from a source that was actually
+# retrieved (file or URL recorded under `source.retrieved_from`). No claim is
+# written from memory. Claims that the current model cannot express are kept in
+# the file with `evaluable: false` and a reason, because "the machinery cannot
+# say" is itself a finding.
+#
+# FIT STATUS (the honesty axis)
+# -----------------------------
+#   independent          no side of the comparison reproduces a declared fit
+#                        target. These form the HEADLINE score.
+#   fit_system_overlap   the comparison lives in the same chemical system as a
+#                        per-row fit target, but is a RATIO the fit's free
+#                        parameters cancel out of (e.g. a pH sweep through a
+#                        system whose absolute scale was fitted at one pH, where
+#                        no pH series was ever fitted). Reported separately and
+#                        added to a secondary "screening" score.
+#   fit_adjacent         a declared fit target with per-row leverage is literally
+#                        one side of the comparison. EXCLUDED from the headline.
+#                        Cross-check against src/fit_target_index.py and
+#                        results/validation/*refit*.json.
+#
+# SCORING
+# -------
+#   scratchpad runner (not in-repo, deliberately): builds a synthetic benchmark
+#   payload per condition and calls src.benchmark_validation.evaluate_benchmark_payload.
+#   Predictions closer than 5% relative are scored "flat" (no separation), which
+#   counts as a MISS against a claim that asserts an ordering.
+#
+# QUOTE FIDELITY
+# --------------
+# Every `source.quote` was checked programmatically against the retrieved source
+# text. Where a quote is not a contiguous verbatim string, `source.quote_form`
+# says why. The three forms that occur:
+#   verbatim              (default, no quote_form key) - exact contiguous text.
+#   verbatim_page_elided  - a running page header sits inside the sentence in the
+#                           scanned text ("...(Hofmann and | 194 Flavour Development,
+#                           Analysis and Perception in Food and Beverages | Schieberle,
+#                           1997)"); the header is dropped, nothing else changed.
+#   table_row_reformatted - numbers are verbatim from the source table; column
+#                           separators were rewritten as "|" and, where the PDF
+#                           extraction put the Tukey significance letters on their own
+#                           line ABOVE the data row, the letters were re-attached to
+#                           their columns in reading order. Which rows this affects is
+#                           stated per claim.
+#   transliterated        - Greek letters written out (alpha-, epsilon-); otherwise exact.
+#
+# Generated: 2026-08-27, Wave S2. Nothing in the model was tuned to build this.
+
+schema_version: 1
+generated: "2026-08-27"
+wave: "S2 (directional accuracy)"
+flat_tolerance_pct: 5
+
+sources:
+  cerny2015:
+    citation: "Cerny, C. (2015). The role of sulfur chemistry in thermal generation of aroma. In: Flavour Development, Analysis and Perception in Food and Beverages, Woodhead/Elsevier, Ch. 9, pp. 187-210."
+    doi: "10.1016/b978-1-78242-103-0.00009-6"
+    access: full_text
+    retrieved_from: "scratchpad/cerny_chapter.txt (full chapter text); DOI/pagination confirmed via Crossref"
+  hofmann1998:
+    citation: "Hofmann, T. & Schieberle, P. (1998). Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol. J. Agric. Food Chem. 46(1), 235-241."
+    doi: "10.1021/jf9705983"
+    access: full_text
+    retrieved_from: >-
+      data/articles/hofmann1998.pdf (full text, obtained by the owner via interlibrary loan
+      2026-08-28 and read directly; the PDF is gitignored and not committed). UPDATED IN WAVE W.
+      This entry previously read `access: abstract` / "OpenAlex abstract_inverted_index
+      (reconstructed); body PAYWALLED and never retrieved - see directional_accuracy_report.md
+      Mission 2b". The body is now retrieved, all ten tables are transcribed, and every claim
+      citing this source below is quoted from the article text rather than from the abstract.
+      Claims SUG-01 and SUG-02 still quote the ABSTRACT sentence, which is verbatim and
+      correct; the new HOF-* claims quote the tables the abstract was summarising.
+  mottram2002:
+    citation: "Mottram, D. S. & Nobrega, I. C. C. (2002). Formation of Sulfur Aroma Compounds in Reaction Mixtures Containing Cysteine and Three Different Forms of Ribose. J. Agric. Food Chem. 50(14), 4080-4086."
+    doi: "10.1021/jf0200826"
+    access: full_text
+    retrieved_from: >-
+      data/articles/mottram2002.pdf (full text, obtained by the owner via interlibrary loan
+      2026-08-28 and read directly; the PDF is gitignored and not committed).
+    ordinal_only: true
+    ordinal_only_reason: >-
+      SETTLED FROM THE METHODS, 2026-08-28 (Wave W). Wave S2b predicted at ~85% confidence
+      that this paper's values were Tenax-relative rather than absolute. CONFIRMED, and the
+      paper says so itself in one sentence, quoted verbatim: "Approximate quantities of the
+      volatiles in the concentrated headspace from each sample were estimated by comparison
+      of their peak areas, in the total ion current chromatogram, with that of the
+      1,2-dichlorobenzene internal standard using a response factor of 1. This allowed
+      comparison of the relative contributions the volatiles made to the headspaces of the
+      different systems BUT DID NOT PROVIDE ABSOLUTE CONCENTRATIONS IN THE AQUEOUS SOLUTIONS."
+      (Emphasis added; the words are the authors'.) Table 1's own footnote a reads
+      "Approximate quantities in headspace (ng/mmol of sugar)". So this source can NEVER
+      become an absolute benchmark in this repository, at any future date, on any amount of
+      further work - the quantity it reports is not the quantity the model predicts. It is
+      admissible here and only here. Reported precision, for the record: "The mean coefficient
+      of variance (CV) for quantities of individual components was 22% and, with the exception
+      of some compounds that were present in relatively small amounts, no compound showed a
+      CV >40%."
+    protocol_note: >-
+      Conditions, verbatim: "Separate solutions of cysteine (0.1 M) and the ribose-containing
+      compound (0.1 M) were prepared using water or the appropriate buffer. ... Equal
+      quantities of the solutions were mixed, and 6.0 mL of the mixture (i.e., 0.3 mmol of
+      each reactant) was transferred to the reaction ampules. The ampules were flame-sealed
+      and then heated in a CERTOclav autoclave (Kelomat, Traun, Austria) for 30 min at 140
+      degC under a pressure of 0.28 MPa (2.8 bar)." So 50 mM cysteine + 50 mM sugar, 140 degC,
+      30 min. THIS CONFIRMS WAVE S2b's SECOND FINDING: the retired benchmark
+      data/benchmarks/cys_ribose_140C_Hofmann1998.json's conditions block (140 degC / 30 min /
+      equimolar) is Mottram & Nobrega's protocol attached to Hofmann & Schieberle's citation.
+      One detail Wave S2b could not check is now checkable and is ALSO wrong: the retired file
+      declares 10 mM, while Mottram & Nobrega's system is 50 mM. The conditions block was not
+      even a faithful copy of the protocol it was borrowed from.
+  ma2024:
+    citation: "Ma, Y., Fu, S., Cheng, K.-W., Liu, B., et al. (2024). Impact of Extrusion Parameters on the Formation of CML, CEL and Acrylamide in Plant-Based Meat Analogues. Int. J. Mol. Sci. 25(16), 8668."
+    doi: "10.3390/ijms25168668"
+    access: full_text
+    retrieved_from: "scratchpad/ma2024.xml (Europe PMC fullTextXML, PMC11354377)"
+  pratapsingh2021:
+    citation: "Pratap-Singh, A. et al. (2021). A Rapid GC/MS Technique for Determining Odour Activity Values of Volatile Compounds in Plant Proteins: Soy, and Allergen-Free Pea and Brown Rice Protein. Molecules 26(13), 4104."
+    doi: "10.3390/molecules26134104"
+    access: full_text
+    retrieved_from: "scratchpad/ps2021.xml (Europe PMC fullTextXML, PMC8271896), Table 1"
+  trikusuma2018:
+    citation: "Trikusuma, M. (2018). Identification of Aroma Compounds in Pea Protein UHT Beverages. MS thesis, The Ohio State University (advisor D.G. Peterson). Published as Trikusuma, Paravisini & Peterson, Food Chemistry 312:126082 (2020)."
+    doi: "10.1016/j.foodchem.2019.126082"
+    access: full_text
+    retrieved_from: "scratchpad/trik_thesis.pdf/.txt via OhioLINK ETD accession osu1531495328317918 (open access); Table 6, p.35"
+
+  ni2021:
+    citation: "Ni, H. et al. (2021). Effects of different sugars on the flavour and antioxidant activity of Maillard reaction products of camellia seed meal hydrolysates. Food Chemistry: X 11, 100127."
+    doi: "10.1016/j.fochx.2021.100127"
+    access: full_text_and_table
+    retrieved_from: "scratchpad/dirlit_camellia_sugars.txt (Europe PMC full text + Table 3); column order R-MRPs | X-MRPs | G-MRPs | F-MRPs"
+  fallico2022:
+    citation: "Fallico, B. et al. (2022). HMF formation in cookies as a function of sugar type, baking temperature and time. Foods 11(24), 4066."
+    doi: "10.3390/foods11244066"
+    access: full_text_and_table
+    retrieved_from: "scratchpad/dirlit_cookies_sugars.txt (Europe PMC full text + Table 2)"
+  laemont2023:
+    citation: "Laemont, K. & Barringer, S.A. (2023). Effect of pH, Reducing Sugar and Whey Protein on Volatile Formation in Roasted Sunflower Seeds. Foods 12(22), 4155."
+    doi: "10.3390/foods12224155"
+    access: full_text_and_table
+    retrieved_from: "scratchpad/dirlit_sunflower_pH_volatiles.txt (Europe PMC full text + Table 2); columns Raw | pH 4 | pH 7 | pH 9 | 20% Glucose | 20% Fructose | 17% Whey Isolate | 17% Whey Concentrate, ppb"
+  goncuoglu2026:
+    citation: "Goncuoglu Tas, N. et al. (2026). Volatile, acrylamide and lipid-oxidation profile of cornmeal / pea-protein-isolate extrudates. Food Chemistry: X 36, 104019."
+    doi: "10.1016/j.fochx.2026.104019"
+    access: full_text
+    retrieved_from: "scratchpad/dirlit_pea_extrudate_acrylamide.txt (Europe PMC full text)"
+  elhosry2025:
+    citation: "El Hosry, L. et al. (2025). The Maillard reaction in foods: reaction parameters (review). Foods 14(11), 1881."
+    doi: "10.3390/foods14111881"
+    access: full_text_review
+    retrieved_from: "scratchpad/dirlit_maillard_review_params.txt (Europe PMC full text)"
+  zhang2024rice:
+    citation: "Zhang, X. et al. (2024). Effect of cysteine and temperature on the Maillard reaction of rice protein hydrolysate with D-xylose. Food Chemistry: X 22, 101491."
+    doi: "10.1016/j.fochx.2024.101491"
+    access: full_text
+    retrieved_from: "scratchpad/dirlit_rice_xylose_cys.txt (Europe PMC full text)"
+  chickencys2025:
+    citation: "Chicken-carcass-hydrolysate cysteine dose study (2025). J. Food Science, doi 10.1111/1750-3841.70564."
+    doi: "10.1111/1750-3841.70564"
+    access: full_text_and_table
+    retrieved_from: "scratchpad/dirlit_cys_chicken_sulfur.txt (Table 3, OAV units, not concentrations)"
+  zhou2025:
+    citation: "Zhou, X. et al. (2025). Thermal oxidation of individual fatty acids and their contribution to beef flavour. Food Chemistry: X 26, 102291."
+    doi: "10.1016/j.fochx.2025.102291"
+    access: full_text
+    retrieved_from: "scratchpad/dirlit_fa_thermal_oxid_beef.txt (Europe PMC full text)"
+  qi2025:
+    citation: "Qi, Y. et al. (2025). Maillard reaction in flour-based foods (review). Foods 14(15), 2721."
+    doi: "10.3390/foods14152721"
+    access: full_text_review
+    retrieved_from: "scratchpad/dirlit_flour_maillard_review.txt (Europe PMC full text)"
+
+panel:
+
+  # =====================================================================
+  # SUGAR IDENTITY
+  # =====================================================================
+  - claim_id: SUG-01
+    statement: "With cysteine, pentoses generate much higher 2-methyl-3-furanthiol (MFT) than hexoses."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "cysteine + D-ribose"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+      B:
+        label: "cysteine + D-glucose"
+        system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "Although pentoses generated much higher amounts of FFT and MFT than hexoses when heated in the presence of cysteine, glucose and rhamnose also gave significant yields."
+    fit_status: fit_adjacent
+    fit_note: "The A-side reproduces cys_ribose_140C_Hofmann1998, a per_row_recovery fit target of sulfur_barrier_refit_hofmann.json (4 free barriers / 2 rows) and sulfur_barrier_refit_pentodiulose.json. Excluded from the headline."
+    model_scope_note: "Expressible: both sugars resolve and both MFT and FFT are model observables."
+
+  - claim_id: SUG-02
+    statement: "With cysteine, pentoses generate much higher 2-furfurylthiol (FFT) than hexoses."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "cysteine + D-ribose"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+      B:
+        label: "cysteine + D-glucose"
+        system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "Although pentoses generated much higher amounts of FFT and MFT than hexoses when heated in the presence of cysteine, glucose and rhamnose also gave significant yields."
+    fit_status: fit_adjacent
+    fit_note: "Same per-row fit target as SUG-01."
+    model_scope_note: "Expressible."
+
+  - claim_id: SUG-03
+    statement: "In a cysteine/hexose (glucose) system FFT is the more important thiol; MFT is the one that is key in cysteine/pentose systems. So FFT > MFT in cysteine + glucose."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "FFT in cysteine + glucose"
+        observable: "FFT"
+        system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+      B:
+        label: "MFT in cysteine + glucose"
+        observable: "MFT"
+        system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: cerny2015
+      quote: "2-furanmethanethiol, together with 5-acetyl-3,4-dihydro-2H-1,4-thiazine, was among the most important aroma compounds identified in a thermally treated solution of L-cysteine and glucose and played a more important role than 2-methyl-3-furanthiol, which is key in aqueous L-cysteine/pentose systems"
+      quote_form: verbatim_page_elided
+      quote_form_note: >-
+        A running page header interrupts the sentence in the scanned chapter text and was dropped; no other change.
+    fit_status: independent
+    fit_note: "The cysteine/GLUCOSE system is not a benchmark anywhere in data/benchmarks/; the sulfur fit targeted the ribose row only."
+    model_scope_note: "Expressible: within-system ordering of two model observables."
+
+  - claim_id: SUG-04
+    statement: "Conversely, MFT > FFT in the cysteine/pentose system (MFT is 'key' there)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "MFT in cysteine + ribose"
+        observable: "MFT"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+      B:
+        label: "FFT in cysteine + ribose"
+        observable: "FFT"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: cerny2015
+      quote: "...played a more important role than 2-methyl-3-furanthiol, which is key in aqueous L-cysteine/pentose systems (Hofmann and Schieberle, 1997)."
+      quote_form: verbatim_page_elided
+      quote_form_note: >-
+        A running page header interrupts the sentence in the scanned chapter text and was dropped; no other change.
+    fit_status: fit_adjacent
+    fit_note: "Both sides are the cys_ribose_140C_Hofmann1998 row and BOTH observables are the fitted targets of sulfur_barrier_refit_hofmann.json. This is pure fit recovery; excluded."
+    model_scope_note: "Expressible but uninformative - it is the fitted row."
+
+  - claim_id: SUG-05
+    statement: "Furfural is the characteristic dehydration product of pentoses; the model should give more furfural from a pentose than from a hexose under identical conditions."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["Furfural"]
+    conditions:
+      A:
+        label: "cysteine + D-ribose"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+      B:
+        label: "cysteine + D-glucose"
+        system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 5.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: cerny2015
+      quote: "Furfural is nearly always detected in reactions of L-cysteine with pentoses. ... When furfural was replaced by glucose, furfural and 2-furanmethanethiol were still detected, suggesting that glucose can likewise serve as a precursor for furfural and 2-furanmethanethiol, even though glucose is less effective as a precursor than pentoses (ribose, xylose), as shown by Hofmann and Schieberle (1998b)."
+    fit_status: fit_system_overlap
+    fit_note: "Furfural is NOT among the fitted observables of sulfur_barrier_refit_hofmann.json (which fitted MFT/FFT barriers), but the A-side system is the fitted row."
+    model_scope_note: "Expressible."
+
+  - claim_id: SUG-06
+    statement: "Ribose and xylose are both pentoses but are not interchangeable precursors in the literature (different downstream ratios are reported for each)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: cerny2015
+      quote: "glucose is less effective as a precursor than pentoses (ribose, xylose)"
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MEASURED MODEL LIMITATION. Substituting D-Xylose for D-Ribose
+      produced numerically IDENTICAL predictions to 4+ significant figures for every
+      observable (furfural 511.88, MFT 242.38, FFT 218.00, disulfide 120.59,
+      2,5-dimethylpyrazine 59.42). The model resolves both pentoses to the same
+      reactive representation, so it cannot express ANY ribose-vs-xylose comparison.
+
+  # =====================================================================
+  # pH DIRECTION
+  # =====================================================================
+  - claim_id: PH-01
+    statement: "In cysteine/ribose model systems, MFT is drastically reduced at pH 6.5 relative to pH 4.5; thiols are favoured at low pH."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "pH 4.5"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 30}
+      B:
+        label: "pH 6.5"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: cerny2015
+      quote: "At low pH, levels of 2-methyl-3-furanthiol and 2-furanmethanethiol are, in general, higher. Consistent with these findings, model reactions between L-cysteine and ribose at pH 4.5-6.5 showed drastically reduced levels at pH 6.5 for the sulfur odourants 2-methyl-3-furanthiol, 2-methyl-3-thiophenethiol as well as for their corresponding disulfides (Farmer and Mottram, 1990)."
+    fit_status: fit_system_overlap
+    fit_note: "Same chemical system as the per-row fit target, but the fit set the absolute level at pH 5.0 only; no pH series was ever fitted, so the pH-response ratio is out-of-sample."
+    model_scope_note: "Expressible - pH is a first-class condition."
+
+  - claim_id: PH-02
+    statement: "Same pH direction for the corresponding disulfide (bis(2-methyl-3-furyl) disulfide): lower at pH 6.5 than at pH 4.5."
+    claim_type: ordering
+    category: ph
+    observables: ["bis(2-methyl-3-furyl) disulfide"]
+    conditions:
+      A:
+        label: "pH 4.5"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 30}
+      B:
+        label: "pH 6.5"
+        system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: cerny2015
+      quote: "...showed drastically reduced levels at pH 6.5 for the sulfur odourants 2-methyl-3-furanthiol, 2-methyl-3-thiophenethiol as well as for their corresponding disulfides (Farmer and Mottram, 1990)."
+    fit_status: fit_system_overlap
+    fit_note: "As PH-01. The disulfide is a reported-not-fitted observable in sulfur_barrier_refit_hofmann.json."
+    model_scope_note: "Expressible."
+
+  - claim_id: PH-03
+    statement: "Raising pH from 4 to 7 in a cysteine/xylose/thiamine system SUPPRESSES 2-furanmethanethiol (FFT) formation - FFT is favoured with decreasing pH."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "pH 4.0"
+          system: {precursors: {L-Cysteine: 10.0, D-Xylose: 10.0, Thiamine: 5.0}, temp_C: 140, ph: 4.0, water_activity: 0.98, time_min: 30}
+        - label: "pH 5.5"
+          system: {precursors: {L-Cysteine: 10.0, D-Xylose: 10.0, Thiamine: 5.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 30}
+        - label: "pH 7.0"
+          system: {precursors: {L-Cysteine: 10.0, D-Xylose: 10.0, Thiamine: 5.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "decreasing"
+    source:
+      ref: cerny2015
+      quote: "The increased formation of thiols at low pH was also observed by Cerny and Briffod (2007) who found that formation of 2-furanmethanethiol, 3-mercapto-2-pentanone and 4,5-dihydro-2-methyl-3-furanthiol was favoured in heated aqueous model systems of L-cysteine, xylose and thiamine with decreasing pH from 7 to 4."
+      quote_form: verbatim_page_elided
+      quote_form_note: >-
+        A running page header interrupts the sentence in the scanned chapter text and was dropped; no other change.
+    fit_status: independent
+    fit_note: "No cysteine/xylose/thiamine benchmark exists in data/benchmarks/; nothing was fitted to this system."
+    model_scope_note: "Expressible - all three precursors resolve and FFT is an observable. NB the model treats xylose identically to ribose (see SUG-06)."
+
+  - claim_id: PH-04
+    statement: "Raising pH shifts the Maillard product spectrum from sulfur compounds toward NITROGEN heterocycles - pyrazines and thiazoles increase with pH."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["2,5-Dimethylpyrazine"]
+    conditions:
+      series:
+        - label: "pH 4.5"
+          system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 30}
+        - label: "pH 5.6"
+          system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+        - label: "pH 6.5"
+          system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 30}
+    expected_relation: "increasing"
+    source:
+      ref: cerny2015
+      quote: "Higher pH produced more thiazoles (e.g. 2-acetylthiazole). ... At pH 4.5, sulfur compounds dominated the volatile fraction, whereas with pH 6.5 nitrogen compounds prevailed. ... In the same reaction at pH 7.1, heterocyclic compounds (thiazoles, thiazolines, pyrazines and others) dominate."
+    fit_status: independent
+    fit_note: "2,5-dimethylpyrazine is not a fitted observable in any live fit record."
+    model_scope_note: "Expressible: 2,5-dimethylpyrazine is the model's only nitrogen-heterocycle observable, so it is the available proxy for 'nitrogen compounds'."
+
+  - claim_id: PH-05
+    statement: "Furfural/HMF (acid-catalysed sugar dehydration) should NOT rise with pH the way nitrogen heterocycles do; sugar dehydration to furfural is favoured under acidic conditions."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["Furfural"]
+    conditions:
+      series:
+        - label: "pH 4.0"
+          system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 4.0, water_activity: 0.98, time_min: 30}
+        - label: "pH 5.5"
+          system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 30}
+        - label: "pH 7.0"
+          system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "decreasing"
+    source:
+      ref: cerny2015
+      quote: "At pH 4.5, sulfur compounds dominated the volatile fraction, whereas with pH 6.5 nitrogen compounds prevailed."
+    fit_status: independent
+    fit_note: "Weakest-sourced row in the panel: the quote establishes the sulfur/nitrogen shift, and the furfural direction is the standard acid-catalysis corollary rather than a quoted measurement. Flagged as such; treat its outcome as indicative only."
+    model_scope_note: "Expressible."
+
+  # =====================================================================
+  # TEMPERATURE DIRECTION
+  # =====================================================================
+  - claim_id: TEMP-01
+    statement: "Acrylamide in extruded plant-based meat analogues DECREASES with rising barrel temperature over 130 -> 150 -> 170 C (highest at 130 C)."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["Acrylamide"]
+    conditions:
+      series:
+        - label: "130 C"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 130, ph: 6.0, water_activity: 0.5, time_min: 20}
+        - label: "150 C"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.5, time_min: 20}
+        - label: "170 C"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 170, ph: 6.0, water_activity: 0.5, time_min: 20}
+    expected_relation: "decreasing"
+    source:
+      ref: ma2024
+      quote: "Acrylamide content increased with increasing feed rates and decreasing barrel temperature, with the highest amount observed at 8 kg/h and 130 C, respectively (Figure 2 C,D). A decrease in acrylamide content at higher temperatures was also reported by Mottram et al. [11]. ... Elevated temperatures promoted the accumulation of CEL, methylglyoxal and 2,3-butanedione while diminishing the accumulation of CML, acrylamide, glyoxal and 3-deoxyglucosone."
+    source_conditions: "Die-zone temperature setpoints 130 / 150 / 170 C, 30% moisture, SPI + corn starch, twin-screw extrusion (Section 4, temperature experiment)."
+    fit_status: independent
+    fit_note: "acrylamide_spi_extrusion_130C_ACSRef3.json is a projection_constant_refit target, but at global_low_leverage (2 constants / 16 rows), which by the repo's own rule (src/fit_target_index.py) stays in the coverage denominator. No temperature series was ever fitted."
+    model_scope_note: "Expressible: asparagine + glucose is the acrylamide route and acrylamide is a model observable. Caveat: the model has no extrusion residence-time/SME coupling, so 'barrel temperature' is mapped to reaction temperature at fixed time."
+
+  - claim_id: TEMP-02
+    statement: "Extrusion (i.e. any thermal processing) raises acrylamide above the unprocessed control."
+    claim_type: ordering
+    category: temperature
+    observables: ["Acrylamide"]
+    conditions:
+      A:
+        label: "extruded, 130 C 20 min"
+        system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 130, ph: 6.0, water_activity: 0.5, time_min: 20}
+      B:
+        label: "unheated control, 25 C"
+        system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 25, ph: 6.0, water_activity: 0.5, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: ma2024
+      quote: "Compared to the control, acrylamide contents in all extruded samples were significantly increased (Figure 2)."
+    fit_status: independent
+    model_scope_note: "Expressible."
+
+  - claim_id: TEMP-03
+    statement: "Sugar-dehydration products (HMF from hexose) accumulate MORE at higher temperature - the opposite temperature response to acrylamide in the same experiment."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["HMF"]
+    conditions:
+      series:
+        - label: "130 C"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 130, ph: 6.0, water_activity: 0.5, time_min: 20}
+        - label: "150 C"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.5, time_min: 20}
+        - label: "170 C"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 170, ph: 6.0, water_activity: 0.5, time_min: 20}
+    expected_relation: "increasing"
+    source:
+      ref: ma2024
+      quote: "As expected, CEL content significantly increased with an increase in barrel temperature from 130 C to 170 C. ... the total AGEs content increased, consistent with previous research, which reported that Maillard reactions were enhanced by high temperature [27]. ... This aligns with a previous report that Maillard reactions are favored by high temperatures, high shear and low moisture [27]."
+    fit_status: independent
+    fit_note: "The quoted temperature direction is for CEL/total AGEs and the general Maillard rate; HMF is the model's available hexose-track proxy. Weaker mapping than TEMP-01 - flagged."
+    model_scope_note: "Expressible."
+
+  # =====================================================================
+  # MOISTURE / WATER ACTIVITY
+  # =====================================================================
+  - claim_id: AW-01
+    statement: "Maillard chemistry is favoured by LOW moisture; raising water content suppresses it."
+    claim_type: monotonic_direction
+    category: moisture_aw
+    observables: ["HMF"]
+    conditions:
+      series:
+        - label: "aw 0.3"
+          system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.3, time_min: 30}
+        - label: "aw 0.6"
+          system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.6, time_min: 30}
+        - label: "aw 0.98"
+          system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "decreasing"
+    source:
+      ref: ma2024
+      quote: "This aligns with a previous report that Maillard reactions are favored by high temperatures, high shear and low moisture [27]. ... increased moisture levels may lead to decreased matrix viscosity and SME, which could inhibit Maillard reactions and consequently reduce acrylamide formation [22, 30]."
+    source_conditions: "Moisture experiment levels 20/30/40/50/60% w/w."
+    fit_status: independent
+    model_scope_note: "Expressible: water_activity is a first-class condition. Note aw and extrusion moisture % are related but not identical variables - flagged as an approximate mapping."
+
+  - claim_id: AW-02
+    statement: "Acrylamide vs moisture is NON-MONOTONIC (bell-shaped), peaking at intermediate moisture (40%) - rising for low-moisture extrusion, falling for high-moisture extrusion."
+    claim_type: monotonic_direction
+    category: moisture_aw
+    observables: ["Acrylamide"]
+    conditions:
+      series:
+        - label: "aw 0.3 (low moisture)"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.3, time_min: 20}
+        - label: "aw 0.6 (mid moisture)"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.6, time_min: 20}
+        - label: "aw 0.9 (high moisture)"
+          system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.9, time_min: 20}
+    expected_relation: "peak"
+    source:
+      ref: ma2024
+      quote: "Acrylamide contents in PBMAs showed a bell-shaped pattern with increasing moisture level, with the highest acrylamide content at 40% moisture content (Figure 2 A). These results indicated that for low-moisture extrusion (<=40%), increasing moisture level promoted acrylamide formation, whereas for high-moisture extrusion, increasing moisture level inhibited its formation."
+    fit_status: independent
+    fit_note: "The paper itself notes the moisture direction is material-dependent (Mulla et al. found the opposite for potato flour/semolina). A miss here is weaker evidence against the model than a miss on TEMP-01."
+    model_scope_note: "Expressible in principle; whether the model has ANY non-monotonic aw response is exactly the question."
+
+  # =====================================================================
+  # ADDITIVE: CYSTEINE
+  # =====================================================================
+  - claim_id: CYS-01
+    statement: "Adding cysteine to a sugar/amino-acid system generates furan-thiols (FFT/MFT) that are absent without it."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "glycine + glucose + cysteine"
+        system: {precursors: {Glycine: 10.0, D-Glucose: 10.0, L-Cysteine: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 30}
+      B:
+        label: "glycine + glucose (no cysteine)"
+        system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: cerny2015
+      quote: "A review of the contribution of sulfur compounds to heated foods (Mottram and Mottram, 2002) identifies ... cysteine, methionine and thiamine as particularly important aroma precursors. ... Furfural is nearly always detected in reactions of L-cysteine with pentoses. Therefore, it is no surprise that 2-furanmethanethiol was identified in the reaction product of furfural with hydrogen sulfide and ammonia"
+    fit_status: independent
+    absent_as_zero: true
+    model_scope_note: >-
+      Expressible only as a presence/absence test: without cysteine the model emits no
+      FFT key at all, which the runner scores as 0 ppb (`absent_as_zero`). A weak claim -
+      it tests that a sulfur precursor is required for a sulfur product, which is a
+      hard-wired consequence of the SMIRKS templates rather than a prediction.
+
+  - claim_id: CYS-02
+    statement: "Adding cysteine to a glucose/amino-acid system SUPPRESSES the competing browning/dehydration track (cysteine sequesters dicarbonyls), lowering HMF."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["HMF"]
+    conditions:
+      A:
+        label: "glycine + glucose (no cysteine)"
+        system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 30}
+      B:
+        label: "glycine + glucose + cysteine"
+        system: {precursors: {Glycine: 10.0, D-Glucose: 10.0, L-Cysteine: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: cerny2015
+      quote: "An alternative formation pathway to alpha-mercaptoketones passes through dicarbonyl compounds, which are known intermediates in the Maillard reaction. These can add hydrogen sulfide (originating from L-cysteine decomposition) and then undergo reduction."
+      quote_form: transliterated
+      quote_form_note: >-
+        Greek alpha written out as "alpha-"; otherwise exact.
+    fit_status: independent
+    fit_note: "The quoted mechanism (cysteine-derived H2S consuming dicarbonyl intermediates) supports competition for the dicarbonyl pool; the HMF-specific magnitude is not quoted. Indicative row."
+    model_scope_note: "Expressible."
+
+  # =====================================================================
+  # SCOPE ROWS - claims the model provably cannot express
+  # =====================================================================
+  - claim_id: SCOPE-01
+    statement: "Extrusion forms MORE CEL than CML in plant-based meat analogues, and the two move in OPPOSITE directions with both temperature and moisture."
+    claim_type: ordering
+    category: scope
+    observables: ["CEL"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: ma2024
+      quote: "The extrusion promoted CML, CEL and acrylamide formation, with more CEL being formed than CML. ... An increase in the moisture content led to a decrease in the CEL content, whereas it enhanced CML formation. ... Elevated temperatures promoted the accumulation of CEL, methylglyoxal and 2,3-butanedione while diminishing the accumulation of CML, acrylamide, glyoxal and 3-deoxyglucosone."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MEASURED MODEL LIMITATION. Neither CML nor CEL is emitted by the
+      free-precursor path for any precursor set probed here, and no alpha-dicarbonyl
+      (glyoxal, methylglyoxal, 3-deoxyglucosone) appears among the predicted species
+      either. A benchmark file cml_cel_commercial_pbma_Foods2023.json exists, but the
+      opposite-sign CML/CEL behaviour that is the paper's central finding has no
+      representation in the prediction machinery.
+
+  - claim_id: SCOPE-02
+    statement: "Methional (boiled-potato note) rises ~6x on UHT processing of a pea beverage (0.55 -> 3.10 ug/L), one of the largest relative Maillard-track responses in the table."
+    claim_type: ordering
+    category: scope
+    observables: ["Methional"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: trikusuma2018
+      quote: "911 | Boiled potato | Methional | 0.55 +/- 0.04a | 3.10 +/- 0.25b | 3.21 +/- 0.30b | 0.2"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MEASURED MODEL LIMITATION. L-Methionine IS a resolvable precursor, but
+      a methionine + D-glucose system at 140 C / pH 6 / 30 min returns ZERO named
+      volatiles: the model emits no methional, no dimethyl disulfide, no Strecker aldehyde
+      of methionine at all. The methionine Strecker branch is absent from the templates.
+
+  # =====================================================================
+  # MATRIX IDENTITY (lipid lane)
+  # =====================================================================
+  - claim_id: MAT-01
+    statement: "Hexanal in unheated plant-protein isolates: brown rice >> soy > pea."
+    claim_type: ordering
+    category: matrix_identity
+    observables: ["Hexanal"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: pratapsingh2021
+      quote: "Table 1. Fully quantified concentration ... Hexanal (in ppb): Pea 1138.00 +/- 297.30 | Brown Rice 22,590.24 +/- 1643.70 | Soy 1621.71 +/- 159.69"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MEASURED MODEL LIMITATION. src.benchmark_validation.MATRIX_BENCHMARK_PROFILES
+      contains exactly two entries, 'pea_iso' and 'soy_iso'. There is no brown-rice lipid
+      profile, so the model cannot place brown rice in the ranking at all - and brown rice
+      is the largest effect in the table (14-20x the legume isolates).
+
+  - claim_id: MAT-02
+    statement: "Hexanal in unheated protein isolates: soy > pea."
+    claim_type: ordering
+    category: matrix_identity
+    observables: ["Hexanal"]
+    conditions:
+      A:
+        label: "soy isolate, 40 C"
+        system: {precursors: {Soy Protein Isolate: 1000.0}, temp_C: 40, ph: 7.0, water_activity: 0.98, time_min: 10, protein_type: soy_iso, denaturation_state: 0.0, process_state: native_powder}
+      B:
+        label: "pea isolate, 40 C"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 40, ph: 7.0, water_activity: 0.98, time_min: 10, protein_type: pea_iso, denaturation_state: 0.0, process_state: native_powder}
+    expected_relation: "A>B"
+    source:
+      ref: pratapsingh2021
+      quote: "Hexanal (in ppb): Pea 1138.00 +/- 297.30 | Soy 1621.71 +/- 159.69"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: fit_adjacent
+    fit_note: "Both sides ARE the fit targets of matrix_observability_refit_pratap_singh.json (per_row_recovery, 1 shared scale / 2 rows). Excluded from the headline. NB a SHARED scale does not by itself set the soy/pea ordering - the ordering comes from the two lipid profiles - but the rows are declared per-row fit targets so the conservative call is exclusion."
+    model_scope_note: "Expressible."
+
+  - claim_id: MAT-03
+    statement: "1-Hexanol is detectable in brown rice protein but NOT detected in either soy or pea isolate - i.e. hexanol is a minor species in legume isolates relative to hexanal."
+    claim_type: ordering
+    category: matrix_identity
+    observables: ["Hexanal"]
+    conditions:
+      A:
+        label: "hexanal, pea isolate 40 C"
+        observable: "Hexanal"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 40, ph: 7.0, water_activity: 0.98, time_min: 10, protein_type: pea_iso, denaturation_state: 0.0, process_state: native_powder}
+      B:
+        label: "1-hexanol, pea isolate 40 C"
+        observable: "1-Hexanol"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 40, ph: 7.0, water_activity: 0.98, time_min: 10, protein_type: pea_iso, denaturation_state: 0.0, process_state: native_powder}
+    expected_relation: "A>B"
+    source:
+      ref: pratapsingh2021
+      quote: "Hexanol (in ppb): Pea n.d. | Brown Rice 102.04 +/- 9.30 | Soy n.d."
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: fit_system_overlap
+    fit_note: "Pea 40 C row is a per-row fit target, but 1-hexanol is not one of the benchmark's scored observables, so the hexanal:hexanol ratio was not fitted."
+    model_scope_note: "Expressible: both are model observables in the matrix lane."
+
+  # =====================================================================
+  # PROCESS: HEATING vs RAW  (Trikusuma pea UHT beverage)
+  # =====================================================================
+  - claim_id: PROC-01
+    statement: "UHT processing of a pea-protein beverage RAISES hexanal (331 -> 782 ug/L, significant)."
+    claim_type: ordering
+    category: process_heating
+    observables: ["Hexanal"]
+    conditions:
+      A:
+        label: "processed, 140 C"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.16, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+      B:
+        label: "unprocessed control, 25 C"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 25, ph: 7.13, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 0.0, process_state: native_powder}
+    expected_relation: "A>B"
+    source:
+      ref: trikusuma2018
+      quote: "802 | Cut grass | Hexanal | 331.00 +/- 81.27a | 781.72 +/- 58.59b | 683.08 +/- 58.09b | 4.5   (columns: Control | Processed | Aged | Odor threshold, ug/L)"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: fit_adjacent
+    fit_note: "The A-side is pea_isolate_uht_140C_Trikusuma2019, a projection_constant_refit target (global_low_leverage) whose hexanal target IS 782 ppb. The model reproduces 782.0 exactly, so this row is recovery, not prediction. Excluded from the headline."
+    model_scope_note: "Expressible."
+
+  - claim_id: PROC-02
+    statement: "UHT processing RAISES 2-pentylfuran in a pea-protein beverage (59.4 -> 163.2 ug/L)."
+    claim_type: ordering
+    category: process_heating
+    observables: ["2-Pentylfuran"]
+    conditions:
+      A:
+        label: "processed, 140 C"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.16, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+      B:
+        label: "unprocessed control, 25 C"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 25, ph: 7.13, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 0.0, process_state: native_powder}
+    expected_relation: "A>B"
+    source:
+      ref: trikusuma2018
+      quote: "1003 | Solvent-like, floral | 2-Pentylfuran | 59.39 +/- 1.93a | 163.16 +/- 15.06b | 197.03 +/- 6.01c | 6"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: fit_adjacent
+    fit_note: "As PROC-01; 2-pentylfuran 163 ppb is a declared target of the same benchmark."
+    model_scope_note: "Expressible."
+
+  - claim_id: PROC-03
+    statement: "UHT processing RAISES nonanal in a pea-protein beverage (8.24 -> 23.98 ug/L)."
+    claim_type: ordering
+    category: process_heating
+    observables: ["Nonanal"]
+    conditions:
+      A:
+        label: "processed, 140 C"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.16, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+      B:
+        label: "unprocessed control, 25 C"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 25, ph: 7.13, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 0.0, process_state: native_powder}
+    expected_relation: "A>B"
+    source:
+      ref: trikusuma2018
+      quote: "1103 | Plastic, waxy | Nonanal | 8.24 +/- 0.44a | 23.98 +/- 0.80c | 22.44 +/- 0.28b | 1"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: fit_adjacent
+    fit_note: "As PROC-01; nonanal 24 ppb is a declared target of the same benchmark."
+    model_scope_note: "Expressible."
+
+  - claim_id: PROC-04
+    statement: "2,5-Dimethylpyrazine is NOT significantly changed by UHT processing of a pea beverage (2.46 vs 2.29 ug/L, same significance letter) - the pyrazine track is essentially inert to this thermal load."
+    claim_type: ordering
+    category: process_heating
+    observables: ["2,5-Dimethylpyrazine"]
+    evaluable: false
+    expected_relation: "flat"
+    conditions: {}
+    source:
+      ref: trikusuma2018
+      quote: "910 | Meaty, brothy | 2,5-Dimethylpyrazine | 2.46 +/- 0.12b | 2.29 +/- 0.13b | 1.74 +/- 0.11a | 800"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MEASURED MODEL LIMITATION. In the matrix lane the model emits ONLY the
+      four lipid markers (Hexanal, 2-Pentylfuran, 1-Hexanol, Nonanal); it produces no
+      pyrazine, methional, or any Maillard-track volatile for a protein-isolate matrix.
+      A pea matrix and a free glycine/glucose system are two disjoint prediction paths
+      with no shared observable, so the model cannot say anything about pyrazines in a
+      pea beverage.
+
+  - claim_id: PROC-05
+    statement: "Within a UHT-processed pea beverage the lipid off-flavour markers rank hexanal (782) > 2-pentylfuran (163) > nonanal (24)."
+    claim_type: ordering
+    category: ranking
+    observables: ["Hexanal"]
+    conditions:
+      A:
+        label: "hexanal"
+        observable: "Hexanal"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.16, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+      B:
+        label: "2-pentylfuran"
+        observable: "2-Pentylfuran"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.16, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+    expected_relation: "A>B"
+    source:
+      ref: trikusuma2018
+      quote: "Hexanal 781.72; 2-Pentylfuran 163.16; Nonanal 23.98 (Processed column, ug/L)"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: fit_adjacent
+    fit_note: "This IS the benchmark's matrix_ranking_contract. Pure recovery."
+    model_scope_note: "Expressible."
+
+  # =====================================================================
+  # TIME
+  # =====================================================================
+  - claim_id: TIME-01
+    statement: "Longer heating accumulates more Maillard volatile - HMF rises monotonically with heating time in a glucose/amino-acid system."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["HMF"]
+    conditions:
+      series:
+        - label: "5 min"
+          system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 5}
+        - label: "30 min"
+          system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 30}
+        - label: "120 min"
+          system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.98, time_min: 120}
+    expected_relation: "increasing"
+    source:
+      ref: ma2024
+      quote: "the total AGEs content decreased slightly, possibly due to the decrease in residence time caused by the increased feed rate [32]"
+    fit_status: independent
+    fit_note: "Sanity/monotonicity row rather than a contested claim: longer residence -> more product is asserted by the source only indirectly. Low evidential weight either way."
+    model_scope_note: "Expressible."
+
+  # =====================================================================
+  # LIPID LANE MECHANISM
+  # =====================================================================
+  - claim_id: LIP-01
+    statement: "Hexanal is the decomposition product of LINOLEIC acid; nonanal comes off the OLEATE pool. A matrix richer in alpha-linolenic/linoleic relative to oleic should therefore skew toward hexanal over nonanal."
+    claim_type: ordering
+    category: lipid_lane
+    observables: ["Hexanal"]
+    conditions:
+      A:
+        label: "hexanal, pea isolate (linoleic 50%, oleic 22%)"
+        observable: "Hexanal"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+      B:
+        label: "nonanal, pea isolate"
+        observable: "Nonanal"
+        system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+    expected_relation: "A>B"
+    source:
+      ref: trikusuma2018
+      quote: "Hexanal has been identified in peas as the decomposition product of linoleic acid. Studies have revealed that hexanal was formed through the breakdown of linoleic acid hydroperoxide formed by lipoxygenase."
+    fit_status: fit_adjacent
+    fit_note: "Both observables are declared targets of the Trikusuma benchmark; see PROC-05."
+    model_scope_note: "Expressible - src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL assigns nonanal to oleate and the rest to linoleate."
+
+  - claim_id: LIP-02
+    statement: "Heating a plant-protein matrix for longer at a fixed temperature increases the lipid-oxidation markers monotonically (hydroperoxide accumulation)."
+    claim_type: monotonic_direction
+    category: lipid_lane
+    observables: ["Hexanal"]
+    conditions:
+      series:
+        - label: "0.1 min"
+          system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 0.1, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+        - label: "10 min"
+          system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 10, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+        - label: "60 min"
+          system: {precursors: {Pea Protein Isolate: 1000.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 60, protein_type: pea_iso, denaturation_state: 1.0, process_state: heated_matrix}
+    expected_relation: "increasing"
+    source:
+      ref: trikusuma2018
+      quote: "Cardboard, oxidized/painty and saw dust were comparatively rated lower, with intensities of about 1 in the non-processed sample and significantly increased in the processed and aged samples."
+    fit_status: fit_system_overlap
+    fit_note: "The 0.1 min point coincides with the fitted Trikusuma row, but no time series was fitted."
+    model_scope_note: "Expressible."
+
+  - claim_id: LIP-03
+    statement: "Sensory: UHT processing of a pea beverage REDUCES 'beany' intensity while RAISING 'oxidized/painty'. The two off-note families move in OPPOSITE directions under the same thermal load."
+    claim_type: ordering
+    category: lipid_lane
+    observables: ["Hexanal"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: trikusuma2018
+      quote: "Beany 3.3b | 1.5a | 1.4a  (<0.001) ... Oxidized/painty 1.0a | 2.7b | 3.2b  (<0.001)   (columns: Non-Processed control | Processed | Aged; 10-point line scale)"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Numbers verbatim from the source table; "|" column separators added by transcription. For Trikusuma Table 6 rows 890/902/910/1003/1103 and the Table 5 sensory rows, the PDF extraction places the Tukey letters on a line above the data row - they were re-attached column-wise.
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE. The model has a sensory module (src/sensory.py) but the matrix lane
+      emits only four lipid markers, all of which are 'oxidized/green' descriptors; there
+      is no modelled species carrying the 'beany' attribute and no mechanism by which a
+      thermal step DESTROYS an off-note. The model can only make off-notes go up with heat.
+
+  # =====================================================================
+  # WAVE S2 EXTENSION - independent sources retrieved 2026-08-27
+  # =====================================================================
+
+  - claim_id: SUG-07
+    statement: "Furfural is produced from pentoses (ribose, xylose) but is NOT DETECTED from hexoses (glucose, fructose) in the same cysteine + protein-hydrolysate system."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["Furfural"]
+    conditions:
+      A: {label: "cysteine + D-ribose, 110 C 90 min", system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+      B: {label: "cysteine + D-glucose, 110 C 90 min", system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+    expected_relation: "A>B"
+    source:
+      ref: ni2021
+      quote: "ROW| Furfural | 833 | 1341.2 +/- 94.8 | 1212.6 +/- 151.8 | ND | ND"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 3 row as saved; columns are LRI | R-MRPs | X-MRPs | G-MRPs | F-MRPs, ng/g.
+        Corroborating narrative (verbatim): "The content of furan in MRPs of ribose and
+        xylose was higher than that of glucose and fructose. Furfural was also tested in
+        the MRPs of these two sugars ( Table 3 )."
+    fit_status: independent
+    model_scope_note: >-
+      Expressible. NB the literature result is a hard ON/OFF (ND for both hexoses), so a
+      model that predicts any finite hexose furfural is wrong in kind, not just magnitude.
+      The scoring only asks for the sign.
+
+  - claim_id: SUG-08
+    statement: "MFT is produced from pentoses but NOT DETECTED from hexoses under identical cysteine loading."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    conditions:
+      A: {label: "cysteine + D-ribose, 110 C 90 min", system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+      B: {label: "cysteine + D-glucose, 110 C 90 min", system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+    expected_relation: "A>B"
+    source:
+      ref: ni2021
+      quote: "ROW| 2-Methyl-3-furanthiol | 895 | 221.6 +/- 15.3 | 121.2 +/- 9.3 | ND | ND"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 3; columns LRI | R-MRPs | X-MRPs | G-MRPs | F-MRPs, ng/g."
+    fit_status: independent
+    fit_note: "Independent replication of the Hofmann 1998 direction (SUG-01) in a DIFFERENT system (camellia seed meal hydrolysate, 110 C) and from a source with no relationship to any fit target."
+    model_scope_note: "Expressible."
+
+  - claim_id: SUG-09
+    statement: "FFT is produced from pentoses but NOT DETECTED from hexoses under identical cysteine loading."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    conditions:
+      A: {label: "cysteine + D-ribose, 110 C 90 min", system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+      B: {label: "cysteine + D-glucose, 110 C 90 min", system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+    expected_relation: "A>B"
+    source:
+      ref: ni2021
+      quote: "ROW| 2-Furfurylthiol | 921 | 1418.9 +/- 27.4 | 3295.5 +/- 34.9 | ND | ND"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 3; columns LRI | R-MRPs | X-MRPs | G-MRPs | F-MRPs, ng/g."
+    fit_status: independent
+    model_scope_note: "Expressible."
+
+  - claim_id: SUG-10
+    statement: "Total pyrazine yield ranks ribose > xylose > glucose > fructose (a 7-fold spread from ribose to fructose)."
+    claim_type: monotonic_direction
+    category: sugar_identity
+    observables: ["2,5-Dimethylpyrazine"]
+    conditions:
+      series:
+        - {label: "D-ribose", system: {precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+        - {label: "D-glucose", system: {precursors: {L-Cysteine: 10.0, D-Glucose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+        - {label: "D-fructose", system: {precursors: {L-Cysteine: 10.0, D-Fructose: 10.0}, temp_C: 110, ph: 7.0, water_activity: 0.98, time_min: 90}}
+    expected_relation: "decreasing"
+    source:
+      ref: ni2021
+      quote: "ROW| Pyrazines | | 473.4 +/- 27.4a | 362.8 +/- 13.2b | 258.2 +/- 23.1c | 67.1 +/- 11.3d"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 3 class total; columns R-MRPs | X-MRPs | G-MRPs | F-MRPs, ng/g. Xylose is dropped from the model series because the model cannot distinguish it from ribose (SUG-06/SUG-11)."
+    fit_status: independent
+    model_scope_note: "Expressible via 2,5-dimethylpyrazine, the model's only pyrazine observable, as a proxy for the pyrazine class total."
+
+  - claim_id: SUG-11
+    statement: "Ribose and xylose are NOT interchangeable: xylose gives 2.3x more FFT than ribose (3295 vs 1419 ng/g) while ribose gives 1.8x more MFT than xylose (222 vs 121 ng/g) - the two pentoses rank OPPOSITELY on the two thiols."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    evaluable: false
+    expected_relation: "A<B"
+    conditions: {}
+    source:
+      ref: ni2021
+      quote: "ROW| 2-Methyl-3-furanthiol | 895 | 221.6 +/- 15.3 | 121.2 +/- 9.3 | ND | ND ;; ROW| 2-Furfurylthiol | 921 | 1418.9 +/- 27.4 | 3295.5 +/- 34.9 | ND | ND"
+      quote_form: table_row_reformatted
+      quote_form_note: "Two Table 3 rows joined by ';;'; columns LRI | R-MRPs | X-MRPs | G-MRPs | F-MRPs, ng/g."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MEASURED MODEL LIMITATION, now with numbers. Confirms SUG-06: the model
+      returns identical values for D-Ribose and D-Xylose to 4+ significant figures, so it
+      cannot reproduce a real, LARGE (2.3x) and SIGN-CROSSING difference between the two
+      pentoses. Any pentose recommendation the model makes is a coin flip on this axis.
+
+  - claim_id: SUG-12
+    statement: "Substituting fructose for glucose roughly triples HMF in a baked system (1350 vs 452 mg/kg)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["HMF"]
+    conditions:
+      A: {label: "glycine + D-fructose, 150 C 35 min", system: {precursors: {Glycine: 10.0, D-Fructose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.3, time_min: 35}}
+      B: {label: "glycine + D-glucose, 150 C 35 min", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.3, time_min: 35}}
+    expected_relation: "A>B"
+    source:
+      ref: fallico2022
+      quote: "At the end of baking (35 min), the final levels of HMF were 262.2 +/- 7.7, 1350.3 +/- 3.3 and 451.5 +/- 15.7 mg/kg in the sucrose, fructose and glucose cookies, respectively."
+    fit_status: independent
+    model_scope_note: "Expressible: both sugars resolve, HMF is an observable."
+
+  - claim_id: SUG-13
+    statement: "For FURFURAL the sugar ordering INVERTS relative to HMF: glucose gives more furfural than fructose (333 vs 276 ppb) in roasted sunflower seed. The source explicitly flags this as contested."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["Furfural"]
+    conditions:
+      A: {label: "glycine + D-glucose, 165 C 8 min", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 6.0, water_activity: 0.3, time_min: 8}}
+      B: {label: "glycine + D-fructose, 165 C 8 min", system: {precursors: {Glycine: 10.0, D-Fructose: 10.0}, temp_C: 165, ph: 6.0, water_activity: 0.3, time_min: 8}}
+    expected_relation: "A>B"
+    source:
+      ref: laemont2023
+      quote: "However, the results were the opposite for furfural, and glucose increased furfural concentration more than fructose ( Figure 1 ). The literature is conflicting on the effects of reducing sugar type on furfural formation."
+    fit_status: independent
+    fit_note: "The source itself says the literature is conflicting, so a MISS here is weak evidence against the model. Included because the panel should contain at least one claim the model is entitled to lose."
+    model_scope_note: "Expressible. Table 2 row: furfural | 1.01 d (raw) | ... | 333 a (20% glucose) | 276 b (20% fructose)."
+
+  - claim_id: PH-06
+    statement: "Raising pH from 4 to 9 SIGNIFICANTLY INCREASES pyrazines (dimethylpyrazine isomers 26.6 -> 68.2 ppb, ~2.6x) in a roasted seed matrix - a direct measurement, not an inference."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["2,5-Dimethylpyrazine"]
+    conditions:
+      series:
+        - {label: "pH 4", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 4.0, water_activity: 0.3, time_min: 8}}
+        - {label: "pH 7", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 7.0, water_activity: 0.3, time_min: 8}}
+        - {label: "pH 9", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 9.0, water_activity: 0.3, time_min: 8}}
+    expected_relation: "increasing"
+    source:
+      ref: laemont2023
+      quote: "Increasing the pH from 4 to 9 significantly increased the formation of the pyrazines 2-methylpyrazine, dimethylpyrazine isomers, trimethylpyrazine, and tetramethylpyrazine ( Figure 1 )."
+    fit_status: independent
+    fit_note: "Table 2, verbatim row: dimethylpyrazine isomers | 4.88 f (raw) | 26.6 f (pH 4) | 37.4 ef (pH 7) | 68.2 de (pH 9). This is the panel's strongest pH-vs-pyrazine evidence - primary, quantitative, monotone across three levels."
+    model_scope_note: "Expressible."
+
+  - claim_id: PH-07
+    statement: "Furfural is NOT significantly affected by pH 4 -> 9 (11.4 -> 12.4 ppb), contrary to the textbook expectation that acid favours furfural. The authors say so explicitly."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["Furfural"]
+    conditions:
+      series:
+        - {label: "pH 4", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 4.0, water_activity: 0.3, time_min: 8}}
+        - {label: "pH 7", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 7.0, water_activity: 0.3, time_min: 8}}
+        - {label: "pH 9", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 9.0, water_activity: 0.3, time_min: 8}}
+    expected_relation: "flat"
+    source:
+      ref: laemont2023
+      quote: "Furfural was also not affected by a change in pH ( Figure 1 )."
+    fit_status: independent
+    fit_note: >-
+      This row SUPERSEDES PH-05, whose expected direction was an inference from a
+      sulfur/nitrogen statement rather than a measurement. Where PH-05 and PH-07 conflict,
+      PH-07 is the better evidence: the same paper measured furfural directly at three pH
+      levels (Table 2: 11.4 d | 11.0 d | 12.4 cd) and reports it flat.
+    model_scope_note: "Expressible."
+
+  - claim_id: TEMP-04
+    statement: "Raising extruder barrel temperature (max zone 145 -> 160 C) NEARLY DOUBLES pyrazines in a cornmeal / pea-protein-isolate extrudate, and affects nothing else."
+    claim_type: ordering
+    category: temperature
+    observables: ["2,5-Dimethylpyrazine"]
+    conditions:
+      A: {label: "T4 profile, 160 C max", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 160, ph: 6.0, water_activity: 0.4, time_min: 2}}
+      B: {label: "T1 profile, 145 C max", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 145, ph: 6.0, water_activity: 0.4, time_min: 2}}
+    expected_relation: "A>B"
+    source:
+      ref: goncuoglu2026
+      quote: "By increasing temperature of the zones of the barrel, from 40 to 60-80-100-120-140-145-145 C (T1) to 40-60-80-110-140-155-160-160 C (T4), the level of pyrazines (2-methylpyrazine, 2,5(6)-dimethylpyrazine, 2-ethylpyrazine, 2,3-dimethylpyrazine, 2-ethyl-5-methylpyrazine, trimethylpyrazine, 3-ethyl-2,5-dimethylpyrazine, 2-methyl-3,5-dimethylpyrazine) nearly doubled."
+    fit_status: independent
+    fit_note: "The single most on-target claim in the panel: a plant-protein extrusion matrix, a model observable (2,5(6)-dimethylpyrazine is named explicitly), and a clean two-level temperature contrast."
+    model_scope_note: "Expressible. Extrusion residence time approximated as 2 min; the model has no SME coupling."
+
+  - claim_id: TEMP-05
+    statement: "At fixed baking time, HMF rises steeply and super-linearly with temperature (150 -> 190 C gives roughly a 1000x increase)."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["HMF"]
+    conditions:
+      series:
+        - {label: "150 C", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.3, time_min: 25}}
+        - {label: "170 C", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 170, ph: 6.0, water_activity: 0.3, time_min: 25}}
+        - {label: "190 C", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 190, ph: 6.0, water_activity: 0.3, time_min: 25}}
+    expected_relation: "increasing"
+    source:
+      ref: fallico2022
+      quote: "At the highest temperature, 190 C, the HMF levels were highly variable; the highest level after 25 min of baking was 10,606.5 +/- 104.3, 5626.2 +/- 130.6 and 3323.9 +/- 81.8 mg/kg in fructose, sucrose and glucose cookies, respectively."
+    fit_status: independent
+    fit_note: "Table 2 sucrose series at 25 min: 150 C 5.7 +/- 0.8 b; 170 C 93.1 +/- 17.1 b; 190 C 5626.2 +/- 130.6 b."
+    model_scope_note: "Expressible."
+
+  - claim_id: TEMP-06
+    statement: "Roasting (vs raw seed) significantly increases BOTH the Maillard volatiles (pyrazines, furfural) AND the lipid-oxidation volatiles (hexanal, nonanal) - hexanal 4.54 -> 103 ppb."
+    claim_type: ordering
+    category: temperature
+    observables: ["Furfural"]
+    conditions:
+      A: {label: "roasted, 165 C 8 min", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 165, ph: 7.0, water_activity: 0.3, time_min: 8}}
+      B: {label: "raw, 25 C", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 25, ph: 7.0, water_activity: 0.3, time_min: 8}}
+    expected_relation: "A>B"
+    source:
+      ref: laemont2023
+      quote: "For all treatments, roasting significantly increased the formation of the Maillard reaction volatiles, including 2-methylpyrazine, dimethylpyrazine isomers, trimethylpyrazine, tetramethylpyrazine, furfural, benzaldehyde, phenylacetaldehyde, and methional, contributing to the desirable aromas of roasted sunflower seeds ( Table 2 ). ... Roasting significantly increased all lipid oxidation volatiles ( Table 2 )."
+    fit_status: independent
+    fit_note: "Table 2 raw -> roasted pH 7: furfural 1.01 d -> 11.0 d; hexanal 4.54 e -> 103 d; nonanal 2.67 f -> 5.92 e; dimethylpyrazine isomers 4.88 f -> 37.4 ef."
+    model_scope_note: "Expressible."
+
+  - claim_id: AW-03
+    statement: "Maillard rate is NON-MONOTONIC in water activity: it peaks around aw 0.6-0.7 and falls at both aw < 0.4 and aw > 0.9."
+    claim_type: monotonic_direction
+    category: moisture_aw
+    observables: ["HMF"]
+    conditions:
+      series:
+        - {label: "aw 0.25", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.25, time_min: 30}}
+        - {label: "aw 0.65", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.65, time_min: 30}}
+        - {label: "aw 0.95", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 140, ph: 6.0, water_activity: 0.95, time_min: 30}}
+    expected_relation: "peak"
+    source:
+      ref: elhosry2025
+      quote: "Water activity influences the rate and color of the Maillard reaction, with a peak reaction rate typically occurring around a water activity of 0.6 to 0.7 ( Figure 8 ). As water activity approaches 0.70, the Maillard reaction and sugar browning accelerate, but beyond this point, the reaction slows due to excessive free water diluting the reactants [ 64 ]."
+    fit_status: independent
+    fit_note: >-
+      This is the classical Labuza aw curve, which src/conditions.py explicitly claims to
+      implement (`_water_activity_correction`: 'Based on Labuza & Saltmarch (1981). Rate
+      peaks around aw=0.65, drops at both extremes'). So this row tests a mechanism the
+      code says it has. Review-level source; corroborated by qi2025 ('when the water
+      activity is 0.60 to 0.70, the Maillard reaction rate is the highest').
+    model_scope_note: "Expressible."
+
+  - claim_id: CYS-03
+    statement: "Adding cysteine to a hydrolysate/xylose system switches MFT and FFT from NOT DETECTED to dominant odorants, while simultaneously INHIBITING browning."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["MFT"]
+    absent_as_zero: true
+    conditions:
+      A: {label: "hydrolysate + xylose + cysteine, 100 C 60 min", system: {precursors: {Glycine: 10.0, D-Xylose: 10.0, L-Cysteine: 8.0}, temp_C: 100, ph: 6.5, water_activity: 0.98, time_min: 60}}
+      B: {label: "hydrolysate + xylose, no cysteine", system: {precursors: {Glycine: 10.0, D-Xylose: 10.0}, temp_C: 100, ph: 6.5, water_activity: 0.98, time_min: 60}}
+    expected_relation: "A>B"
+    source:
+      ref: chickencys2025
+      quote: "It was found that only Cys significantly reduced pH and inhibited browning, facilitating the production of key meaty odorants such as MFT and FFT."
+    fit_status: independent
+    fit_note: "Table 3 (OAV, not ppb): MFT and FFT are '-' in every no-cysteine column and 22,803 / 42,609 in the H-Cys-08 column."
+    model_scope_note: "Expressible only as presence/absence; scored with absent_as_zero."
+
+  - claim_id: CYS-04
+    statement: "Adding cysteine SUPPRESSES the pyrazine track: a system with cysteine produced only four pyrazines where the cysteine-free system produced 'a significant amount', and cysteine restrained browning."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["2,5-Dimethylpyrazine"]
+    conditions:
+      A: {label: "hydrolysate + xylose (no cysteine), 120 C", system: {precursors: {Glycine: 10.0, D-Xylose: 10.0}, temp_C: 120, ph: 6.5, water_activity: 0.98, time_min: 60}}
+      B: {label: "hydrolysate + xylose + cysteine, 120 C", system: {precursors: {Glycine: 10.0, D-Xylose: 10.0, L-Cysteine: 5.0}, temp_C: 120, ph: 6.5, water_activity: 0.98, time_min: 60}}
+    expected_relation: "A>B"
+    source:
+      ref: zhang2024rice
+      quote: "A significant amount of pyrazine compounds were produced in RHX-120 and RHX-140, whereas only 2,3-dimethyl-pyrazine, 2,5-dimethyl-pyrazine, 2,6-dimethyl-pyrazine, and trimethyl-pyrazine were identified in RHXC-120 and RHXC-140. ... The RHX-MRPs exhibited notably higher deltaE values than the corresponding RHXC-MRPs, indicating that adding cysteine could restrain brownish polymers formation."
+      quote_form: transliterated
+      quote_form_note: "Greek Delta written as 'delta'; otherwise exact. RHX = hydrolysate+xylose, RHXC = hydrolysate+xylose+cysteine."
+    fit_status: independent
+    fit_note: "The source reports a reduction in pyrazine VARIETY plus a browning reduction, not a 2,5-dimethylpyrazine concentration; 2,5-dimethylpyrazine survives in both systems. So the mapping to a single-compound decrease is approximate - indicative row."
+    model_scope_note: "Expressible."
+
+  - claim_id: LIP-04
+    statement: "Nonanal comes from the 9-/10-hydroperoxide of OLEIC acid (C18:1n9); hexanal and pentanal come from the 13-hydroperoxide of LINOLEIC acid (C18:2n6). The two markers report on different fatty-acid pools."
+    claim_type: ordering
+    category: lipid_lane
+    observables: ["Hexanal"]
+    conditions:
+      A: {label: "hexanal, soy isolate (linoleic 53%)", observable: "Hexanal", system: {precursors: {Soy Protein Isolate: 1000.0}, temp_C: 100, ph: 7.0, water_activity: 0.98, time_min: 30, protein_type: soy_iso, denaturation_state: 1.0, process_state: heated_matrix}}
+      B: {label: "nonanal, soy isolate (oleic 23%)", observable: "Nonanal", system: {precursors: {Soy Protein Isolate: 1000.0}, temp_C: 100, ph: 7.0, water_activity: 0.98, time_min: 30, protein_type: soy_iso, denaturation_state: 1.0, process_state: heated_matrix}}
+    expected_relation: "A>B"
+    source:
+      ref: zhou2025
+      quote: "9-hydroperoxide or 10-hydroperoxide can produce nonanal or ( E )-2-decenal; and 11-hydroperoxide can yield heptanal and octanal ... Pentanal and hexanal are mainly derived from the fragmentation of 13-hydroperoxide (from C18:2n6) and 15-hydroperoxide (from C20:4n6) alkyl radicals"
+    fit_status: fit_system_overlap
+    fit_note: >-
+      Independent SOURCE (a single-fatty-acid oxidation model with no connection to any
+      benchmark), but the model's hexanal:nonanal split is set by two registry constants -
+      MARKER_HYDROPEROXIDE_POOL and MATRIX_BENCHMARK_BASE_MARKER_YIELDS (Hexanal 0.205,
+      Nonanal 0.15) - that were chosen against matrix benchmarks. Not scored as a clean
+      out-of-sample win.
+    model_scope_note: "Expressible; src/lipid_oxidation.py implements exactly this pool split."
+
+  - claim_id: ACR-01
+    statement: "Acrylamide is NON-MONOTONIC in asparagine-source loading: it peaks at 30% pea protein isolate and falls at 50% and 70%, because the reducing-sugar co-substrate is diluted out."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["Acrylamide"]
+    conditions:
+      series:
+        - {label: "low protein (asn 3 mM, glucose 10 mM)", system: {precursors: {L-Asparagine: 3.0, D-Glucose: 10.0}, temp_C: 145, ph: 6.0, water_activity: 0.4, time_min: 2}}
+        - {label: "mid protein (asn 10 mM, glucose 7 mM)", system: {precursors: {L-Asparagine: 10.0, D-Glucose: 7.0}, temp_C: 145, ph: 6.0, water_activity: 0.4, time_min: 2}}
+        - {label: "high protein (asn 20 mM, glucose 3 mM)", system: {precursors: {L-Asparagine: 20.0, D-Glucose: 3.0}, temp_C: 145, ph: 6.0, water_activity: 0.4, time_min: 2}}
+    expected_relation: "peak"
+    source:
+      ref: goncuoglu2026
+      quote: "Acrylamide formation peaked at 30% protein and decreased at both 50% and 70% protein levels. ... At higher pea protein isolate levels (50-70%), the dilution of asparagine likely limited acrylamide formation"
+    fit_status: independent
+    fit_note: >-
+      The last clause of the source quote says 'dilution of asparagine' where the mechanism
+      it describes is dilution of the cornmeal REDUCING SUGAR (asparagine rises with protein).
+      The panel encodes the co-substrate-dilution reading, which is the one that makes the
+      measured peak make sense. Flagged because the encoding is an interpretation.
+    model_scope_note: "Expressible: the model takes both precursor concentrations."
+
+  - claim_id: ACR-02
+    statement: "Acrylamide vs temperature is NON-MONOTONIC: formation begins around 120 C and peaks at 160-180 C, declining above that."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["Acrylamide"]
+    conditions:
+      series:
+        - {label: "130 C", system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 130, ph: 6.0, water_activity: 0.4, time_min: 15}}
+        - {label: "170 C", system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 170, ph: 6.0, water_activity: 0.4, time_min: 15}}
+        - {label: "210 C", system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 210, ph: 6.0, water_activity: 0.4, time_min: 15}}
+    expected_relation: "peak"
+    source:
+      ref: qi2025
+      quote: "Firstly, it is produced by asparagine and reducing sugars through the Maillard reaction at around 120 C [ 102 , 103 , 104 ], and reaches its peak at 160-180 C."
+    fit_status: independent
+    fit_note: >-
+      Review-level source. This claim RECONCILES TEMP-01: Ma 2024's 130 > 150 > 170 ordering
+      sits on the falling limb only if the peak is below 130 C in that matrix, so the two
+      sources are not straightforwardly consistent either. What both agree on, and what the
+      model must reproduce to be useful, is that acrylamide is NOT monotonically increasing
+      in temperature. The model's answer to that is the same in both rows.
+    model_scope_note: "Expressible."
+
+  - claim_id: TIME-02
+    statement: "HMF accumulation vs time is NOT smooth: there is a long lag phase (flat to ~25 min at 150 C) followed by an exponential burst (5.7 -> 48 -> 262 mg/kg over the next 10 min)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["HMF"]
+    conditions:
+      series:
+        - {label: "5 min", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.3, time_min: 5}}
+        - {label: "25 min", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.3, time_min: 25}}
+        - {label: "35 min", system: {precursors: {Glycine: 10.0, D-Glucose: 10.0}, temp_C: 150, ph: 6.0, water_activity: 0.3, time_min: 35}}
+    expected_relation: "increasing"
+    source:
+      ref: fallico2022
+      quote: "Then, the HMF concentration remained almost constant in all samples up to 25 and 20 min of baking in sucrose cookies and fructose and glucose cookies, respectively. ... In these studied systems, both titratable acidity and HMF behaved similarly, with an initial lag-phase followed by an exponential increase exhibiting a strong exponential correlation (R2 > 0.9300)."
+    fit_status: independent
+    fit_note: >-
+      Scored only on the SIGN (increasing), which the model will almost certainly get. The
+      interesting question this row raises is the SHAPE - whether the model reproduces the
+      lag-then-burst - and the panel's ordinal scoring deliberately cannot see that. Read
+      the predicted values, not just the outcome.
+    model_scope_note: "Expressible."
+
+  - claim_id: SCOPE-03
+    statement: "2-Pentylfuran runs OPPOSITE to the thiols on sugar identity: hexoses give MORE 2-pentylfuran than pentoses (224/209 vs 126/135 ng/g)."
+    claim_type: ordering
+    category: scope
+    observables: ["2-Pentylfuran"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: ni2021
+      quote: "ROW| 2-pentyl-furan | 1014 | 126.3 +/- 19.8b | 134.5 +/- 27.5b | 223.7 +/- 35.6a | 209.3 +/- 47.3a"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 3; columns LRI | R-MRPs | X-MRPs | G-MRPs | F-MRPs, ng/g."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MEASURED MODEL LIMITATION. 2-Pentylfuran exists ONLY in the matrix lane,
+      where it is generated from the linoleate hydroperoxide pool by a fixed yield factor.
+      The free-precursor lane never emits it for any sugar/amino-acid combination probed
+      here. So the model structurally cannot represent a SUGAR effect on 2-pentylfuran -
+      in its world 2-pentylfuran has no Maillard route at all, only a lipid route.
+
+  # =====================================================================
+  # WAVE W (2026-08-28) - claims added from five interlibrary-loan papers.
+  #
+  # Two of these papers were previously ABSTRACT-ONLY in this file
+  # (hofmann1998) or absent entirely (mottram2002). Nothing in the model was
+  # tuned to build these rows, and no constant was fitted in Wave W at all.
+  #
+  # WHY THE MOTTRAM ROWS ARE HERE AND NOT IN data/benchmarks/: the paper's own
+  # methods sentence says its numbers "did not provide absolute concentrations
+  # in the aqueous solutions". Ordinal is the only honest home for them. See
+  # sources.mottram2002.ordinal_only_reason.
+  # =====================================================================
+
+  - claim_id: HOF-01
+    statement: "With cysteine at 145 C / 20 min / pH 5.0, FRUCTOSE is at least as effective as GLUCOSE for both thiols - the two hexoses measure within 1.3x of each other, with fructose slightly ahead on both."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "cysteine + D-fructose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "cysteine + D-glucose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "ribose 12.1 19.8 | xylose 9.6 14.3 | fructose 3.2 2.5 | glucose 2.8 1.9 | glucose-6-phosphate 0.9 0.6 | rhamnose 0.8 0.8 | maltose 0.6 0.3"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 1, "Amounts of FFT and MFT Generated from Cysteine and Various Carbohydrates",
+        columns "amountb (ug)" = FFT | MFT. Rows are verbatim; the column separator was
+        rewritten as "|" and the seven rows joined onto one line. Footnote a: "A solution
+        (100 mL) of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was
+        reacted at pH 5.0 in a laboratory autoclave." Footnote b: "Data are mean values of
+        triplicates and differed by not more than 10%." MFT: fructose 2.5 vs glucose 1.9 =
+        1.32x, which is outside the +/-10% replicate spread.
+    fit_status: independent
+    fit_note: >-
+      Both sides are now PANEL benchmarks (hofmann1998_fructose_cysteine_145C_20min_pH5 and
+      hofmann1998_glucose_cysteine_145C_20min_pH5, ingested in the same wave). That does NOT
+      make this row fit-adjacent: Wave W fitted nothing, to these rows or to anything else,
+      and src/fit_target_index.py names neither benchmark. If a future wave ever fits a
+      constant against either one, this row must be reclassified to fit_adjacent in the
+      same change.
+    model_scope_note: "Expressible: both sugars resolve and MFT is a model observable."
+
+  - claim_id: HOF-02
+    statement: "Same claim as HOF-01 for FFT: fructose is at least as effective as glucose (3.2 vs 2.8 ug)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "cysteine + D-fructose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "cysteine + D-glucose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "ribose 12.1 19.8 | xylose 9.6 14.3 | fructose 3.2 2.5 | glucose 2.8 1.9 | glucose-6-phosphate 0.9 0.6 | rhamnose 0.8 0.8 | maltose 0.6 0.3"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        As HOF-01. FFT: fructose 3.2 vs glucose 2.8 = 1.14x. THIS IS INSIDE THE +/-10%
+        REPLICATE SPREAD ON EACH SIDE, so the source does not resolve the ordering with
+        confidence; what it DOES resolve is that the two hexoses are the same to well within
+        a factor of 2. A model separating them by orders of magnitude is wrong regardless of
+        which way the sign falls, and that is what this row is really testing. Read the
+        predicted values, not just the outcome.
+    fit_status: independent
+    fit_note: "As HOF-01."
+    model_scope_note: "Expressible."
+
+  - claim_id: HOF-03
+    statement: "Under DRY-heating (6 min / 180 C on buffered silica gel), the pentose still beats the hexose for FFT, and by a wider margin than in water: ribose 97.2 ug vs glucose 1.4 ug."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "cysteine + D-ribose, dry-heated 180 C 6 min"
+        system: {precursors: {L-Cysteine: 33.0, D-Ribose: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.3, time_min: 6}
+      B:
+        label: "cysteine + D-glucose, dry-heated 180 C 6 min"
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.3, time_min: 6}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "ribose 22.9 12.1 1.2 97.2 55.3 19.8 2.5 25.1 | glucose 0.7 2.8 0.6 1.4 0.3 1.9 0.4 4.2 | rhamnose 0.2 0.8 0.1 0.4 0.1 0.8 0.1 3.1"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 2, "Influence of pH on the Amounts of FFT and MFT Generated from Cysteine and
+        Carbohydrates". Printed column order: FFT at pH 3.0 / 5.0 / 7.0 / dry-5.0c, then MFT
+        at pH 3.0 / 5.0 / 7.0 / dry-5.0c. The dry columns are the 4th and 8th. Footnote c:
+        "A mixture of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was
+        dry-heated for 6 min at 180 degC."
+    water_activity_caveat: >-
+      THE SOURCE STATES NO WATER ACTIVITY. The system is a silica gel (3.0 g) carrying 300 uL
+      of 2 mol/L phosphate buffer; neither an aw nor a system mass is printed, which is
+      exactly why the dry-heat rows are NOT ingested as absolute benchmarks anywhere in this
+      repository (see wave_w_dry_heat_exclusion in the Wave W benchmark files). The aw 0.3
+      written above is a STAND-IN, not a measurement. It is admissible HERE and only here
+      because this claim is a SAME-aw comparison: the identical stand-in appears on both
+      sides and cancels out of the ordering. Wave W verified that the model's outcome for
+      this row is unchanged at aw 0.2, 0.3 and 0.5. If a future edit ever makes the two sides
+      differ in aw, this row stops being interpretable and must be marked evaluable: false.
+    fit_status: independent
+    model_scope_note: "Expressible, with the stand-in aw documented above."
+
+  - claim_id: HOF-04
+    statement: "The dry/aqueous comparison within one carbohydrate SPLITS BY SIGN between the two odorants for glucose: dry-heating RAISES MFT (1.9 -> 4.2 ug) but LOWERS FFT (2.8 -> 1.4 ug)."
+    claim_type: ordering
+    category: moisture_aw
+    observables: ["MFT", "FFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "Under these conditions, ribose generated much higher concentrations of FFT than under aqueous conditions, whereas MFT was only slightly increased. In contrast, FFT especially was lower when hexoses were reacted under dry-heating conditions."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - THE COMPARISON IS TRIPLY CONFOUNDED IN THE SOURCE AND CANNOT BE
+      DECONFOUNDED. The aqueous arm is 145 degC for 20 min in bulk buffer; the dry arm is 180
+      degC for 6 min on buffered silica gel. Temperature, time AND water content all change
+      at once, and the source assigns no water activity to the dry arm. A model "miss" here
+      would be uninterpretable - it could be the aw term, the Arrhenius term, or the time
+      integration - and a model "hit" would be luck. WHAT WOULD MAKE IT EVALUABLE: a source
+      reporting a dry-heat aw explicitly, or an aqueous arm at matched 180 degC / 6 min.
+      Recorded rather than dropped, because the sign SPLIT (MFT up, FFT down, same system,
+      same change) is a genuinely discriminating fact about the branch point that no wave has
+      yet been able to test.
+
+  - claim_id: MOT-01
+    statement: "In phosphate-buffered cysteine/ribose at 140 C, MFT rises as the buffered pH falls from 5.6 to 4.2 (2230 -> 8250 ng/mmol sugar)."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30}
+      B:
+        label: "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: mottram2002
+      quote: "2-methyl-3-furanthiol 2940 1010 97 2050 2230 67 2960 2620 143 10230 8250 1867"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 1, the 2-methyl-3-furanthiol row, transcribed across all twelve printed data
+        columns in order: unbuffered (Rib-PO4, ribose, IMP), phosphate pH 5.6 (Rib-PO4,
+        ribose, IMP), phthalate pH 5.6 (Rib-PO4, ribose, IMP), phosphate pH 4.2 (Rib-PO4,
+        ribose, IMP). THE TWO CELLS THIS CLAIM USES are the ribose columns of the phosphate
+        blocks: pH 5.6 = 2230, pH 4.2 = 8250. Units per footnote a: "Approximate quantities
+        in headspace (ng/mmol of sugar)". The buffer holds: the paper reports final pH 5.5
+        and 3.9 respectively, i.e. within 0.3 unit as stated for the buffered systems.
+    fit_status: independent
+    fit_note: >-
+      No side of this comparison is a fit target. This is a pH claim from a lab, a method and
+      a decade different from every other pH row in this panel, which matters because the ph
+      category is the panel's worst (see report section 3.1).
+    corroboration_note: >-
+      INDEPENDENT AGREEMENT WITH THE HOFMANN pH HOLD-OUT. Hofmann & Schieberle 1998 (SIDA,
+      absolute, 145 C, 0.5 M phosphate) find ribose MFT rising 2.5 -> 19.8 -> 55.3 ug as pH
+      falls 7.0 -> 5.0 -> 3.0. Mottram & Nobrega 2002 (Tenax headspace, relative, 140 C, 0.2 M
+      pyrophosphate) find the same direction over 5.6 -> 4.2. Two labs, two methods, two
+      quantification classes, same sign. The direction of the pentose pH effect is now the
+      best-corroborated directional fact in the sulfur branch.
+    model_scope_note: "Expressible."
+
+  - claim_id: MOT-02
+    statement: "Same as MOT-01 for FFT: in phosphate-buffered cysteine/ribose, FFT rises as pH falls from 5.6 to 4.2 (1750 -> 3160 ng/mmol sugar)."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30}
+      B:
+        label: "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: mottram2002
+      quote: "2-furanmethanethiol 3310 2610 13 496 1750 23 840 3540 47 2360 3160 5000"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 1, the 2-furanmethanethiol (= 2-furfurylthiol, FFT) row, same twelve-column
+        order as MOT-01. The cells used are the ribose columns of the phosphate blocks:
+        pH 5.6 = 1750, pH 4.2 = 3160.
+    fit_status: independent
+    model_scope_note: "Expressible."
+
+  - claim_id: MOT-03
+    statement: "In phosphate-buffered cysteine/ribose at pH 5.6 / 140 C, MFT exceeds FFT in the headspace (2230 vs 1750 ng/mmol sugar)."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "MFT, cysteine + ribose, phosphate pH 5.6"
+        observable: "MFT"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+      B:
+        label: "FFT, cysteine + ribose, phosphate pH 5.6"
+        observable: "FFT"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: mottram2002
+      quote: "2-methyl-3-furanthiol 2940 1010 97 2050 2230 67 2960 2620 143 10230 8250 1867 | 2-furanmethanethiol 3310 2610 13 496 1750 23 840 3540 47 2360 3160 5000"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 1, both thiol rows, twelve-column order as MOT-01; the cells used are the phosphate pH 5.6 ribose column of each: MFT 2230, FFT 1750."
+    cross_method_caveat: >-
+      THIS ROW COMPARES TWO DIFFERENT COMPOUNDS MEASURED WITH A RESPONSE FACTOR OF 1. The
+      methods say quantities were estimated "with that of the 1,2-dichlorobenzene internal
+      standard using a response factor of 1" - i.e. no compound-specific response factor was
+      applied. Comparing MFT to FFT therefore carries an unquantified relative-response bias
+      that comparing MFT to MFT across systems (MOT-01/02) does not. The claim is kept
+      because the model's own MFT/FFT branch ratio is a live open question, but the ratio is
+      1.27x and the stated CV is 22%, so this row is WEAK EVIDENCE and must not be quoted as
+      settling the branch point. Hofmann's SIDA numbers, which DO carry compound-specific
+      response factors, are the authority: MFT 19.8 vs FFT 12.1 ug at pH 5.0, same sign.
+    fit_status: independent
+    model_scope_note: "Expressible, with the response-factor caveat above."
+
+  - claim_id: MOT-04
+    statement: "Ribose 5-phosphate and free ribose give similar sulfur-volatile yields WHEN BUFFERED, but ribose 5-phosphate greatly outperforms free ribose when unbuffered (unbuffered MFT 2940 vs 1010; total mercaptoketones 13760 vs 919 ng/mmol sugar)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: mottram2002
+      quote: "In the systems buffered with phosphate or phthalate buffers, both ribose and ribose phosphate systems gave similar quantities of sulfur volatiles. However, in the absence of buffer, the ribose system was relatively unreactive, especially for volatiles formed via the"
+      quote_form: verbatim
+      quote_form_note: "Abstract; the sentence is truncated at the page-column break in the extracted text and is quoted only as far as it is contiguous."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - PRECURSOR NOT IN THE RESOLVER. src/precursor_resolver.py resolves 19
+      species (data/species/precursors.yml); ribose 5-phosphate is not one of them, and
+      neither is inosine 5'-monophosphate (see MOT-05). The model cannot represent a
+      phosphorylated sugar at all, so it cannot express any claim about phosphate-ester
+      precursors. WHAT WOULD MAKE IT EVALUABLE: a ribose-5-phosphate entry in precursors.yml
+      WITH a dephosphorylation step in the network - adding the species alone would produce a
+      confidently wrong answer rather than an honest one, because the paper's own mechanism
+      is that "the greater reactivity of ribose 5-phosphate in the unbuffered system is
+      believed to result from the ready dephosphorylation of this sugar".
+
+  - claim_id: MOT-05
+    statement: "Inosine 5'-monophosphate is a much poorer sulfur-volatile precursor than either ribose or ribose 5-phosphate (MFT 97 vs 1010 vs 2940 ng/mmol sugar, unbuffered)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: mottram2002
+      quote: "The inosine monophosphate systems produced much lower quantities of volatiles than ribose phosphate or ribose systems."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - PRECURSOR NOT IN THE RESOLVER, as MOT-04. This is the meat-relevant one:
+      IMP is the dominant ribose reservoir in post-mortem muscle, so a model that cannot
+      represent it cannot reason about the actual precursor pool of cooked meat. Recorded as
+      a scope limitation rather than dropped.
+
+  - claim_id: MOT-06
+    statement: "Unbuffered cysteine/ribose is far less reactive than buffered, for MFT (1010 vs 2230 ng/mmol sugar) - buffer catalysis, not just pH."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A<B"
+    conditions: {}
+    source:
+      ref: mottram2002
+      quote: "On heating, the pH values of the unbuffered reaction mixtures containing cysteine and ribose 5-phosphate or free ribose dropped from the initial pH of 5.6 to pH 4.2 and 3.9, respectively."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - TWO SEPARATE MODEL LIMITATIONS, and both are worth stating. (1) NO BUFFER
+      TERM: the model takes a pH, not a buffer identity or molarity, so it cannot express
+      "phosphate catalyses the 2,3-enolisation step" at all - and that is the paper's own
+      explanation of the effect ("the role of phosphate and phthalate buffers in catalyzing
+      the Maillard reaction is associated only with the 2,3-enolization step in the breakdown
+      of the Amadori intermediate"). (2) NO pH TRAJECTORY: the unbuffered system's pH DRIFTS
+      from 5.6 to 3.9 during the run, and the model integrates at a single fixed pH, so there
+      is no single pH value that honestly represents the unbuffered arm. Assigning it 5.6
+      (initial) or 3.9 (final) would each be a choice this repository would then be scoring
+      itself against. NOT MADE. WHAT WOULD MAKE IT EVALUABLE: a time-varying pH input, plus a
+      buffer-catalysis term keyed to the enolisation branch.
+
+  # ── WAVE X (2026-08-28): the step-level tables ────────────────────────────
+  # Seven claims from Hofmann & Schieberle 1998 Tables 3, 6, 7, 8 and 10 — the tables
+  # that constrain INDIVIDUAL STEPS. Three are evaluable. Every value below was read
+  # from the rendered page images of data/articles/hofmann1998.pdf by Wave X and
+  # cross-checked against the paper's own mol% column by an independent arithmetic
+  # route; the conversions are recorded in the benchmark files under
+  # data/benchmarks/hofmann1998_* and data/benchmarks/step_level_unreachable/.
+  #
+  # ONE OF THESE ROWS TOUCHES A FIT TARGET AND IS LABELLED FOR IT. The NF/H2S system
+  # (Table 4 = Table 10 row 2) is the sole fit target of
+  # results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json, so
+  # HOX-01 and HOX-02, which use it as one side of a comparison, are `fit_adjacent`
+  # and are EXCLUDED FROM THE HEADLINE — even though the fit was REJECTED by its own
+  # isotope gate and moved no constant. A rejected fit still means a value was
+  # selected by looking at that row, and the conservative classification is the one
+  # that does not have to be argued for.
+
+  - claim_id: HOX-01
+    statement: "Of the four MFT precursor systems in Table 10, the hydroxyacetaldehyde/mercapto-2-propanone pair is the most effective - ahead of norfuraneol/H2S (268.1 vs 211.2 ug)."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Hydroxyacetaldehyde: 20.0, Mercapto-2-propanone: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Norfuraneol: 20.0, Hydrogen sulfide: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "hydroxyacetaldehyde/mercapto-2-propanone 268.1 0.24 | NF/H2S 211.2 0.19 | NF/cysteine 50.8 0.05 | thiamin 8.2 0.01"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 10, "Amounts of MFT Liberated from Various Precursors or Precursor Systems",
+        columns "MFT" = ugb | %. The four rows are verbatim; the column separator was
+        rewritten as "|" and the rows joined onto one line. Footnote a: "An aqueous solution
+        (50 mL) of the precursors was reacted at pH 5.0 in a laboratory autoclave." Footnote
+        b: "See footnote b in Table 1." The stub column head states the charge: "precursor
+        (1.0 mmol) each". 268.1/211.2 = 1.27x, outside the +/-10% replicate spread.
+    fit_status: fit_adjacent
+    fit_note: >-
+      The B side is `hofmann1998_norfuraneol_h2s_145C_20min_pH5`, the sole fit target of
+      results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json. The fit was
+      REJECTED by its isotope gate and moved no constant, so no value in the tree was
+      actually chosen by looking at this row - but a rejected fit is still a look, and the
+      conservative classification needs no argument. Excluded from the headline.
+    model_scope_note: "Expressible: all four precursors resolve (Wave X) and MFT is a model observable."
+
+  - claim_id: HOX-02
+    statement: "Norfuraneol with H2S is a far better MFT precursor than norfuraneol with cysteine (211.2 vs 50.8 ug) - an equimolar cysteine charge delivers much less effective sulfur than free H2S."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Norfuraneol: 20.0, Hydrogen sulfide: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "norfuraneol + cysteine, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Norfuraneol: 20.0, L-Cysteine: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "hydroxyacetaldehyde/mercapto-2-propanone 268.1 0.24 | NF/H2S 211.2 0.19 | NF/cysteine 50.8 0.05 | thiamin 8.2 0.01"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        As HOX-01. 211.2/50.8 = 4.16x, far outside the replicate spread. This is the
+        cleanest sulfur-donor comparison in the paper: the carbon precursor, the charge, the
+        volume, the pH and the thermal treatment are all identical and only the sulfur
+        source differs.
+    fit_status: fit_adjacent
+    fit_note: "As HOX-01: the A side is the fit target. Excluded from the headline."
+    model_scope_note: >-
+      Expressible, and worth watching: the model has no explicit account of how much H2S a
+      mole of cysteine delivers - `Cysteine_Degradation` and `Beta_Elimination` each emit one
+      H2S per cysteine with no yield term - so a system given cysteine has, in the model's
+      bookkeeping, roughly the sulfur a system given H2S has. This row is where that
+      simplification becomes measurable.
+
+  - claim_id: HOX-03
+    statement: "From hydroxyacetaldehyde + mercapto-2-propanone, MFT formation RISES strongly with pH: 15.5 ug at pH 3.0, 268.1 at pH 5.0, 311.5 at pH 7.0 - a 20x rise from pH 3 to pH 7."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0"
+        system: {precursors: {Hydroxyacetaldehyde: 20.0, Mercapto-2-propanone: 20.0}, temp_C: 145, ph: 7.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "hydroxyacetaldehyde + mercapto-2-propanone at pH 3.0"
+        system: {precursors: {Hydroxyacetaldehyde: 20.0, Mercapto-2-propanone: 20.0}, temp_C: 145, ph: 3.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "1 3.0 26.1 0.02 15.5 0.01 | 2 5.0 40.5 0.04 268.1 0.23 | 3 7.0 58.2 0.05 311.5 0.27"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 8, "Amounts of FFT and MFT Generated from Hydroxyacetaldehyde and
+        Mercapto-2-propanone", columns expt | pH | FFT ugb | % | MFT ugb | %. Experiments
+        1-3 (the aqueous ones) are verbatim; the column separator was rewritten as "|" and
+        the rows joined onto one line. Experiment 4 is the DRY system and is deliberately
+        not quoted here. Footnote a: "An aqueous solution (50 mL) of hydroxyacetaldehyde
+        (1 mmol) and mercapto-2-propanone (1 mmol) was reacted in a laboratory autoclave."
+        The paper's own prose: "At pH 3.0, low concentrations of both odorants were formed.
+        Increasing the pH to 5.0 significantly favored the formation of the MFT."
+    fit_status: independent
+    fit_note: >-
+      Both sides are PANEL benchmarks (hofmann1998_c2c3_recombination_145C_20min_pH7 and
+      _pH3, ingested in this wave) and NEITHER is a fit target. The only fit run in Wave X
+      was against the norfuraneol/H2S row and it was rejected.
+    model_scope_note: >-
+      Expressible in principle and, as it turns out, NOT expressible in practice - which is
+      the finding. This lane's three families (`Mercaptoketone_Formation`,
+      `Mercaptoketone_Aldol_Addition`, `Mercaptoketone_Cyclodehydration`) appear in none of
+      the pH sets in src/conditions.py, so the lane carries NO pH term at all and predicts
+      the identical value at pH 3, 5 and 7. Wave P chose that deliberately, and said so:
+      reaching the existing machinery would have required a family name containing the
+      substring "furfural", "a naming trick, not a model". This row is the measurement that
+      turns that recorded caveat into a scored miss.
+
+  - claim_id: HOX-04
+    statement: "Thiamin is by far the weakest of the four MFT precursor systems - 8.2 ug against 268.1 for the C2+C3 pair, a factor of 33."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A<B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "Thiamin was less efficient, because by factors of 30 or 25 less MFT was generated compared to the two binary precursor mixtures."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - THE THIAMIN-ONLY SYSTEM PREDICTS NOTHING AT ALL, and the reason is not
+      about thiamine chemistry. `SmirksEngine.enumerate` on thiamine alone emits SEVEN steps
+      and does reach MFT; the FLUX PROPAGATOR then returns an empty dict, because
+      `Recommender.predict_from_steps` seeds its tracking dict from the initial
+      concentrations only and `_evaluate_step` refuses any step whose reactant is untracked.
+      Thiamine's first step is a HYDROLYSIS - "Thiamine + water -> thiazole + pyrimidinium" -
+      water is not in the initial pool, and nothing has yet produced any. WATER IS NOT A
+      TRACKED SPECIES, so a hydrolytic step cannot be the FIRST step of a system. Every other
+      benchmark hides this: a sugar + amino acid system makes water in its own first step.
+      Recorded in full in data/benchmarks/step_level_unreachable/
+      hofmann1998_UNREACHABLE_thiamin_145C_20min_pH5.json. WHAT WOULD MAKE IT EVALUABLE: a
+      seeded water pool - which is not a local change, because it moves every
+      water-consuming step on the panel.
+
+  - claim_id: HOX-05
+    statement: "From hydroxyacetaldehyde + 2-oxopropanal, BOTH furan-2-aldehyde and norfuraneol rise strongly and monotonically with pH (FA 101.2 -> 364.5 -> 1443.1 ug; NF 153.1 -> 885.1 -> 3610.5 ug at pH 3 / 5 / 7), and NF exceeds FA at every pH."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "3.0 101.2 0.11 153.1 0.13 | 5.0 364.5 0.40 885.1 0.78 | 7.0 1443.1 1.60 3610.5 3.18"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 6, "Amounts of Furan-2-aldehyde (FA) and NF Generated from Hydroxyacetaldehyde
+        and 2-Oxopropanal", columns pH | FA ugb | % | NF ugb | %. Rows verbatim, separator
+        rewritten as "|". Footnote a: "An aqueous solution (50 mL) of hydroxyacetaldehyde
+        (1 mmol) and 2-oxopropanal (1 mmol) was reacted in a laboratory autoclave."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MISSING STEP. Fed hydroxyacetaldehyde + 2-oxopropanal enumerate ZERO
+      steps: the network fragments sugars (`Retro_Aldol_Fragmentation`, `Enolisation_2_3`)
+      and has no step running the other way. This is the cleanest pH experiment in the paper
+      - no amino acid, no sugar, two C2/C3 fragments and a 14x (FA) / 24x (NF) rise across
+      four pH units - and the model cannot attempt it. WHAT WOULD MAKE IT EVALUABLE: the two
+      aldol branches Hofmann & Schieberle DRAW AND NAME in their Figure 2, both exactly
+      balanced with species the engine already has; see data/benchmarks/
+      step_level_unreachable/hofmann1998_UNREACHABLE_c2c3_aldol_145C_20min_pH5.json.
+
+  - claim_id: HOX-06
+    statement: "Doubling the H2S charge more than doubles mercapto-2-propanone formation from 2-oxopropanal (1650 -> 3600 ug); H2S is the limiting reagent."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "Because higher H2S concentrations increased the formation of the mercaptoketone (Table 7), it might be assumed that H2S is the limiting factor in this reaction."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MISSING OBSERVABLE, not a missing step. The reaction runs:
+      `Mercaptoketone_Formation` fires on 2-oxopropanal + H2S and 1-mercapto-2-propanone
+      enters the pool. It is discarded at the projection layer, which reports only compounds
+      present in the desirable / off-flavour / toxic registries, and 1-mercapto-2-propanone
+      is in none of them. WHAT WOULD MAKE IT EVALUABLE: one SOURCED odour threshold for
+      1-mercapto-2-propanone. Wave X refused to invent one - adding a compound with a made-up
+      threshold in order to make a row scorable is the exact move this audit exists to
+      remove.
+
+  - claim_id: HOX-07
+    statement: "With H2S, furan-2-aldehyde is a far better FFT precursor than ribose (550.8 vs 9.2 ug, a factor of 60) and than the 3-deoxypentosone (78.6 ug, a factor of 7)."
+    claim_type: ordering
+    category: ranking
+    observables: ["FFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "More FFT was liberated from the furan-2-aldehyde, compared to ribose and the 3-deoxyribosulose, by factors of 60 or 7, respectively (Table 3)."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - BOTH COMPARATORS ARE UNREACHABLE, for two different reasons, and the A
+      side is the only one of the three the model can run. Ribose + H2S contains no primary
+      amine, and the network's entire sugar trunk is entered through `_amadori_cascade`, so
+      the sugar is untouched: NO AMINE-FREE SUGAR DEGRADATION LANE EXISTS. The fed
+      3-deoxypentosone canonicalises to the engine's own intermediate but has no CONSUMER,
+      because the `Enolisation_1_2` dehydration that turns it into furan-2-aldehyde is
+      emitted only from inside `_enolisation_steps`, which requires an Amadori product. Both
+      are recorded with their exact stoichiometry in data/benchmarks/
+      step_level_unreachable/. The second is the cheapest unblock on the Wave X list: no new
+      chemistry, no new barrier, only a trigger moved.

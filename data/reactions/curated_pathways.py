@@ -4,7 +4,12 @@ data/reactions/curated_pathways.py — Hand-curated Maillard reaction pathways.
 Defines the 5 core Maillard cascades (A–E) as explicit ElementaryStep objects
 with validated SMILES, ready to feed into the xTB screening pipeline.
 
-Sources: pathways.md, Maillard_meat.md, Maillard_Plant_based.md
+Sources: data/Gemini_Deep_Research/maillard_meat.md,
+         data/Gemini_Deep_Research/maillard_plant_based.md -- both LLM digests, not papers.
+         Also cites `pathways.md`, which exists nowhere in this repository; the name is kept
+         on the record rather than dropped. 2026-08-28 (Wave S5): the bare filenames were
+         repointed at the surviving copies after the byte-identical docs/research/archives/
+         duplicates were deleted. No pathway, SMILES or value was changed.
 """
 
 import sys

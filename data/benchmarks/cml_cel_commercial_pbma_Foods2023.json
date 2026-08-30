@@ -24,8 +24,15 @@
       "mean_abs_log10_error": 0.25
     }
   },
+  "unit_correction_note": {
+    "date": "2026-08-27",
+    "status": "corrected_expected_to_fail",
+    "what_changed": "conc_ppb held the source's mg/kg values (CML 32.0, CEL 55.0) in a field declared as ppb. They now hold true ppb: 32.0 mg/kg x 1000 = 32000 ppb and 55.0 mg/kg x 1000 = 55000 ppb. Source values are the Fu et al. (2023) commercial-PBMA midpoints (CML 16.46-47.61 mg/kg, CEL 25.21-86.23 mg/kg).",
+    "expected_miss": "This benchmark is now EXPECTED TO FAIL. src.safety.predict_cml/predict_cel return ppb (see the UNITS contract in src/safety.py) and their empirical constants were tuned against the mis-unit-ed values, so at these conditions they predict 26.6 ppb (CML) and 51.7 ppb (CEL) against 32000 and 55000 ppb: ratios 1204x and 1064x, i.e. 3.08 and 3.03 log10 units low. Mean abs log10 error ~3.05 against a 0.25 contract.",
+    "policy": "Tolerances are deliberately UNCHANGED. The pre-correction pass (ratios 1.005-1.204) was an artifact of the unit collision, not agreement; loosening the contract would hide a real 1000x calibration gap. Fix the predictors against real ug/kg data, do not retune the tolerance."
+  },
   "measured_volatiles": {
-    "Nε-(Carboxymethyl)lysine (CML)": {"conc_ppb": 32.0, "uncertainty_pct": 20},
-    "Nε-(Carboxyethyl)lysine (CEL)": {"conc_ppb": 55.0, "uncertainty_pct": 20}
+    "Nε-(Carboxymethyl)lysine (CML)": {"conc_ppb": 32000.0, "uncertainty_pct": 20},
+    "Nε-(Carboxyethyl)lysine (CEL)": {"conc_ppb": 55000.0, "uncertainty_pct": 20}
   }
 }

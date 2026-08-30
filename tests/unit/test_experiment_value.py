@@ -39,7 +39,8 @@ def test_load_compound_specs_aliases_resolve():
     assert long_form is not None
     assert short_form is long_form
     assert bare is long_form
-    assert long_form.odour_threshold_ug_per_kg == pytest.approx(0.0001)
+    # Audit 2026-08-26: corrected from 0.0001 to the commonly cited aqueous ODT.
+    assert long_form.odour_threshold_ug_per_kg == pytest.approx(0.007)
 
 
 def test_envelope_miss_inside_ci_is_zero():
@@ -87,9 +88,46 @@ def test_suggest_template_safety_marker():
     assert template == "missing_absolute_anchor"
 
 
-def test_suggest_template_meaty():
-    template, _ = _suggest_template("2-Methyl-3-furanthiol (MFT)", ci_width_log10=0.1, inside_ci=False)
+def test_suggest_template_meaty_in_a_protein_matrix():
+    """Matrix system -> the matrix-varying template. Unchanged behaviour.
+
+    2026-08-27 (Wave I): this test previously called `_suggest_template` with no system
+    at all and asserted `blocking_benchmark_gap`. That was the defect, not the contract:
+    template selection matched only the compound NAME, so a free-precursor aqueous
+    benchmark (thiamine + cysteine + glucose in buffer, no protein) was being handed a
+    protocol whose defining factor is "Matrix (SPI, PPI)". A CRO following that card would
+    have run the wrong experiment. The selector now takes the benchmark's system, so this
+    test states which system it is asserting about, and the free-precursor case below is
+    the regression the old test could not have caught.
+    """
+    template, _ = _suggest_template(
+        "2-Methyl-3-furanthiol (MFT)",
+        ci_width_log10=0.1,
+        inside_ci=False,
+        execution_path="matrix_only",
+        protein_type="pea_iso",
+    )
     assert template == "blocking_benchmark_gap"
+
+
+def test_suggest_template_meaty_in_a_free_precursor_system_does_not_prescribe_a_matrix():
+    """2026-08-27 (Wave I): the regression the rank-1 experiment card actually had."""
+    template, rationale = _suggest_template(
+        "2-Methyl-3-furanthiol (MFT)",
+        ci_width_log10=0.1,
+        inside_ci=False,
+        execution_path="free_precursor",
+        protein_type="free",
+    )
+    assert template == "free_precursor_sulfur_yield"
+    assert "FREE-PRECURSOR" in rationale
+
+    from src.doe_generator import DOE_TEMPLATES
+
+    factors = " ".join(DOE_TEMPLATES[template]["factors"]).lower()
+    assert "spi" not in factors and "ppi" not in factors, (
+        "a free-precursor protocol must not vary a protein matrix that is not in the system"
+    )
 
 
 def test_rank_experiments_sorted_descending_with_full_payload(tmp_path: Path):
@@ -153,7 +191,7 @@ def test_infer_matrix_family_id_prefix_for_unattributed_benchmark():
 
 
 def test_infer_matrix_family_free_precursor_and_unknown():
-    assert infer_matrix_family("cys_glucose_150C_Farmer1999", {}) == "free"
+    assert infer_matrix_family("cys_ribose_140C_Hofmann1998", {}) == "free"
     assert infer_matrix_family("thiamine_thermal_120C", {}) == "free"
     assert infer_matrix_family("completely_novel_id", {}) == "unknown"
 

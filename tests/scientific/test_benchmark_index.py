@@ -12,16 +12,16 @@ from src.presentation import render_benchmark_index_markdown
 
 def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
     entries = build_benchmark_index([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
         ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
     by_id = {entry.benchmark_id: entry for entry in entries}
 
-    assert by_id["cys_glucose_150C_Farmer1999"].execution_path == "free_precursor"
-    assert by_id["cys_glucose_150C_Farmer1999"].benchmark_engine == "fast_observable"
-    assert by_id["cys_glucose_150C_Farmer1999"].cantera_role == "diagnostic_reference_only"
-    assert by_id["cys_glucose_150C_Farmer1999"].thermodynamic_gating_policy == "diagnostic_only"
+    assert by_id["cys_ribose_140C_Hofmann1998"].execution_path == "free_precursor"
+    assert by_id["cys_ribose_140C_Hofmann1998"].benchmark_engine == "fast_observable"
+    assert by_id["cys_ribose_140C_Hofmann1998"].cantera_role == "diagnostic_reference_only"
+    assert by_id["cys_ribose_140C_Hofmann1998"].thermodynamic_gating_policy == "diagnostic_only"
     assert by_id["pea_isolate_40C_PratapSingh2021"].execution_path == "matrix_only"
     assert by_id["pea_isolate_40C_PratapSingh2021"].benchmark_engine == "matrix_intake_headspace"
     assert by_id["pea_isolate_40C_PratapSingh2021"].cantera_role == "not_authoritative"
@@ -37,7 +37,7 @@ def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
 
 def test_benchmark_index_markdown_exposes_execution_path():
     entries = build_benchmark_index([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
         ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])

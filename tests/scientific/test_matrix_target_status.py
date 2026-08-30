@@ -34,12 +34,14 @@ def test_matrix_target_status_distinguishes_quantitative_from_internal_and_direc
     assert pea_meaty["next_best_action"] == "prioritize_mechanistic_refinement"
     assert pea_meaty["promotion_blocker"] == "insufficient externally measured target closure; current comparator is internal reference-only"
 
+    # Audit 2026-08-26: ProtocolPilot payloads are frozen model output; they
+    # surface as synthetic and carry reference-grade support, never measured.
     pea_protocol = by_id["pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"]
-    assert pea_protocol["external_data_status"] == "internal_measured_quantitative"
-    assert pea_protocol["support_counts"]["internal_candidate"] == 0
-    assert pea_protocol["support_counts"]["directional_support"] >= 1
+    assert pea_protocol["external_data_status"] == "synthetic_diagnostic_only"
+    assert pea_protocol["support_counts"]["internal_reference_candidate"] >= 1
+    assert pea_protocol["support_counts"]["internal_measured_candidate"] == 0
     assert pea_protocol["mechanistic_priority_ready"] is True
-    assert pea_protocol["promotion_blocker"] == "insufficient externally measured target closure; current comparator is internal measured only"
+    assert pea_protocol["promotion_blocker"] == "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)"
 
     summary = payload["summary"]
     assert summary["quantitative_closed"] >= 1
@@ -52,5 +54,5 @@ def test_matrix_target_status_distinguishes_quantitative_from_internal_and_direc
     assert "quantitative_closed" in markdown
     assert "internal_measured_candidate" in markdown
     assert "internal_reference_candidate" in markdown
-    assert "internal_measured_quantitative" in markdown
+    assert "synthetic_diagnostic_only" in markdown
     assert "prioritize_mechanistic_refinement" in markdown

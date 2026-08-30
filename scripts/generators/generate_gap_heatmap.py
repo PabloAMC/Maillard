@@ -318,6 +318,7 @@ def _short_benchmark(name: str) -> str:
         "soy_isolate_40C_PratapSingh2021": "Pratap Singh 2021 (Soy Isolate, 40°C)",
         "soy_isolate_ribose_cysteine_100C_45min_Internal2026": "Internal 2026 (Soy Isolate + Ribose + Cys, 100°C)",
         "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026": "Protocol Pilot 2026 (Soy Isolate + Ribose + Cys, 100°C)",
+        "thiamine_cys_glucose_120C_Bolton1994": "Bolton 1994 (Thiamine + Cys + Glucose, 120°C)",
         "thiamine_cys_ribose_100C_Hofmann1996": "Hofmann 1996 (Thiamine + Cys + Ribose, 100°C)",
         "thiamine_cys_xylose_145C_Cerny2008": "Cerny 2008 (Thiamine + Cys + Xylose, 145°C)",
     }

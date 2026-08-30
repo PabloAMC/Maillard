@@ -158,9 +158,9 @@ def build_hexanal_nonanal_calibration_artifact() -> Dict[str, Any]:
                     },
                 },
                 "scientific_basis": [
-                    "ProtocolPilot2026 is treated as measured internal comparator evidence rather than external promotion evidence.",
-                    "Internal2026 is treated as the frozen internal reference lane for matrix-calibration drift checks.",
-                    "Closure here means the adverse-marker calibration route is internally concordant; it does not unlock external decision-ready promotion by itself.",
+                    "ProtocolPilot2026 is a SYNTHETIC diagnostic payload whose volatile values were frozen from the model's own run path (audit 2026-08-26); it is not measured evidence of any kind.",
+                    "Internal2026 is the frozen internal reference lane for matrix-calibration drift checks; it is likewise model output, not a measurement.",
+                    "Closure here therefore means only that two snapshots of the model agree with each other (a reproducibility/drift check); it carries zero calibration evidence and does not unlock any promotion.",
                 ],
                 "next_best_action": (
                     "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
@@ -179,6 +179,12 @@ def build_hexanal_nonanal_calibration_artifact() -> Dict[str, Any]:
             "marker_count": len(prediction_change_rows),
             "default_ratio_bounds": list(HEXANAL_NONANAL_RATIO_BOUNDS),
             "policy": "hexanal_nonanal_protocol_pilot_to_internal2026_ratio_check_closes_internal_calibration_routes_but_not_external_promotion_claims",
+            "comparator_nature": "synthetic_model_output_vs_synthetic_model_output",
+            "evidence_disclaimer": (
+                "Both lanes compare frozen model output against frozen model output "
+                "(audit 2026-08-26); 'closed' is a reproducibility statement, not "
+                "agreement with any measurement."
+            ),
         },
         "lanes": lane_rows,
         "prediction_change_cascade": prediction_change_rows,

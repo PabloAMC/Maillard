@@ -3,6 +3,18 @@ from __future__ import annotations
 from typing import Iterable
 
 
+# Pure display-name lookup. Every accessor falls back to a derived label for unknown ids,
+# so entries here are safe to retain for benchmarks that are no longer in the panel, and
+# adding/removing an entry never changes which benchmarks are evaluated.
+#
+# Four entries below (cys_glucose_150C_Farmer1999, cys_ribose_150C_Mottram1994,
+# thiamine_cys_ribose_100C_Hofmann1996, acrylamide_asparagine_glucose_Parker2012) refer to
+# benchmarks removed from the panel on 2026-08-26 for unlocatable sources. Parker2012 sits in
+# data/benchmarks/quarantined/, where the loader's non-recursive glob keeps it out of the
+# panel; the other three were deleted outright once source recovery confirmed no source
+# exists. The labels are kept in all four cases so historical artifacts and forensic reports
+# still render readable names. thiamine_cys_ribose_100C_Hofmann1996 was rebuilt from a real
+# source as thiamine_cys_glucose_120C_Bolton1994, which has its own entry below.
 _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
     "acrylamide_asparagine_glucose_Parker2012": {
         "plain": "Asparagine + glucose, acrylamide benchmark (Parker, 2012)",
@@ -45,8 +57,8 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "latex": r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)",
     },
     "pea_isolate_uht_140C_Trikusuma2019": {
-        "plain": "Pea isolate UHT, 140 C (Trikusuma, 2019)",
-        "latex": r"Pea isolate UHT, $140\,^{\circ}$C (Trikusuma, 2019)",
+        "plain": "Pea isolate UHT, 140 C (Trikusuma, 2020)",
+        "latex": r"Pea isolate UHT, $140\,^{\circ}$C (Trikusuma, 2020)",
     },
     "resconi_2023_pbma_beef_identity_benchmark": {
         "plain": "PBMA vs beef comparator, 150 C (Resconi et al., 2023)",
@@ -64,9 +76,18 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "plain": "Soy isolate + ribose + cysteine, 100 C (Protocol Pilot, 2026)",
         "latex": r"Soy isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)",
     },
+    # QUARANTINED 2026-08-27 (Wave I) -- kept so any surviving reference to the id renders
+    # with a name instead of a raw slug, NOT because the benchmark is in the panel. Its
+    # values have no possible source: 10.1007/s10068-022-01194-w reports relative peak areas
+    # for glucose/fructose at pH 7.5 and never mentions FFT or MFT. See
+    # data/benchmarks/quarantined/README.md.
     "spi_hvp_xylose_120C_PMC9905368": {
-        "plain": "SPI hydrolysate + xylose, 120 C (Cho et al., 2023)",
-        "latex": r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)",
+        "plain": "SPI hydrolysate + xylose, 120 C (Cho et al., 2023) [QUARANTINED]",
+        "latex": r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]",
+    },
+    "thiamine_cys_glucose_120C_Bolton1994": {
+        "plain": "Thiamine + cysteine + glucose, 120 C (Bolton et al., 1994)",
+        "latex": r"Thiamine + cysteine + glucose, $120\,^{\circ}$C (Bolton et al., 1994)",
     },
     "thiamine_cys_ribose_100C_Hofmann1996": {
         "plain": "Thiamine + cysteine + ribose, 100 C (Hofmann, 1996)",
@@ -76,9 +97,10 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "plain": "Thiamine + cysteine + xylose, 145 C (Cerny, 2008) [reference anchor]",
         "latex": r"Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor]",
     },
+    # QUARANTINED 2026-08-27 (Wave I) -- see the spi_hvp_xylose entry above.
     "wheat_gluten_hvp_xylose_120C_PMC9905368": {
-        "plain": "Wheat gluten hydrolysate + xylose, 120 C (Cho et al., 2023)",
-        "latex": r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)",
+        "plain": "Wheat gluten hydrolysate + xylose, 120 C (Cho et al., 2023) [QUARANTINED]",
+        "latex": r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]",
     },
 }
 

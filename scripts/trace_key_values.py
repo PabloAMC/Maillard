@@ -1,8 +1,77 @@
+"""LLM-DIGEST ECHO CENSUS. **THIS SCRIPT DOES NOT VERIFY ANYTHING.**
+
+2026-08-27 (Wave T3) -- DISARMED. Read this before believing its output.
+
+WHAT THIS SCRIPT ACTUALLY MEASURES
+----------------------------------
+For each registry entry in ``data/lit/*.json`` it collects every numeric leaf, splits
+the entry's citation string into surnames, then searches the **LLM-generated markdown
+under ``data/Gemini_Deep_Research/``** for lines containing one of those surnames. If a
+number appears as a **substring** anywhere in a +/-30-line window around such a line,
+that number is recorded as "echoed".
+
+That is the entire test. In full:
+
+* the corpus searched is **machine-generated text**, not literature;
+* the match is textual proximity, not attribution -- nothing checks that the digest
+  sentence is *about* the quantity, the compound, the units, or the conditions;
+* the match is a bare substring, so ``4.5`` matches ``14.52``, ``0.045`` and ``2004.5``;
+* a surname match is case-insensitive and unanchored, so ``Bi`` matches ``binding``,
+  ``combination`` and every other word containing "bi";
+* a +/-30-line window in these digests routinely spans several unrelated references.
+
+WHAT IT DOES **NOT** DO
+-----------------------
+It never opens a paper. It never contacts CrossRef, PubMed, Unpaywall or a publisher.
+It cannot distinguish a number the digest copied correctly from one the digest invented.
+It has no notion of a primary source at all.
+
+WHY THE VOCABULARY CHANGED
+--------------------------
+This script previously printed its top-line result as **"Fully Verified (All values
+matched): 153 (57.5%)"**, under the report title *"Numeric Value Traceability and
+**Verification** Report"*. Those 153 rows were a census of values whose only known
+upstream is an LLM digest -- i.e. the **laundering census** -- published under a heading
+asserting the opposite. It directly contradicted this repository's own rule
+(``data/Gemini_Deep_Research/README.md``):
+
+    "The deep-research report says so" is not provenance.
+
+The old and new vocabulary, one-for-one:
+
+    OLD                                      NEW
+    "Fully Verified (All values matched)" -> "DIGEST-ECHO (NOT VERIFICATION)"
+    "Partially Verified (Some values ...)"-> "PARTIAL DIGEST-ECHO (NOT VERIFICATION)"
+    "Unverified (No values matched)"      -> "NO DIGEST ECHO (origin unaccounted for)"
+    "Fully Verified Entries"              -> "Entries whose every number echoes an LLM digest"
+    "...verified in the Deep Research
+       markdown files"                    -> "...found only inside LLM-generated text;
+                                              no paper was opened"
+    report title: "... Verification Report"->"LLM-Digest Echo Census -- NOT a verification
+                                              result"
+
+A HIGH ECHO COUNT IS A BAD SIGN, NOT A GOOD ONE
+-----------------------------------------------
+Read the output backwards from how the old wording invited. An entry in the DIGEST-ECHO
+class is one for which this repository can point at nothing but its own machine-generated
+research dump. That is the condition the audit is trying to eliminate. An entry in the
+NO DIGEST ECHO class is *not* thereby better -- it merely has no identified upstream at
+all, which may be worse.
+
+Nothing in this output may be cited as evidence that a value is verified, sourced,
+anchored, or safe to ship. Verification means a human opened the primary source; see
+``results/validation/citation_verification_ledger.md`` for the (identity-only, CrossRef)
+pass that does exist, and note that even that one checks the DOI, not the number.
+"""
+
 import json
 import re
 from pathlib import Path
 
-ROOT = Path(".").resolve()
+# 2026-08-27 (Wave T3): was `Path(".").resolve()`, i.e. the process CWD, so the script
+# silently produced an empty census unless invoked from the repo root. Anchored to the
+# file instead.
+ROOT = Path(__file__).resolve().parents[1]
 DATA_LIT_DIR = ROOT / "data" / "lit"
 GDR_DIR = ROOT / "data" / "Gemini_Deep_Research"
 OUTPUT_REPORT_PATH = ROOT / "results" / "validation" / "key_value_trace_report.md"
@@ -157,31 +226,74 @@ def trace():
         }
 
     # 4. Generate the MD Report
+    #
+    # 2026-08-27 (Wave T3): the three counters below are UNCHANGED in what they
+    # compute. Only their names and their printed labels changed, because the old
+    # names asserted a fact the computation cannot establish. `fully_verified` was
+    # never a count of verified entries; it is the count of entries all of whose
+    # numbers can be found inside LLM-generated text near a surname.
     total_entries = len(results)
-    fully_verified = sum(1 for r in results.values() if len(r["unmatched_vals"]) == 0)
-    partially_verified = sum(1 for r in results.values() if 0 < len(r["unmatched_vals"]) < len(r["all_vals"]))
-    unverified = sum(1 for r in results.values() if len(r["unmatched_vals"]) == len(r["all_vals"]))
+    full_digest_echo = sum(1 for r in results.values() if len(r["unmatched_vals"]) == 0)
+    partial_digest_echo = sum(1 for r in results.values() if 0 < len(r["unmatched_vals"]) < len(r["all_vals"]))
+    no_digest_echo = sum(1 for r in results.values() if len(r["unmatched_vals"]) == len(r["all_vals"]))
 
     report_lines = [
-        "# Numeric Value Traceability and Verification Report",
-        f"This report traces the numeric values (`key_values`, `Ea`, `yields`, etc.) in the Maillard database registries back to the raw and structured Deep Research markdown corpus.",
+        "# LLM-Digest Echo Census — **NOT a verification result**",
         "",
-        "## Summary Metrics",
-        f"- **Total Entries Evaluated**: {total_entries}",
-        f"- **Fully Verified (All values matched)**: {fully_verified} ({fully_verified/total_entries*100:.1f}%)",
-        f"- **Partially Verified (Some values matched)**: {partially_verified} ({partially_verified/total_entries*100:.1f}%)",
-        f"- **Unverified (No values matched)**: {unverified} ({unverified/total_entries*100:.1f}%)",
+        "> ## ⚠ READ THIS BEFORE READING ANY NUMBER BELOW",
+        "> ",
+        "> **This report verifies nothing. No paper was opened to produce it.**",
+        "> ",
+        "> It measures ONE thing: whether a registry entry's numbers appear as text within",
+        "> ±30 lines of one of its citation surnames inside the **machine-generated markdown**",
+        "> under `data/Gemini_Deep_Research/`. Matching is bare substring matching (`4.5`",
+        "> matches `14.52`) and surname matching is unanchored (`Bi` matches `binding`).",
+        "> No primary source, DOI resolver, publisher or index is contacted at any point.",
+        "> ",
+        "> Per this repository's own rule (`data/Gemini_Deep_Research/README.md`):",
+        "> ",
+        "> > \"The deep-research report says so\" **is not provenance.**",
+        "> ",
+        "> **Therefore the DIGEST-ECHO class below is the LAUNDERING CENSUS, not a clean bill",
+        "> of health.** A high echo count is a bad sign: it means that for those entries this",
+        "> repository can point at nothing but its own LLM research dump. Entries in the",
+        "> NO DIGEST ECHO class are not thereby better — they simply have no identified",
+        "> upstream at all, which may be worse.",
+        "> ",
+        "> Nothing in this file may be cited as evidence that a value is verified, sourced,",
+        "> anchored or safe to ship. The only verification pass that exists in this repo is",
+        "> `results/validation/citation_verification_ledger.md`, and even that checks the DOI's",
+        "> identity, not the number.",
+        "> ",
+        "> *History: until 2026-08-27 this file was titled \"Numeric Value Traceability and",
+        "> **Verification** Report\" and printed its top line as \"**Fully Verified** (All values",
+        "> matched): 153 (57.5%)\". Same computation, opposite claim. Retitled and re-worded by",
+        "> Wave T3 of the audit remediation; see `scripts/trace_key_values.py` for the full",
+        "> old→new vocabulary map and `tasks/audit_remediation.md` § Wave T3.*",
         "",
         "---",
         "",
-        "## Unverified & Partially Verified Entries (Action Required)",
-        "The following registry entries have numerical values that could not be verified in the surrounding context of their citation in the markdown files.",
+        "## Summary Metrics",
+        f"- **Total Entries Evaluated**: {total_entries}",
+        f"- **DIGEST-ECHO (NOT VERIFICATION) — every number echoes the LLM digest corpus**: "
+        f"{full_digest_echo} ({full_digest_echo/total_entries*100:.1f}%)",
+        f"- **PARTIAL DIGEST-ECHO (NOT VERIFICATION) — some numbers echo the corpus**: "
+        f"{partial_digest_echo} ({partial_digest_echo/total_entries*100:.1f}%)",
+        f"- **NO DIGEST ECHO — origin unaccounted for even by the digests**: "
+        f"{no_digest_echo} ({no_digest_echo/total_entries*100:.1f}%)",
+        "",
+        "---",
+        "",
+        "## Entries with NO / PARTIAL digest echo",
+        "The numbers listed for each entry were **not** found near their citation surname in the",
+        "LLM digest corpus. This says nothing about whether they are right: it says only that the",
+        "digests do not account for them, so their origin is unidentified by this script.",
         ""
     ]
 
-    report_lines.append("| Entry ID | Citation | Sources | Mismatched / Unmatched Values |")
+    report_lines.append("| Entry ID | Citation | Sources | Values NOT echoed anywhere in the digest corpus |")
     report_lines.append("|---|---|---|---|")
-    
+
     for entry_id, r in sorted(results.items()):
         if r["unmatched_vals"]:
             sources_str = ", ".join(r["sources"])
@@ -192,27 +304,33 @@ def trace():
         "",
         "---",
         "",
-        "## Fully Verified Entries",
-        "The following registry entries are 100% matched and verified in the Deep Research markdown files.",
+        "## DIGEST-ECHO entries — every number found only inside LLM-generated text",
+        "**NOT VERIFICATION.** For each entry below, every numeric value was located inside",
+        "`data/Gemini_Deep_Research/**` within ±30 lines of a citation surname. No paper was",
+        "opened. This is the list of entries whose only demonstrated upstream is a machine-",
+        "generated digest — i.e. the remediation worklist, not the safe list.",
         ""
     ])
 
-    report_lines.append("| Entry ID | Citation | Sources | Verified Values |")
+    report_lines.append("| Entry ID | Citation | Sources | Values echoed in the digest corpus (unverified) |")
     report_lines.append("|---|---|---|---|")
-    
+
     for entry_id, r in sorted(results.items()):
         if not r["unmatched_vals"]:
             sources_str = ", ".join(r["sources"])
             vals_str = ", ".join(map(str, sorted(r["all_vals"])))
             report_lines.append(f"| `{entry_id}` | {r['citation']} | {sources_str} | {vals_str} |")
 
+    report_lines.append("")
+
     # Write report
     OUTPUT_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_REPORT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(report_lines))
 
-    print(f"Trace report successfully written to {OUTPUT_REPORT_PATH}")
-    print(f"Verified: {fully_verified}/{total_entries}")
+    print(f"Digest-echo census written to {OUTPUT_REPORT_PATH}")
+    print("NOTE: this script verifies nothing. It measures echo into LLM-generated text.")
+    print(f"DIGEST-ECHO (not verified): {full_digest_echo}/{total_entries}")
 
 if __name__ == "__main__":
     trace()

@@ -1,0 +1,105 @@
+{
+  "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+  "evidence_class": "external_validation_only",
+  "maillard_path_holdout": true,
+  "identifier": "Schibilsky, S. (2019). 'Bildung fluechtiger Verbindungen und Carbonsaeuren in Modellsystemen unter Maillard-Bedingungen.' Dissertation, Fakultaet III - Prozesswissenschaften, Technische Universitaet Berlin; referees Prof. Dr. L. W. Kroh and Prof. Dr. S. Rohn; defended 15.02.2019; Berlin 2019. DepositOnce bitstream 969d7075-4e3d-48ec-9a26-fed34b3c7a55.",
+  "identifier_scheme": "citation",
+  "source_doi_absent_reason": "This is a university dissertation with no registered DOI; CrossRef returns no record for the title (checked 2026-08-27). The typed identifier/identifier_scheme pair is used instead, the same convention the repository already uses for the DOI-less Liu 2021 NC State thesis in the legacy hold-out.",
+  "source_metadata": {
+    "citation": "Schibilsky, S. Bildung fluechtiger Verbindungen und Carbonsaeuren in Modellsystemen unter Maillard-Bedingungen. Dissertation, Technische Universitaet Berlin, 2019.",
+    "origin": "external_literature",
+    "evidence_class": "external_validation_only",
+    "notes": "MAILLARD-PATH HOLD-OUT (Wave U, 2026-08-27). Never use for calibration, refitting, or any promotion decision."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "DepositOnce (TU Berlin institutional repository) bitstream, https://depositonce.tu-berlin.de/bitstreams/969d7075-4e3d-48ec-9a26-fed34b3c7a55/download, downloaded as PDF and text-extracted locally with pdftotext -layout. Title page, section 5.1.6/5.1.6.2, Tabelle 10 and Tabelle 17 were all read directly.",
+    "retrieval_date": "2026-08-27",
+    "quoted_method": "5.1.6 (thermolysis): 'Die Thermolysen erfolgten in abgeschmolzenen 10 mL Glasspiessampullen (Neolab) oder in 20 mL Headspace-Vials mit Boerdelkappe (Amchro) in einem Thermoblock (Behr Labortechnik, behrotest ET 2) bzw. in einem Umlufttrockenschrank (Heraeus UT 6) mit Aluminiumblock fuer eine Reaktionszeit bis zu 300 min und bei einer Temperatur vom (130 +/- 1) degC. ... Des Weiteren wurde der pH-Wert auf 5,00 +/- 0,01 und 8,00 +/- 0,01 eingestellt. Die Einstellung des pH-Wertes erfolgte an einem pH-Meter ... mit verduennter Natronlauge-Loesung bzw. verduennter Salzsaeure-Loesung. Das Probenvolumen in den Glasspiessampullen betrug 2 mL und in den Headspace-Vials 6 mL.' 5.1.6.2 (the glucose/alanine model): 'Es wurden jeweils 2,228 g L-Alanin (0,5 M) und 4,504 g D-Glucose bzw. D-Fructose (0,5 M) in einen 50 mL Messkolben eingewogen und mit bidestilliertem Wasser aufgefuellt. ... Mit den jeweiligen Stammloesungen wurde eine 1:2 Verduennung gemacht (Endkonzentration 0,25 M).'",
+    "quoted_table": "'Tabelle 17: Uebersicht fluechtiger Verbindungen in einem D-Glc/L-Ala-Modell bei verschiedenen pH-Werten (2 h; 130 degC)', columns 'D-Glc/L-Ala-Modell pH 5 [uM]' and 'D-Glc/L-Ala-Modell pH 8 [uM]'. Rows, verbatim: Diacetyl 4 / 11 ; Acetol 17 / 546 ; 2,3-Pentandion 4 / 12 ; Furfural 17 / 25 ; Furfurylalkohol 9 / 34 ; Furaneol 9 / 46 ; HMF 454 / 798 ; 2-Acetylpyrrol 5 / 8.",
+    "quoted_quantification": "Quantification is by extraction + GC/MS against 2-methoxypyrazine as internal standard with MEASURED response factors, not an assumed RF of 1. 'Tabelle 10: Response-Faktoren verschiedener Stickstoff- und Sauerstoffheterozyklen nach der Fluessig-Fluessig-Extraktion mit Dichlormethan' gives, against the 2-Methoxypyrazin (Standard) row: Furaneol M = 128,13 g/mol, RF(DCM) = 0,482, STABW 0,95%; Furfural M = 96,08, RF = 1,171, STABW 2,16%; Hydroxymethylfurfural M = 126,11, RF = 2,330, STABW 21,30%. The thesis states its own limitation: 'Bei einer externen Kalibrierung konnten eventuelle Matrixeffekte nicht ausreichend beruecksichtigt werden, aber es war eine sehr gute Linearitaet ... gegeben.'",
+    "quantification_class": "internal_standard_with_measured_response_factors",
+    "quantification_verdict": "ADMISSIBLE WITH CAVEATS, AND THIS IS THE ONLY FURANONE QUANTIFICATION THE WHOLE HARVEST PRODUCED. It clears the bar that killed most candidates - the response factors are MEASURED and tabulated, not assumed to be 1. The caveats are real and are carried into the score: (a) HMF's response factor has a 21.3% relative standard deviation, by far the worst in the table, so the HMF target is the softest of the three; (b) the system is UNBUFFERED - pH is set at t=0 with dilute NaOH/HCl and will drift over 2 h at 130 degC, and the thesis does not report the final pH; (c) German-language source with no DOI.",
+    "language": "German (Doktorarbeit). All quoted strings are transliterated ASCII of the printed German; umlauts are written oe/ue/ae and 'ss' for eszett. Digits and units are unchanged."
+  },
+  "contamination_disclosure": {
+    "status": "CLEAN",
+    "dedupe": "No DOI exists for this thesis. Checked 2026-08-27 across data/, docs/, src/, results/: zero hits for '11303/9152', 'depositonce', 'Schibilsky'. CrossRef has no record for the title. The repository has never seen this source.",
+    "note": "The repository DOES hold a different Maillard thesis from a different group at glucose/glycine 0.2 M pH 6.8 (Martins 2003, WUR edepot 121418) and it is heavily used for calibration - data/lit/arrhenius_params.yml takes Ea = 97 kJ/mol from its Table 5.2 and data/lit/timeseries/ holds ten of its species curves. That is exactly why Martins' own HMF value (20 umol/L at 120 degC) was DECLINED for this hold-out and this independent thesis was used instead. See the declined-candidates table in the wave record."
+  },
+  "precursor_concentration_provenance": {
+    "status": "FULLY_STATED_IN_SOURCE",
+    "derivation": "2.228 g L-alanine and 4.504 g D-glucose made up to 50 mL = 0.5 M stock of each, then diluted 1:2 to a final concentration of 0.25 M each. Check: 4.504 g / 180.16 g/mol / 0.050 L = 0.500 M; 2.228 g / 89.09 g/mol / 0.050 L = 0.500 M. Both reproduce the thesis's own '0,5 M' label exactly.",
+    "residual_caveats": "UNBUFFERED. The pH is set to 5.00 +/- 0.01 (or 8.00 +/- 0.01) at t = 0 with dilute NaOH/HCl and nothing holds it there; over 2 h at 130 degC a 0.25 M sugar/amino-acid system generates enough organic acid to move it substantially, and the thesis does not report the final pH. The pH entered below is therefore the INITIAL pH, and any pH-driven term in the model is being scored against a starting condition rather than an average one."
+  },
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "D-Glucose": {
+      "concentration_mM": 250.0
+    },
+    "L-Alanine": {
+      "concentration_mM": 250.0
+    }
+  },
+  "conditions": {
+    "temp_C": 130.0,
+    "ph": 8.0,
+    "water_activity": 0.98,
+    "time_min": 120.0,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "As the pH-5.0 arm: Schibilsky 2019, sec. 5.1.6, bidistilled water, UNBUFFERED, pH set at t=0 ('auf 5,00 +/- 0,01 und 8,00 +/- 0,01 eingestellt'). This is the pH-8.0 arm. SOURCE NOT ON DISK; second-hand."
+    }
+  },
+  "metadata": {
+    "tier": "REFERENCE",
+    "family": "carbohydrate_pyrolysis_and_caramelization",
+    "execution_path": "free_precursor",
+    "notes": "One of a pH PAIR (pH 5 and pH 8) at otherwise identical conditions. The pair is the point: the thesis measures Furaneol rising 5.1x, HMF 1.76x and Furfural 1.47x from pH 5 to pH 8, all in the SAME direction. The repository's pH machinery (src/conditions.get_ph_multiplier, the ionisation term, the enolisation route correction) has never been scored against a paired free-precursor measurement out of sample."
+  },
+  "reference_volatiles": {
+    "Furfural": {
+      "conc_ppb": 2402.0,
+      "uncertainty_pct": null
+    },
+    "DMHF": {
+      "conc_ppb": 5893.98,
+      "uncertainty_pct": null
+    },
+    "5-Hydroxymethylfurfural (HMF)": {
+      "conc_ppb": 100635.78,
+      "uncertainty_pct": null
+    }
+  },
+  "holdout_targets": {
+    "Furfural": {
+      "target_unit": "ppb",
+      "target_value": 2402.0,
+      "native_unit_and_conversion": "Printed as 25 uM in Tabelle 17. Converted with the molecular weight the THESIS ITSELF prints for furfural in Tabelle 10 (M = 96,08 g/mol): 25 umol/L x 96.08 g/mol = 2402.0 ug/L = 2402.0 ppb. This is a pure unit conversion through a molecular weight and the paper's OWN volumetric basis (umol per litre of solution). It introduces no molar basis and no free parameter, which is what separates it from the mol%->ppb conversion Wave S2b found hiding a 10 mM assumption under the retired 342/200 anchor.",
+      "target_quote": "'Tabelle 17: Uebersicht fluechtiger Verbindungen in einem D-Glc/L-Ala-Modell bei verschiedenen pH-Werten (2 h; 130 degC)', columns 'D-Glc/L-Ala-Modell pH 5 [uM]' and 'D-Glc/L-Ala-Modell pH 8 [uM]'. Rows, verbatim: Diacetyl 4 / 11 ; Acetol 17 / 546 ; 2,3-Pentandion 4 / 12 ; Furfural 17 / 25 ; Furfurylalkohol 9 / 34 ; Furaneol 9 / 46 ; HMF 454 / 798 ; 2-Acetylpyrrol 5 / 8.",
+      "unit_commensurable": true,
+      "smiles": "O=Cc1ccco1"
+    },
+    "DMHF": {
+      "target_unit": "ppb",
+      "target_value": 5893.98,
+      "native_unit_and_conversion": "Printed as 'Furaneol 46' uM in Tabelle 17. Thesis Tabelle 10 prints M = 128,13 g/mol for Furaneol: 46 umol/L x 128.13 = 5893.98 ppb. 'Furaneol' is 4-hydroxy-2,5-dimethyl-3(2H)-furanone, which data/species/desirable_targets.yml carries under the name DMHF (SMILES CC1=C(O)C(=O)C(C)O1); the compound name in this bundle is the repository's registry name so the comparison layer matches it.",
+      "target_quote": "'Tabelle 17: Uebersicht fluechtiger Verbindungen in einem D-Glc/L-Ala-Modell bei verschiedenen pH-Werten (2 h; 130 degC)', columns 'D-Glc/L-Ala-Modell pH 5 [uM]' and 'D-Glc/L-Ala-Modell pH 8 [uM]'. Rows, verbatim: Diacetyl 4 / 11 ; Acetol 17 / 546 ; 2,3-Pentandion 4 / 12 ; Furfural 17 / 25 ; Furfurylalkohol 9 / 34 ; Furaneol 9 / 46 ; HMF 454 / 798 ; 2-Acetylpyrrol 5 / 8.",
+      "unit_commensurable": true,
+      "smiles": "CC1=C(O)C(=O)C(C)O1"
+    },
+    "5-Hydroxymethylfurfural (HMF)": {
+      "target_unit": "ppb",
+      "target_value": 100635.78,
+      "native_unit_and_conversion": "Printed as 798 uM in Tabelle 17. Thesis Tabelle 10 prints M = 126,11 g/mol for Hydroxymethylfurfural: 798 umol/L x 126.11 = 100635.78 ppb.",
+      "target_quote": "'Tabelle 17: Uebersicht fluechtiger Verbindungen in einem D-Glc/L-Ala-Modell bei verschiedenen pH-Werten (2 h; 130 degC)', columns 'D-Glc/L-Ala-Modell pH 5 [uM]' and 'D-Glc/L-Ala-Modell pH 8 [uM]'. Rows, verbatim: Diacetyl 4 / 11 ; Acetol 17 / 546 ; 2,3-Pentandion 4 / 12 ; Furfural 17 / 25 ; Furfurylalkohol 9 / 34 ; Furaneol 9 / 46 ; HMF 454 / 798 ; 2-Acetylpyrrol 5 / 8.",
+      "unit_commensurable": true,
+      "softest_target_note": "HMF's tabulated response factor carries a 21.3% relative SD, the worst of the three.",
+      "smiles": "O=Cc1ccc(CO)o1"
+    }
+  }
+}

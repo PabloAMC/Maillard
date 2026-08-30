@@ -135,8 +135,19 @@ def test_priority_summary_flags_53_targets_as_runtime_bound_in_current_repo():
     payload = build_audit_payload(min_score=6)
     target_summary = summarize_priority_targets(payload["items"])
 
-    assert target_summary["spi_hvp_xylose"]["status"] == "RUNTIME_BOUND"
-    assert target_summary["wheat_gluten_hvp_xylose"]["status"] == "RUNTIME_BOUND"
+    # RE-PINNED 2026-08-27 (Wave I). `spi_hvp_xylose` and `wheat_gluten_hvp_xylose` fell
+    # from RUNTIME_BOUND to REGISTRY_ONLY because their benchmark files were QUARANTINED:
+    # the cited source 10.1007/s10068-022-01194-w uses glucose/fructose at pH 7.5 and
+    # reports only relative peak areas, never mentioning FFT or MFT, so it cannot be the
+    # source of the absolute ppb values those files carried. They are now under
+    # data/benchmarks/quarantined/ and the loader's non-recursive glob no longer sees
+    # them, which is exactly what REGISTRY_ONLY means: the registry entry still exists,
+    # but nothing at runtime is bound to it.
+    # This is the honest expectation, not a relaxation — asserting RUNTIME_BOUND here
+    # would assert that a fabricated benchmark is still wired into the runtime.
+    # See data/benchmarks/quarantined/README.md (Wave I section).
+    assert target_summary["spi_hvp_xylose"]["status"] == "REGISTRY_ONLY"
+    assert target_summary["wheat_gluten_hvp_xylose"]["status"] == "REGISTRY_ONLY"
     assert target_summary["acrylamide_fast_kinetics"]["status"] == "RUNTIME_BOUND"
     assert target_summary["cml_cel_commercial_pba_ranges"]["status"] == "RUNTIME_BOUND"
     assert target_summary["furosine_crossover"]["status"] == "RUNTIME_BOUND"

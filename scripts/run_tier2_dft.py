@@ -37,7 +37,7 @@ def load_geometries(reaction_key: str) -> dict:
     ts_path = base_path / "xtbpath_ts.xyz"
     
     if not r_path.exists() or not ts_path.exists():
-        raise FileNotFoundError(f"Missing geometries for {reaction_key} in {base_path}. Have you run scripts/generate_mapped_geometries.py and run_xtb.sh?")
+        raise FileNotFoundError(f"Missing geometries for {reaction_key} in {base_path}. Have you run scripts/generators/generate_mapped_geometries.py and run_xtb.sh?")
         
     with open(r_path, "r") as f:
         r_xyz = f.read()

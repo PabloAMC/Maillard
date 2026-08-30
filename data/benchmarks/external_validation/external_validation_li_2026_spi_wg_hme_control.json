@@ -4,14 +4,22 @@
     "ph": 7.0,
     "temp_C": 160.0,
     "time_min": 0.4167,
-    "water_activity": 0.35
+    "water_activity": 0.35,
+    "buffer": {
+      "species": "buffer_unknown",
+      "concentration_M": null,
+      "initial_ph_scale": "unstated",
+      "provenance_class": "unknown",
+      "provenance_note": "Li et al. 2026, Foods 15(5):912. SOURCE PAPER NOT ON DISK and the repo carries NO verbatim methods quotation for the medium. The scored system is a 57 wt%-moisture high-moisture-extrusion melt, not an aqueous solution, so 'buffer' may not even be the right question -- but that is a reason to record UNKNOWN, not a licence to record 'none'. The protocol's own note is explicit: 'The paper does not publish a final-blend pH or water-activity closure' (data/protocols/external_validation/external_validation_li_2026_spi_wg_hme_control.yaml, benchmark_alignment.notes). ph_disagreement: the only pH in the whole record is 7.0 for the WHEAT-GLUTEN ENZYMATIC PRETREATMENT at 30 C -- a different unit operation -- and it has been transposed onto a 160 C extrusion run. conditions.ph = 7.0 is unsourced AS AN EXTRUSION CONDITION. Reported, not edited.",
+      "ph_disagreement": "conditions.ph = 7.0 is the wheat-gluten pretreatment pH at 30 C, not a stated extrusion condition."
+    }
   },
   "denaturation_state": 0.8,
   "evidence_class": "external_validation_only",
   "matrix_ranking_contract": {
     "adverse_markers": [
-      "hexanal",
       "2-pentylfuran",
+      "hexanal",
       "nonanal",
       "1-hexanol"
     ],
@@ -23,13 +31,13 @@
       {
         "direction": "lower",
         "expected_rank": 1,
-        "name": "hexanal",
+        "name": "2-pentylfuran",
         "role": "adverse_marker"
       },
       {
         "direction": "lower",
         "expected_rank": 2,
-        "name": "2-pentylfuran",
+        "name": "hexanal",
         "role": "adverse_marker"
       },
       {
@@ -48,16 +56,26 @@
   },
   "measured_volatiles": {
     "1-hexanol": {
-      "conc_ppb": 20.04
+      "conc_ppb": 20.04,
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
     },
     "2-pentylfuran": {
-      "conc_ppb": 221.51
+      "conc_ppb": 5625.8,
+      "content_correction_note": "2026-08-27 (Wave K/M): was 221.51, which is the paper's MALTOL row (volatile table, HMPE-0 min control column); the 2-Pentylfuran row reads 5625.80 +/- 63.75 ug/kg -- the previous value was 25x low. Off-by-one table-row transcription error, verified against Europe PMC fullTextXML (PMC12984281). See results/validation/content_verification_wave_k.md.",
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
     },
     "hexanal": {
-      "conc_ppb": 605.6
+      "conc_ppb": 605.6,
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
     },
     "nonanal": {
-      "conc_ppb": 29.42
+      "conc_ppb": 72.66,
+      "content_correction_note": "2026-08-27 (Wave K/M): was 29.42, which is the paper's DECANAL row (volatile table, HMPE-0 min control column); the Nonanal row reads 72.66 +/- 1.46 ug/kg. Off-by-one table-row transcription error, verified against Europe PMC fullTextXML (PMC12984281). See results/validation/content_verification_wave_k.md.",
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
     }
   },
   "metadata": {
@@ -83,8 +101,11 @@
   "source_metadata": {
     "evidence_class": "external_validation_only",
     "generator": "matrix_experiment_intake",
-    "measurement_date": "2026-01-01",
+    "measurement_date": "not_applicable",
+    "measurement_date_note": "This bundle is SYNTHESIZED from published anchors; no measurement date exists. Until 2026-08-27 this field carried a fabricated '<publication year>-01-01'.",
     "notes": "External validation hold-out synthesized from flavor_reference_payloads.json; never use for calibration or promotion. li_2026_spi_wg_hme_hexanal_control_point: track_family_11_hme_hexanal_baseline_without_claiming_executable_benchmark_closure li_2026_spi_wg_hme_nonanal_control_point: retain_family_11_nonanal_baseline_as_supporting_off_note_panel_evidence li_2026_spi_wg_hme_1_hexanol_control_point: retain_family_11_1_hexanol_baseline_as_supporting_off_note_panel_evidence li_2026_spi_wg_hme_2_pentylfuran_control_point: retain_family_11_2_pentylfuran_baseline_as_supporting_off_note_panel_evidence",
-    "origin": "external_literature"
+    "origin": "external_literature",
+    "source_publication_year": "2026",
+    "source_reference": "Li et al. (2026), Foods 15(5):912"
   }
 }

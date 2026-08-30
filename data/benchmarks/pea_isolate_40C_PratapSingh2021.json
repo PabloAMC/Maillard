@@ -24,50 +24,52 @@
     "extrusion_history": "none",
     "matrix_format": "pea protein isolate slurry"
   },
+  "content_correction_note": {
+    "date": "2026-08-27",
+    "wave": "Wave K/M content verification",
+    "verified_against": "Molecules 2021, 26, 4104, Table 1, retrieved as JATS XML from Europe PMC (PMC8271896)",
+    "corrections": [
+      "hexanal 260 ppb -> 1138.00 ppb (paper: 1138.00 +/- 297.30; repo value was 4.38x low, origin unknown, no derivation found)",
+      "hexanol REMOVED: paper Table 1 reports n.d. for pea, and its text states pea proteins 'contained no alcohol compounds'; the previous 80 ppb had no source",
+      "expected ranks corrected: with the paper's values hexanal (1138) outranks 2-pentylfuran (638); the previous ranking encoded the erroneous values",
+      "2-pentylfuran 638 ppb CONFIRMED verbatim against the paper"
+    ],
+    "report": "results/validation/content_verification_wave_k.md",
+    "origin_identified_2026_08_27_wave_t3": "ORIGIN IDENTIFIED 2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-05/T1-04). Wave K recorded the retired 260 / 380 ppb hexanal and 80 / 120 ppb 1-hexanol values as 'origin unknown, no derivation found'. They are not unknown. All four are printed in data/benchmarks/maillard_validation_benchmarks.md section 3.1 -- the repository's own abstract-reconstructed internal brief -- as '~260 +/- 35', '~380 +/- 42', '~80' and '~120'. That is the same table, the same file and the same commit era as section 1.3, which Wave S2b proved fabricated (the MFT 342 / FFT 200 case). It carries the identical forensic fingerprint, now independently validated twice: in that document a BOLD or unhedged cell is transcribed from a real abstract and a '~'-hedged cell is invented. Section 3.1's two BOLD cells are 2-pentylfuran '638 +/- 49' and '2492 +/- 199' -- exactly the two values Wave K confirmed VERBATIM against the paper -- and its tilde-hedged cells are exactly the four Wave K found wrong or fabricated. The fingerprint predicts the Wave K result perfectly. NO VALUE IS CHANGED BY THIS NOTE: the corrections above already stand. This records that the wrong numbers came from inside this repository, not from a misreading of Pratap-Singh et al., and that section 3.1 is a confirmed source of laundered values. Consequence still live: the 1-hexanol observability factors in src/matrix_calibration_registry.py (0.063 pea, 0.143 soy) are back-solved from the retired ~80 / ~120 ppb and were never refitted -- see that file's headers."
+  },
   "matrix_ranking_contract": {
     "observable_targets": [
       {
-        "name": "2-pentylfuran",
+        "name": "hexanal",
         "role": "adverse_marker",
         "expected_rank": 1,
         "direction": "higher"
       },
       {
-        "name": "hexanal",
+        "name": "2-pentylfuran",
         "role": "adverse_marker",
         "expected_rank": 2,
-        "direction": "higher"
-      },
-      {
-        "name": "hexanol",
-        "role": "adverse_marker",
-        "expected_rank": 3,
         "direction": "higher"
       }
     ],
     "adverse_markers": [
-      "2-pentylfuran",
       "hexanal",
-      "hexanol"
+      "2-pentylfuran"
     ],
     "citation_provenance": [
-      "Pratap-Singh 2021 ambient slurry GC-MS profile for pea protein isolate"
+      "Pratap-Singh 2021 (Molecules 26:4104) Table 1, fully quantified ppb for pea protein isolate"
     ],
     "calibration_mode": "compound_specific_headspace",
     "notes": "Off-flavour ranking contract for the ambient pea-isolate matrix lane; still outside the strict gate."
   },
   "measured_volatiles": {
     "hexanal": {
-      "conc_ppb": 260,
-      "uncertainty_pct": 14
+      "conc_ppb": 1138.0,
+      "uncertainty_pct": 26
     },
     "2-pentylfuran": {
       "conc_ppb": 638,
       "uncertainty_pct": 8
-    },
-    "hexanol": {
-      "conc_ppb": 80,
-      "uncertainty_pct": 19
     }
   },
   "protein_type": "pea_iso",

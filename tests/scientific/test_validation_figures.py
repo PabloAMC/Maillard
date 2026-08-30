@@ -40,8 +40,32 @@ def test_validation_overview_payload_reports_current_tolerance_closure():
     assert payload["experimental_outside_1_5x_benchmark_count"] == sum(1 for ratio in experimental_ratios if ratio > 1.5)
     assert payload["experimental_outside_2x_benchmark_count"] == sum(1 for ratio in experimental_ratios if ratio > 2.0)
     assert payload["experimental_worst_quantitative_ratio"] == pytest.approx(max(experimental_ratios, default=0.0))
-    assert payload["worst_quantitative_point"]["benchmark_id"] == "thiamine_cys_xylose_145C_Cerny2008"
-    assert payload["worst_quantitative_point"]["reference_signal_origin"] == "reference_volatiles"
+    # UPDATED 2026-08-27 (cause: reporting-consistency fix, audit remediation Part 2a).
+    # `worst_quantitative_ratio` was always a max over ALL quantitative benchmarks, but
+    # `worst_quantitative_point` was selected only from the reference_volatiles subset.
+    # The two coincided by accident until the Bolton1994 benchmark entered the panel, at
+    # which point the artifact reported a worst ratio of 173x next to a worst point of
+    # 3.4x. This test pinned the buggy pairing (it asserted the point was Cerny, a
+    # reference_volatiles row, while the ratio above it came from the full population).
+    # The generator now draws both from the same population and exposes the reference-only
+    # view under explicitly named `reference_worst_quantitative_*` keys. The assertions
+    # below pin the CONSISTENCY property rather than a specific benchmark id, so the pair
+    # can never silently diverge again.
+    assert payload["worst_quantitative_population"] == "all_quantitative_benchmarks"
+    assert payload["worst_quantitative_point"]["max_ratio"] == pytest.approx(
+        payload["worst_quantitative_ratio"]
+    ), "worst_quantitative_point and worst_quantitative_ratio must describe the same population"
+
+    reference_ratios = [
+        float(row["max_ratio"] or 0.0)
+        for row in payload["quantitative_benchmarks"]
+        if row["reference_signal_origin"] != "measured_volatiles"
+    ]
+    assert payload["reference_worst_quantitative_ratio"] == pytest.approx(
+        max(reference_ratios, default=0.0)
+    )
+    assert payload["reference_worst_quantitative_point"]["benchmark_id"] == "thiamine_cys_xylose_145C_Cerny2008"
+    assert payload["reference_worst_quantitative_point"]["reference_signal_origin"] == "reference_volatiles"
     assert payload["experimental_worst_quantitative_point"]["benchmark_id"] != "thiamine_cys_xylose_145C_Cerny2008"
     assert payload["experimental_worst_quantitative_point"]["reference_signal_origin"] == "measured_volatiles"
 
@@ -51,8 +75,16 @@ def test_validation_overview_uses_standardized_benchmark_labels():
     assert _bench_label("thiamine_cys_xylose_145C_Cerny2008") == r"Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor]"
     assert _bench_label("pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026") == r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)"
     assert _bench_label("resconi_2023_pbma_beef_identity_benchmark") == r"PBMA vs beef comparator, $150\,^{\circ}$C (Resconi et al., 2023)"
-    assert _bench_label("spi_hvp_xylose_120C_PMC9905368") == r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)"
-    assert _bench_label("wheat_gluten_hvp_xylose_120C_PMC9905368") == r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)"
+    # RE-PINNED 2026-08-27 (Wave I): the label now carries a `[QUARANTINED]` suffix.
+    # `spi_hvp_xylose_120C_PMC9905368` and its wheat-gluten twin were quarantined as
+    # fabricated -- the cited paper reports relative peak areas for glucose/fructose at
+    # pH 7.5 and never mentions FFT or MFT. The label entries are KEPT so any surviving
+    # reference renders as a name rather than a raw slug, and the suffix is there so a
+    # figure or table that somehow still shows one of them cannot look like a live
+    # benchmark. See data/benchmarks/quarantined/README.md.
+    assert _bench_label("spi_hvp_xylose_120C_PMC9905368") == r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]"
+    # RE-PINNED 2026-08-27 (Wave I): see the SPI entry above -- same quarantine.
+    assert _bench_label("wheat_gluten_hvp_xylose_120C_PMC9905368") == r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]"
 
 
 def test_validation_overview_payload_surfaces_integrated_families_11_to_16():

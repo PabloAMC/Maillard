@@ -1,8 +1,9 @@
 import yaml
 import logging
 import math
+import re
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import Any, List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
 
 from src.smirks_engine import SmirksEngine, ReactionConditions, Species  # noqa: E402
@@ -36,6 +37,30 @@ _FURFURAL_ALIASES = (
 )
 
 
+_UNKNOWN_PRECURSOR_RE = re.compile(r"Unknown precursor '([^']*)'")
+
+
+def _extract_unresolved_names(message: str, requested: List[str]) -> List[str]:
+    """Pull the offending precursor name(s) out of a resolver error message.
+
+    ``precursor_resolver.resolve`` appends the full catalogue of available
+    names to its ValueError, which is useless in a report; we want the one
+    token the user actually got wrong.
+    """
+    found = _UNKNOWN_PRECURSOR_RE.findall(message or "")
+    if found:
+        return [str(name) for name in found]
+    # Fallback: report everything we were asked to resolve.
+    return [str(name) for name in requested]
+
+
+def _short_resolver_reason(message: str) -> str:
+    """Drop the giant ``Available: ...`` catalogue from a resolver error."""
+    text = str(message or "").strip()
+    head, sep, _tail = text.partition(". Available:")
+    return (head + ".") if sep else text
+
+
 def _max_predicted_signal(predicted_ppb: Dict[str, float], aliases: Tuple[str, ...]) -> float:
     signal = 0.0
     for alias in aliases:
@@ -67,10 +92,14 @@ def _compute_meaty_quality_constraint(predicted_ppb: Dict[str, float]) -> Tuple[
     return ratio, penalty
 
 
-def build_formulation_uncertainty_envelopes(predicted_ppb: Dict[str, float]) -> Dict[str, Dict[str, object]]:
+def build_formulation_uncertainty_envelopes(
+    predicted_ppb: Dict[str, float],
+    *,
+    uncalibrated: bool = False,
+) -> Dict[str, Dict[str, object]]:
     from src.uncertainty_propagation import build_formulation_uncertainty_envelopes as _build_formulation_uncertainty_envelopes
 
-    return _build_formulation_uncertainty_envelopes(predicted_ppb)
+    return _build_formulation_uncertainty_envelopes(predicted_ppb, uncalibrated=uncalibrated)
 
 @dataclass
 class UncertaintyEnvelope:
@@ -120,6 +149,10 @@ class FormulationResult:
     furanone_penalty: float = 0.0
     ranking_score: float = 0.0
     flavor_axis_summary: Dict[str, object] = field(default_factory=dict)
+    #: Formulations dropped from this evaluation batch because a precursor
+    #: could not be resolved. Populated on every result of the batch so the
+    #: omission is visible in reports instead of vanishing silently.
+    skipped_formulations: List[Dict[str, str]] = field(default_factory=list)
 
 
 def compute_ranking_score(
@@ -189,6 +222,21 @@ class MaillardPipeline:
         self.db = ResultsDB()
         self.sensory = SensoryPredictor()
         self.pre_processor = PreProcessor()
+        # Formulations dropped by the last evaluate_all() call because a
+        # precursor could not be resolved (see evaluate_all).
+        self.last_skipped_formulations: List[Dict[str, str]] = []
+        # 2026-08-28 (Wave S5). Route traces from the last evaluate_all() call, keyed by
+        # formulation name: {name: {"debug_paths": ..., "debug_channel_flux": ...,
+        # "species_names": ...}} exactly as `Recommender.predict_from_steps` returns them.
+        #
+        # WHY A SIDE-CHANNEL AND NOT A FormulationResult FIELD. The comparative CLI reports a
+        # dominant pathway per compound, which needs the route trace. Putting it on
+        # FormulationResult would push a large debug payload into every serialized report,
+        # so it is exposed the same way `last_skipped_formulations` already is: on the
+        # pipeline, overwritten per call, read by whoever wants it. NOTHING in the science
+        # path reads this; it is a read-only view of a payload `predict_from_steps` was
+        # already returning and `evaluate_all` was already discarding.
+        self.last_route_traces: Dict[str, Dict[str, Any]] = {}
 
     def _load_grid(self) -> List[Dict]:
         if not GRID_FILE.exists():
@@ -197,6 +245,45 @@ class MaillardPipeline:
             data = yaml.safe_load(f)
             return data.get("formulations", [])
             
+    def grid_names(self) -> List[str]:
+        """Names of every formulation in the built-in grid, in file order."""
+        return [str(item.get("name", "")) for item in self.grid if item.get("name")]
+
+    def resolve_grid_formulation(self, name: str) -> Dict:
+        """Look up a grid formulation by name, tolerantly but never silently.
+
+        Exact match wins; then a case-insensitive exact match; then a unique
+        case-insensitive substring match (so ``"Cysteine Enrichment"`` finds
+        ``"Cysteine Enrichment (Basic)"``). Anything else raises with the full
+        list of valid names — the previous behaviour was a bare "not found",
+        which is what made the documented ``--names 'Baseline,...'`` quickstart
+        so hard to recover from.
+        """
+        requested = str(name).strip()
+        for item in self.grid:
+            if str(item.get("name", "")) == requested:
+                return item
+
+        lowered = requested.lower()
+        exact_ci = [item for item in self.grid if str(item.get("name", "")).lower() == lowered]
+        if len(exact_ci) == 1:
+            return exact_ci[0]
+
+        partial = [item for item in self.grid if lowered and lowered in str(item.get("name", "")).lower()]
+        if len(partial) == 1:
+            return partial[0]
+
+        available = ", ".join(f"'{n}'" for n in self.grid_names())
+        if len(partial) > 1:
+            ambiguous = ", ".join(f"'{item.get('name')}'" for item in partial)
+            raise ValueError(
+                f"Formulation '{name}' is ambiguous — it matches {ambiguous}. "
+                "Use the full name."
+            )
+        raise ValueError(
+            f"Formulation '{name}' not found in data/formulation_grid.yml. Available: {available}"
+        )
+
     def _load_tags(self) -> Dict[str, List[str]]:
         if not TAGS_FILE.exists():
             return {}
@@ -271,6 +358,13 @@ class MaillardPipeline:
             self.grid = [formulation]
             results = self.evaluate_all(global_conditions)
             if not results:
+                skipped = getattr(self, "last_skipped_formulations", []) or []
+                if skipped:
+                    detail = "; ".join(
+                        f"{row.get('name', 'unknown')}: {row.get('reason', 'unknown reason')}"
+                        for row in skipped
+                    )
+                    raise ValueError(f"Evaluation failed for formulation — {detail}")
                 raise ValueError("Evaluation failed for formulation")
             return results[0]
         finally:
@@ -282,6 +376,8 @@ class MaillardPipeline:
         Returns a ranked list of results.
         """
         results = []
+        skipped_formulations: List[Dict[str, str]] = []
+        route_traces: Dict[str, Dict[str, Any]] = {}
         target_compounds = self.tags.get(self.target_tag, [])
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
@@ -347,9 +443,26 @@ class MaillardPipeline:
             try:
                 precursors = resolve_many(all_names)
             except ValueError as e:
-                logging.getLogger(__name__).warning("Skipping '%s': %s", name, e)
+                # Do NOT swallow this. A single unrecognised precursor used to
+                # delete the whole formulation from the batch with only a log
+                # line, so an inverse-design screen could quietly rank 14 of 15
+                # grid entries and never say so.
+                skipped_formulations.append(
+                    {
+                        "name": str(name),
+                        "reason": _short_resolver_reason(str(e)),
+                        "unresolved_precursors": ", ".join(
+                            _extract_unresolved_names(str(e), all_names)
+                        ),
+                        "requested_precursors": ", ".join(str(n) for n in all_names),
+                    }
+                )
+                logging.getLogger(__name__).warning(
+                    "Skipping formulation '%s' — unresolved precursor(s): %s", name, e
+                )
                 continue
-                
+
+
             # Create a localized conditions object (e.g. to apply catalyst override if specified)
             effective_pH = family_upstream_contract.get("effective_pH", form.get("ph", global_conditions.pH))
             cond = ReactionConditions(
@@ -532,13 +645,19 @@ class MaillardPipeline:
                 "process_state": process_state,
             }
 
+            # `name_ratios` values are consumed as mM by the safety lane (see the
+            # `UNITS` contract in src/safety.py); grids that author them as
+            # unitless ratios are warned about by the literature runtime.
             safety_val, flagged = evaluate_formulation_safety(
-                name_ratios, 
-                cond.temperature_celsius, 
-                form.get("time_minutes", 60.0), 
+                name_ratios,
+                cond.temperature_celsius,
+                form.get("time_minutes", 60.0),
                 cond.pH,
                 modifiers=safety_modifiers
             )
+            # safety_val is now a genuine [0, 1] band-relative risk (2026-08-27),
+            # so this penalty is bounded by 2.0 instead of growing with the
+            # unbounded log-sum it replaced.
             s_penalty = safety_val * 2.0 # Weight for optimization
             
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
@@ -622,6 +741,20 @@ class MaillardPipeline:
                 }
             )
 
+            # Compute confidence/scope once so the runtime uncertainty envelopes can
+            # honestly widen for out-of-calibration formulations (S27 followup #1).
+            confidence_metadata = _build_confidence_metadata(
+                extrusion_process=extrusion_process,
+                protein_type=protein_type,
+                process_state=process_state,
+                temperature_celsius=cond.effective_temperature_celsius,
+                time_minutes=form.get("time_minutes", 60.0),
+                pH=cond.pH,
+            )
+            formulation_uncalibrated = not bool(
+                confidence_metadata.get("scope_assessment", {}).get("in_scope", True)
+            )
+
             result = FormulationResult(
                 name=name,
                 target_score=t_score,
@@ -638,20 +771,15 @@ class MaillardPipeline:
                 predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
                 uncertainty_envelopes={
                     compound: UncertaintyEnvelope(**row)
-                    for compound, row in build_formulation_uncertainty_envelopes(conc_map).items()
+                    for compound, row in build_formulation_uncertainty_envelopes(
+                        conc_map, uncalibrated=formulation_uncalibrated
+                    ).items()
                 },
                 projection_metadata=rec_result.get("projection_metadata", {}),
                 avg_uncertainty=avg_unc,
                 effective_denaturation_state=denaturation_state,
                 matrix_explainability=matrix_explainability,
-                confidence_metadata=_build_confidence_metadata(
-                    extrusion_process=extrusion_process,
-                    protein_type=protein_type,
-                    process_state=process_state,
-                    temperature_celsius=cond.effective_temperature_celsius,
-                    time_minutes=form.get("time_minutes", 60.0),
-                    pH=cond.pH,
-                ),
+                confidence_metadata=confidence_metadata,
                 targets=rec_result.get("targets", []),
                 bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),
                 bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),
@@ -668,8 +796,21 @@ class MaillardPipeline:
                 flavor_axis_summary=flavor_axis_summary,
             )
             results.append(result)
+            route_traces[name] = {
+                "debug_paths": rec_result.get("debug_paths", {}),
+                "debug_channel_flux": rec_result.get("debug_channel_flux", {}),
+                "species_names": rec_result.get("species_names", {}),
+            }
 
-            
+        # Surface any formulation the resolver rejected: expose it on the
+        # pipeline (for callers that got an empty result list) and stamp it on
+        # every result of this batch (so reports can print it).
+        self.last_skipped_formulations = list(skipped_formulations)
+        self.last_route_traces = route_traces
+        if skipped_formulations:
+            for result in results:
+                result.skipped_formulations = list(skipped_formulations)
+
         # Rank by the full scientist-facing recommendation objective, then by lower off-flavour risk.
         risk_aversion = 1.0 # Default
         texture_aversion = 0.01 # 100 risk = 1.0 score penalty

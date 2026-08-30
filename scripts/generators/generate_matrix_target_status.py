@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -16,8 +17,21 @@ from src.benchmark_validation import build_matrix_target_status_artifact
 from src.presentation import render_matrix_target_status_markdown
 
 
-def main() -> int:
-    output_dir = ROOT / "results" / "validation"
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build the P0.4 matrix target-support status artifact; writes "
+            "results/validation/matrix_target_status.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
+    output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     artifact = build_matrix_target_status_artifact()
     markdown = render_matrix_target_status_markdown(artifact)

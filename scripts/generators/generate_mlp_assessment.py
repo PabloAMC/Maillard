@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -20,9 +21,22 @@ from src.reaction_benchmark import build_reaction_benchmark_artifact, render_rea
 from src.results_db import ResultsDB
 
 
-def main() -> None:
-    root = ROOT
-    output_dir = root / "results" / "validation"
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build the MLP reaction benchmark, assessment, external-landscape "
+            "and adoption notes into results/validation/, and record the "
+            "adoption decisions in the results DB."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
+    output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     benchmark_payload = build_reaction_benchmark_artifact()

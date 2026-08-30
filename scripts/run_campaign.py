@@ -131,9 +131,9 @@ def main() -> int:
         formulation_name = entry.get("name")
         if not formulation_name:
             raise ValueError("Each campaign formulation must define a name.")
-        base = next((item for item in designer.grid if item.get("name") == formulation_name), None)
-        if base is None:
-            raise ValueError(f"Formulation '{formulation_name}' not found in data/formulation_grid.yml")
+        # Tolerant-but-explicit name resolution: exact, then case-insensitive,
+        # then a unique substring match; otherwise raise with the valid names.
+        base = designer.resolve_grid_formulation(str(formulation_name))
         requested_formulations.append(_merge_formulation(base, entry.get("overrides", {})))
 
     print("======================================================")
@@ -205,6 +205,16 @@ def main() -> int:
         warnings_list=warnings_list,
         run_artifacts=run_artifacts,
         output_dir=output_dir,
+        # The conditions the pipeline actually ran with, after the spec's
+        # shared_conditions and this script's own defaults are applied. Without
+        # this the leaderboard cannot report the pH/temperature of a campaign
+        # whose spec omits them (2026-08-27 audit remediation).
+        effective_conditions={
+            "ph": base_conditions.pH,
+            "temp": base_conditions.temperature_celsius,
+            "aw": base_conditions.water_activity,
+            "protein_type": base_conditions.protein_type,
+        },
     )
 
     print(f"\nCampaign artifacts written to: {campaign_dir}")

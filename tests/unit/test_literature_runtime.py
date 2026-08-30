@@ -121,7 +121,14 @@ def test_describe_retention_runtime_for_soy_hexanal_is_temperature_and_time_sens
 
     assert hot_short["dynamic_retention_factor"] > cool["dynamic_retention_factor"]
     assert hot_long["dynamic_retention_factor"] < hot_short["dynamic_retention_factor"]
-    assert "Ince et al. (2024)" in " ".join(hot_short["retention_reference_sources"])
+    # UPDATED 2026-08-27 (cause: citation repair in data/lit/retention_reference_payloads.json,
+    # reference-repair partition B). The soy 11S-glycinin/hexanal binding anchor was cited as
+    # "Ince et al. (2024), Int J Biological Macromolecules"; the CrossRef record for the DOI
+    # already in the repo is Ince, Condict, Stockmann et al., "Molecular characterisation of
+    # interactions between 11S glycinin and hexanal - An off flavour compound", Food
+    # Hydrocolloids 158 (2025). Same paper, wrong venue and year in the stored string.
+    # The retention VALUES are unchanged; only the citation text moved.
+    assert "Ince et al. (2025)" in " ".join(hot_short["retention_reference_sources"])
 
 
 def test_describe_retention_runtime_for_pea_markers_carries_structured_ph_release_provenance():
@@ -143,11 +150,21 @@ def test_describe_retention_runtime_for_pea_markers_carries_structured_ph_releas
     assert (
         hexanal["retention_runtime_mode"] == "direct_binding_plus_ph_release_reference"
     )
-    assert "Karolkowski et al. (2021)" in " ".join(
+    # UPDATED 2026-08-27 (cause: citation repair in data/lit/retention_reference_payloads.json,
+    # reference-repair partition B). The pea-isolate pH-release anchor was cited as
+    # "Karolkowski et al. (2021), HAL Open Science". That is the wrong paper: Karolkowski
+    # et al. (2021) is "Volatile Compounds in Pulses: A Review" (Foods 10:3140), a review
+    # with no pH-resolved dataset. The dataset the repo actually encodes -- nine
+    # semi-quantified pea-isolate volatiles including hexanal, 2-pentylfuran and
+    # 2,5-dimethylpyrazine, with "hexanal release 59% higher at pH 4.5 than pH 6.5" -- is
+    # Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760, from the same Dijon group.
+    # The retention VALUES are unchanged; only the citation text moved.
+    assert "Fischer, Cachon & Cayot (2021)" in " ".join(
         hexanal["retention_reference_sources"]
     )
     assert pentylfuran["retention_runtime_mode"] == "ph_release_reference"
-    assert "Karolkowski et al. (2021)" in " ".join(
+    # Same 2026-08-27 citation repair as above.
+    assert "Fischer, Cachon & Cayot (2021)" in " ".join(
         pentylfuran["retention_reference_sources"]
     )
 
@@ -1108,9 +1125,28 @@ def test_build_flavor_axis_summary_surfaces_family_05_kokumi_support_when_gsh_an
         == "combined_glutathione_and_gamma_glutamyl_peptide"
     )
     assert family_05["kokumi_signal_score"] > 0.8
-    assert family_05["gsh_casr_ec50_mM"] == pytest.approx(0.68)
+    # UPDATED 2026-08-27 (wave G5, module-hunt TIER 4.7): the caveat below is now
+    # RESOLVED in src/kokumi_scoring.py. The echoed CaSR EC50s are the verified Ohsu 2010
+    # values (GSH 76.5 nM; gamma-Glu-Val-Gly 41.9 nM; gamma-Glu-Val 1.34 uM), no longer
+    # the unanchored 0.68 / 0.32 mM, and the unanchored mM priors can no longer leak back
+    # in through the payload. These fields are echo-only (zero prediction impact, audited).
+    assert family_05["gsh_casr_ec50_nM"] == pytest.approx(76.5)
+    assert family_05["gamma_glu_val_gly_casr_ec50_nM"] == pytest.approx(41.9)
+    assert family_05["gsh_casr_ec50_mM"] == pytest.approx(76.5e-6)
+    # The "+141% CCK secretion" figure appears in no verifiable source -> withdrawn.
+    assert family_05["gsh_cck_secretion_increase_percent"] is None
     assert family_05["kokumi_reference_ids"] == ["ohsu_2025_kokumi_casr_anchor"]
-    assert "Ohsu et al. (2025)" in family_05["kokumi_reference_citations"]
+    # HISTORICAL CONTEXT (kept): "Ohsu et al. (2025)" does not exist, and the DOI stored
+    # alongside it (10.1021/acs.jafc.2c04919) is Yang et al. (2022). The real CaSR kokumi
+    # paper is Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), "Involvement of the
+    # Calcium-sensing Receptor in Human Taste Perception", J. Biol. Chem. 285:1016.
+    # STILL OPEN (not this fix's scope): that paper's sensory scale runs -2..+2, so the
+    # stored "+2.2 mouthfulness units" -- which DOES drive kokumi_signal_score -- remains
+    # out of range and unanchored. The payload constants themselves were not rewritten.
+    assert (
+        "Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016"
+        in family_05["kokumi_reference_citations"]
+    )
     assert family_05["kokumi_prior_ids"] == ["ohsu_2025_kokumi_casr_support_v1"]
     assert summary["kokumi_support_active"] is True
     assert summary["kokumi_support_signal"] == pytest.approx(
@@ -1138,8 +1174,12 @@ def test_build_kokumi_support_profile_caps_combined_gsh_and_gamma_glu_signal():
         == "combined_glutathione_and_gamma_glutamyl_peptide"
     )
     assert 0.8 < profile["kokumi_signal_score"] <= 1.0
-    assert profile["gsh_casr_ec50_mM"] == pytest.approx(0.68)
-    assert profile["gamma_glu_val_casr_ec50_mM"] == pytest.approx(0.32)
+    # UPDATED 2026-08-27 (wave G5, module-hunt TIER 4.7). Was 0.68 / 0.32 mM, attributed
+    # to a non-existent "Ohsu et al. (2025)". Now the verified Ohsu 2010 CaSR EC50s, and
+    # the stale mM priors passed in above are deliberately ignored rather than echoed.
+    assert profile["gsh_casr_ec50_nM"] == pytest.approx(76.5)
+    assert profile["gamma_glu_val_gly_casr_ec50_nM"] == pytest.approx(41.9)
+    assert profile["gsh_casr_ec50_mM"] == pytest.approx(76.5e-6)
 
 
 def test_build_family_upstream_contract_calibrates_family_04_tradeoff_and_adds_bounded_ribose():
@@ -1248,7 +1288,16 @@ def test_build_flavor_axis_summary_surfaces_family_04_low_temp_euc_context():
     assert family_04["low_temp_euc_window_active"] is True
     assert family_04["soladoye_reference_ids"] == ["soladoye_2020_sous_vide_euc_anchor"]
     assert family_04["soladoye_raw_euc_percent_msg"] == pytest.approx(0.18)
-    assert "Soladoye et al. (2020)" in family_04["soladoye_reference_citations"]
+    # UPDATED 2026-08-27 (cause: citation repair in the flavor reference payloads,
+    # reference-repair partition B). CrossRef metadata for the DOI already stored here
+    # (10.3390/foods9030251) is Hwang, Ismail & Joo (2020), Foods 9:251 -- the sous-vide
+    # beef EUC study the anchor is about. The topic matched all along; only the author
+    # label was wrong. The EUC VALUES are unchanged. The `soladoye_*` field names are
+    # retained as stable runtime keys.
+    assert (
+        "Hwang, Ismail & Joo (2020), Foods 9:251"
+        in family_04["soladoye_reference_citations"]
+    )
 
 
 def test_build_flavor_axis_summary_surfaces_family_04_source_profile_context():

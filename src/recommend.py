@@ -352,6 +352,32 @@ _MELANOIDIN_TRAPPING_PROFILES = {
     _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"): {"slope": 0.55, "floor": 0.35},
 }
 
+# Fraction of the modelled volatile taken to survive to the headspace in a
+# hydrolysed-vegetable-protein matrix. These constrain the PRODUCT of the lane, not
+# any barrier.
+#
+# WAVE I REVERT, 2026-08-27 — READ THIS BEFORE TOUCHING THESE NUMBERS.
+# Wave H (2026-08-27) re-derived the Methional factor 0.0045 -> 0.05623 against the two
+# xylose HVP benchmarks `spi_hvp_xylose_120C_PMC9905368` and
+# `wheat_gluten_hvp_xylose_120C_PMC9905368`. The cold-start red team then established
+# that BOTH of those benchmarks are fabricated: the cited paper
+# 10.1007/s10068-022-01194-w uses glucose/fructose at pH 7.5 for 90 min, reports only
+# RELATIVE PEAK AREAS, and never mentions FFT or MFT — so it cannot be the source of any
+# absolute ppb value in those files. The Wave H fit therefore had no measurement behind
+# it, and the two "methional rows inside the CI" it produced were a self-fit scored
+# against its own fit target. Both files are now quarantined
+# (data/benchmarks/quarantined/) and this constant is REVERTED to its pre-Wave-H value.
+# `results/validation/hydrolysate_observability_rederivation.{json,md}` is marked
+# RETRACTED and must not be cited as a warrant for any value here.
+#   * Methional  0.05623 -> 0.0045 (revert; the 0.05623 was fitted to fabricated data).
+#   * 2-Furfurylthiol / 2-Methyl-3-furanthiol / bis(2-methyl-3-furyl) disulfide: Wave H
+#     did NOT move these (their unconstrained optima were 8.65 and 3.49, above the
+#     physical maximum of 1.0 for a surviving fraction; the disulfide had no comparator
+#     at all), so there is nothing to revert. They remain UNCONSTRAINED LEGACY
+#     ESTIMATES, never fitted values.
+# NET STATUS after this revert: with the xylose HVP lanes quarantined, EVERY entry in
+# this table is an unconstrained legacy estimate. There is no surviving literature
+# constraint on any of them.
 _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES = {
     _normalize_chemical_name("Methional"): {"base_factor": 0.0045, "source_sensitive": False},
     _normalize_chemical_name("2-Furfurylthiol"): {"base_factor": 0.13, "source_sensitive": True},
@@ -437,6 +463,60 @@ def _resolve_upstream_observability_factor(
     return max(1.0e-4, min(1.0, factor * thiamine_factor))
 
 
+def _registry_compound_name(
+    canon: str,
+    species_label: Optional[str],
+    target_lookup: Dict[str, Dict[str, Any]],
+) -> str:
+    """Resolve the NAME under which a tracked species is looked up in the name-keyed registries.
+
+    WAVE S1 FIX (2026-08-27) — closes the Wave O finding "the matrix observability
+    registry is unreachable from the recommend path".
+
+    CAUSE. Species reach `predict_from_steps` from two places. Network species carry a
+    human label ("2-methyl-3-furanthiol"). Species INJECTED into `corrected_initial`
+    — the lipid-oxidation markers on the `matrix_precursor_augmented` lane — are
+    materialised at the top of the relaxation as `Species(species_name_lookup.get(canon,
+    canon), canon)`, and when no step ever named them the label falls back to the
+    CANONICAL SMILES. `_apply_output_projection` then called
+    `describe_matrix_calibration("CCCCCC=O", ...)`, which normalises to the literal
+    string "ccccccc=o", matches no record and no class anchor, and returns
+    `calibration_observable_factor=None` -> the caller's `or 1.0` silently applied a
+    factor of ONE. Measured by Wave O on
+    `soy_isolate_ribose_cysteine_100C_45min_Internal2026`: the snapshot was BIT-IDENTICAL
+    after a 4.32x change to the soy heated-matrix hexanal factor, i.e. the internal
+    snapshots could not detect drift in `src/matrix_calibration_registry.py` at all.
+
+    FIX. Names, not SMILES, are the registry's key, so resolve to a name at the lookup
+    boundary: keep the species' own label when it IS a name, and fall back to the
+    compound-database name for that canonical SMILES when the label is merely the SMILES
+    string again. `target_lookup` is keyed by canonical SMILES and its `name` is the
+    entry the desirable/off-flavour/toxic YAML databases use, which is the same spelling
+    `MATRIX_BENCHMARK_BASE_MARKER_YIELDS` (and therefore the registry) uses on the
+    `matrix_only` lane. The two lanes now agree on the key.
+
+    LIMITATION, stated. A species that is neither labelled nor present in the compound
+    databases still reaches the registry as a SMILES and still misses. That is not
+    reachable today for any scored row (only target-database species are projected to
+    ppb), but the fallback is left as the SMILES rather than raising, so such a species
+    degrades to the pre-fix behaviour rather than crashing.
+    """
+    label = str(species_label or "").strip()
+    if label:
+        try:
+            label_is_smiles = _canon(label) == canon
+        except Exception:  # pragma: no cover - canonicaliser is total, belt and braces
+            label_is_smiles = False
+        if not label_is_smiles:
+            return label
+    entry = target_lookup.get(canon)
+    if entry:
+        registered = str(entry.get("name") or "").strip()
+        if registered:
+            return registered
+    return label or canon
+
+
 def _apply_output_projection(
     raw_concentrations: Dict[str, float],
     species_catalog: Dict[str, Species],
@@ -487,6 +567,8 @@ def _apply_output_projection(
             "projection_temperature_factor": float(projection_budget.temperature_factor),
             "projection_time_factor": float(projection_budget.time_factor),
             "projection_severity": float(projection_budget.severity),
+            "projection_kinetic_drive": float(projection_budget.kinetic_drive),
+            "projection_conversion_extent": float(projection_budget.conversion_extent),
             "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
             "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
         }
@@ -500,7 +582,12 @@ def _apply_output_projection(
         species = species_catalog.get(canon)
         if species is None:
             observable_ppb[canon] = raw_value * fallback_matrix_factor
-            compound_name = species_name_lookup.get(canon, canon) if species_name_lookup else canon
+            # WAVE S1 (2026-08-27): resolve SMILES-labelled species to their registry name.
+            compound_name = _registry_compound_name(
+                canon,
+                species_name_lookup.get(canon) if species_name_lookup else None,
+                target_lookup,
+            )
             calibration = describe_matrix_calibration(
                 compound_name,
                 protein_type=protein_type,
@@ -569,7 +656,10 @@ def _apply_output_projection(
             fat_fraction=fat_eff,
             protein_fraction=protein_eff,
         )
-        compound_name = species.label or canon
+        # WAVE S1 (2026-08-27): resolve SMILES-labelled species to their registry name.
+        # See `_registry_compound_name` — this is the boundary at which the Wave O
+        # "registry unreachable on matrix_precursor_augmented" defect was located.
+        compound_name = _registry_compound_name(canon, species.label, target_lookup)
         calibration = describe_matrix_calibration(
             compound_name,
             protein_type=protein_type,
@@ -664,13 +754,23 @@ def _is_ppb_output_species(
 
 
 def _select_accumulating_projection_species(
-    steps: List[Any],
     tracked_species: Dict[str, Tuple[float, float, int, float, float]],
     species_catalog: Dict[str, Species],
     target_lookup: Dict[str, Dict[str, Any]],
     exogenous_reactants: Set[str],
-    downstream_margin_kcal: float = 0.25,
 ) -> Set[str]:
+    """Which tracked species the budget projection lets accumulate.
+
+    2026-08-27 (Wave T4): two parameters REMOVED, AST-verified unused in the body
+    — `steps` and `downstream_margin_kcal: float = 0.25`. Both are leftovers of a
+    pre-Wave-S1 selection heuristic that compared each candidate against its
+    downstream competitors by a barrier margin; Wave S1's additive propagator
+    replaced that comparison entirely and the parameters were never unwired. The
+    magic default is the part worth removing: a reader tuning `0.25` would have
+    been tuning nothing, which is the same false-affordance class as the Wave I
+    false zeros. Behaviour is unchanged by construction — the body never read
+    either name.
+    """
     candidate_canons: Set[str] = set()
     for canon, (span, _conc, depth, _weight, _unc) in tracked_species.items():
         species = species_catalog.get(canon)
@@ -686,6 +786,54 @@ def _select_accumulating_projection_species(
     return candidate_canons
 
 
+def _route_channel_id(path: List[Dict[str, Any]]) -> str:
+    """Channel identity of a route: its FULL ORDERED STEP-SET.
+
+    2026-08-27 (Wave S1). Two enumerated routes to the same product are the same kinetic
+    channel iff they are the same sequence of elementary steps. Anything else is a
+    genuinely distinct branch and its conductance adds.
+
+    THE ALTERNATIVE RULE WAS IMPLEMENTED, MEASURED AND REJECTED, and the reason is the
+    load-bearing argument of this change, so it is written here rather than in a ledger
+    nobody reads next to the code.
+
+      Rejected rule: "two routes that share their RATE-LIMITING STEP are one channel;
+      take the max, not the sum."  Measured on cys_ribose_140C_Hofmann1998: BOTH MFT
+      routes -- the pentodiulose lane and the Hofmann & Schieberle C2+C3 lane -- have the
+      SAME highest-barrier step, the `Amadori_Rearrangement` at 29.06 kcal/mol, which sits
+      on the shared cysteine/ribose trunk and is the slowest step of essentially every
+      route in the network. Under that rule MFT keeps exactly its old value (242.38 ppb)
+      and the whole panel moves 3 rows by <1.15x, i.e. the propagator stays
+      winner-takes-all in all but name.
+
+      And the rule is WRONG, not merely inert. Take X --(slow, R_c)--> Y, then
+      Y --(fast, R_1)--> P, Y --(fast, R_2)--> P, Y --(fast, R_3)--> Q. At steady state
+      the trunk fixes the total flux and the branches PARTITION it by conductance:
+      P's share is (1/R_1 + 1/R_2) / (1/R_1 + 1/R_2 + 1/R_3) = 2/3 for equal branches.
+      This propagator's per-route weight is pool * exp(-span/RT) with
+      exp(span/RT) = sum_i exp(barrier_i/RT), so when R_c dominates every route's weight
+      collapses to the SAME trunk value ~ pool/exp(R_c/RT). SUMMING P's two branches then
+      reproduces the 2/3 partition; taking the max returns 1/2. The shared bottleneck is
+      the reason the sum is right, not a reason to suppress it -- and the mass the sum
+      appears to create is not created at all, because the allocation layer normalises by
+      the total activity against a fixed volatile budget.
+
+    LIMITATION OF THE RULE THAT SHIPS, stated honestly. Every distinct producing step is
+    treated as an independent branch. The model carries no pool depletion, so two branches
+    drawing on the same scarce intermediate are still summed as if that intermediate were
+    unlimited; the only thing standing between that and minted mass is the global budget
+    cap, which bounds the TOTAL but not the split. Second, because `best_paths` keeps one
+    upstream route per reactant, the step-set of a candidate is determined by its terminal
+    step, so in the current enumeration this rule reduces to "one contribution per distinct
+    producing step". Third, additivity is applied where flux is CONSUMED (at the product)
+    and is not propagated, so an intermediate with two routes still hands its own products
+    a single span: parallelism does not compound along a chain.
+    """
+    if not path:
+        return ""
+    return "|".join(str(trace.get("step_key", "")) for trace in path)
+
+
 def _project_weighted_flux_to_ppb(
     steps: List[Any],
     tracked_species: Dict[str, Tuple[float, float, int, float, float]],
@@ -698,6 +846,7 @@ def _project_weighted_flux_to_ppb(
     time_minutes: Optional[float],
     projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
     projection_budget: Optional[ProjectionBudget] = None,
+    channel_flux_totals: Optional[Dict[str, float]] = None,
 ) -> Dict[str, float]:
     if projection_budget is None:
         projection_budget = _estimate_projection_budget(
@@ -713,7 +862,6 @@ def _project_weighted_flux_to_ppb(
     total_volatile_budget_molar = projection_budget.total_volatile_budget_molar
 
     projected_species = _select_accumulating_projection_species(
-        steps,
         tracked_species,
         species_catalog,
         target_lookup,
@@ -722,28 +870,44 @@ def _project_weighted_flux_to_ppb(
     if not projected_species:
         return {}
 
+    # ADDITIVE FLUX (Wave S1, 2026-08-27). `channel_flux_totals[canon]` is the SUM over
+    # kinetically distinct routes to `canon` of each route's Boltzmann flux, deduplicated on
+    # route step-set (see `predict_from_steps`). When it is absent -- the only callers
+    # that omit it are direct unit-test calls -- this falls back to the pre-Wave-S1
+    # winner-takes-all flux held in `tracked_species`, so the old behaviour is still
+    # reachable and testable, but it is NOT what ships.
+    def _flux_for(canon: str, winner_weight: float) -> float:
+        if channel_flux_totals is None:
+            return winner_weight
+        return float(channel_flux_totals.get(canon, winner_weight))
+
     candidate_entries = {
-        canon: (span, depth, weight, best_paths.get(canon, []))
+        canon: (span, depth, _flux_for(canon, weight), best_paths.get(canon, []))
         for canon, (span, conc, depth, weight, unc) in tracked_species.items()
         if canon in projected_species and depth > 0 and span < float("inf")
     }
     if not candidate_entries:
         return {}
 
-    best_span = min(span for span, _depth, _weight, _path in candidate_entries.values())
     min_depth = min(depth for _span, depth, _weight, _path in candidate_entries.values())
-    span_window_kcal = max(0.35, 0.65 * 0.001987 * temperature_kelvin)
     max_weight = max(max(weight, 0.0) for _canon, (_span, _depth, weight, _path) in candidate_entries.items())
 
-    # At lower thermal severity, short terminal routes should retain a mild advantage over
-    # deeper ones when the final ppb budget is allocated across competing outputs.
+    # BOLTZMANN DE-DUPLICATION (2026-08-27).
+    # `weight` (tracking[canon][3]) is already a flux: reactant_flux_pool *
+    # co_reactant_factor * exp(-path_span / RT) * temporal_accessibility. The previous
+    # code ALSO multiplied in span_activity = exp(-(span - best_span) / (0.65 * RT))
+    # and then softened the flux with a ^0.65 exponent, so the net span discrimination
+    # was exp(-(1/0.65 + 0.65) * dspan / RT) = exp(-2.19 * dspan / RT) -- selectivity
+    # evaluated at an effective temperature of T/2.19 (~193 K at a 150 C bake), with no
+    # physical justification for either the second factor or the exponent.
+    # Selectivity is now applied exactly ONCE, at the physical temperature, by using the
+    # relative pathway flux directly. Everything else in the allocation (depth bias,
+    # direct-sulfur bonus) is an explicit non-Boltzmann heuristic keyed on severity.
     depth_bias_strength = max(0.0, 0.85 - severity) * 1.0
     activities = {}
     for canon, (span, depth, weight, best_path) in candidate_entries.items():
-        span_activity = math.exp(-(span - best_span) / span_window_kcal)
         if max_weight > 0.0:
-            relative_weight = max(weight, 0.0) / max_weight
-            flux_activity = max(relative_weight, 1.0e-6) ** 0.65
+            flux_activity = max(max(weight, 0.0) / max_weight, 1.0e-12)
         else:
             flux_activity = 1.0
         depth_activity = math.exp(-depth_bias_strength * max(depth - min_depth, 0))
@@ -751,9 +915,33 @@ def _project_weighted_flux_to_ppb(
         if best_path:
             terminal_family = str(best_path[-1].get("family", "")).lower().replace("-", "_").replace(" ", "_")
         direct_sulfur_bonus = 1.0
+        # AUDIT 2026-08-27 (Wave H): this equality test is now DEAD. Wave G1 renamed
+        # every terminal sulfur family, and none of the survivors is spelled
+        # "thiol_addition". So an unconstrained legacy heuristic silently
+        # switched itself off in the same commit that changed the chemistry. Measured
+        # size: at most 1.68x, and only 1.007x at the Hofmann1998 conditions where the
+        # sulfur residual is 5.6x, so it is NOT the cause of the sulfur collapse.
+        # Left dead ON PURPOSE rather than re-pointed: `direct_sulfur_bonus` is an
+        # unconstrained fit from the quarantined-target era and is the exact knob that
+        # would absorb the MFT residuals this panel exists to expose (see
+        # tasks/audit_remediation.md, "NOT refit, flagged for a dedicated workstream").
+        # Re-pointing it belongs to that workstream, with a refit, not to this one.
+        #
+        # 2026-08-27 (Wave T4) — THE FAMILY NAMES ABOVE WERE UPDATED, THE KNOB WAS
+        # NOT TOUCHED. The Wave H text named `Thiol_Addition_Norfuraneol` and
+        # `Thiol_Addition_Legacy_Shortcut` as "the routes that reach MFT today".
+        # Neither is emitted any more: Wave N RETIRED the norfuraneol route on the
+        # Cerny & Davidek isotope evidence, and `Thiol_Addition_Legacy_Shortcut` has
+        # zero source literals and zero runtime emissions. The families that reach
+        # MFT now are `Thiol_Addition_Pentodiulose` (Wave N) and
+        # `Mercaptoketone_Cyclodehydration` (Wave P) — still neither spelled
+        # "thiol_addition", so the CONCLUSION is unchanged and in fact stronger: the
+        # branch is more thoroughly dead than when Wave H measured it. The knob stays
+        # dead deliberately, per the paragraph above; only the two stale names here
+        # were wrong.
         if terminal_family == "thiol_addition":
             direct_sulfur_bonus += 0.8 * max(0.0, 0.85 - severity)
-        activities[canon] = span_activity * flux_activity * depth_activity * direct_sulfur_bonus
+        activities[canon] = flux_activity * depth_activity * direct_sulfur_bonus
 
     total_activity = sum(activities.values())
     if total_activity <= 0.0:
@@ -936,136 +1124,157 @@ class Recommender:
 
         exogenous_reactants = set(corrected_initial)
 
+        def _evaluate_step(step) -> Optional[Dict[str, Any]]:
+            """Span / flux / trace this step confers on its products from the CURRENT `tracking`.
+
+            Extracted verbatim from the relaxation loop body on 2026-08-27 (Wave S1) so the
+            SAME arithmetic can be replayed once more after the fixpoint is reached, for the
+            additive-channel pass. Returns None when a reactant is not yet reachable.
+            """
+            r_smiles = [r.smiles for r in step.reactants]
+            p_smiles = [p.smiles for p in step.products]
+            step_key = f"{'+'.join(sorted(r_smiles))}->{'+'.join(sorted(p_smiles))}"
+            barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
+            barrier, step_unc = barrier_data if isinstance(barrier_data, tuple) else (barrier_data, 5.0)
+
+            r_canons = [_canon(r.smiles) for r in step.reactants]
+            p_canons = [_canon(p.smiles) for p in step.products]
+
+            # The distance to fire this step is the MAX distance of all its reactants.
+            # We propagate two separate notions:
+            # - `conc`: user-specified precursor abundance proxy.
+            # - `weight`: pathway-available reactive flux proxy.
+            # Products must inherit from available flux, not directly from the original precursor pool.
+            max_r_dist = 0.0
+            max_r_unc = 0.0
+            min_r_conc = float('inf')
+            max_r_depth = 0
+            dominant_reactant = None
+            dominant_reactant_span = -1.0
+
+            for r in r_canons:
+                if r not in tracking:
+                    return None
+                r_span, r_conc, r_depth, r_weight, r_unc = tracking[r]
+                max_r_dist = max(max_r_dist, r_span)
+                max_r_unc = max(max_r_unc, r_unc)
+                min_r_conc = min(min_r_conc, r_conc)
+                max_r_depth = max(max_r_depth, r_depth)
+                if r_span >= dominant_reactant_span:
+                    dominant_reactant = r
+                    dominant_reactant_span = r_span
+
+            # Path properties to products via this step
+            # Expert Refinement (R.7): Use sequential bottleneck (microkinetics)
+            # Instead of max(barriers), we use the cumulative resistance:
+            # exp(G_eff/RT) = sum(exp(G_i/RT))
+            RT = 0.001987 * temperature_kelvin
+
+            # To avoid overflow, we use the log-sum-exp trick:
+            # ln(sum(exp(x_i))) = x_max + ln(sum(exp(x_i - x_max)))
+            # x_max = max(max_r_dist, barrier)
+            # For sequential bottleneck, we propagate uncertainty as the max of reactant/step uncertainties
+            # (since they are typically dominated by the rate-limiting step's error)
+            x_max = max(max_r_dist, barrier)
+            path_span = x_max + RT * math.log(math.exp((max_r_dist - x_max)/RT) + math.exp((barrier - x_max)/RT))
+            path_unc = max(max_r_unc, step_unc)
+
+            path_depth = max_r_depth + 1
+
+            # Phase G: Concentration-Aware Weighting
+            # Flux = (product of reactant concs) * exp(-barrier/RT)
+            # But for the cumulative pathway, we use the bottleneck span
+
+            # Use the least-available upstream precursor/intermediate pool once.
+            # The cumulative span already captures pathway resistance, so reusing an
+            # already-discounted upstream weight here would double-penalize deep routes.
+            reactant_flux_pool = min_r_conc
+            if not math.isfinite(reactant_flux_pool):
+                reactant_flux_pool = 0.0
+
+            # Additional co-reactant availability factor keeps multi-reactant steps sensitive
+            # to precursor abundance without turning units into concentration^n.
+            reference_concentration = 10.0
+            co_reactant_factor = 1.0
+            for r in r_canons:
+                if r not in exogenous_reactants:
+                    continue
+                normalized_conc = tracking[r][1] / (tracking[r][1] + reference_concentration)
+                co_reactant_factor *= normalized_conc
+
+            if ramp_data:
+                # SOTA: Integrated Propensity
+                integrated_propensity = _integrate_arrhenius(path_span, ramp_data)
+                path_weight = reactant_flux_pool * co_reactant_factor * integrated_propensity
+            else:
+                # Path weight (Flux approximation)
+                path_weight = reactant_flux_pool * co_reactant_factor * math.exp(-path_span / RT)
+
+                # Phase Q.1: Temporal FAST Mode (Fallback)
+                if time_minutes is not None:
+                    # Characteristic time approx (seconds)
+                    tau_sec = math.exp(path_span / RT) / get_reference_pre_exponential()
+                    tau_min = tau_sec / 60.0
+
+                    # Number of steps increases characteristic time roughly linearly
+                    total_tau = tau_min * path_depth
+
+                    # Finite-duration accessibility: slow routes scale roughly linearly
+                    # when t << tau and saturate smoothly when t >> tau.
+                    path_weight *= _temporal_accessibility(total_tau, time_minutes)
+
+            # Product concentration proxy should inherit the precursor-limited pool,
+            # not the exponentially discounted pathway score.
+            path_conc = reactant_flux_pool
+            base_path = list(best_paths.get(dominant_reactant, [])) if dominant_reactant else []
+            step_trace = {
+                "family": step.reaction_family or "unknown",
+                "barrier": barrier,
+                "path_span": path_span,
+                # 2026-08-27 (Wave S1): the step's own identity, so a path can be reduced to
+                # its rate-limiting step. This is the key the additive propagator dedupes on.
+                "step_key": step_key,
+                "reactants": [species_name_lookup.get(r, r) for r in r_canons],
+                "reactant_canons": list(r_canons),
+                "products": [species_name_lookup.get(p, p) for p in p_canons],
+            }
+            return {
+                "p_canons": p_canons,
+                "path_span": path_span,
+                "path_conc": path_conc,
+                "path_depth": path_depth,
+                "path_weight": path_weight,
+                "path_unc": path_unc,
+                "candidate_path": base_path + [step_trace],
+            }
+
         changed = True
         iterations = 0
         max_iterations = len(steps) + 1  # Longest possible path
-        
+
         while changed and iterations < max_iterations:
             changed = False
             iterations += 1
-            
+
             for step in steps:
-                r_smiles = [r.smiles for r in step.reactants]
-                p_smiles = [p.smiles for p in step.products]
-                step_key = f"{'+'.join(sorted(r_smiles))}->{'+'.join(sorted(p_smiles))}"
-                barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
-                barrier, step_unc = barrier_data if isinstance(barrier_data, tuple) else (barrier_data, 5.0)
-                
-                r_canons = [_canon(r.smiles) for r in step.reactants]
-                p_canons = [_canon(p.smiles) for p in step.products]
-                
-                # The distance to fire this step is the MAX distance of all its reactants.
-                # We propagate two separate notions:
-                # - `conc`: user-specified precursor abundance proxy.
-                # - `weight`: pathway-available reactive flux proxy.
-                # Products must inherit from available flux, not directly from the original precursor pool.
-                max_r_dist = 0.0
-                max_r_unc = 0.0
-                min_r_conc = float('inf')
-                max_r_depth = 0
-                reachable = True
-                dominant_reactant = None
-                dominant_reactant_span = -1.0
-                
-                for r in r_canons:
-                    if r not in tracking:
-                        reachable = False
-                        break
-                    r_span, r_conc, r_depth, r_weight, r_unc = tracking[r]
-                    max_r_dist = max(max_r_dist, r_span)
-                    max_r_unc = max(max_r_unc, r_unc)
-                    min_r_conc = min(min_r_conc, r_conc)
-                    max_r_depth = max(max_r_depth, r_depth)
-                    if r_span >= dominant_reactant_span:
-                        dominant_reactant = r
-                        dominant_reactant_span = r_span
-                    
-                if not reachable:
+                evaluated = _evaluate_step(step)
+                if evaluated is None:
                     continue
-                    
-                # Path properties to products via this step
-                # Expert Refinement (R.7): Use sequential bottleneck (microkinetics)
-                # Instead of max(barriers), we use the cumulative resistance:
-                # exp(G_eff/RT) = sum(exp(G_i/RT))
-                RT = 0.001987 * temperature_kelvin
-                
-                # To avoid overflow, we use the log-sum-exp trick:
-                # ln(sum(exp(x_i))) = x_max + ln(sum(exp(x_i - x_max)))
-                # x_max = max(max_r_dist, barrier)
-                # For sequential bottleneck, we propagate uncertainty as the max of reactant/step uncertainties
-                # (since they are typically dominated by the rate-limiting step's error)
-                x_max = max(max_r_dist, barrier)
-                path_span = x_max + RT * math.log(math.exp((max_r_dist - x_max)/RT) + math.exp((barrier - x_max)/RT))
-                path_unc = max(max_r_unc, step_unc)
-                
-                path_conc = min_r_conc
-                path_depth = max_r_depth + 1
-                
-                # Phase G: Concentration-Aware Weighting
-                # Flux = (product of reactant concs) * exp(-barrier/RT)
-                # But for the cumulative pathway, we use the bottleneck span
-                import math
-                
-                # Use the least-available upstream precursor/intermediate pool once.
-                # The cumulative span already captures pathway resistance, so reusing an
-                # already-discounted upstream weight here would double-penalize deep routes.
-                reactant_flux_pool = min_r_conc
-                if not math.isfinite(reactant_flux_pool):
-                    reactant_flux_pool = 0.0
 
-                # Additional co-reactant availability factor keeps multi-reactant steps sensitive
-                # to precursor abundance without turning units into concentration^n.
-                reference_concentration = 10.0
-                co_reactant_factor = 1.0
-                for r in r_canons:
-                    if r not in exogenous_reactants:
-                        continue
-                    normalized_conc = tracking[r][1] / (tracking[r][1] + reference_concentration)
-                    co_reactant_factor *= normalized_conc
-                
-                if ramp_data:
-                    # SOTA: Integrated Propensity
-                    integrated_propensity = _integrate_arrhenius(path_span, ramp_data)
-                    path_weight = reactant_flux_pool * co_reactant_factor * integrated_propensity
-                else:
-                    RT = 0.001987 * temperature_kelvin
-                    # Path weight (Flux approximation)
-                    path_weight = reactant_flux_pool * co_reactant_factor * math.exp(-path_span / RT)
-                    
-                    # Phase Q.1: Temporal FAST Mode (Fallback)
-                    if time_minutes is not None:
-                        # Characteristic time approx (seconds)
-                        tau_sec = math.exp(path_span / RT) / get_reference_pre_exponential()
-                        tau_min = tau_sec / 60.0
-                        
-                        # Number of steps increases characteristic time roughly linearly
-                        total_tau = tau_min * path_depth
+                path_span = evaluated["path_span"]
+                path_conc = evaluated["path_conc"]
+                path_depth = evaluated["path_depth"]
+                path_weight = evaluated["path_weight"]
+                path_unc = evaluated["path_unc"]
+                candidate_path = evaluated["candidate_path"]
 
-                        # Finite-duration accessibility: slow routes scale roughly linearly
-                        # when t << tau and saturate smoothly when t >> tau.
-                        path_weight *= _temporal_accessibility(total_tau, time_minutes)
-
-                # Product concentration proxy should inherit the precursor-limited pool,
-                # not the exponentially discounted pathway score.
-                path_conc = reactant_flux_pool
-                base_path = list(best_paths.get(dominant_reactant, [])) if dominant_reactant else []
-                step_trace = {
-                    "family": step.reaction_family or "unknown",
-                    "barrier": barrier,
-                    "path_span": path_span,
-                    "reactants": [species_name_lookup.get(r, r) for r in r_canons],
-                    "reactant_canons": list(r_canons),
-                    "products": [species_name_lookup.get(p, p) for p in p_canons],
-                }
-                candidate_path = base_path + [step_trace]
-                
-                # Relaxation: we primarily want the lowest span path. 
-                for p in p_canons:
+                # Relaxation: we primarily want the lowest span path.
+                for p in evaluated["p_canons"]:
                     # Update if new span is lower OR if span is same but weight is higher
                     p_key = p # Assuming p is the canonical SMILES string
                     if p_key not in tracking:
                         tracking[p_key] = (float('inf'), 0.0, 0, 0.0, 0.0) # Initialize if not present
-                    
+
                     current_span, current_conc, current_depth, current_weight, current_unc = tracking[p_key]
 
                     if path_span < current_span:
@@ -1076,6 +1285,51 @@ class Recommender:
                         tracking[p_key] = (path_span, path_conc, path_depth, path_weight, path_unc)
                         best_paths[p_key] = candidate_path
                         changed = True
+
+        # ── ADDITIVE FLUX OVER PARALLEL CHANNELS (Wave S1, 2026-08-27) ────────────────
+        # THE DEFECT THIS REPLACES. The relaxation above is winner-takes-all: `tracking[p]`
+        # ends up holding the LOWEST-SPAN route to p and that route's flux alone, so the
+        # allocation layer saw one channel per product. Wave P measured the consequence on
+        # cys_ribose_140C_Hofmann1998: the pentodiulose MFT lane alone predicted 242.38 ppb,
+        # the Hofmann & Schieberle C2+C3 lane alone 71.02 ppb, and BOTH together 242.38 ppb
+        # -- adding a real, literature-evidenced second route to the flagship compound moved
+        # the flagship number by EXACTLY ZERO. Real kinetics sums parallel channels.
+        #
+        # WHAT IS SUMMED. One more sweep over the steps, from the CONVERGED tracking state
+        # (not accumulated during relaxation -- that would add the same channel once per
+        # iteration). Each step contributes the Boltzmann-weighted flux it confers on its
+        # products, exactly the `path_weight` the relaxation already computes: the
+        # rate-limiting-span Boltzmann factor times the available upstream pool.
+        #
+        # THE DEDUPE RULE. Channel identity is the route's FULL ORDERED STEP-SET, and within a
+        # channel the largest flux wins rather than the sum, so no route can be counted twice.
+        # `_route_channel_id` carries the full argument, including the rate-limiting-step rule
+        # that was implemented, MEASURED and rejected: both MFT routes here share the trunk
+        # `Amadori_Rearrangement` as their slowest step, so that rule left the flagship number
+        # unmoved AND under-counts the conductance partition it was meant to protect.
+        #
+        # WHAT IS *NOT* CHANGED. Span, depth, concentration proxy and `best_paths` still come
+        # from the lowest-span representative route, so every span-driven behaviour
+        # downstream (ranking by span, path traces, `depth_activity`) is bit-identical. Only
+        # the flux proxy the budget allocation reads becomes additive. Consequence, and it is
+        # a real limitation: additivity is applied where the flux is CONSUMED (at the product,
+        # by the allocation layer), not propagated -- an INTERMEDIATE with two routes still
+        # hands its downstream products a single span, so parallelism does not compound along
+        # a chain.
+        channel_flux: Dict[str, Dict[str, float]] = {}
+        for step in steps:
+            evaluated = _evaluate_step(step)
+            if evaluated is None:
+                continue
+            channel_id = _route_channel_id(evaluated["candidate_path"])
+            weight = float(evaluated["path_weight"])
+            for p in evaluated["p_canons"]:
+                by_channel = channel_flux.setdefault(p, {})
+                if weight > by_channel.get(channel_id, float("-inf")):
+                    by_channel[channel_id] = weight
+        summed_channel_flux: Dict[str, float] = {
+            p: float(sum(by_channel.values())) for p, by_channel in channel_flux.items()
+        }
 
         # Project ranked FAST outputs onto a bounded volatile ppb budget.
         projection_budget = _estimate_projection_budget(
@@ -1096,6 +1350,7 @@ class Recommender:
             time_minutes,
             projection_strategy=projection_strategy,
             projection_budget=projection_budget,
+            channel_flux_totals=summed_channel_flux,
         )
 
         # Ensure injected targets (e.g. Hexanal from lipid oxidation) are included in raw_concentrations
@@ -1352,12 +1607,31 @@ class Recommender:
                 "projection_temperature_factor": float(projection_budget.temperature_factor),
                 "projection_time_factor": float(projection_budget.time_factor),
                 "projection_severity": float(projection_budget.severity),
+                "projection_kinetic_drive": float(projection_budget.kinetic_drive),
+                "projection_conversion_extent": float(projection_budget.conversion_extent),
                 "water_activity": None if water_activity is None else float(water_activity),
                 "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
                 "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
                 **_projection_strategy_metadata(projection_strategy),
             },
             "debug_paths": best_paths,
+            # 2026-08-27 (Wave S1): per-product flux BROKEN OUT BY CHANNEL, so "the model has
+            # N routes to X" is auditable against what the allocation layer actually summed.
+            # Keys are canonical SMILES. Inner keys are CHANNEL IDS: the full ordered
+            # step-set of the route, joined on "|" (`_route_channel_id`), which is the
+            # key the additive propagator deduplicates on.
+            #
+            # 2026-08-27 (Wave T4) CORRECTION. This line used to read "inner keys are
+            # rate-limiting `step_key`s". That is the description of the REJECTED rule
+            # — "routes sharing a rate-limiting step are one channel, take the max" —
+            # which `_route_channel_id`'s own docstring records as implemented,
+            # MEASURED and REJECTED (both MFT routes share the trunk Amadori step as
+            # their slowest, so it left the flagship number unmoved and under-counts
+            # the conductance partition a shared bottleneck actually produces). A
+            # reader auditing "the model has N routes to X" against this payload would
+            # have mis-read every key. No behaviour change; the payload was always the
+            # full step-set.
+            "debug_channel_flux": channel_flux,
             "species_names": species_name_lookup,
         }
 

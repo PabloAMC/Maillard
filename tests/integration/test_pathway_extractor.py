@@ -115,3 +115,119 @@ END
     # A+B should be ignored as it has no '=' (it has space)
     # A=A should be kept if A is resolved
     assert len(steps) == 1
+
+
+# ---------------------------------------------------------------------------
+# Audit remediation 2026-08-27 (extractor failure modes)
+# ---------------------------------------------------------------------------
+
+def _write_case(tmp_path, name, dict_content, inp_content):
+    test_dir = tmp_path / name
+    chem_dir = test_dir / "chemkin"
+    chem_dir.mkdir(parents=True)
+    (chem_dir / "species_dictionary.txt").write_text(dict_content)
+    (chem_dir / "chem_annotated.inp").write_text(inp_content)
+    return test_dir
+
+
+def test_unresolved_species_fail_the_step_instead_of_being_dropped(tmp_path):
+    test_dir = _write_case(
+        tmp_path,
+        "unresolved",
+        'A\n// SMILES="C"\n\nC\n// SMILES="CO"\n',
+        "REACTIONS\nA+Missing=C  1.0 0 0\nEND\n",
+    )
+    steps = PathwayExtractor(test_dir).run()
+
+    assert len(steps) == 1
+    step = steps[0]
+    # Stoichiometry preserved: the unknown reactant is NOT silently removed.
+    assert [r.label for r in step.reactants] == ["A", "Missing"]
+    assert step.source_quality == "unresolved_species"
+    assert step.unresolved_species == ["Missing"]
+
+
+def test_equation_split_tolerates_equals_signs_inside_species_labels(tmp_path):
+    test_dir = _write_case(
+        tmp_path,
+        "equals",
+        'C=CC=O\n// SMILES="C=CC=O"\n\nCC=O\n// SMILES="CC=O"\n',
+        "REACTIONS\nC=CC=O=CC=O  1.0 0 0\nEND\n",
+    )
+    steps = PathwayExtractor(test_dir).run()
+
+    assert len(steps) == 1
+    assert [r.label for r in steps[0].reactants] == ["C=CC=O"]
+    assert [p.label for p in steps[0].products] == ["CC=O"]
+    assert steps[0].unresolved_species == []
+
+
+def test_reversible_arrows_are_flagged_and_can_emit_both_directions(tmp_path):
+    dict_content = 'A\n// SMILES="C"\n\nB\n// SMILES="CO"\n'
+    inp_content = "REACTIONS\nA<=>B  1.0 0 0\nEND\n"
+
+    flagged = PathwayExtractor(_write_case(tmp_path, "rev_flag", dict_content, inp_content)).run()
+    assert len(flagged) == 1
+    assert flagged[0].reversible is True
+    assert flagged[0].direction == "forward"
+
+    both = PathwayExtractor(
+        _write_case(tmp_path, "rev_both", dict_content, inp_content),
+        emit_reverse_steps=True,
+    ).run()
+    assert len(both) == 2
+    assert both[1].direction == "reverse"
+    assert [r.label for r in both[1].reactants] == ["B"]
+
+
+def test_irreversible_arrow_is_not_marked_reversible(tmp_path):
+    test_dir = _write_case(
+        tmp_path,
+        "irrev",
+        'A\n// SMILES="C"\n\nB\n// SMILES="CO"\n',
+        "REACTIONS\nA=>B  1.0 0 0\nEND\n",
+    )
+    steps = PathwayExtractor(test_dir).run()
+    assert len(steps) == 1
+    assert steps[0].reversible is False
+
+
+def test_real_rmg_adjacency_lists_are_parsed(tmp_path):
+    from rdkit import Chem
+
+    adjacency = "\n".join([
+        "water",
+        "1 O u0 p2 c0 {2,S} {3,S}",
+        "2 H u0 p0 c0 {1,S}",
+        "3 H u0 p0 c0 {1,S}",
+        "",
+        "acetaldehyde",
+        "multiplicity 1",
+        "1 C u0 p0 c0 {2,S} {4,S} {5,S} {6,S}",
+        "2 C u0 p0 c0 {1,S} {3,D} {7,S}",
+        "3 O u0 p2 c0 {2,D}",
+        "4 H u0 p0 c0 {1,S}",
+        "5 H u0 p0 c0 {1,S}",
+        "6 H u0 p0 c0 {1,S}",
+        "7 H u0 p0 c0 {2,S}",
+    ])
+    test_dir = _write_case(tmp_path, "adjacency", adjacency, "REACTIONS\nEND\n")
+
+    extractor = PathwayExtractor(test_dir)
+    extractor.run()
+
+    assert extractor.species_dict["water"].smiles == Chem.CanonSmiles("O")
+    assert extractor.species_dict["acetaldehyde"].smiles == Chem.CanonSmiles("CC=O")
+
+
+def test_unsupported_species_block_raises_instead_of_returning_empty(tmp_path):
+    from src.pathway_extractor import UnsupportedSpeciesFormatError
+
+    test_dir = _write_case(
+        tmp_path,
+        "unsupported",
+        "MysterySpecies\nsome free-form text that is neither SMILES nor adjacency\n",
+        "REACTIONS\nEND\n",
+    )
+    with pytest.raises(UnsupportedSpeciesFormatError):
+        PathwayExtractor(test_dir).run()

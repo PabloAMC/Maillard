@@ -218,6 +218,37 @@ def build_projection_rows(
     return rows
 
 
+#: Input keys that describe *where the output went* or *how the process was
+#: invoked*, not *what science was asked for*. They are excluded from
+#: ``input_fingerprint_sha256`` so that the same run written to two different
+#: directories fingerprints identically — the fingerprint is a claim about the
+#: scientific inputs, and it was previously invalidated by ``--output-dir``
+#: alone. The full argv is still recorded verbatim under ``generator``.
+FINGERPRINT_EXCLUDED_INPUT_KEYS = frozenset(
+    {
+        "output_dir",
+        "output-dir",
+        "docs_asset_dir",
+        "docs-asset-dir",
+        "report",
+        "argv",
+        "command",
+        "entrypoint",
+    }
+)
+
+
+def fingerprint_inputs(inputs: Any) -> Any:
+    """Strip non-scientific keys before hashing an artifact's inputs."""
+    if isinstance(inputs, Mapping):
+        return {
+            key: value
+            for key, value in inputs.items()
+            if str(key) not in FINGERPRINT_EXCLUDED_INPUT_KEYS
+        }
+    return inputs
+
+
 def build_artifact_provenance(
     artifact_kind: str,
     output_dir: Path,
@@ -242,7 +273,7 @@ def build_artifact_provenance(
         if path_text:
             changed_paths.append(path_text)
 
-    serialized_inputs = json.dumps(inputs, sort_keys=True, default=str)
+    serialized_inputs = json.dumps(fingerprint_inputs(inputs), sort_keys=True, default=str)
     provenance: Dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
         "artifact_kind": artifact_kind,

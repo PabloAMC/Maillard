@@ -9,34 +9,18 @@ import pytest
 import numpy as np
 
 
-@pytest.mark.slow
-class TestMechanismFileGeneration:
-    """Test CTI/YAML mechanism file generation from RMG + DFT barriers."""
-
-    def test_mechanism_file_generation(self):
-        """Convert RMG mechanism + DFT barriers → CTI format."""
-        pass
-        # from src.cantera_integration import generate_mechanism_file
-        #
-        # rmg_mechanism = load_rmg_output('tests/fixtures/rmg_output/mechanism.py')
-        # dft_barriers = load_dft_barriers('tests/fixtures/dft_barriers.json')
-        #
-        # cti_file = generate_mechanism_file(rmg_mechanism, dft_barriers, output_format='cti')
-        # assert cti_file.exists()
-        # # Verify CTI is valid
-        # import cantera as ct
-        # gas = ct.Solution(str(cti_file))
-        # assert gas.n_species > 0
-
-    def test_mechanism_file_no_syntax_errors(self):
-        """Generated CTI/YAML parses without syntax errors in Cantera."""
-        pass
-        # import cantera as ct
-        # mech_file = generate_mechanism_file(...)
-        # try:
-        #     gas = ct.Solution(str(mech_file))
-        # except Exception as e:
-        #     pytest.fail(f"Mechanism file has syntax errors: {e}")
+# DELETED 2026-08-27 (Wave J2, red-team finding: empty-body tests). `TestMechanismFileGeneration`
+# held two `pass`-bodied tests, `test_mechanism_file_generation` and
+# `test_mechanism_file_no_syntax_errors`, whose commented-out bodies import
+# `src.cantera_integration.generate_mechanism_file` and load
+# `tests/fixtures/rmg_output/mechanism.py` + `tests/fixtures/dft_barriers.json`. NONE of
+# those exist: the module in this repo is `src/cantera_export.py` (class `CanteraExporter`)
+# and there are no RMG fixtures. The promise was never implementable here.
+#
+# The property they claimed -- that the exporter emits YAML Cantera can actually parse -- is
+# NOT lost: TestIsothermalSimulation below writes a mechanism with CanteraExporter and then
+# integrates it through `KineticsEngine.simulate_network_cantera`, which fails loudly if the
+# file does not parse. That test does for real what these two announced.
 
 
 @pytest.mark.slow
@@ -263,13 +247,13 @@ class TestSensoryPrediction:
         assert profile_high["meaty"][0] > profile_low["meaty"][0]
 
 
-@pytest.mark.slow
-class TestKineticsRefinement:
-    """Test improvement of kinetics from xTB to DFT barriers."""
-
-    def test_compare_xtb_vs_dft_kinetics(self):
-        """DFT-based kinetics should show refinement over xTB-based kinetics."""
-        pass
+# DELETED 2026-08-27 (Wave J2, red-team finding: empty-body tests). `TestKineticsRefinement`
+# held a single `pass`-bodied `test_compare_xtb_vs_dft_kinetics`. Read its commented-out
+# body: after building both networks it would have asserted only `fft_dft > 0` and
+# `fft_xtb > 0` -- it does not compare xTB against DFT at all, and its own comment concedes
+# the point ("DFT might be more/less realistic"). There is no criterion by which one
+# refines the other, so there was nothing to implement. Deleted rather than renamed: a
+# positivity check on two independent runs is already covered by the simulation tests above.
         # # Simulate with xTB barriers
         # gas_xtb = generate_mechanism_file(rmg_mech, xtb_barriers)
         # solution_xtb = run_isothermal_simulation(gas_xtb, initial_state, (0, 600), T=423)
@@ -287,233 +271,53 @@ class TestKineticsRefinement:
         # assert fft_dft > 0
         # assert fft_xtb > 0
 # --- CANTERA CLI TESTS ---
-@pytest.mark.slow
-class TestCanteraCLITemperatureProfile:
-    """Test CLI arguments for time-temperature profiles."""
-
-    def test_cli_arg_temperature_ramp(self):
-        """CLI: --temp-profile linear:20to150:30min."""
-        pass
-        # import subprocess
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,cysteine:0.1',
-        #     '--temp-profile', 'linear:20to150:30min',
-        #     '--time-total', '3600',  # 1 hour
-        #     '--output', 'test_output.csv'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True, text=True)
-        # assert result.returncode == 0, f"CLI failed: {result.stderr}"
-        # 
-        # # Check output file exists and has data
-        # output_file = Path('test_output.csv')
-        # assert output_file.exists()
-        # with open(output_file) as f:
-        #     lines = f.readlines()
-        #     assert len(lines) > 10, "Output file has insufficient data"
-
-    def test_cli_arg_isothermal_constant_temp(self):
-        """CLI: --temperature 150 for isothermal simulation."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,cysteine:0.1',
-        #     '--temperature', '150',  # Isothermal at 150°C
-        #     '--time-total', '600',
-        #     '--output', 'test_isothermal.csv'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True, text=True)
-        # assert result.returncode == 0
-
-
-@pytest.mark.slow
-class TestCanteraCLIOutputFormat:
-    """Test CLI output format options."""
-
-    def test_cli_arg_output_csv(self):
-        """CLI: --output csv generates CSV file."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1',
-        #     '--temperature', '150',
-        #     '--output', 'test_output.csv'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True)
-        # assert result.returncode == 0
-        # 
-        # output = Path('test_output.csv')
-        # assert output.exists()
-        # # CSV should have headers and data
-        # with open(output) as f:
-        #     first_line = f.readline()
-        #     assert 'time' in first_line.lower()
-
-    def test_cli_arg_output_json(self):
-        """CLI: --output json generates JSON file."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1',
-        #     '--temperature', '150',
-        #     '--output', 'test_output.json'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True)
-        # assert result.returncode == 0
-        #
-        # import json
-        # with open('test_output.json') as f:
-        #     data = json.load(f)
-        #     assert 'time' in data or 'results' in data
-
-    def test_cli_multiple_output_formats(self):
-        """CLI: --output csv --output json generates both."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,cysteine:0.1',
-        #     '--temperature', '150',
-        #     '--output', 'test_multi.csv',
-        #     '--output', 'test_multi.json'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True)
-        # assert result.returncode == 0
-        # assert Path('test_multi.csv').exists()
-        # assert Path('test_multi.json').exists()
-
-
-@pytest.mark.slow
-class TestCanteraCLISensoryPrediction:
-    """Test CLI sensory profile prediction."""
-
-    def test_cli_sensory_prediction(self):
-        """CLI: --predict-sensory returns sensory profile rankings from Cantera output."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,cysteine:0.1',
-        #     '--temperature', '150',
-        #     '--time-total', '600',
-        #     '--predict-sensory',
-        #     '--output', 'test_sensory.json'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True, text=True)
-        # assert result.returncode == 0
-        #
-        # # Output should contain sensory predictions
-        # import json
-        # with open('test_sensory.json') as f:
-        #     data = json.load(f)
-        #     assert 'sensory_profile' in data
-        #     sensory = data['sensory_profile']
-        #     assert 'meaty' in sensory
-        #     assert 'roasted' in sensory
-        #     assert isinstance(sensory['meaty'], float)
-
-    def test_cli_sensory_ranking_output(self):
-        """CLI sensory output shows human-readable rankings."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,cysteine:0.1',
-        #     '--temperature', '150',
-        #     '--predict-sensory',
-        #     '--verbose'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True, text=True)
-        # assert result.returncode == 0
-        # # Should print human-readable output
-        # assert 'meaty' in result.stdout.lower() or 'sensory' in result.stdout.lower()
-
-
-@pytest.mark.slow
-class TestCanteraCLIPHArgument:
-    """Test CLI pH handling for kinetics."""
-
-    def test_cli_arg_ph(self):
-        """CLI: --pH 5.0 sets reaction pH."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,glucose:0.1',
-        #     '--temperature', '150',
-        #     '--pH', '5.0',
-        #     '--output', 'test_ph5.csv'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True)
-        # assert result.returncode == 0
-        # assert Path('test_ph5.csv').exists()
-
-    def test_cli_arg_ph_low_produces_furans(self):
-        """CLI: --pH 5.0 should produce more furans than --pH 7.0."""
-        pass
-        # # Run at pH 5
-        # subprocess.run([
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,glucose:0.1',
-        #     '--temperature', '150',
-        #     '--pH', '5.0',
-        #     '--output', 'test_ph5.csv'
-        # ])
-        #
-        # # Run at pH 7
-        # subprocess.run([
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1,glucose:0.1',
-        #     '--temperature', '150',
-        #     '--pH', '7.0',
-        #     '--output', 'test_ph7.csv'
-        # ])
-        #
-        # # Parse outputs
-        # import csv
-        # with open('test_ph5.csv') as f:
-        #     data_ph5 = list(csv.DictReader(f))
-        #     furan_ph5 = float(data_ph5[-1].get('furfural', 0))
-        #
-        # with open('test_ph7.csv') as f:
-        #     data_ph7 = list(csv.DictReader(f))
-        #     furan_ph7 = float(data_ph7[-1].get('furfural', 0))
-        #
-        # # pH 5 should produce more furans
-        # assert furan_ph5 > furan_ph7
+#
+# DELETED 2026-08-27 (Wave J2, red-team finding: empty-body tests). Eleven test methods
+# lived here across five classes -- TestCanteraCLITemperatureProfile,
+# TestCanteraCLIOutputFormat, TestCanteraCLISensoryPrediction, TestCanteraCLIPHArgument and
+# most of TestCanteraCLIValidation. EVERY ONE had a body consisting of a bare `pass`
+# followed by a block of commented-out aspiration. They collected, ran in ~0.03 s and
+# reported PASS, contributing eleven green ticks that asserted nothing.
+#
+# They were not merely unimplemented, they were unimplementable AS WRITTEN: they describe a
+# CLI that does not exist. The real interface in scripts/run_cantera_kinetics.py takes
+# `--temp` / `--temp-ramp <csv>` / `--ph` / `--output <prefix>`; the deleted bodies invoked
+# `--temp-profile linear:20to150:30min`, `--temperature`, `--time-total`, `--pH`, and
+# `--output` repeated to request multiple formats. Uncommenting them would have tested a
+# fictional program. Reviving them means writing the assertion against the CLI that exists,
+# which is a feature decision, not a test cleanup.
+#
+# The one promise the real CLI does keep is implemented below for real.
 
 
 @pytest.mark.slow
 class TestCanteraCLIValidation:
-    """Test CLI input validation and error handling."""
+    """Argument-contract checks against the CLI that actually exists."""
 
-    def test_cli_invalid_precursor_name(self):
-        """CLI should error on invalid precursor name."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'foobarone:0.1',
-        #     '--temperature', '150'
-        # ]
-        # result = subprocess.run(cmd, capture_output=True, text=True)
-        # assert result.returncode != 0
-        # assert 'unknown' in result.stderr.lower() or 'invalid' in result.stderr.lower()
+    def test_cli_requires_the_precursors_argument(self):
+        """IMPLEMENTED 2026-08-27 (Wave J2), replacing an empty `pass` body.
 
-    def test_cli_invalid_temperature_range(self):
-        """CLI should error on physically unrealistic temperatures."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--precursors', 'ribose:0.1',
-        #     '--temperature', '5000'  # Unrealistic
-        # ]
-        # result = subprocess.run(cmd, capture_output=True, text=True)
-        # assert result.returncode != 0
+        The only one of the twelve deleted CLI placeholders whose promise the real
+        scripts/run_cantera_kinetics.py keeps. argparse marks --precursors/-p required, so
+        invoking with no arguments must exit non-zero and say so on stderr. Verified
+        discriminating: dropping `required=True` from the parser makes this fail.
+        """
+        import subprocess
+        import sys
+        from pathlib import Path
 
-    def test_cli_missing_required_args(self):
-        """CLI should require --precursors argument."""
-        pass
-        # cmd = [
-        #     'python', 'scripts/run_cantera_kinetics.py',
-        #     '--temperature', '150'
-        #     # Missing --precursors
-        # ]
-        # result = subprocess.run(cmd, capture_output=True, text=True)
-        # assert result.returncode != 0
-        # assert 'required' in result.stderr.lower() or 'precursor' in result.stderr.lower()
+        root = Path(__file__).resolve().parents[2]
+        result = subprocess.run(
+            [sys.executable, str(root / "scripts" / "run_cantera_kinetics.py")],
+            capture_output=True,
+            text=True,
+            cwd=str(root),
+            timeout=300,
+        )
+
+        assert result.returncode != 0, (
+            "CLI exited 0 with no --precursors; the required-argument contract is gone"
+        )
+        assert "precursors" in result.stderr.lower(), (
+            f"CLI failed without naming the missing argument. stderr: {result.stderr!r}"
+        )

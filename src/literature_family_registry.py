@@ -281,26 +281,3 @@ def build_family_payload_coverage_artifact() -> Dict[str, Any]:
         },
         "families": family_rows,
     }
-
-
-def render_family_payload_coverage_markdown(payload: Mapping[str, Any]) -> str:
-    lines = [
-        "# Family Payload Coverage",
-        "",
-        "| SLR | Family | Posture | Primary Payloads | Supporting Payloads | Runtime Support |",
-        "| --- | --- | --- | ---: | ---: | --- |",
-    ]
-    for row in payload.get("families", []):
-        lines.append(
-            f"| {row.get('slr_family', 'unknown')} | {row.get('family_id', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {int(row.get('total_primary_payload_count', 0))} | {int(row.get('total_supporting_payload_count', 0))} | {bool(row.get('has_runtime_support', False))} |"
-        )
-    summary = payload.get("summary", {})
-    lines.extend(
-        [
-            "",
-            f"Families tracked: {int(summary.get('family_count', 0))}",
-            f"Families with primary payload support: {int(summary.get('families_with_primary_payload_support', 0))}",
-            f"Payload roles: {', '.join(str(item) for item in summary.get('payload_roles', []))}",
-        ]
-    )
-    return "\n".join(lines) + "\n"

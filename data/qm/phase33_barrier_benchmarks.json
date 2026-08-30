@@ -1,0 +1,76 @@
+{
+  "provenance": {
+    "audit_note": "2026-08-27 (audit-remediation Wave J1). Every `literature` window below was labelled `no_verifiable_source` because NO citation of any kind was ever recorded for it. There is no DOI, no author-year string, no run record, and no entry for this file in results/validation/citation_verification_ledger.md - the ledger swept data/lit, data/benchmarks and data/species, and this file was invisible to it because .gitignore line 33 (`data/*`) hid the whole directory from the repository until this commit. The windows are therefore UNANCHORED NUMBERS OF UNKNOWN ORIGIN, not literature.",
+    "why_not_verified": "Labelling, not verification. Assigning a primary source to these nine windows requires reading nine bodies of literature and is an owner task; inventing a plausible-looking citation for them is exactly the failure this audit exists to undo. `no_verifiable_source` states the true current status.",
+    "fabrication_indicators": "Two independent signatures suggest these numbers were written to look like a benchmark rather than measured. (1) All nine `xtb_reference_kcal_mol` and all nine `wb97mv_kcal_mol` values fall INSIDE their own literature window - a real semi-empirical method disagrees with a DFT reference by several kcal/mol on some fraction of a nine-case set. (2) `wb97mv_kcal_mol` equals `literature.best` EXACTLY for amadori_rearrangement (20.1) and strecker_decarboxylation (24.8). No output file, log, input deck or geometry backs any of the eighteen values. Treat the whole file as unverified until someone re-runs it.",
+    "runtime_coupling": "NONE, verified 2026-08-27. The only importer of src/authority_benchmark_data.py is tests/unit/test_authority_benchmark_data.py, which asserts the loader parses; tests/benchmarks/_lane_policy.py gates the (skip-heavy, not-in-CI) Phase 3 authority lane on the file's existence. No value here reaches the model, a calibration, or a headline. That bounds the damage - it does not make the numbers real.",
+    "runtime_coupling_correction_2026_08_27": "APPENDED, NOT OVERWRITTEN (Wave R, 2026-08-27). The second clause of `runtime_coupling` above is now stale: `tests/benchmarks/_lane_policy.py` was DELETED on 2026-08-27 (Wave J2), together with the whole `tests/benchmarks/` directory, on the same day the note was written. The original wording is left in place rather than edited because it is an audit record of what was true when it was checked. The correction makes the finding STRONGER, not weaker: with the lane policy gone, the ONLY remaining importer of `src/authority_benchmark_data.py` is `tests/unit/test_authority_benchmark_data.py`, which asserts that the loader parses. Nothing gates on this file's existence any more and nothing consumes its values. Reviving or retiring the Phase 3 authority lane is an open owner decision; until it is made, these eighteen unverified numbers are inert.",
+    "source_status_scope": "The per-entry `source_status` applies to the `literature` window AND to the two computed columns, which have no more provenance than the window does.",
+    "gate": "scripts/ci/citation_gate.py scans this directory (added Wave J1) and requires every benchmark entry to carry a verifiable DOI or this label. WAIVERS is empty and must stay empty."
+  },
+  "benchmarks": [
+    {
+      "family": "amadori_rearrangement",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 18.4, "high": 22.3, "best": 20.1},
+      "xtb_reference_kcal_mol": 19.6,
+      "wb97mv_kcal_mol": 20.1
+    },
+    {
+      "family": "strecker_decarboxylation",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 23.4, "high": 27.1, "best": 24.8},
+      "xtb_reference_kcal_mol": 24.1,
+      "wb97mv_kcal_mol": 24.8
+    },
+    {
+      "family": "trapping_hexanal",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 15.2, "high": 19.7, "best": 18.0},
+      "xtb_reference_kcal_mol": 17.6,
+      "wb97mv_kcal_mol": 18.3
+    },
+    {
+      "family": "mft_release",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 16.8, "high": 21.0, "best": 18.9},
+      "xtb_reference_kcal_mol": 18.2,
+      "wb97mv_kcal_mol": 19.1
+    },
+    {
+      "family": "furosine_crossover",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 17.9, "high": 22.0, "best": 20.0},
+      "xtb_reference_kcal_mol": 19.4,
+      "wb97mv_kcal_mol": 20.2
+    },
+    {
+      "family": "cml_cel_proxy",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 21.1, "high": 26.9, "best": 23.5},
+      "xtb_reference_kcal_mol": 22.8,
+      "wb97mv_kcal_mol": 23.7
+    },
+    {
+      "family": "acrylamide_fast_kinetics",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 28.0, "high": 34.2, "best": 31.1},
+      "xtb_reference_kcal_mol": 30.4,
+      "wb97mv_kcal_mol": 31.0
+    },
+    {
+      "family": "pyrazine_control",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 14.9, "high": 18.2, "best": 16.5},
+      "xtb_reference_kcal_mol": 16.1,
+      "wb97mv_kcal_mol": 16.7
+    },
+    {
+      "family": "thiamine_fragmentation",
+      "source_status": "no_verifiable_source",
+      "literature": {"low": 19.5, "high": 24.8, "best": 21.9},
+      "xtb_reference_kcal_mol": 21.2,
+      "wb97mv_kcal_mol": 22.0
+    }
+  ]
+}

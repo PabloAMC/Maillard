@@ -1,0 +1,73 @@
+{
+  "summary": {
+    "chosen_family": "mycoprotein",
+    "chosen_evidence_landing": "bounded_calibration_prior",
+    "chosen_action": "advance_bounded_next_family",
+    "policy": "advance_at_most_one_bounded_next_family_while_explicitly_deferring_scope_gaps_and_preserving_primary_pea_soy_closure_work"
+  },
+  "decisions": [
+    {
+      "matrix_family": "pea_isolate",
+      "priority_rank": 1,
+      "scope_priority": "active_matrix_priority",
+      "evidence_landing": "external_benchmark_plus_calibration_review",
+      "decision": "defer_until_primary_matrix_lane_moves",
+      "next_best_action": "promote_primary_meaty_positive_pea_benchmark",
+      "rationale": "Pea and soy remain the main product blocker, so these stay primary closure work rather than scope-expansion work."
+    },
+    {
+      "matrix_family": "soy_isolate",
+      "priority_rank": 2,
+      "scope_priority": "active_matrix_priority",
+      "evidence_landing": "external_benchmark_plus_calibration_review",
+      "decision": "defer_until_primary_matrix_lane_moves",
+      "next_best_action": "promote_primary_meaty_positive_soy_benchmark",
+      "rationale": "Pea and soy remain the main product blocker, so these stay primary closure work rather than scope-expansion work."
+    },
+    {
+      "matrix_family": "mycoprotein",
+      "priority_rank": 3,
+      "scope_priority": "bounded_next_candidate",
+      "evidence_landing": "bounded_calibration_prior",
+      "decision": "advance_now",
+      "next_best_action": "land_first_family_specific_mycoprotein_measurement_package",
+      "rationale": "Highest-ranked bounded next candidate with a calibration-grade landing that does not overclaim broad matrix closure."
+    },
+    {
+      "matrix_family": "coconut_oil_co_matrix",
+      "priority_rank": 4,
+      "scope_priority": "scope_gap_to_rank",
+      "evidence_landing": "family_specific_calibration_or_tradeoff_benchmark",
+      "decision": "defer_as_scope_gap",
+      "next_best_action": "encode_coconut_oil_as_explicit_open_family_gap",
+      "rationale": "Family remains explicitly out of scope until family-specific evidence landing is available."
+    },
+    {
+      "matrix_family": "other_plant_proteins",
+      "priority_rank": 5,
+      "scope_priority": "scope_gap_to_rank",
+      "evidence_landing": "runtime_prior_plus_first_benchmark_design",
+      "decision": "defer_as_scope_gap",
+      "next_best_action": "rank_next_family_by_product_impact_and_literature_closability",
+      "rationale": "Family remains explicitly out of scope until family-specific evidence landing is available."
+    },
+    {
+      "matrix_family": "extrusion_heavy_systems",
+      "priority_rank": 6,
+      "scope_priority": "hold_current_posture",
+      "evidence_landing": "process_regime_intake_and_warnings",
+      "decision": "hold_current_posture",
+      "next_best_action": "add_family_specific_process_intake_when_literature_allows",
+      "rationale": "Current support is intentionally bounded and should not be broadened in this cycle."
+    },
+    {
+      "matrix_family": "soy_hydrolysate",
+      "priority_rank": 7,
+      "scope_priority": "hold_current_posture",
+      "evidence_landing": "qualitative_intake_only",
+      "decision": "hold_current_posture",
+      "next_best_action": "preserve_as_qualitative_design_anchor",
+      "rationale": "Current support is intentionally bounded and should not be broadened in this cycle."
+    }
+  ]
+}

@@ -1,0 +1,1663 @@
+{
+  "cross_lane_checks": [
+    {
+      "name": "schiff_condensation (Cantera lane) vs k_schiff (kinetic core)",
+      "shared_source": "Martins & van Boekel 2005, Food Chem 90:257-269, Table 2, step 1 (Glc + Gly -> DFG). Both entries name it.",
+      "left_id": "schiff_condensation",
+      "right_id": "k_schiff",
+      "left_a": 150000000000.0,
+      "left_a_unit": "L/mol.s",
+      "right_a_converted_to_left_unit": 9463554664.366365,
+      "a_ratio": 15.850280927187235,
+      "a_fold_difference": 15.850280927187235,
+      "left_ea_kj_mol": 97.0,
+      "right_ea_kj_mol": 96.8,
+      "ea_delta_kj_mol": 0.20000000000000284,
+      "side_carrying_the_defect": null,
+      "side_reproducing_its_source": null,
+      "flag": "FLAG_CROSS_LANE_A"
+    },
+    {
+      "name": "cysteine_thermolysis (Cantera lane) vs k_cys_h2s (kinetic core)",
+      "shared_source": "Zheng & Ho 1994, ACS Symp. Ser. 564:138-146, aqueous 0.1 M L-cysteine H2S release. Both entries name it.",
+      "left_id": "cysteine_thermolysis",
+      "right_id": "k_cys_h2s",
+      "left_a": 1931000000000.0,
+      "left_a_unit": "1/s",
+      "right_a_converted_to_left_unit": 1929999999999.9976,
+      "a_ratio": 1.0005181347150272,
+      "a_fold_difference": 1.0005181347150272,
+      "left_ea_kj_mol": 133.0,
+      "right_ea_kj_mol": 133.0,
+      "ea_delta_kj_mol": 0.0,
+      "side_carrying_the_defect": null,
+      "side_reproducing_its_source": null,
+      "flag": "OK"
+    }
+  ],
+  "thresholds": {
+    "a_ratio_fold": 2.0,
+    "ea_tolerance_pct": 10.0
+  },
+  "coverage": {
+    "shipped_pairs_total": 53,
+    "verifiable_against_a_dossier_k_table": 11,
+    "unverifiable_no_dossier_k_table": 42,
+    "pairs_with_no_prefactor_shipped": 2,
+    "flagged": 7,
+    "dossier_k_tables_available": 13,
+    "cross_lane_checks_run": 2,
+    "cross_lane_checks_flagged": 1
+  },
+  "out_of_scope_ea_only_tables": {
+    "note": "These ship an activation energy with NO paired prefactor: the rate is reconstructed at the point of use from a generic Eyring/TST factor (k_B T/h, or the 6.25e12 'TST @ 150C' substitution). They are not (Ea, A) pairs and so are outside this audit's scored set, but they are the same silent-prefactor risk surface.",
+    "src/barrier_constants.py FAST_BARRIERS": "51 families, kcal/mol, fitted screening constants",
+    "src/conditions.py ACTIVATION_ENERGIES_KJ": "6 family defaults, kJ/mol, Eyring prefactor"
+  },
+  "rows": [
+    {
+      "parameter_id": "mutarotation",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 94.5,
+      "shipped_a": 1000000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1063/5.0288357",
+      "source_quality": "estimated_tst",
+      "has_audit_flag": false,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "schiff_condensation",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 97.0,
+      "shipped_a": 150000000000.0,
+      "shipped_a_unit": "L/mol.s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1016/j.foodchem.2004.04.006",
+      "source_quality": "literature",
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE",
+        "FLAG_CROSS_LANE_A"
+      ],
+      "notes": [
+        "cross-lane: schiff_condensation (Cantera lane) vs k_schiff (kinetic core) disagree by 15.9x on the prefactor while citing the same source"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "amadori",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 59.0,
+      "shipped_a": 100000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1021/jf025561j",
+      "source_quality": "literature_estimated",
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "enolisation",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 120.0,
+      "shipped_a": 1000000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1016/S0924-2244(01)00022-X",
+      "source_quality": "literature_estimated",
+      "has_audit_flag": false,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "dehydration",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 123.88,
+      "shipped_a": 309000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "https://www.science.gov/topicpages/m/model+compounds+reaction.html",
+      "source_quality": "non_citable_aggregator",
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "strecker",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 80.3328,
+      "shipped_a": 10000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "T.P. Labuza 1998",
+      "source_quality": "non_citable_author_year_only",
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "retro_aldol",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 160.0,
+      "shipped_a": 1000000000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1080/10408398.2017.1378865",
+      "source_quality": "off_topic_source",
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "pyrazine_condensation",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 138.072,
+      "shipped_a": 100000000000.0,
+      "shipped_a_unit": "L/mol.s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1016/j.foodchem.2025.145652",
+      "source_quality": "estimated",
+      "has_audit_flag": false,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "cysteine_thermolysis",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 133.0,
+      "shipped_a": 1931000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1021/bk-1994-0564.ch011",
+      "source_quality": "literature",
+      "has_audit_flag": true,
+      "dossier_k_table": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 5.0 column",
+      "refit_ea_kj_mol": 132.96804900025737,
+      "refit_a": 1931214330876.3445,
+      "a_ratio": 0.9998890175611698,
+      "ea_delta_pct": -0.024023308077168206,
+      "flags": [
+        "OK"
+      ],
+      "notes": [
+        "The shipped Ea 130.4 is the pH 3-9 MEAN, so no single pH column is its exact partner; pH 5 is used as the primary comparator and all four are reported. The prefactor must be judged against the whole 9.8e11-2.4e13 band the four columns give."
+      ],
+      "verifiable": true,
+      "refit_a_ols": 1931214330876.3445,
+      "refit_ea_ols_kj_mol": 132.96804900025737,
+      "refit_r2_weighted": 0.9745510908233191,
+      "refit_n_points": 4,
+      "refit_unit_conversion": "min^-1 -> s^-1 (/60)",
+      "a_fold_difference": 1.000110994757299,
+      "ea_delta_kj_mol": -0.03195099974263371
+    },
+    {
+      "parameter_id": "thiol_addition",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 29.0,
+      "shipped_a": null,
+      "shipped_a_unit": "L/mol.s",
+      "a_is_placeholder_nan": true,
+      "source_key": "https://www.researchgate.net...acrylamide_removal",
+      "source_quality": "non_citable_truncated_url",
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "NO_PREFACTOR_SHIPPED",
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "A_value is a bare NaN placeholder; src/barrier_constants.get_arrhenius_params silently substitutes 6.25e12 ('TST @ 150C') at the point of use, and for an A_unit of L/mol.s that substitution is also a unimolecular prefactor handed to a bimolecular reaction."
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "beta_elimination_dha",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 79.496,
+      "shipped_a": null,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": true,
+      "source_key": "10.1021/bi00270a010 (Helmerhorst, E., & Stokes, G. B., 1983)",
+      "source_quality": null,
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "NO_PREFACTOR_SHIPPED",
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "A_value is a bare NaN placeholder; src/barrier_constants.get_arrhenius_params silently substitutes 6.25e12 ('TST @ 150C') at the point of use, and for an A_unit of L/mol.s that substitution is also a unimolecular prefactor handed to a bimolecular reaction."
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "thiamine_degradation",
+      "shipped_in": "data/lit/arrhenius_params.yml",
+      "lane": "cantera_export",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 100.8,
+      "shipped_a": 1000000000.0,
+      "shipped_a_unit": "1/s",
+      "a_is_placeholder_nan": false,
+      "source_key": "10.1016/0022-1416(84)90226-9 (or similar lit)",
+      "source_quality": "dead_doi",
+      "has_audit_flag": true,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_schiff",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 96.8,
+      "shipped_k_ref": 1.6e-05,
+      "t_ref_k": 373.15,
+      "shipped_a": 567813279.8619819,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 1",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.1 lines 116-117",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE",
+        "FLAG_CROSS_LANE_A"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table",
+        "cross-lane: schiff_condensation (Cantera lane) vs k_schiff (kinetic core) disagree by 15.9x on the prefactor while citing the same source"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_glc_fru",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 123.0,
+      "shipped_k_ref": 0.00164,
+      "t_ref_k": 373.15,
+      "shipped_a": 270652003983398.28,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 2",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_fru_glc",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 93.0,
+      "shipped_k_ref": 0.00915,
+      "t_ref_k": 373.15,
+      "shipped_a": 95407344990.25519,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 3",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_ama_tdg",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 97.0,
+      "shipped_k_ref": 0.0111,
+      "t_ref_k": 373.15,
+      "shipped_a": 420150211163.3269,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 4",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_tdg_fa",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 30.0,
+      "shipped_k_ref": 0.0345,
+      "t_ref_k": 373.15,
+      "shipped_a": 546.0416593647133,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 5",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_ama_mgo",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 125.0,
+      "shipped_k_ref": 0.00708,
+      "t_ref_k": 373.15,
+      "shipped_a": 2226184231495923.5,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 6",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_ama_odg",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 107.0,
+      "shipped_k_ref": 0.0157,
+      "t_ref_k": 373.15,
+      "shipped_a": 14920503790808.842,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 7",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_odg_aa",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 76.0,
+      "shipped_k_ref": 1.45,
+      "t_ref_k": 373.15,
+      "shipped_a": 63076114333.56083,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 8",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_tdg_mel",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 95.2,
+      "shipped_k_ref": 0.000812,
+      "t_ref_k": 373.15,
+      "shipped_a": 17205735236.240158,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 9",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.1 lines 119-120",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_fru_acids",
+      "shipped_in": "src/kinetic_core/parameters.py",
+      "lane": "trunk_martins_m4",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 237.0,
+      "shipped_k_ref": 4.41e-05,
+      "t_ref_k": 373.15,
+      "shipped_a": 6.603153340605225e+28,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Martins & van Boekel 2005, Food Chem 90(1-2):257-269 Table 2 (= Martins 2003 thesis Table 5.2, p. 122), model M4, step 10",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.1 line 123 ('Martins Table 2, all 10 steps')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_asn_glc",
+      "shipped_in": "src/kinetic_core/parameters_acrylamide.py",
+      "lane": "acrylamide",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 117.5,
+      "shipped_k_ref": 0.0017,
+      "t_ref_k": 433.15,
+      "shipped_a": 251067580497.6337,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "De Vleeschouwer et al. 2009 Part I, Food Chem 114:116-126, Table 3 p. 124, GLUCOSE column (non-italic subset), k_INTg / Ea_INTg",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.2 line 192",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_int1_acr",
+      "shipped_in": "src/kinetic_core/parameters_acrylamide.py",
+      "lane": "acrylamide",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 159.2,
+      "shipped_k_ref": 0.00357,
+      "t_ref_k": 433.15,
+      "shipped_a": 5.631432261354652e+16,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "De Vleeschouwer et al. 2009 Part I, Food Chem 114:116-126, Table 3 p. 124, GLUCOSE column (non-italic subset), k_Fref / Ea_F",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.2 line 193",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_asn_asp",
+      "shipped_in": "src/kinetic_core/parameters_acrylamide.py",
+      "lane": "acrylamide",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 105.4,
+      "shipped_k_ref": 0.02643,
+      "t_ref_k": 433.15,
+      "shipped_a": 135612011477.5257,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "De Vleeschouwer et al. 2009 Part I, Food Chem 114:116-126, Table 3 p. 124, GLUCOSE column (non-italic subset), k_Aspref / Ea_Asp",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.2 lines 195-196",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_acr_cys",
+      "shipped_in": "src/kinetic_core/parameters_acrylamide.py",
+      "lane": "acrylamide",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 51.3,
+      "shipped_k_ref": 0.04936,
+      "t_ref_k": 433.15,
+      "shipped_a": 75796.5518627059,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "De Vleeschouwer et al. 2009 Part II, J Agric Food Chem 57:539-546, Table 3 p. 542, CYSTEINE column, k_E2ref / Ea_E2",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.2 lines 190-191",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_cys_sink",
+      "shipped_in": "src/kinetic_core/parameters_acrylamide.py",
+      "lane": "acrylamide",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 110.5,
+      "shipped_k_ref": 0.35,
+      "t_ref_k": 433.15,
+      "shipped_a": 7400801645178.194,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "De Vleeschouwer et al. 2009 Part II, J Agric Food Chem 57:539-546, Table 3 p. 542, CYSTEINE column, k_Yref / Ea_Y",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.2 line 199",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_cys_glc",
+      "shipped_in": "src/kinetic_core/parameters_acrylamide.py",
+      "lane": "acrylamide",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 30.3,
+      "shipped_k_ref": 0.00026000000000000003,
+      "t_ref_k": 433.15,
+      "shipped_a": 1.1718031430740885,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "De Vleeschouwer et al. 2009 Part II, J Agric Food Chem 57:539-546, Table 3 p. 542, CYSTEINE column, k_INT2ref / Ea_INT2",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.2, K1 sec. 2c row k_INT2ref",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_asp_sink",
+      "shipped_in": "src/kinetic_core/parameters_acrylamide.py",
+      "lane": "acrylamide",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 97.2,
+      "shipped_k_ref": 0.04,
+      "t_ref_k": 433.15,
+      "shipped_a": 21058227797.59717,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "De Vleeschouwer et al. 2009 Part II, J Agric Food Chem 57:539-546, Table 3 p. 542, CYSTEINE column, k_Xref / Ea_X (cysteine column)",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.2, K1 sec. 2c row k_Xref",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_glc_tdg",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 107.2,
+      "shipped_k_ref": 9.39823324272715e-06,
+      "t_ref_k": 373.15,
+      "shipped_a": 9526340457.401974,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 3",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 4 (Table 2) and sec. 3 (Table 1); consolidated in k5a_hmf_synthesis.md sec. 7.1 rows 10-12",
+      "dossier_k_table": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 3",
+      "refit_ea_kj_mol": 65.42853033989759,
+      "refit_a": 76345.89253843014,
+      "a_ratio": 124778.68999444484,
+      "ea_delta_pct": -38.96592319039404,
+      "flags": [
+        "FLAG_A_RATIO",
+        "FLAG_EA"
+      ],
+      "notes": [
+        "source table: non-monotonic in T (0.91 -> 4.14 -> 3.60)",
+        "shipped value comes from the source's SIMULTANEOUS GLOBAL ODE fit (Table 2), not from an Arrhenius fit of its own per-temperature Table 1; the two are not required to agree and the gap is an identifiability diagnostic"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 17968.401564858203,
+      "refit_ea_ols_kj_mol": 59.58405247004294,
+      "refit_r2_weighted": 0.8346353019475345,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 124778.68999444484,
+      "ea_delta_kj_mol": -41.77146966010241
+    },
+    {
+      "parameter_id": "k_tdg_ddg",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 36.9,
+      "shipped_k_ref": 0.0037360509257845947,
+      "t_ref_k": 373.15,
+      "shipped_a": 546.6168399580836,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 4",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 4 (Table 2) and sec. 3 (Table 1); consolidated in k5a_hmf_synthesis.md sec. 7.1 rows 10-12",
+      "dossier_k_table": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 4",
+      "refit_ea_kj_mol": 31.419163310283782,
+      "refit_a": 136.40263133281297,
+      "a_ratio": 4.0073775308951065,
+      "ea_delta_pct": -14.853215961290562,
+      "flags": [
+        "FLAG_A_RATIO",
+        "FLAG_EA"
+      ],
+      "notes": [
+        "shipped value comes from the source's SIMULTANEOUS GLOBAL ODE fit (Table 2), not from an Arrhenius fit of its own per-temperature Table 1; the two are not required to agree and the gap is an identifiability diagnostic"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 167.47186623797526,
+      "refit_ea_ols_kj_mol": 32.14716457860005,
+      "refit_r2_weighted": 0.9587594275662445,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 4.0073775308951065,
+      "ea_delta_kj_mol": -5.480836689716217
+    },
+    {
+      "parameter_id": "k_ddg_hmf",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 0.0,
+      "shipped_k_ref": 0.11900000000000001,
+      "t_ref_k": 373.15,
+      "shipped_a": 0.11900000000000001,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 5",
+      "source_quality": "bounded_from_a_timescale_bracket",
+      "dossier_anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 4 (Table 2) and sec. 3 (Table 1); consolidated in k5a_hmf_synthesis.md sec. 7.1 rows 10-12",
+      "dossier_k_table": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 5",
+      "refit_ea_kj_mol": -10.828634242033818,
+      "refit_a": 0.0074329929547902575,
+      "a_ratio": 16.009701707481025,
+      "ea_delta_pct": null,
+      "flags": [
+        "FLAG_A_RATIO",
+        "FLAG_EA_FIXED_ZERO_VS_NONZERO_REFIT"
+      ],
+      "notes": [
+        "source table: non-monotonic in T; the authors FIXED Ea to zero for this step",
+        "shipped value comes from the source's SIMULTANEOUS GLOBAL ODE fit (Table 2), not from an Arrhenius fit of its own per-temperature Table 1; the two are not required to agree and the gap is an identifiability diagnostic"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 0.020984445393899268,
+      "refit_ea_ols_kj_mol": -6.979109392974482,
+      "refit_r2_weighted": 0.35111188865287457,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 16.009701707481025,
+      "ea_delta_kj_mol": -10.828634242033818
+    },
+    {
+      "parameter_id": "k_tdg_mgo",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 84.8,
+      "shipped_k_ref": 0.0024392888534061643,
+      "t_ref_k": 373.15,
+      "shipped_a": 1809614722.837638,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 11",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 4 (Table 2) and sec. 3 (Table 1); consolidated in k5a_hmf_synthesis.md sec. 7.1 rows 10-12",
+      "dossier_k_table": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 11",
+      "refit_ea_kj_mol": 90.11427739624901,
+      "refit_a": 7930325640.033125,
+      "a_ratio": 0.22818920747749763,
+      "ea_delta_pct": 6.266836552180437,
+      "flags": [
+        "FLAG_A_RATIO"
+      ],
+      "notes": [
+        "shipped value comes from the source's SIMULTANEOUS GLOBAL ODE fit (Table 2), not from an Arrhenius fit of its own per-temperature Table 1; the two are not required to agree and the gap is an identifiability diagnostic"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 19782577369.281437,
+      "refit_ea_ols_kj_mol": 93.6933604903489,
+      "refit_r2_weighted": 0.9937726934463121,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 4.3823282049770595,
+      "ea_delta_kj_mol": 5.314277396249011
+    },
+    {
+      "parameter_id": "k_fru_int",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 100.4,
+      "shipped_k_ref": 0.0010899093099035733,
+      "t_ref_k": 373.15,
+      "shipped_a": 123425452199.01762,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 6",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 4 (Table 2) and sec. 3 (Table 1); consolidated in k5a_hmf_synthesis.md sec. 7.1 rows 10-12",
+      "dossier_k_table": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 6",
+      "refit_ea_kj_mol": 100.50648626206808,
+      "refit_a": 132042999660.062,
+      "a_ratio": 0.9347368093482441,
+      "ea_delta_pct": 0.1060620140120261,
+      "flags": [
+        "OK"
+      ],
+      "notes": [
+        "shipped value comes from the source's SIMULTANEOUS GLOBAL ODE fit (Table 2), not from an Arrhenius fit of its own per-temperature Table 1; the two are not required to agree and the gap is an identifiability diagnostic"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 131680797447.33812,
+      "refit_ea_ols_kj_mol": 100.49725891161857,
+      "refit_r2_weighted": 0.999995503540159,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 1.0698198573107027,
+      "ea_delta_kj_mol": 0.10648626206807421
+    },
+    {
+      "parameter_id": "k_int_hmf",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 151.4,
+      "shipped_k_ref": 3.337048722903169e-07,
+      "t_ref_k": 373.15,
+      "shipped_a": 520437129669786.5,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 7",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 4 (Table 2) and sec. 3 (Table 1); consolidated in k5a_hmf_synthesis.md sec. 7.1 rows 10-12",
+      "dossier_k_table": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 7",
+      "refit_ea_kj_mol": 144.73948990866535,
+      "refit_a": 89853097648347.05,
+      "a_ratio": 5.792088901671389,
+      "ea_delta_pct": -4.39928011316688,
+      "flags": [
+        "FLAG_A_RATIO"
+      ],
+      "notes": [
+        "shipped value comes from the source's SIMULTANEOUS GLOBAL ODE fit (Table 2), not from an Arrhenius fit of its own per-temperature Table 1; the two are not required to agree and the gap is an identifiability diagnostic"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 94499444557952.47,
+      "refit_ea_ols_kj_mol": 144.96356322845128,
+      "refit_r2_weighted": 0.9998840404686569,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 5.792088901671389,
+      "ea_delta_kj_mol": -6.6605100913346575
+    },
+    {
+      "parameter_id": "k_fru_odg",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 99.3,
+      "shipped_k_ref": 7.418950997820022e-06,
+      "t_ref_k": 373.15,
+      "shipped_a": 589357238.9933045,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 8",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 4 (Table 2) and sec. 3 (Table 1); consolidated in k5a_hmf_synthesis.md sec. 7.1 rows 10-12",
+      "dossier_k_table": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 8",
+      "refit_ea_kj_mol": 98.50241716180943,
+      "refit_a": 483516205.3919516,
+      "a_ratio": 1.218898627225028,
+      "ea_delta_pct": -0.803205275116379,
+      "flags": [
+        "OK"
+      ],
+      "notes": [
+        "shipped value comes from the source's SIMULTANEOUS GLOBAL ODE fit (Table 2), not from an Arrhenius fit of its own per-temperature Table 1; the two are not required to agree and the gap is an identifiability diagnostic"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 313496069.47869164,
+      "refit_ea_ols_kj_mol": 96.86705972157502,
+      "refit_r2_weighted": 0.9893926649945417,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 1.218898627225028,
+      "ea_delta_kj_mol": -0.7975828381905643
+    },
+    {
+      "parameter_id": "k_hmf_self",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 0.0,
+      "shipped_k_ref": 8.968992710465348e-07,
+      "t_ref_k": 373.15,
+      "shipped_a": 8.968992710465348e-07,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Hamzalioglu & Gokmen 2018, sec. 3.1, model-free control: HMF alone, no amino acid, 0.9 % lost in 7 days at 5 C and pH 3.5",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/hamzalioglu2018_extraction.md sec. 7 / S1; k5a_hmf_synthesis.md C7",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_hmf_cys",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 29.675,
+      "shipped_k_ref": 5.874669909184585e-05,
+      "t_ref_k": 373.15,
+      "shipped_a": 0.8373298611111125,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "Hamzalioglu & Gokmen 2018, Food Chem. 240:354-360, doi 10.1016/j.foodchem.2017.07.131, Table 1 HIGH-MOISTURE arm, second-order constant derived as k = k'/[AA] with the stated [AA] = 30 umol / 1.5 mL = 20 mM",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "data/lit/extraction_dossiers/hamzalioglu2018_extraction.md sec. 4 and sec. 6 (the refit); k5a_hmf_synthesis.md sec. 4.2 and 7.1 rows 1, 4, 6",
+      "dossier_k_table": "data/lit/extraction_dossiers/hamzalioglu2018_extraction.md sec. 4 (Table 1), HMF-Cys row",
+      "refit_ea_kj_mol": 29.676583263622614,
+      "refit_a": 0.8373306821998364,
+      "a_ratio": 0.9999990193973046,
+      "ea_delta_pct": 0.005335344979321411,
+      "flags": [
+        "OK"
+      ],
+      "notes": [
+        "the shipped second-order constant is derived as k = k'/[AA] with the stated [AA] = 30 umol / 1.5 mL = 20 mM, so the same conversion is applied to the refit prefactor"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 0.8373306821996431,
+      "refit_ea_ols_kj_mol": 29.676583263622042,
+      "refit_r2_weighted": 0.8737188070734947,
+      "refit_n_points": 3,
+      "refit_unit_conversion": "day^-1 -> L/(mmol*min): k2 = k'/[AA] with [AA] = 0.020 M, then /1000 (mol->mmol) and /1440 (day->min)",
+      "a_fold_difference": 1.000000980603657,
+      "ea_delta_kj_mol": 0.0015832636226136287
+    },
+    {
+      "parameter_id": "k_odg_af",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 0.0,
+      "shipped_k_ref": 0.004028960042285363,
+      "t_ref_k": 373.15,
+      "shipped_a": 0.004028960042285363,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "DERIVED, not measured. The pentose edge's PSEUDO-FIRST-ORDER constant at Blank 1997's 1 M amine loading, transferred to the hexose series. Structure from Wang & Ho 2008 sec. 4.1 (CAMOLA: [13C6]:[12C6] = 1:1 with [13C1]-[13C5] ABSENT, i.e. 100 % intact C6) and Poisson 2019 T9/T10 (intact share 87.3-100 % at all nine roast times, with 2,3-butanedione's intact share collapsing 25.4 -> 0.4 % in the SAME runs as an internal positive control)",
+      "source_quality": "bounded_from_a_timescale_bracket",
+      "dossier_anchor": "k5b_dmhf_synthesis.md sec. 6a rows A19-A22 and sec. 10 ('There is NO absolute hexose DMHF yield in any of the five papers')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_af_dmhf",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 76.0,
+      "shipped_k_ref": 14.5,
+      "t_ref_k": 373.15,
+      "shipped_a": 630761143335.6083,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "DECLARED, UNCONSTRAINED. Route from Hofmann & Schieberle 2001 via Wang & Ho 2008 (ref 17) and Poisson 2019 (ref 19); NO rate, conversion or time course is published for it anywhere",
+      "source_quality": "bounded_from_a_timescale_bracket",
+      "dossier_anchor": "k5b_dmhf_synthesis.md sec. 6a row A26 ('rate constant / Ea / time course: NONE anywhere') and R6",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_mgo_dmhf",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 0.0,
+      "shipped_k_ref": 1.2078506576282275e-09,
+      "t_ref_k": 373.15,
+      "shipped_a": 1.2078506576282275e-09,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "Wang & Ho 2008, JAFC 56:7405-7409, Figure 1, MG-alone arm: 13 mg DMHF per mol MG from 1.4 M MG in 0.5 M phosphate at pH 5, 120 C, 60 min",
+      "source_quality": "bounded_from_a_timescale_bracket",
+      "dossier_anchor": "data/lit/extraction_dossiers/wang2008_extraction.md sec. 4.2; k5b_dmhf_synthesis.md sec. 6b rows B1, B6-B11 and sec. 8.5",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_dmhf_h2s",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 0.0,
+      "shipped_k_ref": 0.0,
+      "t_ref_k": 373.15,
+      "shipped_a": 0.0,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "Shu & Ho 1988, JAFC 36:801-803, Table I -- STRUCTURE ONLY. The paper reports a GC area percent and no consumption of any kind",
+      "source_quality": "structural_constant",
+      "dossier_anchor": "data/lit/extraction_dossiers/shu1988_extraction.md; k5b_dmhf_synthesis.md sec. 3.4, 6c rows C1-C12 and sec. 8.6",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_dpo_af",
+      "shipped_in": "src/kinetic_core/parameters_furanic.py",
+      "lane": "furanic",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 0.0,
+      "shipped_k_ref": 4.028960042285363e-06,
+      "t_ref_k": 373.15,
+      "shipped_a": 4.028960042285363e-06,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "FITTED -- the only fitted constant in the furanic channel. Calibrated on Blank, Fay, Lakner & Schlosser 1997, JAFC 45:2642-2648 (article ID JF960997I), Table 1 PENTOSE + GLYCINE HDMF cells: arabinose 5.1, xylose 2.6, ribose 3.6 ug per mmol of sugar, isotope-dilution assay against synthesised [13C2]HDMF, max SD <= 10 %, 90 C / 1 h / 0.2 M phosphate / pH 6 / 1:1",
+      "source_quality": "derived_from_fit_data",
+      "dossier_anchor": "data/lit/extraction_dossiers/blank1997_extraction.md sec. 2; k5b_dmhf_synthesis.md sec. 6a rows A1-A5 and its FIT proposal table row F1; FIT_HOLDOUT_DECLARATION.md Amendment 12",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "k_thioether",
+      "shipped_in": "src/kinetic_core/parameters_sulfur.py",
+      "lane": "sulfur",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 10.8,
+      "shipped_k_ref": 0.000501,
+      "t_ref_k": 418.15,
+      "shipped_a": 0.01119258469842008,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "Hofmann & Schieberle 2002 Fig. 6 (9.4e-4 /s, 30 C, SIDA) and Table 2 (9.8e-4 /s); Charles-Bernard, Roberts & Kraehenbuehl 2005 Table 2 (>7.7e-4 /s, 25 C) as the corroborating lower bound; recast bimolecular on Charles-Bernard's titrated site density of 8-10 mmol per g dry solids (p. 4428)",
+      "source_quality": "measured_rate",
+      "dossier_anchor": "k3_final_parameter_inventory.md sec. A.4 rows at 25/30 C and the 'THE CROSS-VALIDATION' block; k1_kinetic_parameters.md secs. 1a, 1c",
+      "dossier_k_table": "data/lit/extraction_dossiers/stack2018_extraction.md sec. 3 (Figure 4C), NAC k1 column",
+      "refit_ea_kj_mol": 10.784389888539001,
+      "refit_a": 2560.3570352239726,
+      "a_ratio": 4.371493719211308e-06,
+      "ea_delta_pct": -0.14453806908332612,
+      "flags": [
+        "A_RATIO_LARGE_BY_DESIGN",
+        "OK"
+      ],
+      "notes": [
+        "source table: 14.8 K span, rate moves only 1.27x -- Ea weakly determined (+/-30-50 %)",
+        "DECLARED HYBRID at the parameter: only Stack's Ea is taken; the absolute forward magnitude is Hofmann/Charles-Bernard's matrix recast, because Stack's 496 M^-1 s^-1 against the titrated site density predicts a millisecond thiol half-life. The A ratio below is therefore EXPECTED to be large and is not a defect."
+      ],
+      "verifiable": true,
+      "refit_a_ols": 2560.357035227083,
+      "refit_ea_ols_kj_mol": 10.784389888541883,
+      "refit_r2_weighted": 0.9405251023076064,
+      "refit_n_points": 4,
+      "refit_unit_conversion": "M^-1 s^-1 -> L/(mmol*min) (x60 /1000)",
+      "a_fold_difference": 228754.76078241217,
+      "ea_delta_kj_mol": -0.01561011146099922
+    },
+    {
+      "parameter_id": "k_cys_h2s",
+      "shipped_in": "src/kinetic_core/parameters_sulfur.py",
+      "lane": "sulfur",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": 133.0,
+      "shipped_k_ref": 0.0028176188125000495,
+      "t_ref_k": 418.15,
+      "shipped_a": 115799999999999.86,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Zheng & Ho 1994, ACS Symp. Ser. 564:138-146, doi 10.1021/bk-1994-0564.ch011, Table I (16 rate constants) and Table V p. 145 (4 activation energies), aqueous 0.1 M L-cysteine",
+      "source_quality": "measured_activation_energy",
+      "dossier_anchor": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 5b (the matched (Ea, A) refit pairs), sec. 3 (Table I), sec. 9 (the caveats), sec. 10a (the consequences for arrhenius_params.yml); and k3_final_parameter_inventory.md sec. A.3.5 for the derived in-situ H2S budget this set is cross-checked against",
+      "dossier_k_table": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 5.0 column",
+      "refit_ea_kj_mol": 132.96804900025737,
+      "refit_a": 115872859852580.67,
+      "a_ratio": 0.9993712086447724,
+      "ea_delta_pct": -0.024023308077168206,
+      "flags": [
+        "OK"
+      ],
+      "notes": [
+        "shipped at ph_of_measurement 5.0, so the pH 5 column is the exact partner"
+      ],
+      "verifiable": true,
+      "refit_a_ols": 115872859852580.67,
+      "refit_ea_ols_kj_mol": 132.96804900025737,
+      "refit_r2_weighted": 0.9745510908233191,
+      "refit_n_points": 4,
+      "refit_unit_conversion": "none",
+      "a_fold_difference": 1.0006291869825632,
+      "ea_delta_kj_mol": -0.03195099974263371
+    },
+    {
+      "parameter_id": "k_protein_ss",
+      "shipped_in": "src/kinetic_core/parameters_sulfur.py",
+      "lane": "sulfur",
+      "form": "reparameterised_k_ref",
+      "shipped_ea_kj_mol": null,
+      "shipped_k_ref": 6.04979338490167e-06,
+      "t_ref_k": 418.15,
+      "shipped_a": null,
+      "shipped_a_unit": "L/(mmol*min)",
+      "a_is_placeholder_nan": false,
+      "source_key": "Anantharamkrishnan & Reineccius 2020b (the parent adduct survey), Fig. 7c: 2-furfurylthiol forms BOTH 1:1 (+114 Da) and 2:1 (+228 Da) adducts with beta-lactoglobulin, 'in close analogy to the reactions with n-PrSH'; p. 12 names the mechanism as 'cleaving one or both of the (soft) electrophilic disulfide linkages in BLG'. The ONLY two timescale brackets in the paper (sec. 5c): the propanethiol 1:1 adduct is present at 6 h and the 2:1 adduct is 'nearly none' at 6 h but 'clearly seen' at 24 h, at 158 mmol/L thiol, ambient.",
+      "source_quality": "bounded_from_a_timescale_bracket",
+      "dossier_anchor": "data/lit/extraction_dossiers/anantharamkrishnan2020b_extraction.md secs. 5b, 5c, 5d, 6a and gate G-3; docs/reference/FIT_HOLDOUT_DECLARATION.md Amendment 5 ('New required channel for the sulfur branch: FFT is consumed by protein disulfides')",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "NO_EA_SHIPPED",
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [
+        "the cited dossier anchors a reparameterised (k_ref, Ea) pair or a bracket, not a rate-constant-versus-temperature table"
+      ],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "lipid_hydroperoxide_formation",
+      "shipped_in": "data/lit/lipid_oxidation_calibration.json",
+      "lane": "lipid_oxidation",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 80.0,
+      "shipped_a": 100000000.0,
+      "shipped_a_unit": "1/min",
+      "a_is_placeholder_nan": false,
+      "source_key": "Frankel (1998) radical-chain framing; Arrhenius prefactor/Ea are order-of-magnitude literature values, NOT a fitted barrier. The absolute observable scale is pinned downstream by the per-(matrix, process_state) calibration registry, so these constants set the SHAPE of the temperature/time response, not the final ppb.",
+      "source_quality": "order_of_magnitude_literature_self_declared",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "safety_acrylamide_formation",
+      "shipped_in": "src/safety.py (predict_acrylamide)",
+      "lane": "safety_screening",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 129.0,
+      "shipped_a": 16000000000000.0,
+      "shipped_a_unit": "L/mol.s",
+      "a_is_placeholder_nan": false,
+      "source_key": "Knol 2009 (comment: '~129 kJ/mol'); no table cited for A",
+      "source_quality": "hardcoded_in_code",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "safety_acrylamide_elimination",
+      "shipped_in": "src/safety.py (predict_acrylamide)",
+      "lane": "safety_screening",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 105.0,
+      "shipped_a": 500000000.0,
+      "shipped_a_unit": "1/s",
+      "source_key": "Parker 2012 (comment: 'Ea_e typically ~90-110 kJ/mol'); no table cited",
+      "source_quality": "hardcoded_in_code",
+      "a_is_placeholder_nan": false,
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "safety_dicarbonyl_pool_formation",
+      "shipped_in": "src/safety.py (_estimate_dicarbonyl_pools)",
+      "lane": "safety_screening",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 52.0,
+      "shipped_a": 4000000.0,
+      "shipped_a_unit": "1/s (implied)",
+      "a_is_placeholder_nan": false,
+      "source_key": "no citation at the call site; the Amadori/dicarbonyl pool shape constants",
+      "source_quality": "hardcoded_in_code_uncited",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "safety_dicarbonyl_pool_elimination",
+      "shipped_in": "src/safety.py (_estimate_dicarbonyl_pools)",
+      "lane": "safety_screening",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 74.0,
+      "shipped_a": 2500000000.0,
+      "shipped_a_unit": "1/s (implied)",
+      "a_is_placeholder_nan": false,
+      "source_key": "no citation at the call site; the Amadori/dicarbonyl pool shape constants",
+      "source_quality": "hardcoded_in_code_uncited",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "safety_furosine_formation",
+      "shipped_in": "src/safety.py (predict_furosine)",
+      "lane": "safety_screening",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 50.0,
+      "shipped_a": 800000.0,
+      "shipped_a_unit": "1/s (implied)",
+      "a_is_placeholder_nan": false,
+      "source_key": "no citation at the call site; the furosine fallback path",
+      "source_quality": "hardcoded_in_code_uncited",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    },
+    {
+      "parameter_id": "safety_furosine_elimination",
+      "shipped_in": "src/safety.py (predict_furosine)",
+      "lane": "safety_screening",
+      "form": "explicit_A",
+      "shipped_ea_kj_mol": 73.0,
+      "shipped_a": 18000000000.0,
+      "shipped_a_unit": "1/s (implied)",
+      "a_is_placeholder_nan": false,
+      "source_key": "no citation at the call site; the furosine fallback path",
+      "source_quality": "hardcoded_in_code_uncited",
+      "dossier_k_table": null,
+      "refit_ea_kj_mol": null,
+      "refit_a": null,
+      "a_ratio": null,
+      "ea_delta_pct": null,
+      "flags": [
+        "UNVERIFIABLE_NO_DOSSIER_K_TABLE"
+      ],
+      "notes": [],
+      "verifiable": false
+    }
+  ],
+  "refits": {
+    "zheng1994_cysteine_ph3": {
+      "ea_kj_mol": 131.23641623315197,
+      "a_in_table_unit": 58757925044537.414,
+      "ols_ea_kj_mol": 131.23641623315197,
+      "ols_a_in_table_unit": 58757925044537.414,
+      "r2_weighted": 0.9401132040928498,
+      "n_points": 4,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 3.0 column",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": "the authors flag pH 3.0 as a possibly different mechanism (p. 140)"
+    },
+    "zheng1994_cysteine_ph5": {
+      "ea_kj_mol": 132.96804900025737,
+      "a_in_table_unit": 115872859852580.67,
+      "ols_ea_kj_mol": 132.96804900025737,
+      "ols_a_in_table_unit": 115872859852580.67,
+      "r2_weighted": 0.9745510908233191,
+      "n_points": 4,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 5.0 column",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "zheng1994_cysteine_ph7": {
+      "ea_kj_mol": 135.46667815588899,
+      "a_in_table_unit": 1415153085452500.8,
+      "ols_ea_kj_mol": 135.46667815588899,
+      "ols_a_in_table_unit": 1415153085452500.8,
+      "r2_weighted": 0.9423639792754162,
+      "n_points": 4,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 7.0 column",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "zheng1994_cysteine_ph9": {
+      "ea_kj_mol": 123.32831955064874,
+      "a_in_table_unit": 62320838021417.85,
+      "ols_ea_kj_mol": 123.32831955064874,
+      "ols_a_in_table_unit": 62320838021417.85,
+      "r2_weighted": 0.9665375760647464,
+      "n_points": 4,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 9.0 column",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "hamzalioglu2018_hmf_cys": {
+      "ea_kj_mol": 29.676583263622614,
+      "a_in_table_unit": 24115.12364735529,
+      "ols_ea_kj_mol": 29.676583263622042,
+      "ols_a_in_table_unit": 24115.123647349723,
+      "r2_weighted": 0.8737188070734947,
+      "n_points": 3,
+      "table_unit": "1/day",
+      "anchor": "data/lit/extraction_dossiers/hamzalioglu2018_extraction.md sec. 4 (Table 1), HMF-Cys row",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "kocadagli2016_step3_glc_3dg": {
+      "ea_kj_mol": 65.42853033989759,
+      "a_in_table_unit": 76345.89253843014,
+      "ols_ea_kj_mol": 59.58405247004294,
+      "ols_a_in_table_unit": 17968.401564858203,
+      "r2_weighted": 0.8346353019475345,
+      "n_points": 3,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 3",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": "non-monotonic in T (0.91 -> 4.14 -> 3.60)"
+    },
+    "kocadagli2016_step4_3dg_34dg": {
+      "ea_kj_mol": 31.419163310283782,
+      "a_in_table_unit": 136.40263133281297,
+      "ols_ea_kj_mol": 32.14716457860005,
+      "ols_a_in_table_unit": 167.47186623797526,
+      "r2_weighted": 0.9587594275662445,
+      "n_points": 3,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 4",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "kocadagli2016_step5_34dg_hmf": {
+      "ea_kj_mol": -10.828634242033818,
+      "a_in_table_unit": 0.0074329929547902575,
+      "ols_ea_kj_mol": -6.979109392974482,
+      "ols_a_in_table_unit": 0.020984445393899268,
+      "r2_weighted": 0.35111188865287457,
+      "n_points": 3,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 5",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": "non-monotonic in T; the authors FIXED Ea to zero for this step"
+    },
+    "kocadagli2016_step6_fru_int": {
+      "ea_kj_mol": 100.50648626206808,
+      "a_in_table_unit": 132042999660.062,
+      "ols_ea_kj_mol": 100.49725891161857,
+      "ols_a_in_table_unit": 131680797447.33812,
+      "r2_weighted": 0.999995503540159,
+      "n_points": 3,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 6",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "kocadagli2016_step7_int_hmf": {
+      "ea_kj_mol": 144.73948990866535,
+      "a_in_table_unit": 89853097648347.05,
+      "ols_ea_kj_mol": 144.96356322845128,
+      "ols_a_in_table_unit": 94499444557952.47,
+      "r2_weighted": 0.9998840404686569,
+      "n_points": 3,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 7",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "kocadagli2016_step8_fru_1dg": {
+      "ea_kj_mol": 98.50241716180943,
+      "a_in_table_unit": 483516205.3919516,
+      "ols_ea_kj_mol": 96.86705972157502,
+      "ols_a_in_table_unit": 313496069.47869164,
+      "r2_weighted": 0.9893926649945417,
+      "n_points": 3,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 8",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "kocadagli2016_step11_3dg_mgo": {
+      "ea_kj_mol": 90.11427739624901,
+      "a_in_table_unit": 7930325640.033125,
+      "ols_ea_kj_mol": 93.6933604903489,
+      "ols_a_in_table_unit": 19782577369.281437,
+      "r2_weighted": 0.9937726934463121,
+      "n_points": 3,
+      "table_unit": "1/min",
+      "anchor": "data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md sec. 3 (Table 1), step 11",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": null
+    },
+    "stack2018_nac_forward": {
+      "ea_kj_mol": 10.784389888539001,
+      "a_in_table_unit": 42672.617253732875,
+      "ols_ea_kj_mol": 10.784389888541883,
+      "ols_a_in_table_unit": 42672.61725378472,
+      "r2_weighted": 0.9405251023076064,
+      "n_points": 4,
+      "table_unit": "M^-1 s^-1",
+      "anchor": "data/lit/extraction_dossiers/stack2018_extraction.md sec. 3 (Figure 4C), NAC k1 column",
+      "n_points_with_interval_spanning_zero": 0,
+      "table_note": "14.8 K span, rate moves only 1.27x -- Ea weakly determined (+/-30-50 %)"
+    }
+  }
+}
