@@ -1,7 +1,7 @@
 {
   "wave": "B4 -- matrix / OAV output layer",
   "generated_by": "scripts/generators/generate_kinetic_core_b4_fit.py",
-  "generated_on": "2026-08-28",
+  "generated_on": "2026-08-29",
   "declaration": {
     "document": "docs/reference/FIT_HOLDOUT_DECLARATION.md, amendments 1-6",
     "fit_rows_used": [
@@ -41,7 +41,7 @@
       "emulsion_20pct_fat": "as emulsion_10pct_fat.",
       "soybean_oil": "as caseinate_1pct.",
       "cooked_beef": "Brewer 1995 is declaration D.6 Module 7 HOLD-OUT and RECLASSIFIED `dose_added_pre_cook`: its numbers are doses added to RAW beef before a 70 C cook, not concentrations present at the moment of perception. They are not thresholds in this repo's sense and are not tabulated here.",
-      "milk_tian": "Tian 2020's units cell prints a literal `?`, verified at 900 dpi. A factor-of-1000 basis risk; declared `neither, until the unit is settled`.",
+      "milk_tian": "UNIT RESOLVED 2026-08-30 (Wave B8, FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 6); STILL NOT TABULATED, for a DIFFERENT and now stated reason. The block was: `Tian 2020's units cell prints a literal `?`, verified at 900 dpi. A factor-of-1000 basis risk; declared `neither, until the unit is settled`.` THE UNIT IS SETTLED BY ARITHMETIC, not by inference: Tian 2020 Table 1's own footnote says its concentration column is the Y6 sample of Tian et al. 2019, and SEVEN OF SEVEN values reproduce that column digit for digit (347; 7,030; 1,719 vs 1,720; 29 vs 29.3; 198 vs 199; 244; 1,001 vs 1,000) -- a column its source heads `Concentration (ug/kg)` in plain type. The same `?/kg` notation heads the THRESHOLD column of the same table, so `?/kg` = `ug/kg` and the factor-of-1000 basis risk is CLOSED (k3 sec. C.18 RESOLVED). Two independent confirmations: k2 sec. A.4 recovered nonanal's aqueous threshold as ~1.1 ug/kg from Xin2026b and computed ~1,450x, against 1,455x from Tian's own 1.10 -- 0.3% apart; and tian2020b's yogurt thresholds (5,430-29,000 ug/kg) span the same range as the seven milk rows read as ug/kg, while ng/kg would be 30-300x LOWER and mg/kg 1,000x higher and physically absurd. WHY THEY ARE STILL NOT TABULATED, and this is a role decision and not a defect: k6b sec. 7b proposes the seven newly-usable rows as a HOLD-OUT, not as fit data -- 'they were previously unusable, so they are newly valuable as a hold-out and should NOT be spent as fit data' -- and no amendment has assigned them a column. THREE CAVEATS MUST TRAVEL WITH THEM WHEREVER THEY LAND: (1) `same_matrix: FALSE` -- 'milk fan' is a CHEESE and the thresholds were dosed into an unspecified 'fresh milk solution'; (2) the reference thresholds are UNSOURCED and mislabelled 'in air' (they are almost certainly aqueous, which is why nonanal's 1.10 matches); (3) the printed SDs are NOT threshold uncertainty -- 0.16-2.1% RSD on a 15-panellist sensory threshold is impossible and five of the seven values are exact powers-of-two dilution steps (1,024 = 2^10; 25,600 = 25 x 1,024; 51,200 = 50 x 1,024). NO VALUE CHANGES IN THIS WAVE: nothing was ever tabulated, so unblocking is a provenance edit.",
       "saliva": "Starkenmann's thiol binding is STRANDED (no basis, no stoichiometry, mechanism unresolved) and Baek 1999 EXCLUDES mucosal binding for a neutral ester. A single saliva factor applied to all odourants is refuted by the pair."
     },
     "class_binding_constants": {
@@ -496,18 +496,26 @@
     ],
     "covalent_ceiling": {
       "k2_M_per_s_at_20C": 2.5e-05,
-      "ea_kJ_per_mol": null,
-      "ea_status": "UNMEASURED IN EVERY CORPUS SOURCE (Amendment 6 named gap)",
+      "ea_kJ_per_mol": 20.0,
+      "ea_range_kJ_per_mol": [
+        15.0,
+        23.0
+      ],
+      "ea_status": "MEASURED (Shepelev 2024 Fig. 3, 14-C on beta-lactoglobulin, 3 temperatures): 15-23 kJ/mol, central 20.0. Corroborated at 10.0 by Hamzalioglu 2018 in a different lab on a different aldehyde by a different method. The most generous defensible upper bound is 45 (adding back a hypothetical hydrophobic pre-equilibrium the paper does not measure and this layer would not want, since the sink acts on total rather than bound aldehyde) -- and even 45 < 70.",
+      "process_temperature_verdict": "NEGLIGIBLE AT PROCESS TEMPERATURE, MEASURED. The channel removes 0.005%-0.21% of a hexanal dose in any realistic thermal process (UHT 130 C/30 s, extrusion 140 C/60 s, retort 100 C/30 min, bake 180 C/10 min), against the 1%-91% the >= 70 kJ/mol assumption implied. Three independent mechanisms point the same way: the rate barely rises (Ea 15-23), the CAPACITY FALLS with temperature (day-28 binding 25.6 > 20.1 > 17.4 mg/g at 25/45/65 C), and the EQUILIBRIUM UNWINDS on heating (Ea_rev 52 > Ea_fwd 44 => K_eq falls 3.0x from 25 to 180 C). It is an AMBIENT-STORAGE channel -- real and sizeable over weeks in a high-protein matrix -- and no amount of heat makes it a process channel. The term stays INERT and contributes exactly 0.0, which it already did; what changed is that the zero is now MEASURED rather than ASSUMED. STILL OPEN: adduct reversibility is asserted by three papers and tested by none.",
+      "retirement": "RETIRED 2026-08-30 (Wave B8, Amendment 17 clause 6). State change: 'UNMEASURED, could matter at process temperature if Ea >= 70 kJ/mol' -> 'MEASURED NEGLIGIBLE, Ea = 15-23 kJ/mol'. NO PREDICTED VALUE MOVES: the term was already INERT BY RULING and contributed exactly 0.0 to every point prediction, so what this replaces is an UNMEASURED zero with a MEASURED one. Do not read a score change into it; if one appears, the retirement was not the no-op it is declared to be and that is a finding.",
       "reversible_share_headspace": 0.98,
       "reversible_share_48h": 0.77,
       "ambient_half_life_days": [
         37.0,
         760.0
       ],
+      "decision_threshold_ea_kj_mol": 70.0,
+      "decision_threshold_missed_by_x": 3.5,
       "activates_if_ea_at_least": 70.0,
       "contribution_to_point_prediction": 0.0,
-      "source": "Amendment 6 rulings 1, 2 and 4 (meynier2004_extraction.md sec. 9, G-2) bracketed two-sided against anantharamkrishnan2020b's floor.",
-      "notes": "k2(hexanal-Lys) <= 2.5e-5 M^-1 s^-1 at 20 C is a CEILING, measured as '<= 6 % of a 40 mM dose in 48 h'. The measured analogues are t-2-hexenal 5.3-7.9e-5 (Lys) and 1.5-2.4e-4 (His). Hexanal binding is >=98 % reversible on headspace timescales and >=77 % over 48 h; t-2-hexenal is ~2/3 reversible at 48 h. The covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale, so it does NOT close the matrix gap at ambient. The ONE surviving corner: extent is uncapped (lysine is in 360-36 000x excess), so at process temperature with Ea >= ~70 kJ/mol, 36x arrives in 36 min - 2.2 h at 140 C. THAT Ea IS UNMEASURED IN EVERY CORPUS SOURCE and is the named wet-lab gap Amendment 6 opened."
+      "source": "Amendment 6 rulings 1, 2 and 4 (meynier2004_extraction.md sec. 9, G-2) bracketed two-sided against anantharamkrishnan2020b's floor. THE Ea IS NOW MEASURED: shepelev2024_extraction.md sec. 6 / k6b_adduct_kinetics_synthesis.md secs. 1b, 2b, 2d, 2e (Amendment 17 clause 6), with hamzalioglu2018, hidalgo2010 and zamora2010 as the independent corroborations.",
+      "notes": "k2(hexanal-Lys) <= 2.5e-5 M^-1 s^-1 at 20 C is a CEILING, measured as '<= 6 % of a 40 mM dose in 48 h'. The measured analogues are t-2-hexenal 5.3-7.9e-5 (Lys) and 1.5-2.4e-4 (His). Hexanal binding is >=98 % reversible on headspace timescales and >=77 % over 48 h; t-2-hexenal is ~2/3 reversible at 48 h. The covalent channel supplies ~0.06 % of the 1 304x hexanal log-shift on a threshold-panel timescale, so it does NOT close the matrix gap at ambient. THE ONE SURVIVING CORNER IS NOW CLOSED TOO (Wave B8): Amendment 6's argument was that extent is uncapped (lysine is in 360-36 000x excess), so at process temperature with Ea >= ~70 kJ/mol, 36x would arrive in 36 min - 2.2 h at 140 C. THE Ea IS MEASURED AT 15-23 kJ/mol, so the acceleration to 140 C is 9.5x rather than 2 596x and 36x never arrives. The uncapped-extent argument also fails on its own terms: the sink's measured CAPACITY FALLS with temperature. The named wet-lab gap Amendment 6 opened is CLOSED; the one that replaces it is narrower and different -- nobody has ever tested whether an aldehyde-protein adduct is reversible."
     },
     "no_adduct_gate": {
       "n_compounds": 32,
@@ -1205,7 +1213,14 @@
             37.0,
             760.0
           ],
-          "process_temperature_report": "Could matter at process temperature IF Ea >= 70.0 kJ/mol -- 36x would arrive in 36 min to 2.2 h at 140 C, and the extent is UNCAPPED (lysine in 360-36 000x excess). THAT Ea IS UNMEASURED IN EVERY CORPUS SOURCE. Named wet-lab gap, Amendment 6."
+          "process_temperature_report": "NEGLIGIBLE AT PROCESS TEMPERATURE, MEASURED. The channel removes 0.005%-0.21% of a hexanal dose in any realistic thermal process (UHT 130 C/30 s, extrusion 140 C/60 s, retort 100 C/30 min, bake 180 C/10 min), against the 1%-91% the >= 70 kJ/mol assumption implied. Three independent mechanisms point the same way: the rate barely rises (Ea 15-23), the CAPACITY FALLS with temperature (day-28 binding 25.6 > 20.1 > 17.4 mg/g at 25/45/65 C), and the EQUILIBRIUM UNWINDS on heating (Ea_rev 52 > Ea_fwd 44 => K_eq falls 3.0x from 25 to 180 C). It is an AMBIENT-STORAGE channel -- real and sizeable over weeks in a high-protein matrix -- and no amount of heat makes it a process channel. The term stays INERT and contributes exactly 0.0, which it already did; what changed is that the zero is now MEASURED rather than ASSUMED. STILL OPEN: adduct reversibility is asserted by three papers and tested by none.",
+          "ea_kJ_per_mol": 20.0,
+          "ea_range_kJ_per_mol": [
+            15.0,
+            23.0
+          ],
+          "ea_status": "MEASURED (Shepelev 2024 Fig. 3, 14-C on beta-lactoglobulin, 3 temperatures): 15-23 kJ/mol, central 20.0. Corroborated at 10.0 by Hamzalioglu 2018 in a different lab on a different aldehyde by a different method. The most generous defensible upper bound is 45 (adding back a hypothetical hydrophobic pre-equilibrium the paper does not measure and this layer would not want, since the sink acts on total rather than bound aldehyde) -- and even 45 < 70.",
+          "retirement": "RETIRED 2026-08-30 (Wave B8, Amendment 17 clause 6). State change: 'UNMEASURED, could matter at process temperature if Ea >= 70 kJ/mol' -> 'MEASURED NEGLIGIBLE, Ea = 15-23 kJ/mol'. NO PREDICTED VALUE MOVES: the term was already INERT BY RULING and contributed exactly 0.0 to every point prediction, so what this replaces is an UNMEASURED zero with a MEASURED one. Do not read a score change into it; if one appears, the retirement was not the no-op it is declared to be and that is a finding."
         }
       },
       "state": "predicted",
@@ -1264,7 +1279,14 @@
             37.0,
             760.0
           ],
-          "process_temperature_report": "Could matter at process temperature IF Ea >= 70.0 kJ/mol -- 36x would arrive in 36 min to 2.2 h at 140 C, and the extent is UNCAPPED (lysine in 360-36 000x excess). THAT Ea IS UNMEASURED IN EVERY CORPUS SOURCE. Named wet-lab gap, Amendment 6."
+          "process_temperature_report": "NEGLIGIBLE AT PROCESS TEMPERATURE, MEASURED. The channel removes 0.005%-0.21% of a hexanal dose in any realistic thermal process (UHT 130 C/30 s, extrusion 140 C/60 s, retort 100 C/30 min, bake 180 C/10 min), against the 1%-91% the >= 70 kJ/mol assumption implied. Three independent mechanisms point the same way: the rate barely rises (Ea 15-23), the CAPACITY FALLS with temperature (day-28 binding 25.6 > 20.1 > 17.4 mg/g at 25/45/65 C), and the EQUILIBRIUM UNWINDS on heating (Ea_rev 52 > Ea_fwd 44 => K_eq falls 3.0x from 25 to 180 C). It is an AMBIENT-STORAGE channel -- real and sizeable over weeks in a high-protein matrix -- and no amount of heat makes it a process channel. The term stays INERT and contributes exactly 0.0, which it already did; what changed is that the zero is now MEASURED rather than ASSUMED. STILL OPEN: adduct reversibility is asserted by three papers and tested by none.",
+          "ea_kJ_per_mol": 20.0,
+          "ea_range_kJ_per_mol": [
+            15.0,
+            23.0
+          ],
+          "ea_status": "MEASURED (Shepelev 2024 Fig. 3, 14-C on beta-lactoglobulin, 3 temperatures): 15-23 kJ/mol, central 20.0. Corroborated at 10.0 by Hamzalioglu 2018 in a different lab on a different aldehyde by a different method. The most generous defensible upper bound is 45 (adding back a hypothetical hydrophobic pre-equilibrium the paper does not measure and this layer would not want, since the sink acts on total rather than bound aldehyde) -- and even 45 < 70.",
+          "retirement": "RETIRED 2026-08-30 (Wave B8, Amendment 17 clause 6). State change: 'UNMEASURED, could matter at process temperature if Ea >= 70 kJ/mol' -> 'MEASURED NEGLIGIBLE, Ea = 15-23 kJ/mol'. NO PREDICTED VALUE MOVES: the term was already INERT BY RULING and contributed exactly 0.0 to every point prediction, so what this replaces is an UNMEASURED zero with a MEASURED one. Do not read a score change into it; if one appears, the retirement was not the no-op it is declared to be and that is a finding."
         }
       },
       "state": "predicted_with_chain_length_surrogate",
@@ -1323,7 +1345,14 @@
             37.0,
             760.0
           ],
-          "process_temperature_report": "Could matter at process temperature IF Ea >= 70.0 kJ/mol -- 36x would arrive in 36 min to 2.2 h at 140 C, and the extent is UNCAPPED (lysine in 360-36 000x excess). THAT Ea IS UNMEASURED IN EVERY CORPUS SOURCE. Named wet-lab gap, Amendment 6."
+          "process_temperature_report": "NEGLIGIBLE AT PROCESS TEMPERATURE, MEASURED. The channel removes 0.005%-0.21% of a hexanal dose in any realistic thermal process (UHT 130 C/30 s, extrusion 140 C/60 s, retort 100 C/30 min, bake 180 C/10 min), against the 1%-91% the >= 70 kJ/mol assumption implied. Three independent mechanisms point the same way: the rate barely rises (Ea 15-23), the CAPACITY FALLS with temperature (day-28 binding 25.6 > 20.1 > 17.4 mg/g at 25/45/65 C), and the EQUILIBRIUM UNWINDS on heating (Ea_rev 52 > Ea_fwd 44 => K_eq falls 3.0x from 25 to 180 C). It is an AMBIENT-STORAGE channel -- real and sizeable over weeks in a high-protein matrix -- and no amount of heat makes it a process channel. The term stays INERT and contributes exactly 0.0, which it already did; what changed is that the zero is now MEASURED rather than ASSUMED. STILL OPEN: adduct reversibility is asserted by three papers and tested by none.",
+          "ea_kJ_per_mol": 20.0,
+          "ea_range_kJ_per_mol": [
+            15.0,
+            23.0
+          ],
+          "ea_status": "MEASURED (Shepelev 2024 Fig. 3, 14-C on beta-lactoglobulin, 3 temperatures): 15-23 kJ/mol, central 20.0. Corroborated at 10.0 by Hamzalioglu 2018 in a different lab on a different aldehyde by a different method. The most generous defensible upper bound is 45 (adding back a hypothetical hydrophobic pre-equilibrium the paper does not measure and this layer would not want, since the sink acts on total rather than bound aldehyde) -- and even 45 < 70.",
+          "retirement": "RETIRED 2026-08-30 (Wave B8, Amendment 17 clause 6). State change: 'UNMEASURED, could matter at process temperature if Ea >= 70 kJ/mol' -> 'MEASURED NEGLIGIBLE, Ea = 15-23 kJ/mol'. NO PREDICTED VALUE MOVES: the term was already INERT BY RULING and contributed exactly 0.0 to every point prediction, so what this replaces is an UNMEASURED zero with a MEASURED one. Do not read a score change into it; if one appears, the retirement was not the no-op it is declared to be and that is a finding."
         }
       },
       "state": "predicted_with_chain_length_surrogate",
@@ -1508,7 +1537,7 @@
     "emulsion_20pct_fat": "as emulsion_10pct_fat.",
     "soybean_oil": "as caseinate_1pct.",
     "cooked_beef": "Brewer 1995 is declaration D.6 Module 7 HOLD-OUT and RECLASSIFIED `dose_added_pre_cook`: its numbers are doses added to RAW beef before a 70 C cook, not concentrations present at the moment of perception. They are not thresholds in this repo's sense and are not tabulated here.",
-    "milk_tian": "Tian 2020's units cell prints a literal `?`, verified at 900 dpi. A factor-of-1000 basis risk; declared `neither, until the unit is settled`.",
+    "milk_tian": "UNIT RESOLVED 2026-08-30 (Wave B8, FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 6); STILL NOT TABULATED, for a DIFFERENT and now stated reason. The block was: `Tian 2020's units cell prints a literal `?`, verified at 900 dpi. A factor-of-1000 basis risk; declared `neither, until the unit is settled`.` THE UNIT IS SETTLED BY ARITHMETIC, not by inference: Tian 2020 Table 1's own footnote says its concentration column is the Y6 sample of Tian et al. 2019, and SEVEN OF SEVEN values reproduce that column digit for digit (347; 7,030; 1,719 vs 1,720; 29 vs 29.3; 198 vs 199; 244; 1,001 vs 1,000) -- a column its source heads `Concentration (ug/kg)` in plain type. The same `?/kg` notation heads the THRESHOLD column of the same table, so `?/kg` = `ug/kg` and the factor-of-1000 basis risk is CLOSED (k3 sec. C.18 RESOLVED). Two independent confirmations: k2 sec. A.4 recovered nonanal's aqueous threshold as ~1.1 ug/kg from Xin2026b and computed ~1,450x, against 1,455x from Tian's own 1.10 -- 0.3% apart; and tian2020b's yogurt thresholds (5,430-29,000 ug/kg) span the same range as the seven milk rows read as ug/kg, while ng/kg would be 30-300x LOWER and mg/kg 1,000x higher and physically absurd. WHY THEY ARE STILL NOT TABULATED, and this is a role decision and not a defect: k6b sec. 7b proposes the seven newly-usable rows as a HOLD-OUT, not as fit data -- 'they were previously unusable, so they are newly valuable as a hold-out and should NOT be spent as fit data' -- and no amendment has assigned them a column. THREE CAVEATS MUST TRAVEL WITH THEM WHEREVER THEY LAND: (1) `same_matrix: FALSE` -- 'milk fan' is a CHEESE and the thresholds were dosed into an unspecified 'fresh milk solution'; (2) the reference thresholds are UNSOURCED and mislabelled 'in air' (they are almost certainly aqueous, which is why nonanal's 1.10 matches); (3) the printed SDs are NOT threshold uncertainty -- 0.16-2.1% RSD on a 15-panellist sensory threshold is impossible and five of the seven values are exact powers-of-two dilution steps (1,024 = 2^10; 25,600 = 25 x 1,024; 51,200 = 50 x 1,024). NO VALUE CHANGES IN THIS WAVE: nothing was ever tabulated, so unblocking is a provenance edit.",
     "saliva": "Starkenmann's thiol binding is STRANDED (no basis, no stoichiometry, mechanism unresolved) and Baek 1999 EXCLUDES mucosal binding for a neutral ester. A single saliva factor applied to all odourants is refuted by the pair."
   },
   "oav_code_path_demo": {
@@ -1755,6 +1784,7 @@
     "formulation_b": "pea_control",
     "n_compared": 3,
     "n_resolved": 2,
+    "n_undefined": 0,
     "reliability_band_x": 4.795831523312719,
     "rows": [
       {
