@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src import data_paths
+from src import data_access
 from src.conditions import ReactionConditions
 from src.barrier_constants import effective_barrier_from_rate_constant
 from src.headspace import HeadspaceModel
@@ -87,49 +88,9 @@ SUPPORT_ADDITIVE_TOKENS = (
     "phosphatidyl",
 )
 
-BENCHMARK_NAME_ALIASES = {
-    "2methyl3furanthiol": {
-        "2methyl3furanthiolmft",
-        "2methyl3furylthiol",
-        "2methylfuran3thiol",
-        "mft",
-    },
-    "2furfurylthiol": {
-        "2furfurylthiolfft",
-        "2furylmethanethiol",
-        "fft",
-    },
-    "bis2methyl3furyldisulfide": {
-        "bis2methyl3furyldisulfide",
-        "2methyl3furyl2methyl3furyldisulfide",
-    },
-    "pyrazine": {
-        "25dimethylpyrazine",
-        "23dimethylpyrazine",
-        "26dimethylpyrazine",
-        "2ethyl35dimethylpyrazine",
-        "2ethylpyrazine",
-        "trimethylpyrazine",
-        "tetramethylpyrazine",
-        "dimethylpyrazine",
-    },
-    "3methylbutanal": {
-        "3methylbutanal",
-        "isovaleraldehyde",
-    },
-    "2methylbutanal": {
-        "2methylbutanal",
-        "2methylbutyraldehyde",
-    },
-    "methional": {
-        "3methylthiopropanal",
-        "methional",
-    },
-    "acrylamide": {
-        "acrylamide",
-        "2-propenamide",
-    },
-}
+# The hand-written BENCHMARK_NAME_ALIASES table that lived here until 2026-09-01 is now
+# derived from data/keys/compounds.yml (src.compound_keys.match_norms); the literal is
+# frozen in tests/unit/test_compound_keys.py as the floor the registry must cover.
 
 MATRIX_BENCHMARK_PROFILES = {
     "pea_iso": {
@@ -427,9 +388,8 @@ def get_benchmark_files(benchmark_dir: Path = BENCHMARK_DIR) -> List[Path]:
 
 
 def load_benchmark(bench_file: Path | str) -> dict:
-    bench_path = Path(bench_file)
-    with open(bench_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    # Cached and strict (2026-09-01): this is called at ~15 sites per run.
+    return data_access.load_json(Path(bench_file))
 
 
 def _get_condition_water_activity(conditions: Dict[str, Any], *, required: bool = False) -> Optional[float]:
@@ -511,6 +471,7 @@ def benchmark_to_formulation(bench: dict) -> dict:
 
 
 from src.text_utils import normalize_compound_name as _normalize_name
+from src import compound_keys
 
 
 def _tokenize_name(name: str) -> List[str]:
@@ -551,7 +512,7 @@ def get_matrix_only_target_snapshot_exclusions(
 def _best_prediction_match(target_name: str, predicted_ppb: Dict[str, float]) -> tuple[Optional[str], float, float]:
     target_norm = _normalize_name(target_name)
     target_tokens = {token for token in _tokenize_name(target_name) if len(token) >= 4}
-    target_aliases = BENCHMARK_NAME_ALIASES.get(target_norm, set())
+    target_aliases = compound_keys.match_norms(target_name)
     best_name: Optional[str] = None
     best_score = -1.0
 

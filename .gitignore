@@ -46,6 +46,11 @@ docs/assets/*.html
 # Data rules -- data/ holds curated inputs only. Everything tracked is whitelisted
 # explicitly here; anything else under data/ is local (e.g. data/articles/, ~160 MB of PDFs).
 data/*
+!data/README.md
+!data/keys/
+!data/keys/**
+!data/schemas/
+!data/schemas/**
 !data/lit/
 !data/species/
 !data/benchmarks/
