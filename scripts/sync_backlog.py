@@ -1,9 +1,15 @@
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BACKLOG_PATH = ROOT / "data" / "lit" / "deep_research_backlog.json"
-REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+BACKLOG_PATH = data_paths.DEEP_RESEARCH_BACKLOG
+REGISTRY_PATH = data_paths.BENCHMARK_INTAKE_REGISTRY
 
 def clean_string(s):
     if not s:

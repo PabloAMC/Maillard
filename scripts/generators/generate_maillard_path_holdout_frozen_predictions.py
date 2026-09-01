@@ -72,7 +72,9 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-MAILLARD_PATH_HOLDOUT_DIR = ROOT / "data" / "benchmarks" / "external_validation" / "maillard_path"
+from src import data_paths
+
+MAILLARD_PATH_HOLDOUT_DIR = data_paths.MAILLARD_PATH_HOLDOUT_DIR
 DEFAULT_BASENAME = "maillard_path_holdout_frozen_predictions"
 
 # The projection identity, quoted from src/projection.py so a drift is visible here.
@@ -556,7 +558,7 @@ def render_markdown(payload: Dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--basename", default=DEFAULT_BASENAME)
     parser.add_argument("--target-tag", default="meaty")
     args = parser.parse_args()

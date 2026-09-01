@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import List, Dict, Set, Optional, Any, Tuple
 from typing import Mapping
 
-ROOT = Path(__file__).resolve().parents[1]
+from src import data_paths
 
 from src.logger import get_logger
 logger = get_logger(__name__)
@@ -61,7 +61,7 @@ else:
     _PRIMARY_AMINE_SMARTS = None
     _IMINE_SMARTS = None
 
-_HENRY_CONSTANTS_PATH = ROOT / "data" / "lit" / "henry_constants.yml"
+_HENRY_CONSTANTS_PATH = data_paths.HENRY_CONSTANTS
 _NON_OBSERVABLE_KAW_THRESHOLD = 1.0e-8
 _LOW_HEADSPACE_REFERENCE_KAW = 1.0e-5
 
@@ -997,7 +997,7 @@ class Recommender:
         
         
     def _load_yaml_db(self, filename: str) -> dict:
-        path = ROOT / "data" / "species" / filename
+        path = data_paths.SPECIES_DIR / filename
         if not path.exists():
             return {}
         with open(path, "r") as f:

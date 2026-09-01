@@ -6,12 +6,12 @@ import subprocess
 import sys
 import time
 from datetime import datetime
-from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 from scipy.optimize import minimize
 
+from src import data_paths
 from src.matrix_correction import (
     MATRIX_CORRECTIONS,
     VOLATILE_CLASS_RETENTION_PROFILES,
@@ -25,9 +25,9 @@ from src.smirks_engine import ReactionConditions
 
 logger = logging.getLogger(__name__)
 
-ROOT = Path(__file__).resolve().parents[1]
-# Generated artifact: lives under results/ (data/ is curated inputs only).
-CALIBRATION_HISTORY_DIR = ROOT / "results" / "calibration_history"
+# Generated artifact: lives under results/ (data/ is curated inputs only). Module-level
+# so tests can monkeypatch it.
+CALIBRATION_HISTORY_DIR = data_paths.CALIBRATION_HISTORY_DIR
 
 # Measurements below ~0.1 ppb are at or under the quantitation limit of the GC-O
 # methods the intake payloads come from, so the measurement side of the log error is
@@ -291,7 +291,7 @@ def _run_guardrail_tests(
     try:
         full_env = os.environ.copy()
         full_env["MAILLARD_STRICT_BENCHMARKS"] = "1"
-        full_env["MAILLARD_GUARDRAIL_ROOT"] = str(ROOT)
+        full_env["MAILLARD_GUARDRAIL_ROOT"] = str(data_paths.REPO_ROOT)
         full_env["MAILLARD_GUARDRAIL_ARGS"] = json.dumps(paths + ["-q"])
         if candidate is None:
             full_env.pop(CANDIDATE_CONSTANTS_ENV_VAR, None)
@@ -300,7 +300,7 @@ def _run_guardrail_tests(
 
         result = subprocess.run(
             [sys.executable, "-c", _GUARDRAIL_BOOTSTRAP],
-            cwd=str(ROOT),
+            cwd=str(data_paths.REPO_ROOT),
             env=full_env,
             capture_output=True,
             text=True

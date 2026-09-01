@@ -49,9 +49,11 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-EXTERNAL_DIR = ROOT / "data" / "benchmarks" / "external_validation"
+from src import data_paths
+
+EXTERNAL_DIR = data_paths.EXTERNAL_VALIDATION_DIR
 MAILLARD_PATH_DIR = EXTERNAL_DIR / "maillard_path"
-OUTPUT_DIR = ROOT / "results" / "validation"
+OUTPUT_DIR = data_paths.VALIDATION_DIR
 DEFAULT_BASENAME = "cutover_final_exam"
 
 #: Pass bands, taken UNCHANGED from the module scorecards so this exam cannot
@@ -994,7 +996,7 @@ def build_exam(target_tag: str = "meaty") -> Dict[str, Any]:
         "generated_on": date.today().isoformat(),
         "git": _git_head(),
         "target_tag": target_tag,
-        "pre_registration": "results/validation/cutover_prereg.md",
+        "pre_registration": data_paths.rel(data_paths.VALIDATION_DIR / "cutover_prereg.md"),
         "pass_band_level_x": PASS_BAND_LEVEL,
         "bundle_count": len(bundles),
         "point_count": len(core_rows),

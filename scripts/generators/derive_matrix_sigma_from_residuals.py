@@ -61,6 +61,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.benchmark_validation import (
     MATRIX_BENCHMARK_BASE_MARKER_YIELDS,
     MATRIX_BENCHMARK_PROFILES,
@@ -105,7 +106,7 @@ def _uncalibrated_prediction_ppb(protein_type: str, temp_c: float, time_min: flo
 
 def build_payload() -> dict:
     residual_rows = []
-    for bench_file in sorted((ROOT / "data" / "benchmarks").glob("*.json")):
+    for bench_file in sorted((data_paths.BENCHMARKS_DIR).glob("*.json")):
         bench = json.loads(bench_file.read_text())
         if (bench.get("metadata") or {}).get("execution_path") != "matrix_only":
             continue
@@ -237,7 +238,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     args = parser.parse_args(argv)

@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from src import data_paths
 
-ROOT = Path(__file__).resolve().parents[1]
-_PRIORS_PATH = ROOT / "data" / "lit" / "computational_priors.json"
+_PRIORS_PATH = data_paths.COMPUTATIONAL_PRIORS
 
 
 def _load_priors() -> dict[str, Any]:

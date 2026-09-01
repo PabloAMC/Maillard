@@ -1,7 +1,8 @@
 import json
 from dataclasses import dataclass
 from typing import Dict, List, Optional
-from pathlib import Path
+
+from src import data_paths
 
 EVIDENCE_STATES = {
     "externally_benchmarked",
@@ -36,8 +37,7 @@ OBSERVABLE_KINDS = {
     "state_variable",
 }
 
-ROOT = Path(__file__).resolve().parents[1]
-PANEL_PATH = ROOT / "data" / "lit" / "matrix_decision_panel.json"
+PANEL_PATH = data_paths.MATRIX_DECISION_PANEL
 
 @dataclass(frozen=True)
 class TargetCompound:
@@ -147,7 +147,7 @@ def get_compound_panel_entry(name: str) -> Optional[dict]:
         "panel_role": compound.panel_role,
         "observable_kind": compound.observable_kind,
         "modeling_regimes": list(compound.modeling_regimes),
-        "decision_panel_source": str(PANEL_PATH.relative_to(ROOT)),
+        "decision_panel_source": data_paths.rel(PANEL_PATH),
     }
 
 

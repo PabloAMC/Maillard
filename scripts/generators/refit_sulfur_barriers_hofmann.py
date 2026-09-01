@@ -105,12 +105,13 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src import barrier_constants as barrier_constants_module
 from src.barrier_constants import FAST_BARRIERS
 from src.benchmark_validation import evaluate_benchmark
 from src.uncertainty_propagation import _benchmark_signal_origin
 
-TARGET_BENCHMARK = ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json"
+TARGET_BENCHMARK = data_paths.benchmark_path("cys_ribose_140C_Hofmann1998")
 BARRIER_SOURCE = ROOT / "src" / "barrier_constants.py"
 
 UNSCORED_ROW_PENALTY = 3.0        # dex — same convention as refit_projection_constants.py
@@ -246,7 +247,7 @@ def _rewrite_constant(text: str, key: str, new_value: float, note: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument(
         "--apply",
         action="store_true",

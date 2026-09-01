@@ -58,8 +58,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
-ROOT = Path(__file__).resolve().parents[1]
-MODEL_CARD_PATH = ROOT / "results" / "validation" / "model_card.json"
+from src import data_paths
+
+MODEL_CARD_PATH = data_paths.MODEL_CARD_JSON
 
 #: Rendered above the charts, once, in the loudest style the page has.
 INTERVAL_RULE = (
@@ -108,7 +109,7 @@ def _git_version() -> str:
     ):
         try:
             out = subprocess.run(
-                command, cwd=str(ROOT), capture_output=True, text=True, timeout=10
+                command, cwd=str(data_paths.REPO_ROOT), capture_output=True, text=True, timeout=10
             )
         except (OSError, subprocess.SubprocessError):
             continue
@@ -129,7 +130,7 @@ def model_card_headline() -> Dict[str, Any]:
             "available": False,
             "sentences": [],
             "note": (
-                f"{MODEL_CARD_PATH.relative_to(ROOT)} is absent from this "
+                f"{data_paths.rel(MODEL_CARD_PATH)} is absent from this "
                 "checkout, so this report cannot show the generated validation "
                 "headline. Regenerate it with "
                 "scripts/generators/generate_model_card.py. NO substitute "
@@ -746,9 +747,11 @@ def residual_section(
             ),
         }
 
+    from src.kinetic_core.keyspaces import b4_key  # NameError until 2026-09-01: called a helper that never existed
+
     rows: List[Dict[str, Any]] = []
     for compound in compounds:
-        b4 = _b4_key_for(_species_key_for(compound, declaration))
+        b4 = b4_key(_species_key_for(compound, declaration))
         if b4 is None:
             continue
         prediction = predict_matrix_shift(b4, matrix, ph=ph)

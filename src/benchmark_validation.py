@@ -8,6 +8,7 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src import data_paths
 from src.conditions import ReactionConditions
 from src.barrier_constants import effective_barrier_from_rate_constant
 from src.headspace import HeadspaceModel
@@ -58,8 +59,7 @@ from src.benchmark_types import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
-BENCHMARK_DIR = ROOT / "data" / "benchmarks"
+BENCHMARK_DIR = data_paths.BENCHMARKS_DIR
 DEFAULT_TARGET_TAG = "meaty"
 MATRIX_NAMES = (
     "pea protein isolate",
@@ -1124,7 +1124,7 @@ def evaluate_benchmark_payload(
     if benchmark_id and not normalized.get("benchmark_id"):
         normalized["benchmark_id"] = benchmark_id
     payload_id = str(normalized.get("benchmark_id", benchmark_id or "matrix_experiment_payload"))
-    pseudo_path = ROOT / "results" / "validation" / f"{payload_id}.synthetic_benchmark.json"
+    pseudo_path = data_paths.VALIDATION_DIR / f"{payload_id}.synthetic_benchmark.json"
     return _evaluate_loaded_benchmark(
         normalized,
         bench_path=pseudo_path,
@@ -1582,7 +1582,7 @@ def assess_matrix_benchmark_evidence(bench: dict | Path | str) -> MatrixBenchmar
         bench_path = Path(bench)
         bench = load_benchmark(bench_path)
     else:
-        bench_path = ROOT / "data" / "benchmarks" / f"{bench.get('benchmark_id', 'unknown')}.json"
+        bench_path = data_paths.benchmark_path(bench.get('benchmark_id', 'unknown'))
 
     metadata = get_benchmark_metadata(bench)
     process_state = get_matrix_ranking_contract(bench).get("process_state")

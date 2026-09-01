@@ -35,6 +35,7 @@ from typing import Any, Dict, Iterable, Iterator, List, Optional, Sequence, Tupl
 
 from rdkit import Chem
 
+from src import data_paths  # noqa: E402
 from src.barrier_constants import get_barrier  # noqa: E402
 
 # --- Repository-anchored default location -----------------------------------
@@ -42,8 +43,7 @@ from src.barrier_constants import get_barrier  # noqa: E402
 # whether it is constructed from the repo root, from scripts/, or from a test
 # tmpdir.  The previous relative default silently created an empty DB next to
 # whatever directory the process happened to start in.
-REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_DB_PATH = REPO_ROOT / "results" / "maillard_results.db"
+DEFAULT_DB_PATH = data_paths.RESULTS_DB
 
 # --- Thermo-treatment versioning --------------------------------------------
 # Bump CURRENT_THERMO_VERSION whenever a change to the thermochemistry pipeline
@@ -192,7 +192,7 @@ class ResultsDB:
         if not self.db_path.is_absolute():
             # Explicit relative paths (tests, ad-hoc scripts) are resolved
             # against the repo root rather than the process CWD.
-            self.db_path = (REPO_ROOT / self.db_path).resolve()
+            self.db_path = (data_paths.REPO_ROOT / self.db_path).resolve()
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._init_db()
 

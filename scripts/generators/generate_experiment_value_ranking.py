@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.experiment_value import (
     PREDICTION_UNCERTAINTY_PATH,
     build_ranking_payload,
@@ -25,7 +26,7 @@ from src.experiment_value import (
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prediction-path", default=str(PREDICTION_UNCERTAINTY_PATH))
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--basename", default="experiment_value_ranking")
     parser.add_argument("--top-n", type=int, default=None)
     parser.add_argument(

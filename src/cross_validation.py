@@ -27,8 +27,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
-ROOT = Path(__file__).resolve().parents[1]
-PREDICTION_UNCERTAINTY_PATH = ROOT / "results" / "validation" / "prediction_uncertainty.json"
+from src import data_paths
+
+PREDICTION_UNCERTAINTY_PATH = data_paths.PREDICTION_UNCERTAINTY
 
 
 @dataclass(frozen=True)
@@ -189,7 +190,7 @@ def render_markdown(report: Mapping[str, Any]) -> str:
 def write_artifact(
     report: Mapping[str, Any],
     *,
-    output_dir: Path | str = ROOT / "results" / "validation",
+    output_dir: Path | str = data_paths.VALIDATION_DIR,
     basename: str = "loo_leverage",
 ) -> Dict[str, Path]:
     output_dir = Path(output_dir)

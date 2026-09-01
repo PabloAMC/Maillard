@@ -11,12 +11,13 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.family_sensitivity import build_family_sensitivity_artifact, render_family_sensitivity_markdown
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--target-tag", default="meaty")
     parser.add_argument("--delta-kcal", type=float, default=3.0)
     args = parser.parse_args()

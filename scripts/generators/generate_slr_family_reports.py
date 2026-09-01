@@ -15,17 +15,24 @@ import json
 import os
 import glob
 import re
+import sys
 from datetime import datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
 
 # Define paths
-WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DATA_LIT_DIR = os.path.join(WORKSPACE_DIR, "data", "lit")
-OUTPUT_DIR = os.path.join(WORKSPACE_DIR, "results", "literature", "slr_family_reports")
+DATA_LIT_DIR = str(data_paths.LIT_DIR)
+OUTPUT_DIR = str(data_paths.SLR_FAMILY_REPORTS_DIR)
 
-FAMILY_PLAN_PATH = os.path.join(DATA_LIT_DIR, "family_ingestion_plan.json")
-REGISTRY_PATH = os.path.join(DATA_LIT_DIR, "benchmark_intake_registry.json")
-MATRIX_PATH = os.path.join(DATA_LIT_DIR, "slr_incorporation_matrix.json")
-BACKLOG_PATH = os.path.join(DATA_LIT_DIR, "deep_research_backlog.json")
+FAMILY_PLAN_PATH = str(data_paths.FAMILY_INGESTION_PLAN)
+REGISTRY_PATH = str(data_paths.BENCHMARK_INTAKE_REGISTRY)
+MATRIX_PATH = str(data_paths.SLR_INCORPORATION_MATRIX)
+BACKLOG_PATH = str(data_paths.DEEP_RESEARCH_BACKLOG)
 
 def load_json(path):
     if not os.path.exists(path):

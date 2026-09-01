@@ -3,11 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
+from src import data_paths
+from src.artifact_io import load_json_mapping, resolve_optional_path
 
 
-DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT = repo_root() / "data" / "protocols" / "extrusion_external_closure_contract.json"
-PROCESS_STATE_CALIBRATIONS = repo_root() / "data" / "lit" / "process_state_calibrations.json"
+DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT = data_paths.EXTRUSION_EXTERNAL_CLOSURE_CONTRACT
+PROCESS_STATE_CALIBRATIONS = data_paths.PROCESS_STATE_CALIBRATIONS
 
 
 def load_extrusion_external_closure_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:

@@ -43,6 +43,7 @@ from typing import Any, Dict, List, Mapping, Optional, Tuple
 
 import yaml
 
+from src import data_paths
 from src.directional_reliability import (
     CAUTION_MIN_RATE,
     MIN_EVALUABLE_FOR_TRUST,
@@ -54,13 +55,12 @@ from src.directional_reliability import (
     verdict_for,
 )
 
-ROOT = Path(__file__).resolve().parents[1]
-VALIDATION_DIR = ROOT / "results" / "validation"
+ROOT = data_paths.REPO_ROOT
 
-HOLDOUT_PATH = VALIDATION_DIR / "maillard_path_holdout_frozen_predictions.json"
-EXTERNAL_PATH = VALIDATION_DIR / "external_validation_report.json"
-MODE_COMPARISON_PATH = VALIDATION_DIR / "matrix_binding_mode_comparison.json"
-SULFUR_BENCHMARK_PATH = ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json"
+HOLDOUT_PATH = data_paths.MAILLARD_PATH_HOLDOUT_FROZEN_PREDICTIONS
+EXTERNAL_PATH = data_paths.EXTERNAL_VALIDATION_REPORT
+MODE_COMPARISON_PATH = data_paths.MATRIX_BINDING_MODE_COMPARISON
+SULFUR_BENCHMARK_PATH = data_paths.benchmark_path("cys_ribose_140C_Hofmann1998")
 
 GATES = (
     "scripts/ci/holdout_guard.py",
@@ -343,7 +343,7 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
     # currently a miss -- exclusion has to be symmetric about which direction it flatters.
     verified: List[str] = []
     fitted: List[str] = []
-    benchmark_dir = ROOT / "data" / "benchmarks"
+    benchmark_dir = data_paths.BENCHMARKS_DIR
     if benchmark_dir.is_dir():
         for path in sorted(benchmark_dir.glob("*.json")):  # non-recursive: hold-out stays out
             other = _read_json(path)

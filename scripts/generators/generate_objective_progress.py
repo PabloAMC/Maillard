@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.objective_progress import (  # noqa: E402
     build_objective_progress_artifact,
     render_objective_progress_markdown,
@@ -118,8 +119,8 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
-    parser.add_argument("--docs-asset-dir", default="docs/assets")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
+    parser.add_argument("--docs-asset-dir", default=data_paths.rel(data_paths.DOCS_ASSETS_DIR))
     args = parser.parse_args()
 
     payload = build_objective_progress_artifact()

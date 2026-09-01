@@ -159,11 +159,12 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.barrier_constants import FAST_BARRIERS
 from src.benchmark_validation import evaluate_benchmark
 from src.uncertainty_propagation import _benchmark_signal_origin
 
-BENCH_DIR = ROOT / "data" / "benchmarks"
+BENCH_DIR = data_paths.BENCHMARKS_DIR
 TARGET_BENCHMARK = BENCH_DIR / "hofmann1998_norfuraneol_h2s_145C_20min_pH5.json"
 TRANSFER_BENCHMARK = BENCH_DIR / "hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json"
 CO_MOVEMENT_BENCHMARKS = (
@@ -380,7 +381,7 @@ def _panel_snapshot(value: float) -> Dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument(
         "--apply",
         action="store_true",

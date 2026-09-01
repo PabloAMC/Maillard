@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src import data_paths
 from src.chemistry_family_scope import load_chemistry_family_scope_registry
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.literature_family_registry import (
@@ -14,10 +14,6 @@ from src.literature_family_registry import (
     iter_retention_reference_entries,
 )
 from src.matrix_family_coverage import load_matrix_family_coverage_registry
-
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
 
 
 def _sorted_plan_families(plan: Mapping[str, Any]) -> List[Dict[str, Any]]:
@@ -93,9 +89,9 @@ def build_family_identifier_contract_artifact() -> Dict[str, Any]:
 
     return {
         "source": {
-            "family_ingestion_plan": "data/lit/family_ingestion_plan.json",
-            "chemistry_family_scope_registry": "data/lit/chemistry_family_scope_registry.json",
-            "matrix_family_coverage_registry": "data/lit/matrix_family_coverage_registry.json",
+            "family_ingestion_plan": data_paths.rel(data_paths.FAMILY_INGESTION_PLAN),
+            "chemistry_family_scope_registry": data_paths.rel(data_paths.CHEMISTRY_FAMILY_SCOPE_REGISTRY),
+            "matrix_family_coverage_registry": data_paths.rel(data_paths.MATRIX_FAMILY_COVERAGE_REGISTRY),
         },
         "summary": {
             "canonical_chemistry_family_count": len(plan_family_ids),

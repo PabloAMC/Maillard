@@ -46,7 +46,9 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-VALIDATION = ROOT / "results" / "validation"
+from src import data_paths
+
+VALIDATION = data_paths.VALIDATION_DIR
 FROZEN = VALIDATION / "maillard_path_holdout_frozen_predictions.json"
 CALIBRATION = VALIDATION / "trunk_rate_calibration_refit.json"
 FROZEN_COMMIT = "12f43dd"
@@ -200,7 +202,7 @@ def build() -> Dict[str, Any]:
         "wave": "S3",
         "generated_on": date.today().isoformat(),
         "baseline": {
-            "file": "results/validation/maillard_path_holdout_frozen_predictions.json",
+            "file": data_paths.rel(data_paths.VALIDATION_DIR / "maillard_path_holdout_frozen_predictions.json"),
             "git_commit": frozen["git"]["short"],
             "note": "READ, never regenerated. The pre-registration is the file, not a re-run.",
         },

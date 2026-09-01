@@ -71,7 +71,12 @@ from pathlib import Path
 from typing import Any, Dict
 
 ROOT = Path(__file__).resolve().parents[2]
-BUNDLE_DIR = ROOT / "data/benchmarks/external_validation"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+BUNDLE_DIR = data_paths.EXTERNAL_VALIDATION_DIR
 
 # ===========================================================================
 # THE COMPLETED BUFFER RECORDS

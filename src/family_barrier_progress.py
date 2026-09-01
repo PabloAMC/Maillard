@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any, Dict, List, Mapping
 
 from src.barrier_constants import FAST_BARRIERS, get_arrhenius_params
 from src.family_deviation_audit import build_family_deviation_audit_artifact
 from src.family_ingestion_plan import load_family_ingestion_plan
+from src import data_paths
 
 
-ROOT = Path(__file__).resolve().parents[1]
-REFINEMENT_PATCH_FILE = ROOT / "data" / "lit" / "refinement_surrogate_patches.json"
+REFINEMENT_PATCH_FILE = data_paths.REFINEMENT_SURROGATE_PATCHES
 
 FAMILY_BARRIER_LANES: Dict[str, List[str]] = {
     "amino_acid_sugar_core": [

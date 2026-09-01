@@ -3,14 +3,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
-from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
+from src import data_paths
+from src.artifact_io import load_json_mapping, resolve_optional_path
 from src.primary_benchmark_campaign import build_matrix_primary_benchmark_campaign
 from src.pea_soy_external_evidence import build_pea_soy_external_evidence_artifact
 
 
-DEFAULT_PEA_SOY_MIXED_EXTERNAL_PACKAGE_CONTRACT = (
-    repo_root() / "data" / "protocols" / "pea_soy_mixed_external_package_contract.json"
-)
+DEFAULT_PEA_SOY_MIXED_EXTERNAL_PACKAGE_CONTRACT = data_paths.PEA_SOY_MIXED_EXTERNAL_PACKAGE_CONTRACT
 
 
 def load_pea_soy_mixed_external_package_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:

@@ -42,6 +42,7 @@ REPO = Path(__file__).resolve().parents[2]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core.lipid import (  # noqa: E402
     REFERENCE_AUTOXIDATION_SYSTEM,
     Y_HEXANAL_PER_LOOH,
@@ -65,9 +66,9 @@ from src.kinetic_core.species_lipid import (  # noqa: E402
     NAMED_UNQUANTIFIED_COPRODUCTS,
 )
 
-OUT_JSON = REPO / "results/validation/kinetic_core_b6_fit_report.json"
-OUT_MD = REPO / "results/validation/kinetic_core_b6_fit_report.md"
-PREREG = REPO / "results/validation/kinetic_core_b6_prereg.md"
+OUT_JSON = data_paths.VALIDATION_DIR / "kinetic_core_b6_fit_report.json"
+OUT_MD = data_paths.VALIDATION_DIR / "kinetic_core_b6_fit_report.md"
+PREREG = data_paths.VALIDATION_DIR / "kinetic_core_b6_prereg.md"
 
 #: The pre-registered fit tolerances, quoted from the prereg so the report
 #: cannot grade itself leniently.

@@ -108,6 +108,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core import operative_parameters  # noqa: E402
 from src.kinetic_core.parameters_sulfur import (  # noqa: E402
     CONSUMPTION_KEYS,
@@ -818,7 +819,7 @@ def main() -> int:
 
     print(f"B2 sulfur fit: {len(ACTIVE_FIT_ROWS)} declared FIT rows, "
           f"{N_K + 1} free parameters", flush=True)
-    out_json = ROOT / "results/validation/kinetic_core_b2_fit_report.json"
+    out_json = data_paths.VALIDATION_DIR / "kinetic_core_b2_fit_report.json"
     previous = None
     if args.reuse_frozen:
         if not out_json.exists():
@@ -1058,7 +1059,7 @@ def main() -> int:
           f"Reason: {row['why']}")
     a("")
 
-    out_md = ROOT / "results/validation/kinetic_core_b2_fit_report.md"
+    out_md = data_paths.VALIDATION_DIR / "kinetic_core_b2_fit_report.md"
     out_md.write_text("\n".join(lines))
     print(f"wrote {out_json}")
     print(f"wrote {out_md}")

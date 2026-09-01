@@ -48,6 +48,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.conditions import ReactionConditions
 from src.pipeline import MaillardPipeline
 from src.reporting import generate_comparison_report, generate_report
@@ -119,8 +120,8 @@ def _run(pipeline: MaillardPipeline, formulation: dict, conditions: ReactionCond
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output-dir", default="results/validation/report_visual_examples")
-    parser.add_argument("--docs-asset-dir", default="docs/assets")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.REPORT_VISUAL_EXAMPLES_DIR))
+    parser.add_argument("--docs-asset-dir", default=data_paths.rel(data_paths.DOCS_ASSETS_DIR))
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)

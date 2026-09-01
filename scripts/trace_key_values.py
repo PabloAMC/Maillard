@@ -66,15 +66,21 @@ pass that does exist, and note that even that one checks the DOI, not the number
 
 import json
 import re
+import sys
 from pathlib import Path
 
 # 2026-08-27 (Wave T3): was `Path(".").resolve()`, i.e. the process CWD, so the script
 # silently produced an empty census unless invoked from the repo root. Anchored to the
 # file instead.
 ROOT = Path(__file__).resolve().parents[1]
-DATA_LIT_DIR = ROOT / "data" / "lit"
-GDR_DIR = ROOT / "data" / "Gemini_Deep_Research"
-OUTPUT_REPORT_PATH = ROOT / "results" / "validation" / "key_value_trace_report.md"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+DATA_LIT_DIR = data_paths.LIT_DIR
+GDR_DIR = data_paths.RESEARCH_CORPUS_DIR
+OUTPUT_REPORT_PATH = data_paths.VALIDATION_DIR / "key_value_trace_report.md"
 
 def load_json(path):
     if not path.exists():

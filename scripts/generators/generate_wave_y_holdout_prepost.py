@@ -40,7 +40,9 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-VALIDATION = ROOT / "results" / "validation"
+from src import data_paths
+
+VALIDATION = data_paths.VALIDATION_DIR
 FROZEN = VALIDATION / "maillard_path_holdout_frozen_predictions.json"
 PREREG = VALIDATION / "wave_y_prereg_predictions.json"
 FROZEN_COMMIT = "12f43dd"
@@ -88,7 +90,7 @@ def score_step_level() -> Dict[str, Any]:
 
     rows: List[Dict[str, Any]] = []
     for bid in STEP_LEVEL_BENCHMARKS:
-        evaluation = evaluate_benchmark(ROOT / "data" / "benchmarks" / f"{bid}.json")
+        evaluation = evaluate_benchmark(data_paths.benchmark_path(bid))
         for comparison in evaluation.comparisons:
             if comparison.matched_name is None or not comparison.measured_ppb:
                 continue

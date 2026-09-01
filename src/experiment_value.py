@@ -31,10 +31,11 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1]
-PREDICTION_UNCERTAINTY_PATH = ROOT / "results" / "validation" / "prediction_uncertainty.json"
-DESIRABLE_TARGETS_PATH = ROOT / "data" / "species" / "desirable_targets.yml"
-OFF_FLAVOUR_TARGETS_PATH = ROOT / "data" / "species" / "off_flavour_targets.yml"
+from src import data_paths
+
+PREDICTION_UNCERTAINTY_PATH = data_paths.PREDICTION_UNCERTAINTY
+DESIRABLE_TARGETS_PATH = data_paths.DESIRABLE_TARGETS
+OFF_FLAVOUR_TARGETS_PATH = data_paths.OFF_FLAVOUR_TARGETS
 
 # Compound classes for DoE template suggestion.
 _MEATY_KEYWORDS = ("furanthiol", "furfurylthiol", "methional", "thiazole", "mft", "fft")
@@ -562,7 +563,7 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
 def write_artifact(
     payload: Mapping[str, Any],
     *,
-    output_dir: Path | str = ROOT / "results" / "validation",
+    output_dir: Path | str = data_paths.VALIDATION_DIR,
     basename: str = "experiment_value_ranking",
 ) -> Dict[str, Path]:
     output_dir = Path(output_dir)

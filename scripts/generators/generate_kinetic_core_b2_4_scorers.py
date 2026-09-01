@@ -34,6 +34,8 @@ from typing import Any, Dict
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+
+from src import data_paths
 if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
@@ -49,7 +51,7 @@ _OVERRIDE: Path = None
 def fit_report_for(tag: str) -> Path:
     if _OVERRIDE is not None:
         return _OVERRIDE
-    return ROOT / f"results/validation/kinetic_core_b2_4_fit_{tag}.json"
+    return data_paths.VALIDATION_DIR / f"kinetic_core_b2_4_fit_{tag}.json"
 
 
 def run_panel(tag: str) -> Dict[str, Any]:
@@ -62,7 +64,7 @@ def run_panel(tag: str) -> Dict[str, Any]:
     if rc != 0:
         raise SystemExit(f"panel returned {rc} for weighting {tag}")
     return json.loads(
-        (ROOT / f"results/validation/{PANEL.OUT_BASENAME}.json").read_text())
+        (data_paths.VALIDATION_DIR / f"{PANEL.OUT_BASENAME}.json").read_text())
 
 
 def run_exam(tag: str, basename: str = None) -> Dict[str, Any]:
@@ -87,9 +89,9 @@ def run_exam(tag: str, basename: str = None) -> Dict[str, Any]:
     payload["parameters_from"] = str(fit_report_for(tag).relative_to(ROOT))
     payload["b2_4_weight_tag"] = tag
     base = basename or f"kinetic_core_b2_4_exam_{tag}"
-    out_json = ROOT / f"results/validation/{base}.json"
+    out_json = data_paths.VALIDATION_DIR / f"{base}.json"
     out_json.write_text(json.dumps(payload, indent=2, sort_keys=True, default=str))
-    (ROOT / f"results/validation/{base}.md").write_text(
+    (data_paths.VALIDATION_DIR / f"{base}.md").write_text(
         EXAM.render_markdown(payload))
     return payload
 

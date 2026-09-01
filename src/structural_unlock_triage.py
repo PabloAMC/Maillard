@@ -4,12 +4,8 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping
 
+from src import data_paths
 from src.literature_intake_registry import build_literature_backlog_artifact
-
-
-ROOT = Path(__file__).resolve().parents[1]
-INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
-PROCESS_GAP_REGISTRY_PATH = ROOT / "data" / "lit" / "process_gap_registry.json"
 
 
 _PRIORITY_WEIGHTS = {
@@ -139,9 +135,16 @@ def _priority_score(priority: str) -> float:
     return float(_PRIORITY_WEIGHTS.get(str(priority).strip().lower(), 1.0))
 
 
+def _under_root(root: Path, path: Path) -> Path:
+    """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
+    if Path(root).resolve() == data_paths.REPO_ROOT:
+        return path
+    return root / data_paths.rel(path)
+
+
 def _build_gap_maps(root: Path) -> tuple[Dict[str, Dict[str, Any]], Dict[str, Dict[str, Any]]]:
-    intake = _load_json(root / "data" / "lit" / "benchmark_intake_registry.json")
-    process = _load_json(root / "data" / "lit" / "process_gap_registry.json")
+    intake = _load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
+    process = _load_json(_under_root(root, data_paths.PROCESS_GAP_REGISTRY))
     intake_gaps = {
         str(entry.get("id", "unknown")): dict(entry)
         for entry in intake.get("structural_gaps", [])
@@ -199,7 +202,7 @@ def _rank_workstreams(
     return ranked
 
 
-def build_structural_unlock_triage(root: Path = ROOT) -> Dict[str, Any]:
+def build_structural_unlock_triage(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     backlog = build_literature_backlog_artifact(root)
     intake_gaps, process_gaps = _build_gap_maps(root)
     ranked = _rank_workstreams(intake_gaps, process_gaps)
@@ -208,8 +211,8 @@ def build_structural_unlock_triage(root: Path = ROOT) -> Dict[str, Any]:
     return {
         "schema_version": "1.0",
         "source_paths": [
-            INTAKE_REGISTRY_PATH.relative_to(root).as_posix(),
-            PROCESS_GAP_REGISTRY_PATH.relative_to(root).as_posix(),
+            _under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY).relative_to(root).as_posix(),
+            _under_root(root, data_paths.PROCESS_GAP_REGISTRY).relative_to(root).as_posix(),
         ],
         "summary": {
             "ready_runtime_backlog_count": int(backlog.get("summary", {}).get("ready_runtime_count", 0)),

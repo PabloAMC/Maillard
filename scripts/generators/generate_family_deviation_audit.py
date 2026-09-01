@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.family_deviation_audit import (  # noqa: E402
     build_family_deviation_audit_artifact,
     render_family_deviation_audit_markdown,
@@ -19,7 +20,7 @@ from src.family_deviation_audit import (  # noqa: E402
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     args = parser.parse_args()
 
     payload = build_family_deviation_audit_artifact()

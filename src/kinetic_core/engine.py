@@ -64,6 +64,8 @@ from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
+from src import data_paths
+
 from . import operative_parameters
 from .acrylamide import integrate_acrylamide
 from .integrate import integrate
@@ -89,8 +91,7 @@ from .sulfur import integrate_sulfur
 
 CELSIUS = 273.15
 
-_ROOT = Path(__file__).resolve().parents[2]
-_B1_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b1_fit_report.json"
+_B1_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b1_fit_report.json"
 #: THE SULFUR LANE'S FROZEN PARAMETERS -- and this is a CUTOVER, stated here
 #: rather than buried in a wave report. Build Wave B2.3 refits B2.2's own 48
 #: parameters on B2.2's own 58 FIT rows after a CONSERVATION FIX (see
@@ -114,15 +115,15 @@ _B1_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b1_fit_report.json"
 #: ships even where it scores worse, and where it scores worse the B8 hold-out
 #: report says so. (It does score worse on the hold-out panel: 12/32 -> 8/30.)
 _B2_FIT_REPORT_CANDIDATES = (
-    _ROOT / "results/validation/kinetic_core_b8_fit_report.json",
-    _ROOT / "results/validation/kinetic_core_b2_3_fit_report.json",
-    _ROOT / "results/validation/kinetic_core_b2_2_fit_report.json",
+    data_paths.VALIDATION_DIR / "kinetic_core_b8_fit_report.json",
+    data_paths.VALIDATION_DIR / "kinetic_core_b2_3_fit_report.json",
+    data_paths.VALIDATION_DIR / "kinetic_core_b2_2_fit_report.json",
 )
 _B2_FIT_REPORT = next(
     (p for p in _B2_FIT_REPORT_CANDIDATES if p.exists()),
     _B2_FIT_REPORT_CANDIDATES[-1],
 )
-_B3_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b3_fit_report.json"
+_B3_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b3_fit_report.json"
 
 
 # ---------------------------------------------------------------------------
@@ -1124,7 +1125,7 @@ def core_parameters(lane: str) -> Dict[str, Any]:
     raise ValueError(f"unknown lane {lane!r}")
 
 
-_B6_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b6_fit_report.json"
+_B6_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b6_fit_report.json"
 
 
 def core_lipid_model():
@@ -1798,9 +1799,9 @@ def engine_metadata() -> Dict[str, Any]:
         },
         "lipid_rate_is_an_assumption": True,
         "parameters_from": [
-            str(_B1_FIT_REPORT.relative_to(_ROOT)),
-            str(_B2_FIT_REPORT.relative_to(_ROOT)),
-            str(_B3_FIT_REPORT.relative_to(_ROOT)),
+            data_paths.rel(_B1_FIT_REPORT),
+            data_paths.rel(_B2_FIT_REPORT),
+            data_paths.rel(_B3_FIT_REPORT),
         ],
         "fits_anything": False,
         "network_ph": NETWORK_PH,

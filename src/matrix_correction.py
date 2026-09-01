@@ -34,20 +34,16 @@ from src.matrix_prior_registry import (
     summarize_matrix_prior_bundle,
 )
 from src.literature_runtime import describe_retention_runtime
+from src import data_paths
 
 
-ROOT = Path(__file__).resolve().parents[1]
-DATA_LIT_DIR = ROOT / "data" / "lit"
-
-
-def _load_json_payload(file_name: str) -> dict:
-    payload_path = DATA_LIT_DIR / file_name
+def _load_json_payload(payload_path: Path) -> dict:
     with open(payload_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
-PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload("process_state_calibrations.json")
-PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload("protein_source_registry.json")
+PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload(data_paths.PROCESS_STATE_CALIBRATIONS)
+PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload(data_paths.PROTEIN_SOURCE_REGISTRY)
 
 
 def _warn_if_registry_unsourced(payload: dict, consumer: str) -> bool:
@@ -70,7 +66,7 @@ def _warn_if_registry_unsourced(payload: dict, consumer: str) -> bool:
     if str(payload.get("source_status", "")).strip() != "no_verifiable_source":
         return False
     warnings.warn(
-        f"{consumer}: data/lit/protein_source_registry.json declares "
+        f"{consumer}: {data_paths.rel(data_paths.PROTEIN_SOURCE_REGISTRY)} declares "
         "source_status='no_verifiable_source' -- every value in it is a MOCKED "
         "placeholder whose only declared upstream is the LLM digest "
         "data/Gemini_Deep_Research/06_alternative_proteins.md. It is nonetheless LIVE: "

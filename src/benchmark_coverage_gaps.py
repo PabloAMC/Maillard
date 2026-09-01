@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
+from src import data_paths
 from src.benchmark_validation import (
     build_matrix_benchmark_evidence_audit,
     get_benchmark_files,
@@ -10,9 +10,6 @@ from src.benchmark_validation import (
     load_benchmark,
 )
 
-
-ROOT = Path(__file__).resolve().parents[1]
-INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
 
 TARGET_PROTEINS = ["free", "pea_iso", "soy_iso", "pea_conc", "soy_conc", "myco"]
 TARGET_PROCESS_STATES = ["ambient_slurry", "aqueous_pre_extrusion_model", "heated_matrix"]
@@ -90,7 +87,7 @@ def build_benchmark_coverage_gap_rows() -> list[dict[str, object]]:
         "note": "wet-lab quantitative meaty-positive matrix benchmarks are the main blocker for broad alt-protein validation",
     })
 
-    intake = json.loads(INTAKE_REGISTRY_PATH.read_text(encoding="utf-8")) if INTAKE_REGISTRY_PATH.exists() else {}
+    intake = json.loads(data_paths.BENCHMARK_INTAKE_REGISTRY.read_text(encoding="utf-8")) if data_paths.BENCHMARK_INTAKE_REGISTRY.exists() else {}
     for gap in intake.get("structural_gaps", []):
         gap_id = str(gap.get("id", "unknown"))
         if gap_id not in {

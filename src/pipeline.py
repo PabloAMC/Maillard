@@ -2,7 +2,6 @@ import yaml
 import logging
 import math
 import re
-from pathlib import Path
 from typing import Any, List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
 
@@ -20,11 +19,11 @@ from src.extrusion import build_extrusion_process_profile
 from src.literature_runtime import build_family_upstream_contract, build_flavor_axis_summary
 from src.pre_processor import PreProcessor
 from src.projection_metadata import ProjectionMetadataMap
+from src import data_paths
 
 # Locate data files
-ROOT = Path(__file__).resolve().parents[1]
-GRID_FILE = ROOT / "data" / "formulation_grid.yml"
-TAGS_FILE = ROOT / "data" / "species" / "sensory_tags.yml"
+GRID_FILE = data_paths.FORMULATION_GRID
+TAGS_FILE = data_paths.SENSORY_TAGS
 
 _MFT_ALIASES = (
     "2-Methyl-3-furanthiol (MFT)",
@@ -521,7 +520,7 @@ class MaillardPipeline:
             modifiers = {}
             if interventions:
                 import yaml
-                LIBRARY_PATH = ROOT / "data" / "interventions.yml"
+                LIBRARY_PATH = data_paths.INTERVENTIONS
                 if LIBRARY_PATH.exists():
                     with open(LIBRARY_PATH, "r") as f:
                         lib_data = yaml.safe_load(f)

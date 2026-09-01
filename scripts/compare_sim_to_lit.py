@@ -17,7 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import evaluate_benchmark, summarize_evaluation
+from src import data_paths  # noqa: E402
+from src.benchmark_validation import evaluate_benchmark, summarize_evaluation  # noqa: E402
 
 
 def _infer_protein_type(benchmark_id: str) -> str:
@@ -77,7 +78,7 @@ def compare(lit_path: str) -> int:
     print(f"Overall status:{summary.overall_status:>16}")
     print(f"Strict-ready:  {'yes' if summary.strict_ready else 'no'}")
 
-    out_dir = Path("results/validation")
+    out_dir = data_paths.VALIDATION_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5.5))
@@ -184,15 +185,15 @@ def compare(lit_path: str) -> int:
         encoding="utf-8",
     )
 
-    print(f"\nPlot saved to {plot_path}")
-    print(f"Summary saved to {markdown_path}")
-    print(f"Data saved to {json_path}")
+    print(f"\nPlot saved to {data_paths.rel(plot_path)}")
+    print(f"Summary saved to {data_paths.rel(markdown_path)}")
+    print(f"Data saved to {data_paths.rel(json_path)}")
     return 0
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--lit", default="data/benchmarks/cys_ribose_140C_Hofmann1998.json")
+    parser.add_argument("--lit", default=data_paths.rel(data_paths.benchmark_path("cys_ribose_140C_Hofmann1998")))
     args = parser.parse_args()
 
     raise SystemExit(compare(args.lit))

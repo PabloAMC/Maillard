@@ -67,6 +67,8 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+
+from src import data_paths
 if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
@@ -211,8 +213,8 @@ assert len(ALL_KEYS) == B23.N_K + B23.N_EXTRA == 48
 FREE_INDEX: Tuple[int, ...] = tuple(ALL_KEYS.index(k) for k in FREE_KEYS)
 FROZEN_KEYS: Tuple[str, ...] = tuple(k for k in ALL_KEYS if k not in set(FREE_KEYS))
 
-B23_FIT_REPORT = ROOT / "results/validation/kinetic_core_b2_3_fit_report.json"
-MEMBER_DIR = ROOT / "results/validation/kinetic_core_b2_4_members"
+B23_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b2_3_fit_report.json"
+MEMBER_DIR = data_paths.VALIDATION_DIR / "kinetic_core_b2_4_members"
 
 #: Seeds. Start 0 is B2.3's own vector exactly, so every ensemble contains the
 #: incumbent and a member worse than B2.3 is visibly worse.
@@ -655,7 +657,7 @@ def write_per_weighting_fit_reports(members: List[Dict[str, Any]]) -> Dict[str, 
         # from the best member alone: the whole claim is that a single number
         # was never a property of the model.
         for member in block:
-            (ROOT / f"results/validation/kinetic_core_b2_4_fit_{tag}_s"
+            (data_paths.VALIDATION_DIR / f"kinetic_core_b2_4_fit_{tag}_s"
                     f"{member['start']}.json").write_text(json.dumps({
                         "wave": f"B2.4 member {tag}/s{member['start']}",
                         "member": {k: v for k, v in member.items()
@@ -687,7 +689,7 @@ def write_per_weighting_fit_reports(members: List[Dict[str, Any]]) -> Dict[str, 
             },
             "frozen_parameters": _b23_schema_frozen(x_full),
         }
-        path = ROOT / f"results/validation/kinetic_core_b2_4_fit_{tag}.json"
+        path = data_paths.VALIDATION_DIR / f"kinetic_core_b2_4_fit_{tag}.json"
         path.write_text(json.dumps(payload, indent=2, default=str))
         paths[tag] = str(path.relative_to(ROOT))
     return paths
@@ -712,7 +714,7 @@ def main(argv=None) -> int:
         paths = write_per_weighting_fit_reports(members)
         out = {
             "wave": "B2.4 -- declared weighting + ensemble",
-            "prereg": "results/validation/kinetic_core_b2_4_prereg.md",
+            "prereg": data_paths.rel(data_paths.VALIDATION_DIR / "kinetic_core_b2_4_prereg.md"),
             "declared_weights": PH_ENDPOINT_WEIGHT,
             "weight_basis": PH_ENDPOINT_WEIGHT_BASIS,
             "sigma_log_reference": SIGMA_LOG_REFERENCE,
@@ -727,7 +729,7 @@ def main(argv=None) -> int:
             "per_weighting_fit_reports": paths,
             "members": members,
         }
-        dest = ROOT / "results/validation/kinetic_core_b2_4_ensemble.json"
+        dest = data_paths.VALIDATION_DIR / "kinetic_core_b2_4_ensemble.json"
         dest.write_text(json.dumps(out, indent=2, default=str))
         print(f"wrote {dest}")
         for tag, b in summary.items():

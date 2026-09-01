@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.model_card import (  # noqa: E402
     build_model_card,
     render_model_card_markdown,
@@ -38,7 +39,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--readme", default=str(ROOT / "README.md"))
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="where the machine-readable model_card.json is written",
     )
     parser.add_argument("--stdout", action="store_true", help="print the markdown and exit")

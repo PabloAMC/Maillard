@@ -58,6 +58,7 @@ import sys
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.benchmark_validation import _run_matrix_only_benchmark_prediction  # noqa: E402
 from src.external_validation import build_external_validation_report, get_holdout_benchmark_files  # noqa: E402
 from src.protein_binding import (  # noqa: E402
@@ -72,8 +73,8 @@ from src.protein_binding import (  # noqa: E402
     use_observability_mode,
 )
 
-OUT_JSON = ROOT / "results" / "validation" / "matrix_binding_mode_comparison.json"
-OUT_MD = ROOT / "results" / "validation" / "matrix_binding_mode_comparison.md"
+OUT_JSON = data_paths.VALIDATION_DIR / "matrix_binding_mode_comparison.json"
+OUT_MD = data_paths.VALIDATION_DIR / "matrix_binding_mode_comparison.md"
 
 MODES = (MODE_FITTED, MODE_UNIT, MODE_BINDING)
 
@@ -87,9 +88,9 @@ FABRICATED_FACTOR_ROWS = (
 )
 
 IN_PANEL_FILES = (
-    "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
-    "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
-    "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
+    data_paths.benchmark_path("pea_isolate_40C_PratapSingh2021"),
+    data_paths.benchmark_path("soy_isolate_40C_PratapSingh2021"),
+    data_paths.benchmark_path("pea_isolate_uht_140C_Trikusuma2019"),
 )
 
 
@@ -251,7 +252,7 @@ def pratap_vs_liu_test() -> Dict[str, Any]:
 
 def build() -> Dict[str, Any]:
     holdout_files = [Path(p) for p in get_holdout_benchmark_files()]
-    in_panel_files = [ROOT / p for p in IN_PANEL_FILES]
+    in_panel_files = list(IN_PANEL_FILES)
 
     payload: Dict[str, Any] = {
         "generated_by": "scripts/generators/generate_matrix_binding_mode_comparison.py",
@@ -259,7 +260,7 @@ def build() -> Dict[str, Any]:
         "git_head": _git_head(),
         "fitted_parameters_in_this_wave": 0,
         "model": describe_model(),
-        "binding_constants_file": "data/lit/binding_constants.yml",
+        "binding_constants_file": data_paths.rel(data_paths.BINDING_CONSTANTS),
         "binding_constants_sources": [
             s.get("source_id") for s in (load_binding_constants().get("sources") or [])
         ],

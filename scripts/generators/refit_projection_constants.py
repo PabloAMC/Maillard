@@ -62,6 +62,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src import projection as projection_module
 from src import recommend as recommend_module
 from src.benchmark_validation import evaluate_benchmark, get_benchmark_files
@@ -145,7 +146,7 @@ def _evaluate_point(files, *, baseline: float, tau_ref: float, ea_kj: float) -> 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--quick", action="store_true", help="coarse scan only")
     args = parser.parse_args()
 
@@ -411,7 +412,7 @@ def main() -> int:
     def _hofmann_allocation() -> Dict[str, Any]:
         from src.benchmark_validation import evaluate_benchmark as _eval
 
-        bench = ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json"
+        bench = data_paths.benchmark_path("cys_ribose_140C_Hofmann1998")
         evaluation = _eval(bench)
         # `predicted_ppb` carries each species under several aliases (SMILES, lower-case
         # label, display label); select one canonical key per species so the sum is not

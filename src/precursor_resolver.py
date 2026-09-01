@@ -6,13 +6,12 @@ can type "ribose" or "cysteine" instead of full SMILES.
 """
 
 import yaml
-from pathlib import Path
 from typing import List, Dict, Optional
 
 from src.chem_utils import Species  # noqa: E402
+from src import data_paths  # noqa: E402
 
-ROOT = Path(__file__).resolve().parents[1]
-_PRECURSORS_PATH = ROOT / "data" / "species" / "precursors.yml"
+_PRECURSORS_PATH = data_paths.PRECURSORS
 
 # Lazily loaded cache
 _LOOKUP: Optional[Dict[str, dict]] = None

@@ -6,14 +6,14 @@ from typing import Any, Dict, Iterable, Mapping, Optional
 
 import yaml
 
+from src import data_paths
 from src.benchmark_validation import (
     build_matrix_promotion_contract_artifact,
     build_matrix_target_status_artifact,
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
-PRIMARY_PROTOCOL_CONTRACT_PATH = ROOT / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json"
+ROOT = data_paths.REPO_ROOT
 PRIMARY_PROTOCOL_CLOSES = {
     "comparator_is_measured_volatiles",
     "external_quantitative_origin",
@@ -32,8 +32,14 @@ def _load_json(path: Path) -> Dict[str, Any]:
         return json.load(handle)
 
 
+def _under_root(root: Path, default: Path) -> Path:
+    """``default`` when ``root`` is the repository checkout; the same repo-relative file
+    re-rooted under ``root`` otherwise (tests and scripts pass explicit roots)."""
+    return default if root == data_paths.REPO_ROOT else root / data_paths.rel(default)
+
+
 def _benchmark_path(root: Path, benchmark_id: str) -> Path:
-    return root / "data" / "benchmarks" / f"{benchmark_id}.json"
+    return _under_root(root, data_paths.benchmark_path(benchmark_id))
 
 
 def _load_benchmark(root: Path, benchmark_id: str) -> Dict[str, Any]:
@@ -172,7 +178,7 @@ def _arm_for_matrix(
 
 
 def build_matrix_primary_benchmark_campaign(root: Path = ROOT) -> Dict[str, Any]:
-    contract = _load_json(root / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json")
+    contract = _load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
     status_payload = build_matrix_target_status_artifact()
     promotion_payload = build_matrix_promotion_contract_artifact()
     status_rows = list(status_payload.get("benchmarks", []))

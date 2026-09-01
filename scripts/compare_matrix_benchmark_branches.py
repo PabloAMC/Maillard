@@ -14,7 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import (
+from src import data_paths  # noqa: E402
+from src.benchmark_validation import (  # noqa: E402
     build_matrix_benchmark_deltas,
     build_matrix_benchmark_evidence_audit,
     compare_matrix_benchmark_delta_sets,
@@ -27,7 +28,7 @@ def _git_output(*args: str) -> str:
 
 
 def _benchmark_paths_for_ref(ref: str) -> list[str]:
-    rows = _git_output("ls-tree", "-r", "--name-only", ref, "data/benchmarks").splitlines()
+    rows = _git_output("ls-tree", "-r", "--name-only", ref, data_paths.rel(data_paths.BENCHMARKS_DIR)).splitlines()
     return [row for row in rows if row.endswith(".json")]
 
 
@@ -45,7 +46,7 @@ def _materialize_ref_benchmarks(ref: str, target_root: Path) -> list[Path]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-ref", default="main")
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--target-tag", default="meaty")
     args = parser.parse_args()
 

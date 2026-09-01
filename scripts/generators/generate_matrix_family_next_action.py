@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.matrix_family_next_action import (  # noqa: E402
     build_matrix_family_next_action_artifact,
     render_matrix_family_next_action_markdown,
@@ -27,7 +28,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     args = parser.parse_args(argv)

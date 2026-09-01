@@ -8,14 +8,12 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional, Sequence, Tuple
 
+from src import data_paths
 from src.benchmark_validation import evaluate_benchmark, get_benchmark_files, get_benchmark_metadata, load_benchmark
 from src.cross_validation import compute_leverage
-from src.matrix_calibration_registry import MATRIX_CALIBRATION_OFFSETS_PATH
 from src.uncertainty_propagation import propagate_benchmarks
 
 
-ROOT = Path(__file__).resolve().parents[1]
-RESULTS_DIR = ROOT / "results" / "validation"
 _RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 _MATRIX_EXECUTION_PATHS = ("matrix_only", "matrix_precursor_augmented")
 _TRUST_LOOP_EXECUTION_PATHS = ("free_precursor", "matrix_precursor_augmented")
@@ -189,8 +187,9 @@ def _write_multiplier_file(overrides: Mapping[str, float], *, decision_summary: 
             for protein_type, multiplier in overrides.items()
         },
     }
-    MATRIX_CALIBRATION_OFFSETS_PATH.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
-    return MATRIX_CALIBRATION_OFFSETS_PATH
+    data_paths.MATRIX_CALIBRATION_OFFSETS.parent.mkdir(parents=True, exist_ok=True)
+    data_paths.MATRIX_CALIBRATION_OFFSETS.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    return data_paths.MATRIX_CALIBRATION_OFFSETS
 
 
 def render_refit_decision_markdown(report: Mapping[str, Any]) -> str:
@@ -230,7 +229,7 @@ def render_refit_decision_markdown(report: Mapping[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def write_refit_artifacts(report: Mapping[str, Any], *, output_dir: Path | str = RESULTS_DIR) -> Dict[str, Path]:
+def write_refit_artifacts(report: Mapping[str, Any], *, output_dir: Path | str = data_paths.VALIDATION_DIR) -> Dict[str, Path]:
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
     json_path = destination / "calibration_refit_decision.json"

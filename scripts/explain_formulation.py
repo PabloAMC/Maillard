@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.pipeline import MaillardPipeline
+from src import data_paths  # noqa: E402
+from src.pipeline import MaillardPipeline  # noqa: E402
 from src.smirks_engine import ReactionConditions
 from src.usability_reports import build_formulation_explainability_payload
 from src.presentation import render_formulation_explainability_markdown
@@ -23,7 +24,7 @@ def main() -> int:
     parser.add_argument("--name", required=True)
     parser.add_argument("--target-tag", default="meaty")
     parser.add_argument("--minimize-tag", default="beany")
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     args = parser.parse_args()
 
     designer = MaillardPipeline(target_tag=args.target_tag, minimize_tag=args.minimize_tag)

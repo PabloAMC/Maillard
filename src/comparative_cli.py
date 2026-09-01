@@ -61,8 +61,6 @@ from src.directional_reliability import (
 from src.pipeline import MaillardPipeline
 from src.usability_reports import prepare_cli_confidence
 
-ROOT = Path(__file__).resolve().parents[1]
-
 #: The FAST lane's absolute caveat. CORRECTED 2026-08-29 (Wave Q1): this said
 #: "Printed above every absolute number this interface emits, without
 #: exception", which stopped being true at the B5 cutover. It is now printed

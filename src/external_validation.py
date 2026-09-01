@@ -38,15 +38,16 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1]
-FLAVOR_REFERENCE_PATH = ROOT / "data" / "lit" / "flavor_reference_payloads.json"
-BENCHMARK_INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
-BENCHMARK_DIR = ROOT / "data" / "benchmarks"
+from src import data_paths
+
+FLAVOR_REFERENCE_PATH = data_paths.FLAVOR_REFERENCE_PAYLOADS
+BENCHMARK_INTAKE_REGISTRY_PATH = data_paths.BENCHMARK_INTAKE_REGISTRY
+BENCHMARK_DIR = data_paths.BENCHMARKS_DIR
 # The intake YAML that each frozen hold-out benchmark was materialized from lives NEXT TO
 # the benchmark JSON (moved from data/protocols/external_validation/ on 2026-09-01). Both
 # are frozen evidence; see write_holdout_bundles.
-EXTERNAL_VALIDATION_PROTOCOL_DIR = ROOT / "data" / "benchmarks" / "external_validation" / "intake"
-EXTERNAL_VALIDATION_BENCHMARK_DIR = ROOT / "data" / "benchmarks" / "external_validation"
+EXTERNAL_VALIDATION_PROTOCOL_DIR = data_paths.EXTERNAL_VALIDATION_INTAKE_DIR
+EXTERNAL_VALIDATION_BENCHMARK_DIR = data_paths.EXTERNAL_VALIDATION_DIR
 EXTERNAL_VALIDATION_EVIDENCE_CLASS = "external_validation_only"
 
 # Read the live uncalibrated matrix sigma so the report's methodology disclosure
@@ -584,7 +585,7 @@ def _anchor_has_top_level_benchmark_artifact(row: Mapping[str, Any]) -> bool:
         if str(artifact.get("artifact_type", "")).strip() != "benchmark":
             continue
         path = str(artifact.get("path", "")).strip()
-        if path.startswith("data/benchmarks/") and "/external_validation/" not in path:
+        if path.startswith(f"{data_paths.rel(BENCHMARK_DIR)}/") and "/external_validation/" not in path:
             return True
     return False
 
@@ -746,7 +747,7 @@ def build_inventory(
                 eligibility = "redundant_with_panel"
                 reason = (
                     f"anchor '{anchor_id}' already has a top-level benchmark runtime artifact in "
-                    f"data/benchmarks ({_TOP_LEVEL_BENCHMARK_EQUIVALENTS.get(anchor_id, 'registry-backed benchmark')}); "
+                    f"{data_paths.rel(BENCHMARK_DIR)} ({_TOP_LEVEL_BENCHMARK_EQUIVALENTS.get(anchor_id, 'registry-backed benchmark')}); "
                     "it is not an external hold-out"
                 )
             elif not _unit_is_ppb_equivalent(units):
@@ -1636,7 +1637,7 @@ def render_external_validation_markdown(payload: Mapping[str, Any]) -> str:
 def write_external_validation_artifact(
     payload: Mapping[str, Any],
     *,
-    output_dir: Path | str = ROOT / "results" / "validation",
+    output_dir: Path | str = data_paths.VALIDATION_DIR,
     basename: str = "external_validation_report",
 ) -> Dict[str, Path]:
     output_dir = Path(output_dir)

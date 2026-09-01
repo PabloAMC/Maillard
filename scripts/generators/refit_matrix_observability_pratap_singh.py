@@ -121,10 +121,11 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 import src.matrix_calibration_registry as registry_module
 from src.benchmark_validation import evaluate_benchmark
 
-BENCHMARK_DIR = ROOT / "data" / "benchmarks"
+BENCHMARK_DIR = data_paths.BENCHMARKS_DIR
 
 # --- fit configuration -------------------------------------------------------------
 SEARCH_RANGE = (1.0e-3, 3.0e1)
@@ -329,7 +330,7 @@ def _at_shared_scale(scale: float) -> Dict[Tuple[str, str, str], float]:
 # ---------------------------------------------------------------------------
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument(
         "--no-check",
         action="store_true",
@@ -351,8 +352,8 @@ def main() -> int:
             "soy_isolate_40C_PratapSingh2021",
         ],
         "fit_target_files": [
-            "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
-            "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
+            data_paths.rel(data_paths.benchmark_path("pea_isolate_40C_PratapSingh2021")),
+            data_paths.rel(data_paths.benchmark_path("soy_isolate_40C_PratapSingh2021")),
         ],
         "anchor_provenance": (
             "Molecules 2021, 26, 4104, Table 1 (Europe PMC PMC8271896), read in Wave K. "

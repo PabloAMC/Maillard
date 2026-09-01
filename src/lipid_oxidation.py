@@ -46,10 +46,11 @@ import json
 import math
 from dataclasses import dataclass
 from functools import lru_cache
-from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-_CALIBRATION_PATH = Path(__file__).resolve().parents[1] / "data" / "lit" / "lipid_oxidation_calibration.json"
+from src import data_paths
+
+_CALIBRATION_PATH = data_paths.LIPID_OXIDATION_CALIBRATION
 
 # Fallback constants matching the pre-S27 hardcoded behaviour, used only when the
 # calibration file is missing or malformed (so the module never hard-fails).

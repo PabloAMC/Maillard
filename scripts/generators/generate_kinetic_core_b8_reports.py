@@ -42,10 +42,12 @@ from typing import Any, Dict, List, Optional
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+
+from src import data_paths
 if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
-V = ROOT / "results" / "validation"
+V = data_paths.VALIDATION_DIR
 
 B8_FIT = V / "kinetic_core_b8_fit_report.json"
 B24_HALF_FIT = V / "kinetic_core_b2_4_fit_half.json"
@@ -503,7 +505,7 @@ def build_holdout_report() -> Dict[str, Any]:
         "wave": "B8 -- blind re-sits (Amendments 16, 17, 18)",
         "prereg_scorecard": scorecard,
         "generated_by": "scripts/generators/generate_kinetic_core_b8_reports.py",
-        "prereg": "results/validation/kinetic_core_b8_prereg.md",
+        "prereg": data_paths.rel(data_paths.VALIDATION_DIR / "kinetic_core_b8_prereg.md"),
         "columns": {
             "pre_b8": (
                 "The artifacts already on disk at HEAD. PANEL: B2.4-half's own "

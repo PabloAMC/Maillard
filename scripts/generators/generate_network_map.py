@@ -64,6 +64,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.explain_compound import (  # noqa: E402
     DERIVED,
     EVIDENCE_MEANING,
@@ -74,8 +75,8 @@ from src.explain_compound import (  # noqa: E402
     evidence_class_of,
 )
 
-DEFAULT_OUT = ROOT / "docs" / "assets" / "network_map.html"
-EXAMPLES_DIR = ROOT / "docs" / "examples"
+DEFAULT_OUT = data_paths.DOCS_ASSETS_DIR / "network_map.html"
+EXAMPLES_DIR = data_paths.EXAMPLES_DIR
 DEFAULT_EXAMPLES = (
     "flux_ribose_cysteine_145C.json",
     "flux_extrusion_pea_three_zone.json",

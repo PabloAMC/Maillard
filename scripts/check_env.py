@@ -100,16 +100,19 @@ def check_rdkit_smiles_roundtrip() -> bool:
 def check_yaml_files() -> bool:
     """Verify all required data YAML files exist and are parseable."""
     import yaml
+    root = Path(__file__).resolve().parents[1]
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from src import data_paths  # pure-stdlib module; keeps this smoke test dependency-light
     expected = [
-        "data/species/desirable_targets.yml",
-        "data/species/off_flavour_targets.yml",
-        "data/species/toxic_markers.yml",
-        "data/species/precursors.yml",
+        data_paths.DESIRABLE_TARGETS,
+        data_paths.OFF_FLAVOUR_TARGETS,
+        data_paths.TOXIC_MARKERS,
+        data_paths.PRECURSORS,
     ]
-    root = Path(__file__).parent.parent
     all_ok = True
-    for rel_path in expected:
-        p = root / rel_path
+    for p in expected:
+        rel_path = data_paths.rel(p)
         if not p.exists():
             fail(f"Missing: {rel_path}")
             all_ok = False

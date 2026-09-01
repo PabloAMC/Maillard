@@ -77,13 +77,13 @@ import math
 import os
 from contextlib import contextmanager
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any, Dict, Iterator, Mapping, Optional
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[1]
-BINDING_CONSTANTS_PATH = ROOT / "data" / "lit" / "binding_constants.yml"
+from src import data_paths
+
+BINDING_CONSTANTS_PATH = data_paths.BINDING_CONSTANTS
 
 # --- Observability modes -------------------------------------------------------------
 #

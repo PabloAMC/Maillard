@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.benchmark_validation import (
     get_matrix_only_target_snapshot_exclusions,
     snapshot_all_benchmark_targets,
@@ -21,7 +22,7 @@ from src.presentation import render_benchmark_targets_markdown
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--target-tag", default="meaty")
     args = parser.parse_args()
 

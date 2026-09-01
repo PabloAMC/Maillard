@@ -326,9 +326,9 @@ Everything the xTB → DFT → MLP refinement lane left behind, deleted rather t
       ~35 places; the audit narrative depends on the path); `data/protocols/*_protocol_pilot_intake.yaml` (the
       `comparison_contract` half is hand-written; only `conc_ppb` is refreshed) — decision 6 in §5 still open;
       `data/Gemini_Deep_Research/` rename → Phase 5.
-- [ ] Full suites in Docker (running).
+- [x] Full suites in Docker (commit `623b850`): unit+scripts **1340 passed**; integration+scientific **426 passed, 2 xfailed**.
 
-### Phase 1 — Purge and re-home (no schema change, ~1–2 sessions)
+### Phase 1 — Purge and re-home (original checklist; SUPERSEDED by 1a/1b above, kept for the exit criteria)
 Pure deletes and moves of files with 0–2 consumers. Expected model-output change: none.
 - [ ] Delete dead: `data/rmg_extensions/`, `data/reactions/curated_pathways.py`, `data/logs/`,
       `data/geometries/**` (tracked and untracked), `data/calibration_history/`,
@@ -352,8 +352,26 @@ Pure deletes and moves of files with 0–2 consumers. Expected model-output chan
 - [ ] Update the three CI gates' globs and the count pins in `test_honest_headline_guards.py:959-1016`.
 - **Exit:** `data/` holds only hand-curated, cited inputs; on-disk size drops from ~400 MB to ~170 MB (articles) / ~8 MB tracked.
 
-### Phase 2 — One access layer (~2–3 sessions)
+### Phase 2 — One access layer (~2–3 sessions) — IN PROGRESS 2026-09-01
 Do this **before** any renames inside `data/lit`, so later moves are one-line edits.
+- [x] `src/data_paths.py` (65+ constants, `MAILLARD_DATA_ROOT`/`MAILLARD_RESULTS_ROOT`, `rel()`, `benchmark_path()`).
+- [x] `src/__init__.py` re-exports are lazy (PEP 562): `import src.x` no longer imports the pipeline and reads 11 files.
+- [x] `src/data_access.py`: `load_json` / `load_yaml` / `load_mapping` raise `DataFileError` on missing/malformed,
+      mtime-keyed cache, `missing_ok=True` returns `None` (never `{}`), `clear_cache()`. Not adopted yet (2b).
+- [ ] 2a (running, five parallel agents): migrate ~110 hard-coded path sites in `src/` and `scripts/` onto `data_paths`;
+      CWD-relative defaults in `headspace.py` / `sensory.py` removed; `matrix_calibration_offsets.json` feedback loop
+      routed to `results/calibration/`. Tests with CWD-relative paths fixed by hand (`test_wave_s1`, `test_wave_p`,
+      `test_regression`, `test_temporal_fast` — the last one pointed at a nonexistent ramp CSV and silently tested
+      the non-ramp path).
+- [ ] 2b: adopt `data_access` in the loaders that return `{}` on a missing file (`literature_runtime._load_json_payload`,
+      `barrier_constants._load_dft_anchor_metadata` / `_load_refinement_surrogate_offsets` / `get_arrhenius_params`,
+      `recommend._load_henry_lookup` / `_load_ramp`, `lipid_oxidation._load_calibration`, `protein_binding.load_binding_constants`,
+      `headspace.HeadspaceModel._load_constants`, the `_load_json` copies in `literature_family_registry`, `literature_learning_loop`,
+      `literature_intake_registry`, `deep_research_runtime_queue`, `doe_generator`, `structural_unlock_triage`,
+      `extrusion_benchmark_landing`, and `curated_pathways._wire_computational_priors`); collapse the five
+      `data/benchmarks/{id}.json` builders onto `benchmark_path`; keep the mocked-registry `RuntimeWarning`, emitted once.
+- [ ] 2c: defer the 11 import-time loads to first call; move `deep_research_backlog.json` and `slr_incorporation_matrix.json`
+      to `results/literature/` now that every reader goes through one constant.
 - [ ] `src/data_paths.py`: `DATA_ROOT` (env `MAILLARD_DATA_ROOT` override, default repo-relative),
       one named constant per curated file/dir. `scripts/` and tests import from it too.
 - [ ] `src/data_access.py`: `load_json(path)`, `load_yaml(path)` that **raise** `DataFileMissing`

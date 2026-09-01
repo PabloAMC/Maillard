@@ -1,14 +1,20 @@
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_LIT_DIR = ROOT / "data" / "lit"
-GDR_DIR = ROOT / "data" / "Gemini_Deep_Research"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-INTAKE_REGISTRY_PATH = DATA_LIT_DIR / "benchmark_intake_registry.json"
-SLR_MATRIX_PATH = DATA_LIT_DIR / "slr_incorporation_matrix.json"
-BACKLOG_PATH = DATA_LIT_DIR / "deep_research_backlog.json"
+from src import data_paths  # noqa: E402
+
+DATA_LIT_DIR = data_paths.LIT_DIR
+GDR_DIR = data_paths.RESEARCH_CORPUS_DIR
+
+INTAKE_REGISTRY_PATH = data_paths.BENCHMARK_INTAKE_REGISTRY
+SLR_MATRIX_PATH = data_paths.SLR_INCORPORATION_MATRIX
+BACKLOG_PATH = data_paths.DEEP_RESEARCH_BACKLOG
 
 
 def load_json(path):

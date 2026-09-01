@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping
 
+from src import data_paths
 from src.family_validation_overview import build_family_validation_overview_artifact
 from src.literature_family_registry import build_family_payload_coverage_artifact
 from src.literature_family_registry import iter_matrix_decision_panel_entries
@@ -12,12 +13,6 @@ from src.family_promotion_state import build_family_promotion_state_artifact
 from src.literature_intake_registry import build_intake_reference_rows, build_literature_backlog_artifact, infer_target_payload_types, resolve_primary_template_kind as normalized_primary_template_kind
 from src.matrix_prior_registry import summarize_matrix_prior_bundle
 
-
-ROOT = Path(__file__).resolve().parents[1]
-DATA_LIT_DIR = ROOT / "data" / "lit"
-
-INTAKE_REGISTRY_PATH = DATA_LIT_DIR / "benchmark_intake_registry.json"
-PROCESS_GAP_REGISTRY_PATH = DATA_LIT_DIR / "process_gap_registry.json"
 
 
 PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10"}
@@ -37,8 +32,15 @@ def _load_json(path: Path) -> Dict[str, Any]:
         return json.load(handle)
 
 
-def _to_repo_relative(path: Path, root: Path = ROOT) -> str:
+def _to_repo_relative(path: Path, root: Path = data_paths.REPO_ROOT) -> str:
     return path.resolve().relative_to(root.resolve()).as_posix()
+
+
+def _under_root(root: Path, path: Path) -> Path:
+    """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
+    if Path(root).resolve() == data_paths.REPO_ROOT:
+        return path
+    return root / data_paths.rel(path)
 
 
 def _normalize_name(name: str) -> str:
@@ -110,11 +112,11 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
             }
             for index, (compound, _value) in enumerate(sorted(tracked.items(), key=lambda item: float(item[1]), reverse=True)[:3])
         ]
-        output_name = "pea_isolate_uht_140C_Trikusuma2019.json"
+        benchmark_id = "pea_isolate_uht_140C_Trikusuma2019"
         return {
             **base_template,
-            "suggested_output_path": f"data/benchmarks/{output_name}",
-            "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+            "suggested_output_path": data_paths.rel(data_paths.benchmark_path(benchmark_id)),
+            "benchmark_id": benchmark_id,
             "protein_type": protein_type,
             "conditions": {
                 "temp_C": float(key_values.get("uht_temp_C", 140.0)),
@@ -133,7 +135,7 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
     if template_kind == "process_state_calibration":
         return {
             **base_template,
-            "suggested_output_path": "data/lit/process_state_calibrations.json",
+            "suggested_output_path": data_paths.rel(data_paths.PROCESS_STATE_CALIBRATIONS),
             "protein_type": protein_type,
             "kind": str(entry.get("kind", "calibration_reference")),
             "numeric_anchors": key_values,
@@ -143,7 +145,7 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
     if template_kind == "computational_prior":
         return {
             **base_template,
-            "suggested_output_path": "data/lit/computational_priors.json",
+            "suggested_output_path": data_paths.rel(data_paths.COMPUTATIONAL_PRIORS),
             "target_section": "strecker_crosstalk_priors",
             "protein_type": protein_type,
             "required_context": ["lipids", "polyphenols"],
@@ -153,7 +155,7 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
     if template_kind == "flavor_reference_payload":
         return {
             **base_template,
-            "suggested_output_path": "data/lit/flavor_reference_payloads.json",
+            "suggested_output_path": data_paths.rel(data_paths.FLAVOR_REFERENCE_PAYLOADS),
             "target_section": _suggest_reference_section(entry),
             "source_citation": str(entry.get("citation", "unknown")),
             "key_values": key_values,
@@ -162,7 +164,7 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
     if template_kind == "retention_payload":
         return {
             **base_template,
-            "suggested_output_path": "data/lit/retention_reference_payloads.json",
+            "suggested_output_path": data_paths.rel(data_paths.RETENTION_REFERENCE_PAYLOADS),
             "target_section": _suggest_retention_section(entry),
             "target_matrix_family": str(entry.get("matrix_family", "unknown")),
             "source_citation": str(entry.get("citation", "unknown")),
@@ -171,7 +173,7 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
 
     return {
         **base_template,
-        "suggested_output_path": "data/lit/safety_reference_payloads.json",
+        "suggested_output_path": data_paths.rel(data_paths.SAFETY_REFERENCE_PAYLOADS),
         "target_section": "entries",
         "analyte": "acrylamide",
         "numeric_anchors": key_values,
@@ -179,8 +181,8 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
     }
 
 
-def build_runtime_templates(root: Path = ROOT) -> List[Dict[str, Any]]:
-    intake = _load_json(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
+def build_runtime_templates(root: Path = data_paths.REPO_ROOT) -> List[Dict[str, Any]]:
+    intake = _load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
     templates: List[Dict[str, Any]] = []
     ready_rows = {
         row["id"]: row
@@ -198,7 +200,7 @@ def build_runtime_templates(root: Path = ROOT) -> List[Dict[str, Any]]:
     return templates
 
 
-def build_payload_queue_review(root: Path = ROOT) -> Dict[str, Any]:
+def build_payload_queue_review(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     ready_rows = build_intake_reference_rows(root)
     queue_by_payload_type: Dict[str, int] = {}
     queue_by_chemistry_family: Dict[str, Dict[str, int]] = {}
@@ -301,7 +303,7 @@ def _family_promotion_blocker(
     return "none"
 
 
-def build_s11_c_family_promotion_queue(root: Path = ROOT) -> Dict[str, Any]:
+def build_s11_c_family_promotion_queue(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     plan = load_family_ingestion_plan()
     coverage_payload = build_family_payload_coverage_artifact()
     promotion_payload = build_family_promotion_state_artifact()
@@ -410,9 +412,9 @@ def build_matrix_prior_review() -> List[Dict[str, Any]]:
     return rows
 
 
-def build_literature_gap_review(root: Path = ROOT) -> Dict[str, List[Dict[str, Any]]]:
-    intake = _load_json(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
-    process_gaps = _load_json(root / _to_repo_relative(PROCESS_GAP_REGISTRY_PATH, ROOT))
+def build_literature_gap_review(root: Path = data_paths.REPO_ROOT) -> Dict[str, List[Dict[str, Any]]]:
+    intake = _load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
+    process_gaps = _load_json(_under_root(root, data_paths.PROCESS_GAP_REGISTRY))
     intake_rows = []
     for entry in intake.get("structural_gaps", []):
         near_miss_candidates = []
@@ -455,7 +457,7 @@ def build_literature_gap_review(root: Path = ROOT) -> Dict[str, List[Dict[str, A
     }
 
 
-def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
+def build_literature_learning_loop_payload(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     ready_rows = build_intake_reference_rows(root)
     templates = build_runtime_templates(root)
     backlog_payload = build_literature_backlog_artifact(root)
@@ -467,7 +469,7 @@ def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
     encoded_count = sum(1 for row in ready_rows if row["encoding_status"] == "encoded_runtime_artifact")
     return {
         "schema_version": "1.0",
-        "source": _to_repo_relative(INTAKE_REGISTRY_PATH, root),
+        "source": _to_repo_relative(data_paths.BENCHMARK_INTAKE_REGISTRY, root),
         "ready_reference_rows": ready_rows,
         "runtime_templates": templates,
         "literature_backlog": backlog_payload,

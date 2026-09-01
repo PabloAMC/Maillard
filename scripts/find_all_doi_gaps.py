@@ -1,8 +1,14 @@
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_LIT_DIR = ROOT / "data" / "lit"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+DATA_LIT_DIR = data_paths.LIT_DIR
 
 json_files = [
     "benchmark_intake_registry.json",

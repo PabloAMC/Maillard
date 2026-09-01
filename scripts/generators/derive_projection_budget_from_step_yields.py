@@ -82,6 +82,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 import src.projection as projection_module  # noqa: E402
 import src.recommend as recommend_module  # noqa: E402
 from src.benchmark_validation import (  # noqa: E402
@@ -96,10 +97,10 @@ from rdkit import RDLogger  # noqa: E402
 
 RDLogger.DisableLog("rdApp.*")
 
-OUT_JSON = ROOT / "results" / "validation" / "projection_budget_step_yield_constraint.json"
-OUT_MD = ROOT / "results" / "validation" / "projection_budget_step_yield_constraint.md"
+OUT_JSON = data_paths.VALIDATION_DIR / "projection_budget_step_yield_constraint.json"
+OUT_MD = data_paths.VALIDATION_DIR / "projection_budget_step_yield_constraint.md"
 
-BENCH_DIR = ROOT / "data" / "benchmarks"
+BENCH_DIR = data_paths.BENCHMARKS_DIR
 
 # Wave X's declared fit target. Excluded from every objective and every bound here.
 WAVE_X_FIT_TARGET = "hofmann1998_norfuraneol_h2s_145C_20min_pH5"
@@ -107,7 +108,7 @@ WAVE_X_FIT_TARGET = "hofmann1998_norfuraneol_h2s_145C_20min_pH5"
 SKIP_TOKENS = ("Internal2026", "ProtocolPilot2026")
 ASSERT_ABSENT_TOKENS = ("external_validation", "quarantined")
 
-FROZEN_HOLDOUT = ROOT / "results" / "validation" / "maillard_path_holdout_frozen_predictions.json"
+FROZEN_HOLDOUT = data_paths.VALIDATION_DIR / "maillard_path_holdout_frozen_predictions.json"
 
 
 def _install_strategy(strategy) -> None:

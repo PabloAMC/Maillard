@@ -82,14 +82,15 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src import recommend as recommend_module
 from src.benchmark_validation import evaluate_benchmark
 from src.recommend import _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES, _normalize_chemical_name
 from src.uncertainty_propagation import _benchmark_signal_origin
 
 TARGETS = (
-    ROOT / "data" / "benchmarks" / "spi_hvp_xylose_120C_PMC9905368.json",
-    ROOT / "data" / "benchmarks" / "wheat_gluten_hvp_xylose_120C_PMC9905368.json",
+    data_paths.benchmark_path("spi_hvp_xylose_120C_PMC9905368"),
+    data_paths.benchmark_path("wheat_gluten_hvp_xylose_120C_PMC9905368"),
 )
 RECOMMEND_SOURCE = ROOT / "src" / "recommend.py"
 
@@ -233,7 +234,7 @@ _RETRACTION_MESSAGE = (
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
 

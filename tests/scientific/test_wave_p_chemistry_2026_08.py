@@ -45,7 +45,9 @@ _FRUCTOSE = Species("D-Fructose", "OCC(O)C(O)C(O)C(=O)CO")
 _CYSTEINE = Species("L-Cysteine", "NC(CS)C(=O)O")
 _GLYCINE = Species("Glycine", "NCC(=O)O")
 
-_HOFMANN = Path("data/benchmarks/cys_ribose_140C_Hofmann1998.json")
+from src.data_paths import benchmark_path
+
+_HOFMANN = benchmark_path("cys_ribose_140C_Hofmann1998")
 
 #: The six families Wave P introduced.
 _NEW_FAMILIES = (
@@ -505,7 +507,7 @@ def test_trikusuma_nonanal_recovery_broke_by_exactly_the_oleic_linoleic_ratio():
     the dated note on the record in src/matrix_calibration_registry.py.
     """
     evaluation = evaluate_benchmark(
-        Path("data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json")
+        benchmark_path("pea_isolate_uht_140C_Trikusuma2019")
     )
     predicted = {c.compound: c.predicted_ppb for c in evaluation.comparisons}
     expected_ratio = PEA_LIPID_PROFILE.oleic_acid_pct / PEA_LIPID_PROFILE.linoleic_acid_pct

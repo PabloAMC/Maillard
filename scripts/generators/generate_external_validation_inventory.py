@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.external_validation import build_inventory, write_artifact
 
 
@@ -26,7 +27,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--output-dir",
-        default="results/validation",
+        default=data_paths.rel(data_paths.VALIDATION_DIR),
         help="Directory to write the .md and .json artifacts to.",
     )
     parser.add_argument(

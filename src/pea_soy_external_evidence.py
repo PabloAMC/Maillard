@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Mapping
 
+from src import data_paths
 from src.benchmark_validation import assess_matrix_benchmark_evidence, load_benchmark
 from src.primary_benchmark_campaign import build_matrix_primary_benchmark_campaign
 
@@ -12,17 +13,13 @@ EXTERNAL_BENCHMARKS = {
 }
 
 
-def _repo_benchmark_path(benchmark_id: str) -> str:
-    return f"data/benchmarks/{benchmark_id}.json"
-
-
 def build_pea_soy_external_evidence_artifact() -> Dict[str, Any]:
     campaign = build_matrix_primary_benchmark_campaign()
     campaign_by_matrix = {row["matrix"]: row for row in campaign.get("arms", [])}
 
     lanes = []
     for protein_type, benchmark_id in EXTERNAL_BENCHMARKS.items():
-        bench = load_benchmark(_repo_benchmark_path(benchmark_id))
+        bench = load_benchmark(data_paths.benchmark_path(benchmark_id))
         evidence = assess_matrix_benchmark_evidence(bench)
         campaign_row = campaign_by_matrix.get(protein_type, {})
         lanes.append(

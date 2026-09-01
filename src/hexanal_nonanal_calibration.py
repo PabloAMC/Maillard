@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
 from src.benchmark_validation import load_benchmark
-from src.artifact_io import repo_root
+from src import data_paths
 
 
 @dataclass(frozen=True)
@@ -35,7 +35,7 @@ CALIBRATION_LANES = (
 
 
 def _benchmark_path(benchmark_id: str) -> Path:
-    return repo_root() / "data" / "benchmarks" / f"{benchmark_id}.json"
+    return data_paths.benchmark_path(benchmark_id)
 
 
 def _volatile_entry(benchmark: Mapping[str, Any], compound: str) -> Dict[str, Any]:

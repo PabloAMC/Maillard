@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.benchmark_validation import summarize_benchmarks  # noqa: E402
 from src.benchmark_labels import benchmark_label  # noqa: E402
 from src.plot_style import configure_science_plot_style  # noqa: E402
@@ -386,8 +387,8 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
-    parser.add_argument("--docs-asset-dir", default="docs/assets")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
+    parser.add_argument("--docs-asset-dir", default=data_paths.rel(data_paths.DOCS_ASSETS_DIR))
     parser.add_argument(
         "--skip-figures",
         action="store_true",

@@ -12,12 +12,13 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.uncertainty_propagation import propagate_benchmarks, write_artifact
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--basename", default="prediction_uncertainty")
     parser.add_argument("--n-samples", type=int, default=200)
     parser.add_argument("--seed", type=int, default=0)

@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.literature_learning_loop import (
     build_literature_learning_loop_payload,
     render_literature_learning_loop_markdown,
@@ -19,7 +20,7 @@ from src.doe_generator import export_doe_requests
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -37,7 +38,7 @@ def main() -> int:
     template_path.write_text(json.dumps(payload.get("runtime_templates", []), indent=2), encoding="utf-8")
 
     doe_output = output_dir / "active_learning_requests.json"
-    export_doe_requests(str(ROOT / "data" / "lit" / "process_gap_registry.json"), str(doe_output))
+    export_doe_requests(str(data_paths.PROCESS_GAP_REGISTRY), str(doe_output))
 
     print(markdown)
     print(f"Wrote {markdown_path}")

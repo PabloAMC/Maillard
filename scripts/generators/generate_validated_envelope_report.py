@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.usability_reports import build_validated_envelope_report
 from src.benchmark_labels import benchmark_label_list
 from src.plot_style import configure_science_plot_style
@@ -77,7 +78,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default="results/validation",
+        default=data_paths.rel(data_paths.VALIDATION_DIR),
         help="Directory for validated_envelope.{md,json,png} (default: results/validation).",
     )
     parser.add_argument("--target-tag", default="meaty")

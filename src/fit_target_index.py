@@ -50,8 +50,9 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Iterator, List, Tuple
 
-ROOT = Path(__file__).resolve().parents[1]
-VALIDATION_DIR = ROOT / "results" / "validation"
+from src import data_paths
+
+VALIDATION_DIR = data_paths.VALIDATION_DIR
 
 #: Globs whose JSON records are read for fit-target declarations.
 FIT_RECORD_GLOBS: Tuple[str, ...] = (

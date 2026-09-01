@@ -6,6 +6,7 @@ import warnings
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence
 
+from src import data_paths
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.kokumi_scoring import build_kokumi_support_profile
 from src.literature_family_registry import (
@@ -31,23 +32,18 @@ from src.safety import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
-DATA_LIT_DIR = ROOT / "data" / "lit"
-
-
-def _load_json_payload(file_name: str) -> dict[str, Any]:
-    payload_path = DATA_LIT_DIR / file_name
+def _load_json_payload(payload_path: Path) -> dict[str, Any]:
     if not payload_path.exists():
         return {}
     with open(payload_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
-FLAVOR_REFERENCE_PAYLOADS = _load_json_payload("flavor_reference_payloads.json")
-RETENTION_REFERENCE_PAYLOADS = _load_json_payload("retention_reference_payloads.json")
-COMPUTATIONAL_PRIORS_PAYLOAD = _load_json_payload("computational_priors.json")
-PROCESS_STATE_CALIBRATIONS_PAYLOAD = _load_json_payload("process_state_calibrations.json")
-PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload("protein_source_registry.json")
+FLAVOR_REFERENCE_PAYLOADS = _load_json_payload(data_paths.FLAVOR_REFERENCE_PAYLOADS)
+RETENTION_REFERENCE_PAYLOADS = _load_json_payload(data_paths.RETENTION_REFERENCE_PAYLOADS)
+COMPUTATIONAL_PRIORS_PAYLOAD = _load_json_payload(data_paths.COMPUTATIONAL_PRIORS)
+PROCESS_STATE_CALIBRATIONS_PAYLOAD = _load_json_payload(data_paths.PROCESS_STATE_CALIBRATIONS)
+PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload(data_paths.PROTEIN_SOURCE_REGISTRY)
 try:
     FAMILY_INGESTION_PLAN_PAYLOAD = load_family_ingestion_plan()
 except FileNotFoundError:
@@ -129,7 +125,7 @@ PROTEIN_SOURCE_REGISTRY_UNSOURCED = (
 )
 if PROTEIN_SOURCE_REGISTRY_UNSOURCED:
     warnings.warn(
-        "src.literature_runtime: data/lit/protein_source_registry.json declares "
+        f"src.literature_runtime: {data_paths.rel(data_paths.PROTEIN_SOURCE_REGISTRY)} declares "
         "source_status='no_verifiable_source' -- every value in it is a MOCKED "
         "placeholder whose only declared upstream is the LLM digest "
         "data/Gemini_Deep_Research/06_alternative_proteins.md, which is not provenance. "
@@ -144,7 +140,7 @@ if PROTEIN_SOURCE_REGISTRY_UNSOURCED:
 #: Surfaced verbatim on the family-06 lane payload so the mock status travels with the
 #: number it contaminates instead of living only in a warning nobody sees.
 PROTEIN_SOURCE_PROVENANCE = {
-    "registry": "data/lit/protein_source_registry.json",
+    "registry": data_paths.rel(data_paths.PROTEIN_SOURCE_REGISTRY),
     "source_status": str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("source_status", "") or "unstated"),
     "value_basis": str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("value_basis", "") or "unstated"),
     "declared_upstream": "data/Gemini_Deep_Research/06_alternative_proteins.md (LLM digest)",

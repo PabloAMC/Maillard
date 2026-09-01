@@ -14,8 +14,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.benchmark_validation import evaluate_benchmark  # noqa: E402
-BENCH = ROOT / "data" / "benchmarks"
+BENCH = data_paths.BENCHMARKS_DIR
 
 LIPID_MARKERS = {"hexanal", "nonanal", "2-pentylfuran", "1-hexanol", "hexanol"}
 

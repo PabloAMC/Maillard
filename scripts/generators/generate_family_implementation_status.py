@@ -51,6 +51,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.conditions import ReactionConditions
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.smirks_engine import SmirksEngine, Species
@@ -311,7 +312,7 @@ def enumerate_emitted_families() -> Tuple[Dict[str, List[str]], Dict[str, int]]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     args = parser.parse_args()
 
     emitted, step_counts = enumerate_emitted_families()

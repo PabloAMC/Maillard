@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.benchmark_coverage_gaps import build_benchmark_coverage_gap_rows as build_coverage_gap_rows
 from src.benchmark_labels import benchmark_label
 from src.benchmark_validation import build_matrix_promotion_family_status, evaluate_benchmark, summarize_benchmarks
@@ -429,8 +430,8 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
-    parser.add_argument("--docs-asset-dir", default="docs/assets")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
+    parser.add_argument("--docs-asset-dir", default=data_paths.rel(data_paths.DOCS_ASSETS_DIR))
     parser.add_argument(
         "--skip-figures",
         action="store_true",

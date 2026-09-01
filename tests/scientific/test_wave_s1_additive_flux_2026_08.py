@@ -26,8 +26,10 @@ from src.benchmark_validation import evaluate_benchmark
 from src.chem_utils import ElementaryStep, Species
 from src.recommend import Recommender, _route_channel_id
 
-_HOFMANN = Path("data/benchmarks/cys_ribose_140C_Hofmann1998.json")
-_SOY_SNAPSHOT = Path("data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_Internal2026.json")
+from src.data_paths import benchmark_path
+
+_HOFMANN = benchmark_path("cys_ribose_140C_Hofmann1998")
+_SOY_SNAPSHOT = benchmark_path("soy_isolate_ribose_cysteine_100C_45min_Internal2026")
 
 
 def _predicted(bench: Path) -> dict[str, float]:
@@ -391,7 +393,7 @@ def test_registry_reachability_moves_exactly_the_four_internal_snapshots():
     three Trikusuma rows run the `matrix_only` path, which passed compound NAMES to the
     registry and was never affected, and the eight external hold-out points likewise.
     """
-    pea = _predicted(Path("data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_Internal2026.json"))
+    pea = _predicted(benchmark_path("pea_isolate_ribose_cysteine_100C_45min_Internal2026"))
     soy = _predicted(_SOY_SNAPSHOT)
     assert pea["Hexanal"] == pytest.approx(0.7425331, rel=1e-5)
     assert soy["Hexanal"] == pytest.approx(1.7006158, rel=1e-5)

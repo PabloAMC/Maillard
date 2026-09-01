@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.external_validation import build_holdout_bundles, write_holdout_bundles
 
 
@@ -19,12 +20,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--protocol-dir",
-        default="data/benchmarks/external_validation/intake",
+        default=data_paths.rel(data_paths.EXTERNAL_VALIDATION_INTAKE_DIR),
         help="Destination directory for synthesized intake YAML files.",
     )
     parser.add_argument(
         "--benchmark-dir",
-        default="data/benchmarks/external_validation",
+        default=data_paths.rel(data_paths.EXTERNAL_VALIDATION_DIR),
         help="Destination directory for isolated hold-out benchmark JSON files.",
     )
     parser.add_argument(

@@ -92,6 +92,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.trunk_kinetics import (  # noqa: E402
     STEP_FAMILY,
     STEP_KEYS,
@@ -100,7 +101,7 @@ from src.trunk_kinetics import (  # noqa: E402
     integrate,
 )
 
-TIMESERIES = ROOT / "data" / "lit" / "timeseries"
+TIMESERIES = data_paths.TIMESERIES_DIR
 
 GG_FILE = "martins2005_glucose_glycine_80_100_120C_pH68.yml"
 DD_FILE = "martins2003_DFG_amadori_degradation.yml"
@@ -1082,7 +1083,7 @@ def build(starts: int) -> Dict[str, Any]:
 
         # ---- the machine-readable fit declaration the gates read ----
         "fit_target_files": [
-            f"data/lit/timeseries/{GG_FILE}",
+            data_paths.rel(data_paths.TIMESERIES_DIR / GG_FILE),
             f"data/lit/timeseries/{DD_FILE} (pH 6.8 series only)",
         ],
         "fit_corpus_excluded": [
@@ -1378,7 +1379,7 @@ def render_markdown(payload: Dict[str, Any]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--starts", type=int, default=48)
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--basename", default="trunk_rate_calibration_refit")
     args = parser.parse_args()
 

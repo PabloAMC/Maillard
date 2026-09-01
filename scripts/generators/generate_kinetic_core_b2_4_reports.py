@@ -29,7 +29,9 @@ from typing import Any, Dict, List, Optional
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-V = ROOT / "results" / "validation"
+
+from src import data_paths
+V = data_paths.VALIDATION_DIR
 
 TAGS = ("shipped", "half", "measured")
 TAG_LABEL = {"shipped": "W-SHIPPED", "half": "W-HALF", "measured": "W-MEASURED"}
@@ -271,7 +273,7 @@ def build() -> Dict[str, Any]:
 
     return {
         "wave": "B2.4 -- the declared weighting, the ensemble, and two scorer conditions",
-        "prereg": "results/validation/kinetic_core_b2_4_prereg.md",
+        "prereg": data_paths.rel(data_paths.VALIDATION_DIR / "kinetic_core_b2_4_prereg.md"),
         "generated_by": "scripts/generators/generate_kinetic_core_b2_4_reports.py",
         "declared_weights": ensemble["declared_weights"],
         "weight_basis": ensemble["weight_basis"],

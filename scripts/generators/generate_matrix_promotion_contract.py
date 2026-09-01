@@ -11,13 +11,14 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.benchmark_validation import build_matrix_promotion_contract_artifact
 from src.presentation import render_matrix_promotion_contract_markdown
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)

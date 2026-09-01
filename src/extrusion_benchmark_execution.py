@@ -6,11 +6,18 @@ from typing import Any, Dict, Iterable, Mapping
 
 import yaml
 
+from src import data_paths
 from src.extrusion import build_extrusion_process_profile, compute_extrusion_headspace_adjustment
 from src.matrix_experiment_intake import build_matrix_experiment_support_delta_artifact
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = data_paths.REPO_ROOT
+
+
+def _under_root(root: Path, default: Path) -> Path:
+    """``default`` when ``root`` is the repository checkout; the same repo-relative file
+    re-rooted under ``root`` otherwise (tests and scripts pass explicit roots)."""
+    return default if root == data_paths.REPO_ROOT else root / data_paths.rel(default)
 
 
 def _load_yaml(path: Path | str) -> Dict[str, Any]:
@@ -27,7 +34,7 @@ def _load_json(path: Path) -> Dict[str, Any]:
 
 
 def _load_benchmark(benchmark_id: str, root: Path = ROOT) -> Dict[str, Any]:
-    path = root / "data" / "benchmarks" / f"{benchmark_id}.json"
+    path = _under_root(root, data_paths.benchmark_path(benchmark_id))
     payload = _load_json(path)
     if not payload:
         raise ValueError(f"Benchmark id not found: {benchmark_id}")

@@ -11,6 +11,7 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence
 import pandas as pd
 import yaml
 
+from src import data_paths
 from src.benchmark_validation import get_benchmark_files
 from src.matrix_experiment_intake import (
     build_matrix_experiment_benchmark_payload,
@@ -22,12 +23,11 @@ from src.presentation import render_matrix_experiment_support_delta_markdown
 from src.uncertainty_propagation import propagate_benchmarks
 
 
-ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT_DIR = ROOT / "results" / "validation"
+DEFAULT_OUTPUT_DIR = data_paths.VALIDATION_DIR
 #: Preview runs (no --confirm) must not write into the tracked validation
 #: directory. Before 2026-08-27 a plain preview dropped four files into
 #: results/validation/ uninvited, which looked like validated artifacts.
-DEFAULT_PREVIEW_OUTPUT_DIR = ROOT / "results" / "ingest_previews"
+DEFAULT_PREVIEW_OUTPUT_DIR = data_paths.INGEST_PREVIEWS_DIR
 
 
 @dataclass(frozen=True)
@@ -685,8 +685,8 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         help=(
             "Where to write the artifacts. Defaults to "
-            f"'{DEFAULT_PREVIEW_OUTPUT_DIR.relative_to(ROOT)}' in preview mode and "
-            f"'{DEFAULT_OUTPUT_DIR.relative_to(ROOT)}' with --confirm."
+            f"'{data_paths.rel(DEFAULT_PREVIEW_OUTPUT_DIR)}' in preview mode and "
+            f"'{data_paths.rel(DEFAULT_OUTPUT_DIR)}' with --confirm."
         ),
     )
     parser.add_argument(
@@ -776,6 +776,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     else:
         print(
             "Preview only. No canonical intake YAML was written and nothing under "
-            "results/validation/ was touched. Re-run with --confirm to persist the intake YAML."
+            f"{data_paths.rel(DEFAULT_OUTPUT_DIR)}/ was touched. Re-run with --confirm to persist the intake YAML."
         )
     return 0

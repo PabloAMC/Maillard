@@ -285,11 +285,11 @@ PATHWAY_METADATA = {
 def _wire_computational_priors():
     import json
     import math
-    from pathlib import Path
+
+    from src import data_paths
 
     # 1. Load computational priors
-    root = Path(__file__).resolve().parents[1]
-    priors_path = root / "data" / "lit" / "computational_priors.json"
+    priors_path = data_paths.COMPUTATIONAL_PRIORS
     if not priors_path.exists():
         return
 

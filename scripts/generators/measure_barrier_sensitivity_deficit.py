@@ -70,6 +70,7 @@ from rdkit import RDLogger  # noqa: E402
 
 RDLogger.DisableLog("rdApp.*")
 
+from src import data_paths  # noqa: E402
 import src.projection as projection_module  # noqa: E402
 import src.recommend as recommend_module  # noqa: E402
 from src import barrier_constants  # noqa: E402
@@ -80,8 +81,8 @@ from src.benchmark_validation import (  # noqa: E402
 )
 from src.projection import DEFAULT_PROJECTION_STRATEGY  # noqa: E402
 
-OUT_JSON = ROOT / "results" / "validation" / "barrier_sensitivity_deficit.json"
-OUT_MD = ROOT / "results" / "validation" / "barrier_sensitivity_deficit.md"
+OUT_JSON = data_paths.VALIDATION_DIR / "barrier_sensitivity_deficit.json"
+OUT_MD = data_paths.VALIDATION_DIR / "barrier_sensitivity_deficit.md"
 
 R_KCAL = 1.987204258e-3  # kcal / (mol K)
 
@@ -172,7 +173,7 @@ def _channel_flux(rec: Dict[str, Any], analyte_ppb: Optional[float]) -> Optional
 
 
 def probe(spec: Dict[str, Any], temperature_kelvin: float, tau_ref: Optional[float]) -> Dict[str, Any]:
-    bench = load_benchmark(ROOT / "data" / "benchmarks" / f"{spec['benchmark_id']}.json")
+    bench = load_benchmark(data_paths.benchmark_path(spec['benchmark_id']))
     base = _run(bench, None, 0.0)
     pert = _run(bench, spec["family"], DELTA_KCAL)
 
@@ -232,13 +233,13 @@ def main(argv: list[str] | None = None) -> int:
 
     shipped_tau = float(DEFAULT_PROJECTION_STRATEGY.reference_conversion_time_min)
     constraint = json.loads(
-        (ROOT / "results" / "validation" / "projection_budget_step_yield_constraint.json").read_text()
+        (data_paths.VALIDATION_DIR / "projection_budget_step_yield_constraint.json").read_text()
     )
     counterfactual_tau = float(constraint["implied_reference_conversion_time_min"])
 
     rows_shipped: List[Dict[str, Any]] = []
     for spec in PROBES:
-        bench = load_benchmark(ROOT / "data" / "benchmarks" / f"{spec['benchmark_id']}.json")
+        bench = load_benchmark(data_paths.benchmark_path(spec['benchmark_id']))
         temperature = float(bench["conditions"]["temp_C"]) + 273.15
         rows_shipped.append(probe(spec, temperature, shipped_tau))
 
@@ -246,7 +247,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         rows_counterfactual: List[Dict[str, Any]] = []
         for spec in PROBES:
-            bench = load_benchmark(ROOT / "data" / "benchmarks" / f"{spec['benchmark_id']}.json")
+            bench = load_benchmark(data_paths.benchmark_path(spec['benchmark_id']))
             temperature = float(bench["conditions"]["temp_C"]) + 273.15
             rows_counterfactual.append(probe(spec, temperature, counterfactual_tau))
     finally:
@@ -263,7 +264,7 @@ def main(argv: list[str] | None = None) -> int:
         "shipped_budget": {"reference_conversion_time_min": shipped_tau, "rows": rows_shipped},
         "counterfactual_budget": {
             "reference_conversion_time_min": counterfactual_tau,
-            "source": "results/validation/projection_budget_step_yield_constraint.json",
+            "source": data_paths.rel(data_paths.VALIDATION_DIR / "projection_budget_step_yield_constraint.json"),
             "rows": rows_counterfactual,
         },
     }

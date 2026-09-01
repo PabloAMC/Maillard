@@ -6,14 +6,20 @@ import argparse
 import json
 import re
 from collections import defaultdict
+import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEEP_RESEARCH_DIR = ROOT / "data" / "Gemini_Deep_Research"
-REGISTRY_FILE = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
-OUTPUT_JSON = ROOT / "data" / "lit" / "deep_research_backlog.json"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+DEEP_RESEARCH_DIR = data_paths.RESEARCH_CORPUS_DIR
+REGISTRY_FILE = data_paths.BENCHMARK_INTAKE_REGISTRY
+OUTPUT_JSON = data_paths.DEEP_RESEARCH_BACKLOG
 OUTPUT_MD = ROOT / "reports" / "deep_research_gap_analysis.md"
 NUMBERED_REPORT_PATTERN = re.compile(r"^\d{2}_.+\.md$")
 ENTRY_PATTERN = re.compile(
@@ -306,7 +312,7 @@ def main() -> None:
         f"Found {summary['total_occurrences']} eligible occurrences across {summary['unique_citations']} unique citations; "
         f"runtime-bound={summary['runtime_bound']}, registry-only={summary['registry_only']}, backlog={summary['backlog']}."
     )
-    print(f"Reports saved to {OUTPUT_JSON.relative_to(ROOT)} and {OUTPUT_MD.relative_to(ROOT)}")
+    print(f"Reports saved to {data_paths.rel(OUTPUT_JSON)} and {OUTPUT_MD.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

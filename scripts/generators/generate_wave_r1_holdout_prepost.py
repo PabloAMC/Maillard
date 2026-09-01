@@ -51,9 +51,11 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-VALIDATION = ROOT / "results" / "validation"
+from src import data_paths
+
+VALIDATION = data_paths.VALIDATION_DIR
 FROZEN = VALIDATION / "maillard_path_holdout_frozen_predictions.json"
-PATCH_FILE = ROOT / "data" / "lit" / "refinement_surrogate_patches.json"
+PATCH_FILE = data_paths.REFINEMENT_SURROGATE_PATCHES
 FROZEN_COMMIT = "12f43dd"
 
 OUT_JSON = VALIDATION / "holdout_prepost_barrier_offset_retirement.json"

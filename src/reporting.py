@@ -22,6 +22,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Iterable
 
+from src import data_paths
 from src.input_normalization import resolve_condition_float, resolve_condition_value
 from src.pipeline import FormulationResult, UncertaintyEnvelope
 from src.literature_learning_loop import build_literature_learning_loop_payload
@@ -524,7 +525,12 @@ def _build_family_specific_open_gaps(result: FormulationResult) -> List[Dict[str
 
 
 def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+    return data_paths.REPO_ROOT
+
+
+def _validation_artifact(root: Path, name: str) -> Path:
+    """``results/validation/<name>`` under ``root`` (a caller-supplied repo root)."""
+    return root / data_paths.rel(data_paths.VALIDATION_DIR / name)
 
 
 def _to_repo_relative(path: Path, root: Path) -> str:
@@ -549,7 +555,7 @@ def _configure_report_plot_style() -> None:
 
 @lru_cache(maxsize=4)
 def _load_external_validation_compounds(root_str: str) -> set[str]:
-    path = Path(root_str) / "results" / "validation" / "external_validation_report.json"
+    path = Path(root_str) / data_paths.rel(data_paths.EXTERNAL_VALIDATION_REPORT)
     if not path.exists():
         return set()
     try:
@@ -571,7 +577,7 @@ def _load_external_failing_compounds(root_str: str) -> set[str]:
     """Lane F (sprint 2026-05-10b): compounds whose mean |log10 error| exceeds
     the failing threshold on the external hold-out. Returned as normalized keys.
     """
-    path = Path(root_str) / "results" / "validation" / "external_failing_compounds.json"
+    path = Path(root_str) / data_paths.rel(data_paths.EXTERNAL_FAILING_COMPOUNDS)
     if not path.exists():
         return set()
     try:
@@ -1099,50 +1105,50 @@ def _safe_git_output(root: Path, args: List[str]) -> Optional[str]:
 
 def _build_scientific_surface(root: Path) -> Dict[str, str]:
     references = {
-        "scientific_reference": root / "docs/reference/SCIENTIFIC_REFERENCE.md",
-        "benchmark_summary": root / "results/validation/benchmark_summary.md",
-        "validated_envelope": root / "results/validation/validated_envelope.md",
-        "validation_overview": root / "results/validation/validation_overview.md",
-        "matrix_decision_panel": root / "data/lit/matrix_decision_panel.json",
-        "chemistry_family_scope_registry": root / "data/lit/chemistry_family_scope_registry.json",
-        "family_ingestion_plan_registry": root / "data/lit/family_ingestion_plan.json",
-        "family_identifier_contract": root / "results/validation/family_identifier_contract.md",
-        "family_identifier_contract_json": root / "results/validation/family_identifier_contract.json",
-        "family_strategy_policy": root / "results/validation/family_strategy_policy.md",
-        "family_strategy_policy_json": root / "results/validation/family_strategy_policy.json",
-        "family_payload_coverage": root / "results/validation/family_payload_coverage.md",
-        "family_payload_coverage_json": root / "results/validation/family_payload_coverage.json",
-        "matrix_family_coverage_registry": root / "data/lit/matrix_family_coverage_registry.json",
-        "benchmark_intake_registry": root / "data/lit/benchmark_intake_registry.json",
-        "computational_priors": root / "data/lit/computational_priors.json",
-        "slr_incorporation_matrix": root / "data/lit/slr_incorporation_matrix.json",
-        "flavor_reference_payloads": root / "data/lit/flavor_reference_payloads.json",
-        "process_state_calibrations": root / "data/lit/process_state_calibrations.json",
-        "retention_reference_payloads": root / "data/lit/retention_reference_payloads.json",
-        "process_gap_registry": root / "data/lit/process_gap_registry.json",
-        "safety_reference_payloads": root / "data/lit/safety_reference_payloads.json",
-        "primary_benchmark_protocol": root / "docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md",
-        "primary_benchmark_contract": root / "data/protocols/ppi_spi_primary_benchmark_contract.json",
-        "literature_learning_loop": root / "results/validation/literature_learning_loop.md",
-        "literature_learning_loop_json": root / "results/validation/literature_learning_loop.json",
-        "literature_backlog": root / "results/validation/literature_backlog.md",
-        "literature_backlog_json": root / "results/validation/literature_backlog.json",
-        "deep_research_runtime_queue": root / "results/validation/deep_research_runtime_queue.md",
-        "deep_research_runtime_queue_json": root / "results/validation/deep_research_runtime_queue.json",
-        "literature_runtime_templates": root / "results/validation/literature_runtime_templates.json",
-        "family_ingestion_plan": root / "results/validation/family_ingestion_plan.md",
-        "family_ingestion_plan_json": root / "results/validation/family_ingestion_plan.json",
-        "matrix_target_status": root / "results/validation/matrix_target_status.md",
-        "matrix_target_status_json": root / "results/validation/matrix_target_status.json",
-        "chemistry_family_scope": root / "results/validation/chemistry_family_scope.md",
-        "chemistry_family_scope_json": root / "results/validation/chemistry_family_scope.json",
-        "matrix_family_coverage": root / "results/validation/matrix_family_coverage.md",
-        "matrix_family_coverage_json": root / "results/validation/matrix_family_coverage.json",
-        "family_sensitivity": root / "results/validation/family_sensitivity.md",
-        "family_sensitivity_json": root / "results/validation/family_sensitivity.json",
-        "family_lane_validation": root / "results/validation/family_lane_validation.md",
-        "family_lane_validation_json": root / "results/validation/family_lane_validation.json",
-        "refinement_surrogate_patches": root / "data/lit/refinement_surrogate_patches.json",
+        "scientific_reference": root / data_paths.rel(data_paths.SCIENTIFIC_REFERENCE_MD),
+        "benchmark_summary": _validation_artifact(root, "benchmark_summary.md"),
+        "validated_envelope": _validation_artifact(root, "validated_envelope.md"),
+        "validation_overview": _validation_artifact(root, "validation_overview.md"),
+        "matrix_decision_panel": root / data_paths.rel(data_paths.MATRIX_DECISION_PANEL),
+        "chemistry_family_scope_registry": root / data_paths.rel(data_paths.CHEMISTRY_FAMILY_SCOPE_REGISTRY),
+        "family_ingestion_plan_registry": root / data_paths.rel(data_paths.FAMILY_INGESTION_PLAN),
+        "family_identifier_contract": _validation_artifact(root, "family_identifier_contract.md"),
+        "family_identifier_contract_json": _validation_artifact(root, "family_identifier_contract.json"),
+        "family_strategy_policy": _validation_artifact(root, "family_strategy_policy.md"),
+        "family_strategy_policy_json": _validation_artifact(root, "family_strategy_policy.json"),
+        "family_payload_coverage": _validation_artifact(root, "family_payload_coverage.md"),
+        "family_payload_coverage_json": _validation_artifact(root, "family_payload_coverage.json"),
+        "matrix_family_coverage_registry": root / data_paths.rel(data_paths.MATRIX_FAMILY_COVERAGE_REGISTRY),
+        "benchmark_intake_registry": root / data_paths.rel(data_paths.BENCHMARK_INTAKE_REGISTRY),
+        "computational_priors": root / data_paths.rel(data_paths.COMPUTATIONAL_PRIORS),
+        "slr_incorporation_matrix": root / data_paths.rel(data_paths.SLR_INCORPORATION_MATRIX),
+        "flavor_reference_payloads": root / data_paths.rel(data_paths.FLAVOR_REFERENCE_PAYLOADS),
+        "process_state_calibrations": root / data_paths.rel(data_paths.PROCESS_STATE_CALIBRATIONS),
+        "retention_reference_payloads": root / data_paths.rel(data_paths.RETENTION_REFERENCE_PAYLOADS),
+        "process_gap_registry": root / data_paths.rel(data_paths.PROCESS_GAP_REGISTRY),
+        "safety_reference_payloads": root / data_paths.rel(data_paths.SAFETY_REFERENCE_PAYLOADS),
+        "primary_benchmark_protocol": root / data_paths.rel(data_paths.PRIMARY_BENCHMARK_PROTOCOL_MD),
+        "primary_benchmark_contract": root / data_paths.rel(data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT),
+        "literature_learning_loop": _validation_artifact(root, "literature_learning_loop.md"),
+        "literature_learning_loop_json": _validation_artifact(root, "literature_learning_loop.json"),
+        "literature_backlog": _validation_artifact(root, "literature_backlog.md"),
+        "literature_backlog_json": _validation_artifact(root, "literature_backlog.json"),
+        "deep_research_runtime_queue": _validation_artifact(root, "deep_research_runtime_queue.md"),
+        "deep_research_runtime_queue_json": _validation_artifact(root, "deep_research_runtime_queue.json"),
+        "literature_runtime_templates": _validation_artifact(root, "literature_runtime_templates.json"),
+        "family_ingestion_plan": _validation_artifact(root, "family_ingestion_plan.md"),
+        "family_ingestion_plan_json": _validation_artifact(root, "family_ingestion_plan.json"),
+        "matrix_target_status": _validation_artifact(root, "matrix_target_status.md"),
+        "matrix_target_status_json": _validation_artifact(root, "matrix_target_status.json"),
+        "chemistry_family_scope": _validation_artifact(root, "chemistry_family_scope.md"),
+        "chemistry_family_scope_json": _validation_artifact(root, "chemistry_family_scope.json"),
+        "matrix_family_coverage": _validation_artifact(root, "matrix_family_coverage.md"),
+        "matrix_family_coverage_json": _validation_artifact(root, "matrix_family_coverage.json"),
+        "family_sensitivity": _validation_artifact(root, "family_sensitivity.md"),
+        "family_sensitivity_json": _validation_artifact(root, "family_sensitivity.json"),
+        "family_lane_validation": _validation_artifact(root, "family_lane_validation.md"),
+        "family_lane_validation_json": _validation_artifact(root, "family_lane_validation.json"),
+        "refinement_surrogate_patches": root / data_paths.rel(data_paths.REFINEMENT_SURROGATE_PATCHES),
     }
     payload: Dict[str, str] = {}
     for key, path in references.items():
@@ -1152,7 +1158,7 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
 
 def _build_literature_evidence_summary(root: Optional[Path] = None) -> Dict[str, Any]:
     repo_root = root or _repo_root()
-    intake_path = repo_root / "data" / "lit" / "benchmark_intake_registry.json"
+    intake_path = repo_root / data_paths.rel(data_paths.BENCHMARK_INTAKE_REGISTRY)
     if not intake_path.exists():
         return {}
 
@@ -1249,8 +1255,8 @@ def _render_next_experiment_markdown(
     so the scientist still sees actionable rows.
     """
     repo_root = _repo_root()
-    default_ranking = repo_root / "results" / "validation" / "experiment_value_ranking.json"
-    default_prediction = repo_root / "results" / "validation" / "prediction_uncertainty.json"
+    default_ranking = data_paths.EXPERIMENT_VALUE_RANKING
+    default_prediction = data_paths.PREDICTION_UNCERTAINTY
     ranking_path = Path(ranking_path) if ranking_path else default_ranking
     prediction_path = Path(prediction_path) if prediction_path else default_prediction
 

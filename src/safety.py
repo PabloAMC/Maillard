@@ -39,14 +39,13 @@ import math
 import re
 import warnings
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any, Dict, List, Tuple, Optional
 
 from src.extrusion import normalize_moisture_regime
+from src import data_paths
 
 
-ROOT = Path(__file__).resolve().parents[1]
-SAFETY_REFERENCE_PAYLOAD_PATH = ROOT / "data" / "lit" / "safety_reference_payloads.json"
+SAFETY_REFERENCE_PAYLOAD_PATH = data_paths.SAFETY_REFERENCE_PAYLOADS
 
 
 #: Single source of truth for the units of everything this module exchanges.

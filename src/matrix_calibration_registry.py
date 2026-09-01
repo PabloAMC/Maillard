@@ -4,12 +4,10 @@ import json
 import math
 import os
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Dict, Optional
 
+from src import data_paths
 
-ROOT = Path(__file__).resolve().parents[1]
-MATRIX_CALIBRATION_OFFSETS_PATH = ROOT / "data" / "lit" / "matrix_calibration_offsets.json"
 _RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 
 
@@ -689,10 +687,10 @@ _MATRIX_RUNTIME_COMPOSITION_RULES = (
 
 
 def _load_persisted_matrix_multipliers() -> Dict[str, Dict[str, object]]:
-    if not MATRIX_CALIBRATION_OFFSETS_PATH.exists():
+    if not data_paths.MATRIX_CALIBRATION_OFFSETS.exists():
         return {}
     try:
-        payload = json.loads(MATRIX_CALIBRATION_OFFSETS_PATH.read_text(encoding="utf-8"))
+        payload = json.loads(data_paths.MATRIX_CALIBRATION_OFFSETS.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
     entries = payload.get("entries", {}) if isinstance(payload, dict) else {}

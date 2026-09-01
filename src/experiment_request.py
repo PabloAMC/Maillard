@@ -25,6 +25,7 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence
 
 import yaml
 
+from src import data_paths
 from src.benchmark_validation import (
     get_benchmark_files,
     load_benchmark,
@@ -32,18 +33,17 @@ from src.benchmark_validation import (
 from src.doe_generator import DOE_TEMPLATES
 from src.experiment_value import ExperimentCandidate, infer_matrix_family
 
-ROOT = Path(__file__).resolve().parents[1]
 # Both halves of a request are GENERATED artifacts and live together under results/.
 # (Until 2026-09-01 the intake YAML was written into data/protocols/, i.e. ranker
 # output was committed as a curated protocol.)
-REQUESTS_DIR = ROOT / "results" / "validation" / "experiment_requests"
+REQUESTS_DIR = data_paths.EXPERIMENT_REQUESTS_DIR
 PROTOCOLS_DIR = REQUESTS_DIR
 
 
 def _display_path(path: Path) -> str:
     """Repo-relative path when possible, otherwise the path itself."""
     try:
-        return str(path.relative_to(ROOT))
+        return str(path.relative_to(data_paths.REPO_ROOT))
     except ValueError:
         return str(path)
 

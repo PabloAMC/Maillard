@@ -113,6 +113,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.benchmark_validation import (  # noqa: E402
     MATRIX_BENCHMARK_BASE_MARKER_YIELDS,
     MATRIX_BENCHMARK_PROFILES,
@@ -133,9 +134,9 @@ from src.matrix_calibration_registry import (  # noqa: E402
     determine_matrix_process_state,
 )
 
-BENCH_DIR = ROOT / "data" / "benchmarks"
-OUT_JSON = ROOT / "results" / "validation" / "matrix_marker_yield_rederivation.json"
-OUT_MD = ROOT / "results" / "validation" / "matrix_marker_yield_rederivation.md"
+BENCH_DIR = data_paths.BENCHMARKS_DIR
+OUT_JSON = data_paths.VALIDATION_DIR / "matrix_marker_yield_rederivation.json"
+OUT_MD = data_paths.VALIDATION_DIR / "matrix_marker_yield_rederivation.md"
 
 # The fit corpus, as ids. Nothing outside this tuple is read for a measured value.
 ANCHOR_BENCHMARKS = (

@@ -13,9 +13,8 @@ from typing import Dict, List, Any, Set, Tuple, Optional
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 from src.headspace import HeadspaceModel  # noqa: E402
 from src.text_utils import normalize_compound_name
+from src import data_paths
 
-
-ROOT = Path(__file__).resolve().parents[1]
 
 logger = logging.getLogger(__name__)
 
@@ -89,10 +88,10 @@ class SensoryDatabase:
     Loads from YAML files and provides normalized ODT lookups.
     """
     
-    def __init__(self, data_dir: str = "data/species"):
+    def __init__(self, data_dir: str | Path = data_paths.SPECIES_DIR):
         data_path = Path(data_dir)
         if not data_path.is_absolute():
-            data_path = ROOT / data_path
+            data_path = data_paths.REPO_ROOT / data_path
         self.data_dir = data_path
         self.compounds = {}  # key: name, value: data
         self.smiles_map = {}

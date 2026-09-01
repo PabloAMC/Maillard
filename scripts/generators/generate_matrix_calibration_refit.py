@@ -11,12 +11,13 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.matrix_recalibration import run_matrix_recalibration, write_refit_artifacts
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the matrix observable recalibration guard and emit an accept/reject artifact.")
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--write-changes", action="store_true", help="Persist accepted observable multipliers to data/lit/matrix_calibration_offsets.json.")
     parser.add_argument("--uncertainty-samples", type=int, default=60)
     parser.add_argument("--uncertainty-seed", type=int, default=0)

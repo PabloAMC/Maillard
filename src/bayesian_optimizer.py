@@ -1,9 +1,7 @@
 import optuna
-from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-ROOT = Path(__file__).resolve().parents[1]
-
+from src import data_paths
 from src.pipeline import MaillardPipeline  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
 from src.pre_processor import PreProcessor  # noqa: E402
@@ -170,7 +168,7 @@ class FormulationOptimizer:
 
         # Phase 20: Suggest interventions from library
         import yaml
-        LIBRARY_PATH = ROOT / "data" / "interventions.yml"
+        LIBRARY_PATH = data_paths.INTERVENTIONS
         if LIBRARY_PATH.exists():
             with open(LIBRARY_PATH, "r") as f:
                 lib_data = yaml.safe_load(f)

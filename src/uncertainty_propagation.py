@@ -43,9 +43,9 @@ from src.benchmark_validation import (
     matrix_source_anchor,
 )
 
+from src import data_paths
 
-ROOT = Path(__file__).resolve().parents[1]
-PREDICTION_UNCERTAINTY_PATH = ROOT / "results" / "validation" / "prediction_uncertainty.json"
+PREDICTION_UNCERTAINTY_PATH = data_paths.PREDICTION_UNCERTAINTY
 
 # Default Gaussian sigma (kcal/mol) per barrier-family offset key. The keys
 # match the ones already accepted by BARRIER_OFFSETS via barrier_constants.
@@ -1013,7 +1013,7 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
 def write_artifact(
     payload: Mapping[str, Any],
     *,
-    output_dir: Path | str = ROOT / "results" / "validation",
+    output_dir: Path | str = data_paths.VALIDATION_DIR,
     basename: str = "prediction_uncertainty",
 ) -> Dict[str, Path]:
     output_dir = Path(output_dir)

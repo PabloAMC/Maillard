@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from src import data_paths  # noqa: E402
 from src.config import DEFAULTS  # noqa: E402
 from src.logger import get_logger  # noqa: E402
 from src.exceptions import KineticsError  # noqa: E402
@@ -283,14 +284,14 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Cantera microkinetic simulation for Maillard.")
-    parser.add_argument("--input", "-i", type=str, default="results/maillard_results.db",
+    parser.add_argument("--input", "-i", type=str, default=data_paths.rel(data_paths.RESULTS_DB),
                         help="Path to the Results DB (.db) or legacy JSON.")
     parser.add_argument("--precursors", "-p", type=str, required=True,
                         help="Comma-separated precursors and molarities (e.g., 'ribose:0.1,glycine:0.1')")
     parser.add_argument("--temp", "-T", type=float, help="Temperature in Celsius (isothermal)")
     parser.add_argument("--temp-ramp", type=str, help="Path to CSV file with 'time,temp' columns for a ramp.")
     parser.add_argument("--time", "-t", type=float, default=DEFAULTS.default_cantera_time_sec, help="Total simulation time in seconds")
-    parser.add_argument("--output", "-o", type=str, default="results/sim_maillard", help="Output file prefix")
+    parser.add_argument("--output", "-o", type=str, default=data_paths.rel(data_paths.RESULTS_ROOT / "sim_maillard"), help="Output file prefix")
     parser.add_argument("--predict-sensory", action="store_true", help="Predict sensory aroma profile")
     parser.add_argument("--from-smirks", action="store_true", help="Generate network dynamically via SmirksEngine")
     parser.add_argument("--track", type=str, help="Comma-separated species names to track even if not precursors")

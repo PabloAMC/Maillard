@@ -4,10 +4,12 @@ import json
 from pathlib import Path
 from typing import Any
 
+from src import data_paths
+
 
 def repo_root() -> Path:
     """Canonical project root (parent of the ``src/`` package directory)."""
-    return Path(__file__).resolve().parents[1]
+    return data_paths.REPO_ROOT
 
 
 def resolve_optional_path(file_path: Path | str | None, default_path: Path) -> Path:

@@ -14,7 +14,7 @@ def test_temporal_accessibility_increases_with_time():
     long = _temporal_accessibility(total_tau_minutes=60.0, time_minutes=60.0)
     assert long > short
 
-def test_temporal_ramp_in_fast_mode():
+def test_temporal_ramp_in_fast_mode(tmp_path, caplog):
     """
     Verify that the FAST recommender correctly ingests temporal profile CSVs
     and uses integrated Arrhenius propensity (SOTA).
@@ -40,11 +40,15 @@ def test_temporal_ramp_in_fast_mode():
     
     initial = {ribose_smi: 1.0}
     
-    # Use the test ramp we created
-    ramp_path = "data/temp_profiles/test_ramp.csv"
-    
-    # Call with the new parameter
-    res = recommender.predict_from_steps(steps, barriers, initial, temp_ramp_csv=ramp_path)
+    # A real ramp file. Until 2026-09-01 this test pointed at a path that did not exist
+    # (data/temp_profiles/test_ramp.csv); _load_ramp logged a warning, returned [], and the
+    # test silently exercised the NON-ramp path while claiming to test ramps.
+    ramp_path = tmp_path / "test_ramp.csv"
+    ramp_path.write_text("time,temp\n0,25\n10,100\n30,140\n45,140\n", encoding="utf-8")
+
+    with caplog.at_level("WARNING"):
+        res = recommender.predict_from_steps(steps, barriers, initial, temp_ramp_csv=str(ramp_path))
+    assert "Failed to load ramp" not in caplog.text
     
     assert res is not None
     assert "metrics" in res

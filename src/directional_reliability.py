@@ -51,15 +51,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
-ROOT = Path(__file__).resolve().parents[1]
+from src import data_paths
 
 #: The artifact this module reads. Its CURRENT STANDING section is the live panel score.
-DIRECTIONAL_REPORT_PATH = ROOT / "docs" / "validation" / "directional_accuracy_report.md"
+DIRECTIONAL_REPORT_PATH = data_paths.DIRECTIONAL_ACCURACY_REPORT
 
 #: The panel data itself, used only to check that the categories we tag are categories the
 #: panel actually contains -- so a typo in an axis name is caught rather than silently
 #: reported as "unmeasured".
-DIRECTIONAL_PANEL_PATH = ROOT / "docs" / "validation" / "directional_claims_panel.yml"
+DIRECTIONAL_PANEL_PATH = data_paths.DIRECTIONAL_CLAIMS_PANEL
 
 _CURRENT_STANDING_HEADING = "# CURRENT STANDING"
 

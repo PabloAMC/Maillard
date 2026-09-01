@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.curated_pathways import PATHWAYS  # noqa: E402
 from src.plot_style import configure_science_plot_style  # noqa: E402
 
@@ -573,7 +574,7 @@ def main() -> int:
     # (Title removed to prevent overlap with legends and support clean embedding in documents)
 
     # 6. Save Plot
-    output_dir = ROOT / "results" / "validation"
+    output_dir = data_paths.VALIDATION_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path_png = output_dir / "reaction_network.png"
     output_path_pdf = output_dir / "reaction_network.pdf"

@@ -113,14 +113,14 @@ see tasks/audit_remediation.md.
 import json
 import yaml
 import math
-from pathlib import Path
 from typing import Any, Dict, Tuple, Optional, Sequence
 
+from src import data_paths
+
 # Locate data files
-ROOT = Path(__file__).resolve().parents[1]
-ARRHENIUS_FILE = ROOT / "data" / "lit" / "arrhenius_params.yml"
-REFINEMENT_PATCH_FILE = ROOT / "data" / "lit" / "refinement_surrogate_patches.json"
-COMPUTATIONAL_PRIORS_FILE = ROOT / "data" / "lit" / "computational_priors.json"
+ARRHENIUS_FILE = data_paths.ARRHENIUS_PARAMS
+REFINEMENT_PATCH_FILE = data_paths.REFINEMENT_SURROGATE_PATCHES
+COMPUTATIONAL_PRIORS_FILE = data_paths.COMPUTATIONAL_PRIORS
 
 # Exact Mapping: normalized reaction family name → barrier in kcal/mol.
 # Replaces fragile substring matching.

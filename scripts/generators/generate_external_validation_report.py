@@ -12,12 +12,13 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.external_validation import build_external_validation_report, write_external_validation_artifact
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     parser.add_argument("--basename", default="external_validation_report")
     parser.add_argument("--n-samples", type=int, default=200)
     parser.add_argument("--seed", type=int, default=0)

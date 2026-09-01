@@ -12,6 +12,7 @@ from typing import Dict, Optional, List
 from src.logger import get_logger
 logger = get_logger(__name__)
 
+from src import data_paths
 from src.matrix_calibration_registry import (
     determine_matrix_process_state,
     get_matrix_calibration_record,
@@ -56,8 +57,11 @@ class HeadspaceModel:
     Accounts for temperature (Van't Hoff) and matrix suppression (lipids/proteins).
     """
 
-    def __init__(self, constants_path: str = "data/lit/henry_constants.yml"):
-        self.constants_path = Path(constants_path)
+    def __init__(self, constants_path: str | Path = data_paths.HENRY_CONSTANTS):
+        constants_path = Path(constants_path)
+        if not constants_path.is_absolute():
+            constants_path = data_paths.REPO_ROOT / constants_path
+        self.constants_path = constants_path
         self.data = self._load_constants()
         self.R = 0.008314  # kJ/(mol*K)
 

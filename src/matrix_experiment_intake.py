@@ -22,12 +22,9 @@ from src.benchmark_validation import (
     load_benchmark,
     summarize_evaluation_for_benchmark,
 )
+from src import data_paths
 from src.matrix_targets import get_compound_panel_entry
 
-
-ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SCHEMA_PATH = ROOT / "data" / "protocols" / "matrix_experiment_intake_schema.json"
-DEFAULT_EXAMPLE_PATH = ROOT / "data" / "protocols" / "example_matrix_experiment_intake.yaml"
 
 _SOURCE_KINDS = {"external_literature", "internal_experiment", "synthetic_diagnostic"}
 _EVIDENCE_CLASSES = {"calibration_candidate", "external_validation_only", "diagnostic_only"}
@@ -43,7 +40,7 @@ _SUPPORT_RANK = {
 
 
 def load_matrix_experiment_intake_schema(path: Optional[Path | str] = None) -> Dict[str, Any]:
-    schema_path = Path(path) if path is not None else DEFAULT_SCHEMA_PATH
+    schema_path = Path(path) if path is not None else data_paths.MATRIX_EXPERIMENT_INTAKE_SCHEMA
     with open(schema_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 

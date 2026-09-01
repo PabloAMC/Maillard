@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
 from src.benchmark_validation import evaluate_benchmark_payload, load_benchmark
 from src.matrix_experiment_intake import materialize_matrix_experiment_benchmark
 
@@ -257,7 +258,7 @@ def _refresh_contract_ranks(contract: dict, predicted: dict) -> None:
 
 
 def refresh_internal(protein: str) -> dict:
-    path = ROOT / "data" / "benchmarks" / f"{protein}_isolate_ribose_cysteine_100C_45min_Internal2026.json"
+    path = data_paths.benchmark_path(f"{protein}_isolate_ribose_cysteine_100C_45min_Internal2026")
     bench = load_benchmark(path)
     evaluation = evaluate_benchmark_payload(bench)
     predicted = dict(evaluation.predicted_ppb or {})
@@ -279,7 +280,7 @@ def refresh_internal(protein: str) -> dict:
 
 
 def refresh_protocol_pilot(protein: str, predicted: dict) -> None:
-    yaml_path = ROOT / "data" / "protocols" / f"{protein}_iso_protocol_pilot_intake.yaml"
+    yaml_path = data_paths.PROTOCOLS_DIR / f"{protein}_iso_protocol_pilot_intake.yaml"
     payload = yaml.safe_load(yaml_path.read_text())
 
     measured = payload.get("measured_volatiles") or {}
@@ -291,7 +292,7 @@ def refresh_protocol_pilot(protein: str, predicted: dict) -> None:
     yaml_path.write_text(yaml.safe_dump(payload, sort_keys=False, allow_unicode=True))
 
     bench = materialize_matrix_experiment_benchmark(yaml_path)
-    out = ROOT / "data" / "benchmarks" / f"{protein}_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json"
+    out = data_paths.benchmark_path(f"{protein}_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026")
     out.write_text(json.dumps(bench, indent=2, sort_keys=True) + "\n")
 
 

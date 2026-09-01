@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.extrusion_benchmark_execution import (  # noqa: E402
     export_extrusion_external_closure_execution,
     render_extrusion_external_closure_execution_markdown,
@@ -20,7 +21,7 @@ from src.extrusion_benchmark_execution import (  # noqa: E402
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--workbook", required=True)
-    parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--output-dir", default=data_paths.rel(data_paths.VALIDATION_DIR))
     args = parser.parse_args()
 
     artifact = export_extrusion_external_closure_execution(args.workbook, args.output_dir, root=ROOT)
