@@ -16,13 +16,13 @@ src/            Runtime package — kinetics, retention, headspace,
 scripts/        CLI entrypoints and one-shot research scripts.
                 Scientist-facing CLIs route through src/usability_reports.py.
 
-data/           Curated inputs only (priors, lit, benchmarks, protocols, species).
-                No generated artifacts, no Python (the stale data/reactions/curated_pathways.py
-                copy was deleted 2026-09-01). Read-only at runtime, enforced by
-                scripts/ci/data_readonly_gate.py. Examples live in docs/examples/, intake
-                templates in docs/templates/, test fixtures in tests/fixtures/.
-                For the literature database and ingestion, see [data/lit/README.md](data/lit/README.md).
-                Restructure in progress: tasks/data_restructure_plan.md.
+data/           Curated inputs only; read-only at runtime (scripts/ci/data_readonly_gate.py).
+                Generated map of every file: data/README.md. Sub-trees: keys/ (compound and paper
+                identity, generated from seeds), schemas/ (JSON Schemas enforced by
+                scripts/ci/schema_gate.py), species/, lit/, benchmarks/, protocols/.
+                Examples live in docs/examples/, intake templates in docs/templates/, test
+                fixtures in tests/fixtures/. Ingestion workflow: data/lit/README.md.
+                Restructure record: tasks/data_restructure_plan.md.
 
 results/        Generated artifacts. .gitignore'd. Do not hand-edit.
 
@@ -92,6 +92,13 @@ these through the pipeline; never silently upgrade.
 Every barrier is a measured literature value or an explicitly labelled surrogate. The
 former xTB → DFT refinement lane was removed on 2026-08-30/09-01; `assert_no_dft_*()`
 guards in `src/kinetic_core/` run at import.
+
+### Data access
+Paths: `from src import data_paths` (one constant per curated file; never a `"data/..."` string).
+Loads: `data_access.load_json / load_yaml` (missing or malformed files raise `DataFileError`).
+Compound names: `compound_keys.resolve(name)`; papers: `paper_keys.for_doi(doi)`. Adding a
+curated file means: a `data_paths` constant, a line in `build_data_readme.py`, and (for
+benchmarks) passing `data/schemas/benchmark.schema.json`.
 
 ### Naming
 Avoid opaque shorthand (`p3`, `wave1`, `c4_c5`). Name scripts/artifacts after the scientific

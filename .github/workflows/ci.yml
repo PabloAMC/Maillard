@@ -101,7 +101,7 @@ jobs:
       # dependency; deliberately no conda and no science stack, so this check
       # cannot be taken down by a dependency-solve failure.
       - name: Install gate dependencies
-        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0"
+        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0" "jsonschema>=4.0"
 
       - name: Citation contamination gate (offline)
         run: python scripts/ci/citation_gate.py
@@ -117,6 +117,12 @@ jobs:
       # check. Like the other gates in this tier it is stdlib-only and offline.
       - name: Fit-target circularity + constant-precision gate
         run: python scripts/ci/fit_target_gate.py
+
+      # 2026-09-01 (cleaning, Phase 4). Every benchmark payload validates against
+      # data/schemas/benchmark.schema.json, its id equals its file stem, its volatiles
+      # resolve in data/keys/compounds.yml, and hold-out bundles are labelled.
+      - name: Benchmark schema + compound-key gate
+        run: python scripts/ci/schema_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
@@ -408,7 +414,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install gate dependencies
-        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0"
+        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0" "jsonschema>=4.0"
 
       - name: Resolve a random DOI sample against doi.org
         # --fail-on-online is intentionally omitted: dead DOIs are reported in the

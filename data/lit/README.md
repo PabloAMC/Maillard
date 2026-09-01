@@ -4,47 +4,12 @@ This directory houses the structured literature, theoretical priors, and experim
 
 ---
 
-## 1. Directory Structure & File Map
+## 1. File map
 
-To ensure model transparency and traceabilty, all reference files are organised into six functional domains:
-
-### Category A: Core Kinetics & Physical Constants
-These files contain the fundamental physical chemistry constants parameterising the thermodynamic and rate equation calculations.
-*   **[`arrhenius_params.yml`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/arrhenius_params.yml)**: Canonical pre-exponential factors ($A$) and activation energies ($E_a$) parameterising the baseline chemical reactions in `src/smirks_engine.py`.
-*   **[`henry_constants.yml`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/henry_constants.yml)**: Henry's law constants ($K_H$) used by the headspace module (`src/headspace.py`) to resolve gas-liquid partitioning coefficients.
-*   **[`calibration_offsets.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/calibration_offsets.json)**: Per-family barrier offsets produced by an Optuna fit against two benchmarks (`cys_ribose_150C_Mottram1994`, `cys_glucose_150C_Farmer1999`) via `scripts/calibrate_barriers.py`. NOT MLP/xTB-vs-DFT offsets (earlier description was wrong), and currently unwired — no runtime path reads this file (`get_barrier` reads only the `BARRIER_OFFSETS` env var and `refinement_surrogate_patches.json`). **Both fit targets were quarantined on 2026-08-26** (fabricated/unlocatable sources — see `data/benchmarks/quarantined/README.md`) and are no longer in the validation panel. This file must stay unwired until verified sources replace them.
-
-### Category B: Literature & SLR Integration Registries
-Registries translating qualitative literature reviews and systematic surveys into machine-readable status trackers.
-*   **[`benchmark_intake_registry.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/benchmark_intake_registry.json)**: The authoritative catalogue of literature papers and experimental datasets evaluated against quality thresholds.
-*   **[`slr_incorporation_matrix.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/slr_incorporation_matrix.json)**: The ledger tracking which papers from the Systematic Literature Review (SLR) are currently integrated into runtime modules.
-*   **[`family_ingestion_plan.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/family_ingestion_plan.json)**: The implementation roadmap mapping the 16 SLR chemistry lanes to their target modules, preferred payload formats, and development waves. NOTE 2026-08-27: these are literature lanes, not 16 implemented mechanisms — only 5 carry generative reaction templates. See `results/validation/family_implementation_status.md`, derived from the engine by enumeration.
-*   **[`deep_research_backlog.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/deep_research_backlog.json)**: Non-ingested candidate entries identified during automated research passes awaiting manual curation.
-
-### Category C: Theoretical Priors & Sensory Bounds
-These files provide the model with starting default assumptions and safety bounds.
-*   **[`computational_priors.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/computational_priors.json)**: Initial guess parameters for reaction rates and intermediate stability, labeled with confidence tiers (`bounded_calibration`, `transferred_literature`, `surrogate_family`, `xtb_derived`).
-*   **[`flavor_reference_payloads.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/flavor_reference_payloads.json)**: Odor detection thresholds (ODT) and concentration ranges of character-impact compounds in animal muscle matrices vs commercial plant-based analogues.
-*   **[`safety_reference_payloads.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/safety_reference_payloads.json)**: Legally mandated safety limits for undesirable compounds (such as acrylamide or furan) used to constrain optimization pathways.
-
-### Category D: Matrix & Retention Calibrations
-Parameters governing how the complex plant protein matrix alters reaction chemistry and volatile release.
-*   **[`protein_source_registry.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/protein_source_registry.json)**: Endogenous precursor compositions, moisture contents, and amino acid profiles (e.g. for Pea Protein Isolate, Soy Protein Isolate).
-*   **[`retention_reference_payloads.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/retention_reference_payloads.json)**: Experimentally measured volatile retention factors governing the non-covalent binding of flavor compounds to denatured proteins.
-*   **[`process_state_calibrations.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/process_state_calibrations.json)**: Scaling factors modeling how extrusion, heating, and shear alter sulfhydryl accessibility and overall reaction cross-sections.
-*   **[`matrix_decision_panel.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/matrix_decision_panel.json)**: Truth tables resolving matrix-level structural state modifiers.
-*   **[`matrix_family_coverage_registry.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/matrix_family_coverage_registry.json)**: Mapping of matrix-specific modifiers across the 16 chemistry families.
-
-### Category F: Everything else in this directory
-*   **`binding_constants.yml`**: Measured protein–flavour binding constants (Langmuir `f_free` model) with verbatim source quotes and per-source verification status — the record shape the rest of this directory should converge on.
-*   **`lipid_oxidation_calibration.json`**: Lipid-oxidation kinetics, branching ratios and per-matrix lipid profiles read by `src/lipid_oxidation.py`.
-*   **`chemistry_family_scope_registry.json`**: The 16 chemistry lanes as product scope (status, priority, next action); overlaps `family_ingestion_plan.json`, merge planned.
-*   **`extrusion_damage_reference_payloads.json`**: Four damage-marker reference ranges (furosine, CML, CEL, LAL) read by `src/extrusion.py`; same record shape as `safety_reference_payloads.json`, merge planned.
-*   **`process_gap_registry.json`**: Five structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`, merge planned.
-*   **`refinement_surrogate_patches.json`**: RETIRED barrier-offset acceptance file; kept as a tombstone read by `src/barrier_constants.get_barrier` (its `accepted_offsets` must stay empty; guarded by a test).
-*   `extraction_dossiers/`: per-paper extraction records cited as provenance strings by `src/kinetic_core/`. `timeseries/`: digitised concentration-vs-time trajectories used by the trunk-rate fit (see its README).
-
-> 2026-09-01 (cleaning branch): the QM/MLP registries that used to be listed here (`dft_coverage_map`, `computational_gap_*`, `geometry_benchmark_set`, `ts_seed_benchmark_set`, `reaction_benchmark_set`, `mlp_*`, `calibration_offsets`) were deleted with the QM/DFT lane; `canonical_systems.json` moved to `tests/fixtures/`. The restructure plan is in `tasks/data_restructure_plan.md`.
+The per-file map that used to live here is now generated: see **[`data/README.md`](../README.md)**
+(built by `scripts/generators/build_data_readme.py`, kept current by
+`tests/unit/test_data_readme.py`). Paths in code come from `src/data_paths.py`; every load goes
+through `src/data_access.py`; compound and paper identity resolve through `data/keys/`.
 
 ---
 

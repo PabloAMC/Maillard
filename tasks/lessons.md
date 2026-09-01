@@ -98,3 +98,26 @@
 - **Pattern**: A single Colab notebook for an external repo (React-OT) hit five distinct import failures in sequence: missing module after `pip install -e .` (broken upstream packaging), `numpy.rec` missing (forced numpy<2 broke Colab's scipy), `torch_scatter` ABI mismatch (forced torch reinstall on top of Colab's preinstalled torch), `ase.neb` missing (ASE moved NEB to `ase.mep`), `ipdb`/`wandb` missing (upstream imports them at module load).
 - **The Correct Way**: For any third-party repo on Colab — (a) NEVER reinstall torch; derive the PyG wheel index from the preinstalled `torch.__version__`. (b) NEVER pin numpy/pandas; Colab's scipy is built against numpy 2.x. (c) Do the editable install with a fallback to `sys.path` injection because some upstream packages have broken `setup.py`/`pyproject.toml`. (d) Install the obvious dev-dep imports the upstream module-loads (here `ipdb`, `wandb`). (e) Add compat shims (`sys.modules['ase.neb'] = shim`) for any deprecated import paths the upstream still uses. (f) Always print a diagnostic dict (`torch`, `cuda`, `numpy`, `scipy`, `torch_scatter` versions) so failures get attributed correctly.
 - **Workflow corollary**: Colab pulls notebooks live from GitHub — local-only patches are invisible. Push the fix to the branch the user opens.
+
+
+## 2026-09-01 — data restructure (cleaning branch)
+
+- **A gitignored directory under `data/` is invisible to every audit, gate and reviewer.** `data/qm/` shipped 18
+  unsourced barrier windows for four months because `data/*` was ignored wholesale. Rule: `.gitignore` whitelists
+  data files explicitly; `git ls-files -i -c --exclude-standard` must be empty.
+- **Silent fallbacks hide broken installs as bad science.** `HeadspaceModel()` resolved its constants relative to the
+  CWD and fell back to `Kaw = 0.01` for every compound with no message; `_load_ramp` logged a warning and ran
+  isothermally; a dozen loaders returned `{}` for a missing registry. Rule: curated files are loaded through
+  `src/data_access.py`, which raises. A test that points a loader at a nonexistent path must expect an exception.
+- **Tests that write into the repo tree accumulate.** 102 `calibration_history` files were pytest droppings. Rule:
+  `scripts/ci/data_readonly_gate.py` runs after every tier; output dirs are monkeypatched to `tmp_path`.
+- **Regeneration deletes hand corrections.** The hold-out bundles carried primary-source corrections that the
+  generator's spec never learned; a regeneration would have reverted them (and once did, for a citation note).
+  Rule: generators of frozen evidence are write-once and carry curated-only keys forward on `--overwrite`.
+- **Free-text joins need a registry, not a fifth alias table.** 148 spellings for ~85 compounds, five alias tables,
+  one `difflib` fallback at 0.75. Rule: `data/keys/compounds.yml` + `compound_keys.resolve`; every spelling under
+  `data/` must resolve (tested); new spellings are added to the generator seeds, not to code.
+- **Scripted edits need an assertion per replacement.** A `str.find` that returned `-1` silently duplicated a test
+  file; a whitespace mismatch silently skipped an edit. Rule: assert `old in text` before every replace, compile
+  after every batch, and re-read the tail of a test log before committing (a Phase 1a commit claimed a pass with two
+  failures in the log).

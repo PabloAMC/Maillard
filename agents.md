@@ -16,8 +16,8 @@ Computational screening framework for meat-like Maillard chemistry in plant-base
 ## Layout
 - `src/` — runtime package (kinetics, retention, headspace, recommend/optimize, reports). Import as `from src.<module> import ...`; do not mutate `sys.path`.
 - `scripts/` — CLI entrypoints and one-shot research scripts. Scientist-facing CLIs route through `src/usability_reports.py`.
-- `data/` — curated inputs only (priors, lit, benchmarks, protocols, species). No generated artifacts; no Python. Restructure in progress: see [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md).
-- `results/` — generated artifacts. `.gitignore`d; do not hand-edit.
+- `data/` — curated inputs only, READ-ONLY at runtime (`scripts/ci/data_readonly_gate.py`). Map: [data/README.md](data/README.md) (generated). Paths come from `src/data_paths.py`, loads from `src/data_access.py` (missing files raise), names resolve via `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`), benchmarks validate against `data/schemas/` (`scripts/ci/schema_gate.py`). Never write a `"data/..."` string or a `json.load` of a curated file in code. Restructure record: [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md).
+- `results/` — generated artifacts (`results/validation/` is tracked as frozen evidence). Do not hand-edit. Generators write here, never into `data/`.
 - `tests/` — `unit/` (fast), `scientific/` (regression), plus `scripts/` integration tests.
 
 ## Execution Environment
@@ -54,6 +54,9 @@ Markers: `regression`, `slow`, `scientific_regression`, `kinetics_validation` (s
 ## Pitfalls (see [tasks/lessons.md](tasks/lessons.md) for full list)
 - LaTeX-backed plots: failure must be explicit; no silent fallback.
 - Before deleting any script, confirm with the user — scripts are often invoked ad-hoc via `docker_maillard.sh run`.
+- A directory under `data/` that `.gitignore` hides is invisible to every audit and gate (this is how `data/qm` shipped 18 unsourced barriers for four months). `data/*` is ignored by default; whitelist explicitly.
+- Tests must never write into `data/`; `tests/integration/test_matrix_calibration_loop.py` once left 102 calibration files there. Monkeypatch output dirs to `tmp_path`.
+- Regenerating a file that has been hand-corrected since destroys the correction (`conditions.buffer`, Wave W values). Generators of frozen evidence are write-once (`write_holdout_bundles`).
 
 ## Workflow Orchestration
 
