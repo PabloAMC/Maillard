@@ -533,8 +533,8 @@ def _arrhenius_rate(*, temp_c: float, pre_exponential: float, activation_energy_
 #   safety_furosine_formation             Ea 50,  A 8.0e5   (predict_furosine)
 #   safety_furosine_elimination           Ea 73,  A 1.8e10  (predict_furosine)
 #
-# The Wave T3 convention (src/matrix_correction.py::_warn_if_registry_unsourced,
-# src/literature_runtime.py::PROTEIN_SOURCE_PROVENANCE) is: state the defect,
+# The Wave T3 convention (first applied to the protein-source registry, whose
+# warning + provenance block were withdrawn with that file on 2026-09-01) is: state the defect,
 # name what depends on it downstream, declare that NO VALUE IS SUBSTITUTED OR
 # RESCALED, emit a RuntimeWarning, and carry a provenance record the flag can
 # travel on. All five parts are honoured below. FOUR PAIRS ARE LABELLED AND
@@ -564,7 +564,7 @@ SAFETY_ARRHENIUS_SOURCE_STATUS = "no_verifiable_source"
 
 #: The provenance record. Emitted on the safety payload so the status travels
 #: with the numbers it contaminates instead of living only in a warning nobody
-#: sees (the `literature_runtime.PROTEIN_SOURCE_PROVENANCE` shape).
+#: sees (the shape the withdrawn protein-source provenance block used).
 SAFETY_ARRHENIUS_PROVENANCE: Dict[str, object] = {
     "parameters": list(SAFETY_UNCITED_ARRHENIUS_PAIRS),
     "source_status": SAFETY_ARRHENIUS_SOURCE_STATUS,

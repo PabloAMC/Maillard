@@ -269,7 +269,10 @@ def refresh_internal(protein: str) -> dict:
             entry["conc_ppb"] = float(predicted[compound])
     _refresh_contract_ranks(bench.get("matrix_ranking_contract") or {}, predicted)
 
+    bench["evidence_class"] = "diagnostic_only"
+    bench.setdefault("metadata", {})["evidence_class"] = "diagnostic_only"
     meta = bench.setdefault("source_metadata", {})
+    meta["evidence_class"] = "diagnostic_only"
     meta["generator"] = GENERATOR_TAG
     meta["origin"] = "internal_reproducibility_candidate"
     meta["notes"] = NOTES
@@ -279,7 +282,13 @@ def refresh_internal(protein: str) -> dict:
     return predicted
 
 
-def refresh_protocol_pilot(protein: str, predicted: dict) -> None:
+def refresh_protocol_pilot_intake(protein: str, predicted: dict) -> None:
+    """Keep the protocol-pilot INTAKE YAML's placeholder volatiles in step with the model.
+
+    Until 2026-09-01 this also materialised a *_ProtocolPilot2026.json benchmark that was a
+    byte-identical twin of the Internal2026 snapshot under a measured_volatiles label; that
+    twin is gone. The YAML stays as the intake example the protocol tests exercise.
+    """
     yaml_path = data_paths.PROTOCOLS_DIR / f"{protein}_iso_protocol_pilot_intake.yaml"
     payload = yaml.safe_load(yaml_path.read_text())
 
@@ -291,19 +300,13 @@ def refresh_protocol_pilot(protein: str, predicted: dict) -> None:
 
     yaml_path.write_text(yaml.safe_dump(payload, sort_keys=False, allow_unicode=True))
 
-    bench = materialize_matrix_experiment_benchmark(yaml_path)
-    out = data_paths.benchmark_path(f"{protein}_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026")
-    out.write_text(json.dumps(bench, indent=2, sort_keys=True) + "\n")
-
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
-            "Refresh the SYNTHETIC Internal2026 and ProtocolPilot2026 snapshots "
-            "for pea and soy from the CURRENT model, rewriting "
-            "data/benchmarks/{pea,soy}_isolate_ribose_cysteine_100C_45min_"
-            "{Internal2026,ProtocolPilot2026}.json and the two "
-            "data/protocols/*_intake.yaml. These are drift baselines, not "
+            "Refresh the SYNTHETIC Internal2026 snapshots for pea and soy from the "
+            "CURRENT model, rewriting data/benchmarks/{pea,soy}_isolate_ribose_cysteine_"
+            "100C_45min_Internal2026.json and the two data/protocols/*_intake.yaml. These are drift baselines, not "
             "measurements. RUNNING THIS MOVES SHIPPED NUMBERS: run it only for "
             "an intentional model change, then commit the diff so the drift is "
             "explicit in review."
@@ -318,8 +321,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     for protein in tuple(args.protein or ("pea", "soy")):
         predicted = refresh_internal(protein)
-        refresh_protocol_pilot(protein, predicted)
-        print(f"{protein}: refreshed Internal2026 + ProtocolPilot2026 snapshots")
+        refresh_protocol_pilot_intake(protein, predicted)
+        print(f"{protein}: refreshed the Internal2026 snapshot and the protocol-pilot intake YAML")
     return 0
 
 

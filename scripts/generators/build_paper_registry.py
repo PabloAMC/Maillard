@@ -78,6 +78,7 @@ def gather() -> Dict[str, Any]:
     files: List[Path] = []
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.LIT_DIR / "*.json")))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.LIT_DIR / "*.yml")))]
+    files += [Path(p) for p in sorted(glob.glob(str(data_paths.LITERATURE_LEDGERS_DIR / "*.json")))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.TIMESERIES_DIR / "*.yml")))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.BENCHMARKS_DIR / "**" / "*.json"), recursive=True))]
     files += [Path(p) for p in sorted(glob.glob(str(data_paths.SPECIES_DIR / "*.yml")))]

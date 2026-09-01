@@ -336,7 +336,8 @@ fitted rows and 4.03 for the synthetic ones), so 31% is the one coverage number 
 that is not cheap — the tightest intervals in the panel and the model still outside them 9 times
 in 13. The
 literature slice is saying the model is wrong on the sulfur branch, and saying so loudly. The
-internal-synthetic rows (26 of the 47 matched rows in the Monte-Carlo panel) are
+internal-synthetic rows (14 of the 35 matched rows in the Monte-Carlo panel; 26 of 47 before the
+2026-09-02 removal of the two duplicate synthetic files) are
 drift-detection harnesses, not
 evidence, and are labeled as such throughout the pipeline. Four former panel benchmarks lost
 their place in the audit because their cited sources are dead or resolve to unrelated papers:
@@ -628,7 +629,7 @@ the global scale", is unchanged and is now better supported, not worse.)*
 
 | Surface                       | Question                                                                 | Status                                                       |
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| **Parity**              | On matched systems, how close is predicted ppb to measured?              | **23** benchmarks · MC panel covers **20** of them, **47 matched rows** · **0 strict-ready** · **0/14 predictive benchmarks without blocking gaps** *(2026-08-28, Wave X: six step-level rows added; nine further verified rows are deliberately OFF the panel in `data/benchmarks/step_level_unreachable/` because the network cannot execute them)* |
+| **Parity**              | On matched systems, how close is predicted ppb to measured?              | **21** benchmarks · MC panel covers **18** of them, **35 matched rows** · **0 strict-ready** · **0/14 predictive benchmarks without blocking gaps** *(2026-08-28, Wave X: six step-level rows added; nine further verified rows are deliberately OFF the panel in `data/benchmarks/step_level_unreachable/` because the network cannot execute them)* |
 | **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **93.68×** error, worst **2474×** |
 | **Maillard-path hold-out** | On systems excluded from calibration, is the *reaction network* right? | **NEW (Wave U)** · 12 free-precursor literature points, predictions frozen before any calibration wave saw them · median **6.04×**, **12/21** within 10×, **1** structural zero · but the *shape* is wrong: sulfur temperature dependence runs backwards and acrylamide is ~40× under-responsive in time · **scored against Wave S3's rate calibration: 0/22 targets moved** |
 | **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
@@ -788,15 +789,20 @@ the global scale", is unchanged and is now better supported, not worse.)*
 > ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
 > audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
 > pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> carries an `audit_flag` in its registry entry. **102 records are marked
-> `no_verifiable_source`** (re-measured 2026-09-01 across every tracked JSON and YAML file,
-> including nested records), of which **80 carry numeric payloads** and **80 of those are
-> consumed at runtime**.
+> carries an `audit_flag` in its registry entry. **87 records are marked
+> `no_verifiable_source`** (re-measured 2026-09-02 across every tracked JSON and YAML file
+> under `data/` and `results/literature/`, including nested records), of which
+> **65 carry numeric payloads** and **65 of those are consumed at runtime**.
 >
-> That count rose twice in one day and later fell once. **Both rises are the repository getting
-> more honest, not worse**; the fall is a deletion, not a verification. Read it that way or the
+> That count rose twice in one day and later fell twice. **Both rises are the repository getting
+> more honest, not worse**; both falls are deletions, not verifications. Read it that way or the
 > number is misleading in the wrong direction.
 >
+> * **102 → 87** (2026-09-02, cleaning branch). `data/lit/protein_source_registry.json` — the
+>   fifteen records Wave T3 labelled below — was WITHDRAWN together with the code that consumed
+>   it. On a default run none of its numbers ever applied, and the kinetic-core matrix lane
+>   already refused the file by policy; nothing was verified, the numbers simply no longer ship.
+>   The two literature ledgers moved to `results/literature/` the same day and stay in the count.
 > * **120 → 102** (2026-09-01, cleaning branch). `data/qm/` was deleted together with the
 >   whole xTB → DFT lane, taking its 18 unverifiable barrier records with it. None of them
 >   ever reached the model, so the runtime-consumed figure is unchanged at 80.
@@ -1004,12 +1010,12 @@ ratio under `ratio_a_over_b`, and the renderer was looking for `ratio` — so th
 | Direction / ranking on `moisture_aw` | any (water activity moved) | 0/3 on the directional panel | **do-not-use** |
 | Ordering of two compounds in one system | free precursor | 8/12 pairs correct<br/><sub>measured on the hold-out, independently of the panel</sub> | caution |
 | Response direction across a condition series | free precursor | 3/6 correct<br/><sub>the sulfur temperature dependence is inverted and acrylamide is ~40x under-responsive in time</sub> | **do-not-use** |
-| Any claim of benchmark-grade agreement | the in-panel benchmarks themselves | 0/23 strict-ready<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
+| Any claim of benchmark-grade agreement | the in-panel benchmarks themselves | 0/21 strict-ready<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
 | Which experiment to run next (value of information) | any system the uncertainty panel covers | every ranked row is a measured model failure<br/><sub>this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is</sub> | **trust** |
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
 
-**Provenance census (recounted at generation time, not copied).** **102 records** carry `source_status: no_verifiable_source` across 10 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 148 in total. The numeric-payload and runtime-consumed subsets (80 and 80) use a narrower definition than this recount and are pinned separately by `tests/scientific/test_honest_headline_guards.py`.
+**Provenance census (recounted at generation time, not copied).** **87 records** carry `source_status: no_verifiable_source` across 9 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 133 in total. The numeric-payload and runtime-consumed subsets (65 and 65) use a narrower definition than this recount and are pinned separately by `tests/scientific/test_honest_headline_guards.py`.
 
 **Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
 
@@ -1160,7 +1166,7 @@ the engine ever emits a reaction family the table does not classify.
 📖 = curated layer only &emsp; 📚 = literature priors only
 
 ⚠️ = has quantitative benchmark rows, and currently MISSES them by the stated factor
-(0/23 benchmarks are strict-ready — see the calibration section above) &emsp;
+(0/21 benchmarks are strict-ready — see the calibration section above) &emsp;
 📐 = literature-calibrated priors, no dedicated benchmark &emsp;
 🧮 = computational closure in progress (xTB → DFT queue)
 

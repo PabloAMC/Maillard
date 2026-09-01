@@ -1,8 +1,8 @@
 {
   "target_tag": "meaty",
   "strict_ready_benchmarks": [],
-  "supported_benchmarks": 14,
-  "total_benchmarks": 14,
+  "supported_benchmarks": 21,
+  "total_benchmarks": 21,
   "matrix_only_benchmarks": [
     "pea_isolate_40C_PratapSingh2021",
     "pea_isolate_uht_140C_Trikusuma2019",

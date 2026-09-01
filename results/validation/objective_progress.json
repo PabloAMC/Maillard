@@ -1,7 +1,7 @@
 {
   "summary": {
-    "objective_count": 3,
-    "closed_objective_count": 1,
+    "objective_count": 2,
+    "closed_objective_count": 0,
     "policy": "objective_progress_must_state_what_changed_without_turning_internal_closure_into_external_promotion"
   },
   "objectives": [
@@ -18,18 +18,6 @@
       "prediction_effect": "No promotion-ready lane is unlocked yet; the repo now states exactly which package would move the decision gate."
     },
     {
-      "objective_id": "hexanal_nonanal_ambiguity",
-      "label": "Hexanal/Nonanal ambiguity",
-      "target_count": 4,
-      "closed_count": 4,
-      "status": "closed_internal_calibration_route",
-      "resolved_in_last_step": [
-        "prediction_validation_chain_exposed",
-        "closed_marker_counts_visible"
-      ],
-      "prediction_effect": "All tracked Hexanal/Nonanal markers are within the accepted internal ratio band, so adverse-marker drift is calibration-closed without upgrading promotion posture."
-    },
-    {
       "objective_id": "extrusion_direct_damage_package",
       "label": "Extrusion direct damage closure package",
       "target_count": 3,
@@ -40,48 +28,6 @@
         "dha_lysinoalanine_external_package_specified"
       ],
       "prediction_effect": "Extrusion reporting now states the exact direct-marker package still missing for DHA/LAL and lysine-damage claims, and names the external measurement bundle required to move closure while keeping thiamine retention and soy thermal-history anchors explicitly partial."
-    }
-  ],
-  "hexanal_nonanal_prediction_change": [
-    {
-      "lane_id": "pea_protocol_pilot_vs_internal2026",
-      "protein_type": "pea_iso",
-      "compound": "Hexanal",
-      "internal2026_ppb": 0.7425330938848701,
-      "protocolpilot2026_ppb": 0.7425330938848701,
-      "ratio": 1.0,
-      "closure_state": "calibration_closed",
-      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
-    },
-    {
-      "lane_id": "pea_protocol_pilot_vs_internal2026",
-      "protein_type": "pea_iso",
-      "compound": "Nonanal",
-      "internal2026_ppb": 0.03899145957513976,
-      "protocolpilot2026_ppb": 0.03899145957513976,
-      "ratio": 1.0,
-      "closure_state": "calibration_closed",
-      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
-    },
-    {
-      "lane_id": "soy_protocol_pilot_vs_internal2026",
-      "protein_type": "soy_iso",
-      "compound": "Hexanal",
-      "internal2026_ppb": 1.700615783970017,
-      "protocolpilot2026_ppb": 1.700615783970017,
-      "ratio": 1.0,
-      "closure_state": "calibration_closed",
-      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
-    },
-    {
-      "lane_id": "soy_protocol_pilot_vs_internal2026",
-      "protein_type": "soy_iso",
-      "compound": "Nonanal",
-      "internal2026_ppb": 0.042515132218226476,
-      "protocolpilot2026_ppb": 0.042515132218226476,
-      "ratio": 1.0,
-      "closure_state": "calibration_closed",
-      "next_decision_gate": "retain_internal_calibration_route_and_seek_external_quantitative_mixed_matrix_evidence"
     }
   ],
   "pea_soy_external_delta": [

@@ -14,7 +14,7 @@ Deliberately narrow and fast, in B1/B2/B3's style:
     unflagged;
   * the 32-of-47 NEGATIVE GATE and the pH-3 adduct gate, enforced;
   * the covalent term is INERT: it contributes exactly zero;
-  * the OLD LANE is not reproduced: no protein_source_registry value reaches
+  * the OLD LANE is not reproduced: no protein_source_registry value (file withdrawn 2026-09-01) reaches
     this layer;
   * the HOLD-OUT FIREWALL: the exposed Hong and Brewer literals appear in no
     B4 runtime or fit source file, and the frozen hold-out JSON is not read by
@@ -432,8 +432,11 @@ def test_no_dft_and_no_mocked_protein_source():
 def test_no_b4_source_file_references_the_unsourced_protein_registry():
     for relative in B4_SOURCE_FILES:
         text = (REPO / relative).read_text()
-        assert "protein_source_registry" not in text or "no_verifiable_source" in text, (
-            f"{relative} names the unsourced registry outside a policy note")
+        # The registry file itself was WITHDRAWN on 2026-09-01; B4 may still name it
+        # only inside a policy note that says so.
+        assert "protein_source_registry" not in text or (
+            "no_verifiable_source" in text and "WITHDRAWN" in text
+        ), f"{relative} names the withdrawn registry outside a policy note"
         for forbidden in ("meaty_potential_multiplier", "off_note_penalty",
                           "lox_activity_flag", "hydrolysate_observability_bias",
                           "methoxypyrazine_ceiling", "matrix_uncertainty_factor"):
@@ -456,6 +459,7 @@ def test_layer_metadata_names_what_it_refuses():
     assert "general matrix correction factor" in joined
     assert "log P" in joined
     assert "protein_source_registry" in joined
+    assert "WITHDRAWN 2026-09-01" in joined
     assert "HOLD-OUT" in joined
     assert "DFT" in joined
     assert layer_metadata()["primary_output"].startswith("formulation")

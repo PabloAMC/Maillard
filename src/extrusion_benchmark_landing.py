@@ -163,7 +163,7 @@ def build_extrusion_external_closure_workbook(root: Path = ROOT) -> Dict[str, An
     package = build_extrusion_external_closure_package(root)
     protocol = build_extrusion_benchmark_protocol(root)
     hme_anchor = dict(protocol.get("closest_repo_backed_hme_anchor", {}))
-    aligned_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
+    aligned_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_Internal2026"
     experiments = []
     for arm in package.get("process_arms", []):
         experiments.append(
@@ -361,7 +361,7 @@ def render_extrusion_disulfide_follow_on_markdown(payload: Mapping[str, Any]) ->
 def build_extrusion_disulfide_follow_on_workbook(root: Path = ROOT) -> Dict[str, Any]:
     follow_on = build_extrusion_disulfide_follow_on_package(root)
     protocol = build_extrusion_benchmark_protocol(root)
-    reference_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
+    reference_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_Internal2026"
     experiments = []
     for arm in protocol.get("process_arms", []):
         experiments.append(

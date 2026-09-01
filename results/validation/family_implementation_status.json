@@ -314,7 +314,7 @@
       "implementation_state_label": "matrix / modifier layer, not reaction chemistry",
       "emitted_reaction_families": [],
       "mapped_but_not_emitted_by_this_battery": [],
-      "implementation": "Not reaction chemistry. Implemented as the matrix layer: src/matrix_correction.py (accessibility + volatile retention per protein type) and data/lit/protein_source_registry.json."
+      "implementation": "Not reaction chemistry. Implemented as the matrix layer: src/matrix_correction.py (accessibility + volatile retention per protein type). The per-source registry (data/lit/protein_source_registry.json) was withdrawn 2026-09-01 as self-declared mocked."
     },
     {
       "slr_family": "07",

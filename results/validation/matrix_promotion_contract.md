@@ -17,7 +17,7 @@ Disallow directional support: yes
 
 ## Selected Promotion Target
 
-- benchmark: pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026
+- benchmark: pea_isolate_ribose_cysteine_100C_45min_Internal2026
 - protein: pea_iso
 - process_state: aqueous_pre_extrusion_model
 - target_profile: mixed
@@ -35,11 +35,9 @@ Disallow directional support: yes
 | --- | --- | --- | --- | --- | --- | ---: |
 | pea_isolate_40C_PratapSingh2021 | pea_iso | ambient_slurry | adverse_only | no | benchmark lacks meaty-positive targets | 5/6 |
 | pea_isolate_ribose_cysteine_100C_45min_Internal2026 | pea_iso | aqueous_pre_extrusion_model | mixed | no | insufficient externally measured target closure; current comparator is internal reference-only | 2/6 |
-| pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | pea_iso | aqueous_pre_extrusion_model | mixed | no | insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only) | 3/6 |
 | pea_isolate_uht_140C_Trikusuma2019 | pea_iso | heated_matrix | adverse_only | no | benchmark lacks meaty-positive targets | 5/6 |
 | soy_isolate_40C_PratapSingh2021 | soy_iso | ambient_slurry | adverse_only | no | benchmark lacks meaty-positive targets | 5/6 |
 | soy_isolate_ribose_cysteine_100C_45min_Internal2026 | soy_iso | aqueous_pre_extrusion_model | mixed | no | insufficient externally measured target closure; current comparator is internal reference-only | 2/6 |
-| soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | soy_iso | aqueous_pre_extrusion_model | mixed | no | insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only) | 3/6 |
 
 ## Requirement Details
 
@@ -57,12 +55,6 @@ Disallow directional support: yes
 | pea_isolate_ribose_cysteine_100C_45min_Internal2026 | Source is externally quantitative | no | internal_reference_only |
 | pea_isolate_ribose_cysteine_100C_45min_Internal2026 | At least two compounds are quantitatively closed | no | 0 |
 | pea_isolate_ribose_cysteine_100C_45min_Internal2026 | No internal-candidate or directional dependencies remain | no | internal=6; directional=0 |
-| pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Target profile includes meaty-positive compounds | yes | mixed |
-| pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Ranking contract passes | yes | pass |
-| pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Comparator signal is wet-lab measured_volatiles | yes | measured_volatiles |
-| pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Source is externally quantitative | no | synthetic_diagnostic_only |
-| pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | At least two compounds are quantitatively closed | no | 0 |
-| pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | No internal-candidate or directional dependencies remain | no | internal=6; directional=0 |
 | pea_isolate_uht_140C_Trikusuma2019 | Target profile includes meaty-positive compounds | no | adverse_only |
 | pea_isolate_uht_140C_Trikusuma2019 | Ranking contract passes | yes | pass |
 | pea_isolate_uht_140C_Trikusuma2019 | Comparator signal is wet-lab measured_volatiles | yes | measured_volatiles |
@@ -81,9 +73,3 @@ Disallow directional support: yes
 | soy_isolate_ribose_cysteine_100C_45min_Internal2026 | Source is externally quantitative | no | internal_reference_only |
 | soy_isolate_ribose_cysteine_100C_45min_Internal2026 | At least two compounds are quantitatively closed | no | 0 |
 | soy_isolate_ribose_cysteine_100C_45min_Internal2026 | No internal-candidate or directional dependencies remain | no | internal=6; directional=0 |
-| soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Target profile includes meaty-positive compounds | yes | mixed |
-| soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Ranking contract passes | yes | pass |
-| soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Comparator signal is wet-lab measured_volatiles | yes | measured_volatiles |
-| soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | Source is externally quantitative | no | synthetic_diagnostic_only |
-| soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | At least two compounds are quantitatively closed | no | 0 |
-| soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026 | No internal-candidate or directional dependencies remain | no | internal=6; directional=0 |

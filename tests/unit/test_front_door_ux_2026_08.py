@@ -576,7 +576,6 @@ def _args(**overrides) -> argparse.Namespace:
         minimize="beany",
         xtb=False,
         protein_type="pea_iso",
-        protein_source=None,
         denaturation_state=0.5,
         report=False,
         output_dir=None,

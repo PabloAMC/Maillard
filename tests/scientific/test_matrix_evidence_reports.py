@@ -15,8 +15,6 @@ def test_matrix_evidence_audit_distinguishes_external_off_flavour_from_internal_
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
         ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
     ])
     markdown = render_matrix_benchmark_evidence_markdown(rows)
     by_id = {row.benchmark_id: row for row in rows}
@@ -37,18 +35,5 @@ def test_matrix_evidence_audit_distinguishes_external_off_flavour_from_internal_
     assert soy_meaty.external_data_status == "internal_reference_only"
     assert soy_meaty.promotable is False
 
-    # Audit 2026-08-26: the ProtocolPilot payloads are frozen model output, not
-    # internal experiments; they must surface as synthetic, never as measured.
-    pea_protocol = by_id["pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"]
-    assert pea_protocol.external_data_status == "synthetic_diagnostic_only"
-    assert pea_protocol.target_profile == "mixed"
-    assert pea_protocol.promotable is False
-    assert "synthetic model output" in pea_protocol.promotion_blocker
-
-    soy_protocol = by_id["soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"]
-    assert soy_protocol.external_data_status == "synthetic_diagnostic_only"
-    assert soy_protocol.promotable is False
-
     assert "Matrix Benchmark Evidence Audit Report" in markdown
     assert "internal_reference_only" in markdown
-    assert "synthetic_diagnostic_only" in markdown

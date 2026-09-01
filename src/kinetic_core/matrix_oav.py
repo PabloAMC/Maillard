@@ -53,9 +53,9 @@ borrowed across matrices.
 WHAT THIS MODULE DOES NOT TOUCH
 -------------------------------
 ``src/matrix_correction.py`` and ``src/headspace.py`` are the OLD lane. They are
-not imported, not modified, and their ``protein_source_registry.json``-derived
-protein differentiation (declared ``no_verifiable_source``) is not reproduced
-here in any form.
+not imported and not modified. The ``protein_source_registry.json``-derived
+protein differentiation they once carried (declared ``no_verifiable_source``;
+file WITHDRAWN 2026-09-01) is not reproduced here in any form.
 """
 
 from __future__ import annotations

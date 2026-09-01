@@ -41,7 +41,6 @@ from src.matrix_correction import (
     classify_accessibility_state,
     classify_volatile_matrix_family,
     describe_compound_matrix_retention,
-    get_protein_source_profile,
     get_volatile_class_retention_factor,
     resolve_compound_matrix_retention,
     resolve_matrix_correction,
@@ -418,7 +417,6 @@ def _resolve_melanoidin_trapping_factor(
 def _resolve_upstream_observability_factor(
     compound_name: str,
     *,
-    protein_source: Optional[str],
     family_upstream_contract: Optional[Mapping[str, Any]],
 ) -> float:
     if not family_upstream_contract:
@@ -458,10 +456,9 @@ def _resolve_upstream_observability_factor(
         peptide_accessibility_factor = float(sulfur_lane.get("peptide_accessibility_factor", 1.0) or 1.0)
         hydrolysate_release_uplift = 1.0 + max(0.0, selected_peptide_ratio - 1.0) * peptide_accessibility_factor
         factor *= max(1.0, min(selected_peptide_ratio, hydrolysate_release_uplift))
-    if profile.get("source_sensitive"):
-        source_profile = get_protein_source_profile(protein_source)
-        if source_profile is not None:
-            factor *= float(source_profile.hydrolysate_observability_bias)
+    # 2026-09-01: the per-source `hydrolysate_observability_bias` multiplier that used
+    # to apply here for `source_sensitive` compounds was withdrawn with the mocked
+    # protein source registry; every source now shares the same factor.
     return max(1.0e-4, min(1.0, factor * thiamine_factor))
 
 
@@ -533,7 +530,6 @@ def _apply_output_projection(
     projection_budget: Optional[ProjectionBudget] = None,
     projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
     species_name_lookup: Optional[Dict[str, str]] = None,
-    protein_source: Optional[str] = None,
     family_upstream_contract: Optional[Mapping[str, Any]] = None,
 ) -> Tuple[Dict[str, float], ProjectionMetadataMap]:
     p_type = ProteinType(protein_type)
@@ -646,7 +642,6 @@ def _apply_output_projection(
                 time_minutes=time_minutes,
                 water_activity=water_activity,
                 process_state=process_state,
-                protein_source=protein_source,
             )
             class_matrix_factor = float(retention_description.get("class_matrix_factor", 1.0))
             effective_matrix_factor = float(retention_description.get("matrix_factor", 1.0))
@@ -678,7 +673,6 @@ def _apply_output_projection(
         )
         upstream_observability_factor = _resolve_upstream_observability_factor(
             compound_name,
-            protein_source=protein_source,
             family_upstream_contract=family_upstream_contract,
         )
         observable_value = (
@@ -1038,7 +1032,6 @@ class Recommender:
                            fat_fraction: float = 0.0,
                            protein_fraction: float = 0.0,
                            temp_ramp_csv: Optional[str] = None,
-                           protein_source: Optional[str] = None,
                            family_upstream_contract: Optional[Mapping[str, Any]] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
@@ -1058,7 +1051,6 @@ class Recommender:
             reactive_amino_acids={k: v for k, v in initial_concentrations.items()},
             protein_type=p_type,
             denaturation_state=denaturation_state,
-            protein_source=protein_source
         )
         
         desirable = self._load_desirable()
@@ -1370,7 +1362,6 @@ class Recommender:
             projection_budget=projection_budget,
             projection_strategy=projection_strategy,
             species_name_lookup=species_name_lookup,
-            protein_source=protein_source,
             family_upstream_contract=family_upstream_contract,
         )
         proxy_volatiles = dict(raw_concentrations)

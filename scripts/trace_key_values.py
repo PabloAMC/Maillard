@@ -6,7 +6,7 @@ WHAT THIS SCRIPT ACTUALLY MEASURES
 ----------------------------------
 For each registry entry in ``data/lit/*.json`` it collects every numeric leaf, splits
 the entry's citation string into surnames, then searches the **LLM-generated markdown
-under ``data/Gemini_Deep_Research/``** for lines containing one of those surnames. If a
+under ``data/research_corpus/``** for lines containing one of those surnames. If a
 number appears as a **substring** anywhere in a +/-30-line window around such a line,
 that number is recorded as "echoed".
 
@@ -33,7 +33,7 @@ matched): 153 (57.5%)"**, under the report title *"Numeric Value Traceability an
 **Verification** Report"*. Those 153 rows were a census of values whose only known
 upstream is an LLM digest -- i.e. the **laundering census** -- published under a heading
 asserting the opposite. It directly contradicted this repository's own rule
-(``data/Gemini_Deep_Research/README.md``):
+(``data/research_corpus/README.md``):
 
     "The deep-research report says so" is not provenance.
 
@@ -252,11 +252,11 @@ def trace():
         "> ",
         "> It measures ONE thing: whether a registry entry's numbers appear as text within",
         "> ±30 lines of one of its citation surnames inside the **machine-generated markdown**",
-        "> under `data/Gemini_Deep_Research/`. Matching is bare substring matching (`4.5`",
+        "> under `data/research_corpus/`. Matching is bare substring matching (`4.5`",
         "> matches `14.52`) and surname matching is unanchored (`Bi` matches `binding`).",
         "> No primary source, DOI resolver, publisher or index is contacted at any point.",
         "> ",
-        "> Per this repository's own rule (`data/Gemini_Deep_Research/README.md`):",
+        "> Per this repository's own rule (`data/research_corpus/README.md`):",
         "> ",
         "> > \"The deep-research report says so\" **is not provenance.**",
         "> ",
@@ -312,7 +312,7 @@ def trace():
         "",
         "## DIGEST-ECHO entries — every number found only inside LLM-generated text",
         "**NOT VERIFICATION.** For each entry below, every numeric value was located inside",
-        "`data/Gemini_Deep_Research/**` within ±30 lines of a citation surname. No paper was",
+        "`data/research_corpus/**` within ±30 lines of a citation surname. No paper was",
         "opened. This is the list of entries whose only demonstrated upstream is a machine-",
         "generated digest — i.e. the remediation worklist, not the safe list.",
         ""

@@ -17,7 +17,7 @@
     ]
   },
   "selected_promotion_target": {
-    "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+    "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
     "protein_type": "pea_iso",
     "process_state": "aqueous_pre_extrusion_model",
     "target_profile": "mixed",
@@ -109,52 +109,6 @@
           "label": "Source is externally quantitative",
           "passed": false,
           "detail": "internal_reference_only"
-        },
-        {
-          "key": "minimum_quantitative_closed_targets",
-          "label": "At least two compounds are quantitatively closed",
-          "passed": false,
-          "detail": "0"
-        },
-        {
-          "key": "no_internal_or_directional_dependencies",
-          "label": "No internal-candidate or directional dependencies remain",
-          "passed": false,
-          "detail": "internal=6; directional=0"
-        }
-      ]
-    },
-    {
-      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
-      "protein_type": "pea_iso",
-      "process_state": "aqueous_pre_extrusion_model",
-      "target_profile": "mixed",
-      "promotion_ready": false,
-      "promotion_blocker": "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)",
-      "requirements": [
-        {
-          "key": "meaty_positive_targets_present",
-          "label": "Target profile includes meaty-positive compounds",
-          "passed": true,
-          "detail": "mixed"
-        },
-        {
-          "key": "ranking_contract_passes",
-          "label": "Ranking contract passes",
-          "passed": true,
-          "detail": "pass"
-        },
-        {
-          "key": "comparator_is_measured_volatiles",
-          "label": "Comparator signal is wet-lab measured_volatiles",
-          "passed": true,
-          "detail": "measured_volatiles"
-        },
-        {
-          "key": "external_quantitative_origin",
-          "label": "Source is externally quantitative",
-          "passed": false,
-          "detail": "synthetic_diagnostic_only"
         },
         {
           "key": "minimum_quantitative_closed_targets",
@@ -307,57 +261,11 @@
           "detail": "internal=6; directional=0"
         }
       ]
-    },
-    {
-      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
-      "protein_type": "soy_iso",
-      "process_state": "aqueous_pre_extrusion_model",
-      "target_profile": "mixed",
-      "promotion_ready": false,
-      "promotion_blocker": "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)",
-      "requirements": [
-        {
-          "key": "meaty_positive_targets_present",
-          "label": "Target profile includes meaty-positive compounds",
-          "passed": true,
-          "detail": "mixed"
-        },
-        {
-          "key": "ranking_contract_passes",
-          "label": "Ranking contract passes",
-          "passed": true,
-          "detail": "pass"
-        },
-        {
-          "key": "comparator_is_measured_volatiles",
-          "label": "Comparator signal is wet-lab measured_volatiles",
-          "passed": true,
-          "detail": "measured_volatiles"
-        },
-        {
-          "key": "external_quantitative_origin",
-          "label": "Source is externally quantitative",
-          "passed": false,
-          "detail": "synthetic_diagnostic_only"
-        },
-        {
-          "key": "minimum_quantitative_closed_targets",
-          "label": "At least two compounds are quantitatively closed",
-          "passed": false,
-          "detail": "0"
-        },
-        {
-          "key": "no_internal_or_directional_dependencies",
-          "label": "No internal-candidate or directional dependencies remain",
-          "passed": false,
-          "detail": "internal=6; directional=0"
-        }
-      ]
     }
   ],
   "summary": {
-    "benchmarks_assessed": 7,
+    "benchmarks_assessed": 5,
     "promotion_ready": 0,
-    "mechanistic_priority_ready": 4
+    "mechanistic_priority_ready": 2
   }
 }

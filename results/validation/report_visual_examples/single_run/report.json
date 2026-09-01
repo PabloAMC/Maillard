@@ -1,38 +1,43 @@
 {
-    "timestamp": "2026-08-27T19:12:54.882887",
+    "timestamp": "2026-09-01T22:11:12.723778",
     "schema_version": "2026-03-18",
     "provenance": {
         "schema_version": "2026-03-18",
         "artifact_kind": "single_run_report",
-        "generated_at": "2026-08-27T19:12:46.010380",
+        "generated_at": "2026-09-01T22:10:58.462156",
         "generator": {
             "entrypoint": "generate_report_visual_examples.py",
-            "argv": [],
-            "command": "scripts/generators/generate_report_visual_examples.py"
+            "argv": [
+                "--output-dir",
+                "results/validation/report_visual_examples",
+                "--docs-asset-dir",
+                "docs/assets"
+            ],
+            "command": "scripts/generators/generate_report_visual_examples.py --output-dir results/validation/report_visual_examples --docs-asset-dir docs/assets"
         },
         "runtime": {
-            "python_version": "3.12.13",
-            "platform": "macOS-26.5.2-arm64-arm-64bit"
+            "python_version": "3.12.14",
+            "platform": "Linux-7.0.14-orbstack-00380-ga7e0a2dc9535-x86_64-with-glibc2.39"
         },
         "repository": {
-            "name": "Maillard",
-            "root": "/Users/pabloantoniomorenocasares/Developer/Maillard",
-            "branch": "audit-remediation",
-            "commit": "263bae8d444c00d2d066256464f2363737fb6b8e",
-            "short_commit": "263bae8",
+            "name": "workspace",
+            "root": "/workspace",
+            "branch": "cleaning",
+            "commit": "2208fd0e17dacbeba60c9aea478fd83e50bed9ff",
+            "short_commit": "2208fd0",
             "dirty": true,
-            "changed_file_count": 57,
+            "changed_file_count": 183,
             "changed_files_sample": [
-                "github/workflows/ci.yml",
+                ".gitignore",
                 "AUDIT.md",
+                "CONTRIBUTING.md",
                 "README.md",
-                "data/benchmarks/cys_ribose_140C_Hofmann1998.json",
-                "data/benchmarks/maillard_validation_benchmarks.md",
+                "data/README.md",
                 "data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
                 "data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
-                "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
                 "data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-                "data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json"
+                "data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
+                "data/keys/compounds.yml"
             ]
         },
         "input_fingerprint_sha256": "b63663346583a45dfd5cb20eeecab6c9a8d6d27baa6bb1a9b6b2324eeeee6e70",
@@ -54,7 +59,7 @@
             "matrix_family_coverage_registry": "data/lit/matrix_family_coverage_registry.json",
             "benchmark_intake_registry": "data/lit/benchmark_intake_registry.json",
             "computational_priors": "data/lit/computational_priors.json",
-            "slr_incorporation_matrix": "data/lit/slr_incorporation_matrix.json",
+            "slr_incorporation_matrix": "results/literature/slr_incorporation_matrix.json",
             "flavor_reference_payloads": "data/lit/flavor_reference_payloads.json",
             "process_state_calibrations": "data/lit/process_state_calibrations.json",
             "retention_reference_payloads": "data/lit/retention_reference_payloads.json",
@@ -77,47 +82,11 @@
             "chemistry_family_scope_json": "results/validation/chemistry_family_scope.json",
             "matrix_family_coverage": "results/validation/matrix_family_coverage.md",
             "matrix_family_coverage_json": "results/validation/matrix_family_coverage.json",
-            "refinement_watchlist": "results/validation/refinement_watchlist.md",
-            "refinement_watchlist_json": "results/validation/refinement_watchlist.json",
-            "offline_dft_jobs": "results/validation/offline_dft_jobs.json",
             "family_sensitivity": "results/validation/family_sensitivity.md",
             "family_sensitivity_json": "results/validation/family_sensitivity.json",
             "family_lane_validation": "results/validation/family_lane_validation.md",
             "family_lane_validation_json": "results/validation/family_lane_validation.json",
-            "refinement_global_sensitivity": "results/validation/refinement_global_sensitivity.md",
-            "refinement_global_sensitivity_json": "results/validation/refinement_global_sensitivity.json",
-            "cheap_refinement_screening": "results/validation/cheap_refinement_screening.md",
-            "cheap_refinement_screening_json": "results/validation/cheap_refinement_screening.json",
-            "selective_dft_plan": "results/validation/selective_dft_plan.md",
-            "selective_dft_plan_json": "results/validation/selective_dft_plan.json",
-            "refinement_governance": "results/validation/refinement_governance.md",
-            "refinement_governance_json": "results/validation/refinement_governance.json",
-            "refinement_offline_dft_jobs": "results/validation/refinement_offline_dft_jobs.json",
-            "refinement_impact": "results/validation/refinement_impact.md",
-            "refinement_impact_json": "results/validation/refinement_impact.json",
-            "computational_gap_refinement_plan": "results/validation/computational_gap_refinement_plan.md",
-            "computational_gap_refinement_plan_json": "results/validation/computational_gap_refinement_plan.json",
-            "computational_gap_dft_ingestion_report": "results/validation/computational_gap_dft_ingestion_report.md",
-            "computational_gap_dft_ingestion_report_json": "results/validation/computational_gap_dft_ingestion_report.json",
-            "computational_gap_dft_promotion_report": "results/validation/computational_gap_dft_promotion_report.md",
-            "computational_gap_dft_promotion_report_json": "results/validation/computational_gap_dft_promotion_report.json",
-            "refinement_surrogate_patches": "data/lit/refinement_surrogate_patches.json",
-            "reaction_benchmark_set": "data/lit/reaction_benchmark_set.json",
-            "mlp_candidate_registry": "data/lit/mlp_candidate_registry.json",
-            "mlp_external_benchmark_evidence": "data/lit/mlp_external_benchmark_evidence.json",
-            "geometry_benchmark_set": "data/lit/geometry_benchmark_set.json",
-            "mlp_geometry_benchmark": "results/validation/mlp_geometry_benchmark.md",
-            "mlp_geometry_benchmark_json": "results/validation/mlp_geometry_benchmark.json",
-            "mlp_geometry_assessment": "results/validation/mlp_geometry_assessment.md",
-            "mlp_geometry_assessment_json": "results/validation/mlp_geometry_assessment.json",
-            "mlp_reaction_benchmark": "results/validation/mlp_reaction_benchmark.md",
-            "mlp_reaction_benchmark_json": "results/validation/mlp_reaction_benchmark.json",
-            "mlp_assessment": "results/validation/mlp_assessment.md",
-            "mlp_assessment_json": "results/validation/mlp_assessment.json",
-            "mlp_external_mlp_landscape": "results/validation/mlp_external_mlp_landscape.md",
-            "mlp_external_mlp_landscape_json": "results/validation/mlp_external_mlp_landscape.json",
-            "mlp_adoption_notes": "results/validation/mlp_adoption_notes.md",
-            "mlp_adoption_notes_json": "results/validation/mlp_adoption_notes.json"
+            "refinement_surrogate_patches": "data/lit/refinement_surrogate_patches.json"
         }
     },
     "inputs": {
@@ -135,17 +104,17 @@
     },
     "results": {
         "name": "Ribose + cysteine + leucine",
-        "target_score": 0.27178598557507333,
-        "off_flavour_risk": 0.00943688353870317,
+        "target_score": 0.27178633751832265,
+        "off_flavour_risk": 0.009436672372753585,
         "safety_score": 1.04398390627651,
         "lysine_budget": 0.0,
         "trapping_efficiency": 0.0,
-        "mft_to_furfural_ratio": 0.0008819266810606256,
-        "meaty_quality_penalty": 1.318209398027324,
+        "mft_to_furfural_ratio": 0.0023409945291690292,
+        "meaty_quality_penalty": 0.7882495015435075,
         "strecker_balance_score": 0.0,
         "strecker_gap_penalty": 0.0,
         "pyrazine_propensity": 0.6459558651206883,
-        "pyrazine_burden": 5.693521420497937e-06,
+        "pyrazine_burden": 5.682360196110273e-06,
         "pyrazine_penalty": 0.0,
         "furanone_penalty": 0.35,
         "flagged_toxics": [
@@ -185,7 +154,6 @@
                     "source": "Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope, retained as a conservative pea-isolate interpolation while exact benchmark-condition values remain unmeasured",
                     "provenance_tier": "literature_derived_transfer",
                     "confidence_tier": "medium",
-                    "uncertainty_posture": "calibration_grade_transfer",
                     "process_state_applicability": [
                         "ambient_slurry",
                         "heated_matrix",
@@ -199,7 +167,6 @@
                     "source": "Asen 2022 DSC/DTNB thermal window + Li 2025 free-SH response; calibrated so pea isolate stays mostly native at 40C but opens progressively by 90-140C",
                     "provenance_tier": "literature_derived_transfer",
                     "confidence_tier": "medium",
-                    "uncertainty_posture": "calibration_grade_transfer",
                     "process_state_applicability": [
                         "ambient_slurry",
                         "heated_matrix",
@@ -213,7 +180,6 @@
                     "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to pea proteins as verified by Sun 2025/2026 and Lozano 2009.",
                     "provenance_tier": "literature_derived_transfer",
                     "confidence_tier": "medium",
-                    "uncertainty_posture": "literature_bounded",
                     "process_state_applicability": [
                         "ambient_slurry",
                         "heated_matrix",
@@ -227,7 +193,6 @@
                     "source": "Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope; values remain a conservative PPI interpolation because the exact 95C pH 5.5 benchmark condition still lacks direct wet-lab measurement",
                     "provenance_tier": "literature_derived_transfer",
                     "confidence_tier": "medium",
-                    "uncertainty_posture": "calibration_grade_transfer",
                     "process_state_applicability": [
                         "ambient_slurry",
                         "heated_matrix",
@@ -237,10 +202,6 @@
                     "notes": "This is a reliability improvement over a generic heuristic because the numbers now explicitly track the validated pea process-state literature."
                 }
             },
-            "matrix_prior_uncertainty_postures": [
-                "calibration_grade_transfer",
-                "literature_bounded"
-            ],
             "matrix_prior_process_state_applicability": [
                 "ambient_slurry",
                 "aqueous_pre_extrusion_model",
@@ -531,8 +492,8 @@
             "compound_confidence": [
                 {
                     "compound": "furfural",
-                    "observable_ppb": 0.10771917269002373,
-                    "proxy_ppb": 0.19650058319115496,
+                    "observable_ppb": 0.10750800674043785,
+                    "proxy_ppb": 0.1961153757001622,
                     "span_uncertainty_kcal": 3.5,
                     "tier": "exploratory",
                     "score": 43.0,
@@ -553,8 +514,8 @@
                 },
                 {
                     "compound": "2-furfurylthiol",
-                    "observable_ppb": 0.0021062319413068507,
-                    "proxy_ppb": 0.006855086040286587,
+                    "observable_ppb": 0.0021021030155378598,
+                    "proxy_ppb": 0.006841647757044701,
                     "span_uncertainty_kcal": 3.5,
                     "tier": "exploratory",
                     "score": 33.0,
@@ -577,8 +538,8 @@
                 },
                 {
                     "compound": "3-methylbutanal",
-                    "observable_ppb": 0.0009043410918107766,
-                    "proxy_ppb": 0.001747221488336357,
+                    "observable_ppb": 0.0009025682779222845,
+                    "proxy_ppb": 0.0017437963442741844,
                     "span_uncertainty_kcal": 3.5,
                     "tier": "exploratory",
                     "score": 43.0,
@@ -599,8 +560,8 @@
                 },
                 {
                     "compound": "2-methyl-3-furanthiol",
-                    "observable_ppb": 9.500041245710901e-05,
-                    "proxy_ppb": 0.0002691368051077558,
+                    "observable_ppb": 0.00025167565562123214,
+                    "proxy_ppb": 0.0007129988189038594,
                     "span_uncertainty_kcal": 3.5,
                     "tier": "exploratory",
                     "score": 33.0,
@@ -623,8 +584,8 @@
                 },
                 {
                     "compound": "bis(2-methyl-3-furyl) disulfide",
-                    "observable_ppb": 2.9392454915052926e-05,
-                    "proxy_ppb": 7.206524811180149e-05,
+                    "observable_ppb": 5.5134520852890295e-05,
+                    "proxy_ppb": 0.000135180369801434,
                     "span_uncertainty_kcal": 3.5,
                     "tier": "exploratory",
                     "score": 33.0,
@@ -685,34 +646,34 @@
                 "minimum_panel_ready": false
             },
             "sensitivity_summary": {
-                "baseline_decision_score": -0.7816348042401399,
+                "baseline_decision_score": -0.7816342411309408,
                 "evaluated_perturbations": 9,
                 "ranking_drivers": [
                     {
                         "input": "ribose",
                         "perturbation": "remove_sugars",
-                        "decision_delta": -1.2797457235572982,
-                        "target_delta": -0.27178598557507333,
+                        "decision_delta": -1.279746286666497,
+                        "target_delta": -0.27178633751832265,
                         "safety_delta": 0.0,
-                        "off_flavour_delta": 0.007959737982224798,
+                        "off_flavour_delta": 0.007959949148174383,
                         "interpretation": "Removal test against the baseline formulation."
                     },
                     {
                         "input": "temp",
                         "perturbation": "decrease_temp",
-                        "decision_delta": 1.0793039535455695,
-                        "target_delta": 0.025883163730356318,
+                        "decision_delta": 1.07930346931624,
+                        "target_delta": 0.02588289066697641,
                         "safety_delta": -1.04398390627651,
-                        "off_flavour_delta": -0.00943688353870317,
+                        "off_flavour_delta": -0.009436672372753585,
                         "interpretation": "Local process perturbation to 95.00."
                     },
                     {
                         "input": "temp",
                         "perturbation": "increase_temp",
-                        "decision_delta": -0.09465426203540961,
-                        "target_delta": -0.06127115722796306,
+                        "decision_delta": -0.09465285039073257,
+                        "target_delta": -0.06127027495003984,
                         "safety_delta": 0.0,
-                        "off_flavour_delta": 0.033383104807446655,
+                        "off_flavour_delta": 0.033382575440692695,
                         "interpretation": "Local process perturbation to 115.00."
                     }
                 ],
@@ -720,28 +681,28 @@
                     {
                         "input": "temp",
                         "perturbation": "decrease_temp",
-                        "decision_delta": 1.0793039535455695,
-                        "target_delta": 0.025883163730356318,
+                        "decision_delta": 1.07930346931624,
+                        "target_delta": 0.02588289066697641,
                         "safety_delta": -1.04398390627651,
-                        "off_flavour_delta": -0.00943688353870317,
+                        "off_flavour_delta": -0.009436672372753585,
                         "interpretation": "Local process perturbation to 95.00."
                     },
                     {
                         "input": "ribose",
                         "perturbation": "remove_sugars",
-                        "decision_delta": -1.2797457235572982,
-                        "target_delta": -0.27178598557507333,
+                        "decision_delta": -1.279746286666497,
+                        "target_delta": -0.27178633751832265,
                         "safety_delta": 0.0,
-                        "off_flavour_delta": 0.007959737982224798,
+                        "off_flavour_delta": 0.007959949148174383,
                         "interpretation": "Removal test against the baseline formulation."
                     },
                     {
                         "input": "cysteine",
                         "perturbation": "remove_amino_acids",
-                        "decision_delta": 0.017139211012769384,
-                        "target_delta": 0.0090867934223553,
+                        "decision_delta": 0.017138647903570337,
+                        "target_delta": 0.009086441479105978,
                         "safety_delta": 0.0,
-                        "off_flavour_delta": -0.00805241759041405,
+                        "off_flavour_delta": -0.008052206424464465,
                         "interpretation": "Removal test against the baseline formulation."
                     }
                 ],
@@ -756,7 +717,7 @@
         "compound_evidence_ladder": [
             {
                 "compound": "furfural",
-                "observable_ppb": 0.10771917269002373,
+                "observable_ppb": 0.10750800674043785,
                 "direct_anchor": false,
                 "transferred_prior": true,
                 "mechanistic_surrogate": false,
@@ -773,7 +734,7 @@
             },
             {
                 "compound": "2-furfurylthiol",
-                "observable_ppb": 0.0021062319413068507,
+                "observable_ppb": 0.0021021030155378598,
                 "direct_anchor": true,
                 "transferred_prior": false,
                 "mechanistic_surrogate": true,
@@ -790,7 +751,7 @@
             },
             {
                 "compound": "3-methylbutanal",
-                "observable_ppb": 0.0009043410918107766,
+                "observable_ppb": 0.0009025682779222845,
                 "direct_anchor": true,
                 "transferred_prior": true,
                 "mechanistic_surrogate": false,
@@ -807,7 +768,7 @@
             },
             {
                 "compound": "2-methyl-3-furanthiol",
-                "observable_ppb": 9.500041245710901e-05,
+                "observable_ppb": 0.00025167565562123214,
                 "direct_anchor": true,
                 "transferred_prior": false,
                 "mechanistic_surrogate": true,
@@ -824,7 +785,7 @@
             },
             {
                 "compound": "bis(2-methyl-3-furyl) disulfide",
-                "observable_ppb": 2.9392454915052926e-05,
+                "observable_ppb": 5.5134520852890295e-05,
                 "direct_anchor": false,
                 "transferred_prior": true,
                 "mechanistic_surrogate": true,
@@ -841,7 +802,7 @@
             },
             {
                 "compound": "2,5-dimethylpyrazine",
-                "observable_ppb": 4.3035649199978185e-06,
+                "observable_ppb": 4.2951284796665246e-06,
                 "direct_anchor": true,
                 "transferred_prior": false,
                 "mechanistic_surrogate": false,
@@ -864,7 +825,7 @@
                 "compounds": [
                     "furfural"
                 ],
-                "observable_ppb_total": 0.10771917269002373,
+                "observable_ppb_total": 0.10750800674043785,
                 "evidence_strength": "class_anchored",
                 "fallback_mode": "class_level"
             },
@@ -876,7 +837,7 @@
                     "2-methyl-3-furanthiol",
                     "bis(2-methyl-3-furyl) disulfide"
                 ],
-                "observable_ppb_total": 0.0022306248086790123,
+                "observable_ppb_total": 0.002408913192011982,
                 "evidence_strength": "directional_transferred",
                 "fallback_mode": "class_level"
             },
@@ -886,7 +847,7 @@
                 "compounds": [
                     "3-methylbutanal"
                 ],
-                "observable_ppb_total": 0.0009043410918107766,
+                "observable_ppb_total": 0.0009025682779222845,
                 "evidence_strength": "class_anchored",
                 "fallback_mode": "class_level"
             },
@@ -896,7 +857,7 @@
                 "compounds": [
                     "2,5-dimethylpyrazine"
                 ],
-                "observable_ppb_total": 4.3035649199978185e-06,
+                "observable_ppb_total": 4.2951284796665246e-06,
                 "evidence_strength": "directional_transferred",
                 "fallback_mode": "class_level"
             }
@@ -976,7 +937,7 @@
                     "kind": "industrial_endpoint_reference",
                     "report_visibility": "default",
                     "source_citation": "Knol et al. (2005)",
-                    "summary": "Bifurcated acrylamide formation (Ea 52.1 kJ/mol) and degradation (Ea 72.9 kJ/mol) kinetic parameters."
+                    "summary": "Bifurcated acrylamide formation (Ea 94.4 +/- 11 kJ/mol) and degradation (Ea 85.1 +/- 14 kJ/mol) kinetic parameters."
                 },
                 {
                     "id": "de_vleeschouwer_2008_acrylamide_aw",
@@ -1696,10 +1657,10 @@
             ]
         },
         "literature_learning_loop_summary": {
-            "ready_reference_count": 203,
-            "encoded_runtime_reference_count": 203,
+            "ready_reference_count": 197,
+            "encoded_runtime_reference_count": 197,
             "template_queue_count": 0,
-            "matrix_family_count": 84,
+            "matrix_family_count": 83,
             "matrix_prior_families": [
                 "pea_iso",
                 "soy_iso",
@@ -1711,13 +1672,11 @@
                 "benchmark_payload": 7,
                 "computational_prior": 126,
                 "flavor_reference_payload": 21,
-                "intake_registry_entry": 6,
                 "process_state_calibration": 20,
                 "reference_payload": 1,
                 "retention_reference_payload": 3,
                 "safety_payload": 8,
-                "safety_reference_payload": 21,
-                "slr_incorporation_ledger": 6
+                "safety_reference_payload": 21
             },
             "selected_s11_c_family": "carbonyl_donor_hierarchy",
             "ready_runtime_backlog_count": 0,
@@ -2038,10 +1997,10 @@
                     "display_name": "Carbohydrate pyrolysis and caramelization",
                     "active": true,
                     "strategic_posture": "failure_mode_lane",
-                    "target_score_delta": 0.06382046804551662,
+                    "target_score_delta": 0.06382081998876594,
                     "maillard_closure_delta": 0.0,
-                    "off_flavour_risk_delta": 0.00010771917269002374,
-                    "toggle_magnitude": 0.06392818721820664
+                    "off_flavour_risk_delta": 0.00010750800674043785,
+                    "toggle_magnitude": 0.06392832799550638
                 },
                 {
                     "slr_family": "16",
@@ -2168,8 +2127,8 @@
         "projection_metadata": {
             "O=Cc1ccco1": {
                 "compound": "furfural",
-                "proxy_ppb": 0.19650058319115496,
-                "observable_ppb": 0.10771917269002373,
+                "proxy_ppb": 0.1961153757001622,
+                "observable_ppb": 0.10750800674043785,
                 "proxy_to_observable_ratio": 0.5481875470325448,
                 "matrix_factor": 0.5481875470325448,
                 "base_matrix_factor": 0.5674382062546259,
@@ -2244,8 +2203,8 @@
             },
             "CC(C)CC=O": {
                 "compound": "3-methylbutanal",
-                "proxy_ppb": 0.001747221488336357,
-                "observable_ppb": 0.0009043410918107766,
+                "proxy_ppb": 0.0017437963442741844,
+                "observable_ppb": 0.0009025682779222845,
                 "proxy_to_observable_ratio": 0.5175881236853711,
                 "matrix_factor": 0.5175881236853711,
                 "base_matrix_factor": 0.5674382062546259,
@@ -2319,8 +2278,8 @@
             },
             "Cc1cnc(C)cn1": {
                 "compound": "2,5-dimethylpyrazine",
-                "proxy_ppb": 7.572309909741604e-06,
-                "observable_ppb": 4.3035649199978185e-06,
+                "proxy_ppb": 7.557465625546714e-06,
+                "observable_ppb": 4.2951284796665246e-06,
                 "proxy_to_observable_ratio": 0.5683292114684029,
                 "matrix_factor": 0.5683292114684029,
                 "base_matrix_factor": 0.5674382062546259,
@@ -2398,8 +2357,8 @@
             },
             "SCc1ccco1": {
                 "compound": "2-furfurylthiol",
-                "proxy_ppb": 0.006855086040286587,
-                "observable_ppb": 0.0021062319413068507,
+                "proxy_ppb": 0.006841647757044701,
+                "observable_ppb": 0.0021021030155378598,
                 "proxy_to_observable_ratio": 0.30725098546229135,
                 "matrix_factor": 0.508466872594721,
                 "base_matrix_factor": 0.5674382062546259,
@@ -2480,9 +2439,9 @@
             },
             "Cc1occc1S": {
                 "compound": "2-methyl-3-furanthiol",
-                "proxy_ppb": 0.0002691368051077558,
-                "observable_ppb": 9.500041245710901e-05,
-                "proxy_to_observable_ratio": 0.3529818689014799,
+                "proxy_ppb": 0.0007129988189038594,
+                "observable_ppb": 0.00025167565562123214,
+                "proxy_to_observable_ratio": 0.35298186890148,
                 "matrix_factor": 0.508466872594721,
                 "base_matrix_factor": 0.5674382062546259,
                 "class_matrix_factor": 0.8960744394545707,
@@ -2562,9 +2521,9 @@
             },
             "Cc1occc1SSc1ccoc1C": {
                 "compound": "bis(2-methyl-3-furyl) disulfide",
-                "proxy_ppb": 7.206524811180149e-05,
-                "observable_ppb": 2.9392454915052926e-05,
-                "proxy_to_observable_ratio": 0.4078589290285061,
+                "proxy_ppb": 0.000135180369801434,
+                "observable_ppb": 5.5134520852890295e-05,
+                "proxy_to_observable_ratio": 0.4078589290285062,
                 "matrix_factor": 0.508466872594721,
                 "base_matrix_factor": 0.5674382062546259,
                 "class_matrix_factor": 0.8960744394545707,
@@ -2646,102 +2605,102 @@
         "uncertainty_envelopes": {
             "furfural": {
                 "compound": "furfural",
-                "predicted_ppb": 0.10771917269002373,
-                "predicted_p5": 0.0009751417711225167,
-                "predicted_p50": 0.10771917269002373,
-                "predicted_p95": 11.899213538628429,
+                "predicted_ppb": 0.10750800674043785,
+                "predicted_p5": 0.0009732301639968985,
+                "predicted_p50": 0.10750800674043785,
+                "predicted_p95": 11.875887062352565,
                 "ci_level_pct": 90,
                 "support_count": 3,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "Furfural": {
                 "compound": "Furfural",
-                "predicted_ppb": 0.10771917269002373,
-                "predicted_p5": 0.0009751417711225167,
-                "predicted_p50": 0.10771917269002373,
-                "predicted_p95": 11.899213538628429,
+                "predicted_ppb": 0.10750800674043785,
+                "predicted_p5": 0.0009732301639968985,
+                "predicted_p50": 0.10750800674043785,
+                "predicted_p95": 11.875887062352565,
                 "ci_level_pct": 90,
                 "support_count": 3,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "2,5-dimethylpyrazine": {
                 "compound": "2,5-dimethylpyrazine",
-                "predicted_ppb": 4.3035649199978185e-06,
-                "predicted_p5": 1.1422295576539268e-09,
-                "predicted_p50": 4.3035649199978185e-06,
-                "predicted_p95": 0.00382903464973938,
+                "predicted_ppb": 4.2951284796665246e-06,
+                "predicted_p5": 1.1893660703765817e-09,
+                "predicted_p50": 4.2951284796665246e-06,
+                "predicted_p95": 0.0034702458269516194,
                 "ci_level_pct": 90,
-                "support_count": 4,
+                "support_count": 2,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "2,5-Dimethylpyrazine": {
                 "compound": "2,5-Dimethylpyrazine",
-                "predicted_ppb": 4.3035649199978185e-06,
-                "predicted_p5": 1.1422295576539268e-09,
-                "predicted_p50": 4.3035649199978185e-06,
-                "predicted_p95": 0.00382903464973938,
+                "predicted_ppb": 4.2951284796665246e-06,
+                "predicted_p5": 1.1893660703765817e-09,
+                "predicted_p50": 4.2951284796665246e-06,
+                "predicted_p95": 0.0034702458269516194,
                 "ci_level_pct": 90,
-                "support_count": 4,
+                "support_count": 2,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "2-furfurylthiol": {
                 "compound": "2-furfurylthiol",
-                "predicted_ppb": 0.0021062319413068507,
-                "predicted_p5": 9.143021083020407e-07,
-                "predicted_p50": 0.0021062319413068507,
-                "predicted_p95": 0.23266520718285508,
+                "predicted_ppb": 0.0021021030155378598,
+                "predicted_p5": 4.600122849135269e-06,
+                "predicted_p50": 0.0021021030155378598,
+                "predicted_p95": 0.2322091048179423,
                 "ci_level_pct": 90,
-                "support_count": 5,
+                "support_count": 7,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "2-Furfurylthiol (FFT)": {
                 "compound": "2-Furfurylthiol (FFT)",
-                "predicted_ppb": 0.0021062319413068507,
-                "predicted_p5": 9.143021083020407e-07,
-                "predicted_p50": 0.0021062319413068507,
-                "predicted_p95": 0.23266520718285508,
+                "predicted_ppb": 0.0021021030155378598,
+                "predicted_p5": 4.600122849135269e-06,
+                "predicted_p50": 0.0021021030155378598,
+                "predicted_p95": 0.2322091048179423,
                 "ci_level_pct": 90,
-                "support_count": 5,
+                "support_count": 7,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "2-methyl-3-furanthiol": {
                 "compound": "2-methyl-3-furanthiol",
-                "predicted_ppb": 9.500041245710901e-05,
-                "predicted_p5": 2.5612662383809536e-07,
-                "predicted_p50": 9.500041245710901e-05,
-                "predicted_p95": 0.010494233903354232,
+                "predicted_ppb": 0.00025167565562123214,
+                "predicted_p5": 2.2783264895390163e-06,
+                "predicted_p50": 0.00025167565562123214,
+                "predicted_p95": 0.027801386641996606,
                 "ci_level_pct": 90,
-                "support_count": 7,
+                "support_count": 13,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "2-Methyl-3-furanthiol (MFT)": {
                 "compound": "2-Methyl-3-furanthiol (MFT)",
-                "predicted_ppb": 9.500041245710901e-05,
-                "predicted_p5": 2.5612662383809536e-07,
-                "predicted_p50": 9.500041245710901e-05,
-                "predicted_p95": 0.010494233903354232,
+                "predicted_ppb": 0.00025167565562123214,
+                "predicted_p5": 2.2783264895390163e-06,
+                "predicted_p50": 0.00025167565562123214,
+                "predicted_p95": 0.027801386641996606,
                 "ci_level_pct": 90,
-                "support_count": 7,
+                "support_count": 13,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "bis(2-methyl-3-furyl) disulfide": {
                 "compound": "bis(2-methyl-3-furyl) disulfide",
-                "predicted_ppb": 2.9392454915052926e-05,
-                "predicted_p5": 3.002690228849808e-08,
-                "predicted_p50": 2.9392454915052926e-05,
-                "predicted_p95": 0.0032468416598887863,
+                "predicted_ppb": 5.5134520852890295e-05,
+                "predicted_p5": 5.263504503197913e-08,
+                "predicted_p50": 5.5134520852890295e-05,
+                "predicted_p95": 0.006090442588771047,
                 "ci_level_pct": 90,
-                "support_count": 4,
+                "support_count": 2,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             },
             "Bis(2-methyl-3-furyl) disulfide": {
                 "compound": "Bis(2-methyl-3-furyl) disulfide",
-                "predicted_ppb": 2.9392454915052926e-05,
-                "predicted_p5": 3.002690228849808e-08,
-                "predicted_p50": 2.9392454915052926e-05,
-                "predicted_p95": 0.0032468416598887863,
+                "predicted_ppb": 5.5134520852890295e-05,
+                "predicted_p5": 5.263504503197913e-08,
+                "predicted_p50": 5.5134520852890295e-05,
+                "predicted_p95": 0.006090442588771047,
                 "ci_level_pct": 90,
-                "support_count": 4,
+                "support_count": 2,
                 "envelope_source": "prediction_uncertainty_uncalibrated"
             }
         },
@@ -2753,39 +2712,39 @@
             "baseline_name": "Ribose + leucine (no cysteine)",
             "current_name": "Ribose + cysteine + leucine",
             "baseline_total_ppb": 0.18289878824742942,
-            "current_total_ppb": 0.11085844215543351,
+            "current_total_ppb": 0.11082378333885179,
             "steps": [
                 {
                     "class_key": "furan",
                     "display_name": "Furans",
                     "baseline_ppb": 0.18136888540373092,
-                    "current_ppb": 0.10771917269002373,
-                    "delta_ppb": -0.07364971271370718,
-                    "delta_pct": -40.60768888211525
+                    "current_ppb": 0.10750800674043785,
+                    "delta_ppb": -0.07386087866329306,
+                    "delta_pct": -40.724117865573916
                 },
                 {
                     "class_key": "sulfur",
                     "display_name": "Sulfur / Thiols",
                     "baseline_ppb": 0.0,
-                    "current_ppb": 0.0022306248086790123,
-                    "delta_ppb": 0.0022306248086790123,
+                    "current_ppb": 0.002408913192011982,
+                    "delta_ppb": 0.002408913192011982,
                     "delta_pct": null
                 },
                 {
                     "class_key": "aldehyde",
                     "display_name": "Aldehydes",
                     "baseline_ppb": 0.0015226568469709765,
-                    "current_ppb": 0.0009043410918107766,
-                    "delta_ppb": -0.0006183157551601999,
-                    "delta_pct": -40.607688882115255
+                    "current_ppb": 0.0009025682779222845,
+                    "delta_ppb": -0.0006200885690486919,
+                    "delta_pct": -40.724117865573916
                 },
                 {
                     "class_key": "pyrazine",
                     "display_name": "Pyrazines",
                     "baseline_ppb": 7.245996727515609e-06,
-                    "current_ppb": 4.3035649199978185e-06,
-                    "delta_ppb": -2.9424318075177902e-06,
-                    "delta_pct": -40.60768888211524
+                    "current_ppb": 4.2951284796665246e-06,
+                    "delta_ppb": -2.950868247849084e-06,
+                    "delta_pct": -40.7241178655739
                 }
             ],
             "precursor_attribution": null,
@@ -2797,7 +2756,7 @@
             "strecker_signals_ppb": {
                 "methional": 0.0,
                 "2_methylbutanal": 0.0,
-                "3_methylbutanal": 0.0009043410918107766,
+                "3_methylbutanal": 0.0009025682779222845,
                 "phenylacetaldehyde": 0.0,
                 "benzaldehyde": 0.0
             },
@@ -3341,9 +3300,9 @@
                     "source_citation": "Hernandez et al. (2023), Molecules 28:3151"
                 }
             ],
-            "pyrazine_signal_ppb": 4.3035649199978185e-06,
+            "pyrazine_signal_ppb": 4.2951284796665246e-06,
             "pyrazine_propensity": 0.6459558651206883,
-            "pyrazine_burden": 5.693521420497937e-06,
+            "pyrazine_burden": 5.682360196110273e-06,
             "pyrazine_penalty": 0.0,
             "pyrazine_drivers": {
                 "pH_factor": 0.19595586512068827,
@@ -3663,12 +3622,6 @@
                         "matrix_uncertainty_factor": 0.0,
                         "protein_type": "pea_iso",
                         "source_id": "pea_isolate",
-                        "source_profile_available": true,
-                        "meaty_potential_multiplier": 0.8,
-                        "hydrolysate_observability_bias": 0.85,
-                        "off_note_penalty": 0.3,
-                        "lox_activity_flag": true,
-                        "matrix_source_support_score": 0.68,
                         "process_state_transfer_confidence": 0.0,
                         "benchmark_anchor_ids": [
                             "pmc9905368_spi_hvp_xylose_benchmark",
@@ -4336,12 +4289,6 @@
                     "matrix_uncertainty_factor": 0.0,
                     "protein_type": "pea_iso",
                     "source_id": "pea_isolate",
-                    "source_profile_available": true,
-                    "meaty_potential_multiplier": 0.8,
-                    "hydrolysate_observability_bias": 0.85,
-                    "off_note_penalty": 0.3,
-                    "lox_activity_flag": true,
-                    "matrix_source_support_score": 0.68,
                     "process_state_transfer_confidence": 0.0,
                     "benchmark_anchor_ids": [
                         "pmc9905368_spi_hvp_xylose_benchmark",
@@ -4451,13 +4398,13 @@
                     "active": true,
                     "summary": "Carbohydrate pyrolysis or caramelization markers are active, and the lane now carries explicit furanone and carbonyl anchors so browning support is separated from benchmark-visible over-furan drift.",
                     "severity_marker_signals_ppb": {
-                        "furfural": 0.10771917269002373,
+                        "furfural": 0.10750800674043785,
                         "hmf": 0.0,
                         "2_acetylfuran": 0.0
                     },
-                    "severity_signal_ppb": 0.10771917269002373,
+                    "severity_signal_ppb": 0.10750800674043785,
                     "caramelization_support_score": 0.8,
-                    "severity_penalty_factor": 0.001795319544833729,
+                    "severity_penalty_factor": 0.001791800112340631,
                     "furanone_support_active": true,
                     "prior_ids": [
                         "blank_fay_1996_furanone_expectation_v1"
@@ -4465,7 +4412,7 @@
                     "mgo_hdmf_reference_active": false,
                     "mgo_hdmf_prior_ids": [],
                     "mgo_hdmf_reference_citations": [],
-                    "mgo_hdmf_fragmentation_context_score": 0.03176936032645613,
+                    "mgo_hdmf_fragmentation_context_score": 0.031767512624397254,
                     "mgo_hdmf_reference_score": 0.0,
                     "mgo_hdmf_reference_yield_ug_per_g": 2.9,
                     "mgo_hdmf_reference_mgo_mM": 50.0,
@@ -4488,7 +4435,7 @@
                         "furfural"
                     ],
                     "furfural_meat_reference_ppb": 20.0,
-                    "furfural_reference_ratio": 0.0053859586345011866
+                    "furfural_reference_ratio": 0.005375400337021893
                 },
                 "10": {
                     "slr_family": "10",
@@ -4669,9 +4616,9 @@
                     "summary": "No explicit Maillard/lipid competition lane active.",
                     "competition_window_active": false,
                     "hexanal_signal_ppb": 0.0,
-                    "sulfur_partner_signal_ppb": 0.0021062319413068507,
-                    "mft_signal_ppb": 9.500041245710901e-05,
-                    "fft_signal_ppb": 0.0021062319413068507,
+                    "sulfur_partner_signal_ppb": 0.0021021030155378598,
+                    "mft_signal_ppb": 0.00025167565562123214,
+                    "fft_signal_ppb": 0.0021021030155378598,
                     "cysteine_partner_active": true,
                     "fast_donor_active": true,
                     "kinetic_prior_ids": [
@@ -4703,7 +4650,7 @@
                     "suppression_anchor_fraction": 0.28800000000000003,
                     "radical_quench_reactivity_factor": 0.9006666666666667,
                     "hexanal_pressure": 0.0,
-                    "radical_partner_pressure": 0.8000614317649548,
+                    "radical_partner_pressure": 0.8000613113379532,
                     "hexanal_suppression_fraction": 0.0,
                     "predicted_quenched_hexanal_ppb": 0.0
                 },
@@ -4958,8 +4905,8 @@
                         "off_flavour_risk_delta": 0.0
                     },
                     "09": {
-                        "target_score_delta": 0.06382046804551662,
-                        "off_flavour_risk_delta": 0.00010771917269002374
+                        "target_score_delta": 0.06382081998876594,
+                        "off_flavour_risk_delta": 0.00010750800674043785
                     },
                     "10": {
                         "target_score_delta": 0.0,
@@ -4996,9 +4943,9 @@
                         "off_flavour_risk_delta": 0.018057927340283907
                     }
                 },
-                "target_score_delta": 0.280256606080081,
+                "target_score_delta": 0.28025695802333034,
                 "maillard_closure_delta": -0.008470620505007673,
-                "off_flavour_risk_delta": 0.00943688353870317
+                "off_flavour_risk_delta": 0.009436672372753585
             },
             "family_prior_bundle": {
                 "amino_acid_sugar_core": [
@@ -5007,7 +4954,6 @@
                         "payload_role": "computational_prior",
                         "source": "Laemont 2023, Arsa 2022, Wang 2021, Hao 2025",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "unknown",
                         "observable_panel_tags": [
                             "pyrazine",
                             "optimization_constraint"
@@ -5027,7 +4973,6 @@
                         "payload_role": "computational_prior",
                         "source": "Lincoln et al. (2025), Sustainable Food Proteins 10.1002/sfp2.1044",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "unknown",
                         "observable_panel_tags": [
                             "crosstalk",
                             "guardrail",
@@ -5045,7 +4990,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hidalgo et al. (2007)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosstalk",
                             "guardrail",
@@ -5063,7 +5007,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zamora et al. (2010)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosstalk",
                             "guardrail",
@@ -5081,7 +5024,6 @@
                         "payload_role": "computational_prior",
                         "source": "Ding et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosstalk",
                             "guardrail",
@@ -5099,7 +5041,6 @@
                         "payload_role": "computational_prior",
                         "source": "Richards et al. (2009)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosstalk",
                             "guardrail",
@@ -5117,7 +5058,6 @@
                         "payload_role": "computational_prior",
                         "source": "Smagghe et al. (2006)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosstalk",
                             "guardrail",
@@ -5135,7 +5075,6 @@
                         "payload_role": "computational_prior",
                         "source": "Blank et al. (2001)",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "bounded_guardrail",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5156,7 +5095,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hidalgo & Zamora (2004), JAFC 52:7126",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "bounded_guardrail",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5177,7 +5115,6 @@
                         "payload_role": "computational_prior",
                         "source": "Mottram et al. (2001), JAFC 49:3712",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5198,7 +5135,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zhang et al. (2022), Food Chemistry 133961",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5219,7 +5155,6 @@
                         "payload_role": "computational_prior",
                         "source": "Frankel et al. (1982)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5240,7 +5175,6 @@
                         "payload_role": "computational_prior",
                         "source": "Grosch & Wieser (1999)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5261,7 +5195,6 @@
                         "payload_role": "computational_prior",
                         "source": "Esterbauer et al. (1991)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5282,7 +5215,6 @@
                         "payload_role": "computational_prior",
                         "source": "Kamal-Eldin et al. (2003)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5303,7 +5235,6 @@
                         "payload_role": "computational_prior",
                         "source": "Yeo & Shibamoto (1991)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5324,7 +5255,6 @@
                         "payload_role": "computational_prior",
                         "source": "Tan et al. (2001)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5345,7 +5275,6 @@
                         "payload_role": "computational_prior",
                         "source": "Bayram et al. (2023)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5366,7 +5295,6 @@
                         "payload_role": "computational_prior",
                         "source": "Spier et al. (2010)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5387,7 +5315,6 @@
                         "payload_role": "computational_prior",
                         "source": "Esterbauer et al. (1991)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5408,7 +5335,6 @@
                         "payload_role": "computational_prior",
                         "source": "Grosch (1982)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5429,7 +5355,6 @@
                         "payload_role": "computational_prior",
                         "source": "Frankel (1982)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5450,7 +5375,6 @@
                         "payload_role": "computational_prior",
                         "source": "Grosch (1999)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5471,7 +5395,6 @@
                         "payload_role": "computational_prior",
                         "source": "Farmer et al. (1991)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5492,7 +5415,6 @@
                         "payload_role": "computational_prior",
                         "source": "Kamal-Eldin et al. (2003)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5513,7 +5435,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hidalgo et al. (2007)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5534,7 +5455,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zamora et al. (2010)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5555,7 +5475,6 @@
                         "payload_role": "computational_prior",
                         "source": "Ding et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5576,7 +5495,6 @@
                         "payload_role": "computational_prior",
                         "source": "Richards et al. (2009)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5597,7 +5515,6 @@
                         "payload_role": "computational_prior",
                         "source": "Smagghe et al. (2006)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5618,7 +5535,6 @@
                         "payload_role": "computational_prior",
                         "source": "Trikusuma et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5639,7 +5555,6 @@
                         "payload_role": "computational_prior",
                         "source": "PMC 2026 HME hexanal baseline",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5660,7 +5575,6 @@
                         "payload_role": "computational_prior",
                         "source": "Xu et al. (2024)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5681,7 +5595,6 @@
                         "payload_role": "computational_prior",
                         "source": "Yeo & Shibamoto (1991)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5702,7 +5615,6 @@
                         "payload_role": "computational_prior",
                         "source": "Marquez-Ruiz et al. (2014)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -5725,7 +5637,6 @@
                         "payload_role": "computational_prior",
                         "source": "Blank and Fay 1996 plus Watanabe 2015 meat-side reference context",
                         "confidence_tier": "low",
-                        "uncertainty_posture": "unknown",
                         "observable_panel_tags": [
                             "furanone",
                             "caramelization_support"
@@ -5742,7 +5653,6 @@
                         "payload_role": "computational_prior",
                         "source": "Mottram & Nobrega (2002 / Chapter 9 review)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "furanone",
                             "caramelization_support"
@@ -5759,7 +5669,6 @@
                         "payload_role": "computational_prior",
                         "source": "Brands & van Boekel (2002) with bounded absolute-yield context carried forward from the repo's Hauck & Tressl 1999 HDMF synthesis cross-reference",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "furanone",
                             "caramelization_support"
@@ -5776,7 +5685,6 @@
                         "payload_role": "computational_prior",
                         "source": "de Bruijn et al. (1987)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "furanone",
                             "caramelization_support"
@@ -5793,7 +5701,6 @@
                         "payload_role": "computational_prior",
                         "source": "Luna & Aguilera (2014)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "furanone",
                             "caramelization_support"
@@ -5810,7 +5717,6 @@
                         "payload_role": "computational_prior",
                         "source": "Bao et al. (2022)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "furanone",
                             "caramelization_support"
@@ -5827,7 +5733,6 @@
                         "payload_role": "computational_prior",
                         "source": "Glomb & Monnier (1995)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "dicarbonyl",
                             "caramelization_support",
@@ -5851,7 +5756,6 @@
                         "payload_role": "computational_prior",
                         "source": "Cerny 2007 isotope-labeled thiamine partitioning plus Cerny & Guntz-Dubini 2008 pH-resolved MFT yields and Hofmann et al. 1996 beef-realistic synergy context",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "unknown",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5868,7 +5772,6 @@
                         "payload_role": "computational_prior",
                         "source": "Voelker, Taylor & Mauer (2021)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5885,7 +5788,6 @@
                         "payload_role": "computational_prior",
                         "source": "Arabshahi & Lund (1988)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5902,7 +5804,6 @@
                         "payload_role": "computational_prior",
                         "source": "Huang (2022)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5919,7 +5820,6 @@
                         "payload_role": "computational_prior",
                         "source": "Tannenbaum, Archer & Young (1985)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5936,7 +5836,6 @@
                         "payload_role": "computational_prior",
                         "source": "Voelker et al. (2018)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5953,7 +5852,6 @@
                         "payload_role": "computational_prior",
                         "source": "Cerny & Guntz-Dubini (2008)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5970,7 +5868,6 @@
                         "payload_role": "computational_prior",
                         "source": "WITHDRAWN - no verifiable source (previously cited as 'Hofmann, Schieberle & Grosch (1996), JAFC 44:2219')",
                         "confidence_tier": "low",
-                        "uncertainty_posture": "withdrawn_do_not_use",
                         "observable_panel_tags": [
                             "thiamine_support",
                             "sulfur_support"
@@ -5989,7 +5886,6 @@
                         "payload_role": "computational_prior",
                         "source": "Matoba, Terao & Fujimaki 1988 IMP/GMP hydrolysis kinetics plus Mouritsen 2024 threshold-fold data, Yamaguchi & Ninomiya 2000 EUC constants, and Nakamura 1988 ribose-liberation context",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "unknown",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6010,7 +5906,6 @@
                         "payload_role": "computational_prior",
                         "source": "Liardon, de Weck-Gaudard & Philippossian (1991)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "unknown",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6031,7 +5926,6 @@
                         "payload_role": "computational_prior",
                         "source": "Aliani & Farmer (2005)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "unknown",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6052,7 +5946,6 @@
                         "payload_role": "computational_prior",
                         "source": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358, DOI:10.1021/jf034037p",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6073,7 +5966,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hwang, Ismail & Joo (2020), Foods 9:251, DOI:10.3390/foods9030251",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "bounded_contextual_transfer",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6094,7 +5986,6 @@
                         "payload_role": "computational_prior",
                         "source": "Ahlberg & Mohammadi (2021), PMC9998214",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "bounded_contextual_transfer",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6115,7 +6006,6 @@
                         "payload_role": "computational_prior",
                         "source": "Liu, Bau, Jin et al. (2022), LWT 164:113651, DOI:10.1016/j.lwt.2022.113651",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "bounded_contextual_transfer",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6136,7 +6026,6 @@
                         "payload_role": "computational_prior",
                         "source": "Mouritsen et al. (2024)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6157,7 +6046,6 @@
                         "payload_role": "computational_prior",
                         "source": "Matoba et al. (1988)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6178,7 +6066,6 @@
                         "payload_role": "computational_prior",
                         "source": "Blank & Grosch (2001), JAFC 49:2985",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "nucleotide_support",
                             "umami_support",
@@ -6201,7 +6088,6 @@
                         "payload_role": "computational_prior",
                         "source": "Martins, Jongen & van Boekel (2000), Trends in Food Science & Technology 11:364, DOI:10.1016/s0924-2244(01)00022-x",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6221,7 +6107,6 @@
                         "payload_role": "computational_prior",
                         "source": "van Boekel (2001), DOI:10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6241,7 +6126,6 @@
                         "payload_role": "computational_prior",
                         "source": "Blank et al. (1997), DOI:10.1021/jf960777q",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6262,7 +6146,6 @@
                         "payload_role": "computational_prior",
                         "source": "Tran et al. (2023 / PMC9846454)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6285,7 +6168,6 @@
                         "payload_role": "computational_prior",
                         "source": "Quintas et al. (2000)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6308,7 +6190,6 @@
                         "payload_role": "computational_prior",
                         "source": "Huang et al. (2024)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6331,7 +6212,6 @@
                         "payload_role": "computational_prior",
                         "source": "Martins & van Boekel (2003)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6354,7 +6234,6 @@
                         "payload_role": "computational_prior",
                         "source": "Nashalian & Yaylayan (2014)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6377,7 +6256,6 @@
                         "payload_role": "computational_prior",
                         "source": "Wu et al. (2025)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6400,7 +6278,6 @@
                         "payload_role": "computational_prior",
                         "source": "Blank & Mottram (Mercaptoketone labelling 2002)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6423,7 +6300,6 @@
                         "payload_role": "computational_prior",
                         "source": "Buera et al. (1987)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6446,7 +6322,6 @@
                         "payload_role": "computational_prior",
                         "source": "PMC10056349 (2023)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6469,7 +6344,6 @@
                         "payload_role": "computational_prior",
                         "source": "Tran et al. (2023)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6492,7 +6366,6 @@
                         "payload_role": "computational_prior",
                         "source": "Davidek et al. (2006), JAFC 54:6677",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6515,7 +6388,6 @@
                         "payload_role": "computational_prior",
                         "source": "Martins & van Boekel (2003)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "literature_bounded",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6538,7 +6410,6 @@
                         "payload_role": "computational_prior",
                         "source": "Liu et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6561,7 +6432,6 @@
                         "payload_role": "computational_prior",
                         "source": "Yu et al. (2021)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "donor_hierarchy",
                             "carbonyl_donor",
@@ -6586,7 +6456,6 @@
                         "payload_role": "computational_prior",
                         "source": "Ohsu et al. (2010), J. Biol. Chem. 285:1016, DOI:10.1074/jbc.M109.029165",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "kokumi_support",
                             "mouthfulness",
@@ -6607,7 +6476,6 @@
                         "payload_role": "computational_prior",
                         "source": "Huang et al. (2021)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "sulfur_support",
                             "peptide_support",
@@ -6628,7 +6496,6 @@
                         "payload_role": "computational_prior",
                         "source": "Xu, H. et al. (2025)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "sulfur_support",
                             "peptide_support",
@@ -6651,7 +6518,6 @@
                         "payload_role": "computational_prior",
                         "source": "ACS JAFC 3c02618",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6672,7 +6538,6 @@
                         "payload_role": "computational_prior",
                         "source": "ACS JAFC 0c01925",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6693,7 +6558,6 @@
                         "payload_role": "computational_prior",
                         "source": "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6714,7 +6578,6 @@
                         "payload_role": "computational_prior",
                         "source": "PubMed PMID:36878579 (Ref. 39)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6735,7 +6598,6 @@
                         "payload_role": "computational_prior",
                         "source": "Fadel et al. (2015)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6756,7 +6618,6 @@
                         "payload_role": "computational_prior",
                         "source": "Wang et al. (2023)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6777,7 +6638,6 @@
                         "payload_role": "computational_prior",
                         "source": "Mottram et al. (2001)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6798,7 +6658,6 @@
                         "payload_role": "computational_prior",
                         "source": "Siripitakpong et al. (2026)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "retention_support",
                             "binding_support",
@@ -6821,7 +6680,6 @@
                         "payload_role": "computational_prior",
                         "source": "Bhandari et al. (1998)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_guardrail",
                         "observable_panel_tags": [
                             "off_note",
                             "guardrail",
@@ -6846,7 +6704,6 @@
                         "payload_role": "computational_prior",
                         "source": "Nakagawa et al. (2004), PubMed PMID:15165134",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "bounded_guardrail",
                         "observable_panel_tags": [
                             "guardrail",
                             "safety",
@@ -6867,7 +6724,6 @@
                         "payload_role": "computational_prior",
                         "source": "J. Agric. Food Chem. 2020 (Ref. 25)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "guardrail",
                             "safety",
@@ -6888,7 +6744,6 @@
                         "payload_role": "computational_prior",
                         "source": "J. Agric. Food Chem. 2019 (Ref. 24)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_guardrail",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -6909,7 +6764,6 @@
                         "payload_role": "computational_prior",
                         "source": "PMC PMCID:PMC12154226 (Ref. 2)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_guardrail",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -6930,7 +6784,6 @@
                         "payload_role": "computational_prior",
                         "source": "Rawel et al. (2002)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -6951,7 +6804,6 @@
                         "payload_role": "computational_prior",
                         "source": "ResearchGate (Ref. 14)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -6972,7 +6824,6 @@
                         "payload_role": "computational_prior",
                         "source": "Shu, Lorentzen & Davies (2019), Free Radical Biology and Medicine 137:169, DOI:10.1016/j.freeradbiomed.2019.04.026",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -6993,7 +6844,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zhu H. et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7014,7 +6864,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zhu H. et al. (2020b)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7035,7 +6884,6 @@
                         "payload_role": "computational_prior",
                         "source": "Liu J. et al. (2023)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7056,7 +6904,6 @@
                         "payload_role": "computational_prior",
                         "source": "C\u00f6mert & G\u00f6kmen (2019)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7077,7 +6924,6 @@
                         "payload_role": "computational_prior",
                         "source": "Munoz et al. (2007)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7098,7 +6944,6 @@
                         "payload_role": "computational_prior",
                         "source": "C\u00f6mert & G\u00f6kmen (2021)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7119,7 +6964,6 @@
                         "payload_role": "computational_prior",
                         "source": "Song et al. (2009)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7140,7 +6984,6 @@
                         "payload_role": "computational_prior",
                         "source": "Li et al. (2017)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7161,7 +7004,6 @@
                         "payload_role": "computational_prior",
                         "source": "Monforte et al. (2018)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7182,7 +7024,6 @@
                         "payload_role": "computational_prior",
                         "source": "Liu, Y. (2021 thesis, NC State) / Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "guardrail",
                             "sulfur_support",
@@ -7205,7 +7046,6 @@
                         "payload_role": "computational_prior",
                         "source": "Frontiers in Nutrition 2022, DOI:10.3389/fnut.2022.1022254",
                         "confidence_tier": "medium_high",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7226,7 +7066,6 @@
                         "payload_role": "computational_prior",
                         "source": "SciELO Brasil (Ref. 4)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7247,7 +7086,6 @@
                         "payload_role": "computational_prior",
                         "source": "PubMed PMID:1904866 (Ref. 5)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7268,7 +7106,6 @@
                         "payload_role": "computational_prior",
                         "source": "PMC PMCID:PMC3199460 (Ref. 2)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7289,7 +7126,6 @@
                         "payload_role": "computational_prior",
                         "source": "Serpen & G\u00f6kmen (2007)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7310,7 +7146,6 @@
                         "payload_role": "computational_prior",
                         "source": "Yang et al. (2021)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7331,7 +7166,6 @@
                         "payload_role": "computational_prior",
                         "source": "Manso et al. (2001)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7352,7 +7186,6 @@
                         "payload_role": "computational_prior",
                         "source": "Takase et al. (2025)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7373,7 +7206,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hendrickx et al. (1998)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7394,7 +7226,6 @@
                         "payload_role": "computational_prior",
                         "source": "Jian et al. (2012)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7415,7 +7246,6 @@
                         "payload_role": "computational_prior",
                         "source": "Smuda & Glomb (2013)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7436,7 +7266,6 @@
                         "payload_role": "computational_prior",
                         "source": "Frontiers (2022) HCW AA Arrhenius anchor",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7457,7 +7286,6 @@
                         "payload_role": "computational_prior",
                         "source": "PMID 1904866 pentosidine equivalence",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7478,7 +7306,6 @@
                         "payload_role": "computational_prior",
                         "source": "SciELO Brasil (Ref. 4)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "ascorbic_support",
                             "arrhenius_anchor",
@@ -7501,7 +7328,6 @@
                         "payload_role": "computational_prior",
                         "source": "PMC PMCID:PMC9351765 (Ref. 12)",
                         "confidence_tier": "medium",
-                        "uncertainty_posture": "bounded_calibration",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7523,7 +7349,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zha et al. (2019)",
                         "confidence_tier": "medium_low",
-                        "uncertainty_posture": "bounded_contextual_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7545,7 +7370,6 @@
                         "payload_role": "computational_prior",
                         "source": "Gigl et al. (2021)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7567,7 +7391,6 @@
                         "payload_role": "computational_prior",
                         "source": "Brands et al. (2002)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7589,7 +7412,6 @@
                         "payload_role": "computational_prior",
                         "source": "Gigl et al. (2021)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7611,7 +7433,6 @@
                         "payload_role": "computational_prior",
                         "source": "Suzuki & Philp (1990)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7633,7 +7454,6 @@
                         "payload_role": "computational_prior",
                         "source": "Mundt & Wedzicha (2007)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7655,7 +7475,6 @@
                         "payload_role": "computational_prior",
                         "source": "Cao et al. (2024)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7677,7 +7496,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hofmann et al. (2001)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7699,7 +7517,6 @@
                         "payload_role": "computational_prior",
                         "source": "Martins & van Boekel (2005)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "trapping_support",
                             "melanoidin",
@@ -7723,7 +7540,6 @@
                         "payload_role": "computational_prior",
                         "source": "Krause et al. (2003)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "furosine",
                             "hydrolysis",
@@ -7743,7 +7559,6 @@
                         "payload_role": "computational_prior",
                         "source": "Lagrain et al. (2010)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7762,7 +7577,6 @@
                         "payload_role": "computational_prior",
                         "source": "Rombouts et al. (2012)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7781,7 +7595,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zhang et al. (1993)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7800,7 +7613,6 @@
                         "payload_role": "computational_prior",
                         "source": "Li et al. (2010)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7819,7 +7631,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zha et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7838,7 +7649,6 @@
                         "payload_role": "computational_prior",
                         "source": "Kutzli et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7857,7 +7667,6 @@
                         "payload_role": "computational_prior",
                         "source": "Nguyen et al. (2025)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7876,7 +7685,6 @@
                         "payload_role": "computational_prior",
                         "source": "Pereira et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7895,7 +7703,6 @@
                         "payload_role": "computational_prior",
                         "source": "Sun et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7914,7 +7721,6 @@
                         "payload_role": "computational_prior",
                         "source": "Shirai et al. (2015)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7933,7 +7739,6 @@
                         "payload_role": "computational_prior",
                         "source": "Ma et al. (2024)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "crosslinking",
                             "lanthionine",
@@ -7954,7 +7759,6 @@
                         "payload_role": "computational_prior",
                         "source": "Sol\u00eds-Calero et al. (2015)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -7975,7 +7779,6 @@
                         "payload_role": "computational_prior",
                         "source": "Sol\u00eds-Calero et al. (2013)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -7996,7 +7799,6 @@
                         "payload_role": "computational_prior",
                         "source": "Lertsiri et al. (1998)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -8017,7 +7819,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hidalgo et al. (2005)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -8038,7 +7839,6 @@
                         "payload_role": "computational_prior",
                         "source": "Zamora et al. (2020)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -8059,7 +7859,6 @@
                         "payload_role": "computational_prior",
                         "source": "Hidalgo et al. (2006)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -8080,7 +7879,6 @@
                         "payload_role": "computational_prior",
                         "source": "Vilanova et al. (2012)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -8101,7 +7899,6 @@
                         "payload_role": "computational_prior",
                         "source": "Biondi et al. (2010)",
                         "confidence_tier": "high",
-                        "uncertainty_posture": "directional_transfer",
                         "observable_panel_tags": [
                             "phospholipid_amine_sink",
                             "surface_catalysis",
@@ -8373,7 +8170,7 @@
                         "severity_marker"
                     ],
                     "active": true,
-                    "state_value": 0.10771917269002373,
+                    "state_value": 0.10750800674043785,
                     "state_value_summary": "severity_signal_ppb=0.11, severity_penalty_factor=0.00",
                     "influence_mode": "upstream_state_plus_marker_panel",
                     "summary": "Carbohydrate pyrolysis or caramelization markers are active, and the lane now carries explicit furanone and carbonyl anchors so browning support is separated from benchmark-visible over-furan drift.",
@@ -8403,24 +8200,24 @@
             ]
         },
         "predicted_ppb": {
-            "O=Cc1ccco1": 0.10771917269002373,
-            "furfural": 0.10771917269002373,
-            "Furfural": 0.10771917269002373,
-            "CC(C)CC=O": 0.0009043410918107766,
-            "3-methylbutanal": 0.0009043410918107766,
-            "3-Methylbutanal": 0.0009043410918107766,
-            "Cc1cnc(C)cn1": 4.3035649199978185e-06,
-            "2,5-dimethylpyrazine": 4.3035649199978185e-06,
-            "2,5-Dimethylpyrazine": 4.3035649199978185e-06,
-            "SCc1ccco1": 0.0021062319413068507,
-            "2-furfurylthiol": 0.0021062319413068507,
-            "2-Furfurylthiol (FFT)": 0.0021062319413068507,
-            "Cc1occc1S": 9.500041245710901e-05,
-            "2-methyl-3-furanthiol": 9.500041245710901e-05,
-            "2-Methyl-3-furanthiol (MFT)": 9.500041245710901e-05,
-            "Cc1occc1SSc1ccoc1C": 2.9392454915052926e-05,
-            "bis(2-methyl-3-furyl) disulfide": 2.9392454915052926e-05,
-            "Bis(2-methyl-3-furyl) disulfide": 2.9392454915052926e-05
+            "O=Cc1ccco1": 0.10750800674043785,
+            "furfural": 0.10750800674043785,
+            "Furfural": 0.10750800674043785,
+            "CC(C)CC=O": 0.0009025682779222845,
+            "3-methylbutanal": 0.0009025682779222845,
+            "3-Methylbutanal": 0.0009025682779222845,
+            "Cc1cnc(C)cn1": 4.2951284796665246e-06,
+            "2,5-dimethylpyrazine": 4.2951284796665246e-06,
+            "2,5-Dimethylpyrazine": 4.2951284796665246e-06,
+            "SCc1ccco1": 0.0021021030155378598,
+            "2-furfurylthiol": 0.0021021030155378598,
+            "2-Furfurylthiol (FFT)": 0.0021021030155378598,
+            "Cc1occc1S": 0.00025167565562123214,
+            "2-methyl-3-furanthiol": 0.00025167565562123214,
+            "2-Methyl-3-furanthiol (MFT)": 0.00025167565562123214,
+            "Cc1occc1SSc1ccoc1C": 5.5134520852890295e-05,
+            "bis(2-methyl-3-furyl) disulfide": 5.5134520852890295e-05,
+            "Bis(2-methyl-3-furyl) disulfide": 5.5134520852890295e-05
         },
         "detected_targets": [
             "Hydrogen Sulfide",

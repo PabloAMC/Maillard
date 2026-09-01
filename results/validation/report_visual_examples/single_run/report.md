@@ -1,6 +1,6 @@
 # Maillard Simulation Report - Ribose + cysteine + leucine
 
-**Date:** 2026-08-27 19:12:54
+**Date:** 2026-09-01 22:11:12
 
 ## 1. Input Formulation & Conditions
 | Parameter | Value |
@@ -57,8 +57,8 @@
 - **Off-Flavour Risk:** 0.01
 - **Safety Score:** 1.04 *(2× band-relative risk, range [0, 2]; **higher is worse**; >1.0 = above the action band)*
 
-- **MFT/Furfural Ratio:** 0.0009
-- **Meaty Quality Penalty:** 1.32
+- **MFT/Furfural Ratio:** 0.0023
+- **Meaty Quality Penalty:** 0.79
 
 - **Strecker Balance Score:** 0.00
 - **Strecker Gap Penalty:** 0.00
@@ -120,11 +120,11 @@
 ### Compound Confidence
 | Compound | Predicted | Tier | Score | Mode | Reachability | Calibration Source | Observable Assumption |
 | :--- | :--- | :---: | ---: | :--- | :--- | :--- | :--- |
-| furfural | 0.108 ppb [0.000975-11.9, 90% CI] | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic furan transfer) | static_class_profile \| class_level \| standard_matrix_support |
-| 2-furfurylthiol | 0.00211 ppb [9.14e-07-0.233, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
-| 3-methylbutanal | 0.000904 ppb | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic aldehyde transfer) | static_class_profile \| class_level \| standard_matrix_support |
-| 2-methyl-3-furanthiol | 9.5e-05 ppb [2.56e-07-0.0105, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
-| bis(2-methyl-3-furyl) disulfide | 2.94e-05 ppb [3e-08-0.00325, 90% CI] | exploratory | 33.0 | hypothesis_only | conditionally_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
+| furfural | 0.108 ppb [0.000973-11.9, 90% CI] | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic furan transfer) | static_class_profile \| class_level \| standard_matrix_support |
+| 2-furfurylthiol | 0.0021 ppb [4.6e-06-0.232, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
+| 3-methylbutanal | 0.000903 ppb | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic aldehyde transfer) | static_class_profile \| class_level \| standard_matrix_support |
+| 2-methyl-3-furanthiol | 0.000252 ppb [2.28e-06-0.0278, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
+| bis(2-methyl-3-furyl) disulfide | 5.51e-05 ppb [5.26e-08-0.00609, 90% CI] | exploratory | 33.0 | hypothesis_only | conditionally_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
 
 ### Compound Confidence Overlay
 - **figure:** compound_confidence_overlay.png
@@ -163,7 +163,7 @@
 | default | kinetic_model_reference | De Vleeschouwer, Van der Plancken & Van Loey (2006), JAFC 54:7847 | Pseudo-first-order formation/elimination kinetics model |
 | default | kinetic_model_reference | Ma et al. (2022), Frontiers in Nutrition 9:940202 | Demonstration of lipid oxidation carbonyl crosstalk in accelerating acrylamide formation |
 | default | industrial_endpoint_reference | Ma et al. (2024) | CML and CEL selective generation under extrusion barrel temperatures of 160 C. |
-| default | industrial_endpoint_reference | Knol et al. (2005) | Bifurcated acrylamide formation (Ea 52.1 kJ/mol) and degradation (Ea 72.9 kJ/mol) kinetic parameters. |
+| default | industrial_endpoint_reference | Knol et al. (2005) | Bifurcated acrylamide formation (Ea 94.4 +/- 11 kJ/mol) and degradation (Ea 85.1 +/- 14 kJ/mol) kinetic parameters. |
 | default | industrial_endpoint_reference | De Vleeschouwer et al. (2008) | Moisture-dependent acrylamide degradation with minimum elimination at Aw 0.82. |
 
 - Extended safety provenance entries available in JSON: 7
@@ -243,10 +243,10 @@
 - **structural_gap_ids:** ppi_meaty_positive_matrix_benchmark, spi_meaty_positive_matrix_benchmark, mft_fft_matrix_retention, ppi_spi_time_series, meaty_off_flavour_safety_tradeoff_panel
 
 ### Literature Learning Loop Summary
-- **ready_reference_count:** 203
-- **encoded_runtime_reference_count:** 203
+- **ready_reference_count:** 197
+- **encoded_runtime_reference_count:** 197
 - **template_queue_count:** 0
-- **matrix_family_count:** 84
+- **matrix_family_count:** 83
 - **intake_structural_gap_count:** 5
 - **process_gap_count:** 5
 - **matrix_prior_families:** pea_iso, soy_iso, myco
@@ -395,8 +395,7 @@
 - **bulk_volatile_retention:** 0.5674382062546259
 - **literature_window:** {'lysine_min': 0.3, 'lysine_max': 0.45, 'cysteine_min': 0.0, 'cysteine_max': 0.08, 'source': 'Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope, retained as a conservative pea-isolate interpolation while exact benchmark-condition values remain unmeasured'}
 - **denaturation_source:** Asen 2022 DSC/DTNB thermal window + Li 2025 free-SH response; calibrated so pea isolate stays mostly native at 40C but opens progressively by 90-140C
-- **prior_summary:** {'accessibility_window': {'parameter': 'accessibility_window', 'source': 'Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope, retained as a conservative pea-isolate interpolation while exact benchmark-condition values remain unmeasured', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'uncertainty_posture': 'calibration_grade_transfer', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'Directly informed by validated pea process-state anchors, but still transferred to the benchmark condition rather than measured there.'}, 'denaturation_heuristic': {'parameter': 'denaturation_heuristic', 'source': 'Asen 2022 DSC/DTNB thermal window + Li 2025 free-SH response; calibrated so pea isolate stays mostly native at 40C but opens progressively by 90-140C', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'uncertainty_posture': 'calibration_grade_transfer', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'This is a low-cost interpolation heuristic derived from pea literature anchors, not a direct benchmark fit.'}, 'volatile_class_profile': {'parameter': 'volatile_class_profile', 'source': 'Literature-calibrated class-aware trapping: VSCs bind strongly to pea proteins as verified by Sun 2025/2026 and Lozano 2009.', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'uncertainty_posture': 'literature_bounded', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'Used as a class-level surrogate until compound-specific matrix retention data exists for meaty sulfur targets.'}, 'matrix_correction': {'parameter': 'matrix_correction', 'source': 'Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope; values remain a conservative PPI interpolation because the exact 95C pH 5.5 benchmark condition still lacks direct wet-lab measurement', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'uncertainty_posture': 'calibration_grade_transfer', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'This is a reliability improvement over a generic heuristic because the numbers now explicitly track the validated pea process-state literature.'}}
-- **matrix_prior_uncertainty_postures:** ['calibration_grade_transfer', 'literature_bounded']
+- **prior_summary:** {'accessibility_window': {'parameter': 'accessibility_window', 'source': 'Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope, retained as a conservative pea-isolate interpolation while exact benchmark-condition values remain unmeasured', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'Directly informed by validated pea process-state anchors, but still transferred to the benchmark condition rather than measured there.'}, 'denaturation_heuristic': {'parameter': 'denaturation_heuristic', 'source': 'Asen 2022 DSC/DTNB thermal window + Li 2025 free-SH response; calibrated so pea isolate stays mostly native at 40C but opens progressively by 90-140C', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'This is a low-cost interpolation heuristic derived from pea literature anchors, not a direct benchmark fit.'}, 'volatile_class_profile': {'parameter': 'volatile_class_profile', 'source': 'Literature-calibrated class-aware trapping: VSCs bind strongly to pea proteins as verified by Sun 2025/2026 and Lozano 2009.', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'Used as a class-level surrogate until compound-specific matrix retention data exists for meaty sulfur targets.'}, 'matrix_correction': {'parameter': 'matrix_correction', 'source': 'Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope; values remain a conservative PPI interpolation because the exact 95C pH 5.5 benchmark condition still lacks direct wet-lab measurement', 'provenance_tier': 'literature_derived_transfer', 'confidence_tier': 'medium', 'process_state_applicability': ['ambient_slurry', 'heated_matrix', 'aqueous_pre_extrusion_model', 'extrusion_structured'], 'notes': 'This is a reliability improvement over a generic heuristic because the numbers now explicitly track the validated pea process-state literature.'}}
 - **matrix_prior_process_state_applicability:** ['ambient_slurry', 'aqueous_pre_extrusion_model', 'extrusion_structured', 'heated_matrix']
 - **accessibility_profile:** free_like
 - **accessibility_warning:** False
@@ -411,9 +410,9 @@
 
 ## 5. Provenance
 - **artifact_kind:** single_run_report
-- **generated_at:** 2026-08-27T19:12:46.010380
-- **generator:** scripts/generators/generate_report_visual_examples.py
-- **repository:** Maillard | branch audit-remediation | commit 263bae8 | dirty True
+- **generated_at:** 2026-09-01T22:10:58.462156
+- **generator:** scripts/generators/generate_report_visual_examples.py --output-dir results/validation/report_visual_examples --docs-asset-dir docs/assets
+- **repository:** workspace | branch cleaning | commit 2208fd0 | dirty True
 - **input_fingerprint_sha256:** b63663346583a45dfd5cb20eeecab6c9a8d6d27baa6bb1a9b6b2324eeeee6e70
 - **scientific_surface:**
   - scientific_reference: docs/reference/SCIENTIFIC_REFERENCE.md
@@ -432,7 +431,7 @@
   - matrix_family_coverage_registry: data/lit/matrix_family_coverage_registry.json
   - benchmark_intake_registry: data/lit/benchmark_intake_registry.json
   - computational_priors: data/lit/computational_priors.json
-  - slr_incorporation_matrix: data/lit/slr_incorporation_matrix.json
+  - slr_incorporation_matrix: results/literature/slr_incorporation_matrix.json
   - flavor_reference_payloads: data/lit/flavor_reference_payloads.json
   - process_state_calibrations: data/lit/process_state_calibrations.json
   - retention_reference_payloads: data/lit/retention_reference_payloads.json
@@ -455,47 +454,11 @@
   - chemistry_family_scope_json: results/validation/chemistry_family_scope.json
   - matrix_family_coverage: results/validation/matrix_family_coverage.md
   - matrix_family_coverage_json: results/validation/matrix_family_coverage.json
-  - refinement_watchlist: results/validation/refinement_watchlist.md
-  - refinement_watchlist_json: results/validation/refinement_watchlist.json
-  - offline_dft_jobs: results/validation/offline_dft_jobs.json
   - family_sensitivity: results/validation/family_sensitivity.md
   - family_sensitivity_json: results/validation/family_sensitivity.json
   - family_lane_validation: results/validation/family_lane_validation.md
   - family_lane_validation_json: results/validation/family_lane_validation.json
-  - refinement_global_sensitivity: results/validation/refinement_global_sensitivity.md
-  - refinement_global_sensitivity_json: results/validation/refinement_global_sensitivity.json
-  - cheap_refinement_screening: results/validation/cheap_refinement_screening.md
-  - cheap_refinement_screening_json: results/validation/cheap_refinement_screening.json
-  - selective_dft_plan: results/validation/selective_dft_plan.md
-  - selective_dft_plan_json: results/validation/selective_dft_plan.json
-  - refinement_governance: results/validation/refinement_governance.md
-  - refinement_governance_json: results/validation/refinement_governance.json
-  - refinement_offline_dft_jobs: results/validation/refinement_offline_dft_jobs.json
-  - refinement_impact: results/validation/refinement_impact.md
-  - refinement_impact_json: results/validation/refinement_impact.json
-  - computational_gap_refinement_plan: results/validation/computational_gap_refinement_plan.md
-  - computational_gap_refinement_plan_json: results/validation/computational_gap_refinement_plan.json
-  - computational_gap_dft_ingestion_report: results/validation/computational_gap_dft_ingestion_report.md
-  - computational_gap_dft_ingestion_report_json: results/validation/computational_gap_dft_ingestion_report.json
-  - computational_gap_dft_promotion_report: results/validation/computational_gap_dft_promotion_report.md
-  - computational_gap_dft_promotion_report_json: results/validation/computational_gap_dft_promotion_report.json
   - refinement_surrogate_patches: data/lit/refinement_surrogate_patches.json
-  - reaction_benchmark_set: data/lit/reaction_benchmark_set.json
-  - mlp_candidate_registry: data/lit/mlp_candidate_registry.json
-  - mlp_external_benchmark_evidence: data/lit/mlp_external_benchmark_evidence.json
-  - geometry_benchmark_set: data/lit/geometry_benchmark_set.json
-  - mlp_geometry_benchmark: results/validation/mlp_geometry_benchmark.md
-  - mlp_geometry_benchmark_json: results/validation/mlp_geometry_benchmark.json
-  - mlp_geometry_assessment: results/validation/mlp_geometry_assessment.md
-  - mlp_geometry_assessment_json: results/validation/mlp_geometry_assessment.json
-  - mlp_reaction_benchmark: results/validation/mlp_reaction_benchmark.md
-  - mlp_reaction_benchmark_json: results/validation/mlp_reaction_benchmark.json
-  - mlp_assessment: results/validation/mlp_assessment.md
-  - mlp_assessment_json: results/validation/mlp_assessment.json
-  - mlp_external_mlp_landscape: results/validation/mlp_external_mlp_landscape.md
-  - mlp_external_mlp_landscape_json: results/validation/mlp_external_mlp_landscape.json
-  - mlp_adoption_notes: results/validation/mlp_adoption_notes.md
-  - mlp_adoption_notes_json: results/validation/mlp_adoption_notes.json
 
 ## 6. Glossary
 Plain-language meaning of the labels used above. The model is honest about *how* it knows what it claims; this section names that vocabulary.
@@ -544,9 +507,9 @@ Scoped to matrix `pea_iso` (filtered from the global ranking).
 
 | Rank | VoI | Benchmark | Matrix | Compound | DoE template | Why this one |
 | ---: | ---: | --- | --- | --- | --- | --- |
-| 9 | 0.98 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.53 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
-| 10 | 0.98 | `pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.53 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
-| 13 | 0.70 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | bis(2-methyl-3-furyl) disulfide | `missing_kinetic_dataset` | CI width 4.67 dex; ≈0.04× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
+| 21 | 0.97 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.47 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
+| 22 | 0.97 | `pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.47 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
+| 25 | 0.68 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | bis(2-methyl-3-furyl) disulfide | `missing_kinetic_dataset` | CI width 4.56 dex; ≈0.06× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
 
 _How to use this: run `./scripts/docker_maillard.sh next-experiment --top 3` to materialise pre-filled intake YAMLs and protocol Markdown for each row. Ingest the resulting measurement via `./scripts/docker_maillard.sh ingest --file results.csv ...`._
 
@@ -558,31 +521,31 @@ Per-compound odour activity value (OAV = predicted ppb ÷ curated odour threshol
 ### Axis roll-up
 | Axis | Compounds (with ODT) | Above threshold | Max OAV | Top contributor |
 | --- | ---: | ---: | ---: | --- |
-| meaty | 4 | 0 | 0.211 | 2-furfurylthiol |
+| meaty | 4 | 0 | 0.210 | 2-furfurylthiol |
 | off-note | 0 | 0 | n/a | _no compound with curated ODT in this run_ |
 | safety | 0 | 0 | n/a | _no compound with curated ODT in this run_ |
 
 ### Per-compound OAV (90 % CI)
 | Compound | Axis | ODT (μg/kg) | Predicted ppb (p50) | OAV (p50) | OAV p5 | OAV p95 | ≥1? |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | :---: |
-| 2-furfurylthiol | meaty | 0.01 | 0.00211 | 0.211 | 9.14e-05 | 23.3 | · |
-| 2-Furfurylthiol (FFT) | meaty | 0.01 | 0.00211 | 0.211 | 9.14e-05 | 23.3 | · |
-| 2-methyl-3-furanthiol | meaty | 0.007 | 9.5e-05 | 0.014 | 3.66e-05 | 1.50 | · |
-| 2-Methyl-3-furanthiol (MFT) | meaty | 0.007 | 9.5e-05 | 0.014 | 3.66e-05 | 1.50 | · |
-| bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 2.94e-05 | 1.47e-03 | 1.50e-06 | 0.162 | · |
-| Bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 2.94e-05 | 1.47e-03 | 1.50e-06 | 0.162 | · |
-| 3-methylbutanal | unclassified | 1.5 | 0.000904 | 6.03e-04 | n/a | n/a | · |
-| 3-Methylbutanal | unclassified | 1.5 | 0.000904 | 6.03e-04 | n/a | n/a | · |
-| furfural | unclassified | 3000 | 0.108 | 3.59e-05 | 3.25e-07 | 3.97e-03 | · |
-| Furfural | unclassified | 3000 | 0.108 | 3.59e-05 | 3.25e-07 | 3.97e-03 | · |
-| 2,5-dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.35e-13 | 2.13e-06 | · |
-| 2,5-Dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.35e-13 | 2.13e-06 | · |
+| 2-furfurylthiol | meaty | 0.01 | 0.0021 | 0.210 | 4.60e-04 | 23.2 | · |
+| 2-Furfurylthiol (FFT) | meaty | 0.01 | 0.0021 | 0.210 | 4.60e-04 | 23.2 | · |
+| 2-methyl-3-furanthiol | meaty | 0.007 | 0.000252 | 0.036 | 3.25e-04 | 3.97 | · |
+| 2-Methyl-3-furanthiol (MFT) | meaty | 0.007 | 0.000252 | 0.036 | 3.25e-04 | 3.97 | · |
+| bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 5.51e-05 | 2.76e-03 | 2.63e-06 | 0.305 | · |
+| Bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 5.51e-05 | 2.76e-03 | 2.63e-06 | 0.305 | · |
+| 3-methylbutanal | unclassified | 1.5 | 0.000903 | 6.02e-04 | n/a | n/a | · |
+| 3-Methylbutanal | unclassified | 1.5 | 0.000903 | 6.02e-04 | n/a | n/a | · |
+| furfural | unclassified | 3000 | 0.108 | 3.58e-05 | 3.24e-07 | 3.96e-03 | · |
+| Furfural | unclassified | 3000 | 0.108 | 3.58e-05 | 3.24e-07 | 3.96e-03 | · |
+| 2,5-dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.61e-13 | 1.93e-06 | · |
+| 2,5-Dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.61e-13 | 1.93e-06 | · |
 | O=Cc1ccco1 | unclassified | n/a | 0.108 | n/a | n/a | n/a | — |
-| CC(C)CC=O | unclassified | n/a | 0.000904 | n/a | n/a | n/a | — |
+| CC(C)CC=O | unclassified | n/a | 0.000903 | n/a | n/a | n/a | — |
 | Cc1cnc(C)cn1 | unclassified | n/a | 4.3e-06 | n/a | n/a | n/a | — |
-| SCc1ccco1 | unclassified | n/a | 0.00211 | n/a | n/a | n/a | — |
-| Cc1occc1S | unclassified | n/a | 9.5e-05 | n/a | n/a | n/a | — |
-| Cc1occc1SSc1ccoc1C | unclassified | n/a | 2.94e-05 | n/a | n/a | n/a | — |
+| SCc1ccco1 | unclassified | n/a | 0.0021 | n/a | n/a | n/a | — |
+| Cc1occc1S | unclassified | n/a | 0.000252 | n/a | n/a | n/a | — |
+| Cc1occc1SSc1ccoc1C | unclassified | n/a | 5.51e-05 | n/a | n/a | n/a | — |
 
 _6/18 predicted compounds have no curated odour threshold; they appear in the per-compound table but do not contribute to axis roll-ups._
 

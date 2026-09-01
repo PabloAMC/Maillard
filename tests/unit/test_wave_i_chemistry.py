@@ -160,7 +160,7 @@ def test_text_doi_extraction_survives_prose_punctuation():
         "see 10.1021/jf60199a045.": "10.1021/jf60199a045",
         "(DOI 10.1021/jf9705983)": "10.1021/jf9705983",
         "`10.1016/j.foodchem.2004.04.006`": "10.1016/j.foodchem.2004.04.006",
-        # markdown-escaped, as in data/Gemini_Deep_Research/* (the docs/research/archives/
+        # markdown-escaped, as in data/research_corpus/* (the docs/research/archives/
         # duplicates of those same files were deleted 2026-08-28, Wave S5)
         r"10.1016/0891-5849\\": "10.1016/0891-5849",
         # URL fragment is part of the link, not the DOI

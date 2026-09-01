@@ -18,7 +18,6 @@ def test_mycoprotein_reference_uses_bounded_priors_and_next_family_decision():
     assert payload["summary"]["matrix_family"] == "mycoprotein"
     assert payload["summary"]["decision"] == "advance_now"
     assert payload["summary"]["evidence_surface"] == "bounded_calibration_prior"
-    assert payload["reference_windows"]["accessibility"]["uncertainty_posture"] == "directional_only"
     assert payload["reference_windows"]["denaturation"]["midpoint_celsius"] == 78.0
 
 

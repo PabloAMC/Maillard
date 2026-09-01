@@ -3,17 +3,7 @@
 | Objective | Closed / Target | Status | Resolved In Last Step | Prediction Effect |
 | --- | ---: | --- | --- | --- |
 | External mixed meaty-positive package | 0 / 2 | blocked_on_external_data | explicit_required_external_package_for_pea_and_soy, promotion_delta_if_package_lands_today | No promotion-ready lane is unlocked yet; the repo now states exactly which package would move the decision gate. |
-| Hexanal/Nonanal ambiguity | 4 / 4 | closed_internal_calibration_route | prediction_validation_chain_exposed, closed_marker_counts_visible | All tracked Hexanal/Nonanal markers are within the accepted internal ratio band, so adverse-marker drift is calibration-closed without upgrading promotion posture. |
 | Extrusion direct damage closure package | 0 / 3 | blocked_on_external_data | shared_extrusion_blocker_encoded_as_contract_artifact, dha_lysinoalanine_external_package_specified | Extrusion reporting now states the exact direct-marker package still missing for DHA/LAL and lysine-damage claims, and names the external measurement bundle required to move closure while keeping thiamine retention and soy thermal-history anchors explicitly partial. |
-
-## Hexanal Nonanal Prediction Change
-
-| Protein | Compound | Internal2026 ppb | ProtocolPilot2026 ppb | Ratio | Closure State |
-| --- | --- | ---: | ---: | ---: | --- |
-| pea_iso | Hexanal | 0.742533 | 0.742533 | 1.000 | calibration_closed |
-| pea_iso | Nonanal | 0.0389915 | 0.0389915 | 1.000 | calibration_closed |
-| soy_iso | Hexanal | 1.70062 | 1.70062 | 1.000 | calibration_closed |
-| soy_iso | Nonanal | 0.0425151 | 0.0425151 | 1.000 | calibration_closed |
 
 ## Pea Soy Promotion Delta
 

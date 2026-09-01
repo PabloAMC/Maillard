@@ -11,15 +11,15 @@ Next best action: run_primary_benchmark_protocol_and_land_results_as_benchmark_j
 
 | Matrix | Benchmark | Temp C | pH | Time Points | Calibration Route | Promotion Blocker | Would Close | Remaining After Protocol |
 | --- | --- | ---: | ---: | --- | --- | --- | --- | --- |
-| pea_iso | pea_isolate_ribose_cysteine_100C_45min_Internal2026 | 95.0 | 5.5 | 0, 30, 60, 120, 240 | calibration_closed | insufficient externally measured target closure; current comparator is internal reference-only | comparator_is_measured_volatiles, external_quantitative_origin, minimum_quantitative_closed_targets | no_internal_or_directional_dependencies |
-| soy_iso | soy_isolate_ribose_cysteine_100C_45min_Internal2026 | 120.0 | 5.8 | 0, 30, 60, 120, 240 | calibration_closed | insufficient externally measured target closure; current comparator is internal reference-only | comparator_is_measured_volatiles, external_quantitative_origin, minimum_quantitative_closed_targets | no_internal_or_directional_dependencies |
+| pea_iso | pea_isolate_ribose_cysteine_100C_45min_Internal2026 | 95.0 | 5.5 | 0, 30, 60, 120, 240 | no_internal_comparator | insufficient externally measured target closure; current comparator is internal reference-only | comparator_is_measured_volatiles, external_quantitative_origin, minimum_quantitative_closed_targets | no_internal_or_directional_dependencies |
+| soy_iso | soy_isolate_ribose_cysteine_100C_45min_Internal2026 | 120.0 | 5.8 | 0, 30, 60, 120, 240 | no_internal_comparator | insufficient externally measured target closure; current comparator is internal reference-only | comparator_is_measured_volatiles, external_quantitative_origin, minimum_quantitative_closed_targets | no_internal_or_directional_dependencies |
 
 ## Required Panel
 
 | Matrix | Transfer-Ready Targets | Evidence/Calibration Blockers | Mechanistic Blockers | Hexanal Ratio | Nonanal Ratio | Companion Assays | Replicates |
 | --- | --- | --- | --- | ---: | ---: | --- | ---: |
-| pea_iso | 2-furfurylthiol, 2-methyl-3-furanthiol, bis(2-methyl-3-furyl) disulfide, 2,5-dimethylpyrazine | Hexanal, Nonanal | none | 1.074 | 0.985 | Ellman free SH, OPA free amino groups, DSC or equivalent denaturation proxy, post-heating pH measurement | 3 |
-| soy_iso | 2-furfurylthiol, 2-methyl-3-furanthiol, bis(2-methyl-3-furyl) disulfide, 2,5-dimethylpyrazine | Hexanal, Nonanal | none | 1.000 | 1.000 | Ellman free SH, OPA free amino groups, DSC or equivalent denaturation proxy, post-heating pH measurement | 3 |
+| pea_iso | 2-furfurylthiol, 2-methyl-3-furanthiol, bis(2-methyl-3-furyl) disulfide, 2,5-dimethylpyrazine | Hexanal, Nonanal | none | n/a | n/a | Ellman free SH, OPA free amino groups, DSC or equivalent denaturation proxy, post-heating pH measurement | 3 |
+| soy_iso | 2-furfurylthiol, 2-methyl-3-furanthiol, bis(2-methyl-3-furyl) disulfide, 2,5-dimethylpyrazine | Hexanal, Nonanal | none | n/a | n/a | Ellman free SH, OPA free amino groups, DSC or equivalent denaturation proxy, post-heating pH measurement | 3 |
 
 ## Promotion Delta
 

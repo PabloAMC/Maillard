@@ -80,20 +80,6 @@ def _resolve_internal_benchmark_id(status_rows: Iterable[Mapping[str, Any]], pro
     return str(candidates[0].get("benchmark_id", ""))
 
 
-def _resolve_protocol_pilot_id(status_rows: Iterable[Mapping[str, Any]], protein_type: str) -> str:
-    candidates = [
-        dict(row)
-        for row in status_rows
-        if str(row.get("protein_type", "")) == protein_type
-        and str(row.get("source_origin", "")) in {"synthetic_diagnostic", "internal_experiment"}
-        and str(row.get("target_profile", "")) == "mixed"
-    ]
-    if not candidates:
-        return ""
-    candidates.sort(key=lambda row: str(row.get("benchmark_id", "")))
-    return str(candidates[0].get("benchmark_id", ""))
-
-
 def _resolve_best_external_anchor(status_rows: Iterable[Mapping[str, Any]], root: Path, protein_type: str) -> str:
     candidates: list[tuple[int, float, str]] = []
     for row in status_rows:
@@ -123,13 +109,11 @@ def _arm_for_matrix(
     root: Path,
     matrix_contract: Mapping[str, Any],
     internal_benchmark_id: str,
-    protocol_pilot_id: str,
     status_row: Mapping[str, Any],
     assessment_row: Mapping[str, Any],
     contract: Mapping[str, Any],
 ) -> Dict[str, Any]:
     internal_benchmark = _load_benchmark(root, internal_benchmark_id)
-    protocol_pilot = _load_benchmark(root, protocol_pilot_id) if protocol_pilot_id else {}
     requirements = list(assessment_row.get("requirements", []))
     unmet_requirements = [dict(row) for row in requirements if not bool(row.get("passed", False))]
     would_close = [row["key"] for row in unmet_requirements if str(row.get("key", "")) in PRIMARY_PROTOCOL_CLOSES]
@@ -150,16 +134,13 @@ def _arm_for_matrix(
         "required_adverse_targets": list(contract.get("required_panel", {}).get("adverse", [])),
         "required_safety_targets": list(contract.get("required_panel", {}).get("safety", [])),
         "companion_assays": list(contract.get("companion_assays", [])),
-        "calibration_closure_action": "calibration_closed",
-        "calibration_passed": True,
-        "hexanal_ratio": _float_ratio(
-            _compound_value(protocol_pilot, "Hexanal") or _compound_value(protocol_pilot, "hexanal"),
-            _compound_value(internal_benchmark, "Hexanal") or _compound_value(internal_benchmark, "hexanal"),
-        ),
-        "nonanal_ratio": _float_ratio(
-            _compound_value(protocol_pilot, "Nonanal") or _compound_value(protocol_pilot, "nonanal"),
-            _compound_value(internal_benchmark, "Nonanal") or _compound_value(internal_benchmark, "nonanal"),
-        ),
+        # Until 2026-09-01 these read "calibration_closed" / True on the strength of a
+        # hexanal and nonanal ratio between the Internal2026 snapshot and a byte-identical
+        # copy of it (always 1.0). No internal calibration check exists for this arm.
+        "calibration_closure_action": "no_internal_comparator",
+        "calibration_passed": None,
+        "hexanal_ratio": None,
+        "nonanal_ratio": None,
         "unmet_promotion_requirements": unmet_requirements,
         "mechanistic_blockers": [],
         "evidence_or_calibration_blockers": [
@@ -197,7 +178,6 @@ def build_matrix_primary_benchmark_campaign(root: Path = ROOT) -> Dict[str, Any]
     for matrix_contract in contract_matrices:
         matrix = str(matrix_contract.get("matrix", "unknown"))
         internal_benchmark_id = _resolve_internal_benchmark_id(status_rows, matrix)
-        protocol_pilot_id = _resolve_protocol_pilot_id(status_rows, matrix)
         status_row = _find_status_row(status_rows, internal_benchmark_id)
         assessment_row = _find_assessment_row(assessment_rows, internal_benchmark_id)
         if not internal_benchmark_id or not status_row:
@@ -207,7 +187,6 @@ def build_matrix_primary_benchmark_campaign(root: Path = ROOT) -> Dict[str, Any]
                 root=root,
                 matrix_contract=matrix_contract,
                 internal_benchmark_id=internal_benchmark_id,
-                protocol_pilot_id=protocol_pilot_id,
                 status_row=status_row,
                 assessment_row=assessment_row,
                 contract=contract,
@@ -228,6 +207,11 @@ def build_matrix_primary_benchmark_campaign(root: Path = ROOT) -> Dict[str, Any]
         "selected_target": selected_target,
         "arms": arms,
     }
+
+
+def _fmt_ratio(value: Any) -> str:
+    """Ratio cell; 'n/a' since 2026-09-01 (no internal comparator exists for the arm)."""
+    return "n/a" if value is None else f"{float(value):.3f}"
 
 
 def render_matrix_primary_benchmark_campaign_markdown(payload: Mapping[str, Any]) -> str:
@@ -261,7 +245,7 @@ def render_matrix_primary_benchmark_campaign_markdown(payload: Mapping[str, Any]
     ])
     for arm in payload.get("arms", []):
         lines.append(
-            f"| {arm.get('matrix', 'unknown')} | {', '.join(arm.get('transfer_ready_targets', [])) or 'none'} | {', '.join(arm.get('evidence_or_calibration_blockers', [])) or 'none'} | {', '.join(arm.get('mechanistic_blockers', [])) or 'none'} | {float(arm.get('hexanal_ratio', 0.0)):.3f} | {float(arm.get('nonanal_ratio', 0.0)):.3f} | {', '.join(arm.get('companion_assays', [])) or 'none'} | {int(arm.get('required_replicates', 0))} |"
+            f"| {arm.get('matrix', 'unknown')} | {', '.join(arm.get('transfer_ready_targets', [])) or 'none'} | {', '.join(arm.get('evidence_or_calibration_blockers', [])) or 'none'} | {', '.join(arm.get('mechanistic_blockers', [])) or 'none'} | {_fmt_ratio(arm.get('hexanal_ratio'))} | {_fmt_ratio(arm.get('nonanal_ratio'))} | {', '.join(arm.get('companion_assays', [])) or 'none'} | {int(arm.get('required_replicates', 0))} |"
         )
 
     lines.extend([

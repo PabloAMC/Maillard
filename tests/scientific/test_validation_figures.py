@@ -73,7 +73,7 @@ def test_validation_overview_payload_reports_current_tolerance_closure():
 def test_validation_overview_uses_standardized_benchmark_labels():
     assert _bench_label("thiamine_cys_ribose_100C_Hofmann1996") == r"Thiamine + cysteine + ribose, $100\,^{\circ}$C (Hofmann, 1996)"
     assert _bench_label("thiamine_cys_xylose_145C_Cerny2008") == r"Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor]"
-    assert _bench_label("pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026") == r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)"
+    assert _bench_label("pea_isolate_ribose_cysteine_100C_45min_Internal2026") == r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Internal, 2026)"
     assert _bench_label("resconi_2023_pbma_beef_identity_benchmark") == r"PBMA vs beef comparator, $150\,^{\circ}$C (Resconi et al., 2023)"
     # RE-PINNED 2026-08-27 (Wave I): the label now carries a `[QUARANTINED]` suffix.
     # `spi_hvp_xylose_120C_PMC9905368` and its wheat-gluten twin were quarantined as

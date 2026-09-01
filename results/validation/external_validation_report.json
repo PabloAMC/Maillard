@@ -1,7 +1,7 @@
 {
   "benchmarks": [
     {
-      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
+      "bench_file": "/workspace/data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
       "compounds": [
         {
@@ -29,7 +29,7 @@
       "median_accuracy_fold": 1.2437369765279496
     },
     {
-      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
+      "bench_file": "/workspace/data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
       "compounds": [
         {
@@ -57,7 +57,7 @@
       "median_accuracy_fold": 2474.385976533296
     },
     {
-      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
+      "bench_file": "/workspace/data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
       "compounds": [
         {
@@ -83,7 +83,7 @@
           "inside_ci": true,
           "is_direct_measurement": true,
           "measured_ppb": 5625.8,
-          "predicted_mean": 629619.2841029409,
+          "predicted_mean": 629619.284102941,
           "predicted_p5": 175.22730010902325,
           "predicted_p50": 11038.555615711428,
           "predicted_p95": 1825067.1922035383,
@@ -113,7 +113,7 @@
           "inside_ci": false,
           "is_direct_measurement": true,
           "measured_ppb": 72.66,
-          "predicted_mean": 490320.3411079559,
+          "predicted_mean": 490320.34110795596,
           "predicted_p5": 136.45946325054928,
           "predicted_p50": 8596.350987797654,
           "predicted_p95": 1421283.608714675,
@@ -130,7 +130,7 @@
       "median_accuracy_fold": 104.97695567991867
     },
     {
-      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
+      "bench_file": "/workspace/data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
       "compounds": [
         {
@@ -296,13 +296,13 @@
     }
   ],
   "source": {
-    "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+    "benchmark_dir": "/workspace/data/benchmarks/external_validation",
     "description": "Hold-out matrix benchmarks synthesized from flavor_reference_payloads.json and excluded from the default calibration panel.",
     "evidence_class": "external_validation_only"
   },
   "summary": {
     "benchmark_count": 4,
-    "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+    "benchmark_dir": "/workspace/data/benchmarks/external_validation",
     "ci_coverage_hits": 3,
     "ci_coverage_rate": 0.375,
     "ci_level_pct": 90,

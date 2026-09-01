@@ -171,7 +171,6 @@ compounds:
   - 2,5-dimethylpyrazine
   - 25dimethylpyrazine
   seen_in:
-  - benchmarks:measured_volatiles
   - benchmarks:reference_volatiles
   - henry_constants
   - panel:alias
@@ -568,7 +567,6 @@ compounds:
   - bis2methyl3furyldisulfide
   - mft disulfide
   seen_in:
-  - benchmarks:measured_volatiles
   - benchmarks:reference_volatiles
   - flavor:sulfur_reference_anchors
   - panel:alias

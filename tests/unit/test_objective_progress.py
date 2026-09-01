@@ -12,15 +12,13 @@ from src.objective_progress import (  # noqa: E402
 )
 
 
-def test_objective_progress_summarizes_external_gap_and_hexanal_closure():
+def test_objective_progress_summarizes_external_gaps():
     payload = build_objective_progress_artifact()
 
-    assert payload["summary"]["objective_count"] == 3
+    assert payload["summary"]["objective_count"] == 2
     by_id = {row["objective_id"]: row for row in payload["objectives"]}
     assert by_id["external_mixed_meaty_positive_package"]["closed_count"] == 0
-    assert by_id["hexanal_nonanal_ambiguity"]["closed_count"] == 4
     assert by_id["extrusion_direct_damage_package"]["closed_count"] == 0
-    assert len(payload["hexanal_nonanal_prediction_change"]) == 4
     assert payload["selected_next_family_sprint"] == "dha_lysinoalanine_external_package"
 
 
@@ -29,7 +27,6 @@ def test_objective_progress_markdown_surfaces_prediction_effects():
 
     assert "Objective Progress" in markdown
     assert "External mixed meaty-positive package" in markdown
-    assert "Hexanal Nonanal Prediction Change" in markdown
     assert "Pea Soy Mixed External Package Delta" in markdown
     assert "Extrusion Direct Closure Delta" in markdown
     assert "DHA Lysinoalanine External Package Delta" in markdown

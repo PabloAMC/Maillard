@@ -261,7 +261,6 @@ def test_build_matrix_explainability_surfaces_effective_accessibility_context():
     assert payload["lysine_accessibility"] > payload["cysteine_accessibility"]
     assert payload["literature_window"] is not None
     assert payload["prior_summary"]["matrix_correction"]["confidence_tier"] == "medium"
-    assert "calibration_grade_transfer" in payload["matrix_prior_uncertainty_postures"]
     assert "heated_matrix" in payload["matrix_prior_process_state_applicability"]
 
 
@@ -312,7 +311,6 @@ def test_build_matrix_explainability_surfaces_mycoprotein_prior_tags():
     )
 
     assert payload["protein_type"] == "myco"
-    assert "directional_only" in payload["matrix_prior_uncertainty_postures"]
     assert "aqueous_pre_extrusion_model" in payload["matrix_prior_process_state_applicability"]
     assert payload["prior_summary"]["accessibility_window"]["provenance_tier"] == "literature_bounded_provisional"
 

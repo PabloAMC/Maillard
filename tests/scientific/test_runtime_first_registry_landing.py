@@ -87,7 +87,7 @@ def test_runtime_first_batch_is_landed_in_operational_registries():
     dft_prior_ids = {entry["reaction_key"] for entry in computational_payload["dft_kinetic_priors"]["entries"]}
     assert {"pyrraline_from_3dg", "furosine_from_3dg", "pe_schiff_base", "pe_amadori"}.issubset(dft_prior_ids)
 
-    backlog_payload = _load_json("data/lit/deep_research_backlog.json")
+    backlog_payload = _load_json("results/literature/deep_research_backlog.json")
     backlog_rows = {row["citation"]: row for row in backlog_payload["items"]}
     for citation in {
         "Rizzello et al. (2024)",

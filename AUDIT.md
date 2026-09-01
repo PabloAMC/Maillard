@@ -1431,6 +1431,20 @@ ranked wet-lab request — together with a documented map of the kinetic measure
 field does not have. It is not a validated quantitative predictor, and its reports say so
 on every surface.
 
+## Cleaning branch, 2026-09-01/02 — what moved and why (dated addendum)
+
+Numbers above are as of their own dates. The cleaning branch (Phases 0–4a, plus the owner's
+round-2 decisions) changed the following, each as a deletion or a relabelling, never a
+verification: the QM/DFT lane and `data/qm/` (census 120 → 102); the mocked
+`protein_source_registry.json` withdrawn with its code (102 → 87; no default-run output
+moved); the two `*_ProtocolPilot2026` benchmark files, byte-identical twins of the
+`*_Internal2026` synthetic snapshots, deleted together with the hexanal/nonanal "closure"
+lane that compared the twins (panel 23 → 21; MC panel 20 → 18 benchmarks, 47 → 35 rows;
+`honest_literature_coverage` 4/13 unchanged; evidence-role split 14/5/4 → 14/5/2);
+`uncertainty_posture` / `validated_status` labels dropped (read by nothing); the two
+literature ledgers moved to `results/literature/`; `data/Gemini_Deep_Research` renamed
+`data/research_corpus`. The record of each step is `tasks/data_restructure_plan.md`.
+
 ## Open items
 
 The ledger's `[P]` entries are the live list. Two of them are stated in full here because

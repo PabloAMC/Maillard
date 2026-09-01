@@ -1,7 +1,7 @@
 # Validated Envelope
 
 Target tag: meaty
-Supported benchmarks: 14/14
+Supported benchmarks: 21/21
 Strict-ready benchmarks: none
 Matrix-only executable benchmarks: Pea isolate, 40 C (Pratap Singh, 2021), Pea isolate UHT, 140 C (Trikusuma, 2020), Soy isolate, 40 C (Pratap Singh, 2021)
 

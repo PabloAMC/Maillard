@@ -1071,7 +1071,7 @@
       ],
       "incorporation_status": "encoded_low_confidence_reference",
       "next_action": "Retain as pending-full-text meat reference only; do not score against it yet.",
-      "confidence_tier": "low_medium",
+      "confidence_tier": "medium_low",
       "notes_on_limits": "Full absolute concentrations still need recovery."
     },
     {

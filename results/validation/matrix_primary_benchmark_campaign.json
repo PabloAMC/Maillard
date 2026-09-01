@@ -85,7 +85,7 @@
     }
   },
   "selected_target": {
-    "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+    "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
     "protein_type": "pea_iso",
     "process_state": "aqueous_pre_extrusion_model",
     "target_profile": "mixed",
@@ -93,9 +93,9 @@
       "same_protein_external_anchor_count=2",
       "same_protein_external_process_states=2",
       "quantitative_closed=0",
-      "internal_candidate=0",
+      "internal_candidate=6",
       "internal_measured_candidate=0",
-      "internal_reference_candidate=0"
+      "internal_reference_candidate=6"
     ],
     "selection_policy": "prefer_mixed_matrix_lanes_with_the_broadest_same_protein_external_anchor_span_before_mechanistic_escalation"
   },
@@ -137,10 +137,10 @@
         "DSC or equivalent denaturation proxy",
         "post-heating pH measurement"
       ],
-      "calibration_closure_action": "calibration_closed",
-      "calibration_passed": true,
-      "hexanal_ratio": 1.0735329184674205,
-      "nonanal_ratio": 0.9845099647274906,
+      "calibration_closure_action": "no_internal_comparator",
+      "calibration_passed": null,
+      "hexanal_ratio": null,
+      "nonanal_ratio": null,
       "unmet_promotion_requirements": [
         {
           "key": "comparator_is_measured_volatiles",
@@ -224,10 +224,10 @@
         "DSC or equivalent denaturation proxy",
         "post-heating pH measurement"
       ],
-      "calibration_closure_action": "calibration_closed",
-      "calibration_passed": true,
-      "hexanal_ratio": 1.0,
-      "nonanal_ratio": 1.0,
+      "calibration_closure_action": "no_internal_comparator",
+      "calibration_passed": null,
+      "hexanal_ratio": null,
+      "nonanal_ratio": null,
       "unmet_promotion_requirements": [
         {
           "key": "comparator_is_measured_volatiles",

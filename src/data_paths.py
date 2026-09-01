@@ -44,7 +44,7 @@ TIMESERIES_DIR: Path = LIT_DIR / "timeseries"
 EXTRACTION_DOSSIERS_DIR: Path = LIT_DIR / "extraction_dossiers"
 # LLM research dumps kept only so citation_gate can detect laundered citations. Not
 # provenance; nothing loads them as inputs.
-RESEARCH_CORPUS_DIR: Path = DATA_ROOT / "Gemini_Deep_Research"
+RESEARCH_CORPUS_DIR: Path = DATA_ROOT / "research_corpus"
 # Primary-source PDFs. Local only (~160 MB, gitignored); code cites them by name.
 ARTICLES_DIR: Path = DATA_ROOT / "articles"
 
@@ -69,15 +69,12 @@ SAFETY_REFERENCE_PAYLOADS: Path = LIT_DIR / "safety_reference_payloads.json"
 RETENTION_REFERENCE_PAYLOADS: Path = LIT_DIR / "retention_reference_payloads.json"
 EXTRUSION_DAMAGE_REFERENCE_PAYLOADS: Path = LIT_DIR / "extrusion_damage_reference_payloads.json"
 PROCESS_STATE_CALIBRATIONS: Path = LIT_DIR / "process_state_calibrations.json"
-PROTEIN_SOURCE_REGISTRY: Path = LIT_DIR / "protein_source_registry.json"
 MATRIX_DECISION_PANEL: Path = LIT_DIR / "matrix_decision_panel.json"
 MATRIX_FAMILY_COVERAGE_REGISTRY: Path = LIT_DIR / "matrix_family_coverage_registry.json"
 CHEMISTRY_FAMILY_SCOPE_REGISTRY: Path = LIT_DIR / "chemistry_family_scope_registry.json"
 FAMILY_INGESTION_PLAN: Path = LIT_DIR / "family_ingestion_plan.json"
 PROCESS_GAP_REGISTRY: Path = LIT_DIR / "process_gap_registry.json"
 BENCHMARK_INTAKE_REGISTRY: Path = LIT_DIR / "benchmark_intake_registry.json"
-SLR_INCORPORATION_MATRIX: Path = LIT_DIR / "slr_incorporation_matrix.json"
-DEEP_RESEARCH_BACKLOG: Path = LIT_DIR / "deep_research_backlog.json"
 # Orphan output of scripts/ingest_deep_research_markdown.py: not present in the repo and
 # nothing reads it.
 DEEP_RESEARCH_CANDIDATE_REGISTRY: Path = LIT_DIR / "deep_research_candidate_registry.json"
@@ -137,7 +134,13 @@ CALIBRATION_HISTORY_DIR: Path = RESULTS_ROOT / "calibration_history"
 # Until 2026-09-01 this feedback loop ran through data/lit/ (a generated file inside the
 # curated tree); it is a result.
 MATRIX_CALIBRATION_OFFSETS: Path = RESULTS_ROOT / "calibration" / "matrix_calibration_offsets.json"
-SLR_FAMILY_REPORTS_DIR: Path = RESULTS_ROOT / "literature" / "slr_family_reports"
+# Literature LEDGERS: regenerable status records (which paper is wired where; citation
+# candidates mined from the corpus). Moved out of data/lit on 2026-09-02; tracked under
+# results/ so tests and the citation gate still see them.
+LITERATURE_LEDGERS_DIR: Path = RESULTS_ROOT / "literature"
+SLR_INCORPORATION_MATRIX: Path = LITERATURE_LEDGERS_DIR / "slr_incorporation_matrix.json"
+DEEP_RESEARCH_BACKLOG: Path = LITERATURE_LEDGERS_DIR / "deep_research_backlog.json"
+SLR_FAMILY_REPORTS_DIR: Path = LITERATURE_LEDGERS_DIR / "slr_family_reports"
 RESULTS_DB: Path = RESULTS_ROOT / "maillard_results.db"
 # Generated validation artifacts that other modules read back as inputs.
 PREDICTION_UNCERTAINTY: Path = VALIDATION_DIR / "prediction_uncertainty.json"

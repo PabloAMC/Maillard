@@ -121,10 +121,11 @@ def parse_args() -> argparse.Namespace:
     # resolved a denaturation state. The matrix-correction layer has no wheat
     # gluten accessibility/retention profile (matrix_calibration_registry carries
     # only "Placeholder: no wheat_gluten matrix calibration data yet"), so the
-    # option is withdrawn rather than silently aliased to soy. Wheat gluten is
-    # still reachable as a registry-backed --protein-source for MEATY multipliers.
-    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections. (wheat_gluten has no calibrated matrix profile; use --protein-source wheat_gluten instead.)")
-    parser.add_argument("--protein-source", type=str, default=None, help="Explicit registry-backed protein source for MEATY multipliers (e.g. pea_isolate, wheat_gluten).")
+    # option is withdrawn rather than silently aliased to soy.
+    # 2026-09-01: the `--protein-source` flag (per-source MEATY multipliers read from
+    # data/lit/protein_source_registry.json) was withdrawn with that file, which
+    # self-declared every value a mocked placeholder.
+    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections. (wheat_gluten has no calibrated matrix profile.)")
     parser.add_argument("--denaturation-state", type=float, default=DEFAULTS.default_denaturation_state, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
     parser.add_argument("--list-tags", action="store_true", help="List available sensory tags and exit")
@@ -222,7 +223,6 @@ def build_formulation_from_args(args: argparse.Namespace, name: str) -> Dict[str
         "barrel_zone_temperatures": _parse_float_list(args.barrel_zones) if args.barrel_zones else None,
         "barrel_zone_time_fractions": _parse_float_list(args.barrel_zone_time_fractions) if args.barrel_zone_time_fractions else None,
         "protein_type": args.protein_type,
-        "protein_source": args.protein_source,
         "denaturation_state": args.denaturation_state,
         "catalyst": args.catalyst,
     }
@@ -291,7 +291,6 @@ def _report_inputs_for_forward_mode(
         "aw": formulation.get("aw"),
         "time_minutes": formulation.get("time_minutes"),
         "protein_type": formulation.get("protein_type"),
-        "protein_source": formulation.get("protein_source"),
         "denaturation_state": formulation.get("denaturation_state"),
         "catalyst": formulation.get("catalyst"),
         "sme_kj_per_kg": formulation.get("sme_kj_per_kg"),

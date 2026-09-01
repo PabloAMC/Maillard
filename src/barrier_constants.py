@@ -22,7 +22,7 @@ Starting-point sources (see audit caveats)
 * Wedzicha 1984 — AUDIT 2026-08-26: paper is a kinetic model of the
   SULPHITE-inhibited Maillard reaction, not cysteine thermolysis.
 * Hodge 1953; Nursten 2005 (overall Maillard kinetics)
-* data/Gemini_Deep_Research/maillard_meat.md, data/Gemini_Deep_Research/maillard_plant_based.md (project literature reviews)
+* data/research_corpus/maillard_meat.md, data/research_corpus/maillard_plant_based.md (project literature reviews)
 
 AUDIT 2026-08-26 (forensics) — the sulfur-branch values (thiol_addition,
 thiol_addition_hexose, thiol_oxidation, aminoketone_condensation,

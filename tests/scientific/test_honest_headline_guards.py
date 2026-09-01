@@ -134,8 +134,11 @@ def test_calibration_panel_is_23_benchmarks_and_none_is_strict_ready(panel):
     cost nothing and the total miss would be invisible. If this count jumps by nine, check
     that someone has not promoted them without implementing the steps they name.
     """
-    assert len(panel) == 23, (
-        f"Calibration panel is {len(panel)} benchmarks, not the published 23. "
+    # RE-PINNED 2026-09-02: 23 -> 21. The two *_ProtocolPilot2026 files were byte-identical
+    # twins of the *_Internal2026 synthetic snapshots (same frozen model output under a
+    # measured_volatiles label); the twins were deleted, not the evidence.
+    assert len(panel) == 21, (
+        f"Calibration panel is {len(panel)} benchmarks, not the published 21. "
         f"Adding or removing a benchmark changes every downstream headline; re-pin this "
         f"guard and the README/AUDIT tables in the same change."
     )
@@ -227,8 +230,10 @@ def test_zero_of_fourteen_predictive_benchmarks_are_free_of_blocking_gaps(panel)
     # row is a MISS (2.3x under) that the exclusion removes from the count. The failure is
     # reported in tasks/audit_remediation.md '## Wave X' (b) instead.
     totals = {role: len(rows) for role, rows in by_role.items()}
-    assert totals == {"predictive": 14, "fit_recovery": 5, "internal_synthetic": 4}, (
-        f"Evidence-role split moved to {totals}, published as 14/5/4. Reclassifying a "
+    # RE-PINNED 2026-09-02: 14/5/4 -> 14/5/2 (the two ProtocolPilot2026 twins deleted; the
+    # predictive and fit_recovery buckets are untouched).
+    assert totals == {"predictive": 14, "fit_recovery": 5, "internal_synthetic": 2}, (
+        f"Evidence-role split moved to {totals}, published as 14/5/2. Reclassifying a "
         f"benchmark changes the denominator of the headline claim -- justify it in AUDIT.md."
     )
 
@@ -293,8 +298,8 @@ def test_zero_of_fourteen_predictive_benchmarks_are_free_of_blocking_gaps(panel)
     # the same motion absorb the unreported Waves W/X drift, which is laundering. The rows
     # stay failing and the decomposition is on the record.
     assert len(passing("internal_synthetic")) == 0, (
-        f"internal-synthetic passes moved to {len(passing('internal_synthetic'))}/4 "
-        f"(published 0/4 since the 2026-08-28 Wave Y marker-yield relocation; 4/4 before "
+        f"internal-synthetic passes moved to {len(passing('internal_synthetic'))}/2 "
+        f"(published 0/2 since 2026-09-02, 0/4 since the 2026-08-28 Wave Y marker-yield relocation; 4/4 before "
         f"Waves W/X). These are reproducibility pins, not evidence: a row RETURNING here "
         f"means someone regenerated the snapshots, which absorbs every unreported drift "
         f"since they were last written. Check what was absorbed before re-pinning."
@@ -405,11 +410,15 @@ def test_honest_external_literature_coverage_is_4_of_13_and_the_intervals_narrow
 
     # RE-PINNED 2026-08-28 (Wave X): 14 -> 20 benchmarks, 41 -> 47 matched rows, from the six
     # step-level Hofmann rows.
-    assert summary["benchmark_count"] == 20, (
-        f"MC panel is {summary['benchmark_count']} benchmarks, published as 20"
+    # RE-PINNED 2026-09-02: 20 -> 18 benchmarks, 47 -> 35 matched rows. The two
+    # *_ProtocolPilot2026 files (byte-identical twins of the *_Internal2026 synthetic
+    # snapshots) were deleted; the 12 rows that left were the model scored against a copy
+    # of its own output. honest_literature_coverage (4/13) is unchanged, as it must be.
+    assert summary["benchmark_count"] == 18, (
+        f"MC panel is {summary['benchmark_count']} benchmarks, published as 18"
     )
-    assert summary["matched_compound_count"] == 47, (
-        f"MC panel matched rows moved to {summary['matched_compound_count']}, published as 47"
+    assert summary["matched_compound_count"] == 35, (
+        f"MC panel matched rows moved to {summary['matched_compound_count']}, published as 35"
     )
 
     # RE-PINNED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR).
@@ -876,7 +885,7 @@ def _no_verifiable_source_census():
 
         flagged  = any object, at any depth, with source_status == "no_verifiable_source"
         numeric  = a flagged record containing at least one numeric value anywhere inside it
-        scope    = every parseable .json / .yml / .yaml under data/
+        scope    = every parseable .json / .yml / .yaml under data/ plus results/literature/
 
     No generator emits this census, so before this test the README's counts were
     unreproducible assertions. They are now recomputed on every run.
@@ -884,8 +893,11 @@ def _no_verifiable_source_census():
     import yaml  # noqa: PLC0415 - only this census needs the YAML surface
 
     census = {}
+    # 2026-09-02: the two literature ledgers live under results/literature/ now; they stay
+    # in the census so the count is a property of the records, not of the file layout.
+    scopes = ("data/**/", "results/literature/")
     for pattern in ("*.json", "*.yml", "*.yaml"):
-        for path in sorted(ROOT.glob(f"data/**/{pattern}")):
+        for path in sorted(p for scope in scopes for p in ROOT.glob(f"{scope}{pattern}")):
             try:
                 text = path.read_text(encoding="utf-8")
                 payload = json.loads(text) if path.suffix == ".json" else yaml.safe_load(text)
@@ -905,8 +917,13 @@ def _no_verifiable_source_census():
     return census
 
 
-def test_no_verifiable_source_census_is_102_records_80_numeric_80_reaching_runtime():
-    """no_verifiable_source: 102 flagged · 80 carrying numbers · 80 of those reaching runtime.
+def test_no_verifiable_source_census_is_87_records_65_numeric_65_reaching_runtime():
+    """no_verifiable_source: 87 flagged · 65 carrying numbers · 65 of those reaching runtime.
+
+    RE-PINNED 2026-09-02: 102/80/80 -> 87/65/65. `data/lit/protein_source_registry.json`
+    (15 records, every value self-labelled `mocked_placeholder`) was WITHDRAWN together
+    with the code that consumed it; nothing was verified, the numbers simply no longer ship.
+    Same day: the two literature ledgers moved to results/literature/ and stay in scope here.
 
     RE-PINNED 2026-09-01 (cleaning, Phase 1a): 120/98/80 -> 102/80/80. `data/qm/` was
     deleted together with the QM/DFT lane, taking its 18 unverifiable barrier records with
@@ -962,22 +979,22 @@ def test_no_verifiable_source_census_is_102_records_80_numeric_80_reaching_runti
     runtime = sum(
         with_number
         for path, (_, with_number) in census.items()
-        if path.startswith("data/lit/")
+        if path.startswith(("data/lit/", "results/literature/"))
     )
 
-    assert total == 102, (
-        f"Repo-wide no_verifiable_source count is {total}, published as 102. "
+    assert total == 87, (
+        f"Repo-wide no_verifiable_source count is {total}, published as 87. "
         f"Per file: { {k: v[0] for k, v in census.items()} }"
     )
-    assert numeric == 80, (
-        f"{numeric} flagged records carry numeric payloads, published as 80."
+    assert numeric == 65, (
+        f"{numeric} flagged records carry numeric payloads, published as 65."
     )
-    assert runtime == 80, (
-        f"{runtime} flagged records with numeric payloads sit in data/lit and therefore "
-        f"reach the runtime, published as 80."
+    assert runtime == 65, (
+        f"{runtime} flagged records with numeric payloads sit in data/lit or the literature "
+        f"ledgers and therefore reach the runtime, published as 65."
     )
 
     readme = _doc_text(README)
-    _assert_quoted(readme, "102 records", "README.md", "the no_verifiable_source census")
-    _assert_quoted(readme, "80 carry numeric payloads", "README.md", "the numeric subset")
-    _assert_quoted(readme, "80 of those are", "README.md", "the runtime-consumed subset")
+    _assert_quoted(readme, "87 records", "README.md", "the no_verifiable_source census")
+    _assert_quoted(readme, "65 carry numeric payloads", "README.md", "the numeric subset")
+    _assert_quoted(readme, "65 of those are", "README.md", "the runtime-consumed subset")

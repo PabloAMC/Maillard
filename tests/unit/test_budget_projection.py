@@ -580,7 +580,7 @@ def test_melanoidin_trapping_can_penalize_free_thiamine_systems_when_family_16_i
     assert observable[canon] < 100.0
 
 
-def test_hydrolysate_supported_sulfur_observability_uses_peptide_release_uplift_but_preserves_source_ranking():
+def test_hydrolysate_supported_sulfur_observability_uses_peptide_release_uplift_and_is_source_neutral():
     contract = build_family_upstream_contract(
         sugars=["xylose"],
         amino_acids=["cysteine", "methionine", "glycine"],
@@ -597,24 +597,21 @@ def test_hydrolysate_supported_sulfur_observability_uses_peptide_release_uplift_
 
     expected_hydrolysate_uplift = 1.0 + (1.6 - 1.0) * 0.92
 
-    soy_fft = _resolve_upstream_observability_factor(
+    # 2026-09-01: `_resolve_upstream_observability_factor` no longer takes a
+    # `protein_source`. The per-source `hydrolysate_observability_bias` (soy 1.25,
+    # wheat 0.58) came from data/lit/protein_source_registry.json, which
+    # self-declared every value mocked and was withdrawn. The factor is now the
+    # same for every source: base 0.13 x the hydrolysate uplift, no source bias.
+    fft = _resolve_upstream_observability_factor(
         "2-Furfurylthiol",
-        protein_source="soy_isolate",
-        family_upstream_contract=contract,
-    )
-    wheat_fft = _resolve_upstream_observability_factor(
-        "2-Furfurylthiol",
-        protein_source="wheat_gluten",
         family_upstream_contract=contract,
     )
     soy_methional = _resolve_upstream_observability_factor(
         "Methional",
-        protein_source="soy_isolate",
         family_upstream_contract=contract,
     )
 
-    assert soy_fft == pytest.approx(0.13 * expected_hydrolysate_uplift * 1.25)
-    assert wheat_fft == pytest.approx(soy_fft * (0.58 / 1.25))
+    assert fft == pytest.approx(0.13 * expected_hydrolysate_uplift)
     # RE-PINNED 2026-08-27 (Wave I) — REVERTED to the pre-Wave-H value, 0.05623 -> 0.0045.
     # Wave H had re-derived this factor 0.0045 -> 0.05623 against the two literature xylose
     # HVP benchmarks. The cold-start red team then established that BOTH of those
@@ -630,7 +627,10 @@ def test_hydrolysate_supported_sulfur_observability_uses_peptide_release_uplift_
     # The property this test is named for -- that Methional is NOT source-sensitive while
     # the thiols are -- is unchanged, and is what the assertion below still checks.
     assert soy_methional == pytest.approx(0.0045)
-    assert wheat_fft < soy_fft
+    # 2026-09-01: soy and wheat used to differ here only through the mocked registry
+    # bias (1.25 vs 0.58). With the registry withdrawn they share the same factor;
+    # the thiol-vs-Methional contrast above is the only source-sensitivity left.
+    assert fft > soy_methional
 
 
 def test_output_projection_surfaces_extrusion_process_state_and_surrogates():

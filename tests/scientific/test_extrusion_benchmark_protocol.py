@@ -98,7 +98,7 @@ def test_extrusion_external_closure_workbook_is_per_arm_and_placeholder_based():
     assert payload["selected_matrix"] == "soy_iso"
     assert len(payload["experiments"]) == 2
     assert payload["experiments"][0]["source_kind"] == "external_literature"
-    assert payload["experiments"][0]["benchmark_alignment"]["target_benchmark_id"] == "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
+    assert payload["experiments"][0]["benchmark_alignment"]["target_benchmark_id"] == "soy_isolate_ribose_cysteine_100C_45min_Internal2026"
     assert payload["experiments"][0]["measured_damage_markers"]["furosine_mg_per_kg"].startswith("REPLACE_WITH_MEASURED_")
     assert "screw speed rpm" in payload["experiments"][0]["required_metadata"]
 
@@ -128,7 +128,7 @@ def test_extrusion_5_8_follow_on_workbook_keeps_feed_reference_and_post_extrusio
 
     assert payload["package_id"] == "spi_extrusion_5_8_follow_on_workbook_2026"
     assert len(payload["experiments"]) == 2
-    assert payload["experiments"][0]["reference_benchmark_id"] == "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
+    assert payload["experiments"][0]["reference_benchmark_id"] == "soy_isolate_ribose_cysteine_100C_45min_Internal2026"
     assert payload["experiments"][0]["feed_reference_assays"]["pre_extrusion_free_sh_umol_per_g"].startswith("REPLACE_WITH_")
     assert payload["experiments"][0]["post_extrusion_process_state_assays"]["furosine_mg_per_kg"].startswith("REPLACE_WITH_")
     assert payload["experiments"][0]["measured_volatiles_ppb"]["2-methyl-3-furanthiol"].startswith("REPLACE_WITH_MEASURED_")

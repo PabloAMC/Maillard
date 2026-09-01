@@ -35,14 +35,12 @@ def test_primary_matrix_campaign_materializes_dual_pea_soy_execution_bundle():
     ]
     assert pea["remaining_after_protocol"] == ["no_internal_or_directional_dependencies"]
     assert pea["evidence_or_calibration_blockers"] == ["Hexanal", "Nonanal"]
-    # Audit 2026-08-26: after the snapshot refresh, ProtocolPilot values are
-    # regenerated from the same model state as Internal2026, so the lane ratios
-    # are exactly 1.0 by construction (the old 1.074/0.985 measured historical
-    # drift between two hand-frozen snapshots).
-    assert round(float(pea["hexanal_ratio"]), 3) == 1.000
-    assert round(float(pea["nonanal_ratio"]), 3) == 1.000
-    assert round(float(soy["hexanal_ratio"]), 3) == 1.000
-    assert round(float(soy["nonanal_ratio"]), 3) == 1.000
+    # 2026-09-01: the ProtocolPilot twin (a byte-identical copy of Internal2026) is gone, and
+    # with it the "ratio = 1.000 by construction" closure claim. The arm now says so.
+    for arm in (pea, soy):
+        assert arm["calibration_closure_action"] == "no_internal_comparator"
+        assert arm["calibration_passed"] is None
+        assert arm["hexanal_ratio"] is None and arm["nonanal_ratio"] is None
 
     markdown = render_matrix_primary_benchmark_campaign_markdown(payload)
     assert "Matrix Primary Benchmark Campaign" in markdown

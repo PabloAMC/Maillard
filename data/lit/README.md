@@ -21,7 +21,7 @@ To add a new paper or experimental dataset:
 graph TD
     A[New Paper / Dataset] --> B[Evaluate Quality Criteria]
     B -->|Score >= 6/8| C[Register in benchmark_intake_registry.json]
-    B -->|Score 3-5/8| D[Register in slr_incorporation_matrix.json as Calibration]
+    B -->|Score 3-5/8| D[Register in results/literature/slr_incorporation_matrix.json as Calibration]
     C --> E[Generate Benchmark JSON payload in data/benchmarks/]
     D --> F[Inject Parameters into computational_priors.json or retention_reference_payloads.json]
     E --> G[Run validation campaign: ./scripts/docker_maillard.sh summary]

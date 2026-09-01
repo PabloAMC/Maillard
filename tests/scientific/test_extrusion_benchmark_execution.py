@@ -40,7 +40,7 @@ def test_extrusion_external_closure_execution_turns_workbook_into_support_delta_
     assert payload["summary"]["status"] == "ready_for_external_landing_review"
     first = payload["experiments"][0]
     assert first["intake_payload"]["source_kind"] == "external_literature"
-    assert first["support_delta"]["aligned_benchmark"]["benchmark_id"] == "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
+    assert first["support_delta"]["aligned_benchmark"]["benchmark_id"] == "soy_isolate_ribose_cysteine_100C_45min_Internal2026"
     assert first["support_delta"]["promotion_assessment"]["landing_recommendation"] == "land_in_benchmark_candidate_or_blocker_registry"
 
     markdown = render_extrusion_external_closure_execution_markdown(payload)

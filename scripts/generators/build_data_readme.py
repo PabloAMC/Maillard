@@ -63,15 +63,12 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/lit/extrusion_damage_reference_payloads.json": "4 damage-marker reference ranges (furosine, CML, CEL, LAL); `src/extrusion.py`. Merge into safety payloads planned.",
     "data/lit/retention_reference_payloads.json": "Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`.",
     "data/lit/process_state_calibrations.json": "26 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`.",
-    "data/lit/protein_source_registry.json": "14 protein-source profiles. Self-labelled `mocked_placeholder`, `no_verifiable_source`, and LIVE in `kinetic_core` (owner decision pending).",
     "data/lit/matrix_decision_panel.json": "Compound -> target class + evidence state truth table with aliases; seed of `compounds.yml`; `src/matrix_targets.py`.",
     "data/lit/matrix_family_coverage_registry.json": "The 8 canonical matrix families and what each supports; the intended closed vocabulary for `matrix_family`.",
     "data/lit/chemistry_family_scope_registry.json": "The 16 chemistry lanes as product scope (status, priority, next action).",
     "data/lit/family_ingestion_plan.json": "The same 16 lanes as an ingestion roadmap (waves, payload types, target modules). Merge with the scope registry planned.",
     "data/lit/process_gap_registry.json": "5 structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`.",
     "data/lit/benchmark_intake_registry.json": "The paper catalogue: 205 references scored against the C1-C8 intake criteria, with repair ledgers. `paper_id` of choice for `papers.yml`.",
-    "data/lit/slr_incorporation_matrix.json": "Ledger of which SLR papers are wired into which runtime module (hand-maintained import graph). Generated-ledger status; move to results/ planned with a census re-pin.",
-    "data/lit/deep_research_backlog.json": "Citation candidates mined from the research corpus by `scripts/deep_research_tracker.py` (regenerable). Same plan as the SLR ledger.",
     "data/lit/refinement_surrogate_patches.json": "RETIRED barrier-offset tombstone; `accepted_offsets` must stay empty (guarded by a test).",
     "data/lit/extraction_dossiers": "Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.",
     "data/lit/timeseries": "Digitised concentration-vs-time trajectories (Martins 2003/2005, Brands 2002) used by the trunk-rate fit; declared fit targets are gated by `scripts/ci/fit_target_gate.py`.",
@@ -94,8 +91,8 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/protocols/pea_iso_protocol_pilot_intake.yaml": "Protocol-pilot intake for pea isolate (hand-written comparison contract; `conc_ppb` refreshed from the model by the reproducibility snapshot generator).",
     "data/protocols/soy_iso_protocol_pilot_intake.yaml": "Protocol-pilot intake for soy isolate; same status.",
     # ---- research corpus
-    "data/Gemini_Deep_Research": "LLM research dumps and literature syntheses. NOT provenance: kept so `scripts/ci/citation_gate.py` can detect laundered citations, and mined by `deep_research_tracker.py`.",
-    "data/Gemini_Deep_Research/raw": "The raw deep-research dumps, unedited.",
+    "data/research_corpus": "LLM research dumps and literature syntheses (renamed from Gemini_Deep_Research on 2026-09-02). NOT provenance: kept so `scripts/ci/citation_gate.py` can detect laundered citations, and mined by `deep_research_tracker.py`.",
+    "data/research_corpus/raw": "The raw deep-research dumps, unedited.",
 }
 
 SKIP_BASENAMES = {".DS_Store"}

@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **221**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **216**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -18,12 +18,6 @@ Tracked files: **221**. Local-only (gitignored): `data/articles/` (primary-sourc
 |---|---|
 | `formulation_grid.yml` | Built-in candidate formulation grid for inverse-design runs (`src/pipeline.py`). |
 | `interventions.yml` | Intervention library: per-unit barrier deltas used by the Bayesian optimiser. |
-
-## `data/Gemini_Deep_Research`
-
-LLM research dumps and literature syntheses. NOT provenance: kept so `scripts/ci/citation_gate.py` can detect laundered citations, and mined by `deep_research_tracker.py`.
-
-13 files covered by the directory description above: `00_priority_runtime_bound.md`, `06_alternative_proteins.md`, `12_protein_damage_markers.md`, `Deep_Research_Protein_Matrix_Kinetics_Report.md`, `Maillard_Reaction_Kinetics_Literature_Search.md`, `Plant_Protein_Maillard_Kinetics_Literature_Search.md`, `README.md`, `elicit_meat_cooking.md`, `elicit_plant_based_cooking.md`, `kinetic_thermodynamic_profiling.md`, `maillard_meat.md`, `maillard_plant_based.md` …
 
 ## `data/benchmarks`
 
@@ -33,7 +27,7 @@ Observations the model is scored against. Panel discovery is NON-recursive: only
 |---|---|
 | `maillard_validation_benchmarks.md` | Retired evidence record whose sections 1.3/3.1/3.2 are self-declared reconstructed; kept at this path because ~35 provenance notes cite it. |
 
-23 files covered by the directory description above: `acrylamide_spi_extrusion_130C_ACSRef3.json`, `cml_cel_commercial_pbma_Foods2023.json`, `cys_ribose_140C_Hofmann1998.json`, `furosine_extrusion_crossover_140C_RamirezJimenez2000.json`, `hofmann1998_c2c3_recombination_145C_20min_pH3.json`, `hofmann1998_c2c3_recombination_145C_20min_pH5.json`, `hofmann1998_c2c3_recombination_145C_20min_pH7.json`, `hofmann1998_fructose_cysteine_145C_20min_pH5.json`, `hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json`, `hofmann1998_glucose_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_h2s_145C_20min_pH5.json` …
+21 files covered by the directory description above: `acrylamide_spi_extrusion_130C_ACSRef3.json`, `cml_cel_commercial_pbma_Foods2023.json`, `cys_ribose_140C_Hofmann1998.json`, `furosine_extrusion_crossover_140C_RamirezJimenez2000.json`, `hofmann1998_c2c3_recombination_145C_20min_pH3.json`, `hofmann1998_c2c3_recombination_145C_20min_pH5.json`, `hofmann1998_c2c3_recombination_145C_20min_pH7.json`, `hofmann1998_fructose_cysteine_145C_20min_pH5.json`, `hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json`, `hofmann1998_glucose_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_h2s_145C_20min_pH5.json` …
 
 ## `data/keys`
 
@@ -56,7 +50,6 @@ Literature-derived constants, priors, reference payloads and the intake registri
 | `binding_constants.yml` | Measured protein-flavour binding constants with verbatim source quotes and verification status; `src/protein_binding.py`. The record shape the rest of this directory should converge on. |
 | `chemistry_family_scope_registry.json` | The 16 chemistry lanes as product scope (status, priority, next action). |
 | `computational_priors.json` | 22 prior tables in one file (accessibility windows, class profiles, per-family priors, DFT-era kinetic priors); read by 10 modules. Split planned (Phase 4). |
-| `deep_research_backlog.json` | Citation candidates mined from the research corpus by `scripts/deep_research_tracker.py` (regenerable). Same plan as the SLR ledger. |
 | `extrusion_damage_reference_payloads.json` | 4 damage-marker reference ranges (furosine, CML, CEL, LAL); `src/extrusion.py`. Merge into safety payloads planned. |
 | `family_ingestion_plan.json` | The same 16 lanes as an ingestion roadmap (waves, payload types, target modules). Merge with the scope registry planned. |
 | `flavor_reference_payloads.json` | 59 odour-threshold / concentration anchors for character-impact compounds, by chemistry section. |
@@ -66,11 +59,9 @@ Literature-derived constants, priors, reference payloads and the intake registri
 | `matrix_family_coverage_registry.json` | The 8 canonical matrix families and what each supports; the intended closed vocabulary for `matrix_family`. |
 | `process_gap_registry.json` | 5 structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`. |
 | `process_state_calibrations.json` | 26 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`. |
-| `protein_source_registry.json` | 14 protein-source profiles. Self-labelled `mocked_placeholder`, `no_verifiable_source`, and LIVE in `kinetic_core` (owner decision pending). |
 | `refinement_surrogate_patches.json` | RETIRED barrier-offset tombstone; `accepted_offsets` must stay empty (guarded by a test). |
 | `retention_reference_payloads.json` | Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`. |
 | `safety_reference_payloads.json` | 43 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`. |
-| `slr_incorporation_matrix.json` | Ledger of which SLR papers are wired into which runtime module (hand-maintained import graph). Generated-ledger status; move to results/ planned with a census re-pin. |
 
 ## `data/protocols`
 
@@ -86,6 +77,12 @@ Wet-lab contracts and intake specifications.
 | `pea_soy_mixed_external_package_contract.json` | Pea/soy mixed-matrix external package contract. |
 | `ppi_spi_primary_benchmark_contract.json` | The PPI/SPI primary benchmark package contract (DOE generator, campaign). |
 | `soy_iso_protocol_pilot_intake.yaml` | Protocol-pilot intake for soy isolate; same status. |
+
+## `data/research_corpus`
+
+LLM research dumps and literature syntheses (renamed from Gemini_Deep_Research on 2026-09-02). NOT provenance: kept so `scripts/ci/citation_gate.py` can detect laundered citations, and mined by `deep_research_tracker.py`.
+
+13 files covered by the directory description above: `00_priority_runtime_bound.md`, `06_alternative_proteins.md`, `12_protein_damage_markers.md`, `Deep_Research_Protein_Matrix_Kinetics_Report.md`, `Maillard_Reaction_Kinetics_Literature_Search.md`, `Plant_Protein_Maillard_Kinetics_Literature_Search.md`, `README.md`, `elicit_meat_cooking.md`, `elicit_plant_based_cooking.md`, `kinetic_thermodynamic_profiling.md`, `maillard_meat.md`, `maillard_plant_based.md` …
 
 ## `data/schemas`
 
@@ -106,12 +103,6 @@ Compound and precursor definitions (SMILES, CAS, InChI, odour thresholds). The s
 | `precursors.yml` | Precursors by category (amino acids, sugars, exogenous, intermediates, lipids); `src/precursor_resolver.py`. |
 | `sensory_tags.yml` | Tag -> compound display-name lists used by the pipeline's target/minimise tags. |
 | `toxic_markers.yml` | 8 safety markers (AGEs, acrylamide, HCAs) with IARC class. |
-
-## `data/Gemini_Deep_Research/raw`
-
-The raw deep-research dumps, unedited.
-
-26 files covered by the directory description above: `00_priority_runtime_bound.md`, `Gemini_deep_research_01.md`, `Gemini_deep_research_02.md`, `Gemini_deep_research_03.md`, `Gemini_deep_research_04.md`, `Gemini_deep_research_05.md`, `Gemini_deep_research_06.md`, `Gemini_deep_research_07.md`, `Gemini_deep_research_08.md`, `Gemini_deep_research_09.md`, `Gemini_deep_research_10.md`, `Gemini_deep_research_11.md` …
 
 ## `data/benchmarks/external_validation`
 
@@ -142,6 +133,12 @@ Per-paper extraction records (verbatim quotes, digitised tables, unit reconcilia
 Digitised concentration-vs-time trajectories (Martins 2003/2005, Brands 2002) used by the trunk-rate fit; declared fit targets are gated by `scripts/ci/fit_target_gate.py`.
 
 5 files covered by the directory description above: `README.md`, `brands_sugar_casein_120C_pH68.yml`, `martins2003_DFG_amadori_degradation.yml`, `martins2005_glucose_glycine_100C_pH68.yml`, `martins2005_glucose_glycine_80_100_120C_pH68.yml`
+
+## `data/research_corpus/raw`
+
+The raw deep-research dumps, unedited.
+
+26 files covered by the directory description above: `00_priority_runtime_bound.md`, `Gemini_deep_research_01.md`, `Gemini_deep_research_02.md`, `Gemini_deep_research_03.md`, `Gemini_deep_research_04.md`, `Gemini_deep_research_05.md`, `Gemini_deep_research_06.md`, `Gemini_deep_research_07.md`, `Gemini_deep_research_08.md`, `Gemini_deep_research_09.md`, `Gemini_deep_research_10.md`, `Gemini_deep_research_11.md` …
 
 ## `data/benchmarks/external_validation/intake`
 

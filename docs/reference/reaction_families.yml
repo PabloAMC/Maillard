@@ -348,7 +348,7 @@ reaction_families:
       HIGHEST PRIORITY target. MFT is the most powerful meaty odorant.
       This pathway is ribose-SPECIFIC — does not occur with glucose.
       Multi-step sequence: requires custom encoding of 1,4-dideoxyosone as intermediate.
-      Literature: data/Gemini_Deep_Research/maillard_plant_based.md (LLM digest, not a paper) confirms a secondary pathway bypassing 4-hydroxy-5-methyl-3(2H)-furanone.
+      Literature: data/research_corpus/maillard_plant_based.md (LLM digest, not a paper) confirms a secondary pathway bypassing 4-hydroxy-5-methyl-3(2H)-furanone.
       Target for Tier 2 DFT calculation (3.2e in todo.md).
 
   - id: "1B.15"
@@ -562,5 +562,5 @@ reaction_families:
     notes: |
       This is not a chemical reaction but a stoichiometric accounting rule that must be
       implemented in src/pathway_ranker.py and src/recommend.py.
-      Without this rule, models will OVERESTIMATE meaty volatile yield (as documented in pathways.md -- a file that exists nowhere in this repository; name kept on the record, see data/Gemini_Deep_Research/README.md).
+      Without this rule, models will OVERESTIMATE meaty volatile yield (as documented in pathways.md -- a file that exists nowhere in this repository; name kept on the record, see data/research_corpus/README.md).
       Failing to model DHA systematically leads to overoptimistic precursor recommendations.

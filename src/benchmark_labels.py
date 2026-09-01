@@ -52,10 +52,6 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "plain": "Pea isolate + ribose + cysteine, 100 C (Internal, 2026)",
         "latex": r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Internal, 2026)",
     },
-    "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026": {
-        "plain": "Pea isolate + ribose + cysteine, 100 C (Protocol Pilot, 2026)",
-        "latex": r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)",
-    },
     "pea_isolate_uht_140C_Trikusuma2019": {
         "plain": "Pea isolate UHT, 140 C (Trikusuma, 2020)",
         "latex": r"Pea isolate UHT, $140\,^{\circ}$C (Trikusuma, 2020)",
@@ -71,10 +67,6 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
     "soy_isolate_ribose_cysteine_100C_45min_Internal2026": {
         "plain": "Soy isolate + ribose + cysteine, 100 C (Internal, 2026)",
         "latex": r"Soy isolate + ribose + cysteine, $100\,^{\circ}$C (Internal, 2026)",
-    },
-    "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026": {
-        "plain": "Soy isolate + ribose + cysteine, 100 C (Protocol Pilot, 2026)",
-        "latex": r"Soy isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)",
     },
     # QUARANTINED 2026-08-27 (Wave I) -- kept so any surviving reference to the id renders
     # with a name instead of a raw slug, NOT because the benchmark is in the panel. Its

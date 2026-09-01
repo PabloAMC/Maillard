@@ -18,7 +18,7 @@ def _load(relative_path: str) -> dict:
 def test_track0_and_track1_artifacts_exist_and_are_exposed_in_reporting():
     surface = _build_scientific_surface(ROOT)
 
-    assert surface["slr_incorporation_matrix"] == "data/lit/slr_incorporation_matrix.json"
+    assert surface["slr_incorporation_matrix"] == "results/literature/slr_incorporation_matrix.json"
     assert surface["chemistry_family_scope_registry"] == "data/lit/chemistry_family_scope_registry.json"
     assert surface["family_ingestion_plan_registry"] == "data/lit/family_ingestion_plan.json"
     assert surface["family_identifier_contract"] == "results/validation/family_identifier_contract.md"
@@ -67,7 +67,7 @@ def test_family_metadata_is_present_on_literature_payload_surfaces():
 
 
 def test_slr_incorporation_matrix_covers_new_track1_sources():
-    payload = _load("data/lit/slr_incorporation_matrix.json")
+    payload = _load("results/literature/slr_incorporation_matrix.json")
     by_id = {entry["paper_id"]: entry for entry in payload["entries"]}
 
     required_ids = {
@@ -224,10 +224,8 @@ def test_computational_priors_promote_mycoprotein_to_a_first_class_matrix_family
     correction = next(entry for entry in payload["matrix_corrections"] if entry["protein_type"] == "myco")
 
     assert accessibility["provenance_tier"] == "literature_bounded_provisional"
-    assert accessibility["uncertainty_posture"] == "directional_only"
     assert "extrusion_structured" in accessibility["process_state_applicability"]
     assert correction["provenance_tier"] == "literature_bounded_provisional"
-    assert correction["uncertainty_posture"] == "directional_only"
 
 
 def test_flavor_reference_payloads_cover_sulfur_strecker_pyrazine_and_furanones():

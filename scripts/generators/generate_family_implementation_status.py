@@ -213,8 +213,9 @@ _NON_TEMPLATE_IMPLEMENTATION: Dict[str, Dict[str, str]] = {
         "state": "matrix_or_modifier_layer",
         "implementation": (
             "Not reaction chemistry. Implemented as the matrix layer: "
-            "src/matrix_correction.py (accessibility + volatile retention per protein type) "
-            "and data/lit/protein_source_registry.json."
+            "src/matrix_correction.py (accessibility + volatile retention per protein type). "
+            "The per-source registry (data/lit/protein_source_registry.json) was withdrawn "
+            "2026-09-01 as self-declared mocked."
         ),
     },
     "carbonyl_donor_hierarchy": {

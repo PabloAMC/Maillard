@@ -14,13 +14,12 @@ Current legume-matrix anchoring inside the repo:
 - soy: repo literature synthesis around soy glycinin/beta-conglycinin burial,
   sulfur limitation, extrusion-driven accessibility changes, and soy
   protein-polysaccharide conjugate trapping documented in
-    data/Gemini_Deep_Research/maillard_plant_based.md and
-    data/Gemini_Deep_Research/elicit_plant_based_cooking.md
+    data/research_corpus/maillard_plant_based.md and
+    data/research_corpus/elicit_plant_based_cooking.md
 """
 
 import json
 import math
-import warnings
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -43,81 +42,6 @@ def _load_json_payload(payload_path: Path) -> dict:
 
 
 PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload(data_paths.PROCESS_STATE_CALIBRATIONS)
-PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload(data_paths.PROTEIN_SOURCE_REGISTRY)
-
-
-def _warn_if_registry_unsourced(payload: dict, consumer: str) -> bool:
-    """Surface an unanchored data file's own admission at LOAD time.
-
-    2026-08-27 (Wave T3, finding T1-01). ``data/lit/protein_source_registry.json``
-    has always described itself as *"Mocked values for 14 protein sources based on
-    Report 06 requirements"* -- and that sentence sat in a JSON field nothing read,
-    while the numbers underneath it drove ``matrix_uncertainty_factor`` and the
-    meaty-potential score at prediction time. Silence was reading as anchoring.
-
-    The precedent for the shape is the family-12 molar-ratio unit warning in
-    ``src.literature_runtime`` (``_resolve_concentration_unit``): state the defect,
-    name what depends on it, and change NOTHING about the values. No substitute
-    numbers are invented here; inventing them would be the same defect again.
-
-    Returns True when the payload admits it has no verifiable source, so callers can
-    propagate the fact into their own output payloads rather than only to stderr.
-    """
-    if str(payload.get("source_status", "")).strip() != "no_verifiable_source":
-        return False
-    warnings.warn(
-        f"{consumer}: {data_paths.rel(data_paths.PROTEIN_SOURCE_REGISTRY)} declares "
-        "source_status='no_verifiable_source' -- every value in it is a MOCKED "
-        "placeholder whose only declared upstream is the LLM digest "
-        "data/Gemini_Deep_Research/06_alternative_proteins.md. It is nonetheless LIVE: "
-        "meaty_potential_multiplier, hydrolysate_observability_bias, off_note_penalty, "
-        "lox_activity_flag and methoxypyrazine_ceiling feed matrix_uncertainty_factor, "
-        "the meaty-potential score and the recommendation path. Any prediction that "
-        "differs between protein sources is unanchored on that axis. Values are NOT "
-        "substituted or rescaled.",
-        RuntimeWarning,
-        stacklevel=2,
-    )
-    return True
-
-
-PROTEIN_SOURCE_REGISTRY_UNSOURCED = _warn_if_registry_unsourced(
-    PROTEIN_SOURCE_REGISTRY_PAYLOAD, "src.matrix_correction"
-)
-
-@dataclass(frozen=True)
-class ProteinSourceProfile:
-    source_id: str
-    meaty_potential_multiplier: float
-    hydrolysate_observability_bias: float
-    off_note_penalty: float
-    lox_activity_flag: bool
-    methoxypyrazine_ceiling: float
-    aa_composition: dict[str, float]
-
-def _build_protein_source_profiles() -> dict[str, ProteinSourceProfile]:
-    profiles = {}
-    for entry in PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("sources", []):
-        profiles[entry["source_id"]] = ProteinSourceProfile(
-            source_id=entry["source_id"],
-            meaty_potential_multiplier=float(entry.get("meaty_potential_multiplier", 1.0)),
-            hydrolysate_observability_bias=float(entry.get("hydrolysate_observability_bias", 1.0)),
-            off_note_penalty=float(entry.get("off_note_penalty", 0.0)),
-            lox_activity_flag=bool(entry.get("lox_activity_flag", False)),
-            methoxypyrazine_ceiling=float(entry.get("methoxypyrazine_ceiling", 1.0)),
-            aa_composition={k: float(v) for k, v in entry.get("aa_composition", {}).items()},
-        )
-    return profiles
-
-PROTEIN_SOURCE_PROFILES = _build_protein_source_profiles()
-
-def get_protein_source_profile(source_id: Optional[str]) -> ProteinSourceProfile | None:
-    if not source_id:
-        return None
-    return PROTEIN_SOURCE_PROFILES.get(str(source_id).strip().lower())
-
-
-
 class ProteinType(Enum):
     FREE_AMINO_ACID = "free"
     PEA_CONCENTRATE = "pea_conc"    # ~60% protein, fibrous matrix
@@ -451,7 +375,6 @@ def resolve_compound_matrix_retention(
     time_minutes: Optional[float] = None,
     water_activity: Optional[float] = None,
     process_state: Optional[str] = None,
-    protein_source: Optional[str] = None,
 ) -> float:
     p_type = _coerce_protein_type(protein_type)
     base = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
@@ -470,18 +393,7 @@ def resolve_compound_matrix_retention(
         process_state=process_state,
     )
     dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
-    
-    source_factor = 1.0
-    profile = get_protein_source_profile(protein_source)
-    if profile:
-        source_factor = profile.meaty_potential_multiplier
-        if "methoxypyrazine" in name.lower():
-            source_factor = min(source_factor, profile.methoxypyrazine_ceiling)
-        compound_family = classify_volatile_matrix_family(name, smiles=smiles)
-        if compound_family in ["aldehyde", "alcohol"] and profile.lox_activity_flag:
-            source_factor *= (1.0 + profile.off_note_penalty)
-
-    return max(0.01, min(1.0, base * class_factor * dynamic_factor * source_factor))
+    return max(0.01, min(1.0, base * class_factor * dynamic_factor))
 
 
 def describe_compound_matrix_retention(
@@ -493,7 +405,6 @@ def describe_compound_matrix_retention(
     time_minutes: Optional[float] = None,
     water_activity: Optional[float] = None,
     process_state: Optional[str] = None,
-    protein_source: Optional[str] = None,
 ) -> dict[str, object]:
     p_type = _coerce_protein_type(protein_type)
     base = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
@@ -512,23 +423,13 @@ def describe_compound_matrix_retention(
         process_state=process_state,
     )
     dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
-    
-    source_factor = 1.0
-    profile = get_protein_source_profile(protein_source)
-    if profile:
-        source_factor = profile.meaty_potential_multiplier
-        if "methoxypyrazine" in name.lower():
-            source_factor = min(source_factor, profile.methoxypyrazine_ceiling)
-        compound_family = classify_volatile_matrix_family(name, smiles=smiles)
-        if compound_family in ["aldehyde", "alcohol"] and profile.lox_activity_flag:
-            source_factor *= (1.0 + profile.off_note_penalty)
-
-    matrix_factor = max(0.01, min(1.0, base * class_factor * dynamic_factor * source_factor))
+    # 2026-09-01: the `source_heuristic_factor` (a per-protein-source multiplier
+    # from the withdrawn mocked registry) is gone; no reader in src/ consumed it.
+    matrix_factor = max(0.01, min(1.0, base * class_factor * dynamic_factor))
     return {
         "base_matrix_factor": float(base),
         "class_matrix_factor": float(class_factor),
         "dynamic_retention_factor": float(dynamic_factor),
-        "source_heuristic_factor": float(source_factor),
         "matrix_factor": float(matrix_factor),
         **runtime,
     }
@@ -558,13 +459,6 @@ def build_matrix_explainability(
         denaturation_source = DENATURATION_HEURISTICS.get(p_type).source if p_type in DENATURATION_HEURISTICS else "estimated_from_conditions"
     else:
         denaturation_source = "explicit_override"
-    uncertainty_postures = sorted(
-        {
-            str(item.get("uncertainty_posture", "unknown"))
-            for item in prior_summary.values()
-            if isinstance(item, dict) and item.get("uncertainty_posture")
-        }
-    )
     process_state_applicability = sorted(
         {
             str(state)
@@ -595,7 +489,6 @@ def build_matrix_explainability(
         ),
         "denaturation_source": denaturation_source,
         "prior_summary": prior_summary,
-        "matrix_prior_uncertainty_postures": uncertainty_postures,
         "matrix_prior_process_state_applicability": process_state_applicability,
         # P1: canonical accessibility state
         "accessibility_profile": acc_state.profile,
@@ -643,57 +536,37 @@ def apply_matrix_correction(
     reactive_amino_acids: dict[str, float],
     protein_type: ProteinType,
     denaturation_state: float = 0.5,  # 0=native, 1=fully denatured
-    protein_source: Optional[str] = None,
 ) -> tuple[dict[str, float], dict[str, float]]:
     """
     Scale predicted volatile concentrations and reactive AA concentrations
-    by matrix accessibility factors and specific protein source heuristics.
+    by matrix accessibility factors.
+
+    2026-09-01: the per-protein-source heuristics that used to sit here
+    (``aa_composition`` rescaling of the reactive amino acids and a
+    ``meaty_potential_multiplier`` / ``methoxypyrazine_ceiling`` /
+    ``off_note_penalty`` scaler on the volatiles) were withdrawn together with
+    ``data/lit/protein_source_registry.json``, which self-declared every value a
+    mocked placeholder. All sources now share the accessibility factors of the
+    ``protein_type`` matrix.
     """
     corr = resolve_matrix_correction(
         protein_type,
         denaturation_state=denaturation_state,
     )
-    
-    profile = get_protein_source_profile(protein_source)
 
     corrected_aa = {}
     for aa, conc in reactive_amino_acids.items():
         aa_class = _classify_reactive_aa_key(aa)
-        
-        aa_scaler = 1.0
-        if profile:
-            if aa_class and aa_class in profile.aa_composition:
-                aa_scaler = profile.aa_composition[aa_class]
-            elif "methionine" in profile.aa_composition and "methionine" in aa.lower():
-                aa_scaler = profile.aa_composition["methionine"]
-
         if aa_class == "lysine":
-            corrected_aa[aa] = conc * corr.lysine_accessibility * aa_scaler
+            corrected_aa[aa] = conc * corr.lysine_accessibility
         elif aa_class == "cysteine":
-            corrected_aa[aa] = conc * corr.cysteine_accessibility * aa_scaler
+            corrected_aa[aa] = conc * corr.cysteine_accessibility
         else:
-            corrected_aa[aa] = conc * ((corr.lysine_accessibility + corr.cysteine_accessibility) / 2.0) * aa_scaler
+            corrected_aa[aa] = conc * ((corr.lysine_accessibility + corr.cysteine_accessibility) / 2.0)
 
     corrected_volatiles = {}
     for compound, conc in predicted_concentrations.items():
-        base_retention = corr.volatile_retention
-        
-        if profile:
-            # Base capacity shift for desirable meatiness
-            scaler = profile.meaty_potential_multiplier
-            
-            # Heuristic: methoxypyrazine non-correctable
-            if "methoxypyrazine" in compound.lower():
-                scaler = min(scaler, profile.methoxypyrazine_ceiling)
-
-            # Heuristic: Off-note penalty + LOX flag
-            compound_family = classify_volatile_matrix_family(compound)
-            if compound_family in ["aldehyde", "alcohol"] and profile.lox_activity_flag:
-                scaler *= (1.0 + profile.off_note_penalty)
-
-            base_retention *= scaler
-
-        corrected_volatiles[compound] = conc * base_retention
+        corrected_volatiles[compound] = conc * corr.volatile_retention
 
     return corrected_volatiles, corrected_aa
 

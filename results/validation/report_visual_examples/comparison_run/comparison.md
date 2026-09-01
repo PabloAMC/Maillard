@@ -1,6 +1,6 @@
 # Maillard Formulation Comparison Report
 
-**Date:** 2026-08-27 19:13:11
+**Date:** 2026-09-01 22:11:32
 
 ## 1. Metric Overview
 | Metric | Ribose + leucine (no cysteine) | Ribose + cysteine + leucine |
@@ -10,8 +10,8 @@
 | **Safety Score** (2× band risk, higher is worse) | 1.04 | 1.04 |
 | **Lysine Budget** | 0.0% | 0.0% |
 | **Trapping Eff.** | 0.0% | 0.0% |
-| **MFT/Furfural Ratio** | 0.0000 | 0.0009 |
-| **Meaty Quality Penalty** | 2.50 | 1.32 |
+| **MFT/Furfural Ratio** | 0.0000 | 0.0023 |
+| **Meaty Quality Penalty** | 2.50 | 0.79 |
 | **Strecker Balance** | 0.00 | 0.00 |
 | **Strecker Penalty** | 0.00 | 0.00 |
 | **Pyrazine Burden** | 0.00 | 0.00 |
@@ -119,9 +119,9 @@
 
 ## 5. Provenance
 - **artifact_kind:** formulation_comparison
-- **generated_at:** 2026-08-27T19:12:54.923769
-- **generator:** scripts/generators/generate_report_visual_examples.py
-- **repository:** Maillard | branch audit-remediation | commit 263bae8 | dirty True
+- **generated_at:** 2026-09-01T22:11:13.014601
+- **generator:** scripts/generators/generate_report_visual_examples.py --output-dir results/validation/report_visual_examples --docs-asset-dir docs/assets
+- **repository:** workspace | branch cleaning | commit 2208fd0 | dirty True
 - **input_fingerprint_sha256:** b1272b62fda83200e95ca6d9e4be97ab29cf3d78f4c9fa684309c1f09aa1bad7
 - **scientific_surface:**
   - scientific_reference: docs/reference/SCIENTIFIC_REFERENCE.md
@@ -140,7 +140,7 @@
   - matrix_family_coverage_registry: data/lit/matrix_family_coverage_registry.json
   - benchmark_intake_registry: data/lit/benchmark_intake_registry.json
   - computational_priors: data/lit/computational_priors.json
-  - slr_incorporation_matrix: data/lit/slr_incorporation_matrix.json
+  - slr_incorporation_matrix: results/literature/slr_incorporation_matrix.json
   - flavor_reference_payloads: data/lit/flavor_reference_payloads.json
   - process_state_calibrations: data/lit/process_state_calibrations.json
   - retention_reference_payloads: data/lit/retention_reference_payloads.json
@@ -163,47 +163,11 @@
   - chemistry_family_scope_json: results/validation/chemistry_family_scope.json
   - matrix_family_coverage: results/validation/matrix_family_coverage.md
   - matrix_family_coverage_json: results/validation/matrix_family_coverage.json
-  - refinement_watchlist: results/validation/refinement_watchlist.md
-  - refinement_watchlist_json: results/validation/refinement_watchlist.json
-  - offline_dft_jobs: results/validation/offline_dft_jobs.json
   - family_sensitivity: results/validation/family_sensitivity.md
   - family_sensitivity_json: results/validation/family_sensitivity.json
   - family_lane_validation: results/validation/family_lane_validation.md
   - family_lane_validation_json: results/validation/family_lane_validation.json
-  - refinement_global_sensitivity: results/validation/refinement_global_sensitivity.md
-  - refinement_global_sensitivity_json: results/validation/refinement_global_sensitivity.json
-  - cheap_refinement_screening: results/validation/cheap_refinement_screening.md
-  - cheap_refinement_screening_json: results/validation/cheap_refinement_screening.json
-  - selective_dft_plan: results/validation/selective_dft_plan.md
-  - selective_dft_plan_json: results/validation/selective_dft_plan.json
-  - refinement_governance: results/validation/refinement_governance.md
-  - refinement_governance_json: results/validation/refinement_governance.json
-  - refinement_offline_dft_jobs: results/validation/refinement_offline_dft_jobs.json
-  - refinement_impact: results/validation/refinement_impact.md
-  - refinement_impact_json: results/validation/refinement_impact.json
-  - computational_gap_refinement_plan: results/validation/computational_gap_refinement_plan.md
-  - computational_gap_refinement_plan_json: results/validation/computational_gap_refinement_plan.json
-  - computational_gap_dft_ingestion_report: results/validation/computational_gap_dft_ingestion_report.md
-  - computational_gap_dft_ingestion_report_json: results/validation/computational_gap_dft_ingestion_report.json
-  - computational_gap_dft_promotion_report: results/validation/computational_gap_dft_promotion_report.md
-  - computational_gap_dft_promotion_report_json: results/validation/computational_gap_dft_promotion_report.json
   - refinement_surrogate_patches: data/lit/refinement_surrogate_patches.json
-  - reaction_benchmark_set: data/lit/reaction_benchmark_set.json
-  - mlp_candidate_registry: data/lit/mlp_candidate_registry.json
-  - mlp_external_benchmark_evidence: data/lit/mlp_external_benchmark_evidence.json
-  - geometry_benchmark_set: data/lit/geometry_benchmark_set.json
-  - mlp_geometry_benchmark: results/validation/mlp_geometry_benchmark.md
-  - mlp_geometry_benchmark_json: results/validation/mlp_geometry_benchmark.json
-  - mlp_geometry_assessment: results/validation/mlp_geometry_assessment.md
-  - mlp_geometry_assessment_json: results/validation/mlp_geometry_assessment.json
-  - mlp_reaction_benchmark: results/validation/mlp_reaction_benchmark.md
-  - mlp_reaction_benchmark_json: results/validation/mlp_reaction_benchmark.json
-  - mlp_assessment: results/validation/mlp_assessment.md
-  - mlp_assessment_json: results/validation/mlp_assessment.json
-  - mlp_external_mlp_landscape: results/validation/mlp_external_mlp_landscape.md
-  - mlp_external_mlp_landscape_json: results/validation/mlp_external_mlp_landscape.json
-  - mlp_adoption_notes: results/validation/mlp_adoption_notes.md
-  - mlp_adoption_notes_json: results/validation/mlp_adoption_notes.json
 - **campaign_name:** unknown
 
 ## 6. Glossary
@@ -253,9 +217,9 @@ Scoped to matrix `pea_iso` (filtered from the global ranking).
 
 | Rank | VoI | Benchmark | Matrix | Compound | DoE template | Why this one |
 | ---: | ---: | --- | --- | --- | --- | --- |
-| 9 | 0.98 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.53 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
-| 10 | 0.98 | `pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.53 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
-| 13 | 0.70 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | bis(2-methyl-3-furyl) disulfide | `missing_kinetic_dataset` | CI width 4.67 dex; ≈0.04× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
+| 21 | 0.97 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.47 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
+| 22 | 0.97 | `pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | `pea_iso` | 2,5-dimethylpyrazine | `missing_kinetic_dataset` | CI width 6.47 dex; ≈2e-08× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
+| 25 | 0.68 | `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | `pea_iso` | bis(2-methyl-3-furyl) disulfide | `missing_kinetic_dataset` | CI width 4.56 dex; ≈0.06× ODT (decision_relevance=0.50); wide envelope — time-course narrows the rate-limiting step |
 
 _How to use this: run `./scripts/docker_maillard.sh next-experiment --top 3` to materialise pre-filled intake YAMLs and protocol Markdown for each row. Ingest the resulting measurement via `./scripts/docker_maillard.sh ingest --file results.csv ...`._
 
@@ -278,8 +242,8 @@ Per-compound odour activity value (OAV = predicted ppb ÷ curated odour threshol
 | 3-Methylbutanal | unclassified | 1.5 | 0.00152 | 1.02e-03 | n/a | n/a | · |
 | furfural | unclassified | 3000 | 0.181 | 6.05e-05 | 5.47e-07 | 6.68e-03 | · |
 | Furfural | unclassified | 3000 | 0.181 | 6.05e-05 | 5.47e-07 | 6.68e-03 | · |
-| 2,5-dimethylpyrazine | unclassified | 1800 | 7.25e-06 | 4.03e-09 | 1.07e-12 | 3.58e-06 | · |
-| 2,5-Dimethylpyrazine | unclassified | 1800 | 7.25e-06 | 4.03e-09 | 1.07e-12 | 3.58e-06 | · |
+| 2,5-dimethylpyrazine | unclassified | 1800 | 7.25e-06 | 4.03e-09 | 1.11e-12 | 3.25e-06 | · |
+| 2,5-Dimethylpyrazine | unclassified | 1800 | 7.25e-06 | 4.03e-09 | 1.11e-12 | 3.25e-06 | · |
 | O=Cc1ccco1 | unclassified | n/a | 0.181 | n/a | n/a | n/a | — |
 | CC(C)CC=O | unclassified | n/a | 0.00152 | n/a | n/a | n/a | — |
 | Cc1cnc(C)cn1 | unclassified | n/a | 7.25e-06 | n/a | n/a | n/a | — |
@@ -294,31 +258,31 @@ Per-compound odour activity value (OAV = predicted ppb ÷ curated odour threshol
 ### Axis roll-up
 | Axis | Compounds (with ODT) | Above threshold | Max OAV | Top contributor |
 | --- | ---: | ---: | ---: | --- |
-| meaty | 4 | 0 | 0.211 | 2-furfurylthiol |
+| meaty | 4 | 0 | 0.210 | 2-furfurylthiol |
 | off-note | 0 | 0 | n/a | _no compound with curated ODT in this run_ |
 | safety | 0 | 0 | n/a | _no compound with curated ODT in this run_ |
 
 ### Per-compound OAV (90 % CI)
 | Compound | Axis | ODT (μg/kg) | Predicted ppb (p50) | OAV (p50) | OAV p5 | OAV p95 | ≥1? |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | :---: |
-| 2-furfurylthiol | meaty | 0.01 | 0.00211 | 0.211 | 9.14e-05 | 23.3 | · |
-| 2-Furfurylthiol (FFT) | meaty | 0.01 | 0.00211 | 0.211 | 9.14e-05 | 23.3 | · |
-| 2-methyl-3-furanthiol | meaty | 0.007 | 9.5e-05 | 0.014 | 3.66e-05 | 1.50 | · |
-| 2-Methyl-3-furanthiol (MFT) | meaty | 0.007 | 9.5e-05 | 0.014 | 3.66e-05 | 1.50 | · |
-| bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 2.94e-05 | 1.47e-03 | 1.50e-06 | 0.162 | · |
-| Bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 2.94e-05 | 1.47e-03 | 1.50e-06 | 0.162 | · |
-| 3-methylbutanal | unclassified | 1.5 | 0.000904 | 6.03e-04 | n/a | n/a | · |
-| 3-Methylbutanal | unclassified | 1.5 | 0.000904 | 6.03e-04 | n/a | n/a | · |
-| furfural | unclassified | 3000 | 0.108 | 3.59e-05 | 3.25e-07 | 3.97e-03 | · |
-| Furfural | unclassified | 3000 | 0.108 | 3.59e-05 | 3.25e-07 | 3.97e-03 | · |
-| 2,5-dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.35e-13 | 2.13e-06 | · |
-| 2,5-Dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.35e-13 | 2.13e-06 | · |
+| 2-furfurylthiol | meaty | 0.01 | 0.0021 | 0.210 | 4.60e-04 | 23.2 | · |
+| 2-Furfurylthiol (FFT) | meaty | 0.01 | 0.0021 | 0.210 | 4.60e-04 | 23.2 | · |
+| 2-methyl-3-furanthiol | meaty | 0.007 | 0.000252 | 0.036 | 3.25e-04 | 3.97 | · |
+| 2-Methyl-3-furanthiol (MFT) | meaty | 0.007 | 0.000252 | 0.036 | 3.25e-04 | 3.97 | · |
+| bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 5.51e-05 | 2.76e-03 | 2.63e-06 | 0.305 | · |
+| Bis(2-methyl-3-furyl) disulfide | unclassified | 0.02 | 5.51e-05 | 2.76e-03 | 2.63e-06 | 0.305 | · |
+| 3-methylbutanal | unclassified | 1.5 | 0.000903 | 6.02e-04 | n/a | n/a | · |
+| 3-Methylbutanal | unclassified | 1.5 | 0.000903 | 6.02e-04 | n/a | n/a | · |
+| furfural | unclassified | 3000 | 0.108 | 3.58e-05 | 3.24e-07 | 3.96e-03 | · |
+| Furfural | unclassified | 3000 | 0.108 | 3.58e-05 | 3.24e-07 | 3.96e-03 | · |
+| 2,5-dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.61e-13 | 1.93e-06 | · |
+| 2,5-Dimethylpyrazine | unclassified | 1800 | 4.3e-06 | 2.39e-09 | 6.61e-13 | 1.93e-06 | · |
 | O=Cc1ccco1 | unclassified | n/a | 0.108 | n/a | n/a | n/a | — |
-| CC(C)CC=O | unclassified | n/a | 0.000904 | n/a | n/a | n/a | — |
+| CC(C)CC=O | unclassified | n/a | 0.000903 | n/a | n/a | n/a | — |
 | Cc1cnc(C)cn1 | unclassified | n/a | 4.3e-06 | n/a | n/a | n/a | — |
-| SCc1ccco1 | unclassified | n/a | 0.00211 | n/a | n/a | n/a | — |
-| Cc1occc1S | unclassified | n/a | 9.5e-05 | n/a | n/a | n/a | — |
-| Cc1occc1SSc1ccoc1C | unclassified | n/a | 2.94e-05 | n/a | n/a | n/a | — |
+| SCc1ccco1 | unclassified | n/a | 0.0021 | n/a | n/a | n/a | — |
+| Cc1occc1S | unclassified | n/a | 0.000252 | n/a | n/a | n/a | — |
+| Cc1occc1SSc1ccoc1C | unclassified | n/a | 5.51e-05 | n/a | n/a | n/a | — |
 
 _6/18 predicted compounds have no curated odour threshold; they appear in the per-compound table but do not contribute to axis roll-ups._
 

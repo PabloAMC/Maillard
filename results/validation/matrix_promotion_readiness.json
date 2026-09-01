@@ -2,7 +2,7 @@
   {
     "protein_type": "pea_iso",
     "off_flavour_anchor_count": 2,
-    "meaty_candidate_count": 2,
+    "meaty_candidate_count": 1,
     "external_meaty_anchor_count": 0,
     "candidate_set_ready": true,
     "external_assessment_unlocked": false,
@@ -11,7 +11,7 @@
   {
     "protein_type": "soy_iso",
     "off_flavour_anchor_count": 1,
-    "meaty_candidate_count": 2,
+    "meaty_candidate_count": 1,
     "external_meaty_anchor_count": 0,
     "candidate_set_ready": true,
     "external_assessment_unlocked": false,

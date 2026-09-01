@@ -56,8 +56,8 @@ data/*
 !data/benchmarks/
 !data/protocols/
 !data/protocols/**
-!data/Gemini_Deep_Research/
-!data/Gemini_Deep_Research/**
+!data/research_corpus/
+!data/research_corpus/**
 !data/formulation_grid.yml
 !data/interventions.yml
 
@@ -70,6 +70,8 @@ reports/
 results/*
 !results/validation/
 !results/validation/**
+!results/literature/
+!results/literature/*.json
 !results/maillard_results.db
 
 # Cantera

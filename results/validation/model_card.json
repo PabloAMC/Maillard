@@ -5,10 +5,10 @@
     "source": "recomputed live from data/benchmarks/",
     "status_counts": {
       "pass-no-ranking": 2,
-      "scale-gap": 21
+      "scale-gap": 19
     },
     "strict_ready": 0,
-    "total": 23
+    "total": 21
   },
   "directional": {
     "categories": {
@@ -126,14 +126,14 @@
   "no_verifiable_source": {
     "available": true,
     "by_status_key": {
-      "source_status": 102,
+      "source_status": 87,
       "status": 38,
       "value_anchor_status": 4,
       "value_status": 4
     },
-    "files": 10,
-    "records": 148,
-    "with_numeric_payload": 50
+    "files": 9,
+    "records": 133,
+    "with_numeric_payload": 36
   },
   "observability_modes": {
     "available": true,
@@ -295,7 +295,7 @@
     {
       "basis": "recomputed live; strict-ready is the repository's own passing bar",
       "claim_type": "Any claim of benchmark-grade agreement",
-      "evidence": "0/23 strict-ready",
+      "evidence": "0/21 strict-ready",
       "system_class": "the in-panel benchmarks themselves",
       "verdict": "do-not-use"
     },

@@ -260,7 +260,7 @@ def _spec_to_bench(spec: Mapping[str, Any]) -> Dict[str, Any]:
         },
         "protein_type": str(spec.get("protein_type", "free")),
     }
-    for optional in ("protein_source", "denaturation_state", "moisture_regime", "sme_kj_per_kg"):
+    for optional in ("denaturation_state", "moisture_regime", "sme_kj_per_kg"):
         if spec.get(optional) is not None:
             bench[optional] = spec[optional]
     return bench

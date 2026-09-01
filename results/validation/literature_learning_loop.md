@@ -151,12 +151,6 @@
 | vtechworks_2022_fava_hydrolysis | calibration_reference | alternative_protein_matrix_scope | flavor_reference_payload | flavor_reference_payload | fava_bean | encoded | flavor_reference_payload | encoded_runtime_artifact | True | flavor_reference_payload:vtechworks_2022_fava_hydrolysis |
 | wang_2022_lab_hexanal_cleanup_anchor | calibration_reference | off_note_and_maillard_suppression | benchmark_intake | flavor_reference_payload | lab_fermented_plant_protein | ready_reference | flavor_reference_payload | encoded_runtime_artifact | True | flavor_reference_payload:wang_2022_lab_hexanal_cleanup_oav_target |
 | xu_2024_soybean_pbma_hexanal | calibration_reference | lipid_oxidation_and_carbonylic_crosstalk | benchmark_intake | flavor_reference_payload | soy_isolate | encoded | flavor_reference_payload | encoded_runtime_artifact | True | flavor_reference_payload:xu_2024_soybean_pbma_hexanal_anchor |
-| fadel_2015_mft_retention | calibration_reference | glutathione_and_peptide_support | retention_payload | intake_registry_entry, slr_incorporation_ledger | soy_isolate | encoded | intake_registry_entry | encoded_runtime_artifact | True | intake_registry_entry:fadel_2015_mft_retention, slr_incorporation_ledger:fadel_2015_mft_retention |
-| farmer_1991_alkyl_thiazoles | calibration_reference | lipid_oxidation_and_carbonylic_crosstalk | benchmark_intake | intake_registry_entry, slr_incorporation_ledger | free_model_system | encoded | intake_registry_entry | encoded_runtime_artifact | True | intake_registry_entry:farmer_1991_alkyl_thiazoles, slr_incorporation_ledger:farmer_1991_alkyl_thiazoles |
-| mottram_2001_bmfd_retention | calibration_reference | glutathione_and_peptide_support | retention_payload | intake_registry_entry, slr_incorporation_ledger | soy_isolate | encoded | intake_registry_entry | encoded_runtime_artifact | True | intake_registry_entry:mottram_2001_bmfd_retention, slr_incorporation_ledger:mottram_2001_bmfd_retention |
-| nishimura_abe_2024 | conditional_calibration | glutathione_and_peptide_support | benchmark_intake | intake_registry_entry, slr_incorporation_ledger | soy_hydrolysate | reviewed_qualitative_only | intake_registry_entry | encoded_runtime_artifact | True | intake_registry_entry:nishimura_abe_2024, slr_incorporation_ledger:nishimura_abe_2024 |
-| siripitakpong_2026_fft_retention | calibration_reference | glutathione_and_peptide_support | retention_payload | intake_registry_entry, slr_incorporation_ledger | pea_isolate | encoded | intake_registry_entry | encoded_runtime_artifact | True | intake_registry_entry:siripitakpong_2026_fft_retention, slr_incorporation_ledger:siripitakpong_2026_fft_retention |
-| wang_2023_mft_retention | calibration_reference | glutathione_and_peptide_support | retention_payload | intake_registry_entry, slr_incorporation_ledger | soy_isolate | encoded | intake_registry_entry | encoded_runtime_artifact | True | intake_registry_entry:wang_2023_mft_retention, slr_incorporation_ledger:wang_2023_mft_retention |
 | acs_foodscitech_2024_hme_firmness_anchor | calibration_reference | melanoidin_polymerization | benchmark_intake | process_state_calibration | spi_rice_hme_burger_analogues | encoded | process_state_calibration | encoded_runtime_artifact | True | process_state_calibration:acs_foodscitech_2024_hme_firmness_window |
 | acs_jafc_3c05991_ppi_spi_partitioning | calibration_reference | lipid_maillard_crosstalk | benchmark_intake | process_state_calibration | commercial_ppi_spi | ready_calibration | process_state_calibration | encoded_runtime_artifact | True | process_state_calibration:acs_jafc_3c05991_ppi_spi_partitioning |
 | acs_jafc_3c08432_crosstalk_cleanup_link | calibration_reference | lipid_maillard_crosstalk | benchmark_intake | process_state_calibration | fermented_textured_pea_protein | ready_calibration | process_state_calibration | encoded_runtime_artifact | True | process_state_calibration:rizzello_2024_lactic_fermentation_cleanup |
@@ -220,9 +214,9 @@
 | carbohydrate_pyrolysis_caramelization | 3 | computational_prior:3 |
 | carbonyl_donor_hierarchy | 11 | computational_prior:10, safety_reference_payload:1 |
 | fermentation_pretreatment | 1 | process_state_calibration:1 |
-| glutathione_and_peptide_support | 16 | computational_prior:4, intake_registry_entry:5, retention_reference_payload:2, slr_incorporation_ledger:5 |
+| glutathione_and_peptide_support | 6 | computational_prior:4, retention_reference_payload:2 |
 | lipid_maillard_crosstalk | 13 | computational_prior:9, flavor_reference_payload:2, process_state_calibration:2 |
-| lipid_oxidation_and_carbonylic_crosstalk | 19 | benchmark_payload:1, computational_prior:10, flavor_reference_payload:3, intake_registry_entry:1, process_state_calibration:3, slr_incorporation_ledger:1 |
+| lipid_oxidation_and_carbonylic_crosstalk | 17 | benchmark_payload:1, computational_prior:10, flavor_reference_payload:3, process_state_calibration:3 |
 | lipid_oxidation_crosstalk | 3 | computational_prior:3 |
 | melanoidin_polymerization | 13 | computational_prior:10, process_state_calibration:3 |
 | microbial_fermentation_modulation | 2 | process_state_calibration:2 |
@@ -272,11 +266,11 @@ Selection policy: rank only families 03/04/05/06/07/10 by direct matrix decision
 
 ## Matrix Prior Review
 
-| Protein Type | Accessibility | Denaturation | Matrix Correction | Uncertainty | Process States |
-| --- | --- | --- | --- | --- | --- |
-| pea_iso | True | True | True | calibration_grade_transfer, literature_bounded | ambient_slurry, aqueous_pre_extrusion_model, extrusion_structured, heated_matrix |
-| soy_iso | True | True | True | calibration_grade_transfer, literature_bounded | ambient_slurry, aqueous_pre_extrusion_model, extrusion_structured, heated_matrix |
-| myco | True | True | True | directional_only | ambient_slurry, aqueous_pre_extrusion_model, extrusion_structured, heated_matrix |
+| Protein Type | Accessibility | Denaturation | Matrix Correction | Process States |
+| --- | --- | --- | --- | --- |
+| pea_iso | True | True | True | ambient_slurry, aqueous_pre_extrusion_model, extrusion_structured, heated_matrix |
+| soy_iso | True | True | True | ambient_slurry, aqueous_pre_extrusion_model, extrusion_structured, heated_matrix |
+| myco | True | True | True | ambient_slurry, aqueous_pre_extrusion_model, extrusion_structured, heated_matrix |
 
 ## Structural Gaps
 

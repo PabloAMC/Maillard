@@ -43,7 +43,6 @@ FLAVOR_REFERENCE_PAYLOADS = _load_json_payload(data_paths.FLAVOR_REFERENCE_PAYLO
 RETENTION_REFERENCE_PAYLOADS = _load_json_payload(data_paths.RETENTION_REFERENCE_PAYLOADS)
 COMPUTATIONAL_PRIORS_PAYLOAD = _load_json_payload(data_paths.COMPUTATIONAL_PRIORS)
 PROCESS_STATE_CALIBRATIONS_PAYLOAD = _load_json_payload(data_paths.PROCESS_STATE_CALIBRATIONS)
-PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload(data_paths.PROTEIN_SOURCE_REGISTRY)
 FAMILY_INGESTION_PLAN_PAYLOAD = load_family_ingestion_plan()
 
 
@@ -93,6 +92,11 @@ _PRIMARY_CONTRACT_TAGS_BY_FAMILY = {
 }
 
 
+# Label aliases so a `--protein-type` short code can be matched against the
+# `matrix_family` string of a family-06 benchmark anchor. This is a label
+# normaliser only. The per-source numeric registry these labels used to key
+# (data/lit/protein_source_registry.json) was WITHDRAWN on 2026-09-01: it
+# self-declared every value `mocked_placeholder` / `no_verifiable_source`.
 _PROTEIN_SOURCE_ALIAS_MAP = {
     "free": "",
     "myco": "mycoprotein",
@@ -100,56 +104,6 @@ _PROTEIN_SOURCE_ALIAS_MAP = {
     "pea_conc": "pea_concentrate",
     "soy_iso": "soy_isolate",
     "soy_conc": "soy_concentrate",
-}
-
-
-_PROTEIN_SOURCE_PROFILES = {
-    str(entry.get("source_id", "")).strip().lower(): dict(entry)
-    for entry in PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("sources", [])
-    if isinstance(entry, Mapping) and str(entry.get("source_id", "")).strip()
-}
-
-# 2026-08-27 (Wave T3, finding T1-01). protein_source_registry.json is a MOCK. Its
-# own description has always said so; nothing read that sentence, so the mock status
-# never reached either stderr or any output payload while the numbers underneath it
-# drove `matrix_uncertainty_factor` (see `_alternative_matrix_lane` below) and the
-# meaty-potential score. Warned at load, in the shape of the family-12 molar-ratio
-# unit warning in `_resolve_concentration_unit`: state the defect, name what depends
-# on it, rescale nothing, invent nothing.
-PROTEIN_SOURCE_REGISTRY_UNSOURCED = (
-    str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("source_status", "")).strip()
-    == "no_verifiable_source"
-)
-if PROTEIN_SOURCE_REGISTRY_UNSOURCED:
-    warnings.warn(
-        f"src.literature_runtime: {data_paths.rel(data_paths.PROTEIN_SOURCE_REGISTRY)} declares "
-        "source_status='no_verifiable_source' -- every value in it is a MOCKED "
-        "placeholder whose only declared upstream is the LLM digest "
-        "data/Gemini_Deep_Research/06_alternative_proteins.md, which is not provenance. "
-        "It is nonetheless LIVE: hydrolysate_observability_bias, off_note_penalty and "
-        "lox_activity_flag enter matrix_uncertainty_factor directly, and "
-        "meaty_potential_multiplier drives the meaty-potential score. The plant-source "
-        "DIFFERENTIATION these values encode is not evidence. Values are NOT substituted.",
-        RuntimeWarning,
-        stacklevel=2,
-    )
-
-#: Surfaced verbatim on the family-06 lane payload so the mock status travels with the
-#: number it contaminates instead of living only in a warning nobody sees.
-PROTEIN_SOURCE_PROVENANCE = {
-    "registry": data_paths.rel(data_paths.PROTEIN_SOURCE_REGISTRY),
-    "source_status": str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("source_status", "") or "unstated"),
-    "value_basis": str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("value_basis", "") or "unstated"),
-    "declared_upstream": "data/Gemini_Deep_Research/06_alternative_proteins.md (LLM digest)",
-    "affects": [
-        "matrix_uncertainty_factor",
-        "matrix_source_support_score",
-        "process_state_transfer_confidence",
-    ],
-    "warning": (
-        "MOCKED VALUES. Source-to-source differences in these outputs are not evidence; "
-        "they reproduce an ordering someone wrote down. Wave T3 (2026-08-27), finding T1-01."
-    ),
 }
 
 
@@ -334,13 +288,6 @@ def _resolve_protein_source_id(protein_label: str) -> str:
     if not normalized:
         return ""
     return _PROTEIN_SOURCE_ALIAS_MAP.get(normalized, normalized)
-
-
-def _protein_source_profile(source_id: str) -> Dict[str, Any]:
-    normalized = str(source_id or "").strip().lower()
-    if not normalized:
-        return {}
-    return dict(_PROTEIN_SOURCE_PROFILES.get(normalized, {}))
 
 
 def _interpolate_profile(points: Iterable[float], values: Iterable[float], query_value: Optional[float]) -> Optional[float]:
@@ -3074,7 +3021,6 @@ def _build_sulfur_peptide_support_lane(
 def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
     normalized_protein = _normalize_name(protein_label)
     source_id = _resolve_protein_source_id(protein_label)
-    source_profile = _protein_source_profile(source_id)
     alternative_matrix_active = bool(normalized_protein and normalized_protein not in {"free", "pea iso", "pea conc", "soy iso", "soy conc"})
     quantitative_benchmarks = query_benchmark_intake_entries(
         family="06",
@@ -3107,27 +3053,14 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
     ):
         transferable_benchmarks = [exact_benchmark_row, *transferable_benchmarks]
     structural_gaps = [dict(entry) for entry in iter_family_process_gap_entries(family="06")]
-    meaty_potential_multiplier = float(source_profile.get("meaty_potential_multiplier", 0.0) or 0.0)
-    hydrolysate_observability_bias = float(source_profile.get("hydrolysate_observability_bias", 0.0) or 0.0)
-    off_note_penalty = float(source_profile.get("off_note_penalty", 0.0) or 0.0)
-    lox_activity_flag = bool(source_profile.get("lox_activity_flag", False))
-    matrix_source_support_score = max(
-        0.0,
-        min(1.0, meaty_potential_multiplier * (1.0 - 0.5 * off_note_penalty)),
-    )
-    nearest_benchmark_row: Dict[str, Any] = {}
-    if not exact_benchmark_row and transferable_benchmarks and source_profile:
-        nearest_benchmark_row = min(
-            transferable_benchmarks,
-            key=lambda row: abs(
-                float(
-                    _protein_source_profile(
-                        "wheat_gluten" if "wheat_gluten" in str(row.get("matrix_family", "")).strip().lower() else "soy_isolate"
-                    ).get("meaty_potential_multiplier", 0.0)
-                ) - meaty_potential_multiplier
-            ),
-        )
-    selected_benchmark_row = exact_benchmark_row if exact_benchmark_row else nearest_benchmark_row
+    # 2026-09-01: the "nearest source" tie-break used to minimise the distance in
+    # `meaty_potential_multiplier` between the requested source and the anchor's
+    # matrix family. That number came from the withdrawn mocked registry, so there
+    # is no longer a metric to rank anchors by. Without an exact matrix-family
+    # match the FIRST transferable candidate (intake order) is kept; the transfer
+    # mode still reports `nearest_source_transfer` so consumers see it is not an
+    # exact match.
+    selected_benchmark_row = exact_benchmark_row
     if not selected_benchmark_row and transferable_benchmarks:
         selected_benchmark_row = transferable_benchmarks[0]
     if not selected_benchmark_row and quantitative_benchmarks:
@@ -3135,12 +3068,13 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
     benchmark_transfer_mode = "inactive"
     if selected_benchmark_row:
         benchmark_transfer_mode = "exact_source_benchmark" if exact_benchmark_row else "nearest_source_transfer"
+    # 2026-09-01: the registry-derived terms (0.45 * (1 - hydrolysate_observability_bias),
+    # 0.20 * off_note_penalty, 0.10 * lox_activity_flag) were removed with the
+    # withdrawn mocked registry. What remains is structural: the base, the
+    # same-experiment gap, and the benchmark / process-state anchor discounts.
     matrix_uncertainty_factor = 0.0
     if alternative_matrix_active:
         matrix_uncertainty_factor = 0.20
-        matrix_uncertainty_factor += 0.45 * max(0.0, 1.0 - hydrolysate_observability_bias)
-        matrix_uncertainty_factor += 0.20 * off_note_penalty
-        matrix_uncertainty_factor += 0.10 * float(lox_activity_flag)
         matrix_uncertainty_factor += 0.10 * float(bool(structural_gaps))
         if benchmark_transfer_mode == "exact_source_benchmark":
             matrix_uncertainty_factor -= 0.10
@@ -3164,12 +3098,6 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
             "matrix_uncertainty_factor": float(matrix_uncertainty_factor),
             "protein_type": protein_label,
             "source_id": source_id,
-            "source_profile_available": bool(source_profile),
-            "meaty_potential_multiplier": float(meaty_potential_multiplier),
-            "hydrolysate_observability_bias": float(hydrolysate_observability_bias),
-            "off_note_penalty": float(off_note_penalty),
-            "lox_activity_flag": bool(lox_activity_flag),
-            "matrix_source_support_score": float(matrix_source_support_score),
             "process_state_transfer_confidence": float(process_state_transfer_confidence),
             "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in transferable_benchmarks],
             "matrix_reference_anchor_ids": [str(row.get("id", "unknown")) for row in quantitative_benchmarks],
@@ -3178,12 +3106,11 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
             "benchmark_transfer_mode": benchmark_transfer_mode,
             "process_state_anchor_ids": [str(row.get("id", "unknown")) for row in process_state_rows],
             "structural_gap_ids": [str(row.get("gap_id", "unknown")) for row in structural_gaps],
-            # 2026-08-27 (Wave T3, T1-01): the five source-profile numbers above are
-            # MOCKED. This block ships the registry's own admission alongside the
-            # numbers it contaminates, so a consumer of matrix_uncertainty_factor
-            # cannot read source differentiation as evidence.
-            "protein_source_provenance": dict(PROTEIN_SOURCE_PROVENANCE),
-            "protein_source_profile_unsourced": bool(PROTEIN_SOURCE_REGISTRY_UNSOURCED),
+            # 2026-09-01: the per-source numbers this lane used to carry
+            # (meaty_potential_multiplier, hydrolysate_observability_bias,
+            # off_note_penalty, lox_activity_flag, matrix_source_support_score) and
+            # the `protein_source_provenance` block were withdrawn together with
+            # data/lit/protein_source_registry.json (self-declared mocked).
         },
     )
 
@@ -3607,15 +3534,16 @@ def _build_family_lane_adjustments(family_lane_summary: Mapping[str, Mapping[str
         "off_flavour_risk_delta": 0.0,
     }
 
+    # 2026-09-01: the `0.06 * matrix_source_support_score` credit and the
+    # `0.10 * off_note_penalty` risk term were withdrawn with the mocked protein
+    # source registry. Only the structural transfer-uncertainty terms remain.
     matrix_lane = family_lane_summary.get("06", {})
     per_lane["06"] = {
         "target_score_delta": (
-            0.06 * float(matrix_lane.get("matrix_source_support_score", 0.0))
-            - 0.12 * float(matrix_lane.get("matrix_uncertainty_factor", 0.0))
+            -0.12 * float(matrix_lane.get("matrix_uncertainty_factor", 0.0))
         ) if matrix_lane.get("active") else 0.0,
         "off_flavour_risk_delta": (
-            0.10 * float(matrix_lane.get("off_note_penalty", 0.0))
-            + 0.05 * float(matrix_lane.get("matrix_uncertainty_factor", 0.0))
+            0.05 * float(matrix_lane.get("matrix_uncertainty_factor", 0.0))
         ) if matrix_lane.get("active") else 0.0,
     }
 
@@ -4251,11 +4179,23 @@ def build_flavor_axis_summary(
     furanone_penalty = 0.0
     if furanone_expected:
         furanone_support_score = len(furanone_observed) / len(furanone_expected)
-        confidence_scale = {
+        # Every documented tier is mapped (README / GLOSSARY: low, medium_low, medium,
+        # medium_high, high). Until 2026-09-01 the three unmapped tiers silently took the
+        # `low` value; an unknown tier now fails loudly instead.
+        tier = str(furanone_priors.get("confidence_tier", "low")).lower()
+        confidence_scale_by_tier = {
             "low": 0.35,
+            "medium_low": 0.45,
             "medium": 0.60,
+            "medium_high": 0.75,
             "high": 0.90,
-        }.get(str(furanone_priors.get("confidence_tier", "low")).lower(), 0.35)
+        }
+        if tier not in confidence_scale_by_tier:
+            raise ValueError(
+                f"furanone prior carries confidence_tier {tier!r}; expected one of "
+                f"{sorted(confidence_scale_by_tier)}"
+            )
+        confidence_scale = confidence_scale_by_tier[tier]
         furanone_penalty = (1.0 - furanone_support_score) * confidence_scale
 
     thiamine_priors = get_thiamine_priors()

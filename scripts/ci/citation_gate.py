@@ -46,7 +46,7 @@ Checks (offline, all blocking)
    deleted together with the QM/DFT lane. Nothing remains for it to scan.
 6. **Digest-as-provenance** (added 2026-08-27, Wave T3) -- a record may not name a
    machine-generated or abstract-reconstructed in-repo document
-   (``data/Gemini_Deep_Research/**``, ``docs/research/archives/`` [deleted 2026-08-28,
+   (``data/research_corpus/**``, ``docs/research/archives/`` [deleted 2026-08-28,
    pattern retained], ``raw/NN_*.md``,
    "Literature Report N", ``maillard_validation_benchmarks.md``,
    ``Maillard_meat.md`` / ``Maillard_Plant_based.md``, the Elicit dumps, the
@@ -102,6 +102,9 @@ SCAN_GLOBS = (
     "data/lit/*.json",
     "data/lit/*.yml",
     "data/lit/*.yaml",
+    # 2026-09-02: the two literature ledgers moved to results/literature/ (regenerable
+    # status records, not curated inputs). They stay in scope here.
+    "results/literature/*.json",
     "data/benchmarks/**/*.json",
     "data/species/*.yml",
     "data/species/*.yaml",
@@ -132,7 +135,7 @@ TEXT_SCAN_GLOBS = (
 # never a false positive that blocks a build on punctuation.
 #
 # `\` and `#` terminate the token, and neither is a loss: a DOI suffix cannot
-# contain a backslash (in the research dumps under data/Gemini_Deep_Research/ they
+# contain a backslash (in the research dumps under data/research_corpus/ they
 # are MARKDOWN ESCAPES, e.g. `10.1016/0891-5849\`), and `#` starts a URL fragment
 # (`...1573830#:~:text=Generally%2C...`), which is part of the link, not the DOI.
 # Both were producing pure-punctuation `doi-syntax` failures on first run.
@@ -160,7 +163,7 @@ REQUIRED_REPAIR_KEYS = ("old", "new", "date", "basis")
 # --- Check 6 scope: digest-as-provenance (2026-08-27, Wave T3) --------------
 # Wave T1 found that `scripts/trace_key_values.py` was publishing "Fully Verified:
 # 153 (57.5%)" for entries whose numbers merely appeared near a surname inside the
-# LLM-generated markdown under data/Gemini_Deep_Research/. That script has been
+# LLM-generated markdown under data/research_corpus/. That script has been
 # disarmed. This check stops the same confusion re-entering the DATA layer, where
 # it would be load-bearing: an entry may not name a machine-generated digest as its
 # source while simultaneously claiming a provenance tier that asserts somebody made
@@ -185,9 +188,9 @@ DIGEST_CITATION_FIELDS = ("citation", "source", "source_citation")
 # Naming one of these is naming an LLM digest, not a source.
 DIGEST_SOURCE_RE = re.compile(
     r"(?i)("
-    r"Gemini_Deep_Research"
+    r"Gemini_Deep_Research|data/research_corpus"
     # 2026-08-28 (Wave S5): docs/research/archives/ was DELETED -- its five files were
-    # byte-identical duplicates of data/Gemini_Deep_Research/. This alternative is kept
+    # byte-identical duplicates of data/research_corpus/. This alternative is kept
     # deliberately rather than pruned as dead: a stale citation string still naming that
     # path, anywhere, must keep tripping the digest detector rather than reading as clean.
     r"|docs/research/archives"
@@ -258,7 +261,7 @@ WAIVERS: tuple[tuple[str, str, str, str, str], ...] = (
     # History of the ratchet:
     #  - The nine stale `no_verifiable_source` waivers that shipped with this
     #    gate were resolved on 2026-08-27 by clearing the stale flags in
-    #    data/lit/deep_research_backlog.json.
+    #    results/literature/deep_research_backlog.json.
     #  - The last four (2026-08-27) were the genuinely DOI-less sources whose
     #    identifiers were being stored in fields named `doi` / `source_doi`:
     #      * Huang (2022) Clemson TigerPrints MS thesis 3936 -> identifier
@@ -514,7 +517,7 @@ def _walk(node: Any, rel: str, pointer: str, out: list[Violation], dois: list[st
                         f"{pointer}/{field_name}",
                         field_value,
                         "'digest echo' is a measurement of where a number was echoed, not a "
-                        "provenance tier. A value found inside data/Gemini_Deep_Research/ has "
+                        "provenance tier. A value found inside data/research_corpus/ has "
                         "no provenance; label it source_status='no_verifiable_source'.",
                     )
                 )
@@ -534,7 +537,7 @@ def _walk(node: Any, rel: str, pointer: str, out: list[Violation], dois: list[st
                             f"record claims provenance_tier='{tier}' -- which asserts that a "
                             "primary source was read -- while naming a machine-generated or "
                             "abstract-reconstructed in-repo document as its source. Per "
-                            "data/Gemini_Deep_Research/README.md, \"the deep-research report "
+                            "data/research_corpus/README.md, \"the deep-research report "
                             "says so\" is not provenance. Either cite the primary source, or "
                             "mark source_status='no_verifiable_source' and drop the tier.",
                         )

@@ -462,7 +462,6 @@ def benchmark_to_formulation(bench: dict) -> dict:
         "aw": _get_condition_water_activity(conditions, required=True),
         "time_minutes": conditions["time_min"],
         "protein_type": bench.get("protein_type", "free"),
-        "protein_source": bench.get("protein_source"),
         "support_cues": skipped_matrix_precursors,
         "denaturation_state": bench.get("denaturation_state", 0.5),
         "_skipped_matrix_precursors": skipped_matrix_precursors,
@@ -767,7 +766,6 @@ def _run_benchmark_recommendation(
         time_minutes=float(formulation.get("time_minutes", 60.0)),
         protein_type=protein_type,
         denaturation_state=float(bench.get("denaturation_state", 0.5)),
-        protein_source=formulation.get("protein_source"),
         family_upstream_contract=family_upstream_contract,
     )
 

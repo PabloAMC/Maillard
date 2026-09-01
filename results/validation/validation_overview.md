@@ -4,7 +4,7 @@
 
 This artifact shows the full quantitative benchmark surface while still separating strict-gate free-precursor trust from matrix-only and matrix-augmented evidence.
 
-- Benchmarks summarized: 23
+- Benchmarks summarized: 21
 - Strict-ready benchmarks: 0
 - Quantitative benchmarks plotted: 18
 - Experimental quantitative benchmarks: 17

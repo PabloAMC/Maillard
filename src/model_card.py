@@ -748,7 +748,7 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
             f"quotes, reproduced here by recount. A further {other} carry the same marker under "
             f"a different status key (`status`, `value_status`, `value_anchor_status`), for "
             f"{census['records']} in total. The numeric-payload and runtime-consumed subsets "
-            f"(80 and 80) use a narrower definition than this recount and are pinned "
+            f"(65 and 65) use a narrower definition than this recount and are pinned "
             f"separately by `tests/scientific/test_honest_headline_guards.py`."
         )
         lines.append("")

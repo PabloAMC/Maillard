@@ -271,7 +271,7 @@ def _runtime_landing_contract_note(landing_kind: str) -> str:
         return "must land as a benchmark-linked payload that changes the matrix decision surface or trust posture"
     if landing_kind == "process_state_calibration":
         return "must land as a runtime-consumed process-state calibration, not narrative-only markdown"
-    return "must land as a bounded prior with explicit uncertainty_posture and process_state_applicability"
+    return "must land as a bounded prior with explicit provenance_tier and process_state_applicability"
 
 
 def _family_promotion_blocker(
@@ -395,9 +395,6 @@ def build_matrix_prior_review() -> List[Dict[str, Any]]:
                 "has_matrix_correction": "matrix_correction" in bundle,
                 "provenance_tiers": sorted(
                     {str(item.get("provenance_tier", "unknown")) for item in bundle.values()}
-                ),
-                "uncertainty_postures": sorted(
-                    {str(item.get("uncertainty_posture", "unknown")) for item in bundle.values()}
                 ),
                 "process_state_applicability": sorted(
                     {
@@ -567,12 +564,12 @@ def render_literature_learning_loop_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "## Matrix Prior Review",
         "",
-        "| Protein Type | Accessibility | Denaturation | Matrix Correction | Uncertainty | Process States |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| Protein Type | Accessibility | Denaturation | Matrix Correction | Process States |",
+        "| --- | --- | --- | --- | --- |",
     ])
     for row in payload.get("matrix_prior_review", []):
         lines.append(
-            f"| {row['protein_type']} | {row['has_accessibility_window']} | {row['has_denaturation_heuristic']} | {row['has_matrix_correction']} | {', '.join(row['uncertainty_postures'])} | {', '.join(row['process_state_applicability'])} |"
+            f"| {row['protein_type']} | {row['has_accessibility_window']} | {row['has_denaturation_heuristic']} | {row['has_matrix_correction']} | {', '.join(row['process_state_applicability'])} |"
         )
 
     lines.extend([

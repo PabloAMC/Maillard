@@ -40,7 +40,7 @@ docs/           Human-facing documentation. (Wave S5, 2026-08-28: this map used 
   assets/                  Images and diagrams.
   slr_benchmark_evaluation.md  The systematic literature review two data registries cite.
 
-data/Gemini_Deep_Research/  All literature synthesis reports (Elicit, SLR, kinetics).
+data/research_corpus/  LLM research dumps and syntheses (formerly Gemini_Deep_Research). Not provenance; scanned by the citation gate.
 
 tasks/          todo.md (active roadmap), lessons.md (process lessons).
 ```

@@ -100,7 +100,6 @@ def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
     backlog = payload["literature_backlog"]
 
     assert prior_rows["myco"]["has_accessibility_window"] is True
-    assert "directional_only" in prior_rows["myco"]["uncertainty_postures"]
     assert "extrusion_structured" in prior_rows["myco"]["process_state_applicability"]
     assert payload["summary"]["payload_type_queue"]["benchmark_payload"] >= 1
     assert payload["summary"]["payload_type_queue"]["computational_prior"] >= 1

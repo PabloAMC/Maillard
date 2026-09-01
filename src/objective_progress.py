@@ -4,20 +4,12 @@ from typing import Any, Dict, Mapping
 
 from src.dha_lysinoalanine_external_package import build_dha_lysinoalanine_external_package_artifact
 from src.extrusion_external_closure import build_extrusion_external_closure_artifact
-from src.hexanal_nonanal_calibration import build_hexanal_nonanal_calibration_artifact
 from src.pea_soy_external_evidence import build_pea_soy_external_evidence_artifact
 from src.pea_soy_mixed_external_package import build_pea_soy_mixed_external_package_artifact
 
 
-def _format_measurement(value: Any) -> str:
-    if value is None:
-        return ""
-    return f"{float(value):.6g}"
-
-
 def build_objective_progress_artifact() -> Dict[str, Any]:
     external_payload = build_pea_soy_external_evidence_artifact()
-    calibration_payload = build_hexanal_nonanal_calibration_artifact()
     extrusion_payload = build_extrusion_external_closure_artifact()
     dha_package_payload = build_dha_lysinoalanine_external_package_artifact()
     mixed_package_payload = build_pea_soy_mixed_external_package_artifact()
@@ -34,18 +26,6 @@ def build_objective_progress_artifact() -> Dict[str, Any]:
                 "promotion_delta_if_package_lands_today",
             ],
             "prediction_effect": "No promotion-ready lane is unlocked yet; the repo now states exactly which package would move the decision gate.",
-        },
-        {
-            "objective_id": "hexanal_nonanal_ambiguity",
-            "label": "Hexanal/Nonanal ambiguity",
-            "target_count": int(calibration_payload.get("summary", {}).get("marker_count", 0)),
-            "closed_count": int(calibration_payload.get("summary", {}).get("closed_marker_count", 0)),
-            "status": "closed_internal_calibration_route",
-            "resolved_in_last_step": [
-                "prediction_validation_chain_exposed",
-                "closed_marker_counts_visible",
-            ],
-            "prediction_effect": "All tracked Hexanal/Nonanal markers are within the accepted internal ratio band, so adverse-marker drift is calibration-closed without upgrading promotion posture.",
         },
         {
             "objective_id": "extrusion_direct_damage_package",
@@ -68,7 +48,6 @@ def build_objective_progress_artifact() -> Dict[str, Any]:
             "policy": "objective_progress_must_state_what_changed_without_turning_internal_closure_into_external_promotion",
         },
         "objectives": objectives,
-        "hexanal_nonanal_prediction_change": list(calibration_payload.get("prediction_change_cascade", [])),
         "pea_soy_external_delta": list(external_payload.get("lanes", [])),
         "pea_soy_mixed_external_package_delta": list(mixed_package_payload.get("matrices", [])),
         "extrusion_external_delta": list(extrusion_payload.get("matrices", [])),
@@ -87,21 +66,6 @@ def render_objective_progress_markdown(payload: Mapping[str, Any]) -> str:
     for row in payload.get("objectives", []):
         lines.append(
             f"| {row.get('label', 'unknown')} | {int(row.get('closed_count', 0))} / {int(row.get('target_count', 0))} | {row.get('status', 'unknown')} | {', '.join(str(item) for item in row.get('resolved_in_last_step', [])) or 'none'} | {row.get('prediction_effect', 'unknown')} |"
-        )
-
-    lines.extend(
-        [
-            "",
-            "## Hexanal Nonanal Prediction Change",
-            "",
-            "| Protein | Compound | Internal2026 ppb | ProtocolPilot2026 ppb | Ratio | Closure State |",
-            "| --- | --- | ---: | ---: | ---: | --- |",
-        ]
-    )
-    for row in payload.get("hexanal_nonanal_prediction_change", []):
-        ratio_value = row.get("ratio")
-        lines.append(
-            f"| {row.get('protein_type', 'unknown')} | {row.get('compound', 'unknown')} | {_format_measurement(row.get('internal2026_ppb'))} | {_format_measurement(row.get('protocolpilot2026_ppb'))} | {'' if ratio_value is None else f'{float(ratio_value):.3f}'} | {row.get('closure_state', 'unknown')} |"
         )
 
     lines.extend(

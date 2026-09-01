@@ -466,13 +466,52 @@ value, ~zero risk), Phase 3 compounds + papers only, Phase 4 the benchmark schem
 
 ---
 
-## 5. Decisions needed from the owner
+## 5. Decisions needed from the owner — RESOLVED 2026-09-01 (owner round 2)
+
+1. **Mocked protein-source registry → withdrawn.** Trace: on a default run none of its numbers apply (only
+   `--protein-source X`, `--protein-type myco`, or a quarantined benchmark carrying `protein_source` reach them); the
+   kinetic-core B4 lane already refuses the file by policy; four of five fields are unit-less invented scores and
+   `aa_composition` rescales the user's own input rather than seeding an endogenous pool. Deleted with its code
+   paths. If plant-source differentiation is wanted later, it must come from measured inputs: a per-source amino-acid
+   composition with units and a citation that seeds an endogenous precursor pool, and lipoxygenase presence reported
+   as a cited fact, not a multiplier.
+2. **Synthetic benchmark pairs → one per matrix.** All four files were frozen model output (labelled as such); the two
+   `ProtocolPilot2026` files were byte-identical twins of `Internal2026` under a `measured_volatiles` label, and the
+   "protocol pilot vs internal" hexanal/nonanal closure lane compared the two (always 1.0). Twins and lane deleted;
+   `Internal2026` kept, labelled `diagnostic_only`. Still inside the scored MC panel (the README discloses the
+   synthetic share); moving them out of the panel entirely is the next honest step and is listed under follow-ups.
+3. **Confidence vocabulary → keep the load-bearing three, drop the rest.** `source_status` and `provenance_tier` feed
+   blocking citation-gate checks and the census; `confidence_tier` moves one number (furanone lane). `uncertainty_posture`
+   (175 records), `validated_status` (58) and `value_basis` (15) are read by nothing but report echoes: deleted, no
+   output changes. `low_medium` → `medium_low` (undocumented synonym). Furanone tier map extended to every documented tier.
+4. **Keys → continue (safer long term):** rewrite record references onto registry ids and retire the remaining alias
+   tables and the fuzzy fallback.
+5. **Ledgers → `results/literature/`** with the citation gate and census extended to scan them there.
+6. **Research corpus → keep, rename** to signal it is not provenance.
+
+### Round-2 execution log (2026-09-02)
+- [x] Mocked protein-source registry withdrawn with its code paths (`literature_runtime`, `matrix_correction`, `recommend`,
+      `pipeline`, `run_pipeline --protein-source`, `comparative_cli`, `benchmark_validation`); B4 lane policy reworded to
+      "withdrawn"; census 102/80/80 → 87/65/65 re-pinned in the guards, README and the model card. Output-neutral on default runs.
+- [x] Synthetic pairs collapsed: `*_ProtocolPilot2026.json` deleted (byte-identical twins), `*_Internal2026.json` kept and
+      labelled `diagnostic_only`; the "protocol pilot vs internal" hexanal/nonanal ratio lane (always 1.0) deleted with its
+      artifacts; the campaign arm no longer claims `calibration_passed`. Panel 23 → 21, MC panel 20 → 18 benchmarks /
+      47 → 35 matched rows (the 12 rows that left were the model scored against a copy of its own output);
+      `honest_literature_coverage` 4/13 unchanged. Evidence-role split 14/5/4 → 14/5/2.
+- [x] Vocabulary: `uncertainty_posture` (175), `validated_status` (58) deleted from data and their echo sites; `low_medium` →
+      `medium_low` (7); furanone tier map covers all five documented tiers and fails on an unknown one.
+- [x] Ledgers moved to `results/literature/` (tracked); citation gate, census and the paper registry scan them there.
+- [x] `data/Gemini_Deep_Research` → `data/research_corpus`; the citation gate's digest regex catches both spellings.
+- [x] Artifacts regenerated (MC panel, summaries, matrix artifacts, figures, ranking, model card).
+- [ ] Keys 3c/3d (alias tables, fuzzy fallback, closed enums) — next.
+
+### Original decision list (kept for the record)
 
 1. **`protein_source_registry.json`** is self-labelled `value_basis: mocked_placeholder` and
    `source_status: no_verifiable_source`, yet feeds four `kinetic_core` modules. Options: (a) gate
    it — multipliers default to 1.0 and the report says "matrix multipliers unsourced" (recommended;
    honest, cheap); (b) keep as-is with the warning; (c) source the 14 profiles (a research task,
-   not a cleaning task).
+   not a cleaning task). *(Withdrawn 2026-09-01 — see resolved item 1 above.)*
 2. **`data/qm/phase33_*` / `phase35_*`** (27 values, no verifiable source, zero runtime readers,
    pinned by `test_honest_headline_guards` and `citation_gate` check 5). Keep under
    `qm/unverified/` with the label, or delete and drop the pins. Recommended: delete; the
@@ -523,7 +562,7 @@ value, ~zero risk), Phase 3 compounds + papers only, Phase 4 the benchmark schem
 | `lit/extrusion_damage_reference_payloads.json` | 1/0/0 | merge into safety |
 | `lit/retention_reference_payloads.json` | 5/2/3 | measured rows → `binding_constants.yml`; withdrawn rows → `references/retention.json` (quarantine list) |
 | `lit/process_state_calibrations.json` | 8/1/1 | keep → `references/process_state.json`; collapse `kind` |
-| `lit/protein_source_registry.json` | 4/1/1 | decision 1 |
+| `lit/protein_source_registry.json` | 4/1/1 | decision 1 — withdrawn 2026-09-01 |
 | `lit/matrix_decision_panel.json` | 3/0/2 | seed for `keys/compounds.yml` |
 | `lit/matrix_family_coverage_registry.json` | 4/0/1 | → `keys/matrix_families.json` |
 | `lit/chemistry_family_scope_registry.json` | 4/1/1 | → `keys/chemistry_families.json` |

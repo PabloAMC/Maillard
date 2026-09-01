@@ -49,11 +49,12 @@ WHAT IS DELIBERATELY *NOT* IN HERE
   fails in both directions on two structural isomers).
 * **No log P term of any kind.** k4b hold-out guard #4: "any shipped matrix term
   that is a monotone function of log P is refuted".
-* **No `protein_source_registry.json` values.** That file is declared
-  ``no_verifiable_source`` and the OLD lane (``src/matrix_correction.py``,
-  ``src/headspace.py``) raises RuntimeWarnings about it. Nothing here imports
-  it, reproduces it, or re-derives its mocked protein differentiation.
-  ``assert_no_mocked_protein_source()`` enforces that at import.
+* **No `protein_source_registry.json` values.** That file self-declared
+  ``no_verifiable_source`` and was WITHDRAWN from the repository on 2026-09-01
+  together with every OLD-lane code path that read it. Nothing here ever
+  imported it, reproduced it, or re-derived its mocked protein differentiation,
+  and ``assert_no_mocked_protein_source()`` keeps enforcing that at import so
+  the differentiation cannot be re-introduced by hand.
 * **No DFT.** Standing owner policy. ``assert_no_dft_matrix()`` at import.
 * **The Barallat-Perez lupin and mucin constants.** They are Module 6
   **HOLD-OUT** (declaration D.6). Their KEYS are registered so a caller can see
@@ -847,9 +848,9 @@ def assert_no_dft_matrix() -> None:
 
 def assert_no_mocked_protein_source() -> None:
     """
-    The OLD lane's ``protein_source_registry.json`` is declared
-    ``no_verifiable_source`` and raises RuntimeWarnings where it is used. This
-    layer must not import it, reproduce it, or carry any protein
+    The OLD lane's ``protein_source_registry.json`` self-declared
+    ``no_verifiable_source`` and was WITHDRAWN on 2026-09-01 (file deleted,
+    readers removed). This layer must not reproduce it or carry any protein
     differentiation traceable to it. Every protein loading here comes from a
     named printed composition or from an explicitly DECLARED ASSUMPTION.
     """
@@ -982,7 +983,7 @@ def matrix_registry_metadata() -> Dict[str, object]:
             "matched samples)",
             "any term monotone in log P (k4b hold-out guard #4; Hong r = -0.05)",
             "protein_source_registry.json's mocked differentiation "
-            "(no_verifiable_source)",
+            "(no_verifiable_source; file WITHDRAWN 2026-09-01, not re-derived here)",
             "Barallat-Perez lupin and mucin constants (Module 6 HOLD-OUT)",
             "Leksrisompong's 24 BETs as table entries (Amendment 4 makes only "
             "its K RATIOS fit-eligible)",

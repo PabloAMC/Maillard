@@ -8,7 +8,6 @@
       "protein_type": "pea_iso",
       "source_citation": "Asen et al. (2022), Frontiers in Nutrition",
       "doi": "10.3389/fnut.2022.852225",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "pea protein concentrate",
@@ -46,7 +45,6 @@
       "protein_type": "pea_iso",
       "source_citation": "Li et al. (2025), Current Research in Food Science",
       "doi": "10.1016/j.crfs.2025.101173",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "pea protein solution",
@@ -78,7 +76,6 @@
       "protein_type": "soy_iso",
       "source_citation": "Foods 11(21):3505 (2022)",
       "doi": "10.3390/foods11213505",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "soy protein isolate",
@@ -109,7 +106,6 @@
       "protein_type": "soy_iso",
       "source_citation": "Troise et al. (2018), Food Chemistry",
       "doi": "10.1016/j.foodchem.2017.12.019",
-      "validated_status": "contextual_anchor",
       "provenance_tier": "literature_derived_transfer",
       "conditions": {
         "matrix_label": "thermally processed soy products",
@@ -135,7 +131,6 @@
       "kind": "extrusion_retention_context",
       "protein_type": "soy_iso",
       "source_citation": "De Leyn & Muylle (2019)",
-      "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "soy protein concentrate",
@@ -178,7 +173,6 @@
       "kind": "encapsulation_retention_context",
       "protein_type": "plant_protein_generic",
       "source_citation": "Comunian et al. (2021)",
-      "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "encapsulated thiamine hcl under simulated extrusion",
@@ -224,7 +218,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "ACS JAFC 3c05991 / PMC10739987",
       "doi": "10.1021/acs.jafc.3c05991",
-      "validated_status": "contextual_anchor",
       "provenance_tier": "literature_derived_transfer",
       "conditions": {
         "matrix_label": "commercial PPI and SPI systems",
@@ -260,7 +253,6 @@
       "kind": "cysteine_accessibility",
       "protein_type": "pea_iso",
       "source_citation": "Malia et al. (2025)",
-      "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "pea protein",
@@ -295,7 +287,6 @@
       "kind": "extrusion_disulfide_context",
       "protein_type": "plant_protein_generic",
       "source_citation": "Raman/SDS-PAGE synthesis",
-      "validated_status": "supportive_anchor",
       "provenance_tier": "literature_derived_transfer",
       "conditions": {
         "matrix_label": "extruded plant protein matrix",
@@ -332,7 +323,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Rizzello et al. (2024)",
       "doi": "10.1021/acs.jafc.3c08432",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "lactic-acid-fermented plant-based meat analogues",
@@ -367,7 +357,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Zhao et al. (2022)",
       "doi": "10.3390/molecules27196182",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "A. oryzae moromi fermentation",
@@ -413,7 +402,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Ordoudi et al. (2014 / PMC12484514)",
       "doi": "10.1016/j.foodchem.2014.05.097",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "caramelization model systems",
@@ -444,7 +432,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Hrncirik & Zeelenberg (2014)",
       "doi": "10.1016/j.foodchem.2013.11.082",
-      "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "coconut oil thermal model",
@@ -473,7 +460,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Mottram et al. (2001), JAFC 49:4316",
       "doi": "10.1021/jf0008644",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "cysteine-ribose model with carnosine buffering",
@@ -501,7 +487,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Yeo & Mottram (2023)",
       "doi": "10.1016/j.foodchem.2023.136009",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "ppi_spi_cysteine_ribose_model_with_soy_lecithin",
@@ -536,7 +521,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Snel et al. (2023)",
       "doi": "10.3390/foods12132543",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "spi_ppi_reworked_hme_extrudates",
@@ -574,7 +558,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "ACS Food Sci. Technol. 2024 (Ref. 1)",
       "doi": "10.1021/acsfoodscitech.4c00677",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "spi_rice_hme_burger_analogues",
@@ -611,7 +594,6 @@
       "protein_type": "pea_iso",
       "source_citation": "Zha et al. (2019)",
       "doi": "10.1021/acs.jafc.9b04099",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "pea_protein_hydrolysate_gum_arabic_conjugate",
@@ -650,7 +632,6 @@
       "protein_type": "plant_protein_generic",
       "source_citation": "Kodate et al. (2018)",
       "doi": "10.1038/s41598-018-27010-2",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "powdered_milk_and_buttermilk_food_matrices",
@@ -687,7 +668,6 @@
       "protein_type": "yeast_ye",
       "source_citation": "Charpentier et al. (2005), JAFC 53:3000-3007 (PMID 15826051)",
       "doi": "10.1021/jf040334y",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "yeast autolysis",
@@ -730,7 +710,6 @@
       "protein_type": "myco",
       "source_citation": "Finnigan et al. (2019), Curr Dev Nutr 3:nzz021",
       "doi": "10.1093/cdn/nzz021",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "mycoprotein",
@@ -770,7 +749,6 @@
       "protein_type": "soy_iso",
       "source_citation": "Zhao et al. (2018), Front. Microbiol. 9:1872",
       "doi": "10.3389/fmicb.2018.01872",
-      "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
         "matrix_label": "fermented soybean meal",

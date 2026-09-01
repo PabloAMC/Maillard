@@ -2,7 +2,7 @@
 """
 ingest_deep_research_markdown.py
 
-Parses Deep Research Markdown reports (e.g. data/Gemini_Deep_Research/*_*.md),
+Parses Deep Research Markdown reports (e.g. data/research_corpus/*_*.md),
 extracts the 'Consolidated entries' sections which have been scored via the 8-point SLR,
 and appends them to a dedicated backlog file instead of the operational
 benchmark intake registry.
@@ -142,7 +142,7 @@ def main():
     args = parser.parse_args()
     
     entries = parse_markdown_files()
-    print(f"Parsed {len(entries)} references from Gemini_Deep_Research markdown.")
+    print(f"Parsed {len(entries)} references from research_corpus markdown.")
     
     if args.dry_run:
         for e in entries:

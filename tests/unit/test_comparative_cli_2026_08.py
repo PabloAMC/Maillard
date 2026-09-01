@@ -614,13 +614,14 @@ def test_the_sulfur_anchor_claim_is_checked_not_asserted():
 
 
 def test_the_provenance_census_reproduces_the_readme_pinned_source_status_count():
-    """102 is pinned in README prose and by test_honest_headline_guards; recount must agree.
+    """87 is pinned in README prose and by test_honest_headline_guards; recount must agree.
 
     RE-PINNED 2026-09-01: 120 -> 102 when data/qm/ (18 records) was deleted with the QM lane.
+    RE-PINNED 2026-09-02: 102 -> 87 when the mocked protein_source_registry (15) was withdrawn.
     """
     census = model_card.collect_no_verifiable_source_census()
     assert census["available"]
-    assert census["by_status_key"]["source_status"] == 102
+    assert census["by_status_key"]["source_status"] == 87
 
 
 def test_a_missing_artifact_is_reported_in_the_card_not_dropped_from_it(monkeypatch, tmp_path):

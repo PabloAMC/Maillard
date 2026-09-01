@@ -620,7 +620,6 @@ class MaillardPipeline:
                 denaturation_state=denaturation_state,
                 fat_fraction=cond.fat_fraction,
                 protein_fraction=cond.protein_fraction,
-                protein_source=form.get("protein_source"),
                 family_upstream_contract=family_upstream_contract,
             )
             
