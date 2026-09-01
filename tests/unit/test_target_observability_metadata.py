@@ -1,4 +1,4 @@
-from src.pathway_extractor import Species
+from src.chem_utils import Species
 from src.recommend import _canon, _headspace_observability_metadata
 
 

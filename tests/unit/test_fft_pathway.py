@@ -1,4 +1,4 @@
-from src.pathway_extractor import Species  # noqa: E402
+from src.chem_utils import Species  # noqa: E402
 from src.reaction_templates import _thiol_addition  # noqa: E402
 
 

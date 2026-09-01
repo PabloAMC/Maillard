@@ -11,7 +11,7 @@ from rdkit import Chem  # noqa: E402
 
 from src.smirks_engine import SmirksEngine  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
-from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
+from src.chem_utils import Species, ElementaryStep  # noqa: E402
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────

@@ -4,7 +4,7 @@ import pytest
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from src.smirks_engine import _SMIRKS_RULES, _amadori_cascade, _strecker_step, _beta_elimination_steps
-from src.pathway_extractor import Species
+from src.chem_utils import Species
 from src.conditions import ReactionConditions
 
 def _check_balance(reactants, products):

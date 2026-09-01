@@ -28,6 +28,7 @@ no offset is fitted, no benchmark file is mutated.
 
 from __future__ import annotations
 
+import copy
 import json
 import math
 import statistics
@@ -1007,31 +1008,84 @@ def build_holdout_bundles(
     return bundles
 
 
+# The committed hold-out bundles are FROZEN EVIDENCE, not a build product. They started
+# life as `_HOLDOUT_BUNDLE_SPECS` renderings, but have since been corrected by hand from
+# primary sources (Wave W: Bi 2020 Table 4 values and uncertainties; the
+# `conditions.buffer` blocks read from the PDFs by
+# scripts/generators/complete_benchmark_buffer_fields.py). None of that lives in the spec,
+# so a naive regeneration silently reverted it -- which is how `citation_audit_note` was
+# lost once (see the spec comment above). Rules, enforced by
+# tests/unit/test_external_validation_inventory.py:
+#   * by default an existing bundle file is never rewritten;
+#   * with ``overwrite=True`` the regenerated payload is written, but every key the
+#     committed file has and the regenerated payload lacks is carried forward.
+def _fill_missing_from_existing(payload: Any, existing: Any) -> Any:
+    """Deep-merge: keys present in ``existing`` but absent from ``payload`` are copied over."""
+    if not (isinstance(payload, dict) and isinstance(existing, dict)):
+        return payload
+    merged = dict(payload)
+    for key, value in existing.items():
+        if key not in merged:
+            merged[key] = copy.deepcopy(value)
+        else:
+            merged[key] = _fill_missing_from_existing(merged[key], value)
+    return merged
+
+
+def _load_existing_json(path: Path) -> Optional[Dict[str, Any]]:
+    if not path.exists():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return payload if isinstance(payload, dict) else None
+
+
 def write_holdout_bundles(
     bundles: Sequence[HoldoutBundle],
     *,
     protocol_dir: Path = EXTERNAL_VALIDATION_PROTOCOL_DIR,
     benchmark_dir: Path = EXTERNAL_VALIDATION_BENCHMARK_DIR,
+    overwrite: bool = False,
 ) -> Dict[str, List[Path]]:
+    """Materialize bundles to disk. Existing files are frozen unless ``overwrite``.
+
+    Returns the paths written under ``protocols`` / ``benchmarks`` and the paths left
+    untouched under ``skipped``.
+    """
     protocol_dir.mkdir(parents=True, exist_ok=True)
     benchmark_dir.mkdir(parents=True, exist_ok=True)
 
     protocol_paths: List[Path] = []
     benchmark_paths: List[Path] = []
+    skipped: List[Path] = []
     for bundle in bundles:
         protocol_path = protocol_dir / f"{bundle.bundle_id}.yaml"
         benchmark_path = benchmark_dir / f"{bundle.bundle_id}.json"
-        protocol_path.write_text(
-            yaml.safe_dump(bundle.intake_payload, sort_keys=False, allow_unicode=False),
-            encoding="utf-8",
-        )
+
+        if protocol_path.exists() and not overwrite:
+            skipped.append(protocol_path)
+        else:
+            protocol_path.write_text(
+                yaml.safe_dump(bundle.intake_payload, sort_keys=False, allow_unicode=False),
+                encoding="utf-8",
+            )
+            protocol_paths.append(protocol_path)
+
+        existing = _load_existing_json(benchmark_path)
+        if existing is not None and not overwrite:
+            skipped.append(benchmark_path)
+            continue
+        benchmark_payload = bundle.benchmark_payload
+        if existing is not None:
+            benchmark_payload = _fill_missing_from_existing(benchmark_payload, existing)
         benchmark_path.write_text(
-            json.dumps(bundle.benchmark_payload, indent=2, sort_keys=True) + "\n",
+            json.dumps(benchmark_payload, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-        protocol_paths.append(protocol_path)
         benchmark_paths.append(benchmark_path)
-    return {"protocols": protocol_paths, "benchmarks": benchmark_paths}
+    return {"protocols": protocol_paths, "benchmarks": benchmark_paths, "skipped": skipped}
 
 
 def get_holdout_benchmark_files(

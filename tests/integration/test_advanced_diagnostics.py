@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
 from src.recommend import Recommender
-from src.pathway_extractor import Species, ElementaryStep
+from src.chem_utils import Species, ElementaryStep
 from src.pipeline import MaillardPipeline, FormulationResult
 
 def test_precursor_attribution_tracing():

@@ -8,7 +8,7 @@ from pathlib import Path
 
 from src.recommend import Recommender  # noqa: E402
 from src.smirks_engine import SmirksEngine, ReactionConditions  # noqa: E402
-from src.pathway_extractor import Species  # noqa: E402
+from src.chem_utils import Species  # noqa: E402
 from src.precursor_resolver import resolve  # noqa: E402
 from src.pipeline import MaillardPipeline, compute_ranking_score  # noqa: E402
 

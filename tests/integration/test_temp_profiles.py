@@ -6,7 +6,7 @@ from pathlib import Path
 from src.kinetics import KineticsEngine  # noqa: E402
 from src.cantera_export import CanteraExporter  # noqa: E402
 from src.recommend import Recommender  # noqa: E402
-from src.pathway_extractor import ElementaryStep, Species  # noqa: E402
+from src.chem_utils import ElementaryStep, Species  # noqa: E402
 
 def test_isothermal_vs_ramp(tmp_path):
     # 1. Create a simple balanced isomerisation mechanism: A <=> B

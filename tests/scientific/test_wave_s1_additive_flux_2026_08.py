@@ -23,7 +23,7 @@ import pytest
 import src.matrix_calibration_registry as registry
 import src.recommend as recommend
 from src.benchmark_validation import evaluate_benchmark
-from src.pathway_extractor import ElementaryStep, Species
+from src.chem_utils import ElementaryStep, Species
 from src.recommend import Recommender, _route_channel_id
 
 _HOFMANN = Path("data/benchmarks/cys_ribose_140C_Hofmann1998.json")

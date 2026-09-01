@@ -14,7 +14,7 @@ Verifies:
 
 import pytest
 from pathlib import Path
-from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
+from src.chem_utils import Species, ElementaryStep  # noqa: E402
 from src.smirks_engine import SmirksEngine  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
 from src.recommend import Recommender  # noqa: E402
@@ -150,22 +150,6 @@ class TestNegativeBarrierHandling:
 
 class TestMissingFileHandling:
     """Test behavior when expected files are missing."""
-
-    def test_pathway_extractor_missing_file(self):
-        """PathwayExtractor should handle missing directory gracefully."""
-        from src.pathway_extractor import PathwayExtractor
-        
-        nonexistent_dir = Path("/tmp/nonexistent_dir_xyz_12345")
-        
-        # PathwayExtractor may defer error checking to usage time
-        # Just verify initialization doesn't crash
-        try:
-            extractor = PathwayExtractor(nonexistent_dir)
-            # If it initializes, that's ok - error may come later on usage
-            assert extractor is not None
-        except (FileNotFoundError, IOError, ValueError):
-            # If it does raise, that's also acceptable
-            pass
 
     def test_pipelineer_missing_grid(self, monkeypatch):
         """Should handle missing grid file gracefully."""

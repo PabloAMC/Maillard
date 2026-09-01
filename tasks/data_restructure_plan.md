@@ -1,0 +1,511 @@
+# Data restructure plan — `cleaning` Phase 2
+
+> Planning round, 2026-09-01. Nothing here has been executed. Companion to the Phase 1 prune
+> (`2dbe6a9`). Evidence comes from a full read of `data/`, `src/`, `scripts/`, `tests/`, the CI
+> gates and `AUDIT.md`; every claim below cites a path so it can be re-checked.
+
+## 0. TL;DR
+
+`data/` is not one database. It is five overlapping file stores (literature registries, benchmarks,
+species, protocols, QM fixtures) plus 400 MB of untracked scratch, with **no shared keys, no
+schemas, no single access path, and no read-only boundary**. The runtime reaches it through
+95 modules that each re-derive `repo_root / "data" / ...`, joins records by free-text names
+through five alias tables and a fuzzy matcher, silently substitutes `{}` when a file is missing,
+and writes generated artifacts back into the "curated inputs" tree.
+
+The plan is six phases. Phases 0–2 are behaviour-preserving housekeeping that should land
+regardless (fix the broken branch, purge, one access layer). Phase 3 (keys) is the real fix and
+the only phase that can change model outputs. Phases 4–5 (schemas, docs) are what keeps it
+clean afterwards.
+
+**Blocking prerequisite:** the `cleaning` branch does not currently pass CI. Phase 1 deleted
+36 `src/` modules and 5 `scripts/`, but ~25 test files and `scripts/run_pipeline.py` still
+import them (§4, Phase 0).
+
+---
+
+## 1. Diagnosis — what "frankenstein" means, concretely
+
+### D1. No access layer: 95 modules hard-code paths, some relative to CWD
+- 50 modules in `src/` and 45 in `scripts/` each contain `Path(__file__).resolve().parents[1] / "data" / ...`
+  (54 occurrences) or a literal `"data/..."` string (58 occurrences). No `src/paths.py`, no
+  env var for the data root. Six modules derive the same path twice in one file.
+- `src/headspace.py:59` defaults to the CWD-relative string `"data/lit/henry_constants.yml"`;
+  `HeadspaceModel()` is called with no argument at `src/benchmark_validation.py:844` and ~20 test
+  sites. If CWD ≠ repo root, the constants load as `{}` and every Kaw becomes the hard-coded
+  `0.01` (`headspace.py:69`) with no error.
+- `scripts/calibrate_barriers.py:263` writes CWD-relative. `tests/integration/test_regression.py:16`
+  reads CWD-relative.
+- Path strings are baked into report output (`src/reporting.py:1106-1169`, 18 literals) and four
+  tests assert those exact strings, so the physical layout is part of the public output contract.
+
+### D2. `data/` is read-write: 11 write paths, generated artifacts committed as "curated"
+| Writer | Writes into `data/` | Readers |
+|---|---|---|
+| `src/matrix_calibration_optimizer.py:415` | `calibration_history/calib_*.json` (102 files, all pytest output from `tests/integration/test_matrix_calibration_loop.py:16`, which does not monkeypatch the dir) | none |
+| `src/experiment_request.py:419` | `protocols/requested_*.yaml` (5) | none; MD twins live in `results/validation/experiment_requests/` |
+| `src/external_validation.py:1016-1029` | `benchmarks/external_validation/*.json` + `protocols/external_validation/*.yaml` (same 4 names, two formats) | hold-out lane |
+| `scripts/deep_research_tracker.py:256`, `scripts/sync_backlog.py:110`, `scripts/ingest_deep_research_markdown.py:182` | `lit/deep_research_backlog.json` (430 KB, three independent writers) | 2 src, 5 scripts |
+| `scripts/calibrate_barriers.py:263` | `lit/calibration_offsets.json` | none (README says unwired) |
+| `scripts/generators/generate_slr_family_reports.py:559` | `Gemini_Deep_Research/slr_family_*.md` (16) | none |
+| `scripts/generators/refresh_internal_reproducibility_snapshots.py` | `benchmarks/*_{Internal2026,ProtocolPilot2026}.json`, `protocols/*_protocol_pilot_intake.yaml` | tests |
+| `src/matrix_recalibration.py:192` | `lit/matrix_calibration_offsets.json` (absent on disk; read back by `matrix_calibration_registry.py:12`) | runtime feedback loop through `data/` |
+- Status ledgers with counts live in `data/lit`: `dft_coverage_map.json` (0 readers),
+  `slr_incorporation_matrix.json` (350 KB; hand-maintains `current_runtime_consumers`, i.e. the
+  import graph, by hand). `agents.md:20` forbids exactly this.
+- Mirror image: `results/validation/qm_barrier_provenance.json` is a hand-curated input with no
+  generator, read at runtime by `src/uncertainty_propagation.py:513`. `docs/validation/directional_claims_panel.yml`
+  and `directional_accuracy_report.md` are curated inputs in `docs/`, parsed by `src/directional_reliability.py:57-62`.
+
+### D3. No keys: every join is a string match
+- **Compounds.** Keyed by display name everywhere. In `data/benchmarks/**` alone: `Hexanal`/`hexanal`,
+  `Acrylamide`/`acrylamide`, `2-Methyl-3-furanthiol (MFT)`/`2-methyl-3-furanthiol`, and
+  `Furan-2-aldehyde (FA)` = furfural; 25 keys for ~19 compounds. `flavor_reference_payloads.json`
+  uses `compound`, `safety_reference_payloads.json` uses `analyte` (7 rows `null`), species YAML
+  uses `name`. The runtime papers over this with **five** independent normaliser/alias tables
+  (`benchmark_validation.py:90-140`, `external_validation.py:61-67`, `experiment_value.py:146-198`,
+  `sensory.py:170-212`, `matrix_calibration_registry.py:773`) and a `difflib.SequenceMatcher`
+  fallback at ratio 0.75 (`benchmark_validation.py:551-582`). `test_regression.py:53-55` keeps its
+  own synonym table. SMILES/InChI exist in the YAMLs but are never used as keys.
+- **Papers.** 171 of 227 distinct DOIs appear in more than one file; no shared id. DOI
+  `10.3390/molecules28073151` has 13 ids across 4 files; `10.1590/1678-457x.08717` has 3 ids in
+  `benchmark_intake_registry.json` alone with wrong years. PDF stems, dossier stems, benchmark
+  ids, intake ids and SLR ids are five namespaces (14-row mismatch table in Appendix B), including
+  two documented file-swap traps (`Kocada2016.pdf` vs `Kocadagli2016.pdf`, the two `Zhai2023` files).
+- **Reaction families.** Four keyspaces: `arrhenius_params.yml` (`enolisation`), `FAST_BARRIERS`
+  in `src/barrier_constants.py` (`enolisation_intermediate`), `calibration_offsets.json` (`enol`),
+  `reaction_benchmark_set.json` (`1,2-enolisation`). Bridged by hard-coded dicts at
+  `barrier_constants.py:740-748, 807-813`. The YAML header itself records a kJ/kcal collision.
+- **Chemistry families.** 16 canonical slugs; `benchmark_intake_registry.json` uses 5 aliases
+  across 11 rows; `slr_section` mixes `01`, `5`, `11` and `11.0`, `1.1`, `"1.3,6.1,7.4"`.
+- **Matrix families.** 8 canonical values in `matrix_family_coverage_registry.json`; the intake
+  registry uses 86. Two vocabularies (`pea_isolate` vs `pea_iso`) bridged by one alias map
+  (`literature_runtime.py:103-110`) and a substring rule over benchmark ids (`experiment_value.py:52-62`).
+
+### D4. No schemas, one validator, and it drifted from its own schema file
+- Benchmark JSON has 4 top-level variants and 9 distinct `measured_volatiles` key sets; `ph` is
+  bench-initial in 20 bundles and post-autoclave in one (disclosed only in prose). No validator:
+  `src/benchmark_validation.py` validates model vs. measurement, not structure.
+- `computational_priors.json` (217 KB) is 22 unrelated tables with 22 record shapes in one file.
+- The only validator (`src/matrix_experiment_intake.py:64`) hard-codes the enums in Python
+  (`:32-34`) instead of reading `matrix_experiment_intake_schema.json`, and they already disagree
+  (`wheat_gluten`). The `requested_*.yaml` it supposedly emits fail it three ways.
+- No pydantic/jsonschema anywhere. `tests/unit/test_data_integrity.py` reads no data file. No
+  referential-integrity test between any two data files.
+- Confidence vocabulary: `agents.md` mandates `bounded_calibration / transferred_literature /
+  surrogate_family / xtb_derived`; three of the four occur **zero** times in `data/`. The real
+  fields are `confidence_tier` (with synonyms `low_medium` and `medium_low` both live),
+  `provenance_tier`, `uncertainty_posture`; 19 of 27 JSON files carry none.
+
+### D5. Failure is silent
+Most loaders return `{}` on a missing or malformed file (`literature_runtime.py:40`,
+`barrier_constants.py:530`, `lipid_oxidation.py:76`, `recommend.py:74`); two substitute
+hard-coded fallback constants that then look data-derived. 11 files are read at import time
+into module globals across 7 modules. A stale path after a move degrades the model quietly
+rather than failing.
+
+### D6. Dead, orphaned and ghost files
+- **Zero consumers:** `data/rmg_extensions/` (13 families; no `rmgpy` in the env),
+  `data/reactions/curated_pathways.py` (imports the deleted `src.pathway_extractor`; stale copy of
+  `src/curated_pathways.py`), `data/reactions/reaction_families.yml` (existence-checked only),
+  `lit/dft_coverage_map.json`, `lit/ts_seed_benchmark_set.json`, `lit/computational_gap_closure_targets.json`,
+  `lit/computational_gap_multistep_targets.json`, `lit/calibration_offsets.json`, all 33 tracked
+  `data/geometries/` files (readers deleted in Phase 1; 15 are tracked while gitignored),
+  `results_db.ml_adoption_decisions` table + 2 methods, `docs/notebooks/results/maillard_results.db`.
+- **Test-only:** `lit/canonical_systems.json`.
+- **Ghosts (referenced, absent):** `lit/ribose_glycine_2021.json` (README), `lit/matrix_calibration_offsets.json`
+  (read at `matrix_calibration_registry.py:12`), `lit/deep_research_candidate_registry.json` (written
+  by `ingest_deep_research_markdown.py`, cited by the intake registry's notes), `src/dft_coverage_map.py`
+  (cited by `generate_family_implementation_status.py:199`), `data/benchmarks/quarantined/{cys_ribose_150C_Mottram1994,cys_glucose_150C_Farmer1999}.json`
+  (`calibrate_barriers.py:70-71`), `Gemini_Deep_Research/raw/11_maillard_lipid_crosstalk.md`
+  (`computational_priors.json:2118`), `xtb_inputs/pe_amadori/{reactant,product}.xyz`, `data/reactions/rmg_validation_cases/`.
+
+### D7. Untracked bulk hides inside `data/` — the `data/qm` lesson, still live
+`.gitignore` blanket-ignores `data/*` then whitelists. On disk but invisible to git and every
+audit: 818 geometry files (31 MB, generated QM scratch), `data/logs/` (193 MB of dead stdout,
+zero writers, zero readers), `data/calibration_history/` (102 files), `data/articles/` (134 PDFs,
+162 MB, genuine sources, never cited by filename from any registry). AUDIT.md §"Open items 3"
+documents what this pattern already cost once.
+
+### D8. Documentation describes a different repository
+`data/lit/README.md` documents one ghost file, omits five real ones (`binding_constants.yml`,
+`chemistry_family_scope_registry.json`, `extrusion_damage_reference_payloads.json`,
+`lipid_oxidation_calibration.json`, `process_gap_registry.json`), and calls a run ledger
+"curated". `timeseries/*.yml` headers say "NOTHING IN THIS FILE IS WIRED" while the README marks
+two as fit corpus. `src/external_validation.py:7` says 19 benchmarks; there are 23.
+
+### D9. Regeneration hazards
+- `scripts/generators/complete_benchmark_buffer_fields.py` patched `conditions.buffer` into all
+  21 hold-out bundles, but `_HOLDOUT_BUNDLE_SPECS` (`src/external_validation.py:71-84`) has no
+  `buffer` key. Re-running `generate_external_validation_payloads.py` deletes the provenance
+  blocks. This already happened once (`external_validation.py:113-116`).
+- `generate_slr_family_reports.py:44-56` deletes nine legacy filenames on every run.
+
+### D10. The `Internal2026` / `ProtocolPilot2026` pairs are one synthetic snapshot under two labels
+Byte-identical `conc_ppb` for all 7 compounds; one is filed as `measured_volatiles`, the other as
+`reference_volatiles`. Calling model output "measured" is the confusion the rest of the repo
+works hardest to avoid. Heavily test-referenced (17 + 15 + 3 + 3 files), so retire with care.
+
+---
+
+## 2. Design principles for the target state
+
+1. **`data/` is read-only at runtime.** Anything a script or test writes goes to `results/`
+   (or `tests/` tmp). Enforced by a CI gate that diffs `data/` after the test run.
+2. **One key per entity.** Compounds by InChIKey, papers by `paper_id` (one per DOI), chemistry /
+   matrix / reaction families and process states by closed enumerations in `data/keys/`. Every
+   other file references keys; no file re-spells a name.
+3. **One record envelope.** Adopt the shape `binding_constants.yml` and `timeseries/*.yml`
+   already use: `sources[]` + `records[]`, each record with `id`, `paper_id`, `quote`,
+   `verification_status`, one tier field. Flat `entries[]`, never nested class→protein→list.
+4. **One access path.** `src/data_paths.py` (named path constants, one data root, env override)
+   and `src/data_access.py` (typed loaders; raise on missing; `lru_cache`; no import-time I/O).
+   `grep '"data/' src` must return only `data_paths.py`.
+5. **Schemas in the repo, enforced in CI.** JSON Schema per record type under `data/schemas/`,
+   a stdlib+pyyaml `scripts/ci/schema_gate.py` next to the three existing gates, and one
+   referential-integrity test.
+6. **Generated ≠ curated ≠ forensic.** Three trees, three rules: `data/` (hand-edited, cited),
+   `results/` (regenerable, never hand-edited), `data/research_corpus/` (LLM dumps kept only so
+   `citation_gate.py` can detect laundered citations; never a provenance source).
+7. **Names say what things are.** No wave shorthand (`k4b_`, `phase33_`), per `agents.md`.
+
+---
+
+## 3. Target layout
+
+```
+data/
+  README.md                         one line per file; CI checks no ghosts, no omissions
+  keys/                             NEW — the join layer
+    compounds.yml                   id=InChIKey; name, cas, smiles, aliases[], class,
+                                    odour_threshold{value,unit,paper_id}, sensory_tags[]
+                                    ← species/{desirable,off_flavour,toxic}_targets.yml,
+                                      sensory_tags.yml, lit/matrix_decision_panel.json,
+                                      all in-code alias tables
+    precursors.yml                  ← species/precursors.yml, one section schema, inchikey
+    papers.yml                      one row per DOI: paper_id, citation, doi, pdf, dossier
+    chemistry_families.json         ← chemistry_family_scope_registry + family_ingestion_plan
+                                      (+ the 10 rows of dft_coverage_map)
+    matrix_families.json            ← matrix_family_coverage_registry; long+short ids in one row
+    reaction_families.json          NEW: arrhenius key ↔ FAST_BARRIERS key ↔ benchmark key
+    process_states.json
+  schemas/                          NEW — JSON Schema per record type
+    benchmark.schema.json  reference_record.schema.json  prior_record.schema.json
+    intake.schema.json (← protocols/matrix_experiment_intake_schema.json)
+  constants/                        measured physical constants
+    arrhenius_params.yml  henry_constants.yml  binding_constants.yml
+    lipid_oxidation_calibration.json  interventions.yml
+  priors/                           ← computational_priors.json split by section (22 → ~10 files)
+    matrix_accessibility.json  thiamine.json  nucleotide.json  carbonyl_donor.json
+    sulfur_peptide.json  lipid_offnote.json  ascorbic.json  melanoidin.json  dft_kinetic.json …
+  references/                       observable anchors, one flat entries[] envelope each
+    flavor.json  safety.json (+extrusion_damage)  retention.json  process_state.json
+  benchmarks/
+    calibration/*.json              today's top level (minus the synthetic pair, see decision 6)
+    holdout/matrix/*.json           ← external_validation/
+    holdout/free_precursor/*.json   ← external_validation/maillard_path/
+    retired/quarantined/            retired/unreachable/
+  timeseries/                       unchanged (already the model)
+  dossiers/<paper_id>.md            ← lit/extraction_dossiers/; synthesis/ for k1…k6b, round3/4
+  intake/
+    benchmark_intake_registry.json  slimmed: references paper_id; derived columns dropped
+    gaps.json                       ← process_gap_registry + intake.structural_gaps
+  protocols/
+    contracts/*.json                the 4 *_contract.json, one shape
+    example_matrix_experiment_intake.yaml
+  qm/
+    reaction_barriers.json          ← lit/reaction_benchmark_set.json
+    geometries.json                 ← lit/geometry_benchmark_set + ts_seed_benchmark_set
+    mlp_registry.json               ← mlp_candidate_registry + mlp_external_benchmark_evidence
+    qm_barrier_provenance.json      ← results/validation/ (curated input, misfiled)
+    unverified/phase33_*.json, phase35_*.json   (or deleted — decision 2)
+  formulation_grid.yml
+  articles/                         untracked PDFs + tracked manifest.json {file→doi,paper_id,dossier}
+  research_corpus/                  ← Gemini_Deep_Research/raw + 13 dumps; forensic only
+
+docs/examples/                      ← cli_examples/, campaigns/
+docs/templates/                     ← ingest_templates/
+docs/reference/reaction_families.yml  ← data/reactions/ (a design doc)
+docs/retired/maillard_validation_benchmarks.md  (self-declared fabricated sections)
+
+results/                            generated, gitignored unless a test/gate needs it
+  validation/experiment_requests/*.{yaml,md}   ← protocols/requested_*.yaml
+  validation/reproducibility/                  ← protocols/*_protocol_pilot_intake.yaml
+  validation/holdout_bundles/*.yaml            ← protocols/external_validation/
+  literature/deep_research_backlog.json  slr_incorporation_status.json  dft_coverage_map.json
+  literature/slr_family_reports/*.md
+  calibration/calibration_offsets.json  calibration_history/
+
+tests/fixtures/canonical_systems.json
+
+src/data_paths.py   src/data_access.py   scripts/ci/schema_gate.py   scripts/ci/data_readonly_gate.py
+tests/unit/test_data_referential_integrity.py
+
+DELETE
+  data/rmg_extensions/  data/reactions/curated_pathways.py  data/logs/
+  data/geometries/ (33 tracked + 818 untracked)  data/calibration_history/
+  docs/notebooks/results/maillard_results.db  results_db.ml_adoption_decisions (+2 methods)
+  lit/{dft_coverage_map,ts_seed_benchmark_set,computational_gap_*}.json (after merge/move)
+```
+
+Whether the top-level stays `data/lit/…` or flattens as above is decision 7; the plan works either way.
+
+---
+
+## 4. Phased execution
+
+Each phase is one PR, behaviour-preserving unless stated, with the unit + scientific suites run
+in Docker before and after and the headline numbers (`tests/scientific/test_honest_headline_guards.py`)
+pinned unchanged. Moves use `git mv` so history survives. Effort is in focused sessions.
+
+### Phase 0 — Stabilise the `cleaning` branch (prerequisite, ~1 session) — IN PROGRESS 2026-09-01
+Owner decisions received 2026-09-01: (i) full tree backup before deletions —
+`../Maillard_backup_2026-09-01_pre-data-restructure.tar.gz` (298 MB, includes `.git` and all
+untracked data) + git tag `pre-data-restructure-2026-09-01`; (ii) the QM/DFT lane is gone for
+good, so its data, loaders, tests and docs are to be removed, not preserved.
+- [x] 16 test files: `from src.pathway_extractor import Species/ElementaryStep` → `src.chem_utils`.
+- [x] Deleted QM-only tests (owner-authorised): `tests/scripts/{test_run_computational_gap_dft,
+      test_run_computational_gap_xtb,test_react_ot_seed_coverage,test_import_react_ot_colab_artifacts,
+      test_open_react_ot_colab}.py`, `tests/scientific/{test_mlp_assessment,test_refinement_campaign,
+      test_refinement_governance,test_refinement_watchlist,test_offline_refinement_governance}.py`,
+      the `PathwayExtractor` test in `tests/unit/test_error_handling.py`, empty `tests/qm/`.
+- [x] `tests/unit/test_wave_r1_barrier_offset_retirement.py`: dropped the `src.refinement_campaign`
+      import; the retirement-note test now guards the tracked file directly.
+- [x] `scripts/run_pipeline.py`: removed `XTBScreener` import and the `--xtb` flag.
+- [x] `.github/workflows/ci.yml`: removed the `tests-qm` job and the `qm` dispatch input.
+- [x] `scripts/docker_maillard.sh`: removed dead `run_computational_gap_job`.
+- [x] D9 fixed properly: the four matrix hold-out bundles are frozen evidence. `write_holdout_bundles`
+      is write-once by default (`overwrite=True` carries curated-only keys forward); the diff that
+      forced this is bigger than `conditions.buffer` — Wave W primary-source corrections to the Bi 2020
+      values/uncertainties live only in the committed JSON. Two new tests pin it.
+- [x] `data/calibration_history` leak: writer moved to `results/calibration_history/`; the
+      integration test monkeypatches the dir.
+- [x] `data/reactions/curated_pathways.py` deleted (broken import, zero consumers).
+- [ ] Baseline: `pytest tests/unit tests/scripts` and `tests/integration tests/scientific` in Docker (running).
+- **Exit:** both tiers green in Docker; counts recorded here.
+
+### Phase 1 — Purge and re-home (no schema change, ~1–2 sessions)
+Pure deletes and moves of files with 0–2 consumers. Expected model-output change: none.
+- [ ] Delete dead: `data/rmg_extensions/`, `data/reactions/curated_pathways.py`, `data/logs/`,
+      `data/geometries/**` (tracked and untracked), `data/calibration_history/`,
+      `docs/notebooks/results/maillard_results.db`, `lit/ts_seed_benchmark_set.json` (fold its 2 rows
+      into `geometry_benchmark_set.json`), `lit/computational_gap_*.json`, `lit/dft_coverage_map.json`,
+      `lit/calibration_offsets.json` (+ `scripts/calibrate_barriers.py`, whose two fit targets no longer exist).
+      `ResultsDB`: drop `ml_adoption_decisions` and its two methods.
+- [ ] Move generated → `results/`: `protocols/requested_*.yaml`, `protocols/*_protocol_pilot_intake.yaml`,
+      `protocols/external_validation/*.yaml`, `lit/deep_research_backlog.json`, `lit/slr_incorporation_matrix.json`,
+      `Gemini_Deep_Research/slr_family_*.md`. Repoint the writers (§1 D2 table) and the 2+5 readers of the backlog.
+- [ ] Move examples/docs → `docs/`: `cli_examples/`, `campaigns/`, `ingest_templates/`,
+      `reactions/reaction_families.yml`, `benchmarks/maillard_validation_benchmarks.md`.
+      `lit/canonical_systems.json` → `tests/fixtures/`. `results/validation/qm_barrier_provenance.json` → `data/qm/`.
+- [ ] Rename `Gemini_Deep_Research/` → `research_corpus/` (raw + 13 dumps only); update
+      `citation_gate.py` regexes (`:216` and the `raw/\d\d_` alternative).
+- [ ] `data/articles/manifest.json` generated from the dossier §0 IDENTITY tables (`scripts/generators/build_article_manifest.py`);
+      the file-swap traps in `src/kinetic_core/parameters_furanic.py:124-126` become data.
+- [ ] Rewrite `.gitignore` `# Data rules` as an explicit whitelist with no tracked-but-ignored files
+      (`git ls-files -i -c --exclude-standard` must be empty). Remove the geometry/xtb rules.
+- [ ] Add `scripts/ci/data_readonly_gate.py`: fail if `git status --porcelain data/` is non-empty after the test tiers.
+- [ ] Update the three CI gates' globs and the count pins in `test_honest_headline_guards.py:959-1016`.
+- **Exit:** `data/` holds only hand-curated, cited inputs; on-disk size drops from ~400 MB to ~170 MB (articles) / ~8 MB tracked.
+
+### Phase 2 — One access layer (~2–3 sessions)
+Do this **before** any renames inside `data/lit`, so later moves are one-line edits.
+- [ ] `src/data_paths.py`: `DATA_ROOT` (env `MAILLARD_DATA_ROOT` override, default repo-relative),
+      one named constant per curated file/dir. `scripts/` and tests import from it too.
+- [ ] `src/data_access.py`: `load_json(path)`, `load_yaml(path)` that **raise** `DataFileMissing`
+      with the named constant; `@lru_cache`; explicit `reload()` for tests. Collapse the 9 loaders of
+      `benchmark_intake_registry.json`, 10 of `computational_priors.json`, 8 of `process_state_calibrations.json`,
+      3 of the species YAMLs, 5 path builders for `data/benchmarks/{id}.json`, and the two
+      `protein_source_registry` / `henry_constants` readers into one function each with one alias policy.
+- [ ] Remove CWD-relative defaults (`headspace.py:59`, `sensory.py:92`, `calibrate_barriers.py:263`, `test_regression.py:16`).
+- [ ] Defer the 11 import-time loads (7 modules) to first call. Keep the `MOCKED VALUES`
+      RuntimeWarning, emitted once.
+- [ ] `reporting._build_scientific_surface` and the four payload builders that embed `data/...` strings
+      read them from `data_paths`; update the four tests that assert them.
+- [ ] Leave the env-var overrides (`BARRIER_OFFSETS`, `MAILLARD_MATRIX_*`) but route them through
+      `data_access` so precedence is visible in one place.
+- **Exit:** `grep -rn '"data/' src scripts | grep -v data_paths.py` is empty; `pytest` from a
+      non-root CWD passes; model outputs byte-identical.
+
+### Phase 3 — Keys (the real fix, ~3–5 sessions; the only phase that can change outputs)
+- [ ] `keys/papers.yml`: one `paper_id` per normalised DOI (227), built by script from the intake
+      registry + SLR matrix + dossier IDENTITY tables; case-fold DOIs. Rewrite every record's paper
+      reference to `paper_id`; keep `citation_repair`/`doi_repair` history in one `repairs.yml`,
+      not inline in six files. Rename dossiers to `<paper_id>.md`.
+- [ ] `keys/compounds.yml`: seeded from `matrix_decision_panel.json` (already has `aliases`) +
+      species YAMLs + `henry_constants` names + every alias table in code + `test_regression.py:53-55`.
+      InChIKey from RDKit on the existing SMILES; fail the build on collisions. Then: benchmark
+      `measured_volatiles` keyed by compound id (name kept as `display_name`); the five alias tables
+      and the `SequenceMatcher` fallback replaced by one `resolve_compound()` over this file.
+      **Expect a handful of benchmark rows to change match status** where the fuzzy matcher was
+      silently merging or splitting compounds. Record every such change in the PR.
+- [ ] `keys/reaction_families.json`: the explicit crosswalk that `barrier_constants.py:740-748,807-813`
+      currently hard-codes; the kJ/kcal collision in `arrhenius_params.yml`'s header gets resolved
+      or explicitly quarantined here.
+- [ ] `keys/chemistry_families.json`, `keys/matrix_families.json`, `keys/process_states.json` as closed
+      enums; `family_identifier_contract.py` goes from reporting unknown ids to rejecting them.
+      Collapse the intake registry's 86 `matrix_family` values onto the 8 canonical + a free-text `matrix_note`.
+- [ ] `tests/unit/test_data_referential_integrity.py`: every `paper_id`, compound id, family id,
+      matrix id in every file resolves; every odour threshold has a `paper_id`.
+- **Exit:** no free-text join anywhere in `src/`; headline guards re-pinned with the diff explained.
+
+### Phase 4 — Schemas and merges (~3–4 sessions)
+- [ ] `data/schemas/benchmark.schema.json`: one core, `conditions` with typed optional `buffer`,
+      `measured_volatiles` **xor** `reference_volatiles` with the semantics documented, compound
+      keys from `keys/compounds.yml`, `ph_basis: initial | final`. `scripts/ci/schema_gate.py` (stdlib + pyyaml).
+- [ ] One record envelope (§2 P3) for `references/*`, `priors/*`, `constants/*`; split
+      `computational_priors.json` by section; merge `extrusion_damage` → `safety`, the two MLP files,
+      `family_ingestion_plan` → `chemistry_families`, `process_gap_registry` + `structural_gaps` → `gaps.json`,
+      measured rows of `retention_reference_payloads` → `binding_constants.yml`.
+- [ ] Unify the four `*_contract.json` shapes (`protocol_id` vs `package_id`). Make
+      `matrix_experiment_intake.py` read its enums from the schema file.
+- [ ] Confidence vocabulary: pick one (decision 4); dedupe `low_medium`/`medium_low`; add the tier
+      field to the 19 files lacking it, defaulting honestly (`unlabelled`).
+- [ ] Collapse `process_state_calibrations.kind` (20 values / 26 rows) to a real vocabulary.
+- **Exit:** every file in `data/` validates against a schema in CI; `data/lit/README.md`'s file map is generated.
+
+### Phase 5 — Docs and contracts (~1 session)
+- [ ] `data/README.md` generated from `data_paths.py` + schema titles; CI fails on ghosts/omissions.
+- [ ] Correct `agents.md` / `CONTRIBUTING.md`: `data/` rules, layout map, tier vocabulary, the
+      "curated pathways live in data/" exception (goes away with Phase 1).
+- [ ] Fix stale prose: `timeseries/*.yml` "NOTHING IS WIRED" headers, `external_validation.py:7`
+      "19 benchmarks", `COMPUTATIONAL_GAP_RUNBOOK.md` (lane deleted in Phase 1).
+- [ ] `tasks/lessons.md`: the pattern "gitignored dirs inside `data/` are invisible to audits".
+
+Total: roughly 11–16 sessions. Recommended cut if time is short: Phases 0–2 in full (high
+value, ~zero risk), Phase 3 compounds + papers only, Phase 4 the benchmark schema only.
+
+---
+
+## 5. Decisions needed from the owner
+
+1. **`protein_source_registry.json`** is self-labelled `value_basis: mocked_placeholder` and
+   `source_status: no_verifiable_source`, yet feeds four `kinetic_core` modules. Options: (a) gate
+   it — multipliers default to 1.0 and the report says "matrix multipliers unsourced" (recommended;
+   honest, cheap); (b) keep as-is with the warning; (c) source the 14 profiles (a research task,
+   not a cleaning task).
+2. **`data/qm/phase33_*` / `phase35_*`** (27 values, no verifiable source, zero runtime readers,
+   pinned by `test_honest_headline_guards` and `citation_gate` check 5). Keep under
+   `qm/unverified/` with the label, or delete and drop the pins. Recommended: delete; the
+   AUDIT.md narrative already preserves the finding.
+3. **Research corpus** (`Gemini_Deep_Research/raw` + dumps, ~2 MB tracked): keep in-repo as the
+   forensic corpus `citation_gate` scans (recommended), or move off-repo and relax the gate.
+4. **Confidence vocabulary**: migrate data to the four labels `agents.md` mandates, or amend
+   `agents.md` to the three fields actually in use. Recommended: amend the docs; the data's
+   `provenance_tier` + `uncertainty_posture` carry more information than the four labels.
+5. **Scope**: stop after Phase 2, or commit to Phase 3. Phase 3 is where maintainability actually
+   comes from; without it the alias tables regrow.
+6. **The synthetic `Internal2026` / `ProtocolPilot2026` pairs**: keep one per matrix, relabel
+   `evidence_class: synthetic_snapshot` and `reference_volatiles`, retire the other and repoint the
+   ~38 test references. Or keep both and only fix the `measured_volatiles` label.
+7. **Layout depth**: flatten `data/lit/*` into `data/{keys,constants,priors,references,…}` as in §3,
+   or keep `lit/` as a parent. Flattening is recommended: "lit" currently means "everything".
+8. **Script deletions** (Appendix C) need explicit confirmation per `agents.md`.
+
+---
+
+## 6. Risks and guardrails
+
+| Risk | Guardrail |
+|---|---|
+| A stale path after a move silently degrades the model (D5) | Phase 2 makes missing files raise; do Phase 2 before any `data/lit` rename |
+| The three CI gates and `test_honest_headline_guards` hard-code globs and counts | Update in the same PR; the gates are stdlib-only and fast to re-run |
+| Report output embeds paths and four tests assert them | Route through `data_paths`; treat the output strings as a versioned contract |
+| Hold-out leakage: `holdout_guard` relies on `get_benchmark_files` being non-recursive | `benchmarks/calibration/` vs `benchmarks/holdout/` makes the separation physical; keep the guard's rglob check |
+| Phase 3 changes compound matching | Diff `benchmark_summary.json` before/after; explain each changed row in the PR; re-pin headline guards last |
+| Regeneration deletes provenance (D9) | Phase 0 idempotency test |
+| Pytest writes into `data/` again | `data_readonly_gate.py` |
+| Losing git history on moves | `git mv`, one directory per commit |
+
+---
+
+## Appendix A — Disposition of every tracked path under `data/` (current names)
+
+| Path | Consumers (src/scripts/tests) | Disposition |
+|---|---|---|
+| `lit/arrhenius_params.yml` | 5/4/4 | keep → `constants/` |
+| `lit/henry_constants.yml` | 2/0/2 | keep → `constants/` |
+| `lit/binding_constants.yml` | 3/1/1 | keep → `constants/` (envelope template for the rest) |
+| `lit/lipid_oxidation_calibration.json` | 4/2/1 | keep → `constants/` |
+| `lit/calibration_offsets.json` | 0 readers | delete (generated, unwired, fit targets gone) |
+| `lit/computational_priors.json` | 10/2/4 | split → `priors/*.json` |
+| `lit/flavor_reference_payloads.json` | 5/2/2 | keep → `references/flavor.json`, one envelope |
+| `lit/safety_reference_payloads.json` | 5/3/1 | keep → `references/safety.json` (+ extrusion_damage) |
+| `lit/extrusion_damage_reference_payloads.json` | 1/0/0 | merge into safety |
+| `lit/retention_reference_payloads.json` | 5/2/3 | measured rows → `binding_constants.yml`; withdrawn rows → `references/retention.json` (quarantine list) |
+| `lit/process_state_calibrations.json` | 8/1/1 | keep → `references/process_state.json`; collapse `kind` |
+| `lit/protein_source_registry.json` | 4/1/1 | decision 1 |
+| `lit/matrix_decision_panel.json` | 3/0/2 | seed for `keys/compounds.yml` |
+| `lit/matrix_family_coverage_registry.json` | 4/0/1 | → `keys/matrix_families.json` |
+| `lit/chemistry_family_scope_registry.json` | 4/1/1 | → `keys/chemistry_families.json` |
+| `lit/family_ingestion_plan.json` | 4/4/1 | merge into `keys/chemistry_families.json` |
+| `lit/process_gap_registry.json` | 4/1/1 | merge → `intake/gaps.json` |
+| `lit/benchmark_intake_registry.json` | 9/8/4 | keep → `intake/`; reference `paper_id`; drop derived columns |
+| `lit/slr_incorporation_matrix.json` | 1/3/1 | generated → `results/literature/` |
+| `lit/deep_research_backlog.json` | 2/5/1 | generated → `results/literature/` |
+| `lit/dft_coverage_map.json` | 0 | delete (10 rows fold into chemistry_families) |
+| `lit/computational_gap_closure_targets.json`, `_multistep_targets.json` | 0 | delete |
+| `lit/geometry_benchmark_set.json` | 1/0/2 | → `qm/geometries.json` (+ ts_seed rows); rename misused `chemistry_family` field |
+| `lit/ts_seed_benchmark_set.json` | 0 | merge then delete |
+| `lit/reaction_benchmark_set.json` | 2/0/2 | → `qm/reaction_barriers.json` |
+| `lit/mlp_candidate_registry.json`, `mlp_external_benchmark_evidence.json` | 1/0/2 each | merge → `qm/mlp_registry.json` |
+| `lit/refinement_surrogate_patches.json` | 3/1/2 | keep (tombstone read by a retirement guard) → `constants/` |
+| `lit/canonical_systems.json` | 0/0/1 | → `tests/fixtures/` |
+| `lit/README.md` | — | regenerate |
+| `lit/extraction_dossiers/*` (75) | cited as strings by ~15 files | → `dossiers/<paper_id>.md`; `k*`/`round*` → `dossiers/synthesis/` |
+| `lit/timeseries/*` (4 + README) | 1/4/0 + gates | keep as-is; fix stale headers |
+| `benchmarks/*.json` top-level (23) | glob | → `benchmarks/calibration/`; schema; decision 6 |
+| `benchmarks/external_validation/*.json` (4) | generated | → `benchmarks/holdout/matrix/`; fix generator (D9) |
+| `benchmarks/external_validation/maillard_path/*.json` (17) | hand-authored, frozen | → `benchmarks/holdout/free_precursor/` |
+| `benchmarks/quarantined/`, `step_level_unreachable/` | READMEs cited | → `benchmarks/retired/{quarantined,unreachable}/` |
+| `benchmarks/maillard_validation_benchmarks.md` | quoted by 5 src | → `docs/retired/` |
+| `protocols/*_contract.json` (4) | 1–4 each | → `protocols/contracts/`, one shape |
+| `protocols/matrix_experiment_intake_schema.json` | 2/1/0 | → `schemas/intake.schema.json`; enums move into it |
+| `protocols/example_matrix_experiment_intake.yaml` | 2/0/2 | keep in `protocols/` |
+| `protocols/{pea,soy}_iso_protocol_pilot_intake.yaml` | generated | → `results/validation/reproducibility/` |
+| `protocols/external_validation/*.yaml` (4) | generated twins | → `results/validation/holdout_bundles/` |
+| `protocols/requested_*.yaml` (5) | 0 | → `results/validation/experiment_requests/` |
+| `species/{desirable,off_flavour,toxic}_targets.yml`, `sensory_tags.yml` | 2–4 src each | → `keys/compounds.yml` (Phase 3); until then unchanged |
+| `species/precursors.yml` | 2/2/0 | → `keys/precursors.yml`, one section schema |
+| `reactions/curated_pathways.py` | 0 (broken import) | delete |
+| `reactions/reaction_families.yml` | existence check only | → `docs/reference/` |
+| `rmg_extensions/**` (26) | 0 | delete |
+| `qm/phase33_*`, `phase35_*` | loader + parse test | decision 2 |
+| `qm/irc_validation_cases/**` | parse test only | with decision 2 |
+| `geometries/**` (33 tracked) | 0 after Phase 1 | delete |
+| `Gemini_Deep_Research/slr_family_*.md` (16) | 0 | → `results/literature/slr_family_reports/` |
+| `Gemini_Deep_Research/{raw/*, 13 dumps, README}` | `citation_gate`, 3 scripts | → `research_corpus/` (decision 3) |
+| `cli_examples/*`, `campaigns/*`, `ingest_templates/*` | docs + 1–2 tests | → `docs/examples/`, `docs/templates/` |
+| `formulation_grid.yml`, `interventions.yml` | 2–3 src | keep (`interventions` → `constants/`) |
+| untracked: `articles/` | prose citations | keep untracked + tracked `manifest.json` |
+| untracked: `logs/`, `calibration_history/`, `geometries/{dft_runs,dft_checkpoints,multistep,xtb_inputs}` | 0 | delete |
+| `results/maillard_results.db` | `pipeline.py:222,554`, `benchmark_validation.py:709` | keep; drop `ml_adoption_decisions` |
+| `docs/notebooks/results/maillard_results.db` | 0 | delete |
+| `results/validation/qm_barrier_provenance.json` | `uncertainty_propagation.py:513` | curated input → `data/qm/` |
+| `docs/validation/directional_claims_panel.yml`, `directional_accuracy_report.md` | `directional_reliability.py:57,62` | leave in `docs/` (the report is the record by design); register in `data_paths.py` |
+
+## Appendix B — Paper-identifier mismatches (sample of 14)
+
+| PDF | Dossier | Benchmark id | Intake id | SLR id | Defect |
+|---|---|---|---|---|---|
+| `Kocada2016.pdf` | `kocadagli2016jafc` | — | — | — | shorter stem is the JAFC paper; documented swap trap |
+| `Kocadagli2016.pdf` | `kocadagli2016foodchem` | — | — | — | text layer garbled |
+| `Zhai2023.pdf` / `Zhai2023b.pdf` | `zhai2023foodchem` / `zhai2023jafc` | — | — | — | swapped relative to the K6a brief |
+| `Goncouglu2016.pdf` | `goncuoglutas2017` | — | — | — | surname, year and no registry entry |
+| `Goncouglu2026.pdf` | none | — | — | — | different paper, one digit away |
+| `Kang2026(_supplementary).pdf` | `kang2026(_SI)` | — | — | — | case + suffix |
+| `frankel1989.pdf` | none | — | `frankel_1982_…` | same | citation says 1983; three years |
+| `Hamzalioglu2018.pdf` | `hamzalioglu2018` | — | `hamzalioglu_2026_…` | same | registry id is a different 2026 paper |
+| `Zhou2023b.pdf` | `zhou2023` | — | — | — | dossier drops the `b` |
+| `Xin2026b.pdf` | `Xin2026b` (capitalised) | — | — | — | dossier casing inconsistent |
+| none | none | `pea_isolate_uht_140C_Trikusuma2019` | `trikusuma_2019` | two ids | benchmark with no PDF; SLR double id |
+| `hofmann1998.pdf` | `hofmann1998_reconciliation` | 9 benchmarks, 2 casings | — | — | most-cited source has no registry id |
+| `1-s2.0-S0308814622010068-main.pdf`, `jf0480290.pdf` | none | — | — | — | publisher-default names |
+
+## Appendix C — Scripts proposed for deletion (owner confirmation required)
+
+- `scripts/calibrate_barriers.py` — both fit targets quarantined/deleted 2026-08-26; output unwired.
+- `scripts/generators/generate_rmg_inputs.py` — targets nonexistent, gitignored `data/reactions/rmg_validation_cases/`.
+- `scripts/sync_backlog.py` **or** `scripts/ingest_deep_research_markdown.py` — three writers of one file; keep `deep_research_tracker.py`.
+- `tests/scripts/{test_run_computational_gap_dft,test_run_computational_gap_xtb,test_react_ot_seed_coverage,test_import_react_ot_colab_artifacts,test_open_react_ot_colab}.py` — import scripts deleted in Phase 1.
+- `tests/scientific/{test_refinement_campaign,test_refinement_watchlist,test_refinement_governance,test_offline_refinement_governance,test_mlp_assessment}.py`, `tests/unit/test_wave_r1_barrier_offset_retirement.py` — import `src` modules deleted in Phase 1 (check whether any surviving assertion is worth porting first).

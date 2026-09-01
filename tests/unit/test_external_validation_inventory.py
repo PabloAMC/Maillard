@@ -12,6 +12,7 @@ from src.external_validation import (
     FLAVOR_REFERENCE_PATH,
     build_inventory,
     build_holdout_bundles,
+    write_holdout_bundles,
     EXTERNAL_VALIDATION_EVIDENCE_CLASS,
     render_markdown,
     write_artifact,
@@ -137,3 +138,64 @@ def test_holdout_bundles_evaluate_against_runtime_surface():
         assert evaluation.supported is True, bundle.bundle_id
         assert evaluation.comparisons, bundle.bundle_id
         assert any(row.matched_name is not None for row in evaluation.comparisons), bundle.bundle_id
+
+
+def test_regenerating_holdout_bundles_over_the_committed_files_is_a_noop(tmp_path: Path):
+    """The committed hold-out bundles are frozen evidence (2026-09-01, cleaning Phase 0).
+
+    They carry primary-source corrections (Wave W values/uncertainties, `conditions.buffer`)
+    that `_HOLDOUT_BUNDLE_SPECS` does not know about, so a regeneration must leave them
+    untouched. Seed scratch copies of the committed JSON + YAML, regenerate on top, and
+    require byte-identical files.
+    """
+    from src.external_validation import (
+        EXTERNAL_VALIDATION_BENCHMARK_DIR,
+        EXTERNAL_VALIDATION_PROTOCOL_DIR,
+    )
+
+    benchmark_dir = tmp_path / "benchmarks"
+    protocol_dir = tmp_path / "protocols"
+    benchmark_dir.mkdir()
+    protocol_dir.mkdir()
+    committed = {}
+    for src_dir, dst_dir, pattern in (
+        (EXTERNAL_VALIDATION_BENCHMARK_DIR, benchmark_dir, "*.json"),
+        (EXTERNAL_VALIDATION_PROTOCOL_DIR, protocol_dir, "*.yaml"),
+    ):
+        for path in sorted(src_dir.glob(pattern)):
+            text = path.read_text(encoding="utf-8")
+            (dst_dir / path.name).write_text(text, encoding="utf-8")
+            committed[dst_dir / path.name] = text
+    assert committed, "no committed hold-out bundles found"
+
+    written = write_holdout_bundles(
+        build_holdout_bundles(), protocol_dir=protocol_dir, benchmark_dir=benchmark_dir
+    )
+    assert written["protocols"] == [] and written["benchmarks"] == []
+    assert len(written["skipped"]) == len(committed)
+    for path, before in committed.items():
+        assert path.read_text(encoding="utf-8") == before, f"regeneration changed {path.name}"
+
+
+def test_overwriting_holdout_bundles_carries_curated_keys_forward(tmp_path: Path):
+    """With overwrite=True the spec wins on shared keys, but curated-only keys survive."""
+    from src.external_validation import EXTERNAL_VALIDATION_BENCHMARK_DIR
+
+    benchmark_dir = tmp_path / "benchmarks"
+    benchmark_dir.mkdir()
+    for path in EXTERNAL_VALIDATION_BENCHMARK_DIR.glob("*.json"):
+        (benchmark_dir / path.name).write_text(path.read_text(encoding="utf-8"), encoding="utf-8")
+
+    write_holdout_bundles(
+        build_holdout_bundles(),
+        protocol_dir=tmp_path / "protocols",
+        benchmark_dir=benchmark_dir,
+        overwrite=True,
+    )
+    for path in EXTERNAL_VALIDATION_BENCHMARK_DIR.glob("*.json"):
+        before = json.loads(path.read_text(encoding="utf-8"))
+        after = json.loads((benchmark_dir / path.name).read_text(encoding="utf-8"))
+        assert after["conditions"]["buffer"] == before["conditions"]["buffer"], path.name
+        for compound, block in before["measured_volatiles"].items():
+            for key in block:
+                assert key in after["measured_volatiles"][compound], f"{path.name}: {compound}.{key} lost"

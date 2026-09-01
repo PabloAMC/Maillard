@@ -5,7 +5,7 @@ import yaml
 
 from src import recommend as recommend_module
 from src.literature_runtime import build_family_upstream_contract
-from src.pathway_extractor import ElementaryStep, Species
+from src.chem_utils import ElementaryStep, Species
 from src.recommend import (
     DEFAULT_PROJECTION_STRATEGY,
     Recommender,

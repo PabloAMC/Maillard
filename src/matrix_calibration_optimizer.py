@@ -26,7 +26,8 @@ from src.smirks_engine import ReactionConditions
 logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parents[1]
-CALIBRATION_HISTORY_DIR = ROOT / "data" / "calibration_history"
+# Generated artifact: lives under results/ (data/ is curated inputs only).
+CALIBRATION_HISTORY_DIR = ROOT / "results" / "calibration_history"
 
 # Measurements below ~0.1 ppb are at or under the quantitation limit of the GC-O
 # methods the intake payloads come from, so the measurement side of the log error is
@@ -390,7 +391,7 @@ def calibrate_matrix_constants(experiments: List[Dict[str, Any]], protein_type_s
     finally:
         _restore_matrix_constants(protein_type, snapshot)
 
-    # Success! Write diff to data/calibration_history
+    # Success! Write the diff to results/calibration_history (generated artifact)
     mae_drop_pct = (baseline_mae - res.fun) / baseline_mae * 100
     logger.info(f"Calibration successful! MAE dropped by {mae_drop_pct:.1f}%. Guardrails passed.")
 

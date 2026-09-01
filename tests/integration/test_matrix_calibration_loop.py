@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 from src.matrix_correction import MATRIX_CORRECTIONS, VOLATILE_CLASS_RETENTION_PROFILES, ProteinType
 from src.matrix_experiment_intake import calibrate_from_intake
 
-def test_calibration_loop_improves_mae():
+def test_calibration_loop_improves_mae(monkeypatch, tmp_path):
     """
     Tests that the scipy L-BFGS-B optimizer successfully lowers the 
     Log-MAE error between pipeline predictions and experimental intake payloads.
@@ -52,6 +52,10 @@ def test_calibration_loop_improves_mae():
     # validates the CANDIDATE rather than the on-disk baseline -- see FIX 17 in
     # src/matrix_calibration_optimizer.py. The stub has to accept them.
     src.matrix_calibration_optimizer._run_guardrail_tests = lambda *args, **kwargs: True
+    # Never let a test run write calibration history into the repository tree.
+    monkeypatch.setattr(
+        src.matrix_calibration_optimizer, "CALIBRATION_HISTORY_DIR", tmp_path / "calibration_history"
+    )
 
     try:
         # Run calibration

@@ -1,6 +1,6 @@
 import pytest
 from src.recommend import Recommender
-from src.pathway_extractor import Species, ElementaryStep
+from src.chem_utils import Species, ElementaryStep
 from pathlib import Path
 
 def test_lysine_budget_scaling():

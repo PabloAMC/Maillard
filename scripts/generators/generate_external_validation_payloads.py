@@ -27,6 +27,15 @@ def main() -> int:
         default="data/benchmarks/external_validation",
         help="Destination directory for isolated hold-out benchmark JSON files.",
     )
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help=(
+            "Rewrite bundles that already exist. By default existing bundles are frozen "
+            "evidence and are skipped; with --overwrite, keys the committed file has and the "
+            "regenerated payload lacks are still carried forward."
+        ),
+    )
     args = parser.parse_args()
 
     bundles = build_holdout_bundles()
@@ -34,12 +43,14 @@ def main() -> int:
         bundles,
         protocol_dir=Path(args.protocol_dir),
         benchmark_dir=Path(args.benchmark_dir),
+        overwrite=args.overwrite,
     )
     payload = {
         "bundle_count": len(bundles),
         "matched_compound_count": sum(bundle.matched_compound_count() for bundle in bundles),
         "protocols": [str(path) for path in written["protocols"]],
         "benchmarks": [str(path) for path in written["benchmarks"]],
+        "skipped_existing": [str(path) for path in written["skipped"]],
     }
     print(json.dumps(payload, indent=2))
     return 0

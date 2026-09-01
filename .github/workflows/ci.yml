@@ -36,11 +36,8 @@ name: CI
 #     lane is an open decision -- see tests/README.md and
 #     docs/reference/VALIDATION_CONTRACT.md section 7.
 #
-# Deliberately NOT in the required set: tests/qm. Those tests skip gracefully when
-# xtb / crest / sella / MACE are absent, but environment.yml *installs* all of
-# them, so on CI they would actually execute -- pulling MACE model weights from
-# HuggingFace at runtime (network dependency) and running real semi-empirical
-# optimisations. Run them via the `qm` workflow_dispatch input when needed.
+# 2026-09-01: the tests/qm tier and its `qm` workflow_dispatch input were removed
+# together with the QM/DFT refinement stack (cleaning branch, Phase 1 + Phase 2).
 
 # 2026-08-27 (owner request): test tiers run on PULL REQUESTS, not on every
 # branch push -- 8 pushes in one day each triggered a full ~30-min pipeline.
@@ -55,11 +52,6 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
-    inputs:
-      qm:
-        description: "Also run the tests/qm tier (slow; needs xtb/crest/MACE)"
-        type: boolean
-        default: false
   schedule:
     # Weekly DOI liveness sample. Advisory only -- see the citation-liveness job.
     - cron: "17 6 * * 1"
@@ -389,42 +381,6 @@ jobs:
           name: strict-benchmarks-log
           path: strict_benchmarks.log
           if-no-files-found: warn
-
-  # ---------------------------------------------------------------------------
-  # Optional: QM tier. Manual only -- see the header note.
-  # ---------------------------------------------------------------------------
-  tests-qm:
-    name: QM tests (manual)
-    if: github.event_name == 'workflow_dispatch' && inputs.qm
-    runs-on: ubuntu-latest
-    needs: tests-unit
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Cache conda packages
-        uses: actions/cache@v4
-        env:
-          CACHE_EPOCH: 1
-        with:
-          path: ~/conda_pkgs_dir
-          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
-
-      - name: Install conda (Miniforge)
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          # See the tests-unit job for why environment-file is not passed here.
-          miniforge-version: latest
-          activate-environment: maillard
-          python-version: "3.12"
-          auto-activate-base: false
-          pkgs-dirs: ~/conda_pkgs_dir
-
-      - name: Build the maillard environment
-        run: bash scripts/ci/setup_env.sh
-
-      - name: QM tests
-        run: python -m pytest tests/qm -q
 
   # ---------------------------------------------------------------------------
   # Advisory: DOI liveness. Never blocks a PR.

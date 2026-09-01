@@ -192,21 +192,6 @@ run_generator_script() {
   fi
 }
 
-run_computational_gap_job() {
-  local script_name="$1"
-  local output_suffix="$2"
-  local extra_args="$3"
-  local target="${4:-}"
-  local prefix="${5:-}"
-  local command="python scripts/run_${script_name}.py ${extra_args}"
-
-  if [ -n "$target" ]; then
-    command="$command --target '$target' --output 'results/computational_gap_refinement/${target}_${output_suffix}_execution.json'"
-  fi
-
-  run_in_env "${prefix}${command}"
-}
-
 validation_figures_lane() {
   local commands=(
     "generate_family_lane_validation --output-dir results/validation"

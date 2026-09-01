@@ -1,6 +1,6 @@
 import pytest
 from src.recommend import Recommender, _temporal_accessibility
-from src.pathway_extractor import Species, ElementaryStep
+from src.chem_utils import Species, ElementaryStep
 
 
 def test_temporal_accessibility_behaves_saturating_not_exponential_collapse():

@@ -27,7 +27,6 @@ logger = get_logger(__name__)
 from src.conditions import ReactionConditions  # noqa: E402
 from src.smirks_engine import SmirksEngine, Species  # noqa: E402
 from src.pipeline import MaillardPipeline  # noqa: E402
-from src.xtb_screener import XTBScreener  # noqa: E402
 from src.recommend import _trunc  # noqa: E402
 from src import precursor_resolver  # noqa: E402
 from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
@@ -116,7 +115,6 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument("--minimize", type=str, default=DEFAULTS.default_minimize_tag, help="Inverse design off-flavour tag to minimize (default: beany)")
-    parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
     # NOTE (2026-08-27): `wheat_gluten` was advertised here but is NOT a member of
     # src.matrix_correction.ProteinType, so every run using it died with
     # "'wheat_gluten' is not a valid ProteinType" the moment the matrix layer
@@ -267,7 +265,6 @@ def _report_inputs_for_inverse_design(
         "time_minutes": winning_formulation.get("time_minutes", args.time_minutes),
         "protein_type": winning_formulation.get("protein_type", args.protein_type),
         "catalyst": winning_formulation.get("catalyst", args.catalyst),
-        "xtb": bool(args.xtb),
     }
     if ignored_arguments:
         payload["ignored_cli_arguments"] = ", ".join(sorted(ignored_arguments))
@@ -303,7 +300,6 @@ def _report_inputs_for_forward_mode(
         "sterilization_time_minutes": formulation.get("sterilization_time_minutes"),
         "barrel_zone_temperatures": formulation.get("barrel_zone_temperatures"),
         "barrel_zone_time_fractions": formulation.get("barrel_zone_time_fractions"),
-        "xtb": bool(args.xtb),
     }
     return {key: value for key, value in payload.items() if value is not None}
 
@@ -553,7 +549,6 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
     print("\n" + "═"*85)
     print(" ℹ️  KNOWN LIMITATIONS:")
     print("    - FAST mode barrier estimates are purely qualitative heuristics.")
-    print("    - Use --xtb for valid semi-empirical calculations.")
     print("═"*85 + "\n")
 
 

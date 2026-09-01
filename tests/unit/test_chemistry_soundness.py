@@ -21,7 +21,7 @@ from rdkit import Chem
 
 from src.conditions import ReactionConditions
 from src.curated_pathways import PATHWAYS
-from src.pathway_extractor import Species
+from src.chem_utils import Species
 from src.smirks_engine import (
     SmirksEngine,
     _DMHF_CANONICAL,

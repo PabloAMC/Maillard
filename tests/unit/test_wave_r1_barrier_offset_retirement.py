@@ -46,7 +46,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import src.barrier_constants as barrier_constants
-from src.refinement_campaign import RETIREMENT_NOTE
 
 PATCH_FILE = ROOT / "data" / "lit" / "refinement_surrogate_patches.json"
 
@@ -97,9 +96,7 @@ def test_accepted_offsets_in_the_tracked_patch_file_is_empty():
         "every shipped prediction in this working tree is running on barriers the "
         "documented table does not contain. This is the 2026-08-28 defect returning.\n"
         f"  found: {accepted}\n"
-        "If a regeneration pass put it there, the auto-acceptance in "
-        "src/refinement_campaign.build_refinement_impact_artifact has been re-enabled; "
-        "re-read the retirement note in the patch file before changing anything. "
+        "If a regeneration pass put it there, re-read the retirement note in the patch file before changing anything. "
         "Offsets may only ever be applied through an EXPLICIT, DECLARED fit record that "
         "scripts/ci/fit_target_gate.py can see, with the fitted rows removed from scored "
         "evidence -- never by a search that optimises the evaluation panel."
@@ -109,25 +106,21 @@ def test_accepted_offsets_in_the_tracked_patch_file_is_empty():
     )
 
 
-def test_the_retirement_note_survives_a_regeneration_pass():
-    """The note lives in code, so overwriting the file cannot erase the explanation.
+def test_the_retirement_note_keeps_the_provenance_of_what_was_retired():
+    """The tracked patch file must keep the record of the nine retired offsets.
 
-    `generate_refinement_governance.py` ends with a wholesale
-    `patch_path.write_text(json.dumps(impact_payload["patch"]))`, so anything hand-written
-    into the JSON lasts exactly until the next regeneration. The note that explains why
-    the mechanism was retired is the one thing that must not be silently erasable, so it
-    is emitted from `src.refinement_campaign.RETIREMENT_NOTE`. This test fails if the file
-    and the constant drift apart -- i.e. if someone regenerates from code that no longer
-    carries the note, or hand-edits the note out of the file.
+    Until the 2026-08-30 QM/DFT prune the note was also emitted from
+    `src.refinement_campaign.RETIREMENT_NOTE`; that module and the generator that could
+    overwrite the file are gone, so the file itself is now the only copy and this test
+    guards it directly.
     """
     payload = json.loads(PATCH_FILE.read_text(encoding="utf-8"))
     note = payload.get("retirement_note") or {}
 
-    assert note.get("date") == RETIREMENT_NOTE["date"]
+    assert note.get("date") == "2026-08-28"
     assert note.get("retired_offsets_kept_for_provenance") == RETIRED_OFFSETS, (
         "the provenance record of what was retired has been altered or lost"
     )
-    assert RETIREMENT_NOTE["retired_offsets_kept_for_provenance"] == RETIRED_OFFSETS
 
 
 @pytest.mark.parametrize("family", sorted(barrier_constants.FAST_BARRIERS))

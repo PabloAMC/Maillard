@@ -5,7 +5,7 @@ import pytest
 from src.pipeline import FormulationResult, MaillardPipeline
 from src.projection_utils import build_projection_rows
 from src.smirks_engine import ReactionConditions, Species
-from src.pathway_extractor import Species as OutputSpecies
+from src.chem_utils import Species as OutputSpecies
 from src.recommend import _apply_output_projection, _canon
 
 
