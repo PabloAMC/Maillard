@@ -18,6 +18,7 @@ from typing import List, Dict, Set, Optional, Any, Tuple
 from typing import Mapping
 
 from src import data_paths
+from src import data_access
 
 from src.logger import get_logger
 logger = get_logger(__name__)
@@ -71,10 +72,7 @@ def _normalize_chemical_name(name: str) -> str:
 
 
 def _load_henry_lookup() -> Dict[str, Dict[str, Any]]:
-    if not _HENRY_CONSTANTS_PATH.exists():
-        return {}
-    with open(_HENRY_CONSTANTS_PATH, "r", encoding="utf-8") as handle:
-        raw = yaml.safe_load(handle) or {}
+    raw = data_access.load_yaml(_HENRY_CONSTANTS_PATH) or {}
     constants = raw.get("constants", [])
     lookup: Dict[str, Dict[str, Any]] = {}
     for entry in constants:
@@ -156,16 +154,20 @@ def _integrate_arrhenius(barrier_kcal: float,
     return 1.0 - np.exp(-integral_k_dt)
 
 def _load_ramp(ramp_path: str) -> List[Tuple[float, float]]:
-    """Load a temperature ramp from CSV (time_min, temp_c)."""
-    try:
-        df = pd.read_csv(ramp_path)
-        # Standard schema: 'time' in minutes, 'temp' in Celsius
-        if 'time' not in df.columns or 'temp' not in df.columns:
-            return []
-        return list(zip(df['time'], df['temp'] + 273.15))
-    except Exception as e:
-        logger.warning(f"Failed to load ramp {ramp_path}: {e}")
-        return []
+    """Load a temperature ramp from CSV (columns ``time`` in minutes, ``temp`` in Celsius).
+
+    Raises instead of degrading: until 2026-09-01 a missing or malformed ramp file was
+    logged as a warning and the run silently continued isothermally.
+    """
+    path = Path(ramp_path)
+    if not path.exists():
+        raise FileNotFoundError(f"temperature ramp file not found: {ramp_path}")
+    df = pd.read_csv(path)
+    if 'time' not in df.columns or 'temp' not in df.columns:
+        raise ValueError(
+            f"temperature ramp {ramp_path} must have 'time' and 'temp' columns; found {list(df.columns)}"
+        )
+    return list(zip(df['time'], df['temp'] + 273.15))
 
 
 def _mw_from_smiles(smiles: str) -> float:
@@ -997,11 +999,7 @@ class Recommender:
         
         
     def _load_yaml_db(self, filename: str) -> dict:
-        path = data_paths.SPECIES_DIR / filename
-        if not path.exists():
-            return {}
-        with open(path, "r") as f:
-            data = yaml.safe_load(f)
+        data = data_access.load_yaml(data_paths.SPECIES_DIR / filename) or {}
         return {item["name"]: item for item in data.get("compounds", [])}
 
     def _load_toxic_markers(self) -> dict:

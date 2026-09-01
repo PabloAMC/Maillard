@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence, Set
 
 from src import data_paths
+from src import data_access
 
 RUNTIME_LANE_METADATA = {
     "process_state_calibration": {
@@ -220,9 +221,8 @@ CURATED_RUNTIME_BATCHES = [
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    # Strict since 2026-09-01 (used to return {} for a missing registry).
+    return data_access.load_json(path)
 
 
 def _derive_slr_families(files: List[str]) -> List[str]:

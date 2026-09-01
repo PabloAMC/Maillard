@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src import data_paths
+from src import data_access
 from src.family_ingestion_plan import load_family_ingestion_plan
 
 
@@ -22,8 +23,7 @@ _CANONICAL_FAMILY_ALIASES = {
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return data_access.load_json(path)
 
 
 _FAMILY_PLAN = load_family_ingestion_plan()

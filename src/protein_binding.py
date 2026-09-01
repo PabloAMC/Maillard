@@ -82,6 +82,7 @@ from typing import Any, Dict, Iterator, Mapping, Optional
 import yaml
 
 from src import data_paths
+from src import data_access
 
 BINDING_CONSTANTS_PATH = data_paths.BINDING_CONSTANTS
 
@@ -151,11 +152,7 @@ _CACHE: Dict[str, Any] = {}
 def load_binding_constants() -> Dict[str, Any]:
     """Parsed ``data/lit/binding_constants.yml`` (cached)."""
     if "payload" not in _CACHE:
-        if not BINDING_CONSTANTS_PATH.exists():
-            _CACHE["payload"] = {}
-        else:
-            with open(BINDING_CONSTANTS_PATH, "r", encoding="utf-8") as handle:
-                _CACHE["payload"] = yaml.safe_load(handle) or {}
+        _CACHE["payload"] = data_access.load_yaml(BINDING_CONSTANTS_PATH) or {}
     return _CACHE["payload"]
 
 

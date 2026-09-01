@@ -14,6 +14,7 @@ from src.matrix_correction import ProteinType, resolve_compound_matrix_retention
 from src.headspace import HeadspaceModel  # noqa: E402
 from src.text_utils import normalize_compound_name
 from src import data_paths
+from src import data_access
 
 
 logger = logging.getLogger(__name__)
@@ -109,11 +110,9 @@ class SensoryDatabase:
         files = ["desirable_targets.yml", "off_flavour_targets.yml", "toxic_markers.yml"]
         for fname in files:
             fpath = self.data_dir / fname
-            if not fpath.exists():
-                continue
-            
-            with open(fpath, "r") as f:
-                data = yaml.safe_load(f)
+            # Strict since 2026-09-01: a missing species file used to be skipped silently.
+            data = data_access.load_yaml(fpath) or {}
+            if data:
                 for c in data.get("compounds", []):
                     name = c.get("name")
                     # Convert ug/kg (ppb) to ppm

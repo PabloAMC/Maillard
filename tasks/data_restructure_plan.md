@@ -358,34 +358,25 @@ Do this **before** any renames inside `data/lit`, so later moves are one-line ed
 - [x] `src/__init__.py` re-exports are lazy (PEP 562): `import src.x` no longer imports the pipeline and reads 11 files.
 - [x] `src/data_access.py`: `load_json` / `load_yaml` / `load_mapping` raise `DataFileError` on missing/malformed,
       mtime-keyed cache, `missing_ok=True` returns `None` (never `{}`), `clear_cache()`. Not adopted yet (2b).
-- [ ] 2a (running, five parallel agents): migrate ~110 hard-coded path sites in `src/` and `scripts/` onto `data_paths`;
-      CWD-relative defaults in `headspace.py` / `sensory.py` removed; `matrix_calibration_offsets.json` feedback loop
-      routed to `results/calibration/`. Tests with CWD-relative paths fixed by hand (`test_wave_s1`, `test_wave_p`,
-      `test_regression`, `test_temporal_fast` — the last one pointed at a nonexistent ramp CSV and silently tested
-      the non-ramp path).
-- [ ] 2b: adopt `data_access` in the loaders that return `{}` on a missing file (`literature_runtime._load_json_payload`,
-      `barrier_constants._load_dft_anchor_metadata` / `_load_refinement_surrogate_offsets` / `get_arrhenius_params`,
-      `recommend._load_henry_lookup` / `_load_ramp`, `lipid_oxidation._load_calibration`, `protein_binding.load_binding_constants`,
-      `headspace.HeadspaceModel._load_constants`, the `_load_json` copies in `literature_family_registry`, `literature_learning_loop`,
-      `literature_intake_registry`, `deep_research_runtime_queue`, `doe_generator`, `structural_unlock_triage`,
-      `extrusion_benchmark_landing`, and `curated_pathways._wire_computational_priors`); collapse the five
-      `data/benchmarks/{id}.json` builders onto `benchmark_path`; keep the mocked-registry `RuntimeWarning`, emitted once.
-- [ ] 2c: defer the 11 import-time loads to first call; move `deep_research_backlog.json` and `slr_incorporation_matrix.json`
-      to `results/literature/` now that every reader goes through one constant.
-- [ ] `src/data_paths.py`: `DATA_ROOT` (env `MAILLARD_DATA_ROOT` override, default repo-relative),
-      one named constant per curated file/dir. `scripts/` and tests import from it too.
-- [ ] `src/data_access.py`: `load_json(path)`, `load_yaml(path)` that **raise** `DataFileMissing`
-      with the named constant; `@lru_cache`; explicit `reload()` for tests. Collapse the 9 loaders of
-      `benchmark_intake_registry.json`, 10 of `computational_priors.json`, 8 of `process_state_calibrations.json`,
-      3 of the species YAMLs, 5 path builders for `data/benchmarks/{id}.json`, and the two
-      `protein_source_registry` / `henry_constants` readers into one function each with one alias policy.
-- [ ] Remove CWD-relative defaults (`headspace.py:59`, `sensory.py:92`, `calibrate_barriers.py:263`, `test_regression.py:16`).
-- [ ] Defer the 11 import-time loads (7 modules) to first call. Keep the `MOCKED VALUES`
-      RuntimeWarning, emitted once.
-- [ ] `reporting._build_scientific_surface` and the four payload builders that embed `data/...` strings
-      read them from `data_paths`; update the four tests that assert them.
-- [ ] Leave the env-var overrides (`BARRIER_OFFSETS`, `MAILLARD_MATRIX_*`) but route them through
-      `data_access` so precedence is visible in one place.
+- [x] 2a (commit `97069f1`): ~110 hard-coded path sites in `src/` and `scripts/` migrated onto `data_paths`; 41 private
+      `ROOT` definitions removed; CWD-relative defaults in `headspace.py` / `sensory.py` removed (probe: `HeadspaceModel()`
+      from `/tmp` now loads 31 constants, previously 0); `matrix_calibration_offsets.json` feedback loop routed to
+      `results/calibration/`; four tests with CWD-relative paths fixed (`test_temporal_fast` had pointed at a nonexistent
+      ramp CSV and silently tested the non-ramp path); latent `NameError` in `report_html.residual_section` fixed.
+      The three stdlib-only CI gates keep literal globs by design.
+- [x] 2b: `data_access` adopted by every curated-file loader — `literature_runtime`, `matrix_correction`, `barrier_constants`
+      (`_load_dft_anchor_metadata` no longer substitutes the inline fallback table; `get_arrhenius_params` no longer returns
+      `None` for every family when the YAML is absent), `recommend` (`_load_henry_lookup`, `_load_yaml_db`; `_load_ramp` now
+      raises on a missing/malformed user ramp instead of logging and running isothermally), `lipid_oxidation`,
+      `protein_binding`, `headspace`, `literature_family_registry`, the six `_load_json` copies, `curated_pathways`,
+      `safety`, `matrix_prior_registry`, `matrix_targets`, `benchmark_validation.load_benchmark` (now cached),
+      `precursor_resolver`, `experiment_value`, `sensory`, `pipeline`. `DataFileMissing` subclasses `FileNotFoundError`
+      and `DataFileMalformed` subclasses `ValueError`, so existing handlers keep working.
+- [x] 2c decided AGAINST for now: (i) the 17 remaining import-time loads cost one cached parse each and nothing outside
+      their modules imports the globals — making them lazy means rewriting internal references in `literature_runtime`
+      (4.5k LoC), which belongs with the S14 monolith decomposition; (ii) moving `deep_research_backlog.json` /
+      `slr_incorporation_matrix.json` to `results/` would silently drop 97 `no_verifiable_source` records and 331 DOI
+      fields out of the census and the citation gate — do it in Phase 4 with an explicit re-pin, not as a file move.
 - **Exit:** `grep -rn '"data/' src scripts | grep -v data_paths.py` is empty; `pytest` from a
       non-root CWD passes; model outputs byte-identical.
 

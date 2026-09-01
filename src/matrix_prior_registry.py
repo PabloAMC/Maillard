@@ -4,13 +4,13 @@ import json
 from typing import Any, Dict, List, Optional
 
 from src import data_paths
+from src import data_access
 
 _PRIORS_PATH = data_paths.COMPUTATIONAL_PRIORS
 
 
 def _load_priors() -> dict[str, Any]:
-    with open(_PRIORS_PATH, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return data_access.load_json(_PRIORS_PATH)
 
 
 COMPUTATIONAL_PRIORS_PAYLOAD = _load_priors()

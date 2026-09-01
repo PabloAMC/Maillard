@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Sequence
 
 from src import data_paths
+from src import data_access
 from src.extrusion import (
     SME_WINDOW_REFERENCE_KJ_PER_KG,
     build_extrusion_process_profile,
@@ -141,10 +142,8 @@ def export_doe_requests(gap_registry_path: str, output_path: str):
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    # Strict since 2026-09-01 (used to return {} for a missing registry).
+    return data_access.load_json(path)
 
 
 def _under_root(root: Path, path: Path) -> Path:

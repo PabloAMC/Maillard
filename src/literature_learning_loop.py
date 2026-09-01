@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping
 
 from src import data_paths
+from src import data_access
 from src.family_validation_overview import build_family_validation_overview_artifact
 from src.literature_family_registry import build_family_payload_coverage_artifact
 from src.literature_family_registry import iter_matrix_decision_panel_entries
@@ -26,10 +27,8 @@ PROMOTION_POSTURE_WEIGHTS = {
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    # Strict since 2026-09-01 (used to return {} for a missing registry).
+    return data_access.load_json(path)
 
 
 def _to_repo_relative(path: Path, root: Path = data_paths.REPO_ROOT) -> str:

@@ -35,11 +35,11 @@ from src.matrix_prior_registry import (
 )
 from src.literature_runtime import describe_retention_runtime
 from src import data_paths
+from src import data_access
 
 
 def _load_json_payload(payload_path: Path) -> dict:
-    with open(payload_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return data_access.load_json(payload_path)
 
 
 PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload(data_paths.PROCESS_STATE_CALIBRATIONS)

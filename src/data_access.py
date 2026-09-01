@@ -34,6 +34,14 @@ class DataFileError(RuntimeError):
     """A curated data file is missing or cannot be parsed."""
 
 
+class DataFileMissing(DataFileError, FileNotFoundError):
+    """The file is not there. Also a ``FileNotFoundError`` so older handlers still catch it."""
+
+
+class DataFileMalformed(DataFileError, ValueError):
+    """The file exists but does not parse. Also a ``ValueError``."""
+
+
 _CACHE: Dict[Tuple[str, str], Tuple[float, Any]] = {}
 
 
@@ -52,7 +60,7 @@ def _read(path: Path | str, kind: str, *, missing_ok: bool) -> Optional[Any]:
     except FileNotFoundError:
         if missing_ok:
             return None
-        raise DataFileError(
+        raise DataFileMissing(
             f"curated data file is missing: {data_paths.rel(resolved)} "
             f"(resolved to {resolved}). Curated inputs are read-only and must be "
             f"present in the checkout; see src/data_paths.py."
@@ -64,7 +72,7 @@ def _read(path: Path | str, kind: str, *, missing_ok: bool) -> Optional[Any]:
         text = resolved.read_text(encoding="utf-8")
         payload = json.loads(text) if kind == "json" else yaml.safe_load(text)
     except (OSError, ValueError, yaml.YAMLError) as exc:
-        raise DataFileError(
+        raise DataFileMalformed(
             f"could not parse {data_paths.rel(resolved)}: {type(exc).__name__}: {exc}"
         ) from exc
     _CACHE[key] = (mtime, payload)

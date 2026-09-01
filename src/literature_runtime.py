@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence
 
 from src import data_paths
+from src import data_access
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.kokumi_scoring import build_kokumi_support_profile
 from src.literature_family_registry import (
@@ -33,10 +34,9 @@ from src.safety import (
 
 
 def _load_json_payload(payload_path: Path) -> dict[str, Any]:
-    if not payload_path.exists():
-        return {}
-    with open(payload_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    # Strict since 2026-09-01: a missing registry used to load as {} and the runtime
+    # carried on without it.
+    return data_access.load_json(payload_path)
 
 
 FLAVOR_REFERENCE_PAYLOADS = _load_json_payload(data_paths.FLAVOR_REFERENCE_PAYLOADS)
@@ -44,10 +44,7 @@ RETENTION_REFERENCE_PAYLOADS = _load_json_payload(data_paths.RETENTION_REFERENCE
 COMPUTATIONAL_PRIORS_PAYLOAD = _load_json_payload(data_paths.COMPUTATIONAL_PRIORS)
 PROCESS_STATE_CALIBRATIONS_PAYLOAD = _load_json_payload(data_paths.PROCESS_STATE_CALIBRATIONS)
 PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload(data_paths.PROTEIN_SOURCE_REGISTRY)
-try:
-    FAMILY_INGESTION_PLAN_PAYLOAD = load_family_ingestion_plan()
-except FileNotFoundError:
-    FAMILY_INGESTION_PLAN_PAYLOAD = {}
+FAMILY_INGESTION_PLAN_PAYLOAD = load_family_ingestion_plan()
 
 
 _FAMILY_ENTRIES_BY_SLR = {

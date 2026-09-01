@@ -32,6 +32,7 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 import yaml
 
 from src import data_paths
+from src import data_access
 
 PREDICTION_UNCERTAINTY_PATH = data_paths.PREDICTION_UNCERTAINTY
 DESIRABLE_TARGETS_PATH = data_paths.DESIRABLE_TARGETS
@@ -161,12 +162,8 @@ def load_compound_specs(
     """
     specs: Dict[str, CompoundSpec] = {}
     for path in paths:
-        if not path.exists():
-            continue
-        try:
-            data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        except yaml.YAMLError:
-            continue
+        # Strict since 2026-09-01: a missing or malformed species file used to be skipped.
+        data = data_access.load_yaml(path) or {}
         for entry in data.get("compounds", []) or []:
             name = str(entry.get("name") or "").strip()
             if not name:

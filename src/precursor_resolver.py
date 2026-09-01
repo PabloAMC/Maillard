@@ -10,6 +10,7 @@ from typing import List, Dict, Optional
 
 from src.chem_utils import Species  # noqa: E402
 from src import data_paths  # noqa: E402
+from src import data_access
 
 _PRECURSORS_PATH = data_paths.PRECURSORS
 
@@ -23,8 +24,7 @@ def _load_precursors() -> Dict[str, dict]:
     if _LOOKUP is not None:
         return _LOOKUP
 
-    with open(_PRECURSORS_PATH) as f:
-        data = yaml.safe_load(f)
+    data = data_access.load_yaml(_PRECURSORS_PATH)
 
     _LOOKUP = {}
     # 2026-08-28 (Wave X): `maillard_intermediates` added.  The tuple below is the

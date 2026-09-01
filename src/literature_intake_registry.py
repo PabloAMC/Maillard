@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src import data_paths
+from src import data_access
 
 LEGACY_STATUS_TO_TRIAGE_STATUS = {
     "ready_for_reference_encoding": "ready_reference",
@@ -43,10 +44,8 @@ ARTIFACT_TYPE_TO_TEMPLATE_KIND = {
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    # Strict since 2026-09-01 (used to return {} for a missing registry).
+    return data_access.load_json(path)
 
 
 def _under_root(root: Path, path: Path) -> Path:

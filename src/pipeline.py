@@ -20,6 +20,7 @@ from src.literature_runtime import build_family_upstream_contract, build_flavor_
 from src.pre_processor import PreProcessor
 from src.projection_metadata import ProjectionMetadataMap
 from src import data_paths
+from src import data_access
 
 # Locate data files
 GRID_FILE = data_paths.FORMULATION_GRID
@@ -238,11 +239,9 @@ class MaillardPipeline:
         self.last_route_traces: Dict[str, Dict[str, Any]] = {}
 
     def _load_grid(self) -> List[Dict]:
-        if not GRID_FILE.exists():
-            return []
-        with open(GRID_FILE, "r") as f:
-            data = yaml.safe_load(f)
-            return data.get("formulations", [])
+        # Strict since 2026-09-01: a missing grid used to load as an empty grid.
+        data = data_access.load_yaml(GRID_FILE) or {}
+        return data.get("formulations", [])
             
     def grid_names(self) -> List[str]:
         """Names of every formulation in the built-in grid, in file order."""
@@ -284,11 +283,8 @@ class MaillardPipeline:
         )
 
     def _load_tags(self) -> Dict[str, List[str]]:
-        if not TAGS_FILE.exists():
-            return {}
-        with open(TAGS_FILE, "r") as f:
-            data = yaml.safe_load(f)
-            return data.get("tags", {})
+        data = data_access.load_yaml(TAGS_FILE) or {}
+        return data.get("tags", {})
             
     def _score_targets(self, targets_found: List[dict], target_list: List[str], conditions: ReactionConditions) -> Tuple[float, List[str]]:
         """

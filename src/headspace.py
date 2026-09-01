@@ -13,6 +13,7 @@ from src.logger import get_logger
 logger = get_logger(__name__)
 
 from src import data_paths
+from src import data_access
 from src.matrix_calibration_registry import (
     determine_matrix_process_state,
     get_matrix_calibration_record,
@@ -66,11 +67,10 @@ class HeadspaceModel:
         self.R = 0.008314  # kJ/(mol*K)
 
     def _load_constants(self) -> Dict[str, Dict]:
-        if not self.constants_path.exists():
-            return {}
-        with open(self.constants_path, "r") as f:
-            raw = yaml.safe_load(f)
-            return {c["name"]: c for c in raw.get("constants", [])}
+        # Strict since 2026-09-01: a missing file used to load as {} and every Kaw fell
+        # back to the hard-coded default without a word.
+        raw = data_access.load_yaml(self.constants_path) or {}
+        return {c["name"]: c for c in raw.get("constants", [])}
 
     def get_kaw_at_temp(self, name: str, temp_k: float) -> float:
         """

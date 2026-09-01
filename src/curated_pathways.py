@@ -288,16 +288,11 @@ def _wire_computational_priors():
 
     from src import data_paths
 
-    # 1. Load computational priors
-    priors_path = data_paths.COMPUTATIONAL_PRIORS
-    if not priors_path.exists():
-        return
+    # 1. Load computational priors (strict since 2026-09-01: an unreadable file used
+    # to leave every prior silently unwired).
+    from src import data_access
 
-    try:
-        with open(priors_path, "r", encoding="utf-8") as f:
-            priors_data = json.load(f)
-    except Exception:
-        return
+    priors_data = data_access.load_json(data_paths.COMPUTATIONAL_PRIORS)
 
     # Helper to calculate rate constant k at 150C (423.15 K) using Eyring equation
     # k = (kB * T / h) * exp(-Delta G‡ / RT)

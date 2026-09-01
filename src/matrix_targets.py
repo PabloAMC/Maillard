@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from src import data_paths
+from src import data_access
 
 EVIDENCE_STATES = {
     "externally_benchmarked",
@@ -67,8 +68,7 @@ from src.text_utils import normalize_compound_name as _normalize_name
 
 
 def _load_panel() -> tuple[Dict[str, TargetCompound], Dict[str, str]]:
-    with open(PANEL_PATH, "r", encoding="utf-8") as handle:
-        payload = json.load(handle)
+    payload = data_access.load_json(PANEL_PATH)
     entries = payload.get("entries", {})
     target_class_metadata = payload.get("target_class_family_metadata", {})
     panel: Dict[str, TargetCompound] = {}

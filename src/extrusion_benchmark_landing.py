@@ -7,6 +7,7 @@ from typing import Any, Dict, Iterable, Mapping
 import yaml
 
 from src import data_paths
+from src import data_access
 from src.doe_generator import build_extrusion_benchmark_protocol
 
 
@@ -20,10 +21,8 @@ def _under_root(root: Path, default: Path) -> Path:
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    # Strict since 2026-09-01 (used to return {} for a missing registry).
+    return data_access.load_json(path)
 
 
 def _find_row(rows: Iterable[Mapping[str, Any]], key: str, value: str) -> Dict[str, Any]:

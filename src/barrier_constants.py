@@ -116,6 +116,7 @@ import math
 from typing import Any, Dict, Tuple, Optional, Sequence
 
 from src import data_paths
+from src import data_access
 
 # Locate data files
 ARRHENIUS_FILE = data_paths.ARRHENIUS_PARAMS
@@ -524,12 +525,10 @@ def _fallback_dft_anchor_metadata() -> Dict[str, Dict[str, Any]]:
 
 
 def _load_dft_anchor_metadata() -> Dict[str, Dict[str, Any]]:
+    # Strict since 2026-09-01: an unreadable priors file used to substitute an inline
+    # fallback table that then looked data-derived.
     fallback = _fallback_dft_anchor_metadata()
-    try:
-        with open(COMPUTATIONAL_PRIORS_FILE, "r", encoding="utf-8") as handle:
-            payload = json.load(handle)
-    except Exception:
-        return fallback
+    payload = data_access.load_json(COMPUTATIONAL_PRIORS_FILE)
 
     entries = {
         str(row.get("reaction_key", "")).strip(): row
@@ -837,17 +836,15 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float, str, float
     """
     global _ARRHENIUS_CACHE
     if _ARRHENIUS_CACHE is None:
-        if ARRHENIUS_FILE.exists():
-            with open(ARRHENIUS_FILE, "r") as f:
-                data = yaml.safe_load(f)
-                _ARRHENIUS_CACHE = data.get("arrhenius_data", {})
-                # Warm cache with TST defaults for missing A values
-                for k, v in _ARRHENIUS_CACHE.items():
-                    if v.get("A_value") is None or (isinstance(v["A_value"], float) and math.isnan(v["A_value"])):
-                        v["A_value"] = 6.25e12 # TST @ 150C
-                        v["source_quality"] = "estimated_tst"
-        else:
-            _ARRHENIUS_CACHE = {}
+        # Strict since 2026-09-01: a missing YAML used to leave the cache empty and every
+        # family silently returned None.
+        data = data_access.load_yaml(ARRHENIUS_FILE) or {}
+        _ARRHENIUS_CACHE = {k: dict(v) for k, v in data.get("arrhenius_data", {}).items()}
+        # Warm cache with TST defaults for missing A values
+        for k, v in _ARRHENIUS_CACHE.items():
+            if v.get("A_value") is None or (isinstance(v["A_value"], float) and math.isnan(v["A_value"])):
+                v["A_value"] = 6.25e12 # TST @ 150C
+                v["source_quality"] = "estimated_tst"
             
     if not family:
         return None

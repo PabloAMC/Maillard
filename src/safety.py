@@ -43,6 +43,7 @@ from typing import Any, Dict, List, Tuple, Optional
 
 from src.extrusion import normalize_moisture_regime
 from src import data_paths
+from src import data_access
 
 
 SAFETY_REFERENCE_PAYLOAD_PATH = data_paths.SAFETY_REFERENCE_PAYLOADS
@@ -87,8 +88,7 @@ def mg_per_100g_protein_to_ppb(value: float, protein_fraction: float = FUROSINE_
 
 
 def _load_safety_reference_payloads() -> dict:
-    with open(SAFETY_REFERENCE_PAYLOAD_PATH, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return data_access.load_json(SAFETY_REFERENCE_PAYLOAD_PATH)
 
 
 SAFETY_REFERENCE_PAYLOADS = _load_safety_reference_payloads()
