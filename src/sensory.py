@@ -14,6 +14,7 @@ from src.matrix_correction import ProteinType, resolve_compound_matrix_retention
 from src.headspace import HeadspaceModel  # noqa: E402
 from src.text_utils import normalize_compound_name
 from src import data_paths
+from src import compound_keys
 from src import data_access
 
 
@@ -52,36 +53,6 @@ def _token_match(text: Any, keyword: str) -> bool:
     pattern = r"(?<![a-z0-9])" + re.escape(needle) + r"(?![a-z0-9])"
     return re.search(pattern, haystack) is not None
 
-
-def _alias_candidates(name: str) -> List[str]:
-    """
-    Explicit aliases for a canonical species name.
-
-    Handles the repo's 'Common name (ABBREV)' convention, including nested parentheses:
-      '2-Furfurylthiol (FFT)'            -> ['2-Furfurylthiol', 'FFT']
-      'Methional (3-(methylthio)propanal)' -> ['Methional', '3-(methylthio)propanal']
-    These are *declared* aliases, not fuzzy prefixes: 'dimethylpyrazine' is deliberately
-    not an alias of anything, because it is ambiguous between 2,3- and 2,5-.
-    """
-    text = str(name).strip()
-    if not text.endswith(")"):
-        return []
-    depth = 0
-    open_idx = -1
-    for idx in range(len(text) - 1, -1, -1):
-        ch = text[idx]
-        if ch == ")":
-            depth += 1
-        elif ch == "(":
-            depth -= 1
-            if depth == 0:
-                open_idx = idx
-                break
-    if open_idx <= 0:
-        return []
-    head = text[:open_idx].strip()
-    inner = text[open_idx + 1:-1].strip()
-    return [a for a in (head, inner) if a]
 
 class SensoryDatabase:
     """
@@ -157,10 +128,10 @@ class SensoryDatabase:
         """
         Build the normalized name/alias -> entry index used by find_entry.
 
-        Aliases are declared, not guessed. An alias claimed by more than one compound is
-        dropped into `ambiguous_aliases` and never resolves, so a caller asking for
-        'dimethylpyrazine' gets None rather than whichever of 2,3- / 2,5- happened to be
-        first in dict order.
+        Aliases are declared in data/keys/compounds.yml, not guessed. 'dimethylpyrazine' and
+        'pyrazine' are spellings of the pyrazine FAMILY there, not of any species compound,
+        so they resolve to nothing here. An alias claimed by more than one compound is
+        dropped into `ambiguous_aliases` and never resolves.
         """
         claims: Dict[str, Set[str]] = {}
 
@@ -172,9 +143,13 @@ class SensoryDatabase:
 
         for name in self.compounds:
             claim(name, name)
-        for name in self.compounds:
-            for alias in _alias_candidates(name):
-                claim(alias, name)
+            # Declared spellings come from data/keys/compounds.yml (2026-09-02); a compound
+            # missing there is a registry bug, not something to guess around.
+            key = compound_keys.resolve(name)
+            if key is None:
+                raise ValueError(f"sensory database compound {name!r} is not in the compound registry")
+            for spelling in key.norms:
+                claims.setdefault(spelling, set()).add(name)
 
         for key, owners in claims.items():
             if len(owners) == 1:

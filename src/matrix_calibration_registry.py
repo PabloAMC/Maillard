@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Dict, Optional
 
 from src import data_paths
+from src import compound_keys
 
 _RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 
@@ -769,7 +770,10 @@ def _apply_observable_multiplier_to_record(record: MatrixCalibrationRecord) -> M
 
 
 def _normalize_compound(name: str) -> str:
-    return str(name).strip().lower()
+    """Compound identity for record matching: the registry id, or the lower-cased spelling
+    when the name is not in data/keys/compounds.yml (2026-09-02)."""
+    key = compound_keys.resolve(str(name))
+    return key.id if key else str(name).strip().lower()
 
 
 def _process_state_fallback_order(requested_state: str) -> tuple[str, ...]:

@@ -39,6 +39,7 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 import yaml
 
 from src import data_paths
+from src import compound_keys
 
 FLAVOR_REFERENCE_PATH = data_paths.FLAVOR_REFERENCE_PAYLOADS
 BENCHMARK_INTAKE_REGISTRY_PATH = data_paths.BENCHMARK_INTAKE_REGISTRY
@@ -63,13 +64,6 @@ _UNCALIBRATED_MATRIX_FOLD = math.exp(1.645 * _UNCALIBRATED_MATRIX_SIGMA)
 # Compound aliases used to detect overlap between flavor-anchor compound names
 # and the calibration panel compound names. Keep this list short and only
 # add entries that have been manually verified.
-_COMPOUND_ALIASES: Mapping[str, Tuple[str, ...]] = {
-    "2-methyl-3-furanthiol": ("mft", "2-methyl-3-furanthiol (mft)"),
-    "2-furfurylthiol": ("fft", "2-furfurylthiol (fft)", "furfuryl mercaptan"),
-    "bis(2-methyl-3-furyl) disulfide": ("mft disulfide", "bis(2-methyl-3-furyl) disulphide"),
-    "nε-(carboxymethyl)lysine (cml)": ("cml", "carboxymethyl lysine"),
-    "nε-(carboxyethyl)lysine (cel)": ("cel", "carboxyethyl lysine"),
-}
 
 # Registry-backed Lane A.2 synthesis specs. Each bundle becomes one intake YAML
 # plus one isolated benchmark JSON under data/benchmarks/external_validation/.
@@ -521,26 +515,17 @@ def _load_panel_compounds() -> Tuple[str, ...]:
 
 
 def _canonicalise_compound(name: str) -> str:
-    """Lowercase and apply known alias mapping so anchor compound
-    strings line up with panel compound strings."""
-
-    needle = name.strip().lower()
-    for canonical, aliases in _COMPOUND_ALIASES.items():
-        if needle == canonical:
-            return canonical
-        for alias in aliases:
-            if needle == alias.lower():
-                return canonical
-    return needle
+    """Registry id of the compound (data/keys/compounds.yml); the lower-cased spelling
+    when it resolves to nothing, so the row is still reported, never silently matched."""
+    key = compound_keys.resolve(name)
+    return key.id if key else name.strip().lower()
 
 
 def _compound_in_panel(canonical: str, panel: Iterable[str]) -> bool:
-    panel_norm = {p.strip().lower() for p in panel}
-    if canonical in panel_norm:
-        return True
-    # Allow contains-match for paren-suffixed panel names like
-    # ``2-methyl-3-furanthiol (mft)``.
-    return any(canonical in p for p in panel_norm)
+    # Exact identity only (2026-09-02): the contains-match that used to accept
+    # '2-methyl-3-furanthiol' inside '2-methyl-3-furanthiol (mft)' is what the registry
+    # aliases now encode explicitly.
+    return canonical in {_canonicalise_compound(p) for p in panel}
 
 
 def _load_flavor_anchor_lookup(

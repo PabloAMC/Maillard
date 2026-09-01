@@ -32,6 +32,7 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 import yaml
 
 from src import data_paths
+from src import compound_keys
 from src import data_access
 
 PREDICTION_UNCERTAINTY_PATH = data_paths.PREDICTION_UNCERTAINTY
@@ -128,37 +129,17 @@ class ExperimentCandidate:
 # Compound lookup
 # ---------------------------------------------------------------------------
 
-def _normalise(name: str) -> str:
-    """Lowercase + strip parenthetical aliases + collapse non-alnum to single
-    spaces. Examples:
-        '2-Methyl-3-furanthiol (MFT)' -> '2 methyl 3 furanthiol'
-        '2-furfurylthiol'             -> '2 furfurylthiol'
-    """
-    if not name:
-        return ""
-    # remove parenthetical aliases
-    stripped = re.sub(r"\([^)]*\)", " ", name)
-    stripped = stripped.lower()
-    stripped = re.sub(r"[^a-z0-9]+", " ", stripped).strip()
-    return stripped
-
-
-def _alias_keys(canonical: str) -> List[str]:
-    """All match keys for a compound: full canonical + each parenthetical token."""
-    keys = [_normalise(canonical)]
-    for token in re.findall(r"\(([^)]*)\)", canonical):
-        token_norm = _normalise(token)
-        if token_norm and token_norm not in keys:
-            keys.append(token_norm)
-    return keys
+# Compound identity comes from data/keys/compounds.yml via src.compound_keys (2026-09-02).
+# The private normaliser, parenthetical alias keys and the substring fallback that lived
+# here are gone: a spelling either resolves to one registry entry or it does not.
 
 
 def load_compound_specs(
     paths: Sequence[Path] = (DESIRABLE_TARGETS_PATH, OFF_FLAVOUR_TARGETS_PATH),
 ) -> Dict[str, CompoundSpec]:
-    """Return {normalised_alias: CompoundSpec}.
+    """Return {compound registry id: CompoundSpec}.
 
-    Multiple aliases (full name + parenthetical) point at the same spec.
+    Keyed by ``compound_keys`` id, so every spelling of a compound maps to one spec.
     """
     specs: Dict[str, CompoundSpec] = {}
     for path in paths:
@@ -177,25 +158,23 @@ def load_compound_specs(
                 ),
                 priority=entry.get("priority"),
             )
-            for alias in _alias_keys(name):
-                # First spec wins for each alias.
-                specs.setdefault(alias, spec)
+            key = compound_keys.resolve(name)
+            if key is None:
+                raise ValueError(
+                    f"{data_paths.rel(path)}: compound {name!r} is not in {data_paths.rel(data_paths.COMPOUND_REGISTRY)}"
+                )
+            # First spec wins for each compound.
+            specs.setdefault(key.id, spec)
     return specs
 
 
 def lookup_spec(
     compound_name: str, specs: Mapping[str, CompoundSpec]
 ) -> Optional[CompoundSpec]:
-    key = _normalise(compound_name)
-    if not key:
+    key = compound_keys.resolve(compound_name)
+    if key is None:
         return None
-    if key in specs:
-        return specs[key]
-    # token containment fallback for noisy names like "2-methyl-3-furanthiol-derived adduct"
-    for alias, spec in specs.items():
-        if alias and alias in key:
-            return spec
-    return None
+    return specs.get(key.id)
 
 
 # ---------------------------------------------------------------------------

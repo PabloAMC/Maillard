@@ -10,7 +10,6 @@ from src.experiment_value import (
     CompoundSpec,
     _decision_relevance,
     _envelope_miss_log10,
-    _normalise,
     _suggest_template,
     _voi_score,
     build_ranking_payload,
@@ -24,10 +23,13 @@ from src.experiment_value import (
 )
 
 
-def test_normalise_strips_aliases_and_lowercases():
-    assert _normalise("2-Methyl-3-furanthiol (MFT)") == "2 methyl 3 furanthiol"
-    assert _normalise("2-furfurylthiol") == "2 furfurylthiol"
-    assert _normalise("") == ""
+def test_compound_spellings_resolve_through_the_registry():
+    """2026-09-02: the private normaliser is gone; identity comes from data/keys/compounds.yml."""
+    from src import compound_keys
+
+    assert compound_keys.same_compound("2-Methyl-3-furanthiol (MFT)", "2-methyl-3-furanthiol")
+    assert compound_keys.same_compound("2-furfurylthiol", "FFT")
+    assert compound_keys.resolve("") is None
 
 
 def test_load_compound_specs_aliases_resolve():

@@ -9,9 +9,10 @@ Until 2026-09-01 five modules each kept their own alias table and normaliser
 (``benchmark_validation.BENCHMARK_NAME_ALIASES``, ``external_validation._COMPOUND_ALIASES``,
 ``experiment_value._alias_keys``, ``sensory.SensoryDatabase.alias_map``,
 ``matrix_calibration_registry._normalize_compound``), and the benchmark matcher fell
-through to a ``difflib`` similarity at ratio 0.75. This module is the one place a
-spelling becomes an identity. It is deliberately exact: no substring or similarity
-matching. Unknown spellings resolve to ``None``; callers decide what that means.
+through to a >=4-character token overlap and then a ``difflib`` similarity at ratio
+0.75. All five now resolve through this module (2026-09-02) and the fallbacks are gone.
+It is deliberately exact: no substring or similarity matching. Unknown spellings resolve
+to ``None``; callers decide what that means.
 """
 from __future__ import annotations
 

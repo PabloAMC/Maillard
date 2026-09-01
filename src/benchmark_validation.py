@@ -4,7 +4,6 @@ import json
 import math
 import re
 from collections import defaultdict
-from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
@@ -509,36 +508,25 @@ def get_matrix_only_target_snapshot_exclusions(
 
 
 def _best_prediction_match(target_name: str, predicted_ppb: Dict[str, float]) -> tuple[Optional[str], float, float]:
-    target_norm = _normalize_name(target_name)
-    target_tokens = {token for token in _tokenize_name(target_name) if len(token) >= 4}
-    target_aliases = compound_keys.match_norms(target_name)
-    best_name: Optional[str] = None
-    best_score = -1.0
+    """Predicted row for a measured compound, by IDENTITY only.
 
+    A candidate matches when its spelling and the target's resolve to the same
+    data/keys/compounds.yml entry (class entries such as 'pyrazine' match every member).
+    Until 2026-09-02 this fell through to a >=4-character token overlap and then a
+    difflib similarity at ratio 0.75, so a compound the registry did not know could be
+    scored against the nearest-looking name. It now returns no match instead, and the
+    panel's matched-row count (pinned in tests/scientific/test_honest_headline_guards.py)
+    is the proof that no scored row depended on the fallback.
+    """
+    target_norm = _normalize_name(target_name)
+    if not target_norm:
+        return None, 0.0, 0.0
+    target_aliases = compound_keys.match_norms(target_name)
     for candidate_name in predicted_ppb:
         candidate_norm = _normalize_name(candidate_name)
-        if not candidate_norm:
-            continue
-        if len(candidate_norm) < 4:
-            continue
-
-        candidate_tokens = {token for token in _tokenize_name(candidate_name) if len(token) >= 4}
-
-        if candidate_norm == target_norm or candidate_norm in target_aliases:
-            score = 1.0
-        elif target_tokens and candidate_tokens and target_tokens.intersection(candidate_tokens):
-            overlap = len(target_tokens.intersection(candidate_tokens))
-            score = overlap / max(len(target_tokens), len(candidate_tokens))
-        else:
-            score = SequenceMatcher(None, target_norm, candidate_norm).ratio()
-
-        if score > best_score:
-            best_score = score
-            best_name = candidate_name
-
-    if best_score < 0.75:
-        return None, 0.0, 0.0
-    return best_name, predicted_ppb[best_name], best_score
+        if candidate_norm and (candidate_norm == target_norm or candidate_norm in target_aliases):
+            return candidate_name, predicted_ppb[candidate_name], 1.0
+    return None, 0.0, 0.0
 
 
 def _pearson(values_a: Iterable[float], values_b: Iterable[float]) -> Optional[float]:

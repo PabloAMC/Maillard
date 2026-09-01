@@ -503,7 +503,38 @@ value, ~zero risk), Phase 3 compounds + papers only, Phase 4 the benchmark schem
 - [x] Ledgers moved to `results/literature/` (tracked); citation gate, census and the paper registry scan them there.
 - [x] `data/Gemini_Deep_Research` → `data/research_corpus`; the citation gate's digest regex catches both spellings.
 - [x] Artifacts regenerated (MC panel, summaries, matrix artifacts, figures, ranking, model card).
-- [ ] Keys 3c/3d (alias tables, fuzzy fallback, closed enums) — next.
+- [x] 3d: the five alias sites resolve through `compound_keys`; the token-overlap and `difflib` fallbacks in the
+      benchmark matcher and the substring fallback in `experiment_value.lookup_spec` are gone. The 35-row MC pin held,
+      proving no scored row depended on them.
+- [ ] 3c: closed enums for chemistry / matrix families and reaction keys — next.
+
+### Product decision (owner, 2026-09-02)
+One tool, one engine. Retire the legacy SMIRKS/Hammond path (`src/smirks_engine.py`, `src/reaction_templates.py`
+enumeration, `FAST_BARRIERS`, the fixed volatile-budget renormalisation) and keep the kinetic core as the single
+source of concentrations; ranking/directional output by default, absolute concentrations only after the user
+calibrates on their own data (`maillard ingest`). Architecture follow-ups are listed in the session record.
+
+### Product roadmap (owner-approved 2026-09-02; item 6 reserved)
+1. **One pipeline with a typed contract.** formulation + process recipe → concentrations (kinetic core) → matrix and
+   headspace physics → observables → sensory axes → ranking + next experiment, as one callable with typed input/output
+   and a stable JSON result; CLI, HTML report and notebooks consume it. Retire the legacy SMIRKS/Hammond engine and the
+   volatile-budget renormalisation as part of this step.
+2. **Process as a trajectory.** A first-class process-recipe schema (time, temperature, moisture, pH along the path;
+   extrusion zones, frying, retorting) replacing scalar temp/time; Cantera becomes the one integrator if a parity test
+   against the current propagator passes.
+3. **Matrix by measurable quantities.** Protein source/grade, moisture and a_w, pH, lipid content, free amino-acid pool,
+   thiol content; cited defaults labelled as defaults. No lookup multipliers.
+4. **Calibrate-on-your-data as the core loop.** `maillard ingest` fits the few matrix parameters on the user's GC-MS table
+   with the hold-out firewall kept; calibrations versioned per matrix; every prediction names the calibration it rests on.
+5. **Sensory targets as the headline output.** Source the odour thresholds (1 of 26 carries a source today); add reference
+   profiles of cooked meat and commercial analogues; report distance to target on the meaty / off-note axes.
+6. *(Owner reservation: keep the absolute-ppb Monte-Carlo intervals as they are.)* Add rank-stability / P(A beats B)
+   alongside them rather than instead of them.
+7. **Next-experiment recommendation as the second default output**, with the protocol sheet generated.
+8. **Cut the surface.** One CLI (`predict`, `compare`, `rank`, `ingest`, `next-experiment`), one report, one `validate`
+   command that regenerates the evidence dashboard; guards pin contracts, not numbers. Notebook-first.
+Not to build: quantum chemistry, ML potentials, generic reaction enumeration, absolute claims without user calibration.
+Sequence: 1 → 8 → 4 (then 2, 3, 5, 7). Data lever: make the PPI/SPI protocol trivially reproducible.
 
 ### Original decision list (kept for the record)
 
