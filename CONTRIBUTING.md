@@ -17,10 +17,12 @@ scripts/        CLI entrypoints and one-shot research scripts.
                 Scientist-facing CLIs route through src/usability_reports.py.
 
 data/           Curated inputs only (priors, lit, benchmarks, protocols, species).
-                No generated artifacts. One exception, stated because this line used to
-                deny it: data/reactions/curated_pathways.py IS Python under data/, alongside
-                src/curated_pathways.py (corrected 2026-08-28, Wave S5).
+                No generated artifacts, no Python (the stale data/reactions/curated_pathways.py
+                copy was deleted 2026-09-01). Read-only at runtime, enforced by
+                scripts/ci/data_readonly_gate.py. Examples live in docs/examples/, intake
+                templates in docs/templates/, test fixtures in tests/fixtures/.
                 For the literature database and ingestion, see [data/lit/README.md](data/lit/README.md).
+                Restructure in progress: tasks/data_restructure_plan.md.
 
 results/        Generated artifacts. .gitignore'd. Do not hand-edit.
 

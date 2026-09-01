@@ -55,7 +55,7 @@ class _StubResult:
 @pytest.mark.parametrize(
     "shared",
     [
-        # the spelling data/campaigns/*.yml uses
+        # the spelling docs/examples/*.yml uses
         {"ph": 5.5, "temp": 105.0, "protein_type": "pea_iso"},
         # the spelling a scientist types / Formulation dataclass names
         {"pH": 5.5, "temperature": 105.0, "protein": "pea_iso"},

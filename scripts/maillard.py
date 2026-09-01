@@ -215,7 +215,7 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=(
             "WORKED EXAMPLE -- does swapping ribose for glucose buy you more meaty thiol?\n"
             "\n"
-            "  python scripts/maillard.py compare data/cli_examples/compare_ribose_vs_glucose.yml \\\n"
+            "  python scripts/maillard.py compare docs/examples/compare_ribose_vs_glucose.yml \\\n"
             "      --report /tmp/ribose_vs_glucose.html\n"
             "\n"
             "Both arms are 10 mM cysteine + 10 mM sugar, 140 C, 30 min, pH 5.0. The only\n"
@@ -268,7 +268,7 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=(
             "WORKED EXAMPLE -- what does a cysteine/ribose reaction flavour actually smell of?\n"
             "\n"
-            "  python scripts/maillard.py predict data/cli_examples/compare_ribose_vs_glucose.yml \\\n"
+            "  python scripts/maillard.py predict docs/examples/compare_ribose_vs_glucose.yml \\\n"
             "      --system a --report /tmp/cys_ribose.html\n"
             "\n"
             "10 mM L-cysteine + 10 mM D-ribose, 140 C, 30 min, pH 5.0, aqueous. The core\n"

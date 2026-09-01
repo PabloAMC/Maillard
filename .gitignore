@@ -28,6 +28,7 @@ test_failures.log
 minimal.yaml
 test_mech.yaml
 *.csv
+!docs/templates/*.csv
 *.log
 *.hypothesis/
 
@@ -42,22 +43,18 @@ test_mech.yaml
 !docs/assets/report_compound_confidence_overlay.png
 docs/assets/*.html
 
-# Data rules
+# Data rules -- data/ holds curated inputs only. Everything tracked is whitelisted
+# explicitly here; anything else under data/ is local (e.g. data/articles/, ~160 MB of PDFs).
 data/*
 !data/lit/
-!data/reactions/
 !data/species/
 !data/benchmarks/
 !data/protocols/
 !data/protocols/**
-!data/campaigns/
-!data/campaigns/**
-!data/ingest_templates/
-!data/ingest_templates/**
-!data/cli_examples/
-!data/cli_examples/**
 !data/Gemini_Deep_Research/
 !data/Gemini_Deep_Research/**
+!data/formulation_grid.yml
+!data/interventions.yml
 
 # Bulky & auto-generated data exclusions
 data/lit/*.pdf
@@ -74,3 +71,5 @@ results/*
 *.yaml
 !data/**/*.yml
 !data/**/*.yaml
+!docs/**/*.yaml
+!results/validation/**/*.yaml

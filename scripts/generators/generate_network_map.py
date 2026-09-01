@@ -44,7 +44,7 @@ twice and compares bytes.
 USAGE
 -----
     python scripts/generators/generate_network_map.py
-    python scripts/generators/generate_network_map.py --spec data/cli_examples/flux_ribose_cysteine_145C.json
+    python scripts/generators/generate_network_map.py --spec docs/examples/flux_ribose_cysteine_145C.json
     python scripts/generators/generate_network_map.py --all-examples
     python scripts/generators/generate_network_map.py --out /tmp/map.html
 """
@@ -75,7 +75,7 @@ from src.explain_compound import (  # noqa: E402
 )
 
 DEFAULT_OUT = ROOT / "docs" / "assets" / "network_map.html"
-EXAMPLES_DIR = ROOT / "data" / "cli_examples"
+EXAMPLES_DIR = ROOT / "docs" / "examples"
 DEFAULT_EXAMPLES = (
     "flux_ribose_cysteine_145C.json",
     "flux_extrusion_pea_three_zone.json",

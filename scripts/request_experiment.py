@@ -6,7 +6,7 @@ Usage:
       --top 5 --protein-type soy --goal 'meaty aroma' --budget '3 lab days'"
 
 For each top-N candidate, writes a pre-filled intake YAML under
-`data/protocols/requested_*.yaml` and a human protocol under
+`results/validation/experiment_requests/requested_*.yaml` and a human protocol under
 `results/validation/experiment_requests/*.md`, plus an index file.
 """
 

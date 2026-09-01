@@ -3,12 +3,12 @@
 # Referenced by docs/guides/QUICKSTART.md ("If You Need A Shareable Package").
 # Run with:
 #
-#   python scripts/run_campaign.py --spec data/campaigns/shareable_meaty_screen.yml \
+#   python scripts/run_campaign.py --spec docs/examples/shareable_meaty_screen.yml \
 #       --output-dir results/quickstart_campaign
 #
 #   # or, through the Docker wrapper:
 #   ./scripts/docker_maillard.sh campaign \
-#       data/campaigns/shareable_meaty_screen.yml \
+#       docs/examples/shareable_meaty_screen.yml \
 #       results/quickstart_campaign
 #
 # Every `name` below MUST match an entry in data/formulation_grid.yml exactly

@@ -105,7 +105,6 @@ def check_yaml_files() -> bool:
         "data/species/off_flavour_targets.yml",
         "data/species/toxic_markers.yml",
         "data/species/precursors.yml",
-        "data/reactions/reaction_families.yml",
     ]
     root = Path(__file__).parent.parent
     all_ok = True

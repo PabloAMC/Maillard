@@ -188,7 +188,7 @@ def test_write_ingest_artifacts_is_idempotent(tmp_path: Path):
 def test_lane_h_csv_templates_round_trip_through_build_intake_payload():
     """Lane H (sprint 2026-05-10b): the bundled CSV templates must parse
     cleanly so a scientist can run the 30-minute walkthrough end-to-end."""
-    template_dir = ROOT / "data" / "ingest_templates"
+    template_dir = ROOT / "docs" / "templates"
     for filename, expected_compounds in (
         ("hs_spme_gc_ms_template.csv", {"hexanal", "nonanal", "2-pentylfuran"}),
         ("sida_template.csv", {"2-methyl-3-furanthiol"}),

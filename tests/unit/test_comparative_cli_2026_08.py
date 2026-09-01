@@ -39,7 +39,7 @@ from src import directional_reliability as dr  # noqa: E402
 from src import model_card  # noqa: E402
 
 CLI = ROOT / "scripts" / "maillard.py"
-EXAMPLE_SPEC = ROOT / "data" / "cli_examples" / "compare_ribose_vs_glucose.yml"
+EXAMPLE_SPEC = ROOT / "docs" / "examples" / "compare_ribose_vs_glucose.yml"
 
 
 # ---------------------------------------------------------------------------------------

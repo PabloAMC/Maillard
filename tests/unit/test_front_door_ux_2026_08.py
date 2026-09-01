@@ -396,7 +396,7 @@ def test_grid_name_resolution_is_tolerant_but_never_silent():
 def test_quickstart_campaign_spec_names_exist_in_the_grid():
     import yaml
 
-    spec_path = ROOT / "data" / "campaigns" / "shareable_meaty_screen.yml"
+    spec_path = ROOT / "docs" / "examples" / "shareable_meaty_screen.yml"
     assert spec_path.exists(), "QUICKSTART references this campaign spec"
     spec = yaml.safe_load(spec_path.read_text())
     designer = MaillardPipeline(

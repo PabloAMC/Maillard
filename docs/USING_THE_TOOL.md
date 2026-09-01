@@ -75,7 +75,7 @@ the model says so out loud on every run that uses one.
 ### Example 1 — the decision: does ribose beat glucose?
 
 ```bash
-python scripts/maillard.py compare data/cli_examples/compare_ribose_vs_glucose.yml \
+python scripts/maillard.py compare docs/examples/compare_ribose_vs_glucose.yml \
     --report /tmp/ribose_vs_glucose.html
 ```
 
@@ -131,7 +131,7 @@ scores 9/11 on the directional panel.
 ### Example 2 — the profile: what does a cysteine/ribose reaction flavour smell of?
 
 ```bash
-python scripts/maillard.py predict data/cli_examples/compare_ribose_vs_glucose.yml \
+python scripts/maillard.py predict docs/examples/compare_ribose_vs_glucose.yml \
     --system a --report /tmp/cys_ribose.html
 ```
 

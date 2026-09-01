@@ -6,7 +6,7 @@ Uses structured JSON databases in data/lit/:
 - benchmark_intake_registry.json
 - slr_incorporation_matrix.json
 - deep_research_backlog.json
-Writes files to data/Gemini_Deep_Research/slr_family_<num>_<family_id>.md
+Writes files to results/literature/slr_family_reports/slr_family_<num>_<family_id>.md (generated; not tracked)
 Deletes old manually created files to avoid duplicates.
 """
 
@@ -20,7 +20,7 @@ from datetime import datetime
 # Define paths
 WORKSPACE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA_LIT_DIR = os.path.join(WORKSPACE_DIR, "data", "lit")
-OUTPUT_DIR = os.path.join(WORKSPACE_DIR, "data", "Gemini_Deep_Research")
+OUTPUT_DIR = os.path.join(WORKSPACE_DIR, "results", "literature", "slr_family_reports")
 
 FAMILY_PLAN_PATH = os.path.join(DATA_LIT_DIR, "family_ingestion_plan.json")
 REGISTRY_PATH = os.path.join(DATA_LIT_DIR, "benchmark_intake_registry.json")
@@ -33,6 +33,10 @@ def load_json(path):
         return {}
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+def ensure_output_dir():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 
 def clean_old_files():
     """Deletes old manual SLR files to prevent duplication with slightly different names."""
@@ -220,7 +224,7 @@ def main(argv=None):
         description=(
             "Regenerate the 16 systematic-literature-review family reports from "
             "the JSON databases in data/lit/ into "
-            "data/Gemini_Deep_Research/slr_family_<num>_<family_id>.md, "
+            "results/literature/slr_family_reports/slr_family_<num>_<family_id>.md, "
             "deleting the older hand-written copies."
         )
     )
@@ -240,6 +244,7 @@ def main(argv=None):
     print(f"Loaded {len(families)} families, {len(eligible_refs)} registry references, "
           f"{len(matrix_entries)} matrix entries, and {len(backlog_items)} backlog items.")
     
+    ensure_output_dir()
     clean_old_files()
     
     current_date = datetime.now().strftime("%Y-%m-%d")

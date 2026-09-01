@@ -42,7 +42,10 @@ ROOT = Path(__file__).resolve().parents[1]
 FLAVOR_REFERENCE_PATH = ROOT / "data" / "lit" / "flavor_reference_payloads.json"
 BENCHMARK_INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
 BENCHMARK_DIR = ROOT / "data" / "benchmarks"
-EXTERNAL_VALIDATION_PROTOCOL_DIR = ROOT / "data" / "protocols" / "external_validation"
+# The intake YAML that each frozen hold-out benchmark was materialized from lives NEXT TO
+# the benchmark JSON (moved from data/protocols/external_validation/ on 2026-09-01). Both
+# are frozen evidence; see write_holdout_bundles.
+EXTERNAL_VALIDATION_PROTOCOL_DIR = ROOT / "data" / "benchmarks" / "external_validation" / "intake"
 EXTERNAL_VALIDATION_BENCHMARK_DIR = ROOT / "data" / "benchmarks" / "external_validation"
 EXTERNAL_VALIDATION_EVIDENCE_CLASS = "external_validation_only"
 

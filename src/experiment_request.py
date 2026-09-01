@@ -2,7 +2,7 @@
 
 For each requested candidate we emit:
 
-* `data/protocols/requested_<request_id>.yaml` — pre-filled intake YAML in
+* `results/validation/experiment_requests/requested_<request_id>.yaml` — pre-filled intake YAML in
   the same schema used by `data/protocols/example_matrix_experiment_intake.yaml`,
   but with a `status: pending_lab` field and empty `measured_volatiles` ready
   for lab fill-in.
@@ -33,8 +33,11 @@ from src.doe_generator import DOE_TEMPLATES
 from src.experiment_value import ExperimentCandidate, infer_matrix_family
 
 ROOT = Path(__file__).resolve().parents[1]
-PROTOCOLS_DIR = ROOT / "data" / "protocols"
+# Both halves of a request are GENERATED artifacts and live together under results/.
+# (Until 2026-09-01 the intake YAML was written into data/protocols/, i.e. ranker
+# output was committed as a curated protocol.)
 REQUESTS_DIR = ROOT / "results" / "validation" / "experiment_requests"
+PROTOCOLS_DIR = REQUESTS_DIR
 
 
 def _display_path(path: Path) -> str:

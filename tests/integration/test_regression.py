@@ -13,7 +13,7 @@ from rdkit.Chem import Descriptors
 
 @pytest.fixture
 def regression_data():
-    path = Path("data/lit/canonical_systems.json")
+    path = Path(__file__).resolve().parents[1] / "fixtures" / "canonical_systems.json"
     with open(path, "r") as f:
         return json.load(f)
 
@@ -50,9 +50,9 @@ LOOKUP = {
     "leucine": "CC(C)CC(N)C(=O)O"
 }
 
-# Synonyms used in data/lit/canonical_systems.json that are the SAME molecule as a
+# Synonyms used in tests/fixtures/canonical_systems.json that are the SAME molecule as a
 # species the engine emits under another label.
-# Abbreviations and synonyms used in data/lit/canonical_systems.json that name the SAME
+# Abbreviations and synonyms used in tests/fixtures/canonical_systems.json that name the SAME
 # molecule as a species the engine emits under another label. Added 2026-08-27 (Wave H):
 # the old "at least one target in the top 10" assertion silently never matched "FFT" or
 # "2,5-dimethylpyrazine" at all, so two of the three systems were passing on a single

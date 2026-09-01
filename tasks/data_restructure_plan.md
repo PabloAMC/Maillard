@@ -306,6 +306,26 @@ Everything the xTB → DFT → MLP refinement lane left behind, deleted rather t
       `docker_maillard.sh bootstrap/status`, `scripts/check_env.py` stripped of torch/jax/xtbiff/pyGSM/MACE. **The running
       container still has the old env; a rebuild is not required for tests to pass.**
 - [x] Gates: citation_gate / holdout_guard / fit_target_gate PASS; collection 1768 tests, 0 errors.
+- [x] Full suites in Docker (commit `22b5dee`): unit+scripts **1340 passed**; integration+scientific **426 passed, 2 xfailed**.
+
+### Phase 1b — Re-home what is not curated input — IN PROGRESS
+- [x] `data/cli_examples/*`, `data/campaigns/*` → `docs/examples/`; `data/ingest_templates/*` → `docs/templates/`;
+      `data/lit/canonical_systems.json` → `tests/fixtures/`; `data/reactions/reaction_families.yml` → `docs/reference/`
+      (so `data/reactions/` is gone).
+- [x] `data/protocols/requested_*.yaml` → `results/validation/experiment_requests/` (next to their MD twins);
+      `src/experiment_request.py` writes there now.
+- [x] `data/protocols/external_validation/*.yaml` → `data/benchmarks/external_validation/intake/` (frozen evidence next
+      to the JSON it materialized; `EXTERNAL_VALIDATION_PROTOCOL_DIR` repointed).
+- [x] `data/Gemini_Deep_Research/slr_family_*.md` (16, generated) → `results/literature/slr_family_reports/`, untracked;
+      generator repointed and creates the dir.
+- [x] `.gitignore` data rules rewritten as an explicit whitelist; `git ls-files -i -c --exclude-standard` is empty.
+- [x] `data/lit/README.md`: QM category removed, ghosts removed, five undocumented files added.
+- [ ] Deferred to Phase 2 (many consumers, do after `data_paths.py`): `deep_research_backlog.json`,
+      `slr_incorporation_matrix.json` → `results/literature/`.
+- [ ] Not moved, on purpose: `data/benchmarks/maillard_validation_benchmarks.md` (cited as a fixed historical path in
+      ~35 places; the audit narrative depends on the path); `data/protocols/*_protocol_pilot_intake.yaml` (the
+      `comparison_contract` half is hand-written; only `conc_ppb` is refreshed) — decision 6 in §5 still open;
+      `data/Gemini_Deep_Research/` rename → Phase 5.
 - [ ] Full suites in Docker (running).
 
 ### Phase 1 — Purge and re-home (no schema change, ~1–2 sessions)

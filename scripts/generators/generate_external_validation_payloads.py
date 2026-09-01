@@ -19,7 +19,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--protocol-dir",
-        default="data/protocols/external_validation",
+        default="data/benchmarks/external_validation/intake",
         help="Destination directory for synthesized intake YAML files.",
     )
     parser.add_argument(

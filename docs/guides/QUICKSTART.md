@@ -176,7 +176,7 @@ For a shareable multi-run campaign, use:
 
 ```bash
 ./scripts/docker_maillard.sh campaign \
-  data/campaigns/shareable_meaty_screen.yml \
+  docs/examples/shareable_meaty_screen.yml \
   results/quickstart_campaign
 ```
 
@@ -305,7 +305,7 @@ Started. One fewer document, same content.*
 | `./scripts/docker_maillard.sh computational-gap-dft-ingest` | Build the DFT ingestion report for computational-gap refinement |
 | `./scripts/docker_maillard.sh computational-gap-dft-promote` | Promote completed computational-gap DFT results into priors |
 | `./scripts/docker_maillard.sh refinement-governance` | Generate the selective mechanistic refinement governance artifact |
-| `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Generate a review-ready campaign package with run-level and campaign-level artifacts |
+| `./scripts/docker_maillard.sh campaign docs/examples/shareable_meaty_screen.yml` | Generate a review-ready campaign package with run-level and campaign-level artifacts |
 
 ## CLI Workflows Outside Docker
 
@@ -316,7 +316,7 @@ Started. One fewer document, same content.*
 | `python scripts/run_pipeline.py ...` | Run one forward prediction |
 | `python scripts/optimize_formulation.py ...` | Search a formulation space |
 | `python scripts/run_campaign.py --names "A,B" --ph 5.5 --temp 105` | Generate a side-by-side comparison package via the campaign pipeline |
-| `python scripts/run_campaign.py --spec data/campaigns/shareable_meaty_screen.yml` | Generate a shareable multi-run campaign package |
+| `python scripts/run_campaign.py --spec docs/examples/shareable_meaty_screen.yml` | Generate a shareable multi-run campaign package |
 | `python scripts/compare_sim_to_lit.py` | Compare the framework against literature benchmarks |
 
 ## Recommended Review Sequence

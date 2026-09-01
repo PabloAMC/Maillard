@@ -35,17 +35,16 @@ Parameters governing how the complex plant protein matrix alters reaction chemis
 *   **[`matrix_decision_panel.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/matrix_decision_panel.json)**: Truth tables resolving matrix-level structural state modifiers.
 *   **[`matrix_family_coverage_registry.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/matrix_family_coverage_registry.json)**: Mapping of matrix-specific modifiers across the 16 chemistry families.
 
-### Category E: QM & MLP Computational Refinement Maps
-Input coordinates, target structures, and status ledgers for transition state (TS) and barrier refinement.
-*   **[`computational_gap_closure_targets.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/computational_gap_closure_targets.json)** & **[`computational_gap_multistep_targets.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/computational_gap_multistep_targets.json)**: Target reactions where high-level DFT computations are needed to replace coarse xTB/MLP estimates.
-*   **[`dft_coverage_map.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/dft_coverage_map.json)**: Ingestion log tracking the status of DFT runs (preflight, running, completed, promoted).
-*   **[`geometry_benchmark_set.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/geometry_benchmark_set.json)**, **[`reaction_benchmark_set.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/reaction_benchmark_set.json)** & **[`ts_seed_benchmark_set.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/ts_seed_benchmark_set.json)**: Validated geometry files and reaction coordinates used for regression testing transition state search routines.
-*   **[`mlp_candidate_registry.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/mlp_candidate_registry.json)** & **[`mlp_external_benchmark_evidence.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/mlp_external_benchmark_evidence.json)**: Training datasets and parity metrics verifying the accuracy of the surrogate Machine Learning Potentials.
-*   **[`refinement_surrogate_patches.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/refinement_surrogate_patches.json)**: Bounded fallback parameters used when explicit quantum chemical refinement fails to converge.
+### Category F: Everything else in this directory
+*   **`binding_constants.yml`**: Measured protein–flavour binding constants (Langmuir `f_free` model) with verbatim source quotes and per-source verification status — the record shape the rest of this directory should converge on.
+*   **`lipid_oxidation_calibration.json`**: Lipid-oxidation kinetics, branching ratios and per-matrix lipid profiles read by `src/lipid_oxidation.py`.
+*   **`chemistry_family_scope_registry.json`**: The 16 chemistry lanes as product scope (status, priority, next action); overlaps `family_ingestion_plan.json`, merge planned.
+*   **`extrusion_damage_reference_payloads.json`**: Four damage-marker reference ranges (furosine, CML, CEL, LAL) read by `src/extrusion.py`; same record shape as `safety_reference_payloads.json`, merge planned.
+*   **`process_gap_registry.json`**: Five structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`, merge planned.
+*   **`refinement_surrogate_patches.json`**: RETIRED barrier-offset acceptance file; kept as a tombstone read by `src/barrier_constants.get_barrier` (its `accepted_offsets` must stay empty; guarded by a test).
+*   `extraction_dossiers/`: per-paper extraction records cited as provenance strings by `src/kinetic_core/`. `timeseries/`: digitised concentration-vs-time trajectories used by the trunk-rate fit (see its README).
 
-### Category F: Predefined Systems & Test Sets
-*   **[`canonical_systems.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/canonical_systems.json)**: Definition of baseline formulations used for integration testing.
-*   **[`ribose_glycine_2021.json`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/lit/ribose_glycine_2021.json)**: A historical validation dataset for early prototype model matching.
+> 2026-09-01 (cleaning branch): the QM/MLP registries that used to be listed here (`dft_coverage_map`, `computational_gap_*`, `geometry_benchmark_set`, `ts_seed_benchmark_set`, `reaction_benchmark_set`, `mlp_*`, `calibration_offsets`) were deleted with the QM/DFT lane; `canonical_systems.json` moved to `tests/fixtures/`. The restructure plan is in `tasks/data_restructure_plan.md`.
 
 ---
 
@@ -102,7 +101,7 @@ graph TD
 
 ## 3. Systematic Literature Review (SLR) Report Generation
 
-The 16 systematic literature review (SLR) report files located in **[`data/Gemini_Deep_Research/`](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/Gemini_Deep_Research)** are generated programmatically. 
+The 16 systematic literature review (SLR) report files are generated programmatically into `results/literature/slr_family_reports/` (not tracked; regenerate on demand). 
 
 To regenerate all 16 reports (e.g., `slr_family_01_amino_acid_sugar_core.md` through `slr_family_16_melanoidin_polymerization.md`) after adding or updating entries in the structured registries, run the generator script inside the Docker container:
 
