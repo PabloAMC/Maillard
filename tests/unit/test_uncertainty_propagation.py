@@ -337,22 +337,9 @@ def test_uncalibrated_runtime_envelope_widens_to_structural_floor():
 
 # --- S27 followup #2: provenance-tiered barrier sigma (narrow-only, exact-match) ---
 
-def test_provenance_tiering_is_narrow_only_no_widening_on_current_file():
-    # The provenance file catalogues only exploratory families (not in the MC set)
-    # at surrogate tiers, so nothing should narrow AND nothing should widen: the
-    # core barrier sigmas must equal the flat defaults. This guards the in-panel
-    # headline against accidental barrier-sigma drift.
+def test_default_barrier_sigmas_are_the_flat_family_defaults():
+    # The core barrier sigmas must equal the flat defaults. This guards the
+    # in-panel headline against accidental barrier-sigma drift (the former QM
+    # provenance narrowing pass was removed 2026-09-01 with the QM/DFT lane).
     barrier = {p.key: p.sigma_kcal for p in default_priors() if p.kind == "barrier"}
     assert barrier == dict(DEFAULT_FAMILY_PRIORS)
-
-
-def test_provenance_narrowing_never_widens_a_core_family():
-    from src.uncertainty_propagation import _apply_qm_provenance_narrowing
-
-    priors = {
-        key: ParameterPrior(key=key, sigma_kcal=sigma, source="x", kind="barrier")
-        for key, sigma in DEFAULT_FAMILY_PRIORS.items()
-    }
-    _apply_qm_provenance_narrowing(priors)
-    for key, sigma in DEFAULT_FAMILY_PRIORS.items():
-        assert priors[key].sigma_kcal <= sigma  # narrow-only invariant

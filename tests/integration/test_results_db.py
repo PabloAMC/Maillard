@@ -57,35 +57,6 @@ def test_results_db_empty(tmp_path):
     assert db.find_barrier(["X"], ["Y"]) is None
 
 
-def test_results_db_persists_ml_adoption_decisions(tmp_path):
-    db_file = tmp_path / "test_p4.db"
-    db = ResultsDB(db_path=str(db_file))
-
-    db.add_ml_adoption_decision(
-        {
-            "candidate_id": "mace_off_medium",
-            "model_family": "mace_off",
-            "model_name": "medium",
-            "proposed_role": "local_barrier_surrogate",
-            "decision": "quarantine",
-            "benchmark_set_id": "maillard_reaction_benchmark_v1",
-            "coverage_ratio": 0.5,
-            "rank_correlation": -1.0,
-            "mean_abs_error_kcal": 50.0,
-            "max_abs_error_kcal": 90.0,
-            "stop_reasons": ["nonphysical_barrier_predictions"],
-            "rationale": "Nonphysical barriers on reaction benchmark.",
-            "fallback_comparator": "xTB_plus_selective_DFT",
-            "benchmark_visible_gap": "barrier ordering",
-            "approved_for_default": False,
-        }
-    )
-
-    rows = db.list_ml_adoption_decisions("mace_off_medium")
-    assert len(rows) == 1
-    assert rows[0]["decision"] == "quarantine"
-    assert rows[0]["stop_reasons"] == ["nonphysical_barrier_predictions"]
-
 # ---------------------------------------------------------------------------
 # Audit remediation 2026-08-27 (items 3.7 / 3.8 / 3.9)
 # ---------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 """
 Environment smoke-test for the Maillard Reaction Computational Framework.
 
-Verifies that all required packages are importable and key binaries work.
+Verifies that all required packages are importable and the curated YAML parses.
 Run with: python scripts/check_env.py
 
 Exit 0 = all checks pass.
@@ -10,7 +10,6 @@ Exit 1 = one or more checks failed.
 """
 
 import sys
-import subprocess
 import importlib
 from pathlib import Path
 
@@ -56,22 +55,6 @@ def check_import(package: str, import_as: str | None = None, version_attr: str =
         return True
     except ImportError as e:
         fail(f"{package} — {e}")
-        return False
-
-
-def check_binary(binary: str, args: list[str] | None = None, label: str | None = None) -> bool:
-    label = label or binary
-    cmd = [binary] + (args or ["--version"])
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
-        first_line = (result.stdout or result.stderr).strip().split("\n")[0]
-        ok(f"{label}: {first_line[:80]}")
-        return True
-    except FileNotFoundError:
-        fail(f"{label} — binary not found in PATH")
-        return False
-    except subprocess.TimeoutExpired:
-        fail(f"{label} — timed out")
         return False
 
 
@@ -165,48 +148,20 @@ def main() -> int:
         ("pandas",   "pandas"),
         ("networkx", "networkx"),
         ("yaml",     "yaml"),
-        ("ase",      "ase"),
-        ("tqdm",     "tqdm"),
+        ("cantera",  "cantera"),
+        ("matplotlib", "matplotlib"),
     ]:
         if not check_import(pkg, import_name):
             failures.append(pkg)
 
-    # ── xTB binary ──────────────────────────────────────────────────────────
-    section("3. xTB Binary (Tier 1 screening)")
-    if not check_binary("xtb", ["--version"], "xtb"):
-        warn("xtb not found — install via: conda install -c conda-forge xtb")
-        failures.append("xtb_binary")
-
-    # ── PySCF (Tier 2 DFT) ──────────────────────────────────────────────────
-    section("4. PySCF (Tier 2 DFT backend)")
-    if not check_import("pyscf"):
-        warn("Install: pip install pyscf>=2.4.0")
-        failures.append("pyscf")
-
-    # ── Skala XC functional ──────────────────────────────────────────────────
-    section("5. Microsoft Skala XC Functional (Tier 2)")
-    if not check_import("skala", version_attr="__version__"):
-        warn("Skala not installed. Install: pip install git+https://github.com/microsoft/skala.git")
-        failures.append("skala")
-
-    # ── RMG-Py (Tier 0) ─────────────────────────────────────────────────────
-    section("6. RMG-Py (Tier 0 pathway generation)")
-    # RMG-Py requires a separate conda environment; check for rmgpy module
-    has_rmg = check_import("rmgpy", version_attr="__version__")
-    if not has_rmg:
-        warn("RMG-Py not installed in current env. Install separately:")
-        warn("  conda install -c rmg rmgpy rmg-database")
-        warn("  See: https://github.com/ReactionMechanismGenerator/RMG-Py")
-        failures.append("rmgpy")
-
     # ── RDKit SMILES validation ──────────────────────────────────────────────
-    section("7. RDKit SMILES Round-trip (target compounds)")
+    section("3. RDKit SMILES Round-trip (target compounds)")
     if "rdkit" not in failures:
         if not check_rdkit_smiles_roundtrip():
             failures.append("rdkit_smiles")
 
     # ── Data files ───────────────────────────────────────────────────────────
-    section("8. Project Data Files")
+    section("4. Project Data Files")
     if not check_yaml_files():
         failures.append("data_files")
 
@@ -216,15 +171,10 @@ def main() -> int:
         print(f"{GREEN}{BOLD}  ✓ All checks passed.{RESET}")
         return 0
     else:
-        critical = [f for f in failures if f not in ("rmgpy", "skala")]
-        if critical:
-            print(f"{RED}{BOLD}  ✗ {len(failures)} check(s) failed:{RESET}")
-            for f in failures:
-                print(f"      - {f}")
-            return 1
-        else:
-            print(f"{YELLOW}{BOLD}  ⚠ Core checks passed, optional tools missing ({', '.join(failures)}).{RESET}")
-            return 0
+        print(f"{RED}{BOLD}  ✗ {len(failures)} check(s) failed:{RESET}")
+        for f in failures:
+            print(f"      - {f}")
+        return 1
 
 
 if __name__ == "__main__":

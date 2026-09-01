@@ -89,9 +89,3 @@ def test_run_campaign_named_comparison_mode(tmp_path):
     assert (out_dir / "campaign.md").exists()
     assert (out_dir / "campaign.json").exists()
 
-@pytest.mark.slow
-def test_calibrate_barriers_importable():
-    """Verify calibrate_barriers.py can be loaded without syntax or config errors."""
-    cmd = ["python", "-c", "import scripts.calibrate_barriers"]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0

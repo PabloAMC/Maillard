@@ -281,8 +281,32 @@ good, so its data, loaders, tests and docs are to be removed, not preserved.
 - [x] `data/calibration_history` leak: writer moved to `results/calibration_history/`; the
       integration test monkeypatches the dir.
 - [x] `data/reactions/curated_pathways.py` deleted (broken import, zero consumers).
-- [ ] Baseline: `pytest tests/unit tests/scripts` and `tests/integration tests/scientific` in Docker (running).
-- **Exit:** both tiers green in Docker; counts recorded here.
+- [x] Baseline in Docker (commit `8c35ec8`): unit+scripts **1347 passed**; integration+scientific **428 passed, 2 xfailed**.
+
+### Phase 1a — QM/DFT lane purge (owner-authorised 2026-09-01) — IN PROGRESS
+Everything the xTB → DFT → MLP refinement lane left behind, deleted rather than re-homed:
+- [x] `data/qm/`, `data/geometries/` (33 tracked + 818 untracked), `data/rmg_extensions/`, `data/logs/`,
+      `data/calibration_history/`, `models/external/`, `docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md`,
+      `docs/notebooks/results/maillard_results.db`, `environment.react_ot.yml`.
+- [x] `data/lit/{dft_coverage_map, computational_gap_closure_targets, computational_gap_multistep_targets,
+      ts_seed_benchmark_set, geometry_benchmark_set, mlp_candidate_registry, mlp_external_benchmark_evidence,
+      reaction_benchmark_set, calibration_offsets}.json`.
+- [x] `results/validation/`: `pygsm_scratch/` (106 files) + 31 QM-lane artifacts (refinement_*, computational_gap_*,
+      selective_dft_plan, qm_barrier_provenance, react_ot_*, xtb_*, offline_dft_jobs, cheap_refinement_screening).
+- [x] `src/{authority_benchmark_data, reaction_benchmark, solvation, skip_policy_registry}.py` + their tests;
+      `scripts/{calibrate_barriers.py, generators/generate_rmg_inputs.py, generators/generate_skip_registry.py}`.
+- [x] `src/results_db.py`: `ml_adoption_decisions` table + 2 methods dropped (table also dropped from the tracked DB).
+- [x] `src/uncertainty_propagation.py`: `_apply_qm_provenance_narrowing` (a documented no-op) removed.
+- [x] `src/reporting.py`: 21 QM-artifact keys dropped from the scientific surface.
+- [x] `scripts/ci/citation_gate.py`: check 5 (barrier-source disclosure over `data/qm/`) retired; `data/qm` glob removed.
+- [x] Census re-pinned 120/98/80 → 102/80/80 in `test_honest_headline_guards.py` and README; the data/qm split test removed.
+- [x] Docs: README (QM section → "No quantum chemistry in the loop", QM-operator row), `agents.md`, `CONTRIBUTING.md`,
+      `VALIDATION_CONTRACT.md`, CI header comments, `.gitignore` (all xtb/geometry rules).
+- [x] Environment: `environment.yml` reduced to imported deps only; `Dockerfile`, `scripts/ci/setup_env.sh`,
+      `docker_maillard.sh bootstrap/status`, `scripts/check_env.py` stripped of torch/jax/xtbiff/pyGSM/MACE. **The running
+      container still has the old env; a rebuild is not required for tests to pass.**
+- [x] Gates: citation_gate / holdout_guard / fit_target_gate PASS; collection 1768 tests, 0 errors.
+- [ ] Full suites in Docker (running).
 
 ### Phase 1 — Purge and re-home (no schema change, ~1–2 sessions)
 Pure deletes and moves of files with 0–2 consumers. Expected model-output change: none.

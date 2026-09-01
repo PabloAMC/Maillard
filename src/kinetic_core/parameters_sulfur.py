@@ -13,8 +13,9 @@ runtime metadata.
 
 FIVE STANDING POLICIES, ENFORCED HERE
 -------------------------------------
-1. **NO DFT.** Same as B1. ``assert_no_dft_sulfur()`` runs at import. Nothing
-   from ``data/qm/`` is read, imported or referenced.
+1. **NO DFT.** Same as B1. ``assert_no_dft_sulfur()`` runs at import. No computed
+   barrier is read, imported or referenced (the ``data/qm/`` fixtures were deleted
+   with the QM/DFT lane on 2026-09-01).
 
 2. **NO SINGLE ARRHENIUS FOR THIOL CONSUMPTION.** K1 declared the gap and K3
    turned it into a structural finding: four papers at four temperatures

@@ -905,8 +905,14 @@ def _no_verifiable_source_census():
     return census
 
 
-def test_no_verifiable_source_census_is_120_records_98_numeric_80_reaching_runtime():
-    """no_verifiable_source: 120 flagged · 98 carrying numbers · 80 of those reaching runtime.
+def test_no_verifiable_source_census_is_102_records_80_numeric_80_reaching_runtime():
+    """no_verifiable_source: 102 flagged · 80 carrying numbers · 80 of those reaching runtime.
+
+    RE-PINNED 2026-09-01 (cleaning, Phase 1a): 120/98/80 -> 102/80/80. `data/qm/` was
+    deleted together with the QM/DFT lane, taking its 18 unverifiable barrier records with
+    it. Nothing runtime-reachable changed: those 18 never reached the model, so the runtime
+    figure stays at 80 and the total falls by exactly the data/qm share. The history below
+    is kept because it explains why the split (data/lit vs. everything else) was pinned.
 
     Pinned 2026-08-27 against README.md's "On literature provenance" note. The three
     numbers are pinned separately because they fail for different reasons and a maintainer
@@ -959,61 +965,19 @@ def test_no_verifiable_source_census_is_120_records_98_numeric_80_reaching_runti
         if path.startswith("data/lit/")
     )
 
-    assert total == 120, (
-        f"Repo-wide no_verifiable_source count is {total}, published as 120. "
+    assert total == 102, (
+        f"Repo-wide no_verifiable_source count is {total}, published as 102. "
         f"Per file: { {k: v[0] for k, v in census.items()} }"
     )
-    assert numeric == 98, (
-        f"{numeric} flagged records carry numeric payloads, published as 98."
+    assert numeric == 80, (
+        f"{numeric} flagged records carry numeric payloads, published as 80."
     )
     assert runtime == 80, (
         f"{runtime} flagged records with numeric payloads sit in data/lit and therefore "
-        f"reach the runtime, published as 80. If a data/qm record becomes runtime-reachable "
-        f"this number must rise and the README's 'none of those 18 reach the model' claim "
-        f"becomes false."
+        f"reach the runtime, published as 80."
     )
 
     readme = _doc_text(README)
-    _assert_quoted(readme, "120 records", "README.md", "the no_verifiable_source census")
-    _assert_quoted(readme, "98 carry numeric payloads", "README.md", "the numeric subset")
+    _assert_quoted(readme, "102 records", "README.md", "the no_verifiable_source census")
+    _assert_quoted(readme, "80 carry numeric payloads", "README.md", "the numeric subset")
     _assert_quoted(readme, "80 of those are", "README.md", "the runtime-consumed subset")
-
-
-def test_the_data_qm_records_that_moved_the_census_from_84_to_102_are_still_counted():  # noqa: N802
-    """Pins the 84 (data/lit) + 18 (data/qm) = 102 split, not just the total.
-
-    Separate from the census test above on purpose. A total of 102 can be preserved while
-    `data/qm/` silently drops back out of scope and 18 new data/lit records appear -- the
-    aggregate would look stable and the honesty gain of 2026-08-27 would be quietly undone.
-    This test makes the specific files that caused the 84 -> 102 correction load-bearing.
-    """
-    census = _no_verifiable_source_census()
-    outside_lit = {
-        path: flagged
-        for path, (flagged, _) in census.items()
-        if not path.startswith("data/lit/")
-    }
-
-    assert outside_lit == {
-        # Measured 2026-08-27: the 18 records exposed when data/qm stopped being gitignored.
-        "data/qm/phase33_barrier_benchmarks.json": 9,
-        "data/qm/phase35_double_hybrid_benchmarks.json": 9,
-    }, (
-        f"The no_verifiable_source records OUTSIDE data/lit changed to {outside_lit}. These "
-        f"18 are what moved the published census from 84 to 102; if they disappear, check "
-        f"whether data/qm was re-hidden from git rather than whether the records were fixed."
-    )
-
-    in_lit = sum(
-        flagged for path, (flagged, _) in census.items() if path.startswith("data/lit/")
-    )
-    # RE-PINNED 2026-08-27 (Wave T3): 84 -> 102. The data/qm side of the split is UNCHANGED
-    # at 18, which is what this test exists to protect. The data/lit side rose because Wave
-    # T3 labelled 18 already-shipping records (15 protein_source_registry, 2
-    # retention_reference_payloads runtime_surrogate blocks, 1 ref41) -- see the census test
-    # above for the full account. Total is now 102 + 18 = 120.
-    assert in_lit == 102, (
-        f"data/lit carries {in_lit} flagged records, measured as 102 on 2026-08-27 after "
-        f"Wave T3's labelling pass (it was 84 before that pass, and 84 is still the figure "
-        f"the README published before data/qm was brought into scope)."
-    )

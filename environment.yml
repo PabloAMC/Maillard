@@ -1,48 +1,30 @@
+# Maillard runtime environment.
+#
+# 2026-09-01 (cleaning branch, Phase 1a): the xTB / DFT / MLP refinement lane was
+# removed, and with it pyscf, xtb, crest, geometric, ase, pytorch, sella, mace-torch,
+# e3nn, huggingface_hub and the pyGSM build patches. Everything listed here is imported
+# by src/, scripts/ or tests/ (checked with grep on that date); do not add a dependency
+# without a consumer.
 name: maillard
 channels:
-  - pytorch
   - conda-forge
-  - defaults
 dependencies:
   - python=3.12
   - pip
   - setuptools
   - pytest
   - hypothesis
-  # Upper bound pinned 2026-08-26: NumPy >=2.4 breaks PySCF 2.11.0 (the einsum_path
-  # contraction tuples changed arity; pyscf/lib/numpy_helper.py unpacks 4 elements and
-  # raises), which takes down the whole QM/DFT-refinement lane in tests/qm. Lift once
-  # PySCF ships a NumPy 2.4-compatible release.
-  - numpy>=2.0,<2.4
+  - numpy>=2.0
   - scipy
   - pandas
-  - jupyter
-  - ipykernel
-  - ipywidgets
   - matplotlib
   - rdkit
   - cantera>=3.2.0
-  - ase
-  - pyscf
-  - xtb
-  - crest
-  - geometric
-  - sqlalchemy
-  - pydantic>=2.0
-  - pydantic-settings
   - pyyaml
   - optuna
-  - tqdm
-  - requests
-  - diskcache
   - networkx
-  - pytorch::pytorch=*=*cpu* # Forces the lightweight CPU version by default
+  - jupyter
+  - ipykernel
+  - ipywidgets
   - pip:
-      - sella
-      - mace-torch
-      - e3nn==0.4.4  # pinned: mace-torch 0.3.x requires <=0.5.x; 0.6.0 breaks __setstate__ unpacking
-      - rxn-chem-utils
-      - rxnmapper
-      - huggingface_hub
-      - orjson
       - SciencePlots

@@ -288,53 +288,14 @@ bootstrap_env() {
     docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; conda create -n '$ENV_NAME' python=3.12 -y"
   fi
 
-  run_in_env "conda install -y -c conda-forge jax jaxlib wget xz jupyter ipywidgets"
-  run_in_env "pip install --index-url https://download.pytorch.org/whl/cpu torch==2.5.1"
   run_in_env "conda env update -n '$ENV_NAME' --file environment.yml"
-
-  run_in_env '
-    if ! command -v xtbiff >/dev/null 2>&1; then
-      wget -q https://github.com/grimme-lab/xtbiff/releases/download/v1.1/xtbiff.tar.xz
-      tar -xf xtbiff.tar.xz
-      mv xtbiff "$CONDA_PREFIX/bin/xtbiff"
-      chmod +x "$CONDA_PREFIX/bin/xtbiff"
-      rm -f xtbiff.tar.xz
-    fi
-  '
-
-  run_in_env "python - <<'PY'
-from pathlib import Path
-import os
-
-patches = [
-    (
-        Path(os.environ['CONDA_PREFIX']) / 'lib/python3.12/site-packages/e3nn/o3/_wigner.py',
-        \"torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))\",
-        \"torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'), weights_only=False)\",
-    ),
-    (
-        Path(os.environ['CONDA_PREFIX']) / 'lib/python3.12/site-packages/mace/calculators/mace.py',
-        \"torch.load(f=model_path, map_location=device)\",
-        \"torch.load(f=model_path, map_location=device, weights_only=False)\",
-    ),
-]
-
-for path, old, new in patches:
-    if not path.exists():
-        continue
-    text = path.read_text()
-    if new in text:
-        continue
-    if old in text:
-        path.write_text(text.replace(old, new))
-PY"
 }
 
 status() {
   ensure_container
   docker ps -a --filter "name=$CONTAINER_NAME"
   if env_exists; then
-    run_in_env "python --version && which crest && which xtbiff"
+    run_in_env "python --version && python -c 'import rdkit, cantera; print(rdkit.__version__, cantera.__version__)'"
   else
     echo "Conda environment '$ENV_NAME' has not been created yet. Run: ./scripts/docker_maillard.sh bootstrap"
   fi

@@ -25,13 +25,10 @@ name: CI
 #     test is a coverage/executability check; the accuracy numbers are pinned in
 #     tests/scientific/test_honest_headline_guards.py and are bad on purpose.
 #   * strict-benchmarks cannot pass and is not required to. See its job block.
-#   * The Phase 3 "authority lane" no longer exists. This block used to describe
-#     tests/benchmarks/ and its _lane_policy.py gate as a live-but-unrun directory;
-#     both were DELETED on 2026-08-27 (Wave J2) and this comment outlived them by a
-#     day (corrected 2026-08-27, Wave R). What survives of that lane is the loader
-#     src/authority_benchmark_data.py and its tracked fixtures data/qm/phase33_*.json
-#     and data/qm/phase35_*.json; the loader's only remaining consumer is its own
-#     parse test, tests/unit/test_authority_benchmark_data.py, so NO authority-lane
+#   * The Phase 3 "authority lane" no longer exists. tests/benchmarks/ and its
+#     _lane_policy.py gate were deleted on 2026-08-27 (Wave J2); the surviving loader
+#     src/authority_benchmark_data.py and its data/qm/ fixtures were deleted on
+#     2026-09-01 together with the whole QM/DFT lane, so NO authority-lane
 #     value reaches the model, a calibration or a headline. Reviving or retiring the
 #     lane is an open decision -- see tests/README.md and
 #     docs/reference/VALIDATION_CONTRACT.md section 7.
@@ -215,6 +212,12 @@ jobs:
         # runaway guard.
         run: python -m pytest tests/unit tests/scripts -q
 
+      # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
+      # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).
+      - name: data/ untouched by the unit tier
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
+
   # ---------------------------------------------------------------------------
   # Tier 2: scientific + integration.
   # ---------------------------------------------------------------------------
@@ -269,6 +272,10 @@ jobs:
         run: |
           mkdir -p results
           python -m pytest tests/scientific tests/integration -q 2>&1 | tee results/pytest_full.log
+
+      - name: data/ untouched by the full tier
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
 
       - name: Upload test log
         if: always()

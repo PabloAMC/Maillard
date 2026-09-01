@@ -45,7 +45,6 @@ from src.benchmark_validation import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-QM_PROVENANCE_PATH = ROOT / "results" / "validation" / "qm_barrier_provenance.json"
 PREDICTION_UNCERTAINTY_PATH = ROOT / "results" / "validation" / "prediction_uncertainty.json"
 
 # Default Gaussian sigma (kcal/mol) per barrier-family offset key. The keys
@@ -438,15 +437,13 @@ def default_priors(
     matrix_tier: str = "calibrated",
     matrix_sigma_override: Optional[float] = None,
 ) -> List[ParameterPrior]:
-    """Build the default prior set, overriding sigmas where qm_barrier_provenance
-    has narrowed the bound for a specific anchor target.
+    """Build the default prior set.
 
-    qm_barrier_provenance currently catalogues per-target literature anchors
-    rather than per-family runtime offsets, so we apply its evidence by
-    *narrowing* (never widening) the family sigma if the provenance states a
-    bounded-calibration tier. When ``include_observable`` is True we also
-    add lognormal priors over the matrix-headspace, Henry, and matrix-
-    retention multipliers (S20.4).
+    Barrier sigmas are the flat ``DEFAULT_FAMILY_PRIORS``. (Until 2026-09-01 a
+    ``qm_barrier_provenance.json`` narrowing pass ran here; it was a documented
+    no-op and was removed with the QM/DFT lane.) When ``include_observable`` is
+    True we also add lognormal priors over the matrix-headspace, Henry, and
+    matrix-retention multipliers (S20.4).
 
     ``matrix_tier`` (S27 Workstream B) selects the observable-multiplier sigmas:
     ``"calibrated"`` (default) uses the tight in-registry priors and is unchanged
@@ -465,8 +462,6 @@ def default_priors(
         )
         for key, sigma in DEFAULT_FAMILY_PRIORS.items()
     }
-
-    _apply_qm_provenance_narrowing(priors)
 
     result: List[ParameterPrior] = list(priors.values())
     if include_observable:
@@ -497,64 +492,6 @@ def default_priors(
                 )
             )
     return result
-
-
-# Current-tier labels in qm_barrier_provenance.json that represent a genuine
-# measured/DFT anchor strong enough to NARROW a core family's MC sigma. The file's
-# other labels (literature_family_surrogate, literature_derived_transfer,
-# family_rule_surrogate, no_literature_anchor) are weaker than the flat default and
-# must NOT widen a well-anchored core family (see the design note below).
-_QM_ANCHORED_TIERS = frozenset(
-    {"bounded_calibration", "selective_dft_anchor", "dft_validated", "wet_lab_anchor"}
-)
-
-
-def _apply_qm_provenance_narrowing(priors: Dict[str, ParameterPrior]) -> None:
-    """Narrow (never widen) core-family sigmas using qm_barrier_provenance.json.
-    Mutates ``priors`` in place. Silently no-ops if the file is missing or
-    malformed — the wider default sigma is the safe fallback.
-
-    Design note (S27 followup #2): this provenance file catalogues the EXPLORATORY
-    families (11-16: radical quench, quinone-Cys Michael, PE Schiff/Amadori,
-    lysinoalanine, ascorbic dicarbonyl), which are NOT in the MC's core-14
-    ``DEFAULT_FAMILY_PRIORS`` sampling set. Their tiers are surrogate / literature-
-    derived. We therefore (a) match the provenance ``active_arrhenius_key`` EXACTLY
-    against a core family key — never by substring — so an exploratory surrogate
-    barrier (e.g. ``quinone_cys_michael_thiol_addition_family``) can no longer
-    misattribute its uncertainty onto the well-anchored core ``thiol_addition`` used
-    in benchmarked Cys+ribose chemistry; and (b) only ever NARROW, and only when the
-    provenance ``current_tier`` is a genuine measured/DFT anchor. With the present
-    file this correctly no-ops (no core family carries an anchored tier), preserving
-    the in-panel headline; it activates automatically if a future entry anchors a
-    core family. The earlier code read a non-existent ``entries`` key (the schema
-    uses ``targets``) and was a silent no-op — this also fixes that latent bug.
-    """
-    if not QM_PROVENANCE_PATH.exists():
-        return
-    try:
-        provenance = json.loads(QM_PROVENANCE_PATH.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return
-    targets = provenance.get("targets") if isinstance(provenance, Mapping) else None
-    if not isinstance(targets, list):
-        return
-    for entry in targets:
-        if not isinstance(entry, Mapping):
-            continue
-        target_key = str(entry.get("active_arrhenius_key", ""))
-        tier = str(entry.get("current_tier", ""))
-        # Exact match only — no substring cross-mapping onto core families.
-        if target_key not in priors:
-            continue
-        if tier in _QM_ANCHORED_TIERS:
-            current = priors[target_key]
-            if current.sigma_kcal > 1.0:
-                priors[target_key] = ParameterPrior(
-                    key=target_key,
-                    sigma_kcal=1.0,
-                    source="qm_barrier_provenance",
-                    kind="barrier",
-                )
 
 
 def sample_offset_vectors(

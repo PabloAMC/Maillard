@@ -788,14 +788,18 @@ the global scale", is unchanged and is now better supported, not worse.)*
 > ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
 > audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
 > pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> carries an `audit_flag` in its registry entry. **120 records are marked
-> `no_verifiable_source`** (measured 2026-08-27 across every tracked JSON and YAML file,
-> including nested records), of which **98 carry numeric payloads** and **80 of those are
+> carries an `audit_flag` in its registry entry. **102 records are marked
+> `no_verifiable_source`** (re-measured 2026-09-01 across every tracked JSON and YAML file,
+> including nested records), of which **80 carry numeric payloads** and **80 of those are
 > consumed at runtime**.
 >
-> That count has now risen twice in one day, and **both rises are the repository getting more
-> honest, not worse.** Read it that way or the number is misleading in the wrong direction.
+> That count rose twice in one day and later fell once. **Both rises are the repository getting
+> more honest, not worse**; the fall is a deletion, not a verification. Read it that way or the
+> number is misleading in the wrong direction.
 >
+> * **120 → 102** (2026-09-01, cleaning branch). `data/qm/` was deleted together with the
+>   whole xTB → DFT lane, taking its 18 unverifiable barrier records with it. None of them
+>   ever reached the model, so the runtime-consumed figure is unchanged at 80.
 > * **84 → 102.** `data/qm/` was excluded from every sweep this repo has ever run — not by
 >   choice, but because `.gitignore` hid the directory from git entirely. Tracking it
 >   (2026-08-27) exposed 18 barrier windows and claimed quantum-chemistry values that carried
@@ -1005,7 +1009,7 @@ ratio under `ratio_a_over_b`, and the renderer was looking for `ratio` — so th
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
 
-**Provenance census (recounted at generation time, not copied).** **120 records** carry `source_status: no_verifiable_source` across 12 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 166 in total. The numeric-payload and runtime-consumed subsets (98 and 80) use a narrower definition than this recount and are pinned separately by `tests/scientific/test_honest_headline_guards.py`.
+**Provenance census (recounted at generation time, not copied).** **102 records** carry `source_status: no_verifiable_source` across 10 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 148 in total. The numeric-payload and runtime-consumed subsets (80 and 80) use a narrower definition than this recount and are pinned separately by `tests/scientific/test_honest_headline_guards.py`.
 
 **Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
 
@@ -1535,17 +1539,18 @@ on a 0-100 confidence score) paired with a `prediction_mode`, plus a
 `process_state_mismatch`, `heuristic`). Both propagate through the pipeline and surface in
 every report, and both are demoted one notch when a run falls outside the calibrated scope.
 
-### Selective quantum chemistry (xTB → DFT)
+### No quantum chemistry in the loop
 
-For high-value rate-limiting steps, GFN2-xTB identifies kinetically viable pathways (pathfinder,
-not a barrier authority). Final barriers come from DFT (r2SCAN-3c/def2-svp + ddCOSMO implicit
-water via PySCF/Sella). See the [Computational Gap Runbook](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)
-for the current queue and copy-paste commands.
+Until 2026-08-30 the repository carried a selective xTB → DFT refinement lane (PySCF/Sella,
+MACE potentials, pyGSM). It never produced a barrier the model used and it was removed
+(cleaning branch, Phases 1 and 1a). Every barrier the model ships is either a measured
+literature value or an explicitly labelled surrogate; see
+[SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md).
 
 ### Key dependencies
 
-RDKit (reaction enumeration), Cantera (ODE kinetics), PySCF + Sella (DFT refinement),
-xtb (pathfinding), MACE (ML potentials), NumPy/SciPy (numerics), Matplotlib (figures).
+RDKit (reaction enumeration), Cantera (ODE kinetics), NumPy/SciPy (numerics),
+Matplotlib (figures).
 
 ### Supported protein matrices
 
@@ -1569,7 +1574,6 @@ Pea and soy have the strongest literature backing; others are directional.
 | **Reviewer** — auditing what is verified         | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/)                                    |
 | **Experimentalist** — closing the gaps           | [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) → [experiment ranking](results/validation/experiment_value_ranking.md) |
 | **Maintainer** — extending the chemistry         | [Architecture (above)](#architecture-and-computational-methods-under-the-hood) → [CONTRIBUTING.md](CONTRIBUTING.md)                             |
-| **QM operator** — running the DFT queue          | [COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)                                                                      |
 | **Literature curator** — ingestion & calibration | [data/lit/README.md](data/lit/README.md)                                                                                                      |
 | **New contributor**                               | [CONTRIBUTING.md](CONTRIBUTING.md)                                                                                                            |
 

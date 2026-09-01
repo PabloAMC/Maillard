@@ -126,14 +126,14 @@
   "no_verifiable_source": {
     "available": true,
     "by_status_key": {
-      "source_status": 120,
+      "source_status": 102,
       "status": 38,
       "value_anchor_status": 4,
       "value_status": 4
     },
-    "files": 12,
-    "records": 166,
-    "with_numeric_payload": 68
+    "files": 10,
+    "records": 148,
+    "with_numeric_payload": 50
   },
   "observability_modes": {
     "available": true,

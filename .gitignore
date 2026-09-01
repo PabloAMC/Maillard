@@ -45,17 +45,13 @@ docs/assets/*.html
 # Data rules
 data/*
 !data/lit/
-!data/geometries/
 !data/reactions/
-!data/rmg_extensions/
 !data/species/
 !data/benchmarks/
 !data/protocols/
 !data/protocols/**
 !data/campaigns/
 !data/campaigns/**
-!data/qm/
-!data/qm/**
 !data/ingest_templates/
 !data/ingest_templates/**
 !data/cli_examples/
@@ -64,10 +60,8 @@ data/*
 !data/Gemini_Deep_Research/**
 
 # Bulky & auto-generated data exclusions
-data/reactions/rmg_validation_cases/
 data/lit/*.pdf
 data/lit/**/*.pdf
-results/validation/pygsm_scratch/
 
 # Test Reports and Validation Evidence
 reports/
@@ -75,32 +69,6 @@ results/*
 !results/validation/
 !results/validation/**
 !results/maillard_results.db
-
-# xTB & QM scratch outputs
-xtbopt.log
-xtbrestart
-xtbtopo.mol
-.sccnotconverged
-.xtboptok
-gfnff_topo
-*.xyz.bak
-wbo
-charges
-scr/
-grow/
-manual_test_qcg/
-data/geometries/xtb_inputs/**/xtbpath*.xyz
-data/geometries/xtb_inputs/**/xtbpath_ts*.xyz
-data/geometries/xtb_inputs/**/product*.xyz
-data/geometries/xtb_inputs/**/reactant*.xyz
-data/geometries/xtb_inputs/**/xtbrestart*
-data/geometries/xtb_inputs/**/.sccnotconverged
-data/geometries/scratch/
-data/geometries/dft_checkpoints/
-data/geometries/dft_runs/
-data/geometries/multistep/
-data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/
-data/geometries/xtb_inputs/pe_amadori_water/
 
 # Cantera
 *.yaml
