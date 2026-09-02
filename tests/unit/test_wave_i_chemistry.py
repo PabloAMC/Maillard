@@ -70,7 +70,6 @@ _GOOD_DOI = "10.1021/jf60199a045"
 _DOI_REPAIR_SITES = (
     "src/reaction_templates.py",
     "src/smirks_engine.py",
-    "src/curated_pathways.py",
     "src/barrier_constants.py",
     "scripts/generators/refit_sulfur_barriers_hofmann.py",
 )

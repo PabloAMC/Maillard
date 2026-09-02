@@ -134,36 +134,9 @@ def test_condition_resolver_ignores_uncoercible_values():
 
 
 # --------------------------------------------------------------------------
-# B. Reaction-network colour map
-# --------------------------------------------------------------------------
+# B. (Reaction-network colour map: tests removed 2026-09-03 with scripts/generate_reaction_network.py)
 
 
-def test_every_curated_reaction_family_has_an_edge_colour():
-    import generate_reaction_network as network
-
-    missing = network.uncoloured_reaction_families()
-    assert not missing, (
-        "reaction-family colour map is stale; no colour for "
-        f"{sorted(missing)} — they would draw in {network.DEFAULT_EDGE_COLOR}"
-    )
-
-
-def test_colour_map_carries_no_family_the_engine_stopped_emitting():
-    import generate_reaction_network as network
-
-    stale = network.stale_colour_map_keys()
-    assert not stale, f"colour map keys no curated pathway emits: {sorted(stale)}"
-
-
-def test_colour_map_colours_are_distinct():
-    import generate_reaction_network as network
-
-    colours = list(network.FAMILY_EDGE_COLORS.values())
-    assert len(set(colours)) == len(colours)
-    assert network.DEFAULT_EDGE_COLOR not in colours
-
-
-# --------------------------------------------------------------------------
 # C. Typed identifiers for DOI-less sources
 # --------------------------------------------------------------------------
 

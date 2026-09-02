@@ -59,6 +59,20 @@ def iter_markdown_paths(directory: Path = DEEP_RESEARCH_DIR) -> Iterable[Path]:
             yield path
 
 
+
+def _artifact_is_live(root: Path, artifact: Dict[str, Any]) -> bool:
+    """A runtime artifact binds a reference only if it exists AND is not quarantined.
+
+    2026-09-03: the two PMC9905368 benchmarks now point at their real location under
+    data/benchmarks/quarantined/ (the intake registry used to name a path that no longer
+    existed). Existing there must not read as RUNTIME_BOUND: the calibration panel's
+    non-recursive discovery never loads them, which is what quarantine means.
+    """
+    rel = str(artifact.get("path", ""))
+    if str(artifact.get("artifact_status", "")) == "quarantined" or "/quarantined/" in rel:
+        return False
+    return (root / rel).exists()
+
 def load_registry_entries(
     registry_file: Path = REGISTRY_FILE,
     *,
@@ -80,7 +94,7 @@ def load_registry_entries(
         author_year_keys = [key for key in (_author_year_key(value) for value in all_citations) if key]
         runtime_artifacts = list(row.get("runtime_artifacts", []) or [])
         runtime_bound = bool(runtime_artifacts) and all(
-            (root / str(artifact.get("path", ""))).exists()
+            _artifact_is_live(root, artifact)
             for artifact in runtime_artifacts
             if str(artifact.get("path", ""))
         )

@@ -585,6 +585,46 @@ The legacy path is not a side lane; it is the whole validation harness:
 Consequence: "retire the second engine" = rebuild the validation harness, the envelope, the matrix/headspace
 layer and the report on the core. Owner decision on staging requested 2026-09-03.
 
+### Retirement, staged (option B) — execution log
+- [x] B1a (2026-09-03, staged): `src/curated_pathways.py` (the hand-maintained mirror of the SMIRKS chemistry),
+      `scripts/generate_reaction_network.py` (drew it), `scripts/reproduce_use_cases.py` (legacy demo),
+      `tests/unit/test_data_integrity.py` (atom balance of the mirror) deleted; two soundness tests trimmed. The
+      Bayesian optimiser is deferred: its helpers are used by the front-door UX tests and it dies with `pipeline.py`.
+      The Cantera lane stays (roadmap item 2 may make it the integrator); `results_db`, `pre_processor`,
+      `family_sensitivity`, `trunk_kinetics` stay until the harness moves.
+      Also in this step: quarantined benchmarks referenced from the intake registry are labelled
+      `artifact_status: quarantined` and `deep_research_tracker` no longer counts them as runtime-bound (the corrected
+      path had made them look live); the `reaction_templates` ↔ `smirks_engine` import cycle is broken with a lazy
+      accessor (it only resolved when `smirks_engine` happened to be imported first).
+- [ ] B2 core Monte-Carlo envelope — DESIGN SETTLED 2026-09-03 (study in the session record):
+      * `predict(spec, targets, parameters=...)` already accepts an operative-parameter override; add a `CoreDraw`
+        (maillard overrides, Q10, lipid-fraction and PV scales, furanone partition Ea, pH drift) and
+        `size_declared_bands=False` so a draw does not double-count the corner re-integrations; add
+        `core_parameters(lane, frozen=...)` so draws are made in FIT-REPORT space (shared Ea scalars stay shared,
+        `MEASURED_EA_OVERRIDES` / `NO_EA_KEYS` honoured).
+      * Sampling: B1 identified pairs from their stderr (`k_mgo_mel`, `k_aa_frag`; the other two are unidentified →
+        fixed); B3 `k_acr_dp`/`Ea_acr_dp` from `ci95_halfwidth`; B7 `sigma_log10` 0.0414; declared bands (Q10,
+        lipid fraction, PV, furanone partition, K_aw, HS-SPME) sampled UNIFORM / log-uniform over the declared band,
+        not as lognormal 90 % (they were declared as corner bands). Independent draws, `SeedSequence(0)`, n=200.
+      * B8 (sulfur, most of the panel) carries NO uncertainty in its fit report. Decision: compute a Laplace
+        (finite-difference Jacobian) covariance at the B8 optimum rather than invent a 0.4-dex prior; until it
+        exists the artifact must mark sulfur priors `sampled: false, reason: no_uncertainty_in_fit_report`.
+      * Panel on the core: union of the trust-loop panel, the 17 maillard_path hold-outs and the 4 matrix bundles,
+        each row tagged `panel:`; `honest_literature_coverage` computed identically across the union; the 4 shared
+        Hofmann rows carry `shared_with`. The two `*_Internal2026` snapshots are legacy-model output and leave the
+        scored panel (regenerate later as core frozen predictions). Vocabulary gaps that refuse external rows
+        (hydroxyacetaldehyde, mercapto-2-propanone, hydrogen sulfide as precursors) are recorded, not patched
+        silently.
+      * Artifact keeps every field consumers read (benchmarks[].{benchmark_id, bench_file, execution_path,
+        protein_type, fitted_row, compounds[].{compound, measured_ppb, predicted_p5/p50/p95, inside_ci,
+        ci_width_log10}}, summary.honest_literature_coverage.*, summary.signal_origin_split.*, summary counts);
+        adds `predicted_point`, `lane`, `refused_compounds[]`, `priors[]` with `sampled`/`source`.
+      * Delete rather than port: `uncertainty_propagation.py` sampling, `matrix_recalibration.py`, the MC sections of
+        `external_validation.py` and `data_ingest.py`, `pipeline.build_formulation_uncertainty_envelopes`.
+      * Effort: ~2 sessions (+1 for the B8 Laplace covariance and the precursor aliases).
+- [ ] B3 core scoring of the 21-file panel + hold-outs. B4 publish core numbers next to legacy for one release, re-pin.
+- [ ] B5 delete the legacy engine and its harness.
+
 ### Original decision list (kept for the record)
 
 1. **`protein_source_registry.json`** is self-labelled `value_basis: mocked_placeholder` and

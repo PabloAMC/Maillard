@@ -2667,7 +2667,9 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json"
+          "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
+          "artifact_status": "quarantined",
+          "artifact_status_note": "Benchmark quarantined 2026-08-26 (unverifiable source); path corrected 2026-09-03. Not runtime-bound."
         }
       ],
       "requires_primary_data": false,
@@ -2722,7 +2724,9 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json"
+          "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
+          "artifact_status": "quarantined",
+          "artifact_status_note": "Benchmark quarantined 2026-08-26 (unverifiable source); path corrected 2026-09-03. Not runtime-bound."
         }
       ],
       "requires_primary_data": false,

@@ -3,7 +3,8 @@ from collections import Counter
 import pytest
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from src.smirks_engine import _SMIRKS_RULES, _amadori_cascade, _strecker_step, _beta_elimination_steps
+from src.smirks_engine import _SMIRKS_RULES
+from src.reaction_templates import _amadori_cascade, _strecker_step, _beta_elimination_steps
 from src.chem_utils import Species
 from src.conditions import ReactionConditions
 

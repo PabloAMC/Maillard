@@ -20,7 +20,6 @@ import pytest
 from rdkit import Chem
 
 from src.conditions import ReactionConditions
-from src.curated_pathways import PATHWAYS
 from src.chem_utils import Species
 from src.smirks_engine import (
     SmirksEngine,
@@ -79,18 +78,6 @@ def _skeleton(smiles: str) -> str:
 def test_reference_structure_identity(name, smiles, inchikey, formula):
     assert _skeleton(smiles) == inchikey, f"{name} is the wrong molecule"
     assert _formula(smiles) == formula, f"{name} has the wrong formula"
-
-
-def test_template_and_curated_layers_agree_on_the_disulfide():
-    """One label, one molecule. The two layers used to disagree."""
-    curated = next(
-        p.smiles
-        for step in PATHWAYS["C_S_Maillard_FFT"]
-        for p in step.products
-        if p.label == "bis(2-methyl-3-furyl) disulfide"
-    )
-    assert _skeleton(curated) == _skeleton(_FURYL_DISULFIDE_CANONICAL)
-    assert _skeleton(curated) not in _RETIRED_WRONG_STRUCTURES
 
 
 # ── Network invariants ──────────────────────────────────────────────────────
@@ -373,9 +360,6 @@ def test_no_emitted_family_falls_through_to_the_default_barrier():
         step.reaction_family
         for system in _SYSTEMS
         for step in _enumerate(system)
-    }
-    emitted |= {
-        step.reaction_family for steps in PATHWAYS.values() for step in steps
     }
     fallthrough = sorted(f for f in emitted if get_barrier(f)[0] == DEFAULT_BARRIER)
     assert not fallthrough, (

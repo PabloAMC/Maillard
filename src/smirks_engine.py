@@ -414,17 +414,68 @@ def _is_lipid_hydroperoxide(s: Species) -> bool:
 
 
 
-from src.reaction_templates import (
-    _amadori_cascade, _enolisation_steps, _strecker_step, _beta_elimination_steps,
-    _aminoketone_condensation, _retro_aldol_fragmentation, _cysteine_degradation,
-    _thiazole_condensation, _thiol_addition, _mft_pathway, _furyl_disulfide_formation,
-    _sulfur_volatiles_pathway, _deamination_step, _lipid_maillard_synergy,
-    _lipid_hydroperoxide_scission, _sugar_ring_opening,
-    _acrylamide_formation, _cml_cel_formation, _thiamine_degradation, _furanone_generation,
-    _glutathione_cleavage, _furanone_and_mft_route, _thiol_reductant_pool,
-    _c2_c3_mft_recombination, _norfuraneol_mercaptopentanone_route,
-    _norfuraneol_mft_parallel_route,
+
+_TEMPLATE_NAMES = (
+    "_acrylamide_formation",
+    "_amadori_cascade",
+    "_aminoketone_condensation",
+    "_beta_elimination_steps",
+    "_c2_c3_mft_recombination",
+    "_cml_cel_formation",
+    "_cysteine_degradation",
+    "_deamination_step",
+    "_enolisation_steps",
+    "_furanone_and_mft_route",
+    "_furanone_generation",
+    "_furyl_disulfide_formation",
+    "_glutathione_cleavage",
+    "_lipid_hydroperoxide_scission",
+    "_lipid_maillard_synergy",
+    "_mft_pathway",
+    "_norfuraneol_mercaptopentanone_route",
+    "_norfuraneol_mft_parallel_route",
+    "_retro_aldol_fragmentation",
+    "_strecker_step",
+    "_sugar_ring_opening",
+    "_sulfur_volatiles_pathway",
+    "_thiamine_degradation",
+    "_thiazole_condensation",
+    "_thiol_addition",
+    "_thiol_reductant_pool",
 )
+
+
+def _templates():
+    """Lazy handle on src.reaction_templates (breaks the import cycle; see _tpl)."""
+    from src import reaction_templates
+
+    return reaction_templates
+
+
+def _tpl(name: str):
+    """Resolve a template function by name at CALL time.
+
+    reaction_templates imports helper predicates from this module at import time, and this
+    module used to import the template functions back at the bottom. That cycle only
+    resolved when smirks_engine happened to be imported first; importing
+    reaction_templates first (as tests/unit/test_wave_i_chemistry.py does) failed with a
+    partially-initialised module. Templates are therefore resolved when called
+    (2026-09-03). A test that sets ``smirks_engine._aminoketone_condensation = ...`` to
+    disable a lane still works: an override set on this module wins over the template
+    module. The whole engine is scheduled for retirement; this is the minimal fix.
+    """
+    override = globals().get(name)
+    if override is not None:
+        return override
+    return getattr(_templates(), name)
+
+
+def __getattr__(name: str):
+    # Module-level access to the template functions (``smirks_engine._mft_pathway``) keeps
+    # working for callers and for tests that save/restore or monkeypatch them.
+    if name in _TEMPLATE_NAMES:
+        return getattr(_templates(), name)
+    raise AttributeError(f"module 'src.smirks_engine' has no attribute {name!r}")
 # ──────────────────────────────────────────────────────────────────────────
 # Tier A: SMIRKS application
 # ──────────────────────────────────────────────────────────────────────────
@@ -694,17 +745,17 @@ class SmirksEngine:
                     add_step_products(s)
 
         # ── Pre-Phase: Sugar Ring Opening ────────────────────────────────
-        ring_steps = _sugar_ring_opening(pool_list())
+        ring_steps = _tpl("_sugar_ring_opening")(pool_list())
         _add_steps(ring_steps)
 
         # ── Pre-Phase: PBMA Additive Degradations ─────────────────────────
-        thiamine_steps = _thiamine_degradation(pool_list(), self.conditions)
+        thiamine_steps = _tpl("_thiamine_degradation")(pool_list(), self.conditions)
         _add_steps(thiamine_steps)
                 
-        gsh_steps = _glutathione_cleavage(pool_list(), self.conditions)
+        gsh_steps = _tpl("_glutathione_cleavage")(pool_list(), self.conditions)
         _add_steps(gsh_steps)
 
-        furanone_steps = _furanone_generation(pool_list(), self.conditions)
+        furanone_steps = _tpl("_furanone_generation")(pool_list(), self.conditions)
         _add_steps(furanone_steps)
 
         # ── Tier B Phase 1: Amadori / Heyns cascade ──────────────────────
@@ -713,7 +764,7 @@ class SmirksEngine:
 
         for sugar in sugars:
             for amine in amines:
-                cascade = _amadori_cascade(sugar, amine)
+                cascade = _tpl("_amadori_cascade")(sugar, amine)
                 for step in cascade:
                     # Dedup by reactant+product labels
                     if not _step_exists(step, all_steps):
@@ -725,14 +776,14 @@ class SmirksEngine:
                 amadori_sp = pool_dict.get(amadori_can) if amadori_can else None
                 
                 if amadori_sp:
-                    enols = _enolisation_steps(amadori_sp, sugar, amine, self.conditions)
+                    enols = _tpl("_enolisation_steps")(amadori_sp, sugar, amine, self.conditions)
                     for enol in enols:
                         if not _step_exists(enol, all_steps):
                             all_steps.append(enol)
                             add_step_products(enol)
 
         # ── Tier B Phase 2: Retro-aldol and Strecker degradation ─────────
-        ra_steps = _retro_aldol_fragmentation(pool_list())
+        ra_steps = _tpl("_retro_aldol_fragmentation")(pool_list())
         _add_steps(ra_steps)
 
         dicarbonyls = [s for s in pool_list() if _is_dicarbonyl(s)]
@@ -740,7 +791,7 @@ class SmirksEngine:
 
         for dc in dicarbonyls:
             for amine in amines_now:
-                s_step = _strecker_step(dc, amine)
+                s_step = _tpl("_strecker_step")(dc, amine)
                 if s_step and not _step_exists(s_step, all_steps):
                     all_steps.append(s_step)
                     add_step_products(s_step)
@@ -749,11 +800,11 @@ class SmirksEngine:
         # 3a. Beta-elimination (DHA pathway)
         beta_candidates = [s for s in pool_list() if _has_cysteine_beta_carbon(s)]
         for aa in beta_candidates:
-            be_steps = _beta_elimination_steps(aa, pool_list())
+            be_steps = _tpl("_beta_elimination_steps")(aa, pool_list())
             _add_steps(be_steps)
 
         # 3b. Cysteine thermal degradation
-        cys_steps = _cysteine_degradation(pool_list(), self.conditions)
+        cys_steps = _tpl("_cysteine_degradation")(pool_list(), self.conditions)
         _add_steps(cys_steps)
 
         # 3b-1. Reducing-equivalent pool (Wave I fix 8, 2026-08-27; red-team H4).
@@ -762,22 +813,22 @@ class SmirksEngine:
         # only producer reachable from a cysteine/sugar system is the pyrazine
         # aromatisation at 3c and MFT becomes a downstream dependent of pyrazine
         # chemistry. See `_thiol_reductant_pool`.
-        _add_steps(_thiol_reductant_pool(pool_list()))
+        _add_steps(_tpl("_thiol_reductant_pool")(pool_list()))
 
         # 3c. Aminoketone Condensation (Pyrazines)
-        ak_steps = _aminoketone_condensation(pool_list())
+        ak_steps = _tpl("_aminoketone_condensation")(pool_list())
         _add_steps(ak_steps)
 
         # 3d. Lipid Thiazole Condensation
-        tz_steps = _thiazole_condensation(pool_list())
+        tz_steps = _tpl("_thiazole_condensation")(pool_list())
         _add_steps(tz_steps)
 
         # 3e-0. R.12: Deamination (Must happen before volatile templates)
-        deam_steps = _deamination_step(pool_list())
+        deam_steps = _tpl("_deamination_step")(pool_list())
         _add_steps(deam_steps)
 
         # 3e. Thiol Addition (Furfural + H2S + H2 -> FFT)
-        ta_steps = _thiol_addition(pool_list())
+        ta_steps = _tpl("_thiol_addition")(pool_list())
         _add_steps(ta_steps)
 
         # 3e-1. PRIMARY MFT route (Wave G1 fix 7; route corrected Wave N,
@@ -790,11 +841,11 @@ class SmirksEngine:
         # van den Ouweland & Peer 1975, 10.1021/jf60199a045, is its genuine
         # SYNTHESIS route to MFT) but no longer feeds MFT in situ; see
         # `_furanone_and_mft_route`'s docstring.
-        furanone_steps = _furanone_and_mft_route(pool_list())
+        furanone_steps = _tpl("_furanone_and_mft_route")(pool_list())
         _add_steps(furanone_steps)
         # Second pass so the +H2S step can see a 1,4-dideoxyosone that only
         # entered the pool on the first pass.
-        _add_steps(_furanone_and_mft_route(pool_list()))
+        _add_steps(_tpl("_furanone_and_mft_route")(pool_list()))
 
         # 3e-1b. SECOND MFT channel (Wave P item 2, 2026-08-27): the C2 + C3
         # recombination that Hofmann & Schieberle 1998 (10.1021/jf9705983) measured
@@ -810,10 +861,10 @@ class SmirksEngine:
         # moisture-gated; see the function docstring for why, and for the measured
         # reachability limit (glycolaldehyde is emitted only by the pentose
         # retro-aldol channel).
-        _add_steps(_c2_c3_mft_recombination(pool_list()))
+        _add_steps(_tpl("_c2_c3_mft_recombination")(pool_list()))
         # Second pass so the aldol step can see a mercaptopropanone that only
         # entered the pool on the first pass.
-        _add_steps(_c2_c3_mft_recombination(pool_list()))
+        _add_steps(_tpl("_c2_c3_mft_recombination")(pool_list()))
 
         # 3e-1c. NORFURANEOL's real sulfur fate (Wave P item 3, 2026-08-27). Wave N
         # retired norfuraneol from the MFT lane and left it with ZERO consumers;
@@ -822,8 +873,8 @@ class SmirksEngine:
         # 2,3-pentanedione intermediate:
         #   norfuraneol + 2 x 2[H] -> 2,3-pentanedione + H2O
         #   2,3-pentanedione + H2S + 2[H] -> 2-mercapto-3-pentanone + H2O
-        _add_steps(_norfuraneol_mercaptopentanone_route(pool_list()))
-        _add_steps(_norfuraneol_mercaptopentanone_route(pool_list()))
+        _add_steps(_tpl("_norfuraneol_mercaptopentanone_route")(pool_list()))
+        _add_steps(_tpl("_norfuraneol_mercaptopentanone_route")(pool_list()))
 
         # 3e-1d. NORFURANEOL -> MFT, re-added as a SLOW PARALLEL channel (Wave X,
         # 2026-08-28). Wave N removed this step on Cerny & Davidek's spike result;
@@ -836,37 +887,37 @@ class SmirksEngine:
         # argument is in `_norfuraneol_mft_parallel_route`'s docstring and in
         # tasks/audit_remediation.md "## Wave X" (a). Runs AFTER 3e-1/3e-1b so that
         # MFT from all three channels lands in one pool species.
-        _add_steps(_norfuraneol_mft_parallel_route(pool_list()))
+        _add_steps(_tpl("_norfuraneol_mft_parallel_route")(pool_list()))
 
         # 3e-2. DEMOTED one-step 3-deoxyosone shortcut, kept only for hexose
         #       reachability; see `_mft_pathway`'s docstring.
-        mft_steps = _mft_pathway(pool_list())
+        mft_steps = _tpl("_mft_pathway")(pool_list())
         _add_steps(mft_steps)
 
         # 3e-2b. Furyl disulfide formation from MFT
-        furyl_disulfide_steps = _furyl_disulfide_formation(pool_list())
+        furyl_disulfide_steps = _tpl("_furyl_disulfide_formation")(pool_list())
         _add_steps(furyl_disulfide_steps)
 
         # 3e-3. Methionine Sulfur Volatiles (Phase R.2 Fix)
-        sulf_steps = _sulfur_volatiles_pathway(pool_list())
+        sulf_steps = _tpl("_sulfur_volatiles_pathway")(pool_list())
         _add_steps(sulf_steps)
 
         # 3f. Safety / Toxic Markers (Acrylamide, CML, CEL)
         for sug in sugars:
             for amine in amines_now:
-                acry_steps = _acrylamide_formation(sug, amine)
+                acry_steps = _tpl("_acrylamide_formation")(sug, amine)
                 _add_steps(acry_steps)
         
         for amine in amines_now:
-            age_steps = _cml_cel_formation(amine, pool_list())
+            age_steps = _tpl("_cml_cel_formation")(amine, pool_list())
             _add_steps(age_steps)
 
         # 3g. Lipid-Maillard Synergy (Lipid Aldehyde + Strecker AK)
-        syn_steps = _lipid_maillard_synergy(pool_list())
+        syn_steps = _tpl("_lipid_maillard_synergy")(pool_list())
         _add_steps(syn_steps)
 
         # 3h. Lipid Oxidation Radicals (Phase 19)
-        hooh_steps = _lipid_hydroperoxide_scission(pool_list())
+        hooh_steps = _tpl("_lipid_hydroperoxide_scission")(pool_list())
         _add_steps(hooh_steps)
 
         # `_radical_crosstalk_templates` was retired here on 2026-08-27
