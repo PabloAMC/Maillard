@@ -796,9 +796,16 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
 - [x] Step 6 — bring your own measurement: `src/kinetic_core/user_scoring.py` + `maillard score DOC` (`--template`):
       scores measured ppb like the panel scorecard (fold, 3x band, interval, refusals) and writes a bundle-shaped
       record with provenance under `results/user/` (never `data/`); explicitly scoring, not calibration.
-- [ ] Step 4 — slice profiles of the B8 objective (`generate_kinetic_core_b8_profile.py`, 161 evals): RUNNING /
-      see below. The thiol-sink ceiling question (102 kJ/mol, Gigl 2021 vs search convenience) is reported from
-      the profile, not decided in code.
+- [x] Step 4 — slice profiles of the B8 objective (`generate_kinetic_core_b8_profile.py` → `results/validation/
+      kinetic_core_b8_profile.{json,md}`, 161 evaluations, 340 s): verdicts {'asymmetric': 6, 'bound_limited': 9, 'quadratic': 8}.
+      quadratic: k_tdp_fur, k_nf_mft, k_mgo_mp, k_glc_ha, k_fft_decay, k_pent_caramel, ph_arp_secondary_ammonium_pKa, k_arp_tdp. asymmetric: k_nf_mp3p, k_cys_thermal, k_thiolate_loss, k_osone_decay, k_ttca_deg, Ea_decay_carbonyl_sink.
+      bound_limited (the declared band ends within 2 sigma): k_dimer_fft, k_fur_decay, ph_acid_yield_per_sink_event, k_fur_fft, k_dimer_decay, k_thiol_decay, Ea_decay_thiol_sink, k_dimer_mft, k_arp_dpo.
+      READING: the Laplace picture holds locally on 8 coordinates and is one-sided on 6; on 9 the DECLARED BANDS,
+      not the data, end the slice — the search ranges are active constraints of the B8 optimum. The slice rise at
+      2 marginal sigma is far above 2 on the quadratic coordinates (e.g. k_tdp_fur 17.8), i.e. the marginal sigmas
+      are inflated by strong correlations; the joint draw in the envelope is the right object, the marginal table
+      is not. The thiol-sink ceiling (102 kJ/mol) is one of the active bounds: whether it is Gigl 2021's measured
+      range or a search convenience is the first question for B9, together with the fit/validate split.
 - [x] Step 7 — B6 test audit: `tasks/test_audit.md` (49 files, per-file verdicts). Executed: the public-API smoke test
       deleted; ten "markdown mentions phrase" prose tests deleted; the seven frozen-wave contract files labelled as
       regression records. Left in the audit's own backlog: merge the four generator-text checks into the freeze guard,
