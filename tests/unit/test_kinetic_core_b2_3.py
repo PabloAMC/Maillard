@@ -1,4 +1,9 @@
-"""
+"""FROZEN-WAVE REGRESSION RECORD (labelled 2026-09-03, test audit). The wave generator this file
+tests is frozen (scripts/generators/WAVES.md); these tests fail only if the frozen report, the
+network or the parameter tables change. They are the contract of a finished wave, not live checks
+of new behaviour.
+
+
 tests/unit/test_kinetic_core_b2_3.py
 
 BUILD WAVE B2.3 -- the three things this wave must not be able to lose.
@@ -304,7 +309,7 @@ BUNDLE_BASELINES = {
         "a3d126ac3fab64c57f8a463659e3e89474a2405e152e6c72e33272b37e8b8927",
     "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7":
         "7c78672fbcba460489e0528dd6becc24a530bb67fde6cf73aaee5e6c6480a183",
-    "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5":
+    "hofmann1998_xylose_cysteine_145C_20min_pH5":
         "ad67c760dad783148542bea1587821334be1130c1638dd8478c4919fa2e8b6a6",
     "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026":
         "03d56fd60b097c85c731c87181f5269a4ea9aa4e4bd38c3f5267cef5f66d8251",
@@ -327,8 +332,9 @@ def _hash_without_buffer(payload):
     ).hexdigest()
 
 
-def test_there_are_exactly_twenty_one_frozen_bundles():
-    assert len(list(BUNDLE_DIR.rglob("*.json"))) == 21
+def test_there_are_exactly_twenty_frozen_bundles():
+    # 2026-09-03: 21 -> 20; the xylose pH-5 bundle moved to the trust loop (the sulfur fit had read it)
+    assert len(list(BUNDLE_DIR.rglob("*.json"))) == 20
 
 
 def test_the_buffer_completion_changed_nothing_but_the_buffer():

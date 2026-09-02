@@ -1,4 +1,9 @@
-"""
+"""FROZEN-WAVE REGRESSION RECORD (labelled 2026-09-03, test audit). The wave generator this file
+tests is frozen (scripts/generators/WAVES.md); these tests fail only if the frozen report, the
+network or the parameter tables change. They are the contract of a finished wave, not live checks
+of new behaviour.
+
+
 tests/unit/test_kinetic_core_b2_2.py
 
 BUILD WAVE B2.2 -- the properties the two new pieces must not lose.

@@ -73,7 +73,7 @@ cd Maillard
 ```
 
 Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`); host
-Python is for editing only. The front door is one script with four verbs:
+Python is for editing only. The front door is one script with five verbs:
 
 ```bash
 python scripts/maillard.py compare --template > my_comparison.yml   # two arms, A vs B
@@ -81,13 +81,17 @@ python scripts/maillard.py compare my_comparison.yml --report compare.html
 python scripts/maillard.py predict my_comparison.yml --system a      # one arm, absolutes
 python scripts/maillard.py explain 2-methyl-3-furanthiol             # what the core knows about a compound
 python scripts/maillard.py rank --top 10                             # which measurement would teach the model most
+python scripts/maillard.py score --template > my_measurements.yml    # then: score my_measurements.yml
 ```
 
 `compare` leads with **ratios** between the two arms — the quantity the systematic scale error
 cancels out of — and prints each arm's envelope declaration. `predict` prints absolutes *with*
 their interval and OAV. `explain` answers a compound with the lane, the declared assumptions and,
 for a refused compound, the reason. `rank` reads the core's Monte-Carlo envelope and orders
-(benchmark, compound) rows by how badly and how uncertainly the model misses them. `--json`
+(benchmark, compound) rows by how badly and how uncertainly the model misses them. `score` takes
+**your own measured concentrations** and scores them the way the panel scorecard scores a bundle,
+writing a bundle-shaped record under `results/user/` that the next fit wave can read; it never
+refits anything, because a refit is a new pre-registered wave (`scripts/generators/WAVES.md`). `--json`
 gives the machine-readable payload of any verb; `--report` writes a self-contained HTML page.
 
 Regenerate the evidence artifacts:
@@ -106,8 +110,8 @@ hold-out isolation, benchmark schema).
 
 ## How well calibrated is it?
 
-Badly, and measurably. The numbers below are what the core scores on the union panel — the 19
-trust-loop bundles that carry a measurement, the 17 `maillard_path` hold-outs and the 4 external
+Badly, and measurably. The numbers below are what the core scores on the union panel — the 20
+trust-loop bundles that carry a measurement, the 16 `maillard_path` hold-outs and the 4 external
 matrix bundles, 40 in all, 49 scored rows — read from
 [`core_panel_scores.md`](results/validation/core_panel_scores.md) and
 [`core_prediction_uncertainty.md`](results/validation/core_prediction_uncertainty.md), and
@@ -121,16 +125,18 @@ in the same change.
 | by lane, within 3x | acrylamide 2/12 · sulfur 6/29 · lipid 0/7 · trunk 0/1 |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **1 of 40** — `thiamine_cys_glucose_120C_Bolton1994`, 1.34x under the bundle's declared 3x contract |
 | literature rows inside the 90% Monte-Carlo interval | **11 of 44** evaluable (median width 1.07 dex); **8 of 35** out of sample; 5 rows not evaluable |
-| direction / ranking skill (69-claim literature panel) | **18 of 30** strictly independent evaluable claims; **15 of 22** with pH and water activity set aside, **3 of 8** on those axes; 22 independent claims not evaluable |
+| direction / ranking skill (69-claim literature panel) | **18 of 27** strictly independent evaluable claims; **15 of 22** with pH set aside, **3 of 5** on pH; water-activity comparisons are refused; 25 independent claims not evaluable |
 
 Three things a reader must know, all declared in code and printed on every row they touch:
 
-- **The sulfur fit read eight panel rows.** The B2–B8 sulfur calibration (62 rows, 23 free
-  parameters) used the Hofmann 1998 Table 1 pH-5 rows — ribose, glucose, fructose *and xylose* —
-  plus five fed-intermediate step rows. The xylose row sits on the **hold-out** panel. By the
-  repository's leverage rule (0.37 free parameters per row) these rows stay in the counts,
-  flagged `in_core_fit`; the out-of-sample line above is the count without them
-  (`src/kinetic_core/fit_targets.py`).
+- **The sulfur fit read ten panel bundles.** The B2–B8 sulfur calibration (62 rows, 23 free
+  parameters) used the Hofmann 1998 Table 1 pH-5 rows — ribose, glucose, fructose and xylose —
+  plus six fed-intermediate step rows. The fit rows now declare their bundles
+  (`results/validation/kinetic_core_b8_fit_targets.json`, generated from the fit generator's own row
+  table), and the xylose bundle, found on the hold-out panel at B3, was moved to the trust loop on
+  2026-09-03 because a hold-out the fit has read is not a hold-out. By the repository's leverage rule
+  (0.37 free parameters per row) these rows stay in the counts, flagged `in_core_fit`; the
+  out-of-sample line above is the count without them.
 - **The sulfur lane's uncertainty is a Laplace covariance, not a fitted one.** The B8 fit report
   carries no parameter covariance; a Gauss-Newton covariance at its frozen optimum
   ([`kinetic_core_b8_laplace_covariance.json`](results/validation/kinetic_core_b8_laplace_covariance.json),
@@ -142,15 +148,16 @@ Three things a reader must know, all declared in code and printed on every row t
   bundle declares as headspace-quantified, never to isotope-dilution or HPLC values; ten bundles
   declare no method and get them by default, and say so.
 
-**Directional and ranking claims are the product, and the core scores 18 of 30 on them.**
+**Directional and ranking claims are the product, and the core scores 18 of 27 on them.**
 [`core_directional_scores.md`](results/validation/core_directional_scores.md) runs every claim of
 the 69-claim literature panel ([`directional_claims_panel.yml`](docs/validation/directional_claims_panel.yml))
-through the same front door a user calls. Sixteen claims are prose-only and 22 more are not
-evaluable on the core (an arm refused: 2,5-dimethylpyrazine and 2-pentylfuran are not core
-species, H2S and hydroxyacetaldehyde are not core precursors). Of the rest: sugar identity 5 of 9,
-temperature 5 of 7, time 2 of 2, cysteine present-vs-absent 3 of 3, pH 3 of 5, water activity 0 of
-3. Seven misses are identical predictions across an axis the lane carries no term for (pH on the
-trunk and acrylamide lanes, water activity everywhere); they are counted as misses, not excused.
+through the same front door a user calls. Sixteen claims are prose-only and 25 more are not
+evaluable on the core: an arm refused because 2,5-dimethylpyrazine and 2-pentylfuran are not core
+species or H2S and hydroxyacetaldehyde are not core precursors, or because the comparison moves an
+axis the lane carries no term for. **The engine refuses those comparisons outright** (water activity
+anywhere, pH on the trunk, acrylamide and lipid lanes) rather than returning two identical numbers,
+so they are not evaluable rather than misses. Of the rest: sugar identity 5 of 9, temperature 5 of 7,
+time 2 of 2, cysteine present-vs-absent 3 of 3, pH on the sulfur lane 3 of 5.
 A coin scores about half on binary orderings, so read the per-axis rows in the model card, not
 the aggregate. `maillard compare` prints the axes each comparison moves and the weakest of their
 verdicts.
@@ -185,7 +192,7 @@ constant, which is what makes `rank` useful.
 *Generated by `scripts/generators/generate_model_card.py`. Do not hand-edit between the markers; regenerate. Every number below is read from a tracked artifact or recomputed live, and the row says which.*
 
 - **Absolute concentrations are unreliable.** On the union panel the kinetic core lands 8/49 rows within 3x (median fold error 11.1x, worst 7.56e+06x); out of sample -- every row a core fit read removed -- 4/40 (median 31.2x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 11/44 evaluable literature rows (5 not evaluable: the no lane carries no sampled uncertainty), 8/35 out of sample.
-- **Directional and ranking claims are the product, and on the kinetic core they score 18/30 on strictly independent literature claims** (22 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 15/22 once pH and water activity are set aside, and 3/8 on pH and water activity themselves, 3 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.
+- **Directional and ranking claims are the product, and on the kinetic core they score 18/27 on strictly independent literature claims** (25 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 15/22 once pH and water activity are set aside, and 3/5 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.
 - **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
 
 | Claim type | System class | Measured | Verdict |
@@ -202,7 +209,7 @@ constant, which is what makes `rank` useful.
 | Direction / ranking on `lipid_lane` | protein matrix (lipid-derived aldehydes) | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `matrix_identity` | protein matrix (pea vs soy) | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `ph` | any (pH moved) | 3/5 on the directional panel (independent claims)<br/><sub>misses: PH-07, MOT-01</sub> | caution |
-| Direction / ranking on `moisture_aw` | any (water activity moved) | 0/3 on the directional panel (independent claims)<br/><sub>misses: AW-01, AW-02, AW-03</sub> | **do-not-use** |
+| Direction / ranking on `moisture_aw` | any (water activity moved) | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `ranking` | several compounds ordered in one system | 0/1 on the directional panel (independent claims)<br/><sub>misses: MOT-03</sub> | **do-not-use** |
 | Direction / ranking on `process_heating` | processed vs raw | no evaluable independent claim on the core | **do-not-use** |
 | Any claim of benchmark-grade agreement | the union panel: trust loop + hold-outs + matrix bundles | 1/40 strict-ready (thiamine_cys_glucose_120C_Bolton1994); 8/49 rows within 3x, out-of-sample 4/40<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | caution |

@@ -64,6 +64,7 @@ are gone with it. The front door is scripts/maillard.py.)
   predict SPEC [args...]             python scripts/maillard.py predict SPEC ...
   explain COMPOUND                   python scripts/maillard.py explain COMPOUND
   rank [args...]                     python scripts/maillard.py rank ...
+  score DOC [args...]                python scripts/maillard.py score DOC ... (your own measurements)
 
 == Evidence artifacts (regenerate what README quotes) ==
   core-scores                        results/validation/core_panel_scores.{json,md}   (~15 s)
@@ -225,7 +226,7 @@ case "$cmd" in
   quickstart)
     quickstart_lane
     ;;
-  compare|predict|explain|rank)
+  compare|predict|explain|rank|score)
     verb="$cmd"; shift
     run_in_env "$(forward_args "python scripts/maillard.py $verb" "$@")"
     ;;

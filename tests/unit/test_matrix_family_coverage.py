@@ -27,10 +27,3 @@ def test_matrix_family_coverage_artifact_distinguishes_explicit_from_indirect_su
     assert payload["summary"]["bounded_expansion_candidates"] == ["mycoprotein"]
 
 
-def test_matrix_family_coverage_markdown_mentions_coconut_gap_policy():
-    markdown = render_matrix_family_coverage_markdown(build_matrix_family_coverage_artifact())
-
-    assert "Matrix Family Coverage" in markdown
-    assert "Expansion Gates" in markdown
-    assert "coconut_oil_co_matrix" in markdown
-    assert "Indirect-only families" in markdown

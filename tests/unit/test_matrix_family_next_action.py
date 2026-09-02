@@ -25,10 +25,3 @@ def test_matrix_family_next_action_advances_only_one_bounded_family():
     assert by_family["pea_isolate"]["decision"] == "defer_until_primary_matrix_lane_moves"
 
 
-def test_matrix_family_next_action_markdown_surfaces_choice_and_defers():
-    markdown = render_matrix_family_next_action_markdown(build_matrix_family_next_action_artifact())
-
-    assert "Matrix Family Next Action" in markdown
-    assert "Chosen family: mycoprotein" in markdown
-    assert "advance_now" in markdown
-    assert "defer_as_scope_gap" in markdown

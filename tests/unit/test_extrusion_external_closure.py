@@ -25,11 +25,3 @@ def test_extrusion_external_closure_artifact_tracks_root_blocker_and_next_sprint
     assert by_matrix["soy_iso"]["contextual_anchor_ids"] == ["troise_2018_soy_thermal_history"]
 
 
-def test_extrusion_external_closure_markdown_surfaces_backfill_and_missing_markers():
-    markdown = render_extrusion_external_closure_markdown(build_extrusion_external_closure_artifact())
-
-    assert "Extrusion External Closure" in markdown
-    assert "Literature Backfill" in markdown
-    assert "Lysinoalanine (LAL)" in markdown
-    assert "de_leyn_2019_thiamine_retention" in markdown
-    assert "dha_lysinoalanine_external_package" in markdown

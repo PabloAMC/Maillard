@@ -14,8 +14,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
 | external_matrix | 2 | 4 | 0.500 | 2.096 | 0 |
-| maillard_path_holdout | 4 | 25 | 0.160 | 0.930 | 5 |
-| trust_loop | 5 | 15 | 0.333 | 1.639 | 0 |
+| maillard_path_holdout | 3 | 23 | 0.130 | 0.930 | 5 |
+| trust_loop | 6 | 17 | 0.353 | 1.508 | 0 |
 
 ## Rows
 
@@ -31,6 +31,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.32e+03 | 1.48e+03 | 2.25e+03 | 2.73e+03 | no | 0.267 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 1.21e+03 | 233.237 | 1.13e+03 | 6.52e+03 | no | 1.447 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 697.088 | 385.854 | 668.033 | 1.08e+03 | no | 0.447 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_xylose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 96.000 | 268.846 | 70.428 | 289.514 | 1.25e+03 | yes | 1.250 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_xylose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 526.834 | 302.821 | 497.524 | 720.876 | no | 0.377 | no (extraction) | sulfur | predictive [in core fit] |
 | pea_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.14e+03 | 0.339 | 0.036 | 0.369 | 4.381 | no | 2.089 | yes (undeclared) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 22.839 | 1.223 | 25.195 | 459.646 | no | 2.575 | yes (undeclared) | lipid | predictive |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 9.46e-05 | 2.74e-15 | 0.000578 | 2.058 | no | 14.876 | yes (undeclared) | sulfur | predictive |
@@ -56,8 +58,6 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 22.314 | 11.967 | 21.364 | 36.427 | no | 0.483 | no (extraction) | sulfur | predictive (shared: hofmann_ribose_pH3_MFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.095 | 0.00509 | 0.094 | 0.889 | no | 2.242 | no (extraction) | sulfur | predictive (shared: hofmann_ribose_pH7_FFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.174 | 0.029 | 0.149 | 0.248 | no | 0.929 | no (extraction) | sulfur | predictive (shared: hofmann_ribose_pH7_MFT) |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 268.846 | 70.428 | 289.514 | 1.25e+03 | yes | 1.250 | no (extraction) | sulfur | predictive [in core fit] |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 526.834 | 302.821 | 497.524 | 720.876 | no | 0.377 | no (extraction) | sulfur | predictive [in core fit] |
 | mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 60.743 | 23.585 | 50.708 | 95.985 | no | 0.610 | no (extraction) | sulfur | predictive |
 | mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 634.638 | 309.860 | 713.210 | 1.39e+03 | no | 0.652 | no (extraction) | sulfur | predictive |
 | mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 92.511 | 44.499 | 81.401 | 134.034 | no | 0.479 | no (extraction) | sulfur | predictive |

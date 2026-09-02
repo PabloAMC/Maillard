@@ -46,7 +46,9 @@ FROZEN_JSON = ROOT / "results" / "validation" / "maillard_path_holdout_frozen_pr
 # plus xylose pH 5) from the owner-retrieved PDF — growth, not shrinkage; the
 # original 12 are untouched. The five carry the same provenance contract
 # (access_route: owner-provided PDF, dual-read verification).
-EXPECTED_BUNDLE_COUNT = 17
+# RE-PINNED 2026-09-03: 17 -> 16. hofmann1998_xylose_cysteine_145C_20min_pH5 was moved to the trust
+# loop because the B2-B8 sulfur fit had read its two Table 1 rows (see the bundle's hold_out_history).
+EXPECTED_BUNDLE_COUNT = 16
 
 
 def _bundles() -> list[tuple[Path, dict]]:

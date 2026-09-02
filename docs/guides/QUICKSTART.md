@@ -63,6 +63,17 @@ python scripts/maillard.py rank --matrix pea_iso --json
 Reads the core's Monte-Carlo envelope (`results/validation/core_prediction_uncertainty.json`)
 and orders (benchmark, compound) rows by how badly and how uncertainly the model misses them.
 
+## Your own measurements: `maillard score`
+
+```bash
+python scripts/maillard.py score --template > my_measurements.yml   # edit: precursors, process, measured ppb
+python scripts/maillard.py score my_measurements.yml
+```
+
+Each measured compound is scored the way the panel scores a benchmark (fold error, the 3x band, the
+reliability interval, or a named refusal), and a bundle-shaped record lands under `results/user/` with
+your provenance. Nothing is refitted: calibration on new data is a new pre-registered fit wave.
+
 ## Before you trust a result
 
 1. Read the **model card** in [README.md](../../README.md#how-well-calibrated-is-it): every
@@ -99,4 +110,4 @@ and orders (benchmark, compound) rows by how badly and how uncertainly the model
 | `./scripts/docker_maillard.sh data-readme` | Regenerate `data/README.md` |
 | `./scripts/docker_maillard.sh experiment-value-ranking` | Rank experiments by value of information |
 | `./scripts/docker_maillard.sh deep-research-audit` | Literature backlog audit |
-| `python scripts/maillard.py {compare,predict,explain,rank}` | The front door |
+| `python scripts/maillard.py {compare,predict,explain,rank,score}` | The front door |

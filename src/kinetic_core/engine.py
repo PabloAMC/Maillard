@@ -1867,6 +1867,47 @@ def predict(
 # ---------------------------------------------------------------------------
 
 
+#: Lanes whose parameters carry NO pH term (declared in their parameter modules).
+NO_PH_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE, LIPID})
+
+
+def _lanes_of(declaration) -> Tuple[str, ...]:
+    lanes = getattr(declaration, "lanes", None)
+    if lanes:
+        return tuple(str(x) for x in lanes)
+    return (str(declaration.lane),) if declaration.lane else ()
+
+
+def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
+    """
+    2026-09-03 (owner decision, step 5): a comparison that moves an axis the resolved
+    lane carries no term for is REFUSED, not answered with two identical numbers.
+
+    * water activity differs between the arms: NO lane carries an a_w term.
+    * pH differs and every resolved lane is trunk / acrylamide / lipid: those lanes are
+      homogeneous in pH by declaration; only the sulfur lane carries a pH trajectory.
+
+    Returns the refusal reason, or None when the comparison is answerable.
+    """
+    pa, pb = spec_a.process, spec_b.process
+    aw_a, aw_b = pa.water_activity, pb.water_activity
+    if aw_a is not None and aw_b is not None and abs(float(aw_a) - float(aw_b)) > 1e-9:
+        return (
+            "REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w "
+            "term; the model would return identical arms and call it a comparison. "
+            "Hold a_w fixed, or bring a measurement."
+        )
+    if abs(float(pa.ph) - float(pb.ph)) > 1e-9:
+        lanes = set(_lanes_of(declaration_a)) | set(_lanes_of(declaration_b))
+        if lanes and lanes <= NO_PH_TERM_LANES:
+            return (
+                f"REFUSED -- the two arms differ in pH and the resolved lane(s) "
+                f"({', '.join(sorted(lanes))}) carry NO pH term by declaration; the model would "
+                "return identical arms. Only the sulfur lane carries a pH trajectory."
+            )
+    return None
+
+
 def compare(
     spec_a: FormulationSpec,
     spec_b: FormulationSpec,
@@ -1903,6 +1944,15 @@ def compare(
                 "at least one arm is out of envelope; a ratio against a "
                 "refusal is not a ratio."
             ),
+        }
+    refusal = axis_refusal(spec_a, spec_b, run_a.declaration, run_b.declaration)
+    if refusal is not None:
+        return {
+            "comparable": False,
+            "declaration_a": run_a.declaration.as_dict(),
+            "declaration_b": run_b.declaration.as_dict(),
+            "reason": refusal,
+            "axis_refusal": True,
         }
 
     shared = sorted(
@@ -2035,6 +2085,8 @@ __all__ = [
     "ProcessSpec",
     "SULFUR",
     "TARGET_ALIASES",
+    "axis_refusal",
+    "NO_PH_TERM_LANES",
     "TRUNK",
     "ThermalProgram",
     "UNREPRESENTED_COMPOUNDS",

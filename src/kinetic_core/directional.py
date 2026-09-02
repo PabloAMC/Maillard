@@ -136,6 +136,26 @@ def _is_sulfur_observable(name: str) -> bool:
     return any(tok in n for tok in _SULFUR_TOKENS)
 
 
+def _axis_refusal_between_arms(arms, runs) -> Optional[str]:
+    """The engine's axis refusal, applied to every consecutive pair of arms."""
+    from src.comparative_cli import spec_to_core
+
+    from .engine import axis_refusal
+
+    class _Decl:  # the engine's helper reads .lane / .lanes only
+        def __init__(self, run):
+            self.lane = run["lane"]
+            self.lanes = None
+
+    for (label_a, sys_a), (label_b, sys_b), run_a, run_b in zip(arms, arms[1:], runs, runs[1:]):
+        spec_a = spec_to_core(_spec_from_system(label_a, sys_a))
+        spec_b = spec_to_core(_spec_from_system(label_b, sys_b))
+        reason = axis_refusal(spec_a, spec_b, _Decl(run_a), _Decl(run_b))
+        if reason:
+            return "refused by the engine: " + reason
+    return None
+
+
 def _log_step(a: float, b: float) -> Optional[float]:
     if a is None or b is None or a <= 0.0 or b <= 0.0:
         return None
@@ -181,6 +201,12 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
         reasons = "; ".join(refused[0]["reasons"]) or f"{observable}: no concentration returned"
         return {**base, "status": NOT_EVALUABLE, "reason": f"arm {refused[0]['label']!r} refused: {reasons[:400]}", "arms": runs}
 
+    # Step 5 (2026-09-03): an axis the lane carries no term for is REFUSED by the engine
+    # (engine.axis_refusal), so the claim is NOT EVALUABLE rather than a miss of identical
+    # predictions. The count of such claims is reported by reason.
+    refusal = _axis_refusal_between_arms(arms, runs)
+    if refusal is not None:
+        return {**base, "status": NOT_EVALUABLE, "reason": refusal, "arms": runs}
     values = [r["value_ug_per_l"] for r in runs]
     if claim_type == "ordering" and len(values) == 2 and expected in ("A>B", "A<B") and (values[0] == 0.0) != (values[1] == 0.0):
         # one arm is exactly zero (a structural zero or a true zero rate): the ordering is

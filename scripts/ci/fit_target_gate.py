@@ -70,7 +70,7 @@ PREDICTION_UNCERTAINTY = VALIDATION_DIR / "core_prediction_uncertainty.json"
 # Records that declare a fit. Any file matching one of these globs is read for fit
 # targets; a new refit generator is picked up automatically because it will write a
 # record whose name matches.
-FIT_RECORD_GLOBS = ("*refit*.json", "*rederivation*.json", "*calibration_refit*.json")
+FIT_RECORD_GLOBS = ("*refit*.json", "*rederivation*.json", "*calibration_refit*.json", "*_fit_targets.json")
 
 # JSON keys under which a fit record names what it fitted against.
 FIT_TARGET_KEYS = ("fit_target", "fit_targets", "fit_target_files", "fit_target_ids")

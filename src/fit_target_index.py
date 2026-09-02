@@ -59,6 +59,7 @@ FIT_RECORD_GLOBS: Tuple[str, ...] = (
     "*refit*.json",
     "*rederivation*.json",
     "*calibration_refit*.json",
+    "*_fit_targets.json",  # 2026-09-03: the kinetic core's own fit-row declarations
 )
 
 #: JSON keys under which a record names what it was fitted against.

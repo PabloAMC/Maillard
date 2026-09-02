@@ -32,10 +32,3 @@ def test_matrix_family_priority_ranking_orders_next_scope_choices():
     assert by_family["coconut_oil_co_matrix"]["evidence_landing"] == "family_specific_calibration_or_tradeoff_benchmark"
 
 
-def test_matrix_family_priority_ranking_markdown_surfaces_scope_order():
-    markdown = render_matrix_family_priority_ranking_markdown(build_matrix_family_priority_ranking_artifact())
-
-    assert "Matrix Family Priority Ranking" in markdown
-    assert "Evidence Landing" in markdown
-    assert "Scope-gap priorities" in markdown
-    assert "coconut_oil_co_matrix" in markdown

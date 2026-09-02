@@ -435,7 +435,7 @@ def score_panel(
                 **_close(out_of_sample),
                 "definition": (
                     "honest_literature rows MINUS every row a core fit read (fit_targets."
-                    "CORE_SULFUR_FIT_ROWS): the strongest claim the panel supports"
+                    "kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
                 ),
             },
             "in_core_fit": {

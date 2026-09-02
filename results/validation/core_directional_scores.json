@@ -52,7 +52,7 @@
   "summary": {
     "headline": [
       18,
-      30
+      27
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -83,15 +83,11 @@
         },
         "moisture_aw": {
           "agree": 0,
-          "evaluable": 3,
-          "not_evaluable": 1,
-          "misses": [
-            "AW-01",
-            "AW-02",
-            "AW-03"
-          ],
-          "mechanism_absent": 3,
-          "rate": 0.0
+          "evaluable": 0,
+          "not_evaluable": 4,
+          "misses": [],
+          "mechanism_absent": 0,
+          "rate": null
         },
         "ph": {
           "agree": 3,
@@ -165,38 +161,32 @@
       },
       "total": {
         "agree": 18,
-        "evaluable": 30,
-        "not_evaluable": 22,
+        "evaluable": 27,
+        "not_evaluable": 25,
         "misses": [
           "SUG-03",
           "TEMP-01",
-          "AW-01",
-          "AW-02",
           "SUG-12",
           "PH-07",
           "TEMP-05",
-          "AW-03",
           "HOF-01",
           "HOF-03",
           "MOT-01",
           "MOT-03"
         ],
-        "mechanism_absent": 3,
-        "rate": 0.6
+        "mechanism_absent": 0,
+        "rate": 0.6666666666666666
       },
       "ph_aw": {
         "agree": 3,
-        "evaluable": 8,
-        "not_evaluable": 6,
+        "evaluable": 5,
+        "not_evaluable": 9,
         "misses": [
-          "AW-01",
-          "AW-02",
           "PH-07",
-          "AW-03",
           "MOT-01"
         ],
-        "mechanism_absent": 3,
-        "rate": 0.375
+        "mechanism_absent": 0,
+        "rate": 0.6
       },
       "excluding_ph_aw": {
         "agree": 15,
@@ -250,15 +240,11 @@
         },
         "moisture_aw": {
           "agree": 0,
-          "evaluable": 3,
-          "not_evaluable": 1,
-          "misses": [
-            "AW-01",
-            "AW-02",
-            "AW-03"
-          ],
-          "mechanism_absent": 3,
-          "rate": 0.0
+          "evaluable": 0,
+          "not_evaluable": 4,
+          "misses": [],
+          "mechanism_absent": 0,
+          "rate": null
         },
         "ph": {
           "agree": 3,
@@ -273,12 +259,12 @@
           "rate": 0.5
         },
         "process_heating": {
-          "agree": 1,
-          "evaluable": 1,
-          "not_evaluable": 3,
+          "agree": 0,
+          "evaluable": 0,
+          "not_evaluable": 4,
           "misses": [],
           "mechanism_absent": 0,
-          "rate": 1.0
+          "rate": null
         },
         "ranking": {
           "agree": 0,
@@ -334,16 +320,14 @@
         }
       },
       "total": {
-        "agree": 22,
-        "evaluable": 42,
-        "not_evaluable": 27,
+        "agree": 21,
+        "evaluable": 38,
+        "not_evaluable": 31,
         "misses": [
           "SUG-03",
           "SUG-04",
           "PH-01",
           "TEMP-01",
-          "AW-01",
-          "AW-02",
           "MAT-02",
           "MAT-03",
           "PROC-05",
@@ -352,35 +336,31 @@
           "SUG-12",
           "PH-07",
           "TEMP-05",
-          "AW-03",
           "LIP-04",
           "HOF-01",
           "HOF-03",
           "MOT-01",
           "MOT-03"
         ],
-        "mechanism_absent": 7,
-        "rate": 0.5238095238095238
+        "mechanism_absent": 4,
+        "rate": 0.5526315789473685
       },
       "ph_aw": {
         "agree": 3,
-        "evaluable": 9,
-        "not_evaluable": 7,
+        "evaluable": 6,
+        "not_evaluable": 10,
         "misses": [
           "PH-01",
-          "AW-01",
-          "AW-02",
           "PH-07",
-          "AW-03",
           "MOT-01"
         ],
-        "mechanism_absent": 3,
-        "rate": 0.3333333333333333
+        "mechanism_absent": 0,
+        "rate": 0.5
       },
       "excluding_ph_aw": {
-        "agree": 19,
-        "evaluable": 33,
-        "not_evaluable": 20,
+        "agree": 18,
+        "evaluable": 32,
+        "not_evaluable": 21,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -398,11 +378,12 @@
           "MOT-03"
         ],
         "mechanism_absent": 4,
-        "rate": 0.5757575757575758
+        "rate": 0.5625
       }
     },
     "not_evaluable_reasons": {
       "the claim carries no runnable conditions (prose-only)": 16,
+      "refused by the engine": 4,
       "arm 'processed, 140 C' refused": 2,
       "a predicted concentration is zero; no direction is defined": 1,
       "arm 'pH 4.5' refused": 1,
@@ -414,7 +395,7 @@
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
     },
-    "wall_seconds": 91.5
+    "wall_seconds": 28.2
   },
   "claims": [
     {
@@ -1461,20 +1442,8 @@
       "fit_status": "independent",
       "statement": "Maillard chemistry is favoured by LOW moisture; raising water content suppresses it.",
       "source": "ma2024",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": true,
-      "mechanism_absent": true,
-      "lane": "trunk",
-      "values_ug_per_l": [
-        676.3166759938573,
-        676.3166759938573,
-        676.3166759938573
-      ],
-      "log10_steps": [
-        0.0,
-        0.0
-      ],
+      "status": "not_evaluable",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w term; the model would return identical arms and call it a comparison. Hold a_w fixed, or bring a measurement.",
       "arms": [
         {
           "label": "aw 0.3",
@@ -1561,20 +1530,8 @@
       "fit_status": "independent",
       "statement": "Acrylamide vs moisture is NON-MONOTONIC (bell-shaped), peaking at intermediate moisture (40%) - rising for low-moisture extrusion, falling for high-moisture extrusion.",
       "source": "ma2024",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": true,
-      "mechanism_absent": true,
-      "lane": "acrylamide",
-      "values_ug_per_l": [
-        454.269559059928,
-        454.269559059928,
-        454.269559059928
-      ],
-      "log10_steps": [
-        0.0,
-        0.0
-      ],
+      "status": "not_evaluable",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w term; the model would return identical arms and call it a comparison. Hold a_w fixed, or bring a measurement.",
       "arms": [
         {
           "label": "aw 0.3 (low moisture)",
@@ -2002,16 +1959,8 @@
       "fit_status": "fit_adjacent",
       "statement": "UHT processing of a pea-protein beverage RAISES hexanal (331 -> 782 ug/L, significant).",
       "source": "trikusuma2018",
-      "status": "agree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "lipid",
-      "values_ug_per_l": [
-        22.838630048173226,
-        0.0008859802119268436
-      ],
-      "log10_ratio_B_over_A": -4.411246027472839,
+      "status": "not_evaluable",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in pH and the resolved lane(s) (lipid) carry NO pH term by declaration; the model would return identical arms. Only the sulfur lane carries a pH trajectory.",
       "arms": [
         {
           "label": "processed, 140 C",
@@ -3462,20 +3411,8 @@
       "fit_status": "independent",
       "statement": "Maillard rate is NON-MONOTONIC in water activity: it peaks around aw 0.6-0.7 and falls at both aw < 0.4 and aw > 0.9.",
       "source": "elhosry2025",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": true,
-      "mechanism_absent": true,
-      "lane": "trunk",
-      "values_ug_per_l": [
-        676.3166759938573,
-        676.3166759938573,
-        676.3166759938573
-      ],
-      "log10_steps": [
-        0.0,
-        0.0
-      ],
+      "status": "not_evaluable",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w term; the model would return identical arms and call it a comparison. Hold a_w fixed, or bring a measurement.",
       "arms": [
         {
           "label": "aw 0.25",

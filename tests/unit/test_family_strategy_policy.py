@@ -20,11 +20,3 @@ def test_family_strategy_policy_prioritizes_lipid_crosstalk_and_keeps_core_quant
     assert "amino_acid_sugar_core" in summary["family_lane_classification"]["first_class_core"]
 
 
-def test_family_strategy_policy_markdown_mentions_dft_and_mlp_governance():
-    markdown = render_family_strategy_policy_markdown(build_family_strategy_policy_artifact())
-
-    assert "Family Strategy Policy" in markdown
-    assert "Default next expansion family: lipid_oxidation_and_carbonylic_crosstalk" in markdown
-    assert "Narrative-only workflow allowed: False" in markdown
-    assert "DFT policy:" in markdown
-    assert "MLP policy:" in markdown

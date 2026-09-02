@@ -2,11 +2,11 @@
 
 Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 18/30 (60%)**; 22 independent claims not evaluable
-* independent, excluding pH and water activity: 15/22 (68%); pH and water activity alone: 3/8 (38%)
-* all claims (independent + fit-adjacent + fit-system overlap): 22/42 (52%); 27 not evaluable
-* misses where the lane carries no term for the moved axis (identical predictions): 7
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (16); arm 'processed, 140 C' refused (2); a predicted concentration is zero; no direction is defined (1); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
+* **headline (strictly independent, evaluable): 18/27 (67%)**; 25 independent claims not evaluable
+* independent, excluding pH and water activity: 15/22 (68%); pH and water activity alone: 3/5 (60%)
+* all claims (independent + fit-adjacent + fit-system overlap): 21/38 (55%); 31 not evaluable
+* misses where the lane carries no term for the moved axis (identical predictions): 4
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (16); refused by the engine (4); arm 'processed, 140 C' refused (2); a predicted concentration is zero; no direction is defined (1); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
 
 ## Per category (strictly independent claims)
 
@@ -15,7 +15,7 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | additive_cysteine | 3 | 3 | 1.00 | 2 | - |
 | lipid_lane | 0 | 0 | - | 1 | - |
 | matrix_identity | 0 | 0 | - | 1 | - |
-| moisture_aw | 0 | 3 | 0.00 | 1 | AW-01, AW-02, AW-03 |
+| moisture_aw | 0 | 0 | - | 4 | - |
 | ph | 3 | 5 | 0.60 | 5 | PH-07, MOT-01 |
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 1 | 0.00 | 2 | MOT-03 |
@@ -31,9 +31,9 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | additive_cysteine | 3 | 3 | 1.00 | 2 |
 | lipid_lane | 0 | 3 | 0.00 | 1 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
-| moisture_aw | 0 | 3 | 0.00 | 1 |
+| moisture_aw | 0 | 0 | - | 4 |
 | ph | 3 | 6 | 0.50 | 6 |
-| process_heating | 1 | 1 | 1.00 | 3 |
+| process_heating | 0 | 0 | - | 4 |
 | ranking | 0 | 2 | 0.00 | 4 |
 | scope | 0 | 0 | - | 3 |
 | sugar_identity | 8 | 13 | 0.62 | 5 |
@@ -58,8 +58,8 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 21.1, 454, 814 |  |
 | TEMP-02 | temperature | independent | Acrylamide | A>B | **agree** | acrylamide | 21.1, 2.63e-16 |  |
 | TEMP-03 | temperature | independent | HMF | increasing | **agree** | acrylamide | 77.7, 399, 577 |  |
-| AW-01 | moisture_aw | independent | HMF | decreasing | **disagree** | trunk | 676, 676, 676 | identical predictions; the lane has no term for the moved axis |
-| AW-02 | moisture_aw | independent | Acrylamide | peak | **disagree** | acrylamide | 454, 454, 454 | identical predictions; the lane has no term for the moved axis |
+| AW-01 | moisture_aw | independent | HMF | decreasing | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w term; the model would return identical arms and call it  |
+| AW-02 | moisture_aw | independent | Acrylamide | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w term; the model would return identical arms and call it  |
 | CYS-01 | additive_cysteine | independent | FFT | A>B | **agree** | sulfur | 3.45, 0 |  |
 | CYS-02 | additive_cysteine | independent | HMF | A>B | **agree** | trunk | 676, 286 |  |
 | SCOPE-01 | scope | independent | CEL | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -67,7 +67,7 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | MAT-01 | matrix_identity | independent | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MAT-02 | matrix_identity | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 0.267, 0.339 |  |
 | MAT-03 | matrix_identity | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 0.339, 0.339 | identical predictions; the lane has no term for the moved axis |
-| PROC-01 | process_heating | fit_adjacent | Hexanal | A>B | **agree** | lipid | 22.8, 0.000886 |  |
+| PROC-01 | process_heating | fit_adjacent | Hexanal | A>B | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in pH and the resolved lane(s) (lipid) carry NO pH term by declaration; the model would return identical a |
 | PROC-02 | process_heating | fit_adjacent | 2-Pentylfuran | A>B | **not_evaluable** | - | - | arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate a |
 | PROC-03 | process_heating | fit_adjacent | Nonanal | A>B | **not_evaluable** | - | - | arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: nonanal -- the lipid lane exists and nonanal is a species in it, but its ONLY parent is the OLEATE hydrop |
 | PROC-04 | process_heating | independent | 2,5-Dimethylpyrazine | flat | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -88,7 +88,7 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'T4 profile, 160 C max' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound  |
 | TEMP-05 | temperature | independent | HMF | increasing | **disagree** | trunk | 684, 644, 654 |  |
 | TEMP-06 | temperature | independent | Furfural | A>B | **agree** | sulfur | 0.0804, 0.000551 |  |
-| AW-03 | moisture_aw | independent | HMF | peak | **disagree** | trunk | 676, 676, 676 | identical predictions; the lane has no term for the moved axis |
+| AW-03 | moisture_aw | independent | HMF | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w term; the model would return identical arms and call it  |
 | CYS-03 | additive_cysteine | independent | MFT | A>B | **agree** | sulfur | 11.9, 1.43e-30 |  |
 | CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unr |
 | LIP-04 | lipid_lane | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 63.9, 63.9 | identical predictions; the lane has no term for the moved axis |

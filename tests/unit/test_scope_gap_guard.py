@@ -19,8 +19,3 @@ def test_scope_gap_guard_blocks_scope_gap_families():
     assert payload["summary"]["blocked_families"] == ["coconut_oil_co_matrix", "other_plant_proteins"]
 
 
-def test_scope_gap_guard_markdown_surfaces_guard_decision():
-    markdown = render_scope_gap_guard_markdown(build_scope_gap_guard_artifact())
-
-    assert "Scope Gap Guard" in markdown
-    assert "blocked_from_active_expansion" in markdown

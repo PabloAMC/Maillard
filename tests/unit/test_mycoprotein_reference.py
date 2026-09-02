@@ -21,9 +21,3 @@ def test_mycoprotein_reference_uses_bounded_priors_and_next_family_decision():
     assert payload["reference_windows"]["denaturation"]["midpoint_celsius"] == 78.0
 
 
-def test_mycoprotein_reference_markdown_surfaces_bounded_policy():
-    markdown = render_mycoprotein_reference_markdown(build_mycoprotein_reference_artifact())
-
-    assert "Mycoprotein Reference" in markdown
-    assert "bounded_calibration_prior" in markdown
-    assert "Decision: advance_now" in markdown

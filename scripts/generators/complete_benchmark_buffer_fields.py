@@ -162,7 +162,7 @@ BUFFER_RECORDS: Dict[str, Dict[str, Any]] = {
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7": _HOFMANN,
     "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3": _HOFMANN,
     "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7": _HOFMANN,
-    "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5": _HOFMANN,
+    "hofmann1998_xylose_cysteine_145C_20min_pH5": _HOFMANN,
     "external_validation_bi_2020_raw_pea_hexanal": dict(
         species="none",
         concentration_M=None,

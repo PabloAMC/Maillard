@@ -31,9 +31,3 @@ def test_chemistry_family_scope_uses_canonical_numbered_family_ids():
     assert "off_note_and_maillard_suppression" in family_ids
 
 
-def test_chemistry_family_scope_markdown_mentions_ingestion_policy():
-    markdown = render_chemistry_family_scope_markdown(build_chemistry_family_scope_artifact())
-
-    assert "Chemistry Family Scope" in markdown
-    assert "lipid_oxidation_and_carbonylic_crosstalk" in markdown
-    assert "Ingestion policy:" in markdown

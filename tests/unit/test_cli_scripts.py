@@ -33,10 +33,10 @@ def test_entry_point_help_exits_zero(script):
     assert proc.stdout.strip()
 
 
-def test_maillard_verbs_are_the_four_core_verbs():
+def test_maillard_verbs_are_the_five_core_verbs():
     proc = subprocess.run(
         [sys.executable, "scripts/maillard.py", "--help"], cwd=str(ROOT), capture_output=True, text=True, timeout=300
     )
-    for verb in ("compare", "predict", "explain", "rank"):
+    for verb in ("compare", "predict", "explain", "rank", "score"):
         assert verb in proc.stdout
     assert "--lane" not in proc.stdout

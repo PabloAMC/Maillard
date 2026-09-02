@@ -131,35 +131,35 @@
         }
       },
       "maillard_path_holdout": {
-        "benchmarks": 17,
-        "rows": 30,
-        "within_band": 3,
+        "benchmarks": 16,
+        "rows": 28,
+        "within_band": 2,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.1,
+        "within_band_rate": 0.07142857142857142,
         "fold_summary": {
-          "n": 30,
-          "median_fold_error": 19.0788841205256,
+          "n": 28,
+          "median_fold_error": 26.450700402564962,
           "worst_fold_error": 495.8113120550954,
           "best_fold_error": 2.0477407945913852,
-          "median_abs_log10_error": 1.2602224520191219,
-          "geometric_mean_fold": 24.410483004021213
+          "median_abs_log10_error": 1.4215719158649605,
+          "geometric_mean_fold": 28.21564762584616
         }
       },
       "trust_loop": {
-        "benchmarks": 19,
-        "rows": 15,
-        "within_band": 5,
+        "benchmarks": 20,
+        "rows": 17,
+        "within_band": 6,
         "contract_passes": 1,
         "strict_ready": 1,
-        "within_band_rate": 0.3333333333333333,
+        "within_band_rate": 0.35294117647058826,
         "fold_summary": {
-          "n": 15,
-          "median_fold_error": 8.457270323571487,
+          "n": 17,
+          "median_fold_error": 4.699252749695761,
           "worst_fold_error": 7558637.061755763,
           "best_fold_error": 1.337189281374414,
-          "median_abs_log10_error": 0.9272302123648428,
-          "geometric_mean_fold": 46.6090773397375
+          "median_abs_log10_error": 0.6720288042155851,
+          "geometric_mean_fold": 34.025275833473906
         }
       }
     },
@@ -279,7 +279,7 @@
         "median_abs_log10_error": 1.491766120607961,
         "geometric_mean_fold": 58.75681965450017
       },
-      "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.CORE_SULFUR_FIT_ROWS): the strongest claim the panel supports"
+      "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
     "in_core_fit": {
       "benchmarks": 5,
@@ -299,11 +299,11 @@
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
     "holdout_within_band": {
-      "hits": 3,
-      "total": 30
+      "hits": 2,
+      "total": 28
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 41.4
+    "wall_seconds": 13.5
   },
   "benchmarks": [
     {
@@ -324,9 +324,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -405,9 +403,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -474,10 +470,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json",
-          "sulfur_barrier_refit_hofmann.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -574,9 +567,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -634,13 +625,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -708,13 +701,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -782,13 +777,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -856,13 +853,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -973,13 +972,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1047,13 +1048,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1164,13 +1167,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1254,15 +1259,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": [
-          "furanone_reductive_sulfhydrylation_refit_hofmann.json"
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
         ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1330,13 +1335,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b8_fit_report.json"
+          "kinetic_core_b8_fit_targets.json"
         ],
-        "legacy": []
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b8_fit_report.json",
+          "record": "kinetic_core_b8_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1430,6 +1437,121 @@
       ]
     },
     {
+      "benchmark_id": "hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "bench_file": "data/benchmarks/hofmann1998_xylose_cysteine_145C_20min_pH5.json",
+      "panel": "trust_loop",
+      "tier": "PRIMARY",
+      "family": "free_aa_sulfur",
+      "execution_path": "free_precursor",
+      "protein_type": "free",
+      "conditions": {
+        "temp_C": 145.0,
+        "time_min": 20.0,
+        "ph": 5.0,
+        "water_activity": 0.98
+      },
+      "signal_origin": "external_literature",
+      "evidence_role": "predictive",
+      "fit_target_of": {
+        "core": [
+          "kinetic_core_b8_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b8_fit_targets.json"
+        ]
+      },
+      "core_fit_targets": [
+        {
+          "record": "kinetic_core_b8_fit_targets.json",
+          "lane": "sulfur",
+          "leverage_class": "global_low_leverage",
+          "free_parameters": 23,
+          "fitted_rows": 62,
+          "rows": [
+            [
+              "hofmann_xylose_FFT",
+              "2-Furfurylthiol (FFT)"
+            ],
+            [
+              "hofmann_xylose_MFT",
+              "2-Methyl-3-furanthiol (MFT)"
+            ]
+          ]
+        }
+      ],
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "scale_thresholds": {
+        "max_ratio": 1.1,
+        "mean_abs_log10_error": 0.0414,
+        "source": "bundle validation_contract"
+      },
+      "compounds": [
+        {
+          "compound": "2-Furfurylthiol (FFT)",
+          "target_unit": "ppb",
+          "measured": 96.0,
+          "measured_ppb": 96.0,
+          "predicted": 268.8460814849771,
+          "fold_error": 2.8004800154685117,
+          "abs_log10_error": 0.4472324778429254,
+          "within_band": true,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            38.43878268686324,
+            1880.34611081814
+          ],
+          "measured_within_interval": true,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": true
+        },
+        {
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "target_unit": "ppb",
+          "measured": 143.0,
+          "measured_ppb": 143.0,
+          "predicted": 526.8343700195926,
+          "fold_error": 3.684156433703445,
+          "abs_log10_error": 0.5663380625812171,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            75.32515166037568,
+            3684.751338906985
+          ],
+          "measured_within_interval": true,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": true
+        }
+      ],
+      "refused_compounds": [],
+      "matched_compounds": 2,
+      "total_compounds": 2,
+      "coverage": 1.0,
+      "max_ratio": 3.684156433703445,
+      "mean_abs_log10_error": 0.5067852702120712,
+      "pearson_r_log10": null,
+      "ranking_status": "n/a",
+      "scale_status": "fail",
+      "overall_status": "scale-gap",
+      "strict_gate_eligible": true,
+      "strict_ready": false,
+      "blocking_issues": [
+        "max ratio 3.684 > 1.10",
+        "mean |log10 ratio| 0.507 > 0.041"
+      ],
+      "within_band_count": 1,
+      "lanes": [
+        "sulfur"
+      ]
+    },
+    {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
       "bench_file": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
       "panel": "trust_loop",
@@ -1447,11 +1569,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "matrix_observability_refit_pratap_singh.json",
-          "projection_constant_refit.json",
-          "matrix_marker_yield_rederivation.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -1540,10 +1658,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json",
-          "matrix_marker_yield_rederivation.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -1640,9 +1755,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -1716,11 +1829,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "matrix_observability_refit_pratap_singh.json",
-          "projection_constant_refit.json",
-          "matrix_marker_yield_rederivation.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -1809,9 +1918,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -1882,9 +1989,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": [
-          "projection_constant_refit.json"
-        ]
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -1932,7 +2037,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2033,7 +2138,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2149,7 +2254,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2265,7 +2370,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2340,7 +2445,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2415,7 +2520,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2516,7 +2621,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2588,7 +2693,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2664,7 +2769,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2757,7 +2862,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2850,7 +2955,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -2943,7 +3048,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -3019,119 +3124,6 @@
       ]
     },
     {
-      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
-      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
-      "panel": "maillard_path_holdout",
-      "tier": "REFERENCE",
-      "family": "free_aa_sulfur",
-      "execution_path": "free_precursor",
-      "protein_type": "free",
-      "conditions": {
-        "temp_C": 145.0,
-        "time_min": 20.0,
-        "ph": 5.0,
-        "water_activity": 0.98
-      },
-      "signal_origin": "external_literature",
-      "evidence_role": "predictive",
-      "fit_target_of": {
-        "core": [
-          "kinetic_core_b8_fit_report.json"
-        ],
-        "legacy": []
-      },
-      "core_fit_targets": [
-        {
-          "record": "kinetic_core_b8_fit_report.json",
-          "lane": "sulfur",
-          "leverage_class": "global_low_leverage",
-          "free_parameters": 23,
-          "fitted_rows": 62,
-          "rows": [
-            [
-              "hofmann_xylose_FFT",
-              "2-Furfurylthiol (FFT)"
-            ],
-            [
-              "hofmann_xylose_MFT",
-              "2-Methyl-3-furanthiol (MFT)"
-            ]
-          ]
-        }
-      ],
-      "quantification_family": "extraction",
-      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
-      "scale_thresholds": {
-        "max_ratio": 1.1,
-        "mean_abs_log10_error": 0.0414,
-        "source": "bundle validation_contract"
-      },
-      "compounds": [
-        {
-          "compound": "2-Furfurylthiol (FFT)",
-          "target_unit": "ppb",
-          "measured": 96.0,
-          "measured_ppb": 96.0,
-          "predicted": 268.8460814849771,
-          "fold_error": 2.8004800154685117,
-          "abs_log10_error": 0.4472324778429254,
-          "within_band": true,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            38.43878268686324,
-            1880.34611081814
-          ],
-          "measured_within_interval": true,
-          "lane": "sulfur",
-          "envelope_state": "in_envelope",
-          "declaration_warnings": [],
-          "shared_with": null,
-          "in_core_fit": true
-        },
-        {
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "target_unit": "ppb",
-          "measured": 143.0,
-          "measured_ppb": 143.0,
-          "predicted": 526.8343700195926,
-          "fold_error": 3.684156433703445,
-          "abs_log10_error": 0.5663380625812171,
-          "within_band": false,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            75.32515166037568,
-            3684.751338906985
-          ],
-          "measured_within_interval": true,
-          "lane": "sulfur",
-          "envelope_state": "in_envelope",
-          "declaration_warnings": [],
-          "shared_with": null,
-          "in_core_fit": true
-        }
-      ],
-      "refused_compounds": [],
-      "matched_compounds": 2,
-      "total_compounds": 2,
-      "coverage": 1.0,
-      "max_ratio": 3.684156433703445,
-      "mean_abs_log10_error": 0.5067852702120712,
-      "pearson_r_log10": null,
-      "ranking_status": "n/a",
-      "scale_status": "fail",
-      "overall_status": "scale-gap",
-      "strict_gate_eligible": false,
-      "strict_ready": false,
-      "blocking_issues": [
-        "max ratio 3.684 > 1.10",
-        "mean |log10 ratio| 0.507 > 0.041"
-      ],
-      "within_band_count": 1,
-      "lanes": [
-        "sulfur"
-      ]
-    },
-    {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
       "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
       "panel": "maillard_path_holdout",
@@ -3149,7 +3141,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -3242,7 +3234,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -3335,7 +3327,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -3428,7 +3420,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "extraction",
@@ -3521,7 +3513,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "headspace",
@@ -3599,7 +3591,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "headspace",
@@ -3676,7 +3668,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -3720,7 +3712,7 @@
           "panel": "external_matrix",
           "compound": "1-hexanol",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The FAST lane emits a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
+          "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid"
         },
@@ -3782,7 +3774,7 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
-        "legacy": []
+        "index": []
       },
       "core_fit_targets": [],
       "quantification_family": "undeclared",
@@ -3986,7 +3978,7 @@
       "panel": "external_matrix",
       "compound": "1-hexanol",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The FAST lane emits a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
+      "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid"
     },

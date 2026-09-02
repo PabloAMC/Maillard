@@ -81,3 +81,4 @@ results/*
 !docs/**/*.yaml
 !results/validation/**/*.yaml
 .cache/
+results/user/

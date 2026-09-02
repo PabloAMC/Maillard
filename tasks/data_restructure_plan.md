@@ -776,6 +776,43 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
       two test files B5b had deleted for importing the exam generator (`test_kinetic_core_uncertainty`,
       `test_kinetic_core_b2_4`) minus their exam tests. CAVEAT recorded: the covariance is a local Gaussian at an
       optimum that sits on two bounds; a profile-likelihood or MCMC pass is the honest next step (backlog).
+### Post-retirement steps (owner-approved 2026-09-03: "1 go ahead, 2/3 whatever is best for the tool, 4 go ahead, 5 agree, 6 yes, 7 go ahead")
+- [x] Step 1 — fit rows declare their bundles: the sulfur fit's level rows in `generate_kinetic_core_b2_3_fit.py`
+      carry `benchmark_id` / `benchmark_compound`; `generate_core_fit_targets.py` writes
+      `results/validation/kinetic_core_b8_fit_targets.json` (`fit_target_ids`, `fit_leverage` 23/62, rows);
+      `fit_target_index` and the fit-target gate glob `*_fit_targets.json`; `src/kinetic_core/fit_targets.py` reads
+      the record and the hand table is gone; hold-out guard check 4 sees core fit records (14 records scanned).
+- [x] Step 2 — the xylose row: `mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5` → `data/benchmarks/
+      hofmann1998_xylose_cysteine_145C_20min_pH5.json` (trust loop, PRIMARY, `hold_out_history` block, declared
+      in-fit). Chosen over dropping it from the fit because a refit is a new wave (B9, backlog). Panel: trust loop
+      20, hold-out 16 (Wave U count re-pinned 17 → 16 with the reason).
+- [x] Step 3 — the wave generators are frozen by hash manifest, not by moving them (ten test files import them by
+      path): `build_wave_manifest.py` → `results/validation/wave_generators_manifest.json`;
+      `tests/scientific/test_wave_generators_frozen.py`; the rule and the wave log in `scripts/generators/WAVES.md`.
+- [x] Step 5 — axis refusal: `engine.axis_refusal` refuses a comparison whose arms differ in water activity (no lane
+      has a term) or in pH on trunk / acrylamide / lipid (no pH term by declaration); `compare` returns
+      `comparable: False` with the reason; `directional.py` scores such claims NOT EVALUABLE. Directional headline
+      18/30 → **18/27** (25 independent claims not evaluable, 4 of them refused; pH on the sulfur lane 3/5; a_w 0/0).
+- [x] Step 6 — bring your own measurement: `src/kinetic_core/user_scoring.py` + `maillard score DOC` (`--template`):
+      scores measured ppb like the panel scorecard (fold, 3x band, interval, refusals) and writes a bundle-shaped
+      record with provenance under `results/user/` (never `data/`); explicitly scoring, not calibration.
+- [ ] Step 4 — slice profiles of the B8 objective (`generate_kinetic_core_b8_profile.py`, 161 evals): RUNNING /
+      see below. The thiol-sink ceiling question (102 kJ/mol, Gigl 2021 vs search convenience) is reported from
+      the profile, not decided in code.
+- [x] Step 7 — B6 test audit: `tasks/test_audit.md` (49 files, per-file verdicts). Executed: the public-API smoke test
+      deleted; ten "markdown mentions phrase" prose tests deleted; the seven frozen-wave contract files labelled as
+      regression records. Left in the audit's own backlog: merge the four generator-text checks into the freeze guard,
+      rewrite `test_v1_reports`' five substring checks, collapse the fourteen literature-side files into one
+      parametrised builder test, fix the coverage/fork configuration.
+- [ ] **B9 (defined 2026-09-03 from the owner's principle "fit on primary, validate on causally secondary
+      evidence"):** the sulfur refit that drops the eight Hofmann 1998 Table 1 LEVEL rows (ribose / glucose /
+      fructose / xylose pH 5, FFT and MFT) from the objective and keeps the step-level rows (fed intermediates T3 /
+      T4 / T10, conversions, ratios, Kang / Zhou / Whitfield / Cerny). Rule going forward: rate constants,
+      activation energies, fed-intermediate yields, conversions and within-study ratios are FIT evidence; end-to-end
+      concentrations in full precursor systems are VALIDATION evidence. B9 returns all four Hofmann pH-5 bundles to
+      validation (xylose to the hold-out). Check before shipping: absolute scale must stay identified from the fed
+      rows (yields per mmol fed) — the profile of the new optimum decides.
+
 - [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite
       design audit — are the tests well designed, which files should be restructured for coverage, and which tests
       assert nothing (tautologies, pinned-artifact echoes, contract tests without a failure mode). Deliverable: a

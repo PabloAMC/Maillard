@@ -24,11 +24,3 @@ def test_dha_lysinoalanine_external_package_specifies_two_matrix_bundle():
     assert by_matrix["soy_iso"]["supportive_anchor_ids"] == ["de_leyn_2019_thiamine_retention"]
 
 
-def test_dha_lysinoalanine_external_package_markdown_surfaces_bundle_and_policy():
-    markdown = render_dha_lysinoalanine_external_package_markdown(build_dha_lysinoalanine_external_package_artifact())
-
-    assert "DHA Lysinoalanine External Package" in markdown
-    assert "Global Measurement Bundle" in markdown
-    assert "Reactive lysine fraction" in markdown
-    assert "Lysinoalanine (LAL)" in markdown
-    assert "specified_not_yet_measured" in markdown

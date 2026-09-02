@@ -288,6 +288,24 @@ def build_parser() -> argparse.ArgumentParser:
     )
     explain.add_argument("--json", action="store_true", help="emit the payload instead of the text")
 
+    score = verbs.add_parser(
+        "score",
+        help="score YOUR measured concentrations against the core (bring your own data)",
+        description=(
+            "Score one or more of your own measured systems the way the panel scorecard scores a\n"
+            "benchmark: fold error, the 3x band, the reliability interval, and a named refusal for\n"
+            "any compound the core cannot represent. Writes a bundle-shaped record per system under\n"
+            "results/user/ (never under data/) that a future fit wave can read. This is scoring,\n"
+            "not calibration: nothing is refitted."
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    score.add_argument("spec", nargs="?", help="a measurement document (YAML or JSON); see --template")
+    score.add_argument("--template", action="store_true", help="print an example document and exit")
+    score.add_argument("--json", action="store_true", help="emit the payload instead of the table")
+    score.add_argument("--out", default=None, help="directory for the records (default results/user/)")
+    score.add_argument("--no-write", action="store_true", help="score only; write no record")
+
     rank = verbs.add_parser(
         "rank-experiments",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -385,6 +403,33 @@ def run_predict(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_score(args: argparse.Namespace) -> int:
+    from src.kinetic_core.user_scoring import (
+        TEMPLATE,
+        MeasurementSpecError,
+        load_document,
+        render_text,
+        score_document,
+        write_records,
+    )
+
+    if args.template:
+        print(TEMPLATE)
+        return 0
+    if not args.spec:
+        raise SpecError("score needs a measurement document. Try `maillard score --template`.")
+    try:
+        payload = score_document(load_document(args.spec))
+    except MeasurementSpecError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    written = write_records(payload, args.out) if not args.no_write else []
+    print(to_json(payload) if args.json else render_text(payload))
+    for path in written:
+        print(f"wrote {path}", file=sys.stderr)
+    return 0
+
+
 def run_explain(args: argparse.Namespace) -> int:
     from src.explain_compound import explain, render_explain_text
 
@@ -434,6 +479,7 @@ def main(argv=None) -> int:
         "compare": run_compare,
         "predict": run_predict,
         "explain": run_explain,
+        "score": run_score,
         "rank-experiments": run_rank,
     }
     try:

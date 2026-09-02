@@ -1,0 +1,30 @@
+{
+  "artifact": "wave_generators_manifest",
+  "rule": "these files are the record of how the kinetic core's frozen parameters were produced; they are not re-run and a change to any of them is a new wave, recorded in scripts/generators/WAVES.md with the manifest rebuilt",
+  "files": {
+    "scripts/generators/generate_kinetic_core_b1_fit.py": "a404e335e9deb70d052b39ba01e92830c6ab8c229f6729f5d2c2955068f7ece3",
+    "scripts/generators/generate_kinetic_core_b1_holdout.py": "4c1cd615d8cc55d92386ea76aef449fd33e2bb8593c6df12f99493cf10a70c3a",
+    "scripts/generators/generate_kinetic_core_b2_1_fit.py": "3dd1ce5ff3a2ddb98c94578b8bc2e2143794441ee59692aff85b772749e93791",
+    "scripts/generators/generate_kinetic_core_b2_1_holdout.py": "844fb122d574f136e6ff6939105ca04354c4dc31bcdcfa6b881d8814abe03536",
+    "scripts/generators/generate_kinetic_core_b2_2_fit.py": "3f9b414d04c15b1f2fdaca29a21e00abca1695803e28d36f9ab2e96bc56a8707",
+    "scripts/generators/generate_kinetic_core_b2_2_holdout.py": "00aa31bb698018527805ca91ef0bcad6b40e6a942f3d71fb9809413ffd44be3d",
+    "scripts/generators/generate_kinetic_core_b2_3_fit.py": "915126e252e6c831ddb05c4d9fb5e4ca32a04774f6356f6f81a0397330a87851",
+    "scripts/generators/generate_kinetic_core_b2_3_holdout.py": "ad5baf747e4281a6c3738229e9b693d11b1c10092aa97cbfee488872ca9e5242",
+    "scripts/generators/generate_kinetic_core_b2_4_fit.py": "65ddf6500b0e90b03a9e8e5c93398751831226f18f2d6e7af936b754630fa2f8",
+    "scripts/generators/generate_kinetic_core_b2_4_reports.py": "6f99707397151652da4487955ec55db2a07516fbe70ae6eaf2431d2ce44c5750",
+    "scripts/generators/generate_kinetic_core_b2_4_scorers.py": "b09ac639e6736501e1758ce701263c5bb9e361df32a5eecf1b6eed476600a020",
+    "scripts/generators/generate_kinetic_core_b2_fit.py": "17612b51eaade18473f33bd2f133da2826fe63e018eaaebfe646d0874a6d91fd",
+    "scripts/generators/generate_kinetic_core_b2_holdout.py": "502d12852ca4c565db137af8e815f53de30a52a7c839990d0421811b3c7ee353",
+    "scripts/generators/generate_kinetic_core_b3_fit.py": "53e75b5ef8f2909dc9fdfd8bd0128f91cc798cb10cfe8803a9705ef75cdf81f0",
+    "scripts/generators/generate_kinetic_core_b3_holdout.py": "fca70e4d2fcd48a1819916b07ac5acbfb7cf519e66b9e130c8cb43d4841674a4",
+    "scripts/generators/generate_kinetic_core_b4_fit.py": "bc7adad769f5be690542bbc1a47fff4cffcd01843dbe2cea9011e5624cde657a",
+    "scripts/generators/generate_kinetic_core_b4_holdout.py": "9638f8897c8075af6f3c6f2095866c0413301bfcc361d21a94bffa16626e5cf5",
+    "scripts/generators/generate_kinetic_core_b6_fit.py": "a2a1a2b676ae466eb854f27c0a832b1ba8b7ba2565bc1cc02ac0ed5fdf607338",
+    "scripts/generators/generate_kinetic_core_b6_holdout.py": "11903333ae0fb8469a6e0bd2dae067ec435b050b846f65dec8f8538b9679fd46",
+    "scripts/generators/generate_kinetic_core_b7_fit.py": "c1a639e2294c0f45c5584df8a2cf52b30cb2dfacf10ad18f0436222eda7c12f7",
+    "scripts/generators/generate_kinetic_core_b7_holdout.py": "ca1584ff5614a73dfb2c4891a785ff0c705f5315a841d4419dc79f20925826a3",
+    "scripts/generators/generate_kinetic_core_b8_fit.py": "2ecf8ec36a881bf3f5a6ce6569a0ca47af4b1130b509fb06be606b83f41478db",
+    "scripts/generators/generate_kinetic_core_b8_reports.py": "867ee44ea8908a44b1f96f49df5edffc0ec40e577e942ca85308b5da483d9e74",
+    "scripts/generators/probe_amine_fate_b2_4.py": "99ad847333615aaccb86facb4c69a9b7874ee83fdb8428bc291549aed725450f"
+  }
+}

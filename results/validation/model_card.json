@@ -71,7 +71,7 @@
       ],
       "moisture_aw": [
         0,
-        3
+        0
       ],
       "ph": [
         3,
@@ -109,15 +109,10 @@
     ],
     "headline": [
       18,
-      30
+      27
     ],
-    "mechanism_absent_misses": 3,
+    "mechanism_absent_misses": 0,
     "misses": {
-      "moisture_aw": [
-        "AW-01",
-        "AW-02",
-        "AW-03"
-      ],
       "ph": [
         "PH-07",
         "MOT-01"
@@ -136,11 +131,11 @@
         "TEMP-05"
       ]
     },
-    "not_evaluable": 22,
+    "not_evaluable": 25,
     "path": "results/validation/core_directional_scores.json",
     "ph_aw": [
       3,
-      8
+      5
     ]
   },
   "gates": [
@@ -163,7 +158,7 @@
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
     "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 8/49 rows within 3x (median fold error 11.1x, worst 7.56e+06x); out of sample -- every row a core fit read removed -- 4/40 (median 31.2x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 11/44 evaluable literature rows (5 not evaluable: the no lane carries no sampled uncertainty), 8/35 out of sample.",
-    "**Directional and ranking claims are the product, and on the kinetic core they score 18/30 on strictly independent literature claims** (22 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 15/22 once pH and water activity are set aside, and 3/8 on pH and water activity themselves, 3 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 18/27 on strictly independent literature claims** (25 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 15/22 once pH and water activity are set aside, and 3/5 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
@@ -307,9 +302,9 @@
       "verdict": "caution"
     },
     {
-      "basis": "misses: AW-01, AW-02, AW-03",
+      "basis": "",
       "claim_type": "Direction / ranking on `moisture_aw`",
-      "evidence": "0/3 on the directional panel (independent claims)",
+      "evidence": "no evaluable independent claim on the core",
       "system_class": "any (water activity moved)",
       "verdict": "do-not-use"
     },
