@@ -180,8 +180,8 @@ python scripts/maillard.py predict refusal_demo.yml --report /tmp/refused.html
   mapped precursors: Cys=10 mM, PENT=10 mM
     ! REFUSED -- UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but
     ! 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the
-    ! linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's
-    ! shipped 0.08 has no source. Refused rather than invented.
+    ! linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's
+    ! shipped 0.08 had no source. Refused rather than invented.
     ~ declared extrapolation -- no buffer was declared for this system, so the pH TRAJECTORY is
     ~ EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. ...
     ~ declared extrapolation -- 5-HMF: the two formation limbs are ingested WHOLE from Kocadagli &
@@ -204,8 +204,8 @@ OUT OF ENVELOPE -- no number is emitted. Lane resolved: sulfur.
   missing species (targets the core cannot name): 2-pentylfuran
   declared reason -- UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but
   2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the
-  linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's
-  shipped 0.08 has no source. Refused rather than invented.
+  linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's
+  shipped 0.08 had no source. Refused rather than invented.
   A refusal is an output, not a failure. Run `python scripts/maillard.py explain <compound>` ...
 ```
 

@@ -7,15 +7,14 @@
 ## Project Snapshot
 Computational screening framework for meat-like Maillard chemistry in plant-based matrices. Combines deterministic kinetic ODEs (SMIRKS-based reaction families) with matrix-aware retention/headspace physics. The former selective-QM (xTB → DFT) lane was removed on 2026-08-30/09-01; barriers are measured literature values or labelled surrogates.
 
-- Mission, architecture, SMIRKS tier conventions: [README.md](README.md) (the "Architecture and
-  computational methods" section; `docs/architecture.md` and `docs/reference/SMIRKS_SYSTEM.md`
-  were folded into it and deleted on 2026-08-28, Wave S5)
+- Mission and architecture: [README.md](README.md); the retirement plan and the improvement backlog:
+  [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md)
 - Validation contract & benchmark surface: [docs/reference/VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md)
 - Active roadmap & lessons: [tasks/todo.md](tasks/todo.md), [tasks/lessons.md](tasks/lessons.md)
 
 ## Layout
-- `src/` — runtime package (kinetics, retention, headspace, recommend/optimize, reports). Import as `from src.<module> import ...`; do not mutate `sys.path`.
-- `scripts/` — CLI entrypoints and one-shot research scripts. Scientist-facing CLIs route through `src/usability_reports.py`.
+- `src/` — runtime package: `src/kinetic_core/` (the ONE engine: lanes, parameters, panel, scoring, envelope, fit-target ledger), `comparative_cli.py` (the front door's verbs), `report_html.py`, `explain_compound.py`, `experiment_value.py` (the `rank` verb), `model_card.py`, the literature-side registries. Import as `from src.<module> import ...`; do not mutate `sys.path`. The legacy SMIRKS lane was deleted 2026-09-03 (retirement step B5); its README is `docs/history/`, its artifacts `results/legacy_lane/`.
+- `scripts/` — `maillard.py` (compare / predict / explain / rank), `generators/` (the core artifacts, the fit waves, the literature ledgers, the registries), `ci/` (five gates), `deep_research_tracker.py`.
 - `data/` — curated inputs only, READ-ONLY at runtime (`scripts/ci/data_readonly_gate.py`). Map: [data/README.md](data/README.md) (generated). Paths come from `src/data_paths.py`, loads from `src/data_access.py` (missing files raise), names resolve via `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`), benchmarks validate against `data/schemas/` (`scripts/ci/schema_gate.py`). Never write a `"data/..."` string or a `json.load` of a curated file in code. Restructure record: [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md).
 - `results/` — generated artifacts (`results/validation/` is tracked as frozen evidence). Do not hand-edit. Generators write here, never into `data/`.
 - `tests/` — `unit/` (fast), `scientific/` (regression), plus `scripts/` integration tests.
@@ -31,7 +30,8 @@ Computational screening framework for meat-like Maillard chemistry in plant-base
 ./scripts/docker_maillard.sh up           # boot container
 ./scripts/docker_maillard.sh bootstrap    # install deps
 ./scripts/docker_maillard.sh run "<cmd>"  # arbitrary command in container
-./scripts/docker_maillard.sh summary      # benchmark summary artifact
+./scripts/docker_maillard.sh core-scores  # the core's panel scorecard
+./scripts/docker_maillard.sh gates        # the five CI gates
 ```
 
 ## Tests

@@ -233,10 +233,9 @@ def to_json(payload: Mapping[str, Any]) -> str:
 
 
 # ---------------------------------------------------------------------------------------
-# Build Wave B5 -- THE PROPAGATOR CUTOVER
+# The kinetic core: the only engine (Build Wave B5 made it the default; retirement step B5
+# on 2026-09-03 deleted the screening lane it used to sit beside).
 # ---------------------------------------------------------------------------------------
-#
-# From B5, ``compare`` and ``predict`` route through the KINETIC CORE
 # (src/kinetic_core/engine.py). The FAST lane above is NOT deleted -- it is
 # demoted to the ordinal-only front end its measured skill supports, and every
 # surface it reaches is labelled and stripped of absolutes.

@@ -104,7 +104,7 @@ This is a genuinely novel scientific result that would not be visible from eithe
 
 ---
 
-**Script to Reproduce Simulation**: `scripts/run_pipeline.py --protein-type soy_iso --denaturation-state 0.6 --sugars ribose:1.0 --amino-acids cysteine:1.0 --ph 5.8 --temp 120`
+**Script to Reproduce Simulation**: the `run_pipeline.py` command that stood here drove the retired screening lane (deleted 2026-09-03). Reproduce the prediction with `python scripts/maillard.py predict <spec.yml>` using the precursor and process fields above; the kinetic core will refuse, with the reason, any target it cannot represent in a protein matrix.
 
 **Benchmark ID (target)**: `soy_iso_ribose_cys_120C_pH5p8_meaty`
 

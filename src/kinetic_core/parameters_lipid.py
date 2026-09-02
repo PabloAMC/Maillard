@@ -622,12 +622,12 @@ PROHIBITED_DERIVATIONS: Mapping[str, str] = {
     ),
     "oleate -> nonanal branch fraction": (
         "Measured nowhere in the fit corpus. Frankel 1989 fed linoleate only. "
-        "The FAST lane's shipped 0.15 has no source. Requests for absolute "
+        "The retired screening lane's shipped 0.15 had no source. Requests for absolute "
         "nonanal in an oleate-bearing matrix are REFUSED."
     ),
     "linoleate -> 2-pentylfuran branch fraction": (
         "Not in Frankel's six-product slate and measured nowhere else in the "
-        "corpus. The FAST lane's shipped 0.08 has no source."
+        "corpus. The retired screening lane's shipped 0.08 had no source."
     ),
     "aldehyde -> alcohol reduction (hexanal -> 1-hexanol)": (
         "No reduction step is measured anywhere in the corpus, and in a "

@@ -556,8 +556,8 @@ def integrate_lipid(
             f"({charge.looh_oleate_mmol_l:.4g} mmol/L), and the oleate -> "
             "nonanal branch fraction is measured NOWHERE in the fit corpus. "
             "Frankel 1989 fed linoleate only, and nonanal appears in no table, "
-            "figure or sentence of it. The FAST lane's shipped 'nonanal 0.15' "
-            "has no source; this module refuses rather than carrying it "
+            "figure or sentence of it. The retired screening lane's shipped 'nonanal 0.15' "
+            "had no source; this module refuses rather than carrying it "
             "forward."
         )
 

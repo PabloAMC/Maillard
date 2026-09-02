@@ -1,5 +1,22 @@
 # Scientific Validation Guide
 
+> **Status, 2026-09-03 (retirement step B5c).** The harness this contract describes —
+> `src/benchmark_validation.py`, `generate_benchmark_summary.py`, `prediction_uncertainty.json`,
+> `external_validation_report.json`, the FAST/`--lane` switch — was deleted with the legacy
+> screening lane. **What applies now:** the kinetic core is scored by
+> `src/kinetic_core/scoring.py` → `results/validation/core_panel_scores.{json,md}` (per-bundle
+> scale contracts from `validation_contract.scale_thresholds`, else `src/validation_contract.py`
+> defaults; `strict_ready` under the same tier / execution-path rule), its Monte-Carlo envelope by
+> `src/kinetic_core/uncertainty.py` → `core_prediction_uncertainty.{json,md}`, both pinned by
+> `tests/scientific/test_core_headline_guards.py`; fit-then-score is guarded by
+> `scripts/ci/fit_target_gate.py` (reads the core envelope) and the core's own fit-row ledger
+> `src/kinetic_core/fit_targets.py`; the hold-out by `scripts/ci/holdout_guard.py`. The
+> benchmark bundle format, tiers (PRIMARY / SECONDARY / REFERENCE), execution paths, the
+> hold-out rules and the evidence-role vocabulary in the body below are unchanged and still
+> apply; every paragraph that names a deleted module or artifact is history. A rewrite of this
+> document around the core is in the improvement backlog (`tasks/data_restructure_plan.md` §7).
+
+
 If you are new to the repository, read [README.md](../../README.md) first — its architecture section and its generated model card. This document is the deeper contract and methodology reference.
 
 ## 1. Validation Contract

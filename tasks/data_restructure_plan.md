@@ -742,8 +742,19 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
         door. `tests/unit/test_cli_scripts.py` rewritten for the surviving entry points; the data census guard moved
         to `tests/scientific/test_data_headline_guards.py`. Verification: five gates PASS, model-card check clean,
         unit+scripts 569, integration+scientific 77 (646 tests survive of 1,800).
-  - [ ] B5c docs: README rewritten around the one engine (legacy narrative moved to `docs/history/`), QUICKSTART,
-        VALIDATION_CONTRACT, AUDIT banner, badge; data README regenerated.
+  - [x] B5c docs (2026-09-03): README rewritten around the one engine (296 lines, was 1,600; the old README, the old
+        QUICKSTART, the two notebooks and the campaign spec are archived verbatim under `docs/history/`); new
+        QUICKSTART; `scripts/docker_maillard.sh` rewritten (core-scores / core-envelope / model-card / gates /
+        data-readme / keys / the four verbs; the 40-odd legacy lanes gone); AUDIT.md and VALIDATION_CONTRACT.md carry
+        a dated status banner (the contract's body is history until its backlog rewrite); agents.md layout updated;
+        engine refusal strings no longer name "the FAST lane". Verification: five gates PASS, model-card check
+        clean, every README/QUICKSTART/agents.md link resolves, unit+scripts 569, integration+scientific 77.
+- [ ] B7 (next, the product claim): score the kinetic core on the directional claims panel
+      (`docs/validation/directional_claims_panel.yml`, 36 claims) through `comparative_cli.compare_core`; write
+      `results/validation/core_directional_scores.{json,md}`; re-enable the model card's per-axis cells and the CLI's
+      per-axis reliability tags from THAT artifact; pin. Until then the card says "not yet measured on the core".
+- [ ] B8 (science): Laplace covariance at the B8 sulfur optimum → sampled sulfur priors; 24 not-evaluable rows become
+      evaluable; the envelope's coverage number moves.
 - [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite
       design audit — are the tests well designed, which files should be restructured for coverage, and which tests
       assert nothing (tautologies, pinned-artifact echoes, contract tests without a failure mode). Deliverable: a

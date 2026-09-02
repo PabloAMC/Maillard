@@ -5,6 +5,17 @@ remediation of this repository. The machine-readable ledger is
 [tasks/audit_remediation.md](tasks/audit_remediation.md); the evidence artifacts it cites
 are tracked under [results/validation/](results/validation/).*
 
+> **Status, 2026-09-03 (retirement step B5).** The engine this audit examined — the SMIRKS
+> rule-enumeration screening lane with its fitted volatile budget, its validation harness
+> (`src/benchmark_validation.py`), its Monte-Carlo sampler and its matrix/headspace layer — has
+> been **deleted**. The kinetic core (`src/kinetic_core/`) is the only engine, scored on its own
+> (`results/validation/core_panel_scores.md`, `core_prediction_uncertainty.md`; pinned by
+> `tests/scientific/test_core_headline_guards.py`). Every number quoted below was produced by the
+> retired lane and is kept as the record of what that lane claimed; its artifacts are archived
+> under `results/legacy_lane/` and its README under `docs/history/`. The findings about
+> *process* — circular validation, fabricated citations, fit-then-score — are the reason the
+> core carries a pre-registration per fit wave, a fit-target ledger and five CI gates.
+
 ## Why this document exists
 
 This codebase was built with heavy LLM assistance. In August 2026 the owner commissioned

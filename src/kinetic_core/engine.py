@@ -296,8 +296,8 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
         "The B6 lipid lane exists and forms the SIX products Frankel 1989 "
         "measured, but 1-hexanol is not one of them and NO aldehyde-reduction "
         "step is measured anywhere in the corpus -- in a thermally processed "
-        "extrudate the reductant pool is not even identified. The FAST lane "
-        "emits a number for it; this lane refuses. See "
+        "extrudate the reductant pool is not even identified. The retired screening "
+        "lane emitted a number for it; this lane refuses. See "
         "parameters_lipid.PROHIBITED_DERIVATIONS."
     ),
     "2-pentylfuran": (
