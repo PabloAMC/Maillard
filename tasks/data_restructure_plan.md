@@ -763,8 +763,19 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
       `compare_core` carries a `reliability` block (axes moved, per-axis verdicts, governing = weakest) and the
       renderer prints it; the model card's second sentence and per-axis cells are back, from the artifact; guards pin
       the numbers and README quotes them; `docker_maillard.sh core-directional`. The legacy report is bannered.
-- [ ] B8 (science): Laplace covariance at the B8 sulfur optimum → sampled sulfur priors; 24 not-evaluable rows become
-      evaluable; the envelope's coverage number moves.
+- [x] B8 (2026-09-03): `scripts/generators/generate_kinetic_core_b8_laplace.py` → `results/validation/
+      kinetic_core_b8_laplace_covariance.json`: Gauss-Newton covariance at the frozen B8 optimum (J by finite
+      differences of B8's own 62-row residual vector, 23 free coordinates, ~80 s; reduced chi-square 1.03, i.e. the
+      declared row sigmas are consistent with the fit). Identification rule: sigma below the kind's threshold AND
+      not (optimum on a declared bound with sigma > 10 % of the band) → **18 of 23** identified; not sampled:
+      `k_dimer_decay`, `k_thiol_decay` (flat), `Ea_decay_carbonyl_sink` (sigma 64 > 60), `Ea_decay_thiol_sink`
+      (on its 102 kJ/mol ceiling, sigma 27), `ph_acid_yield_per_sink_event` (at 0, sigma 0.29). `uncertainty.py`
+      draws the identified sub-space JOINTLY (Cholesky) per draw, clips to bounds, routes into the sulfur blocks and
+      `CoreDraw.ph_drift`. ENVELOPE (n=200): honest literature coverage **11 of 44** (was 7/25; 5 not evaluable, was
+      24), median width 1.07 dex (was 0.94), out-of-sample **8 of 35** (was 6/23); every lane sampled. Restored the
+      two test files B5b had deleted for importing the exam generator (`test_kinetic_core_uncertainty`,
+      `test_kinetic_core_b2_4`) minus their exam tests. CAVEAT recorded: the covariance is a local Gaussian at an
+      optimum that sits on two bounds; a profile-likelihood or MCMC pass is the honest next step (backlog).
 - [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite
       design audit — are the tests well designed, which files should be restructured for coverage, and which tests
       assert nothing (tautologies, pinned-artifact echoes, contract tests without a failure mode). Deliverable: a
@@ -831,6 +842,27 @@ Not scheduled; each is a self-contained change with its motivation. Strike or pr
 - [ ] **Envelope cost.** 200 draws × 49 rows ≈ 38 min wall (6 workers, under load). Profile one `predict`; the
       sulfur network is re-integrated per draw although the draw leaves it untouched (no sampled sulfur priors) —
       cache lane runs keyed by the draw's lane-relevant coordinates.
+- [ ] **Sulfur covariance is a local Gaussian at a bound-sitting optimum (B8).** Two coordinates sit ON declared
+      bounds (`Ea_decay_thiol_sink` at its 102 kJ/mol ceiling, the acid yield at 0) and are excluded from sampling;
+      the honest replacement for the Laplace picture is a profile likelihood over the 23 free coordinates (or a short
+      MCMC over the 62-row objective, ~4 s/eval) — and a decision on whether the thiol-sink ceiling is a
+      measurement (Gigl 2021) or a search convenience.
+- [ ] **Test coverage is 81 % of `src/` but 11 % of `scripts/` (measured 2026-09-03 with coverage.py over all
+      646 tests).** The 21 k lines of fit / hold-out wave generators (`generate_kinetic_core_b*_*.py`) are never
+      executed by a test; they are the record of how every frozen parameter was produced. Either freeze them under
+      `scripts/generators/waves/` with a "not re-run; re-run = a new wave" README, or give each a `--smoke` path the
+      suite exercises. The measurement also reported `uncertainty.py` and `directional.py` at 0 % although their
+      tests pass — a coverage/`fork` configuration issue to fix before trusting per-module numbers.
+- [ ] **93 of 575 test functions assert only shape (key present / isinstance / file exists) or nothing.** Input to
+      the B6 audit: most are contract tests on artifacts; the question per test is what change would make it fail.
+      Twelve test files read tracked `results/validation/` artifacts — each needs either a live recomputation (as the
+      scorecard and directional guards do) or an explicit "frozen record" label.
+- [ ] **14 of 42 panel bundles have no `quantification_class`, 16 no `content_verification` block; 31 of 278 papers
+      carry an extraction dossier.** The verification waves stopped at the sulfur hold-outs; the trust-loop bundles
+      (Pratap-Singh, Trikusuma, Resconi, Bolton, Cerny, ACSRef3) and the matrix bundles are the ones the envelope
+      defaults on. One primary-source pass per bundle, recorded in the bundle, closes it.
+- [ ] **Envelope cost: 42 min at n=200 × 49 rows.** Profile `predict`; the sulfur lane is now sampled so every draw
+      re-integrates it — cache per-lane runs keyed by the draw's lane coordinates, or vectorise the panel.
 - [ ] **After B5:** drop `benchmark_metadata`'s dependence on `matrix_calibration_registry.is_fit_recovery_benchmark`
       (legacy matrix factors) and collapse the two evidence-role vocabularies (`evidence_role` / `legacy_evidence_role`)
       into one.

@@ -46,7 +46,7 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
-from src import data_paths
+from src import data_access, data_paths
 from src.benchmark_metadata import (
     benchmark_signal_origin,
     get_benchmark_metadata,
@@ -84,6 +84,11 @@ CI_LEVEL_PCT = 90
 MIN_EVALUABLE_CI_WIDTH_LOG10 = 0.01
 
 NO_UNCERTAINTY = "no_uncertainty_in_fit_report"
+#: B8 (2026-09-03): a Laplace covariance at the sulfur optimum exists; identified
+#: directions are sampled JOINTLY from it, flat ones stay at the optimum.
+LAPLACE_SAMPLED = "laplace_covariance_at_b8_optimum"
+LAPLACE_FLAT = "unidentified_direction_in_laplace_covariance"
+LAPLACE_PATH = data_paths.KINETIC_CORE_B8_LAPLACE
 
 
 # ---------------------------------------------------------------------------
@@ -266,49 +271,121 @@ def _b7_priors() -> List[CorePrior]:
     ]
 
 
+def _laplace() -> Optional[Dict[str, Any]]:
+    """The B8 Laplace covariance artifact, or None when it has not been generated."""
+    payload = data_access.load_json(LAPLACE_PATH, missing_ok=True)
+    if not payload or payload.get("artifact") != "kinetic_core_b8_laplace_covariance":
+        return None
+    return dict(payload)
+
+
+def _laplace_lookup(lap: Optional[Dict[str, Any]]) -> Dict[Tuple[str, str], Dict[str, Any]]:
+    """``{(block, key): {sigma, identified, bounds, index}}`` for every free coordinate."""
+    if lap is None:
+        return {}
+    out: Dict[Tuple[str, str], Dict[str, Any]] = {}
+    for i, (coord, sigma, ok, bounds) in enumerate(
+        zip(lap["coordinates"], lap["sigma"], lap["identified"], lap["bounds"])
+    ):
+        out[(coord["block"], coord["key"])] = {
+            "sigma": float(sigma), "identified": bool(ok), "bounds": tuple(bounds), "index": i,
+        }
+    return out
+
+
 def _b8_priors() -> List[CorePrior]:
     report = _report(engine._B2_FIT_REPORT)
     src = data_paths.rel(engine._B2_FIT_REPORT)
     frozen = report["frozen_parameters"]
+    lap = _laplace()
+    lookup = _laplace_lookup(lap)
+    lap_src = data_paths.rel(LAPLACE_PATH) if lap else None
+
+    def prior(key, block, sub, centre, unit, kind, distribution):
+        entry = lookup.get((block, sub))
+        if entry is None:
+            return CorePrior(
+                key=key, lane=SULFUR, kind=kind, distribution="fixed", centre=float(centre),
+                sigma=None, band=None, unit=unit, source=f"{src}: frozen_parameters.{block}",
+                sampled=False, reason=NO_UNCERTAINTY if lap is None else "frozen in the B8 fit (not a free coordinate)",
+            )
+        if not entry["identified"]:
+            return CorePrior(
+                key=key, lane=SULFUR, kind=kind, distribution="fixed", centre=float(centre),
+                sigma=entry["sigma"], band=entry["bounds"], unit=unit,
+                source=f"{lap_src}: sigma above the identification threshold",
+                sampled=False, reason=LAPLACE_FLAT,
+            )
+        return CorePrior(
+            key=key, lane=SULFUR, kind=kind, distribution=distribution, centre=float(centre),
+            sigma=entry["sigma"], band=entry["bounds"], unit=unit,
+            source=f"{lap_src}: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+            sampled=True, reason=LAPLACE_SAMPLED,
+        )
+
     out: List[CorePrior] = []
     for key, value in frozen["log10_k_ref_at_145C"].items():
-        out.append(
-            CorePrior(
-                key=f"b8.{key}.log10_k_ref_145C", lane=SULFUR, kind="fitted_rate",
-                distribution="fixed", centre=float(value), sigma=None, band=None,
-                unit="log10(k at 145 C)", source=f"{src}: frozen_parameters.log10_k_ref_at_145C",
-                sampled=False, reason=NO_UNCERTAINTY,
-            )
-        )
-    out.append(
-        CorePrior(
-            key="b8.lumped_formation_Ea_kJ_mol", lane=SULFUR, kind="fitted_ea",
-            distribution="fixed", centre=float(frozen["lumped_formation_Ea_kJ_mol"]),
-            sigma=None, band=None, unit="kJ/mol",
-            source=f"{src}: frozen_parameters.lumped_formation_Ea_kJ_mol",
-            sampled=False, reason=NO_UNCERTAINTY,
-        )
-    )
+        out.append(prior(f"b8.{key}.log10_k_ref_145C", "log10_k_ref_at_145C", key, value,
+                         "log10(k at 145 C)", "fitted_rate", "normal_log10"))
+    out.append(prior("b8.lumped_formation_Ea_kJ_mol", "lumped_formation_Ea_kJ_mol", "",
+                     frozen["lumped_formation_Ea_kJ_mol"], "kJ/mol", "fitted_ea", "normal"))
     for family, value in (frozen.get("decay_Ea_kJ_mol") or {}).items():
-        out.append(
-            CorePrior(
-                key=f"b8.decay_Ea_kJ_mol.{family}", lane=SULFUR, kind="fitted_ea",
-                distribution="fixed", centre=float(value), sigma=None, band=None,
-                unit="kJ/mol", source=f"{src}: frozen_parameters.decay_Ea_kJ_mol",
-                sampled=False, reason=NO_UNCERTAINTY,
-            )
-        )
+        out.append(prior(f"b8.decay_Ea_kJ_mol.{family}", "decay_Ea_kJ_mol", family, value,
+                         "kJ/mol", "fitted_ea", "normal"))
     for key, value in (frozen.get("ph_drift") or {}).items():
-        out.append(
-            CorePrior(
-                key=f"b8.ph_drift.{key}", lane=SULFUR, kind="fitted_ph_drift",
-                distribution="fixed", centre=float(value), sigma=None, band=None,
-                unit="pKa" if "pKa" in key else "mol acid per sink event",
-                source=f"{src}: frozen_parameters.ph_drift",
-                sampled=False, reason=NO_UNCERTAINTY,
-            )
-        )
+        out.append(prior(f"b8.ph_drift.{key}", "ph_drift", key, value,
+                         "pKa" if "pKa" in key else "mol acid per sink event", "fitted_ph_drift", "normal"))
     return out
+
+
+def sulfur_joint_draw(rng: np.random.Generator) -> Optional[Dict[str, Any]]:
+    """
+    ONE joint draw of the identified sulfur coordinates from the B8 Laplace covariance.
+
+    Returns ``{"maillard_blocks": {...}, "ph_drift": PhDrift | None, "coords": {...}}``
+    or None when no covariance artifact exists. The draw is multivariate normal on the
+    identified sub-space (Cholesky of the sub-covariance, jittered), added to the
+    frozen optimum and clipped to each coordinate's declared bounds. Unidentified
+    coordinates stay at the optimum.
+    """
+    lap = _laplace()
+    if lap is None:
+        return None
+    idx = [i for i, ok in enumerate(lap["identified"]) if ok]
+    if not idx:
+        return None
+    cov = np.asarray(lap["covariance"], dtype=float)[np.ix_(idx, idx)]
+    cov = 0.5 * (cov + cov.T) + np.eye(len(idx)) * 1e-12
+    chol = np.linalg.cholesky(cov)
+    z = chol @ rng.standard_normal(len(idx))
+    optimum = np.asarray(lap["optimum"], dtype=float)
+    values = optimum.copy()
+    for k, i in enumerate(idx):
+        lo, hi = lap["bounds"][i]
+        values[i] = min(max(optimum[i] + z[k], lo), hi)
+    blocks: Dict[str, Any] = {}
+    ph: Dict[str, float] = {}
+    coords: Dict[str, float] = {}
+    for i, coord in enumerate(lap["coordinates"]):
+        if i not in idx:
+            continue
+        block, key = coord["block"], coord["key"]
+        coords[f"b8.{block}.{key}".rstrip(".")] = float(values[i])
+        if block == "ph_drift":
+            ph[key] = float(values[i])
+        elif key:
+            blocks.setdefault(block, {})[key] = float(values[i])
+        else:
+            blocks[block] = float(values[i])
+    drift = None
+    if ph:
+        from .ph_state import PhDrift
+        frozen_ph = _report(engine._B2_FIT_REPORT)["frozen_parameters"]["ph_drift"]
+        drift = PhDrift(
+            acid_yield=ph.get("acid_yield_per_sink_event", frozen_ph["acid_yield_per_sink_event"]),
+            arp_amine_pka=ph.get("arp_secondary_ammonium_pKa", frozen_ph["arp_secondary_ammonium_pKa"]),
+        )
+    return {"maillard_blocks": blocks, "ph_drift": drift, "coords": coords}
 
 
 def _declared_band_priors() -> List[CorePrior]:
@@ -488,8 +565,8 @@ def draw_from_rng(
         return float(10.0 ** (math.log10(lo) + u * (math.log10(hi) - math.log10(lo))))
 
     for p in priors:
-        if not p.sampled:
-            continue
+        if not p.sampled or p.key.startswith("b8."):
+            continue  # b8 coordinates are drawn JOINTLY below
         if p.distribution == "normal_log10":
             value = float(rng.normal(p.centre, p.sigma))
         elif p.distribution == "normal":
@@ -549,6 +626,19 @@ def draw_from_rng(
             hs = value
 
     maillard: Dict[str, Any] = {engine.B1_VARIANT: b1}
+    sulfur = sulfur_joint_draw(rng) if any(p.sampled and p.key.startswith("b8.") for p in priors) else None
+    ph_drift = None
+    if sulfur is not None:
+        frozen_sulfur = frozen_parameters(SULFUR)
+        for block, value in sulfur["maillard_blocks"].items():
+            if isinstance(value, dict):
+                merged = dict(frozen_sulfur[block]); merged.update(value); maillard[block] = merged
+            else:
+                maillard[block] = value
+        for block in ("log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol", "decay_Ea_kJ_mol"):
+            maillard.setdefault(block, frozen_sulfur[block])
+        ph_drift = sulfur["ph_drift"]
+        coords.update(sulfur["coords"])
     if b3_k or b3_ea:
         frozen_b3 = frozen_parameters(ACRYLAMIDE)
         k_block = dict(frozen_b3["log10_k_ref_at_160C"]); k_block.update(b3_k)
@@ -564,7 +654,7 @@ def draw_from_rng(
         lipid_fraction_scale=_scale(lipid_u, lipid_lo, lipid_hi),
         peroxide_scale=_scale(pv_u, pv_lo, pv_hi),
         furanone_partition_ea_kj_mol=furanone,
-        ph_drift=None,  # B8: no uncertainty in the fit report
+        ph_drift=ph_drift,  # B8 Laplace covariance when present, else the frozen calibration
     )
     coords["lipid.fraction_scale"] = core.lipid_fraction_scale if core.lipid_fraction_scale is not None else float("nan")
     coords["lipid.peroxide_scale"] = core.peroxide_scale if core.peroxide_scale is not None else float("nan")
@@ -853,10 +943,9 @@ def propagate_panel(
                     "denominator; computed identically across the trust-loop, "
                     "maillard_path hold-out and external-matrix panels. Read it "
                     "together with median_ci_width_log10: a wide interval covering "
-                    "a measurement is a weak claim -- and here the SULFUR lane's "
-                    "fitted constants carry NO sampled uncertainty (see priors[]), "
-                    "so a sulfur row quantified by extraction (SIDA) has a width "
-                    "from the shared B1 trunk alone, and is usually NOT EVALUABLE."
+                    "a measurement is a weak claim. The SULFUR lane's identified "
+                    "coordinates are sampled jointly from the B8 Laplace covariance "
+                    "(see priors[]); unidentified ones stay at the optimum."
                 ),
             },
             "observable_multiplier_policy": {
@@ -897,6 +986,14 @@ def propagate_panel(
             "fixed_prior_count": len(priors) - len(sampled),
             "unsampled_lanes": sorted(
                 {p.lane for p in priors if not p.sampled and p.reason == NO_UNCERTAINTY}
+            ),
+            "sulfur_laplace": (
+                None if _laplace() is None else {
+                    "path": data_paths.rel(LAPLACE_PATH),
+                    "identified": int(_laplace()["identified_count"]),
+                    "free": int(_laplace()["n_free"]),
+                    "reduced_chi_square": float(_laplace()["reduced_chi_square"]),
+                }
             ),
             "parameter_sources": parameter_sources(),
             "shared_with_holdout_panel": {

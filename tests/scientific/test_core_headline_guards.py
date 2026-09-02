@@ -151,27 +151,30 @@ def test_the_sulfur_fit_read_the_xylose_holdout_row(tracked_scores):
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_7_of_25_evaluable_literature_rows_and_6_of_23_out_of_sample():
-    """Pinned 2026-09-03 (B3 re-run of the B2 envelope, n=200 seed 0). 24 rows are not
-    evaluable: sulfur rows quantified by extraction, on a lane whose fit report carries no
-    uncertainty. Coverage 5/20 at B2 -> 7/25 because the five legacy fit-recovery rows are
-    predictive on the core. A sulfur Laplace covariance will move ALL of these."""
+def test_core_envelope_covers_11_of_44_evaluable_literature_rows_and_8_of_35_out_of_sample():
+    """Pinned 2026-09-03 (B8, n=200 seed 0). The sulfur lane is now sampled jointly from the
+    Laplace covariance at its B8 optimum (18 of 23 free coordinates identified, reduced
+    chi-square 1.03), so the 24 rows that were "not evaluable" at B3 are evaluable: 7/25 ->
+    11/44, median width 0.94 -> 1.07 dex, 5 rows still not evaluable (zero-width or refused
+    draws). Out of sample (every row the sulfur fit read removed): 8/35."""
     payload = json.loads(ENVELOPE.read_text(encoding="utf-8"))
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (7, 25, 24)
-    assert lit["median_ci_width_log10"] == pytest.approx(0.9407, abs=5e-4)
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (11, 44, 5)
+    assert lit["median_ci_width_log10"] == pytest.approx(1.0687, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (6, 23)
-    assert s["unsampled_lanes"] == ["sulfur"]
+    assert (oos["hits"], oos["total"]) == (8, 35)
+    assert s["unsampled_lanes"] == []
+    assert s["sulfur_laplace"]["identified"] == 18 and s["sulfur_laplace"]["free"] == 23
+    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.03, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
         "headspace": 2, "extraction": 37, "undeclared": 10,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "7 of 25", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "6 of 23", "README.md", "the core envelope's out-of-sample coverage")
-    _assert_quoted(readme, "24 sulfur rows not evaluable", "README.md", "the not-evaluable count")
+    _assert_quoted(readme, "11 of 44", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "8 of 35", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "18 of 23", "README.md", "the identified sulfur coordinates")
 
 
 # --------------------------------------------------------------------------------------

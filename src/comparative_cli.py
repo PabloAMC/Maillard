@@ -274,9 +274,10 @@ CORE_CAVEAT = (
     "will tell you why it will not answer, rather than answering. Its four lanes (trunk, sulfur, "
     "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "
     "lane as a direct sum, and the Maillard lanes do not compose with each other. A refusal is "
-    "an output, not a failure. Read the cutover final exam "
-    "(results/validation/cutover_final_exam.md) for its measured out-of-sample accuracy before "
-    "trusting any number here."
+    "an output, not a failure. Read the core's scorecard "
+    "(results/validation/core_panel_scores.md: 4 of 40 out-of-sample rows within 3x) and its "
+    "envelope (core_prediction_uncertainty.md) before trusting any number here; the "
+    "directional panel (core_directional_scores.md) is what the reliability column reads."
 )
 
 #: Fields removed from every FAST payload before it reaches a user.
