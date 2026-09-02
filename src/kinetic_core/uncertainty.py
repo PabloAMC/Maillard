@@ -48,7 +48,6 @@ import numpy as np
 
 from src import data_paths
 from src.benchmark_metadata import (
-    benchmark_evidence_role,
     benchmark_signal_origin,
     get_benchmark_metadata,
 )
@@ -665,10 +664,8 @@ def propagate_panel(
             "execution_path": get_benchmark_metadata(bench).execution_path,
             "protein_type": str(bench.get("protein_type", "") or ""),
             "signal_origin": benchmark_signal_origin(Path(path)),
-            # B3: the CORE's evidence role (src/kinetic_core/fit_targets.py); the
-            # legacy harness's role is kept beside it for the B4 comparison.
+            # B3: the CORE's evidence role (src/kinetic_core/fit_targets.py).
             "evidence_role": core_evidence_role(benchmark_id, Path(path)),
-            "legacy_evidence_role": benchmark_evidence_role(benchmark_id, Path(path)),
             "fit_target_of": fit_target_of(benchmark_id),
             "buffer_applied": True,
             "quantification_family": family,

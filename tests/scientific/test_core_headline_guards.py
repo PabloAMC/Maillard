@@ -99,13 +99,6 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     core fit record that names it is the laundering route this guard blocks."""
     s = tracked_scores["summary"]
     assert s["evidence_role_totals"] == {"predictive": 40}
-    assert s["evidence_role_differs_from_legacy"] == [
-        "cys_ribose_140C_Hofmann1998",
-        "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
-        "pea_isolate_40C_PratapSingh2021",
-        "pea_isolate_uht_140C_Trikusuma2019",
-        "soy_isolate_40C_PratapSingh2021",
-    ]
 
 
 def test_within_3x_is_8_of_49_and_out_of_sample_4_of_40(tracked_scores):

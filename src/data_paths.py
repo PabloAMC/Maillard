@@ -144,6 +144,9 @@ SLR_FAMILY_REPORTS_DIR: Path = LITERATURE_LEDGERS_DIR / "slr_family_reports"
 RESULTS_DB: Path = RESULTS_ROOT / "maillard_results.db"
 # Generated validation artifacts that other modules read back as inputs.
 PREDICTION_UNCERTAINTY: Path = VALIDATION_DIR / "prediction_uncertainty.json"
+#: The kinetic core's own envelope and scorecard (retirement steps B2/B3).
+CORE_PREDICTION_UNCERTAINTY: Path = VALIDATION_DIR / "core_prediction_uncertainty.json"
+CORE_PANEL_SCORES: Path = VALIDATION_DIR / "core_panel_scores.json"
 EXTERNAL_VALIDATION_REPORT: Path = VALIDATION_DIR / "external_validation_report.json"
 EXTERNAL_FAILING_COMPOUNDS: Path = VALIDATION_DIR / "external_failing_compounds.json"
 MAILLARD_PATH_HOLDOUT_FROZEN_PREDICTIONS: Path = VALIDATION_DIR / "maillard_path_holdout_frozen_predictions.json"

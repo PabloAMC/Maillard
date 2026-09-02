@@ -35,7 +35,9 @@ from src import data_paths
 from src import compound_keys
 from src import data_access
 
-PREDICTION_UNCERTAINTY_PATH = data_paths.PREDICTION_UNCERTAINTY
+#: 2026-09-03 (B5): the ranking reads the KINETIC CORE's envelope. The legacy
+#: `prediction_uncertainty.json` is no longer consulted.
+PREDICTION_UNCERTAINTY_PATH = data_paths.CORE_PREDICTION_UNCERTAINTY
 DESIRABLE_TARGETS_PATH = data_paths.DESIRABLE_TARGETS
 OFF_FLAVOUR_TARGETS_PATH = data_paths.OFF_FLAVOUR_TARGETS
 

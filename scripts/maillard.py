@@ -38,23 +38,16 @@ from src.comparative_cli import (  # noqa: E402
     SPEC_TEMPLATE,
     SpecError,
     compare_core,
-    compare_systems,
     envelope_error_text,
-    evaluate_system,
     load_spec_document,
     predict_core,
-    predict_system,
     render_compare_core_text,
-    render_compare_text,
     render_predict_core_text,
-    render_predict_text,
     render_rank_text,
-    screening_payload,
     select_system,
     split_comparison_document,
     to_json,
 )
-from src.config import DEFAULTS  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Help text, written for a bench scientist (Build Wave V1)
@@ -141,30 +134,6 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
         default=None,
         help="show only the N largest rows (the table only; the report is complete)",
     )
-    parser.add_argument(
-        "--target-tag",
-        default=DEFAULTS.default_target_tag,
-        help="FAST lane only: which sensory tag counts as the thing you want more of",
-    )
-    parser.add_argument(
-        "--minimize-tag",
-        default=DEFAULTS.default_minimize_tag,
-        help="FAST lane only: which sensory tag counts as the thing you want less of",
-    )
-    parser.add_argument(
-        "--lane",
-        choices=("core", "fast"),
-        default="core",
-        help=(
-            "core (default): the mass-action kinetic core. Integrates a real "
-            "reaction network, reports absolute ug/L WITH its measured interval, "
-            "and REFUSES -- with a named reason and no number -- anything it "
-            "cannot represent. "
-            "fast: the ORDINAL SCREENING lane. Rankings only; its absolute ppb "
-            "are withheld from every user-facing surface because its measured "
-            "skill is ordinal, not quantitative."
-        ),
-    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -231,12 +200,6 @@ def build_parser() -> argparse.ArgumentParser:
         "spec",
         nargs="*",
         help="one two-arm spec file (top-level 'a:' and 'b:'), or two single-system spec files",
-    )
-    compare.add_argument(
-        "--absolute",
-        action="store_true",
-        help="FAST lane only, and refused there: the core lane already reports absolutes "
-             "with their envelope declaration",
     )
     compare.add_argument(
         "--template", action="store_true", help="print a ready-to-edit two-arm spec and exit"
@@ -397,75 +360,28 @@ def run_compare(args: argparse.Namespace) -> int:
     if not args.spec:
         raise SpecError("compare needs a spec. Try `maillard compare --template`.")
     spec_a, spec_b = _load_two_arms(args.spec)
-
-    if args.lane == "core":
-        if args.absolute:
-            print(
-                "note: --absolute is redundant on the core lane; the kinetic core reports "
-                "absolute concentrations by default, with their envelope declaration.",
-                file=sys.stderr,
-            )
-        payload = compare_core(spec_a, spec_b)
-        print(to_json(payload) if args.json else render_compare_core_text(payload))
-        comparison = payload.get("comparison") or {}
-        if not comparison.get("comparable"):
-            for label, key in (("A", "declaration_a"), ("B", "declaration_b")):
-                declaration = comparison.get(key) or {}
-                if declaration.get("state") == "out_of_envelope":
-                    print(f"arm {label}: {envelope_error_text(declaration)}", file=sys.stderr)
-        if args.report:
-            _write_report(payload, args.report)
-        return 0
-
+    payload = compare_core(spec_a, spec_b)
+    print(to_json(payload) if args.json else render_compare_core_text(payload))
+    comparison = payload.get("comparison") or {}
+    if not comparison.get("comparable"):
+        for label, key in (("A", "declaration_a"), ("B", "declaration_b")):
+            declaration = comparison.get(key) or {}
+            if declaration.get("state") == "out_of_envelope":
+                print(f"arm {label}: {envelope_error_text(declaration)}", file=sys.stderr)
     if args.report:
-        print(
-            "error: --report is a KINETIC CORE surface. The screening lane has no\n"
-            "  absolutes, no intervals and no OAV table to render, and a report that\n"
-            "  showed only rankings would imply it had more. Re-run with --lane core.",
-            file=sys.stderr,
-        )
-        return 2
-
-    if args.absolute:
-        print(
-            "error: --absolute is not available on the screening lane. The FAST lane's\n"
-            "  absolute ppb are withheld from every user-facing surface (Wave B5): its\n"
-            "  measured skill is ordinal, not quantitative. Re-run with --lane core.",
-            file=sys.stderr,
-        )
-        return 2
-    run_a = evaluate_system(spec_a, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    run_b = evaluate_system(spec_b, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    payload = screening_payload(compare_systems(run_a, run_b, top_n=args.top))
-    print(to_json(payload) if args.json else render_compare_text(payload, show_absolute=False))
+        _write_report(payload, args.report)
     return 0
 
 
 def run_predict(args: argparse.Namespace) -> int:
     document = load_spec_document(args.spec)
     spec = select_system(document, source=str(args.spec), arm=args.system)
-
-    if args.lane == "core":
-        payload = predict_core(spec)
-        print(to_json(payload) if args.json else render_predict_core_text(payload))
-        if not payload.get("answered"):
-            print(envelope_error_text(payload.get("declaration") or {}), file=sys.stderr)
-        if args.report:
-            _write_report(payload, args.report)
-        return 0
-
+    payload = predict_core(spec)
+    print(to_json(payload) if args.json else render_predict_core_text(payload))
+    if not payload.get("answered"):
+        print(envelope_error_text(payload.get("declaration") or {}), file=sys.stderr)
     if args.report:
-        print(
-            "error: --report is a KINETIC CORE surface. The screening lane has no\n"
-            "  absolutes, no intervals and no OAV table to render, and a report that\n"
-            "  showed only rankings would imply it had more. Re-run with --lane core.",
-            file=sys.stderr,
-        )
-        return 2
-
-    run = evaluate_system(spec, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    payload = screening_payload(predict_system(run, top_n=args.top))
-    print(to_json(payload) if args.json else render_predict_text(payload))
+        _write_report(payload, args.report)
     return 0
 
 
@@ -490,10 +406,10 @@ def run_rank(args: argparse.Namespace) -> int:
     source = Path(args.prediction_path) if args.prediction_path else PREDICTION_UNCERTAINTY_PATH
     if not Path(source).exists():
         print(
-            f"error: no uncertainty panel at {source}.\n"
-            "  The VoI ranking is computed from the cached Monte-Carlo artifact, which is\n"
-            "  gitignored and therefore absent in a fresh clone. Generate it first:\n"
-            "    python scripts/generators/generate_prediction_uncertainty.py --n-samples 200 --seed 0",
+            f"error: no core uncertainty envelope at {source}.\n"
+            "  The VoI ranking is computed from the kinetic core's Monte-Carlo envelope.\n"
+            "  Generate it first (about 40 min at n=200):\n"
+            "    python scripts/generators/generate_core_prediction_uncertainty.py --n-samples 200 --seed 0 --workers 4",
             file=sys.stderr,
         )
         return 2

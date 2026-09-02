@@ -349,7 +349,7 @@ _SMALL_PANEL = (
 BENCHMARK_FIELDS = {
     "benchmark_id", "bench_file", "panel", "execution_path", "protein_type", "fitted_row",
     "evidence_role", "signal_origin", "fit_target_of", "compounds", "refused_compounds",
-    "quantification_family", "quantification_source", "legacy_evidence_role",
+    "quantification_family", "quantification_source",
 }
 COMPOUND_FIELDS = {
     "compound", "measured_ppb", "predicted_p5", "predicted_p50", "predicted_p95",

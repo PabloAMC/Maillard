@@ -15,7 +15,6 @@ from typing import Any, Dict, Mapping
 
 from src.benchmark_types import BenchmarkMetadata
 from src.fit_target_index import is_per_row_fit_target
-from src.matrix_calibration_registry import is_fit_recovery_benchmark
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
 
 
@@ -174,8 +173,8 @@ def benchmark_evidence_role(benchmark_id: str, bench_file: Path) -> str:
       global fit -- two constants across two dozen rows -- does NOT, because excluding
       those rows would delete genuine failures from the count rather than expose them.
     """
-    if is_fit_recovery_benchmark(benchmark_id):
-        return "fit_recovery"
+    # 2026-09-03 (B5): the legacy matrix observability factors' `fitted_to_benchmark`
+    # declarations are no longer consulted; the fit-target index is the one source.
     if is_per_row_fit_target(benchmark_id):
         return "fit_recovery"
     if benchmark_signal_origin(Path(bench_file)) == "internal_synthetic":

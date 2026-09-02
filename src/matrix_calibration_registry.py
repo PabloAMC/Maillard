@@ -521,6 +521,31 @@ def fitted_to_benchmark_lanes() -> Dict[str, tuple[str, ...]]:
     return {key: tuple(sorted(set(value))) for key, value in sorted(lanes.items())}
 
 
+def classify_volatile_matrix_family(name: str, smiles: Optional[str] = None) -> str:
+    """Coarse volatile class from a name (else SMILES). Moved here 2026-09-03 from the
+    retired ``src/matrix_correction.py``; the registry was its last caller."""
+    normalized = name.strip().lower()
+    if any(token in normalized for token in ["thiol", "sulfide", "sulfur", "methional", "thiazole", "thiophene"]):
+        return "sulfur"
+    if "pyrazine" in normalized:
+        return "pyrazine"
+    if any(token in normalized for token in ["furan", "furfural"]):
+        return "furan"
+    if any(token in normalized for token in ["ol", "alcohol"]):
+        return "alcohol"
+    if any(token in normalized for token in ["anal", "enal", "aldehyde"]):
+        return "aldehyde"
+    if smiles:
+        smi = smiles.lower()
+        if "s" in smi:
+            return "sulfur"
+        if "n" in smi and "c1" in smi:
+            return "pyrazine"
+        if "o" in smi and "c1" in smi:
+            return "furan"
+    return "other"
+
+
 def is_fit_recovery_benchmark(benchmark_id: Optional[str]) -> bool:
     """True when every scored row of this benchmark is algebraic recovery of a fit.
 
@@ -993,7 +1018,6 @@ def describe_matrix_calibration(
         process_state=process_state,
     )
     if record is None:
-        from src.matrix_correction import classify_volatile_matrix_family
         target_class = classify_volatile_matrix_family(compound)
         for anchor in _MATRIX_CLASS_ANCHORS:
             if anchor.protein_type == protein_type and anchor.target_class == target_class:

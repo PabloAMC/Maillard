@@ -36,7 +36,7 @@ _SMALL_PANEL = (
 
 BENCHMARK_FIELDS = {
     "benchmark_id", "bench_file", "panel", "tier", "family", "execution_path", "protein_type",
-    "conditions", "signal_origin", "evidence_role", "legacy_evidence_role", "fit_target_of",
+    "conditions", "signal_origin", "evidence_role", "fit_target_of",
     "core_fit_targets", "quantification_family", "scale_thresholds", "compounds",
     "refused_compounds", "matched_compounds", "total_compounds", "coverage", "max_ratio",
     "mean_abs_log10_error", "pearson_r_log10", "ranking_status", "scale_status",
@@ -51,7 +51,7 @@ ROW_FIELDS = {
 SUMMARY_FIELDS = {
     "panel_benchmark_count", "scored_benchmark_count", "matched_compound_count",
     "refused_compound_count", "within_band_count", "within_band_rate", "fold_summary",
-    "evidence_role_totals", "evidence_role_differs_from_legacy", "predictive_passes",
+    "evidence_role_totals", "predictive_passes",
     "strict_ready", "by_panel", "by_evidence_role", "by_lane", "honest_literature",
     "out_of_sample", "in_core_fit", "holdout_within_band",
 }
@@ -140,14 +140,12 @@ def test_core_evidence_role_ignores_legacy_fit_declarations_but_reports_them(sma
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
     trik = by_id["pea_isolate_uht_140C_Trikusuma2019"]
     # the legacy matrix observability factors were fitted to this bundle; the core's were not
-    assert trik["legacy_evidence_role"] == "fit_recovery"
     assert trik["evidence_role"] == "predictive"
-    assert trik["fit_target_of"]["legacy"] and not trik["fit_target_of"]["core"]
+    assert not trik["fit_target_of"]["core"]
     hof = by_id["hofmann1998_ribose_cysteine_145C_20min_pH5"]
     assert hof["evidence_role"] == "predictive"  # low-leverage fit: stays in, annotated
     assert hof["fit_target_of"]["core"] == [fit_targets.SULFUR_FIT_REPORT.name]
     assert all(r["in_core_fit"] for r in hof["compounds"])
-    assert "pea_isolate_uht_140C_Trikusuma2019" in small["summary"]["evidence_role_differs_from_legacy"]
 
 
 # ---------------------------------------------------------------------------

@@ -4,7 +4,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 
 * panel: **40** benchmarks, 32 scored, 8 fully refused; rows **49**, refused rows 18
 * within 3x: 8/49 (0.163); median fold 11.072, geometric mean 35.986, worst 7.56e+06
-* evidence roles (core): {'predictive': 40}; differs from legacy on: cys_ribose_140C_Hofmann1998, hofmann1998_norfuraneol_h2s_145C_20min_pH5, pea_isolate_40C_PratapSingh2021, pea_isolate_uht_140C_Trikusuma2019, soy_isolate_40C_PratapSingh2021
+* evidence roles (core): {'predictive': 40}
 * predictive benchmarks passing their contract: thiamine_cys_glucose_120C_Bolton1994; strict-ready: thiamine_cys_glucose_120C_Bolton1994
 * **honest literature: 8/49 within band** (0.163), 32 benchmarks, median fold 11.072, geometric mean 35.986
 * **out-of-sample: 4/40 within band** (0.100), 27 benchmarks, median fold 31.179, geometric mean 58.757
@@ -25,48 +25,48 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 
 ## Benchmarks
 
-| benchmark | panel | tier | role (core / legacy) | rows | coverage | max ratio | mean log10 | contract (ratio / log10) | status | strict | in core fit |
+| benchmark | panel | tier | role | rows | coverage | max ratio | mean log10 | contract (ratio / log10) | status | strict | in core fit |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | PRIMARY | predictive / predictive | 1/1 | 1.000 | 4.25e+03 | 3.628 | 1.50 / 0.200 | scale-gap | no | - |
-| cml_cel_commercial_pbma_Foods2023 | trust_loop | PRIMARY | predictive / predictive | 0/2 | 0.000 | - | - | 1.80 / 0.250 | refused | no | - |
-| cys_ribose_140C_Hofmann1998 | trust_loop | REFERENCE | predictive / fit_recovery | 2/2 | 1.000 | 4.699 | 0.538 | 1.50 / 0.100 | scale-gap | no | - |
-| furosine_extrusion_crossover_140C_RamirezJimenez2000 | trust_loop | PRIMARY | predictive / predictive | 0/1 | 0.000 | - | - | 2.00 / 0.300 | refused | no | - |
-| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | PRIMARY | predictive / predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
-| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | PRIMARY | predictive / predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
-| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | PRIMARY | predictive / predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
-| hofmann1998_fructose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive / predictive | 2/2 | 1.000 | 10.571 | 0.701 | 1.10 / 0.041 | scale-gap | no | 2 |
-| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | PRIMARY | predictive / predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
-| hofmann1998_glucose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive / predictive | 2/2 | 1.000 | 8.457 | 0.584 | 1.10 / 0.041 | scale-gap | no | 2 |
-| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive / predictive | 1/1 | 1.000 | 2.280 | 0.358 | 1.10 / 0.041 | scale-gap | no | 1 |
-| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | PRIMARY | predictive / fit_recovery | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive / predictive | 2/2 | 1.000 | 9.981 | 0.773 | 1.10 / 0.041 | scale-gap | no | 2 |
-| pea_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive / fit_recovery | 1/2 | 0.500 | 3.36e+03 | 3.526 | 2.00 / 0.120 | coverage-gap | no | - |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | PRIMARY | predictive / fit_recovery | 1/3 | 0.333 | 34.240 | 1.535 | 2.00 / 0.120 | coverage-gap | no | - |
-| resconi_2023_pbma_beef_identity_benchmark | trust_loop | SECONDARY | predictive / predictive | 1/1 | 1.000 | 7.56e+06 | 6.878 | 1.50 / 0.100 | scale-gap | no | - |
-| soy_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive / fit_recovery | 1/2 | 0.500 | 6.08e+03 | 3.784 | 2.00 / 0.120 | coverage-gap | no | - |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | PRIMARY | predictive / predictive | 1/1 | 1.000 | 1.337 | 0.126 | 3.00 / 0.480 | pass-no-ranking | yes | - |
-| thiamine_cys_xylose_145C_Cerny2008 | trust_loop | PRIMARY | predictive / predictive | 0/0 | 0.000 | - | - | 1.50 / 0.100 | refused | no | - |
-| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 8.246 | 0.859 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/3 | 0.667 | 52.799 | 1.017 | 1.50 / 0.100 | coverage-gap | no | - |
-| mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/3 | 0.667 | 269.863 | 1.494 | 1.50 / 0.100 | coverage-gap | no | - |
-| mp_holdout_glucose_asparagine_180C_10min_Chang2021 | maillard_path_holdout | REFERENCE | predictive / predictive | 1/1 | 1.000 | 241.056 | 2.382 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_glucose_asparagine_180C_30min_Chang2021 | maillard_path_holdout | REFERENCE | predictive / predictive | 1/1 | 1.000 | 2.763 | 0.441 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 4.845 | 0.603 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | REFERENCE | predictive / predictive | 1/1 | 1.000 | 50.058 | 1.699 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | REFERENCE | predictive / predictive | 1/1 | 1.000 | 11.930 | 1.077 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 13.375 | 1.085 | 1.10 / 0.041 | scale-gap | no | - |
-| mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 51.361 | 1.235 | 1.10 / 0.041 | scale-gap | no | - |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 24.783 | 1.123 | 1.10 / 0.041 | scale-gap | no | - |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 143.814 | 2.129 | 1.10 / 0.041 | scale-gap | no | - |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 3.684 | 0.507 | 1.10 / 0.041 | scale-gap | no | 2 |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 495.811 | 1.821 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 381.988 | 2.016 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 233.699 | 2.049 | 1.50 / 0.100 | scale-gap | no | - |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive / predictive | 2/2 | 1.000 | 149.464 | 2.077 | 1.50 / 0.100 | scale-gap | no | - |
-| external_validation_bi_2020_raw_pea_hexanal | external_matrix | PRIMARY | predictive / predictive | 1/1 | 1.000 | 3.72e+03 | 3.570 | 2.00 / 0.120 | scale-gap | no | - |
-| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | PRIMARY | predictive / predictive | 1/1 | 1.000 | 3.657 | 0.563 | 2.00 / 0.120 | scale-gap | no | - |
-| external_validation_li_2026_spi_wg_hme_control | external_matrix | PRIMARY | predictive / predictive | 1/4 | 0.250 | 8.689 | 0.939 | 2.00 / 0.120 | coverage-gap | no | - |
-| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | PRIMARY | predictive / predictive | 1/2 | 0.500 | 3.34e+04 | 4.524 | 2.00 / 0.120 | coverage-gap | no | - |
+| acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 4.25e+03 | 3.628 | 1.50 / 0.200 | scale-gap | no | - |
+| cml_cel_commercial_pbma_Foods2023 | trust_loop | PRIMARY | predictive | 0/2 | 0.000 | - | - | 1.80 / 0.250 | refused | no | - |
+| cys_ribose_140C_Hofmann1998 | trust_loop | REFERENCE | predictive | 2/2 | 1.000 | 4.699 | 0.538 | 1.50 / 0.100 | scale-gap | no | - |
+| furosine_extrusion_crossover_140C_RamirezJimenez2000 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 2.00 / 0.300 | refused | no | - |
+| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
+| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
+| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
+| hofmann1998_fructose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 10.571 | 0.701 | 1.10 / 0.041 | scale-gap | no | 2 |
+| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
+| hofmann1998_glucose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 8.457 | 0.584 | 1.10 / 0.041 | scale-gap | no | 2 |
+| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 2.280 | 0.358 | 1.10 / 0.041 | scale-gap | no | 1 |
+| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 9.981 | 0.773 | 1.10 / 0.041 | scale-gap | no | 2 |
+| pea_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 1/2 | 0.500 | 3.36e+03 | 3.526 | 2.00 / 0.120 | coverage-gap | no | - |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | PRIMARY | predictive | 1/3 | 0.333 | 34.240 | 1.535 | 2.00 / 0.120 | coverage-gap | no | - |
+| resconi_2023_pbma_beef_identity_benchmark | trust_loop | SECONDARY | predictive | 1/1 | 1.000 | 7.56e+06 | 6.878 | 1.50 / 0.100 | scale-gap | no | - |
+| soy_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 1/2 | 0.500 | 6.08e+03 | 3.784 | 2.00 / 0.120 | coverage-gap | no | - |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 1.337 | 0.126 | 3.00 / 0.480 | pass-no-ranking | yes | - |
+| thiamine_cys_xylose_145C_Cerny2008 | trust_loop | PRIMARY | predictive | 0/0 | 0.000 | - | - | 1.50 / 0.100 | refused | no | - |
+| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 8.246 | 0.859 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | REFERENCE | predictive | 2/3 | 0.667 | 52.799 | 1.017 | 1.50 / 0.100 | coverage-gap | no | - |
+| mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | REFERENCE | predictive | 2/3 | 0.667 | 269.863 | 1.494 | 1.50 / 0.100 | coverage-gap | no | - |
+| mp_holdout_glucose_asparagine_180C_10min_Chang2021 | maillard_path_holdout | REFERENCE | predictive | 1/1 | 1.000 | 241.056 | 2.382 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_glucose_asparagine_180C_30min_Chang2021 | maillard_path_holdout | REFERENCE | predictive | 1/1 | 1.000 | 2.763 | 0.441 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 4.845 | 0.603 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | REFERENCE | predictive | 1/1 | 1.000 | 50.058 | 1.699 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | REFERENCE | predictive | 1/1 | 1.000 | 11.930 | 1.077 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 13.375 | 1.085 | 1.10 / 0.041 | scale-gap | no | - |
+| mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 51.361 | 1.235 | 1.10 / 0.041 | scale-gap | no | - |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 24.783 | 1.123 | 1.10 / 0.041 | scale-gap | no | - |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 143.814 | 2.129 | 1.10 / 0.041 | scale-gap | no | - |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 3.684 | 0.507 | 1.10 / 0.041 | scale-gap | no | 2 |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 495.811 | 1.821 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 381.988 | 2.016 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 233.699 | 2.049 | 1.50 / 0.100 | scale-gap | no | - |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | REFERENCE | predictive | 2/2 | 1.000 | 149.464 | 2.077 | 1.50 / 0.100 | scale-gap | no | - |
+| external_validation_bi_2020_raw_pea_hexanal | external_matrix | PRIMARY | predictive | 1/1 | 1.000 | 3.72e+03 | 3.570 | 2.00 / 0.120 | scale-gap | no | - |
+| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | PRIMARY | predictive | 1/1 | 1.000 | 3.657 | 0.563 | 2.00 / 0.120 | scale-gap | no | - |
+| external_validation_li_2026_spi_wg_hme_control | external_matrix | PRIMARY | predictive | 1/4 | 0.250 | 8.689 | 0.939 | 2.00 / 0.120 | coverage-gap | no | - |
+| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | PRIMARY | predictive | 1/2 | 0.500 | 3.34e+04 | 4.524 | 2.00 / 0.120 | coverage-gap | no | - |
 
 ## Rows
 

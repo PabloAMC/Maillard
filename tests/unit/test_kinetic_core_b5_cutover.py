@@ -314,95 +314,16 @@ def test_engine_declares_that_it_fits_nothing():
 _FORBIDDEN_FAST_FIELDS = ("a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_p95")
 
 
-def test_screening_payload_strips_every_fast_absolute_field():
-    from src.comparative_cli import SCREENING_LABEL, screening_payload
-
-    raw = {
-        "artifact": "maillard_predict",
-        "rows": [
-            {
-                "compound": "MFT",
-                "predicted_ppb": 1234.5,
-                "range_p5": 1.0,
-                "range_p95": 9.0,
-                "range_available": True,
-                "dominant_pathway": "x",
-                "lane_reliability": None,
-            }
-        ],
-        "caveats": {"absolute": "..."},
-    }
-    clean = screening_payload(raw)
-    text = json.dumps(clean)
-    for field in _FORBIDDEN_FAST_FIELDS:
-        assert f'"{field}"' not in text, f"{field} survived the screening sanitiser"
-    assert clean["lane_label"] == SCREENING_LABEL
-    assert clean["absolutes_withheld"] is True
-    assert clean["rows"][0]["absolute_ppb_withheld"] is True
-    # The ORDERING -- the lane's measured product -- must survive.
-    assert clean["rows"][0]["compound"] == "MFT"
-    assert clean["rows"][0]["dominant_pathway"] == "x"
-
-
-def test_screening_label_appears_in_the_rendered_fast_text():
-    from src.comparative_cli import (
-        SCREENING_LABEL,
-        render_predict_text,
-        screening_payload,
-    )
-
-    raw = {
-        "artifact": "maillard_predict",
-        "system": {"name": "demo", "spec": {}},
-        "rows": [
-            {
-                "compound": "MFT",
-                "predicted_ppb": 1234.5,
-                "range_p5": 1.0,
-                "range_p95": 9.0,
-                "range_available": True,
-                "dominant_pathway": "x",
-                "lane_reliability": None,
-                "sulfur": False,
-            }
-        ],
-        "warnings": [],
-        "caveats": {"absolute": "...", "sulfur": None, "no_range": "..."},
-    }
-    text = render_predict_text(screening_payload(raw))
-    assert SCREENING_LABEL in text
-    assert "1234" not in text, "a FAST absolute reached the rendered text"
-    assert "ppb withheld" in text
-
-
-def test_cli_defaults_to_the_core_lane():
+def test_cli_has_one_lane_and_no_lane_switch():
+    """2026-09-03 (retirement step B5): the screening lane and its `--lane` switch are gone."""
     import scripts.maillard as cli
 
-    args = cli.build_parser().parse_args(["predict", "spec.yml"])
-    assert args.lane == "core"
-    args = cli.build_parser().parse_args(["compare", "spec.yml"])
-    assert args.lane == "core"
-
-
-def test_cli_offers_both_lanes_and_no_others():
-    import scripts.maillard as cli
-
-    args = cli.build_parser().parse_args(["predict", "spec.yml", "--lane", "fast"])
-    assert args.lane == "fast"
+    for verb in ("predict", "compare"):
+        args = cli.build_parser().parse_args([verb, "spec.yml"])
+        assert not hasattr(args, "lane")
+        assert not hasattr(args, "absolute")
     with pytest.raises(SystemExit):
-        cli.build_parser().parse_args(["predict", "spec.yml", "--lane", "nonsense"])
-
-
-def test_fast_lane_refuses_absolute_flag(tmp_path, capsys):
-    """`--absolute` on the screening lane must be REFUSED, not quietly honoured."""
-    import scripts.maillard as cli
-    from src.comparative_cli import SPEC_TEMPLATE
-
-    spec = tmp_path / "spec.yml"
-    spec.write_text(SPEC_TEMPLATE)
-    code = cli.main(["compare", str(spec), "--lane", "fast", "--absolute"])
-    assert code == 2
-    assert "not available on the screening lane" in capsys.readouterr().err
+        cli.build_parser().parse_args(["predict", "spec.yml", "--lane", "fast"])
 
 
 def test_core_predict_payload_carries_its_declaration_and_no_fast_fields():

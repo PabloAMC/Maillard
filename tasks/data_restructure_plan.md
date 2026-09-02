@@ -702,7 +702,26 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
         sections still describe the legacy lane — they go with it at B5.
       * Verification: five gates PASS; `generate_model_card.py --check` clean; unit+scripts 1389; integration+scientific
         426 + 2 xfail (the 8 core guards included).
-- [ ] B5 delete the legacy engine and its harness.
+- [ ] B5 delete the legacy engine and its harness — OWNER GO-AHEAD 2026-09-03 ("let's make sure we are moving
+      towards a better tool"). Staged:
+  - [x] B5a seams (2026-09-03): the surviving tool's import closure (kinetic_core, `scripts/maillard.py`,
+        `comparative_cli`, `model_card`, `report_html`, `explain_compound`, `experiment_value`, the CI gates, the
+        kept generators) no longer imports any legacy module — verified by a static import-graph check.
+        `comparative_cli`: FAST/screening lane, `--lane`, `--absolute`, `--target-tag/--minimize-tag` deleted;
+        `model_card`: legacy collectors (benchmark panel, free-precursor / matrix hold-outs, observability modes,
+        directional) replaced by the core scorecard + envelope; the card now SAYS directional skill is not yet
+        measured on the core (the retired lane's 24/36 does not transfer); `matrix_calibration_registry` no longer
+        imports `matrix_correction` (classifier inlined); `benchmark_metadata` drops the legacy matrix-factor
+        fit-recovery declarations; `experiment_value` (the `rank` verb) reads the core envelope
+        (`data_paths.CORE_PREDICTION_UNCERTAINTY`); `legacy_evidence_role` removed from the scorecard/envelope.
+        Tests pruned accordingly (screening-lane tests). Gates PASS, model-card check clean, unit+scripts 1355,
+        integration+scientific 426 + 2 xfail.
+  - [ ] B5b delete: 62 src modules, 68 scripts, 124 test files (computed: everything not reachable from the kept
+        scripts and the front door); archive 110 legacy artifacts under `results/legacy_lane/`; drop the legacy-only
+        data files (formulation_grid, sensory_tags, refinement_surrogate_patches, matrix-intake protocol files);
+        re-base `holdout_guard` (checks 2/3) and `fit_target_gate` on the core; rewrite `test_cli_scripts`.
+  - [ ] B5c docs: README rewritten around the one engine (legacy narrative moved to `docs/history/`), QUICKSTART,
+        VALIDATION_CONTRACT, AUDIT banner, badge; data README regenerated.
 - [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite
       design audit — are the tests well designed, which files should be restructured for coverage, and which tests
       assert nothing (tautologies, pinned-artifact echoes, contract tests without a failure mode). Deliverable: a

@@ -42,7 +42,6 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from src import data_paths
 from src.benchmark_metadata import (
-    benchmark_evidence_role,
     benchmark_signal_origin,
     get_benchmark_metadata,
     resolve_scale_thresholds,
@@ -284,7 +283,6 @@ def score_benchmark(
         },
         "signal_origin": benchmark_signal_origin(path),
         "evidence_role": core_evidence_role(benchmark_id, path),
-        "legacy_evidence_role": benchmark_evidence_role(benchmark_id, path),
         "fit_target_of": fit_target_of(benchmark_id),
         "core_fit_targets": [t.as_dict() for t in core_fit_targets(benchmark_id)],
         "quantification_family": family,
@@ -399,9 +397,6 @@ def score_panel(
     strict_ready = sorted(b["benchmark_id"] for b in benches if b["strict_ready"])
     holdout = by_panel.get("maillard_path_holdout")
     role_totals = {role: bucket["benchmarks"] for role, bucket in sorted(by_role.items())}
-    role_moves = sorted(
-        b["benchmark_id"] for b in benches if b["evidence_role"] != b["legacy_evidence_role"]
-    )
     reports = sorted(data_paths.VALIDATION_DIR.glob("kinetic_core_b*_fit_report.json"))
 
     payload: Dict[str, Any] = {
@@ -423,7 +418,6 @@ def score_panel(
                 [r["fold_error"] for b in benches for r in b["compounds"]]
             ),
             "evidence_role_totals": role_totals,
-            "evidence_role_differs_from_legacy": role_moves,
             "predictive_passes": predictive_passes,
             "strict_ready": strict_ready,
             "by_panel": {k: _close(v) for k, v in sorted(by_panel.items())},
@@ -492,8 +486,7 @@ def render_markdown(payload: Dict[str, Any]) -> str:
         f"* within {payload['pass_band_level']:.0f}x: {s['within_band_count']}/{s['matched_compound_count']} "
         f"({_fmt(s['within_band_rate'])}); median fold {_fmt(fs['median_fold_error'])}, "
         f"geometric mean {_fmt(fs['geometric_mean_fold'])}, worst {_fmt(fs['worst_fold_error'])}",
-        f"* evidence roles (core): {s['evidence_role_totals']}; differs from legacy on: "
-        f"{', '.join(s['evidence_role_differs_from_legacy']) or 'none'}",
+        f"* evidence roles (core): {s['evidence_role_totals']}",
         f"* predictive benchmarks passing their contract: {', '.join(s['predictive_passes']) or 'NONE'}; "
         f"strict-ready: {', '.join(s['strict_ready']) or 'NONE'}",
     ]
@@ -522,15 +515,15 @@ def render_markdown(payload: Dict[str, Any]) -> str:
                 f"{_fmt(b['fold_summary']['geometric_mean_fold'])} |"
             )
     out += ["", "## Benchmarks", "",
-            "| benchmark | panel | tier | role (core / legacy) | rows | coverage | max ratio | mean log10 | "
+            "| benchmark | panel | tier | role | rows | coverage | max ratio | mean log10 | "
             "contract (ratio / log10) | status | strict | in core fit |",
             "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for b in payload["benchmarks"]:
         c = b["scale_thresholds"]
         fit_rows = sum(1 for r in b["compounds"] if r["in_core_fit"])
         out.append(
-            f"| {b['benchmark_id']} | {b['panel']} | {b['tier']} | {b['evidence_role']} / "
-            f"{b['legacy_evidence_role']} | {b['matched_compounds']}/{b['total_compounds']} | "
+            f"| {b['benchmark_id']} | {b['panel']} | {b['tier']} | {b['evidence_role']} | "
+            f"{b['matched_compounds']}/{b['total_compounds']} | "
             f"{_fmt(b['coverage'])} | {_fmt(b['max_ratio'])} | {_fmt(b['mean_abs_log10_error'])} | "
             f"{c['max_ratio']:.2f} / {c['mean_abs_log10_error']:.3f} | {b['overall_status']} | "
             f"{'yes' if b['strict_ready'] else 'no'} | {fit_rows or '-'} |"

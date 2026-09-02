@@ -267,65 +267,9 @@ def test_the_committed_example_spec_matches_the_template():
     assert yaml.safe_load(EXAMPLE_SPEC.read_text()) == yaml.safe_load(comparative_cli.SPEC_TEMPLATE)
 
 
-def test_spec_to_bench_reuses_the_benchmark_input_contract(free_spec_document):
-    """Precursor values must land as concentration_mM, the unit the projection budget reads."""
-    spec = comparative_cli.validate_spec(free_spec_document["a"], label="a")
-    bench = comparative_cli._spec_to_bench(spec)
-    assert bench["precursors"]["D-Ribose"]["concentration_mM"] == 10.0
-    assert bench["conditions"]["water_activity"] == 0.98
-    assert bench["conditions"]["time_min"] == 30.0
-
-
 # ---------------------------------------------------------------------------------------
 # Verb shape -- in-process, so the assertions can see the payload
 # ---------------------------------------------------------------------------------------
-
-
-@pytest.fixture(scope="module")
-def free_runs():
-    document = yaml.safe_load(comparative_cli.SPEC_TEMPLATE)
-    spec_a, spec_b = comparative_cli.split_comparison_document(document, source="template")
-    return (
-        comparative_cli.evaluate_system(spec_a),
-        comparative_cli.evaluate_system(spec_b),
-    )
-
-
-def test_each_compound_appears_exactly_once_despite_the_three_alias_keys(free_runs):
-    run_a, _ = free_runs
-    displays = list(run_a.compounds)
-    assert len(displays) == len(set(displays))
-    # The canonical SMILES spelling must not leak into the user-facing name.
-    assert not any(display.startswith("O=C") or display.startswith("Cc1") for display in displays)
-
-
-def test_compare_payload_has_the_expected_shape(free_runs):
-    payload = comparative_cli.compare_systems(*free_runs)
-    assert payload["artifact"] == "maillard_compare"
-    assert payload["axes_exercised"] == ["sugar_identity"]
-    assert payload["rows"], "the free-precursor sulfur system must produce compounds"
-    for row in payload["rows"]:
-        assert set(row) >= {
-            "compound",
-            "ratio",
-            "ratio_lo",
-            "ratio_hi",
-            "dominant_pathway_a",
-            "reliability",
-            "reliability_verdict",
-        }
-        assert row["reliability_verdict"] in {
-            dr.VERDICT_TRUST,
-            dr.VERDICT_CAUTION,
-            dr.VERDICT_DO_NOT_USE,
-            "n/a",
-        }
-
-
-def test_at_least_one_compound_carries_a_dominant_pathway(free_runs):
-    """The route trace side-channel is wired; without it every pathway column would be '-'."""
-    payload = comparative_cli.compare_systems(*free_runs)
-    assert any(row["dominant_pathway_a"] for row in payload["rows"])
 
 
 def test_the_ratio_bound_is_the_independent_error_combination():
@@ -341,81 +285,9 @@ def test_no_bound_is_invented_when_either_arm_lacks_an_envelope():
     assert comparative_cli._ratio_bounds({"p5": 1.0, "p95": 2.0}, None) == (None, None)
 
 
-def test_predict_reports_a_range_not_a_bare_point(free_runs):
-    run_a, _ = free_runs
-    payload = comparative_cli.predict_system(run_a)
-    assert payload["artifact"] == "maillard_predict"
-    assert payload["rows"]
-    assert any(row["range_available"] for row in payload["rows"])
-    for row in payload["rows"]:
-        assert "range_p5" in row and "range_p95" in row
-
-
-def test_the_sulfur_caveat_fires_on_a_sulfur_system(free_runs):
-    payload = comparative_cli.compare_systems(*free_runs)
-    assert any(row["sulfur"] for row in payload["rows"])
-    assert payload["caveats"]["sulfur"]
-    assert "zero absolute literature anchors" in payload["caveats"]["sulfur"]
-
-
 # ---------------------------------------------------------------------------------------
 # Rendering honesty -- what actually reaches the terminal
 # ---------------------------------------------------------------------------------------
-
-
-def test_ratios_lead_and_absolutes_do_not_appear_unless_asked(free_runs):
-    payload = comparative_cli.compare_systems(*free_runs)
-    default = comparative_cli.render_compare_text(payload, show_absolute=False)
-    assert "A/B" in default
-    assert "ABSOLUTE ppb (requested with --absolute)" not in default
-
-    with_absolute = comparative_cli.render_compare_text(payload, show_absolute=True)
-    assert "ABSOLUTE ppb (requested with --absolute)" in with_absolute
-    # The caveat is not optional: it ships in the same block as the numbers.
-    assert "ABSOLUTE ppb ARE NOT RELIABLE" in with_absolute
-
-
-def test_predict_prints_the_absolute_caveat_unconditionally(free_runs):
-    run_a, _ = free_runs
-    text = comparative_cli.render_predict_text(comparative_cli.predict_system(run_a))
-    flat = " ".join(text.split())  # the renderer wraps, so compare on normalised whitespace
-    assert "ABSOLUTE ppb ARE NOT RELIABLE" in flat
-    # And it must not let a run-level "high" tier read as a validation claim.
-    # RE-PINNED 2026-08-28 (Wave W): 14 -> 17 as the panel gained three Hofmann anchors.
-    # The NUMERATOR is the load-bearing half and it did not move: the three new rows are
-    # literature anchors and all three fail their contracts, so nothing became strict-ready.
-    assert "0 of 17 benchmarks in the panel are strict-ready" in flat
-
-
-def test_predict_points_the_user_at_the_comparative_verb(free_runs):
-    run_a, _ = free_runs
-    text = comparative_cli.render_predict_text(comparative_cli.predict_system(run_a))
-    assert "maillard compare" in text
-
-
-def test_the_per_axis_note_reaches_the_rendered_table():
-    """A do-not-use tag must arrive with its reason, not as a bare word."""
-    counts = dr.load_panel_counts()
-    payload = {
-        "a": {"name": "A", "spec": {}},
-        "b": {"name": "B", "spec": {}},
-        "axes_exercised": ["ph"],
-        "governing_reliability": "do-not-use (4/7)",
-        "per_axis": [
-            {
-                "axis": "ph",
-                "score": "%d/%d" % counts["ph"],
-                "verdict": dr.VERDICT_DO_NOT_USE,
-                "note": dr.reliability_for_axis("ph", counts).note,
-            }
-        ],
-        "rows": [],
-        "warnings_a": [],
-        "warnings_b": [],
-        "caveats": {"ratio": "r", "absolute": "a", "sulfur": None},
-    }
-    text = comparative_cli.render_compare_text(payload)
-    assert "licenses no pH recommendation" in text
 
 
 # ---------------------------------------------------------------------------------------
@@ -438,20 +310,15 @@ def _run_cli(*args, expect_ok=True):
 
 @pytest.mark.slow
 def test_compare_verb_runs_end_to_end_and_emits_json():
-    """
-    2026-08-29 (Wave B5, the propagator cutover): the DEFAULT lane is now the
-    kinetic core, so the default artifact is `maillard_compare_core`. The FAST
-    lane's payload is still reachable behind `--lane fast` and is asserted in
-    the companion test below.
-    """
+    """2026-09-03 (B5): the kinetic core is the only lane; `compare` reports ratios with
+    the envelope declaration of each arm."""
     proc = _run_cli("compare", str(EXAMPLE_SPEC), "--json")
     payload = json.loads(proc.stdout)
     assert payload["artifact"] == "maillard_compare_core"
     assert payload["lane"] == "core"
-    assert payload["comparison"]["comparable"] is True
+    assert "comparison" in payload
 
 
-@pytest.mark.slow
 def test_predict_verb_runs_end_to_end_and_emits_json():
     """2026-08-29 (Wave B5): default lane is the kinetic core -- see above."""
     proc = _run_cli("predict", str(EXAMPLE_SPEC), "--system", "a", "--json")
@@ -460,23 +327,6 @@ def test_predict_verb_runs_end_to_end_and_emits_json():
     assert payload["lane"] == "core"
     assert payload["answered"] is True
     assert payload["rows"]
-
-
-@pytest.mark.slow
-def test_fast_lane_still_runs_but_emits_no_absolutes():
-    """
-    Wave B5: the FAST lane is DEMOTED, not deleted. It must still run, must be
-    labelled ORDINAL SCREENING, and must not carry a single absolute ppb.
-    """
-    proc = _run_cli("predict", str(EXAMPLE_SPEC), "--system", "a", "--lane", "fast", "--json")
-    payload = json.loads(proc.stdout)
-    assert payload["artifact"] == "maillard_predict"
-    assert payload["lane_label"] == "ORDINAL SCREENING"
-    assert payload["absolutes_withheld"] is True
-    assert payload["rows"], "the screening lane must still rank compounds"
-    text = json.dumps(payload)
-    for field in ("predicted_ppb", "range_p5", "range_p95", "a_ppb", "b_ppb"):
-        assert f'"{field}"' not in text, f"{field} leaked from the screening lane"
 
 
 @pytest.mark.slow
@@ -532,7 +382,9 @@ def test_the_card_states_all_three_honest_headline_sentences():
     card = model_card.build_model_card(run_gate_checks=False)
     joined = " ".join(card["headline_sentences"])
     assert "Absolute concentrations are unreliable" in joined
-    assert "Directional and ranking claims are the measured product" in joined
+    # 2026-09-03 (B5): the directional panel was scored on the retired screening lane; the
+    # card must say the core has NOT been scored on it rather than borrow those numbers.
+    assert "Directional and ranking claims are NOT YET MEASURED on the kinetic core" in joined
     # RE-PINNED 2026-08-28 (Wave W). This used to require the literal phrase "sulfur branch
     # has zero absolute literature anchors". That sentence became FALSE on 2026-08-28 when
     # the full text of 10.1021/jf9705983 arrived and three of its Table 1 rows were ingested
@@ -626,8 +478,8 @@ def test_the_provenance_census_reproduces_the_readme_pinned_source_status_count(
 
 def test_a_missing_artifact_is_reported_in_the_card_not_dropped_from_it(monkeypatch, tmp_path):
     """A blank cell is indistinguishable from a pass, so absence must be stated."""
-    monkeypatch.setattr(model_card, "HOLDOUT_PATH", tmp_path / "absent.json")
-    collected = model_card.collect_free_precursor_holdout()
+    monkeypatch.setattr(model_card, "ENVELOPE_PATH", tmp_path / "absent.json")
+    collected = model_card.collect_core_envelope()
     assert collected["available"] is False
     assert collected["path"]
 

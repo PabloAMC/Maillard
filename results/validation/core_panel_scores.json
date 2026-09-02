@@ -107,13 +107,6 @@
     "evidence_role_totals": {
       "predictive": 40
     },
-    "evidence_role_differs_from_legacy": [
-      "cys_ribose_140C_Hofmann1998",
-      "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
-      "pea_isolate_40C_PratapSingh2021",
-      "pea_isolate_uht_140C_Trikusuma2019",
-      "soy_isolate_40C_PratapSingh2021"
-    ],
     "predictive_passes": [
       "thiamine_cys_glucose_120C_Bolton1994"
     ],
@@ -310,7 +303,7 @@
       "total": 30
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 13.4
+    "wall_seconds": 41.4
   },
   "benchmarks": [
     {
@@ -329,7 +322,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -411,7 +403,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -481,7 +472,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "fit_recovery",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -582,7 +572,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -643,7 +632,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -718,7 +706,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -793,7 +780,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -868,7 +854,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -986,7 +971,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -1061,7 +1045,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -1179,7 +1162,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -1270,7 +1252,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "fit_recovery",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -1347,7 +1328,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -1465,7 +1445,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "fit_recovery",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -1559,7 +1538,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "fit_recovery",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -1660,7 +1638,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -1737,7 +1714,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "fit_recovery",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -1831,7 +1807,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -1905,7 +1880,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": [
@@ -1956,7 +1930,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2058,7 +2031,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2175,7 +2147,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2292,7 +2263,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2368,7 +2338,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2444,7 +2413,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2546,7 +2514,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2619,7 +2586,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2696,7 +2662,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2790,7 +2755,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2884,7 +2848,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -2978,7 +2941,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3072,7 +3034,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [
           "kinetic_core_b8_fit_report.json"
@@ -3186,7 +3147,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3280,7 +3240,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3374,7 +3333,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3468,7 +3426,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3562,7 +3519,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3641,7 +3597,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3719,7 +3674,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []
@@ -3826,7 +3780,6 @@
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
-      "legacy_evidence_role": "predictive",
       "fit_target_of": {
         "core": [],
         "legacy": []

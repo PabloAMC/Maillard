@@ -33,7 +33,7 @@ if str(ROOT) not in sys.path:
 
 from src import data_paths  # noqa: E402
 
-DEFAULT_OUTPUT = data_paths.VALIDATION_DIR / "core_prediction_uncertainty.json"
+DEFAULT_OUTPUT = data_paths.CORE_PREDICTION_UNCERTAINTY
 
 
 def main(argv: Optional[List[str]] = None) -> int:
