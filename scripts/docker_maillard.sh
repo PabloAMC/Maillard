@@ -67,6 +67,7 @@ are gone with it. The front door is scripts/maillard.py.)
 
 == Evidence artifacts (regenerate what README quotes) ==
   core-scores                        results/validation/core_panel_scores.{json,md}   (~15 s)
+  core-directional                   results/validation/core_directional_scores.*     (~90 s)
   core-envelope [args...]            results/validation/core_prediction_uncertainty.* (~40 min at n=200)
   model-card                         Re-splice the README model card from the artifacts.
   model-card-check                   Fail if the README model card is stale.
@@ -244,6 +245,9 @@ case "$cmd" in
     ;;
   core-scores)
     run_generator_script generate_core_panel_scores
+    ;;
+  core-directional)
+    run_generator_script generate_core_directional_scores
     ;;
   core-envelope)
     shift

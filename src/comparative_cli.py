@@ -490,8 +490,37 @@ def compare_core(
         "a": {"name": core_a.name, "spec": dict(spec_a)},
         "b": {"name": core_b.name, "spec": dict(spec_b)},
         "comparison": payload,
+        "reliability": _reliability_block(spec_a, spec_b),
         "caveats": {"core": CORE_CAVEAT, "ratio": RATIO_CAVEAT},
         "engine": engine_metadata(),
+    }
+
+
+def _reliability_block(spec_a: Mapping[str, Any], spec_b: Mapping[str, Any]) -> Dict[str, Any]:
+    """
+    Step B7 (2026-09-03): the per-axis reliability of THIS comparison, read from the
+    core's own directional scorecard. The axes are the knobs the two arms differ on; the
+    governing verdict is the weakest of them. When the scorecard is absent the block says
+    so instead of inventing a tag.
+    """
+    from src.directional_reliability import describe_comparison
+
+    try:
+        described = describe_comparison(spec_a, spec_b)
+    except (FileNotFoundError, ValueError) as exc:
+        return {"available": False, "reason": str(exc), "axes": [], "per_axis": [], "governing": None}
+    governing = described["governing"]
+    return {
+        "available": True,
+        "source": "results/validation/core_directional_scores.json (strictly independent claims)",
+        "axes": list(described["axes"]),
+        "per_axis": [
+            {"axis": r.axis, "agree": r.agree, "evaluable": r.evaluable, "verdict": r.verdict, "note": r.note}
+            for r in described["per_axis"]
+        ],
+        "governing": None if governing is None else governing.render(),
+        "governing_verdict": None if governing is None else governing.verdict,
+        "no_axis_differs": bool(described["no_axis_differs"]),
     }
 
 
@@ -629,6 +658,20 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
             out.append(f"  arm {label}:")
             _render_declaration(declaration, out)
             out.append("")
+
+    reliability = payload.get("reliability") or {}
+    if reliability.get("available"):
+        axes = reliability.get("axes") or []
+        out.append("  Axes this comparison moves: " + (", ".join(axes) if axes else "none (the arms differ on no panel axis)"))
+        out.append(f"  Governing reliability:      {reliability.get('governing') or 'n/a'}   [directional panel, independent claims]")
+        for item in reliability.get("per_axis") or []:
+            out.append(f"    - {item['axis']:<18} {item['verdict']:<12} panel {item['agree']}/{item['evaluable']}")
+            if item.get("note"):
+                out.append(_wrap(item["note"], indent="        "))
+        out.append("")
+    elif reliability:
+        out.append(_wrap("reliability tags unavailable: " + str(reliability.get("reason")), indent="  ! "))
+        out.append("")
 
     ratios = comparison.get("ratios") or {}
     rows = list(ratios.get("rows") or [])

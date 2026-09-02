@@ -28,6 +28,7 @@ AUDIT = ROOT / "AUDIT.md"
 SCORES = data_paths.VALIDATION_DIR / "core_panel_scores.json"
 ENVELOPE = data_paths.VALIDATION_DIR / "core_prediction_uncertainty.json"
 EXAM = data_paths.VALIDATION_DIR / "cutover_final_exam.json"
+DIRECTIONAL = data_paths.CORE_DIRECTIONAL_SCORES
 
 
 def _doc_text(path: Path) -> str:
@@ -194,3 +195,51 @@ def test_cutover_exam_is_34_answered_3_within_band_paired_24_78x_vs_10_86x():
     _assert_quoted(readme, "**24.78x**", "README.md", "the exam's paired core median")
     _assert_quoted(readme, "**10.86x**", "README.md", "the exam's paired old-lane median")
     _assert_quoted(readme, "**19.08x**", "README.md", "the exam's all-answered core median")
+
+
+# --------------------------------------------------------------------------------------
+# 5. The directional claims panel, on the core (step B7)
+# --------------------------------------------------------------------------------------
+
+
+def test_core_scores_18_of_30_independent_directional_claims():
+    """Pinned 2026-09-03 (B7). 69 claims; 16 are prose-only and 22 independent claims are
+    not evaluable on the core (refused arms: 2,5-dimethylpyrazine, 2-pentylfuran, nonanal from
+    oleate, H2S / hydroxyacetaldehyde precursors; a zero disulfide). Of the evaluable
+    independent claims the core agrees on 18 of 30 -- 15 of 22 with pH and water activity
+    set aside, 3 of 8 on those two axes, 3 of the independent misses (7 over all claims) being
+    identical predictions across an axis the lane carries no term for. The retired lane's 24/36 was a different engine
+    on a different evaluable subset and is NOT a baseline for this number."""
+    payload = json.loads(DIRECTIONAL.read_text(encoding="utf-8"))
+    s = payload["summary"]
+    assert payload["panel"]["claims"] == 69
+    assert s["headline"] == [18, 30]
+    ind = s["independent"]
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (15, 22)
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (3, 8)
+    assert ind["total"]["not_evaluable"] == 22
+    assert ind["total"]["mechanism_absent"] == 3          # independent subset
+    assert s["all_claims"]["total"]["mechanism_absent"] == 7  # all 69 claims
+    cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
+    assert cats["sugar_identity"] == (5, 9)
+    assert cats["temperature"] == (5, 7)
+    assert cats["ph"] == (3, 5)
+    assert cats["moisture_aw"] == (0, 3)
+    assert cats["additive_cysteine"] == (3, 3)
+    assert cats["time"] == (2, 2)
+    readme = _doc_text(README)
+    _assert_quoted(readme, "18 of 30", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "15 of 22", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "3 of 8", "README.md", "the directional count on pH and water activity")
+
+
+def test_directional_scorecard_is_not_stale():
+    """The tracked artifact must be what the code scores today (~90 s)."""
+    from src.kinetic_core import directional
+
+    tracked = json.loads(DIRECTIONAL.read_text(encoding="utf-8"))
+    live = directional.score_panel()
+    assert live["summary"]["headline"] == tracked["summary"]["headline"]
+    assert {r["claim_id"]: r["status"] for r in live["claims"]} == {
+        r["claim_id"]: r["status"] for r in tracked["claims"]
+    }

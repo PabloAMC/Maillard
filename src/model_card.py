@@ -25,10 +25,10 @@ data/benchmarks/cys_ribose_140C_Hofmann1998  the sulfur branch's anchor status
 scripts/ci/*.py                              the three blocking gates, actually run
 ============================================ ==========================================
 
-NOT READ ANY MORE: the directional-accuracy report, the free-precursor and matrix
-hold-out reports and the observability-mode comparison. All four were measured on the
-retired screening lane; the kinetic core has not been scored on the directional panel
-yet, and the card says so rather than borrowing the retired lane's numbers.
+core_directional_scores.json                 the core on the directional claims panel (B7)
+
+NOT READ ANY MORE: the retired lane's directional-accuracy report, hold-out reports and
+observability-mode comparison. They were measured on the retired screening lane.
 
 NOTHING HERE IS A MEASUREMENT. Every number is read or recounted; the only judgement this
 module adds is the trust/caution/do-not-use threshold, which is stated in the card itself.
@@ -57,6 +57,7 @@ from src.directional_reliability import (
 )
 
 ENVELOPE_PATH = data_paths.CORE_PREDICTION_UNCERTAINTY
+DIRECTIONAL_PATH = data_paths.CORE_DIRECTIONAL_SCORES
 
 ROOT = data_paths.REPO_ROOT
 
@@ -99,6 +100,27 @@ def _read_json(path: Path) -> Optional[Dict[str, Any]]:
         return json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
+
+
+def collect_directional() -> Dict[str, Any]:
+    """The core on the directional claims panel (step B7), read from the tracked scorecard."""
+    payload = _read_json(DIRECTIONAL_PATH)
+    if payload is None or payload.get("artifact") != "core_directional_scores":
+        return {"available": False, "path": _relative(DIRECTIONAL_PATH)}
+    s = payload["summary"]
+    ind = s["independent"]
+    return {
+        "available": True,
+        "path": _relative(DIRECTIONAL_PATH),
+        "claims": payload["panel"]["claims"],
+        "headline": tuple(s["headline"]),
+        "excluding_ph_aw": (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]),
+        "ph_aw": (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]),
+        "not_evaluable": ind["total"]["not_evaluable"],
+        "mechanism_absent_misses": ind["total"]["mechanism_absent"],
+        "categories": {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()},
+        "misses": {k: list(v["misses"]) for k, v in ind["by_category"].items() if v["misses"]},
+    }
 
 
 def collect_core_envelope() -> Dict[str, Any]:
@@ -347,6 +369,7 @@ def build_model_card(*, run_gate_checks: bool = True) -> Dict[str, Any]:
         },
         "core_panel": collect_core_panel(),
         "core_envelope": collect_core_envelope(),
+        "directional": collect_directional(),
         "no_verifiable_source": collect_no_verifiable_source_census(),
         "sulfur_anchor": collect_sulfur_anchor_status(),
         "gates": run_gates() if run_gate_checks else [],
@@ -395,13 +418,25 @@ def _headline_sentences(card: Mapping[str, Any]) -> List[str]:
             f"{', '.join(env['unsampled_lanes']) or 'no'} lane carries no sampled uncertainty), "
             f"{env['out_of_sample_hits']}/{env['out_of_sample_total']} out of sample."
         )
-    second = (
-        "**Directional and ranking claims are NOT YET MEASURED on the kinetic core.** The "
-        "24/36 directional panel this card used to quote was scored on the retired screening "
-        "lane and does not transfer; until the core is scored on that panel, every ranking "
-        "claim is reported do-not-use by the card's own rule, not because it is known to be "
-        "wrong."
-    )
+    directional = card.get("directional") or {}
+    if directional.get("available"):
+        h = directional["headline"]; ex = directional["excluding_ph_aw"]; pa = directional["ph_aw"]
+        second = (
+            f"**Directional and ranking claims are the product, and on the kinetic core they score "
+            f"{h[0]}/{h[1]} on strictly independent literature claims** "
+            f"({directional['not_evaluable']} independent claims not evaluable: refused arms, "
+            f"prose-only claims, observables the core does not represent) -- "
+            f"{ex[0]}/{ex[1]} once pH and water activity are set aside, and {pa[0]}/{pa[1]} on pH and "
+            f"water activity themselves, {directional['mechanism_absent_misses']} of the misses being "
+            f"identical predictions across an axis the lane carries no term for. A coin scores ~0.5 "
+            f"on binary orderings; read the per-axis rows below, not the aggregate."
+        )
+    else:
+        second = (
+            "**Directional and ranking claims are NOT YET MEASURED on the kinetic core.** The "
+            "directional scorecard is absent; every ranking claim is reported do-not-use by the "
+            "card's own rule, not because it is known to be wrong."
+        )
     third = (
         (
             "**The sulfur branch has "
@@ -514,17 +549,44 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
             )
         )
 
-    # --- Ordinal claims: not yet measured on the core ------------------------------------
-    cells.append(
-        DomainCell(
-            "Direction / ranking on any axis",
-            "any",
-            "not yet measured on the kinetic core",
-            VERDICT_DO_NOT_USE,
-            "the directional panel was scored on the retired screening lane (2026-09-03); "
-            "re-scoring it on the core is the next retirement step",
+    # --- Ordinal claims, per axis, from the core's directional scorecard -----------------
+    directional = card.get("directional") or {}
+    axis_systems = {
+        "sugar_identity": "any (sugar swap, conditions held)",
+        "additive_cysteine": "free precursor (cysteine present vs absent)",
+        "temperature": "any (temperature moved, everything else held)",
+        "time": "any (time moved, everything else held)",
+        "lipid_lane": "protein matrix (lipid-derived aldehydes)",
+        "matrix_identity": "protein matrix (pea vs soy)",
+        "ph": "any (pH moved)",
+        "moisture_aw": "any (water activity moved)",
+        "ranking": "several compounds ordered in one system",
+        "process_heating": "processed vs raw",
+    }
+    if directional.get("available"):
+        for axis, system in axis_systems.items():
+            agree, evaluable = directional["categories"].get(axis, (0, 0))
+            misses = directional["misses"].get(axis, [])
+            cells.append(
+                DomainCell(
+                    f"Direction / ranking on `{axis}`",
+                    system,
+                    f"{agree}/{evaluable} on the directional panel (independent claims)"
+                    if evaluable else "no evaluable independent claim on the core",
+                    verdict_for(agree, evaluable),
+                    ("misses: " + ", ".join(misses)) if misses else "",
+                )
+            )
+    else:
+        cells.append(
+            DomainCell(
+                "Direction / ranking on any axis",
+                "any",
+                "not measured: the core directional scorecard is absent",
+                VERDICT_DO_NOT_USE,
+                "regenerate results/validation/core_directional_scores.json",
+            )
         )
-    )
 
     # --- Panel-level statements --------------------------------------------------------
     if core.get("available"):

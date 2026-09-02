@@ -47,98 +47,55 @@ EXAMPLE_SPEC = ROOT / "docs" / "examples" / "compare_ribose_vs_glucose.yml"
 # ---------------------------------------------------------------------------------------
 
 
-def test_panel_counts_are_read_from_the_committed_directional_report():
+def test_panel_counts_are_read_from_the_core_directional_scorecard():
+    """Step B7 (2026-09-03): the tags come from results/validation/core_directional_scores.json,
+    the kinetic core scored on the claims panel. The VALUES are pinned in
+    tests/scientific/test_core_headline_guards.py; here only the categories the CLI tags
+    against must be present, so a category cannot vanish into "unmeasured" silently."""
     counts = dr.load_panel_counts()
-    # The categories the CLI tags against must all be present. Their VALUES are not pinned
-    # here -- the report is allowed to move; what must not happen is a category vanishing and
-    # the CLI silently reporting "unmeasured".
-    for category in (
-        "sugar_identity",
-        "additive_cysteine",
-        "temperature",
-        "time",
-        "lipid_lane",
-        "matrix_identity",
-        "ph",
-        "moisture_aw",
-    ):
-        assert category in counts, f"{category} missing from the CURRENT STANDING table"
+    for category in ("sugar_identity", "additive_cysteine", "temperature", "time", "ph", "moisture_aw"):
+        assert category in counts, f"{category} missing from the core directional scorecard"
         agree, evaluable = counts[category]
         assert 0 <= agree <= evaluable
 
 
 def test_reliability_tags_follow_the_artifact_rather_than_a_hardcoded_table(tmp_path):
-    """Edit the report, and the tag moves. This is the whole point of reading it at runtime."""
-    fake = tmp_path / "report.md"
-    fake.write_text(
-        "# CURRENT STANDING — synthetic\n\n"
-        "| category | agree | evaluable |\n|---|---:|---:|\n"
-        "| ph | 7 | 7 |\n| sugar_identity | 0 | 8 |\n",
-        encoding="utf-8",
-    )
+    """Edit the artifact, and the tag moves. This is the whole point of reading it at runtime."""
+    fake = tmp_path / "scores.json"
+    fake.write_text(json.dumps({
+        "artifact": "core_directional_scores",
+        "summary": {"independent": {"by_category": {
+            "ph": {"agree": 7, "evaluable": 7, "not_evaluable": 0, "misses": [], "mechanism_absent": 0},
+            "sugar_identity": {"agree": 0, "evaluable": 8, "not_evaluable": 1, "misses": ["X-1"], "mechanism_absent": 0},
+        }}},
+    }), encoding="utf-8")
     counts = dr.load_panel_counts(fake)
-    assert dr.reliability_for_axis("ph", counts).verdict == dr.VERDICT_TRUST
-    assert dr.reliability_for_axis("sugar_identity", counts).verdict == dr.VERDICT_DO_NOT_USE
+    assert dr.reliability_for_axis("ph", counts, {}).verdict == dr.VERDICT_TRUST
+    assert dr.reliability_for_axis("sugar_identity", counts, {}).verdict == dr.VERDICT_DO_NOT_USE
+    assert "X-1" in dr.load_axis_notes(fake)["sugar_identity"]
 
 
-def test_a_missing_or_unparseable_report_raises_rather_than_defaulting(tmp_path):
+def test_a_missing_or_unparseable_artifact_raises_rather_than_defaulting(tmp_path):
     """A silent fallback here would republish a number after its evidence stopped being read."""
     with pytest.raises(FileNotFoundError):
-        dr.load_panel_counts(tmp_path / "nope.md")
-    empty = tmp_path / "empty.md"
-    empty.write_text("# something else\n", encoding="utf-8")
+        dr.load_panel_counts(tmp_path / "nope.json")
+    wrong = tmp_path / "wrong.json"
+    wrong.write_text(json.dumps({"artifact": "something_else"}), encoding="utf-8")
     with pytest.raises(ValueError):
-        dr.load_panel_counts(empty)
+        dr.load_panel_counts(wrong)
 
 
-def test_ph_and_water_activity_are_never_trusted_on_the_shipped_panel():
-    """The report's own conclusion, enforced. It says the model 'licenses no pH recommendation'.
-
-    RE-PINNED 2026-08-28 (Wave W), and the reason matters more than the new value.
-
-    This test used to assert ``ph`` == ``do-not-use``. It no longer holds, because the
-    EVIDENCE moved, not because the threshold did: Wave W added two independent pH rows
-    from Mottram & Nobrega 2002 (``MOT-01``, ``MOT-02``, both quoted from the paper's
-    Table 1) and the model AGREED with both, taking ``ph`` from 4/7 = 0.571 to 6/9 = 0.667.
-    ``CAUTION_MIN_RATE`` is still 0.60 and ``TRUST_MIN_RATE`` is still 0.80; neither was
-    touched in that wave, and the guard below asserts that they weren't.
-
-    So the assertion is re-expressed as the thing the report actually licenses -- **pH and
-    water activity are never TRUSTED** -- rather than as one specific tag. That is the
-    invariant §8/§A6 depends on ("licenses no pH recommendation, no moisture
-    recommendation"), it survives the panel gaining rows in either direction, and it still
-    fails loudly if someone widens a threshold to promote either axis.
-    """
+def test_ph_and_water_activity_are_never_trusted_on_the_core():
+    """The core's trunk and acrylamide lanes carry no pH term and no lane carries a water-
+    activity term (declared in the engine); the directional scorecard must not tag either
+    axis 'trust'. The thresholds are part of the claim: a promotion that came from moving
+    them is a different event from one that came from new measurements."""
     counts = dr.load_panel_counts()
-
-    # The thresholds themselves are part of the claim: a "promotion" that came from moving
-    # these is a different event from one that came from new measurements.
     assert dr.TRUST_MIN_RATE == 0.80
     assert dr.CAUTION_MIN_RATE == 0.60
-
     for axis in ("ph", "moisture_aw"):
-        assert dr.reliability_for_axis(axis, counts).verdict != dr.VERDICT_TRUST, (
-            f"{axis} is now tagged 'trust'. The report's licence section says the model "
-            f"licenses no pH and no moisture recommendation; promoting either axis to "
-            f"'trust' contradicts a shipped licence and must be done in the report first."
-        )
-
-    # Water activity has moved for nobody: 0/3, and the miss is structural (see
-    # src/directional_reliability._AXIS_NOTES).
+        assert dr.reliability_for_axis(axis, counts).verdict != dr.VERDICT_TRUST
     assert dr.reliability_for_axis("moisture_aw", counts).verdict == dr.VERDICT_DO_NOT_USE
-
-    # pH, as of Wave W, cleared the caution floor by two rows and no more. Pinned so that a
-    # drop back below 0.60 is visible as a change rather than absorbed silently.
-    # RE-PINNED 2026-08-28 (Wave X): 6/9 -> 6/10, and the axis is now EXACTLY ON the floor
-    # (0.600 against CAUTION_MIN_RATE 0.60). NO THRESHOLD MOVED -- both are asserted above.
-    # The new row is `HOX-03`: Hofmann & Schieberle 1998 Table 8 measures MFT rising 20x from
-    # pH 3 to pH 7 in a system containing no amino acid and no sugar (hydroxyacetaldehyde +
-    # mercapto-2-propanone), and the model predicts the IDENTICAL value at pH 3, 5 and 7,
-    # because that lane's three families appear in none of the pH sets in src/conditions.py.
-    # ONE MORE pH MISS TAKES THIS AXIS BACK TO do-not-use. That is not a reason to avoid
-    # adding pH rows; it is the reason to add them.
-    assert dr.reliability_for_axis("ph", counts).verdict == dr.VERDICT_CAUTION
-    assert counts["ph"] == (6, 10)
 
 
 def test_an_unmeasured_axis_is_reported_as_do_not_use_not_as_silence():
@@ -167,8 +124,12 @@ def test_axes_exercised_detects_each_knob_independently():
 
 
 def test_a_multi_axis_comparison_is_governed_by_its_weakest_axis():
-    """Bundling a pH change with a sugar change must not launder the pH miss away."""
-    counts = dr.load_panel_counts()
+    """Bundling a pH change with a sugar change must not launder the pH miss away.
+
+    RE-EXPRESSED 2026-09-03 (B7): the invariant is tested on a SYNTHETIC counts table so it
+    holds whatever the live scorecard says about either axis; the live numbers are pinned in
+    tests/scientific/test_core_headline_guards.py."""
+    counts = {"sugar_identity": (8, 8), "ph": (1, 5)}
     base = {
         "precursors": {"L-Cysteine": 10.0, "D-Ribose": 10.0},
         "temp_C": 140.0,
@@ -179,22 +140,9 @@ def test_a_multi_axis_comparison_is_governed_by_its_weakest_axis():
     other = {**base, "ph": 8.0, "precursors": {"L-Cysteine": 10.0, "D-Glucose": 10.0}}
     described = dr.describe_comparison(base, other, counts=counts)
     assert set(described["axes"]) == {"sugar_identity", "ph"}
-
-    # RE-EXPRESSED 2026-08-28 (Wave W). This used to assert the governing verdict was the
-    # literal string "do-not-use", which was true only because `ph` happened to sit there.
-    # Wave W's two new independent pH rows (MOT-01/MOT-02, both agreeing) moved `ph` to
-    # `caution` on the evidence, with no threshold change -- and the old assertion would
-    # then have failed for a reason that has nothing to do with what this test is for.
-    # What the test is actually for is the LAUNDERING invariant: the bundled comparison must
-    # inherit the WEAKER of its two axes, never the stronger one. That is asserted directly
-    # below and it holds at any tag either axis may take in future.
-    ph_tag = dr.reliability_for_axis("ph", counts)
-    sugar_tag = dr.reliability_for_axis("sugar_identity", counts)
-    assert ph_tag.rate < sugar_tag.rate, (
-        "This test needs pH to be the weaker of the two axes to say anything. It is not "
-        f"any more (ph {ph_tag.rate:.3f} vs sugar_identity {sugar_tag.rate:.3f}); pick a "
-        "different weak axis for the bundle rather than deleting the check."
-    )
+    ph_tag = dr.reliability_for_axis("ph", counts, {})
+    sugar_tag = dr.reliability_for_axis("sugar_identity", counts, {})
+    assert ph_tag.verdict == dr.VERDICT_DO_NOT_USE and sugar_tag.verdict == dr.VERDICT_TRUST
     assert described["governing"].verdict == ph_tag.verdict
     assert described["governing"].verdict != sugar_tag.verdict
 
@@ -384,7 +332,8 @@ def test_the_card_states_all_three_honest_headline_sentences():
     assert "Absolute concentrations are unreliable" in joined
     # 2026-09-03 (B5): the directional panel was scored on the retired screening lane; the
     # card must say the core has NOT been scored on it rather than borrow those numbers.
-    assert "Directional and ranking claims are NOT YET MEASURED on the kinetic core" in joined
+    # 2026-09-03 (B7): the core is scored on the directional panel; the sentence carries the count.
+    assert "Directional and ranking claims are the product, and on the kinetic core they score" in joined
     # RE-PINNED 2026-08-28 (Wave W). This used to require the literal phrase "sulfur branch
     # has zero absolute literature anchors". That sentence became FALSE on 2026-08-28 when
     # the full text of 10.1021/jf9705983 arrived and three of its Table 1 rows were ingested

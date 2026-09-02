@@ -46,6 +46,7 @@ record of measurement only.
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -53,15 +54,10 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence
 
 from src import data_paths
 
-#: The artifact this module reads. Its CURRENT STANDING section is the live panel score.
-DIRECTIONAL_REPORT_PATH = data_paths.DIRECTIONAL_ACCURACY_REPORT
-
-#: The panel data itself, used only to check that the categories we tag are categories the
-#: panel actually contains -- so a typo in an axis name is caught rather than silently
-#: reported as "unmeasured".
+#: The core's directional scorecard (step B7, 2026-09-03). The retired lane's markdown
+#: report at ``docs/validation/directional_accuracy_report.md`` is history and is not read.
+DIRECTIONAL_SCORES_PATH = data_paths.CORE_DIRECTIONAL_SCORES
 DIRECTIONAL_PANEL_PATH = data_paths.DIRECTIONAL_CLAIMS_PANEL
-
-_CURRENT_STANDING_HEADING = "# CURRENT STANDING"
 
 TRUST_MIN_RATE = 0.80
 CAUTION_MIN_RATE = 0.60
@@ -121,46 +117,54 @@ SULFUR_COMPOUNDS = frozenset(
 )
 
 
-def _parse_count_tables(text: str) -> Dict[str, tuple]:
-    """Pull every ``| label | int | int |`` row out of a markdown blob."""
-    counts: Dict[str, tuple] = {}
-    row = re.compile(r"^\|\s*([^|]+?)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*$")
-    for line in text.splitlines():
-        match = row.match(line.strip())
-        if not match:
-            continue
-        label = match.group(1).strip().strip("*").strip()
-        if not label or label.lower() in {"category", "bucket"}:
-            continue
-        counts[label] = (int(match.group(2)), int(match.group(3)))
-    return counts
+def load_directional_artifact(path: Path | str = DIRECTIONAL_SCORES_PATH) -> Dict[str, Any]:
+    """The core's directional scorecard (``results/validation/core_directional_scores.json``).
 
-
-def load_panel_counts(report_path: Path | str = DIRECTIONAL_REPORT_PATH) -> Dict[str, tuple]:
-    """``{label: (agree, evaluable)}`` from the report's CURRENT STANDING section.
-
-    Raises rather than falling back to a baked-in default. A silent default here would be the
-    exact failure this repository has been removing all campaign: a number that keeps being
-    published after the evidence behind it stops being read.
+    Raises rather than falling back: a silent default here would republish a number after
+    the evidence behind it stopped being read. (Until 2026-09-03 this module parsed the
+    CURRENT STANDING table of the retired lane's markdown report; that report is history.)
     """
-    path = Path(report_path)
+    path = Path(path)
     if not path.exists():
         raise FileNotFoundError(
-            f"directional-accuracy report not found at {path}. The reliability tags are read "
-            "from its CURRENT STANDING section and there is no fallback copy of the numbers."
+            f"core directional scorecard not found at {path}. Regenerate it with "
+            "scripts/generators/generate_core_directional_scores.py; there is no fallback copy."
         )
-    text = path.read_text(encoding="utf-8")
-    index = text.find(_CURRENT_STANDING_HEADING)
-    if index < 0:
-        raise ValueError(
-            f"{path} has no '{_CURRENT_STANDING_HEADING}' section. That section is the only "
-            "place the live per-category panel counts are recorded; see its own "
-            "'How to update this table' subsection."
-        )
-    counts = _parse_count_tables(text[index:])
-    if not counts:
-        raise ValueError(f"{path}: CURRENT STANDING section contains no parseable count table.")
-    return counts
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{path}: not a JSON artifact ({exc})") from exc
+    if not isinstance(payload, dict) or payload.get("artifact") != "core_directional_scores":
+        raise ValueError(f"{path}: not a core_directional_scores artifact")
+    return payload
+
+
+def load_panel_counts(path: Path | str = DIRECTIONAL_SCORES_PATH) -> Dict[str, tuple]:
+    """``{category: (agree, evaluable)}`` over the STRICTLY INDEPENDENT claims."""
+    payload = load_directional_artifact(path)
+    table = payload["summary"]["independent"]["by_category"]
+    if not table:
+        raise ValueError(f"{path}: the independent split has no categories")
+    return {str(k): (int(v["agree"]), int(v["evaluable"])) for k, v in table.items()}
+
+
+def load_axis_notes(path: Path | str = DIRECTIONAL_SCORES_PATH) -> Dict[str, str]:
+    """One sentence per category, derived from the artifact rather than typed."""
+    payload = load_directional_artifact(path)
+    notes: Dict[str, str] = {}
+    for axis, bucket in payload["summary"]["independent"]["by_category"].items():
+        parts = []
+        if bucket["misses"]:
+            parts.append(f"misses: {', '.join(bucket['misses'])}")
+        if bucket.get("mechanism_absent"):
+            parts.append(
+                f"{bucket['mechanism_absent']} of them are identical predictions across the moved "
+                "axis (the lane carries no term for it)"
+            )
+        if bucket["not_evaluable"]:
+            parts.append(f"{bucket['not_evaluable']} claim(s) not evaluable on the core")
+        notes[str(axis)] = "; ".join(parts) if parts else "every evaluable independent claim agrees"
+    return notes
 
 
 def verdict_for(agree: int, evaluable: int) -> str:
@@ -175,42 +179,19 @@ def verdict_for(agree: int, evaluable: int) -> str:
     return VERDICT_CAUTION
 
 
-_AXIS_NOTES = {
-    "ph": (
-        "pH is 6/10 on the panel and 6/13 combined with water activity -- BELOW chance when the "
-        "two axes are pooled, and EXACTLY ON the caution floor on its own: one more miss makes it "
-        "do-not-use (Wave X, 2026-08-28; was 6/9 and 6/12 at Wave W, and 4/7 and 4/10 before "
-        "that). The Wave X row is the sharpest of them: Hofmann's hydroxyacetaldehyde + "
-        "mercapto-2-propanone system, which has no amino acid and no sugar to confound it, "
-        "measures MFT rising 20x from pH 3 to pH 7 and the model predicts the IDENTICAL value at "
-        "pH 3, 5 and 7, because that lane carries no pH term at all. The model licenses no pH "
-        "recommendation."
-    ),
-    "moisture_aw": (
-        "Water activity is 0/3 and the miss is STRUCTURAL, not a wiring bug: HMF and furfural "
-        "share one reaction family, so they always carry the same aw factor, and the "
-        "projection budget has no moisture dependence at all."
-    ),
-    "temperature": (
-        "6/8 on the panel, but the free-precursor hold-out found acrylamide ~40x "
-        "under-responsive in time and the sulfur branch's temperature dependence BACKWARDS "
-        "between 100 and 130 C. Treat a temperature direction as a hypothesis."
-    ),
-    "lipid_lane": (
-        "2/2 on the panel, but on only two claims, and the matrix lane's absolute lipid "
-        "aldehydes carry the campaign's largest errors (up to ~94x). Direction only."
-    ),
-    "matrix_identity": (
-        "One evaluable claim. The pea-vs-soy question is genuinely open: binding physics and "
-        "one literature dataset disagree on the SIGN of the pea-vs-soy hexanal difference."
-    ),
-}
 
 
 def reliability_for_axis(
-    axis: str, counts: Optional[Mapping[str, tuple]] = None
+    axis: str,
+    counts: Optional[Mapping[str, tuple]] = None,
+    notes: Optional[Mapping[str, str]] = None,
 ) -> AxisReliability:
     table = dict(counts if counts is not None else load_panel_counts())
+    if notes is None:
+        try:
+            notes = load_axis_notes()
+        except (FileNotFoundError, ValueError):
+            notes = {}
     if axis not in table:
         return AxisReliability(
             axis=axis,
@@ -228,7 +209,7 @@ def reliability_for_axis(
         agree=agree,
         evaluable=evaluable,
         verdict=verdict_for(agree, evaluable),
-        note=_AXIS_NOTES.get(axis, ""),
+        note=dict(notes).get(axis, ""),
     )
 
 
@@ -336,8 +317,12 @@ def describe_comparison(
 ) -> Dict[str, Any]:
     """Full reliability picture for one A-vs-B comparison."""
     table = dict(counts if counts is not None else load_panel_counts())
+    try:
+        notes = load_axis_notes() if counts is None else {}
+    except (FileNotFoundError, ValueError):
+        notes = {}
     axes = axes_exercised(spec_a, spec_b)
-    reliabilities = [reliability_for_axis(axis, table) for axis in axes]
+    reliabilities = [reliability_for_axis(axis, table, notes) for axis in axes]
     governing = weakest(reliabilities)
     return {
         "axes": axes,

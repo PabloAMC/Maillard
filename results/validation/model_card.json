@@ -56,6 +56,95 @@
     "within_band": 8,
     "worst_fold_error": 7558637.061755763
   },
+  "directional": {
+    "available": true,
+    "categories": {
+      "additive_cysteine": [
+        3,
+        3
+      ],
+      "lipid_lane": [
+        0,
+        0
+      ],
+      "matrix_identity": [
+        0,
+        0
+      ],
+      "moisture_aw": [
+        0,
+        3
+      ],
+      "ph": [
+        3,
+        5
+      ],
+      "process_heating": [
+        0,
+        0
+      ],
+      "ranking": [
+        0,
+        1
+      ],
+      "scope": [
+        0,
+        0
+      ],
+      "sugar_identity": [
+        5,
+        9
+      ],
+      "temperature": [
+        5,
+        7
+      ],
+      "time": [
+        2,
+        2
+      ]
+    },
+    "claims": 69,
+    "excluding_ph_aw": [
+      15,
+      22
+    ],
+    "headline": [
+      18,
+      30
+    ],
+    "mechanism_absent_misses": 3,
+    "misses": {
+      "moisture_aw": [
+        "AW-01",
+        "AW-02",
+        "AW-03"
+      ],
+      "ph": [
+        "PH-07",
+        "MOT-01"
+      ],
+      "ranking": [
+        "MOT-03"
+      ],
+      "sugar_identity": [
+        "SUG-03",
+        "SUG-12",
+        "HOF-01",
+        "HOF-03"
+      ],
+      "temperature": [
+        "TEMP-01",
+        "TEMP-05"
+      ]
+    },
+    "not_evaluable": 22,
+    "path": "results/validation/core_directional_scores.json",
+    "ph_aw": [
+      3,
+      8
+    ]
+  },
   "gates": [
     {
       "detail": "holdout_guard: PASS",
@@ -76,7 +165,7 @@
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
     "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 8/49 rows within 3x (median fold error 11.1x, worst 7.56e+06x); out of sample -- every row a core fit read removed -- 4/40 (median 31.2x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 7/25 evaluable literature rows (24 not evaluable: the sulfur lane carries no sampled uncertainty), 6/23 out of sample.",
-    "**Directional and ranking claims are NOT YET MEASURED on the kinetic core.** The 24/36 directional panel this card used to quote was scored on the retired screening lane and does not transfer; until the core is scored on that panel, every ranking claim is reported do-not-use by the card's own rule, not because it is known to be wrong.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 18/30 on strictly independent literature claims** (22 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 15/22 once pH and water activity are set aside, and 3/8 on pH and water activity themselves, 3 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
@@ -171,10 +260,73 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "the directional panel was scored on the retired screening lane (2026-09-03); re-scoring it on the core is the next retirement step",
-      "claim_type": "Direction / ranking on any axis",
-      "evidence": "not yet measured on the kinetic core",
-      "system_class": "any",
+      "basis": "misses: SUG-03, SUG-12, HOF-01, HOF-03",
+      "claim_type": "Direction / ranking on `sugar_identity`",
+      "evidence": "5/9 on the directional panel (independent claims)",
+      "system_class": "any (sugar swap, conditions held)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `additive_cysteine`",
+      "evidence": "3/3 on the directional panel (independent claims)",
+      "system_class": "free precursor (cysteine present vs absent)",
+      "verdict": "trust"
+    },
+    {
+      "basis": "misses: TEMP-01, TEMP-05",
+      "claim_type": "Direction / ranking on `temperature`",
+      "evidence": "5/7 on the directional panel (independent claims)",
+      "system_class": "any (temperature moved, everything else held)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `time`",
+      "evidence": "2/2 on the directional panel (independent claims)",
+      "system_class": "any (time moved, everything else held)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `lipid_lane`",
+      "evidence": "no evaluable independent claim on the core",
+      "system_class": "protein matrix (lipid-derived aldehydes)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `matrix_identity`",
+      "evidence": "no evaluable independent claim on the core",
+      "system_class": "protein matrix (pea vs soy)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "misses: PH-07, MOT-01",
+      "claim_type": "Direction / ranking on `ph`",
+      "evidence": "3/5 on the directional panel (independent claims)",
+      "system_class": "any (pH moved)",
+      "verdict": "caution"
+    },
+    {
+      "basis": "misses: AW-01, AW-02, AW-03",
+      "claim_type": "Direction / ranking on `moisture_aw`",
+      "evidence": "0/3 on the directional panel (independent claims)",
+      "system_class": "any (water activity moved)",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "misses: MOT-03",
+      "claim_type": "Direction / ranking on `ranking`",
+      "evidence": "0/1 on the directional panel (independent claims)",
+      "system_class": "several compounds ordered in one system",
+      "verdict": "do-not-use"
+    },
+    {
+      "basis": "",
+      "claim_type": "Direction / ranking on `process_heating`",
+      "evidence": "no evaluable independent claim on the core",
+      "system_class": "processed vs raw",
       "verdict": "do-not-use"
     },
     {

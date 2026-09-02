@@ -749,10 +749,20 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
         a dated status banner (the contract's body is history until its backlog rewrite); agents.md layout updated;
         engine refusal strings no longer name "the FAST lane". Verification: five gates PASS, model-card check
         clean, every README/QUICKSTART/agents.md link resolves, unit+scripts 569, integration+scientific 77.
-- [ ] B7 (next, the product claim): score the kinetic core on the directional claims panel
-      (`docs/validation/directional_claims_panel.yml`, 36 claims) through `comparative_cli.compare_core`; write
-      `results/validation/core_directional_scores.{json,md}`; re-enable the model card's per-axis cells and the CLI's
-      per-axis reliability tags from THAT artifact; pin. Until then the card says "not yet measured on the core".
+- [x] B7 (2026-09-03, the product claim): `src/kinetic_core/directional.py` scores all 69 claims of
+      `docs/validation/directional_claims_panel.yml` on the core through the front door; artifact
+      `results/validation/core_directional_scores.{json,md}`. Rules stated in the module: refused arms and
+      unrepresented observables are NOT EVALUABLE; identical predictions across a moved axis the lane has no term for
+      are MISSES flagged `mechanism_absent`; the sulfur lane refusing for "no sulfur source" is a structural ZERO for
+      a sulfur observable (CYS-01 agrees). RESULT: strictly independent **18 of 30** evaluable (60 %), 22 independent
+      claims not evaluable (16 prose-only, 2,5-dimethylpyrazine / 2-pentylfuran / nonanal-from-oleate / H2S and
+      hydroxyacetaldehyde precursors refused); excluding pH and a_w **15 of 22**; pH + a_w **3 of 8**; per axis:
+      sugar 5/9, temperature 5/7, time 2/2, cysteine 3/3, pH 3/5 (caution, on the floor), a_w 0/3, ranking 0/1.
+      All claims: 22/42. The retired lane's 24/36 is a different engine on a different evaluable subset.
+      `directional_reliability` now reads the artifact (independent split) and derives its axis notes from it;
+      `compare_core` carries a `reliability` block (axes moved, per-axis verdicts, governing = weakest) and the
+      renderer prints it; the model card's second sentence and per-axis cells are back, from the artifact; guards pin
+      the numbers and README quotes them; `docker_maillard.sh core-directional`. The legacy report is bannered.
 - [ ] B8 (science): Laplace covariance at the B8 sulfur optimum → sampled sulfur priors; 24 not-evaluable rows become
       evaluable; the envelope's coverage number moves.
 - [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite

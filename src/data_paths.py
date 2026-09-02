@@ -136,6 +136,8 @@ SLR_FAMILY_REPORTS_DIR: Path = LITERATURE_LEDGERS_DIR / "slr_family_reports"
 #: The kinetic core's own envelope and scorecard (retirement steps B2/B3).
 CORE_PREDICTION_UNCERTAINTY: Path = VALIDATION_DIR / "core_prediction_uncertainty.json"
 CORE_PANEL_SCORES: Path = VALIDATION_DIR / "core_panel_scores.json"
+CORE_DIRECTIONAL_SCORES: Path = VALIDATION_DIR / "core_directional_scores.json"
+KINETIC_CORE_B8_LAPLACE: Path = VALIDATION_DIR / "kinetic_core_b8_laplace_covariance.json"
 MODEL_CARD_JSON: Path = VALIDATION_DIR / "model_card.json"
 EXPERIMENT_VALUE_RANKING: Path = VALIDATION_DIR / "experiment_value_ranking.json"
 
