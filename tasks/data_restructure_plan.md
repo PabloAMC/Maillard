@@ -656,8 +656,42 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
       * B5 NOTE: `uncertainty.py` still imports `benchmark_evidence_role`, `benchmark_signal_origin`,
         `get_benchmark_metadata` from `src/benchmark_validation.py`; those three helpers must move to a core-side
         metadata module before the legacy harness is deleted.
-- [ ] B3 core scoring of the 21-file panel + hold-outs. B4 publish core numbers next to legacy for one release, re-pin.
+- [x] B3 core scoring of the union panel — BUILT AND VERIFIED 2026-09-03.
+      * Files: `src/kinetic_core/scoring.py` (`score_benchmark`, `score_panel`, markdown, artifact),
+        `scripts/generators/generate_core_panel_scores.py` → `results/validation/core_panel_scores.{json,md}`;
+        `src/kinetic_core/fit_targets.py` (which panel rows the CORE's fits read); `src/benchmark_metadata.py`
+        (engine-neutral `get_benchmark_metadata`, `benchmark_signal_origin`, `benchmark_evidence_role`,
+        `matrix_source_anchor`, `resolve_scale_thresholds`, moved out of the legacy harness, which re-exports them);
+        `tests/unit/test_kinetic_core_scoring.py` (19 tests). Legacy vocabulary kept: per-bundle scale contract
+        (`validation_contract.scale_thresholds`, else the global default), `scale_status`, `ranking_status`,
+        `overall_status`, `strict_ready` with the same tier/execution-path eligibility, `blocking_issues`.
+      * FOUND: the sulfur lane's fit (B2–B8, 62 rows / 23 free) read eight panel rows the fit-target index could not
+        see — the Hofmann 1998 Table 1 pH-5 rows (ribose, glucose, fructose) AND the xylose pH-5 row that sits on the
+        maillard_path HOLD-OUT panel, plus five fed-intermediate step rows. Declared in `fit_targets.CORE_SULFUR_FIT_ROWS`
+        (test-checked against the bundles). Leverage 0.37/row < 0.5 → `global_low_leverage` by the repo's rule: rows
+        stay in, annotated `in_core_fit`, and an `out_of_sample` split is printed beside `honest_literature`.
+        The CORE's evidence role ignores the legacy engine's fit-recovery declarations (matrix observability factors
+        fitted to Pratap-Singh/Trikusuma, the projection budget) and prints them as `legacy_evidence_role`: on the
+        union panel the core has predictive 40 / fit_recovery 0 / internal_synthetic 0 (legacy 21-file panel: 14/5/2).
+      * RESULT (`core_panel_scores.md`): 40 bundles, 32 scored, 49 rows, 18 refused. Within 3x: 8/49; honest
+        literature 8/49 (median fold 11.1x, geometric mean 36x); **out-of-sample 4/40 (median 31x)**; rows the
+        sulfur fit read 4/9. Per panel: trust loop 5/15, hold-out 3/30, external matrix 0/4. Per lane: acrylamide
+        2/12, sulfur 6/29, lipid 0/7, trunk 0/1. **Contract passes / strict-ready: 1 — `thiamine_cys_glucose_120C_Bolton1994`**
+        (MFT 13 → 17.4 ppb, 1.34x, under the bundle's own 3x/0.48-dex contract; PRIMARY, free_precursor, not a fit
+        row). Legacy: 0/23 strict-ready. This number moves at B4; the guards are untouched here.
+      * Envelope re-run with the B3 annotations (n=200, 6 workers, 2562 s under load): honest literature coverage
+        5/20 → **7/25** because the five legacy fit-recovery rows are predictive on the core; out-of-sample 6/23
+        (17 not evaluable); rows the core fit read 1/2 (+7 not evaluable). `results/validation/cutover_final_exam.*`
+        regenerated (was stale; 3/34 within band; the README's "42.23x paired" prose is B4's).
+      * Verification: py_compile + pyflakes clean; five gates PASS; integration+scientific 418 + 2 xfail;
+        unit+scripts 1389.
+- [ ] B4 publish core numbers next to legacy for one release, re-pin README / guards / model card (numbers move:
+      panel 40 not 21, roles 40/0/0, strict-ready 1, envelope 7/25 & 6/23, exam 3/34).
 - [ ] B5 delete the legacy engine and its harness.
+- [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite
+      design audit — are the tests well designed, which files should be restructured for coverage, and which tests
+      assert nothing (tautologies, pinned-artifact echoes, contract tests without a failure mode). Deliverable: a
+      per-file verdict (keep / merge / rewrite / delete) with the coverage gaps named, then execute it.
 
 ### Original decision list (kept for the record)
 
@@ -685,6 +719,44 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
 8. **Script deletions** (Appendix C) need explicit confirmation per `agents.md`.
 
 ---
+
+## 7. Improvement backlog (standing owner request 2026-09-03: "suggest ideas that improve the codebase and add them here")
+
+Not scheduled; each is a self-contained change with its motivation. Strike or promote as decided.
+
+- [ ] **Fit reports should declare their targets in the index's vocabulary.** `src/kinetic_core/fit_targets.py` is a
+      hand-typed table mapping sulfur fit rows to bundles because the core fit reports key rows by prose anchors. Give
+      each generator's ROW dict a `benchmark_id`, emit `fit_target_ids` + `fit_leverage {free_parameters, fitted_rows}`
+      in every `kinetic_core_b*_fit_report.json`, add that glob to `fit_target_index.FIT_RECORD_GLOBS`, delete the
+      table. (Found 2026-09-03: the sulfur fit read 8 panel rows the index could not see, one of them a hold-out.)
+- [ ] **A hold-out the fit read.** `mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5` is on the hold-out panel
+      and in the B2–B8 sulfur fit (Hofmann T1 xylose). Either declare it in `docs/reference/FIT_HOLDOUT_DECLARATION.md`
+      and move it to the trust loop, or drop it from the fit; and make `scripts/ci/holdout_guard.py` check fit rows
+      against hold-out bundles statically so this cannot recur.
+- [ ] **Artifact freshness gate.** `results/validation/cutover_final_exam.json` drifted from the code silently
+      (4/34 → 3/34) until B2 regenerated it. For cheap generators (exam ~1 min, scorecard 13 s) add a CI check that a
+      regeneration equals the tracked file modulo `generated_on`/`git`; for expensive ones record input hashes
+      (`parameter_sources` already does this for the fit reports) and compare those.
+- [ ] **README numbers should be rendered, not typed.** README quotes exam numbers (42.23x paired median) that no
+      test pins and the artifact no longer says (24.78x). At the B4 re-pin, turn every quoted headline into a
+      generated snippet (a `docs/generated/headlines.md` include, or a guard per number) so prose cannot drift.
+- [ ] **Ten bundles lack `quantification_class`.** Named in the B2 log. Declare from the primary sources so the
+      envelope's headspace-band gating stops defaulting; the default is conservative but is a guess.
+- [ ] **One scorer.** `generate_cutover_final_exam.score_core` duplicates `kinetic_core.scoring.score_benchmark`
+      (the exam predates it). When the old-lane half of the exam dies at B5, make the exam a consumer of `scoring`.
+- [ ] **Shared report helpers.** `_fmt`, `_summarise`/`summarise_folds`, `_git_head`, `write_artifact` are copied
+      across `scripts/generators/*.py` and `kinetic_core/{uncertainty,scoring}.py`; one `kinetic_core/reporting.py`.
+- [ ] **`results/validation/` needs the `data/` treatment.** ~140 files, including per-member dumps
+      (`kinetic_core_b2_4_*_s0..s5`) and superseded wave baselines. Generate a `results/README.md` with a ghost check
+      (as `data/README.md`), and archive what nothing reads.
+- [ ] **`data_paths.bundle_path(benchmark_id)`** resolving across all panel directories (trust loop, hold-out,
+      external matrix); `benchmark_path` only knows the trust loop and the B3 test had to work around it.
+- [ ] **Envelope cost.** 200 draws × 49 rows ≈ 38 min wall (6 workers, under load). Profile one `predict`; the
+      sulfur network is re-integrated per draw although the draw leaves it untouched (no sampled sulfur priors) —
+      cache lane runs keyed by the draw's lane-relevant coordinates.
+- [ ] **After B5:** drop `benchmark_metadata`'s dependence on `matrix_calibration_registry.is_fit_recovery_benchmark`
+      (legacy matrix factors) and collapse the two evidence-role vocabularies (`evidence_role` / `legacy_evidence_role`)
+      into one.
 
 ## 6. Risks and guardrails
 

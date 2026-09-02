@@ -349,12 +349,12 @@ _SMALL_PANEL = (
 BENCHMARK_FIELDS = {
     "benchmark_id", "bench_file", "panel", "execution_path", "protein_type", "fitted_row",
     "evidence_role", "signal_origin", "fit_target_of", "compounds", "refused_compounds",
-    "quantification_family", "quantification_source",
+    "quantification_family", "quantification_source", "legacy_evidence_role",
 }
 COMPOUND_FIELDS = {
     "compound", "measured_ppb", "predicted_p5", "predicted_p50", "predicted_p95",
     "predicted_point", "inside_ci", "ci_width_log10", "lane", "shared_with", "target_unit",
-    "observable_multipliers_applied",
+    "observable_multipliers_applied", "in_core_fit",
 }
 SUMMARY_FIELDS = {
     "benchmark_count", "matched_compound_count", "ci_coverage_hits", "ci_coverage_rate",
@@ -379,8 +379,11 @@ def test_artifact_contract_fields(small_artifact):
         payload["summary"]["honest_literature_coverage"]
     )
     assert set(payload["summary"]["signal_origin_split"]) == {
-        "external_literature", "internal_synthetic", "fitted_row"
+        "external_literature", "internal_synthetic", "fitted_row", "in_core_fit"
     }
+    oos = payload["summary"]["out_of_sample_literature_coverage"]
+    lit = payload["summary"]["honest_literature_coverage"]
+    assert oos["total"] + oos["rows_the_core_fit_read"]["total"] == lit["total"]
     assert payload["priors"] == [p.as_dict() for p in unc.CORE_PRIORS]
     assert payload["benchmarks"]
     for bench in payload["benchmarks"]:

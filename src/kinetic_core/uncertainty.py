@@ -47,14 +47,14 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 import numpy as np
 
 from src import data_paths
-from src.benchmark_validation import (
+from src.benchmark_metadata import (
     benchmark_evidence_role,
     benchmark_signal_origin,
     get_benchmark_metadata,
 )
-from src.fit_target_index import fit_target_records_for
 
 from . import engine
+from .fit_targets import core_evidence_role, fit_target_of, in_core_fit
 from .engine import (
     ACRYLAMIDE,
     LIPID,
@@ -665,8 +665,11 @@ def propagate_panel(
             "execution_path": get_benchmark_metadata(bench).execution_path,
             "protein_type": str(bench.get("protein_type", "") or ""),
             "signal_origin": benchmark_signal_origin(Path(path)),
-            "evidence_role": benchmark_evidence_role(benchmark_id, Path(path)),
-            "fit_target_of": list(fit_target_records_for(benchmark_id)),
+            # B3: the CORE's evidence role (src/kinetic_core/fit_targets.py); the
+            # legacy harness's role is kept beside it for the B4 comparison.
+            "evidence_role": core_evidence_role(benchmark_id, Path(path)),
+            "legacy_evidence_role": benchmark_evidence_role(benchmark_id, Path(path)),
+            "fit_target_of": fit_target_of(benchmark_id),
             "buffer_applied": True,
             "quantification_family": family,
             "quantification_source": family_source,
@@ -711,6 +714,7 @@ def propagate_panel(
                 "envelope_state": declaration.state,
                 "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
                 "observable_multipliers_applied": observable,
+                "in_core_fit": in_core_fit(benchmark_id, compound),
                 "samples": [],
             }
             by_lane.setdefault(declaration.lane, []).append((compound, unit, observable))
@@ -748,7 +752,7 @@ def propagate_panel(
     coverage_total = 0
     split: Dict[str, Dict[str, Any]] = {
         name: {"hits": 0, "total": 0, "not_evaluable": 0, "ci_widths_log10": []}
-        for name in ("external_literature", "internal_synthetic", "fitted_row")
+        for name in ("external_literature", "internal_synthetic", "fitted_row", "in_core_fit")
     }
     panel_split: Dict[str, Dict[str, Any]] = {}
     out_benches: List[Dict[str, Any]] = []
@@ -796,7 +800,10 @@ def propagate_panel(
             pbucket = panel_split.setdefault(
                 entry["panel"], {"hits": 0, "total": 0, "not_evaluable": 0, "ci_widths_log10": []}
             )
-            for b in (bucket, pbucket):
+            buckets = [bucket, pbucket]
+            if bucket is split["external_literature"] and row["in_core_fit"]:
+                buckets.append(split["in_core_fit"])
+            for b in buckets:
                 if width is None or width <= MIN_EVALUABLE_CI_WIDTH_LOG10:
                     b["not_evaluable"] += 1
                     continue
@@ -876,6 +883,19 @@ def propagate_panel(
                     if b["quantification_family"] == "undeclared" and b["compounds"]
                 ),
             },
+            "out_of_sample_literature_coverage": {
+                "hits": lit["hits"] - split["in_core_fit"]["hits"],
+                "total": lit["total"] - split["in_core_fit"]["total"],
+                "not_evaluable": lit["not_evaluable"] - split["in_core_fit"]["not_evaluable"],
+                "rows_the_core_fit_read": {
+                    k: split["in_core_fit"][k] for k in ("hits", "total", "not_evaluable")
+                },
+                "definition": (
+                    "honest_literature_coverage MINUS every row a core fit read "
+                    "(src/kinetic_core/fit_targets.py: the Hofmann 1998 pH-5 Table 1 rows, "
+                    "including the xylose row on the hold-out panel). The stronger claim."
+                ),
+            },
             "sampled_prior_count": len(sampled),
             "fixed_prior_count": len(priors) - len(sampled),
             "unsampled_lanes": sorted(
@@ -930,6 +950,10 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         f"* **honest literature coverage: {lit['hits']}/{lit['total']} ({_fmt(lit['rate'])})**, "
         f"median CI width {_fmt(lit['median_ci_width_log10'])} log10; "
         f"{lit['not_evaluable']} not evaluable; {lit['excluded_fitted_rows']} fitted rows excluded",
+        f"* out-of-sample literature coverage: {s['out_of_sample_literature_coverage']['hits']}/"
+        f"{s['out_of_sample_literature_coverage']['total']} "
+        f"({s['out_of_sample_literature_coverage']['not_evaluable']} not evaluable); rows the core fit read: "
+        f"{s['out_of_sample_literature_coverage']['rows_the_core_fit_read']}",
         f"* sampled priors {s['sampled_prior_count']}, fixed {s['fixed_prior_count']}; "
         f"lanes with NO sampled fit uncertainty: {', '.join(s['unsampled_lanes']) or 'none'}",
         "* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: "
@@ -965,6 +989,7 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
                 f"{'yes' if c['inside_ci'] else 'no'} | {_fmt(c['ci_width_log10'])} | "
                 f"{('yes (' + b['quantification_family'] + ')') if c['observable_multipliers_applied'] else 'no (' + b['quantification_family'] + ')'} | "
                 f"{c['lane']} | {b['evidence_role']}"
+                f"{' [in core fit]' if c.get('in_core_fit') else ''}"
                 f"{' (shared: ' + c['shared_with'] + ')' if c.get('shared_with') else ''} |"
             )
     if payload["refused_compounds"]:
