@@ -50,7 +50,7 @@
       "NOTE: the model_change_note above still quotes the old 62.62 reference in its expected_miss line; with the corrected 150 ppb reference the expected miss WIDENS (predicted 9.75 ppb -> ~15.4x under). The benchmark remains expected_to_fail for the same desaturation reason."
     ],
     "value_provenance": "figure_readoff",
-    "report": "results/validation/content_verification_wave_k.md"
+    "report": "results/legacy_lane/validation/content_verification_wave_k.md"
   },
   "measured_volatiles": {
     "acrylamide": {

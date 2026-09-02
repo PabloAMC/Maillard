@@ -18,11 +18,7 @@
       "benchmarkability_status": "already_benchmarked_core",
       "implementation_wave": 0,
       "order_in_wave": 0,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/literature_runtime.py",
-        "src/benchmark_validation.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "2-methyl-3-furanthiol",
         "2-furfurylthiol",
@@ -37,7 +33,13 @@
       ],
       "next_curation_actions": [
         "Keep as the quantitative trunk and dependency map."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/benchmark_validation.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "02",
@@ -56,8 +58,7 @@
       "implementation_wave": 1,
       "order_in_wave": 1,
       "target_runtime_modules": [
-        "src/lipid_oxidation.py",
-        "src/literature_runtime.py"
+        "src/lipid_oxidation.py"
       ],
       "target_compounds_or_state_variables": [
         "hexanal",
@@ -76,7 +77,11 @@
       ],
       "next_curation_actions": [
         "Split into adverse-marker and carbonyl-competition sub-lanes."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "03",
@@ -93,10 +98,7 @@
       "benchmarkability_status": "calibration_ready_support_lane",
       "implementation_wave": 2,
       "order_in_wave": 1,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "thiamine_availability",
         "2-methyl-3-furanthiol"
@@ -112,7 +114,12 @@
       ],
       "next_curation_actions": [
         "Model thiamine first as an availability modifier."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "04",
@@ -129,10 +136,7 @@
       "benchmarkability_status": "calibration_ready_support_lane",
       "implementation_wave": 2,
       "order_in_wave": 2,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "IMP",
         "GMP",
@@ -149,7 +153,12 @@
       ],
       "next_curation_actions": [
         "Encode nucleotide enrichment state variables explicitly."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "05",
@@ -166,10 +175,7 @@
       "benchmarkability_status": "support_lane_with_bounded_quantitative_anchors",
       "implementation_wave": 2,
       "order_in_wave": 3,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "glutathione_support_factor",
         "kokumi_support_signal"
@@ -184,7 +190,12 @@
       ],
       "next_curation_actions": [
         "Model peptide-bound sulfur as a support lane."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "06",
@@ -234,10 +245,7 @@
       "benchmarkability_status": "benchmark_ready_donor_lane",
       "implementation_wave": 1,
       "order_in_wave": 2,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/literature_runtime.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "ribose",
         "xylose",
@@ -254,7 +262,12 @@
       ],
       "next_curation_actions": [
         "Encode donor identity as a first-class formulation variable."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/literature_runtime.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "08",
@@ -272,10 +285,7 @@
       "benchmarkability_status": "negative_control_and_guardrail_lane",
       "implementation_wave": 1,
       "order_in_wave": 4,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/safety.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "dicarbonyl_trapping_factor",
         "amino_group_blocking_factor"
@@ -290,7 +300,12 @@
       ],
       "next_curation_actions": [
         "Represent inhibitor loads as family-aware priors."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/safety.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "09",
@@ -308,10 +323,7 @@
       "benchmarkability_status": "severity_and_failure_mode_lane",
       "implementation_wave": 3,
       "order_in_wave": 1,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "HMF",
         "furfural",
@@ -328,7 +340,12 @@
       ],
       "next_curation_actions": [
         "Use first as a severity and failure-mode lane."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "10",
@@ -347,8 +364,6 @@
       "implementation_wave": 1,
       "order_in_wave": 3,
       "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py",
         "src/matrix_prior_registry.py"
       ],
       "target_compounds_or_state_variables": [
@@ -366,7 +381,12 @@
       ],
       "next_curation_actions": [
         "Implement fermentation as an upstream state modifier."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "11",
@@ -384,8 +404,7 @@
       "implementation_wave": 1,
       "order_in_wave": 5,
       "target_runtime_modules": [
-        "src/lipid_oxidation.py",
-        "src/sensory.py"
+        "src/lipid_oxidation.py"
       ],
       "target_compounds_or_state_variables": [
         "hexanal",
@@ -405,7 +424,11 @@
       ],
       "next_curation_actions": [
         "Implement the hexanal/MFT competition surface."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/sensory.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "12",
@@ -423,7 +446,6 @@
       "implementation_wave": 1,
       "order_in_wave": 6,
       "target_runtime_modules": [
-        "src/safety.py",
         "src/extrusion.py"
       ],
       "target_compounds_or_state_variables": [
@@ -443,7 +465,11 @@
       ],
       "next_curation_actions": [
         "Integrate AGE/ALE kinetics into the safety module."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/safety.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "13",
@@ -460,10 +486,7 @@
       "benchmarkability_status": "mechanistic_modifier",
       "implementation_wave": 1,
       "order_in_wave": 7,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/literature_runtime.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "quinone_budget",
         "cysteine_depletion_factor"
@@ -479,7 +502,12 @@
       ],
       "next_curation_actions": [
         "Implement the pH-dependent quinone-thiol kinetics."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/literature_runtime.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "14",
@@ -496,11 +524,7 @@
       "benchmarkability_status": "bounded_source_term",
       "implementation_wave": 2,
       "order_in_wave": 4,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/sensory.py",
-        "src/safety.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "ascorbic_acid_loss",
         "3-deoxythreosone",
@@ -519,7 +543,13 @@
       ],
       "next_curation_actions": [
         "Implement the biphasic AA functionality."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/sensory.py",
+        "retired 2026-09-03 (B5b): src/safety.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "15",
@@ -536,10 +566,7 @@
       "benchmarkability_status": "mechanistic_to_bounded_closure",
       "implementation_wave": 2,
       "order_in_wave": 5,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/sensory.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "PE_glycation_fraction",
         "available_sugar_subtraction"
@@ -556,7 +583,12 @@
       ],
       "next_curation_actions": [
         "Implement the 1:2 sugar-PE stoichiometry multiplier."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/sensory.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "16",
@@ -574,8 +606,7 @@
       "implementation_wave": 2,
       "order_in_wave": 6,
       "target_runtime_modules": [
-        "src/extrusion.py",
-        "src/sensory.py"
+        "src/extrusion.py"
       ],
       "target_compounds_or_state_variables": [
         "melanoidin_mass",
@@ -593,7 +624,11 @@
       ],
       "next_curation_actions": [
         "Implement pseudo-zero-order melanoidin accumulation."
-      ]
+      ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/sensory.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     }
   ],
   "source_slr_file_note": "`source_slr_file` is the JOIN KEY into results/literature/deep_research_backlog.json (its items' `files`), not a live path: the NN_<topic>.md documents were the corpus file names when the ledger was mined and several no longer exist under that name (the raw dumps are data/research_corpus/raw/Gemini_deep_research_NN.md). Recorded 2026-09-03."

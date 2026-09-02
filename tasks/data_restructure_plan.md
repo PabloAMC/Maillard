@@ -714,12 +714,34 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
         imports `matrix_correction` (classifier inlined); `benchmark_metadata` drops the legacy matrix-factor
         fit-recovery declarations; `experiment_value` (the `rank` verb) reads the core envelope
         (`data_paths.CORE_PREDICTION_UNCERTAINTY`); `legacy_evidence_role` removed from the scorecard/envelope.
-        Tests pruned accordingly (screening-lane tests). Gates PASS, model-card check clean, unit+scripts 1355,
+        Tests pruned accordingly (screening-lane tests). Gates PASS, model-card check clean, unit+scripts 1374,
         integration+scientific 426 + 2 xfail.
-  - [ ] B5b delete: 62 src modules, 68 scripts, 124 test files (computed: everything not reachable from the kept
-        scripts and the front door); archive 110 legacy artifacts under `results/legacy_lane/`; drop the legacy-only
-        data files (formulation_grid, sensory_tags, refinement_surrogate_patches, matrix-intake protocol files);
-        re-base `holdout_guard` (checks 2/3) and `fit_target_gate` on the core; rewrite `test_cli_scripts`.
+  - [x] B5b delete (2026-09-03). Rule: a module goes if it is not reachable from the kept scripts and the front
+        door (static import graph). DELETED: 62 src modules (the SMIRKS engine `smirks_engine`/`reaction_templates`/
+        `barrier_constants`/`kinetics`/`results_db`/`cantera_export`/`trunk_kinetics`; the harness
+        `benchmark_validation`/`pipeline`/`recommend`/`conditions`/`projection*`/`presentation`/`reporting`/
+        `usability_reports`/`sensory`/`headspace`/`matrix_correction`/`uncertainty_propagation`/`external_validation`/
+        `cross_validation`/`matrix_recalibration`/`data_ingest`/`matrix_experiment_intake`/`matrix_calibration_*`/
+        `bayesian_optimizer`/`pre_processor`; the family/matrix promotion reporting layer; `literature_runtime`
+        (4.5k lines, orphaned), `safety` (the second acrylamide/CML model), `precursor_resolver`, `formulation`,
+        `thermo`, `protein_binding`, `experiment_request`, and other orphans), 68 scripts (run_pipeline,
+        optimize_formulation, run_campaign, run_cantera_kinetics, ingest_results, explain_formulation,
+        request_experiment, the cutover exam generator, every legacy refit/report generator), 124 test files.
+        ARCHIVED (git mv, nothing reads them): 108 artifacts + `maillard_results.db` → `results/legacy_lane/` with a
+        README. Kept in place: `trunk_rate_calibration_refit.*` (the core's B1 reads it), `holdout_frozen/`, the
+        frozen cutover exam/prereg, every `kinetic_core_*` report. DATA: `formulation_grid.yml`, `sensory_tags.yml`,
+        `refinement_surrogate_patches.json`, the three matrix-intake protocol files deleted; `data/README.md`
+        regenerated; `data/keys/papers.yml` rebuilt (278 papers, was 285: the DOIs cited only from
+        `barrier_constants.py`); registries' `target_runtime_modules` / `current_runtime_assets` / `artifacts`
+        entries that named deleted modules rewritten as "retired 2026-09-03 (B5b): …" (36 strings), archived
+        artifact pointers repointed to `results/legacy_lane/`.
+        GATES re-based: `holdout_guard` check 2 = no core fit generator names the hold-out directory (path-like
+        string constants, prose excluded), check 3 = `panel.panel_bundles` is a literal non-recursive glob;
+        `fit_target_gate` reads `core_prediction_uncertainty.json`, registry check retired, constant-precision
+        containers emptied (backlog: point it at `parameters_*.py`). `src/__init__.py` exports the core's front
+        door. `tests/unit/test_cli_scripts.py` rewritten for the surviving entry points; the data census guard moved
+        to `tests/scientific/test_data_headline_guards.py`. Verification: five gates PASS, model-card check clean,
+        unit+scripts 569, integration+scientific 77 (646 tests survive of 1,800).
   - [ ] B5c docs: README rewritten around the one engine (legacy narrative moved to `docs/history/`), QUICKSTART,
         VALIDATION_CONTRACT, AUDIT banner, badge; data README regenerated.
 - [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite

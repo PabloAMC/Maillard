@@ -1,10 +1,8 @@
 """Maillard runtime package.
 
-The public names below are re-exported LAZILY (PEP 562). Until 2026-09-01 this file
-imported ``src.pipeline`` eagerly, so ``import src.anything`` -- including
-``src.data_paths`` -- pulled in the whole pipeline and read eleven data files off disk
-before the caller's first line ran. Import the module you need; the convenience names
-still resolve on first access.
+2026-09-03 (retirement step B5b): one engine. The public names below are the kinetic
+core's front door and are re-exported LAZILY (PEP 562) so ``import src.data_paths`` does
+not integrate anything.
 """
 from __future__ import annotations
 
@@ -12,12 +10,11 @@ from importlib import import_module
 from typing import Any
 
 _LAZY_EXPORTS = {
-    "MaillardPipeline": "src.pipeline",
-    "FormulationResult": "src.pipeline",
-    "ReactionConditions": "src.smirks_engine",
-    "SmirksEngine": "src.smirks_engine",
-    "FormulationOptimizer": "src.bayesian_optimizer",
-    "Formulation": "src.formulation",
+    "predict": "src.kinetic_core.engine",
+    "FormulationSpec": "src.kinetic_core.engine",
+    "ProcessSpec": "src.kinetic_core.engine",
+    "ThermalProgram": "src.kinetic_core.engine",
+    "EnvelopeDeclaration": "src.kinetic_core.engine",
 }
 
 __all__ = list(_LAZY_EXPORTS)

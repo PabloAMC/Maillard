@@ -78,17 +78,14 @@ BENCHMARK_INTAKE_REGISTRY: Path = LIT_DIR / "benchmark_intake_registry.json"
 # Orphan output of scripts/ingest_deep_research_markdown.py: not present in the repo and
 # nothing reads it.
 DEEP_RESEARCH_CANDIDATE_REGISTRY: Path = LIT_DIR / "deep_research_candidate_registry.json"
-REFINEMENT_SURROGATE_PATCHES: Path = LIT_DIR / "refinement_surrogate_patches.json"
 
 # --------------------------------------------------------------------------- data/species
 DESIRABLE_TARGETS: Path = SPECIES_DIR / "desirable_targets.yml"
 OFF_FLAVOUR_TARGETS: Path = SPECIES_DIR / "off_flavour_targets.yml"
 TOXIC_MARKERS: Path = SPECIES_DIR / "toxic_markers.yml"
-SENSORY_TAGS: Path = SPECIES_DIR / "sensory_tags.yml"
 PRECURSORS: Path = SPECIES_DIR / "precursors.yml"
 
 # --------------------------------------------------------------------------- data/ (loose)
-FORMULATION_GRID: Path = DATA_ROOT / "formulation_grid.yml"
 INTERVENTIONS: Path = DATA_ROOT / "interventions.yml"
 
 # --------------------------------------------------------------------------- data/benchmarks
@@ -104,14 +101,11 @@ STEP_LEVEL_UNREACHABLE_DIR: Path = BENCHMARKS_DIR / "step_level_unreachable"
 MAILLARD_VALIDATION_BENCHMARKS_MD: Path = BENCHMARKS_DIR / "maillard_validation_benchmarks.md"
 
 # --------------------------------------------------------------------------- data/protocols
-MATRIX_EXPERIMENT_INTAKE_SCHEMA: Path = PROTOCOLS_DIR / "matrix_experiment_intake_schema.json"
-EXAMPLE_MATRIX_EXPERIMENT_INTAKE: Path = PROTOCOLS_DIR / "example_matrix_experiment_intake.yaml"
 PPI_SPI_PRIMARY_BENCHMARK_CONTRACT: Path = PROTOCOLS_DIR / "ppi_spi_primary_benchmark_contract.json"
 EXTRUSION_EXTERNAL_CLOSURE_CONTRACT: Path = PROTOCOLS_DIR / "extrusion_external_closure_contract.json"
 DHA_LYSINOALANINE_EXTERNAL_PACKAGE_CONTRACT: Path = (
     PROTOCOLS_DIR / "dha_lysinoalanine_external_package_contract.json"
 )
-PEA_SOY_MIXED_EXTERNAL_PACKAGE_CONTRACT: Path = PROTOCOLS_DIR / "pea_soy_mixed_external_package_contract.json"
 
 # --------------------------------------------------------------------------- docs/ inputs
 DIRECTIONAL_CLAIMS_PANEL: Path = DOCS_ROOT / "validation" / "directional_claims_panel.yml"
@@ -126,10 +120,7 @@ DOCS_ASSETS_DIR: Path = DOCS_ROOT / "assets"
 # --------------------------------------------------------------------------- results/
 VALIDATION_DIR: Path = RESULTS_ROOT / "validation"
 EXPERIMENT_REQUESTS_DIR: Path = VALIDATION_DIR / "experiment_requests"
-REPORT_VISUAL_EXAMPLES_DIR: Path = VALIDATION_DIR / "report_visual_examples"
 # Preview runs of src/data_ingest (no --confirm) write here instead of VALIDATION_DIR.
-INGEST_PREVIEWS_DIR: Path = RESULTS_ROOT / "ingest_previews"
-CALIBRATION_HISTORY_DIR: Path = RESULTS_ROOT / "calibration_history"
 # Written by src/matrix_recalibration and read back by src/matrix_calibration_registry.
 # Until 2026-09-01 this feedback loop ran through data/lit/ (a generated file inside the
 # curated tree); it is a result.
@@ -141,16 +132,10 @@ LITERATURE_LEDGERS_DIR: Path = RESULTS_ROOT / "literature"
 SLR_INCORPORATION_MATRIX: Path = LITERATURE_LEDGERS_DIR / "slr_incorporation_matrix.json"
 DEEP_RESEARCH_BACKLOG: Path = LITERATURE_LEDGERS_DIR / "deep_research_backlog.json"
 SLR_FAMILY_REPORTS_DIR: Path = LITERATURE_LEDGERS_DIR / "slr_family_reports"
-RESULTS_DB: Path = RESULTS_ROOT / "maillard_results.db"
 # Generated validation artifacts that other modules read back as inputs.
-PREDICTION_UNCERTAINTY: Path = VALIDATION_DIR / "prediction_uncertainty.json"
 #: The kinetic core's own envelope and scorecard (retirement steps B2/B3).
 CORE_PREDICTION_UNCERTAINTY: Path = VALIDATION_DIR / "core_prediction_uncertainty.json"
 CORE_PANEL_SCORES: Path = VALIDATION_DIR / "core_panel_scores.json"
-EXTERNAL_VALIDATION_REPORT: Path = VALIDATION_DIR / "external_validation_report.json"
-EXTERNAL_FAILING_COMPOUNDS: Path = VALIDATION_DIR / "external_failing_compounds.json"
-MAILLARD_PATH_HOLDOUT_FROZEN_PREDICTIONS: Path = VALIDATION_DIR / "maillard_path_holdout_frozen_predictions.json"
-MATRIX_BINDING_MODE_COMPARISON: Path = VALIDATION_DIR / "matrix_binding_mode_comparison.json"
 MODEL_CARD_JSON: Path = VALIDATION_DIR / "model_card.json"
 EXPERIMENT_VALUE_RANKING: Path = VALIDATION_DIR / "experiment_value_ranking.json"
 

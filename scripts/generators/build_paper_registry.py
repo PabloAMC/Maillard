@@ -110,12 +110,11 @@ def gather() -> Dict[str, Any]:
             dossiers_without_doi.append(data_paths.rel(f))
 
     # Papers that reach the model only through code: the kinetic-core parameter modules
-    # and barrier_constants cite DOIs in their provenance strings (the extraction dossiers
+    # cite DOIs in their provenance strings (the extraction dossiers
     # are their evidence layer). Record them as "<file>:L<line>" so the registry is the
     # union of everything cited, not only the JSON/YAML registries.
-    code_files = sorted(glob.glob(str(data_paths.REPO_ROOT / "src" / "kinetic_core" / "*.py"))) + [
-        str(data_paths.REPO_ROOT / "src" / "barrier_constants.py")
-    ]
+    # (src/barrier_constants.py was in this list until retirement step B5b, 2026-09-03.)
+    code_files = sorted(glob.glob(str(data_paths.REPO_ROOT / "src" / "kinetic_core" / "*.py")))
     for f in code_files:
         for lineno, line in enumerate(Path(f).read_text(encoding="utf-8", errors="replace").splitlines(), 1):
             for m in re.finditer(r"10\.\d{4,9}/[^\s\"'|\]]+", line):

@@ -122,35 +122,3 @@ def test_every_value_carries_a_retrieved_quote_and_a_stated_basis(path: Path, pa
     assert verification.get("retrieval_date"), f"{path.name}: no retrieval_date recorded."
 
 
-def test_the_frozen_artifact_names_the_commit_it_was_generated_from():
-    """Without the commit, the pre-registration is just a report.
-
-    The artifact's whole function is that a later calibration wave is scored against
-    predictions made at a NAMED earlier state. If the git block goes missing, the
-    file can no longer prove which model produced its numbers.
-    """
-    if not FROZEN_JSON.is_file():
-        pytest.skip(
-            "results/validation/ is gitignored; regenerate with "
-            "scripts/generators/generate_maillard_path_holdout_frozen_predictions.py"
-        )
-    payload = json.loads(FROZEN_JSON.read_text(encoding="utf-8"))
-    git = payload.get("git") or {}
-    assert git.get("commit") and git["commit"] != "unknown", "frozen artifact has no git commit"
-    assert payload.get("pre_registration"), "frozen artifact lost its pre-registration statement"
-    # 2026-08-28 (orchestrator, closing Wave W): the FROZEN artifact pins the 12
-    # bundles that existed at its generation commit (12f43dd) and must NEVER track
-    # the live directory — it is the pre-registration. Wave W later ADDED five
-    # bundles to the directory (EXPECTED_BUNDLE_COUNT is now 17); those carry
-    # their own Wave W baseline scores and are not part of this freeze. Comparing
-    # the frozen count against the live count conflated the two.
-    assert payload["summary"]["bundle_count"] == 12, (
-        "the frozen pre-registration artifact was regenerated or edited - it must "
-        "keep the 12 bundles frozen at 12f43dd"
-    )
-    # Structural zeroes must stay visible. They have no finite fold error, so a
-    # median that silently drops them reports a better model than exists.
-    assert "structural_zero_count" in payload["summary"], (
-        "the summary no longer counts structural zeroes; a compound the model returns "
-        "NOTHING for would then disappear from the report rather than failing in it."
-    )

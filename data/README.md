@@ -10,13 +10,12 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **216**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **210**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
 | file | what it is |
 |---|---|
-| `formulation_grid.yml` | Built-in candidate formulation grid for inverse-design runs (`src/pipeline.py`). |
 | `interventions.yml` | Intervention library: per-unit barrier deltas used by the Bayesian optimiser. |
 
 ## `data/benchmarks`
@@ -59,7 +58,6 @@ Literature-derived constants, priors, reference payloads and the intake registri
 | `matrix_family_coverage_registry.json` | The 8 canonical matrix families and what each supports; the intended closed vocabulary for `matrix_family`. |
 | `process_gap_registry.json` | 5 structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`. |
 | `process_state_calibrations.json` | 26 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`. |
-| `refinement_surrogate_patches.json` | RETIRED barrier-offset tombstone; `accepted_offsets` must stay empty (guarded by a test). |
 | `retention_reference_payloads.json` | Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`. |
 | `safety_reference_payloads.json` | 43 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`. |
 
@@ -70,11 +68,8 @@ Wet-lab contracts and intake specifications.
 | file | what it is |
 |---|---|
 | `dha_lysinoalanine_external_package_contract.json` | DHA / lysinoalanine external package contract. |
-| `example_matrix_experiment_intake.yaml` | Canonical intake example used by `maillard ingest` and its tests. |
 | `extrusion_external_closure_contract.json` | Extrusion external-closure package contract. |
-| `matrix_experiment_intake_schema.json` | Required-field lists for intake YAML (`src/matrix_experiment_intake.py`); to become a JSON Schema under data/schemas. |
 | `pea_iso_protocol_pilot_intake.yaml` | Protocol-pilot intake for pea isolate (hand-written comparison contract; `conc_ppb` refreshed from the model by the reproducibility snapshot generator). |
-| `pea_soy_mixed_external_package_contract.json` | Pea/soy mixed-matrix external package contract. |
 | `ppi_spi_primary_benchmark_contract.json` | The PPI/SPI primary benchmark package contract (DOE generator, campaign). |
 | `soy_iso_protocol_pilot_intake.yaml` | Protocol-pilot intake for soy isolate; same status. |
 
@@ -101,7 +96,6 @@ Compound and precursor definitions (SMILES, CAS, InChI, odour thresholds). The s
 | `desirable_targets.yml` | 20 meat-relevant target odorants with odour thresholds; read by `sensory`, `experiment_value`, `recommend`. |
 | `off_flavour_targets.yml` | 6 off-note compounds (beany/green/fatty) with thresholds; same readers. |
 | `precursors.yml` | Precursors by category (amino acids, sugars, exogenous, intermediates, lipids); `src/precursor_resolver.py`. |
-| `sensory_tags.yml` | Tag -> compound display-name lists used by the pipeline's target/minimise tags. |
 | `toxic_markers.yml` | 8 safety markers (AGEs, acrylamide, HCAs) with IARC class. |
 
 ## `data/benchmarks/external_validation`

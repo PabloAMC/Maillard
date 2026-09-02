@@ -34,7 +34,6 @@ from src import data_paths  # noqa: E402
 # path (file or directory, relative to repo root) -> one-line description.
 # A directory entry covers every file beneath it that has no entry of its own.
 DESCRIPTIONS: Dict[str, str] = {
-    "data/formulation_grid.yml": "Built-in candidate formulation grid for inverse-design runs (`src/pipeline.py`).",
     "data/interventions.yml": "Intervention library: per-unit barrier deltas used by the Bayesian optimiser.",
     # ---- keys
     "data/keys": "The join layer (Phase 3). Generated files; edit the seeds in the generators, not the YAML.",
@@ -48,7 +47,6 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/species/desirable_targets.yml": "20 meat-relevant target odorants with odour thresholds; read by `sensory`, `experiment_value`, `recommend`.",
     "data/species/off_flavour_targets.yml": "6 off-note compounds (beany/green/fatty) with thresholds; same readers.",
     "data/species/toxic_markers.yml": "8 safety markers (AGEs, acrylamide, HCAs) with IARC class.",
-    "data/species/sensory_tags.yml": "Tag -> compound display-name lists used by the pipeline's target/minimise tags.",
     "data/species/precursors.yml": "Precursors by category (amino acids, sugars, exogenous, intermediates, lipids); `src/precursor_resolver.py`.",
     # ---- lit
     "data/lit": "Literature-derived constants, priors, reference payloads and the intake registries. See the per-file lines below and `data/lit/README.md` for the ingestion workflow.",
@@ -69,7 +67,6 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/lit/family_ingestion_plan.json": "The same 16 lanes as an ingestion roadmap (waves, payload types, target modules). Merge with the scope registry planned.",
     "data/lit/process_gap_registry.json": "5 structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`.",
     "data/lit/benchmark_intake_registry.json": "The paper catalogue: 205 references scored against the C1-C8 intake criteria, with repair ledgers. `paper_id` of choice for `papers.yml`.",
-    "data/lit/refinement_surrogate_patches.json": "RETIRED barrier-offset tombstone; `accepted_offsets` must stay empty (guarded by a test).",
     "data/lit/extraction_dossiers": "Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.",
     "data/lit/timeseries": "Digitised concentration-vs-time trajectories (Martins 2003/2005, Brands 2002) used by the trunk-rate fit; declared fit targets are gated by `scripts/ci/fit_target_gate.py`.",
     # ---- benchmarks
@@ -82,12 +79,9 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/benchmarks/step_level_unreachable": "Verified rows the network cannot execute (see README there); kept off the panel by design.",
     # ---- protocols
     "data/protocols": "Wet-lab contracts and intake specifications.",
-    "data/protocols/matrix_experiment_intake_schema.json": "Required-field lists for intake YAML (`src/matrix_experiment_intake.py`); to become a JSON Schema under data/schemas.",
-    "data/protocols/example_matrix_experiment_intake.yaml": "Canonical intake example used by `maillard ingest` and its tests.",
     "data/protocols/ppi_spi_primary_benchmark_contract.json": "The PPI/SPI primary benchmark package contract (DOE generator, campaign).",
     "data/protocols/extrusion_external_closure_contract.json": "Extrusion external-closure package contract.",
     "data/protocols/dha_lysinoalanine_external_package_contract.json": "DHA / lysinoalanine external package contract.",
-    "data/protocols/pea_soy_mixed_external_package_contract.json": "Pea/soy mixed-matrix external package contract.",
     "data/protocols/pea_iso_protocol_pilot_intake.yaml": "Protocol-pilot intake for pea isolate (hand-written comparison contract; `conc_ppb` refreshed from the model by the reproducibility snapshot generator).",
     "data/protocols/soy_iso_protocol_pilot_intake.yaml": "Protocol-pilot intake for soy isolate; same status.",
     # ---- research corpus

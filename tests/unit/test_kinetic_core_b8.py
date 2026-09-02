@@ -12,7 +12,7 @@ What this file pins, in the order the wave did it:
   3. THE COVALENT-SINK RETIREMENT, and -- the harder half -- that it moved NO
      NUMBER: the term contributed exactly 0.0 before and after.
   4. THE MILK UNIT RESOLUTION, and that unblocking changed no value.
-  5. safety.py's four uncited pairs LABELLED, with the values untouched.
+  5. (safety.py's four uncited pairs -- retired with src/safety.py at B5b, 2026-09-03.)
   6. THE RETIREMENT ACCOUNTING: both bases present, and the replacement
      hold-outs unable to gate.
   7. THE FIREWALL, by literal grep and by a SYSTEMS walk.
@@ -393,75 +393,7 @@ def test_the_milk_seal_records_the_resolution_and_no_value_moves():
     assert record.reason == reason
 
 
-# ===========================================================================
-# 5. safety.py's FOUR UNCITED PAIRS (Amendment 16 clause 2)
-# ===========================================================================
-
-
-def test_the_four_uncited_safety_pairs_are_labelled_and_unchanged():
-    from src import safety
-
-    assert safety.SAFETY_ARRHENIUS_SOURCE_STATUS == "no_verifiable_source"
-    assert len(safety.SAFETY_UNCITED_ARRHENIUS_PAIRS) == 4
-    provenance = safety.SAFETY_ARRHENIUS_PROVENANCE
-    assert provenance["source_status"] == "no_verifiable_source"
-    # the three obligatory Wave T3 ingredients
-    assert "predict_furosine" in provenance["affects"]
-    assert "NOT SUBSTITUTED OR RESCALED" in provenance["warning"].upper()
-    # THE VALUES DID NOT MOVE. Read them out of the source, positionally, the
-    # same way the prefactor audit does.
-    source = (ROOT / "src" / "safety.py").read_text()
-    pairs = re.findall(
-        r"formation_pre_exponential=([0-9.eE+-]+),\s*\n\s*"
-        r"formation_ea_kj_mol=([0-9.eE+-]+),\s*\n\s*"
-        r"elimination_pre_exponential=([0-9.eE+-]+),\s*\n\s*"
-        r"elimination_ea_kj_mol=([0-9.eE+-]+),",
-        source)
-    assert len(pairs) == 2, (
-        "the prefactor audit re-parses these four literals POSITIONALLY and "
-        "this test uses its exact regex; if the call sites were reflowed the "
-        "audit silently drops rows")
-    assert [tuple(float(v) for v in p) for p in pairs] == [
-        (4.0e6, 52.0, 2.5e9, 74.0),   # dicarbonyl pool
-        (8.0e5, 50.0, 1.8e10, 73.0),  # furosine
-    ]
-
-
-def test_the_safety_label_warns_once_and_names_only_the_keys():
-    """
-    Both call sites run inside optimiser sweeps, so the message names the
-    PARAMETER KEYS and not their values, and it is emitted at most once per
-    process. A warning that fires thousands of times trains the reader to
-    filter it, which is the same as not having it.
-    """
-    from src import safety
-    safety._SAFETY_ARRHENIUS_WARNED = False
-    with warnings.catch_warnings(record=True) as caught:
-        warnings.simplefilter("always")
-        first = safety.predict_furosine(140.0, 10.0)
-        safety.predict_furosine(140.0, 20.0)
-        safety.predict_furosine(120.0, 30.0)
-    hits = [w for w in caught if "no_verifiable_source" in str(w.message)]
-    assert len(hits) == 1, f"warned {len(hits)} times, expected once"
-    assert issubclass(hits[0].category, RuntimeWarning)
-    message = str(hits[0].message)
-    for key in safety.SAFETY_UNCITED_ARRHENIUS_PAIRS:
-        assert key in message
-    assert "NOT substituted or rescaled" in message
-    # naming a VALUE in the message would defeat the once-per-process design
-    for value in ("4.0e6", "2.5e9", "8.0e5", "1.8e10"):
-        assert value not in message
-    assert first > 0.0
-
-
-def test_the_flag_travels_on_the_payload_and_not_only_to_stderr():
-    from src import safety
-    ctx = safety.build_safety_reference_context(analyte="furosine")
-    assert ctx["unsourced_arrhenius_pairs"]["source_status"] == (
-        "no_verifiable_source")
-    # and it is NOT attached where those constants do not reach
-    assert "unsourced_arrhenius_pairs" not in (
-        safety.build_safety_reference_context(analyte="acrylamide"))
+# (section 5, safety.py's four uncited pairs: retired with src/safety.py at B5b, 2026-09-03)
 
 
 # ===========================================================================
