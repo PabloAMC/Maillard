@@ -2,21 +2,21 @@
   {
     "dimension": "protein_system",
     "category": "free",
-    "benchmark_count": 7,
+    "benchmark_count": 16,
     "status": "covered",
     "note": "present in current benchmark set"
   },
   {
     "dimension": "protein_system",
     "category": "pea_iso",
-    "benchmark_count": 4,
+    "benchmark_count": 3,
     "status": "covered",
     "note": "present in current benchmark set"
   },
   {
     "dimension": "protein_system",
     "category": "soy_iso",
-    "benchmark_count": 3,
+    "benchmark_count": 2,
     "status": "covered",
     "note": "present in current benchmark set"
   },
@@ -51,7 +51,7 @@
   {
     "dimension": "process_state",
     "category": "aqueous_pre_extrusion_model",
-    "benchmark_count": 4,
+    "benchmark_count": 2,
     "status": "covered",
     "note": "present in current benchmark set"
   },
@@ -65,7 +65,7 @@
   {
     "dimension": "execution_path",
     "category": "free_precursor",
-    "benchmark_count": 7,
+    "benchmark_count": 16,
     "status": "covered",
     "note": "free-AA sulfur and safety envelope"
   },
@@ -79,7 +79,7 @@
   {
     "dimension": "execution_path",
     "category": "matrix_precursor_augmented",
-    "benchmark_count": 4,
+    "benchmark_count": 2,
     "status": "covered",
     "note": "matrix meaty-positive reproducibility harness envelope"
   },

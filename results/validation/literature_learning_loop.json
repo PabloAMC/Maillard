@@ -193,6 +193,74 @@
       ]
     },
     {
+      "id": "pmc9905368_spi_hvp_xylose_benchmark",
+      "citation": "PMC9905368 (2023)",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "source_payload_role": "benchmark_intake",
+      "target_payload_types": [
+        "benchmark_payload"
+      ],
+      "matrix_family": "spi_hvp_xylose",
+      "legacy_status": "encoded",
+      "triage_status": "encoded",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "benchmark_payload",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "benchmark_validation",
+        "matrix_correction",
+        "reporting"
+      ],
+      "repo_next_action": "Keep encoded as a sulfur-focused executable benchmark subset tied to the protein-source registry.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
+          "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
+          "template_kind": "benchmark_payload",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
+      "citation": "Cho et al. (2023)",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "source_payload_role": "benchmark_intake",
+      "target_payload_types": [
+        "benchmark_payload"
+      ],
+      "matrix_family": "wheat_gluten_hvp_xylose",
+      "legacy_status": "encoded",
+      "triage_status": "encoded",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "benchmark_payload",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "benchmark_validation",
+        "matrix_correction",
+        "reporting"
+      ],
+      "repo_next_action": "Expose as the highest-MFT plant-source sulfur benchmark for protein-source-aware formulation ranking.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
+          "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
+          "template_kind": "benchmark_payload",
+          "exists": true
+        }
+      ]
+    },
+    {
       "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
       "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
       "kind": "quantitative_benchmark",
@@ -306,7 +374,7 @@
       "id": "acs_apts_ref24_3dg_arrhenius_anchor",
       "citation": "Yu et al. (2020)",
       "kind": "calibration_reference",
-      "chemistry_family": "advanced_glycation_and_damage",
+      "chemistry_family": "protein_damage_markers",
       "slr_family_source": "14",
       "source_payload_role": "benchmark_intake",
       "target_payload_types": [
@@ -538,7 +606,7 @@
       "id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
       "citation": "Cui et al. (2022), J. Agric. Food Chem. 70:11556",
       "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "source_payload_role": "computational_prior",
       "target_payload_types": [
@@ -570,7 +638,7 @@
       "id": "bayram_2023_stripped_soybean_oil_hexanal",
       "citation": "Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546",
       "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_crosstalk",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "source_payload_role": "computational_prior",
       "target_payload_types": [
@@ -1081,7 +1149,7 @@
       "id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
       "citation": "de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35",
       "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "source_payload_role": "computational_prior",
       "target_payload_types": [
@@ -2198,7 +2266,7 @@
       "id": "luna_aguilera_2014_molten_sugar_color_kinetics",
       "citation": "Luna & Aguilera (2013), Food Biophysics 9:61",
       "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "source_payload_role": "computational_prior",
       "target_payload_types": [
@@ -2986,7 +3054,7 @@
       "id": "pmc_4419266_pe_interfacial_maillard_kinetics",
       "citation": "Sol\u00eds-Calero et al. (2015)",
       "kind": "calibration_reference",
-      "chemistry_family": "phospholipid_amine_maillard",
+      "chemistry_family": "phospholipid_amine_sink",
       "slr_family_source": "15",
       "source_payload_role": "benchmark_intake",
       "target_payload_types": [
@@ -3573,7 +3641,7 @@
       "id": "spier_2010_metal_naphthenate_peroxide_decomp",
       "citation": "West, Adams & Zabarnick (2011), Energy & Fuels 25:897",
       "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_crosstalk",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "source_payload_role": "computational_prior",
       "target_payload_types": [
@@ -3701,7 +3769,7 @@
       "id": "tan_2001_oil_dsc_oxidation",
       "citation": "Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133",
       "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_crosstalk",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "source_payload_role": "computational_prior",
       "target_payload_types": [
@@ -5151,6 +5219,253 @@
       ]
     },
     {
+      "id": "fadel_2015_mft_retention",
+      "citation": "Fadel et al. (2015)",
+      "kind": "calibration_reference",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "source_payload_role": "retention_payload",
+      "target_payload_types": [
+        "intake_registry_entry",
+        "slr_incorporation_ledger"
+      ],
+      "matrix_family": "soy_isolate",
+      "legacy_status": "encoded",
+      "triage_status": "encoded",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "intake_registry_entry",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "literature_runtime",
+        "headspace"
+      ],
+      "repo_next_action": "Keep encoded as a soy isolate MFT retention anchor.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "fadel_2015_mft_retention",
+          "path": "data/lit/benchmark_intake_registry.json",
+          "template_kind": "intake_registry_entry",
+          "exists": true
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "fadel_2015_mft_retention",
+          "path": "results/literature/slr_incorporation_matrix.json",
+          "template_kind": "slr_incorporation_ledger",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "farmer_1991_alkyl_thiazoles",
+      "citation": "Farmer & Patterson (1991), Food Chemistry 40:201",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "source_payload_role": "benchmark_intake",
+      "target_payload_types": [
+        "intake_registry_entry",
+        "slr_incorporation_ledger"
+      ],
+      "matrix_family": "free_model_system",
+      "legacy_status": "encoded",
+      "triage_status": "encoded",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "intake_registry_entry",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "literature_runtime",
+        "lipid_condensation"
+      ],
+      "repo_next_action": "Expose as a lipid-Maillard thiazole cross-coupling mechanistic reference.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "farmer_1991_alkyl_thiazoles",
+          "path": "data/lit/benchmark_intake_registry.json",
+          "template_kind": "intake_registry_entry",
+          "exists": true
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "farmer_1991_alkyl_thiazoles",
+          "path": "results/literature/slr_incorporation_matrix.json",
+          "template_kind": "slr_incorporation_ledger",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "mottram_2001_bmfd_retention",
+      "citation": "Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333",
+      "kind": "calibration_reference",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "source_payload_role": "retention_payload",
+      "target_payload_types": [
+        "intake_registry_entry",
+        "slr_incorporation_ledger"
+      ],
+      "matrix_family": "soy_isolate",
+      "legacy_status": "encoded",
+      "triage_status": "encoded",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "intake_registry_entry",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "literature_runtime",
+        "headspace"
+      ],
+      "repo_next_action": "Keep encoded as a covalent soy BMFD retention anchor.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "mottram_2001_bmfd_retention",
+          "path": "data/lit/benchmark_intake_registry.json",
+          "template_kind": "intake_registry_entry",
+          "exists": true
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "mottram_2001_bmfd_retention",
+          "path": "results/literature/slr_incorporation_matrix.json",
+          "template_kind": "slr_incorporation_ledger",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "nishimura_abe_2024",
+      "citation": "Nishimura & Abe (2024)",
+      "kind": "conditional_calibration",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "source_payload_role": "benchmark_intake",
+      "target_payload_types": [
+        "intake_registry_entry",
+        "slr_incorporation_ledger"
+      ],
+      "matrix_family": "soy_hydrolysate",
+      "legacy_status": "reviewed_qualitative_only",
+      "triage_status": "reviewed_qualitative_only",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "intake_registry_entry",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "soy_matrix_meaty",
+        "matrix_correction",
+        "headspace"
+      ],
+      "repo_next_action": "Keep encoded as a qualitative soy-hydrolysate intake anchor and require primary SPI data for any benchmark JSON or absolute calibration surface.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "nishimura_abe_2024",
+          "path": "data/lit/benchmark_intake_registry.json",
+          "template_kind": "intake_registry_entry",
+          "exists": true
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "nishimura_abe_2024",
+          "path": "results/literature/slr_incorporation_matrix.json",
+          "template_kind": "slr_incorporation_ledger",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "siripitakpong_2026_fft_retention",
+      "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
+      "kind": "calibration_reference",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "source_payload_role": "retention_payload",
+      "target_payload_types": [
+        "intake_registry_entry",
+        "slr_incorporation_ledger"
+      ],
+      "matrix_family": "pea_isolate",
+      "legacy_status": "encoded",
+      "triage_status": "encoded",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "intake_registry_entry",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "literature_runtime",
+        "headspace"
+      ],
+      "repo_next_action": "Keep encoded as a pea isolate FFT binding energy anchor.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "siripitakpong_2026_fft_retention",
+          "path": "data/lit/benchmark_intake_registry.json",
+          "template_kind": "intake_registry_entry",
+          "exists": true
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "siripitakpong_2026_fft_retention",
+          "path": "results/literature/slr_incorporation_matrix.json",
+          "template_kind": "slr_incorporation_ledger",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "wang_2023_mft_retention",
+      "citation": "Wang et al. (2023)",
+      "kind": "calibration_reference",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "source_payload_role": "retention_payload",
+      "target_payload_types": [
+        "intake_registry_entry",
+        "slr_incorporation_ledger"
+      ],
+      "matrix_family": "soy_isolate",
+      "legacy_status": "encoded",
+      "triage_status": "encoded",
+      "encoding_status": "encoded_runtime_artifact",
+      "template_kind": "intake_registry_entry",
+      "runtime_artifacts_present": true,
+      "backlog_queue": null,
+      "requires_primary_data": false,
+      "target_modules": [
+        "literature_runtime",
+        "headspace"
+      ],
+      "repo_next_action": "Keep encoded as a native soy isolate MFT retention anchor.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "wang_2023_mft_retention",
+          "path": "data/lit/benchmark_intake_registry.json",
+          "template_kind": "intake_registry_entry",
+          "exists": true
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "wang_2023_mft_retention",
+          "path": "results/literature/slr_incorporation_matrix.json",
+          "template_kind": "slr_incorporation_ledger",
+          "exists": true
+        }
+      ]
+    },
+    {
       "id": "acs_foodscitech_2024_hme_firmness_anchor",
       "citation": "Cruz et al. (2025)",
       "kind": "calibration_reference",
@@ -5634,7 +5949,7 @@
       "id": "pmc5992167_amadori_pe_burden_anchor",
       "citation": "Kodate et al. (2018)",
       "kind": "calibration_reference",
-      "chemistry_family": "phospholipid_amine_maillard",
+      "chemistry_family": "phospholipid_amine_sink",
       "slr_family_source": "15",
       "source_payload_role": "benchmark_intake",
       "target_payload_types": [
@@ -5721,7 +6036,7 @@
       "id": "rizzello_2024_fermentation_cleanup",
       "citation": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
       "kind": "calibration_reference",
-      "chemistry_family": "microbial_fermentation_modulation",
+      "chemistry_family": "fermentation_pretreatment",
       "slr_family_source": "10",
       "source_payload_role": "benchmark_intake",
       "target_payload_types": [
@@ -5822,7 +6137,7 @@
       "id": "zhao_2022_moromi_precursor_release",
       "citation": "Jo et al. (2022), Molecules 27:6182",
       "kind": "calibration_reference",
-      "chemistry_family": "microbial_fermentation_modulation",
+      "chemistry_family": "fermentation_pretreatment",
       "slr_family_source": "10",
       "source_payload_role": "benchmark_intake",
       "target_payload_types": [
@@ -7084,6 +7399,74 @@
         ]
       },
       {
+        "id": "pmc9905368_spi_hvp_xylose_benchmark",
+        "citation": "PMC9905368 (2023)",
+        "kind": "quantitative_benchmark",
+        "chemistry_family": "alternative_protein_matrix_scope",
+        "slr_family_source": "06",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "benchmark_payload"
+        ],
+        "matrix_family": "spi_hvp_xylose",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "benchmark_payload",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "benchmark_validation",
+          "matrix_correction",
+          "reporting"
+        ],
+        "repo_next_action": "Keep encoded as a sulfur-focused executable benchmark subset tied to the protein-source registry.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "benchmark",
+            "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
+            "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
+            "template_kind": "benchmark_payload",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
+        "citation": "Cho et al. (2023)",
+        "kind": "quantitative_benchmark",
+        "chemistry_family": "alternative_protein_matrix_scope",
+        "slr_family_source": "06",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "benchmark_payload"
+        ],
+        "matrix_family": "wheat_gluten_hvp_xylose",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "benchmark_payload",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "benchmark_validation",
+          "matrix_correction",
+          "reporting"
+        ],
+        "repo_next_action": "Expose as the highest-MFT plant-source sulfur benchmark for protein-source-aware formulation ranking.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "benchmark",
+            "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
+            "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
+            "template_kind": "benchmark_payload",
+            "exists": true
+          }
+        ]
+      },
+      {
         "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
         "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
         "kind": "quantitative_benchmark",
@@ -7197,7 +7580,7 @@
         "id": "acs_apts_ref24_3dg_arrhenius_anchor",
         "citation": "Yu et al. (2020)",
         "kind": "calibration_reference",
-        "chemistry_family": "advanced_glycation_and_damage",
+        "chemistry_family": "protein_damage_markers",
         "slr_family_source": "14",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -7429,7 +7812,7 @@
         "id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
         "citation": "Cui et al. (2022), J. Agric. Food Chem. 70:11556",
         "kind": "calibration_reference",
-        "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+        "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
         "slr_family_source": "09",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -7461,7 +7844,7 @@
         "id": "bayram_2023_stripped_soybean_oil_hexanal",
         "citation": "Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546",
         "kind": "calibration_reference",
-        "chemistry_family": "lipid_oxidation_crosstalk",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
         "slr_family_source": "02",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -7972,7 +8355,7 @@
         "id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
         "citation": "de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35",
         "kind": "calibration_reference",
-        "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+        "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
         "slr_family_source": "09",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -9089,7 +9472,7 @@
         "id": "luna_aguilera_2014_molten_sugar_color_kinetics",
         "citation": "Luna & Aguilera (2013), Food Biophysics 9:61",
         "kind": "calibration_reference",
-        "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+        "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
         "slr_family_source": "09",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -9877,7 +10260,7 @@
         "id": "pmc_4419266_pe_interfacial_maillard_kinetics",
         "citation": "Sol\u00eds-Calero et al. (2015)",
         "kind": "calibration_reference",
-        "chemistry_family": "phospholipid_amine_maillard",
+        "chemistry_family": "phospholipid_amine_sink",
         "slr_family_source": "15",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -10464,7 +10847,7 @@
         "id": "spier_2010_metal_naphthenate_peroxide_decomp",
         "citation": "West, Adams & Zabarnick (2011), Energy & Fuels 25:897",
         "kind": "calibration_reference",
-        "chemistry_family": "lipid_oxidation_crosstalk",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
         "slr_family_source": "02",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -10592,7 +10975,7 @@
         "id": "tan_2001_oil_dsc_oxidation",
         "citation": "Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133",
         "kind": "calibration_reference",
-        "chemistry_family": "lipid_oxidation_crosstalk",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
         "slr_family_source": "02",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -12042,6 +12425,253 @@
         ]
       },
       {
+        "id": "fadel_2015_mft_retention",
+        "citation": "Fadel et al. (2015)",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a soy isolate MFT retention anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "fadel_2015_mft_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "fadel_2015_mft_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "farmer_1991_alkyl_thiazoles",
+        "citation": "Farmer & Patterson (1991), Food Chemistry 40:201",
+        "kind": "calibration_reference",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+        "slr_family_source": "02",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "free_model_system",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "lipid_condensation"
+        ],
+        "repo_next_action": "Expose as a lipid-Maillard thiazole cross-coupling mechanistic reference.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "farmer_1991_alkyl_thiazoles",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "farmer_1991_alkyl_thiazoles",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "mottram_2001_bmfd_retention",
+        "citation": "Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a covalent soy BMFD retention anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "mottram_2001_bmfd_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "mottram_2001_bmfd_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "nishimura_abe_2024",
+        "citation": "Nishimura & Abe (2024)",
+        "kind": "conditional_calibration",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_hydrolysate",
+        "legacy_status": "reviewed_qualitative_only",
+        "triage_status": "reviewed_qualitative_only",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "soy_matrix_meaty",
+          "matrix_correction",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a qualitative soy-hydrolysate intake anchor and require primary SPI data for any benchmark JSON or absolute calibration surface.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "nishimura_abe_2024",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "nishimura_abe_2024",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "siripitakpong_2026_fft_retention",
+        "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "pea_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a pea isolate FFT binding energy anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "siripitakpong_2026_fft_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "siripitakpong_2026_fft_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "wang_2023_mft_retention",
+        "citation": "Wang et al. (2023)",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a native soy isolate MFT retention anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "wang_2023_mft_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "wang_2023_mft_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
         "id": "acs_foodscitech_2024_hme_firmness_anchor",
         "citation": "Cruz et al. (2025)",
         "kind": "calibration_reference",
@@ -12525,7 +13155,7 @@
         "id": "pmc5992167_amadori_pe_burden_anchor",
         "citation": "Kodate et al. (2018)",
         "kind": "calibration_reference",
-        "chemistry_family": "phospholipid_amine_maillard",
+        "chemistry_family": "phospholipid_amine_sink",
         "slr_family_source": "15",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -12612,7 +13242,7 @@
         "id": "rizzello_2024_fermentation_cleanup",
         "citation": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
         "kind": "calibration_reference",
-        "chemistry_family": "microbial_fermentation_modulation",
+        "chemistry_family": "fermentation_pretreatment",
         "slr_family_source": "10",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -12713,7 +13343,7 @@
         "id": "zhao_2022_moromi_precursor_release",
         "citation": "Jo et al. (2022), Molecules 27:6182",
         "kind": "calibration_reference",
-        "chemistry_family": "microbial_fermentation_modulation",
+        "chemistry_family": "fermentation_pretreatment",
         "slr_family_source": "10",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -14065,6 +14695,74 @@
         ]
       },
       {
+        "id": "pmc9905368_spi_hvp_xylose_benchmark",
+        "citation": "PMC9905368 (2023)",
+        "kind": "quantitative_benchmark",
+        "chemistry_family": "alternative_protein_matrix_scope",
+        "slr_family_source": "06",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "benchmark_payload"
+        ],
+        "matrix_family": "spi_hvp_xylose",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "benchmark_payload",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "benchmark_validation",
+          "matrix_correction",
+          "reporting"
+        ],
+        "repo_next_action": "Keep encoded as a sulfur-focused executable benchmark subset tied to the protein-source registry.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "benchmark",
+            "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
+            "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
+            "template_kind": "benchmark_payload",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
+        "citation": "Cho et al. (2023)",
+        "kind": "quantitative_benchmark",
+        "chemistry_family": "alternative_protein_matrix_scope",
+        "slr_family_source": "06",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "benchmark_payload"
+        ],
+        "matrix_family": "wheat_gluten_hvp_xylose",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "benchmark_payload",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "benchmark_validation",
+          "matrix_correction",
+          "reporting"
+        ],
+        "repo_next_action": "Expose as the highest-MFT plant-source sulfur benchmark for protein-source-aware formulation ranking.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "benchmark",
+            "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
+            "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
+            "template_kind": "benchmark_payload",
+            "exists": true
+          }
+        ]
+      },
+      {
         "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
         "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
         "kind": "quantitative_benchmark",
@@ -14178,7 +14876,7 @@
         "id": "acs_apts_ref24_3dg_arrhenius_anchor",
         "citation": "Yu et al. (2020)",
         "kind": "calibration_reference",
-        "chemistry_family": "advanced_glycation_and_damage",
+        "chemistry_family": "protein_damage_markers",
         "slr_family_source": "14",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -14410,7 +15108,7 @@
         "id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
         "citation": "Cui et al. (2022), J. Agric. Food Chem. 70:11556",
         "kind": "calibration_reference",
-        "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+        "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
         "slr_family_source": "09",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -14442,7 +15140,7 @@
         "id": "bayram_2023_stripped_soybean_oil_hexanal",
         "citation": "Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546",
         "kind": "calibration_reference",
-        "chemistry_family": "lipid_oxidation_crosstalk",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
         "slr_family_source": "02",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -14953,7 +15651,7 @@
         "id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
         "citation": "de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35",
         "kind": "calibration_reference",
-        "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+        "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
         "slr_family_source": "09",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -16070,7 +16768,7 @@
         "id": "luna_aguilera_2014_molten_sugar_color_kinetics",
         "citation": "Luna & Aguilera (2013), Food Biophysics 9:61",
         "kind": "calibration_reference",
-        "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+        "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
         "slr_family_source": "09",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -16858,7 +17556,7 @@
         "id": "pmc_4419266_pe_interfacial_maillard_kinetics",
         "citation": "Sol\u00eds-Calero et al. (2015)",
         "kind": "calibration_reference",
-        "chemistry_family": "phospholipid_amine_maillard",
+        "chemistry_family": "phospholipid_amine_sink",
         "slr_family_source": "15",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -17445,7 +18143,7 @@
         "id": "spier_2010_metal_naphthenate_peroxide_decomp",
         "citation": "West, Adams & Zabarnick (2011), Energy & Fuels 25:897",
         "kind": "calibration_reference",
-        "chemistry_family": "lipid_oxidation_crosstalk",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
         "slr_family_source": "02",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -17573,7 +18271,7 @@
         "id": "tan_2001_oil_dsc_oxidation",
         "citation": "Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133",
         "kind": "calibration_reference",
-        "chemistry_family": "lipid_oxidation_crosstalk",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
         "slr_family_source": "02",
         "source_payload_role": "computational_prior",
         "target_payload_types": [
@@ -19023,6 +19721,253 @@
         ]
       },
       {
+        "id": "fadel_2015_mft_retention",
+        "citation": "Fadel et al. (2015)",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a soy isolate MFT retention anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "fadel_2015_mft_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "fadel_2015_mft_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "farmer_1991_alkyl_thiazoles",
+        "citation": "Farmer & Patterson (1991), Food Chemistry 40:201",
+        "kind": "calibration_reference",
+        "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+        "slr_family_source": "02",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "free_model_system",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "lipid_condensation"
+        ],
+        "repo_next_action": "Expose as a lipid-Maillard thiazole cross-coupling mechanistic reference.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "farmer_1991_alkyl_thiazoles",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "farmer_1991_alkyl_thiazoles",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "mottram_2001_bmfd_retention",
+        "citation": "Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a covalent soy BMFD retention anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "mottram_2001_bmfd_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "mottram_2001_bmfd_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "nishimura_abe_2024",
+        "citation": "Nishimura & Abe (2024)",
+        "kind": "conditional_calibration",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "benchmark_intake",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_hydrolysate",
+        "legacy_status": "reviewed_qualitative_only",
+        "triage_status": "reviewed_qualitative_only",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "soy_matrix_meaty",
+          "matrix_correction",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a qualitative soy-hydrolysate intake anchor and require primary SPI data for any benchmark JSON or absolute calibration surface.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "nishimura_abe_2024",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "nishimura_abe_2024",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "siripitakpong_2026_fft_retention",
+        "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "pea_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a pea isolate FFT binding energy anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "siripitakpong_2026_fft_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "siripitakpong_2026_fft_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "id": "wang_2023_mft_retention",
+        "citation": "Wang et al. (2023)",
+        "kind": "calibration_reference",
+        "chemistry_family": "glutathione_and_peptide_support",
+        "slr_family_source": "05",
+        "source_payload_role": "retention_payload",
+        "target_payload_types": [
+          "intake_registry_entry",
+          "slr_incorporation_ledger"
+        ],
+        "matrix_family": "soy_isolate",
+        "legacy_status": "encoded",
+        "triage_status": "encoded",
+        "encoding_status": "encoded_runtime_artifact",
+        "template_kind": "intake_registry_entry",
+        "runtime_artifacts_present": true,
+        "backlog_queue": null,
+        "requires_primary_data": false,
+        "target_modules": [
+          "literature_runtime",
+          "headspace"
+        ],
+        "repo_next_action": "Keep encoded as a native soy isolate MFT retention anchor.",
+        "runtime_artifacts": [
+          {
+            "artifact_type": "intake_registry_entry",
+            "artifact_id": "wang_2023_mft_retention",
+            "path": "data/lit/benchmark_intake_registry.json",
+            "template_kind": "intake_registry_entry",
+            "exists": true
+          },
+          {
+            "artifact_type": "slr_incorporation_ledger",
+            "artifact_id": "wang_2023_mft_retention",
+            "path": "results/literature/slr_incorporation_matrix.json",
+            "template_kind": "slr_incorporation_ledger",
+            "exists": true
+          }
+        ]
+      },
+      {
         "id": "acs_foodscitech_2024_hme_firmness_anchor",
         "citation": "Cruz et al. (2025)",
         "kind": "calibration_reference",
@@ -19506,7 +20451,7 @@
         "id": "pmc5992167_amadori_pe_burden_anchor",
         "citation": "Kodate et al. (2018)",
         "kind": "calibration_reference",
-        "chemistry_family": "phospholipid_amine_maillard",
+        "chemistry_family": "phospholipid_amine_sink",
         "slr_family_source": "15",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -19593,7 +20538,7 @@
         "id": "rizzello_2024_fermentation_cleanup",
         "citation": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
         "kind": "calibration_reference",
-        "chemistry_family": "microbial_fermentation_modulation",
+        "chemistry_family": "fermentation_pretreatment",
         "slr_family_source": "10",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -19694,7 +20639,7 @@
         "id": "zhao_2022_moromi_precursor_release",
         "citation": "Jo et al. (2022), Molecules 27:6182",
         "kind": "calibration_reference",
-        "chemistry_family": "microbial_fermentation_modulation",
+        "chemistry_family": "fermentation_pretreatment",
         "slr_family_source": "10",
         "source_payload_role": "benchmark_intake",
         "target_payload_types": [
@@ -20813,8 +21758,8 @@
       "encoded_and_ready_ids": []
     },
     "summary": {
-      "intake_reference_count": 197,
-      "encoded_reference_count": 197,
+      "intake_reference_count": 205,
+      "encoded_reference_count": 205,
       "ready_runtime_count": 0,
       "ready_benchmark_count": 0,
       "wet_lab_blocked_count": 4,
@@ -21307,31 +22252,27 @@
   "payload_queue_review": {
     "queue_by_payload_type": {
       "benchmark_intake_entry": 2,
-      "benchmark_payload": 7,
+      "benchmark_payload": 9,
       "computational_prior": 126,
       "flavor_reference_payload": 21,
+      "intake_registry_entry": 6,
       "process_state_calibration": 20,
       "reference_payload": 1,
       "retention_reference_payload": 3,
       "safety_payload": 8,
-      "safety_reference_payload": 21
+      "safety_reference_payload": 21,
+      "slr_incorporation_ledger": 6
     },
     "queue_by_chemistry_family": [
       {
-        "chemistry_family": "advanced_glycation_and_damage",
-        "payload_type_counts": {
-          "computational_prior": 1
-        },
-        "ready_reference_count": 1
-      },
-      {
         "chemistry_family": "alternative_protein_matrix_scope",
         "payload_type_counts": {
+          "benchmark_payload": 2,
           "computational_prior": 15,
           "flavor_reference_payload": 10,
           "process_state_calibration": 4
         },
-        "ready_reference_count": 29
+        "ready_reference_count": 31
       },
       {
         "chemistry_family": "amino_acid_sugar_core",
@@ -21355,18 +22296,11 @@
         "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
         "payload_type_counts": {
           "benchmark_payload": 1,
-          "computational_prior": 4,
+          "computational_prior": 7,
           "flavor_reference_payload": 1,
           "process_state_calibration": 1
         },
-        "ready_reference_count": 7
-      },
-      {
-        "chemistry_family": "carbohydrate_pyrolysis_caramelization",
-        "payload_type_counts": {
-          "computational_prior": 3
-        },
-        "ready_reference_count": 3
+        "ready_reference_count": 10
       },
       {
         "chemistry_family": "carbonyl_donor_hierarchy",
@@ -21379,17 +22313,19 @@
       {
         "chemistry_family": "fermentation_pretreatment",
         "payload_type_counts": {
-          "process_state_calibration": 1
+          "process_state_calibration": 3
         },
-        "ready_reference_count": 1
+        "ready_reference_count": 3
       },
       {
         "chemistry_family": "glutathione_and_peptide_support",
         "payload_type_counts": {
           "computational_prior": 4,
-          "retention_reference_payload": 2
+          "intake_registry_entry": 5,
+          "retention_reference_payload": 2,
+          "slr_incorporation_ledger": 5
         },
-        "ready_reference_count": 6
+        "ready_reference_count": 16
       },
       {
         "chemistry_family": "lipid_maillard_crosstalk",
@@ -21404,18 +22340,13 @@
         "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
         "payload_type_counts": {
           "benchmark_payload": 1,
-          "computational_prior": 10,
+          "computational_prior": 13,
           "flavor_reference_payload": 3,
-          "process_state_calibration": 3
+          "intake_registry_entry": 1,
+          "process_state_calibration": 3,
+          "slr_incorporation_ledger": 1
         },
-        "ready_reference_count": 17
-      },
-      {
-        "chemistry_family": "lipid_oxidation_crosstalk",
-        "payload_type_counts": {
-          "computational_prior": 3
-        },
-        "ready_reference_count": 3
+        "ready_reference_count": 22
       },
       {
         "chemistry_family": "melanoidin_polymerization",
@@ -21424,13 +22355,6 @@
           "process_state_calibration": 3
         },
         "ready_reference_count": 13
-      },
-      {
-        "chemistry_family": "microbial_fermentation_modulation",
-        "payload_type_counts": {
-          "process_state_calibration": 2
-        },
-        "ready_reference_count": 2
       },
       {
         "chemistry_family": "nucleotide_and_ribose_support",
@@ -21451,19 +22375,12 @@
         "ready_reference_count": 5
       },
       {
-        "chemistry_family": "phospholipid_amine_maillard",
-        "payload_type_counts": {
-          "computational_prior": 2,
-          "process_state_calibration": 1
-        },
-        "ready_reference_count": 3
-      },
-      {
         "chemistry_family": "phospholipid_amine_sink",
         "payload_type_counts": {
-          "computational_prior": 8
+          "computational_prior": 10,
+          "process_state_calibration": 1
         },
-        "ready_reference_count": 8
+        "ready_reference_count": 11
       },
       {
         "chemistry_family": "polyphenol_amino_capping",
@@ -21478,11 +22395,11 @@
         "chemistry_family": "protein_damage_markers",
         "payload_type_counts": {
           "benchmark_payload": 3,
-          "computational_prior": 1,
+          "computational_prior": 2,
           "safety_payload": 5,
           "safety_reference_payload": 18
         },
-        "ready_reference_count": 27
+        "ready_reference_count": 28
       },
       {
         "chemistry_family": "thiamine_fragmentation_support",
@@ -21810,10 +22727,10 @@
     }
   ],
   "summary": {
-    "ready_reference_count": 197,
-    "encoded_runtime_reference_count": 197,
+    "ready_reference_count": 205,
+    "encoded_runtime_reference_count": 205,
     "template_queue_count": 0,
-    "matrix_family_count": 83,
+    "matrix_family_count": 86,
     "matrix_prior_families": [
       "pea_iso",
       "soy_iso",
@@ -21822,14 +22739,16 @@
     "families_with_primary_payload_support": 16,
     "payload_type_queue": {
       "benchmark_intake_entry": 2,
-      "benchmark_payload": 7,
+      "benchmark_payload": 9,
       "computational_prior": 126,
       "flavor_reference_payload": 21,
+      "intake_registry_entry": 6,
       "process_state_calibration": 20,
       "reference_payload": 1,
       "retention_reference_payload": 3,
       "safety_payload": 8,
-      "safety_reference_payload": 21
+      "safety_reference_payload": 21,
+      "slr_incorporation_ledger": 6
     },
     "selected_s11_c_family": "carbonyl_donor_hierarchy",
     "ready_runtime_backlog_count": 0,

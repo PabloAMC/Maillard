@@ -189,7 +189,7 @@
       ],
       "next_best_action": "rank_next_family_by_product_impact_and_literature_closability",
       "artifacts": [
-        "data/Gemini_Deep_Research/elicit_plant_based_cooking.md"
+        "data/research_corpus/elicit_plant_based_cooking.md"
       ]
     }
   ]

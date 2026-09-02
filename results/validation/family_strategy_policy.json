@@ -1,0 +1,273 @@
+{
+  "source": {
+    "chemistry_family_scope_registry": "data/lit/chemistry_family_scope_registry.json",
+    "family_ingestion_plan_registry": "data/lit/family_ingestion_plan.json"
+  },
+  "summary": {
+    "quantitative_trunk_family": "amino_acid_sugar_core",
+    "benchmarked_foundation_statement": "keep_amino_acid_plus_sugar_core_with_strecker_and_sulfur_scoring_surfaces_as_the_benchmarked_foundation",
+    "default_next_expansion_family": "lipid_oxidation_and_carbonylic_crosstalk",
+    "default_next_expansion_reason": "In plant-based matrices this family often dominates early off-notes and interacts directly with Maillard intermediates.",
+    "default_next_expansion_wave": 1,
+    "family_lane_classification": {
+      "first_class_core": [
+        "amino_acid_sugar_core"
+      ],
+      "partially_encoded_high_priority": [
+        "lipid_oxidation_and_carbonylic_crosstalk"
+      ],
+      "bounded_lanes": [
+        "thiamine_fragmentation_support",
+        "nucleotide_and_ribose_support",
+        "glutathione_and_peptide_support",
+        "alternative_protein_matrix_scope",
+        "carbonyl_donor_hierarchy",
+        "off_note_and_maillard_suppression",
+        "carbohydrate_pyrolysis_and_caramelization",
+        "fermentation_pretreatment"
+      ],
+      "open_gaps": []
+    },
+    "shared_ingestion_contract": {
+      "machine_readable_only": true,
+      "narrative_only_workflow_allowed": false,
+      "required_surfaces": [
+        "benchmark_intake_registry",
+        "runtime_payloads",
+        "process_gap_registry"
+      ],
+      "policy": "new_families_use_the_same_machine_readable_ingestion_contract_as_the_core_and_do_not_create_a_parallel_markdown_only_workflow"
+    },
+    "lipid_crosstalk_dual_lane_policy": {
+      "family_id": "lipid_oxidation_and_carbonylic_crosstalk",
+      "observable_lane_payloads": [
+        "benchmark_payload",
+        "retention_payload"
+      ],
+      "competition_lane_payloads": [
+        "computational_prior",
+        "structural_gap_entry"
+      ],
+      "policy": "treat_lipid_oxidation_as_a_dual_lane_of_observable_adverse_markers_plus_carbonyl_competition_and_crosstalk_priors"
+    },
+    "compute_policy": {
+      "p4_status": "infrastructure_not_active_product_objective",
+      "dft_policy": "selective_dft_is_reserved_for_benchmark_visible_sulfur_carbonyl_transfer_and_ts_sensitive_gaps_after_cheap_first_screening",
+      "mlp_policy": "mlps_remain_bounded_offline_accelerators_until_local_geometry_or_ts_benchmarks_accept_them_on_maillard_relevant_systems"
+    }
+  },
+  "family_lane_positions": [
+    {
+      "slr_family": "01",
+      "family_id": "amino_acid_sugar_core",
+      "display_name": "Amino acid plus reducing sugar core",
+      "current_status": "first_class_core",
+      "priority": "high",
+      "classification": "first_class_core",
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload"
+      ],
+      "implementation_wave": 0
+    },
+    {
+      "slr_family": "02",
+      "family_id": "lipid_oxidation_and_carbonylic_crosstalk",
+      "display_name": "Lipid oxidation and carbonylic crosstalk",
+      "current_status": "partially_encoded_high_priority",
+      "priority": "high",
+      "classification": "partially_encoded_high_priority",
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "retention_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 1
+    },
+    {
+      "slr_family": "03",
+      "family_id": "thiamine_fragmentation_support",
+      "display_name": "Thiamine degradation and sulfur support",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "computational_prior",
+        "flavor_reference_payload"
+      ],
+      "implementation_wave": 2
+    },
+    {
+      "slr_family": "04",
+      "family_id": "nucleotide_and_ribose_support",
+      "display_name": "Nucleotide degradation and ribose support",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "flavor_reference_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 2
+    },
+    {
+      "slr_family": "05",
+      "family_id": "glutathione_and_peptide_support",
+      "display_name": "Glutathione and peptide sulfur support",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "computational_prior",
+        "flavor_reference_payload"
+      ],
+      "implementation_wave": 2
+    },
+    {
+      "slr_family": "06",
+      "family_id": "alternative_protein_matrix_scope",
+      "display_name": "Alternative protein matrix scope",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "computational_prior",
+        "process_state_calibration"
+      ],
+      "implementation_wave": 3
+    },
+    {
+      "slr_family": "07",
+      "family_id": "carbonyl_donor_hierarchy",
+      "display_name": "Reducing sugar and carbonyl donor hierarchy",
+      "current_status": "bounded_lane",
+      "priority": "high",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload"
+      ],
+      "implementation_wave": 1
+    },
+    {
+      "slr_family": "08",
+      "family_id": "off_note_and_maillard_suppression",
+      "display_name": "Plant off-notes and Maillard suppression",
+      "current_status": "bounded_lane",
+      "priority": "high",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "computational_prior",
+        "safety_payload"
+      ],
+      "implementation_wave": 1
+    },
+    {
+      "slr_family": "09",
+      "family_id": "carbohydrate_pyrolysis_and_caramelization",
+      "display_name": "Carbohydrate pyrolysis and caramelization",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 3
+    },
+    {
+      "slr_family": "10",
+      "family_id": "fermentation_pretreatment",
+      "display_name": "Microbial fermentation pretreatment",
+      "current_status": "bounded_lane",
+      "priority": "high",
+      "classification": "bounded_lane",
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 1
+    },
+    {
+      "slr_family": "11",
+      "family_id": "lipid_maillard_crosstalk",
+      "display_name": "Maillard/Lipid Crosstalk and Radical Quenching",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "classification": "open_gap",
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 1
+    },
+    {
+      "slr_family": "12",
+      "family_id": "protein_damage_markers",
+      "display_name": "Protein Damage and Safety Markers (AGEs/ALE/LAL)",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "classification": "open_gap",
+      "preferred_payload_types": [
+        "safety_payload",
+        "guardrail_entry"
+      ],
+      "implementation_wave": 1
+    },
+    {
+      "slr_family": "13",
+      "family_id": "polyphenol_amino_capping",
+      "display_name": "Polyphenol-Amino Capping and Thiol Scavenging",
+      "current_status": "active_expansion",
+      "priority": "medium",
+      "classification": "open_gap",
+      "preferred_payload_types": [
+        "upstream_modifier_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 1
+    },
+    {
+      "slr_family": "14",
+      "family_id": "ascorbic_acid_maillard",
+      "display_name": "Ascorbic Acid Thermal Degradation (Stealth Initiator)",
+      "current_status": "active_expansion",
+      "priority": "medium",
+      "classification": "open_gap",
+      "preferred_payload_types": [
+        "bounded_source_term_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 2
+    },
+    {
+      "slr_family": "15",
+      "family_id": "phospholipid_amine_sink",
+      "display_name": "Phospholipid-Amine (PE) Stealth Sugar Sink",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "classification": "open_gap",
+      "preferred_payload_types": [
+        "upstream_modifier_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 2
+    },
+    {
+      "slr_family": "16",
+      "family_id": "melanoidin_polymerization",
+      "display_name": "Melanoidin Polymerization and Volatile Trapping",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "classification": "open_gap",
+      "preferred_payload_types": [
+        "trapping_burden_modifier_payload",
+        "computational_prior"
+      ],
+      "implementation_wave": 2
+    }
+  ]
+}

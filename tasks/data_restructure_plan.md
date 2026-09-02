@@ -506,7 +506,23 @@ value, ~zero risk), Phase 3 compounds + papers only, Phase 4 the benchmark schem
 - [x] 3d: the five alias sites resolve through `compound_keys`; the token-overlap and `difflib` fallbacks in the
       benchmark matcher and the substring fallback in `experiment_value.lookup_spec` are gone. The 35-row MC pin held,
       proving no scored row depended on them.
-- [ ] 3c: closed enums for chemistry / matrix families and reaction keys — next.
+- [~] 3c (STAGED, NOT COMMITTED, end of 2026-09-02): the 11 intake records using the five chemistry-family aliases were
+      rewritten to canonical ids; `literature_family_registry._CANONICAL_FAMILY_ALIASES` deleted;
+      `tests/unit/test_chemistry_family_keys.py` closes the axis (16 ids; intake + process-gap registries must use them).
+      Targeted tests: 77 passed. FULL SUITES NOT RUN. Before committing: run both tiers.
+      Open finding: regenerating `results/validation/literature_backlog.*` drops 6 intake rows that are NOT touched by
+      this change (`fadel_2015_mft_retention`, `farmer_1991_alkyl_thiazoles`, `mottram_2001_bmfd_retention`,
+      `nishimura_abe_2024`, `siripitakpong_2026_fft_retention`, `wang_2023_mft_retention`; 203 → 197 encoded
+      references) — i.e. the tracked artifact is stale relative to the registry for a reason that predates 3c
+      (`generate_literature_backlog` was not in the round-2 regeneration list). Diagnose why those six leave before
+      regenerating; the four regenerated files were reverted to HEAD for now.
+      Matrix-family axis: 86 free-text `matrix_family` values in the intake registry describe paper matrices, not the
+      8 product matrices — needs a per-record mapping (rename to `matrix_context` + optional canonical `matrix_family`),
+      not a mechanical fix. Reaction-family crosswalk deferred: the legacy engine that owns those keys is being retired.
+- [ ] Next session: (1) finish/commit 3c as above; (2) roadmap item 1 — retire the SMIRKS/Hammond engine and the
+      volatile-budget layer behind one typed pipeline contract. A read-only footprint map was requested from a subagent
+      at the end of 2026-09-02; if its report is not in the transcript, redo the map (entry points, keep/retire/seam per
+      module, data files, tests, what the MC envelope samples).
 
 ### Product decision (owner, 2026-09-02)
 One tool, one engine. Retire the legacy SMIRKS/Hammond path (`src/smirks_engine.py`, `src/reaction_templates.py`
@@ -535,6 +551,39 @@ calibrates on their own data (`maillard ingest`). Architecture follow-ups are li
    command that regenerates the evidence dashboard; guards pin contracts, not numbers. Notebook-first.
 Not to build: quantum chemistry, ML potentials, generic reaction enumeration, absolute claims without user calibration.
 Sequence: 1 → 8 → 4 (then 2, 3, 5, 7). Data lever: make the PPI/SPI protocol trivially reproducible.
+
+### Engine retirement — footprint map (2026-09-03, read-only survey)
+The legacy path is not a side lane; it is the whole validation harness:
+- **Two front doors, two engines.** `scripts/run_pipeline.py` → `MaillardPipeline` → `SmirksEngine.enumerate` →
+  `ResultsDB.get_best_barrier` (FAST_BARRIERS + refinement patches) → `Recommender.predict_from_steps` →
+  `_apply_output_projection` (the fixed volatile budget, `recommend.py:947-950`) → `predicted_ppb` → `reporting`.
+  `scripts/maillard.py --lane core` → `comparative_cli.predict_core` → `kinetic_core.engine.predict` (own 15-step
+  mass-action network in `kinetic_core/network.py`, parameters from `results/validation/kinetic_core_b*_fit_report.json`,
+  imports nothing from `src/` but `data_paths`) → `report_html` / `explain`. The core never sees SMIRKS steps.
+- **Everything that validates runs on the legacy engine:** `benchmark_validation.py` (2852 lines, 36 test files)
+  builds `SmirksEngine` + `predict_from_steps` directly; the Monte-Carlo envelope (`uncertainty_propagation.py`)
+  samples 14 FAST family barrier offsets via `BARRIER_OFFSETS` and its artifact `prediction_uncertainty.json` feeds
+  `pipeline` envelopes, `experiment_value.rank` (used by the CORE `rank` verb), external/cross-validation, ingest,
+  matrix recalibration, and every headline-guard pin (panel 21, MC 18/35, 4/13, 1.44 dex). The core's own scoring is
+  `scripts/generators/generate_cutover_final_exam.py` only.
+- **Legacy-only modules (retire):** smirks_engine, reaction_templates, curated_pathways, barrier_constants
+  (2 seams: HEME_*, arrhenius_rate_constant → conditions/recommend, both legacy), kinetics, results_db,
+  family_sensitivity, cantera_export, projection, projection_utils, bayesian_optimizer, pre_processor,
+  trunk_kinetics, and the harness modules pipeline, recommend, conditions, benchmark_validation, external_validation,
+  cross_validation, reporting, presentation, usability_reports, sensory, safety, lipid_oxidation, headspace,
+  matrix_correction (none imported by kinetic_core / report_html).
+- **Seams:** projection_metadata (a type, pulled through literature_runtime/benchmark_types), matrix_targets (used by
+  the literature/family registries, not by the core, which has `matrix_oav.py`), uncertainty_propagation (rewrite).
+- **Legacy-only data:** arrhenius_params.yml, refinement_surrogate_patches.json, four computational_priors sections,
+  interventions.yml, formulation_grid.yml, results/maillard_results.db, precursors.yml (core takes names raw).
+- **MC envelope after retirement:** sample the core's fitted (k, Ea) pairs and its declared assumption bands
+  (Q10, lipid fraction, PV, furanic partition, pH drift) by re-integrating `predict()` per draw; drop the
+  BARRIER_OFFSETS routing; re-point every consumer of `prediction_uncertainty.json`.
+- **Three riskiest couplings:** (1) `prediction_uncertainty.json` shared by both worlds; (2) `benchmark_validation`
+  is the legacy harness, not a neutral scorer — the panel must be re-based on the core before deletion;
+  (3) `literature_runtime` + family/matrix registries sit on legacy types.
+Consequence: "retire the second engine" = rebuild the validation harness, the envelope, the matrix/headspace
+layer and the report on the core. Owner decision on staging requested 2026-09-03.
 
 ### Original decision list (kept for the record)
 

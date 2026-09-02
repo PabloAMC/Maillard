@@ -1,6 +1,38 @@
 {
-  "generated_at": "2026-03-27",
-  "description": "Canonical registry describing the numbered chemistry families as first-class product lanes. The family_id values in this file are the canonical chemistry-family identifiers used across ingestion plans, payload metadata, reporting summaries, and validation artifacts.",
+  "summary": {
+    "family_count": 16,
+    "status_counts": {
+      "active_expansion": 6,
+      "bounded_lane": 8,
+      "first_class_core": 1,
+      "partially_encoded_high_priority": 1
+    },
+    "strategic_role_counts": {
+      "bounded_support_lane": 4,
+      "computational_closure_candidate": 5,
+      "first_class_runtime_lane": 4,
+      "guardrail_lane": 2,
+      "matrix_scope_lane": 1
+    },
+    "first_class_families": [
+      "amino_acid_sugar_core"
+    ],
+    "expansion_candidates": [
+      "lipid_oxidation_and_carbonylic_crosstalk",
+      "thiamine_fragmentation_support",
+      "nucleotide_and_ribose_support",
+      "glutathione_and_peptide_support",
+      "alternative_protein_matrix_scope",
+      "carbonyl_donor_hierarchy",
+      "off_note_and_maillard_suppression",
+      "carbohydrate_pyrolysis_and_caramelization",
+      "fermentation_pretreatment"
+    ],
+    "open_gap_families": [],
+    "recommended_next_family": "lipid_oxidation_and_carbonylic_crosstalk",
+    "policy": "expand_product_scope_by_adding_benchmark_visible_family_lanes_not_by_diluting_the_core",
+    "ingestion_policy": "beyond_amino_acid_sugar_use_the_same_runtime_contract_but_choose_family_specific_payload_types_benchmark_payloads_for_observable_panels_priors_for_transfer_and_gap_registries_for_non_closable_scope"
+  },
   "families": [
     {
       "slr_family": "01",
@@ -282,7 +314,7 @@
       "strategic_role": "computational_closure_candidate",
       "current_status": "active_expansion",
       "priority": "medium",
-      "why_it_matters": "Ascorbic acid acts as a dicarbonyl and AGE initiator at extrusion temperatures (>120°C).",
+      "why_it_matters": "Ascorbic acid acts as a dicarbonyl and AGE initiator at extrusion temperatures (>120\u00b0C).",
       "current_runtime_assets": [
         "data/research_corpus/raw/Gemini_deep_research_14.md"
       ],

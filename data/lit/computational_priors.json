@@ -1212,7 +1212,7 @@
         "date": "2026-08-27",
         "action": "confidence_tier high -> low; source_status no_verifiable_source",
         "basis": "2026-08-26 citation sweep + source recovery: the cited JAFC 44:2219 (1996) thiamine/cysteine/ribose MFT paper does not exist. The benchmark built on this reference (thiamine_cys_ribose_100C_Hofmann1996) was DELETED and rebuilt from the verified Bolton & Reineccius 1994 chapter (10.1021/bk-1994-0543.ch022) as data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json, which the model fails honestly. The same repair was applied in data/lit/benchmark_intake_registry.json and data/lit/slr_incorporation_matrix.json, where these two anchors were withdrawn as unsourced.",
-        "id_retained_because": "the id is a stable join key referenced from data/lit/deep_research_backlog.json and tests/unit/test_literature_runtime.py; renaming it would silently break those joins."
+        "id_retained_because": "the id is a stable join key referenced from results/literature/deep_research_backlog.json and tests/unit/test_literature_runtime.py; renaming it would silently break those joins."
       },
       "notes": "WITHDRAWN 2026-08-27. The two numbers below (thiamine->MFT conversion 0.021%; cysteine augments MFT 2.3-fold) came from a fabricated source and must not be used as anchors. They are retained in-file, not deleted, so the forensic record and the id join key survive; nothing in the live runtime reads either field (verified 2026-08-27: no consumer outside this file and an archived ingest script, and this entry is not the thiamine_fragmentation lane default - that is cerny_2007_thiamine_split_v1). Replacement lineage: Bolton & Reineccius 1994, 10.1021/bk-1994-0543.ch022 -> data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json."
     }
@@ -3549,7 +3549,7 @@
         "promotion_note": "Removed xTB-derived 17.88 kcal/mol; escalated to wet-lab backlog per Vía C of tasks/todo.md (active plan 2026-04-22).",
         "last_refined_at": "2026-04-21",
         "refinability_status": "wet_lab_pending",
-        "refinability_note": "Requires either: (a) hexanal H-abstraction Ea from radical-trapping literature ingestion, or (b) wet-lab measurement of hexanal suppression vs cysteine/sulfur partner concentration in oxidized-oil pre-cooking. See data/lit/deep_research_backlog.json for ResearchGate Ref 11 (lipid off-notes) ingestion."
+        "refinability_note": "Requires either: (a) hexanal H-abstraction Ea from radical-trapping literature ingestion, or (b) wet-lab measurement of hexanal suppression vs cysteine/sulfur partner concentration in oxidized-oil pre-cooking. See results/literature/deep_research_backlog.json for ResearchGate Ref 11 (lipid off-notes) ingestion."
       },
       {
         "reaction_key": "quinone_cys_michael",
@@ -3616,13 +3616,13 @@
           {
             "method": "interp+xtb_constrained_relax",
             "date": "2026-04-21",
-            "log": "data/logs/aa_ring_open_dicarbonyl_interp_recovery.log",
+            "log": "deleted with the QM lane 2026-09-01 (was data/logs/aa_ring_open_dicarbonyl_interp_recovery.log, never tracked)",
             "verdict": "minimum"
           },
           {
             "method": "xtb_ci_neb+tblite",
             "date": "2026-04-21",
-            "log": "data/logs/aa_ring_open_dicarbonyl_neb_recovery.log",
+            "log": "deleted with the QM lane 2026-09-01 (was data/logs/aa_ring_open_dicarbonyl_neb_recovery.log, never tracked)",
             "verdict": "minimum"
           }
         ]
@@ -3734,7 +3734,7 @@
         "surrogate_reaction": "Dehydroalanine plus lysine epsilon-amine Michael addition to form lysinoalanine.",
         "surrogate_assumption": "The previous xTB pair is discarded as a non-elementary placeholder; this prior assumes dehydroalanine has already formed via beta-elimination before lysine capture.",
         "surrogate_basis": [
-          "data/rmg_extensions/families/DHA_Crosslinking/rules.py",
+          "deleted with the QM/RMG lane 2026-09-01 (was data/rmg_extensions/families/DHA_Crosslinking/rules.py)",
           "data/species/toxic_markers.yml",
           "src/reaction_templates.py::_dha_competing_pathway"
         ],

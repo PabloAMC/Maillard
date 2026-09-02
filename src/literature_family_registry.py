@@ -13,13 +13,9 @@ from src.family_ingestion_plan import load_family_ingestion_plan
 BENCHMARK_INTAKE_REGISTRY_PATH = data_paths.BENCHMARK_INTAKE_REGISTRY
 PENDING_BENCHMARK_INTAKE_STATUSES = {"pending_json_payload"}
 
-_CANONICAL_FAMILY_ALIASES = {
-    "advanced_glycation_and_damage": "protein_damage_markers",
-    "microbial_fermentation_modulation": "fermentation_pretreatment",
-    "phospholipid_amine_maillard": "phospholipid_amine_sink",
-    "lipid_oxidation_crosstalk": "lipid_oxidation_and_carbonylic_crosstalk",
-    "carbohydrate_pyrolysis_caramelization": "carbohydrate_pyrolysis_and_caramelization",
-}
+# 2026-09-02: the five chemistry-family aliases that used to be normalised here were
+# rewritten to their canonical ids in the intake registry; tests/unit/test_chemistry_family_keys.py
+# fails on any non-canonical id, so no alias map is needed.
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
@@ -41,7 +37,6 @@ _FAMILY_BY_ID = {
 
 def resolve_family_descriptor(family_ref: Optional[str]) -> Dict[str, Any]:
     normalized = str(family_ref or "").strip()
-    normalized = _CANONICAL_FAMILY_ALIASES.get(normalized, normalized)
     if not normalized:
         return {}
     if normalized.isdigit():
@@ -73,16 +68,12 @@ def _apply_metadata_defaults(entry: Mapping[str, Any], defaults: Optional[Mappin
     row.update(dict(entry))
     chemistry_family = str(row.get("chemistry_family", "")).strip()
     if chemistry_family:
-        row["chemistry_family"] = _CANONICAL_FAMILY_ALIASES.get(chemistry_family, chemistry_family)
+        row["chemistry_family"] = chemistry_family
     supporting = []
     for source in [defaults or {}, entry]:
         values = source.get("supporting_families", []) if isinstance(source, Mapping) else []
         if isinstance(values, list):
-            supporting.extend(
-                _CANONICAL_FAMILY_ALIASES.get(str(item).strip(), str(item).strip())
-                for item in values
-                if str(item).strip()
-            )
+            supporting.extend(str(item).strip() for item in values if str(item).strip())
     if supporting:
         row["supporting_families"] = list(dict.fromkeys(supporting))
     observable_tags = []

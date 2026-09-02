@@ -1,327 +1,600 @@
 {
   "generated_at": "2026-03-28",
   "description": "Canonical family-aware ingestion plan for the numbered SLR corpus. This maps each family review to runtime payload types, target modules, implementation wave, and next curation action.",
-  "template_source": "data/Gemini_Deep_Research/00_framework_scaffold.md",
+  "template_source": "00_framework_scaffold.md",
   "families": [
     {
       "slr_family": "01",
       "family_id": "amino_acid_sugar_core",
       "scope_family_id": "amino_acid_sugar_core",
       "display_name": "Amino acid-sugar Maillard core",
-      "source_slr_file": "data/Gemini_Deep_Research/01_amino_acid_sugar.md",
+      "source_slr_file": "01_amino_acid_sugar.md",
       "strategic_posture": "first_class_core",
       "runtime_concept": "core_reaction_network",
-      "preferred_payload_types": ["benchmark_payload", "flavor_reference_payload"],
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload"
+      ],
       "benchmarkability_status": "already_benchmarked_core",
       "implementation_wave": 0,
       "order_in_wave": 0,
-      "target_runtime_modules": ["src/precursor_resolver.py", "src/literature_runtime.py", "src/benchmark_validation.py"],
-      "target_compounds_or_state_variables": ["2-methyl-3-furanthiol", "2-furfurylthiol", "methional", "2,5-dimethylpyrazine"],
+      "target_runtime_modules": [
+        "src/precursor_resolver.py",
+        "src/literature_runtime.py",
+        "src/benchmark_validation.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "2-methyl-3-furanthiol",
+        "2-furfurylthiol",
+        "methional",
+        "2,5-dimethylpyrazine"
+      ],
       "depends_on": [],
       "blocked_by": [],
       "lane_concept": "direct_kinetic_lane",
-      "lane_tags": ["direct_kinetic_lane"],
-      "next_curation_actions": ["Keep as the quantitative trunk and dependency map."]
+      "lane_tags": [
+        "direct_kinetic_lane"
+      ],
+      "next_curation_actions": [
+        "Keep as the quantitative trunk and dependency map."
+      ]
     },
     {
       "slr_family": "02",
       "family_id": "lipid_oxidation_and_carbonylic_crosstalk",
       "scope_family_id": "lipid_oxidation_and_carbonylic_crosstalk",
       "display_name": "Lipid oxidation and carbonylic crosstalk",
-      "source_slr_file": "data/Gemini_Deep_Research/02_lipid_oxidation.md",
+      "source_slr_file": "02_lipid_oxidation.md",
       "strategic_posture": "immediate_expansion_lane",
       "runtime_concept": "lipid_crosstalk_lane",
-      "preferred_payload_types": ["benchmark_payload", "retention_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "retention_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "dual_lane_benchmark_plus_crosstalk_prior",
       "implementation_wave": 1,
       "order_in_wave": 1,
-      "target_runtime_modules": ["src/lipid_oxidation.py", "src/literature_runtime.py"],
-      "target_compounds_or_state_variables": ["hexanal", "2-pentylfuran", "nonanal", "carbonyl_competition_factor"],
-      "depends_on": ["01"],
+      "target_runtime_modules": [
+        "src/lipid_oxidation.py",
+        "src/literature_runtime.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "hexanal",
+        "2-pentylfuran",
+        "nonanal",
+        "carbonyl_competition_factor"
+      ],
+      "depends_on": [
+        "01"
+      ],
       "blocked_by": [],
       "lane_concept": "direct_kinetic_lane",
-      "lane_tags": ["direct_kinetic_lane", "upstream_modifier"],
-      "next_curation_actions": ["Split into adverse-marker and carbonyl-competition sub-lanes."]
+      "lane_tags": [
+        "direct_kinetic_lane",
+        "upstream_modifier"
+      ],
+      "next_curation_actions": [
+        "Split into adverse-marker and carbonyl-competition sub-lanes."
+      ]
     },
     {
       "slr_family": "03",
       "family_id": "thiamine_fragmentation_support",
       "scope_family_id": "thiamine_fragmentation_support",
       "display_name": "Thiamine degradation and sulfur support",
-      "source_slr_file": "data/Gemini_Deep_Research/03_thiamine_degradation.md",
+      "source_slr_file": "03_thiamine_degradation.md",
       "strategic_posture": "high_value_support_lane",
       "runtime_concept": "thiamine_fragmentation_support",
-      "preferred_payload_types": ["computational_prior", "flavor_reference_payload"],
+      "preferred_payload_types": [
+        "computational_prior",
+        "flavor_reference_payload"
+      ],
       "benchmarkability_status": "calibration_ready_support_lane",
       "implementation_wave": 2,
       "order_in_wave": 1,
-      "target_runtime_modules": ["src/literature_runtime.py", "src/recommend.py"],
-      "target_compounds_or_state_variables": ["thiamine_availability", "2-methyl-3-furanthiol"],
-      "depends_on": ["01", "07"],
+      "target_runtime_modules": [
+        "src/literature_runtime.py",
+        "src/recommend.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "thiamine_availability",
+        "2-methyl-3-furanthiol"
+      ],
+      "depends_on": [
+        "01",
+        "07"
+      ],
       "blocked_by": [],
       "lane_concept": "upstream_modifier",
-      "lane_tags": ["upstream_modifier"],
-      "next_curation_actions": ["Model thiamine first as an availability modifier."]
+      "lane_tags": [
+        "upstream_modifier"
+      ],
+      "next_curation_actions": [
+        "Model thiamine first as an availability modifier."
+      ]
     },
     {
       "slr_family": "04",
       "family_id": "nucleotide_and_ribose_support",
       "scope_family_id": "nucleotide_and_ribose_support",
       "display_name": "Nucleotide degradation and ribose support",
-      "source_slr_file": "data/Gemini_Deep_Research/04_nucleotide_degradation.md",
+      "source_slr_file": "04_nucleotide_degradation.md",
       "strategic_posture": "high_value_support_lane",
       "runtime_concept": "nucleotide_and_ribose_support",
-      "preferred_payload_types": ["flavor_reference_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "flavor_reference_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "calibration_ready_support_lane",
       "implementation_wave": 2,
       "order_in_wave": 2,
-      "target_runtime_modules": ["src/literature_runtime.py", "src/recommend.py"],
-      "target_compounds_or_state_variables": ["IMP", "GMP", "ribose-5-phosphate"],
-      "depends_on": ["07", "10"],
+      "target_runtime_modules": [
+        "src/literature_runtime.py",
+        "src/recommend.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "IMP",
+        "GMP",
+        "ribose-5-phosphate"
+      ],
+      "depends_on": [
+        "07",
+        "10"
+      ],
       "blocked_by": [],
       "lane_concept": "upstream_modifier",
-      "lane_tags": ["upstream_modifier"],
-      "next_curation_actions": ["Encode nucleotide enrichment state variables explicitly."]
+      "lane_tags": [
+        "upstream_modifier"
+      ],
+      "next_curation_actions": [
+        "Encode nucleotide enrichment state variables explicitly."
+      ]
     },
     {
       "slr_family": "05",
       "family_id": "glutathione_and_peptide_support",
       "scope_family_id": "glutathione_and_peptide_support",
       "display_name": "Glutathione and peptide support",
-      "source_slr_file": "data/Gemini_Deep_Research/05_glutathione_peptides.md",
+      "source_slr_file": "05_glutathione_peptides.md",
       "strategic_posture": "high_value_support_lane",
       "runtime_concept": "sulfur_peptide_support",
-      "preferred_payload_types": ["computational_prior", "flavor_reference_payload"],
+      "preferred_payload_types": [
+        "computational_prior",
+        "flavor_reference_payload"
+      ],
       "benchmarkability_status": "support_lane_with_bounded_quantitative_anchors",
       "implementation_wave": 2,
       "order_in_wave": 3,
-      "target_runtime_modules": ["src/literature_runtime.py", "src/recommend.py"],
-      "target_compounds_or_state_variables": ["glutathione_support_factor", "kokumi_support_signal"],
-      "depends_on": ["01"],
+      "target_runtime_modules": [
+        "src/literature_runtime.py",
+        "src/recommend.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "glutathione_support_factor",
+        "kokumi_support_signal"
+      ],
+      "depends_on": [
+        "01"
+      ],
       "blocked_by": [],
       "lane_concept": "upstream_modifier",
-      "lane_tags": ["upstream_modifier"],
-      "next_curation_actions": ["Model peptide-bound sulfur as a support lane."]
+      "lane_tags": [
+        "upstream_modifier"
+      ],
+      "next_curation_actions": [
+        "Model peptide-bound sulfur as a support lane."
+      ]
     },
     {
       "slr_family": "06",
       "family_id": "alternative_protein_matrix_scope",
       "scope_family_id": "alternative_protein_matrix_scope",
       "display_name": "Alternative protein matrix scope",
-      "source_slr_file": "data/Gemini_Deep_Research/06_alternative_proteins.md",
+      "source_slr_file": "06_alternative_proteins.md",
       "strategic_posture": "matrix_scope_lane",
       "runtime_concept": "matrix_family_scope_extension",
-      "preferred_payload_types": ["computational_prior", "process_state_calibration"],
+      "preferred_payload_types": [
+        "computational_prior",
+        "process_state_calibration"
+      ],
       "benchmarkability_status": "mostly_directional_matrix_scope",
       "implementation_wave": 3,
       "order_in_wave": 2,
-      "target_runtime_modules": ["src/matrix_family_coverage.py", "src/matrix_prior_registry.py"],
-      "target_compounds_or_state_variables": ["matrix_family_support_posture", "sulfur_deficiency_risk"],
+      "target_runtime_modules": [
+        "src/matrix_family_coverage.py",
+        "src/matrix_prior_registry.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "matrix_family_support_posture",
+        "sulfur_deficiency_risk"
+      ],
       "depends_on": [],
       "blocked_by": [],
       "lane_concept": "matrix_scope_transfer",
-      "lane_tags": ["matrix_scope_transfer"],
-      "next_curation_actions": ["Use to extend matrix scope artifacts and bounded priors."]
+      "lane_tags": [
+        "matrix_scope_transfer"
+      ],
+      "next_curation_actions": [
+        "Use to extend matrix scope artifacts and bounded priors."
+      ]
     },
     {
       "slr_family": "07",
       "family_id": "carbonyl_donor_hierarchy",
       "scope_family_id": "carbonyl_donor_hierarchy",
       "display_name": "Reducing sugar and carbonyl donor hierarchy",
-      "source_slr_file": "data/Gemini_Deep_Research/07_reducing_sugars.md",
+      "source_slr_file": "07_reducing_sugars.md",
       "strategic_posture": "immediate_expansion_lane",
       "runtime_concept": "carbonyl_donor_hierarchy",
-      "preferred_payload_types": ["benchmark_payload", "flavor_reference_payload"],
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload"
+      ],
       "benchmarkability_status": "benchmark_ready_donor_lane",
       "implementation_wave": 1,
       "order_in_wave": 2,
-      "target_runtime_modules": ["src/precursor_resolver.py", "src/literature_runtime.py"],
-      "target_compounds_or_state_variables": ["ribose", "xylose", "glucose", "fructose"],
-      "depends_on": ["01"],
+      "target_runtime_modules": [
+        "src/precursor_resolver.py",
+        "src/literature_runtime.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "ribose",
+        "xylose",
+        "glucose",
+        "fructose"
+      ],
+      "depends_on": [
+        "01"
+      ],
       "blocked_by": [],
       "lane_concept": "direct_kinetic_lane",
-      "lane_tags": ["direct_kinetic_lane"],
-      "next_curation_actions": ["Encode donor identity as a first-class formulation variable."]
+      "lane_tags": [
+        "direct_kinetic_lane"
+      ],
+      "next_curation_actions": [
+        "Encode donor identity as a first-class formulation variable."
+      ]
     },
     {
       "slr_family": "08",
       "family_id": "off_note_and_maillard_suppression",
       "scope_family_id": "off_note_and_maillard_suppression",
       "display_name": "Plant off-notes and Maillard suppression",
-      "source_slr_file": "data/Gemini_Deep_Research/08_off_note_chemistry.md",
+      "source_slr_file": "08_off_note_chemistry.md",
       "strategic_posture": "guardrail_lane",
       "runtime_concept": "off_note_and_maillard_suppression",
-      "preferred_payload_types": ["benchmark_payload", "computational_prior", "safety_payload"],
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "computational_prior",
+        "safety_payload"
+      ],
       "benchmarkability_status": "negative_control_and_guardrail_lane",
       "implementation_wave": 1,
       "order_in_wave": 4,
-      "target_runtime_modules": ["src/literature_runtime.py", "src/safety.py"],
-      "target_compounds_or_state_variables": ["dicarbonyl_trapping_factor", "amino_group_blocking_factor"],
-      "depends_on": ["02"],
+      "target_runtime_modules": [
+        "src/literature_runtime.py",
+        "src/safety.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "dicarbonyl_trapping_factor",
+        "amino_group_blocking_factor"
+      ],
+      "depends_on": [
+        "02"
+      ],
       "blocked_by": [],
       "lane_concept": "guardrail_lane",
-      "lane_tags": ["guardrail_lane"],
-      "next_curation_actions": ["Represent inhibitor loads as family-aware priors."]
+      "lane_tags": [
+        "guardrail_lane"
+      ],
+      "next_curation_actions": [
+        "Represent inhibitor loads as family-aware priors."
+      ]
     },
     {
       "slr_family": "09",
       "family_id": "carbohydrate_pyrolysis_and_caramelization",
       "scope_family_id": "carbohydrate_pyrolysis_and_caramelization",
       "display_name": "Carbohydrate pyrolysis and caramelization",
-      "source_slr_file": "data/Gemini_Deep_Research/09_carbohydrate_degradation.md",
+      "source_slr_file": "09_carbohydrate_degradation.md",
       "strategic_posture": "failure_mode_lane",
       "runtime_concept": "carbohydrate_pyrolysis_lane",
-      "preferred_payload_types": ["benchmark_payload", "flavor_reference_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "severity_and_failure_mode_lane",
       "implementation_wave": 3,
       "order_in_wave": 1,
-      "target_runtime_modules": ["src/literature_runtime.py", "src/recommend.py"],
-      "target_compounds_or_state_variables": ["HMF", "furfural", "caramelization_severity"],
-      "depends_on": ["07"],
+      "target_runtime_modules": [
+        "src/literature_runtime.py",
+        "src/recommend.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "HMF",
+        "furfural",
+        "caramelization_severity"
+      ],
+      "depends_on": [
+        "07"
+      ],
       "blocked_by": [],
       "lane_concept": "guardrail_lane",
-      "lane_tags": ["guardrail_lane", "direct_kinetic_lane"],
-      "next_curation_actions": ["Use first as a severity and failure-mode lane."]
+      "lane_tags": [
+        "guardrail_lane",
+        "direct_kinetic_lane"
+      ],
+      "next_curation_actions": [
+        "Use first as a severity and failure-mode lane."
+      ]
     },
     {
       "slr_family": "10",
       "family_id": "fermentation_pretreatment",
       "scope_family_id": "fermentation_pretreatment",
       "display_name": "Microbial fermentation pretreatment",
-      "source_slr_file": "data/Gemini_Deep_Research/10_microbial_fermentation.md",
+      "source_slr_file": "10_microbial_fermentation.md",
       "strategic_posture": "upstream_pretreatment_lane",
       "runtime_concept": "fermentation_pretreatment_node",
-      "preferred_payload_types": ["benchmark_payload", "flavor_reference_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "flavor_reference_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "pretreatment_state_lane_with_bounded_quantitative_support",
       "implementation_wave": 1,
       "order_in_wave": 3,
-      "target_runtime_modules": ["src/literature_runtime.py", "src/recommend.py", "src/matrix_prior_registry.py"],
-      "target_compounds_or_state_variables": ["free_amino_acid_enrichment", "nucleotide_enrichment", "pretreatment_pH_shift"],
-      "depends_on": ["04"],
+      "target_runtime_modules": [
+        "src/literature_runtime.py",
+        "src/recommend.py",
+        "src/matrix_prior_registry.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "free_amino_acid_enrichment",
+        "nucleotide_enrichment",
+        "pretreatment_pH_shift"
+      ],
+      "depends_on": [
+        "04"
+      ],
       "blocked_by": [],
       "lane_concept": "upstream_modifier",
-      "lane_tags": ["upstream_modifier"],
-      "next_curation_actions": ["Implement fermentation as an upstream state modifier."]
+      "lane_tags": [
+        "upstream_modifier"
+      ],
+      "next_curation_actions": [
+        "Implement fermentation as an upstream state modifier."
+      ]
     },
     {
       "slr_family": "11",
       "family_id": "lipid_maillard_crosstalk",
       "scope_family_id": "lipid_maillard_crosstalk",
       "display_name": "Maillard/Lipid Crosstalk",
-      "source_slr_file": "data/Gemini_Deep_Research/11_maillard_lipid_crosstalk.md",
+      "source_slr_file": "11_maillard_lipid_crosstalk.md",
       "strategic_posture": "first_class_runtime_lane",
       "runtime_concept": "lipid_maillard_competition",
-      "preferred_payload_types": ["benchmark_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "benchmark_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "benchmark_linked_suppression_surface",
       "implementation_wave": 1,
       "order_in_wave": 5,
-      "target_runtime_modules": ["src/lipid_oxidation.py", "src/flavor.py"],
-      "target_compounds_or_state_variables": ["hexanal", "MDA", "4-HNE", "radical_quenching_rate"],
-      "depends_on": ["01", "02"],
+      "target_runtime_modules": [
+        "src/lipid_oxidation.py",
+        "src/sensory.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "hexanal",
+        "MDA",
+        "4-HNE",
+        "radical_quenching_rate"
+      ],
+      "depends_on": [
+        "01",
+        "02"
+      ],
       "blocked_by": [],
       "lane_concept": "computational_closure_candidate",
-      "lane_tags": ["computational_closure_candidate", "direct_kinetic_lane"],
-      "next_curation_actions": ["Implement the hexanal/MFT competition surface."]
+      "lane_tags": [
+        "computational_closure_candidate",
+        "direct_kinetic_lane"
+      ],
+      "next_curation_actions": [
+        "Implement the hexanal/MFT competition surface."
+      ]
     },
     {
       "slr_family": "12",
       "family_id": "protein_damage_markers",
       "scope_family_id": "protein_damage_markers",
       "display_name": "Protein Damage Markers",
-      "source_slr_file": "data/Gemini_Deep_Research/12_protein_damage_markers.md",
+      "source_slr_file": "12_protein_damage_markers.md",
       "strategic_posture": "first_class_runtime_lane",
       "runtime_concept": "safety_damage_lane",
-      "preferred_payload_types": ["safety_payload", "guardrail_entry"],
+      "preferred_payload_types": [
+        "safety_payload",
+        "guardrail_entry"
+      ],
       "benchmarkability_status": "guardrail_severity_surface",
       "implementation_wave": 1,
       "order_in_wave": 6,
-      "target_runtime_modules": ["src/safety.py", "src/extrusion_model.py"],
-      "target_compounds_or_state_variables": ["CML", "CEL", "furosine", "lysinoalanine"],
-      "depends_on": ["01"],
+      "target_runtime_modules": [
+        "src/safety.py",
+        "src/extrusion.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "CML",
+        "CEL",
+        "furosine",
+        "lysinoalanine"
+      ],
+      "depends_on": [
+        "01"
+      ],
       "blocked_by": [],
       "lane_concept": "guardrail_lane",
-      "lane_tags": ["guardrail_lane", "computational_closure_candidate"],
-      "next_curation_actions": ["Integrate AGE/ALE kinetics into the safety module."]
+      "lane_tags": [
+        "guardrail_lane",
+        "computational_closure_candidate"
+      ],
+      "next_curation_actions": [
+        "Integrate AGE/ALE kinetics into the safety module."
+      ]
     },
     {
       "slr_family": "13",
       "family_id": "polyphenol_amino_capping",
       "scope_family_id": "polyphenol_amino_capping",
       "display_name": "Polyphenol-Amino Capping",
-      "source_slr_file": "data/Gemini_Deep_Research/13_polyphenol_amino_capping.md",
+      "source_slr_file": "13_polyphenol_amino_capping.md",
       "strategic_posture": "upstream_precursor_sink",
       "runtime_concept": "precursor_depletion_sink",
-      "preferred_payload_types": ["upstream_modifier_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "upstream_modifier_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "mechanistic_modifier",
       "implementation_wave": 1,
       "order_in_wave": 7,
-      "target_runtime_modules": ["src/precursor_resolver.py", "src/literature_runtime.py"],
-      "target_compounds_or_state_variables": ["quinone_budget", "cysteine_depletion_factor"],
-      "depends_on": ["01"],
+      "target_runtime_modules": [
+        "src/precursor_resolver.py",
+        "src/literature_runtime.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "quinone_budget",
+        "cysteine_depletion_factor"
+      ],
+      "depends_on": [
+        "01"
+      ],
       "blocked_by": [],
       "lane_concept": "upstream_modifier",
-      "lane_tags": ["upstream_modifier", "computational_closure_candidate"],
-      "next_curation_actions": ["Implement the pH-dependent quinone-thiol kinetics."]
+      "lane_tags": [
+        "upstream_modifier",
+        "computational_closure_candidate"
+      ],
+      "next_curation_actions": [
+        "Implement the pH-dependent quinone-thiol kinetics."
+      ]
     },
     {
       "slr_family": "14",
       "family_id": "ascorbic_acid_maillard",
       "scope_family_id": "ascorbic_acid_maillard",
       "display_name": "Ascorbic Acid Maillard",
-      "source_slr_file": "data/Gemini_Deep_Research/14_ascorbic_acid_maillard.md",
+      "source_slr_file": "14_ascorbic_acid_maillard.md",
       "strategic_posture": "bounded_upstream_source",
       "runtime_concept": "stealth_dicarbonyl_source",
-      "preferred_payload_types": ["bounded_source_term_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "bounded_source_term_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "bounded_source_term",
       "implementation_wave": 2,
       "order_in_wave": 4,
-      "target_runtime_modules": ["src/precursor_resolver.py", "src/flavor.py", "src/safety.py"],
-      "target_compounds_or_state_variables": ["ascorbic_acid_loss", "3-deoxythreosone", "pentosidine_load"],
-      "depends_on": ["01", "07", "12"],
+      "target_runtime_modules": [
+        "src/precursor_resolver.py",
+        "src/sensory.py",
+        "src/safety.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "ascorbic_acid_loss",
+        "3-deoxythreosone",
+        "pentosidine_load"
+      ],
+      "depends_on": [
+        "01",
+        "07",
+        "12"
+      ],
       "blocked_by": [],
       "lane_concept": "upstream_modifier",
-      "lane_tags": ["upstream_modifier", "computational_closure_candidate"],
-      "next_curation_actions": ["Implement the biphasic AA functionality."]
+      "lane_tags": [
+        "upstream_modifier",
+        "computational_closure_candidate"
+      ],
+      "next_curation_actions": [
+        "Implement the biphasic AA functionality."
+      ]
     },
     {
       "slr_family": "15",
       "family_id": "phospholipid_amine_sink",
       "scope_family_id": "phospholipid_amine_sink",
       "display_name": "PE Stealth Sugar Sink",
-      "source_slr_file": "data/Gemini_Deep_Research/15_phospholipid_amine_maillard.md",
+      "source_slr_file": "15_phospholipid_amine_maillard.md",
       "strategic_posture": "upstream_precursor_sink",
       "runtime_concept": "sugar_depletion_sink",
-      "preferred_payload_types": ["upstream_modifier_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "upstream_modifier_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "mechanistic_to_bounded_closure",
       "implementation_wave": 2,
       "order_in_wave": 5,
-      "target_runtime_modules": ["src/precursor_resolver.py", "src/flavor.py"],
-      "target_compounds_or_state_variables": ["PE_glycation_fraction", "available_sugar_subtraction"],
-      "depends_on": ["01", "07"],
+      "target_runtime_modules": [
+        "src/precursor_resolver.py",
+        "src/sensory.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "PE_glycation_fraction",
+        "available_sugar_subtraction"
+      ],
+      "depends_on": [
+        "01",
+        "07"
+      ],
       "blocked_by": [],
       "lane_concept": "upstream_modifier",
-      "lane_tags": ["upstream_modifier", "computational_closure_candidate"],
-      "next_curation_actions": ["Implement the 1:2 sugar-PE stoichiometry multiplier."]
+      "lane_tags": [
+        "upstream_modifier",
+        "computational_closure_candidate"
+      ],
+      "next_curation_actions": [
+        "Implement the 1:2 sugar-PE stoichiometry multiplier."
+      ]
     },
     {
       "slr_family": "16",
       "family_id": "melanoidin_polymerization",
       "scope_family_id": "melanoidin_polymerization",
       "display_name": "Melanoidin Polymerization",
-      "source_slr_file": "data/Gemini_Deep_Research/16_melanoidin_polymerization.md",
+      "source_slr_file": "16_melanoidin_polymerization.md",
       "strategic_posture": "trapping_burden_modifier",
       "runtime_concept": "matrix_trapping_node",
-      "preferred_payload_types": ["trapping_burden_modifier_payload", "computational_prior"],
+      "preferred_payload_types": [
+        "trapping_burden_modifier_payload",
+        "computational_prior"
+      ],
       "benchmarkability_status": "bounded_trapping_modifier",
       "implementation_wave": 2,
       "order_in_wave": 6,
-      "target_runtime_modules": ["src/extrusion_model.py", "src/flavor.py"],
-      "target_compounds_or_state_variables": ["melanoidin_mass", "TH_scavenging_factor"],
-      "depends_on": ["01", "12"],
+      "target_runtime_modules": [
+        "src/extrusion.py",
+        "src/sensory.py"
+      ],
+      "target_compounds_or_state_variables": [
+        "melanoidin_mass",
+        "TH_scavenging_factor"
+      ],
+      "depends_on": [
+        "01",
+        "12"
+      ],
       "blocked_by": [],
       "lane_concept": "guardrail_lane",
-      "lane_tags": ["guardrail_lane", "computational_closure_candidate"],
-      "next_curation_actions": ["Implement pseudo-zero-order melanoidin accumulation."]
+      "lane_tags": [
+        "guardrail_lane",
+        "computational_closure_candidate"
+      ],
+      "next_curation_actions": [
+        "Implement pseudo-zero-order melanoidin accumulation."
+      ]
     }
-  ]
+  ],
+  "source_slr_file_note": "`source_slr_file` is the JOIN KEY into results/literature/deep_research_backlog.json (its items' `files`), not a live path: the NN_<topic>.md documents were the corpus file names when the ledger was mined and several no longer exist under that name (the raw dumps are data/research_corpus/raw/Gemini_deep_research_NN.md). Recorded 2026-09-03."
 }

@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "2026-04-05-runtime-first-batch-03",
+  "batch_label": "Batch 03",
+  "source": "results/literature/deep_research_backlog.json",
+  "selection_policy": "Select only Deep Research citations still marked BACKLOG and stage them into non-benchmark runtime lanes: process_state_calibration, safety_reference, and computational_prior. Exclude anything already landed in runtime registries, already runtime-bound, or benchmark-first.",
+  "selected_candidates": [],
+  "excluded_candidates": [
+    {
+      "citation": "Ordoudi et al. (2014 / PMC12484514)",
+      "reason": "already_landed_in_runtime_registry"
+    },
+    {
+      "citation": "Hrncirik & Zeelenberg (2014)",
+      "reason": "already_landed_in_runtime_registry"
+    },
+    {
+      "citation": "Aliani & Farmer (2005)",
+      "reason": "already_landed_in_runtime_registry"
+    },
+    {
+      "citation": "Blank, Devaud & Grosch (2003)",
+      "reason": "already_runtime_bound",
+      "registry_id": "blank_devaud_grosch_2003_g6p_hdmf_prior"
+    },
+    {
+      "citation": "Glomb & Monnier (1995)",
+      "reason": "already_landed_in_runtime_registry"
+    },
+    {
+      "citation": "Hidalgo & Zamora (2004)",
+      "reason": "already_landed_in_runtime_registry"
+    }
+  ],
+  "prepared_next_batch": {
+    "batch_id": "",
+    "batch_label": "",
+    "candidates": [],
+    "summary": {
+      "candidate_count": 0,
+      "process_state_calibration_count": 0,
+      "safety_reference_count": 0,
+      "computational_prior_count": 0
+    }
+  },
+  "summary": {
+    "selected_candidate_count": 0,
+    "process_state_calibration_count": 0,
+    "safety_reference_count": 0,
+    "computational_prior_count": 0,
+    "landed_runtime_citation_count": 5,
+    "excluded_candidate_count": 6,
+    "themes": {}
+  }
+}
