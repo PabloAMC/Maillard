@@ -10,6 +10,21 @@
     "strict_ready": 0,
     "total": 21
   },
+  "core_panel": {
+    "available": true,
+    "out_of_sample_rows": 40,
+    "out_of_sample_within_band": 4,
+    "pass_band_level": 3.0,
+    "rows": 49,
+    "scored": 32,
+    "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
+    "strict_ready": 1,
+    "strict_ready_ids": [
+      "thiamine_cys_glucose_120C_Bolton1994"
+    ],
+    "total": 40,
+    "within_band": 8
+  },
   "directional": {
     "categories": {
       "additive_cysteine": [
@@ -298,6 +313,13 @@
       "evidence": "0/21 strict-ready",
       "system_class": "the in-panel benchmarks themselves",
       "verdict": "do-not-use"
+    },
+    {
+      "basis": "recomputed live on the kinetic core; the lane that replaces the legacy one above",
+      "claim_type": "Any claim of benchmark-grade agreement (kinetic core, retirement B3)",
+      "evidence": "1/40 strict-ready (thiamine_cys_glucose_120C_Bolton1994); 8/49 rows within 3x, out-of-sample 4/40",
+      "system_class": "the union panel: trust loop + hold-outs + matrix bundles",
+      "verdict": "caution"
     },
     {
       "basis": "this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is",

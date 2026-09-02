@@ -685,8 +685,23 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
         regenerated (was stale; 3/34 within band; the README's "42.23x paired" prose is B4's).
       * Verification: py_compile + pyflakes clean; five gates PASS; integration+scientific 418 + 2 xfail;
         unit+scripts 1389.
-- [ ] B4 publish core numbers next to legacy for one release, re-pin README / guards / model card (numbers move:
-      panel 40 not 21, roles 40/0/0, strict-ready 1, envelope 7/25 & 6/23, exam 3/34).
+- [x] B4 publish core numbers next to legacy for one release — DONE 2026-09-03.
+      * README: the exam table/prose re-pinned to the regenerated artifact (3/34 within 3x; paired 24.78x vs 10.86x,
+        "2.3x worse", was 42.23x / "3.9x worse" from the B7 scoring; trajectory row added for the B8 re-score;
+        sulfur family 1/10 median 12.22x, ladder median 122.5x); NEW subsection "The core scored on its own" with the
+        legacy-vs-core table (panel 21 vs 40; roles 14/5/2 vs 40/0/0; strict-ready 0/23 vs 1 of 40 = Bolton 1994;
+        90 % CI coverage 4/13 vs 7 of 25 evaluable, 6 of 23 out-of-sample, 24 sulfur rows not evaluable) and the
+        three disclosures (sulfur fit read 8 panel rows incl. the xylose hold-out; sulfur has no uncertainty;
+        headspace bands gated by quantification method). AUDIT.md: one dated row.
+      * Model card: `collect_core_panel()` (recomputed live, ~15 s) and a "kinetic core" validity-domain cell beside
+        the legacy strict-ready cell; README block regenerated.
+      * Guards: `tests/scientific/test_core_headline_guards.py` pins the core artifacts (scorecard recomputed live
+        and diffed against the tracked file — the freshness check the exam lacked; envelope and exam read tracked)
+        and the README/AUDIT sentences that quote them. Legacy guards untouched: both sets hold for this release.
+      * Deliberately NOT done here: the calibration badge (line 6), the "When to trust" table and the legacy headline
+        sections still describe the legacy lane — they go with it at B5.
+      * Verification: five gates PASS; `generate_model_card.py --check` clean; unit+scripts 1389; integration+scientific
+        426 + 2 xfail (the 8 core guards included).
 - [ ] B5 delete the legacy engine and its harness.
 - [ ] B6 (owner request 2026-09-03, not urgent; AFTER B5 so the audit covers the tests that survive): test-suite
       design audit — are the tests well designed, which files should be restructured for coverage, and which tests

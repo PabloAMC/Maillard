@@ -912,17 +912,17 @@ direction of travel is the finding:
 | | core | old lane |
 | --- | --- | --- |
 | points answered | **34 of 40** (6 declared out of envelope) | 39 of 40 |
-| within 3x | **4 / 34** | 7 / 39 |
-| **paired median fold error** (the 33 points both answer) | **42.23x** | **10.86x** |
-| geometric-mean fold, same 33 points | **45.02x** | **13.14x** |
+| within 3x | **3 / 34** | 7 / 39 |
+| **paired median fold error** (the 33 points both answer) | **24.78x** | **10.86x** |
+| geometric-mean fold, same 33 points | **33.08x** | **13.14x** |
 | worst | **33 392x** | 2 748x |
 
-**Read the paired row: on the 33 points both lanes answer, the core is 3.9x WORSE on median
-accuracy than the lane it replaces** (42.23x vs 10.86x — the exam's own wording is "about 3.887x
-worse"). At the B5 cutover that gap was 2x, on 23 paired points. **It has roughly doubled, and it
-doubled because the core stopped refusing.** The pre-registration allowed for the core losing this
-comparison, so the sign is not a surprise; the size is worse than it was, and that is the first
-thing to know.
+**Read the paired row: on the 33 points both lanes answer, the core is 2.3x WORSE on median
+accuracy than the lane it replaces** (24.78x vs 10.86x — the exam's own wording is "about 2.281x
+worse"). At the B5 cutover that gap was 2x, on 23 paired points; at the B7 scoring it had grown to
+3.9x (42.23x), **because the core stopped refusing**; the B8 sulfur refit (re-scored 2026-09-03)
+brought it back to 2.3x. The pre-registration allowed for the core losing this comparison, so the
+sign is not a surprise; the size is the first thing to know.
 
 **The refusal count fell 17 → 13 → 6, and the cost of each step is measurable** (B6 baseline,
 B7 baseline and the current exam are all tracked artifacts):
@@ -931,19 +931,20 @@ B7 baseline and the current exam are all tracked artifacts):
 | --- | ---: | ---: | ---: | ---: | ---: |
 | pre-B6 | 17 | 23 | 3 | 50.13x | 648x |
 | pre-B7 (B6's lipid lane wired) | 13 | 27 | 3 | 50.13x | **33 392x** |
-| current (B7's furanic channel wired) | **6** | **34** | **4** | **40.23x** | 33 392x |
+| B7's furanic channel wired | 6 | 34 | 4 | 40.23x | 33 392x |
+| current (B8 sulfur refit; re-scored 2026-09-03) | **6** | **34** | **3** | **19.08x** | 33 392x |
 
 **B6 and B7 pull in opposite directions and the honest reading is that only one of them paid.**
 B6's four new lipid answers are the whole of the 648x → 33 392x jump in the worst point: two of
 them are 40 °C / 10 min rows scored against an isolate's *accumulated storage* oxidation, which
 the lane's own declared no-formation-during-heating gap says it cannot make. B7's seven new
 furanic answers went the other way — median 50.13x → 40.23x, geometric mean 60.96x → 43.29x, and
-the in-band count up for the first time since the cutover (3 → 4). A refusal converted into a bad number costs the
+the in-band count up for the first time since the cutover (3 → 4; back to 3 at the B8 re-score). A refusal converted into a bad number costs the
 paired median; a refusal converted into a defensible number buys it back.
 
 **So: does "what the cutover buys is the refusals" still hold at 6?** Much more weakly, and the
 sentence should not be read the way it was written. At 17 refusals out of 40 the core was
-declining 42% of the exam and the trade was real. At 6 it declines 15%, while being 3.9x worse
+declining 42% of the exam and the trade was real. At 6 it declines 15%, while being 2.3x worse
 than the lane it replaced on everything it does answer. What survives of the argument is not the
 *count* but the *kind*: every remaining refusal names a specific unmeasured quantity (see the list
 above), and the failures that remain are localised to named lanes and named constants rather than
@@ -952,17 +953,17 @@ smeared across one screening heuristic. That is still worth something. It is not
 
 The specifics (all from `results/validation/cutover_final_exam.md`):
 
-- **Sulfur at 145 °C is still the core's best family: 2/10 within 3x**, median 11.48x, where the
-  old lane scores **0/10** on the same points and misses by up to 506x. This is down from the
-  4/10 this section reported at B5 — the two flagship rows moved the wrong way, xylose FFT from
-  1.14x to **3.076x (now a FAIL)** and xylose MFT from 1.17x to **2.376x (still a pass, but only
-  just)**. The family beats the old lane on median and loses to its own previous self.
-- **Sulfur on the low-temperature ladder is 0/8, median 193.5x.** The temperature axis itself is
+- **Sulfur at 145 °C is still the core's best family: 1/10 within 3x**, median 12.22x, where the
+  old lane scores **0/10** on the same points (median 13.77x). This is down from the 4/10 this
+  section reported at B5 — xylose FFT sits at **2.80x (a pass)** and xylose MFT at **3.68x (a
+  FAIL)**. And the pass is not out-of-sample: the sulfur fit read the xylose pH-5 row (see the
+  scorecard below). The family beats the old lane on median and loses to its own previous self.
+- **Sulfur on the low-temperature ladder is 0/8, median 122.5x.** The temperature axis itself is
   sound — at a fixed hold, product rises with temperature as it should. The failure is on the
   *time* axis: Yiltirak's protocol compensates lower temperature with longer holds, and over a 4 h
   hold at 100 °C the core accumulates thiol its sinks never remove. **The mechanism first blamed
   for this — B2.1's no-activation-energy consumption policy — has since been fixed** (B2.2 gave
-  the decay lumps their own barrier families, B2.3 refit them), so the residual 193.5x is no
+  the decay lumps their own barrier families, B2.3 refit them), so the residual 122.5x is no
   longer attributable to it and is currently unexplained.
 - **The acrylamide lane has the time shape inverted** — Chang measures acrylamide rising 28 → 1459
   ppb between 10 and 30 min; the core predicts it falling **6750 → 4031**. Its single in-band
@@ -984,6 +985,45 @@ the `water` threshold matrix. The fourth was found after the exam, on the CLI co
 (which the exam does not use, so no exam number is affected): `compare_formulations` returns its
 ratio under `ratio_a_over_b`, and the renderer was looking for `ratio` — so the core lane's
 *primary* output, per-compound ratios, rendered as a dash for every compound.
+
+**The core scored on its own — retirement steps B2–B3 (2026-09-03).** The legacy SMIRKS lane is
+being retired, and until now every headline above was computed *by its harness*. Two new artifacts
+score the kinetic core directly on the union panel — the 19 trust-loop bundles that carry a
+measurement, the 17 `maillard_path` hold-outs and the 4 external matrix bundles, 40 in all — through
+one bundle → formulation mapping (`src/kinetic_core/panel.py`), in the harness's own vocabulary:
+[`core_panel_scores.md`](results/validation/core_panel_scores.md) (points, per-bundle contracts,
+strict-ready) and
+[`core_prediction_uncertainty.md`](results/validation/core_prediction_uncertainty.md) (a 200-draw
+Monte-Carlo envelope on the core's *own* fitted coordinates and declared bands). Side by side with
+the legacy numbers this section still publishes:
+
+| | legacy lane (this README's headlines) | kinetic core (B3 scorecard) |
+| --- | --- | --- |
+| panel | 21 benchmarks (non-recursive; synthetic snapshots included) | **40** bundles, 32 answered, 49 rows (synthetic snapshots off the panel) |
+| evidence-role split | 14 predictive / 5 fit-recovery / 2 synthetic | 40 predictive / 0 / 0 — the core never fitted the rows the legacy factors did |
+| rows within 3x | — (not the legacy metric) | **8 of 49**; **out-of-sample 4 of 40** (median 31x) |
+| strict-ready (contract pass, PRIMARY, free precursor) | **0/23** | **1 of 40** — `thiamine_cys_glucose_120C_Bolton1994`, 1.34x under the bundle's own 3x contract |
+| literature rows inside the 90% CI | 4/13 evaluable (1.44 dex) | **7 of 25** evaluable (0.94 dex); **6 of 23** out-of-sample; **24 sulfur rows not evaluable** |
+| the exam (above) | 7/39 within 3x | 3 / 34 within 3x, paired 24.78x vs 10.86x |
+
+Three things the scorecard found that the legacy harness could not see, all now declared in
+`src/kinetic_core/fit_targets.py` and printed on every row they touch:
+
+- **The sulfur fit read eight panel rows.** The B2–B8 sulfur calibration (62 rows, 23 free
+  parameters) used the Hofmann 1998 Table 1 pH-5 rows — ribose, glucose, fructose *and xylose* —
+  plus five fed-intermediate step rows. The xylose row is on the **hold-out** panel. By the
+  repository's leverage rule (0.37 free parameters per row, below 0.5) these rows stay in the
+  counts, annotated `in_core_fit`; the out-of-sample line above is the count without them.
+- **The sulfur lane has no uncertainty.** Its fit report carries no parameter covariance, so the
+  envelope samples nothing on it; 24 of the 49 rows are therefore *not evaluable* rather than
+  misses. A Laplace covariance at the B8 optimum is the next step, not a wider prior.
+- **The K_aw and HS-SPME bands are headspace facts.** The envelope applies them only to rows the
+  bundle declares as headspace-quantified (2), never to isotope-dilution or HPLC values (37); ten
+  bundles declare no method and get them by default, and say so.
+
+The legacy numbers stay on this page for one release so the two can be read together; the
+retirement plan (`tasks/data_restructure_plan.md`, "Retirement, staged") deletes the legacy lane,
+its harness and its headlines next.
 
 <!-- BEGIN GENERATED: model-card -->
 
@@ -1011,6 +1051,7 @@ ratio under `ratio_a_over_b`, and the renderer was looking for `ratio` — so th
 | Ordering of two compounds in one system | free precursor | 8/12 pairs correct<br/><sub>measured on the hold-out, independently of the panel</sub> | caution |
 | Response direction across a condition series | free precursor | 3/6 correct<br/><sub>the sulfur temperature dependence is inverted and acrylamide is ~40x under-responsive in time</sub> | **do-not-use** |
 | Any claim of benchmark-grade agreement | the in-panel benchmarks themselves | 0/21 strict-ready<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
+| Any claim of benchmark-grade agreement (kinetic core, retirement B3) | the union panel: trust loop + hold-outs + matrix bundles | 1/40 strict-ready (thiamine_cys_glucose_120C_Bolton1994); 8/49 rows within 3x, out-of-sample 4/40<br/><sub>recomputed live on the kinetic core; the lane that replaces the legacy one above</sub> | caution |
 | Which experiment to run next (value of information) | any system the uncertainty panel covers | every ranked row is a measured model failure<br/><sub>this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is</sub> | **trust** |
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.

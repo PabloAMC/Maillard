@@ -230,6 +230,32 @@ def collect_benchmark_panel() -> Dict[str, Any]:
     }
 
 
+def collect_core_panel() -> Dict[str, Any]:
+    """The kinetic core scored on the union panel (retirement step B3), recomputed live.
+
+    ``results/validation/core_panel_scores.json`` is tracked, but the card recomputes (about
+    15 s) for the same reason ``collect_benchmark_panel`` does: a number the card prints must
+    be one the card can stand behind on a fresh clone.
+    """
+    from src.kinetic_core.scoring import score_panel
+
+    payload = score_panel()
+    s = payload["summary"]
+    return {
+        "available": True,
+        "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
+        "total": s["panel_benchmark_count"],
+        "scored": s["scored_benchmark_count"],
+        "rows": s["matched_compound_count"],
+        "within_band": s["within_band_count"],
+        "out_of_sample_within_band": s["out_of_sample"]["within_band"],
+        "out_of_sample_rows": s["out_of_sample"]["rows"],
+        "strict_ready": len(s["strict_ready"]),
+        "strict_ready_ids": list(s["strict_ready"]),
+        "pass_band_level": payload["pass_band_level"],
+    }
+
+
 def collect_no_verifiable_source_census() -> Dict[str, Any]:
     """Recount the census over tracked data files.
 
@@ -420,6 +446,7 @@ def build_model_card(*, run_gate_checks: bool = True) -> Dict[str, Any]:
         "matrix_holdout": collect_matrix_holdout(),
         "observability_modes": collect_observability_modes(),
         "benchmark_panel": collect_benchmark_panel(),
+        "core_panel": collect_core_panel(),
         "no_verifiable_source": collect_no_verifiable_source_census(),
         "sulfur_anchor": collect_sulfur_anchor_status(),
         "gates": run_gates() if run_gate_checks else [],
@@ -666,6 +693,21 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
                 f"{panel['strict_ready']}/{panel['total']} strict-ready",
                 VERDICT_DO_NOT_USE if not panel["strict_ready"] else VERDICT_CAUTION,
                 "recomputed live; strict-ready is the repository's own passing bar",
+            )
+        )
+
+    core = card.get("core_panel") or {}
+    if core.get("available"):
+        ids = ", ".join(core.get("strict_ready_ids") or []) or "none"
+        cells.append(
+            DomainCell(
+                "Any claim of benchmark-grade agreement (kinetic core, retirement B3)",
+                "the union panel: trust loop + hold-outs + matrix bundles",
+                f"{core['strict_ready']}/{core['total']} strict-ready ({ids}); "
+                f"{core['within_band']}/{core['rows']} rows within {core['pass_band_level']:.0f}x, "
+                f"out-of-sample {core['out_of_sample_within_band']}/{core['out_of_sample_rows']}",
+                VERDICT_DO_NOT_USE if not core["strict_ready"] else VERDICT_CAUTION,
+                "recomputed live on the kinetic core; the lane that replaces the legacy one above",
             )
         )
 
