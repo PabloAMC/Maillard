@@ -586,7 +586,7 @@ Consequence: "retire the second engine" = rebuild the validation harness, the en
 layer and the report on the core. Owner decision on staging requested 2026-09-03.
 
 ### Retirement, staged (option B) — execution log
-- [x] B1a (2026-09-03, staged): `src/curated_pathways.py` (the hand-maintained mirror of the SMIRKS chemistry),
+- [x] B1a (2026-09-03, commit `0112107`; unit+scripts 1338, integration+scientific 418 green): `src/curated_pathways.py` (the hand-maintained mirror of the SMIRKS chemistry),
       `scripts/generate_reaction_network.py` (drew it), `scripts/reproduce_use_cases.py` (legacy demo),
       `tests/unit/test_data_integrity.py` (atom balance of the mirror) deleted; two soundness tests trimmed. The
       Bayesian optimiser is deferred: its helpers are used by the front-door UX tests and it dies with `pipeline.py`.
@@ -596,7 +596,7 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
       `artifact_status: quarantined` and `deep_research_tracker` no longer counts them as runtime-bound (the corrected
       path had made them look live); the `reaction_templates` ↔ `smirks_engine` import cycle is broken with a lazy
       accessor (it only resolved when `smirks_engine` happened to be imported first).
-- [ ] B2 core Monte-Carlo envelope — DESIGN SETTLED 2026-09-03 (study in the session record):
+- [x] B2 core Monte-Carlo envelope — DESIGN SETTLED 2026-09-03; BUILT AND VERIFIED 2026-09-03 (execution log below the design):
       * `predict(spec, targets, parameters=...)` already accepts an operative-parameter override; add a `CoreDraw`
         (maillard overrides, Q10, lipid-fraction and PV scales, furanone partition Ea, pH drift) and
         `size_declared_bands=False` so a draw does not double-count the corner re-integrations; add
@@ -622,6 +622,40 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
       * Delete rather than port: `uncertainty_propagation.py` sampling, `matrix_recalibration.py`, the MC sections of
         `external_validation.py` and `data_ingest.py`, `pipeline.build_formulation_uncertainty_envelopes`.
       * Effort: ~2 sessions (+1 for the B8 Laplace covariance and the precursor aliases).
+      * EXECUTION LOG (2026-09-03). Files: `src/kinetic_core/engine.py` (`CoreDraw`, `frozen_parameters(lane)`,
+        `core_parameters(lane, frozen=)`, `predict(..., draw=, size_declared_bands=)`, lipid lane takes q10/scales
+        as arguments, `corners=False`); `src/kinetic_core/panel.py` (THE bundle→spec mapping, lifted out of the exam
+        generator, plus panel membership and `quantification_family`); `src/kinetic_core/uncertainty.py` (priors
+        table, sampler, `propagate_panel`, artifact + markdown); `scripts/generators/generate_core_prediction_uncertainty.py`;
+        `tests/unit/test_kinetic_core_uncertainty.py` (33 tests). The exam generator now imports from `panel.py`
+        and its JSON is identical to HEAD's code output (checked in a detached worktree).
+      * DEVIATION FROM THE DESIGN, deliberate: the K_aw (±0.5 dex) and HS-SPME same-sample dispersion (10–23×)
+        bands are facts about a HEADSPACE number. The first build multiplied every ppb row by them, which put a
+        near-constant 1.33-dex width on SIDA-extracted thiols and HPLC/LC-MS acrylamide and HMF (nothing in those
+        numbers passed through an air/water partition or a fibre). Now gated by the bundle's own
+        `content_verification.quantification_class`: headspace → applied; extraction (SIDA, HPLC-UV, LC-MS/MS,
+        internal-standard GC/MS of an extract) → not applied; undeclared → applied, and the row/summary say so.
+        Rows: headspace 2, extraction 37, undeclared 10 (bundles: acrylamide_spi_extrusion_130C_ACSRef3,
+        cys_ribose_140C_Hofmann1998, li_2026, liu_2023, pea/soy PratapSingh2021, Trikusuma2019, resconi_2023,
+        Bolton1994, Cerny2008 — declaring their `quantification_class` is a curated-data task for B4).
+      * RESULT `results/validation/core_prediction_uncertainty.{json,md}` (n=200, seed 0): 32/40 panel benchmarks
+        answered, 49 rows, 18 refused; honest literature coverage **5/20 (0.25), median width 0.94 dex**,
+        24 rows NOT EVALUABLE (sulfur rows quantified by extraction: the sulfur lane has no sampled uncertainty and
+        does not respond to the sampled B1 pairs — width ~1e-6 dex), 5 fitted rows excluded. Per panel:
+        external_matrix 2/4 (width 2.10), maillard_path_holdout 1/11 (19 n.e.), trust_loop 4/10 (5 n.e.).
+        Mixed-population 7/49. Legacy artifact for comparison: 4/13 (unchanged, untouched until B4). The honest
+        reading: the core's envelope is EVALUABLE on the acrylamide, trunk and lipid lanes only; sulfur needs the
+        B8 Laplace covariance before any sulfur coverage number means anything.
+      * Timing: n=50 single worker 471 s; n=200 with `--workers 4` 2290 s wall while both test tiers ran alongside
+        (user CPU 29 min). Result is independent of the worker count (per-draw `SeedSequence.spawn`).
+      * Verification: py_compile + pyflakes clean; five gates PASS; unit+scripts 1371, integration+scientific
+        418 + 2 xfail. README, headline guards, legacy `prediction_uncertainty.json` and the model card untouched.
+      * FOUND IN PASSING: the tracked `results/validation/cutover_final_exam.json` was already stale before B2 —
+        HEAD's code gives 3/34 core rows within band, the artifact says 4/34 (four MFT/FFT sulfur rows moved with an
+        earlier fit-report/data change). Regenerate at B4 with the re-pin.
+      * B5 NOTE: `uncertainty.py` still imports `benchmark_evidence_role`, `benchmark_signal_origin`,
+        `get_benchmark_metadata` from `src/benchmark_validation.py`; those three helpers must move to a core-side
+        metadata module before the legacy harness is deleted.
 - [ ] B3 core scoring of the 21-file panel + hold-outs. B4 publish core numbers next to legacy for one release, re-pin.
 - [ ] B5 delete the legacy engine and its harness.
 

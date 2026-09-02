@@ -50,6 +50,21 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import data_paths
+# RETIREMENT STEP B2. The bundle -> core-spec mapping (spec, buffer, measured
+# value, native-unit conversion, the four shared rows) is lifted into
+# src/kinetic_core/panel.py so that this exam and the core Monte-Carlo
+# envelope (src/kinetic_core/uncertainty.py) read a bundle through ONE code
+# path. The private names below are kept so this module's own callers and
+# the B2.4/B8 report generators are unchanged.
+from src.kinetic_core.panel import (  # noqa: E402
+    RATIO_UNIT_FACTORS,
+    SHARED_WITH_HOLDOUT_PANEL,
+    buffer_from_bundle,
+    core_native_value as _core_native_value,
+    core_spec as _core_spec,
+    limiting_precursor_molar as _limiting_precursor_molar,
+    measured_value as _measured_value,
+)
 
 EXTERNAL_DIR = data_paths.EXTERNAL_VALIDATION_DIR
 MAILLARD_PATH_DIR = EXTERNAL_DIR / "maillard_path"
@@ -61,10 +76,6 @@ DEFAULT_BASENAME = "cutover_final_exam"
 PASS_BAND_LEVEL = 3.0
 
 PPB_CONVERSION_FACTOR = 1.0e6
-RATIO_UNIT_FACTORS = {
-    "mol_percent": 100.0,
-    "umol_per_mol_limiting_precursor": 1.0e6,
-}
 
 #: Bundle -> family, for the pre-registration's per-family expectations.
 FAMILIES = (
@@ -88,29 +99,8 @@ B2_1_RESCORED = {
 }
 
 
-#: WAVE B2.4 -- THE FOUR SHARED ROWS, DECLARED.
-#:
-#: D1's reconciliation sec. 5 established that four of this exam's 23 answered
-#: points are not merely analogous to four rows of the B2.1/B2.2/B2.3 hold-out
-#: panel -- they are THE SAME MEASUREMENTS. Hofmann & Schieberle 1998's ribose +
-#: cysteine pots at 145 C / 20 min, pH 3 and pH 7, scored once here in fold
-#: error and once there against a 3x band. The panel's `hofmann_ribose_pH7_FFT`
-#: reads 0.00200x and this exam reads 498.99x: the same number, inverted.
-#:
-#: Consequence, and the reason this table exists: THE EXAM AND THE PANEL ARE NOT
-#: INDEPENDENT EVIDENCE. Anyone who reads "the exam says X and the panel agrees"
-#: is, on these four points, reading one measurement twice. It is declared here
-#: and in the panel artifact so the double-counting is visible in both places.
-SHARED_WITH_HOLDOUT_PANEL: Dict[Tuple[str, str], str] = {
-    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
-     "2-Methyl-3-furanthiol (MFT)"): "hofmann_ribose_pH3_MFT",
-    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
-     "2-Furfurylthiol (FFT)"): "hofmann_ribose_pH3_FFT",
-    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
-     "2-Methyl-3-furanthiol (MFT)"): "hofmann_ribose_pH7_MFT",
-    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
-     "2-Furfurylthiol (FFT)"): "hofmann_ribose_pH7_FFT",
-}
+#: WAVE B2.4 -- THE FOUR SHARED ROWS are declared in
+#: ``src.kinetic_core.panel.SHARED_WITH_HOLDOUT_PANEL`` (imported above).
 
 
 def _git_head() -> Dict[str, str]:
@@ -137,55 +127,6 @@ def _family(benchmark_id: str) -> str:
     return "matrix_path_lipid"
 
 
-def _limiting_precursor_molar(bench: Dict[str, Any]) -> Tuple[Optional[str], Optional[float]]:
-    items = [
-        (str(name), float(data.get("concentration_mM", 0.0)) / 1000.0)
-        for name, data in (bench.get("precursors") or {}).items()
-        if float(data.get("concentration_mM", 0.0)) > 0.0
-    ]
-    if not items:
-        return None, None
-    return min(items, key=lambda kv: kv[1])
-
-
-def _measured_value(
-    bench: Dict[str, Any], compound: str, target_spec: Dict[str, Any]
-) -> Optional[float]:
-    """
-    The measured value for one point, from wherever this bundle's schema keeps it.
-
-    WAVE B6 FIX -- A PRE-EXISTING DEFECT, FOUND BY THE LIPID LANE.
-    ------------------------------------------------------------
-    ``score_core`` and ``score_old_lane`` both took ``target_value`` and then
-    fell back to ``reference_volatiles[compound]["conc_ppb"]``. The seventeen
-    maillard_path bundles carry ``holdout_targets`` with ``target_value``, so
-    they scored. The FOUR matrix_path bundles do not: they carry the value in
-    ``measured_volatiles[compound]["conc_ppb"]``, and ``reference_volatiles``
-    does not exist in them at all. Every matrix_path point therefore came back
-    ``measured = None`` and was reported with NO fold error -- in BOTH lanes,
-    since the two functions shared the bug.
-
-    That went unnoticed because the core REFUSED all four bundles before B6, so
-    a missing measured value cost nothing visible. B6 answers them, and a
-    prediction with no referee is exactly what this exam exists to prevent.
-
-    This is a schema-reading fix, defensible with no reference to any hold-out
-    value -- the same standing as Amendment 9 clause 2's buffer-field
-    completion. It changes the OLD lane's reported numbers too, which is the
-    honest consequence of a shared bug: those points were never scored, and now
-    they are.
-    """
-    for candidate in (
-        target_spec.get("target_value"),
-        (bench.get("reference_volatiles") or {}).get(compound, {}).get("conc_ppb"),
-        target_spec.get("conc_ppb"),
-        (bench.get("measured_volatiles") or {}).get(compound, {}).get("conc_ppb"),
-    ):
-        if candidate is not None:
-            return float(candidate)
-    return None
-
-
 def _fold(predicted: Optional[float], measured: Optional[float]) -> Optional[float]:
     if predicted is None or measured is None:
         return None
@@ -202,127 +143,9 @@ def _fold(predicted: Optional[float], measured: Optional[float]) -> Optional[flo
 # ---------------------------------------------------------------------------
 
 
-# ---------------------------------------------------------------------------
-# B2.3: THE BUFFER FIELD, AND WHY THIS EXAM IS NOW REPORTED BOTH WAYS
-# ---------------------------------------------------------------------------
-# `results/validation/kinetic_core_b2_2_diagnosis.md` sec. 4 found that the
-# frozen bundles record NO buffer, so bundles literally named
-# `..._ribose_cysteine_buffer_...` were being integrated as WATER -- and sized
-# that schema gap at an 11x swing in predicted 2-furfurylthiol on exactly the
-# system shape that is the worst point in this report.
-#
-# `docs/reference/FIT_HOLDOUT_DECLARATION.md` Amendment 9 clause 2 completes
-# the buffer field AND requires this exam to be reported BOTH WAYS --
-# buffer-completed and as-was -- in one artifact, PERMANENTLY. The reason the
-# as-was column is permanent rather than transitional: every earlier number
-# this repo has published was computed as-was, and a report that silently
-# replaces them makes its own history unreadable. Two columns cost one extra
-# integration per row and settle the question of how much of the Yiltirak
-# failure was chemistry and how much was a data-schema gap.
-#
-# NOTE ON REACH: only the SULFUR lane carries a pH state, so the buffer can
-# only move a sulfur-lane row. The acrylamide-lane bundles (Chang, Lin, Ye,
-# Schibilsky) will be IDENTICAL in both columns and that identity is a
-# reported result, not an omission -- it is the same gap X-7 names.
-
-
-def buffer_from_bundle(bench: Dict[str, Any]):
-    """
-    Translate a bundle's completed ``conditions.buffer`` block into a
-    ``BufferSpec``. Returns ``None`` when the bundle has no block at all.
-
-    ``buffer_unknown`` maps to the engine's DECLARED DEFAULT -- unbuffered,
-    ``declared=False``, which raises the extrapolation warning. That is the
-    correct handling and it is the point of recording unknown rather than
-    guessing: an unknown buffer produces a WARNED extrapolation, not a silent
-    assumption in either direction.
-    """
-    from src.kinetic_core.ph_state import BufferSpec
-
-    block = (bench.get("conditions") or {}).get("buffer")
-    if not isinstance(block, dict):
-        return None
-    species = str(block.get("species", "buffer_unknown"))
-    molarity = block.get("concentration_M")
-    note = str(block.get("provenance_note", ""))[:200]
-    if species == "buffer_unknown":
-        return BufferSpec(
-            kind="none", declared=False,
-            source=f"BUFFER UNKNOWN, recorded as such rather than guessed: {note}")
-    if species == "none":
-        return BufferSpec(
-            kind="none", declared=True,
-            source=f"the source states NO BUFFER: {note}")
-    if species in ("phosphate", "potassium_phosphate"):
-        return BufferSpec(
-            kind="phosphate", phosphate_mol_l=float(molarity), declared=True,
-            source=note)
-    if species == "acetate":
-        return BufferSpec(
-            kind="acetate", acetate_mol_l=float(molarity), declared=True,
-            source=note)
-    if species == "citrate_phosphate":
-        return BufferSpec(
-            kind="citrate_phosphate", phosphate_mol_l=float(molarity) * 2.0 / 3.0,
-            citrate_mol_l=float(molarity) / 3.0, declared=True, source=note)
-    raise SystemExit(
-        f"{bench.get('benchmark_id')}: buffer species {species!r} has no "
-        f"BufferSpec translation. Add one deliberately -- do not fall through "
-        f"to water, which is the defect this whole block exists to remove.")
-
-
-def _core_spec(bench: Dict[str, Any], *, use_buffer: bool = True):
-    from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram
-
-    conditions = bench.get("conditions") or {}
-    return FormulationSpec(
-        name=str(bench.get("benchmark_id")),
-        precursors={
-            str(name): float(data.get("concentration_mM", 0.0))
-            for name, data in (bench.get("precursors") or {}).items()
-        },
-        process=ProcessSpec(
-            thermal=ThermalProgram.isothermal(
-                float(conditions.get("temp_C", 0.0)),
-                float(conditions.get("time_min", 0.0)),
-            ),
-            ph=float(conditions.get("ph", 7.0)),
-            water_activity=(
-                float(conditions["water_activity"])
-                if conditions.get("water_activity") is not None
-                else None
-            ),
-            matrix=str(bench.get("protein_type") or "water"),
-            # BOTH WAYS. `use_buffer=False` reproduces every pre-B2.3 number in
-            # this report exactly: no buffer supplied means the engine's
-            # declared default, which is unbuffered plus an extrapolation
-            # warning.
-            buffer=buffer_from_bundle(bench) if use_buffer else None,
-        ),
-    )
-
-
-def _core_native_value(
-    run, compound: str, unit: str, limiting_molar: Optional[float]
-) -> Optional[float]:
-    """
-    The core's prediction in the TARGET's own unit.
-
-    ppb is direct (the core reports ug/L and every scored bundle is aqueous at
-    ~1 kg/L, which is the bundles' own stated basis). The ratio units are
-    computed from the core's MOLAR state, so no molecular weight and no assumed
-    concentration basis enters -- the 342/200 lesson.
-    """
-    if unit == "ppb":
-        return run.concentrations_ug_per_l.get(compound)
-    if unit in RATIO_UNIT_FACTORS:
-        key = run.declaration.mapped_targets.get(compound)
-        if key is None or not limiting_molar:
-            return None
-        mmol_per_l = float(run.species_mmol_per_l.get(key, 0.0))
-        mol_per_l = mmol_per_l / 1000.0
-        return RATIO_UNIT_FACTORS[unit] * (mol_per_l / limiting_molar)
-    return None
+# B2.3: THE BUFFER FIELD, AND WHY THIS EXAM IS REPORTED BOTH WAYS -- see
+# ``src.kinetic_core.panel`` (buffer_from_bundle, core_spec), where the
+# rationale now lives next to the code.
 
 
 def score_core(bundles: List[Path], *, use_buffer: bool = True) -> List[Dict[str, Any]]:
