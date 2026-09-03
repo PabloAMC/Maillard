@@ -886,7 +886,15 @@ README is now tracked); `scripts/ci/artifact_freshness_gate.py` (sixth gate: reg
 scorecard / directional / fit-target record modulo volatile keys, every `--check` runner, and provenance input
 hashes for every artifact that carries a block, the envelope included).
 
-- [ ] **Envelope cost: the Docker container serialises worker processes (found 2026-09-03).** Measured in the amd64
+- [x] **Envelope cost — RESOLVED 2026-09-03 (backlog pass 6): native arm64 container.** The container now follows the host
+      architecture (`scripts/docker_maillard.sh`; the amd64 one stays reachable via `MAILLARD_PLATFORM=linux/amd64`).
+      Natively: tier 1 196 s → 83 s, 12 envelope draws 127 s → 46 s with six workers (serial pass of point predictions
+      remains), full envelope ~5 min instead of 35-43. Cross-architecture reproducibility measured at ≤ 7e-8 relative on the
+      scorecard; `FLOAT_REL_TOL = 1e-6` (+ `FLOAT_ABS_TOL = 1e-9`) in `src/provenance.py` and the scorecard guard. Two
+      reproducibility leaks fixed on the way: the scorecard's blocking string printed a 1e10 ratio to three decimals (now 4
+      significant figures), and the directional scorer took 1e-31 µg/L as a number (now floored to zero below 1 pg/L; one
+      noise-ratio MISS became NOT EVALUABLE: 17/27 → 17/26). Original finding follows.
+- [ ] (history) **Envelope cost: the Docker container serialises worker processes (found 2026-09-03).** Measured in the amd64
       container (Rosetta on Apple Silicon): one sulfur predict is 0.17-0.33 s (LSODA, Python RHS, no file I/O once the
       engine caches its fit reports); `propagate_panel` at 12 draws takes 127 s with 1 worker, 127 s with 6 forked
       workers, 134 s with 6 spawned workers. Per worker: 64 s wall for 10.8 s CPU; two workers take 2x, three take 3x.
@@ -922,22 +930,14 @@ hashes for every artifact that carries a block, the envelope included).
       the honest replacement for the Laplace picture is a profile likelihood over the 23 free coordinates (or a short
       MCMC over the 62-row objective, ~4 s/eval) — and a decision on whether the thiol-sink ceiling is a
       measurement (Gigl 2021) or a search convenience.
-- [ ] **Test coverage is 81 % of `src/` but 11 % of `scripts/` (measured 2026-09-03 with coverage.py over all
-      646 tests).** The 21 k lines of fit / hold-out wave generators (`generate_kinetic_core_b*_*.py`) are never
-      executed by a test; they are the record of how every frozen parameter was produced. Either freeze them under
-      `scripts/generators/waves/` with a "not re-run; re-run = a new wave" README, or give each a `--smoke` path the
-      suite exercises. The measurement also reported `uncertainty.py` and `directional.py` at 0 % although their
-      tests pass — a coverage/`fork` configuration issue to fix before trusting per-module numbers.
-- [ ] **93 of 575 test functions assert only shape (key present / isinstance / file exists) or nothing.** Input to
-      the B6 audit: most are contract tests on artifacts; the question per test is what change would make it fail.
-      Twelve test files read tracked `results/validation/` artifacts — each needs either a live recomputation (as the
-      scorecard and directional guards do) or an explicit "frozen record" label.
-- [ ] **14 of 42 panel bundles have no `quantification_class`, 16 no `content_verification` block; 31 of 278 papers
-      carry an extraction dossier.** The verification waves stopped at the sulfur hold-outs; the trust-loop bundles
-      (Pratap-Singh, Trikusuma, Resconi, Bolton, Cerny, ACSRef3) and the matrix bundles are the ones the envelope
-      defaults on. One primary-source pass per bundle, recorded in the bundle, closes it.
-- [ ] **Envelope cost: 42 min at n=200 × 49 rows.** Profile `predict`; the sulfur lane is now sampled so every draw
-      re-integrates it — cache per-lane runs keyed by the draw's lane coordinates, or vectorise the panel.
+- [x] **Test coverage (closed 2026-09-03):** wave generators are frozen by policy and omitted from coverage on purpose
+      (`WAVES.md`, hash manifest); the fork/multiprocessing coverage configuration is fixed (`uncertainty.py` 92 %).
+- [x] **Shape-only tests (closed 2026-09-03 by the two test-audit passes):** prose tests deleted, wave contract files
+      labelled frozen records, artifact-reading tests either recompute live (guards) or are contract tests by design.
+- [ ] **Bundle verification coverage: 16 panel bundles have no `content_verification` block and only 31 of 278 papers
+      carry an extraction dossier** (the quantification-class half of this item closed on 2026-09-03). The trust-loop
+      bundles (Pratap-Singh, Trikusuma, Resconi, Bolton, Cerny, ACSRef3) and the matrix bundles are the ones without a
+      primary-source pass; one pass per bundle, recorded in the bundle, closes it. Needs the PDFs (`data/articles/`).
 
 ## 6. Risks and guardrails
 

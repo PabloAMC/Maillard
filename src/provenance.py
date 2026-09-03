@@ -111,10 +111,23 @@ def strip_volatile(value: Any) -> Any:
     return value
 
 
+#: Cross-architecture floating-point reproducibility measured 2026-09-03: the same scorecard on
+#: linux/arm64 vs linux/amd64 differs by at most 7e-8 relative over 49 rows. 1e-6 is a decision-safe
+#: tolerance (the 3x band is six orders away) that still catches any real parameter or data change.
+FLOAT_REL_TOL = 1e-6
+
+
+#: Absolute floor for float comparison: differences below it are numerical noise around zero
+#: (concentrations of 1e-30 ug/L, log-space steps of 1e-8).
+FLOAT_ABS_TOL = 1e-9
+
+
 def payload_differences(
-    tracked: Any, live: Any, *, rel_tol: float = 1e-9, path: str = "$", limit: int = 20
+    tracked: Any, live: Any, *, rel_tol: float = FLOAT_REL_TOL, abs_tol: float = FLOAT_ABS_TOL,
+    path: str = "$", limit: int = 20,
 ) -> List[str]:
-    """Where two artifacts differ once volatile keys are stripped; floats compare with ``rel_tol``.
+    """Where two artifacts differ once volatile keys are stripped; floats compare with ``rel_tol``
+    or ``abs_tol`` (either suffices).
 
     Returns at most ``limit`` human-readable ``"$.summary.hits: 10 != 11"`` lines; an empty
     list means the artifacts match.
@@ -140,7 +153,7 @@ def payload_differences(
                 walk(x, y, f"{where}[{i}]")
             return
         if isinstance(a, (int, float)) and isinstance(b, (int, float)) and not isinstance(a, bool) and not isinstance(b, bool):
-            if a != b and abs(a - b) > rel_tol * max(abs(a), abs(b), 1e-300):
+            if a != b and abs(a - b) > max(rel_tol * max(abs(a), abs(b)), abs_tol):
                 out.append(f"{where}: {a} != {b}")
             return
         if a != b:
@@ -166,6 +179,8 @@ def stale_inputs(payload: Mapping[str, Any]) -> List[str]:
 
 
 __all__ = [
+    "FLOAT_ABS_TOL",
+    "FLOAT_REL_TOL",
     "VOLATILE_KEYS",
     "git_head",
     "input_sources",

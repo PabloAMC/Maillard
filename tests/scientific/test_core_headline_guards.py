@@ -69,8 +69,11 @@ def test_tracked_scorecard_is_not_stale(tracked_scores, live_scores):
     live = {(b["benchmark_id"], r["compound"]): r["predicted"] for b in live_scores["benchmarks"] for r in b["compounds"]}
     tracked = {(b["benchmark_id"], r["compound"]): r["predicted"] for b in tracked_scores["benchmarks"] for r in b["compounds"]}
     assert set(live) == set(tracked)
+    # rel 1e-6, not 1e-9: the same code on linux/arm64 vs linux/amd64 (LSODA + BLAS) reproduces
+    # every prediction to 7e-8 relative (measured 2026-09-03, 49 rows); a 3x band decision is
+    # six orders of magnitude away from that noise.
     for key, value in live.items():
-        assert tracked[key] == pytest.approx(value, rel=1e-9), key
+        assert tracked[key] == pytest.approx(value, rel=1e-6), key
 
 
 # --------------------------------------------------------------------------------------
@@ -220,7 +223,7 @@ def test_cutover_exam_is_34_answered_3_within_band_paired_24_78x_vs_10_86x():
 # --------------------------------------------------------------------------------------
 
 
-def test_core_scores_17_of_27_independent_directional_claims():
+def test_core_scores_17_of_26_independent_directional_claims():
     """Pinned 2026-09-03 (B7). 69 claims; 16 are prose-only and 22 independent claims are
     not evaluable on the core (refused arms: 2,5-dimethylpyrazine, 2-pentylfuran, nonanal from
     oleate, H2S / hydroxyacetaldehyde precursors; a zero disulfide). Of the evaluable
@@ -235,23 +238,26 @@ def test_core_scores_17_of_27_independent_directional_claims():
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
     # RE-PINNED 2026-09-03 (B9): 18/27 -> 17/27; the hexose-related claims moved.
-    assert s["headline"] == [17, 27]
+    # RE-PINNED 2026-09-03 (zero floor): a claim whose arms were 1e-31 and 1e-29 ug/L had been a
+    # MISS on a log ratio of integrator noise; below 1 pg/L a concentration is zero and the claim is
+    # NOT EVALUABLE ("a predicted concentration is zero"): 17/27 -> 17/26, sugar identity 4/9 -> 4/8.
+    assert s["headline"] == [17, 26]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (13, 22)
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (13, 21)
     assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (4, 5)
-    assert ind["total"]["not_evaluable"] == 25
+    assert ind["total"]["not_evaluable"] == 26
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 4
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
-    assert cats["sugar_identity"] == (4, 9)
+    assert cats["sugar_identity"] == (4, 8)
     assert cats["temperature"] == (5, 7)
     assert cats["ph"] == (4, 5)
     assert cats["moisture_aw"] == (0, 0)   # every a_w comparison is refused
     assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (2, 2)
     readme = _doc_text(README)
-    _assert_quoted(readme, "17 of 27", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "13 of 22", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "17 of 26", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "13 of 21", "README.md", "the directional count excluding pH and water activity")
     _assert_quoted(readme, "4 of 5", "README.md", "the directional count on pH")
 
 

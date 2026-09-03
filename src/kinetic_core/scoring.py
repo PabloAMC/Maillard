@@ -253,7 +253,8 @@ def score_benchmark(
     if ranking_status == "fail":
         blocking.append(f"ranking {'n/a' if pearson is None else f'{pearson:.3f}'} < {thresholds.ranking_threshold:.2f}")
     if rows and scale_status == "fail":
-        blocking.append(f"max ratio {'n/a' if max_ratio is None else f'{max_ratio:.3f}'} > {contract['max_ratio']:.2f}")
+        # 4 significant figures, not 3 decimals: a 1e10 ratio printed to the ppb is architecture noise
+        blocking.append(f"max ratio {'n/a' if max_ratio is None else f'{max_ratio:.4g}'} > {contract['max_ratio']:.2f}")
         if mean_abs_log10 is not None and mean_abs_log10 > contract["mean_abs_log10_error"]:
             blocking.append(
                 f"mean |log10 ratio| {mean_abs_log10:.3f} > {contract['mean_abs_log10_error']:.3f}"

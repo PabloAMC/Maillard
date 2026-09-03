@@ -123,8 +123,18 @@ def _predict_arm(label: str, system: Mapping[str, Any], observable: str) -> Dict
         "state": declaration.state,
         "reasons": list(declaration.reasons),
         "warnings": list(declaration.warnings),
-        "value_ug_per_l": None if value is None else float(value),
+        "value_ug_per_l": None if value is None else _floor_zero(float(value)),
     }
+
+
+#: Below one picogram per litre a predicted concentration is zero, not a number: 1e-31 ug/L
+#: on one architecture and 3e-29 on another (2026-09-03) is integrator noise, and a log ratio
+#: of two noises is not a direction. Floored values take the exact-zero ordering rule.
+ZERO_FLOOR_UG_PER_L = 1e-6
+
+
+def _floor_zero(value: float) -> float:
+    return 0.0 if abs(value) < ZERO_FLOOR_UG_PER_L else value
 
 
 _SULFUR_TOKENS = ("thiol", "sulfide", "mft", "fft", "mercapto", "thiazol", "thiophen", "methional")

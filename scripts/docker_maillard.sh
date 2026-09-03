@@ -2,13 +2,25 @@
 
 set -euo pipefail
 
-CONTAINER_NAME="${MAILLARD_CONTAINER_NAME:-maillard_validation}"
 IMAGE_NAME="${MAILLARD_IMAGE_NAME:-condaforge/miniforge3}"
-# 2026-09-03: the amd64 image runs under Rosetta on Apple Silicon, where forked worker processes
-# serialise (the envelope's six workers gave no speed-up). MAILLARD_PLATFORM=linux/arm64 with its own
-# container name and conda volume runs natively; see tasks/data_restructure_plan.md §7 (envelope cost).
-PLATFORM="${MAILLARD_PLATFORM:-linux/amd64}"
-CONDA_VOLUME="${MAILLARD_CONDA_VOLUME:-maillard_conda}"
+# 2026-09-03: the container follows the HOST architecture. Until this date it was pinned to
+# linux/amd64, which on Apple Silicon runs under Rosetta -- where forked worker processes serialise
+# once numpy is imported (the envelope's six workers gave no speed-up; measurements in
+# tasks/data_restructure_plan.md §7). Natively the tiers run 2.4x faster and the envelope ~8x. The
+# amd64 environment stays reachable as MAILLARD_PLATFORM=linux/amd64 (container maillard_validation,
+# volume maillard_conda); results agree across architectures to 7e-8 relative.
+case "$(uname -m)" in
+  arm64|aarch64) HOST_PLATFORM="linux/arm64" ;;
+  *)             HOST_PLATFORM="linux/amd64" ;;
+esac
+PLATFORM="${MAILLARD_PLATFORM:-$HOST_PLATFORM}"
+if [ "$PLATFORM" = "linux/amd64" ]; then
+  CONTAINER_NAME="${MAILLARD_CONTAINER_NAME:-maillard_validation}"
+  CONDA_VOLUME="${MAILLARD_CONDA_VOLUME:-maillard_conda}"
+else
+  CONTAINER_NAME="${MAILLARD_CONTAINER_NAME:-maillard_arm64}"
+  CONDA_VOLUME="${MAILLARD_CONDA_VOLUME:-maillard_conda_arm64}"
+fi
 JUPYTER_PORT="${MAILLARD_JUPYTER_PORT:-8888}"
 WORKSPACE_DIR="${MAILLARD_WORKSPACE_DIR:-$PWD}"
 WORKSPACE_MOUNT="/workspace"

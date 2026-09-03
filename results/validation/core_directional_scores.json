@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-03",
     "git": {
-      "commit": "878994e4bb9a64181a619a20e24eef5897a52012",
-      "short": "878994e4",
+      "commit": "076ea761b093bdf72359d6ae29d33747aa70b87b",
+      "short": "076ea761",
       "branch": "cleaning",
       "dirty": true
     },
@@ -89,7 +89,7 @@
   "summary": {
     "headline": [
       17,
-      27
+      26
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -166,17 +166,16 @@
         },
         "sugar_identity": {
           "agree": 4,
-          "evaluable": 9,
-          "not_evaluable": 5,
+          "evaluable": 8,
+          "not_evaluable": 6,
           "misses": [
             "SUG-03",
             "SUG-12",
-            "HOF-01",
             "HOF-02",
             "HOF-03"
           ],
           "mechanism_absent": 0,
-          "rate": 0.4444444444444444
+          "rate": 0.5
         },
         "temperature": {
           "agree": 5,
@@ -200,22 +199,21 @@
       },
       "total": {
         "agree": 17,
-        "evaluable": 27,
-        "not_evaluable": 25,
+        "evaluable": 26,
+        "not_evaluable": 26,
         "misses": [
           "SUG-03",
           "TEMP-01",
           "CYS-02",
           "SUG-12",
           "TEMP-05",
-          "HOF-01",
           "HOF-02",
           "HOF-03",
           "MOT-01",
           "MOT-03"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6296296296296297
+        "rate": 0.6538461538461539
       },
       "ph_aw": {
         "agree": 4,
@@ -229,21 +227,20 @@
       },
       "excluding_ph_aw": {
         "agree": 13,
-        "evaluable": 22,
-        "not_evaluable": 16,
+        "evaluable": 21,
+        "not_evaluable": 17,
         "misses": [
           "SUG-03",
           "TEMP-01",
           "CYS-02",
           "SUG-12",
           "TEMP-05",
-          "HOF-01",
           "HOF-02",
           "HOF-03",
           "MOT-03"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5909090909090909
+        "rate": 0.6190476190476191
       }
     },
     "all_claims": {
@@ -329,19 +326,18 @@
         },
         "sugar_identity": {
           "agree": 6,
-          "evaluable": 13,
-          "not_evaluable": 5,
+          "evaluable": 12,
+          "not_evaluable": 6,
           "misses": [
             "SUG-03",
             "SUG-04",
             "SUG-05",
             "SUG-12",
-            "HOF-01",
             "HOF-02",
             "HOF-03"
           ],
           "mechanism_absent": 0,
-          "rate": 0.46153846153846156
+          "rate": 0.5
         },
         "temperature": {
           "agree": 5,
@@ -365,8 +361,8 @@
       },
       "total": {
         "agree": 19,
-        "evaluable": 38,
-        "not_evaluable": 31,
+        "evaluable": 37,
+        "not_evaluable": 32,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -382,14 +378,13 @@
           "SUG-12",
           "TEMP-05",
           "LIP-04",
-          "HOF-01",
           "HOF-02",
           "HOF-03",
           "MOT-01",
           "MOT-03"
         ],
         "mechanism_absent": 4,
-        "rate": 0.5
+        "rate": 0.5135135135135135
       },
       "ph_aw": {
         "agree": 4,
@@ -404,8 +399,8 @@
       },
       "excluding_ph_aw": {
         "agree": 15,
-        "evaluable": 32,
-        "not_evaluable": 21,
+        "evaluable": 31,
+        "not_evaluable": 22,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -420,20 +415,19 @@
           "SUG-12",
           "TEMP-05",
           "LIP-04",
-          "HOF-01",
           "HOF-02",
           "HOF-03",
           "MOT-03"
         ],
         "mechanism_absent": 4,
-        "rate": 0.46875
+        "rate": 0.4838709677419355
       }
     },
     "not_evaluable_reasons": {
       "the claim carries no runnable conditions (prose-only)": 16,
       "refused by the engine": 4,
+      "a predicted concentration is zero; no direction is defined": 2,
       "arm 'processed, 140 C' refused": 2,
-      "a predicted concentration is zero; no direction is defined": 1,
       "arm 'pH 4.5' refused": 1,
       "arm 'D-ribose' refused": 1,
       "arm 'pH 4' refused": 1,
@@ -443,7 +437,7 @@
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
     },
-    "wall_seconds": 30.1
+    "wall_seconds": 17.7
   },
   "claims": [
     {
@@ -463,10 +457,11 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        76.27667873104714,
-        6.994709143798126e-12
+        76.27667872228899,
+        0.0
       ],
-      "log10_ratio_B_over_A": -13.037622114332436,
+      "log10_ratio_B_over_A": null,
+      "structural_zero": false,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -488,7 +483,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 76.27667873104714
+          "value_ug_per_l": 76.27667872228899
         },
         {
           "label": "cysteine + D-glucose",
@@ -510,7 +505,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 6.994709143798126e-12
+          "value_ug_per_l": 0.0
         }
       ]
     },
@@ -531,10 +526,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        57.69360857102594,
-        52.25403648914065
+        57.69361250537501,
+        52.25403590728247
       ],
-      "log10_ratio_B_over_A": -0.04300785948743051,
+      "log10_ratio_B_over_A": -0.043007893939588454,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -556,7 +551,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 57.69360857102594
+          "value_ug_per_l": 57.69361250537501
         },
         {
           "label": "cysteine + D-glucose",
@@ -578,7 +573,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.25403648914065
+          "value_ug_per_l": 52.25403590728247
         }
       ]
     },
@@ -599,8 +594,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        52.25403648914065,
-        52.25403648914065
+        52.25403590728247,
+        52.25403590728247
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -624,7 +619,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.25403648914065
+          "value_ug_per_l": 52.25403590728247
         },
         {
           "label": "MFT in cysteine + glucose",
@@ -646,7 +641,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.25403648914065
+          "value_ug_per_l": 52.25403590728247
         }
       ]
     },
@@ -667,8 +662,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        76.27667873104714,
-        76.27667873104714
+        76.27667872228899,
+        76.27667872228899
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -692,7 +687,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 76.27667873104714
+          "value_ug_per_l": 76.27667872228899
         },
         {
           "label": "FFT in cysteine + ribose",
@@ -714,7 +709,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 76.27667873104714
+          "value_ug_per_l": 76.27667872228899
         }
       ]
     },
@@ -735,10 +730,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        135.76563482333037,
-        147.13555133406743
+        135.7656333489145,
+        147.13555295989062
       ],
-      "log10_ratio_B_over_A": 0.03492776628239303,
+      "log10_ratio_B_over_A": 0.03492777579771585,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -760,7 +755,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 135.76563482333037
+          "value_ug_per_l": 135.7656333489145
         },
         {
           "label": "cysteine + D-glucose",
@@ -782,7 +777,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 147.13555133406743
+          "value_ug_per_l": 147.13555295989062
         }
       ]
     },
@@ -818,10 +813,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        46.786830374696635,
-        83.14387867117601
+        46.78683073840358,
+        83.14387876244038
       ],
-      "log10_ratio_B_over_A": 0.24970665609738943,
+      "log10_ratio_B_over_A": 0.24970665319802407,
       "arms": [
         {
           "label": "pH 4.5",
@@ -843,7 +838,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 46.786830374696635
+          "value_ug_per_l": 46.78683073840358
         },
         {
           "label": "pH 6.5",
@@ -865,7 +860,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 83.14387867117601
+          "value_ug_per_l": 83.14387876244038
         }
       ]
     },
@@ -946,13 +941,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        65.87986792235726,
-        53.768120728631644,
-        10.856522944755909
+        65.87986535105843,
+        53.76812210860274,
+        10.856522703300888
       ],
       "log10_steps": [
-        -0.0882278622738979,
-        -0.6948341029775124
+        -0.08822783417706695,
+        -0.6948341237827267
       ],
       "arms": [
         {
@@ -976,7 +971,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 65.87986792235726
+          "value_ug_per_l": 65.87986535105843
         },
         {
           "label": "pH 5.5",
@@ -999,7 +994,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 53.768120728631644
+          "value_ug_per_l": 53.76812210860274
         },
         {
           "label": "pH 7.0",
@@ -1022,7 +1017,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 10.856522944755909
+          "value_ug_per_l": 10.856522703300888
         }
       ]
     },
@@ -1131,13 +1126,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        146.27872854020666,
-        131.09761518854862,
-        58.05211952528161
+        146.27872838658266,
+        131.0976153012262,
+        58.05212042022503
       ],
       "log10_steps": [
-        -0.047586385317466735,
-        -0.35377671068943145
+        -0.04758638448809109,
+        -0.3537767043675318
       ],
       "arms": [
         {
@@ -1160,7 +1155,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 146.27872854020666
+          "value_ug_per_l": 146.27872838658266
         },
         {
           "label": "pH 5.5",
@@ -1182,7 +1177,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 131.09761518854862
+          "value_ug_per_l": 131.0976153012262
         },
         {
           "label": "pH 7.0",
@@ -1204,7 +1199,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 58.05211952528161
+          "value_ug_per_l": 58.05212042022503
         }
       ]
     },
@@ -1225,13 +1220,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        21.052241457967035,
-        454.269559059928,
-        814.1459509912017
+        21.052241449596707,
+        454.26955934654166,
+        814.1459440494322
       ],
       "log10_steps": [
-        1.3340152928947446,
-        0.2533886319374079
+        1.33401529334143,
+        0.2533886279604097
       ],
       "arms": [
         {
@@ -1255,7 +1250,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 21.052241457967035
+          "value_ug_per_l": 21.052241449596707
         },
         {
           "label": "150 C",
@@ -1278,7 +1273,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 454.269559059928
+          "value_ug_per_l": 454.26955934654166
         },
         {
           "label": "170 C",
@@ -1301,7 +1296,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 814.1459509912017
+          "value_ug_per_l": 814.1459440494322
         }
       ]
     },
@@ -1322,10 +1317,11 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        21.052241457967035,
-        2.6260051787618e-16
+        21.052241449596707,
+        0.0
       ],
-      "log10_ratio_B_over_A": -16.904002764270324,
+      "log10_ratio_B_over_A": null,
+      "structural_zero": false,
       "arms": [
         {
           "label": "extruded, 130 C 20 min",
@@ -1348,7 +1344,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 21.052241457967035
+          "value_ug_per_l": 21.052241449596707
         },
         {
           "label": "unheated control, 25 C",
@@ -1372,7 +1368,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 2.6260051787618e-16
+          "value_ug_per_l": 0.0
         }
       ]
     },
@@ -1393,13 +1389,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        77.7292173603229,
-        398.9513157292849,
-        577.4184677682385
+        77.72921779394943,
+        398.9513152652994,
+        577.4184679502196
       ],
       "log10_steps": [
-        0.7103356067967226,
-        0.16057076825126365
+        0.7103356038688421,
+        0.1605707688932273
       ],
       "arms": [
         {
@@ -1425,7 +1421,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 77.7292173603229
+          "value_ug_per_l": 77.72921779394943
         },
         {
           "label": "150 C",
@@ -1450,7 +1446,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 398.9513157292849
+          "value_ug_per_l": 398.9513152652994
         },
         {
           "label": "170 C",
@@ -1475,7 +1471,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 577.4184677682385
+          "value_ug_per_l": 577.4184679502196
         }
       ]
     },
@@ -1515,7 +1511,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         },
         {
           "label": "aw 0.6",
@@ -1539,7 +1535,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         },
         {
           "label": "aw 0.98",
@@ -1563,7 +1559,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         }
       ]
     },
@@ -1602,7 +1598,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 454.269559059928
+          "value_ug_per_l": 454.26955934654166
         },
         {
           "label": "aw 0.6 (mid moisture)",
@@ -1625,7 +1621,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 454.269559059928
+          "value_ug_per_l": 454.26955934654166
         },
         {
           "label": "aw 0.9 (high moisture)",
@@ -1648,7 +1644,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 454.269559059928
+          "value_ug_per_l": 454.26955934654166
         }
       ]
     },
@@ -1669,7 +1665,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        46.96106910489461,
+        46.96106906785942,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -1696,7 +1692,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 46.96106910489461
+          "value_ug_per_l": 46.96106906785942
         },
         {
           "label": "glycine + glucose (no cysteine)",
@@ -1742,10 +1738,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        676.3166759938573,
-        674.360973079102
+        676.3166766505675,
+        674.3609731305359
       ],
-      "log10_ratio_B_over_A": -0.0012576673320522148,
+      "log10_ratio_B_over_A": -0.0012576677206326188,
       "arms": [
         {
           "label": "glycine + glucose (no cysteine)",
@@ -1769,7 +1765,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         },
         {
           "label": "glycine + glucose + cysteine",
@@ -1795,7 +1791,7 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED.",
             "5-HMF + cysteine: the sink constant is HELD at its 50 C value for this whole program. Holding it UNDER-states the sink; extrapolating it is a named prohibited derivation (K5a sec. 7.3), and the direction is stated rather than chosen for convenience."
           ],
-          "value_ug_per_l": 674.360973079102
+          "value_ug_per_l": 674.3609731305359
         }
       ]
     },
@@ -2311,13 +2307,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        14.854007729246579,
-        676.3166759938573,
-        2389.569710129535
+        14.854007729246737,
+        676.3166766505675,
+        2389.5697101274527
       ],
       "log10_steps": [
-        1.6583064504271006,
-        0.5481696085805835
+        1.6583064508488001,
+        0.5481696081585008
       ],
       "arms": [
         {
@@ -2342,7 +2338,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 14.854007729246579
+          "value_ug_per_l": 14.854007729246737
         },
         {
           "label": "30 min",
@@ -2366,7 +2362,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         },
         {
           "label": "120 min",
@@ -2390,7 +2386,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 2389.569710129535
+          "value_ug_per_l": 2389.5697101274527
         }
       ]
     },
@@ -2603,10 +2599,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1416.9854185050253,
-        402.1798285755728
+        1416.985428767528,
+        402.17982867381005
       ],
-      "log10_ratio_B_over_A": -0.5469450964966005,
+      "log10_ratio_B_over_A": -0.5469450995358922,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2628,7 +2624,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1416.9854185050253
+          "value_ug_per_l": 1416.985428767528
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2650,7 +2646,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 402.1798285755728
+          "value_ug_per_l": 402.17982867381005
         }
       ]
     },
@@ -2671,10 +2667,11 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        10.125894091982444,
-        2.0796981481588038e-13
+        10.125894086533679,
+        0.0
       ],
-      "log10_ratio_B_over_A": -13.687433075627204,
+      "log10_ratio_B_over_A": null,
+      "structural_zero": false,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2696,7 +2693,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 10.125894091982444
+          "value_ug_per_l": 10.125894086533679
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2718,7 +2715,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.0796981481588038e-13
+          "value_ug_per_l": 0.0
         }
       ]
     },
@@ -2739,10 +2736,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        36.853371091467004,
-        33.51626322774152
+        36.85337157494882,
+        33.516262394966446
       ],
-      "log10_ratio_B_over_A": -0.04122162767284886,
+      "log10_ratio_B_over_A": -0.041221644161256364,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2764,7 +2761,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 36.853371091467004
+          "value_ug_per_l": 36.85337157494882
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2786,7 +2783,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 33.51626322774152
+          "value_ug_per_l": 33.516262394966446
         }
       ]
     },
@@ -2910,10 +2907,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        697.2930169920588,
-        936.6743855435344
+        697.2930155199198,
+        936.6743833019796
       ],
-      "log10_ratio_B_over_A": 0.12817332809680265,
+      "log10_ratio_B_over_A": 0.12817332797438405,
       "arms": [
         {
           "label": "glycine + D-fructose, 150 C 35 min",
@@ -2937,7 +2934,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 697.2930169920588
+          "value_ug_per_l": 697.2930155199198
         },
         {
           "label": "glycine + D-glucose, 150 C 35 min",
@@ -2961,7 +2958,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 936.6743855435344
+          "value_ug_per_l": 936.6743833019796
         }
       ]
     },
@@ -2982,10 +2979,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2.086196586803662,
-        0.4051088231871279
+        2.086196726664629,
+        0.4051088129111135
       ],
-      "log10_ratio_B_over_A": -0.7117835283931178,
+      "log10_ratio_B_over_A": -0.7117835685250473,
       "arms": [
         {
           "label": "glycine + D-glucose, 165 C 8 min",
@@ -3007,7 +3004,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.086196586803662
+          "value_ug_per_l": 2.086196726664629
         },
         {
           "label": "glycine + D-fructose, 165 C 8 min",
@@ -3029,7 +3026,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.4051088231871279
+          "value_ug_per_l": 0.4051088129111135
         }
       ]
     },
@@ -3138,13 +3135,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2.173830881963166,
-        2.0853333235229643,
-        2.076535481003123
+        2.173830811720757,
+        2.085333296829725,
+        2.076535641684557
       ],
       "log10_steps": [
-        -0.0180502708646253,
-        -0.0018361271485660394
+        -0.018050262390556928,
+        -0.001836087983872715
       ],
       "arms": [
         {
@@ -3167,7 +3164,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.173830881963166
+          "value_ug_per_l": 2.173830811720757
         },
         {
           "label": "pH 7",
@@ -3189,7 +3186,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.0853333235229643
+          "value_ug_per_l": 2.085333296829725
         },
         {
           "label": "pH 9",
@@ -3211,7 +3208,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.076535481003123
+          "value_ug_per_l": 2.076535641684557
         }
       ]
     },
@@ -3296,13 +3293,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        683.5026389598895,
-        643.6275769291448,
-        653.924345339222
+        683.5026424814189,
+        643.6275769276729,
+        653.9243453397951
       ],
       "log10_steps": [
-        -0.026105552041407305,
-        0.0068928626230381
+        -0.02610555427996431,
+        0.006892862624411984
       ],
       "arms": [
         {
@@ -3327,7 +3324,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 683.5026389598895
+          "value_ug_per_l": 683.5026424814189
         },
         {
           "label": "170 C",
@@ -3351,7 +3348,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 643.6275769291448
+          "value_ug_per_l": 643.6275769276729
         },
         {
           "label": "190 C",
@@ -3375,7 +3372,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 190 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 653.924345339222
+          "value_ug_per_l": 653.9243453397951
         }
       ]
     },
@@ -3396,10 +3393,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2.0853333235229643,
+        2.085333296829725,
         0.000550839314489987
       ],
-      "log10_ratio_B_over_A": -3.578150554142864,
+      "log10_ratio_B_over_A": -3.5781505485836917,
       "arms": [
         {
           "label": "roasted, 165 C 8 min",
@@ -3421,7 +3418,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.0853333235229643
+          "value_ug_per_l": 2.085333296829725
         },
         {
           "label": "raw, 25 C",
@@ -3484,7 +3481,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         },
         {
           "label": "aw 0.65",
@@ -3508,7 +3505,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         },
         {
           "label": "aw 0.95",
@@ -3532,7 +3529,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 676.3166759938573
+          "value_ug_per_l": 676.3166766505675
         }
       ]
     },
@@ -3553,10 +3550,11 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        12.486721287316758,
-        2.004666493578227e-31
+        12.486721310209862,
+        0.0
       ],
-      "log10_ratio_B_over_A": -31.794406286510895,
+      "log10_ratio_B_over_A": null,
+      "structural_zero": false,
       "arms": [
         {
           "label": "hydrolysate + xylose + cysteine, 100 C 60 min",
@@ -3579,7 +3577,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 12.486721287316758
+          "value_ug_per_l": 12.486721310209862
         },
         {
           "label": "hydrolysate + xylose, no cysteine",
@@ -3601,7 +3599,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.004666493578227e-31
+          "value_ug_per_l": 0.0
         }
       ]
     },
@@ -3761,13 +3759,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        1.2144629413441232,
-        2.8301506238960443,
-        2.4212223355279674
+        1.2144629413441264,
+        2.830150623900616,
+        2.4212223355287916
       ],
       "log10_steps": [
-        0.36742528270433705,
-        -0.06777487821391606
+        0.3674252827050375,
+        -0.06777487821446967
       ],
       "arms": [
         {
@@ -3791,7 +3789,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 1.2144629413441232
+          "value_ug_per_l": 1.2144629413441264
         },
         {
           "label": "mid protein (asn 10 mM, glucose 7 mM)",
@@ -3814,7 +3812,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 2.8301506238960443
+          "value_ug_per_l": 2.830150623900616
         },
         {
           "label": "high protein (asn 20 mM, glucose 3 mM)",
@@ -3837,7 +3835,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 2.4212223355279674
+          "value_ug_per_l": 2.4212223355287916
         }
       ]
     },
@@ -3858,13 +3856,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        12.127836830251677,
-        841.590502606104,
-        3.427486434861055
+        12.127836830251743,
+        841.5904954870106,
+        3.4274865346731973
       ],
       "log10_steps": [
-        1.8413174805370938,
-        -2.3901250811654347
+        1.8413174768633533,
+        -2.390125064844568
       ],
       "arms": [
         {
@@ -3888,7 +3886,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 12.127836830251677
+          "value_ug_per_l": 12.127836830251743
         },
         {
           "label": "170 C",
@@ -3911,7 +3909,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 841.590502606104
+          "value_ug_per_l": 841.5904954870106
         },
         {
           "label": "210 C",
@@ -3935,7 +3933,7 @@
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
           ],
-          "value_ug_per_l": 3.427486434861055
+          "value_ug_per_l": 3.4274865346731973
         }
       ]
     },
@@ -3956,13 +3954,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        40.4853305722877,
-        683.5026389598895,
-        936.6743855435344
+        40.485330446554435,
+        683.5026424814189,
+        936.6743833019796
       ],
       "log10_steps": [
-        1.2274425059465321,
-        0.13684844841170596
+        1.2274425095328625,
+        0.13684844513483232
       ],
       "arms": [
         {
@@ -3987,7 +3985,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 40.4853305722877
+          "value_ug_per_l": 40.485330446554435
         },
         {
           "label": "25 min",
@@ -4011,7 +4009,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 683.5026389598895
+          "value_ug_per_l": 683.5026424814189
         },
         {
           "label": "35 min",
@@ -4035,7 +4033,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 936.6743855435344
+          "value_ug_per_l": 936.6743833019796
         }
       ]
     },
@@ -4065,16 +4063,8 @@
       "fit_status": "independent",
       "statement": "With cysteine at 145 C / 20 min / pH 5.0, FRUCTOSE is at least as effective as GLUCOSE for both thiols - the two hexoses measure within 1.3x of each other, with fructose slightly ahead on both.",
       "source": "hofmann1998",
-      "status": "disagree",
-      "reason": null,
-      "identical_predictions": false,
-      "mechanism_absent": false,
-      "lane": "sulfur",
-      "values_ug_per_l": [
-        2.980867863660286e-10,
-        1.3682749301602664e-09
-      ],
-      "log10_ratio_B_over_A": 0.6618306448017225,
+      "status": "not_evaluable",
+      "reason": "a predicted concentration is zero; no direction is defined",
       "arms": [
         {
           "label": "cysteine + D-fructose, 145 C 20 min pH 5.0",
@@ -4096,7 +4086,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.980867863660286e-10
+          "value_ug_per_l": 0.0
         },
         {
           "label": "cysteine + D-glucose, 145 C 20 min pH 5.0",
@@ -4118,7 +4108,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1.3682749301602664e-09
+          "value_ug_per_l": 0.0
         }
       ]
     },
@@ -4139,10 +4129,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1673.6754170627341,
-        2296.4427383779007
+        1673.6753965373948,
+        2296.4427137049315
       ],
-      "log10_ratio_B_over_A": 0.13738438352821727,
+      "log10_ratio_B_over_A": 0.1373843841881872,
       "arms": [
         {
           "label": "cysteine + D-fructose, 145 C 20 min pH 5.0",
@@ -4164,7 +4154,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1673.6754170627341
+          "value_ug_per_l": 1673.6753965373948
         },
         {
           "label": "cysteine + D-glucose, 145 C 20 min pH 5.0",
@@ -4186,7 +4176,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2296.4427383779007
+          "value_ug_per_l": 2296.4427137049315
         }
       ]
     },
@@ -4207,10 +4197,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        0.0009114347369005939,
-        0.2971467098033335
+        0.0009114347038737902,
+        0.2971467014501777
       ],
-      "log10_ratio_B_over_A": 2.5132453493010933,
+      "log10_ratio_B_over_A": 2.5132453528296677,
       "arms": [
         {
           "label": "cysteine + D-ribose, dry-heated 180 C 6 min",
@@ -4232,7 +4222,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.0009114347369005939
+          "value_ug_per_l": 0.0009114347038737902
         },
         {
           "label": "cysteine + D-glucose, dry-heated 180 C 6 min",
@@ -4254,7 +4244,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.2971467098033335
+          "value_ug_per_l": 0.2971467014501777
         }
       ]
     },
@@ -4291,10 +4281,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        189.97512866517167,
-        504.81328489001345
+        189.97512842428378,
+        504.81328394857496
       ],
-      "log10_ratio_B_over_A": 0.42443402815381576,
+      "log10_ratio_B_over_A": 0.4244340278945736,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -4316,7 +4306,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 189.97512866517167
+          "value_ug_per_l": 189.97512842428378
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -4338,7 +4328,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.81328489001345
+          "value_ug_per_l": 504.81328394857496
         }
       ]
     },
@@ -4359,10 +4349,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1369.9573212876383,
-        1075.8066442018157
+        1369.9573572190159,
+        1075.8066510398496
       ],
-      "log10_ratio_B_over_A": -0.10497281548933164,
+      "log10_ratio_B_over_A": -0.10497282411959144,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -4384,7 +4374,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1369.9573212876383
+          "value_ug_per_l": 1369.9573572190159
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -4406,7 +4396,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1075.8066442018157
+          "value_ug_per_l": 1075.8066510398496
         }
       ]
     },
@@ -4427,8 +4417,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        504.81328489001345,
-        504.81328489001345
+        504.81328394857496,
+        504.81328394857496
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -4452,7 +4442,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.81328489001345
+          "value_ug_per_l": 504.81328394857496
         },
         {
           "label": "FFT, cysteine + ribose, phosphate pH 5.6",
@@ -4474,7 +4464,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.81328489001345
+          "value_ug_per_l": 504.81328394857496
         }
       ]
     },
@@ -4645,7 +4635,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2359.823928313302
+          "value_ug_per_l": 2359.823933281173
         }
       ]
     },
