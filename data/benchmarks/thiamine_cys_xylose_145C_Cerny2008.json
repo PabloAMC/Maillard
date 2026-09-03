@@ -1,5 +1,7 @@
 {
   "benchmark_id": "thiamine_cys_xylose_145C_Cerny2008",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: VALUES_NEED_RE_EXAMINATION: the 2.47 ppb MFT figure has not been located in the paper; no class can be attached to an unlocated value. The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "source_doi": "10.1021/jf801762c",
   "source_metadata": {
     "citation": "Cerny, C.; Guntz-Dubini, R. Formation of Cysteine-S-Conjugates in the Maillard Reaction of Cysteine, Xylose and Thiamine. J. Agric. Food Chem. 2008, 56 (23), 10237-10241.",

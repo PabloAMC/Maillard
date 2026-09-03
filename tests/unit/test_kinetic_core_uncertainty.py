@@ -483,7 +483,10 @@ def test_markdown_renders(small_artifact):
             data_paths.EXTERNAL_VALIDATION_DIR / "external_validation_bi_2020_raw_pea_hexanal.json",
             "headspace",
         ),
-        (data_paths.BENCHMARKS_DIR / "pea_isolate_uht_140C_Trikusuma2019.json", "undeclared"),
+        # 2026-09-03: declared dynamic_headspace_gcmsms from the bundle's own source_metadata
+        (data_paths.BENCHMARKS_DIR / "pea_isolate_uht_140C_Trikusuma2019.json", "headspace"),
+        (data_paths.BENCHMARKS_DIR / "thiamine_cys_glucose_120C_Bolton1994.json", "extraction"),
+        (data_paths.BENCHMARKS_DIR / "cys_ribose_140C_Hofmann1998.json", "undeclared"),
     ],
 )
 def test_quantification_family_reads_the_bundles_own_class(path, family):
@@ -498,6 +501,8 @@ def test_quantification_family_marker_precedence():
         {"content_verification": {"quantification_class": "internal standard, SPME-GC-MS"}}
     )[0] == "headspace"
     assert panel.quantification_family({"quantification_class": "gravimetric"})[0] == "undeclared"
+    assert panel.quantification_family({"quantification_class": "dynamic_headspace_gcmsms"})[0] == "headspace"
+    assert panel.quantification_family({"quantification_class": "undeclared"})[0] == "undeclared"
     assert panel.quantification_family({})[0] == "undeclared"
 
 
@@ -510,11 +515,13 @@ def test_extraction_rows_do_not_carry_the_headspace_bands(small_artifact):
     # now carries a FIT-uncertainty width -- and no headspace band on top of it
     for c in hofmann["compounds"]:
         assert c["ci_width_log10"] is not None and c["ci_width_log10"] > 0.0
+    # 2026-09-03: Trikusuma declares dynamic headspace (DHS-GC-MS-MS), so the bands apply
+    # because the bundle SAYS so, not because it said nothing
     trikusuma = by_id["pea_isolate_uht_140C_Trikusuma2019"]
-    assert trikusuma["quantification_family"] == "undeclared"
+    assert trikusuma["quantification_family"] == "headspace"
     assert all(c["observable_multipliers_applied"] for c in trikusuma["compounds"])
     policy = small_artifact["summary"]["observable_multiplier_policy"]
     assert policy["rows_by_family"]["extraction"] == len(hofmann["compounds"]) + len(
         by_id["mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7"]["compounds"]
     )
-    assert "pea_isolate_uht_140C_Trikusuma2019" in policy["undeclared_bundles"]
+    assert "pea_isolate_uht_140C_Trikusuma2019" not in policy["undeclared_bundles"]

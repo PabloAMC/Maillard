@@ -1,5 +1,7 @@
 {
   "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: model output frozen as a reproducibility snapshot (diagnostic_only); not a measurement. The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "conditions": {
     "ph": 5.6,
     "temp_C": 100.0,

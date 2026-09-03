@@ -281,10 +281,12 @@ BUNDLE_BASELINES = {
         "b8f9814c0c2c10701679de5bf0a64aa9b393df2ad45d368f4e0940ade6a58e5d",
     "external_validation_bi_2020_roasted_pea_hexanal":
         "7d5cf5174622face448ff0095c03b5813d9227481b05af6eb4e8343b05b41ffe",
+    # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     "external_validation_li_2026_spi_wg_hme_control":
-        "8b891d62be554f47c53380e61d41d517f78b82f2362e4f9f16b89362b3fd2b68",
+        "7af20770d5e2ebb52817a51db8e25f29577cf09994b7113545115d4a1b33a2d5",
+    # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     "external_validation_liu_2023_ppi_offnote_baseline":
-        "ad7fd3442187c715f9d8b1d71b4c4cae9a3f76a33f2d0aef9812223fb1161bea",
+        "5e0b0a7ec0e56a5efff9c1d01225a5eac15c9129fe58fd08032bd1226cd15dcd",
     "mp_holdout_fructose_asparagine_180C_Lin2022":
         "85efa67b7c88adc2d8616d7ed601efe6f6f7763238b2aef237bc485c405d0505",
     "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019":

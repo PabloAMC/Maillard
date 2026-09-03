@@ -886,6 +886,15 @@ README is now tracked); `scripts/ci/artifact_freshness_gate.py` (sixth gate: reg
 scorecard / directional / fit-target record modulo volatile keys, every `--check` runner, and provenance input
 hashes for every artifact that carries a block, the envelope included).
 
+- [ ] **Envelope cost: the Docker container serialises worker processes (found 2026-09-03).** Measured in the amd64
+      container (Rosetta on Apple Silicon): one sulfur predict is 0.17-0.33 s (LSODA, Python RHS, no file I/O once the
+      engine caches its fit reports); `propagate_panel` at 12 draws takes 127 s with 1 worker, 127 s with 6 forked
+      workers, 134 s with 6 spawned workers. Per worker: 64 s wall for 10.8 s CPU; two workers take 2x, three take 3x.
+      A probe shows the same for pure-Python loops once numpy is imported in the parent, while a numpy-free pool
+      parallelises (12 tasks: 1.4 s -> 0.4 s). Affinity is full, BLAS threads pinned to 1 change nothing. The cause is
+      below the code (emulation layer); the fix is a native arm64 container: `MAILLARD_PLATFORM=linux/arm64` with its
+      own container name and conda volume (script override added). Validate: probe parallelism, run both tiers, and the
+      freshness gate must still match the tracked scorecard (rel 1e-9) before the default flips.
 - [ ] **The deep-research ledger is stale against its own generator** (found 2026-09-03 by accident: a bash script edited
       while running jumped into the `deep-research-audit` alias). `scripts/deep_research_tracker.py` rewrites
       `results/literature/deep_research_backlog.json` from 7,400 lines to 200 (20 occurrences / 19 citations); the tracked
@@ -899,14 +908,14 @@ hashes for every artifact that carries a block, the envelope included).
       `benchmark_metadata`; 23 bundles + `benchmark.schema.json` + `holdout_guard`/`schema_gate` + three tests change.
       The parameter-level `evidence_class` in `parameters*.py` is a different vocabulary (provenance of a constant):
       rename it `provenance_class` to end the collision.
-- [ ] **`quantification_class` is unenforced and 12 of 40 panel bundles lack it** (survey 2026-09-03; the schema and
-      `schema_gate` are silent, so a typo degrades to `undeclared` and re-applies the headspace bands). Declarable from
-      text already in the repo: Bolton 1994 (GC-MS-SIM vs internal standard → extraction), Liu 2023 (HS-SPME-GC-MS/MS
-      → headspace), Trikusuma 2019 (DHS-GC-MS-MS → headspace; add a `dhs`/`dynamic_headspace` marker). NOT declarable
-      without the source: Pratap-Singh 2021 (×2; PMC8271896 XML is re-fetchable), Li 2026, Resconi/Hernandez 2023,
-      ACSRef3 (figure read-off), Foods 2023 CML/CEL, Ramírez-Jiménez 2000, Cerny 2008 (values unverified). Hofmann
-      `cys_ribose_140C` is a repo-internal derivation (tier REFERENCE): its honest class is "no measurement". Add the
-      field to the schema as an enum, gate it, declare the three, and record the rest as `undeclared` explicitly.
+- [x] **`quantification_class` declared on every panel bundle and enforced (2026-09-03, backlog pass 5).** Three declared
+      from text already in the repo (Bolton 1994 → `internal_standard_gcms_sim`, Liu 2023 → `hs_spme_gcmsms_external_standard_curve`,
+      Trikusuma 2019 → `dynamic_headspace_gcmsms`; the marker list learned `dhs`); eleven set to an explicit `undeclared`
+      with a `quantification_note` saying why (source not on disk, figure read-off, repo-internal derivation, model
+      snapshot). `benchmark.schema.json` carries the enum; `schema_gate` fails a panel bundle whose class resolves to no
+      family unless it says `undeclared`. Still open: fetch PMC8271896 (Pratap-Singh ×2) and the Li 2026 / Resconi
+      method sentences to declare four more. Envelope effect: Bolton's row had only band width and is now NOT EVALUABLE:
+      10/44 → **9/43** literature, 10/43 → **9/42** out of sample, rows by family headspace 4 / extraction 38 / undeclared 7.
 
 - [ ] **Sulfur covariance is a local Gaussian at a bound-sitting optimum (B8).** Two coordinates sit ON declared
       bounds (`Ea_decay_thiol_sink` at its 102 kJ/mol ceiling, the acid yield at 0) and are excluded from sampling;

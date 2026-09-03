@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-03",
     "git": {
-      "commit": "66c6fe313015c0450d85a9319fd5ee1cfceca347",
-      "short": "66c6fe31",
+      "commit": "878994e4bb9a64181a619a20e24eef5897a52012",
+      "short": "878994e4",
       "branch": "cleaning",
       "dirty": true
     },
@@ -443,7 +443,7 @@
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
     },
-    "wall_seconds": 30.8
+    "wall_seconds": 30.1
   },
   "claims": [
     {

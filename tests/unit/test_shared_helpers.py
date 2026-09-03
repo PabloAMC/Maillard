@@ -165,3 +165,21 @@ def test_stale_inputs_reports_moved_and_missing_inputs(tmp_path, monkeypatch):
     moving.write_text("2", encoding="utf-8")
     assert [d.split(":")[0] for d in provenance.stale_inputs(payload)] == ["moving.json", "gone.json"]
     assert provenance.stale_inputs({}) == []
+
+
+# ------------------------------------------------------------- engine report cache
+def test_engine_read_caches_a_report_until_it_changes(tmp_path):
+    import os
+
+    from src.kinetic_core import engine
+
+    report = tmp_path / "r.json"
+    report.write_text('{"v": 1}', encoding="utf-8")
+    first = engine._read(report)
+    assert first == {"v": 1} and engine._read(report) is first  # same object: no re-read
+    report.write_text('{"v": 2}', encoding="utf-8")
+    os.utime(report, ns=(1, 1))  # force a distinct mtime even on coarse filesystems
+    assert engine._read(report) == {"v": 2}
+    assert sum(1 for k in engine._REPORT_CACHE if k[0] == str(report)) == 1
+    with pytest.raises(SystemExit):
+        engine._read(tmp_path / "missing.json")

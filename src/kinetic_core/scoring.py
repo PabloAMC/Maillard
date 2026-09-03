@@ -396,7 +396,7 @@ def score_panel(
         "engine": engine_metadata(),
         "provenance": provenance.provenance_block(
             "core_panel_scores", generated_by="src/kinetic_core/scoring.py",
-            inputs=fit_report_paths(),
+            inputs=(*fit_report_paths(), *(path for path, _tag in bundles)),
         ),
         "pass_band_level": float(pass_band),
         "parameter_sources": [

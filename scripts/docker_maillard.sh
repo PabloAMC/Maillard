@@ -4,6 +4,12 @@ set -euo pipefail
 
 CONTAINER_NAME="${MAILLARD_CONTAINER_NAME:-maillard_validation}"
 IMAGE_NAME="${MAILLARD_IMAGE_NAME:-condaforge/miniforge3}"
+# 2026-09-03: the amd64 image runs under Rosetta on Apple Silicon, where forked worker processes
+# serialise (the envelope's six workers gave no speed-up). MAILLARD_PLATFORM=linux/arm64 with its own
+# container name and conda volume runs natively; see tasks/data_restructure_plan.md §7 (envelope cost).
+PLATFORM="${MAILLARD_PLATFORM:-linux/amd64}"
+CONDA_VOLUME="${MAILLARD_CONDA_VOLUME:-maillard_conda}"
+JUPYTER_PORT="${MAILLARD_JUPYTER_PORT:-8888}"
 WORKSPACE_DIR="${MAILLARD_WORKSPACE_DIR:-$PWD}"
 WORKSPACE_MOUNT="/workspace"
 CONDA_SH="/opt/conda/etc/profile.d/conda.sh"
@@ -151,12 +157,12 @@ container_running() {
 ensure_container() {
   if ! container_exists; then
     docker run -d \
-      --platform linux/amd64 \
+      --platform "$PLATFORM" \
       --name "$CONTAINER_NAME" \
       --memory=10g \
       --memory-swap=10g \
-      -p 8888:8888 \
-      -v maillard_conda:/opt/conda \
+      -p "$JUPYTER_PORT:8888" \
+      -v "$CONDA_VOLUME:/opt/conda" \
       -v "$WORKSPACE_DIR:$WORKSPACE_MOUNT" \
       -w "$WORKSPACE_MOUNT" \
       "$IMAGE_NAME" \

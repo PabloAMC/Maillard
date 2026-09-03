@@ -1,5 +1,7 @@
 {
   "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+  "quantification_class": "hs_spme_gcmsms_external_standard_curve",
+  "quantification_note": "Declared 2026-09-03 from the bundle's own content_correction_note: 'quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95)', curves built in DI water (see the caveat there).",
   "conditions": {
     "ph": 6.0,
     "temp_C": 40.0,

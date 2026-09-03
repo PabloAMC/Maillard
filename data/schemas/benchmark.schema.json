@@ -189,6 +189,25 @@
     },
     "validation_contract": {
       "type": "object"
+    },
+    "quantification_class": {
+      "type": "string",
+      "description": "How the analyte was quantified. Headspace classes (spme/headspace/dhs in the name) carry the K_aw and HS-SPME bands in the envelope; extraction classes do not; 'undeclared' keeps the core's convention and says so on the row (src/kinetic_core/panel.quantification_family).",
+      "enum": [
+        "dynamic_headspace_gcmsms",
+        "external_standard_curve_hplc_uv",
+        "hs_spme_gcmsms_external_standard_curve",
+        "internal_standard_gcms_sim",
+        "internal_standard_with_measured_response_factors",
+        "isotope_dilution_lcmsms",
+        "lcmsms_external_calibration_curve",
+        "stable_isotope_dilution_gcms",
+        "undeclared"
+      ]
+    },
+    "quantification_note": {
+      "type": "string",
+      "description": "Where the class was read from, or why it is undeclared."
     }
   },
   "additionalProperties": true,

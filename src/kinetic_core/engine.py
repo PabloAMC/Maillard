@@ -1051,13 +1051,29 @@ def declare_envelope(
 # ---------------------------------------------------------------------------
 
 
+#: Parsed fit reports keyed by (path, mtime_ns, size): one stat per call instead of one
+#: read + parse. 2026-09-03 (envelope cost): every predict re-read five reports from disk;
+#: inside the Docker bind mount six envelope workers serialised on the file-sharing layer
+#: and the pool gave no speed-up at all. A regenerated report (new mtime) is re-read.
+_REPORT_CACHE: Dict[Tuple[str, int, int], Dict[str, Any]] = {}
+
+
 def _read(path: Path) -> Dict[str, Any]:
-    if not path.exists():
+    try:
+        stat = path.stat()
+    except FileNotFoundError:
         raise SystemExit(
             f"{path} not found. The engine never fits anything; it reads the "
             f"frozen fit reports. Regenerate them first."
-        )
-    return json.loads(path.read_text())
+        ) from None
+    key = (str(path), stat.st_mtime_ns, stat.st_size)
+    cached = _REPORT_CACHE.get(key)
+    if cached is None:
+        cached = json.loads(path.read_text())
+        for stale in [k for k in _REPORT_CACHE if k[0] == key[0]]:
+            del _REPORT_CACHE[stale]  # one live version per path
+        _REPORT_CACHE[key] = cached
+    return cached
 
 
 def b1_fitted(variant: str = "variant_A_measured_sink") -> Dict[str, Tuple[float, float]]:

@@ -1,5 +1,7 @@
 {
   "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: only the volatile table was verified (Molecules 28:3151, PMC10096055); no method sentence on disk. The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "source_metadata": {
     "origin": "external_literature",
     "generator": "Hernandez et al. 2023 commercial PBMA versus ground beef survey",

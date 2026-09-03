@@ -1,5 +1,7 @@
 {
   "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+  "quantification_class": "internal_standard_gcms_sim",
+  "quantification_note": "Declared 2026-09-03 from source_metadata.measurement_basis: 'MFT quantified by GC-MS-SIM against an internal standard' (extract-based; no headspace step). The full text was not obtained (abstract + CrossRef), so the class rests on the abstract.",
   "source_doi": "10.1021/bk-1994-0543.ch022",
   "source_metadata": {
     "citation": "Bolton, T. A.; Reineccius, G. A.; Liardon, R.; Huynh-Ba, T. Role of Cysteine in the Formation of 2-Methyl-3-furanthiol in a Thiamine-Cysteine Model System. ACS Symp. Ser. 1994, 543 (Thermally Generated Flavors), 270-278.",

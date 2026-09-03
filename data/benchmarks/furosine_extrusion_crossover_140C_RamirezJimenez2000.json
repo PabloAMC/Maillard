@@ -1,5 +1,7 @@
 {
   "benchmark_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: only the basis conversion is recorded (8.7 mg furosine / 100 g protein); no method sentence on disk (furosine is conventionally ion-pair HPLC-UV, not asserted). The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "benchmark_type": "safety",
   "source_doi": "10.1021/jf9907687",
   "damage_protein_type": "pea_iso",

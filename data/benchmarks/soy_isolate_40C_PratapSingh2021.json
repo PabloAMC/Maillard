@@ -1,5 +1,7 @@
 {
   "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: values verified against Molecules 2021, 26, 4104 Table 1 (PMC8271896) but no method sentence was extracted; the XML is re-fetchable -- a one-quote job, not a guess. The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "source_doi": "10.3390/molecules26134104",
   "precursors": {
     "Soy Protein Isolate": {

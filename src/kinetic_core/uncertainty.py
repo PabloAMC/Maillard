@@ -912,7 +912,7 @@ def propagate_panel(
         "engine": engine_metadata(),
         "provenance": provenance.provenance_block(
             "core_prediction_uncertainty", generated_by="src/kinetic_core/uncertainty.py",
-            inputs=(*engine.fit_report_paths(), LAPLACE_PATH),
+            inputs=(*engine.fit_report_paths(), LAPLACE_PATH, *(path for path, _tag in bundles)),
         ),
         "summary": {
             "n_samples": int(n_samples),

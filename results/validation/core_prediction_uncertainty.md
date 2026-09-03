@@ -3,11 +3,11 @@
 n_samples = 200, seed = 0, CI level = 90 %.
 
 * benchmarks with an envelope: **32** of 40 on the panel; matched rows **49**; refused rows 18
-* mixed-population coverage: 10/49 (0.204)
-* **honest literature coverage: 10/44 (0.227)**, median CI width 1.170 log10; 5 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 10/43 (5 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
+* mixed-population coverage: 9/49 (0.184)
+* **honest literature coverage: 9/43 (0.209)**, median CI width 1.142 log10; 6 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 9/42 (6 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
 * sampled priors 35, fixed 43; lanes with NO sampled fit uncertainty: none
-* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 2, extraction 37, undeclared 10; undeclared bundles: acrylamide_spi_extrusion_130C_ACSRef3, cys_ribose_140C_Hofmann1998, external_validation_li_2026_spi_wg_hme_control, external_validation_liu_2023_ppi_offnote_baseline, pea_isolate_40C_PratapSingh2021, pea_isolate_uht_140C_Trikusuma2019, resconi_2023_pbma_beef_identity_benchmark, soy_isolate_40C_PratapSingh2021, thiamine_cys_glucose_120C_Bolton1994
+* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 4, extraction 38, undeclared 7; undeclared bundles: acrylamide_spi_extrusion_130C_ACSRef3, cys_ribose_140C_Hofmann1998, external_validation_li_2026_spi_wg_hme_control, pea_isolate_40C_PratapSingh2021, resconi_2023_pbma_beef_identity_benchmark, soy_isolate_40C_PratapSingh2021
 
 ## Per panel
 
@@ -15,7 +15,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 |---|---|---|---|---|---|
 | external_matrix | 2 | 4 | 0.500 | 2.096 | 0 |
 | maillard_path_holdout | 4 | 25 | 0.160 | 0.941 | 5 |
-| trust_loop | 4 | 15 | 0.267 | 1.652 | 0 |
+| trust_loop | 3 | 14 | 0.214 | 1.681 | 1 |
 
 ## Rows
 
@@ -32,10 +32,10 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 834.391 | 55.756 | 798.227 | 7.92e+03 | yes | 2.153 | no (extraction) | sulfur | predictive |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 731.065 | 348.934 | 682.743 | 1.16e+03 | no | 0.521 | no (extraction) | sulfur | predictive |
 | pea_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.14e+03 | 0.339 | 0.036 | 0.369 | 4.381 | no | 2.089 | yes (undeclared) | lipid | predictive |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 22.839 | 1.223 | 25.195 | 459.646 | no | 2.575 | yes (undeclared) | lipid | predictive |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 22.839 | 1.223 | 25.195 | 459.646 | no | 2.575 | yes (headspace) | lipid | predictive |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.665 | 1.685 | 11.247 | 75.170 | no | 1.650 | yes (undeclared) | sulfur | predictive |
 | soy_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.62e+03 | 0.267 | 0.028 | 0.290 | 3.449 | no | 2.089 | yes (undeclared) | lipid | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 13.000 | 17.314 | 3.560 | 18.602 | 114.536 | yes | 1.508 | yes (undeclared) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 13.000 | 17.314 | 17.232 | 17.314 | 17.320 | no | 0.0022 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 225.440 | 79.043 | 207.025 | 689.414 | no | 0.941 | no (extraction) | acrylamide | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.94e+03 | 1.94e+03 | 1.94e+03 | 1.94e+03 | no | 1.14e-11 | no (extraction) | acrylamide | predictive |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 7.588 | 21.565 | 64.513 | no | 0.930 | no (extraction) | acrylamide | predictive |
@@ -69,7 +69,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | external_validation_bi_2020_raw_pea_hexanal | external_matrix | hexanal | ppb | 1.26e+03 | 0.339 | 0.036 | 0.369 | 4.381 | no | 2.089 | yes (headspace) | lipid | predictive |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 88.598 | 8.016 | 101.125 | 1.23e+03 | yes | 2.184 | yes (headspace) | lipid | predictive |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 69.695 | 5.987 | 64.082 | 759.830 | yes | 2.104 | yes (undeclared) | lipid | predictive |
-| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | hexanal | ppb | 1.13e+04 | 0.339 | 0.036 | 0.369 | 4.381 | no | 2.089 | yes (undeclared) | lipid | predictive |
+| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | hexanal | ppb | 1.13e+04 | 0.339 | 0.036 | 0.369 | 4.381 | no | 2.089 | yes (headspace) | lipid | predictive |
 
 ## Refused rows
 

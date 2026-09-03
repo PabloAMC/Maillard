@@ -1,10 +1,16 @@
 {
   "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: the bundle records only the unit repair (mg/kg -> ppb); no method sentence on disk (CML/CEL are conventionally LC-MS/MS, not asserted). The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "benchmark_type": "safety",
   "source_doi": "10.3390/foods12101967",
   "precursors": {
-    "L-Lysine": {"concentration_mM": 45.0},
-    "D-Glucose": {"concentration_mM": 45.0}
+    "L-Lysine": {
+      "concentration_mM": 45.0
+    },
+    "D-Glucose": {
+      "concentration_mM": 45.0
+    }
   },
   "conditions": {
     "temp_C": 150,
@@ -32,7 +38,13 @@
     "policy": "Tolerances are deliberately UNCHANGED. The pre-correction pass (ratios 1.005-1.204) was an artifact of the unit collision, not agreement; loosening the contract would hide a real 1000x calibration gap. Fix the predictors against real ug/kg data, do not retune the tolerance."
   },
   "measured_volatiles": {
-    "Nε-(Carboxymethyl)lysine (CML)": {"conc_ppb": 32000.0, "uncertainty_pct": 20},
-    "Nε-(Carboxyethyl)lysine (CEL)": {"conc_ppb": 55000.0, "uncertainty_pct": 20}
+    "Nε-(Carboxymethyl)lysine (CML)": {
+      "conc_ppb": 32000.0,
+      "uncertainty_pct": 20
+    },
+    "Nε-(Carboxyethyl)lysine (CEL)": {
+      "conc_ppb": 55000.0,
+      "uncertainty_pct": 20
+    }
   }
 }

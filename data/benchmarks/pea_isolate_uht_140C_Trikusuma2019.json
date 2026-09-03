@@ -1,5 +1,7 @@
 {
   "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+  "quantification_class": "dynamic_headspace_gcmsms",
+  "quantification_note": "Declared 2026-09-03 from source_metadata.generator: 'Trikusuma 2020 DHS-GC-MS-MS quantitative table' (values verified against the 2018 OSU thesis Table 6). Dynamic headspace: the headspace bands apply.",
   "source_doi": "10.1016/j.foodchem.2019.126082",
   "precursors": {
     "Pea Protein Isolate": {

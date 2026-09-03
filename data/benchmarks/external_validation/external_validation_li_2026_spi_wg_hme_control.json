@@ -1,5 +1,7 @@
 {
   "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: only the volatile table row was verified (PMC12984281); no method sentence on disk. The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "conditions": {
     "ph": 7.0,
     "temp_C": 160.0,

@@ -1,5 +1,7 @@
 {
   "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+  "quantification_class": "undeclared",
+  "quantification_note": "Explicitly undeclared 2026-09-03: the value is a figure read-off (Fig 2D); the paper's method section is not on disk. The envelope keeps the core's absolute-concentration convention for this row and says so.",
   "benchmark_type": "safety",
   "source_doi": "10.3390/ijms25168668",
   "precursors": {

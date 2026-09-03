@@ -31,6 +31,7 @@ if str(ROOT) not in sys.path:
 import jsonschema  # noqa: E402
 
 from src import compound_keys, data_paths  # noqa: E402
+from src.kinetic_core.panel import quantification_family  # noqa: E402
 
 
 def main() -> int:
@@ -56,6 +57,13 @@ def main() -> int:
                     violations.append(f"{rel}: {block}/{name!r} resolves to no entry in {data_paths.rel(data_paths.COMPOUND_REGISTRY)}")
         if data_paths.EXTERNAL_VALIDATION_DIR in path.parents and payload.get("evidence_class") != "external_validation_only":
             violations.append(f"{rel}: hold-out bundle without evidence_class=external_validation_only")
+        # 2026-09-03: every PANEL bundle says how its number was quantified -- a class the envelope
+        # can place (anywhere in the bundle, as it searches) or an explicit top-level 'undeclared'
+        # with a quantification_note. The headspace-band gating must never default silently.
+        if path.parent in data_paths.PANEL_DIRS:
+            family, _why = quantification_family(payload)
+            if family == "undeclared" and payload.get("quantification_class") != "undeclared":
+                violations.append(f"{rel}: panel bundle whose quantification class resolves to no family (declare it, or set quantification_class: 'undeclared' with a quantification_note)")
     if violations:
         print(f"schema_gate: FAIL -- {len(violations)} violation(s) across {len(files)} benchmark files", file=sys.stderr)
         for v in violations:

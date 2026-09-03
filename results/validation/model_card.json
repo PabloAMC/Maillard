@@ -3,13 +3,13 @@
   "core_envelope": {
     "available": true,
     "ci_level_pct": 90,
-    "literature_hits": 10,
-    "literature_not_evaluable": 5,
-    "literature_total": 44,
-    "median_ci_width_log10": 1.1695611166707942,
+    "literature_hits": 9,
+    "literature_not_evaluable": 6,
+    "literature_total": 43,
+    "median_ci_width_log10": 1.1424123312827679,
     "n_samples": 200,
-    "out_of_sample_hits": 10,
-    "out_of_sample_total": 43,
+    "out_of_sample_hits": 9,
+    "out_of_sample_total": 42,
     "path": "results/validation/core_prediction_uncertainty.json",
     "seed": 0,
     "unsampled_lanes": []
@@ -160,7 +160,7 @@
   ],
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
-    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 6/49 rows within 3x (median fold error 50.1x, worst 8.39e+10x); out of sample -- every row a core fit read removed -- 5/48 (median 51.2x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 10/44 evaluable literature rows (5 not evaluable: the no lane carries no sampled uncertainty), 10/43 out of sample.",
+    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 6/49 rows within 3x (median fold error 50.1x, worst 8.39e+10x); out of sample -- every row a core fit read removed -- 5/48 (median 51.2x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 9/43 evaluable literature rows (6 not evaluable: the no lane carries no sampled uncertainty), 9/42 out of sample.",
     "**Directional and ranking claims are the product, and on the kinetic core they score 17/27 on strictly independent literature claims** (25 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 13/22 once pH and water activity are set aside, and 4/5 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
@@ -251,7 +251,7 @@
     {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
-      "evidence": "10/44 evaluable literature rows inside; 10/43 out of sample; 5 not evaluable",
+      "evidence": "9/43 evaluable literature rows inside; 9/42 out of sample; 6 not evaluable",
       "system_class": "every lane with sampled uncertainty",
       "verdict": "do-not-use"
     },

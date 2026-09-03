@@ -364,7 +364,7 @@ QUANTIFICATION_EXTRACTION = "extraction"
 #: absolute ppb carries the HS-SPME dispersion) and says so on the row.
 QUANTIFICATION_UNDECLARED = "undeclared"
 
-_HEADSPACE_MARKERS = ("spme", "headspace", "hs-gc", "hs_gc")
+_HEADSPACE_MARKERS = ("spme", "headspace", "hs-gc", "hs_gc", "dhs", "dynamic_headspace")
 _EXTRACTION_MARKERS = (
     "isotope_dilution", "sida", "hplc", "lcms", "lc-ms", "internal_standard",
     "external_standard", "response_factor", "calibration_curve",

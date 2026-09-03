@@ -161,9 +161,12 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_10_of_44_evaluable_literature_rows_and_10_of_43_out_of_sample():
+def test_core_envelope_covers_9_of_43_evaluable_literature_rows_and_9_of_42_out_of_sample():
     # RE-PINNED 2026-09-03 (B9): 11/44 -> 10/44 (width 1.07 -> 1.17 dex); out of sample now
     # excludes only the C2+C3 pH-5 row, 8/35 -> 10/43; Laplace 18/23 -> 20/23, chi2_red 1.03 -> 1.21.
+    # RE-PINNED 2026-09-03 (quantification classes declared): Bolton 1994 is extraction-quantified,
+    # so its row no longer gets the headspace bands; the interval it had was band width alone
+    # and the row is now NOT EVALUABLE (6, was 5): 10/44 -> 9/43, out of sample 10/43 -> 9/42.
     """Pinned 2026-09-03 (B8, n=200 seed 0). The sulfur lane is now sampled jointly from the
     Laplace covariance at its B8 optimum (18 of 23 free coordinates identified, reduced
     chi-square 1.03), so the 24 rows that were "not evaluable" at B3 are evaluable: 7/25 ->
@@ -173,19 +176,19 @@ def test_core_envelope_covers_10_of_44_evaluable_literature_rows_and_10_of_43_ou
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (10, 44, 5)
-    assert lit["median_ci_width_log10"] == pytest.approx(1.1696, abs=5e-4)
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (9, 43, 6)
+    assert lit["median_ci_width_log10"] == pytest.approx(1.1424, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (10, 43)
+    assert (oos["hits"], oos["total"]) == (9, 42)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
-        "headspace": 2, "extraction": 37, "undeclared": 10,
+        "headspace": 4, "extraction": 38, "undeclared": 7,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "10 of 44", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "10 of 43", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "9 of 43", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "9 of 42", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 
