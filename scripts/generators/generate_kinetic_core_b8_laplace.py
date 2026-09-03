@@ -46,11 +46,17 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
+import importlib  # noqa: E402
+
 import generate_kinetic_core_b2_3_fit as B23  # noqa: E402
-import generate_kinetic_core_b8_fit as B8  # noqa: E402
 from src import data_paths  # noqa: E402
 
 OUT = data_paths.KINETIC_CORE_B8_LAPLACE
+
+
+def wave_module(wave: str):
+    """The wave's fit module (B8, or B9 which imports B8 and removes rows)."""
+    return importlib.import_module(f"generate_kinetic_core_{wave}_fit")
 THRESHOLDS = {"Ea": 60.0, "log10k": 3.0, "acid_yield": 0.5, "pka": 1.5}
 STEPS = {"Ea": 2.0, "log10k": 0.05, "acid_yield": 0.01, "pka": 0.1}
 
@@ -84,9 +90,15 @@ def frozen_vector(report: Dict[str, Any]) -> np.ndarray:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--careful", action="store_true", help="careful pH fixed point (slower) for the Jacobian")
-    parser.add_argument("--output", default=str(OUT))
+    parser.add_argument("--output", default=None)
+    parser.add_argument("--wave", default="b9", help="b8 or b9 (default: b9 when its report exists, else b8)")
     args = parser.parse_args(argv)
     quick = not args.careful
+    B8 = wave_module(args.wave)
+    if not Path(B8.OUT_FIT_REPORT).exists() and args.wave != "b8":
+        B8 = wave_module("b8")
+    wave = B8.WAVE.lower() if hasattr(B8, "WAVE") else "b8"
+    out = Path(args.output) if args.output else data_paths.VALIDATION_DIR / f"kinetic_core_{wave}_laplace_covariance.json"
 
     report = json.loads(Path(B8.OUT_FIT_REPORT).read_text(encoding="utf-8"))
     x_opt = frozen_vector(report)
@@ -192,8 +204,9 @@ def main(argv=None) -> int:
             "threshold, or a flat J column) stays at the optimum and is reported, not widened."
         ),
     }
-    Path(args.output).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {args.output}: identified {payload['identified_count']}/{n_free}, chi2_red={chi2_red:.3f}, wall={payload['wall_seconds']}s")
+    payload["wave"] = wave
+    out.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {out}: identified {payload['identified_count']}/{n_free}, chi2_red={chi2_red:.3f}, wall={payload['wall_seconds']}s")
     for k, s, ok, c, ab in zip(keys, sigmas, identified, coords, at_bound):
         print(f"  {k:34s} sigma={s:9.3g} {'IDENTIFIED' if ok else 'not sampled'} ({c['kind']}{', at bound' if ab else ''})")
     return 0

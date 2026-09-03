@@ -72,3 +72,4 @@ say so in the docstring), **merge**, **rewrite** (shape-only tests that should a
 - Collapse the fourteen literature-side files into one parametrised builder test.
 - Coverage configuration: `uncertainty.py` and `directional.py` report 0 % under `coverage run` although their
   tests pass (multiprocessing `fork`); fix before trusting per-module numbers.
+- **Import-order coupling (found 2026-09-03 during B9):** `generate_kinetic_core_b8_fit.py` (and B9 through it) installs its rows into `generate_kinetic_core_b2_3_fit.ACTIVE_FIT_ROWS` at import. `test_kinetic_core_b2_3.py::test_b2_3_objective_at_its_own_vector` and `test_kinetic_core_b2_4.py` (58-row assertion) pass only when they import before the B8 test module, i.e. only in alphabetical order. Fix: have the B8/B9 generators expose their row tables without mutating B2.3's module, or snapshot B2.3's rows in a fixture.

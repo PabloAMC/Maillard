@@ -811,8 +811,20 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
       regression records. Left in the audit's own backlog: merge the four generator-text checks into the freeze guard,
       rewrite `test_v1_reports`' five substring checks, collapse the fourteen literature-side files into one
       parametrised builder test, fix the coverage/fork configuration.
-- [ ] **B9 (defined 2026-09-03 from the owner's principle "fit on primary, validate on causally secondary
-      evidence"):** the sulfur refit that drops the eight Hofmann 1998 Table 1 LEVEL rows (ribose / glucose /
+- [x] **B9 RUN 2026-09-03** (`generate_kinetic_core_b9_fit.py`, prereg `kinetic_core_b9_prereg.md`): B8 minus the
+      eight Hofmann T1 level rows, 54 rows, same free set / bands / weighting / protocol. Both starts converge to cost
+      18.74 (B8's vector scores 18.87 on the 54 rows); active bounds: k_dimer_mft, k_dimer_fft, Ea_decay_thiol_sink
+      (ceiling), acid yield (floor). Laplace at B9: 20/23 identified, chi2_red 1.21. PREREG CHECK: hold-out 4/30
+      (not worse), returned bundles **1 of 8** within 3x (expected 2-4; falsifier was 0/8 AND hold-out -2) → B9 SHIPS.
+      THE FINDING: glucose and fructose MFT predict ZERO without the level rows — the hexose→thiol route had no
+      step-level support and was carried by the very rows it was scored on. Scorecard 8/49 → **6/49**, out-of-sample
+      4/40 → **5/48** (only the C2+C3 pH-5 row is a fit row now), median fold 11x → 50x; directional 18/27 → **17/27**.
+      Xylose returned to the hold-out (17 bundles). B8's fit-target record removed (superseded). Envelope on B9 (n=200):
+      **10/44** evaluable literature rows (was 11/44; median width 1.17 dex, was 1.07), out of sample **10/43** (was 8/35).
+      B9 slice profile: 4 quadratic / 9 asymmetric / 3 flat / 7 bound-limited — the declared bands are still active
+      constraints and the hexose coordinates are now flat (unconstrained by step-level data). The bands question and a
+      hexose→thiol step-level measurement are the next science items.
+      Original definition: the sulfur refit that drops the eight Hofmann 1998 Table 1 LEVEL rows (ribose / glucose /
       fructose / xylose pH 5, FFT and MFT) from the objective and keeps the step-level rows (fed intermediates T3 /
       T4 / T10, conversions, ratios, Kang / Zhou / Whitfield / Cerny). Rule going forward: rate constants,
       activation energies, fed-intermediate yields, conversions and within-study ratios are FIT evidence; end-to-end
@@ -853,6 +865,9 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
 ---
 
 ## 7. Improvement backlog (standing owner request 2026-09-03: "suggest ideas that improve the codebase and add them here")
+
+- **Verdicts at the boundary** (found at B9): pH on the core is tagged `trust` on 4 of 5 claims (0.80 exactly, n=5). The rule is a point rate over a minimum count; a Wilson lower bound (or requiring rate >= 0.80 AND n >= 5 with at most one miss) would separate 4/5 from 8/8. Changing the rule is a threshold change and so an owner decision; `src/directional_reliability.py` documents why the current ones were not tuned.
+- **Hard-coded headline numbers in code** (found at B9): `src/comparative_cli.py` carries the out-of-sample count as a string literal (now "5 of 48"); QUICKSTART quotes it too. Have the CLI read `core_panel_scores.json` and let the model card be the only place prose numbers are spliced. Also: B8/B9 generators mutate B2.3's `ACTIVE_FIT_ROWS` at import (see `tasks/test_audit.md`).
 
 Not scheduled; each is a self-contained change with its motivation. Strike or promote as decided.
 

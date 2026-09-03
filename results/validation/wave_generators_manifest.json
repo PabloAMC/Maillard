@@ -25,6 +25,7 @@
     "scripts/generators/generate_kinetic_core_b7_holdout.py": "ca1584ff5614a73dfb2c4891a785ff0c705f5315a841d4419dc79f20925826a3",
     "scripts/generators/generate_kinetic_core_b8_fit.py": "2ecf8ec36a881bf3f5a6ce6569a0ca47af4b1130b509fb06be606b83f41478db",
     "scripts/generators/generate_kinetic_core_b8_reports.py": "867ee44ea8908a44b1f96f49df5edffc0ec40e577e942ca85308b5da483d9e74",
+    "scripts/generators/generate_kinetic_core_b9_fit.py": "f92f20d42c626ceb9145c5e79bb20323343ca376eedad423129f1a5faf002480",
     "scripts/generators/probe_amine_fate_b2_4.py": "99ad847333615aaccb86facb4c69a9b7874ee83fdb8428bc291549aed725450f"
   }
 }

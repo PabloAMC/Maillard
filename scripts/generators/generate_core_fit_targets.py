@@ -5,7 +5,7 @@ THE KINETIC CORE'S FIT-ROW DECLARATIONS, in the fit-target index's vocabulary (2
 Reads the sulfur fit's row table (``generate_kinetic_core_b2_3_fit.FIT_ROWS`` plus the
 four rows B8 installs) -- each level row now carries ``benchmark_id`` and
 ``benchmark_compound`` next to its source anchor -- and the B8 report's free set, and
-writes ``results/validation/kinetic_core_b8_fit_targets.json``:
+writes ``results/validation/kinetic_core_<wave>_fit_targets.json`` (default wave b9):
 
     fit_target_ids   the panel bundles whose level rows the fit read
     fit_leverage     {free_parameters, fitted_rows}  (23 / 62 -> global_low_leverage)
@@ -34,16 +34,23 @@ sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
 from src import data_paths  # noqa: E402
 
-OUT = data_paths.VALIDATION_DIR / "kinetic_core_b8_fit_targets.json"
+OUT = None  # kinetic_core_<wave>_fit_targets.json
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", default=str(OUT))
+    parser.add_argument("--output", default=None)
+    parser.add_argument("--wave", default="b9", help="the sulfur wave whose rows are declared (b8 or b9)")
     args = parser.parse_args(argv)
 
+    import importlib
+
     import generate_kinetic_core_b2_3_fit as B23  # noqa: E402  (installs nothing)
-    import generate_kinetic_core_b8_fit as B8  # noqa: E402  (installs B8's four rows into B23)
+    B8 = importlib.import_module(f"generate_kinetic_core_{args.wave}_fit")  # installs / removes rows in B23
+    if not Path(B8.OUT_FIT_REPORT).exists() and args.wave != "b8":
+        B8 = importlib.import_module("generate_kinetic_core_b8_fit")
+    wave = B8.WAVE.lower() if hasattr(B8, "WAVE") else "b8"
+    out = Path(args.output) if args.output else data_paths.VALIDATION_DIR / f"kinetic_core_{wave}_fit_targets.json"
 
     report = json.loads(Path(B8.OUT_FIT_REPORT).read_text(encoding="utf-8"))
     n_free = int(report["free_set"]["n_free"])
@@ -75,8 +82,9 @@ def main(argv=None) -> int:
         "fit_leverage": {"free_parameters": n_free, "fitted_rows": n_rows},
         "rows": rows,
     }
-    Path(args.output).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {args.output}: {len(rows)} level rows over {len(payload['fit_target_ids'])} bundles; leverage {n_free}/{n_rows}")
+    payload["wave"] = wave
+    out.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {out}: {len(rows)} level rows over {len(payload['fit_target_ids'])} bundles; leverage {n_free}/{n_rows}")
     return 0
 
 

@@ -18,6 +18,6 @@ frozen B8 optimum), `generate_kinetic_core_b8_profile.py` (slice profiles around
 | date | change | why |
 | --- | --- | --- |
 | 2026-09-03 | manifest created after annotating the sulfur fit rows in `generate_kinetic_core_b2_3_fit.py` with `benchmark_id` / `benchmark_compound` (no numeric change) | step 1 of the post-retirement plan: fit rows declare their bundles |
+| 2026-09-03 | **B9** `generate_kinetic_core_b9_fit.py`: B8's objective minus the eight Hofmann 1998 Table 1 LEVEL rows (54 rows), same free set, bands, weighting and protocol; pre-registered in `results/validation/kinetic_core_b9_prereg.md` | the owner's rule: primary evidence fits, end-to-end levels validate |
+| 2026-09-03 | **B9 result**: both starts converge (cost 18.74 on 54 rows; B8's vector scores 18.87 there); ships per its prereg (hold-out 4/30 not worse; the four returned Hofmann bundles 1/8 within 3x). Finding: glucose and fructose MFT predict zero without the level rows. Laplace 20/23 identified (chi2_red 1.21); slice profile 4 quadratic / 9 asymmetric / 3 flat / 7 bound-limited. Envelope 10/44 literature rows, 10/43 out of sample. Active bounds: k_dimer_mft, k_dimer_fft, Ea_decay_thiol_sink (ceiling), acid yield (floor). Manifest rebuilt (25 files). | the engine reads `kinetic_core_b9_fit_report.json` |
 
-Next wave candidate (backlog): **B9**, the sulfur refit WITHOUT the Hofmann xylose pH-5 rows, which would let
-`hofmann1998_xylose_cysteine_145C_20min_pH5` return to the hold-out panel.

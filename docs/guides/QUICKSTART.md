@@ -43,7 +43,7 @@ python scripts/maillard.py predict my_comparison.yml --system a
 
 Absolute µg/L (= ppb in water) per compound, **always with its reliability interval** and, where
 an odour threshold exists, the odour-activity ratio. Read the interval before the point: an
-absolute out of sample lands within 3x of the measurement on 4 of 40 panel rows.
+absolute out of sample lands within 3x of the measurement on 5 of 48 panel rows.
 
 ## What does the model know about a compound? `maillard explain`
 

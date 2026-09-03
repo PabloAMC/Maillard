@@ -24,7 +24,10 @@ _SMALL_PANEL = (
     (data_paths.BENCHMARKS_DIR / "acrylamide_spi_extrusion_130C_ACSRef3.json", "trust_loop"),
     (data_paths.BENCHMARKS_DIR / "hofmann1998_norfuraneol_h2s_145C_20min_pH5.json", "trust_loop"),
     (data_paths.BENCHMARKS_DIR / "pea_isolate_uht_140C_Trikusuma2019.json", "trust_loop"),
-    (data_paths.BENCHMARKS_DIR / "hofmann1998_xylose_cysteine_145C_20min_pH5.json", "trust_loop"),
+    (
+        data_paths.MAILLARD_PATH_HOLDOUT_DIR / "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
+        "maillard_path_holdout",
+    ),
     (
         data_paths.MAILLARD_PATH_HOLDOUT_DIR / "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
         "maillard_path_holdout",
@@ -101,7 +104,7 @@ def _bundle_path(benchmark_id: str) -> Path:
 
 def _fit_target_record():
     paths = fit_targets.record_paths()
-    assert [p.name for p in paths] == ["kinetic_core_b8_fit_targets.json"]
+    assert [p.name for p in paths] == ["kinetic_core_b9_fit_targets.json"]
     return json.loads(paths[0].read_text())
 
 
@@ -125,15 +128,17 @@ def test_sulfur_fit_leverage_is_read_from_the_record_and_is_low():
     record = _fit_target_record()
     lev = record["fit_leverage"]
     assert lev["free_parameters"] < lev["fitted_rows"]
-    report = json.loads((data_paths.VALIDATION_DIR / "kinetic_core_b8_fit_report.json").read_text())
+    report = json.loads((data_paths.VALIDATION_DIR / "kinetic_core_b9_fit_report.json").read_text())
     assert lev["free_parameters"] == report["free_set"]["n_free"]
-    targets = fit_targets.core_fit_targets("hofmann1998_ribose_cysteine_145C_20min_pH5")
+    targets = fit_targets.core_fit_targets("hofmann1998_c2c3_recombination_145C_20min_pH5")
     assert len(targets) == 1 and targets[0].leverage_class == "global_low_leverage"
 
 
-def test_in_core_fit_flags_the_pH5_rows_including_xylose_only():
-    assert fit_targets.in_core_fit("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)
-    assert fit_targets.in_core_fit("hofmann1998_xylose_cysteine_145C_20min_pH5", FFT)
+def test_in_core_fit_flags_only_the_step_level_bundles_after_b9():
+    # B9 (2026-09-03) removed the Hofmann Table 1 level rows from the objective
+    assert not fit_targets.in_core_fit("hofmann1998_ribose_cysteine_145C_20min_pH5", MFT)
+    assert not fit_targets.in_core_fit("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", FFT)
+    assert fit_targets.in_core_fit("hofmann1998_c2c3_recombination_145C_20min_pH5", MFT)
     assert not fit_targets.in_core_fit("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7", MFT)
     assert not fit_targets.in_core_fit("hofmann1998_ribose_cysteine_145C_20min_pH5", "furfural")
 
@@ -145,9 +150,9 @@ def test_core_evidence_role_ignores_legacy_fit_declarations_but_reports_them(sma
     assert trik["evidence_role"] == "predictive"
     assert not trik["fit_target_of"]["core"]
     hof = by_id["hofmann1998_ribose_cysteine_145C_20min_pH5"]
-    assert hof["evidence_role"] == "predictive"  # low-leverage fit: stays in, annotated
-    assert hof["fit_target_of"]["core"] == ["kinetic_core_b8_fit_targets.json"]
-    assert all(r["in_core_fit"] for r in hof["compounds"])
+    assert hof["evidence_role"] == "predictive"
+    assert hof["fit_target_of"]["core"] == []  # B9: the level rows left the objective
+    assert not any(r["in_core_fit"] for r in hof["compounds"])
 
 
 # ---------------------------------------------------------------------------
@@ -214,7 +219,9 @@ def test_coverage_splits_are_consistent(small):
     assert s["honest_literature"]["within_band"] == (
         s["out_of_sample"]["within_band"] + s["in_core_fit"]["within_band"]
     )
-    assert s["in_core_fit"]["rows"] >= 4  # ribose pH5 (2) + xylose pH5 (2)
+    # B9 (2026-09-03): no Hofmann level row is a fit row any more and the small panel
+    # holds none of the six step-level bundles, so the in-fit split is empty here.
+    assert s["in_core_fit"]["rows"] == 0
 
 
 def test_markdown_renders(small):

@@ -88,9 +88,10 @@ def test_core_panel_is_40_bundles_32_answered_49_rows(tracked_scores):
     assert s["scored_benchmark_count"] == 32
     assert s["matched_compound_count"] == 49
     assert s["refused_compound_count"] == 18
-    # 2026-09-03: the xylose pH-5 bundle moved from the hold-out to the trust loop (in-fit)
+    # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
+    # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
-        "trust_loop": 20, "maillard_path_holdout": 16, "external_matrix": 4,
+        "trust_loop": 19, "maillard_path_holdout": 17, "external_matrix": 4,
     }
 
 
@@ -103,18 +104,21 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     assert s["evidence_role_totals"] == {"predictive": 40}
 
 
-def test_within_3x_is_8_of_49_and_out_of_sample_4_of_40(tracked_scores):
-    """Pinned 2026-09-03 (B3). honest_literature == all 49 rows (no fit-recovery, no synthetic
-    on the core); out_of_sample removes the 9 rows the sulfur fit read (4 of which are hits)."""
+def test_within_3x_is_6_of_49_and_out_of_sample_5_of_48(tracked_scores):
+    """RE-PINNED 2026-09-03 (wave B9, the fit/validate split). With the eight Hofmann Table 1
+    level rows out of the sulfur objective the core lands 6/49 within 3x (was 8/49 with those
+    rows fitted); out of sample is now 48 of the 49 rows (only the C2+C3 pH-5 row is a fit row)
+    at 5/48 (was 4/40). The hexose rows are the story: glucose and fructose MFT predict ZERO
+    without the level rows -- the hexose-to-thiol route has no primary-evidence support."""
     s = tracked_scores["summary"]
-    assert (s["within_band_count"], s["matched_compound_count"]) == (8, 49)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (8, 49)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (4, 40)
-    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (4, 9)
-    assert s["holdout_within_band"] == {"hits": 2, "total": 28}
+    assert (s["within_band_count"], s["matched_compound_count"]) == (6, 49)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (6, 49)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (5, 48)
+    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (1, 1)
+    assert s["holdout_within_band"] == {"hits": 4, "total": 30}
     readme = _doc_text(README)
-    _assert_quoted(readme, "8 of 49", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "4 of 40", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "6 of 49", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "5 of 48", "README.md", "the core's out-of-sample count")
 
 
 def test_one_core_benchmark_is_strict_ready_and_it_is_bolton_1994(tracked_scores):
@@ -135,17 +139,21 @@ def test_one_core_benchmark_is_strict_ready_and_it_is_bolton_1994(tracked_scores
     _assert_quoted(_doc_text(AUDIT), "strict-ready 1/40", "AUDIT.md", "the core strict-ready count")
 
 
-def test_the_xylose_row_the_sulfur_fit_read_is_declared_in_fit(tracked_scores):
-    """Pinned 2026-09-03. Found at B3 on the hold-out panel; moved to the trust loop the same
-    day (owner decision) and declared in-fit by the generated fit-target record."""
+def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_fit(tracked_scores):
+    """Pinned 2026-09-03 (B9). Found at B3 as a hold-out the fit had read; moved to the trust
+    loop; returned to the hold-out once B9 removed the Hofmann level rows. The generated fit-
+    target record names no Hofmann pH-5 level bundle any more."""
     xyl = next(
         b for b in tracked_scores["benchmarks"]
-        if b["benchmark_id"] == "hofmann1998_xylose_cysteine_145C_20min_pH5"
+        if b["benchmark_id"] == "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5"
     )
-    # moved 2026-09-03: the fit read it, so it lives on the trust loop, declared in-fit
-    assert xyl["panel"] == "trust_loop"
-    assert xyl["fit_target_of"]["core"] == ["kinetic_core_b8_fit_targets.json"]
-    assert all(r["in_core_fit"] for r in xyl["compounds"])
+    assert xyl["panel"] == "maillard_path_holdout"
+    assert xyl["fit_target_of"]["core"] == []
+    assert not any(r["in_core_fit"] for r in xyl["compounds"])
+    for bid in ("hofmann1998_ribose_cysteine_145C_20min_pH5", "hofmann1998_glucose_cysteine_145C_20min_pH5",
+                "hofmann1998_fructose_cysteine_145C_20min_pH5"):
+        b = next(x for x in tracked_scores["benchmarks"] if x["benchmark_id"] == bid)
+        assert b["fit_target_of"]["core"] == [] and not any(r["in_core_fit"] for r in b["compounds"]), bid
 
 
 # --------------------------------------------------------------------------------------
@@ -153,7 +161,9 @@ def test_the_xylose_row_the_sulfur_fit_read_is_declared_in_fit(tracked_scores):
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_11_of_44_evaluable_literature_rows_and_8_of_35_out_of_sample():
+def test_core_envelope_covers_10_of_44_evaluable_literature_rows_and_10_of_43_out_of_sample():
+    # RE-PINNED 2026-09-03 (B9): 11/44 -> 10/44 (width 1.07 -> 1.17 dex); out of sample now
+    # excludes only the C2+C3 pH-5 row, 8/35 -> 10/43; Laplace 18/23 -> 20/23, chi2_red 1.03 -> 1.21.
     """Pinned 2026-09-03 (B8, n=200 seed 0). The sulfur lane is now sampled jointly from the
     Laplace covariance at its B8 optimum (18 of 23 free coordinates identified, reduced
     chi-square 1.03), so the 24 rows that were "not evaluable" at B3 are evaluable: 7/25 ->
@@ -163,20 +173,20 @@ def test_core_envelope_covers_11_of_44_evaluable_literature_rows_and_8_of_35_out
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (11, 44, 5)
-    assert lit["median_ci_width_log10"] == pytest.approx(1.0687, abs=5e-4)
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (10, 44, 5)
+    assert lit["median_ci_width_log10"] == pytest.approx(1.1696, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (8, 35)
+    assert (oos["hits"], oos["total"]) == (10, 43)
     assert s["unsampled_lanes"] == []
-    assert s["sulfur_laplace"]["identified"] == 18 and s["sulfur_laplace"]["free"] == 23
-    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.03, abs=0.01)
+    assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
+    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
         "headspace": 2, "extraction": 37, "undeclared": 10,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "11 of 44", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "8 of 35", "README.md", "the core envelope's out-of-sample coverage")
-    _assert_quoted(readme, "18 of 23", "README.md", "the identified sulfur coordinates")
+    _assert_quoted(readme, "10 of 44", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "10 of 43", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 
 # --------------------------------------------------------------------------------------
@@ -207,7 +217,7 @@ def test_cutover_exam_is_34_answered_3_within_band_paired_24_78x_vs_10_86x():
 # --------------------------------------------------------------------------------------
 
 
-def test_core_scores_18_of_27_independent_directional_claims():
+def test_core_scores_17_of_27_independent_directional_claims():
     """Pinned 2026-09-03 (B7). 69 claims; 16 are prose-only and 22 independent claims are
     not evaluable on the core (refused arms: 2,5-dimethylpyrazine, 2-pentylfuran, nonanal from
     oleate, H2S / hydroxyacetaldehyde precursors; a zero disulfide). Of the evaluable
@@ -221,24 +231,25 @@ def test_core_scores_18_of_27_independent_directional_claims():
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
-    assert s["headline"] == [18, 27]
+    # RE-PINNED 2026-09-03 (B9): 18/27 -> 17/27; the hexose-related claims moved.
+    assert s["headline"] == [17, 27]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (15, 22)
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (3, 5)
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (13, 22)
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (4, 5)
     assert ind["total"]["not_evaluable"] == 25
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 4
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
-    assert cats["sugar_identity"] == (5, 9)
+    assert cats["sugar_identity"] == (4, 9)
     assert cats["temperature"] == (5, 7)
-    assert cats["ph"] == (3, 5)
+    assert cats["ph"] == (4, 5)
     assert cats["moisture_aw"] == (0, 0)   # every a_w comparison is refused
-    assert cats["additive_cysteine"] == (3, 3)
+    assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (2, 2)
     readme = _doc_text(README)
-    _assert_quoted(readme, "18 of 27", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "15 of 22", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "3 of 5", "README.md", "the directional count on pH")
+    _assert_quoted(readme, "17 of 27", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "13 of 22", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "4 of 5", "README.md", "the directional count on pH")
 
 
 def test_directional_scorecard_is_not_stale():

@@ -85,17 +85,22 @@ def test_a_missing_or_unparseable_artifact_raises_rather_than_defaulting(tmp_pat
         dr.load_panel_counts(wrong)
 
 
-def test_ph_and_water_activity_are_never_trusted_on_the_core():
-    """The core's trunk and acrylamide lanes carry no pH term and no lane carries a water-
-    activity term (declared in the engine); the directional scorecard must not tag either
-    axis 'trust'. The thresholds are part of the claim: a promotion that came from moving
-    them is a different event from one that came from new measurements."""
+def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule():
+    """No lane carries a water-activity term, so every a_w comparison is refused (0/0
+    evaluable) and the axis stays 'do-not-use'. pH is different since axis refusal: the
+    trunk, acrylamide and lipid lanes refuse pH, so every EVALUABLE pH claim is a sulfur-lane
+    claim, and the tag is whatever the standing thresholds say about those. RE-PINNED
+    2026-09-03 (B9): 4 of 5 -> 'trust' at the boundary (was 3 of 5, 'caution', under B8).
+    The thresholds are part of the claim: a promotion that came from moving them is a
+    different event from one that came from a refit, and this one came from the refit."""
     counts = dr.load_panel_counts()
     assert dr.TRUST_MIN_RATE == 0.80
     assert dr.CAUTION_MIN_RATE == 0.60
-    for axis in ("ph", "moisture_aw"):
-        assert dr.reliability_for_axis(axis, counts).verdict != dr.VERDICT_TRUST
+    assert dr.MIN_EVALUABLE_FOR_TRUST == 3
     assert dr.reliability_for_axis("moisture_aw", counts).verdict == dr.VERDICT_DO_NOT_USE
+    ph = dr.reliability_for_axis("ph", counts)
+    assert (ph.agree, ph.evaluable) == (4, 5)
+    assert ph.verdict == dr.verdict_for(4, 5) == dr.VERDICT_TRUST
 
 
 def test_an_unmeasured_axis_is_reported_as_do_not_use_not_as_silence():

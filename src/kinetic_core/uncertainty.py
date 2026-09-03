@@ -88,7 +88,9 @@ NO_UNCERTAINTY = "no_uncertainty_in_fit_report"
 #: directions are sampled JOINTLY from it, flat ones stay at the optimum.
 LAPLACE_SAMPLED = "laplace_covariance_at_b8_optimum"
 LAPLACE_FLAT = "unidentified_direction_in_laplace_covariance"
-LAPLACE_PATH = data_paths.KINETIC_CORE_B8_LAPLACE
+#: The covariance of the SHIPPED sulfur wave (B9 since 2026-09-03): the file beside the
+#: fit report the engine reads, named kinetic_core_<wave>_laplace_covariance.json.
+LAPLACE_PATH = data_paths.VALIDATION_DIR / engine._B2_FIT_REPORT.name.replace("_fit_report.json", "_laplace_covariance.json")
 
 
 # ---------------------------------------------------------------------------
@@ -272,9 +274,10 @@ def _b7_priors() -> List[CorePrior]:
 
 
 def _laplace() -> Optional[Dict[str, Any]]:
-    """The B8 Laplace covariance artifact, or None when it has not been generated."""
+    """The shipped wave's Laplace covariance artifact (LAPLACE_PATH follows the fit report the
+    engine reads), or None when it has not been generated."""
     payload = data_access.load_json(LAPLACE_PATH, missing_ok=True)
-    if not payload or payload.get("artifact") != "kinetic_core_b8_laplace_covariance":
+    if not payload or not str(payload.get("artifact", "")).endswith("_laplace_covariance"):
         return None
     return dict(payload)
 
@@ -340,7 +343,7 @@ def _b8_priors() -> List[CorePrior]:
 
 def sulfur_joint_draw(rng: np.random.Generator) -> Optional[Dict[str, Any]]:
     """
-    ONE joint draw of the identified sulfur coordinates from the B8 Laplace covariance.
+    ONE joint draw of the identified sulfur coordinates from the shipped wave's Laplace covariance.
 
     Returns ``{"maillard_blocks": {...}, "ph_drift": PhDrift | None, "coords": {...}}``
     or None when no covariance artifact exists. The draw is multivariate normal on the
@@ -654,7 +657,7 @@ def draw_from_rng(
         lipid_fraction_scale=_scale(lipid_u, lipid_lo, lipid_hi),
         peroxide_scale=_scale(pv_u, pv_lo, pv_hi),
         furanone_partition_ea_kj_mol=furanone,
-        ph_drift=ph_drift,  # B8 Laplace covariance when present, else the frozen calibration
+        ph_drift=ph_drift,  # the wave's Laplace covariance when present, else the frozen calibration
     )
     coords["lipid.fraction_scale"] = core.lipid_fraction_scale if core.lipid_fraction_scale is not None else float("nan")
     coords["lipid.peroxide_scale"] = core.peroxide_scale if core.peroxide_scale is not None else float("nan")
@@ -944,7 +947,7 @@ def propagate_panel(
                     "maillard_path hold-out and external-matrix panels. Read it "
                     "together with median_ci_width_log10: a wide interval covering "
                     "a measurement is a weak claim. The SULFUR lane's identified "
-                    "coordinates are sampled jointly from the B8 Laplace covariance "
+                    "coordinates are sampled jointly from the shipped wave's Laplace covariance "
                     "(see priors[]); unidentified ones stay at the optimum."
                 ),
             },
@@ -978,8 +981,8 @@ def propagate_panel(
                 },
                 "definition": (
                     "honest_literature_coverage MINUS every row a core fit read "
-                    "(src/kinetic_core/fit_targets.py: the Hofmann 1998 pH-5 Table 1 rows, "
-                    "including the xylose row on the hold-out panel). The stronger claim."
+                    "(src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; "
+                    "since B9 only the step-level bundles). The stronger claim."
                 ),
             },
             "sampled_prior_count": len(sampled),

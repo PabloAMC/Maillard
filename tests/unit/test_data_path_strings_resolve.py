@@ -20,8 +20,6 @@ PATH_RE = re.compile(r"^(data|results|docs|src|scripts|tests)/[A-Za-z0-9_./-]+\.
 # as a live reference. Keep this list short and dated.
 HISTORICAL = {
     "data/benchmarks/maillard_validation_benchmarks.md",  # retired record, kept at its path
-    # 2026-09-03: the xylose pH-5 bundle's `hold_out_history.was` names the path it moved FROM
-    "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
 }
 
 

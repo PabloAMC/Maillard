@@ -275,7 +275,7 @@ CORE_CAVEAT = (
     "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "
     "lane as a direct sum, and the Maillard lanes do not compose with each other. A refusal is "
     "an output, not a failure. Read the core's scorecard "
-    "(results/validation/core_panel_scores.md: 4 of 40 out-of-sample rows within 3x) and its "
+    "(results/validation/core_panel_scores.md: 5 of 48 out-of-sample rows within 3x) and its "
     "envelope (core_prediction_uncertainty.md) before trusting any number here; the "
     "directional panel (core_directional_scores.md) is what the reliability column reads."
 )

@@ -2951,6 +2951,8 @@ papers:
     - mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3
     data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json:
     - mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7
+    data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json:
+    - mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5
     data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json:
     - hofmann1998_c2c3_recombination_145C_20min_pH3
     data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json:
@@ -2969,8 +2971,6 @@ papers:
     - hofmann1998_norfuraneol_h2s_145C_20min_pH5
     data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json:
     - hofmann1998_ribose_cysteine_145C_20min_pH5
-    data/benchmarks/hofmann1998_xylose_cysteine_145C_20min_pH5.json:
-    - hofmann1998_xylose_cysteine_145C_20min_pH5
     data/benchmarks/step_level_unreachable/hofmann1998_UNREACHABLE_3deoxyribosulose_h2s_145C_20min_pH5.json:
     - hofmann1998_UNREACHABLE_3deoxyribosulose_h2s_145C_20min_pH5
     data/benchmarks/step_level_unreachable/hofmann1998_UNREACHABLE_c2c3_aldol_145C_20min_pH3.json:

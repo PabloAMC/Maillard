@@ -47,10 +47,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
-import generate_kinetic_core_b8_fit as B8  # noqa: E402
-from generate_kinetic_core_b8_laplace import frozen_vector  # noqa: E402
+from generate_kinetic_core_b8_laplace import frozen_vector, wave_module  # noqa: E402
 from src import data_paths  # noqa: E402
 
+B8 = None  # bound in main() to the wave's fit module
 OUT = data_paths.VALIDATION_DIR / "kinetic_core_b8_profile.json"
 KS = (-3, -2, -1, 0, 1, 2, 3)
 
@@ -76,10 +76,16 @@ def _slice(args):
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workers", type=int, default=6)
-    parser.add_argument("--output", default=str(OUT))
+    parser.add_argument("--output", default=None)
+    parser.add_argument("--wave", default="b9")
     args = parser.parse_args(argv)
-
-    lap = json.loads(data_paths.KINETIC_CORE_B8_LAPLACE.read_text(encoding="utf-8"))
+    global B8
+    B8 = wave_module(args.wave)
+    if not Path(B8.OUT_FIT_REPORT).exists() and args.wave != "b8":
+        B8 = wave_module("b8")
+    wave = B8.WAVE.lower() if hasattr(B8, "WAVE") else "b8"
+    out = Path(args.output) if args.output else data_paths.VALIDATION_DIR / f"kinetic_core_{wave}_profile.json"
+    lap = json.loads((data_paths.VALIDATION_DIR / f"kinetic_core_{wave}_laplace_covariance.json").read_text(encoding="utf-8"))
     report = json.loads(Path(B8.OUT_FIT_REPORT).read_text(encoding="utf-8"))
     x_opt = frozen_vector(report)
     lower, upper = B8.full_bounds()
@@ -154,7 +160,8 @@ def main(argv=None) -> int:
             "integration, or a converged-on-a-bound optimum)."
         ),
     }
-    Path(args.output).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    payload["wave"] = wave
+    out.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     md = [
         "# B8 sulfur objective: slice profiles around the frozen optimum", "",
         f"cost at optimum {cost0:.3f}; {payload['n_evaluations']} evaluations; verdicts {payload['verdict_counts']}", "",
@@ -167,8 +174,8 @@ def main(argv=None) -> int:
             f"{r['quadratic_prediction']['2']:.3f} | {'-' if r['asymmetry_2sigma'] is None else f'{r['asymmetry_2sigma']:.2f}'} | "
             f"{r['slice_min_k']} | **{r['verdict']}** |"
         )
-    Path(args.output).with_suffix(".md").write_text("\n".join(md) + "\n", encoding="utf-8")
-    print(f"wrote {args.output}: {payload['verdict_counts']} wall={payload['wall_seconds']}s")
+    out.with_suffix(".md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    print(f"wrote {out}: {payload['verdict_counts']} wall={payload['wall_seconds']}s")
     return 0
 
 
