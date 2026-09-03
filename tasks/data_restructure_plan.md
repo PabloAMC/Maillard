@@ -811,7 +811,7 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
       regression records. Left in the audit's own backlog: merge the four generator-text checks into the freeze guard,
       rewrite `test_v1_reports`' five substring checks, collapse the fourteen literature-side files into one
       parametrised builder test, fix the coverage/fork configuration.
-- [x] **B9 RUN 2026-09-03** (`generate_kinetic_core_b9_fit.py`, prereg `kinetic_core_b9_prereg.md`): B8 minus the
+- [x] **B9 RUN 2026-09-03, committed `1067358`** (`generate_kinetic_core_b9_fit.py`, prereg `kinetic_core_b9_prereg.md`): B8 minus the
       eight Hofmann T1 level rows, 54 rows, same free set / bands / weighting / protocol. Both starts converge to cost
       18.74 (B8's vector scores 18.87 on the 54 rows); active bounds: k_dimer_mft, k_dimer_fft, Ea_decay_thiol_sink
       (ceiling), acid yield (floor). Laplace at B9: 20/23 identified, chi2_red 1.21. PREREG CHECK: hold-out 4/30
