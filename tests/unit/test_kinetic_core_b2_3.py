@@ -571,17 +571,6 @@ def test_the_fit_rows_are_unchanged_from_b2_2():
     assert set(b23.SYSTEMS) == set(b22.SYSTEMS)
 
 
-def test_the_optimiser_budget_is_the_one_amendment_9_allows():
-    """Seeded, TWO starts, ftol 1e-6 -- what B2.2 actually shipped."""
-    import inspect
-
-    import scripts.generators.generate_kinetic_core_b2_3_fit as b23
-
-    source = inspect.getsource(b23.main)
-    assert '"--starts", type=int, default=2' in source
-    assert "ftol=1e-6" in inspect.getsource(b23.fit)
-    assert "seed: int = 20260828" in inspect.getsource(b23.fit)
-
 
 # ===========================================================================
 # 5. THE FROZEN FIT, once it exists

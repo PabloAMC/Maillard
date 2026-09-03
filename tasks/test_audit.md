@@ -65,11 +65,26 @@ say so in the docstring), **merge**, **rewrite** (shape-only tests that should a
 3. Labelled the wave contract files (`b2`, `b2_1`–`b2_4`, `b3`, `b8`) as frozen-wave regression records in their
    module docstrings.
 
+## Executed 2026-09-03 (second pass, "go ahead with the backlog")
+
+1. `tests/support.py` holds the two helpers three files had copied: `executable_code` / `strip_prose`
+   (tokenize-based, replaces two regex `_strip_prose` and one `_executable_code`) and `wave_generator`, a
+   context manager that imports a row-splicing wave generator (B8, B9) and restores B2.3's row table on exit.
+   `test_kinetic_core_b8.py` uses it; the wave suites now pass in any order (verified with B8 first).
+2. The three per-wave "hold-out scorer contains no optimiser" copies are one parametrised test in
+   `test_wave_generators_frozen.py`; the B2.3 optimiser-budget and B3 fructose-prose text checks are gone
+   (the hash manifest pins those files whole).
+3. `tests/conftest.py`: fifteen dead DFT / Cantera / recommendation-engine fixtures and an auto-marker list
+   naming five deleted files removed; the scientific-directory marker rule kept.
+4. Ten single-test literature-side files merged into `tests/unit/test_literature_registries.py` with their value
+   assertions verbatim plus one parametrised build-and-render smoke test (their renderer imports were dead).
+   The three `tests/scientific` literature files and `test_deep_research_tracker.py` stay: they pin registry state.
+5. `test_v1_reports.py` reviewed and KEPT: its ~60 substring checks are presentation contracts (CSS classes,
+   refusal cards, negative checks for "inf"), not prose; every one has a structured counterpart the same file
+   already exercises. Not worth a rewrite.
+6. Coverage: `[tool.coverage.run]` in `pyproject.toml` (`concurrency = multiprocessing`, `parallel`, wave
+   generators omitted), `coverage` in `environment.yml`, and a `coverage` alias in `docker_maillard.sh`.
+
 ## Left for later (backlog, in order)
 
-- Merge the four "fit script reads no hold-out / contains no optimiser" text checks into the freeze guard.
-- Rewrite `test_v1_reports.py`'s five substring checks to parse the report table.
-- Collapse the fourteen literature-side files into one parametrised builder test.
-- Coverage configuration: `uncertainty.py` and `directional.py` report 0 % under `coverage run` although their
-  tests pass (multiprocessing `fork`); fix before trusting per-module numbers.
-- **Import-order coupling (found 2026-09-03 during B9):** `generate_kinetic_core_b8_fit.py` (and B9 through it) installs its rows into `generate_kinetic_core_b2_3_fit.ACTIVE_FIT_ROWS` at import. `test_kinetic_core_b2_3.py::test_b2_3_objective_at_its_own_vector` and `test_kinetic_core_b2_4.py` (58-row assertion) pass only when they import before the B8 test module, i.e. only in alphabetical order. Fix: have the B8/B9 generators expose their row tables without mutating B2.3's module, or snapshot B2.3's rows in a fixture.
+(Empty as of 2026-09-03. New test findings go to the improvement backlog in `tasks/data_restructure_plan.md` §7.)

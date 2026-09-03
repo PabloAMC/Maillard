@@ -536,15 +536,7 @@ HOLDOUT_LITERALS = (
 )
 
 
-def _executable_code(path: Path) -> str:
-    """Strip comments, docstrings and string literals; return only code."""
-    out = []
-    with open(path, "rb") as handle:
-        for token in tokenize.tokenize(handle.readline):
-            if token.type in (tokenize.COMMENT, tokenize.STRING):
-                continue
-            out.append(token.string)
-    return " ".join(out)
+from tests.support import executable_code as _executable_code  # noqa: E402
 
 
 def test_holdout_firewall_no_exposed_literal_reaches_executable_code():
@@ -577,14 +569,6 @@ def test_holdout_firewall_no_b4_file_touches_the_frozen_bundles():
                         or line.strip().startswith(('"', "'", "*", "-"))), (
                     f"{relative}: live reference to the frozen bundles: {line!r}")
 
-
-def test_the_scorer_contains_no_optimiser():
-    # Executable code only: the module docstring says the words in order to
-    # promise their absence, which is the point.
-    code = _executable_code(REPO / "scripts/generators/generate_kinetic_core_b4_holdout.py")
-    for forbidden in ("least_squares", "minimize", "curve_fit", "differential_evolution",
-                      "scipy"):
-        assert forbidden not in code
 
 
 def test_frozen_predictions_exist_and_predate_the_score():

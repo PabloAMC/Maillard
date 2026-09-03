@@ -578,7 +578,7 @@ def test_the_b8_fit_side_never_opens_a_frozen_bundle():
                 f"{relative}:{line_no} reads a frozen bundle")
 
 
-def test_the_b8_systems_walk_no_holdout_condition_is_integrated():
+def test_the_b8_systems_walk_no_holdout_condition_is_integrated(wave_generator):
     """
     THE SYSTEMS WALK. B8 adds exactly two pots to the objective and both must be
     declared FIT conditions. The specific thing that would be cheating is a
@@ -587,7 +587,11 @@ def test_the_b8_systems_walk_no_holdout_condition_is_integrated():
     fit panel already spans, and none may be the Zhou pH-6 or pH-8 pot at
     anything other than a pH endpoint.
     """
-    import generate_kinetic_core_b8_fit as b8
+    with wave_generator("generate_kinetic_core_b8_fit") as b8:
+        _check_b8_systems_walk(b8)
+
+
+def _check_b8_systems_walk(b8):
     import generate_kinetic_core_b2_3_fit as b23
 
     assert set(b8.B8_SYSTEMS) == {"feng_arp_100", "feng_arp_120"}
@@ -611,8 +615,12 @@ def test_the_b8_systems_walk_no_holdout_condition_is_integrated():
             assert b23.SYSTEMS[name]["t_c"] <= 120.0, (row["id"], name)
 
 
-def test_the_b8_free_set_is_twenty_three_and_names_why_each_is_free():
-    import generate_kinetic_core_b8_fit as b8
+def test_the_b8_free_set_is_twenty_three_and_names_why_each_is_free(wave_generator):
+    with wave_generator("generate_kinetic_core_b8_fit") as b8:
+        _check_b8_free_set(b8)
+
+
+def _check_b8_free_set(b8):
     assert len(b8.FREE_KEYS) == len(set(b8.FREE_KEYS)) == 23
     assert set(b8.FREE_R5_BARRIER_MOVED) == {
         "k_dimer_mft", "k_arp_dpo", "k_arp_tdp"}

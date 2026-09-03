@@ -13,6 +13,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
+from tests.support import executable_code
+
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "results" / "validation" / "wave_generators_manifest.json"
 
@@ -35,3 +39,21 @@ def test_the_manifest_covers_every_wave_generator():
     } | {"scripts/generators/probe_amine_fate_b2_4.py"}
     assert files == on_disk, sorted(files ^ on_disk)
     assert "new wave" in manifest["rule"]
+
+
+HOLDOUT_SCORERS = (
+    "scripts/generators/generate_kinetic_core_b2_holdout.py",
+    "scripts/generators/generate_kinetic_core_b3_holdout.py",
+    "scripts/generators/generate_kinetic_core_b4_holdout.py",
+)
+FORBIDDEN_IN_A_SCORER = ("least_squares", "minimize", "curve_fit", "differential_evolution", "scipy")
+
+
+@pytest.mark.parametrize("relative", HOLDOUT_SCORERS)
+def test_a_holdout_scorer_contains_no_optimiser(relative):
+    """A hold-out scorer reads frozen parameters and predicts; it fits nothing. Checked on
+    executable code only -- each module docstring says the words in order to promise their
+    absence. Merged here 2026-09-03 from three per-wave copies (test audit)."""
+    code = executable_code(ROOT / relative)
+    for forbidden in FORBIDDEN_IN_A_SCORER:
+        assert forbidden not in code, (relative, forbidden)

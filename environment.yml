@@ -13,6 +13,7 @@ dependencies:
   - pip
   - setuptools
   - pytest
+  - coverage
   - hypothesis
   - numpy>=2.0
   - scipy

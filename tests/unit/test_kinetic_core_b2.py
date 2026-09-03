@@ -666,7 +666,7 @@ def test_no_dft():
         # A docstring may SAY that no DFT is read, and the policy guard's own
         # ban list necessarily NAMES the banned tokens. What must not exist is
         # a code path that reads a computed barrier.
-        code = _strip_prose((ROOT / "src/kinetic_core" / name).read_text()).lower()
+        code = strip_prose((ROOT / "src/kinetic_core" / name).read_text()).lower()
         assert "data/qm" not in code
         assert "dft_coverage" not in code
 
@@ -759,18 +759,12 @@ RUNTIME_FILES = (
 FIT_FILE = "scripts/generators/generate_kinetic_core_b2_fit.py"
 
 
-def _strip_prose(text: str) -> str:
-    """Remove docstrings, string literals and comments; return executable code."""
-    text = re.sub(r'"""(?:.|\n)*?"""', " ", text)
-    text = re.sub(r"'''(?:.|\n)*?'''", " ", text)
-    text = re.sub(r'"(?:[^"\\\n]|\\.)*"', ' "" ', text)
-    text = re.sub(r"'(?:[^'\\\n]|\\.)*'", " '' ", text)
-    return "\n".join(line.split("#")[0] for line in text.splitlines())
+from tests.support import executable_code, strip_prose  # noqa: E402
 
 
 @pytest.mark.parametrize("relative", RUNTIME_FILES + (FIT_FILE,))
 def test_no_holdout_value_reaches_the_runtime_or_the_fit(relative):
-    code = _strip_prose((ROOT / relative).read_text())
+    code = executable_code(ROOT / relative)
     for literal in HOLDOUT_NUMBERS:
         pattern = r"(?<![\w.])" + re.escape(literal) + r"(?![\w.])"
         assert re.search(pattern, code) is None, (
@@ -782,28 +776,18 @@ def test_no_holdout_value_reaches_the_runtime_or_the_fit(relative):
 def test_the_firewall_stripper_actually_finds_a_planted_breach():
     """A firewall test that cannot fail is not a firewall test."""
     planted = 'x = "the note says 525.62"\ny = 525.62  # a breach\n'
-    code = _strip_prose(planted)
+    code = strip_prose(planted)
     assert re.search(r"(?<![\w.])525\.62(?![\w.])", code) is not None
     assert code.count("525.62") == 1, "the string literal must have been stripped"
 
 
 def test_the_fit_script_reads_no_benchmark_or_holdout_file():
     text = (ROOT / FIT_FILE).read_text()
-    code = _strip_prose(text)
+    code = strip_prose(text)
     assert "data/benchmarks" not in code
     assert "mp_holdout" not in code
     assert "external_validation" not in code
 
-
-def test_the_holdout_scorer_contains_no_optimiser():
-    code = _strip_prose(
-        (ROOT / "scripts/generators/generate_kinetic_core_b2_holdout.py").read_text()
-    )
-    for forbidden in ("least_squares", "minimize(", "curve_fit", "differential_evolution"):
-        assert forbidden not in code, (
-            "the hold-out scorer must not fit anything; it reads the frozen "
-            "parameters and predicts"
-        )
 
 
 # ---------------------------------------------------------------------------

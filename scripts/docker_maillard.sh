@@ -68,6 +68,7 @@ are gone with it. The front door is scripts/maillard.py.)
 
 == Evidence artifacts (regenerate what README quotes) ==
   core-scores                        results/validation/core_panel_scores.{json,md}   (~15 s)
+  coverage                           per-module line coverage of src/ and scripts/ over both tiers (~35 min)
   core-directional                   results/validation/core_directional_scores.*     (~90 s)
   core-envelope [args...]            results/validation/core_prediction_uncertainty.* (~40 min at n=200)
   model-card                         Re-splice the README model card from the artifacts.
@@ -240,6 +241,10 @@ case "$cmd" in
     core_lane
     scientific_lane
     gates_lane
+    ;;
+  coverage)
+    # per-module line coverage of src/ and scripts/ over both tiers (wave generators omitted on purpose)
+    run_in_env "coverage erase && coverage run -m pytest tests/unit tests/scripts tests/integration tests/scientific -q -p no:cacheprovider && coverage combine -q && coverage report --sort=cover"
     ;;
   gates)
     gates_lane
