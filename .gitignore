@@ -73,6 +73,8 @@ results/*
 !results/literature/
 !results/literature/*.json
 !results/maillard_results.db
+!results/README.md
+!results/legacy_lane/README.md
 
 # Cantera
 *.yaml

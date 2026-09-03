@@ -103,8 +103,9 @@ python scripts/generators/generate_model_card.py                        # re-spl
 ```
 
 Test tiers and gates: `pytest tests/unit tests/scripts -q`, `pytest tests/integration tests/scientific -q`,
-and `python scripts/ci/<gate>.py` for the five gates (citation, data read-only, fit-then-score,
-hold-out isolation, benchmark schema).
+and `python scripts/ci/<gate>.py` for the six gates (citation, data read-only, fit-then-score,
+hold-out isolation, benchmark schema, artifact freshness: tracked artifacts equal what the code
+produces, modulo date and git head, and every recorded input still hashes the same).
 
 ---
 
@@ -266,7 +267,7 @@ Three trees, one rule each (`agents.md`):
 | tree | rule | map |
 | --- | --- | --- |
 | `data/` | curated inputs, **read-only at runtime** (`scripts/ci/data_readonly_gate.py`); paths from `src/data_paths.py`, loads through `src/data_access.py`, names through `data/keys/` | [`data/README.md`](data/README.md) (generated) |
-| `results/` | generated artifacts: the core's scorecard and envelope, the fit and hold-out reports per wave, the literature ledgers; `results/legacy_lane/` is the retired lane's archive | [`results/legacy_lane/README.md`](results/legacy_lane/README.md) |
+| `results/` | generated artifacts: the core's scorecard, envelope and directional scorecard (each with a `provenance` block), the frozen fit and hold-out records per wave, the literature ledgers; `results/legacy_lane/` is the archive of the retired lane and of orphaned artifacts | [`results/README.md`](results/README.md) (generated) |
 | `docs/` | human documents: [USING_THE_TOOL.md](docs/USING_THE_TOOL.md), [QUICKSTART.md](docs/guides/QUICKSTART.md), [GLOSSARY.md](docs/guides/GLOSSARY.md), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md), the retired lane's README under `docs/history/` | |
 
 Code: `src/kinetic_core/` (the engine, its parameters, panel, scoring, envelope, fit-target

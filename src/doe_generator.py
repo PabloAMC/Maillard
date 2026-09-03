@@ -129,18 +129,6 @@ def generate_active_learning_requests(gap_registry_path: str) -> dict:
     return {"active_learning_requests": requests}
 
 
-def export_doe_requests(gap_registry_path: str, output_path: str):
-    """Generates and writes the DoE requests to a JSON artifact."""
-    payload = generate_active_learning_requests(gap_registry_path)
-    
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2)
-        
-    logger.info(f"Exported {len(payload['active_learning_requests'])} Active Learning DoE requests to {output_path}")
-    return payload
-
-
 def _under_root(root: Path, path: Path) -> Path:
     """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
     if Path(root).resolve() == data_paths.REPO_ROOT:

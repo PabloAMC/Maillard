@@ -131,3 +131,37 @@ def test_the_cli_description_reads_the_directional_headline(monkeypatch, tmp_pat
     assert maillard._axis_note("moisture_aw") == ""
     monkeypatch.setattr(data_paths, "CORE_DIRECTIONAL_SCORES", tmp_path / "absent.json")
     assert "not generated" in maillard._headline_lines()
+
+
+# ------------------------------------------------------------ freshness comparison
+def test_strip_volatile_removes_clock_and_checkout_keys_recursively():
+    payload = {"generated_on": "x", "summary": {"git": {}, "hits": 1, "rows": [{"wall_seconds": 2, "v": 3}]}}
+    assert provenance.strip_volatile(payload) == {"summary": {"hits": 1, "rows": [{"v": 3}]}}
+
+
+def test_payload_differences_ignores_volatile_keys_and_float_noise_but_reports_real_moves():
+    tracked = {"generated_on": "2026-01-01", "summary": {"hits": 10, "rate": 0.2}, "rows": [1, 2]}
+    live = {"generated_on": "2026-09-03", "summary": {"hits": 10, "rate": 0.2 + 1e-15}, "rows": [1, 2]}
+    assert provenance.payload_differences(tracked, live) == []
+    live["summary"]["hits"] = 11
+    live["rows"] = [1]
+    diffs = provenance.payload_differences(tracked, live)
+    assert any("summary.hits: 10 != 11" in d for d in diffs) and any("rows: length 2 != 1" in d for d in diffs)
+    assert provenance.payload_differences({"a": 1}, {"b": 1}) == ["$.a: missing in live", "$.b: missing in tracked"]
+
+
+def test_stale_inputs_reports_moved_and_missing_inputs(tmp_path, monkeypatch):
+    stable = tmp_path / "stable.json"
+    stable.write_text("{}", encoding="utf-8")
+    moving = tmp_path / "moving.json"
+    moving.write_text("1", encoding="utf-8")
+    monkeypatch.setattr(data_paths, "REPO_ROOT", tmp_path)
+    payload = {"provenance": {"inputs": [
+        {"path": "stable.json", "sha256": provenance.sha256_of(stable)},
+        {"path": "moving.json", "sha256": provenance.sha256_of(moving)},
+        {"path": "gone.json", "sha256": "abc"},
+    ]}}
+    assert provenance.stale_inputs(payload) == ["gone.json: recorded abc now None"]
+    moving.write_text("2", encoding="utf-8")
+    assert [d.split(":")[0] for d in provenance.stale_inputs(payload)] == ["moving.json", "gone.json"]
+    assert provenance.stale_inputs({}) == []

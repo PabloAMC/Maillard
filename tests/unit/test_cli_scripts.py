@@ -21,6 +21,8 @@ ENTRY_POINTS = (
     "scripts/generators/generate_core_prediction_uncertainty.py",
     "scripts/generators/generate_model_card.py",
     "scripts/generators/build_data_readme.py",
+    "scripts/generators/build_results_readme.py",
+    "scripts/ci/artifact_freshness_gate.py",
 )
 
 

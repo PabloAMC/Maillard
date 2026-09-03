@@ -39,6 +39,8 @@ stage_into_workspace() {
   echo "$WORKSPACE_MOUNT/.cache/react_ot_uploads/$(basename "$abs_src")"
 }
 
+# NOTE: bash reads this file incrementally. Do not edit it while a `run` is in flight -- on 2026-09-03 an
+# edit made a running invocation jump into another alias's case arm.
 usage() {
   cat <<'EOF'
 Usage: ./scripts/docker_maillard.sh <command> [args...]
@@ -69,11 +71,12 @@ are gone with it. The front door is scripts/maillard.py.)
 == Evidence artifacts (regenerate what README quotes) ==
   core-scores                        results/validation/core_panel_scores.{json,md}   (~15 s)
   coverage                           per-module line coverage of src/ and scripts/ over both tiers (~35 min)
+  results-readme                     results/README.md (the generated map of every tracked artifact)
   core-directional                   results/validation/core_directional_scores.*     (~90 s)
   core-envelope [args...]            results/validation/core_prediction_uncertainty.* (~40 min at n=200)
   model-card                         Re-splice the README model card from the artifacts.
   model-card-check                   Fail if the README model card is stale.
-  gates                              Run the five CI gates.
+  gates                              Run the six CI gates (incl. artifact_freshness_gate, ~1 min).
   data-readme                        Regenerate data/README.md (fails on undescribed files).
   keys                               Rebuild data/keys/compounds.yml and papers.yml.
   experiment-value-ranking [...]     Rank (benchmark, compound) pairs by VoI.
@@ -100,7 +103,7 @@ scientific_lane() {
 
 gates_lane() {
   local gate
-  for gate in citation_gate data_readonly_gate fit_target_gate holdout_guard schema_gate; do
+  for gate in citation_gate data_readonly_gate fit_target_gate holdout_guard schema_gate artifact_freshness_gate; do
     run_in_env "python scripts/ci/${gate}.py"
   done
 }
@@ -264,6 +267,9 @@ case "$cmd" in
     ;;
   model-card-check)
     run_generator_script generate_model_card --check
+    ;;
+  results-readme)
+    run_generator_script build_results_readme
     ;;
   data-readme)
     run_generator_script build_data_readme

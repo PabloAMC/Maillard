@@ -91,7 +91,7 @@ your provenance. Nothing is refitted: calibration on new data is a new pre-regis
 ./scripts/docker_maillard.sh core-scores      # results/validation/core_panel_scores.*   (~15 s)
 ./scripts/docker_maillard.sh core-envelope    # results/validation/core_prediction_uncertainty.* (~40 min)
 ./scripts/docker_maillard.sh model-card       # re-splices the README model card
-./scripts/docker_maillard.sh gates            # the five CI gates
+./scripts/docker_maillard.sh gates            # the six CI gates
 ./scripts/docker_maillard.sh pytest tests/unit tests/scripts
 ./scripts/docker_maillard.sh pytest tests/integration tests/scientific
 ```
@@ -106,7 +106,7 @@ your provenance. Nothing is refitted: calibration on new data is a new pre-regis
 | `./scripts/docker_maillard.sh core-scores` | The core's panel scorecard |
 | `./scripts/docker_maillard.sh core-envelope [--n-samples N --workers W]` | The core's Monte-Carlo envelope |
 | `./scripts/docker_maillard.sh model-card` | Regenerate the README model card |
-| `./scripts/docker_maillard.sh gates` | Run the five CI gates |
+| `./scripts/docker_maillard.sh gates` | Run the six CI gates (incl. artifact freshness) |
 | `./scripts/docker_maillard.sh data-readme` | Regenerate `data/README.md` |
 | `./scripts/docker_maillard.sh experiment-value-ranking` | Rank experiments by value of information |
 | `./scripts/docker_maillard.sh deep-research-audit` | Literature backlog audit |

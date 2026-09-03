@@ -3198,6 +3198,43 @@
       "unit": "x (same-sample dispersion D)"
     }
   ],
+  "provenance": {
+    "artifact": "core_prediction_uncertainty",
+    "generated_by": "src/kinetic_core/uncertainty.py",
+    "generated_on": "2026-09-03",
+    "git": {
+      "branch": "cleaning",
+      "commit": "d8532466834696d96a3e80a5970222c5d20c95ed",
+      "dirty": true,
+      "short": "d8532466"
+    },
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b1_fit_report.json",
+        "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+      },
+      {
+        "path": "results/validation/kinetic_core_b6_fit_report.json",
+        "sha256": "923940a43d2946b5a79afa476578650eb73a11217a80addbf741fff224091a8a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b7_fit_report.json",
+        "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
+        "sha256": "219cf3a887b27f44b0ced51f273458e5e622e867ced4d74efce4a2587e9a8379"
+      }
+    ]
+  },
   "refused_compounds": [
     {
       "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -3496,7 +3533,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 2352.3,
+    "wall_seconds": 2586.5,
     "workers": 6
   }
 }

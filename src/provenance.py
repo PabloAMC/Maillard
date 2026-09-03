@@ -19,7 +19,7 @@ import hashlib
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src import data_paths
 
@@ -99,14 +99,80 @@ def provenance_block(
 
 #: Keys a freshness comparison must ignore: they change with the clock and the checkout,
 #: not with the code or the data.
-VOLATILE_KEYS = ("generated_on", "git", "wall_seconds", "workers")
+VOLATILE_KEYS = ("generated_on", "git", "wall_seconds", "workers", "generated")
+
+
+def strip_volatile(value: Any) -> Any:
+    """``value`` with every ``VOLATILE_KEYS`` entry removed, recursively (lists included)."""
+    if isinstance(value, dict):
+        return {k: strip_volatile(v) for k, v in value.items() if k not in VOLATILE_KEYS}
+    if isinstance(value, list):
+        return [strip_volatile(v) for v in value]
+    return value
+
+
+def payload_differences(
+    tracked: Any, live: Any, *, rel_tol: float = 1e-9, path: str = "$", limit: int = 20
+) -> List[str]:
+    """Where two artifacts differ once volatile keys are stripped; floats compare with ``rel_tol``.
+
+    Returns at most ``limit`` human-readable ``"$.summary.hits: 10 != 11"`` lines; an empty
+    list means the artifacts match.
+    """
+    tracked, live = strip_volatile(tracked), strip_volatile(live)
+    out: List[str] = []
+
+    def walk(a: Any, b: Any, where: str) -> None:
+        if len(out) >= limit:
+            return
+        if isinstance(a, dict) and isinstance(b, dict):
+            for key in sorted(set(a) | set(b)):
+                if key not in a or key not in b:
+                    out.append(f"{where}.{key}: {'missing in tracked' if key not in a else 'missing in live'}")
+                else:
+                    walk(a[key], b[key], f"{where}.{key}")
+            return
+        if isinstance(a, list) and isinstance(b, list):
+            if len(a) != len(b):
+                out.append(f"{where}: length {len(a)} != {len(b)}")
+                return
+            for i, (x, y) in enumerate(zip(a, b)):
+                walk(x, y, f"{where}[{i}]")
+            return
+        if isinstance(a, (int, float)) and isinstance(b, (int, float)) and not isinstance(a, bool) and not isinstance(b, bool):
+            if a != b and abs(a - b) > rel_tol * max(abs(a), abs(b), 1e-300):
+                out.append(f"{where}: {a} != {b}")
+            return
+        if a != b:
+            out.append(f"{where}: {a!r} != {b!r}")
+
+    walk(tracked, live, path)
+    return out
+
+
+def stale_inputs(payload: Mapping[str, Any]) -> List[str]:
+    """Inputs recorded in ``payload["provenance"]["inputs"]`` whose file no longer hashes the same.
+
+    The cheap freshness test for an expensive artifact: no regeneration, just the hashes.
+    Missing files and files whose hash moved are both reported.
+    """
+    block = payload.get("provenance") or {}
+    out: List[str] = []
+    for entry in block.get("inputs", []):
+        current = sha256_of(data_paths.REPO_ROOT / entry["path"])
+        if current != entry.get("sha256"):
+            out.append(f"{entry['path']}: recorded {str(entry.get('sha256'))[:12]} now {str(current)[:12]}")
+    return out
 
 
 __all__ = [
     "VOLATILE_KEYS",
     "git_head",
     "input_sources",
+    "payload_differences",
     "provenance_block",
     "sha256_of",
+    "stale_inputs",
+    "strip_volatile",
     "today_iso",
 ]
