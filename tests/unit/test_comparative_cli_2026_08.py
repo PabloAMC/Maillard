@@ -90,9 +90,9 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     evaluable) and the axis stays 'do-not-use'. pH is different since axis refusal: the
     trunk, acrylamide and lipid lanes refuse pH, so every EVALUABLE pH claim is a sulfur-lane
     claim, and the tag is whatever the standing thresholds say about those. RE-PINNED
-    2026-09-03 (B9): 4 of 5 -> 'trust' at the boundary (was 3 of 5, 'caution', under B8).
-    The thresholds are part of the claim: a promotion that came from moving them is a
-    different event from one that came from a refit, and this one came from the refit."""
+    2026-09-03 (B9): 4 of 5 -> 'trust' at the boundary (was 3 of 5, 'caution', under B8);
+    then the Wilson condition was ADDED to 'trust' (a 4/5 axis is not demonstrably better
+    than a coin), so 4/5 is 'caution' again. The 0.80 / 0.60 thresholds were not moved."""
     counts = dr.load_panel_counts()
     assert dr.TRUST_MIN_RATE == 0.80
     assert dr.CAUTION_MIN_RATE == 0.60
@@ -100,7 +100,9 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     assert dr.reliability_for_axis("moisture_aw", counts).verdict == dr.VERDICT_DO_NOT_USE
     ph = dr.reliability_for_axis("ph", counts)
     assert (ph.agree, ph.evaluable) == (4, 5)
-    assert ph.verdict == dr.verdict_for(4, 5) == dr.VERDICT_TRUST
+    assert ph.verdict == dr.verdict_for(4, 5) == dr.VERDICT_CAUTION
+    assert dr.wilson_lower(4, 5) < dr.COIN < dr.wilson_lower(8, 8)
+    assert dr.verdict_for(8, 8) == dr.VERDICT_TRUST and dr.verdict_for(7, 7) == dr.VERDICT_TRUST
 
 
 def test_an_unmeasured_axis_is_reported_as_do_not_use_not_as_silence():

@@ -1,7 +1,7 @@
 {
   "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
-  "quantification_class": "undeclared",
-  "quantification_note": "Explicitly undeclared 2026-09-03: only the volatile table was verified (Molecules 28:3151, PMC10096055); no method sentence on disk. The envelope keeps the core's absolute-concentration convention for this row and says so.",
+  "quantification_class": "hs_spme_gcms_internal_standard_calibration_curve",
+  "quantification_note": "Declared 2026-09-03 from the PMC full text (PMC10096055, Hernandez, Woerner, Brooks & Legako 2023): 5 g cooked homogenate spiked with 10 uL 1,2-dichlorobenzene internal standard (2.5 ug/uL), 25 min SPME (85 um CAR/PDMS), GC-MS (Agilent 7890B/5977A); 'Quantitation of volatile compounds (ng per gram of sample) was conducted using the internal standard and a 5-level calibration curve'. Headspace: the bands apply.",
   "source_metadata": {
     "origin": "external_literature",
     "generator": "Hernandez et al. 2023 commercial PBMA versus ground beef survey",
@@ -72,5 +72,13 @@
     "basis": "The file's own PMC10096055 resolves (NCBI ID converter) to 10.3390/molecules28073151, whose CrossRef record is Hernandez, Woerner, Brooks & Legako (2023), 'Descriptive Sensory Attributes and Volatile Flavor Compounds of Plant-Based Meat Alternatives and Ground Beef' (Molecules). 'Resconi' names no author of that record. The benchmark id and every numeric value are unchanged; only the bibliographic labels were corrected."
   },
   "shared_anchor": true,
-  "shared_anchor_note": "10.3390/molecules28073151 also anchors intake id resconi_2023_pbma_beef_identity_benchmark in data/lit/benchmark_intake_registry.json. One paper, one benchmark plus one intake row."
+  "shared_anchor_note": "10.3390/molecules28073151 also anchors intake id resconi_2023_pbma_beef_identity_benchmark in data/lit/benchmark_intake_registry.json. One paper, one benchmark plus one intake row.",
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PubMed Central PMC10096055 (open access), fetched 2026-09-03",
+    "quoted_quantification": "Five grams of cooked homogenate were weighed into 20 mL glass vials and spiked with 10 uL of an internal standard solution (1,2 dichlorobenzene, 2.5 ug/uL) ... a 25-min extraction period was used to collect volatile compounds from the sample headspace via solid phase microextraction (SPME) with an 85 um film thickness carboxen polydimethylsiloxane fiber ... Quantitation of volatile compounds (ng per gram of sample) was conducted using the internal standard and a 5-level calibration curve.",
+    "quoted_values": "Table 3, furfural (ng/g): Beyond Meat 987.41; Impossible Burger 64.71; third retail brand 1093.54; SEM 138.580.",
+    "quantification_verdict": "HS-SPME-GC-MS with an internal standard and a five-level calibration curve; the bundle's three PBMA furfural values match Table 3.",
+    "verified_on": "2026-09-03"
+  }
 }

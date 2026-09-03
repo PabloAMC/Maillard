@@ -104,7 +104,8 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     are listed as differing from the legacy role. Moving a bundle INTO fit_recovery without a
     core fit record that names it is the laundering route this guard blocks."""
     s = tracked_scores["summary"]
-    assert s["evidence_role_totals"] == {"predictive": 40}
+    # RE-PINNED 2026-09-03: the 21 physically separated hold-out bundles carry their own role.
+    assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 19}
 
 
 def test_within_3x_is_6_of_49_and_out_of_sample_5_of_48(tracked_scores):
@@ -164,7 +165,10 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_9_of_43_evaluable_literature_rows_and_9_of_42_out_of_sample():
+def test_core_envelope_covers_9_of_42_evaluable_literature_rows_and_9_of_41_out_of_sample():
+    # RE-PINNED 2026-09-03 (pass 7): five more bundles verified from PMC full text; ACSRef3 is
+    # isotope-dilution LC-MS/MS (extraction), so its band-only interval is gone and the row is
+    # NOT EVALUABLE (7): 9/43 -> 9/42, out of sample 9/42 -> 9/41; headspace 4 -> 8 rows.
     # RE-PINNED 2026-09-03 (B9): 11/44 -> 10/44 (width 1.07 -> 1.17 dex); out of sample now
     # excludes only the C2+C3 pH-5 row, 8/35 -> 10/43; Laplace 18/23 -> 20/23, chi2_red 1.03 -> 1.21.
     # RE-PINNED 2026-09-03 (quantification classes declared): Bolton 1994 is extraction-quantified,
@@ -179,19 +183,19 @@ def test_core_envelope_covers_9_of_43_evaluable_literature_rows_and_9_of_42_out_
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (9, 43, 6)
-    assert lit["median_ci_width_log10"] == pytest.approx(1.1424, abs=5e-4)
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (9, 42, 7)
+    assert lit["median_ci_width_log10"] == pytest.approx(1.0967, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (9, 42)
+    assert (oos["hits"], oos["total"]) == (9, 41)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
-        "headspace": 4, "extraction": 38, "undeclared": 7,
+        "headspace": 8, "extraction": 39, "undeclared": 2,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "9 of 43", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "9 of 42", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "9 of 42", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "9 of 41", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

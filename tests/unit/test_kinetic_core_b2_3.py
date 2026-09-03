@@ -282,8 +282,9 @@ BUNDLE_BASELINES = {
     "external_validation_bi_2020_roasted_pea_hexanal":
         "7d5cf5174622face448ff0095c03b5813d9227481b05af6eb4e8343b05b41ffe",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
+    # re-pinned 2026-09-03: content_verification block from the PMC full text added
     "external_validation_li_2026_spi_wg_hme_control":
-        "7af20770d5e2ebb52817a51db8e25f29577cf09994b7113545115d4a1b33a2d5",
+        "53edcdb681c3c04ab8b8e4f384cee5b686f040bdbdd28dc914e3131e2295a593",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     "external_validation_liu_2023_ppi_offnote_baseline":
         "5e0b0a7ec0e56a5efff9c1d01225a5eac15c9129fe58fd08032bd1226cd15dcd",

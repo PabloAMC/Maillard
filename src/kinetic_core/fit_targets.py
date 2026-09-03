@@ -92,19 +92,28 @@ def in_core_fit(benchmark_id: str, compound: str) -> bool:
     return any(c == compound for target in core_fit_targets(benchmark_id) for _, c in target.rows)
 
 
-def core_evidence_role(benchmark_id: str, bench_file: Path) -> str:
-    """
-    What kind of claim a CORE score on this benchmark supports.
+#: The ONE evidence-role vocabulary (2026-09-03). What kind of claim a core score supports:
+#:   fit_recovery       a core fit could reproduce the row (per-row leverage): algebra, not evidence
+#:   internal_synthetic the comparator is frozen model output, not a measurement
+#:   external_holdout   a measurement physically separated from every fit (external_validation/**)
+#:   predictive         an external measurement on the trust loop the core was not fitted to
+#: The bundle-level ``evidence_class`` label (``external_validation_only`` / ``diagnostic_only``)
+#: is the DATA-SIDE marker the gates check; this function turns it and the fit records into the role.
+EVIDENCE_ROLES = ("fit_recovery", "internal_synthetic", "external_holdout", "predictive")
 
-    ``fit_recovery`` only when a core fit could reproduce it row by row
-    (``per_row_recovery``); ``internal_synthetic`` for a non-literature signal;
-    else ``predictive`` -- annotated by :func:`core_fit_targets` when a
-    low-leverage fit read it, exactly as ``fit_target_index`` treats a global fit.
-    """
+
+def core_evidence_role(benchmark_id: str, bench_file: Path) -> str:
+    """One of :data:`EVIDENCE_ROLES` for a bundle, from its fit records, signal origin and location."""
+    path = Path(bench_file)
     if any(t.leverage_class in {"per_row_recovery", "undeclared"} for t in core_fit_targets(benchmark_id)):
         return "fit_recovery"
-    if benchmark_signal_origin(Path(bench_file)) == "internal_synthetic":
+    if benchmark_signal_origin(path) == "internal_synthetic":
         return "internal_synthetic"
+    try:
+        if data_paths.EXTERNAL_VALIDATION_DIR in path.resolve().parents:
+            return "external_holdout"
+    except OSError:
+        pass
     return "predictive"
 
 
@@ -121,6 +130,7 @@ def clear_cache() -> None:
 
 
 __all__ = [
+    "EVIDENCE_ROLES",
     "CoreFitTarget",
     "RECORD_GLOB",
     "clear_cache",

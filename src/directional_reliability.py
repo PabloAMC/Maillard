@@ -19,7 +19,8 @@ artifact moves and every tag in the CLI and in the README model card moves with 
 
 THE THRESHOLDS, AND WHY THEY SIT WHERE THEY DO
 ----------------------------------------------
-``trust``       >= 0.80 agreement on >= 3 evaluable claims.
+``trust``       >= 0.80 agreement on >= 3 evaluable claims AND the 95 % Wilson lower bound of
+                the rate above 0.50 (demonstrably better than a coin; added 2026-09-03).
 ``caution``     >= 0.60 agreement, or a rate at/above 0.80 on fewer than 3 claims (an axis
                 measured twice and right twice is encouraging, not established).
 ``do-not-use``  < 0.60 agreement.
@@ -35,6 +36,7 @@ the boundary) is recorded in the tests as a re-pin, not hidden by moving a thres
 from __future__ import annotations
 
 import json
+import math
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -162,9 +164,28 @@ def verdict_for(agree: int, evaluable: int) -> str:
     rate = agree / evaluable
     if rate < CAUTION_MIN_RATE:
         return VERDICT_DO_NOT_USE
-    if rate >= TRUST_MIN_RATE and evaluable >= MIN_EVALUABLE_FOR_TRUST:
+    if rate >= TRUST_MIN_RATE and evaluable >= MIN_EVALUABLE_FOR_TRUST and wilson_lower(agree, evaluable) > COIN:
         return VERDICT_TRUST
     return VERDICT_CAUTION
+
+
+#: 2026-09-03 (B9 took pH on the sulfur lane to 4/5 = 0.80 exactly). A point rate on five claims
+#: cannot distinguish the model from a coin: the 95 % Wilson lower bound of 4/5 is 0.38. ``trust``
+#: now also requires that lower bound to clear 0.50, i.e. the axis is demonstrably better than a
+#: coin at 95 %. 8/8 clears it (0.68), 7/7 does (0.65), 4/5 and 5/6 do not. This ADDS a condition
+#: to ``trust``; the 0.80 / 0.60 thresholds themselves were not moved.
+COIN = 0.50
+
+
+def wilson_lower(agree: int, evaluable: int, z: float = 1.959964) -> float:
+    """95 % Wilson score interval, lower bound; 0.0 when nothing was evaluable."""
+    if evaluable <= 0:
+        return 0.0
+    p = agree / evaluable
+    denom = 1.0 + z * z / evaluable
+    centre = p + z * z / (2.0 * evaluable)
+    half = z * math.sqrt(p * (1.0 - p) / evaluable + z * z / (4.0 * evaluable * evaluable))
+    return (centre - half) / denom
 
 
 

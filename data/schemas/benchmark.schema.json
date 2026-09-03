@@ -196,6 +196,9 @@
       "enum": [
         "dynamic_headspace_gcmsms",
         "external_standard_curve_hplc_uv",
+        "hs_spme_gcms_internal_standard_calibration_curve",
+        "hs_spme_gcms_internal_standard_curve",
+        "hs_spme_gcms_semi_quantitative_internal_standard",
         "hs_spme_gcmsms_external_standard_curve",
         "internal_standard_gcms_sim",
         "internal_standard_with_measured_response_factors",

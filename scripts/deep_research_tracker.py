@@ -19,7 +19,10 @@ from src import data_paths  # noqa: E402
 
 DEEP_RESEARCH_DIR = data_paths.RESEARCH_CORPUS_DIR
 REGISTRY_FILE = data_paths.BENCHMARK_INTAKE_REGISTRY
-OUTPUT_JSON = data_paths.DEEP_RESEARCH_BACKLOG
+# 2026-09-03: the audit is written BESIDE the ledger it audits. Until this date it overwrote
+# results/literature/deep_research_backlog.json (7,500 lines the runtime queue, the family
+# ingestion plan and the SLR reports read) with a 200-line audit payload.
+OUTPUT_JSON = data_paths.LITERATURE_LEDGERS_DIR / "deep_research_gap_analysis.json"
 OUTPUT_MD = ROOT / "reports" / "deep_research_gap_analysis.md"
 NUMBERED_REPORT_PATTERN = re.compile(r"^\d{2}_.+\.md$")
 ENTRY_PATTERN = re.compile(

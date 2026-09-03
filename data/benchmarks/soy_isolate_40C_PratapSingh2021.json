@@ -1,7 +1,7 @@
 {
   "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-  "quantification_class": "undeclared",
-  "quantification_note": "Explicitly undeclared 2026-09-03: values verified against Molecules 2021, 26, 4104 Table 1 (PMC8271896) but no method sentence was extracted; the XML is re-fetchable -- a one-quote job, not a guess. The envelope keeps the core's absolute-concentration convention for this row and says so.",
+  "quantification_class": "hs_spme_gcms_internal_standard_curve",
+  "quantification_note": "Declared 2026-09-03 from the PMC full text (PMC8271896, Materials and Methods 4.2): DVB/CAR/PDMS SPME fibre, 10 min, GC-MS; standard curves per compound class with hexanal-d12 as internal standard; 1 g powder in 7 mL water; Table 1 in ppb, mean +/- SD. Headspace: the K_aw and HS-SPME bands apply.",
   "source_doi": "10.3390/molecules26134104",
   "precursors": {
     "Soy Protein Isolate": {
@@ -74,5 +74,13 @@
     }
   },
   "protein_type": "soy_iso",
-  "denaturation_state": 0.0
+  "denaturation_state": 0.0,
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PubMed Central PMC8271896 (open access), fetched 2026-09-03",
+    "quoted_quantification": "Volatile compounds were recovered on a 1 cm 50/30 um DVB/CAR/PDMS Flex SPME fibre over a period of 10 min ... Standard curves of hexanal, 2-nonanone, and hexanol were generated and used for the aldehyde, ketone and alcohol quantification separately ... 5 uL of internal standard hexanal-d12 was used to generate the standard curve for quantification.",
+    "quoted_values": "Table 1: hexanal, native soy protein isolate 1621.71 +/- 159.69 ppb (1 g powder in 7 mL distilled deionized water).",
+    "quantification_verdict": "HS-SPME-GC-MS with an internal-standard calibration curve (hexanal-d12); compound classes quantified against one representative standard each.",
+    "verified_on": "2026-09-03"
+  }
 }
