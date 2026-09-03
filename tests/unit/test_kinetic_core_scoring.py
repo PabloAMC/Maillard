@@ -93,13 +93,7 @@ def test_scale_contract_is_the_bundles_own_else_the_global_default(path, ratio, 
 # ---------------------------------------------------------------------------
 
 
-def _bundle_path(benchmark_id: str) -> Path:
-    for directory in (data_paths.BENCHMARKS_DIR, data_paths.MAILLARD_PATH_HOLDOUT_DIR,
-                      data_paths.EXTERNAL_VALIDATION_DIR):
-        candidate = directory / f"{benchmark_id}.json"
-        if candidate.exists():
-            return candidate
-    raise AssertionError(f"{benchmark_id}: no bundle on any panel directory")
+_bundle_path = data_paths.bundle_path  # panel-wide resolver (2026-09-03)
 
 
 def _fit_target_record():

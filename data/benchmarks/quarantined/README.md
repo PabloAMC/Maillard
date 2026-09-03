@@ -1,7 +1,7 @@
 # Quarantined benchmarks
 
 Files in this directory are **excluded from the validation panel**. The benchmark loader
-(`get_benchmark_files` in `src/benchmark_validation.py`) uses a non-recursive
+(`panel_bundles` in `src/kinetic_core/panel.py`) uses a non-recursive
 `benchmark_dir.glob("*.json")`, so any JSON placed in a subdirectory of `data/benchmarks/`
 is invisible to every panel-wide generator, report and headline count. (The same mechanism
 already keeps `data/benchmarks/external_validation/` out of the panel.)

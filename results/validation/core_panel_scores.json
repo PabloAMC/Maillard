@@ -41,6 +41,39 @@
       "propanal"
     ]
   },
+  "provenance": {
+    "artifact": "core_panel_scores",
+    "generated_on": "2026-09-03",
+    "git": {
+      "commit": "66c6fe313015c0450d85a9319fd5ee1cfceca347",
+      "short": "66c6fe31",
+      "branch": "cleaning",
+      "dirty": true
+    },
+    "generated_by": "src/kinetic_core/scoring.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b1_fit_report.json",
+        "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+      },
+      {
+        "path": "results/validation/kinetic_core_b6_fit_report.json",
+        "sha256": "923940a43d2946b5a79afa476578650eb73a11217a80addbf741fff224091a8a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b7_fit_report.json",
+        "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
+      }
+    ]
+  },
   "pass_band_level": 3.0,
   "parameter_sources": [
     {
@@ -48,32 +81,12 @@
       "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
     },
     {
-      "report": "results/validation/kinetic_core_b2_1_fit_report.json",
-      "sha256": "0b972d36defedec06aa121dcde0c32ccc5bd4350647c85a624a2643666fd731c"
-    },
-    {
-      "report": "results/validation/kinetic_core_b2_2_fit_report.json",
-      "sha256": "b0b445233f90bbc0eb35a8f8c2d35948074c9f4f103e1105847a6251ebe9ecac"
-    },
-    {
-      "report": "results/validation/kinetic_core_b2_3_fit_report.json",
-      "sha256": "be1f6893bfa93ef52f9be2efc1a023bc9f4b6acdcfb7a3581011ae1b99f83ac8"
-    },
-    {
-      "report": "results/validation/kinetic_core_b2_4_fit_report.json",
-      "sha256": "e9783c72e319b451e072fbc75a5c31f5f9b15af63e67b640c1a47a7edf54b544"
-    },
-    {
-      "report": "results/validation/kinetic_core_b2_fit_report.json",
-      "sha256": "a05a0fe5b1aae21b196627ffe2a6bec95fc3b1f41cfb73751400e7eb8302b0a2"
+      "report": "results/validation/kinetic_core_b9_fit_report.json",
+      "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
     },
     {
       "report": "results/validation/kinetic_core_b3_fit_report.json",
       "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
-    },
-    {
-      "report": "results/validation/kinetic_core_b4_fit_report.json",
-      "sha256": "ce3d73dbc1687dfe4cdb27ac5832e6a9aa47a69ac1d9b44f4bcb678d3a3c2686"
     },
     {
       "report": "results/validation/kinetic_core_b6_fit_report.json",
@@ -82,14 +95,6 @@
     {
       "report": "results/validation/kinetic_core_b7_fit_report.json",
       "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
-    },
-    {
-      "report": "results/validation/kinetic_core_b8_fit_report.json",
-      "sha256": "2d6384de0d872746724319f50a76e5ee84126fc537134b131491214569eccbcb"
-    },
-    {
-      "report": "results/validation/kinetic_core_b9_fit_report.json",
-      "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
     }
   ],
   "summary": {
@@ -307,7 +312,7 @@
       "total": 30
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 74.4
+    "wall_seconds": 15.1
   },
   "benchmarks": [
     {

@@ -35,7 +35,6 @@ does not depend on the number of worker processes.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import math
 import multiprocessing
@@ -46,7 +45,8 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
-from src import data_access, data_paths
+from src import artifact_io, data_access, data_paths, provenance
+from src.report_format import fmt_number as _fmt
 from src.benchmark_metadata import (
     benchmark_signal_origin,
     get_benchmark_metadata,
@@ -496,22 +496,13 @@ def core_priors() -> Tuple[CorePrior, ...]:
 CORE_PRIORS: Tuple[CorePrior, ...] = core_priors()
 
 
-def parameter_sources() -> List[Dict[str, str]]:
-    """The fit reports the draws are made from, with their sha256."""
-    out = []
-    for path in (
-        engine._B1_FIT_REPORT, engine._B2_FIT_REPORT, engine._B3_FIT_REPORT,
-        engine._B6_FIT_REPORT, engine._B7_FIT_REPORT,
-    ):
-        if not path.exists():
-            continue
-        out.append(
-            {
-                "report": data_paths.rel(path),
-                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-            }
-        )
-    return out
+def parameter_sources() -> List[Dict[str, Any]]:
+    """The fit reports the draws are made from, with their sha256 (``report`` + ``sha256``)."""
+    return [
+        {"report": s["path"], "sha256": s["sha256"]}
+        for s in provenance.input_sources(engine.fit_report_paths())
+        if s["sha256"] is not None
+    ]
 
 
 # ---------------------------------------------------------------------------
@@ -919,6 +910,10 @@ def propagate_panel(
     payload: Dict[str, Any] = {
         "artifact": "core_prediction_uncertainty",
         "engine": engine_metadata(),
+        "provenance": provenance.provenance_block(
+            "core_prediction_uncertainty", generated_by="src/kinetic_core/uncertainty.py",
+            inputs=(*engine.fit_report_paths(), LAPLACE_PATH),
+        ),
         "summary": {
             "n_samples": int(n_samples),
             "seed": int(seed),
@@ -1021,16 +1016,6 @@ def propagate_panel(
 # ---------------------------------------------------------------------------
 
 
-def _fmt(value: Optional[float]) -> str:
-    if value is None:
-        return "-"
-    if isinstance(value, bool):
-        return "yes" if value else "no"
-    if abs(value) >= 1000 or (abs(value) < 0.01 and value != 0):
-        return f"{value:.3g}"
-    return f"{value:.3f}"
-
-
 def render_markdown(payload: Mapping[str, Any]) -> str:
     s = payload["summary"]
     lit = s["honest_literature_coverage"]
@@ -1119,12 +1104,11 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
 def write_artifact(
     payload: Mapping[str, Any], json_path: Path, md_path: Optional[Path] = None
 ) -> Tuple[Path, Path]:
-    json_path = Path(json_path)
-    md_path = Path(md_path) if md_path is not None else json_path.with_suffix(".md")
-    json_path.parent.mkdir(parents=True, exist_ok=True)
-    json_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
-    md_path.write_text(render_markdown(payload))
-    return json_path, md_path
+    """JSON (sorted keys) + markdown twin through the one artifact writer (src/artifact_io.py)."""
+    written, md_written = artifact_io.write_artifact(
+        payload, json_path, render=render_markdown, md_path=md_path, sort_keys=True
+    )
+    return written, Path(md_written)
 
 
 __all__ = [

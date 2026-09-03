@@ -15,6 +15,11 @@ Three non-wave derivatives import them and fit nothing: `generate_kinetic_core_b
 frozen B8 optimum), `generate_kinetic_core_b8_profile.py` (slice profiles around it) and `generate_core_fit_targets.py`
 (reads the row tables into the fit-target index's vocabulary).
 
+Known dead paths inside frozen files (recorded 2026-09-03, NOT edited because a change is a new wave):
+`generate_kinetic_core_b8_reports.py:91` and `generate_kinetic_core_b2_4_scorers.py:79` import
+`generate_cutover_final_exam` and `generate_kinetic_core_b6_holdout.py:247` shells out to it; that script was deleted at
+B5b, so their `run_exam()` paths raise if called. The exam artifact `cutover_final_exam.{json,md}` is frozen history.
+
 | date | change | why |
 | --- | --- | --- |
 | 2026-09-03 | manifest created after annotating the sulfur fit rows in `generate_kinetic_core_b2_3_fit.py` with `benchmark_id` / `benchmark_compound` (no numeric change) | step 1 of the post-retirement plan: fit rows declare their bundles |

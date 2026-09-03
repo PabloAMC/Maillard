@@ -20,11 +20,6 @@ def _under_root(root: Path, default: Path) -> Path:
     return default if root == data_paths.REPO_ROOT else root / data_paths.rel(default)
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    # Strict since 2026-09-01 (used to return {} for a missing registry).
-    return data_access.load_json(path)
-
-
 def _find_row(rows: Iterable[Mapping[str, Any]], key: str, value: str) -> Dict[str, Any]:
     for row in rows:
         if str(row.get(key, "")) == value:
@@ -55,8 +50,8 @@ def _required_tradeoff_panel(contract: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def build_extrusion_external_closure_package(root: Path = ROOT) -> Dict[str, Any]:
-    closure_contract = _load_json(_under_root(root, data_paths.EXTRUSION_EXTERNAL_CLOSURE_CONTRACT))
-    primary_contract = _load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
+    closure_contract = data_access.load_json(_under_root(root, data_paths.EXTRUSION_EXTERNAL_CLOSURE_CONTRACT))
+    primary_contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
     protocol = build_extrusion_benchmark_protocol(root)
     selected_matrix = str(protocol.get("selected_protein_type", "soy_iso"))
     matrix_row = _find_row(closure_contract.get("matrices", []), "matrix", selected_matrix)
@@ -246,9 +241,9 @@ def _prior_ids() -> Dict[str, str]:
 
 def build_extrusion_disulfide_follow_on_package(root: Path = ROOT) -> Dict[str, Any]:
     protocol = build_extrusion_benchmark_protocol(root)
-    primary_contract = _load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
-    process_payload = _load_json(_under_root(root, data_paths.PROCESS_STATE_CALIBRATIONS))
-    prior_payload = _load_json(_under_root(root, data_paths.COMPUTATIONAL_PRIORS))
+    primary_contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
+    process_payload = data_access.load_json(_under_root(root, data_paths.PROCESS_STATE_CALIBRATIONS))
+    prior_payload = data_access.load_json(_under_root(root, data_paths.COMPUTATIONAL_PRIORS))
     ids = _prior_ids()
     process_entry = _find_row(process_payload.get("entries", []), "id", ids["disulfide_context"])
     prior_rows = list(prior_payload.get("retention_binding_priors", []))

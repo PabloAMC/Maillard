@@ -38,17 +38,16 @@ trust / caution / do-not-use live in ``src/directional_reliability.py``.
 """
 from __future__ import annotations
 
-import hashlib
-import json
 import math
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import yaml
 
-from src import data_paths
+from src import artifact_io, data_paths, provenance
+from src.report_format import fmt_rate
 
-from .engine import engine_metadata, predict
+from .engine import engine_metadata, fit_report_paths, predict
 
 PANEL_PATH: Path = data_paths.DIRECTIONAL_CLAIMS_PANEL
 INDEPENDENT = "independent"
@@ -325,9 +324,13 @@ def score_panel(path: Path | str = PANEL_PATH) -> Dict[str, Any]:
     payload = {
         "artifact": "core_directional_scores",
         "engine": engine_metadata(),
+        "provenance": provenance.provenance_block(
+            "core_directional_scores", generated_by="src/kinetic_core/directional.py",
+            inputs=(Path(path), *fit_report_paths()),
+        ),
         "panel": {
             "path": data_paths.rel(Path(path)),
-            "sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest(),
+            "sha256": provenance.sha256_of(path),
             "claims": len(rows),
             "flat_tolerance_pct": tol_pct,
             "generated": str(panel.get("generated")),
@@ -355,7 +358,7 @@ def score_panel(path: Path | str = PANEL_PATH) -> Dict[str, Any]:
 
 
 def _fmt_rate(bucket: Mapping[str, Any]) -> str:
-    return f"{bucket['agree']}/{bucket['evaluable']}" + (f" ({bucket['rate']:.0%})" if bucket.get("rate") is not None else "")
+    return fmt_rate(int(bucket["agree"]), int(bucket["evaluable"]))
 
 
 def render_markdown(payload: Mapping[str, Any]) -> str:
@@ -404,12 +407,9 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
 
 
 def write_artifact(payload: Mapping[str, Any], json_path: Path) -> Tuple[Path, Path]:
-    json_path = Path(json_path)
-    json_path.parent.mkdir(parents=True, exist_ok=True)
-    json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    md_path = json_path.with_suffix(".md")
-    md_path.write_text(render_markdown(payload), encoding="utf-8")
-    return json_path, md_path
+    """JSON + markdown twin through the one artifact writer (src/artifact_io.py)."""
+    written, md_path = artifact_io.write_artifact(payload, json_path, render=render_markdown)
+    return written, Path(md_path)
 
 
 __all__ = ["INDEPENDENT", "NOT_EVALUABLE", "PANEL_PATH", "load_panel", "render_markdown", "score_claim", "score_panel", "write_artifact"]

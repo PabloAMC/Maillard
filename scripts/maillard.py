@@ -34,6 +34,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_access, data_paths  # noqa: E402
 from src.comparative_cli import (  # noqa: E402
     SPEC_TEMPLATE,
     SpecError,
@@ -136,6 +137,42 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
     )
 
 
+def _directional_summary():
+    """The tracked directional scorecard's summary, or None when it is not generated."""
+    try:
+        return data_access.load_json(data_paths.CORE_DIRECTIONAL_SCORES)["summary"]
+    except Exception:  # noqa: BLE001 - the CLI must still print its help without artifacts
+        return None
+
+
+def _headline_lines() -> str:
+    """The measured ordinal skill, READ from the artifacts (never typed into this file)."""
+    summary = _directional_summary()
+    try:
+        oos = data_access.load_json(data_paths.CORE_PANEL_SCORES)["summary"]["out_of_sample"]
+        absolute = f"Out of sample {oos['within_band']} of {oos['rows']} absolute rows land within 3x;"
+    except Exception:  # noqa: BLE001
+        absolute = "Out of sample its absolute concentrations are mostly wrong;"
+    if summary is None:
+        return absolute + "\nthe directional scorecard is not generated (core-directional).\n"
+    agree, evaluable = summary["headline"]
+    excl = summary["independent"]["excluding_ph_aw"]
+    return (
+        f"{absolute}\nits directional and ranking claims score {agree}/{evaluable} on strictly\n"
+        f"independent claims, {excl['agree']}/{excl['evaluable']} once pH and water activity are set aside.\n"
+    )
+
+
+def _axis_note(axis: str) -> str:
+    summary = _directional_summary()
+    if summary is None:
+        return ""
+    bucket = summary["independent"].get("by_category", {}).get(axis)
+    if not bucket:
+        return ""
+    return f", scored {bucket['agree']}/{bucket['evaluable']} on the directional panel"
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="maillard",
@@ -144,12 +181,11 @@ def build_parser() -> argparse.ArgumentParser:
             "Predict aroma-compound formation in a Maillard / lipid-oxidation\n"
             "system, and -- more usefully -- COMPARE two systems.\n"
             "\n"
-            "READ THIS FIRST. This model's measured skill is ORDINAL. Out of sample\n"
-            "its absolute concentrations are wrong by 6x-94x; its directional and\n"
-            "ranking claims score 24/36 on strictly independent claims, and 18/23\n"
-            "once pH and water activity are set aside. So: compare two formulations\n"
-            "and read the RATIO. Never quote an absolute number as a specification.\n"
-            "Treat any pH or moisture direction as unsupported.\n"
+            "READ THIS FIRST. This model's measured skill is ORDINAL, and modest.\n"
+            + _headline_lines() +
+            "So: compare two formulations and read the RATIO. Never quote an absolute\n"
+            "number as a specification. Read the per-axis reliability tags: water\n"
+            "activity is refused, pH is answered on the sulfur lane only.\n"
             "\n"
             "Four verbs:\n"
             "  compare           two formulations in, per-compound A/B ratios out\n"
@@ -188,8 +224,7 @@ def build_parser() -> argparse.ArgumentParser:
             "      --report /tmp/ribose_vs_glucose.html\n"
             "\n"
             "Both arms are 10 mM cysteine + 10 mM sugar, 140 C, 30 min, pH 5.0. The only\n"
-            "axis that moves is sugar identity, which is the panel's strongest axis "
-            "(9/11).\n"
+            "axis that moves is sugar identity" + _axis_note("sugar_identity") + ".\n"
             "You will see a table of A/B ratios per compound, each tagged resolved or NOT\n"
             "RESOLVED, and -- with --report -- an HTML page with the OAV chart, the "
             "refusals\nand every declared assumption the run used.\n"
@@ -326,7 +361,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  python scripts/maillard.py rank-experiments --top 3\n"
             "\n"
             "If it exits saying the panel is absent, generate it first:\n"
-            "  python scripts/generators/generate_prediction_uncertainty.py --n-samples 200 --seed 0\n"
+            "  ./scripts/docker_maillard.sh core-envelope\n"
         ),
     )
     rank.add_argument("--top", type=int, default=10, help="how many candidates to show")

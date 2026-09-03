@@ -41,6 +41,43 @@
       "propanal"
     ]
   },
+  "provenance": {
+    "artifact": "core_directional_scores",
+    "generated_on": "2026-09-03",
+    "git": {
+      "commit": "66c6fe313015c0450d85a9319fd5ee1cfceca347",
+      "short": "66c6fe31",
+      "branch": "cleaning",
+      "dirty": true
+    },
+    "generated_by": "src/kinetic_core/directional.py",
+    "inputs": [
+      {
+        "path": "docs/validation/directional_claims_panel.yml",
+        "sha256": "e0c6a70fc22e86c0a26519e8df43303f9c14b9e641abed21d31e3429841271ed"
+      },
+      {
+        "path": "results/validation/kinetic_core_b1_fit_report.json",
+        "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+      },
+      {
+        "path": "results/validation/kinetic_core_b6_fit_report.json",
+        "sha256": "923940a43d2946b5a79afa476578650eb73a11217a80addbf741fff224091a8a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b7_fit_report.json",
+        "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
+      }
+    ]
+  },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
     "sha256": "e0c6a70fc22e86c0a26519e8df43303f9c14b9e641abed21d31e3429841271ed",
@@ -406,7 +443,7 @@
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
     },
-    "wall_seconds": 264.8
+    "wall_seconds": 30.8
   },
   "claims": [
     {

@@ -220,11 +220,6 @@ CURATED_RUNTIME_BATCHES = [
 ]
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    # Strict since 2026-09-01 (used to return {} for a missing registry).
-    return data_access.load_json(path)
-
-
 def _derive_slr_families(files: List[str]) -> List[str]:
     family_ids = set()
     for filename in files:
@@ -253,17 +248,17 @@ def _under_root(root: Path, path: Path) -> Path:
 
 
 def _iter_registry_citations(root: Path) -> Iterable[str]:
-    process_payload = _load_json(_under_root(root, data_paths.PROCESS_STATE_CALIBRATIONS))
+    process_payload = data_access.load_json(_under_root(root, data_paths.PROCESS_STATE_CALIBRATIONS))
     for entry in process_payload.get("entries", []):
         if isinstance(entry, Mapping) and str(entry.get("source_citation", "")).strip():
             yield str(entry.get("source_citation", ""))
 
-    safety_payload = _load_json(_under_root(root, data_paths.SAFETY_REFERENCE_PAYLOADS))
+    safety_payload = data_access.load_json(_under_root(root, data_paths.SAFETY_REFERENCE_PAYLOADS))
     for entry in safety_payload.get("entries", []):
         if isinstance(entry, Mapping) and str(entry.get("source_citation", "")).strip():
             yield str(entry.get("source_citation", ""))
 
-    prior_payload = _load_json(_under_root(root, data_paths.COMPUTATIONAL_PRIORS))
+    prior_payload = data_access.load_json(_under_root(root, data_paths.COMPUTATIONAL_PRIORS))
     for section_name, entries in prior_payload.items():
         if section_name == "section_family_metadata" or not isinstance(entries, list):
             continue
@@ -343,7 +338,7 @@ def _prepared_candidate(spec: Mapping[str, Any], backlog_items: Mapping[str, Map
 
 
 def build_deep_research_runtime_queue(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
-    payload = _load_json(_under_root(root, data_paths.DEEP_RESEARCH_BACKLOG))
+    payload = data_access.load_json(_under_root(root, data_paths.DEEP_RESEARCH_BACKLOG))
     backlog_items = {
         str(item.get("citation", "")): item
         for item in payload.get("items", [])

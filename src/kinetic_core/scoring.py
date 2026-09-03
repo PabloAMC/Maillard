@@ -2,7 +2,7 @@
 src/kinetic_core/scoring.py -- THE CORE'S OWN PANEL SCORECARD (retirement step B3).
 
 Until B3 the kinetic core was scored by one script only, the pre-registered
-cutover exam (``scripts/generators/generate_cutover_final_exam.py``), against a
+cutover exam (``scripts/generators/generate_cutover_final_exam.py``, deleted at B5b), against a
 single 3x band and always PAIRED with the legacy lane. Every headline the
 repository publishes (panel size, evidence-role split, predictive passes,
 strict-ready count, the hold-out's genuine-extrapolation hits) came from the
@@ -34,13 +34,13 @@ fit saw. The second is the smaller number and the stronger claim.
 """
 from __future__ import annotations
 
-import hashlib
 import math
 import statistics
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-from src import data_paths
+from src import artifact_io, data_paths, provenance
+from src.report_format import fmt_number as _fmt
 from src.benchmark_metadata import (
     benchmark_signal_origin,
     get_benchmark_metadata,
@@ -48,7 +48,7 @@ from src.benchmark_metadata import (
 )
 from src.validation_contract import DEFAULT_VALIDATION_CONTRACT
 
-from .engine import engine_metadata, predict
+from .engine import engine_metadata, fit_report_paths, predict
 from .fit_targets import core_evidence_role, core_fit_targets, fit_target_of, in_core_fit
 from .panel import (
     RATIO_UNIT_FACTORS,
@@ -324,12 +324,6 @@ def _close(bucket: Dict[str, Any]) -> Dict[str, Any]:
     return bucket
 
 
-def _report_sha(path: Path) -> Optional[str]:
-    if not path.exists():
-        return None
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
 def score_panel(
     bundles: Optional[Sequence[Tuple[Path, str]]] = None, *, pass_band: float = PASS_BAND_LEVEL
 ) -> Dict[str, Any]:
@@ -397,14 +391,17 @@ def score_panel(
     strict_ready = sorted(b["benchmark_id"] for b in benches if b["strict_ready"])
     holdout = by_panel.get("maillard_path_holdout")
     role_totals = {role: bucket["benchmarks"] for role, bucket in sorted(by_role.items())}
-    reports = sorted(data_paths.VALIDATION_DIR.glob("kinetic_core_b*_fit_report.json"))
-
     payload: Dict[str, Any] = {
         "artifact": "core_panel_scores",
         "engine": engine_metadata(),
+        "provenance": provenance.provenance_block(
+            "core_panel_scores", generated_by="src/kinetic_core/scoring.py",
+            inputs=fit_report_paths(),
+        ),
         "pass_band_level": float(pass_band),
         "parameter_sources": [
-            {"report": data_paths.rel(p), "sha256": _report_sha(p)} for p in reports
+            {"report": s["path"], "sha256": s["sha256"]}
+            for s in provenance.input_sources(fit_report_paths())
         ],
         "summary": {
             "panel_benchmark_count": len(benches),
@@ -459,16 +456,6 @@ def score_panel(
 # ---------------------------------------------------------------------------
 # Rendering
 # ---------------------------------------------------------------------------
-
-
-def _fmt(value: Optional[float]) -> str:
-    if value is None:
-        return "-"
-    if isinstance(value, bool):
-        return "yes" if value else "no"
-    if abs(value) >= 1000 or (abs(value) < 0.01 and value != 0):
-        return f"{value:.3g}"
-    return f"{value:.3f}"
 
 
 def render_markdown(payload: Dict[str, Any]) -> str:
@@ -560,14 +547,9 @@ def render_markdown(payload: Dict[str, Any]) -> str:
 
 
 def write_artifact(payload: Dict[str, Any], json_path: Path) -> Tuple[Path, Path]:
-    import json
-
-    json_path = Path(json_path)
-    json_path.parent.mkdir(parents=True, exist_ok=True)
-    json_path.write_text(json.dumps(payload, indent=2, sort_keys=False) + "\n", encoding="utf-8")
-    md_path = json_path.with_suffix(".md")
-    md_path.write_text(render_markdown(payload), encoding="utf-8")
-    return json_path, md_path
+    """JSON + markdown twin through the one artifact writer (src/artifact_io.py)."""
+    written, md_path = artifact_io.write_artifact(payload, json_path, render=render_markdown)
+    return written, Path(md_path)
 
 
 __all__ = [

@@ -43,11 +43,6 @@ ARTIFACT_TYPE_TO_TEMPLATE_KIND = {
 }
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    # Strict since 2026-09-01 (used to return {} for a missing registry).
-    return data_access.load_json(path)
-
-
 def _under_root(root: Path, path: Path) -> Path:
     """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
     if Path(root).resolve() == data_paths.REPO_ROOT:
@@ -56,7 +51,7 @@ def _under_root(root: Path, path: Path) -> Path:
 
 
 def load_intake_registry(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
-    return _load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
+    return data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
 
 
 def _iter_payload_entries(payload: Any, *, section_name: Optional[str] = None) -> Iterable[Dict[str, Any]]:
@@ -93,7 +88,7 @@ def _artifact_exists(artifact: Mapping[str, Any], *, root: Path = data_paths.REP
     if not artifact_id or artifact_type == "benchmark":
         return True
 
-    payload = _load_json(path)
+    payload = data_access.load_json(path)
     if artifact_type == "intake_registry_entry":
         return any(str(entry.get("id", "")) == artifact_id for entry in payload.get("eligible_references", []))
     if artifact_type == "slr_incorporation_ledger":

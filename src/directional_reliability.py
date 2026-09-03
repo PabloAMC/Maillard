@@ -1,25 +1,21 @@
-"""Per-axis reliability tags, read from the directional-accuracy artifact.
+"""Per-axis reliability tags, read from the core's directional scorecard.
 
 WHY THIS MODULE EXISTS
 ----------------------
-2026-08-28 (Wave S5). The measured skill of this model is **ordinal**, not absolute: the
-hold-out medians are 6x on the free-precursor lane and 67-94x on the matrix lane, while the
-directional panel scores 24/35 on strictly independent claims (Wave W, 2026-08-28; was
-21/29). A user-facing interface that
-leads with a ppb number is therefore reporting the part of the model that was measured to be
-wrong. The comparative CLI leads with ratios instead -- and a ratio is only as good as the
-model's direction sense **on the axis the two arms differ along**, which the panel measures
-per category.
+The measured skill of this model is **ordinal**, not absolute: its absolute concentrations
+are mostly wrong out of sample, while its direction sense on a few axes is measured to beat
+a coin. A user-facing interface that leads with a ppb number is therefore reporting the part
+of the model that was measured to be wrong. The comparative CLI leads with ratios instead --
+and a ratio is only as good as the model's direction sense **on the axis the two arms differ
+along**, which the directional panel measures per category.
 
-So this module does exactly one thing: it turns
-``docs/validation/directional_accuracy_report.md`` -- specifically its CURRENT STANDING
-section, the one place in the repo that states the live per-category counts -- into
-``(agree, evaluable, verdict)`` triples, and works out which categories a given pair of
-formulation specs actually exercises.
+So this module does exactly one thing: it turns ``results/validation/core_directional_scores.json``
+(the artifact ``kinetic_core.directional.score_panel`` writes; step B7, 2026-09-03) into
+``(agree, evaluable, verdict)`` triples per axis, and works out which axes a given pair of
+formulation specs actually exercises. No count is typed here: when the panel is re-scored the
+artifact moves and every tag in the CLI and in the README model card moves with it.
 
-**Nothing here is a measurement.** It parses one and applies a threshold. If the panel is
-re-scored, edit the table in that report and every tag in the CLI and in the README model
-card moves with it; there is no second copy of the numbers to forget.
+**Nothing here is a measurement.** It reads one and applies a threshold.
 
 THE THRESHOLDS, AND WHY THEY SIT WHERE THEY DO
 ----------------------------------------------
@@ -29,19 +25,11 @@ THE THRESHOLDS, AND WHY THEY SIT WHERE THEY DO
 ``do-not-use``  < 0.60 agreement.
 
 The 0.60 floor is not arbitrary and it is not tuned: most panel rows are binary orderings, so
-a coin scores ~0.50, and the report's own §2 says the model's edge over a coin is "real but
-modest". An axis that cannot clear 0.60 has not been shown to beat guessing on this evidence,
-and the report's §A6 says in terms that the model "licenses no pH or moisture recommendation".
-Under these thresholds ``moisture_aw`` (0/3) lands on ``do-not-use``.
-
-UPDATED 2026-08-28 (Wave W). ``ph`` was 4/7 = 0.571 and therefore ``do-not-use``. Two new
-independent pH rows from Mottram & Nobrega 2002 both AGREE, taking it to 6/9 = 0.667, which
-clears the 0.60 floor and moves the tag to ``caution``. THE THRESHOLD WAS NOT MOVED TO GET
-THIS -- the evidence moved. Read the change conservatively: 6/9 is two rows above the floor,
-both from one source, and the report's SS8/SSA6 licence still says the model "licenses no pH
-recommendation". ``caution`` here means "no longer demonstrably worse than a coin", not
-"trustworthy". The thresholds live here rather than in the report so that the report stays a
-record of measurement only.
+a coin scores ~0.50. An axis that cannot clear 0.60 has not been shown to beat guessing on
+this evidence. The thresholds live here rather than in the artifact so that the artifact
+stays a record of measurement only; they have not been moved since 2026-08-28. A verdict that
+changes because a refit moved the counts (B9 took pH on the sulfur lane to 4/5, ``trust`` at
+the boundary) is recorded in the tests as a re-pin, not hidden by moving a threshold.
 """
 
 from __future__ import annotations

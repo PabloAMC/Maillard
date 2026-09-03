@@ -21,6 +21,8 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import yaml
 
+from src import data_access, data_paths
+
 
 RATIO_CAVEAT = (
     "Ratios are the reported quantity because comparisons cancel the systematic scale error. "
@@ -220,7 +222,7 @@ def render_rank_text(payload: Mapping[str, Any]) -> str:
         _wrap(
             "This ranking is the model's honest product: every row is a place the model is "
             "measurably wrong, converted into a bookable measurement. It is computed from the "
-            "cached Monte-Carlo panel (results/validation/prediction_uncertainty.json), so it "
+            "cached Monte-Carlo envelope (results/validation/core_prediction_uncertainty.json), so it "
             "is only as current as the last trust-loop run."
         )
     )
@@ -232,32 +234,6 @@ def to_json(payload: Mapping[str, Any]) -> str:
     return json.dumps(payload, indent=2, sort_keys=True, default=str)
 
 
-# ---------------------------------------------------------------------------------------
-# The kinetic core: the only engine (Build Wave B5 made it the default; retirement step B5
-# on 2026-09-03 deleted the screening lane it used to sit beside).
-# ---------------------------------------------------------------------------------------
-# (src/kinetic_core/engine.py). The FAST lane above is NOT deleted -- it is
-# demoted to the ordinal-only front end its measured skill supports, and every
-# surface it reaches is labelled and stripped of absolutes.
-#
-# The two rules this section enforces, mechanically rather than by convention:
-#   1. NO ABSOLUTE ppb FROM THE FAST LANE REACHES A USER-FACING SURFACE.
-#      ``screening_payload`` removes the fields; the CLI applies it to every
-#      FAST payload before rendering or serialising, so there is no path from a
-#      FAST ppb to a terminal.
-#   2. Every FAST surface carries the ORDINAL SCREENING label.
-
-
-SCREENING_CAVEAT = (
-    "ORDINAL SCREENING LANE. These are RANKINGS, not concentrations. The FAST lane's "
-    "absolute ppb are withheld from every user-facing surface as of Wave B5, because its "
-    "measured absolute skill does not support them (median 6.0x on the free-precursor "
-    "hold-out, 67-94x on the matrix lane, 1 of 5 genuine extrapolation rows inside the 90% "
-    "CI). What the FAST lane is measured to do is ORDER things: the directional panel scores "
-    "24/35 on strictly independent claims. Use it to sort candidates; use `--lane core` for "
-    "any quantity."
-)
-
 # CORRECTED 2026-08-29 (Wave Q1). This caveat is printed to EVERY core-lane
 # user, and three of its factual claims had been falsified by the waves that
 # followed it: B6 added the lipid lane (so "no lipid-oxidation path" was wrong),
@@ -267,30 +243,31 @@ SCREENING_CAVEAT = (
 # are four lanes). A caveat that overstates the model's limits is not the safe
 # direction to be wrong in: it teaches users to distrust answers the model can
 # actually support, and it goes stale invisibly because nothing tests prose.
-CORE_CAVEAT = (
-    "KINETIC CORE. Absolute concentrations come from the mass-action network (frozen "
-    "B1/B2.x/B3/B6/B7 parameters), and they are reported WITH their envelope declaration. The "
-    "core refuses what it cannot name -- ask it for 1-hexanol, 2-pentylfuran or propanal and it "
-    "will tell you why it will not answer, rather than answering. Its four lanes (trunk, sulfur, "
-    "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "
-    "lane as a direct sum, and the Maillard lanes do not compose with each other. A refusal is "
-    "an output, not a failure. Read the core's scorecard "
-    "(results/validation/core_panel_scores.md: 5 of 48 out-of-sample rows within 3x) and its "
-    "envelope (core_prediction_uncertainty.md) before trusting any number here; the "
-    "directional panel (core_directional_scores.md) is what the reliability column reads."
-)
+def core_caveat() -> str:
+    """The caveat printed with every core answer. Its one number is READ from the tracked
+    scorecard (results/validation/core_panel_scores.json) rather than typed here: a
+    hard-coded count was one wave behind twice (2026-09-03)."""
+    try:
+        summary = data_access.load_json(data_paths.CORE_PANEL_SCORES)["summary"]["out_of_sample"]
+        headline = f"{summary['within_band']} of {summary['rows']} out-of-sample rows within 3x"
+    except Exception:  # noqa: BLE001 - a missing scorecard is reported, not fatal
+        headline = "scorecard not generated; run ./scripts/docker_maillard.sh core-scores"
+    return (
+        "KINETIC CORE. Absolute concentrations come from the mass-action network (frozen "
+        "B1/B2.x/B3/B6/B7 parameters), and they are reported WITH their envelope declaration. The "
+        "core refuses what it cannot name -- ask it for 1-hexanol, 2-pentylfuran or propanal and it "
+        "will tell you why it will not answer, rather than answering. Its four lanes (trunk, sulfur, "
+        "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "
+        "lane as a direct sum, and the Maillard lanes do not compose with each other. A refusal is "
+        "an output, not a failure. Read the core's scorecard "
+        f"(results/validation/core_panel_scores.md: {headline}) and its "
+        "envelope (core_prediction_uncertainty.md) before trusting any number here; the "
+        "directional panel (core_directional_scores.md) is what the reliability column reads."
+    )
 
-#: Fields removed from every FAST payload before it reaches a user.
-#: Q1 added ``ci_level_pct`` and ``range_available``. Both are properties of an
-#: absolute interval that is itself being withheld, so leaving them in described
-#: a quantity the payload no longer carried -- ``range_available: true`` next to
-#: no range. Nothing rendered them, so this strips two fields that were dead
-#: weight rather than changing any output.
-_FAST_ABSOLUTE_FIELDS = (
-    "a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_p95",
-    "ci_level_pct", "range_available",
-)
 
+#: Evaluated once at import for callers that read the constant.
+CORE_CAVEAT = core_caveat()
 
 def _core_process(spec: Mapping[str, Any]):
     from src.kinetic_core.engine import ProcessSpec, ThermalProgram

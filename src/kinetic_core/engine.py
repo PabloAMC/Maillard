@@ -2002,6 +2002,15 @@ def residual_report(
     }
 
 
+def fit_report_paths() -> Tuple[Path, ...]:
+    """The frozen fit reports this engine reads, in lane order (B1, sulfur wave, B3, B6, B7).
+
+    The scorecard, the envelope and the directional artifact list exactly these as their
+    provenance inputs; a report on disk the engine does not read is not a parameter source.
+    """
+    return (_B1_FIT_REPORT, _B2_FIT_REPORT, _B3_FIT_REPORT, _B6_FIT_REPORT, _B7_FIT_REPORT)
+
+
 def engine_metadata() -> Dict[str, Any]:
     """
     What this engine is, for embedding in every artifact it produces.

@@ -1,11 +1,11 @@
 """Engine-neutral facts about a benchmark bundle: metadata, signal origin, evidence role,
 and the scale contract it declares.
 
-2026-09-03 (retirement step B3). These helpers used to live in ``src/benchmark_validation.py``,
-the LEGACY validation harness, and were imported from there by the kinetic core's envelope
-(``src/kinetic_core/uncertainty.py``). The harness is scheduled for deletion (retirement
-step B5); nothing here runs an engine, so it moves to a module that will outlive it.
-``benchmark_validation`` re-exports every name so its 36 test files keep working.
+2026-09-03 (retirement step B3). These helpers used to live in the legacy validation harness
+(``src/benchmark_validation.py``, deleted at B5b) and are what the kinetic core's scorecard and
+envelope read. Nothing here runs an engine. The evidence-role vocabulary (predictive /
+fit_recovery / internal_synthetic) has ONE implementation, ``kinetic_core.fit_targets.core_evidence_role``;
+this module supplies the signal origin it builds on.
 """
 from __future__ import annotations
 
@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import Any, Dict, Mapping
 
 from src.benchmark_types import BenchmarkMetadata
-from src.fit_target_index import is_per_row_fit_target
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
 
 
@@ -155,40 +154,11 @@ def benchmark_signal_origin(bench_file: Path) -> str:
         return "external_literature"
     return "internal_synthetic"
 
-def benchmark_evidence_role(benchmark_id: str, bench_file: Path) -> str:
-    """What KIND of claim this benchmark can support: see BenchmarkSummary.evidence_role.
 
-    2026-08-27 (Wave I). The mechanical status says whether predictions and measurements
-    agree; this says whether that agreement is evidence. Fit-recovery is checked FIRST and
-    beats signal origin: a lane whose observable factor was solved from a literature
-    benchmark is still literature-sourced, and is still not a prediction.
-
-    Two independent sources of fit-recovery are consulted:
-
-    * the calibration registry's own `fitted_to_benchmark` declarations (the matrix
-      observability factors, one free factor per compound per lane); and
-    * `src.fit_target_index`, which reads the fit records under `results/validation/` and
-      classifies each by LEVERAGE. Only high-leverage fits (enough free parameters to
-      reproduce their target row by row) make a benchmark fit-recovery. A low-leverage
-      global fit -- two constants across two dozen rows -- does NOT, because excluding
-      those rows would delete genuine failures from the count rather than expose them.
-    """
-    # 2026-09-03 (B5): the legacy matrix observability factors' `fitted_to_benchmark`
-    # declarations are no longer consulted; the fit-target index is the one source.
-    if is_per_row_fit_target(benchmark_id):
-        return "fit_recovery"
-    if benchmark_signal_origin(Path(bench_file)) == "internal_synthetic":
-        return "internal_synthetic"
-    return "predictive"
-
-
-#: Backwards-compatible alias (the legacy harness called it by this name).
-_resolve_scale_thresholds = resolve_scale_thresholds
 
 __all__ = [
     "BenchmarkMetadata",
     "SYNTHETIC_BENCHMARK_ORIGINS",
-    "benchmark_evidence_role",
     "benchmark_signal_origin",
     "get_benchmark_metadata",
     "matrix_source_anchor",

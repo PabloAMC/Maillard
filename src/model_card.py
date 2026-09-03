@@ -696,17 +696,6 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
         )
         lines.append("")
 
-    free = card.get("free_precursor_holdout", {})
-    if free.get("available"):
-        lines.append(
-            f"**Provenance of the hold-out numbers.** `{free['path']}`, "
-            f"{free['bundles']} bundles / {free['scored']} scored targets, frozen "
-            f"{free.get('generated_on')} at `{free.get('git')}` — before any calibration wave "
-            "saw those points, and un-gitignored specifically so a later wave cannot "
-            "regenerate it and compare it with itself."
-        )
-        lines.append("")
-
     lines.append(
         "**How to use this model in one line:** compare two formulations and read the ratio "
         "(`python scripts/maillard.py compare`), never quote the absolute number, and treat "

@@ -12,7 +12,7 @@ independent arithmetic route, and is **true**. What is missing is a **reaction s
 or — for two of the rows — an **observable** and a **seed species**.
 
 Files here are invisible to every panel-wide generator, report and headline count, because
-`get_benchmark_files` in `src/benchmark_validation.py` uses a non-recursive `glob("*.json")`.
+`panel_bundles` in `src/kinetic_core/panel.py` uses a non-recursive `glob("*.json")`.
 That is the same mechanism that keeps `external_validation/` and `quarantined/` out.
 
 ## Why not just score them and let them fail?

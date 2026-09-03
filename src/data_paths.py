@@ -119,12 +119,6 @@ DOCS_ASSETS_DIR: Path = DOCS_ROOT / "assets"
 
 # --------------------------------------------------------------------------- results/
 VALIDATION_DIR: Path = RESULTS_ROOT / "validation"
-EXPERIMENT_REQUESTS_DIR: Path = VALIDATION_DIR / "experiment_requests"
-# Preview runs of src/data_ingest (no --confirm) write here instead of VALIDATION_DIR.
-# Written by src/matrix_recalibration and read back by src/matrix_calibration_registry.
-# Until 2026-09-01 this feedback loop ran through data/lit/ (a generated file inside the
-# curated tree); it is a result.
-MATRIX_CALIBRATION_OFFSETS: Path = RESULTS_ROOT / "calibration" / "matrix_calibration_offsets.json"
 # Literature LEDGERS: regenerable status records (which paper is wired where; citation
 # candidates mined from the corpus). Moved out of data/lit on 2026-09-02; tracked under
 # results/ so tests and the citation gate still see them.
@@ -159,5 +153,21 @@ def rel(path: Path | str) -> str:
 
 
 def benchmark_path(benchmark_id: str) -> Path:
-    """Path of a panel benchmark by id (``benchmark_id`` is the file stem)."""
+    """Path of a TRUST-LOOP benchmark by id (``benchmark_id`` is the file stem); no existence
+    check. For a bundle that may live on any panel directory use :func:`bundle_path`."""
     return BENCHMARKS_DIR / f"{benchmark_id}.json"
+
+
+#: The three panel directories, in the order ``kinetic_core.panel.panel_bundles`` tags them.
+PANEL_DIRS: tuple = (BENCHMARKS_DIR, MAILLARD_PATH_HOLDOUT_DIR, EXTERNAL_VALIDATION_DIR)
+
+
+def bundle_path(benchmark_id: str) -> Path:
+    """Path of a panel bundle by id, searched across the trust loop, the maillard_path
+    hold-out and the external-matrix directory. Raises ``FileNotFoundError`` when no panel
+    directory holds it (quarantined and step-level-unreachable bundles are off the panel)."""
+    for directory in PANEL_DIRS:
+        candidate = directory / f"{benchmark_id}.json"
+        if candidate.exists():
+            return candidate
+    raise FileNotFoundError(f"{benchmark_id}: no bundle on any panel directory")

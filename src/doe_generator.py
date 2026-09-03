@@ -141,11 +141,6 @@ def export_doe_requests(gap_registry_path: str, output_path: str):
     return payload
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    # Strict since 2026-09-01 (used to return {} for a missing registry).
-    return data_access.load_json(path)
-
-
 def _under_root(root: Path, path: Path) -> Path:
     """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
     if Path(root).resolve() == data_paths.REPO_ROOT:
@@ -154,7 +149,7 @@ def _under_root(root: Path, path: Path) -> Path:
 
 
 def _resolve_acrylamide_reference(root: Path) -> Dict[str, Any]:
-    payload = _load_json(_under_root(root, data_paths.SAFETY_REFERENCE_PAYLOADS))
+    payload = data_access.load_json(_under_root(root, data_paths.SAFETY_REFERENCE_PAYLOADS))
     for entry in payload.get("entries", []):
         if str(entry.get("id", "")) == "choi_2024_pea_acrylamide_asparagine":
             return dict(entry)
@@ -162,7 +157,7 @@ def _resolve_acrylamide_reference(root: Path) -> Dict[str, Any]:
 
 
 def _resolve_hme_control_anchor(root: Path) -> Dict[str, Any]:
-    payload = _load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
+    payload = data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
     for entry in payload.get("eligible_references", []):
         if str(entry.get("id", "")) == "pmc_2026_hme_hexanal_baseline":
             return dict(entry)
@@ -241,7 +236,7 @@ def _evaluate_arm_discrimination(
 
 
 def build_extrusion_benchmark_protocol(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
-    contract = _load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
+    contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
     acrylamide_reference = _resolve_acrylamide_reference(root)
     hme_control_anchor = _resolve_hme_control_anchor(root)
     hme_key_values = dict(hme_control_anchor.get("key_values", {}))
@@ -493,7 +488,7 @@ def build_extrusion_sop_lock_register(root: Path = data_paths.REPO_ROOT) -> Dict
     anchor = dict(protocol.get("closest_repo_backed_hme_anchor", {}))
     headspace = dict(protocol.get("repo_backed_lab_specs", {}).get("headspace_method", {}))
     safety = dict(protocol.get("repo_backed_lab_specs", {}).get("safety_method", {}))
-    contract = _load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
+    contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
     return {
         "summary": {
             "status": "partially_locked_repo_backed",

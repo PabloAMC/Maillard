@@ -193,7 +193,7 @@ As of the current benchmark summary:
   28.60, its record retracted. **Strict-ready is 0/14 before and after** — this benchmark was
   *failing* its contract when it was retired (2.2086x / 0.2352 dex, and 4.3797x / 0.4041 dex
   after the revert), so retiring it removes a failure, not a pass. Retiring the contract does
-  not leave the row untested: `_resolve_scale_thresholds` falls back to the global
+  not leave the row untested: `resolve_scale_thresholds` falls back to the global
   free-precursor defaults (1.5x / 0.10 dex), which are marginally *looser* than what was
   retired and which the row fails by more. That inheritance is stated here rather than left to
   be discovered. **The sulfur branch now has zero absolute literature anchors.**

@@ -2,7 +2,7 @@
 src/kinetic_core/panel.py -- THE ONE bundle -> core-spec mapping (retirement step B2).
 
 Before B2 the mapping from a frozen benchmark bundle to a ``FormulationSpec``
-lived inside ``scripts/generators/generate_cutover_final_exam.py``. The core
+lived inside ``scripts/generators/generate_cutover_final_exam.py`` (deleted at B5b). The core
 Monte-Carlo envelope needs exactly the same mapping, and two copies of a
 schema reader are how the matrix_path bundles came to be scored with
 ``measured = None`` for a whole wave (see :func:`measured_value`). So the
@@ -112,9 +112,9 @@ def panel_bundles(
     """
     The union panel: ``[(path, panel_tag), ...]`` plus the skipped bundles.
 
-    * ``data/benchmarks/*.json`` (NON-recursive, as ``get_benchmark_files``
-      is; the quarantined and step-level-unreachable subdirectories are
-      physically separated and stay out)          -> ``trust_loop``
+    * ``data/benchmarks/*.json`` (NON-recursive; the quarantined and
+      step-level-unreachable subdirectories are physically separated and
+      stay out)                                    -> ``trust_loop``
     * ``data/benchmarks/external_validation/maillard_path/*.json`` -> ``maillard_path_holdout``
     * ``data/benchmarks/external_validation/*.json``               -> ``external_matrix``
     """

@@ -867,40 +867,41 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
 ## 7. Improvement backlog (standing owner request 2026-09-03: "suggest ideas that improve the codebase and add them here")
 
 - **Verdicts at the boundary** (found at B9): pH on the core is tagged `trust` on 4 of 5 claims (0.80 exactly, n=5). The rule is a point rate over a minimum count; a Wilson lower bound (or requiring rate >= 0.80 AND n >= 5 with at most one miss) would separate 4/5 from 8/8. Changing the rule is a threshold change and so an owner decision; `src/directional_reliability.py` documents why the current ones were not tuned.
-- **Hard-coded headline numbers in code** (found at B9): `src/comparative_cli.py` carries the out-of-sample count as a string literal (now "5 of 48"); QUICKSTART quotes it too. Have the CLI read `core_panel_scores.json` and let the model card be the only place prose numbers are spliced. Also: B8/B9 generators mutate B2.3's `ACTIVE_FIT_ROWS` at import (see `tasks/test_audit.md`).
 
 Not scheduled; each is a self-contained change with its motivation. Strike or promote as decided.
 
-- [ ] **Fit reports should declare their targets in the index's vocabulary.** `src/kinetic_core/fit_targets.py` is a
-      hand-typed table mapping sulfur fit rows to bundles because the core fit reports key rows by prose anchors. Give
-      each generator's ROW dict a `benchmark_id`, emit `fit_target_ids` + `fit_leverage {free_parameters, fitted_rows}`
-      in every `kinetic_core_b*_fit_report.json`, add that glob to `fit_target_index.FIT_RECORD_GLOBS`, delete the
-      table. (Found 2026-09-03: the sulfur fit read 8 panel rows the index could not see, one of them a hold-out.)
-- [ ] **A hold-out the fit read.** `mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5` is on the hold-out panel
-      and in the B2–B8 sulfur fit (Hofmann T1 xylose). Either declare it in `docs/reference/FIT_HOLDOUT_DECLARATION.md`
-      and move it to the trust loop, or drop it from the fit; and make `scripts/ci/holdout_guard.py` check fit rows
-      against hold-out bundles statically so this cannot recur.
+**Done 2026-09-03 (backlog pass, commits after `66c6fe3`):** fit-target declarations (step 1), the hold-out the fit read
+(B9), README numbers via the model card + guards (B4/B5c), the exam scorer (frozen history), shared helpers
+(`src/provenance.py`, `src/report_format.py`, `src/artifact_io.write_artifact`; the three headline artifacts now
+carry a `provenance` block with git + input hashes), `data_paths.bundle_path`, CLI headline numbers read from the
+artifacts (`comparative_cli.core_caveat`, `maillard.py` help), dead code (`benchmark_evidence_role`,
+`SCREENING_CAVEAT`, the model card's unproduced hold-out branch, five `_load_json` wrappers, two dead
+`data_paths` constants), stale pointers to `benchmark_validation` / `matrix_calibration_registry` /
+`get_benchmark_files`.
+
+- [ ] **One evidence-role vocabulary (four values).** `evidence_role` (predictive / fit_recovery / internal_synthetic,
+      computed by `kinetic_core.fit_targets.core_evidence_role`) and the bundle-level `evidence_class`
+      (`external_validation_only` / `diagnostic_only`, read by `panel.is_scored_bundle` and `schema_gate`) answer the
+      same question. Fold them: `predictive`, `fit_recovery`, `internal_synthetic`, `external_holdout`; one reader in
+      `benchmark_metadata`; 23 bundles + `benchmark.schema.json` + `holdout_guard`/`schema_gate` + three tests change.
+      The parameter-level `evidence_class` in `parameters*.py` is a different vocabulary (provenance of a constant):
+      rename it `provenance_class` to end the collision.
+- [ ] **`quantification_class` is unenforced and 12 of 40 panel bundles lack it** (survey 2026-09-03; the schema and
+      `schema_gate` are silent, so a typo degrades to `undeclared` and re-applies the headspace bands). Declarable from
+      text already in the repo: Bolton 1994 (GC-MS-SIM vs internal standard → extraction), Liu 2023 (HS-SPME-GC-MS/MS
+      → headspace), Trikusuma 2019 (DHS-GC-MS-MS → headspace; add a `dhs`/`dynamic_headspace` marker). NOT declarable
+      without the source: Pratap-Singh 2021 (×2; PMC8271896 XML is re-fetchable), Li 2026, Resconi/Hernandez 2023,
+      ACSRef3 (figure read-off), Foods 2023 CML/CEL, Ramírez-Jiménez 2000, Cerny 2008 (values unverified). Hofmann
+      `cys_ribose_140C` is a repo-internal derivation (tier REFERENCE): its honest class is "no measurement". Add the
+      field to the schema as an enum, gate it, declare the three, and record the rest as `undeclared` explicitly.
+
 - [ ] **Artifact freshness gate.** `results/validation/cutover_final_exam.json` drifted from the code silently
       (4/34 → 3/34) until B2 regenerated it. For cheap generators (exam ~1 min, scorecard 13 s) add a CI check that a
       regeneration equals the tracked file modulo `generated_on`/`git`; for expensive ones record input hashes
       (`parameter_sources` already does this for the fit reports) and compare those.
-- [ ] **README numbers should be rendered, not typed.** README quotes exam numbers (42.23x paired median) that no
-      test pins and the artifact no longer says (24.78x). At the B4 re-pin, turn every quoted headline into a
-      generated snippet (a `docs/generated/headlines.md` include, or a guard per number) so prose cannot drift.
-- [ ] **Ten bundles lack `quantification_class`.** Named in the B2 log. Declare from the primary sources so the
-      envelope's headspace-band gating stops defaulting; the default is conservative but is a guess.
-- [ ] **One scorer.** `generate_cutover_final_exam.score_core` duplicates `kinetic_core.scoring.score_benchmark`
-      (the exam predates it). When the old-lane half of the exam dies at B5, make the exam a consumer of `scoring`.
-- [ ] **Shared report helpers.** `_fmt`, `_summarise`/`summarise_folds`, `_git_head`, `write_artifact` are copied
-      across `scripts/generators/*.py` and `kinetic_core/{uncertainty,scoring}.py`; one `kinetic_core/reporting.py`.
 - [ ] **`results/validation/` needs the `data/` treatment.** ~140 files, including per-member dumps
       (`kinetic_core_b2_4_*_s0..s5`) and superseded wave baselines. Generate a `results/README.md` with a ghost check
       (as `data/README.md`), and archive what nothing reads.
-- [ ] **`data_paths.bundle_path(benchmark_id)`** resolving across all panel directories (trust loop, hold-out,
-      external matrix); `benchmark_path` only knows the trust loop and the B3 test had to work around it.
-- [ ] **Envelope cost.** 200 draws × 49 rows ≈ 38 min wall (6 workers, under load). Profile one `predict`; the
-      sulfur network is re-integrated per draw although the draw leaves it untouched (no sampled sulfur priors) —
-      cache lane runs keyed by the draw's lane-relevant coordinates.
 - [ ] **Sulfur covariance is a local Gaussian at a bound-sitting optimum (B8).** Two coordinates sit ON declared
       bounds (`Ea_decay_thiol_sink` at its 102 kJ/mol ceiling, the acid yield at 0) and are excluded from sampling;
       the honest replacement for the Laplace picture is a profile likelihood over the 23 free coordinates (or a short
@@ -922,9 +923,6 @@ Not scheduled; each is a self-contained change with its motivation. Strike or pr
       defaults on. One primary-source pass per bundle, recorded in the bundle, closes it.
 - [ ] **Envelope cost: 42 min at n=200 × 49 rows.** Profile `predict`; the sulfur lane is now sampled so every draw
       re-integrates it — cache per-lane runs keyed by the draw's lane coordinates, or vectorise the panel.
-- [ ] **After B5:** drop `benchmark_metadata`'s dependence on `matrix_calibration_registry.is_fit_recovery_benchmark`
-      (legacy matrix factors) and collapse the two evidence-role vocabularies (`evidence_role` / `legacy_evidence_role`)
-      into one.
 
 ## 6. Risks and guardrails
 

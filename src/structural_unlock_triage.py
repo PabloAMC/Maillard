@@ -125,11 +125,6 @@ _DEFERRED_MODELING_REVIEW = [
 ]
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    # Strict since 2026-09-01 (used to return {} for a missing registry).
-    return data_access.load_json(path)
-
-
 def _priority_score(priority: str) -> float:
     return float(_PRIORITY_WEIGHTS.get(str(priority).strip().lower(), 1.0))
 
@@ -142,8 +137,8 @@ def _under_root(root: Path, path: Path) -> Path:
 
 
 def _build_gap_maps(root: Path) -> tuple[Dict[str, Dict[str, Any]], Dict[str, Dict[str, Any]]]:
-    intake = _load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
-    process = _load_json(_under_root(root, data_paths.PROCESS_GAP_REGISTRY))
+    intake = data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
+    process = data_access.load_json(_under_root(root, data_paths.PROCESS_GAP_REGISTRY))
     intake_gaps = {
         str(entry.get("id", "unknown")): dict(entry)
         for entry in intake.get("structural_gaps", [])
