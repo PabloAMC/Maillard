@@ -731,6 +731,34 @@ def resolve_lane(
     return lanes[0], ()
 
 
+#: Warning tag the scorers look for (see :func:`unidentified_routes`).
+HEXOSE_ENTRY_UNIDENTIFIED = "HEXOSE ENTRY UNIDENTIFIED"
+#: Species keys of the sugars that reach the thiols only through the unidentified entry.
+_HEXOSE_KEYS = ("Glc", "Fru")
+#: Thiols whose only hexose route is that entry.
+_HEXOSE_ENTRY_TARGETS = ("MFT", "FFT")
+
+
+def unidentified_routes(
+    mapped_precursors: Mapping[str, float], mapped_targets: Mapping[str, str]
+) -> Tuple[str, ...]:
+    """Target KEYS (``MFT``/``FFT``) whose formation from this charge runs only through the
+    unidentified hexose entry: a hexose is charged, no pentose and no thiamine are, and
+    the target is a thiol. Empty for every other request."""
+    charged = {k for k, v in mapped_precursors.items() if float(v) > 0.0}
+    if not any(k in charged for k in _HEXOSE_KEYS) or "PENT" in charged or "THI" in charged:
+        return ()
+    return tuple(sorted({key for key in mapped_targets.values() if key in _HEXOSE_ENTRY_TARGETS}))
+
+
+def declared_unidentified(declaration: "EnvelopeDeclaration", compound: str) -> bool:
+    """Whether ``compound`` (a bundle target name) is one the declaration flagged as running
+    through the unidentified hexose entry."""
+    if not any(str(w).startswith(HEXOSE_ENTRY_UNIDENTIFIED) for w in declaration.warnings):
+        return False
+    return declaration.mapped_targets.get(str(compound)) in _HEXOSE_ENTRY_TARGETS
+
+
 def declare_envelope(
     spec: FormulationSpec, targets: Sequence[str]
 ) -> EnvelopeDeclaration:
@@ -822,6 +850,27 @@ def declare_envelope(
                 f"descriptor {spec.process.matrix!r} was used instead. Its "
                 f"lipid fraction and peroxide value are declared assumptions."
             )
+
+    # --- routes the primary evidence does not identify --------------------
+    # 2026-09-04 (after wave B9). Hexoses reach MFT and FFT only through the
+    # fragmentation entry r_glc_c2c3 / r_glc_fur, whose rate constants no
+    # step-level measurement in the corpus constrains; B9 (primary evidence
+    # only) put them at the floor of their declared bands. A number computed
+    # from a coordinate sitting on an arbitrary floor is not a prediction, so
+    # a hexose-only charge asked for a thiol gets the number AND a declaration
+    # that the scorers treat as NOT EVALUABLE. Thiamine has its own MFT route
+    # (Bolton 1994), so a charge that carries thiamine is not affected; a
+    # pentose charge is not affected because the intact-C5 route is fitted.
+    unidentified = unidentified_routes(mapped_precursors, mapped_targets)
+    if unidentified:
+        warnings.append(
+            f"{HEXOSE_ENTRY_UNIDENTIFIED} ({', '.join(sorted(unidentified))}): the only "
+            "route from a hexose to these thiols is the C2+C3 fragmentation entry, "
+            "whose rate constants no primary measurement identifies (B9 left them on "
+            "their band floor). The number below is a floor artefact, not a fit; the "
+            "scorecard and the envelope list this row as not evaluable, and the ordering "
+            "'pentose above hexose' is the structural claim the model does support."
+        )
 
     # --- lane ------------------------------------------------------------
     lanes, lane_reasons = resolve_lanes(

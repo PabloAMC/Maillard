@@ -81,20 +81,22 @@ def test_tracked_scorecard_is_not_stale(tracked_scores, live_scores):
 # --------------------------------------------------------------------------------------
 
 
-def test_core_panel_is_40_bundles_32_answered_49_rows(tracked_scores):
+def test_core_panel_is_38_bundles_27_answered_39_rows(tracked_scores):
+    # RE-PINNED 2026-09-04: two sourceless bundles quarantined (3 rows) and the eight hexose-only
+    # thiol rows are declared NOT EVALUABLE (unidentified hexose entry): 40/32/49 -> 38/27/39.
     """Pinned 2026-09-03 (B3). The union panel: 19 scored trust-loop bundles (the two
     *_Internal2026 synthetic snapshots are off the panel), 17 maillard_path hold-outs, 4
     external matrix bundles. 8 bundles are refused whole (H2S / hydroxyacetaldehyde /
     mercapto-2-propanone precursors, CML/CEL/furosine targets, 2-pentylfuran)."""
     s = tracked_scores["summary"]
-    assert s["panel_benchmark_count"] == 40
-    assert s["scored_benchmark_count"] == 32
-    assert s["matched_compound_count"] == 49
-    assert s["refused_compound_count"] == 18
+    assert s["panel_benchmark_count"] == 38
+    assert s["scored_benchmark_count"] == 27
+    assert s["matched_compound_count"] == 39
+    assert s["refused_compound_count"] == 26
     # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
     # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
-        "trust_loop": 19, "maillard_path_holdout": 17, "external_matrix": 4,
+        "trust_loop": 17, "maillard_path_holdout": 17, "external_matrix": 4,
     }
 
 
@@ -105,42 +107,48 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     core fit record that names it is the laundering route this guard blocks."""
     s = tracked_scores["summary"]
     # RE-PINNED 2026-09-03: the 21 physically separated hold-out bundles carry their own role.
-    assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 19}
+    assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 17}
 
 
-def test_within_3x_is_6_of_49_and_out_of_sample_5_of_48(tracked_scores):
+def test_within_3x_is_4_of_39_and_out_of_sample_3_of_38(tracked_scores):
+    # RE-PINNED 2026-09-04: 6/49 -> 4/39. The two hits lost are Bolton 1994 (its assumed
+    # loadings replaced by the paper's Table I: the core now overpredicts MFT 20x) and one of the
+    # quarantined Hofmann-derivation rows; the eight hexose thiol rows (all misses) left the count.
     """RE-PINNED 2026-09-03 (wave B9, the fit/validate split). With the eight Hofmann Table 1
     level rows out of the sulfur objective the core lands 6/49 within 3x (was 8/49 with those
     rows fitted); out of sample is now 48 of the 49 rows (only the C2+C3 pH-5 row is a fit row)
     at 5/48 (was 4/40). The hexose rows are the story: glucose and fructose MFT predict ZERO
     without the level rows -- the hexose-to-thiol route has no primary-evidence support."""
     s = tracked_scores["summary"]
-    assert (s["within_band_count"], s["matched_compound_count"]) == (6, 49)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (6, 49)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (5, 48)
+    assert (s["within_band_count"], s["matched_compound_count"]) == (4, 39)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (4, 39)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (3, 38)
     assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (1, 1)
-    assert s["holdout_within_band"] == {"hits": 4, "total": 30}
+    assert s["holdout_within_band"] == {"hits": 3, "total": 26}
     readme = _doc_text(README)
-    _assert_quoted(readme, "6 of 49", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "5 of 48", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "4 of 39", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "3 of 38", "README.md", "the core's out-of-sample count")
 
 
-def test_one_core_benchmark_is_strict_ready_and_it_is_bolton_1994(tracked_scores):
+def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_scores):
     """Pinned 2026-09-03 (B3). Bolton 1994 (thiamine + cysteine + glucose, 120 C): MFT 13 ->
     17.4 ppb, 1.34x, under the bundle's OWN 3x / 0.48-dex contract; PRIMARY, free_precursor,
     not a row any core fit read. The legacy lane has 0/23. A second strict-ready bundle is
     either a real result or a contract that was loosened: check the bundle's
     validation_contract before re-pinning."""
     s = tracked_scores["summary"]
-    assert s["strict_ready"] == ["thiamine_cys_glucose_120C_Bolton1994"]
-    assert s["predictive_passes"] == ["thiamine_cys_glucose_120C_Bolton1994"]
+    # RE-PINNED 2026-09-04: the full text of Bolton 1994 replaced the assumed loadings (glucose
+    # 10 -> 51.5 mM, thiamine 1 -> 13.7 mM, pH 5.0 -> 5.65); the core overpredicts MFT 20x and
+    # no benchmark is strict-ready. The pass had rested on inputs nobody had read.
+    assert s["strict_ready"] == []
+    assert s["predictive_passes"] == []
     bolton = next(b for b in tracked_scores["benchmarks"] if b["benchmark_id"] == "thiamine_cys_glucose_120C_Bolton1994")
     assert bolton["scale_thresholds"]["max_ratio"] == pytest.approx(3.0)
     assert not any(r["in_core_fit"] for r in bolton["compounds"])
     readme = _doc_text(README)
-    _assert_quoted(readme, "1 of 40", "README.md", "the core strict-ready count")
-    _assert_quoted(readme, "thiamine_cys_glucose_120C_Bolton1994", "README.md", "the strict-ready bundle")
-    _assert_quoted(_doc_text(AUDIT), "strict-ready 1/40", "AUDIT.md", "the core strict-ready count")
+    _assert_quoted(readme, "0 of 38", "README.md", "the core strict-ready count")
+    _assert_quoted(readme, "thiamine_cys_glucose_120C_Bolton1994", "README.md", "the benchmark that lost its pass")
+    _assert_quoted(_doc_text(AUDIT), "strict-ready 0/38", "AUDIT.md", "the core strict-ready count")
 
 
 def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_fit(tracked_scores):
@@ -165,7 +173,9 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_9_of_42_evaluable_literature_rows_and_9_of_41_out_of_sample():
+def test_core_envelope_covers_6_of_32_evaluable_literature_rows_and_6_of_31_out_of_sample():
+    # RE-PINNED 2026-09-04 (quarantine + unidentified hexose entry): 9/42 -> 6/32, 9/41 -> 6/31;
+    # every remaining row carries a declared quantification class (undeclared 0).
     # RE-PINNED 2026-09-03 (pass 7): five more bundles verified from PMC full text; ACSRef3 is
     # isotope-dilution LC-MS/MS (extraction), so its band-only interval is gone and the row is
     # NOT EVALUABLE (7): 9/43 -> 9/42, out of sample 9/42 -> 9/41; headspace 4 -> 8 rows.
@@ -183,19 +193,19 @@ def test_core_envelope_covers_9_of_42_evaluable_literature_rows_and_9_of_41_out_
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (9, 42, 7)
-    assert lit["median_ci_width_log10"] == pytest.approx(1.0967, abs=5e-4)
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (6, 32, 7)
+    assert lit["median_ci_width_log10"] == pytest.approx(0.9775, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (9, 41)
+    assert (oos["hits"], oos["total"]) == (6, 31)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
-        "headspace": 8, "extraction": 39, "undeclared": 2,
+        "headspace": 8, "extraction": 31, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "9 of 42", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "9 of 41", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "6 of 32", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "6 of 31", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

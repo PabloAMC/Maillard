@@ -48,7 +48,7 @@ from src.benchmark_metadata import (
 )
 from src.validation_contract import DEFAULT_VALIDATION_CONTRACT
 
-from .engine import engine_metadata, fit_report_paths, predict
+from .engine import declared_unidentified, engine_metadata, fit_report_paths, predict
 from .fit_targets import core_evidence_role, core_fit_targets, fit_target_of, in_core_fit
 from .panel import (
     RATIO_UNIT_FACTORS,
@@ -157,12 +157,19 @@ def score_benchmark(
             reason = f"target unit {unit!r} has no core conversion"
         elif measured is None:
             reason = "the bundle carries no measured value for this compound"
+        elif declared_unidentified(declaration, compound):
+            # 2026-09-04: a thiol from a hexose-only charge runs through an entry no
+            # primary measurement identifies (B9); the number is a band-floor artefact.
+            reason = "NOT EVALUABLE: " + next(
+                w for w in declaration.warnings if w.startswith("HEXOSE ENTRY UNIDENTIFIED")
+            )
         if reason is not None:
             refused.append(
                 {
                     "benchmark_id": benchmark_id, "panel": panel_tag, "compound": compound,
                     "target_unit": unit, "reason": reason,
                     "envelope_state": declaration.state, "lane": declaration.lane,
+                    "unidentified_route": reason.startswith("NOT EVALUABLE: HEXOSE"),
                 }
             )
             continue

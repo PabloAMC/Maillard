@@ -2848,7 +2848,7 @@ papers:
   - cerny_guntz_dubini_2008
   slr_paper_ids: []
   record_ids:
-    data/benchmarks/thiamine_cys_xylose_145C_Cerny2008.json:
+    data/benchmarks/quarantined/thiamine_cys_xylose_145C_Cerny2008.json:
     - thiamine_cys_xylose_145C_Cerny2008
     data/lit/benchmark_intake_registry.json:
     - cerny_guntz_dubini_2008
@@ -2941,8 +2941,6 @@ papers:
   slr_paper_ids:
   - hofmann_schieberle_1998_free_mft_fft
   record_ids:
-    data/benchmarks/cys_ribose_140C_Hofmann1998.json:
-    - cys_ribose_140C_Hofmann1998
     data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json:
     - mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3
     data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json:
@@ -2971,6 +2969,8 @@ papers:
     - hofmann1998_norfuraneol_h2s_145C_20min_pH5
     data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json:
     - hofmann1998_ribose_cysteine_145C_20min_pH5
+    data/benchmarks/quarantined/cys_ribose_140C_Hofmann1998.json:
+    - cys_ribose_140C_Hofmann1998
     data/benchmarks/step_level_unreachable/hofmann1998_UNREACHABLE_3deoxyribosulose_h2s_145C_20min_pH5.json:
     - hofmann1998_UNREACHABLE_3deoxyribosulose_h2s_145C_20min_pH5
     data/benchmarks/step_level_unreachable/hofmann1998_UNREACHABLE_c2c3_aldol_145C_20min_pH3.json:

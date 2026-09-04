@@ -878,6 +878,17 @@ artifacts (`comparative_cli.core_caveat`, `maillard.py` help), dead code (`bench
 `data_paths` constants), stale pointers to `benchmark_validation` / `matrix_calibration_registry` /
 `get_benchmark_files`.
 
+**Owner decisions executed 2026-09-04:** (1) `cys_ribose_140C_Hofmann1998` and `thiamine_cys_xylose_145C_Cerny2008`
+quarantined (no source for the numbers); (2) Bolton 1994 read in full (PDF from the owner): assumed loadings replaced by
+Table I (glucose 51.5 / thiamine 13.7 / cysteine 11.7 mM per litre of added water, pH 5.65, a_w 0.83), value from Table II
+system I (389 ng / 33.3 g = 11.7 ppb); the core overpredicts 20x, strict-ready 1/40 → **0/38**; (3) the hexose entry:
+`engine.unidentified_routes` declares `HEXOSE ENTRY UNIDENTIFIED` on a hexose-only charge asked for MFT/FFT (no pentose, no
+thiamine); scorecard and envelope list those eight rows as not evaluable (`unidentified_route`), directional keeps the
+exact-zero ordering. Headlines: within 3x 6/49 → **4/39**, out of sample 5/48 → **3/38** (median fold 50x → 30x), envelope
+9/42 → **6/32** (6/31 oos, undeclared families 0), hold-out 4/30 → 3/26, directional unchanged 17/26. Open: sample the
+unidentified coordinates (`k_glc_ha`, `k_glc_fur`) log-uniformly over their bands in the envelope so any row touching them
+shows honest width (today they sit at the floor, flagged flat by the profile).
+
 **Done 2026-09-03 (backlog pass 7, the last):** one evidence-role vocabulary in code (`fit_targets.EVIDENCE_ROLES`:
 fit_recovery / internal_synthetic / external_holdout / predictive; the bundle-level `evidence_class` stays as the data-side
 marker the gates check, so no hold-out bundle was rewritten); `trust` now also requires the 95 % Wilson lower bound above

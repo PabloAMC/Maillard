@@ -183,3 +183,33 @@ def test_engine_read_caches_a_report_until_it_changes(tmp_path):
     assert sum(1 for k in engine._REPORT_CACHE if k[0] == str(report)) == 1
     with pytest.raises(SystemExit):
         engine._read(tmp_path / "missing.json")
+
+
+# ------------------------------------------------- the unidentified hexose entry
+def test_a_hexose_only_thiol_request_is_declared_unidentified_and_others_are_not():
+    from src.kinetic_core import engine
+
+    assert engine.unidentified_routes({"Glc": 10.0, "CYS": 10.0}, {"2-Methyl-3-furanthiol (MFT)": "MFT"}) == ("MFT",)
+    assert engine.unidentified_routes({"Fru": 10.0, "CYS": 10.0}, {"FFT": "FFT", "MFT": "MFT"}) == ("FFT", "MFT")
+    # a pentose, thiamine, or no hexose at all: nothing is unidentified
+    assert engine.unidentified_routes({"Glc": 10.0, "PENT": 1.0, "CYS": 10.0}, {"MFT": "MFT"}) == ()
+    assert engine.unidentified_routes({"Glc": 10.0, "THI": 1.0, "CYS": 10.0}, {"MFT": "MFT"}) == ()
+    assert engine.unidentified_routes({"PENT": 10.0, "CYS": 10.0}, {"MFT": "MFT"}) == ()
+    # a non-thiol target from a hexose (furfural) is not covered by the declaration
+    assert engine.unidentified_routes({"Glc": 10.0, "CYS": 10.0}, {"furfural": "FUR"}) == ()
+
+
+def test_the_declaration_carries_the_tag_and_the_scorers_read_it():
+    from src.kinetic_core import engine, panel
+    from src.kinetic_core.scoring import score_benchmark
+
+    bundle = data_paths.bundle_path("hofmann1998_glucose_cysteine_145C_20min_pH5")
+    spec = panel.core_spec(panel.load_bundle(bundle), use_buffer=True)
+    run = engine.predict(spec, ["2-Methyl-3-furanthiol (MFT)"])
+    assert run.answered and any(w.startswith(engine.HEXOSE_ENTRY_UNIDENTIFIED) for w in run.declaration.warnings)
+    assert engine.declared_unidentified(run.declaration, "2-Methyl-3-furanthiol (MFT)")
+    scored = score_benchmark(bundle, "trust_loop")
+    assert scored["compounds"] == []
+    assert all(r["unidentified_route"] for r in scored["refused_compounds"])
+    ribose = score_benchmark(data_paths.bundle_path("hofmann1998_ribose_cysteine_145C_20min_pH5"), "trust_loop")
+    assert ribose["compounds"] and not any(r.get("unidentified_route") for r in ribose["refused_compounds"])

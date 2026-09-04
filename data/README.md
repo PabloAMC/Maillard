@@ -26,7 +26,7 @@ Observations the model is scored against. Panel discovery is NON-recursive: only
 |---|---|
 | `maillard_validation_benchmarks.md` | Retired evidence record whose sections 1.3/3.1/3.2 are self-declared reconstructed; kept at this path because ~35 provenance notes cite it. |
 
-21 files covered by the directory description above: `acrylamide_spi_extrusion_130C_ACSRef3.json`, `cml_cel_commercial_pbma_Foods2023.json`, `cys_ribose_140C_Hofmann1998.json`, `furosine_extrusion_crossover_140C_RamirezJimenez2000.json`, `hofmann1998_c2c3_recombination_145C_20min_pH3.json`, `hofmann1998_c2c3_recombination_145C_20min_pH5.json`, `hofmann1998_c2c3_recombination_145C_20min_pH7.json`, `hofmann1998_fructose_cysteine_145C_20min_pH5.json`, `hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json`, `hofmann1998_glucose_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_h2s_145C_20min_pH5.json` …
+19 files covered by the directory description above: `acrylamide_spi_extrusion_130C_ACSRef3.json`, `cml_cel_commercial_pbma_Foods2023.json`, `furosine_extrusion_crossover_140C_RamirezJimenez2000.json`, `hofmann1998_c2c3_recombination_145C_20min_pH3.json`, `hofmann1998_c2c3_recombination_145C_20min_pH5.json`, `hofmann1998_c2c3_recombination_145C_20min_pH7.json`, `hofmann1998_fructose_cysteine_145C_20min_pH5.json`, `hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json`, `hofmann1998_glucose_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json`, `hofmann1998_norfuraneol_h2s_145C_20min_pH5.json`, `hofmann1998_ribose_cysteine_145C_20min_pH5.json` …
 
 ## `data/keys`
 
@@ -108,7 +108,7 @@ Matrix-lane hold-out bundles (`evidence_class: external_validation_only`). Froze
 
 Benchmarks retired for unverifiable sources; kept for forensics, never scored.
 
-4 files covered by the directory description above: `README.md`, `acrylamide_asparagine_glucose_Parker2012.json`, `spi_hvp_xylose_120C_PMC9905368.json`, `wheat_gluten_hvp_xylose_120C_PMC9905368.json`
+6 files covered by the directory description above: `README.md`, `acrylamide_asparagine_glucose_Parker2012.json`, `cys_ribose_140C_Hofmann1998.json`, `spi_hvp_xylose_120C_PMC9905368.json`, `thiamine_cys_xylose_145C_Cerny2008.json`, `wheat_gluten_hvp_xylose_120C_PMC9905368.json`
 
 ## `data/benchmarks/step_level_unreachable`
 

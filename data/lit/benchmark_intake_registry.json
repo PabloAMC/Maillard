@@ -807,7 +807,7 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "thiamine_cys_xylose_145C_Cerny2008",
-          "path": "data/benchmarks/thiamine_cys_xylose_145C_Cerny2008.json"
+          "path": "data/benchmarks/quarantined/thiamine_cys_xylose_145C_Cerny2008.json"
         },
         {
           "artifact_type": "benchmark_intake_entry",

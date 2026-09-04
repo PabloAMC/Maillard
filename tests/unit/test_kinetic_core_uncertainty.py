@@ -486,7 +486,7 @@ def test_markdown_renders(small_artifact):
         # 2026-09-03: declared dynamic_headspace_gcmsms from the bundle's own source_metadata
         (data_paths.BENCHMARKS_DIR / "pea_isolate_uht_140C_Trikusuma2019.json", "headspace"),
         (data_paths.BENCHMARKS_DIR / "thiamine_cys_glucose_120C_Bolton1994.json", "extraction"),
-        (data_paths.BENCHMARKS_DIR / "cys_ribose_140C_Hofmann1998.json", "undeclared"),
+        (data_paths.QUARANTINED_BENCHMARKS_DIR / "cys_ribose_140C_Hofmann1998.json", "undeclared"),  # quarantined 2026-09-04
     ],
 )
 def test_quantification_family_reads_the_bundles_own_class(path, family):

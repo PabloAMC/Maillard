@@ -25,6 +25,13 @@ A citation audit on **2026-08-26** could not locate a real literature source for
 | `spi_hvp_xylose_120C_PMC9905368.json` | `10.1007/s10068-022-01194-w` | **DOI is LIVE and correct — the paper is real, the content is not.** It uses glucose/fructose at pH 7.5 for 90 min and reports only *relative peak areas*; it never mentions FFT or MFT. The file's xylose/cysteine **absolute ppb** values have no possible source. **Quarantined 2026-08-27** (Wave I) — see the dedicated section below. | Quarantined; file retained. |
 | `wheat_gluten_hvp_xylose_120C_PMC9905368.json` | `10.1007/s10068-022-01194-w` | Same source, same finding as the row above. | Quarantined; file retained. |
 
+## Quarantined 2026-09-04 (owner decision after the backlog passes)
+
+| File | Why it left the scored panel | Current state |
+|---|---|---|
+| `cys_ribose_140C_Hofmann1998.json` | Its two values are a **repo-internal derivation**, labelled in the file itself `value_status: no_verifiable_source` and `THIS IS NOT A MEASUREMENT` (tier demoted to REFERENCE at Wave S2c). The Hofmann 1998 paper's real rows live on the panel as the nine `hofmann1998_*` bundles. A number nobody can point to in a source is not a measurement. | Quarantined; file retained for forensics. `src/model_card.py` still reads it for the "sulfur anchor status" record. |
+| `thiamine_cys_xylose_145C_Cerny2008.json` | `VALUES_NEED_RE_EXAMINATION`: the 2.47 ppb MFT figure was inherited from a pre-repair file and **has not been located in the paper** (10.1021/jf801762c, whose subject is the cysteine-S-conjugate, not MFT). | Quarantined; file retained. If the value is found in the paper, restore it with a `content_verification` block. |
+
 ## Treat the values *and the tolerances* as suspect
 
 Two things in these files are unverified, and the second matters as much as the first:

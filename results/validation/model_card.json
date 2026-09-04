@@ -3,13 +3,13 @@
   "core_envelope": {
     "available": true,
     "ci_level_pct": 90,
-    "literature_hits": 9,
+    "literature_hits": 6,
     "literature_not_evaluable": 7,
-    "literature_total": 42,
-    "median_ci_width_log10": 1.0966774785630007,
+    "literature_total": 32,
+    "median_ci_width_log10": 0.977484433190962,
     "n_samples": 200,
-    "out_of_sample_hits": 9,
-    "out_of_sample_total": 41,
+    "out_of_sample_hits": 6,
+    "out_of_sample_total": 31,
     "path": "results/validation/core_prediction_uncertainty.json",
     "seed": 0,
     "unsampled_lanes": []
@@ -28,9 +28,9 @@
         "within_band": 0
       },
       "sulfur": {
-        "median_fold_error": 56.1295781746465,
-        "rows": 29,
-        "within_band": 4
+        "median_fold_error": 29.475375451170162,
+        "rows": 19,
+        "within_band": 2
       },
       "trunk": {
         "median_fold_error": 11.929988259675033,
@@ -38,21 +38,19 @@
         "within_band": 0
       }
     },
-    "median_fold_error": 50.058407883586476,
-    "out_of_sample_median_fold_error": 51.18038201269003,
-    "out_of_sample_rows": 48,
-    "out_of_sample_within_band": 5,
+    "median_fold_error": 29.475375451170162,
+    "out_of_sample_median_fold_error": 31.85780391360813,
+    "out_of_sample_rows": 38,
+    "out_of_sample_within_band": 3,
     "pass_band_level": 3.0,
-    "rows": 49,
-    "scored": 32,
+    "rows": 39,
+    "scored": 27,
     "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
-    "strict_ready": 1,
-    "strict_ready_ids": [
-      "thiamine_cys_glucose_120C_Bolton1994"
-    ],
-    "total": 40,
-    "within_band": 6,
-    "worst_fold_error": 83868191769.90416
+    "strict_ready": 0,
+    "strict_ready_ids": [],
+    "total": 38,
+    "within_band": 4,
+    "worst_fold_error": 33391.73597895205
   },
   "directional": {
     "available": true,
@@ -159,7 +157,7 @@
   ],
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
-    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 6/49 rows within 3x (median fold error 50.1x, worst 8.39e+10x); out of sample -- every row a core fit read removed -- 5/48 (median 51.2x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 9/42 evaluable literature rows (7 not evaluable: the no lane carries no sampled uncertainty), 9/41 out of sample.",
+    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 4/39 rows within 3x (median fold error 29.5x, worst 3.34e+04x); out of sample -- every row a core fit read removed -- 3/38 (median 31.9x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 6/32 evaluable literature rows (7 not evaluable: the no lane carries no sampled uncertainty), 6/31 out of sample.",
     "**Directional and ranking claims are the product, and on the kinetic core they score 17/26 on strictly independent literature claims** (26 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 13/21 once pH and water activity are set aside, and 4/5 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
@@ -204,7 +202,7 @@
     "panel_verified_sulfur_values_that_are_fit_targets": [
       "hofmann1998_norfuraneol_h2s_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)"
     ],
-    "path": "data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "path": "data/benchmarks/quarantined/cys_ribose_140C_Hofmann1998.json",
     "tier": "REFERENCE",
     "values_with_an_anchor": [],
     "values_without_verifiable_source": [
@@ -236,7 +234,7 @@
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "4/29 rows within 3x, median 56.1x",
+      "evidence": "2/19 rows within 3x, median 29.5x",
       "system_class": "free precursor, cysteine / ribose meaty thiols [sulfur lane]",
       "verdict": "do-not-use"
     },
@@ -250,7 +248,7 @@
     {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
-      "evidence": "9/42 evaluable literature rows inside; 9/41 out of sample; 7 not evaluable",
+      "evidence": "6/32 evaluable literature rows inside; 6/31 out of sample; 7 not evaluable",
       "system_class": "every lane with sampled uncertainty",
       "verdict": "do-not-use"
     },
@@ -327,9 +325,9 @@
     {
       "basis": "recomputed live; strict-ready is the repository's own passing bar",
       "claim_type": "Any claim of benchmark-grade agreement",
-      "evidence": "1/40 strict-ready (thiamine_cys_glucose_120C_Bolton1994); 6/49 rows within 3x, out-of-sample 5/48",
+      "evidence": "0/38 strict-ready (none); 4/39 rows within 3x, out-of-sample 3/38",
       "system_class": "the union panel: trust loop + hold-outs + matrix bundles",
-      "verdict": "caution"
+      "verdict": "do-not-use"
     },
     {
       "basis": "this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is",

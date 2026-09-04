@@ -61,7 +61,9 @@ DIRECTIONAL_PATH = data_paths.CORE_DIRECTIONAL_SCORES
 
 ROOT = data_paths.REPO_ROOT
 
-SULFUR_BENCHMARK_PATH = data_paths.benchmark_path("cys_ribose_140C_Hofmann1998")
+# Quarantined 2026-09-04 (a repo-internal derivation, not a measurement); still read here as the
+# record of the sulfur branch's anchor status.
+SULFUR_BENCHMARK_PATH = data_paths.QUARANTINED_BENCHMARKS_DIR / "cys_ribose_140C_Hofmann1998.json"
 
 GATES = (
     "scripts/ci/holdout_guard.py",

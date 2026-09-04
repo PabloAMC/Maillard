@@ -771,6 +771,10 @@ def propagate_panel(
                 reason = f"target unit {unit!r} has no core conversion"
             elif measured is None:
                 reason = "the bundle carries no measured value for this compound"
+            elif engine.declared_unidentified(declaration, compound):
+                reason = "NOT EVALUABLE: " + next(
+                    w for w in declaration.warnings if w.startswith(engine.HEXOSE_ENTRY_UNIDENTIFIED)
+                )
             if reason is not None:
                 item = {
                     "benchmark_id": benchmark_id, "panel": panel_tag,
