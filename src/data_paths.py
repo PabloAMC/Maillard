@@ -134,6 +134,8 @@ CORE_DIRECTIONAL_SCORES: Path = VALIDATION_DIR / "core_directional_scores.json"
 KINETIC_CORE_B8_LAPLACE: Path = VALIDATION_DIR / "kinetic_core_b8_laplace_covariance.json"
 MODEL_CARD_JSON: Path = VALIDATION_DIR / "model_card.json"
 EXPERIMENT_VALUE_RANKING: Path = VALIDATION_DIR / "experiment_value_ranking.json"
+#: What to measure next and what it would unlock (src/data_wishlist.py; `maillard wishlist`).
+DATA_WISHLIST: Path = VALIDATION_DIR / "data_wishlist.json"
 
 # --------------------------------------------------------------------------- tests/
 TEST_FIXTURES_DIR: Path = TESTS_ROOT / "fixtures"

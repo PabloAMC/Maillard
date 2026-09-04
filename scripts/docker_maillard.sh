@@ -90,6 +90,7 @@ are gone with it. The front door is scripts/maillard.py.)
   core-scores                        results/validation/core_panel_scores.{json,md}   (~15 s)
   coverage                           per-module line coverage of src/ and scripts/ over both tiers (~35 min)
   results-readme                     results/README.md (the generated map of every tracked artifact)
+  wishlist                           results/validation/data_wishlist.{json,md}: what to measure next, what it unlocks
   core-directional                   results/validation/core_directional_scores.*     (~90 s)
   core-envelope [args...]            results/validation/core_prediction_uncertainty.* (~40 min at n=200)
   model-card                         Re-splice the README model card from the artifacts.
@@ -248,7 +249,7 @@ case "$cmd" in
   quickstart)
     quickstart_lane
     ;;
-  compare|predict|explain|rank|score)
+  compare|predict|explain|rank|rank-experiments|score|wishlist)
     verb="$cmd"; shift
     run_in_env "$(forward_args "python scripts/maillard.py $verb" "$@")"
     ;;
@@ -285,6 +286,9 @@ case "$cmd" in
     ;;
   model-card-check)
     run_generator_script generate_model_card --check
+    ;;
+  wishlist)
+    run_generator_script generate_data_wishlist
     ;;
   results-readme)
     run_generator_script build_results_readme

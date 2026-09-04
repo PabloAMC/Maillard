@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **337**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **339**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -45,6 +45,7 @@ Tracked files: **337**. Local-only (gitignored): scratch runs under `results/qui
 | `cutover_final_exam.*` (2): `cutover_final_exam.json`, `cutover_final_exam.md` | FROZEN 2026-09-03 cutover exam (core vs legacy lane, 34 answered / 3 within band). Its generator was deleted at B5b; kept as the record of the cutover decision. |
 | `cutover_prereg.md` | Pre-registration of the cutover exam; pinned by `tests/unit/test_kinetic_core_b5_cutover.py`. |
 | `d1_exam_panel_reconciliation.*` (2): `d1_exam_panel_reconciliation.json`, `d1_exam_panel_reconciliation.md` | Reconciliation of exam vs panel scoring (D1); read by the B8 and B2.3 report generators. |
+| `data_wishlist.*` (2): `data_wishlist.json`, `data_wishlist.md` | THE DATA WISHLIST: what to measure next and what each measurement would unlock, derived from the scorecard, the slice profile, the Laplace covariance, the directional scorecard and the value-of-information ranking (`src/data_wishlist.py`; alias `wishlist`; read with `maillard wishlist`). Regenerated and compared by the freshness gate. |
 | `deep_research_runtime_queue.*` (2): `deep_research_runtime_queue.json`, `deep_research_runtime_queue.md` | Which mined citations are queued for runtime encoding (`src/deep_research_runtime_queue.py`). |
 | `experiment_brief_cards.html` | One card per ranked experiment (`generate_gap_heatmap.py`). |
 | `experiment_value_ranking.*` (2): `experiment_value_ranking.json`, `experiment_value_ranking.md` | `rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`. |

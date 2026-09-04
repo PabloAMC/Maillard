@@ -23,6 +23,7 @@ ENTRY_POINTS = (
     "scripts/generators/build_data_readme.py",
     "scripts/generators/build_results_readme.py",
     "scripts/ci/artifact_freshness_gate.py",
+    "scripts/generators/generate_data_wishlist.py",
 )
 
 

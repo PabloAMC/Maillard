@@ -2030,6 +2030,26 @@ def compare(
         label_a=spec_a.name,
         label_b=spec_b.name,
     )
+    # 2026-09-04: a row whose formation in either arm runs through an UNIDENTIFIED route
+    # (declared on the arm, see unidentified_routes) is not a ratio between two predictions
+    # but between a prediction and a band-floor artefact. It is reported as undefined, with the
+    # arm named, so that "1e13x higher in the pentose arm" never reaches a table.
+    for row in payload.get("rows", []):
+        arms = [label for label, decl in (("a", run_a.declaration), ("b", run_b.declaration))
+                if declared_unidentified(decl, str(row["compound"]))]
+        if arms:
+            row["ratio_a_over_b"] = None
+            row["direction"] = "undefined"
+            row["within_reliability_band"] = False
+            row["unidentified_arm"] = arms[0] if len(arms) == 1 else "both"
+            row["note"] = (
+                f"arm {row['unidentified_arm'].upper()}: {HEXOSE_ENTRY_UNIDENTIFIED} -- its number is a "
+                "band-floor artefact, so no ratio is claimed; the model supports the ordering "
+                "'pentose above hexose' structurally, not a magnitude"
+            )
+    rows_ = payload.get("rows", [])
+    payload["n_undefined"] = sum(1 for r in rows_ if r.get("direction") == "undefined")
+    payload["n_resolved"] = sum(1 for r in rows_ if r.get("direction") != "undefined" and not r.get("within_reliability_band"))
     return {
         "comparable": True,
         "ratios": payload,

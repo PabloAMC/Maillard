@@ -68,10 +68,27 @@ def _live_fit_targets() -> Dict:
         return json.loads(out.read_text(encoding="utf-8"))
 
 
+def _live_ranking() -> Dict:
+    with tempfile.TemporaryDirectory() as tmp:
+        subprocess.run(
+            [sys.executable, "scripts/generators/generate_experiment_value_ranking.py", "--output-dir", tmp],
+            cwd=str(ROOT), check=True, capture_output=True, text=True, timeout=600,
+        )
+        return json.loads((Path(tmp) / "experiment_value_ranking.json").read_text(encoding="utf-8"))
+
+
+def _live_wishlist() -> Dict:
+    from src.data_wishlist import build
+
+    return build()
+
+
 REGENERATE: Dict[str, Callable[[], Dict]] = {
     "results/validation/core_panel_scores.json": _live_scorecard,
     "results/validation/core_directional_scores.json": _live_directional,
     "results/validation/kinetic_core_b9_fit_targets.json": _live_fit_targets,
+    "results/validation/experiment_value_ranking.json": _live_ranking,
+    "results/validation/data_wishlist.json": _live_wishlist,
 }
 
 

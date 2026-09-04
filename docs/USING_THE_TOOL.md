@@ -340,10 +340,12 @@ be written as the program it physically is.
 ### Use it for
 
 - **Choosing between two formulations.** Ratios cancel the shared systematic error; the
-  directional panel scores 24/36 on strictly independent claims, and 18/23 once pH and water
-  activity are set aside.
-- **Sugar swaps** (9/11 on the panel) and **cysteine present vs absent** (4/4). These are the
-  model's two strongest axes.
+  directional panel's current score on strictly independent claims is the first line of
+  `python scripts/maillard.py --help` and of the README model card (it is generated, so this
+  document does not repeat it).
+- **Sugar swaps** and **cysteine present vs absent**: the per-axis reliability the `compare`
+  verb prints beside every ratio comes from the same panel; read that column rather than a
+  number quoted here.
 - **Deciding what to measure next.** `rank-experiments` ranks candidate measurements by how
   much each would move the model. Every ranked row is a place the model is *measurably wrong*,
   so this is the one claim type that does not depend on the model being right.

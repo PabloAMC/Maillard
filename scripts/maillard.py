@@ -173,6 +173,22 @@ def _axis_note(axis: str) -> str:
     return f", scored {bucket['agree']}/{bucket['evaluable']} on the directional panel"
 
 
+def run_wishlist(args: argparse.Namespace) -> int:
+    """Print the tracked data wishlist (results/validation/data_wishlist.md), or its JSON."""
+    md_path = data_paths.DATA_WISHLIST.with_suffix(".md")
+    if not data_paths.DATA_WISHLIST.exists() or not md_path.exists():
+        print(
+            "The data wishlist is not generated. Run: ./scripts/docker_maillard.sh wishlist "
+            "(or python scripts/generators/generate_data_wishlist.py).", file=sys.stderr,
+        )
+        return 2
+    if getattr(args, "json", False):
+        print(data_paths.DATA_WISHLIST.read_text(encoding="utf-8"))
+    else:
+        print(md_path.read_text(encoding="utf-8"))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="maillard",
@@ -187,11 +203,13 @@ def build_parser() -> argparse.ArgumentParser:
             "number as a specification. Read the per-axis reliability tags: water\n"
             "activity is refused, pH is answered on the sulfur lane only.\n"
             "\n"
-            "Four verbs:\n"
+            "Six verbs:\n"
             "  compare           two formulations in, per-compound A/B ratios out\n"
             "  predict           one formulation, with intervals and its caveats inline\n"
             "  explain           where a compound comes from in the model, and on what evidence\n"
-            "  rank-experiments  which measurement would most reduce the model's error"
+            "  score             score YOUR measured concentrations against the model\n"
+            "  rank              which measurement would most reduce the model's error (alias: rank-experiments)\n"
+            "  wishlist          what to measure next and what it would unlock, from the tracked artifacts"
         ),
         epilog=_SPEC_FIELDS,
     )
@@ -343,6 +361,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     rank = verbs.add_parser(
         "rank-experiments",
+        aliases=["rank"],
         formatter_class=argparse.RawDescriptionHelpFormatter,
         help="rank the measurements that would most reduce the model's error",
         description=(
@@ -380,6 +399,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="also write results/validation/experiment_value_ranking.{json,md}",
     )
 
+    wishlist = verbs.add_parser(
+        "wishlist",
+        help="what to measure next and what it would unlock (from the tracked artifacts)",
+        description=(
+            "What new data would improve this model most, and what each measurement would let you\n"
+            "predict. Read from results/validation/data_wishlist.md, which is generated from the\n"
+            "scorecard, the slice profile, the directional scorecard and the value-of-information\n"
+            "ranking (src/data_wishlist.py). Nothing here is typed by hand."
+        ),
+    )
+    wishlist.add_argument("--json", action="store_true", help="print the machine-readable payload instead")
     return parser
 
 
@@ -516,6 +546,8 @@ def main(argv=None) -> int:
         "explain": run_explain,
         "score": run_score,
         "rank-experiments": run_rank,
+        "rank": run_rank,
+        "wishlist": run_wishlist,
     }
     try:
         return handlers[args.verb](args)

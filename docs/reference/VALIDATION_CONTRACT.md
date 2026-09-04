@@ -573,6 +573,8 @@ because it never reaches the reaction network.
 The shipped prediction path changed. This section states the new contract and the evidence
 behind it.
 
+> *Historical (2026-08-29, Build Wave B5): the paragraph below describes the two-lane CLI that retirement step B5b deleted on 2026-09-03. There is no `--lane` switch and no FAST lane any more; every verb runs the kinetic core.*
+
 **What routes where.** `maillard compare` and `maillard predict` default to `--lane core`, the
 mass-action kinetic core at `src/kinetic_core/engine.py`. The FAST lane is reachable at
 `--lane fast` and is **demoted to ordinal screening**: its outputs are labelled

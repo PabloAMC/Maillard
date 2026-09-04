@@ -878,6 +878,13 @@ artifacts (`comparative_cli.core_caveat`, `maillard.py` help), dead code (`bench
 `data_paths` constants), stale pointers to `benchmark_validation` / `matrix_calibration_registry` /
 `get_benchmark_files`.
 
+**Usability pass 2026-09-04 (owner: 'we want the repository to be highly usable'):** `maillard rank` (alias) and `maillard wishlist`
+(new verb) exist; the help text counts its verbs; a zero A arm and a declared-unidentified arm both yield an undefined ratio
+(no more 1e13x rows); `results/validation/data_wishlist.{json,md}` (`src/data_wishlist.py`) answers 'what to measure next and
+what it would unlock' from the tracked artifacts and is regenerated/compared by the freshness gate, as is the
+value-of-information ranking (it had been stale at 49 rows); README, QUICKSTART (with a worked example of real output),
+USING_THE_TOOL and the validation contract no longer carry numbers or verbs that drift.
+
 **Primary sources of the fit read 2026-09-04 (owner's PDFs):** Hofmann & Schieberle 2002 (thiol-sink constant: Table 2 reproduces
 9.8e-4 /s exactly; Fig. 1 gives the 0.023 /min brew hold-out row; disulfide <1.5 %) and Schroën & Berton-Carabin 2022 (lipid lane:
 k4 = 6e-3 /h, k_hexanal = 6e-5 /h for all five emulsifiers, visual-agreement fits, 25 C only) — extraction dossiers written, no

@@ -672,15 +672,17 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
     )
     if undefined:
         out.append(
-            f"  ...of which {undefined} are UNDEFINED (one arm at exactly zero) and "
-            f"resolve nothing: see the 'resolved' column, not this count."
+            f"  ...of which {undefined} are UNDEFINED (one arm at exactly zero, or on a route the "
+            f"engine declares unidentified) and resolve nothing: see the 'resolved' column, not this count."
         )
     out.append("")
     out.append(f"  {'compound':<38} {'A/B':>12} {'direction':<14} resolved")
     out.append("  " + "-" * 88)
     for row in rows:
         ratio = row.get("ratio_a_over_b")
-        if not isinstance(ratio, (int, float)):
+        if row.get("unidentified_arm"):
+            ratio_text = f"{str(row['unidentified_arm']).upper()} unidentified"
+        elif not isinstance(ratio, (int, float)):
             ratio_text = "-"
         elif ratio != ratio or ratio in (float("inf"), float("-inf")) or ratio == 0.0:
             # One arm is at zero: a ratio is undefined, not enormous.

@@ -635,6 +635,13 @@ def compare_formulations(
                 compound, float("inf"), "undefined", False, band_x,
                 f"{label_b} is zero; a ratio is undefined"))
             continue
+        if a <= 0:
+            # 2026-09-04: a zero A arm used to come out as ratio 0 with direction
+            # "higher_in_B" -- a defined claim about a quantity that does not exist.
+            rows.append(FormulationComparison(
+                compound, 0.0, "undefined", False, band_x,
+                f"{label_a} is zero; a ratio is undefined"))
+            continue
         ratio = a / b
         resolved = ratio >= band_x or ratio <= 1.0 / band_x
         rows.append(FormulationComparison(

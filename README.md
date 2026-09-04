@@ -82,6 +82,7 @@ python scripts/maillard.py predict my_comparison.yml --system a      # one arm, 
 python scripts/maillard.py explain 2-methyl-3-furanthiol             # what the core knows about a compound
 python scripts/maillard.py rank --top 10                             # which measurement would teach the model most
 python scripts/maillard.py score --template > my_measurements.yml    # then: score my_measurements.yml
+python scripts/maillard.py wishlist                                  # what to measure next, and what it would unlock
 ```
 
 `compare` leads with **ratios** between the two arms — the quantity the systematic scale error
@@ -91,14 +92,17 @@ for a refused compound, the reason. `rank` reads the core's Monte-Carlo envelope
 (benchmark, compound) rows by how badly and how uncertainly the model misses them. `score` takes
 **your own measured concentrations** and scores them the way the panel scorecard scores a bundle,
 writing a bundle-shaped record under `results/user/` that the next fit wave can read; it never
-refits anything, because a refit is a new pre-registered wave (`scripts/generators/WAVES.md`). `--json`
+refits anything, because a refit is a new pre-registered wave (`scripts/generators/WAVES.md`).
+`wishlist` prints the generated data wishlist: which fitted constants the evidence does not pin,
+which rows the engine answers but declares not evaluable, what no lane represents, which
+directional axes are thin, and what each measurement would let you predict. `--json`
 gives the machine-readable payload of any verb; `--report` writes a self-contained HTML page.
 
 Regenerate the evidence artifacts:
 
 ```bash
 python scripts/generators/generate_core_panel_scores.py                 # ~15 s
-python scripts/generators/generate_core_prediction_uncertainty.py --n-samples 200 --workers 4   # ~40 min
+python scripts/generators/generate_core_prediction_uncertainty.py --n-samples 200 --workers 6   # ~5-7 min natively
 python scripts/generators/generate_model_card.py                        # re-splices the card below
 ```
 
@@ -111,9 +115,10 @@ produces, modulo date and git head, and every recorded input still hashes the sa
 
 ## How well calibrated is it?
 
-Badly, and measurably. The numbers below are what the core scores on the union panel — the 20
-trust-loop bundles that carry a measurement, the 16 `maillard_path` hold-outs and the 4 external
-matrix bundles, 40 in all, 49 scored rows — read from
+Badly, and measurably. The numbers below are what the core scores on the union panel — the 16
+trust-loop bundles that carry a measurement, the 17 `maillard_path` hold-outs and the 4 external
+matrix bundles, 37 in all, 39 evaluable rows (8 more are answered but declared not evaluable, 17
+refused) — read from
 [`core_panel_scores.md`](results/validation/core_panel_scores.md) and
 [`core_prediction_uncertainty.md`](results/validation/core_prediction_uncertainty.md), and
 pinned by `tests/scientific/test_core_headline_guards.py`. A moved number has to move this page
@@ -291,15 +296,28 @@ PyYAML, jsonschema, Matplotlib (report figures).
 
 ## Guiding experiments: what to measure next
 
-`maillard rank` reads the core's Monte-Carlo envelope and orders every (benchmark, compound) row
-by uncertainty × miss × sensory weight; the tracked ranking is
-[`experiment_value_ranking.md`](results/validation/experiment_value_ranking.md). The single
-experiment that would close the most gaps is still a **quantitative PPI/SPI meaty-positive
-benchmark** — pea and soy protein isolates with ribose + cysteine, both the desirable thiols and
-the off-flavour aldehydes in one GC-MS run
-([protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md)). Closing the loop from such a
-measurement back into the core's parameters ("calibrate on your own data") is roadmap item 4 in
-[`tasks/data_restructure_plan.md`](tasks/data_restructure_plan.md).
+Two generated artifacts answer this, and the CLI prints both:
+
+- **`maillard wishlist`** ([`data_wishlist.md`](results/validation/data_wishlist.md)) is the
+  structural answer: which fitted constants the primary evidence does not pin (with the one
+  fed-intermediate measurement that would identify each and the observables it would unlock),
+  which panel rows the engine answers but declares not evaluable, what the panel asks for that no
+  lane represents, which directional axes are below "trust" and how many agreeing claims would lift
+  them, and a closing list of *what you could predict if you had it*. Its first entry is the finding
+  wave B9 exposed: the hexose entry to the thiols (`k_glc_ha`) has no step-level measurement anywhere,
+  so absolute MFT and FFT from glucose or fructose are not predictions until someone heats glucose
+  alone and quantifies its C2 + C3 fragments against time.
+- **`maillard rank`** ([`experiment_value_ranking.md`](results/validation/experiment_value_ranking.md))
+  is the value-of-information answer: every (benchmark, compound) row the envelope misses, ordered
+  by miss × uncertainty × sensory weight. Today it leads with hexanal in pea protein and FFT in the
+  buffered ribose/cysteine series.
+
+Both are regenerated and compared by the artifact-freshness gate, so they cannot drift from the
+scorecard they are derived from. The wet-lab protocol for the matrix gap the two agree on — a
+quantitative PPI/SPI meaty-positive benchmark with the thiols and the off-flavour aldehydes in one
+run — is [PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md).
+Closing the loop from such a measurement back into the constants is a new pre-registered wave
+(`scripts/generators/WAVES.md`); `maillard score` writes your measurements in the shape that wave reads.
 
 ---
 
@@ -312,7 +330,7 @@ measurement back into the core's parameters ("calibrate on your own data") is ro
 | **Food scientist** — first run | [QUICKSTART.md](docs/guides/QUICKSTART.md) |
 | **Scientist** — understanding the output | [GLOSSARY.md](docs/guides/GLOSSARY.md) |
 | **Reviewer** — auditing what is verified | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/) → [AUDIT.md](AUDIT.md) |
-| **Experimentalist** — closing the gaps | [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) → [experiment ranking](results/validation/experiment_value_ranking.md) |
+| **Experimentalist** — closing the gaps | `maillard wishlist` → [data wishlist](results/validation/data_wishlist.md) → [experiment ranking](results/validation/experiment_value_ranking.md) → [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) |
 | **Maintainer** — extending the chemistry | `src/kinetic_core/` module docstrings → [`tasks/data_restructure_plan.md`](tasks/data_restructure_plan.md) → [CONTRIBUTING.md](CONTRIBUTING.md) |
 | **Literature curator** — ingestion | [data/lit/README.md](data/lit/README.md) |
 | **Historian** — what the retired lane claimed | [docs/history/README_legacy_lane_2026-09-03.md](docs/history/README_legacy_lane_2026-09-03.md), [results/legacy_lane/](results/legacy_lane/) |
