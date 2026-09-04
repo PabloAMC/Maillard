@@ -1662,7 +1662,7 @@
       "panel": "external_matrix",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
-      "quantification_source": "quantification_class='External calibration curve against an internal standard (2,4,6-trimethylpyridine'",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
       "refused_compounds": [],
       "signal_origin": "external_literature"
     },
@@ -1704,7 +1704,7 @@
       "panel": "external_matrix",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
-      "quantification_source": "quantification_class='External calibration curve against an internal standard (2,4,6-trimethylpyridine'",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
       "refused_compounds": [],
       "signal_origin": "external_literature"
     },
@@ -2995,9 +2995,9 @@
     "generated_on": "2026-09-04",
     "git": {
       "branch": "cleaning",
-      "commit": "0d03e295da0e7b5a11f9fa6dc0fb75320b6bcf13",
+      "commit": "b2a35f3b343b5787125ad589695b58d1895583d9",
       "dirty": true,
-      "short": "0d03e295"
+      "short": "b2a35f3b"
     },
     "inputs": [
       {
@@ -3158,11 +3158,11 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
-        "sha256": "fe17532f3e6d33b9abcea9979cb27ae26564a0350d881c1350adb4c312229c8b"
+        "sha256": "dca526d221bba25ef9fe4b75817a9de704974a37980f3944c45d77c0eff196b1"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
-        "sha256": "eac91d26ab7236593bf409843e589a607f46d1fd47a0e75a2369e9ef7ecafd74"
+        "sha256": "769621a705a54f132ed8ce56e8fa9f691d81ec4bc6c2238662f6fcdec7c485f5"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
@@ -3518,7 +3518,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 146.6,
+    "wall_seconds": 147.1,
     "workers": 6
   }
 }

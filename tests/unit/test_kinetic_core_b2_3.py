@@ -277,10 +277,12 @@ def test_carbon_nitrogen_and_sulfur_still_balance_everywhere():
 # that nothing else moved either.
 
 BUNDLE_BASELINES = {
+    # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
     "external_validation_bi_2020_raw_pea_hexanal":
-        "b8f9814c0c2c10701679de5bf0a64aa9b393df2ad45d368f4e0940ade6a58e5d",
+        "7abdfc96d16b97c3366512d6183fd1d2d677220dbc5e1d460b334caeec135f37",
+    # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
     "external_validation_bi_2020_roasted_pea_hexanal":
-        "7d5cf5174622face448ff0095c03b5813d9227481b05af6eb4e8343b05b41ffe",
+        "201752690e3702ac2d87ab3d3380c1d7360408e160213b48cdfe0835d36ac198",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-03: content_verification block from the PMC full text added
     "external_validation_li_2026_spi_wg_hme_control":
