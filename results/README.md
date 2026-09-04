@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **336**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **337**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -30,6 +30,7 @@ Tracked files: **336**. Local-only (gitignored): scratch runs under `results/qui
 
 | files | what it is, who writes it, who reads it |
 |---|---|
+| `deep_research_gap_analysis.json` | Audit of the deep-research markdown reports against the intake registry (`scripts/deep_research_tracker.py`, alias `deep-research-audit`): which mined citations are runtime-bound, registry-only or backlog. Written beside the ledger it audits; pinned by `tests/unit/test_deep_research_tracker.py`. |
 | `slr_family_reports/` (16 files) | One markdown report per SLR family (`generate_slr_family_reports.py`); write-only, for people. |
 
 ## `results/validation`

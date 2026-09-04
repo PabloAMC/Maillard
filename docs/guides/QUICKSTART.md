@@ -92,8 +92,8 @@ your provenance. Nothing is refitted: calibration on new data is a new pre-regis
 ./scripts/docker_maillard.sh core-envelope    # results/validation/core_prediction_uncertainty.* (~40 min)
 ./scripts/docker_maillard.sh model-card       # re-splices the README model card
 ./scripts/docker_maillard.sh gates            # the six CI gates
-./scripts/docker_maillard.sh pytest tests/unit tests/scripts
-./scripts/docker_maillard.sh pytest tests/integration tests/scientific
+./scripts/docker_maillard.sh pytest tests/unit
+./scripts/docker_maillard.sh pytest tests/scientific
 ```
 
 ## Command reference

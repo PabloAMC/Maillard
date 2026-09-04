@@ -102,7 +102,7 @@ python scripts/generators/generate_core_prediction_uncertainty.py --n-samples 20
 python scripts/generators/generate_model_card.py                        # re-splices the card below
 ```
 
-Test tiers and gates: `pytest tests/unit tests/scripts -q`, `pytest tests/integration tests/scientific -q`,
+Test tiers and gates: `pytest tests/unit -q`, `pytest tests/scientific -q`,
 and `python scripts/ci/<gate>.py` for the six gates (citation, data read-only, fit-then-score,
 hold-out isolation, benchmark schema, artifact freshness: tracked artifacts equal what the code
 produces, modulo date and git head, and every recorded input still hashes the same).

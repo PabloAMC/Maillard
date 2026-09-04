@@ -9,8 +9,8 @@ name: CI
 #                                      signal an external inspector should look at
 #                                      first, and it is always green or genuinely
 #                                      broken.
-#   tests-unit   (~10 min + env)     : tests/unit + tests/scripts. Fast tier.
-#   tests-full   (~25 min + env)     : tests/scientific + tests/integration.
+#   tests-unit   (~10 min + env)     : tests/unit. Fast tier.
+#   tests-full   (~25 min + env)     : tests/scientific.
 #                                      Runs UNCONDITIONALLY as of 2026-08-27; see
 #                                      the comment on the job for why the previous
 #                                      `needs: tests-unit` had to go.
@@ -216,7 +216,7 @@ jobs:
         # NOTE: neither pytest-timeout nor pytest-xdist is in environment.yml, so
         # do not add --timeout or -n here; the job-level timeout-minutes is the
         # runaway guard.
-        run: python -m pytest tests/unit tests/scripts -q
+        run: python -m pytest tests/unit -q
 
       # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
       # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).
@@ -277,7 +277,7 @@ jobs:
       - name: Scientific and integration tests
         run: |
           mkdir -p results
-          python -m pytest tests/scientific tests/integration -q 2>&1 | tee results/pytest_full.log
+          python -m pytest tests/scientific -q 2>&1 | tee results/pytest_full.log
 
       - name: data/ untouched by the full tier
         if: always()

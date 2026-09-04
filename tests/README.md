@@ -16,7 +16,7 @@ To ensure both rapid development and scientific accuracy, the Maillard test suit
 - `test_data_integrity.py`: Verifies atom balance of curated reaction pathways.
 - `test_precursor_resolver.py`: Name-to-SMILES fuzzy matching.
 
-## 🔵 Integration Tests (`tests/integration/`)
+## 🔵 Integration Tests (`tests/integration/`) — EMPTY since retirement step B5b (2026-09-03); the two tiers are `tests/unit` and `tests/scientific`
 
 - **Cost**: 1–10 seconds.
 - **Dependencies**: Cantera, xTB (if available).

@@ -112,11 +112,11 @@ EOF
 }
 
 core_lane() {
-  run_in_env "python -m pytest tests/unit tests/scripts -q"
+  run_in_env "python -m pytest tests/unit -q"
 }
 
 scientific_lane() {
-  run_in_env "python -m pytest tests/integration tests/scientific -q"
+  run_in_env "python -m pytest tests/scientific -q"
 }
 
 gates_lane() {
@@ -265,7 +265,7 @@ case "$cmd" in
     ;;
   coverage)
     # per-module line coverage of src/ and scripts/ over both tiers (wave generators omitted on purpose)
-    run_in_env "coverage erase && coverage run -m pytest tests/unit tests/scripts tests/integration tests/scientific -q -p no:cacheprovider && coverage combine -q && coverage report --sort=cover"
+    run_in_env "coverage erase && coverage run -m pytest tests/unit tests/scientific -q -p no:cacheprovider && coverage combine -q && coverage report --sort=cover"
     ;;
   gates)
     gates_lane

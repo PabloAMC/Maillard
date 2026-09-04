@@ -31,7 +31,7 @@ if str(ROOT) not in sys.path:
 import jsonschema  # noqa: E402
 
 from src import compound_keys, data_paths  # noqa: E402
-from src.kinetic_core.panel import quantification_family  # noqa: E402
+from src.quantification import quantification_family  # noqa: E402 (stdlib-only; no numpy in this job)
 
 
 def main() -> int:
