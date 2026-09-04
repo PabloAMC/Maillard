@@ -1,7 +1,7 @@
 # Quarantined benchmarks
 
 Files in this directory are **excluded from the validation panel**. The benchmark loader
-(`get_benchmark_files` in `src/benchmark_validation.py`) uses a non-recursive
+(`panel_bundles` in `src/kinetic_core/panel.py`) uses a non-recursive
 `benchmark_dir.glob("*.json")`, so any JSON placed in a subdirectory of `data/benchmarks/`
 is invisible to every panel-wide generator, report and headline count. (The same mechanism
 already keeps `data/benchmarks/external_validation/` out of the panel.)
@@ -24,6 +24,14 @@ A citation audit on **2026-08-26** could not locate a real literature source for
 | `acrylamide_asparagine_glucose_Parker2012.json` | `10.1021/jf3032779` | Dead DOI, no identifiable source; the real Parker 2012 acrylamide paper is a different system. **Quarantined 2026-08-26** (second pass) — see the dedicated section below. | Quarantined; file retained. |
 | `spi_hvp_xylose_120C_PMC9905368.json` | `10.1007/s10068-022-01194-w` | **DOI is LIVE and correct — the paper is real, the content is not.** It uses glucose/fructose at pH 7.5 for 90 min and reports only *relative peak areas*; it never mentions FFT or MFT. The file's xylose/cysteine **absolute ppb** values have no possible source. **Quarantined 2026-08-27** (Wave I) — see the dedicated section below. | Quarantined; file retained. |
 | `wheat_gluten_hvp_xylose_120C_PMC9905368.json` | `10.1007/s10068-022-01194-w` | Same source, same finding as the row above. | Quarantined; file retained. |
+
+## Quarantined 2026-09-04 (owner decision after the backlog passes)
+
+| File | Why it left the scored panel | Current state |
+|---|---|---|
+| `cys_ribose_140C_Hofmann1998.json` | Its two values are a **repo-internal derivation**, labelled in the file itself `value_status: no_verifiable_source` and `THIS IS NOT A MEASUREMENT` (tier demoted to REFERENCE at Wave S2c). The Hofmann 1998 paper's real rows live on the panel as the nine `hofmann1998_*` bundles. A number nobody can point to in a source is not a measurement. | Quarantined; file retained for forensics. `src/model_card.py` still reads it for the "sulfur anchor status" record. |
+| `thiamine_cys_xylose_145C_Cerny2008.json` | `VALUES_NEED_RE_EXAMINATION`: the 2.47 ppb MFT figure was inherited from a pre-repair file and has not been located in the paper. **Source recovery concluded 2026-09-04** (full text read, `data/articles/cerny2008.pdf`): 10.1021/jf801762c is a four-page NMR/MS identification of 5-hydroxy-3-mercapto-2-pentanone in a thiamine/cysteine/xylose model reaction (145 C, 45 min, pH 5 phosphate); it reports no MFT concentration at all (HS-SPME peaks are listed qualitatively). No source exists for the value. | **Deleted 2026-09-04.** Git history preserves the file. A possible real source is Cerny's book chapter (Recent Highlights in Flavor Chemistry & Biology, 2008, pp. 261-264, ref. 11 of the paper), not on disk. |
+| `furosine_extrusion_crossover_140C_RamirezJimenez2000.json` | Its DOI 10.1021/jf9907687 is Ramírez-Jiménez, Guerra-Hernández & García-Villanova 2000, *Browning indicators in bread* (J. Agric. Food Chem. 48:4176): furosine 43-221 mg/100 g protein in breads baked at 200-235 C, HMF and colour. The bundle encodes a lysine + glucose 35 mM model system at 140 C / 20 min with furosine 17.4 mg/kg, described in its own notes as 'a representative mild-extrusion point'; **nothing in the paper corresponds to it** (full text read 2026-09-04, `data/articles/ramirez-jimenez2000.pdf`). Furosine is also not a species in any core lane, so the row was always refused. | **Quarantined 2026-09-04**; file retained. |
 
 ## Treat the values *and the tolerances* as suspect
 

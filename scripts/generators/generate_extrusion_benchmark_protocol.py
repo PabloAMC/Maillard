@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.doe_generator import (  # noqa: E402
     export_extrusion_benchmark_protocol,
     export_extrusion_sop_lock_register,
@@ -39,7 +40,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     args = parser.parse_args(argv)

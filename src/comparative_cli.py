@@ -1,83 +1,28 @@
-"""The comparative interface: orchestration only, no science.
+"""The comparative front door: two formulations in, a ranked comparison out.
 
-WHY THIS EXISTS
----------------
-2026-08-28 (Wave S5). Every accuracy measurement this repository has made says the same
-thing twice: the **absolute** numbers are bad and the **ordinal** ones are usable. The
-free-precursor hold-out lands at a 6.04x median fold error; the matrix lane's three
-observability modes land at 67-94x; CI coverage on genuine extrapolation is 1/5. Against
-that, the directional panel scores 24/35 on strictly independent claims and 18/23 once pH
-and water activity are set aside (2026-08-28, Wave W: was 21/29 and 17/19 before six
-interlibrary-loan rows were added and scored 3/6 -- the ordinal claim got WEAKER, not
-stronger, and the numbers here move with it).
+2026-09-03 (retirement step B5): this module drives ONE engine, the kinetic core
+(``src/kinetic_core``). The FAST / "ordinal screening" lane that used to sit
+beside it -- the SMIRKS enumeration path behind ``MaillardPipeline`` -- is
+deleted, together with its ``--lane`` switch, its withheld-absolutes payload and
+its directional-panel reliability tags (those were measured on the retired lane
+and do not transfer; re-scoring the directional panel on the core is the next
+retirement step).
 
-So the front door leads with **ratios**, not with ppb. That is not a presentational
-preference, it is the only reading of the model the evidence supports: a comparison of two
-arms run through the same projection budget, the same marker yields and the same
-observability factors cancels the systematic scale error those constants carry, and what
-survives is the thing that was measured to work.
-
-CORRECTED 2026-08-29 (Wave Q1). This line used to read "Absolutes are still available behind
-``--absolute``, and they print their own caveat." That has not been true since the B5 cutover.
-On the FAST lane ``--absolute`` now EXITS 2, and ``screening_payload`` strips every ppb field
-from the payload before it can reach a renderer, unconditionally -- so no FAST absolute reaches
-a user by any route. On the CORE lane absolutes ARE emitted, always with their envelope
-declaration and always inside a reliability interval, and ``--absolute`` is a no-op note there
-because the flag has nothing left to unlock.
-
-WHAT THIS MODULE MAY AND MAY NOT DO
------------------------------------
-May: call ``MaillardPipeline``, reuse ``benchmark_to_formulation`` /
-``benchmark_to_conditions`` for input handling, read the directional artifact through
-``src.directional_reliability``, arrange the results in a table.
-
-May NOT: introduce a constant, a correction, a correlation model, or any number that is not
-either an input, a model output, or arithmetic on the two. In particular the ratio interval
-below is the ordinary independent-error combination of two existing envelopes and is labelled
-as the conservative bound it is; this module does not model the error correlation that the
-comparative thesis rests on, because nobody has measured it.
+What survives here is engine-neutral: spec loading and validation, the two-arm
+document contract, ``predict_core`` / ``compare_core`` and their renderers, and
+the value-of-information ``rank`` renderer over the core's own envelope.
 """
 
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import yaml
 
-from src.benchmark_validation import benchmark_to_conditions, benchmark_to_formulation
-from src.config import DEFAULTS
-from src.directional_reliability import (
-    AxisReliability,
-    compound_axes,
-    describe_comparison,
-    is_sulfur_compound,
-    load_panel_counts,
-    reliability_for_axis,
-    weakest,
-)
-from src.pipeline import MaillardPipeline
-from src.usability_reports import prepare_cli_confidence
+from src import data_access, data_paths
 
-ROOT = Path(__file__).resolve().parents[1]
-
-#: The FAST lane's absolute caveat. CORRECTED 2026-08-29 (Wave Q1): this said
-#: "Printed above every absolute number this interface emits, without
-#: exception", which stopped being true at the B5 cutover. It is now printed
-#: NOWHERE on the FAST lane -- ``screening_payload`` overwrites the caveat block
-#: with the screening label and strips the ppb fields -- and it is not used on
-#: the core lane at all, which has its own ``CORE_CAVEAT``. It is reachable only
-#: from the library-level renderers, which the unit tests call directly on raw
-#: payloads to pin that IF an absolute is ever printed it arrives with this text
-#: in the same block. Keep it for that; do not read it as shipped behaviour.
-ABSOLUTE_CAVEAT = (
-    "ABSOLUTE ppb ARE NOT RELIABLE. Measured out-of-sample: median 6.0x fold error on the "
-    "free-precursor hold-out (worst 52.6x), 67-94x on the matrix lane, and 1 of 5 genuine "
-    "extrapolation rows inside the 90% CI. Read these as order-of-magnitude hypotheses that "
-    "tell you which experiment to run, never as a specification."
-)
 
 RATIO_CAVEAT = (
     "Ratios are the reported quantity because comparisons cancel the systematic scale error. "
@@ -85,20 +30,6 @@ RATIO_CAVEAT = (
     "assumes the two arms' errors are unrelated, which the comparative argument says they are "
     "not. The correlation has never been measured, so no tighter interval is claimed. What HAS "
     "been measured is the direction, per axis, in the reliability column."
-)
-
-SULFUR_CAVEAT = (
-    "SULFUR BRANCH: three absolute literature anchors, and the model fails all three. "
-    "CORRECTED 2026-08-28 (Wave W); this caveat read 'zero absolute literature anchors' until "
-    "the full text of 10.1021/jf9705983 was obtained. The anchors are the pH-5.0 aqueous "
-    "isotope-dilution rows of Hofmann & Schieberle 1998 Table 1 "
-    "(hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5); the model misses them by "
-    "12.3x, 29.6x and 14.5x. The old benchmark cys_ribose_140C_Hofmann1998 remains retired -- "
-    "both its values are marked no_verifiable_source and the paper confirms they appear nowhere "
-    "in it. Its DIRECTION is not thereby worthless -- it predicted an unseen MFT measurement to "
-    "1.52x -- but it has the temperature dependence backwards between 100 and 130 C, and it now "
-    "also gets glucose-vs-fructose backwards by two orders of magnitude. Sulfur absolutes are "
-    "anchored and wrong; sulfur temperature directions are wrong."
 )
 
 
@@ -209,168 +140,6 @@ def select_system(document: Mapping[str, Any], *, source: str, arm: Optional[str
 # ---------------------------------------------------------------------------------------
 
 
-@dataclass
-class CompoundRow:
-    """One compound of one arm, with its three aliases collapsed into one record.
-
-    ``Recommender`` deliberately keys ``predicted_ppb`` by canonical SMILES **and** species
-    name **and** display label, so that downstream benchmark matching can find a compound
-    under whichever spelling a paper used. That is right for matching and wrong for a table:
-    reading it naively prints every compound three times. This record is the collapse, built
-    from ``result.targets``, which is already one row per compound.
-    """
-
-    display: str
-    species: Optional[str]
-    canon: Optional[str]
-    ppb: float
-    envelope: Optional[Dict[str, float]] = None
-    rate_limiting_family: Optional[str] = None
-    route_count: int = 0
-
-
-@dataclass
-class SystemRun:
-    """One evaluated arm."""
-
-    spec: Dict[str, Any]
-    name: str
-    compounds: Dict[str, CompoundRow]
-    warnings: List[str] = field(default_factory=list)
-    confidence: Dict[str, Any] = field(default_factory=dict)
-
-
-def _spec_to_bench(spec: Mapping[str, Any]) -> Dict[str, Any]:
-    """Reuse the benchmark input contract rather than writing a second one.
-
-    ``benchmark_to_formulation`` already owns the precursor->category routing (which names
-    count as sugars, which as lipids, which as matrix cues) and ``benchmark_to_conditions``
-    already owns the condition mapping. Re-implementing either here would create a second
-    input path that could drift from the one every benchmark is scored through.
-    """
-    bench: Dict[str, Any] = {
-        "benchmark_id": str(spec["name"]),
-        "precursors": {
-            str(name): {"concentration_mM": float(value)}
-            for name, value in spec["precursors"].items()
-        },
-        "conditions": {
-            "temp_C": float(spec["temp_C"]),
-            "ph": float(spec["ph"]),
-            "water_activity": float(spec["aw"]),
-            "time_min": float(spec["time_min"]),
-        },
-        "protein_type": str(spec.get("protein_type", "free")),
-    }
-    for optional in ("protein_source", "denaturation_state", "moisture_regime", "sme_kj_per_kg"):
-        if spec.get(optional) is not None:
-            bench[optional] = spec[optional]
-    return bench
-
-
-def _rate_limiting_family(path: Sequence[Mapping[str, Any]]) -> Optional[str]:
-    """The family of the highest-barrier step on a route -- the same rule the Wave S1 test uses."""
-    steps = [step for step in path if step.get("barrier") is not None]
-    if not steps:
-        return None
-    return str(max(steps, key=lambda step: float(step["barrier"])).get("family", "unknown"))
-
-
-def _collapse_targets(result: Any, trace: Mapping[str, Any]) -> Dict[str, CompoundRow]:
-    """One row per compound, with its route trace attached."""
-    species_names = dict(trace.get("species_names", {}) or {})
-    canon_by_species = {str(name): str(canon) for canon, name in species_names.items()}
-    debug_paths = dict(trace.get("debug_paths", {}) or {})
-    channel_flux = dict(trace.get("debug_channel_flux", {}) or {})
-
-    envelopes = {
-        str(compound): {
-            "p5": float(envelope.predicted_p5),
-            "p50": float(envelope.predicted_p50),
-            "p95": float(envelope.predicted_p95),
-            "ci_level_pct": int(envelope.ci_level_pct),
-            "support_count": int(envelope.support_count),
-            "envelope_source": str(envelope.envelope_source),
-        }
-        for compound, envelope in (result.uncertainty_envelopes or {}).items()
-    }
-
-    rows: Dict[str, CompoundRow] = {}
-    for target in result.targets or []:
-        display = str(target.get("name", "")).strip()
-        if not display:
-            continue
-        ppb = float(target.get("concentration", 0.0) or 0.0)
-        species = (target.get("projection") or {}).get("compound")
-        species = None if species is None else str(species)
-        canon = canon_by_species.get(species) if species else None
-
-        envelope = None
-        for alias in (display, species, canon):
-            if alias and alias in envelopes:
-                envelope = envelopes[alias]
-                break
-
-        path = debug_paths.get(canon, []) if canon else []
-        rows[display] = CompoundRow(
-            display=display,
-            species=species,
-            canon=canon,
-            ppb=ppb,
-            envelope=envelope,
-            rate_limiting_family=_rate_limiting_family(path or []),
-            route_count=len(channel_flux.get(canon, {}) or {}) if canon else 0,
-        )
-    return rows
-
-
-def evaluate_system(
-    spec: Mapping[str, Any],
-    *,
-    target_tag: str = DEFAULTS.default_target_tag,
-    minimize_tag: str = DEFAULTS.default_minimize_tag,
-) -> SystemRun:
-    """Run one spec through the shipped forward path. No new science on this line or any other."""
-    bench = _spec_to_bench(spec)
-    formulation = benchmark_to_formulation(bench)
-    formulation["time_minutes"] = float(spec["time_min"])
-    conditions = benchmark_to_conditions(bench)
-
-    designer = MaillardPipeline(target_tag=target_tag, minimize_tag=minimize_tag)
-    try:
-        result = designer.evaluate_single(formulation, conditions)
-    except ValueError as exc:
-        skipped = getattr(designer, "last_skipped_formulations", []) or []
-        reasons = "; ".join(f"{row.get('name')}: {row.get('reason')}" for row in skipped)
-        raise SpecError(
-            f"{spec['name']}: the formulation could not be evaluated -- {exc}"
-            + (f" ({reasons})" if reasons else "")
-        ) from exc
-
-    domain_warnings = prepare_cli_confidence(
-        result,
-        target_tag=target_tag,
-        precursor_names=list(spec["precursors"].keys()),
-        protein_type=str(formulation.get("protein_type", "free")),
-        temp_c=float(spec["temp_C"]),
-        ph=float(spec["ph"]),
-        aw=float(spec["aw"]),
-        formulation=formulation,
-        baseline_conditions=conditions,
-        designer=designer,
-    )
-
-    trace = (getattr(designer, "last_route_traces", {}) or {}).get(str(formulation.get("name")), {})
-
-    return SystemRun(
-        spec=dict(spec),
-        name=str(spec["name"]),
-        compounds=_collapse_targets(result, trace),
-        warnings=[str(getattr(w, "description", w)) for w in domain_warnings],
-        confidence=dict(result.confidence_metadata or {}),
-    )
-
-
 # ---------------------------------------------------------------------------------------
 # Comparison
 # ---------------------------------------------------------------------------------------
@@ -389,145 +158,9 @@ def _ratio_bounds(
     return (a_lo / b_hi, a_hi / b_lo)
 
 
-def compare_systems(
-    run_a: SystemRun,
-    run_b: SystemRun,
-    *,
-    counts: Optional[Mapping[str, tuple]] = None,
-    top_n: Optional[int] = None,
-) -> Dict[str, Any]:
-    table = dict(counts if counts is not None else load_panel_counts())
-    comparison = describe_comparison(run_a.spec, run_b.spec, counts=table)
-
-    compounds = sorted(set(run_a.compounds) | set(run_b.compounds))
-    rows: List[Dict[str, Any]] = []
-    for compound in compounds:
-        row_a = run_a.compounds.get(compound)
-        row_b = run_b.compounds.get(compound)
-        a_ppb = row_a.ppb if row_a else 0.0
-        b_ppb = row_b.ppb if row_b else 0.0
-        if a_ppb <= 0.0 and b_ppb <= 0.0:
-            continue
-
-        if b_ppb > 0.0 and a_ppb > 0.0:
-            ratio: Optional[float] = a_ppb / b_ppb
-            ratio_kind = "finite"
-        elif a_ppb > 0.0:
-            ratio, ratio_kind = None, "b_absent"
-        else:
-            ratio, ratio_kind = None, "a_absent"
-
-        lo, hi = _ratio_bounds(
-            row_a.envelope if row_a else None, row_b.envelope if row_b else None
-        )
-
-        axes = list(comparison["axes"]) + compound_axes(compound)
-        reliabilities = [reliability_for_axis(axis, table) for axis in axes]
-        governing = weakest(reliabilities)
-
-        rows.append(
-            {
-                "compound": compound,
-                "a_ppb": a_ppb,
-                "b_ppb": b_ppb,
-                "ratio": ratio,
-                "ratio_kind": ratio_kind,
-                "ratio_lo": lo,
-                "ratio_hi": hi,
-                "dominant_pathway_a": row_a.rate_limiting_family if row_a else None,
-                "dominant_pathway_b": row_b.rate_limiting_family if row_b else None,
-                "routes_a": row_a.route_count if row_a else 0,
-                "axes": axes,
-                "reliability": governing.render() if governing else "no-axis-differs",
-                "reliability_verdict": governing.verdict if governing else "n/a",
-                "sulfur": is_sulfur_compound(compound),
-            }
-        )
-
-    rows.sort(key=lambda row: -max(row["a_ppb"], row["b_ppb"]))
-    if top_n is not None:
-        rows = rows[: max(int(top_n), 0)]
-
-    return {
-        "artifact": "maillard_compare",
-        "a": {"name": run_a.name, "spec": run_a.spec},
-        "b": {"name": run_b.name, "spec": run_b.spec},
-        "axes_exercised": comparison["axes"],
-        "governing_reliability": (
-            comparison["governing"].render() if comparison["governing"] else "no-axis-differs"
-        ),
-        "per_axis": [
-            {
-                "axis": item.axis,
-                "score": item.score,
-                "verdict": item.verdict,
-                "note": item.note,
-            }
-            for item in comparison["per_axis"]
-        ],
-        "rows": rows,
-        "warnings_a": run_a.warnings,
-        "warnings_b": run_b.warnings,
-        "caveats": {
-            "ratio": RATIO_CAVEAT,
-            "absolute": ABSOLUTE_CAVEAT,
-            "sulfur": SULFUR_CAVEAT if any(row["sulfur"] for row in rows) else None,
-        },
-    }
-
-
 # ---------------------------------------------------------------------------------------
 # Single-system prediction
 # ---------------------------------------------------------------------------------------
-
-
-def predict_system(
-    run: SystemRun, *, counts: Optional[Mapping[str, tuple]] = None, top_n: Optional[int] = None
-) -> Dict[str, Any]:
-    table = dict(counts if counts is not None else load_panel_counts())
-    rows: List[Dict[str, Any]] = []
-    for compound, row in sorted(run.compounds.items(), key=lambda item: -item[1].ppb):
-        if row.ppb <= 0.0:
-            continue
-        envelope = row.envelope
-        lane = compound_axes(compound)
-        lane_reliability = [reliability_for_axis(axis, table) for axis in lane]
-        governing = weakest(lane_reliability)
-        rows.append(
-            {
-                "compound": compound,
-                "predicted_ppb": row.ppb,
-                "range_p5": None if not envelope else envelope["p5"],
-                "range_p95": None if not envelope else envelope["p95"],
-                "ci_level_pct": None if not envelope else envelope["ci_level_pct"],
-                "range_available": envelope is not None,
-                "dominant_pathway": row.rate_limiting_family,
-                "routes": row.route_count,
-                "lane_reliability": governing.render() if governing else None,
-                "sulfur": is_sulfur_compound(compound),
-            }
-        )
-    if top_n is not None:
-        rows = rows[: max(int(top_n), 0)]
-
-    return {
-        "artifact": "maillard_predict",
-        "system": {"name": run.name, "spec": run.spec},
-        "rows": rows,
-        "warnings": run.warnings,
-        "confidence_tier": run.confidence.get("tier"),
-        "prediction_mode": run.confidence.get("prediction_mode"),
-        "decision_mode": run.confidence.get("decision_mode"),
-        "caveats": {
-            "absolute": ABSOLUTE_CAVEAT,
-            "sulfur": SULFUR_CAVEAT if any(row["sulfur"] for row in rows) else None,
-            "no_range": (
-                "A compound with no range has no counterpart in the Monte-Carlo uncertainty "
-                "panel; it is a point prediction with NO measured interval, which is weaker "
-                "evidence than a wide interval, not stronger."
-            ),
-        },
-    }
 
 
 # ---------------------------------------------------------------------------------------
@@ -560,174 +193,6 @@ def _wrap(text: str, width: int = 92, indent: str = "  ") -> str:
     return "\n".join(lines)
 
 
-def render_compare_text(payload: Mapping[str, Any], *, show_absolute: bool = False) -> str:
-    """
-    Render a FAST-lane compare payload as text.
-
-    REACHABILITY, stated because it is not obvious and Q1 had to work it out.
-    ``show_absolute`` CANNOT BE TRUE FROM THE CLI. Three gates stack: the only
-    production caller (``scripts/maillard.py``) passes ``show_absolute=False``
-    literally; ``--absolute`` exits 2 on this lane before reaching here; and the
-    core lane renders through ``render_compare_core_text`` instead. So the
-    absolute block below is dead from the front door.
-
-    It is NOT dead from the library, and that is why it is kept rather than
-    deleted: ``tests/unit/test_comparative_cli_2026_08.py`` calls it directly on
-    a RAW payload to pin a policy that should outlive the current gating -- if
-    absolutes are ever printed, the caveat ships in the SAME block as the
-    numbers, not somewhere else on the page.
-
-    THE CONSTRAINT THAT COMES WITH THAT: the absolute block reads ``a_ppb`` and
-    ``b_ppb``, which ``screening_payload`` STRIPS. Passing a screened payload
-    with ``show_absolute=True`` would raise ``KeyError``. Callers must pass the
-    raw payload from ``compare_systems``, as the tests do.
-    """
-    out: List[str] = []
-    a_name, b_name = payload["a"]["name"], payload["b"]["name"]
-    banner = f" [{SCREENING_LABEL}]" if payload.get("absolutes_withheld") else ""
-    out.append("=" * 96)
-    out.append(f"  COMPARE{banner}   A = {a_name}   vs   B = {b_name}")
-    out.append("=" * 96)
-    out.append("")
-    if payload.get("absolutes_withheld"):
-        out.append(_wrap(payload["caveats"]["screening"], indent="  !! "))
-        out.append("")
-    axes = payload["axes_exercised"]
-    out.append(
-        f"  Axes this comparison moves: {', '.join(axes) if axes else '(none -- the two arms are identical)'}"
-    )
-    out.append(f"  Governing reliability:      {payload['governing_reliability']}")
-    out.append("")
-    for item in payload["per_axis"]:
-        out.append(f"    - {item['axis']:<18} {item['verdict']:<12} panel {item['score']}")
-        if item["note"]:
-            out.append(_wrap(item["note"], indent="        "))
-    out.append("")
-
-    header = f"  {'compound':<34} {'A/B':>10} {'bound(lo..hi)':>22}  {'reliability':<18} pathway A"
-    out.append(header)
-    out.append("  " + "-" * 94)
-    for row in payload["rows"]:
-        if row["ratio"] is None:
-            ratio_text = "A only" if row["ratio_kind"] == "b_absent" else "B only"
-        else:
-            ratio_text = f"{row['ratio']:.3g}x"
-        if row["ratio_lo"] is None:
-            bound = "no panel envelope"
-        else:
-            bound = f"{row['ratio_lo']:.3g} .. {row['ratio_hi']:.3g}"
-        pathway = row["dominant_pathway_a"] or "-"
-        out.append(
-            f"  {row['compound'][:33]:<34} {ratio_text:>10} {bound:>22}  "
-            f"{row['reliability']:<18} {pathway}"
-        )
-    out.append("")
-
-    if show_absolute:
-        out.append("  ABSOLUTE ppb (requested with --absolute)")
-        out.append(f"  {'compound':<34} {'A ppb':>14} {'B ppb':>14}")
-        out.append("  " + "-" * 64)
-        for row in payload["rows"]:
-            out.append(
-                f"  {row['compound'][:33]:<34} {_fmt(row['a_ppb']):>14} {_fmt(row['b_ppb']):>14}"
-            )
-        out.append("")
-        out.append("  !! " + "-" * 88)
-        out.append(_wrap(payload["caveats"]["absolute"], indent="  !! "))
-        out.append("  !! " + "-" * 88)
-        out.append("")
-
-    out.append("  HOW TO READ THIS")
-    out.append(_wrap(payload["caveats"]["ratio"]))
-    if payload["caveats"].get("sulfur"):
-        out.append("")
-        out.append(_wrap(payload["caveats"]["sulfur"]))
-    for label, warnings in (("A", payload["warnings_a"]), ("B", payload["warnings_b"])):
-        for warning in warnings:
-            out.append(f"  [envelope warning, {label}] {warning}")
-    out.append("")
-    return "\n".join(out)
-
-
-def render_predict_text(payload: Mapping[str, Any]) -> str:
-    """
-    Render a FAST-lane predict payload as text.
-
-    REACHABILITY (Q1, same analysis as ``render_compare_text``): every payload
-    that reaches this function FROM THE CLI has been through
-    ``screening_payload``, which sets ``absolutes_withheld=True`` unconditionally
-    and strips ``predicted_ppb`` / ``range_p5`` / ``range_p95``. So from the
-    front door ``withheld`` is ALWAYS true, and the three ``else`` arms below --
-    the "range (90% CI), ppb" column heading, the range and point-value bands,
-    and the ``no_range`` caveat -- are unreachable, as is ``caveats["absolute"]``.
-
-    They are kept because the library-level tests exercise this renderer on RAW
-    payloads, and because those arms are the only thing that would render a FAST
-    absolute correctly if the screening policy is ever revisited. Do not read
-    them as live behaviour, and do not pass a screened payload to them: the
-    fields they read have been deleted by then.
-    """
-    out: List[str] = []
-    banner = f" [{SCREENING_LABEL}]" if payload.get("absolutes_withheld") else ""
-    out.append("=" * 96)
-    out.append(f"  PREDICT{banner}   {payload['system']['name']}")
-    out.append("=" * 96)
-    out.append("")
-    out.append("  !! " + "-" * 88)
-    if payload.get("absolutes_withheld"):
-        out.append(f"  !! {SCREENING_LABEL}")
-        out.append(_wrap(payload["caveats"]["screening"], indent="  !! "))
-    else:
-        out.append(_wrap(payload["caveats"]["absolute"], indent="  !! "))
-    out.append("  !! " + "-" * 88)
-    out.append("")
-    out.append(
-        f"  confidence tier: {payload.get('confidence_tier')}   "
-        f"prediction mode: {payload.get('prediction_mode')}   "
-        f"decision mode: {payload.get('decision_mode')}"
-    )
-    out.append(
-        _wrap(
-            "That tier is the run-level SCOPE vocabulary -- how close this formulation sits to "
-            "systems the model has seen. It is not a validation claim and does not mean the "
-            "numbers are right: 0 of 17 benchmarks in the panel are strict-ready, and a "
-            "formulation can be 'high' on scope while carrying a 90% interval four decades "
-            "wide, as the widths below will usually show."
-        )
-    )
-    out.append("")
-    withheld = bool(payload.get("absolutes_withheld"))
-    column = "rank" if withheld else "range (90% CI), ppb"
-    out.append(f"  {'compound':<34} {column:>28}  {'lane':<18} pathway")
-    out.append("  " + "-" * 94)
-    for index, row in enumerate(payload["rows"], start=1):
-        if withheld:
-            # ORDINAL SCREENING: the ordering survives, the magnitudes do not.
-            band = f"#{index} (ppb withheld)"
-        elif row.get("range_available"):
-            band = f"{_fmt(row['range_p5'])} .. {_fmt(row['range_p95'])}"
-        else:
-            band = f"{_fmt(row.get('predicted_ppb'))} (point, no interval)"
-        out.append(
-            f"  {row['compound'][:33]:<34} {band:>28}  "
-            f"{(row['lane_reliability'] or '-'):<18} {row['dominant_pathway'] or '-'}"
-        )
-    out.append("")
-    if not withheld:
-        out.append(_wrap(payload["caveats"]["no_range"]))
-    if payload["caveats"].get("sulfur"):
-        out.append("")
-        out.append(_wrap(payload["caveats"]["sulfur"]))
-    for warning in payload["warnings"]:
-        out.append(f"  [envelope warning] {warning}")
-    out.append("")
-    out.append("  For a decision, use `maillard compare` instead: the ranking claims are the")
-    out.append("  ones this model was measured to get right (24/35), and a comparison cancels")
-    out.append("  the systematic scale error that makes the numbers above unreliable.")
-    out.append("")
-    return "\n".join(out)
-
-
 def render_rank_text(payload: Mapping[str, Any]) -> str:
     out: List[str] = []
     out.append("=" * 96)
@@ -757,7 +222,7 @@ def render_rank_text(payload: Mapping[str, Any]) -> str:
         _wrap(
             "This ranking is the model's honest product: every row is a place the model is "
             "measurably wrong, converted into a bookable measurement. It is computed from the "
-            "cached Monte-Carlo panel (results/validation/prediction_uncertainty.json), so it "
+            "cached Monte-Carlo envelope (results/validation/core_prediction_uncertainty.json), so it "
             "is only as current as the last trust-loop run."
         )
     )
@@ -769,34 +234,6 @@ def to_json(payload: Mapping[str, Any]) -> str:
     return json.dumps(payload, indent=2, sort_keys=True, default=str)
 
 
-# ---------------------------------------------------------------------------------------
-# Build Wave B5 -- THE PROPAGATOR CUTOVER
-# ---------------------------------------------------------------------------------------
-#
-# From B5, ``compare`` and ``predict`` route through the KINETIC CORE
-# (src/kinetic_core/engine.py). The FAST lane above is NOT deleted -- it is
-# demoted to the ordinal-only front end its measured skill supports, and every
-# surface it reaches is labelled and stripped of absolutes.
-#
-# The two rules this section enforces, mechanically rather than by convention:
-#   1. NO ABSOLUTE ppb FROM THE FAST LANE REACHES A USER-FACING SURFACE.
-#      ``screening_payload`` removes the fields; the CLI applies it to every
-#      FAST payload before rendering or serialising, so there is no path from a
-#      FAST ppb to a terminal.
-#   2. Every FAST surface carries the ORDINAL SCREENING label.
-
-SCREENING_LABEL = "ORDINAL SCREENING"
-
-SCREENING_CAVEAT = (
-    "ORDINAL SCREENING LANE. These are RANKINGS, not concentrations. The FAST lane's "
-    "absolute ppb are withheld from every user-facing surface as of Wave B5, because its "
-    "measured absolute skill does not support them (median 6.0x on the free-precursor "
-    "hold-out, 67-94x on the matrix lane, 1 of 5 genuine extrapolation rows inside the 90% "
-    "CI). What the FAST lane is measured to do is ORDER things: the directional panel scores "
-    "24/35 on strictly independent claims. Use it to sort candidates; use `--lane core` for "
-    "any quantity."
-)
-
 # CORRECTED 2026-08-29 (Wave Q1). This caveat is printed to EVERY core-lane
 # user, and three of its factual claims had been falsified by the waves that
 # followed it: B6 added the lipid lane (so "no lipid-oxidation path" was wrong),
@@ -806,59 +243,31 @@ SCREENING_CAVEAT = (
 # are four lanes). A caveat that overstates the model's limits is not the safe
 # direction to be wrong in: it teaches users to distrust answers the model can
 # actually support, and it goes stale invisibly because nothing tests prose.
-CORE_CAVEAT = (
-    "KINETIC CORE. Absolute concentrations come from the mass-action network (frozen "
-    "B1/B2.x/B3/B6/B7 parameters), and they are reported WITH their envelope declaration. The "
-    "core refuses what it cannot name -- ask it for 1-hexanol, 2-pentylfuran or propanal and it "
-    "will tell you why it will not answer, rather than answering. Its four lanes (trunk, sulfur, "
-    "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "
-    "lane as a direct sum, and the Maillard lanes do not compose with each other. A refusal is "
-    "an output, not a failure. Read the cutover final exam "
-    "(results/validation/cutover_final_exam.md) for its measured out-of-sample accuracy before "
-    "trusting any number here."
-)
-
-#: Fields removed from every FAST payload before it reaches a user.
-#: Q1 added ``ci_level_pct`` and ``range_available``. Both are properties of an
-#: absolute interval that is itself being withheld, so leaving them in described
-#: a quantity the payload no longer carried -- ``range_available: true`` next to
-#: no range. Nothing rendered them, so this strips two fields that were dead
-#: weight rather than changing any output.
-_FAST_ABSOLUTE_FIELDS = (
-    "a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_p95",
-    "ci_level_pct", "range_available",
-)
-
-
-def screening_payload(payload: Mapping[str, Any]) -> Dict[str, Any]:
-    """
-    Strip FAST-lane absolutes and stamp the ORDINAL SCREENING label.
-
-    Applied at the CLI boundary to every FAST payload. The ratio, the ordering
-    and the reliability columns survive untouched -- those are the lane's
-    measured product. The ppb columns do not.
-    """
-    out = dict(payload)
-    out["lane"] = "fast"
-    out["lane_label"] = SCREENING_LABEL
-    rows = []
-    for row in out.get("rows", []):
-        clean = {k: v for k, v in dict(row).items() if k not in _FAST_ABSOLUTE_FIELDS}
-        clean["absolute_ppb_withheld"] = True
-        clean["lane_label"] = SCREENING_LABEL
-        rows.append(clean)
-    out["rows"] = rows
-    caveats = dict(out.get("caveats") or {})
-    caveats["screening"] = SCREENING_CAVEAT
-    # The old absolute caveat described numbers this lane no longer emits.
-    caveats["absolute"] = (
-        "NOT APPLICABLE on the screening lane: absolute ppb are withheld here. "
-        "Use `--lane core`."
+def core_caveat() -> str:
+    """The caveat printed with every core answer. Its one number is READ from the tracked
+    scorecard (results/validation/core_panel_scores.json) rather than typed here: a
+    hard-coded count was one wave behind twice (2026-09-03)."""
+    try:
+        summary = data_access.load_json(data_paths.CORE_PANEL_SCORES)["summary"]["out_of_sample"]
+        headline = f"{summary['within_band']} of {summary['rows']} out-of-sample rows within 3x"
+    except Exception:  # noqa: BLE001 - a missing scorecard is reported, not fatal
+        headline = "scorecard not generated; run ./scripts/docker_maillard.sh core-scores"
+    return (
+        "KINETIC CORE. Absolute concentrations come from the mass-action network (frozen "
+        "per-lane fit reports), and they are reported WITH their envelope declaration. The "
+        "core refuses what it cannot name -- ask it for 1-hexanol, 2-pentylfuran or propanal and it "
+        "will tell you why it will not answer, rather than answering. Its four lanes (trunk, sulfur, "
+        "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "
+        "lane as a direct sum, and the Maillard lanes do not compose with each other. A refusal is "
+        "an output, not a failure. Read the core's scorecard "
+        f"(results/validation/core_panel_scores.md: {headline}) and its "
+        "envelope (core_prediction_uncertainty.md) before trusting any number here; the "
+        "directional panel (core_directional_scores.md) is what the reliability column reads."
     )
-    out["caveats"] = caveats
-    out["absolutes_withheld"] = True
-    return out
 
+
+#: Evaluated once at import for callers that read the constant.
+CORE_CAVEAT = core_caveat()
 
 def _core_process(spec: Mapping[str, Any]):
     from src.kinetic_core.engine import ProcessSpec, ThermalProgram
@@ -1059,8 +468,37 @@ def compare_core(
         "a": {"name": core_a.name, "spec": dict(spec_a)},
         "b": {"name": core_b.name, "spec": dict(spec_b)},
         "comparison": payload,
+        "reliability": _reliability_block(spec_a, spec_b),
         "caveats": {"core": CORE_CAVEAT, "ratio": RATIO_CAVEAT},
         "engine": engine_metadata(),
+    }
+
+
+def _reliability_block(spec_a: Mapping[str, Any], spec_b: Mapping[str, Any]) -> Dict[str, Any]:
+    """
+    Step B7 (2026-09-03): the per-axis reliability of THIS comparison, read from the
+    core's own directional scorecard. The axes are the knobs the two arms differ on; the
+    governing verdict is the weakest of them. When the scorecard is absent the block says
+    so instead of inventing a tag.
+    """
+    from src.directional_reliability import describe_comparison
+
+    try:
+        described = describe_comparison(spec_a, spec_b)
+    except (FileNotFoundError, ValueError) as exc:
+        return {"available": False, "reason": str(exc), "axes": [], "per_axis": [], "governing": None}
+    governing = described["governing"]
+    return {
+        "available": True,
+        "source": "results/validation/core_directional_scores.json (strictly independent claims)",
+        "axes": list(described["axes"]),
+        "per_axis": [
+            {"axis": r.axis, "agree": r.agree, "evaluable": r.evaluable, "verdict": r.verdict, "note": r.note}
+            for r in described["per_axis"]
+        ],
+        "governing": None if governing is None else governing.render(),
+        "governing_verdict": None if governing is None else governing.verdict,
+        "no_axis_differs": bool(described["no_axis_differs"]),
     }
 
 
@@ -1199,6 +637,20 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
             _render_declaration(declaration, out)
             out.append("")
 
+    reliability = payload.get("reliability") or {}
+    if reliability.get("available"):
+        axes = reliability.get("axes") or []
+        out.append("  Axes this comparison moves: " + (", ".join(axes) if axes else "none (the arms differ on no panel axis)"))
+        out.append(f"  Governing reliability:      {reliability.get('governing') or 'n/a'}   [directional panel, independent claims]")
+        for item in reliability.get("per_axis") or []:
+            out.append(f"    - {item['axis']:<18} {item['verdict']:<12} panel {item['agree']}/{item['evaluable']}")
+            if item.get("note"):
+                out.append(_wrap(item["note"], indent="        "))
+        out.append("")
+    elif reliability:
+        out.append(_wrap("reliability tags unavailable: " + str(reliability.get("reason")), indent="  ! "))
+        out.append("")
+
     ratios = comparison.get("ratios") or {}
     rows = list(ratios.get("rows") or [])
     band = ratios.get("reliability_band_x")
@@ -1220,15 +672,17 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
     )
     if undefined:
         out.append(
-            f"  ...of which {undefined} are UNDEFINED (one arm at exactly zero) and "
-            f"resolve nothing: see the 'resolved' column, not this count."
+            f"  ...of which {undefined} are UNDEFINED (one arm at exactly zero, or on a route the "
+            f"engine declares unidentified) and resolve nothing: see the 'resolved' column, not this count."
         )
     out.append("")
     out.append(f"  {'compound':<38} {'A/B':>12} {'direction':<14} resolved")
     out.append("  " + "-" * 88)
     for row in rows:
         ratio = row.get("ratio_a_over_b")
-        if not isinstance(ratio, (int, float)):
+        if row.get("unidentified_arm"):
+            ratio_text = f"{str(row['unidentified_arm']).upper()} unidentified"
+        elif not isinstance(ratio, (int, float)):
             ratio_text = "-"
         elif ratio != ratio or ratio in (float("inf"), float("-inf")) or ratio == 0.0:
             # One arm is at zero: a ratio is undefined, not enormous.

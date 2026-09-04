@@ -1,0 +1,112 @@
+{
+  "summary": {
+    "matrix_family": "mycoprotein",
+    "protein_type": "myco",
+    "runtime_posture": "directional_matrix",
+    "evidence_surface": "bounded_calibration_prior",
+    "decision": "advance_now",
+    "next_best_action": "land_first_family_specific_mycoprotein_measurement_package",
+    "policy": "mycoprotein_reference_is_runtime_executable_but_remains_bounded_directional_support_until_family_specific_measurements_are_landed"
+  },
+  "family_scope": {
+    "supported_today": [
+      "first-class matrix family in computational priors",
+      "directional accessibility and process-state support",
+      "runtime-executable bounded reference windows"
+    ],
+    "not_supported_today": [
+      "executable benchmark family",
+      "quantitative headspace closure",
+      "meaty-positive matrix benchmark"
+    ],
+    "primary_blocker": "executable benchmark family"
+  },
+  "matrix_prior_bundle": {
+    "accessibility_window": {
+      "parameter": "accessibility_window",
+      "source": "Bounded mycoprotein accessibility prior from fungal cell-wall entrapment and heat-softening literature synthesis retained as a directional planning prior",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "medium_low",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Mycoprotein is now a first-class matrix family with explicit bounded priors, but the window remains directional until direct free-SH / free-amino anchors are encoded."
+    },
+    "denaturation_heuristic": {
+      "parameter": "denaturation_heuristic",
+      "source": "Bounded mycoprotein thermal-opening prior derived from fungal-protein heat-softening literature synthesis",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "medium_low",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Directional mycoprotein process-state prior only; use for planning and trust reporting rather than quantitative closure."
+    },
+    "volatile_class_profile": {
+      "parameter": "volatile_class_profile",
+      "source": "Bounded mycoprotein class overlay retained as a literature-bounded directional surrogate",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "medium_low",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Use for directional matrix-family comparisons until direct mycoprotein release data is encoded."
+    },
+    "matrix_correction": {
+      "parameter": "matrix_correction",
+      "source": "Bounded mycoprotein correction prior from fungal-matrix accessibility and release literature synthesis",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "medium_low",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Directional mycoprotein prior only; intended for bounded ranking support and trust reporting rather than quantitative closure."
+    }
+  },
+  "reference_windows": {
+    "accessibility": {
+      "lysine_min": 0.42,
+      "lysine_max": 0.58,
+      "cysteine_min": 0.18,
+      "cysteine_max": 0.3,
+      "source": "Bounded mycoprotein accessibility prior from fungal cell-wall entrapment and heat-softening literature synthesis retained as a directional planning prior"
+    },
+    "denaturation": {
+      "midpoint_celsius": 78.0,
+      "width_celsius": 12.0,
+      "time_gain_celsius": 5.0,
+      "source": "Bounded mycoprotein thermal-opening prior derived from fungal-protein heat-softening literature synthesis"
+    },
+    "volatile_classes": {
+      "native_factors": {
+        "aldehyde": 0.92,
+        "furan": 0.98,
+        "alcohol": 1.02,
+        "sulfur": 1.03,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "denatured_factors": {
+        "aldehyde": 0.97,
+        "furan": 1.0,
+        "alcohol": 1.01,
+        "sulfur": 1.01,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "source": "Bounded mycoprotein class overlay retained as a literature-bounded directional surrogate"
+    }
+  }
+}

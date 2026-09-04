@@ -69,3 +69,30 @@ values in any artifact.
 | **Target-ranking Validation** | A benchmark where the model must predict rank order, not just presence (e.g. hexanal far more abundant than an oxidized lipid note). Its results surface in the benchmark artifacts as ranking assertions, not as a label. |
 | **Intake Check** | A basic test that the software runs and produces the right compounds, without guaranteeing absolute predicted concentrations. Corresponds to the matrix intake contract, whose runs appear under `benchmark_neighborhood: matrix_intake_only`. |
 | **Matrix Retargeting / Matrix Calibration** | Adjusting theoretical free-system predictions (water/buffer) downward to account for physical trapping inside structured plant proteins such as pea or soy isolates. The mechanism is visible through `calibration_source`, `support_origin` and `calibration_fallback_mode`, not under this name. |
+
+---
+
+## Part 3 — Identifiers you will meet in the code and the artifacts
+
+The code, the fit reports and the audit trail name their history with short tags. They are
+provenance, not jargon for its own sake: every tag points at a pre-registered record. This is the key.
+
+| tag | what it is | where the record lives |
+| --- | --- | --- |
+| **B1** | the trunk lane's fit (glucose/glycine backbone, Martins & van Boekel 2005 Table 2) | `results/validation/kinetic_core_b1_fit_report.json` |
+| **B2, B2.1, B2.2, B2.3, B2.4** | the sulfur lane's first fits: the pentose/cysteine network, its pH trajectory (B2.2), its buffer completion (B2.3) and a six-start ensemble (B2.4) | `kinetic_core_b2*_fit_report.json`, `kinetic_core_b2*_prereg.md` |
+| **B3** | the acrylamide lane's fit (asparagine + reducing sugar) | `kinetic_core_b3_fit_report.json` |
+| **B4** | the protein-matrix hold-out step (frozen predictions before scoring) | `kinetic_core_b4_*` |
+| **B5** (a, b, c) | not a fit: the cutover to one engine and the retirement of the legacy lane (2026-09-03) | `docs/history/`, `results/legacy_lane/` |
+| **B6** | the lipid lane's fit (hydroperoxide pool, Frankel 1989's product slate) | `kinetic_core_b6_fit_report.json` |
+| **B7** | the furanic channels added to the trunk (HMF, DMHF) | `kinetic_core_b7_fit_report.json` |
+| **B8** | the sulfur refit with the measured thiol-sink barriers, plus the Laplace covariance and slice profile the envelope samples | `kinetic_core_b8_*`, `kinetic_core_b9_laplace_covariance.json`, `kinetic_core_b9_profile.md` |
+| **B9** | the primary-evidence refit of the sulfur lane: the end-to-end level rows left the objective and validate instead. The shipped sulfur parameters. | `kinetic_core_b9_fit_report.json`, `kinetic_core_b9_prereg.md` |
+| **S, K, Q, V, W waves** (e.g. Wave S2c, K6a, Q1, V1, W) | the retired legacy lane's audit and repair waves, August 2026 | `AUDIT.md`, `docs/history/` |
+| **Amendment n**, **D.n**, **T1, F-1, H-3** | sections of the fit/hold-out declaration and of the wave pre-registrations: which rows may be fitted, which are hold-outs, and what would falsify a wave | `docs/reference/FIT_HOLDOUT_DECLARATION.md`, `results/validation/kinetic_core_b*_prereg.md` |
+| **C2 + C3**, **C5**, **C6** | chemistry, not tags: carbon-fragment sizes (a hexose splits into a two-carbon and a three-carbon fragment; a pentose keeps its intact five-carbon skeleton) | `src/kinetic_core/sulfur.py` |
+| **MFT, FFT, MFTD, MESH, ACTZ, NF, FUR, PENT, ARP, DPO** | species keys of the sulfur network (2-methyl-3-furanthiol, 2-furfurylthiol, the MFT dimer, methanethiol, 2-acetylthiazole, norfuraneol, furfural, a generic aldopentose, the Amadori compound, the pentose deoxyosone) | `src/kinetic_core/species_sulfur.py` |
+
+The rule that keeps these honest: a change to any wave generator is a new wave, never an edit
+(`scripts/generators/WAVES.md`), so a tag always names exactly one frozen record.
+

@@ -84,6 +84,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core import operative_acrylamide_parameters  # noqa: E402
 from src.kinetic_core.acrylamide import (  # noqa: E402
     OUT_OF_SCOPE,
@@ -138,7 +139,7 @@ DV_LOADING_MMOL_L = 3000.0
 #: independent of it.
 KNOL_LOADING_MMOL_L = 100.0
 
-SPI_BENCHMARK = ROOT / "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json"
+SPI_BENCHMARK = data_paths.benchmark_path("acrylamide_spi_extrusion_130C_ACSRef3")
 
 
 # ===========================================================================
@@ -197,7 +198,7 @@ SYSTEMS: Dict[str, Dict[str, Any]] = {
 SPI_SYSTEM = dict(
     initial={"Asn": 42.0, "Glc": 42.0}, aw=0.35, ph=6.0,
     temperature_c=130.0, minutes=0.4167,
-    anchor="data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
+    anchor=data_paths.rel(SPI_BENCHMARK),
 )
 
 
@@ -855,7 +856,7 @@ def main() -> int:
         },
     }
 
-    out_json = ROOT / "results/validation/kinetic_core_b3_fit_report.json"
+    out_json = data_paths.VALIDATION_DIR / "kinetic_core_b3_fit_report.json"
     out_json.parent.mkdir(parents=True, exist_ok=True)
     out_json.write_text(json.dumps(payload, indent=2, default=str))
 
@@ -1027,7 +1028,7 @@ def main() -> int:
           f"Reason: {row['why']}")
     a("")
 
-    out_md = ROOT / "results/validation/kinetic_core_b3_fit_report.md"
+    out_md = data_paths.VALIDATION_DIR / "kinetic_core_b3_fit_report.md"
     out_md.write_text("\n".join(lines))
     print(f"wrote {out_json}")
     print(f"wrote {out_md}")

@@ -1,16 +1,16 @@
 # Cutover final exam — the kinetic core vs the old lane on the 21 frozen bundles
 
-Generated 2026-08-29 on `audit-remediation` @ `49df685` (dirty).
+Generated 2026-09-02 on `cleaning` @ `343ddf8` (dirty).
 
 Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), written BEFORE this scorer existed and before any measured value was read. **No parameter changed in this wave.** Pass band: **3.0x** on every level row, taken unchanged from the B2.1 and B3 scorecards.
 
 ## Headline
 
 - **21 bundles, 40 points.** The core ANSWERS **34** and **DECLINES 6**, each declension with a named structural reason.
-- **Core: 4/34 within 3.0x**, median fold error **40.23x**, worst 3.339e+04x.
+- **Core: 3/34 within 3.0x**, median fold error **19.08x**, worst 3.339e+04x.
 - **Old lane, all 39 points it scores: 7 within 3.0x**, median **10.94x**, worst 2748x.
-- **PAIRED SUBSET (n=33), the only apples-to-apples number:** core median **42.23x** vs old median **10.86x**.
-- **GEOMETRIC-MEAN FOLD, on the same points:** core over all scored **43.29x**; on the paired subset core **45.02x** vs old **13.14x**. A median moves only when a row crosses the middle of the pool; a geometric mean moves whenever any row moves, including a row that was already failing.
+- **PAIRED SUBSET (n=33), the only apples-to-apples number:** core median **24.78x** vs old median **10.86x**.
+- **GEOMETRIC-MEAN FOLD, on the same points:** core over all scored **32.1x**; on the paired subset core **33.08x** vs old **13.14x**. A median moves only when a row crosses the middle of the pool; a geometric mean moves whenever any row moves, including a row that was already failing.
 - **4 of these points are SHARED with the hold-out panel** — the same measurements, scored twice. THESE FOUR POINTS ARE THE SAME MEASUREMENTS AS FOUR ROWS OF THE KINETIC-CORE HOLD-OUT PANEL, not analogues of them. The exam and the panel are therefore NOT independent evidence on this axis: agreement between them here is one measurement counted twice. Established in results/validation/d1_exam_panel_reconciliation.md sec. 5 and declared in both artifacts from Wave B2.4 onward.
 
 > Read the paired row, not the two unpaired medians. The old lane emits a number for every point including the ones the core declines; a median over guesses and a median over answers are different quantities. Reporting only the unpaired pair would let the core look good by refusing its hardest points.
@@ -21,13 +21,13 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 
 | | scored | within band | median fold | paired median (n=33) |
 |---|---:|---:|---:|---:|
-| **buffer-completed** | 34 | 4 | 40.23x | **42.23x** |
-| **as-was (no buffer field)** | 34 | 3 | 31.22x | **35.08x** |
+| **buffer-completed** | 34 | 3 | 19.08x | **24.78x** |
+| **as-was (no buffer field)** | 34 | 2 | 31.39x | **31.81x** |
 | old lane (identical in both) | 39 | 7 | 10.94x | 10.86x |
 
 > THE OLD LANE HAS NO pH STATE AND NO BUFFER INPUT AT ALL, so its numbers are BY CONSTRUCTION the same in both columns. That is why the old-lane comparison is reported against BOTH core columns rather than recomputed: the comparison changes because the CORE moves, never because the old lane does.
 
-**The buffer field moved 17 of 40 points** — 13 closer to the measurement, 4 further away, 23 untouched.
+**The buffer field moved 18 of 40 points** — 13 closer to the measurement, 5 further away, 22 untouched.
 
 > Only the SULFUR lane carries a pH state. An acrylamide-lane or matrix-lane row is identical in both columns no matter what its buffer says, and that identity is a REPORTED GAP rather than an omission -- it is the same gap that leaves Chang's two arms predicting the same value.
 
@@ -38,30 +38,31 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 | `acrylamide_180C` | 7 | 6.323x | 1 | 6.323x | 1 |
 | `furan_browning_glc_alanine` | 7 | 11.93x | 1 | 11.93x | 1 |
 | `matrix_path_lipid` | 8 | 1863x | 0 | 1863x | 0 |
-| `sulfur_hofmann1998_145C` | 10 | 11.48x | 2 | 17.15x | 1 |
-| `sulfur_yiltirak2026_T_ladder` | 8 | 193.5x | 0 | 444.5x | 0 |
+| `sulfur_hofmann1998_145C` | 10 | 12.22x | 1 | 21.78x | 0 |
+| `sulfur_yiltirak2026_T_ladder` | 8 | 122.5x | 0 | 294.6x | 0 |
 
 ### Every point the buffer field moved
 
 | bundle | compound | buffer | provenance | as-was fold | completed fold | |
 |---|---|---|---|---:|---:|---|
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 54.02x | 12.35x | closer |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 27.36x | 401.4x | **further** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 8.539x | 2.48x | closer |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 6.963x | 7.248x | **further** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 207.5x | 42.23x | closer |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 35.08x | 499x | **further** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 21.13x | 517.3x | **further** |
-| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 13.17x | 3.076x | closer |
-| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 2.93x | 2.376x | closer |
-| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 47.12x | 38.23x | closer |
-| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 2337x | 598.6x | closer |
-| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 128.3x | 107.5x | closer |
-| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 2380x | 647.8x | closer |
-| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 179.3x | 153.8x | closer |
-| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 1596x | 469.4x | closer |
-| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 183.9x | 161.1x | closer |
-| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 705.1x | 225.9x | closer |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 60.15x | 13.38x | closer |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 10.8x | 11.07x | **further** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 31.81x | 51.36x | **further** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 8.892x | 5.735x | closer |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 6.844x | 7.124x | **further** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 122.1x | 24.78x | closer |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 52.25x | 126x | **further** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 30.97x | 143.8x | **further** |
+| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 12.58x | 2.8x | closer |
+| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 4.875x | 3.684x | closer |
+| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 10.49x | 8.829x | closer |
+| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 1966x | 495.8x | closer |
+| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 34.13x | 28.12x | closer |
+| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 1474x | 382x | closer |
+| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 63.92x | 53.58x | closer |
+| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 838.1x | 233.7x | closer |
+| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Methyl-3-furanthiol (MFT | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 109.4x | 95.54x | closer |
+| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Furfurylthiol (FFT) | potassium_phosphate 0.5 M | repo_verbatim_methods_quote | 479.9x | 149.5x | closer |
 
 ## By bundle family
 
@@ -70,8 +71,8 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 | `acrylamide_180C` | 7 | 7 | 0 | 1 | 2 | 6.323x | 6.161x |
 | `furan_browning_glc_alanine` | 7 | 5 | 2 | 1 | 2 | 11.93x | 5.658x |
 | `matrix_path_lipid` | 8 | 4 | 4 | 0 | 2 | 1863x | 104.1x |
-| `sulfur_hofmann1998_145C` | 10 | 10 | 0 | 2 | 0 | 11.48x | 13.77x |
-| `sulfur_yiltirak2026_T_ladder` | 8 | 8 | 0 | 0 | 1 | 193.5x | 16.77x |
+| `sulfur_hofmann1998_145C` | 10 | 10 | 0 | 1 | 0 | 12.22x | 13.77x |
+| `sulfur_yiltirak2026_T_ladder` | 8 | 8 | 0 | 0 | 1 | 122.5x | 16.77x |
 
 ## Every point, old lane vs core
 
@@ -99,24 +100,24 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 | `mp_holdout_glucose_asparagine_180C_30min_water` | 5-Hydroxymethylfurfural (HMF) | ppb | 7000 | 4.313e+04 | 6.161x | ANSWERED | 2108 | 3.32x | **FAIL** |
 | `mp_holdout_glucose_asparagine_180C_Ye2024` | Acrylamide | umol_per_mol_limiting_precursor | 140.6 | 80.38 | 1.749x | ANSWERED | 7037 | 50.06x | **FAIL** |
 | `mp_holdout_glucose_only_autoclave_121C_Steinha` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 0 | --x | ANSWERED | 1459 | 11.93x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 7 | 951.2 | 135.9x | ANSWERED | 86.44 | 12.35x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 3 | 1519 | 506.4x | ANSWERED | 31.82 | 10.61x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 6 | 343.4 | 57.23x | ANSWERED | 0.01495 | 401.4x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 4 | 22.85 | 5.713x | ANSWERED | 9.918 | 2.48x | PASS |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 229 | 1409 | 6.151x | ANSWERED | 1660 | 7.248x | **FAIL** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 553 | 2878 | 5.204x | ANSWERED | 13.09 | 42.23x | **FAIL** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 12 | 624.7 | 52.06x | ANSWERED | 0.02405 | 499x | **FAIL** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 25 | 316.2 | 12.65x | ANSWERED | 0.04833 | 517.3x | **FAIL** |
-| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | ppb | 96 | 1429 | 14.88x | ANSWERED | 295.3 | 3.076x | **FAIL** |
-| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) | ppb | 143 | 713.7 | 4.991x | ANSWERED | 339.8 | 2.376x | PASS |
-| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 6.88 | 8.556 | 1.244x | ANSWERED | 263 | 38.23x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.28 | 15.44 | 12.06x | ANSWERED | 766.2 | 598.6x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 3.29 | 15.71 | 4.775x | ANSWERED | 353.5 | 107.5x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.46 | 33.17 | 22.72x | ANSWERED | 945.9 | 647.8x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 2.4 | 26.07 | 10.86x | ANSWERED | 369 | 153.8x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.68 | 61.28 | 36.48x | ANSWERED | 788.6 | 469.4x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Methyl-3-furanthiol (MFT) | ppb | 1.71 | 36.73 | 21.48x | ANSWERED | 275.4 | 161.1x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Furfurylthiol (FFT) | ppb | 1.62 | 83.99 | 51.85x | ANSWERED | 365.9 | 225.9x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 7 | 951.2 | 135.9x | ANSWERED | 93.63 | 13.38x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 3 | 1519 | 506.4x | ANSWERED | 33.22 | 11.07x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 6 | 343.4 | 57.23x | ANSWERED | 0.1168 | 51.36x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 4 | 22.85 | 5.713x | ANSWERED | 22.94 | 5.735x | **FAIL** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 229 | 1409 | 6.151x | ANSWERED | 1631 | 7.124x | **FAIL** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 553 | 2878 | 5.204x | ANSWERED | 22.31 | 24.78x | **FAIL** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 12 | 624.7 | 52.06x | ANSWERED | 0.09527 | 126x | **FAIL** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 25 | 316.2 | 12.65x | ANSWERED | 0.1738 | 143.8x | **FAIL** |
+| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | ppb | 96 | 1429 | 14.88x | ANSWERED | 268.8 | 2.8x | PASS |
+| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) | ppb | 143 | 713.7 | 4.991x | ANSWERED | 526.8 | 3.684x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 6.88 | 8.556 | 1.244x | ANSWERED | 60.74 | 8.829x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.28 | 15.44 | 12.06x | ANSWERED | 634.6 | 495.8x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 3.29 | 15.71 | 4.775x | ANSWERED | 92.51 | 28.12x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.46 | 33.17 | 22.72x | ANSWERED | 557.7 | 382x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 2.4 | 26.07 | 10.86x | ANSWERED | 128.6 | 53.58x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.68 | 61.28 | 36.48x | ANSWERED | 392.6 | 233.7x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Methyl-3-furanthiol (MFT) | ppb | 1.71 | 36.73 | 21.48x | ANSWERED | 163.4 | 95.54x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Furfurylthiol (FFT) | ppb | 1.62 | 83.99 | 51.85x | ANSWERED | 242.1 | 149.5x | **FAIL** |
 
 ## The declensions, with their reasons
 
@@ -132,9 +133,9 @@ Every claim in `cutover_prereg.md` that this exam can settle, checked against th
 | pre-registered claim | outcome | detail |
 |---|---|---|
 | 23 of the 40 points are in envelope; 17 are declared out | **MISSED** | core answered 34, declined 6 |
-| 2 to 7 of the 23 in-envelope points inside band, most likely 4 | **HELD** | 4/34 inside the 3.0x band |
-| core median fold error 10x-100x, and NOT better than the old lane | **HELD** | BAND HALF: core median over all scored points 40.23x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 42.23x against the old lane's 10.86x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.) |
-| Yiltirak: UNDER-prediction, worsening as temperature falls | **HALF-FALSIFIED** | DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is not the 100 C one (598.6x). |
+| 2 to 7 of the 23 in-envelope points inside band, most likely 4 | **HELD** | 3/34 inside the 3.0x band |
+| core median fold error 10x-100x, and NOT better than the old lane | **HELD** | BAND HALF: core median over all scored points 19.08x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 24.78x against the old lane's 10.86x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.) |
+| Yiltirak: UNDER-prediction, worsening as temperature falls | **HALF-FALSIFIED** | DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is the 100 C one (495.8x). |
 | Lin 2022 (fructose-fed) is the WORST acrylamide point | **FALSIFIED** | Lin fold 8.246x; worst Chang/Ye glucose fold 241.1x. The fructose point is the BEST acrylamide point, not the worst. |
 | acrylamide direction: UNDER-prediction, consistent with Knol 2010 | **FALSIFIED** | every answered acrylamide point OVER-predicts; the module under-predicted its own B3 gating row and over-predicts here by 2.8x-242x |
 
@@ -142,7 +143,7 @@ Every claim in `cutover_prereg.md` that this exam can settle, checked against th
 
 ### The core is WORSE than the old lane on the paired subset, and that is the headline
 
-On the 33 points both lanes answer, the core's median fold error is **42.23x** against the old lane's **10.86x**, i.e. about **3.887x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise — but it is a negative result and it is the first thing a reader should be told.
+On the 33 points both lanes answer, the core's median fold error is **24.78x** against the old lane's **10.86x**, i.e. about **2.281x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise — but it is a negative result and it is the first thing a reader should be told.
 
 What the core buys instead is the 6 declensions and the localisation of the failures: where it cannot name a route it says so instead of emitting a number from one it does not have. Whether that trade is worth making is a judgement, and the numbers for making it are in the family table above.
 
@@ -150,9 +151,9 @@ NOTE ON THE SIZE OF THAT TRADE, because it has moved a long way and the argument
 
 ### The sulfur lane is strongest at 145 C and catastrophic on the low-temperature ladder
 
-The Hofmann family (145 C, 20 min) is the core's best result anywhere: **2/10 within 3x**, its two closest rows being mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 2-Methyl-3-furanthiol (MFT) at 2.376x, mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 2-Methyl-3-furanthiol (MFT) at 2.48x, against an old lane that scores **0/10** on the same points and misses by up to 506.4x. That is a genuine out-of-sample result for the rebuilt sulfur network on the conditions closest to its fit point.
+The Hofmann family (145 C, 20 min) is the core's best result anywhere: **1/10 within 3x**, its two closest rows being mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 2-Furfurylthiol (FFT) at 2.8x, mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 2-Methyl-3-furanthiol (MFT) at 3.684x, against an old lane that scores **0/10** on the same points and misses by up to 506.4x. That is a genuine out-of-sample result for the rebuilt sulfur network on the conditions closest to its fit point.
 
-The Yiltirak family (100-130 C, 30 min - 4 h) is **0/8**, median 193.5x. The probe that separates the two axes shows the network's temperature response is sound — at a fixed 20 min hold, product rises monotonically with temperature as it should. The failure is on the TIME axis: Yiltirak's protocol compensates lower temperature with longer holds, and over a 4 h hold at 100 C the core accumulates thiol far beyond the measurement. The mechanism is named and it is B2.1's own declared policy through B2.1: the sulfur CONSUMPTION channels carried **no activation energy at all**, so lowering the temperature slowed formation while leaving every sink running at its 145 C rate — and the sinks were then given 12x longer to run and still failed to remove the product. **THAT SENTENCE IS NO LONGER CURRENT AND IS KEPT ONLY AS THE HISTORY OF THIS DIAGNOSIS.** B2.2 gave the decay lumps two named barrier families of their own (`thiol_sink`, `carbonyl_sink`) and the family median moved; B2.3 refits both after a charge-conservation fix. The residual failure is therefore no longer attributable to a no-Ea consumption policy, and the current fold errors above are what should be read. B2.2's diagnosis sec. 2 flagged this paragraph as stale and could not fix it under a pure-re-scoring mandate; B2.3 corrects it.
+The Yiltirak family (100-130 C, 30 min - 4 h) is **0/8**, median 122.5x. The probe that separates the two axes shows the network's temperature response is sound — at a fixed 20 min hold, product rises monotonically with temperature as it should. The failure is on the TIME axis: Yiltirak's protocol compensates lower temperature with longer holds, and over a 4 h hold at 100 C the core accumulates thiol far beyond the measurement. The mechanism is named and it is B2.1's own declared policy through B2.1: the sulfur CONSUMPTION channels carried **no activation energy at all**, so lowering the temperature slowed formation while leaving every sink running at its 145 C rate — and the sinks were then given 12x longer to run and still failed to remove the product. **THAT SENTENCE IS NO LONGER CURRENT AND IS KEPT ONLY AS THE HISTORY OF THIS DIAGNOSIS.** B2.2 gave the decay lumps two named barrier families of their own (`thiol_sink`, `carbonyl_sink`) and the family median moved; B2.3 refits both after a charge-conservation fix. The residual failure is therefore no longer attributable to a no-Ea consumption policy, and the current fold errors above are what should be read. B2.2's diagnosis sec. 2 flagged this paragraph as stale and could not fix it under a pure-re-scoring mandate; B2.3 corrects it.
 
 ### The acrylamide lane has the TIME SHAPE inverted
 

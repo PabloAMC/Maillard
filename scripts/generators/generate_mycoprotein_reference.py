@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.mycoprotein_reference import (  # noqa: E402
     build_mycoprotein_reference_artifact,
     render_mycoprotein_reference_markdown,
@@ -26,7 +27,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     args = parser.parse_args(argv)

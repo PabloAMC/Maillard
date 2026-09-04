@@ -71,7 +71,12 @@ from pathlib import Path
 from typing import Any, Dict
 
 ROOT = Path(__file__).resolve().parents[2]
-BUNDLE_DIR = ROOT / "data/benchmarks/external_validation"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+BUNDLE_DIR = data_paths.EXTERNAL_VALIDATION_DIR
 
 # ===========================================================================
 # THE COMPLETED BUFFER RECORDS
@@ -298,7 +303,7 @@ BUFFER_RECORDS: Dict[str, Dict[str, Any]] = {
         provenance_note=(
             "Liu, Cadwallader & Drake -- thesis sec. 2.9 / Food Chemistry 406: "
             "134998, as carried in "
-            "data/protocols/external_validation/"
+            "data/benchmarks/external_validation/intake/"
             "external_validation_liu_2023_ppi_offnote_baseline.yaml "
             "(matrix_format): 'commercial pea protein rehydrated to 10% solids "
             "(w/w) in deionized water'. NO BUFFER. The slurry is never heated "
@@ -331,7 +336,7 @@ BUFFER_RECORDS: Dict[str, Dict[str, Any]] = {
             "question -- but that is a reason to record UNKNOWN, not a licence "
             "to record 'none'. The protocol's own note is explicit: 'The paper "
             "does not publish a final-blend pH or water-activity closure' "
-            "(data/protocols/external_validation/"
+            "(data/benchmarks/external_validation/intake/"
             "external_validation_li_2026_spi_wg_hme_control.yaml, "
             "benchmark_alignment.notes). "
             "ph_disagreement: the only pH in the whole record is 7.0 for the "

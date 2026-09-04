@@ -3,11 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
+from src import data_paths
+from src.artifact_io import load_json_mapping, resolve_optional_path
 
 
-DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT = repo_root() / "data" / "protocols" / "extrusion_external_closure_contract.json"
-PROCESS_STATE_CALIBRATIONS = repo_root() / "data" / "lit" / "process_state_calibrations.json"
+DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT = data_paths.EXTRUSION_EXTERNAL_CLOSURE_CONTRACT
+PROCESS_STATE_CALIBRATIONS = data_paths.PROCESS_STATE_CALIBRATIONS
 
 
 def load_extrusion_external_closure_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
@@ -79,7 +80,6 @@ def build_extrusion_external_closure_artifact(file_path: Optional[Path | str] = 
             "support_level": str(row.get("support_level", "unknown")),
             "source_kind": str(row.get("source_kind", "unknown")),
             "available_in_repo": available,
-            "validated_status": str(source_row.get("validated_status", "missing")) if available else "missing",
             "provenance_tier": str(source_row.get("provenance_tier", "missing")) if available else "missing",
             "what_it_supports": list(row.get("what_it_supports", [])),
             "why_not_sufficient": str(row.get("why_not_sufficient", "unknown")),

@@ -1,0 +1,89 @@
+experiment_id: pea_iso_ribose_cysteine_primary_external_package_template_2026
+source_kind: external_literature
+protein_type: pea_iso
+process_state: aqueous_pre_extrusion_model
+matrix_format: pea iso slurry with exogenous ribose and cysteine
+conditions:
+  temp_C: 95.0
+  ph: 5.5
+  water_activity: 0.95
+  time_min: 60.0
+denaturation_state: 0.5
+formulation:
+  precursors:
+    Pea Protein Isolate:
+      concentration_mM: 1000.0
+    D-Ribose:
+      concentration_mM: 1.0
+    L-Cysteine:
+      concentration_mM: 1.0
+comparison_contract:
+  observable_targets:
+  - name: 2-methyl-3-furanthiol
+    role: desirable_marker
+    expected_rank: 1
+    direction: higher
+  - name: 2-furfurylthiol
+    role: desirable_marker
+    expected_rank: 2
+    direction: higher
+  - name: bis(2-methyl-3-furyl) disulfide
+    role: desirable_marker
+    expected_rank: 3
+    direction: higher
+  - name: 2,5-dimethylpyrazine
+    role: desirable_marker
+    expected_rank: 4
+    direction: higher
+  - name: Hexanal
+    role: adverse_marker
+    expected_rank: 5
+    direction: lower
+  - name: Nonanal
+    role: adverse_marker
+    expected_rank: 6
+    direction: lower
+  adverse_markers:
+  - furfural
+  - Hexanal
+  - Nonanal
+  citation_provenance:
+  - Contract-lab or external wet-lab package generated from results/validation/primary_matrix_external_package.{md,json}.
+  notes: Fill measured_volatiles and provenance before passing this payload through
+    the matrix experiment intake path.
+measured_volatiles:
+  2-methyl-3-furanthiol:
+    conc_ppb: REPLACE_WITH_MEASURED_2_METHYL_3_FURANTHIOL_PPB
+    uncertainty_pct: REPLACE_WITH_MEASUREMENT_UNCERTAINTY_PCT
+  2-furfurylthiol:
+    conc_ppb: REPLACE_WITH_MEASURED_2_FURFURYLTHIOL_PPB
+    uncertainty_pct: REPLACE_WITH_MEASUREMENT_UNCERTAINTY_PCT
+  bis(2-methyl-3-furyl) disulfide:
+    conc_ppb: REPLACE_WITH_MEASURED_BIS(2_METHYL_3_FURYL)_DISULFIDE_PPB
+    uncertainty_pct: REPLACE_WITH_MEASUREMENT_UNCERTAINTY_PCT
+  2,5-dimethylpyrazine:
+    conc_ppb: REPLACE_WITH_MEASURED_25_DIMETHYLPYRAZINE_PPB
+    uncertainty_pct: REPLACE_WITH_MEASUREMENT_UNCERTAINTY_PCT
+  Hexanal:
+    conc_ppb: REPLACE_WITH_MEASURED_HEXANAL_PPB
+    uncertainty_pct: REPLACE_WITH_MEASUREMENT_UNCERTAINTY_PCT
+  Nonanal:
+    conc_ppb: REPLACE_WITH_MEASURED_NONANAL_PPB
+    uncertainty_pct: REPLACE_WITH_MEASUREMENT_UNCERTAINTY_PCT
+provenance:
+  origin: external_literature
+  source_reference: REPLACE_WITH_CONTRACT_LAB_OR_PUBLICATION
+  source_doi: REPLACE_WITH_DOI_IF_AVAILABLE
+  measurement_date: REPLACE_WITH_YYYY_MM_DD
+  notes: Populate with the real measured package before ingestion.
+analytical_context:
+  headspace_method: HS-SPME-GC-MS
+  quantification_mode: internal_standard_calibrated
+  replicates: 3
+  non_detect_policy: report_lod_and_do_not_backfill
+  internal_standards:
+  - thiol_specific_internal_standard
+  - hexanal-d12
+  - 13C3-acrylamide
+  notes: Template generated from the primary matrix external package. Replace all
+    placeholder values before use.

@@ -1,67 +1,53 @@
-"""Per-axis reliability tags, read from the directional-accuracy artifact.
+"""Per-axis reliability tags, read from the core's directional scorecard.
 
 WHY THIS MODULE EXISTS
 ----------------------
-2026-08-28 (Wave S5). The measured skill of this model is **ordinal**, not absolute: the
-hold-out medians are 6x on the free-precursor lane and 67-94x on the matrix lane, while the
-directional panel scores 24/35 on strictly independent claims (Wave W, 2026-08-28; was
-21/29). A user-facing interface that
-leads with a ppb number is therefore reporting the part of the model that was measured to be
-wrong. The comparative CLI leads with ratios instead -- and a ratio is only as good as the
-model's direction sense **on the axis the two arms differ along**, which the panel measures
-per category.
+The measured skill of this model is **ordinal**, not absolute: its absolute concentrations
+are mostly wrong out of sample, while its direction sense on a few axes is measured to beat
+a coin. A user-facing interface that leads with a ppb number is therefore reporting the part
+of the model that was measured to be wrong. The comparative CLI leads with ratios instead --
+and a ratio is only as good as the model's direction sense **on the axis the two arms differ
+along**, which the directional panel measures per category.
 
-So this module does exactly one thing: it turns
-``docs/validation/directional_accuracy_report.md`` -- specifically its CURRENT STANDING
-section, the one place in the repo that states the live per-category counts -- into
-``(agree, evaluable, verdict)`` triples, and works out which categories a given pair of
-formulation specs actually exercises.
+So this module does exactly one thing: it turns ``results/validation/core_directional_scores.json``
+(the artifact ``kinetic_core.directional.score_panel`` writes; step B7, 2026-09-03) into
+``(agree, evaluable, verdict)`` triples per axis, and works out which axes a given pair of
+formulation specs actually exercises. No count is typed here: when the panel is re-scored the
+artifact moves and every tag in the CLI and in the README model card moves with it.
 
-**Nothing here is a measurement.** It parses one and applies a threshold. If the panel is
-re-scored, edit the table in that report and every tag in the CLI and in the README model
-card moves with it; there is no second copy of the numbers to forget.
+**Nothing here is a measurement.** It reads one and applies a threshold.
 
 THE THRESHOLDS, AND WHY THEY SIT WHERE THEY DO
 ----------------------------------------------
-``trust``       >= 0.80 agreement on >= 3 evaluable claims.
+``trust``       >= 0.80 agreement on >= 3 evaluable claims AND the 95 % Wilson lower bound of
+                the rate above 0.50 (demonstrably better than a coin; added 2026-09-03).
 ``caution``     >= 0.60 agreement, or a rate at/above 0.80 on fewer than 3 claims (an axis
                 measured twice and right twice is encouraging, not established).
 ``do-not-use``  < 0.60 agreement.
 
 The 0.60 floor is not arbitrary and it is not tuned: most panel rows are binary orderings, so
-a coin scores ~0.50, and the report's own §2 says the model's edge over a coin is "real but
-modest". An axis that cannot clear 0.60 has not been shown to beat guessing on this evidence,
-and the report's §A6 says in terms that the model "licenses no pH or moisture recommendation".
-Under these thresholds ``moisture_aw`` (0/3) lands on ``do-not-use``.
-
-UPDATED 2026-08-28 (Wave W). ``ph`` was 4/7 = 0.571 and therefore ``do-not-use``. Two new
-independent pH rows from Mottram & Nobrega 2002 both AGREE, taking it to 6/9 = 0.667, which
-clears the 0.60 floor and moves the tag to ``caution``. THE THRESHOLD WAS NOT MOVED TO GET
-THIS -- the evidence moved. Read the change conservatively: 6/9 is two rows above the floor,
-both from one source, and the report's SS8/SSA6 licence still says the model "licenses no pH
-recommendation". ``caution`` here means "no longer demonstrably worse than a coin", not
-"trustworthy". The thresholds live here rather than in the report so that the report stays a
-record of measurement only.
+a coin scores ~0.50. An axis that cannot clear 0.60 has not been shown to beat guessing on
+this evidence. The thresholds live here rather than in the artifact so that the artifact
+stays a record of measurement only; they have not been moved since 2026-08-28. A verdict that
+changes because a refit moved the counts (B9 took pH on the sulfur lane to 4/5, ``trust`` at
+the boundary) is recorded in the tests as a re-pin, not hidden by moving a threshold.
 """
 
 from __future__ import annotations
 
+import json
+import math
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 
-ROOT = Path(__file__).resolve().parents[1]
+from src import data_paths
 
-#: The artifact this module reads. Its CURRENT STANDING section is the live panel score.
-DIRECTIONAL_REPORT_PATH = ROOT / "docs" / "validation" / "directional_accuracy_report.md"
-
-#: The panel data itself, used only to check that the categories we tag are categories the
-#: panel actually contains -- so a typo in an axis name is caught rather than silently
-#: reported as "unmeasured".
-DIRECTIONAL_PANEL_PATH = ROOT / "docs" / "validation" / "directional_claims_panel.yml"
-
-_CURRENT_STANDING_HEADING = "# CURRENT STANDING"
+#: The core's directional scorecard (step B7, 2026-09-03). The retired lane's markdown
+#: report at ``docs/validation/directional_accuracy_report.md`` is history and is not read.
+DIRECTIONAL_SCORES_PATH = data_paths.CORE_DIRECTIONAL_SCORES
+DIRECTIONAL_PANEL_PATH = data_paths.DIRECTIONAL_CLAIMS_PANEL
 
 TRUST_MIN_RATE = 0.80
 CAUTION_MIN_RATE = 0.60
@@ -121,46 +107,54 @@ SULFUR_COMPOUNDS = frozenset(
 )
 
 
-def _parse_count_tables(text: str) -> Dict[str, tuple]:
-    """Pull every ``| label | int | int |`` row out of a markdown blob."""
-    counts: Dict[str, tuple] = {}
-    row = re.compile(r"^\|\s*([^|]+?)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*$")
-    for line in text.splitlines():
-        match = row.match(line.strip())
-        if not match:
-            continue
-        label = match.group(1).strip().strip("*").strip()
-        if not label or label.lower() in {"category", "bucket"}:
-            continue
-        counts[label] = (int(match.group(2)), int(match.group(3)))
-    return counts
+def load_directional_artifact(path: Path | str = DIRECTIONAL_SCORES_PATH) -> Dict[str, Any]:
+    """The core's directional scorecard (``results/validation/core_directional_scores.json``).
 
-
-def load_panel_counts(report_path: Path | str = DIRECTIONAL_REPORT_PATH) -> Dict[str, tuple]:
-    """``{label: (agree, evaluable)}`` from the report's CURRENT STANDING section.
-
-    Raises rather than falling back to a baked-in default. A silent default here would be the
-    exact failure this repository has been removing all campaign: a number that keeps being
-    published after the evidence behind it stops being read.
+    Raises rather than falling back: a silent default here would republish a number after
+    the evidence behind it stopped being read. (Until 2026-09-03 this module parsed the
+    CURRENT STANDING table of the retired lane's markdown report; that report is history.)
     """
-    path = Path(report_path)
+    path = Path(path)
     if not path.exists():
         raise FileNotFoundError(
-            f"directional-accuracy report not found at {path}. The reliability tags are read "
-            "from its CURRENT STANDING section and there is no fallback copy of the numbers."
+            f"core directional scorecard not found at {path}. Regenerate it with "
+            "scripts/generators/generate_core_directional_scores.py; there is no fallback copy."
         )
-    text = path.read_text(encoding="utf-8")
-    index = text.find(_CURRENT_STANDING_HEADING)
-    if index < 0:
-        raise ValueError(
-            f"{path} has no '{_CURRENT_STANDING_HEADING}' section. That section is the only "
-            "place the live per-category panel counts are recorded; see its own "
-            "'How to update this table' subsection."
-        )
-    counts = _parse_count_tables(text[index:])
-    if not counts:
-        raise ValueError(f"{path}: CURRENT STANDING section contains no parseable count table.")
-    return counts
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{path}: not a JSON artifact ({exc})") from exc
+    if not isinstance(payload, dict) or payload.get("artifact") != "core_directional_scores":
+        raise ValueError(f"{path}: not a core_directional_scores artifact")
+    return payload
+
+
+def load_panel_counts(path: Path | str = DIRECTIONAL_SCORES_PATH) -> Dict[str, tuple]:
+    """``{category: (agree, evaluable)}`` over the STRICTLY INDEPENDENT claims."""
+    payload = load_directional_artifact(path)
+    table = payload["summary"]["independent"]["by_category"]
+    if not table:
+        raise ValueError(f"{path}: the independent split has no categories")
+    return {str(k): (int(v["agree"]), int(v["evaluable"])) for k, v in table.items()}
+
+
+def load_axis_notes(path: Path | str = DIRECTIONAL_SCORES_PATH) -> Dict[str, str]:
+    """One sentence per category, derived from the artifact rather than typed."""
+    payload = load_directional_artifact(path)
+    notes: Dict[str, str] = {}
+    for axis, bucket in payload["summary"]["independent"]["by_category"].items():
+        parts = []
+        if bucket["misses"]:
+            parts.append(f"misses: {', '.join(bucket['misses'])}")
+        if bucket.get("mechanism_absent"):
+            parts.append(
+                f"{bucket['mechanism_absent']} of them are identical predictions across the moved "
+                "axis (the lane carries no term for it)"
+            )
+        if bucket["not_evaluable"]:
+            parts.append(f"{bucket['not_evaluable']} claim(s) not evaluable on the core")
+        notes[str(axis)] = "; ".join(parts) if parts else "every evaluable independent claim agrees"
+    return notes
 
 
 def verdict_for(agree: int, evaluable: int) -> str:
@@ -170,47 +164,43 @@ def verdict_for(agree: int, evaluable: int) -> str:
     rate = agree / evaluable
     if rate < CAUTION_MIN_RATE:
         return VERDICT_DO_NOT_USE
-    if rate >= TRUST_MIN_RATE and evaluable >= MIN_EVALUABLE_FOR_TRUST:
+    if rate >= TRUST_MIN_RATE and evaluable >= MIN_EVALUABLE_FOR_TRUST and wilson_lower(agree, evaluable) > COIN:
         return VERDICT_TRUST
     return VERDICT_CAUTION
 
 
-_AXIS_NOTES = {
-    "ph": (
-        "pH is 6/10 on the panel and 6/13 combined with water activity -- BELOW chance when the "
-        "two axes are pooled, and EXACTLY ON the caution floor on its own: one more miss makes it "
-        "do-not-use (Wave X, 2026-08-28; was 6/9 and 6/12 at Wave W, and 4/7 and 4/10 before "
-        "that). The Wave X row is the sharpest of them: Hofmann's hydroxyacetaldehyde + "
-        "mercapto-2-propanone system, which has no amino acid and no sugar to confound it, "
-        "measures MFT rising 20x from pH 3 to pH 7 and the model predicts the IDENTICAL value at "
-        "pH 3, 5 and 7, because that lane carries no pH term at all. The model licenses no pH "
-        "recommendation."
-    ),
-    "moisture_aw": (
-        "Water activity is 0/3 and the miss is STRUCTURAL, not a wiring bug: HMF and furfural "
-        "share one reaction family, so they always carry the same aw factor, and the "
-        "projection budget has no moisture dependence at all."
-    ),
-    "temperature": (
-        "6/8 on the panel, but the free-precursor hold-out found acrylamide ~40x "
-        "under-responsive in time and the sulfur branch's temperature dependence BACKWARDS "
-        "between 100 and 130 C. Treat a temperature direction as a hypothesis."
-    ),
-    "lipid_lane": (
-        "2/2 on the panel, but on only two claims, and the matrix lane's absolute lipid "
-        "aldehydes carry the campaign's largest errors (up to ~94x). Direction only."
-    ),
-    "matrix_identity": (
-        "One evaluable claim. The pea-vs-soy question is genuinely open: binding physics and "
-        "one literature dataset disagree on the SIGN of the pea-vs-soy hexanal difference."
-    ),
-}
+#: 2026-09-03 (B9 took pH on the sulfur lane to 4/5 = 0.80 exactly). A point rate on five claims
+#: cannot distinguish the model from a coin: the 95 % Wilson lower bound of 4/5 is 0.38. ``trust``
+#: now also requires that lower bound to clear 0.50, i.e. the axis is demonstrably better than a
+#: coin at 95 %. 8/8 clears it (0.68), 7/7 does (0.65), 4/5 and 5/6 do not. This ADDS a condition
+#: to ``trust``; the 0.80 / 0.60 thresholds themselves were not moved.
+COIN = 0.50
+
+
+def wilson_lower(agree: int, evaluable: int, z: float = 1.959964) -> float:
+    """95 % Wilson score interval, lower bound; 0.0 when nothing was evaluable."""
+    if evaluable <= 0:
+        return 0.0
+    p = agree / evaluable
+    denom = 1.0 + z * z / evaluable
+    centre = p + z * z / (2.0 * evaluable)
+    half = z * math.sqrt(p * (1.0 - p) / evaluable + z * z / (4.0 * evaluable * evaluable))
+    return (centre - half) / denom
+
+
 
 
 def reliability_for_axis(
-    axis: str, counts: Optional[Mapping[str, tuple]] = None
+    axis: str,
+    counts: Optional[Mapping[str, tuple]] = None,
+    notes: Optional[Mapping[str, str]] = None,
 ) -> AxisReliability:
     table = dict(counts if counts is not None else load_panel_counts())
+    if notes is None:
+        try:
+            notes = load_axis_notes()
+        except (FileNotFoundError, ValueError):
+            notes = {}
     if axis not in table:
         return AxisReliability(
             axis=axis,
@@ -228,7 +218,7 @@ def reliability_for_axis(
         agree=agree,
         evaluable=evaluable,
         verdict=verdict_for(agree, evaluable),
-        note=_AXIS_NOTES.get(axis, ""),
+        note=dict(notes).get(axis, ""),
     )
 
 
@@ -336,8 +326,12 @@ def describe_comparison(
 ) -> Dict[str, Any]:
     """Full reliability picture for one A-vs-B comparison."""
     table = dict(counts if counts is not None else load_panel_counts())
+    try:
+        notes = load_axis_notes() if counts is None else {}
+    except (FileNotFoundError, ValueError):
+        notes = {}
     axes = axes_exercised(spec_a, spec_b)
-    reliabilities = [reliability_for_axis(axis, table) for axis in axes]
+    reliabilities = [reliability_for_axis(axis, table, notes) for axis in axes]
     governing = weakest(reliabilities)
     return {
         "axes": axes,

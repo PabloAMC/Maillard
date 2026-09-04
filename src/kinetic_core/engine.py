@@ -64,6 +64,8 @@ from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
+from src import data_paths
+
 from . import operative_parameters
 from .acrylamide import integrate_acrylamide
 from .integrate import integrate
@@ -89,8 +91,7 @@ from .sulfur import integrate_sulfur
 
 CELSIUS = 273.15
 
-_ROOT = Path(__file__).resolve().parents[2]
-_B1_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b1_fit_report.json"
+_B1_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b1_fit_report.json"
 #: THE SULFUR LANE'S FROZEN PARAMETERS -- and this is a CUTOVER, stated here
 #: rather than buried in a wave report. Build Wave B2.3 refits B2.2's own 48
 #: parameters on B2.2's own 58 FIT rows after a CONSERVATION FIX (see
@@ -114,15 +115,16 @@ _B1_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b1_fit_report.json"
 #: ships even where it scores worse, and where it scores worse the B8 hold-out
 #: report says so. (It does score worse on the hold-out panel: 12/32 -> 8/30.)
 _B2_FIT_REPORT_CANDIDATES = (
-    _ROOT / "results/validation/kinetic_core_b8_fit_report.json",
-    _ROOT / "results/validation/kinetic_core_b2_3_fit_report.json",
-    _ROOT / "results/validation/kinetic_core_b2_2_fit_report.json",
+    data_paths.VALIDATION_DIR / "kinetic_core_b9_fit_report.json",  # 2026-09-03: fit/validate split
+    data_paths.VALIDATION_DIR / "kinetic_core_b8_fit_report.json",
+    data_paths.VALIDATION_DIR / "kinetic_core_b2_3_fit_report.json",
+    data_paths.VALIDATION_DIR / "kinetic_core_b2_2_fit_report.json",
 )
 _B2_FIT_REPORT = next(
     (p for p in _B2_FIT_REPORT_CANDIDATES if p.exists()),
     _B2_FIT_REPORT_CANDIDATES[-1],
 )
-_B3_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b3_fit_report.json"
+_B3_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b3_fit_report.json"
 
 
 # ---------------------------------------------------------------------------
@@ -266,7 +268,7 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
         "alanine only on the acrylamide lane, which do not compose. Blank 1997 "
         "measures HEMF at 6.8-10.0 ug/mmol in pentose/alanine systems and at "
         "0.3-1.3 in pentose/glycine ones -- a 5.2-25x PREFERENCE, not a switch "
-        "(FIT_HOLDOUT_DECLARATION Amendment 12 corrected Amendment 8 on "
+        "(docs/reference/FIT_HOLDOUT_DECLARATION.md, amendment 12, which corrected amendment 8 on "
         "exactly this) -- so the compound is real, the route is understood, "
         "and the lane algebra is what refuses. Refused rather than answered "
         "with a DMHF number wearing a different name."
@@ -292,27 +294,27 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
     # they are still refused is sharper and different. A wave that un-refused
     # them would have invented two branch fractions.
     "1-hexanol": (
-        "The B6 lipid lane exists and forms the SIX products Frankel 1989 "
+        "The lipid lane exists and forms the SIX products Frankel 1989 "
         "measured, but 1-hexanol is not one of them and NO aldehyde-reduction "
         "step is measured anywhere in the corpus -- in a thermally processed "
-        "extrudate the reductant pool is not even identified. The FAST lane "
-        "emits a number for it; this lane refuses. See "
+        "extrudate the reductant pool is not even identified. The retired screening "
+        "lane emitted a number for it; this lane refuses. See "
         "parameters_lipid.PROHIBITED_DERIVATIONS."
     ),
     "2-pentylfuran": (
-        "The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
+        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
         "alkylfuran route is measured anywhere in the fit corpus. The FAST "
         "lane's shipped 0.08 has no source. Refused rather than invented."
     ),
     "2-pentyl furan": (
-        "The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
+        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
         "alkylfuran route is measured anywhere in the fit corpus. The FAST "
         "lane's shipped 0.08 has no source. Refused rather than invented."
     ),
     "propanal": (
-        "The B6 lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
+        "The lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
         "scission product; Frankel 1989 fed linoleate only, so the FIT column "
         "contains no propanal share, and Schroen's 7 % is a property of "
         "RAPESEED OIL's fatty-acid profile rather than a transferable branch "
@@ -729,6 +731,34 @@ def resolve_lane(
     return lanes[0], ()
 
 
+#: Warning tag the scorers look for (see :func:`unidentified_routes`).
+HEXOSE_ENTRY_UNIDENTIFIED = "HEXOSE ENTRY UNIDENTIFIED"
+#: Species keys of the sugars that reach the thiols only through the unidentified entry.
+_HEXOSE_KEYS = ("Glc", "Fru")
+#: Thiols whose only hexose route is that entry.
+_HEXOSE_ENTRY_TARGETS = ("MFT", "FFT")
+
+
+def unidentified_routes(
+    mapped_precursors: Mapping[str, float], mapped_targets: Mapping[str, str]
+) -> Tuple[str, ...]:
+    """Target KEYS (``MFT``/``FFT``) whose formation from this charge runs only through the
+    unidentified hexose entry: a hexose is charged, no pentose and no thiamine are, and
+    the target is a thiol. Empty for every other request."""
+    charged = {k for k, v in mapped_precursors.items() if float(v) > 0.0}
+    if not any(k in charged for k in _HEXOSE_KEYS) or "PENT" in charged or "THI" in charged:
+        return ()
+    return tuple(sorted({key for key in mapped_targets.values() if key in _HEXOSE_ENTRY_TARGETS}))
+
+
+def declared_unidentified(declaration: "EnvelopeDeclaration", compound: str) -> bool:
+    """Whether ``compound`` (a bundle target name) is one the declaration flagged as running
+    through the unidentified hexose entry."""
+    if not any(str(w).startswith(HEXOSE_ENTRY_UNIDENTIFIED) for w in declaration.warnings):
+        return False
+    return declaration.mapped_targets.get(str(compound)) in _HEXOSE_ENTRY_TARGETS
+
+
 def declare_envelope(
     spec: FormulationSpec, targets: Sequence[str]
 ) -> EnvelopeDeclaration:
@@ -820,6 +850,27 @@ def declare_envelope(
                 f"descriptor {spec.process.matrix!r} was used instead. Its "
                 f"lipid fraction and peroxide value are declared assumptions."
             )
+
+    # --- routes the primary evidence does not identify --------------------
+    # 2026-09-04 (after wave B9). Hexoses reach MFT and FFT only through the
+    # fragmentation entry r_glc_c2c3 / r_glc_fur, whose rate constants no
+    # step-level measurement in the corpus constrains; B9 (primary evidence
+    # only) put them at the floor of their declared bands. A number computed
+    # from a coordinate sitting on an arbitrary floor is not a prediction, so
+    # a hexose-only charge asked for a thiol gets the number AND a declaration
+    # that the scorers treat as NOT EVALUABLE. Thiamine has its own MFT route
+    # (Bolton 1994), so a charge that carries thiamine is not affected; a
+    # pentose charge is not affected because the intact-C5 route is fitted.
+    unidentified = unidentified_routes(mapped_precursors, mapped_targets)
+    if unidentified:
+        warnings.append(
+            f"{HEXOSE_ENTRY_UNIDENTIFIED} ({', '.join(sorted(unidentified))}): the only "
+            "route from a hexose to these thiols is the C2+C3 fragmentation entry, "
+            "whose rate constants no primary measurement identifies (the primary-evidence refit left them on "
+            "their band floor). The number below is a floor artefact, not a fit; the "
+            "scorecard and the envelope list this row as not evaluable, and the ordering "
+            "'pentose above hexose' is the structural claim the model does support."
+        )
 
     # --- lane ------------------------------------------------------------
     lanes, lane_reasons = resolve_lanes(
@@ -968,7 +1019,7 @@ def declare_envelope(
                 "at 160-200 C. This program runs at "
                 f"{spec.process.thermal.peak_temperature_c:.0f} C in an "
                 "aqueous or matrix system, so both the temperature and the "
-                "physical state are extrapolations. K5a sec. 6.2: that limb's "
+                "physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's "
                 "activation energy reproduces four independent ways in the "
                 "melt and COLLAPSES in all three real-matrix systems in the "
                 "corpus."
@@ -981,7 +1032,7 @@ def declare_envelope(
                 f"{HMF_SINK_NO_EXTRAPOLATION_ABOVE_K - CELSIUS:.0f} C rather "
                 "than extrapolated, and HMF self-degradation is a "
                 "single-temperature 0.9 %-per-7-days control carried with no "
-                "activation energy. K5a declared gap G2: the 50-150 C window "
+                "activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window "
                 "is empty. EXPECT HMF TO BE OVER-PREDICTED."
             )
             if peak_k > HMF_SINK_NO_EXTRAPOLATION_ABOVE_K and (
@@ -991,7 +1042,7 @@ def declare_envelope(
                     "5-HMF + cysteine: the sink constant is HELD at its 50 C "
                     "value for this whole program. Holding it UNDER-states the "
                     "sink; extrapolating it is a named prohibited derivation "
-                    "(K5a sec. 7.3), and the direction is stated rather than "
+                    "(furanic extraction dossier, sec. 7.3), and the direction is stated rather than "
                     "chosen for convenience."
                 )
         if "DMHF" in furanic_keys or "AF" in furanic_keys:
@@ -1049,13 +1100,29 @@ def declare_envelope(
 # ---------------------------------------------------------------------------
 
 
+#: Parsed fit reports keyed by (path, mtime_ns, size): one stat per call instead of one
+#: read + parse. 2026-09-03 (envelope cost): every predict re-read five reports from disk;
+#: inside the Docker bind mount six envelope workers serialised on the file-sharing layer
+#: and the pool gave no speed-up at all. A regenerated report (new mtime) is re-read.
+_REPORT_CACHE: Dict[Tuple[str, int, int], Dict[str, Any]] = {}
+
+
 def _read(path: Path) -> Dict[str, Any]:
-    if not path.exists():
+    try:
+        stat = path.stat()
+    except FileNotFoundError:
         raise SystemExit(
             f"{path} not found. The engine never fits anything; it reads the "
             f"frozen fit reports. Regenerate them first."
-        )
-    return json.loads(path.read_text())
+        ) from None
+    key = (str(path), stat.st_mtime_ns, stat.st_size)
+    cached = _REPORT_CACHE.get(key)
+    if cached is None:
+        cached = json.loads(path.read_text())
+        for stale in [k for k in _REPORT_CACHE if k[0] == key[0]]:
+            del _REPORT_CACHE[stale]  # one live version per path
+        _REPORT_CACHE[key] = cached
+    return cached
 
 
 def b1_fitted(variant: str = "variant_A_measured_sink") -> Dict[str, Tuple[float, float]]:
@@ -1088,32 +1155,77 @@ def core_ph_drift() -> PhDrift:
     )
 
 
-def core_parameters(lane: str) -> Dict[str, Any]:
-    """The full operative parameter set for one lane, from the frozen reports."""
-    if lane == TRUNK:
-        return dict(operative_parameters(b1_fitted()))
+_B7_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b7_fit_report.json"
+
+#: The B1 variant every lane inherits (B2.1 and B3 pin the identical four pairs).
+B1_VARIANT = "variant_A_measured_sink"
+
+
+def frozen_parameters(lane: str) -> Dict[str, Any]:
+    """
+    The FIT-REPORT-SPACE parameter vector one lane reads, as ONE dict.
+
+    Retirement step B2. The dict is shaped like the fit reports' own
+    ``frozen_parameters`` blocks, merged: the B1 variant block under its own
+    name (``variant_A_measured_sink``: ``{key: {k_ref_100C, ea_kj_mol}}``),
+    then the lane's own block (B8's ``log10_k_ref_at_145C`` /
+    ``lumped_formation_Ea_kJ_mol`` / ``decay_Ea_kJ_mol``, or B3's
+    ``log10_k_ref_at_160C`` / ``fitted_Ea_kJ_mol``), and B7's ``k_dpo_af``.
+    The keys are disjoint across reports, so one dict serves every lane.
+
+    A Monte-Carlo draw perturbs THIS dict and hands it to
+    :func:`core_parameters` -- so a draw moves the fit's own coordinates
+    (one shared lumped Ea stays one number; ``k_odg_af`` keeps following
+    ``k_dpo_af``; ``MEASURED_EA_OVERRIDES`` and ``NO_EA_KEYS`` are honoured
+    by ``with_fitted_sulfur`` exactly as in the fit) rather than editing
+    operative constants one by one.
+    """
+    if lane not in MAILLARD_LANES:
+        raise ValueError(
+            f"{lane!r} has no fit-report parameter vector; the lipid lane's "
+            "frozen state is a branch model (core_lipid_model)."
+        )
+    out: Dict[str, Any] = {
+        B1_VARIANT: {
+            key: {"k_ref_100C": float(v["k_ref_100C"]), "ea_kj_mol": float(v["ea_kj_mol"])}
+            for key, v in _read(_B1_FIT_REPORT)["frozen_parameters"][B1_VARIANT].items()
+        }
+    }
     if lane == SULFUR:
         frozen = _read(_B2_FIT_REPORT)["frozen_parameters"]
-        parameters = dict(operative_parameters(b1_fitted()))
-        parameters.update(MEASURED_SULFUR)
-        parameters.update(
-            with_fitted_sulfur(
-                frozen["log10_k_ref_at_145C"],
-                frozen["lumped_formation_Ea_kJ_mol"],
-                frozen["decay_Ea_kJ_mol"],
-            )
-        )
-        return parameters
+        out["log10_k_ref_at_145C"] = {
+            k: float(v) for k, v in frozen["log10_k_ref_at_145C"].items()
+        }
+        out["lumped_formation_Ea_kJ_mol"] = float(frozen["lumped_formation_Ea_kJ_mol"])
+        out["decay_Ea_kJ_mol"] = {
+            k: float(v) for k, v in (frozen.get("decay_Ea_kJ_mol") or {}).items()
+        }
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
-        parameters = dict(operative_parameters(b1_fitted()))
-        parameters.update(MEASURED_ACRYLAMIDE)
-        parameters.update(
-            with_fitted_acrylamide(
-                frozen["log10_k_ref_at_160C"], frozen["fitted_Ea_kJ_mol"]
-            )
-        )
-        return parameters
+        out["log10_k_ref_at_160C"] = {
+            k: float(v) for k, v in frozen["log10_k_ref_at_160C"].items()
+        }
+        out["fitted_Ea_kJ_mol"] = {
+            k: float(v) for k, v in frozen["fitted_Ea_kJ_mol"].items()
+        }
+    if _B7_FIT_REPORT.exists():
+        out["k_dpo_af"] = float(_read(_B7_FIT_REPORT)["frozen_parameters"]["k_dpo_af"])
+    return out
+
+
+def core_parameters(
+    lane: str, *, frozen: Optional[Mapping[str, Any]] = None
+) -> Dict[str, Any]:
+    """
+    The full operative parameter set for one lane, from the frozen reports.
+
+    ``frozen`` (retirement step B2) is a dict shaped like
+    :func:`frozen_parameters`; any block it carries REPLACES the report's, any
+    block it omits is read from the report. With ``frozen=None`` the result is
+    byte-identical to what this function returned before B2: the B1 pairs are
+    passed straight from the report to ``operative_parameters`` and no
+    furanic block is touched.
+    """
     if lane == LIPID:
         raise ValueError(
             "the lipid lane has no mass-action parameter dictionary: its "
@@ -1121,10 +1233,57 @@ def core_parameters(lane: str) -> Dict[str, Any]:
             "core_lipid_model() instead -- the distinction is the module's "
             "whole point."
         )
-    raise ValueError(f"unknown lane {lane!r}")
+    if lane not in MAILLARD_LANES:
+        raise ValueError(f"unknown lane {lane!r}")
+
+    override = dict(frozen or {})
+
+    if B1_VARIANT in override:
+        b1 = {
+            key: (float(v["k_ref_100C"]), float(v["ea_kj_mol"]))
+            for key, v in override[B1_VARIANT].items()
+        }
+    else:
+        b1 = b1_fitted()
+    parameters = dict(operative_parameters(b1))
+
+    if lane == SULFUR:
+        report = None
+        if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
+                "decay_Ea_kJ_mol"} <= set(override):
+            report = _read(_B2_FIT_REPORT)["frozen_parameters"]
+        pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
+        parameters.update(MEASURED_SULFUR)
+        parameters.update(
+            with_fitted_sulfur(
+                pick("log10_k_ref_at_145C"),
+                pick("lumped_formation_Ea_kJ_mol"),
+                pick("decay_Ea_kJ_mol"),
+            )
+        )
+    if lane == ACRYLAMIDE:
+        report = None
+        if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):
+            report = _read(_B3_FIT_REPORT)["frozen_parameters"]
+        pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
+        parameters.update(MEASURED_ACRYLAMIDE)
+        parameters.update(
+            with_fitted_acrylamide(
+                pick("log10_k_ref_at_160C"), pick("fitted_Ea_kJ_mol")
+            )
+        )
+    if "k_dpo_af" in override:
+        # Only an EXPLICIT override touches the furanic block: the frozen
+        # literal in parameters_furanic is asserted equal to the B7 report by
+        # a unit test, so the default path leaves it exactly as
+        # operative_parameters installed it.
+        from .parameters_furanic import with_fitted_furanic
+
+        parameters.update(with_fitted_furanic(float(override["k_dpo_af"])))
+    return parameters
 
 
-_B6_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b6_fit_report.json"
+_B6_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b6_fit_report.json"
 
 
 def core_lipid_model():
@@ -1153,6 +1312,44 @@ def core_lipid_model():
 # ---------------------------------------------------------------------------
 # The prediction
 # ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class CoreDraw:
+    """
+    ONE Monte-Carlo draw of everything the core lets a sampler move.
+
+    Retirement step B2. Every field is ``None`` by default, and a draw whose
+    fields are all ``None`` reproduces the deterministic prediction exactly;
+    that is asserted by a unit test, not assumed.
+
+    * ``maillard`` -- a FIT-REPORT-SPACE override, shaped like
+      :func:`frozen_parameters`, handed to :func:`core_parameters`. ``None``
+      means the frozen reports.
+    * ``q10`` -- the lipid lane's Q10 literal (declared band [2, 3]).
+    * ``lipid_fraction_scale`` / ``peroxide_scale`` -- multiplicative scales on
+      each carrier's declared lipid mass fraction and peroxide value (1.0 is
+      the declared centre; the result is clipped to the carrier's own band).
+    * ``furanone_partition_ea_kj_mol`` -- the offset on the furanone
+      PARTITION barrier (declared band +/-50 kJ/mol), applied through the same
+      helper the corner re-integration uses.
+    * ``ph_drift`` -- a ``PhDrift`` for the sulfur lane, or ``None`` for the
+      frozen calibration. A spec's own ``ph_drift`` wins over the draw's.
+    """
+
+    maillard: Optional[Mapping[str, Any]] = None
+    q10: Optional[float] = None
+    lipid_fraction_scale: Optional[float] = None
+    peroxide_scale: Optional[float] = None
+    furanone_partition_ea_kj_mol: Optional[float] = None
+    ph_drift: Optional[PhDrift] = None
+
+    @property
+    def is_centre(self) -> bool:
+        """True when every field is ``None`` -- the deterministic point."""
+        return all(
+            getattr(self, name) is None for name in self.__dataclass_fields__
+        )
 
 
 @dataclass(frozen=True)
@@ -1332,10 +1529,23 @@ class CorePrediction:
 
 
 def _run_lipid_lane(
-    spec: FormulationSpec, declaration: EnvelopeDeclaration
+    spec: FormulationSpec,
+    declaration: EnvelopeDeclaration,
+    *,
+    q10: Optional[float] = None,
+    lipid_scale: Optional[float] = None,
+    pv_scale: Optional[float] = None,
+    corners: bool = True,
 ) -> Tuple[Dict[str, float], Dict[str, Any], Dict[str, float]]:
     """
     Run the B6 lipid lane and size its interval BY RE-INTEGRATION.
+
+    B2: the three declared assumptions are ARGUMENTS. ``q10`` is the literal
+    (``None`` = the declared default), ``lipid_scale`` and ``pv_scale`` scale
+    each carrier's declared centre (``None`` = 1.0, and the scaled value is
+    clipped to the carrier's own declared band). ``corners=False`` skips the
+    two corner re-integrations -- a Monte-Carlo draw prices the bands by
+    sampling them and must not ALSO price them by re-integration.
 
     THE INTERVAL IS NOT A NOMINAL WIDTH. The lipid lane's absolute scale rests
     on three declared assumptions -- the Q10, the carrier's lipid fraction and
@@ -1356,33 +1566,43 @@ def _run_lipid_lane(
             f"{spec.name}: the lipid lane ran with no carrier", declaration
         )
 
-    def _run(q10, lipid_scale, pv_scale):
+    def _run(q10_value, lipid_of, pv_of):
         state: Dict[str, float] = {}
         runs = []
         for key in carrier_keys:
             carrier = LIPID_CARRIERS[key]
             charge = charge_from_carrier(
                 carrier, composition,
-                lipid_fraction=lipid_scale(carrier),
-                peroxide_value_meq_per_kg=pv_scale(carrier),
+                lipid_fraction=lipid_of(carrier),
+                peroxide_value_meq_per_kg=pv_of(carrier),
             )
-            run = integrate_lipid(charge, segments, branch, q10=q10)
+            run = integrate_lipid(charge, segments, branch, q10=q10_value)
             runs.append(run)
             for species_key, value in run.state_mmol_per_l.items():
                 state[species_key] = state.get(species_key, 0.0) + value
         return state, runs
 
+    def _scaled(centre, lo, hi, scale):
+        if scale is None:
+            return centre
+        return min(max(float(centre) * float(scale), float(lo)), float(hi))
+
     point, point_runs = _run(
-        None, lambda c: c.lipid_mass_fraction, lambda c: c.peroxide_value_meq_per_kg
+        q10,
+        lambda c: _scaled(c.lipid_mass_fraction, c.lipid_lo, c.lipid_hi, lipid_scale),
+        lambda c: _scaled(c.peroxide_value_meq_per_kg, c.pv_lo, c.pv_hi, pv_scale),
     )
-    low, _ = _run(Q10_ASSUMPTION.lo, lambda c: c.lipid_lo, lambda c: c.pv_lo)
-    high, _ = _run(Q10_ASSUMPTION.hi, lambda c: c.lipid_hi, lambda c: c.pv_hi)
 
     extra_decades: Dict[str, float] = {}
-    for key, value in point.items():
-        lo, hi = low.get(key, 0.0), high.get(key, 0.0)
-        if value > 0.0 and lo > 0.0 and hi > 0.0:
-            extra_decades[key] = 0.5 * abs(math.log10(hi / lo))
+    low: Dict[str, float] = {}
+    high: Dict[str, float] = {}
+    if corners:
+        low, _ = _run(Q10_ASSUMPTION.lo, lambda c: c.lipid_lo, lambda c: c.pv_lo)
+        high, _ = _run(Q10_ASSUMPTION.hi, lambda c: c.lipid_hi, lambda c: c.pv_hi)
+        for key, value in point.items():
+            lo, hi = low.get(key, 0.0), high.get(key, 0.0)
+            if value > 0.0 and lo > 0.0 and hi > 0.0:
+                extra_decades[key] = 0.5 * abs(math.log10(hi / lo))
 
     metadata = {
         "carriers": carrier_keys,
@@ -1401,6 +1621,15 @@ def _run_lipid_lane(
         "lower_corner_mmol_per_l": low,
         "upper_corner_mmol_per_l": high,
     }
+    if not corners:
+        metadata["interval_method"] = (
+            "corner re-integration SKIPPED (size_declared_bands=False): the "
+            "declared assumptions are being sampled by the caller."
+        )
+    if q10 is not None or lipid_scale is not None or pv_scale is not None:
+        metadata["draw"] = {
+            "q10": q10, "lipid_fraction_scale": lipid_scale, "peroxide_scale": pv_scale,
+        }
     return point, metadata, extra_decades
 
 
@@ -1440,10 +1669,15 @@ def _integrate_program(
     parameters: Mapping[str, Any],
     initial: Mapping[str, float],
     process: ProcessSpec,
+    *,
+    ph_drift: Optional[PhDrift] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """
     Integrate a piecewise-constant thermal program, chaining the state across
     segments, and return the FINAL state as ``{species_key: mmol/L}``.
+
+    ``ph_drift`` (B2) is consulted only when the process declares none: the
+    order is spec, then draw, then the frozen calibration.
     """
     state: Dict[str, float] = dict(initial)
     metadata: Dict[str, Any] = {"segments": [], "lane": lane}
@@ -1472,7 +1706,7 @@ def _integrate_program(
                 ),
                 ph_drift=(
                     process.ph_drift if process.ph_drift is not None
-                    else core_ph_drift()
+                    else (ph_drift if ph_drift is not None else core_ph_drift())
                 ),
                 rtol=1e-8,
                 atol=1e-14,
@@ -1526,6 +1760,8 @@ def predict(
     targets: Sequence[str],
     *,
     parameters: Optional[Mapping[str, Any]] = None,
+    draw: Optional[CoreDraw] = None,
+    size_declared_bands: bool = True,
 ) -> CorePrediction:
     """
     THE ENTRY POINT. Map ``spec`` onto a lane, integrate, emit B4 objects.
@@ -1534,7 +1770,20 @@ def predict(
     and NO concentrations. It does not raise here -- a caller scoring a panel
     needs to record the refusal alongside the answers -- but every accessor
     that would hand back a number raises instead.
+
+    B2. ``draw`` moves the sampled quantities (see :class:`CoreDraw`);
+    ``size_declared_bands=False`` skips the furanone-corner and lipid lo/hi
+    re-integrations, so a Monte-Carlo caller that samples those bands does
+    not ALSO price them by re-integration. ``parameters`` is still the raw
+    operative override and cannot be combined with ``draw.maillard``. With
+    the defaults the output is byte-identical to the pre-B2 engine.
     """
+    if parameters is not None and draw is not None and draw.maillard is not None:
+        raise ValueError(
+            "pass either an operative `parameters` override or a fit-report-"
+            "space `draw.maillard`, not both: they would silently shadow each "
+            "other."
+        )
     declaration = declare_envelope(spec, targets)
     if not declaration.is_answerable:
         return CorePrediction(spec=spec, declaration=declaration)
@@ -1548,10 +1797,18 @@ def predict(
     if maillard_lane is not None:
         operative = (
             dict(parameters) if parameters is not None
-            else core_parameters(maillard_lane)
+            else core_parameters(
+                maillard_lane,
+                frozen=draw.maillard if draw is not None else None,
+            )
         )
+        if draw is not None and draw.furanone_partition_ea_kj_mol is not None:
+            operative = _furanone_corner_parameters(
+                operative, float(draw.furanone_partition_ea_kj_mol)
+            )
         final_state, metadata = _integrate_program(
-            maillard_lane, operative, dict(declaration.mapped_precursors), spec.process
+            maillard_lane, operative, dict(declaration.mapped_precursors), spec.process,
+            ph_drift=draw.ph_drift if draw is not None else None,
         )
         metadata["lanes"] = list(lanes)
 
@@ -1561,7 +1818,7 @@ def predict(
     # alone would suggest, because the deoxyosone POOL that feeds the edge is
     # itself depleting -- which a nominal width could not have shown.
     furanic_decades: Dict[str, float] = {}
-    if maillard_lane is not None and (
+    if size_declared_bands and maillard_lane is not None and (
         set(declaration.mapped_targets.values()) & set(FURANONE_BANDED_KEYS)
     ):
         from .parameters_furanic import FURANONE_PARTITION_EA_BAND_KJ_MOL
@@ -1588,7 +1845,13 @@ def predict(
 
     extra_decades: Dict[str, float] = {}
     if LIPID in lanes:
-        lipid_state, lipid_metadata, extra_decades = _run_lipid_lane(spec, declaration)
+        lipid_state, lipid_metadata, extra_decades = _run_lipid_lane(
+            spec, declaration,
+            q10=draw.q10 if draw is not None else None,
+            lipid_scale=draw.lipid_fraction_scale if draw is not None else None,
+            pv_scale=draw.peroxide_scale if draw is not None else None,
+            corners=size_declared_bands,
+        )
         overlap = set(lipid_state) & set(final_state)
         if overlap:
             raise AssertionError(
@@ -1630,6 +1893,17 @@ def predict(
     )
     metadata["matrix"] = spec.process.matrix
     metadata["thermal_program"] = spec.process.thermal.describe()
+    if draw is not None and not draw.is_centre:
+        metadata["draw"] = {
+            "maillard_override_blocks": sorted(draw.maillard or {}),
+            "q10": draw.q10,
+            "lipid_fraction_scale": draw.lipid_fraction_scale,
+            "peroxide_scale": draw.peroxide_scale,
+            "furanone_partition_ea_kj_mol": draw.furanone_partition_ea_kj_mol,
+            "ph_drift": draw.ph_drift.as_dict() if draw.ph_drift is not None else None,
+        }
+    if not size_declared_bands:
+        metadata["declared_bands_sized"] = False
     # B6: the declared-assumption band, re-keyed from species key to the
     # caller's own compound name so ``absolutes()`` can find it.
     if extra_decades:
@@ -1657,6 +1931,47 @@ def predict(
 # ---------------------------------------------------------------------------
 # The comparative surface -- the layer's PRIMARY output
 # ---------------------------------------------------------------------------
+
+
+#: Lanes whose parameters carry NO pH term (declared in their parameter modules).
+NO_PH_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE, LIPID})
+
+
+def _lanes_of(declaration) -> Tuple[str, ...]:
+    lanes = getattr(declaration, "lanes", None)
+    if lanes:
+        return tuple(str(x) for x in lanes)
+    return (str(declaration.lane),) if declaration.lane else ()
+
+
+def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
+    """
+    2026-09-03 (owner decision, step 5): a comparison that moves an axis the resolved
+    lane carries no term for is REFUSED, not answered with two identical numbers.
+
+    * water activity differs between the arms: NO lane carries an a_w term.
+    * pH differs and every resolved lane is trunk / acrylamide / lipid: those lanes are
+      homogeneous in pH by declaration; only the sulfur lane carries a pH trajectory.
+
+    Returns the refusal reason, or None when the comparison is answerable.
+    """
+    pa, pb = spec_a.process, spec_b.process
+    aw_a, aw_b = pa.water_activity, pb.water_activity
+    if aw_a is not None and aw_b is not None and abs(float(aw_a) - float(aw_b)) > 1e-9:
+        return (
+            "REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w "
+            "term; the model would return identical arms and call it a comparison. "
+            "Hold a_w fixed, or bring a measurement."
+        )
+    if abs(float(pa.ph) - float(pb.ph)) > 1e-9:
+        lanes = set(_lanes_of(declaration_a)) | set(_lanes_of(declaration_b))
+        if lanes and lanes <= NO_PH_TERM_LANES:
+            return (
+                f"REFUSED -- the two arms differ in pH and the resolved lane(s) "
+                f"({', '.join(sorted(lanes))}) carry NO pH term by declaration; the model would "
+                "return identical arms. Only the sulfur lane carries a pH trajectory."
+            )
+    return None
 
 
 def compare(
@@ -1696,6 +2011,15 @@ def compare(
                 "refusal is not a ratio."
             ),
         }
+    refusal = axis_refusal(spec_a, spec_b, run_a.declaration, run_b.declaration)
+    if refusal is not None:
+        return {
+            "comparable": False,
+            "declaration_a": run_a.declaration.as_dict(),
+            "declaration_b": run_b.declaration.as_dict(),
+            "reason": refusal,
+            "axis_refusal": True,
+        }
 
     shared = sorted(
         set(run_a.concentrations_ug_per_l) & set(run_b.concentrations_ug_per_l)
@@ -1706,6 +2030,26 @@ def compare(
         label_a=spec_a.name,
         label_b=spec_b.name,
     )
+    # 2026-09-04: a row whose formation in either arm runs through an UNIDENTIFIED route
+    # (declared on the arm, see unidentified_routes) is not a ratio between two predictions
+    # but between a prediction and a band-floor artefact. It is reported as undefined, with the
+    # arm named, so that "1e13x higher in the pentose arm" never reaches a table.
+    for row in payload.get("rows", []):
+        arms = [label for label, decl in (("a", run_a.declaration), ("b", run_b.declaration))
+                if declared_unidentified(decl, str(row["compound"]))]
+        if arms:
+            row["ratio_a_over_b"] = None
+            row["direction"] = "undefined"
+            row["within_reliability_band"] = False
+            row["unidentified_arm"] = arms[0] if len(arms) == 1 else "both"
+            row["note"] = (
+                f"arm {row['unidentified_arm'].upper()}: {HEXOSE_ENTRY_UNIDENTIFIED} -- its number is a "
+                "band-floor artefact, so no ratio is claimed; the model supports the ordering "
+                "'pentose above hexose' structurally, not a magnitude"
+            )
+    rows_ = payload.get("rows", [])
+    payload["n_undefined"] = sum(1 for r in rows_ if r.get("direction") == "undefined")
+    payload["n_resolved"] = sum(1 for r in rows_ if r.get("direction") != "undefined" and not r.get("within_reliability_band"))
     return {
         "comparable": True,
         "ratios": payload,
@@ -1743,6 +2087,15 @@ def residual_report(
     }
 
 
+def fit_report_paths() -> Tuple[Path, ...]:
+    """The frozen fit reports this engine reads, in lane order (B1, sulfur wave, B3, B6, B7).
+
+    The scorecard, the envelope and the directional artifact list exactly these as their
+    provenance inputs; a report on disk the engine does not read is not a parameter source.
+    """
+    return (_B1_FIT_REPORT, _B2_FIT_REPORT, _B3_FIT_REPORT, _B6_FIT_REPORT, _B7_FIT_REPORT)
+
+
 def engine_metadata() -> Dict[str, Any]:
     """
     What this engine is, for embedding in every artifact it produces.
@@ -1762,7 +2115,7 @@ def engine_metadata() -> Dict[str, Any]:
 
     return {
         "module": "src/kinetic_core/engine.py",
-        "wave": "B7 -- furanic channels (HMF, DMHF); propagator cutover at B5",
+        "wave": "furanic channels (HMF, DMHF), fit wave B7",
         "lanes": list(LANES),
         "lane_networks": {
             TRUNK: f"REACTIONS ({len(REACTIONS)} steps), no pH term, no a_w term",
@@ -1775,7 +2128,7 @@ def engine_metadata() -> Dict[str, Any]:
                 "steps) = trunk + acrylamide; sulfur STEPS deliberately absent"
             ),
             LIPID: (
-                "B6: a hydroperoxide pool resolved by position (9-/13-) and "
+                "a hydroperoxide pool resolved by position (9-/13-) and "
                 "geometry (cis,trans / trans,trans), decomposing first-order "
                 "into Frankel 1989's six-product measured slate. The "
                 "DISTRIBUTION is fitted and frozen; the RATE is a declared, "
@@ -1788,7 +2141,7 @@ def engine_metadata() -> Dict[str, Any]:
             "why": (
                 "disjoint species sets, and the only candidate coupling (the "
                 "aldehyde-lysine covalent channel) is INERT BY RULING "
-                "(FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2). Checked at "
+                "(docs/reference/FIT_HOLDOUT_DECLARATION.md, amendment 6, ruling 2). Checked at "
                 "every call by lipid.lane_coupling_verdict, not hard-coded."
             ),
             "condition": (
@@ -1798,9 +2151,9 @@ def engine_metadata() -> Dict[str, Any]:
         },
         "lipid_rate_is_an_assumption": True,
         "parameters_from": [
-            str(_B1_FIT_REPORT.relative_to(_ROOT)),
-            str(_B2_FIT_REPORT.relative_to(_ROOT)),
-            str(_B3_FIT_REPORT.relative_to(_ROOT)),
+            data_paths.rel(_B1_FIT_REPORT),
+            data_paths.rel(_B2_FIT_REPORT),
+            data_paths.rel(_B3_FIT_REPORT),
         ],
         "fits_anything": False,
         "network_ph": NETWORK_PH,
@@ -1815,6 +2168,7 @@ __all__ = [
     "MAILLARD_LANES",
     "core_lipid_model",
     "resolve_lanes",
+    "CoreDraw",
     "CorePrediction",
     "EnvelopeDeclaration",
     "FormulationSpec",
@@ -1826,12 +2180,15 @@ __all__ = [
     "ProcessSpec",
     "SULFUR",
     "TARGET_ALIASES",
+    "axis_refusal",
+    "NO_PH_TERM_LANES",
     "TRUNK",
     "ThermalProgram",
     "UNREPRESENTED_COMPOUNDS",
     "b1_fitted",
     "compare",
     "core_parameters",
+    "frozen_parameters",
     "declare_envelope",
     "engine_metadata",
     "predict",

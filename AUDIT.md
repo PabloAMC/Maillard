@@ -5,6 +5,17 @@ remediation of this repository. The machine-readable ledger is
 [tasks/audit_remediation.md](tasks/audit_remediation.md); the evidence artifacts it cites
 are tracked under [results/validation/](results/validation/).*
 
+> **Status, 2026-09-03 (retirement step B5).** The engine this audit examined — the SMIRKS
+> rule-enumeration screening lane with its fitted volatile budget, its validation harness
+> (`src/benchmark_validation.py`), its Monte-Carlo sampler and its matrix/headspace layer — has
+> been **deleted**. The kinetic core (`src/kinetic_core/`) is the only engine, scored on its own
+> (`results/validation/core_panel_scores.md`, `core_prediction_uncertainty.md`; pinned by
+> `tests/scientific/test_core_headline_guards.py`). Every number quoted below was produced by the
+> retired lane and is kept as the record of what that lane claimed; its artifacts are archived
+> under `results/legacy_lane/` and its README under `docs/history/`. The findings about
+> *process* — circular validation, fabricated citations, fit-then-score — are the reason the
+> core carries a pre-registration per fit wave, a fit-target ledger and five CI gates.
+
 ## Why this document exists
 
 This codebase was built with heavy LLM assistance. In August 2026 the owner commissioned
@@ -93,6 +104,7 @@ These are worse than the numbers this repository advertised a week ago. They are
 | Benchmarks without blocking gaps | **0/14 predictive** (+ **0/5** fit-recovery, 4/4 synthetic; the **4/23** aggregate is all non-evidence). *(2026-08-28, Wave X: predictive 0/9 -> 0/14 and fit-recovery 0/4 -> 0/5. Five of the six new step-level rows are predictive and all five FAIL; the sixth is a declared fit target and moves to fit-recovery automatically. Moving a row into fit-recovery normally flatters the headline by shrinking the predictive denominator — it does not here: the denominator grew by five, the numerator stayed at zero, and the excluded row is itself a 2.3x miss.)* *(2026-08-28, Wave W: predictive 0/6 -> 0/9. All three new Hofmann anchors are predictive and all three FAIL — 12.27x, 29.58x, 14.46x worst-ratio. The headline denominator grew by 50% and the numerator stayed at zero.)* Fit-recovery fell 3/4 -> 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering. Wave O then refitted their constants onto the verified values and they recover again — at `pass-no-ranking`, which is not `pass`, so none of those counts moved. A refit changes the size of a recovery, never its evidential status. |
 | External hold-out | **1/5 genuine extrapolations** at the pre-widening prior — and 1/5 under the wider one too since Wave O; median fold error **93.68×**, worst **2474×**, coverage **3/8** at the shipped sigma. Only 4 of the 8 points are measurements at all. The median was 32.79× until Round 3 corrected two wrong table rows in the Li 2026 bundle (→ 15.31×, predictions unmoved), rose to 42.62× when Wave O refitted the ambient hexanal observability onto the paper's verified anchor, and rose again to 93.68× when Wave R found the Liu hold-out's two reference values matched nothing in their source and replaced them with the thesis's own Table 2.7. **Every rise came from correcting data toward the literature, and predictions moved in none of them**; see Round 3, Wave O and Wave R. |
 | Strict-ready benchmarks | **0/23** *(2026-08-28, Wave X: 0/17 -> 0/23. The six step-level rows are not strict-ready either. They are predicted BETTER than the end-to-end rows — 0.518 dex against 0.952 — and still nowhere near the +/-10% replicate contract their own source's footnote sets)* *(0/14 before Wave W; the three Wave W literature anchors are not strict-ready either — they fail their contracts by 12-30x)* |
+| Kinetic core, scored on its own *(2026-09-03, retirement B3; the lane that replaces the one above)* | 37 bundles / 39 rows (2026-09-04: three sourceless bundles quarantined and one deleted after its paper was read, eight hexose-only thiol rows declared NOT EVALUABLE by the engine's unidentified-entry rule): **4/39 within 3x**, out-of-sample **3/38**; envelope **6/32** evaluable literature rows inside the 90% CI, **6/31** out of sample (10/44 before the quantification classes were declared on 2026-09-03; one band-only interval is now not evaluable) (the B9 Laplace covariance, 20/23 identified, samples the sulfur lane; 5 rows not evaluable); **strict-ready 0/37** (`thiamine_cys_glucose_120C_Bolton1994` passed on assumed loadings; read in full on 2026-09-04 the core overpredicts its MFT 20x). Since wave B9 (2026-09-03) the sulfur fit reads primary evidence only: 6 panel rows over 6 step-level bundles, declared in `kinetic_core_b9_fit_targets.json`; the Hofmann 1998 level rows (ribose, xylose, glucose, fructose) are validation, and the xylose bundle is back on the hold-out panel. Without those rows the core predicts zero MFT from glucose and fructose. `results/validation/core_panel_scores.md`, `core_prediction_uncertainty.md` |
 | Reaction-chemistry lanes with generative templates | 5/16 (derived by enumeration, test-pinned) |
 | Test suite | **1274 passed, 1 skipped, 2 xfailed, 0 failed** (2026-08-27, after Wave S1; 1265 after Wave P, 1242 after Round 3). The dvipng failure carried as "environmental" for the whole audit is **gone**: `--report` now degrades to mathtext instead of raising |
 | Citation gate | **0 dead DOIs as of the 2026-08-26 and 2026-08-27 sweeps; 0 waivers.** The blocking gate is **structural and offline** — DOI grammar, confabulation signatures, status coherence, repair-record completeness. It cannot detect a live DOI that resolves to the wrong paper, which is exactly how the two PMC9905368 benchmarks survived every previous check. Liveness is a **scheduled weekly sample**, advisory, not part of the required set. |
@@ -1430,6 +1442,20 @@ propagation, and a value-of-information loop that converts every model failure i
 ranked wet-lab request — together with a documented map of the kinetic measurements the
 field does not have. It is not a validated quantitative predictor, and its reports say so
 on every surface.
+
+## Cleaning branch, 2026-09-01/02 — what moved and why (dated addendum)
+
+Numbers above are as of their own dates. The cleaning branch (Phases 0–4a, plus the owner's
+round-2 decisions) changed the following, each as a deletion or a relabelling, never a
+verification: the QM/DFT lane and `data/qm/` (census 120 → 102); the mocked
+`protein_source_registry.json` withdrawn with its code (102 → 87; no default-run output
+moved); the two `*_ProtocolPilot2026` benchmark files, byte-identical twins of the
+`*_Internal2026` synthetic snapshots, deleted together with the hexanal/nonanal "closure"
+lane that compared the twins (panel 23 → 21; MC panel 20 → 18 benchmarks, 47 → 35 rows;
+`honest_literature_coverage` 4/13 unchanged; evidence-role split 14/5/4 → 14/5/2);
+`uncertainty_posture` / `validated_status` labels dropped (read by nothing); the two
+literature ledgers moved to `results/literature/`; `data/Gemini_Deep_Research` renamed
+`data/research_corpus`. The record of each step is `tasks/data_restructure_plan.md`.
 
 ## Open items
 

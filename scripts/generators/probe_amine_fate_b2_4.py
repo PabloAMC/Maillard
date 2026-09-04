@@ -68,6 +68,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 
 import generate_kinetic_core_b2_3_fit as F  # noqa: E402
+from src import data_paths  # noqa: E402
 from src.kinetic_core import ph_state as PH  # noqa: E402
 from src.kinetic_core import sulfur as S  # noqa: E402
 
@@ -134,7 +135,7 @@ def _patched_inventory(mode: str, initial_amine_mmol: float):
 
 def run_probe() -> Dict[str, Any]:
     report = json.loads(
-        (ROOT / "results/validation/kinetic_core_b2_2_fit_report.json").read_text())
+        (data_paths.VALIDATION_DIR / "kinetic_core_b2_2_fit_report.json").read_text())
     fz = report["frozen_parameters"]
     x = np.array(
         [fz["log10_k_ref_at_145C"][k] for k in F.PARAM_ORDER]
@@ -275,7 +276,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     args = parser.parse_args(argv)

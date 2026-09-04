@@ -34,27 +34,21 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_access, data_paths  # noqa: E402
 from src.comparative_cli import (  # noqa: E402
     SPEC_TEMPLATE,
     SpecError,
     compare_core,
-    compare_systems,
     envelope_error_text,
-    evaluate_system,
     load_spec_document,
     predict_core,
-    predict_system,
     render_compare_core_text,
-    render_compare_text,
     render_predict_core_text,
-    render_predict_text,
     render_rank_text,
-    screening_payload,
     select_system,
     split_comparison_document,
     to_json,
 )
-from src.config import DEFAULTS  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Help text, written for a bench scientist (Build Wave V1)
@@ -141,30 +135,58 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
         default=None,
         help="show only the N largest rows (the table only; the report is complete)",
     )
-    parser.add_argument(
-        "--target-tag",
-        default=DEFAULTS.default_target_tag,
-        help="FAST lane only: which sensory tag counts as the thing you want more of",
+
+
+def _directional_summary():
+    """The tracked directional scorecard's summary, or None when it is not generated."""
+    try:
+        return data_access.load_json(data_paths.CORE_DIRECTIONAL_SCORES)["summary"]
+    except Exception:  # noqa: BLE001 - the CLI must still print its help without artifacts
+        return None
+
+
+def _headline_lines() -> str:
+    """The measured ordinal skill, READ from the artifacts (never typed into this file)."""
+    summary = _directional_summary()
+    try:
+        oos = data_access.load_json(data_paths.CORE_PANEL_SCORES)["summary"]["out_of_sample"]
+        absolute = f"Out of sample {oos['within_band']} of {oos['rows']} absolute rows land within 3x;"
+    except Exception:  # noqa: BLE001
+        absolute = "Out of sample its absolute concentrations are mostly wrong;"
+    if summary is None:
+        return absolute + "\nthe directional scorecard is not generated (core-directional).\n"
+    agree, evaluable = summary["headline"]
+    excl = summary["independent"]["excluding_ph_aw"]
+    return (
+        f"{absolute}\nits directional and ranking claims score {agree}/{evaluable} on strictly\n"
+        f"independent claims, {excl['agree']}/{excl['evaluable']} once pH and water activity are set aside.\n"
     )
-    parser.add_argument(
-        "--minimize-tag",
-        default=DEFAULTS.default_minimize_tag,
-        help="FAST lane only: which sensory tag counts as the thing you want less of",
-    )
-    parser.add_argument(
-        "--lane",
-        choices=("core", "fast"),
-        default="core",
-        help=(
-            "core (default): the mass-action kinetic core. Integrates a real "
-            "reaction network, reports absolute ug/L WITH its measured interval, "
-            "and REFUSES -- with a named reason and no number -- anything it "
-            "cannot represent. "
-            "fast: the ORDINAL SCREENING lane. Rankings only; its absolute ppb "
-            "are withheld from every user-facing surface because its measured "
-            "skill is ordinal, not quantitative."
-        ),
-    )
+
+
+def _axis_note(axis: str) -> str:
+    summary = _directional_summary()
+    if summary is None:
+        return ""
+    bucket = summary["independent"].get("by_category", {}).get(axis)
+    if not bucket:
+        return ""
+    return f", scored {bucket['agree']}/{bucket['evaluable']} on the directional panel"
+
+
+def run_wishlist(args: argparse.Namespace) -> int:
+    """Print the tracked data wishlist (results/validation/data_wishlist.md), or its JSON."""
+    md_path = data_paths.DATA_WISHLIST.with_suffix(".md")
+    if not data_paths.DATA_WISHLIST.exists() or not md_path.exists():
+        print(
+            "The data wishlist is not generated. Run: ./scripts/docker_maillard.sh wishlist "
+            "(or python scripts/generators/generate_data_wishlist.py).", file=sys.stderr,
+        )
+        return 2
+    if getattr(args, "json", False):
+        print(data_paths.DATA_WISHLIST.read_text(encoding="utf-8"))
+    else:
+        print(md_path.read_text(encoding="utf-8"))
+    return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -175,18 +197,19 @@ def build_parser() -> argparse.ArgumentParser:
             "Predict aroma-compound formation in a Maillard / lipid-oxidation\n"
             "system, and -- more usefully -- COMPARE two systems.\n"
             "\n"
-            "READ THIS FIRST. This model's measured skill is ORDINAL. Out of sample\n"
-            "its absolute concentrations are wrong by 6x-94x; its directional and\n"
-            "ranking claims score 24/36 on strictly independent claims, and 18/23\n"
-            "once pH and water activity are set aside. So: compare two formulations\n"
-            "and read the RATIO. Never quote an absolute number as a specification.\n"
-            "Treat any pH or moisture direction as unsupported.\n"
+            "READ THIS FIRST. This model's measured skill is ORDINAL, and modest.\n"
+            + _headline_lines() +
+            "So: compare two formulations and read the RATIO. Never quote an absolute\n"
+            "number as a specification. Read the per-axis reliability tags: water\n"
+            "activity is refused, pH is answered on the sulfur lane only.\n"
             "\n"
-            "Four verbs:\n"
+            "Six verbs:\n"
             "  compare           two formulations in, per-compound A/B ratios out\n"
             "  predict           one formulation, with intervals and its caveats inline\n"
             "  explain           where a compound comes from in the model, and on what evidence\n"
-            "  rank-experiments  which measurement would most reduce the model's error"
+            "  score             score YOUR measured concentrations against the model\n"
+            "  rank              which measurement would most reduce the model's error (alias: rank-experiments)\n"
+            "  wishlist          what to measure next and what it would unlock, from the tracked artifacts"
         ),
         epilog=_SPEC_FIELDS,
     )
@@ -215,12 +238,11 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=(
             "WORKED EXAMPLE -- does swapping ribose for glucose buy you more meaty thiol?\n"
             "\n"
-            "  python scripts/maillard.py compare data/cli_examples/compare_ribose_vs_glucose.yml \\\n"
+            "  python scripts/maillard.py compare docs/examples/compare_ribose_vs_glucose.yml \\\n"
             "      --report /tmp/ribose_vs_glucose.html\n"
             "\n"
             "Both arms are 10 mM cysteine + 10 mM sugar, 140 C, 30 min, pH 5.0. The only\n"
-            "axis that moves is sugar identity, which is the panel's strongest axis "
-            "(9/11).\n"
+            "axis that moves is sugar identity" + _axis_note("sugar_identity") + ".\n"
             "You will see a table of A/B ratios per compound, each tagged resolved or NOT\n"
             "RESOLVED, and -- with --report -- an HTML page with the OAV chart, the "
             "refusals\nand every declared assumption the run used.\n"
@@ -231,12 +253,6 @@ def build_parser() -> argparse.ArgumentParser:
         "spec",
         nargs="*",
         help="one two-arm spec file (top-level 'a:' and 'b:'), or two single-system spec files",
-    )
-    compare.add_argument(
-        "--absolute",
-        action="store_true",
-        help="FAST lane only, and refused there: the core lane already reports absolutes "
-             "with their envelope declaration",
     )
     compare.add_argument(
         "--template", action="store_true", help="print a ready-to-edit two-arm spec and exit"
@@ -268,7 +284,7 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=(
             "WORKED EXAMPLE -- what does a cysteine/ribose reaction flavour actually smell of?\n"
             "\n"
-            "  python scripts/maillard.py predict data/cli_examples/compare_ribose_vs_glucose.yml \\\n"
+            "  python scripts/maillard.py predict docs/examples/compare_ribose_vs_glucose.yml \\\n"
             "      --system a --report /tmp/cys_ribose.html\n"
             "\n"
             "10 mM L-cysteine + 10 mM D-ribose, 140 C, 30 min, pH 5.0, aqueous. The core\n"
@@ -325,8 +341,27 @@ def build_parser() -> argparse.ArgumentParser:
     )
     explain.add_argument("--json", action="store_true", help="emit the payload instead of the text")
 
+    score = verbs.add_parser(
+        "score",
+        help="score YOUR measured concentrations against the core (bring your own data)",
+        description=(
+            "Score one or more of your own measured systems the way the panel scorecard scores a\n"
+            "benchmark: fold error, the 3x band, the reliability interval, and a named refusal for\n"
+            "any compound the core cannot represent. Writes a bundle-shaped record per system under\n"
+            "results/user/ (never under data/) that a future fit wave can read. This is scoring,\n"
+            "not calibration: nothing is refitted."
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    score.add_argument("spec", nargs="?", help="a measurement document (YAML or JSON); see --template")
+    score.add_argument("--template", action="store_true", help="print an example document and exit")
+    score.add_argument("--json", action="store_true", help="emit the payload instead of the table")
+    score.add_argument("--out", default=None, help="directory for the records (default results/user/)")
+    score.add_argument("--no-write", action="store_true", help="score only; write no record")
+
     rank = verbs.add_parser(
         "rank-experiments",
+        aliases=["rank"],
         formatter_class=argparse.RawDescriptionHelpFormatter,
         help="rank the measurements that would most reduce the model's error",
         description=(
@@ -345,7 +380,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  python scripts/maillard.py rank-experiments --top 3\n"
             "\n"
             "If it exits saying the panel is absent, generate it first:\n"
-            "  python scripts/generators/generate_prediction_uncertainty.py --n-samples 200 --seed 0\n"
+            "  ./scripts/docker_maillard.sh core-envelope\n"
         ),
     )
     rank.add_argument("--top", type=int, default=10, help="how many candidates to show")
@@ -364,6 +399,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="also write results/validation/experiment_value_ranking.{json,md}",
     )
 
+    wishlist = verbs.add_parser(
+        "wishlist",
+        help="what to measure next and what it would unlock (from the tracked artifacts)",
+        description=(
+            "What new data would improve this model most, and what each measurement would let you\n"
+            "predict. Read from results/validation/data_wishlist.md, which is generated from the\n"
+            "scorecard, the slice profile, the directional scorecard and the value-of-information\n"
+            "ranking (src/data_wishlist.py). Nothing here is typed by hand."
+        ),
+    )
+    wishlist.add_argument("--json", action="store_true", help="print the machine-readable payload instead")
     return parser
 
 
@@ -397,75 +443,55 @@ def run_compare(args: argparse.Namespace) -> int:
     if not args.spec:
         raise SpecError("compare needs a spec. Try `maillard compare --template`.")
     spec_a, spec_b = _load_two_arms(args.spec)
-
-    if args.lane == "core":
-        if args.absolute:
-            print(
-                "note: --absolute is redundant on the core lane; the kinetic core reports "
-                "absolute concentrations by default, with their envelope declaration.",
-                file=sys.stderr,
-            )
-        payload = compare_core(spec_a, spec_b)
-        print(to_json(payload) if args.json else render_compare_core_text(payload))
-        comparison = payload.get("comparison") or {}
-        if not comparison.get("comparable"):
-            for label, key in (("A", "declaration_a"), ("B", "declaration_b")):
-                declaration = comparison.get(key) or {}
-                if declaration.get("state") == "out_of_envelope":
-                    print(f"arm {label}: {envelope_error_text(declaration)}", file=sys.stderr)
-        if args.report:
-            _write_report(payload, args.report)
-        return 0
-
+    payload = compare_core(spec_a, spec_b)
+    print(to_json(payload) if args.json else render_compare_core_text(payload))
+    comparison = payload.get("comparison") or {}
+    if not comparison.get("comparable"):
+        for label, key in (("A", "declaration_a"), ("B", "declaration_b")):
+            declaration = comparison.get(key) or {}
+            if declaration.get("state") == "out_of_envelope":
+                print(f"arm {label}: {envelope_error_text(declaration)}", file=sys.stderr)
     if args.report:
-        print(
-            "error: --report is a KINETIC CORE surface. The screening lane has no\n"
-            "  absolutes, no intervals and no OAV table to render, and a report that\n"
-            "  showed only rankings would imply it had more. Re-run with --lane core.",
-            file=sys.stderr,
-        )
-        return 2
-
-    if args.absolute:
-        print(
-            "error: --absolute is not available on the screening lane. The FAST lane's\n"
-            "  absolute ppb are withheld from every user-facing surface (Wave B5): its\n"
-            "  measured skill is ordinal, not quantitative. Re-run with --lane core.",
-            file=sys.stderr,
-        )
-        return 2
-    run_a = evaluate_system(spec_a, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    run_b = evaluate_system(spec_b, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    payload = screening_payload(compare_systems(run_a, run_b, top_n=args.top))
-    print(to_json(payload) if args.json else render_compare_text(payload, show_absolute=False))
+        _write_report(payload, args.report)
     return 0
 
 
 def run_predict(args: argparse.Namespace) -> int:
     document = load_spec_document(args.spec)
     spec = select_system(document, source=str(args.spec), arm=args.system)
-
-    if args.lane == "core":
-        payload = predict_core(spec)
-        print(to_json(payload) if args.json else render_predict_core_text(payload))
-        if not payload.get("answered"):
-            print(envelope_error_text(payload.get("declaration") or {}), file=sys.stderr)
-        if args.report:
-            _write_report(payload, args.report)
-        return 0
-
+    payload = predict_core(spec)
+    print(to_json(payload) if args.json else render_predict_core_text(payload))
+    if not payload.get("answered"):
+        print(envelope_error_text(payload.get("declaration") or {}), file=sys.stderr)
     if args.report:
-        print(
-            "error: --report is a KINETIC CORE surface. The screening lane has no\n"
-            "  absolutes, no intervals and no OAV table to render, and a report that\n"
-            "  showed only rankings would imply it had more. Re-run with --lane core.",
-            file=sys.stderr,
-        )
-        return 2
+        _write_report(payload, args.report)
+    return 0
 
-    run = evaluate_system(spec, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    payload = screening_payload(predict_system(run, top_n=args.top))
-    print(to_json(payload) if args.json else render_predict_text(payload))
+
+def run_score(args: argparse.Namespace) -> int:
+    from src.kinetic_core.user_scoring import (
+        TEMPLATE,
+        MeasurementSpecError,
+        load_document,
+        render_text,
+        score_document,
+        write_records,
+    )
+
+    if args.template:
+        print(TEMPLATE)
+        return 0
+    if not args.spec:
+        raise SpecError("score needs a measurement document. Try `maillard score --template`.")
+    try:
+        payload = score_document(load_document(args.spec))
+    except MeasurementSpecError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    written = write_records(payload, args.out) if not args.no_write else []
+    print(to_json(payload) if args.json else render_text(payload))
+    for path in written:
+        print(f"wrote {path}", file=sys.stderr)
     return 0
 
 
@@ -490,10 +516,10 @@ def run_rank(args: argparse.Namespace) -> int:
     source = Path(args.prediction_path) if args.prediction_path else PREDICTION_UNCERTAINTY_PATH
     if not Path(source).exists():
         print(
-            f"error: no uncertainty panel at {source}.\n"
-            "  The VoI ranking is computed from the cached Monte-Carlo artifact, which is\n"
-            "  gitignored and therefore absent in a fresh clone. Generate it first:\n"
-            "    python scripts/generators/generate_prediction_uncertainty.py --n-samples 200 --seed 0",
+            f"error: no core uncertainty envelope at {source}.\n"
+            "  The VoI ranking is computed from the kinetic core's Monte-Carlo envelope.\n"
+            "  Generate it first (about 40 min at n=200):\n"
+            "    python scripts/generators/generate_core_prediction_uncertainty.py --n-samples 200 --seed 0 --workers 4",
             file=sys.stderr,
         )
         return 2
@@ -518,7 +544,10 @@ def main(argv=None) -> int:
         "compare": run_compare,
         "predict": run_predict,
         "explain": run_explain,
+        "score": run_score,
         "rank-experiments": run_rank,
+        "rank": run_rank,
+        "wishlist": run_wishlist,
     }
     try:
         return handlers[args.verb](args)

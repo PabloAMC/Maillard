@@ -28,6 +28,7 @@ test_failures.log
 minimal.yaml
 test_mech.yaml
 *.csv
+!docs/templates/*.csv
 *.log
 *.hypothesis/
 
@@ -42,67 +43,44 @@ test_mech.yaml
 !docs/assets/report_compound_confidence_overlay.png
 docs/assets/*.html
 
-# Data rules
+# Data rules -- data/ holds curated inputs only. Everything tracked is whitelisted
+# explicitly here; anything else under data/ is local (e.g. data/articles/, ~160 MB of PDFs).
 data/*
+!data/README.md
+!data/keys/
+!data/keys/**
+!data/schemas/
+!data/schemas/**
 !data/lit/
-!data/geometries/
-!data/reactions/
-!data/rmg_extensions/
 !data/species/
 !data/benchmarks/
 !data/protocols/
 !data/protocols/**
-!data/campaigns/
-!data/campaigns/**
-!data/qm/
-!data/qm/**
-!data/ingest_templates/
-!data/ingest_templates/**
-!data/cli_examples/
-!data/cli_examples/**
-!data/Gemini_Deep_Research/
-!data/Gemini_Deep_Research/**
+!data/research_corpus/
+!data/research_corpus/**
+!data/formulation_grid.yml
+!data/interventions.yml
 
 # Bulky & auto-generated data exclusions
-data/reactions/rmg_validation_cases/
 data/lit/*.pdf
 data/lit/**/*.pdf
-results/validation/pygsm_scratch/
 
 # Test Reports and Validation Evidence
 reports/
 results/*
 !results/validation/
 !results/validation/**
+!results/literature/
+!results/literature/*.json
 !results/maillard_results.db
-
-# xTB & QM scratch outputs
-xtbopt.log
-xtbrestart
-xtbtopo.mol
-.sccnotconverged
-.xtboptok
-gfnff_topo
-*.xyz.bak
-wbo
-charges
-scr/
-grow/
-manual_test_qcg/
-data/geometries/xtb_inputs/**/xtbpath*.xyz
-data/geometries/xtb_inputs/**/xtbpath_ts*.xyz
-data/geometries/xtb_inputs/**/product*.xyz
-data/geometries/xtb_inputs/**/reactant*.xyz
-data/geometries/xtb_inputs/**/xtbrestart*
-data/geometries/xtb_inputs/**/.sccnotconverged
-data/geometries/scratch/
-data/geometries/dft_checkpoints/
-data/geometries/dft_runs/
-data/geometries/multistep/
-data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/
-data/geometries/xtb_inputs/pe_amadori_water/
+!results/README.md
+!results/legacy_lane/README.md
 
 # Cantera
 *.yaml
 !data/**/*.yml
 !data/**/*.yaml
+!docs/**/*.yaml
+!results/validation/**/*.yaml
+.cache/
+results/user/

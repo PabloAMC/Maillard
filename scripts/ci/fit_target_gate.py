@@ -33,8 +33,8 @@ Checks (all offline, all blocking)
 2. **Fitted rows are excluded from the coverage claim.** The scored artifact must carry
    a ``summary.honest_literature_coverage`` block, its denominator must exclude every
    fitted row, and the fitted rows must be reported separately.
-3. **Registry declarations reach the artifact.** Every benchmark the calibration registry
-   declares as ``fitted_to_benchmark`` must be flagged ``fitted_row: true`` wherever it is
+3. (Retired 2026-09-03 with the legacy matrix calibration registry.) The core's own
+   fit-row ledger is ``src/kinetic_core/fit_targets.py``, checked by its unit tests; it is
    scored. (Catches the reverse drift: someone marks the registry honestly but the
    reporting layer keeps counting the row.)
 4. **Constant precision.** Shipped float constants in the calibration registries must not
@@ -64,12 +64,13 @@ from typing import Any, Dict, Iterator, List, Sequence, Set, Tuple
 ROOT = Path(__file__).resolve().parents[2]
 
 VALIDATION_DIR = ROOT / "results" / "validation"
-PREDICTION_UNCERTAINTY = VALIDATION_DIR / "prediction_uncertainty.json"
+# 2026-09-03 (retirement step B5b): the scored artifact is the KINETIC CORE's envelope.
+PREDICTION_UNCERTAINTY = VALIDATION_DIR / "core_prediction_uncertainty.json"
 
 # Records that declare a fit. Any file matching one of these globs is read for fit
 # targets; a new refit generator is picked up automatically because it will write a
 # record whose name matches.
-FIT_RECORD_GLOBS = ("*refit*.json", "*rederivation*.json", "*calibration_refit*.json")
+FIT_RECORD_GLOBS = ("*refit*.json", "*rederivation*.json", "*calibration_refit*.json", "*_fit_targets.json")
 
 # JSON keys under which a fit record names what it fitted against.
 FIT_TARGET_KEYS = ("fit_target", "fit_targets", "fit_target_files", "fit_target_ids")
@@ -90,14 +91,10 @@ FIT_LEVERAGE_THRESHOLD = 0.5
 # containers keeps the check meaningful: a stray precision-carrying float in an unrelated
 # helper is not a shipped calibration constant.
 CONSTANT_SOURCES: Dict[str, Tuple[str, ...]] = {
-    "src/matrix_calibration_registry.py": (
-        "_MATRIX_CALIBRATION_RECORDS",
-        "_MATRIX_CLASS_ANCHORS",
-    ),
-    "src/recommend.py": (
-        "_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES",
-        "_MELANOIDIN_TRAPPING_PROFILES",
-    ),
+    # 2026-09-03 (B5b): the legacy containers (matrix_calibration_registry, recommend) are
+    # deleted. The kinetic core's fitted constants live in results/validation/
+    # kinetic_core_b*_fit_report.json, not in code literals; the declared-assumption
+    # tables in src/kinetic_core/parameters_*.py are the next candidates (backlog).
 }
 
 # Keyword arguments whose value is deliberately allowed to keep full precision, because
@@ -261,42 +258,11 @@ def _collect_declared_fit_targets(verbose: bool) -> Tuple[Dict[str, List[str]], 
     return targets, failures
 
 
-def _collect_registry_fitted_benchmarks() -> Set[str]:
-    """Benchmark ids the calibration registry declares as fitted_to_benchmark.
-
-    Parsed with ``ast`` rather than imported, so this gate keeps working without the
-    science stack installed.
-    """
-    path = ROOT / "src" / "matrix_calibration_registry.py"
-    if not path.exists():
-        return set()
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    fitted: Set[str] = set()
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        keywords = {kw.arg: kw.value for kw in node.keywords if kw.arg}
-        strength = keywords.get("evidence_strength")
-        strength_value = None
-        if isinstance(strength, ast.Constant) and isinstance(strength.value, str):
-            strength_value = strength.value
-        elif isinstance(strength, ast.Name):
-            strength_value = "fitted_to_benchmark" if strength.id == "FITTED_TO_BENCHMARK" else None
-        if strength_value != "fitted_to_benchmark":
-            continue
-        origin = keywords.get("fitted_from_benchmark")
-        if isinstance(origin, ast.Constant) and isinstance(origin.value, str):
-            fitted.add(origin.value)
-    return fitted
-
-
 def check_fit_then_score(verbose: bool) -> List[str]:
     declared, failures = _collect_declared_fit_targets(verbose)
-    registry_fitted = _collect_registry_fitted_benchmarks()
 
     if verbose:
         print(f"    per-row fit targets: {sorted(declared) or 'none'}")
-        print(f"    registry fitted_to_benchmark: {sorted(registry_fitted) or 'none'}")
 
     if not PREDICTION_UNCERTAINTY.exists():
         failures.append(
@@ -331,18 +297,6 @@ def check_fit_then_score(verbose: bool) -> List[str]:
                 "coverage is circular. Either disclose the row (fitted_row: true, which "
                 "removes it from the coverage numerator and denominator) or stop fitting "
                 "against it."
-            )
-
-    # --- check 3: registry declarations must reach the artifact -----------------------
-    for benchmark_id in sorted(registry_fitted):
-        if benchmark_id not in scored_flags:
-            continue
-        if not scored_flags[benchmark_id]:
-            failures.append(
-                f"UNDISCLOSED FIT-RECOVERY: the calibration registry declares "
-                f"'{benchmark_id}' as `fitted_to_benchmark`, but its scored row in "
-                f"{_rel(PREDICTION_UNCERTAINTY)} is not flagged `fitted_row: true`. The "
-                "honest label was written in one place and lost in the other."
             )
 
     # --- check 2: the coverage claim must exclude fitted rows -------------------------

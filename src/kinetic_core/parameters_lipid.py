@@ -222,7 +222,9 @@ K_LOOH_DECOMP_ANCHOR = LipidParameter(
                   "Table 1, k4,CD -- identical across all five emulsifiers "
                   "(beta-lactoglobulin, BSA, beta-casein, Tween 20, Tween 80)",
     dossier_anchor="research_round3_channels.md sec. D.1; "
-                   "data/articles/schroen2022_fulltext.txt",
+                   "schroen2022_extraction.md (full text read 2026-09-04: Table 1 "
+                   "prints k4,CD = 6e-3 /h and k_hexanal = 6e-5 /h for all five "
+                   "emulsifiers, 'determined based on visual agreement of fit')",
     conditions="rapeseed-oil O/W emulsion, droplets 1.4-1.8 um, pH 6.7 buffer, "
                "rotative agitation, controlled oxygen-to-lipid ratio",
     temperature_of_measurement_c=25.0,
@@ -622,12 +624,12 @@ PROHIBITED_DERIVATIONS: Mapping[str, str] = {
     ),
     "oleate -> nonanal branch fraction": (
         "Measured nowhere in the fit corpus. Frankel 1989 fed linoleate only. "
-        "The FAST lane's shipped 0.15 has no source. Requests for absolute "
+        "The retired screening lane's shipped 0.15 had no source. Requests for absolute "
         "nonanal in an oleate-bearing matrix are REFUSED."
     ),
     "linoleate -> 2-pentylfuran branch fraction": (
         "Not in Frankel's six-product slate and measured nowhere else in the "
-        "corpus. The FAST lane's shipped 0.08 has no source."
+        "corpus. The retired screening lane's shipped 0.08 had no source."
     ),
     "aldehyde -> alcohol reduction (hexanal -> 1-hexanol)": (
         "No reduction step is measured anywhere in the corpus, and in a "

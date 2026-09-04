@@ -1,0 +1,284 @@
+{
+  "summary": {
+    "family_count": 8,
+    "posture_counts": {
+      "directional_matrix": 4,
+      "indirect_generic_support": 1,
+      "open_gap": 1,
+      "qualitative_intake_only": 1,
+      "quantitative_core": 1
+    },
+    "category_counts": {
+      "alternative_protein_matrix": 2,
+      "chemistry_core": 1,
+      "lipid_rich_co_matrix": 1,
+      "plant_protein_hydrolysate": 1,
+      "plant_protein_matrix": 2,
+      "process_regime": 1
+    },
+    "support_class_counts": {
+      "explicit_supported": 6,
+      "indirect_only": 1,
+      "open_gap": 1
+    },
+    "explicit_supported_families": [
+      "free_precursor",
+      "pea_isolate",
+      "soy_isolate",
+      "soy_hydrolysate",
+      "mycoprotein",
+      "extrusion_heavy_systems"
+    ],
+    "indirect_only_families": [
+      "coconut_oil_co_matrix"
+    ],
+    "open_gap_families": [
+      "other_plant_proteins"
+    ],
+    "bounded_expansion_candidates": [
+      "mycoprotein"
+    ],
+    "scope_hold_families": [
+      "soy_hydrolysate",
+      "extrusion_heavy_systems"
+    ],
+    "evidence_blocked_families": [
+      "coconut_oil_co_matrix",
+      "other_plant_proteins"
+    ],
+    "policy": "matrix_family_scope_must_distinguish_explicit_support_from_generic_indirect_support",
+    "expansion_policy": "do_not_broaden_matrix_scope_beyond_bounded_candidates_until_the_next_family_has_runtime_evidence_and_a_named_benchmark_or_calibration_landing"
+  },
+  "families": [
+    {
+      "matrix_family": "free_precursor",
+      "category": "chemistry_core",
+      "importance_tier": "critical",
+      "protein_type": "free",
+      "runtime_posture": "quantitative_core",
+      "evidence_surface": "strict_ready_benchmarks",
+      "family_scope": "aqueous free-amino-acid and free-sugar systems",
+      "what_is_supported": [
+        "quantitative free-precursor screening",
+        "reaction-family sensitivity and selective offline refinement",
+        "reaction-centered chemistry benchmarking"
+      ],
+      "what_is_not_supported": [
+        "matrix accessibility effects",
+        "family-specific fat-phase partitioning",
+        "protein-bound precursor release"
+      ],
+      "next_best_action": "preserve_as_reference_core",
+      "artifacts": [
+        "results/validation/benchmark_summary.md",
+        "results/validation/validated_envelope.md"
+      ],
+      "support_class": "explicit_supported",
+      "expansion_status": "reference_core",
+      "scope_priority": "hold_current_posture",
+      "primary_blocker": "matrix accessibility effects",
+      "artifact_count": 2
+    },
+    {
+      "matrix_family": "pea_isolate",
+      "category": "plant_protein_matrix",
+      "importance_tier": "critical",
+      "protein_type": "pea_iso",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "matrix_benchmark_plus_calibration",
+      "family_scope": "pea protein isolate slurry and heated beverage systems",
+      "what_is_supported": [
+        "matrix-only off-flavour intake and headspace benchmarks",
+        "pea accessibility and process-state priors",
+        "internal meaty-positive ranking harnesses"
+      ],
+      "what_is_not_supported": [
+        "external quantitative meaty-positive matrix benchmark",
+        "direct retention benchmark for MFT or FFT",
+        "broad closure beyond pea-focused literature families"
+      ],
+      "next_best_action": "promote_primary_meaty_positive_pea_benchmark",
+      "artifacts": [
+        "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
+        "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
+        "data/protocols/ppi_spi_primary_benchmark_contract.json"
+      ],
+      "support_class": "explicit_supported",
+      "expansion_status": "promote_primary_benchmark",
+      "scope_priority": "active_matrix_priority",
+      "primary_blocker": "external quantitative meaty-positive matrix benchmark",
+      "artifact_count": 3
+    },
+    {
+      "matrix_family": "soy_isolate",
+      "category": "plant_protein_matrix",
+      "importance_tier": "critical",
+      "protein_type": "soy_iso",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "matrix_benchmark_plus_calibration",
+      "family_scope": "soy protein isolate slurry and treated protein systems",
+      "what_is_supported": [
+        "matrix-only off-flavour intake benchmarks",
+        "soy accessibility and process-state priors",
+        "qualitative and internal meaty-positive harnesses"
+      ],
+      "what_is_not_supported": [
+        "external quantitative SPI meaty-positive benchmark",
+        "benchmark-closed sulfur time series",
+        "broad closure beyond soy-focused literature families"
+      ],
+      "next_best_action": "promote_primary_meaty_positive_soy_benchmark",
+      "artifacts": [
+        "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
+        "data/protocols/ppi_spi_primary_benchmark_contract.json",
+        "data/lit/benchmark_intake_registry.json"
+      ],
+      "support_class": "explicit_supported",
+      "expansion_status": "promote_primary_benchmark",
+      "scope_priority": "active_matrix_priority",
+      "primary_blocker": "external quantitative SPI meaty-positive benchmark",
+      "artifact_count": 3
+    },
+    {
+      "matrix_family": "soy_hydrolysate",
+      "category": "plant_protein_hydrolysate",
+      "importance_tier": "high",
+      "protein_type": "soy_iso",
+      "runtime_posture": "qualitative_intake_only",
+      "evidence_surface": "qualitative_intake",
+      "family_scope": "soy hydrolysate MRP preparations such as Nishimura-like systems",
+      "what_is_supported": [
+        "qualitative soy sulfur-chemistry intake",
+        "design support for future benchmark conditions"
+      ],
+      "what_is_not_supported": [
+        "absolute ppb validation",
+        "strict benchmark promotion",
+        "direct transfer to soy isolate quantitative claims"
+      ],
+      "next_best_action": "preserve_as_qualitative_design_anchor",
+      "artifacts": [
+        "data/lit/benchmark_intake_registry.json"
+      ],
+      "support_class": "explicit_supported",
+      "expansion_status": "hold_intake_only",
+      "scope_priority": "hold_current_posture",
+      "primary_blocker": "absolute ppb validation",
+      "artifact_count": 1
+    },
+    {
+      "matrix_family": "mycoprotein",
+      "category": "alternative_protein_matrix",
+      "importance_tier": "high",
+      "protein_type": "myco",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "bounded_calibration_prior",
+      "family_scope": "mycoprotein and fungal-protein systems with bounded priors",
+      "what_is_supported": [
+        "first-class matrix family in computational priors",
+        "directional accessibility and process-state support",
+        "runtime-executable bounded reference windows"
+      ],
+      "what_is_not_supported": [
+        "executable benchmark family",
+        "quantitative headspace closure",
+        "meaty-positive matrix benchmark"
+      ],
+      "next_best_action": "land_first_family_specific_mycoprotein_measurement_package",
+      "artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/mycoprotein_reference.md"
+      ],
+      "support_class": "explicit_supported",
+      "expansion_status": "bounded_expansion_candidate",
+      "scope_priority": "bounded_next_candidate",
+      "primary_blocker": "executable benchmark family",
+      "artifact_count": 2
+    },
+    {
+      "matrix_family": "extrusion_heavy_systems",
+      "category": "process_regime",
+      "importance_tier": "critical",
+      "protein_type": "free",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "exploratory_mode",
+      "family_scope": "high-severity extrusion and texturization regimes across plant matrices",
+      "what_is_supported": [
+        "exploratory recommendation mode",
+        "shared accessibility and process-structured surrogates",
+        "explicit trust warnings"
+      ],
+      "what_is_not_supported": [
+        "benchmark-grade quantitative closure",
+        "family-specific fat-phase calibration",
+        "strict decision-gate use"
+      ],
+      "next_best_action": "add_family_specific_process_intake_when_literature_allows",
+      "artifacts": [
+        "results/validation/validated_envelope.md"
+      ],
+      "support_class": "explicit_supported",
+      "expansion_status": "hold_process_regime_only",
+      "scope_priority": "hold_current_posture",
+      "primary_blocker": "benchmark-grade quantitative closure",
+      "artifact_count": 1
+    },
+    {
+      "matrix_family": "coconut_oil_co_matrix",
+      "category": "lipid_rich_co_matrix",
+      "importance_tier": "high",
+      "protein_type": "free",
+      "runtime_posture": "indirect_generic_support",
+      "evidence_surface": "generic_fat_fraction_plus_generic_lipid_chemistry",
+      "family_scope": "fat-phase co-matrix used in plant-based meat formulations, especially saturated or semi-solid oils such as coconut oil",
+      "what_is_supported": [
+        "generic fat-fraction partitioning in headspace and recommendation layers",
+        "generic lipid aldehyde formation and trapping chemistry",
+        "generic lipid-Maillard crosstalk at the chemistry-family level"
+      ],
+      "what_is_not_supported": [
+        "coconut-specific lipid profile",
+        "coconut-specific oxidation calibration",
+        "coconut-specific retention or release benchmark",
+        "family-specific tradeoff benchmark combining sulfur positives and lipid off-notes"
+      ],
+      "next_best_action": "encode_coconut_oil_as_explicit_open_family_gap",
+      "artifacts": [
+        "src/headspace.py",
+        "src/lipid_oxidation.py",
+        "src/reaction_templates.py"
+      ],
+      "support_class": "indirect_only",
+      "expansion_status": "blocked_on_family_specific_evidence",
+      "scope_priority": "scope_gap_to_rank",
+      "primary_blocker": "coconut-specific lipid profile",
+      "artifact_count": 3
+    },
+    {
+      "matrix_family": "other_plant_proteins",
+      "category": "alternative_protein_matrix",
+      "importance_tier": "high",
+      "protein_type": "free",
+      "runtime_posture": "open_gap",
+      "evidence_surface": "narrative_only_or_unencoded_literature",
+      "family_scope": "other plant proteins relevant to PBMA such as oat, rice, wheat, peanut, fava, or mixed systems not yet elevated to runtime-facing support",
+      "what_is_supported": [
+        "high-level scientific awareness that these families matter"
+      ],
+      "what_is_not_supported": [
+        "runtime priors",
+        "executable benchmark families",
+        "family-specific accessibility or observability support"
+      ],
+      "next_best_action": "rank_next_family_by_product_impact_and_literature_closability",
+      "artifacts": [
+        "data/Gemini_Deep_Research/elicit_plant_based_cooking.md"
+      ],
+      "support_class": "open_gap",
+      "expansion_status": "blocked_on_runtime_prior_and_benchmark",
+      "scope_priority": "scope_gap_to_rank",
+      "primary_blocker": "runtime priors",
+      "artifact_count": 1
+    }
+  ]
+}

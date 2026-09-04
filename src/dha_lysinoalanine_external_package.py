@@ -3,13 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
+from src import data_paths
+from src.artifact_io import load_json_mapping, resolve_optional_path
 from src.extrusion_external_closure import build_extrusion_external_closure_artifact
 
 
-DEFAULT_DHA_LYSINOALANINE_EXTERNAL_PACKAGE_CONTRACT = (
-    repo_root() / "data" / "protocols" / "dha_lysinoalanine_external_package_contract.json"
-)
+DEFAULT_DHA_LYSINOALANINE_EXTERNAL_PACKAGE_CONTRACT = data_paths.DHA_LYSINOALANINE_EXTERNAL_PACKAGE_CONTRACT
 
 
 def load_dha_lysinoalanine_external_package_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:

@@ -22,8 +22,8 @@
       ],
       "next_best_action": "preserve_as_reference_core",
       "artifacts": [
-        "results/validation/benchmark_summary.md",
-        "results/validation/validated_envelope.md"
+        "results/legacy_lane/validation/benchmark_summary.md",
+        "results/legacy_lane/validation/validated_envelope.md"
       ]
     },
     {
@@ -142,7 +142,7 @@
       ],
       "next_best_action": "add_family_specific_process_intake_when_literature_allows",
       "artifacts": [
-        "results/validation/validated_envelope.md"
+        "results/legacy_lane/validation/validated_envelope.md"
       ]
     },
     {
@@ -166,10 +166,13 @@
       ],
       "next_best_action": "encode_coconut_oil_as_explicit_open_family_gap",
       "artifacts": [
-        "src/headspace.py",
-        "src/lipid_oxidation.py",
-        "src/reaction_templates.py"
-      ]
+        "src/lipid_oxidation.py"
+      ],
+      "retired_artifacts": [
+        "retired 2026-09-03 (B5b): src/headspace.py",
+        "retired 2026-09-03 (B5b): src/reaction_templates.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "matrix_family": "other_plant_proteins",
@@ -189,7 +192,7 @@
       ],
       "next_best_action": "rank_next_family_by_product_impact_and_literature_closability",
       "artifacts": [
-        "data/Gemini_Deep_Research/elicit_plant_based_cooking.md"
+        "data/research_corpus/elicit_plant_based_cooking.md"
       ]
     }
   ]

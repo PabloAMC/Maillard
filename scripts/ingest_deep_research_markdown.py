@@ -2,7 +2,7 @@
 """
 ingest_deep_research_markdown.py
 
-Parses Deep Research Markdown reports (e.g. data/Gemini_Deep_Research/*_*.md),
+Parses Deep Research Markdown reports (e.g. data/research_corpus/*_*.md),
 extracts the 'Consolidated entries' sections which have been scored via the 8-point SLR,
 and appends them to a dedicated backlog file instead of the operational
 benchmark intake registry.
@@ -15,12 +15,19 @@ import glob
 import json
 import re
 import argparse
+import sys
 from datetime import datetime
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEEP_RESEARCH_DIR = os.path.join(ROOT_DIR, "data", "Gemini_Deep_Research")
-REGISTRY_PATH = os.path.join(ROOT_DIR, "data", "lit", "benchmark_intake_registry.json")
-BACKLOG_PATH = os.path.join(ROOT_DIR, "data", "lit", "deep_research_candidate_registry.json")
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+from src import data_paths  # noqa: E402
+
+DEEP_RESEARCH_DIR = str(data_paths.RESEARCH_CORPUS_DIR)
+REGISTRY_PATH = str(data_paths.BENCHMARK_INTAKE_REGISTRY)
+# Orphan output: this file does not exist in the repo and nothing reads it.
+BACKLOG_PATH = str(data_paths.DEEP_RESEARCH_CANDIDATE_REGISTRY)
 
 
 def _load_json(path: str) -> dict:
@@ -33,7 +40,7 @@ def _load_json(path: str) -> dict:
 def _default_backlog_payload() -> dict:
     return {
         "generated_at": "",
-        "source": "data/Gemini_Deep_Research/*.md",
+        "source": f"{data_paths.rel(data_paths.RESEARCH_CORPUS_DIR)}/*.md",
         "notes": "Markdown-derived Deep Research candidate backlog. This file is not consumed by the runtime or benchmark registry.",
         "candidate_entries": [],
     }
@@ -135,7 +142,7 @@ def main():
     args = parser.parse_args()
     
     entries = parse_markdown_files()
-    print(f"Parsed {len(entries)} references from Gemini_Deep_Research markdown.")
+    print(f"Parsed {len(entries)} references from research_corpus markdown.")
     
     if args.dry_run:
         for e in entries:

@@ -9,8 +9,8 @@ name: CI
 #                                      signal an external inspector should look at
 #                                      first, and it is always green or genuinely
 #                                      broken.
-#   tests-unit   (~10 min + env)     : tests/unit + tests/scripts. Fast tier.
-#   tests-full   (~25 min + env)     : tests/scientific + tests/integration.
+#   tests-unit   (~10 min + env)     : tests/unit. Fast tier.
+#   tests-full   (~25 min + env)     : tests/scientific.
 #                                      Runs UNCONDITIONALLY as of 2026-08-27; see
 #                                      the comment on the job for why the previous
 #                                      `needs: tests-unit` had to go.
@@ -25,22 +25,16 @@ name: CI
 #     test is a coverage/executability check; the accuracy numbers are pinned in
 #     tests/scientific/test_honest_headline_guards.py and are bad on purpose.
 #   * strict-benchmarks cannot pass and is not required to. See its job block.
-#   * The Phase 3 "authority lane" no longer exists. This block used to describe
-#     tests/benchmarks/ and its _lane_policy.py gate as a live-but-unrun directory;
-#     both were DELETED on 2026-08-27 (Wave J2) and this comment outlived them by a
-#     day (corrected 2026-08-27, Wave R). What survives of that lane is the loader
-#     src/authority_benchmark_data.py and its tracked fixtures data/qm/phase33_*.json
-#     and data/qm/phase35_*.json; the loader's only remaining consumer is its own
-#     parse test, tests/unit/test_authority_benchmark_data.py, so NO authority-lane
+#   * The Phase 3 "authority lane" no longer exists. tests/benchmarks/ and its
+#     _lane_policy.py gate were deleted on 2026-08-27 (Wave J2); the surviving loader
+#     src/authority_benchmark_data.py and its data/qm/ fixtures were deleted on
+#     2026-09-01 together with the whole QM/DFT lane, so NO authority-lane
 #     value reaches the model, a calibration or a headline. Reviving or retiring the
 #     lane is an open decision -- see tests/README.md and
 #     docs/reference/VALIDATION_CONTRACT.md section 7.
 #
-# Deliberately NOT in the required set: tests/qm. Those tests skip gracefully when
-# xtb / crest / sella / MACE are absent, but environment.yml *installs* all of
-# them, so on CI they would actually execute -- pulling MACE model weights from
-# HuggingFace at runtime (network dependency) and running real semi-empirical
-# optimisations. Run them via the `qm` workflow_dispatch input when needed.
+# 2026-09-01: the tests/qm tier and its `qm` workflow_dispatch input were removed
+# together with the QM/DFT refinement stack (cleaning branch, Phase 1 + Phase 2).
 
 # 2026-08-27 (owner request): test tiers run on PULL REQUESTS, not on every
 # branch push -- 8 pushes in one day each triggered a full ~30-min pipeline.
@@ -55,11 +49,6 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
-    inputs:
-      qm:
-        description: "Also run the tests/qm tier (slow; needs xtb/crest/MACE)"
-        type: boolean
-        default: false
   schedule:
     # Weekly DOI liveness sample. Advisory only -- see the citation-liveness job.
     - cron: "17 6 * * 1"
@@ -112,7 +101,7 @@ jobs:
       # dependency; deliberately no conda and no science stack, so this check
       # cannot be taken down by a dependency-solve failure.
       - name: Install gate dependencies
-        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0"
+        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0" "jsonschema>=4.0"
 
       - name: Citation contamination gate (offline)
         run: python scripts/ci/citation_gate.py
@@ -128,6 +117,12 @@ jobs:
       # check. Like the other gates in this tier it is stdlib-only and offline.
       - name: Fit-target circularity + constant-precision gate
         run: python scripts/ci/fit_target_gate.py
+
+      # 2026-09-01 (cleaning, Phase 4). Every benchmark payload validates against
+      # data/schemas/benchmark.schema.json, its id equals its file stem, its volatiles
+      # resolve in data/keys/compounds.yml, and hold-out bundles are labelled.
+      - name: Benchmark schema + compound-key gate
+        run: python scripts/ci/schema_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
@@ -221,7 +216,13 @@ jobs:
         # NOTE: neither pytest-timeout nor pytest-xdist is in environment.yml, so
         # do not add --timeout or -n here; the job-level timeout-minutes is the
         # runaway guard.
-        run: python -m pytest tests/unit tests/scripts -q
+        run: python -m pytest tests/unit -q
+
+      # 2026-09-01: data/ is read-only at runtime. Fails if the tier above wrote,
+      # rewrote or deleted anything under data/ (see scripts/ci/data_readonly_gate.py).
+      - name: data/ untouched by the unit tier
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 2: scientific + integration.
@@ -276,7 +277,11 @@ jobs:
       - name: Scientific and integration tests
         run: |
           mkdir -p results
-          python -m pytest tests/scientific tests/integration -q 2>&1 | tee results/pytest_full.log
+          python -m pytest tests/scientific -q 2>&1 | tee results/pytest_full.log
+
+      - name: data/ untouched by the full tier
+        if: always()
+        run: python scripts/ci/data_readonly_gate.py
 
       - name: Upload test log
         if: always()
@@ -391,42 +396,6 @@ jobs:
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
-  # Optional: QM tier. Manual only -- see the header note.
-  # ---------------------------------------------------------------------------
-  tests-qm:
-    name: QM tests (manual)
-    if: github.event_name == 'workflow_dispatch' && inputs.qm
-    runs-on: ubuntu-latest
-    needs: tests-unit
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Cache conda packages
-        uses: actions/cache@v4
-        env:
-          CACHE_EPOCH: 1
-        with:
-          path: ~/conda_pkgs_dir
-          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
-
-      - name: Install conda (Miniforge)
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          # See the tests-unit job for why environment-file is not passed here.
-          miniforge-version: latest
-          activate-environment: maillard
-          python-version: "3.12"
-          auto-activate-base: false
-          pkgs-dirs: ~/conda_pkgs_dir
-
-      - name: Build the maillard environment
-        run: bash scripts/ci/setup_env.sh
-
-      - name: QM tests
-        run: python -m pytest tests/qm -q
-
-  # ---------------------------------------------------------------------------
   # Advisory: DOI liveness. Never blocks a PR.
   # ---------------------------------------------------------------------------
   citation-liveness:
@@ -445,7 +414,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install gate dependencies
-        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0"
+        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0" "jsonschema>=4.0"
 
       - name: Resolve a random DOI sample against doi.org
         # --fail-on-online is intentionally omitted: dead DOIs are reported in the

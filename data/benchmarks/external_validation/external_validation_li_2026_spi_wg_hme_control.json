@@ -1,5 +1,7 @@
 {
   "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+  "quantification_class": "hs_spme_gcms_semi_quantitative_internal_standard",
+  "quantification_note": "Declared 2026-09-03 from the PMC full text (PMC12984281): 2.00 g powdered HMPE in a 20 mL headspace vial with 10 uL cyclohexanone internal standard, DVB/CAR/PDMS fibre 30 min, GC-MS; 'Relative contents (ug/kg)' by C = A x CS x VS / (AS x m), i.e. SEMI-quantitative against one internal standard with no per-compound response factor. Headspace: the bands apply; the semi-quantitative basis is a further, undeclared multiplier the envelope does not model.",
   "conditions": {
     "ph": 7.0,
     "temp_C": 160.0,
@@ -107,5 +109,13 @@
     "origin": "external_literature",
     "source_publication_year": "2026",
     "source_reference": "Li et al. (2026), Foods 15(5):912"
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PubMed Central PMC12984281 (open access), fetched 2026-09-03",
+    "quoted_quantification": "2.00 g of powdered HMPE was placed in a 20 mL headspace vial, to which 10 uL of the internal standard (cyclohexanone) was added ... 50/30 um DVB/CAR/PDMS fibre ... exposed to the sample for 30 min. Semi-quantitative: C = A x CS x VS / (AS x m). Table header: 'Relative contents (ug/kg)'.",
+    "quoted_values": "Table 2, HMPE-0 min (control): 2-pentylfuran 5625.80 +/- 63.75 ug/kg; maltol 221.51 +/- 5.74 ug/kg.",
+    "quantification_verdict": "HS-SPME-GC-MS, semi-quantitative relative to cyclohexanone (no compound-specific calibration); the bundle's 2-pentylfuran value matches Table 2.",
+    "verified_on": "2026-09-03"
   }
 }

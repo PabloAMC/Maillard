@@ -59,6 +59,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
 import generate_kinetic_core_b2_3_fit as B23  # noqa: E402
 import generate_kinetic_core_b2_4_fit as B24  # noqa: E402
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core.parameters_sulfur import (  # noqa: E402
     DECAY_EA_PRIOR_CENTRE,
     GIGL_EA_COVALENT_CAPTURE_RANGE_KJ_MOL,
@@ -78,10 +79,10 @@ WEIGHT_E = B24.PH_ENDPOINT_WEIGHT[WEIGHT_TAG]
 #: The incumbent B8 starts from. NOT B2.3's vector: B2.4-half's ensemble-best
 #: is the most recent vector fitted at this weighting, so start 0 being the
 #: incumbent means a B8 member worse than its predecessor is visibly worse.
-B24_HALF_FIT_REPORT = ROOT / "results/validation/kinetic_core_b2_4_fit_half.json"
+B24_HALF_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b2_4_fit_half.json"
 
-MEMBER_DIR = ROOT / "results/validation/kinetic_core_b8_members"
-OUT_FIT_REPORT = ROOT / "results/validation/kinetic_core_b8_fit_report.json"
+MEMBER_DIR = data_paths.VALIDATION_DIR / "kinetic_core_b8_members"
+OUT_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b8_fit_report.json"
 
 SEED_BASE = 20260830
 SEED_STRIDE = 1000
@@ -506,7 +507,7 @@ def consolidate() -> Dict[str, Any]:
     payload = {
         "wave": "B8 -- the final parameter wave (Amendments 16 + 17)",
         "generated_by": "scripts/generators/generate_kinetic_core_b8_fit.py",
-        "prereg": "results/validation/kinetic_core_b8_prereg.md",
+        "prereg": data_paths.rel(data_paths.VALIDATION_DIR / "kinetic_core_b8_prereg.md"),
         "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendments 16, 17",
         "objective": {
             "form": ("B2.3's objective at B2.4's DECLARED pH exchange rate "

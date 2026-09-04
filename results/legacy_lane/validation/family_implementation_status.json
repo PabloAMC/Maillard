@@ -1,0 +1,429 @@
+{
+  "generated_by": "scripts/generators/generate_family_implementation_status.py",
+  "method": "engine enumeration over a battery of entry points; the mapping from emitted reaction family to SLR family is authored and listed in the script, the set of emitted families is measured",
+  "enumeration_temperature_celsius": 150.0,
+  "max_generations": 3,
+  "battery_step_counts": {
+    "core_pentose_cysteine_lysine": 129,
+    "hexose_asparagine": 21,
+    "lipid_hydroperoxide_seed": 25,
+    "unoxidised_lipid_plus_o2": 0,
+    "thiamine": 34,
+    "glutathione": 17,
+    "ascorbate": 0,
+    "polyphenol": 4,
+    "phospholipid_headgroup": 0,
+    "nucleotide": 4,
+    "serine_lysine_dha": 36
+  },
+  "emitted_reaction_families": {
+    "Furanone_Formation": [
+      "core_pentose_cysteine_lysine",
+      "glutathione"
+    ],
+    "Schiff_Base_Formation": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Amadori_Rearrangement": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Enolisation_Intermediate": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Enolisation_1_2": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Enolisation_2_3": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Enolisation_2_3_Amadori": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Retro_Aldol_Fragmentation": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Strecker_Degradation": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Beta_Elimination": [
+      "core_pentose_cysteine_lysine",
+      "lipid_hydroperoxide_seed",
+      "nucleotide",
+      "polyphenol",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "DHA_Crosslinking": [
+      "core_pentose_cysteine_lysine",
+      "serine_lysine_dha"
+    ],
+    "Cysteine_Degradation": [
+      "core_pentose_cysteine_lysine",
+      "lipid_hydroperoxide_seed",
+      "nucleotide",
+      "polyphenol",
+      "thiamine"
+    ],
+    "Thiol_Oxidation": [
+      "core_pentose_cysteine_lysine",
+      "lipid_hydroperoxide_seed",
+      "nucleotide",
+      "polyphenol",
+      "thiamine"
+    ],
+    "Aminoketone_Condensation": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Lipid_Thiazole_Condensation": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Generalized_Deamination": [
+      "core_pentose_cysteine_lysine",
+      "glutathione",
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Thiol_Addition_H2": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Thiohemiacetal_Formation": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Thiol_Dehydration": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Furanone_Cyclisation": [
+      "core_pentose_cysteine_lysine",
+      "glutathione"
+    ],
+    "Deoxyosone_Reduction": [
+      "core_pentose_cysteine_lysine",
+      "glutathione"
+    ],
+    "Thiol_Addition_Pentodiulose": [
+      "core_pentose_cysteine_lysine"
+    ],
+    "Mercaptoketone_Formation": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Mercaptoketone_Aldol_Addition": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Mercaptoketone_Cyclodehydration": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Furanone_Reductive_Opening": [
+      "core_pentose_cysteine_lysine"
+    ],
+    "Furanone_Reductive_Sulfhydrylation": [
+      "core_pentose_cysteine_lysine"
+    ],
+    "Safety_Risk_AGE": [
+      "core_pentose_cysteine_lysine",
+      "serine_lysine_dha"
+    ],
+    "Lipid_Strecker_Synergy": [
+      "core_pentose_cysteine_lysine"
+    ],
+    "Lipid_Schiff_Base": [
+      "core_pentose_cysteine_lysine",
+      "lipid_hydroperoxide_seed",
+      "serine_lysine_dha"
+    ],
+    "Furanone_Amino_Acid_Reduction": [
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
+    ],
+    "Safety_Risk_Acrylamide": [
+      "hexose_asparagine"
+    ],
+    "Lipid_Homolysis": [
+      "lipid_hydroperoxide_seed"
+    ],
+    "Beta_Scission": [
+      "lipid_hydroperoxide_seed"
+    ],
+    "Radical_Propagation_O2": [
+      "lipid_hydroperoxide_seed"
+    ],
+    "Peroxy_H_Abstraction": [
+      "lipid_hydroperoxide_seed"
+    ],
+    "Radical_Termination": [
+      "lipid_hydroperoxide_seed"
+    ],
+    "Additive_Thermal_Degradation": [
+      "thiamine"
+    ],
+    "Furan_Ring_Aromatisation": [
+      "thiamine"
+    ],
+    "Thiol_Addition_Hexose_Legacy_Shortcut": [
+      "thiamine"
+    ]
+  },
+  "family_count": 16,
+  "families_with_generative_templates": 5,
+  "entry_point_findings": [
+    "The lipid radical chain runs only from a HYDROPEROXIDE: the `unoxidised_lipid_plus_o2` case enumerates to 0 steps. There is no initiation step from an unoxidised fatty acid, so in production the chain is seeded by the lipid-oxidation anchor rather than by the network itself.",
+    "The thiamine cascade matches thiamine by EXACT canonical SMILES (Cc1ncc(C[n+]2csc(CCO)c2C)c(N)n1) and by a >= 100 C gate; a differently written thiamine SMILES silently produces nothing.",
+    "Glutathione, ascorbate, catechol, the phospholipid headgroup and IMP reach no template of their own -- they enumerate only through the generic family-01 amine/carbonyl templates, or to zero steps."
+  ],
+  "families": [
+    {
+      "slr_family": "01",
+      "family_id": "amino_acid_sugar_core",
+      "display_name": "Amino acid-sugar Maillard core",
+      "implementation_state": "generative_templates",
+      "implementation_state_label": "generative reaction templates",
+      "emitted_reaction_families": [
+        "Amadori_Rearrangement",
+        "Aminoketone_Condensation",
+        "Cysteine_Degradation",
+        "Deoxyosone_Reduction",
+        "Enolisation_1_2",
+        "Enolisation_2_3",
+        "Enolisation_2_3_Amadori",
+        "Enolisation_Intermediate",
+        "Furanone_Amino_Acid_Reduction",
+        "Furanone_Cyclisation",
+        "Furanone_Formation",
+        "Furanone_Reductive_Opening",
+        "Furanone_Reductive_Sulfhydrylation",
+        "Generalized_Deamination",
+        "Mercaptoketone_Aldol_Addition",
+        "Mercaptoketone_Cyclodehydration",
+        "Mercaptoketone_Formation",
+        "Retro_Aldol_Fragmentation",
+        "Schiff_Base_Formation",
+        "Strecker_Degradation",
+        "Thiohemiacetal_Formation",
+        "Thiol_Addition_H2",
+        "Thiol_Addition_Hexose_Legacy_Shortcut",
+        "Thiol_Addition_Pentodiulose",
+        "Thiol_Dehydration",
+        "Thiol_Oxidation"
+      ],
+      "mapped_but_not_emitted_by_this_battery": [
+        "Fructofuranosyl_Dehydration",
+        "Heyns_Rearrangement",
+        "Thiol_Addition_Legacy_Shortcut",
+        "Thiol_Addition_Norfuraneol"
+      ],
+      "implementation": "26 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
+    },
+    {
+      "slr_family": "02",
+      "family_id": "lipid_oxidation_and_carbonylic_crosstalk",
+      "display_name": "Lipid oxidation and carbonylic crosstalk",
+      "implementation_state": "generative_templates",
+      "implementation_state_label": "generative reaction templates",
+      "emitted_reaction_families": [
+        "Beta_Scission",
+        "Lipid_Homolysis",
+        "Peroxy_H_Abstraction",
+        "Radical_Propagation_O2",
+        "Radical_Termination"
+      ],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "5 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
+    },
+    {
+      "slr_family": "03",
+      "family_id": "thiamine_fragmentation_support",
+      "display_name": "Thiamine degradation and sulfur support",
+      "implementation_state": "generative_templates",
+      "implementation_state_label": "generative reaction templates",
+      "emitted_reaction_families": [
+        "Additive_Thermal_Degradation",
+        "Furan_Ring_Aromatisation"
+      ],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "2 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
+    },
+    {
+      "slr_family": "04",
+      "family_id": "nucleotide_and_ribose_support",
+      "display_name": "Nucleotide degradation and ribose support",
+      "implementation_state": "priors_only",
+      "implementation_state_label": "literature priors only",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "Ribose itself is a first-class sugar donor of families 01/07, but there is no nucleotide template: IMP/GMP enumerate to nothing. The lane exists as literature priors and coverage bookkeeping only (src/family_barrier_progress.py, src/dft_coverage_map.py)."
+    },
+    {
+      "slr_family": "05",
+      "family_id": "glutathione_and_peptide_support",
+      "display_name": "Glutathione and peptide support",
+      "implementation_state": "priors_only",
+      "implementation_state_label": "literature priors only",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "No GSH template. Glutathione enumerates only through the generic amine/carbonyl templates of family 01 -- the `glutathione_cleavage` FAST_BARRIERS entry is never reached because no family emits it. Priors and bookkeeping only (src/literature_learning_loop.py, src/family_barrier_progress.py)."
+    },
+    {
+      "slr_family": "06",
+      "family_id": "alternative_protein_matrix_scope",
+      "display_name": "Alternative protein matrix scope",
+      "implementation_state": "matrix_or_modifier_layer",
+      "implementation_state_label": "matrix / modifier layer, not reaction chemistry",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "Not reaction chemistry. Implemented as the matrix layer: src/matrix_correction.py (accessibility + volatile retention per protein type). The per-source registry (data/lit/protein_source_registry.json) was withdrawn 2026-09-01 as self-declared mocked."
+    },
+    {
+      "slr_family": "07",
+      "family_id": "carbonyl_donor_hierarchy",
+      "display_name": "Reducing sugar and carbonyl donor hierarchy",
+      "implementation_state": "shared_templates_plus_modifier",
+      "implementation_state_label": "no templates of its own; modifier layer",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "No templates of its own: it modulates family 01's. Implemented as `DONOR_REACTIVITY_MULTIPLIERS` in src/barrier_constants.py (per-family pentose/hexose/fructose/phosphorylated multipliers) plus `infer_carbohydrate_donor_identity`."
+    },
+    {
+      "slr_family": "08",
+      "family_id": "off_note_and_maillard_suppression",
+      "display_name": "Plant off-notes and Maillard suppression",
+      "implementation_state": "shared_templates_plus_modifier",
+      "implementation_state_label": "no templates of its own; modifier layer",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "No templates of its own. The off-notes are produced by family 02 and trapped by family 11 (`Lipid_Schiff_Base`); the suppression side is the intervention layer (src/pre_processor.py) and the matrix retention profiles."
+    },
+    {
+      "slr_family": "09",
+      "family_id": "carbohydrate_pyrolysis_and_caramelization",
+      "display_name": "Carbohydrate pyrolysis and caramelization",
+      "implementation_state": "shared_templates",
+      "implementation_state_label": "no templates of its own (uses another family's)",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "No templates of its own. Furfural and HMF are produced by family 01's 1,2-enolisation limb (`Enolisation_1_2`); severity is reported by the projection layer's process-state index (src/projection.py)."
+    },
+    {
+      "slr_family": "10",
+      "family_id": "fermentation_pretreatment",
+      "display_name": "Microbial fermentation pretreatment",
+      "implementation_state": "matrix_or_modifier_layer",
+      "implementation_state_label": "matrix / modifier layer, not reaction chemistry",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "Not reaction chemistry. Implemented as an upstream precursor-enrichment modifier: src/pre_processor.py `KNOWN_INTERVENTIONS`, wired through src/literature_runtime.py."
+    },
+    {
+      "slr_family": "11",
+      "family_id": "lipid_maillard_crosstalk",
+      "display_name": "Maillard/Lipid Crosstalk",
+      "implementation_state": "generative_templates",
+      "implementation_state_label": "generative reaction templates",
+      "emitted_reaction_families": [
+        "Lipid_Schiff_Base",
+        "Lipid_Strecker_Synergy",
+        "Lipid_Thiazole_Condensation"
+      ],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "3 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
+    },
+    {
+      "slr_family": "12",
+      "family_id": "protein_damage_markers",
+      "display_name": "Protein Damage Markers",
+      "implementation_state": "generative_templates",
+      "implementation_state_label": "generative reaction templates",
+      "emitted_reaction_families": [
+        "Beta_Elimination",
+        "DHA_Crosslinking",
+        "Safety_Risk_AGE",
+        "Safety_Risk_Acrylamide"
+      ],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "4 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
+    },
+    {
+      "slr_family": "13",
+      "family_id": "polyphenol_amino_capping",
+      "display_name": "Polyphenol-Amino Capping",
+      "implementation_state": "priors_only",
+      "implementation_state_label": "literature priors only",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "No template. The quinone/cysteine Michael step has a computational prior (`quinone_cys_michael`) which Wave G1 explicitly PARKED because the curated layer has no step to route it to. src/literature_runtime.py only."
+    },
+    {
+      "slr_family": "14",
+      "family_id": "ascorbic_acid_maillard",
+      "display_name": "Ascorbic Acid Maillard",
+      "implementation_state": "curated_only",
+      "implementation_state_label": "curated layer only",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "No template. Present only as an ascorbate prior attached to the curated `Enolisation_1_2` step (src/curated_pathways.py, src/literature_runtime.py). [P] that prior's provenance is still open -- see tasks/audit_remediation.md."
+    },
+    {
+      "slr_family": "15",
+      "family_id": "phospholipid_amine_sink",
+      "display_name": "PE Stealth Sugar Sink",
+      "implementation_state": "priors_only",
+      "implementation_state_label": "literature priors only",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "No template; the PE headgroup enumerates to nothing. Implemented as a sugar-depletion bookkeeping term from the `pe_schiff_base` / `pe_amadori` priors in src/literature_runtime.py."
+    },
+    {
+      "slr_family": "16",
+      "family_id": "melanoidin_polymerization",
+      "display_name": "Melanoidin Polymerization",
+      "implementation_state": "matrix_or_modifier_layer",
+      "implementation_state_label": "matrix / modifier layer, not reaction chemistry",
+      "emitted_reaction_families": [],
+      "mapped_but_not_emitted_by_this_battery": [],
+      "implementation": "Not reaction chemistry. Implemented as the thiol-trapping factor `_MELANOIDIN_TRAPPING_PROFILES` / `_resolve_melanoidin_trapping_factor` in src/recommend.py, gated on the family-16 lane being active."
+    }
+  ]
+}

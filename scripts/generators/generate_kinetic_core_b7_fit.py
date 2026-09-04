@@ -47,7 +47,9 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-OUTPUT_DIR = ROOT / "results" / "validation"
+from src import data_paths
+
+OUTPUT_DIR = data_paths.VALIDATION_DIR
 BASENAME = "kinetic_core_b7_fit_report"
 
 SEED = 20260829
@@ -457,7 +459,7 @@ def build_report() -> Dict[str, Any]:
         "artifact": "kinetic_core_b7_fit_report",
         "generated_on": date.today().isoformat(),
         "git": _git_head(),
-        "pre_registration": "results/validation/kinetic_core_b7_prereg.md",
+        "pre_registration": data_paths.rel(data_paths.VALIDATION_DIR / "kinetic_core_b7_prereg.md"),
         "declaration": (
             "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendments 8 and 12"
         ),

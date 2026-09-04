@@ -1,5 +1,7 @@
 {
   "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+  "quantification_class": "hs_spme_gcms_internal_standard_curve",
+  "quantification_note": "Declared 2026-09-03 from the PMC full text (PMC8271896, Materials and Methods 4.2): DVB/CAR/PDMS SPME fibre, 10 min, GC-MS; standard curves per compound class with hexanal-d12 as internal standard; 1 g powder in 7 mL water; Table 1 in ppb, mean +/- SD. Headspace: the K_aw and HS-SPME bands apply.",
   "source_doi": "10.3390/molecules26134104",
   "precursors": {
     "Soy Protein Isolate": {
@@ -33,7 +35,7 @@
       "hexanol REMOVED: paper Table 1 reports n.d. for soy; the paper's text gives soy's entire alcohol fraction as 40 +/- 9 ppb of 1-octen-3-ol only, so the previous 120 ppb was 3x the paper's TOTAL alcohols and attributed to a compound the paper says was not detected",
       "2-pentylfuran 2492 ppb CONFIRMED against the paper; ranking (2-pentylfuran > hexanal) unchanged"
     ],
-    "report": "results/validation/content_verification_wave_k.md",
+    "report": "results/legacy_lane/validation/content_verification_wave_k.md",
     "origin_identified_2026_08_27_wave_t3": "ORIGIN IDENTIFIED 2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-05/T1-04). Wave K recorded the retired 260 / 380 ppb hexanal and 80 / 120 ppb 1-hexanol values as 'origin unknown, no derivation found'. They are not unknown. All four are printed in data/benchmarks/maillard_validation_benchmarks.md section 3.1 -- the repository's own abstract-reconstructed internal brief -- as '~260 +/- 35', '~380 +/- 42', '~80' and '~120'. That is the same table, the same file and the same commit era as section 1.3, which Wave S2b proved fabricated (the MFT 342 / FFT 200 case). It carries the identical forensic fingerprint, now independently validated twice: in that document a BOLD or unhedged cell is transcribed from a real abstract and a '~'-hedged cell is invented. Section 3.1's two BOLD cells are 2-pentylfuran '638 +/- 49' and '2492 +/- 199' -- exactly the two values Wave K confirmed VERBATIM against the paper -- and its tilde-hedged cells are exactly the four Wave K found wrong or fabricated. The fingerprint predicts the Wave K result perfectly. NO VALUE IS CHANGED BY THIS NOTE: the corrections above already stand. This records that the wrong numbers came from inside this repository, not from a misreading of Pratap-Singh et al., and that section 3.1 is a confirmed source of laundered values. Consequence still live: the 1-hexanol observability factors in src/matrix_calibration_registry.py (0.063 pea, 0.143 soy) are back-solved from the retired ~80 / ~120 ppb and were never refitted -- see that file's headers."
   },
   "matrix_ranking_contract": {
@@ -72,5 +74,13 @@
     }
   },
   "protein_type": "soy_iso",
-  "denaturation_state": 0.0
+  "denaturation_state": 0.0,
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PubMed Central PMC8271896 (open access), fetched 2026-09-03",
+    "quoted_quantification": "Volatile compounds were recovered on a 1 cm 50/30 um DVB/CAR/PDMS Flex SPME fibre over a period of 10 min ... Standard curves of hexanal, 2-nonanone, and hexanol were generated and used for the aldehyde, ketone and alcohol quantification separately ... 5 uL of internal standard hexanal-d12 was used to generate the standard curve for quantification.",
+    "quoted_values": "Table 1: hexanal, native soy protein isolate 1621.71 +/- 159.69 ppb (1 g powder in 7 mL distilled deionized water).",
+    "quantification_verdict": "HS-SPME-GC-MS with an internal-standard calibration curve (hexanal-d12); compound classes quantified against one representative standard each.",
+    "verified_on": "2026-09-03"
+  }
 }

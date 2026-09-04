@@ -11,8 +11,7 @@
       "priority": "high",
       "why_it_matters": "This is the generative trunk that creates the dicarbonyl and Amadori or Heyns intermediates feeding most downstream meaty chemistry.",
       "current_runtime_assets": [
-        "data/lit/flavor_reference_payloads.json",
-        "src/benchmark_validation.py"
+        "data/lit/flavor_reference_payloads.json"
       ],
       "ingestion_surfaces": [
         "benchmark_intake_registry",
@@ -21,7 +20,11 @@
       ],
       "preferred_ingestion_mode": "benchmark_or_reference_payload",
       "next_best_action": "Keep as the strict core and use it as the dependency map for every non-core family extension.",
-      "notes": "First because it is the most transferable, benchmarkable, and decision-relevant foundation."
+      "notes": "First because it is the most transferable, benchmarkable, and decision-relevant foundation.",
+      "retired_runtime_assets": [
+        "retired 2026-09-03 (B5b): src/benchmark_validation.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "02",
@@ -138,8 +141,7 @@
       "why_it_matters": "Flavor recommendations are wrong if ribose, xylose, glucose, and fructose are treated as interchangeable.",
       "current_runtime_assets": [
         "data/lit/flavor_reference_payloads.json",
-        "data/lit/matrix_decision_panel.json",
-        "src/recommend.py"
+        "data/lit/matrix_decision_panel.json"
       ],
       "ingestion_surfaces": [
         "benchmark_intake_registry",
@@ -149,7 +151,11 @@
       ],
       "preferred_ingestion_mode": "benchmark_payload_plus_priors",
       "next_best_action": "Keep donor identity first-class in runtime and reporting.",
-      "notes": "Lane is already active and should stay separate from the core trunk."
+      "notes": "Lane is already active and should stay separate from the core trunk.",
+      "retired_runtime_assets": [
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "08",
@@ -225,7 +231,7 @@
       "priority": "high",
       "why_it_matters": "Lipid-derived dicarbonyls (MDA, 4-HNE) compete for protein amines, while Maillard intermediates quench lipid radicals.",
       "current_runtime_assets": [
-        "data/Gemini_Deep_Research/11_maillard_lipid_crosstalk.md",
+        "data/research_corpus/raw/Gemini_deep_research_11.md",
         "src/lipid_oxidation.py"
       ],
       "ingestion_surfaces": [
@@ -245,8 +251,7 @@
       "priority": "high",
       "why_it_matters": "Extrusion intensity drives the formation of CML, CEL, Furosine, and LAL, critical for safety labeling.",
       "current_runtime_assets": [
-        "data/Gemini_Deep_Research/12_protein_damage_markers.md",
-        "src/safety.py"
+        "data/research_corpus/12_protein_damage_markers.md"
       ],
       "ingestion_surfaces": [
         "safety_reference_payloads",
@@ -254,7 +259,11 @@
       ],
       "preferred_ingestion_mode": "guardrail_severity_surface",
       "next_best_action": "Promote CML, CEL, and Furosine to first-class safety metrics.",
-      "notes": "Split lane: computable guardrail severity vs. wet-lab required for exact markers."
+      "notes": "Split lane: computable guardrail severity vs. wet-lab required for exact markers.",
+      "retired_runtime_assets": [
+        "retired 2026-09-03 (B5b): src/safety.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py"
     },
     {
       "slr_family": "13",
@@ -265,7 +274,7 @@
       "priority": "medium",
       "why_it_matters": "Oxidized polyphenols (quinones) rapidly cap cysteine and lysine residues, depleting flavor precursors.",
       "current_runtime_assets": [
-        "data/Gemini_Deep_Research/13_polyphenol_amino_capping.md"
+        "data/research_corpus/raw/Gemini_deep_research_13.md"
       ],
       "ingestion_surfaces": [
         "computational_priors",
@@ -284,7 +293,7 @@
       "priority": "medium",
       "why_it_matters": "Ascorbic acid acts as a dicarbonyl and AGE initiator at extrusion temperatures (>120°C).",
       "current_runtime_assets": [
-        "data/Gemini_Deep_Research/14_ascorbic_acid_maillard.md"
+        "data/research_corpus/raw/Gemini_deep_research_14.md"
       ],
       "ingestion_surfaces": [
         "computational_priors",
@@ -303,7 +312,7 @@
       "priority": "high",
       "why_it_matters": "PE in lecithin competes with protein amines for sugar with lower Ea and interfacial acceleration.",
       "current_runtime_assets": [
-        "data/Gemini_Deep_Research/15_phospholipid_amine_maillard.md"
+        "data/research_corpus/raw/Gemini_deep_research_15.md"
       ],
       "ingestion_surfaces": [
         "computational_priors",
@@ -322,8 +331,8 @@
       "priority": "high",
       "why_it_matters": "HMW melanoidins scavenge sulfur volatiles via irreversible CROSSPY-radical thioether formation.",
       "current_runtime_assets": [
-        "data/Gemini_Deep_Research/16_melanoidin_polymerization.md",
-        "src/extrusion_model.py"
+        "data/research_corpus/raw/Gemini_deep_research_16.md",
+        "src/extrusion.py"
       ],
       "ingestion_surfaces": [
         "process_gap_registry",

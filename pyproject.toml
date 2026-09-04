@@ -37,3 +37,18 @@ dev = [
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+# 2026-09-03 (test audit). The envelope and the directional scorer fork worker processes;
+# without `concurrency = multiprocessing` + `parallel` their modules measured 0 % although
+# their tests pass. Run: ./scripts/docker_maillard.sh coverage
+[tool.coverage.run]
+source = ["src", "scripts"]
+branch = false
+parallel = true
+concurrency = ["multiprocessing"]
+omit = ["scripts/generators/generate_kinetic_core_b*_*.py", "scripts/generators/probe_amine_fate_b2_4.py"]
+
+[tool.coverage.report]
+skip_empty = true
+show_missing = false
+precision = 0

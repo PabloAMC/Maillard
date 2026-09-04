@@ -6,21 +6,18 @@ from typing import Any, Dict, Iterable, Mapping
 
 import yaml
 
+from src import data_paths
+from src import data_access
 from src.doe_generator import build_extrusion_benchmark_protocol
 
 
-ROOT = Path(__file__).resolve().parents[1]
-EXTRUSION_EXTERNAL_CLOSURE_CONTRACT_PATH = ROOT / "data" / "protocols" / "extrusion_external_closure_contract.json"
-PRIMARY_PROTOCOL_CONTRACT_PATH = ROOT / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json"
-PROCESS_STATE_CALIBRATIONS_PATH = ROOT / "data" / "lit" / "process_state_calibrations.json"
-COMPUTATIONAL_PRIORS_PATH = ROOT / "data" / "lit" / "computational_priors.json"
+ROOT = data_paths.REPO_ROOT
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+def _under_root(root: Path, default: Path) -> Path:
+    """``default`` when ``root`` is the repository checkout; the same repo-relative file
+    re-rooted under ``root`` otherwise (tests and scripts pass explicit roots)."""
+    return default if root == data_paths.REPO_ROOT else root / data_paths.rel(default)
 
 
 def _find_row(rows: Iterable[Mapping[str, Any]], key: str, value: str) -> Dict[str, Any]:
@@ -53,8 +50,8 @@ def _required_tradeoff_panel(contract: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def build_extrusion_external_closure_package(root: Path = ROOT) -> Dict[str, Any]:
-    closure_contract = _load_json(root / "data" / "protocols" / "extrusion_external_closure_contract.json")
-    primary_contract = _load_json(root / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json")
+    closure_contract = data_access.load_json(_under_root(root, data_paths.EXTRUSION_EXTERNAL_CLOSURE_CONTRACT))
+    primary_contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
     protocol = build_extrusion_benchmark_protocol(root)
     selected_matrix = str(protocol.get("selected_protein_type", "soy_iso"))
     matrix_row = _find_row(closure_contract.get("matrices", []), "matrix", selected_matrix)
@@ -161,7 +158,7 @@ def build_extrusion_external_closure_workbook(root: Path = ROOT) -> Dict[str, An
     package = build_extrusion_external_closure_package(root)
     protocol = build_extrusion_benchmark_protocol(root)
     hme_anchor = dict(protocol.get("closest_repo_backed_hme_anchor", {}))
-    aligned_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
+    aligned_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_Internal2026"
     experiments = []
     for arm in package.get("process_arms", []):
         experiments.append(
@@ -244,9 +241,9 @@ def _prior_ids() -> Dict[str, str]:
 
 def build_extrusion_disulfide_follow_on_package(root: Path = ROOT) -> Dict[str, Any]:
     protocol = build_extrusion_benchmark_protocol(root)
-    primary_contract = _load_json(root / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json")
-    process_payload = _load_json(root / "data" / "lit" / "process_state_calibrations.json")
-    prior_payload = _load_json(root / "data" / "lit" / "computational_priors.json")
+    primary_contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
+    process_payload = data_access.load_json(_under_root(root, data_paths.PROCESS_STATE_CALIBRATIONS))
+    prior_payload = data_access.load_json(_under_root(root, data_paths.COMPUTATIONAL_PRIORS))
     ids = _prior_ids()
     process_entry = _find_row(process_payload.get("entries", []), "id", ids["disulfide_context"])
     prior_rows = list(prior_payload.get("retention_binding_priors", []))
@@ -359,7 +356,7 @@ def render_extrusion_disulfide_follow_on_markdown(payload: Mapping[str, Any]) ->
 def build_extrusion_disulfide_follow_on_workbook(root: Path = ROOT) -> Dict[str, Any]:
     follow_on = build_extrusion_disulfide_follow_on_package(root)
     protocol = build_extrusion_benchmark_protocol(root)
-    reference_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"
+    reference_benchmark_id = "soy_isolate_ribose_cysteine_100C_45min_Internal2026"
     experiments = []
     for arm in protocol.get("process_arms", []):
         experiments.append(

@@ -80,9 +80,11 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths
+
 R_KJ = 8.314462618e-3  # kJ/(mol K)
 
-DOSSIER_DIR = Path("data/lit/extraction_dossiers")
+DOSSIER_DIR = data_paths.rel(data_paths.EXTRACTION_DOSSIERS_DIR)
 
 
 # ---------------------------------------------------------------------------
@@ -296,7 +298,7 @@ def _a_from_k_ref(k_ref: Optional[float], ea: Optional[float], t_ref: float) -> 
 def collect_yaml_pairs() -> List[Dict[str, Any]]:
     import yaml  # local import: only this collector needs it
 
-    path = ROOT / "data" / "lit" / "arrhenius_params.yml"
+    path = data_paths.ARRHENIUS_PARAMS
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     rows: List[Dict[str, Any]] = []
     for key, entry in (data.get("arrhenius_data") or {}).items():
@@ -304,7 +306,7 @@ def collect_yaml_pairs() -> List[Dict[str, Any]]:
         a_is_nan = a_raw is None or (isinstance(a_raw, float) and math.isnan(a_raw))
         rows.append({
             "parameter_id": key,
-            "shipped_in": "data/lit/arrhenius_params.yml",
+            "shipped_in": data_paths.rel(data_paths.ARRHENIUS_PARAMS),
             "lane": "cantera_export",
             "form": "explicit_A",
             "shipped_ea_kj_mol": (
@@ -365,12 +367,12 @@ def collect_misc_pairs() -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
 
     calib = json.loads(
-        (ROOT / "data" / "lit" / "lipid_oxidation_calibration.json").read_text(encoding="utf-8")
+        (data_paths.LIPID_OXIDATION_CALIBRATION).read_text(encoding="utf-8")
     )
     kin = calib["kinetics"]
     rows.append({
         "parameter_id": "lipid_hydroperoxide_formation",
-        "shipped_in": "data/lit/lipid_oxidation_calibration.json",
+        "shipped_in": data_paths.rel(data_paths.LIPID_OXIDATION_CALIBRATION),
         "lane": "lipid_oxidation",
         "form": "explicit_A",
         "shipped_ea_kj_mol": float(kin["activation_energy_j_per_mol"]) / 1000.0,
@@ -1042,7 +1044,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default="results/validation",
+        default=data_paths.rel(data_paths.VALIDATION_DIR),
         help="directory the two artifacts are written to, relative to the repo root",
     )
     parser.add_argument(

@@ -22,6 +22,8 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Sequence
 
+from src import data_paths
+from src import data_access
 from src.extrusion import (
     SME_WINDOW_REFERENCE_KJ_PER_KG,
     build_extrusion_process_profile,
@@ -30,11 +32,6 @@ from src.extrusion import (
 
 logger = logging.getLogger(__name__)
 
-ROOT = Path(__file__).resolve().parents[1]
-
-PRIMARY_PROTOCOL_CONTRACT_PATH = ROOT / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json"
-SAFETY_REFERENCE_PAYLOADS_PATH = ROOT / "data" / "lit" / "safety_reference_payloads.json"
-BENCHMARK_INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
 
 # Basic templated DoE protocols based on the gap type
 DOE_TEMPLATES = {
@@ -132,27 +129,15 @@ def generate_active_learning_requests(gap_registry_path: str) -> dict:
     return {"active_learning_requests": requests}
 
 
-def export_doe_requests(gap_registry_path: str, output_path: str):
-    """Generates and writes the DoE requests to a JSON artifact."""
-    payload = generate_active_learning_requests(gap_registry_path)
-    
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2)
-        
-    logger.info(f"Exported {len(payload['active_learning_requests'])} Active Learning DoE requests to {output_path}")
-    return payload
-
-
-def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+def _under_root(root: Path, path: Path) -> Path:
+    """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
+    if Path(root).resolve() == data_paths.REPO_ROOT:
+        return path
+    return root / data_paths.rel(path)
 
 
 def _resolve_acrylamide_reference(root: Path) -> Dict[str, Any]:
-    payload = _load_json(root / "data" / "lit" / "safety_reference_payloads.json")
+    payload = data_access.load_json(_under_root(root, data_paths.SAFETY_REFERENCE_PAYLOADS))
     for entry in payload.get("entries", []):
         if str(entry.get("id", "")) == "choi_2024_pea_acrylamide_asparagine":
             return dict(entry)
@@ -160,7 +145,7 @@ def _resolve_acrylamide_reference(root: Path) -> Dict[str, Any]:
 
 
 def _resolve_hme_control_anchor(root: Path) -> Dict[str, Any]:
-    payload = _load_json(root / "data" / "lit" / "benchmark_intake_registry.json")
+    payload = data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
     for entry in payload.get("eligible_references", []):
         if str(entry.get("id", "")) == "pmc_2026_hme_hexanal_baseline":
             return dict(entry)
@@ -238,8 +223,8 @@ def _evaluate_arm_discrimination(
     }
 
 
-def build_extrusion_benchmark_protocol(root: Path = ROOT) -> Dict[str, Any]:
-    contract = _load_json(root / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json")
+def build_extrusion_benchmark_protocol(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
+    contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
     acrylamide_reference = _resolve_acrylamide_reference(root)
     hme_control_anchor = _resolve_hme_control_anchor(root)
     hme_key_values = dict(hme_control_anchor.get("key_values", {}))
@@ -486,12 +471,12 @@ def render_extrusion_benchmark_protocol_markdown(payload: Mapping[str, Any]) -> 
     return "\n".join(lines) + "\n"
 
 
-def build_extrusion_sop_lock_register(root: Path = ROOT) -> Dict[str, Any]:
+def build_extrusion_sop_lock_register(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     protocol = build_extrusion_benchmark_protocol(root)
     anchor = dict(protocol.get("closest_repo_backed_hme_anchor", {}))
     headspace = dict(protocol.get("repo_backed_lab_specs", {}).get("headspace_method", {}))
     safety = dict(protocol.get("repo_backed_lab_specs", {}).get("safety_method", {}))
-    contract = _load_json(root / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json")
+    contract = data_access.load_json(_under_root(root, data_paths.PPI_SPI_PRIMARY_BENCHMARK_CONTRACT))
     return {
         "summary": {
             "status": "partially_locked_repo_backed",
@@ -546,7 +531,7 @@ def render_extrusion_sop_lock_register_markdown(payload: Mapping[str, Any]) -> s
     return "\n".join(lines) + "\n"
 
 
-def export_extrusion_sop_lock_register(output_dir: str, *, root: Path = ROOT) -> Dict[str, Any]:
+def export_extrusion_sop_lock_register(output_dir: str, *, root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     payload = build_extrusion_sop_lock_register(root)
     markdown = render_extrusion_sop_lock_register_markdown(payload)
     destination = Path(output_dir)
@@ -558,7 +543,7 @@ def export_extrusion_sop_lock_register(output_dir: str, *, root: Path = ROOT) ->
     return payload
 
 
-def export_extrusion_benchmark_protocol(output_dir: str, *, root: Path = ROOT) -> Dict[str, Any]:
+def export_extrusion_benchmark_protocol(output_dir: str, *, root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     payload = build_extrusion_benchmark_protocol(root)
     markdown = render_extrusion_benchmark_protocol_markdown(payload)
 

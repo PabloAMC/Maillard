@@ -104,7 +104,7 @@ The following criteria must all be met before this benchmark can be promoted to 
 
 ---
 
-**Script to Reproduce Simulation**: `scripts/run_pipeline.py --protein-type pea_iso --denaturation-state 0.5 --sugars ribose:1.0 --amino-acids cysteine:1.0 --ph 5.5 --temp 95`
+**Script to Reproduce Simulation**: the `run_pipeline.py` command that stood here drove the retired screening lane (deleted 2026-09-03). Reproduce the prediction with `python scripts/maillard.py predict <spec.yml>` using the precursor and process fields above; the kinetic core will refuse, with the reason, any target it cannot represent in a protein matrix.
 
 **Benchmark ID (target)**: `pea_iso_ribose_cys_95C_pH5p5_meaty`
 

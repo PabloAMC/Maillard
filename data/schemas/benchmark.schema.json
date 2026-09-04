@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "maillard/benchmark.schema.json",
+  "title": "Maillard benchmark payload",
+  "description": "One literature or internal observation the model is scored against. Written 2026-09-01 from the 56 committed payloads (cleaning branch, Phase 4). Four tiers share this core: panel (data/benchmarks/*.json), matrix hold-out (external_validation/), free-precursor hold-out (external_validation/maillard_path/), retired (quarantined/, step_level_unreachable/). Provenance blocks are free-form on purpose; the CORE is not.",
+  "type": "object",
+  "required": [
+    "benchmark_id",
+    "precursors",
+    "conditions",
+    "metadata"
+  ],
+  "properties": {
+    "benchmark_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_]+$",
+      "description": "Equals the file stem (checked by scripts/ci/schema_gate.py)."
+    },
+    "precursors": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "concentration_mM"
+        ],
+        "properties": {
+          "concentration_mM": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "conditions": {
+      "type": "object",
+      "required": [
+        "temp_C",
+        "ph",
+        "water_activity",
+        "time_min"
+      ],
+      "properties": {
+        "temp_C": {
+          "type": "number",
+          "minimum": -50,
+          "maximum": 400
+        },
+        "ph": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 14
+        },
+        "water_activity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "time_min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "ph_basis": {
+          "type": "string",
+          "enum": [
+            "initial",
+            "final",
+            "unstated"
+          ],
+          "description": "Optional until every payload declares it. One bundle (Steinhagen 2021) reports a post-autoclave pH; the rest report the bench value."
+        },
+        "buffer": {
+          "type": "object",
+          "description": "Curated from the primary source; carried forward on regeneration (see src/external_validation.py)."
+        }
+      },
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "tier",
+        "family",
+        "execution_path",
+        "notes"
+      ],
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "PRIMARY",
+            "SECONDARY",
+            "REFERENCE"
+          ]
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "execution_path": {
+          "type": "string",
+          "enum": [
+            "free_precursor",
+            "matrix_only",
+            "matrix_precursor_augmented"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        },
+        "evidence_class": {
+          "type": "string",
+          "enum": [
+            "external_validation_only",
+            "diagnostic_only"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "measured_volatiles": {
+      "$ref": "#/$defs/volatile_block",
+      "description": "Concentrations MEASURED by the source. Mutually exclusive with reference_volatiles."
+    },
+    "reference_volatiles": {
+      "$ref": "#/$defs/volatile_block",
+      "description": "Concentrations that are a reference or a model snapshot, not a measurement of this system (internal reproducibility snapshots; free-precursor hold-outs, whose scored targets live in holdout_targets)."
+    },
+    "holdout_targets": {
+      "type": "object",
+      "description": "Free-precursor hold-out only: the frozen scored targets with their verbatim source quote.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "target_value",
+          "target_unit",
+          "target_quote"
+        ],
+        "properties": {
+          "target_value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "target_unit": {
+            "type": "string"
+          },
+          "target_quote": {
+            "type": "string"
+          },
+          "unit_commensurable": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "evidence_class": {
+      "type": "string",
+      "enum": [
+        "external_validation_only",
+        "diagnostic_only"
+      ]
+    },
+    "protein_type": {
+      "type": "string",
+      "enum": [
+        "free",
+        "pea_iso",
+        "soy_iso"
+      ]
+    },
+    "denaturation_state": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "source_doi": {
+      "type": "string",
+      "pattern": "^10\\.\\d{4,9}/"
+    },
+    "source_metadata": {
+      "type": "object"
+    },
+    "validation_contract": {
+      "type": "object"
+    },
+    "quantification_class": {
+      "type": "string",
+      "description": "How the analyte was quantified. Headspace classes (spme/headspace/dhs in the name) carry the K_aw and HS-SPME bands in the envelope; extraction classes do not; 'undeclared' keeps the core's convention and says so on the row (src/kinetic_core/panel.quantification_family).",
+      "enum": [
+        "dynamic_headspace_gcmsms",
+        "external_standard_curve_hplc_uv",
+        "hs_spme_gcms_internal_standard_calibration_curve",
+        "hs_spme_gcms_internal_standard_curve",
+        "hs_spme_gcms_semi_quantitative_internal_standard",
+        "hs_spme_gcmsms_external_standard_curve",
+        "internal_standard_gcms_sim",
+        "internal_standard_with_measured_response_factors",
+        "isotope_dilution_lcmsms",
+        "lcmsms_external_calibration_curve",
+        "stable_isotope_dilution_gcms",
+        "undeclared"
+      ]
+    },
+    "quantification_note": {
+      "type": "string",
+      "description": "Where the class was read from, or why it is undeclared."
+    }
+  },
+  "additionalProperties": true,
+  "oneOf": [
+    {
+      "required": [
+        "measured_volatiles"
+      ],
+      "not": {
+        "required": [
+          "reference_volatiles"
+        ]
+      }
+    },
+    {
+      "required": [
+        "reference_volatiles"
+      ],
+      "not": {
+        "required": [
+          "measured_volatiles"
+        ]
+      }
+    }
+  ],
+  "dependentRequired": {
+    "holdout_targets": [
+      "reference_volatiles"
+    ]
+  },
+  "$defs": {
+    "volatile_block": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "conc_ppb": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "uncertainty_pct": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "conc_ppb_deliberately_absent": {
+            "type": "string",
+            "minLength": 20,
+            "description": "Why no concentration is given (e.g. the source reports a ratio, scored in holdout_targets). Replaces conc_ppb; must explain itself."
+          }
+        },
+        "additionalProperties": true,
+        "anyOf": [
+          {
+            "required": [
+              "conc_ppb"
+            ]
+          },
+          {
+            "required": [
+              "conc_ppb_deliberately_absent"
+            ]
+          }
+        ]
+      },
+      "description": "Per-compound entries keyed by a spelling that resolves in data/keys/compounds.yml. Each entry carries conc_ppb, or conc_ppb_deliberately_absent explaining why not."
+    }
+  }
+}

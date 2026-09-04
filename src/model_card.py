@@ -14,19 +14,21 @@ an artifact moves, the card moves. If an artifact is missing, the card says so i
 rather than quietly dropping the row: a blank is indistinguishable from a pass, and this
 campaign has spent nine waves removing exactly that failure mode.
 
-WHAT IT READS
+WHAT IT READS (2026-09-03, retirement step B5: the legacy lane's artifacts are gone)
 -------------
 ============================================ ==========================================
-directional_accuracy_report.md               ordinal reliability, per axis (tracked)
-maillard_path_holdout_frozen_predictions.json free-precursor hold-out, pre-registered
-external_validation_report.json              matrix hold-out, CI coverage, extrapolation
-matrix_binding_mode_comparison.json          three observability modes, hold-out medians
-the benchmark panel                          RECOMPUTED live -- benchmark_summary.json is
-                                             gitignored and absent in a fresh clone
+the union panel                              RECOMPUTED live on the kinetic core
+                                             (src.kinetic_core.scoring.score_panel, ~15 s)
+core_prediction_uncertainty.json             the core's Monte-Carlo envelope (tracked)
 data/**/*.json,yml                           the no_verifiable_source census, recounted
 data/benchmarks/cys_ribose_140C_Hofmann1998  the sulfur branch's anchor status
 scripts/ci/*.py                              the three blocking gates, actually run
 ============================================ ==========================================
+
+core_directional_scores.json                 the core on the directional claims panel (B7)
+
+NOT READ ANY MORE: the retired lane's directional-accuracy report, hold-out reports and
+observability-mode comparison. They were measured on the retired screening lane.
 
 NOTHING HERE IS A MEASUREMENT. Every number is read or recounted; the only judgement this
 module adds is the trust/caution/do-not-use threshold, which is stated in the card itself.
@@ -37,12 +39,13 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Tuple
 
 import yaml
 
+from src import data_paths
 from src.directional_reliability import (
     CAUTION_MIN_RATE,
     MIN_EVALUABLE_FOR_TRUST,
@@ -50,17 +53,17 @@ from src.directional_reliability import (
     VERDICT_CAUTION,
     VERDICT_DO_NOT_USE,
     VERDICT_TRUST,
-    load_panel_counts,
     verdict_for,
 )
 
-ROOT = Path(__file__).resolve().parents[1]
-VALIDATION_DIR = ROOT / "results" / "validation"
+ENVELOPE_PATH = data_paths.CORE_PREDICTION_UNCERTAINTY
+DIRECTIONAL_PATH = data_paths.CORE_DIRECTIONAL_SCORES
 
-HOLDOUT_PATH = VALIDATION_DIR / "maillard_path_holdout_frozen_predictions.json"
-EXTERNAL_PATH = VALIDATION_DIR / "external_validation_report.json"
-MODE_COMPARISON_PATH = VALIDATION_DIR / "matrix_binding_mode_comparison.json"
-SULFUR_BENCHMARK_PATH = ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json"
+ROOT = data_paths.REPO_ROOT
+
+# Quarantined 2026-09-04 (a repo-internal derivation, not a measurement); still read here as the
+# record of the sulfur branch's anchor status.
+SULFUR_BENCHMARK_PATH = data_paths.QUARANTINED_BENCHMARKS_DIR / "cys_ribose_140C_Hofmann1998.json"
 
 GATES = (
     "scripts/ci/holdout_guard.py",
@@ -101,132 +104,83 @@ def _read_json(path: Path) -> Optional[Dict[str, Any]]:
         return None
 
 
-def collect_directional(report_path: Optional[Path] = None) -> Dict[str, Any]:
-    counts = load_panel_counts(report_path) if report_path else load_panel_counts()
-    # The bucket rows and the category rows have DIFFERENT DENOMINATORS: the categories sum
-    # to the screening bucket (independent + system-overlap), the headline counts only the
-    # independent claims. Summing categories to derive an "excluding pH/aw" figure therefore
-    # quotes 24/29 where the headline-comparable number is 18/23. Both are true; mixing them
-    # inflates the score. So the bucket figures are READ from their own rows
-    # rather than derived, and the report states that arithmetic in place.
-    buckets = {
-        "headline": "strictly independent (headline)",
-        "system_overlap": "system-overlap",
-        "fit_adjacent": "fit-adjacent (excluded from the headline)",
-        "excluding_ph_aw": "independent, excluding ph and moisture_aw",
-        "ph_aw": "independent, ph and moisture_aw only",
-    }
-    categories = {
-        key: value for key, value in counts.items() if key not in set(buckets.values())
-    }
-    resolved = {name: counts.get(label) for name, label in buckets.items()}
-    resolved["categories"] = categories
-    resolved["category_bucket_note"] = (
-        "Category rows sum to the SCREENING bucket (independent + system-overlap); the "
-        "headline and the excluding-pH/aw rows are strictly independent. Different "
-        "denominators -- see the report's CURRENT STANDING section."
-    )
-    return resolved
-
-
-def collect_free_precursor_holdout() -> Dict[str, Any]:
-    payload = _read_json(HOLDOUT_PATH)
-    if payload is None:
-        return {"available": False, "path": _relative(HOLDOUT_PATH)}
-    summary = payload.get("summary", {})
+def collect_directional() -> Dict[str, Any]:
+    """The core on the directional claims panel (step B7), read from the tracked scorecard."""
+    payload = _read_json(DIRECTIONAL_PATH)
+    if payload is None or payload.get("artifact") != "core_directional_scores":
+        return {"available": False, "path": _relative(DIRECTIONAL_PATH)}
+    s = payload["summary"]
+    ind = s["independent"]
     return {
         "available": True,
-        "path": _relative(HOLDOUT_PATH),
-        "generated_on": payload.get("generated_on"),
-        "git": (payload.get("git") or {}).get("short") or (payload.get("git") or {}).get("commit"),
-        "bundles": summary.get("bundle_count"),
-        "targets": summary.get("target_count"),
-        "scored": summary.get("quantitatively_scored_count"),
-        "median_fold_error": summary.get("median_fold_error"),
-        "worst_fold_error": summary.get("worst_fold_error"),
-        "best_fold_error": summary.get("best_fold_error"),
-        "within_10x": summary.get("within_10x"),
-        "ordinal_pairs_correct": summary.get("ordinal_pairs_correct"),
-        "ordinal_pairs_total": summary.get("ordinal_pairs_total"),
-        "series_directions_correct": summary.get("series_directions_correct"),
-        "series_directions_total": summary.get("series_directions_total"),
-        "structural_zeroes": summary.get("structural_zero_count"),
+        "path": _relative(DIRECTIONAL_PATH),
+        "claims": payload["panel"]["claims"],
+        "headline": tuple(s["headline"]),
+        "excluding_ph_aw": (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]),
+        "ph_aw": (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]),
+        "not_evaluable": ind["total"]["not_evaluable"],
+        "mechanism_absent_misses": ind["total"]["mechanism_absent"],
+        "categories": {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()},
+        "misses": {k: list(v["misses"]) for k, v in ind["by_category"].items() if v["misses"]},
     }
 
 
-def collect_matrix_holdout() -> Dict[str, Any]:
-    payload = _read_json(EXTERNAL_PATH)
+def collect_core_envelope() -> Dict[str, Any]:
+    """The kinetic core's Monte-Carlo envelope (retirement step B2), read from the tracked
+    artifact: n=200 takes ~40 min, so this one is not recomputed."""
+    payload = _read_json(ENVELOPE_PATH)
     if payload is None:
-        return {"available": False, "path": _relative(EXTERNAL_PATH)}
-    summary = payload.get("summary", {})
-    split = summary.get("holdout_kind_split", {}) or {}
-    genuine = split.get("genuine_extrapolation", {}) or {}
-    in_panel = split.get("in_panel_rescoring", {}) or {}
+        return {"available": False, "path": _relative(ENVELOPE_PATH)}
+    s = payload.get("summary", {})
+    lit = s.get("honest_literature_coverage", {}) or {}
+    oos = s.get("out_of_sample_literature_coverage", {}) or {}
     return {
         "available": True,
-        "path": _relative(EXTERNAL_PATH),
-        "ci_coverage_hits": summary.get("ci_coverage_hits"),
-        "ci_level_pct": summary.get("ci_level_pct"),
-        "genuine_hits": genuine.get("hits"),
-        "genuine_total": genuine.get("total"),
-        "in_panel_hits": in_panel.get("hits"),
-        "in_panel_total": in_panel.get("total"),
-        "median_ci_width_log10": (summary.get("honest_literature_coverage") or {}).get(
-            "median_ci_width_log10"
-        ),
+        "path": _relative(ENVELOPE_PATH),
+        "n_samples": s.get("n_samples"),
+        "seed": s.get("seed"),
+        "ci_level_pct": s.get("ci_level_pct"),
+        "literature_hits": lit.get("hits"),
+        "literature_total": lit.get("total"),
+        "literature_not_evaluable": lit.get("not_evaluable"),
+        "median_ci_width_log10": lit.get("median_ci_width_log10"),
+        "out_of_sample_hits": oos.get("hits"),
+        "out_of_sample_total": oos.get("total"),
+        "unsampled_lanes": list(s.get("unsampled_lanes") or []),
     }
 
 
-def collect_observability_modes() -> Dict[str, Any]:
-    payload = _read_json(MODE_COMPARISON_PATH)
-    if payload is None:
-        return {"available": False, "path": _relative(MODE_COMPARISON_PATH)}
-    monte_carlo = payload.get("holdout_monte_carlo", {}) or {}
-    return {
-        "available": True,
-        "path": _relative(MODE_COMPARISON_PATH),
-        "shipped_mode": "fitted_factors",
-        "modes": {
-            mode: {
-                "median_fold_error": (monte_carlo.get(mode) or {}).get("median_fold_error"),
-                "ci_coverage_hits": (monte_carlo.get(mode) or {}).get("ci_coverage_hits"),
-                "ci_coverage_total": (monte_carlo.get(mode) or {}).get("ci_coverage_total"),
-            }
-            for mode in payload.get("modes", [])
-        },
-    }
+def collect_core_panel() -> Dict[str, Any]:
+    """The kinetic core scored on the union panel (retirement step B3), recomputed live.
 
-
-def collect_benchmark_panel() -> Dict[str, Any]:
-    """Recompute the panel rather than read benchmark_summary.json.
-
-    That artifact is gitignored, so a card that read it would print ``artifact absent`` on
-    every fresh clone and on CI -- the self-excusing-skip pattern Wave J2 removed. The panel
-    re-evaluates in a couple of seconds, so live recomputation is both cheap and stronger.
+    ``results/validation/core_panel_scores.json`` is tracked, but the card recomputes (about
+    15 s) for the same reason ``collect_benchmark_panel`` does: a number the card prints must
+    be one the card can stand behind on a fresh clone.
     """
-    from src.benchmark_validation import (
-        evaluate_benchmark,
-        get_benchmark_files,
-        load_benchmark,
-        summarize_evaluation,
-    )
+    from src.kinetic_core.scoring import score_panel
 
-    statuses: Dict[str, int] = {}
-    strict_ready = 0
-    total = 0
-    for bench_file in get_benchmark_files():
-        evaluation = evaluate_benchmark(bench_file)
-        bench = load_benchmark(bench_file)
-        summary = summarize_evaluation(evaluation, protein_type=bench.get("protein_type", "free"))
-        total += 1
-        statuses[summary.overall_status] = statuses.get(summary.overall_status, 0) + 1
-        strict_ready += 1 if summary.strict_ready else 0
+    payload = score_panel()
+    s = payload["summary"]
     return {
         "available": True,
-        "source": "recomputed live from data/benchmarks/",
-        "total": total,
-        "strict_ready": strict_ready,
-        "status_counts": dict(sorted(statuses.items())),
+        "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
+        "by_lane": {
+            lane: {"within_band": b["within_band"], "rows": b["rows"],
+                   "median_fold_error": b["fold_summary"]["median_fold_error"]}
+            for lane, b in s["by_lane"].items()
+        },
+        "median_fold_error": s["fold_summary"]["median_fold_error"],
+        "worst_fold_error": s["fold_summary"]["worst_fold_error"],
+        "out_of_sample_median_fold_error": s["out_of_sample"]["fold_summary"]["median_fold_error"],
+        "total": s["panel_benchmark_count"],
+        "scored": s["scored_benchmark_count"],
+        "rows": s["matched_compound_count"],
+        "within_band": s["within_band_count"],
+        "out_of_sample_within_band": s["out_of_sample"]["within_band"],
+        "out_of_sample_rows": s["out_of_sample"]["rows"],
+        "strict_ready": len(s["strict_ready"]),
+        "strict_ready_ids": list(s["strict_ready"]),
+        "pass_band_level": payload["pass_band_level"],
     }
 
 
@@ -343,7 +297,7 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
     # currently a miss -- exclusion has to be symmetric about which direction it flatters.
     verified: List[str] = []
     fitted: List[str] = []
-    benchmark_dir = ROOT / "data" / "benchmarks"
+    benchmark_dir = data_paths.BENCHMARKS_DIR
     if benchmark_dir.is_dir():
         for path in sorted(benchmark_dir.glob("*.json")):  # non-recursive: hold-out stays out
             other = _read_json(path)
@@ -415,11 +369,9 @@ def build_model_card(*, run_gate_checks: bool = True) -> Dict[str, Any]:
             "caution": f">= {CAUTION_MIN_RATE:.0%} agreement, or too few claims to establish",
             "do_not_use": f"< {CAUTION_MIN_RATE:.0%} agreement, or unmeasured",
         },
+        "core_panel": collect_core_panel(),
+        "core_envelope": collect_core_envelope(),
         "directional": collect_directional(),
-        "free_precursor_holdout": collect_free_precursor_holdout(),
-        "matrix_holdout": collect_matrix_holdout(),
-        "observability_modes": collect_observability_modes(),
-        "benchmark_panel": collect_benchmark_panel(),
         "no_verifiable_source": collect_no_verifiable_source_census(),
         "sulfur_anchor": collect_sulfur_anchor_status(),
         "gates": run_gates() if run_gate_checks else [],
@@ -438,104 +390,103 @@ def _fold(value: Optional[float]) -> str:
     return MISSING if value is None else f"{float(value):.3g}x"
 
 
+# ---------------------------------------------------------------------------------------
+# The validity-domain table: claim type x system class
+# ---------------------------------------------------------------------------------------
+
+
 def _headline_sentences(card: Mapping[str, Any]) -> List[str]:
-    free = card["free_precursor_holdout"]
-    modes = card["observability_modes"]
-    directional = card["directional"]
+    core = card["core_panel"]
+    env = card["core_envelope"]
     sulfur = card["sulfur_anchor"]
 
-    if modes.get("available"):
-        medians = [
-            entry["median_fold_error"]
-            for entry in modes["modes"].values()
-            if entry.get("median_fold_error") is not None
-        ]
-        matrix_range = (
-            f"{min(medians):.3g}x-{max(medians):.3g}x" if medians else MISSING
+    if core.get("available"):
+        first = (
+            f"**Absolute concentrations are unreliable.** On the union panel the kinetic core "
+            f"lands {core['within_band']}/{core['rows']} rows within {core['pass_band_level']:.0f}x "
+            f"(median fold error {_fold(core['median_fold_error'])}, worst "
+            f"{_fold(core['worst_fold_error'])}); out of sample -- every row a core fit read "
+            f"removed -- {core['out_of_sample_within_band']}/{core['out_of_sample_rows']} "
+            f"(median {_fold(core['out_of_sample_median_fold_error'])}). Nothing in this "
+            f"repository licenses a ppb number as a specification."
         )
     else:
-        matrix_range = MISSING
-
-    free_median = _fold(free.get("median_fold_error")) if free.get("available") else MISSING
-    free_worst = _fold(free.get("worst_fold_error")) if free.get("available") else MISSING
-
-    headline = directional.get("headline")
-    excl = directional.get("excluding_ph_aw")
-    ph_aw = directional.get("ph_aw")
-
-    sentences = [
-        (
-            f"**Absolute concentrations are unreliable.** Out of sample the free-precursor "
-            f"lane lands at a {free_median} median fold error (worst {free_worst}) and the "
-            f"matrix lane at {matrix_range} across all three observability modes. Nothing in "
-            f"this repository licenses a ppb number as a specification."
-        ),
-        (
-            f"**Directional and ranking claims are the measured product**, at "
-            f"{headline[0]}/{headline[1]} on strictly independent claims"
-            if headline
-            else "**Directional and ranking claims are the measured product**"
+        first = "**Absolute concentrations are unreliable.** The core scorecard could not be computed."
+    if env.get("available"):
+        first += (
+            f" The core's {env['ci_level_pct']}% Monte-Carlo interval covers "
+            f"{env['literature_hits']}/{env['literature_total']} evaluable literature rows "
+            f"({env['literature_not_evaluable']} not evaluable: the "
+            f"{', '.join(env['unsampled_lanes']) or 'no'} lane carries no sampled uncertainty), "
+            f"{env['out_of_sample_hits']}/{env['out_of_sample_total']} out of sample."
         )
-        + (
-            f" -- {excl[0]}/{excl[1]} ({excl[0] / excl[1]:.0%}) once pH and water activity are "
-            f"set aside, and {ph_aw[0]}/{ph_aw[1]} on pH and water activity themselves, which "
-            f"is at or below chance."
-            if excl and excl[1] and ph_aw and ph_aw[1]
-            else "."
-        ),
+    directional = card.get("directional") or {}
+    if directional.get("available"):
+        h = directional["headline"]; ex = directional["excluding_ph_aw"]; pa = directional["ph_aw"]
+        second = (
+            f"**Directional and ranking claims are the product, and on the kinetic core they score "
+            f"{h[0]}/{h[1]} on strictly independent literature claims** "
+            f"({directional['not_evaluable']} independent claims not evaluable: refused arms, "
+            f"prose-only claims, observables the core does not represent) -- "
+            f"{ex[0]}/{ex[1]} once pH and water activity are set aside, and {pa[0]}/{pa[1]} on pH and "
+            f"water activity themselves, {directional['mechanism_absent_misses']} of the misses being "
+            f"identical predictions across an axis the lane carries no term for. A coin scores ~0.5 "
+            f"on binary orderings; read the per-axis rows below, not the aggregate."
+        )
+    else:
+        second = (
+            "**Directional and ranking claims are NOT YET MEASURED on the kinetic core.** The "
+            "directional scorecard is absent; every ranking claim is reported do-not-use by the "
+            "card's own rule, not because it is known to be wrong."
+        )
+    third = (
         (
-            (
-                "**The sulfur branch has "
-                + str(len(sulfur.get("panel_verified_sulfur_benchmarks") or []))
-                + " absolute literature anchors, and the model fails every one of them.** "
-                "They are the primary-source-verified stable-isotope-dilution rows in "
-                + ", ".join(sulfur.get("panel_verified_sulfur_benchmarks") or [])
-                + ". "
-                + (
-                    (
-                        "A further "
-                        + str(len({
-                            row.split("/", 1)[0]
-                            for row in (sulfur.get(
-                                "panel_verified_sulfur_values_that_are_fit_targets"
-                            ) or [])
-                        }))
-                        + " primary-source-verified sulfur row(s) are on the panel and are NOT "
-                        "counted here, because a constant was selected by looking at them ("
-                        + ", ".join(sorted({
-                            row.split("/", 1)[0]
-                            for row in (sulfur.get(
-                                "panel_verified_sulfur_values_that_are_fit_targets"
-                            ) or [])
-                        }))
-                        + "): agreement on a fitted row is not evidence about the model. "
-                    )
-                    if sulfur.get("panel_verified_sulfur_values_that_are_fit_targets")
-                    else ""
-                )
-                + "The previously shipped claim of ZERO anchors was corrected on 2026-08-28 "
-                "(Wave W) when the full text behind them was obtained; the retired benchmark ("
-                + Path(sulfur.get("path", "")).stem
-                + ") is kept in the tree as the provenance record of the values that were not "
-                "measurements. Absolute agreement is poor and the DIRECTION is a separate "
-                "question."
-            )
-            if sulfur.get("available") and sulfur.get("panel_verified_sulfur_benchmarks")
-            else "**The sulfur branch has zero absolute literature anchors.** "
+            "**The sulfur branch has "
+            + str(len(sulfur.get("panel_verified_sulfur_benchmarks") or []))
+            + " absolute literature anchors, and the model fails every one of them.** "
+            "They are the primary-source-verified stable-isotope-dilution rows in "
+            + ", ".join(sulfur.get("panel_verified_sulfur_benchmarks") or [])
+            + ". "
             + (
-                "Both values on its only benchmark ("
-                + Path(sulfur.get("path", "")).stem
-                + ") carry no verifiable source and its tightest contract was retired; the "
-                "shipped numbers are the evidence for nothing but themselves. Its DIRECTION is "
-                "a separate question and is not thereby worthless."
-                if sulfur.get("available") and sulfur.get("zero_absolute_anchors")
-                else "Status could not be verified from "
-                + str(sulfur.get("path", "the benchmark file"))
-                + "; treat this sentence as unconfirmed until it can be."
+                (
+                    "A further "
+                    + str(len({
+                        row.split("/", 1)[0]
+                        for row in (sulfur.get("panel_verified_sulfur_values_that_are_fit_targets") or [])
+                    }))
+                    + " primary-source-verified sulfur row(s) are on the panel and are NOT "
+                    "counted here, because a constant was selected by looking at them ("
+                    + ", ".join(sorted({
+                        row.split("/", 1)[0]
+                        for row in (sulfur.get("panel_verified_sulfur_values_that_are_fit_targets") or [])
+                    }))
+                    + "): agreement on a fitted row is not evidence about the model. "
+                )
+                if sulfur.get("panel_verified_sulfur_values_that_are_fit_targets")
+                else ""
             )
-        ),
-    ]
-    return sentences
+            + "The previously shipped claim of ZERO anchors was corrected on 2026-08-28 "
+            "when the full text behind them was obtained; the retired benchmark ("
+            + Path(sulfur.get("path", "")).stem
+            + ") is kept in the tree as the provenance record of the values that were not "
+            "measurements. Absolute agreement is poor and the DIRECTION is a separate "
+            "question."
+        )
+        if sulfur.get("available") and sulfur.get("panel_verified_sulfur_benchmarks")
+        else "**The sulfur branch has zero absolute literature anchors.** "
+        + (
+            "Both values on its only benchmark ("
+            + Path(sulfur.get("path", "")).stem
+            + ") carry no verifiable source and its tightest contract was retired; the "
+            "shipped numbers are the evidence for nothing but themselves. Its DIRECTION is "
+            "a separate question and is not thereby worthless."
+            if sulfur.get("available") and sulfur.get("zero_absolute_anchors")
+            else "Status could not be verified from "
+            + str(sulfur.get("path", "the benchmark file"))
+            + "; treat this sentence as unconfirmed until it can be."
+        )
+    )
+    return [first, second, third]
 
 
 # ---------------------------------------------------------------------------------------
@@ -558,54 +509,50 @@ def _verdict_from_fraction(hits: Optional[int], total: Optional[int]) -> str:
     return verdict_for(int(hits or 0), int(total))
 
 
-def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
-    directional = card["directional"]
-    categories = directional.get("categories", {})
-    free = card["free_precursor_holdout"]
-    matrix = card["matrix_holdout"]
-    modes = card["observability_modes"]
-    panel = card["benchmark_panel"]
+_LANE_SYSTEMS = {
+    "trunk": "free precursor, sugar + amine browning / furanics",
+    "sulfur": "free precursor, cysteine / ribose meaty thiols",
+    "acrylamide": "free precursor, asparagine + reducing sugar",
+    "lipid": "protein matrix, lipid-derived aldehydes",
+}
 
+
+def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
+    core = card["core_panel"]
+    env = card["core_envelope"]
     cells: List[DomainCell] = []
 
-    # --- Absolute concentration -------------------------------------------------------
-    if free.get("available"):
-        cells.append(
-            DomainCell(
-                "Absolute concentration (ppb)",
-                "free precursor (sugar + amino acid, aqueous)",
-                f"median {_fold(free['median_fold_error'])}, "
-                f"{free['within_10x']}/{free['scored']} within 10x",
-                VERDICT_DO_NOT_USE,
-                "12-point pre-registered hold-out, frozen before any calibration wave saw it",
+    # --- Absolute concentration, per core lane ---------------------------------------
+    if core.get("available"):
+        for lane, entry in sorted(core["by_lane"].items()):
+            if lane == "None":
+                continue
+            cells.append(
+                DomainCell(
+                    "Absolute concentration (ppb)",
+                    _LANE_SYSTEMS.get(lane, lane) + f" [{lane} lane]",
+                    f"{entry['within_band']}/{entry['rows']} rows within "
+                    f"{core['pass_band_level']:.0f}x, median {_fold(entry['median_fold_error'])}",
+                    VERDICT_DO_NOT_USE,
+                    "recomputed live on the union panel; an absolute is never trust by rule",
+                )
             )
-        )
-    if modes.get("available"):
-        shipped = modes["modes"].get(modes["shipped_mode"], {})
+    if env.get("available"):
         cells.append(
             DomainCell(
-                "Absolute concentration (ppb)",
-                "protein matrix (pea / soy isolate)",
-                f"median {_fold(shipped.get('median_fold_error'))}, CI coverage "
-                f"{shipped.get('ci_coverage_hits')}/{shipped.get('ci_coverage_total')}",
+                "Absolute concentration interval (90% CI)",
+                "every lane with sampled uncertainty",
+                f"{env['literature_hits']}/{env['literature_total']} evaluable literature rows "
+                f"inside; {env['out_of_sample_hits']}/{env['out_of_sample_total']} out of sample; "
+                f"{env['literature_not_evaluable']} not evaluable",
                 VERDICT_DO_NOT_USE,
-                "8-point external hold-out; the shipped fitted factors LOSE to applying no "
-                "observability factor at all",
-            )
-        )
-    if matrix.get("available"):
-        cells.append(
-            DomainCell(
-                "Absolute concentration (ppb)",
-                "genuine extrapolation (roasting, HME extrusion)",
-                f"{matrix.get('genuine_hits')}/{matrix.get('genuine_total')} inside the "
-                f"{matrix.get('ci_level_pct')}% CI",
-                VERDICT_DO_NOT_USE,
-                "the only rows that test transfer; the interval that does cover is ~4 decades wide",
+                f"{env['path']} (n={env['n_samples']}); the "
+                f"{', '.join(env['unsampled_lanes']) or 'no'} lane has no sampled uncertainty",
             )
         )
 
-    # --- Ordinal claims, per axis ------------------------------------------------------
+    # --- Ordinal claims, per axis, from the core's directional scorecard -----------------
+    directional = card.get("directional") or {}
     axis_systems = {
         "sugar_identity": "any (sugar swap, conditions held)",
         "additive_cysteine": "free precursor (cysteine present vs absent)",
@@ -615,56 +562,45 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
         "matrix_identity": "protein matrix (pea vs soy)",
         "ph": "any (pH moved)",
         "moisture_aw": "any (water activity moved)",
+        "ranking": "several compounds ordered in one system",
+        "process_heating": "processed vs raw",
     }
-    for axis, system in axis_systems.items():
-        if axis not in categories:
-            continue
-        agree, evaluable = categories[axis]
-        cells.append(
-            DomainCell(
-                f"Direction / ranking on `{axis}`",
-                system,
-                f"{agree}/{evaluable} on the directional panel",
-                verdict_for(agree, evaluable),
-                "",
+    if directional.get("available"):
+        for axis, system in axis_systems.items():
+            agree, evaluable = directional["categories"].get(axis, (0, 0))
+            misses = directional["misses"].get(axis, [])
+            cells.append(
+                DomainCell(
+                    f"Direction / ranking on `{axis}`",
+                    system,
+                    f"{agree}/{evaluable} on the directional panel (independent claims)"
+                    if evaluable else "no evaluable independent claim on the core",
+                    verdict_for(agree, evaluable),
+                    ("misses: " + ", ".join(misses)) if misses else "",
+                )
             )
-        )
-
-    # --- Within-system ordering --------------------------------------------------------
-    if free.get("available") and free.get("ordinal_pairs_total"):
+    else:
         cells.append(
             DomainCell(
-                "Ordering of two compounds in one system",
-                "free precursor",
-                f"{free['ordinal_pairs_correct']}/{free['ordinal_pairs_total']} pairs correct",
-                _verdict_from_fraction(
-                    free["ordinal_pairs_correct"], free["ordinal_pairs_total"]
-                ),
-                "measured on the hold-out, independently of the panel",
-            )
-        )
-    if free.get("available") and free.get("series_directions_total"):
-        cells.append(
-            DomainCell(
-                "Response direction across a condition series",
-                "free precursor",
-                f"{free['series_directions_correct']}/{free['series_directions_total']} correct",
-                _verdict_from_fraction(
-                    free["series_directions_correct"], free["series_directions_total"]
-                ),
-                "the sulfur temperature dependence is inverted and acrylamide is ~40x "
-                "under-responsive in time",
+                "Direction / ranking on any axis",
+                "any",
+                "not measured: the core directional scorecard is absent",
+                VERDICT_DO_NOT_USE,
+                "regenerate results/validation/core_directional_scores.json",
             )
         )
 
     # --- Panel-level statements --------------------------------------------------------
-    if panel.get("available"):
+    if core.get("available"):
+        ids = ", ".join(core.get("strict_ready_ids") or []) or "none"
         cells.append(
             DomainCell(
                 "Any claim of benchmark-grade agreement",
-                "the in-panel benchmarks themselves",
-                f"{panel['strict_ready']}/{panel['total']} strict-ready",
-                VERDICT_DO_NOT_USE if not panel["strict_ready"] else VERDICT_CAUTION,
+                "the union panel: trust loop + hold-outs + matrix bundles",
+                f"{core['strict_ready']}/{core['total']} strict-ready ({ids}); "
+                f"{core['within_band']}/{core['rows']} rows within {core['pass_band_level']:.0f}x, "
+                f"out-of-sample {core['out_of_sample_within_band']}/{core['out_of_sample_rows']}",
+                VERDICT_DO_NOT_USE if not core["strict_ready"] else VERDICT_CAUTION,
                 "recomputed live; strict-ready is the repository's own passing bar",
             )
         )
@@ -673,7 +609,7 @@ def _validity_domain(card: Mapping[str, Any]) -> List[Dict[str, str]]:
     cells.append(
         DomainCell(
             "Which experiment to run next (value of information)",
-            "any system the uncertainty panel covers",
+            "any system the core envelope covers",
             "every ranked row is a measured model failure",
             VERDICT_TRUST,
             "this claim type does not depend on the model being right -- it depends on the "
@@ -748,8 +684,8 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
             f"quotes, reproduced here by recount. A further {other} carry the same marker under "
             f"a different status key (`status`, `value_status`, `value_anchor_status`), for "
             f"{census['records']} in total. The numeric-payload and runtime-consumed subsets "
-            f"(98 and 80) use a narrower definition than this recount and are pinned "
-            f"separately by `tests/scientific/test_honest_headline_guards.py`."
+            f"(65 and 65) use a narrower definition than this recount and are pinned "
+            f"separately by the headline guards under `tests/scientific/`."
         )
         lines.append("")
 
@@ -759,17 +695,6 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
             "**Blocking gates at generation time:** "
             + " · ".join(f"`{Path(item['gate']).name}` {item['status']}" for item in gates)
             + "."
-        )
-        lines.append("")
-
-    free = card.get("free_precursor_holdout", {})
-    if free.get("available"):
-        lines.append(
-            f"**Provenance of the hold-out numbers.** `{free['path']}`, "
-            f"{free['bundles']} bundles / {free['scored']} scored targets, frozen "
-            f"{free.get('generated_on')} at `{free.get('git')}` — before any calibration wave "
-            "saw those points, and un-gitignored specifically so a later wave cannot "
-            "regenerate it and compare it with itself."
         )
         lines.append("")
 

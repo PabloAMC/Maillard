@@ -1,10 +1,16 @@
 {
   "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+  "quantification_class": "isotope_dilution_lcmsms",
+  "quantification_note": "Declared 2026-09-04 from the PMC full text (PMC10217484, Fu et al. 2023): defatting with n-hexane, NaBH4 reduction, 6 M HCl hydrolysis 110 C 24 h, MCX clean-up, UHPLC-QqQ-MS/MS (Waters ACQUITY H-Class / XEVO TQ-XS) with CML-d4 and CEL-d4 internal standards at 25 ug/L; results in mg/kg of the freeze-dried sample. Extraction-based: no headspace band (the targets are not volatiles).",
   "benchmark_type": "safety",
   "source_doi": "10.3390/foods12101967",
   "precursors": {
-    "L-Lysine": {"concentration_mM": 45.0},
-    "D-Glucose": {"concentration_mM": 45.0}
+    "L-Lysine": {
+      "concentration_mM": 45.0
+    },
+    "D-Glucose": {
+      "concentration_mM": 45.0
+    }
   },
   "conditions": {
     "temp_C": 150,
@@ -32,7 +38,21 @@
     "policy": "Tolerances are deliberately UNCHANGED. The pre-correction pass (ratios 1.005-1.204) was an artifact of the unit collision, not agreement; loosening the contract would hide a real 1000x calibration gap. Fix the predictors against real ug/kg data, do not retune the tolerance."
   },
   "measured_volatiles": {
-    "Nε-(Carboxymethyl)lysine (CML)": {"conc_ppb": 32000.0, "uncertainty_pct": 20},
-    "Nε-(Carboxyethyl)lysine (CEL)": {"conc_ppb": 55000.0, "uncertainty_pct": 20}
+    "Nε-(Carboxymethyl)lysine (CML)": {
+      "conc_ppb": 32000.0,
+      "uncertainty_pct": 20
+    },
+    "Nε-(Carboxyethyl)lysine (CEL)": {
+      "conc_ppb": 55000.0,
+      "uncertainty_pct": 20
+    }
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PubMed Central PMC10217484 (open access), fetched 2026-09-04",
+    "quoted_quantification": "The analysis of CML and CEL was performed on a Waters ACQUITY UPLC H-Class chromatographic system ... coupled with a XEVO TQ-XS tandem triple quadrupole mass spectrometer (UHPLC-QqQ-MS/MS). Isotope-labeled internal standards (CML-d4 and CEL-d4) were added at 25 ug/L final concentration. Calibration: CML y = 0.692994x + 0.494217 (R2 = 0.9990); CEL y = 0.75529x + 0.402503 (R2 = 0.9996).",
+    "quoted_values": "Table 1 (15 commercial plant-based meat analogs, mg/kg of freeze-dried sample): CML 16.46-47.61 (mean 32.64); CEL 25.21-86.23.",
+    "quantification_verdict": "Isotope-dilution UHPLC-MS/MS after acid hydrolysis; the bundle's CML 32.0 and CEL 55.0 mg/kg are the range midpoints (the paper's CML mean is 32.64), on a freeze-dried basis.",
+    "verified_on": "2026-09-04"
   }
 }

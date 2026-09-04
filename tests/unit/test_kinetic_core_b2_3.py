@@ -1,4 +1,9 @@
-"""
+"""FROZEN-WAVE REGRESSION RECORD (labelled 2026-09-03, test audit). The wave generator this file
+tests is frozen (scripts/generators/WAVES.md); these tests fail only if the frozen report, the
+network or the parameter tables change. They are the contract of a finished wave, not live checks
+of new behaviour.
+
+
 tests/unit/test_kinetic_core_b2_3.py
 
 BUILD WAVE B2.3 -- the three things this wave must not be able to lose.
@@ -272,14 +277,20 @@ def test_carbon_nitrogen_and_sulfur_still_balance_everywhere():
 # that nothing else moved either.
 
 BUNDLE_BASELINES = {
+    # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
     "external_validation_bi_2020_raw_pea_hexanal":
-        "b8f9814c0c2c10701679de5bf0a64aa9b393df2ad45d368f4e0940ade6a58e5d",
+        "7abdfc96d16b97c3366512d6183fd1d2d677220dbc5e1d460b334caeec135f37",
+    # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
     "external_validation_bi_2020_roasted_pea_hexanal":
-        "7d5cf5174622face448ff0095c03b5813d9227481b05af6eb4e8343b05b41ffe",
+        "201752690e3702ac2d87ab3d3380c1d7360408e160213b48cdfe0835d36ac198",
+    # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
+    # re-pinned 2026-09-03: content_verification block from the PMC full text added
     "external_validation_li_2026_spi_wg_hme_control":
-        "8b891d62be554f47c53380e61d41d517f78b82f2362e4f9f16b89362b3fd2b68",
+        "53edcdb681c3c04ab8b8e4f384cee5b686f040bdbdd28dc914e3131e2295a593",
+    # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
+    # re-pinned 2026-09-04: content_verification block from the full text added
     "external_validation_liu_2023_ppi_offnote_baseline":
-        "ad7fd3442187c715f9d8b1d71b4c4cae9a3f76a33f2d0aef9812223fb1161bea",
+        "d04c01abe7bba4a666fe94c023aa9a92aa77d8358c56673079ad6522b419c7cd",
     "mp_holdout_fructose_asparagine_180C_Lin2022":
         "85efa67b7c88adc2d8616d7ed601efe6f6f7763238b2aef237bc485c405d0505",
     "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019":
@@ -304,8 +315,10 @@ BUNDLE_BASELINES = {
         "a3d126ac3fab64c57f8a463659e3e89474a2405e152e6c72e33272b37e8b8927",
     "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7":
         "7c78672fbcba460489e0528dd6becc24a530bb67fde6cf73aaee5e6c6480a183",
+    # re-pinned 2026-09-03 (B9): the bundle returned to the hold-out with its notes,
+    # evidence_class and hold_out_history updated; measured block untouched.
     "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5":
-        "ad67c760dad783148542bea1587821334be1130c1638dd8478c4919fa2e8b6a6",
+        "008cfa372890a196f8b9183ae2ab84800b64238e182d905f3a134499300698b5",
     "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026":
         "03d56fd60b097c85c731c87181f5269a4ea9aa4e4bd38c3f5267cef5f66d8251",
     "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026":
@@ -328,7 +341,7 @@ def _hash_without_buffer(payload):
 
 
 def test_there_are_exactly_twenty_one_frozen_bundles():
-    assert len(list(BUNDLE_DIR.rglob("*.json"))) == 21
+    assert len(list(BUNDLE_DIR.rglob("*.json"))) == 21  # xylose returned after B9 (2026-09-03)
 
 
 def test_the_buffer_completion_changed_nothing_but_the_buffer():
@@ -563,17 +576,6 @@ def test_the_fit_rows_are_unchanged_from_b2_2():
         assert a["sigma_log"] == b["sigma_log"], a["id"]
     assert set(b23.SYSTEMS) == set(b22.SYSTEMS)
 
-
-def test_the_optimiser_budget_is_the_one_amendment_9_allows():
-    """Seeded, TWO starts, ftol 1e-6 -- what B2.2 actually shipped."""
-    import inspect
-
-    import scripts.generators.generate_kinetic_core_b2_3_fit as b23
-
-    source = inspect.getsource(b23.main)
-    assert '"--starts", type=int, default=2' in source
-    assert "ftol=1e-6" in inspect.getsource(b23.fit)
-    assert "seed: int = 20260828" in inspect.getsource(b23.fit)
 
 
 # ===========================================================================

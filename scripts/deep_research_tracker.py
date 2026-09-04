@@ -6,14 +6,23 @@ import argparse
 import json
 import re
 from collections import defaultdict
+import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEEP_RESEARCH_DIR = ROOT / "data" / "Gemini_Deep_Research"
-REGISTRY_FILE = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
-OUTPUT_JSON = ROOT / "data" / "lit" / "deep_research_backlog.json"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+DEEP_RESEARCH_DIR = data_paths.RESEARCH_CORPUS_DIR
+REGISTRY_FILE = data_paths.BENCHMARK_INTAKE_REGISTRY
+# 2026-09-03: the audit is written BESIDE the ledger it audits. Until this date it overwrote
+# results/literature/deep_research_backlog.json (7,500 lines the runtime queue, the family
+# ingestion plan and the SLR reports read) with a 200-line audit payload.
+OUTPUT_JSON = data_paths.LITERATURE_LEDGERS_DIR / "deep_research_gap_analysis.json"
 OUTPUT_MD = ROOT / "reports" / "deep_research_gap_analysis.md"
 NUMBERED_REPORT_PATTERN = re.compile(r"^\d{2}_.+\.md$")
 ENTRY_PATTERN = re.compile(
@@ -53,6 +62,20 @@ def iter_markdown_paths(directory: Path = DEEP_RESEARCH_DIR) -> Iterable[Path]:
             yield path
 
 
+
+def _artifact_is_live(root: Path, artifact: Dict[str, Any]) -> bool:
+    """A runtime artifact binds a reference only if it exists AND is not quarantined.
+
+    2026-09-03: the two PMC9905368 benchmarks now point at their real location under
+    data/benchmarks/quarantined/ (the intake registry used to name a path that no longer
+    existed). Existing there must not read as RUNTIME_BOUND: the calibration panel's
+    non-recursive discovery never loads them, which is what quarantine means.
+    """
+    rel = str(artifact.get("path", ""))
+    if str(artifact.get("artifact_status", "")) == "quarantined" or "/quarantined/" in rel:
+        return False
+    return (root / rel).exists()
+
 def load_registry_entries(
     registry_file: Path = REGISTRY_FILE,
     *,
@@ -74,7 +97,7 @@ def load_registry_entries(
         author_year_keys = [key for key in (_author_year_key(value) for value in all_citations) if key]
         runtime_artifacts = list(row.get("runtime_artifacts", []) or [])
         runtime_bound = bool(runtime_artifacts) and all(
-            (root / str(artifact.get("path", ""))).exists()
+            _artifact_is_live(root, artifact)
             for artifact in runtime_artifacts
             if str(artifact.get("path", ""))
         )
@@ -306,7 +329,7 @@ def main() -> None:
         f"Found {summary['total_occurrences']} eligible occurrences across {summary['unique_citations']} unique citations; "
         f"runtime-bound={summary['runtime_bound']}, registry-only={summary['registry_only']}, backlog={summary['backlog']}."
     )
-    print(f"Reports saved to {OUTPUT_JSON.relative_to(ROOT)} and {OUTPUT_MD.relative_to(ROOT)}")
+    print(f"Reports saved to {data_paths.rel(OUTPUT_JSON)} and {OUTPUT_MD.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

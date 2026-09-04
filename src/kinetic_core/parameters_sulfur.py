@@ -13,8 +13,9 @@ runtime metadata.
 
 FIVE STANDING POLICIES, ENFORCED HERE
 -------------------------------------
-1. **NO DFT.** Same as B1. ``assert_no_dft_sulfur()`` runs at import. Nothing
-   from ``data/qm/`` is read, imported or referenced.
+1. **NO DFT.** Same as B1. ``assert_no_dft_sulfur()`` runs at import. No computed
+   barrier is read, imported or referenced (the ``data/qm/`` fixtures were deleted
+   with the QM/DFT lane on 2026-09-01).
 
 2. **NO SINGLE ARRHENIUS FOR THIOL CONSUMPTION.** K1 declared the gap and K3
    turned it into a structural finding: four papers at four temperatures
@@ -914,7 +915,10 @@ MEASURED_SULFUR: Mapping[str, SulfurParameter] = {
         ),
         dossier_anchor=(
             "k3_final_parameter_inventory.md sec. A.4 rows at 25/30 C and the "
-            "'THE CROSS-VALIDATION' block; k1_kinetic_parameters.md secs. 1a, 1c"
+            "'THE CROSS-VALIDATION' block; k1_kinetic_parameters.md secs. 1a, 1c; "
+            "hofmann2002_extraction.md (full text read 2026-09-04: Table 2 gives "
+            "9.8e-4 /s exactly, Fig. 6 supports 9.4e-4 within the read-off, "
+            "disulfide <6 ug of 400 ug; the model reactions ran at pH 6.0)"
         ),
         conditions=_THIOETHER_CONDITIONS,
         ph=5.6,

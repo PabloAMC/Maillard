@@ -4,16 +4,11 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
-DEFAULT_CHEMISTRY_FAMILY_SCOPE_REGISTRY = _repo_root() / "data" / "lit" / "chemistry_family_scope_registry.json"
+from src import data_paths
 
 
 def load_chemistry_family_scope_registry(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_CHEMISTRY_FAMILY_SCOPE_REGISTRY
+    path = Path(file_path) if file_path is not None else data_paths.CHEMISTRY_FAMILY_SCOPE_REGISTRY
     with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 

@@ -1,0 +1,22 @@
+{
+  "target_tag": "meaty",
+  "strict_ready_benchmarks": [],
+  "supported_benchmarks": 21,
+  "total_benchmarks": 21,
+  "matrix_only_benchmarks": [
+    "pea_isolate_40C_PratapSingh2021",
+    "pea_isolate_uht_140C_Trikusuma2019",
+    "soy_isolate_40C_PratapSingh2021"
+  ],
+  "warnings": [
+    "Matrix benchmarks are executable intake/headspace checks, but remain outside the strict gate and target snapshots.",
+    "Benchmark-facing concentrations still use the FAST observable projection; Cantera remains diagnostic-reference-only.",
+    "Peptide-bound and intact-protein accessibility remain outside the validated precursor envelope.",
+    "The validated plant-matrix scope is currently limited to pea/soy matrix-only systems and not yet a broad release gate."
+  ],
+  "next_priorities": [
+    "Expose matrix-state and projection explainability in user-facing artifacts.",
+    "Promote domain-of-applicability warnings into routine CLI/report outputs.",
+    "Replace bulk matrix retention with broader compound-aware observability across plant-matrix systems."
+  ]
+}

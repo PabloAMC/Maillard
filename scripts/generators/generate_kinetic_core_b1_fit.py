@@ -99,6 +99,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core import (  # noqa: E402
     CROSS_LAB_COMPARATORS,
     FITTED_BOUNDS_LOG10K,
@@ -115,11 +116,11 @@ from src.kinetic_core import (  # noqa: E402
     registry_metadata,
 )
 
-TIMESERIES = ROOT / "data" / "lit" / "timeseries"
+TIMESERIES = data_paths.TIMESERIES_DIR
 GG_FILE = "martins2005_glucose_glycine_80_100_120C_pH68.yml"
 BRANDS_FILE = "brands_sugar_casein_120C_pH68.yml"
 
-OUTPUT_DIR = ROOT / "results" / "validation"
+OUTPUT_DIR = data_paths.VALIDATION_DIR
 BASENAME = "kinetic_core_b1_fit_report"
 
 # ---------------------------------------------------------------------------

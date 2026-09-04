@@ -375,7 +375,6 @@
       "source": "Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope, retained as a conservative pea-isolate interpolation while exact benchmark-condition values remain unmeasured",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "calibration_grade_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -393,7 +392,6 @@
       "source": "Foods 11(21):3505 soy free-SH anchor for native versus 70 C SPI plus repo synthesis from Kutzli 2020 / Naik 2021 on glycinin and beta-conglycinin burial",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "calibration_grade_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -410,8 +408,7 @@
       "cysteine_max": 0.3,
       "source": "Bounded mycoprotein accessibility prior from fungal cell-wall entrapment and heat-softening literature synthesis retained as a directional planning prior",
       "provenance_tier": "literature_bounded_provisional",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "directional_only",
+      "confidence_tier": "medium_low",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -433,7 +430,6 @@
       "source": "Asen 2022 DSC/DTNB thermal window + Li 2025 free-SH response; calibrated so pea isolate stays mostly native at 40C but opens progressively by 90-140C",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "calibration_grade_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -453,7 +449,6 @@
       "source": "Pea concentrate inherits the Asen 2022 / Li 2025 pea thermal envelope with a modest fiber-burial penalty",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "directional_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -473,7 +468,6 @@
       "source": "Foods 11(21):3505 free-SH increase at 70 C plus soy globulin burial synthesis from Kutzli 2020 / Naik 2021",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "calibration_grade_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -492,8 +486,7 @@
       "reference_ph": 6.0,
       "source": "Soy concentrate inherits the soy-isolate thermal envelope with added concentrate burial",
       "provenance_tier": "repo_literature_synthesis",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "directional_transfer",
+      "confidence_tier": "medium_low",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -512,8 +505,7 @@
       "reference_ph": 6.0,
       "source": "Bounded mycoprotein thermal-opening prior derived from fungal-protein heat-softening literature synthesis",
       "provenance_tier": "literature_bounded_provisional",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "directional_only",
+      "confidence_tier": "medium_low",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -545,7 +537,6 @@
       "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to pea proteins as verified by Sun 2025/2026 and Lozano 2009.",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -575,7 +566,6 @@
       "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to pea proteins as verified by Sun 2025/2026 and Lozano 2009.",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -605,7 +595,6 @@
       "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to soy proteins as verified by Sun 2025/2026 and Lozano 2009.",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -635,7 +624,6 @@
       "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to soy proteins as verified by Sun 2025/2026 and Lozano 2009.",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -664,8 +652,7 @@
       },
       "source": "Bounded mycoprotein class overlay retained as a literature-bounded directional surrogate",
       "provenance_tier": "literature_bounded_provisional",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "directional_only",
+      "confidence_tier": "medium_low",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -690,7 +677,6 @@
       "source": "Model system, no matrix correction",
       "provenance_tier": "direct_model_assumption",
       "confidence_tier": "high",
-      "uncertainty_posture": "direct_reference",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -713,7 +699,6 @@
       "source": "Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope; values remain a conservative PPI interpolation because the exact 95C pH 5.5 benchmark condition still lacks direct wet-lab measurement",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "calibration_grade_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -736,7 +721,6 @@
       "source": "Pea-isolate accessibility envelope with added fiber burial penalty",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "directional_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -759,7 +743,6 @@
       "source": "Soy isolate envelope anchored to Foods 11(21):3505 free-SH shift plus repo literature on glycinin and beta-conglycinin burial and accessibility transfer",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "calibration_grade_transfer",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -779,10 +762,9 @@
       "volatile_retention_mid": 0.45,
       "volatile_retention_native": 0.37,
       "volatile_retention_denatured": 0.53,
-      "source": "Soy concentrate envelope derived from soy-isolate globulin burial (glycinin/beta-conglycinin) with added fiber/concentrate penalty; repo anchors: Kutzli 2020 / Naik 2021 synthesis plus soy-polysaccharide conjugation trapping notes in data/Gemini_Deep_Research/maillard_plant_based.md",
+      "source": "Soy concentrate envelope derived from soy-isolate globulin burial (glycinin/beta-conglycinin) with added fiber/concentrate penalty; repo anchors: Kutzli 2020 / Naik 2021 synthesis plus soy-polysaccharide conjugation trapping notes in data/research_corpus/maillard_plant_based.md",
       "provenance_tier": "repo_literature_synthesis",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "directional_transfer",
+      "confidence_tier": "medium_low",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -804,8 +786,7 @@
       "volatile_retention_denatured": 0.66,
       "source": "Bounded mycoprotein correction prior from fungal-matrix accessibility and release literature synthesis",
       "provenance_tier": "literature_bounded_provisional",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "directional_only",
+      "confidence_tier": "medium_low",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -863,7 +844,6 @@
       "source": "Hidalgo et al. (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_styrene_formation_kj_mol": 150.4
@@ -875,7 +855,6 @@
       "source": "Zamora et al. (2010)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_asparagine_decarboxylation_kj_mol": 81.0
@@ -887,7 +866,6 @@
       "source": "Ding et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -898,7 +876,6 @@
       "source": "Richards et al. (2009)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "cod_Hb_Vmax_uM_min": 66.2,
@@ -913,7 +890,6 @@
       "source": "Smagghe et al. (2006)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "soy_leghemoglobin_dissociation_s1": 5.6
@@ -936,7 +912,6 @@
       "source": "Mottram & Nobrega (2002 / Chapter 9 review)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "norfuraneol_to_mft_mol_fraction": 0.014,
       "hdmf_cysteine_thiophene_ph_optimum": 5.1,
       "diacetyl_mercaptoketone_bridge_reported": true,
@@ -950,7 +925,6 @@
       "source": "Brands & van Boekel (2002) with bounded absolute-yield context carried forward from the repo's Hauck & Tressl 1999 HDMF synthesis cross-reference",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "route_type": "methylglyoxal_self_condensation",
       "reference_conditions": {
         "mgo_mM": 50.0,
@@ -971,7 +945,6 @@
       "source": "de Bruijn et al. (1987)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -982,7 +955,6 @@
       "source": "Luna & Aguilera (2014)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -993,7 +965,6 @@
       "source": "Bao et al. (2022)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -1048,7 +1019,6 @@
       "source": "Voelker, Taylor & Mauer (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "temperature_c_points": [
           40.0,
@@ -1096,7 +1066,6 @@
       "source": "Arabshahi & Lund (1988)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "temperature_c_points": [
           110.0,
@@ -1136,7 +1105,6 @@
       "source": "Huang (2022)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "ph": 6.0,
         "temperature_c_points": [
@@ -1181,7 +1149,6 @@
       "source": "Tannenbaum, Archer & Young (1985)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "kinetic_order": "pseudo_first_order",
         "ph_range": [
@@ -1200,7 +1167,6 @@
       "source": "Voelker et al. (2018)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "temp_range_C": [
           100.0,
@@ -1218,7 +1184,6 @@
       "source": "Cerny & Guntz-Dubini (2008)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 145,
         "pH": 6.0
@@ -1233,7 +1198,6 @@
       "provenance_tier": "unsourced_withdrawn",
       "confidence_tier": "low",
       "source_status": "no_verifiable_source",
-      "uncertainty_posture": "withdrawn_do_not_use",
       "reference_conditions": {
         "T_C": 145,
         "pH": 6.5
@@ -1248,7 +1212,7 @@
         "date": "2026-08-27",
         "action": "confidence_tier high -> low; source_status no_verifiable_source",
         "basis": "2026-08-26 citation sweep + source recovery: the cited JAFC 44:2219 (1996) thiamine/cysteine/ribose MFT paper does not exist. The benchmark built on this reference (thiamine_cys_ribose_100C_Hofmann1996) was DELETED and rebuilt from the verified Bolton & Reineccius 1994 chapter (10.1021/bk-1994-0543.ch022) as data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json, which the model fails honestly. The same repair was applied in data/lit/benchmark_intake_registry.json and data/lit/slr_incorporation_matrix.json, where these two anchors were withdrawn as unsourced.",
-        "id_retained_because": "the id is a stable join key referenced from data/lit/deep_research_backlog.json and tests/unit/test_literature_runtime.py; renaming it would silently break those joins."
+        "id_retained_because": "the id is a stable join key referenced from results/literature/deep_research_backlog.json and tests/unit/test_literature_runtime.py; renaming it would silently break those joins."
       },
       "notes": "WITHDRAWN 2026-08-27. The two numbers below (thiamine->MFT conversion 0.021%; cysteine augments MFT 2.3-fold) came from a fabricated source and must not be used as anchors. They are retained in-file, not deleted, so the forensic record and the id join key survive; nothing in the live runtime reads either field (verified 2026-08-27: no consumer outside this file and an archived ingest script, and this entry is not the thiamine_fragmentation lane default - that is cerny_2007_thiamine_split_v1). Replacement lineage: Bolton & Reineccius 1994, 10.1021/bk-1994-0543.ch022 -> data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json."
     }
@@ -1378,7 +1342,6 @@
       "source": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358, DOI:10.1021/jf034037p",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "g6p_hdmf_multiplier_vs_glucose": 4.4,
       "analytical_method": "SIDA with [2H3]-HDMF",
       "replicates": 3,
@@ -1400,7 +1363,6 @@
       "source": "Hwang, Ismail & Joo (2020), Foods 9:251, DOI:10.3390/foods9030251",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "bounded_contextual_transfer",
       "reference_conditions": {
         "matrix": "beef_steak_sous_vide",
         "temperature_c_points": [
@@ -1445,7 +1407,6 @@
       "source": "Ahlberg & Mohammadi (2021), PMC9998214",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "bounded_contextual_transfer",
       "reference_basis": "commercial_yeast_extract_dry_weight",
       "standard_autolysate_imp_mg_per_100g_dw_range": [
         120.0,
@@ -1480,7 +1441,6 @@
       "source": "Liu, Bau, Jin et al. (2022), LWT 164:113651, DOI:10.1016/j.lwt.2022.113651",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "bounded_contextual_transfer",
       "reference_basis": "commercial_dried_mushroom_powder",
       "species_profiles": {
         "shiitake": {
@@ -1528,7 +1488,6 @@
       "source": "Mouritsen et al. (2024)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "umami_detection_thresholds_mmol_per_L": {
         "IMP": 0.25,
         "GMP": 0.125,
@@ -1543,7 +1502,6 @@
       "source": "Matoba et al. (1988)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 80,
         "pH": 6.0
@@ -1557,7 +1515,6 @@
       "source": "Blank & Grosch (2001), JAFC 49:2985",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 145,
         "pH": 6.0
@@ -1575,7 +1532,6 @@
       "source": "Martins, Jongen & van Boekel (2000), Trends in Food Science & Technology 11:364, DOI:10.1016/s0924-2244(01)00022-x",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "supporting_families": [
         "07"
       ],
@@ -1620,7 +1576,6 @@
       "source": "van Boekel (2001), DOI:10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "ph": 6.0,
         "sugar_molarity_M": 0.5,
@@ -1701,7 +1656,6 @@
       "source": "Blank et al. (1997), DOI:10.1021/jf960777q",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "temperature_c": 145.0,
         "amino_acid_partner": "proline",
@@ -1731,7 +1685,6 @@
       "source": "Tran et al. (2023 / PMC9846454)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "pea_iso",
         "plant_protein_generic"
@@ -1754,7 +1707,6 @@
       "source": "Quintas et al. (2000)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "ph": 5.0,
         "temperature_c": 120.0,
@@ -1770,7 +1722,6 @@
       "source": "Huang et al. (2024)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "matrix": "aqueous_free_model"
       },
@@ -1785,7 +1736,6 @@
       "source": "Martins & van Boekel (2003)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -1796,7 +1746,6 @@
       "source": "Nashalian & Yaylayan (2014)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "decarboxylation_k_s1": 0.41
       },
@@ -1807,7 +1756,6 @@
       "source": "Wu et al. (2025)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "amino_depletion_umol_ml": 0.69,
       "tvc_yield_ug_g": 28.3,
       "notes": "Glucosamine synergy and amino group depletion kinetics.",
@@ -1819,7 +1767,6 @@
       "source": "Blank & Mottram (Mercaptoketone labelling 2002)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "labeling_efficiency_pct": 90.0,
       "notes": "Branching ratios from [1-13C]ribose to 3-mercapto-2-pentanone showing 90% labeling."
     },
@@ -1828,7 +1775,6 @@
       "source": "Buera et al. (1987)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "maillard_ea_kcal_mol_range": [
         25.0,
         35.0
@@ -1844,7 +1790,6 @@
       "source": "PMC10056349 (2023)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "directional_transfer",
       "met_content_pct": 2.2,
       "cys_content_pct": 1.9,
       "gly_content_pct": 9.5,
@@ -1855,7 +1800,6 @@
       "source": "Tran et al. (2023)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "process": "HME",
         "T_C": 150
@@ -1871,7 +1815,6 @@
       "source": "Davidek et al. (2006), JAFC 54:6677",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 100,
         "pH": 6.0
@@ -1884,7 +1827,6 @@
       "source": "Martins & van Boekel (2003)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "literature_bounded",
       "reference_conditions": {
         "T_C": 120,
         "pH": 6.8
@@ -1898,7 +1840,6 @@
       "source": "Liu et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 100
       },
@@ -1910,7 +1851,6 @@
       "source": "Yu et al. (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 120,
         "matrix": "corn_hydrolysate"
@@ -1947,7 +1887,6 @@
       "source": "Bounded sulfur-support prior distilled from Wang et al. GSH vs cysteine sulfur yields, Xu et al. peptide hierarchy, and Nishimura & Abe soy hydrolysate intake support",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "process_state_applicability": [
         "heated_matrix",
         "aqueous_pre_extrusion_model",
@@ -1962,7 +1901,6 @@
       "source": "Ohsu et al. (2010), J. Biol. Chem. 285:1016, DOI:10.1074/jbc.M109.029165",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "temperature_c": 37.0,
         "msg_mM": 10.0,
@@ -2008,7 +1946,6 @@
       "source": "Huang et al. (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "temp_C": 100.0,
         "carbonyl_partner": "xylose",
@@ -2028,7 +1965,6 @@
       "source": "Xu, H. et al. (2025)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "ph": 6.0
       },
@@ -2047,7 +1983,6 @@
       "source": "ACS JAFC 3c02618",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "applicable_protein_types": [
         "pea_iso",
         "soy_iso",
@@ -2070,7 +2005,6 @@
       "source": "ACS JAFC 0c01925",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "pea_iso",
         "soy_iso",
@@ -2115,11 +2049,10 @@
       "id": "ref41_ppi_sulfur_volatile_binding_v1",
       "source": "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
       "provenance_tier": "direct_model_assumption",
-      "provenance_tier_history": "literature_derived_transfer until 2026-08-27; demoted by Wave T3 (Wave T1 finding T1-08). That tier asserts a primary source was read and transferred. Nothing was: the `source` field points at reference number 41 inside data/Gemini_Deep_Research/raw/11_maillard_lipid_crosstalk.md, an LLM research dump, and the only DOI ever attached to this claim (10.1021/acs.jafc.9b06882, on the sibling benchmark_intake_registry record `ref41_ppi_sulfur_binding`) was found by the 2026-08-26 citation sweep to be Zhao et al. 2019, a rodent reproductive-toxicology paper -- TOPIC-MISMATCH, recorded in results/validation/citation_verification_ledger.md. `direct_model_assumption` is the honest tier: the DMTS > DMDS > DMS ordering and the binding-site counts are assumptions this model makes, not measurements it inherited.",
+      "provenance_tier_history": "literature_derived_transfer until 2026-08-27; demoted by Wave T3 (Wave T1 finding T1-08). That tier asserts a primary source was read and transferred. Nothing was: the `source` field points at reference number 41 inside data/research_corpus/raw/11_maillard_lipid_crosstalk.md, an LLM research dump, and the only DOI ever attached to this claim (10.1021/acs.jafc.9b06882, on the sibling benchmark_intake_registry record `ref41_ppi_sulfur_binding`) was found by the 2026-08-26 citation sweep to be Zhao et al. 2019, a rodent reproductive-toxicology paper -- TOPIC-MISMATCH, recorded in results/validation/citation_verification_ledger.md. `direct_model_assumption` is the honest tier: the DMTS > DMDS > DMS ordering and the binding-site counts are assumptions this model makes, not measurements it inherited.",
       "source_status": "no_verifiable_source",
-      "source_status_note": "2026-08-27 (Wave T3). Per data/Gemini_Deep_Research/README.md, \"the deep-research report says so\" is not provenance, so this record has none. The `source` string is KEPT verbatim rather than emptied because it is the evidence trail for the finding and is pinned as such by tests/scientific/test_runtime_first_registry_landing.py; it reads as a disclosure (\"ref. 41 in raw/...\"), not as a citation. NO VALUE WAS CHANGED: the ordering, the site counts, the 25 C / pH 7 reference conditions and the runtime behaviour of the Family 11 sulfur-retention lane are all exactly as before. Retiring or re-anchoring this prior is an owner decision [P].",
+      "source_status_note": "2026-08-27 (Wave T3). Per data/research_corpus/README.md, \"the deep-research report says so\" is not provenance, so this record has none. The `source` string is KEPT verbatim rather than emptied because it is the evidence trail for the finding and is pinned as such by tests/scientific/test_runtime_first_registry_landing.py; it reads as a disclosure (\"ref. 41 in raw/...\"), not as a citation. NO VALUE WAS CHANGED: the ordering, the site counts, the 25 C / pH 7 reference conditions and the runtime behaviour of the Family 11 sulfur-retention lane are all exactly as before. Retiring or re-anchoring this prior is an owner decision [P].",
       "confidence_tier": "medium",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "pea_iso",
         "pea_conc"
@@ -2172,7 +2105,6 @@
       ],
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_guardrail",
       "reference_conditions": {
         "temperature_c": 25.0,
         "beta_cyclodextrin_loading_wt_pct": 1.0,
@@ -2212,7 +2144,6 @@
       "source": "PubMed PMID:36878579 (Ref. 39)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "free"
       ],
@@ -2230,7 +2161,6 @@
       "source": "Fadel et al. (2015)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "applicable_protein_types": [
         "soy_iso"
       ],
@@ -2251,7 +2181,6 @@
       "source": "Wang et al. (2023)",
       "provenance_tier": "direct_measurement",
       "confidence_tier": "high",
-      "uncertainty_posture": "bounded_calibration",
       "applicable_protein_types": [
         "soy_iso"
       ],
@@ -2296,7 +2225,6 @@
       "source": "Mottram et al. (2001)",
       "provenance_tier": "direct_measurement",
       "confidence_tier": "high",
-      "uncertainty_posture": "bounded_calibration",
       "applicable_protein_types": [
         "soy_iso"
       ],
@@ -2339,7 +2267,6 @@
       "source": "Siripitakpong et al. (2026)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "applicable_protein_types": [
         "pea_iso"
       ],
@@ -2384,7 +2311,6 @@
       "source": "Nakagawa et al. (2004), PubMed PMID:15165134",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "bounded_guardrail",
       "supporting_families": [
         "08",
         "12"
@@ -2403,7 +2329,6 @@
       "source": "J. Agric. Food Chem. 2020 (Ref. 25)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "baseline_arp_formation_ea_kj_per_mol": 77.8,
       "egcg_arp_formation_ea_kj_per_mol": 62.8,
       "ea_reduction_kj_per_mol": 15.0,
@@ -2447,7 +2372,6 @@
       "source": "J. Agric. Food Chem. 2019 (Ref. 24)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_guardrail",
       "cys_4mc_adduct_nmol_per_mg_range": [
         2.2,
         8.1
@@ -2490,7 +2414,6 @@
       "source": "PMC PMCID:PMC12154226 (Ref. 2)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_guardrail",
       "fft_reduction_factor": 16.0,
       "volatile_adduct_range_ug_per_l": [
         5.0,
@@ -2507,7 +2430,6 @@
       "source": "Rawel et al. (2002)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "cys_blocking_rate_vs_lys": 2.9,
       "lys_blocked_percent_at_10_1_ratio": 43.0,
       "effect_direction": "increase_cysteine_sink_and_reduce_free_thiol_budget",
@@ -2518,7 +2440,6 @@
       "source": "ResearchGate (Ref. 14)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "cga_cys_mrm_mz": 474.1,
       "stability_temp_C": 90.0,
       "effect_direction": "increase_cysteine_sink_and_reduce_free_thiol_budget",
@@ -2529,7 +2450,6 @@
       "source": "Shu, Lorentzen & Davies (2019), Free Radical Biology and Medicine 137:169, DOI:10.1016/j.freeradbiomed.2019.04.026",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "quinone_thiol_k_range": [
         100000.0,
         1000000.0
@@ -2539,7 +2459,7 @@
         "old": "Shu et al. (2019)",
         "new": "Shu, Lorentzen & Davies (2019), Free Radical Biology and Medicine 137:169, DOI:10.1016/j.freeradbiomed.2019.04.026",
         "date": "2026-08-26",
-        "basis": "The bare 'Shu et al. (2019)' string carried no identifier. The source deep-research document (data/Gemini_Deep_Research/slr_family_13_polyphenol_amino_capping.md) records DOI 10.1016/j.freeradbiomed.2019.04.026, verified in CrossRef as Shu, Lorentzen & Davies (2019), 'Reaction of quinones with proteins: Kinetics of adduct formation, effects on enzymatic activity and protein structure, and potential reversibility of modifications', Free Radic Biol Med 137:169-180 - a quinone/thiol adduct-formation kinetics study, matching the stored 10^5-10^6 M-1 s-1 second-order band."
+        "basis": "The bare 'Shu et al. (2019)' string carried no identifier. The source deep-research document (data/research_corpus/slr_family_13_polyphenol_amino_capping.md) records DOI 10.1016/j.freeradbiomed.2019.04.026, verified in CrossRef as Shu, Lorentzen & Davies (2019), 'Reaction of quinones with proteins: Kinetics of adduct formation, effects on enzymatic activity and protein structure, and potential reversibility of modifications', Free Radic Biol Med 137:169-180 - a quinone/thiol adduct-formation kinetics study, matching the stored 10^5-10^6 M-1 s-1 second-order band."
       },
       "doi": "10.1016/j.freeradbiomed.2019.04.026"
     },
@@ -2548,7 +2468,6 @@
       "source": "Zhu H. et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 4,
         "MGO_trapping_k_M1_s1": 1.6,
@@ -2561,7 +2480,6 @@
       "source": "Zhu H. et al. (2020b)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "kaempferol_MGO_k_M1_s1": 0.063,
@@ -2574,7 +2492,6 @@
       "source": "Liu J. et al. (2023)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_4MBQ_Lysine_kj_mol": 19.0
@@ -2586,7 +2503,6 @@
       "source": "Cömert & Gökmen (2019)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "egg_MGO_rate_k_L_mol_min": 26.6
@@ -2598,7 +2514,6 @@
       "source": "Munoz et al. (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "CQA_Q_reaction_rate_k_M1_s1": 2.73
@@ -2610,7 +2525,6 @@
       "source": "Cömert & Gökmen (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -2621,7 +2535,6 @@
       "source": "Song et al. (2009)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "forward_rate_k_M1_s1": 1547.0,
@@ -2634,7 +2547,6 @@
       "source": "Li et al. (2017)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -2645,7 +2557,6 @@
       "source": "Monforte et al. (2018)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_hydroquinone_catalyzed_kj_mol": 32.9,
@@ -2658,7 +2569,6 @@
       "source": "Liu, Y. (2021 thesis, NC State) / Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "matrix": "ppi"
       },
@@ -2684,7 +2594,6 @@
       "source": "Blank et al. (2001)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "bounded_guardrail",
       "precursor_fatty_acid": "arachidonic_acid",
       "target_offnote": "trans-4,5-epoxy-(E)-2-decenal",
       "odor_threshold_ng_per_l": 0.07,
@@ -2721,7 +2630,6 @@
       "source": "Hidalgo & Zamora (2004), JAFC 52:7126",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "bounded_guardrail",
       "precursor_fatty_acid": "4_hydroxynonenal",
       "target_offnote": "2-pentylpyrrole",
       "reactant_pairing": "4-HNE + phenylalanine",
@@ -2737,7 +2645,6 @@
       "source": "Mottram et al. (2001), JAFC 49:3712",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "competitive_target": "2-methyl-3-furanthiol",
       "competing_offnote_family": "lipid_aldehydes",
       "hexanal_to_cysteine_ratio_threshold": 0.5,
@@ -2755,7 +2662,6 @@
       "source": "Zhang et al. (2022), Food Chemistry 133961",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "directional_transfer",
       "target_offnote": "unsaturated_aldehydes",
       "comparison_baseline": "saturated_aldehydes",
       "oav_reported": true,
@@ -2771,7 +2677,6 @@
       "source": "Frankel et al. (1982)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "free"
       ],
@@ -2810,7 +2715,6 @@
       "source": "Grosch & Wieser (1999)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "free"
       ],
@@ -2828,7 +2732,6 @@
       "source": "Esterbauer et al. (1991)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "free"
       ],
@@ -2871,7 +2774,6 @@
       "source": "Kamal-Eldin et al. (2003)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "free"
       ],
@@ -2910,7 +2812,6 @@
       "source": "Yeo & Shibamoto (1991)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "applicable_protein_types": [
         "free"
       ],
@@ -2932,7 +2833,6 @@
       "source": "Tan et al. (2001)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -2943,7 +2843,6 @@
       "source": "Bayram et al. (2023)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -2954,7 +2853,6 @@
       "source": "Spier et al. (2010)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Fe_Ea_kcal_mol": 23.0,
@@ -2969,7 +2867,6 @@
       "source": "Esterbauer et al. (1991)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 37,
         "pH": 7.4
@@ -2983,7 +2880,6 @@
       "source": "Grosch (1982)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "hexanal_ODT_ppb": 4.5,
       "hexanal_OAV_benchmark_range": [
         2.0,
@@ -2996,7 +2892,6 @@
       "source": "Frankel (1982)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "linoleic_to_hexanal_molar_yield_pct": 45.0,
       "linoleic_to_propanal_molar_yield_pct": 28.0,
       "notes": "C18:2 oxidation: hexanal 45%, propanal 28% molar yield from beta-scission."
@@ -3006,7 +2901,6 @@
       "source": "Grosch (1999)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "linolenate_to_propanal_molar_yield_pct": 52.0,
       "linolenate_to_pentanal_molar_yield_pct": 22.0,
       "notes": "C18:3 oxidation: propanal 52%, pentanal 22% from beta-scission."
@@ -3016,7 +2910,6 @@
       "source": "Farmer et al. (1991)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 120
       },
@@ -3028,7 +2921,6 @@
       "source": "Kamal-Eldin et al. (2003)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "triolein_nonanal_molar_yield_pct": 38.0,
       "notes": "Triolein oxidation beta-scission: nonanal 38% molar yield."
     },
@@ -3037,7 +2929,6 @@
       "source": "Hidalgo et al. (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 100
       },
@@ -3049,7 +2940,6 @@
       "source": "Zamora et al. (2010)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 100
       },
@@ -3061,7 +2951,6 @@
       "source": "Ding et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 60,
         "matrix": "o/w_emulsion"
@@ -3075,7 +2964,6 @@
       "source": "Richards et al. (2009)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 37
       },
@@ -3087,7 +2975,6 @@
       "source": "Smagghe et al. (2006)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 25
       },
@@ -3100,7 +2987,6 @@
       "source": "Trikusuma et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "matrix": "pea_protein_emulsion"
       },
@@ -3115,7 +3001,6 @@
       "source": "PMC 2026 HME hexanal baseline",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "process": "HME",
         "T_C": 150
@@ -3128,7 +3013,6 @@
       "source": "Xu et al. (2024)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "matrix": "pbma_soy"
       },
@@ -3142,7 +3026,6 @@
       "source": "Yeo & Shibamoto (1991)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "matrix": "wof_model"
       },
@@ -3156,7 +3039,6 @@
       "source": "Marquez-Ruiz et al. (2014)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "nonanal_ODT_ppb": 1.0,
       "nonanal_OAV_range": [
         1.0,
@@ -3173,7 +3055,6 @@
       "source": "Glomb & Monnier (1995)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "precursor": "3-deoxyglucosone",
       "branching_fraction": {
         "methylglyoxal": 0.41,
@@ -3212,7 +3093,6 @@
       "source": "Frontiers in Nutrition 2022, DOI:10.3389/fnut.2022.1022254",
       "provenance_tier": "direct_measurement",
       "confidence_tier": "medium_high",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "matrix_context": "hot_compressed_water",
         "temperature_window_c": [
@@ -3262,7 +3142,6 @@
       "source": "SciELO Brasil (Ref. 4)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "matrix_context": "ascorbic_acid_amino_acid_model_system",
         "kinetic_order": "pseudo_first_order"
@@ -3309,7 +3188,6 @@
       "source": "PubMed PMID:1904866 (Ref. 5)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "reference_conditions": {
         "matrix_context": "bsa_ascorbic_acid_vs_glucose_model",
         "temperature_c": 37.0,
@@ -3337,7 +3215,6 @@
       "source": "PMC PMCID:PMC3199460 (Ref. 2)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {},
       "dicarbonyl_yields_pmol_mg": {
         "three_deoxythreosone": 9.1,
@@ -3355,7 +3232,6 @@
       "source": "Serpen & Gökmen (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "oxidation_acceleration_copper_fold": 88.0,
@@ -3368,7 +3244,6 @@
       "source": "Yang et al. (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_excess_ascorbate_kj_mol": 60.76,
@@ -3381,7 +3256,6 @@
       "source": "Manso et al. (2001)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_ascorbic_degradation_kj_mol": 55.6
@@ -3393,7 +3267,6 @@
       "source": "Takase et al. (2025)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -3404,7 +3277,6 @@
       "source": "Hendrickx et al. (1998)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_ascorbic_degradation_kj_mol": 54.8,
@@ -3418,7 +3290,6 @@
       "source": "Jian et al. (2012)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_ethanolic_min_kj_mol": 43.3,
@@ -3431,7 +3302,6 @@
       "source": "Smuda & Glomb (2013)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {},
       "oxidative_alpha_fragmentation_pct": 31.0,
       "beta_cleavage_pct": 32.0,
@@ -3444,7 +3314,6 @@
       "source": "Frontiers (2022) HCW AA Arrhenius anchor",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 160,
         "matrix": "HCW"
@@ -3457,7 +3326,6 @@
       "source": "PMID 1904866 pentosidine equivalence",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 37,
         "pH": 7.4
@@ -3478,7 +3346,6 @@
       "source": "SciELO Brasil (Ref. 4)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {},
       "ea_kj_per_mol_by_amino_acid": {
         "lysine": 54.94,
@@ -3499,7 +3366,6 @@
       "source": "PMC PMCID:PMC9351765 (Ref. 12)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
-      "uncertainty_posture": "bounded_calibration",
       "target_compound": "2-methyl-3-furanthiol",
       "mechanism": "crosspy_radical_thioether_adduction",
       "melanoidin_loading_reference_mg": 125.0,
@@ -3518,7 +3384,6 @@
       "source": "Zha et al. (2019)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
-      "uncertainty_posture": "bounded_contextual_transfer",
       "reference_conditions": {
         "matrix": "pea_protein_hydrolysate_gum_arabic_conjugate",
         "process_state": "heated_matrix",
@@ -3569,7 +3434,6 @@
       "source": "Gigl et al. (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "target_compound": "2-furfurylthiol",
       "mechanism": "melanoidin_thioether_trapping",
       "melanoidin_thiol_binding_parameters": {
@@ -3583,7 +3447,6 @@
       "source": "Brands et al. (2002)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "rate_k_h1": 1.14,
@@ -3597,7 +3460,6 @@
       "source": "Gigl et al. (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "thiol_loss_20min_pct": 50.0,
@@ -3610,7 +3472,6 @@
       "source": "Suzuki & Philp (1990)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -3621,7 +3482,6 @@
       "source": "Mundt & Wedzicha (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_browning_kj_mol": 105.0
@@ -3633,7 +3493,6 @@
       "source": "Cao et al. (2024)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "secondary_metabolite_inhibition_pct": 68.19,
@@ -3646,7 +3505,6 @@
       "source": "Hofmann et al. (2001)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "thiol_loss_30min_pct": 90.0
@@ -3658,7 +3516,6 @@
       "source": "Martins & van Boekel (2005)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_histidine_kj_mol": 35.31,
@@ -3692,7 +3549,7 @@
         "promotion_note": "Removed xTB-derived 17.88 kcal/mol; escalated to wet-lab backlog per Vía C of tasks/todo.md (active plan 2026-04-22).",
         "last_refined_at": "2026-04-21",
         "refinability_status": "wet_lab_pending",
-        "refinability_note": "Requires either: (a) hexanal H-abstraction Ea from radical-trapping literature ingestion, or (b) wet-lab measurement of hexanal suppression vs cysteine/sulfur partner concentration in oxidized-oil pre-cooking. See data/lit/deep_research_backlog.json for ResearchGate Ref 11 (lipid off-notes) ingestion."
+        "refinability_note": "Requires either: (a) hexanal H-abstraction Ea from radical-trapping literature ingestion, or (b) wet-lab measurement of hexanal suppression vs cysteine/sulfur partner concentration in oxidized-oil pre-cooking. See results/literature/deep_research_backlog.json for ResearchGate Ref 11 (lipid off-notes) ingestion."
       },
       {
         "reaction_key": "quinone_cys_michael",
@@ -3759,13 +3616,13 @@
           {
             "method": "interp+xtb_constrained_relax",
             "date": "2026-04-21",
-            "log": "data/logs/aa_ring_open_dicarbonyl_interp_recovery.log",
+            "log": "deleted with the QM lane 2026-09-01 (was data/logs/aa_ring_open_dicarbonyl_interp_recovery.log, never tracked)",
             "verdict": "minimum"
           },
           {
             "method": "xtb_ci_neb+tblite",
             "date": "2026-04-21",
-            "log": "data/logs/aa_ring_open_dicarbonyl_neb_recovery.log",
+            "log": "deleted with the QM lane 2026-09-01 (was data/logs/aa_ring_open_dicarbonyl_neb_recovery.log, never tracked)",
             "verdict": "minimum"
           }
         ]
@@ -3877,7 +3734,7 @@
         "surrogate_reaction": "Dehydroalanine plus lysine epsilon-amine Michael addition to form lysinoalanine.",
         "surrogate_assumption": "The previous xTB pair is discarded as a non-elementary placeholder; this prior assumes dehydroalanine has already formed via beta-elimination before lysine capture.",
         "surrogate_basis": [
-          "data/rmg_extensions/families/DHA_Crosslinking/rules.py",
+          "deleted with the QM/RMG lane 2026-09-01 (was data/rmg_extensions/families/DHA_Crosslinking/rules.py)",
           "data/species/toxic_markers.yml",
           "src/reaction_templates.py::_dha_competing_pathway"
         ],
@@ -3892,7 +3749,6 @@
         "source": "Martins & van Boekel (2003)",
         "provenance_tier": "literature_derived_transfer",
         "confidence_tier": "high",
-        "uncertainty_posture": "directional_transfer",
         "applicable_protein_types": [
           "free"
         ],
@@ -3915,7 +3771,6 @@
       "source": "Krause et al. (2003)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "acid_hydrolysis_conditions": {
         "hydrolysis_time_h": 24,
         "temperature_C": 110
@@ -3941,7 +3796,6 @@
       "source": "Lagrain et al. (2010)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "ph_values": [
           6.0,
@@ -3968,7 +3822,6 @@
       "source": "Rombouts et al. (2012)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "thermal_threshold_temp_C": 90.0
       },
@@ -3982,7 +3835,6 @@
       "source": "Zhang et al. (1993)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "deamidation_kinetics": {
         "ea_asn_kj_mol_range": [
           25.1,
@@ -4000,7 +3852,6 @@
       "source": "Li et al. (2010)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "chelation_kinetics": {
         "apparent_ea_kj_mol": 84.54
       },
@@ -4013,7 +3864,6 @@
       "source": "Zha et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -4024,7 +3874,6 @@
       "source": "Kutzli et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -4035,7 +3884,6 @@
       "source": "Nguyen et al. (2025)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -4046,7 +3894,6 @@
       "source": "Pereira et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "Cu_PM_formation_free_energy_kcal_mol": -35.8,
         "Fe_PM_formation_free_energy_kcal_mol": -58.9
@@ -4058,7 +3905,6 @@
       "source": "Sun et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_free_CML_kj_mol": 44.158,
@@ -4071,7 +3917,6 @@
       "source": "Shirai et al. (2015)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },
@@ -4082,7 +3927,6 @@
       "source": "Ma et al. (2024)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "process": "twin_screw_extrusion",
         "T_C": 150
@@ -4098,7 +3942,6 @@
       "source": "Morel et al. (2002)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "shear_rate_rpm": [
           10.0,
@@ -4115,7 +3958,6 @@
       "source": "Ilo et al. (1996)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "matrix": "maize_grits"
       },
@@ -4129,7 +3971,6 @@
       "source": "Lagrain et al. (2010), JAFC 58:3541",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 120,
         "pH": 8.0,
@@ -4144,7 +3985,6 @@
       "source": "Rombouts et al. (2012)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 160,
         "process": "HME"
@@ -4157,7 +3997,6 @@
       "source": "Zhang et al. (1993)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "T_C": 80,
         "pH": 7.0
@@ -4173,7 +4012,6 @@
       "source": "Spier et al. (2010)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Fe_Ea_kcal_mol": 23.0,
@@ -4188,7 +4026,6 @@
       "source": "Pereira et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "Cu_PM_formation_free_energy_kcal_mol": -35.8,
         "Fe_PM_formation_free_energy_kcal_mol": -58.9
@@ -4200,7 +4037,6 @@
       "source": "Nashalian & Yaylayan (2014)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "decarboxylation_k_s1": 0.41
       },
@@ -4211,7 +4047,6 @@
       "source": "Richards et al. (2009)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "cod_Hb_Vmax_uM_min": 66.2,
@@ -4226,7 +4061,6 @@
       "source": "Smagghe et al. (2006)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "soy_leghemoglobin_dissociation_s1": 5.6
@@ -4238,7 +4072,6 @@
       "source": "Serpen & Gökmen (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "oxidation_acceleration_copper_fold": 88.0,
@@ -4253,7 +4086,6 @@
       "source": "Solís-Calero et al. (2015)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_dehydration_kcal_mol": 17.5,
@@ -4267,7 +4099,6 @@
       "source": "Solís-Calero et al. (2013)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_condensation_kcal_mol": 8.76,
@@ -4282,7 +4113,6 @@
       "source": "Lertsiri et al. (1998)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "glycation_rate_mol_pct_min": 0.05,
@@ -4295,7 +4125,6 @@
       "source": "Hidalgo et al. (2005)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_browning_kj_mol": 66.5,
@@ -4308,7 +4137,6 @@
       "source": "Zamora et al. (2020)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "dpph_scavenging_increase_pct": 85.1
@@ -4320,7 +4148,6 @@
       "source": "Hidalgo et al. (2006)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "induction_period_synergy_pct": 185.0
@@ -4332,7 +4159,6 @@
       "source": "Vilanova et al. (2012)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3,
         "Ea_dehydration_kcal_mol": 13.08,
@@ -4345,7 +4171,6 @@
       "source": "Biondi et al. (2010)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
       "key_values": {
         "replicates": 3
       },

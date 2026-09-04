@@ -1,5 +1,22 @@
 # Scientific Validation Guide
 
+> **Status, 2026-09-03 (retirement step B5c).** The harness this contract describes —
+> `src/benchmark_validation.py`, `generate_benchmark_summary.py`, `prediction_uncertainty.json`,
+> `external_validation_report.json`, the FAST/`--lane` switch — was deleted with the legacy
+> screening lane. **What applies now:** the kinetic core is scored by
+> `src/kinetic_core/scoring.py` → `results/validation/core_panel_scores.{json,md}` (per-bundle
+> scale contracts from `validation_contract.scale_thresholds`, else `src/validation_contract.py`
+> defaults; `strict_ready` under the same tier / execution-path rule), its Monte-Carlo envelope by
+> `src/kinetic_core/uncertainty.py` → `core_prediction_uncertainty.{json,md}`, both pinned by
+> `tests/scientific/test_core_headline_guards.py`; fit-then-score is guarded by
+> `scripts/ci/fit_target_gate.py` (reads the core envelope) and the core's own fit-row ledger
+> `src/kinetic_core/fit_targets.py`; the hold-out by `scripts/ci/holdout_guard.py`. The
+> benchmark bundle format, tiers (PRIMARY / SECONDARY / REFERENCE), execution paths, the
+> hold-out rules and the evidence-role vocabulary in the body below are unchanged and still
+> apply; every paragraph that names a deleted module or artifact is history. A rewrite of this
+> document around the core is in the improvement backlog (`tasks/data_restructure_plan.md` §7).
+
+
 If you are new to the repository, read [README.md](../../README.md) first — its architecture section and its generated model card. This document is the deeper contract and methodology reference.
 
 ## 1. Validation Contract
@@ -176,7 +193,7 @@ As of the current benchmark summary:
   28.60, its record retracted. **Strict-ready is 0/14 before and after** — this benchmark was
   *failing* its contract when it was retired (2.2086x / 0.2352 dex, and 4.3797x / 0.4041 dex
   after the revert), so retiring it removes a failure, not a pass. Retiring the contract does
-  not leave the row untested: `_resolve_scale_thresholds` falls back to the global
+  not leave the row untested: `resolve_scale_thresholds` falls back to the global
   free-precursor defaults (1.5x / 0.10 dex), which are marginally *looser* than what was
   retired and which the row fails by more. That inheritance is stated here rather than left to
   be discovered. **The sulfur branch now has zero absolute literature anchors.**
@@ -556,6 +573,8 @@ because it never reaches the reaction network.
 The shipped prediction path changed. This section states the new contract and the evidence
 behind it.
 
+> *Historical (2026-08-29, Build Wave B5): the paragraph below describes the two-lane CLI that retirement step B5b deleted on 2026-09-03. There is no `--lane` switch and no FAST lane any more; every verb runs the kinetic core.*
+
 **What routes where.** `maillard compare` and `maillard predict` default to `--lane core`, the
 mass-action kinetic core at `src/kinetic_core/engine.py`. The FAST lane is reachable at
 `--lane fast` and is **demoted to ordinal screening**: its outputs are labelled
@@ -671,7 +690,7 @@ This is why a benchmark may be scientifically acceptable as `pass-no-ranking` wh
 
 ## 7. Expected Skips In The Docker Lane
 
-- `tests/benchmarks/` **no longer exists.** *(Corrected 2026-08-27, Wave R.)* This line used to describe it in the present tense as "intentionally skip-heavy today … Phase 3 placeholders and HPC-oriented literature checks". The directory and its `_lane_policy.py` gate were deleted on 2026-08-27 (Wave J2); nothing skips there because nothing runs there. The loader `src/authority_benchmark_data.py` and its tracked fixtures (`data/qm/phase33_barrier_benchmarks.json`, `data/qm/phase35_double_hybrid_benchmarks.json`) survive, but the loader's only remaining consumer is its own parse test, so no value from that lane reaches the model, a calibration or a headline. Reviving or retiring the Phase 3 authority lane is an open decision, not a skip.
+- `tests/benchmarks/` **no longer exists.** *(Corrected 2026-08-27, Wave R.)* This line used to describe it in the present tense as "intentionally skip-heavy today … Phase 3 placeholders and HPC-oriented literature checks". The directory and its `_lane_policy.py` gate were deleted on 2026-08-27 (Wave J2); nothing skips there because nothing runs there. The loader `src/authority_benchmark_data.py` and its `data/qm/` fixtures survived until 2026-09-01, when they were deleted together with the QM/DFT lane (cleaning branch, Phase 1a); no value from that lane ever reached the model, a calibration or a headline. The Phase 3 authority lane is retired, not open.
 - Capability-gated QM tests should skip only when the backend is genuinely unavailable or unusable in the active Docker environment.
 - A path-based skip for a binary that is actually present in `PATH` is a test bug, not a valid environment gate.
 

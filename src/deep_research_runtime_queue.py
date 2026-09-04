@@ -5,21 +5,20 @@ import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence, Set
 
-
-ROOT = Path(__file__).resolve().parents[1]
-BACKLOG_PATH = ROOT / "data" / "lit" / "deep_research_backlog.json"
+from src import data_paths
+from src import data_access
 
 RUNTIME_LANE_METADATA = {
     "process_state_calibration": {
-        "landing_path": "data/lit/process_state_calibrations.json",
+        "landing_path": data_paths.rel(data_paths.PROCESS_STATE_CALIBRATIONS),
         "title": "Process-State Calibration",
     },
     "safety_reference": {
-        "landing_path": "data/lit/safety_reference_payloads.json",
+        "landing_path": data_paths.rel(data_paths.SAFETY_REFERENCE_PAYLOADS),
         "title": "Safety Reference",
     },
     "computational_prior": {
-        "landing_path": "data/lit/computational_priors.json",
+        "landing_path": data_paths.rel(data_paths.COMPUTATIONAL_PRIORS),
         "title": "Computational Prior",
     },
 }
@@ -221,12 +220,6 @@ CURATED_RUNTIME_BATCHES = [
 ]
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
 def _derive_slr_families(files: List[str]) -> List[str]:
     family_ids = set()
     for filename in files:
@@ -247,18 +240,25 @@ def _normalize_citation(value: str) -> str:
     return normalized
 
 
+def _under_root(root: Path, path: Path) -> Path:
+    """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
+    if Path(root).resolve() == data_paths.REPO_ROOT:
+        return path
+    return root / data_paths.rel(path)
+
+
 def _iter_registry_citations(root: Path) -> Iterable[str]:
-    process_payload = _load_json(root / "data" / "lit" / "process_state_calibrations.json")
+    process_payload = data_access.load_json(_under_root(root, data_paths.PROCESS_STATE_CALIBRATIONS))
     for entry in process_payload.get("entries", []):
         if isinstance(entry, Mapping) and str(entry.get("source_citation", "")).strip():
             yield str(entry.get("source_citation", ""))
 
-    safety_payload = _load_json(root / "data" / "lit" / "safety_reference_payloads.json")
+    safety_payload = data_access.load_json(_under_root(root, data_paths.SAFETY_REFERENCE_PAYLOADS))
     for entry in safety_payload.get("entries", []):
         if isinstance(entry, Mapping) and str(entry.get("source_citation", "")).strip():
             yield str(entry.get("source_citation", ""))
 
-    prior_payload = _load_json(root / "data" / "lit" / "computational_priors.json")
+    prior_payload = data_access.load_json(_under_root(root, data_paths.COMPUTATIONAL_PRIORS))
     for section_name, entries in prior_payload.items():
         if section_name == "section_family_metadata" or not isinstance(entries, list):
             continue
@@ -337,8 +337,8 @@ def _prepared_candidate(spec: Mapping[str, Any], backlog_items: Mapping[str, Map
     }
 
 
-def build_deep_research_runtime_queue(root: Path = ROOT) -> Dict[str, Any]:
-    payload = _load_json(root / "data" / "lit" / "deep_research_backlog.json")
+def build_deep_research_runtime_queue(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
+    payload = data_access.load_json(_under_root(root, data_paths.DEEP_RESEARCH_BACKLOG))
     backlog_items = {
         str(item.get("citation", "")): item
         for item in payload.get("items", [])
@@ -413,7 +413,7 @@ def build_deep_research_runtime_queue(root: Path = ROOT) -> Dict[str, Any]:
         "schema_version": "1.0",
         "batch_id": str(batch.get("batch_id", "unknown")),
         "batch_label": str(batch.get("batch_label", "unknown")),
-        "source": BACKLOG_PATH.relative_to(ROOT).as_posix(),
+        "source": data_paths.rel(data_paths.DEEP_RESEARCH_BACKLOG),
         "selection_policy": "Select only Deep Research citations still marked BACKLOG and stage them into non-benchmark runtime lanes: process_state_calibration, safety_reference, and computational_prior. Exclude anything already landed in runtime registries, already runtime-bound, or benchmark-first.",
         "selected_candidates": selected_candidates,
         "excluded_candidates": excluded_candidates,

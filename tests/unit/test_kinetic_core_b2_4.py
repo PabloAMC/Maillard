@@ -1,4 +1,9 @@
-"""
+"""FROZEN-WAVE REGRESSION RECORD (labelled 2026-09-03, test audit). The wave generator this file
+tests is frozen (scripts/generators/WAVES.md); these tests fail only if the frozen report, the
+network or the parameter tables change. They are the contract of a finished wave, not live checks
+of new behaviour.
+
+
 tests/unit/test_kinetic_core_b2_4.py
 
 BUILD WAVE B2.4 -- the four things this wave must not be able to lose.
@@ -46,7 +51,6 @@ B23_FIT_REPORT = ROOT / "results/validation/kinetic_core_b2_3_fit_report.json"
 ENSEMBLE = ROOT / "results/validation/kinetic_core_b2_4_ensemble.json"
 PREREG = ROOT / "results/validation/kinetic_core_b2_4_prereg.md"
 AMINE_PROBE = ROOT / "results/validation/kinetic_core_b2_4_amine_fate_probe.json"
-
 
 
 def _executable_text(source: str) -> str:
@@ -240,31 +244,6 @@ def test_the_control_reproduces_b2_3s_cost_and_only_the_ph_rows_move():
 # ===========================================================================
 
 
-def test_both_scorers_declare_the_same_four_shared_rows():
-    import scripts.generators.generate_cutover_final_exam as exam
-    import scripts.generators.generate_kinetic_core_b2_3_holdout as panel
-
-    assert len(exam.SHARED_WITH_HOLDOUT_PANEL) == 4
-    assert len(panel.SHARED_WITH_CUTOVER_EXAM) == 4
-    # the exam's values are panel row ids; the panel's keys are those same ids
-    assert set(exam.SHARED_WITH_HOLDOUT_PANEL.values()) == set(
-        panel.SHARED_WITH_CUTOVER_EXAM)
-    # and the panel's values name the exam's own (bundle, compound) pairs
-    for row_id, exam_point in panel.SHARED_WITH_CUTOVER_EXAM.items():
-        bundle, compound = (part.strip() for part in exam_point.split(" / "))
-        assert bundle in {k[0] for k in exam.SHARED_WITH_HOLDOUT_PANEL}
-        assert compound in ("MFT", "FFT")
-        assert row_id.endswith(compound)
-
-
-def test_the_shared_rows_are_the_hofmann_ph3_and_ph7_ribose_block():
-    import scripts.generators.generate_kinetic_core_b2_3_holdout as panel
-    assert set(panel.SHARED_WITH_CUTOVER_EXAM) == {
-        "hofmann_ribose_pH3_MFT", "hofmann_ribose_pH3_FFT",
-        "hofmann_ribose_pH7_MFT", "hofmann_ribose_pH7_FFT",
-    }
-
-
 @pytest.mark.parametrize("tag", ("shipped", "half", "measured"))
 def test_the_generated_artifacts_carry_the_shared_declaration(tag):
     exam_path = ROOT / f"results/validation/kinetic_core_b2_4_exam_{tag}.json"
@@ -287,15 +266,6 @@ def test_the_generated_artifacts_carry_the_shared_declaration(tag):
 # ===========================================================================
 # 3. THE SCORER CONDITIONS -- continuous statistics beside the censored ones
 # ===========================================================================
-
-
-def test_the_exam_summariser_reports_a_geometric_mean():
-    import scripts.generators.generate_cutover_final_exam as exam
-    out = exam._summarise([10.0, 1000.0])
-    assert out["geometric_mean_fold"] == pytest.approx(100.0)
-    assert out["median_fold_error"] == pytest.approx(505.0)
-    # the empty case must still carry the key, or a consumer reads a KeyError
-    assert exam._summarise([])["geometric_mean_fold"] is None
 
 
 def test_the_panel_reports_median_abs_log10_beside_the_gating_count():

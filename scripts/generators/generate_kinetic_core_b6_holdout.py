@@ -35,6 +35,7 @@ REPO = Path(__file__).resolve().parents[2]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core.engine import (  # noqa: E402
     LIPID,
     FormulationSpec,
@@ -54,12 +55,12 @@ from src.kinetic_core.lipid import (  # noqa: E402
 from src.kinetic_core.parameters_lipid import LIPID_CARRIERS  # noqa: E402
 from src.kinetic_core.species_lipid import CLEAVAGE_MECHANISM, FRANKEL_SLATE  # noqa: E402
 
-FIT_REPORT = REPO / "results/validation/kinetic_core_b6_fit_report.json"
-OUT_JSON = REPO / "results/validation/kinetic_core_b6_holdout_report.json"
-OUT_MD = REPO / "results/validation/kinetic_core_b6_holdout_report.md"
-PREREG = REPO / "results/validation/kinetic_core_b6_prereg.md"
-EXAM_JSON = REPO / "results/validation/cutover_final_exam.json"
-EXAM_BASELINE = REPO / "results/validation/kinetic_core_b6_exam_baseline.json"
+FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b6_fit_report.json"
+OUT_JSON = data_paths.VALIDATION_DIR / "kinetic_core_b6_holdout_report.json"
+OUT_MD = data_paths.VALIDATION_DIR / "kinetic_core_b6_holdout_report.md"
+PREREG = data_paths.VALIDATION_DIR / "kinetic_core_b6_prereg.md"
+EXAM_JSON = data_paths.VALIDATION_DIR / "cutover_final_exam.json"
+EXAM_BASELINE = data_paths.VALIDATION_DIR / "kinetic_core_b6_exam_baseline.json"
 
 #: The eight rows the pre-registration names, and the outcome it registered.
 PREREG_EXAM_ROWS = {

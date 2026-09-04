@@ -9,7 +9,6 @@
       "target_module": "safety",
       "source_citation": "Squeo et al. (2023), Foods 12(6):1331",
       "doi": "10.3390/foods12061331",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "LC-MS/MS",
@@ -54,7 +53,6 @@
       "target_module": "safety",
       "source_citation": "Fu et al. (2023)",
       "doi": "10.3390/foods12101967",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "LC-MS/MS",
@@ -102,7 +100,6 @@
       "target_module": "safety",
       "source_citation": "Jung et al. (2024), Food Science and Biotechnology 33:2333",
       "doi": "10.1007/s10068-024-01633-w",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "UHPLC Nexera plus TQMS8040",
@@ -140,7 +137,6 @@
       "target_module": "safety",
       "source_citation": "Knol et al. (2010), Food Chemistry 120:1047",
       "doi": "10.1016/j.foodchem.2009.11.049",
-      "validated_status": "model_reference",
       "analyte": "acrylamide",
       "method": {
         "model_type": "Arrhenius formation model",
@@ -170,7 +166,6 @@
       "target_module": "safety",
       "source_citation": "Claeys et al. (2005), JAFC",
       "doi": "10.1021/jf051197n",
-      "validated_status": "model_reference",
       "analyte": "acrylamide",
       "method": {
         "model_type": "time_temperature_dependence"
@@ -192,7 +187,6 @@
       "target_module": "safety",
       "source_citation": "Sen & Gokmen (2023), ACS Food Sci Technol",
       "doi": "10.1021/acsfoodscitech.3c00359",
-      "validated_status": "model_reference",
       "analyte": "acrylamide",
       "method": {
         "model_type": "time_temperature_dependence"
@@ -214,7 +208,6 @@
       "target_module": "safety",
       "source_citation": "Zilic et al. (2014), J Sci Food Agric",
       "doi": "10.1002/jsfa.6210",
-      "validated_status": "contextual_reference",
       "analyte": "acrylamide",
       "method": {
         "matrix": "whole soybean",
@@ -243,7 +236,6 @@
       "slr_family_source": "12",
       "source_citation": "ACS Food Science & Technology 2022, 2(2):00242",
       "doi": "10.1021/acsfoodscitech.2c00242",
-      "validated_status": "reference_anchor",
       "analyte": "reactive_lysine",
       "method": {
         "instrument": "HPLC-UV",
@@ -287,7 +279,6 @@
       "slr_family_source": "12",
       "source_citation": "Fu et al. (2023)",
       "doi": "10.3390/foods12101967",
-      "validated_status": "reference_anchor",
       "analyte": "CML/CEL",
       "method": {
         "instrument": "UHPLC-MS/MS",
@@ -330,7 +321,6 @@
       "slr_family_source": "12",
       "source_citation": "Arinzechukwu et al. (2025)",
       "doi": "10.1111/1750-3841.70545",
-      "validated_status": "reference_anchor",
       "analyte": "CML/CEL",
       "method": {
         "instrument": "UHPLC-MS/MS",
@@ -375,7 +365,6 @@
       "slr_family_source": "13",
       "source_citation": "PMC PMCID:PMC12648097 (Ref. 5)",
       "doi": "10.1016/j.fochx.2025.103252",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "UPLC-QqQ-MS/MS",
@@ -407,9 +396,8 @@
       "target_module": "safety",
       "chemistry_family": "off_note_and_maillard_suppression",
       "slr_family_source": "08",
-      "source_citation": "Kocada\u011fl\u0131 & G\u00f6kmen (2016)",
+      "source_citation": "Kocadağlı & Gökmen (2016)",
       "doi": "10.1016/j.foodchem.2022.133518",
-      "validated_status": "contextual_reference",
       "analyte": "acrylamide",
       "method": {
         "instrument": "reported in source summary",
@@ -441,9 +429,8 @@
       "target_module": "safety",
       "chemistry_family": "safety_damage_lane",
       "slr_family_source": "12",
-      "source_citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "source_citation": "Ramírez-Jiménez et al. (2000)",
       "doi": "10.1021/jf9907687",
-      "validated_status": "reference_anchor",
       "analyte": "furosine",
       "method": {
         "model_type": "formation_elimination_crossover",
@@ -477,7 +464,6 @@
       "target_module": "safety",
       "source_citation": "Limacher, Kerler, Davidek, Schmalzried & Blank (2008), JAFC 56:3639",
       "doi": "10.1021/jf800268t",
-      "validated_status": "reference_anchor",
       "analyte": "furan",
       "method": {
         "instrument": "GC-MS",
@@ -524,7 +510,6 @@
       "chemistry_family": "safety_damage_lane",
       "slr_family_source": "12",
       "source_citation": "Henle (2005), Amino Acids 29:313-322 -- but see caveat",
-      "validated_status": "reference_anchor",
       "analyte": "CML",
       "method": {
         "instrument": "GC-MS",
@@ -563,7 +548,6 @@
       "target_module": "safety",
       "source_citation": "Fu et al. (2023)",
       "doi": "10.3390/foods12101967",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "GC-MS",
@@ -596,7 +580,6 @@
       "target_module": "safety",
       "source_citation": "De Vleeschouwer, Van der Plancken & Van Loey (2006), JAFC 54:7847",
       "doi": "10.1021/jf0611264",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "HPLC-MS/MS",
@@ -638,7 +621,6 @@
       "target_module": "safety",
       "source_citation": "Ma et al. (2022), Frontiers in Nutrition 9:940202",
       "doi": "10.3389/fnut.2022.940202",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "GC-MS",
@@ -673,7 +655,6 @@
       "target_module": "safety",
       "source_citation": "Sun et al. (2015)",
       "doi": "10.1016/j.foodchem.2014.09.129",
-      "validated_status": "reference_anchor",
       "analyte": "CML/CEL",
       "method": {
         "instrument": "HPLC-MS/MS",
@@ -704,7 +685,6 @@
       "target_module": "safety",
       "source_citation": "Zhu et al. (2021)",
       "doi": "10.1002/jsfa.10528",
-      "validated_status": "reference_anchor",
       "analyte": "CML/CEL",
       "method": {
         "instrument": "HPLC-MS/MS",
@@ -734,7 +714,6 @@
       "target_module": "safety",
       "source_citation": "Hamzalioglu et al. (2026)",
       "doi": "10.1021/acs.jafc.5c14296",
-      "validated_status": "reference_anchor",
       "analyte": "CML/CEL",
       "method": {
         "instrument": "HPLC-MS/MS",
@@ -763,7 +742,6 @@
       "target_module": "safety",
       "source_citation": "Hidalgo & Pompei (2000)",
       "doi": "10.1021/jf990120u",
-      "validated_status": "reference_anchor",
       "analyte": "furosine",
       "method": {
         "instrument": "HPLC-UV",
@@ -790,7 +768,6 @@
       "report_visibility": "default",
       "target_module": "safety",
       "source_citation": "Cantre, Garcia, Carpio & Madamba (2007), Philippine Agric. Sci. 90(2):143-152",
-      "validated_status": "reference_anchor",
       "analyte": "furosine",
       "method": {
         "instrument": "HPLC-UV",
@@ -831,7 +808,6 @@
       "target_module": "safety",
       "source_citation": "Zhu et al. (2020), Trends in Food Science & Technology 98:30",
       "doi": "10.1016/j.tifs.2020.01.021",
-      "validated_status": "reference_anchor",
       "analyte": "cml_cel",
       "method": {
         "instrument": "LC-MS/MS",
@@ -867,7 +843,6 @@
       "target_module": "safety",
       "source_citation": "Charissou et al. (2007)",
       "doi": "10.1021/jf063024j",
-      "validated_status": "reference_anchor",
       "analyte": "furosine_cml",
       "method": {
         "instrument": "GC-MS",
@@ -898,7 +873,6 @@
       "target_module": "safety",
       "source_citation": "Fratianni et al. (2017), Food Research International 99:862",
       "doi": "10.1016/j.foodres.2016.12.009",
-      "validated_status": "reference_anchor",
       "analyte": "furosine",
       "method": {
         "instrument": "HPLC",
@@ -932,7 +906,6 @@
       "target_module": "safety",
       "source_citation": "Ma et al. (2024)",
       "doi": "10.3390/ijms25168668",
-      "validated_status": "reference_anchor",
       "analyte": "cml_cel_acrylamide",
       "method": {
         "instrument": "LC-MS/MS",
@@ -964,7 +937,6 @@
       "target_module": "safety",
       "source_citation": "Knol et al. (2005)",
       "doi": "10.1021/jf050504m",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "LC-MS",
@@ -995,7 +967,6 @@
       "target_module": "safety",
       "source_citation": "De Vleeschouwer et al. (2008)",
       "doi": "10.1021/bp060389f",
-      "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
         "instrument": "HPLC",
@@ -1017,7 +988,6 @@
       "target_module": "safety",
       "source_citation": "Ishak et al. (2022)",
       "doi": "10.1016/j.foodchem.2022.132372",
-      "validated_status": "reference_anchor",
       "analyte": "PhIP",
       "method": {
         "instrument": "HPLC",
@@ -1039,7 +1009,6 @@
       "target_module": "safety",
       "source_citation": "Mandelli et al. (2025)",
       "doi": "10.3390/foods14193295",
-      "validated_status": "reference_anchor",
       "analyte": "HCAs",
       "method": {
         "instrument": "UHPLC-MS/MS",
@@ -1059,7 +1028,6 @@
       "target_module": "safety",
       "source_citation": "Yu et al. (2016), Food Science and Biotechnology 25:1163",
       "doi": "10.1007/s10068-016-0185-5",
-      "validated_status": "reference_anchor",
       "analyte": "CML",
       "method": {
         "instrument": "LC-MS",
@@ -1085,7 +1053,6 @@
       "target_module": "safety",
       "source_citation": "van Boekel (2001), Nahrung/Food 45:150",
       "doi": "10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9",
-      "validated_status": "reference_anchor",
       "analyte": "browning_intermediates",
       "method": {
         "instrument": "HPLC",
@@ -1120,7 +1087,6 @@
       "target_module": "safety",
       "source_citation": "Smuda & Glomb (2013)",
       "doi": "10.1002/anie.201300399",
-      "validated_status": "reference_anchor",
       "analyte": "browning_intermediates",
       "method": {
         "instrument": "LC-MS/MS",
@@ -1140,7 +1106,6 @@
       "target_module": "safety",
       "source_citation": "Yu et al. (2018)",
       "doi": "10.1590/1678-457x.08717",
-      "validated_status": "reference_anchor",
       "analyte": "browning_intermediates",
       "method": {
         "instrument": "HPLC",
@@ -1164,7 +1129,6 @@
       "slr_family_source": "07",
       "source_citation": "Fu et al. (2023), Foods 12:1967",
       "doi": "10.3390/foods12101967",
-      "validated_status": "reference_anchor",
       "analyte": "CML_CEL",
       "method": {
         "instrument": "LC-MS/MS",
@@ -1237,7 +1201,7 @@
       "key_values": {
         "lysine_loss_pct_extrusion_pba": 22.0
       },
-      "notes": "PBA lysine loss benchmark: 22% after HME extrusion at 150\u00b0C.",
+      "notes": "PBA lysine loss benchmark: 22% after HME extrusion at 150°C.",
       "shared_anchor": true,
       "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: acs_2022_pba_lysine_loss, acs_2022_pba_lysine_loss_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
@@ -1252,7 +1216,7 @@
       "key_values": {
         "acrylamide_ug_per_kg_spi_150C": 112.0
       },
-      "notes": "Acrylamide 112 ug/kg in heated SPI at 150\u00b0C; higher precursor availability in SPI.",
+      "notes": "Acrylamide 112 ug/kg in heated SPI at 150°C; higher precursor availability in SPI.",
       "shared_anchor": true,
       "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: acs_ref3_spi_acrylamide_fast_kinetics, ma_2024_pbma_extrusion_damage. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
@@ -1274,7 +1238,7 @@
     {
       "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
       "category": "furosine",
-      "source_citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "source_citation": "Ramírez-Jiménez et al. (2000)",
       "doi": "10.1021/jf9907687",
       "matrix_context": "toasted_bread",
       "analytical_method": "RP-HPLC",

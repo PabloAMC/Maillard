@@ -63,11 +63,12 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core import integrate, operative_parameters  # noqa: E402
 
-TIMESERIES = ROOT / "data" / "lit" / "timeseries"
+TIMESERIES = data_paths.TIMESERIES_DIR
 GG_FILE = "martins2005_glucose_glycine_80_100_120C_pH68.yml"
-OUTPUT_DIR = ROOT / "results" / "validation"
+OUTPUT_DIR = data_paths.VALIDATION_DIR
 FIT_BASENAME = "kinetic_core_b1_fit_report"
 BASENAME = "kinetic_core_b1_holdout_report"
 
@@ -399,7 +400,7 @@ def main() -> int:
         "wave": "B1",
         "generated_on": date.today().isoformat(),
         "git": git_head(),
-        "frozen_parameters_source": f"results/validation/{FIT_BASENAME}.json",
+        "frozen_parameters_source": data_paths.rel(data_paths.VALIDATION_DIR / f"{FIT_BASENAME}.json"),
         "parameters_changed_after_reading_the_holdout": False,
         "holdout_declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md D.6, Module 4",
         "holdout_1": {

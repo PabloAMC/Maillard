@@ -1,0 +1,1114 @@
+schema_version: 1
+generated_by: scripts/generators/build_compound_registry.py
+note: 'One row per compound identity. Molecules are keyed by InChIKey (computed with RDKit from `smiles`); classes,
+  marker sets and process levers are keyed by id. `aliases` is every spelling that appears anywhere in the repository;
+  every compound string in data/ must resolve here (tests/unit/test_compound_keys.py). Do not hand-edit: change
+  the seeds in the generator and re-run it.'
+compounds:
+- id: methoxypyrazines
+  display_name: Methoxypyrazines
+  kind: compound_class
+  members_of_class: methoxypyrazines
+  aliases:
+  - methoxypyrazines
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: decision panel / safety registry vocabulary
+- id: pyrazines
+  display_name: Pyrazines
+  kind: compound_class
+  members_of_class: pyrazines
+  aliases:
+  - dimethylpyrazine
+  - pyrazine
+  - pyrazine_family
+  seen_in:
+  - flavor:pyrazine_reference_anchors
+  - panel:alias
+  identity_source: decision panel / safety registry vocabulary
+  identity_note: the bare word 'pyrazine' in benchmark and payload rows means the family, as the retired BENCHMARK_NAME_ALIASES
+    table asserted
+- id: browning_intermediates
+  display_name: Browning intermediates (unspecified)
+  kind: marker_class
+  aliases:
+  - browning_intermediates
+  seen_in:
+  - safety:analyte
+  identity_source: decision panel / safety registry vocabulary
+- id: cml_cel
+  display_name: CML + CEL (advanced glycation end-products)
+  kind: marker_class
+  members:
+  - cml
+  - cel
+  aliases:
+  - CML/CEL
+  - CML_CEL
+  - cml_cel
+  seen_in:
+  - safety:analyte
+  identity_source: decision panel / safety registry vocabulary
+- id: cml_cel_acrylamide
+  display_name: CML + CEL + acrylamide (damage marker set)
+  kind: marker_class
+  members:
+  - cml
+  - cel
+  - acrylamide
+  aliases:
+  - cml_cel_acrylamide
+  seen_in:
+  - safety:analyte
+  identity_source: decision panel / safety registry vocabulary
+- id: furosine_cml
+  display_name: Furosine + CML (early/advanced glycation pair)
+  kind: marker_class
+  members:
+  - furosine
+  - cml
+  aliases:
+  - furosine_cml
+  seen_in:
+  - safety:analyte
+  identity_source: decision panel / safety registry vocabulary
+- id: heterocyclic_amines
+  display_name: Heterocyclic amines (HCAs)
+  kind: marker_class
+  members:
+  - phip
+  - meiqx
+  aliases:
+  - HCAs
+  - hcas
+  seen_in:
+  - safety:analyte
+  identity_source: decision panel / safety registry vocabulary
+- id: reactive_lysine
+  display_name: Reactive (available) lysine
+  kind: marker_class
+  aliases:
+  - reactive_lysine
+  seen_in:
+  - safety:analyte
+  identity_source: decision panel / safety registry vocabulary
+- id: 1_hexanol
+  display_name: 1-Hexanol
+  kind: molecule
+  smiles: CCCCCCO
+  inchikey: ZSIAUFGUXNUGDI-UHFFFAOYSA-N
+  canonical_smiles: CCCCCCO
+  inchi: InChI=1S/C6H14O/c1-2-3-4-5-6-7/h7H,2-6H2,1H3
+  cas: 111-27-3
+  class: adverse_lipid_markers
+  aliases:
+  - 1-hexanol
+  - 1hexanol
+  seen_in:
+  - benchmarks:measured_volatiles
+  - flavor:off_note_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
+- id: 1_octen_3_ol
+  display_name: 1-Octen-3-ol
+  kind: molecule
+  smiles: CCCCC(O)C=C
+  inchikey: PZKFYTOLVRCMOA-UHFFFAOYSA-N
+  canonical_smiles: C=CC(O)CCCC
+  inchi: InChI=1S/C8H16O/c1-3-5-6-8(9)7-4-2/h4,7-9H,2-3,5-6H2,1H3
+  cas: 3391-86-4
+  aliases:
+  - 1-octen-3-ol
+  seen_in:
+  - flavor:off_note_reference_anchors
+  - henry_constants
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
+- id: 2_3_butanedione
+  display_name: 2,3-Butanedione
+  kind: molecule
+  smiles: CC(=O)C(C)=O
+  inchikey: QSJXEFYPDANLFS-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C(C)=O
+  aliases:
+  - 2,3-butanedione
+  - diacetyl
+  seen_in:
+  - flavor:carbonyl_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_3_dimethylpyrazine
+  display_name: 2,3-Dimethylpyrazine
+  kind: molecule
+  smiles: Cc1nccnc1C
+  inchikey: OXQOBQJCDNLAPO-UHFFFAOYSA-N
+  canonical_smiles: Cc1nccnc1C
+  inchi: InChI=1S/C6H8N2/c1-5-6(2)8-4-3-7-5/h3-4H,1-2H3
+  cas: 5910-89-4
+  class: pyrazines
+  aliases:
+  - 23dimethylpyrazine
+  seen_in:
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_5_dimethylpyrazine
+  display_name: 2,5-Dimethylpyrazine
+  kind: molecule
+  smiles: Cc1cnc(C)cn1
+  inchikey: LCZUOKDVTBMCMX-UHFFFAOYSA-N
+  canonical_smiles: Cc1cnc(C)cn1
+  inchi: InChI=1S/C6H8N2/c1-5-3-8-6(2)4-7-5/h3-4H,1-2H3
+  cas: 123-32-0
+  class: pyrazines
+  aliases:
+  - 2,5-dimethylpyrazine
+  - 25dimethylpyrazine
+  seen_in:
+  - benchmarks:reference_volatiles
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_6_dimethylpyrazine
+  display_name: 2,6-Dimethylpyrazine
+  kind: molecule
+  smiles: Cc1cncc(C)n1
+  inchikey: HJFZAYHYIWGLNL-UHFFFAOYSA-N
+  canonical_smiles: Cc1cncc(C)n1
+  class: pyrazines
+  aliases: []
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_acetylfuran
+  display_name: 2-Acetylfuran
+  kind: molecule
+  smiles: CC(=O)c1ccco1
+  inchikey: IEMMBWWQXVXBEU-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)c1ccco1
+  class: severity_markers
+  aliases:
+  - 2acetylfuran
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_ethyl_3_5_dimethylpyrazine
+  display_name: 2-Ethyl-3,5-dimethylpyrazine
+  kind: molecule
+  smiles: CCc1nc(C)cnc1C
+  inchikey: WHMWOHBXYIZFPF-UHFFFAOYSA-N
+  canonical_smiles: CCc1nc(C)cnc1C
+  inchi: InChI=1S/C8H12N2/c1-4-7-8(3)10-6-5-9-7/h5-6H,4H2,1-3H3
+  cas: 13360-64-0
+  class: pyrazines
+  aliases:
+  - 2-ethyl-3,5-dimethylpyrazine
+  - 2ethyl35dimethylpyrazine
+  seen_in:
+  - flavor:pyrazine_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_ethylpyrazine
+  display_name: 2-Ethylpyrazine
+  kind: molecule
+  smiles: CCc1cnccn1
+  inchikey: KVFIJIWMDBAGDP-UHFFFAOYSA-N
+  canonical_smiles: CCc1cnccn1
+  class: pyrazines
+  aliases: []
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_furfurylthiol
+  display_name: 2-Furfurylthiol (FFT)
+  kind: molecule
+  smiles: SCc1ccco1
+  inchikey: ZFFTZDQKIXPDAF-UHFFFAOYSA-N
+  canonical_smiles: SCc1ccco1
+  inchi: InChI=1S/C5H6OS/c6-3-5-2-1-4-7-5/h1-2,4,6H,3H2
+  cas: 98-02-2
+  class: sulfur_positives
+  aliases:
+  - 2-Furfurylthiol
+  - 2-furfurylthiol
+  - 2-furylmethanethiol
+  - 2furfurylthiol
+  - 2furfurylthiolfft
+  - 2furylmethanethiol
+  - FFT
+  - fft
+  - furfuryl mercaptan
+  seen_in:
+  - benchmarks:holdout_targets
+  - benchmarks:measured_volatiles
+  - benchmarks:reference_volatiles
+  - flavor:sulfur_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_hexyl_4_methylthiazole
+  display_name: 2-hexyl-4-methylthiazole
+  kind: molecule
+  smiles: CCCCCCC1=NC(C)=CS1
+  inchikey: JAKJZOOTXAIFDV-UHFFFAOYSA-N
+  canonical_smiles: CCCCCCc1nc(C)cs1
+  inchi: InChI=1S/C10H17NS/c1-3-4-5-6-7-10-11-9(2)8-12-10/h8H,3-7H2,1-2H3
+  cas: 135111-97-4
+  aliases: []
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_methyl_3_furanthiol
+  display_name: 2-Methyl-3-furanthiol (MFT)
+  kind: molecule
+  smiles: Cc1occc1S
+  inchikey: RUYNUXHHUVUINQ-UHFFFAOYSA-N
+  canonical_smiles: Cc1occc1S
+  inchi: InChI=1S/C5H6OS/c1-4-5(7)2-3-6-4/h2-3,7H,1H3
+  cas: 28588-74-1
+  class: sulfur_positives
+  aliases:
+  - 2-Methyl-3-furanthiol
+  - 2-methyl-3-furanthiol
+  - 2-methyl-3-furylthiol
+  - 2-methylfuran-3-thiol
+  - 2methyl3furanthiol
+  - 2methyl3furanthiolmft
+  - 2methyl3furylthiol
+  - 2methylfuran3thiol
+  - MFT
+  - mft
+  seen_in:
+  - benchmarks:holdout_targets
+  - benchmarks:measured_volatiles
+  - benchmarks:reference_volatiles
+  - flavor:sulfur_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_methylbutanal
+  display_name: 2-Methylbutanal
+  kind: molecule
+  smiles: CCC(C)C=O
+  inchikey: BYGQBDHUGHBGMD-UHFFFAOYSA-N
+  canonical_smiles: CCC(C)C=O
+  inchi: InChI=1S/C5H10O/c1-3-5(2)4-6/h4-5H,3H2,1-2H3
+  cas: 96-17-3
+  class: strecker_aldehydes
+  aliases:
+  - 2-methylbutanal
+  - 2-methylbutyraldehyde
+  - 2methylbutanal
+  - 2methylbutyraldehyde
+  seen_in:
+  - flavor:strecker_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_methylpropanal
+  display_name: 2-Methylpropanal (isobutyraldehyde)
+  kind: molecule
+  smiles: CC(C)C=O
+  inchikey: AMIMRNSIRUDHCM-UHFFFAOYSA-N
+  canonical_smiles: CC(C)C=O
+  inchi: InChI=1S/C4H8O/c1-4(2)3-5/h3-4H,1-2H3
+  cas: 78-84-2
+  aliases:
+  - 2-Methylpropanal
+  - isobutyraldehyde
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_methyltetrahydrofuran_3_one
+  display_name: 2-Methyltetrahydrofuran-3-one
+  kind: molecule
+  smiles: CC1OCCC1=O
+  inchikey: FCWYQRVIQDNGBI-UHFFFAOYSA-N
+  canonical_smiles: CC1OCCC1=O
+  class: furans_furanones
+  aliases:
+  - 2methyltetrahydrofuran3one
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_methylthiophene
+  display_name: 2-Methylthiophene
+  kind: molecule
+  smiles: Cc1cccs1
+  inchikey: XQQBUAPQHNYYRS-UHFFFAOYSA-N
+  canonical_smiles: Cc1cccs1
+  inchi: InChI=1S/C5H6S/c1-5-3-2-4-6-5/h2-4H,1H3
+  cas: 554-14-3
+  aliases: []
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_pentyl_4_methylthiazole
+  display_name: 2-pentyl-4-methylthiazole
+  kind: molecule
+  smiles: CCCCCC1=NC(C)=CS1
+  inchikey: FLCKZQLXJGGADB-UHFFFAOYSA-N
+  canonical_smiles: CCCCCc1nc(C)cs1
+  inchi: InChI=1S/C9H15NS/c1-3-4-5-6-9-10-8(2)7-11-9/h7H,3-6H2,1-2H3
+  cas: 135111-96-3
+  aliases: []
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 2_pentylfuran
+  display_name: 2-Pentylfuran
+  kind: molecule
+  smiles: CCCCCc1ccco1
+  inchikey: YVBAUDVGOFCUSG-UHFFFAOYSA-N
+  canonical_smiles: CCCCCc1ccco1
+  inchi: InChI=1S/C9H14O/c1-2-3-4-5-9-6-7-10-8-9/h6-8H,2-5H2,1H3
+  cas: 3777-69-3
+  class: adverse_lipid_markers
+  aliases:
+  - 2-pentylfuran
+  - 2pentylfuran
+  seen_in:
+  - benchmarks:measured_volatiles
+  - flavor:off_note_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
+- id: 3_isobutyl_2_methoxypyrazine
+  display_name: 3-Isobutyl-2-methoxypyrazine (IBMP)
+  kind: molecule
+  smiles: COc1nccnc1CC(C)C
+  inchikey: UXFSPRAGHGMRSQ-UHFFFAOYSA-N
+  canonical_smiles: COc1nccnc1CC(C)C
+  class: methoxypyrazines
+  aliases:
+  - 3-isobutyl-2-methoxypyrazine
+  - ibmp
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 3_methylbutanal
+  display_name: 3-Methylbutanal
+  kind: molecule
+  smiles: CC(C)CC=O
+  inchikey: YGHRJJRRZDOVPD-UHFFFAOYSA-N
+  canonical_smiles: CC(C)CC=O
+  inchi: InChI=1S/C5H10O/c1-5(2)3-4-6/h4H,3H2,1-2H3
+  cas: 590-86-3
+  class: strecker_aldehydes
+  aliases:
+  - 3-methylbutanal
+  - 3methylbutanal
+  - isovaleraldehyde
+  seen_in:
+  - flavor:strecker_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 4_5_dihydro_2_methylthiazole
+  display_name: 4,5-Dihydro-2-methylthiazole
+  kind: molecule
+  smiles: CC1=NCCS1
+  inchikey: JUIQOABNSLTJSW-UHFFFAOYSA-N
+  canonical_smiles: CC1=NCCS1
+  inchi: InChI=1S/C4H7NS/c1-4-5-2-3-6-4/h2-3H2,1H3
+  cas: 2346-00-1
+  aliases: []
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: 4_vinylguaiacol
+  display_name: 4-Vinylguaiacol
+  kind: molecule
+  smiles: C=Cc1ccc(O)c(OC)c1
+  inchikey: YOMSJEATGXXYPX-UHFFFAOYSA-N
+  canonical_smiles: C=Cc1ccc(O)c(OC)c1
+  aliases:
+  - 4-vinylguaiacol
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: acetaldehyde
+  display_name: Acetaldehyde
+  kind: molecule
+  smiles: CC=O
+  inchikey: IKHGUXGNUITLKF-UHFFFAOYSA-N
+  canonical_smiles: CC=O
+  aliases: []
+  seen_in:
+  - henry_constants
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: acetoin
+  display_name: Acetoin
+  kind: molecule
+  smiles: CC(O)C(C)=O
+  inchikey: ROWKJAVDOGWPAT-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C(C)O
+  aliases:
+  - acetoin
+  seen_in:
+  - flavor:carbonyl_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: acetone
+  display_name: Acetone
+  kind: molecule
+  smiles: CC(C)=O
+  inchikey: CSCPPACGZOOCGX-UHFFFAOYSA-N
+  canonical_smiles: CC(C)=O
+  aliases: []
+  seen_in:
+  - henry_constants
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: acrolein
+  display_name: Acrolein
+  kind: molecule
+  smiles: C=CC=O
+  inchikey: HGINCPLSRVDWNT-UHFFFAOYSA-N
+  canonical_smiles: C=CC=O
+  aliases: []
+  seen_in:
+  - henry_constants
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: acrylamide
+  display_name: Acrylamide
+  kind: molecule
+  smiles: C=CC(=O)N
+  inchikey: HRPVXLWXLXDGHG-UHFFFAOYSA-N
+  canonical_smiles: C=CC(N)=O
+  inchi: InChI=1S/C3H5NO/c1-2-3(4)5/h2H,1H2,(H2,4,5)
+  cas: 79-06-1
+  class: safety_markers
+  aliases:
+  - 2-propenamide
+  - 2propenamide
+  - acrylamide
+  seen_in:
+  - benchmarks:holdout_targets
+  - benchmarks:measured_volatiles
+  - benchmarks:reference_volatiles
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - safety:analyte
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: benzaldehyde
+  display_name: Benzaldehyde
+  kind: molecule
+  smiles: O=Cc1ccccc1
+  inchikey: HUMNYLRZRPPJDN-UHFFFAOYSA-N
+  canonical_smiles: O=Cc1ccccc1
+  aliases:
+  - benzaldehyde
+  seen_in:
+  - flavor:strecker_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: beta_ionone
+  display_name: beta-Ionone
+  kind: molecule
+  smiles: CC(=O)/C=C/C1=C(C)CCCC1(C)C
+  inchikey: PSQYTAPXSHCGMF-BQYQJAHWSA-N
+  canonical_smiles: CC(=O)/C=C/C1=C(C)CCCC1(C)C
+  aliases:
+  - beta-ionone
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: bis_2_methyl_3_furyl_disulfide
+  display_name: Bis(2-methyl-3-furyl) disulfide
+  kind: molecule
+  smiles: Cc1c(SSc2ccoc2C)cco1
+  inchikey: OHDFENKFSKIFBJ-UHFFFAOYSA-N
+  canonical_smiles: Cc1occc1SSc1ccoc1C
+  inchi: InChI=1S/C10H10O2S2/c1-7-9(3-5-11-7)13-14-10-4-6-12-8(10)2/h3-6H,1-2H3
+  cas: 28588-75-2
+  class: sulfur_positives
+  aliases:
+  - 2-methyl-3-furyl 2-methyl-3-furyl disulfide
+  - 2methyl3furyl2methyl3furyldisulfide
+  - bis(2-methyl-3-furyl) disulfide
+  - bis(2-methyl-3-furyl) disulphide
+  - bis(2-methyl-3-furyl)disulfide
+  - bis2methyl3furyldisulfide
+  - mft disulfide
+  seen_in:
+  - benchmarks:reference_volatiles
+  - flavor:sulfur_reference_anchors
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: cel
+  display_name: Nε-(Carboxyethyl)lysine (CEL)
+  kind: molecule
+  smiles: N[C@@H](CCCCNC(C)C(=O)O)C(=O)O
+  inchikey: XCYPSOHOIAZISD-MLWJPKLSSA-N
+  canonical_smiles: CC(NCCCC[C@H](N)C(=O)O)C(=O)O
+  cas: 136362-46-2
+  class: safety_markers
+  aliases:
+  - carboxyethyl lysine
+  - CEL
+  - Nε-(Carboxyethyl)lysine
+  - nε-(carboxyethyl)lysine (cel)
+  seen_in:
+  - benchmarks:measured_volatiles
+  - henry_constants
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: chlorogenic_acid
+  display_name: Chlorogenic acid
+  kind: molecule
+  smiles: O=C(OC1CC(O)(C(=O)O)CC(O)C1O)/C=C/c1ccc(O)c(O)c1
+  inchikey: CWVRJTMFETXNAD-DUXPYHPUSA-N
+  canonical_smiles: O=C(/C=C/c1ccc(O)c(O)c1)OC1CC(O)(C(=O)O)CC(O)C1O
+  aliases:
+  - chlorogenic acid
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: ring stereocentres omitted; identity at constitution level only
+- id: cml
+  display_name: Nε-(Carboxymethyl)lysine (CML)
+  kind: molecule
+  smiles: N[C@@H](CCCCNCC(=O)O)C(=O)O
+  inchikey: NUXSIDPKKIEIMI-LURJTMIESA-N
+  canonical_smiles: N[C@@H](CCCCNCC(=O)O)C(=O)O
+  inchi: InChI=1S/C8H16N2O4/c9-4-2-1-3-6(10-5-7(11)12)8(13)14/h6H,1-5,9-10H2,(H,11,12)(H,13,14)/t6-/m0/s1
+  cas: 23100-12-1
+  class: safety_markers
+  aliases:
+  - carboxymethyl lysine
+  - CML
+  - Nε-(Carboxymethyl)lysine
+  - nε-(carboxymethyl)lysine (cml)
+  seen_in:
+  - benchmarks:measured_volatiles
+  - henry_constants
+  - safety:analyte
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: dimethyl_disulfide
+  display_name: Dimethyl disulfide
+  kind: molecule
+  smiles: CSSC
+  inchikey: WQOXQRCZOLPYPM-UHFFFAOYSA-N
+  canonical_smiles: CSSC
+  inchi: InChI=1S/C2H6S2/c1-3-4-2/h1-2H3
+  cas: 624-92-0
+  aliases: []
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: dimethyl_trisulfide
+  display_name: Dimethyl trisulfide
+  kind: molecule
+  smiles: CSSSC
+  inchikey: YWHLKYXPLRWGSE-UHFFFAOYSA-N
+  canonical_smiles: CSSSC
+  inchi: InChI=1S/C2H6S3/c1-3-4-5-2/h1-2H3
+  cas: 3658-80-8
+  aliases: []
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: e_2_octenal
+  display_name: (E)-2-Octenal
+  kind: molecule
+  smiles: CCCCC/C=C/C=O
+  inchikey: LVBXEMGDVWVTGY-VOTSOKGWSA-N
+  canonical_smiles: CCCCC/C=C/C=O
+  aliases:
+  - (E)-2-octenal
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: e_e_2_4_heptadienal
+  display_name: (E,E)-2,4-Heptadienal
+  kind: molecule
+  smiles: CC/C=C/C=C/C=O
+  inchikey: SATICYYAWWYRAM-VNKDHWASSA-N
+  canonical_smiles: CC/C=C/C=C/C=O
+  aliases:
+  - (E,E)-2,4-heptadienal
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: furan
+  display_name: Furan
+  kind: molecule
+  smiles: c1ccoc1
+  inchikey: YLQBMQCUIZJEEH-UHFFFAOYSA-N
+  canonical_smiles: c1ccoc1
+  aliases:
+  - furan
+  seen_in:
+  - safety:analyte
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: furfural
+  display_name: Furfural
+  kind: molecule
+  smiles: O=Cc1ccco1
+  inchikey: HYBBIBNJHNGZAN-UHFFFAOYSA-N
+  canonical_smiles: O=Cc1ccco1
+  inchi: InChI=1S/C5H4O2/c6-4-5-2-1-3-7-5/h1-4H
+  cas: 98-01-1
+  class: severity_markers
+  aliases:
+  - fa
+  - furan-2-aldehyde
+  - Furan-2-aldehyde (FA)
+  - furan-2-carbaldehyde
+  - furfural
+  seen_in:
+  - benchmarks:holdout_targets
+  - benchmarks:measured_volatiles
+  - benchmarks:reference_volatiles
+  - flavor:carbonyl_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
+- id: furosine
+  display_name: Furosine
+  kind: molecule
+  smiles: NC(CCCCNCC(=O)c1ccco1)C(=O)O
+  inchikey: YQHPCDPFXQXCMV-UHFFFAOYSA-N
+  canonical_smiles: NC(CCCCNCC(=O)c1ccco1)C(=O)O
+  aliases:
+  - furosine
+  seen_in:
+  - benchmarks:measured_volatiles
+  - safety:analyte
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: alpha-carbon stereocentre omitted
+- id: gmp
+  display_name: Guanosine 5'-monophosphate (GMP)
+  kind: molecule
+  smiles: null
+  inchikey: null
+  cas: 85-32-5
+  class: umami_support_markers
+  aliases:
+  - GMP
+  - gmp
+  - guanosine monophosphate
+  - guanylate
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: hdmf
+  display_name: DMHF
+  kind: molecule
+  smiles: CC1OC(C)=C(O)C1=O
+  inchikey: INAXVXBDKKUCGI-UHFFFAOYSA-N
+  canonical_smiles: CC1=C(O)C(=O)C(C)O1
+  class: furans_furanones
+  aliases:
+  - 4-Hydroxy-2,5-dimethyl-3(2H)-furanone
+  - 4-hydroxy-2,5-dimethyl-3(2H)-furanone
+  - 4hydroxy25dimethyl32hfuranone
+  - dmhf
+  - furaneol
+  - HDMF
+  - hdmf
+  seen_in:
+  - benchmarks:holdout_targets
+  - benchmarks:reference_volatiles
+  - flavor:furanone_reference_anchors
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: hemf
+  display_name: HEMF
+  kind: molecule
+  smiles: CCC1OC(C)=C(O)C1=O
+  inchikey: GWCRPYGYVRXVLI-UHFFFAOYSA-N
+  canonical_smiles: CCC1OC(C)=C(O)C1=O
+  aliases: []
+  seen_in:
+  - flavor:furanone_reference_anchors
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: heptanal
+  display_name: Heptanal
+  kind: molecule
+  smiles: CCCCCCC=O
+  inchikey: FXHGMKSSBGDXIY-UHFFFAOYSA-N
+  canonical_smiles: CCCCCCC=O
+  aliases:
+  - heptanal
+  seen_in:
+  - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: hexanal
+  display_name: Hexanal
+  kind: molecule
+  smiles: CCCCCC=O
+  inchikey: JARKCYVAAOWBJS-UHFFFAOYSA-N
+  canonical_smiles: CCCCCC=O
+  inchi: InChI=1S/C6H12O/c1-2-3-4-5-6-7/h6H,2-5H2,1H3
+  cas: 66-25-1
+  class: adverse_lipid_markers
+  aliases:
+  - hexanal
+  seen_in:
+  - benchmarks:measured_volatiles
+  - benchmarks:reference_volatiles
+  - flavor:off_note_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
+- id: hmf
+  display_name: 5-Hydroxymethylfurfural (HMF)
+  kind: molecule
+  smiles: OCc1ccc(C=O)o1
+  inchikey: NOEGNKMFWQHSLB-UHFFFAOYSA-N
+  canonical_smiles: O=Cc1ccc(CO)o1
+  inchi: InChI=1S/C6H6O3/c7-2-5-1-3-6(4-5)9-2/h1,3-4,8H,2H2
+  cas: 67-47-0
+  class: safety_markers
+  aliases:
+  - 5-Hydroxymethylfurfural
+  - 5hydroxymethylfurfural
+  - 5hydroxymethylfurfuralhmf
+  - HMF
+  - hmf
+  seen_in:
+  - benchmarks:holdout_targets
+  - benchmarks:reference_volatiles
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: hydrogen_sulfide
+  display_name: Hydrogen Sulfide
+  kind: molecule
+  smiles: S
+  inchikey: RWSOTUBLDIXVET-UHFFFAOYSA-N
+  canonical_smiles: S
+  inchi: InChI=1S/H2S/h1H2
+  cas: 7783-06-4
+  aliases:
+  - h2s
+  seen_in:
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: imp
+  display_name: Inosine 5'-monophosphate (IMP)
+  kind: molecule
+  smiles: null
+  inchikey: null
+  cas: 131-99-7
+  class: umami_support_markers
+  aliases:
+  - IMP
+  - imp
+  - inosinate
+  - inosine monophosphate
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: lanthionine
+  display_name: Lanthionine (LAN)
+  kind: molecule
+  smiles: N[C@@H](CSCC[C@@H](N)C(=O)O)C(=O)O
+  inchikey: ILRYLPWNYFXEMH-UHNVWZDZSA-N
+  canonical_smiles: N[C@H](CCSC[C@H](N)C(=O)O)C(=O)O
+  cas: 922-55-4
+  class: safety_markers
+  aliases:
+  - LAN
+  - Lanthionine
+  seen_in:
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: lysinoalanine
+  display_name: Lysinoalanine (LAL)
+  kind: molecule
+  smiles: NCCCC[C@@H](N)C(=O)O.N[C@@H](CC(=O)O)C(=O)O
+  inchikey: CPYVQXAASIFAMD-ZDNJXDGKSA-N
+  canonical_smiles: NCCCC[C@@H](N)C(=O)O.N[C@@H](CC(=O)O)C(=O)O
+  cas: 6027-77-6
+  class: safety_markers
+  aliases:
+  - LAL
+  - Lysinoalanine
+  seen_in:
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: meiqx
+  display_name: 2-Amino-3-methylimidazo[4,5-f]quinoxaline (MeIQx)
+  kind: molecule
+  smiles: Cc1nc2ccc3nccnc3c2n1N
+  inchikey: TWNPBOFMTPRLDO-UHFFFAOYSA-N
+  canonical_smiles: Cc1nc2ccc3nccnc3c2n1N
+  cas: 77094-11-2
+  class: safety_markers
+  aliases:
+  - 2-Amino-3-methylimidazo[4,5-f]quinoxaline
+  - MeIQx
+  seen_in:
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: mercapto_2_propanone
+  display_name: Mercapto-2-propanone
+  kind: molecule
+  smiles: CC(=O)CS
+  inchikey: USVCRBGYQRVTNK-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)CS
+  aliases:
+  - 1-mercapto-2-propanone
+  - mercaptoacetone
+  seen_in:
+  - benchmarks:measured_volatiles
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: methanethiol
+  display_name: Methanethiol
+  kind: molecule
+  smiles: CS
+  inchikey: LSDPWZHWYPCBBB-UHFFFAOYSA-N
+  canonical_smiles: CS
+  aliases: []
+  seen_in:
+  - henry_constants
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: methional
+  display_name: Methional (3-(methylthio)propanal)
+  kind: molecule
+  smiles: CSCCC=O
+  inchikey: CLUWOWRTHNNBBU-UHFFFAOYSA-N
+  canonical_smiles: CSCCC=O
+  inchi: InChI=1S/C4H8OS/c1-6-3-2-4-5/h4H,2-3H2,1H3
+  cas: 3268-49-3
+  class: sulfur_positives
+  aliases:
+  - 3-(methylthio)propanal
+  - 3methylthiopropanal
+  - Methional
+  - methional
+  seen_in:
+  - benchmarks:measured_volatiles
+  - flavor:strecker_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: methylpyrazine
+  display_name: 2-Methylpyrazine
+  kind: molecule
+  smiles: Cc1cnccn1
+  inchikey: CAWHJQAVHZEVTJ-UHFFFAOYSA-N
+  canonical_smiles: Cc1cnccn1
+  class: pyrazines
+  aliases:
+  - methylpyrazine
+  seen_in:
+  - flavor:pyrazine_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: nonanal
+  display_name: Nonanal
+  kind: molecule
+  smiles: CCCCCCCCC=O
+  inchikey: GYHFUZHODSMOHU-UHFFFAOYSA-N
+  canonical_smiles: CCCCCCCCC=O
+  inchi: InChI=1S/C9H18O/c1-2-3-4-5-6-7-8-9-10/h9H,2-8H2,1H3
+  cas: 124-19-6
+  class: adverse_lipid_markers
+  aliases:
+  - nonanal
+  seen_in:
+  - benchmarks:measured_volatiles
+  - benchmarks:reference_volatiles
+  - flavor:off_note_reference_anchors
+  - henry_constants
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
+- id: norfuraneol
+  display_name: Norfuraneol (NF)
+  kind: molecule
+  smiles: CC1=C(O)C(=O)CO1
+  inchikey: DLVYTANECMRFGX-UHFFFAOYSA-N
+  canonical_smiles: CC1=C(O)C(=O)CO1
+  aliases:
+  - 4-hydroxy-5-methyl-3(2H)-furanone
+  - nf
+  seen_in:
+  - benchmarks:measured_volatiles
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: phenylacetaldehyde
+  display_name: Phenylacetaldehyde
+  kind: molecule
+  smiles: O=CCc1ccccc1
+  inchikey: DTUQWGWMVIHBKE-UHFFFAOYSA-N
+  canonical_smiles: O=CCc1ccccc1
+  inchi: InChI=1S/C8H8O/c9-7-6-8-4-2-1-3-5-8/h1-5,7H,6H2
+  cas: 122-78-1
+  aliases:
+  - phenylacetaldehyde
+  seen_in:
+  - flavor:strecker_reference_anchors
+  - henry_constants
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
+- id: phip
+  display_name: 2-Amino-1-methyl-6-phenylimidazo[4,5-b]pyridine (PhIP)
+  kind: molecule
+  smiles: Cc1nc2cc(-c3ccccc3)ccc2n1N
+  inchikey: JEPLVUOGWNCTAM-UHFFFAOYSA-N
+  canonical_smiles: Cc1nc2cc(-c3ccccc3)ccc2n1N
+  cas: 105650-23-5
+  class: safety_markers
+  aliases:
+  - 2-Amino-1-methyl-6-phenylimidazo[4,5-b]pyridine
+  - PhIP
+  seen_in:
+  - safety:analyte
+  - species:toxic_markers.yml
+  identity_source: data/species/toxic_markers.yml
+- id: tetramethylpyrazine
+  display_name: Tetramethylpyrazine
+  kind: molecule
+  smiles: Cc1nc(C)c(C)nc1C
+  inchikey: FINHMKGKINIASC-UHFFFAOYSA-N
+  canonical_smiles: Cc1nc(C)c(C)nc1C
+  class: pyrazines
+  aliases:
+  - tetramethylpyrazine
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: trimethylpyrazine
+  display_name: Trimethylpyrazine
+  kind: molecule
+  smiles: Cc1cnc(C)c(C)n1
+  inchikey: IAEGWXHKWJGQAZ-UHFFFAOYSA-N
+  canonical_smiles: Cc1cnc(C)c(C)n1
+  class: pyrazines
+  aliases: []
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: caramelization_severity
+  display_name: Caramelization severity
+  kind: process_lever
+  class: severity_markers
+  aliases:
+  - caramelization severity
+  - caramelization_severity
+  - caramelizationseverity
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: decision panel / safety registry vocabulary
+- id: free_amino_acid_enrichment
+  display_name: Free amino acid enrichment
+  kind: process_lever
+  class: pretreatment_state_markers
+  aliases:
+  - free amino acid enrichment
+  - free_amino_acid_enrichment
+  - freeaminoacidenrichment
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: decision panel / safety registry vocabulary
+- id: nucleotide_enrichment
+  display_name: Nucleotide enrichment
+  kind: process_lever
+  class: pretreatment_state_markers
+  aliases:
+  - nucleotide enrichment
+  - nucleotide_enrichment
+  - nucleotideenrichment
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: decision panel / safety registry vocabulary
+- id: pretreatment_ph_shift
+  display_name: Pretreatment pH shift
+  kind: process_lever
+  class: pretreatment_state_markers
+  aliases:
+  - pretreatment pH shift
+  - pretreatment_ph_shift
+  - pretreatmentphshift
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: decision panel / safety registry vocabulary
+- id: thiamine_availability
+  display_name: Thiamine availability
+  kind: process_lever
+  class: pretreatment_state_markers
+  aliases:
+  - thiamine availability
+  - thiamine_availability
+  - thiamineavailability
+  seen_in:
+  - panel:alias
+  - panel:display_name
+  - panel:key
+  identity_source: decision panel / safety registry vocabulary

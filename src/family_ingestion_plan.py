@@ -4,13 +4,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
-DEFAULT_FAMILY_INGESTION_PLAN = _repo_root() / "data" / "lit" / "family_ingestion_plan.json"
-DEFAULT_DEEP_RESEARCH_BACKLOG = _repo_root() / "data" / "lit" / "deep_research_backlog.json"
+from src import data_paths
 
 _IMPACT_BY_POSTURE = {
     "first_class_runtime_lane": 1.00,
@@ -55,13 +49,13 @@ _RUNTIME_QUEUE_POSTURE_PRIORITY = {
 
 
 def load_family_ingestion_plan(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_FAMILY_INGESTION_PLAN
+    path = Path(file_path) if file_path is not None else data_paths.FAMILY_INGESTION_PLAN
     with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
 def load_deep_research_backlog(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_DEEP_RESEARCH_BACKLOG
+    path = Path(file_path) if file_path is not None else data_paths.DEEP_RESEARCH_BACKLOG
     if not path.exists():
         return {"summary": {}, "items": []}
     with open(path, "r", encoding="utf-8") as handle:
@@ -235,8 +229,8 @@ def build_family_ingestion_plan_artifact(
     next_family = prioritized_families[0] if prioritized_families else None
 
     return {
-        "source": str((Path(file_path) if file_path is not None else DEFAULT_FAMILY_INGESTION_PLAN).resolve().relative_to(_repo_root().resolve()).as_posix()),
-        "deep_research_source": str((Path(backlog_path) if backlog_path is not None else DEFAULT_DEEP_RESEARCH_BACKLOG).resolve().relative_to(_repo_root().resolve()).as_posix()),
+        "source": str((Path(file_path) if file_path is not None else data_paths.FAMILY_INGESTION_PLAN).resolve().relative_to(data_paths.REPO_ROOT).as_posix()),
+        "deep_research_source": str((Path(backlog_path) if backlog_path is not None else data_paths.DEEP_RESEARCH_BACKLOG).resolve().relative_to(data_paths.REPO_ROOT).as_posix()),
         "template_source": str(payload.get("template_source", "")),
         "summary": {
             "family_count": len(families),

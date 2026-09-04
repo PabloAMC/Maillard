@@ -8,7 +8,7 @@ run tests. For scientist-facing usage, start with [docs/guides/QUICKSTART.md](do
 ## Project Layout
 
 ```
-src/            Runtime package — kinetics, retention, headspace, QM refiners,
+src/            Runtime package — kinetics, retention, headspace,
                 recommend/optimize, reports.
                 Import as: from src.<module> import ...
                 Never mutate sys.path.
@@ -16,11 +16,13 @@ src/            Runtime package — kinetics, retention, headspace, QM refiners,
 scripts/        CLI entrypoints and one-shot research scripts.
                 Scientist-facing CLIs route through src/usability_reports.py.
 
-data/           Curated inputs only (priors, geometries, lit, protocols).
-                No generated artifacts. One exception, stated because this line used to
-                deny it: data/reactions/curated_pathways.py IS Python under data/, alongside
-                src/curated_pathways.py (corrected 2026-08-28, Wave S5).
-                For the literature database and ingestion, see [data/lit/README.md](data/lit/README.md).
+data/           Curated inputs only; read-only at runtime (scripts/ci/data_readonly_gate.py).
+                Generated map of every file: data/README.md. Sub-trees: keys/ (compound and paper
+                identity, generated from seeds), schemas/ (JSON Schemas enforced by
+                scripts/ci/schema_gate.py), species/, lit/, benchmarks/, protocols/.
+                Examples live in docs/examples/, intake templates in docs/templates/, test
+                fixtures in tests/fixtures/. Ingestion workflow: data/lit/README.md.
+                Restructure record: tasks/data_restructure_plan.md.
 
 results/        Generated artifacts. .gitignore'd. Do not hand-edit.
 
@@ -29,8 +31,7 @@ tests/          unit/ (fast), scientific/ (regression), scripts/ (integration).
 docs/           Human-facing documentation. (Wave S5, 2026-08-28: this map used to omit
                 four real subtrees and name three files that no longer exist. Nine documents
                 were folded into their nearest living home and deleted; see AUDIT.md.)
-  guides/                  Onboarding: QUICKSTART (incl. the command reference),
-                           COMPUTATIONAL_GAP_RUNBOOK, GLOSSARY.
+  guides/                  Onboarding: QUICKSTART (incl. the command reference), GLOSSARY.
   reference/               Deep technical: SCIENTIFIC_REFERENCE, VALIDATION_CONTRACT.
   protocols/               Benchmark intake specs and the PPI/SPI primary protocol.
   validation/              Frozen evidence: the directional-accuracy panel and report,
@@ -39,10 +40,9 @@ docs/           Human-facing documentation. (Wave S5, 2026-08-28: this map used 
   assets/                  Images and diagrams.
   slr_benchmark_evaluation.md  The systematic literature review two data registries cite.
 
-data/Gemini_Deep_Research/  All literature synthesis reports (Elicit, SLR, kinetics).
+data/research_corpus/  LLM research dumps and syntheses (formerly Gemini_Deep_Research). Not provenance; scanned by the citation gate.
 
 tasks/          todo.md (active roadmap), lessons.md (process lessons).
-models/external/ Third-party ML checkpoints with provenance.json.
 ```
 
 ---
@@ -80,26 +80,29 @@ Markers: `regression`, `slow`, `scientific_regression`, `kinetics_validation` (s
 ## Key Conventions
 
 ### Observable-first governance
-Never promote a target to a tighter prior or selective-DFT anchor without a justifying
+Never promote a target to a tighter prior without a justifying
 artifact in `results/validation/`. No write-back if the result only reproduces existing
 surrogate uncertainty.
 
 ### Confidence tiers
-Priors carry `bounded_calibration` / `transferred_literature` / `surrogate_family` /
-`xtb_derived` labels. Preserve these through the pipeline; never silently upgrade.
+Records carry `confidence_tier` / `provenance_tier` / `uncertainty_posture` labels. Preserve
+these through the pipeline; never silently upgrade.
 
-### xTB is a pathfinder, not a barrier authority
-Final barriers come from DFT (r2SCAN/def2-svp + ddCOSMO water via PySCF/Sella) or explicit
-literature surrogates.
+### No computed barriers
+Every barrier is a measured literature value or an explicitly labelled surrogate. The
+former xTB → DFT refinement lane was removed on 2026-08-30/09-01; `assert_no_dft_*()`
+guards in `src/kinetic_core/` run at import.
 
-### TS guess gates (before multi-hour DFT)
-- Minimum pairwise RMS Δ between reactant/TS ≥ 0.3 Å
-- xTB path multi-frame files: read the **last** frame
-- Check imag-mode score before launching Sella
+### Data access
+Paths: `from src import data_paths` (one constant per curated file; never a `"data/..."` string).
+Loads: `data_access.load_json / load_yaml` (missing or malformed files raise `DataFileError`).
+Compound names: `compound_keys.resolve(name)`; papers: `paper_keys.for_doi(doi)`. Adding a
+curated file means: a `data_paths` constant, a line in `build_data_readme.py`, and (for
+benchmarks) passing `data/schemas/benchmark.schema.json`.
 
 ### Naming
 Avoid opaque shorthand (`p3`, `wave1`, `c4_c5`). Name scripts/artifacts after the scientific
-job (e.g. `computational_gap_dft_ingestion_report`).
+job (e.g. `matrix_sigma_residual_derivation`).
 
 ### Calibration single-application rule
 `HeadspaceModel.get_matrix_benchmark_headspace_factor()` already applies the matrix observable
@@ -108,24 +111,13 @@ factor — never multiply `calibration_observable_factor` again downstream.
 ### No synthetic closure
 Internally constructed mixed-matrix benchmarks do not count as external promotion evidence.
 
-### Multi-fragment geometry
-Embed and MMFF-optimize each fragment independently before combining with explicit spacing.
-Use `MMFFAddDistanceConstraint` for pre-docking, never dummy bonds.
-
-### DFT checkpointing
-Pass `checkpoint_dir` to `calculate_barrier()` so optimised geometries survive failed
-downstream SCFs.
-
 ---
 
 ## Common Pitfalls
 
 | Pitfall | Rule |
 |---------|------|
-| Stale execution JSON | Refresh DFT preflight before trusting per-target status |
-| e3nn version conflict | Pin `e3nn==0.5.1` for MACE 0.3.x |
 | LaTeX-backed plots | Failure must be explicit; no silent fallback |
-| Sella + JAX optional imports | Catch runtime failures (CPU feature gaps), not just `ImportError` |
 | Deleting scripts | Confirm with user first — scripts are often invoked ad-hoc |
 
 Full lessons list: [tasks/lessons.md](tasks/lessons.md)

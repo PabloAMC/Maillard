@@ -58,6 +58,7 @@ REPO = Path(__file__).resolve().parents[2]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core.matrix_oav import (  # noqa: E402
     ShiftPrediction,
     decompose_residual,
@@ -65,10 +66,10 @@ from src.kinetic_core.matrix_oav import (  # noqa: E402
     select_threshold,
 )
 
-FROZEN = REPO / "results/validation/kinetic_core_b4_frozen_predictions.json"
-HOLDOUT_VALUES = REPO / "results/validation/holdout_frozen/hong2020_paired_thresholds.json"
-OUT_JSON = REPO / "results/validation/kinetic_core_b4_holdout_report.json"
-OUT_MD = REPO / "results/validation/kinetic_core_b4_holdout_report.md"
+FROZEN = data_paths.VALIDATION_DIR / "kinetic_core_b4_frozen_predictions.json"
+HOLDOUT_VALUES = data_paths.VALIDATION_DIR / "holdout_frozen/hong2020_paired_thresholds.json"
+OUT_JSON = data_paths.VALIDATION_DIR / "kinetic_core_b4_holdout_report.json"
+OUT_MD = data_paths.VALIDATION_DIR / "kinetic_core_b4_holdout_report.md"
 
 FOLD_WINDOW = 5.0
 N_WITHIN_REQUIRED = 7

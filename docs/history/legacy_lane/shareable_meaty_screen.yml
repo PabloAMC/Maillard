@@ -1,0 +1,45 @@
+# Shareable meaty-screen campaign
+#
+# Referenced by docs/guides/QUICKSTART.md ("If You Need A Shareable Package").
+# Run with:
+#
+#   python scripts/run_campaign.py --spec docs/examples/shareable_meaty_screen.yml \
+#       --output-dir results/quickstart_campaign
+#
+#   # or, through the Docker wrapper:
+#   ./scripts/docker_maillard.sh campaign \
+#       docs/examples/shareable_meaty_screen.yml \
+#       results/quickstart_campaign
+#
+# Every `name` below MUST match an entry in data/formulation_grid.yml exactly
+# (run_campaign resolves names against that grid and errors out otherwise).
+# `overrides` are merged on top of the grid entry, so a campaign can vary
+# conditions without editing the grid.
+
+campaign:
+  name: "Shareable meaty screen — pea isolate, mild thermal"
+  target_tag: meaty
+  minimize_tag: beany
+
+shared_conditions:
+  ph: 5.5
+  temp: 105.0
+  aw: 0.8
+  protein_type: pea_iso
+
+formulations:
+  - name: "Soy/Pea Base (Untreated)"
+    overrides:
+      time_minutes: 45.0
+
+  - name: "Soy/Pea Base + Reducing Sugar"
+    overrides:
+      time_minutes: 45.0
+
+  - name: "Cysteine Enrichment (Basic)"
+    overrides:
+      time_minutes: 45.0
+
+  - name: "Premium Meaty Mix"
+    overrides:
+      time_minutes: 45.0

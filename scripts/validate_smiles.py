@@ -22,12 +22,17 @@ except ImportError:
     sys.exit(1)
 
 # ── Configuration ───────────────────────────────────────────────────────────
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
 DATA_FILES = [
-    ROOT / "data/species/desirable_targets.yml",
-    ROOT / "data/species/off_flavour_targets.yml",
-    ROOT / "data/species/toxic_markers.yml",
-    ROOT / "data/species/precursors.yml",
+    data_paths.DESIRABLE_TARGETS,
+    data_paths.OFF_FLAVOUR_TARGETS,
+    data_paths.TOXIC_MARKERS,
+    data_paths.PRECURSORS,
 ]
 
 GREEN  = "\033[92m"

@@ -95,6 +95,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core import operative_parameters  # noqa: E402
 from src.kinetic_core.parameters_sulfur import (  # noqa: E402
     DECAY_FAMILIES,
@@ -123,7 +124,7 @@ BUFFER_HOFMANN = BufferSpec(
 BUFFER_NONE = BufferSpec(
     kind="none", declared=True,
     source="the source states water and declares no buffer")
-FIT_REPORT = ROOT / "results/validation/kinetic_core_b2_3_fit_report.json"
+FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b2_3_fit_report.json"
 
 #: WAVE B2.4, ADDITIVE AND BEHAVIOUR-PRESERVING. The default is the B2.3
 #: basename this file has always written, so a plain invocation produces
@@ -298,7 +299,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     parser.add_argument(
@@ -1418,8 +1419,8 @@ def main(argv: list[str] | None = None) -> int:
     # B2.1's report is read, never written. B2.2 adds no hold-out row and
     # removes none, so every row here has a B2.1 counterpart and a REGRESSION
     # cannot hide inside an improved total.
-    b2_path = ROOT / "results/validation/kinetic_core_b2_2_holdout_report.json"
-    b21_path = ROOT / "results/validation/kinetic_core_b2_1_holdout_report.json"
+    b2_path = data_paths.VALIDATION_DIR / "kinetic_core_b2_2_holdout_report.json"
+    b21_path = data_paths.VALIDATION_DIR / "kinetic_core_b2_1_holdout_report.json"
     comparison: List[Dict[str, Any]] = []
     b2_summary: Dict[str, Any] = {}
     b21_summary: Dict[str, Any] = {}

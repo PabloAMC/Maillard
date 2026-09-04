@@ -4,42 +4,42 @@
     "as_was": {
       "all_points": {
         "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 47.383384831748664,
-        "median_abs_log10_error": 1.4910717713989556,
-        "median_fold_error": 31.218924601260703,
+        "geometric_mean_fold": 40.871130424945854,
+        "median_abs_log10_error": 1.4967554264818839,
+        "median_fold_error": 31.390166927346584,
         "n": 34,
         "worst_fold_error": 33391.73597895205
       },
       "paired": {
         "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 49.40571333997651,
-        "median_abs_log10_error": 1.5450524746976524,
-        "median_fold_error": 35.079425696985076,
+        "geometric_mean_fold": 42.42501477541071,
+        "median_abs_log10_error": 1.5025156316951556,
+        "median_fold_error": 31.806481683191873,
+        "n": 33,
+        "worst_fold_error": 33391.73597895205
+      },
+      "scored": 34,
+      "within_band": 2
+    },
+    "buffer_completed": {
+      "all_points": {
+        "best_fold_error": 2.0477407945913852,
+        "geometric_mean_fold": 32.10440101174753,
+        "median_abs_log10_error": 1.2602224520191219,
+        "median_fold_error": 19.0788841205256,
+        "n": 34,
+        "worst_fold_error": 33391.73597895205
+      },
+      "paired": {
+        "best_fold_error": 2.0477407945913852,
+        "geometric_mean_fold": 33.08206329975995,
+        "median_abs_log10_error": 1.3941482939283463,
+        "median_fold_error": 24.78268141098215,
         "n": 33,
         "worst_fold_error": 33391.73597895205
       },
       "scored": 34,
       "within_band": 3
-    },
-    "buffer_completed": {
-      "all_points": {
-        "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 43.2944893201303,
-        "median_abs_log10_error": 1.6040173270044316,
-        "median_fold_error": 40.230541614006285,
-        "n": 34,
-        "worst_fold_error": 33391.73597895205
-      },
-      "paired": {
-        "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 45.01901966521474,
-        "median_abs_log10_error": 1.625650035306526,
-        "median_fold_error": 42.23281551627133,
-        "n": 33,
-        "worst_fold_error": 33391.73597895205
-      },
-      "scored": 34,
-      "within_band": 4
     },
     "by_family": {
       "acrylamide_180C": {
@@ -64,17 +64,17 @@
         "points": 8
       },
       "sulfur_hofmann1998_145C": {
-        "as_was_in_band": 1,
-        "as_was_median_fold": 17.150380331865065,
-        "completed_in_band": 2,
-        "completed_median_fold": 11.47732133297033,
+        "as_was_in_band": 0,
+        "as_was_median_fold": 21.777304452009027,
+        "completed_in_band": 1,
+        "completed_median_fold": 12.22369737538201,
         "points": 10
       },
       "sulfur_yiltirak2026_T_ladder": {
         "as_was_in_band": 0,
-        "as_was_median_fold": 444.5092123505325,
+        "as_was_median_fold": 294.6135396967061,
         "completed_in_band": 0,
-        "completed_median_fold": 193.46967915486215,
+        "completed_median_fold": 122.49979133996135,
         "points": 8
       }
     },
@@ -89,9 +89,9 @@
       "worst_fold_error": 2748.4338151666816
     },
     "rows_improved_by_the_buffer": 13,
-    "rows_the_buffer_moved": 17,
-    "rows_untouched": 23,
-    "rows_worsened_by_the_buffer": 4,
+    "rows_the_buffer_moved": 18,
+    "rows_untouched": 22,
+    "rows_worsened_by_the_buffer": 5,
     "why_so_many_are_untouched": "Only the SULFUR lane carries a pH state. An acrylamide-lane or matrix-lane row is identical in both columns no matter what its buffer says, and that identity is a REPORTED GAP rather than an omission -- it is the same gap that leaves Chang's two arms predicting the same value."
   },
   "bundle_count": 21,
@@ -125,8 +125,8 @@
     },
     "sulfur_hofmann1998_145C": {
       "answered": 10,
-      "core_median_fold": 11.47732133297033,
-      "core_within_band": 2,
+      "core_median_fold": 12.22369737538201,
+      "core_within_band": 1,
       "declined": 0,
       "old_median_fold": 13.765760288060605,
       "old_within_band": 0,
@@ -134,7 +134,7 @@
     },
     "sulfur_yiltirak2026_T_ladder": {
       "answered": 8,
-      "core_median_fold": 193.46967915486215,
+      "core_median_fold": 122.49979133996135,
       "core_within_band": 0,
       "declined": 0,
       "old_median_fold": 16.772164231776266,
@@ -144,19 +144,19 @@
   },
   "findings": [
     {
-      "body": "On the 33 points both lanes answer, the core's median fold error is **42.23x** against the old lane's **10.86x**, i.e. about **3.887x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise \u2014 but it is a negative result and it is the first thing a reader should be told.\n\nWhat the core buys instead is the 17 declensions and the localisation of the failures. The old lane emitted a number for all 8 matrix-path lipid points and all 7 HMF/DMHF/furfural points; every one of those numbers came from a route the kinetic core does not have, and 5 of the old lane's 5 in-band hits sit in exactly those families. Whether that trade is worth making is a judgement, and the numbers for making it are both in the family table above.",
+      "body": "On the 33 points both lanes answer, the core's median fold error is **24.78x** against the old lane's **10.86x**, i.e. about **2.281x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise \u2014 but it is a negative result and it is the first thing a reader should be told.\n\nWhat the core buys instead is the 6 declensions and the localisation of the failures: where it cannot name a route it says so instead of emitting a number from one it does not have. Whether that trade is worth making is a judgement, and the numbers for making it are in the family table above.\n\nNOTE ON THE SIZE OF THAT TRADE, because it has moved a long way and the argument is weaker than it was: the core declined 17 of 40 at B5, and declines 6 now. B6 gave it the lipid lane and B7 the furanic channels, so most of what it used to refuse it now answers \u2014 and answering is how it acquired its worst points. A refusal count is only an argument while the refusals are the ones worth making; read the family table for which families the remaining declensions are in.",
       "title": "The core is WORSE than the old lane on the paired subset, and that is the headline"
     },
     {
-      "body": "The Hofmann family (145 C, 20 min) is the core's best result anywhere: **4/10 within 3x**, including xylose FFT at 1.14x and xylose MFT at 1.17x, against an old lane that scores **0/10** on the same points and misses by up to 506x. That is a genuine out-of-sample win for the rebuilt sulfur network on the conditions closest to its fit point.\n\nThe Yiltirak family (100-130 C, 30 min - 4 h) is **0/8**, median 193.5x. The probe that separates the two axes shows the network's temperature response is sound \u2014 at a fixed 20 min hold, product rises monotonically with temperature as it should. The failure is on the TIME axis: Yiltirak's protocol compensates lower temperature with longer holds, and over a 4 h hold at 100 C the core accumulates thiol far beyond the measurement. The mechanism is named and it is B2.1's own declared policy through B2.1: the sulfur CONSUMPTION channels carried **no activation energy at all**, so lowering the temperature slowed formation while leaving every sink running at its 145 C rate \u2014 and the sinks were then given 12x longer to run and still failed to remove the product. **THAT SENTENCE IS NO LONGER CURRENT AND IS KEPT ONLY AS THE HISTORY OF THIS DIAGNOSIS.** B2.2 gave the decay lumps two named barrier families of their own (`thiol_sink`, `carbonyl_sink`) and the family median moved; B2.3 refits both after a charge-conservation fix. The residual failure is therefore no longer attributable to a no-Ea consumption policy, and the current fold errors above are what should be read. B2.2's diagnosis sec. 2 flagged this paragraph as stale and could not fix it under a pure-re-scoring mandate; B2.3 corrects it.",
-      "title": "The sulfur lane is excellent at 145 C and catastrophic on the low-temperature ladder"
+      "body": "The Hofmann family (145 C, 20 min) is the core's best result anywhere: **1/10 within 3x**, its two closest rows being mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 2-Furfurylthiol (FFT) at 2.8x, mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 2-Methyl-3-furanthiol (MFT) at 3.684x, against an old lane that scores **0/10** on the same points and misses by up to 506.4x. That is a genuine out-of-sample result for the rebuilt sulfur network on the conditions closest to its fit point.\n\nThe Yiltirak family (100-130 C, 30 min - 4 h) is **0/8**, median 122.5x. The probe that separates the two axes shows the network's temperature response is sound \u2014 at a fixed 20 min hold, product rises monotonically with temperature as it should. The failure is on the TIME axis: Yiltirak's protocol compensates lower temperature with longer holds, and over a 4 h hold at 100 C the core accumulates thiol far beyond the measurement. The mechanism is named and it is B2.1's own declared policy through B2.1: the sulfur CONSUMPTION channels carried **no activation energy at all**, so lowering the temperature slowed formation while leaving every sink running at its 145 C rate \u2014 and the sinks were then given 12x longer to run and still failed to remove the product. **THAT SENTENCE IS NO LONGER CURRENT AND IS KEPT ONLY AS THE HISTORY OF THIS DIAGNOSIS.** B2.2 gave the decay lumps two named barrier families of their own (`thiol_sink`, `carbonyl_sink`) and the family median moved; B2.3 refits both after a charge-conservation fix. The residual failure is therefore no longer attributable to a no-Ea consumption policy, and the current fold errors above are what should be read. B2.2's diagnosis sec. 2 flagged this paragraph as stale and could not fix it under a pure-re-scoring mandate; B2.3 corrects it.",
+      "title": "The sulfur lane is strongest at 145 C and catastrophic on the low-temperature ladder"
     },
     {
-      "body": "Chang 2021 measures acrylamide RISING from 28 ppb at 10 min to 1459 ppb at 30 min. The core predicts it FALLING, from 6766 ppb at 10 min to 4041 ppb at 30 min \u2014 its trajectory peaks at about 5 min and decays thereafter. The single in-band acrylamide pass (Chang 30 min, 2.77x) is therefore a crossing of a falling curve with a rising measurement, not a correct prediction: the same model scores 242x on the 10 min point of the same experiment. **A pass on one point of a two-point time series whose direction is wrong should not be counted as evidence**, and it is flagged here rather than left in the tally to be misread.\n\nThe mechanism is B3's declared underfit: `Ea_int1_mel` sits at the TOP of its search bound (260.0 kJ/mol, saturated), and these bundles are at 180 C against a 160 C fit point, so the melanoidin sink that sets the acrylamide partition is being extrapolated 20 C above a barrier the fit could not resolve.",
+      "body": "Chang 2021 measures acrylamide RISING from 28 ppb at 10 min to 1459 ppb at 30 min. The core predicts it FALLING, from 6750 ppb at 10 min to 4031 ppb at 30 min \u2014 its trajectory peaks at about 5 min and decays thereafter. The single in-band acrylamide pass (Chang 30 min, 2.763x) is therefore a crossing of a falling curve with a rising measurement, not a correct prediction: the same model scores 241.1x on the 10 min point of the same experiment. **A pass on one point of a two-point time series whose direction is wrong should not be counted as evidence**, and it is flagged here rather than left in the tally to be misread.\n\nThe mechanism is B3's declared underfit: `Ea_int1_mel` sits at the TOP of its search bound (260.0 kJ/mol, saturated), and these bundles are at 180 C against a 160 C fit point, so the melanoidin sink that sets the acrylamide partition is being extrapolated 20 C above a barrier the fit could not resolve.",
       "title": "The acrylamide lane has the TIME SHAPE inverted"
     },
     {
-      "body": "`mp_holdout_glucose_asparagine_180C_30min_Chang2021` (1% acetic acid) and `..._30min_water_Chang2021` (deionized water) measure 1459 and 832 ppb respectively \u2014 the same chemistry in two solvents, deliberately kept in separate bundles by the curation campaign. The core returns **4041 ppb for both**, because the acrylamide lane has no pH term and no solvent term; the declaration says so on every one of these rows. The core cannot see a 1.75x effect the experiment was designed to isolate. That is a coverage gap in the model, correctly declared, and it is the cleanest single illustration in this exam of what 'no pH term' costs.",
+      "body": "`mp_holdout_glucose_asparagine_180C_30min_Chang2021` (1% acetic acid) and `..._30min_water_Chang2021` (deionized water) measure 1459 and 832 ppb respectively \u2014 the same chemistry in two solvents, deliberately kept in separate bundles by the curation campaign. The core returns **4031 ppb for both**, because the acrylamide lane has no pH term and no solvent term; the declaration says so on every one of these rows. The core cannot see a 1.75x effect the experiment was designed to isolate. That is a coverage gap in the model, correctly declared, and it is the cleanest single illustration in this exam of what 'no pH term' costs.",
       "title": "The core gives one number to two arms the source distinguishes"
     },
     {
@@ -164,12 +164,12 @@
       "title": "The furfural declension was reached by a different route than pre-registered, and agrees"
     }
   ],
-  "generated_on": "2026-08-29",
+  "generated_on": "2026-09-02",
   "git": {
-    "branch": "audit-remediation",
-    "commit": "49df685c6fcda0749c336263034b969207618699",
+    "branch": "cleaning",
+    "commit": "343ddf89fae10d3eb2954aaaaa7514d5fb0e3628",
     "dirty": "yes",
-    "short": "49df685"
+    "short": "343ddf8"
   },
   "pass_band_level_x": 3.0,
   "point_count": 40,
@@ -182,17 +182,17 @@
     },
     {
       "claim": "2 to 7 of the 23 in-envelope points inside band, most likely 4",
-      "detail": "4/34 inside the 3.0x band",
+      "detail": "3/34 inside the 3.0x band",
       "outcome": "HELD"
     },
     {
       "claim": "core median fold error 10x-100x, and NOT better than the old lane",
-      "detail": "BAND HALF: core median over all scored points 40.23x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 42.23x against the old lane's 10.86x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.)",
+      "detail": "BAND HALF: core median over all scored points 19.08x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 24.78x against the old lane's 10.86x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.)",
       "outcome": "HELD"
     },
     {
       "claim": "Yiltirak: UNDER-prediction, worsening as temperature falls",
-      "detail": "DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is not the 100 C one (598.6x).",
+      "detail": "DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is the 100 C one (495.8x).",
       "outcome": "HALF-FALSIFIED"
     },
     {
@@ -1066,8 +1066,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 54.01978663987577,
-      "as_was_predicted": 378.1385064791304,
+      "as_was_fold_error": 60.149310697845166,
+      "as_was_predicted": 421.04517488491615,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
@@ -1077,13 +1077,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 12.347984244348256,
+      "core_fold_error": 13.37508683006905,
       "core_interval_ug_per_L": [
-        12.358336645910367,
-        604.5443852273867
+        13.38630034209279,
+        654.8302528607405
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 86.43588971043779,
+      "core_predicted": 93.62560781048334,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1101,24 +1101,24 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 10.41474209400001,
-      "as_was_predicted": 31.24422628200003,
+      "as_was_fold_error": 10.803978264420453,
+      "as_was_predicted": 32.41193479326136,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
       "buffer_applied": true,
       "buffer_concentration_M": 0.5,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": true,
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 10.606658421592407,
+      "core_fold_error": 11.072307920694968,
       "core_interval_ug_per_L": [
-        4.549521821364103,
-        222.55324089146768
+        4.749253204526371,
+        232.32368894641738
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 31.81997526477722,
+      "core_predicted": 33.2169237620849,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1136,8 +1136,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 27.358423505536333,
-      "as_was_predicted": 164.150541033218,
+      "as_was_fold_error": 31.806481683191873,
+      "as_was_predicted": 190.83889009915123,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
@@ -1147,13 +1147,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 401.4228863820416,
+      "core_fold_error": 51.36108988021321,
       "core_interval_ug_per_L": [
-        0.0021370517340025263,
-        0.10454017103986311
+        0.01670255591171813,
+        0.8170546477803825
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 0.014946830894663261,
+      "core_predicted": 0.11681995093938792,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1171,8 +1171,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 8.53912214419291,
-      "as_was_predicted": 34.15648857677164,
+      "as_was_fold_error": 8.892150793058534,
+      "as_was_predicted": 35.568603172234134,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
@@ -1182,14 +1182,14 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 2.4796066495142877,
+      "core_fold_error": 5.73508309558405,
       "core_interval_ug_per_L": [
-        1.4181060125275702,
-        69.37082651931495
+        3.2799378973217697,
+        160.44780916180733
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 9.91842659805715,
-      "core_within_band": true,
+      "core_predicted": 22.9403323823362,
+      "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
       "envelope_state": "in_envelope",
@@ -1206,8 +1206,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 6.962621458725127,
-      "as_was_predicted": 1594.440314048054,
+      "as_was_fold_error": 6.844221298041926,
+      "as_was_predicted": 1567.326677251601,
       "as_was_within_band": false,
       "b2_1_rescored": true,
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
@@ -1217,13 +1217,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 7.247851632874023,
+      "core_fold_error": 7.124121064155873,
       "core_interval_ug_per_L": [
-        237.30707787205301,
-        11608.573678865001
+        233.25592710445537,
+        11410.399723871533
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 1659.7580239281513,
+      "core_predicted": 1631.423723691695,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1241,8 +1241,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 207.48782327202687,
-      "as_was_predicted": 2.6652166439424714,
+      "as_was_fold_error": 122.07105393375588,
+      "as_was_predicted": 4.530148484669393,
       "as_was_within_band": false,
       "b2_1_rescored": true,
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
@@ -1252,13 +1252,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 42.23281551627133,
+      "core_fold_error": 24.78268141098215,
       "core_interval_ug_per_L": [
-        1.8721515883761501,
-        91.58180129539286
+        3.190382482798937,
+        156.06694266110347
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 13.094083196677754,
+      "core_predicted": 22.313969615690763,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1276,8 +1276,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 35.079425696985076,
-      "as_was_predicted": 0.34208085684342737,
+      "as_was_fold_error": 52.2455562574754,
+      "as_was_predicted": 0.22968460591867115,
       "as_was_within_band": false,
       "b2_1_rescored": true,
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -1287,13 +1287,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 498.9922393004056,
+      "core_fold_error": 125.9553013191387,
       "core_interval_ug_per_L": [
-        0.0034383760220951555,
-        0.1681982760314247
+        0.013621681126980728,
+        0.6663445962526976
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 0.024048470206318593,
+      "core_predicted": 0.09527189307891895,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1311,8 +1311,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 21.13071564080081,
-      "as_was_predicted": 1.1831118465163613,
+      "as_was_fold_error": 30.973852171501296,
+      "as_was_predicted": 0.8071324116088546,
       "as_was_within_band": false,
       "b2_1_rescored": true,
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -1322,13 +1322,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 517.2738559036196,
+      "core_fold_error": 143.8140178040606,
       "core_interval_ug_per_L": [
-        0.006910116901169409,
-        0.33802869217430226
+        0.024854481286258504,
+        1.2158300538219302
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 0.04833029876665194,
+      "core_predicted": 0.1738356273034611,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1346,8 +1346,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 13.170045022929324,
-      "as_was_predicted": 1264.3243222012152,
+      "as_was_fold_error": 12.580756732516754,
+      "as_was_predicted": 1207.7526463216084,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -1357,14 +1357,14 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 3.0762601029964944,
+      "core_fold_error": 2.8004800154685117,
       "core_interval_ug_per_L": [
-        42.22408049127511,
-        2065.515086193804
+        38.43878268686324,
+        1880.34611081814
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 295.32096988766347,
-      "core_within_band": false,
+      "core_predicted": 268.8460814849771,
+      "core_within_band": true,
       "declaration_reasons": [],
       "declaration_warnings": [],
       "envelope_state": "in_envelope",
@@ -1381,9 +1381,9 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 2.9303286428120554,
-      "as_was_predicted": 419.03699592212394,
-      "as_was_within_band": true,
+      "as_was_fold_error": 4.874740484770247,
+      "as_was_predicted": 697.0878893221453,
+      "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
       "buffer_applied": true,
@@ -1392,14 +1392,14 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 2.376383282573259,
+      "core_fold_error": 3.684156433703445,
       "core_interval_ug_per_L": [
-        48.58681610950857,
-        2376.767012961979
+        75.32515166037568,
+        3684.751338906985
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 339.8228094079761,
-      "core_within_band": true,
+      "core_predicted": 526.8343700195926,
+      "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
       "envelope_state": "in_envelope",
@@ -1416,8 +1416,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 47.122434059972235,
-      "as_was_predicted": 324.20234633260895,
+      "as_was_fold_error": 10.485738596466003,
+      "as_was_predicted": 72.1418815436861,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -1427,13 +1427,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 38.228267711741246,
+      "core_fold_error": 8.82895034293717,
       "core_interval_ug_per_L": [
-        37.604426669037665,
-        1839.5311322082107
+        8.684872101426256,
+        424.84606268374176
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 263.0104818567798,
+      "core_predicted": 60.74317835940773,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1451,8 +1451,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 2336.6956042949737,
-      "as_was_predicted": 2990.9703734975665,
+      "as_was_fold_error": 1965.5263278796024,
+      "as_was_predicted": 2515.873699685891,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -1462,13 +1462,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 598.6078481913958,
+      "core_fold_error": 495.8113120550954,
       "core_interval_ug_per_L": [
-        109.55149052631452,
-        5359.033370634969
+        90.7386503861479,
+        4438.747963077168
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 766.2180456849866,
+      "core_predicted": 634.6384794305221,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1486,8 +1486,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 128.28166333835097,
-      "as_was_predicted": 422.04667238317467,
+      "as_was_fold_error": 34.13307455496533,
+      "as_was_predicted": 112.29781528583595,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -1497,13 +1497,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 107.4567839404132,
+      "core_fold_error": 28.11871939414777,
       "core_interval_ug_per_L": [
-        50.54703097570318,
-        2472.656688502527
+        13.22687808152941,
+        647.0316440944272
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 353.53281916395946,
+      "core_predicted": 92.51058680674616,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1521,8 +1521,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 2379.508039417114,
-      "as_was_predicted": 3474.0817375489864,
+      "as_was_fold_error": 1474.3372796524538,
+      "as_was_predicted": 2152.5324282925826,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -1532,13 +1532,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 647.8495575762685,
+      "core_fold_error": 381.98769856321184,
       "core_interval_ug_per_L": [
-        135.23619314464685,
-        6615.476142752393
+        79.73851579838754,
+        3900.644026251919
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 945.8603540613519,
+      "core_predicted": 557.7020399022892,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1556,8 +1556,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 179.26502762358732,
-      "as_was_predicted": 430.2360662966095,
+      "as_was_fold_error": 63.92085761902555,
+      "as_was_predicted": 153.4100582856613,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
@@ -1567,13 +1567,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 153.76671194772658,
+      "core_fold_error": 53.577753352942935,
       "core_interval_ug_per_L": [
-        52.76421535223252,
-        2581.1167834367634
+        18.384916216225793,
+        899.3522502134828
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 369.0401086745438,
+      "core_predicted": 128.58660804706304,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1591,8 +1591,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 1596.3809620364043,
-      "as_was_predicted": 2681.920016221159,
+      "as_was_fold_error": 838.135770755067,
+      "as_was_predicted": 1408.0680948685126,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
@@ -1602,13 +1602,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 469.4137510793868,
+      "core_fold_error": 233.69906443793408,
       "core_interval_ug_per_L": [
-        112.75375246217432,
-        5515.68143168225
+        56.13479878185371,
+        2745.998785416558
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 788.6151018133698,
+      "core_predicted": 392.61442825572925,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1626,8 +1626,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 183.89051344246946,
-      "as_was_predicted": 314.4527779866228,
+      "as_was_fold_error": 109.35956527621448,
+      "as_was_predicted": 187.00485662232677,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
@@ -1637,13 +1637,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 161.0787409430878,
+      "core_fold_error": 95.53607936261994,
       "core_interval_ug_per_L": [
-        39.3822252133952,
-        1926.497376845383
+        23.35766576914599,
+        1142.6089203863844
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 275.44464701268015,
+      "core_predicted": 163.3666957100801,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1661,8 +1661,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 705.1279112585955,
-      "as_was_predicted": 1142.3072162389249,
+      "as_was_fold_error": 479.86751411719774,
+      "as_was_predicted": 777.3853728698604,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
@@ -1672,13 +1672,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 225.86061736663652,
+      "core_fold_error": 149.46350331730275,
       "core_interval_ug_per_L": [
-        52.314423061875694,
-        2559.113870630227
+        34.619124998488786,
+        1693.4963206595635
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 365.8942001339512,
+      "core_predicted": 242.13087537403047,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1702,28 +1702,28 @@
       {
         "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
         "compound": "2-Furfurylthiol (FFT)",
-        "exam_fold_error": 7.247851632874023,
+        "exam_fold_error": 7.124121064155873,
         "exam_in_band": false,
         "holdout_panel_row": "hofmann_ribose_pH3_FFT"
       },
       {
         "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
         "compound": "2-Methyl-3-furanthiol (MFT)",
-        "exam_fold_error": 42.23281551627133,
+        "exam_fold_error": 24.78268141098215,
         "exam_in_band": false,
         "holdout_panel_row": "hofmann_ribose_pH3_MFT"
       },
       {
         "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
         "compound": "2-Furfurylthiol (FFT)",
-        "exam_fold_error": 498.9922393004056,
+        "exam_fold_error": 125.9553013191387,
         "exam_in_band": false,
         "holdout_panel_row": "hofmann_ribose_pH7_FFT"
       },
       {
         "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
         "compound": "2-Methyl-3-furanthiol (MFT)",
-        "exam_fold_error": 517.2738559036196,
+        "exam_fold_error": 143.8140178040606,
         "exam_in_band": false,
         "holdout_panel_row": "hofmann_ribose_pH7_MFT"
       }
@@ -1732,16 +1732,16 @@
   "summary": {
     "core": {
       "best_fold_error": 2.0477407945913852,
-      "geometric_mean_fold": 43.2944893201303,
-      "median_abs_log10_error": 1.6040173270044316,
-      "median_fold_error": 40.230541614006285,
+      "geometric_mean_fold": 32.10440101174753,
+      "median_abs_log10_error": 1.2602224520191219,
+      "median_fold_error": 19.0788841205256,
       "n": 34,
       "worst_fold_error": 33391.73597895205
     },
     "core_answered": 34,
     "core_declined": 6,
     "core_scored": 34,
-    "core_within_band": 4,
+    "core_within_band": 3,
     "old_lane_all_points": {
       "best_fold_error": 1.1197232824869903,
       "geometric_mean_fold": 15.403546120717891,
@@ -1754,9 +1754,9 @@
     "paired_subset": {
       "core": {
         "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 45.01901966521474,
-        "median_abs_log10_error": 1.625650035306526,
-        "median_fold_error": 42.23281551627133,
+        "geometric_mean_fold": 33.08206329975995,
+        "median_abs_log10_error": 1.3941482939283463,
+        "median_fold_error": 24.78268141098215,
         "n": 33,
         "worst_fold_error": 33391.73597895205
       },

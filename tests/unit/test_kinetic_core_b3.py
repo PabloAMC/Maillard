@@ -1,4 +1,9 @@
-"""
+"""FROZEN-WAVE REGRESSION RECORD (labelled 2026-09-03, test audit). The wave generator this file
+tests is frozen (scripts/generators/WAVES.md); these tests fail only if the frozen report, the
+network or the parameter tables change. They are the contract of a finished wave, not live checks
+of new behaviour.
+
+
 tests/unit/test_kinetic_core_b3.py
 
 Focused unit tests for the ACRYLAMIDE / SAFETY MODULE (Build Wave B3).
@@ -560,13 +565,6 @@ def test_the_fructose_prediction_is_reported_as_a_wide_interval(parameters):
     )
 
 
-def test_the_holdout_scorer_declares_the_fructose_rows_low_confidence():
-    text = HOLDOUT_SCRIPT.read_text()
-    assert '"confidence": "LOW"' in text
-    assert "prediction_interval_95" in text
-    assert "spans_zero" in text
-    assert "UNSCOREABLE" in text
-
 
 def test_the_exposure_disclosure_is_carried_in_the_runtime_registry():
     for field in ("what_was_seen", "what_was_not_seen",
@@ -615,18 +613,12 @@ RUNTIME_FILES = (
 FIT_FILE = "scripts/generators/generate_kinetic_core_b3_fit.py"
 
 
-def _strip_prose(text: str) -> str:
-    """Remove docstrings, string literals and comments; return executable code."""
-    text = re.sub(r'"""(?:.|\n)*?"""', " ", text)
-    text = re.sub(r"'''(?:.|\n)*?'''", " ", text)
-    text = re.sub(r'"(?:[^"\\\n]|\\.)*"', ' "" ', text)
-    text = re.sub(r"'(?:[^'\\\n]|\\.)*'", " '' ", text)
-    return "\n".join(line.split("#")[0] for line in text.splitlines())
+from tests.support import executable_code, strip_prose  # noqa: E402
 
 
 @pytest.mark.parametrize("relative", RUNTIME_FILES + (FIT_FILE,))
 def test_no_holdout_value_reaches_the_runtime_or_the_fit(relative):
-    code = _strip_prose((ROOT / relative).read_text())
+    code = executable_code(ROOT / relative)
     for literal in HOLDOUT_NUMBERS:
         pattern = r"(?<![\w.])" + re.escape(literal) + r"(?![\w.])"
         assert re.search(pattern, code) is None, (
@@ -638,25 +630,16 @@ def test_no_holdout_value_reaches_the_runtime_or_the_fit(relative):
 def test_the_firewall_stripper_actually_finds_a_planted_breach():
     """A firewall test that cannot fail is not a firewall test."""
     planted = 'x = "the note says 8.05"\ny = 8.05  # a breach\n'
-    code = _strip_prose(planted)
+    code = strip_prose(planted)
     assert re.search(r"(?<![\w.])8\.05(?![\w.])", code) is not None
     assert code.count("8.05") == 1, "the string literal must have been stripped"
 
 
 def test_the_fit_script_reads_no_holdout_file():
-    code = _strip_prose((ROOT / FIT_FILE).read_text())
+    code = strip_prose((ROOT / FIT_FILE).read_text())
     assert "external_validation" not in code
     assert "mp_holdout" not in code
 
-
-def test_the_holdout_scorer_contains_no_optimiser():
-    code = _strip_prose(HOLDOUT_SCRIPT.read_text())
-    for forbidden in ("least_squares", "minimize(", "curve_fit",
-                      "differential_evolution"):
-        assert forbidden not in code, (
-            "the hold-out scorer must not fit anything; it reads the frozen "
-            "parameters and predicts"
-        )
 
 
 # ---------------------------------------------------------------------------

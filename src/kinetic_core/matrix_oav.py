@@ -53,9 +53,9 @@ borrowed across matrices.
 WHAT THIS MODULE DOES NOT TOUCH
 -------------------------------
 ``src/matrix_correction.py`` and ``src/headspace.py`` are the OLD lane. They are
-not imported, not modified, and their ``protein_source_registry.json``-derived
-protein differentiation (declared ``no_verifiable_source``) is not reproduced
-here in any form.
+not imported and not modified. The ``protein_source_registry.json``-derived
+protein differentiation they once carried (declared ``no_verifiable_source``;
+file WITHDRAWN 2026-09-01) is not reproduced here in any form.
 """
 
 from __future__ import annotations
@@ -634,6 +634,13 @@ def compare_formulations(
             rows.append(FormulationComparison(
                 compound, float("inf"), "undefined", False, band_x,
                 f"{label_b} is zero; a ratio is undefined"))
+            continue
+        if a <= 0:
+            # 2026-09-04: a zero A arm used to come out as ratio 0 with direction
+            # "higher_in_B" -- a defined claim about a quantity that does not exist.
+            rows.append(FormulationComparison(
+                compound, 0.0, "undefined", False, band_x,
+                f"{label_a} is zero; a ratio is undefined"))
             continue
         ratio = a / b
         resolved = ratio >= band_x or ratio <= 1.0 / band_x

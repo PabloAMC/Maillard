@@ -1,0 +1,491 @@
+{
+  "summary": {
+    "total_occurrences": 20,
+    "unique_citations": 19,
+    "runtime_bound": 13,
+    "registry_only": 1,
+    "backlog": 5,
+    "min_score": 6
+  },
+  "priority_53_targets": {
+    "spi_hvp_xylose": {
+      "status": "REGISTRY_ONLY",
+      "matches": [
+        "PMC9905368 (2023)"
+      ]
+    },
+    "wheat_gluten_hvp_xylose": {
+      "status": "REGISTRY_ONLY",
+      "matches": [
+        "PMC9905368 (2023)"
+      ]
+    },
+    "acrylamide_fast_kinetics": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "ACS ResearchGate ref. 3"
+      ]
+    },
+    "cml_cel_commercial_pba_ranges": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "Foods 2023, 12(10):1967 (2023)"
+      ]
+    },
+    "furosine_crossover": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "Hidalgo & Pompei (2000)",
+        "Cantre et al. (2007)",
+        "Krause et al. (2003)",
+        "Ram\u00edrez-Jim\u00e9nez et al. (2000)"
+      ]
+    }
+  },
+  "items": [
+    {
+      "citation": "Zenker et al. (2022)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Amino Acid Modifications During the Production (Shearing, Sterilization) of Plant-Based Meat Analogues: An Explorative Study Using Pet Food Production as an Example. ACS Food Sci. Technol., 2(11), 1753-1765. DOI: 10.1021/acsfoodscitech.2c00242."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 188,
+          "description": "Amino Acid Modifications During the Production (Shearing, Sterilization) of Plant-Based Meat Analogues: An Explorative Study Using Pet Food Production as an Example. ACS Food Sci. Technol., 2(11), 1753-1765. DOI: 10.1021/acsfoodscitech.2c00242.",
+          "raw_line": "13. `Zenker et al. (2022)` \u2014 Amino Acid Modifications During the Production (Shearing, Sterilization) of Plant-Based Meat Analogues: An Explorative Study Using Pet Food Production as an Example. ACS Food Sci. Technol., 2(11), 1753-1765. DOI: 10.1021/acsfoodscitech.2c00242. 8/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Hidalgo & Pompei (2000)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Hydroxymethylfurfural and Furosine Reaction Kinetics in Tomato Products; J. Agric. Food Chem., 10.1021/jf990120u."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 182,
+          "description": "Hydroxymethylfurfural and Furosine Reaction Kinetics in Tomato Products; J. Agric. Food Chem., 10.1021/jf990120u.",
+          "raw_line": "7. `Hidalgo & Pompei (2000)` \u2014 Hydroxymethylfurfural and Furosine Reaction Kinetics in Tomato Products; J. Agric. Food Chem., 10.1021/jf990120u. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Zhu et al. (2021)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Carboxymethyllysine and N\u03b5-carboxyethyllysine kinetics and water loss analysis during chicken braising; J. Sci. Food Agric., 10.1002/jsfa.10528."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 179,
+          "description": "Carboxymethyllysine and N\u03b5-carboxyethyllysine kinetics and water loss analysis during chicken braising; J. Sci. Food Agric., 10.1002/jsfa.10528.",
+          "raw_line": "4. `Zhu et al. (2021)` \u2014 Carboxymethyllysine and N\u03b5-carboxyethyllysine kinetics and water loss analysis during chicken braising; J. Sci. Food Agric., 10.1002/jsfa.10528. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Zhu et al. (2022)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Exploring Acrylamide and 5-Hydroxymethylfurfural in glucose-asparagine-linoleic acid system; Front. Nutr., 10.3389/fnut.2022.940202."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 177,
+          "description": "Exploring Acrylamide and 5-Hydroxymethylfurfural in glucose-asparagine-linoleic acid system; Front. Nutr., 10.3389/fnut.2022.940202.",
+          "raw_line": "2. `Zhu et al. (2022)` \u2014 Exploring Acrylamide and 5-Hydroxymethylfurfural in glucose-asparagine-linoleic acid system; Front. Nutr., 10.3389/fnut.2022.940202. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Ilo et al. (1996)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "The Effect of Extrusion Operating Conditions on the Apparent Viscosity and the Properties of Extrudates in Twin-Screw Extrusion Cooking of Maize Grits. LWT-Food Sci. Technol., 29(7), 593-598. DOI: 10.1006/fstl.1996.0090."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 10,
+          "description": "The Effect of Extrusion Operating Conditions on the Apparent Viscosity and the Properties of Extrudates in Twin-Screw Extrusion Cooking of Maize Grits. LWT-Food Sci. Technol., 29(7), 593-598. DOI: 10.1006/fstl.1996.0090.",
+          "raw_line": "4. `Ilo et al. (1996)` \u2014 The Effect of Extrusion Operating Conditions on the Apparent Viscosity and the Properties of Extrudates in Twin-Screw Extrusion Cooking of Maize Grits. LWT-Food Sci. Technol., 29(7), 593-598. DOI: 10.1006/fstl.1996.0090. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Ma et al. (2024)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Impact of Extrusion Parameters on the Formation of N\u03b5-(Carboxymethyl)lysine, N\u03b5-(Carboxyethyl)lysine and Acrylamide in Plant-Based Meat Analogues. Int. J. Mol. Sci., 25, 8408. DOI: 10.3390/ijms25158408."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 187,
+          "description": "Impact of Extrusion Parameters on the Formation of N\u03b5-(Carboxymethyl)lysine, N\u03b5-(Carboxyethyl)lysine and Acrylamide in Plant-Based Meat Analogues. Int. J. Mol. Sci., 25, 8408. DOI: 10.3390/ijms25158408.",
+          "raw_line": "12. `Ma et al. (2024)` \u2014 Impact of Extrusion Parameters on the Formation of N\u03b5-(Carboxymethyl)lysine, N\u03b5-(Carboxyethyl)lysine and Acrylamide in Plant-Based Meat Analogues. Int. J. Mol. Sci., 25, 8408. DOI: 10.3390/ijms25158408. 8/8."
+        }
+      ],
+      "registry_id": "acs_ref3_spi_acrylamide_fast_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "PMC9905368 (2023)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "REGISTRY_ONLY",
+      "occurrence_count": 2,
+      "files": [
+        "00_priority_runtime_bound.md"
+      ],
+      "descriptions": [
+        "spi-hvp + xylose sulfur benchmark with mft oav 450 and fft oav 84.",
+        "wheat gluten hvp plus xylose matrix with mft oav 850."
+      ],
+      "occurrences": [
+        {
+          "file": "00_priority_runtime_bound.md",
+          "line": 1,
+          "description": "spi-hvp + xylose sulfur benchmark with mft oav 450 and fft oav 84.",
+          "raw_line": "1. `PMC9905368 (2023)` - spi-hvp + xylose sulfur benchmark with mft oav 450 and fft oav 84. 8/8."
+        },
+        {
+          "file": "00_priority_runtime_bound.md",
+          "line": 2,
+          "description": "wheat gluten hvp plus xylose matrix with mft oav 850.",
+          "raw_line": "2. `PMC9905368 (2023)` - wheat gluten hvp plus xylose matrix with mft oav 850. 8/8."
+        }
+      ],
+      "registry_id": "pmc9905368_spi_hvp_xylose_benchmark",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "ACS ResearchGate ref. 3",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "00_priority_runtime_bound.md"
+      ],
+      "descriptions": [
+        "22.36 -> 62.62 ug/kg increase in 20-30 s at 130C for acrylamide fast kinetics."
+      ],
+      "occurrences": [
+        {
+          "file": "00_priority_runtime_bound.md",
+          "line": 3,
+          "description": "22.36 -> 62.62 ug/kg increase in 20-30 s at 130C for acrylamide fast kinetics.",
+          "raw_line": "3. `ACS ResearchGate ref. 3` - 22.36 -> 62.62 ug/kg increase in 20-30 s at 130C for acrylamide fast kinetics. 7/8."
+        }
+      ],
+      "registry_id": "acs_ref3_spi_acrylamide_fast_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Cantre et al. (2007)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Reaction kinetics of furosine (\u03b5-N-2-furoylmethyl-L-lysine) during thermal processing of corned beef; Philipp Agric Sci, 90(2):143-152."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 183,
+          "description": "Reaction kinetics of furosine (\u03b5-N-2-furoylmethyl-L-lysine) during thermal processing of corned beef; Philipp Agric Sci, 90(2):143-152.",
+          "raw_line": "8. `Cantre et al. (2007)` \u2014 Reaction kinetics of furosine (\u03b5-N-2-furoylmethyl-L-lysine) during thermal processing of corned beef; Philipp Agric Sci, 90(2):143-152. 7/8."
+        }
+      ],
+      "registry_id": "cantre_2007_corned_beef_furosine",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "De Vleeschouwer et al. (2006)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Kinetics of Acrylamide Formation and Elimination during Heating of an Asparagine-Sugar Model System; J. Agric. Food Chem., 10.1021/jf051197n."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 176,
+          "description": "Kinetics of Acrylamide Formation and Elimination during Heating of an Asparagine-Sugar Model System; J. Agric. Food Chem., 10.1021/jf051197n.",
+          "raw_line": "1. `De Vleeschouwer et al. (2006)` \u2014 Kinetics of Acrylamide Formation and Elimination during Heating of an Asparagine-Sugar Model System; J. Agric. Food Chem., 10.1021/jf051197n. 7/8."
+        }
+      ],
+      "registry_id": "de_vleeschouwer_2006_acrylamide_aqueous",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Foods 2023, 12(10):1967 (2023)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "00_priority_runtime_bound.md"
+      ],
+      "descriptions": [
+        "cml cel commercial pbma ranges anchor for Foods 12(10):1967 commercial PBMA survey."
+      ],
+      "occurrences": [
+        {
+          "file": "00_priority_runtime_bound.md",
+          "line": 4,
+          "description": "cml cel commercial pbma ranges anchor for Foods 12(10):1967 commercial PBMA survey.",
+          "raw_line": "4. `Foods 2023, 12(10):1967 (2023)` - cml cel commercial pbma ranges anchor for Foods 12(10):1967 commercial PBMA survey. 7/8."
+        }
+      ],
+      "registry_id": "foods_2023_cml_cel_proxy_benchmark",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "Hamzalioglu et al. (2026)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Multi-Response Kinetic Modeling of the Maillard Reaction in Milk During Heating at Ultra-High-Temperature Range; J. Agric. Food Chem., 10.1021/acs.jafc.5c14296."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 180,
+          "description": "Multi-Response Kinetic Modeling of the Maillard Reaction in Milk During Heating at Ultra-High-Temperature Range; J. Agric. Food Chem., 10.1021/acs.jafc.5c14296.",
+          "raw_line": "5. `Hamzalioglu et al. (2026)` \u2014 Multi-Response Kinetic Modeling of the Maillard Reaction in Milk During Heating at Ultra-High-Temperature Range; J. Agric. Food Chem., 10.1021/acs.jafc.5c14296. 7/8."
+        }
+      ],
+      "registry_id": "hamzalioglu_2026_milk_uht_ages",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Krause et al. (2003)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Studies on the formation of furosine and pyridosine during acid hydrolysis of different Amadori products of lysine; Eur Food Res Technol, 10.1007/s00217-003-0685-6."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 181,
+          "description": "Studies on the formation of furosine and pyridosine during acid hydrolysis of different Amadori products of lysine; Eur Food Res Technol, 10.1007/s00217-003-0685-6.",
+          "raw_line": "6. `Krause et al. (2003)` \u2014 Studies on the formation of furosine and pyridosine during acid hydrolysis of different Amadori products of lysine; Eur Food Res Technol, 10.1007/s00217-003-0685-6. 7/8."
+        }
+      ],
+      "registry_id": "krause_2003_furosine_hydrolysis_yields",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "00_priority_runtime_bound.md"
+      ],
+      "descriptions": [
+        "furosine peak at 8.7 mg/100 g with fall above 150C showing degradation dominates."
+      ],
+      "occurrences": [
+        {
+          "file": "00_priority_runtime_bound.md",
+          "line": 5,
+          "description": "furosine peak at 8.7 mg/100 g with fall above 150C showing degradation dominates.",
+          "raw_line": "5. `Ram\u00edrez-Jim\u00e9nez et al. (2000)` - furosine peak at 8.7 mg/100 g with fall above 150C showing degradation dominates. 7/8."
+        }
+      ],
+      "registry_id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "Sun et al. (2015)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Formation of advanced glycation endproducts in ground beef under pasteurisation conditions; Food Chem., 10.1016/j.foodchem.2014.09.129."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 178,
+          "description": "Formation of advanced glycation endproducts in ground beef under pasteurisation conditions; Food Chem., 10.1016/j.foodchem.2014.09.129.",
+          "raw_line": "3. `Sun et al. (2015)` \u2014 Formation of advanced glycation endproducts in ground beef under pasteurisation conditions; Food Chem., 10.1016/j.foodchem.2014.09.129. 7/8."
+        }
+      ],
+      "registry_id": "sun_2015_ground_beef_ages",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Charissou et al. (2007)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Kinetics of Formation of Three Indicators of the Maillard Reaction in Model Cookies: Influence of Baking Temperature and Type of Sugar. J. Agric. Food Chem., 55(11), 4532-4539. DOI: 10.1021/jf063024j."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 185,
+          "description": "Kinetics of Formation of Three Indicators of the Maillard Reaction in Model Cookies: Influence of Baking Temperature and Type of Sugar. J. Agric. Food Chem., 55(11), 4532-4539. DOI: 10.1021/jf063024j.",
+          "raw_line": "10. `Charissou et al. (2007)` \u2014 Kinetics of Formation of Three Indicators of the Maillard Reaction in Model Cookies: Influence of Baking Temperature and Type of Sugar. J. Agric. Food Chem., 55(11), 4532-4539. DOI: 10.1021/jf063024j. 6/8."
+        }
+      ],
+      "registry_id": "charissou_2007_cookie_cml_furosine",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Lagrain et al. (2010)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "The Kinetics of \u03b2-Elimination of Cystine and the Formation of Lanthionine in Gliadin. J. Agric. Food Chem., 58(19), 10761-10767. DOI: 10.1021/jf102575r."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 7,
+          "description": "The Kinetics of \u03b2-Elimination of Cystine and the Formation of Lanthionine in Gliadin. J. Agric. Food Chem., 58(19), 10761-10767. DOI: 10.1021/jf102575r.",
+          "raw_line": "1. `Lagrain et al. (2010)` \u2014 The Kinetics of \u03b2-Elimination of Cystine and the Formation of Lanthionine in Gliadin. J. Agric. Food Chem., 58(19), 10761-10767. DOI: 10.1021/jf102575r. 6/8."
+        }
+      ],
+      "registry_id": "lagrain_2010_cystine_elimination_lanthionine",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Morel et al. (2002)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Mechanism of Heat and Shear Mediated Aggregation of Wheat Gluten Protein upon Mixing. Biomacromolecules, 3(3), 488-495. DOI: 10.1021/bm015639p."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 9,
+          "description": "Mechanism of Heat and Shear Mediated Aggregation of Wheat Gluten Protein upon Mixing. Biomacromolecules, 3(3), 488-495. DOI: 10.1021/bm015639p.",
+          "raw_line": "3. `Morel et al. (2002)` \u2014 Mechanism of Heat and Shear Mediated Aggregation of Wheat Gluten Protein upon Mixing. Biomacromolecules, 3(3), 488-495. DOI: 10.1021/bm015639p. 6/8."
+        }
+      ],
+      "registry_id": "morel_2002_gluten_shear_aggregation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Rombouts et al. (2012)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Heat-Induced Cross-Linking and Degradation of Wheat Gluten, Serum Albumin, and Mixtures Thereof. J. Agric. Food Chem., 60(40), 10133-10140. DOI: 10.1021/jf3024672."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 8,
+          "description": "Heat-Induced Cross-Linking and Degradation of Wheat Gluten, Serum Albumin, and Mixtures Thereof. J. Agric. Food Chem., 60(40), 10133-10140. DOI: 10.1021/jf3024672.",
+          "raw_line": "2. `Rombouts et al. (2012)` \u2014 Heat-Induced Cross-Linking and Degradation of Wheat Gluten, Serum Albumin, and Mixtures Thereof. J. Agric. Food Chem., 60(40), 10133-10140. DOI: 10.1021/jf3024672. 6/8."
+        }
+      ],
+      "registry_id": "rombouts_2012_gluten_crosslinking",
+      "runtime_artifact_count": 1
+    }
+  ]
+}

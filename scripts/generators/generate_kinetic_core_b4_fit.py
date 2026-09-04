@@ -53,6 +53,7 @@ REPO = Path(__file__).resolve().parents[2]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core.matrix_oav import (  # noqa: E402
     MATRIX_THRESHOLDS,
     SEALED_OR_REFUSED_MATRICES,
@@ -75,9 +76,9 @@ from src.kinetic_core.parameters_matrix import (  # noqa: E402
     matrix_registry_metadata,
 )
 
-OUT_JSON = REPO / "results/validation/kinetic_core_b4_fit_report.json"
-OUT_MD = REPO / "results/validation/kinetic_core_b4_fit_report.md"
-FROZEN_PREDICTIONS = REPO / "results/validation/kinetic_core_b4_frozen_predictions.json"
+OUT_JSON = data_paths.VALIDATION_DIR / "kinetic_core_b4_fit_report.json"
+OUT_MD = data_paths.VALIDATION_DIR / "kinetic_core_b4_fit_report.md"
+FROZEN_PREDICTIONS = data_paths.VALIDATION_DIR / "kinetic_core_b4_frozen_predictions.json"
 
 # The Hong 2020 panel, in the order the public manifest lists it. The manifest
 # is firewalled: it carries structure only, no threshold, ratio, sign or

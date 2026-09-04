@@ -1,17 +1,16 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from src import data_paths
+from src import data_access
 
-ROOT = Path(__file__).resolve().parents[1]
-_PRIORS_PATH = ROOT / "data" / "lit" / "computational_priors.json"
+_PRIORS_PATH = data_paths.COMPUTATIONAL_PRIORS
 
 
 def _load_priors() -> dict[str, Any]:
-    with open(_PRIORS_PATH, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return data_access.load_json(_PRIORS_PATH)
 
 
 COMPUTATIONAL_PRIORS_PAYLOAD = _load_priors()
@@ -128,7 +127,6 @@ def summarize_family_prior_bundle(
             "payload_role": str(row.get("payload_role", "unknown")),
             "source": str(row.get("source", "unknown")),
             "confidence_tier": str(row.get("confidence_tier", "unknown")),
-            "uncertainty_posture": str(row.get("uncertainty_posture", "unknown")),
             "observable_panel_tags": _normalize_string_list(row.get("observable_panel_tags", [])),
             "supporting_families": _normalize_string_list(row.get("supporting_families", [])),
             "process_state_scope": process_state_scope,
@@ -152,7 +150,6 @@ def summarize_matrix_prior_bundle(protein_type: str) -> Dict[str, Dict[str, Any]
             "source": str(entry.get("source", "unknown")),
             "provenance_tier": str(entry.get("provenance_tier", "unknown")),
             "confidence_tier": str(entry.get("confidence_tier", "unknown")),
-            "uncertainty_posture": str(entry.get("uncertainty_posture", "unknown")),
             "process_state_applicability": [str(item) for item in process_state_applicability],
             "notes": str(entry.get("notes", "")),
         }

@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -31,10 +32,15 @@ import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = ROOT / "results" / "validation" / "experiment_value_ranking.json"
-DEFAULT_OUTPUT = ROOT / "results" / "validation" / "gap_heatmap.png"
-DEFAULT_HTML_OUTPUT = ROOT / "results" / "validation" / "experiment_brief_cards.html"
-DEFAULT_FAMILY_PLAN = ROOT / "data" / "lit" / "family_ingestion_plan.json"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+DEFAULT_INPUT = data_paths.VALIDATION_DIR / "experiment_value_ranking.json"
+DEFAULT_OUTPUT = data_paths.VALIDATION_DIR / "gap_heatmap.png"
+DEFAULT_HTML_OUTPUT = data_paths.VALIDATION_DIR / "experiment_brief_cards.html"
+DEFAULT_FAMILY_PLAN = data_paths.FAMILY_INGESTION_PLAN
 
 _MEATY_KEYWORDS = ("furanthiol", "furfurylthiol", "methional", "thiazole", "mft", "fft")
 _OFFNOTE_KEYWORDS = ("hexanal", "nonanal", "octenal", "pentylfuran", "hexanol")
@@ -312,12 +318,10 @@ def _short_benchmark(name: str) -> str:
         "furosine_extrusion_crossover_140C_RamirezJimenez2000": "Ramirez-Jimenez 2000 (Extrusion, 140°C)",
         "pea_isolate_40C_PratapSingh2021": "Pratap Singh 2021 (Pea Isolate, 40°C)",
         "pea_isolate_ribose_cysteine_100C_45min_Internal2026": "Internal 2026 (Pea Isolate + Ribose + Cys, 100°C)",
-        "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026": "Protocol Pilot 2026 (Pea Isolate + Ribose + Cys, 100°C)",
         "pea_isolate_uht_140C_Trikusuma2019": "Trikusuma 2019 (Pea Isolate UHT, 140°C)",
         "resconi_2023_pbma_beef_identity_benchmark": "Resconi 2023 (PBMA Beef Identity)",
         "soy_isolate_40C_PratapSingh2021": "Pratap Singh 2021 (Soy Isolate, 40°C)",
         "soy_isolate_ribose_cysteine_100C_45min_Internal2026": "Internal 2026 (Soy Isolate + Ribose + Cys, 100°C)",
-        "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026": "Protocol Pilot 2026 (Soy Isolate + Ribose + Cys, 100°C)",
         "thiamine_cys_glucose_120C_Bolton1994": "Bolton 1994 (Thiamine + Cys + Glucose, 120°C)",
         "thiamine_cys_ribose_100C_Hofmann1996": "Hofmann 1996 (Thiamine + Cys + Ribose, 100°C)",
         "thiamine_cys_xylose_145C_Cerny2008": "Cerny 2008 (Thiamine + Cys + Xylose, 145°C)",

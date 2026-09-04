@@ -81,6 +81,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core import operative_parameters  # noqa: E402
 from src.kinetic_core.parameters_sulfur import MEASURED_SULFUR, with_fitted_sulfur  # noqa: E402
 from src.kinetic_core.species_sulfur import (  # noqa: E402
@@ -96,7 +97,7 @@ from src.kinetic_core.sulfur import (  # noqa: E402
 
 CELSIUS = 273.15
 OX_AMBIENT = 1.0
-FIT_REPORT = ROOT / "results/validation/kinetic_core_b2_1_fit_report.json"
+FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b2_1_fit_report.json"
 
 B1_FITTED = {
     "k_glc_frag": (1.000032373292967e-08, 180.69531857985976),
@@ -174,7 +175,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     args = parser.parse_args(argv)
@@ -964,7 +965,7 @@ def main(argv: list[str] | None = None) -> int:
     # 140 C block and the Sun 2019 pH-9 block) are shown as NEW, and rows that
     # B2 had are shown with both folds so a regression cannot hide inside an
     # improved total.
-    b2_path = ROOT / "results/validation/kinetic_core_b2_holdout_report.json"
+    b2_path = data_paths.VALIDATION_DIR / "kinetic_core_b2_holdout_report.json"
     comparison: List[Dict[str, Any]] = []
     b2_summary: Dict[str, Any] = {}
     if b2_path.exists():

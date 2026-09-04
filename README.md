@@ -3,31 +3,31 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Calibration: 4/13 evaluable literature rows inside a 1.4-dex 90% CI](https://img.shields.io/badge/calibration-4%2F13%20lit.%20rows%20in%20a%201.4--dex%2090%25%20CI-red.svg)](results/validation/prediction_uncertainty.md)
-[![Chemistry: 16 literature lanes, 5 with reaction templates](https://img.shields.io/badge/chemistry-16%20lanes%20%C2%B7%205%20with%20templates-blueviolet.svg)](results/validation/family_implementation_status.md)
+[![Out of sample: 3/38 rows within 3x](https://img.shields.io/badge/out--of--sample-3%2F38%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
+[![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
 
-**Maillard** is a computational screening framework that predicts which combinations of
-sugars, amino acids, temperatures, pH, and protein matrices will produce **meat-like aroma**
-in plant-based formulations — and which will produce **off-notes** or **safety concerns** —
-*before* you run a single wet-lab experiment.
+**Maillard** is a mass-action kinetic model of the Maillard reaction for alternative-protein
+scientists: sugars, amino acids, lipids and process conditions in; per-compound aroma volatiles
+(meaty thiols, furanones, acrylamide, lipid aldehydes) out — each with a measured reliability
+interval, an odour-activity ratio, and a **named refusal** wherever the model cannot represent
+what was asked. It exists to help decide *which experiment to run next*, not to replace the
+GC-MS.
 
-Plant-based meat smells "beany" because the Maillard reactions that create real meat aroma
-behave very differently inside a soy or pea protein matrix than in a free aqueous system.
-Maillard maps 16 literature-derived chemistry lanes — **5 of them backed by generative
-reaction templates**, the rest implemented as shared limbs, matrix/modifier layers or
-literature priors ([which is which](results/validation/family_implementation_status.md)) —
-corrects for how the plant matrix traps or releases each volatile, and tells you exactly where
-its predictions are trustworthy, where they are directional, and **what experiment would
-improve them most**.
+> **One engine (2026-09-03).** Until the retirement of the legacy lane this repository carried two prediction
+> paths — a SMIRKS rule-enumeration "screening lane" with a fitted volatile budget, and the
+> kinetic core. The screening lane, its validation harness and its headline numbers are deleted;
+> everything below is the kinetic core, scored on its own. The retired lane's README, artifacts
+> and audit trail are kept verbatim in [`docs/history/`](docs/history/) and
+> [`results/legacy_lane/`](results/legacy_lane/), and the August 2026 adversarial audit that
+> preceded the retirement is in [AUDIT.md](AUDIT.md).
 
-> **Who is this for?** Alternative protein scientists who want to triage formulations before
-> burning GC-MS time, and computational chemists who want a transparent, benchmarked platform
-> for matrix-aware Maillard chemistry.
+> **Who is this for?** Alternative-protein scientists who want to triage formulations and
+> process conditions before burning GC-MS time, and computational chemists who want a
+> transparent, benchmarked, honestly scored Maillard kinetics platform.
 
-> **Read this first:** this repository underwent a two-day adversarial audit in August 2026
-> that found — and fixed — serious problems, including circular validation and fabricated
-> citations. The findings, the fixes, and the honest (worse) numbers that resulted are
-> published in [AUDIT.md](AUDIT.md). The calibration claims below are the post-audit ones.
+> **Reading the identifiers.** The fit waves are named **B1 to B9** (one per lane, then the sulfur refits;
+> `scripts/generators/WAVES.md`), the retired lane's audit waves carry letters (S, K, Q, V, W; `AUDIT.md`),
+> and "Amendment n" refers to the fit/hold-out declaration. The [glossary](docs/guides/GLOSSARY.md#part-3--identifiers-you-will-meet-in-the-code-and-the-artifacts) has the key.
 
 ---
 
@@ -36,1181 +36,39 @@ improve them most**.
 ```mermaid
 graph LR
     subgraph Inputs
-        A["🧪 Precursors<br/>(sugars, amino acids, lipids)"]
-        B["⚙️ Process conditions<br/>(pH, T, time, matrix)"]
+        A["🧪 Precursors<br/>(sugars, amino acids, thiamine, lipids)"]
+        B["⚙️ Process<br/>(T programme, time, pH, a_w, matrix)"]
     end
 
-    subgraph Engine
-        C["SMIRKS rule engine<br/>5 template-backed families"]
-        D["Kinetic solver<br/>Arrhenius + literature barriers"]
-    end
-
-    subgraph Physics
-        E["Matrix correction<br/>binding, denaturation, SH access"]
-        F["Headspace model<br/>Henry's law, retention"]
+    subgraph "Kinetic core (src/kinetic_core)"
+        C["Lane resolution<br/>trunk · sulfur · acrylamide · lipid"]
+        D["Mass-action ODE network<br/>fitted (k, Ea) per lane"]
+        E["Observable layer<br/>K_aw, reliability band, OAV"]
     end
 
     subgraph Output
-        G["Per-compound ppb<br/>with 90% CI + ODT"]
-        H["🔬 Ranked experiment<br/>requests (VoI)"]
+        G["ug/L with interval<br/>or a NAMED REFUSAL"]
+        H["compare · predict · explain · rank<br/>+ HTML report"]
     end
 
-    A & B --> C --> D --> E --> F --> G --> H
+    A & B --> C --> D --> E --> G --> H
 ```
 
-**Inputs:** Choose your protein source (pea, soy, wheat gluten, mycoprotein, or 10 others),
-precursors, and process conditions. **Engine:** The SMIRKS rule engine generates
-atom-balanced reaction candidates for the 5 chemistry lanes that carry reaction templates
-(core amino acid + sugar, lipid oxidation, thiamine, lipid x Maillard crosstalk, protein
-damage markers); a kinetic solver ranks them using literature-calibrated Arrhenius
-parameters. **Physics:** Matrix corrections account for
-protein-volatile binding, denaturation, and accessibility; a headspace model applies Henry's
-law partitioning and retention penalties. **Output:** Per-compound predicted concentrations
-(ppb) with 90% confidence intervals, odour-activity ratios, and a ranked list of which
-wet-lab experiment would reduce uncertainty the most.
-
----
-
-## What the output looks like
-
-This is the *Compound Confidence* table as `report.md` actually emits it, **regenerated by
-running the tool** — `scripts/generators/generate_report_visual_examples.py`, which drives the
-same forward-mode entry point as the documented CLI (ribose + cysteine + leucine, pea isolate,
-pH 5.5 / 105 °C / 45 min). Copy it from a run, never by hand:
-
-| Compound | Predicted | Tier | Score | Mode | Reachability | Calibration Source | Observable Assumption |
-| :--- | :--- | :---: | ---: | :--- | :--- | :--- | :--- |
-| furfural | 0.108 ppb [0.000975-11.9, 90% CI] | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic furan transfer) | static_class_profile \| class_level \| standard_matrix_support |
-| 2-furfurylthiol | 0.00211 ppb [9.14e-07-0.233, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
-| 3-methylbutanal | 0.000904 ppb | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic aldehyde transfer) | static_class_profile \| class_level \| standard_matrix_support |
-| 2-methyl-3-furanthiol | 9.5e-05 ppb [2.56e-07-0.0105, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
-| bis(2-methyl-3-furyl) disulfide | 2.94e-05 ppb [3e-08-0.00325, 90% CI] | exploratory | 33.0 | hypothesis_only | conditionally_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
-
-> **This table used to be fabricated, and the fix is worth reading.** Until 2026-08-27 the
-> generator behind these figures built its `FormulationResult` objects from hard-coded
-> numbers and never touched the model. It announced *"DECISION CONFIDENCE: HIGH_CONFIDENCE
-> (82/100)"* and *"SCIENTIFIC ENVELOPE: TRUSTED"* while this README said there is no "high"
-> tier — and it attributed the two flagship thiols to the *Pratap-Singh soy-vs-pea ambient
-> slurry* anchor, which contains no sulfur chemistry at all and is now labelled
-> `fitted_to_benchmark`. Because the numbers were invented, the tracked figures dated from
-> May and had survived every recalibration since: the one artifact guaranteed never to show a
-> regression. It now runs the pipeline, so the showcase moves when the model does.
-
-> **How to read this:** *Predicted* carries the 90 % Monte-Carlo interval inline; a compound
-> with no interval had no envelope sampled. *Tier* is one of `high` / `medium` / `low` /
-> `exploratory` — a band on the 0-100 *Score*, paired one-to-one with *Mode*
-> (`benchmark_supported_quantitative` / `ranking_supported` / `directional_only` /
-> `hypothesis_only`). *Reachability* says whether an enumerated pathway produces the
-> compound or whether the number is a class-level projection. *Observable Assumption* is a
-> pipe-joined triple: retention mode, calibration fallback mode, support origin. Compounds
-> with no curated label appear by SMILES.
->
-> Note the honesty of this example: every row is `exploratory`, because a pea-isolate matrix
-> at 105 °C sits outside the free-precursor benchmark envelope. Wide intervals and low tiers
-> are the normal output for matrix systems today — see the calibration section below.
->
-> Two other tier vocabularies appear elsewhere in the same report and are **not** the same
-> scale: `calibration_evidence_strength` (`literature_anchored` → `conditional_literature_anchored`
-> → `class_anchored` → `directional_transferred` → `process_state_mismatch` → `heuristic`)
-> grades the anchor behind a compound; `confidence_tier` (`high` / `medium_high` / `medium` /
-> `medium_low` / `low`) grades a *literature prior* in `data/lit/`, not your run. §6 of every
-> report defines all three side by side.
-
-The full report also includes a compound confidence overlay chart, an intervention waterfall,
-and provenance metadata linking every number to its literature source.
-
-![Compound confidence overlay](docs/assets/report_compound_confidence_overlay.png)
-
----
-
-## How well calibrated is it?
-
-We publish four orthogonal evidence surfaces rather than a single accuracy number — and
-after an adversarial provenance audit (2026-08-26), we report calibration **split by signal
-origin**, because an aggregate number quietly mixed literature-measured rows with internal
-synthetic comparators.
-
-### Read this first (2026-08-28): the model was fitting its own evaluation panel, and the repo's own regeneration command is what armed it
-
-`data/lit/refinement_surrogate_patches.json` holds a map of barrier offsets that
-`src/barrier_constants.get_barrier()` **adds to the audited `FAST_BARRIERS` value** before
-returning it. Until 2026-08-28 that map was filled *automatically*, by a search in
-`src/refinement_campaign.py` that accepted an offset **because it improved the benchmark
-panel the model is then scored against**. That is a fit to the evaluation set — the defect
-class this whole audit existed to remove — and it was never declared to
-`scripts/ci/fit_target_gate.py`. Every accepted offset also sat at exactly ±3.0 kcal/mol,
-the search bound: a bound report, not an optimum. **At 150 °C, 3.0 kcal/mol is a ~35×
-factor in rate.**
-
-| family | barrier with the fit armed | audited table value | error |
-| --- | ---: | ---: | ---: |
-| `Schiff_Base_Formation` | 18.0 | **15.0** | +3.0 kcal/mol |
-| `Retro_Aldol_Fragmentation` | 29.0 | **32.0** | −3.0 kcal/mol |
-| `Thiol_Addition` | 31.6 | **28.6** | +3.0 kcal/mol |
-
-**The mechanism is retired.** `accepted_offsets` is permanently empty, the auto-acceptance
-path now records its candidates as `candidate_offsets_not_applied` diagnostics and never
-applies them, and `tests/unit/test_wave_r1_barrier_offset_retirement.py` fails if either
-the file grows an entry or `get_barrier()` stops returning the table value for *any* of the
-51 families.
-
-**What was actually contaminated, measured rather than assumed — and this is the part worth
-reading.** At git `HEAD` the tracked patch file carried an **empty** map, so a clean
-checkout shipped the audited table, and every artifact and hold-out number published in
-this README was produced in that state: re-running the whole generator sequence after the
-retirement reproduces `benchmark_summary`, `external_validation_report`,
-`prediction_uncertainty` and the eight-point matrix hold-out **byte-identically**. The
-offsets were written into the tracked file by
-`scripts/generators/generate_refinement_governance.py` — which runs in the *middle* of
-`scientific_lane()` in `scripts/docker_maillard.sh`, ahead of the figure generators, the
-envelope report **and the scientific-regression pytest lane**. So running the repository's
-own documented regeneration command armed a ±3.0 kcal/mol override of the barrier table and
-then scored everything after it against the armed model, until someone happened to
-`git checkout` the file. Re-running the pre-retirement code today re-accepts the same nine
-offsets, so this was live, not historical.
-
-**The price, on the only surface that can price it.** The free-precursor `maillard_path`
-hold-out is a pre-registration frozen at git `12f43dd` and was never available to any fit.
-Scored under both states
-(`results/validation/holdout_prepost_barrier_offset_retirement.md`):
-
-| `maillard_path` hold-out (32 targets) | fit armed | fit retired (**what ships**) |
-| --- | ---: | ---: |
-| median fold error | 10.05× | **10.86×** |
-| median \|log₁₀\| error | 1.0020 dex | **1.0360 dex** |
-| within 10× | 15/31 | 15/31 |
-| worst fold error | 565.2× | **506.4×** |
-| frozen targets differing from the 12f43dd pre-registration | 21 of 22 | **8 of 22** |
-
-**The honest model is the worse model on the median, and that is the expected direction.**
-The armed model bought ~8 % on the median fold error of a hold-out it had never seen, by
-tuning three barriers against a *different* set of benchmarks — which is exactly what an
-undeclared panel fit looks like when it happens to generalise a little. The last row is the
-one that settles the argument: with the fit armed, the model disagreed with its own
-pre-registration on 21 of 22 targets; retired, it disagrees on 8 — and those 8 are Wave X's
-norfuraneol channel, already attributed and on the record.
-
-**The eight-point matrix hold-out did not move at all** — 0 of 8 points, to machine
-precision. That is not a clean bill of health: it runs the `matrix_only` execution path,
-which never reaches the reaction network, so it is structurally incapable of detecting a
-barrier error of any size.
-
-### Headline: **4 of 13** evaluable literature rows fall within the model's 90% CI — and 3 populations that used to be pooled are now reported apart
-
-*(current as of `results/validation/prediction_uncertainty.md`; the panel has grown since the 4/9 and 0/3 figures earlier revisions of this section quoted, and the intervals have narrowed by more than a decade.)*
-
-| Population | Inside 90% CI | Not evaluable\* | Median CI width | Is it evidence? |
-| --- | ---: | ---: | ---: | --- |
-| **External literature** | **4/13** (31%) | 5 | **1.44 dex** (~28× end to end) | **Yes — this is the only row that is, and 31% inside a 28×-wide interval is a bad number, not a mixed one** |
-| **Fitted rows** (constants back-solved from the benchmark) | 2/3 | 0 | 2.87 dex | No — algebraic recovery |
-| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 4.03 dex | No — reproducibility harness |
-
-\* Degenerate near-zero-width envelopes: the Monte Carlo perturbs nothing on their path, so
-pass/fail is meaningless and they are excluded from coverage.
-
-**The `fitted rows` line is new (2026-08-27) and it is the whole point of the split.** Both of
-its hits would previously have been counted as literature evidence — and in the immediately
-preceding revision of this README, they *were*: they were the only two hits in a headline that
-read "2 of 11 literature rows". A constant solved from a benchmark reproduces that benchmark.
-Those rows are now removed from the literature numerator **and** denominator, which is why the
-denominator fell from 11 to 3, and `scripts/ci/fit_target_gate.py` makes undisclosed
-fit-then-score a build failure. The panel itself also shrank from 16 benchmarks to **14**: two
-more were quarantined as fabricated (see [AUDIT.md](AUDIT.md), Round 2). *(That 3 is the
-2026-08-27 figure. The literature denominator has since grown to **13** as Waves W and X put
-real Hofmann rows on the panel — the split survived the growth, the coverage did not.)*
-
-**And the benchmark-level count, split the same way** (read off
-`results/validation/benchmark_summary.md`, which now prints the split itself)**:** of **23**
-benchmarks, the ones without blocking coverage or ranking gaps are **0 of 14 predictive**,
-**2 of 5 fit-recovery**, and **0 of 4 internal-synthetic** — a mixed-population aggregate of
-**2/23**. On the strict bar the repository actually gates on, **strict-ready is 0/23**: not one
-benchmark passes, of any evidence class.
-
-> **Not one benchmark in this panel passes, on any kind of evidence, including its own frozen
-> output.** That is the most honest this number has ever been, and it got there without a
-> single measurement being re-read. The last four passes were the synthetic reproducibility
-> snapshots — the model agreeing with a copy of itself — and they drifted off their own pins in
-> two steps: **×1.936** from the Waves W/X sulfur chemistry, then a further **×1.276** from
-> Wave Y's marker-yield relocation, against a ×2.00 pass threshold. The snapshots were
-> deliberately **not** regenerated: refreshing them would restore 0/14 → 4/14 and in the same
-> motion absorb the Waves W/X drift, which is laundering. Full decomposition:
-> [tasks/audit_remediation.md](tasks/audit_remediation.md), Wave Y.
-
-> **Two counters, and they disagree.** `benchmark_summary.md` prints **2/23** on its mixed
-> all-rows line, because `src/presentation.py::_is_pass` also counts the weaker
-> `pass-no-ranking` status (the two Pratap-Singh fit-recovery rows). The headline above and
-> `tests/scientific/test_honest_headline_guards.py` use the strict `overall_status == "pass"`
-> and see **0/23**. Both are defensible; publishing them without saying which is which is not.
-> The divergence predates this wave (7/14 vs 5/14 after Wave O, 6/14 vs 4/14 after Wave P, then
-> 2/14 vs 0/14) and is pinned in the guard. The gap has not widened; the denominator grew from
-> 14 to 23 as Waves W/X/B7 added rows, and every added row failed.
-
-> **Fit-recovery fell 1/4 → 0/4 on 2026-08-27 (Wave P), and the mechanism is worth reading.**
-> The last survivor was `pea_isolate_uht_140C_Trikusuma2019`, which passed because three
-> observability factors had been back-solved so it reproduced its own measured 782 / 163 / 24
-> ppb. Wave P corrected the *substrate* nonanal is cleaved from — oleate, not linoleate
-> (Miyazaki 2023, [10.1093/bbb/zbac189](https://doi.org/10.1093/bbb/zbac189): nonanal appears
-> in neither linoleate hydroperoxide isomer's product list; `LipidProfile.oleic_acid_pct` had
-> been declared, populated for pea and soy, and read by **no code path in the repository**).
-> The nonanal row immediately fell to **2.2727× under**, which is *exactly*
-> 1 / (22.0 / 50.0), the pea oleic/linoleic ratio. A constant that tracks a substrate error to
-> five significant figures was never measuring the model. It was deliberately **not**
-> refitted.
-
-> **Fit-recovery fell 3/4 → 1/4 on 2026-08-27 (Wave K/M), and it is the most instructive
-> number on this page.** The two Pratap-Singh ambient-slurry benchmarks used to score max
-> ratio 1.002× and 1.001× — textbook algebraic recovery, since their observability factors
-> were back-solved from their own measured hexanal. Wave K then read the actual paper
-> (Molecules 2021, 26, 4104, Table 1, via Europe PMC): the measured hexanal is **1138.00**
-> ppb for pea and **1621.71** ppb for soy, not the 260 / 380 this repository had recorded,
-> and the hexanol rows (80 / 120 ppb) were reported by the paper as **n.d.** With the
-> corrected references the two lanes now miss by **4.37×** and **4.27×** — exactly the size
-> of the transcription error, because the constants still reproduce the wrong number they
-> were solved from. **A fit-recovery that no longer recovers is the cleanest possible proof
-> that the recovery was never evidence.** The observability factors were deliberately NOT
-> refitted here (see [AUDIT.md](AUDIT.md), Round 3): refitting them in the same pass as a
-> chemistry change would make the resulting agreement unattributable.
->
-> **They have since been refitted, to the verified values, and the headline did not move
-> (2026-08-27, Wave O).** One shared scale of **4.317249×** was fitted across both ambient
-> hexanal lanes against 1138.00 / 1621.71 ppb — one free parameter, two rows, so the fit
-> keeps a measurable residual instead of an arithmetic zero. It lands at **1.0113× on both
-> rows**, which says the two corrected anchors agree to 1.1%: the transcription error was a
-> common *absolute-scale* error and the pea-vs-soy release ratio (2.2098) survived it
-> untouched. Both rows moved `scale-gap` → `pass-no-ranking`. **Neither counts as a pass and
-> neither is evidence** — they are still `fit_recovery`, still excluded from the coverage
-> numerator and denominator, so 0/6 predictive and 5/14 aggregate are unchanged. What the
-> refit bought is that the constants are now anchored to numbers that exist; what it cost is
-> in the hold-out row below. Record:
-> [matrix_observability_refit_pratap_singh.md](results/validation/matrix_observability_refit_pratap_singh.md).
->
-> **Binding physics mode: measured constants, zero fitted parameters (2026-08-27, Wave S4).**
-> There is now an alternative to those fitted factors and it can be selected per run.
-> `src/protein_binding.py` computes the observability factor as
-> `f_free = 1/(1 + a_p·Pow·c_p)` — a single-site Langmuir in the dilute-ligand limit with
-> `a_p` in litres per gram of protein — entirely from literature binding data transcribed
-> with verbatim quotes into [`data/lit/binding_constants.yml`](data/lit/binding_constants.yml).
-> **No parameter in it is fitted**, `fitted_factors` remains the default, and no shipped
-> number moved. The model reproduces percent-bound measurements from three other
-> laboratories to a median of ~3 percentage points with nothing adjusted. **Mode-vs-mode on
-> the never-fitted hold-out: `fitted_factors` 93.68× median / 3-8 covered, a *null model*
-> with no observability factor at all 67.42× / 4-8, `binding_physics` 68.18× / 5-8 — while
-> in-panel the fitted factors win 1.0004× to 5.92×.** That is the overfitting signature
-> exactly: the fitted constants beat everything where they were fitted and lose to doing
-> nothing where they were not. The binding physics itself is a wash — it has usable data on
-> only 4 of 16 hold-out rows and reduces to the null model on the rest. The unit argument is
-> sharper than the scores: an observability factor is a fraction of a total and cannot exceed
-> 1, and the shipped constants are **4.32 and 9.54**, so they are absorbing an absolute-scale
-> deficit that lives in the marker yields, not in observability. Record:
-> [matrix_binding_mode_comparison.md](results/validation/matrix_binding_mode_comparison.md).
->
-> **The unit argument, acted on and then HALF FALSIFIED (2026-08-28, Wave Y).** Wave O's
-> shared ambient-hexanal scale has been moved to the side of the product the unit argument
-> requires: `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` **0.205 → 0.885036**, and every
-> hexanal observability constant divided by the same 4.317249 (**pea ambient 4.31725 → 1.0**,
-> soy heated 2.80478 → 0.6497, pea heated 0.228776 → 0.0529912, soy ambient 9.54007 →
-> 0.453/0.205). Wave O's fit is not withdrawn — same single constant, same two verified
-> anchors, same 1.0113× residual — and **no prediction moved**: the eight hold-out points are
-> unchanged to six significant figures and the pea lane still reads 1125.278 ppb. A yield can
-> exceed 1 because it multiplies an arbitrary `hydroperoxide_scale`; a fraction-observed
-> cannot.
->
-> **But Wave S4 predicted the factors would all come back under 1, and six of them did not.**
-> Every survivor is a **soy** factor (ambient hexanal 2.2098, 2-pentylfuran 5.9203, 1-hexanol
-> 2.2698, nonanal 1.0667, and the soy class anchors 2.209 / 5.92). A marker yield is shared
-> across matrices, so it can absorb a *global* scale error and never a *lane* one. With
-> observability pinned to the 1.0 that Wave S4's own matrix-matched-quantification evidence
-> requires, the soy-vs-pea required-yield ratio is **2.1606× on hexanal and 5.9221× on
-> 2-pentylfuran** — and because those two differ, the residual is *compound*-specific too, so
-> it cannot be repaired by the soy lipid profile either. Record:
-> [matrix_marker_yield_rederivation.md](results/validation/matrix_marker_yield_rederivation.md).
-
-**How to read this honestly:** coverage is only meaningful next to interval width — a 90% CI
-spanning two or more orders of magnitude makes coverage cheap. The *rate* has fallen through
-every revision of this section — **2/11 → 1/3** when the fitted rows were pulled out of both
-sides, **1/3 → 0/3** under Wave S1b, and **0/3 → 4/13 (31%)** once Waves W and X put ten more
-real literature rows on the panel. Read the last of those as a bigger denominator, not as a
-recovery: nine of the ten rows added were missed. And the literature slice's interval is still
-the *narrowest* of the three (**1.44 dex**, a factor of ~28 end to end, against 2.87 for the
-fitted rows and 4.03 for the synthetic ones), so 31% is the one coverage number on this page
-that is not cheap — the tightest intervals in the panel and the model still outside them 9 times
-in 13. The
-literature slice is saying the model is wrong on the sulfur branch, and saying so loudly. The
-internal-synthetic rows (26 of the 47 matched rows in the Monte-Carlo panel) are
-drift-detection harnesses, not
-evidence, and are labeled as such throughout the pipeline. Four former panel benchmarks lost
-their place in the audit because their cited sources are dead or resolve to unrelated papers:
-three were deleted after source recovery confirmed no source exists (one was rebuilt from a
-verified chapter and now fails honestly at 773×), and one was **quarantined**
-([data/benchmarks/quarantined/](data/benchmarks/quarantined/)) — it carried the tightest
-tolerance in the collection, 1.05×, and the model was landing inside it at 1.016×. The panel
-and all artifacts were regenerated without them.
-
-**Why this number fell — twice (2026-08-27):**
-
-*First,* the projection layer was applying its Boltzmann selectivity term *twice* to the same
-pathway span — once explicitly and once inside the pathway flux it multiplied by — so
-competing volatiles were being discriminated at an effective temperature of T/2.19 with no
-physical justification, and the volatile budget's temperature dependence came from a sigmoid
-that saturated by 150 °C. Both were corrected and the budget's two free constants refit
-against literature rows only
-([results/validation/projection_constant_refit.md](results/validation/projection_constant_refit.md)).
-Literature-row mean |log10 error| went 0.15 → 0.26 dex *from the Boltzmann de-duplication
-alone*. That gap measures how much of the previous agreement was being carried by the
-unphysical term.
-
-> **Corrected 2026-08-27.** The sentence above used to be the whole story, and it stopped
-> at the flattering number. 0.26 dex was measured *before* the chemistry rebuild described
-> next; it was never the shipped state. At the shipped constants,
-> [results/validation/projection_constant_refit.md](results/validation/projection_constant_refit.md)
-> records a literature-row objective of **0.89 dex** (0.96 dex before the Wave O and Wave P
-> regenerations, 0.74 dex before the 2026-08-27 Wave N route correction and the Wave K/M
-> benchmark content corrections; the objective got worse because the *references* got more
-> accurate, not because the model changed) — nearly four
-> times the figure this README was quoting, and six times the 0.15 it started from. The
-> degradation was **larger** than stated. (The fit optimum the repository declines to apply
-> sits at 0.88 dex, i.e. the refit buys almost nothing: tau_ref is a single global scale and
-> cannot fix an allocation problem.) The regenerated coverage numbers are in the section above.
-
-*Then* a mechanism-level review of every reaction template found that the flagship compound,
-2-methyl-3-furanthiol, was being made by a **fabricated one-step shortcut**, and that 93 % of
-the emitted network was a lipid radical chain whose propagation rule matched any sp²
-carbon — 61 of 103 peroxidation steps were chemistry that does not exist. The fabricated chain
-was deleted (5500 → 369 steps) and MFT rebuilt on a mechanistic
-1-deoxyosone → furanone → MFT route. **Absolute sulfur
-yields fell 5–40×.** That is the entire cause of the calibration drop: the panel's previous
-sulfur agreement was standing on chemistry that was not real.
-
-*And then the replacement route turned out to be wrong too (2026-08-27, Wave N).* The
-norfuraneol intermediate was taken from van den Ouweland & Peer 1975
-(`10.1021/jf60199a045`) — a real paper, correctly cited, describing a genuine **synthesis**
-of MFT from norfuraneol and H₂S. It is not the in-situ Maillard route. Cerny & Davidek 2003
-(`10.1021/jf026123f`) spiked authentic norfuraneol into a [¹³C₅]ribose/cysteine system and
-the MFT came out **mainly ¹³C₅-labelled**, i.e. from the ribose and not from the spike:
-"4-hydroxy-5-methyl-3(2H)-furanone is unimportant as an intermediate". Cerny & Davidek 2004
-(`10.1021/jf035265m`) confirmed the real intermediate positionally with [1-¹³C]ribose:
-**1,4-dideoxypento-2,3-diulose**. Hofmann & Schieberle 1998 say the same thing in their own
-abstract — norfuraneol/cysteine is among the *less* effective MFT precursors. The route was
-replaced with the isotope-evidenced one (`Deoxyosone_Reduction` + `Thiol_Addition_Pentodiulose`;
-norfuraneol is retained as a real furanone product, just not in the MFT lane). Evidence
-dossier: [docs/validation/isotope_topology_evidence.md](docs/validation/isotope_topology_evidence.md).
-
-**The Hofmann agreement got worse, and that is the honest number.** MFT went 235.32 → **151.87
-ppb** against a 342 ppb reference (**1.45× under → 2.25× under**) and FFT 219.96 → **243.72**
-against 200 (1.10× over → **1.22× over**). Nothing was tuned to claw it back. The 1.45× had
-been bought with `thiol_addition_norfuraneol` = 26.85 kcal/mol, a barrier Wave H fitted
-*through the contradicted route*; its replacement ships at the un-fitted sulfur-addition class
-value 28.60, explicitly unconstrained. **A worse number obtained through a route the isotope
-literature supports is worth more than a better number obtained through one it refutes.**
-
-**That barrier has since been refitted, with owner approval (2026-08-27, Wave P), and both
-rows improved — which is fit recovery, not validation.** *(**REVERTED 2026-08-27 by Wave S2c**
-— the whole paragraph below is history. `thiol_addition_pentodiulose` is back at the un-fitted
-28.60 and the fit record is retracted, because Wave S2b showed the 342 / 200 ppb it was fitted
-against are this repository's own arithmetic on an invented mol % band, not a measurement. Read
-it as a record of what was done, not as a description of what ships.)*
-`thiol_addition_pentodiulose` went
-**28.60 → 26.35** kcal/mol against `cys_ribose_140C_Hofmann1998` and nothing else: one free
-parameter, range [23.30, 29.65] bounded by values already in the table, decision rules copied
-verbatim from the Wave H script, and run *last* in the wave so the fit sees the network that
-ships. MFT 151.87 → **242.38 ppb** (2.25× under → **1.41× under**); FFT, which was **not**
-fitted, moved 243.72 → **217.99** (1.22× over → **1.09× over**) in the opposite direction,
-because the two lanes draw on the same upstream sugar flux — which is exactly why one knob was
-fitted against these two rows and not two. Three things keep this readable as what it is:
-> * the benchmark is a **declared fit target** at `per_row_recovery` leverage, so it stays out
->   of the honest literature-coverage numerator *and* denominator, exactly as before;
-> * **the profile minimum sits at the range floor** (argmin 23.30, `hit_a_bound = true`), so
->   26.35 is the conservative edge of the indifference band and the residual is *not* removable
->   by this barrier — pinned at the floor the objective is still 0.0836 dex;
-> * the anchor's own **mol%→ppb conversion is unverified** (Wave K), and that sentence now
->   travels verbatim inside the constant's rationale in `src/barrier_constants.py`. If the
->   conversion is wrong, the error is now *localised in one named constant* instead of spread
->   through the route. That is the argument for doing the fit at all.
->
-> The benchmark's own contract is untouched and still **fails** — max ratio 1.4110 was
-> *inside* its 1.45 threshold while MALE 0.0935 was outside 0.09, so at that point it failed
-> on one criterion instead of two. Record:
-> [sulfur_barrier_refit_pentodiulose.md](results/validation/sulfur_barrier_refit_pentodiulose.md),
-> which supersedes the stale `sulfur_barrier_refit_hofmann.md`.
-> **Those two numbers have since moved and got worse — see the Wave S1 block below.**
-
-**Wave S1 (2026-08-27): parallel reaction channels can finally add — and the flagship
-benchmark got worse.** Wave P discovered that `src/recommend.py` relaxed to the *lowest-span
-route per product* and kept only that route's flux, so adding a second literature-evidenced
-route to MFT contributed **exactly zero**. The propagator now sums kinetically distinct routes
-before the fixed volatile budget is allocated. Nothing was refitted to accompany it. What that
-cost, on the one verified sulfur benchmark:
-
-| Hofmann 1998 row | Wave P | Wave S1 | reading |
-| ---------------- | ------ | ------- | ------- |
-| MFT (vs 342 ppb) | 242.38 — 1.4110× under | **283.59 — 1.2060× under** | better |
-| FFT (vs 200 ppb) | 217.99 — 1.0900× over | **297.28 — 1.4864× over** | **worse** |
-| max ratio / MALE | 1.4110 / 0.0935 dex | **1.4864 / 0.1267 dex** | **worse — the untouched 1.45× / 0.09 dex contract now fails on *both* criteria again, not one** |
-
-**Wave S1b (2026-08-27): the pH and moisture physics was written, unit-tested, and never
-connected — and connecting it made this benchmark worse again.** The repo's first *ordinal*
-accuracy measurement (Wave S2's 52-claim directional panel) scored the model **16/19 on sugar
-identity, temperature, time and precursor loading, and 2/10 on pH and moisture** — worse than
-a coin, and systematically so. The cause was three routing defects, not three modelling
-errors: `get_ph_multiplier` was never called on the prediction path; the pyrazine branch of
-`_ionization_correction` keyed on a substring matching **none** of the 29 families this engine
-emits; and the water-activity correction reached 3 of those 29, missing the furan/HMF track
-entirely, with its dehydration branch keyed on the equally dead `"furfural"`. All three are
-now wired, with explicit family-name sets replacing every substring key. **No correction curve
-was reshaped, no constant refitted, and the panel was not iterated against.**
-
-| | pre-fix | post-fix | reading |
-| --- | --- | --- | --- |
-| Directional panel, **pH claims** | 2/7 | **4/7** | the two gained rows are exactly the two dimethylpyrazine-vs-pH measurements the diagnosis predicted |
-| Directional panel, **moisture claims** | 0/3 | **0/3** | see below — this one is structural, not routing |
-| Directional headline | 19/29 (66%) | **20/29 (69%)** | +2 pH, −1 sugar identity |
-| Hofmann MFT (vs 342 ppb) | 283.59 — 1.2060× under | **154.85 — 2.2086× under** | **worse** |
-| Hofmann FFT (vs 200 ppb) | 297.28 — 1.4864× over | **267.50 — 1.3375× over** | better |
-| Hofmann max ratio / MALE | 1.4864 / 0.1267 dex | **2.2086 / 0.2352 dex** | **worse on both** |
-| Bolton 1994 MFT | 748× under | **6731× under** | **much worse** — now the worst quantitative point in the whole panel |
-| Cerny 2008 MFT | 2.787× over | **23.406× over** | **much worse** |
-| MC panel, honest literature coverage | 1/3 | **0/3** | the Resconi furfural row left its own 90% CI |
-
-**The Hofmann row is not a conflict with a measurement, and saying so was wrong.** The
-mechanism is real — at pH 5.0 the textbook acid preference of 1,2-enolisation moves budget
-share from the MFT arm to the FFT/furfural arm — but the thing it moves *against* is not a
-measurement. **Wave S2b traced 342 / 200 ppb to this repository's own
-`data/benchmarks/maillard_validation_benchmarks.md` §1.3**, an abstract-reconstructed range
-table (`~0.02–0.05` and `~0.01–0.03` mol %) committed in the *same commit* that created the
-benchmark file; 342 and 200 are interior points of those two invented bands, and the bands
-**overlap** (MFT 228–571 ppb, FFT 114–342 ppb). So "MFT 342 > FFT 200 at pH 5" is an artifact
-of where the midpoints were picked, and the 1.45× / 0.09 dex contract is ~1.7× tighter than
-its own source band. The degradation above is still real and is still reported; what it is
-*not* is evidence that the pH physics is wrong. **Nothing was refitted to claw any of this
-back, and the contract was not relaxed either** — Wave S2b's recommendation to retire it and
-demote the benchmark is an owner decision, recorded in that file's
-`content_verification_note`. *(Executed the same day by Wave S2c — see immediately below.)*
-
-**Wave S2c (2026-08-27): the tightest contract in the panel was anchored to the repository's
-own guess, and it is retired. THE SULFUR BRANCH NOW HAS ZERO ABSOLUTE LITERATURE ANCHORS.**
-*(**CORRECTED 2026-08-28 (Wave W): THIS IS NO LONGER TRUE.** The full text of Hofmann & Schieberle 1998 (`10.1021/jf9705983`) arrived by interlibrary loan and the sulfur branch now has **three** absolute, stable-isotope-dilution literature anchors — `hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5`, the pH-5.0 aqueous rows of the paper's own Table 1 (ribose FFT 121 / MFT 198 ppb; glucose 28 / 19; fructose 32 / 25, all µg per 100 mL × 10 with the volume printed in the table footnote). The paper also confirms Wave S2b's forensic finding from the primary source: 342 and 200 ppb appear nowhere in it. **The model fails all three anchors** — 12.27×, 29.58× and 14.46× worst-ratio, mean 0.92 dex — so the branch went from *unanchored* to *anchored and measurably wrong*, which is the direction of travel this audit wanted. The Wave S2c sentence is kept verbatim because it was true when written, and because the period during which 342/200 shipped as literature is what this section exists to record.)*
-
-**Wave X (2026-08-28): the repository's first STEP-LEVEL constraints.** Wave W found six
-further tables in the same paper that measure *individual reaction steps* rather than
-end-to-end lumps — `precursor (1 mmol) + H₂S (1 mmol) in 50 mL, pH 5.0, 145 °C / 20 min` —
-and found that **not one of them could be executed**, because `src/precursor_resolver.py`
-resolved none of their precursors. Wave X added the seven missing species,
-repaired three structural blockers, and ingested the tables. **Six step-level rows are now on
-the panel and five are scored** (the sixth is a fit target). They are predicted at a mean
-**0.518 dex**, about *half* the end-to-end panel's 0.95 dex — the first direct evidence that
-the model's error is accumulated through the cascade rather than made in any one step. Nine
-further rows are verified but **not executable**, each with the missing step named, in
-[`data/benchmarks/step_level_unreachable/`](data/benchmarks/step_level_unreachable/). And the
-wave's own headline is a rejection: the norfuraneol → MFT step that Wave N retired on isotope
-evidence was **re-added as a slow parallel channel** and then its barrier fit was **rejected by
-its own pre-registered isotope gate** — Hofmann's Table 4 wants a barrier ≤ 23.30 kcal/mol and
-Cerny & Davidek's labelling experiment admits nothing below 27.80, so **the model cannot
-reproduce both experiments at once**, and that incompatibility is the measurement.
-
-The owner approved Wave S2b's staged plan and it was executed. What that means, plainly: after
-three fabricated-source benchmarks were quarantined or deleted in Round 2, the repo said one
-literature anchor survived on the sulfur branch. It did not. `342` and `200` ppb were never
-measured by anybody — they are interior points of two invented mol % bands in this
-repository's own `data/benchmarks/maillard_validation_benchmarks.md` §1.3, and the arithmetic
-closes exactly on the benchmark's declared (also unattested) 10 mM basis:
-`0.0300 mol % × 0.010 M × 114.17 g/mol = 342.5 → 342 ppb`, and the geometric mean of the FFT
-band `0.017321 mol % → 197.8 → 200 ppb`.
-
-| What was undone | Before | After |
-| --- | --- | --- |
-| `cys_ribose_140C_Hofmann1998` values | shipped as literature measurements | both marked `value_status: no_verifiable_source`, values **unedited** (the shipped number is the evidence) |
-| Its validation contract | 1.45× / 0.09 dex — the tightest in the panel | **retired**; nothing looser invented; the global free-precursor default (1.5× / 0.10 dex) is inherited and is failed by more |
-| Its tier | `PRIMARY` | **`REFERENCE`** — no longer strict-gate eligible; kept in the tree as a mechanistic diagnostic |
-| `thiol_addition_pentodiulose` | 26.35 kcal/mol, *fitted* against that benchmark alone | **28.60 — reverted** to the un-fitted Wave N class value; the fit record is **retracted** |
-| §1.3 of the literature brief | presented as a transcribed yields table | dated **ABSTRACT-RECONSTRUCTED GUESSWORK** warning; kept, not deleted — it is the provenance record |
-
-**The cost is real and is published, not absorbed.** Removing a fit to a non-measurement makes
-the model look *worse* against that non-measurement, and it should:
-
-| Hofmann row | Wave S1b | **Wave S2c** | reading |
-| --- | --- | --- | --- |
-| MFT (vs the fabricated 342 ppb) | 154.85 — 2.2086× under | **78.09 — 4.3797× under** | **much worse** |
-| FFT (vs the fabricated 200 ppb) | 267.50 — 1.3375× over | **293.67 — 1.4684× over** | worse |
-| max ratio / MALE | 2.2086 / 0.2352 dex | **4.3797 / 0.4041 dex** | **worse on both** |
-| Cerny 2008 MFT (reference-only) | 23.406× over | **25.741× over** | worse — same barrier, xylose lane |
-
-Every other panel aggregate held: strict-ready **0/14** (this benchmark was *failing* its
-contract when it was retired, so retiring it removes a failure, not a pass), honest literature
-coverage **0/3**, MC coverage **28/35**, and **all eight external hold-out points bit-identical
-for a third consecutive wave**. The four internal reproducibility snapshots recover exactly
-after the documented refresh: MFT ×0.416079 and the MFT-derived disulfide ×0.420049, while
-every other propagated row rises by exactly ×1.010812 — one shared factor across three
-unrelated compounds, which is the signature of the fixed volatile budget re-normalising rather
-than of three coincidences.
-
-**What is *not* fixed by this.** The benchmark still declares `measured_volatiles`, so its rows
-are still enumerated and still scored — the fold errors above are errors against a fabricated
-yardstick and must never be quoted as accuracy against literature. Taking it out of the scored
-population entirely (via `reference_volatiles`, or quarantine) and rebuilding it from an
-interlibrary-loan copy of the paper in native **mol %** are the open owner items; the ILL
-request pack is in `tasks/audit_remediation.md` "## Wave S2b" §(f).
-
-**And moisture is still 0/3 for a reason worth knowing.** The correction now reaches the
-chemistry properly and visibly moves compounds (DMHF falls 115.4 → 45.5 → 49.6 ppb over
-aw 0.25 → 0.65 → 0.95, a 2.5× separation where there was none). But HMF — the observable in
-two of the three moisture rows — is produced by the
-*same* reaction family as furfural, so the two always carry the same aw factor, their shares
-are pinned against each other, and together they are 90–96% of that system's volatile budget.
-**No family-level correction can move HMF against aw in a two-precursor system**; the
-projection budget itself has no moisture dependence. That is a statement about the allocation
-layer, and it is an open item.
-
-**pH and moisture together are still 4/10 — at or below chance. The model still licenses no
-pH or moisture recommendation.** Full pre/post table and per-claim flips:
-[docs/validation/directional_accuracy_report.md](docs/validation/directional_accuracy_report.md)
-§A4.
-
-**One visible knock-on:** the forward-mode sample table above lost 2,5-dimethylpyrazine from
-its top five and gained bis(2-methyl-3-furyl) disulfide. At that example's pH 5.5 the pyrazine
-step is penalised twice over — its α-aminoketone amine is mostly protonated (pKa 6.5) *and* the
-condensation sheds two waters — so it falls by ~450×. The same swap appears in the internal
-reproducibility snapshots, where the ranking contract now reads FFT > MFT and disulfide > DMP.
-
-Both compounds are reached by two enumerated routes, so both rose; FFT was already over. This
-was **not** clawed back: the two lanes share their upstream trunk, so a barrier that pushed FFT
-down would take MFT with it, and refitting a constant to absorb a propagator change is the
-exact move this campaign exists to remove. The fix also **corrects Wave P's own arithmetic**:
-Wave P projected MFT would reach 242.38 + 71.02 = 313.39 ppb "if the two channels are
-genuinely independent". They are not — both MFT routes share the trunk `Amadori_Rearrangement`
-as their rate-limiting step — and, more decisively, the volatile budget is fixed, so the
-single-lane figures were never addable. **Mass honesty was verified rather than argued:** at a
-fixed budget the allocated molar total equals `total_volatile_budget_molar` to 1 part in 10¹²
-both before and after, so adding channels moves the *split* and never the total.
-
-**Corrected 2026-08-27 (Wave S2c): there is no surviving literature constraint on the sulfur
-branch.** The paragraph that follows is kept because it records what was done and what it
-found, but its premise is false — Hofmann 1998 was never a literature constraint here (see the
-Wave S2c block above), so the refits below were fitted against this repository's own guess.
-The finding they reported — *that no barrier value closes the gap* — survives as a statement
-about the model's allocation layer; the *anchor* does not.
-
-~~The one surviving literature constraint~~ The benchmark then believed to be the one surviving
-literature constraint on the sulfur branch (Hofmann 1998, after three
-fabricated-source benchmarks were quarantined or deleted) was used to refit the branch —
-and the refit's finding was that **it does not work**: no barrier value anywhere in its
-defensible range closed the gap, because the deficit is in how the volatile
-budget is *allocated*, not in the barriers
-([results/validation/sulfur_barrier_refit_hofmann.md](results/validation/sulfur_barrier_refit_hofmann.md)
-— **that record is now stale**: it profiles `thiol_addition_norfuraneol`, the family Wave N
-retired, and re-running it is an open owner item).
-A single global scale on the budget *would* close it — after the Wave P refit the optimum sits
-**1.26×** away (it was 2.51× before) and would drop the Hofmann MFT residual from 0.1495 dex to
-0.0497 dex — at the price of pushing Resconi furfural from 4.7× to **5.9× over**. That constant
-was deliberately **not** moved
-([results/validation/projection_constant_refit.md](results/validation/projection_constant_refit.md)).
-We report the gap rather than absorbing it. *(Those two fold numbers are as of Wave P and are
-now stale on both counts: the barrier they were measured against was reverted by Wave S2c, and
-the Hofmann residual they trade against is a residual to a non-measurement. The record was
-deliberately **not** re-run — re-running a refit generator to refresh a number nobody may act
-on would be a recalibration event dressed as bookkeeping. The decision it records, "do not move
-the global scale", is unchanged and is now better supported, not worse.)*
-
-<table>
-<tr>
-<td width="33%" valign="top"><a href="docs/assets/validation_overview.png"><img src="docs/assets/validation_overview.png" alt="Parity plot"/></a><br/><sub><b>Parity.</b> Predicted vs. measured ppb across the 14-benchmark panel.</sub></td>
-<td width="33%" valign="top"><a href="docs/assets/family_coverage.png"><img src="docs/assets/family_coverage.png" alt="Family coverage"/></a><br/><sub><b>Coverage.</b> Which of the 16 lanes are wired and evidence-backed.</sub></td>
-<td width="33%" valign="top"><a href="results/validation/gap_heatmap.png"><img src="results/validation/gap_heatmap.png" alt="Gap heatmap"/></a><br/><sub><b>Gaps.</b> Which experiments would close the largest blind spots.</sub></td>
-</tr>
-</table>
-
-> **Figures (updated 2026-08-27):** all figures on this page are now current. They had been
-> stale since May because `configure_science_plot_style()` raised a `RuntimeError` whenever
-> `dvipng` was absent — which is the state of the documented conda environment, so the
-> documented path could not produce a report at all. It now falls back to matplotlib's
-> `mathtext` renderer with a one-time warning; set `MAILLARD_STRICT_LATEX=1` to restore the
-> hard failure for CI figure jobs that must have real LaTeX. Glyphs are typeset by mathtext
-> rather than LaTeX until `dvipng` is installed; the numbers are unaffected.
-
-| Surface                       | Question                                                                 | Status                                                       |
-| ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| **Parity**              | On matched systems, how close is predicted ppb to measured?              | **23** benchmarks · MC panel covers **20** of them, **47 matched rows** · **0 strict-ready** · **0/14 predictive benchmarks without blocking gaps** *(2026-08-28, Wave X: six step-level rows added; nine further verified rows are deliberately OFF the panel in `data/benchmarks/step_level_unreachable/` because the network cannot execute them)* |
-| **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **93.68×** error, worst **2474×** |
-| **Maillard-path hold-out** | On systems excluded from calibration, is the *reaction network* right? | **NEW (Wave U)** · 12 free-precursor literature points, predictions frozen before any calibration wave saw them · median **6.04×**, **12/21** within 10×, **1** structural zero · but the *shape* is wrong: sulfur temperature dependence runs backwards and acrylamide is ~40× under-responsive in time · **scored against Wave S3's rate calibration: 0/22 targets moved** |
-| **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
-| **Experiment priority** | Where would the next experiment improve confidence the most?             | 6/35 MC cells outside 90% CI — all queued                    |
-
-> **On the Maillard-path hold-out (Wave U, 2026-08-27) — the reaction network's first
-> out-of-sample test.** The row above it is a *matrix* number: all four legacy hold-out
-> bundles run the `matrix_only` path and never call `predict_from_steps`, which is why three
-> consecutive waves of chemistry work moved zero hold-out points. Twelve content-verified
-> free-precursor literature points now live in
-> `data/benchmarks/external_validation/maillard_path/` and every one of them executes the
-> network. Every value is quoted verbatim from the retrieved paper in its own bundle; no
-> conversion assumes a molar basis.
->
-> **The predictions were frozen before any calibration wave saw these points**, in
-> `results/validation/maillard_path_holdout_frozen_predictions.{json,md}`, which names the
-> git HEAD it came from. That file is a pre-registration and the pending rate-calibration
-> work must be scored against *it*, not against a fresh run.
->
-> Median 6.04× is better than the in-panel numbers would suggest, and the best single point
-> is genuinely encouraging: **MFT at 100 °C to 1.52×, on a sulfur branch that Wave S2c
-> established has zero absolute literature anchors** *(true when written; Wave W gave that
-> branch three real Hofmann anchors on 2026-08-28 and the model fails all three by
-> 12-30× — see the calibration section)*.** But the median hides the finding. The
-> model gets the *shape* wrong in three nameable ways — measured MFT falls 4.0× with rising
-> temperature while the model has it rising 4.55×; measured acrylamide rises 52× from 10 to
-> 30 min while the model rises 1.24×; and two of three pH responses point the wrong way.
-> Full table and per-point provenance in `AUDIT.md` → "Wave U".
->
-> **Scored, 2026-08-27 (Wave S3): the first rate-level calibration moved this hold-out by
-> exactly nothing — and that is the result.** The sugar trunk (Schiff condensation, Amadori
-> rearrangement, the enolisations, the deoxyosone sinks) was fitted for the first time to
-> *measured trajectories*: 176 concentration-time values from Martins' glucose/glycine
-> multiresponse experiments at 80/100/120 °C plus an experiment on isolated Amadori compound.
-> The fitted rates agree with **Brands (2002)** — an independent fitted model on a different
-> amine — to **1.5× on the Amadori degradation rate** and 3× on the condensation. Yet
-> **0 of 22 hold-out targets moved** and the directional panel is byte-identical, because the
-> screening lane consumes barriers **only as branching ratios**: the predicted magnitude comes
-> from a projection budget that never sees a barrier. Applying the derived barriers anyway was
-> measured as a counterfactual and makes things *worse* — hold-out median 6.04× → 7.61×, panel
-> 21/29 → 18/29 — so `FAST_BARRIERS` is unchanged. **The model's absolute-accuracy problem is
-> not in its barrier table.** The wave also settled a standing contradiction: the two barrier
-> tables disagreed by ~6.6e8 about which of the first two Maillard steps is rate-determining,
-> and the data say the Amadori rearrangement is 44.9× faster (95% interval 40–45) — the
-> screening lane had the sign backwards and the Cantera lane had the magnitude wrong by ~700×.
-> `results/validation/trunk_rate_calibration_refit.md` and `AUDIT.md` → "Wave S3".
-
-> **On the external hold-out — read this before the number above.** The 8 points are
-> genuinely excluded from calibration; the exclusion is code-enforced and survived an
-> adversarial leak hunt. Everything else about them needs qualifying.
->
-> **Genuine-extrapolation coverage is 1 of 5 at the prior this project shipped for most of
-> its life (ln-sigma 2.0).** A 2/5 was quoted here until 2026-08-27: that was the *same
-> predictions* re-scored after the prior was widened to ln-sigma 2.86 on 2026-08-26, and the
-> Wave O refit has since taken it back down to 1/5, so the two priors now agree. Nothing
-> about the model changed between those numbers — only the width of the interval drawn
-> around it. The median hold-out fold error is 93.68×, which is why that is the figure to
-> track. The report computes both and leads with the pre-widening one.
->
-> **The Liu hold-out was being scored against numbers that are in no source, and fixing
-> that made the headline worse again (2026-08-27, Wave R).** The block below quotes "Liu's
-> band midpoint at 51.96 ppb" as one side of a 24× literature contradiction. There was no
-> contradiction: the band was not in the literature. The primary document — Yaozheng Liu,
-> *Flavor Chemistry of Pea Proteins*, NC State MS thesis 2021, published as Liu, Cadwallader
-> & Drake (2023), *Food Chemistry* 406:134998, `10.1016/j.foodchem.2022.134998` — was
-> retrieved and read in full. Its Table 2.7 quantifies nine commercial pea proteins at
-> **hexanal 2445–52454 µg/L** and **nonanal 0.188–3.42 µg/L** of the rehydrated 10%-solids
-> slurry. This repository carried **hexanal 15–180 ppb** (50–300× low) and **nonanal 5–50
-> ppb** (6–266× high), plus OAV pairs and two further anchors that match no row of any table
-> in the thesis. Correcting the reference values — **no prediction moved, nothing was
-> fitted** — gives hexanal **19.50× → 11.17×** (better) and nonanal **4.78× → 94.22×**
-> (worse), taking the median from 42.62× to **93.68×** and shipped-sigma coverage from 4/8 to
-> **3/8**. The nonanal row is now the sharpest lipid-lane over-prediction on record against a
-> directly-quantified reference: **75.5 ppb predicted against a band whose top is 3.42 ppb**.
-> Wave P's oleate-substrate correction (below) is the partial mitigation already landed — it
-> took this same point from 214× to 94× — and it was not enough. Liu's curves were built in
-> **deionized water rather than in the protein matrix**, so protein binding is uncorrected
-> and 0.188–3.42 is a *lower* bound; the gap is if anything understated. Two further anchors
-> on the same source were retired rather than repaired: **(E,E)-2,4-heptadienal does not
-> appear anywhere in the thesis**, and the methoxypyrazine anchor named IBMP, a compound the
-> thesis neither identifies nor quantifies (its methoxypyrazine is IPMP, at 6.126–57.0 µg/L
-> — 713× the retired 0.08 ppb ceiling). Neither was ever in the scored bundle. The hold-out
-> stayed out of every fit throughout: this wave corrected reference data, it did not
-> calibrate.
->
-> **The refit to verified anchors made this WORSE, and that is the honest result
-> (2026-08-27, Wave O).** Correcting the ambient hexanal observability factors to the paper's
-> real values took the hold-out median from 15.31× to **42.62×** and shipped-sigma coverage
-> from 5/8 to **4/8**. Three of the eight points moved, in opposite directions: Bi 2020 raw
-> pea **5.37× → 1.24×** (the anchor and this hold-out point now agree), Liu 2023 **4.52× →
-> 19.50×**, Li 2026 hexanal **21.58× → 93.15×**. The cause is a disagreement in the
-> literature, not in the fit: the pea ambient lane carries two contradictory external
-> measurements — Bi at 1260 ppb and Liu's band midpoint at 51.96 ppb, a **24× spread at
-> nominally identical conditions** — and the erroneous 260 ppb the old constants reproduced
-> sat almost exactly at their geometric mean (√(1260 × 51.96) = 255.9). Being wrong in the
-> middle of a contradiction scores better than being right at one end of it. **Superseded
-> 2026-08-27 (Wave R): there was no contradiction.** The 51.96 ppb was a midpoint of a band
-> that appears in no source; Liu's real Table 2.7 range is 2445–52454 µg/L, so the verified
-> anchor (1138 ppb) sits *just under* Liu's lowest lot rather than 6.3× above her band. The
-> refit's DIRECTION is vindicated by the corrected target — this same Liu hexanal point
-> improved 19.50× → 11.17× when the reference was fixed — while the reason the median rose
-> is now the *nonanal* row, not a disagreement between two believable papers. `max_fold_error` (2474×) and the pre-widening 1/5 did **not** move — the refit
-> touched one lane, not the transfer behaviour.
->
-> **Two points improved on 2026-08-27 (Wave P) with nothing fitted, and the headline did not
-> move at all.** Nonanal is the C9 fragment of the **oleate** double bond, not a linoleate
-> product (Miyazaki 2023, `10.1093/bbb/zbac189`, read in full text; Hung, Katrib & Martin 2005,
-> `10.1021/jp0500900`, measure "1-nonanal (30 ± 3% carbon yield)" from oleate cleavage). The
-> model computed its entire hydroperoxide pool from `linoleic_acid_pct` and
-> `LipidProfile.oleic_acid_pct` was dead code. Correcting the substrate — no constant fitted,
-> no observability factor refitted — moved Li 2026 HME nonanal **272.63× → 118.31×** and Liu
-> 2023 nonanal **10.86× → 4.78×**, each by exactly the matrix's oleic/linoleic ratio (both Liu
-> folds were computed against the fabricated reference Wave R later retired; against the real
-> Table 2.7 value the same fix reads **214× → 94.22×**). The
-> other six points are byte-identical. And `median_accuracy_fold` (42.62× at the time; 93.68×
-> since the Wave R reference correction), `ci_coverage_hits`
-> (4/8 at the time; 3/8 since Wave R), `max_fold_error` (2474×) and the pre-widening 1/5 were
-> **all unchanged by this fix**, because the
-> median sits between two points that did not move and the two that did were outside the
-> interval before and after. A real mechanistic correction improved a quarter of the hold-out
-> by 2.3× each and moved the published number by nothing. Both nonanal points are still
-> over-predicted, and the model still treats oleate as being as oxidisable as linoleate —
-> which biases them high by roughly another order of magnitude and is *not* fixed.
->
-> **That 0 of 5 became 1 of 5, and the median halved from 32.79×, because a reference was
-> corrected — not because the model improved (2026-08-27, Wave K/M).** Two of the four Li
-> 2026 hold-out points had been transcribed from the wrong table rows: 2-pentylfuran was the
-> paper's *Maltol* row (221.5 ppb; the true value is **5625.80**) and nonanal was its
-> *Decanal* row (29.42 ppb; the true value is **72.66**). With the paper's own numbers the
-> 2-pentylfuran point goes from **49.8× over to 1.96× over** and nonanal from 673× to 273×.
-> The predictions are byte-identical. Verified against the Europe PMC full text
-> (PMC12984281); every corrected row carries a `content_correction_note`.
->
-> **Only 5 of the 8 points test extrapolation at all.** The other 3 come from bundles whose
-> run conditions are copied from an in-panel benchmark: those are reproducibility
-> comparisons. On the bundles at genuinely new process states (HME extrusion, roasting) the
-> misses still reach ~2500×, from unbounded lipid-oxidation kinetics — the reference
-> correction removed one large miss, it did not remove the failure mode.
->
-> **And only 4 of the 8 are measurements.** Two are geometric midpoints of 10–12× reported
-> bands — a number we constructed, not one anybody measured — and two are the source's
-> odour-activity value multiplied by *this repository's own* hexanal odour threshold, which
-> is itself compilation-level and never verified against a primary table. Those two move if
-> we correct our own constant, so they are a consistency check, not external evidence. Every
-> row now carries its `value_provenance` and the report renders the split.
->
-> **On the ±110× band itself (corrected 2026-08-27):** until this date the sampler clamped
-> every multiplier at ±100×, so 10.7 % of Monte-Carlo draws were pinned at the clamp and the
-> realised band was ±100×, not the ±110× advertised. The clamp is now derived from the sigma
-> at 3σ and truncates 0.27 % of draws, so the sigma finally expresses what it claims.
->
-> Extreme-processing predictions should be treated as hypotheses, and the gap heatmap
-> converts each miss into a ranked, bookable wet-lab request. Full methodology:
-> [VALIDATION_CONTRACT.md §3E](docs/reference/VALIDATION_CONTRACT.md).
-
-> **On literature provenance:** the kinetic anchors and benchmark values in this repo were
-> ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
-> audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
-> pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> carries an `audit_flag` in its registry entry. **120 records are marked
-> `no_verifiable_source`** (measured 2026-08-27 across every tracked JSON and YAML file,
-> including nested records), of which **98 carry numeric payloads** and **80 of those are
-> consumed at runtime**.
->
-> That count has now risen twice in one day, and **both rises are the repository getting more
-> honest, not worse.** Read it that way or the number is misleading in the wrong direction.
->
-> * **84 → 102.** `data/qm/` was excluded from every sweep this repo has ever run — not by
->   choice, but because `.gitignore` hid the directory from git entirely. Tracking it
->   (2026-08-27) exposed 18 barrier windows and claimed quantum-chemistry values that carried
->   **no citation, no run record and no provenance of any kind**, and labelling them honestly
->   is what moved 84 → 102. None of those 18 reach the model: `data/qm/` is read only by a
->   loader test and by the skip-heavy Phase 3 authority lane.
-> * **102 → 120** (Wave T3, 2026-08-27). Eighteen more records were labelled, and **all
->   eighteen were already shipping — none is new, and no value was added, changed or
->   invented.** Fifteen are `data/lit/protein_source_registry.json`, which has always
->   described itself as *"Mocked values for 14 protein sources based on Report 06"* in a JSON
->   field nothing read, while those mocked numbers drove `matrix_uncertainty_factor` and the
->   meaty-potential score at prediction time; two are the pH-release surrogates in
->   `retention_reference_payloads.json`, whose shipped `log_slope` turns out to be an exact
->   back-solve from an invented band; one is `ref41_ppi_sulfur_volatile_binding_v1`, which
->   cited a reference *number* inside an LLM research dump. Because all eighteen are in
->   `data/lit/` and all carry numbers, the runtime figure rises with them, **62 → 80**. That
->   is the honest count of unverifiable numbers the model consumes; it was 80 before this
->   wave too, they were merely unlabelled.
->
-> Treat kinetic parameters as provisional pending manual source verification — the
-> remediation ledger is [tasks/audit_remediation.md](tasks/audit_remediation.md).
->
-> **What the citation gate can and cannot do.** `scripts/ci/citation_gate.py` is blocking and
-> reports **0 dead DOIs and 0 waivers** as of the 2026-08-26 and 2026-08-27 sweeps. But it is
-> **structural and offline** — DOI grammar, confabulation signatures, status coherence,
-> repair-record completeness — and it *cannot* tell that a live, correctly-resolving DOI
-> points at a paper describing a different experiment. That is exactly how two fabricated
-> benchmarks survived every check until a human read the paper (see
-> [AUDIT.md](AUDIT.md), Round 2). DOI **liveness** is a scheduled weekly sample, advisory,
-> not part of the required set.
-
-### When to trust the predictions
-
-The table below is the hand-written summary; the **generated model card** immediately after it
-is the authoritative version, recomputed from the artifacts every time
-`scripts/generators/generate_model_card.py` runs. If the two ever disagree, the generated one
-is right and this one has drifted — which is precisely the failure this wave found in the
-directional report and is trying not to repeat.
-
-| Trust level                                  | Use for                                            | Example                                                         |
-| -------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------- |
-| **Moderate** — verify before deciding | Directional prioritisation and *relative* ranking  | Cys + ribose vs Cys + glucose; pea vs soy matrix comparisons; choosing what to test next |
-| **Low** — exploratory only            | Hypothesis generation                              | Any absolute ppb figure; new protein sources without nearby benchmarks; extrusion claims |
-
-### The kinetic core is the prediction path (Wave B5 — the propagator cutover; numbers re-scored through B7, 2026-08-29)
-
-`maillard compare` and `maillard predict` now route through **`src/kinetic_core/engine.py`**, the
-mass-action reaction network built over Waves B1–B4 and extended by B6 (the lipid lane) and B7
-(the furanic channel). The old FAST screening lane is **demoted, not
-deleted**: it is still reachable behind `--lane fast`, it is labelled `ORDINAL SCREENING`
-everywhere it surfaces, and **its absolute ppb no longer reach any user-facing surface** — the
-CLI strips them from both the table and the JSON, and `--absolute` on that lane is refused.
-
-**What the core is.** Four networks that do *not* compose, each with its own integrator. Waves B6
-and B7 added the fourth lane and the furanic channel, so the step counts below are larger than
-the ones this section carried at the B5 cutover (counted from `src/kinetic_core`: trunk
-`network.REACTIONS`, sulfur `sulfur.FULL_REACTIONS`, acrylamide
-`acrylamide.FULL_ACRYLAMIDE_REACTIONS`):
-
-| lane | steps | adds | pH | measured skill |
-| --- | ---: | --- | --- | --- |
-| trunk | 26 | glucose/fructose/glycine → melanoidins; **B7 adds HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin** | none | **browning median 1.45x — PASS**, the core's one clean hold-out win; the B7 furanic hold-out answers **7 of 7** exam rows at **1 in band** and **misses its pre-registered HMF direction** |
-| sulfur | 93 | pentoses, cysteine, thiamine, MFT/FFT/furfural | pH trajectory | **11/32** pre-registered hold-out rows (B2.3/B2.4 scorecard, shipped weighting). The trajectory is downward and is published as such: **B2.1 15/33 → B2.2 12/33 → B2.3 12/33**, then 11/32 after Amendment 9 permanently demoted one row |
-| acrylamide | 42 | asparagine, the acrylamide block | none | **0/4** gating rows, 3 of them pre-registered failures with the mechanism named |
-| lipid (B6) | — | linoleate hydroperoxide pool → Frankel 1989's six measured products | none | branch **distribution** fitted and frozen, **rate is a declared assumption**; **0 in band** on the exam's 8-point matrix-lipid family (4 answered, 4 still refused), answered median **1863x** |
-
-The sulfur *steps* are deliberately absent from the acrylamide lane — composing them would spend
-the same cysteine twice — so a request spanning both is declared **unanswerable** rather than
-silently routed. The lipid lane co-integrates with any *one* Maillard lane (disjoint species
-sets), checked at every call rather than assumed. B4 adds the output layer: ratios lead, OAV
-carries intervals, and every matrix shift is reported as a **residual decomposition** ("measured
-132x, the named terms explain 2.6x, the rest is unexplained residual").
-
-**The core still refuses what it cannot name — but the list is much shorter than it was, and
-what is left on it is a sharper kind of refusal.** The B5 text here said the core had "no
-lipid-oxidation path, no HMF, no DMHF"; **all three of those are now false** — B6 built the lipid
-lane and B7 made HMF and DMHF trunk targets. What `engine.UNREPRESENTED_COMPOUNDS` actually
-refuses today is:
-
-- **1-hexanol** and **2-pentylfuran** — the lipid lane exists, but neither is in Frankel 1989's
-  six-product slate and no branch fraction for either route is measured anywhere in the fit
-  corpus. The FAST lane emits a number for both; this lane will not invent one.
-- **propanal** (an α-linolenate scission product; Frankel fed linoleate only) and **2-nonenal**
-  (named in Frankel's introduction, quantified in none of his tables).
-- **HEMF / homofuraneol** — the compound is real and the route is understood; the *lane algebra*
-  refuses, because it needs alanine and a pentose in the same lane and those live on the
-  acrylamide and sulfur lanes respectively.
-- **2,5-dimethyl-4-hydroxy-3(2H)-thiophenone** — the species and its edge are in the network and
-  balanced, but its rate is exactly zero, because the only fed-precursor experiment in the corpus
-  reports a GC area percent with no internal standard.
-
-Read the change of shape, not just the change of length: the pre-B6 refusals were "no route
-exists"; every surviving one is "the route exists and the *number* is not measured". In each case
-the engine emits an `EnvelopeDeclaration` with a named reason and **no number** rather than a
-plausible-looking float.
-
-**The final exam, pre-registered and run once, and re-scored at every wave since**
-([`cutover_prereg.md`](results/validation/cutover_prereg.md) →
-[`cutover_final_exam.md`](results/validation/cutover_final_exam.md)). The 21 frozen
-external-validation bundles, 40 points. **The numbers below are the current, post-B7 scoring**;
-the B5 figures this section used to carry are kept in the trajectory row underneath, because the
-direction of travel is the finding:
-
-| | core | old lane |
-| --- | --- | --- |
-| points answered | **34 of 40** (6 declared out of envelope) | 39 of 40 |
-| within 3x | **4 / 34** | 7 / 39 |
-| **paired median fold error** (the 33 points both answer) | **42.23x** | **10.86x** |
-| geometric-mean fold, same 33 points | **45.02x** | **13.14x** |
-| worst | **33 392x** | 2 748x |
-
-**Read the paired row: on the 33 points both lanes answer, the core is 3.9x WORSE on median
-accuracy than the lane it replaces** (42.23x vs 10.86x — the exam's own wording is "about 3.887x
-worse"). At the B5 cutover that gap was 2x, on 23 paired points. **It has roughly doubled, and it
-doubled because the core stopped refusing.** The pre-registration allowed for the core losing this
-comparison, so the sign is not a surprise; the size is worse than it was, and that is the first
-thing to know.
-
-**The refusal count fell 17 → 13 → 6, and the cost of each step is measurable** (B6 baseline,
-B7 baseline and the current exam are all tracked artifacts):
-
-| | refusals | core answers | in band | core median | worst |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| pre-B6 | 17 | 23 | 3 | 50.13x | 648x |
-| pre-B7 (B6's lipid lane wired) | 13 | 27 | 3 | 50.13x | **33 392x** |
-| current (B7's furanic channel wired) | **6** | **34** | **4** | **40.23x** | 33 392x |
-
-**B6 and B7 pull in opposite directions and the honest reading is that only one of them paid.**
-B6's four new lipid answers are the whole of the 648x → 33 392x jump in the worst point: two of
-them are 40 °C / 10 min rows scored against an isolate's *accumulated storage* oxidation, which
-the lane's own declared no-formation-during-heating gap says it cannot make. B7's seven new
-furanic answers went the other way — median 50.13x → 40.23x, geometric mean 60.96x → 43.29x, and
-the in-band count up for the first time since the cutover (3 → 4). A refusal converted into a bad number costs the
-paired median; a refusal converted into a defensible number buys it back.
-
-**So: does "what the cutover buys is the refusals" still hold at 6?** Much more weakly, and the
-sentence should not be read the way it was written. At 17 refusals out of 40 the core was
-declining 42% of the exam and the trade was real. At 6 it declines 15%, while being 3.9x worse
-than the lane it replaced on everything it does answer. What survives of the argument is not the
-*count* but the *kind*: every remaining refusal names a specific unmeasured quantity (see the list
-above), and the failures that remain are localised to named lanes and named constants rather than
-smeared across one screening heuristic. That is still worth something. It is not worth as much as
-17 refusals were, and quoting the B5 sentence unchanged would overstate it.
-
-The specifics (all from `results/validation/cutover_final_exam.md`):
-
-- **Sulfur at 145 °C is still the core's best family: 2/10 within 3x**, median 11.48x, where the
-  old lane scores **0/10** on the same points and misses by up to 506x. This is down from the
-  4/10 this section reported at B5 — the two flagship rows moved the wrong way, xylose FFT from
-  1.14x to **3.076x (now a FAIL)** and xylose MFT from 1.17x to **2.376x (still a pass, but only
-  just)**. The family beats the old lane on median and loses to its own previous self.
-- **Sulfur on the low-temperature ladder is 0/8, median 193.5x.** The temperature axis itself is
-  sound — at a fixed hold, product rises with temperature as it should. The failure is on the
-  *time* axis: Yiltirak's protocol compensates lower temperature with longer holds, and over a 4 h
-  hold at 100 °C the core accumulates thiol its sinks never remove. **The mechanism first blamed
-  for this — B2.1's no-activation-energy consumption policy — has since been fixed** (B2.2 gave
-  the decay lumps their own barrier families, B2.3 refit them), so the residual 193.5x is no
-  longer attributable to it and is currently unexplained.
-- **The acrylamide lane has the time shape inverted** — Chang measures acrylamide rising 28 → 1459
-  ppb between 10 and 30 min; the core predicts it falling **6750 → 4031**. Its single in-band
-  acrylamide "pass" is a falling curve crossing a rising measurement and **should not be counted as
-  evidence**: the same model scores 241x on the 10 min point of the same experiment.
-- **The core returns one number for two arms the source distinguishes** (Chang's acetic-acid and
-  water arms, 1459 vs 832 ppb measured, **4031 predicted for both**) because the acrylamide lane
-  has no pH or solvent term. The declaration says so on every such row. It is the cleanest
-  illustration in the repository of what "no pH term" costs.
-- **Four of the 40 points are the same measurements as four rows of the kinetic-core hold-out
-  panel**, not analogues of them. The exam and the panel are therefore not independent evidence on
-  that axis, and both artifacts declare it from Wave B2.4 onward.
-
-Four **wiring** bugs were found and fixed during the cutover, none a parameter change. Three were
-found before the exam ran and share one signature — a compound that *has* a measured threshold
-being reported as having none: the B4 OAV table is keyed by species key rather than display name,
-`oav_table` returns its entries under `per_species`, and `protein_type: free` had to be resolved to
-the `water` threshold matrix. The fourth was found after the exam, on the CLI compare path only
-(which the exam does not use, so no exam number is affected): `compare_formulations` returns its
-ratio under `ratio_a_over_b`, and the renderer was looking for `ratio` — so the core lane's
-*primary* output, per-compound ratios, rendered as a dash for every compound.
-
-<!-- BEGIN GENERATED: model-card -->
-
-### Model card — the validity domain, generated from the artifacts
-
-*Generated by `scripts/generators/generate_model_card.py`. Do not hand-edit between the markers; regenerate. Every number below is read from a tracked artifact or recomputed live, and the row says which.*
-
-- **Absolute concentrations are unreliable.** Out of sample the free-precursor lane lands at a 6.04x median fold error (worst 52.6x) and the matrix lane at 67.4x-93.7x across all three observability modes. Nothing in this repository licenses a ppb number as a specification.
-- **Directional and ranking claims are the measured product**, at 24/36 on strictly independent claims -- 18/23 (78%) once pH and water activity are set aside, and 6/13 on pH and water activity themselves, which is at or below chance.
-- **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
-
-| Claim type | System class | Measured | Verdict |
-|---|---|---|---|
-| Absolute concentration (ppb) | free precursor (sugar + amino acid, aqueous) | median 6.04x, 12/21 within 10x<br/><sub>12-point pre-registered hold-out, frozen before any calibration wave saw it</sub> | **do-not-use** |
-| Absolute concentration (ppb) | protein matrix (pea / soy isolate) | median 93.7x, CI coverage 3/8<br/><sub>8-point external hold-out; the shipped fitted factors LOSE to applying no observability factor at all</sub> | **do-not-use** |
-| Absolute concentration (ppb) | genuine extrapolation (roasting, HME extrusion) | 1/5 inside the 90% CI<br/><sub>the only rows that test transfer; the interval that does cover is ~4 decades wide</sub> | **do-not-use** |
-| Direction / ranking on `sugar_identity` | any (sugar swap, conditions held) | 9/11 on the directional panel | **trust** |
-| Direction / ranking on `additive_cysteine` | free precursor (cysteine present vs absent) | 4/4 on the directional panel | **trust** |
-| Direction / ranking on `temperature` | any (temperature moved, everything else held) | 6/8 on the directional panel | caution |
-| Direction / ranking on `time` | any (time moved, everything else held) | 2/2 on the directional panel | caution |
-| Direction / ranking on `lipid_lane` | protein matrix (lipid-derived aldehydes) | 2/2 on the directional panel | caution |
-| Direction / ranking on `matrix_identity` | protein matrix (pea vs soy) | 1/1 on the directional panel | caution |
-| Direction / ranking on `ph` | any (pH moved) | 6/10 on the directional panel | caution |
-| Direction / ranking on `moisture_aw` | any (water activity moved) | 0/3 on the directional panel | **do-not-use** |
-| Ordering of two compounds in one system | free precursor | 8/12 pairs correct<br/><sub>measured on the hold-out, independently of the panel</sub> | caution |
-| Response direction across a condition series | free precursor | 3/6 correct<br/><sub>the sulfur temperature dependence is inverted and acrylamide is ~40x under-responsive in time</sub> | **do-not-use** |
-| Any claim of benchmark-grade agreement | the in-panel benchmarks themselves | 0/23 strict-ready<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
-| Which experiment to run next (value of information) | any system the uncertainty panel covers | every ranked row is a measured model failure<br/><sub>this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is</sub> | **trust** |
-
-**Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
-
-**Provenance census (recounted at generation time, not copied).** **120 records** carry `source_status: no_verifiable_source` across 12 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 166 in total. The numeric-payload and runtime-consumed subsets (98 and 80) use a narrower definition than this recount and are pinned separately by `tests/scientific/test_honest_headline_guards.py`.
-
-**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
-
-**Provenance of the hold-out numbers.** `results/validation/maillard_path_holdout_frozen_predictions.json`, 12 bundles / 21 scored targets, frozen 2026-08-27 at `12f43dd` — before any calibration wave saw those points, and un-gitignored specifically so a later wave cannot regenerate it and compare it with itself.
-
-**How to use this model in one line:** compare two formulations and read the ratio (`python scripts/maillard.py compare`), never quote the absolute number, and treat any pH or moisture direction as unsupported.
-
-<!-- END GENERATED: model-card -->
-
-
-**There is currently no "high" tier, and no benchmark in the panel is strict-ready
-(0/23).** Free-precursor sulfur chemistry used to sit here as the high-confidence lane; after
-the 2026-08-27 chemistry rebuild, the Wave N route correction, the Wave P refit and the Wave S1
-additive-propagator fix the model under-predicts MFT by **1.21×** on its one verified
-sulfur benchmark — while now **over**-predicting FFT on the same benchmark by **1.49×**, which
-is worse than before — and by 21–95× on the hydrolysate lanes, and the refit established that
-the residual is not removable by that barrier (its profile minimum sits at the floor of the
-defensible range). What survives is **ordering** — but read the size of it carefully, because
-the README previously quoted a number that no longer holds and attributed it to the wrong
-thing. Measured on the current tree (2026-08-27, after Wave S1b): the pentose ≫ hexose MFT
-constraint holds at
-**8.26×** (ribose 169.1 ppb vs glucose 20.5 ppb at matched conditions). It has now been
-published at 15.8×, then **8.98**×, then 3.39×, then 6.15×, then 7.78×, then 18.27×, and now
-8.26× — the falls were supports being removed, and **the rises were not model improvements
-either**. Measured: zero the
-1.05 kcal/mol gap between `thiol_addition_hexose` (29.65) and
-`thiol_addition_pentodiulose` (28.60) — i.e. make the two routes energetically identical — and
-the ratio collapses to **4.27×**. So the mechanism contributes ~4.3× and the remaining ~1.9× is
-carried by a barrier difference. The split has been 1.13× of 3.39× (Wave N), 2.31× of 6.15×
-(Wave P), 3.14× of 7.78× (Wave S1), 4.27× of 18.27× (Wave S1b) and **4.27× of 8.26× now**.
-**The claim got smaller and its evidence got better, and both halves are the point.** Wave S2c
-reverted `thiol_addition_pentodiulose` 26.35 → 28.60 because the 26.35 was fitted against
-`cys_ribose_140C_Hofmann1998`, whose values are this repository's own arithmetic on an invented
-mol % band. Only the pentose limb runs that barrier, so ribose fell 374.0 → 169.1 while
-**glucose did not move at all** — which is what identifies the cause. The structural share is
-unchanged in absolute terms, so the fraction of the ordering carried by mechanism rather than
-by a barrier gap went from **23% to 52%**, and no part of the claim now traces to a number this
-repository invented. What is left riding on a barrier gap is 1.05 kcal/mol between an
-*estimated class value* and an unconstrained legacy fit — where it used to be 3.30 kcal/mol
-between a *fitted* barrier and that same legacy fit. The hexose limb still runs the demoted
-one-step lump. The ordering agrees with
-Hofmann & Schieberle 1998 — and this is the one Hofmann claim that survives Wave S2c, because
-pentose ≫ hexose is stated in that paper's **abstract**, which is retrievable, rather than in
-the reconstructed yields table that is not; the *reason* the model reproduces it is still
-weaker than the agreement looks. The wheat ≫ soy hydrolysate ranking claim is withdrawn entirely: both benchmarks that
-supported it were quarantined as fabricated.
-Use the model to rank; do not use it to predict a concentration.
-
-> **One disabled knob you should know exists.** `src/lipid_oxidation.py` carries an
-> aldehyde-conversion saturation cap. **It ships disabled (`null`)** — the shipped model is
-> byte-identical to the linear one — and until 2026-08-27 two docstrings claimed otherwise.
-> The rationale is recorded verbatim in `data/lit/lipid_oxidation_calibration.json`
-> (`_provenance.saturation_rationale`), and it is quoted here including the part that is
-> awkward, because that part is the reason to publish it:
->
-> > *"the validated benchmark envelope reaches progress ~= 0.06 (100C/45min) and the
-> > external hold-out failures sit in the SAME progress regime (HME ~0.07), so a cap
-> > aggressive enough to bend the hold-out also perturbs in-panel trace points … and
-> > regressed the headline 37/48 -> 31/48 even at c=12. The hold-out over-prediction is
-> > therefore a per-(matrix, process_state) CALIBRATION gap …, NOT a kinetic-shape problem.
-> > The cap is therefore SHIPPED DISABLED (null) … **so the headline stays 37/48.**"*
->
-> Read the last clause. A mechanism was left switched off with the preservation of a
-> headline number stated as part of the reason. The diagnosis may well be right — the
-> in-panel points it perturbs are trace-level with near-zero-width intervals — but "so the
-> headline stays" is not a scientific argument, and it should never have been load-bearing.
-> The cap remains disabled (turning it on now would be a recalibration entangled with this
-> wave's chemistry changes) and re-deciding it on the evidence alone is an open owner item.
-
-> **The matrix over-prediction story, re-derived on corrected anchors (2026-08-27, Wave M).**
-> The S27 workstream that produced the disabled cap was written against a *median 36×
-> hold-out over-prediction*. That framing was built on top of two data errors, so here is
-> what the corrected anchors say:
->
-> * The hold-out median was **15.31×** at that point, and one 49.8× miss became 1.96×. That
->   was entirely the Li 2026 wrong-row correction, not a model change. **Wave O then took the
->   median to 42.62×** by refitting the ambient lane onto the verified anchor — see the
->   hold-out block above.
-> * **The over-prediction has not gone away.** The extreme process-state misses — roasted pea
->   2474×, HME 1-hexanol 1117×, HME nonanal 273× — are untouched. All eight hold-out points
->   are still over-predictions.
-> * **A new under-prediction appeared where there used to be perfect agreement.** With the
->   real Pratap-Singh hexanal values (1138 / 1621.71 ppb) the ambient pea and soy slurry
->   lanes were **4.37× and 4.27× UNDER**, because their observability factors were solved from
->   260 / 380. In the uncalibrated residual derivation soy ambient hexanal moves from 2.21×
->   under to **9.43× under**. **Wave O closed the calibrated half of this** (one shared scale
->   of 4.317249×, leaving a 1.0113× residual on both rows) but **not the uncalibrated half**:
->   the residual derivation deliberately never reads the observability factors — the whole
->   point of the uncalibrated tier is to describe a lane with no such calibration — so it is
->   bit-identical after the refit and 9.43× still stands.
-> * So the diagnosis "unbounded lipid-oxidation kinetics over-predict at high process
->   severity" survives, but the *baseline* it was measured against did not: the ambient lane
->   is not a calibrated reference, it is a lane pinned to a mistranscribed number. The
->   leave-lane-out matrix ln-sigma moved with it: RMS 2.86 → **3.25** on 5 residuals (was 6;
->   the hexanol row is gone), bias fold 3.46 → **3.91**, 90% CI [1.98, 5.48] → **[2.19,
->   6.80]**. The shipped 2.86 is still inside it and was **not** moved
->   ([matrix_sigma_residual_derivation.md](results/validation/matrix_sigma_residual_derivation.md)).
->   Re-derived again after the Wave O refit: **bit-identical**, for the structural reason
->   given above. No refit of an observability constant can ever be used to narrow this prior.
-> * **Wave P moved it, and a chemistry correction is the only thing that can (2026-08-27).**
->   One of the five residuals is the Trikusuma heated-pea *nonanal* row, whose uncalibrated
->   prediction fell 3238.93 → 1425.13 ppb when nonanal was moved onto the oleate pool — the
->   exact 0.4400× oleic/linoleic ratio. RMS **3.25 → 3.02**, bias fold 3.91 → **3.31**, 90% CI
->   [2.19, 6.80] → **[2.03, 6.30]**. The shipped 2.86 was **not** moved and is still inside.
->   The derivation moved *toward* the shipped value; that is a consequence of correcting a
->   substrate, and it is not a reason to narrow the prior.
-
-Full validation methodology: [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md).
-Regenerate all evidence artifacts: `./scripts/docker_maillard.sh summary`.
-
----
-
-## The 16 chemistry lanes — and what is actually implemented
-
-Maillard maps 16 chemistry lanes drawn from a systematic literature review. **They are not
-16 implemented reaction mechanisms**, and the table below says which is which. Five lanes
-carry generative reaction templates — the engine can enumerate atom-balanced steps for
-them. The other eleven are real parts of the model, but they are shared limbs of another
-lane, matrix/modifier layers that are not reaction chemistry at all, or literature priors
-with no generative implementation yet.
-
-The **Implementation** column is derived from the engine by enumeration, not asserted:
-regenerate it with `python scripts/generators/generate_family_implementation_status.py`
-([full detail](results/validation/family_implementation_status.md)). The generator fails if
-the engine ever emits a reaction family the table does not classify.
-
-| #  | Lane                          | Key compounds                     | Implementation                                | Evidence                 |
-| -- | ----------------------------- | --------------------------------- | --------------------------------------------- | ------------------------ |
-| 01 | Amino acid–sugar core        | MFT, FFT, methional, pyrazines    | 🧬 **20 reaction templates**                  | ⚠️ Benchmarked, failing 1.45–773× |
-| 02 | Lipid oxidation & crosstalk   | Hexanal, 2-pentylfuran, nonanal   | 🧬 **5 reaction templates** (needs a hydroperoxide seed) | ⛔ **Fit-recovery only** — every matrix intake lane's observable factor was back-solved from the benchmark it is scored against |
-| 03 | Thiamine degradation          | MFT (via thiamine), thiazoles     | 🧬 **2 reaction templates**                   | ⚠️ Benchmarked, failing 3.2–773× |
-| 04 | Nucleotide & ribose support   | IMP, GMP, umami precursors        | 📚 Priors only — ribose is a family-01 donor; nucleotides enumerate to nothing | 📐 Literature-calibrated |
-| 05 | Glutathione & peptide support | GSH-derived sulfur volatiles      | 📚 Priors only — no GSH template; the `glutathione_cleavage` barrier is never reached | 📐 Literature-calibrated |
-| 06 | Alternative protein matrices  | Matrix-specific modifiers         | 🧱 Matrix layer (`src/matrix_correction.py`) — not reaction chemistry | ⛔ **Unbenchmarked** — its two anchors were quarantined as fabricated (2026-08-27); the surviving matrix rows are all fit-recovery |
-| 07 | Carbonyl donor hierarchy      | Sugar reactivity ranking          | 🎚️ Modifier on family 01 (`DONOR_REACTIVITY_MULTIPLIERS`) | 📐 Literature-calibrated |
-| 08 | Off-notes & suppression       | Dicarbonyl traps, inhibitors      | 🎚️ Shares families 02/11; suppression is the intervention layer | ⚠️ Benchmarked, failing 15.4× (acrylamide extrusion) |
-| 09 | Caramelization & pyrolysis    | HMF, furfural                     | 🔗 Shares family 01's 1,2-enolisation limb    | ⚠️ Benchmarked, failing 3.1× |
-| 10 | Fermentation pretreatment     | Free AA/nucleotide enrichment     | 🧱 Upstream modifier (`src/pre_processor.py`) | 📐 Literature-calibrated |
-| 11 | Lipid–Maillard crosstalk     | MFT quenching by aldehydes        | 🧬 **3 reaction templates**                   | 🧮 DFT-queued |
-| 12 | Protein damage markers        | CML, CEL, furosine, lysinoalanine | 🧬 **4 reaction templates**                   | ⚠️ Benchmarked, failing 201–1204× (unit-collision gaps, see AUDIT.md) |
-| 13 | Polyphenol–amino capping     | Quinone–thiol trapping           | 📚 Priors only — the quinone/cysteine prior is parked, nothing routes it | 🧮 DFT-queued |
-| 14 | Ascorbic acid Maillard        | Dicarbonyl source, crosslinks     | 📖 Curated layer only (an ascorbate prior on a curated step) | 🧮 DFT-queued |
-| 15 | PE stealth sugar sink         | Phospholipid glycation            | 📚 Priors only — the PE headgroup enumerates to nothing | 🧮 DFT-queued |
-| 16 | Melanoidin polymerization     | Thiol scavenging                  | 🧱 Trapping factor in `src/recommend.py` — not reaction chemistry | 🧮 DFT-queued |
-
-🧬 = generative reaction templates &emsp; 🔗 = shares another lane's templates &emsp;
-🎚️ = modifier on another lane &emsp; 🧱 = matrix / process layer, not reaction chemistry &emsp;
-📖 = curated layer only &emsp; 📚 = literature priors only
-
-⚠️ = has quantitative benchmark rows, and currently MISSES them by the stated factor
-(0/23 benchmarks are strict-ready — see the calibration section above) &emsp;
-📐 = literature-calibrated priors, no dedicated benchmark &emsp;
-🧮 = computational closure in progress (xTB → DFT queue)
-
-The ✅ that used to sit in this column was retired on 2026-08-27: after the chemistry
-rebuild no lane has a passing quantitative benchmark, so "benchmark-validated" would have
-been a claim the panel no longer supports. The failures are shown rather than removed.
-
-**Two entry-point facts the table cannot show.** The lipid radical chain runs only from a
-*hydroperoxide*: an unoxidised fatty acid plus O₂ enumerates to **zero** steps, so in
-production the chain is seeded by the lipid-oxidation anchor rather than by the network. And
-the thiamine cascade matches thiamine by exact canonical SMILES and a ≥ 100 °C gate — a
-differently written thiamine SMILES silently produces nothing.
-
-Full literature basis: [docs/slr_benchmark_evaluation.md](docs/slr_benchmark_evaluation.md).
-**Corrected 2026-08-27:** this line used to claim "76 peer-reviewed papers evaluated". The
-file does not contain 76 of anything. Counted directly, it holds **41 paper entries**
-(36 distinct author–year citations, some appearing in more than one section), of which
-**37 carry an explicit 8-criterion score**, and **27 distinct DOIs** appear anywhere in it.
-The 8-criterion checklist itself is real and is applied to those 37. Where the 76 came from
-is not recoverable; it is withdrawn rather than adjusted.
-
----
-
-## Guiding experiments: what to measure next
-
-Maillard doesn't just predict — it tells you which experiment would improve its predictions
-the most, using a **Value of Information (VoI)** framework that ranks compounds by:
-uncertainty × sensory impact.
-
-![Gap heatmap](results/validation/gap_heatmap.png)
-
-**How to read the heatmap:** Each cell is a benchmark × compound combination. Bright cells
-are high-value: the model is uncertain *and* the compound matters for sensory quality.
-Dark cells are already well-calibrated.
-
-### The highest-value missing experiment
-
-The single experiment that would close the most gaps is a **quantitative PPI/SPI meaty-positive
-benchmark** — pea and soy protein isolates with ribose + cysteine, measuring both desirable
-sulfur targets and adverse off-flavour markers in the same GC-MS run:
-
-- Full protocol: [PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md)
-- Ranked experiment requests: [experiment_value_ranking.md](results/validation/experiment_value_ranking.md)
+**Inputs** are a formulation (precursor names and mM) and a process (an isothermal or
+programmed thermal history, pH, water activity, matrix). **Lane resolution** decides which of
+the four networks can represent the request — the Maillard lanes (trunk, sulfur, acrylamide)
+do not compose with each other, the lipid lane co-integrates with any one of them — and refuses,
+with the reason, anything that maps to no lane or to a species the fit corpus never measured.
+**Integration** is a plain mass-action ODE system with rate constants and activation energies
+read from the frozen fit reports under `results/validation/kinetic_core_b*_fit_report.json`.
+**The observable layer** wraps every absolute in its measured reliability band, converts to
+headspace where a threshold exists, and reports odour-activity ratios. **Nothing in the code
+carries a fitted constant as a literal**: every number the model ships is a fit-report value
+or a *declared assumption* with its band.
 
 ---
 
 ## Getting started
-
-### Prerequisites
-
-- [Docker](https://www.docker.com/products/docker-desktop/) (recommended) or Python 3.12 with conda
-- Git
-
-### Install and boot
 
 ```bash
 git clone https://github.com/PabloAMC/Maillard.git
@@ -1218,360 +76,268 @@ cd Maillard
 ./scripts/docker_maillard.sh up && ./scripts/docker_maillard.sh bootstrap
 ```
 
-### Step 0 — The comparative front door (`python -m` style entry point)
-
-*Added 2026-08-28 (Wave S5).* Steps 1–4 below are the full designer and are unchanged. This
-step exists because they lead with the part of the model that was **measured to be wrong**: an
-absolute ppb number, out of sample, is off by 6×–94×. What was measured to work is the
-ordinal reading — 21/29 on strictly independent directional claims. So the front door leads
-with **ratios**:
+Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`); host
+Python is for editing only. The front door is one script with five verbs:
 
 ```bash
-python scripts/maillard.py compare --template > my_comparison.yml
-python scripts/maillard.py compare my_comparison.yml
+python scripts/maillard.py compare --template > my_comparison.yml   # two arms, A vs B
+python scripts/maillard.py compare my_comparison.yml --report compare.html
+python scripts/maillard.py predict my_comparison.yml --system a      # one arm, absolutes
+python scripts/maillard.py explain 2-methyl-3-furanthiol             # what the core knows about a compound
+python scripts/maillard.py rank --top 10                             # which measurement would teach the model most
+python scripts/maillard.py score --template > my_measurements.yml    # then: score my_measurements.yml
+python scripts/maillard.py wishlist                                  # what to measure next, and what it would unlock
 ```
 
-```
-  COMPARE   A = cysteine_ribose   vs   B = cysteine_glucose
+`compare` leads with **ratios** between the two arms — the quantity the systematic scale error
+cancels out of — and prints each arm's envelope declaration. `predict` prints absolutes *with*
+their interval and OAV. `explain` answers a compound with the lane, the declared assumptions and,
+for a refused compound, the reason. `rank` reads the core's Monte-Carlo envelope and orders
+(benchmark, compound) rows by how badly and how uncertainly the model misses them. `score` takes
+**your own measured concentrations** and scores them the way the panel scorecard scores a bundle,
+writing a bundle-shaped record under `results/user/` that the next fit wave can read; it never
+refits anything, because a refit is a new pre-registered wave (`scripts/generators/WAVES.md`).
+`wishlist` prints the generated data wishlist: which fitted constants the evidence does not pin,
+which rows the engine answers but declares not evaluable, what no lane represents, which
+directional axes are thin, and what each measurement would let you predict. `--json`
+gives the machine-readable payload of any verb; `--report` writes a self-contained HTML page.
 
-  Axes this comparison moves: sugar_identity
-  Governing reliability:      trust (8/8)
-
-    - sugar_identity     trust        panel 8/8
-
-  compound                                  A/B          bound(lo..hi)  reliability        pathway A
-  ----------------------------------------------------------------------------------------------
-  Furfural                                1.74x   0.000142 .. 2.12e+04  trust (8/8)        Amadori_Rearrangement
-  2-Furfurylthiol (FFT)                   1.69x   6.62e-06 .. 4.29e+05  trust (8/8)        Amadori_Rearrangement
-  2-Methyl-3-furanthiol (MFT)             5.71x   0.000139 .. 2.34e+05  trust (8/8)        Thiol_Addition_Pentodiulose
-  2,5-Dimethylpyrazine                    1.53x   4.56e-07 .. 5.12e+06  trust (8/8)        Aminoketone_Condensation
-```
-
-Move the pH instead of the sugar, and the same tool says so:
-
-```
-  Axes this comparison moves: ph, moisture_aw
-  Governing reliability:      do-not-use (0/3)
-
-    - ph                 do-not-use   panel 4/7
-        pH is 4/7 on the panel and 4/10 combined with water activity -- at or below chance.
-        The model licenses no pH recommendation.
-    - moisture_aw        do-not-use   panel 0/3
-        Water activity is 0/3 and the miss is STRUCTURAL, not a wiring bug: HMF and furfural
-        share one reaction family, so they always carry the same aw factor, and the
-        projection budget has no moisture dependence at all.
-```
-
-Those reliability tags are **read at runtime** from
-[`docs/validation/directional_accuracy_report.md`](docs/validation/directional_accuracy_report.md);
-re-score the panel and edit that file, and the tool's advice moves with it. There is no second
-copy of the numbers.
-
-| Verb | What it answers | Notes |
-| --- | --- | --- |
-| `compare A.yml B.yml` (or one two-arm file) | "Which formulation gives more X?" | Ratios, the conservative independent-error bound, dominant pathway, per-axis reliability |
-| `predict spec.yml` | "What comes out of this one?" | Ranges not points; model-card caveats printed inline |
-| `rank-experiments` | "What should I measure next?" | Surfaces the value-of-information loop |
-
-Flags: `--absolute` adds the raw ppb columns to `compare` **with the caveat printed in the
-same block**, `--json` emits the machine-readable payload, `--top N` trims the table.
-Input specs are small YAML/JSON — precursors in **mM**, plus `temp_C`, `time_min`, `ph`, `aw`,
-and an optional `protein_type`. None of the process conditions is defaulted: a defaulted
-temperature is a silent chemistry claim, so a spec missing one is refused by name.
-
-### Step 1 — Predict your formulation (forward mode)
-
-Forward mode scores **exactly** the formulation you type — every precursor, ratio,
-temperature and time you pass is honoured:
+Regenerate the evidence artifacts:
 
 ```bash
-./scripts/docker_maillard.sh run "python scripts/run_pipeline.py \
-  --sugars ribose,glucose \
-  --amino-acids cysteine,leucine \
-  --ratios ribose:0.5,glucose:0.2,cysteine:0.2,leucine:0.1 \
-  --ph 5.5 --temp 105 --time-minutes 45 \
-  --protein-type pea_iso \
-  --report --output-dir results/first_run"
+python scripts/generators/generate_core_panel_scores.py                 # ~15 s
+python scripts/generators/generate_core_prediction_uncertainty.py --n-samples 200 --workers 6   # ~5-7 min natively
+python scripts/generators/generate_model_card.py                        # re-splices the card below
 ```
 
-Open `results/first_run/report.md` for the full analysis.
-
-### Step 2 — Screen the candidate space (inverse design)
-
-Adding `--target TAG` switches to **inverse design**: the tool screens the 15-entry grid in
-`data/formulation_grid.yml` and ranks candidates for that sensory tag. Your own formulation
-is entered as one extra candidate (`Your formulation (custom)`) when you supply precursors:
-
-```bash
-./scripts/docker_maillard.sh run "python scripts/run_pipeline.py \
-  --sugars ribose,glucose \
-  --amino-acids cysteine,leucine \
-  --ratios ribose:0.5,glucose:0.2,cysteine:0.2,leucine:0.1 \
-  --ph 5.5 --temp 105 --time-minutes 45 \
-  --protein-type pea_iso \
-  --target meaty --minimize beany \
-  --report --output-dir results/first_screen"
-```
-
-The grid entries carry their own precursors and ratios, so `--ratios` and `--time-minutes`
-apply only to your own candidate. If a grid entry wins the screen, the report describes
-**that entry**, not the recipe you typed — the CLI says which, and §1 of `report.md` lists
-the formulation that was actually evaluated. Use forward mode (Step 1) when you want a
-report about your own recipe.
-
-> **`--minimize beany` does not predict beaniness from your ingredients.** Stated plainly
-> because the command reads as if it does (2026-08-27, cold-start review). The flag
-> re-weights the objective over off-note compounds *already present in the run*; it does
-> not generate them. **No fatty acid is registered as a precursor** — `Linoleic acid` is
-> rejected by the resolver, and `--lipids` takes the aldehydes themselves (`hexanal`,
-> `nonanal`). So forward mode can only score an off-note you supplied, and an empty
-> `--lipids` yields `Off-Flavour Risk 0.00`, which means *"no off-note compound was in the
-> system"*, not *"this formulation is not beany"*. The lipid radical chain cannot close
-> the gap either: it enumerates to **zero** steps from an unoxidised fatty acid plus O₂
-> (it needs a hydroperoxide seed), and the `MAX_MW = 300 Da` network prune removes
-> 13-HPODE (312 Da) and the peroxyl radical (311 Da), so even a seeded chain is cut before
-> hexanal. The matrix lane's hexanal is **fit-recovery** — its observability factors were
-> back-solved from the benchmarks they are then scored against. Use this lane to *rank*
-> formulations that already contain aldehydes; do not use it to ask whether ingredients
-> will go beany. Registering a fatty-acid precursor is an open owner item and is
-> deliberately **not** done yet: a registered precursor feeding a chain that cannot
-> propagate would report a confident zero.
-
-### Step 3 — Optimise & compare
-
-Auto-search concentrations and process conditions over 50 Bayesian iterations. The search
-space is class-based (one concentration knob per amino-acid class, in mM), and the winning
-trial is re-scored as the formulation it actually described:
-
-```bash
-./scripts/docker_maillard.sh run "python scripts/optimize_formulation.py \
-  --sugars ribose,glucose --amino-acids cysteine,leucine \
-  --target-tag meaty --minimize-tag beany \
-  --protein-type pea_iso --n-iterations 50"
-```
-
-Or run the built-in quickstart comparison:
-
-```bash
-./scripts/docker_maillard.sh quickstart
-```
-
-![Comparison intervention waterfall](docs/assets/report_comparison_intervention_waterfall.png)
-
-### Step 4 — Ingest lab results & close the loop
-
-When your GC-MS results come back, normalise them into the matrix intake contract. Every
-flag below is required (values may instead come from columns/metadata in your file);
-`--water-activity`, `--time-min` and `--source-reference` are the ones usually forgotten:
-
-```bash
-./scripts/docker_maillard.sh ingest \
-  --file path/to/my_results.csv \
-  --protein-type pea_iso \
-  --process-state extrusion_structured \
-  --temp-c 105 --ph 5.5 \
-  --water-activity 0.85 --time-min 45 \
-  --source-reference "Internal run 2026-08, GC-MS/SIDA" \
-  --precursor cysteine=15.0 \
-  --precursor glucose=30.0 \
-  --confirm
-```
-
-Without `--confirm` this is a preview: preview and support-delta artifacts are written to
-`results/ingest_previews/` and nothing under `results/validation/` is touched. With
-`--confirm` the canonical intake YAML is written into `results/validation/` — **one YAML
-file**. It does *not* rebuild the benchmark panel and does *not* regenerate validation
-artifacts; run `./scripts/docker_maillard.sh summary` (and the other generators) for that.
-
-Full quickstart guide: [QUICKSTART.md](docs/guides/QUICKSTART.md). Glossary for non-computational scientists: [GLOSSARY.md](docs/guides/GLOSSARY.md).
+Test tiers and gates: `pytest tests/unit -q`, `pytest tests/scientific -q`,
+and `python scripts/ci/<gate>.py` for the six gates (citation, data read-only, fit-then-score,
+hold-out isolation, benchmark schema, artifact freshness: tracked artifacts equal what the code
+produces, modulo date and git head, and every recorded input still hashes the same).
 
 ---
 
-<details>
-<summary><b>Architecture and computational methods under the hood</b></summary>
+## How well calibrated is it?
 
-*This section absorbed `docs/architecture.md` and `docs/reference/SMIRKS_SYSTEM.md` on
-2026-08-28 (Wave S5); both files were deleted. They were not merged wholesale — each led with
-a pre-audit trust claim that the evidence has since withdrawn. `architecture.md` opened its
-trust surface with "**High trust — use freely**" and advertised a `bounded_calibration` /
-`transferred_literature` / `surrogate_family` confidence vocabulary that no longer exists in
-the output; `SMIRKS_SYSTEM.md` described two templates as "Validated vs. benchmarks" at a time
-when **0 of 23** benchmarks are strict-ready. The structural content below is what survived
-that filter.*
+Badly, and measurably. The numbers below are what the core scores on the union panel — the 16
+trust-loop bundles that carry a measurement, the 17 `maillard_path` hold-outs and the 4 external
+matrix bundles, 37 in all, 39 evaluable rows (8 more are answered but declared not evaluable, 17
+refused) — read from
+[`core_panel_scores.md`](results/validation/core_panel_scores.md) and
+[`core_prediction_uncertainty.md`](results/validation/core_prediction_uncertainty.md), and
+pinned by `tests/scientific/test_core_headline_guards.py`. A moved number has to move this page
+in the same change.
 
-### The lanes — the single most load-bearing fact about this codebase
+| | kinetic core |
+| --- | --- |
+| rows within 3x of the measurement | **4 of 39** (median fold error 30x, geometric mean 43x) |
+| **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since the primary-evidence refit (wave B9) only one scored row is a fit row |
+| by lane, within 3x | acrylamide 2/12 · sulfur 4/29 · lipid 0/7 · trunk 0/1 |
+| strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 37** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
+| literature rows inside the 90% Monte-Carlo interval | **6 of 32** evaluable (median width 0.98 dex); **6 of 31** out of sample; 7 rows not evaluable |
+| direction / ranking skill (69-claim literature panel) | **17 of 26** strictly independent evaluable claims; **13 of 21** with pH set aside, **4 of 5** on pH; water-activity comparisons are refused; 26 independent claims not evaluable |
 
-**Updated 2026-08-29 (Wave B5).** There are now **three** things that can produce a number, and
-the shipped default changed. `maillard compare` / `maillard predict` route through the
-**kinetic core** (`src/kinetic_core/engine.py`); the two paths described below are the
-**FAST screening lane**, which still runs behind `--lane fast` with its absolutes withheld, and
-the **matrix lane**, whose absolute path no longer feeds any user-facing output. The measured
-comparison between core and old lane is in the model-card section above — and it is not a
-flattering one for the core on median accuracy (**42.23x vs 10.86x on the 33 points both
-answer**, B7 exam, `results/validation/cutover_final_exam.md`; it was 24.93x vs 12.65x on 23
-paired points when this line was first written at B5, so the gap has roughly doubled).
-What follows describes the two OLD paths, which remain in the tree and still back the benchmark
-artifacts.
+Three things a reader must know, all declared in code and printed on every row they touch:
 
-Every *benchmark* still runs down **one of two execution paths**, and they share almost nothing.
-Confusing them has produced more wrong conclusions in this repository's history than any
-chemistry error:
+- **The sulfur lane is fitted on primary evidence only (wave B9, 2026-09-03).** The rule: rate
+  constants, activation energies, fed-intermediate yields, conversions and within-study ratios fit
+  the model; end-to-end concentrations in full precursor systems validate it. The earlier sulfur waves (B2 to B8) had fitted the
+  Hofmann 1998 Table 1 levels of FFT and MFT for ribose, xylose, glucose and fructose + cysteine and
+  then scored those same four bundles; B9 ([prereg](results/validation/kinetic_core_b9_prereg.md))
+  removed the eight rows and refitted with everything else unchanged. **What the split revealed: without those rows the core predicts zero MFT from glucose and fructose.** The hexose entry to the thiols (`r_glc_c2c3` / `r_glc_fur`) is real chemistry but its rate constants are identified by no step-level measurement in the corpus; B9 left them on their band floor. Since 2026-09-04 the engine DECLARES this (`HEXOSE ENTRY UNIDENTIFIED`) on any hexose-only charge asked for MFT or FFT: the number is still returned, both scorers list the row as not evaluable instead of scoring a band-floor artefact, and the ordering "pentose above hexose" stays a claim the model supports structurally. The four returned Hofmann bundles' hexose rows are therefore off the absolute count; the two pentose ones score 1 of 4 within 3x. Every fit row now declares its bundle
+  (`results/validation/kinetic_core_b9_fit_targets.json`); the only scored row the fit read is the
+  C2 + C3 recombination pot, flagged `in_core_fit`.
+- **Two bundles were quarantined and one was read in full (2026-09-04).** `cys_ribose_140C_Hofmann1998` (a
+  repo-internal derivation the file itself labels "not a measurement") and `thiamine_cys_xylose_145C_Cerny2008`
+  (an MFT value never located in the paper) left the scored panel (`data/benchmarks/quarantined/README.md`).
+  `thiamine_cys_glucose_120C_Bolton1994`, the one benchmark that had passed its strict contract, was rebuilt from
+  the chapter's Table I and II once the PDF arrived: with the paper's loadings (glucose 51.5 mM, thiamine 13.7 mM,
+  cysteine 11.7 mM, pH 5.65, a_w 0.83) the core overpredicts MFT 20x. The pass had rested on assumed inputs; no
+  benchmark is strict-ready now. The chapter's own finding is recorded in the bundle: no MFT formed without
+  thiamine and only 8 % of it carried cysteine's sulfur, so this benchmark tests the thiamine route, not the
+  sugar/cysteine one.
+- **The sulfur lane's uncertainty is a Laplace covariance, not a fitted one.** The fit report
+  carries no parameter covariance; a Gauss-Newton covariance at the shipped wave's frozen optimum
+  ([`kinetic_core_b9_laplace_covariance.json`](results/validation/kinetic_core_b9_laplace_covariance.json),
+  reduced chi-square 1.21) identifies **20 of 23** free coordinates, which the envelope samples
+  jointly; the other three (the carbonyl-sink barrier, and the thiol-sink barrier and acid yield
+  pinned on a declared bound) stay at the optimum and are listed as such. The slice profile
+  ([`kinetic_core_b9_profile.md`](results/validation/kinetic_core_b9_profile.md)) grades 4 of the 23
+  coordinates quadratic, 9 asymmetric, 3 flat and 7 bound-limited: the declared bands are still
+  active constraints. Until the covariance step (wave B8, 2026-09-03) the lane was unsampled and 24 rows were not evaluable.
+- **The K_aw and HS-SPME bands are headspace facts.** The envelope applies them only to rows the
+  bundle declares as headspace-quantified, never to isotope-dilution or HPLC values. Since 2026-09-03
+  every panel bundle declares its class (`benchmark.schema.json` enum, `schema_gate`); eleven say
+  `undeclared` with the reason in a `quantification_note`, get the bands by default, and say so.
 
-| | `free_precursor` | `matrix_only` / `matrix_precursor_augmented` |
+**Directional and ranking claims are the product, and the core scores 17 of 26 on them.**
+[`core_directional_scores.md`](results/validation/core_directional_scores.md) runs every claim of
+the 69-claim literature panel ([`directional_claims_panel.yml`](docs/validation/directional_claims_panel.yml))
+through the same front door a user calls. Sixteen claims are prose-only and 25 more are not
+evaluable on the core: an arm refused because 2,5-dimethylpyrazine and 2-pentylfuran are not core
+species or H2S and hydroxyacetaldehyde are not core precursors, or because the comparison moves an
+axis the lane carries no term for. **The engine refuses those comparisons outright** (water activity
+anywhere, pH on the trunk, acrylamide and lipid lanes) rather than returning two identical numbers,
+so they are not evaluable rather than misses. Of the rest: sugar identity 4 of 8, temperature 5 of 7,
+time 2 of 2, cysteine present-vs-absent 2 of 3, pH on the sulfur lane 4 of 5.
+A coin scores about half on binary orderings, so read the per-axis rows in the model card, not
+the aggregate. `maillard compare` prints the axes each comparison moves and the weakest of their
+verdicts.
+
+**The cutover exam, frozen.** The pre-registered exam that compared the core with the lane it
+replaced ([`cutover_prereg.md`](results/validation/cutover_prereg.md) →
+[`cutover_final_exam.md`](results/validation/cutover_final_exam.md)) was last run on 2026-09-03,
+the day the old lane was deleted, and is kept as a record: the core answered 34 of 40 points
+(6 refused with a named reason), landed **3 / 34** within 3x with an all-answered median of
+**19.08x**, and on the 33 points both lanes answered its paired median was **24.78x** against the
+old lane's **10.86x**. The core lost the exam on median accuracy, as the pre-registration allowed
+for, and won it on refusals: every one of its misses is localised to a named lane and a named
+constant, which is what makes `rank` useful.
+
+> **On literature provenance:** the kinetic anchors and benchmark values in this repo were
+> ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
+> audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
+> pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
+> carries an `audit_flag` in its registry entry. **87 records are marked
+> `no_verifiable_source`** (re-measured 2026-09-02 across every tracked JSON and YAML file
+> under `data/` and `results/literature/`, including nested records), of which
+> **65 carry numeric payloads** and **65 of those are consumed at runtime**. Both rises in that
+> count were the repository getting more honest, not worse; both falls were deletions, not
+> verifications. The registries are `data/keys/papers.yml` (285 DOIs) and
+> `data/keys/compounds.yml` (74 InChIKey-resolved compounds); `scripts/ci/citation_gate.py`
+> blocks a dead or confabulated DOI.
+
+<!-- BEGIN GENERATED: model-card -->
+
+### Model card — the validity domain, generated from the artifacts
+
+*Generated by `scripts/generators/generate_model_card.py`. Do not hand-edit between the markers; regenerate. Every number below is read from a tracked artifact or recomputed live, and the row says which.*
+
+- **Absolute concentrations are unreliable.** On the union panel the kinetic core lands 4/39 rows within 3x (median fold error 29.5x, worst 3.34e+04x); out of sample -- every row a core fit read removed -- 3/38 (median 31.9x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 6/32 evaluable literature rows (7 not evaluable: the no lane carries no sampled uncertainty), 6/31 out of sample.
+- **Directional and ranking claims are the product, and on the kinetic core they score 17/26 on strictly independent literature claims** (26 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 13/21 once pH and water activity are set aside, and 4/5 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.
+- **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
+
+| Claim type | System class | Measured | Verdict |
+|---|---|---|---|
+| Absolute concentration (ppb) | free precursor, asparagine + reducing sugar [acrylamide lane] | 2/12 rows within 3x, median 7.28x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
+| Absolute concentration (ppb) | protein matrix, lipid-derived aldehydes [lipid lane] | 0/7 rows within 3x, median 3.36e+03x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
+| Absolute concentration (ppb) | free precursor, cysteine / ribose meaty thiols [sulfur lane] | 2/19 rows within 3x, median 29.5x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
+| Absolute concentration (ppb) | free precursor, sugar + amine browning / furanics [trunk lane] | 0/1 rows within 3x, median 11.9x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
+| Absolute concentration interval (90% CI) | every lane with sampled uncertainty | 6/32 evaluable literature rows inside; 6/31 out of sample; 7 not evaluable<br/><sub>results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty</sub> | **do-not-use** |
+| Direction / ranking on `sugar_identity` | any (sugar swap, conditions held) | 4/8 on the directional panel (independent claims)<br/><sub>misses: SUG-03, SUG-12, HOF-02, HOF-03</sub> | **do-not-use** |
+| Direction / ranking on `additive_cysteine` | free precursor (cysteine present vs absent) | 2/3 on the directional panel (independent claims)<br/><sub>misses: CYS-02</sub> | caution |
+| Direction / ranking on `temperature` | any (temperature moved, everything else held) | 5/7 on the directional panel (independent claims)<br/><sub>misses: TEMP-01, TEMP-05</sub> | caution |
+| Direction / ranking on `time` | any (time moved, everything else held) | 2/2 on the directional panel (independent claims) | caution |
+| Direction / ranking on `lipid_lane` | protein matrix (lipid-derived aldehydes) | no evaluable independent claim on the core | **do-not-use** |
+| Direction / ranking on `matrix_identity` | protein matrix (pea vs soy) | no evaluable independent claim on the core | **do-not-use** |
+| Direction / ranking on `ph` | any (pH moved) | 4/5 on the directional panel (independent claims)<br/><sub>misses: MOT-01</sub> | caution |
+| Direction / ranking on `moisture_aw` | any (water activity moved) | no evaluable independent claim on the core | **do-not-use** |
+| Direction / ranking on `ranking` | several compounds ordered in one system | 0/1 on the directional panel (independent claims)<br/><sub>misses: MOT-03</sub> | **do-not-use** |
+| Direction / ranking on `process_heating` | processed vs raw | no evaluable independent claim on the core | **do-not-use** |
+| Any claim of benchmark-grade agreement | the union panel: trust loop + hold-outs + matrix bundles | 0/37 strict-ready (none); 4/39 rows within 3x, out-of-sample 3/38<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
+| Which experiment to run next (value of information) | any system the core envelope covers | every ranked row is a measured model failure<br/><sub>this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is</sub> | **trust** |
+
+**Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
+
+**Provenance census (recounted at generation time, not copied).** **87 records** carry `source_status: no_verifiable_source` across 9 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 133 in total. The numeric-payload and runtime-consumed subsets (65 and 65) use a narrower definition than this recount and are pinned separately by the headline guards under `tests/scientific/`.
+
+**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
+
+**How to use this model in one line:** compare two formulations and read the ratio (`python scripts/maillard.py compare`), never quote the absolute number, and treat any pH or moisture direction as unsupported.
+
+<!-- END GENERATED: model-card -->
+
+---
+
+## What the core is
+
+Four networks that do *not* compose, each with its own integrator (`src/kinetic_core/`):
+
+| lane | steps | species it adds | pH term | fitted to |
+| --- | ---: | --- | --- | --- |
+| trunk (wave B1) | 26 | glucose / fructose / glycine → Amadori, deoxyosones, melanoidins; HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin | none | Martins 2005 time series, Blank 1997 furanic yields (wave B7) |
+| sulfur (waves B2 to B9) | 93 | pentoses, cysteine, thiamine → MFT, FFT, furfural, the MFT dimer | pH trajectory (wave B2.2) | Hofmann 1998 Tables 1/3/4/10, Kang 2026, Zhou 2023, Whitfield 1999, Cerny 2007, van Seeventer 2001 (waves B2 to B8) |
+| acrylamide (wave B3) | 42 | asparagine + reducing sugar → acrylamide, HMF | none | Claeys 2005, De Vleeschouwer 2009, Knol 2005 rate constants |
+| lipid (wave B6) | — | a linoleate hydroperoxide pool → Frankel 1989's six products (hexanal, pentane, decadienal, …) | none | branch distribution fitted; the **rate is a declared assumption** with a Q10 band |
+
+The sulfur steps are deliberately absent from the acrylamide lane — composing them would spend
+the same cysteine twice — so a request spanning both is declared **unanswerable** rather than
+silently routed. What `engine.UNREPRESENTED_COMPOUNDS` refuses today, and why, is printed by
+`maillard explain <compound>`: 1-hexanol and 2-pentylfuran (no measured branch fraction),
+propanal and 2-nonenal (Frankel fed linoleate only), HEMF (needs alanine and a pentose in one
+lane), and the thiophenone (a rate of exactly zero, because the only fed-precursor experiment
+reports an area percent). Every refusal is an `EnvelopeDeclaration` with a reason and no number.
+
+**Fit / hold-out discipline.** Every fit wave was pre-registered
+(`results/validation/kinetic_core_b*_prereg.md`), every fit report names its rows and their
+source anchors, and `scripts/ci/holdout_guard.py` asserts statically that no fit generator names
+the hold-out directory and that panel discovery never recurses. The one place that discipline was
+found wanting — the xylose pH-5 row above — is declared rather than fixed silently.
+
+---
+
+## Repository layout
+
+Three trees, one rule each (`agents.md`):
+
+| tree | rule | map |
 | --- | --- | --- |
-| What runs | The enumerated reaction network: SMIRKS → barriers → flux propagation → projection | A lipid-oxidation load read off a **matrix profile**, multiplied by marker yields and observability factors |
-| Reaches `Recommender.predict_from_steps` | Yes | **No** — `matrix_only` returns before the network is ever called |
-| Where its numbers come from | Chemistry | Calibration constants, several of them back-solved from the benchmarks they are then scored against |
-| Measured out-of-sample | 6.04x median fold error (12-point hold-out) | 67x–94x median (8-point hold-out), and the shipped fitted factors **lose to applying no factor at all** |
+| `data/` | curated inputs, **read-only at runtime** (`scripts/ci/data_readonly_gate.py`); paths from `src/data_paths.py`, loads through `src/data_access.py`, names through `data/keys/` | [`data/README.md`](data/README.md) (generated) |
+| `results/` | generated artifacts: the core's scorecard, envelope and directional scorecard (each with a `provenance` block), the frozen fit and hold-out records per wave, the literature ledgers; `results/legacy_lane/` is the archive of the retired lane and of orphaned artifacts | [`results/README.md`](results/README.md) (generated) |
+| `docs/` | human documents: [USING_THE_TOOL.md](docs/USING_THE_TOOL.md), [QUICKSTART.md](docs/guides/QUICKSTART.md), [GLOSSARY.md](docs/guides/GLOSSARY.md), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md), the retired lane's README under `docs/history/` | |
 
-This is not an abstraction: it is why three consecutive waves of reaction-network work — an
-additive flux propagator, a pH/water-activity rewiring, a barrier revert — moved dozens of
-in-panel rows and left all eight matrix hold-out points **bit-identical**. The invariance was
-evidence about the hold-out's coverage, not about the model.
+Code: `src/kinetic_core/` (the engine, its parameters, panel, scoring, envelope, fit-target
+ledger), `src/comparative_cli.py` + `scripts/maillard.py` (the front door), `src/report_html.py`,
+`src/explain_compound.py`, `src/experiment_value.py` (the `rank` verb), `src/model_card.py`; the
+literature side (`src/family_ingestion_plan.py`, `src/literature_intake_registry.py`,
+`scripts/deep_research_tracker.py` and the `generate_*` scripts that write
+`results/literature/`); and the five CI gates under `scripts/ci/`.
 
-### `src/trunk_kinetics.py` — why there is a third, deliberately non-shipping integrator
+**Key dependencies:** NumPy / SciPy (integration), RDKit (compound identity through InChIKey),
+PyYAML, jsonschema, Matplotlib (report figures).
 
-Neither lane above can be honestly fitted to concentration-vs-time data. The FAST screening
-lane has no time axis and no absolute rate constant — it propagates *relative* fluxes, so a
-uniform shift of every barrier by +10 kcal/mol changes the predicted ppb by under 0.4%. The
-Cantera export lane does integrate ODEs but discards the initial molarity (Cantera normalises
-mole fractions), so three feeds two orders of magnitude apart give bit-identical trajectories.
+---
 
-`trunk_kinetics.py` is a minimal dedicated integrator for the sugar-trunk subsystem, built so
-that the first rate-level calibration in this repository's history could happen at all. It was
-fitted to 176 point-verified concentration-time values and **agrees with an independent
-laboratory's fitted model to 1.5x** on total Amadori degradation. It is also **not wired into
-either shipped lane**, and that was the finding: applying its derived barriers would make the
-hold-out 26% *worse*, because the absolute-accuracy deficit lives in the projection budget and
-in missing chemistry, not in the barrier table.
+## Guiding experiments: what to measure next
 
-### Data flow — benchmarks → gates → artifacts → this README
+Two generated artifacts answer this, and the CLI prints both:
 
-```
-data/benchmarks/**            data/lit/**              docs/validation/directional_*
-        |                          |                              |
-        v                          v                              v
- src/benchmark_validation   src/*.py (science)          src/directional_reliability
-        |                          |                              |
-        +----------> scripts/generators/generate_*.py <-----------+
-                               |
-                               v
-                    results/validation/*.{json,md}     <-- the evidence, mostly gitignored;
-                               |                           the load-bearing ones force-added
-        +----------------------+----------------------+
-        |                      |                      |
-        v                      v                      v
-  scripts/ci/*.py       scripts/maillard.py    generate_model_card.py
-  (3 blocking gates)    (the user-facing CLI)  (rewrites README's model card in place)
-```
+- **`maillard wishlist`** ([`data_wishlist.md`](results/validation/data_wishlist.md)) is the
+  structural answer: which fitted constants the primary evidence does not pin (with the one
+  fed-intermediate measurement that would identify each and the observables it would unlock),
+  which panel rows the engine answers but declares not evaluable, what the panel asks for that no
+  lane represents, which directional axes are below "trust" and how many agreeing claims would lift
+  them, and a closing list of *what you could predict if you had it*. Its first entry is the finding
+  wave B9 exposed: the hexose entry to the thiols (`k_glc_ha`) has no step-level measurement anywhere,
+  so absolute MFT and FFT from glucose or fructose are not predictions until someone heats glucose
+  alone and quantifies its C2 + C3 fragments against time.
+- **`maillard rank`** ([`experiment_value_ranking.md`](results/validation/experiment_value_ranking.md))
+  is the value-of-information answer: every (benchmark, compound) row the envelope misses, ordered
+  by miss × uncertainty × sensory weight. Today it leads with hexanal in pea protein and FFT in the
+  buffered ribose/cysteine series.
 
-Three properties of that diagram are deliberate. **The gates are blocking and offline** —
-`citation_gate` (DOI grammar, confabulation signatures, digest-as-provenance),
-`fit_target_gate` (fit-then-score circularity), `holdout_guard` (that no hold-out bundle is
-named by any fit record). **The CLI reads the directional artifact at runtime**, so a
-re-scored panel changes what the tool tells a user without a code change. And **the README's
-model card is generated, not written**, because prose does not update itself: this wave found
-the directional report still publishing 20/29 four commits after the tree started scoring
-21/29.
-
-### Reaction template provenance — Tier A and Tier B
-
-`src/smirks_engine.py` is a hybrid generator. **Tier A** rules are generic SMIRKS functional-group
-transforms (`schiff_base_lipid` ← Martins 2001; `beta_scission_alkoxy` and
-`radical_propagation_o2` ← Frankel 1985). **Tier B** are curated Python templates for
-rearrangements whose atom mapping is non-trivial — `_amadori_cascade` (glycation, via the
-N-substituted-1-amino-1-deoxy-2-ketose), `_strecker_step` (oxidative decarboxylation →
-Strecker aldehyde + CO₂), `_beta_elimination_steps` (the DHA pathway), `_thiazole_condensation`
-(heuristic, Yaylayan 1990).
-
-Three physical constraints keep the enumeration from exploding, and **one of them is a known
-scientific limitation, not just a performance guard**:
-
-1. **MW cap at 300 Da** on volatile products. This is why the lipid radical chain cannot reach
-   hexanal from a fatty acid: 13-HPODE (312 Da) and the peroxyl radical (311 Da) are both
-   pruned out of the network.
-2. **Canonical deduplication** — every intermediate is RDKit-canonicalised before recruitment.
-3. **Strict atom balance**, including H₂O and CO₂ co-products.
-
-Known template gaps: nitrate/nitrite interventions are not modelled, and the iron-coordination
-SMIRKS rules are placeholders. Missing chemistry the network has no route to at all:
-glucose→fructose isomerisation, formic and acetic acid, melanoidins, and a caramelisation lane.
-
-### Reaction enumeration
-
-The SMIRKS rule engine (`src/smirks_engine.py`) generates deterministic, atom-balanced reaction
-candidates from precursor sets. The chemistry surface is explicit and inspectable — if the
-reaction graph is not coherent, no later scoring is trustworthy.
-
-### Kinetics
-
-Arrhenius parameters (Schiff base 15 kcal/mol → enolisation 28 kcal/mol) drive laptop-speed
-FAST screening in < 1 second. *Corrected 2026-08-27 (Wave S2c): this line used to read
-"Literature-calibrated … anchored to Hofmann, Martins, Nursten". The Martins and Nursten
-anchors stand; **the Hofmann anchor does not** — every constant that ever traced to
-`cys_ribose_140C_Hofmann1998` was traced to a repo-internal derivation, not to
-`10.1021/jf9705983`. *(Updated 2026-08-28, Wave W: the paper's real Table 1 values are now
-ingested as three panel anchors, which the model fails by 12-30x. What remains true is the
-sentence's actual point — no sulfur barrier constant has ever been fitted to a verified
-literature value, and none was fitted in Wave W either.)* Read
-`src/barrier_constants.py`'s per-key rationales for which values are measured, which are class
-analogues, and which are estimates.*
-A Cantera ODE solver is available for temporal profiles and mechanism debugging.
-
-### Matrix physics
-
-Accessibility corrections model how protein denaturation, sulfhydryl availability, and pH
-alter precursor reactivity in structured plant matrices. Volatile retention factors
-(non-covalent binding to denatured proteins) and Henry's law headspace partitioning translate
-beaker-chemistry yields into what a sensory panel would actually perceive.
-
-### Uncertainty quantification
-
-Monte Carlo propagation across the full benchmark panel produces per-compound 90% confidence
-intervals. Each prediction carries a `tier` (`high` / `medium` / `low` / `exploratory`, a band
-on a 0-100 confidence score) paired with a `prediction_mode`, plus a
-`calibration_evidence_strength` naming the kind of anchor behind it (`literature_anchored`,
-`conditional_literature_anchored`, `class_anchored`, `directional_transferred`,
-`process_state_mismatch`, `heuristic`). Both propagate through the pipeline and surface in
-every report, and both are demoted one notch when a run falls outside the calibrated scope.
-
-### Selective quantum chemistry (xTB → DFT)
-
-For high-value rate-limiting steps, GFN2-xTB identifies kinetically viable pathways (pathfinder,
-not a barrier authority). Final barriers come from DFT (r2SCAN-3c/def2-svp + ddCOSMO implicit
-water via PySCF/Sella). See the [Computational Gap Runbook](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)
-for the current queue and copy-paste commands.
-
-### Key dependencies
-
-RDKit (reaction enumeration), Cantera (ODE kinetics), PySCF + Sella (DFT refinement),
-xtb (pathfinding), MACE (ML potentials), NumPy/SciPy (numerics), Matplotlib (figures).
-
-### Supported protein matrices
-
-14 protein sources are registered with endogenous composition profiles and matrix correction
-factors: pea isolate, pea concentrate, soy isolate, soy concentrate, wheat gluten, mycoprotein,
-chickpea, lentil, faba bean, oat, potato, sunflower, spirulina, and yeast extract.
-Pea and soy have the strongest literature backing; others are directional.
-
-</details>
+Both are regenerated and compared by the artifact-freshness gate, so they cannot drift from the
+scorecard they are derived from. The wet-lab protocol for the matrix gap the two agree on — a
+quantitative PPI/SPI meaty-positive benchmark with the thiols and the off-flavour aldehydes in one
+run — is [PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md).
+Closing the loop from such a measurement back into the constants is a new pre-registered wave
+(`scripts/generators/WAVES.md`); `maillard score` writes your measurements in the shape that wave reads.
 
 ---
 
 ## Where to look next
 
-| If you are a…                                          | Start with                                                                                                                                 |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Anyone, first command**                        | `python scripts/maillard.py compare --template` → the [model card](#when-to-trust-the-predictions)                                             |
-| **Flavour scientist** — using the tool           | [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) — three worked examples, how to read intervals / NOT-RESOLVED / refusals, and what the model is explicitly *not* for |
-| **Food scientist** — first run                   | [QUICKSTART.md](docs/guides/QUICKSTART.md)                                                                                                    |
-| **Scientist** — understanding the output         | [GLOSSARY.md](docs/guides/GLOSSARY.md)                                                                                                        |
-| **Reviewer** — auditing what is verified         | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/)                                    |
-| **Experimentalist** — closing the gaps           | [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) → [experiment ranking](results/validation/experiment_value_ranking.md) |
-| **Maintainer** — extending the chemistry         | [Architecture (above)](#architecture-and-computational-methods-under-the-hood) → [CONTRIBUTING.md](CONTRIBUTING.md)                             |
-| **QM operator** — running the DFT queue          | [COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)                                                                      |
-| **Literature curator** — ingestion & calibration | [data/lit/README.md](data/lit/README.md)                                                                                                      |
-| **New contributor**                               | [CONTRIBUTING.md](CONTRIBUTING.md)                                                                                                            |
+| If you are a… | Start with |
+| --- | --- |
+| **Anyone, first command** | `python scripts/maillard.py compare --template` → the model card above |
+| **Flavour scientist** — using the tool | [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) |
+| **Food scientist** — first run | [QUICKSTART.md](docs/guides/QUICKSTART.md) |
+| **Scientist** — understanding the output | [GLOSSARY.md](docs/guides/GLOSSARY.md) |
+| **Reviewer** — auditing what is verified | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/) → [AUDIT.md](AUDIT.md) |
+| **Experimentalist** — closing the gaps | `maillard wishlist` → [data wishlist](results/validation/data_wishlist.md) → [experiment ranking](results/validation/experiment_value_ranking.md) → [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) |
+| **Maintainer** — extending the chemistry | `src/kinetic_core/` module docstrings → [`tasks/data_restructure_plan.md`](tasks/data_restructure_plan.md) → [CONTRIBUTING.md](CONTRIBUTING.md) |
+| **Literature curator** — ingestion | [data/lit/README.md](data/lit/README.md) |
+| **Historian** — what the retired lane claimed | [docs/history/README_legacy_lane_2026-09-03.md](docs/history/README_legacy_lane_2026-09-03.md), [results/legacy_lane/](results/legacy_lane/) |
 
 ---
 

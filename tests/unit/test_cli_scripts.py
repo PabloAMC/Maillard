@@ -1,97 +1,45 @@
-"""
-tests/unit/test_cli_scripts.py
+"""Smoke tests for the command-line entry points that survive retirement step B5.
 
-Smoke tests to ensure that the command-line orchestrators parse arguments, 
-load configs, and exit gracefully under expected conditions (like --help or dry runs).
+2026-09-03: `scripts/run_pipeline.py`, `run_campaign.py`, `run_cantera_kinetics.py`,
+`optimize_formulation.py`, `explain_formulation.py` and `ingest_results.py` were deleted with
+the legacy lane. The front door is `scripts/maillard.py`; the two core artifacts have their
+own generators. Each must at least parse `--help` and exit 0 from a fresh interpreter.
 """
+from __future__ import annotations
 
 import subprocess
-import pytest
+import sys
 from pathlib import Path
+
+import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 
-@pytest.mark.slow
-def test_run_pipeline_help():
-    """Verify run_pipeline.py parses --help successfully."""
-    cmd = ["python", "scripts/run_pipeline.py", "--help"]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0
-    assert "Maillard formulation screening pipeline" in result.stdout
-
-@pytest.mark.slow
-def test_run_pipeline_dry_run():
-    """Verify run_pipeline.py validates inputs correctly without running integration."""
-    cmd = [
-        "python", "scripts/run_pipeline.py",
-        "--sugars", "ribose",
-        "--amino-acids", "cysteine",
-        "--dry-run"
-    ]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0
-    assert "Dry-run complete" in result.stdout
+ENTRY_POINTS = (
+    "scripts/maillard.py",
+    "scripts/generators/generate_core_panel_scores.py",
+    "scripts/generators/generate_core_prediction_uncertainty.py",
+    "scripts/generators/generate_model_card.py",
+    "scripts/generators/build_data_readme.py",
+    "scripts/generators/build_results_readme.py",
+    "scripts/ci/artifact_freshness_gate.py",
+    "scripts/generators/generate_data_wishlist.py",
+)
 
 
-@pytest.mark.slow
-def test_run_pipeline_dry_run_accepts_extrusion_flags():
-    cmd = [
-        "python", "scripts/run_pipeline.py",
-        "--sugars", "ribose",
-        "--amino-acids", "cysteine",
-        "--dry-run",
-        "--sme-kj-per-kg", "120",
-        "--moisture-regime", "hme",
-        "--sterilization-temp", "123",
-        "--sterilization-time-minutes", "20",
-        "--barrel-zones", "125,145,160",
-        "--barrel-zone-time-fractions", "0.2,0.3,0.5",
-    ]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0
-    assert "Dry-run complete" in result.stdout
-
-@pytest.mark.slow
-def test_run_cantera_help():
-    """Verify run_cantera_kinetics.py parses --help successfully."""
-    cmd = ["python", "scripts/run_cantera_kinetics.py", "--help"]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0
-    assert "Run Cantera microkinetic simulation" in result.stdout
+@pytest.mark.parametrize("script", ENTRY_POINTS)
+def test_entry_point_help_exits_zero(script):
+    proc = subprocess.run(
+        [sys.executable, script, "--help"], cwd=str(ROOT), capture_output=True, text=True, timeout=300
+    )
+    assert proc.returncode == 0, proc.stderr[-2000:]
+    assert proc.stdout.strip()
 
 
-@pytest.mark.slow
-def test_run_campaign_help():
-    cmd = ["python", "scripts/run_campaign.py", "--help"]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0
-    assert "--spec" in result.stdout
-    assert "--names" in result.stdout
-
-
-@pytest.mark.slow
-def test_run_campaign_named_comparison_mode(tmp_path):
-    out_dir = tmp_path / "campaign_compare"
-    cmd = [
-        "python", "scripts/run_campaign.py",
-        "--names", "Soy/Pea Base (Untreated),Soy/Pea Base + Reducing Sugar",
-        "--ph", "5.5",
-        "--temp", "105",
-        "--target-tag", "meaty",
-        "--minimize-tag", "beany",
-        "--campaign-name", "CLI comparison smoke",
-        "--output-dir", str(out_dir),
-    ]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0, result.stderr
-    assert (out_dir / "comparison.md").exists()
-    assert (out_dir / "comparison.json").exists()
-    assert (out_dir / "campaign.md").exists()
-    assert (out_dir / "campaign.json").exists()
-
-@pytest.mark.slow
-def test_calibrate_barriers_importable():
-    """Verify calibrate_barriers.py can be loaded without syntax or config errors."""
-    cmd = ["python", "-c", "import scripts.calibrate_barriers"]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert result.returncode == 0
+def test_maillard_verbs_are_the_five_core_verbs():
+    proc = subprocess.run(
+        [sys.executable, "scripts/maillard.py", "--help"], cwd=str(ROOT), capture_output=True, text=True, timeout=300
+    )
+    for verb in ("compare", "predict", "explain", "rank", "score"):
+        assert verb in proc.stdout
+    assert "--lane" not in proc.stdout

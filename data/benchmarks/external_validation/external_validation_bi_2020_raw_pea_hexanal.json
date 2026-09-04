@@ -1,5 +1,7 @@
 {
   "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+  "quantification_class": "hs_spme_gcms_internal_standard_curve",
+  "quantification_note": "Confirmed 2026-09-04 from the full text (J. Agric. Food Chem. 68:2718, PDF data/articles/bi2020.pdf, pp. 2719-2720): HS-SPME (50/30 um DVB/CAR/PDMS, 1.5 g flour + 1.8 g NaCl in 5 mL water, 50 C, 20 min equilibration, 50 min extraction), GC-MS in SIM mode; 'Five-point standard curves were used to quantitate odorants in the pea samples' built in deodorized pea flour with 2,4,6-trimethylpyridine as internal standard; concentrations in ug/kg. Headspace: the K_aw and HS-SPME bands apply. Not stable-isotope dilution.",
   "citation_audit_note": {
     "basis": "10.1021/acs.jafc.9b07711 (Bi et al. 2020, key aroma compounds in raw and roasted peas) is the correct anchor here and for external_validation_bi_2020_raw_pea_hexanal / external_validation_bi_2020_roasted_pea_hexanal / intake id acs_2020_raw_pea_hexanal_baseline. It was ALSO reused in data/lit/benchmark_intake_registry.json for the unrelated EGCG/deoxyosone claim (jafc_2020_egcg_deoxyosone_trapping); that anchor has been repointed to 10.1021/acs.jafc.0c05098, so this DOI is no longer double-counted across unrelated claims. 2026-08-27 (Wave I): this note used to live only in the generated benchmark file, where a regeneration deleted it -- it is now carried in the bundle spec so it survives. See doi_repair_reversal on the bi_2020 anchors in data/lit/flavor_reference_payloads.json.",
     "date": "2026-08-26",
@@ -91,5 +93,14 @@
     "source_publication_year": "2020",
     "source_reference": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
     "wave_w_access": "Full text obtained by the repository owner via interlibrary loan, 2026-08-28, read directly from data/articles/bi2020.pdf (gitignored; the PDF is not committed). Identity confirmed from the PDF first page: 'Characterization of Key Aroma Compounds in Raw and Roasted Peas (Pisum sativum L.) by Application of Instrumental and Sensory Techniques', Shuang Bi, Xinxing Xu, Dongsheng Luo, Fei Lao, Xueli Pang, Qun Shen, Xiaosong Hu, Jihong Wu, 'Cite This: J. Agric. Food Chem. 2020, 68, 2718-2727'."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "data/articles/bi2020.pdf (on disk since 2026-08; read in full 2026-09-04)",
+    "quoted_quantification": "Volatile compounds in raw and roasted peas were extracted by SPME with a 50/30 um divinylbenzene-carboxen-polydimethylsiloxane fiber ... Sodium chloride (1.8 g) was dissolved in a 5 mL aliquot of distilled water contained in a 20 mL vial. After the sodium chloride had dissolved, raw or roasted pea flour (1.5 g) was added to the vial and 20 uL of a 2,4,6-trimethylpyridine (10 uL diluted by a factor of 2 x 10^4 in methanol) was added as an internal standard ... the vial was kept at 50 C for 20 min, before the fiber was exposed to the headspace for 50 min ... Five-point standard curves were used to quantitate odorants in the pea samples ... GC-selected ion monitoring (GC-SIM).",
+    "quoted_conditions": "The roasted peas (500 g) were prepared using an Isotemp forced-air oven at 160 C for 30 min.",
+    "quoted_values": "Table 4 (ug/kg, mean +/- SD of three repeated measurements): hexanal, raw peas 1260 +/- 114 (OAV 280).",
+    "quantification_verdict": "HS-SPME-GC-MS (SIM) with a five-point matrix-matched curve against an internal standard; the bundle's 1260 ug/kg +/- 9.05 % is Table 4 exactly.",
+    "verified_on": "2026-09-04"
   }
 }

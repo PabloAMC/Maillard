@@ -102,6 +102,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.kinetic_core import operative_acrylamide_parameters  # noqa: E402
 from src.kinetic_core.acrylamide import (  # noqa: E402
     apparent_activation_energy,
@@ -109,7 +110,7 @@ from src.kinetic_core.acrylamide import (  # noqa: E402
 )
 
 CELSIUS = 273.15
-FIT_REPORT = ROOT / "results/validation/kinetic_core_b3_fit_report.json"
+FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b3_fit_report.json"
 
 B1_FITTED = {
     "k_glc_frag": (1.000032373292967e-08, 180.69531857985976),
@@ -244,7 +245,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(ROOT / "results" / "validation"),
+        default=str(data_paths.VALIDATION_DIR),
         help="directory the artifacts are written to",
     )
     args = parser.parse_args(argv)

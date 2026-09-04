@@ -1,14 +1,10 @@
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Any, Dict, List, Mapping
 
+from src import data_paths
 from src.chemistry_family_scope import load_chemistry_family_scope_registry
 from src.family_ingestion_plan import load_family_ingestion_plan
-
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
 
 
 def _sorted_scope_rows(payload: Mapping[str, Any]) -> List[Dict[str, Any]]:
@@ -83,8 +79,8 @@ def build_family_strategy_policy_artifact() -> Dict[str, Any]:
 
     return {
         "source": {
-            "chemistry_family_scope_registry": "data/lit/chemistry_family_scope_registry.json",
-            "family_ingestion_plan_registry": "data/lit/family_ingestion_plan.json",
+            "chemistry_family_scope_registry": data_paths.rel(data_paths.CHEMISTRY_FAMILY_SCOPE_REGISTRY),
+            "family_ingestion_plan_registry": data_paths.rel(data_paths.FAMILY_INGESTION_PLAN),
         },
         "summary": {
             "quantitative_trunk_family": "amino_acid_sugar_core",

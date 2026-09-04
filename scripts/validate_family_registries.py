@@ -3,10 +3,16 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src import data_paths  # noqa: E402
+
+
 def validate():
-    root = Path(__file__).parent.parent
-    scope_path = root / "data/lit/chemistry_family_scope_registry.json"
-    ingestion_path = root / "data/lit/family_ingestion_plan.json"
+    scope_path = data_paths.CHEMISTRY_FAMILY_SCOPE_REGISTRY
+    ingestion_path = data_paths.FAMILY_INGESTION_PLAN
 
     if not scope_path.exists():
         print(f"Error: {scope_path} not found")

@@ -65,7 +65,7 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "nishimura_abe_2024",
-          "path": "data/lit/slr_incorporation_matrix.json"
+          "path": "results/literature/slr_incorporation_matrix.json"
         }
       ],
       "requires_primary_data": false
@@ -601,7 +601,7 @@
       "citation": "Huang (2022)",
       "identifier": "https://open.clemson.edu/all_theses/3936/",
       "identifier_scheme": "url",
-      "identifier_note": "2026-08-27: retyped from doi 'ClemsonThesis3936', which was never a DOI. Clemson TigerPrints issues no DOI for this MS thesis (Huang, J. H., 2022, All Theses 3936); the repository's permanent record URL is the only identifier it has. Verified 2026-08-26 - see the doi_repair record in data/lit/deep_research_backlog.json.",
+      "identifier_note": "2026-08-27: retyped from doi 'ClemsonThesis3936', which was never a DOI. Clemson TigerPrints issues no DOI for this MS thesis (Huang, J. H., 2022, All Theses 3936); the repository's permanent record URL is the only identifier it has. Verified 2026-08-26 - see the doi_repair record in results/literature/deep_research_backlog.json.",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -807,7 +807,7 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "thiamine_cys_xylose_145C_Cerny2008",
-          "path": "data/benchmarks/thiamine_cys_xylose_145C_Cerny2008.json"
+          "path": "deleted 2026-09-04: no source for the value (data/benchmarks/quarantined/README.md)"
         },
         {
           "artifact_type": "benchmark_intake_entry",
@@ -1582,7 +1582,7 @@
       "citation": "Yu et al. (2020)",
       "doi": "10.1016/j.foodchem.2020.126458",
       "kind": "calibration_reference",
-      "chemistry_family": "advanced_glycation_and_damage",
+      "chemistry_family": "protein_damage_markers",
       "slr_family_source": "14",
       "payload_role": "benchmark_intake",
       "observable_panel_tags": [
@@ -1707,7 +1707,7 @@
       "citation": "Solís-Calero et al. (2015)",
       "doi": "10.1155/2015/319505",
       "kind": "calibration_reference",
-      "chemistry_family": "phospholipid_amine_maillard",
+      "chemistry_family": "phospholipid_amine_sink",
       "slr_family_source": "15",
       "payload_role": "benchmark_intake",
       "observable_panel_tags": [
@@ -1771,7 +1771,7 @@
       "citation": "Kodate et al. (2018)",
       "doi": "10.1038/s41598-018-27010-2",
       "kind": "calibration_reference",
-      "chemistry_family": "phospholipid_amine_maillard",
+      "chemistry_family": "phospholipid_amine_sink",
       "slr_family_source": "15",
       "payload_role": "benchmark_intake",
       "observable_panel_tags": [
@@ -2667,7 +2667,9 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/spi_hvp_xylose_120C_PMC9905368.json"
+          "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
+          "artifact_status": "quarantined",
+          "artifact_status_note": "Benchmark quarantined 2026-08-26 (unverifiable source); path corrected 2026-09-03. Not runtime-bound."
         }
       ],
       "requires_primary_data": false,
@@ -2722,7 +2724,9 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/wheat_gluten_hvp_xylose_120C_PMC9905368.json"
+          "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
+          "artifact_status": "quarantined",
+          "artifact_status_note": "Benchmark quarantined 2026-08-26 (unverifiable source); path corrected 2026-09-03. Not runtime-bound."
         }
       ],
       "requires_primary_data": false,
@@ -2898,7 +2902,7 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-          "path": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json"
+          "path": "data/benchmarks/quarantined/furosine_extrusion_crossover_140C_RamirezJimenez2000.json"
         },
         {
           "artifact_type": "safety_reference",
@@ -2921,7 +2925,7 @@
       "citation": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
       "doi": "10.1021/acs.jafc.3c08432",
       "kind": "calibration_reference",
-      "chemistry_family": "microbial_fermentation_modulation",
+      "chemistry_family": "fermentation_pretreatment",
       "slr_family_source": "10",
       "payload_role": "benchmark_intake",
       "observable_panel_tags": [
@@ -3043,7 +3047,7 @@
       "citation": "Jo et al. (2022), Molecules 27:6182",
       "doi": "10.3390/molecules27196182",
       "kind": "calibration_reference",
-      "chemistry_family": "microbial_fermentation_modulation",
+      "chemistry_family": "fermentation_pretreatment",
       "slr_family_source": "10",
       "payload_role": "benchmark_intake",
       "observable_panel_tags": [
@@ -5652,7 +5656,7 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "farmer_1991_alkyl_thiazoles",
-          "path": "data/lit/slr_incorporation_matrix.json"
+          "path": "results/literature/slr_incorporation_matrix.json"
         }
       ],
       "requires_primary_data": false,
@@ -8262,7 +8266,7 @@
       "citation": "Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133",
       "doi": "10.1007/s11746-001-0401-1",
       "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_crosstalk",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "payload_role": "computational_prior",
       "observable_panel_tags": [
@@ -8318,7 +8322,7 @@
       "citation": "Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546",
       "doi": "10.3989/gya.0320231",
       "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_crosstalk",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "payload_role": "computational_prior",
       "observable_panel_tags": [
@@ -8374,7 +8378,7 @@
       "citation": "West, Adams & Zabarnick (2011), Energy & Fuels 25:897",
       "doi": "10.1021/ef101678s",
       "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_crosstalk",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "payload_role": "computational_prior",
       "observable_panel_tags": [
@@ -8836,7 +8840,7 @@
       "citation": "de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35",
       "doi": "10.1002/recl.19871060201",
       "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "payload_role": "computational_prior",
       "observable_panel_tags": [
@@ -8892,7 +8896,7 @@
       "citation": "Luna & Aguilera (2013), Food Biophysics 9:61",
       "doi": "10.1007/s11483-013-9317-0",
       "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "payload_role": "computational_prior",
       "observable_panel_tags": [
@@ -8948,7 +8952,7 @@
       "citation": "Cui et al. (2022), J. Agric. Food Chem. 70:11556",
       "doi": "10.1021/acs.jafc.2c03427",
       "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_caramelization",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "payload_role": "computational_prior",
       "observable_panel_tags": [
@@ -11058,7 +11062,7 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "fadel_2015_mft_retention",
-          "path": "data/lit/slr_incorporation_matrix.json"
+          "path": "results/literature/slr_incorporation_matrix.json"
         }
       ],
       "requires_primary_data": false,
@@ -11123,7 +11127,7 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "wang_2023_mft_retention",
-          "path": "data/lit/slr_incorporation_matrix.json"
+          "path": "results/literature/slr_incorporation_matrix.json"
         }
       ],
       "requires_primary_data": false
@@ -11182,7 +11186,7 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "mottram_2001_bmfd_retention",
-          "path": "data/lit/slr_incorporation_matrix.json"
+          "path": "results/literature/slr_incorporation_matrix.json"
         }
       ],
       "requires_primary_data": false,
@@ -11246,7 +11250,7 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "siripitakpong_2026_fft_retention",
-          "path": "data/lit/slr_incorporation_matrix.json"
+          "path": "results/literature/slr_incorporation_matrix.json"
         }
       ],
       "requires_primary_data": false,

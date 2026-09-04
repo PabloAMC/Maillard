@@ -1,5 +1,7 @@
 {
   "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+  "quantification_class": "isotope_dilution_lcmsms",
+  "quantification_note": "Declared 2026-09-03 from the PMC full text (PMC11354377, Ma et al. 2024): 'Acrylamide quantification was performed on a UPLC-QqQ-MS/MS' with acrylamide-2,3,3-d3 as the isotope-labelled internal standard (extraction as Fu et al.). Extraction-based: no headspace band. The VALUE remains a figure read-off (Figure 2D, ~150 ug/kg at 130 C; the text gives no number), which value_provenance already records.",
   "benchmark_type": "safety",
   "source_doi": "10.3390/ijms25168668",
   "precursors": {
@@ -50,12 +52,20 @@
       "NOTE: the model_change_note above still quotes the old 62.62 reference in its expected_miss line; with the corrected 150 ppb reference the expected miss WIDENS (predicted 9.75 ppb -> ~15.4x under). The benchmark remains expected_to_fail for the same desaturation reason."
     ],
     "value_provenance": "figure_readoff",
-    "report": "results/validation/content_verification_wave_k.md"
+    "report": "results/legacy_lane/validation/content_verification_wave_k.md"
   },
   "measured_volatiles": {
     "acrylamide": {
       "conc_ppb": 150,
       "uncertainty_pct": 20
     }
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PubMed Central PMC11354377 (open access), fetched 2026-09-03",
+    "quoted_quantification": "Methods used for the extraction and separation of acrylamide were the same as Fu et al. Acrylamide quantification was performed on a UPLC-QqQ-MS/MS. Internal standard: acrylamide-2,3,3-d3.",
+    "quoted_values": "Acrylamide (ug/kg) appears only in Figure 2 (A-D); the text says 'The lowest and highest acrylamide content were found in PBMAs extruded by 20% moisture and 130 C, respectively' and gives no number.",
+    "quantification_verdict": "Isotope-dilution UPLC-MS/MS; the bundle's 150 ug/kg is a read-off of Figure 2D, not a tabulated value.",
+    "verified_on": "2026-09-03"
   }
 }

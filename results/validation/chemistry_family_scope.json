@@ -1,0 +1,369 @@
+{
+  "summary": {
+    "family_count": 16,
+    "status_counts": {
+      "active_expansion": 6,
+      "bounded_lane": 8,
+      "first_class_core": 1,
+      "partially_encoded_high_priority": 1
+    },
+    "strategic_role_counts": {
+      "bounded_support_lane": 4,
+      "computational_closure_candidate": 5,
+      "first_class_runtime_lane": 4,
+      "guardrail_lane": 2,
+      "matrix_scope_lane": 1
+    },
+    "first_class_families": [
+      "amino_acid_sugar_core"
+    ],
+    "expansion_candidates": [
+      "lipid_oxidation_and_carbonylic_crosstalk",
+      "thiamine_fragmentation_support",
+      "nucleotide_and_ribose_support",
+      "glutathione_and_peptide_support",
+      "alternative_protein_matrix_scope",
+      "carbonyl_donor_hierarchy",
+      "off_note_and_maillard_suppression",
+      "carbohydrate_pyrolysis_and_caramelization",
+      "fermentation_pretreatment"
+    ],
+    "open_gap_families": [],
+    "recommended_next_family": "lipid_oxidation_and_carbonylic_crosstalk",
+    "policy": "expand_product_scope_by_adding_benchmark_visible_family_lanes_not_by_diluting_the_core",
+    "ingestion_policy": "beyond_amino_acid_sugar_use_the_same_runtime_contract_but_choose_family_specific_payload_types_benchmark_payloads_for_observable_panels_priors_for_transfer_and_gap_registries_for_non_closable_scope"
+  },
+  "families": [
+    {
+      "slr_family": "01",
+      "family_id": "amino_acid_sugar_core",
+      "display_name": "Amino acid plus reducing sugar core",
+      "strategic_role": "first_class_runtime_lane",
+      "current_status": "first_class_core",
+      "priority": "high",
+      "why_it_matters": "This is the generative trunk that creates the dicarbonyl and Amadori or Heyns intermediates feeding most downstream meaty chemistry.",
+      "current_runtime_assets": [
+        "data/lit/flavor_reference_payloads.json",
+        "src/benchmark_validation.py"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "flavor_reference_payloads",
+        "benchmark_validation"
+      ],
+      "preferred_ingestion_mode": "benchmark_or_reference_payload",
+      "next_best_action": "Keep as the strict core and use it as the dependency map for every non-core family extension.",
+      "notes": "First because it is the most transferable, benchmarkable, and decision-relevant foundation."
+    },
+    {
+      "slr_family": "02",
+      "family_id": "lipid_oxidation_and_carbonylic_crosstalk",
+      "display_name": "Lipid oxidation and carbonylic crosstalk",
+      "strategic_role": "computational_closure_candidate",
+      "current_status": "partially_encoded_high_priority",
+      "priority": "high",
+      "why_it_matters": "In plant-based matrices this family often dominates early off-notes and interacts directly with Maillard intermediates.",
+      "current_runtime_assets": [
+        "src/lipid_oxidation.py",
+        "data/lit/retention_reference_payloads.json",
+        "data/lit/computational_priors.json"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "retention_reference_payloads",
+        "computational_priors"
+      ],
+      "preferred_ingestion_mode": "dual_lane_benchmark_plus_retention_payload",
+      "next_best_action": "Promote this to the first non-core family sprint by adding explicit benchmark and calibration lanes.",
+      "notes": "Leading candidate for expansion because it changes real PBMA decisions immediately."
+    },
+    {
+      "slr_family": "03",
+      "family_id": "thiamine_fragmentation_support",
+      "display_name": "Thiamine degradation and sulfur support",
+      "strategic_role": "bounded_support_lane",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "why_it_matters": "Fortified precursor systems can unlock sulfur chemistry that the native plant matrix lacks.",
+      "current_runtime_assets": [
+        "data/lit/computational_priors.json",
+        "data/lit/flavor_reference_payloads.json"
+      ],
+      "ingestion_surfaces": [
+        "flavor_reference_payloads",
+        "computational_priors"
+      ],
+      "preferred_ingestion_mode": "directional_prior_then_benchmark",
+      "next_best_action": "Keep thiamine as an upstream availability and routing support lane.",
+      "notes": "Strengthens sulfur interpretation without becoming a standalone kinetic solver on day one."
+    },
+    {
+      "slr_family": "04",
+      "family_id": "nucleotide_and_ribose_support",
+      "display_name": "Nucleotide degradation and ribose support",
+      "strategic_role": "bounded_support_lane",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "why_it_matters": "Nucleotides and ribose-delivery systems can improve savory support and alter precursor availability.",
+      "current_runtime_assets": [
+        "data/lit/flavor_reference_payloads.json",
+        "data/lit/matrix_decision_panel.json"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "flavor_reference_payloads",
+        "matrix_decision_panel"
+      ],
+      "preferred_ingestion_mode": "reference_payload_plus_priors",
+      "next_best_action": "Keep nucleotide support explicit as an upstream state modifier and decision-panel lane.",
+      "notes": "Support-grade rather than benchmark-closed, but first-class in reports."
+    },
+    {
+      "slr_family": "05",
+      "family_id": "glutathione_and_peptide_support",
+      "display_name": "Glutathione and peptide sulfur support",
+      "strategic_role": "bounded_support_lane",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "why_it_matters": "Low-molecular-weight peptides and glutathione can supply bounded sulfur support and kokumi-like effects.",
+      "current_runtime_assets": [
+        "data/lit/flavor_reference_payloads.json",
+        "data/lit/computational_priors.json"
+      ],
+      "ingestion_surfaces": [
+        "flavor_reference_payloads",
+        "computational_priors"
+      ],
+      "preferred_ingestion_mode": "directional_prior_then_benchmark",
+      "next_best_action": "Keep peptide-bound sulfur explicit as a support lane.",
+      "notes": "Lane should remain bounded and interpretable, even when direct quantitative closure is absent."
+    },
+    {
+      "slr_family": "06",
+      "family_id": "alternative_protein_matrix_scope",
+      "display_name": "Alternative protein matrix scope",
+      "strategic_role": "matrix_scope_lane",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "why_it_matters": "States clearly where chemistry knowledge is being transferred into alternative matrices under bounded confidence.",
+      "current_runtime_assets": [
+        "data/lit/matrix_family_coverage_registry.json",
+        "data/lit/computational_priors.json",
+        "src/matrix_prior_registry.py"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "computational_priors",
+        "process_gap_registry"
+      ],
+      "preferred_ingestion_mode": "process_state_calibration_plus_priors",
+      "next_best_action": "Keep this lane explicit as matrix-scope support and trust-surface logic.",
+      "notes": "Names where knowledge is portable across matrices and where it remains directional only."
+    },
+    {
+      "slr_family": "07",
+      "family_id": "carbonyl_donor_hierarchy",
+      "display_name": "Reducing sugar and carbonyl donor hierarchy",
+      "strategic_role": "first_class_runtime_lane",
+      "current_status": "bounded_lane",
+      "priority": "high",
+      "why_it_matters": "Flavor recommendations are wrong if ribose, xylose, glucose, and fructose are treated as interchangeable.",
+      "current_runtime_assets": [
+        "data/lit/flavor_reference_payloads.json",
+        "data/lit/matrix_decision_panel.json",
+        "src/recommend.py"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "flavor_reference_payloads",
+        "computational_priors",
+        "matrix_decision_panel"
+      ],
+      "preferred_ingestion_mode": "benchmark_payload_plus_priors",
+      "next_best_action": "Keep donor identity first-class in runtime and reporting.",
+      "notes": "Lane is already active and should stay separate from the core trunk."
+    },
+    {
+      "slr_family": "08",
+      "family_id": "off_note_and_maillard_suppression",
+      "display_name": "Plant off-notes and Maillard suppression",
+      "strategic_role": "guardrail_lane",
+      "current_status": "bounded_lane",
+      "priority": "high",
+      "why_it_matters": "Flavor predictions are unsafe if plant off-note loads and dicarbonyl trapping are not modeled.",
+      "current_runtime_assets": [
+        "data/lit/safety_reference_payloads.json",
+        "data/lit/computational_priors.json",
+        "data/lit/matrix_decision_panel.json"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "computational_priors",
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "preferred_ingestion_mode": "guardrail_payload_plus_priors",
+      "next_best_action": "Keep this family co-equal with positive flavor lanes.",
+      "notes": "Not merely a safety appendix; part of whether a meaty recommendation is believable."
+    },
+    {
+      "slr_family": "09",
+      "family_id": "carbohydrate_pyrolysis_and_caramelization",
+      "display_name": "Carbohydrate pyrolysis and caramelization",
+      "strategic_role": "guardrail_lane",
+      "current_status": "bounded_lane",
+      "priority": "medium",
+      "why_it_matters": "Severity markers like HMF and furfural help separate useful browning from over-processed drift.",
+      "current_runtime_assets": [
+        "data/lit/flavor_reference_payloads.json",
+        "data/lit/matrix_decision_panel.json"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "flavor_reference_payloads",
+        "safety_reference_payloads"
+      ],
+      "preferred_ingestion_mode": "safety_or_structural_gap_registry",
+      "next_best_action": "Keep this family as a severity and failure-mode lane.",
+      "notes": "Should stay reportable and constraining even when not directly optimized."
+    },
+    {
+      "slr_family": "10",
+      "family_id": "fermentation_pretreatment",
+      "display_name": "Microbial fermentation pretreatment",
+      "strategic_role": "bounded_support_lane",
+      "current_status": "bounded_lane",
+      "priority": "high",
+      "why_it_matters": "Fermentation changes precursor pools and off-note burden before thermal chemistry starts.",
+      "current_runtime_assets": [
+        "data/lit/computational_priors.json",
+        "data/lit/process_state_calibrations.json",
+        "data/lit/flavor_reference_payloads.json"
+      ],
+      "ingestion_surfaces": [
+        "benchmark_intake_registry",
+        "flavor_reference_payloads",
+        "computational_priors"
+      ],
+      "preferred_ingestion_mode": "process_state_calibration_plus_priors",
+      "next_best_action": "Keep pretreatment explicit as an upstream state-modifier lane.",
+      "notes": "Remains bounded and literature-backed without full microbial simulation."
+    },
+    {
+      "slr_family": "11",
+      "family_id": "lipid_maillard_crosstalk",
+      "display_name": "Maillard/Lipid Crosstalk and Radical Quenching",
+      "strategic_role": "first_class_runtime_lane",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "why_it_matters": "Lipid-derived dicarbonyls (MDA, 4-HNE) compete for protein amines, while Maillard intermediates quench lipid radicals.",
+      "current_runtime_assets": [
+        "data/research_corpus/raw/Gemini_deep_research_11.md",
+        "src/lipid_oxidation.py"
+      ],
+      "ingestion_surfaces": [
+        "computational_priors",
+        "benchmark_intake_registry"
+      ],
+      "preferred_ingestion_mode": "benchmark_linked_suppression_surface",
+      "next_best_action": "Implement the competition surface between sulfur volatiles and lipid off-notes.",
+      "notes": "Critical for high-fat formulations where lipid-derived off-notes dominate."
+    },
+    {
+      "slr_family": "12",
+      "family_id": "protein_damage_markers",
+      "display_name": "Protein Damage and Safety Markers (AGEs/ALE/LAL)",
+      "strategic_role": "first_class_runtime_lane",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "why_it_matters": "Extrusion intensity drives the formation of CML, CEL, Furosine, and LAL, critical for safety labeling.",
+      "current_runtime_assets": [
+        "data/research_corpus/12_protein_damage_markers.md",
+        "src/safety.py"
+      ],
+      "ingestion_surfaces": [
+        "safety_reference_payloads",
+        "process_gap_registry"
+      ],
+      "preferred_ingestion_mode": "guardrail_severity_surface",
+      "next_best_action": "Promote CML, CEL, and Furosine to first-class safety metrics.",
+      "notes": "Split lane: computable guardrail severity vs. wet-lab required for exact markers."
+    },
+    {
+      "slr_family": "13",
+      "family_id": "polyphenol_amino_capping",
+      "display_name": "Polyphenol-Amino Capping and Thiol Scavenging",
+      "strategic_role": "computational_closure_candidate",
+      "current_status": "active_expansion",
+      "priority": "medium",
+      "why_it_matters": "Oxidized polyphenols (quinones) rapidly cap cysteine and lysine residues, depleting flavor precursors.",
+      "current_runtime_assets": [
+        "data/research_corpus/raw/Gemini_deep_research_13.md"
+      ],
+      "ingestion_surfaces": [
+        "computational_priors",
+        "matrix_decision_panel"
+      ],
+      "preferred_ingestion_mode": "upstream_modifier_payload",
+      "next_best_action": "Implement the quinone-budget sink with Cys-first priority mapping.",
+      "notes": "Crucial for high native polyphenol matrices (e.g., sunflower, pea)."
+    },
+    {
+      "slr_family": "14",
+      "family_id": "ascorbic_acid_maillard",
+      "display_name": "Ascorbic Acid Thermal Degradation (Stealth Initiator)",
+      "strategic_role": "computational_closure_candidate",
+      "current_status": "active_expansion",
+      "priority": "medium",
+      "why_it_matters": "Ascorbic acid acts as a dicarbonyl and AGE initiator at extrusion temperatures (>120\u00b0C).",
+      "current_runtime_assets": [
+        "data/research_corpus/raw/Gemini_deep_research_14.md"
+      ],
+      "ingestion_surfaces": [
+        "computational_priors",
+        "safety_reference_payloads"
+      ],
+      "preferred_ingestion_mode": "bounded_source_term_payload",
+      "next_best_action": "Add the AA-driven dicarbonyl source term with pH and aw-dependent routing.",
+      "notes": "Equivalent to glucose on a molar basis for pentosidine-type cross-link generation."
+    },
+    {
+      "slr_family": "15",
+      "family_id": "phospholipid_amine_sink",
+      "display_name": "Phospholipid-Amine (PE) Stealth Sugar Sink",
+      "strategic_role": "computational_closure_candidate",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "why_it_matters": "PE in lecithin competes with protein amines for sugar with lower Ea and interfacial acceleration.",
+      "current_runtime_assets": [
+        "data/research_corpus/raw/Gemini_deep_research_15.md"
+      ],
+      "ingestion_surfaces": [
+        "computational_priors",
+        "matrix_decision_panel"
+      ],
+      "preferred_ingestion_mode": "mechanistic_to_bounded_closure",
+      "next_best_action": "Subtract PE sink capacity using 1:2 sugar:PE stoichiometry multiplier.",
+      "notes": "Lipid interface acts as a low-aw microenvironment, bypassing bulk moisture inhibition."
+    },
+    {
+      "slr_family": "16",
+      "family_id": "melanoidin_polymerization",
+      "display_name": "Melanoidin Polymerization and Volatile Trapping",
+      "strategic_role": "computational_closure_candidate",
+      "current_status": "active_expansion",
+      "priority": "high",
+      "why_it_matters": "HMW melanoidins scavenge sulfur volatiles via irreversible CROSSPY-radical thioether formation.",
+      "current_runtime_assets": [
+        "data/research_corpus/raw/Gemini_deep_research_16.md",
+        "src/extrusion.py"
+      ],
+      "ingestion_surfaces": [
+        "process_gap_registry",
+        "computational_priors"
+      ],
+      "preferred_ingestion_mode": "trapping_burden_modifier_payload",
+      "next_best_action": "Implement pseudo-zero-order melanoidin accumulation with IC50-based flavor scavenging.",
+      "notes": "Explains why texture-optimized extrudates suffer from catastrophic flavor loss."
+    }
+  ]
+}

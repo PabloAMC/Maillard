@@ -2,8 +2,26 @@
 
 set -euo pipefail
 
-CONTAINER_NAME="${MAILLARD_CONTAINER_NAME:-maillard_validation}"
 IMAGE_NAME="${MAILLARD_IMAGE_NAME:-condaforge/miniforge3}"
+# 2026-09-03: the container follows the HOST architecture. Until this date it was pinned to
+# linux/amd64, which on Apple Silicon runs under Rosetta -- where forked worker processes serialise
+# once numpy is imported (the envelope's six workers gave no speed-up; measurements in
+# tasks/data_restructure_plan.md §7). Natively the tiers run 2.4x faster and the envelope ~8x. The
+# amd64 environment stays reachable as MAILLARD_PLATFORM=linux/amd64 (container maillard_validation,
+# volume maillard_conda); results agree across architectures to 7e-8 relative.
+case "$(uname -m)" in
+  arm64|aarch64) HOST_PLATFORM="linux/arm64" ;;
+  *)             HOST_PLATFORM="linux/amd64" ;;
+esac
+PLATFORM="${MAILLARD_PLATFORM:-$HOST_PLATFORM}"
+if [ "$PLATFORM" = "linux/amd64" ]; then
+  CONTAINER_NAME="${MAILLARD_CONTAINER_NAME:-maillard_validation}"
+  CONDA_VOLUME="${MAILLARD_CONDA_VOLUME:-maillard_conda}"
+else
+  CONTAINER_NAME="${MAILLARD_CONTAINER_NAME:-maillard_arm64}"
+  CONDA_VOLUME="${MAILLARD_CONDA_VOLUME:-maillard_conda_arm64}"
+fi
+JUPYTER_PORT="${MAILLARD_JUPYTER_PORT:-8888}"
 WORKSPACE_DIR="${MAILLARD_WORKSPACE_DIR:-$PWD}"
 WORKSPACE_MOUNT="/workspace"
 CONDA_SH="/opt/conda/etc/profile.d/conda.sh"
@@ -39,175 +57,96 @@ stage_into_workspace() {
   echo "$WORKSPACE_MOUNT/.cache/react_ot_uploads/$(basename "$abs_src")"
 }
 
+# NOTE: bash reads this file incrementally. Do not edit it while a `run` is in flight -- on 2026-09-03 an
+# edit made a running invocation jump into another alias's case arm.
 usage() {
   cat <<'EOF'
 Usage: ./scripts/docker_maillard.sh <command> [args...]
 
 Single Docker entrypoint for the Maillard workbench. All commands run inside
 the maillard conda env (Python 3.12) in the validated container.
+(2026-09-03, retirement step B5: the legacy screening lane's commands --
+quickstart pipeline runs, campaigns, ingest, the matrix/family report lanes --
+are gone with it. The front door is scripts/maillard.py.)
 
-══ Container lifecycle ══
+== Container lifecycle ==
   up                                 Boot the validated container (one-time).
   bootstrap                          Install the conda env + dependencies.
   shell                              Open an interactive bash shell in the env.
   status                             Show container + env status.
   notebook                           Launch Jupyter on port 8888.
 
-══ Scientist quickstart ══
-  help                               Print this help screen.
-  quickstart                         End-to-end demo: run a pea-isolate baseline
-                                     and a cysteine-enrichment comparison, then
-                                     point at the resulting report bundles.
-
-══ Scientist daily loop ══
+== Daily loop ==
   run "<command>"                    Run any command inside the env.
   pytest [PYTEST_ARGS...]            Run pytest inside the env (default: tests/).
-  ingest --file RESULTS.csv [...]    Preview + (with --confirm) land GC-MS data
-                                     through scripts/ingest_results.py.
-  campaign SPEC [OUTPUT_DIR]         Run a shareable campaign spec.
-  campaign --names "A,B" [args...]   Run a named comparison through run_campaign.
-  explain-formulation NAME [TARGET]  Explain a formulation result.
-                  [MINIMIZE]
-  compare-experiment INTAKE          Support-delta artifacts for a matrix
-                                     experiment intake payload.
+  quickstart                         Print a two-arm spec and run `maillard compare` on it.
+  compare SPEC [args...]             python scripts/maillard.py compare SPEC ...
+  predict SPEC [args...]             python scripts/maillard.py predict SPEC ...
+  explain COMPOUND                   python scripts/maillard.py explain COMPOUND
+  rank [args...]                     python scripts/maillard.py rank ...
+  score DOC [args...]                python scripts/maillard.py score DOC ... (your own measurements)
 
-══ Trust-loop artifacts (regenerate published evidence) ══
-  summary                            Benchmark summary (md + json).
-  index                              Benchmark index.
-  validated-envelope                 Per-compound 90% envelope report.
-  validation-figures                 All validation figures + report visual
-                                     examples in one bundle.
-  coverage-gaps                      Benchmark coverage gaps.
-  thermo-gating                      Thermodynamic gating audit.
-  literature-learning-loop           Literature learning loop summary.
-  external-inventory                 External validation inventory.
-  refinement-watchlist               Refinement watchlist.
-  objective-progress                 Strategic objective progress.
-  scope-guard                        Out-of-scope demotion guard.
-  family-priority                    Matrix family priority ranking.
-  family-implementation              Which of the 16 lanes actually carry reaction templates
-                                     (derived by engine enumeration; backs the README table).
-  family-next-action                 Per-family next-action recommendation.
-  family-promotion-state             Family promotion state.
-  family-ingestion-plan              Family ingestion plan.
-  matrix-family-coverage             Matrix × family coverage.
-  matrix-deltas                      Matrix benchmark deltas.
-  matrix-assertions                  Matrix benchmark assertions.
-  matrix-evidence                    Matrix benchmark evidence summary.
-  matrix-readiness                   Matrix promotion readiness.
-  matrix-promotion-contract          Matrix promotion contract.
-  matrix-closure-audit               Matrix observable closure audit.
-  matrix-calibration-refit [...]     Re-run the matrix observable recalibration.
-  matrix-branch-deltas [BASE_REF]    Matrix branch delta report (default: main).
-  refinement-governance              Selective mechanistic refinement governance.
-  mlp-assessment                     MLP backend assessment.
-  experiment-intake-schema           Matrix experiment intake schema.
-  experiment-value-ranking [...]     Rank (benchmark, compound) pairs by VoI;
-                                     emits results/validation/experiment_value_ranking.{md,json}.
-  next-experiment [--top N] [...]    Top-N experiment recommendations: prints
-                                     ranked list and writes per-candidate intake
-                                     YAML + protocol Markdown under
-                                     data/protocols/ and results/validation/experiment_requests/.
-  targets-report                     Benchmark targets report.
-  targets BENCHMARK_JSON [TYPE]      Per-benchmark target snapshot.
-  hofmann                            Hofmann 1998 selectivity diagnostic.
-  deep-research-audit                Deep-research backlog audit.
+== Evidence artifacts (regenerate what README quotes) ==
+  core-scores                        results/validation/core_panel_scores.{json,md}   (~15 s)
+  coverage                           per-module line coverage of src/ and scripts/ over both tiers (~35 min)
+  results-readme                     results/README.md (the generated map of every tracked artifact)
+  wishlist                           results/validation/data_wishlist.{json,md}: what to measure next, what it unlocks
+  core-directional                   results/validation/core_directional_scores.*     (~90 s)
+  core-envelope [args...]            results/validation/core_prediction_uncertainty.* (~40 min at n=200)
+  model-card                         Re-splice the README model card from the artifacts.
+  model-card-check                   Fail if the README model card is stale.
+  gates                              Run the six CI gates (incl. artifact_freshness_gate, ~1 min).
+  data-readme                        Regenerate data/README.md (fails on undescribed files).
+  keys                               Rebuild data/keys/compounds.yml and papers.yml.
+  experiment-value-ranking [...]     Rank (benchmark, compound) pairs by VoI.
+  deep-research-audit                Literature backlog audit.
+  family-ingestion-plan | family-priority | family-next-action | matrix-family-coverage | scope-guard
+                                     Literature-side registries and reports.
 
-══ Test lanes ══
-  core                               Unit + integration tests.
-  scientific                         Full scientific generator + regression lane.
-  scientific-fast                    Scientific regression tests only.
-  stability                          Targeted kinetics + safety tests.
-  kinetics-validation                Cantera + temperature-profile tests.
-  qm-heavy                           QM lane tests.
+== Test lanes ==
+  core                               Unit + scripts tests (fast).
+  scientific                         Integration + scientific tests.
+  all                                Everything, plus the gates.
 
-══ QM operator (selective DFT queue) ══
-  computational-gap-refinement-plan  Regenerate the selective-DFT plan + manifests.
-  computational-gap-xtb [TARGET]     Run xTB pathfinder for one or all targets.
-  computational-gap-dft-preflight    Preflight a target before DFT.
-                  [TARGET]
-  computational-gap-dft [TARGET]     Execute DFT refinement.
-  computational-gap-dft-ingest       Ingest finished DFT results.
-  computational-gap-dft-promote      Promote DFT-validated barriers.
-
-══ Extrusion observable ingestion ══
-  extrusion-closure-workbook FILE    Convert an external-closure workbook.
-  extrusion-follow-on-workbook FILE  Convert a 5.8 disulfide follow-on workbook.
-  extrusion-diagnostic-examples      Run synthetic diagnostic example bundles.
-
-══ React-OT pilot (TS guess generation) ══
-  react-ot-setup
-  react-ot-smoke [ARGS...]
-  react-ot-pilot [ARGS...]
-  react-ot-import-colab ARCHIVE [--out-dir DIR]
-  react-ot-open-colab [--github] [--open]
-  react-ot-coverage [--target TARGET ...]
-  react-ot-orchestrate [--prepare-only|--finish] [--archive PATH]
-                       [--target TARGET ...]
-
-See README.md and docs/guides/QUICKSTART.md for the recommended scientist
-flow. Trust artifacts live under results/validation/.
+See README.md and docs/guides/QUICKSTART.md for the scientist flow.
 EOF
 }
 
 core_lane() {
-  run_in_env "python -m pytest tests/unit tests/integration"
-}
-
-stability_lane() {
-  run_in_env "python -m pytest \
-    tests/unit/test_arrhenius_params.py \
-    tests/unit/test_headspace.py \
-    tests/unit/test_safety_and_flux.py \
-    tests/integration/test_recommendation_engine.py \
-    tests/integration/test_cantera_sim.py \
-    tests/integration/test_fft_bottleneck.py \
-    tests/integration/test_regression.py \
-    tests/integration/test_barrier_calibration.py"
+  run_in_env "python -m pytest tests/unit -q"
 }
 
 scientific_lane() {
-  run_in_env "python scripts/generators/generate_benchmark_summary.py"
-  run_in_env "python scripts/generators/generate_benchmark_index.py"
-  run_in_env "python scripts/generators/generate_benchmark_targets.py"
-  run_in_env "python scripts/generators/generate_matrix_benchmark_deltas.py"
-  run_in_env "python scripts/generators/generate_matrix_benchmark_assertions.py"
-  run_in_env "python scripts/generators/generate_matrix_benchmark_evidence.py"
-  run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
-  run_in_env "python scripts/generators/generate_matrix_promotion_contract.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
-  run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_mlp_assessment.py"
-  run_in_env "python scripts/generators/generate_computational_gap_refinement_plan.py --output-dir results/validation --manifest-dir results/computational_gap_refinement"
-  run_in_env "python scripts/generators/ingest_computational_gap_dft_results.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_validation_figures.py --docs-asset-dir docs/assets"
-  run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
-  run_in_env "python scripts/generators/generate_report_visual_examples.py --output-dir results/validation/report_visual_examples --docs-asset-dir docs/assets"
-  run_in_env "python scripts/generators/generate_validated_envelope_report.py"
-  run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
-  scientific_fast_lane
+  run_in_env "python -m pytest tests/scientific -q"
 }
 
-scientific_fast_lane() {
-  run_in_env "python -m pytest -m scientific_regression tests/scientific tests/unit/test_budget_projection.py tests/unit/test_safety_and_flux.py tests/integration/test_recommendation_engine.py"
+gates_lane() {
+  local gate
+  for gate in citation_gate data_readonly_gate fit_target_gate holdout_guard schema_gate artifact_freshness_gate; do
+    run_in_env "python scripts/ci/${gate}.py"
+  done
 }
 
-kinetics_validation_lane() {
-  run_in_env "python -m pytest -m kinetics_validation tests/integration/test_cantera_sim.py tests/integration/test_temp_profiles.py"
+quickstart_lane() {
+  echo "[quickstart] 1/2 writing a two-arm spec -> results/quickstart/my_comparison.yml"
+  run_in_env "mkdir -p results/quickstart && python scripts/maillard.py compare --template > results/quickstart/my_comparison.yml"
+  echo "[quickstart] 2/2 comparing the two arms on the kinetic core"
+  run_in_env "python scripts/maillard.py compare results/quickstart/my_comparison.yml --report results/quickstart/compare.html"
+  cat <<'MSG'
+[quickstart] Done. Edit results/quickstart/my_comparison.yml (precursors in mM, temp_C, time_min, ph, aw)
+and re-run:  ./scripts/docker_maillard.sh compare results/quickstart/my_comparison.yml
+Open results/quickstart/compare.html for the OAV chart, refusal cards and declared assumptions.
+MSG
 }
 
-qm_heavy_lane() {
-  run_in_env "python -m pytest tests/qm tests/integration/test_cantera_sim.py tests/integration/test_fft_bottleneck.py tests/integration/test_regression.py"
-}
-
-hofmann_diagnostic() {
-  run_in_env "python scripts/diagnose_benchmark_selectivity.py --lit data/benchmarks/cys_ribose_140C_Hofmann1998.json"
+forward_args() {
+  local out="$1"; shift
+  local arg quoted
+  for arg in "$@"; do
+    printf -v quoted '%q' "$arg"
+    out+=" $quoted"
+  done
+  echo "$out"
 }
 
 run_generator_script() {
@@ -218,73 +157,6 @@ run_generator_script() {
   else
     run_in_env "python scripts/generators/${generator_name}.py $*"
   fi
-}
-
-run_computational_gap_job() {
-  local script_name="$1"
-  local output_suffix="$2"
-  local extra_args="$3"
-  local target="${4:-}"
-  local prefix="${5:-}"
-  local command="python scripts/run_${script_name}.py ${extra_args}"
-
-  if [ -n "$target" ]; then
-    command="$command --target '$target' --output 'results/computational_gap_refinement/${target}_${output_suffix}_execution.json'"
-  fi
-
-  run_in_env "${prefix}${command}"
-}
-
-validation_figures_lane() {
-  local commands=(
-    "generate_family_lane_validation --output-dir results/validation"
-    "generate_family_deviation_audit --output-dir results/validation"
-    "generate_validation_figures --docs-asset-dir docs/assets"
-    "generate_family_validation_figures --output-dir results/validation --docs-asset-dir docs/assets"
-    "generate_report_visual_examples --output-dir results/validation/report_visual_examples --docs-asset-dir docs/assets"
-    "generate_validated_envelope_report"
-  )
-  local command
-  for command in "${commands[@]}"; do
-    run_generator_script $command
-  done
-}
-
-run_generator_alias() {
-  case "$1" in
-    targets-report) run_generator_script generate_benchmark_targets ;;
-    matrix-deltas) run_generator_script generate_matrix_benchmark_deltas ;;
-    matrix-assertions) run_generator_script generate_matrix_benchmark_assertions ;;
-    matrix-evidence) run_generator_script generate_matrix_benchmark_evidence ;;
-    matrix-readiness) run_generator_script generate_matrix_promotion_readiness ;;
-    matrix-promotion-contract) run_generator_script generate_matrix_promotion_contract --output-dir results/validation ;;
-    matrix-closure-audit) run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation ;;
-    experiment-intake-schema) run_generator_script generate_matrix_experiment_intake_schema --output-dir results/validation ;;
-    literature-learning-loop) run_generator_script generate_literature_learning_loop --output-dir results/validation ;;
-    family-ingestion-plan) run_generator_script generate_family_ingestion_plan --output-dir results/validation ;;
-    family-promotion-state) run_generator_script generate_family_promotion_state --output-dir results/validation ;;
-    matrix-family-coverage) run_generator_script generate_matrix_family_coverage ;;
-    refinement-governance) run_generator_script generate_refinement_governance --output-dir results/validation ;;
-    mlp-assessment) run_generator_script generate_mlp_assessment ;;
-    coverage-gaps) run_generator_script generate_benchmark_coverage_gaps ;;
-    thermo-gating) run_generator_script generate_thermodynamic_gating_audit ;;
-    validated-envelope) run_generator_script generate_validated_envelope_report ;;
-    index) run_generator_script generate_benchmark_index ;;
-    summary) run_generator_script generate_benchmark_summary ;;
-    objective-progress) run_generator_script generate_objective_progress ;;
-    refinement-watchlist) run_generator_script generate_refinement_watchlist --output-dir results/validation ;;
-    external-inventory) run_generator_script generate_external_validation_inventory --output-dir results/validation ;;
-    family-priority) run_generator_script generate_matrix_family_priority_ranking ;;
-    family-next-action) run_generator_script generate_matrix_family_next_action ;;
-    scope-guard) run_generator_script generate_scope_gap_guard ;;
-    family-implementation) run_generator_script generate_family_implementation_status ;;
-  esac
-}
-
-targets_snapshot() {
-  local benchmark_path="$1"
-  local target_type="${2:-desirable}"
-  run_in_env "python scripts/diagnose_benchmark_selectivity.py --lit '$benchmark_path' --targets --target-type '$target_type'"
 }
 
 container_exists() {
@@ -298,12 +170,12 @@ container_running() {
 ensure_container() {
   if ! container_exists; then
     docker run -d \
-      --platform linux/amd64 \
+      --platform "$PLATFORM" \
       --name "$CONTAINER_NAME" \
       --memory=10g \
       --memory-swap=10g \
-      -p 8888:8888 \
-      -v maillard_conda:/opt/conda \
+      -p "$JUPYTER_PORT:8888" \
+      -v "$CONDA_VOLUME:/opt/conda" \
       -v "$WORKSPACE_DIR:$WORKSPACE_MOUNT" \
       -w "$WORKSPACE_MOUNT" \
       "$IMAGE_NAME" \
@@ -334,95 +206,23 @@ bootstrap_env() {
     docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; conda create -n '$ENV_NAME' python=3.12 -y"
   fi
 
-  run_in_env "conda install -y -c conda-forge jax jaxlib wget xz jupyter ipywidgets"
-  run_in_env "pip install --index-url https://download.pytorch.org/whl/cpu torch==2.5.1"
   run_in_env "conda env update -n '$ENV_NAME' --file environment.yml"
-
-  run_in_env '
-    if ! command -v xtbiff >/dev/null 2>&1; then
-      wget -q https://github.com/grimme-lab/xtbiff/releases/download/v1.1/xtbiff.tar.xz
-      tar -xf xtbiff.tar.xz
-      mv xtbiff "$CONDA_PREFIX/bin/xtbiff"
-      chmod +x "$CONDA_PREFIX/bin/xtbiff"
-      rm -f xtbiff.tar.xz
-    fi
-  '
-
-  run_in_env "python - <<'PY'
-from pathlib import Path
-import os
-
-patches = [
-    (
-        Path(os.environ['CONDA_PREFIX']) / 'lib/python3.12/site-packages/e3nn/o3/_wigner.py',
-        \"torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))\",
-        \"torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'), weights_only=False)\",
-    ),
-    (
-        Path(os.environ['CONDA_PREFIX']) / 'lib/python3.12/site-packages/mace/calculators/mace.py',
-        \"torch.load(f=model_path, map_location=device)\",
-        \"torch.load(f=model_path, map_location=device, weights_only=False)\",
-    ),
-]
-
-for path, old, new in patches:
-    if not path.exists():
-        continue
-    text = path.read_text()
-    if new in text:
-        continue
-    if old in text:
-        path.write_text(text.replace(old, new))
-PY"
 }
 
 status() {
   ensure_container
   docker ps -a --filter "name=$CONTAINER_NAME"
   if env_exists; then
-    run_in_env "python --version && which crest && which xtbiff"
+    run_in_env "python --version && python -c 'import rdkit, cantera; print(rdkit.__version__, cantera.__version__)'"
   else
     echo "Conda environment '$ENV_NAME' has not been created yet. Run: ./scripts/docker_maillard.sh bootstrap"
   fi
-}
-
-quickstart_lane() {
-  echo "[quickstart] 1/2 baseline run -> results/quickstart/baseline/"
-  run_in_env "python scripts/run_pipeline.py \
-    --sugars ribose,glucose \
-    --amino-acids cysteine,leucine \
-    --ratios ribose:0.5,glucose:0.2,cysteine:0.2,leucine:0.1 \
-    --ph 5.5 --temp 105 --time-minutes 45 \
-    --protein-type pea_iso \
-    --target meaty --minimize beany \
-    --report --output-dir results/quickstart/baseline"
-  echo "[quickstart] 2/2 baseline vs cysteine-enrichment comparison -> results/quickstart/comparison/"
-  run_in_env "python scripts/run_campaign.py \
-    --names 'Soy/Pea Base (Untreated),Cysteine Enrichment (Basic)' \
-    --ph 5.5 --temp 105 \
-    --target-tag meaty --minimize-tag beany \
-    --campaign-name 'Quickstart pea-isolate head-to-head' \
-    --output-dir results/quickstart/comparison"
-  cat <<'MSG'
-
-[quickstart] Done. Inspect:
-  - results/quickstart/baseline/report.md                   (per-compound table + confidence + glossary)
-  - results/quickstart/baseline/compound_confidence_overlay.png
-  - results/quickstart/comparison/comparison.md             (side-by-side + intervention waterfall)
-  - results/quickstart/comparison/comparison_intervention_waterfall.png
-
-Next: ./scripts/docker_maillard.sh help        # full command surface
-      docs/guides/QUICKSTART.md                # the daily loop, including ingest
-MSG
 }
 
 cmd="${1:-}"
 case "$cmd" in
   help|--help|-h)
     usage
-    ;;
-  quickstart)
-    quickstart_lane
     ;;
   up)
     ensure_container
@@ -446,8 +246,12 @@ case "$cmd" in
       run_in_env "python -m pytest $*"
     fi
     ;;
-  stability)
-    stability_lane
+  quickstart)
+    quickstart_lane
+    ;;
+  compare|predict|explain|rank|rank-experiments|score|wishlist)
+    verb="$cmd"; shift
+    run_in_env "$(forward_args "python scripts/maillard.py $verb" "$@")"
     ;;
   core)
     core_lane
@@ -455,225 +259,58 @@ case "$cmd" in
   scientific)
     scientific_lane
     ;;
-  scientific-fast)
-    scientific_fast_lane
+  all)
+    core_lane
+    scientific_lane
+    gates_lane
     ;;
-  kinetics-validation)
-    kinetics_validation_lane
+  coverage)
+    # per-module line coverage of src/ and scripts/ over both tiers (wave generators omitted on purpose)
+    run_in_env "coverage erase && coverage run -m pytest tests/unit tests/scientific -q -p no:cacheprovider && coverage combine -q && coverage report --sort=cover"
     ;;
-  qm-heavy)
-    qm_heavy_lane
+  gates)
+    gates_lane
     ;;
-  hofmann)
-    hofmann_diagnostic
+  core-scores)
+    run_generator_script generate_core_panel_scores
     ;;
-  targets)
+  core-directional)
+    run_generator_script generate_core_directional_scores
+    ;;
+  core-envelope)
     shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh targets BENCHMARK_JSON [TYPE]" >&2
-      exit 1
-    fi
-    targets_snapshot "$1" "${2:-desirable}"
+    run_in_env "$(forward_args "python scripts/generators/generate_core_prediction_uncertainty.py" "$@")"
     ;;
-  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary|objective-progress|refinement-watchlist|external-inventory|family-priority|family-next-action|scope-guard|family-implementation)
-    run_generator_alias "$cmd"
+  model-card)
+    run_generator_script generate_model_card
     ;;
-  ingest)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh ingest --file RESULTS.csv [INGEST_ARGS...]" >&2
-      exit 1
-    fi
-    ingest_cmd="python scripts/ingest_results.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      ingest_cmd+=" $quoted_arg"
-    done
-    run_in_env "$ingest_cmd"
+  model-card-check)
+    run_generator_script generate_model_card --check
     ;;
-  matrix-calibration-refit)
-    shift
-    refit_cmd="python scripts/generators/generate_matrix_calibration_refit.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      refit_cmd+=" $quoted_arg"
-    done
-    run_in_env "$refit_cmd"
+  wishlist)
+    run_generator_script generate_data_wishlist
+    ;;
+  results-readme)
+    run_generator_script build_results_readme
+    ;;
+  data-readme)
+    run_generator_script build_data_readme
+    ;;
+  keys)
+    run_generator_script build_compound_registry
+    run_generator_script build_paper_registry
     ;;
   experiment-value-ranking)
     shift
-    rank_cmd="python scripts/generators/generate_experiment_value_ranking.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      rank_cmd+=" $quoted_arg"
-    done
-    run_in_env "$rank_cmd"
+    run_in_env "$(forward_args "python scripts/generators/generate_experiment_value_ranking.py" "$@")"
     ;;
-  next-experiment)
-    shift
-    next_cmd="python scripts/request_experiment.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      next_cmd+=" $quoted_arg"
-    done
-    run_in_env "$next_cmd"
-    ;;
-  compare-experiment)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh compare-experiment INTAKE_FILE" >&2
-      exit 1
-    fi
-    run_in_env "python scripts/generators/compare_matrix_experiment_intake.py --experiment '$1' --output-dir results/validation"
-    ;;
-  extrusion-closure-workbook)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh extrusion-closure-workbook WORKBOOK_FILE" >&2
-      exit 1
-    fi
-    run_in_env "python scripts/generators/process_extrusion_external_closure_workbook.py --workbook '$1' --output-dir results/validation"
-    ;;
-  extrusion-follow-on-workbook)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh extrusion-follow-on-workbook WORKBOOK_FILE" >&2
-      exit 1
-    fi
-    run_in_env "python scripts/generators/process_extrusion_disulfide_follow_on_workbook.py --workbook '$1' --output-dir results/validation"
-    ;;
-  extrusion-diagnostic-examples)
-    run_generator_script generate_extrusion_diagnostic_examples
-    ;;
-  computational-gap-refinement-plan)
-    run_generator_script generate_computational_gap_refinement_plan --output-dir results/validation --manifest-dir results/computational_gap_refinement
-    ;;
-  computational-gap-xtb)
-    shift
-    run_computational_gap_job computational_gap_xtb xtb "--execute" "${1:-}"
-    ;;
-  computational-gap-dft-preflight)
-    shift
-    run_computational_gap_job computational_gap_dft dft "--preflight-only" "${1:-}"
-    ;;
-  computational-gap-dft)
-    shift
-    run_computational_gap_job computational_gap_dft dft "--execute" "${1:-}" "exec "
-    ;;
-  computational-gap-dft-ingest)
-    run_generator_script ingest_computational_gap_dft_results --output-dir results/validation
-    ;;
-  computational-gap-dft-promote)
-    run_generator_script promote_computational_gap_dft_results --output-dir results/validation
-    ;;
-  matrix-branch-deltas)
-    shift
-    run_in_env "python scripts/compare_matrix_benchmark_branches.py --base-ref '${1:-main}'"
-    ;;
-  validation-figures)
-    validation_figures_lane
-    ;;
-  explain-formulation)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]" >&2
-      exit 1
-    fi
-    run_in_env "python scripts/explain_formulation.py --name '$1' --target-tag '${2:-meaty}' --minimize-tag '${3:-beany}'"
-    ;;
-  campaign)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh campaign SPEC [OUTPUT_DIR]" >&2
-      echo "   or: ./scripts/docker_maillard.sh campaign --names \"A,B\" [extra run_campaign args]" >&2
-      exit 1
-    fi
-    if [ "${1#--}" != "$1" ]; then
-      cmd="python scripts/run_campaign.py"
-      for arg in "$@"; do
-        printf -v quoted_arg '%q' "$arg"
-        cmd+=" $quoted_arg"
-      done
-      run_in_env "$cmd"
-    elif [ "$#" -ge 2 ]; then
-      run_in_env "python scripts/run_campaign.py --spec '$1' --output-dir '$2'"
-    else
-      run_in_env "python scripts/run_campaign.py --spec '$1'"
-    fi
-    ;;
+  family-ingestion-plan) run_generator_script generate_family_ingestion_plan --output-dir results/validation ;;
+  family-priority) run_generator_script generate_matrix_family_priority_ranking ;;
+  family-next-action) run_generator_script generate_matrix_family_next_action ;;
+  matrix-family-coverage) run_generator_script generate_matrix_family_coverage ;;
+  scope-guard) run_generator_script generate_scope_gap_guard ;;
   deep-research-audit)
     run_in_env "python scripts/deep_research_tracker.py"
-    ;;
-  react-ot-setup)
-    ensure_container
-    REACT_OT_SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-    bash "${REACT_OT_SCRIPT_DIR}/setup_react_ot_env.sh"
-    ;;
-  react-ot-smoke)
-    shift
-    cmd="python scripts/run_react_ot_smoke.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-pilot)
-    shift
-    cmd="python scripts/recover_ts_react_ot_seed.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-import-colab)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh react-ot-import-colab ARCHIVE [--out-dir DIR]" >&2
-      exit 1
-    fi
-    cmd="python scripts/import_react_ot_colab_artifacts.py"
-    first=1
-    for arg in "$@"; do
-      if [ "$first" = "1" ]; then
-        arg="$(stage_into_workspace "$arg")"
-        first=0
-      fi
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-open-colab)
-    shift
-    # Runs on the host so a browser can actually be opened.
-    python3 "$(cd "$(dirname "$0")" && pwd)/open_react_ot_colab.py" "$@"
-    ;;
-  react-ot-coverage)
-    shift
-    cmd="python scripts/report_react_ot_seed_coverage.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-orchestrate)
-    shift
-    cmd="python scripts/orchestrate_react_ot_colab.py"
-    next_is_archive=0
-    for arg in "$@"; do
-      if [ "$next_is_archive" = "1" ]; then
-        arg="$(stage_into_workspace "$arg")"
-        next_is_archive=0
-      elif [ "$arg" = "--archive" ]; then
-        next_is_archive=1
-      fi
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"

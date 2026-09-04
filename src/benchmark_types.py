@@ -127,8 +127,8 @@ class BenchmarkSummary:
     #   "predictive"         — external literature measurement; the model was not fitted
     #                          to it, so agreement is evidence.
     #   "fit_recovery"       — the constants under test were BACK-SOLVED from this
-    #                          benchmark's own measured values (see
-    #                          matrix_calibration_registry.fitted_to_benchmark_lanes).
+    #                          benchmark's own measured values (a fit record with per-row
+    #                          leverage names it: src/fit_target_index.py).
     #                          Agreement here is algebraic recovery, NOT a prediction, and
     #                          such rows are excluded from literature-coverage counts.
     #   "internal_synthetic" — the comparator is model output frozen as a reproducibility

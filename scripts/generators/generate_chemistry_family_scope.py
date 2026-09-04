@@ -11,13 +11,14 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src import data_paths  # noqa: E402
 from src.chemistry_family_scope import (  # noqa: E402
     build_chemistry_family_scope_artifact,
     render_chemistry_family_scope_markdown,
 )
 
 
-OUTPUT_DIR = ROOT / "results" / "validation"
+OUTPUT_DIR = data_paths.VALIDATION_DIR
 
 
 def main(argv: list[str] | None = None) -> int:

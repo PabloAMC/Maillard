@@ -4,9 +4,8 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
-
-ROOT = Path(__file__).resolve().parents[1]
-INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
+from src import data_paths
+from src import data_access
 
 LEGACY_STATUS_TO_TRIAGE_STATUS = {
     "ready_for_reference_encoding": "ready_reference",
@@ -44,15 +43,15 @@ ARTIFACT_TYPE_TO_TEMPLATE_KIND = {
 }
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+def _under_root(root: Path, path: Path) -> Path:
+    """``path`` (a ``data_paths`` constant) re-rooted under a scratch ``root``."""
+    if Path(root).resolve() == data_paths.REPO_ROOT:
+        return path
+    return root / data_paths.rel(path)
 
 
-def load_intake_registry(root: Path = ROOT) -> Dict[str, Any]:
-    return _load_json(root / "data" / "lit" / "benchmark_intake_registry.json")
+def load_intake_registry(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
+    return data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
 
 
 def _iter_payload_entries(payload: Any, *, section_name: Optional[str] = None) -> Iterable[Dict[str, Any]]:
@@ -79,7 +78,7 @@ def canonical_template_kind_for_artifact(artifact_type: str) -> str:
     return ARTIFACT_TYPE_TO_TEMPLATE_KIND.get(normalized, normalized)
 
 
-def _artifact_exists(artifact: Mapping[str, Any], *, root: Path = ROOT) -> bool:
+def _artifact_exists(artifact: Mapping[str, Any], *, root: Path = data_paths.REPO_ROOT) -> bool:
     path = root / str(artifact.get("path", ""))
     if not path.exists():
         return False
@@ -89,7 +88,7 @@ def _artifact_exists(artifact: Mapping[str, Any], *, root: Path = ROOT) -> bool:
     if not artifact_id or artifact_type == "benchmark":
         return True
 
-    payload = _load_json(path)
+    payload = data_access.load_json(path)
     if artifact_type == "intake_registry_entry":
         return any(str(entry.get("id", "")) == artifact_id for entry in payload.get("eligible_references", []))
     if artifact_type == "slr_incorporation_ledger":
@@ -140,7 +139,7 @@ def normalize_triage_status(entry: Mapping[str, Any]) -> str:
     return LEGACY_STATUS_TO_TRIAGE_STATUS.get(legacy_status, legacy_status or "unknown")
 
 
-def _normalize_runtime_artifacts(entry: Mapping[str, Any], *, root: Path = ROOT) -> List[Dict[str, Any]]:
+def _normalize_runtime_artifacts(entry: Mapping[str, Any], *, root: Path = data_paths.REPO_ROOT) -> List[Dict[str, Any]]:
     runtime_artifacts: List[Dict[str, Any]] = []
     for artifact in entry.get("runtime_artifacts", []) or []:
         artifact_row = dict(artifact)
@@ -167,7 +166,7 @@ def _determine_backlog_queue(*, triage_status: str, encoding_status: str, templa
     return "ready_runtime"
 
 
-def normalize_intake_entry(entry: Mapping[str, Any], *, root: Path = ROOT) -> Dict[str, Any]:
+def normalize_intake_entry(entry: Mapping[str, Any], *, root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     runtime_artifacts = _normalize_runtime_artifacts(entry, root=root)
     runtime_artifacts_present = bool(runtime_artifacts) and all(bool(item.get("exists", False)) for item in runtime_artifacts)
     triage_status = normalize_triage_status(entry)
@@ -200,7 +199,7 @@ def normalize_intake_entry(entry: Mapping[str, Any], *, root: Path = ROOT) -> Di
     }
 
 
-def build_intake_reference_rows(root: Path = ROOT) -> List[Dict[str, Any]]:
+def build_intake_reference_rows(root: Path = data_paths.REPO_ROOT) -> List[Dict[str, Any]]:
     intake = load_intake_registry(root)
     rows: List[Dict[str, Any]] = []
     for entry in intake.get("eligible_references", []):
@@ -220,7 +219,7 @@ def build_intake_reference_rows(root: Path = ROOT) -> List[Dict[str, Any]]:
     return rows
 
 
-def build_literature_backlog_artifact(root: Path = ROOT) -> Dict[str, Any]:
+def build_literature_backlog_artifact(root: Path = data_paths.REPO_ROOT) -> Dict[str, Any]:
     intake = load_intake_registry(root)
     reference_rows = build_intake_reference_rows(root)
     ready_runtime = [row for row in reference_rows if row.get("backlog_queue") == "ready_runtime"]
@@ -259,7 +258,7 @@ def build_literature_backlog_artifact(root: Path = ROOT) -> Dict[str, Any]:
 
     return {
         "schema_version": "1.0",
-        "source": INTAKE_REGISTRY_PATH.relative_to(ROOT).as_posix(),
+        "source": data_paths.rel(data_paths.BENCHMARK_INTAKE_REGISTRY),
         "queue_policy": "ready queues are exclusive to non-encoded intake rows; wet_lab_blocked comes only from structural gaps with closure_outcome=wet_lab_only",
         "intake_reference_rows": reference_rows,
         "ready_runtime": ready_runtime,

@@ -46,10 +46,12 @@ import json
 import math
 from dataclasses import dataclass
 from functools import lru_cache
-from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-_CALIBRATION_PATH = Path(__file__).resolve().parents[1] / "data" / "lit" / "lipid_oxidation_calibration.json"
+from src import data_paths
+from src import data_access
+
+_CALIBRATION_PATH = data_paths.LIPID_OXIDATION_CALIBRATION
 
 # Fallback constants matching the pre-S27 hardcoded behaviour, used only when the
 # calibration file is missing or malformed (so the module never hard-fails).
@@ -72,10 +74,9 @@ _FORMULATION_PROXY_SCALE = 1.0e4
 
 @lru_cache(maxsize=1)
 def _load_calibration() -> dict[str, Any]:
-    try:
-        return json.loads(_CALIBRATION_PATH.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return {}
+    # Strict since 2026-09-01: an unreadable calibration used to fall back to the
+    # inline _FALLBACK_KINETICS silently.
+    return data_access.load_json(_CALIBRATION_PATH)
 
 
 def _kinetics() -> dict[str, Any]:

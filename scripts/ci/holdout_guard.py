@@ -12,14 +12,13 @@ Three independent mechanisms keep them out. This guard asserts all three
 1. **Data-side label.** Every JSON under ``data/benchmarks/external_validation/``
    -- *including its subdirectories* -- declares
    ``evidence_class: external_validation_only`` at top level.
-2. **Code-side refusal.** ``src/matrix_experiment_intake.calibrate_from_intake``
-   raises on an ``external_validation_only`` payload rather than calibrating it.
-3. **Discovery-side isolation.** ``src.benchmark_validation.get_benchmark_files``
-   globs ``*.json`` **non-recursively**, so the ``external_validation/``
-   subdirectory is never picked up by default benchmark discovery. A change to
-   ``rglob`` or ``**/*.json`` would silently pull the hold-out set into the
-   calibration corpus; that is the single highest-consequence one-character
-   regression in this repo.
+2. **Fit-side isolation (2026-09-03, B5b).** No core fit generator
+   (``scripts/generators/generate_kinetic_core_*_fit.py``) carries a string that
+   names the hold-out directory.
+3. **Discovery-side isolation.** ``src.kinetic_core.panel.panel_bundles`` globs
+   ``*.json`` **non-recursively** per panel directory and tags each bundle; a
+   change to ``rglob`` or ``**/*.json`` would silently pull quarantined bundles
+   into the scored panel.
 
 A fourth check was added on 2026-08-27 (Wave U), when the hold-out gained its
 first bundles that actually execute the reaction network:
@@ -57,21 +56,14 @@ ROOT = Path(__file__).resolve().parents[2]
 
 BENCHMARK_ROOT = ROOT / "data" / "benchmarks"
 HOLDOUT_DIR = BENCHMARK_ROOT / "external_validation"
-INTAKE_MODULE = ROOT / "src" / "matrix_experiment_intake.py"
-VALIDATION_MODULE = ROOT / "src" / "benchmark_validation.py"
+FIT_GENERATOR_DIR = ROOT / "scripts" / "generators"
+PANEL_MODULE = ROOT / "src" / "kinetic_core" / "panel.py"
+HOLDOUT_PATH_MARKERS = ("external_validation", "maillard_path")
 
 EVIDENCE_CLASS = "external_validation_only"
 MAILLARD_PATH_FLAG = "maillard_path_holdout"
 REQUIRED_EXECUTION_PATH = "free_precursor"
-GUARDED_FUNCTION = "calibrate_from_intake"
-DISCOVERY_FUNCTION = "get_benchmark_files"
-
-# Substrings that must appear in the guard's raise message, so that deleting the
-# guard while keeping a same-named function still fails this check.
-GUARD_MESSAGE_MARKERS = (
-    "Refusing to calibrate",
-    "hold-out",
-)
+DISCOVERY_FUNCTION = "panel_bundles"
 
 # Glob methods / patterns that would defeat the non-recursive discovery invariant.
 RECURSIVE_GLOB_METHODS = frozenset({"rglob"})
@@ -121,64 +113,69 @@ def _find_function(tree: ast.Module, name: str) -> ast.FunctionDef | ast.AsyncFu
     return None
 
 
-def check_calibration_guard(failures: list[str]) -> None:
-    rel = INTAKE_MODULE.relative_to(ROOT).as_posix()
-    if not INTAKE_MODULE.is_file():
-        failures.append(f"{rel} is missing")
+def check_fit_generators_never_open_the_holdout(failures: list[str]) -> None:
+    """Check 2 (2026-09-03, retirement step B5b): no core FIT generator names the hold-out.
+
+    The legacy intake guard (``matrix_experiment_intake.calibrate_from_intake``) is gone
+    with the lane it guarded. The kinetic core is fitted by
+    ``scripts/generators/generate_kinetic_core_*_fit.py``; none of them may carry a string
+    constant that points into ``data/benchmarks/external_validation/``. (The one hold-out row
+    the sulfur fit DID read, Hofmann 1998 xylose pH 5, is declared in
+    ``src/kinetic_core/fit_targets.py`` and flagged on every scorecard row; it entered the
+    fit as a literal table row, not by opening the bundle -- which is exactly why this check
+    exists.)
+    """
+    generators = sorted(FIT_GENERATOR_DIR.glob("generate_kinetic_core_*_fit.py"))
+    if not generators:
+        failures.append(f"no core fit generators found under {FIT_GENERATOR_DIR.relative_to(ROOT)}")
         return
-
-    source = INTAKE_MODULE.read_text(encoding="utf-8")
-    tree = ast.parse(source)
-    func = _find_function(tree, GUARDED_FUNCTION)
-    if func is None:
-        failures.append(f"{rel}: function {GUARDED_FUNCTION}() not found")
-        return
-
-    body = ast.get_source_segment(source, func) or ""
-
-    if EVIDENCE_CLASS not in body:
-        failures.append(
-            f"{rel}:{func.lineno} {GUARDED_FUNCTION}() no longer mentions "
-            f"{EVIDENCE_CLASS!r} - the hold-out refusal has been removed."
-        )
-        return
-
-    # The guard must actually raise, not merely warn or log.
-    raises_in_guard = any(
-        isinstance(node, ast.Raise) for node in ast.walk(func)
-    )
-    if not raises_in_guard:
-        failures.append(
-            f"{rel}:{func.lineno} {GUARDED_FUNCTION}() references {EVIDENCE_CLASS!r} "
-            "but contains no raise statement - the guard must refuse, not warn."
-        )
-
-    missing = [m for m in GUARD_MESSAGE_MARKERS if m not in body]
-    if missing:
-        failures.append(
-            f"{rel}:{func.lineno} {GUARDED_FUNCTION}() guard message lost expected "
-            f"marker(s) {missing!r}. If the wording changed deliberately, update "
-            "GUARD_MESSAGE_MARKERS in scripts/ci/holdout_guard.py in the same commit."
-        )
-
-    if not failures:
-        print(f"  [2/4] calibration guard: {GUARDED_FUNCTION}() raises on {EVIDENCE_CLASS}.")
+    before = len(failures)
+    for path in generators:
+        rel = path.relative_to(ROOT).as_posix()
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        # Docstrings and bare string statements are prose (they may well DISCUSS the
+        # hold-out); only strings that feed code count.
+        prose = {
+            id(node.value)
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant)
+            and isinstance(node.value.value, str)
+        }
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Constant) and isinstance(node.value, str) and id(node) not in prose:
+                value = node.value.strip()
+                # A PATH has no spaces (or is a glob / a .json name); a sentence that
+                # discloses "... external_validation/ was never opened" is a declaration.
+                looks_like_path = (" " not in value) or value.endswith(".json") or "*" in value
+                if looks_like_path and any(marker in value for marker in HOLDOUT_PATH_MARKERS):
+                    failures.append(
+                        f"{rel}:{node.lineno} names the hold-out ({node.value!r}). A fit "
+                        "generator must not open, glob or reference the hold-out directory."
+                    )
+    if len(failures) == before:
+        print(f"  [2/4] fit isolation: {len(generators)} core fit generator(s) never name the hold-out.")
 
 
 def check_non_recursive_discovery(failures: list[str]) -> None:
-    rel = VALIDATION_MODULE.relative_to(ROOT).as_posix()
-    if not VALIDATION_MODULE.is_file():
+    """Check 3: the core panel's discovery must stay a literal, non-recursive glob.
+
+    ``src/kinetic_core/panel.py::panel_bundles`` reads three directories on purpose (the
+    trust loop, the maillard_path hold-out, the external matrix bundles) and TAGS each
+    bundle with its panel. What it must never do is recurse: a ``**`` or ``rglob`` would
+    pull quarantined and step-level-unreachable bundles -- or a future subdirectory -- into
+    the scored panel silently.
+    """
+    rel = PANEL_MODULE.relative_to(ROOT).as_posix()
+    if not PANEL_MODULE.is_file():
         failures.append(f"{rel} is missing")
         return
-
-    source = VALIDATION_MODULE.read_text(encoding="utf-8")
+    source = PANEL_MODULE.read_text(encoding="utf-8")
     tree = ast.parse(source)
     func = _find_function(tree, DISCOVERY_FUNCTION)
     if func is None:
         failures.append(f"{rel}: function {DISCOVERY_FUNCTION}() not found")
         return
-
-    glob_calls: list[tuple[str, str]] = []  # (method, pattern-or-'<dynamic>')
+    glob_calls: list[tuple[str, str]] = []
     for node in ast.walk(func):
         if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
             method = node.func.attr
@@ -188,35 +185,18 @@ def check_non_recursive_discovery(failures: list[str]) -> None:
                 else:
                     pattern = "<dynamic>"
                 glob_calls.append((method, pattern))
-
     if not glob_calls:
         failures.append(
-            f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}() performs no recognisable glob. "
-            "This guard can no longer verify that hold-out files stay out of default "
-            "benchmark discovery; re-express the check or restore a literal glob."
+            f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}() performs no recognisable glob; "
+            "re-express the check or restore a literal glob."
         )
         return
-
     for method, pattern in glob_calls:
-        if method in RECURSIVE_GLOB_METHODS:
+        if method in RECURSIVE_GLOB_METHODS or RECURSIVE_PATTERN_MARKER in pattern or method == "walk" or pattern == "<dynamic>":
             failures.append(
-                f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}() uses .{method}() - recursive "
-                "discovery pulls data/benchmarks/external_validation/ into the default "
-                "benchmark corpus and destroys the hold-out."
+                f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}() uses {method}({pattern!r}): "
+                "panel discovery must be a literal non-recursive glob."
             )
-        elif RECURSIVE_PATTERN_MARKER in pattern:
-            failures.append(
-                f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}() globs {pattern!r} - the '**' "
-                "wildcard recurses into data/benchmarks/external_validation/ and destroys "
-                "the hold-out."
-            )
-        elif method == "walk" or pattern == "<dynamic>":
-            failures.append(
-                f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}() uses a non-literal or "
-                f"walk-based discovery ({method}, pattern={pattern!r}); this guard cannot "
-                "statically prove the hold-out stays excluded."
-            )
-
     if not any(f.startswith(f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}") for f in failures):
         patterns = ", ".join(f"{m}({p!r})" for m, p in glob_calls)
         print(f"  [3/4] discovery isolation: {DISCOVERY_FUNCTION}() uses {patterns} (non-recursive).")
@@ -315,7 +295,7 @@ def main() -> int:
     failures: list[str] = []
 
     check_evidence_class(failures)
-    check_calibration_guard(failures)
+    check_fit_generators_never_open_the_holdout(failures)
     check_non_recursive_discovery(failures)
     check_maillard_path_bundles(failures)
 

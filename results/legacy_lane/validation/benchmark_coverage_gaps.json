@@ -1,0 +1,123 @@
+[
+  {
+    "dimension": "protein_system",
+    "category": "free",
+    "benchmark_count": 16,
+    "status": "covered",
+    "note": "present in current benchmark set"
+  },
+  {
+    "dimension": "protein_system",
+    "category": "pea_iso",
+    "benchmark_count": 3,
+    "status": "covered",
+    "note": "present in current benchmark set"
+  },
+  {
+    "dimension": "protein_system",
+    "category": "soy_iso",
+    "benchmark_count": 2,
+    "status": "covered",
+    "note": "present in current benchmark set"
+  },
+  {
+    "dimension": "protein_system",
+    "category": "pea_conc",
+    "benchmark_count": 0,
+    "status": "gap",
+    "note": "no benchmark currently covers this protein system"
+  },
+  {
+    "dimension": "protein_system",
+    "category": "soy_conc",
+    "benchmark_count": 0,
+    "status": "gap",
+    "note": "no benchmark currently covers this protein system"
+  },
+  {
+    "dimension": "protein_system",
+    "category": "myco",
+    "benchmark_count": 0,
+    "status": "gap",
+    "note": "no benchmark currently covers this protein system"
+  },
+  {
+    "dimension": "process_state",
+    "category": "ambient_slurry",
+    "benchmark_count": 2,
+    "status": "covered",
+    "note": "present in current benchmark set"
+  },
+  {
+    "dimension": "process_state",
+    "category": "aqueous_pre_extrusion_model",
+    "benchmark_count": 2,
+    "status": "covered",
+    "note": "present in current benchmark set"
+  },
+  {
+    "dimension": "process_state",
+    "category": "heated_matrix",
+    "benchmark_count": 2,
+    "status": "covered",
+    "note": "present in current benchmark set"
+  },
+  {
+    "dimension": "execution_path",
+    "category": "free_precursor",
+    "benchmark_count": 16,
+    "status": "covered",
+    "note": "free-AA sulfur and safety envelope"
+  },
+  {
+    "dimension": "execution_path",
+    "category": "matrix_only",
+    "benchmark_count": 3,
+    "status": "covered",
+    "note": "matrix off-flavour intake/headspace envelope"
+  },
+  {
+    "dimension": "execution_path",
+    "category": "matrix_precursor_augmented",
+    "benchmark_count": 2,
+    "status": "covered",
+    "note": "matrix meaty-positive reproducibility harness envelope"
+  },
+  {
+    "dimension": "scientific_gap",
+    "category": "external_matrix_meaty_positive",
+    "benchmark_count": 0,
+    "status": "gap",
+    "note": "wet-lab quantitative meaty-positive matrix benchmarks are the main blocker for broad alt-protein validation"
+  },
+  {
+    "dimension": "structural_gap",
+    "category": "ppi_meaty_positive_matrix_benchmark",
+    "benchmark_count": 0,
+    "status": "gap",
+    "note": "No benchmark-eligible paper exists; the SLR confirms this is a structural literature gap rather than an encoding backlog. Near misses: nishimura_abe_2024, pmc9905368_spi_hvp_xylose_benchmark.",
+    "requires_primary_data": true,
+    "closure_outcome": "wet_lab_only",
+    "evidence_state": "still_missing"
+  },
+  {
+    "dimension": "structural_gap",
+    "category": "spi_meaty_positive_matrix_benchmark",
+    "benchmark_count": 0,
+    "status": "gap",
+    "note": "The SPI-side literature bifurcates into soy hydrolysate sulfur chemistry and separate off-flavour papers; no single benchmark-eligible package closes the mixed meaty-positive contract. Near misses: nishimura_abe_2024, trikusuma_2019, pmc9905368_spi_hvp_xylose_benchmark.",
+    "requires_primary_data": true,
+    "closure_outcome": "wet_lab_only",
+    "evidence_state": "still_missing"
+  },
+  {
+    "dimension": "structural_gap",
+    "category": "meaty_off_flavour_safety_tradeoff_panel",
+    "benchmark_count": 0,
+    "status": "gap",
+    "note": "The literature still splits meaty chemistry, off-flavour suppression, and safety endpoints across different studies, so there is no external benchmark package to promote honestly. Near misses: pmc9905368_spi_hvp_xylose_benchmark, trikusuma_2019, squeo_2023.",
+    "requires_primary_data": true,
+    "closure_outcome": "wet_lab_only",
+    "evidence_state": "still_missing"
+  }
+]
