@@ -1,6 +1,6 @@
 # Hofmann & Schieberle 2002 — Chemical interactions between odor-active thiols and melanoidins involved in the aroma staling of coffee beverages
 
-### Per-paper extraction, 2026-09-04, from the full text supplied by the owner (`data/articles/hofmann2001b.pdf`; the article was published on the web 12/07/2001 and printed in the 2002 volume, hence the file name). **Nothing in `src/`, `tests/` or `results/` was changed by this extraction; it records what the code already cites and whether the paper supports it.**
+### Per-paper extraction, 2026-09-04, from the full text supplied by the owner (`data/articles/hofmann2001.pdf`; the article was published on the web 12/07/2001 and printed in the 2002 volume, hence the file name). **Nothing in `src/`, `tests/` or `results/` was changed by this extraction; it records what the code already cites and whether the paper supports it.**
 
 **Provenance codes:** **[M]** measured and printed · **[F]** fitted by the authors · **[D]** derived by this extraction from a printed figure or table · **[NEG]** verified negative.
 
@@ -10,7 +10,7 @@
 
 | field | value | how verified |
 |---|---|---|
-| file on disk | `data/articles/hofmann2001b.pdf` (8 pages) | read in full |
+| file on disk | `data/articles/hofmann2001.pdf` (8 pages) | read in full |
 | title | "Chemical Interactions between Odor-Active Thiols and Melanoidins Involved in the Aroma Staling of Coffee Beverages" | p. 319 |
 | authors | Thomas Hofmann and Peter Schieberle, Deutsche Forschungsanstalt für Lebensmittelchemie, Garching | p. 319 |
 | DOI | `10.1021/jf010823n` | p. 319 footer |

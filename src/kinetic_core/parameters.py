@@ -179,11 +179,15 @@ class KineticParameter:
 #     300 dpi render after finding that the PDF text layer STRIPS THE MINUS
 #     SIGN FROM EVERY EXPONENT in this table (inventory lines 116-120). Those
 #     two rows are the only ones the inventory prints with an uncertainty.
-#   * steps 2-8 and 10 are taken from the repository's existing transcription
-#     in scripts/generators/generate_trunk_rate_calibration.py (MARTINS_M4),
-#     whose Ea are the printed ROUNDED values. Their k-side 95% HPDs are NOT
-#     transcribed anywhere in the repository; the flag
-#     'k_hpd_not_transcribed' says so on every affected row.
+#   * steps 2-8 and 10: k_ref from the repository's existing transcription
+#     (scripts/generators/generate_trunk_rate_calibration.py, MARTINS_M4; three
+#     significant digits, from the thesis table). On 2026-09-04 the PDF's
+#     Table 2 was read in full (data/lit/extraction_dossiers/martins2005_extraction.md)
+#     and BOTH 95% HPDs were transcribed for every step: the k-side HPDs (never
+#     in the repository before) and the printed Ea HPDs, which replaced two
+#     rounded/mis-transcribed values: step 3 +/-1.9 (was 3.0) and step 10
+#     +/-63.4 (was 36.0 -- the digits of the k-side HPD 3.6e-5). k_ref and Ea
+#     themselves are unchanged; no prediction moves.
 #   * the two transcriptions disagree slightly on step 1: the inventory gives
 #     Ea 96.8 +/- 2.8 and X 1.6e-5, the repo table 97.0 +/- 3.0 and 1.61e-5.
 #     The inventory's value is used, being the re-read one; the difference is
@@ -258,17 +262,17 @@ MARTINS_M4: Mapping[str, KineticParameter] = {
     ),
     "k_glc_fru": _martins(
         "k_glc_fru", "Glc -> Fru (Lobry de Bruyn-Alberda van Ekenstein)",
-        1.64e-3, 123.0, 5.0, 1, 2, flags=("k_hpd_not_transcribed", "ea_printed_rounded")),
+        1.64e-3, 123.0, 5.2, 1, 2, k_ci=1.0e-4, flags=("hpd_transcribed_from_table2_2026_09_04")),
     "k_fru_glc": _martins(
         "k_fru_glc", "Fru -> Glc (reverse isomerisation)",
-        9.15e-3, 93.0, 3.0, 1, 3, flags=("k_hpd_not_transcribed", "ea_printed_rounded")),
+        9.15e-3, 93.0, 1.9, 1, 3, k_ci=1.9e-3, flags=("hpd_transcribed_from_table2_2026_09_04")),
     "k_ama_tdg": _martins(
         "k_ama_tdg", "Amadori (DFG) -> 3-deoxyglucosone + Gly",
-        1.11e-2, 97.0, 2.0, 1, 4, flags=("k_hpd_not_transcribed", "ea_printed_rounded")),
+        1.11e-2, 97.0, 1.7, 1, 4, k_ci=4.0e-4, flags=("hpd_transcribed_from_table2_2026_09_04")),
     "k_tdg_fa": _martins(
         "k_tdg_fa", "3-deoxyglucosone -> formic acid (+ unmeasured C5 residue)",
-        3.45e-2, 30.0, 9.0, 1, 5,
-        flags=("k_hpd_not_transcribed", "ea_printed_rounded", "ea_conflicts_with_knol_2010"),
+        3.45e-2, 30.0, 8.5, 1, 5, k_ci=6.4e-3,
+        flags=("hpd_transcribed_from_table2_2026_09_04", "ea_conflicts_with_knol_2010"),
         note=(
             "Ea 30 +/- 9 kJ/mol is the lowest barrier in the Martins set and it "
             "CONFLICTS with Knol 2010 T2's formic-acid formation Ea of 84 +/- 14 "
@@ -280,14 +284,14 @@ MARTINS_M4: Mapping[str, KineticParameter] = {
         )),
     "k_ama_mgo": _martins(
         "k_ama_mgo", "Amadori (DFG) -> methylglyoxal + Gly (+ unmeasured C3 residue)",
-        7.08e-3, 125.0, 5.0, 1, 6, flags=("k_hpd_not_transcribed", "ea_printed_rounded")),
+        7.08e-3, 125.0, 4.7, 1, 6, k_ci=4.6e-4, flags=("hpd_transcribed_from_table2_2026_09_04")),
     "k_ama_odg": _martins(
         "k_ama_odg", "Amadori (DFG) -> 1-deoxyglucosone + Gly",
-        1.57e-2, 107.0, 7.0, 1, 7, flags=("k_hpd_not_transcribed", "ea_printed_rounded")),
+        1.57e-2, 107.0, 7.3, 1, 7, k_ci=6.8e-4, flags=("hpd_transcribed_from_table2_2026_09_04")),
     "k_odg_aa": _martins(
         "k_odg_aa", "1-deoxyglucosone -> acetic acid (+ unmeasured C4 residue)",
-        1.45, 76.0, 4.0, 1, 8,
-        flags=("k_hpd_not_transcribed", "ea_printed_rounded", "ea_agrees_with_knol_2010"),
+        1.45, 76.0, 3.8, 1, 8, k_ci=6.8e-2,
+        flags=("hpd_transcribed_from_table2_2026_09_04", "ea_agrees_with_knol_2010"),
         note="Knol 2010 T2's acetic-acid Ea, 75 +/- 10 kJ/mol, agrees within 1 kJ/mol.",
     ),
     "k_tdg_mel": _martins(
@@ -309,10 +313,12 @@ MARTINS_M4: Mapping[str, KineticParameter] = {
     ),
     "k_fru_acids": _martins(
         "k_fru_acids", "Fru -> formic acid + acetic acid (+ unmeasured C3 residue)",
-        4.41e-5, 237.0, 36.0, 1, 10,
-        flags=("k_hpd_not_transcribed", "ea_printed_rounded", "ea_poorly_determined"),
-        note="Ea 237 +/- 36 kJ/mol is the loosest in the set; the 80-120 C window "
-             "is narrow for a barrier this large."),
+        4.41e-5, 237.0, 63.4, 1, 10, k_ci=3.6e-5,
+        flags=("hpd_transcribed_from_table2_2026_09_04", "ea_poorly_determined"),
+        note="Ea 237 +/- 63 kJ/mol (Table 2 prints 236.7 +/- 63.4; an earlier "
+             "transcription carried +/- 36, the k-side HPD's digits) is the loosest "
+             "in the set; the authors say the step 'was not estimated very precisely' "
+             "and the 80-120 C window is narrow for a barrier this large."),
 }
 
 
