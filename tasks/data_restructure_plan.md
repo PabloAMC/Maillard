@@ -1046,6 +1046,24 @@ The evidence, in the order it was found:
       user far more than "3 of 38 within 3x", and it converts the headline from a verdict into a
       usable rule for when to trust an absolute.
 
+- [ ] **B9's Laplace covariance is numerically invalid, and the envelope reads its sampling decisions
+      out of it.** `kinetic_core_b9_laplace_covariance.json` contains **six correlation entries with
+      |r| > 1** (max **+1.900**, `k_thiol_decay` x `k_glc_ha`; also `Ea_decay_carbonyl_sink` x
+      `k_glc_ha` at -1.879), and its `jtj_eigenvalues` hold three values at or below 4e-14 against a
+      largest of 173 -- **one of them negative** (-2.7e-15), which J^T J cannot be. All six bad
+      entries involve `k_glc_ha`, whose sigma is 1.37e-11: B9 dropped the eight Hofmann level rows,
+      the hexose-entry coordinate went to its band floor with a numerically zero Jacobian column, and
+      dividing a noisy covariance by ~0 produces nonsense. B8's matrix is clean (`k_glc_ha` sigma
+      0.495 there), so this arrived with the B9 refit and nothing checked it. **Consequences:** the
+      sigmas quoted for the two Ea coordinates (29.2 / 60.6 kJ/mol) are pseudo-inverse artefacts of a
+      singular matrix, not uncertainties -- the honest statement is that both Ea's lie in the fit's
+      numerical null space and are bounded only by their declared bands (`thiol_sink` [7, 102],
+      `carbonyl_sink` [20, 250] kJ/mol); and `uncertainty.py` decides what to sample from
+      `identified`, which is computed from this matrix. Concrete change: after building the
+      covariance, assert |r| <= 1 + 1e-9 elementwise and every eigenvalue >= -1e-10 * max(eigenvalue),
+      report the numerical rank, and mark coordinates in the null space `unidentified` with reason
+      `rank_deficient` rather than emitting a sigma for them. Then re-derive the identification flags.
+
 ### Repository review 2026-09-04 (same pass, engineering side)
 
 - [ ] **The dependency manifests describe a repository that no longer exists.** Measured by AST over
