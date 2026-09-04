@@ -1,7 +1,7 @@
 {
   "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
   "quantification_class": "hs_spme_gcmsms_external_standard_curve",
-  "quantification_note": "Declared 2026-09-03 from the bundle's own content_correction_note: 'quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95)', curves built in DI water (see the caveat there).",
+  "quantification_note": "Confirmed 2026-09-04 from the full text (Food Chem. 406:134998, PDF data/articles/Liu2023.pdf, sections 2.4 and 2.11): HS-SPME-GC-MS/MS (Agilent 7890B / 7000C triple quadrupole, MRM) with three internal standards (2-methyl-3-heptanone, 2-ethoxy-3-isopropylpyrazine, heptanal-d14) and standard curves built by spiking DI water at five levels (R2 > 0.95); concentration = area ratio x response factor x IS mass / sample mass. Headspace: the K_aw and HS-SPME bands apply; the DI-water calibration caveat the bundle already carries is confirmed.",
   "conditions": {
     "ph": 6.0,
     "temp_C": 40.0,
@@ -99,5 +99,13 @@
     "origin": "external_literature",
     "source_publication_year": "2021",
     "source_reference": "Liu, Y. (2021), \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998"
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PDF supplied by the owner 2026-09-04 (data/articles/Liu2023.pdf), read in full",
+    "quoted_quantification": "Five (5) grams of rehydrated pea protein samples (10 % solids (w/w), 0.5 g pea protein and 4.5 g water) were added to 20 mL SPME vials in triplicate. Internal standards ... 2-methyl-3-heptanone at 1010 ppm, ... 2-ethoxy-3-isopropyl pyrazine at 10 ppm, and ... heptanal-d14 at 1004 ppm ... For standard curves, pea protein solutions were replaced with 5 g DI water and were spiked with known compounds (Table 4) at five different levels ... Concentration (ng/g) = (area_target / area_IS) x Rf x mass_IS (ng) / sample mass (g).",
+    "quoted_values": "Table 4 (ng/g of the rehydrated 10 %-solids protein, n = 2, nine commercial pea proteins): hexanal 2445-52454, mean 11214; nonanal 0.188-3.42, mean 0.887.",
+    "quantification_verdict": "HS-SPME-GC-MS/MS with internal standards, response factors and DI-water standard curves. The bundle's hexanal 11320 ppb is the nine-product mean of Table 4 (11214 ng/g, 1 % apart); its nonanal 0.802 ppb is within 10 % of the Table 4 mean (0.887 ng/g; the bundle's value was taken from the 2021 thesis). The 'uncertainty_pct' values (363 %, 326 %) are the spread across the nine products, not measurement error.",
+    "verified_on": "2026-09-04"
   }
 }

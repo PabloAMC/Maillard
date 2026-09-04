@@ -807,7 +807,7 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "thiamine_cys_xylose_145C_Cerny2008",
-          "path": "data/benchmarks/quarantined/thiamine_cys_xylose_145C_Cerny2008.json"
+          "path": "deleted 2026-09-04: no source for the value (data/benchmarks/quarantined/README.md)"
         },
         {
           "artifact_type": "benchmark_intake_entry",
@@ -2902,7 +2902,7 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-          "path": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json"
+          "path": "data/benchmarks/quarantined/furosine_extrusion_crossover_140C_RamirezJimenez2000.json"
         },
         {
           "artifact_type": "safety_reference",

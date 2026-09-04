@@ -1,7 +1,7 @@
 {
   "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
   "quantification_class": "dynamic_headspace_gcmsms",
-  "quantification_note": "Declared 2026-09-03 from source_metadata.generator: 'Trikusuma 2020 DHS-GC-MS-MS quantitative table' (values verified against the 2018 OSU thesis Table 6). Dynamic headspace: the headspace bands apply.",
+  "quantification_note": "Confirmed 2026-09-04 from the full text (Food Chem. 312:126082, PDF data/articles/trikusuma2020.pdf, section 2.5): 'Aroma compounds were quantified using a standard addition technique and DHS coupled with GC/MS-QQQ' (multiple reaction monitoring, 5-point standard addition curves, r2 > 0.960; 2-acetyl-1-pyrroline by SIDA). Dynamic headspace: the K_aw and HS-SPME bands apply.",
   "source_doi": "10.1016/j.foodchem.2019.126082",
   "precursors": {
     "Pea Protein Isolate": {
@@ -22,7 +22,8 @@
   },
   "source_metadata": {
     "origin": "external_literature",
-    "generator": "Trikusuma 2020 DHS-GC-MS-MS quantitative table (values verified against the 2018 OSU thesis, Table 6 p.35, Processed column)"
+    "generator": "Trikusuma 2020 DHS-GC-MS-MS quantitative table (values verified against the 2018 OSU thesis, Table 6 p.35, Processed column)",
+    "verified_date": "2026-09-04"
   },
   "content_verification_note": {
     "date": "2026-08-27",
@@ -84,5 +85,14 @@
     }
   },
   "protein_type": "pea_iso",
-  "denaturation_state": 1.0
+  "denaturation_state": 1.0,
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "PDF supplied by the owner 2026-09-04 (data/articles/trikusuma2020.pdf), read in full",
+    "quoted_quantification": "Aroma compounds were quantified using a standard addition technique and DHS coupled with GC/MS-QQQ ... Data were collected using multiple reaction monitoring (MRM) mode ... Compounds were quantified using 5-point standard addition curves (r2 > 0.960).",
+    "quoted_conditions": "Pea protein isolate (3 % w/w) ... aseptic UHT processing ... processed at a final temperature and pressure of 140 C and 0.55 MPa for 6 s ... The pH of the control beverage was measured at 7.1, and there were no significant pH changes observed on the UHT processed and aged samples.",
+    "quoted_values": "Table 2 (ug/L, n = 3, UHT processed): hexanal 782 +/- 58.6; 2-pentylfuran 163 +/- 15.1; nonanal 24.0 +/- 0.80 (non-UHT: 331 +/- 81.3, 59.4 +/- 1.93, 8.24 +/- 0.44).",
+    "quantification_verdict": "DHS-GC/MS-QQQ with standard addition; the bundle's three UHT values match Table 2 exactly and its 140 C / 6 s / pH 7.1 conditions match section 2.2.",
+    "verified_on": "2026-09-04"
+  }
 }

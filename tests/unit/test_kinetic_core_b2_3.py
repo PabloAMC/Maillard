@@ -286,8 +286,9 @@ BUNDLE_BASELINES = {
     "external_validation_li_2026_spi_wg_hme_control":
         "53edcdb681c3c04ab8b8e4f384cee5b686f040bdbdd28dc914e3131e2295a593",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
+    # re-pinned 2026-09-04: content_verification block from the full text added
     "external_validation_liu_2023_ppi_offnote_baseline":
-        "5e0b0a7ec0e56a5efff9c1d01225a5eac15c9129fe58fd08032bd1226cd15dcd",
+        "d04c01abe7bba4a666fe94c023aa9a92aa77d8358c56673079ad6522b419c7cd",
     "mp_holdout_fructose_asparagine_180C_Lin2022":
         "85efa67b7c88adc2d8616d7ed601efe6f6f7763238b2aef237bc485c405d0505",
     "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019":

@@ -2,9 +2,9 @@
 
 pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresholds`, else the global default.
 
-* panel: **38** benchmarks, 27 scored, 11 fully refused; rows **39**, refused rows 26
+* panel: **37** benchmarks, 27 scored, 10 fully refused; rows **39**, refused rows 25
 * within 3x: 4/39 (0.103); median fold 29.475, geometric mean 43.207, worst 3.34e+04
-* evidence roles (core): {'external_holdout': 21, 'predictive': 17}
+* evidence roles (core): {'external_holdout': 21, 'predictive': 16}
 * predictive benchmarks passing their contract: NONE; strict-ready: NONE
 * **honest literature: 4/39 within band** (0.103), 27 benchmarks, median fold 29.475, geometric mean 43.207
 * **out-of-sample: 3/38 within band** (0.079), 26 benchmarks, median fold 31.858, geometric mean 46.662
@@ -16,9 +16,9 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 |---|---|---|---|---|---|---|---|---|---|
 | panel | external_matrix | 4 | 4 | 0 | 0.000 | 0 | 0 | 1.86e+03 | 250.597 |
 | panel | maillard_path_holdout | 17 | 26 | 3 | 0.115 | 0 | 0 | 26.519 | 25.731 |
-| panel | trust_loop | 17 | 9 | 1 | 0.111 | 0 | 0 | 34.240 | 88.416 |
+| panel | trust_loop | 16 | 9 | 1 | 0.111 | 0 | 0 | 34.240 | 88.416 |
 | evidence_role | external_holdout | 21 | 30 | 3 | 0.100 | 0 | 0 | 26.519 | 34.854 |
-| evidence_role | predictive | 17 | 9 | 1 | 0.111 | 0 | 0 | 34.240 | 88.416 |
+| evidence_role | predictive | 16 | 9 | 1 | 0.111 | 0 | 0 | 34.240 | 88.416 |
 | lane | acrylamide | - | 12 | 2 | 0.167 | 0 | 0 | 7.285 | 21.945 |
 | lane | lipid | - | 7 | 0 | 0.000 | 0 | 0 | 3.36e+03 | 430.826 |
 | lane | sulfur | - | 19 | 2 | 0.105 | 0 | 0 | 29.475 | 30.397 |
@@ -30,7 +30,6 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 4.25e+03 | 3.628 | 1.50 / 0.200 | scale-gap | no | - |
 | cml_cel_commercial_pbma_Foods2023 | trust_loop | PRIMARY | predictive | 0/2 | 0.000 | - | - | 1.80 / 0.250 | refused | no | - |
-| furosine_extrusion_crossover_140C_RamirezJimenez2000 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 2.00 / 0.300 | refused | no | - |
 | hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
 | hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
 | hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - |
@@ -117,7 +116,6 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 |---|---|---|---|
 | cml_cel_commercial_pbma_Foods2023 | trust_loop | Nε-(Carboxymethyl)lysine (CML) | UNREPRESENTED TARGETS: Nε-(Carboxymethyl)lysine (CML) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it. |
 | cml_cel_commercial_pbma_Foods2023 | trust_loop | Nε-(Carboxyethyl)lysine (CEL) | UNREPRESENTED TARGETS: Nε-(Carboxyethyl)lysine (CEL) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it. |
-| furosine_extrusion_crossover_140C_RamirezJimenez2000 | trust_loop | furosine | UNREPRESENTED TARGETS: furosine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it. |
 | hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. |
 | hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. |
 | hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. |

@@ -4,7 +4,7 @@
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Out of sample: 3/38 rows within 3x](https://img.shields.io/badge/out--of--sample-3%2F38%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
-[![Strict-ready: 0/38 benchmarks](https://img.shields.io/badge/strict--ready-0%2F38-red.svg)](results/validation/core_panel_scores.md)
+[![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
 
 **Maillard** is a mass-action kinetic model of the Maillard reaction for alternative-protein
 scientists: sugars, amino acids, lipids and process conditions in; per-compound aroma volatiles
@@ -124,7 +124,7 @@ in the same change.
 | rows within 3x of the measurement | **4 of 39** (median fold error 30x, geometric mean 43x) |
 | **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since wave B9 only one scored row is a fit row |
 | by lane, within 3x | acrylamide 2/12 · sulfur 4/29 · lipid 0/7 · trunk 0/1 |
-| strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 38** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
+| strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 37** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
 | literature rows inside the 90% Monte-Carlo interval | **6 of 32** evaluable (median width 0.98 dex); **6 of 31** out of sample; 7 rows not evaluable |
 | direction / ranking skill (69-claim literature panel) | **17 of 26** strictly independent evaluable claims; **13 of 21** with pH set aside, **4 of 5** on pH; water-activity comparisons are refused; 26 independent claims not evaluable |
 
@@ -225,7 +225,7 @@ constant, which is what makes `rank` useful.
 | Direction / ranking on `moisture_aw` | any (water activity moved) | no evaluable independent claim on the core | **do-not-use** |
 | Direction / ranking on `ranking` | several compounds ordered in one system | 0/1 on the directional panel (independent claims)<br/><sub>misses: MOT-03</sub> | **do-not-use** |
 | Direction / ranking on `process_heating` | processed vs raw | no evaluable independent claim on the core | **do-not-use** |
-| Any claim of benchmark-grade agreement | the union panel: trust loop + hold-outs + matrix bundles | 0/38 strict-ready (none); 4/39 rows within 3x, out-of-sample 3/38<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
+| Any claim of benchmark-grade agreement | the union panel: trust loop + hold-outs + matrix bundles | 0/37 strict-ready (none); 4/39 rows within 3x, out-of-sample 3/38<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
 | Which experiment to run next (value of information) | any system the core envelope covers | every ranked row is a measured model failure<br/><sub>this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is</sub> | **trust** |
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.

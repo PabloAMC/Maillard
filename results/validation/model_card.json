@@ -48,7 +48,7 @@
     "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
     "strict_ready": 0,
     "strict_ready_ids": [],
-    "total": 38,
+    "total": 37,
     "within_band": 4,
     "worst_fold_error": 33391.73597895205
   },
@@ -325,7 +325,7 @@
     {
       "basis": "recomputed live; strict-ready is the repository's own passing bar",
       "claim_type": "Any claim of benchmark-grade agreement",
-      "evidence": "0/38 strict-ready (none); 4/39 rows within 3x, out-of-sample 3/38",
+      "evidence": "0/37 strict-ready (none); 4/39 rows within 3x, out-of-sample 3/38",
       "system_class": "the union panel: trust loop + hold-outs + matrix bundles",
       "verdict": "do-not-use"
     },

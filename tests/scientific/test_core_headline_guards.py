@@ -81,7 +81,9 @@ def test_tracked_scorecard_is_not_stale(tracked_scores, live_scores):
 # --------------------------------------------------------------------------------------
 
 
-def test_core_panel_is_38_bundles_27_answered_39_rows(tracked_scores):
+def test_core_panel_is_37_bundles_27_answered_39_rows(tracked_scores):
+    # RE-PINNED 2026-09-04 (later the same day): the furosine bundle's DOI is a bread-baking paper
+    # with no extrusion point; quarantined. Its row was always refused (furosine is no core species).
     # RE-PINNED 2026-09-04: two sourceless bundles quarantined (3 rows) and the eight hexose-only
     # thiol rows are declared NOT EVALUABLE (unidentified hexose entry): 40/32/49 -> 38/27/39.
     """Pinned 2026-09-03 (B3). The union panel: 19 scored trust-loop bundles (the two
@@ -89,14 +91,14 @@ def test_core_panel_is_38_bundles_27_answered_39_rows(tracked_scores):
     external matrix bundles. 8 bundles are refused whole (H2S / hydroxyacetaldehyde /
     mercapto-2-propanone precursors, CML/CEL/furosine targets, 2-pentylfuran)."""
     s = tracked_scores["summary"]
-    assert s["panel_benchmark_count"] == 38
+    assert s["panel_benchmark_count"] == 37
     assert s["scored_benchmark_count"] == 27
     assert s["matched_compound_count"] == 39
-    assert s["refused_compound_count"] == 26
+    assert s["refused_compound_count"] == 25
     # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
     # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
-        "trust_loop": 17, "maillard_path_holdout": 17, "external_matrix": 4,
+        "trust_loop": 16, "maillard_path_holdout": 17, "external_matrix": 4,
     }
 
 
@@ -107,7 +109,7 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     core fit record that names it is the laundering route this guard blocks."""
     s = tracked_scores["summary"]
     # RE-PINNED 2026-09-03: the 21 physically separated hold-out bundles carry their own role.
-    assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 17}
+    assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 16}
 
 
 def test_within_3x_is_4_of_39_and_out_of_sample_3_of_38(tracked_scores):
@@ -146,9 +148,9 @@ def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_sc
     assert bolton["scale_thresholds"]["max_ratio"] == pytest.approx(3.0)
     assert not any(r["in_core_fit"] for r in bolton["compounds"])
     readme = _doc_text(README)
-    _assert_quoted(readme, "0 of 38", "README.md", "the core strict-ready count")
+    _assert_quoted(readme, "0 of 37", "README.md", "the core strict-ready count")
     _assert_quoted(readme, "thiamine_cys_glucose_120C_Bolton1994", "README.md", "the benchmark that lost its pass")
-    _assert_quoted(_doc_text(AUDIT), "strict-ready 0/38", "AUDIT.md", "the core strict-ready count")
+    _assert_quoted(_doc_text(AUDIT), "strict-ready 0/37", "AUDIT.md", "the core strict-ready count")
 
 
 def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_fit(tracked_scores):

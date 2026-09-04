@@ -878,7 +878,9 @@ artifacts (`comparative_cli.core_caveat`, `maillard.py` help), dead code (`bench
 `data_paths` constants), stale pointers to `benchmark_validation` / `matrix_calibration_registry` /
 `get_benchmark_files`.
 
-**Owner decisions executed 2026-09-04:** (1) `cys_ribose_140C_Hofmann1998` and `thiamine_cys_xylose_145C_Cerny2008`
+**Owner decisions executed 2026-09-04 (papers read the same day):** Cerny 2008 read: no MFT quantity in it → the quarantined
+bundle DELETED; Ramírez-Jiménez 2000 read: a bread study with no extrusion point → the furosine bundle QUARANTINED; Trikusuma 2020
+and Liu 2023 read: values and methods confirmed, verification blocks written (panel 37 bundles, 16 trust-loop). (1) `cys_ribose_140C_Hofmann1998` and `thiamine_cys_xylose_145C_Cerny2008`
 quarantined (no source for the numbers); (2) Bolton 1994 read in full (PDF from the owner): assumed loadings replaced by
 Table I (glucose 51.5 / thiamine 13.7 / cysteine 11.7 mM per litre of added water, pH 5.65, a_w 0.83), value from Table II
 system I (389 ng / 33.3 g = 11.7 ppb); the core overpredicts 20x, strict-ready 1/40 → **0/38**; (3) the hexose entry:

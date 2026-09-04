@@ -82,36 +82,6 @@
       "signal_origin": "external_literature"
     },
     {
-      "bench_file": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json",
-      "benchmark_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-      "buffer_applied": true,
-      "compounds": [],
-      "coverage_rate": 0.0,
-      "evidence_role": "predictive",
-      "execution_path": "free_precursor",
-      "fit_target_of": {
-        "core": [],
-        "index": []
-      },
-      "fitted_row": false,
-      "matched_compounds": 0,
-      "panel": "trust_loop",
-      "protein_type": "",
-      "quantification_family": "undeclared",
-      "quantification_source": "quantification_class='undeclared' matches no known family",
-      "refused_compounds": [
-        {
-          "benchmark_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-          "compound": "furosine",
-          "envelope_state": "out_of_envelope",
-          "lane": "acrylamide",
-          "panel": "trust_loop",
-          "reason": "UNREPRESENTED TARGETS: furosine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
-        }
-      ],
-      "signal_origin": "external_literature"
-    },
-    {
       "bench_file": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
       "buffer_applied": true,
@@ -3025,9 +2995,9 @@
     "generated_on": "2026-09-04",
     "git": {
       "branch": "cleaning",
-      "commit": "e31b98e488ea51e5f96420322bf93db478075020",
+      "commit": "0d03e295da0e7b5a11f9fa6dc0fb75320b6bcf13",
       "dirty": true,
-      "short": "e31b98e4"
+      "short": "0d03e295"
     },
     "inputs": [
       {
@@ -3061,10 +3031,6 @@
       {
         "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
         "sha256": "541e98c54b9b584d2c09ddb13e308c7f73f06d612a5f7f7959812ee77bfd94dc"
-      },
-      {
-        "path": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json",
-        "sha256": "909f003162d502d0777fb03d378d1320a1dea37cbe856d658ca450d592f4a14b"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
@@ -3108,7 +3074,7 @@
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "864672518ed2ebbe78346df46b655b45c58027b8be16879350fd2ec75de2540e"
+        "sha256": "8e7ecea3a7b4c267a96168aeb18c00308623717d8308346a1dc46e79558981b0"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
@@ -3204,7 +3170,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
-        "sha256": "39059ac46f85aebafeb6b2565371bdc8eab67ca573e469213016d72e1f6ea57a"
+        "sha256": "81d7b20add9ed45541298837f3d1b1491cf1967a050f61694d08abc3ad9da18f"
       }
     ]
   },
@@ -3224,14 +3190,6 @@
       "lane": "acrylamide",
       "panel": "trust_loop",
       "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
-    },
-    {
-      "benchmark_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-      "compound": "furosine",
-      "envelope_state": "out_of_envelope",
-      "lane": "acrylamide",
-      "panel": "trust_loop",
-      "reason": "UNREPRESENTED TARGETS: furosine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
@@ -3470,7 +3428,7 @@
       },
       "total": 31
     },
-    "panel_benchmark_count": 38,
+    "panel_benchmark_count": 37,
     "panel_split": {
       "external_matrix": {
         "ci_coverage_rate": 0.5,
@@ -3516,7 +3474,7 @@
         "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
       }
     ],
-    "refused_compound_count": 26,
+    "refused_compound_count": 25,
     "sampled_prior_count": 35,
     "seed": 0,
     "shared_with_holdout_panel": {
@@ -3560,7 +3518,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 163.8,
+    "wall_seconds": 146.6,
     "workers": 6
   }
 }
