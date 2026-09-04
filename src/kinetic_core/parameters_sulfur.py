@@ -915,7 +915,10 @@ MEASURED_SULFUR: Mapping[str, SulfurParameter] = {
         ),
         dossier_anchor=(
             "k3_final_parameter_inventory.md sec. A.4 rows at 25/30 C and the "
-            "'THE CROSS-VALIDATION' block; k1_kinetic_parameters.md secs. 1a, 1c"
+            "'THE CROSS-VALIDATION' block; k1_kinetic_parameters.md secs. 1a, 1c; "
+            "hofmann2002_extraction.md (full text read 2026-09-04: Table 2 gives "
+            "9.8e-4 /s exactly, Fig. 6 supports 9.4e-4 within the read-off, "
+            "disulfide <6 ug of 400 ug; the model reactions ran at pH 6.0)"
         ),
         conditions=_THIOETHER_CONDITIONS,
         ph=5.6,

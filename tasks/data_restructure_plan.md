@@ -878,6 +878,11 @@ artifacts (`comparative_cli.core_caveat`, `maillard.py` help), dead code (`bench
 `data_paths` constants), stale pointers to `benchmark_validation` / `matrix_calibration_registry` /
 `get_benchmark_files`.
 
+**Primary sources of the fit read 2026-09-04 (owner's PDFs):** Hofmann & Schieberle 2002 (thiol-sink constant: Table 2 reproduces
+9.8e-4 /s exactly; Fig. 1 gives the 0.023 /min brew hold-out row; disulfide <1.5 %) and Schroën & Berton-Carabin 2022 (lipid lane:
+k4 = 6e-3 /h, k_hexanal = 6e-5 /h for all five emulsifiers, visual-agreement fits, 25 C only) — extraction dossiers written, no
+code change warranted. Still without a PDF: Martins & van Boekel 2005 (hexose acid yields, 10.1016/j.foodchem.2004.04.006).
+
 **Owner decisions executed 2026-09-04 (papers read the same day):** Cerny 2008 read: no MFT quantity in it → the quarantined
 bundle DELETED; Ramírez-Jiménez 2000 read: a bread study with no extrusion point → the furosine bundle QUARANTINED; Trikusuma 2020
 and Liu 2023 read: values and methods confirmed, verification blocks written (panel 37 bundles, 16 trust-loop). (1) `cys_ribose_140C_Hofmann1998` and `thiamine_cys_xylose_145C_Cerny2008`
