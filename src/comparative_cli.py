@@ -254,7 +254,7 @@ def core_caveat() -> str:
         headline = "scorecard not generated; run ./scripts/docker_maillard.sh core-scores"
     return (
         "KINETIC CORE. Absolute concentrations come from the mass-action network (frozen "
-        "B1/B2.x/B3/B6/B7 parameters), and they are reported WITH their envelope declaration. The "
+        "per-lane fit reports), and they are reported WITH their envelope declaration. The "
         "core refuses what it cannot name -- ask it for 1-hexanol, 2-pentylfuran or propanal and it "
         "will tell you why it will not answer, rather than answering. Its four lanes (trunk, sulfur, "
         "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "

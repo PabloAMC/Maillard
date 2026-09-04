@@ -466,7 +466,7 @@ def _headline_sentences(card: Mapping[str, Any]) -> List[str]:
                 else ""
             )
             + "The previously shipped claim of ZERO anchors was corrected on 2026-08-28 "
-            "(Wave W) when the full text behind them was obtained; the retired benchmark ("
+            "when the full text behind them was obtained; the retired benchmark ("
             + Path(sulfur.get("path", "")).stem
             + ") is kept in the tree as the provenance record of the values that were not "
             "measurements. Absolute agreement is poor and the DIRECTION is a separate "

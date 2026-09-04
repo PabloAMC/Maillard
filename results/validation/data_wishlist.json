@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-04",
     "git": {
-      "commit": "2e8fda59389a674c8dd58e0c091083a9210c5a13",
-      "short": "2e8fda59",
+      "commit": "1bc4d331d9d3bcb7ca86801e4058a544c2853274",
+      "short": "1bc4d331",
       "branch": "cleaning",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "40d15285dc5a3b3434a7331be16e93ee914ee3769b57ecb43ea6126042c9a15b"
+        "sha256": "21960ce14e11b420e3d36a7b3fea7013a0869bfeafc104ca4887632574f8260f"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "361ca1dff905746d57ad806953a95e2ff81e1a97de77f208bcba861c309f6fa3"
+        "sha256": "860824fc7b171d15191b77773b5e66e13ef8839cecc269f5fe56b9062f94623e"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -83,7 +83,7 @@
         "FRAG_C"
       ],
       "what_the_code_says": "THE HEXOSE ENTRY, and the structural reason pentose beats hexose.",
-      "story": "The hexose fragmentation entry (B9 left it on its band floor; the engine declares 'HEXOSE ENTRY UNIDENTIFIED' on every hexose-only thiol request).",
+      "story": "The hexose fragmentation entry (the primary-evidence refit left it on its band floor; the engine declares 'HEXOSE ENTRY UNIDENTIFIED' on every hexose-only thiol request).",
       "measurement": "a fed-intermediate rate: glucose heated alone, HA + MGO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
         "MFT",
@@ -346,7 +346,7 @@
   "refused_targets": [
     {
       "what": "UNREPRESENTED TARGETS: 2-pentylfuran",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
       "rows": [
         {
           "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -466,7 +466,7 @@
     },
     {
       "what": "UNREPRESENTED TARGETS: 1-hexanol",
-      "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVA",
+      "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIO",
       "rows": [
         {
           "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",

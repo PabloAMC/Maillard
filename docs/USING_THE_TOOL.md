@@ -178,7 +178,7 @@ python scripts/maillard.py predict refusal_demo.yml --report /tmp/refused.html
 ```text
   ENVELOPE: OUT_OF_ENVELOPE   lane: sulfur
   mapped precursors: Cys=10 mM, PENT=10 mM
-    ! REFUSED -- UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but
+    ! REFUSED -- UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but
     ! 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the
     ! linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's
     ! shipped 0.08 had no source. Refused rather than invented.
@@ -192,7 +192,7 @@ python scripts/maillard.py predict refusal_demo.yml --report /tmp/refused.html
     ~ gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED.
     ~ declared extrapolation -- 5-HMF + cysteine: the sink constant is HELD at its 50 C value for
     ~ this whole program. Holding it UNDER-states the sink; extrapolating it is a named prohibited
-    ~ derivation (K5a sec. 7.3), and the direction is stated rather than chosen for convenience.
+    ~ derivation (furanic extraction dossier, sec. 7.3), and the direction is stated rather than chosen for convenience.
 
   NO NUMBER IS EMITTED. The core declined this request above.
 ```
@@ -202,7 +202,7 @@ on stderr:
 ```text
 OUT OF ENVELOPE -- no number is emitted. Lane resolved: sulfur.
   missing species (targets the core cannot name): 2-pentylfuran
-  declared reason -- UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but
+  declared reason -- UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but
   2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the
   linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's
   shipped 0.08 had no source. Refused rather than invented.
@@ -214,9 +214,9 @@ nothing behind it, and every documented accuracy defect in this repository began
 that should not have existed. The refusal tells you precisely what would have to be measured
 for the answer to exist — which is a research plan, not an error message.
 
-**Watch what happened to HMF here, because it is the other half of the lesson.** Until Wave B7
+**Watch what happened to HMF here, because it is the other half of the lesson.** Until the furanic-channel wave (B7)
 this same spec refused *two* targets, and the HMF refusal read "5-HMF is not a species in any core
-lane. The hexose-dehydration route that forms it was never parameterised." B7 parameterised it, so
+lane. The hexose-dehydration route that forms it was never parameterised." That wave parameterised it, so
 HMF is now an answerable trunk species and only 2-pentylfuran refuses. **The refusal did not become
 a silent pass — it became four declared extrapolations**, one of which states the expected
 direction of the error out loud ("EXPECT HMF TO BE OVER-PREDICTED"). A refusal is what the model
@@ -280,7 +280,7 @@ wide.
 ```bash
 python scripts/maillard.py explain MFT
 python scripts/maillard.py explain hexanal
-python scripts/maillard.py explain HMF             # answers since B7 -- 2 routes, 1 of them `pinned`
+python scripts/maillard.py explain HMF             # answers since the furanic-channel wave -- 2 routes, 1 of them `pinned`
 python scripts/maillard.py explain 2-pentylfuran   # a refusal, with its declared reason
 ```
 

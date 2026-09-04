@@ -2,7 +2,7 @@
   "artifact": "core_panel_scores",
   "engine": {
     "module": "src/kinetic_core/engine.py",
-    "wave": "B7 -- furanic channels (HMF, DMHF); propagator cutover at B5",
+    "wave": "furanic channels (HMF, DMHF), fit wave B7",
     "lanes": [
       "trunk",
       "sulfur",
@@ -13,12 +13,12 @@
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
       "sulfur": "FULL_REACTIONS (93 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
-      "lipid": "B6: a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
+      "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
     "lanes_compose": false,
     "lipid_lane_cointegrates": {
       "rule": "direct sum with any ONE Maillard lane",
-      "why": "disjoint species sets, and the only candidate coupling (the aldehyde-lysine covalent channel) is INERT BY RULING (FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2). Checked at every call by lipid.lane_coupling_verdict, not hard-coded.",
+      "why": "disjoint species sets, and the only candidate coupling (the aldehyde-lysine covalent channel) is INERT BY RULING (docs/reference/FIT_HOLDOUT_DECLARATION.md, amendment 6, ruling 2). Checked at every call by lipid.lane_coupling_verdict, not hard-coded.",
       "condition": "revisit the moment the aldehyde-lysine Ea on food proteins is measured -- the amine pool then becomes genuinely shared"
     },
     "lipid_rate_is_an_assumption": true,
@@ -45,8 +45,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-04",
     "git": {
-      "commit": "b2a35f3b343b5787125ad589695b58d1895583d9",
-      "short": "b2a35f3b",
+      "commit": "1bc4d331d9d3bcb7ca86801e4058a544c2853274",
+      "short": "1bc4d331",
       "branch": "cleaning",
       "dirty": true
     },
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.2
+    "wall_seconds": 9.0
   },
   "benchmarks": [
     {
@@ -890,7 +890,7 @@
           "panel": "trust_loop",
           "compound": "2-Furfurylthiol (FFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -900,7 +900,7 @@
           "panel": "trust_loop",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -918,7 +918,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -1036,7 +1036,7 @@
           "panel": "trust_loop",
           "compound": "2-Furfurylthiol (FFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -1046,7 +1046,7 @@
           "panel": "trust_loop",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -1064,7 +1064,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -1399,7 +1399,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1488,7 +1488,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1662,7 +1662,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1836,8 +1836,8 @@
           "declaration_warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -1941,8 +1941,8 @@
           "declaration_warnings": [
             "pH 5 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2058,8 +2058,8 @@
           "declaration_warnings": [
             "pH 8 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2321,8 +2321,8 @@
           "declaration_warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2469,8 +2469,8 @@
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
             "pH 4.36 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 121 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 121 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2532,7 +2532,7 @@
           "panel": "maillard_path_holdout",
           "compound": "2-Furfurylthiol (FFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -2542,7 +2542,7 @@
           "panel": "maillard_path_holdout",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -2560,7 +2560,7 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -2601,7 +2601,7 @@
           "panel": "maillard_path_holdout",
           "compound": "2-Furfurylthiol (FFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -2611,7 +2611,7 @@
           "panel": "maillard_path_holdout",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
           "envelope_state": "in_envelope_extrapolated",
           "lane": "sulfur",
           "unidentified_route": true
@@ -2629,7 +2629,7 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+        "every target refused: NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.; NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -3503,7 +3503,7 @@
           "panel": "external_matrix",
           "compound": "1-hexanol",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
+          "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -3513,7 +3513,7 @@
           "panel": "external_matrix",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -3697,7 +3697,7 @@
       "panel": "trust_loop",
       "compound": "2-Furfurylthiol (FFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3707,7 +3707,7 @@
       "panel": "trust_loop",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3727,7 +3727,7 @@
       "panel": "trust_loop",
       "compound": "2-Furfurylthiol (FFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3737,7 +3737,7 @@
       "panel": "trust_loop",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3757,7 +3757,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -3767,7 +3767,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -3787,7 +3787,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -3817,7 +3817,7 @@
       "panel": "maillard_path_holdout",
       "compound": "2-Furfurylthiol (FFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3827,7 +3827,7 @@
       "panel": "maillard_path_holdout",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3837,7 +3837,7 @@
       "panel": "maillard_path_holdout",
       "compound": "2-Furfurylthiol (FFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3847,7 +3847,7 @@
       "panel": "maillard_path_holdout",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
       "envelope_state": "in_envelope_extrapolated",
       "lane": "sulfur",
       "unidentified_route": true
@@ -3857,7 +3857,7 @@
       "panel": "external_matrix",
       "compound": "1-hexanol",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
+      "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -3867,7 +3867,7 @@
       "panel": "external_matrix",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false

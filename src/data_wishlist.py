@@ -34,7 +34,7 @@ SULFUR_CHARGES = {"Glc": "glucose", "Fru": "fructose", "PENT": "a pentose (ribos
                   "Cys": "cysteine", "THI": "thiamine", "H2S": "hydrogen sulfide"}
 #: Coordinates whose story is already told elsewhere in the repository; the wishlist quotes it.
 KNOWN_STORIES = {
-    "k_glc_ha": "The hexose fragmentation entry (B9 left it on its band floor; the engine declares "
+    "k_glc_ha": "The hexose fragmentation entry (the primary-evidence refit left it on its band floor; the engine declares "
                 "'HEXOSE ENTRY UNIDENTIFIED' on every hexose-only thiol request).",
     "Ea_decay_thiol_sink": "Pressed against Gigl 2021's measured covalent-capture ceiling (7-102 kJ/mol); "
                            "a measurement of the sink's barrier at two temperatures decides whether the "

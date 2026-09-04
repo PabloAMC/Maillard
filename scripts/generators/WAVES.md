@@ -1,5 +1,7 @@
 # The fit / hold-out waves are frozen
 
+> Key to the identifiers (B1..B9, the lettered audit waves, Amendment n): `docs/guides/GLOSSARY.md`, Part 3.
+
 `generate_kinetic_core_b*_{fit,holdout,reports,scorers}.py` and `probe_amine_fate_b2_4.py` produced every
 frozen parameter of the kinetic core (`results/validation/kinetic_core_b*_fit_report.json`) and every
 pre-registered hold-out score beside it. Since 2026-09-03 they are **frozen**:

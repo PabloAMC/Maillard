@@ -481,6 +481,8 @@ def render_explain_text(payload: Mapping[str, Any]) -> str:
         )
     out.append("")
     out.append("  EVIDENCE CLASSES")
+    out.append("    (provenance tags in the notes below -- B1..B9, Amendment n, D.n, K/S waves -- are the")
+    out.append("     repository's fit waves and declaration sections; key: docs/guides/GLOSSARY.md, Part 3)")
     for cls in EVIDENCE_ORDER:
         out.append(f"    {cls:<9} {EVIDENCE_MEANING[cls]}")
     out.append("")

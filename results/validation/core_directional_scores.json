@@ -2,7 +2,7 @@
   "artifact": "core_directional_scores",
   "engine": {
     "module": "src/kinetic_core/engine.py",
-    "wave": "B7 -- furanic channels (HMF, DMHF); propagator cutover at B5",
+    "wave": "furanic channels (HMF, DMHF), fit wave B7",
     "lanes": [
       "trunk",
       "sulfur",
@@ -13,12 +13,12 @@
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
       "sulfur": "FULL_REACTIONS (93 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
-      "lipid": "B6: a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
+      "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
     "lanes_compose": false,
     "lipid_lane_cointegrates": {
       "rule": "direct sum with any ONE Maillard lane",
-      "why": "disjoint species sets, and the only candidate coupling (the aldehyde-lysine covalent channel) is INERT BY RULING (FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2). Checked at every call by lipid.lane_coupling_verdict, not hard-coded.",
+      "why": "disjoint species sets, and the only candidate coupling (the aldehyde-lysine covalent channel) is INERT BY RULING (docs/reference/FIT_HOLDOUT_DECLARATION.md, amendment 6, ruling 2). Checked at every call by lipid.lane_coupling_verdict, not hard-coded.",
       "condition": "revisit the moment the aldehyde-lysine Ea on food proteins is measured -- the amine pool then becomes genuinely shared"
     },
     "lipid_rate_is_an_assumption": true,
@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-04",
     "git": {
-      "commit": "fb0327a17d5431aa3434c838c8cfcf0db119ffa2",
-      "short": "fb0327a1",
+      "commit": "1bc4d331d9d3bcb7ca86801e4058a544c2853274",
+      "short": "1bc4d331",
       "branch": "cleaning",
       "dirty": true
     },
@@ -503,7 +503,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 0.0
@@ -572,7 +572,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 52.25403590728247
@@ -619,7 +619,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 52.25403590728247
@@ -642,7 +642,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 52.25403590728247
@@ -1422,8 +1422,8 @@
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 77.72921779394943
         },
@@ -1447,8 +1447,8 @@
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 398.9513152652994
         },
@@ -1472,8 +1472,8 @@
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
             "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 577.4184679502196
         }
@@ -1512,8 +1512,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         },
@@ -1536,8 +1536,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         },
@@ -1560,8 +1560,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         }
@@ -1694,7 +1694,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 46.96106906785942
@@ -1719,7 +1719,7 @@
             "The sulfur lane was selected but the charge contains NO sulfur source (no cysteine, thiamine or sulfide). Every thiol in the core is built from a charged sulfur atom; there is no route that makes one from a sugar alone."
           ],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 0.0,
@@ -1768,8 +1768,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         },
@@ -1793,9 +1793,9 @@
           "reasons": [],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED.",
-            "5-HMF + cysteine: the sink constant is HELD at its 50 C value for this whole program. Holding it UNDER-states the sink; extrapolating it is a named prohibited derivation (K5a sec. 7.3), and the direction is stated rather than chosen for convenience."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED.",
+            "5-HMF + cysteine: the sink constant is HELD at its 50 C value for this whole program. Holding it UNDER-states the sink; extrapolating it is a named prohibited derivation (furanic extraction dossier, sec. 7.3), and the direction is stated rather than chosen for convenience."
           ],
           "value_ug_per_l": 674.3609731305359
         }
@@ -2077,7 +2077,7 @@
       "statement": "UHT processing RAISES 2-pentylfuran in a pea-protein beverage (59.4 -> 163.2 ug/L).",
       "source": "trikusuma2018",
       "status": "not_evaluable",
-      "reason": "arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
       "arms": [
         {
           "label": "processed, 140 C",
@@ -2096,7 +2096,7 @@
           "lane": "lipid",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
           ],
           "warnings": [
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
@@ -2123,7 +2123,7 @@
           "lane": "lipid",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
           ],
           "warnings": [
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
@@ -2341,8 +2341,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 14.854007729246737
         },
@@ -2365,8 +2365,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         },
@@ -2389,8 +2389,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 2389.5697101274527
         }
@@ -2719,7 +2719,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 0.0
@@ -2788,7 +2788,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 33.516262394966446
@@ -2939,8 +2939,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 697.2930155199198
         },
@@ -2963,8 +2963,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 936.6743833019796
         }
@@ -3329,8 +3329,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 683.5026424814189
         },
@@ -3353,8 +3353,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 643.6275769276729
         },
@@ -3377,8 +3377,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 190 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 190 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 653.9243453397951
         }
@@ -3486,8 +3486,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         },
@@ -3510,8 +3510,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         },
@@ -3534,8 +3534,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 676.3166766505675
         }
@@ -3990,8 +3990,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 40.485330446554435
         },
@@ -4014,8 +4014,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 683.5026424814189
         },
@@ -4038,8 +4038,8 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
+            "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "value_ug_per_l": 936.6743833019796
         }
@@ -4092,7 +4092,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 0.0
@@ -4115,7 +4115,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 0.0
@@ -4162,7 +4162,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 1673.6753965373948
@@ -4185,7 +4185,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 2296.4427137049315
@@ -4254,7 +4254,7 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (B9 left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "value_ug_per_l": 0.2971467014501777

@@ -264,7 +264,7 @@ def _b7_priors() -> List[CorePrior]:
             source=f"{src}: fit.sigma_log10 ({report.get('fit', {}).get('sigma_basis', '')})",
             sampled=sigma is not None,
             reason=(
-                "the B7 report carries no parameter stderr; its residual "
+                "the furanic-channel fit report carries no parameter stderr; its residual "
                 "sigma_log10 is used as the log10-k stderr proxy, per the plan. "
                 "k_odg_af is DERIVED from k_dpo_af and moves with it, as in the fit"
                 if sigma is not None else NO_UNCERTAINTY
@@ -310,7 +310,7 @@ def _b8_priors() -> List[CorePrior]:
             return CorePrior(
                 key=key, lane=SULFUR, kind=kind, distribution="fixed", centre=float(centre),
                 sigma=None, band=None, unit=unit, source=f"{src}: frozen_parameters.{block}",
-                sampled=False, reason=NO_UNCERTAINTY if lap is None else "frozen in the B8 fit (not a free coordinate)",
+                sampled=False, reason=NO_UNCERTAINTY if lap is None else "frozen in the sulfur fit (not a free coordinate)",
             )
         if not entry["identified"]:
             return CorePrior(
@@ -981,7 +981,7 @@ def propagate_panel(
                 "definition": (
                     "honest_literature_coverage MINUS every row a core fit read "
                     "(src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; "
-                    "since B9 only the step-level bundles). The stronger claim."
+                    "since the primary-evidence refit only the step-level bundles). The stronger claim."
                 ),
             },
             "sampled_prior_count": len(sampled),
@@ -1002,7 +1002,7 @@ def propagate_panel(
                 "n": sum(1 for b in out_benches for c in b["compounds"] if c.get("shared_with")),
                 "declaration": (
                     "The four Hofmann 1998 ribose/cysteine pH-3 and pH-7 rows are the "
-                    "SAME MEASUREMENTS as four rows of the B2.x hold-out panel: NOT "
+                    "SAME MEASUREMENTS as four rows of the sulfur waves' hold-out panel: NOT "
                     "independent evidence. Each carries `shared_with`."
                 ),
             },

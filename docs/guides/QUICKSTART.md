@@ -1,6 +1,6 @@
 # Quick Start
 
-*Rewritten 2026-09-03 (retirement step B5c) for the one-engine tool. The previous quick start,
+*Rewritten 2026-09-03, when the legacy lane was retired, for the one-engine tool. The previous quick start,
 which drove the retired screening lane (`run_pipeline.py`, `optimize_formulation.py`,
 `run_campaign.py`, `ingest_results.py`), is kept at
 [`docs/history/QUICKSTART_legacy_lane_2026-09-03.md`](../history/QUICKSTART_legacy_lane_2026-09-03.md).*

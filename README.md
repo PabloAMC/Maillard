@@ -13,7 +13,7 @@ interval, an odour-activity ratio, and a **named refusal** wherever the model ca
 what was asked. It exists to help decide *which experiment to run next*, not to replace the
 GC-MS.
 
-> **One engine (2026-09-03).** Until retirement step B5 this repository carried two prediction
+> **One engine (2026-09-03).** Until the retirement of the legacy lane this repository carried two prediction
 > paths — a SMIRKS rule-enumeration "screening lane" with a fitted volatile budget, and the
 > kinetic core. The screening lane, its validation harness and its headline numbers are deleted;
 > everything below is the kinetic core, scored on its own. The retired lane's README, artifacts
@@ -24,6 +24,10 @@ GC-MS.
 > **Who is this for?** Alternative-protein scientists who want to triage formulations and
 > process conditions before burning GC-MS time, and computational chemists who want a
 > transparent, benchmarked, honestly scored Maillard kinetics platform.
+
+> **Reading the identifiers.** The fit waves are named **B1 to B9** (one per lane, then the sulfur refits;
+> `scripts/generators/WAVES.md`), the retired lane's audit waves carry letters (S, K, Q, V, W; `AUDIT.md`),
+> and "Amendment n" refers to the fit/hold-out declaration. The [glossary](docs/guides/GLOSSARY.md#part-3--identifiers-you-will-meet-in-the-code-and-the-artifacts) has the key.
 
 ---
 
@@ -127,7 +131,7 @@ in the same change.
 | | kinetic core |
 | --- | --- |
 | rows within 3x of the measurement | **4 of 39** (median fold error 30x, geometric mean 43x) |
-| **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since wave B9 only one scored row is a fit row |
+| **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since the primary-evidence refit (wave B9) only one scored row is a fit row |
 | by lane, within 3x | acrylamide 2/12 · sulfur 4/29 · lipid 0/7 · trunk 0/1 |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 37** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
 | literature rows inside the 90% Monte-Carlo interval | **6 of 32** evaluable (median width 0.98 dex); **6 of 31** out of sample; 7 rows not evaluable |
@@ -137,7 +141,7 @@ Three things a reader must know, all declared in code and printed on every row t
 
 - **The sulfur lane is fitted on primary evidence only (wave B9, 2026-09-03).** The rule: rate
   constants, activation energies, fed-intermediate yields, conversions and within-study ratios fit
-  the model; end-to-end concentrations in full precursor systems validate it. B2–B8 had fitted the
+  the model; end-to-end concentrations in full precursor systems validate it. The earlier sulfur waves (B2 to B8) had fitted the
   Hofmann 1998 Table 1 levels of FFT and MFT for ribose, xylose, glucose and fructose + cysteine and
   then scored those same four bundles; B9 ([prereg](results/validation/kinetic_core_b9_prereg.md))
   removed the eight rows and refitted with everything else unchanged. **What the split revealed: without those rows the core predicts zero MFT from glucose and fructose.** The hexose entry to the thiols (`r_glc_c2c3` / `r_glc_fur`) is real chemistry but its rate constants are identified by no step-level measurement in the corpus; B9 left them on their band floor. Since 2026-09-04 the engine DECLARES this (`HEXOSE ENTRY UNIDENTIFIED`) on any hexose-only charge asked for MFT or FFT: the number is still returned, both scorers list the row as not evaluable instead of scoring a band-floor artefact, and the ordering "pentose above hexose" stays a claim the model supports structurally. The four returned Hofmann bundles' hexose rows are therefore off the absolute count; the two pentose ones score 1 of 4 within 3x. Every fit row now declares its bundle
@@ -160,7 +164,7 @@ Three things a reader must know, all declared in code and printed on every row t
   pinned on a declared bound) stay at the optimum and are listed as such. The slice profile
   ([`kinetic_core_b9_profile.md`](results/validation/kinetic_core_b9_profile.md)) grades 4 of the 23
   coordinates quadratic, 9 asymmetric, 3 flat and 7 bound-limited: the declared bands are still
-  active constraints. Until B8 (2026-09-03) the lane was unsampled and 24 rows were not evaluable.
+  active constraints. Until the covariance step (wave B8, 2026-09-03) the lane was unsampled and 24 rows were not evaluable.
 - **The K_aw and HS-SPME bands are headspace facts.** The envelope applies them only to rows the
   bundle declares as headspace-quantified, never to isotope-dilution or HPLC values. Since 2026-09-03
   every panel bundle declares its class (`benchmark.schema.json` enum, `schema_gate`); eleven say
@@ -211,7 +215,7 @@ constant, which is what makes `rank` useful.
 
 - **Absolute concentrations are unreliable.** On the union panel the kinetic core lands 4/39 rows within 3x (median fold error 29.5x, worst 3.34e+04x); out of sample -- every row a core fit read removed -- 3/38 (median 31.9x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 6/32 evaluable literature rows (7 not evaluable: the no lane carries no sampled uncertainty), 6/31 out of sample.
 - **Directional and ranking claims are the product, and on the kinetic core they score 17/26 on strictly independent literature claims** (26 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 13/21 once pH and water activity are set aside, and 4/5 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.
-- **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
+- **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
 
 | Claim type | System class | Measured | Verdict |
 |---|---|---|---|
@@ -251,10 +255,10 @@ Four networks that do *not* compose, each with its own integrator (`src/kinetic_
 
 | lane | steps | species it adds | pH term | fitted to |
 | --- | ---: | --- | --- | --- |
-| trunk | 26 | glucose / fructose / glycine → Amadori, deoxyosones, melanoidins; HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin | none | Martins 2005 time series (B1), Blank 1997 furanic yields (B7) |
-| sulfur | 93 | pentoses, cysteine, thiamine → MFT, FFT, furfural, the MFT dimer | pH trajectory (B2.2) | Hofmann 1998 Tables 1/3/4/10, Kang 2026, Zhou 2023, Whitfield 1999, Cerny 2007, van Seeventer 2001 (B2–B8) |
-| acrylamide | 42 | asparagine + reducing sugar → acrylamide, HMF | none | Claeys 2005, De Vleeschouwer 2009, Knol 2005 rate constants (B3) |
-| lipid | — | a linoleate hydroperoxide pool → Frankel 1989's six products (hexanal, pentane, decadienal, …) | none | branch distribution fitted (B6); the **rate is a declared assumption** with a Q10 band |
+| trunk (wave B1) | 26 | glucose / fructose / glycine → Amadori, deoxyosones, melanoidins; HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin | none | Martins 2005 time series, Blank 1997 furanic yields (wave B7) |
+| sulfur (waves B2 to B9) | 93 | pentoses, cysteine, thiamine → MFT, FFT, furfural, the MFT dimer | pH trajectory (wave B2.2) | Hofmann 1998 Tables 1/3/4/10, Kang 2026, Zhou 2023, Whitfield 1999, Cerny 2007, van Seeventer 2001 (waves B2 to B8) |
+| acrylamide (wave B3) | 42 | asparagine + reducing sugar → acrylamide, HMF | none | Claeys 2005, De Vleeschouwer 2009, Knol 2005 rate constants |
+| lipid (wave B6) | — | a linoleate hydroperoxide pool → Frankel 1989's six products (hexanal, pentane, decadienal, …) | none | branch distribution fitted; the **rate is a declared assumption** with a Q10 band |
 
 The sulfur steps are deliberately absent from the acrylamide lane — composing them would spend
 the same cysteine twice — so a request spanning both is declared **unanswerable** rather than

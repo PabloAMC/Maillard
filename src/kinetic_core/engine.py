@@ -268,7 +268,7 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
         "alanine only on the acrylamide lane, which do not compose. Blank 1997 "
         "measures HEMF at 6.8-10.0 ug/mmol in pentose/alanine systems and at "
         "0.3-1.3 in pentose/glycine ones -- a 5.2-25x PREFERENCE, not a switch "
-        "(FIT_HOLDOUT_DECLARATION Amendment 12 corrected Amendment 8 on "
+        "(docs/reference/FIT_HOLDOUT_DECLARATION.md, amendment 12, which corrected amendment 8 on "
         "exactly this) -- so the compound is real, the route is understood, "
         "and the lane algebra is what refuses. Refused rather than answered "
         "with a DMHF number wearing a different name."
@@ -294,7 +294,7 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
     # they are still refused is sharper and different. A wave that un-refused
     # them would have invented two branch fractions.
     "1-hexanol": (
-        "The B6 lipid lane exists and forms the SIX products Frankel 1989 "
+        "The lipid lane exists and forms the SIX products Frankel 1989 "
         "measured, but 1-hexanol is not one of them and NO aldehyde-reduction "
         "step is measured anywhere in the corpus -- in a thermally processed "
         "extrudate the reductant pool is not even identified. The retired screening "
@@ -302,19 +302,19 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
         "parameters_lipid.PROHIBITED_DERIVATIONS."
     ),
     "2-pentylfuran": (
-        "The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
+        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
         "alkylfuran route is measured anywhere in the fit corpus. The FAST "
         "lane's shipped 0.08 has no source. Refused rather than invented."
     ),
     "2-pentyl furan": (
-        "The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
+        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
         "alkylfuran route is measured anywhere in the fit corpus. The FAST "
         "lane's shipped 0.08 has no source. Refused rather than invented."
     ),
     "propanal": (
-        "The B6 lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
+        "The lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
         "scission product; Frankel 1989 fed linoleate only, so the FIT column "
         "contains no propanal share, and Schroen's 7 % is a property of "
         "RAPESEED OIL's fatty-acid profile rather than a transferable branch "
@@ -866,7 +866,7 @@ def declare_envelope(
         warnings.append(
             f"{HEXOSE_ENTRY_UNIDENTIFIED} ({', '.join(sorted(unidentified))}): the only "
             "route from a hexose to these thiols is the C2+C3 fragmentation entry, "
-            "whose rate constants no primary measurement identifies (B9 left them on "
+            "whose rate constants no primary measurement identifies (the primary-evidence refit left them on "
             "their band floor). The number below is a floor artefact, not a fit; the "
             "scorecard and the envelope list this row as not evaluable, and the ordering "
             "'pentose above hexose' is the structural claim the model does support."
@@ -1019,7 +1019,7 @@ def declare_envelope(
                 "at 160-200 C. This program runs at "
                 f"{spec.process.thermal.peak_temperature_c:.0f} C in an "
                 "aqueous or matrix system, so both the temperature and the "
-                "physical state are extrapolations. K5a sec. 6.2: that limb's "
+                "physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's "
                 "activation energy reproduces four independent ways in the "
                 "melt and COLLAPSES in all three real-matrix systems in the "
                 "corpus."
@@ -1032,7 +1032,7 @@ def declare_envelope(
                 f"{HMF_SINK_NO_EXTRAPOLATION_ABOVE_K - CELSIUS:.0f} C rather "
                 "than extrapolated, and HMF self-degradation is a "
                 "single-temperature 0.9 %-per-7-days control carried with no "
-                "activation energy. K5a declared gap G2: the 50-150 C window "
+                "activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window "
                 "is empty. EXPECT HMF TO BE OVER-PREDICTED."
             )
             if peak_k > HMF_SINK_NO_EXTRAPOLATION_ABOVE_K and (
@@ -1042,7 +1042,7 @@ def declare_envelope(
                     "5-HMF + cysteine: the sink constant is HELD at its 50 C "
                     "value for this whole program. Holding it UNDER-states the "
                     "sink; extrapolating it is a named prohibited derivation "
-                    "(K5a sec. 7.3), and the direction is stated rather than "
+                    "(furanic extraction dossier, sec. 7.3), and the direction is stated rather than "
                     "chosen for convenience."
                 )
         if "DMHF" in furanic_keys or "AF" in furanic_keys:
@@ -2115,7 +2115,7 @@ def engine_metadata() -> Dict[str, Any]:
 
     return {
         "module": "src/kinetic_core/engine.py",
-        "wave": "B7 -- furanic channels (HMF, DMHF); propagator cutover at B5",
+        "wave": "furanic channels (HMF, DMHF), fit wave B7",
         "lanes": list(LANES),
         "lane_networks": {
             TRUNK: f"REACTIONS ({len(REACTIONS)} steps), no pH term, no a_w term",
@@ -2128,7 +2128,7 @@ def engine_metadata() -> Dict[str, Any]:
                 "steps) = trunk + acrylamide; sulfur STEPS deliberately absent"
             ),
             LIPID: (
-                "B6: a hydroperoxide pool resolved by position (9-/13-) and "
+                "a hydroperoxide pool resolved by position (9-/13-) and "
                 "geometry (cis,trans / trans,trans), decomposing first-order "
                 "into Frankel 1989's six-product measured slate. The "
                 "DISTRIBUTION is fitted and frozen; the RATE is a declared, "
@@ -2141,7 +2141,7 @@ def engine_metadata() -> Dict[str, Any]:
             "why": (
                 "disjoint species sets, and the only candidate coupling (the "
                 "aldehyde-lysine covalent channel) is INERT BY RULING "
-                "(FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2). Checked at "
+                "(docs/reference/FIT_HOLDOUT_DECLARATION.md, amendment 6, ruling 2). Checked at "
                 "every call by lipid.lane_coupling_verdict, not hard-coded."
             ),
             "condition": (
