@@ -208,20 +208,39 @@ def test_priors_table_shape():
             assert p.band is not None and p.band[0] < p.band[1]
 
 
-def test_b1_identified_pairs_are_sampled_and_the_unidentified_are_fixed():
+def test_b1_identified_pairs_are_sampled_and_an_unidentified_Ea_is_banded():
+    """
+    2026-09-04, the rule inversion. An identified pair is drawn from its stderr; an
+    UNIDENTIFIED Ea is drawn across FITTED_EA_BOUNDS (narrowed by the prefactor
+    prior) rather than frozen; an unidentified RATE has no recorded search band, so
+    it stays fixed and must SAY that rather than passing for a known constant.
+    """
     by_key = {p.key: p for p in unc.CORE_PRIORS}
     for key in ("k_mgo_mel", "k_aa_frag"):
         assert by_key[f"b1.{key}.log10_k_ref_100C"].sampled
         assert by_key[f"b1.{key}.ea_kj_mol"].sampled
     for key in ("k_glc_frag", "k_fa_frag"):
-        assert not by_key[f"b1.{key}.log10_k_ref_100C"].sampled
-        assert not by_key[f"b1.{key}.ea_kj_mol"].sampled
+        rate = by_key[f"b1.{key}.log10_k_ref_100C"]
+        assert not rate.sampled and rate.reason == unc.UNIDENTIFIED_NO_BAND
+        ea = by_key[f"b1.{key}.ea_kj_mol"]
+        assert ea.sampled, "an unidentified Ea is the one an interval most needs"
+        assert ea.distribution == "uniform_band"
+        assert ea.band[0] < ea.band[1]
 
 
 def test_b3_only_the_identified_pair_is_sampled():
     b3 = [p for p in unc.CORE_PRIORS if p.key.startswith("b3.")]
     sampled = sorted(p.key for p in b3 if p.sampled)
-    assert sampled == ["b3.Ea_acr_dp", "b3.k_acr_dp.log10_k_ref_160C"]
+    # The identified pair, plus the two unidentified Ea coordinates now drawn
+    # across FITTED_ACRYLAMIDE_EA_BOUNDS narrowed to the prefactor prior. Both sit
+    # AT a search bound (260 and 20 kJ/mol), which is what unidentified looks like.
+    assert sampled == [
+        "b3.Ea_acr_dp", "b3.Ea_competitor_sugar", "b3.Ea_int1_mel",
+        "b3.k_acr_dp.log10_k_ref_160C",
+    ]
+    for key in ("b3.Ea_int1_mel", "b3.Ea_competitor_sugar"):
+        p_ = next(p for p in b3 if p.key == key)
+        assert p_.distribution == "uniform_band" and p_.reason == unc.UNIDENTIFIED_CAPPED
     report = json.loads(
         (data_paths.VALIDATION_DIR / "kinetic_core_b3_fit_report.json").read_text()
     )
@@ -231,28 +250,71 @@ def test_b3_only_the_identified_pair_is_sampled():
 
 
 def test_sulfur_priors_follow_the_b8_laplace_covariance():
-    """B8 (2026-09-03): the sulfur lane's free coordinates are sampled JOINTLY from the
-    Laplace covariance at the frozen optimum -- identified ones only; unidentified or
-    at-bound ones stay put and say why; coordinates the B8 fit froze are not sampled."""
+    """
+    The sulfur lane's IDENTIFIED coordinates are drawn jointly from the Laplace
+    covariance at the frozen optimum.
+
+    2026-09-04: the FLAT ones are no longer frozen. Each is drawn across its own
+    declared band -- independently, because a covariance has nothing to say about a
+    direction it is flat in -- unless its bound is DEFINITIONAL, in which case it
+    stays fixed and says so. Coordinates the fit never made free stay fixed too,
+    with a reason that distinguishes "we could not pin it" from "we never asked".
+    """
     import json
     lap = json.loads(unc.LAPLACE_PATH.read_text())
     identified = {
-        (c["block"], c["key"]) for c, ok in zip(lap["coordinates"], lap["identified"]) if ok
+        (c["block"], c["key"]) for c, ok in zip(lap["coordinates"], lap["identified"], strict=True) if ok
     }
     free = {(c["block"], c["key"]) for c in lap["coordinates"]}
+    definitional = {
+        (c["block"], c["key"]) for c, ok in zip(lap["coordinates"], lap["identified"], strict=True)
+        if not ok and c.get("kind") in unc.DEFINITIONAL_BAND_KINDS
+    }
     sulfur = [p for p in unc.CORE_PRIORS if p.lane == "sulfur"]
     assert sulfur
     sampled = {p.key for p in sulfur if p.sampled}
-    assert len(sampled) == len(identified) == lap["identified_count"]
+    assert len(identified) == lap["identified_count"]
+    # every free coordinate is now sampled EXCEPT the definitionally-bounded ones
+    assert len(sampled) == len(free) - len(definitional)
     for p in sulfur:
-        if p.sampled:
-            assert p.reason == unc.LAPLACE_SAMPLED and p.sigma is not None and p.band is not None
-        elif p.reason == unc.LAPLACE_FLAT:
-            assert p.sigma is not None  # reported, not sampled
+        if p.sampled and p.reason == unc.LAPLACE_SAMPLED:
+            assert p.sigma is not None and p.band is not None
+        elif p.sampled:
+            assert p.reason in (unc.UNIDENTIFIED_SAMPLED, unc.UNIDENTIFIED_CAPPED)
+            assert p.distribution == "uniform_band" and p.band[0] < p.band[1]
+        elif p.reason == unc.DEFINITIONAL_BAND:
+            assert p.band is not None  # reported, deliberately not drawn over
         else:
             assert "not a free coordinate" in p.reason
-    # the flat / at-bound coordinates are exactly the free-but-unidentified ones
-    assert sum(1 for p in sulfur if p.reason == unc.LAPLACE_FLAT) == len(free) - len(identified)
+
+
+def test_a_flat_Ea_is_drawn_and_its_band_respects_the_prefactor_prior():
+    """
+    The two sulfur sink barriers are the coordinates the fit cannot pin, and the
+    ones an extrapolation away from 145 C is most sensitive to. Each must be drawn,
+    inside its declared band, and no wider than a physical prefactor allows: holding
+    log10 k(145 C) fixed, an Ea offset of dEa implies a prefactor offset of
+    dEa / (ln10 * R * T_ref), and 6 decades is the declared ceiling.
+    """
+    by_key = {p.key: p for p in unc.CORE_PRIORS}
+    half = unc.ea_halfwidth_from_prefactor(unc.B8_T_REF_C)
+    # ln(10) * R * T_ref = 8.0 kJ/mol per decade of prefactor at 145 C. Pin the
+    # ARITHMETIC against the declared constant, not a copy of the constant: moving
+    # PREFACTOR_PRIOR_DECADES is a scientific decision this test must not veto.
+    per_decade = unc.ea_halfwidth_from_prefactor(unc.B8_T_REF_C, decades=2.0)
+    assert per_decade == pytest.approx(8.0, abs=0.05)
+    assert half == pytest.approx(per_decade * unc.PREFACTOR_PRIOR_DECADES / 2.0)
+    for key in ("b8.decay_Ea_kJ_mol.thiol_sink", "b8.decay_Ea_kJ_mol.carbonyl_sink"):
+        p_ = by_key[key]
+        assert p_.sampled and p_.distribution == "uniform_band"
+        assert p_.band[1] - p_.band[0] <= 2 * half + 1e-9
+        assert p_.band[0] >= 7.0 - 1e-9  # never outside the DECLARED band
+
+    # and the draw actually moves them
+    import numpy as np
+    rng = np.random.default_rng(11)
+    seen = {unc.sulfur_joint_draw(rng)["coords"]["b8.decay_Ea_kJ_mol.thiol_sink"] for _ in range(6)}
+    assert len(seen) == 6, "a flat direction that never moves is the old bug"
 
 
 

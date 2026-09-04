@@ -175,7 +175,14 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_6_of_32_evaluable_literature_rows_and_6_of_31_out_of_sample():
+def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_of_sample():
+    # RE-PINNED 2026-09-04 (the unidentified-coordinate rule inverted): a coordinate the fit
+    # could not pin is now DRAWN across its declared band instead of frozen at the optimum,
+    # with an Ea band narrowed to a 12-decade prefactor prior and a definitionally-bounded
+    # coordinate (acid yield) still fixed. 6/32 -> 5/33, out of sample 6/31 -> 5/32, median
+    # width 0.98 -> 1.38 dex, sampled priors 35 -> 41. The width is the point; the coverage
+    # is NOT, and the sweep in uncertainty.py records why: uncapped bands still cover only
+    # 21% against a nominal 90%, so the residual is model-structure error.
     # RE-PINNED 2026-09-04 (quarantine + unidentified hexose entry): 9/42 -> 6/32, 9/41 -> 6/31;
     # every remaining row carries a declared quantification class (undeclared 0).
     # RE-PINNED 2026-09-03 (pass 7): five more bundles verified from PMC full text; ACSRef3 is
@@ -195,10 +202,10 @@ def test_core_envelope_covers_6_of_32_evaluable_literature_rows_and_6_of_31_out_
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (6, 32, 7)
-    assert lit["median_ci_width_log10"] == pytest.approx(0.9775, abs=5e-4)
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (5, 33, 6)
+    assert lit["median_ci_width_log10"] == pytest.approx(1.3753, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (6, 31)
+    assert (oos["hits"], oos["total"]) == (5, 32)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
@@ -206,8 +213,8 @@ def test_core_envelope_covers_6_of_32_evaluable_literature_rows_and_6_of_31_out_
         "headspace": 8, "extraction": 31, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "6 of 32", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "6 of 31", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "5 of 33", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "5 of 32", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

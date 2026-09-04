@@ -1014,8 +1014,45 @@ The evidence, in the order it was found:
    the tail, not the body). `acrylamide_spi_extrusion_130C_ACSRef3` (25 s at 130 C, 4 247x) deserves
    the same look at whether its `conditions` are the process or the analysis.
 
-- [ ] **Invert the envelope's sampling rule: unidentified => SAMPLED over its declared band, not
-      fixed.** Today `uncertainty.py` fixes a coordinate *because* the fit failed to constrain it,
+- [x] **DONE 2026-09-04. Invert the envelope's sampling rule: unidentified => SAMPLED over its
+      declared band, not fixed.** Shipped, with a NEGATIVE result on its stated goal that is worth
+      more than the change: `uncertainty.unidentified_prior` draws a free-but-unpinned coordinate
+      uniformly across its declared band; an Ea band is first narrowed to a 12-decade prefactor
+      prior (`PREFACTOR_PRIOR_DECADES`; holding log10 k(T_ref) fixed, dEa = ln10*R*T_ref*d(log10 A)
+      = 8.0 kJ/mol per decade at 145 C, so the raw (20, 260) search band implied a prefactor
+      uncertain by 29 decades, which nothing is); a DEFINITIONAL bound is NOT sampled (a flat draw
+      over `acid_yield_per_sink_event`'s (0, 1) lands ~1500x above the fitted 3.6e-4, floors every
+      sulfur prediction and made the envelope worse). Sampled priors 35 -> 41, median 90 % width
+      0.98 -> 1.38 dex, coverage 6/32 -> 5/33, out of sample 6/31 -> 5/32; README, the headline
+      guard and the model card re-pinned together; 770 tests and six gates green.
+      **THE NEGATIVE RESULT.** A sweep of the prior width (n=80, seed 0) says parameter uncertainty
+      is NOT what the envelope is missing:
+
+      | prior width | Ea half-width | coverage | median 90 % width |
+      | --- | ---: | ---: | ---: |
+      | frozen (the old rule) | 0 | 6/32 = 18.8 % | 0.949 dex |
+      | 6 decades | 24 kJ/mol | 4/33 = 12.1 % | 0.937 dex |
+      | 12 decades (shipped) | 48 kJ/mol | 5/33 = 15.2 % | 1.168 dex |
+      | 24 decades | 96 kJ/mol | 5/33 = 15.2 % | 1.279 dex |
+      | uncapped | +/-115 kJ/mol | 7/33 = 21.2 % | 1.245 dex |
+
+      Widening the priors all the way to uncapped moves a nominal 90 % interval from 19 % to 21 %
+      actual coverage. The change is still right -- freezing a coordinate BECAUSE the fit could not
+      pin it was indefensible, and the intervals are now wide in the places the physics says they
+      should be -- but it does not make the model honest on its own. Superseded item follows.
+- [ ] **The missing term is MODEL-STRUCTURE error, and the envelope has no way to express it.**
+      Sampling parameters around a wrong centre cannot reproduce a systematic offset, and the
+      residuals carry per-lane offsets of +0.84 (sulfur), -0.56 (acrylamide) and -3.53 dex (lipid)
+      medians, with ~1.1 dex of scatter left after removing each lane's temperature trend. To cover
+      90 % of rows an interval would need ~+/-2.5 dex. Options, in increasing honesty and cost:
+      (a) publish the measured per-lane residual dispersion beside the parameter interval and refuse
+      to call the parameter interval a prediction interval; (b) add a declared per-lane structural
+      dispersion term, fitted on the panel and disclosed as such, so the published interval is a
+      real predictive interval; (c) close the gap physically -- the two-temperature measurements the
+      calibration diagnosis asks for. (a) is a day, (b) is a wave with a prereg, (c) is an
+      experiment. Do NOT smuggle (b) in as a wider parameter prior: the sweep above shows that does
+      not work and would misattribute the error.
+- [ ] (superseded, kept for the record) **Invert the envelope's sampling rule.** Today `uncertainty.py` fixes a coordinate *because* the fit failed to constrain it,
       which is why a 90 % interval covers 15 %. The two sulfur Ea coordinates already carry a
       computed sigma (29.2 / 60.6 kJ/mol) in the Laplace artifact and are still `sampled: False`;
       the trunk and acrylamide ones have no sigma and should be drawn log-uniform over their
