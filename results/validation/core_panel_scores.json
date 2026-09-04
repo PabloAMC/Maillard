@@ -45,8 +45,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-04",
     "git": {
-      "commit": "fb0327a17d5431aa3434c838c8cfcf0db119ffa2",
-      "short": "fb0327a1",
+      "commit": "e31b98e488ea51e5f96420322bf93db478075020",
+      "short": "e31b98e4",
       "branch": "cleaning",
       "dirty": true
     },
@@ -78,7 +78,7 @@
       },
       {
         "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
-        "sha256": "39d2ca1361506cb7c99372a963e6e762d7f4da72c2c5eea0957e9d09bbf62015"
+        "sha256": "541e98c54b9b584d2c09ddb13e308c7f73f06d612a5f7f7959812ee77bfd94dc"
       },
       {
         "path": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json",
@@ -477,7 +477,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 8.5
+    "wall_seconds": 8.8
   },
   "benchmarks": [
     {
@@ -580,8 +580,8 @@
         "index": []
       },
       "core_fit_targets": [],
-      "quantification_family": "undeclared",
-      "quantification_source": "quantification_class='undeclared' matches no known family",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
       "scale_thresholds": {
         "max_ratio": 1.8,
         "mean_abs_log10_error": 0.25,
