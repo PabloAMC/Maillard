@@ -288,7 +288,7 @@ def _laplace_lookup(lap: Optional[Dict[str, Any]]) -> Dict[Tuple[str, str], Dict
         return {}
     out: Dict[Tuple[str, str], Dict[str, Any]] = {}
     for i, (coord, sigma, ok, bounds) in enumerate(
-        zip(lap["coordinates"], lap["sigma"], lap["identified"], lap["bounds"])
+        zip(lap["coordinates"], lap["sigma"], lap["identified"], lap["bounds"], strict=True)
     ):
         out[(coord["block"], coord["key"])] = {
             "sigma": float(sigma), "identified": bool(ok), "bounds": tuple(bounds), "index": i,
@@ -825,9 +825,9 @@ def propagate_panel(
     else:
         results = [_run_draw(task) for task in tasks]
     for per_draw in results:
-        for job, values in zip(jobs, per_draw):
+        for job, values in zip(jobs, per_draw, strict=True):
             rows = benches[job.bench_index]["rows"]
-            for compound, value in zip(job.compounds, values):
+            for compound, value in zip(job.compounds, values, strict=True):
                 if value is not None and math.isfinite(value):
                     rows[compound]["samples"].append(value)
 

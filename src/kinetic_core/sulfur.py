@@ -800,11 +800,13 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
     # model's one calibrated constant: Martins measures that PART of the
     # deoxyosone flux terminates as formic/acetic acid and part as browning
     # polymer, and nothing in the corpus measures the pentose analogue's split.
-    "r_arp_decay": {"carboxyl": +1, "basis": (
-        "ONE lumped-sink acid equivalent (ACID), on the analogy of Martins' "
-        "measured steps 5 and 8. The Amadori's OWN carboxyl and amine are "
-        "separately CARRIED into CBX, so the +1 here is "
-        "the sink's new acid and nothing else.")},
+    # FOUR of the five are declared here; the fifth, `r_arp_decay`, is declared
+    # once below with the B2.3 amine movement as well (2026-09-04: a pre-B2.3
+    # copy of it stood here, silently shadowed by the live entry and asserting
+    # the opposite -- that the Amadori amine is CARRIED, not destroyed. Python
+    # collapses a repeated key before `validate_charge_closure` can see it, so
+    # the validator could not catch it; `test_no_dict_literal_repeats_a_key`
+    # now does).
     "r_osone_decay_dpo": {"carboxyl": +1, "basis": (
         "the lumped deoxyosone sink's acid equivalent; see r_arp_decay.")},
     "r_osone_decay_tdp": {"carboxyl": +1, "basis": (

@@ -960,6 +960,160 @@ hashes for every artifact that carries a block, the envelope included).
       bundles (Pratap-Singh, Trikusuma, Resconi, Bolton, Cerny, ACSRef3) and the matrix bundles are the ones without a
       primary-source pass; one pass per bundle, recorded in the bundle, closes it. Needs the PDFs (`data/articles/`).
 
+### Calibration diagnosis 2026-09-04 (review pass: "why does so little land?")
+
+Measured on the shipped artifacts, not argued from first principles. Signed residuals
+`log10(predicted / measured)` over the 38 scored panel rows of `core_panel_scores.json`.
+
+**The finding, in one line: the corpus pins rate constants at a reference temperature and does not
+pin their temperature slopes, so the core is near-unbiased where its evidence sits and drifts one
+to three orders of magnitude away from it.**
+
+The evidence, in the order it was found:
+
+1. **There is no global scale error to remove.** Median signed residual over all 38 rows is
+   -0.42 dex; 18 rows over-predict, 20 under-predict. Nothing is fixed by one multiplier.
+2. **Per lane the residual is Arrhenius-shaped.** Regressing the signed residual on
+   `1000/T - 1000/T_ref` (T_ref = 145 C, the sulfur fit's own reference):
+
+   | lane | n | intercept at 145 C | implied Ea error | R^2 | residual sd after removing the trend |
+   | --- | ---: | ---: | ---: | ---: | --- |
+   | sulfur | 19 | -0.16 dex | -189 kJ/mol (too shallow) | 0.47 | 1.11 dex (raw 1.52) |
+   | acrylamide | 11 | -1.10 dex | +136 kJ/mol (too steep) | 0.40 | 1.18 dex (raw 1.53) |
+   | lipid | 7 | -1.15 dex | +65 kJ/mol | **0.94** | **0.34 dex** (raw 1.46) |
+
+   The sulfur lane is unbiased at 145 C and runs ~+2 dex (100x over) at 100-130 C. The lipid lane's
+   residual is 94 % explained by a single wrong temperature coefficient -- consistent with its own
+   declared gap (k4 anchored at 25 C, Schroen & Berton-Carabin 2022, Q10 2-3 ASSUMED, no measured
+   temperature dependence).
+3. **The fit cannot identify a slope, structurally.** The 54-row B9 objective spans 100-145 C, but
+   across **35 distinct systems of which ZERO appear at more than one temperature**. Every
+   temperature contrast in the objective is confounded with a change of sugar, amino acid, lab,
+   matrix and analytical method. Accordingly 21 of the 23 free coordinates are
+   `log10_k_ref_at_145C`, only 2 are activation energies, and **both Ea coordinates are among the
+   three the Laplace marks NOT identified** (sigma 29.2 and 60.6 kJ/mol).
+4. **Sigma on an Ea is worth more than every other error combined, away from the reference.**
+   sigma = 60.6 kJ/mol moves a prediction by 0.91 dex (8x) over 145 -> 100 C, and by 2.5 dex (345x)
+   over 145 -> 40 C. The residual sd after removing the T-trend is ~1.1 dex, which is the chain
+   compounding of coordinates whose own sigmas are 0.1-0.7 dex -- real, but second order.
+5. **The envelope hides exactly this.** Of 10 activation-energy priors in
+   `core_prediction_uncertainty.json`, **7 are held FIXED, and the stated reason for each is that the
+   coordinate is unidentified** (`unidentified_direction_in_laplace_covariance`, or a null stderr).
+   The envelope therefore propagates the well-measured coordinates and freezes the badly-measured
+   ones -- the wrong way round for an interval. Measured consequence: a nominal **90 % interval
+   covers 6 of 39 rows (15 %)**.
+6. **Four rows are not tests of the kinetics at all.** Every `matrix_only` row at T = 40 C,
+   t = 10 min (`pea_isolate_40C_PratapSingh2021`, `soy_isolate_40C_PratapSingh2021`,
+   `external_validation_bi_2020_raw_pea_hexanal`, `external_validation_liu_2023_ppi_offnote_baseline`)
+   records the **HS-SPME incubation** (40 C, 10 min -- the fibre exposure in the quantification note)
+   in the `conditions` block as if it were the thermal process, and scores an unheated ingredient's
+   storage-accumulated hexanal against a from-zero 10-minute simulation. They are the four worst
+   rows in the panel (3 357x, 6 078x, 3 717x, 33 392x). The same lane's three genuinely cooked rows
+   land at **3.7x, 8.7x and 34x** -- among the better rows anywhere in the panel. Removing the four
+   moves the median fold from 26.5x to 16.1x (the within-3x count is unchanged at 4/34, so this is
+   the tail, not the body). `acrylamide_spi_extrusion_130C_ACSRef3` (25 s at 130 C, 4 247x) deserves
+   the same look at whether its `conditions` are the process or the analysis.
+
+- [ ] **Invert the envelope's sampling rule: unidentified => SAMPLED over its declared band, not
+      fixed.** Today `uncertainty.py` fixes a coordinate *because* the fit failed to constrain it,
+      which is why a 90 % interval covers 15 %. The two sulfur Ea coordinates already carry a
+      computed sigma (29.2 / 60.6 kJ/mol) in the Laplace artifact and are still `sampled: False`;
+      the trunk and acrylamide ones have no sigma and should be drawn log-uniform over their
+      declared bands. NOTE the distinction the thiol-sink decision turned on (backlog pass 7): Gigl
+      2021's (7, 102) kJ/mol is a MEASURED range, and leaving the point estimate at the bound is
+      right -- but an interval must still integrate across a measured width. Expected effect:
+      intervals widen sharply away from 145 C (to roughly +/-2 dex at 40 C on the lipid lane) and
+      coverage moves toward nominal. This supersedes and generalises the open `k_glc_ha` /
+      `k_glc_fur` item above: the rule is general, not two coordinates.
+- [ ] **Re-aim the data wishlist from levels to SLOPES: every new bundle should be a PAIR at two
+      temperatures in the same system.** No system in the objective appears at two temperatures, so
+      a further single-temperature bundle adds one more constraint to the coordinate class that
+      already has 21 members and zero to the two that dominate the error. `data_wishlist.py` already
+      says this for `Ea_decay_thiol_sink` ("at two temperatures in the same matrix"); make it the
+      wishlist's ranking principle rather than one row's remark, and have the value-of-information
+      ranking score a candidate measurement by whether it moves an *unidentified* coordinate.
+- [ ] **Repair or reclassify the four T = 40 C / t = 10 min matrix rows.** Two honest options:
+      (a) declare the ingredient's incoming hexanal as an initial condition and score the
+      *increment* the process adds; or (b) score these bundles only on the
+      `matrix_ranking_contract` they were curated for (they carry `expected_rank` and `direction`)
+      and drop them from the absolute denominator. Either way the scorecard should not report an
+      absolute fold error for a bundle whose `conditions` block is an analytical method. Add a
+      schema-gate check: a bundle whose `conditions.temp_C`/`time_min` equal its
+      `quantification_note`'s incubation must declare which one the `conditions` are.
+- [ ] **Publish the per-lane temperature trend as a first-class artifact.** The three regressions in
+      the table above are the most useful calibration statement the repo can make, and they cost one
+      short generator over `core_panel_scores.json`. "Unbiased at 145 C, +2 dex at 110 C" tells a
+      user far more than "3 of 38 within 3x", and it converts the headline from a verdict into a
+      usable rule for when to trust an absolute.
+
+### Repository review 2026-09-04 (same pass, engineering side)
+
+- [ ] **The dependency manifests describe a repository that no longer exists.** Measured by AST over
+      `src/` and `scripts/maillard.py`: the entire shipping tool imports exactly **numpy, scipy and
+      pyyaml**. `pyproject.toml` still declares 17 runtime dependencies including `torch`,
+      `mace-torch`, `sella`, `ase` and `cantera` (the QM lane deleted at Phase 1a and the legacy
+      engine deleted at B5); `environment.yml`, cleaned on 2026-09-01 with the rule "do not add a
+      dependency without a consumer", still carries `cantera`, `optuna` and `networkx`, none of
+      which any file imports. Verified empirically: `maillard compare` runs a full two-arm
+      comparison end to end in 8.5 s on a bare venv with only those three packages. Concrete change:
+      cut the runtime set to numpy/scipy/pyyaml; move rdkit + matplotlib to a `data-build` extra
+      (their only consumers are `validate_smiles`, `build_compound_registry`, `generate_gap_heatmap`);
+      add `pytest-timeout` to `environment.yml` (CI/pytest.ini assume it; the container does not have
+      it); and add a seventh gate asserting manifest == imports, in the style of the other six.
+- [ ] **Make the tool `pip install`-able and drop the Docker requirement for the front door.** The
+      package is literally named `src`, so 496 imports read `from src import ...` and 77 files carry
+      a `sys.path.insert` shim; the README's install path is a Docker image built from a conda env.
+      Given the finding above, `pip install maillard` + a `[project.scripts]` entry point is
+      reachable now and would remove the single largest barrier to the stated "highly usable"
+      goal. Docker stays the right answer for regenerating artifacts reproducibly; it should not be
+      required to ask the model a question.
+- [ ] **CI runs three jobs that reference deleted files, and skips the gate that matters most.**
+      `strict-benchmarks` and the whole `validation-benchmarks.yml` workflow invoke
+      `tests/scientific/test_benchmarks.py`, deleted at B5; `ci.yml` also names
+      `tests/scientific/test_honest_headline_guards.py` and `scripts/run_campaign.py`, both gone.
+      `strict-benchmarks` is `continue-on-error: true`, so it builds a full conda env on every
+      non-draft PR to run nothing -- while advertising, as its job NAME in the PR checks list,
+      "RED: 0/14 strict-ready (9/9 PRIMARY fail, 5 SECONDARY unevaluated)": pre-retirement numbers
+      in legacy vocabulary, the most prominent honesty signal the repo publishes and the one place
+      the "docs that cannot drift" pass did not reach. Meanwhile **`artifact_freshness_gate.py` --
+      the sixth gate, written because an artifact drifted silently -- runs only in
+      `docker_maillard.sh gates`, never in CI.** Also: the "Install LaTeX toolchain" step (~2-3 min
+      of apt per unit run) exists for `test_run_campaign_named_comparison_mode`, which no longer
+      exists; nothing in the repo calls `usetex`.
+- [ ] **Adopt `ruff` with a narrow rule set (F, B905, B006) as a seventh CI check.** It found, in one
+      pass: a **duplicate `"r_arp_decay"` key in `CENTRE_LEDGER`** (`src/kinetic_core/sulfur.py:803`
+      shadowed by `:858`) whose two `basis` strings *contradict each other* -- the dead one asserts
+      the Amadori amine is CARRIED, the live one declares it destroyed. No behaviour is wrong
+      (`validate_charge_closure` asserts declared == stoichiometry, so the live entry must be
+      correct, and the module would refuse to import otherwise), but the ledger whose stated
+      contract is that every step is "declared in exactly one place" declares one step twice, and
+      the validator cannot see it because Python collapsed the key before it ran. Also 39 `zip()`
+      calls without `strict=`, of which `uncertainty.py:291` zips four parallel arrays out of the
+      Laplace artifact (`coordinates`/`sigma`/`identified`/`bounds`) -- a length mismatch there
+      would silently sample a subset of coordinates -- and `uncertainty.py:828` zips jobs against
+      worker results. Plus 48 unused imports and 3 unused locals. Nothing here runs today: `black`
+      and `isort` are declared in the dev extra but never configured or invoked, and
+      `pyrightconfig.json` exists but nothing runs pyright.
+- [ ] **Split the wave generators into frozen DECLARATIONS and a tested HARNESS.** 21 138 of the
+      32 033 lines under `scripts/` (66 %) are frozen wave generators, omitted from coverage by
+      policy, and the shipping objective is not written down anywhere -- it is the residue of
+      importing three modules in a fixed order, each mutating the first one's module-level list:
+      `import b2_3` gives 58 rows, `import b8` appends 4 to make 62, `import b9` removes 8 to make
+      54, and `b9.main()` then rebinds `b8`'s `MEMBER_DIR`, `OUT_FIT_REPORT` and `incumbent_vector`
+      at run time. It works only by careful construction, it is untested, and the freeze policy
+      means B10 can only deepen the chain. The freeze is right and should stay -- a changed
+      generator IS a new wave -- but freeze the *declaration* (row table, free-key set, bounds,
+      prereg pointer: small, data-like, one file per wave) and move the invariant machinery
+      (residual assembly, optimiser driver, consolidation, report writing) into `src/kinetic_core/`
+      under test. A new wave then becomes a ~100-line data file, and the objective becomes something
+      a reader can read.
+- [ ] **Live-code hotspots worth splitting** (the frozen waves excluded, since they cannot be
+      touched): `engine.declare_envelope` 334 lines / 50 branches, `uncertainty.propagate_panel`
+      303 / 46, `report_html.declared_assumptions` 242, `sulfur.integrate_sulfur` 231,
+      `scoring.score_benchmark` 188 / 53. Also `make trust-loop` invokes three scripts deleted at
+      B5 (`generate_prediction_uncertainty`, `generate_external_validation_report`,
+      `generate_loo_leverage`) and fails on the first line.
+
 ## 6. Risks and guardrails
 
 | Risk | Guardrail |
