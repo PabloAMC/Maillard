@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-06",
     "git": {
-      "commit": "1495f5804b735a8f82ad3288941590b76fc32748",
-      "short": "1495f580",
+      "commit": "c71ecc5ce5a8ad629cc1756d698b1bca715b7497",
+      "short": "c71ecc5c",
       "branch": "cleaning",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "2f7da9aaf3e5c36bc3bc91bcb41b0a0b60fcba96c4541abfda65cfc73cc90530"
+        "sha256": "0361e037836a22f3311142d6dddbecda9e6ccf1ee191feab3f3cfe8d91c16d9b"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "f70e098456e69a4eeaab330bd3b5e54367ee95469356beca54c99992d75d7ba0"
+        "sha256": "f37cef572459257d1ba9440eaf0587d80d64f1a3efda6aacac9de60e72afc889"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -498,16 +498,6 @@
       "structural_block": null
     },
     {
-      "axis": "moisture_aw",
-      "agree": 0,
-      "evaluable": 0,
-      "not_evaluable": 4,
-      "verdict": "no evaluable claim",
-      "wilson_lower_bound": null,
-      "additional_agreeing_claims_to_trust": 4,
-      "structural_block": "no lane carries a water-activity term: the engine refuses every a_w comparison, so claims cannot help until a moisture-dependent step is measured and fitted"
-    },
-    {
       "axis": "process_heating",
       "agree": 0,
       "evaluable": 0,
@@ -536,6 +526,16 @@
       "wilson_lower_bound": 0.0,
       "additional_agreeing_claims_to_trust": 7,
       "structural_block": null
+    },
+    {
+      "axis": "moisture_aw",
+      "agree": 1,
+      "evaluable": 2,
+      "not_evaluable": 2,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.095,
+      "additional_agreeing_claims_to_trust": 6,
+      "structural_block": "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
     },
     {
       "axis": "time",

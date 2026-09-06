@@ -272,24 +272,28 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-09-03 (zero floor): a claim whose arms were 1e-31 and 1e-29 ug/L had been a
     # MISS on a log ratio of integrator noise; below 1 pg/L a concentration is zero and the claim is
     # NOT EVALUABLE ("a predicted concentration is zero"): 17/27 -> 17/26, sugar identity 4/9 -> 4/8.
-    assert s["headline"] == [17, 28]
+    # RE-PINNED 2026-09-07 (B12: the trunk gained declared a_w and pH terms): AW-01 and AW-03 became
+    # evaluable (one agree, one disagree, both as the B12 prereg expected), 17/28 -> 18/30; the two
+    # water-activity refusals on the trunk are gone (engine refusals 4 -> 2: the acrylamide arm of
+    # AW-02 and the lipid arm of PROC-01); pH-and-a_w 4/5 -> 5/7; 29 -> 27 not evaluable.
+    assert s["headline"] == [18, 30]
     ind = s["independent"]
     assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (13, 23)
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (4, 5)
-    assert ind["total"]["not_evaluable"] == 29
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (5, 7)
+    assert ind["total"]["not_evaluable"] == 27
     assert ind["total"]["mechanism_absent"] == 0
-    assert s["not_evaluable_reasons"]["refused by the engine"] >= 4
+    assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
     assert cats["sugar_identity"] == (4, 8)
     assert cats["temperature"] == (5, 9)
     assert cats["ph"] == (4, 5)
-    assert cats["moisture_aw"] == (0, 0)   # every a_w comparison is refused
+    assert cats["moisture_aw"] == (1, 2)   # B12: the trunk answers a_w; AW-03 agrees, AW-01 does not
     assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (2, 2)
     readme = _doc_text(README)
-    _assert_quoted(readme, "17 of 28", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "18 of 30", "README.md", "the core's directional headline")
     _assert_quoted(readme, "13 of 23", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "4 of 5", "README.md", "the directional count on pH")
+    _assert_quoted(readme, "5 of 7", "README.md", "the directional count on pH and water activity")
 
 
 def test_directional_scorecard_is_not_stale():

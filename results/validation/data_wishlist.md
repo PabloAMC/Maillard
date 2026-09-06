@@ -54,10 +54,10 @@ The engine returns a number but declares the route unidentified; the rows leave 
 |---|---|---|---|---|---|
 | lipid_lane | 0 / 0 | 1 | no evaluable claim | — | 4 |
 | matrix_identity | 0 / 0 | 1 | no evaluable claim | — | 4 |
-| moisture_aw | 0 / 0 | 4 | no evaluable claim | — | blocked: no lane carries a water-activity term: the engine refuses every a_w comparison, so claims cannot help until a moisture-dependent step is measured and fitted |
 | process_heating | 0 / 0 | 1 | no evaluable claim | — | 4 |
 | scope | 0 / 0 | 3 | no evaluable claim | — | 4 |
 | ranking | 0 / 1 | 2 | do-not-use | 0.0 | 7 |
+| moisture_aw | 1 / 2 | 2 | do-not-use | 0.095 | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
 | time | 2 / 2 | 0 | caution | 0.342 | 2 |
 | additive_cysteine | 2 / 3 | 2 | caution | 0.208 | 5 |
 | ph | 4 / 5 | 5 | caution | 0.376 | 3 |

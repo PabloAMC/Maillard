@@ -5,8 +5,10 @@ because the model is unusually opinionated about what it will and will not tell 
 most of the value is in the parts where it refuses.
 
 **One line, before anything else:** compare two formulations and read the **ratio**. Never
-quote an absolute ppb number as a specification. Treat any pH or moisture direction as
-unsupported.
+quote an absolute ppb number as a specification. Treat pH and moisture directions as
+caution-only: the sulfur lane carries a pH trajectory and the trunk a declared water-activity and
+Amadori-decay pH term (wave B12); the acrylamide and lipid lanes carry neither, and a comparison
+that moves an axis a lane has no term for is refused.
 
 ---
 
@@ -357,9 +359,10 @@ be written as the program it physically is.
 - **Any absolute ppb as a specification.** Out of sample: 6.04× median fold error on the
   free-precursor hold-out (worst 52.6×), 67–94× on the matrix lane, and 1 of 5 genuine
   extrapolation rows inside the 90 % CI.
-- **pH direction** (6/10 on the panel — at or near chance) or **water activity direction**
-  (0/3). The trunk and acrylamide lanes carry no pH term and no lane carries an a_w term at
-  all; your value is recorded and ignored.
+- **pH direction** (4 of 5 independent claims on the sulfur lane) or **water activity direction**
+  (1 of 2 on the trunk since wave B12, each printed with its band and source). The acrylamide and
+  lipid lanes carry no pH term and no a_w term: there your value is recorded and ignored, and a
+  comparison that moves it is refused rather than answered with identical arms.
 - **Sulfur absolutes.** The sulfur branch has 8 primary-source-verified literature anchors and
   the model fails every one of them. The *directions* are a separate question, and the
   temperature direction is also wrong.

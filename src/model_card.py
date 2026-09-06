@@ -701,7 +701,8 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
     lines.append(
         "**How to use this model in one line:** compare two formulations and read the ratio "
         "(`python scripts/maillard.py compare`), never quote the absolute number, and treat "
-        "any pH or moisture direction as unsupported."
+        "pH and moisture directions as caution-only: declared terms exist on the sulfur lane (pH) "
+        "and the trunk (water activity, Amadori-decay pH; wave B12), none on acrylamide or lipid."
     )
     return "\n".join(lines)
 

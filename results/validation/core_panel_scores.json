@@ -45,8 +45,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-06",
     "git": {
-      "commit": "1495f5804b735a8f82ad3288941590b76fc32748",
-      "short": "1495f580",
+      "commit": "c71ecc5ce5a8ad629cc1756d698b1bca715b7497",
+      "short": "c71ecc5c",
       "branch": "cleaning",
       "dirty": true
     },
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.0
+    "wall_seconds": 8.2
   },
   "benchmarks": [
     {
@@ -2741,7 +2741,8 @@
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 4.36 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
+            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 121 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],

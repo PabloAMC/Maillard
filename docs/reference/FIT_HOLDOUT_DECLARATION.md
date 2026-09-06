@@ -1099,3 +1099,20 @@ ran.
    Laplace, no B9 row moved more than 0.3 dex, the Kang 140 C direction held, and the Yiltirak
    fit-adjacent median improved. If the barriers are not identified the split is re-merged and the
    ambient-oxidant consistency fix ships alone as B10.
+
+## Amendment 21 — 2026-09-07 (Wave B12: water activity and pH on the trunk lane, declared from measured ratios)
+
+1. **TWO DECLARED TERMS, NO FIT.** `src/kinetic_core/trunk_conditions.py` scales the trunk's
+   amine-sugar condensation by a water-activity multiplier (Pereyra Gonzales 2010's k(a_w)/k(0.98),
+   50 and 60 C averaged; band from Bell 1995's fixed-molality plateau to 1.2x the centre) and the three
+   Amadori-decay steps by 10^(0.69 (pH - 6.8)) (Martins & van Boekel 2003 Part II, k(6.8)/k(5.5) at
+   100 and 120 C; band 0.37-0.92 decades per pH unit; window 5.5-6.8). Both are within-study ratios
+   read from dossiers on disk, installed as constants with bands: the standing of a measured
+   barrier override, not of a fitted coordinate.
+2. **WHAT MAY NOT MOVE.** At a_w None or >= 0.98 and pH 6.8 every factor is exactly 1.0; B1, B7 and every
+   panel row reproduce bit for bit (`tests/unit/test_kinetic_core_b12.py`). No fit row is added or
+   read. The sulfur network's copy of the trunk steps and the acrylamide lane are untouched.
+3. **WHAT THE ENGINE NOW ANSWERS.** Water-activity comparisons on the trunk and pH comparisons on the
+   trunk, each printing the term, its band and its source; the acrylamide lane still refuses both.
+   The pre-registered expectations on the directional panel are in `kinetic_core_b12_prereg.md`
+   sec. 3, written before the re-score.

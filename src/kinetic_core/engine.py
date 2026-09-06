@@ -79,6 +79,7 @@ from .matrix_oav import (
 from .parameters import NETWORK_PH
 from .parameters_acrylamide import MEASURED_ACRYLAMIDE, with_fitted_acrylamide
 from .parameters_sulfur import MEASURED_SULFUR, OX_AMBIENT_MMOL_L, with_fitted_sulfur
+from . import trunk_conditions
 from .species import SPECIES_KEYS
 from .species_acrylamide import ACRYLAMIDE_INDEX, acrylamide_ppb
 from .species_sulfur import (
@@ -946,13 +947,16 @@ def declare_envelope(
             f"measured over 80-120 C. This is a numerically sound extrapolation "
             f"of an experimentally unsupported barrier."
         )
-    if lane in (TRUNK, ACRYLAMIDE) and abs(float(spec.process.ph) - NETWORK_PH) > 1e-9:
+    if lane == ACRYLAMIDE and abs(float(spec.process.ph) - NETWORK_PH) > 1e-9:
         warnings.append(
             f"pH {spec.process.ph:g} was supplied, but the {lane} lane carries "
             f"NO pH term at all -- its parameters are homogeneous at pH "
             f"{NETWORK_PH:g}. The pH is recorded and IGNORED; it changes no "
             f"rate. Any pH sensitivity in the measurement is unmodelled."
         )
+    if lane == TRUNK:
+        # B12: the trunk carries a declared a_w term and a declared pH term (Amadori decay).
+        warnings.extend(trunk_conditions.declarations(spec.process))
     if spec.process.water_activity is not None and lane == ACRYLAMIDE:
         warnings.append(
             "water activity is METADATA ONLY on the acrylamide lane: it changes "
@@ -1746,8 +1750,12 @@ def _integrate_program(
             )
             keys = list(ACRYLAMIDE_INDEX)
         else:
+            # B12 (2026-09-07): the trunk's declared water-activity and pH terms scale the
+            # named steps' k_ref before integration; exactly 1.0 at the references.
+            trunk_parameters, condition_terms = trunk_conditions.apply(parameters, process)
+            metadata.setdefault("condition_terms", list(condition_terms))
             run = integrate(
-                parameters,
+                trunk_parameters,
                 float(temperature_c) + CELSIUS,
                 state,
                 grid,
@@ -1956,7 +1964,10 @@ def predict(
 
 
 #: Lanes whose parameters carry NO pH term (declared in their parameter modules).
-NO_PH_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE, LIPID})
+#: B12 (2026-09-07): the trunk gained a declared pH term on its Amadori-decay steps.
+NO_PH_TERM_LANES = frozenset({ACRYLAMIDE, LIPID})
+#: Lanes that carry a water-activity term (B12: the trunk's declared multiplier).
+AW_TERM_LANES = frozenset({TRUNK})
 
 
 def _lanes_of(declaration) -> Tuple[str, ...]:
@@ -1979,19 +1990,22 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
     """
     pa, pb = spec_a.process, spec_b.process
     aw_a, aw_b = pa.water_activity, pb.water_activity
+    lanes = set(_lanes_of(declaration_a)) | set(_lanes_of(declaration_b))
     if aw_a is not None and aw_b is not None and abs(float(aw_a) - float(aw_b)) > 1e-9:
-        return (
-            "REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w "
-            "term; the model would return identical arms and call it a comparison. "
-            "Hold a_w fixed, or bring a measurement."
-        )
+        if not (lanes & AW_TERM_LANES):
+            return (
+                f"REFUSED -- the two arms differ in WATER ACTIVITY and the resolved lane(s) "
+                f"({', '.join(sorted(lanes)) or 'none'}) carry no a_w term; the model would return "
+                "identical arms and call it a comparison. Only the trunk lane carries a declared "
+                "a_w term (B12). Hold a_w fixed, or bring a measurement."
+            )
     if abs(float(pa.ph) - float(pb.ph)) > 1e-9:
-        lanes = set(_lanes_of(declaration_a)) | set(_lanes_of(declaration_b))
         if lanes and lanes <= NO_PH_TERM_LANES:
             return (
                 f"REFUSED -- the two arms differ in pH and the resolved lane(s) "
                 f"({', '.join(sorted(lanes))}) carry NO pH term by declaration; the model would "
-                "return identical arms. Only the sulfur lane carries a pH trajectory."
+                "return identical arms. The sulfur lane carries a pH trajectory and the trunk a "
+                "declared Amadori-decay pH term (B12)."
             )
     return None
 
@@ -2203,6 +2217,7 @@ __all__ = [
     "SULFUR",
     "TARGET_ALIASES",
     "axis_refusal",
+    "AW_TERM_LANES",
     "NO_PH_TERM_LANES",
     "TRUNK",
     "ThermalProgram",
