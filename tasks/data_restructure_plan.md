@@ -1291,7 +1291,13 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       weeks of GC-MS at a partner lab.
 - [ ] **W2 (kept). Within-study contrast dataset** from the 78 dossiers: one row per within-paper
       comparison with verbatim quote; several hundred rows; the fold rows R2(c) and R3 consume.
-- [ ] **W4 (kept). Trunk lane from the on-disk kinetic papers** (Bell 1995, Lievonen 2002, Miao
+- [x] **W4 part 1 DONE 2026-09-07 (wave B12, `3e88b83`):** water activity (Pereyra Gonzales 2010 shape, Bell 1995
+      floor) and Amadori-decay pH (Martins 2003 contrast) as declared banded terms on the trunk; AW-01 miss /
+      AW-03 agree as pre-registered; headline 17/28 -> 18/30. Kocadagli 2016 JAFC was already in the trunk (B7).
+      **B13 (next): glucosone / glyoxal / diacetyl species from Kocadagli JAFC + Gursul Aktag; Lee 2022/2024 and
+      Brands 2002 as validation sets; De Vleeschouwer 2009 for the acrylamide lane's a_w; envelope sampling of the
+      B12 bands; dossiers for Balagiannis 2010, Jousse 2002, Piornos 2025 (owner-supplied 2026-09-07).**
+- [ ] **W4 part 2 (B13). Trunk lane from the on-disk kinetic papers** (Bell 1995, Lievonen 2002, Miao
       2004, Pereyra Gonzales 2010, Kocadagli 2016 x2, Sen 2022, Agcam 2022, Hidalgo 1993, Zamora
       2013, Gursul Aktag 2020; Goncuoglu Tas 2017 has no Ea): rate constants, Ea, a_w dependence;
       the first a_w term in any lane.
