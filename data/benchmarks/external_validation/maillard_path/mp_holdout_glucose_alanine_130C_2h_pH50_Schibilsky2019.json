@@ -53,6 +53,16 @@
       "initial_ph_scale": "bench_cooled",
       "provenance_class": "repo_verbatim_methods_quote",
       "provenance_note": "Schibilsky 2019, TU Berlin dissertation, sec. 5.1.6 / 5.1.6.2, verbatim as carried in this bundle's content_verification.quoted_method: 'mit bidestilliertem Wasser aufgefuellt' and 'Des Weiteren wurde der pH-Wert auf 5,00 +/- 0,01 und 8,00 +/- 0,01 eingestellt.' NO BUFFER: bidistilled water, pH set at t=0 with dilute NaOH/HCl. The bundle's own content_verification.quantification_verdict already states the consequence in capitals -- 'the system is UNBUFFERED - pH is set at t=0 ... and will drift over 2 h at 130 degC, and the thesis does not report the final pH'. SOURCE NOT ON DISK; second-hand."
+    },
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "sealed 10 mL glass ampoule (2 mL) or 20 mL crimp-capped headspace vial (6 mL); thesis does not say which",
+      "atmosphere": "air_by_default",
+      "water_source": "distilled",
+      "stirred": null,
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Schibilsky 2019 (dissertation), SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method, verbatim (German): 'Die Thermolysen erfolgten in abgeschmolzenen 10 mL Glasspiessampullen (Neolab) oder in 20 mL Headspace-Vials mit Boerdelkappe (Amchro) ... Das Probenvolumen in den Glasspiessampullen betrug 2 mL und in den Headspace-Vials 6 mL.' The thesis does not say WHICH vessel the glucose/alanine model (5.1.6.2) used, so fill and vessel are left null rather than chosen: the two candidates give 8 or 14 mL of air (0.07 or 0.12 mmol O2). Sealed under air in either case (air_by_default); 'bidestilliertem Wasser' = distilled."
     }
   },
   "metadata": {

@@ -31,7 +31,17 @@
     "temp_C": 145.0,
     "ph": 3.0,
     "water_activity": 0.98,
-    "time_min": 20.0
+    "time_min": 20.0,
+    "vessel": {
+      "fill_mL": 50.0,
+      "vessel_mL": 200.0,
+      "closure": "laboratory autoclave (200 mL; Type II; Roth, Germany), sealed",
+      "atmosphere": "air_by_default",
+      "water_source": "unstated",
+      "stirred": null,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Hofmann & Schieberle 1998, JAFC 46:235, read from data/articles/hofmann1998.pdf (p. 236, EXPERIMENTAL PROCEDURES, 'Model Experiments'): 'thermally treated for 20 min at 145 degC in a laboratory autoclave (200 mL; Type II; Roth, Germany)'. This bundle's own quoted table footnote gives the fed-intermediate system volume verbatim as 'An aqueous solution (50 mL)' of 1 mmol of each precursor. Headspace = 200 - 50 = 150 mL. ATMOSPHERE: no inert-gas step appears anywhere in the procedures, so the headspace is taken as laboratory air at closure (air_by_default). Water source not stated. Stirring not stated."
+    }
   },
   "condition_provenance": {
     "status": "FULLY_STATED_IN_SOURCE for T, t, pH, volume and moles.",

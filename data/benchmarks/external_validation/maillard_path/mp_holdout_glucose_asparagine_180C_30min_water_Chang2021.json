@@ -53,6 +53,16 @@
       "initial_ph_scale": "bench_cooled",
       "provenance_class": "repo_verbatim_methods_quote",
       "provenance_note": "Chang / Sung et al. 2021, Polymers 13(12):1901, sec. 2.2, verbatim: 'Solutions containing 0.5 g asparagine, 0.5 g glucose, and 0.5 g hydroxymethylfurfural in distilled water were also prepared', and the same pH ladder ('adjusted to 5.8 by adding 1 N NaOH and then 0.001 N NaOH to pH 6.0'). This bundle's own vehicle_note names it 'Deionized water, pH adjusted to 6.0 (Figure 3A arm)'. POSITIVE FINDING OF NO BUFFER, not an absence of information -- and it is the WATER half of the two-arm pair whose arms the exam currently predicts identically. SOURCE PAPER NOT ON DISK; second-hand."
+    },
+    "vessel": {
+      "fill_mL": 100.0,
+      "vessel_mL": null,
+      "closure": "not stated",
+      "atmosphere": "unstated",
+      "water_source": "distilled",
+      "stirred": null,
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Chang et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method, verbatim: 'The pH value of each solution was first adjusted to 5.8 ... and topped up with distilled water to 100 mL. Each solution was heated at 180 degC for 10, 20, and 30 min, followed by cooling in tap water.' The quotation names the solution volume (100 mL) but neither the vessel nor whether it was closed, so vessel volume is null and the atmosphere is unstated. Water: distilled."
     }
   },
   "metadata": {

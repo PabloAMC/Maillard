@@ -50,6 +50,7 @@ from src.validation_contract import DEFAULT_VALIDATION_CONTRACT
 
 from .engine import declared_unidentified, engine_metadata, fit_report_paths, predict
 from .fit_targets import core_evidence_role, core_fit_targets, fit_target_of, in_core_fit
+from .vessel import format_o2_to_thiol, oxygen_record
 from .panel import (
     RATIO_UNIT_FACTORS,
     SHARED_WITH_HOLDOUT_PANEL,
@@ -295,6 +296,8 @@ def score_benchmark(
         "core_fit_targets": [t.as_dict() for t in core_fit_targets(benchmark_id)],
         "quantification_family": family,
         "quantification_source": family_source,
+        # R1 (2026-09-06): the pot's oxygen, printed, never yet modelled (vessel.py)
+        "vessel_oxygen": oxygen_record(bench),
         "scale_thresholds": {**contract, "source": contract_source},
         "compounds": rows,
         "refused_compounds": refused,
@@ -511,8 +514,8 @@ def render_markdown(payload: Dict[str, Any]) -> str:
             )
     out += ["", "## Benchmarks", "",
             "| benchmark | panel | tier | role | rows | coverage | max ratio | mean log10 | "
-            "contract (ratio / log10) | status | strict | in core fit |",
-            "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+            "contract (ratio / log10) | status | strict | in core fit | O2 : thiol |",
+            "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for b in payload["benchmarks"]:
         c = b["scale_thresholds"]
         fit_rows = sum(1 for r in b["compounds"] if r["in_core_fit"])
@@ -521,7 +524,8 @@ def render_markdown(payload: Dict[str, Any]) -> str:
             f"{b['matched_compounds']}/{b['total_compounds']} | "
             f"{_fmt(b['coverage'])} | {_fmt(b['max_ratio'])} | {_fmt(b['mean_abs_log10_error'])} | "
             f"{c['max_ratio']:.2f} / {c['mean_abs_log10_error']:.3f} | {b['overall_status']} | "
-            f"{'yes' if b['strict_ready'] else 'no'} | {fit_rows or '-'} |"
+            f"{'yes' if b['strict_ready'] else 'no'} | {fit_rows or '-'} | "
+            f"{format_o2_to_thiol(b.get('vessel_oxygen') or {})} |"
         )
     out += ["", "## Rows", "",
             "| benchmark | compound | unit | measured | predicted | fold | within band | within contract | "

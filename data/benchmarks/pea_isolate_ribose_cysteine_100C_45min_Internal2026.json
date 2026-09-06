@@ -6,7 +6,17 @@
     "ph": 5.6,
     "temp_C": 100.0,
     "time_min": 45.0,
-    "water_activity": 0.95
+    "water_activity": 0.95,
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "no cook",
+      "atmosphere": "not_applicable",
+      "water_source": "not_applicable",
+      "stirred": null,
+      "provenance_class": "not_applicable",
+      "provenance_note": "Synthetic snapshot (_Internal2026): legacy-model output, not a measurement, kept off the scored panel by src/kinetic_core/panel.is_scored_bundle. There is no experiment and no vessel (not_applicable)."
+    }
   },
   "denaturation_state": 0.5,
   "evidence_class": "diagnostic_only",

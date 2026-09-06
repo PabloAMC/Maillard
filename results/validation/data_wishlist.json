@@ -2,10 +2,10 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-04",
+    "generated_on": "2026-09-06",
     "git": {
-      "commit": "ecd8bc3fd03ac2ba7d138c4ee38d16273061419e",
-      "short": "ecd8bc3f",
+      "commit": "f6450ae3f0885a210283d818a5235b263e36f629",
+      "short": "f6450ae3",
       "branch": "cleaning",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "21960ce14e11b420e3d36a7b3fea7013a0869bfeafc104ca4887632574f8260f"
+        "sha256": "cefdc4844b7c8cc6ad96435d7b35fbe6e7fd65cae7cc5dbf92e2480c131193e0"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",

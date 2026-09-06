@@ -1041,3 +1041,32 @@ ran.
     deliberately NOT regenerated: it is a pre-registration and re-dating one to
     propagate a prose edit would be worse than leaving the superseded prose
     inside a frozen record of what was believed at freeze time.
+
+## Amendment 19 — 2026-09-06 (programme step R1: the vessel block, a condition-record completion under the Amendment 9 clause 2 licence)
+
+1. **WHAT IS COMPLETED.** Every panel bundle (the 18 top-level files, the 4 external matrix
+   bundles and the 17 maillard_path hold-outs) gains ONE new key, `conditions.vessel`:
+   fill volume, vessel volume, closure, atmosphere during the cook, water source, stirring,
+   and a per-field provenance class and note. It is written by
+   `scripts/generators/complete_benchmark_vessel_fields.py` from each bundle's SOURCE PAPER
+   (PDF on disk) or from a verbatim methods quotation the bundle already carries, and the
+   note names which. Where neither exists the block records `unstated` / `unknown` and says
+   the source is not on disk. Nothing is inferred from a bundle's name or from what would be
+   convenient.
+2. **WHY.** The 2026-09-06 review found the largest between-laboratory residual term to be
+   the oxygen the closed vessel held above the sample (headspace O2 to cysteine 2.0 in
+   Yiltirak 2026 and ~2 in Bolton 1994 against 0.26 in Hofmann 1998; the core is near-unbiased
+   on Hofmann and over-predicts the thiols 9-100x on the other two). The network's oxidant
+   pool is charged from cystine only. The state has to be on the record before any wave can
+   read it.
+3. **WHAT MAY NOT MOVE.** Measured values, compound lists, `evidence_class`, roles,
+   `conditions.temp_C/ph/water_activity/time_min` and the buffer block are byte-identical.
+   `tests/unit/test_kinetic_core_b2_3.py` extends its bundle-hash proof to drop `vessel`
+   alongside `buffer` before hashing, so the baselines pinned for the buffer completion still
+   hold. `tests/unit/test_benchmark_vessel_block.py` checks every panel bundle carries a
+   decided block and that primary readings name the PDF they were read from.
+4. **WHAT CHANGES IN THE ARTIFACTS.** `src/kinetic_core/vessel.py` computes headspace O2
+   (1 atm, 20 C, 20.946 %), thiol charged and their ratio; the scorecard prints them per
+   benchmark (`vessel_oxygen`; an "O2 : thiol" column). **No prediction moves.** Charging
+   `OX` from this block is step R2(a), which will be pre-registered as its own wave with the
+   Yiltirak-versus-Hofmann yield gap as its declared test.

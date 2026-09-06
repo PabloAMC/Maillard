@@ -12,7 +12,17 @@
     "temp_C": 40,
     "ph": 6.0,
     "water_activity": 0.95,
-    "time_min": 10
+    "time_min": 10,
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "no cook",
+      "atmosphere": "not_applicable",
+      "water_source": "not_applicable",
+      "stirred": null,
+      "provenance_class": "not_applicable",
+      "provenance_note": "Pratap-Singh et al. 2021, Molecules 26:4104: an UNHEATED protein powder; the bundle's 40 C / 10 min is the HS-SPME incubation (1 g powder in 7 mL water), not a thermal process, as the 2026-09-04 calibration diagnosis records. No cook, so no vessel (not_applicable). SOURCE NOT ON DISK."
+    }
   },
   "metadata": {
     "tier": "PRIMARY",

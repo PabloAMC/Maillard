@@ -19,7 +19,17 @@
     "temp_C": 150.0,
     "ph": 5.5,
     "water_activity": 0.95,
-    "time_min": 60.0
+    "time_min": 60.0,
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "no cook",
+      "atmosphere": "not_applicable",
+      "water_source": "not_applicable",
+      "stirred": null,
+      "provenance_class": "not_applicable",
+      "provenance_note": "Hernandez, Woerner, Brooks & Legako 2023, Molecules 28:3151: a COMMERCIAL plant-based meat analogue cooked as a reference product; the bundle's 150 C / 60 min is a proxy for an unspecified commercial process (process_metadata.extrusion_history = commercial_pbma_unknown). No vessel to record (not_applicable). SOURCE NOT ON DISK."
+    }
   },
   "metadata": {
     "tier": "SECONDARY",

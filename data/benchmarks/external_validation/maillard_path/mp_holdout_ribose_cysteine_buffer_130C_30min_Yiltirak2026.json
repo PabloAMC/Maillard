@@ -55,6 +55,16 @@
       "initial_ph_scale": "bench_cooled",
       "provenance_class": "primary_source_pdf",
       "provenance_note": "Yiltirak et al. 2026, Food Res. Int. 231:118600, read from data/articles/Yiltirak2026.pdf on 2026-09-06. Sec. 2.1 (p. 2), verbatim: 'Potassium phosphate buffer (0.5 M, pH 5.5) was made using potassium dihydrogen phosphate and dipotassium hydrogen phosphate in tap water.' Sec. 2.3 (pp. 2-3), verbatim: 'All buffer phases were prepared by dissolving ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5).' The scored arm is model (iv), 'buffer system (100% buffer)' -- oil-free and emulsifier-free. TWO CAVEATS THE SOURCE ITSELF RAISES, carried rather than dropped: the buffer was made in TAP WATER, not deionised water, so trace-metal catalysis is uncontrolled; and the paper reports pH before heating only (0.5 M phosphate; the drift over the cook is not measured). Until 2026-09-06 this block was a second-hand reading of the repo's own verbatim quote; the PDF now on disk confirms it word for word."
+    },
+    "vessel": {
+      "fill_mL": 3.0,
+      "vessel_mL": 20.0,
+      "closure": "20 mL Duran tube, screw cap with PTFE gasket, magnetically stirred",
+      "atmosphere": "air_by_default",
+      "water_source": "tap",
+      "stirred": true,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Yiltirak et al. 2026, Food Res. Int. 231:118600, read from data/articles/Yiltirak2026.pdf on 2026-09-06. Sec. 2.4, verbatim: 'model systems (3 mL) ... were transferred to 20-mL Duran tubes with screw-caps lined with PTFE gaskets (Duran Wheaton Kimble, Wertheim, Germany) ... in a heating block equipped with a magnetic stirrer ... PTFE-covered magnetic stir bars (12 mm x 4.5 mm) were used ... After heating, the tubes were cooled immediately to room temperature in an ice bath ... Subsequently, they were flushed with Pureshield Argon (B.O.C., UK) to prevent further oxidation'. The argon comes AFTER the cook: the 17 mL headspace was laboratory air during heating (air_by_default). Sec. 2.1: the buffer was made 'in tap water'. Dossier: data/lit/extraction_dossiers/yiltirak2026_extraction.md."
     }
   },
   "metadata": {

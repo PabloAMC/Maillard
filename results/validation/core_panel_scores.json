@@ -43,10 +43,10 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-09-04",
+    "generated_on": "2026-09-06",
     "git": {
-      "commit": "1bc4d331d9d3bcb7ca86801e4058a544c2853274",
-      "short": "1bc4d331",
+      "commit": "f6450ae3f0885a210283d818a5235b263e36f629",
+      "short": "f6450ae3",
       "branch": "cleaning",
       "dirty": true
     },
@@ -74,151 +74,151 @@
       },
       {
         "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
-        "sha256": "4699e53b76ceff1821cf3681bd6f8e5f59e0b8c8186da82f3998211d9cf22c0a"
+        "sha256": "fe72f4553a2644fd6abfb24e881ccc62e435a648a973976d5fd46bc5a345e1a8"
       },
       {
         "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
-        "sha256": "541e98c54b9b584d2c09ddb13e308c7f73f06d612a5f7f7959812ee77bfd94dc"
+        "sha256": "329fe17a3b13b88a77ae1810614dbbf7b91db3c95367afaf420b098dbb367dae"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
-        "sha256": "d644025955106a09705322456bbc7d42bbb40f43e511ef26d1c49401901d97c8"
+        "sha256": "b7630539c622871bf44daab616f78042bd625e103d6ec76a44237e9dae63ad9b"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
-        "sha256": "a97b2f836fbb496cf0a3e76a39d4bac8381d259be541d3bb72be466800fc718a"
+        "sha256": "a664ad21718aff7209097d0b6909b463e6f91b5d3dd4784383e5820a1ab51eca"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
-        "sha256": "9118ecd5fac0616effadec76e18704a5ab757fbeee39e594bf795db550435b95"
+        "sha256": "a96fa8fc437d9fee0e69fe8004da06479edbf51cc7d31af64529c9b7e2d3ed5d"
       },
       {
         "path": "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
-        "sha256": "de58e0a35af4d53200a571f5b27191f83e4f36e3805b8034d0b43c87f3e30707"
+        "sha256": "db8fb70d862597dfe04b2272f93c1b50188d1f3b25a5c58fb7c7339a1d50082c"
       },
       {
         "path": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
-        "sha256": "8abd0b3982e2f369c96c3e9e5518a965a887844baf53550ff80bcc87ef45a867"
+        "sha256": "87caac1c46a24d7c44a7a0aea2b7964d5c0a1e70991838a007f4b5d4212d773a"
       },
       {
         "path": "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
-        "sha256": "9c89e375838920b7007288ec978873b3ae962ef7cf34d6011581d0e96fd3e5d4"
+        "sha256": "60bc7cc5c7e04ee3c53cf731f48c3aa1c4bf775552ad6f0d4e35cf79e5fc9a90"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
-        "sha256": "e6998c36fb400bd3374cc4f4820a1aaddf499b3c6648575bd99bd15df73e6723"
+        "sha256": "d31fdfdaa704aac64d820c772c86a60b3de9ab9b7a8e8d40f8a4bd53ca947524"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
-        "sha256": "fc3db9a908ae46b7e64edc222c4353402c509f5a9f9a3aea77ff50eb2fbca887"
+        "sha256": "e32d49f3e456f31e4a2c607280774ec6c8a2b8de520eed5ba7c035410cd6fac8"
       },
       {
         "path": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
-        "sha256": "962869636c313102e4fe0a221687b1e3e4b9fefd7ef3bcd349c47d2ebdbaf908"
+        "sha256": "8de992ed19dee9d8534960cc15748edec9b052112046d21e4b340144881aa8a6"
       },
       {
         "path": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
-        "sha256": "17b002345118637ecc62fdc69c73754d44cbd3a0119affde0fbe790ccee0ef59"
+        "sha256": "2ee2e0225360ec05da37dc5bf2f1f82d970c25ccd0471a70bd73978d2addbb5c"
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "8e7ecea3a7b4c267a96168aeb18c00308623717d8308346a1dc46e79558981b0"
+        "sha256": "2e64e3a6ced769a1733018e0fe7a1d084c9939c49b8f76487d0c544026e3468f"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
-        "sha256": "575d6be493b225f56fbda67013f3f75d8161366af8bd5e42cb256c9fa5052b90"
+        "sha256": "d4595d306169a2a81a2981f0dfdd0460b8d0025bd4963d45c753c459d05ba7d7"
       },
       {
         "path": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
-        "sha256": "1d5afbecf77fa95fc2c5a0be1bf44810800d9ff261a1eb195eb5bfa792825467"
+        "sha256": "cb306359d0570595692a5b85fa262318640c98a843b9ea901c8cc1a6448463c0"
       },
       {
         "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
-        "sha256": "91e4fc7681971254c7f8d30cb83a3a083e0e5f7d0243580759754fb9c85ded1f"
+        "sha256": "969d7072680549faf00c19514f0b07d060fd934ecd03ee0ac9c10b5e8fcef8e0"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
-        "sha256": "8669b741a3344d7e21359e2eb6808ae577459eb9dcf4bd084a35217f52bea073"
+        "sha256": "c10cf27277211e7668b68d39001af274d971f012b6e292fb37bd88997f3a9425"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json",
-        "sha256": "e43ce5974fff91771da1bb29b21654fd163e56732674dbf960857c7ef6c3587e"
+        "sha256": "4005557191b26f4992b15281cca5c730bd497244a5ec03846003f43e72634c50"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019.json",
-        "sha256": "a5477cc81cb8c1803c749c8a9258979802d20b3c251f7271cda276a37f469fe9"
+        "sha256": "337ad5e3c9b8af0a9b9fe9d68aa9218f7f50406a655aaf48f8a6790588b39509"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_10min_Chang2021.json",
-        "sha256": "40adeb2f3aa00763dcff437924f1f805a6f71e9042798eb268d5d8d6816557bb"
+        "sha256": "61219f743234159c82ed2648a33e0c45b15bd7d55027c90b72a45aa6ea25d843"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_Chang2021.json",
-        "sha256": "82472cfc95e6676d68a6369e1a1d3ee9a4ad9582d018287d93f932c482d4d351"
+        "sha256": "dbb843c04dd7f3ff9f61653898a5d890bbf7ce265a0d254a9c925d2436b22d88"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_water_Chang2021.json",
-        "sha256": "d3816842f0a4d738b4470c21821922231abf30983f47984583374a6b983b4ab4"
+        "sha256": "2dd3955fa3252822552472480dc72c72055ce3afdce26398d8e7461d66583184"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_Ye2024.json",
-        "sha256": "c782e0e62303a8579fcb2c35ecf9666f69a5e25ba911d43b583e864581066970"
+        "sha256": "e78a2b62c9ed32bafb966b8d181897283e4681b49a810f72f9f26d496694efbe"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "e461ef1b967c2ad8acf90b59753c3e0b3f26ea929fb60713f7709653e9311c49"
+        "sha256": "3004872736bab6ff8809d21fae8eeabe039e72349238dc414dbed9748218d567"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
-        "sha256": "a51bb3a5ec4a09cbc49f2acceb2e4e34cefa282a357eea4dd4d3ff35d62e4db9"
+        "sha256": "3bd440ee7f86492ded7609ea9cdf62fa109178a2ec87c5a4e8f5f787646ad4ed"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json",
-        "sha256": "18cf754d141e3a2b638f2359ae324968453bfb624ae291a5d65e882f5fcc8e24"
+        "sha256": "af1adbd38b4e055579bb5304860b7ad9fc16345d20c954183dcf7e78c13b61c0"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json",
-        "sha256": "1bfe2d288c4162ff269377b5ffe7c5f69bc1c0b0481a47ba4c5fad221b6163a8"
+        "sha256": "63cfc172d57e28c02d11c719a8880cdad2dd01789bf34aa51a2c0f3354b379f1"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
-        "sha256": "1bda1201a663af1b17d8ff690208b87a1c25f92a47cf92f185cd852a93f9dfae"
+        "sha256": "edd2b24080574d112ed271161472ec0f903f145946f450e65cdd890bd3c9521a"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
-        "sha256": "5a90a4d3232fd187436f7f3d84b202ac713f48b4dbd4f931ea8397017c3c4b2c"
+        "sha256": "0d216cda3fe110c1ca452e944f8846836cbe675079fad8057d9f2a5a4f203f86"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
-        "sha256": "cf20032ad04e00325be93f5fc65aae4e3389825c78cd9a4f772f1f57ca819996"
+        "sha256": "2ec1bc44f15f3523bff139164c0b3cd94d6e8b3e51c820fbee8e7685ae3a19f8"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json",
-        "sha256": "0d460ef5b166dcf24126f56e64d84d35509e1818117a2dd61763cedb434dbd47"
+        "sha256": "d6379ca0eb39fd844e6cd40aad744d31e027bf76f030ceac7dccf87a96e3d33c"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json",
-        "sha256": "ce93fcdf369236d48943780b69e4c2834ee1ed2fa3b3ae6664895d5f8023d8da"
+        "sha256": "1e1ede1bd7ad93aafb3bf3d5b810c074622185328ac1609ae395e10129801594"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json",
-        "sha256": "72eac1cb54b9137fece172391ee1d3f007a4323d7e9e26311f20174bcf630f41"
+        "sha256": "00daaa8e537c8f1fec02d7fb670b9aa8bcf8e9f267f562d8d0c278360420d0ea"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
-        "sha256": "dca526d221bba25ef9fe4b75817a9de704974a37980f3944c45d77c0eff196b1"
+        "sha256": "91c4b50a985cd842cfb5e0a4398ebdc027239250db937a52554646b7235f944d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
-        "sha256": "769621a705a54f132ed8ce56e8fa9f691d81ec4bc6c2238662f6fcdec7c485f5"
+        "sha256": "aa199ad5b23935fd2d20cf5cd2b4bdf0c9cc8b3692cf580e370ef31d5fdfea7d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
-        "sha256": "8ad9a432ada669eb18c8e6b2df2de5c222676cbd47f3ea601be1ee0314517ece"
+        "sha256": "ad0f6b15622d1defd7b22d53d0517c2a92612132b211eba378ec696aeb41c52d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
-        "sha256": "81d7b20add9ed45541298837f3d1b1491cf1967a050f61694d08abc3ad9da18f"
+        "sha256": "6142251527d63cc0b1b88375b9369ab187254f052590ee905bbcd2f0f2ab2f67"
       }
     ]
   },
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.0
+    "wall_seconds": 8.4
   },
   "benchmarks": [
     {
@@ -499,6 +499,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "continuous_process",
+        "water_source": "not_applicable",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "continuous",
+        "basis": "continuous process: no fixed headspace; oxygen access is process-specific"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.2,
@@ -578,6 +588,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 1.8,
         "mean_abs_log10_error": 0.25,
@@ -665,6 +685,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -742,6 +775,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -819,6 +865,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -878,6 +937,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -965,6 +1037,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1024,6 +1109,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1111,6 +1209,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1203,6 +1314,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1262,6 +1386,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1359,6 +1496,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -1449,6 +1596,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='dynamic_headspace_gcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "continuous_process",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "continuous",
+        "basis": "continuous process: no fixed headspace; oxygen access is process-specific"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -1548,6 +1705,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -1622,6 +1789,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -1712,6 +1889,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='internal_standard_gcms_sim'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "distilled",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 33.3,
+        "vessel_mL": 125.0,
+        "headspace_mL": 91.7,
+        "status": "computed",
+        "o2_mmol": 0.8075134463309884,
+        "thiol_mmol": 0.38960999999999996,
+        "o2_to_thiol": 2.072619918202789,
+        "basis": "91.7 mL headspace of air at closure = 0.808 mmol O2 over 0.390 mmol thiol charged = 2.07 mol/mol (air by default; water: distilled)"
+      },
       "scale_thresholds": {
         "max_ratio": 3.0,
         "mean_abs_log10_error": 0.48,
@@ -1786,6 +1976,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -1887,6 +2087,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='internal_standard_with_measured_response_factors'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2004,6 +2214,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='internal_standard_with_measured_response_factors'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2121,6 +2341,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2196,6 +2426,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2271,6 +2511,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2372,6 +2622,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 4.0,
+        "vessel_mL": 25.0,
+        "headspace_mL": 21.0,
+        "status": "computed",
+        "o2_mmol": 0.18394773580098972,
+        "thiol_mmol": 0.0,
+        "o2_to_thiol": null,
+        "basis": "21.0 mL headspace of air at closure = 0.184 mmol O2; no free-thiol precursor charged (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2444,6 +2707,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='lcmsms_external_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "unstated",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2520,6 +2793,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2589,6 +2875,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2658,6 +2957,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2751,6 +3063,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2844,6 +3169,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2937,6 +3275,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -3030,6 +3381,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -3123,6 +3487,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -3216,6 +3593,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -3309,6 +3699,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -3387,6 +3787,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "open",
+        "water_source": "not_applicable",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "open",
+        "basis": "open vessel: oxygen is not limited by a headspace"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -3464,6 +3874,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_semi_quantitative_internal_standard'",
+      "vessel_oxygen": {
+        "atmosphere": "continuous_process",
+        "water_source": "unstated",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "continuous",
+        "basis": "continuous process: no fixed headspace; oxygen access is process-specific"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -3573,6 +3993,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcmsms_external_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,

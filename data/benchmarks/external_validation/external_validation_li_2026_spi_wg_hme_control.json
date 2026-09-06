@@ -14,6 +14,16 @@
       "provenance_class": "unknown",
       "provenance_note": "Li et al. 2026, Foods 15(5):912. SOURCE PAPER NOT ON DISK and the repo carries NO verbatim methods quotation for the medium. The scored system is a 57 wt%-moisture high-moisture-extrusion melt, not an aqueous solution, so 'buffer' may not even be the right question -- but that is a reason to record UNKNOWN, not a licence to record 'none'. The protocol's own note is explicit: 'The paper does not publish a final-blend pH or water-activity closure' (data/protocols/external_validation/external_validation_li_2026_spi_wg_hme_control.yaml, benchmark_alignment.notes). ph_disagreement: the only pH in the whole record is 7.0 for the WHEAT-GLUTEN ENZYMATIC PRETREATMENT at 30 C -- a different unit operation -- and it has been transposed onto a 160 C extrusion run. conditions.ph = 7.0 is unsourced AS AN EXTRUSION CONDITION. Reported, not edited.",
       "ph_disagreement": "conditions.ph = 7.0 is the wheat-gluten pretreatment pH at 30 C, not a stated extrusion condition."
+    },
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "high-moisture extruder",
+      "atmosphere": "continuous_process",
+      "water_source": "unstated",
+      "stirred": null,
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Li et al. 2026, Foods 15(5):912, SOURCE NOT ON DISK; second-hand, from the PMC full text the repo read on 2026-09-03 (content_verification): a high-moisture extrusion melt (57 wt % moisture, 160 C). An extruder has no fixed headspace; oxygen access is process-specific (continuous_process). Water source not stated."
     }
   },
   "denaturation_state": 0.8,
