@@ -1169,6 +1169,126 @@ The evidence, in the order it was found:
       B5 (`generate_prediction_uncertainty`, `generate_external_validation_report`,
       `generate_loo_leverage`) and fails on the first line.
 
+### Reaction-modelling programme (2026-09-06 review, second pass: "we want to model the reactions")
+
+Owner position: the goal is to model the reactions to absolute concentrations, not to retreat
+to within-study ratios. This section records why that IS achievable, what the sulfur lane is
+missing, and the programme. Numbers measured on the shipped artifacts and on the PDFs on disk.
+
+**Proof that it is achievable, inside this repo.** The trunk lane (B1, Martins 2005 glucose/glycine)
+predicts the held-out browning trajectory at 80/100/120 C, 38 points, median 1.45x, 100 % within 3x,
+out of sample. The acrylamide lane, fitted on 16 rate + 12 Ea rows from three kinetics labs, holds
+the best free-precursor rows on the panel (Chang 2021 2.8x / 4.8x). What both have that the sulfur
+lane lacks is data SHAPE: one lab, time-resolved, several temperatures, several species at once
+(mass balance), a fully specified physical state.
+
+**What the sulfur lane has instead.**
+- 54 rows from ~13 labs, endpoints only. **There is no MFT or FFT concentration-versus-time series
+  anywhere in the corpus** (Kang 2026's volatiles are 120-min endpoints, `kang2026_SI_extraction.md`
+  sec. "any time course of the volatiles"; Yiltirak one time per temperature; Hofmann 1998 20 min;
+  Meng 2017 two times). The only time series are Kang's free-Cys curves and Zhou 2023's MGO + Cys arm.
+- One frozen formation Ea (64.1 kJ/mol, `lumped_formation_Ea_kJ_mol`) for every formation step;
+  only the two sink barriers are free (thiol sink at its 102 ceiling).
+- Oxidant pool `OX` is charged ONLY from cystine (Zhang 2024 arm): **zero in every cysteine-only
+  system**, so the oxidative channels carry no flux in Hofmann, Yiltirak, Kang, Zhou.
+- `benchmark.schema.json` has no vessel, fill, atmosphere or water-source field; `henry_constants.yml`
+  carries MFT (0.015) and FFT (0.002) as ESTIMATES, not measurements.
+- Cross-lab spread: Hofmann vs Zhou 64x at the shared pH-7 point with opposite pH sign; Hofmann vs
+  Yiltirak ~115x on ribose + cys in the same 0.5 M phosphate; between-paper residual means span
+  4-5 dex; within-paper sd 0.8-0.9 dex; leave-one-PAPER-out every predictor plateaus at ~12/39.
+
+**The between-lab term is missing INPUTS, not noise, and the largest one is computable from the
+Methods sections.** Yiltirak 2026 (PDF on disk, read 2026-09-06): 3 mL sample in a 20 mL Duran
+tube, air headspace during heating, argon only AFTER heating, buffer made in tap water. Hofmann
+1998: 100 mL in a 200 mL autoclave.
+
+| | Yiltirak 2026 buffer arm | Hofmann 1998 |
+| --- | ---: | ---: |
+| headspace air / O2 at 20 C | 17 mL / 0.148 mmol | 100 mL / 0.87 mmol |
+| cysteine charged | 0.075 mmol | 3.3 mmol |
+| O2 : cysteine (mol) | 2.0 | 0.26 |
+| MFT yield per mol ribose | 2.4e-6 (6.88 ug/L on 25 mM) | 1.7e-5 (198 ug/L on 100 mM) |
+
+7.5x in oxidant availability against 7x in yield, and thiols are the oxidation-labile species. The
+model cannot see this today because neither the bundle nor the network carries oxygen. Second-order
+hidden inputs, same origin: phosphate concentration (general acid-base catalysis; partly modelled in
+`ph_state`), trace metals (tap vs deionised), headspace partition of the thiols at temperature,
+quantification (SIDA vs external calibration). A yield of 1e-6 through >= 6 branching steps also
+means a 3x absolute needs every branching fraction to ~20 %, which single-endpoint data cannot give.
+
+**Programme (R = reaction modelling; W items from the first pass kept where still needed).**
+
+- [ ] **R0. Yiltirak 2026 in full.** Owner to download the supplementary `mmc1.docx` (Table S3
+      thiols, Table S1 LOD/LOQ, Fig. S5 hexanal). Ingest all 4 matrices x 4 T-t x 3 thiols = 48
+      numbers (+ hexanal in the oil arms) as bundles; the emulsion arms are a within-lab MATRIX
+      contrast (MFT 5.1x / 3.8x / 3.5x / 2.9x emulsion over buffer+oil at 100/110/120/130 C).
+      Verify the 8 existing hold-out rows against S3 (bundle is second-hand today). Record the
+      vessel block (R1) from sec. 2.4.
+- [ ] **R1. Physical state on every bundle and fit system.** Schema: `vessel` {fill_mL, vessel_mL,
+      atmosphere: air|N2|argon|sealed_unknown, closure, water_source} + the existing `buffer`;
+      derived `o2_equivalents_mmol` and `o2_to_thiol_ratio`. Back-fill from the Methods of every
+      panel bundle and every fit system (all PDFs on disk except the two hydrolysate PMC papers).
+      Where a paper does not state it, `sealed_unknown` with a declared prior, never a guess.
+- [ ] **R2. Model structure, three changes, each its own prereg wave.**
+      (a) **Oxygen as an input.** Charge `OX` from headspace + dissolved O2 (Henry) and cystine;
+      split the thiol sink into a thermal term and an oxidative term first order in thiol and in
+      O2 through the thiolate fraction (mechanism already in `ch_thiolate_loss_*`), with a
+      trace-metal multiplier on the water-source flag. Anchors: Hofmann 2002 brew FFT loss
+      0.023/min at 80 C (hold-out today), Kumazawa 2003 pH survival grid, Zhang 2024 cystine arm,
+      Gigl 2021 ceiling. Pre-registered test: the Yiltirak/Hofmann yield gap closes to < 3x with
+      no anchor.
+      (b) **Headspace reservoir during heating.** V_air/V_liq x K_aw(T) for MFT, FFT, H2S, MeSH;
+      flag the K_aw values as estimated; a measured K_aw(T) for MFT/FFT joins the wishlist.
+      (c) **Split formation Ea** into 2-3 coordinates (pentose-osone -> MFT route; furfural +
+      H2S -> FFT route; Strecker/H2S release, prior from Kang's cys-conversion Ea 55.1 kJ/mol),
+      priors from the Zamora 2013 Ea ladder; fitted on within-study temperature folds only
+      (Kang 100/120, Feng, Zhai, Meng 80/95/120, Yiltirak's ladder AFTER R0 moves it to the fit,
+      keeping Kang 140 C and Hofmann pH 3/7 as hold-outs).
+- [ ] **R3. The fit as a hierarchical model.** Response factor per (paper x method) as a declared
+      random effect on the log scale; fed-intermediate yields, conversions and folds enter with no
+      factor; levels enter through their paper's factor. The between-paper sd becomes the published
+      structural term (first-pass item W3). Hold-outs pre-registered per wave: Yiltirak fold SIGNS
+      (currently both wrong: MFT predicted 64 -> 171 vs measured 6.88 -> 1.71; FFT 615 -> 214 vs
+      1.28 -> 1.62), Kang 140 C rung, Meng ladder, Hofmann pH 3 / 7 rows.
+- [ ] **R4. Identifiability before and after.** Profile likelihood on every free coordinate;
+      collapse or fix flat ones (target <= 15 free in the sulfur lane); assert |r| <= 1 and
+      eigenvalues >= 0 on the covariance (the open singular-Laplace item); publish numerical rank.
+- [ ] **R5. Engineering that R3 needs.** A sulfur integration costs ~0.3 s (LSODA, Python RHS);
+      a hierarchical fit by MCMC at ~100 rows x 1e4 evaluations is ~3.5 days. Compile the RHS
+      (numba or JAX; JAX also gives sensitivities and replaces corner re-integration in the
+      envelope). Target: < 1 h per fit.
+- [ ] **R6. Validation targets, pre-registered, in increasing difficulty.** (i) In-lab absolute:
+      predict Hofmann 1998's full-precursor rows from Hofmann's own fed-intermediate rows, same lab,
+      same SIDA: >= 70 % within 2x. (ii) Cross-lab absolute WITH state inputs: Yiltirak buffer arm
+      within 3x, no anchor (today 9x-480x). (iii) Directional >= 80 % on an enlarged independent
+      panel. (iv) One-anchor scorecard as the practitioner headline (17/28 today), kept alongside.
+- [ ] **R7. The experiment the model is built to consume.** The registry's minimum primary
+      experiment (PPI/SPI 5 % slurry, ribose + cysteine 1 mM, 5 time points, 95 / 120 C, SIDA) plus
+      the two axes this analysis adds: atmosphere (air vs N2, two fill ratios) and phosphate (0.05 /
+      0.5 M). This is the only route to absolute ppb in a protein matrix without an anchor; ~4-6
+      weeks of GC-MS at a partner lab.
+- [ ] **W2 (kept). Within-study contrast dataset** from the 78 dossiers: one row per within-paper
+      comparison with verbatim quote; several hundred rows; the fold rows R2(c) and R3 consume.
+- [ ] **W4 (kept). Trunk lane from the on-disk kinetic papers** (Bell 1995, Lievonen 2002, Miao
+      2004, Pereyra Gonzales 2010, Kocadagli 2016 x2, Sen 2022, Agcam 2022, Hidalgo 1993, Zamora
+      2013, Gursul Aktag 2020; Goncuoglu Tas 2017 has no Ea): rate constants, Ea, a_w dependence;
+      the first a_w term in any lane.
+- [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
+      stays as hypothesis generator and refusal engine.
+
+**Order.** R0 -> R1 -> R2(a) -> R2(c) -> R3 (+R5 in parallel) -> R4 -> R6; W2 alongside R2/R3;
+W4 independent; R7 as soon as a partner lab exists.
+
+**Forecasts (2026-09-06).** R2(a) closes the Yiltirak/Hofmann gap to < 3x: 35 %. R6(i) in-lab
+Hofmann >= 70 % within 2x after R2-R4: 50 %. R6(ii) Yiltirak within 3x without anchor: 30 %.
+Cross-lab absolute >= 50 % within 3x on the present panel without R7: 15 %. With R7 data, absolute
+ppb in PPI/SPI matrices within 3x, no anchor: 60 %.
+
+**Corrections to earlier notes.** (1) "Zero systems at two temperatures" (2026-09-04) is a
+labelling artefact: Kang 100/120, Feng 100/120, Zhai folds, Yiltirak's ladder, Meng's ladder.
+(2) "Kang 2026 has 8-point MFT/FFT time courses" (first pass, this date) is wrong: the SI dossier
+states every volatile number is a 120-min endpoint; only the free-Cys curves are time-resolved.
+
 ## 6. Risks and guardrails
 
 | Risk | Guardrail |
