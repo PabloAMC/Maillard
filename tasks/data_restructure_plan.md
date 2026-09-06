@@ -1218,18 +1218,26 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
 
 **Programme (R = reaction modelling; W items from the first pass kept where still needed).**
 
-- [ ] **R0. Yiltirak 2026 in full.** Owner to download the supplementary `mmc1.docx` (Table S3
+- [x] **R0 DONE 2026-09-06 (`f6450ae`). Yiltirak 2026 in full.** Owner to download the supplementary `mmc1.docx` (Table S3
       thiols, Table S1 LOD/LOQ, Fig. S5 hexanal). Ingest all 4 matrices x 4 T-t x 3 thiols = 48
       numbers (+ hexanal in the oil arms) as bundles; the emulsion arms are a within-lab MATRIX
       contrast (MFT 5.1x / 3.8x / 3.5x / 2.9x emulsion over buffer+oil at 100/110/120/130 C).
       Verify the 8 existing hold-out rows against S3 (bundle is second-hand today). Record the
       vessel block (R1) from sec. 2.4.
-- [ ] **R1. Physical state on every bundle and fit system.** Schema: `vessel` {fill_mL, vessel_mL,
+- [x] **R1 DONE 2026-09-06 (`415d7c3`; panel bundles only -- fit systems belong to the B10 generator). Physical state on every bundle and fit system.** Schema: `vessel` {fill_mL, vessel_mL,
       atmosphere: air|N2|argon|sealed_unknown, closure, water_source} + the existing `buffer`;
       derived `o2_equivalents_mmol` and `o2_to_thiol_ratio`. Back-fill from the Methods of every
       panel bundle and every fit system (all PDFs on disk except the two hydrolysate PMC papers).
       Where a paper does not state it, `sealed_unknown` with a declared prior, never a guess.
-- [ ] **R2. Model structure, three changes, each its own prereg wave.**
+- [ ] **R2. Model structure, three changes, each its own prereg wave.** PREREG FOR (a) WRITTEN
+      2026-09-06: `results/validation/kinetic_core_b10_prereg.md`, draft for owner sign-off. PROBE
+      FINDING that reshaped it (no fit; `scratch/ox_probe_2026-09-06.py`): every fit system ran at
+      `OX = 1 mmol/L` while the engine deploys at `OX = 0` (a fit/deploy inconsistency); the shipped
+      oxidant channels are second order in thiol and inert at trace levels (charging the pot's own
+      O2 moves MFT < 10 %, FFT <= 1.7x); the first-order thiolate sink carries no O2 dependence and
+      was fitted on an air-in-excess grid; Yiltirak's 100 C FFT miss (480x vs MFT 9x) is a
+      temperature-structure miss for (c), not an oxygen miss. Forecast for (a) revised down:
+      P(ships) 0.30, P(a Yiltirak rung within 3x after (a) alone) 0.05.
       (a) **Oxygen as an input.** Charge `OX` from headspace + dissolved O2 (Henry) and cystine;
       split the thiol sink into a thermal term and an oxidative term first order in thiol and in
       O2 through the thiolate fraction (mechanism already in `ch_thiolate_loss_*`), with a
