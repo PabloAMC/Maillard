@@ -2176,6 +2176,114 @@ FITTED_SULFUR_BOUNDS_LOG10K: Mapping[str, Tuple[float, float]] = {
 LUMPED_FORMATION_EA_BOUNDS: Tuple[float, float] = (20.0, 250.0)
 
 
+# ===========================================================================
+# WAVE B10 (2026-09-06) -- ONE FORMATION BARRIER BECOMES TWO, BY ROUTE
+# ===========================================================================
+#: `results/validation/kinetic_core_b10_prereg.md` sec. 3. Every step that used
+#: to take the single lumped barrier belongs to exactly ONE of two routes:
+#:
+#:   sugar_trunk     -- the carbohydrate side: pentose / Amadori / hexose
+#:                      entries, the deoxyosone branchings, furfural
+#:                      formation, the TTCA steps, and the carbonyl-sink
+#:                      family's fallback when no family barrier is supplied.
+#:   thiol_assembly  -- every step that joins a sulfur nucleophile (H2S, HS-,
+#:                      cysteine, thiamine fragments) to a carbonyl, the H2S
+#:                      loss, and the thiol-sink family's fallback.
+#:
+#: The table is TOTAL over the keys that can reach the lumped barrier
+#: (`FITTED_SULFUR_KEYS` minus `NO_EA_KEYS` minus `MEASURED_EA_OVERRIDES`) and
+#: `tests/unit/test_kinetic_core_b10.py` pins that. Passing ONE number to
+#: `with_fitted_sulfur` still gives every route that number, so every wave
+#: before B10 is reproduced exactly.
+FORMATION_ROUTES: Tuple[str, ...] = ("sugar_trunk", "thiol_assembly")
+
+FORMATION_ROUTE_OF: Mapping[str, str] = {
+    # ---- sugar trunk --------------------------------------------------------
+    "k_pent_dpo": "sugar_trunk", "k_pent_tdp": "sugar_trunk",
+    "k_pent_caramel": "sugar_trunk", "k_pent_thermal": "sugar_trunk",
+    "k_arp_tdp_th": "sugar_trunk", "k_arp_dpo_th": "sugar_trunk",
+    "k_glc_ha": "sugar_trunk", "k_glc_fur": "sugar_trunk",
+    "k_dpo_c2c3": "sugar_trunk", "k_dpo_nf": "sugar_trunk",
+    "k_dpo_ptr": "sugar_trunk", "k_dpo_ddp": "sugar_trunk",
+    "k_tdp_fur": "sugar_trunk",
+    "k_ttca_cys": "sugar_trunk", "k_ttca_deg": "sugar_trunk",
+    # carbonyl-sink family: reached only when no family barrier is supplied
+    "k_nf_decay": "sugar_trunk", "k_fur_decay": "sugar_trunk",
+    "k_osone_decay": "sugar_trunk",
+    # ---- thiol assembly -----------------------------------------------------
+    "k_ddp_mft": "thiol_assembly", "k_ddp_mft_hs": "thiol_assembly",
+    "k_nf_mft": "thiol_assembly", "k_nf_mp3p": "thiol_assembly",
+    "k_fur_fft": "thiol_assembly", "k_fur_fft_hs": "thiol_assembly",
+    "k_mgo_mp": "thiol_assembly", "k_ha_mp_mft": "thiol_assembly",
+    "k_hmp_mft": "thiol_assembly", "k_hmp_mp2p": "thiol_assembly",
+    "k_thi_hmp": "thiol_assembly", "k_thi_mesh": "thiol_assembly",
+    "k_cys_actz": "thiol_assembly", "k_h2s_loss": "thiol_assembly",
+    # the one decay key in no family: a thiol-derived species' sink
+    "k_dimer_decay": "thiol_assembly",
+    # thiol-sink family: reached only when no family barrier is supplied
+    "k_mft_decay": "thiol_assembly", "k_fft_decay": "thiol_assembly",
+    "k_thiol_decay": "thiol_assembly", "k_thiolate_loss": "thiol_assembly",
+}
+
+#: Declared search bands per route (B10 prereg sec. 3b): the lumped band (20,
+#: 250) narrowed by the 2026-09-04 prefactor rule (12 decades = +/-48 kJ/mol at
+#: 145 C) around a SOURCED centre. Neither is a measurement of the route.
+FORMATION_EA_BOUNDS_BY_ROUTE: Mapping[str, Tuple[float, float]] = {
+    "sugar_trunk": (40.0, 135.0),
+    "thiol_assembly": (55.0, 145.0),
+}
+
+#: The centres the bands are organised around, and where each comes from.
+FORMATION_EA_PRIOR_CENTRE: Mapping[str, float] = {
+    # Zhang 2026 k16: the Cys-Amadori enolisation, 86.7 / 84.7 kJ/mol on the two
+    # legs, R^2 1.000 -- the best-conditioned sugar-side barrier in the corpus.
+    "sugar_trunk": ZHANG_EA_CYS_AMADORI_TO_ALPHA_DC_KJ_MOL,
+    # Chan & Reineccius 1994 Table I: six sulfur-volatile formation barriers
+    # (methional pH 6/7/8, 2-acetylthiophene) in (81, 137) kJ/mol, aqueous,
+    # 75-115 C; none is a core species, the CLASS is the right one.
+    "thiol_assembly": 100.0,
+}
+FORMATION_EA_PRIOR_SOURCE: Mapping[str, str] = {
+    "sugar_trunk": (
+        "Zhang 2026 k16 (Cys-Amadori -> alpha-dicarbonyl), 85.7 kJ/mol; "
+        "zhang2026_extraction.md; already a MEASURED override on k_arp_dpo / k_arp_tdp"
+    ),
+    "thiol_assembly": (
+        "Chan & Reineccius 1994, ACS Symp. Ser. 564 ch. 10, Table I: methional "
+        "Ea 102.1 / 106.6 / 81.4 kJ/mol (pH 6/7/8), 2-acetylthiophene 132.9 kJ/mol "
+        "(replicate means); chan1994_extraction.md rows 34-40. A class prior, "
+        "not a step measurement."
+    ),
+}
+
+#: The ambient oxidant every fit system since B2.3 was integrated with
+#: (`generate_kinetic_core_b2_3_fit.OX_AMBIENT_MMOL_L`). Until B10 the engine
+#: charged NOTHING here (B11 prereg sec. 2.1: a fit/deploy inconsistency).
+#: `tests/unit/test_kinetic_core_b10.py` pins the two constants equal.
+OX_AMBIENT_MMOL_L: float = 1.0
+
+
+def formation_route_of(key: str) -> Optional[str]:
+    """Which B10 formation route a fitted key's barrier belongs to, or None."""
+    return FORMATION_ROUTE_OF.get(key)
+
+
+def formation_ea_for(key: str, lumped_formation_ea) -> float:
+    """
+    The barrier a route-sharing step receives: one number for every route
+    (every wave before B10), or the key's route from a ``{route: Ea}`` mapping.
+    """
+    if isinstance(lumped_formation_ea, Mapping):
+        route = formation_route_of(key)
+        if route is None:
+            raise KeyError(
+                f"{key!r} shares the formation barrier but has no route in "
+                f"FORMATION_ROUTE_OF -- add it deliberately."
+            )
+        return float(lumped_formation_ea[route])
+    return float(lumped_formation_ea)
+
+
 def sulfur_placeholders() -> Dict[str, SulfurParameter]:
     """The fitted sulfur steps, unpopulated. Integration refuses them as-is."""
     out: Dict[str, SulfurParameter] = {}
@@ -2242,7 +2350,7 @@ def decay_family_of(key: str) -> Optional[str]:
 
 def with_fitted_sulfur(
     fitted_log10k: Mapping[str, float],
-    lumped_formation_ea: float,
+    lumped_formation_ea,
     decay_ea: Optional[Mapping[str, float]] = None,
 ) -> Dict[str, SulfurParameter]:
     """
@@ -2269,7 +2377,9 @@ def with_fitted_sulfur(
         elif family is not None and family in families:
             ea = float(families[family])
         else:
-            ea = float(lumped_formation_ea)
+            # B10: a float gives every route the same barrier (every wave before
+            # B10, bit for bit); a {route: Ea} mapping gives each step its route's.
+            ea = formation_ea_for(key, lumped_formation_ea)
         out[key] = replace(out[key], k_ref=10.0 ** float(log10k), ea_kj_mol=ea)
     # The one channel that is declared but deliberately unpopulated stays at
     # zero rather than at None, because zero is a PREDICTION (no oligomerisation)

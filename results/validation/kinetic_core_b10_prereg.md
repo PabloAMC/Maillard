@@ -65,10 +65,12 @@ holding k(145 C) fixed, 8.0 kJ/mol per decade of prefactor; 12 decades). `Ea_sug
 100 (Chan 1994's class), band (55, 145). Both sink barriers keep their B9 bands.
 
 **(c) The ambient oxidant is charged consistently** (B11 prereg finding 2.1): the engine charges
-`OX` at the fit's ambient 1.0 mmol/L when no vessel is declared, and from the vessel block when
-one is. Effect on every panel row is below 1 % at trace thiol (probe), so this is a consistency
-fix, not a modelling change, and the B9 numbers are reproduced to 1e-6 by a unit test when the
-ambient charge is set to zero.
+`OX` at the fit's ambient 1.0 mmol/L on every sulfur run, as every fit system since B2.3 has been.
+*Amended 2026-09-06 before the fit ran:* the vessel-derived charge is NOT applied in B10 -- at the
+pot's own oxygen the fed-intermediate rows' dimer channel changes materially (probe: ~5 % -> ~50 %
+of MFT-equivalents at mM thiol), which would move B9's objective and is B11's modelling change,
+not a consistency fix. Effect of the ambient charge on every panel row is below 1 % at trace
+thiol (probe), and a unit test pins the engine's constant to the fit generator's.
 
 **Free set: 23 + 2 = 25** (`lumped_formation_Ea` was frozen in B9; both route barriers are free
 in B10). Objective: 54 + 6 = 60 rows.
@@ -134,3 +136,25 @@ the dossier's Table S3 transcription; the fold rows are declared as reading the 
 fit-target index lists the four Yiltirak bundles as fit-adjacent (`in_core_fit` on the fold basis)
 so the scorecard's out-of-sample count excludes them. The hold-out guard runs on the B10 generator
 like any other.
+
+## 9. OUTCOME (2026-09-07, the rule applied to the frozen artifacts: `kinetic_core_b10_ship_rule.md`)
+
+**Verdict: RE-MERGE.** T1 failed: at the optimum the Laplace sigmas are 74 kJ/mol (sugar trunk)
+and 52 kJ/mol (thiol assembly, ON ITS FLOOR of 55) -- neither route barrier is identified by the
+60-row objective, Yiltirak's six folds included. T2 failed by one row (`hofmann_ribose_FUR_insitu` +0.40 dex;
+1 rows over 0.3 dex, 0 over 0.5). T3: the Yiltirak median moved 115x -> 90x
+(improved, not below 10x; 0 of 8 within 3x). T4: the Kang 140 C direction is NOT reproduced (MFT predicted
+x0.77 against an observed x4.26; FFT x0.09); the Hofmann 2002 brew is unchanged at
+2.4x. T5: without the folds the optimum lands at 50 / 55 against 49 / 55 with them:
+the folds moved the barriers by less than a Laplace sigma. Both variants want BOTH barriers lower than B9's 64 (the
+thiol one pinned at its floor) and leave the thiol sink on its 102 ceiling; the carbonyl-sink barrier swings from
+92 (with folds) to 226 (without), i.e. it is the sinks, not the formation steps, that the ladders are shaped by, and
+the corpus does not pin them either.
+
+**What ships as B10:** the ambient-oxidant consistency fix only (sec. 3c). The engine keeps reading the B9 report;
+the B10 and B10-noyil reports, the Laplace and the ship-rule artifacts are kept as the record of the attempt; the
+route table in `parameters_sulfur.py` stays (one number still means one number) for the wave that can identify it.
+**What the finding says about the data:** the corpus's temperature contrast, even with the only clean SIDA ladder
+folded in, cannot separate a formation barrier from a sink barrier. The next data item is R7's experiment -- two
+temperatures, several times, in ONE buffered pot, with the intermediates measured -- or B11's oxygen structure,
+which acts on the sinks the ladders point at.

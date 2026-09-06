@@ -546,8 +546,16 @@ def _b8_priors() -> List[CorePrior]:
     for key, value in frozen["log10_k_ref_at_145C"].items():
         out.append(prior(f"b8.{key}.log10_k_ref_145C", "log10_k_ref_at_145C", key, value,
                          "log10(k at 145 C)", "fitted_rate", "normal_log10"))
-    out.append(prior("b8.lumped_formation_Ea_kJ_mol", "lumped_formation_Ea_kJ_mol", "",
-                     frozen["lumped_formation_Ea_kJ_mol"], "kJ/mol", "fitted_ea", "normal"))
+    routes = frozen.get("formation_Ea_by_route_kJ_mol") or {}
+    if routes:
+        # B10: two route barriers in their own block; the lumped slot is not a
+        # separate coordinate any more (it equals the sugar-trunk route).
+        for route, value in routes.items():
+            out.append(prior(f"b8.formation_Ea_by_route_kJ_mol.{route}", "formation_Ea_by_route_kJ_mol",
+                             route, value, "kJ/mol", "fitted_ea", "normal"))
+    else:
+        out.append(prior("b8.lumped_formation_Ea_kJ_mol", "lumped_formation_Ea_kJ_mol", "",
+                         frozen["lumped_formation_Ea_kJ_mol"], "kJ/mol", "fitted_ea", "normal"))
     for family, value in (frozen.get("decay_Ea_kJ_mol") or {}).items():
         out.append(prior(f"b8.decay_Ea_kJ_mol.{family}", "decay_Ea_kJ_mol", family, value,
                          "kJ/mol", "fitted_ea", "normal"))
@@ -869,8 +877,10 @@ def draw_from_rng(
                 merged = dict(frozen_sulfur[block]); merged.update(value); maillard[block] = merged
             else:
                 maillard[block] = value
-        for block in ("log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol", "decay_Ea_kJ_mol"):
-            maillard.setdefault(block, frozen_sulfur[block])
+        for block in ("log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol", "decay_Ea_kJ_mol",
+                      "formation_Ea_by_route_kJ_mol"):
+            if block in frozen_sulfur:
+                maillard.setdefault(block, frozen_sulfur[block])
         ph_drift = sulfur["ph_drift"]
         coords.update(sulfur["coords"])
     if b3_k or b3_ea:

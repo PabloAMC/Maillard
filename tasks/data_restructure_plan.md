@@ -1245,6 +1245,13 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       **(a) becomes wave B11** (`kinetic_core_b11_prereg.md`). Five sulfur temperature claims added
       to the directional panel before the fit (YIL-01/02 evaluable and both MISSED by the shipped
       lane; WANG-01/02, MENG-01 recorded not evaluable): headline 17/26 -> 17/28.
+      **B10 RUN 2026-09-07: RE-MERGE** (`kinetic_core_b10_ship_rule.md`). Neither route barrier identified
+      (Laplace sigma 74 / 52 kJ/mol; the thiol-assembly barrier on its 55 floor in both variants, the sugar
+      trunk at ~50, both BELOW B9's 64); one B9 row +0.40 dex; Yiltirak median 115x -> 90x; Kang 140 C
+      direction not reproduced; carbonyl-sink barrier 92 with the folds vs 226 without. Reading: the
+      ladders are shaped by the SINKS, which the corpus does not pin either. Shipped as B10: the
+      ambient-oxidant consistency fix only; the engine keeps reading B9. Next: R7 (two temperatures,
+      several times, one buffered pot, intermediates measured) and/or B11 (the sink structure).
       (a) **Oxygen as an input.** Charge `OX` from headspace + dissolved O2 (Henry) and cystine;
       split the thiol sink into a thermal term and an oxidative term first order in thiol and in
       O2 through the thiolate fraction (mechanism already in `ch_thiolate_loss_*`), with a

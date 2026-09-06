@@ -1,0 +1,205 @@
+{
+  "artifact": "kinetic_core_b10_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b10_ship_rule",
+    "generated_on": "2026-09-06",
+    "git": {
+      "commit": "1495f5804b735a8f82ad3288941590b76fc32748",
+      "short": "1495f580",
+      "branch": "cleaning",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b10_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b10_fit_report.json",
+        "sha256": "bd02f84ce4a94e4dc143abe7d6441e705159ae79e46850e503012171b727fab3"
+      },
+      {
+        "path": "results/validation/kinetic_core_b10_noyil_fit_report.json",
+        "sha256": "a3ec716fa04468a31efc1a6c8f4fbf70feecb8aba489eada2eec953e7ecfbcc9"
+      },
+      {
+        "path": "results/validation/kinetic_core_b10_laplace_covariance.json",
+        "sha256": "409970d710b486b9aad7d1f9df7180268b174cf89e529d80e309b68f75bc132f"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b10_prereg.md",
+  "route_barriers_kj_mol": {
+    "sugar_trunk": 49.31931339833706,
+    "thiol_assembly": 55.000278224682674
+  },
+  "b9_lumped_barrier_kj_mol": 64.0822869313293,
+  "active_bounds": [
+    {
+      "key": "k_dimer_mft",
+      "bound": "upper",
+      "value": 0.4999998820062943
+    },
+    {
+      "key": "k_dimer_fft",
+      "bound": "upper",
+      "value": 0.4999999757199624
+    },
+    {
+      "key": "Ea_decay_thiol_sink",
+      "bound": "upper",
+      "value": 101.99999957365641
+    },
+    {
+      "key": "Ea_thiol_assembly",
+      "bound": "lower",
+      "value": 55.000278224682674
+    }
+  ],
+  "T1_laplace_identification": {
+    "sugar_trunk": {
+      "identified": false,
+      "sigma_kj_mol": 74.25325168326071
+    },
+    "thiol_assembly": {
+      "identified": false,
+      "sigma_kj_mol": 52.37755702672499
+    },
+    "pass": false
+  },
+  "T2_in_sample_discipline": {
+    "rows_compared": 51,
+    "worst": {
+      "row": "hofmann_ribose_FUR_insitu",
+      "b9_residual": -0.23444416238763696,
+      "b10_residual": 1.0305365998112088,
+      "growth_dex": 0.3980462187117859
+    },
+    "n_over_0_3_dex": 1,
+    "n_over_0_5_dex": 0,
+    "pass": false
+  },
+  "T3_yiltirak_levels_fit_adjacent": {
+    "b9_median_fold": 115.21546229171273,
+    "b10_median_fold": 89.85121065758412,
+    "rows_b10": [
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 6.88,
+        "predicted": 69.54215300532383,
+        "fold": 10.107871076355208
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.28,
+        "predicted": 131.5685179574151,
+        "fold": 102.78790465423056
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 3.29,
+        "predicted": 93.38151466177067,
+        "fold": 28.383439106921173
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.46,
+        "predicted": 146.03230641980812,
+        "fold": 100.02212768480008
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 2.4,
+        "predicted": 120.0251936587797,
+        "fold": 50.010497357824875
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.68,
+        "predicted": 156.9106649329275,
+        "fold": 93.39920531721874
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 1.71,
+        "predicted": 147.57849935649364,
+        "fold": 86.3032159979495
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.62,
+        "predicted": 163.94783682728882,
+        "fold": 101.20236841190668
+      }
+    ],
+    "pass": false,
+    "improved": true,
+    "within_3x_b9": 0,
+    "within_3x_b10": 0
+  },
+  "T4_holdouts": {
+    "kang_140_over_120": {
+      "b9": {
+        "MFT": {
+          "predicted_fold_140_over_120": 0.7778091069483591,
+          "observed_fold": 4.2557636887608075
+        },
+        "FFT": {
+          "predicted_fold_140_over_120": 0.01245631800274551,
+          "observed_fold": 2.785244704163623
+        }
+      },
+      "b10": {
+        "MFT": {
+          "predicted_fold_140_over_120": 0.7714750279031806,
+          "observed_fold": 4.2557636887608075
+        },
+        "FFT": {
+          "predicted_fold_140_over_120": 0.08575315259939147,
+          "observed_fold": 2.785244704163623
+        }
+      },
+      "direction_pass": false
+    },
+    "hofmann2002_brew_80C": {
+      "observed_k_per_min": 0.023,
+      "b9_k_per_min": 0.00940891950457854,
+      "b10_k_per_min": 0.009412707231495036,
+      "b9_fold": 2.4444889754671415,
+      "b10_fold": 2.4435052992025197,
+      "not_worse": true
+    },
+    "pass": false
+  },
+  "T5_leave_yiltirak_out": {
+    "with_folds": {
+      "sugar_trunk": 49.31931339833706,
+      "thiol_assembly": 55.000278224682674
+    },
+    "without_folds": {
+      "sugar_trunk": 50.375002770083256,
+      "thiol_assembly": 55.000230204042666
+    },
+    "difference_kj_mol": {
+      "sugar_trunk": -1.0556893717461975,
+      "thiol_assembly": 4.8020640008417104e-05
+    },
+    "cost_with_folds_on_shared_rows": 35.648401010399155,
+    "cost_without_folds_on_shared_rows": 32.31058119974467,
+    "difference_in_laplace_sigmas": {
+      "sugar_trunk": 0.014217416043265171,
+      "thiol_assembly": 9.168171013381776e-07
+    }
+  },
+  "verdict": "RE-MERGE: barriers not identified",
+  "rule": "SHIP if T1 and T2 and T4 (Kang direction) hold and T3 improved at all (prereg sec. 5)"
+}

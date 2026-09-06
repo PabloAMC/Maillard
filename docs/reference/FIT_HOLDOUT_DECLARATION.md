@@ -1070,3 +1070,32 @@ ran.
    benchmark (`vessel_oxygen`; an "O2 : thiol" column). **No prediction moves.** Charging
    `OX` from this block is step R2(a), which will be pre-registered as its own wave with the
    Yiltirak-versus-Hofmann yield gap as its declared test.
+
+## Amendment 20 — 2026-09-06 (Wave B10, pre-declared before the fit ran: the temperature structure)
+
+1. **THE STRUCTURE.** The sulfur lane's single lumped formation barrier (`lumped_formation_Ea_kJ_mol`,
+   frozen at 64.1 since B9 on 37 steps) becomes two barriers by route
+   (`parameters_sulfur.FORMATION_ROUTE_OF`: `sugar_trunk`, `thiol_assembly`), both FREE, with
+   declared bands narrowed by the 2026-09-04 prefactor rule around sourced centres (Zhang 2026 k16,
+   85.7; Chan & Reineccius 1994's class, 100). One number passed to `with_fitted_sulfur` still gives
+   every route that number, so every wave before B10 is reproduced bit for bit; the route table is
+   total over the keys that can reach the barrier and is pinned by `tests/unit/test_kinetic_core_b10.py`.
+2. **THE ROWS.** Yiltirak 2026's time-compensated ladder enters the objective as SIX within-study
+   FOLDS (consecutive rungs, MFT and FFT, `kind = cross_system_ratio`, sigma_log 0.10), quoted from
+   Table S3 of the supplementary on disk via `yiltirak2026_extraction.md`. Under the owner's rule
+   (2026-09-03: within-study ratios are primary evidence; end-to-end levels validate) the folds fit
+   and the eight LEVELS stay on the hold-out panel. The fit-target index lists BOTH bundles each fold
+   reads, so those rows are `in_core_fit` and leave the strict out-of-sample count. A pre-registered
+   leave-Yiltirak-out refit (`kinetic_core_b10_noyil_fit_report.json`) is reported alongside so the
+   reader can see what the folds taught.
+3. **THE OXIDANT.** Every fit system since B2.3 was integrated with `OX` = 1.0 mmol/L; the engine
+   charged nothing (B11 prereg sec. 2.1). The engine now charges `OX_AMBIENT_MMOL_L` on every sulfur
+   run unless the caller supplies its own; `test_kinetic_core_b10.py` pins the two constants equal
+   and the effect on a trace-thiol prediction below 1 %. The VESSEL-derived charge is B11's, not B10's.
+4. **WHAT MAY NOT MOVE.** No level enters the fit. No proxy charge is invented for Meng 2017 or Wang
+   2026. The Kang 140 C rung, Hofmann 2002's brew and van Seeventer 2001 stay hold-outs. The eight
+   Hofmann Table-1 level rows B9 removed stay removed.
+5. **THE SHIP RULE** is `kinetic_core_b10_prereg.md` sec. 5: both route barriers identified by the
+   Laplace, no B9 row moved more than 0.3 dex, the Kang 140 C direction held, and the Yiltirak
+   fit-adjacent median improved. If the barriers are not identified the split is re-merged and the
+   ambient-oxidant consistency fix ships alone as B10.

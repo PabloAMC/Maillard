@@ -2,6 +2,8 @@
   "artifact": "wave_generators_manifest",
   "rule": "these files are the record of how the kinetic core's frozen parameters were produced; they are not re-run and a change to any of them is a new wave, recorded in scripts/generators/WAVES.md with the manifest rebuilt",
   "files": {
+    "scripts/generators/generate_kinetic_core_b10_fit.py": "588b80fe89fef56cce841e901088c60b56d9edcaf49c6ab99a9f6045674793d4",
+    "scripts/generators/generate_kinetic_core_b10_ship_rule.py": "d5e2bf63a18d3ac38f8b150ba54468344b5c1f40a453c99cb925c18e4732a5ea",
     "scripts/generators/generate_kinetic_core_b1_fit.py": "a404e335e9deb70d052b39ba01e92830c6ab8c229f6729f5d2c2955068f7ece3",
     "scripts/generators/generate_kinetic_core_b1_holdout.py": "4c1cd615d8cc55d92386ea76aef449fd33e2bb8593c6df12f99493cf10a70c3a",
     "scripts/generators/generate_kinetic_core_b2_1_fit.py": "3dd1ce5ff3a2ddb98c94578b8bc2e2143794441ee59692aff85b772749e93791",

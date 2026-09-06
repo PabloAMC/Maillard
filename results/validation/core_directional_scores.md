@@ -4,9 +4,9 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 
 * **headline (strictly independent, evaluable): 17/28 (61%)**; 29 independent claims not evaluable
 * independent, excluding pH and water activity: 13/23 (57%); pH and water activity alone: 4/5 (80%)
-* all claims (independent + fit-adjacent + fit-system overlap): 19/39 (49%); 35 not evaluable
+* all claims (independent + fit-adjacent + fit-system overlap): 19/40 (48%); 34 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (19); refused by the engine (4); a predicted concentration is zero; no direction is defined (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (19); refused by the engine (4); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); a predicted concentration is zero; no direction is defined (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
 
 ## Per category (strictly independent claims)
 
@@ -32,7 +32,7 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 | lipid_lane | 0 | 3 | 0.00 | 1 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 0 | 0 | - | 4 |
-| ph | 4 | 6 | 0.67 | 6 |
+| ph | 4 | 7 | 0.57 | 5 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 0 | 2 | 0.00 | 4 |
 | scope | 0 | 0 | - | 3 |
@@ -45,14 +45,14 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 | claim | category | fit status | observable | expected | result | lane | predictions (ug/L) | note |
 |---|---|---|---|---|---|---|---|---|
 | SUG-01 | sugar_identity | fit_adjacent | MFT | A>B | **agree** | sulfur | 76.3, 0 |  |
-| SUG-02 | sugar_identity | fit_adjacent | FFT | A>B | **agree** | sulfur | 57.7, 52.3 |  |
-| SUG-03 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 52.3, 52.3 | identical predictions |
+| SUG-02 | sugar_identity | fit_adjacent | FFT | A>B | **agree** | sulfur | 57.7, 52.2 |  |
+| SUG-03 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 52.2, 52.2 | identical predictions |
 | SUG-04 | sugar_identity | fit_adjacent | MFT | A>B | **disagree** | sulfur | 76.3, 76.3 | identical predictions |
 | SUG-05 | sugar_identity | fit_system_overlap | Furfural | A>B | **disagree** | sulfur | 136, 147 |  |
 | SUG-06 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | PH-01 | ph | fit_system_overlap | MFT | A>B | **disagree** | sulfur | 46.8, 83.1 |  |
-| PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
-| PH-03 | ph | independent | FFT | decreasing | **agree** | sulfur | 65.9, 53.8, 10.9 |  |
+| PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **disagree** | sulfur | 0.0452, 0.111 |  |
+| PH-03 | ph | independent | FFT | decreasing | **agree** | sulfur | 65.9, 53.7, 10.9 |  |
 | PH-04 | ph | independent | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | arm 'pH 4.5' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: th |
 | PH-05 | ph | independent | Furfural | decreasing | **agree** | sulfur | 146, 131, 58.1 |  |
 | TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 21.1, 454, 814 |  |
@@ -97,11 +97,11 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 | TIME-02 | time | independent | HMF | increasing | **agree** | trunk | 40.5, 684, 937 |  |
 | SCOPE-03 | scope | independent | 2-Pentylfuran | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HOF-01 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
-| HOF-02 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 1.67e+03, 2.3e+03 |  |
+| HOF-02 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 1.67e+03, 2.29e+03 |  |
 | HOF-03 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 0.000911, 0.297 |  |
 | HOF-04 | moisture_aw | independent | MFT, FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-01 | ph | independent | MFT | A>B | **disagree** | sulfur | 190, 505 |  |
-| MOT-02 | ph | independent | FFT | A>B | **agree** | sulfur | 1.37e+03, 1.08e+03 |  |
+| MOT-02 | ph | independent | FFT | A>B | **agree** | sulfur | 1.36e+03, 1.07e+03 |  |
 | MOT-03 | ranking | independent | MFT | A>B | **disagree** | sulfur | 505, 505 | identical predictions |
 | MOT-04 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-05 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -114,7 +114,7 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 | HOX-06 | additive_cysteine | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HOX-07 | ranking | independent | FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | YIL-01 | temperature | independent | MFT | decreasing | **disagree** | sulfur | 79.5, 121, 163, 197 |  |
-| YIL-02 | temperature | independent | FFT | A>B | **disagree** | sulfur | 1.22e+03, 2.31e+03 |  |
+| YIL-02 | temperature | independent | FFT | A>B | **disagree** | sulfur | 1.21e+03, 2.3e+03 |  |
 | WANG-01 | temperature | independent | MFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WANG-02 | temperature | independent | FFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MENG-01 | temperature | independent | MFT, FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |

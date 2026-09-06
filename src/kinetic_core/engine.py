@@ -78,7 +78,7 @@ from .matrix_oav import (
 )
 from .parameters import NETWORK_PH
 from .parameters_acrylamide import MEASURED_ACRYLAMIDE, with_fitted_acrylamide
-from .parameters_sulfur import MEASURED_SULFUR, with_fitted_sulfur
+from .parameters_sulfur import MEASURED_SULFUR, OX_AMBIENT_MMOL_L, with_fitted_sulfur
 from .species import SPECIES_KEYS
 from .species_acrylamide import ACRYLAMIDE_INDEX, acrylamide_ppb
 from .species_sulfur import (
@@ -1200,6 +1200,12 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
         out["decay_Ea_kJ_mol"] = {
             k: float(v) for k, v in (frozen.get("decay_Ea_kJ_mol") or {}).items()
         }
+        if frozen.get("formation_Ea_by_route_kJ_mol"):
+            # B10: two barriers by route. The lumped value above is kept for every
+            # reader that predates the split (it equals the sugar-trunk route).
+            out["formation_Ea_by_route_kJ_mol"] = {
+                k: float(v) for k, v in frozen["formation_Ea_by_route_kJ_mol"].items()
+            }
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1250,14 +1256,21 @@ def core_parameters(
     if lane == SULFUR:
         report = None
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
-                "decay_Ea_kJ_mol"} <= set(override):
+                "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
+        # B10: a report (or a draw) that carries the two route barriers uses them;
+        # a wave before B10 carries only the lumped value and every route gets it.
+        routes: Dict[str, float] = {}
+        if report is not None and report.get("formation_Ea_by_route_kJ_mol"):
+            routes.update(report["formation_Ea_by_route_kJ_mol"])
+        routes.update(override.get("formation_Ea_by_route_kJ_mol") or {})
+        formation = routes if routes else pick("lumped_formation_Ea_kJ_mol")
         parameters.update(MEASURED_SULFUR)
         parameters.update(
             with_fitted_sulfur(
                 pick("log10_k_ref_at_145C"),
-                pick("lumped_formation_Ea_kJ_mol"),
+                formation,
                 pick("decay_Ea_kJ_mol"),
             )
         )
@@ -1681,6 +1694,15 @@ def _integrate_program(
     """
     state: Dict[str, float] = dict(initial)
     metadata: Dict[str, Any] = {"segments": [], "lane": lane}
+    if lane == SULFUR:
+        # B10 (2026-09-06): every fit system since B2.3 was integrated with the
+        # ambient oxidant pool charged at OX_AMBIENT_MMOL_L; the engine charged
+        # nothing, so the two oxidant channels carried flux in the fit and none
+        # in use (B11 prereg sec. 2.1). Charged here so fit and deployment agree;
+        # a caller that passes its own "OX" (a fit generator, wave B11's vessel
+        # charge) is left alone. Effect on every panel row: below 1 % at trace
+        # thiol (the 2026-09-06 probe).
+        state.setdefault("OX", OX_AMBIENT_MMOL_L)
 
     for index, (duration, temperature_c) in enumerate(process.thermal.segments):
         grid = np.array([0.0, float(duration)])

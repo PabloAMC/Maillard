@@ -61,12 +61,22 @@ THRESHOLDS = {"Ea": 60.0, "log10k": 3.0, "acid_yield": 0.5, "pka": 1.5}
 STEPS = {"Ea": 2.0, "log10k": 0.05, "acid_yield": 0.01, "pka": 0.1}
 
 
+#: A wave module may declare ``COORDINATE_OF_OVERRIDES`` (B10 does: the slot B2.3
+#: calls ``Ea_lumped_formation`` is the sugar-trunk ROUTE barrier there). Bound in main().
+_OVERRIDES: Dict[str, Dict[str, str]] = {}
+
+
 def coordinate_of(key: str) -> Dict[str, str]:
     """Where a free key lives in the fit report's ``frozen_parameters``."""
+    if key in _OVERRIDES:
+        return dict(_OVERRIDES[key])
     if key in B23.PARAM_ORDER:
         return {"block": "log10_k_ref_at_145C", "key": key, "kind": "log10k"}
     if key == "Ea_lumped_formation":
         return {"block": "lumped_formation_Ea_kJ_mol", "key": "", "kind": "Ea"}
+    if key in ("Ea_sugar_trunk", "Ea_thiol_assembly"):
+        # B10: the two route barriers live in their own report block.
+        return {"block": "formation_Ea_by_route_kJ_mol", "key": key[len("Ea_"):], "kind": "Ea"}
     if key.startswith("Ea_decay_"):
         return {"block": "decay_Ea_kJ_mol", "key": key[len("Ea_decay_"):], "kind": "Ea"}
     if key == "ph_acid_yield_per_sink_event":
@@ -77,12 +87,23 @@ def coordinate_of(key: str) -> Dict[str, str]:
 
 
 def frozen_vector(report: Dict[str, Any]) -> np.ndarray:
+    """
+    The wave's optimum in its own vector order. Waves up to B9: 48 coordinates,
+    the lumped formation barrier at position N_K. B10 and later (a report carrying
+    ``formation_Ea_by_route_kJ_mol``): the sugar-trunk barrier takes that slot and
+    the thiol-assembly barrier is appended as the 49th coordinate -- the layout
+    ``generate_kinetic_core_b10_fit.ALL_KEYS`` declares.
+    """
     fr = report["frozen_parameters"]
+    routes = fr.get("formation_Ea_by_route_kJ_mol") or {}
+    lumped = routes.get("sugar_trunk", fr["lumped_formation_Ea_kJ_mol"])
+    extra = [routes["thiol_assembly"]] if routes else []
     return np.array(
         [fr["log10_k_ref_at_145C"][k] for k in B23.PARAM_ORDER]
-        + [fr["lumped_formation_Ea_kJ_mol"]]
+        + [lumped]
         + [fr["decay_Ea_kJ_mol"][f] for f in B23.DECAY_FAMILY_ORDER]
-        + [fr["ph_drift"]["acid_yield_per_sink_event"], fr["ph_drift"]["arp_secondary_ammonium_pKa"]],
+        + [fr["ph_drift"]["acid_yield_per_sink_event"], fr["ph_drift"]["arp_secondary_ammonium_pKa"]]
+        + extra,
         dtype=float,
     )
 
@@ -98,6 +119,8 @@ def main(argv=None) -> int:
     if not Path(B8.OUT_FIT_REPORT).exists() and args.wave != "b8":
         B8 = wave_module("b8")
     wave = B8.WAVE.lower() if hasattr(B8, "WAVE") else "b8"
+    _OVERRIDES.clear()
+    _OVERRIDES.update(getattr(B8, "COORDINATE_OF_OVERRIDES", {}))
     out = Path(args.output) if args.output else data_paths.VALIDATION_DIR / f"kinetic_core_{wave}_laplace_covariance.json"
 
     report = json.loads(Path(B8.OUT_FIT_REPORT).read_text(encoding="utf-8"))
@@ -105,7 +128,7 @@ def main(argv=None) -> int:
     lower, upper = B8.full_bounds()
     idx = np.array(B8.FREE_INDEX, dtype=int)
     keys = list(B8.FREE_KEYS)
-    assert len(keys) == len(idx) == 23
+    assert len(keys) == len(idx) == len(B8.FREE_KEYS)  # 23 through B9, 25 from B10
     coords = [coordinate_of(k) for k in keys]
 
     t0 = time.time()

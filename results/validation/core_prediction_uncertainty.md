@@ -4,7 +4,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 
 * benchmarks with an envelope: **27** of 37 on the panel; matched rows **39**; refused rows 25
 * mixed-population coverage: 5/39 (0.128)
-* **honest literature coverage: 5/33 (0.152)**, median CI width 1.375 log10; 6 not evaluable; 0 fitted rows excluded
+* **honest literature coverage: 5/33 (0.152)**, median CI width 1.369 log10; 6 not evaluable; 0 fitted rows excluded
 * out-of-sample literature coverage: 5/32 (6 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
 * sampled priors 41, fixed 37; lanes with NO sampled fit uncertainty: none
 * observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 8, extraction 31, undeclared 0
@@ -22,14 +22,14 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | benchmark | panel | compound | unit | measured | point | p5 | p50 | p95 | inside | width | obs bands | lane | role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | ppb | 150.000 | 0.035 | 0.035 | 0.035 | 0.035 | no | 0.00106 | no (extraction) | acrylamide | predictive |
-| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.36e+03 | 1.44e+03 | 2.25e+03 | 2.75e+03 | no | 0.280 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 834.391 | 45.450 | 1.02e+03 | 8.19e+03 | yes | 2.256 | no (extraction) | sulfur | predictive |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 731.065 | 383.953 | 655.004 | 1.07e+03 | no | 0.443 | no (extraction) | sulfur | predictive |
+| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.35e+03 | 1.44e+03 | 2.25e+03 | 2.73e+03 | no | 0.279 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 830.643 | 45.420 | 1.01e+03 | 8.09e+03 | yes | 2.250 | no (extraction) | sulfur | predictive |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 730.638 | 383.849 | 654.728 | 1.06e+03 | no | 0.443 | no (extraction) | sulfur | predictive |
 | pea_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.14e+03 | 0.339 | 0.030 | 0.289 | 3.410 | no | 2.051 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 22.839 | 0.717 | 19.721 | 508.110 | no | 2.851 | yes (headspace) | lipid | predictive |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.665 | 1.365 | 9.930 | 63.129 | no | 1.665 | yes (headspace) | sulfur | predictive |
 | soy_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.62e+03 | 0.267 | 0.024 | 0.227 | 2.684 | no | 2.051 | yes (headspace) | lipid | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 236.008 | 48.710 | 103.794 | 219.476 | no | 0.654 | no (extraction) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.973 | 48.710 | 103.791 | 219.453 | no | 0.654 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 225.440 | 89.867 | 229.650 | 712.828 | no | 0.899 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.94e+03 | 1.94e+03 | 1.94e+03 | 1.94e+03 | no | 3.36e-05 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 7.780 | 24.604 | 62.585 | no | 0.905 | no (extraction) | acrylamide | external_holdout |
@@ -42,20 +42,20 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.11e+03 | 2.11e+03 | 2.11e+03 | 2.11e+03 | no | 0.000586 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | Acrylamide | umol_per_mol_limiting_precursor | 140.580 | 7.04e+03 | 2.81e+03 | 7.17e+03 | 2.23e+04 | no | 0.899 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.46e+03 | 1.46e+03 | 1.46e+03 | 1.46e+03 | no | 7.04e-07 | no (extraction) | trunk | external_holdout |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 1.14e+03 | 64.589 | 1.39e+03 | 1.07e+04 | yes | 2.219 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 23.470 | 11.859 | 21.144 | 35.333 | no | 0.474 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.090 | 0.00478 | 0.085 | 0.598 | no | 2.097 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 1.13e+03 | 64.571 | 1.38e+03 | 1.04e+04 | yes | 2.208 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 23.470 | 11.858 | 21.144 | 35.332 | no | 0.474 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.090 | 0.00478 | 0.085 | 0.597 | no | 2.097 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.178 | 0.032 | 0.153 | 0.255 | no | 0.902 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_MFT) |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 192.701 | 28.157 | 278.807 | 1.71e+03 | yes | 1.784 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 548.334 | 313.433 | 485.365 | 710.902 | no | 0.356 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 64.116 | 1.920 | 8.886 | 45.557 | yes | 1.375 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 615.517 | 18.475 | 179.427 | 879.502 | no | 1.678 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 96.974 | 6.508 | 21.703 | 73.299 | no | 1.052 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 541.772 | 28.903 | 238.587 | 1.08e+03 | no | 1.571 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 134.711 | 19.272 | 48.157 | 116.226 | no | 0.780 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 367.708 | 37.197 | 253.015 | 1.01e+03 | no | 1.436 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.934 | 47.428 | 96.657 | 181.349 | no | 0.582 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 213.745 | 37.325 | 196.647 | 892.234 | no | 1.378 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 191.058 | 28.100 | 275.662 | 1.61e+03 | yes | 1.757 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 546.398 | 312.866 | 484.552 | 708.893 | no | 0.355 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 64.086 | 1.920 | 8.886 | 45.547 | yes | 1.375 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 610.255 | 18.475 | 179.284 | 869.569 | no | 1.673 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 96.892 | 6.508 | 21.702 | 73.254 | no | 1.051 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 535.496 | 28.900 | 238.136 | 1.05e+03 | no | 1.561 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 134.513 | 19.271 | 48.146 | 116.080 | no | 0.780 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 363.445 | 37.181 | 252.246 | 987.961 | no | 1.424 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.534 | 47.418 | 96.612 | 181.001 | no | 0.582 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 37.318 | 195.546 | 872.925 | no | 1.369 | no (extraction) | sulfur | external_holdout |
 | external_validation_bi_2020_raw_pea_hexanal | external_matrix | hexanal | ppb | 1.26e+03 | 0.339 | 0.030 | 0.289 | 3.410 | no | 2.051 | yes (headspace) | lipid | external_holdout |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 88.598 | 6.700 | 80.020 | 746.145 | yes | 2.047 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 69.695 | 5.170 | 55.355 | 570.820 | no | 2.043 | yes (headspace) | lipid | external_holdout |

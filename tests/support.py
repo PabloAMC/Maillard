@@ -25,7 +25,9 @@ ROOT = Path(__file__).resolve().parents[1]
 GENERATORS = ROOT / "scripts" / "generators"
 
 #: Wave modules that mutate B2.3's module state when imported.
-SPLICING_WAVE_MODULES = ("generate_kinetic_core_b8_fit", "generate_kinetic_core_b9_fit")
+SPLICING_WAVE_MODULES = (
+    "generate_kinetic_core_b8_fit", "generate_kinetic_core_b9_fit", "generate_kinetic_core_b10_fit",
+)
 
 
 def strip_prose(text: str) -> str:
@@ -55,7 +57,8 @@ def wave_generator(name: str) -> Iterator[object]:
     _ensure_generator_path()
     import generate_kinetic_core_b2_3_fit as b23  # noqa: E402
 
-    snapshot = (b23.ACTIVE_FIT_ROWS, b23.FIT_ROWS, dict(b23.SYSTEMS))
+    # B10 also rebinds B2.3's parameter builder (two route barriers); snapshot it too.
+    snapshot = (b23.ACTIVE_FIT_ROWS, b23.FIT_ROWS, dict(b23.SYSTEMS), b23.build_parameters)
     for module in SPLICING_WAVE_MODULES:
         sys.modules.pop(module, None)
     try:
@@ -64,5 +67,6 @@ def wave_generator(name: str) -> Iterator[object]:
         b23.ACTIVE_FIT_ROWS, b23.FIT_ROWS = snapshot[0], snapshot[1]
         b23.SYSTEMS.clear()
         b23.SYSTEMS.update(snapshot[2])
+        b23.build_parameters = snapshot[3]
         for module in SPLICING_WAVE_MODULES:
             sys.modules.pop(module, None)
