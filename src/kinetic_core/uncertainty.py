@@ -691,6 +691,28 @@ def _declared_band_priors() -> List[CorePrior]:
                 ),
             )
         )
+    from . import trunk_conditions as tc
+
+    # B12 (2026-09-07): the trunk's two declared condition bands. Both are inert on a run at
+    # the reference conditions (a_w None / >= 0.98, pH 6.8), which is every panel row today.
+    out.append(
+        CorePrior(
+            key="trunk.aw_multiplier_scale", lane=TRUNK, kind="declared_band", distribution="uniform",
+            centre=1.0, sigma=None, band=(float(tc.AW_SCALE_BAND[0]), float(tc.AW_SCALE_BAND[1])),
+            unit="scale on (multiplier - 1)",
+            source=f"trunk_conditions.AW_MULTIPLIER_TABLE ({tc.AW_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: 0 = Bell 1995's fixed-molality plateau, 1.2 = the source's 95 % CI",
+        )
+    )
+    out.append(
+        CorePrior(
+            key="trunk.amadori_ph_exponent_decades_per_unit", lane=TRUNK, kind="declared_band",
+            distribution="uniform", centre=float(tc.PH_EXPONENT_DECADES_PER_UNIT), sigma=None,
+            band=(float(tc.PH_EXPONENT_BAND[0]), float(tc.PH_EXPONENT_BAND[1])), unit="decades per pH unit",
+            source=f"trunk_conditions.PH_EXPONENT_BAND ({tc.PH_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the six Martins 2003 per-step ratios span it",
+        )
+    )
     band = float(FURANONE_PARTITION_EA_BAND_KJ_MOL)
     out.append(
         CorePrior(
@@ -789,6 +811,8 @@ def draw_from_rng(
     coords: Dict[str, float] = {}
     q10 = None
     furanone = None
+    trunk_aw_scale = None
+    trunk_ph_exponent = None
     lipid_u = None
     pv_u = None
     k_aw = 1.0
@@ -862,6 +886,10 @@ def draw_from_rng(
             pass  # routed through lipid_u / pv_u above
         elif p.key == "furanic.partition_ea_offset_kj_mol":
             furanone = value
+        elif p.key == "trunk.aw_multiplier_scale":
+            trunk_aw_scale = value
+        elif p.key == "trunk.amadori_ph_exponent_decades_per_unit":
+            trunk_ph_exponent = value
         elif p.key == "observable.air_water_partition_constant":
             k_aw = 10.0 ** value
         elif p.key == "observable.hs_spme_same_sample_dispersion":
@@ -898,6 +926,8 @@ def draw_from_rng(
         lipid_fraction_scale=_scale(lipid_u, lipid_lo, lipid_hi),
         peroxide_scale=_scale(pv_u, pv_lo, pv_hi),
         furanone_partition_ea_kj_mol=furanone,
+        trunk_aw_scale=trunk_aw_scale,
+        trunk_ph_exponent=trunk_ph_exponent,
         ph_drift=ph_drift,  # the wave's Laplace covariance when present, else the frozen calibration
     )
     coords["lipid.fraction_scale"] = core.lipid_fraction_scale if core.lipid_fraction_scale is not None else float("nan")

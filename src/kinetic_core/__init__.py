@@ -304,6 +304,12 @@ def operative_parameters(fitted):
     # FROZEN LITERAL in `parameters_furanic`, and a unit test asserts that it
     # equals the value in the B7 fit report to 1e-9.
     parameters.update(FURANIC_PARAMETERS)
+    # BUILD WAVE B13 (2026-09-07): the dicarbonyl trio's constants, at the same choke
+    # point. The trunk integrator runs their steps (network.TRUNK_REACTIONS); the
+    # sulfur and acrylamide networks do not, and carrying the constants there is inert.
+    from .parameters_dicarbonyl import DICARBONYL_PARAMETERS
+
+    parameters.update(DICARBONYL_PARAMETERS)
     return parameters
 
 

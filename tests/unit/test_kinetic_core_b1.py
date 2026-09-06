@@ -335,7 +335,9 @@ def test_extrapolation_beyond_the_measured_window_is_flagged(parameters):
         "k_mgo_dmhf", "k_dpo_af", "k_hmf_cys", "k_dmhf_h2s",
     }
     for line in inside_warnings:
-        assert line.split(":", 1)[0] in furanic_keys, line
+        # B13 (2026-09-07): the dicarbonyl trio is ingested through the same 160-200 C source.
+        from src.kinetic_core.parameters_dicarbonyl import DICARBONYL_KEYS
+        assert line.split(":", 1)[0] in furanic_keys | set(DICARBONYL_KEYS), line
 
 
 # ---------------------------------------------------------------------------

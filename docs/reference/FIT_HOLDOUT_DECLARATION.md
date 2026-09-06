@@ -1116,3 +1116,19 @@ ran.
    trunk, each printing the term, its band and its source; the acrylamide lane still refuses both.
    The pre-registered expectations on the directional panel are in `kinetic_core_b12_prereg.md`
    sec. 3, written before the re-score.
+
+## Amendment 22 — 2026-09-07 (Wave B13: glucosone, glyoxal and diacetyl on the trunk lane, trunk-only)
+
+1. **THREE SPECIES, FIVE STEPS, ONE SOURCE.** Kocadağlı & Gökmen 2016 JAFC's glucose-glass constants
+   for Glc -> glucosone -> glyoxal and 1-DG -> diacetyl and their two sinks, re-referenced from
+   180 C to 100 C through the B7 helper, carried as measured rates with their published HPDs; the
+   glyoxal sink's barrier FIXED TO ZERO by the authors and the diacetyl sink's ZERO rate are carried
+   as the authors left them and flagged (`ea_fixed_to_zero_by_authors`, `rate_zero_in_source`).
+2. **TRUNK ONLY.** `network.TRUNK_REACTIONS` = B1 + B7 + these five; `network.REACTIONS` (what the
+   sulfur network imports) is unchanged, so the sulfur lane keeps the topology B9 was fitted on and
+   the acrylamide lane is untouched. The engine refuses a dicarbonyl target on any other lane by name.
+3. **WHAT MAY NOT MOVE.** No fit row is added or read; the three species are appended after every
+   existing one; predictions at the reference conditions reproduce within 0.1 %
+   (`tests/unit/test_kinetic_core_b13.py`).
+4. **NO VALIDATION ROW EXISTS** for the three species (`kinetic_core_b13_prereg.md` sec. 3); the
+   wishlist names the measurements. Lee 2022 / 2024 is the declared next validation set.

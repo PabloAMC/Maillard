@@ -49,7 +49,7 @@ from __future__ import annotations
 
 from typing import Dict, Mapping, Tuple
 
-from .species import SPECIES, Species
+from .species import SPECIES, TRUNK_ONLY_KEYS, Species
 
 # ---------------------------------------------------------------------------
 # The sulfur block
@@ -340,7 +340,11 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
 #: are preserved exactly.
-SULFUR_STATE: Tuple[Species, ...] = SPECIES + SULFUR_SPECIES
+# B13 (2026-09-07): the trunk's dicarbonyl trio is TRUNK-ONLY (its steps are not in this
+# network), so it is left out of the sulfur state and the shape B9 was fitted on is kept.
+SULFUR_STATE: Tuple[Species, ...] = (
+    tuple(s for s in SPECIES if s.key not in TRUNK_ONLY_KEYS) + SULFUR_SPECIES
+)
 
 SULFUR_STATE_KEYS: Tuple[str, ...] = tuple(s.key for s in SULFUR_STATE)
 SULFUR_INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SULFUR_STATE)}
@@ -386,6 +390,10 @@ TERMINAL_POOLS: Tuple[str, ...] = (
 # Used ONLY to convert a printed ug/L anchor into the module's mmol/L. Every
 # value is the compound's formula weight; none is fitted and none is a rate.
 MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
+    # B13 (2026-09-07): the trunk's dicarbonyl trio
+    "G": 178.14,      # C6H10O6, glucosone
+    "GO": 58.04,      # C2H2O2, glyoxal
+    "DA": 86.09,      # C4H6O2, 2,3-butanedione
     "PENT": 150.13,   # C5H10O5, ribose = xylose
     "ARP": 221.21,    # C8H15NO6, 1-deoxy-xylulosyl-alanine
     "Cys": 121.16,    # C3H7NO2S

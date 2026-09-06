@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-06",
     "git": {
-      "commit": "c71ecc5ce5a8ad629cc1756d698b1bca715b7497",
-      "short": "c71ecc5c",
+      "commit": "136673d97f77bbeeaa7ac354e1542bb894a037e4",
+      "short": "136673d9",
       "branch": "cleaning",
       "dirty": true
     },
@@ -460,7 +460,7 @@
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
     },
-    "wall_seconds": 18.4
+    "wall_seconds": 18.1
   },
   "claims": [
     {
@@ -1527,13 +1527,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1346.2038742580592,
-        1503.6192971491894,
-        628.5263585053666
+        1346.176534658124,
+        1503.5889963211446,
+        628.5131011735649
       ],
       "log10_steps": [
-        0.04802705464162102,
-        -0.37881439531757627
+        0.0480271227117948,
+        -0.3788148039076149
       ],
       "arms": [
         {
@@ -1554,13 +1554,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1346.2038742580592
+          "value_ug_per_l": 1346.176534658124
         },
         {
           "label": "aw 0.6",
@@ -1580,12 +1580,12 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.60 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.24; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.60 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.04; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1503.6192971491894
+          "value_ug_per_l": 1503.5889963211446
         },
         {
           "label": "aw 0.98",
@@ -1609,7 +1609,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 628.5263585053666
+          "value_ug_per_l": 628.5131011735649
         }
       ]
     },
@@ -1790,10 +1790,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        628.5263585053666,
+        628.5131011735649,
         674.360972628192
       ],
-      "log10_ratio_B_over_A": 0.03056893295992275,
+      "log10_ratio_B_over_A": 0.030578093509342485,
       "arms": [
         {
           "label": "glycine + glucose (no cysteine)",
@@ -1817,7 +1817,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 628.5263585053666
+          "value_ug_per_l": 628.5131011735649
         },
         {
           "label": "glycine + glucose + cysteine",
@@ -2359,13 +2359,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        10.57885336056733,
-        628.5263585053666,
-        2384.290336584701
+        10.578819181666045,
+        628.5131011735649,
+        2384.1372337755283
       ],
       "log10_steps": [
-        1.7738848982352968,
-        0.5790356432013621
+        1.7738771408372112,
+        0.5790169154357223
       ],
       "arms": [
         {
@@ -2390,7 +2390,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 10.57885336056733
+          "value_ug_per_l": 10.578819181666045
         },
         {
           "label": "30 min",
@@ -2414,7 +2414,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 628.5263585053666
+          "value_ug_per_l": 628.5131011735649
         },
         {
           "label": "120 min",
@@ -2438,7 +2438,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 2384.290336584701
+          "value_ug_per_l": 2384.1372337755283
         }
       ]
     },
@@ -2961,10 +2961,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        978.6734207756882,
-        1600.5895354640195
+        978.6466456047809,
+        1600.5242779835687
       ],
-      "log10_ratio_B_over_A": 0.21364217945517888,
+      "log10_ratio_B_over_A": 0.213636354383722,
       "arms": [
         {
           "label": "glycine + D-fructose, 150 C 35 min",
@@ -2984,13 +2984,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 978.6734207756882
+          "value_ug_per_l": 978.6466456047809
         },
         {
           "label": "glycine + D-glucose, 150 C 35 min",
@@ -3010,13 +3010,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1600.5895354640195
+          "value_ug_per_l": 1600.5242779835687
         }
       ]
     },
@@ -3122,7 +3122,7 @@
             "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
           ],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 4 scales the three Amadori-decay steps by x0.01 (10^(0.69 per pH unit); declared band 0.00-0.09; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 4 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
@@ -3149,7 +3149,7 @@
             "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
           ],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 7 scales the three Amadori-decay steps by x1.37 (10^(0.69 per pH unit); declared band 1.19-1.53; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 7 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
@@ -3176,7 +3176,7 @@
             "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
           ],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 9 scales the three Amadori-decay steps by x32.96 (10^(0.69 per pH unit); declared band 6.52-105.68; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 9 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
@@ -3313,7 +3313,7 @@
             "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
           ],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.40 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.23; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.40 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.03; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
           "value_ug_per_l": null
@@ -3338,7 +3338,7 @@
             "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
           ],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.40 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.23; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.40 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.03; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
           "value_ug_per_l": null
@@ -3362,13 +3362,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1220.6549940279956,
-        796.735019087687,
-        688.5307910987804
+        1220.6149169138578,
+        796.7048563245262,
+        688.505033491039
       ],
       "log10_steps": [
-        -0.18527902604444788,
-        -0.0633905395582726
+        -0.18528120866608022,
+        -0.06339034479640217
       ],
       "arms": [
         {
@@ -3389,13 +3389,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1220.6549940279956
+          "value_ug_per_l": 1220.6149169138578
         },
         {
           "label": "170 C",
@@ -3415,13 +3415,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 796.735019087687
+          "value_ug_per_l": 796.7048563245262
         },
         {
           "label": "190 C",
@@ -3441,13 +3441,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 190 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 688.5307910987804
+          "value_ug_per_l": 688.505033491039
         }
       ]
     },
@@ -3537,13 +3537,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1346.2038742580592,
-        1530.1288914378251,
-        762.1813019341307
+        1346.176534658124,
+        1530.0980945198262,
+        762.1653502709938
       ],
       "log10_steps": [
-        0.05561717936229916,
-        -0.30266972512552687
+        0.05561725825493287,
+        -0.3026700734162209
       ],
       "arms": [
         {
@@ -3564,13 +3564,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.25 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.25 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.25 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1346.2038742580592
+          "value_ug_per_l": 1346.176534658124
         },
         {
           "label": "aw 0.65",
@@ -3590,12 +3590,12 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.65 scales the amine-sugar condensation by x3.61 (declared band 1.00-4.34; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.65 scales the amine-sugar condensation by x3.61 (declared band 1.00-4.14; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1530.1288914378251
+          "value_ug_per_l": 1530.0980945198262
         },
         {
           "label": "aw 0.95",
@@ -3615,12 +3615,12 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.95 scales the amine-sugar condensation by x1.36 (declared band 1.00-1.64; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.95 scales the amine-sugar condensation by x1.36 (declared band 1.00-1.44; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 762.1813019341307
+          "value_ug_per_l": 762.1653502709938
         }
       ]
     },
@@ -4045,13 +4045,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        59.66075528627674,
-        1220.6549940279956,
-        1600.5895354640195
+        59.660326613675736,
+        1220.6149169138578,
+        1600.5242779835687
       ],
       "log10_steps": [
-        1.3109041851887977,
-        0.11768704090171372
+        1.3108930464861057,
+        0.11768359315570782
       ],
       "arms": [
         {
@@ -4072,13 +4072,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 59.66075528627674
+          "value_ug_per_l": 59.660326613675736
         },
         {
           "label": "25 min",
@@ -4098,13 +4098,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1220.6549940279956
+          "value_ug_per_l": 1220.6149169138578
         },
         {
           "label": "35 min",
@@ -4124,13 +4124,13 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.66; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
+            "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1600.5895354640195
+          "value_ug_per_l": 1600.5242779835687
         }
       ]
     },

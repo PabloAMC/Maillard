@@ -32,7 +32,7 @@ def test_the_aw_table_is_pereyra_gonzales_normalised_to_solution():
     assert tc.aw_multiplier(0.20) == tc.aw_multiplier(0.33)          # held below the table
     assert 1.0 < tc.aw_multiplier(0.90) < tc.aw_multiplier(0.85)     # interpolated
     lo, hi = tc.aw_band(0.6)
-    assert lo == 1.0 and hi == pytest.approx(tc.aw_multiplier(0.6) * 1.2)
+    assert lo == 1.0 and hi == pytest.approx(1.0 + (tc.aw_multiplier(0.6) - 1.0) * 1.2)
 
 
 def test_the_ph_exponent_is_the_martins_2003_contrast():

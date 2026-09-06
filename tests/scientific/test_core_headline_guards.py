@@ -206,7 +206,9 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
-    assert lit["median_ci_width_log10"] == pytest.approx(1.3691, abs=5e-4)
+    # RE-PINNED 2026-09-07 (B12 envelope hooks + B13): two trunk declared-band priors joined the
+    # draw table, which moves the random stream; coverage unchanged, width 1.3691 -> 1.3376 dex.
+    assert lit["median_ci_width_log10"] == pytest.approx(1.3376, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
     assert (oos["hits"], oos["total"]) == (5, 32)
     assert s["unsampled_lanes"] == []

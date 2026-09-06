@@ -68,8 +68,10 @@ AW_MULTIPLIER_TABLE: Tuple[Tuple[float, float], ...] = (
     (0.85, 2.58),
     (0.98, 1.00),
 )
-#: The band: from Bell 1995's fixed-molality plateau (no effect, 1.0) up to the source's own
-#: 95 % CI (+20 %). Printed on every run that uses the term; sampled by the envelope.
+#: The band, expressed as a SCALE on the excess (m - 1): 0 is Bell 1995's fixed-molality plateau
+#: (no effect), 1 the Pereyra Gonzales centre, 1.2 the source's own 95 % CI. The envelope draws the
+#: scale uniformly over AW_SCALE_BAND (`CoreDraw.trunk_aw_scale`); the multiplier is 1 + (m - 1) s.
+AW_SCALE_BAND = (0.0, 1.2)
 AW_BAND_LOW_MULTIPLIER = 1.0
 AW_BAND_HIGH_FACTOR = 1.2
 #: Below the lowest measured a_w the multiplier is HELD at the 0.33 value with a glass warning:
@@ -105,7 +107,7 @@ def aw_band(water_activity: Optional[float]) -> Tuple[float, float]:
     m = aw_multiplier(water_activity)
     if m == 1.0:
         return (1.0, 1.0)
-    return (AW_BAND_LOW_MULTIPLIER, m * AW_BAND_HIGH_FACTOR)
+    return (1.0 + (m - 1.0) * AW_SCALE_BAND[0], 1.0 + (m - 1.0) * AW_SCALE_BAND[1])
 
 
 # ---------------------------------------------------------------------------
@@ -228,7 +230,7 @@ def apply(
 
 
 __all__ = [
-    "AW_BAND_HIGH_FACTOR", "AW_BAND_LOW_MULTIPLIER", "AW_MULTIPLIER_TABLE", "AW_SOURCE", "AW_STEPS",
+    "AW_BAND_HIGH_FACTOR", "AW_BAND_LOW_MULTIPLIER", "AW_SCALE_BAND", "AW_MULTIPLIER_TABLE", "AW_SOURCE", "AW_STEPS",
     "AW_TABLE_FLOOR", "PH_EXPONENT_BAND", "PH_EXPONENT_DECADES_PER_UNIT", "PH_MEASURED_WINDOW",
     "PH_SOURCE", "PH_STEPS", "REFERENCE_AW", "REFERENCE_PH", "apply", "aw_band", "aw_multiplier",
     "declarations", "factors", "ph_band", "ph_factor",

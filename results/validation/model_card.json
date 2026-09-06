@@ -6,7 +6,7 @@
     "literature_hits": 5,
     "literature_not_evaluable": 6,
     "literature_total": 33,
-    "median_ci_width_log10": 1.3690552477026041,
+    "median_ci_width_log10": 1.3376121736278213,
     "n_samples": 200,
     "out_of_sample_hits": 5,
     "out_of_sample_total": 32,
@@ -33,7 +33,7 @@
         "within_band": 2
       },
       "trunk": {
-        "median_fold_error": 11.929988259675033,
+        "median_fold_error": 11.930016362529054,
         "rows": 1,
         "within_band": 0
       }

@@ -196,6 +196,12 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     "alanine": "Ala",
     "l-alanine": "Ala",
     "methylglyoxal": "MGO",
+    # B13 (2026-09-07): the dicarbonyl trio
+    "glyoxal": "GO",
+    "glucosone": "G",
+    "diacetyl": "DA",
+    "2,3-butanedione": "DA",
+    "butane-2,3-dione": "DA",
     "norfuraneol": "NF",
     "amadori": "AMA",
     "arp": "ARP",
@@ -203,6 +209,13 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
 
 #: Target-compound synonyms -> core species key.
 TARGET_ALIASES: Mapping[str, str] = {
+    # B13 (2026-09-07): the trunk's dicarbonyls, answerable on the trunk lane only
+    "glyoxal": "GO",
+    "glucosone": "G",
+    "diacetyl": "DA",
+    "2,3-butanedione": "DA",
+    "butane-2,3-dione": "DA",
+    "methylglyoxal": "MGO",
     "acrylamide": "ACR",
     "2-furfurylthiol": "FFT",
     "2-furfurylthiol (fft)": "FFT",
@@ -350,6 +363,13 @@ _TARGET_LANE: Mapping[str, str] = {
     "DMHF": TRUNK,
     "DDG": TRUNK,
     "AF": TRUNK,
+    # -- B13, the dicarbonyl trio: TRUNK species whose STEPS run only when the trunk
+    # integrates on its own (network.TRUNK_REACTIONS); declare_envelope refuses them on
+    # any other lane rather than returning the inert zero the sulfur state would carry.
+    "G": TRUNK,
+    "GO": TRUNK,
+    "DA": TRUNK,
+    "MGO": TRUNK,
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
     "NONANAL": LIPID,
@@ -359,6 +379,9 @@ _TARGET_LANE: Mapping[str, str] = {
     "ME_9_OXONONANOATE": LIPID,
     "ME_13_OXO_TRIDECADIENOATE": LIPID,
 }
+
+#: B13: the species whose steps exist on the trunk integrator only.
+DICARBONYL_TARGET_KEYS: frozenset = frozenset({"G", "GO", "DA"})
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
 _PRECURSOR_LANE: Mapping[str, str] = {
@@ -880,6 +903,20 @@ def declare_envelope(
     lane = lanes[0] if lanes else None
     reasons.extend(lane_reasons)
 
+    # B13: the dicarbonyl steps are trunk-only (the sulfur and acrylamide networks keep the
+    # topology their fits were run on), so a dicarbonyl target on another lane is refused
+    # by name instead of answered with the inert zero those state vectors carry.
+    dicarbonyls = sorted(
+        c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS
+    )
+    if dicarbonyls and lane is not None and lane != TRUNK:
+        reasons.append(
+            "DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls)
+            + f" run on the trunk lane only (wave B13): the {lane} lane's network keeps the "
+            "topology its fit was run on and carries these species inert. Ask for them in a "
+            "sugar + amine pot that resolves to the trunk, or bring a measurement."
+        )
+
     # --- the lipid lane's own refusals ------------------------------------
     if LIPID in lanes:
         from .parameters_lipid import LIPID_CARRIERS, oleate_fraction
@@ -1355,6 +1392,12 @@ class CoreDraw:
     """
 
     maillard: Optional[Mapping[str, Any]] = None
+    #: B12 (2026-09-07): the trunk's declared condition bands. ``trunk_aw_scale`` scales the
+    #: water-activity multiplier's excess over 1 (band trunk_conditions.AW_SCALE_BAND);
+    #: ``trunk_ph_exponent`` is the Amadori-decay pH exponent (band PH_EXPONENT_BAND).
+    #: ``None`` = the declared centres.
+    trunk_aw_scale: Optional[float] = None
+    trunk_ph_exponent: Optional[float] = None
     q10: Optional[float] = None
     lipid_fraction_scale: Optional[float] = None
     peroxide_scale: Optional[float] = None
@@ -1688,10 +1731,14 @@ def _integrate_program(
     process: ProcessSpec,
     *,
     ph_drift: Optional[PhDrift] = None,
+    trunk_draw: Optional[Tuple[Optional[float], Optional[float]]] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """
     Integrate a piecewise-constant thermal program, chaining the state across
     segments, and return the FINAL state as ``{species_key: mmol/L}``.
+
+    ``trunk_draw`` (B12) = ``(aw_scale, ph_exponent)`` from a ``CoreDraw``; ``None`` entries
+    mean the declared centres.
 
     ``ph_drift`` (B2) is consulted only when the process declares none: the
     order is spec, then draw, then the frozen calibration.
@@ -1752,7 +1799,13 @@ def _integrate_program(
         else:
             # B12 (2026-09-07): the trunk's declared water-activity and pH terms scale the
             # named steps' k_ref before integration; exactly 1.0 at the references.
-            trunk_parameters, condition_terms = trunk_conditions.apply(parameters, process)
+            aw_scale, ph_exponent = (trunk_draw or (None, None))
+            trunk_parameters, condition_terms = trunk_conditions.apply(
+                parameters, process,
+                aw_scale=1.0 if aw_scale is None else float(aw_scale),
+                ph_exponent=(trunk_conditions.PH_EXPONENT_DECADES_PER_UNIT
+                             if ph_exponent is None else float(ph_exponent)),
+            )
             metadata.setdefault("condition_terms", list(condition_terms))
             run = integrate(
                 trunk_parameters,
@@ -1836,9 +1889,13 @@ def predict(
             operative = _furanone_corner_parameters(
                 operative, float(draw.furanone_partition_ea_kj_mol)
             )
+        trunk_draw = (
+            (draw.trunk_aw_scale, draw.trunk_ph_exponent) if draw is not None else None
+        )
         final_state, metadata = _integrate_program(
             maillard_lane, operative, dict(declaration.mapped_precursors), spec.process,
             ph_drift=draw.ph_drift if draw is not None else None,
+            trunk_draw=trunk_draw,
         )
         metadata["lanes"] = list(lanes)
 
@@ -1861,6 +1918,7 @@ def predict(
                 _furanone_corner_parameters(operative, offset),
                 dict(declaration.mapped_precursors),
                 spec.process,
+                trunk_draw=trunk_draw,
             )
             corners.append(corner_state)
         for key in FURANONE_BANDED_KEYS:

@@ -134,7 +134,7 @@ in the same change.
 | **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since the primary-evidence refit (wave B9) only one scored row is a fit row |
 | by lane, within 3x | acrylamide 2/12 · sulfur 4/29 · lipid 0/7 · trunk 0/1 |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 37** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
-| literature rows inside the 90% Monte-Carlo interval | **5 of 33** evaluable (median width 1.37 dex); **5 of 32** out of sample; 6 rows not evaluable |
+| literature rows inside the 90% Monte-Carlo interval | **5 of 33** evaluable (median width 1.34 dex); **5 of 32** out of sample; 6 rows not evaluable |
 | direction / ranking skill (74-claim literature panel) | **18 of 30** strictly independent evaluable claims; **13 of 23** with pH and water activity set aside, **5 of 7** on pH and water activity; 27 independent claims not evaluable |
 
 Three things a reader must know, all declared in code and printed on every row they touch:

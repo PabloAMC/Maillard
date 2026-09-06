@@ -150,9 +150,28 @@ SPECIES: Tuple[Species, ...] = (
             "COMPOUND from norfuraneol (``NF``, C5): the pre-B7 engine refused "
             "every DMHF request on exactly that ground and the refusal was "
             "correct."),
+    # ---- Build Wave B13 (2026-09-07): the dicarbonyl trio, TRUNK-ONLY ----------
+    # Kocadagli & Gokmen 2016 JAFC (amine-free glucose glass, 160-200 C) measure
+    # Glc -> glucosone -> glyoxal and 1-DG -> diacetyl with barriers. Appended at
+    # the END so every existing index is unchanged; the sulfur state vector
+    # (SPECIES + SULFUR_SPECIES) gains three inert entries and the sulfur network
+    # keeps B9's topology (network.DICARBONYL_REACTIONS runs on the trunk only).
+    Species("G", "glucosone (D-arabino-hexos-2-ulose)", 6, 0, "intermediate", False,
+            "B13. The oxidative entry: glucose -> glucosone -> glyoxal (Kocadagli "
+            "2016 JAFC steps 9-10). Not measured in any fit row of this repository."),
+    Species("GO", "glyoxal", 2, 0, "product", False,
+            "B13. The CML precursor (glyoxal + lysine). Sink: Kocadagli step 15, "
+            "barrier FIXED to zero by the authors."),
+    Species("DA", "2,3-butanedione (diacetyl)", 4, 0, "product", False,
+            "B13. From 1-deoxyglucosone (Kocadagli step 12, Ea 150.8); the "
+            "3-mercapto-2-butanone precursor once a sulfur wave adopts it. Sink: "
+            "Kocadagli step 17, rate 0 in the source."),
 )
 
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
+#: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
+#: state vectors leave them out, so those lanes keep the shape their fits were run on.
+TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 
