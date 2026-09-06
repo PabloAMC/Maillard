@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **339**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **340**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -60,7 +60,7 @@ Tracked files: **339**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
 | `kinetic_core_b*_laplace_covariance.json` (2): `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
-| `kinetic_core_b*_prereg.md` (7): `kinetic_core_b2_2_prereg.md`, `kinetic_core_b2_3_prereg.md`, `kinetic_core_b2_4_prereg.md`, `kinetic_core_b6_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
+| `kinetic_core_b*_prereg.md` (8): `kinetic_core_b10_prereg.md`, `kinetic_core_b2_2_prereg.md`, `kinetic_core_b2_3_prereg.md`, `kinetic_core_b2_4_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
 | `kinetic_core_b*_profile.*` (4): `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md`, `kinetic_core_b9_profile.json`, `kinetic_core_b9_profile.md` | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
