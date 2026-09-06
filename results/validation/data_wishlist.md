@@ -61,8 +61,8 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | time | 2 / 2 | 0 | caution | 0.342 | 2 |
 | additive_cysteine | 2 / 3 | 2 | caution | 0.208 | 5 |
 | ph | 4 / 5 | 5 | caution | 0.376 | 3 |
-| temperature | 5 / 7 | 1 | caution | 0.359 | 4 |
 | sugar_identity | 4 / 8 | 6 | do-not-use | 0.215 | 12 |
+| temperature | 5 / 9 | 4 | do-not-use | 0.267 | 11 |
 
 ## 5. Where the envelope misses most (value of information)
 
@@ -94,7 +94,7 @@ The engine returns a number but declares the route unidentified; the rows leave 
 - **If** `2 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'caution'.
 - **If** `5 more independent ordering claims on additive_cysteine (all agreeing)` were measured: the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'.
 - **If** `3 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
-- **If** `4 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'caution'.
 - **If** `12 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
+- **If** `11 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'.
 
 Nothing above is a forecast of accuracy: 'unlocks' means the observable sits downstream of the step in the network, so a measured rate would replace a band artefact with a fitted value. Whether the fitted value lands within 3x of a measurement is what the next pre-registered wave finds out (`scripts/generators/WAVES.md`).

@@ -256,7 +256,12 @@ def test_core_scores_17_of_26_independent_directional_claims():
     on a different evaluable subset and is NOT a baseline for this number."""
     payload = json.loads(DIRECTIONAL.read_text(encoding="utf-8"))
     s = payload["summary"]
-    assert payload["panel"]["claims"] == 69
+    # RE-PINNED 2026-09-06 (programme step R2(c), B10 prereg sec. 6): five sulfur temperature
+    # claims added BEFORE wave B10 fits anything (YIL-01/02 evaluable, WANG-01/02 and MENG-01
+    # recorded not evaluable); both Yiltirak sign claims MISS on the shipped B9 lane, which is
+    # the pre-wave baseline the wave is judged against: 69 -> 74 claims, 17/26 -> 17/28,
+    # temperature 5/7 -> 5/9, 26 -> 29 independent claims not evaluable.
+    assert payload["panel"]["claims"] == 74
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
@@ -264,23 +269,23 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-09-03 (zero floor): a claim whose arms were 1e-31 and 1e-29 ug/L had been a
     # MISS on a log ratio of integrator noise; below 1 pg/L a concentration is zero and the claim is
     # NOT EVALUABLE ("a predicted concentration is zero"): 17/27 -> 17/26, sugar identity 4/9 -> 4/8.
-    assert s["headline"] == [17, 26]
+    assert s["headline"] == [17, 28]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (13, 21)
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (13, 23)
     assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (4, 5)
-    assert ind["total"]["not_evaluable"] == 26
+    assert ind["total"]["not_evaluable"] == 29
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 4
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
     assert cats["sugar_identity"] == (4, 8)
-    assert cats["temperature"] == (5, 7)
+    assert cats["temperature"] == (5, 9)
     assert cats["ph"] == (4, 5)
     assert cats["moisture_aw"] == (0, 0)   # every a_w comparison is refused
     assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (2, 2)
     readme = _doc_text(README)
-    _assert_quoted(readme, "17 of 26", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "13 of 21", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "17 of 28", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "13 of 23", "README.md", "the directional count excluding pH and water activity")
     _assert_quoted(readme, "4 of 5", "README.md", "the directional count on pH")
 
 

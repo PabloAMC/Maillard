@@ -1,159 +1,136 @@
-# Wave B10 pre-registration — oxygen as an input (programme step R2(a))
+# Wave B10 pre-registration — the temperature structure of the sulfur lane (programme step R2(c))
 
-*Written 2026-09-06 before any B10 number existed. STATUS: DRAFT FOR OWNER SIGN-OFF. No B10
-generator exists yet; nothing below has been fitted. Programme: `tasks/data_restructure_plan.md`,
-"Reaction-modelling programme". Licence for the data it reads: FIT_HOLDOUT_DECLARATION.md
-Amendment 19 (the vessel block).*
+*Written 2026-09-06 before any B10 number existed. Owner's instruction: "take the most sensible
+decision long term." This wave was chosen over the oxygen wave (now B11) for the reasons in sec. 1.
+Generator to be written: `scripts/generators/generate_kinetic_core_b10_fit.py`. Programme:
+`tasks/data_restructure_plan.md`, "Reaction-modelling programme".*
 
-## 1. What this wave is for
+## 1. Why this wave runs first
 
-Step R1 put the physical state of every panel pot on record: fill, vessel, atmosphere, water. The
-scorecard now prints the oxygen each closed vessel held per mol of thiol charged: Yiltirak 2026
-1.98, Bolton 1994 2.07, Hofmann 1998 Table-1 systems 0.27, Hofmann fed-intermediate systems 1.32.
-The core is near-unbiased on Hofmann's Table-1 pots and over-predicts the thiols 20x (Bolton) and
-9-480x (Yiltirak). B10 asks whether making oxygen an INPUT the network consumes explains the
-oxygen-rich misses without breaking the oxygen-poor fits.
+1. **Every prediction away from 145 C rides on one frozen number.** The sulfur lane carries a
+   single `lumped_formation_Ea_kJ_mol` = 64.1 on 37 formation and miscellaneous steps, frozen
+   since B9; only the two sink barriers are free (the thiol sink at its 102 ceiling). The
+   2026-09-04 diagnosis measured the consequence: the lane is unbiased at 145 C and runs
+   ~+2 dex at 100-130 C.
+2. **The oxygen probe (B11 prereg, sec. 2) showed the oxidant channels are inert at trace thiol.**
+   The oxygen wave needs a new sink structure and two unidentified constants; this wave needs
+   no new constant, only a split of one that exists, and has data.
+3. **The corpus holds four thiol temperature ladders no fit reads, and they agree on the shape:
+   non-monotone.** Kang 2026 (100/120/140 C, TTCA + Cys, 120 min): flat then steep (x1.12 then
+   x4.26 for MFT). Meng 2017 (80/95/120 C, fermented soy sauce, 5 and 20 min, n = 4): rising with
+   a FALLING apparent barrier (122.8 -> 25.0 kJ/mol for MFT at 5 min). Wang 2026 (85-125 C, fed
+   Cys-Amadori + Glu-Amadori, five rungs, digitised): MFT peaks at 115 C and falls, FFT peaks at
+   95 C and collapses. Yiltirak 2026 (100/110/120/130 C under a time-compensated cook, SIDA,
+   buffered, n = 3): MFT falls 4.0x, FFT rises 1.27x. A single Arrhenius formation barrier cannot
+   produce a peak; a formation barrier below a sink barrier can. The structure is what the data
+   ask for.
+4. **The directional panel carries no sulfur temperature claim at all** (its temperature claims are
+   acrylamide, HMF and pyrazines), so the lane's temperature behaviour has never been scored as a
+   direction. B10 adds the claims BEFORE it fits, so the pre-wave baseline is on record.
 
-## 2. Findings that shape the design (measured 2026-09-06 on the shipped B9 lane, no fit)
+## 2. The data, and which role each takes under the fit / validate rule
 
-**2.1 A fit/deploy inconsistency.** Every fit system in the B2.3-B9 objective was integrated with
-the oxidant pool `OX` charged at `OX_AMBIENT_MMOL_L = 1.0` (Zhang 2024's cystine arm at 62.4).
-The engine's `predict` passes only the mapped precursors as the initial state, so every panel
-prediction and every user prediction runs at `OX = 0`. The two oxidant-consuming channels
-(`ch_dimer_mft`, `ch_dimer_fft`) therefore carry zero flux in deployment and non-zero flux in the
-fit, and both `k_dimer_*` sat on active bounds in B9. B10 removes the inconsistency whatever else
-it does.
+Owner's rule (2026-09-03): rate constants, activation energies, fed-intermediate yields, conversions
+and WITHIN-STUDY RATIOS fit; end-to-end levels in full precursor systems validate.
 
-**2.2 The probe.** The shipped lane was integrated with `OX` = 0, 1, the pot's own O2 in mmol per
-litre of liquid, and twice that (`scratch/ox_probe_2026-09-06.py`, gitignored; the numbers are
-reproduced here). MFT and FFT in ug/L; the dimers are reported as the fraction of the thiol they
-remove.
+| source | what it gives | role in B10 | why |
+|---|---|---|---|
+| Yiltirak 2026 buffer arm (dossier `yiltirak2026_extraction.md`) | 4 T-t rungs, MFT + FFT, SIDA, stated charge and buffer, one lab | **FIT: 6 within-study folds** (consecutive rungs, MFT and FFT); **VALIDATION: the 8 levels stay on the hold-out panel** and become `in_core_fit`-adjacent | the corpus's only clean thiol ladder; a fold cancels the lab factor and is primary evidence under the rule; the level is not |
+| Kang 2026 / Zhai 2023 (in the objective) | 100/120 C MFT, FFT, furfural levels and folds; cys conversions 100/120 | unchanged (fit) | already declared; the 140 C rung stays the B2.x hold-out |
+| Feng 2022 (in the objective) | ARP conversion 100/120 C | unchanged (fit) | |
+| Wang 2026 (dossier) | five-rung MFT/FFT shape, digitised; pH and time of the series NOT stated; Glu-Amadori co-charged (no core species); SI Table S2 not on disk | **VALIDATION, shape only:** MFT peak in (105, 125) C, FFT peak in (85, 105) C, as directional claims with `evaluable` set by whether the engine can charge the pot | too many unstated inputs for a fit row; the SHAPE is robust to them |
+| Meng 2017 (dossier) | 80/95/120 C, 5 and 20 min, MFT + FFT, n = 4, soy-sauce matrix; 80/95 in an open cylinder, 120 in an autoclave | **VALIDATION, ordering only** (`evaluable: false` until a chargeable proxy exists; recorded) | no stated precursor charge; vessel discontinuity |
+| Chan & Reineccius 1994 (dossier) | 75-115 C ladders of methional, DMDS, 2-acetylthiophene, six Ea in (81, 137) kJ/mol, non-linear legs | **PRIOR band for the thiol-assembly barrier** (81-137) | none of the three is a core species; the class is the right one |
+| Zamora 2013 (dossier) | Ea ladder for carbonyl-amine Strecker products, 27.6-78.0 kJ/mol | prior information only, recorded | downstream products; the dossier itself forbids substituting them into a sink |
+| Hofmann 2002 brew 80 C, van Seeventer 50 C | thiol loss at low temperature | unchanged hold-outs (B2.x) | the sink barrier's only low-temperature tests |
+| Hofmann 1998 dry-heat 180 C series | one point, confounded (water, T, time) | stays ordinal, unchanged | the reconciliation dossier says the T/water series does not exist |
 
-| pot | O2 in pot (mmol/L) | measured MFT / FFT | OX = 0 (engine today) | OX = 1 (the fit's ambient) | OX = O2 | OX = 2 x O2 |
-|---|---:|---|---|---|---|---|
-| Hofmann ribose + cys, 145 C, pH 5 | 9.0 | 198 / 121 | 731 / 834 | 731 / 831 | 727 / 803 | 724 / 775 |
-| Yiltirak buffer, 100 C / 4 h | 49.6 | 6.88 / 1.28 | 64 / 616 | 64 / 610 | 63 / 447 | 61 / 367 |
-| Yiltirak buffer, 130 C / 0.5 h | 49.6 | 1.71 / 1.62 | 171 / 214 | 171 / 212 | 155 / 153 | 143 / 126 |
-| Bolton thiamine + cys + glc, 120 C | 24.2 | 11.7 / - | 236 / 534 | 236 / 533 | 235 / 523 | 234 / 514 |
-| Hofmann norfuraneol + cys (fed, mM) | 26.4 | 1020 / - | 2360 / 0 | 2353 / 0 | 2201 / 0 | 2077 / 0 |
-
-Reading, in order of consequence:
-
-1. **At trace thiol levels the shipped oxidant channels cannot matter.** Both are SECOND order in
-   thiol. At 1-700 ug/L (1e-8 to 6e-6 M) they remove under 10 % of MFT and at most 1.7x of FFT even
-   with fifty times the ambient charge, and the pool is not consumed (`OX` left = `OX` charged).
-   Charging the pot's oxygen into the network as it stands changes nothing the panel scores.
-2. **The only first-order thiol sink, `ch_thiolate_loss_*`, carries no oxygen dependence.** It was
-   fitted on Kumazawa 2003's pH grid, which the dossier confirms was canned "without the
-   deoxidization process" (air in the can, volume unstated) at 1 ppm FFT, i.e. oxygen in large
-   excess. The same constant runs unchanged in an oxygen-poor pot. If oxygen is the hidden input,
-   THIS channel is where it has to enter: first order in thiol, first order in dissolved oxygen.
-3. **The Yiltirak 100 C / 4 h FFT miss (480x) is not an oxygen miss.** At the same pot MFT is 9x over.
-   The split is the frozen 64 kJ/mol formation barrier applied to the furfural + H2S route at 100 C
-   over four hours; that is step R2(c)'s problem (temperature structure) and this wave does not
-   claim it. The 130 C / 0.5 h rung (100x / 132x, both thiols alike) is the rung this wave can
-   speak to.
-4. **The fed-intermediate rows are where the dimer channel is real.** At mM thiol the second-order
-   channel removes a material share (norfuraneol + cys: ~5 % of MFT-equivalents at OX = 1, ~50 % at
-   the pot's own O2). Those rows are in the objective; they will re-fit `k_dimer_*` once `OX` is
-   charged consistently, and the wave must show they do not degrade.
+**What is NOT done.** No level enters the fit. No proxy charge is invented for Meng. Wang's digitised
+bars are not fit rows. The Kang 140 C rung stays a hold-out.
 
 ## 3. The structural change
 
-Three additions to the sulfur lane, each declared, none fitted to a hold-out.
+**(a) One barrier becomes two, by route.** The 37 keys on the lumped barrier split into
+`Ea_sugar_trunk` (pentose / Amadori / hexose entries and the deoxyosone branchings: `k_pent_*`,
+`k_arp_*_th`, `k_glc_*`, `k_dpo_*`, `k_tdp_fur`, `k_ttca_*`) and `Ea_thiol_assembly` (every step
+that joins a sulfur nucleophile to a carbonyl: `k_ddp_mft*`, `k_nf_mft`, `k_nf_mp3p`, `k_fur_fft*`,
+`k_mgo_mp`, `k_ha_mp_mft`, `k_hmp_*`, `k_thi_*`, `k_cys_actz`, plus `k_h2s_loss`). The measured
+overrides (`k_cys_thermal` 55.1, `k_dimer_*` 122.2, `k_arp_dpo/tdp` 85.7) and the two sink families
+are untouched; the residual decay keys not in a family (`k_dimer_decay`) join `thiol_sink`. The
+exact key table is printed by the generator and pinned by its test.
 
-**(a) Oxygen as a two-pool state.** `OXR` = headspace reservoir in mmol per litre of liquid,
-charged from the vessel block (`vessel.py`: headspace air at 1 atm / 20 C, plus dissolved O2);
-`OX` = dissolved O2, held at its saturation value at temperature while `OXR > 0` and drained by
-every O2-consuming flux; when the reservoir is exhausted `OX` falls with the consumption. The
-gas-liquid equilibration is taken as fast on the cook's timescale (stirred 3 mL tubes; a 100 mL
-autoclave charge is the weakest case and is said so). Saturation: Henry's law for O2 at the segment
-temperature under the sealed tube's air partial pressure (the fixed air charge at the higher
-temperature, ~0.29 atm O2 at 130 C), giving ~0.2-0.4 mmol/L; carried as a DECLARED constant with a
-band (0.1, 1.0) mmol/L sampled by the envelope, not fitted.
+**(b) Both barriers are FREE, with declared bands narrowed by the prefactor rule** (2026-09-04:
+holding k(145 C) fixed, 8.0 kJ/mol per decade of prefactor; 12 decades). `Ea_sugar_trunk`: centre
+85.7 (Zhang 2026's measured Amadori enolisation), band (40, 135). `Ea_thiol_assembly`: centre
+100 (Chan 1994's class), band (55, 145). Both sink barriers keep their B9 bands.
 
-**(b) Oxygen consumers.** (i) `ch_thiolate_loss_mft/fft` become first order in `OX`, normalised to
-`[O2]_ref` = the saturation value at Kumazawa's 121 C, so B9's `k_thiolate_loss` keeps its meaning
-at Kumazawa's condition and the fit only has to move it if the other rows ask. `ch_dimer_*` read the
-same dissolved `OX`. (ii) NEW `ch_cys_ox`: cysteine + 1/2 O2 -> 1/2 cystine-equivalent (to
-`FRAG_S`), constant `k_cys_ox`, declared band (1e-4, 1e-1) /min at 145 C (thiol autoxidation is
-metal-catalysed; Bagiyan 2004 gives initial rates, not constants, so the band is wide and the
-coordinate is expected to be unidentified). (iii) NEW `ch_red_ox`: the reductone pool (Amadori +
-deoxyosones, the species the network already carries) + O2 -> oxidised fragments, constant
-`k_red_ox`, declared band (1e-4, 1e-1) /min at 145 C, likewise expected unidentified. Both sinks
-exist so that an oxygen-POOR pot can run out of oxygen; without them a 9 mmol/L charge would never
-deplete and the wave could not distinguish the regimes. A trace-metal multiplier for tap water is
-NOT added: no measurement supports a number; the water source stays a recorded caveat.
+**(c) The ambient oxidant is charged consistently** (B11 prereg finding 2.1): the engine charges
+`OX` at the fit's ambient 1.0 mmol/L when no vessel is declared, and from the vessel block when
+one is. Effect on every panel row is below 1 % at trace thiol (probe), so this is a consistency
+fix, not a modelling change, and the B9 numbers are reproduced to 1e-6 by a unit test when the
+ambient charge is set to zero.
 
-**(c) The vessel on every fit system.** The fit's systems live in the frozen generators as
-literals; B10's generator carries its own vessel table with provenance per system. Known today:
-Hofmann 1998 (200 mL autoclave, 100 mL Table-1 pots / 50 mL fed pots); Kumazawa 2003 (air in the
-can, volume unstated: declared `oxygen in excess`, which at 1 ppm FFT no can could contradict).
-To be read before the wave runs, all PDFs on disk: Kang 2026 (sealed pressure vessels, volume not
-in the dossier), Zhou 2023, Zhang 2024, Feng 2022, Zhai 2023 (pressure bottles), Whitfield 1999,
-Cerny 2007, van Seeventer 2001, Yaghmur 2005. Rule for a system whose source leaves the vessel
-unstated: `OXR` set to Hofmann's 9 mmol/L with a (1, 100) mmol/L band sampled by the envelope, and
-the system is listed as NOT identifying `k_cys_ox` / `k_red_ox`.
+**Free set: 23 + 2 = 25** (`lumped_formation_Ea` was frozen in B9; both route barriers are free
+in B10). Objective: 54 + 6 = 60 rows.
 
-## 4. What is fitted, what is held
+## 4. The six new rows
 
-| | B9 | B10 |
-| --- | --- | --- |
-| objective rows | 54 | **54, unchanged** (no level row enters; the vessel is an input, not a target) |
-| network | B9 | + `OXR` state, + `ch_cys_ox`, + `ch_red_ox`; `ch_thiolate_loss_*` and `ch_dimer_*` read dissolved O2 |
-| free set | 23 | **25** (+ `k_cys_ox`, `k_red_ox`); `k_thiolate_loss`, `k_dimer_mft`, `k_dimer_fft` re-fit in the new structure |
-| declared bands | B9 | unchanged + the two new bands above; `[O2]_sat` and unstated `OXR` are envelope bands, not fit coordinates |
-| pH weighting, optimiser, budget, starts | B9 | unchanged; start 0 = B9's optimum with the new constants at their band centres, start 1 = the perturbation protocol |
-| every other coordinate | B9 | unchanged, including the single formation Ea (R2(c) is a separate wave) |
+Systems: the Yiltirak buffer arm at (100 C, 240 min), (110 C, 120 min), (120 C, 60 min),
+(130 C, 30 min); 25 mM ribose + 25 mM cysteine; 0.5 M potassium phosphate, pH 5.5 bench; vessel
+3 mL in 20 mL under air, tap water (recorded, not modelled in B10). Rows: `kind =
+cross_system_ratio`, consecutive rungs, targets from Table S3 (MFT 3.29/6.88, 2.4/3.29, 1.71/2.4;
+FFT 1.46/1.28, 1.68/1.46, 1.62/1.68), `sigma_log` 0.10 (SIDA, n = 3; the printed SDs give
+0.03-0.07 dex per rung, and 0.10 leaves room for the unreported come-up time). Anchors quote the
+table row verbatim per the dossier.
 
-## 5. Pre-registered tests and falsifiers
+## 5. Pre-registered tests, the falsifier, and the ship rule
 
-The wave's own claim is the OXYGEN-REGIME CONTRAST. Scored on the panel after the fit is frozen,
-with today's numbers as the baseline.
+Scored after the fit is frozen; baselines are today's numbers.
 
-- **T1 Bolton 1994** (O2 : thiol 2.07; today 20.2x over): fold error falls below **6x**.
-  Falsifier: stays above 12x.
-- **T2 Hofmann Table-1 pH-5 rows** (O2 : thiol 0.27; today MFT 3.7x, FFT 6.9x over): neither
-  worsens beyond **8x**. Falsifier: either exceeds 8x.
-- **T3 Yiltirak 130 C / 0.5 h** (O2 in excess; today MFT 100x, FFT 132x over): both fold errors fall
-  by at least **3x**. Falsifier: neither improves by 2x.
-- **T4 Yiltirak 100 C / 4 h MFT-vs-FFT split** (9x vs 480x): NOT a target of this wave; recorded so
-  the wave is not credited or blamed for it. Expected: the split persists until R2(c).
-- **T5 in-sample discipline:** no B9 objective row's |residual| grows by more than 0.3 dex; the
-  Kumazawa grid stays inside its sigma. Falsifier: any row moves more than 0.5 dex.
-- **T6 fed-intermediate rows** (Hofmann T3/T4/T10 mol% rows, mM thiol, dimer channel live): every one
-  stays within 2x of its B9 residual.
-- **Secondary, not gating:** directional panel not below 17/26; envelope coverage not below 5/33;
-  Laplace identifies at least 20 of the 25 coordinates; `k_cys_ox` and `k_red_ox` are EXPECTED to be
-  unidentified and are then drawn across their bands by the envelope (the 2026-09-04 rule).
+- **T1 (structure): the Laplace at the optimum identifies both route barriers** (finite sigma, not
+  rank-deficient). Falsifier: either lies in the null space. That outcome is reported as "the
+  corpus's temperature contrast does not identify a split" and the wave does NOT ship the split.
+- **T2 (in-sample discipline):** no B9 row's |residual| grows by more than 0.3 dex.
+- **T3 (Yiltirak levels, now fit-adjacent):** the median fold error of the 8 Yiltirak rows falls
+  from 100x to below 10x. This is NOT an out-of-sample claim and is labelled so.
+- **T4 (hold-out shapes, strictly out of sample):** Wang 2026 MFT peak inside (105, 125) C and FFT
+  peak inside (85, 105) C on the directional panel, if the pot is chargeable; Kang 140 C rung
+  direction (MFT 120 -> 140 rises); Hofmann 2002 brew FFT loss at 80 C not worse than today.
+- **T5 (leave-Yiltirak-out):** the same fit WITHOUT the six fold rows, reported alongside. What
+  the difference shows is what Yiltirak alone taught; if the two optima agree within the Laplace
+  sigma the temperature structure was already in the objective and the fold rows cost nothing.
+- **T6 (directional):** the sulfur temperature claims added in sec. 6 move from their pre-wave
+  score (recorded before the fit) toward agreement; the panel headline does not fall.
 
-**Ship rule.** B10 ships as the engine's sulfur report if T1, T3 and T5 hold. If T1 AND T3 both fail,
-the oxygen hypothesis as structured here is refuted for the sulfur lane: the vessel block stays (it
-is a fact about the pots), the two new constants are removed, the fit/deploy `OX` inconsistency is
-fixed by charging the ambient value consistently, and R2 proceeds to (c). Partial outcomes (one of
-T1/T3) ship with the finding recorded and the failing test named in the model card.
+**Ship rule.** B10 ships if T1, T2 and T4's Kang rung hold and T3 improves at all. If T1 fails, the
+two barriers are re-merged, the consistent oxidant charge ships alone as B10, and the finding is
+recorded: the next data item is a two-temperature SIDA measurement in one buffered pot (R7).
 
-## 6. Forecasts, revised after the probe
+## 6. Directional claims added before the fit
 
-P(T1 passes) 0.35. P(T3 passes) 0.25. P(B10 ships under the rule) 0.30. P(any Yiltirak rung lands
-within 3x after B10 alone) 0.05, down from the 0.30 written in the programme before the probe: the
-probe showed the second-order channels are inert at trace thiol and the 100 C FFT miss is a
-temperature-structure miss.
+`YIL-01` MFT falls monotonically across the compensated ladder (100/4 h -> 130/0.5 h);
+`YIL-02` FFT at 120 C / 1 h exceeds FFT at 100 C / 4 h (1.68 vs 1.28, Tukey c vs a);
+`WANG-01` MFT peaks at 115 C over 85-125 C; `WANG-02` FFT peaks at 95 C;
+`MENG-01` MFT rises 80 -> 95 -> 120 C at 5 min and at 20 min (recorded `evaluable: false`: no
+chargeable soy-sauce pot). Fit status: YIL-* become `fit_adjacent` when B10 fits the folds and are
+labelled so; WANG-* and MENG-* stay independent. Their pre-wave score is the baseline T6 reads.
 
-## 7. Cost and order
+**Pre-wave baseline, recorded 2026-09-06 after the claims were added and before any fit:** `YIL-01`
+DISAGREE (the shipped lane predicts MFT 79.5 -> 121 -> 163 -> 197 ug/L, rising, against a measured
+fall 6.88 -> 1.71); `YIL-02` DISAGREE (FFT 1220 vs 2310 ug/L, the opposite ordering); `WANG-01/02`
+and `MENG-01` not evaluable. Panel headline 17/26 -> 17/28; temperature axis 5/7 -> 5/9.
 
-1. Vessel reads for the nine fit-system papers above (about half a day; each becomes a dossier line
-   with a verbatim quote).
-2. Engine and network: `VesselSpec` on `ProcessSpec`; the two-pool O2 state; three reaction edits;
-   bands; charge-closure ledger entries; unit tests that the shipped B9 numbers are reproduced
-   exactly when the vessel is absent and `OX` is charged at the ambient value (one day).
-3. `generate_kinetic_core_b10_fit.py` (B9's shape: import, extend, freeze), two starts (about an
-   hour of compute), consolidation.
-4. Laplace, profile, fit targets, scorecard, directional, envelope, model card, README re-pin
-   (half a day).
+## 7. Forecasts
+
+P(T1: both barriers identified) 0.55. P(B10 ships under the rule) 0.50. P(Yiltirak median below
+10x, fit-adjacent) 0.45. P(Wang's two peaks land, out of sample) 0.30. P(a Yiltirak level within
+3x) 0.10.
 
 ## 8. What is read and what is not
 
-As B9: the fit reads its row table and its own vessel table (literals with provenance) and nothing
-under `data/benchmarks/`. The panel bundles' vessel blocks are read only by the scorer, after the
-fit is frozen. The hold-out guard runs on the B10 generator like any other.
+The fit reads its row table (B9's, plus the six fold rows quoted from the Yiltirak dossier) and
+nothing under `data/benchmarks/`. The Yiltirak bundles' `holdout_targets` are the same numbers as
+the dossier's Table S3 transcription; the fold rows are declared as reading the dossier, and the
+fit-target index lists the four Yiltirak bundles as fit-adjacent (`in_core_fit` on the fold basis)
+so the scorecard's out-of-sample count excludes them. The hold-out guard runs on the B10 generator
+like any other.

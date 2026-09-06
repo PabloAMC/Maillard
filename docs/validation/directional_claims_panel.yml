@@ -179,6 +179,21 @@ sources:
     doi: "10.3390/foods14152721"
     access: full_text_review
     retrieved_from: "scratchpad/dirlit_flour_maillard_review.txt (Europe PMC full text)"
+  yiltirak2026:
+    citation: "Yiltirak, S., Balagiannis, D. P., Koek, J., Koch, J., Elmore, J. S. (2026). Formation of aroma-potent thiols in heat-stable vegetable oil-in-water emulsion models containing ribose and cysteine. Food Research International 231, 118600."
+    doi: "10.1016/j.foodres.2026.118600"
+    access: full_text_plus_supplementary
+    retrieved_from: "data/articles/Yiltirak2026.pdf + data/articles/Yiltirak2026-supplementary.docx (owner-supplied 2026-09-06); dossier data/lit/extraction_dossiers/yiltirak2026_extraction.md"
+  wang2026:
+    citation: "Wang, X.-L., Wei, C.-K., Wei, D.-W., Yang, C.-M., Liu, Y. (2026). Impact of Amadori rearrangement products of cysteine-xylose-glutamic acid on meat flavor development. Food Research International 230, 118535."
+    doi: "10.1016/j.foodres.2026.118535"
+    access: full_text
+    retrieved_from: "data/articles/Wang2026.pdf; dossier data/lit/extraction_dossiers/wang2026_extraction.md (Fig. 5C digitised; SI Table S2 not on disk)"
+  meng2017:
+    citation: "Meng, Q., Kitagawa, R., Imamura, M., Katayama, H., Obata, A., Sugawara, E. (2017). Contribution of 2-methyl-3-furanthiol to the cooked meat-like aroma of fermented soy sauce. Bioscience, Biotechnology, and Biochemistry 81(1), 168-172."
+    doi: "10.1080/09168451.2016.1238295"
+    access: full_text
+    retrieved_from: "data/articles/meng2017.pdf; dossier data/lit/extraction_dossiers/meng2017_extraction.md (Table 3 raster-verified)"
 
 panel:
 
@@ -1822,3 +1837,109 @@ panel:
       are recorded with their exact stoichiometry in data/benchmarks/
       step_level_unreachable/. The second is the cheapest unblock on the Wave X list: no new
       chemistry, no new barrier, only a trigger moved.
+
+  # =====================================================================
+  # SULFUR TEMPERATURE LADDERS (programme step R2(c), B10 prereg sec. 6, 2026-09-06)
+  # The panel carried no sulfur temperature claim before this block. Added BEFORE
+  # wave B10 fits anything, so the pre-wave score is the recorded baseline.
+  # =====================================================================
+  - claim_id: YIL-01
+    statement: "Under a time-compensated cook (100 C / 4 h, 110 C / 2 h, 120 C / 1 h, 130 C / 0.5 h) in 0.5 M phosphate pH 5.5, MFT from 25 mM ribose + 25 mM cysteine FALLS monotonically: 6.88 -> 3.29 -> 2.4 -> 1.71 ug/L."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["MFT"]
+    conditions:
+      series:
+        - {label: "100 C / 4 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240}}
+        - {label: "110 C / 2 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 110, ph: 5.5, water_activity: 0.98, time_min: 120}}
+        - {label: "120 C / 1 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60}}
+        - {label: "130 C / 0.5 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 130, ph: 5.5, water_activity: 0.98, time_min: 30}}
+    expected_relation: "decreasing"
+    source:
+      ref: yiltirak2026
+      quote: "Buffer 100 C 6.88+/-0.98aA 1.28+/-0.08cB 1.54+/-0.03aA ; Buffer 110 C 3.29+/-0.06bB 1.46+/-0.19abB 1.16+/-0.08bA ; Buffer 120 C 2.4+/-0.16bcB 1.68+/-0.21aA 1.21+/-0.21bA ; Buffer 130 C 1.71+/-0.12cB 1.62+/-0.11abB 0.69+/-0.06cA"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table S3 (supplementary), the four Buffer rows, columns MFT | FFT | 3M2B in ug/L; Tukey letters as printed (lowercase across temperatures: a, b, bc, c for MFT)."
+    source_conditions: "3 mL in a 20 mL PTFE-capped Duran tube under air, magnetically stirred, buffer in tap water; SIDA (MFT-d3), matrix-matched calibration; n = 3."
+    fit_status: independent
+    fit_note: "No fit has read Yiltirak 2026 as of this claim's date. Wave B10 (kinetic_core_b10_prereg.md) declares the six within-study FOLDS of this ladder as fit rows; when it ships, YIL-01 and YIL-02 become fit_adjacent and must be relabelled in the same change."
+    model_scope_note: "Expressible: the axis moved is temperature AND time together (the source's own design); the engine refuses neither. Like every claim on this panel the arms run at the engine's declared default buffer (the runner carries no buffer field), not the source's 0.5 M phosphate; the bundles carry the buffer and the SIGN is the same either way. The bundle series mp_holdout_ribose_cysteine_buffer_*_Yiltirak2026 scores the same four points as absolutes; this claim scores the SIGN, which the 2026-09-06 review found the core gets backwards (predicted 64 -> 171 ug/L)."
+
+  - claim_id: YIL-02
+    statement: "In the same ladder FFT does the opposite: 1.68 ug/L at 120 C / 1 h exceeds 1.28 ug/L at 100 C / 4 h (Tukey a vs c)."
+    claim_type: ordering
+    category: temperature
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "120 C / 1 h"
+        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60}
+      B:
+        label: "100 C / 4 h"
+        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240}
+    expected_relation: "A>B"
+    source:
+      ref: yiltirak2026
+      quote: "FFT formation tended to increase in buffer and buffer/emulsion systems up to 1.68 +/- 0.21 ug/L and 1.87 +/- 0.06 ug/L with increasing heating temperature and decreasing time."
+    source_conditions: "As YIL-01."
+    fit_status: independent
+    fit_note: "As YIL-01: becomes fit_adjacent when B10 ships."
+    model_scope_note: "Expressible. The core today predicts FFT 616 -> 214 ug/L over these two points, i.e. the opposite ordering."
+
+  - claim_id: WANG-01
+    statement: "In a fed Cys-Amadori + Glu-Amadori pot (0.2 M PBS), MFT over 85/95/105/115/125 C PEAKS at 115 C (n.d., ~1, 2.5, 6.6, ~2 ug/L) and falls at 125 C."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "peak"
+    conditions: {}
+    source:
+      ref: wang2026
+      quote: "2-Methyl-3-furanthiol (MFT) | n.d. | ~1 | 2.5 | 6.6 | ~2 | PEAKS at 115 C, then falls"
+      quote_form: table_row_reformatted
+      quote_form_note: "Dossier sec. 3.1, digitised from Fig. 5C at 900 dpi (+/-5 % of reading, floor ~2.5 ug/L); the authoritative Table S2 is not on disk."
+    fit_status: independent
+    model_scope_note: >-
+      NOT EVALUABLE BY THE PANEL'S OWN RULE, not by the engine's: the pot is chargeable (the cysteine
+      Amadori maps to ARP), but the paper never states the pH or the hold time at which the
+      temperature series was run, and the co-charged glutamate Amadori has no core species.
+      Declaring a pH and a time to make the row scorable would be inventing inputs. Becomes
+      evaluable when the SI (Table S2, Methods details) is obtained. The SHAPE it records -- a peak
+      -- is the structural claim wave B10 exists to reproduce.
+
+  - claim_id: WANG-02
+    statement: "In the same pot FFT PEAKS at 95 C (4.5, 12.0, 6.7, ~1, n.d. ug/L over 85-125 C) and collapses to zero by 125 C."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["FFT"]
+    evaluable: false
+    expected_relation: "peak"
+    conditions: {}
+    source:
+      ref: wang2026
+      quote: "2-Furfurylthiol (FFT) | 4.5 | 12.0 | 6.7 | ~1 | n.d. | PEAKS at 95 C, then collapses to zero"
+      quote_form: table_row_reformatted
+      quote_form_note: "As WANG-01."
+    fit_status: independent
+    model_scope_note: "As WANG-01: recorded, not evaluable until the series' pH and time are known."
+
+  - claim_id: MENG-01
+    statement: "In fermented soy sauce, MFT and FFT both RISE 80 -> 95 -> 120 C at 5 min (MFT 1.2 -> 6.6 -> 11.1 ug/L) and at 20 min (2.4 -> 6.8 -> 18.3), with the apparent barrier FALLING as temperature rises."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["MFT", "FFT"]
+    evaluable: false
+    expected_relation: "increasing"
+    conditions: {}
+    source:
+      ref: meng2017
+      quote: "80 C | 1.2 +/- 0.1 | 2.4 +/- 0.3 | 1.2 +/- 0.1 | 1.4 +/- 0.1 ; 95 C | 6.6 +/- 0.4 | 6.8 +/- 0.3 | 5.0 +/- 0.3 | 5.2 +/- 0.1 ; 120 C | 11.1 +/- 0.4 | 18.3 +/- 0.8 | 9.7 +/- 0.7 | 18.2 +/- 0.6"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 3, raw soy sauce A: columns 2M3F 5 min | 2M3F 20 min | 2FM 5 min | 2FM 20 min, ug/L, n = 4 (dossier sec. 4, raster-verified)."
+    fit_status: independent
+    model_scope_note: >-
+      NOT EVALUABLE: a fermented soy sauce has no stated precursor charge, and the 80 and 95 C
+      points were taken in an open cylinder while the 120 C point was autoclaved (dossier sec.
+      6b). Recorded because it is one of only four thiol temperature ladders in the corpus and its
+      concave shape (barrier falling with temperature) is the mirror image of Kang 2026's convex one.

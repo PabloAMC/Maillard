@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-06",
     "git": {
-      "commit": "f6450ae3f0885a210283d818a5235b263e36f629",
-      "short": "f6450ae3",
+      "commit": "a612b77702aa03f45a92a0ee524d8ce0d9f7a705",
+      "short": "a612b777",
       "branch": "cleaning",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "860824fc7b171d15191b77773b5e66e13ef8839cecc269f5fe56b9062f94623e"
+        "sha256": "9b2460cd2d39bad0502d61d7fbe4dfeb3ff42e57c6f53e1ff81e92f60eded4c7"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -568,16 +568,6 @@
       "structural_block": null
     },
     {
-      "axis": "temperature",
-      "agree": 5,
-      "evaluable": 7,
-      "not_evaluable": 1,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.359,
-      "additional_agreeing_claims_to_trust": 4,
-      "structural_block": null
-    },
-    {
       "axis": "sugar_identity",
       "agree": 4,
       "evaluable": 8,
@@ -585,6 +575,16 @@
       "verdict": "do-not-use",
       "wilson_lower_bound": 0.215,
       "additional_agreeing_claims_to_trust": 12,
+      "structural_block": null
+    },
+    {
+      "axis": "temperature",
+      "agree": 5,
+      "evaluable": 9,
+      "not_evaluable": 4,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.267,
+      "additional_agreeing_claims_to_trust": 11,
       "structural_block": null
     }
   ],
@@ -714,12 +714,12 @@
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "4 more independent ordering claims on temperature (all agreeing)",
-      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
-    },
-    {
       "if_measured": "12 more independent ordering claims on sugar_identity (all agreeing)",
       "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
+    },
+    {
+      "if_measured": "11 more independent ordering claims on temperature (all agreeing)",
+      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'"
     }
   ],
   "summary": {

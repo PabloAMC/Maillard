@@ -1238,6 +1238,13 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       was fitted on an air-in-excess grid; Yiltirak's 100 C FFT miss (480x vs MFT 9x) is a
       temperature-structure miss for (c), not an oxygen miss. Forecast for (a) revised down:
       P(ships) 0.30, P(a Yiltirak rung within 3x after (a) alone) 0.05.
+      **ORDER DECIDED 2026-09-06 (owner: "take the most sensible decision long term"): (c) runs
+      first as wave B10** (`kinetic_core_b10_prereg.md`: one barrier -> two by route, both free,
+      Yiltirak's six within-study folds as fit rows under the owner's rule, its levels stay
+      validation, leave-Yiltirak-out refit alongside, Wang/Meng/Kang-140 as shape hold-outs);
+      **(a) becomes wave B11** (`kinetic_core_b11_prereg.md`). Five sulfur temperature claims added
+      to the directional panel before the fit (YIL-01/02 evaluable and both MISSED by the shipped
+      lane; WANG-01/02, MENG-01 recorded not evaluable): headline 17/26 -> 17/28.
       (a) **Oxygen as an input.** Charge `OX` from headspace + dissolved O2 (Henry) and cystine;
       split the thiol sink into a thermal term and an oxidative term first order in thiol and in
       O2 through the thiolate fraction (mechanism already in `ch_thiolate_loss_*`), with a

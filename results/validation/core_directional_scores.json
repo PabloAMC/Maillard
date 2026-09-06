@@ -43,10 +43,10 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-09-04",
+    "generated_on": "2026-09-06",
     "git": {
-      "commit": "1bc4d331d9d3bcb7ca86801e4058a544c2853274",
-      "short": "1bc4d331",
+      "commit": "a612b77702aa03f45a92a0ee524d8ce0d9f7a705",
+      "short": "a612b777",
       "branch": "cleaning",
       "dirty": true
     },
@@ -54,7 +54,7 @@
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "e0c6a70fc22e86c0a26519e8df43303f9c14b9e641abed21d31e3429841271ed"
+        "sha256": "a7a9e1105628bf669bf50308908aeb0e8a1828ec2b083d1970917a0a2cabe7fb"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,8 +80,8 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "e0c6a70fc22e86c0a26519e8df43303f9c14b9e641abed21d31e3429841271ed",
-    "claims": 69,
+    "sha256": "a7a9e1105628bf669bf50308908aeb0e8a1828ec2b083d1970917a0a2cabe7fb",
+    "claims": 74,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
     "wave": "S2 (directional accuracy)"
@@ -89,7 +89,7 @@
   "summary": {
     "headline": [
       17,
-      26
+      28
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -179,14 +179,16 @@
         },
         "temperature": {
           "agree": 5,
-          "evaluable": 7,
-          "not_evaluable": 1,
+          "evaluable": 9,
+          "not_evaluable": 4,
           "misses": [
             "TEMP-01",
-            "TEMP-05"
+            "TEMP-05",
+            "YIL-01",
+            "YIL-02"
           ],
           "mechanism_absent": 0,
-          "rate": 0.7142857142857143
+          "rate": 0.5555555555555556
         },
         "time": {
           "agree": 2,
@@ -199,8 +201,8 @@
       },
       "total": {
         "agree": 17,
-        "evaluable": 26,
-        "not_evaluable": 26,
+        "evaluable": 28,
+        "not_evaluable": 29,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -210,10 +212,12 @@
           "HOF-02",
           "HOF-03",
           "MOT-01",
-          "MOT-03"
+          "MOT-03",
+          "YIL-01",
+          "YIL-02"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6538461538461539
+        "rate": 0.6071428571428571
       },
       "ph_aw": {
         "agree": 4,
@@ -227,8 +231,8 @@
       },
       "excluding_ph_aw": {
         "agree": 13,
-        "evaluable": 21,
-        "not_evaluable": 17,
+        "evaluable": 23,
+        "not_evaluable": 20,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -237,10 +241,12 @@
           "TEMP-05",
           "HOF-02",
           "HOF-03",
-          "MOT-03"
+          "MOT-03",
+          "YIL-01",
+          "YIL-02"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6190476190476191
+        "rate": 0.5652173913043478
       }
     },
     "all_claims": {
@@ -341,14 +347,16 @@
         },
         "temperature": {
           "agree": 5,
-          "evaluable": 7,
-          "not_evaluable": 1,
+          "evaluable": 9,
+          "not_evaluable": 4,
           "misses": [
             "TEMP-01",
-            "TEMP-05"
+            "TEMP-05",
+            "YIL-01",
+            "YIL-02"
           ],
           "mechanism_absent": 0,
-          "rate": 0.7142857142857143
+          "rate": 0.5555555555555556
         },
         "time": {
           "agree": 2,
@@ -361,8 +369,8 @@
       },
       "total": {
         "agree": 19,
-        "evaluable": 37,
-        "not_evaluable": 32,
+        "evaluable": 39,
+        "not_evaluable": 35,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -381,10 +389,12 @@
           "HOF-02",
           "HOF-03",
           "MOT-01",
-          "MOT-03"
+          "MOT-03",
+          "YIL-01",
+          "YIL-02"
         ],
         "mechanism_absent": 4,
-        "rate": 0.5135135135135135
+        "rate": 0.48717948717948717
       },
       "ph_aw": {
         "agree": 4,
@@ -399,8 +409,8 @@
       },
       "excluding_ph_aw": {
         "agree": 15,
-        "evaluable": 31,
-        "not_evaluable": 22,
+        "evaluable": 33,
+        "not_evaluable": 25,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -417,14 +427,16 @@
           "LIP-04",
           "HOF-02",
           "HOF-03",
-          "MOT-03"
+          "MOT-03",
+          "YIL-01",
+          "YIL-02"
         ],
         "mechanism_absent": 4,
-        "rate": 0.4838709677419355
+        "rate": 0.45454545454545453
       }
     },
     "not_evaluable_reasons": {
-      "the claim carries no runnable conditions (prose-only)": 16,
+      "the claim carries no runnable conditions (prose-only)": 19,
       "refused by the engine": 4,
       "a predicted concentration is zero; no direction is defined": 2,
       "arm 'processed, 140 C' refused": 2,
@@ -437,7 +449,7 @@
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
     },
-    "wall_seconds": 17.9
+    "wall_seconds": 18.0
   },
   "claims": [
     {
@@ -4772,6 +4784,238 @@
       "fit_status": "independent",
       "statement": "With H2S, furan-2-aldehyde is a far better FFT precursor than ribose (550.8 vs 9.2 ug, a factor of 60) and than the 3-deoxypentosone (78.6 ug, a factor of 7).",
       "source": "hofmann1998",
+      "status": "not_evaluable",
+      "reason": "the claim carries no runnable conditions (prose-only)",
+      "arms": []
+    },
+    {
+      "claim_id": "YIL-01",
+      "category": "temperature",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "decreasing",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "independent",
+      "statement": "Under a time-compensated cook (100 C / 4 h, 110 C / 2 h, 120 C / 1 h, 130 C / 0.5 h) in 0.5 M phosphate pH 5.5, MFT from 25 mM ribose + 25 mM cysteine FALLS monotonically: 6.88 -> 3.29 -> 2.4 -> 1.71 ug/L.",
+      "source": "yiltirak2026",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        79.51231875425175,
+        120.52294270103259,
+        162.65567869906636,
+        196.810018542245
+      ],
+      "log10_steps": [
+        0.1806353082856459,
+        0.1301995032312224,
+        0.08277797211788812
+      ],
+      "arms": [
+        {
+          "label": "100 C / 4 h",
+          "spec": {
+            "name": "100 C / 4 h",
+            "precursors": {
+              "D-Ribose": 25.0,
+              "L-Cysteine": 25.0
+            },
+            "temp_C": 100.0,
+            "time_min": 240.0,
+            "ph": 5.5,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 79.51231875425175
+        },
+        {
+          "label": "110 C / 2 h",
+          "spec": {
+            "name": "110 C / 2 h",
+            "precursors": {
+              "D-Ribose": 25.0,
+              "L-Cysteine": 25.0
+            },
+            "temp_C": 110.0,
+            "time_min": 120.0,
+            "ph": 5.5,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 120.52294270103259
+        },
+        {
+          "label": "120 C / 1 h",
+          "spec": {
+            "name": "120 C / 1 h",
+            "precursors": {
+              "D-Ribose": 25.0,
+              "L-Cysteine": 25.0
+            },
+            "temp_C": 120.0,
+            "time_min": 60.0,
+            "ph": 5.5,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 162.65567869906636
+        },
+        {
+          "label": "130 C / 0.5 h",
+          "spec": {
+            "name": "130 C / 0.5 h",
+            "precursors": {
+              "D-Ribose": 25.0,
+              "L-Cysteine": 25.0
+            },
+            "temp_C": 130.0,
+            "time_min": 30.0,
+            "ph": 5.5,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 196.810018542245
+        }
+      ]
+    },
+    {
+      "claim_id": "YIL-02",
+      "category": "temperature",
+      "claim_type": "ordering",
+      "expected_relation": "A>B",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same ladder FFT does the opposite: 1.68 ug/L at 120 C / 1 h exceeds 1.28 ug/L at 100 C / 4 h (Tukey a vs c).",
+      "source": "yiltirak2026",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        1215.1607140921774,
+        2305.418274156949
+      ],
+      "log10_ratio_B_over_A": 0.2781160108953489,
+      "arms": [
+        {
+          "label": "120 C / 1 h",
+          "spec": {
+            "name": "120 C / 1 h",
+            "precursors": {
+              "D-Ribose": 25.0,
+              "L-Cysteine": 25.0
+            },
+            "temp_C": 120.0,
+            "time_min": 60.0,
+            "ph": 5.5,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 1215.1607140921774
+        },
+        {
+          "label": "100 C / 4 h",
+          "spec": {
+            "name": "100 C / 4 h",
+            "precursors": {
+              "D-Ribose": 25.0,
+              "L-Cysteine": 25.0
+            },
+            "temp_C": 100.0,
+            "time_min": 240.0,
+            "ph": 5.5,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 2305.418274156949
+        }
+      ]
+    },
+    {
+      "claim_id": "WANG-01",
+      "category": "temperature",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "peak",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In a fed Cys-Amadori + Glu-Amadori pot (0.2 M PBS), MFT over 85/95/105/115/125 C PEAKS at 115 C (n.d., ~1, 2.5, 6.6, ~2 ug/L) and falls at 125 C.",
+      "source": "wang2026",
+      "status": "not_evaluable",
+      "reason": "the claim carries no runnable conditions (prose-only)",
+      "arms": []
+    },
+    {
+      "claim_id": "WANG-02",
+      "category": "temperature",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "peak",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same pot FFT PEAKS at 95 C (4.5, 12.0, 6.7, ~1, n.d. ug/L over 85-125 C) and collapses to zero by 125 C.",
+      "source": "wang2026",
+      "status": "not_evaluable",
+      "reason": "the claim carries no runnable conditions (prose-only)",
+      "arms": []
+    },
+    {
+      "claim_id": "MENG-01",
+      "category": "temperature",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "increasing",
+      "observables": [
+        "MFT",
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In fermented soy sauce, MFT and FFT both RISE 80 -> 95 -> 120 C at 5 min (MFT 1.2 -> 6.6 -> 11.1 ug/L) and at 20 min (2.4 -> 6.8 -> 18.3), with the apparent barrier FALLING as temperature rises.",
+      "source": "meng2017",
       "status": "not_evaluable",
       "reason": "the claim carries no runnable conditions (prose-only)",
       "arms": []

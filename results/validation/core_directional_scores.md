@@ -1,12 +1,12 @@
 # Core directional scores (the kinetic core on the directional claims panel)
 
-Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
+Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 17/26 (65%)**; 26 independent claims not evaluable
-* independent, excluding pH and water activity: 13/21 (62%); pH and water activity alone: 4/5 (80%)
-* all claims (independent + fit-adjacent + fit-system overlap): 19/37 (51%); 32 not evaluable
+* **headline (strictly independent, evaluable): 17/28 (61%)**; 29 independent claims not evaluable
+* independent, excluding pH and water activity: 13/23 (57%); pH and water activity alone: 4/5 (80%)
+* all claims (independent + fit-adjacent + fit-system overlap): 19/39 (49%); 35 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (16); refused by the engine (4); a predicted concentration is zero; no direction is defined (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (19); refused by the engine (4); a predicted concentration is zero; no direction is defined (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
 
 ## Per category (strictly independent claims)
 
@@ -21,7 +21,7 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | ranking | 0 | 1 | 0.00 | 2 | MOT-03 |
 | scope | 0 | 0 | - | 3 | - |
 | sugar_identity | 4 | 8 | 0.50 | 6 | SUG-03, SUG-12, HOF-02, HOF-03 |
-| temperature | 5 | 7 | 0.71 | 1 | TEMP-01, TEMP-05 |
+| temperature | 5 | 9 | 0.56 | 4 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
 | time | 2 | 2 | 1.00 | 0 | - |
 
 ## Per category (all claims)
@@ -37,7 +37,7 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | ranking | 0 | 2 | 0.00 | 4 |
 | scope | 0 | 0 | - | 3 |
 | sugar_identity | 6 | 12 | 0.50 | 6 |
-| temperature | 5 | 7 | 0.71 | 1 |
+| temperature | 5 | 9 | 0.56 | 4 |
 | time | 2 | 2 | 1.00 | 0 |
 
 ## Claims
@@ -113,3 +113,8 @@ Panel `docs/validation/directional_claims_panel.yml` (69 claims, flat tolerance 
 | HOX-05 | ph | independent | FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HOX-06 | additive_cysteine | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HOX-07 | ranking | independent | FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
+| YIL-01 | temperature | independent | MFT | decreasing | **disagree** | sulfur | 79.5, 121, 163, 197 |  |
+| YIL-02 | temperature | independent | FFT | A>B | **disagree** | sulfur | 1.22e+03, 2.31e+03 |  |
+| WANG-01 | temperature | independent | MFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
+| WANG-02 | temperature | independent | FFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
+| MENG-01 | temperature | independent | MFT, FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
