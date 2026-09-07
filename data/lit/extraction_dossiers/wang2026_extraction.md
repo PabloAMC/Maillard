@@ -42,11 +42,11 @@
 | ★ buffer | ★ **PBS 0.2 mol/L** — **BUFFERED**, unlike every other sulfur paper in the corpus except Zhang 2026 and Chan 1994 |
 | pH | **5, 6, 7, 8, 9** |
 | **temperature** | ★ **85, 95, 105, 115, 125 °C** — **FIVE RUNGS** |
-| time | **80, 90, 100, 110, 120 min** (Methods) ⚠ **but Fig. 7 plots 60, 80, 100, 120, 140 min** — see §5.1 |
+| time | **80, 90, 100, 110, 120 min** (Methods §2.3), **paired with the temperature rungs "respectively"** (85 °C/80 min … 125 °C/120 min): the temperature ladder is a CO-VARYING temperature-time design, not one-factor-at-a-time. The separate TIME series is Fig. 7's 60, 80, 100, 120, 140 min (abstract: "reaction time (60–140 min)"). Re-read 2026-09-07; the earlier reading took the 80–120 list for the time series and flagged a discrepancy that this pairing resolves. |
 | vessel | thick-walled pressure-resistant bottle, **precision oil bath, continuous magnetic stirring** |
 | quench | ice bath |
 | replication | **n = 3**, mean ± SD, one-way ANOVA, SPSS 20.0, p < 0.05 |
-| ⚠ **the fixed levels of the other two factors are NEVER STATED** | the design is one-factor-at-a-time, but the paper never says at what pH and time the temperature series was run, nor at what temperature the pH and time series were run. **`[!]` This is the single largest defect in the paper for modelling purposes** — the ladder's other coordinates are unknown |
+| ⚠ **the fixed pH of the temperature series and the fixed temperature/pH of the time series are NEVER STATED** | the temperature series carries its own (paired) times, but the paper never says at what pH it was run, nor at what temperature and pH the time series was run. **`[!]` Still the largest defect for modelling; the times are no longer part of it.** RE-READ 2026-09-07: the CORE CANNOT CHARGE THIS POT EITHER WAY — the engine has no cysteine-xylose Amadori species (its `ARP` is a sulfur-free pentose Amadori; "the cysteine Amadori maps to ARP" in the panel note was wrong), so a run refuses for want of a sulfur source. A Cys-Amadori species that releases its cysteine sulfur (Zhai 2023 / Kang 2026 / this paper all feed it) is the structural addition that makes the ladder evaluable. |
 
 **Inference (marked as inference, not fact):** the Conclusions say *"At a reaction temperature of **105 °C** it is beneficial to promote the formation of 2-acetylthiazole"* and *"when the reaction time is between **100 and 140 min**…"*, and Fig. 2's pH panel and Fig. 7's time panel show mutually consistent magnitudes with Fig. 5's 105 °C column. **Best guess: the pH and time series were run at ~105 °C, and the temperature series at pH 7 for 120 min. NOT VERIFIED.**
 

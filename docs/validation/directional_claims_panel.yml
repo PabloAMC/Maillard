@@ -1906,12 +1906,15 @@ panel:
       quote_form_note: "Dossier sec. 3.1, digitised from Fig. 5C at 900 dpi (+/-5 % of reading, floor ~2.5 ug/L); the authoritative Table S2 is not on disk."
     fit_status: independent
     model_scope_note: >-
-      NOT EVALUABLE BY THE PANEL'S OWN RULE, not by the engine's: the pot is chargeable (the cysteine
-      Amadori maps to ARP), but the paper never states the pH or the hold time at which the
-      temperature series was run, and the co-charged glutamate Amadori has no core species.
-      Declaring a pH and a time to make the row scorable would be inventing inputs. Becomes
-      evaluable when the SI (Table S2, Methods details) is obtained. The SHAPE it records -- a peak
-      -- is the structural claim wave B10 exists to reproduce.
+      NOT EVALUABLE, two reasons (re-read 2026-09-07). (1) THE ENGINE: the core has no
+      cysteine-xylose Amadori species (its ARP is a sulfur-free pentose Amadori; the earlier
+      note that "the cysteine Amadori maps to ARP" was wrong), so the pot refuses for want
+      of a sulfur source; a Cys-Amadori species that releases its cysteine sulfur is the
+      structural addition that would make this ladder and the Zhai 2023 / Kang 2026
+      fed-Amadori series evaluable (plan W6). (2) THE PAPER: Methods 2.3 pairs the five
+      temperatures with times 80/90/100/110/120 min "respectively" (a co-varying design), so
+      the hold times ARE stated, but the pH of the series is not. The SHAPE it records -- a
+      peak -- is the structural claim wave B10 existed to reproduce.
 
   - claim_id: WANG-02
     statement: "In the same pot FFT PEAKS at 95 C (4.5, 12.0, 6.7, ~1, n.d. ug/L over 85-125 C) and collapses to zero by 125 C."
@@ -1927,7 +1930,7 @@ panel:
       quote_form: table_row_reformatted
       quote_form_note: "As WANG-01."
     fit_status: independent
-    model_scope_note: "As WANG-01: recorded, not evaluable until the series' pH and time are known."
+    model_scope_note: "As WANG-01: no cysteine-Amadori species in the core, and the series' pH unstated (its times are stated, paired: 85 C/80 min ... 125 C/120 min)."
 
   - claim_id: MENG-01
     statement: "In fermented soy sauce, MFT and FFT both RISE 80 -> 95 -> 120 C at 5 min (MFT 1.2 -> 6.6 -> 11.1 ug/L) and at 20 min (2.4 -> 6.8 -> 18.3), with the apparent barrier FALLING as temperature rises."

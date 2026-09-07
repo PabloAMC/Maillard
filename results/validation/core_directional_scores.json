@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "713067c5abab5a469a003924f7aa5298578eac77",
-      "short": "713067c5",
+      "commit": "1d14983faddad9eb81bd0ca5c92289436b40a060",
+      "short": "1d14983f",
       "branch": "cleaning",
       "dirty": true
     },
@@ -54,7 +54,7 @@
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "1d2bbb6246afd71357205c822b9db654cf63932cc5fbbf11e58c9b9bb50ab37a"
+        "sha256": "6c63e9919f7966a762b289b7a4ac1a57ea55b294a27f258fb86ac34388218171"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,7 +80,7 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "1d2bbb6246afd71357205c822b9db654cf63932cc5fbbf11e58c9b9bb50ab37a",
+    "sha256": "6c63e9919f7966a762b289b7a4ac1a57ea55b294a27f258fb86ac34388218171",
     "claims": 75,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",

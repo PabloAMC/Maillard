@@ -1328,6 +1328,16 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       the corpus: the dry-side extrusion claims need a measurement, not a paper.
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
+- [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI
+      species on the sulfur lane that releases its cysteine sulfur (retro-Amadori / 1,2-enolisation
+      to the deoxypentosone + cysteine). The core's `ARP` is a sulfur-free pentose Amadori, so the
+      three fed-Amadori series in the corpus (Wang 2026's five-rung ladder, Zhai 2023, Kang 2026)
+      cannot be charged at all today; WANG-01/02 refuse for want of a sulfur source, not for the
+      unstated pH. Wang's ladder is a paired temperature-time design (85 C/80 min ... 125 C/120 min,
+      Methods 2.3) at an unstated pH. Meng 2017 (MENG-01) stays not evaluable for its own reason
+      (a fermented soy sauce with no precursor charge, mixed vessels) -- nothing to read there.
+      Prerequisites: the Cys-Amadori synthesis papers already on disk (Zhai 2019 / Xu 2019 for the
+      preparation, Zhai 2023 for its decomposition products) for the species' stoichiometry.
 
 **Order.** R0 -> R1 -> R2(a) -> R2(c) -> R3 (+R5 in parallel) -> R4 -> R6; W2 alongside R2/R3;
 W4 independent; R7 as soon as a partner lab exists.
