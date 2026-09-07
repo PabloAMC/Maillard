@@ -214,8 +214,9 @@ def fig_map() -> None:
     GOOD, MID, BAD, NONE = ("#D9EFE3", "#178F6E"), ("#FBE9D0", "#D9822B"), ("#F6D9D9", "#B23A3A"), ("#EEEEEE", "#9AA6A3")
     nodes = {
         # key: (x, y, label, status)
-        "S": (0.0, 4.0, "sugar +\namino acid", GOOD), "A": (1.6, 4.0, "Amadori\ncompound", GOOD),
-        "D": (3.2, 4.0, "deoxyosones,\nsmall dicarbonyls", BAD), "B": (4.9, 4.0, "brown colour,\nHMF, furanone", GOOD),
+        "S": (0.0, 4.2, "sugar +\namino acid", GOOD), "A": (1.6, 4.2, "Amadori\ncompound", GOOD),
+        "D": (3.2, 4.2, "deoxyosones,\nsmall dicarbonyls", BAD), "B2": (4.9, 4.7, "HMF (2-12x off)", MID),
+        "B": (4.9, 4.05, "brown colour", GOOD), "B3": (4.9, 3.4, "caramel furanone\n(50-270x off)", BAD),
         "P": (0.0, 2.6, "pentose sugar +\ncysteine", MID), "T": (1.6, 2.6, "ring intermediate\n(TTCA)", MID),
         "F": (3.2, 2.6, "furanones, furfural\n+ hydrogen sulfide", MID), "M": (4.9, 2.6, "meaty thiols\nMFT and FFT", BAD),
         "X": (6.5, 2.6, "thiol removal:\ndisulfides, adducts", BAD),
@@ -223,10 +224,10 @@ def fig_map() -> None:
         "N": (0.0, 0.5, "asparagine +\nglucose", MID), "Y": (1.6, 0.5, "acrylamide", MID), "Z": (3.2, 0.5, "acrylamide\nelimination", MID),
         "L": (4.9, 0.5, "unsaturated fat", MID), "O": (6.5, 0.5, "hydroperoxides,\nhexanal + aldehydes", MID),
     }
-    edges = [("S", "A"), ("A", "D"), ("D", "B"), ("P", "T"), ("T", "F"), ("F", "M"), ("M", "X"), ("N", "Y"), ("Y", "Z"), ("L", "O")]
+    edges = [("S", "A"), ("A", "D"), ("D", "B"), ("D", "B2"), ("D", "B3"), ("P", "T"), ("T", "F"), ("F", "M"), ("M", "X"), ("N", "Y"), ("Y", "Z"), ("L", "O")]
     fig, ax = plt.subplots(figsize=(11, 5.4))
     ax.set_xlim(-0.8, 7.4)
-    ax.set_ylim(-0.55, 4.7)
+    ax.set_ylim(-0.55, 5.1)
     ax.axis("off")
     bw, bh = 1.25, 0.62
     for key, (x, y, label, (fill, edge)) in nodes.items():
@@ -318,14 +319,14 @@ def fig_scorecard() -> None:
     """The path-by-path scorecard as an image: what we have, how it does, what we lack."""
     rows = [
         ("sugar + amino acid\n-> brown colour", "9", "one glucose-glycine study at 3 temperatures;\nwater-activity and pH ratios",
-         "held-out browning within 1.5x", "small dicarbonyls: constants from a\nsugar glass, wrong order in water", "#D9EFE3"),
+         "browning within 1.5x (held out); HMF 2-12x;\ncaramel furanone 50-270x off", "small dicarbonyls: constants from a\nsugar glass, wrong order in water", "#FBE9D0"),
         ("pentose + cysteine\n-> meaty thiols", "14", "every step at 145 C from one lab's\nfed-intermediate experiments",
-         "within 2-4x in that lab at 145 C;\n10-500x off elsewhere", "how fast a thiol is REMOVED,\nat more than one temperature", "#F6D9D9"),
+         "2-7x in that lab at 145 C and pH 5;\n20-140x at pH 3 or 7; 10-500x elsewhere", "how fast a thiol is REMOVED, at more\nthan one temperature; pH on formation", "#F6D9D9"),
         ("hexose + cysteine\n-> meaty thiols", "0", "nothing at step level", "declares 'unknown' (no route)", "the furfural / furfuryl-alcohol route;\none 168 C time series waits as its test", "#EEEEEE"),
         ("asparagine + glucose\n-> acrylamide", "9", "formation, elimination, pH and\nwater-activity effects, one lab, 120-200 C",
-         "that lab's own series; extrusion\nin real food not reproduced", "a second laboratory's constants", "#FBE9D0"),
-        ("unsaturated fat\n-> aldehydes", "2", "six products and their split\nfrom one 1989 study", "hexanal in storage tests 2-30x",
-         "nonanal, 2-pentylfuran (no branch)", "#FBE9D0"),
+         "other labs' 180 C pots 2.5-220x (median 9x);\nextrusion in real food 10,000x", "a second laboratory's constants;\nreal-food matrices", "#FBE9D0"),
+        ("unsaturated fat\n-> aldehydes", "2", "six products and their split\nfrom one 1989 study", "cooked rows 4-34x; 40 C storage rows\nnot comparable (model starts from zero)",
+         "nonanal, 2-pentylfuran (no branch);\na storage baseline", "#FBE9D0"),
     ]
     cols = ["path", "papers behind\nits constants", "what we have", "how it does", "what we lack"]
     fig, ax = plt.subplots(figsize=(12.5, 5.2))
@@ -352,9 +353,38 @@ def fig_scorecard() -> None:
     plt.close(fig)
 
 
+def fig_repo_flow() -> None:
+    """What the repository is made of, as a flow from papers to guides."""
+    from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+
+    boxes = [
+        (0.0, "published papers", "PDFs in data/articles\n297 registered"),
+        (1.0, "extraction dossiers", "data/lit/extraction_dossiers\n58 papers read in full,\nevery table re-typed"),
+        (2.0, "three kinds of evidence", "rate constants (34 papers)\nbenchmark pots (53 files)\ndirectional claims (92)"),
+        (3.0, "the kinetic model", "src/kinetic_core\n4 paths, 159 steps;\nevery calibration\npre-registered"),
+        (4.0, "scorecards", "results/validation\nlevels, directions,\nintervals, wishlist"),
+        (5.0, "guides and the tool", "docs, maillard.py\nthis guide; predict,\ncompare, rank, score"),
+    ]
+    fig, ax = plt.subplots(figsize=(14, 3.9))
+    ax.set_xlim(-0.55, 5.55)
+    ax.set_ylim(-0.95, 0.95)
+    ax.axis("off")
+    for x, head, sub in boxes:
+        ax.add_patch(FancyBboxPatch((x - 0.46, -0.72), 0.92, 1.44, boxstyle="round,pad=0.02,rounding_size=0.06", fc="#F2F3F1", ec="#9AA6A3", lw=1.2))
+        ax.text(x, 0.45, head, ha="center", va="center", fontsize=9.5, color=INK, fontweight="bold")
+        ax.text(x, -0.12, sub, ha="center", va="center", fontsize=8, color=MUTED, linespacing=1.4)
+    for x in range(5):
+        ax.add_patch(FancyArrowPatch((x + 0.47, 0.0), (x + 0.53, 0.0), arrowstyle="-|>", mutation_scale=12, color=MUTED, lw=1.2))
+    ax.set_title("What the repository is made of: from papers to predictions", loc="left", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "09_repository_flow.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     fig_map()
+    fig_repo_flow()
     fig_funnel()
     fig_scorecard()
     ship = _read(V / "kinetic_core_b16_ship_rule.json")
@@ -365,7 +395,7 @@ def main() -> int:
     fig_yiltirak(ship)
     fig_ttca()
     fig_dicarbonyls(scores)
-    print(f"wrote 9 figures to {OUT}")
+    print(f"wrote 10 figures to {OUT}")
     return 0
 
 

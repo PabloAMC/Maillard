@@ -13,10 +13,30 @@ for how long, at what pH); it returns how much of each aroma compound forms. The
 from published experiments. The model is then judged on other published experiments it was never
 tuned on.
 
-**The verdict today.** Browning and the sugar-side intermediates are predicted to within a factor
-of 1.5 on held-out data. The meaty thiols, the compounds that matter most for savoury flavour, are
-wrong by factors of 10 to 500, and the reason is now known: the model destroys them far faster than
-real pots do. Everything else in this document is detail on that sentence.
+**The verdict today.** Browning is predicted within a factor of 1.5 on a study the model never saw.
+The furan HMF lands within 2 to 12 times the measurement; the caramel furanone is 50 to 270 times
+off. The meaty thiols, the compounds that matter most for savoury flavour, are wrong by factors of
+10 to 500 outside the one laboratory and one temperature their constants came from, and the reason is
+now known: the model destroys them far faster than real pots do. Everything else in this document is
+detail on those sentences.
+
+**Two words used throughout.** A *pot* is one published cooking experiment: stated ingredients,
+buffer, temperature and time, with a measured result. A *held-out* pot is one the model was never
+tuned on; the model's score is always its performance on held-out pots.
+
+## What the repository is made of
+
+![What the repository is made of](../assets/thiol_sink/09_repository_flow.png)
+
+Papers come in as PDFs and are read into *extraction dossiers*, one file per paper with every table
+re-typed and a note of what the model may take from it. From the dossiers come three kinds of
+evidence, kept apart on purpose: rate constants, which build the model; benchmark pots, end-of-cook
+measurements the model is scored against and never tuned on; and directional claims, statements such
+as "this thiol falls as pH rises" that are scored right or wrong. The model itself is a set of reaction
+steps with those constants. Every re-calibration is written down before it runs, with the tests it
+must pass, and its outcome is recorded whether it passed or not. Scorecards are regenerated from the
+model and the evidence, and this guide's figures are drawn from the scorecards. To run a prediction
+yourself, see the [QUICKSTART](QUICKSTART.md).
 
 ## The map
 
@@ -45,8 +65,10 @@ The same five rows in more detail, for the reader who wants the sources.
 
 **Sugar and amino acid to brown colour.** What we have: the full step list with rate constants and
 temperature dependence from one careful study of glucose and glycine, measured at three
-temperatures. How it does: a held-out browning study reproduces within a factor of 1.5, and the
-effects of water activity and pH are carried as measured ratios. What we lack: the small dicarbonyls
+temperatures. How it does: a held-out browning study reproduces within a factor of 1.5; HMF in four
+held-out pots lands within 2 to 12 times the measurement; the caramel furanone (DMHF) is 50 to 270
+times off in the two pots that measure it; the effects of water activity and pH are carried as
+measured ratios. What we lack: the small dicarbonyls
 (glucosone, glyoxal, methylglyoxal, diacetyl) were measured in a dry sugar glass at 160–200 °C and,
 transplanted into water, they come out in the wrong order: the model puts glucosone twenty times
 above 3-deoxyglucosone where two laboratories find it seven to ten times below. A constant does not
@@ -56,10 +78,12 @@ survive a change of matrix.
 one reference temperature (145 °C), from one laboratory's feeding experiments in which each
 intermediate was heated on its own; the temperature dependence of formation; a single ring
 intermediate (TTCA) that opens to release the sulfur. How it does: inside that laboratory, at that
-temperature, the thiols land within a factor of 2 to 4. Across laboratories and away from 145 °C
-they are wrong by 10 to 500, always too low late in the cook and always too high early. What we
-lack: any measurement of how fast a thiol is removed once formed, at more than one temperature.
-This is the problem the rest of this document is about.
+temperature and at pH 5, the thiols land within a factor of 2 to 7; at pH 3 or 7 in the same
+laboratory they are 20 to 140 times off. Across laboratories and away from 145 °C they are wrong by
+10 to 500, always too low late in the cook and always too high early. What we lack: any measurement
+of how fast a thiol is removed once formed, at more than one temperature, and the pH dependence of
+the formation steps (a fed norfuraneol pot gives at least 150 times less MFT at pH 6.5 than at 4.5;
+the model predicts twice as much). The removal is the problem the rest of this document is about.
 
 **Hexose sugar and cysteine.** No route. Glucose plus cysteine does make these thiols in real pots,
 through furfural and furfuryl alcohol, but no published step-level measurement exists, so the model
@@ -68,13 +92,17 @@ cysteine at 168 °C) is on file as the first test for whoever builds the route.
 
 **Asparagine and glucose to acrylamide.** What we have: formation and elimination constants, their
 temperature dependence, and their dependence on pH and on water activity, all from one laboratory
-(Leuven) over 120–200 °C. How it does: it reproduces that laboratory's own series; extrusion
-experiments in real food matrices are not reproduced. What we lack: any second laboratory's constants.
+(Leuven) over 120–200 °C. How it does: it reproduces that laboratory's own series; other
+laboratories' asparagine-glucose pots at 180 °C land between 2.5 and 220 times off (median 9);
+acrylamide in an extruded plant-protein food is 10,000 times off. What we lack: any second
+laboratory's constants, and anything about real-food matrices.
 
 **Fat to aldehydes.** What we have: six aldehyde products and their split from one 1989 study of
-oxidising linoleate, and a declared temperature rule. How it does: hexanal in storage tests within a
-factor of 2 to 30. What we lack: nonanal and 2-pentylfuran, which the panel asks for and no measured
-branch exists for.
+oxidising linoleate, and a declared temperature rule. How it does: the three cooked pots land within
+4 to 34 times; four storage measurements at 40 °C are thousands of times off for a known reason (the
+samples had accumulated hexanal in storage before the test, and the model starts from zero). What we
+lack: nonanal and 2-pentylfuran, which the panel asks for and no measured branch exists for, and a
+storage baseline.
 
 ## The tree, step by step
 
@@ -166,6 +194,19 @@ and a five-temperature ladder from a second Chinese group); their underlying num
 the authors, would give removal its first tuning rows from a third laboratory. And the reversible or
 saturating removal can be built and pre-registered against the existing series in a day, which tells
 us whether the measured shapes are reachable before anyone orders standards.
+
+## Words used in this document
+
+| word | meaning here |
+|---|---|
+| pot | one published cooking experiment with stated ingredients, buffer, temperature, time and a measured result |
+| held out | a pot the model was never tuned on; all scores are on held-out pots |
+| fed-intermediate experiment | an experiment that heats one intermediate on its own and measures what it becomes; the cleanest source of a rate constant |
+| rate constant | how fast one step runs at a stated temperature; the temperature dependence is a second number the constant may or may not come with |
+| fold error | measured divided by predicted, or the reverse, whichever is larger; 1 is perfect, 3 is the working threshold |
+| directional claim | a published statement of direction (X rises with Y) that the model is scored on independently of absolute levels |
+| removal, sink | the steps that take an aroma compound out of the pot once it has formed |
+| dossier | the repository's re-typed record of one paper |
 
 ## Sources
 
