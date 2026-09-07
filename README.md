@@ -21,6 +21,14 @@ GC-MS.
 > [`results/legacy_lane/`](results/legacy_lane/), and the August 2026 adversarial audit that
 > preceded the retirement is in [AUDIT.md](AUDIT.md).
 
+> **Start here if you know what the Maillard reaction is and nothing else.** The reaction paths
+> the model carries, coloured by how well each is predicted, and the one problem that stops it
+> from predicting meaty aroma, are presented in
+> [**What this model can and cannot predict, and why**](docs/guides/STATE_OF_THE_MODEL.md),
+> written for a reader with no other context, images first.
+>
+> [![The reaction paths the model carries, coloured by how well each is predicted](docs/assets/thiol_sink/00_map.png)](docs/guides/STATE_OF_THE_MODEL.md)
+
 > **Who is this for?** Alternative-protein scientists who want to triage formulations and
 > process conditions before burning GC-MS time, and computational chemists who want a
 > transparent, benchmarked, honestly scored Maillard kinetics platform.
