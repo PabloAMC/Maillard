@@ -721,9 +721,37 @@ def _declared_band_priors() -> List[CorePrior]:
         CorePrior(
             key="acrylamide.aw_multiplier", lane=ACRYLAMIDE, kind="declared_band", distribution="uniform",
             centre=float(ac.AW_MULTIPLIER), sigma=None, band=(float(ac.AW_SCALE_BAND[0]), float(ac.AW_SCALE_BAND[1])),
-            unit="multiplier on k_int1_acr inside a_w 0.88-0.99",
+            unit="multiplier on k_int1_acr inside a_w 0.34-0.99",
             source=f"acrylamide_conditions.KF_TABLE ({ac.AW_SOURCE[:60]}...)",
-            sampled=True, reason="declared band: the source's four a_w point estimates and the 0.92 column's 95 % HPD, relative to the shipped constant",
+            sampled=True, reason="declared band: the source's a_w point estimates and the 0.92 column's 95 % HPD, relative to the shipped constant",
+        )
+    )
+    # B15 (2026-09-07): the elimination a_w shape's deficit scale and the two initial-pH exponents.
+    out.append(
+        CorePrior(
+            key="acrylamide.aw_elimination_deficit_scale", lane=ACRYLAMIDE, kind="declared_band", distribution="uniform",
+            centre=1.0, sigma=None, band=(float(ac.AW_ELIMINATION_SCALE_BAND[0]), float(ac.AW_ELIMINATION_SCALE_BAND[1])),
+            unit="scale on (1 - multiplier) of k_acr_dp inside a_w 0.34-0.92",
+            source=f"acrylamide_conditions.AW_ELIMINATION_TABLE ({ac.AW_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: 0 = no elimination a_w effect, 1.2 = 1.2x De Vleeschouwer 2007's k_E shape (SEs up to 90 %)",
+        )
+    )
+    out.append(
+        CorePrior(
+            key="acrylamide.ph_exponent_formation_decades_per_unit", lane=ACRYLAMIDE, kind="declared_band",
+            distribution="uniform", centre=float(ac.PH_EXPONENT_FORMATION), sigma=None,
+            band=(float(ac.PH_EXPONENT_FORMATION_BAND[0]), float(ac.PH_EXPONENT_FORMATION_BAND[1])),
+            unit="decades per pH unit on k_asn_glc", source=f"acrylamide_conditions.PH_SOURCE ({ac.PH_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the potato-matrix slope minus its SE to the phosphate slope plus its SE",
+        )
+    )
+    out.append(
+        CorePrior(
+            key="acrylamide.ph_exponent_elimination_decades_per_unit", lane=ACRYLAMIDE, kind="declared_band",
+            distribution="uniform", centre=float(ac.PH_EXPONENT_ELIMINATION), sigma=None,
+            band=(float(ac.PH_EXPONENT_ELIMINATION_BAND[0]), float(ac.PH_EXPONENT_ELIMINATION_BAND[1])),
+            unit="decades per pH unit on k_acr_dp", source=f"acrylamide_conditions.PH_SOURCE ({ac.PH_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the two measured slopes and their SEs",
         )
     )
     # B11 (2026-09-07): the oxygen structure's declared bands. SAMPLED only when the shipped
@@ -860,6 +888,9 @@ def draw_from_rng(
     trunk_aw_scale = None
     trunk_ph_exponent = None
     acrylamide_aw_scale = None
+    acrylamide_aw_elimination_scale = None
+    acrylamide_ph_exponent_formation = None
+    acrylamide_ph_exponent_elimination = None
     oxygen: Dict[str, float] = {}
     reservoir_scale = None
     lipid_u = None
@@ -941,6 +972,12 @@ def draw_from_rng(
             trunk_ph_exponent = value
         elif p.key == "acrylamide.aw_multiplier":
             acrylamide_aw_scale = value
+        elif p.key == "acrylamide.aw_elimination_deficit_scale":
+            acrylamide_aw_elimination_scale = value
+        elif p.key == "acrylamide.ph_exponent_formation_decades_per_unit":
+            acrylamide_ph_exponent_formation = value
+        elif p.key == "acrylamide.ph_exponent_elimination_decades_per_unit":
+            acrylamide_ph_exponent_elimination = value
         elif p.key.startswith("sulfur.oxygen.") and p.key.endswith(".log10_k"):
             oxygen[p.key.split(".")[2]] = 10.0 ** value
         elif p.key == "sulfur.oxygen.reservoir_scale":
@@ -986,6 +1023,9 @@ def draw_from_rng(
         trunk_aw_scale=trunk_aw_scale,
         trunk_ph_exponent=trunk_ph_exponent,
         acrylamide_aw_scale=acrylamide_aw_scale,
+        acrylamide_aw_elimination_scale=acrylamide_aw_elimination_scale,
+        acrylamide_ph_exponent_formation=acrylamide_ph_exponent_formation,
+        acrylamide_ph_exponent_elimination=acrylamide_ph_exponent_elimination,
         oxygen_reservoir_scale=reservoir_scale,
         ph_drift=ph_drift,  # the wave's Laplace covariance when present, else the frozen calibration
     )

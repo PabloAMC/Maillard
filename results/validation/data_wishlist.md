@@ -61,23 +61,23 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | time | 2 / 2 | 0 | caution | 0.342 | 2 |
 | additive_cysteine | 2 / 3 | 2 | caution | 0.208 | 5 |
 | ph | 4 / 5 | 5 | caution | 0.376 | 3 |
-| sugar_identity | 4 / 8 | 6 | do-not-use | 0.215 | 12 |
-| temperature | 5 / 9 | 4 | do-not-use | 0.267 | 11 |
+| sugar_identity | 4 / 9 | 7 | do-not-use | 0.189 | 16 |
+| temperature | 6 / 10 | 3 | caution | 0.313 | 10 |
 
 ## 5. Where the envelope misses most (value of information)
 
 | # | benchmark | compound | VoI | miss (log10) | template |
 |---|---|---|---|---|---|
-| 1 | `external_validation_liu_2023_ppi_offnote_baseline` | hexanal | 17.14 | 3.38 | missing_positive_flavor_anchor |
-| 2 | `mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.83 | 1.40 | free_precursor_sulfur_yield |
-| 3 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.82 | 1.39 | free_precursor_sulfur_yield |
-| 4 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.55 | 1.41 | free_precursor_sulfur_yield |
-| 5 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.21 | 1.36 | free_precursor_sulfur_yield |
-| 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 11.44 | 1.97 | free_precursor_sulfur_yield |
-| 7 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.39 | 1.17 | free_precursor_sulfur_yield |
-| 8 | `soy_isolate_40C_PratapSingh2021` | hexanal | 11.00 | 2.64 | missing_positive_flavor_anchor |
-| 9 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.96 | 1.45 | free_precursor_sulfur_yield |
-| 10 | `external_validation_bi_2020_raw_pea_hexanal` | hexanal | 10.00 | 2.43 | missing_positive_flavor_anchor |
+| 1 | `external_validation_liu_2023_ppi_offnote_baseline` | hexanal | 17.46 | 3.46 | missing_positive_flavor_anchor |
+| 2 | `mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.85 | 1.50 | free_precursor_sulfur_yield |
+| 3 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.53 | 1.42 | free_precursor_sulfur_yield |
+| 4 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.98 | 1.38 | free_precursor_sulfur_yield |
+| 5 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.93 | 1.36 | free_precursor_sulfur_yield |
+| 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 11.60 | 2.00 | free_precursor_sulfur_yield |
+| 7 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.48 | 1.18 | free_precursor_sulfur_yield |
+| 8 | `soy_isolate_40C_PratapSingh2021` | hexanal | 11.24 | 2.72 | missing_positive_flavor_anchor |
+| 9 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.94 | 1.42 | free_precursor_sulfur_yield |
+| 10 | `external_validation_bi_2020_raw_pea_hexanal` | hexanal | 10.23 | 2.51 | missing_positive_flavor_anchor |
 
 ## 6. What you could predict if you had it
 
@@ -95,7 +95,7 @@ The engine returns a number but declares the route unidentified; the rows leave 
 - **If** `2 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'caution'.
 - **If** `5 more independent ordering claims on additive_cysteine (all agreeing)` were measured: the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'.
 - **If** `3 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
-- **If** `12 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
-- **If** `11 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'.
+- **If** `16 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
+- **If** `10 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'caution'.
 
 Nothing above is a forecast of accuracy: 'unlocks' means the observable sits downstream of the step in the network, so a measured rate would replace a band artefact with a fitted value. Whether the fitted value lands within 3x of a measurement is what the next pre-registered wave finds out (`scripts/generators/WAVES.md`).

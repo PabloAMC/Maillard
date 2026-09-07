@@ -85,3 +85,21 @@ The three declared candidates were read from the PDFs on disk:
 The three species therefore remain without a validation row; the wishlist entry (an isothermal aqueous
 glucose-amine pot with glucosone, glyoxal and diacetyl quantified against time by o-PDA derivatisation)
 stands as the measurement that would test them.
+
+## Validation row found (2026-09-07, second search): Zhang 2020, and it MISSES
+
+The owner's download of Zhang et al. 2021 (Food Sci. Nutr. 9:290, 10.1002/fsn3.1995; dossier
+`zhang2020_extraction.md`) gives glucosone, glyoxal, methylglyoxal, diacetyl, 3-DG, 1-DG and 3,4-DDG in
+0.3 M glucose in water at 90-110 C over 0-6 h. Its absolute levels do not mass-balance (dossier sec. 3),
+so it enters as an ORDERING claim: DIC-01, glucose alone, 105 C, 6 h, measured 3-DG > glucosone >
+methylglyoxal > glyoxal > diacetyl.
+
+**Outcome: DISAGREE.** The trunk predicts glucosone 638 ppb > glyoxal 33 > 3-DG 0.07 > diacetyl 0.03 >
+methylglyoxal 0.01. Two things are wrong at once: (i) the Glc -> glucosone step (Kocadağlı & Gökmen
+2016's glucose-glass constant, 160-200 C, re-referenced to 100 C through the 180 C helper) is far too
+fast in water at 105 C relative to everything else; (ii) the amine-free 3-DG route is essentially absent
+(0.07 ppb from 300 mM glucose in 6 h) where the measurement makes 3-DG the dominant dicarbonyl. The
+glass-to-water transfer of the caramelisation constants is the suspect, not the network topology. This
+is the first measured constraint on the B13 species and it is recorded as a miss on the independent
+headline (18/30 -> 19/32 with WANG-02). DIC-02 (glucose + glutamate) stays not evaluable: no glutamate
+species.

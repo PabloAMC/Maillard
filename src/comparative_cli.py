@@ -269,6 +269,22 @@ def core_caveat() -> str:
 #: Evaluated once at import for callers that read the constant.
 CORE_CAVEAT = core_caveat()
 
+def _core_buffer(spec: Mapping[str, Any]):
+    """2026-09-07: a spec may declare its buffer (``buffer: {kind, phosphate_mol_l, source}``) so a
+    stated pot is charged as stated; without it the sulfur lane keeps its declared default and says so."""
+    raw = spec.get("buffer")
+    if not raw or not isinstance(raw, Mapping):
+        return None
+    from src.kinetic_core.ph_state import BufferSpec
+
+    return BufferSpec(
+        kind=str(raw.get("kind") or "phosphate"),
+        phosphate_mol_l=float(raw.get("phosphate_mol_l") or 0.0),
+        declared=True,
+        source=str(raw.get("source") or "declared in the spec"),
+    )
+
+
 def _core_process(spec: Mapping[str, Any]):
     from src.kinetic_core.engine import ProcessSpec, ThermalProgram
 
@@ -279,6 +295,7 @@ def _core_process(spec: Mapping[str, Any]):
         ph=float(spec["ph"]),
         water_activity=float(spec["aw"]) if spec.get("aw") is not None else None,
         matrix=str(spec.get("matrix") or spec.get("protein_type") or "water"),
+        buffer=_core_buffer(spec),
     )
 
 

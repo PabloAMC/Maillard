@@ -4,16 +4,16 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "d72560db5270ec278e33836808a6b9091afe49bc",
-      "short": "d72560db",
+      "commit": "1b3e99066163c59040f074f64d30efeeb37e7f99",
+      "short": "1b3e9906",
       "branch": "cleaning",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "cd9dc6fb007c09014d17f24e5c4ecd3f433134084017c6e923bcb516f9796d24"
+        "sha256": "a64297e9ef31610a9086f41ccf9cb6905abe7b4c09ff0105555284e72bdd267d"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "1f95136a5ef2f51a4b3127e5a777273ea36cb0ceba588a62b18c6902b9ab06ce"
+        "sha256": "1ac1a34fc95ec9ab801af0f6fcbce6f8ef148533bc8a5d3c9a2c46a1f33b1603"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "d14ae4d319bf85d4f5095d3daaf78a74bb75a83301d28c1b0a2550eca5ea5e9e"
+        "sha256": "192a187822c6d3ca53caf5caf24bfeaad63e4c0c137d3af9531fc4f19f66b699"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -576,21 +576,21 @@
     {
       "axis": "sugar_identity",
       "agree": 4,
-      "evaluable": 8,
-      "not_evaluable": 6,
+      "evaluable": 9,
+      "not_evaluable": 7,
       "verdict": "do-not-use",
-      "wilson_lower_bound": 0.215,
-      "additional_agreeing_claims_to_trust": 12,
+      "wilson_lower_bound": 0.189,
+      "additional_agreeing_claims_to_trust": 16,
       "structural_block": null
     },
     {
       "axis": "temperature",
-      "agree": 5,
-      "evaluable": 9,
-      "not_evaluable": 4,
-      "verdict": "do-not-use",
-      "wilson_lower_bound": 0.267,
-      "additional_agreeing_claims_to_trust": 11,
+      "agree": 6,
+      "evaluable": 10,
+      "not_evaluable": 3,
+      "verdict": "caution",
+      "wilson_lower_bound": 0.313,
+      "additional_agreeing_claims_to_trust": 10,
       "structural_block": null
     }
   ],
@@ -598,71 +598,71 @@
     {
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
       "compound": "hexanal",
-      "voi_score": 17.142296408421085,
-      "envelope_miss_log10": 3.379994234147889,
+      "voi_score": 17.46072171569549,
+      "envelope_miss_log10": 3.464842039653945,
       "template": "missing_positive_flavor_anchor"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.830798513254244,
-      "envelope_miss_log10": 1.4034765479481979,
+      "voi_score": 12.854685402600802,
+      "envelope_miss_log10": 1.4965904870343925,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.82224483855436,
-      "envelope_miss_log10": 1.3851285347798985,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.547573310354059,
-      "envelope_miss_log10": 1.412525412820885,
+      "voi_score": 12.531471579808716,
+      "envelope_miss_log10": 1.417157792951579,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.214986276945236,
-      "envelope_miss_log10": 1.364686638840826,
+      "voi_score": 11.984567196329667,
+      "envelope_miss_log10": 1.375924665464233,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 11.926101231166935,
+      "envelope_miss_log10": 1.3609711701276446,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.442902018500575,
-      "envelope_miss_log10": 1.9743063280354138,
+      "voi_score": 11.603790981275134,
+      "envelope_miss_log10": 1.9979283001565558,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.38927214375849,
-      "envelope_miss_log10": 1.16932869231551,
+      "voi_score": 11.484013795214867,
+      "envelope_miss_log10": 1.1835312341038355,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
       "compound": "hexanal",
-      "voi_score": 10.996654962317079,
-      "envelope_miss_log10": 2.6400928695121335,
+      "voi_score": 11.236062474641917,
+      "envelope_miss_log10": 2.7249406750181904,
       "template": "missing_positive_flavor_anchor"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.96076500601523,
-      "envelope_miss_log10": 1.448562537946279,
+      "voi_score": 10.93638982929702,
+      "envelope_miss_log10": 1.4237906624406151,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
       "compound": "hexanal",
-      "voi_score": 10.002602202406852,
-      "envelope_miss_log10": 2.4265183524131992,
+      "voi_score": 10.231746846610589,
+      "envelope_miss_log10": 2.5113661579192557,
       "template": "missing_positive_flavor_anchor"
     }
   ],
@@ -724,12 +724,12 @@
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "12 more independent ordering claims on sugar_identity (all agreeing)",
+      "if_measured": "16 more independent ordering claims on sugar_identity (all agreeing)",
       "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "11 more independent ordering claims on temperature (all agreeing)",
-      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'"
+      "if_measured": "10 more independent ordering claims on temperature (all agreeing)",
+      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
     }
   ],
   "summary": {

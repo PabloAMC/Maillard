@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "1d14983faddad9eb81bd0ca5c92289436b40a060",
-      "short": "1d14983f",
+      "commit": "1b3e99066163c59040f074f64d30efeeb37e7f99",
+      "short": "1b3e9906",
       "branch": "cleaning",
       "dirty": true
     },
@@ -54,7 +54,7 @@
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "6c63e9919f7966a762b289b7a4ac1a57ea55b294a27f258fb86ac34388218171"
+        "sha256": "e7782c780f12d6ec9e3d688b94e53585606c960e2e277281695440c2a94b8536"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,16 +80,16 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "6c63e9919f7966a762b289b7a4ac1a57ea55b294a27f258fb86ac34388218171",
-    "claims": 75,
+    "sha256": "e7782c780f12d6ec9e3d688b94e53585606c960e2e277281695440c2a94b8536",
+    "claims": 78,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
     "wave": "S2 (directional accuracy)"
   },
   "summary": {
     "headline": [
-      18,
-      30
+      19,
+      32
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -168,21 +168,22 @@
         },
         "sugar_identity": {
           "agree": 4,
-          "evaluable": 8,
-          "not_evaluable": 6,
+          "evaluable": 9,
+          "not_evaluable": 7,
           "misses": [
             "SUG-03",
             "SUG-12",
             "HOF-02",
-            "HOF-03"
+            "HOF-03",
+            "DIC-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5
+          "rate": 0.4444444444444444
         },
         "temperature": {
-          "agree": 5,
-          "evaluable": 9,
-          "not_evaluable": 4,
+          "agree": 6,
+          "evaluable": 10,
+          "not_evaluable": 3,
           "misses": [
             "TEMP-01",
             "TEMP-05",
@@ -190,7 +191,7 @@
             "YIL-02"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5555555555555556
+          "rate": 0.6
         },
         "time": {
           "agree": 2,
@@ -202,8 +203,8 @@
         }
       },
       "total": {
-        "agree": 18,
-        "evaluable": 30,
+        "agree": 19,
+        "evaluable": 32,
         "not_evaluable": 27,
         "misses": [
           "SUG-03",
@@ -217,10 +218,11 @@
           "MOT-01",
           "MOT-03",
           "YIL-01",
-          "YIL-02"
+          "YIL-02",
+          "DIC-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6
+        "rate": 0.59375
       },
       "ph_aw": {
         "agree": 5,
@@ -234,8 +236,8 @@
         "rate": 0.7142857142857143
       },
       "excluding_ph_aw": {
-        "agree": 13,
-        "evaluable": 23,
+        "agree": 14,
+        "evaluable": 25,
         "not_evaluable": 20,
         "misses": [
           "SUG-03",
@@ -247,10 +249,11 @@
           "HOF-03",
           "MOT-03",
           "YIL-01",
-          "YIL-02"
+          "YIL-02",
+          "DIC-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5652173913043478
+        "rate": 0.56
       }
     },
     "all_claims": {
@@ -299,8 +302,8 @@
           "rate": 0.6666666666666666
         },
         "ph": {
-          "agree": 4,
-          "evaluable": 7,
+          "agree": 5,
+          "evaluable": 8,
           "not_evaluable": 5,
           "misses": [
             "PH-01",
@@ -308,7 +311,7 @@
             "MOT-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5714285714285714
+          "rate": 0.625
         },
         "process_heating": {
           "agree": 0,
@@ -339,23 +342,24 @@
         },
         "sugar_identity": {
           "agree": 6,
-          "evaluable": 12,
-          "not_evaluable": 6,
+          "evaluable": 13,
+          "not_evaluable": 7,
           "misses": [
             "SUG-03",
             "SUG-04",
             "SUG-05",
             "SUG-12",
             "HOF-02",
-            "HOF-03"
+            "HOF-03",
+            "DIC-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5
+          "rate": 0.46153846153846156
         },
         "temperature": {
-          "agree": 5,
-          "evaluable": 9,
-          "not_evaluable": 4,
+          "agree": 6,
+          "evaluable": 10,
+          "not_evaluable": 3,
           "misses": [
             "TEMP-01",
             "TEMP-05",
@@ -363,7 +367,7 @@
             "YIL-02"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5555555555555556
+          "rate": 0.6
         },
         "time": {
           "agree": 2,
@@ -375,8 +379,8 @@
         }
       },
       "total": {
-        "agree": 21,
-        "evaluable": 43,
+        "agree": 23,
+        "evaluable": 46,
         "not_evaluable": 32,
         "misses": [
           "SUG-03",
@@ -400,14 +404,15 @@
           "MOT-01",
           "MOT-03",
           "YIL-01",
-          "YIL-02"
+          "YIL-02",
+          "DIC-01"
         ],
         "mechanism_absent": 4,
-        "rate": 0.4883720930232558
+        "rate": 0.5
       },
       "ph_aw": {
-        "agree": 6,
-        "evaluable": 10,
+        "agree": 7,
+        "evaluable": 11,
         "not_evaluable": 7,
         "misses": [
           "PH-01",
@@ -416,11 +421,11 @@
           "MOT-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6
+        "rate": 0.6363636363636364
       },
       "excluding_ph_aw": {
-        "agree": 15,
-        "evaluable": 33,
+        "agree": 16,
+        "evaluable": 35,
         "not_evaluable": 25,
         "misses": [
           "SUG-03",
@@ -440,14 +445,15 @@
           "HOF-03",
           "MOT-03",
           "YIL-01",
-          "YIL-02"
+          "YIL-02",
+          "DIC-01"
         ],
         "mechanism_absent": 4,
-        "rate": 0.45454545454545453
+        "rate": 0.45714285714285713
       }
     },
     "not_evaluable_reasons": {
-      "the claim carries no runnable conditions (prose-only)": 19,
+      "the claim carries no runnable conditions (prose-only)": 18,
       "refused by the engine": 2,
       "arm 'processed, 140 C' refused": 2,
       "arm 'pH 4.5' refused": 1,
@@ -458,9 +464,10 @@
       "a predicted concentration is zero; no direction is defined": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 ": 1,
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
-      "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
+      "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
+      "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 19.8
+    "wall_seconds": 36.0
   },
   "claims": [
     {
@@ -1255,13 +1262,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        21.052241449596707,
-        454.26955934654166,
-        814.1459440494322
+        13.56431619433877,
+        356.58111284932255,
+        1038.0493548085728
       ],
       "log10_steps": [
-        1.33401529334143,
-        0.2533886279604097
+        1.4197604310752248,
+        0.46405966682117084
       ],
       "arms": [
         {
@@ -1282,10 +1289,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 21.052241449596707
+          "value_ug_per_l": 13.56431619433877
         },
         {
           "label": "150 C",
@@ -1305,10 +1312,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 454.26955934654166
+          "value_ug_per_l": 356.58111284932255
         },
         {
           "label": "170 C",
@@ -1328,10 +1335,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 814.1459440494322
+          "value_ug_per_l": 1038.0493548085728
         }
       ]
     },
@@ -1352,7 +1359,7 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        21.052241449596707,
+        13.56431619433877,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -1376,10 +1383,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 21.052241449596707
+          "value_ug_per_l": 13.56431619433877
         },
         {
           "label": "unheated control, 25 C",
@@ -1400,8 +1407,8 @@
           "reasons": [],
           "warnings": [
             "temperature program spans 25.0-25.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "value_ug_per_l": 0.0
         }
@@ -1424,13 +1431,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        77.72921779394943,
-        398.9513152652994,
-        577.4184679502196
+        77.95111134317825,
+        403.3427817045374,
+        585.3246597136784
       ],
       "log10_steps": [
-        0.7103356038688421,
-        0.1605707688932273
+        0.7138519778628114,
+        0.16172253217973984
       ],
       "arms": [
         {
@@ -1451,12 +1458,12 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 77.72921779394943
+          "value_ug_per_l": 77.95111134317825
         },
         {
           "label": "150 C",
@@ -1476,12 +1483,12 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 398.9513152652994
+          "value_ug_per_l": 403.3427817045374
         },
         {
           "label": "170 C",
@@ -1501,12 +1508,12 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 577.4184679502196
+          "value_ug_per_l": 585.3246597136784
         }
       ]
     },
@@ -1625,7 +1632,7 @@
       "statement": "Acrylamide vs moisture is NON-MONOTONIC (bell-shaped), peaking at intermediate moisture (40%) - rising for low-moisture extrusion, falling for high-moisture extrusion.",
       "source": "ma2024",
       "status": "not_evaluable",
-      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.88-0.99 (De Vleeschouwer 2008, B14): outside it the lane carries no term and would return identical arms. Keep both arms inside the window, or bring a measurement.",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.34-0.99 (De Vleeschouwer 2008, B14): outside it the lane carries no term and would return identical arms. Keep both arms inside the window, or bring a measurement.",
       "arms": [
         {
           "label": "aw 0.3 (low moisture)",
@@ -1645,10 +1652,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.30 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.30 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 454.26955934654166
+          "value_ug_per_l": 324.9083221197772
         },
         {
           "label": "aw 0.6 (mid moisture)",
@@ -1668,10 +1675,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.60 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.60 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.58 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 454.26955934654166
+          "value_ug_per_l": 364.3173995996743
         },
         {
           "label": "aw 0.9 (high moisture)",
@@ -1691,10 +1698,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.90 is inside the measured window 0.88-0.99; the acrylamide lane carries a DECLARED FLAT a_w term on k_int1_acr (multiplier 1; envelope band 0.41-1.39, the source's own spread). Source: De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)."
+            "WATER ACTIVITY (B14/B15): a_w 0.90 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 454.26955934654166
+          "value_ug_per_l": 324.9083221197772
         }
       ]
     },
@@ -2056,7 +2063,7 @@
       "statement": "UHT processing of a pea-protein beverage RAISES hexanal (331 -> 782 ug/L, significant).",
       "source": "trikusuma2018",
       "status": "not_evaluable",
-      "reason": "refused by the engine: REFUSED -- the two arms differ in pH and the resolved lane(s) (lipid) carry NO pH term by declaration; the model would return identical arms. The sulfur lane carries a pH trajectory and the trunk a declared Amadori-decay pH term (B12).",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in pH and the resolved lane(s) (lipid) carry NO pH term by declaration; the model would return identical arms. The sulfur lane carries a pH trajectory, the trunk a declared Amadori-decay pH term (B12) and the acrylamide lane a declared initial-pH factor inside pH 4-8 (B15).",
       "arms": [
         {
           "label": "processed, 140 C",
@@ -3850,13 +3857,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        1.2144629413441264,
-        2.830150623900616,
-        2.4212223355287916
+        0.715592427348875,
+        1.6683850502305226,
+        1.4283360655903128
       ],
       "log10_steps": [
-        0.3674252827050375,
-        -0.06777487821446967
+        0.3676305535796294,
+        -0.06746588734198891
       ],
       "arms": [
         {
@@ -3877,10 +3884,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 1.2144629413441264
+          "value_ug_per_l": 0.715592427348875
         },
         {
           "label": "mid protein (asn 10 mM, glucose 7 mM)",
@@ -3900,10 +3907,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 2.830150623900616
+          "value_ug_per_l": 1.6683850502305226
         },
         {
           "label": "high protein (asn 20 mM, glucose 3 mM)",
@@ -3923,10 +3930,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 2.4212223355287916
+          "value_ug_per_l": 1.4283360655903128
         }
       ]
     },
@@ -3947,13 +3954,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        12.127836830251743,
-        841.5904954870106,
-        3.4274865497923197
+        7.639498356381459,
+        935.1132612715563,
+        4.372780769047925
       ],
       "log10_steps": [
-        1.8413174768633533,
-        -2.3901250629288344
+        2.0877993741755896,
+        -2.3301065115910498
       ],
       "arms": [
         {
@@ -3974,10 +3981,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 12.127836830251743
+          "value_ug_per_l": 7.639498356381459
         },
         {
           "label": "170 C",
@@ -3997,10 +4004,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 841.5904954870106
+          "value_ug_per_l": 935.1132612715563
         },
         {
           "label": "210 C",
@@ -4021,10 +4028,10 @@
           "reasons": [],
           "warnings": [
             "temperature program spans 210.0-210.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
+            "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 3.4274865497923197
+          "value_ug_per_l": 4.372780769047925
         }
       ]
     },
@@ -5060,11 +5067,161 @@
         "MFT"
       ],
       "fit_status": "independent",
-      "statement": "In a fed Cys-Amadori + Glu-Amadori pot (0.2 M PBS), MFT over 85/95/105/115/125 C PEAKS at 115 C (n.d., ~1, 2.5, 6.6, ~2 ug/L) and falls at 125 C.",
+      "statement": "In a fed Cys-Amadori (TTCA) + Glu-Amadori pot (0.2 M PBS), MFT over the paired ladder 85 C/80 min, 95/90, 105/100, 115/110, 125/120 PEAKS at 115 C (n.d., ~1, 2.5, 6.6, ~2 ug/L) and falls at 125 C.",
       "source": "wang2026",
       "status": "not_evaluable",
-      "reason": "the claim carries no runnable conditions (prose-only)",
-      "arms": []
+      "reason": "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, disagree at ph 9); the source does not state it",
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        67.43350871866015,
+        573.7319259772863,
+        1465.1946111699265,
+        2709.4320314306287,
+        4085.74930013152
+      ],
+      "log10_steps": [
+        0.9298332597810134,
+        0.40718629533236095,
+        0.2669829481060745,
+        0.1783934541735906
+      ],
+      "arms": [
+        {
+          "label": "85 C / 80 min",
+          "spec": {
+            "name": "85 C / 80 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 85.0,
+            "time_min": 80.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 67.43350871866015
+        },
+        {
+          "label": "95 C / 90 min",
+          "spec": {
+            "name": "95 C / 90 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 95.0,
+            "time_min": 90.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 573.7319259772863
+        },
+        {
+          "label": "105 C / 100 min",
+          "spec": {
+            "name": "105 C / 100 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 105.0,
+            "time_min": 100.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 1465.1946111699265
+        },
+        {
+          "label": "115 C / 110 min",
+          "spec": {
+            "name": "115 C / 110 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 115.0,
+            "time_min": 110.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 2709.4320314306287
+        },
+        {
+          "label": "125 C / 120 min",
+          "spec": {
+            "name": "125 C / 120 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 125.0,
+            "time_min": 120.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 4085.74930013152
+        }
+      ],
+      "unstated_input_sweep": {
+        "input": "ph",
+        "values": [
+          5.0,
+          7.0,
+          9.0
+        ],
+        "statuses": {
+          "5.0": "disagree",
+          "7.0": "agree",
+          "9.0": "disagree"
+        }
+      }
     },
     {
       "claim_id": "WANG-02",
@@ -5075,11 +5232,162 @@
         "FFT"
       ],
       "fit_status": "independent",
-      "statement": "In the same pot FFT PEAKS at 95 C (4.5, 12.0, 6.7, ~1, n.d. ug/L over 85-125 C) and collapses to zero by 125 C.",
+      "statement": "In the same pot FFT PEAKS at 95 C/90 min (4.5, 12.0, 6.7, ~1, n.d. ug/L over the paired ladder) and collapses to zero by 125 C/120 min.",
       "source": "wang2026",
-      "status": "not_evaluable",
-      "reason": "the claim carries no runnable conditions (prose-only)",
-      "arms": []
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        148.82223786447386,
+        3633.4392755077374,
+        23197.916404235555,
+        35509.179095139516,
+        22886.211231207744
+      ],
+      "log10_steps": [
+        1.387650075558892,
+        0.8051310727143268,
+        0.18489165327166773,
+        -0.19076673035447975
+      ],
+      "arms": [
+        {
+          "label": "85 C / 80 min",
+          "spec": {
+            "name": "85 C / 80 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 85.0,
+            "time_min": 80.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 148.82223786447386
+        },
+        {
+          "label": "95 C / 90 min",
+          "spec": {
+            "name": "95 C / 90 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 95.0,
+            "time_min": 90.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 3633.4392755077374
+        },
+        {
+          "label": "105 C / 100 min",
+          "spec": {
+            "name": "105 C / 100 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 105.0,
+            "time_min": 100.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 23197.916404235555
+        },
+        {
+          "label": "115 C / 110 min",
+          "spec": {
+            "name": "115 C / 110 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 115.0,
+            "time_min": 110.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 35509.179095139516
+        },
+        {
+          "label": "125 C / 120 min",
+          "spec": {
+            "name": "125 C / 120 min",
+            "precursors": {
+              "TTCA": 197.0
+            },
+            "temp_C": 125.0,
+            "time_min": 120.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 22886.211231207744
+        }
+      ],
+      "unstated_input_sweep": {
+        "input": "ph",
+        "values": [
+          5.0,
+          7.0,
+          9.0
+        ],
+        "statuses": {
+          "5.0": "agree",
+          "7.0": "agree",
+          "9.0": "agree"
+        }
+      },
+      "unstated_input_note": "unanimous over ph in [5.0, 7.0, 9.0]"
     },
     {
       "claim_id": "MENG-01",
@@ -5111,11 +5419,11 @@
       "status": "agree",
       "reason": null,
       "identical_predictions": true,
-      "mechanism_absent": true,
+      "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        803.0411929607731,
-        803.0411929607731
+        639.5739340300012,
+        639.5739340300012
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -5137,10 +5445,10 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.88 is inside the measured window 0.88-0.99; the acrylamide lane carries a DECLARED FLAT a_w term on k_int1_acr (multiplier 1; envelope band 0.41-1.39, the source's own spread). Source: De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)."
+            "WATER ACTIVITY (B14/B15): a_w 0.88 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 803.0411929607731
+          "value_ug_per_l": 639.5739340300012
         },
         {
           "label": "aw 0.99",
@@ -5160,12 +5468,248 @@
           "state": "in_envelope_extrapolated",
           "reasons": [],
           "warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "WATER ACTIVITY (B14): a_w 0.99 is inside the measured window 0.88-0.99; the acrylamide lane carries a DECLARED FLAT a_w term on k_int1_acr (multiplier 1; envelope band 0.41-1.39, the source's own spread). Source: De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)."
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 803.0411929607731
+          "value_ug_per_l": 639.5739340300012
         }
       ]
+    },
+    {
+      "claim_id": "PH-ACR-01",
+      "category": "ph",
+      "claim_type": "ordering",
+      "expected_relation": "A>B",
+      "observables": [
+        "Acrylamide"
+      ],
+      "fit_status": "fit_adjacent",
+      "statement": "In buffered equimolar asparagine-glucose (phosphate, 0.05 M) at 160 C, net acrylamide after a short heating is HIGHER at initial pH 8 than at pH 4 (formation constant 37.5 vs 4.30 x 1e-3 /M/min; both formation and elimination fall with acidity).",
+      "source": "devleeschouwer2006",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "acrylamide",
+      "values_ug_per_l": [
+        53102.885144879234,
+        27317.093000175682
+      ],
+      "log10_ratio_B_over_A": -0.288683636269951,
+      "arms": [
+        {
+          "label": "pH 8",
+          "spec": {
+            "name": "pH 8",
+            "precursors": {
+              "L-Asparagine": 100.0,
+              "D-Glucose": 100.0
+            },
+            "temp_C": 160.0,
+            "time_min": 20.0,
+            "ph": 8.0,
+            "aw": 1.0
+          },
+          "answered": true,
+          "lane": "acrylamide",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.91 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.51 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
+          ],
+          "value_ug_per_l": 53102.885144879234
+        },
+        {
+          "label": "pH 4",
+          "spec": {
+            "name": "pH 4",
+            "precursors": {
+              "L-Asparagine": 100.0,
+              "D-Glucose": 100.0
+            },
+            "temp_C": 160.0,
+            "time_min": 20.0,
+            "ph": 4.0,
+            "aw": 1.0
+          },
+          "answered": true,
+          "lane": "acrylamide",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.22 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.38 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
+          ],
+          "value_ug_per_l": 27317.093000175682
+        }
+      ]
+    },
+    {
+      "claim_id": "DIC-01",
+      "category": "sugar_identity",
+      "claim_type": "ranking",
+      "expected_relation": "ranking",
+      "observables": [
+        "3-deoxyglucosone",
+        "glucosone",
+        "methylglyoxal",
+        "glyoxal",
+        "diacetyl"
+      ],
+      "fit_status": "independent",
+      "statement": "In 0.3 M glucose heated alone in water at 105 C for 6 h, the dicarbonyls rank 3-deoxyglucosone > glucosone > methylglyoxal > glyoxal > diacetyl (0.051 / 0.0047 / 0.00064 / 0.00034 / 0.000026 in the paper's unit).",
+      "source": "zhang2020",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "trunk",
+      "values_ug_per_l": [
+        0.07356569398608993,
+        638.2203368167466,
+        0.010537322605920992,
+        32.87080222408425,
+        0.02848224604634159
+      ],
+      "log10_steps": [
+        3.9382953025530933,
+        -4.782240362402355,
+        3.4940800269096597,
+        -3.062236069519815
+      ],
+      "predicted_order": [
+        "glucosone",
+        "glyoxal",
+        "3-deoxyglucosone",
+        "diacetyl",
+        "methylglyoxal"
+      ],
+      "arms": [
+        {
+          "label": "glucose alone, 105 C, 6 h :: 3-deoxyglucosone",
+          "spec": {
+            "name": "glucose alone, 105 C, 6 h :: 3-deoxyglucosone",
+            "precursors": {
+              "D-Glucose": 300.0
+            },
+            "temp_C": 105.0,
+            "time_min": 360.0,
+            "ph": 6.5,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
+          ],
+          "value_ug_per_l": 0.07356569398608993
+        },
+        {
+          "label": "glucose alone, 105 C, 6 h :: glucosone",
+          "spec": {
+            "name": "glucose alone, 105 C, 6 h :: glucosone",
+            "precursors": {
+              "D-Glucose": 300.0
+            },
+            "temp_C": 105.0,
+            "time_min": 360.0,
+            "ph": 6.5,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
+          ],
+          "value_ug_per_l": 638.2203368167466
+        },
+        {
+          "label": "glucose alone, 105 C, 6 h :: methylglyoxal",
+          "spec": {
+            "name": "glucose alone, 105 C, 6 h :: methylglyoxal",
+            "precursors": {
+              "D-Glucose": 300.0
+            },
+            "temp_C": 105.0,
+            "time_min": 360.0,
+            "ph": 6.5,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
+          ],
+          "value_ug_per_l": 0.010537322605920992
+        },
+        {
+          "label": "glucose alone, 105 C, 6 h :: glyoxal",
+          "spec": {
+            "name": "glucose alone, 105 C, 6 h :: glyoxal",
+            "precursors": {
+              "D-Glucose": 300.0
+            },
+            "temp_C": 105.0,
+            "time_min": 360.0,
+            "ph": 6.5,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
+          ],
+          "value_ug_per_l": 32.87080222408425
+        },
+        {
+          "label": "glucose alone, 105 C, 6 h :: diacetyl",
+          "spec": {
+            "name": "glucose alone, 105 C, 6 h :: diacetyl",
+            "precursors": {
+              "D-Glucose": 300.0
+            },
+            "temp_C": 105.0,
+            "time_min": 360.0,
+            "ph": 6.5,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
+          ],
+          "value_ug_per_l": 0.02848224604634159
+        }
+      ]
+    },
+    {
+      "claim_id": "DIC-02",
+      "category": "sugar_identity",
+      "claim_type": "ranking",
+      "expected_relation": "ranking",
+      "observables": [
+        "glucosone",
+        "glyoxal",
+        "methylglyoxal",
+        "diacetyl"
+      ],
+      "fit_status": "independent",
+      "statement": "In 0.3 M glucose + 0.3 M glutamic acid in water at 100 C for 6 h, glucosone > glyoxal > methylglyoxal > diacetyl.",
+      "source": "zhang2020",
+      "status": "not_evaluable",
+      "reason": "the claim carries no runnable conditions (prose-only)",
+      "arms": []
     }
   ]
 }

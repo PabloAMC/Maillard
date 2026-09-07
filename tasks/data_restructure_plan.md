@@ -1326,6 +1326,20 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       across the window boundary; AW-05 (fit_adjacent, flat) agrees; AW-02 (a_w 0.3 / 0.6) stays
       refused with the window named. Nothing below a_w 0.88 is measured for the lane anywhere in
       the corpus: the dry-side extrusion claims need a measurement, not a paper.
+      **B15 DONE 2026-09-07 (owner downloaded De Vleeschouwer 2006 pH + 2007 a_w, Zhang 2020
+      dicarbonyls, Zhai 2020/2021 TTCA):** acrylamide lane gains a DECLARED initial-pH factor (ln-slopes
+      0.5414 / 0.3442 = 0.235 / 0.149 decades per unit on k_asn_glc / k_acr_dp, window pH 4-8, held
+      outside) and an elimination a_w shape (2007 k_E, minimum at 0.82, joining the 2008 flat window at
+      0.88); the formation window widens to 0.34-0.99. Amendment 25, `kinetic_core_b15_prereg.md`.
+      Scorer: unstated-input SWEEP (unanimity rule), RANKING claims, buffers on panel systems; TTCA
+      chargeable by name and counted as a sulfur source (Zhai 2020: ~94 % TTCA). Panel: WANG-02 (FFT
+      peak) AGREES at pH 5/7/9 and enters the headline; WANG-01 flips with pH -> n.e.; PH-ACR-01 and
+      AW-05 agree; DIC-01 (Zhang 2020 dicarbonyl ordering, glucose alone 105 C) DISAGREES -- glucosone
+      x10^4 over 3-DG where 3-DG dominates: the glass-to-water transfer of the B7/B13 caramelisation
+      constants is the suspect (first measured constraint on B13). Headline 18/30 -> 19/32. Zhai 2021's
+      zero-order TTCA degradation at 100/120/140 C (0.0027/0.0065/0.0081 /min first-order equivalents;
+      the core's fitted k_ttca_deg gives 0.0022/0.016) qualifies as FIT rows for the next sulfur wave
+      (W6); its printed Ea 81 kJ/mol is not reproducible from its own constants (~35).
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
 - [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI

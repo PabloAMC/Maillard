@@ -200,6 +200,21 @@ sources:
     doi: "10.1021/jf8006294"
     access: full_text
     retrieved_from: "data/articles/devleeschouwer2008.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/devleeschouwer2008_extraction.md"
+  devleeschouwer2006:
+    citation: "De Vleeschouwer, K., Van der Plancken, I., Van Loey, A., Hendrickx, M. E. (2006). Impact of pH on the Kinetics of Acrylamide Formation/Elimination Reactions in Model Systems. J. Agric. Food Chem. 54(20), 7847-7855."
+    doi: "10.1021/jf0611264"
+    access: full_text
+    retrieved_from: "data/articles/devleeschouwer2006.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/devleeschouwer2006_extraction.md"
+  devleeschouwer2007:
+    citation: "De Vleeschouwer, K., Van der Plancken, I., Van Loey, A., Hendrickx, M. E. (2007). Kinetics of Acrylamide Formation/Elimination Reactions as Affected by Water Activity. Biotechnol. Prog. 23(3), 722-728."
+    doi: "10.1021/bp060389f"
+    access: full_text
+    retrieved_from: "data/articles/devleeschouwer2008b.pdf (owner's download, 2026-09-07; the 2007 paper); data/lit/extraction_dossiers/devleeschouwer2007_extraction.md"
+  zhang2020:
+    citation: "Zhang, Z., et al. (2021). Kinetics of alpha-dicarbonyl compounds formation in glucose-glutamic acid model of Maillard reaction. Food Sci. Nutr. 9(1), 290-302."
+    doi: "10.1002/fsn3.1995"
+    access: full_text
+    retrieved_from: "data/articles/zhang2020.pdf (owner's download, 2026-09-07; open access); data/lit/extraction_dossiers/zhang2020_extraction.md"
 panel:
 
   # =====================================================================
@@ -1892,45 +1907,61 @@ panel:
     model_scope_note: "Expressible. The core today predicts FFT 616 -> 214 ug/L over these two points, i.e. the opposite ordering."
 
   - claim_id: WANG-01
-    statement: "In a fed Cys-Amadori + Glu-Amadori pot (0.2 M PBS), MFT over 85/95/105/115/125 C PEAKS at 115 C (n.d., ~1, 2.5, 6.6, ~2 ug/L) and falls at 125 C."
+    statement: "In a fed Cys-Amadori (TTCA) + Glu-Amadori pot (0.2 M PBS), MFT over the paired ladder 85 C/80 min, 95/90, 105/100, 115/110, 125/120 PEAKS at 115 C (n.d., ~1, 2.5, 6.6, ~2 ug/L) and falls at 125 C."
     claim_type: monotonic_direction
     category: temperature
     observables: ["MFT"]
-    evaluable: false
-    expected_relation: "peak"
-    conditions: {}
+    conditions:
+      series:
+        - label: "85 C / 80 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 85, ph: 7.0, water_activity: 0.98, time_min: 80, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "95 C / 90 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 95, ph: 7.0, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "105 C / 100 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 105, ph: 7.0, water_activity: 0.98, time_min: 100, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "115 C / 110 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 115, ph: 7.0, water_activity: 0.98, time_min: 110, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "125 C / 120 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 125, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+    unstated_inputs:
+      ph: [5.0, 7.0, 9.0]
+    expected_relation: peak
     source:
       ref: wang2026
       quote: "2-Methyl-3-furanthiol (MFT) | n.d. | ~1 | 2.5 | 6.6 | ~2 | PEAKS at 115 C, then falls"
       quote_form: table_row_reformatted
-      quote_form_note: "Dossier sec. 3.1, digitised from Fig. 5C at 900 dpi (+/-5 % of reading, floor ~2.5 ug/L); the authoritative Table S2 is not on disk."
+      quote_form_note: "Dossier sec. 3.1, digitised from Fig. 5C at 900 dpi (+/-5 % of reading, floor ~2.5 ug/L); Table S2 (SI docx on disk) is the authoritative source. Methods 2.3 pairs the five temperatures with times 80/90/100/110/120 min respectively."
+    source_conditions: "1.0 g Glu-Amadori + 1.0 g Cys-Amadori in 20.0 mL PBS 0.2 mol/L (the Cys intermediate is ~94 % TTCA per Zhai 2020: charged as TTCA 197 mmol/L; the Glu-Amadori has no core species and is left out), thick-walled pressure bottle, oil bath, magnetic stirring; the series pH is NOT stated."
     fit_status: independent
-    model_scope_note: >-
-      NOT EVALUABLE, two reasons (re-read 2026-09-07). (1) THE ENGINE: the core has no
-      cysteine-xylose Amadori species (its ARP is a sulfur-free pentose Amadori; the earlier
-      note that "the cysteine Amadori maps to ARP" was wrong), so the pot refuses for want
-      of a sulfur source; a Cys-Amadori species that releases its cysteine sulfur is the
-      structural addition that would make this ladder and the Zhai 2023 / Kang 2026
-      fed-Amadori series evaluable (plan W6). (2) THE PAPER: Methods 2.3 pairs the five
-      temperatures with times 80/90/100/110/120 min "respectively" (a co-varying design), so
-      the hold times ARE stated, but the pH of the series is not. The SHAPE it records -- a
-      peak -- is the structural claim wave B10 existed to reproduce.
+    model_scope_note: "Re-read 2026-09-07: the ladder is a paired temperature-time design (Methods 2.3) at an UNSTATED pH, so the claim is scored at pH 5 / 7 / 9 and the verdict stands only if unanimous (the panel sweeps an unstated input rather than inventing it). The Cys intermediate is charged as TTCA (the species the core carries; Zhai 2020). The SHAPE recorded -- a peak -- is the structural claim wave B10 existed to reproduce."
 
   - claim_id: WANG-02
-    statement: "In the same pot FFT PEAKS at 95 C (4.5, 12.0, 6.7, ~1, n.d. ug/L over 85-125 C) and collapses to zero by 125 C."
+    statement: "In the same pot FFT PEAKS at 95 C/90 min (4.5, 12.0, 6.7, ~1, n.d. ug/L over the paired ladder) and collapses to zero by 125 C/120 min."
     claim_type: monotonic_direction
     category: temperature
     observables: ["FFT"]
-    evaluable: false
-    expected_relation: "peak"
-    conditions: {}
+    conditions:
+      series:
+        - label: "85 C / 80 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 85, ph: 7.0, water_activity: 0.98, time_min: 80, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "95 C / 90 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 95, ph: 7.0, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "105 C / 100 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 105, ph: 7.0, water_activity: 0.98, time_min: 100, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "115 C / 110 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 115, ph: 7.0, water_activity: 0.98, time_min: 110, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "125 C / 120 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 125, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+    unstated_inputs:
+      ph: [5.0, 7.0, 9.0]
+    expected_relation: peak
     source:
       ref: wang2026
       quote: "2-Furfurylthiol (FFT) | 4.5 | 12.0 | 6.7 | ~1 | n.d. | PEAKS at 95 C, then collapses to zero"
       quote_form: table_row_reformatted
       quote_form_note: "As WANG-01."
     fit_status: independent
-    model_scope_note: "As WANG-01: no cysteine-Amadori species in the core, and the series' pH unstated (its times are stated, paired: 85 C/80 min ... 125 C/120 min)."
+    model_scope_note: "As WANG-01: charged as TTCA, series pH unstated and swept over 5 / 7 / 9 with a unanimity rule. The scorer's peak test asks only for an interior maximum; the RUNG of the peak (95 C measured) is not scored."
 
   - claim_id: MENG-01
     statement: "In fermented soy sauce, MFT and FFT both RISE 80 -> 95 -> 120 C at 5 min (MFT 1.2 -> 6.6 -> 11.1 ug/L) and at 20 min (2.4 -> 6.8 -> 18.3), with the apparent barrier FALLING as temperature rises."
@@ -1972,3 +2003,56 @@ panel:
     fit_status: fit_adjacent
     fit_note: "The acrylamide lane's shipped k_int1_acr and k_asn_glc ARE this paper's a_w 0.92 column (via De Vleeschouwer 2009 Part I), and the B14 flat term is DECLARED from this very finding, so the claim is not independent: it checks that the declared term and the refusal window are wired, not that the model predicts anything. Counted in 'all claims' only."
     model_scope_note: "B14 (2026-09-07): answerable inside the measured window 0.88-0.99 by construction; a_w moves that leave the window (AW-02's 0.3 / 0.6 arms) stay refused."
+
+  - claim_id: PH-ACR-01
+    statement: "In buffered equimolar asparagine-glucose (phosphate, 0.05 M) at 160 C, net acrylamide after a short heating is HIGHER at initial pH 8 than at pH 4 (formation constant 37.5 vs 4.30 x 1e-3 /M/min; both formation and elimination fall with acidity)."
+    claim_type: ordering
+    category: ph
+    observables: ["Acrylamide"]
+    conditions:
+      A:
+        label: "pH 8"
+        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 8.0, water_activity: 1.0, time_min: 20}
+      B:
+        label: "pH 4"
+        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 4.0, water_activity: 1.0, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: devleeschouwer2006
+      quote: "the reaction rate constants kFref and kEref for acrylamide formation and elimination decrease significantly (alpha = 0.05) with a decreasing pH from 8 to 4. Figure 6 shows a log-linear relation for both rate constants of acrylamide formation and elimination with pH when studied in phosphate buffer"
+    source_conditions: "0.1 M Asn + 0.1 M Glc in 0.05 M phosphate, initial pH 4 / 6 / 8 (room temperature), closed tubes, 120-200 C; Table 1."
+    fit_status: fit_adjacent
+    fit_note: "The B15 pH factor is DECLARED from this paper's slopes, so the claim checks that the factor and the window are wired (formation 0.235 > elimination 0.149 decades per unit, so net acrylamide must rise with pH at 20 min), not that the model predicts anything independently. Counted in 'all claims' only."
+    model_scope_note: "B15 (2026-09-07): answerable inside the measured window pH 4-8; a pH move that leaves the window is refused."
+  - claim_id: DIC-01
+    statement: "In 0.3 M glucose heated alone in water at 105 C for 6 h, the dicarbonyls rank 3-deoxyglucosone > glucosone > methylglyoxal > glyoxal > diacetyl (0.051 / 0.0047 / 0.00064 / 0.00034 / 0.000026 in the paper's unit)."
+    claim_type: ranking
+    category: sugar_identity
+    observables: ["3-deoxyglucosone", "glucosone", "methylglyoxal", "glyoxal", "diacetyl"]
+    conditions:
+      series:
+        - label: "glucose alone, 105 C, 6 h"
+          system: {precursors: {D-Glucose: 300.0}, temp_C: 105, ph: 6.5, water_activity: 0.99, time_min: 360}
+    expected_relation: ranking
+    source:
+      ref: zhang2020
+      quote: "Table 1: 3-Deoxyglucosone 105 C C(t) = 0.0056t + 0.0173; Glucosone 105 C C(t) = 0.0005t + 0.0017 (3-6 hr); Methylglyoxal 105 C C(t) = 1 x 10-4 t + 4 x 10-5; Glyoxal 105 C C(t) = 4 x 10-5 t + 0.0001; Diacetyl 105 C C(t) = 3 x 10-6 t + 8 x 10-6"
+      quote_form: table_rows_reformatted
+    source_conditions: "Glucose-only 0.3 M in water, 250 mL four-neck flask with reflux, oil bath, atmospheric pressure, 90-110 C, 0-6 h, o-PDA / LC-MS/MS; pH not stated (a fresh glucose solution: 6.5 recorded here; the trunk's pH term touches only Amadori decay, absent without an amine, so the value changes no rate)."
+    fit_status: independent
+    fit_note: "The trunk's dicarbonyl constants are Kocadagli & Gokmen 2016's glucose-glass rates at 160-200 C (B7/B13); this is an aqueous pot at 105 C from another laboratory. ⚠ The paper's absolute levels do not mass-balance against its own glucose loss (dossier sec. 3), so only the ORDERING is claimed."
+    model_scope_note: "Evaluable only if the ranking scorer accepts a five-way ordering; if it scores pairs, the first pair (3-DG > glucosone) is the one that matters."
+  - claim_id: DIC-02
+    statement: "In 0.3 M glucose + 0.3 M glutamic acid in water at 100 C for 6 h, glucosone > glyoxal > methylglyoxal > diacetyl."
+    claim_type: ranking
+    category: sugar_identity
+    observables: ["glucosone", "glyoxal", "methylglyoxal", "diacetyl"]
+    conditions: {}
+    evaluable: false
+    expected_relation: ranking
+    source:
+      ref: zhang2020
+      quote: "Table 2 (glucose-Glu): Glucosone 100 C C(t) = 0.0003t + 0.001; Glyoxal 100 C ln C(t) = 0.2617t + ln0.0004 (1-4 hr); Methylglyoxal 100 C C(t) = 0.0001t + 1 x 10-4; Diacetyl 100 C C(t) = 3 x 10-5 t + 2 x 10-5"
+      quote_form: table_rows_reformatted
+    fit_status: independent
+    model_scope_note: "NOT EVALUABLE: the core has no glutamate species (the trunk's amine is glycine); recorded so the ordering is on file for a trunk wave that adds the amino-acid identity."

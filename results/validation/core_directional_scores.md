@@ -1,12 +1,12 @@
 # Core directional scores (the kinetic core on the directional claims panel)
 
-Panel `docs/validation/directional_claims_panel.yml` (75 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
+Panel `docs/validation/directional_claims_panel.yml` (78 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 18/30 (60%)**; 27 independent claims not evaluable
-* independent, excluding pH and water activity: 13/23 (57%); pH and water activity alone: 5/7 (71%)
-* all claims (independent + fit-adjacent + fit-system overlap): 21/43 (49%); 32 not evaluable
+* **headline (strictly independent, evaluable): 19/32 (59%)**; 27 independent claims not evaluable
+* independent, excluding pH and water activity: 14/25 (56%); pH and water activity alone: 5/7 (71%)
+* all claims (independent + fit-adjacent + fit-system overlap): 23/46 (50%); 32 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (19); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); a predicted concentration is zero; no direction is defined (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); a predicted concentration is zero; no direction is defined (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
 ## Per category (strictly independent claims)
 
@@ -20,8 +20,8 @@ Panel `docs/validation/directional_claims_panel.yml` (75 claims, flat tolerance 
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 1 | 0.00 | 2 | MOT-03 |
 | scope | 0 | 0 | - | 3 | - |
-| sugar_identity | 4 | 8 | 0.50 | 6 | SUG-03, SUG-12, HOF-02, HOF-03 |
-| temperature | 5 | 9 | 0.56 | 4 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
+| sugar_identity | 4 | 9 | 0.44 | 7 | SUG-03, SUG-12, HOF-02, HOF-03, DIC-01 |
+| temperature | 6 | 10 | 0.60 | 3 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
 | time | 2 | 2 | 1.00 | 0 | - |
 
 ## Per category (all claims)
@@ -32,12 +32,12 @@ Panel `docs/validation/directional_claims_panel.yml` (75 claims, flat tolerance 
 | lipid_lane | 0 | 3 | 0.00 | 1 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 2 | 3 | 0.67 | 2 |
-| ph | 4 | 7 | 0.57 | 5 |
+| ph | 5 | 8 | 0.62 | 5 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 0 | 2 | 0.00 | 4 |
 | scope | 0 | 0 | - | 3 |
-| sugar_identity | 6 | 12 | 0.50 | 6 |
-| temperature | 5 | 9 | 0.56 | 4 |
+| sugar_identity | 6 | 13 | 0.46 | 7 |
+| temperature | 6 | 10 | 0.60 | 3 |
 | time | 2 | 2 | 1.00 | 0 |
 
 ## Claims
@@ -55,11 +55,11 @@ Panel `docs/validation/directional_claims_panel.yml` (75 claims, flat tolerance 
 | PH-03 | ph | independent | FFT | decreasing | **agree** | sulfur | 65.9, 53.7, 10.9 |  |
 | PH-04 | ph | independent | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | arm 'pH 4.5' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: th |
 | PH-05 | ph | independent | Furfural | decreasing | **agree** | sulfur | 146, 131, 58.1 |  |
-| TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 21.1, 454, 814 |  |
-| TEMP-02 | temperature | independent | Acrylamide | A>B | **agree** | acrylamide | 21.1, 0 |  |
-| TEMP-03 | temperature | independent | HMF | increasing | **agree** | acrylamide | 77.7, 399, 577 |  |
+| TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 13.6, 357, 1.04e+03 |  |
+| TEMP-02 | temperature | independent | Acrylamide | A>B | **agree** | acrylamide | 13.6, 0 |  |
+| TEMP-03 | temperature | independent | HMF | increasing | **agree** | acrylamide | 78, 403, 585 |  |
 | AW-01 | moisture_aw | independent | HMF | decreasing | **disagree** | trunk | 1.35e+03, 1.5e+03, 629 |  |
-| AW-02 | moisture_aw | independent | Acrylamide | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.88-0.99 (De  |
+| AW-02 | moisture_aw | independent | Acrylamide | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.34-0.99 (De  |
 | CYS-01 | additive_cysteine | independent | FFT | A>B | **agree** | sulfur | 47, 0 |  |
 | CYS-02 | additive_cysteine | independent | HMF | A>B | **disagree** | trunk | 629, 674 |  |
 | SCOPE-01 | scope | independent | CEL | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -92,8 +92,8 @@ Panel `docs/validation/directional_claims_panel.yml` (75 claims, flat tolerance 
 | CYS-03 | additive_cysteine | independent | MFT | A>B | **agree** | sulfur | 12.5, 0 |  |
 | CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unr |
 | LIP-04 | lipid_lane | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 63.9, 63.9 | identical predictions; the lane has no term for the moved axis |
-| ACR-01 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 1.21, 2.83, 2.42 |  |
-| ACR-02 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 12.1, 842, 3.43 |  |
+| ACR-01 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 0.716, 1.67, 1.43 |  |
+| ACR-02 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 7.64, 935, 4.37 |  |
 | TIME-02 | time | independent | HMF | increasing | **agree** | trunk | 59.7, 1.22e+03, 1.6e+03 |  |
 | SCOPE-03 | scope | independent | 2-Pentylfuran | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HOF-01 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
@@ -115,7 +115,10 @@ Panel `docs/validation/directional_claims_panel.yml` (75 claims, flat tolerance 
 | HOX-07 | ranking | independent | FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | YIL-01 | temperature | independent | MFT | decreasing | **disagree** | sulfur | 79.5, 121, 163, 197 |  |
 | YIL-02 | temperature | independent | FFT | A>B | **disagree** | sulfur | 1.21e+03, 2.3e+03 |  |
-| WANG-01 | temperature | independent | MFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| WANG-02 | temperature | independent | FFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
+| WANG-01 | temperature | independent | MFT | peak | **not_evaluable** | sulfur | 67.4, 574, 1.47e+03, 2.71e+03, 4.09e+03 | the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, disagree at ph 9); the source does not state it |
+| WANG-02 | temperature | independent | FFT | peak | **agree** | sulfur | 149, 3.63e+03, 2.32e+04, 3.55e+04, 2.29e+04 |  |
 | MENG-01 | temperature | independent | MFT, FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| AW-05 | moisture_aw | fit_adjacent | Acrylamide | flat | **agree** | acrylamide | 803, 803 | identical predictions; the lane has no term for the moved axis |
+| AW-05 | moisture_aw | fit_adjacent | Acrylamide | flat | **agree** | acrylamide | 640, 640 | identical predictions |
+| PH-ACR-01 | ph | fit_adjacent | Acrylamide | A>B | **agree** | acrylamide | 5.31e+04, 2.73e+04 |  |
+| DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 0.0736, 638, 0.0105, 32.9, 0.0285 |  |
+| DIC-02 | sugar_identity | independent | glucosone, glyoxal, methylglyoxal, diacetyl | ranking | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |

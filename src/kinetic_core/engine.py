@@ -208,6 +208,15 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     "norfuraneol": "NF",
     "amadori": "AMA",
     "arp": "ARP",
+    # W6 (2026-09-07): the xylose-cysteine thiazolidine the sulfur lane carries; Zhai 2020 shows the
+    # group's "Cys-Amadori" intermediate is ~94 % TTCA, so those names charge TTCA.
+    "ttca": "TTCA",
+    "2-threityl-thiazolidine-4-carboxylic acid": "TTCA",
+    "2-(tetrahydroxybutyl)thiazolidine-4-carboxylic acid": "TTCA",
+    "cys-amadori": "TTCA",
+    "cysteine amadori": "TTCA",
+    "cysteine-xylose amadori": "TTCA",
+    "xylose-cysteine amadori": "TTCA",
 }
 
 #: Target-compound synonyms -> core species key.
@@ -259,6 +268,10 @@ TARGET_ALIASES: Mapping[str, str] = {
     "furaneol": "DMHF",
     "2,5-dimethyl-4-hydroxy-3(2h)-furanone": "DMHF",
     "3,4-dideoxyglucosone": "DDG",
+    "3-deoxyglucosone": "TDG",
+    "3-dg": "TDG",
+    "1-deoxyglucosone": "ODG",
+    "1-dg": "ODG",
     "acetylformoin": "AF",
 }
 
@@ -964,7 +977,7 @@ def declare_envelope(
     # A target whose lane needs a precursor species this charge cannot supply.
     if lane is not None and not unmapped:
         if lane == SULFUR and not (
-            {"Cys", "THI", "PENT", "ARP", "H2S"} & set(mapped_precursors)
+            {"Cys", "THI", "PENT", "ARP", "H2S", "TTCA"} & set(mapped_precursors)   # W6: TTCA carries its cysteine sulfur
         ):
             if set(mapped_targets.values()) & {"MFT", "FFT", "MFTD", "MESH", "ACTZ"}:
                 reasons.append(
@@ -991,18 +1004,13 @@ def declare_envelope(
             f"measured over 80-120 C. This is a numerically sound extrapolation "
             f"of an experimentally unsupported barrier."
         )
-    if lane == ACRYLAMIDE and abs(float(spec.process.ph) - NETWORK_PH) > 1e-9:
-        warnings.append(
-            f"pH {spec.process.ph:g} was supplied, but the {lane} lane carries "
-            f"NO pH term at all -- its parameters are homogeneous at pH "
-            f"{NETWORK_PH:g}. The pH is recorded and IGNORED; it changes no "
-            f"rate. Any pH sensitivity in the measurement is unmodelled."
-        )
+    # B15 (2026-09-07): the acrylamide lane's declared initial-pH factor is printed by
+    # acrylamide_conditions.declarations below, together with its a_w terms.
     if lane == TRUNK:
         # B12: the trunk carries a declared a_w term and a declared pH term (Amadori decay).
         warnings.extend(trunk_conditions.declarations(spec.process))
     if lane == ACRYLAMIDE:
-        # B14: a declared flat a_w term inside De Vleeschouwer 2008's window; nothing outside it.
+        # B14/B15: the declared a_w terms (window 0.34-0.99) and the declared initial-pH factor.
         warnings.extend(acrylamide_conditions.declarations(spec.process))
     if spec.process.ph_final is not None and lane != SULFUR:
         warnings.append(
@@ -1438,6 +1446,10 @@ class CoreDraw:
     #: B14 (2026-09-07): the acrylamide lane's declared flat a_w multiplier inside the measured
     #: window (band acrylamide_conditions.AW_SCALE_BAND). ``None`` = the declared centre, 1.0.
     acrylamide_aw_scale: Optional[float] = None
+    #: B15: the elimination a_w deficit scale (band AW_ELIMINATION_SCALE_BAND) and the two pH exponents.
+    acrylamide_aw_elimination_scale: Optional[float] = None
+    acrylamide_ph_exponent_formation: Optional[float] = None
+    acrylamide_ph_exponent_elimination: Optional[float] = None
     #: B11: a multiplicative scale on the sulfur lane's oxygen reservoir (declared band
     #: OX_RESERVOIR_SCALE_BAND, spanning the saturation band and the unrecorded-vessel band).
     oxygen_reservoir_scale: Optional[float] = None
@@ -1807,7 +1819,7 @@ def _integrate_program(
     *,
     ph_drift: Optional[PhDrift] = None,
     trunk_draw: Optional[Tuple[Optional[float], Optional[float]]] = None,
-    acrylamide_draw: Optional[float] = None,
+    acrylamide_draw: Optional[Dict[str, Optional[float]]] = None,
     reservoir_scale: Optional[float] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """
@@ -1872,8 +1884,15 @@ def _integrate_program(
         elif lane == ACRYLAMIDE:
             # B14 (2026-09-07): the declared flat a_w term inside the measured window scales the
             # acrylamide-forming step before integration; exactly 1.0 at the centre and outside.
+            d = acrylamide_draw or {}
             acr_parameters, condition_terms = acrylamide_conditions.apply(
-                parameters, process, aw_scale=acrylamide_draw,
+                parameters, process,
+                aw_scale=d.get("aw_scale"),
+                aw_elimination_deficit_scale=1.0 if d.get("aw_elimination_scale") is None else float(d["aw_elimination_scale"]),
+                ph_exponent_formation=(acrylamide_conditions.PH_EXPONENT_FORMATION
+                                       if d.get("ph_exponent_formation") is None else float(d["ph_exponent_formation"])),
+                ph_exponent_elimination=(acrylamide_conditions.PH_EXPONENT_ELIMINATION
+                                         if d.get("ph_exponent_elimination") is None else float(d["ph_exponent_elimination"])),
             )
             if condition_terms:
                 metadata.setdefault("condition_terms", list(condition_terms))
@@ -1983,7 +2002,12 @@ def predict(
         trunk_draw = (
             (draw.trunk_aw_scale, draw.trunk_ph_exponent) if draw is not None else None
         )
-        acrylamide_draw = draw.acrylamide_aw_scale if draw is not None else None
+        acrylamide_draw = (
+            {"aw_scale": draw.acrylamide_aw_scale, "aw_elimination_scale": draw.acrylamide_aw_elimination_scale,
+             "ph_exponent_formation": draw.acrylamide_ph_exponent_formation,
+             "ph_exponent_elimination": draw.acrylamide_ph_exponent_elimination}
+            if draw is not None else None
+        )
         final_state, metadata = _integrate_program(
             maillard_lane, operative, dict(declaration.mapped_precursors), spec.process,
             ph_drift=draw.ph_drift if draw is not None else None,
@@ -2118,7 +2142,10 @@ def predict(
 
 #: Lanes whose parameters carry NO pH term (declared in their parameter modules).
 #: B12 (2026-09-07): the trunk gained a declared pH term on its Amadori-decay steps.
-NO_PH_TERM_LANES = frozenset({ACRYLAMIDE, LIPID})
+NO_PH_TERM_LANES = frozenset({LIPID})
+#: B15: lanes whose pH term is measured only inside a window (outside it the factor is held and a
+#: comparison that leaves the window is refused).
+PH_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.PH_WINDOW}
 #: Lanes that carry a water-activity term (B12: the trunk's declared multiplier).
 AW_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE})
 #: B14: lanes whose a_w term exists only inside a measured window (outside it the axis is refused).
@@ -2168,9 +2195,18 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
             return (
                 f"REFUSED -- the two arms differ in pH and the resolved lane(s) "
                 f"({', '.join(sorted(lanes))}) carry NO pH term by declaration; the model would "
-                "return identical arms. The sulfur lane carries a pH trajectory and the trunk a "
-                "declared Amadori-decay pH term (B12)."
+                "return identical arms. The sulfur lane carries a pH trajectory, the trunk a "
+                "declared Amadori-decay pH term (B12) and the acrylamide lane a declared initial-pH "
+                "factor inside pH 4-8 (B15)."
             )
+        for lane_name, (lo, hi) in PH_TERM_WINDOWS.items():
+            if lane_name in lanes and not all(lo - 1e-9 <= float(v) <= hi + 1e-9 for v in (pa.ph, pb.ph)):
+                return (
+                    f"REFUSED -- the two arms differ in pH ({float(pa.ph):g} vs {float(pb.ph):g}) and the "
+                    f"{lane_name} lane's pH factor is measured only inside pH {lo:g}-{hi:g} (De Vleeschouwer "
+                    "2006, B15): outside it the factor is held at the window edge and the arms would not be a "
+                    "comparison. Keep both arms inside the window, or bring a measurement."
+                )
     return None
 
 
@@ -2383,6 +2419,7 @@ __all__ = [
     "axis_refusal",
     "AW_TERM_LANES",
     "AW_TERM_WINDOWS",
+    "PH_TERM_WINDOWS",
     "NO_PH_TERM_LANES",
     "TRUNK",
     "ThermalProgram",

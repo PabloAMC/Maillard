@@ -202,7 +202,9 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (7, 33, 6)
+    # RE-PINNED 2026-09-07 (B15): the extrusion row at a_w 0.35 is now inside the acrylamide window and
+    # its interval is sampled (33 -> 34 evaluable, 6 -> 5 not evaluable); three new priors move the stream.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (7, 34, 5)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -211,9 +213,9 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     # RE-PINNED 2026-09-07 (B14): the acrylamide lane's declared flat a_w band joined the draw
     # table (inert on every panel row except the a_w-inside-window acrylamide hold-outs, +0.05 dex);
     # the moved random stream shifts every row by a few hundredths: 5/33 -> 7/33, 1.3376 -> 1.4495 dex.
-    assert lit["median_ci_width_log10"] == pytest.approx(1.4495, abs=5e-4)
+    assert lit["median_ci_width_log10"] == pytest.approx(1.3080, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (7, 32)
+    assert (oos["hits"], oos["total"]) == (7, 33)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
@@ -221,8 +223,8 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
         "headspace": 8, "extraction": 31, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "7 of 33", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "7 of 32", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "7 of 34", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "7 of 33", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 
@@ -270,7 +272,8 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # the pre-wave baseline the wave is judged against: 69 -> 74 claims, 17/26 -> 17/28,
     # temperature 5/7 -> 5/9, 26 -> 29 independent claims not evaluable.
     # RE-PINNED 2026-09-07 (B14): AW-05, the declared-flat acrylamide a_w claim (fit_adjacent), 74 -> 75.
-    assert payload["panel"]["claims"] == 75
+    # RE-PINNED 2026-09-07 (B15): PH-ACR-01 (fit_adjacent), DIC-01 and DIC-02 (Zhang 2020), 75 -> 78.
+    assert payload["panel"]["claims"] == 78
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
@@ -282,23 +285,26 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # evaluable (one agree, one disagree, both as the B12 prereg expected), 17/28 -> 18/30; the two
     # water-activity refusals on the trunk are gone (engine refusals 4 -> 2: the acrylamide arm of
     # AW-02 and the lipid arm of PROC-01); pH-and-a_w 4/5 -> 5/7; 29 -> 27 not evaluable.
-    assert s["headline"] == [18, 30]
+    # RE-PINNED 2026-09-07 (B15 + the unstated-input sweep + ranking claims): WANG-02 (FFT peak, charged
+    # as TTCA, unanimous over pH 5/7/9) AGREES and DIC-01 (Zhang 2020 dicarbonyl ordering) DISAGREES:
+    # 18/30 -> 19/32; WANG-01 flips with pH and stays not evaluable; DIC-02 not evaluable (no glutamate).
+    assert s["headline"] == [19, 32]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (13, 23)
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (14, 25)
     assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (5, 7)
     assert ind["total"]["not_evaluable"] == 27
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
-    assert cats["sugar_identity"] == (4, 8)
-    assert cats["temperature"] == (5, 9)
+    assert cats["sugar_identity"] == (4, 9)   # B15: DIC-01 misses
+    assert cats["temperature"] == (6, 10)     # B15: WANG-02 agrees
     assert cats["ph"] == (4, 5)
     assert cats["moisture_aw"] == (1, 2)   # B12: the trunk answers a_w; AW-03 agrees, AW-01 does not
     assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (2, 2)
     readme = _doc_text(README)
-    _assert_quoted(readme, "18 of 30", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "13 of 23", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "19 of 32", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "14 of 25", "README.md", "the directional count excluding pH and water activity")
     _assert_quoted(readme, "5 of 7", "README.md", "the directional count on pH and water activity")
 
 

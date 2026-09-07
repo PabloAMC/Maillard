@@ -1172,3 +1172,32 @@ ran.
    the window named (the dry-side extrusion claims). The new panel claim AW-05 is declared from the
    same finding and is `fit_adjacent`: it checks the wiring, not the model, and stays out of the
    independent headline.
+
+## Amendment 25 — 2026-09-07 (Wave B15: pH and the dry-side water activity on the acrylamide lane)
+
+1. **THREE DECLARED TERMS, NO FIT.** `src/kinetic_core/acrylamide_conditions.py`: (a) the B14 flat
+   formation a_w term's window extended from 0.88-0.99 to 0.34-0.99 (De Vleeschouwer 2007, Biotechnol.
+   Prog. 23:722, Table 2: k_F 0.71-1.09 of its 0.92 value); (b) an elimination a_w multiplier on
+   `k_acr_dp` through the 2007 k_E ratios (0.76 / 0.60 / 0.33 / 0.37 at a_w 0.34 / 0.59 / 0.73 / 0.82),
+   joining 1.0 at 0.88 where the 2008 series found the constants flat, deficit scaled 0-1.2 by the
+   envelope; (c) initial-pH factors 10^(0.235 (pH - 6.8)) on `k_asn_glc` and 10^(0.149 (pH - 6.8)) on
+   `k_acr_dp` (De Vleeschouwer 2006, JAFC 54:7847, Table 1, phosphate; the paper's ln-slopes 0.5414 and
+   0.3442 converted to decades; bands 0.114-0.281 and 0.116-0.155 span the potato-matrix slopes and the
+   SEs), measured window pH 4-8, held at the edge outside it. Within-study ratios installed as constants
+   with bands: the standing of a measured barrier override, not of a fitted coordinate.
+2. **WHAT MAY NOT MOVE.** At a_w None and pH 6.8 every factor is exactly 1.0; every panel row, fit
+   report and earlier wave reproduces (`tests/unit/test_kinetic_core_b15.py`). No fit row is added or
+   read. The registry's ban on the fabricated ~2000x pH factor stands: this factor is x0.22 at pH 4.
+3. **WHAT THE ENGINE NOW ANSWERS.** pH comparisons on the acrylamide lane inside 4-8 and a_w
+   comparisons inside 0.34-0.99, each printing the term, its band and its source; comparisons that
+   cross either window are refused with the window named. PH-ACR-01 is declared from the same paper
+   (`fit_adjacent`) and checks the wiring.
+4. **ALSO IN THIS WAVE (W6 groundwork).** The sulfur lane's TTCA is chargeable by name (`TTCA`,
+   `cys-amadori`, ...) and counts as a sulfur source (Zhai 2020: the group's xylose-cysteine intermediate
+   is ~94 % TTCA); the trunk's 3-deoxy- and 1-deoxyglucosone are addressable as targets. No rate moves.
+5. **TWO SCORER RULES, SAME DAY.** (a) An unstated input is SWEPT, not invented: a panel claim may
+   declare `unstated_inputs: {ph: [5, 7, 9]}`; it is scored at every value and the verdict stands only
+   when unanimous, otherwise it is not evaluable and names the values that agreed (Wang 2026's series
+   pH). (b) A `ranking` claim scores one pot's several observables against the measured order, each
+   step beyond the flat tolerance. (c) A panel system may declare its buffer, which the CLI spec now
+   carries to the sulfur lane, so a stated pot is charged as stated.
