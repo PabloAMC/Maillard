@@ -389,7 +389,7 @@ FIELD_STATUS = {
     "rates at several temperatures": ("#2B5DA8", "-", 2.4),
     "rates or yields at one temperature": ("#178F6E", "-", 2.0),
     "mechanism only (labelling, products)": ("#9AA6A3", "-", 1.6),
-    "open: no published rate": ("#B23A3A", "--", 2.0),
+    "measured once, at 121 °C; temperature dependence and reversibility open": ("#B23A3A", "--", 2.0),
 }
 
 
@@ -413,20 +413,20 @@ def fig_field_scheme() -> None:
     edges = [   # (from, to, status, label, rad, label dy)
         ("sug", "ama", S[0], "Martins 2005, 3 T", 0.0, 0.48), ("ama", "dox", S[0], "Martins 2005", 0.12, 0.0), ("ama", "dox2", S[0], "", 0.12, 0.0),
         ("ama", "frag", S[0], "Martins 2005; Kocadagli 2016 (glass)", 0.12, 0.0),
-        ("dox", "hmf", S[0], "Martins 2005; Kocadagli 2016", 0.0, 0.48), ("dox2", "fur", S[1], "Kocadagli 2016, glass only", 0.0, 0.48),
+        ("dox", "hmf", S[0], "Martins 2005; Kocadagli 2016", 0.0, 0.48), ("dox2", "fur", S[0], "Kocadagli 2016: 160-200 C, glass only", 0.0, 0.48),
         ("frag", "str", S[1], "Hofmann 2000: yields at 98 C", 0.0, 0.48, -0.6), ("dox2", "frag", S[0], "", 0.12, 0.0),
-        ("hmf", "mel", S[1], "Martins 2005, lumped", 0.12, 0.0), ("str", "pyr", S[2], "mechanism", 0.0, 0.48), ("fur", "mel", S[2], "", 0.12, 0.0),
-        ("cys", "h2s", S[1], "Hofmann 1998, 145 C", 0.0, 0.48), ("cys", "ttca", S[1], "Zhai 2021: 3 T, zero order", 0.35, -0.72, -0.9),
-        ("ttca", "thiol", S[1], "Hofmann 1998 fed pots, 145 C", 0.0, 0.48),
+        ("frag", "mel", S[1], "Martins 2005: from methylglyoxal, lumped", 0.18, 0.55, 1.2), ("str", "pyr", S[2], "mechanism", 0.0, 0.48),
+        ("cys", "h2s", S[1], "Hofmann 1998, 145 C", 0.0, 0.48), ("cys", "ttca", S[0], "Zhai 2021: 100-140 C, zero order", 0.35, -0.72, -0.9),
+        ("ttca", "thiol", S[1], "Kang 2026, Zhai 2023: 100-140 C levels", 0.0, 0.48),
         ("h2s", "thiol", S[1], "Whitfield 1999 / 2001: 140 C, pH 4.5 and 6.5", 0.32, -1.05, 0.6),
         ("fur", "thiol", S[1], "norfuraneol + H2S, 145 C", 0.12, -0.55, 0.95), ("hmf", "thiol", S[1], "furfural + H2S, 145 C", 0.12, 0.35, 0.95),
-        ("thiol", "sink", S[3], "no rate in any cooking pot", 0.0, 0.48),
+        ("thiol", "sink", S[3], "Kumazawa 2003: 121 C only; disulfides never quantified", 0.0, 0.48), ("frag", "h2s", S[2], "Strecker of cysteine (mechanism)", -0.25, -0.35, -0.5),
         ("asn", "acr", S[0], "De Vleeschouwer 2006-09, Knol: 120-200 C, pH, a_w", 0.0, 0.48), ("acr", "acr2", S[0], "same series", 0.0, 0.48),
         ("lip", "ald", S[1], "Frankel 1989", 0.0, 0.48), ("ald", "lm", S[2], "Wang 2022, products", 0.0, 0.48),
     ]
     fig, ax = plt.subplots(figsize=(15, 8.6))
     ax.set_xlim(-0.9, 9.5)
-    ax.set_ylim(-2.5, 6.3)
+    ax.set_ylim(-3.2, 6.3)
     ax.axis("off")
     bw, bh = 1.35, 0.72
     for a, b, st, lab, rad, dy, *dx in edges:
@@ -446,7 +446,7 @@ def fig_field_scheme() -> None:
                       (-0.85, 0.15, "ASPARAGINE"), (-0.85, -1.15, "FAT")):
         ax.text(x, y, txt, fontsize=8.5, color=MUTED, fontweight="bold", ha="left")
     handles = [plt.Line2D([0], [0], color=c, ls=ls, lw=lw, label=s) for s, (c, ls, lw) in FIELD_STATUS.items()]
-    ax.legend(handles=handles, loc="lower right", fontsize=8.5, frameon=False, title="how well the published literature has measured the step", title_fontsize=8.5)
+    ax.legend(handles=handles, loc="upper right", bbox_to_anchor=(1.0, 0.0), fontsize=8.5, frameon=False, ncol=2, title="how well the published literature has measured the step", title_fontsize=8.5)
     ax.set_title("The Maillard reaction as the field draws it, and how well each part has been measured", loc="left", fontsize=11.5)
     fig.tight_layout()
     fig.savefig(OUT / "14_field_scheme.png", bbox_inches="tight")

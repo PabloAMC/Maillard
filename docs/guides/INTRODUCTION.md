@@ -22,9 +22,11 @@ the Maillard chemistry. This scheme has been stable since Hodge drew it in 1953;
 
 The colours are the point. Dark blue steps have published rate constants at several temperatures;
 green steps a rate or a yield at one temperature; grey steps are known as mechanisms from
-isotope-labelling work but have no rate; the dashed red step has no published rate at all. Read that
+isotope-labelling work but have no rate; the dashed red step is measured at one temperature only, in
+one laboratory, and its temperature dependence and reversibility are open. Read that
 way, the sugar and acrylamide branches are quantified, thiol formation is measured once, and thiol
-removal, the step every meaty-aroma prediction ends on, has never been measured in a cooking pot.
+removal, the step every meaty-aroma prediction ends on, has been measured once, at 121 °C in one
+laboratory, with no temperature dependence and without the disulfides it forms ever being quantified.
 
 ## 2. Where the measurements sit
 
