@@ -68,16 +68,16 @@ The engine returns a number but declares the route unidentified; the rows leave 
 
 | # | benchmark | compound | VoI | miss (log10) | template |
 |---|---|---|---|---|---|
-| 1 | `external_validation_liu_2023_ppi_offnote_baseline` | hexanal | 17.66 | 3.61 | missing_positive_flavor_anchor |
-| 2 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.44 | 1.38 | free_precursor_sulfur_yield |
-| 3 | `mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.43 | 1.37 | free_precursor_sulfur_yield |
-| 4 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.02 | 1.39 | free_precursor_sulfur_yield |
-| 5 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.67 | 1.25 | free_precursor_sulfur_yield |
-| 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 11.54 | 1.98 | free_precursor_sulfur_yield |
-| 7 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.46 | 1.19 | free_precursor_sulfur_yield |
-| 8 | `soy_isolate_40C_PratapSingh2021` | hexanal | 11.39 | 2.87 | missing_positive_flavor_anchor |
-| 9 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.86 | 1.45 | free_precursor_sulfur_yield |
-| 10 | `external_validation_bi_2020_raw_pea_hexanal` | hexanal | 10.38 | 2.66 | missing_positive_flavor_anchor |
+| 1 | `external_validation_liu_2023_ppi_offnote_baseline` | hexanal | 17.14 | 3.38 | missing_positive_flavor_anchor |
+| 2 | `mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.83 | 1.40 | free_precursor_sulfur_yield |
+| 3 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.82 | 1.39 | free_precursor_sulfur_yield |
+| 4 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.55 | 1.41 | free_precursor_sulfur_yield |
+| 5 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.21 | 1.36 | free_precursor_sulfur_yield |
+| 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 11.44 | 1.97 | free_precursor_sulfur_yield |
+| 7 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.39 | 1.17 | free_precursor_sulfur_yield |
+| 8 | `soy_isolate_40C_PratapSingh2021` | hexanal | 11.00 | 2.64 | missing_positive_flavor_anchor |
+| 9 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.96 | 1.45 | free_precursor_sulfur_yield |
+| 10 | `external_validation_bi_2020_raw_pea_hexanal` | hexanal | 10.00 | 2.43 | missing_positive_flavor_anchor |
 
 ## 6. What you could predict if you had it
 
