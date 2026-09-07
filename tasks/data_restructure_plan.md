@@ -1312,10 +1312,14 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       **B13 (next): glucosone / glyoxal / diacetyl species from Kocadagli JAFC + Gursul Aktag; Lee 2022/2024 and
       Brands 2002 as validation sets; De Vleeschouwer 2009 for the acrylamide lane's a_w; envelope sampling of the
       B12 bands; dossiers for Balagiannis 2010, Jousse 2002, Piornos 2025 (owner-supplied 2026-09-07).**
-- [ ] **W4 part 2 (B13). Trunk lane from the on-disk kinetic papers** (Bell 1995, Lievonen 2002, Miao
-      2004, Pereyra Gonzales 2010, Kocadagli 2016 x2, Sen 2022, Agcam 2022, Hidalgo 1993, Zamora
-      2013, Gursul Aktag 2020; Goncuoglu Tas 2017 has no Ea): rate constants, Ea, a_w dependence;
-      the first a_w term in any lane.
+- [x] **W4 part 2 DONE 2026-09-07 (wave B13).** Trunk lane from the on-disk kinetic papers (Bell 1995,
+      Lievonen 2002, Miao 2004, Pereyra Gonzales 2010, Kocadagli 2016 x2, Sen 2022, Agcam 2022, Hidalgo
+      1993, Zamora 2013, Gursul Aktag 2020; Goncuoglu Tas 2017 has no Ea): glucosone, glyoxal and
+      diacetyl added trunk-only from Kocadagli 2016 (`kinetic_core_b13_prereg.md`, Amendment 22); the
+      envelope samples the B12 a_w/pH bands. Validation search CLOSED: Lee 2022/2024 are baked model
+      cakes (non-isothermal, figure-only, mmol/g DM) and Brands 2002 x2 quantify melanoidins, so no
+      dicarbonyl validation row exists; the wishlist names the pot to run. Acrylamide a_w term still
+      blocked on De Vleeschouwer 2008 (10.1021/jf8006294, not on disk).
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
 

@@ -68,3 +68,20 @@ because the glyoxal sink carries the authors' fixed-zero barrier. That is a test
 the first item the wishlist names. Scorecard 4/39 and 3/38, directional 18/30 and envelope coverage
 5/33 unchanged; the envelope's median width moved 1.369 -> 1.338 dex because the two B12 trunk bands
 now join the draw table (they are inert on every panel row today).
+
+## Validation search, closed (2026-09-07)
+
+The three declared candidates were read from the PDFs on disk:
+
+- **Lee 2022** (Food Chem 376:131917) and **Lee 2024** (the companion volatiles paper): glucose and
+  glucose + leucine MODEL CAKES baked at 140-200 C. The temperature is a measured profile (surface,
+  bottom, centre; their Figure 1), the matrix is a drying solid, and the dicarbonyls (glucosone, 1-DG,
+  3-DG, 3,4-DDG, glyoxal, methylglyoxal, diacetyl) appear only in Figure 4 in mmol per g dry matter.
+  There is no isothermal aqueous row to type, and a digitised baking curve would need a moisture and
+  temperature-profile model the trunk lane does not carry. NOT a validation row.
+- **Brands 2002** (Int. Congr. Ser. 1245:249) and **Brands 2002b** (JAFC 50:1178): melanoidin
+  quantification in sugar-casein systems. No dicarbonyl is measured. NOT a validation row.
+
+The three species therefore remain without a validation row; the wishlist entry (an isothermal aqueous
+glucose-amine pot with glucosone, glyoxal and diacetyl quantified against time by o-PDA derivatisation)
+stands as the measurement that would test them.
