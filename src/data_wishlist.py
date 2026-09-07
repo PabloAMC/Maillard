@@ -50,7 +50,7 @@ _REACTION_RX = re.compile(
     r'(?:,\s*"(?P<doc>(?:[^"\\]|\\.)*)")?', re.S,
 )
 #: Bookkeeping pools a bench scientist does not quantify; dropped from measurement sentences.
-_POOLS = {"FRAG_C", "FRAG_S", "FRAG_N", "CBX", "ACID", "OLG", "OX"}
+_POOLS = {"FRAG_C", "FRAG_S", "FRAG_N", "CBX", "ACID", "OLG", "OX", "OXR", "OXV"}   # B11: the oxygen pools are bookkeeping
 #: Decay-family activation energies are shared by every step of the family, not one reaction.
 _DECAY_FAMILY_TEXT = {
     "thiol_sink": "every step that removes a thiol into the matrix sink (the k_thiol_decay / k_dimer_decay steps)",
