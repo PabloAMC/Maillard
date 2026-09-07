@@ -4,10 +4,10 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "28712e0a6fe2bbd861b5a8a272f8e68f56b40419",
-      "short": "28712e0a",
+      "commit": "d72560db5270ec278e33836808a6b9091afe49bc",
+      "short": "d72560db",
       "branch": "cleaning",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "7e8262446cfefbdb680d2b1aaa3b2adc689b792ad886211579984c2df144277f"
+        "sha256": "1f95136a5ef2f51a4b3127e5a777273ea36cb0ceba588a62b18c6902b9ab06ce"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
