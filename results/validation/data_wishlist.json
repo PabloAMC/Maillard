@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "1b3e99066163c59040f074f64d30efeeb37e7f99",
-      "short": "1b3e9906",
+      "commit": "6e33af830c98d3a0eb5124bd848b1be5b775b49a",
+      "short": "6e33af83",
       "branch": "cleaning",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "1ac1a34fc95ec9ab801af0f6fcbce6f8ef148533bc8a5d3c9a2c46a1f33b1603"
+        "sha256": "409a851fe33fa65da47430ee3d83c3eb0217d8c83e8e31c26653f29cad2da4e9"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -544,16 +544,6 @@
       "structural_block": "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
     },
     {
-      "axis": "time",
-      "agree": 2,
-      "evaluable": 2,
-      "not_evaluable": 0,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.342,
-      "additional_agreeing_claims_to_trust": 2,
-      "structural_block": null
-    },
-    {
       "axis": "additive_cysteine",
       "agree": 2,
       "evaluable": 3,
@@ -574,13 +564,23 @@
       "structural_block": null
     },
     {
+      "axis": "time",
+      "agree": 3,
+      "evaluable": 6,
+      "not_evaluable": 3,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.188,
+      "additional_agreeing_claims_to_trust": 9,
+      "structural_block": null
+    },
+    {
       "axis": "sugar_identity",
       "agree": 4,
-      "evaluable": 9,
+      "evaluable": 10,
       "not_evaluable": 7,
       "verdict": "do-not-use",
-      "wilson_lower_bound": 0.189,
-      "additional_agreeing_claims_to_trust": 16,
+      "wilson_lower_bound": 0.168,
+      "additional_agreeing_claims_to_trust": 20,
       "structural_block": null
     },
     {
@@ -712,10 +712,6 @@
       "you_could_predict": "the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "2 more independent ordering claims on time (all agreeing)",
-      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'caution'"
-    },
-    {
       "if_measured": "5 more independent ordering claims on additive_cysteine (all agreeing)",
       "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
     },
@@ -724,7 +720,11 @@
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "16 more independent ordering claims on sugar_identity (all agreeing)",
+      "if_measured": "9 more independent ordering claims on time (all agreeing)",
+      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'do-not-use'"
+    },
+    {
+      "if_measured": "20 more independent ordering claims on sugar_identity (all agreeing)",
       "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
     },
     {

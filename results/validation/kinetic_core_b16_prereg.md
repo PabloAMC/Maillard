@@ -125,3 +125,11 @@ P(ships) 0.20 -> did not.
 **Next (plan W7):** a sink-structure wave -- reversible thiol dimerisation with a temperature-dependent
 equilibrium, and the pentose supply at 100 C -- pre-registered against the same ten rows plus the fed
 pots. Until then the panel keeps SCH-T-01 as a miss and the Yiltirak ladder as the 14x-vs-198x lever.
+
+**Addendum (same day): Wang 2022 (FFJ, 10.1002/ffj.3710), a third laboratory with a stated vessel.**
+Cysteine + xylose 400 mM each in 0.2 M phosphate pH 5.5, 5 mL in a 15 mL vial, 100-140 C x 30-180 min
+(heat maps; the text states the shapes). On the shipped B9 lane: MFT at 100 C 185 / 498 / 391 ug/L at
+30 / 90 / 180 min (peaks at 90 min; the pot rises to 180: MISS), FFT at 100 C rises (AGREE), and at 140 C
+both thiols fall three decades over 30 -> 180 min (MFT 2510 -> 2.8, FFT 17200 -> 62 ug/L) where the pot
+declines gently after 60 min (two MISSES). The sinks are too strong at 140 C as well, not only mis-sloped:
+W7's sink structure must be weaker everywhere and saturable, not a re-tuned Arrhenius step.

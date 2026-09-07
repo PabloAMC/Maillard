@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "91df11cababdb045360455eb59bef6ab6d70ae34",
-      "short": "91df11ca",
+      "commit": "6e33af830c98d3a0eb5124bd848b1be5b775b49a",
+      "short": "6e33af83",
       "branch": "cleaning",
       "dirty": true
     },
@@ -54,7 +54,7 @@
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "d87605276e59cde51eb00190cd8bb90630bc5ec646488b51fab10ed095dca1fe"
+        "sha256": "71ee3f3e15e6affe0d2c1a10cc04e8e5c2b2f62c60ec49140194bc087f6bc1e6"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,16 +80,16 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "d87605276e59cde51eb00190cd8bb90630bc5ec646488b51fab10ed095dca1fe",
-    "claims": 83,
+    "sha256": "71ee3f3e15e6affe0d2c1a10cc04e8e5c2b2f62c60ec49140194bc087f6bc1e6",
+    "claims": 87,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
     "wave": "S2 (directional accuracy)"
   },
   "summary": {
     "headline": [
-      19,
-      33
+      20,
+      37
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -195,17 +195,21 @@
           "rate": 0.6
         },
         "time": {
-          "agree": 2,
-          "evaluable": 2,
+          "agree": 3,
+          "evaluable": 6,
           "not_evaluable": 3,
-          "misses": [],
+          "misses": [
+            "WANG22-T-01",
+            "WANG22-T-03",
+            "WANG22-T-04"
+          ],
           "mechanism_absent": 0,
-          "rate": 1.0
+          "rate": 0.5
         }
       },
       "total": {
-        "agree": 19,
-        "evaluable": 33,
+        "agree": 20,
+        "evaluable": 37,
         "not_evaluable": 30,
         "misses": [
           "SUG-03",
@@ -221,10 +225,13 @@
           "YIL-01",
           "YIL-02",
           "DIC-01",
-          "DIC-03"
+          "DIC-03",
+          "WANG22-T-01",
+          "WANG22-T-03",
+          "WANG22-T-04"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5757575757575758
+        "rate": 0.5405405405405406
       },
       "ph_aw": {
         "agree": 5,
@@ -238,8 +245,8 @@
         "rate": 0.7142857142857143
       },
       "excluding_ph_aw": {
-        "agree": 14,
-        "evaluable": 26,
+        "agree": 15,
+        "evaluable": 30,
         "not_evaluable": 23,
         "misses": [
           "SUG-03",
@@ -253,10 +260,13 @@
           "YIL-01",
           "YIL-02",
           "DIC-01",
-          "DIC-03"
+          "DIC-03",
+          "WANG22-T-01",
+          "WANG22-T-03",
+          "WANG22-T-04"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5384615384615384
+        "rate": 0.5
       }
     },
     "all_claims": {
@@ -374,19 +384,22 @@
           "rate": 0.6
         },
         "time": {
-          "agree": 2,
-          "evaluable": 3,
+          "agree": 3,
+          "evaluable": 7,
           "not_evaluable": 3,
           "misses": [
-            "SCH-T-01"
+            "SCH-T-01",
+            "WANG22-T-01",
+            "WANG22-T-03",
+            "WANG22-T-04"
           ],
           "mechanism_absent": 0,
-          "rate": 0.6666666666666666
+          "rate": 0.42857142857142855
         }
       },
       "total": {
-        "agree": 23,
-        "evaluable": 48,
+        "agree": 24,
+        "evaluable": 52,
         "not_evaluable": 35,
         "misses": [
           "SUG-03",
@@ -413,10 +426,13 @@
           "YIL-02",
           "DIC-01",
           "DIC-03",
-          "SCH-T-01"
+          "SCH-T-01",
+          "WANG22-T-01",
+          "WANG22-T-03",
+          "WANG22-T-04"
         ],
         "mechanism_absent": 4,
-        "rate": 0.4791666666666667
+        "rate": 0.46153846153846156
       },
       "ph_aw": {
         "agree": 7,
@@ -432,8 +448,8 @@
         "rate": 0.6363636363636364
       },
       "excluding_ph_aw": {
-        "agree": 16,
-        "evaluable": 37,
+        "agree": 17,
+        "evaluable": 41,
         "not_evaluable": 28,
         "misses": [
           "SUG-03",
@@ -456,10 +472,13 @@
           "YIL-02",
           "DIC-01",
           "DIC-03",
-          "SCH-T-01"
+          "SCH-T-01",
+          "WANG22-T-01",
+          "WANG22-T-03",
+          "WANG22-T-04"
         ],
         "mechanism_absent": 4,
-        "rate": 0.43243243243243246
+        "rate": 0.4146341463414634
       }
     },
     "not_evaluable_reasons": {
@@ -477,7 +496,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 40.6
+    "wall_seconds": 43.3
   },
   "claims": [
     {
@@ -6194,6 +6213,472 @@
           "reasons": [],
           "warnings": [],
           "value_ug_per_l": 16.241426815084704
+        }
+      ]
+    },
+    {
+      "claim_id": "WANG22-T-01",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "increasing",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In cysteine + xylose (400 mM each, 0.2 M phosphate pH 5.5, 15 mL vial) at 100 C, MFT INCREASES with time from 30 to 180 min.",
+      "source": "wang2022",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        185.20397387839546,
+        498.3978814308694,
+        390.81921238585403
+      ],
+      "log10_steps": [
+        0.42992588657287223,
+        -0.10560028240425276
+      ],
+      "arms": [
+        {
+          "label": "30 min",
+          "spec": {
+            "name": "30 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 100.0,
+            "time_min": 30.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 185.20397387839546
+        },
+        {
+          "label": "90 min",
+          "spec": {
+            "name": "90 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 100.0,
+            "time_min": 90.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 498.3978814308694
+        },
+        {
+          "label": "180 min",
+          "spec": {
+            "name": "180 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 100.0,
+            "time_min": 180.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 390.81921238585403
+        }
+      ]
+    },
+    {
+      "claim_id": "WANG22-T-02",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "increasing",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same pot at 100 C, FFT INCREASES with time from 30 to 180 min.",
+      "source": "wang2022",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        2744.2670148369343,
+        20082.94587649352,
+        35674.866666949645
+      ],
+      "log10_steps": [
+        0.8644010522661016,
+        0.2495349407966539
+      ],
+      "arms": [
+        {
+          "label": "30 min",
+          "spec": {
+            "name": "30 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 100.0,
+            "time_min": 30.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 2744.2670148369343
+        },
+        {
+          "label": "90 min",
+          "spec": {
+            "name": "90 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 100.0,
+            "time_min": 90.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 20082.94587649352
+        },
+        {
+          "label": "180 min",
+          "spec": {
+            "name": "180 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 100.0,
+            "time_min": 180.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 35674.866666949645
+        }
+      ]
+    },
+    {
+      "claim_id": "WANG22-T-03",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "peak",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same pot at 140 C, MFT rises then FALLS within 30-180 min (the decline begins at 60 min).",
+      "source": "wang2022",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        2512.11652926388,
+        692.8182304515265,
+        32.697463520807474,
+        2.7732319586479255
+      ],
+      "log10_steps": [
+        -0.5594204741468387,
+        -1.3261052430293083,
+        -1.0715278675719377
+      ],
+      "arms": [
+        {
+          "label": "30 min",
+          "spec": {
+            "name": "30 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 30.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 2512.11652926388
+        },
+        {
+          "label": "60 min",
+          "spec": {
+            "name": "60 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 60.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 692.8182304515265
+        },
+        {
+          "label": "120 min",
+          "spec": {
+            "name": "120 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 120.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 32.697463520807474
+        },
+        {
+          "label": "180 min",
+          "spec": {
+            "name": "180 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 180.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 2.7732319586479255
+        }
+      ]
+    },
+    {
+      "claim_id": "WANG22-T-04",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "peak",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same pot at 140 C, FFT rises then FALLS within 30-180 min (the decline begins at 60 min).",
+      "source": "wang2022",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        17184.65925850516,
+        7047.711596341671,
+        731.6088487862672,
+        61.50086350553256
+      ],
+      "log10_steps": [
+        -0.3870928015236497,
+        -0.9837691741267004,
+        -1.075397736065723
+      ],
+      "arms": [
+        {
+          "label": "30 min",
+          "spec": {
+            "name": "30 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 30.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 17184.65925850516
+        },
+        {
+          "label": "60 min",
+          "spec": {
+            "name": "60 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 60.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 7047.711596341671
+        },
+        {
+          "label": "120 min",
+          "spec": {
+            "name": "120 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 120.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 731.6088487862672
+        },
+        {
+          "label": "180 min",
+          "spec": {
+            "name": "180 min",
+            "precursors": {
+              "L-Cysteine": 400.0,
+              "D-Xylose": 400.0
+            },
+            "temp_C": 140.0,
+            "time_min": 180.0,
+            "ph": 5.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 61.50086350553256
         }
       ]
     }

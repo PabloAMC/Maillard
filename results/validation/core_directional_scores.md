@@ -1,10 +1,10 @@
 # Core directional scores (the kinetic core on the directional claims panel)
 
-Panel `docs/validation/directional_claims_panel.yml` (83 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
+Panel `docs/validation/directional_claims_panel.yml` (87 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 19/33 (58%)**; 30 independent claims not evaluable
-* independent, excluding pH and water activity: 14/26 (54%); pH and water activity alone: 5/7 (71%)
-* all claims (independent + fit-adjacent + fit-system overlap): 23/48 (48%); 35 not evaluable
+* **headline (strictly independent, evaluable): 20/37 (54%)**; 30 independent claims not evaluable
+* independent, excluding pH and water activity: 15/30 (50%); pH and water activity alone: 5/7 (71%)
+* all claims (independent + fit-adjacent + fit-system overlap): 24/52 (46%); 35 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
 * not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); a predicted concentration is zero; no direction is defined (4); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
@@ -22,7 +22,7 @@ Panel `docs/validation/directional_claims_panel.yml` (83 claims, flat tolerance 
 | scope | 0 | 0 | - | 3 | - |
 | sugar_identity | 4 | 10 | 0.40 | 7 | SUG-03, SUG-12, HOF-02, HOF-03, DIC-01, DIC-03 |
 | temperature | 6 | 10 | 0.60 | 3 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
-| time | 2 | 2 | 1.00 | 3 | - |
+| time | 3 | 6 | 0.50 | 3 | WANG22-T-01, WANG22-T-03, WANG22-T-04 |
 
 ## Per category (all claims)
 
@@ -38,7 +38,7 @@ Panel `docs/validation/directional_claims_panel.yml` (83 claims, flat tolerance 
 | scope | 0 | 0 | - | 3 |
 | sugar_identity | 6 | 14 | 0.43 | 7 |
 | temperature | 6 | 10 | 0.60 | 3 |
-| time | 2 | 3 | 0.67 | 3 |
+| time | 3 | 7 | 0.43 | 3 |
 
 ## Claims
 
@@ -127,3 +127,7 @@ Panel `docs/validation/directional_claims_panel.yml` (83 claims, flat tolerance 
 | RIB-T-02 | time | independent | FFT | flat | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | HEX-T-01 | time | independent | FFT | increasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | SCH-T-01 | time | fit_system_overlap | MFT | increasing | **disagree** | sulfur | 65.9, 130, 36.4, 16.2 |  |
+| WANG22-T-01 | time | independent | MFT | increasing | **disagree** | sulfur | 185, 498, 391 |  |
+| WANG22-T-02 | time | independent | FFT | increasing | **agree** | sulfur | 2.74e+03, 2.01e+04, 3.57e+04 |  |
+| WANG22-T-03 | time | independent | MFT | peak | **disagree** | sulfur | 2.51e+03, 693, 32.7, 2.77 |  |
+| WANG22-T-04 | time | independent | FFT | peak | **disagree** | sulfur | 1.72e+04, 7.05e+03, 732, 61.5 |  |

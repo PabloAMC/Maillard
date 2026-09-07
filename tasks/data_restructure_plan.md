@@ -1354,7 +1354,10 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       pentose supply at 100 C (formation dries up at 6 h in the model, not in the pot); the TTCA return
       path (k_ttca_cys against Zhai 2021). Pre-register against B16's ten rows + the fed pots; the
       Yiltirak levels as the out-of-sample lever. Also open: DIC-01/DIC-03 (aqueous glucose dicarbonyls:
-      the B7/B13 glass-to-water transfer), HEX-T-01 (a hexose -> FFT route, Liu 2021).
+      the B7/B13 glass-to-water transfer), HEX-T-01 (a hexose -> FFT route, Liu 2021). Wang 2022 (FFJ,
+      third lab, stated vessel, 100-140 C x 30-180 min; owner's download): on B9 MFT at 100 C peaks at
+      90 min (pot rises to 180), at 140 C both thiols fall 3 dex in 150 min (pot declines gently after
+      60 min) -- the sinks are too strong at BOTH ends. Headline 19/33 -> 20/37 (FFT rise at 100 C agrees).
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
 - [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI

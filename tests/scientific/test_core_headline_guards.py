@@ -274,7 +274,8 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-09-07 (B14): AW-05, the declared-flat acrylamide a_w claim (fit_adjacent), 74 -> 75.
     # RE-PINNED 2026-09-07 (B15): PH-ACR-01 (fit_adjacent), DIC-01 and DIC-02 (Zhang 2020), 75 -> 78.
     # RE-PINNED 2026-09-07 (B16 reads): DIC-03, RIB-T-01/02, HEX-T-01, SCH-T-01, 78 -> 83.
-    assert payload["panel"]["claims"] == 83
+    # RE-PINNED 2026-09-07 (Wang 2022 read): WANG22-T-01..04 (a third lab, 100 and 140 C shapes), 83 -> 87.
+    assert payload["panel"]["claims"] == 87
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
@@ -291,9 +292,11 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # 18/30 -> 19/32; WANG-01 flips with pH and stays not evaluable; DIC-02 not evaluable (no glutamate).
     # RE-PINNED 2026-09-07 (B16 reads): DIC-03 (Leitzen) evaluable and misses, 19/32 -> 19/33; RIB-T-01/02
     # and HEX-T-01 predict zero on the shipped lane (not evaluable), SCH-T-01 is fit_system_overlap.
-    assert s["headline"] == [19, 33]
+    # RE-PINNED 2026-09-07 (Wang 2022): FFT rising at 100 C agrees; MFT at 100 C peaks early and both thiols
+    # collapse at 140 C in the lane (three misses): 19/33 -> 20/37; time 2/2 -> 3/6.
+    assert s["headline"] == [20, 37]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (14, 26)
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (15, 30)
     assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (5, 7)
     assert ind["total"]["not_evaluable"] == 30
     assert ind["total"]["mechanism_absent"] == 0
@@ -304,10 +307,10 @@ def test_core_scores_17_of_26_independent_directional_claims():
     assert cats["ph"] == (4, 5)
     assert cats["moisture_aw"] == (1, 2)   # B12: the trunk answers a_w; AW-03 agrees, AW-01 does not
     assert cats["additive_cysteine"] == (2, 3)
-    assert cats["time"] == (2, 2)
+    assert cats["time"] == (3, 6)             # Wang 2022: the sinks are too strong at 100 C and at 140 C
     readme = _doc_text(README)
-    _assert_quoted(readme, "19 of 33", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "14 of 26", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "20 of 37", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "15 of 30", "README.md", "the directional count excluding pH and water activity")
     _assert_quoted(readme, "5 of 7", "README.md", "the directional count on pH and water activity")
 
 

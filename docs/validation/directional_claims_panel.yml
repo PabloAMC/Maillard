@@ -235,6 +235,11 @@ sources:
     doi: "10.1021/bk-2000-0756.ch010"
     access: full_text
     retrieved_from: "data/articles/schieberle2000.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/schieberle2000_extraction.md"
+  wang2022:
+    citation: "Wang, Y., Xie, J., Zhang, C., Xu, Y., et al. (2022). Effect of lipid on formation of Maillard and lipid-Maillard meaty flavour compounds in heated cysteine-xylose-methyl linoleate system. Flavour Fragr. J. 37."
+    doi: "10.1002/ffj.3710"
+    access: full_text
+    retrieved_from: "data/articles/Wang2022.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/wang2022_extraction.md"
 panel:
 
   # =====================================================================
@@ -2179,3 +2184,92 @@ panel:
     fit_status: fit_system_overlap
     fit_note: "The pot is the sulfur fit's Hofmann 1998 Table-1 pentose system (145 C / 20 min in the objective) and wave B16 pre-registers this series' within-study ratios as FIT rows; the level direction is a shape check, not an independent test."
     model_scope_note: "Before B16 the shipped lane is scored here as the baseline the wave is judged against."
+
+  - claim_id: WANG22-T-01
+    statement: "In cysteine + xylose (400 mM each, 0.2 M phosphate pH 5.5, 15 mL vial) at 100 C, MFT INCREASES with time from 30 to 180 min."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "90 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: increasing
+    source:
+      ref: wang2022
+      quote: "at the lower reaction temperatures of 100 and 110 C, their levels increased with an increase in the reaction time"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+  - claim_id: WANG22-T-02
+    statement: "In the same pot at 100 C, FFT INCREASES with time from 30 to 180 min."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "90 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: increasing
+    source:
+      ref: wang2022
+      quote: "at the lower reaction temperatures of 100 and 110 C, their levels increased with an increase in the reaction time"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+  - claim_id: WANG22-T-03
+    statement: "In the same pot at 140 C, MFT rises then FALLS within 30-180 min (the decline begins at 60 min)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "60 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "120 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: peak
+    source:
+      ref: wang2022
+      quote: "at higher reaction temperatures of 120-140 C, their levels tended to first increase and then decrease with reaction time ... the amounts of 2-methyl-3-furanethiol and 2-furfurylthiol began to decrease at 60 min"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+  - claim_id: WANG22-T-04
+    statement: "In the same pot at 140 C, FFT rises then FALLS within 30-180 min (the decline begins at 60 min)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "60 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "120 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: peak
+    source:
+      ref: wang2022
+      quote: "at higher reaction temperatures of 120-140 C, their levels tended to first increase and then decrease with reaction time ... the amounts of 2-methyl-3-furanethiol and 2-furfurylthiol began to decrease at 60 min"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
