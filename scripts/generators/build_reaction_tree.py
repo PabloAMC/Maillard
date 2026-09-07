@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-The reaction tree the model carries, drawn from the code (2026-09-07), for docs/guides/STATE_OF_THE_MODEL.md.
+The reaction tree the model carries, drawn from the code (2026-09-07), for docs/guides/REACTION_TREES.md.
 
 One figure per lane (sugar, pentose-cysteine, acrylamide). Species are boxes; every step in the lane's
 reaction list is an arrow, coloured by HOW ITS RATE CONSTANT IS KNOWN:

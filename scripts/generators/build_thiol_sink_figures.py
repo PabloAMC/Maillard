@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Figures for docs/guides/STATE_OF_THE_MODEL.md (2026-09-07).
+Figures for docs/guides/INTRODUCTION.md and REACTION_TREES.md (2026-09-07).
 
 Six plots of MEASURED against MODEL for the sulfur lane's thiol-sink diagnosis. Model values are
 read from the frozen artifacts (the B16 ship rule, the directional scorecard); measured values are
@@ -382,7 +382,7 @@ def fig_repo_flow() -> None:
 
 
 # ---------------------------------------------------------------------------
-# What the FIELD knows (docs/guides/WHAT_THE_FIELD_KNOWS.md): the accepted scheme, annotated by
+# What the FIELD knows (docs/guides/INTRODUCTION.md, sec. 1-2): the accepted scheme, annotated by
 # how well each part has been measured in the published literature the repository has read.
 # ---------------------------------------------------------------------------
 FIELD_STATUS = {
@@ -406,33 +406,44 @@ def fig_field_scheme() -> None:
         "pyr": (8.5, 3.2, "pyrazines, pyrroles"),
         "cys": (0.0, 1.6, "cysteine"), "h2s": (1.7, 1.6, "H2S, NH3,\nacetaldehyde"),
         "thiol": (5.1, 1.6, "meaty thiols\nMFT, FFT"), "sink": (6.8, 1.6, "disulfides, adducts,\npolymers"),
-        "asn": (0.0, 0.3, "asparagine\n+ sugar"), "acr": (3.4, 0.3, "acrylamide"), "acr2": (5.1, 0.3, "acrylamide\nelimination"),
-        "lip": (0.0, -1.0, "unsaturated fat"), "ald": (3.4, -1.0, "hydroperoxides,\naldehydes"), "lm": (5.1, -1.0, "lipid-Maillard:\nalkylthiophenes"),
+        "ttca": (3.4, 1.6, "ring intermediate\n(TTCA), deoxypentosones"),
+        "asn": (0.0, -0.5, "asparagine\n+ sugar"), "acr": (3.4, -0.5, "acrylamide"), "acr2": (5.1, -0.5, "acrylamide\nelimination"),
+        "lip": (0.0, -1.8, "unsaturated fat"), "ald": (3.4, -1.8, "hydroperoxides,\naldehydes"), "lm": (5.1, -1.8, "lipid-Maillard:\nalkylthiophenes"),
     }
-    edges = [
-        ("sug", "ama", S[0]), ("ama", "dox", S[0]), ("ama", "dox2", S[0]), ("ama", "frag", S[0]),
-        ("dox", "hmf", S[0]), ("dox2", "fur", S[1]), ("frag", "str", S[1]), ("dox2", "frag", S[0]),
-        ("hmf", "mel", S[1]), ("str", "pyr", S[2]), ("fur", "mel", S[2]),
-        ("cys", "h2s", S[1]), ("h2s", "thiol", S[1]), ("fur", "thiol", S[1]), ("hmf", "thiol", S[1]),
-        ("thiol", "sink", S[3]),
-        ("asn", "acr", S[0]), ("acr", "acr2", S[0]), ("lip", "ald", S[1]), ("ald", "lm", S[2]),
+    edges = [   # (from, to, status, label, rad, label dy)
+        ("sug", "ama", S[0], "Martins 2005, 3 T", 0.0, 0.48), ("ama", "dox", S[0], "Martins 2005", 0.12, 0.0), ("ama", "dox2", S[0], "", 0.12, 0.0),
+        ("ama", "frag", S[0], "Martins 2005; Kocadagli 2016 (glass)", 0.12, 0.0),
+        ("dox", "hmf", S[0], "Martins 2005; Kocadagli 2016", 0.0, 0.48), ("dox2", "fur", S[1], "Kocadagli 2016, glass only", 0.0, 0.48),
+        ("frag", "str", S[1], "Hofmann 2000: yields at 98 C", 0.0, 0.48, -0.6), ("dox2", "frag", S[0], "", 0.12, 0.0),
+        ("hmf", "mel", S[1], "Martins 2005, lumped", 0.12, 0.0), ("str", "pyr", S[2], "mechanism", 0.0, 0.48), ("fur", "mel", S[2], "", 0.12, 0.0),
+        ("cys", "h2s", S[1], "Hofmann 1998, 145 C", 0.0, 0.48), ("cys", "ttca", S[1], "Zhai 2021: 3 T, zero order", 0.35, -0.72, -0.9),
+        ("ttca", "thiol", S[1], "Hofmann 1998 fed pots, 145 C", 0.0, 0.48),
+        ("h2s", "thiol", S[1], "Whitfield 1999 / 2001: 140 C, pH 4.5 and 6.5", 0.32, -1.05, 0.6),
+        ("fur", "thiol", S[1], "norfuraneol + H2S, 145 C", 0.12, -0.55, 0.95), ("hmf", "thiol", S[1], "furfural + H2S, 145 C", 0.12, 0.35, 0.95),
+        ("thiol", "sink", S[3], "no rate in any cooking pot", 0.0, 0.48),
+        ("asn", "acr", S[0], "De Vleeschouwer 2006-09, Knol: 120-200 C, pH, a_w", 0.0, 0.48), ("acr", "acr2", S[0], "same series", 0.0, 0.48),
+        ("lip", "ald", S[1], "Frankel 1989", 0.0, 0.48), ("ald", "lm", S[2], "Wang 2022, products", 0.0, 0.48),
     ]
     fig, ax = plt.subplots(figsize=(15, 8.6))
     ax.set_xlim(-0.9, 9.5)
-    ax.set_ylim(-1.7, 6.3)
+    ax.set_ylim(-2.5, 6.3)
     ax.axis("off")
     bw, bh = 1.35, 0.72
-    for a, b, st in edges:
+    for a, b, st, lab, rad, dy, *dx in edges:
+        dx = dx[0] if dx else 0.0
         colour, ls, lw = FIELD_STATUS[st]
         (xa, ya, _), (xb, yb, _) = nodes[a], nodes[b]
-        rad = 0.0 if abs(ya - yb) < 1e-9 else (0.12 if xb > xa else 0.25)
         ax.add_patch(FancyArrowPatch((xa, ya), (xb, yb), arrowstyle="-|>", mutation_scale=12, color=colour, lw=lw, linestyle=ls,
                                      connectionstyle=f"arc3,rad={rad}", shrinkA=26, shrinkB=26, zorder=1))
+        if lab:
+            xm, ym = (xa + xb) / 2 + dx, (ya + yb) / 2 + dy
+            ax.text(xm, ym, lab, fontsize=6.8, color=colour, ha="center", va="center",
+                    bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.85), zorder=4)
     for key, (x, y, label) in nodes.items():
         ax.add_patch(FancyBboxPatch((x - bw / 2, y - bh / 2), bw, bh, boxstyle="round,pad=0.02,rounding_size=0.08", fc="#F2F3F1", ec="#9AA6A3", lw=1.1, zorder=2))
         ax.text(x, y, label, ha="center", va="center", fontsize=8.6, color=INK, zorder=3)
     for x, y, txt in ((-0.85, 6.05, "SUGAR AND AMINO ACID (the Hodge scheme)"), (-0.85, 2.25, "SULFUR: CYSTEINE AND A PENTOSE"),
-                      (-0.85, 0.95, "ASPARAGINE"), (-0.85, -0.35, "FAT")):
+                      (-0.85, 0.15, "ASPARAGINE"), (-0.85, -1.15, "FAT")):
         ax.text(x, y, txt, fontsize=8.5, color=MUTED, fontweight="bold", ha="left")
     handles = [plt.Line2D([0], [0], color=c, ls=ls, lw=lw, label=s) for s, (c, ls, lw) in FIELD_STATUS.items()]
     ax.legend(handles=handles, loc="lower right", fontsize=8.5, frameon=False, title="how well the published literature has measured the step", title_fontsize=8.5)
@@ -498,12 +509,48 @@ def fig_field_coverage() -> None:
     plt.close(fig)
 
 
+def fig_how_a_model_works() -> None:
+    """The two ideas a kinetic model rests on: steps give time courses; rate constants rise with temperature."""
+    import numpy as np
+
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 3.9))
+    t = np.linspace(0, 120, 400)
+    k1, k2 = 0.05, 0.02                          # per minute: A -> B -> C
+    A = np.exp(-k1 * t)
+    B = k1 / (k2 - k1) * (np.exp(-k1 * t) - np.exp(-k2 * t))
+    C = 1 - A - B
+    a1.plot(t, A, color="#9AA6A3", lw=2, label="starting material")
+    a1.plot(t, B, color="#2B5DA8", lw=2.4, label="aroma compound (formed, then removed)")
+    a1.plot(t, C, color="#B23A3A", lw=2, label="removal product")
+    a1.set_xlabel("minutes at one temperature")
+    a1.set_ylabel("fraction of the starting amount")
+    a1.set_title("Two steps in a row: formation, then removal")
+    a1.legend(loc="center right", fontsize=8)
+    _style(a1, "fraction of the starting amount", "minutes at one temperature")
+    T = np.linspace(80, 180, 200)
+    R = 8.314e-3
+    for ea, colour, lab in ((60, "#178F6E", "activation energy 60 kJ/mol"), (100, "#D9822B", "100 kJ/mol"), (160, "#B23A3A", "160 kJ/mol")):
+        k = np.exp(-ea / R * (1 / (T + 273.15) - 1 / (145 + 273.15)))
+        a2.plot(T, k, color=colour, lw=2.2, label=lab)
+    a2.axvline(145, color="#D6DBD8", lw=1)
+    a2.text(146, 0.02, "measured here", fontsize=8, color=MUTED)
+    a2.set_yscale("log")
+    a2.set_ylim(0.005, 20)
+    a2.set_title("The same step at other temperatures, relative to 145 °C")
+    a2.legend(loc="upper left", fontsize=8)
+    _style(a2, "rate relative to the rate at 145 °C (log)", "temperature, °C")
+    fig.tight_layout()
+    fig.savefig(OUT / "16_how_a_kinetic_model_works.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     fig_map()
     fig_repo_flow()
     fig_field_scheme()
     fig_field_coverage()
+    fig_how_a_model_works()
     fig_funnel()
     fig_scorecard()
     ship = _read(V / "kinetic_core_b16_ship_rule.json")
@@ -514,7 +561,7 @@ def main() -> int:
     fig_yiltirak(ship)
     fig_ttca()
     fig_dicarbonyls(scores)
-    print(f"wrote 12 figures to {OUT}")
+    print(f"wrote 13 figures to {OUT}")
     return 0
 
 
