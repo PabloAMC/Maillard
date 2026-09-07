@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "6e33af830c98d3a0eb5124bd848b1be5b775b49a",
-      "short": "6e33af83",
+      "commit": "5a71cd4cda2a403cae080aec62fec0fb7d684f00",
+      "short": "5a71cd4c",
       "branch": "cleaning",
       "dirty": true
     },
@@ -54,7 +54,7 @@
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "71ee3f3e15e6affe0d2c1a10cc04e8e5c2b2f62c60ec49140194bc087f6bc1e6"
+        "sha256": "44c3936f48ade6de8060f94ab0f9c50e14609b43ad9f72d7de5886238bd514b6"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,16 +80,16 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "71ee3f3e15e6affe0d2c1a10cc04e8e5c2b2f62c60ec49140194bc087f6bc1e6",
-    "claims": 87,
+    "sha256": "44c3936f48ade6de8060f94ab0f9c50e14609b43ad9f72d7de5886238bd514b6",
+    "claims": 92,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
     "wave": "S2 (directional accuracy)"
   },
   "summary": {
     "headline": [
-      20,
-      37
+      23,
+      41
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -131,14 +131,15 @@
           "rate": 0.5
         },
         "ph": {
-          "agree": 4,
-          "evaluable": 5,
+          "agree": 7,
+          "evaluable": 9,
           "not_evaluable": 5,
           "misses": [
-            "MOT-01"
+            "MOT-01",
+            "CER07-PH-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.8
+          "rate": 0.7777777777777778
         },
         "process_heating": {
           "agree": 0,
@@ -208,8 +209,8 @@
         }
       },
       "total": {
-        "agree": 20,
-        "evaluable": 37,
+        "agree": 23,
+        "evaluable": 41,
         "not_evaluable": 30,
         "misses": [
           "SUG-03",
@@ -228,21 +229,23 @@
           "DIC-03",
           "WANG22-T-01",
           "WANG22-T-03",
-          "WANG22-T-04"
+          "WANG22-T-04",
+          "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5405405405405406
+        "rate": 0.5609756097560976
       },
       "ph_aw": {
-        "agree": 5,
-        "evaluable": 7,
+        "agree": 8,
+        "evaluable": 11,
         "not_evaluable": 7,
         "misses": [
           "AW-01",
-          "MOT-01"
+          "MOT-01",
+          "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.7142857142857143
+        "rate": 0.7272727272727273
       },
       "excluding_ph_aw": {
         "agree": 15,
@@ -315,16 +318,18 @@
           "rate": 0.6666666666666666
         },
         "ph": {
-          "agree": 5,
-          "evaluable": 8,
+          "agree": 8,
+          "evaluable": 13,
           "not_evaluable": 5,
           "misses": [
             "PH-01",
             "PH-02",
-            "MOT-01"
+            "MOT-01",
+            "WHI-PH-01",
+            "CER07-PH-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.625
+          "rate": 0.6153846153846154
         },
         "process_heating": {
           "agree": 0,
@@ -398,8 +403,8 @@
         }
       },
       "total": {
-        "agree": 24,
-        "evaluable": 52,
+        "agree": 27,
+        "evaluable": 57,
         "not_evaluable": 35,
         "misses": [
           "SUG-03",
@@ -429,23 +434,27 @@
           "SCH-T-01",
           "WANG22-T-01",
           "WANG22-T-03",
-          "WANG22-T-04"
+          "WANG22-T-04",
+          "WHI-PH-01",
+          "CER07-PH-01"
         ],
         "mechanism_absent": 4,
-        "rate": 0.46153846153846156
+        "rate": 0.47368421052631576
       },
       "ph_aw": {
-        "agree": 7,
-        "evaluable": 11,
+        "agree": 10,
+        "evaluable": 16,
         "not_evaluable": 7,
         "misses": [
           "PH-01",
           "PH-02",
           "AW-01",
-          "MOT-01"
+          "MOT-01",
+          "WHI-PH-01",
+          "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6363636363636364
+        "rate": 0.625
       },
       "excluding_ph_aw": {
         "agree": 17,
@@ -496,7 +505,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 43.3
+    "wall_seconds": 45.5
   },
   "claims": [
     {
@@ -6679,6 +6688,468 @@
           "reasons": [],
           "warnings": [],
           "value_ug_per_l": 61.50086350553256
+        }
+      ]
+    },
+    {
+      "claim_id": "WHI-PH-01",
+      "category": "ph",
+      "claim_type": "ordering",
+      "expected_relation": "A>B",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "fit_adjacent",
+      "statement": "Norfuraneol fed with cysteine (50 mM each, 0.5 M phosphate) at 140 C for 60 min gives far MORE free MFT at pH 4.5 than at pH 6.5 (0.150 mol % vs below 0.001 mol %, at least 150-fold).",
+      "source": "whitfield2001",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        4287.033805931926,
+        9105.213845942411
+      ],
+      "log10_ratio_B_over_A": 0.3271332419267276,
+      "arms": [
+        {
+          "label": "pH 4.5",
+          "spec": {
+            "name": "pH 4.5",
+            "precursors": {
+              "Norfuraneol": 50.0,
+              "L-Cysteine": 50.0
+            },
+            "temp_C": 140.0,
+            "time_min": 60.0,
+            "ph": 4.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Whitfield & Mottram 1999/2001: 0.5 M phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 4287.033805931926
+        },
+        {
+          "label": "pH 6.5",
+          "spec": {
+            "name": "pH 6.5",
+            "precursors": {
+              "Norfuraneol": 50.0,
+              "L-Cysteine": 50.0
+            },
+            "temp_C": 140.0,
+            "time_min": 60.0,
+            "ph": 6.5,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Whitfield & Mottram 2001 Methods: 0.5 M phosphate pH 6.5"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 9105.213845942411
+        }
+      ]
+    },
+    {
+      "claim_id": "CER07-PH-01",
+      "category": "ph",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "decreasing",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In xylose 150 mM + cysteine 50 mM + thiamine 50 mM (0.5 M phosphate, 145 C, 20 min) FFT FALLS monotonically from pH 4 to pH 7 (peak areas 431 / 368 / 185 / 0 at pH 4 / 5 / 6 / 7).",
+      "source": "cerny2007",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        2461.746478225258,
+        309.60935893274365,
+        0.01893537020527611,
+        0.10380427282915822
+      ],
+      "log10_steps": [
+        -0.9004292451417308,
+        -4.213540279720601,
+        0.7389414300395815
+      ],
+      "arms": [
+        {
+          "label": "pH 4",
+          "spec": {
+            "name": "pH 4",
+            "precursors": {
+              "D-Xylose": 150.0,
+              "L-Cysteine": 50.0,
+              "Thiamine": 50.0
+            },
+            "temp_C": 145.0,
+            "time_min": 20.0,
+            "ph": 4.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 2461.746478225258
+        },
+        {
+          "label": "pH 5",
+          "spec": {
+            "name": "pH 5",
+            "precursors": {
+              "D-Xylose": 150.0,
+              "L-Cysteine": 50.0,
+              "Thiamine": 50.0
+            },
+            "temp_C": 145.0,
+            "time_min": 20.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 309.60935893274365
+        },
+        {
+          "label": "pH 6",
+          "spec": {
+            "name": "pH 6",
+            "precursors": {
+              "D-Xylose": 150.0,
+              "L-Cysteine": 50.0,
+              "Thiamine": 50.0
+            },
+            "temp_C": 145.0,
+            "time_min": 20.0,
+            "ph": 6.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 0.01893537020527611
+        },
+        {
+          "label": "pH 7",
+          "spec": {
+            "name": "pH 7",
+            "precursors": {
+              "D-Xylose": 150.0,
+              "L-Cysteine": 50.0,
+              "Thiamine": 50.0
+            },
+            "temp_C": 145.0,
+            "time_min": 20.0,
+            "ph": 7.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 0.10380427282915822
+        }
+      ]
+    },
+    {
+      "claim_id": "CER07-PH-02",
+      "category": "ph",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "decreasing",
+      "observables": [
+        "furfural"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same pot furfural FALLS from pH 4 to pH 6 (208 / 158 / 0 at pH 4 / 5 / 6): the furfural -> FFT branch is shut by neutral pH.",
+      "source": "cerny2007",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        1028.8199276764594,
+        830.3798213773456,
+        89.92511954838264
+      ],
+      "log10_steps": [
+        -0.09306258063584069,
+        -0.965395763219828
+      ],
+      "arms": [
+        {
+          "label": "pH 4",
+          "spec": {
+            "name": "pH 4",
+            "precursors": {
+              "D-Xylose": 150.0,
+              "L-Cysteine": 50.0,
+              "Thiamine": 50.0
+            },
+            "temp_C": 145.0,
+            "time_min": 20.0,
+            "ph": 4.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 1028.8199276764594
+        },
+        {
+          "label": "pH 5",
+          "spec": {
+            "name": "pH 5",
+            "precursors": {
+              "D-Xylose": 150.0,
+              "L-Cysteine": 50.0,
+              "Thiamine": 50.0
+            },
+            "temp_C": 145.0,
+            "time_min": 20.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 830.3798213773456
+        },
+        {
+          "label": "pH 6",
+          "spec": {
+            "name": "pH 6",
+            "precursors": {
+              "D-Xylose": 150.0,
+              "L-Cysteine": 50.0,
+              "Thiamine": 50.0
+            },
+            "temp_C": 145.0,
+            "time_min": 20.0,
+            "ph": 6.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 89.92511954838264
+        }
+      ]
+    },
+    {
+      "claim_id": "MOT02-PH-01",
+      "category": "ph",
+      "claim_type": "ordering",
+      "expected_relation": "A>B",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "independent",
+      "statement": "Ribose 50 mM + cysteine 50 mM in 0.2 M pyrophosphate buffer at 140 C for 30 min gives 3.7x MORE MFT at pH 4.2 than at pH 5.6.",
+      "source": "mottram2002",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        403.8310255843583,
+        373.7814420074287
+      ],
+      "log10_ratio_B_over_A": -0.033581946769767584,
+      "arms": [
+        {
+          "label": "pH 4.2",
+          "spec": {
+            "name": "pH 4.2",
+            "precursors": {
+              "D-Ribose": 50.0,
+              "L-Cysteine": 50.0
+            },
+            "temp_C": 140.0,
+            "time_min": 30.0,
+            "ph": 4.2,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 403.8310255843583
+        },
+        {
+          "label": "pH 5.6",
+          "spec": {
+            "name": "pH 5.6",
+            "precursors": {
+              "D-Ribose": 50.0,
+              "L-Cysteine": 50.0
+            },
+            "temp_C": 140.0,
+            "time_min": 30.0,
+            "ph": 5.6,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 373.7814420074287
+        }
+      ]
+    },
+    {
+      "claim_id": "MOT02-PH-02",
+      "category": "ph",
+      "claim_type": "ordering",
+      "expected_relation": "A>B",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same pots FFT is 1.8x higher at pH 4.2 than at pH 5.6, and furfural rises from a trace to 2290 ng per mmol.",
+      "source": "mottram2002",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        1465.9143589153277,
+        183.39201101561744
+      ],
+      "log10_ratio_B_over_A": -0.9027281859971217,
+      "arms": [
+        {
+          "label": "pH 4.2",
+          "spec": {
+            "name": "pH 4.2",
+            "precursors": {
+              "D-Ribose": 50.0,
+              "L-Cysteine": 50.0
+            },
+            "temp_C": 140.0,
+            "time_min": 30.0,
+            "ph": 4.2,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 1465.9143589153277
+        },
+        {
+          "label": "pH 5.6",
+          "spec": {
+            "name": "pH 5.6",
+            "precursors": {
+              "D-Ribose": 50.0,
+              "L-Cysteine": 50.0
+            },
+            "temp_C": 140.0,
+            "time_min": 30.0,
+            "ph": 5.6,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 183.39201101561744
         }
       ]
     }

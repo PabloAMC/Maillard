@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "6e33af830c98d3a0eb5124bd848b1be5b775b49a",
-      "short": "6e33af83",
+      "commit": "5a71cd4cda2a403cae080aec62fec0fb7d684f00",
+      "short": "5a71cd4c",
       "branch": "cleaning",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "409a851fe33fa65da47430ee3d83c3eb0217d8c83e8e31c26653f29cad2da4e9"
+        "sha256": "583dc3776223b8e36cc270c2680347fe3a49363b59cdbedf139f6e780b1790cb"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -554,16 +554,6 @@
       "structural_block": null
     },
     {
-      "axis": "ph",
-      "agree": 4,
-      "evaluable": 5,
-      "not_evaluable": 5,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.376,
-      "additional_agreeing_claims_to_trust": 3,
-      "structural_block": null
-    },
-    {
       "axis": "time",
       "agree": 3,
       "evaluable": 6,
@@ -571,6 +561,16 @@
       "verdict": "do-not-use",
       "wilson_lower_bound": 0.188,
       "additional_agreeing_claims_to_trust": 9,
+      "structural_block": null
+    },
+    {
+      "axis": "ph",
+      "agree": 7,
+      "evaluable": 9,
+      "not_evaluable": 5,
+      "verdict": "caution",
+      "wilson_lower_bound": 0.453,
+      "additional_agreeing_claims_to_trust": 2,
       "structural_block": null
     },
     {
@@ -716,12 +716,12 @@
       "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "3 more independent ordering claims on ph (all agreeing)",
-      "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
-    },
-    {
       "if_measured": "9 more independent ordering claims on time (all agreeing)",
       "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'do-not-use'"
+    },
+    {
+      "if_measured": "2 more independent ordering claims on ph (all agreeing)",
+      "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
     },
     {
       "if_measured": "20 more independent ordering claims on sugar_identity (all agreeing)",

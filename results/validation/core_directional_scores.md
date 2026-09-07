@@ -1,10 +1,10 @@
 # Core directional scores (the kinetic core on the directional claims panel)
 
-Panel `docs/validation/directional_claims_panel.yml` (87 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
+Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 20/37 (54%)**; 30 independent claims not evaluable
-* independent, excluding pH and water activity: 15/30 (50%); pH and water activity alone: 5/7 (71%)
-* all claims (independent + fit-adjacent + fit-system overlap): 24/52 (46%); 35 not evaluable
+* **headline (strictly independent, evaluable): 23/41 (56%)**; 30 independent claims not evaluable
+* independent, excluding pH and water activity: 15/30 (50%); pH and water activity alone: 8/11 (73%)
+* all claims (independent + fit-adjacent + fit-system overlap): 27/57 (47%); 35 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
 * not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); a predicted concentration is zero; no direction is defined (4); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
@@ -16,7 +16,7 @@ Panel `docs/validation/directional_claims_panel.yml` (87 claims, flat tolerance 
 | lipid_lane | 0 | 0 | - | 1 | - |
 | matrix_identity | 0 | 0 | - | 1 | - |
 | moisture_aw | 1 | 2 | 0.50 | 2 | AW-01 |
-| ph | 4 | 5 | 0.80 | 5 | MOT-01 |
+| ph | 7 | 9 | 0.78 | 5 | MOT-01, CER07-PH-01 |
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 1 | 0.00 | 2 | MOT-03 |
 | scope | 0 | 0 | - | 3 | - |
@@ -32,7 +32,7 @@ Panel `docs/validation/directional_claims_panel.yml` (87 claims, flat tolerance 
 | lipid_lane | 0 | 3 | 0.00 | 1 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 2 | 3 | 0.67 | 2 |
-| ph | 5 | 8 | 0.62 | 5 |
+| ph | 8 | 13 | 0.62 | 5 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 0 | 2 | 0.00 | 4 |
 | scope | 0 | 0 | - | 3 |
@@ -131,3 +131,8 @@ Panel `docs/validation/directional_claims_panel.yml` (87 claims, flat tolerance 
 | WANG22-T-02 | time | independent | FFT | increasing | **agree** | sulfur | 2.74e+03, 2.01e+04, 3.57e+04 |  |
 | WANG22-T-03 | time | independent | MFT | peak | **disagree** | sulfur | 2.51e+03, 693, 32.7, 2.77 |  |
 | WANG22-T-04 | time | independent | FFT | peak | **disagree** | sulfur | 1.72e+04, 7.05e+03, 732, 61.5 |  |
+| WHI-PH-01 | ph | fit_adjacent | MFT | A>B | **disagree** | sulfur | 4.29e+03, 9.11e+03 |  |
+| CER07-PH-01 | ph | independent | FFT | decreasing | **disagree** | sulfur | 2.46e+03, 310, 0.0189, 0.104 |  |
+| CER07-PH-02 | ph | independent | furfural | decreasing | **agree** | sulfur | 1.03e+03, 830, 89.9 |  |
+| MOT02-PH-01 | ph | independent | MFT | A>B | **agree** | sulfur | 404, 374 |  |
+| MOT02-PH-02 | ph | independent | FFT | A>B | **agree** | sulfur | 1.47e+03, 183 |  |

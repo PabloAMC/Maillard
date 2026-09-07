@@ -99,9 +99,10 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     assert dr.MIN_EVALUABLE_FOR_TRUST == 3
     assert dr.reliability_for_axis("moisture_aw", counts).verdict == dr.VERDICT_DO_NOT_USE
     ph = dr.reliability_for_axis("ph", counts)
-    assert (ph.agree, ph.evaluable) == (4, 5)
-    assert ph.verdict == dr.verdict_for(4, 5) == dr.VERDICT_CAUTION
-    assert dr.wilson_lower(4, 5) < dr.COIN < dr.wilson_lower(8, 8)
+    # RE-PINNED 2026-09-07 (thiol pH reads: Cerny 2007, Mottram 2002 claims): 4/5 -> 7/9, still below 0.80: 'caution'.
+    assert (ph.agree, ph.evaluable) == (7, 9)
+    assert ph.verdict == dr.verdict_for(7, 9) == dr.VERDICT_CAUTION
+    assert dr.wilson_lower(7, 9) < dr.COIN < dr.wilson_lower(8, 8)
     assert dr.verdict_for(8, 8) == dr.VERDICT_TRUST and dr.verdict_for(7, 7) == dr.VERDICT_TRUST
 
 

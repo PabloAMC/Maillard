@@ -240,6 +240,21 @@ sources:
     doi: "10.1002/ffj.3710"
     access: full_text
     retrieved_from: "data/articles/Wang2022.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/wang2022_extraction.md"
+  whitfield2001:
+    citation: "Whitfield, F. B., Mottram, D. S. (2001). Heterocyclic volatiles formed by heating cysteine or hydrogen sulfide with 4-hydroxy-5-methyl-3(2H)-furanone at pH 6.5. J. Agric. Food Chem. 49, 816-822."
+    doi: "10.1021/jf000897w"
+    access: full_text
+    retrieved_from: "data/articles/whitfield2001.pdf; data/lit/extraction_dossiers/whitfield2001_extraction.md"
+  cerny2007:
+    citation: "Cerny, C., Briffod, M. (2007). Effect of pH on the Maillard reaction of [13C5]xylose, cysteine, and thiamin. J. Agric. Food Chem. 55, 1552-1556."
+    doi: "10.1021/jf062874u"
+    access: full_text
+    retrieved_from: "data/articles/cerny2007.pdf; data/lit/extraction_dossiers/cerny2007_extraction.md"
+  mottram2002:
+    citation: "Mottram, D. S., Nobrega, I. C. C. (2002). Formation of sulfur aroma compounds in reaction mixtures containing cysteine and three different forms of ribose. J. Agric. Food Chem. 50, 4080-4086."
+    doi: "10.1021/jf0116112"
+    access: full_text
+    retrieved_from: "data/articles/mottram2002.pdf; data/lit/extraction_dossiers/mottram2002_extraction.md"
 panel:
 
   # =====================================================================
@@ -2273,3 +2288,107 @@ panel:
     fit_status: independent
     fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
     model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+
+  - claim_id: WHI-PH-01
+    statement: "Norfuraneol fed with cysteine (50 mM each, 0.5 M phosphate) at 140 C for 60 min gives far MORE free MFT at pH 4.5 than at pH 6.5 (0.150 mol % vs below 0.001 mol %, at least 150-fold)."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "pH 4.5"
+        system: {precursors: {Norfuraneol: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Whitfield & Mottram 1999/2001: 0.5 M phosphate"}}
+      B:
+        label: "pH 6.5"
+        system: {precursors: {Norfuraneol: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Whitfield & Mottram 2001 Methods: 0.5 M phosphate pH 6.5"}}
+    expected_relation: A>B
+    source:
+      ref: whitfield2001
+      quote: "MFT not detected in either duplicate at pH 6.5 (Table 1); 0.150 mol % at pH 4.5 (Whitfield & Mottram 1999 Table 1); the thiol + mercaptoketone class falls from 294 to 7 ug per 10 mg norfuraneol while total volatiles fall only 580 -> 345"
+      quote_form: table_row_reformatted
+    source_conditions: "Sealed ampoules, 140 C, 60 min, dynamic headspace GC-MS against methyl decanoate (response factor 1), duplicates; the 1999 pH-4.5 run is the same laboratory and protocol."
+    fit_status: fit_adjacent
+    fit_note: "The pH-4.5 arm is a sulfur-fit row (whitfield_nf_cys_MFT, a fed-intermediate yield); the pH-6.5 arm is new. The claim tests whether the lane's pH machinery moves the norfuraneol -> MFT step in the measured direction."
+    model_scope_note: "The sulfur lane carries a pH trajectory and thiolate-fraction terms; no explicit pH term on the norfuraneol step exists."
+  - claim_id: CER07-PH-01
+    statement: "In xylose 150 mM + cysteine 50 mM + thiamine 50 mM (0.5 M phosphate, 145 C, 20 min) FFT FALLS monotonically from pH 4 to pH 7 (peak areas 431 / 368 / 185 / 0 at pH 4 / 5 / 6 / 7)."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "pH 4"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 4.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 5"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 6"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 6.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 7"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 7.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+    expected_relation: decreasing
+    source:
+      ref: cerny2007
+      quote: "Table 2: 2-furfurylthiol 431 / 368 / 364 / 185 / 0 at pH 4 / 5 / 5.5 / 6 / 7 (TIC peak areas x 1e-3)"
+      quote_form: table_row_reformatted
+    source_conditions: "Teflon vials, 145 C, 20 min, triplicate (SD <= 23 %), HS-SPME GC-MS peak areas without internal standard; the pH-5.5 point is omitted from the series (no significant step from pH 5)."
+    fit_status: independent
+    fit_note: "Nestle laboratory; not in any fit. Relative units, so only the direction is scored."
+  - claim_id: CER07-PH-02
+    statement: "In the same pot furfural FALLS from pH 4 to pH 6 (208 / 158 / 0 at pH 4 / 5 / 6): the furfural -> FFT branch is shut by neutral pH."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["furfural"]
+    conditions:
+      series:
+        - label: "pH 4"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 4.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 5"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 6"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 6.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+    expected_relation: decreasing
+    source:
+      ref: cerny2007
+      quote: "Table 2: furfural 208 / 158 / 165 / 0 / 0 at pH 4 / 5 / 5.5 / 6 / 7"
+      quote_form: table_row_reformatted
+    source_conditions: "As CER07-PH-01."
+    fit_status: independent
+  - claim_id: MOT02-PH-01
+    statement: "Ribose 50 mM + cysteine 50 mM in 0.2 M pyrophosphate buffer at 140 C for 30 min gives 3.7x MORE MFT at pH 4.2 than at pH 5.6."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "pH 4.2"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"}}
+      B:
+        label: "pH 5.6"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"}}
+    expected_relation: A>B
+    source:
+      ref: mottram2002
+      quote: "Table 1, ribose + cysteine in 0.2 M pyrophosphate: MFT pH 4.2 / pH 5.6 = 3.7; FFT 1.8; 3-mercapto-2-pentanone 1.6; furfural trace at 5.6 -> 2290 ng/mmol at 4.2"
+      quote_form: table_row_reformatted
+    source_conditions: "6 mL in an autoclave, 140 C, 30 min, triplicate (CV ~22 %), dynamic headspace on Tenax against 1,2-dichlorobenzene (response factor 1), ng per mmol sugar."
+    fit_status: independent
+    fit_note: "University of Reading, 2002; not in any fit. Pyrophosphate is carried as phosphate of the same molarity in the pH-state model."
+  - claim_id: MOT02-PH-02
+    statement: "In the same pots FFT is 1.8x higher at pH 4.2 than at pH 5.6, and furfural rises from a trace to 2290 ng per mmol."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "pH 4.2"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"}}
+      B:
+        label: "pH 5.6"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"}}
+    expected_relation: A>B
+    source:
+      ref: mottram2002
+      quote: "Table 1: FFT pH 4.2 / 5.6 = 1.8 (ribose, pyrophosphate)"
+      quote_form: table_row_reformatted
+    source_conditions: "As MOT02-PH-01."
+    fit_status: independent

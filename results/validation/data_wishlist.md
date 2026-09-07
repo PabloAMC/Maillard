@@ -59,8 +59,8 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | ranking | 0 / 1 | 2 | do-not-use | 0.0 | 7 |
 | moisture_aw | 1 / 2 | 2 | do-not-use | 0.095 | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
 | additive_cysteine | 2 / 3 | 2 | caution | 0.208 | 5 |
-| ph | 4 / 5 | 5 | caution | 0.376 | 3 |
 | time | 3 / 6 | 3 | do-not-use | 0.188 | 9 |
+| ph | 7 / 9 | 5 | caution | 0.453 | 2 |
 | sugar_identity | 4 / 10 | 7 | do-not-use | 0.168 | 20 |
 | temperature | 6 / 10 | 3 | caution | 0.313 | 10 |
 
@@ -93,8 +93,8 @@ The engine returns a number but declares the route unidentified; the rows leave 
 - **If** `4 more independent ordering claims on scope (all agreeing)` were measured: the direction of a change along scope with a 'trust' tag instead of 'no evaluable claim'.
 - **If** `7 more independent ordering claims on ranking (all agreeing)` were measured: the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'.
 - **If** `5 more independent ordering claims on additive_cysteine (all agreeing)` were measured: the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'.
-- **If** `3 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
 - **If** `9 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'do-not-use'.
+- **If** `2 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
 - **If** `20 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
 - **If** `10 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'caution'.
 

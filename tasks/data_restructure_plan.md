@@ -1358,6 +1358,27 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       third lab, stated vessel, 100-140 C x 30-180 min; owner's download): on B9 MFT at 100 C peaks at
       90 min (pot rises to 180), at 140 C both thiols fall 3 dex in 150 min (pot declines gently after
       60 min) -- the sinks are too strong at BOTH ends. Headline 19/33 -> 20/37 (FFT rise at 100 C agrees).
+- [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
+      FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
+      norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT
+      0.150 -> < 0.001 mol %, >= 150x; mercaptoketones 74.5 -> 0.03); Cerny 2007's five-point ladder
+      (FFT 431/368/364/185/0 and furfural 208/158/165/0/0 at pH 4-7, peak areas); Mottram 2002's
+      pyrophosphate pair (MFT 3.7x, FFT 1.8x, furfural tr -> 2290 ng/mmol at pH 4.2 vs 5.6). Candidate
+      FIT rows: the Whitfield pH-6.5 mol % (a fed-intermediate yield) and the Mottram/Cerny ratios;
+      the furfural -> FFT branch shuts by pH 7 and the lane has no pH term on it. Panel claims WHI-PH-01,
+      CER07-PH-01/02, MOT02-PH-01/02 record the baseline.
+- [ ] **W9 (from Hofmann & Schieberle 2000b). Oxygen on the Amadori compound.** ARP-Phe at 100 C, pH 7,
+      120 min: Strecker aldehyde 0.06 / 0.55 / 1.38 mol % under argon / air / air + Cu; the same yield
+      from glucose + Phe 0.04 / 0.14 / 0.26. The first measured oxygen dependence of a sugar-path step
+      in the corpus (air / argon = 9.2 on the Amadori, 3.5 on the sugar pot); the companion paper gives
+      air / argon 4.3 / 5.5 / 2.2 / 1.6 for the Strecker ACID from MGO / GO / 3-DG / glucosone while the
+      aldehyde is oxygen-independent from the dicarbonyls. The trunk has no oxygen axis; a declared
+      atmosphere input on the Amadori oxidative branch would make these FIT ratios.
+- [ ] **Sugar-path checks from Brands 2001 and Goncuoglu Tas 2016 (read 2026-09-07):** glucose ->
+      fructose at 120 C agrees within 1.4x; the fructose -> glucose constant does NOT transfer to a
+      fructose-only charge (Brands: 33 % lost in 40 min where the trunk predicts ~80 %); the hazelnut
+      matrix gives 26 steps x 3 roasting temperatures (dry, Arrhenius fails by the authors' own account)
+      with the dicarbonyl order GO ~ MGO > 3-DG, the reverse of aqueous Leitzen 2021: matrix, again.
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
 - [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI

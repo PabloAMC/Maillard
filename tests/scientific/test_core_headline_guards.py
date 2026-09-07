@@ -275,7 +275,8 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-09-07 (B15): PH-ACR-01 (fit_adjacent), DIC-01 and DIC-02 (Zhang 2020), 75 -> 78.
     # RE-PINNED 2026-09-07 (B16 reads): DIC-03, RIB-T-01/02, HEX-T-01, SCH-T-01, 78 -> 83.
     # RE-PINNED 2026-09-07 (Wang 2022 read): WANG22-T-01..04 (a third lab, 100 and 140 C shapes), 83 -> 87.
-    assert payload["panel"]["claims"] == 87
+    # RE-PINNED 2026-09-07 (thiol pH reads): WHI-PH-01, CER07-PH-01/02, MOT02-PH-01/02, 87 -> 92.
+    assert payload["panel"]["claims"] == 92
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
@@ -294,24 +295,25 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # and HEX-T-01 predict zero on the shipped lane (not evaluable), SCH-T-01 is fit_system_overlap.
     # RE-PINNED 2026-09-07 (Wang 2022): FFT rising at 100 C agrees; MFT at 100 C peaks early and both thiols
     # collapse at 140 C in the lane (three misses): 19/33 -> 20/37; time 2/2 -> 3/6.
-    assert s["headline"] == [20, 37]
+    # RE-PINNED 2026-09-07 (Cerny 2007 furfural, Mottram 2002 MFT and FFT agree; Cerny FFT ladder misses): 20/37 -> 23/41.
+    assert s["headline"] == [23, 41]
     ind = s["independent"]
     assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (15, 30)
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (5, 7)
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (8, 11)
     assert ind["total"]["not_evaluable"] == 30
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
     assert cats["sugar_identity"] == (4, 10)  # B15/B16: DIC-01 and DIC-03 miss
     assert cats["temperature"] == (6, 10)     # B15: WANG-02 agrees
-    assert cats["ph"] == (4, 5)
+    assert cats["ph"] == (7, 9)               # thiol pH reads (2026-09-07): Cerny 2007 furfural and Mottram 2002 agree, Cerny FFT ladder misses
     assert cats["moisture_aw"] == (1, 2)   # B12: the trunk answers a_w; AW-03 agrees, AW-01 does not
     assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (3, 6)             # Wang 2022: the sinks are too strong at 100 C and at 140 C
     readme = _doc_text(README)
-    _assert_quoted(readme, "20 of 37", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "23 of 41", "README.md", "the core's directional headline")
     _assert_quoted(readme, "15 of 30", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "5 of 7", "README.md", "the directional count on pH and water activity")
+    _assert_quoted(readme, "8 of 11", "README.md", "the directional count on pH and water activity")
 
 
 def test_directional_scorecard_is_not_stale():
