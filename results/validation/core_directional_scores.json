@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "1b3e99066163c59040f074f64d30efeeb37e7f99",
-      "short": "1b3e9906",
+      "commit": "91df11cababdb045360455eb59bef6ab6d70ae34",
+      "short": "91df11ca",
       "branch": "cleaning",
       "dirty": true
     },
@@ -54,7 +54,7 @@
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "e7782c780f12d6ec9e3d688b94e53585606c960e2e277281695440c2a94b8536"
+        "sha256": "d87605276e59cde51eb00190cd8bb90630bc5ec646488b51fab10ed095dca1fe"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,8 +80,8 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "e7782c780f12d6ec9e3d688b94e53585606c960e2e277281695440c2a94b8536",
-    "claims": 78,
+    "sha256": "d87605276e59cde51eb00190cd8bb90630bc5ec646488b51fab10ed095dca1fe",
+    "claims": 83,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
     "wave": "S2 (directional accuracy)"
@@ -89,7 +89,7 @@
   "summary": {
     "headline": [
       19,
-      32
+      33
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -168,17 +168,18 @@
         },
         "sugar_identity": {
           "agree": 4,
-          "evaluable": 9,
+          "evaluable": 10,
           "not_evaluable": 7,
           "misses": [
             "SUG-03",
             "SUG-12",
             "HOF-02",
             "HOF-03",
-            "DIC-01"
+            "DIC-01",
+            "DIC-03"
           ],
           "mechanism_absent": 0,
-          "rate": 0.4444444444444444
+          "rate": 0.4
         },
         "temperature": {
           "agree": 6,
@@ -196,7 +197,7 @@
         "time": {
           "agree": 2,
           "evaluable": 2,
-          "not_evaluable": 0,
+          "not_evaluable": 3,
           "misses": [],
           "mechanism_absent": 0,
           "rate": 1.0
@@ -204,8 +205,8 @@
       },
       "total": {
         "agree": 19,
-        "evaluable": 32,
-        "not_evaluable": 27,
+        "evaluable": 33,
+        "not_evaluable": 30,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -219,10 +220,11 @@
           "MOT-03",
           "YIL-01",
           "YIL-02",
-          "DIC-01"
+          "DIC-01",
+          "DIC-03"
         ],
         "mechanism_absent": 0,
-        "rate": 0.59375
+        "rate": 0.5757575757575758
       },
       "ph_aw": {
         "agree": 5,
@@ -237,8 +239,8 @@
       },
       "excluding_ph_aw": {
         "agree": 14,
-        "evaluable": 25,
-        "not_evaluable": 20,
+        "evaluable": 26,
+        "not_evaluable": 23,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -250,10 +252,11 @@
           "MOT-03",
           "YIL-01",
           "YIL-02",
-          "DIC-01"
+          "DIC-01",
+          "DIC-03"
         ],
         "mechanism_absent": 0,
-        "rate": 0.56
+        "rate": 0.5384615384615384
       }
     },
     "all_claims": {
@@ -342,7 +345,7 @@
         },
         "sugar_identity": {
           "agree": 6,
-          "evaluable": 13,
+          "evaluable": 14,
           "not_evaluable": 7,
           "misses": [
             "SUG-03",
@@ -351,10 +354,11 @@
             "SUG-12",
             "HOF-02",
             "HOF-03",
-            "DIC-01"
+            "DIC-01",
+            "DIC-03"
           ],
           "mechanism_absent": 0,
-          "rate": 0.46153846153846156
+          "rate": 0.42857142857142855
         },
         "temperature": {
           "agree": 6,
@@ -371,17 +375,19 @@
         },
         "time": {
           "agree": 2,
-          "evaluable": 2,
-          "not_evaluable": 0,
-          "misses": [],
+          "evaluable": 3,
+          "not_evaluable": 3,
+          "misses": [
+            "SCH-T-01"
+          ],
           "mechanism_absent": 0,
-          "rate": 1.0
+          "rate": 0.6666666666666666
         }
       },
       "total": {
         "agree": 23,
-        "evaluable": 46,
-        "not_evaluable": 32,
+        "evaluable": 48,
+        "not_evaluable": 35,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -405,10 +411,12 @@
           "MOT-03",
           "YIL-01",
           "YIL-02",
-          "DIC-01"
+          "DIC-01",
+          "DIC-03",
+          "SCH-T-01"
         ],
         "mechanism_absent": 4,
-        "rate": 0.5
+        "rate": 0.4791666666666667
       },
       "ph_aw": {
         "agree": 7,
@@ -425,8 +433,8 @@
       },
       "excluding_ph_aw": {
         "agree": 16,
-        "evaluable": 35,
-        "not_evaluable": 25,
+        "evaluable": 37,
+        "not_evaluable": 28,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -446,14 +454,17 @@
           "MOT-03",
           "YIL-01",
           "YIL-02",
-          "DIC-01"
+          "DIC-01",
+          "DIC-03",
+          "SCH-T-01"
         ],
         "mechanism_absent": 4,
-        "rate": 0.45714285714285713
+        "rate": 0.43243243243243246
       }
     },
     "not_evaluable_reasons": {
       "the claim carries no runnable conditions (prose-only)": 18,
+      "a predicted concentration is zero; no direction is defined": 4,
       "refused by the engine": 2,
       "arm 'processed, 140 C' refused": 2,
       "arm 'pH 4.5' refused": 1,
@@ -461,13 +472,12 @@
       "arm 'pH 4' refused": 1,
       "arm 'T4 profile, 160 C max' refused": 1,
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
-      "a predicted concentration is zero; no direction is defined": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 ": 1,
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 36.0
+    "wall_seconds": 40.6
   },
   "claims": [
     {
@@ -5710,6 +5720,482 @@
       "status": "not_evaluable",
       "reason": "the claim carries no runnable conditions (prose-only)",
       "arms": []
+    },
+    {
+      "claim_id": "DIC-03",
+      "category": "sugar_identity",
+      "claim_type": "ranking",
+      "expected_relation": "ranking",
+      "observables": [
+        "3-deoxyglucosone",
+        "glucosone",
+        "glyoxal",
+        "methylglyoxal"
+      ],
+      "fit_status": "independent",
+      "statement": "In 10 % glucose autoclaved alone in water at 121 C for 18 min, the dicarbonyls rank 3-deoxyglucosone (52 ug/mL) > glucosone (7.5) > glyoxal (5.6) > methylglyoxal (2.6).",
+      "source": "leitzen2021",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "trunk",
+      "values_ug_per_l": [
+        0.28976748728464125,
+        640.6721049056459,
+        29.795183799459615,
+        0.02816726361398415
+      ],
+      "log10_steps": [
+        3.3445861602413314,
+        -1.3324897462359715,
+        -3.0244014105218855
+      ],
+      "predicted_order": [
+        "glucosone",
+        "glyoxal",
+        "3-deoxyglucosone",
+        "methylglyoxal"
+      ],
+      "arms": [
+        {
+          "label": "10 % glucose, 121 C, 18 min :: 3-deoxyglucosone",
+          "spec": {
+            "name": "10 % glucose, 121 C, 18 min :: 3-deoxyglucosone",
+            "precursors": {
+              "D-Glucose": 555.0
+            },
+            "temp_C": 121.0,
+            "time_min": 18.0,
+            "ph": 5.0,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+          ],
+          "value_ug_per_l": 0.28976748728464125
+        },
+        {
+          "label": "10 % glucose, 121 C, 18 min :: glucosone",
+          "spec": {
+            "name": "10 % glucose, 121 C, 18 min :: glucosone",
+            "precursors": {
+              "D-Glucose": 555.0
+            },
+            "temp_C": 121.0,
+            "time_min": 18.0,
+            "ph": 5.0,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+          ],
+          "value_ug_per_l": 640.6721049056459
+        },
+        {
+          "label": "10 % glucose, 121 C, 18 min :: glyoxal",
+          "spec": {
+            "name": "10 % glucose, 121 C, 18 min :: glyoxal",
+            "precursors": {
+              "D-Glucose": 555.0
+            },
+            "temp_C": 121.0,
+            "time_min": 18.0,
+            "ph": 5.0,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+          ],
+          "value_ug_per_l": 29.795183799459615
+        },
+        {
+          "label": "10 % glucose, 121 C, 18 min :: methylglyoxal",
+          "spec": {
+            "name": "10 % glucose, 121 C, 18 min :: methylglyoxal",
+            "precursors": {
+              "D-Glucose": 555.0
+            },
+            "temp_C": 121.0,
+            "time_min": 18.0,
+            "ph": 5.0,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "trunk",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+          ],
+          "value_ug_per_l": 0.02816726361398415
+        }
+      ]
+    },
+    {
+      "claim_id": "RIB-T-01",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "decreasing",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In a cysteine-rich cysteine + ribose pot (ribose : cysteine ~ 1 : 15 molar, 0.5 M phosphate, pH 5.88) at 168 C, MFT FALLS from 20 to 60 min (1253 -> 760 -> 628 ng).",
+      "source": "liu2023b",
+      "status": "not_evaluable",
+      "reason": "a predicted concentration is zero; no direction is defined",
+      "arms": [
+        {
+          "label": "20 min",
+          "spec": {
+            "name": "20 min",
+            "precursors": {
+              "D-Ribose": 26.1,
+              "L-Cysteine": 326.6
+            },
+            "temp_C": 168.0,
+            "time_min": 20.0,
+            "ph": 5.88,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 0.00018954337633735467
+        },
+        {
+          "label": "40 min",
+          "spec": {
+            "name": "40 min",
+            "precursors": {
+              "D-Ribose": 26.1,
+              "L-Cysteine": 326.6
+            },
+            "temp_C": 168.0,
+            "time_min": 40.0,
+            "ph": 5.88,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 0.0
+        },
+        {
+          "label": "60 min",
+          "spec": {
+            "name": "60 min",
+            "precursors": {
+              "D-Ribose": 26.1,
+              "L-Cysteine": 326.6
+            },
+            "temp_C": 168.0,
+            "time_min": 60.0,
+            "ph": 5.88,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 0.0
+        }
+      ]
+    },
+    {
+      "claim_id": "RIB-T-02",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "flat",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In the same pot FFT is FLAT from 20 to 60 min at 168 C (175, 198, 170 ng; the 40-min point within SD).",
+      "source": "liu2023b",
+      "status": "not_evaluable",
+      "reason": "a predicted concentration is zero; no direction is defined",
+      "arms": [
+        {
+          "label": "20 min",
+          "spec": {
+            "name": "20 min",
+            "precursors": {
+              "D-Ribose": 26.1,
+              "L-Cysteine": 326.6
+            },
+            "temp_C": 168.0,
+            "time_min": 20.0,
+            "ph": 5.88,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 3.884135230924026e-05
+        },
+        {
+          "label": "60 min",
+          "spec": {
+            "name": "60 min",
+            "precursors": {
+              "D-Ribose": 26.1,
+              "L-Cysteine": 326.6
+            },
+            "temp_C": 168.0,
+            "time_min": 60.0,
+            "ph": 5.88,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 0.0
+        }
+      ]
+    },
+    {
+      "claim_id": "HEX-T-01",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "increasing",
+      "observables": [
+        "FFT"
+      ],
+      "fit_status": "independent",
+      "statement": "In glucose + cysteine (no pentose) in phosphate buffer at pH 5.88 and 168 C, FFT RISES from 20 to 60 min (44.7 -> 107 -> 133 ng), via 2-furfural and 2-furanmethanol from glucose fragmentation.",
+      "source": "liu2021",
+      "status": "not_evaluable",
+      "reason": "a predicted concentration is zero; no direction is defined",
+      "arms": [
+        {
+          "label": "20 min",
+          "spec": {
+            "name": "20 min",
+            "precursors": {
+              "D-Glucose": 307.5,
+              "L-Cysteine": 326.6
+            },
+            "temp_C": 168.0,
+            "time_min": 20.0,
+            "ph": 5.88,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 0.5942990987862754
+        },
+        {
+          "label": "60 min",
+          "spec": {
+            "name": "60 min",
+            "precursors": {
+              "D-Glucose": 307.5,
+              "L-Cysteine": 326.6
+            },
+            "temp_C": 168.0,
+            "time_min": 60.0,
+            "ph": 5.88,
+            "aw": 0.98
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+          ],
+          "value_ug_per_l": 0.0
+        }
+      ]
+    },
+    {
+      "claim_id": "SCH-T-01",
+      "category": "time",
+      "claim_type": "monotonic_direction",
+      "expected_relation": "increasing",
+      "observables": [
+        "MFT"
+      ],
+      "fit_status": "fit_system_overlap",
+      "statement": "In the Hofmann 1998 pot (ribose 100 mM + cysteine 33 mM, 0.5 M phosphate pH 5.0) held at 100 C, MFT RISES monotonically 30 -> 60 -> 360 -> 720 min (4.5, 13.8, 156, 179 ug per 100 mL) and FFT likewise (2.0, 3.1, 110, 132).",
+      "source": "schieberle2000",
+      "status": "disagree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "sulfur",
+      "values_ug_per_l": [
+        65.89899103326962,
+        130.31141192694528,
+        36.37447210284323,
+        16.241426815084704
+      ],
+      "log10_steps": [
+        0.29610368515489544,
+        -0.5541857512106039,
+        -0.3501725196854057
+      ],
+      "arms": [
+        {
+          "label": "30 min",
+          "spec": {
+            "name": "30 min",
+            "precursors": {
+              "D-Ribose": 100.0,
+              "L-Cysteine": 33.0
+            },
+            "temp_C": 100.0,
+            "time_min": 30.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 65.89899103326962
+        },
+        {
+          "label": "60 min",
+          "spec": {
+            "name": "60 min",
+            "precursors": {
+              "D-Ribose": 100.0,
+              "L-Cysteine": 33.0
+            },
+            "temp_C": 100.0,
+            "time_min": 60.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 130.31141192694528
+        },
+        {
+          "label": "360 min",
+          "spec": {
+            "name": "360 min",
+            "precursors": {
+              "D-Ribose": 100.0,
+              "L-Cysteine": 33.0
+            },
+            "temp_C": 100.0,
+            "time_min": 360.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 36.37447210284323
+        },
+        {
+          "label": "720 min",
+          "spec": {
+            "name": "720 min",
+            "precursors": {
+              "D-Ribose": 100.0,
+              "L-Cysteine": 33.0
+            },
+            "temp_C": 100.0,
+            "time_min": 720.0,
+            "ph": 5.0,
+            "aw": 0.98,
+            "buffer": {
+              "kind": "phosphate",
+              "phosphate_mol_l": 0.5,
+              "source": "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"
+            }
+          },
+          "answered": true,
+          "lane": "sulfur",
+          "state": "in_envelope",
+          "reasons": [],
+          "warnings": [],
+          "value_ug_per_l": 16.241426815084704
+        }
+      ]
     }
   ]
 }

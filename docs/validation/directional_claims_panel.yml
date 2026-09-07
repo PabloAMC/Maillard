@@ -215,6 +215,26 @@ sources:
     doi: "10.1002/fsn3.1995"
     access: full_text
     retrieved_from: "data/articles/zhang2020.pdf (owner's download, 2026-09-07; open access); data/lit/extraction_dossiers/zhang2020_extraction.md"
+  leitzen2021:
+    citation: "Leitzen, S., Vogel, M., Steffens, M., Zapf, T., Müller, C. E., Brandl, M. (2021). Quantification of Degradation Products Formed during Heat Sterilization of Glucose Solutions by LC-MS/MS. Pharmaceuticals 14(11), 1121."
+    doi: "10.3390/ph14111121"
+    access: full_text
+    retrieved_from: "data/articles/Leitzen2021.pdf (owner's download, 2026-09-07; open access); data/lit/extraction_dossiers/leitzen2021_extraction.md"
+  liu2023b:
+    citation: "Liu, H., Nie, R., Wei, X., Shi, H., Yu, Y., Gao, R., Zhou, Y., Wang, Z., Zhang, D. (2023). Carbon module labeling approach ... furan and thiophene derivatives: Ribose and cysteine as a classic case study. LWT 182, 114874."
+    doi: "10.1016/j.lwt.2023.114874"
+    access: full_text
+    retrieved_from: "data/articles/Liu2023b.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/liu2023b_extraction.md"
+  liu2021:
+    citation: "Liu, H., Wang, Z., Hui, T., Fang, F., Zhang, D. (2021). New insight into the formation mechanism of 2-furfurylthiol in the glucose-cysteine reaction with ribose. Food Res. Int. 143, 110295."
+    doi: "10.1016/j.foodres.2021.110295"
+    access: full_text
+    retrieved_from: "data/articles/liu2021.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/liu2021_extraction.md"
+  schieberle2000:
+    citation: "Schieberle, P., Hofmann, T., Münch, P. (2000). Studies on potent aroma compounds generated in Maillard-type reactions using the odor-activity-value concept. ACS Symp. Ser. 756, ch. 10, 133-150."
+    doi: "10.1021/bk-2000-0756.ch010"
+    access: full_text
+    retrieved_from: "data/articles/schieberle2000.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/schieberle2000_extraction.md"
 panel:
 
   # =====================================================================
@@ -2056,3 +2076,106 @@ panel:
       quote_form: table_rows_reformatted
     fit_status: independent
     model_scope_note: "NOT EVALUABLE: the core has no glutamate species (the trunk's amine is glycine); recorded so the ordering is on file for a trunk wave that adds the amino-acid identity."
+
+  - claim_id: DIC-03
+    statement: "In 10 % glucose autoclaved alone in water at 121 C for 18 min, the dicarbonyls rank 3-deoxyglucosone (52 ug/mL) > glucosone (7.5) > glyoxal (5.6) > methylglyoxal (2.6)."
+    claim_type: ranking
+    category: sugar_identity
+    observables: ["3-deoxyglucosone", "glucosone", "glyoxal", "methylglyoxal"]
+    conditions:
+      series:
+        - label: "10 % glucose, 121 C, 18 min"
+          system: {precursors: {D-Glucose: 555.0}, temp_C: 121, ph: 5.0, water_activity: 0.99, time_min: 18}
+    expected_relation: ranking
+    source:
+      ref: leitzen2021
+      quote: "Table 4, scheme A, 121 C: GO 5.6 +/- 1.3; MGO 2.6 +/- 0.2; 2-KDG 7.5 +/- 1.4; 3-DG/3-DGal 52.2 +/- 4.0 ug/mL"
+      quote_form: table_row_reformatted
+    source_conditions: "10 % (w/v) glucose in water (pH 4.98 before, 4.36 after), PP bottles, autoclaved 121 C for 18 min (F0-based scheme A), o-PDA / LC-MS/MS; the same ordering holds at 111 C / 180 min and 116 C / 57 min."
+    fit_status: independent
+    fit_note: "Credible absolute levels (0.06 % of the glucose as 3-DG), unlike Zhang 2020 (DIC-01). The trunk's dicarbonyl constants come from Kocadagli & Gokmen 2016's glucose glass at 160-200 C; this is aqueous at 121 C from a pharmaceutical laboratory."
+    model_scope_note: "The second independent test of the B13 glass-to-water transfer; DIC-01 already misses with glucosone 1e4 above 3-DG."
+  - claim_id: RIB-T-01
+    statement: "In a cysteine-rich cysteine + ribose pot (ribose : cysteine ~ 1 : 15 molar, 0.5 M phosphate, pH 5.88) at 168 C, MFT FALLS from 20 to 60 min (1253 -> 760 -> 628 ng)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "20 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+        - label: "40 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 40, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+        - label: "60 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+    expected_relation: decreasing
+    source:
+      ref: liu2023b
+      quote: "2-methyl-3-furanthiol | 1252.67 +/- 40.70a | 760.33 +/- 17.21b | 628.00 +/- 70.34b"
+      quote_form: table_row_reformatted
+    source_conditions: "Ribose 19.6 mg + cysteine 198 mg per model (the Beijing-duck ratio), 0.5 mol/L tripotassium phosphate, pH 5.88, glass vial, 168 C for 20 / 40 / 60 min; HS-SPME GC-O-MS, ng per vial against 2-methyl-3-heptanone. Charged here at the same molar ratio in 5 mL (ribose 26.1, cysteine 326.6 mmol/L)."
+    fit_status: independent
+    fit_note: "The first measurement in the corpus of MFT DECLINING with time in a cysteine-ribose pot: a direct test of the thiol-sink barrier the sulfur fit holds at its 102 kJ/mol ceiling. Levels are IS-relative and not scored."
+    model_scope_note: "The vial volume is not stated (no vessel block); the sulfur lane runs at the declared default reservoir."
+  - claim_id: RIB-T-02
+    statement: "In the same pot FFT is FLAT from 20 to 60 min at 168 C (175, 198, 170 ng; the 40-min point within SD)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "20 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+        - label: "60 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+    expected_relation: flat
+    source:
+      ref: liu2023b
+      quote: "2-furfurylthiol | 175.36 +/- 15.40ab | 197.68 +/- 6.64a | 169.51 +/- 10.62b"
+      quote_form: table_row_reformatted
+    source_conditions: "As RIB-T-01."
+    fit_status: independent
+    model_scope_note: "Flat within the scorer's 5 % tolerance is a strict reading of a 3 % change over 40 min at 168 C; scored on the 20 and 60 min arms."
+  - claim_id: HEX-T-01
+    statement: "In glucose + cysteine (no pentose) in phosphate buffer at pH 5.88 and 168 C, FFT RISES from 20 to 60 min (44.7 -> 107 -> 133 ng), via 2-furfural and 2-furanmethanol from glucose fragmentation."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "20 min"
+          system: {precursors: {D-Glucose: 307.5, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 20}
+        - label: "60 min"
+          system: {precursors: {D-Glucose: 307.5, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 60}
+    expected_relation: increasing
+    source:
+      ref: liu2021
+      quote: "2-furfurylthiol | 44.73 +/- 10.00c | 107.15 +/- 9.59b | 133.43 +/- 17.30a"
+      quote_form: table_row_reformatted
+    source_conditions: "Glucose 277.00 mg + cysteine 198.00 mg in 5 mL tripotassium phosphate buffer, pH 5.88, 168 C, heated metal block, 20 / 40 / 60 min; HS-SPME GC-MS, ng per vial."
+    fit_status: independent
+    model_scope_note: "EXPECTED NOT EVALUABLE: the sulfur lane declares the hexose entry unidentified and refuses thiol targets on a hexose-only charge. Recorded as the first validation row for a hexose -> furfural / furfuryl alcohol -> FFT route."
+  - claim_id: SCH-T-01
+    statement: "In the Hofmann 1998 pot (ribose 100 mM + cysteine 33 mM, 0.5 M phosphate pH 5.0) held at 100 C, MFT RISES monotonically 30 -> 60 -> 360 -> 720 min (4.5, 13.8, 156, 179 ug per 100 mL) and FFT likewise (2.0, 3.1, 110, 132)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+        - label: "60 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+        - label: "360 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 360, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+        - label: "720 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 720, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+    expected_relation: increasing
+    source:
+      ref: schieberle2000
+      quote: "2-Methyl-3-furanthiol | 4.5 | 13.8 | 156 | 179 (ug formed after 30 / 60 / 360 / 720 min at 100 C)"
+      quote_form: table_row_reformatted
+    source_conditions: "Ribose (10 mmol) and cysteine (3.3 mmol) in phosphate buffer (100 mL; 0.5 mol/L; pH 5.0) at 100 C in a laboratory autoclave; stable isotope dilution (Table IV, data from Hofmann & Schieberle)."
+    fit_status: fit_system_overlap
+    fit_note: "The pot is the sulfur fit's Hofmann 1998 Table-1 pentose system (145 C / 20 min in the objective) and wave B16 pre-registers this series' within-study ratios as FIT rows; the level direction is a shape check, not an independent test."
+    model_scope_note: "Before B16 the shipped lane is scored here as the baseline the wave is judged against."

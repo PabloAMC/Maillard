@@ -1,12 +1,12 @@
 # Core directional scores (the kinetic core on the directional claims panel)
 
-Panel `docs/validation/directional_claims_panel.yml` (78 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
+Panel `docs/validation/directional_claims_panel.yml` (83 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 19/32 (59%)**; 27 independent claims not evaluable
-* independent, excluding pH and water activity: 14/25 (56%); pH and water activity alone: 5/7 (71%)
-* all claims (independent + fit-adjacent + fit-system overlap): 23/46 (50%); 32 not evaluable
+* **headline (strictly independent, evaluable): 19/33 (58%)**; 30 independent claims not evaluable
+* independent, excluding pH and water activity: 14/26 (54%); pH and water activity alone: 5/7 (71%)
+* all claims (independent + fit-adjacent + fit-system overlap): 23/48 (48%); 35 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); a predicted concentration is zero; no direction is defined (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); a predicted concentration is zero; no direction is defined (4); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
 ## Per category (strictly independent claims)
 
@@ -20,9 +20,9 @@ Panel `docs/validation/directional_claims_panel.yml` (78 claims, flat tolerance 
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 1 | 0.00 | 2 | MOT-03 |
 | scope | 0 | 0 | - | 3 | - |
-| sugar_identity | 4 | 9 | 0.44 | 7 | SUG-03, SUG-12, HOF-02, HOF-03, DIC-01 |
+| sugar_identity | 4 | 10 | 0.40 | 7 | SUG-03, SUG-12, HOF-02, HOF-03, DIC-01, DIC-03 |
 | temperature | 6 | 10 | 0.60 | 3 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
-| time | 2 | 2 | 1.00 | 0 | - |
+| time | 2 | 2 | 1.00 | 3 | - |
 
 ## Per category (all claims)
 
@@ -36,9 +36,9 @@ Panel `docs/validation/directional_claims_panel.yml` (78 claims, flat tolerance 
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 0 | 2 | 0.00 | 4 |
 | scope | 0 | 0 | - | 3 |
-| sugar_identity | 6 | 13 | 0.46 | 7 |
+| sugar_identity | 6 | 14 | 0.43 | 7 |
 | temperature | 6 | 10 | 0.60 | 3 |
-| time | 2 | 2 | 1.00 | 0 |
+| time | 2 | 3 | 0.67 | 3 |
 
 ## Claims
 
@@ -122,3 +122,8 @@ Panel `docs/validation/directional_claims_panel.yml` (78 claims, flat tolerance 
 | PH-ACR-01 | ph | fit_adjacent | Acrylamide | A>B | **agree** | acrylamide | 5.31e+04, 2.73e+04 |  |
 | DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 0.0736, 638, 0.0105, 32.9, 0.0285 |  |
 | DIC-02 | sugar_identity | independent | glucosone, glyoxal, methylglyoxal, diacetyl | ranking | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
+| DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **disagree** | trunk | 0.29, 641, 29.8, 0.0282 |  |
+| RIB-T-01 | time | independent | MFT | decreasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
+| RIB-T-02 | time | independent | FFT | flat | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
+| HEX-T-01 | time | independent | FFT | increasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
+| SCH-T-01 | time | fit_system_overlap | MFT | increasing | **disagree** | sulfur | 65.9, 130, 36.4, 16.2 |  |

@@ -89,7 +89,7 @@
       ],
       "sugar_identity": [
         4,
-        9
+        10
       ],
       "temperature": [
         6,
@@ -100,14 +100,14 @@
         2
       ]
     },
-    "claims": 78,
+    "claims": 83,
     "excluding_ph_aw": [
       14,
-      25
+      26
     ],
     "headline": [
       19,
-      32
+      33
     ],
     "mechanism_absent_misses": 0,
     "misses": {
@@ -128,7 +128,8 @@
         "SUG-12",
         "HOF-02",
         "HOF-03",
-        "DIC-01"
+        "DIC-01",
+        "DIC-03"
       ],
       "temperature": [
         "TEMP-01",
@@ -137,7 +138,7 @@
         "YIL-02"
       ]
     },
-    "not_evaluable": 27,
+    "not_evaluable": 30,
     "path": "results/validation/core_directional_scores.json",
     "ph_aw": [
       5,
@@ -164,7 +165,7 @@
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
     "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 4/39 rows within 3x (median fold error 29.5x, worst 3.34e+04x); out of sample -- every row a core fit read removed -- 3/38 (median 31.8x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 7/34 evaluable literature rows (5 not evaluable: the no lane carries no sampled uncertainty), 7/33 out of sample.",
-    "**Directional and ranking claims are the product, and on the kinetic core they score 19/32 on strictly independent literature claims** (27 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 14/25 once pH and water activity are set aside, and 5/7 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 19/33 on strictly independent literature claims** (30 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 14/26 once pH and water activity are set aside, and 5/7 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
@@ -259,9 +260,9 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: SUG-03, SUG-12, HOF-02, HOF-03, DIC-01",
+      "basis": "misses: SUG-03, SUG-12, HOF-02, HOF-03, DIC-01, DIC-03",
       "claim_type": "Direction / ranking on `sugar_identity`",
-      "evidence": "4/9 on the directional panel (independent claims)",
+      "evidence": "4/10 on the directional panel (independent claims)",
       "system_class": "any (sugar swap, conditions held)",
       "verdict": "do-not-use"
     },

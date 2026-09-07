@@ -1340,6 +1340,21 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       zero-order TTCA degradation at 100/120/140 C (0.0027/0.0065/0.0081 /min first-order equivalents;
       the core's fitted k_ttca_deg gives 0.0022/0.016) qualifies as FIT rows for the next sulfur wave
       (W6); its printed Ea 81 kJ/mol is not reproducible from its own constants (~35).
+      **B16 RUN 2026-09-07: DO NOT SHIP, with a diagnosis** (`kinetic_core_b16_prereg.md` sec. 6). Fit
+      rows: Schieberle 2000's 100 C ratios (the Hofmann pot: MFT 4.5 -> 179 ug over 30 -> 720 min) and
+      Zhai 2021's TTCA decay at 100/120/140 C; no new coordinate; two variants (thiol-sink ceiling 102
+      kept / 160 lifted). Neither reproduces the 100 C rise (MFT peaks at 6 h in both; the lifted fit runs
+      to its new ceiling), both break the 145 C fed pots (+1.9 / +0.6 dex), the TTCA rows stay 1.25 dex off
+      (the core opens TTCA to cysteine + pentose ~10x too fast: k_ttca_cys, fitted on Kang's free-cysteine
+      readings). BUT weakening the low-T sinks moves Yiltirak 100/110 C from 198x to 14x: the between-lab
+      misses are a LOW-TEMPERATURE SINK problem, and a single Arrhenius sink cannot serve 100 C and 145 C
+      at once. Liu 2023's 168 C MFT decline (RIB-T-01) becomes evaluable and agrees. Engine keeps B9.
+- [ ] **W7 (from B16). Sink structure.** Reversible thiol dimerisation (disulfide pool re-releasing thiol,
+      temperature-dependent equilibrium) and/or a sink scaling with the carbonyl/melanoidin pool; the
+      pentose supply at 100 C (formation dries up at 6 h in the model, not in the pot); the TTCA return
+      path (k_ttca_cys against Zhai 2021). Pre-register against B16's ten rows + the fed pots; the
+      Yiltirak levels as the out-of-sample lever. Also open: DIC-01/DIC-03 (aqueous glucose dicarbonyls:
+      the B7/B13 glass-to-water transfer), HEX-T-01 (a hexose -> FFT route, Liu 2021).
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
 - [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI

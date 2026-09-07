@@ -1201,3 +1201,25 @@ ran.
    pH). (b) A `ranking` claim scores one pot's several observables against the measured order, each
    step beyond the flat tolerance. (c) A panel system may declare its buffer, which the CLI spec now
    carries to the sulfur lane, so a stated pot is charged as stated.
+
+## Amendment 26 — 2026-09-07 (Wave B16: the thiol sinks against a 100 C time series and measured TTCA decay)
+
+1. **TEN FIT ROWS, NO NEW COORDINATE.** Seven within-study ratios from Schieberle, Hofmann & Münch 2000
+   Table IV (the sulfur fit's own Hofmann 1998 pentose pot at 100 C for 30 / 60 / 360 / 720 min, stable
+   isotope dilution; MFT and FFT at 60 / 360 / 720 min over 30 min, and the text's "factor of 13" between
+   100 C / 6 h and 145 C / 20 min) and three TTCA-remaining rows from Zhai et al. 2021 (TTCA 10 mM, pH 7,
+   100 / 120 / 140 C, 60 min, from the zero-order fits). Under the owner's rule these are ratios and
+   measured rates: FIT. The Schieberle LEVELS and every other row stay validation.
+2. **THE CEILING.** Variant `b16` keeps every B9 band including the thiol-sink barrier ceiling of
+   102 kJ/mol (Gigl 2021; the owner's 2026-09-04 decision). Variant `b16_lift` raises it to 160 kJ/mol
+   as information and cannot ship under the prereg; if only the lifted variant reproduces the series,
+   the wave does not ship and the finding is put to the owner.
+3. **WHAT IS VALIDATED, and the new panel claims.** SCH-T-01 (fit_system_overlap: the pot is the fit's
+   own), RIB-T-01/02 (Liu 2023, LWT 182:114874, 168 C: MFT falls, FFT flat -- independent), HEX-T-01
+   (Liu 2021, FRI 143:110295, glucose + cysteine FFT rises -- not evaluable until a hexose route
+   exists), DIC-03 (Leitzen 2021, Pharmaceuticals 14:1121, aqueous glucose alone at 121 C: 3-DG >
+   glucosone > glyoxal > methylglyoxal -- independent, credible levels; it misses like DIC-01).
+4. **READ, NOT USED.** Hollnagel & Kroh 2000 (dry melt with in-situ trapping; orderings recorded),
+   Hou 2017 (peak areas; the TTCA / Cys-Amadori isomer distinction the core does not carry), Hofmann
+   1996 (thiols in diethyl ether at 6 C). The Wang 2022 (FFJ) supplement holds only the lipid-arm
+   volatiles table; the MFT/FFT temperature-time grid is in the paywalled main text.

@@ -273,7 +273,8 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # temperature 5/7 -> 5/9, 26 -> 29 independent claims not evaluable.
     # RE-PINNED 2026-09-07 (B14): AW-05, the declared-flat acrylamide a_w claim (fit_adjacent), 74 -> 75.
     # RE-PINNED 2026-09-07 (B15): PH-ACR-01 (fit_adjacent), DIC-01 and DIC-02 (Zhang 2020), 75 -> 78.
-    assert payload["panel"]["claims"] == 78
+    # RE-PINNED 2026-09-07 (B16 reads): DIC-03, RIB-T-01/02, HEX-T-01, SCH-T-01, 78 -> 83.
+    assert payload["panel"]["claims"] == 83
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.
@@ -288,23 +289,25 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-09-07 (B15 + the unstated-input sweep + ranking claims): WANG-02 (FFT peak, charged
     # as TTCA, unanimous over pH 5/7/9) AGREES and DIC-01 (Zhang 2020 dicarbonyl ordering) DISAGREES:
     # 18/30 -> 19/32; WANG-01 flips with pH and stays not evaluable; DIC-02 not evaluable (no glutamate).
-    assert s["headline"] == [19, 32]
+    # RE-PINNED 2026-09-07 (B16 reads): DIC-03 (Leitzen) evaluable and misses, 19/32 -> 19/33; RIB-T-01/02
+    # and HEX-T-01 predict zero on the shipped lane (not evaluable), SCH-T-01 is fit_system_overlap.
+    assert s["headline"] == [19, 33]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (14, 25)
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (14, 26)
     assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (5, 7)
-    assert ind["total"]["not_evaluable"] == 27
+    assert ind["total"]["not_evaluable"] == 30
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
-    assert cats["sugar_identity"] == (4, 9)   # B15: DIC-01 misses
+    assert cats["sugar_identity"] == (4, 10)  # B15/B16: DIC-01 and DIC-03 miss
     assert cats["temperature"] == (6, 10)     # B15: WANG-02 agrees
     assert cats["ph"] == (4, 5)
     assert cats["moisture_aw"] == (1, 2)   # B12: the trunk answers a_w; AW-03 agrees, AW-01 does not
     assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (2, 2)
     readme = _doc_text(README)
-    _assert_quoted(readme, "19 of 32", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "14 of 25", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "19 of 33", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "14 of 26", "README.md", "the directional count excluding pH and water activity")
     _assert_quoted(readme, "5 of 7", "README.md", "the directional count on pH and water activity")
 
 

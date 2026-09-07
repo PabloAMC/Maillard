@@ -27,6 +27,7 @@ GENERATORS = ROOT / "scripts" / "generators"
 #: Wave modules that mutate B2.3's module state when imported.
 SPLICING_WAVE_MODULES = (
     "generate_kinetic_core_b8_fit", "generate_kinetic_core_b9_fit", "generate_kinetic_core_b10_fit",
+    "generate_kinetic_core_b11_fit", "generate_kinetic_core_b16_fit",
 )
 
 
