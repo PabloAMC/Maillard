@@ -2,18 +2,18 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-06",
+    "generated_on": "2026-09-07",
     "git": {
-      "commit": "136673d97f77bbeeaa7ac354e1542bb894a037e4",
-      "short": "136673d9",
+      "commit": "498ca0cfa0917beb54cbecf6d4200626559a3d64",
+      "short": "498ca0cf",
       "branch": "cleaning",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "7d83a890d38dc0f7aeea8ae7878ec7bd01a9e3b8b410cb3191aa2677a7355526"
+        "sha256": "ceafe26c08849c3eac4db124e1d35c4a465c24a60708b13e8615ac4f709c7cc0"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "34184b29b8fa402a90ccda6f901edbaacd7cd759c9a69a26f3492bf354f2ef2a"
+        "sha256": "ea0b7e9b1b40f3c98fb5f8b24b9c3b3af9b41862824d36bc8afdb269fa5cd5e8"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -33,7 +33,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "a05e5030b8dbf2b467c12a97625089ae310da33f8877c8bf0ec07686981d2270"
+        "sha256": "624d82c1c4369c3d397d97c6aecde321c70a3a061bb30c2b95a3fa5411d4ae3c"
       }
     ]
   },
@@ -194,16 +194,20 @@
         "OX"
       ],
       "products": [
-        "FFTD"
+        "FFTD",
+        "OXV"
       ],
       "what_the_code_says": "",
       "story": "",
       "measurement": "a fed-intermediate rate: FFT + OX heated alone, FFTD quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
-      "unlocks_observables": [],
+      "unlocks_observables": [
+        "MFTD"
+      ],
       "unlocks_from_charges": [
         "glucose",
         "a pentose (ribose / xylose)",
         "cysteine",
+        "thiamine",
         "hydrogen sulfide"
       ]
     },
@@ -219,7 +223,8 @@
         "OX"
       ],
       "products": [
-        "MFTD"
+        "MFTD",
+        "OXV"
       ],
       "what_the_code_says": "CHANNEL 3, dominant at 115-120 C -- the channel the 30 C system rules",
       "story": "",
@@ -276,7 +281,8 @@
       "story": "",
       "measurement": "a fed-intermediate rate: FUR + hydrogen sulfide heated alone, FFT quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
-        "FFT"
+        "FFT",
+        "MFTD"
       ],
       "unlocks_from_charges": [
         "glucose",
@@ -674,12 +680,16 @@
       "you_could_predict": "absolute MFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact"
     },
     {
+      "if_measured": "k_dimer_fft",
+      "you_could_predict": "absolute MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
+    },
+    {
       "if_measured": "k_dimer_mft",
       "you_could_predict": "absolute MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "k_fur_fft",
-      "you_could_predict": "absolute FFT from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "4 more independent ordering claims on lipid_lane (all agreeing)",
