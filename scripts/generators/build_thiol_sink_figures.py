@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Figures for docs/guides/WHERE_THE_THIOLS_GO.md (2026-09-07).
+Figures for docs/guides/STATE_OF_THE_MODEL.md (2026-09-07).
 
 Six plots of MEASURED against MODEL for the sulfur lane's thiol-sink diagnosis. Model values are
 read from the frozen artifacts (the B16 ship rule, the directional scorecard); measured values are
