@@ -76,6 +76,32 @@ oxidising linoleate, and a declared temperature rule. How it does: hexanal in st
 factor of 2 to 30. What we lack: nonanal and 2-pentylfuran, which the panel asks for and no measured
 branch exists for.
 
+## The tree, step by step
+
+The map above groups the chemistry into stages. The three figures below are the actual step lists
+the model integrates, one per path, drawn from the code. Each box is a molecule; each arrow is one
+step, coloured by how its rate constant is known. A box is coloured only when the test panel measures
+that molecule, by how far the prediction is from the measurement. Bookkeeping pools (fragment carbon,
+acid equivalents, oxidant) are hidden, and steps whose only products are such pools are drawn into
+one box, "removed into the matrix": those are the sinks.
+
+![How each path's steps are known](../assets/thiol_sink/13_steps_by_status.png)
+
+*The sugar path is almost entirely measured, with temperature dependence. On the pentose–cysteine
+path only four steps are; thirty-one have a rate pinned at 145 °C by the fit but no measured
+temperature dependence, and twenty-eight are carried unchanged from earlier calibrations. That is
+the whole thiol problem in one bar: away from 145 °C every constant is an extrapolation.*
+
+![The sugar path, step by step](../assets/thiol_sink/10_tree_sugar.png)
+
+![The pentose-cysteine path, step by step](../assets/thiol_sink/11_tree_sulfur.png)
+
+*Read the pentose–cysteine tree from the two thiols rightwards: every arrow leaving them, into the
+disulfides, the matrix-bound forms and the sink box, is green, a rate fitted at 145 °C with no
+measured temperature dependence. Those are the arrows the experiment in the last section measures.*
+
+![The acrylamide path, step by step](../assets/thiol_sink/12_tree_acrylamide.png)
+
 ## The one problem that matters most: where the thiols go
 
 A thiol's level in a pot is formation minus removal. Formation is measured; removal was fitted
@@ -153,4 +179,4 @@ us whether the measured shapes are reachable before anyone orders standards.
 | dicarbonyls in water | Leitzen et al. 2021, Pharmaceuticals; Zhang et al. 2021, Food Sci. Nutr. | `leitzen2021_extraction.md`, `zhang2020_extraction.md` |
 | acrylamide constants and their pH and water-activity dependence | De Vleeschouwer et al. 2006, 2007, 2008, 2009 (Leuven) | `devleeschouwer2006/2007/2008_extraction.md` |
 | the attempts and their outcomes | this repository's pre-registrations | `results/validation/kinetic_core_b*_prereg.md`, `scripts/generators/WAVES.md` |
-| the figures | generated from the repository's results | `scripts/generators/build_thiol_sink_figures.py` |
+| the figures | generated from the repository's results and code | `scripts/generators/build_thiol_sink_figures.py`, `scripts/generators/build_reaction_tree.py` |
