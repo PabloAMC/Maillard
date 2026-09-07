@@ -1,10 +1,10 @@
 # Core directional scores (the kinetic core on the directional claims panel)
 
-Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
+Panel `docs/validation/directional_claims_panel.yml` (75 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
 * **headline (strictly independent, evaluable): 18/30 (60%)**; 27 independent claims not evaluable
 * independent, excluding pH and water activity: 13/23 (57%); pH and water activity alone: 5/7 (71%)
-* all claims (independent + fit-adjacent + fit-system overlap): 20/42 (48%); 32 not evaluable
+* all claims (independent + fit-adjacent + fit-system overlap): 21/43 (49%); 32 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
 * not evaluable, by reason: the claim carries no runnable conditions (prose-only) (19); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); a predicted concentration is zero; no direction is defined (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1)
 
@@ -31,7 +31,7 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 | additive_cysteine | 2 | 3 | 0.67 | 2 |
 | lipid_lane | 0 | 3 | 0.00 | 1 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
-| moisture_aw | 1 | 2 | 0.50 | 2 |
+| moisture_aw | 2 | 3 | 0.67 | 2 |
 | ph | 4 | 7 | 0.57 | 5 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 0 | 2 | 0.00 | 4 |
@@ -59,7 +59,7 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 | TEMP-02 | temperature | independent | Acrylamide | A>B | **agree** | acrylamide | 21.1, 0 |  |
 | TEMP-03 | temperature | independent | HMF | increasing | **agree** | acrylamide | 77.7, 399, 577 |  |
 | AW-01 | moisture_aw | independent | HMF | decreasing | **disagree** | trunk | 1.35e+03, 1.5e+03, 629 |  |
-| AW-02 | moisture_aw | independent | Acrylamide | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and the resolved lane(s) (acrylamide) carry no a_w term; the model would return identica |
+| AW-02 | moisture_aw | independent | Acrylamide | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.88-0.99 (De  |
 | CYS-01 | additive_cysteine | independent | FFT | A>B | **agree** | sulfur | 47, 0 |  |
 | CYS-02 | additive_cysteine | independent | HMF | A>B | **disagree** | trunk | 629, 674 |  |
 | SCOPE-01 | scope | independent | CEL | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -118,3 +118,4 @@ Panel `docs/validation/directional_claims_panel.yml` (74 claims, flat tolerance 
 | WANG-01 | temperature | independent | MFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WANG-02 | temperature | independent | FFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MENG-01 | temperature | independent | MFT, FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
+| AW-05 | moisture_aw | fit_adjacent | Acrylamide | flat | **agree** | acrylamide | 803, 803 | identical predictions; the lane has no term for the moved axis |

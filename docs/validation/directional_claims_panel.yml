@@ -195,6 +195,11 @@ sources:
     access: full_text
     retrieved_from: "data/articles/meng2017.pdf; dossier data/lit/extraction_dossiers/meng2017_extraction.md (Table 3 raster-verified)"
 
+  devleeschouwer2008:
+    citation: "De Vleeschouwer, K., Van der Plancken, I., Van Loey, A., Hendrickx, M. E. (2008). Investigation of the Influence of Different Moisture Levels on Acrylamide Formation/Elimination Reactions Using Multiresponse Analysis. J. Agric. Food Chem. 56(15), 6460-6470."
+    doi: "10.1021/jf8006294"
+    access: full_text
+    retrieved_from: "data/articles/devleeschouwer2008.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/devleeschouwer2008_extraction.md"
 panel:
 
   # =====================================================================
@@ -1943,3 +1948,24 @@ panel:
       points were taken in an open cylinder while the 120 C point was autoclaved (dossier sec.
       6b). Recorded because it is one of only four thiol temperature ladders in the corpus and its
       concave shape (barrier falling with temperature) is the mirror image of Kang 2026's convex one.
+
+  - claim_id: AW-05
+    statement: "Acrylamide formation in equimolar asparagine-glucose powders does NOT change significantly between initial a_w 0.88 and 0.99 (95 % HPD) when heated at 120-200 C."
+    claim_type: ordering
+    category: moisture_aw
+    observables: ["Acrylamide"]
+    conditions:
+      A:
+        label: "aw 0.88"
+        system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 160, ph: 6.0, water_activity: 0.88, time_min: 20}
+      B:
+        label: "aw 0.99"
+        system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 160, ph: 6.0, water_activity: 0.99, time_min: 20}
+    expected_relation: flat
+    source:
+      ref: devleeschouwer2008
+      quote: "the corresponding estimated kinetic parameters for acrylamide formation and elimination did not change significantly (based on a 95% confidence level) within the range of water activities tested, nor between the systems in the absence or presence of the potato matrix."
+    source_conditions: "Equimolar Asn + Glc freeze-dried powders equilibrated over saturated salts to a_w 0.88 / 0.92 / 0.96 / 0.99 at 4 C, heated 120-200 C in closed Inox tubes; Table 2 (k_Fref at 160 C: 2.29 / 3.57 / 3.45 / 1.45 x 1e-3 /min, HPDs overlapping)."
+    fit_status: fit_adjacent
+    fit_note: "The acrylamide lane's shipped k_int1_acr and k_asn_glc ARE this paper's a_w 0.92 column (via De Vleeschouwer 2009 Part I), and the B14 flat term is DECLARED from this very finding, so the claim is not independent: it checks that the declared term and the refusal window are wired, not that the model predicts anything. Counted in 'all claims' only."
+    model_scope_note: "B14 (2026-09-07): answerable inside the measured window 0.88-0.99 by construction; a_w moves that leave the window (AW-02's 0.3 / 0.6 arms) stay refused."

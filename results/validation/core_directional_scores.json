@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-07",
     "git": {
-      "commit": "6d6e4468033fe382af6bdbf58abae177dab0684b",
-      "short": "6d6e4468",
+      "commit": "713067c5abab5a469a003924f7aa5298578eac77",
+      "short": "713067c5",
       "branch": "cleaning",
       "dirty": true
     },
@@ -54,7 +54,7 @@
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "a7a9e1105628bf669bf50308908aeb0e8a1828ec2b083d1970917a0a2cabe7fb"
+        "sha256": "1d2bbb6246afd71357205c822b9db654cf63932cc5fbbf11e58c9b9bb50ab37a"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,8 +80,8 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "a7a9e1105628bf669bf50308908aeb0e8a1828ec2b083d1970917a0a2cabe7fb",
-    "claims": 74,
+    "sha256": "1d2bbb6246afd71357205c822b9db654cf63932cc5fbbf11e58c9b9bb50ab37a",
+    "claims": 75,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
     "wave": "S2 (directional accuracy)"
@@ -289,14 +289,14 @@
           "rate": 0.0
         },
         "moisture_aw": {
-          "agree": 1,
-          "evaluable": 2,
+          "agree": 2,
+          "evaluable": 3,
           "not_evaluable": 2,
           "misses": [
             "AW-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.5
+          "rate": 0.6666666666666666
         },
         "ph": {
           "agree": 4,
@@ -375,8 +375,8 @@
         }
       },
       "total": {
-        "agree": 20,
-        "evaluable": 42,
+        "agree": 21,
+        "evaluable": 43,
         "not_evaluable": 32,
         "misses": [
           "SUG-03",
@@ -403,11 +403,11 @@
           "YIL-02"
         ],
         "mechanism_absent": 4,
-        "rate": 0.47619047619047616
+        "rate": 0.4883720930232558
       },
       "ph_aw": {
-        "agree": 5,
-        "evaluable": 9,
+        "agree": 6,
+        "evaluable": 10,
         "not_evaluable": 7,
         "misses": [
           "PH-01",
@@ -416,7 +416,7 @@
           "MOT-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5555555555555556
+        "rate": 0.6
       },
       "excluding_ph_aw": {
         "agree": 15,
@@ -460,7 +460,7 @@
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1
     },
-    "wall_seconds": 19.2
+    "wall_seconds": 19.8
   },
   "claims": [
     {
@@ -1283,7 +1283,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 21.052241449596707
         },
@@ -1306,7 +1306,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 454.26955934654166
         },
@@ -1329,7 +1329,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 814.1459440494322
         }
@@ -1377,7 +1377,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 21.052241449596707
         },
@@ -1401,7 +1401,7 @@
           "warnings": [
             "temperature program spans 25.0-25.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 0.0
         }
@@ -1452,7 +1452,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -1477,7 +1477,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -1502,7 +1502,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14): a_w 0.50 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -1625,7 +1625,7 @@
       "statement": "Acrylamide vs moisture is NON-MONOTONIC (bell-shaped), peaking at intermediate moisture (40%) - rising for low-moisture extrusion, falling for high-moisture extrusion.",
       "source": "ma2024",
       "status": "not_evaluable",
-      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY and the resolved lane(s) (acrylamide) carry no a_w term; the model would return identical arms and call it a comparison. Only the trunk lane carries a declared a_w term (B12). Hold a_w fixed, or bring a measurement.",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.88-0.99 (De Vleeschouwer 2008, B14): outside it the lane carries no term and would return identical arms. Keep both arms inside the window, or bring a measurement.",
       "arms": [
         {
           "label": "aw 0.3 (low moisture)",
@@ -1646,7 +1646,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.30 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 454.26955934654166
         },
@@ -1669,7 +1669,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.60 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 454.26955934654166
         },
@@ -1692,7 +1692,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.90 is inside the measured window 0.88-0.99; the acrylamide lane carries a DECLARED FLAT a_w term on k_int1_acr (multiplier 1; envelope band 0.41-1.39, the source's own spread). Source: De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)."
           ],
           "value_ug_per_l": 454.26955934654166
         }
@@ -3878,7 +3878,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 1.2144629413441264
         },
@@ -3901,7 +3901,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 2.830150623900616
         },
@@ -3924,7 +3924,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 2.4212223355287916
         }
@@ -3975,7 +3975,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 12.127836830251743
         },
@@ -3998,7 +3998,7 @@
           "reasons": [],
           "warnings": [
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 841.5904954870106
         },
@@ -4022,7 +4022,7 @@
           "warnings": [
             "temperature program spans 210.0-210.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14): a_w 0.40 is OUTSIDE the measured window 0.88-0.99; the acrylamide lane's constants were measured at a_w 0.92 and found flat only across that window (De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused."
           ],
           "value_ug_per_l": 3.4274865497923197
         }
@@ -5096,6 +5096,76 @@
       "status": "not_evaluable",
       "reason": "the claim carries no runnable conditions (prose-only)",
       "arms": []
+    },
+    {
+      "claim_id": "AW-05",
+      "category": "moisture_aw",
+      "claim_type": "ordering",
+      "expected_relation": "flat",
+      "observables": [
+        "Acrylamide"
+      ],
+      "fit_status": "fit_adjacent",
+      "statement": "Acrylamide formation in equimolar asparagine-glucose powders does NOT change significantly between initial a_w 0.88 and 0.99 (95 % HPD) when heated at 120-200 C.",
+      "source": "devleeschouwer2008",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": true,
+      "mechanism_absent": true,
+      "lane": "acrylamide",
+      "values_ug_per_l": [
+        803.0411929607731,
+        803.0411929607731
+      ],
+      "log10_ratio_B_over_A": 0.0,
+      "arms": [
+        {
+          "label": "aw 0.88",
+          "spec": {
+            "name": "aw 0.88",
+            "precursors": {
+              "L-Asparagine": 10.0,
+              "D-Glucose": 10.0
+            },
+            "temp_C": 160.0,
+            "time_min": 20.0,
+            "ph": 6.0,
+            "aw": 0.88
+          },
+          "answered": true,
+          "lane": "acrylamide",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
+            "WATER ACTIVITY (B14): a_w 0.88 is inside the measured window 0.88-0.99; the acrylamide lane carries a DECLARED FLAT a_w term on k_int1_acr (multiplier 1; envelope band 0.41-1.39, the source's own spread). Source: De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)."
+          ],
+          "value_ug_per_l": 803.0411929607731
+        },
+        {
+          "label": "aw 0.99",
+          "spec": {
+            "name": "aw 0.99",
+            "precursors": {
+              "L-Asparagine": 10.0,
+              "D-Glucose": 10.0
+            },
+            "temp_C": 160.0,
+            "time_min": 20.0,
+            "ph": 6.0,
+            "aw": 0.99
+          },
+          "answered": true,
+          "lane": "acrylamide",
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
+          "warnings": [
+            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
+            "WATER ACTIVITY (B14): a_w 0.99 is inside the measured window 0.88-0.99; the acrylamide lane carries a DECLARED FLAT a_w term on k_int1_acr (multiplier 1; envelope band 0.41-1.39, the source's own spread). Source: De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2008, J. Agric. Food Chem. 56:6460, Table 2 (equimolar Asn-Glc, a_w 0.88-0.99 at 4 C, 120-200 C, T_ref 160 C)."
+          ],
+          "value_ug_per_l": 803.0411929607731
+        }
+      ]
     }
   ]
 }

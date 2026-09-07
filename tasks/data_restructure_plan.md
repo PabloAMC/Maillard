@@ -1318,8 +1318,14 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       diacetyl added trunk-only from Kocadagli 2016 (`kinetic_core_b13_prereg.md`, Amendment 22); the
       envelope samples the B12 a_w/pH bands. Validation search CLOSED: Lee 2022/2024 are baked model
       cakes (non-isothermal, figure-only, mmol/g DM) and Brands 2002 x2 quantify melanoidins, so no
-      dicarbonyl validation row exists; the wishlist names the pot to run. Acrylamide a_w term still
-      blocked on De Vleeschouwer 2008 (10.1021/jf8006294, not on disk).
+      dicarbonyl validation row exists; the wishlist names the pot to run.
+      **B14 DONE 2026-09-07 (owner downloaded De Vleeschouwer 2008, 10.1021/jf8006294):** the lane's
+      shipped constants turn out to be that paper's a_w 0.92 column, and the paper measures them at
+      a_w 0.88 / 0.96 / 0.99 too: no significant change at 95 % HPD. `acrylamide_conditions.py` =
+      a DECLARED FLAT a_w term inside 0.88-0.99 (band 0.41-1.39 sampled by the envelope), refusal
+      across the window boundary; AW-05 (fit_adjacent, flat) agrees; AW-02 (a_w 0.3 / 0.6) stays
+      refused with the window named. Nothing below a_w 0.88 is measured for the lane anywhere in
+      the corpus: the dry-side extrusion claims need a measurement, not a paper.
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
 

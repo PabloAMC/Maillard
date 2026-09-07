@@ -82,7 +82,7 @@ from .parameters_sulfur import (
     MEASURED_SULFUR, OX_AMBIENT_MMOL_L, OX_RESERVOIR_DEFAULT_UNITS, OX_SAT_MMOL_L,
     oxygen_parameters, with_fitted_sulfur,
 )
-from . import trunk_conditions
+from . import acrylamide_conditions, trunk_conditions
 from .species import SPECIES_KEYS
 from .species_acrylamide import ACRYLAMIDE_INDEX, acrylamide_ppb
 from .species_sulfur import (
@@ -1001,11 +1001,9 @@ def declare_envelope(
     if lane == TRUNK:
         # B12: the trunk carries a declared a_w term and a declared pH term (Amadori decay).
         warnings.extend(trunk_conditions.declarations(spec.process))
-    if spec.process.water_activity is not None and lane == ACRYLAMIDE:
-        warnings.append(
-            "water activity is METADATA ONLY on the acrylamide lane: it changes "
-            "no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
-        )
+    if lane == ACRYLAMIDE:
+        # B14: a declared flat a_w term inside De Vleeschouwer 2008's window; nothing outside it.
+        warnings.extend(acrylamide_conditions.declarations(spec.process))
     if spec.process.ph_final is not None and lane != SULFUR:
         warnings.append(
             f"a final pH was supplied but the {lane} lane has no pH trajectory; "
@@ -1437,6 +1435,9 @@ class CoreDraw:
     #: ``None`` = the declared centres.
     trunk_aw_scale: Optional[float] = None
     trunk_ph_exponent: Optional[float] = None
+    #: B14 (2026-09-07): the acrylamide lane's declared flat a_w multiplier inside the measured
+    #: window (band acrylamide_conditions.AW_SCALE_BAND). ``None`` = the declared centre, 1.0.
+    acrylamide_aw_scale: Optional[float] = None
     #: B11: a multiplicative scale on the sulfur lane's oxygen reservoir (declared band
     #: OX_RESERVOIR_SCALE_BAND, spanning the saturation band and the unrecorded-vessel band).
     oxygen_reservoir_scale: Optional[float] = None
@@ -1806,6 +1807,7 @@ def _integrate_program(
     *,
     ph_drift: Optional[PhDrift] = None,
     trunk_draw: Optional[Tuple[Optional[float], Optional[float]]] = None,
+    acrylamide_draw: Optional[float] = None,
     reservoir_scale: Optional[float] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """
@@ -1868,8 +1870,15 @@ def _integrate_program(
             )
             keys = list(SULFUR_INDEX)
         elif lane == ACRYLAMIDE:
+            # B14 (2026-09-07): the declared flat a_w term inside the measured window scales the
+            # acrylamide-forming step before integration; exactly 1.0 at the centre and outside.
+            acr_parameters, condition_terms = acrylamide_conditions.apply(
+                parameters, process, aw_scale=acrylamide_draw,
+            )
+            if condition_terms:
+                metadata.setdefault("condition_terms", list(condition_terms))
             run = integrate_acrylamide(
-                parameters,
+                acr_parameters,
                 float(temperature_c) + CELSIUS,
                 state,
                 grid,
@@ -1974,10 +1983,12 @@ def predict(
         trunk_draw = (
             (draw.trunk_aw_scale, draw.trunk_ph_exponent) if draw is not None else None
         )
+        acrylamide_draw = draw.acrylamide_aw_scale if draw is not None else None
         final_state, metadata = _integrate_program(
             maillard_lane, operative, dict(declaration.mapped_precursors), spec.process,
             ph_drift=draw.ph_drift if draw is not None else None,
             trunk_draw=trunk_draw,
+            acrylamide_draw=acrylamide_draw,
             reservoir_scale=draw.oxygen_reservoir_scale if draw is not None else None,
         )
         metadata["lanes"] = list(lanes)
@@ -2002,6 +2013,7 @@ def predict(
                 dict(declaration.mapped_precursors),
                 spec.process,
                 trunk_draw=trunk_draw,
+                acrylamide_draw=acrylamide_draw,
             )
             corners.append(corner_state)
         for key in FURANONE_BANDED_KEYS:
@@ -2108,7 +2120,9 @@ def predict(
 #: B12 (2026-09-07): the trunk gained a declared pH term on its Amadori-decay steps.
 NO_PH_TERM_LANES = frozenset({ACRYLAMIDE, LIPID})
 #: Lanes that carry a water-activity term (B12: the trunk's declared multiplier).
-AW_TERM_LANES = frozenset({TRUNK})
+AW_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE})
+#: B14: lanes whose a_w term exists only inside a measured window (outside it the axis is refused).
+AW_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.AW_WINDOW}
 
 
 def _lanes_of(declaration) -> Tuple[str, ...]:
@@ -2137,9 +2151,18 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
             return (
                 f"REFUSED -- the two arms differ in WATER ACTIVITY and the resolved lane(s) "
                 f"({', '.join(sorted(lanes)) or 'none'}) carry no a_w term; the model would return "
-                "identical arms and call it a comparison. Only the trunk lane carries a declared "
-                "a_w term (B12). Hold a_w fixed, or bring a measurement."
+                "identical arms and call it a comparison. The trunk lane carries a declared a_w term "
+                "(B12) and the acrylamide lane a declared flat one inside a_w 0.88-0.99 (B14). Hold "
+                "a_w fixed, or bring a measurement."
             )
+        for lane_name, (lo, hi) in AW_TERM_WINDOWS.items():
+            if lane_name in lanes and not all(lo - 1e-9 <= float(a) <= hi + 1e-9 for a in (aw_a, aw_b)):
+                return (
+                    f"REFUSED -- the two arms differ in WATER ACTIVITY ({float(aw_a):.2f} vs {float(aw_b):.2f}) "
+                    f"and the {lane_name} lane's a_w term is measured only inside {lo:.2f}-{hi:.2f} "
+                    f"(De Vleeschouwer 2008, B14): outside it the lane carries no term and would return "
+                    "identical arms. Keep both arms inside the window, or bring a measurement."
+                )
     if abs(float(pa.ph) - float(pb.ph)) > 1e-9:
         if lanes and lanes <= NO_PH_TERM_LANES:
             return (
@@ -2359,6 +2382,7 @@ __all__ = [
     "TARGET_ALIASES",
     "axis_refusal",
     "AW_TERM_LANES",
+    "AW_TERM_WINDOWS",
     "NO_PH_TERM_LANES",
     "TRUNK",
     "ThermalProgram",

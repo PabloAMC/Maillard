@@ -1156,3 +1156,19 @@ ran.
 4. **WHAT MAY NOT MOVE.** With the consumers at zero every earlier wave reproduces to 1e-9
    (`tests/unit/test_kinetic_core_b11.py`); the trunk and acrylamide lanes never see the pools.
    The vessel's absence is an extrapolation flag only while the shipped report consumes oxygen.
+
+## Amendment 24 — 2026-09-07 (Wave B14: a declared flat water-activity term on the acrylamide lane)
+
+1. **ONE DECLARED TERM, NO FIT.** `src/kinetic_core/acrylamide_conditions.py`: inside the measured
+   window a_w 0.88-0.99 (De Vleeschouwer 2008 JAFC 56:6460, Table 2; the lane's shipped constants are
+   that table's a_w 0.92 column) the acrylamide-forming step `k_int1_acr` carries a multiplier of
+   exactly 1.0 -- the source's 95 % HPD finding of no significant change -- with an envelope band
+   (0.41, 1.39): the four point estimates relative to the shipped column united with that column's HPD.
+2. **WHAT MAY NOT MOVE.** At a_w None and outside the window the factor is exactly 1.0; every panel
+   row, fit report and earlier wave reproduces (`tests/unit/test_kinetic_core_b14.py`). No fit row is
+   added or read. Elimination constants and Table 3 (potato matrix) are recorded, not used.
+3. **WHAT THE ENGINE NOW ANSWERS.** Water-activity comparisons on the acrylamide lane whose arms both
+   lie inside 0.88-0.99, flat within the band; comparisons that cross the boundary stay REFUSED with
+   the window named (the dry-side extrusion claims). The new panel claim AW-05 is declared from the
+   same finding and is `fit_adjacent`: it checks the wiring, not the model, and stays out of the
+   independent headline.

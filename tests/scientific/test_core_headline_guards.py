@@ -202,15 +202,18 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     s = payload["summary"]
     assert (s["n_samples"], s["seed"]) == (200, 0)
     lit = s["honest_literature_coverage"]
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (5, 33, 6)
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (7, 33, 6)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
     # RE-PINNED 2026-09-07 (B12 envelope hooks + B13): two trunk declared-band priors joined the
     # draw table, which moves the random stream; coverage unchanged, width 1.3691 -> 1.3376 dex.
-    assert lit["median_ci_width_log10"] == pytest.approx(1.3376, abs=5e-4)
+    # RE-PINNED 2026-09-07 (B14): the acrylamide lane's declared flat a_w band joined the draw
+    # table (inert on every panel row except the a_w-inside-window acrylamide hold-outs, +0.05 dex);
+    # the moved random stream shifts every row by a few hundredths: 5/33 -> 7/33, 1.3376 -> 1.4495 dex.
+    assert lit["median_ci_width_log10"] == pytest.approx(1.4495, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (5, 32)
+    assert (oos["hits"], oos["total"]) == (7, 32)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
@@ -218,8 +221,8 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
         "headspace": 8, "extraction": 31, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "5 of 33", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "5 of 32", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "7 of 33", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "7 of 32", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 
@@ -266,7 +269,8 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # recorded not evaluable); both Yiltirak sign claims MISS on the shipped B9 lane, which is
     # the pre-wave baseline the wave is judged against: 69 -> 74 claims, 17/26 -> 17/28,
     # temperature 5/7 -> 5/9, 26 -> 29 independent claims not evaluable.
-    assert payload["panel"]["claims"] == 74
+    # RE-PINNED 2026-09-07 (B14): AW-05, the declared-flat acrylamide a_w claim (fit_adjacent), 74 -> 75.
+    assert payload["panel"]["claims"] == 75
     # RE-PINNED 2026-09-03 (step 5): comparisons that move an axis the lane has no term for
     # are REFUSED by the engine (water activity everywhere; pH on trunk / acrylamide / lipid),
     # so those claims are not evaluable instead of identical-prediction misses: 18/30 -> 18/27.

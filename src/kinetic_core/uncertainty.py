@@ -713,6 +713,19 @@ def _declared_band_priors() -> List[CorePrior]:
             sampled=True, reason="declared band: the six Martins 2003 per-step ratios span it",
         )
     )
+    # B14 (2026-09-07): the acrylamide lane's declared flat a_w multiplier inside De Vleeschouwer
+    # 2008's window; inert at a_w None and outside the window (every panel row today is at a_w
+    # None or outside 0.88-0.99 except where a bundle declares one inside it).
+    from . import acrylamide_conditions as ac
+    out.append(
+        CorePrior(
+            key="acrylamide.aw_multiplier", lane=ACRYLAMIDE, kind="declared_band", distribution="uniform",
+            centre=float(ac.AW_MULTIPLIER), sigma=None, band=(float(ac.AW_SCALE_BAND[0]), float(ac.AW_SCALE_BAND[1])),
+            unit="multiplier on k_int1_acr inside a_w 0.88-0.99",
+            source=f"acrylamide_conditions.KF_TABLE ({ac.AW_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the source's four a_w point estimates and the 0.92 column's 95 % HPD, relative to the shipped constant",
+        )
+    )
     # B11 (2026-09-07): the oxygen structure's declared bands. SAMPLED only when the shipped
     # sulfur report carries an "oxygen" block (a B11 report); until then the consumers are
     # zero by declaration and the reservoir is inert, and the priors say so.
@@ -846,6 +859,7 @@ def draw_from_rng(
     furanone = None
     trunk_aw_scale = None
     trunk_ph_exponent = None
+    acrylamide_aw_scale = None
     oxygen: Dict[str, float] = {}
     reservoir_scale = None
     lipid_u = None
@@ -925,6 +939,8 @@ def draw_from_rng(
             trunk_aw_scale = value
         elif p.key == "trunk.amadori_ph_exponent_decades_per_unit":
             trunk_ph_exponent = value
+        elif p.key == "acrylamide.aw_multiplier":
+            acrylamide_aw_scale = value
         elif p.key.startswith("sulfur.oxygen.") and p.key.endswith(".log10_k"):
             oxygen[p.key.split(".")[2]] = 10.0 ** value
         elif p.key == "sulfur.oxygen.reservoir_scale":
@@ -969,6 +985,7 @@ def draw_from_rng(
         furanone_partition_ea_kj_mol=furanone,
         trunk_aw_scale=trunk_aw_scale,
         trunk_ph_exponent=trunk_ph_exponent,
+        acrylamide_aw_scale=acrylamide_aw_scale,
         oxygen_reservoir_scale=reservoir_scale,
         ph_drift=ph_drift,  # the wave's Laplace covariance when present, else the frozen calibration
     )
