@@ -231,6 +231,23 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
             "of the MFT pool to the dimer and the REDUCED one (cysteine) only "
             "8.6%. The branch responds to REDOX STATE, not to concentration, "
             "so the oxidant is a state variable."),
+    # ---- Wave B11 (2026-09-07): oxygen as an input --------------------------
+    # `OX` keeps its B2.1-B9 meaning (ambient units: 1.0 = the air-saturated liquid
+    # every fit system was integrated at). `OXR` is the headspace reservoir in the
+    # same units per litre of liquid, charged from the bundle's vessel block; `OXV`
+    # is the dissolved-oxygen VACANCY (saturation minus OX), created by every
+    # O2-consuming step and refilled from the reservoir while it lasts. The pair
+    # makes dissolved oxygen a state that can run out, with mass action only.
+    Species("OXR", "headspace oxygen reservoir (ambient units per litre of liquid)", 0, 0,
+            "site", False,
+            "B11. Zero atoms. Charged from conditions.vessel (vessel.py): headspace O2 in "
+            "mmol per litre of liquid divided by the saturation OX_SAT_MMOL_L; the "
+            "declared default when no vessel is recorded is Hofmann 1998's 100 mL pot."),
+    Species("OXV", "dissolved-oxygen vacancy (saturation minus OX, ambient units)", 0, 0,
+            "site", False,
+            "B11. Zero atoms. Every O2-consuming step produces one; ox_supply consumes one "
+            "against the reservoir. OX + OXV is conserved at the saturation value, so OX "
+            "can never exceed it and refills only while OXR > 0."),
     Species("PROT_SS", "protein disulfide sites (matrix input, titrated)", 0, 0,
             "site", False,
             "B2.1, NEW. ZERO atoms: a disulfide-linkage equivalent, in the units "

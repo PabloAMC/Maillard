@@ -163,3 +163,64 @@ temperature-structure miss.
 As B9: the fit reads its row table and its own vessel table (literals with provenance) and nothing
 under `data/benchmarks/`. The panel bundles' vessel blocks are read only by the scorer, after the
 fit is frozen. The hold-out guard runs on the B11 generator like any other.
+
+## 9. Amendments before the run (2026-09-07, written after B10 re-merged and before any B11 number)
+
+1. **Base wave.** B10 did not ship its route split, so B11 builds on B9: 54 objective rows, B9's
+   23 free coordinates plus the two consumers (25 free). The six Yiltirak folds are NOT in the
+   objective (they were B10's and stay with its record).
+2. **Units.** Dissolved oxygen keeps the ambient unit every fit system was integrated at
+   (`OX = 1.0` = the air-saturated liquid, `OX_SAT_MMOL_L` = 0.3 mmol/L declared, band 0.1-1.0).
+   The reservoir `OXR` is in the same units per litre of liquid (Yiltirak 165, Hofmann's 100 mL
+   pot 30, Bolton 81). The two-pool state is mass-action: a dissolved-oxygen VACANCY `OXV` is
+   created by every consumer and refilled from the reservoir at a declared fast rate, so `OX`
+   never exceeds saturation and falls only when the reservoir is spent. With the consumers at
+   zero every wave before B11 reproduces bit for bit; B9's `k_thiolate_loss`, `k_dimer_*`
+   therefore keep their meaning and are re-fitted only through the depletion they now see.
+3. **The vessel table of the fit systems.** Read from the PDFs on disk on 2026-09-07: only
+   Hofmann 1998 states its volumes (200 mL autoclave; 100 mL Table-1 pots, 50 mL fed pots ->
+   30 and 88 units). Cerny 2007: 1.00 mL in Teflon vials of unstated volume. Whitfield 1999:
+   flame-sealed 5 mL ampoules, fill unstated. Kang 2026, Zhai 2023, Feng 2022: pressure-rated
+   glass vessels or bottles, volumes unstated. Zhou 2023, Zhang 2024: glass vials, unstated.
+   Kumazawa 2003: a can without deoxidisation, volume unstated. van Seeventer 2001: a 2 L
+   autoclave then closed bottles under air. Yaghmur 2005: a 100 mL vial. Every unstated system
+   is charged with the declared default (30 units) and marked as identifying neither consumer.
+   **Consequence, stated in advance:** the objective contains ONE laboratory's vessel and no
+   oxygen contrast; T1 (identification of the consumers) is EXPECTED to fail, and the wave's
+   value is the declared structure with its bands in the envelope plus the out-of-sample tests.
+4. **Ship rule unchanged** (sec. 5). If T1 fails and T3 does not improve, the structure ships
+   as declared-inert (consumers zero) with the priors marked "not sampled: B11 not shipped",
+   which is what the engine carries today; the reservoir arithmetic and the vessel plumbing
+   stay because they are facts about the pots.
+
+## 10. OUTCOME (2026-09-07, after the run) — DO NOT SHIP: the consumers ship as declared-inert
+
+Two starts, 600 evaluations each (budget-exhausted, status −9), `kinetic_core_b11_fit_report.json`,
+`kinetic_core_b11_laplace_covariance.json`, `kinetic_core_b11_ship_rule.md`.
+
+- **The fit walked both consumers toward their floors:** k_cys_ox 3.7e-4, k_red_ox 1.3e-4 per unit per
+  minute (log10 −3.43 / −3.90 from a −3.0 start); cost 19.71 against B9's 18.74 on the same 54 rows.
+  The Laplace gives sigma 8.1 and 19.9 dex on the two consumers — **unidentified, as sec. 9.3 said**; only
+  15 of 25 coordinates identified (B9: 20 of 23), the budget-exhausted optimum being less curved.
+- **T1 Bolton 1994: 20.2x → 20.2x. FAIL.** With the consumers this small, no reservoir (Bolton's 81
+  units included) is drained on Bolton's hour at 120 C.
+- **T3 Yiltirak 130 C: MFT 99.7x → 102.5x, FFT 130.7x → 129.3x. FAIL** (neither improves 2x: falsified).
+- **T5 in-sample: worst +0.20 dex** (`zhang_fig1_gcys_dimer_over_MFT`) — passes; the dimer channels now
+  vacate dissolved oxygen, and the fit paid for it with k_dimer_decay +1.85 dex and k_thiol_decay +0.6.
+- **T6 fed rows: PASS** (every one within 2x of its B9 residual).
+- **T2 Hofmann Table-1 (not gating):** the two hexose MFT rows predict zero under B9 and B11 alike (the B9
+  finding); the answered rows do not move.
+
+**Ruling under sec. 5:** T1 AND T3 both fail, so the oxygen hypothesis AS STRUCTURED HERE — first-order
+consumers draining a headspace reservoir — is refuted for the sulfur lane on this corpus. Per sec. 9.4 the
+two consumers ship at ZERO (declared-inert), the two-pool state, the vessel plumbing and the reservoir
+arithmetic stay (they are facts about the pots), the engine keeps reading B9, and the envelope priors for
+`sulfur.oxygen.*` stay marked "not a free coordinate of the shipped report". The B11 report, members,
+Laplace and ship rule are kept as the record.
+
+**What the negative result says.** One laboratory's vessel in the objective cannot identify an oxygen
+consumer; and the between-lab gaps (Bolton 20x, Yiltirak 100x) are not closed by any first-order
+consumption within the declared bands — the bands would have to reach 10^-1 and above, where the pots'
+cysteine is destroyed (probe: at 50 per unit per minute cysteine falls 33 → 0.04 mM) and every fed row
+breaks. R2 proceeds to (c): the paper-level response factor (R3) is now the leading explanation for the
+between-lab level gap, and the wet-lab oxygen axis (R7) is the only measurement that can settle oxygen.

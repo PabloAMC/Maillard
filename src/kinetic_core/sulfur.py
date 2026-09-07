@@ -665,7 +665,7 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     Reaction("ch_oligomer_fft", {"FFT": 1}, {"OLG": 1}, "k_oligomer", ""),
     # Channel 3 -- oxidative dimerisation. 115-120 C.
     Reaction(
-        "ch_dimer_mft", {"MFT": 2, "OX": 1}, {"MFTD": 1}, "k_dimer_mft",
+        "ch_dimer_mft", {"MFT": 2, "OX": 1}, {"MFTD": 1, "OXV": 1}, "k_dimer_mft",
         "CHANNEL 3, dominant at 115-120 C -- the channel the 30 C system rules "
         "out at <1.5%. SECOND order in thiol and FIRST in oxidant equivalents, "
         "because Zhang 2024 Fig. 1 shows the branch responds to the additive's "
@@ -674,7 +674,7 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "and cysteine only 8.6%. NOT AROMA LOSS -- the dimer is 15.6x more "
         "potent than the monomer.",
     ),
-    Reaction("ch_dimer_fft", {"FFT": 2, "OX": 1}, {"FFTD": 1}, "k_dimer_fft", ""),
+    Reaction("ch_dimer_fft", {"FFT": 2, "OX": 1}, {"FFTD": 1, "OXV": 1}, "k_dimer_fft", ""),
     # Channel 4 -- radical coupling to methanethiol. 115 C.
     Reaction(
         "ch_mmft", {"MFT": 1, "MESH": 1}, {"MMFT": 1}, "k_mmft",
@@ -759,6 +759,38 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "k5b_dmhf_synthesis.md sec. 8.6 names the failure mode a constant "
         "fitted to its 6.0 % would repeat. The edge ships structural.",
     ),
+    # =======================================================================
+    # WAVE B11 (2026-09-07) -- OXYGEN AS AN INPUT (kinetic_core_b11_prereg.md)
+    # =======================================================================
+    # Dissolved oxygen (OX, ambient units) is resupplied from the headspace
+    # reservoir (OXR) into the vacancy the consumers create (OXV), and consumed by
+    # cysteine autoxidation and by the reductone pool. With k_cys_ox = k_red_ox = 0
+    # and OXR = 0 -- the defaults every wave before B11 runs at -- the four steps
+    # carry no flux and every earlier artefact reproduces exactly.
+    Reaction(
+        "ox_supply", {"OXR": 1, "OXV": 1}, {"OX": 1}, "k_ox_supply",
+        "B11. Gas-liquid resupply: fast (a declared constant), proportional to the "
+        "vacancy, so OX sits at saturation while the reservoir lasts and falls with "
+        "consumption once it is spent.",
+    ),
+    Reaction(
+        "ch_cys_ox", {"Cys": 1, "OX": 1},
+        {"CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "FRAG_S": 1, "OXV": 1}, "k_cys_ox",
+        "B11. Cysteine autoxidation (to cystine and beyond), first order in cysteine "
+        "and in dissolved oxygen, through the thiolate. The products mirror "
+        "r_cys_thermal's routing (carboxyl carried as CBX). NO measurement in the "
+        "corpus pins its rate (Bagiyan 2004 prints initial rates only); B11 fits it "
+        "and expects the objective not to identify it.",
+    ),
+    Reaction(
+        "ch_red_ox_dpo", {"DPO": 1, "OX": 1}, {"FRAG_C": 5, "OXV": 1}, "k_red_ox",
+        "B11. The reductone pool consumes oxygen: the pentose deoxyosone arm. Shares "
+        "k_red_ox with the norfuraneol arm; unmeasured, fitted, expected unidentified.",
+    ),
+    Reaction(
+        "ch_red_ox_nf", {"NF": 1, "OX": 1}, {"FRAG_C": 5, "OXV": 1}, "k_red_ox",
+        "B11. The norfuraneol arm of the reductone oxygen sink.",
+    ),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.
@@ -830,6 +862,9 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
     "r_cys_h2s": {"amine": -1, "basis": (
         "cysteine thermolysis, Zheng & Ho's route: H2S + NH3 + pyruvic acid. "
         "The carboxyl is CARRIED (CBX, as pyruvate). " + AMINE_FATE_BASIS)},
+    "ch_cys_ox": {"amine": -1, "basis": (
+        "B11 cysteine autoxidation, routed exactly as r_cys_thermal: the carboxyl is "
+        "CARRIED (CBX), the amine leaves with the fragment nitrogen. " + AMINE_FATE_BASIS)},
     "r_cys_thermal": {"amine": -1, "basis": (
         "Kang's lumped non-sulfide cysteine consumption (cystine formation, "
         "self-condensation, degradation). Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
@@ -924,6 +959,8 @@ REACTION_PH_FACTOR: Mapping[str, str] = {
     "ch_dimer_fft": "thiolate",
     "ch_thiolate_loss_mft": "thiolate",
     "ch_thiolate_loss_fft": "thiolate",
+    # B11: cysteine autoxidation also proceeds through the thiolate.
+    "ch_cys_ox": "thiolate",
 }
 
 

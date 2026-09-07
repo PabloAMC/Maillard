@@ -1252,6 +1252,21 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       ladders are shaped by the SINKS, which the corpus does not pin either. Shipped as B10: the
       ambient-oxidant consistency fix only; the engine keeps reading B9. Next: R7 (two temperatures,
       several times, one buffered pot, intermediates measured) and/or B11 (the sink structure).
+      **B11 RUN 2026-09-07: DO NOT SHIP** (`kinetic_core_b11_prereg.md` sec. 9 amendments + sec. 10;
+      `kinetic_core_b11_ship_rule.md`). The two-pool oxygen state (reservoir `OXR` in ambient units
+      from the vessel block, vacancy `OXV`, fast refill, consumers `ch_cys_ox` thiolate-mediated and
+      `ch_red_ox_*` on the reductone pool, dimers vacating) is in the engine; the fit on B9's 54 rows
+      with every system charged from the generator's vessel table (only Hofmann 1998 states volumes)
+      walked both consumers to their floors (3.7e-4 / 1.3e-4 per unit per minute), unidentified
+      (Laplace sigma 8 / 20 dex); Bolton 20.2x unchanged, Yiltirak 130 C unchanged, in-sample worst
+      +0.20 dex (the dimer channels' vacancy cost k_dimer_decay +1.85 dex). Per the prereg the
+      consumers ship at ZERO (declared-inert), the structure, the vessel plumbing and the reservoir
+      arithmetic stay (every earlier wave reproduces to 1e-9), the engine keeps reading B9, and the
+      vessel's absence is an extrapolation flag only once a shipped report consumes oxygen
+      (Amendment 23). Reading: one laboratory's vessel cannot identify an oxygen consumer, and no
+      first-order consumption inside the bands closes a between-lab gap without destroying the pot's
+      cysteine. R2(a-b) closed as a negative result; R3 (paper response factor) is now the leading
+      explanation for between-lab level gaps; R7's oxygen axis is the only measurement that settles it.
       (a) **Oxygen as an input.** Charge `OX` from headspace + dissolved O2 (Henry) and cystine;
       split the thiol sink into a thermal term and an oxidative term first order in thiol and in
       O2 through the thiolate fraction (mechanism already in `ch_thiolate_loss_*`), with a

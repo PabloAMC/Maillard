@@ -98,6 +98,10 @@ def frozen_vector(report: Dict[str, Any]) -> np.ndarray:
     routes = fr.get("formation_Ea_by_route_kJ_mol") or {}
     lumped = routes.get("sugar_trunk", fr["lumped_formation_Ea_kJ_mol"])
     extra = [routes["thiol_assembly"]] if routes else []
+    # B11: the two oxygen consumers, log10, appended after everything else.
+    oxy = fr.get("oxygen_log10_k") or {}
+    if oxy:
+        extra += [float(oxy["k_cys_ox"]), float(oxy["k_red_ox"])]
     return np.array(
         [fr["log10_k_ref_at_145C"][k] for k in B23.PARAM_ORDER]
         + [lumped]

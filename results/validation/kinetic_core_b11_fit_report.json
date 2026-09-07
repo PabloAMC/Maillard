@@ -1,0 +1,730 @@
+{
+  "wave": "B11 -- oxygen as an input (two-pool state; consumers fitted, expected unidentified)",
+  "generated_by": "scripts/generators/generate_kinetic_core_b11_fit.py",
+  "prereg": "results/validation/kinetic_core_b11_prereg.md",
+  "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendment 23",
+  "objective": {
+    "form": "B9's 54 rows, every system charged with its headspace reservoir; two oxygen consumers appended (25 free)",
+    "ph_endpoint_weight_E_decades_per_pH_unit": 0.7,
+    "sigma_ph_units": 0.5,
+    "n_rows": 54,
+    "n_rows_in_b2_4": 58,
+    "n_new_rows": 0,
+    "new_row_ids": [],
+    "n_free_parameters": 25,
+    "n_frozen": 25,
+    "final_cost": 19.708165321109245,
+    "sum_r2_level_shared_with_b2_4": 37.690959834964794,
+    "sum_r2_level_all_b8_rows": 38.06038740761201,
+    "not_comparable_note": "TOTAL COST IS NOT COMPARABLE TO B2.4's: B8 scores four rows B2.4 did not. `sum_r2_level_shared_with_b2_4` is the like-for-like comparator and is summed over exactly the non-pH rows both waves scored.",
+    "removed_row_ids": [
+      "hofmann_ribose_FFT",
+      "hofmann_ribose_MFT",
+      "hofmann_xylose_FFT",
+      "hofmann_xylose_MFT",
+      "hofmann_glucose_FFT",
+      "hofmann_glucose_MFT",
+      "hofmann_fructose_FFT",
+      "hofmann_fructose_MFT"
+    ]
+  },
+  "t_structure": {
+    "thiol_sink_band_kj_mol": [
+      7.0,
+      102.0
+    ],
+    "thiol_sink_prior_centre_kj_mol": 60.2,
+    "thiol_sink_fitted_kj_mol": 101.9999994408803,
+    "thiol_sink_band_state": "ON THE CEILING",
+    "carbonyl_sink_band_kj_mol": [
+      20.0,
+      250.0
+    ],
+    "carbonyl_sink_fitted_kj_mol": 161.09938817959548,
+    "carbonyl_sink_band_state": "interior",
+    "measured_barriers_the_fit_cannot_move": {
+      "k_dimer_mft": 122.2,
+      "k_dimer_fft": 122.2,
+      "k_arp_dpo": 85.7,
+      "k_arp_tdp": 85.7,
+      "k_cys_thermal": 55.1
+    },
+    "refuted": "Ea_decay_thiol_sink = 248.0 (B2.2), 216.1 (B2.3), 212.9-218.1 (B2.4). Gigl 2021 measures the covalent-capture channel at k(333)/k(279) = 67.2; 248 kJ/mol predicts 3.4e7 -- wrong by 5.1e5x."
+  },
+  "free_set": {
+    "n_free": 25,
+    "n_frozen": 25,
+    "keys": [
+      "k_tdp_fur",
+      "k_nf_mft",
+      "k_nf_mp3p",
+      "k_mgo_mp",
+      "k_glc_ha",
+      "k_dimer_fft",
+      "k_fft_decay",
+      "k_fur_decay",
+      "k_pent_caramel",
+      "k_cys_thermal",
+      "k_thiolate_loss",
+      "ph_acid_yield_per_sink_event",
+      "ph_arp_secondary_ammonium_pKa",
+      "k_fur_fft",
+      "k_osone_decay",
+      "k_dimer_decay",
+      "k_ttca_deg",
+      "k_thiol_decay",
+      "Ea_decay_thiol_sink",
+      "Ea_decay_carbonyl_sink",
+      "k_dimer_mft",
+      "k_arp_dpo",
+      "k_arp_tdp",
+      "log10_k_cys_ox",
+      "log10_k_red_ox"
+    ],
+    "clause": {
+      "k_tdp_fur": "R1 identified",
+      "k_nf_mft": "R1 identified",
+      "k_nf_mp3p": "R1 identified",
+      "k_mgo_mp": "R1 identified",
+      "k_glc_ha": "R1 identified",
+      "k_dimer_fft": "R1 identified",
+      "k_fft_decay": "R1 identified",
+      "k_fur_decay": "R1 identified",
+      "k_pent_caramel": "R1 identified",
+      "k_cys_thermal": "R1 identified",
+      "k_thiolate_loss": "R1 identified",
+      "ph_acid_yield_per_sink_event": "R2 pH-drift (price-taker of the weighting)",
+      "ph_arp_secondary_ammonium_pKa": "R2 pH-drift (price-taker of the weighting)",
+      "k_fur_fft": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_osone_decay": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_dimer_decay": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_ttca_deg": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_thiol_decay": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "Ea_decay_thiol_sink": "R4 decay barrier (traded on/off its bound)",
+      "Ea_decay_carbonyl_sink": "R4 decay barrier (traded on/off its bound)",
+      "k_dimer_mft": "R5 barrier moved under it (B8)",
+      "k_arp_dpo": "R5 barrier moved under it (B8)",
+      "k_arp_tdp": "R5 barrier moved under it (B8)",
+      "log10_k_cys_ox": "R7 oxygen consumer (B11): cysteine autoxidation; expected unidentified",
+      "log10_k_red_ox": "R7 oxygen consumer (B11): the reductone pool; expected unidentified"
+    },
+    "frozen_keys": [
+      "k_pent_dpo",
+      "k_pent_tdp",
+      "k_dpo_c2c3",
+      "k_dpo_nf",
+      "k_dpo_ptr",
+      "k_dpo_ddp",
+      "k_ddp_mft",
+      "k_ha_mp_mft",
+      "k_thi_hmp",
+      "k_thi_mesh",
+      "k_hmp_mft",
+      "k_hmp_mp2p",
+      "k_cys_actz",
+      "k_mmft",
+      "k_mft_decay",
+      "k_nf_decay",
+      "k_h2s_loss",
+      "k_pent_thermal",
+      "k_glc_fur",
+      "k_arp_tdp_th",
+      "k_arp_dpo_th",
+      "k_ddp_mft_hs",
+      "k_fur_fft_hs",
+      "k_ttca_cys",
+      "Ea_lumped_formation"
+    ]
+  },
+  "members": [
+    {
+      "wave": "B11",
+      "weight_tag": "half",
+      "ph_endpoint_weight_E": 0.7,
+      "sigma_ph_units": 0.5,
+      "start": 0,
+      "arm": "incumbent",
+      "seed": null,
+      "start_is_b2_4_half_vector": true,
+      "start_cost": 37.98559054104876,
+      "cost": 19.708165321109245,
+      "sum_r2_level_shared_with_b2_4": 37.690959834964794,
+      "sum_r2_level_all_b8_rows": 38.06038740761201,
+      "n_rows": 54,
+      "n_free": 25,
+      "evals": 600,
+      "eval_budget": 600,
+      "budget_exhausted": true,
+      "nfev": 600,
+      "status": -9,
+      "converged": false,
+      "seconds": 1981.4,
+      "ph_endpoint_miss_pH_units": {
+        "zhou_final_pH_from_pH6": -0.018846871126443343,
+        "zhou_final_pH_from_pH7": 0.5809233173914254,
+        "zhou_final_pH_from_pH8": 0.03403973283246131
+      },
+      "residual_by_row": {
+        "hofmann_ribose_NF_insitu": 0.30476054772712263,
+        "hofmann_ribose_FUR_insitu": -0.12448470574149766,
+        "fed_ribose_h2s_FFT": 0.05025131639039478,
+        "fed_ribose_h2s_MFT": 0.38493776206999164,
+        "fed_tdp_h2s_FFT": 0.22904862758792938,
+        "fed_furfural_h2s_FFT": 0.35476454723585155,
+        "fed_nf_h2s_MFT": 0.2755448684030751,
+        "fed_nf_cys_MFT": 0.6992202296575313,
+        "fed_c2c3_MFT": -0.2885228516892698,
+        "fed_c2c3_MFT_pH3": 2.088556009172705,
+        "fed_c2c3_MFT_pH7": -0.48286794428354207,
+        "fed_thiamine_MFT": -0.16569758787866617,
+        "fed_mgo_h2s_1to1_MP": 0.06316952734472828,
+        "fed_mgo_h2s_1to2_MP": -0.06384077193427586,
+        "zhou_pH7_MFT": -1.1376062775666596,
+        "zhou_pH7_FFT": -1.0159494671648415,
+        "zhou_pH7_MFT_over_FFT": -0.24344991506597596,
+        "zhou_pH7_dimer_over_MFT": -2.5812007548745446,
+        "zhou_pH7_ACTZ": -0.19078659146100768,
+        "zhou_pH7_FUR_arp_alone": -0.4449831549486819,
+        "whitfield_nf_cys_MFT": -0.6742188395420107,
+        "whitfield_nf_h2s_MFT": -2.0939064834675865,
+        "whitfield_mercaptoketone_over_MFT": -0.5859431351844236,
+        "vanseeventer_cys_conversion": 0.6745349182668513,
+        "vanseeventer_ribose_conversion": 0.4164624553605173,
+        "zhang_fig1_cys_dimer_over_MFT": -2.3692487191040876,
+        "zhang_fig1_gcys_dimer_over_MFT": -0.5614097820655074,
+        "zhang_fig1_cys_MMFT_over_MFT": 1.07213375578732,
+        "cerny_ternary_thiamine_share": -0.927180945105219,
+        "cerny_isomer_split": -0.1897639166671623,
+        "kang_100C_MFT": -0.5360928563821117,
+        "kang_120C_MFT": -0.4429318476886485,
+        "kang_100C_FFT": -0.7244791678940702,
+        "kang_120C_FFT": -0.5405937805842754,
+        "kang_100C_FUR": 1.4333190526139243,
+        "kang_120C_FUR": 0.43063689141776756,
+        "kang_100C_MFT_over_FFT": 0.25185613529142903,
+        "kang_100C_cys_conversion": -0.14831758305613818,
+        "kang_120C_cys_conversion": -0.20688499113178663,
+        "kang_free_cys_yield_ceiling": 0.0,
+        "kumazawa_FFT_retention_pH3_0": -0.8303209481949388,
+        "kumazawa_FFT_retention_pH4_0": -0.7687796417126244,
+        "kumazawa_FFT_retention_pH5_0": -0.7156671684955602,
+        "kumazawa_FFT_retention_pH5_4": -0.6721638057553462,
+        "kumazawa_FFT_retention_pH6_0": -0.3142957015825945,
+        "kumazawa_FFT_retention_pH6_4": 1.701185460576428,
+        "zhou_final_pH_from_pH6": -0.037693742252886686,
+        "zhou_final_pH_from_pH7": 1.1618466347828509,
+        "zhou_final_pH_from_pH8": 0.06807946566492262,
+        "yaghmur_fft_share_ceiling": 0.0409390358192124,
+        "feng_ARP_conversion_100C": 0.21587423846724907,
+        "feng_ARP_conversion_120C": 0.14371757551565023,
+        "zhai_MFT_fold_120_over_100": 0.2484294071573076,
+        "zhai_FFT_fold_120_over_100": 0.490361064890738
+      },
+      "row_ids": [
+        "hofmann_ribose_NF_insitu",
+        "hofmann_ribose_FUR_insitu",
+        "fed_ribose_h2s_FFT",
+        "fed_ribose_h2s_MFT",
+        "fed_tdp_h2s_FFT",
+        "fed_furfural_h2s_FFT",
+        "fed_nf_h2s_MFT",
+        "fed_nf_cys_MFT",
+        "fed_c2c3_MFT",
+        "fed_c2c3_MFT_pH3",
+        "fed_c2c3_MFT_pH7",
+        "fed_thiamine_MFT",
+        "fed_mgo_h2s_1to1_MP",
+        "fed_mgo_h2s_1to2_MP",
+        "zhou_pH7_MFT",
+        "zhou_pH7_FFT",
+        "zhou_pH7_MFT_over_FFT",
+        "zhou_pH7_dimer_over_MFT",
+        "zhou_pH7_ACTZ",
+        "zhou_pH7_FUR_arp_alone",
+        "whitfield_nf_cys_MFT",
+        "whitfield_nf_h2s_MFT",
+        "whitfield_mercaptoketone_over_MFT",
+        "vanseeventer_cys_conversion",
+        "vanseeventer_ribose_conversion",
+        "zhang_fig1_cys_dimer_over_MFT",
+        "zhang_fig1_gcys_dimer_over_MFT",
+        "zhang_fig1_cys_MMFT_over_MFT",
+        "cerny_ternary_thiamine_share",
+        "cerny_isomer_split",
+        "kang_100C_MFT",
+        "kang_120C_MFT",
+        "kang_100C_FFT",
+        "kang_120C_FFT",
+        "kang_100C_FUR",
+        "kang_120C_FUR",
+        "kang_100C_MFT_over_FFT",
+        "kang_100C_cys_conversion",
+        "kang_120C_cys_conversion",
+        "kang_free_cys_yield_ceiling",
+        "kumazawa_FFT_retention_pH3_0",
+        "kumazawa_FFT_retention_pH4_0",
+        "kumazawa_FFT_retention_pH5_0",
+        "kumazawa_FFT_retention_pH5_4",
+        "kumazawa_FFT_retention_pH6_0",
+        "kumazawa_FFT_retention_pH6_4",
+        "zhou_final_pH_from_pH6",
+        "zhou_final_pH_from_pH7",
+        "zhou_final_pH_from_pH8",
+        "yaghmur_fft_share_ceiling",
+        "feng_ARP_conversion_100C",
+        "feng_ARP_conversion_120C",
+        "zhai_MFT_fold_120_over_100",
+        "zhai_FFT_fold_120_over_100"
+      ],
+      "oxygen": {
+        "k_cys_ox": 0.0003704325706580857,
+        "k_red_ox": 0.0001259482411025573
+      }
+    },
+    {
+      "wave": "B11",
+      "weight_tag": "half",
+      "ph_endpoint_weight_E": 0.7,
+      "sigma_ph_units": 0.5,
+      "start": 1,
+      "arm": "local",
+      "seed": 20261830,
+      "start_is_b2_4_half_vector": false,
+      "start_cost": 460.3837159051497,
+      "cost": 25.635177630054248,
+      "sum_r2_level_shared_with_b2_4": 49.391599460281505,
+      "sum_r2_level_all_b8_rows": 49.497805583799035,
+      "n_rows": 54,
+      "n_free": 25,
+      "evals": 600,
+      "eval_budget": 600,
+      "budget_exhausted": true,
+      "nfev": 600,
+      "status": -9,
+      "converged": false,
+      "seconds": 1952.6,
+      "ph_endpoint_miss_pH_units": {
+        "zhou_final_pH_from_pH6": 0.021259176749735875,
+        "zhou_final_pH_from_pH7": 0.6611303346417845,
+        "zhou_final_pH_from_pH8": -0.0747806599177423
+      },
+      "residual_by_row": {
+        "hofmann_ribose_NF_insitu": -0.044165198417342316,
+        "hofmann_ribose_FUR_insitu": 0.4531506527133034,
+        "fed_ribose_h2s_FFT": 0.2663101332845701,
+        "fed_ribose_h2s_MFT": 0.32214858697492604,
+        "fed_tdp_h2s_FFT": 0.25610267410281706,
+        "fed_furfural_h2s_FFT": 0.5442731257853349,
+        "fed_nf_h2s_MFT": 0.3066598126223946,
+        "fed_nf_cys_MFT": 0.6656822617546533,
+        "fed_c2c3_MFT": -0.30306281706539273,
+        "fed_c2c3_MFT_pH3": 2.0882554331537517,
+        "fed_c2c3_MFT_pH7": -0.7899947824158429,
+        "fed_thiamine_MFT": -0.1796482099180816,
+        "fed_mgo_h2s_1to1_MP": 0.06305478704735852,
+        "fed_mgo_h2s_1to2_MP": -0.06395420718285946,
+        "zhou_pH7_MFT": -1.5844914380497463,
+        "zhou_pH7_FFT": -1.3689851072963772,
+        "zhou_pH7_MFT_over_FFT": -0.43114895565756467,
+        "zhou_pH7_dimer_over_MFT": -2.8615899521737633,
+        "zhou_pH7_ACTZ": -0.22507040363401204,
+        "zhou_pH7_FUR_arp_alone": -0.3212067995340004,
+        "whitfield_nf_cys_MFT": -0.7090689684684106,
+        "whitfield_nf_h2s_MFT": -1.8820943732786213,
+        "whitfield_mercaptoketone_over_MFT": -0.49931252650176566,
+        "vanseeventer_cys_conversion": 0.6708427690986445,
+        "vanseeventer_ribose_conversion": 0.4164624553605173,
+        "zhang_fig1_cys_dimer_over_MFT": -2.7352276213807323,
+        "zhang_fig1_gcys_dimer_over_MFT": -1.4638062435522907,
+        "zhang_fig1_cys_MMFT_over_MFT": 1.1069236826699247,
+        "cerny_ternary_thiamine_share": -0.8587754206858741,
+        "cerny_isomer_split": -0.1438026678091658,
+        "kang_100C_MFT": 0.1466366313214506,
+        "kang_120C_MFT": 0.07878700285365964,
+        "kang_100C_FFT": -0.9449139239976292,
+        "kang_120C_FFT": -0.9494284349637466,
+        "kang_100C_FUR": 2.1114487105729696,
+        "kang_120C_FUR": 1.2122397610503546,
+        "kang_100C_MFT_over_FFT": 1.4560752486265711,
+        "kang_100C_cys_conversion": -0.18177334903952702,
+        "kang_120C_cys_conversion": -0.23506388224150546,
+        "kang_free_cys_yield_ceiling": 0.0,
+        "kumazawa_FFT_retention_pH3_0": -0.7933843881104659,
+        "kumazawa_FFT_retention_pH4_0": -0.7300750292177552,
+        "kumazawa_FFT_retention_pH5_0": -0.6619090299658629,
+        "kumazawa_FFT_retention_pH5_4": -0.6010499871248571,
+        "kumazawa_FFT_retention_pH6_0": -0.3219635679025296,
+        "kumazawa_FFT_retention_pH6_4": 1.2342845769887127,
+        "zhou_final_pH_from_pH6": 0.04251835349947175,
+        "zhou_final_pH_from_pH7": 1.322260669283569,
+        "zhou_final_pH_from_pH8": -0.1495613198354846,
+        "yaghmur_fft_share_ceiling": 0.08787467127374846,
+        "feng_ARP_conversion_100C": 0.2323659200271799,
+        "feng_ARP_conversion_120C": 0.13903508191151018,
+        "zhai_MFT_fold_120_over_100": -0.18093235966908397,
+        "zhai_FFT_fold_120_over_100": -0.01203868555480221
+      },
+      "row_ids": [
+        "hofmann_ribose_NF_insitu",
+        "hofmann_ribose_FUR_insitu",
+        "fed_ribose_h2s_FFT",
+        "fed_ribose_h2s_MFT",
+        "fed_tdp_h2s_FFT",
+        "fed_furfural_h2s_FFT",
+        "fed_nf_h2s_MFT",
+        "fed_nf_cys_MFT",
+        "fed_c2c3_MFT",
+        "fed_c2c3_MFT_pH3",
+        "fed_c2c3_MFT_pH7",
+        "fed_thiamine_MFT",
+        "fed_mgo_h2s_1to1_MP",
+        "fed_mgo_h2s_1to2_MP",
+        "zhou_pH7_MFT",
+        "zhou_pH7_FFT",
+        "zhou_pH7_MFT_over_FFT",
+        "zhou_pH7_dimer_over_MFT",
+        "zhou_pH7_ACTZ",
+        "zhou_pH7_FUR_arp_alone",
+        "whitfield_nf_cys_MFT",
+        "whitfield_nf_h2s_MFT",
+        "whitfield_mercaptoketone_over_MFT",
+        "vanseeventer_cys_conversion",
+        "vanseeventer_ribose_conversion",
+        "zhang_fig1_cys_dimer_over_MFT",
+        "zhang_fig1_gcys_dimer_over_MFT",
+        "zhang_fig1_cys_MMFT_over_MFT",
+        "cerny_ternary_thiamine_share",
+        "cerny_isomer_split",
+        "kang_100C_MFT",
+        "kang_120C_MFT",
+        "kang_100C_FFT",
+        "kang_120C_FFT",
+        "kang_100C_FUR",
+        "kang_120C_FUR",
+        "kang_100C_MFT_over_FFT",
+        "kang_100C_cys_conversion",
+        "kang_120C_cys_conversion",
+        "kang_free_cys_yield_ceiling",
+        "kumazawa_FFT_retention_pH3_0",
+        "kumazawa_FFT_retention_pH4_0",
+        "kumazawa_FFT_retention_pH5_0",
+        "kumazawa_FFT_retention_pH5_4",
+        "kumazawa_FFT_retention_pH6_0",
+        "kumazawa_FFT_retention_pH6_4",
+        "zhou_final_pH_from_pH6",
+        "zhou_final_pH_from_pH7",
+        "zhou_final_pH_from_pH8",
+        "yaghmur_fft_share_ceiling",
+        "feng_ARP_conversion_100C",
+        "feng_ARP_conversion_120C",
+        "zhai_MFT_fold_120_over_100",
+        "zhai_FFT_fold_120_over_100"
+      ],
+      "oxygen": {
+        "k_cys_ox": 0.000499908501272111,
+        "k_red_ox": 0.01312798832076639
+      }
+    }
+  ],
+  "best_start": 0,
+  "frozen_parameters": {
+    "log10_k_ref_at_145C": {
+      "k_pent_dpo": -0.5446463072676107,
+      "k_pent_tdp": -0.5022095511358302,
+      "k_dpo_c2c3": -3.0155236916597783,
+      "k_arp_dpo": -2.7590381070451477,
+      "k_arp_tdp": -1.7002393346863771,
+      "k_dpo_nf": 0.43445392481376577,
+      "k_dpo_ptr": -4.347247153178998,
+      "k_dpo_ddp": 0.04172302756946337,
+      "k_tdp_fur": -3.0072635919682,
+      "k_ddp_mft": -6.540581367427349,
+      "k_fur_fft": -0.7442209683976302,
+      "k_nf_mft": -2.008020535953786,
+      "k_nf_mp3p": -2.8692331516130456,
+      "k_mgo_mp": -3.9808843276619825,
+      "k_ha_mp_mft": -3.8696667868173487,
+      "k_glc_ha": -8.589075847746692,
+      "k_thi_hmp": -2.5882946400737175,
+      "k_thi_mesh": -3.273029275775544,
+      "k_hmp_mft": -2.6086953372771946,
+      "k_hmp_mp2p": -3.4372110320564206,
+      "k_cys_actz": -2.9736755938616524,
+      "k_dimer_mft": 0.4999999999954608,
+      "k_dimer_fft": 0.49999999891174607,
+      "k_mmft": -1.9837700999787538,
+      "k_mft_decay": 0.13411252144508923,
+      "k_fft_decay": -0.6369782780848167,
+      "k_dimer_decay": -7.864734847462704,
+      "k_nf_decay": -2.181605124250818,
+      "k_fur_decay": 0.3503533973091202,
+      "k_h2s_loss": -1.3506222526942775,
+      "k_osone_decay": -1.116053958068901,
+      "k_thiol_decay": -8.569903530662273,
+      "k_pent_caramel": -2.534318827976062,
+      "k_pent_thermal": -3.437313963933767,
+      "k_glc_fur": -4.922868997756941,
+      "k_arp_tdp_th": -4.353715425211875,
+      "k_arp_dpo_th": -1.2902512237780432,
+      "k_ddp_mft_hs": -7.69250097808771,
+      "k_fur_fft_hs": -0.009550422129148002,
+      "k_ttca_cys": -0.5786517733288119,
+      "k_ttca_deg": -2.174657588372519,
+      "k_cys_thermal": -2.0615814485747053,
+      "k_thiolate_loss": -2.012935564716002
+    },
+    "lumped_formation_Ea_kJ_mol": 64.0822869313293,
+    "decay_Ea_kJ_mol": {
+      "thiol_sink": 101.9999994408803,
+      "carbonyl_sink": 161.09938817959548
+    },
+    "decay_families": {
+      "thiol_sink": [
+        "k_mft_decay",
+        "k_fft_decay",
+        "k_thiol_decay",
+        "k_thiolate_loss"
+      ],
+      "carbonyl_sink": [
+        "k_fur_decay",
+        "k_osone_decay",
+        "k_nf_decay"
+      ]
+    },
+    "decay_keys_kept_on_formation_Ea": [
+      "k_dimer_decay",
+      "k_h2s_loss"
+    ],
+    "ph_drift": {
+      "acid_yield_per_sink_event": 0.11562488893087818,
+      "arp_secondary_ammonium_pKa": 7.027104240339583
+    },
+    "reference_temperature_K": 418.15,
+    "oxygen": {
+      "k_cys_ox": 0.0003704325706580857,
+      "k_red_ox": 0.0001259482411025573,
+      "k_ox_supply": 10.0,
+      "ox_sat_mmol_l": 0.3,
+      "reservoir_default_units": 29.0
+    },
+    "oxygen_log10_k": {
+      "k_cys_ox": -3.4312908345300808,
+      "k_red_ox": -3.899807893150286
+    }
+  },
+  "vessel_table": {
+    "hofmann_pentose_pH5": {
+      "reservoir_units": 29.920000000000005,
+      "basis": "Hofmann 1998: 100 mL in a 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "hofmann_glucose_pH5": {
+      "reservoir_units": 29.920000000000005,
+      "basis": "Hofmann 1998: 100 mL in a 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "hofmann_fructose_pH5": {
+      "reservoir_units": 29.920000000000005,
+      "basis": "Hofmann 1998: 100 mL in a 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_ribose_h2s": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_tdp_h2s": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_furfural_h2s": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_nf_h2s": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_nf_cys": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_c2c3": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_c2c3_pH3": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_c2c3_pH7": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_thiamine": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_mgo_h2s_1to1": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "fed_mgo_h2s_1to2": {
+      "reservoir_units": 87.96666666666667,
+      "basis": "Hofmann 1998: 50 mL fed pot in the 200 mL autoclave (stated)",
+      "stated": true
+    },
+    "zhou_arp_cys_pH7": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "zhou_arp_pH7": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "whitfield_nf_cys": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "whitfield_nf_h2s": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "vanseeventer_130C": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "zhang_fig1_cys": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "zhang_fig1_gcys": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "cerny_ternary": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kang_ttca_100": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kang_ttca_120": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kang_freecys_100": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kang_freecys_120": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kumazawa_pH3_0": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kumazawa_pH4_0": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kumazawa_pH5_0": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kumazawa_pH5_4": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kumazawa_pH6_0": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "kumazawa_pH6_4": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "zhou_drift_pH6": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "zhou_drift_pH7": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "zhou_drift_pH8": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "feng_arp_100": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    },
+    "feng_arp_120": {
+      "reservoir_units": 29.0,
+      "basis": "vessel volumes unstated in the source: the declared default reservoir",
+      "stated": false
+    }
+  },
+  "oxygen_bands_log10k": {
+    "k_cys_ox": [
+      -5.0,
+      -1.0
+    ],
+    "k_red_ox": [
+      -5.0,
+      -1.0
+    ]
+  },
+  "start_vector": "B9's frozen optimum with both consumers at the centre of their log10 bands (start 0); the perturbation protocol (start 1)",
+  "active_bounds": [
+    {
+      "key": "k_dimer_mft",
+      "bound": "upper",
+      "value": 0.4999999999954608
+    },
+    {
+      "key": "k_dimer_fft",
+      "bound": "upper",
+      "value": 0.49999999891174607
+    },
+    {
+      "key": "Ea_decay_thiol_sink",
+      "bound": "upper",
+      "value": 101.9999994408803
+    }
+  ]
+}

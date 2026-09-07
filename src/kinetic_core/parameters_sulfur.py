@@ -898,7 +898,77 @@ PROTEIN_DISULFIDE_DERIVATION = (
 )
 
 
+# ===========================================================================
+# WAVE B11 (2026-09-07) -- OXYGEN AS AN INPUT: the declared constants
+# ===========================================================================
+#: Saturation of dissolved O2 under the sealed tube's air at cooking temperature,
+#: mmol/L: the ambient unit `OX = 1.0` every fit system was integrated at. ~0.25-0.35
+#: over 100-130 C under 0.21-0.29 atm O2 (Henry's law); declared, banded, sampled.
+OX_SAT_MMOL_L: float = 0.3
+OX_SAT_BAND_MMOL_L: Tuple[float, float] = (0.1, 1.0)
+#: The reservoir a run gets when no vessel is recorded: Hofmann 1998's 100 mL pot in a
+#: 200 mL autoclave, 0.87 mmol O2 over 0.1 L = 8.7 mmol/L, in ambient units. Band: from a
+#: 3 mL tube's 50 mmol/L down to a nearly full vessel, expressed as a scale on the default.
+OX_RESERVOIR_DEFAULT_UNITS: float = 8.7 / OX_SAT_MMOL_L
+OX_RESERVOIR_SCALE_BAND: Tuple[float, float] = (0.1, 10.0)
+#: Gas-liquid resupply, 1/(ambient unit * min): FAST by declaration (a stirred 3 mL tube or a
+#: 100 mL autoclave equilibrates in seconds against cooks of 20-240 min). Not sampled.
+K_OX_SUPPLY_PER_UNIT_MIN: float = 10.0
+#: The two consumers' search bands, log10 of L/(ambient unit * min): wide, because nothing in
+#: the corpus measures either (Bagiyan 2004 prints initial rates, not constants).
+OXYGEN_BOUNDS_LOG10K: Mapping[str, Tuple[float, float]] = {
+    "k_cys_ox": (-5.0, -1.0),
+    "k_red_ox": (-5.0, -1.0),
+}
+OXYGEN_FITTED_KEYS: Tuple[str, ...] = ("k_cys_ox", "k_red_ox")
+OXYGEN_KEYS: Tuple[str, ...] = ("k_ox_supply",) + OXYGEN_FITTED_KEYS
+
+
+def oxygen_parameters(
+    k_cys_ox: float = 0.0, k_red_ox: float = 0.0, k_ox_supply: Optional[float] = None,
+) -> Dict[str, SulfurParameter]:
+    """
+    The B11 oxygen constants as SulfurParameters. The DEFAULTS are zero for the two
+    consumers AND, unless one of them is non-zero, for the resupply: with all three at
+    zero the four B11 steps carry no flux and every wave before B11 reproduces bit for
+    bit (the dimer channels' own draw on the pool is not refilled, exactly as before).
+    A B11 fit report (or an envelope draw) supplies the consumers and switches the
+    declared fast resupply on.
+    """
+    if k_ox_supply is None:
+        k_ox_supply = K_OX_SUPPLY_PER_UNIT_MIN if (k_cys_ox > 0.0 or k_red_ox > 0.0) else 0.0
+    common = dict(
+        evidence_class="derived_from_fit_data",
+        source_anchor="B11 (kinetic_core_b11_prereg.md sec. 3): oxygen as a two-pool state; no "
+                      "literature rate constant exists for either consumer",
+        dossier_anchor="results/validation/kinetic_core_b11_prereg.md; bagiyan2004_extraction.md "
+                       "(initial rates only); yiltirak2026_extraction.md sec. 5",
+        conditions="aqueous, pH 4.5-7, 100-145 C, dissolved O2 in ambient units (1.0 = saturation)",
+        ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+    )
+    return {
+        "k_ox_supply": _sulfur_parameter(
+            "k_ox_supply", "OXR + OXV -> OX (gas-liquid resupply)", 2, k_ref=float(k_ox_supply),
+            ea=None, **{**common, "evidence_class": "structural_constant"},
+            channel="oxygen_supply", flags=("b11_oxygen", "declared_fast_transfer"),
+            note="Declared fast; not fitted, not sampled; zero while the consumers are zero."),
+        "k_cys_ox": _sulfur_parameter(
+            "k_cys_ox", "Cys + OX -> cystine-equivalent (CBX, fragments) + OXV", 2,
+            k_ref=float(k_cys_ox), ea=None, **common, channel="fitted_consumption",
+            ph_factor_kind="thiolate", flags=("b11_oxygen", "fitted_here", "no_literature_value"),
+            note="Cysteine autoxidation through the thiolate; zero until a B11 report supplies it."),
+        "k_red_ox": _sulfur_parameter(
+            "k_red_ox", "reductone (DPO, NF) + OX -> fragments + OXV", 2,
+            k_ref=float(k_red_ox), ea=None, **common, channel="fitted_consumption",
+            flags=("b11_oxygen", "fitted_here", "no_literature_value"),
+            note="The reductone oxygen sink; zero until a B11 report supplies it."),
+    }
+
+
 MEASURED_SULFUR: Mapping[str, SulfurParameter] = {
+    # B11 (2026-09-07): the oxygen constants at their INERT defaults (consumers zero),
+    # so every frozen generator carries the keys and reproduces exactly.
+    **oxygen_parameters(),
     "k_thioether": _sulfur_parameter(
         "k_thioether",
         "R-SH + matrix electrophile site -> matrix-bound thioether",

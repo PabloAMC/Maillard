@@ -713,6 +713,39 @@ def _declared_band_priors() -> List[CorePrior]:
             sampled=True, reason="declared band: the six Martins 2003 per-step ratios span it",
         )
     )
+    # B11 (2026-09-07): the oxygen structure's declared bands. SAMPLED only when the shipped
+    # sulfur report carries an "oxygen" block (a B11 report); until then the consumers are
+    # zero by declaration and the reservoir is inert, and the priors say so.
+    from .parameters_sulfur import OXYGEN_BOUNDS_LOG10K, OX_RESERVOIR_SCALE_BAND
+    frozen_oxygen = (_report(engine._B2_FIT_REPORT)["frozen_parameters"]).get("oxygen") or {}
+    b11 = bool(frozen_oxygen)
+    for key in ("k_cys_ox", "k_red_ox"):
+        centre = float(frozen_oxygen.get(key, 0.0))
+        out.append(
+            CorePrior(
+                key=f"sulfur.oxygen.{key}.log10_k", lane=SULFUR, kind="declared_band",
+                distribution="uniform" if b11 else "fixed",
+                centre=(math.log10(centre) if centre > 0 else OXYGEN_BOUNDS_LOG10K[key][0]) if b11 else 0.0,
+                sigma=None, band=tuple(float(v) for v in OXYGEN_BOUNDS_LOG10K[key]),
+                unit="log10(L per ambient unit per min)",
+                source="parameters_sulfur.OXYGEN_BOUNDS_LOG10K (B11 prereg sec. 3b)",
+                sampled=b11,
+                reason=("declared band, sampled uniform in log10 (no measurement pins the consumer)" if b11
+                        else "not a free coordinate of the shipped report (B11 not shipped): the consumer is zero by declaration and the structure inert"),
+            )
+        )
+    out.append(
+        CorePrior(
+            key="sulfur.oxygen.reservoir_scale", lane=SULFUR, kind="declared_band",
+            distribution="log_uniform" if b11 else "fixed", centre=1.0, sigma=None,
+            band=(float(OX_RESERVOIR_SCALE_BAND[0]), float(OX_RESERVOIR_SCALE_BAND[1])),
+            unit="scale on the reservoir (vessel-derived or default)",
+            source="parameters_sulfur.OX_RESERVOIR_SCALE_BAND (saturation band x unrecorded-vessel band)",
+            sampled=b11,
+            reason=("declared band, sampled log-uniform" if b11
+                    else "not a free coordinate of the shipped report (B11 not shipped): the reservoir is inert while the consumers are zero"),
+        )
+    )
     band = float(FURANONE_PARTITION_EA_BAND_KJ_MOL)
     out.append(
         CorePrior(
@@ -813,6 +846,8 @@ def draw_from_rng(
     furanone = None
     trunk_aw_scale = None
     trunk_ph_exponent = None
+    oxygen: Dict[str, float] = {}
+    reservoir_scale = None
     lipid_u = None
     pv_u = None
     k_aw = 1.0
@@ -890,6 +925,10 @@ def draw_from_rng(
             trunk_aw_scale = value
         elif p.key == "trunk.amadori_ph_exponent_decades_per_unit":
             trunk_ph_exponent = value
+        elif p.key.startswith("sulfur.oxygen.") and p.key.endswith(".log10_k"):
+            oxygen[p.key.split(".")[2]] = 10.0 ** value
+        elif p.key == "sulfur.oxygen.reservoir_scale":
+            reservoir_scale = value
         elif p.key == "observable.air_water_partition_constant":
             k_aw = 10.0 ** value
         elif p.key == "observable.hs_spme_same_sample_dispersion":
@@ -906,11 +945,13 @@ def draw_from_rng(
             else:
                 maillard[block] = value
         for block in ("log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol", "decay_Ea_kJ_mol",
-                      "formation_Ea_by_route_kJ_mol"):
+                      "formation_Ea_by_route_kJ_mol", "oxygen", "oxygen_log10_k"):
             if block in frozen_sulfur:
                 maillard.setdefault(block, frozen_sulfur[block])
         ph_drift = sulfur["ph_drift"]
         coords.update(sulfur["coords"])
+    if oxygen:
+        maillard["oxygen"] = oxygen   # B11: the drawn consumers (only when a B11 report ships)
     if b3_k or b3_ea:
         frozen_b3 = frozen_parameters(ACRYLAMIDE)
         k_block = dict(frozen_b3["log10_k_ref_at_160C"]); k_block.update(b3_k)
@@ -928,6 +969,7 @@ def draw_from_rng(
         furanone_partition_ea_kj_mol=furanone,
         trunk_aw_scale=trunk_aw_scale,
         trunk_ph_exponent=trunk_ph_exponent,
+        oxygen_reservoir_scale=reservoir_scale,
         ph_drift=ph_drift,  # the wave's Laplace covariance when present, else the frozen calibration
     )
     coords["lipid.fraction_scale"] = core.lipid_fraction_scale if core.lipid_fraction_scale is not None else float("nan")

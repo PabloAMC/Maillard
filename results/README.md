@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **352**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **358**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -65,6 +65,10 @@ Tracked files: **352**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
 | `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
 | `kinetic_core_b10_ship_rule.*` (2): `kinetic_core_b10_ship_rule.json`, `kinetic_core_b10_ship_rule.md` | The B10 prereg's ship rule (sec. 5) evaluated on the frozen B10 / B10-noyil / B9 artifacts without switching the engine (`generate_kinetic_core_b10_ship_rule.py`). |
+| `kinetic_core_b11_fit_report.json` | B11 frozen fit: B9's 54 rows with every system charged with a headspace oxygen reservoir and the two consumers appended (25 free). NOT read by the engine: the ship rule refused it and the consumers ship at zero (`kinetic_core_b11_prereg.md` sec. 10). |
+| `kinetic_core_b11_laplace_covariance.json` | Laplace covariance at the frozen B11 optimum (`generate_kinetic_core_b8_laplace.py --wave b11`); both oxygen consumers unidentified. |
+| `kinetic_core_b11_members/` (2 files) | B11 optimiser members (two starts, the oxygen-as-input wave); read back by the B11 generator's consolidation. |
+| `kinetic_core_b11_ship_rule.*` (2): `kinetic_core_b11_ship_rule.json`, `kinetic_core_b11_ship_rule.md` | The B11 prereg's ship rule (sec. 5) evaluated on the frozen B11 / B9 artifacts and the panel bundles' vessel blocks without switching the engine (`generate_kinetic_core_b11_ship_rule.py`). |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
 | `kinetic_core_b2_4_fit_*.json` (21): `kinetic_core_b2_4_fit_half.json`, `kinetic_core_b2_4_fit_half_s0.json`, `kinetic_core_b2_4_fit_half_s1.json`, `kinetic_core_b2_4_fit_half_s2.json` … | B2.4 ensemble: one fit per weighting (half / measured / shipped) and per start (_s0.._s5). History; `kinetic_core_b2_4_ensemble.json` summarises them. |

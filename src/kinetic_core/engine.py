@@ -78,7 +78,10 @@ from .matrix_oav import (
 )
 from .parameters import NETWORK_PH
 from .parameters_acrylamide import MEASURED_ACRYLAMIDE, with_fitted_acrylamide
-from .parameters_sulfur import MEASURED_SULFUR, OX_AMBIENT_MMOL_L, with_fitted_sulfur
+from .parameters_sulfur import (
+    MEASURED_SULFUR, OX_AMBIENT_MMOL_L, OX_RESERVOIR_DEFAULT_UNITS, OX_SAT_MMOL_L,
+    oxygen_parameters, with_fitted_sulfur,
+)
 from . import trunk_conditions
 from .species import SPECIES_KEYS
 from .species_acrylamide import ACRYLAMIDE_INDEX, acrylamide_ppb
@@ -564,6 +567,10 @@ class ProcessSpec:
     ph_drift: Optional[PhDrift] = None
     #: Free-text matrix descriptor, matched against the B4 threshold matrices.
     matrix: str = "water"
+    #: B11 (2026-09-07): the pot's physical state (`vessel.VesselSpec`, from the bundle's
+    #: conditions.vessel). ``None`` = no vessel recorded: the sulfur lane charges the declared
+    #: default reservoir and says so.
+    vessel: Optional[Any] = None
 
     @property
     def time_min(self) -> float:
@@ -1007,6 +1014,19 @@ def declare_envelope(
     # B2.2: the buffer is an input with a declared default, and its ABSENCE is
     # an extrapolation rather than a silent assumption.
     if lane == SULFUR:
+        # B11: the oxygen reservoir this run will be charged with, and where it came from.
+        # The vessel's ABSENCE is an extrapolation only once it changes a rate, i.e. once the
+        # shipped report consumes oxygen; with inert consumers the reservoir is inert too.
+        reservoir, basis = oxygen_reservoir_units(spec.process)
+        consumers = shipped_oxygen_consumers()
+        if any(v > 0.0 for v in consumers.values()) and getattr(spec.process, "vessel", None) is None:
+            warnings.append(
+                f"OXYGEN RESERVOIR (B11): {reservoir:.0f} ambient units per litre of liquid "
+                f"({basis}; 1 unit = {OX_SAT_MMOL_L:g} mmol/L dissolved at saturation). The "
+                f"shipped report consumes oxygen (k_cys_ox {consumers['k_cys_ox']:.2e}, "
+                f"k_red_ox {consumers['k_red_ox']:.2e} per unit per min), so the vessel is an "
+                "input this run did not receive: declare it (conditions.vessel) to leave the flag."
+            )
         if spec.process.buffer is None:
             warnings.append(BUFFER_ABSENT_WARNING)
         elif spec.process.buffer.is_clamped:
@@ -1247,6 +1267,10 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
             out["formation_Ea_by_route_kJ_mol"] = {
                 k: float(v) for k, v in frozen["formation_Ea_by_route_kJ_mol"].items()
             }
+        if frozen.get("oxygen"):
+            out["oxygen"] = {k: float(v) for k, v in frozen["oxygen"].items()}
+        if frozen.get("oxygen_log10_k"):
+            out["oxygen_log10_k"] = {k: float(v) for k, v in frozen["oxygen_log10_k"].items()}
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1297,7 +1321,8 @@ def core_parameters(
     if lane == SULFUR:
         report = None
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
-                "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol"} <= set(override):
+                "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol", "oxygen",
+                "oxygen_log10_k"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
         # B10: a report (or a draw) that carries the two route barriers uses them;
@@ -1315,6 +1340,20 @@ def core_parameters(
                 pick("decay_Ea_kJ_mol"),
             )
         )
+        # B11: the oxygen consumers from the report's "oxygen" block (or a draw's), else the
+        # inert zero defaults MEASURED_SULFUR already carries.
+        oxygen: Dict[str, float] = {}
+        if report is not None and report.get("oxygen"):
+            oxygen.update(report["oxygen"])
+        oxygen.update(override.get("oxygen") or {})
+        # the Laplace draw moves the fit's own coordinates, which are log10 (block oxygen_log10_k)
+        for key, value in (override.get("oxygen_log10_k") or {}).items():
+            oxygen[key] = 10.0 ** float(value)
+        if oxygen:
+            parameters.update(oxygen_parameters(
+                k_cys_ox=float(oxygen.get("k_cys_ox", 0.0)),
+                k_red_ox=float(oxygen.get("k_red_ox", 0.0)),
+            ))
     if lane == ACRYLAMIDE:
         report = None
         if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):
@@ -1398,6 +1437,9 @@ class CoreDraw:
     #: ``None`` = the declared centres.
     trunk_aw_scale: Optional[float] = None
     trunk_ph_exponent: Optional[float] = None
+    #: B11: a multiplicative scale on the sulfur lane's oxygen reservoir (declared band
+    #: OX_RESERVOIR_SCALE_BAND, spanning the saturation band and the unrecorded-vessel band).
+    oxygen_reservoir_scale: Optional[float] = None
     q10: Optional[float] = None
     lipid_fraction_scale: Optional[float] = None
     peroxide_scale: Optional[float] = None
@@ -1724,6 +1766,38 @@ def _furanone_corner_parameters(
     return out
 
 
+def shipped_oxygen_consumers() -> Dict[str, float]:
+    """The two B11 oxygen consumers as the shipped report carries them (zero = inert)."""
+    frozen = _read(_B2_FIT_REPORT)["frozen_parameters"]
+    block = frozen.get("oxygen") or {}
+    return {"k_cys_ox": float(block.get("k_cys_ox", 0.0)), "k_red_ox": float(block.get("k_red_ox", 0.0))}
+
+
+def oxygen_reservoir_units(process) -> Tuple[float, str]:
+    """
+    B11: the headspace oxygen reservoir in ambient units per litre of liquid, and its basis.
+
+    From the process's vessel block when the fill and vessel volumes are stated and the
+    atmosphere is air; the declared default (Hofmann 1998's 100 mL pot) with a basis that says
+    so otherwise. An open vessel or a continuous process gets a LARGE reservoir (oxygen is not
+    limited by a headspace): ten times the default, said so.
+    """
+    from . import vessel as _vessel
+
+    spec = getattr(process, "vessel", None)
+    if spec is None:
+        return OX_RESERVOIR_DEFAULT_UNITS, "no vessel recorded: the declared default reservoir"
+    if spec.atmosphere in ("open", "continuous_process"):
+        return 10.0 * OX_RESERVOIR_DEFAULT_UNITS, f"{spec.atmosphere}: oxygen not limited by a headspace (10x the default)"
+    if spec.atmosphere == "inert_gas":
+        return 0.0, "inert-gas atmosphere stated: no reservoir"
+    o2 = spec.o2_mmol()
+    if o2 is None or spec.fill_mL is None or spec.fill_mL <= 0:
+        return OX_RESERVOIR_DEFAULT_UNITS, f"vessel {spec.atmosphere} with volumes unstated: the declared default reservoir"
+    mmol_per_l = o2 / (float(spec.fill_mL) / 1000.0)
+    return mmol_per_l / OX_SAT_MMOL_L, f"{spec.headspace_mL:.0f} mL headspace over {spec.fill_mL:g} mL: {mmol_per_l:.1f} mmol O2 per litre"
+
+
 def _integrate_program(
     lane: str,
     parameters: Mapping[str, Any],
@@ -1732,6 +1806,7 @@ def _integrate_program(
     *,
     ph_drift: Optional[PhDrift] = None,
     trunk_draw: Optional[Tuple[Optional[float], Optional[float]]] = None,
+    reservoir_scale: Optional[float] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """
     Integrate a piecewise-constant thermal program, chaining the state across
@@ -1754,6 +1829,13 @@ def _integrate_program(
         # charge) is left alone. Effect on every panel row: below 1 % at trace
         # thiol (the 2026-09-06 probe).
         state.setdefault("OX", OX_AMBIENT_MMOL_L)
+        # B11 (2026-09-07): the headspace reservoir, in ambient units per litre of
+        # liquid, from the process's vessel block; the declared default otherwise.
+        # Inert while the report's consumers are zero (every wave before B11).
+        if "OXR" not in state:
+            reservoir, _basis = oxygen_reservoir_units(process)
+            state["OXR"] = reservoir * (1.0 if reservoir_scale is None else float(reservoir_scale))
+        state.setdefault("OXV", 0.0)
 
     for index, (duration, temperature_c) in enumerate(process.thermal.segments):
         grid = np.array([0.0, float(duration)])
@@ -1896,6 +1978,7 @@ def predict(
             maillard_lane, operative, dict(declaration.mapped_precursors), spec.process,
             ph_drift=draw.ph_drift if draw is not None else None,
             trunk_draw=trunk_draw,
+            reservoir_scale=draw.oxygen_reservoir_scale if draw is not None else None,
         )
         metadata["lanes"] = list(lanes)
 

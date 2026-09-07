@@ -1132,3 +1132,27 @@ ran.
    (`tests/unit/test_kinetic_core_b13.py`).
 4. **NO VALIDATION ROW EXISTS** for the three species (`kinetic_core_b13_prereg.md` sec. 3); the
    wishlist names the measurements. Lee 2022 / 2024 is the declared next validation set.
+
+## Amendment 23 — 2026-09-07 (Wave B11: oxygen as a two-pool input on the sulfur lane)
+
+1. **TWO POOLS, FOUR STEPS.** A headspace reservoir `OXR` (ambient units per litre of liquid,
+   1 unit = `OX_SAT_MMOL_L` 0.3 mmol/L dissolved at saturation, band 0.1-1.0 sampled by the
+   envelope) refills a dissolved-oxygen vacancy `OXV` at a declared fast rate (`ox_supply`); every
+   oxygen consumer creates a vacancy, so `OX` never exceeds saturation and falls only once the
+   reservoir is spent. Two NEW consumers, `ch_cys_ox` (cysteine autoxidation, thiolate-mediated)
+   and `ch_red_ox_*` (the reductone pool), carry the only two new FIT coordinates, log10 rate
+   constants in the band (1e-5, 1e-1) per unit per minute; the dimer channels now also vacate.
+2. **WHAT IS FITTED.** B9's 54 objective rows and 23 free coordinates plus the two consumers
+   (25 free); no row added, none removed beyond B9's declared eight. The six Yiltirak folds stay
+   with B10's record. Fit systems are charged from the generator's own vessel table: Hofmann 1998
+   states its volumes (100 mL Table-1 pots -> 29.9 units, 50 mL fed pots -> 88); every other
+   system gets the declared default (29 units) and is marked as identifying neither consumer.
+   The consumers are EXPECTED to be unidentified (one laboratory's vessel, no oxygen contrast).
+3. **WHAT IS VALIDATED.** Bolton 1994 (O2 : thiol 2.07), the Hofmann Table-1 pH-5 level rows
+   (0.27), Yiltirak 2026 130 C (in excess), all scored from the panel bundles' vessel blocks after
+   the fit is frozen, per `kinetic_core_b11_prereg.md` sec. 5 (T1-T3); T5 and T6 are in-sample
+   discipline. Ship rule: T1, T3 and T5; if T1 and T3 both fail the consumers ship as
+   declared-inert (zero) and the structure, the vessel plumbing and the reservoir arithmetic stay.
+4. **WHAT MAY NOT MOVE.** With the consumers at zero every earlier wave reproduces to 1e-9
+   (`tests/unit/test_kinetic_core_b11.py`); the trunk and acrylamide lanes never see the pools.
+   The vessel's absence is an extrapolation flag only while the shipped report consumes oxygen.
