@@ -27,7 +27,21 @@ levels are within a factor of 3 inside the laboratory the constants came from, b
 laboratories. Red: wrong by more than a factor of 10, or wrong in direction. Dashed grey: no route
 exists in the model at all. Arrows run left to right in the order the chemistry happens.
 
+## How much of the literature is inside the model
+
+![How much of the literature is inside the model](../assets/thiol_sink/07_literature_funnel.png)
+
+Nearly three hundred papers are registered and about half of them screened, but a rate constant has
+to come from an experiment that isolates one step, and only about thirty-four papers do that. Most of
+the rest supply the measurements the model is judged against: end-of-cook levels from seventeen
+studies, and eighty-seven statements of direction (this rises with temperature, that falls with pH)
+from twenty-seven. So "the whole literature" is in the model as its examiner, not as its author.
+
 ## Path by path
+
+![Path by path scorecard](../assets/thiol_sink/08_path_scorecard.png)
+
+The same five rows in more detail, for the reader who wants the sources.
 
 **Sugar and amino acid to brown colour.** What we have: the full step list with rate constants and
 temperature dependence from one careful study of glucose and glycine, measured at three

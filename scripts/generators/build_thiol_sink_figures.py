@@ -256,9 +256,107 @@ def fig_map() -> None:
     plt.close(fig)
 
 
+#: The papers whose MEASUREMENTS became rate constants or fit rows, by path (hand-curated from the
+#: parameter registries and the frozen generators' row anchors, 2026-09-07).
+CONSTANT_SOURCES = {
+    "sugar and amino acid": ["Martins & van Boekel 2005", "Martins & van Boekel 2003", "Kocadagli & Gokmen 2016", "Pereyra Gonzales 2010",
+                             "Bell 1995", "Shu 1988", "Hamzalioglu 2018", "Poisson 2019", "Wang 2008"],
+    "pentose and cysteine": ["Hofmann & Schieberle 1998", "Hofmann & Schieberle 2002", "Kumazawa 2003", "Cerny 2007", "Whitfield 1999",
+                             "van Seeventer 2001", "Yaghmur 2005", "Zhou 2023", "Zhang 2024", "Kang 2026", "Feng 2022", "Zhai 2023",
+                             "Charles-Bernard 2005", "Gigl 2021"],
+    "asparagine and glucose": ["De Vleeschouwer 2006", "De Vleeschouwer 2007", "De Vleeschouwer 2008", "De Vleeschouwer 2009 I",
+                               "De Vleeschouwer 2009 II", "Claeys 2005", "Knol 2005", "Knol 2009", "Knol 2010"],
+    "fat oxidation": ["Frankel 1989", "Schroen 2022"],
+}
+PATH_COLOURS = {"sugar and amino acid": "#178F6E", "pentose and cysteine": "#B23A3A", "asparagine and glucose": "#D9822B", "fat oxidation": "#8A6BBF"}
+
+
+def fig_funnel() -> None:
+    """How much of the registered literature is inside the model, and in what role."""
+    import yaml
+
+    reg = yaml.safe_load((ROOT / "data" / "keys" / "papers.yml").read_text(encoding="utf-8"))["papers"]
+    n_reg = len(reg)
+    n_intake = sum(1 for p in reg if p["intake_ids"])
+    n_dossier = sum(1 for p in reg if p["dossier"])
+    n_bench = sum(1 for p in reg if any(f.startswith("data/benchmarks") for f in p["record_ids"]))
+    panel = yaml.safe_load((ROOT / "docs" / "validation" / "directional_claims_panel.yml").read_text(encoding="utf-8"))
+    n_claims_src = len(panel["sources"])
+    n_const = sum(len(v) for v in CONSTANT_SOURCES.values())
+    stages = [("registered in the corpus", n_reg, MUTED), ("screened and indexed", n_intake, MUTED), ("read in full (extraction dossier)", n_dossier, MUTED),
+              ("supply a claim about direction (87 claims)", n_claims_src, "#4F80D0"), ("supply a validation measurement (a level)", n_bench, "#2B5DA8"),
+              ("supply a rate constant or a fit row", n_const, "#1E2A2C")]
+    fig, ax = plt.subplots(figsize=(9.6, 4.6))
+    ys = list(range(len(stages)))[::-1]
+    for y, (label, n, colour) in zip(ys, stages):
+        if label.startswith("supply a rate"):
+            x = 0
+            for path, names in CONSTANT_SOURCES.items():
+                ax.barh(y, len(names), left=x, color=PATH_COLOURS[path], height=0.62)
+                ax.text(x + len(names) / 2, y, str(len(names)), ha="center", va="center", fontsize=8.5, color="white")
+                x += len(names)
+        else:
+            ax.barh(y, n, color=colour, height=0.62)
+        ax.text(n + 3, y, f"{n}", va="center", fontsize=10, color=INK, fontweight="bold")
+        ax.text(-4, y, label, va="center", ha="right", fontsize=9.5, color=INK)
+    ax.set_yticks([])
+    ax.set_xlim(0, 320)
+    ax.set_xlabel("papers")
+    for side in ("top", "right", "left"):
+        ax.spines[side].set_visible(False)
+    ax.grid(True, axis="x", color="#E7EBE9", linewidth=0.8)
+    ax.set_axisbelow(True)
+    handles = [plt.Rectangle((0, 0), 1, 1, color=c) for c in PATH_COLOURS.values()]
+    ax.legend(handles, [f"{k} ({len(v)})" for k, v in CONSTANT_SOURCES.items()], loc="lower right", title="rate constants, by path", fontsize=8.5, title_fontsize=8.5)
+    ax.set_title("How much of the literature is inside the model, and in what role", loc="left", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "07_literature_funnel.png", bbox_inches="tight")
+    plt.close(fig)
+
+
+def fig_scorecard() -> None:
+    """The path-by-path scorecard as an image: what we have, how it does, what we lack."""
+    rows = [
+        ("sugar + amino acid\n-> brown colour", "9", "one glucose-glycine study at 3 temperatures;\nwater-activity and pH ratios",
+         "held-out browning within 1.5x", "small dicarbonyls: constants from a\nsugar glass, wrong order in water", "#D9EFE3"),
+        ("pentose + cysteine\n-> meaty thiols", "14", "every step at 145 C from one lab's\nfed-intermediate experiments",
+         "within 2-4x in that lab at 145 C;\n10-500x off elsewhere", "how fast a thiol is REMOVED,\nat more than one temperature", "#F6D9D9"),
+        ("hexose + cysteine\n-> meaty thiols", "0", "nothing at step level", "declares 'unknown' (no route)", "the furfural / furfuryl-alcohol route;\none 168 C time series waits as its test", "#EEEEEE"),
+        ("asparagine + glucose\n-> acrylamide", "9", "formation, elimination, pH and\nwater-activity effects, one lab, 120-200 C",
+         "that lab's own series; extrusion\nin real food not reproduced", "a second laboratory's constants", "#FBE9D0"),
+        ("unsaturated fat\n-> aldehydes", "2", "six products and their split\nfrom one 1989 study", "hexanal in storage tests 2-30x",
+         "nonanal, 2-pentylfuran (no branch)", "#FBE9D0"),
+    ]
+    cols = ["path", "papers behind\nits constants", "what we have", "how it does", "what we lack"]
+    fig, ax = plt.subplots(figsize=(12.5, 5.2))
+    ax.axis("off")
+    widths = [0.15, 0.09, 0.28, 0.24, 0.24]
+    x0 = [sum(widths[:i]) for i in range(len(widths))]
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, len(rows) + 1)
+    for i, c in enumerate(cols):
+        ax.text(x0[i] + 0.01, len(rows) + 0.5, c, fontsize=9.5, color=MUTED, va="center", fontweight="bold")
+    ax.plot([0, 1], [len(rows) + 0.1, len(rows) + 0.1], color="#1E2A2C", lw=1)
+    for r, row in enumerate(rows):
+        y = len(rows) - r - 0.5
+        ax.add_patch(plt.Rectangle((0, y - 0.5), 1, 1, color=row[-1], alpha=0.55, lw=0))
+        for i, cell in enumerate(row[:-1]):
+            ax.text(x0[i] + 0.01, y, cell, fontsize=9.2 if i else 9.8, color=INK, va="center", fontweight="bold" if i == 0 else "normal",
+                    ha="center" if i == 1 else "left", transform=ax.transData if i != 1 else ax.transData)
+            if i == 1:
+                ax.texts[-1].set_x(x0[1] + widths[1] / 2)
+        ax.plot([0, 1], [y - 0.5, y - 0.5], color="#D6DBD8", lw=0.8)
+    ax.set_title("Path by path: what the model has, how it does, what it lacks", loc="left", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "08_path_scorecard.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     fig_map()
+    fig_funnel()
+    fig_scorecard()
     ship = _read(V / "kinetic_core_b16_ship_rule.json")
     scores = _read(V / "core_directional_scores.json")
     fig_schieberle(ship)
@@ -267,7 +365,7 @@ def main() -> int:
     fig_yiltirak(ship)
     fig_ttca()
     fig_dicarbonyls(scores)
-    print(f"wrote 7 figures to {OUT}")
+    print(f"wrote 9 figures to {OUT}")
     return 0
 
 
