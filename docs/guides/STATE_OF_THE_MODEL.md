@@ -20,39 +20,12 @@ real pots do. Everything else in this document is detail on that sentence.
 
 ## The map
 
-```mermaid
-flowchart LR
-  classDef good fill:#d9efe3,stroke:#178F6E,color:#1E2A2C
-  classDef mid fill:#fbe9d0,stroke:#D9822B,color:#1E2A2C
-  classDef bad fill:#f6d9d9,stroke:#B23A3A,color:#1E2A2C
-  classDef none fill:#eeeeee,stroke:#9AA6A3,color:#5E6B6E,stroke-dasharray: 4 3
-
-  S[sugar + amino acid] --> A[Amadori compound]
-  A --> D[deoxyosones and small dicarbonyls]
-  D --> B[brown colour, HMF, caramel furanone]
-  P[pentose sugar + cysteine] --> T[ring intermediate TTCA]
-  T --> F[furanones, furfural + hydrogen sulfide]
-  F --> M[meaty thiols MFT and FFT]
-  M --> X[thiol removal: disulfides, adducts, polymers]
-  H[hexose sugar + cysteine] -.-> M
-  N[asparagine + glucose] --> Y[acrylamide] --> Z[acrylamide elimination]
-  L[unsaturated fat] --> O[hydroperoxides] --> Q[hexanal and other aldehydes]
-
-  class S,A,B good
-  class D bad
-  class P,T mid
-  class F mid
-  class M bad
-  class X bad
-  class H none
-  class N,Y,Z mid
-  class L,O,Q mid
-```
+![The reaction paths the model carries, coloured by how well each is predicted](../assets/thiol_sink/00_map.png)
 
 Green: predicts held-out measurements within a factor of about 1.5. Amber: the shape is right and the
 levels are within a factor of 3 inside the laboratory the constants came from, but not across
 laboratories. Red: wrong by more than a factor of 10, or wrong in direction. Dashed grey: no route
-exists in the model at all.
+exists in the model at all. Arrows run left to right in the order the chemistry happens.
 
 ## Path by path
 

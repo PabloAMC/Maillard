@@ -207,8 +207,58 @@ def fig_dicarbonyls(scores) -> None:
     plt.close(fig)
 
 
+def fig_map() -> None:
+    """The reaction paths the model carries, coloured by how well each is predicted (docs guide, sec. 'The map')."""
+    from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+
+    GOOD, MID, BAD, NONE = ("#D9EFE3", "#178F6E"), ("#FBE9D0", "#D9822B"), ("#F6D9D9", "#B23A3A"), ("#EEEEEE", "#9AA6A3")
+    nodes = {
+        # key: (x, y, label, status)
+        "S": (0.0, 4.0, "sugar +\namino acid", GOOD), "A": (1.6, 4.0, "Amadori\ncompound", GOOD),
+        "D": (3.2, 4.0, "deoxyosones,\nsmall dicarbonyls", BAD), "B": (4.9, 4.0, "brown colour,\nHMF, furanone", GOOD),
+        "P": (0.0, 2.6, "pentose sugar +\ncysteine", MID), "T": (1.6, 2.6, "ring intermediate\n(TTCA)", MID),
+        "F": (3.2, 2.6, "furanones, furfural\n+ hydrogen sulfide", MID), "M": (4.9, 2.6, "meaty thiols\nMFT and FFT", BAD),
+        "X": (6.5, 2.6, "thiol removal:\ndisulfides, adducts", BAD),
+        "H": (0.0, 1.6, "hexose sugar +\ncysteine", NONE),
+        "N": (0.0, 0.5, "asparagine +\nglucose", MID), "Y": (1.6, 0.5, "acrylamide", MID), "Z": (3.2, 0.5, "acrylamide\nelimination", MID),
+        "L": (4.9, 0.5, "unsaturated fat", MID), "O": (6.5, 0.5, "hydroperoxides,\nhexanal + aldehydes", MID),
+    }
+    edges = [("S", "A"), ("A", "D"), ("D", "B"), ("P", "T"), ("T", "F"), ("F", "M"), ("M", "X"), ("N", "Y"), ("Y", "Z"), ("L", "O")]
+    fig, ax = plt.subplots(figsize=(11, 5.4))
+    ax.set_xlim(-0.8, 7.4)
+    ax.set_ylim(-0.55, 4.7)
+    ax.axis("off")
+    bw, bh = 1.25, 0.62
+    for key, (x, y, label, (fill, edge)) in nodes.items():
+        dashed = key == "H"
+        box = FancyBboxPatch((x - bw / 2, y - bh / 2), bw, bh, boxstyle="round,pad=0.02,rounding_size=0.08", fc=fill, ec=edge, lw=1.4,
+                             ls="--" if dashed else "-")
+        ax.add_patch(box)
+        ax.text(x, y, label, ha="center", va="center", fontsize=9, color=INK if not dashed else MUTED)
+    for a, b in edges:
+        xa, ya = nodes[a][0], nodes[a][1]
+        xb, yb = nodes[b][0], nodes[b][1]
+        ax.add_patch(FancyArrowPatch((xa + bw / 2, ya), (xb - bw / 2, yb), arrowstyle="-|>", mutation_scale=12, color=MUTED, lw=1.2))
+    ax.add_patch(FancyArrowPatch((nodes["H"][0] + bw / 2, nodes["H"][1]), (nodes["M"][0] - 0.1, nodes["M"][1] - bh / 2),
+                                 arrowstyle="-|>", mutation_scale=12, color=MUTED, lw=1.2, ls="--", connectionstyle="arc3,rad=0.25"))
+    ax.text(1.35, 1.0, "no route in the model", fontsize=8.5, color=MUTED, style="italic")
+    legend = [("predicts held-out data within about 1.5x", GOOD), ("right shape; within 3x inside the source lab only", MID),
+              ("wrong by 10x or more, or wrong in direction", BAD), ("no route exists", NONE)]
+    # legend: two rows under the diagram
+    for i, (txt, (fill, edge)) in enumerate(legend):
+        x0 = -0.6 + (i % 2) * 3.9
+        y0 = -0.12 - (i // 2) * 0.34
+        ax.add_patch(FancyBboxPatch((x0, y0), 0.22, 0.18, boxstyle="round,pad=0.01", fc=fill, ec=edge, lw=1.2))
+        ax.text(x0 + 0.3, y0 + 0.09, txt, fontsize=8.5, color=INK, va="center")
+    ax.set_title("The reaction paths the model carries, coloured by how well each one is predicted", loc="left", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "00_map.png")
+    plt.close(fig)
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
+    fig_map()
     ship = _read(V / "kinetic_core_b16_ship_rule.json")
     scores = _read(V / "core_directional_scores.json")
     fig_schieberle(ship)
@@ -217,7 +267,7 @@ def main() -> int:
     fig_yiltirak(ship)
     fig_ttca()
     fig_dicarbonyls(scores)
-    print(f"wrote 6 figures to {OUT}")
+    print(f"wrote 7 figures to {OUT}")
     return 0
 
 
