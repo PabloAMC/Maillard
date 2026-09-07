@@ -381,10 +381,129 @@ def fig_repo_flow() -> None:
     plt.close(fig)
 
 
+# ---------------------------------------------------------------------------
+# What the FIELD knows (docs/guides/WHAT_THE_FIELD_KNOWS.md): the accepted scheme, annotated by
+# how well each part has been measured in the published literature the repository has read.
+# ---------------------------------------------------------------------------
+FIELD_STATUS = {
+    "rates at several temperatures": ("#2B5DA8", "-", 2.4),
+    "rates or yields at one temperature": ("#178F6E", "-", 2.0),
+    "mechanism only (labelling, products)": ("#9AA6A3", "-", 1.6),
+    "open: no published rate": ("#B23A3A", "--", 2.0),
+}
+
+
+def fig_field_scheme() -> None:
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+
+    S = list(FIELD_STATUS)
+    nodes = {
+        "sug": (0.0, 5.0, "reducing sugar\n+ amino acid"), "ama": (1.7, 5.0, "Amadori / Heyns\ncompound"),
+        "dox": (3.4, 5.6, "3-deoxyosone\n(1,2-enolisation)"), "dox2": (3.4, 4.4, "1-deoxyosone\n(2,3-enolisation)"),
+        "frag": (3.4, 3.2, "sugar fragments:\nglyoxal, methylglyoxal,\ndiacetyl"),
+        "hmf": (5.1, 5.6, "HMF, furfural"), "fur": (5.1, 4.4, "furanones\n(caramel, norfuraneol)"),
+        "str": (6.8, 3.2, "Strecker aldehydes\n+ amino-ketones"), "mel": (6.8, 5.0, "melanoidins\n(brown colour)"),
+        "pyr": (8.5, 3.2, "pyrazines, pyrroles"),
+        "cys": (0.0, 1.6, "cysteine"), "h2s": (1.7, 1.6, "H2S, NH3,\nacetaldehyde"),
+        "thiol": (5.1, 1.6, "meaty thiols\nMFT, FFT"), "sink": (6.8, 1.6, "disulfides, adducts,\npolymers"),
+        "asn": (0.0, 0.3, "asparagine\n+ sugar"), "acr": (3.4, 0.3, "acrylamide"), "acr2": (5.1, 0.3, "acrylamide\nelimination"),
+        "lip": (0.0, -1.0, "unsaturated fat"), "ald": (3.4, -1.0, "hydroperoxides,\naldehydes"), "lm": (5.1, -1.0, "lipid-Maillard:\nalkylthiophenes"),
+    }
+    edges = [
+        ("sug", "ama", S[0]), ("ama", "dox", S[0]), ("ama", "dox2", S[0]), ("ama", "frag", S[0]),
+        ("dox", "hmf", S[0]), ("dox2", "fur", S[1]), ("frag", "str", S[1]), ("dox2", "frag", S[0]),
+        ("hmf", "mel", S[1]), ("str", "pyr", S[2]), ("fur", "mel", S[2]),
+        ("cys", "h2s", S[1]), ("h2s", "thiol", S[1]), ("fur", "thiol", S[1]), ("hmf", "thiol", S[1]),
+        ("thiol", "sink", S[3]),
+        ("asn", "acr", S[0]), ("acr", "acr2", S[0]), ("lip", "ald", S[1]), ("ald", "lm", S[2]),
+    ]
+    fig, ax = plt.subplots(figsize=(15, 8.6))
+    ax.set_xlim(-0.9, 9.5)
+    ax.set_ylim(-1.7, 6.3)
+    ax.axis("off")
+    bw, bh = 1.35, 0.72
+    for a, b, st in edges:
+        colour, ls, lw = FIELD_STATUS[st]
+        (xa, ya, _), (xb, yb, _) = nodes[a], nodes[b]
+        rad = 0.0 if abs(ya - yb) < 1e-9 else (0.12 if xb > xa else 0.25)
+        ax.add_patch(FancyArrowPatch((xa, ya), (xb, yb), arrowstyle="-|>", mutation_scale=12, color=colour, lw=lw, linestyle=ls,
+                                     connectionstyle=f"arc3,rad={rad}", shrinkA=26, shrinkB=26, zorder=1))
+    for key, (x, y, label) in nodes.items():
+        ax.add_patch(FancyBboxPatch((x - bw / 2, y - bh / 2), bw, bh, boxstyle="round,pad=0.02,rounding_size=0.08", fc="#F2F3F1", ec="#9AA6A3", lw=1.1, zorder=2))
+        ax.text(x, y, label, ha="center", va="center", fontsize=8.6, color=INK, zorder=3)
+    for x, y, txt in ((-0.85, 6.05, "SUGAR AND AMINO ACID (the Hodge scheme)"), (-0.85, 2.25, "SULFUR: CYSTEINE AND A PENTOSE"),
+                      (-0.85, 0.95, "ASPARAGINE"), (-0.85, -0.35, "FAT")):
+        ax.text(x, y, txt, fontsize=8.5, color=MUTED, fontweight="bold", ha="left")
+    handles = [plt.Line2D([0], [0], color=c, ls=ls, lw=lw, label=s) for s, (c, ls, lw) in FIELD_STATUS.items()]
+    ax.legend(handles=handles, loc="lower right", fontsize=8.5, frameon=False, title="how well the published literature has measured the step", title_fontsize=8.5)
+    ax.set_title("The Maillard reaction as the field draws it, and how well each part has been measured", loc="left", fontsize=11.5)
+    fig.tight_layout()
+    fig.savefig(OUT / "14_field_scheme.png", bbox_inches="tight")
+    plt.close(fig)
+
+
+def fig_field_coverage() -> None:
+    """Where the quantitative measurements the repository has read actually sit: path x temperature, by matrix."""
+    rows = [
+        # (path, T_lo, T_hi, matrix, label)
+        ("sugar + amino acid", 100, 120, "water", "Martins & van Boekel 2005 (glucose-glycine, rates)"),
+        ("sugar + amino acid", 120, 120, "water", "Brands & van Boekel 2001 (sugar-casein)"),
+        ("sugar + amino acid", 111, 121, "water", "Leitzen 2021 (glucose alone, dicarbonyls)"),
+        ("sugar + amino acid", 90, 110, "water", "Zhang 2021 (glucose-glutamate, dicarbonyls)"),
+        ("sugar + amino acid", 160, 200, "dry glass", "Kocadagli & Gokmen 2016 (glucose glass)"),
+        ("sugar + amino acid", 150, 170, "dry food", "Goncuoglu Tas 2016 (hazelnut)"),
+        ("sugar + amino acid", 37, 60, "powder", "Pereyra Gonzales 2010 (milk powder, water activity)"),
+        ("sugar + amino acid", 98, 100, "water", "Hofmann 2000 / 2000b (Strecker yields, air vs argon)"),
+        ("pentose + cysteine", 145, 145, "water", "Hofmann & Schieberle 1998 (fed intermediates)"),
+        ("pentose + cysteine", 140, 140, "water", "Whitfield & Mottram 1999 / 2001 (fed norfuraneol, pH 4.5 / 6.5)"),
+        ("pentose + cysteine", 100, 100, "water", "Schieberle 2000 (time series)"),
+        ("pentose + cysteine", 100, 140, "water", "Zhai 2021 / 2023, Kang 2026 (TTCA ladders)"),
+        ("pentose + cysteine", 100, 140, "water", "Wang 2022 (five-temperature grid, figures only)"),
+        ("pentose + cysteine", 100, 130, "water", "Yiltirak 2026 (ladder, stated vessel)"),
+        ("pentose + cysteine", 121, 121, "water", "Kumazawa 2003 (thiol loss grid)"),
+        ("pentose + cysteine", 80, 80, "brew", "Hofmann 2002 (FFT loss in coffee brew)"),
+        ("pentose + cysteine", 168, 168, "water", "Liu 2023 (decline)"),
+        ("asparagine + glucose", 120, 200, "water / powder", "De Vleeschouwer 2006-2009, Knol 2005-2010, Claeys 2005"),
+        ("fat", 25, 100, "oil", "Frankel 1989, Schroen 2022"),
+    ]
+    paths = ["sugar + amino acid", "pentose + cysteine", "asparagine + glucose", "fat"]
+    colours = {"water": "#2B5DA8", "dry glass": "#D9822B", "dry food": "#B5468A", "powder": "#8A6BBF", "water / powder": "#178F6E", "brew": "#5E6B6E", "oil": "#9AA6A3"}
+    fig, ax = plt.subplots(figsize=(11.5, 5.2))
+    ypos = {p: i for i, p in enumerate(paths)}
+    n_of = {p: sum(1 for r in rows if r[0] == p) for p in paths}
+    stack = {p: 0 for p in paths}
+    for path, lo, hi, matrix, label in rows:
+        y = ypos[path] + (stack[path] - (n_of[path] - 1) / 2) * 0.1
+        stack[path] += 1
+        ax.plot([lo, hi], [y, y], "-", color=colours[matrix], lw=3.5, solid_capstyle="round", alpha=0.9)
+        if lo == hi:
+            ax.plot([lo], [y], "o", color=colours[matrix], ms=6)
+        ax.text(hi + 3, y, label, fontsize=7.4, va="center", color=INK)
+    ax.set_yticks(range(len(paths)))
+    ax.set_yticklabels(paths)
+    ax.invert_yaxis()
+    ax.set_xlim(20, 320)
+    ax.set_xlabel("temperature, °C (each bar: the temperatures one study measured at)")
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+    ax.grid(True, axis="x", color="#E7EBE9", linewidth=0.8)
+    ax.axvspan(100, 145, color="#F3E9D2", alpha=0.5, lw=0, zorder=0)
+    ax.set_ylim(len(paths) - 0.4, -0.95)
+    ax.text(122, -0.78, "cooking window with most data", ha="center", fontsize=8, color=MUTED)
+    handles = [plt.Line2D([0], [0], color=c, lw=3.5, label=m) for m, c in colours.items()]
+    ax.legend(handles=handles, loc="center right", bbox_to_anchor=(1.0, 0.36), fontsize=8, frameon=False, title="matrix", title_fontsize=8)
+    ax.set_title("Where the quantitative measurements sit: temperature and matrix, by path", loc="left", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "15_field_coverage.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     fig_map()
     fig_repo_flow()
+    fig_field_scheme()
+    fig_field_coverage()
     fig_funnel()
     fig_scorecard()
     ship = _read(V / "kinetic_core_b16_ship_rule.json")
@@ -395,7 +514,7 @@ def main() -> int:
     fig_yiltirak(ship)
     fig_ttca()
     fig_dicarbonyls(scores)
-    print(f"wrote 10 figures to {OUT}")
+    print(f"wrote 12 figures to {OUT}")
     return 0
 
 
