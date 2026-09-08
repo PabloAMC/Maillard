@@ -4,10 +4,10 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-08",
     "git": {
-      "commit": "a57a56466f531904fe55f1d559d71a3f3aeeefeb",
-      "short": "a57a5646",
+      "commit": "79202ab37fb40278a47f3161a14b0a23c9b2be23",
+      "short": "79202ab3",
       "branch": "cleaning",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
@@ -29,7 +29,7 @@
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "192a187822c6d3ca53caf5caf24bfeaad63e4c0c137d3af9531fc4f19f66b699"
+        "sha256": "a636443d609fab6a1222285d012d7925ee94dc2ed45de77b24d8b99ca85d8d1c"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
