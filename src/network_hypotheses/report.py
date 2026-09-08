@@ -17,7 +17,13 @@ CHARGES: Dict[str, Dict[str, Any]] = {
     "pentose_cysteine": {"species": ["PENT", "Cys"], "lane": "sulfur", "why": "the sulfur lane's reference pot (Hofmann 1998)"},
     "pentose_cysteine_thiamine": {"species": ["PENT", "Cys", "THI"], "lane": "sulfur", "why": "the thiamine route (Hofmann 1998 Table 8)"},
     "asparagine_glucose": {"species": ["Asn", "Glc"], "lane": "acrylamide", "why": "the acrylamide lane's pot (De Vleeschouwer)"},
-    "linoleate_hydroperoxides": {"species": ["LOOH_13_ct", "LOOH_9_ct"], "lane": "lipid", "why": "the lipid lane's hydroperoxide pool (Frankel 1989)"},
+    "linoleate_hydroperoxides": {"species": ["LOOH_13_ct", "LOOH_9_ct", "LOOH_10"], "lane": "lipid",
+                                 "why": "the lipid lane's hydroperoxide pool (Frankel 1989) and the 10-hydroperoxide it lacks (Miyazaki 2023)"},
+    "oleate_hydroperoxides": {
+        "species": ["OL_8_OOH", "OL_9_OOH", "OL_10_OOH", "OL_11_OOH"],
+        "lane": "lipid",
+        "why": "the four oleate hydroperoxides the lipid lane lumps as LOOH_OL with no edge (nonanal is a declared hold-out): Cao 2020's routes",
+    },
     "strecker_to_pyrazines": {
         "species": ["MGO", "GO", "DA", "Ala", "Cys"],
         "lane": "trunk",

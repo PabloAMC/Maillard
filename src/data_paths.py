@@ -41,6 +41,8 @@ SPECIES_DIR: Path = DATA_ROOT / "species"
 #: 2026-09-08: SMILES (or registry id) per engine species key; lumps declared as such. Read by the
 #: hypothesis layer (src/network_hypotheses) and its test; never by the engine.
 SPECIES_STRUCTURES: Path = SPECIES_DIR / "structures.yml"
+#: Structures the hypothesis layer's rules name that are NOT engine species (literature intermediates and products).
+LITERATURE_STRUCTURES: Path = SPECIES_DIR / "literature_structures.yml"
 #: 2026-09-08: reactive-site densities per gram of protein for the matrices a dossier states (the matrix layer).
 PROTEIN_MATRICES: Path = SPECIES_DIR / "protein_matrices.yml"
 BENCHMARKS_DIR: Path = DATA_ROOT / "benchmarks"

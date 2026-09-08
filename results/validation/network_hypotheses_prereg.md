@@ -90,3 +90,30 @@ explain 2,5-dimethylpyrazine` now says the refusal means no rate, not no route. 
 oleate hydroperoxides, 2-pentylfuran and 1-hexanol still have no cited rule: no dossier on disk draws
 their route, and a rule without a source is not written. 27 rules, 201 steps, T1 to T4 unchanged.
 
+**Addendum, 2026-09-08 late evening: the lipid routes.** Six lipid papers were read the same night
+(`miyazaki2023`, `cao2020`, `chen2017`, `yang2024`, `choe2006`, `wanjala2021` extraction dossiers) and
+four rules entered the table: R29 and R30, the two scissions of a mono-ene allylic hydroperoxide
+(Cao 2020's drawn map for the oleate 8-, 9-, 10- and 11-hydroperoxides: nonanal, octanal, decanal and
+their oxo-esters; 2-decenal and 2-undecenal with the alkane-ended esters; Chen 2017 corroborates
+9-OOH to nonanal and 2-decenal on the free acid); R31, the furyl route of a conjugated-diene
+hydroperoxide (Miyazaki 2023's proposed route from the 13-hydroperoxide to 2-pentylfuran plus
+9-oxononanoate, and its mirror from the 9-hydroperoxide to hexanal; the 12-hydroperoxide gives no
+2-pentylfuran in their table, and the rule's shape refuses it); R32, the 10-hydroperoxide to
+1-octen-3-ol (Miyazaki 2023, Figure 3). The species these rules name that the engine does not hold
+(the four oleate isomers the lipid lane lumps, the linoleate 10-hydroperoxide, the C8 to C11
+aldehydes, the ester-side fragments, methyl stearate as every rule's negative control) live in
+`data/species/literature_structures.yml`, loaded beside the engine's table and never read by the
+engine. With them the layer reaches nonanal from an oleate charge and 2-pentylfuran and 1-octen-3-ol
+from the linoleate charge, all placed *mechanism known, not modelled*; `maillard explain` now says
+"no rate, not no route" for the three, and `maillard explain 1-hexanol` still says no route: none of
+the six papers draws an aldehyde-to-alcohol step (the alcohols they see come from hydroperoxide
+reduction or the allyl radical), so the rule is not written. 31 rules, 219 steps; T1 to T4 unchanged;
+all 31 rules' controls pass. Four papers give four different parents for 2-pentylfuran (the
+13-hydroperoxide here; the singlet-oxygen 10-hydroperoxide in Choe & Min's review; the
+9-hydroperoxide in Yang 2024's map; 4-hydroxynonenal in Wanjala 2021): R31 is anchored to the one
+paper that measured isomer by isomer, and the others are recorded on the rule.
+
+One correction fell out of the controls: the registry's 1-octen-3-ol SMILES had seven carbons
+against its own eight-carbon InChI (`data/species/off_flavour_targets.yml`); fixed at the source and
+the registry regenerated (lesson in `tasks/lessons.md`).
+

@@ -292,4 +292,47 @@ rules:
     controls:
       positive: [{reactants_smiles: ["CC(=O)CN", "CC(=O)CN"], products_smiles: ["Cc1cnc(C)cn1"]}, {reactants_smiles: ["CC(=O)C(C)N", "CC(=O)C(C)N"], products_smiles: ["Cc1nc(C)c(C)nc1C"]}]
       negative: [{reactants: [MGO, MGO]}, {reactants: [Ala, Ala]}]
+  # ---- lipid routes read 2026-09-08 (the wishlist's refused compounds: nonanal, 2-pentylfuran, 1-octen-3-ol) ----
+  - id: R29_oleate_hydroperoxide_scission_alkanal
+    name: mono-ene allylic hydroperoxide -> alkanal + oxo-ester (beta-scission on the hydroperoxide carbon; Cao 2020's "B-scission")
+    class: lipid
+    status: net
+    smirks: "[#6:1][CH1:2]([O:3][OH])[CH1:4]=[CH1:5][CX4:6]>>[#6:1][CH1:2]=[O:3].O=[CH1:4][CH2:5][CX4:6]"
+    source: {dossier: cao2020_extraction.md, anchor: "Figure 6 II-V: 8-OOH -> decanal, 9-OOH and 10-OOH -> nonanal, 11-OOH -> octanal, each with its oxo-glyceride; Table 2 levels at 120-180 C; chen2017_extraction.md corroborates 9-OOH -> nonanal on the free acid"}
+    conditions: "oleate-rich oil or free oleic acid, 120-180 C, air; the mono-ene only (the conjugated diene hydroperoxides are R18b's)"
+    controls:
+      positive: [{reactants: [OL_10_OOH], products: [NONANAL, ME_9_OXONONANOATE]}, {reactants: [OL_9_OOH], products: [NONANAL, ME_9_OXONONANOATE]}, {reactants: [OL_11_OOH], products: [OCTANAL, ME_10_OXODECANOATE]}, {reactants: [OL_8_OOH], products: [DECANAL, ME_8_OXOOCTANOATE]}]
+      negative: [{reactants: [LOOH_13_ct]}, {reactants: [LOOH_9_ct]}, {reactants: [ME_STEARATE]}, {reactants: [HEXANAL]}]
+  - id: R30_oleate_hydroperoxide_scission_alkenal
+    name: mono-ene allylic hydroperoxide -> 2-alkenal + alkane-ended ester (scission on the far side; Cao 2020's "A-scission")
+    class: lipid
+    status: net
+    smirks: "[#6:1][CH2:7][CH1:2]([O:3][OH])[CH1:4]=[CH1:5][CX4:6]>>[#6:1][CH3:7].[O:3]=[CH1:2][CH1:4]=[CH1:5][CX4:6]"
+    source: {dossier: cao2020_extraction.md, anchor: "Figure 6 II-III: 8-OOH -> 2-undecenal, 9-OOH -> 2-decenal; Table 2; chen2017_extraction.md: 2-undecenal from 8-OOH and 2-decenal + octanoic acid from 9-OOH, stated"}
+    conditions: "as R29; the 2-alkenal share rises with temperature (Cao 2020: (2-alkenals)/(alkanals) 0.09 -> 0.56 from 120 to 180 C)"
+    controls:
+      positive: [{reactants: [OL_9_OOH], products: [DECENAL_2E, ME_OCTANOATE]}, {reactants: [OL_8_OOH], products: [UNDECENAL_2E, ME_HEPTANOATE]}]
+      negative: [{reactants: [LOOH_9_ct]}, {reactants: [ME_STEARATE]}, {reactants: [NONANAL]}]
+  - id: R31_linoleate_hydroperoxide_furyl_route
+    name: conjugated-diene hydroperoxide -> 2-alkylfuran + oxo-ester (alkoxyl cyclisation onto the diene's far carbon, oxygen, scission; net)
+    class: lipid
+    status: net
+    terminal: true
+    smirks: "[CH2:1][CH1:2]([O:3][OH])[CH1:4]=[CH1:5][CH1:6]=[CH1:7][CH2:8]>>[CH2:1][c:2]1[cH:4][cH:5][cH:6][o:3]1.O=[CH1:7][CH2:8]"
+    source: {dossier: miyazaki2023_extraction.md, anchor: "Figure 2, route LA-13-F: 13-HpODE -> 2-pentylfuran + 9-oxononanoic acid (24 -> 25 -> 26 -> 22 + 23); the mirror route LA-9-F: 9-HpODE -> hexanal + the furan-bearing C12 acid; Table 1: 2-pentylfuran from the 9-, 10- and 13-hydroperoxides and NOT from the 12-hydroperoxide"}
+    conditions: "purified hydroperoxide isomers, 120 C, 5 min, air; the authors' proposed route, intermediates not isolated; three other papers on disk draw other parents for 2-pentylfuran (choe2006: the singlet-oxygen 10-hydroperoxide; yang2024: the 9-hydroperoxide; wanjala2021: 4-hydroxynonenal), recorded, not merged"
+    controls:
+      positive: [{reactants: [LOOH_13_ct], products: [PENTYLFURAN, ME_9_OXONONANOATE]}, {reactants: [LOOH_9_ct], products: [HEXANAL, ME_8_FURYL_OCTANOATE]}]
+      negative: [{reactants: [OL_9_OOH]}, {reactants: [LOOH_10]}, {reactants: [ME_STEARATE]}, {reactants: [HEXANAL]}]
+  - id: R32_linoleate_10_hydroperoxide_to_octenol
+    name: non-conjugated 10-hydroperoxide -> 10-oxo-8-enoate + 1-octen-3-ol (scission to the 2-octenyl radical, allyl shift, oxygen, reduction; net)
+    class: lipid
+    status: net
+    terminal: true
+    smirks: "[#6:7][CH1:8]=[CH1:9][CH1:10]([O:20][OH])[CH2:11][CH1:12]=[CH1:13][CH2:14]>>[#6:7][CH1:8]=[CH1:9][CH1:10]=[O:20].[CH2:11]=[CH1:12][CH1:13]([OH])[CH2:14]"
+    source: {dossier: miyazaki2023_extraction.md, anchor: "Figure 3, route LA-10-B: 10-HpODE -> 10-oxo-8-decenoic acid + 2-octenyl radical (40 <-> 41) -> 1-octen-3-ol (the dominant product, area 144.8 M), 1-octen-3-one, 2-octenal, 2-octen-1-ol"}
+    conditions: "the 10-hydroperoxide arises by photo-oxidation (choe2006 Table 1: 17 % of the singlet-oxygen mixture) and by isomerisation; purified isomer, 120 C, 5 min, air"
+    controls:
+      positive: [{reactants: [LOOH_10], products: [OCTEN3OL, ME_10_OXO_8_DECENOATE]}]
+      negative: [{reactants: [LOOH_13_ct]}, {reactants: [OL_9_OOH]}, {reactants: [ME_STEARATE]}, {reactants: [HEXANAL]}]
 

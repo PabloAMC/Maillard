@@ -46,9 +46,19 @@ def inchikey(smiles: str) -> Optional[str]:
     return Chem.MolToInchiKey(mol) if mol is not None else None
 
 
-def load() -> Dict[str, Structure]:
-    """Every engine species, as a Structure; lumps have no SMILES."""
-    table = data_access.load_yaml(data_paths.SPECIES_STRUCTURES)["species"]
+def load(literature: bool = True) -> Dict[str, Structure]:
+    """Every engine species, as a Structure; lumps have no SMILES. With ``literature`` (the default)
+    the table also holds the species the rules name that the engine does not: literature
+    intermediates and products (data/species/literature_structures.yml), keyed so they never collide
+    with an engine key; the placement logic treats them as known compounds without an engine
+    reaction, which is what "mechanism known, not modelled" means."""
+    table = dict(data_access.load_yaml(data_paths.SPECIES_STRUCTURES)["species"])
+    if literature:
+        extra = data_access.load_yaml(data_paths.LITERATURE_STRUCTURES)["species"]
+        clash = sorted(set(extra) & set(table))
+        if clash:
+            raise ValueError(f"literature_structures.yml re-uses engine species keys: {clash}")
+        table.update(extra)
     registry = {c["id"]: c for c in data_access.load_yaml(data_paths.COMPOUND_REGISTRY)["compounds"]}
     out: Dict[str, Structure] = {}
     for key, entry in table.items():

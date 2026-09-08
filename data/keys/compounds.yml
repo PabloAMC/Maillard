@@ -116,9 +116,9 @@ compounds:
 - id: 1_octen_3_ol
   display_name: 1-Octen-3-ol
   kind: molecule
-  smiles: CCCCC(O)C=C
-  inchikey: PZKFYTOLVRCMOA-UHFFFAOYSA-N
-  canonical_smiles: C=CC(O)CCCC
+  smiles: CCCCCC(O)C=C
+  inchikey: VSMOENVRRABVKN-UHFFFAOYSA-N
+  canonical_smiles: C=CC(O)CCCCC
   inchi: InChI=1S/C8H16O/c1-3-5-6-8(9)7-4-2/h4,7-9H,2-3,5-6H2,1H3
   cas: 3391-86-4
   aliases:

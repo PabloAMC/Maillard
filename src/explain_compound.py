@@ -398,6 +398,16 @@ def _hypotheses_for(species_key: Optional[str], query: str) -> Dict[str, Any]:
             registry_id = getattr(key, "id", None) if key is not None else None
         except Exception:
             registry_id = None
+    # a compound the engine has no species for may still be a LITERATURE structure the rules name
+    # (data/species/literature_structures.yml, keyed by its registry id): match those keys too
+    keys = {species_key} if species_key is not None else set()
+    if registry_id is not None:
+        try:
+            from src.network_hypotheses import structures as _structures
+
+            keys |= {k for k, st in _structures.load().items() if st.registry_id == registry_id}
+        except Exception:
+            pass
     seen = set()
     steps = []
     reached_by = []
@@ -406,7 +416,7 @@ def _hypotheses_for(species_key: Optional[str], query: str) -> Dict[str, Any]:
             if step["placement"] == "modelled":
                 continue
             names = step["reactants"] + step["products"]
-            if species_key is not None and any(n == species_key or species_key in n.split("/") for n in names):
+            if keys and any(n in keys or (set(n.split("/")) & keys) for n in names):
                 key = (step["rule"], tuple(step["reactants"]), tuple(step["products"]))
                 if key in seen:
                     continue
@@ -416,6 +426,8 @@ def _hypotheses_for(species_key: Optional[str], query: str) -> Dict[str, Any]:
             for product in charge.get("products", []):
                 if product.get("id") == registry_id:
                     reached_by.append(charge["charge"])
+            if any(s["charge"] == charge["charge"] and set(s["products"]) & keys for s in steps):
+                reached_by.append(charge["charge"])
     return {
         "available": True,
         "artifact": "results/validation/network_hypotheses.json",

@@ -2,7 +2,7 @@
 
 *What the literature's reaction rules (data/lit/reaction_rules.yml) propose from each lane's reference charge, placed against the engine's own reactions. Steps and products only: no rate, no concentration, and nothing here is read by the engine. Beyond the first step only products that are engine species or registry compounds react further, so the walk stays on the known map.*
 
-27 rules; 201 proposed steps: 111 mechanism known, 24 modelled, 66 proposed; products: 170 new, 8 registry, 32 species.
+31 rules; 219 proposed steps: 129 mechanism known, 24 modelled, 66 proposed; products: 174 new, 8 registry, 47 species.
 
 | placement | meaning |
 |---|---|
@@ -103,7 +103,7 @@ Products that are not engine species: `NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O`; `
 
 ## linoleate hydroperoxides (lipid lane, depth 2)
 
-*the lipid lane's hydroperoxide pool (Frankel 1989).* Charge: LOOH_13_ct, LOOH_9_ct.
+*the lipid lane's hydroperoxide pool (Frankel 1989) and the 10-hydroperoxide it lacks (Miyazaki 2023).* Charge: LOOH_13_ct, LOOH_9_ct, LOOH_10.
 
 | rule | reactants | products | placement | engine reaction |
 |---|---|---|---|---|
@@ -111,8 +111,35 @@ Products that are not engine species: `NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O`; `
 | R18a_hydroperoxide_scission_alkane_side | LOOH_9_ct/LOOH_9_tt | DECADIENAL + ME_OCTANOATE | modelled | lipid_scission_LOOH_9_tt |
 | R18b_hydroperoxide_scission_aldehyde_side | LOOH_13_ct/LOOH_13_tt | HEXANAL + COC(=O)CCCCCCCC=CCC=O | modelled | lipid_scission_LOOH_13_tt |
 | R18b_hydroperoxide_scission_aldehyde_side | LOOH_9_ct/LOOH_9_tt | CCCCCC=CCC=O + ME_9_OXONONANOATE | modelled | lipid_scission_LOOH_9_tt |
+| R18a_hydroperoxide_scission_alkane_side | LOOH_10 | CC=CCCCCC + ME_10_OXO_8_DECENOATE | mechanism known |  |
+| R29_oleate_hydroperoxide_scission_alkanal | LOOH_10 | CCCCCC=CCC=O + ME_9_OXONONANOATE | mechanism known |  |
+| R30_oleate_hydroperoxide_scission_alkenal | LOOH_10 | CC=CCCCCC + ME_10_OXO_8_DECENOATE | mechanism known |  |
+| R31_linoleate_hydroperoxide_furyl_route | LOOH_13_ct/LOOH_13_tt | PENTYLFURAN + ME_9_OXONONANOATE | mechanism known |  |
+| R31_linoleate_hydroperoxide_furyl_route | LOOH_9_ct/LOOH_9_tt | HEXANAL + ME_8_FURYL_OCTANOATE | mechanism known |  |
+| R32_linoleate_10_hydroperoxide_to_octenol | LOOH_10 | OCTEN3OL + ME_10_OXO_8_DECENOATE | mechanism known |  |
 
-Products that are not engine species: `CCCCCC=CCC=O`; `COC(=O)CCCCCCCC=CCC=O`.
+Products that are not engine species: `CC=CCCCCC`; `CCCCCC=CCC=O`; `COC(=O)CCCCCCCC=CCC=O`.
+
+## oleate hydroperoxides (lipid lane, depth 2)
+
+*the four oleate hydroperoxides the lipid lane lumps as LOOH_OL with no edge (nonanal is a declared hold-out): Cao 2020's routes.* Charge: OL_8_OOH, OL_9_OOH, OL_10_OOH, OL_11_OOH.
+
+| rule | reactants | products | placement | engine reaction |
+|---|---|---|---|---|
+| R18a_hydroperoxide_scission_alkane_side | OL_8_OOH | ME_HEPTANOATE + UNDECENAL_2E | mechanism known |  |
+| R18a_hydroperoxide_scission_alkane_side | OL_9_OOH | ME_OCTANOATE + DECENAL_2E | mechanism known |  |
+| R18a_hydroperoxide_scission_alkane_side | OL_10_OOH | CCCCCCCC + ME_10_OXO_8_DECENOATE | mechanism known |  |
+| R18a_hydroperoxide_scission_alkane_side | OL_11_OOH | CCCCCCC + COC(=O)CCCCCCCC=CC=O | mechanism known |  |
+| R29_oleate_hydroperoxide_scission_alkanal | OL_8_OOH | DECANAL + ME_8_OXOOCTANOATE | mechanism known |  |
+| R29_oleate_hydroperoxide_scission_alkanal | OL_9_OOH | NONANAL + ME_9_OXONONANOATE | mechanism known |  |
+| R29_oleate_hydroperoxide_scission_alkanal | OL_10_OOH | NONANAL + ME_9_OXONONANOATE | mechanism known |  |
+| R29_oleate_hydroperoxide_scission_alkanal | OL_11_OOH | OCTANAL + ME_10_OXODECANOATE | mechanism known |  |
+| R30_oleate_hydroperoxide_scission_alkenal | OL_8_OOH | ME_HEPTANOATE + UNDECENAL_2E | mechanism known |  |
+| R30_oleate_hydroperoxide_scission_alkenal | OL_9_OOH | ME_OCTANOATE + DECENAL_2E | mechanism known |  |
+| R30_oleate_hydroperoxide_scission_alkenal | OL_10_OOH | CCCCCCCC + ME_10_OXO_8_DECENOATE | mechanism known |  |
+| R30_oleate_hydroperoxide_scission_alkenal | OL_11_OOH | CCCCCCC + COC(=O)CCCCCCCC=CC=O | mechanism known |  |
+
+Products that are not engine species: `CCCCCCC`; `CCCCCCCC`; `COC(=O)CCCCCCCC=CC=O`.
 
 ## strecker to pyrazines (trunk lane, depth 2)
 
@@ -303,3 +330,7 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 | R26b_1dg_to_furaneol | 1-deoxyglucosone -> furaneol (cyclisation with the terminal reduction, net) | net | blank1997_extraction.md: furaneol from 1-deoxyglucosone via acetylformoin (the k5b synthesis, the trunk's r_odg_af / r_af_dmhf) |
 | R27_dicarbonyl_h2s_to_mercaptoketone | methylglyoxal + H2S -> 1-mercapto-2-propanone | net | hofmann1998_reconciliation.md: Table 7, 2-oxopropanal + H2S (1:1 and 1:2) |
 | R28_aminoketone_condensation_to_pyrazine | two alpha-aminoketones -> 2,5-disubstituted pyrazine (condensation, dehydration, oxidation; net) | net | zhou2023_extraction.md: the paper's mechanism (Fig. 4): the open-chain aminoketone condenses to the pyrazines, and cysteine's Strecker route supplies more alpha-aminoketones (section on pyrazine promotion) |
+| R29_oleate_hydroperoxide_scission_alkanal | mono-ene allylic hydroperoxide -> alkanal + oxo-ester (beta-scission on the hydroperoxide carbon; Cao 2020's "B-scission") | net | cao2020_extraction.md: Figure 6 II-V: 8-OOH -> decanal, 9-OOH and 10-OOH -> nonanal, 11-OOH -> octanal, each with its oxo-glyceride; Table 2 levels at 120-180 C; chen2017_extraction.md corroborates 9-OOH -> nonanal on the free acid |
+| R30_oleate_hydroperoxide_scission_alkenal | mono-ene allylic hydroperoxide -> 2-alkenal + alkane-ended ester (scission on the far side; Cao 2020's "A-scission") | net | cao2020_extraction.md: Figure 6 II-III: 8-OOH -> 2-undecenal, 9-OOH -> 2-decenal; Table 2; chen2017_extraction.md: 2-undecenal from 8-OOH and 2-decenal + octanoic acid from 9-OOH, stated |
+| R31_linoleate_hydroperoxide_furyl_route | conjugated-diene hydroperoxide -> 2-alkylfuran + oxo-ester (alkoxyl cyclisation onto the diene's far carbon, oxygen, scission; net) | net | miyazaki2023_extraction.md: Figure 2, route LA-13-F: 13-HpODE -> 2-pentylfuran + 9-oxononanoic acid (24 -> 25 -> 26 -> 22 + 23); the mirror route LA-9-F: 9-HpODE -> hexanal + the furan-bearing C12 acid; Table 1: 2-pentylfuran from the 9-, 10- and 13-hydroperoxides and NOT from the 12-hydroperoxide |
+| R32_linoleate_10_hydroperoxide_to_octenol | non-conjugated 10-hydroperoxide -> 10-oxo-8-enoate + 1-octen-3-ol (scission to the 2-octenyl radical, allyl shift, oxygen, reduction; net) | net | miyazaki2023_extraction.md: Figure 3, route LA-10-B: 10-HpODE -> 10-oxo-8-decenoic acid + 2-octenyl radical (40 <-> 41) -> 1-octen-3-ol (the dominant product, area 144.8 M), 1-octen-3-one, 2-octenal, 2-octen-1-ol |

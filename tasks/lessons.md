@@ -121,3 +121,8 @@
   file; a whitespace mismatch silently skipped an edit. Rule: assert `old in text` before every replace, compile
   after every batch, and re-read the tail of a test log before committing (a Phase 1a commit claimed a pass with two
   failures in the log).
+- **A rule's positive control is a data audit.** Writing the 10-hydroperoxide-to-1-octen-3-ol rule (2026-09-08)
+  failed its own control because the registry's 1-octen-3-ol SMILES had seven carbons while its InChI had eight
+  (`off_flavour_targets.yml`, copied into the generated registry). Rule: every structure a rule names is checked by
+  RDKit against an independent identifier (InChI or atom count) when it enters; a curated SMILES is data, not truth.
+
