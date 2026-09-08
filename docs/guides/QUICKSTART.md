@@ -24,6 +24,21 @@ give the aroma you want — and see exactly why the model refuses to answer when
 A refusal is an answer: it names the missing term or route. Section 5 of the
 [introduction](INTRODUCTION.md) shows which rows on the test panel are refused and why.
 
+## Install without the container
+
+```bash
+git clone https://github.com/PabloAMC/Maillard.git && cd Maillard
+python -m venv .venv && source .venv/bin/activate
+pip install -e .            # numpy, scipy, pyyaml, jsonschema, matplotlib, networkx; rdkit is optional
+maillard compare --template > my_comparison.yml
+maillard ui                 # a page on this machine: paste a spec, get the report
+```
+
+`maillard` is the same front door as `python scripts/maillard.py`. Only an editable install inside a
+clone is supported: the package reads its data and frozen artifacts relative to the checkout. From
+Python, `from src import api` gives `compare`, `predict`, `explain`, `score` and `calibrate` returning
+the payloads the verbs print; every spec is checked against `data/schemas/spec.schema.json`.
+
 ## Boot the environment
 
 ```bash

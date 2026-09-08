@@ -58,6 +58,8 @@ COMPOUND_REGISTRY: Path = KEYS_DIR / "compounds.yml"
 PAPER_REGISTRY: Path = KEYS_DIR / "papers.yml"
 
 # --------------------------------------------------------------------------- data/schemas
+#: 2026-09-08: the front door's spec contract (compare, predict, score, calibrate, the API, the page).
+SPEC_SCHEMA: Path = DATA_ROOT / "schemas" / "spec.schema.json"
 SCHEMAS_DIR: Path = DATA_ROOT / "schemas"
 BENCHMARK_SCHEMA: Path = SCHEMAS_DIR / "benchmark.schema.json"
 

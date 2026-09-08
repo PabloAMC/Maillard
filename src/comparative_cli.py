@@ -83,6 +83,28 @@ def load_spec_document(path: Path | str) -> Dict[str, Any]:
     return data
 
 
+_SPEC_SCHEMA: Optional[Dict[str, Any]] = None
+
+
+def spec_schema() -> Dict[str, Any]:
+    """data/schemas/spec.schema.json, the one contract every front-door surface validates against."""
+    global _SPEC_SCHEMA
+    if _SPEC_SCHEMA is None:
+        from src import data_access, data_paths
+
+        _SPEC_SCHEMA = dict(data_access.load_json(data_paths.SPEC_SCHEMA))
+    return _SPEC_SCHEMA
+
+
+def _schema_errors(spec: Mapping[str, Any]) -> List[str]:
+    try:
+        import jsonschema
+    except ImportError:  # pragma: no cover - jsonschema is a declared dependency
+        return []
+    validator = jsonschema.Draft202012Validator(spec_schema())
+    return [f"{'/'.join(str(p) for p in e.absolute_path) or '(spec)'}: {e.message}" for e in sorted(validator.iter_errors(dict(spec)), key=str)]
+
+
 def validate_spec(spec: Mapping[str, Any], *, label: str) -> Dict[str, Any]:
     if not isinstance(spec, Mapping):
         raise SpecError(f"{label}: must be a mapping")
@@ -94,6 +116,11 @@ def validate_spec(spec: Mapping[str, Any], *, label: str) -> Dict[str, Any]:
             "not default process conditions, because a defaulted temperature is a silent "
             "chemistry claim."
         )
+    # 2026-09-08: the schema is the contract (types, ranges, the buffer block); the message above
+    # keeps naming a missing condition in the words a bench scientist has read before
+    problems = _schema_errors(spec)
+    if problems:
+        raise SpecError(f"{label}: " + "; ".join(problems[:6]) + " (data/schemas/spec.schema.json)")
     precursors = spec.get("precursors")
     if not isinstance(precursors, Mapping) or not precursors:
         raise SpecError(f"{label}: 'precursors' must be a non-empty mapping of name -> mM")

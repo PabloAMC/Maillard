@@ -111,6 +111,10 @@ without the experiment, two in three with it.
 
 ## 4. Reach: install, call, click
 
+*Status 2026-09-08: shipped as an editable install (`pip install -e .` gives the `maillard` command),
+`src/api.py`, `maillard ui` (standard library page) and `data/schemas/spec.schema.json` validated at
+the front door. A wheel still needs the package renamed from `src` and its data declared.*
+
 **Why.** The tool runs only in a container from YAML through a shell script. Right for
 reproducibility, wrong for adoption.
 

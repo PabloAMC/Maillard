@@ -28,6 +28,15 @@ dev = [
     "types-PyYAML",
 ]
 
+# `pip install -e .` inside a clone installs the `maillard` command (src/cli.py). Only an editable
+# install is supported today: the package imports as `src.*` and reads data/ and results/ relative
+# to the clone, so a wheel would need the package renamed and its data declared (roadmap, section 4).
+[project.scripts]
+maillard = "src.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"

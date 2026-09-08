@@ -73,9 +73,10 @@ cd Maillard
 ./scripts/docker_maillard.sh up && ./scripts/docker_maillard.sh bootstrap
 ```
 
-Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`); host
-Python is for editing only. The front door is one script with seven verbs. What each answers and
-when it refuses is the first table of the [quick start](docs/guides/QUICKSTART.md).
+Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`), or, without
+it, `pip install -e .` in a clone gives the same front door as the `maillard` command, a Python API
+(`from src import api`) and a local page (`maillard ui`). The front door has eight verbs. What each
+answers and when it refuses is the first table of the [quick start](docs/guides/QUICKSTART.md).
 
 ```bash
 python scripts/maillard.py compare --template > my_comparison.yml   # two arms, A vs B
@@ -86,6 +87,7 @@ python scripts/maillard.py rank --top 10                             # which mea
 python scripts/maillard.py score --template > my_measurements.yml    # then: score my_measurements.yml
 python scripts/maillard.py wishlist                                  # what to measure next, and what it would unlock
 python scripts/maillard.py calibrate my_measurements.yml --lab "my lab"   # a per-laboratory overlay; apply with --calibration
+python scripts/maillard.py ui                                        # a page on this machine: paste a spec, get the report
 ```
 
 `compare` leads with **ratios** between the two arms, the quantity the systematic scale error

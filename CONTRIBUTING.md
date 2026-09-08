@@ -14,8 +14,12 @@ src/            Runtime package. Import as `from src.<module> import ...`; never
   kinetic_core/   The one engine: lanes (trunk, sulfur, acrylamide, lipid), their parameters,
                   the declared condition terms, the panel, scoring, the Monte-Carlo envelope,
                   the directional scorer and the fit-target ledger.
+  cli.py, api.py, ui.py
+                  The front door (the `maillard` command; scripts/maillard.py is a shim), the Python
+                  API with the same payloads, and the local page. Every spec validates against
+                  data/schemas/spec.schema.json.
   comparative_cli.py, explain_compound.py, experiment_value.py, report_html.py, model_card.py
-                  The front door's verbs (compare, predict, explain, rank, score, wishlist, calibrate).
+                  The verbs' bodies (compare, predict, explain, rank, score, wishlist, calibrate).
   calibration.py, user_fit.py, user_scoring.py (under kinetic_core/)
                   Bring-your-own-data: scoring, and the per-laboratory calibration (levels set the
                   response factor, contrasts move the kinetics) that overlays the engine's own

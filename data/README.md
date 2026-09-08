@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **244**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **245**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -87,6 +87,7 @@ JSON Schemas enforced by `scripts/ci/schema_gate.py`.
 | file | what it is |
 |---|---|
 | `benchmark.schema.json` | Schema every benchmark payload validates against (core fields, closed enums, measured XOR reference volatiles). |
+| `spec.schema.json` | The front door's spec contract: what compare, predict, score, calibrate, the Python API and the page validate a formulation against (`src/comparative_cli.validate_spec`). |
 
 ## `data/species`
 

@@ -318,7 +318,7 @@ _FORBIDDEN_FAST_FIELDS = ("a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_
 
 def test_cli_has_one_lane_and_no_lane_switch():
     """2026-09-03 (retirement step B5): the screening lane and its `--lane` switch are gone."""
-    import scripts.maillard as cli
+    import src.cli as cli
 
     for verb in ("predict", "compare"):
         args = cli.build_parser().parse_args([verb, "spec.yml"])
