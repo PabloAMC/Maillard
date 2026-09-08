@@ -4,7 +4,7 @@
 
 _Ranks `(benchmark, compound)` pairs by the value of a confirmatory experiment now: combines envelope miss, CI width, and ODT-anchored decision relevance._
 
-Total candidates: **39** (out-of-CI: **32**). Source: `/workspace/results/validation/core_prediction_uncertainty.json`.
+Total candidates: **39** (out-of-CI: **32**). Source: `results/validation/core_prediction_uncertainty.json`.
 
 | Rank | VoI | Benchmark | Matrix | Compound | In CI | Miss (dex) | Width (dex) | Meas (ppb) | P50 (ppb) | DoE template | Rationale |
 | ---: | ---: | --- | --- | --- | :---: | ---: | ---: | ---: | ---: | --- | --- |

@@ -706,5 +706,5 @@
   ],
   "matrix_filter": null,
   "miss_count": 32,
-  "source": "/workspace/results/validation/core_prediction_uncertainty.json"
+  "source": "results/validation/core_prediction_uncertainty.json"
 }

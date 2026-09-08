@@ -461,6 +461,15 @@ def filter_by_matrix(
     return re_ranked
 
 
+def _repo_relative(path: Path) -> str:
+    from src import data_paths
+
+    try:
+        return data_paths.rel(Path(path))
+    except Exception:  # noqa: BLE001 - a path outside the repository stays as given
+        return str(path)
+
+
 def build_ranking_payload(
     candidates: Sequence[ExperimentCandidate],
     *,
@@ -469,7 +478,9 @@ def build_ranking_payload(
 ) -> Dict[str, Any]:
     """Convert ranked candidates into a JSON-serialisable dict."""
     return {
-        "source": str(source_path) if source_path else None,
+        # repo-relative: an absolute path differs between the container and a CI runner, and the
+        # freshness gate compares this artifact byte for byte (2026-09-08)
+        "source": _repo_relative(source_path) if source_path else None,
         "matrix_filter": list(matrix_filter) if matrix_filter else None,
         "candidate_count": len(candidates),
         "miss_count": sum(1 for c in candidates if not c.inside_ci),

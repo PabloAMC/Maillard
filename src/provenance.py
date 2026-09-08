@@ -118,8 +118,11 @@ FLOAT_REL_TOL = 1e-6
 
 
 #: Absolute floor for float comparison: differences below it are numerical noise around zero
-#: (concentrations of 1e-30 ug/L, log-space steps of 1e-8).
-FLOAT_ABS_TOL = 1e-9
+#: (concentrations of 1e-30 ug/L, log-space steps of 1e-8). Raised from 1e-9 to 1e-6 on 2026-09-08:
+#: a log10 step that is the difference of two nearly equal numbers drifts by ~2e-8 between the
+#: arm64 container and an x86 CI runner, which is 1e-5 relative to the step and nothing at all to
+#: any conclusion drawn from it.
+FLOAT_ABS_TOL = 1e-6
 
 
 def payload_differences(
