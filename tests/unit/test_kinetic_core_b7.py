@@ -118,9 +118,11 @@ def test_every_new_species_is_in_the_state_vector():
         assert key in SULFUR_STATE_KEYS, key
     # The trunk block is APPENDED, never interleaved: a pre-B7 state vector is
     # still a prefix of this one.
-    # B13 (2026-09-07) appended three trunk-only species after B7's five.
-    assert SPECIES_KEYS[-8:-3] == NEW_TRUNK_SPECIES
-    assert SPECIES_KEYS[-3:] == ("G", "GO", "DA")
+    # B13 (2026-09-07) appended three trunk-only species after B7's five; B18 (2026-09-08)
+    # appended the three pyrazines after those.
+    assert SPECIES_KEYS[-13:-8] == NEW_TRUNK_SPECIES
+    assert SPECIES_KEYS[-8:-5] == ("G", "GO", "DA")
+    assert SPECIES_KEYS[-5:] == ("PZ", "DMP", "MPZ", "AKG", "AKM")
 
 
 def test_the_trunk_network_still_balances_with_eleven_more_steps():

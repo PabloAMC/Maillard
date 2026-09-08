@@ -310,6 +310,12 @@ def operative_parameters(fitted):
     from .parameters_dicarbonyl import DICARBONYL_PARAMETERS
 
     parameters.update(DICARBONYL_PARAMETERS)
+    # BUILD WAVE B18 (2026-09-08): the pyrazine step's constants, at the same choke point. The
+    # two fitted ones are FROZEN LITERALS asserted equal to the B18 fit report by a unit test
+    # (the B7 pattern); the mixed route is declared from them. Trunk-only steps, inert elsewhere.
+    from .parameters_pyrazine import PYRAZINE_PARAMETERS
+
+    parameters.update(PYRAZINE_PARAMETERS)
     return parameters
 
 

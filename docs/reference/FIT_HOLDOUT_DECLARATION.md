@@ -1223,3 +1223,23 @@ ran.
    Hou 2017 (peak areas; the TTCA / Cys-Amadori isomer distinction the core does not carry), Hofmann
    1996 (thiols in diethyl ether at 6 C). The Wang 2022 (FFJ) supplement holds only the lipid-arm
    volatiles table; the MFT/FFT temperature-time grid is in the paywalled main text.
+
+## Amendment 27 — 2026-09-08 (Wave B18: a pyrazine step on the trunk)
+
+1. **TEN FIT ROWS, SIX NEW COORDINATES.** Zhou et al. 2024 (J. Agric. Food Chem. 72:18630) Table 2: six
+   pyrazine and 2,5-dimethylpyrazine formation rates from fed 20 mM glyoxal or methylglyoxal + 20 mM
+   alanine, water, initial pH 8, 100 / 110 / 120 °C (MEASURED RATES, 0 to 120 min slopes); Leahy &
+   Reineccius 1989 (ACS Symp. Ser. 409 ch. 18) Table I: four within-study ratios of the lysine + glucose
+   pyrazine and methylpyrazine rates at 95 °C, pH 7 and 5 over pH 9 (WITHIN-STUDY RATIOS). Fitted: the two
+   Strecker constants (log10 k at 100 °C, stored at pH 6.8, and their barriers inside the printed-to-refit
+   bands 100.59 to 103.1 and 111.66 to 114.9 kJ/mol) and the two slopes of the pyrazine pH term. Declared,
+   not fitted: alanine → glycine (±0.5 dex), lysine → glycine (ratios only), the fast condensation
+   (`k_cond`, Jousse 2002 "fast"), the mixed pyrazine as the statistical product of the two pools.
+2. **WHAT IS VALIDATED.** Leahy 1989 ch. 7 Table III (95 °C, 2 h, pH 9: the distribution and the 13.1 ppm
+   total), Leahy's and Yu 2018's whole-cascade barriers, Zhou 2023's pyrazine columns (out of lane, the
+   sulfur network does not carry the step). Their verdict is in the B18 ship rule and on every pyrazine
+   answer: the fed-dicarbonyl step is measured, the sugar-pot supply is not.
+3. **TRUNK ONLY.** The five steps and five species (PZ, DMP, MPZ, AKG, AKM) run on the trunk integrator only;
+   the sulfur and acrylamide networks keep the topology their fits were run on, and a pyrazine target on
+   another lane is refused by name (the B13 rule).
+

@@ -296,24 +296,27 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # RE-PINNED 2026-09-07 (Wang 2022): FFT rising at 100 C agrees; MFT at 100 C peaks early and both thiols
     # collapse at 140 C in the lane (three misses): 19/33 -> 20/37; time 2/2 -> 3/6.
     # RE-PINNED 2026-09-07 (Cerny 2007 furfural, Mottram 2002 MFT and FFT agree; Cerny FFT ladder misses): 20/37 -> 23/41.
-    assert s["headline"] == [23, 41]
+    # RE-PINNED 2026-09-08 (B18: the pyrazine step on the trunk): the two 2,5-dimethylpyrazine claims that
+    # were refused for want of the species now evaluate and AGREE (PH-06 rising with pH 4 -> 9; TEMP-04's
+    # 160 C over 145 C ordering): 23/41 -> 25/43; pH 7/9 -> 8/10; temperature 6/10 -> 7/11; 30 -> 28 not evaluable.
+    assert s["headline"] == [25, 43]
     ind = s["independent"]
-    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (15, 30)
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (8, 11)
-    assert ind["total"]["not_evaluable"] == 30
+    assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (16, 31)
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (9, 12)
+    assert ind["total"]["not_evaluable"] == 28
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
     assert cats["sugar_identity"] == (4, 10)  # B15/B16: DIC-01 and DIC-03 miss
-    assert cats["temperature"] == (6, 10)     # B15: WANG-02 agrees
-    assert cats["ph"] == (7, 9)               # thiol pH reads (2026-09-07): Cerny 2007 furfural and Mottram 2002 agree, Cerny FFT ladder misses
+    assert cats["temperature"] == (7, 11)     # B15: WANG-02 agrees; B18: TEMP-04 (2,5-dimethylpyrazine) agrees
+    assert cats["ph"] == (8, 10)              # thiol pH reads (2026-09-07): Cerny 2007 furfural and Mottram 2002 agree, Cerny FFT ladder misses; B18: PH-06 agrees
     assert cats["moisture_aw"] == (1, 2)   # B12: the trunk answers a_w; AW-03 agrees, AW-01 does not
     assert cats["additive_cysteine"] == (2, 3)
     assert cats["time"] == (3, 6)             # Wang 2022: the sinks are too strong at 100 C and at 140 C
     readme = _doc_text(README)
-    _assert_quoted(readme, "23 of 41", "README.md", "the core's directional headline")
-    _assert_quoted(readme, "15 of 30", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "8 of 11", "README.md", "the directional count on pH and water activity")
+    _assert_quoted(readme, "25 of 43", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "16 of 31", "README.md", "the directional count excluding pH and water activity")
+    _assert_quoted(readme, "9 of 12", "README.md", "the directional count on pH and water activity")
 
 
 def test_directional_scorecard_is_not_stale():

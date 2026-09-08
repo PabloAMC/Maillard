@@ -152,8 +152,10 @@ page round-trips the template spec.
 *Status 2026-09-08: the pyrazine rule is in the hypothesis layer (the layer reaches the three panel
 pyrazines from a Strecker charge), and the same evening the first measured pyrazine rates entered
 the corpus (Zhou 2024's three-temperature ladders on fed glyoxal and methylglyoxal; Leahy 1989's
-pH ladders), so the step is pre-registered as wave B18 (`results/validation/kinetic_core_b18_prereg.md`),
-not yet run. Nonanal, 2-pentylfuran and 1-octen-3-ol now have cited rules (six lipid dossiers read
+pH ladders), so the step was pre-registered as wave B18 and run the same night: it ships by its rule
+(the fed-dicarbonyl rates within 0.07 dex, the panel untouched), and its answer from a sugar + amine
+pot carries the caveat that the trunk's dicarbonyl supply is a thousandfold low at 95 °C in water
+(`results/validation/kinetic_core_b18_prereg.md` section 6). Nonanal, 2-pentylfuran and 1-octen-3-ol now have cited rules (six lipid dossiers read
 the same night; rules R29 to R32), so their refusal reads "no rate, not no route"; 1-hexanol still
 has none, because no paper on disk draws an aldehyde-to-alcohol step.
 The calibrated interval now carries the factor's sigma (programme 1's leftover). The beany note
@@ -166,8 +168,9 @@ what it has is the level a storage-and-processing model must reach and the enzym
 
 Each starts as a rule in the hypothesis layer and becomes a wave only when a measured rate exists.
 - **Pyrazines** (roasted, nutty): the aminoketone condensation after the Strecker step; the
-  registry has the species. Rule first (done); the wave is pre-registered (B18) now that a rate
-  source is read; the run is next.
+  registry has the species. Rule first (done); the wave (B18) ran and ships with its caveat; what it
+  asks for next is the small dicarbonyls in water (their formation from a sugar + amine pot at 70 to
+  120 °C and their loss), which is the trunk's problem, not the step's.
 - **The beany note before any heat**: hexanal from lipoxygenase during processing. Different
   chemistry, its own module and its own data programme; the lipid lane must not be stretched to it.
 - **Extrusion**: two minutes at 130 to 170 °C at low moisture. The process spec already takes a

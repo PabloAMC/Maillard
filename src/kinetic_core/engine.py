@@ -225,6 +225,13 @@ TARGET_ALIASES: Mapping[str, str] = {
     "glyoxal": "GO",
     "glucosone": "G",
     "diacetyl": "DA",
+    # B18 (2026-09-08): the pyrazine step, trunk lane only
+    "pyrazine": "PZ",
+    "2,5-dimethylpyrazine": "DMP",
+    "2,5-dimethyl pyrazine": "DMP",
+    "dimethylpyrazine": "DMP",
+    "methylpyrazine": "MPZ",
+    "2-methylpyrazine": "MPZ",
     "2,3-butanedione": "DA",
     "butane-2,3-dione": "DA",
     "methylglyoxal": "MGO",
@@ -386,6 +393,10 @@ _TARGET_LANE: Mapping[str, str] = {
     "GO": TRUNK,
     "DA": TRUNK,
     "MGO": TRUNK,
+    # -- B18, the pyrazine step: trunk-only as the dicarbonyls are
+    "PZ": TRUNK,
+    "DMP": TRUNK,
+    "MPZ": TRUNK,
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
     "NONANAL": LIPID,
@@ -398,6 +409,9 @@ _TARGET_LANE: Mapping[str, str] = {
 
 #: B13: the species whose steps exist on the trunk integrator only.
 DICARBONYL_TARGET_KEYS: frozenset = frozenset({"G", "GO", "DA"})
+#: B18: the pyrazine species, whose steps also exist on the trunk integrator only.
+PYRAZINE_TARGET_KEYS: frozenset = frozenset({"PZ", "DMP", "MPZ"})
+TRUNK_ONLY_TARGET_KEYS: frozenset = DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
 _PRECURSOR_LANE: Mapping[str, str] = {
@@ -932,15 +946,19 @@ def declare_envelope(
     # B13: the dicarbonyl steps are trunk-only (the sulfur and acrylamide networks keep the
     # topology their fits were run on), so a dicarbonyl target on another lane is refused
     # by name instead of answered with the inert zero those state vectors carry.
-    dicarbonyls = sorted(
-        c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS
-    )
-    if dicarbonyls and lane is not None and lane != TRUNK:
+    dicarbonyls = sorted(c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS)
+    pyrazines = sorted(c for c, key in mapped_targets.items() if key in PYRAZINE_TARGET_KEYS)
+    if (dicarbonyls or pyrazines) and lane is not None and lane != TRUNK:
+        named = []
+        if dicarbonyls:
+            named.append("DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls) + " (wave B13)")
+        if pyrazines:
+            named.append("PYRAZINE TARGETS " + ", ".join(repr(c) for c in pyrazines) + " (wave B18)")
         reasons.append(
-            "DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls)
-            + f" run on the trunk lane only (wave B13): the {lane} lane's network keeps the "
-            "topology its fit was run on and carries these species inert. Ask for them in a "
-            "sugar + amine pot that resolves to the trunk, or bring a measurement."
+            " and ".join(named)
+            + f" run on the trunk lane only: the {lane} lane's network keeps the topology its fit was run "
+            "on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the "
+            "trunk, or bring a measurement."
         )
 
     # --- the lipid lane's own refusals ------------------------------------
@@ -1072,6 +1090,15 @@ def declare_envelope(
                 f"pH term (its anchor is a single pH-6.7 emulsion). The pH is "
                 f"recorded and IGNORED."
             )
+
+    # --- B18: the pyrazine step's own declarations --------------------------
+    # The step is measured (fed dicarbonyls); the supply from a sugar + amine pot is not, and
+    # the ship rule sized both misses. Every pyrazine answer carries them.
+    if set(mapped_targets.values()) & PYRAZINE_TARGET_KEYS:
+        from .parameters_pyrazine import PYRAZINE_SINK_CAVEAT, PYRAZINE_SUPPLY_CAVEAT
+
+        warnings.append(PYRAZINE_SUPPLY_CAVEAT)
+        warnings.append(PYRAZINE_SINK_CAVEAT)
 
     # --- B7: the furanic channel's own declarations -----------------------
     # Every one of these is an EXTRAPOLATION WARNING, not a refusal, and each
@@ -1385,6 +1412,17 @@ def core_parameters(
         from .parameters_furanic import with_fitted_furanic
 
         parameters.update(with_fitted_furanic(float(override["k_dpo_af"])))
+    if "pyrazine" in override:
+        # B18, the same discipline: the frozen literals in parameters_pyrazine are the default;
+        # an explicit block {log10_k_go_ak_100C, ea_go_ak_kj_mol, log10_k_mgo_ak_100C,
+        # ea_mgo_ak_kj_mol} (the fit generator's candidates, a later draw) replaces them.
+        from .parameters_pyrazine import with_fitted_pyrazine
+
+        b = override["pyrazine"]
+        parameters.update(with_fitted_pyrazine(
+            float(b["log10_k_go_ak_100C"]), float(b["ea_go_ak_kj_mol"]),
+            float(b["log10_k_mgo_ak_100C"]), float(b["ea_mgo_ak_kj_mol"]),
+        ))
     return parameters
 
 

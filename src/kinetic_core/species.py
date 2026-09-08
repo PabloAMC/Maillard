@@ -166,12 +166,34 @@ SPECIES: Tuple[Species, ...] = (
             "B13. From 1-deoxyglucosone (Kocadagli step 12, Ea 150.8); the "
             "3-mercapto-2-butanone precursor once a sulfur wave adopts it. Sink: "
             "Kocadagli step 17, rate 0 in the source."),
+    # ---- Build Wave B18 (2026-09-08): the pyrazine step, TRUNK-ONLY -----------------
+    # Zhou 2024 (JAFC 72:18630) measured pyrazine and 2,5-dimethylpyrazine formation from
+    # fed glyoxal / methylglyoxal + alanine at 100-120 C; Leahy & Reineccius 1989 the pH
+    # ladder. Two aminoketone intermediates (the Strecker products) and three pyrazines,
+    # appended at the END so every existing index is unchanged; the sulfur and acrylamide
+    # state vectors leave them out (TRUNK_ONLY_KEYS). Pre-registered in
+    # results/validation/kinetic_core_b18_prereg.md; constants in parameters_pyrazine.py.
+    Species("PZ", "pyrazine", 4, 2, "product", False,
+            "B18. Two aminoacetaldehydes condense (rule R28). The ring carbons are the "
+            "dicarbonyl's; the nitrogens the amino acid's (Zhou 2024's isotope labelling, "
+            "zhou2024_extraction.md Table 1)."),
+    Species("DMP", "2,5-dimethylpyrazine", 6, 2, "product", False,
+            "B18. Two aminoacetones condense; the panel's roasted marker."),
+    Species("MPZ", "2-methylpyrazine", 5, 2, "product", False,
+            "B18. Aminoacetaldehyde + aminoacetone, the mixed condensation. Key MPZ because "
+            "MP is the sulfur lane's 1-mercapto-2-propanone."),
+    Species("AKG", "aminoacetaldehyde (glyoxal's Strecker aminoketone)", 2, 1, "intermediate", False,
+            "B18. Glyoxal + glycine -> aminoacetaldehyde + CO2 + formaldehyde (Strecker, rule "
+            "R07); the rate-determining step. Never measured; a steady-state intermediate."),
+    Species("AKM", "aminoacetone (methylglyoxal's Strecker aminoketone)", 3, 1, "intermediate", False,
+            "B18. Methylglyoxal + glycine -> aminoacetone + CO2 + formaldehyde (Strecker, rule "
+            "R07). As AKG."),
 )
 
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
-TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA")
+TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 

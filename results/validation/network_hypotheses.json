@@ -2134,7 +2134,7 @@
             "Ala"
           ],
           "products": [
-            "CC(=O)CN",
+            "AKM",
             "CC=O"
           ],
           "placement": "mechanism_known",
@@ -2148,7 +2148,7 @@
             "Cys"
           ],
           "products": [
-            "CC(=O)CN",
+            "AKM",
             "O=CCS"
           ],
           "placement": "mechanism_known",
@@ -2268,7 +2268,7 @@
           "depth": 2,
           "reactants": [
             "MGO",
-            "CC(=O)CN"
+            "AKM"
           ],
           "products": [
             "CC(=O)C=NCC(C)=O"
@@ -2294,7 +2294,7 @@
           "depth": 2,
           "reactants": [
             "GO",
-            "CC(=O)CN"
+            "AKM"
           ],
           "products": [
             "CC(=O)CN=CC=O"
@@ -2424,7 +2424,7 @@
           "depth": 2,
           "reactants": [
             "CC(N=CC=O)C(=O)O",
-            "CC(=O)CN"
+            "AKM"
           ],
           "products": [
             "CC(=O)CN=CC=NC(C)C(=O)O"
@@ -2450,7 +2450,7 @@
           "depth": 2,
           "reactants": [
             "O=CC=NC(CS)C(=O)O",
-            "CC(=O)CN"
+            "AKM"
           ],
           "products": [
             "CC(=O)CN=CC=NC(CS)C(=O)O"
@@ -2475,7 +2475,7 @@
           "rule": "R02_schiff_base",
           "depth": 2,
           "reactants": [
-            "CC(=O)CN",
+            "AKM",
             "CC=O"
           ],
           "products": [
@@ -2488,7 +2488,7 @@
           "rule": "R02_schiff_base",
           "depth": 2,
           "reactants": [
-            "CC(=O)CN",
+            "AKM",
             "O=CCS"
           ],
           "products": [
@@ -2997,20 +2997,22 @@
           "rule": "R28_aminoketone_condensation_to_pyrazine",
           "depth": 2,
           "reactants": [
-            "CC(=O)CN",
-            "CC(=O)CN"
+            "AKM",
+            "AKM"
           ],
           "products": [
-            "Cc1cnc(C)cn1"
+            "DMP"
           ],
-          "placement": "mechanism_known",
-          "engine_reactions": []
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_akm_dmp"
+          ]
         },
         {
           "rule": "R28_aminoketone_condensation_to_pyrazine",
           "depth": 2,
           "reactants": [
-            "CC(=O)CN",
+            "AKM",
             "CC(=O)C(C)N"
           ],
           "products": [
@@ -3065,12 +3067,6 @@
           "id": null
         },
         {
-          "smiles": "CC(=O)CN",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
           "smiles": "CC(N=CC=O)C(=O)O",
           "first_depth": 1,
           "kind": "new",
@@ -3117,6 +3113,12 @@
           "first_depth": 1,
           "kind": "registry",
           "id": "acetaldehyde"
+        },
+        {
+          "smiles": "CC(=O)CN",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "AKM"
         },
         {
           "smiles": "S",
@@ -3455,12 +3457,6 @@
           "id": "trimethylpyrazine"
         },
         {
-          "smiles": "Cc1cnc(C)cn1",
-          "first_depth": 2,
-          "kind": "registry",
-          "id": "2_5_dimethylpyrazine"
-        },
-        {
           "smiles": "Cc1nc(C)c(C)nc1C",
           "first_depth": 2,
           "kind": "registry",
@@ -3471,18 +3467,24 @@
           "first_depth": 2,
           "kind": "species",
           "id": "MP"
+        },
+        {
+          "smiles": "Cc1cnc(C)cn1",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "DMP"
         }
       ],
       "summary": {
         "steps": {
-          "mechanism_known": 47,
-          "modelled": 2,
+          "mechanism_known": 46,
+          "modelled": 3,
           "proposed": 24
         },
         "products": {
-          "new": 67,
-          "registry": 4,
-          "species": 2
+          "new": 66,
+          "species": 4,
+          "registry": 3
         }
       }
     },
@@ -3621,7 +3623,7 @@
             "MGO"
           ],
           "products": [
-            "CC(=O)CN",
+            "AKM",
             "O=CCS"
           ],
           "placement": "mechanism_known",
@@ -4439,12 +4441,6 @@
           "id": null
         },
         {
-          "smiles": "CC(=O)CN",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
           "smiles": "CCCCCC(O)SC",
           "first_depth": 1,
           "kind": "new",
@@ -4769,6 +4765,12 @@
           "id": "dimethyl_disulfide"
         },
         {
+          "smiles": "CC(=O)CN",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "AKM"
+        },
+        {
           "smiles": "CC(=O)CS",
           "first_depth": 1,
           "kind": "species",
@@ -4812,9 +4814,9 @@
           "proposed": 28
         },
         "products": {
-          "new": 59,
-          "registry": 2,
-          "species": 6
+          "new": 58,
+          "species": 7,
+          "registry": 2
         }
       }
     }
@@ -4823,14 +4825,14 @@
     "rules": 31,
     "steps": 219,
     "steps_by_placement": {
-      "modelled": 24,
-      "mechanism_known": 129,
+      "modelled": 25,
+      "mechanism_known": 128,
       "proposed": 66
     },
     "products_by_kind": {
-      "species": 47,
-      "new": 174,
-      "registry": 8
+      "species": 50,
+      "new": 172,
+      "registry": 7
     }
   }
 }

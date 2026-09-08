@@ -1,0 +1,169 @@
+{
+  "artifact": "kinetic_core_b18_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b18_ship_rule",
+    "generated_on": "2026-09-08",
+    "git": {
+      "commit": "cc1d665a6da30e89db576421ac06a538a37b1012",
+      "short": "cc1d665a",
+      "branch": "cleaning",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b18_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b18_fit_report.json",
+        "sha256": "cc88208cc76d617340f00123c7f3cdd05cad979fc9b719f1e78aedc6f5eb0afe"
+      },
+      {
+        "path": "results/validation/kinetic_core_b18_nosink_fit_report.json",
+        "sha256": "9b222d8b0b7cdcf54d77cd54cc1c9160b93d29236475ab7e127bbbd89d8c5cc1"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b18_prereg.md",
+  "rule": "SHIP if T1 (six Zhou rates within 0.3 dex, barriers inside band), T2 (no scored panel value moves 0.05 dex) and T5 (log10 k sigma below one decade) hold",
+  "T1": {
+    "worst_row": "zhou_DMP_rate_100C",
+    "worst_dex": 0.07147192480747723,
+    "rows_dex": {
+      "zhou_PZ_rate_100C": 0.02487198366385232,
+      "zhou_PZ_rate_110C": -0.050995003884905944,
+      "zhou_PZ_rate_120C": 0.026110596750925832,
+      "zhou_DMP_rate_100C": 0.07147192480747723,
+      "zhou_DMP_rate_110C": -0.02433401952053703,
+      "zhou_DMP_rate_120C": -0.04860938020303173
+    },
+    "barriers_inside_band": {
+      "ea_go_ak_kj_mol": true,
+      "ea_mgo_ak_kj_mol": true
+    },
+    "pass": true
+  },
+  "T2": {
+    "n_compared": 39,
+    "worst_dex": 4.821637332766438e-16,
+    "worst_benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+    "worst_path": "[0]/predicted",
+    "n_rows_moved_over_0.01_dex": 0,
+    "pass": true
+  },
+  "leahy": {
+    "model_ug_per_l": {
+      "PZ": 1.0354932963337353e-06,
+      "MPZ": 0.004090716199320298,
+      "DMP": 17.431728259589768
+    },
+    "model_share_pct": {
+      "PZ": 5.938884983119162e-06,
+      "MPZ": 0.02346156473669305,
+      "DMP": 99.97653249637833
+    },
+    "leahy_share_pct": {
+      "PZ": 55.8,
+      "MPZ": 41.5,
+      "DMP": 2.4
+    },
+    "T3_pz_over_dmp": {
+      "model": 5.940279018312922e-08,
+      "leahy": 23.25,
+      "dex": -8.592616112704754,
+      "pass": false
+    },
+    "T3_mpz_share": {
+      "model_mpz_over_pz": 3950.4999344794182,
+      "leahy": 0.7437275985663083,
+      "dex": 3.7252381611549814,
+      "mixed_route_ships": false
+    },
+    "T4_total": {
+      "model_ug_per_l": 17.435820011282384,
+      "leahy_ug_per_l": 13100.0,
+      "dex": -2.875828918477721,
+      "pass": false
+    },
+    "note": "glycine stands in for lysine (declared); Leahy's Table III is percent of total pyrazines after 2 h at 95 C, pH 9 borate"
+  },
+  "T5": {
+    "log10_sigma": {
+      "log10_k_go_ak_100C": 0.08183260861717218,
+      "log10_k_mgo_ak_100C": 0.07532045007455257
+    },
+    "ea_sigma": {
+      "ea_go_ak_kj_mol": 16.157518353952135,
+      "ea_mgo_ak_kj_mol": 16.096566410277887
+    },
+    "ea_on_bound": {
+      "ea_go_ak_kj_mol": true,
+      "ea_mgo_ak_kj_mol": true
+    },
+    "slope_sigma": {
+      "ph_slope_above_7_decades_per_unit": 0.0388108646772005,
+      "ph_slope_below_7_decades_per_unit": 0.0459313207815324
+    },
+    "pass": true
+  },
+  "T6": {
+    "k_ph5_over_k_ph9": 0.02569872551148814,
+    "band": [
+      0.016666666666666666,
+      0.05
+    ],
+    "pass": true
+  },
+  "barriers": {
+    "yu2018": {
+      "DMP": {
+        "model_apparent_kj_mol": 390.307302972079,
+        "yu": [
+          99.8,
+          6.7
+        ],
+        "note": "glucose 100 + glycine 100 mM, pH 10, 70-90 C, 90 min window; Yu's k time unit is unprinted so only the barrier is compared"
+      }
+    },
+    "leahy1989": {
+      "PZ": {
+        "model_apparent_kj_mol": 459.3053452196157,
+        "leahy_whole_cascade_kj_mol": 149.8
+      },
+      "MPZ": {
+        "model_apparent_kj_mol": 378.84218167233644,
+        "leahy_whole_cascade_kj_mol": 153.1
+      },
+      "DMP": {
+        "model_apparent_kj_mol": 303.5404791352942,
+        "leahy_whole_cascade_kj_mol": 177.0
+      }
+    }
+  },
+  "sink_conditionality": {
+    "glyoxal_remaining_fraction_at_120min_in_zhou_pot": {
+      "zhou_go_100_GO_remaining_fraction_at_120min": 0.019972110306741266,
+      "zhou_go_120_GO_remaining_fraction_at_120min": 0.019847375241134658,
+      "zhou_mgo_100_MGO_remaining_fraction_at_120min": 0.06539707414672412,
+      "zhou_mgo_120_MGO_remaining_fraction_at_120min": 0.022614623994501926
+    },
+    "methylglyoxal_remaining_fraction_at_120min_in_zhou_pot": {
+      "zhou_mgo_100_MGO_remaining_fraction_at_120min": 0.06539707414672412,
+      "zhou_mgo_120_MGO_remaining_fraction_at_120min": 0.022614623994501926
+    },
+    "pyrazine_rate_0_60_over_0_120_min": 1.749919179776949,
+    "log10_k_go_ak_shift_when_the_dry_glass_glyoxal_sink_is_zeroed": -0.5860313013873828,
+    "log10_k_mgo_ak_shift": 0.01295200166630206,
+    "nosink_cost": 2.415066227158778,
+    "b18_cost": 2.644103944369364,
+    "reading": "The B13 glyoxal sink (Kocadagli's dry glass at 180 C, barrier fixed to zero) removes 98 % of a fed 20 mM glyoxal in two hours at 100 C, so the pyrazine growth in the modelled Zhou pot is not linear (Zhou's is, figure-only) and the fitted glyoxal Strecker constant is higher by the shift above than it would be over a constant pool. The methylglyoxal pot loses its dicarbonyl too, through the trunk's own B1 melanoidin sink and the B7 furanone step; those are fitted or measured constants and are not zeroed here. Recorded as a conditionality on every pyrazine answer; the fix is a wave on the dicarbonyl sinks in water, not a move of this one."
+  },
+  "frozen_parameters": {
+    "pyrazine": {
+      "log10_k_go_ak_100C": -6.5415452891122525,
+      "ea_go_ak_kj_mol": 103.0999999999812,
+      "log10_k_mgo_ak_100C": -7.529714282148093,
+      "ea_mgo_ak_kj_mol": 114.89999999999999,
+      "ph_slope_above_7_decades_per_unit": 0.19744840125387295,
+      "ph_slope_below_7_decades_per_unit": 0.5795142879227316
+    }
+  },
+  "verdict": "SHIP"
+}

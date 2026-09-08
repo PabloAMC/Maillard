@@ -204,6 +204,7 @@ def test_the_untracked_list_is_pinned_so_nothing_joins_silently():
     """
     assert set(PH.UNTRACKED_TITRATABLE) == {
         "H2S", "Gly", "SB", "AMA", "MEL_N", "THI", "MFT", "FFT", "MESH",
+        "AKG", "AKM",   # B18 (2026-09-08): the trunk-only Strecker aminoketones, same gap as Gly
     }
     for key, reason in PH.UNTRACKED_TITRATABLE.items():
         assert len(reason) > 60, f"{key}: a gap needs a stated reason"

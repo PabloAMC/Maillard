@@ -104,6 +104,65 @@ will not move any shipped trunk coordinate; it will not read a hold-out. The par
 molecule row in the compound registry before its prediction can be keyed (the registry today has
 only the class alias); that is part of the wave's engineering, through the registry's generator.
 
-## 6. Outcome
+## 6. Outcome (2026-09-08, run the same evening) — SHIPS, with two conditionalities on every answer
 
-*(not yet run; generator to be derived from the trunk's shipped wave as described in section 3)*
+**What was built.** Five steps rather than three: the pre-registered net reactions were fourth order
+in mass action (two dicarbonyls and two glycines), which is not Yu 2018's rate law, so the step was
+written as chemistry says it goes: two Strecker deaminations (dicarbonyl + glycine → aminoketone +
+CO₂ + formaldehyde), second order and rate-determining, and three aminoketone condensations on one
+constant declared fast (Jousse 2002 call the condensation "fast"; Zhou's products rise linearly from
+the start). With the condensation fast the aminoketones sit at steady state and the pyrazine rate is
+the Strecker rate over two; the mixed pyrazine follows the two pools statistically, which is the
+pre-registered "geometric mean" with its factor two. Methylpyrazine is keyed `MPZ` (MP is a sulfur
+species). The pH term is stored at the trunk's reference pH 6.8, so every condition term is 1 at the
+references; Zhou's pH-8 pots carry its factor in the fit. Generator
+`generate_kinetic_core_b18_fit.py` (its own ten-row objective on the trunk integrator, two starts,
+Laplace inside); ship rule `generate_kinetic_core_b18_ship_rule.py`.
+
+**The fit.** Cost 2.64 on 10 rows, 6 free (reduced χ² 0.66); both starts agree to 2 × 10⁻⁸. The six
+Zhou rates within 0.07 dex, the four Leahy ratios within 0.13 dex. log10 k at 100 °C, pH 6.8:
+glyoxal route −6.54, methylglyoxal route −7.53 (Laplace σ 0.08 and 0.08 dex); barriers 103.1 and
+114.9 kJ/mol, both on the upper edge of their printed-to-refit band (σ 16 kJ/mol: a three-point
+ladder cannot pin a barrier inside a 3 kJ/mol band); pH slopes 0.197 above 7 and 0.580 below
+(σ 0.04 and 0.05).
+
+- **T1 passed**: worst Zhou row +0.071 dex; barriers inside their bands.
+- **T2 passed**: 39 predicted panel numbers compared with the tracked scorecard; the largest change is
+  5 × 10⁻¹⁶ dex. The pyrazine flux is a spectator to every scored row.
+- **T3 failed, and says something.** Leahy's 95 °C / 2 h distribution is pyrazine : 2,5-dimethyl-
+  pyrazine 23 : 1; the model gives 6 × 10⁻⁸ : 1, because the trunk makes glyoxal only through the
+  B13 dry-glass entry (glucose → glucosone, the smallest constant on the trunk) and so makes almost
+  no pyrazine from a sugar + amine pot. Methylpyrazine's share is off by 3.7 dex the other way; the
+  mixed route is reported, not shipped as a prediction of its own.
+- **T4 failed**: the 2 h total is 2.9 decades low (17 µg/L against 13.1 mg/L), glycine for lysine.
+- **T5 passed** on the two log10 constants (σ 0.08 dex); the barriers sit on the band edge as said.
+- **T6 passed**: k(pH 5)/k(pH 9) = 0.0257, inside 1/60 to 1/20.
+- **Barriers against the hold-out laboratories**: the model's apparent barriers from a glucose +
+  glycine pot are 390 kJ/mol (Yu 2018's 2,5-dimethylpyrazine at pH 10, 70 to 90 °C; measured
+  99.8 ± 6.7) and 300 to 460 kJ/mol (Leahy at pH 9, 75 to 95 °C; measured 150 to 177). The step's own
+  barriers are 103 and 115; the excess is the trunk's dicarbonyl supply, whose temperature dependence
+  in water at 70 to 95 °C the model gets steeply wrong.
+
+**The directional panel.** Two 2,5-dimethylpyrazine claims that the engine refused for want of the
+species now evaluate, and both agree: PH-06 (the compound rising with pH from 4 to 9) and TEMP-04
+(160 °C over 145 °C in an extruded pea-protein system). The headline moves from 23 of 41 to 25 of 43.
+
+**Ships, by the rule (T1, T2, T5).** The frozen literals are in `parameters_pyrazine.py`; a unit test
+asserts they equal this report. Two conditionalities travel on every pyrazine answer as warnings:
+
+1. **The supply is not measured.** The two Strecker constants are measured on fed dicarbonyls; from a
+   sugar + amine pot the yield follows the trunk's dicarbonyl supply, which T3 and T4 show to be
+   wrong by orders of magnitude at 95 °C in water. A pyrazine number from this model is a
+   fed-dicarbonyl statement.
+2. **The glyoxal sink.** The B13 dry-glass glyoxal sink (180 °C, barrier fixed to zero) removes 98 %
+   of a fed 20 mM glyoxal in two hours at 100 °C, so the modelled Zhou pot's pyrazine growth is not
+   linear (0 to 60 min rate 1.75 × the 0 to 120 min rate) where Zhou's is; with that sink zeroed
+   (`--variant nosink`, information only) the glyoxal Strecker constant is 0.59 dex lower and the
+   growth linear. The methylglyoxal pot loses its dicarbonyl too (93 to 98 %), through the trunk's
+   fitted melanoidin sink and the measured furanone step, which this wave may not move.
+
+**What this asks for next.** A wave on the small dicarbonyls in water: their formation from a sugar
++ amine pot at 70 to 120 °C (Leitzen 2021's aqueous glucose series is on disk and already misses,
+DIC-01), and their loss (Zhou 2024's glyoxal and methylglyoxal time courses are in Figure 4,
+figure-only; the wishlist's "glyoxal loss at two temperatures" stands). Until then the pyrazine
+answer's first line is its own caveat.

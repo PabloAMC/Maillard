@@ -45,10 +45,10 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-08",
     "git": {
-      "commit": "3db31f6cc04cae9425fb4b84d0af928f76989545",
-      "short": "3db31f6c",
+      "commit": "cc1d665a6da30e89db576421ac06a538a37b1012",
+      "short": "cc1d665a",
       "branch": "cleaning",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
     "inputs": [
@@ -88,8 +88,8 @@
   },
   "summary": {
     "headline": [
-      23,
-      41
+      25,
+      43
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
     "independent": {
@@ -131,15 +131,15 @@
           "rate": 0.5
         },
         "ph": {
-          "agree": 7,
-          "evaluable": 9,
-          "not_evaluable": 5,
+          "agree": 8,
+          "evaluable": 10,
+          "not_evaluable": 4,
           "misses": [
             "MOT-01",
             "CER07-PH-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.7777777777777778
+          "rate": 0.8
         },
         "process_heating": {
           "agree": 0,
@@ -183,9 +183,9 @@
           "rate": 0.4
         },
         "temperature": {
-          "agree": 6,
-          "evaluable": 10,
-          "not_evaluable": 3,
+          "agree": 7,
+          "evaluable": 11,
+          "not_evaluable": 2,
           "misses": [
             "TEMP-01",
             "TEMP-05",
@@ -193,7 +193,7 @@
             "YIL-02"
           ],
           "mechanism_absent": 0,
-          "rate": 0.6
+          "rate": 0.6363636363636364
         },
         "time": {
           "agree": 3,
@@ -209,9 +209,9 @@
         }
       },
       "total": {
-        "agree": 23,
-        "evaluable": 41,
-        "not_evaluable": 30,
+        "agree": 25,
+        "evaluable": 43,
+        "not_evaluable": 28,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -233,24 +233,24 @@
           "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5609756097560976
+        "rate": 0.5813953488372093
       },
       "ph_aw": {
-        "agree": 8,
-        "evaluable": 11,
-        "not_evaluable": 7,
+        "agree": 9,
+        "evaluable": 12,
+        "not_evaluable": 6,
         "misses": [
           "AW-01",
           "MOT-01",
           "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.7272727272727273
+        "rate": 0.75
       },
       "excluding_ph_aw": {
-        "agree": 15,
-        "evaluable": 30,
-        "not_evaluable": 23,
+        "agree": 16,
+        "evaluable": 31,
+        "not_evaluable": 22,
         "misses": [
           "SUG-03",
           "TEMP-01",
@@ -269,7 +269,7 @@
           "WANG22-T-04"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5
+        "rate": 0.5161290322580645
       }
     },
     "all_claims": {
@@ -318,9 +318,9 @@
           "rate": 0.6666666666666666
         },
         "ph": {
-          "agree": 8,
-          "evaluable": 13,
-          "not_evaluable": 5,
+          "agree": 9,
+          "evaluable": 14,
+          "not_evaluable": 4,
           "misses": [
             "PH-01",
             "PH-02",
@@ -329,7 +329,7 @@
             "CER07-PH-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.6153846153846154
+          "rate": 0.6428571428571429
         },
         "process_heating": {
           "agree": 0,
@@ -376,9 +376,9 @@
           "rate": 0.42857142857142855
         },
         "temperature": {
-          "agree": 6,
-          "evaluable": 10,
-          "not_evaluable": 3,
+          "agree": 7,
+          "evaluable": 11,
+          "not_evaluable": 2,
           "misses": [
             "TEMP-01",
             "TEMP-05",
@@ -386,7 +386,7 @@
             "YIL-02"
           ],
           "mechanism_absent": 0,
-          "rate": 0.6
+          "rate": 0.6363636363636364
         },
         "time": {
           "agree": 3,
@@ -403,9 +403,9 @@
         }
       },
       "total": {
-        "agree": 27,
-        "evaluable": 57,
-        "not_evaluable": 35,
+        "agree": 29,
+        "evaluable": 59,
+        "not_evaluable": 33,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -439,12 +439,12 @@
           "CER07-PH-01"
         ],
         "mechanism_absent": 4,
-        "rate": 0.47368421052631576
+        "rate": 0.4915254237288136
       },
       "ph_aw": {
-        "agree": 10,
-        "evaluable": 16,
-        "not_evaluable": 7,
+        "agree": 11,
+        "evaluable": 17,
+        "not_evaluable": 6,
         "misses": [
           "PH-01",
           "PH-02",
@@ -454,12 +454,12 @@
           "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.625
+        "rate": 0.6470588235294118
       },
       "excluding_ph_aw": {
-        "agree": 17,
-        "evaluable": 41,
-        "not_evaluable": 28,
+        "agree": 18,
+        "evaluable": 42,
+        "not_evaluable": 27,
         "misses": [
           "SUG-03",
           "SUG-04",
@@ -487,7 +487,7 @@
           "WANG22-T-04"
         ],
         "mechanism_absent": 4,
-        "rate": 0.4146341463414634
+        "rate": 0.42857142857142855
       }
     },
     "not_evaluable_reasons": {
@@ -497,15 +497,13 @@
       "arm 'processed, 140 C' refused": 2,
       "arm 'pH 4.5' refused": 1,
       "arm 'D-ribose' refused": 1,
-      "arm 'pH 4' refused": 1,
-      "arm 'T4 profile, 160 C max' refused": 1,
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 ": 1,
       "arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 43.1
+    "wall_seconds": 43.3
   },
   "claims": [
     {
@@ -1113,7 +1111,7 @@
       "statement": "Raising pH shifts the Maillard product spectrum from sulfur compounds toward NITROGEN heterocycles - pyrazines and thiazoles increase with pH.",
       "source": "cerny2015",
       "status": "not_evaluable",
-      "reason": "arm 'pH 4.5' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "reason": "arm 'pH 4.5' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "arms": [
         {
           "label": "pH 4.5",
@@ -1132,10 +1130,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         },
@@ -1156,10 +1156,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         },
@@ -1180,10 +1182,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         }
@@ -1572,13 +1576,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1346.176534658124,
-        1503.5889963211446,
-        628.5131011735649
+        1346.1765481996342,
+        1503.5890147461632,
+        628.513108593521
       ],
       "log10_steps": [
-        0.0480271227117948,
-        -0.3788148039076149
+        0.04802712366497908,
+        -0.37881480410237645
       ],
       "arms": [
         {
@@ -1605,7 +1609,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1346.176534658124
+          "value_ug_per_l": 1346.1765481996342
         },
         {
           "label": "aw 0.6",
@@ -1630,7 +1634,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1503.5889963211446
+          "value_ug_per_l": 1503.5890147461632
         },
         {
           "label": "aw 0.98",
@@ -1654,7 +1658,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 628.5131011735649
+          "value_ug_per_l": 628.513108593521
         }
       ]
     },
@@ -1835,10 +1839,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        628.5131011735649,
+        628.513108593521,
         674.3609725366886
       ],
-      "log10_ratio_B_over_A": 0.030578093450413384,
+      "log10_ratio_B_over_A": 0.03057808832331905,
       "arms": [
         {
           "label": "glycine + glucose (no cysteine)",
@@ -1862,7 +1866,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 628.5131011735649
+          "value_ug_per_l": 628.513108593521
         },
         {
           "label": "glycine + glucose + cysteine",
@@ -2404,13 +2408,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        10.578819181666045,
-        628.5131011735649,
-        2384.1372337755283
+        10.578819225324422,
+        628.513108593521,
+        2384.1372466215726
       ],
       "log10_steps": [
-        1.7738771408372112,
-        0.5790169154357223
+        1.773877144171989,
+        0.5790169126486637
       ],
       "arms": [
         {
@@ -2435,7 +2439,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 10.578819181666045
+          "value_ug_per_l": 10.578819225324422
         },
         {
           "label": "30 min",
@@ -2459,7 +2463,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 628.5131011735649
+          "value_ug_per_l": 628.513108593521
         },
         {
           "label": "120 min",
@@ -2483,7 +2487,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 2384.1372337755283
+          "value_ug_per_l": 2384.1372466215726
         }
       ]
     },
@@ -2898,7 +2902,7 @@
       "statement": "Total pyrazine yield ranks ribose > xylose > glucose > fructose (a 7-fold spread from ribose to fructose).",
       "source": "ni2021",
       "status": "not_evaluable",
-      "reason": "arm 'D-ribose' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "reason": "arm 'D-ribose' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "arms": [
         {
           "label": "D-ribose",
@@ -2917,10 +2921,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         },
@@ -2941,10 +2947,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         },
@@ -2965,10 +2973,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         }
@@ -3006,10 +3016,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        978.6466456047809,
-        1600.5242779835687
+        978.6466870461622,
+        1600.5245200133334
       ],
-      "log10_ratio_B_over_A": 0.213636354383722,
+      "log10_ratio_B_over_A": 0.21363640166685618,
       "arms": [
         {
           "label": "glycine + D-fructose, 150 C 35 min",
@@ -3035,7 +3045,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 978.6466456047809
+          "value_ug_per_l": 978.6466870461622
         },
         {
           "label": "glycine + D-glucose, 150 C 35 min",
@@ -3061,7 +3071,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1600.5242779835687
+          "value_ug_per_l": 1600.5245200133334
         }
       ]
     },
@@ -3144,8 +3154,20 @@
       "fit_status": "independent",
       "statement": "Raising pH from 4 to 9 SIGNIFICANTLY INCREASES pyrazines (dimethylpyrazine isomers 26.6 -> 68.2 ppb, ~2.6x) in a roasted seed matrix - a direct measurement, not an inference.",
       "source": "laemont2023",
-      "status": "not_evaluable",
-      "reason": "arm 'pH 4' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "trunk",
+      "values_ug_per_l": [
+        0.000910182837214754,
+        8.318531517612966,
+        22.91467800395366
+      ],
+      "log10_steps": [
+        3.9609180244139965,
+        0.440067092512121
+      ],
       "arms": [
         {
           "label": "pH 4",
@@ -3160,19 +3182,19 @@
             "ph": 4.0,
             "aw": 0.3
           },
-          "answered": false,
+          "answered": true,
           "lane": "trunk",
-          "state": "out_of_envelope",
-          "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 4 scales the three Amadori-decay steps by x0.01 (10^(0.69 per pH unit); declared band 0.00-0.09; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+            "pH 4 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.000910182837214754
         },
         {
           "label": "pH 7",
@@ -3187,19 +3209,19 @@
             "ph": 7.0,
             "aw": 0.3
           },
-          "answered": false,
+          "answered": true,
           "lane": "trunk",
-          "state": "out_of_envelope",
-          "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 7 scales the three Amadori-decay steps by x1.37 (10^(0.69 per pH unit); declared band 1.19-1.53; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 7 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+            "pH 7 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 8.318531517612966
         },
         {
           "label": "pH 9",
@@ -3214,19 +3236,19 @@
             "ph": 9.0,
             "aw": 0.3
           },
-          "answered": false,
+          "answered": true,
           "lane": "trunk",
-          "state": "out_of_envelope",
-          "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "WATER ACTIVITY TERM (B12): a_w 0.30 scales the amine-sugar condensation by x3.05 (declared band 1.00-3.46; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
             "a_w 0.30 is at or below the lowest measured point (0.33): the multiplier is HELD there. Both sources measure a further collapse in the glass (0.02-0.2x) that depends on temperature and is not sized here.",
             "pH TERM (B12): pH 9 scales the three Amadori-decay steps by x32.96 (10^(0.69 per pH unit); declared band 6.52-105.68; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 9 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+            "pH 9 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 22.91467800395366
         }
       ]
     },
@@ -3335,8 +3357,16 @@
       "fit_status": "independent",
       "statement": "Raising extruder barrel temperature (max zone 145 -> 160 C) NEARLY DOUBLES pyrazines in a cornmeal / pea-protein-isolate extrudate, and affects nothing else.",
       "source": "goncuoglu2026",
-      "status": "not_evaluable",
-      "reason": "arm 'T4 profile, 160 C max' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "status": "agree",
+      "reason": null,
+      "identical_predictions": false,
+      "mechanism_absent": false,
+      "lane": "trunk",
+      "values_ug_per_l": [
+        0.0018763696400799154,
+        4.8014211565929014e-06
+      ],
+      "log10_ratio_B_over_A": -2.5919485956125516,
       "arms": [
         {
           "label": "T4 profile, 160 C max",
@@ -3351,17 +3381,17 @@
             "ph": 6.0,
             "aw": 0.4
           },
-          "answered": false,
+          "answered": true,
           "lane": "trunk",
-          "state": "out_of_envelope",
-          "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "WATER ACTIVITY TERM (B12): a_w 0.40 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.03; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
-            "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
+            "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.0018763696400799154
         },
         {
           "label": "T1 profile, 145 C max",
@@ -3376,17 +3406,17 @@
             "ph": 6.0,
             "aw": 0.4
           },
-          "answered": false,
+          "answered": true,
           "lane": "trunk",
-          "state": "out_of_envelope",
-          "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "WATER ACTIVITY TERM (B12): a_w 0.40 scales the amine-sugar condensation by x3.53 (declared band 1.00-4.03; Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J. 20:40-45, Table 1: first-order available-lysine loss in skim milk powder at a_w 0.33-0.98, 37-60 C, 95 % CI (pereyragonzales2010_extraction.md sec. 3); plateau alternative from Bell 1995, J. Food Sci. (bell1995_extraction.md sec. 4a)). The shape is the net effect at FIXED dry-basis composition measured at 37-60 C in one matrix; the band's floor is the fixed-molality no-effect alternative. Dehydration steps carry no a_w term.",
-            "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
+            "pH TERM (B12): pH 6 scales the three Amadori-decay steps by x0.28 (10^(0.69 per pH unit); declared band 0.18-0.51; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 4.8014211565929014e-06
         }
       ]
     },
@@ -3407,13 +3437,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1220.6149169138578,
-        796.7048563245262,
-        688.505033491039
+        1220.615049196038,
+        796.7050507785099,
+        688.5051214065364
       ],
       "log10_steps": [
-        -0.18528120866608022,
-        -0.06339034479640217
+        -0.18528114973258777,
+        -0.06339039534061709
       ],
       "arms": [
         {
@@ -3440,7 +3470,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1220.6149169138578
+          "value_ug_per_l": 1220.615049196038
         },
         {
           "label": "170 C",
@@ -3466,7 +3496,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 796.7048563245262
+          "value_ug_per_l": 796.7050507785099
         },
         {
           "label": "190 C",
@@ -3492,7 +3522,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 190 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 688.505033491039
+          "value_ug_per_l": 688.5051214065364
         }
       ]
     },
@@ -3582,13 +3612,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1346.176534658124,
-        1530.0980945198262,
-        762.1653502709938
+        1346.1765481996342,
+        1530.0981086044992,
+        762.1653602233863
       ],
       "log10_steps": [
-        0.05561725825493287,
-        -0.3026700734162209
+        0.055617257883976035,
+        -0.30267007174289706
       ],
       "arms": [
         {
@@ -3615,7 +3645,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1346.176534658124
+          "value_ug_per_l": 1346.1765481996342
         },
         {
           "label": "aw 0.65",
@@ -3640,7 +3670,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1530.0980945198262
+          "value_ug_per_l": 1530.0981086044992
         },
         {
           "label": "aw 0.95",
@@ -3665,7 +3695,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 762.1653502709938
+          "value_ug_per_l": 762.1653602233863
         }
       ]
     },
@@ -3751,7 +3781,7 @@
       "statement": "Adding cysteine SUPPRESSES the pyrazine track: a system with cysteine produced only four pyrazines where the cysteine-free system produced 'a significant amount', and cysteine restrained browning.",
       "source": "zhang2024rice",
       "status": "not_evaluable",
-      "reason": "arm 'hydrolysate + xylose (no cysteine), 120 C' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "reason": "arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "arms": [
         {
           "label": "hydrolysate + xylose (no cysteine), 120 C",
@@ -3770,10 +3800,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         },
@@ -3795,10 +3827,12 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
           ],
           "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
+            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
+            "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at 100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement.",
+            "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water."
           ],
           "value_ug_per_l": null
         }
@@ -4090,13 +4124,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        59.660326613675736,
-        1220.6149169138578,
-        1600.5242779835687
+        59.660327154137974,
+        1220.615049196038,
+        1600.5245200133334
       ],
       "log10_steps": [
-        1.3108930464861057,
-        0.11768359315570782
+        1.3108930896178008,
+        0.11768361176333884
       ],
       "arms": [
         {
@@ -4123,7 +4157,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 59.660326613675736
+          "value_ug_per_l": 59.660327154137974
         },
         {
           "label": "25 min",
@@ -4149,7 +4183,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1220.6149169138578
+          "value_ug_per_l": 1220.615049196038
         },
         {
           "label": "35 min",
@@ -4175,7 +4209,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1600.5242779835687
+          "value_ug_per_l": 1600.5245200133334
         }
       ]
     },
@@ -5604,17 +5638,17 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        0.07356569398608993,
-        638.2203368167466,
-        0.010537322605920992,
-        32.87080222408425,
-        0.02848224604634159
+        0.07356569403821815,
+        638.2203365725542,
+        0.010537322566990925,
+        32.87080220798014,
+        0.02848224606101167
       ],
       "log10_steps": [
-        3.9382953025530933,
-        -4.782240362402355,
-        3.4940800269096597,
-        -3.062236069519815
+        3.9382953020791875,
+        -4.782240363840685,
+        3.4940800283013873,
+        -3.0622360690833568
       ],
       "predicted_order": [
         "glucosone",
@@ -5643,7 +5677,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 0.07356569398608993
+          "value_ug_per_l": 0.07356569403821815
         },
         {
           "label": "glucose alone, 105 C, 6 h :: glucosone",
@@ -5664,7 +5698,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 638.2203368167466
+          "value_ug_per_l": 638.2203365725542
         },
         {
           "label": "glucose alone, 105 C, 6 h :: methylglyoxal",
@@ -5685,7 +5719,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 0.010537322605920992
+          "value_ug_per_l": 0.010537322566990925
         },
         {
           "label": "glucose alone, 105 C, 6 h :: glyoxal",
@@ -5706,7 +5740,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 32.87080222408425
+          "value_ug_per_l": 32.87080220798014
         },
         {
           "label": "glucose alone, 105 C, 6 h :: diacetyl",
@@ -5727,7 +5761,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 0.02848224604634159
+          "value_ug_per_l": 0.02848224606101167
         }
       ]
     },
@@ -5769,14 +5803,14 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        0.28976748728464125,
-        640.6721049056459,
-        29.795183799459615,
-        0.02816726361398415
+        0.2897674872846414,
+        640.6721049056457,
+        29.795183799459593,
+        0.028167263613984146
       ],
       "log10_steps": [
-        3.3445861602413314,
-        -1.3324897462359715,
+        3.344586160241331,
+        -1.3324897462359717,
         -3.0244014105218855
       ],
       "predicted_order": [
@@ -5806,7 +5840,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 0.28976748728464125
+          "value_ug_per_l": 0.2897674872846414
         },
         {
           "label": "10 % glucose, 121 C, 18 min :: glucosone",
@@ -5828,7 +5862,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 640.6721049056459
+          "value_ug_per_l": 640.6721049056457
         },
         {
           "label": "10 % glucose, 121 C, 18 min :: glyoxal",
@@ -5850,7 +5884,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 29.795183799459615
+          "value_ug_per_l": 29.795183799459593
         },
         {
           "label": "10 % glucose, 121 C, 18 min :: methylglyoxal",
@@ -5872,7 +5906,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 0.02816726361398415
+          "value_ug_per_l": 0.028167263613984146
         }
       ]
     },

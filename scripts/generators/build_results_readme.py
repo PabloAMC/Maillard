@@ -70,6 +70,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "results/validation/kinetic_core_b16_lift_fit_report.json": "B16 lift-variant frozen fit (ceiling 160): what the 100 C series asks of the thiol-sink barrier. Never read by the engine.",
     "results/validation/kinetic_core_b16_laplace_covariance.json": "Laplace covariance at the frozen B16 optimum (`generate_kinetic_core_b8_laplace.py --wave b16`).",
     "results/validation/kinetic_core_b16_ship_rule.*": "The B16 prereg's ship rule (sec. 4) evaluated on the frozen B9 / B16 / B16-lift artifacts without switching the engine (`generate_kinetic_core_b16_ship_rule.py`).",
+    "results/validation/kinetic_core_b18_ship_rule.*": "The B18 prereg's ship rule (sec. 4) evaluated on the frozen B18 artifacts: T1-T6, the Leahy and Yu hold-outs, the glyoxal-sink conditionality (`generate_kinetic_core_b18_ship_rule.py`).",
     "results/validation/kinetic_core_b11_ship_rule.*": "The B11 prereg's ship rule (sec. 5) evaluated on the frozen B11 / B9 artifacts and the panel bundles' vessel blocks without switching the engine (`generate_kinetic_core_b11_ship_rule.py`).",
     "results/validation/holdout_frozen": "Hong 2020 hold-out rows frozen before B4; read by the B4 fit generator and `parameters_matrix.py`.",
     "results/validation/cutover_final_exam.*": "FROZEN 2026-09-03 cutover exam (core vs legacy lane, 34 answered / 3 within band). Its generator was deleted at B5b; kept as the record of the cutover decision.",

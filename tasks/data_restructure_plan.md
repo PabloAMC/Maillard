@@ -1387,7 +1387,13 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       a LOX rate in molar units (needs epsilon 234 and the assay geometry), (iii) the hexanal fate
       (alcohol dehydrogenase to 1-hexanol, binding, evaporation). Until (i) exists the levels above
       are validation rows for a storage model, not fit rows.
-- [ ] **B18 (pre-registered 2026-09-08, not run): a pyrazine step on the trunk.** Five dossiers read
+- [x] **B18 (pre-registered and RUN 2026-09-08; SHIPS with two caveats): a pyrazine step on the trunk.**
+      Outcome in the prereg sec. 6: five steps (Strecker x2 fitted, condensation x3 declared fast), cost
+      2.64 / 10 rows, T1 T2 T5 T6 pass, T3 T4 fail (Leahy's sugar pot: pyrazine absent, total 2.9 dex low,
+      apparent barriers 300-460 kJ/mol = the trunk's dicarbonyl SUPPLY in water); glyoxal-sink
+      conditionality 0.59 dex (nosink variant). NEXT WAVE ASKED FOR: the small dicarbonyls in water
+      (formation from sugar + amine at 70-120 C; loss: Zhou 2024 Fig. 4 GO/MGO time courses are
+      figure-only; Leitzen 2021 DIC-01 on disk). Original entry: Five dossiers read
       (zhou2024, leahy1989, leahy1989a, yu2018, balagiannis2015). FIT rows: Zhou 2024's six initial
       rates (Ala + GO -> pyrazine 0.0279 / 0.0791 / 0.1507 umol/L/min; Ala + MGO -> 2,5-DMP 0.0035 /
       0.0100 / 0.0230 at 100 / 110 / 120 C, 20 + 20 mM, pH 8 unbuffered; Ea 100.6 / 111.7 kJ/mol;

@@ -411,6 +411,12 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "G": 178.14,      # C6H10O6, glucosone
     "GO": 58.04,      # C2H2O2, glyoxal
     "DA": 86.09,      # C4H6O2, 2,3-butanedione
+    # B18 (2026-09-08): the trunk's pyrazine step
+    "PZ": 80.09,      # C4H4N2, pyrazine
+    "DMP": 108.14,    # C6H8N2, 2,5-dimethylpyrazine
+    "MPZ": 94.12,     # C5H6N2, 2-methylpyrazine
+    "AKG": 59.07,     # C2H5NO, aminoacetaldehyde
+    "AKM": 73.09,     # C3H7NO, aminoacetone
     "PENT": 150.13,   # C5H10O5, ribose = xylose
     "ARP": 221.21,    # C8H15NO6, 1-deoxy-xylulosyl-alanine
     "Cys": 121.16,    # C3H7NO2S

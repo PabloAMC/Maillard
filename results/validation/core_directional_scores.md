@@ -2,11 +2,11 @@
 
 Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 23/41 (56%)**; 30 independent claims not evaluable
-* independent, excluding pH and water activity: 15/30 (50%); pH and water activity alone: 8/11 (73%)
-* all claims (independent + fit-adjacent + fit-system overlap): 27/57 (47%); 35 not evaluable
+* **headline (strictly independent, evaluable): 25/43 (58%)**; 28 independent claims not evaluable
+* independent, excluding pH and water activity: 16/31 (52%); pH and water activity alone: 9/12 (75%)
+* all claims (independent + fit-adjacent + fit-system overlap): 29/59 (49%); 33 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); a predicted concentration is zero; no direction is defined (4); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'pH 4' refused (1); arm 'T4 profile, 160 C max' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); a predicted concentration is zero; no direction is defined (4); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
 ## Per category (strictly independent claims)
 
@@ -16,12 +16,12 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | lipid_lane | 0 | 0 | - | 1 | - |
 | matrix_identity | 0 | 0 | - | 1 | - |
 | moisture_aw | 1 | 2 | 0.50 | 2 | AW-01 |
-| ph | 7 | 9 | 0.78 | 5 | MOT-01, CER07-PH-01 |
+| ph | 8 | 10 | 0.80 | 4 | MOT-01, CER07-PH-01 |
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 1 | 0.00 | 2 | MOT-03 |
 | scope | 0 | 0 | - | 3 | - |
 | sugar_identity | 4 | 10 | 0.40 | 7 | SUG-03, SUG-12, HOF-02, HOF-03, DIC-01, DIC-03 |
-| temperature | 6 | 10 | 0.60 | 3 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
+| temperature | 7 | 11 | 0.64 | 2 | TEMP-01, TEMP-05, YIL-01, YIL-02 |
 | time | 3 | 6 | 0.50 | 3 | WANG22-T-01, WANG22-T-03, WANG22-T-04 |
 
 ## Per category (all claims)
@@ -32,12 +32,12 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | lipid_lane | 0 | 3 | 0.00 | 1 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 2 | 3 | 0.67 | 2 |
-| ph | 8 | 13 | 0.62 | 5 |
+| ph | 9 | 14 | 0.64 | 4 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 0 | 2 | 0.00 | 4 |
 | scope | 0 | 0 | - | 3 |
 | sugar_identity | 6 | 14 | 0.43 | 7 |
-| temperature | 6 | 10 | 0.60 | 3 |
+| temperature | 7 | 11 | 0.64 | 2 |
 | time | 3 | 7 | 0.43 | 3 |
 
 ## Claims
@@ -53,7 +53,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | PH-01 | ph | fit_system_overlap | MFT | A>B | **disagree** | sulfur | 46.8, 83.1 |  |
 | PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **disagree** | sulfur | 0.0452, 0.111 |  |
 | PH-03 | ph | independent | FFT | decreasing | **agree** | sulfur | 65.9, 53.7, 10.9 |  |
-| PH-04 | ph | independent | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | arm 'pH 4.5' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: th |
+| PH-04 | ph | independent | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | arm 'pH 4.5' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was ru |
 | PH-05 | ph | independent | Furfural | decreasing | **agree** | sulfur | 146, 131, 58.1 |  |
 | TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 13.6, 357, 1.04e+03 |  |
 | TEMP-02 | temperature | independent | Acrylamide | A>B | **agree** | acrylamide | 13.6, 0 |  |
@@ -79,18 +79,18 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | SUG-07 | sugar_identity | independent | Furfural | A>B | **agree** | sulfur | 1.42e+03, 402 |  |
 | SUG-08 | sugar_identity | independent | MFT | A>B | **agree** | sulfur | 10.1, 0 |  |
 | SUG-09 | sugar_identity | independent | FFT | A>B | **agree** | sulfur | 36.9, 33.5 |  |
-| SUG-10 | sugar_identity | independent | 2,5-Dimethylpyrazine | decreasing | **not_evaluable** | - | - | arm 'D-ribose' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either:  |
+| SUG-10 | sugar_identity | independent | 2,5-Dimethylpyrazine | decreasing | **not_evaluable** | - | - | arm 'D-ribose' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was  |
 | SUG-11 | sugar_identity | independent | FFT | A<B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SUG-12 | sugar_identity | independent | HMF | A>B | **disagree** | trunk | 979, 1.6e+03 |  |
 | SUG-13 | sugar_identity | independent | Furfural | A>B | **agree** | sulfur | 2.09, 0.405 |  |
-| PH-06 | ph | independent | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | arm 'pH 4' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound list either: the  |
+| PH-06 | ph | independent | 2,5-Dimethylpyrazine | increasing | **agree** | trunk | 0.00091, 8.32, 22.9 |  |
 | PH-07 | ph | independent | Furfural | flat | **agree** | sulfur | 2.17, 2.09, 2.08 |  |
-| TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'T4 profile, 160 C max' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unrepresented-compound  |
+| TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **agree** | trunk | 0.00188, 4.8e-06 |  |
 | TEMP-05 | temperature | independent | HMF | increasing | **disagree** | trunk | 1.22e+03, 797, 689 |  |
 | TEMP-06 | temperature | independent | Furfural | A>B | **agree** | sulfur | 2.09, 0.000551 |  |
 | AW-03 | moisture_aw | independent | HMF | peak | **agree** | trunk | 1.35e+03, 1.53e+03, 762 |  |
 | CYS-03 | additive_cysteine | independent | MFT | A>B | **agree** | sulfur | 12.5, 0 |  |
-| CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: UNREPRESENTED TARGETS: 2,5-Dimethylpyrazine -- not a species in any core lane, and not on the named unr |
+| CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's networ |
 | LIP-04 | lipid_lane | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 63.9, 63.9 | identical predictions; the lane has no term for the moved axis |
 | ACR-01 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 0.716, 1.67, 1.43 |  |
 | ACR-02 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 7.64, 935, 4.37 |  |

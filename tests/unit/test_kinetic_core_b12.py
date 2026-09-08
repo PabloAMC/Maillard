@@ -53,11 +53,16 @@ def test_apply_scales_only_the_named_steps():
         assert out[key].k_ref == pytest.approx(base[key].k_ref * tc.aw_multiplier(0.6))
     for key in tc.PH_STEPS:
         assert out[key].k_ref == pytest.approx(base[key].k_ref * tc.ph_factor(5.5))
-    untouched = [k for k in base if k not in tc.AW_STEPS + tc.PH_STEPS]
+    # B18 (2026-09-08): the pyrazine step's own pH term scales its two Strecker steps, reference 6.8
+    from src.kinetic_core.parameters_pyrazine import PYRAZINE_PH_STEPS, pyrazine_ph_factor
+    for key in PYRAZINE_PH_STEPS:
+        assert out[key].k_ref == pytest.approx(base[key].k_ref * pyrazine_ph_factor(5.5))
+    untouched = [k for k in base if k not in tc.AW_STEPS + tc.PH_STEPS + PYRAZINE_PH_STEPS]
     assert untouched
     for key in untouched:
         assert out[key] == base[key], key
     assert any("WATER ACTIVITY TERM" in w for w in warns) and any("pH TERM" in w for w in warns)
+    assert any("PYRAZINE pH TERM" in w for w in warns)
     same, none = tc.apply(base, _spec().process)
     assert same == dict(base) and none == []
 

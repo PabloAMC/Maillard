@@ -160,6 +160,25 @@ def _scaled(parameters: Mapping[str, Any], keys: Sequence[str], factor: float) -
     return out
 
 
+def pyrazine_factor(process, slopes=None) -> Tuple[float, List[str]]:
+    """B18: the pyrazine step's own pH factor (two slopes, knot at 7, reference pH 8) and its declaration."""
+    from .parameters_pyrazine import (
+        PYRAZINE_PH_SLOPES, PYRAZINE_PH_SOURCE, PYRAZINE_REFERENCE_PH, pyrazine_ph_factor,
+    )
+
+    ph = getattr(process, "ph", None)
+    s = tuple(PYRAZINE_PH_SLOPES if slopes is None else slopes)
+    f = pyrazine_ph_factor(ph, s)
+    notes: List[str] = []
+    if abs(f - 1.0) > 1e-12:
+        notes.append(
+            f"PYRAZINE pH TERM (B18): pH {float(ph):g} scales the three pyrazine steps by x{f:.3g} relative to "
+            f"pH {PYRAZINE_REFERENCE_PH:g} ({s[0]:.2f} decades per unit above 7, {s[1]:.2f} below; fitted on "
+            f"{PYRAZINE_PH_SOURCE}). Below pH 5 and above 9 the term is an extrapolation of a three-point ladder."
+        )
+    return f, notes
+
+
 def factors(
     process, *, aw_scale: float = 1.0, ph_exponent: float = PH_EXPONENT_DECADES_PER_UNIT,
 ) -> Tuple[float, float, List[str]]:
@@ -212,13 +231,16 @@ def apply(
     *,
     aw_scale: float = 1.0,
     ph_exponent: float = PH_EXPONENT_DECADES_PER_UNIT,
+    pyrazine_slopes=None,
 ) -> Tuple[Dict[str, Any], List[str]]:
     """
-    The trunk parameter dict with the two condition terms applied, and the declarations.
+    The trunk parameter dict with the condition terms applied, and the declarations.
 
     ``aw_scale`` and ``ph_exponent`` are the envelope's hooks: a draw moves the multiplier
     within its band and the exponent within its band. At the defaults the factors are the
-    declared centres; at a_w None / >= 0.98 and pH 6.8 they are exactly 1.0.
+    declared centres; at a_w None / >= 0.98 and pH 6.8 they are exactly 1.0. ``pyrazine_slopes``
+    (B18) is the pyrazine step's own two-slope pH term, the fitted slopes by default; the fit
+    generator passes candidates. It scales the three pyrazine steps only, when they are present.
     """
     m_eff, f, warnings = factors(process, aw_scale=aw_scale, ph_exponent=ph_exponent)
     out: Dict[str, Any] = dict(parameters)
@@ -226,12 +248,19 @@ def apply(
         out = _scaled(out, AW_STEPS, m_eff)
     if abs(f - 1.0) > 1e-12:
         out = _scaled(out, PH_STEPS, f)
+    from .parameters_pyrazine import PYRAZINE_PH_STEPS
+
+    if all(key in out for key in PYRAZINE_PH_STEPS):
+        fp, notes = pyrazine_factor(process, pyrazine_slopes)
+        if abs(fp - 1.0) > 1e-12:
+            out = _scaled(out, PYRAZINE_PH_STEPS, fp)
+        warnings = list(warnings) + notes
     return out, warnings
 
 
 __all__ = [
     "AW_BAND_HIGH_FACTOR", "AW_BAND_LOW_MULTIPLIER", "AW_SCALE_BAND", "AW_MULTIPLIER_TABLE", "AW_SOURCE", "AW_STEPS",
     "AW_TABLE_FLOOR", "PH_EXPONENT_BAND", "PH_EXPONENT_DECADES_PER_UNIT", "PH_MEASURED_WINDOW",
-    "PH_SOURCE", "PH_STEPS", "REFERENCE_AW", "REFERENCE_PH", "apply", "aw_band", "aw_multiplier",
+    "PH_SOURCE", "PH_STEPS", "REFERENCE_AW", "REFERENCE_PH", "apply", "aw_band", "aw_multiplier", "pyrazine_factor",
     "declarations", "factors", "ph_band", "ph_factor",
 ]

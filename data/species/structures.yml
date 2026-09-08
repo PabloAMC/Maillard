@@ -33,6 +33,12 @@ species:
   G:     {kind: molecule, smiles: "OCC(O)C(O)C(O)C(=O)C=O", note: "glucosone"}
   GO:    {kind: molecule, smiles: "O=CC=O"}
   DA:    {kind: molecule, registry_id: 2_3_butanedione}
+  # ---- B18 (2026-09-08): the pyrazine step, trunk-only ----
+  PZ:    {kind: molecule, smiles: "c1cnccn1", note: "pyrazine (parent); the registry's bare word 'pyrazine' names the class, so the SMILES is given here"}
+  DMP:   {kind: molecule, registry_id: 2_5_dimethylpyrazine}
+  MPZ:   {kind: molecule, registry_id: methylpyrazine}
+  AKG:   {kind: molecule, smiles: "NCC=O", note: "aminoacetaldehyde, the Strecker aminoketone of glyoxal"}
+  AKM:   {kind: molecule, smiles: "CC(=O)CN", note: "aminoacetone, the Strecker aminoketone of methylglyoxal"}
   # ---- sulfur: pentose + cysteine (+ thiamine) ----
   PENT:  {kind: molecule, smiles: "OCC(O)C(O)C(O)C=O", note: "aldopentose, open chain; ribose and xylose share it"}
   Cys:   {kind: molecule, smiles: "NC(CS)C(=O)O"}

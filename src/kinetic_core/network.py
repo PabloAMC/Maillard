@@ -337,9 +337,46 @@ DICARBONYL_REACTIONS: Tuple[Reaction, ...] = (
         "Carried at ZERO as a prediction, not left undefined.",
     ),
 )
-TRUNK_REACTIONS: Tuple[Reaction, ...] = REACTIONS + DICARBONYL_REACTIONS
+#: Build Wave B18 (2026-09-08): the pyrazine step, TRUNK-ONLY, five steps. Two Strecker
+#: deaminations (dicarbonyl + glycine -> aminoketone + CO2 + formaldehyde; hypothesis-layer rule
+#: R07), second order and RATE-DETERMINING, then three aminoketone condensations (rule R28) on one
+#: shared constant DECLARED FAST (Jousse 2002's "I + I -> pyrazines: fast", jousse2002_extraction.md
+#: Table R10), so the measured pyrazine rate is the Strecker rate over two and the mixed pyrazine
+#: follows the two aminoketone pools statistically. Each glycine leaves its two carbons as carbon
+#: dioxide and formaldehyde, booked to the unassigned fragment pool. Constants:
+#: `parameters_pyrazine.py`; pre-registration `results/validation/kinetic_core_b18_prereg.md`.
+PYRAZINE_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_go_ak", {"GO": 1, "Gly": 1}, {"AKG": 1, "FRAG_C": 2}, "k_go_ak",
+        "B18. glyoxal + glycine -> aminoacetaldehyde + CO2 + HCHO (Strecker, net). FITTED to Zhou "
+        "2024's three-temperature pyrazine formation rates on fed glyoxal + alanine (alanine -> "
+        "glycine declared): the rate-determining step of the pyrazine route.",
+    ),
+    Reaction(
+        "r_mgo_ak", {"MGO": 1, "Gly": 1}, {"AKM": 1, "FRAG_C": 2}, "k_mgo_ak",
+        "B18. methylglyoxal + glycine -> aminoacetone + CO2 + HCHO (Strecker, net). FITTED to Zhou "
+        "2024's three-temperature 2,5-dimethylpyrazine rates on fed methylglyoxal + alanine.",
+    ),
+    Reaction(
+        "r_akg_pz", {"AKG": 2}, {"PZ": 1}, "k_cond",
+        "B18. 2 aminoacetaldehyde -> pyrazine (condensation, dehydration, oxidation; net). DECLARED "
+        "FAST (shared k_cond): not rate-determining, sensitivity reported in the ship rule.",
+    ),
+    Reaction(
+        "r_akm_dmp", {"AKM": 2}, {"DMP": 1}, "k_cond",
+        "B18. 2 aminoacetone -> 2,5-dimethylpyrazine (net). Shared declared k_cond.",
+    ),
+    Reaction(
+        "r_ak_mpz", {"AKG": 1, "AKM": 1}, {"MPZ": 1}, "k_cond",
+        "B18. aminoacetaldehyde + aminoacetone -> 2-methylpyrazine (net). Shared declared k_cond: the "
+        "mixed pyrazine follows the two pools statistically (2 sqrt of the two homo rates); no "
+        "source measures the mixed condensation.",
+    ),
+)
+TRUNK_REACTIONS: Tuple[Reaction, ...] = REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS
 TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
 DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
+PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)
 
 #: Build Wave B7's eleven steps, named so a report can say which part of the
 #: trunk is B1's and which is B7's without counting.

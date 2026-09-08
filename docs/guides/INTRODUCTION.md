@@ -134,6 +134,7 @@ This is the list, in order, in plain words.
 | the small dicarbonyls added from constants measured in a dry glass | the panel measures them | they come out in the wrong order in water | yes, flagged |
 | water activity and pH terms on the acrylamide path, declared from one laboratory's series | the panel moves both | the pH claims agree | yes |
 | thiol removal re-tuned on the twelve-hour 100 °C series and the intermediate's own decay | the model loses thiols too fast at low temperature | peaks at six hours where the pot keeps rising; breaks the 145 °C pots | no |
+| a pyrazine step added to the sugar path, its two rate constants fitted on one laboratory's fed-dicarbonyl ladders and its pH shape on another's | the roasted note, asked for and refused until a measured rate existed | the fed-dicarbonyl rates fit within 20 %; from a sugar and amino acid pot the yield is a thousandfold low, because the model makes far too little glyoxal and methylglyoxal in water | yes, with that caveat on every answer |
 
 ## 7. The one problem that matters most: where the thiols go
 

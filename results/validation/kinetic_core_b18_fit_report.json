@@ -1,0 +1,424 @@
+{
+  "wave": "B18 -- a pyrazine step on the trunk (Zhou 2024's rates, Leahy 1989's pH ladder)",
+  "artifact": "kinetic_core_b18_fit_report",
+  "generated_by": "scripts/generators/generate_kinetic_core_b18_fit.py",
+  "generated_on": "2026-09-08",
+  "git": {
+    "head": "cc1d665a6da30e89db576421ac06a538a37b1012"
+  },
+  "prereg": "results/validation/kinetic_core_b18_prereg.md",
+  "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendment 27",
+  "objective": {
+    "form": "10 rows (6 Zhou 2024 mean formation rates + 4 Leahy 1989 within-study pH ratios), 6 free coordinates, log10 residuals over the rows' sigma; least_squares (trf), two starts",
+    "n_rows": 10,
+    "n_free_parameters": 6,
+    "final_cost": 2.644103944369364,
+    "observable": "mean formation rate over the source's regression window (0-120 min), umol L-1 min-1",
+    "rows": [
+      {
+        "id": "zhou_PZ_rate_100C",
+        "kind": "mean_rate_umol_l_min",
+        "system": "zhou_go_100",
+        "species": "PZ",
+        "target": 0.0279,
+        "sigma_log": 0.1,
+        "anchor": "Zhou et al. 2024 JAFC 72:18630 Table 2: [Ala] = [dicarbonyl] = 20 mmol/L, water, initial pH 8.0 (NaOH, unbuffered), stirred sealed vessel, 0-120 min, triplicates, HS-SPME-GC/MS with external calibration; zhou2024_extraction.md sec. 4",
+        "note": "MEASURED RATE (zero-order slope over 0-120 min); alanine -> glycine declared."
+      },
+      {
+        "id": "zhou_PZ_rate_110C",
+        "kind": "mean_rate_umol_l_min",
+        "system": "zhou_go_110",
+        "species": "PZ",
+        "target": 0.0791,
+        "sigma_log": 0.1,
+        "anchor": "Zhou et al. 2024 JAFC 72:18630 Table 2: [Ala] = [dicarbonyl] = 20 mmol/L, water, initial pH 8.0 (NaOH, unbuffered), stirred sealed vessel, 0-120 min, triplicates, HS-SPME-GC/MS with external calibration; zhou2024_extraction.md sec. 4",
+        "note": "MEASURED RATE (zero-order slope over 0-120 min); alanine -> glycine declared."
+      },
+      {
+        "id": "zhou_PZ_rate_120C",
+        "kind": "mean_rate_umol_l_min",
+        "system": "zhou_go_120",
+        "species": "PZ",
+        "target": 0.1507,
+        "sigma_log": 0.1,
+        "anchor": "Zhou et al. 2024 JAFC 72:18630 Table 2: [Ala] = [dicarbonyl] = 20 mmol/L, water, initial pH 8.0 (NaOH, unbuffered), stirred sealed vessel, 0-120 min, triplicates, HS-SPME-GC/MS with external calibration; zhou2024_extraction.md sec. 4",
+        "note": "MEASURED RATE (zero-order slope over 0-120 min); alanine -> glycine declared."
+      },
+      {
+        "id": "zhou_DMP_rate_100C",
+        "kind": "mean_rate_umol_l_min",
+        "system": "zhou_mgo_100",
+        "species": "DMP",
+        "target": 0.0035,
+        "sigma_log": 0.1,
+        "anchor": "Zhou et al. 2024 JAFC 72:18630 Table 2: [Ala] = [dicarbonyl] = 20 mmol/L, water, initial pH 8.0 (NaOH, unbuffered), stirred sealed vessel, 0-120 min, triplicates, HS-SPME-GC/MS with external calibration; zhou2024_extraction.md sec. 4",
+        "note": "MEASURED RATE (zero-order slope over 0-120 min); alanine -> glycine declared."
+      },
+      {
+        "id": "zhou_DMP_rate_110C",
+        "kind": "mean_rate_umol_l_min",
+        "system": "zhou_mgo_110",
+        "species": "DMP",
+        "target": 0.01,
+        "sigma_log": 0.1,
+        "anchor": "Zhou et al. 2024 JAFC 72:18630 Table 2: [Ala] = [dicarbonyl] = 20 mmol/L, water, initial pH 8.0 (NaOH, unbuffered), stirred sealed vessel, 0-120 min, triplicates, HS-SPME-GC/MS with external calibration; zhou2024_extraction.md sec. 4",
+        "note": "MEASURED RATE (zero-order slope over 0-120 min); alanine -> glycine declared."
+      },
+      {
+        "id": "zhou_DMP_rate_120C",
+        "kind": "mean_rate_umol_l_min",
+        "system": "zhou_mgo_120",
+        "species": "DMP",
+        "target": 0.023,
+        "sigma_log": 0.1,
+        "anchor": "Zhou et al. 2024 JAFC 72:18630 Table 2: [Ala] = [dicarbonyl] = 20 mmol/L, water, initial pH 8.0 (NaOH, unbuffered), stirred sealed vessel, 0-120 min, triplicates, HS-SPME-GC/MS with external calibration; zhou2024_extraction.md sec. 4",
+        "note": "MEASURED RATE (zero-order slope over 0-120 min); alanine -> glycine declared."
+      },
+      {
+        "id": "leahy_PZ_k_ph7_over_ph9",
+        "kind": "rate_ratio",
+        "system": "leahy_95C_ph7",
+        "system_b": "leahy_95C_ph9",
+        "species": "PZ",
+        "target": 0.37453183520599254,
+        "sigma_log": 0.15,
+        "anchor": "Leahy & Reineccius 1989 ACS Symp. Ser. 409 ch. 18 Table I: 0.1 M lysine + 0.1 M glucose, 95 C, pH 9.0 (0.1 M borate) / 7.0 and 5.0 (citrate-phosphate), pseudo-zero-order k in ppm/h; leahy1989a_extraction.md sec. 4 (within-study ratios at 95 C)",
+        "note": "WITHIN-STUDY RATIO at 95 C; lysine -> glycine declared; the buffer changes between arms."
+      },
+      {
+        "id": "leahy_PZ_k_ph5_over_ph9",
+        "kind": "rate_ratio",
+        "system": "leahy_95C_ph5",
+        "system_b": "leahy_95C_ph9",
+        "species": "PZ",
+        "target": 0.026109660574412535,
+        "sigma_log": 0.15,
+        "anchor": "Leahy & Reineccius 1989 ACS Symp. Ser. 409 ch. 18 Table I: 0.1 M lysine + 0.1 M glucose, 95 C, pH 9.0 (0.1 M borate) / 7.0 and 5.0 (citrate-phosphate), pseudo-zero-order k in ppm/h; leahy1989a_extraction.md sec. 4 (within-study ratios at 95 C)",
+        "note": "WITHIN-STUDY RATIO at 95 C; lysine -> glycine declared; the buffer changes between arms."
+      },
+      {
+        "id": "leahy_MPZ_k_ph7_over_ph9",
+        "kind": "rate_ratio",
+        "system": "leahy_95C_ph7",
+        "system_b": "leahy_95C_ph9",
+        "species": "MPZ",
+        "target": 0.4807692307692307,
+        "sigma_log": 0.15,
+        "anchor": "Leahy & Reineccius 1989 ACS Symp. Ser. 409 ch. 18 Table I: 0.1 M lysine + 0.1 M glucose, 95 C, pH 9.0 (0.1 M borate) / 7.0 and 5.0 (citrate-phosphate), pseudo-zero-order k in ppm/h; leahy1989a_extraction.md sec. 4 (within-study ratios at 95 C)",
+        "note": "WITHIN-STUDY RATIO at 95 C; lysine -> glycine declared; the buffer changes between arms."
+      },
+      {
+        "id": "leahy_MPZ_k_ph5_over_ph9",
+        "kind": "rate_ratio",
+        "system": "leahy_95C_ph5",
+        "system_b": "leahy_95C_ph9",
+        "species": "MPZ",
+        "target": 0.002242152466367713,
+        "sigma_log": 0.3,
+        "anchor": "Leahy & Reineccius 1989 ACS Symp. Ser. 409 ch. 18 Table I: 0.1 M lysine + 0.1 M glucose, 95 C, pH 9.0 (0.1 M borate) / 7.0 and 5.0 (citrate-phosphate), pseudo-zero-order k in ppm/h; leahy1989a_extraction.md sec. 4 (within-study ratios at 95 C)",
+        "note": "WITHIN-STUDY RATIO at 95 C; lysine -> glycine declared; the buffer changes between arms."
+      }
+    ]
+  },
+  "declared": {
+    "alanine_to_glycine": "Zhou 2024 fed alanine; the trunk holds glycine; the products are the same and the rate is not measured for the pair: +/- 0.5 dex on every pyrazine answer (parameters_pyrazine.PYRAZINE_TRANSFER_BAND_DECADES)",
+    "lysine_to_glycine": "Leahy 1989 used lysine; only the within-study pH RATIOS are read, not the levels",
+    "condensation": "k_cond = 10000 L/(mmol*min), no barrier, declared fast (Jousse 2002 R10 'fast'); sensitivity reported",
+    "mixed_route": "2-methylpyrazine follows the two aminoketone pools statistically through the shared k_cond (2 sqrt of the two homo rates)",
+    "ph_term": "two slopes, knot at pH 7, exactly 1 at the trunk's reference pH 6.8; the fitted constants are stored at 6.8 and Zhou's pH-8 pots carry the factor"
+  },
+  "bounds": {
+    "log10_k_go_ak_100C": [
+      -9.191114581712858,
+      -5.191114581712858
+    ],
+    "ea_go_ak_kj_mol": [
+      100.59,
+      103.1
+    ],
+    "log10_k_mgo_ak_100C": [
+      -10.092961951313706,
+      -6.092961951313706
+    ],
+    "ea_mgo_ak_kj_mol": [
+      111.66,
+      114.9
+    ],
+    "ph_slope_above_7_decades_per_unit": [
+      0.0,
+      1.5
+    ],
+    "ph_slope_below_7_decades_per_unit": [
+      0.0,
+      1.5
+    ]
+  },
+  "prior_centre": {
+    "log10_k_go_ak_100C": -7.191114581712858,
+    "ea_go_ak_kj_mol": 100.59,
+    "log10_k_mgo_ak_100C": -8.092961951313706,
+    "ea_mgo_ak_kj_mol": 111.66,
+    "ph_slope_above_7_decades_per_unit": 0.22,
+    "ph_slope_below_7_decades_per_unit": 0.58
+  },
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        -7.191114581712858,
+        100.59,
+        -8.092961951313706,
+        111.66,
+        0.22,
+        0.58
+      ],
+      "x": [
+        -6.5415452891122525,
+        103.0999999999812,
+        -7.529714282148093,
+        114.89999999999999,
+        0.19744840125387295,
+        0.5795142879227316
+      ],
+      "cost": 2.644103944369364,
+      "evals": 98,
+      "status": 2,
+      "message": "`ftol` termination condition is satisfied.",
+      "residual_by_row": {
+        "zhou_PZ_rate_100C": 0.2487198366385232,
+        "zhou_PZ_rate_110C": -0.5099500388490594,
+        "zhou_PZ_rate_120C": 0.2611059675092583,
+        "zhou_DMP_rate_100C": 0.7147192480747723,
+        "zhou_DMP_rate_110C": -0.24334019520537029,
+        "zhou_DMP_rate_120C": -0.48609380203031727,
+        "leahy_PZ_k_ph7_over_ph9": 0.8301601651662641,
+        "leahy_PZ_k_ph5_over_ph9": -0.04593093552397255,
+        "leahy_MPZ_k_ph7_over_ph9": -0.8646402074621514,
+        "leahy_MPZ_k_ph5_over_ph9": 0.09388046266472896
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        -6.193075413135742,
+        100.84957534295567,
+        -8.163056320761054,
+        112.52266553349591,
+        0.4686830973742049,
+        0.3368993113310211
+      ],
+      "x": [
+        -6.541545275334613,
+        103.09999999999994,
+        -7.529714266707366,
+        114.89999999999999,
+        0.1974483837492751,
+        0.5795143062484089
+      ],
+      "cost": 2.6441039445915147,
+      "evals": 98,
+      "status": 2,
+      "message": "`ftol` termination condition is satisfied.",
+      "residual_by_row": {
+        "zhou_PZ_rate_100C": 0.24871983601991257,
+        "zhou_PZ_rate_110C": -0.5099500394664527,
+        "zhou_PZ_rate_120C": 0.2611059668976108,
+        "zhou_DMP_rate_100C": 0.7147192641629121,
+        "zhou_DMP_rate_110C": -0.24334017915526931,
+        "zhou_DMP_rate_120C": -0.48609378600027026,
+        "leahy_PZ_k_ph7_over_ph9": 0.8301604314466484,
+        "leahy_PZ_k_ph5_over_ph9": -0.04593104208576488,
+        "leahy_MPZ_k_ph7_over_ph9": -0.8646399522136915,
+        "leahy_MPZ_k_ph5_over_ph9": 0.09388041001473972
+      }
+    }
+  ],
+  "best_start": 0,
+  "start_agreement": {
+    "log10_k_go_ak_100C": 1.377763947374433e-08,
+    "ea_go_ak_kj_mol": 1.8744117369351443e-11,
+    "log10_k_mgo_ak_100C": 1.5440726919280223e-08,
+    "ea_mgo_ak_kj_mol": 0.0,
+    "ph_slope_above_7_decades_per_unit": 1.7504597854545167e-08,
+    "ph_slope_below_7_decades_per_unit": 1.8325677308972388e-08
+  },
+  "frozen_parameters": {
+    "pyrazine": {
+      "log10_k_go_ak_100C": -6.5415452891122525,
+      "ea_go_ak_kj_mol": 103.0999999999812,
+      "log10_k_mgo_ak_100C": -7.529714282148093,
+      "ea_mgo_ak_kj_mol": 114.89999999999999,
+      "ph_slope_above_7_decades_per_unit": 0.19744840125387295,
+      "ph_slope_below_7_decades_per_unit": 0.5795142879227316
+    }
+  },
+  "predicted_by_row": {
+    "zhou_PZ_rate_100C": 0.029544468869796472,
+    "zhou_PZ_rate_110C": 0.07033661756896092,
+    "zhou_PZ_rate_120C": 0.16003827037565038,
+    "zhou_DMP_rate_100C": 0.004126102088717448,
+    "zhou_DMP_rate_110C": 0.00945509682237155,
+    "zhou_DMP_rate_120C": 0.02056451426067467,
+    "leahy_PZ_k_ph7_over_ph9": 0.4988991493110615,
+    "leahy_PZ_k_ph5_over_ph9": 0.02569872551148814,
+    "leahy_MPZ_k_ph7_over_ph9": 0.35664869062220894,
+    "leahy_MPZ_k_ph5_over_ph9": 0.0023923751357494798
+  },
+  "residual_by_row_dex": {
+    "zhou_PZ_rate_100C": 0.02487198366385232,
+    "zhou_PZ_rate_110C": -0.050995003884905944,
+    "zhou_PZ_rate_120C": 0.026110596750925832,
+    "zhou_DMP_rate_100C": 0.07147192480747723,
+    "zhou_DMP_rate_110C": -0.02433401952053703,
+    "zhou_DMP_rate_120C": -0.04860938020303173,
+    "leahy_PZ_k_ph7_over_ph9": 0.12452402477493961,
+    "leahy_PZ_k_ph5_over_ph9": -0.006889640328595883,
+    "leahy_MPZ_k_ph7_over_ph9": -0.1296960311193227,
+    "leahy_MPZ_k_ph5_over_ph9": 0.02816413879941869
+  },
+  "laplace": {
+    "method": "Laplace at the optimum: J by central differences on the residual vector, Sigma = pinv(J^T J) chi2_red",
+    "chi2_reduced": 0.661025986092341,
+    "dof": 4,
+    "sigma": [
+      0.08183260861717218,
+      16.157518353952135,
+      0.07532045007455257,
+      16.096566410277887,
+      0.0388108646772005,
+      0.0459313207815324
+    ],
+    "on_bound": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      false
+    ],
+    "identified": [
+      true,
+      false,
+      true,
+      false,
+      true,
+      true
+    ],
+    "thresholds": [
+      3.0,
+      60.0,
+      3.0,
+      60.0,
+      1.5,
+      1.5
+    ],
+    "jtj_rank": 6,
+    "covariance": [
+      [
+        0.0066965758330912815,
+        -0.9352155556775182,
+        0.0006458417323908285,
+        0.09613231676237481,
+        -0.0012790603485818418,
+        0.0007026302163844998
+      ],
+      [
+        -0.9352155556776989,
+        261.06539935830006,
+        0.000604453182714918,
+        -0.0004888736272893508,
+        -0.0005261480671583655,
+        -0.00037900472399076345
+      ],
+      [
+        0.0006458417323915301,
+        0.0006044531825440895,
+        0.005673170199433165,
+        -0.8321372588455589,
+        -0.0010639522184472659,
+        0.0020750542709718207
+      ],
+      [
+        0.09613231676215003,
+        -0.0004888735720504725,
+        -0.8321372588455703,
+        259.0994502004864,
+        -0.0424925334571055,
+        -0.2681853665948628
+      ],
+      [
+        -0.0012790603485817907,
+        -0.0005261480671733645,
+        -0.001063952218447196,
+        -0.04249253345712696,
+        0.0015062832169919695,
+        -0.0011226265272317785
+      ],
+      [
+        0.0007026302163847919,
+        -0.00037900472406217307,
+        0.002075054270971757,
+        -0.268185366594839,
+        -0.001122626527231805,
+        0.00210968622873603
+      ]
+    ],
+    "coordinates": [
+      "log10_k_go_ak_100C",
+      "ea_go_ak_kj_mol",
+      "log10_k_mgo_ak_100C",
+      "ea_mgo_ak_kj_mol",
+      "ph_slope_above_7_decades_per_unit",
+      "ph_slope_below_7_decades_per_unit"
+    ]
+  },
+  "active_bounds": [
+    {
+      "key": "ea_go_ak_kj_mol",
+      "bound": "upper",
+      "value": 103.0999999999812
+    },
+    {
+      "key": "ea_mgo_ak_kj_mol",
+      "bound": "upper",
+      "value": 114.89999999999999
+    }
+  ],
+  "diagnostics": {
+    "zhou_go_100_GO_remaining_fraction_at_120min": 0.019972110306741266,
+    "zhou_go_100_aminoketone_mmol_per_l_at_120min": 1.5768224418961617e-05,
+    "zhou_go_120_GO_remaining_fraction_at_120min": 0.019847375241134658,
+    "zhou_go_120_aminoketone_mmol_per_l_at_120min": 3.6045977774827316e-05,
+    "zhou_mgo_100_MGO_remaining_fraction_at_120min": 0.06539707414672412,
+    "zhou_mgo_100_aminoketone_mmol_per_l_at_120min": 9.194427235955524e-06,
+    "zhou_mgo_120_MGO_remaining_fraction_at_120min": 0.022614623994501926,
+    "zhou_mgo_120_aminoketone_mmol_per_l_at_120min": 1.3834616032024315e-05,
+    "zhou_go_120_PZ_rate_0_60_over_0_120": 1.749919179776949,
+    "zhou_mgo_120_DMP_rate_0_60_over_0_120": 1.7292457793713931,
+    "k_cond_sensitivity": {
+      "k_cond_x0.1": {
+        "zhou_PZ_rate_120C": {
+          "rate": 0.15970213780722364,
+          "log10_change": -0.0009131193286626748
+        },
+        "zhou_DMP_rate_120C": {
+          "rate": 0.020429205742036688,
+          "log10_change": -0.0028669735950337958
+        }
+      },
+      "k_cond_x10": {
+        "zhou_PZ_rate_120C": {
+          "rate": 0.16014133139109274,
+          "log10_change": 0.0002795857800109783
+        },
+        "zhou_DMP_rate_120C": {
+          "rate": 0.02060427896396485,
+          "log10_change": 0.0008389654022541463
+        }
+      }
+    }
+  },
+  "reference_temperature_K": 373.15,
+  "reference_ph": 6.8
+}

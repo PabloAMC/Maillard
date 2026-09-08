@@ -2,7 +2,7 @@
 
 *What the literature's reaction rules (data/lit/reaction_rules.yml) propose from each lane's reference charge, placed against the engine's own reactions. Steps and products only: no rate, no concentration, and nothing here is read by the engine. Beyond the first step only products that are engine species or registry compounds react further, so the walk stays on the known map.*
 
-31 rules; 219 proposed steps: 129 mechanism known, 24 modelled, 66 proposed; products: 174 new, 8 registry, 47 species.
+31 rules; 219 proposed steps: 128 mechanism known, 25 modelled, 66 proposed; products: 172 new, 7 registry, 50 species.
 
 | placement | meaning |
 |---|---|
@@ -149,13 +149,14 @@ Products that are not engine species: `CCCCCCC`; `CCCCCCCC`; `COC(=O)CCCCCCCC=CC
 |---|---|---|---|---|
 | R08_cysteine_thermolysis | Cys | CC=O + N + H2S | modelled | r_cys_h2s |
 | R27_dicarbonyl_h2s_to_mercaptoketone | MGO + H2S | MP | modelled | r_mgo_mp |
+| R28_aminoketone_condensation_to_pyrazine | AKM + AKM | DMP | modelled | r_akm_dmp |
 | R02_schiff_base | MGO + Ala | CC(=O)C=NC(C)C(=O)O | mechanism known |  |
 | R02_schiff_base | MGO + Cys | CC(=O)C=NC(CS)C(=O)O | mechanism known |  |
 | R02_schiff_base | GO + Ala | CC(N=CC=O)C(=O)O | mechanism known |  |
 | R02_schiff_base | GO + Cys | O=CC=NC(CS)C(=O)O | mechanism known |  |
-| R02_schiff_base | MGO + CC(=O)CN | CC(=O)C=NCC(C)=O | mechanism known |  |
+| R02_schiff_base | MGO + AKM | CC(=O)C=NCC(C)=O | mechanism known |  |
 | R02_schiff_base | MGO + CC(=O)C(C)N | CC(=O)C=NC(C)C(C)=O | mechanism known |  |
-| R02_schiff_base | GO + CC(=O)CN | CC(=O)CN=CC=O | mechanism known |  |
+| R02_schiff_base | GO + AKM | CC(=O)CN=CC=O | mechanism known |  |
 | R02_schiff_base | GO + CC(=O)C(C)N | CC(=O)C(C)N=CC=O | mechanism known |  |
 | R02_schiff_base | Ala + CC(N=CC=O)C(=O)O | CC(N=CC=NC(C)C(=O)O)C(=O)O | mechanism known |  |
 | R02_schiff_base | Ala + O=CC=NC(CS)C(=O)O | CC(N=CC=NC(CS)C(=O)O)C(=O)O | mechanism known |  |
@@ -165,16 +166,16 @@ Products that are not engine species: `CCCCCCC`; `CCCCCCCC`; `COC(=O)CCCCCCCC=CC
 | R02_schiff_base | Cys + O=CC=NC(CS)C(=O)O | O=C(O)C(CS)N=CC=NC(CS)C(=O)O | mechanism known |  |
 | R02_schiff_base | Cys + CC=O | CC=NC(CS)C(=O)O | mechanism known |  |
 | R02_schiff_base | Cys + O=CCS | O=C(O)C(CS)N=CCS | mechanism known |  |
-| R02_schiff_base | CC(N=CC=O)C(=O)O + CC(=O)CN | CC(=O)CN=CC=NC(C)C(=O)O | mechanism known |  |
+| R02_schiff_base | CC(N=CC=O)C(=O)O + AKM | CC(=O)CN=CC=NC(C)C(=O)O | mechanism known |  |
 | R02_schiff_base | CC(N=CC=O)C(=O)O + CC(=O)C(C)N | CC(=O)C(C)N=CC=NC(C)C(=O)O | mechanism known |  |
-| R02_schiff_base | O=CC=NC(CS)C(=O)O + CC(=O)CN | CC(=O)CN=CC=NC(CS)C(=O)O | mechanism known |  |
+| R02_schiff_base | O=CC=NC(CS)C(=O)O + AKM | CC(=O)CN=CC=NC(CS)C(=O)O | mechanism known |  |
 | R02_schiff_base | O=CC=NC(CS)C(=O)O + CC(=O)C(C)N | CC(=O)C(C)N=CC=NC(CS)C(=O)O | mechanism known |  |
-| R02_schiff_base | CC(=O)CN + CC=O | CC=NCC(C)=O | mechanism known |  |
-| R02_schiff_base | CC(=O)CN + O=CCS | CC(=O)CN=CCS | mechanism known |  |
+| R02_schiff_base | AKM + CC=O | CC=NCC(C)=O | mechanism known |  |
+| R02_schiff_base | AKM + O=CCS | CC(=O)CN=CCS | mechanism known |  |
 | R02_schiff_base | CC=O + CC(=O)C(C)N | CC=NC(C)C(C)=O | mechanism known |  |
 | R02_schiff_base | O=CCS + CC(=O)C(C)N | CC(=O)C(C)N=CCS | mechanism known |  |
-| R07_strecker | MGO + Ala | CC(=O)CN + CC=O | mechanism known |  |
-| R07_strecker | MGO + Cys | CC(=O)CN + O=CCS | mechanism known |  |
+| R07_strecker | MGO + Ala | AKM + CC=O | mechanism known |  |
+| R07_strecker | MGO + Cys | AKM + O=CCS | mechanism known |  |
 | R07_strecker | DA + Ala | CC(=O)C(C)N + CC=O | mechanism known |  |
 | R07_strecker | DA + Cys | CC(=O)C(C)N + O=CCS | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | Cys + Cys | NC(CSSCC(N)C(=O)O)C(=O)O | mechanism known |  |
@@ -193,8 +194,7 @@ Products that are not engine species: `CCCCCCC`; `CCCCCCCC`; `COC(=O)CCCCCCCC=CC
 | R15_thiazolidine | Cys + O=CC=NC(CS)C(=O)O | O=C(O)C(CS)N=CC1NC(C(=O)O)CS1 | mechanism known |  |
 | R15_thiazolidine | Cys + CC=O | CC1NC(C(=O)O)CS1 | mechanism known |  |
 | R15_thiazolidine | Cys + O=CCS | O=C(O)C1CSC(CS)N1 | mechanism known |  |
-| R28_aminoketone_condensation_to_pyrazine | CC(=O)CN + CC(=O)CN | Cc1cnc(C)cn1 | mechanism known |  |
-| R28_aminoketone_condensation_to_pyrazine | CC(=O)CN + CC(=O)C(C)N | Cc1cnc(C)c(C)n1 | mechanism known |  |
+| R28_aminoketone_condensation_to_pyrazine | AKM + CC(=O)C(C)N | Cc1cnc(C)c(C)n1 | mechanism known |  |
 | R28_aminoketone_condensation_to_pyrazine | CC(=O)C(C)N + CC(=O)C(C)N | Cc1nc(C)c(C)nc1C | mechanism known |  |
 | R14_hemithioacetal | MGO + Cys | CC(=O)C(O)SCC(N)C(=O)O | proposed |  |
 | R14_hemithioacetal | GO + Cys | NC(CSC(O)C=O)C(=O)O | proposed |  |
@@ -221,7 +221,7 @@ Products that are not engine species: `CCCCCCC`; `CCCCCCCC`; `COC(=O)CCCCCCCC=CC
 | R14_hemithioacetal | CC=O + O=CCS | CC(O)SCC=O | proposed |  |
 | R14_hemithioacetal | O=CCS + O=CCS | O=CCSC(O)CS | proposed |  |
 
-Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `CC(=O)C1NC(C(=O)O)CS1`; `CC(=O)C=NC(C)C(=O)O`; `CC(=O)C=NC(CS)C(=O)O`; `CC(=O)CN`; `CC(N=CC=O)C(=O)O`; `N`; `NC(CSC(O)C=O)C(=O)O`; `NC(CSSCC(N)C(=O)O)C(=O)O`; `O=CC1NC(C(=O)O)CS1`; `O=CC=NC(CS)C(=O)O`; `O=CCS`; `CC=O` (acetaldehyde); `CC(=O)C(C)N=CC=NC(C)C(=O)O`; `CC(=O)C(C)N=CC=NC(CS)C(=O)O`; `CC(=O)C(C)N=CC=O`; `CC(=O)C(C)N=CCS`; `CC(=O)C(O)SCC(N=CC=O)C(=O)O`; `CC(=O)C(O)SCC=O`; `CC(=O)C=NC(C)C(C)=O`; `CC(=O)C=NC(CSC(C)O)C(=O)O`; `CC(=O)C=NC(CSC(O)C(C)=O)C(=O)O`; `CC(=O)C=NC(CSC(O)C=NC(C)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSC(O)C=NC(CS)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSC(O)C=O)C(=O)O`; `CC(=O)C=NC(CSC(O)CS)C(=O)O`; `CC(=O)C=NC(CSSCC(N)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSSCC(N=CC(C)=O)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSSCC(N=CC=O)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSSCC=O)C(=O)O`; `CC(=O)C=NCC(C)=O`; `CC(=O)CN=CC=NC(C)C(=O)O`; `CC(=O)CN=CC=NC(CS)C(=O)O`; `CC(=O)CN=CC=O`; `CC(=O)CN=CCS`; `CC(N=CC(O)SCC(N)C(=O)O)C(=O)O`; `CC(N=CC(O)SCC(N=CC=O)C(=O)O)C(=O)O`; `CC(N=CC(O)SCC=O)C(=O)O`; `CC(N=CC1NC(C(=O)O)CS1)C(=O)O`; `CC(N=CC=NC(C)C(=O)O)C(=O)O`; `CC(N=CC=NC(CS)C(=O)O)C(=O)O`; `CC(N=CCS)C(=O)O`; `CC(O)SCC(N)C(=O)O`; `CC(O)SCC(N=CC=O)C(=O)O`; `CC(O)SCC=O`; `CC1NC(C(=O)O)CS1`; `CC=NC(C)C(=O)O`; `CC=NC(C)C(C)=O`; `CC=NC(CS)C(=O)O`; `CC=NCC(C)=O`; `NC(CSC(O)C=NC(CS)C(=O)O)C(=O)O`; `NC(CSC(O)CS)C(=O)O`; `NC(CSSCC(N=CC=O)C(=O)O)C(=O)O`; `NC(CSSCC=O)C(=O)O`; `O=C(O)C(CS)N=CC1NC(C(=O)O)CS1`; `O=C(O)C(CS)N=CC=NC(CS)C(=O)O`; `O=C(O)C(CS)N=CCS`; `O=C(O)C1CSC(CS)N1`; `O=CC=NC(CSC(O)C=NC(CS)C(=O)O)C(=O)O`; `O=CC=NC(CSC(O)C=O)C(=O)O`; `O=CC=NC(CSC(O)CS)C(=O)O`; `O=CC=NC(CSSCC(N=CC=O)C(=O)O)C(=O)O`; `O=CC=NC(CSSCC=O)C(=O)O`; `O=CCSC(O)C=NC(CS)C(=O)O`; `O=CCSC(O)C=O`; `O=CCSC(O)CS`; `O=CCSSCC=O`; `Cc1cnc(C)c(C)n1` (trimethylpyrazine); `Cc1cnc(C)cn1` (2_5_dimethylpyrazine); `Cc1nc(C)c(C)nc1C` (tetramethylpyrazine).
+Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `CC(=O)C1NC(C(=O)O)CS1`; `CC(=O)C=NC(C)C(=O)O`; `CC(=O)C=NC(CS)C(=O)O`; `CC(N=CC=O)C(=O)O`; `N`; `NC(CSC(O)C=O)C(=O)O`; `NC(CSSCC(N)C(=O)O)C(=O)O`; `O=CC1NC(C(=O)O)CS1`; `O=CC=NC(CS)C(=O)O`; `O=CCS`; `CC=O` (acetaldehyde); `CC(=O)C(C)N=CC=NC(C)C(=O)O`; `CC(=O)C(C)N=CC=NC(CS)C(=O)O`; `CC(=O)C(C)N=CC=O`; `CC(=O)C(C)N=CCS`; `CC(=O)C(O)SCC(N=CC=O)C(=O)O`; `CC(=O)C(O)SCC=O`; `CC(=O)C=NC(C)C(C)=O`; `CC(=O)C=NC(CSC(C)O)C(=O)O`; `CC(=O)C=NC(CSC(O)C(C)=O)C(=O)O`; `CC(=O)C=NC(CSC(O)C=NC(C)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSC(O)C=NC(CS)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSC(O)C=O)C(=O)O`; `CC(=O)C=NC(CSC(O)CS)C(=O)O`; `CC(=O)C=NC(CSSCC(N)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSSCC(N=CC(C)=O)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSSCC(N=CC=O)C(=O)O)C(=O)O`; `CC(=O)C=NC(CSSCC=O)C(=O)O`; `CC(=O)C=NCC(C)=O`; `CC(=O)CN=CC=NC(C)C(=O)O`; `CC(=O)CN=CC=NC(CS)C(=O)O`; `CC(=O)CN=CC=O`; `CC(=O)CN=CCS`; `CC(N=CC(O)SCC(N)C(=O)O)C(=O)O`; `CC(N=CC(O)SCC(N=CC=O)C(=O)O)C(=O)O`; `CC(N=CC(O)SCC=O)C(=O)O`; `CC(N=CC1NC(C(=O)O)CS1)C(=O)O`; `CC(N=CC=NC(C)C(=O)O)C(=O)O`; `CC(N=CC=NC(CS)C(=O)O)C(=O)O`; `CC(N=CCS)C(=O)O`; `CC(O)SCC(N)C(=O)O`; `CC(O)SCC(N=CC=O)C(=O)O`; `CC(O)SCC=O`; `CC1NC(C(=O)O)CS1`; `CC=NC(C)C(=O)O`; `CC=NC(C)C(C)=O`; `CC=NC(CS)C(=O)O`; `CC=NCC(C)=O`; `NC(CSC(O)C=NC(CS)C(=O)O)C(=O)O`; `NC(CSC(O)CS)C(=O)O`; `NC(CSSCC(N=CC=O)C(=O)O)C(=O)O`; `NC(CSSCC=O)C(=O)O`; `O=C(O)C(CS)N=CC1NC(C(=O)O)CS1`; `O=C(O)C(CS)N=CC=NC(CS)C(=O)O`; `O=C(O)C(CS)N=CCS`; `O=C(O)C1CSC(CS)N1`; `O=CC=NC(CSC(O)C=NC(CS)C(=O)O)C(=O)O`; `O=CC=NC(CSC(O)C=O)C(=O)O`; `O=CC=NC(CSC(O)CS)C(=O)O`; `O=CC=NC(CSSCC(N=CC=O)C(=O)O)C(=O)O`; `O=CC=NC(CSSCC=O)C(=O)O`; `O=CCSC(O)C=NC(CS)C(=O)O`; `O=CCSC(O)C=O`; `O=CCSC(O)CS`; `O=CCSSCC=O`; `Cc1cnc(C)c(C)n1` (trimethylpyrazine); `Cc1nc(C)c(C)nc1C` (tetramethylpyrazine).
 
 ## thiol sink probe (sulfur lane, depth 1)
 
@@ -245,7 +245,7 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 | R02_schiff_base | Cys + GO | O=CC=NC(CS)C(=O)O | mechanism known |  |
 | R02_schiff_base | Cys + DECADIENAL | CCCCCC=CC=CC=NC(CS)C(=O)O | mechanism known |  |
 | R02_schiff_base | Cys + HEXANAL | CCCCCC=NC(CS)C(=O)O | mechanism known |  |
-| R07_strecker | Cys + MGO | CC(=O)CN + O=CCS | mechanism known |  |
+| R07_strecker | Cys + MGO | AKM + O=CCS | mechanism known |  |
 | R07_strecker | Cys + DA | CC(=O)C(C)N + O=CCS | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | MFT + FFT | Cc1occc1SSCc1ccco1 | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | MFT + Cys | Cc1occc1SSCC(N)C(=O)O | mechanism known |  |
@@ -297,7 +297,7 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 | R14_hemithioacetal | Cys + DECADIENAL | CCCCCC=CC=CC(O)SCC(N)C(=O)O | proposed |  |
 | R14_hemithioacetal | Cys + HEXANAL | CCCCCC(O)SCC(N)C(=O)O | proposed |  |
 
-Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `CC(=O)C(O)SCc1ccco1`; `CC(=O)C(O)Sc1ccoc1C`; `CC(=O)C1NC(C(=O)O)CS1`; `CC(=O)C=NC(CS)C(=O)O`; `CC(=O)CN`; `CCCCCC(O)SC`; `CCCCCC(O)SCC(N)C(=O)O`; `CCCCCC(O)SCc1ccco1`; `CCCCCC(O)Sc1ccoc1C`; `CCCCCC1NC(C(=O)O)CS1`; `CCCCCC=CC(CC=O)SC`; `CCCCCC=CC(CC=O)SCC(N)C(=O)O`; `CCCCCC=CC(CC=O)SCc1ccco1`; `CCCCCC=CC(CC=O)Sc1ccoc1C`; `CCCCCC=CC=CC(O)SC`; `CCCCCC=CC=CC(O)SCC(N)C(=O)O`; `CCCCCC=CC=CC(O)SCc1ccco1`; `CCCCCC=CC=CC(O)Sc1ccoc1C`; `CCCCCC=CC=CC1NC(C(=O)O)CS1`; `CCCCCC=CC=CC=NC(CS)C(=O)O`; `CCCCCC=NC(CS)C(=O)O`; `CSC(O)C(C)=O`; `CSC(O)C(O)C(O)C(O)CO`; `CSC(O)C=O`; `CSC(O)c1ccc(CO)o1`; `CSC(O)c1ccco1`; `CSCCC(N)=O`; `CSSCC(N)C(=O)O`; `CSSCc1ccco1`; `Cc1occc1SC(O)C(O)C(O)C(O)CO`; `Cc1occc1SC(O)C=O`; `Cc1occc1SC(O)c1ccc(CO)o1`; `Cc1occc1SC(O)c1ccco1`; `Cc1occc1SCCC(N)=O`; `Cc1occc1SSCC(N)C(=O)O`; `Cc1occc1SSCc1ccco1`; `N`; `NC(=O)CCSCc1ccco1`; `NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O`; `NC(CSC(O)C=O)C(=O)O`; `NC(CSC(O)c1ccc(CO)o1)C(=O)O`; `NC(CSC(O)c1ccco1)C(=O)O`; `NC(CSSCC(N)C(=O)O)C(=O)O`; `NC(CSSCc1ccco1)C(=O)O`; `O=C(O)C(CS)N=CC(O)C(O)C(O)CO`; `O=C(O)C(CS)N=Cc1ccc(CO)o1`; `O=C(O)C(CS)N=Cc1ccco1`; `O=C(O)C(CS)NCC(=O)C(O)C(O)CO`; `O=C(O)C1CSC(c2ccc(CO)o2)N1`; `O=C(O)C1CSC(c2ccco2)N1`; `O=CC(O)SCc1ccco1`; `O=CC1NC(C(=O)O)CS1`; `O=CC=NC(CS)C(=O)O`; `O=CCS`; `OC(SCc1ccco1)c1ccco1`; `OCC(O)C(O)C(O)C(O)SCc1ccco1`; `OCc1ccc(C(O)SCc2ccco2)o1`; `CC=O` (acetaldehyde); `CSSC` (dimethyl_disulfide).
+Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `CC(=O)C(O)SCc1ccco1`; `CC(=O)C(O)Sc1ccoc1C`; `CC(=O)C1NC(C(=O)O)CS1`; `CC(=O)C=NC(CS)C(=O)O`; `CCCCCC(O)SC`; `CCCCCC(O)SCC(N)C(=O)O`; `CCCCCC(O)SCc1ccco1`; `CCCCCC(O)Sc1ccoc1C`; `CCCCCC1NC(C(=O)O)CS1`; `CCCCCC=CC(CC=O)SC`; `CCCCCC=CC(CC=O)SCC(N)C(=O)O`; `CCCCCC=CC(CC=O)SCc1ccco1`; `CCCCCC=CC(CC=O)Sc1ccoc1C`; `CCCCCC=CC=CC(O)SC`; `CCCCCC=CC=CC(O)SCC(N)C(=O)O`; `CCCCCC=CC=CC(O)SCc1ccco1`; `CCCCCC=CC=CC(O)Sc1ccoc1C`; `CCCCCC=CC=CC1NC(C(=O)O)CS1`; `CCCCCC=CC=CC=NC(CS)C(=O)O`; `CCCCCC=NC(CS)C(=O)O`; `CSC(O)C(C)=O`; `CSC(O)C(O)C(O)C(O)CO`; `CSC(O)C=O`; `CSC(O)c1ccc(CO)o1`; `CSC(O)c1ccco1`; `CSCCC(N)=O`; `CSSCC(N)C(=O)O`; `CSSCc1ccco1`; `Cc1occc1SC(O)C(O)C(O)C(O)CO`; `Cc1occc1SC(O)C=O`; `Cc1occc1SC(O)c1ccc(CO)o1`; `Cc1occc1SC(O)c1ccco1`; `Cc1occc1SCCC(N)=O`; `Cc1occc1SSCC(N)C(=O)O`; `Cc1occc1SSCc1ccco1`; `N`; `NC(=O)CCSCc1ccco1`; `NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O`; `NC(CSC(O)C=O)C(=O)O`; `NC(CSC(O)c1ccc(CO)o1)C(=O)O`; `NC(CSC(O)c1ccco1)C(=O)O`; `NC(CSSCC(N)C(=O)O)C(=O)O`; `NC(CSSCc1ccco1)C(=O)O`; `O=C(O)C(CS)N=CC(O)C(O)C(O)CO`; `O=C(O)C(CS)N=Cc1ccc(CO)o1`; `O=C(O)C(CS)N=Cc1ccco1`; `O=C(O)C(CS)NCC(=O)C(O)C(O)CO`; `O=C(O)C1CSC(c2ccc(CO)o2)N1`; `O=C(O)C1CSC(c2ccco2)N1`; `O=CC(O)SCc1ccco1`; `O=CC1NC(C(=O)O)CS1`; `O=CC=NC(CS)C(=O)O`; `O=CCS`; `OC(SCc1ccco1)c1ccco1`; `OCC(O)C(O)C(O)C(O)SCc1ccco1`; `OCc1ccc(C(O)SCc2ccco2)o1`; `CC=O` (acetaldehyde); `CSSC` (dimethyl_disulfide).
 
 ## Rules
 
