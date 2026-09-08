@@ -43,18 +43,18 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-09-07",
+    "generated_on": "2026-09-08",
     "git": {
-      "commit": "5a71cd4cda2a403cae080aec62fec0fb7d684f00",
-      "short": "5a71cd4c",
+      "commit": "3db31f6cc04cae9425fb4b84d0af928f76989545",
+      "short": "3db31f6c",
       "branch": "cleaning",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/kinetic_core/directional.py",
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "44c3936f48ade6de8060f94ab0f9c50e14609b43ad9f72d7de5886238bd514b6"
+        "sha256": "1e6a62cef12231ce4a32757bde7cca2bcee78dc28d174154dea7be7ba4bb22a3"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -80,7 +80,7 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "44c3936f48ade6de8060f94ab0f9c50e14609b43ad9f72d7de5886238bd514b6",
+    "sha256": "1e6a62cef12231ce4a32757bde7cca2bcee78dc28d174154dea7be7ba4bb22a3",
     "claims": 92,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
@@ -505,7 +505,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 45.5
+    "wall_seconds": 43.1
   },
   "claims": [
     {
