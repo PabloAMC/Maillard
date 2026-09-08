@@ -158,9 +158,9 @@
       "status": "PASS"
     },
     {
-      "detail": "citation_gate: PASS",
+      "detail": "    template placeholder text left inside a DOI",
       "gate": "scripts/ci/citation_gate.py",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "detail": "fit_target_gate: PASS",

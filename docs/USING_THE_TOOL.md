@@ -6,9 +6,10 @@ most of the value is in the parts where it refuses.
 
 **One line, before anything else:** compare two formulations and read the **ratio**. Never
 quote an absolute ppb number as a specification. Treat pH and moisture directions as
-caution-only: the sulfur lane carries a pH trajectory and the trunk a declared water-activity and
-Amadori-decay pH term (wave B12); the acrylamide and lipid lanes carry neither, and a comparison
-that moves an axis a lane has no term for is refused.
+caution-only: the sulfur lane has a pH trajectory, the trunk a declared water-activity and
+Amadori-decay pH term, and the acrylamide lane a declared pH factor and water-activity term that hold
+only inside measured windows; the lipid lane has neither, and a comparison that moves an axis a lane
+has no term for is refused.
 
 ---
 
@@ -123,7 +124,7 @@ those rows in grey with the ratio struck through, so you cannot accidentally quo
 `n/a — undefined`, and it is neither a resolved claim nor an unresolved one.
 
 The extrapolation block above the table is not boilerplate: neither arm declared a buffer, so
-the sulfur lane's pH trajectory is being extrapolated in both. Because *both* arms carry the
+the sulfur lane's pH trajectory is being extrapolated in both. Because *both* arms use the
 same extrapolation, the ratio is more trustworthy than either absolute — which is the whole
 argument for reading ratios.
 
@@ -152,7 +153,7 @@ python scripts/maillard.py predict docs/examples/compare_ribose_vs_glucose.yml \
 compound and contributes essentially nothing (OAV 0.065); FFT is 1.6× *less* abundant than
 furfural and sits four orders of magnitude above its threshold. Abundance is not aroma.
 
-In the HTML report each of those numbers carries its interval — roughly a 49× band, which is
+In the HTML report each of those numbers has its interval — roughly a 49× band, which is
 the honest width of an absolute here — and the OAV chart plots them on a log axis with
 whiskers. **The MFT dimer is charted at its potency-weighted value**, because it is ~15.6×
 more potent than its own monomer: mass lost to dimerisation is *not* aroma lost.
@@ -216,9 +217,9 @@ nothing behind it, and every documented accuracy defect in this repository began
 that should not have existed. The refusal tells you precisely what would have to be measured
 for the answer to exist — which is a research plan, not an error message.
 
-**Watch what happened to HMF here, because it is the other half of the lesson.** Until the furanic-channel wave (B7)
+**Watch what happened to HMF here, because it is the other half of the lesson.** Until the furanic channels were added on 2026-09-03
 this same spec refused *two* targets, and the HMF refusal read "5-HMF is not a species in any core
-lane. The hexose-dehydration route that forms it was never parameterised." That wave parameterised it, so
+lane. The hexose-dehydration route that forms it was never parameterised." That step parameterised it, so
 HMF is now an answerable trunk species and only 2-pentylfuran refuses. **The refusal did not become
 a silent pass — it became four declared extrapolations**, one of which states the expected
 direction of the error out loud ("EXPECT HMF TO BE OVER-PREDICTED"). A refusal is what the model
@@ -240,10 +241,10 @@ measured facts:
 - **HS-SPME same-sample dispersion, 10–23×** — two papers measuring the *same samples* disagree
   by that much. It is a calibration fact, not a fitted error.
 - **±0.5 decades on the air/water partition constant** — the literature spread on hexanal's
-  K_aw alone is 9.5×; the ruling is to *carry* the band, not to pick a constant.
+  K_aw alone is 9.5×; the ruling is to *keep* the band, not to pick a constant.
 
 Added in quadrature, that is a ~49× band before any model error at all. A lipid-lane compound
-carries more, because its rate is an assumption; the report's declared-assumptions section
+has a wider one, because its rate is an assumption; the report's declared-assumptions section
 lists exactly which assumptions widened your run and by how much.
 
 **A compound with no interval is weaker evidence than one with a wide interval, not stronger.**
@@ -265,7 +266,7 @@ Four kinds, all of which emit no number:
 | **lane conflict** | your request needs two Maillard lanes at once; they do not compose, because that would spend the same cysteine twice |
 | **missing sulfur source / asparagine** | the lane was selected but the charge cannot supply the atom the product is made of |
 
-Run `python scripts/maillard.py explain <compound>` to see what the model does carry, and why.
+Run `python scripts/maillard.py explain <compound>` to see what the model does have, and why.
 
 ### Declared extrapolations
 
@@ -282,12 +283,12 @@ wide.
 ```bash
 python scripts/maillard.py explain MFT
 python scripts/maillard.py explain hexanal
-python scripts/maillard.py explain HMF             # answers since the furanic-channel wave -- 2 routes, 1 of them `pinned`
+python scripts/maillard.py explain HMF             # answers since the furanic channels were added -- 2 routes, 1 of them `pinned`
 python scripts/maillard.py explain 2-pentylfuran   # a refusal, with its declared reason
 ```
 
 `explain HMF` is worth running for the contrast: it resolves to `lane: trunk`, two formation
-routes, **measured 1 / pinned 1** — and the pinned one carries the authors' own `Ea = 0`, quoted
+routes, **measured 1 / pinned 1** — and the pinned one keeps the authors' own `Ea = 0`, quoted
 verbatim from their footnote, because no defensible activation energy for that edge exists in any
 paper of the cluster. `explain 2-pentylfuran` prints no routes at all, the reason it is refused,
 and the full list of compounds the model *can* explain.
@@ -316,7 +317,7 @@ python scripts/generators/generate_network_map.py --all-examples
 ```
 
 All four lanes, drawn from the live code: nodes are species, edges are reactions coloured by
-evidence class, and every edge's tooltip carries its source anchor and validity window. Dim
+evidence class, and every edge's tooltip shows its source anchor and validity window. Dim
 everything except `pinned` in the legend to see how much of the network rests on constants
 nothing measured.
 
@@ -360,9 +361,10 @@ be written as the program it physically is.
   free-precursor hold-out (worst 52.6×), 67–94× on the matrix lane, and 1 of 5 genuine
   extrapolation rows inside the 90 % CI.
 - **pH direction** (4 of 5 independent claims on the sulfur lane) or **water activity direction**
-  (1 of 2 on the trunk since wave B12, each printed with its band and source). The acrylamide and
-  lipid lanes carry no pH term and no a_w term: there your value is recorded and ignored, and a
-  comparison that moves it is refused rather than answered with identical arms.
+  (1 of 2 on the trunk, each printed with its band and source). The acrylamide lane answers both
+  only inside its measured windows (pH 4 to 8, water activity 0.34 to 0.99); the lipid lane has no pH
+  term and no a_w term: there your value is recorded and ignored, and a comparison that moves it is
+  refused rather than answered with identical arms.
 - **Sulfur absolutes.** The sulfur branch has 8 primary-source-verified literature anchors and
   the model fails every one of them. The *directions* are a separate question, and the
   temperature direction is also wrong.

@@ -12,7 +12,7 @@ sinks. Updated 2026-09-07.*
 
 The sugar path is almost entirely measured, with temperature dependence. On the pentose–cysteine
 path only four steps are; thirty-one have a rate pinned at 145 °C by the fit but no measured
-temperature dependence, and twenty-eight are carried unchanged from earlier calibrations. That is the
+temperature dependence, and twenty-eight are kept unchanged from earlier calibrations. That is the
 whole thiol problem in one bar: away from 145 °C every constant is an extrapolation.
 
 ## The sugar path

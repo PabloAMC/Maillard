@@ -6,38 +6,25 @@
 [![Out of sample: 3/38 rows within 3x](https://img.shields.io/badge/out--of--sample-3%2F38%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
 [![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
 
-**Maillard** is a mass-action kinetic model of the Maillard reaction for alternative-protein
-scientists: sugars, amino acids, lipids and process conditions in; per-compound aroma volatiles
-(meaty thiols, furanones, acrylamide, lipid aldehydes) out — each with a measured reliability
-interval, an odour-activity ratio, and a **named refusal** wherever the model cannot represent
-what was asked. It exists to help decide *which experiment to run next*, not to replace the
-GC-MS.
-
-> **One engine (2026-09-03).** Until the retirement of the legacy lane this repository carried two prediction
-> paths — a SMIRKS rule-enumeration "screening lane" with a fitted volatile budget, and the
-> kinetic core. The screening lane, its validation harness and its headline numbers are deleted;
-> everything below is the kinetic core, scored on its own. The retired lane's README, artifacts
-> and audit trail are kept verbatim in [`docs/history/`](docs/history/) and
-> [`results/legacy_lane/`](results/legacy_lane/), and the August 2026 adversarial audit that
-> preceded the retirement is in [AUDIT.md](AUDIT.md).
+**Maillard** is a kinetic model of the Maillard reaction for alternative-protein scientists.
+Sugars, amino acids, fats and the cooking programme go in. The aroma compounds come out: the
+meaty thiols, the caramel furanones, acrylamide, the fat aldehydes, each with a measured
+reliability interval, an odour-activity ratio, and a **named refusal** wherever the evidence
+cannot answer. It exists to help decide *which experiment to run next*, not to replace the GC-MS.
 
 > **Start here if you know what the Maillard reaction is and nothing else:**
 > [**Modelling the Maillard reaction: an introduction**](docs/guides/INTRODUCTION.md). Eight short
 > sections, each led by a figure: the chemistry and how well the field has measured it, how a kinetic
 > model is built from that, what this repository is made of, how well this model does, how it got
-> here, the one problem that stops it from predicting meaty aroma, and what is needed next. The step-by-step reaction trees
-> are in its [appendix](docs/guides/REACTION_TREES.md); every paper used, with what was taken from it,
-> in [SOURCES.md](docs/guides/SOURCES.md).
+> here, the one problem that stops it from predicting meaty aroma, and what is needed next. The
+> step-by-step reaction trees are in its [appendix](docs/guides/REACTION_TREES.md); every paper
+> used, with what was taken from it, in [SOURCES.md](docs/guides/SOURCES.md).
 >
 > [![The Maillard reaction map, coloured by how well this model predicts each part](docs/assets/thiol_sink/00_map.png)](docs/guides/INTRODUCTION.md)
 
 > **Who is this for?** Alternative-protein scientists who want to triage formulations and
 > process conditions before burning GC-MS time, and computational chemists who want a
 > transparent, benchmarked, honestly scored Maillard kinetics platform.
-
-> **Reading the identifiers.** The fit waves are named **B1 to B9** (one per lane, then the sulfur refits;
-> `scripts/generators/WAVES.md`), the retired lane's audit waves carry letters (S, K, Q, V, W; `AUDIT.md`),
-> and "Amendment n" refers to the fit/hold-out declaration. The [glossary](docs/guides/GLOSSARY.md#part-3--identifiers-you-will-meet-in-the-code-and-the-artifacts) has the key.
 
 ---
 
@@ -66,15 +53,15 @@ graph LR
 
 **Inputs** are a formulation (precursor names and mM) and a process (an isothermal or
 programmed thermal history, pH, water activity, matrix). **Lane resolution** decides which of
-the four networks can represent the request — the Maillard lanes (trunk, sulfur, acrylamide)
-do not compose with each other, the lipid lane co-integrates with any one of them — and refuses,
-with the reason, anything that maps to no lane or to a species the fit corpus never measured.
+the four networks can represent the request. The Maillard lanes (trunk, sulfur, acrylamide)
+do not compose with each other; the lipid lane co-integrates with any one of them. Anything that
+maps to no lane, or to a species the fit corpus never measured, is refused with the reason.
 **Integration** is a plain mass-action ODE system with rate constants and activation energies
 read from the frozen fit reports under `results/validation/kinetic_core_b*_fit_report.json`.
 **The observable layer** wraps every absolute in its measured reliability band, converts to
-headspace where a threshold exists, and reports odour-activity ratios. **Nothing in the code
-carries a fitted constant as a literal**: every number the model ships is a fit-report value
-or a *declared assumption* with its band.
+headspace where a threshold exists, and reports odour-activity ratios. **No fitted constant is a
+literal in the code**: every number the model ships is a fit-report value or a *declared
+assumption* with its band.
 
 ---
 
@@ -87,7 +74,8 @@ cd Maillard
 ```
 
 Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`); host
-Python is for editing only. The front door is one script with five verbs:
+Python is for editing only. The front door is one script with six verbs. What each answers and
+when it refuses is the first table of the [quick start](docs/guides/QUICKSTART.md).
 
 ```bash
 python scripts/maillard.py compare --template > my_comparison.yml   # two arms, A vs B
@@ -99,18 +87,19 @@ python scripts/maillard.py score --template > my_measurements.yml    # then: sco
 python scripts/maillard.py wishlist                                  # what to measure next, and what it would unlock
 ```
 
-`compare` leads with **ratios** between the two arms — the quantity the systematic scale error
-cancels out of — and prints each arm's envelope declaration. `predict` prints absolutes *with*
+`compare` leads with **ratios** between the two arms, the quantity the systematic scale error
+cancels out of, and prints each arm's envelope declaration. `predict` prints absolutes *with*
 their interval and OAV. `explain` answers a compound with the lane, the declared assumptions and,
 for a refused compound, the reason. `rank` reads the core's Monte-Carlo envelope and orders
 (benchmark, compound) rows by how badly and how uncertainly the model misses them. `score` takes
 **your own measured concentrations** and scores them the way the panel scorecard scores a bundle,
-writing a bundle-shaped record under `results/user/` that the next fit wave can read; it never
-refits anything, because a refit is a new pre-registered wave (`scripts/generators/WAVES.md`).
-`wishlist` prints the generated data wishlist: which fitted constants the evidence does not pin,
-which rows the engine answers but declares not evaluable, what no lane represents, which
-directional axes are thin, and what each measurement would let you predict. `--json`
-gives the machine-readable payload of any verb; `--report` writes a self-contained HTML page.
+writing a bundle-shaped record under `results/user/` that the next re-calibration can read; it
+never refits anything, because a refit is always a new pre-registered step
+(`scripts/generators/WAVES.md`). `wishlist` prints the generated data wishlist: which fitted
+constants the evidence does not pin, which rows the engine answers but declares not evaluable,
+what no lane represents, which directional axes are thin, and what each measurement would let you
+predict. `--json` gives the machine-readable payload of any verb; `--report` writes a
+self-contained HTML page.
 
 Regenerate the evidence artifacts:
 
@@ -130,7 +119,7 @@ produces, modulo date and git head, and every recorded input still hashes the sa
 ## How well calibrated is it?
 
 Badly, and measurably. The numbers below are what the core scores on the union panel — the 16
-trust-loop bundles that carry a measurement, the 17 `maillard_path` hold-outs and the 4 external
+trust-loop bundles that hold a measurement, the 17 `maillard_path` hold-outs and the 4 external
 matrix bundles, 37 in all, 39 evaluable rows (8 more are answered but declared not evaluable, 17
 refused) — read from
 [`core_panel_scores.md`](results/validation/core_panel_scores.md) and
@@ -141,7 +130,7 @@ in the same change.
 | | kinetic core |
 | --- | --- |
 | rows within 3x of the measurement | **4 of 39** (median fold error 30x, geometric mean 43x) |
-| **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since the primary-evidence refit (wave B9) only one scored row is a fit row |
+| **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since the primary-evidence refit only one scored row is a fit row |
 | by lane, within 3x | acrylamide 2/12 · sulfur 4/29 · lipid 0/7 · trunk 0/1 |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 37** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
 | literature rows inside the 90% Monte-Carlo interval | **7 of 34** evaluable (median width 1.31 dex); **7 of 33** out of sample; 5 rows not evaluable |
@@ -149,12 +138,12 @@ in the same change.
 
 Three things a reader must know, all declared in code and printed on every row they touch:
 
-- **The sulfur lane is fitted on primary evidence only (wave B9, 2026-09-03).** The rule: rate
+- **The sulfur lane is fitted on primary evidence only (the refit of 2026-09-03).** The rule: rate
   constants, activation energies, fed-intermediate yields, conversions and within-study ratios fit
-  the model; end-to-end concentrations in full precursor systems validate it. The earlier sulfur waves (B2 to B8) had fitted the
+  the model; end-to-end concentrations in full precursor systems validate it. The earlier sulfur fits had fitted the
   Hofmann 1998 Table 1 levels of FFT and MFT for ribose, xylose, glucose and fructose + cysteine and
-  then scored those same four bundles; B9 ([prereg](results/validation/kinetic_core_b9_prereg.md))
-  removed the eight rows and refitted with everything else unchanged. **What the split revealed: without those rows the core predicts zero MFT from glucose and fructose.** The hexose entry to the thiols (`r_glc_c2c3` / `r_glc_fur`) is real chemistry but its rate constants are identified by no step-level measurement in the corpus; B9 left them on their band floor. Since 2026-09-04 the engine DECLARES this (`HEXOSE ENTRY UNIDENTIFIED`) on any hexose-only charge asked for MFT or FFT: the number is still returned, both scorers list the row as not evaluable instead of scoring a band-floor artefact, and the ordering "pentose above hexose" stays a claim the model supports structurally. The four returned Hofmann bundles' hexose rows are therefore off the absolute count; the two pentose ones score 1 of 4 within 3x. Every fit row now declares its bundle
+  then scored those same four bundles; the refit ([pre-registration](results/validation/kinetic_core_b9_prereg.md))
+  removed the eight rows and refitted with everything else unchanged. **What the split revealed: without those rows the core predicts zero MFT from glucose and fructose.** The hexose entry to the thiols (`r_glc_c2c3` / `r_glc_fur`) is real chemistry but its rate constants are identified by no step-level measurement in the corpus; the refit left them on their band floor. Since 2026-09-04 the engine DECLARES this (`HEXOSE ENTRY UNIDENTIFIED`) on any hexose-only charge asked for MFT or FFT: the number is still returned, both scorers list the row as not evaluable instead of scoring a band-floor artefact, and the ordering "pentose above hexose" stays a claim the model supports structurally. The four returned Hofmann bundles' hexose rows are therefore off the absolute count; the two pentose ones score 1 of 4 within 3x. Every fit row now declares its bundle
   (`results/validation/kinetic_core_b9_fit_targets.json`); the only scored row the fit read is the
   C2 + C3 recombination pot, flagged `in_core_fit`.
 - **Two bundles were quarantined and one was read in full (2026-09-04).** `cys_ribose_140C_Hofmann1998` (a
@@ -164,10 +153,10 @@ Three things a reader must know, all declared in code and printed on every row t
   the chapter's Table I and II once the PDF arrived: with the paper's loadings (glucose 51.5 mM, thiamine 13.7 mM,
   cysteine 11.7 mM, pH 5.65, a_w 0.83) the core overpredicts MFT 20x. The pass had rested on assumed inputs; no
   benchmark is strict-ready now. The chapter's own finding is recorded in the bundle: no MFT formed without
-  thiamine and only 8 % of it carried cysteine's sulfur, so this benchmark tests the thiamine route, not the
+  thiamine and only 8 % of it came from cysteine's sulfur, so this benchmark tests the thiamine route, not the
   sugar/cysteine one.
 - **The sulfur lane's uncertainty is a Laplace covariance, not a fitted one.** The fit report
-  carries no parameter covariance; a Gauss-Newton covariance at the shipped wave's frozen optimum
+  has no parameter covariance; a Gauss-Newton covariance at the shipped fit's frozen optimum
   ([`kinetic_core_b9_laplace_covariance.json`](results/validation/kinetic_core_b9_laplace_covariance.json),
   reduced chi-square 1.21) identifies **20 of 23** free coordinates, which the envelope samples
   jointly. Since 2026-09-04 the three it does NOT identify are no longer frozen at the optimum: the
@@ -176,7 +165,7 @@ Three things a reader must know, all declared in code and printed on every row t
   definitional -- a yield is a fraction -- rather than a measurement of where the value lies. The slice profile
   ([`kinetic_core_b9_profile.md`](results/validation/kinetic_core_b9_profile.md)) grades 4 of the 23
   coordinates quadratic, 9 asymmetric, 3 flat and 7 bound-limited: the declared bands are still
-  active constraints. Until the covariance step (wave B8, 2026-09-03) the lane was unsampled and 24 rows were not evaluable.
+  active constraints. Until the covariance step of 2026-09-03 the lane was unsampled and 24 rows were not evaluable.
 - **The K_aw and HS-SPME bands are headspace facts.** The envelope applies them only to rows the
   bundle declares as headspace-quantified, never to isotope-dilution or HPLC values. Since 2026-09-03
   every panel bundle declares its class (`benchmark.schema.json` enum, `schema_gate`); eleven say
@@ -188,19 +177,20 @@ the 92-claim literature panel ([`directional_claims_panel.yml`](docs/validation/
 through the same front door a user calls. Nineteen claims are prose-only and 13 more are not
 evaluable on the core: an arm refused because 2,5-dimethylpyrazine and 2-pentylfuran are not core
 species or H2S and hydroxyacetaldehyde are not core precursors, or because the comparison moves an
-axis the lane carries no term for. **The engine refuses those comparisons outright** (water activity
-on the acrylamide, sulfur and lipid lanes; pH on the acrylamide and lipid lanes; since wave B12 the
-trunk answers both with a declared, banded term) rather than returning two identical numbers,
+axis the lane has no term for. **The engine refuses those comparisons outright** (water activity
+on the sulfur and lipid lanes and outside its measured window on the acrylamide lane; pH on the lipid
+lane and outside its window on the acrylamide lane; the trunk answers both with a declared, banded term) rather than returning two identical numbers,
 so they are not evaluable rather than misses. Of the rest: sugar identity 4 of 8, temperature 5 of 9,
 time 2 of 2, cysteine present-vs-absent 2 of 3, pH on the sulfur lane 7 of 9, water activity on the
 trunk 1 of 2 (the peak at a_w 0.6-0.7 is reproduced; a monotone fall with water is not, as
 [`kinetic_core_b12_prereg.md`](results/validation/kinetic_core_b12_prereg.md) expected).
 **The sulfur lane's temperature behaviour was scored for the first time on 2026-09-06** (programme
 step R2(c), [`kinetic_core_b10_prereg.md`](results/validation/kinetic_core_b10_prereg.md)): the panel
-had carried no sulfur temperature claim. Yiltirak 2026's time-compensated ladder gives two evaluable
+had no sulfur temperature claim. Yiltirak 2026's time-compensated ladder gives two evaluable
 signs -- MFT falls across it, FFT rises -- and the shipped lane gets **both backwards** (`YIL-01`,
 `YIL-02`); the Wang 2026 and Meng 2017 ladders are recorded and not evaluable (unstated pH/time, no
-chargeable soy-sauce pot). That miss is the pre-registered baseline wave B10 is judged against.
+chargeable soy-sauce pot). That miss was the pre-registered baseline the temperature-structure attempt was judged
+against; it was refused (the introduction, section 6).
 A coin scores about half on binary orderings, so read the per-axis rows in the model card, not
 the aggregate. `maillard compare` prints the axes each comparison moves and the weakest of their
 verdicts.
@@ -219,7 +209,7 @@ constant, which is what makes `rank` useful.
 > ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
 > audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
 > pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> carries an `audit_flag` in its registry entry. **87 records are marked
+> has an `audit_flag` in its registry entry. **87 records are marked
 > `no_verifiable_source`** (re-measured 2026-09-02 across every tracked JSON and YAML file
 > under `data/` and `results/literature/`, including nested records), of which
 > **65 carry numeric payloads** and **65 of those are consumed at runtime**. Both rises in that
@@ -262,9 +252,9 @@ constant, which is what makes `rank` useful.
 
 **Provenance census (recounted at generation time, not copied).** **87 records** carry `source_status: no_verifiable_source` across 9 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 133 in total. The numeric-payload and runtime-consumed subsets (65 and 65) use a narrower definition than this recount and are pinned separately by the headline guards under `tests/scientific/`.
 
-**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
+**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` FAIL · `fit_target_gate.py` PASS.
 
-**How to use this model in one line:** compare two formulations and read the ratio (`python scripts/maillard.py compare`), never quote the absolute number, and treat pH and moisture directions as caution-only: declared terms exist on the sulfur lane (pH) and the trunk (water activity, Amadori-decay pH; wave B12), none on acrylamide or lipid.
+**How to use this model in one line:** compare two formulations and read the ratio (`python scripts/maillard.py compare`), never quote the absolute number, and treat pH and moisture directions as caution-only: declared terms exist on the sulfur lane (pH) the trunk (water activity, Amadori-decay pH) and the acrylamide lane (pH and water activity inside measured windows), none on lipid.
 
 <!-- END GENERATED: model-card -->
 
@@ -274,48 +264,50 @@ constant, which is what makes `rank` useful.
 
 Four networks that do *not* compose, each with its own integrator (`src/kinetic_core/`):
 
-| lane | steps | species it adds | pH term | fitted to |
+| lane | steps | species it adds | pH and water terms | fitted to |
 | --- | ---: | --- | --- | --- |
-| trunk (wave B1) | 26 | glucose / fructose / glycine → Amadori, deoxyosones, melanoidins; HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin | none | Martins 2005 time series, Blank 1997 furanic yields (wave B7) |
-| sulfur (waves B2 to B9) | 93 | pentoses, cysteine, thiamine → MFT, FFT, furfural, the MFT dimer | pH trajectory (wave B2.2) | Hofmann 1998 Tables 1/3/4/10, Kang 2026, Zhou 2023, Whitfield 1999, Cerny 2007, van Seeventer 2001 (waves B2 to B8) |
-| acrylamide (wave B3) | 42 | asparagine + reducing sugar → acrylamide, HMF | none | Claeys 2005, De Vleeschouwer 2009, Knol 2005 rate constants |
-| lipid (wave B6) | — | a linoleate hydroperoxide pool → Frankel 1989's six products (hexanal, pentane, decadienal, …) | none | branch distribution fitted; the **rate is a declared assumption** with a Q10 band |
+| trunk | 26 | glucose / fructose / glycine → Amadori, deoxyosones, melanoidins; HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin; glucosone, glyoxal, diacetyl | declared Amadori-decay pH term; declared water-activity multiplier | Martins 2005 time series, Blank 1997 furanic yields, Kocadağlı 2016 dicarbonyl constants |
+| sulfur | 93 | pentoses, cysteine, thiamine → MFT, FFT, furfural, the MFT dimer | pH trajectory | Hofmann 1998 Tables 1/3/4/10, Kang 2026, Zhou 2023, Whitfield 1999, Cerny 2007, van Seeventer 2001 |
+| acrylamide | 42 | asparagine + reducing sugar → acrylamide, HMF | declared pH factor (pH 4 to 8) and water-activity term (0.34 to 0.99), De Vleeschouwer 2006 to 2008 | Claeys 2005, De Vleeschouwer 2009, Knol 2005 rate constants |
+| lipid | — | a linoleate hydroperoxide pool → Frankel 1989's six products (hexanal, pentane, decadienal, …) | none | branch distribution fitted; the **rate is a declared assumption** with a Q10 band |
 
-The sulfur steps are deliberately absent from the acrylamide lane — composing them would spend
-the same cysteine twice — so a request spanning both is declared **unanswerable** rather than
-silently routed. What `engine.UNREPRESENTED_COMPOUNDS` refuses today, and why, is printed by
-`maillard explain <compound>`: 1-hexanol and 2-pentylfuran (no measured branch fraction),
+The sulfur steps are deliberately absent from the acrylamide lane, since composing them would
+spend the same cysteine twice, so a request spanning both is declared **unanswerable** rather
+than silently routed. What `engine.UNREPRESENTED_COMPOUNDS` refuses today, and why, is printed
+by `maillard explain <compound>`: 1-hexanol and 2-pentylfuran (no measured branch fraction),
 propanal and 2-nonenal (Frankel fed linoleate only), HEMF (needs alanine and a pentose in one
 lane), and the thiophenone (a rate of exactly zero, because the only fed-precursor experiment
 reports an area percent). Every refusal is an `EnvelopeDeclaration` with a reason and no number.
 
-**Fit / hold-out discipline.** Every fit wave was pre-registered
+**Fit / hold-out discipline.** Every re-calibration was pre-registered
 (`results/validation/kinetic_core_b*_prereg.md`), every fit report names its rows and their
 source anchors, and `scripts/ci/holdout_guard.py` asserts statically that no fit generator names
 the hold-out directory and that panel discovery never recurses. The one place that discipline was
-found wanting — the xylose pH-5 row above — is declared rather than fixed silently.
+found wanting, the xylose pH-5 row above, is declared rather than fixed silently. The list of
+every re-calibration, what it tried and whether it was kept is section 6 of the
+[introduction](docs/guides/INTRODUCTION.md#6-how-the-model-got-here).
 
 ---
 
 ## Repository layout
 
-Three trees, one rule each (`agents.md`):
+Three trees, one rule each ([CONTRIBUTING.md](CONTRIBUTING.md)):
 
 | tree | rule | map |
 | --- | --- | --- |
 | `data/` | curated inputs, **read-only at runtime** (`scripts/ci/data_readonly_gate.py`); paths from `src/data_paths.py`, loads through `src/data_access.py`, names through `data/keys/` | [`data/README.md`](data/README.md) (generated) |
-| `results/` | generated artifacts: the core's scorecard, envelope and directional scorecard (each with a `provenance` block), the frozen fit and hold-out records per wave, the literature ledgers; `results/legacy_lane/` is the archive of the retired lane and of orphaned artifacts | [`results/README.md`](results/README.md) (generated) |
-| `docs/` | human documents: [USING_THE_TOOL.md](docs/USING_THE_TOOL.md), [QUICKSTART.md](docs/guides/QUICKSTART.md), [GLOSSARY.md](docs/guides/GLOSSARY.md), [INTRODUCTION.md](docs/guides/INTRODUCTION.md) (modelling the Maillard reaction, for a reader with no context; appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md); every paper used, [SOURCES.md](docs/guides/SOURCES.md)), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md), the retired lane's README under `docs/history/` | |
+| `results/` | generated artifacts: the core's scorecard, envelope and directional scorecard (each with a `provenance` block), the frozen fit and hold-out records per re-calibration, the literature ledgers; `results/legacy_lane/` is the archive of the retired lane and of orphaned artifacts | [`results/README.md`](results/README.md) (generated) |
+| `docs/` | human documents: [INTRODUCTION.md](docs/guides/INTRODUCTION.md) (modelling the Maillard reaction, for a reader with no context; appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md); every paper used, [SOURCES.md](docs/guides/SOURCES.md)), [QUICKSTART.md](docs/guides/QUICKSTART.md), [USING_THE_TOOL.md](docs/USING_THE_TOOL.md), [GLOSSARY.md](docs/guides/GLOSSARY.md), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md); the retired lane's README, the August 2026 audit and the old roadmaps under `docs/history/` | |
 
 Code: `src/kinetic_core/` (the engine, its parameters, panel, scoring, envelope, fit-target
 ledger), `src/comparative_cli.py` + `scripts/maillard.py` (the front door), `src/report_html.py`,
 `src/explain_compound.py`, `src/experiment_value.py` (the `rank` verb), `src/model_card.py`; the
 literature side (`src/family_ingestion_plan.py`, `src/literature_intake_registry.py`,
 `scripts/deep_research_tracker.py` and the `generate_*` scripts that write
-`results/literature/`); and the five CI gates under `scripts/ci/`.
+`results/literature/`); and the six CI gates under `scripts/ci/`.
 
-**Key dependencies:** NumPy / SciPy (integration), RDKit (compound identity through InChIKey),
-PyYAML, jsonschema, Matplotlib (report figures).
+**Dependencies:** NumPy and SciPy (integration), PyYAML and jsonschema (data and gates),
+Matplotlib and NetworkX (figures). RDKit is needed only to rebuild the compound registry.
 
 ---
 
@@ -329,20 +321,23 @@ Two generated artifacts answer this, and the CLI prints both:
   which panel rows the engine answers but declares not evaluable, what the panel asks for that no
   lane represents, which directional axes are below "trust" and how many agreeing claims would lift
   them, and a closing list of *what you could predict if you had it*. Its first entry is the finding
-  wave B9 exposed: the hexose entry to the thiols (`k_glc_ha`) has no step-level measurement anywhere,
-  so absolute MFT and FFT from glucose or fructose are not predictions until someone heats glucose
-  alone and quantifies its C2 + C3 fragments against time.
+  the primary-evidence refit exposed: the hexose entry to the thiols (`k_glc_ha`) has no step-level
+  measurement anywhere, so absolute MFT and FFT from glucose or fructose are not predictions until
+  someone heats glucose alone and quantifies its C2 + C3 fragments against time.
 - **`maillard rank`** ([`experiment_value_ranking.md`](results/validation/experiment_value_ranking.md))
   is the value-of-information answer: every (benchmark, compound) row the envelope misses, ordered
   by miss × uncertainty × sensory weight. Today it leads with hexanal in pea protein and FFT in the
   buffered ribose/cysteine series.
 
 Both are regenerated and compared by the artifact-freshness gate, so they cannot drift from the
-scorecard they are derived from. The wet-lab protocol for the matrix gap the two agree on — a
-quantitative PPI/SPI meaty-positive benchmark with the thiols and the off-flavour aldehydes in one
-run — is [PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md).
-Closing the loop from such a measurement back into the constants is a new pre-registered wave
-(`scripts/generators/WAVES.md`); `maillard score` writes your measurements in the shape that wave reads.
+scorecard they are derived from. The one experiment that would decide the thiol problem is
+section 8 of the [introduction](docs/guides/INTRODUCTION.md#8-what-is-needed-next). The wet-lab
+protocol for the matrix gap, a quantitative PPI/SPI meaty-positive benchmark with the thiols and
+the off-flavour aldehydes in one run, is
+[PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md).
+Closing the loop from such a measurement back into the constants is a new pre-registered
+re-calibration (`scripts/generators/WAVES.md`); `maillard score` writes your measurements in the
+shape it reads.
 
 ---
 
@@ -351,26 +346,38 @@ Closing the loop from such a measurement back into the constants is a new pre-re
 | If you are a… | Start with |
 | --- | --- |
 | **Anyone, first command** | `python scripts/maillard.py compare --template` → the model card above |
+| **Anyone who knows what the Maillard reaction is** — the chemistry, what is measured, how a model is built from it, how well this one does, how it got here, what would decide it | [INTRODUCTION.md](docs/guides/INTRODUCTION.md), appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md), every paper used [SOURCES.md](docs/guides/SOURCES.md) |
 | **Flavour scientist** — using the tool | [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) |
 | **Food scientist** — first run | [QUICKSTART.md](docs/guides/QUICKSTART.md) |
 | **Scientist** — understanding the output | [GLOSSARY.md](docs/guides/GLOSSARY.md) |
-| **Anyone who knows what the Maillard reaction is** — the chemistry, what is measured, how a model is built from it, how well this one does, what would decide it | [INTRODUCTION.md](docs/guides/INTRODUCTION.md), appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md), every paper used [SOURCES.md](docs/guides/SOURCES.md) |
-| **Reviewer** — auditing what is verified | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/) → [AUDIT.md](AUDIT.md) |
+| **Reviewer** — auditing what is verified | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/) → [the August 2026 audit](docs/history/AUDIT_legacy_lane_2026-08.md) |
 | **Experimentalist** — closing the gaps | `maillard wishlist` → [data wishlist](results/validation/data_wishlist.md) → [experiment ranking](results/validation/experiment_value_ranking.md) → [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) |
-| **Maintainer** — extending the chemistry | `src/kinetic_core/` module docstrings → [`tasks/data_restructure_plan.md`](tasks/data_restructure_plan.md) → [CONTRIBUTING.md](CONTRIBUTING.md) |
+| **Maintainer** — extending the chemistry | [CONTRIBUTING.md](CONTRIBUTING.md) → `src/kinetic_core/` module docstrings → [`tasks/data_restructure_plan.md`](tasks/data_restructure_plan.md) (section 7 is the backlog) |
 | **Literature curator** — ingestion | [data/lit/README.md](data/lit/README.md) |
 | **Historian** — what the retired lane claimed | [docs/history/README_legacy_lane_2026-09-03.md](docs/history/README_legacy_lane_2026-09-03.md), [results/legacy_lane/](results/legacy_lane/) |
 
 ---
+
+## History
+
+Until 2026-09-03 this repository held two prediction paths: a rule-enumeration "screening lane"
+with a fitted volatile budget, and the kinetic core. The screening lane, its validation harness
+and its headline numbers were deleted; everything above is the kinetic core, scored on its own.
+The retired lane's README, its artifacts and the August 2026 adversarial audit that preceded the
+retirement are kept verbatim under [`docs/history/`](docs/history/) and
+[`results/legacy_lane/`](results/legacy_lane/). File names and artifacts have short tags for
+their provenance (B1 to B16 for the fits and declared terms, lettered waves for the old audit,
+"Amendment n" for the fit/hold-out declaration); the
+[glossary](docs/guides/GLOSSARY.md#part-3--identifiers-you-will-meet-in-the-code-and-the-artifacts)
+has the key.
 
 ## Citation
 
 If you use Maillard in your research, please cite:
 
 ```
-Moreno Casares, P. A. (2026). Maillard: Computational screening for meat-like
-Maillard chemistry in plant-based protein matrices. GitHub repository.
-https://github.com/PabloAMC/Maillard
+Moreno Casares, P. A. (2026). Maillard: a kinetic model of the Maillard reaction for
+alternative-protein flavour work. GitHub repository. https://github.com/PabloAMC/Maillard
 ```
 
 ## License

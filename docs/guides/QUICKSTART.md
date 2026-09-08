@@ -124,7 +124,7 @@ python scripts/maillard.py score my_measurements.yml
 
 Each measured compound is scored the way the panel scores a benchmark (fold error, the 3x band, the
 reliability interval, or a named refusal), and a bundle-shaped record lands under `results/user/` with
-your provenance. Nothing is refitted: calibration on new data is a new pre-registered fit wave.
+your provenance. Nothing is refitted: calibration on new data is always a new pre-registered re-calibration (`scripts/generators/WAVES.md`).
 
 ## Before you trust a result
 
