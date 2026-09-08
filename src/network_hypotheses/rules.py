@@ -43,10 +43,12 @@ def _compiled(rule: Rule):
     return AllChem.ReactionFromSmarts(rule.smirks)
 
 
-def apply(rule: Rule, reactant_smiles: Sequence[str]) -> Set[Tuple[str, ...]]:
+def apply(rule: Rule, reactant_smiles: Sequence[str]) -> List[Tuple[str, ...]]:
     """Every distinct product set (canonical SMILES, no stereo, sorted) the rule yields on these
-    reactants, over every ordering of them. Products RDKit cannot sanitise are dropped: a rule that
-    writes a broken molecule is a broken rule, and the controls catch it."""
+    reactants, over every ordering of them, in a deterministic order (the artifact is compared byte
+    for byte by the freshness gate, and a set's iteration order depends on hash randomisation).
+    Products RDKit cannot sanitise are dropped: a rule that writes a broken molecule is a broken
+    rule, and the controls catch it."""
     Chem = S._rdkit()
     rxn = _compiled(rule)
     if rxn.GetNumReactantTemplates() != len(reactant_smiles):
@@ -55,7 +57,7 @@ def apply(rule: Rule, reactant_smiles: Sequence[str]) -> Set[Tuple[str, ...]]:
     if any(m is None for m in mols):
         return set()
     out: Set[Tuple[str, ...]] = set()
-    for perm in set(itertools.permutations(range(len(mols)))):
+    for perm in sorted(set(itertools.permutations(range(len(mols))))):
         try:
             product_sets = rxn.RunReactants(tuple(mols[i] for i in perm))
         except Exception:
@@ -72,7 +74,7 @@ def apply(rule: Rule, reactant_smiles: Sequence[str]) -> Set[Tuple[str, ...]]:
                 names.append(Chem.MolToSmiles(p, isomericSmiles=False))
             if ok and names:
                 out.add(tuple(sorted(names)))
-    return out
+    return sorted(out)
 
 
 def run_controls(rule: Rule, table: Mapping[str, S.Structure]) -> List[str]:

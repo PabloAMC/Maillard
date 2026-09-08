@@ -98,3 +98,25 @@ def test_enumeration_from_the_reference_pot_reproduces_modelled_steps(rules, tab
         lost = sum(carbons(s) for s in step.reactants) - sum(carbons(s) for s in step.products)
         allowed = 1 if rule.klass == "strecker" or rule.id == "R08_cysteine_thermolysis" or rule.id.startswith("R17") else 0
         assert 0 <= lost <= allowed, (step.rule_id, step.reactants, step.products, lost)
+
+
+def test_enumeration_is_deterministic_across_processes(rules, table):
+    """The artifact is compared byte for byte by the freshness gate, so the same charge must give the
+    same steps in the same order under a different hash seed."""
+    import json
+    import os
+    import subprocess
+    import sys
+
+    code = (
+        "import json; from src.network_hypotheses import rules as R, structures as S; "
+        "from src.network_hypotheses.enumerate import enumerate_from; "
+        "t = S.load(); steps, _ = enumerate_from(['PENT', 'Cys'], t, R.load(), depth=2); "
+        "print(json.dumps([[s.rule_id, list(s.reactants), list(s.products)] for s in steps]))"
+    )
+    outs = []
+    for seed in ("1", "2"):
+        env = dict(os.environ, PYTHONHASHSEED=seed, PYTHONPATH=str(ROOT))
+        outs.append(subprocess.run([sys.executable, "-c", code], cwd=ROOT, env=env, capture_output=True, text=True, check=True).stdout)
+    assert outs[0] == outs[1]
+
