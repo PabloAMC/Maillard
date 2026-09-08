@@ -1,0 +1,106 @@
+# A real laboratory's ladder as a calibration document: Yiltirak et al. 2026, the buffer pots (Table S3).
+# Four pots, time-compensated: 100 C / 4 h, 110 C / 2 h, 120 C / 1 h, 130 C / 0.5 h. The 100 and 120 C pots
+# are tagged fit, the 110 and 130 C pots validate. Run:
+#     python scripts/maillard.py calibrate docs/examples/reading_2026_ladder.yml --lab 'Reading 2026'
+# Values from data/benchmarks/external_validation/maillard_path/*_Yiltirak2026.json (never fitted by any wave).
+systems:
+- name: yiltirak_100C
+  precursors:
+    D-Ribose: 25.0
+    L-Cysteine: 25.0
+  temp_C: 100.0
+  time_min: 240.0
+  ph: 5.5
+  aw: 0.98
+  matrix: water
+  buffer:
+    kind: phosphate
+    phosphate_mol_l: 0.5
+  role: fit
+  measured:
+    2-methyl-3-furanthiol:
+      value: 6.88
+      uncertainty_pct: 14.24
+    2-furfurylthiol:
+      value: 1.28
+      uncertainty_pct: 6.25
+  quantification_class: stable_isotope_dilution_gcms
+  source:
+    lab: Reading 2026 (Yiltirak et al., Food Res. Int. 231:118600, Table S3)
+    notes: ribose 25 mM + cysteine 25 mM in 0.5 M potassium phosphate pH 5.5; 3 mL
+      in a 20 mL screw-cap tube; SIDA GC-MS
+- name: yiltirak_110C
+  precursors:
+    D-Ribose: 25.0
+    L-Cysteine: 25.0
+  temp_C: 110.0
+  time_min: 120.0
+  ph: 5.5
+  aw: 0.98
+  matrix: water
+  buffer:
+    kind: phosphate
+    phosphate_mol_l: 0.5
+  role: validate
+  measured:
+    2-methyl-3-furanthiol:
+      value: 3.29
+      uncertainty_pct: 1.82
+    2-furfurylthiol:
+      value: 1.46
+      uncertainty_pct: 13.01
+  quantification_class: stable_isotope_dilution_gcms
+  source:
+    lab: Reading 2026 (Yiltirak et al., Food Res. Int. 231:118600, Table S3)
+    notes: ribose 25 mM + cysteine 25 mM in 0.5 M potassium phosphate pH 5.5; 3 mL
+      in a 20 mL screw-cap tube; SIDA GC-MS
+- name: yiltirak_120C
+  precursors:
+    D-Ribose: 25.0
+    L-Cysteine: 25.0
+  temp_C: 120.0
+  time_min: 60.0
+  ph: 5.5
+  aw: 0.98
+  matrix: water
+  buffer:
+    kind: phosphate
+    phosphate_mol_l: 0.5
+  role: fit
+  measured:
+    2-methyl-3-furanthiol:
+      value: 2.4
+      uncertainty_pct: 6.67
+    2-furfurylthiol:
+      value: 1.68
+      uncertainty_pct: 12.5
+  quantification_class: stable_isotope_dilution_gcms
+  source:
+    lab: Reading 2026 (Yiltirak et al., Food Res. Int. 231:118600, Table S3)
+    notes: ribose 25 mM + cysteine 25 mM in 0.5 M potassium phosphate pH 5.5; 3 mL
+      in a 20 mL screw-cap tube; SIDA GC-MS
+- name: yiltirak_130C
+  precursors:
+    D-Ribose: 25.0
+    L-Cysteine: 25.0
+  temp_C: 130.0
+  time_min: 30.0
+  ph: 5.5
+  aw: 0.98
+  matrix: water
+  buffer:
+    kind: phosphate
+    phosphate_mol_l: 0.5
+  role: validate
+  measured:
+    2-methyl-3-furanthiol:
+      value: 1.71
+      uncertainty_pct: 7.02
+    2-furfurylthiol:
+      value: 1.62
+      uncertainty_pct: 6.79
+  quantification_class: stable_isotope_dilution_gcms
+  source:
+    lab: Reading 2026 (Yiltirak et al., Food Res. Int. 231:118600, Table S3)
+    notes: ribose 25 mM + cysteine 25 mM in 0.5 M potassium phosphate pH 5.5; 3 mL
+      in a 20 mL screw-cap tube; SIDA GC-MS

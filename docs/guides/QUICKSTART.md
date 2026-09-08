@@ -133,7 +133,12 @@ your provenance. Nothing is refitted: calibration on new data is always a new pr
 ```bash
 python scripts/maillard.py calibrate my_measurements.yml --lab "my lab"
 python scripts/maillard.py compare my_comparison.yml --calibration results/user/my_lab/calibration_2026-09-08.json
+python scripts/maillard.py calibrate docs/examples/reading_2026_ladder.yml --lab "Reading 2026"   # a real laboratory's ladder, ten seconds
 ```
+
+The last line is a worked example: Yiltirak et al. 2026's four-temperature ladder as one laboratory's
+records, two pots fitted and two held out; its card is
+[reading_2026_calibration_card.md](../examples/reading_2026_calibration_card.md).
 
 The same document `score` reads, with four or more pots. Two things are fitted, and only two.
 Your **levels** set a response factor per compound: the offset between what your instrument
