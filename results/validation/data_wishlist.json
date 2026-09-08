@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-08",
     "git": {
-      "commit": "34da5b51c0b1595c35ec78e14ee9d2caef15b584",
-      "short": "34da5b51",
+      "commit": "871a07d3b692cfc5972546f34719a31e3c56e36f",
+      "short": "871a07d3",
       "branch": "cleaning",
       "dirty": false
     },
@@ -33,7 +33,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "624d82c1c4369c3d397d97c6aecde321c70a3a061bb30c2b95a3fa5411d4ae3c"
+        "sha256": "694d4ac3cdd12cdf0f67ad22cae2a5e0575347837878c9f72e7a60aa780e170d"
       }
     ]
   },
@@ -87,6 +87,7 @@
       "measurement": "a fed-intermediate rate: glucose heated alone, HA + MGO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
         "MFT",
+        "FFT",
         "MFTD",
         "ACTZ"
       ],
@@ -176,6 +177,7 @@
       "measurement": "a fed-intermediate rate: ARP heated alone, DPO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
         "MFT",
+        "FFT",
         "MFTD",
         "ACTZ",
         "NF"
@@ -201,6 +203,8 @@
       "story": "",
       "measurement": "a fed-intermediate rate: FFT + OX heated alone, FFTD quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
+        "MFT",
+        "FFT",
         "MFTD"
       ],
       "unlocks_from_charges": [
@@ -230,6 +234,8 @@
       "story": "",
       "measurement": "a fed-intermediate rate: MFT + OX heated alone, MFTD quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
+        "MFT",
+        "FFT",
         "MFTD"
       ],
       "unlocks_from_charges": [
@@ -281,6 +287,7 @@
       "story": "",
       "measurement": "a fed-intermediate rate: FUR + hydrogen sulfide heated alone, FFT quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
+        "MFT",
         "FFT",
         "MFTD"
       ],
@@ -678,7 +685,7 @@
   "what_you_could_predict": [
     {
       "if_measured": "k_glc_ha",
-      "you_could_predict": "absolute MFT, MFTD, ACTZ from charges containing glucose, as a fitted value instead of a band artefact; 8 panel rows now NOT EVALUABLE would return to the scorecard"
+      "you_could_predict": "absolute MFT, FFT, MFTD, ACTZ from charges containing glucose, as a fitted value instead of a band artefact; 8 panel rows now NOT EVALUABLE would return to the scorecard"
     },
     {
       "if_measured": "Ea_decay_thiol_sink",
@@ -686,19 +693,19 @@
     },
     {
       "if_measured": "k_arp_dpo",
-      "you_could_predict": "absolute MFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "k_dimer_fft",
-      "you_could_predict": "absolute MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "k_dimer_mft",
-      "you_could_predict": "absolute MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "k_fur_fft",
-      "you_could_predict": "absolute FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "4 more independent ordering claims on lipid_lane (all agreeing)",
