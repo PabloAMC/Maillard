@@ -150,7 +150,12 @@ page round-trips the template spec.
 ## 5. The chemistry users ask about that no lane has
 
 *Status 2026-09-08: the pyrazine rule is in the hypothesis layer (the layer reaches the three panel
-pyrazines from a Strecker charge); nonanal, 2-pentylfuran and 1-hexanol still lack a cited route.
+pyrazines from a Strecker charge), and the same evening the first measured pyrazine rates entered
+the corpus (Zhou 2024's three-temperature ladders on fed glyoxal and methylglyoxal; Leahy 1989's
+pH ladders), so the step is pre-registered as wave B18 (`results/validation/kinetic_core_b18_prereg.md`),
+not yet run. Nonanal, 2-pentylfuran and 1-octen-3-ol now have cited rules (six lipid dossiers read
+the same night; rules R29 to R32), so their refusal reads "no rate, not no route"; 1-hexanol still
+has none, because no paper on disk draws an aldehyde-to-alcohol step.
 The calibrated interval now carries the factor's sigma (programme 1's leftover). The beany note
 now has its first data on disk (`zhang2020b`, `gao2020`, `wang2014`, `wang2015` dossiers): raw pea
 milk at 2 % protein, no heat, holds 164 µg/L hexanal and 387 µg/L 1-hexanol against 437 and 284
@@ -168,8 +173,11 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
 - **Extrusion**: two minutes at 130 to 170 °C at low moisture. The process spec already takes a
   programmed thermal history; what is missing is water-activity terms outside the measured windows
   and any data. Declare the windows, refuse outside them, collect data.
-- **The refused routes** the wishlist names: oleate to nonanal, linoleate to 2-pentylfuran,
-  aldehyde to alcohol. Rules first, so the refusal reads "no rate".
+- **The refused routes** the wishlist names: oleate to nonanal and linoleate to 2-pentylfuran now
+  have cited rules (Cao 2020, Miyazaki 2023); aldehyde to alcohol has none in the six lipid papers
+  read, and the 1-octen-3-ol route is a hydroperoxide route, not an aldehyde reduction. A wave for
+  any of them needs measured rates: Cao 2020's 24 h levels at three temperatures and Miyazaki's
+  isomer-resolved product ratios are the within-study material on disk.
 
 ## 6. Cross-cutting engineering, done once
 

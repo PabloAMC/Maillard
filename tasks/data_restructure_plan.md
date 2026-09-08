@@ -1401,6 +1401,15 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       Balagiannis 2015: Huang, Bruechert & Ho 1989 J Food Sci 54:1611 (aqueous, 120-140 C, pH 10, zero
       order: the only pyrazine rates above 120 C), Parker 2013 JSFA 93:197 (consolidated review),
       Jusino 1997 JAFC 45:3164 (solid state, first order, Ea 56.5 kJ/mol).
+- [x] **LIP-RULES (2026-09-08). The refused lipid routes as cited rules.** Six dossiers (miyazaki2023,
+      cao2020, chen2017, yang2024, choe2006, wanjala2021); rules R29-R32 (oleate hydroperoxide
+      scissions to the alkanals and 2-alkenals; the 13-HpODE furyl route to 2-pentylfuran; the 10-HpODE
+      route to 1-octen-3-ol) with `data/species/literature_structures.yml` for the species the engine
+      lacks; `explain` matches literature structures by registry id. Not written: aldehyde -> alcohol
+      (no paper draws it). Left for a wave: Cao 2020's nmol/g at 120 / 150 / 180 C after 24 h and its
+      (2-alkenal)/(alkanal) ratio 0.09 -> 0.56; Miyazaki's isomer-resolved area ratios (n = 1, no IS);
+      the oleate isomer distribution (Choe & Min Table 1, second-hand from Frankel 1985: 26-28 / 22-25
+      / 22-24 / 26-28 %). Registry fix: 1-octen-3-ol SMILES was C7 (off_flavour_targets.yml).
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT
