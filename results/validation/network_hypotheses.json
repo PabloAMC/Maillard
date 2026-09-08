@@ -316,6 +316,76 @@
         "dossier": "miyazaki2023_extraction.md",
         "anchor": "Figure 3, route LA-10-B: 10-HpODE -> 10-oxo-8-decenoic acid + 2-octenyl radical (40 <-> 41) -> 1-octen-3-ol (the dominant product, area 144.8 M), 1-octen-3-one, 2-octenal, 2-octen-1-ol; yao2024_extraction.md draws the same scission for the 10-hydroperoxide (methyl 10-oxo-8-decenoate + 1-octen-3-ol, both detected at 180 C)"
       }
+    },
+    {
+      "id": "R33_dienal_ammonia_to_alkylpyridine",
+      "name": "2,4-alkadienal + ammonia -> 2-alkylpyridine (imine, cyclisation, aromatisation; net)",
+      "class": "lipid_maillard",
+      "status": "established",
+      "source": {
+        "dossier": "zhou2000_extraction.md",
+        "anchor": "Tables 1-3 and the isotope experiments: 5-13C-2,4-decadienal gives 2-13C-2-pentylpyridine and 15N-ammonia gives the ring nitrogen, in a defatted soy slurry at room temperature, pH 9 > 7 > 4.5; zamora2020_extraction.md Table 2: 2-pentylpyridine 14.68 +/- 0.58 umol per mmol glutamine from 2,4-decadienal at 180 C (authentic standard), the C6 to C10 dienal homologue series; du2023_extraction.md Table 1: 2-butylpyridine 191 ug/L from (E,E)-2,4-nonadienal in a cysteine + glucose pot at 150 C"
+      }
+    },
+    {
+      "id": "R34_dienal_h2s_to_alkylthiophene",
+      "name": "2,4-alkadienal + H2S -> 2-alkylthiophene (1,4-addition, S onto C1, dehydration; net)",
+      "class": "lipid_maillard",
+      "status": "established",
+      "source": {
+        "dossier": "farmer1990_extraction.md",
+        "anchor": "Figure 1 middle branch (H2S adds S to C4 and H to C5, S closes on C1, water leaves; 2-hexylthiophene from 2,4-decadienal) and Table 2: 2-hexylthiophene 0 / 0 / 184 / 1220 / 436 relative area for no lipid / triglyceride / lecithin / PC / PE; mottram2002b_extraction.md Figure 3 bottom branch and Table I: 2-pentylthiophene 21, 2-hexylthiophene 9 ng per 0.5 mmol methyl linoleate at 140 C; elmore1997_extraction.md: 2-pentylthiophene 21 % of total area from (E,E)-2,4-nonadienal + acetoin + (NH4)2S; whitfield1988_extraction.md Table: 2-pentylthiophene 95.5 ng only with cysteine + lecithin, and the ratio argument that rejects the furan -> thiophene exchange"
+      }
+    },
+    {
+      "id": "R35_dienal_h2s_to_alkylthiapyran",
+      "name": "2,4-alkadienal + H2S -> 2-alkyl-2H-thiapyran (1,6-addition, S onto C1, dehydration; net)",
+      "class": "lipid_maillard",
+      "status": "established",
+      "source": {
+        "dossier": "farmer1990_extraction.md",
+        "anchor": "Figure 1 right branch (H2S adds S to C5 and H to C4, S closes on C1, water leaves) and Table 2: 2-pentyl-2H-thiapyran 0 / 35 / 3150 / 34700 / 12500 relative area, the largest lipid-dependent product in every phospholipid pot; mottram2002b_extraction.md Figure 3 top branch and Table I: 2-ethylthiapyran 399 ng per 0.5 mmol methyl linolenate, and the text that a pure dienal + H2S pot gives up to 100 times more thiapyran than thiophene"
+      }
+    },
+    {
+      "id": "R36_hydroxyketone_h2s_to_mercaptoketone",
+      "name": "alpha-hydroxyketone + H2S -> alpha-mercaptoketone + H2O",
+      "class": "lipid_maillard",
+      "status": "established",
+      "source": {
+        "dossier": "elmore1997_extraction.md",
+        "anchor": "Figure 1, first step: substitution of the hydroxyketone's -OH by -SH (E97-A); the mercaptoketones themselves are the compounds Farmer 1990 Table 2 rows 44 to 47 measure in cysteine + ribose pots (2-mercapto-3-butanone 0.97 / 0.45 / 0.51 / 0.48 with the four lipids)"
+      }
+    },
+    {
+      "id": "R37_alkanal_ammonia_to_aldimine",
+      "name": "alkanal + NH3 -> aldimine + H2O",
+      "class": "lipid_maillard",
+      "status": "established",
+      "source": {
+        "dossier": "elmore1997_extraction.md",
+        "anchor": "Figure 1, the imine of the alkanal (E97-B), drawn as the N-donor of the 3-thiazoline's C2; the alkanal series C4 to C10 in Tables 1 and 2"
+      }
+    },
+    {
+      "id": "R38_mercaptoketone_aldimine_to_thiazoline",
+      "name": "alpha-mercaptoketone + aldimine -> 2-alkyl-3-thiazoline + H2O (S-attack on the imine carbon, condensation; net)",
+      "class": "lipid_maillard",
+      "status": "established",
+      "source": {
+        "dossier": "elmore1997_extraction.md",
+        "anchor": "Figure 1 (E97-C): the mercaptoketone's S attacks the imine carbon, the amine condenses onto the ketone; Table 1: 4,5-dimethyl-2-pentyl-3-thiazoline 36.7 % of area from acetoin + hexanal + (NH4)2S, 4-methyl-2-pentyl-3-thiazoline 18.3 % from acetol + hexanal (the 4-isomer favoured over the 5-isomer 5.5 to 18.3 versus 1.5 to 4.4 %); 3-thiazolines 15 to 42 % of area across the C4 to C10 alkanals"
+      }
+    },
+    {
+      "id": "R39_thiazoline_to_thiazole",
+      "name": "3-thiazoline -> thiazole (oxidation; net, terminal)",
+      "class": "lipid_maillard",
+      "status": "established",
+      "source": {
+        "dossier": "elmore1997_extraction.md",
+        "anchor": "Figure 1 [O] arrow (E97-D); Tables 1 and 2: thiazole / 3-thiazoline area ratio 0.002 to 0.05 in the hydroxyketone pots (hexanal + acetol 0.7 / 18.3) because the ammonium-sulfide pot is reducing, about 1 in the butanedione pots (pentanal 12.8 / 13.4, hexanal 16.8 / 15.7, heptanal 6.9 / 8.0), which go by the dione route (E97-E) without an oxidation step; whitfield1988_extraction.md: 2-acetylthiazole rises 14.8 -> 25.2 ng with lecithin while every other thiazole falls"
+      }
     }
   ],
   "charges": [
@@ -473,7 +543,7 @@
           ],
           "products": [
             "CC=O",
-            "N",
+            "AMMONIA",
             "H2S"
           ],
           "placement": "modelled",
@@ -701,15 +771,48 @@
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
+        },
+        {
+          "rule": "R36_hydroxyketone_h2s_to_mercaptoketone",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "H2S"
+          ],
+          "products": [
+            "O=C(O)C(CS)NCC(=O)C(S)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "PENT",
+            "AMMONIA"
+          ],
+          "products": [
+            "N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "CC=O",
+            "AMMONIA"
+          ],
+          "products": [
+            "CC=N"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
         }
       ],
       "products": [
-        {
-          "smiles": "N",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
         {
           "smiles": "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O",
           "first_depth": 1,
@@ -739,6 +842,12 @@
           "first_depth": 1,
           "kind": "registry",
           "id": "acetaldehyde"
+        },
+        {
+          "smiles": "N",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "AMMONIA"
         },
         {
           "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
@@ -777,7 +886,19 @@
           "id": null
         },
         {
+          "smiles": "CC=N",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
           "smiles": "CC=NC(CS)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "N=CC(O)C(O)C(O)CO",
           "first_depth": 2,
           "kind": "new",
           "id": null
@@ -790,6 +911,12 @@
         },
         {
           "smiles": "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(S)C(O)CO",
           "first_depth": 2,
           "kind": "new",
           "id": null
@@ -839,14 +966,14 @@
       ],
       "summary": {
         "steps": {
-          "mechanism_known": 13,
+          "mechanism_known": 16,
           "modelled": 1,
           "proposed": 6
         },
         "products": {
-          "new": 17,
+          "new": 19,
           "registry": 1,
-          "species": 4
+          "species": 5
         }
       }
     },
@@ -895,7 +1022,7 @@
           ],
           "products": [
             "CC=O",
-            "N",
+            "AMMONIA",
             "H2S"
           ],
           "placement": "modelled",
@@ -1229,15 +1356,48 @@
           "engine_reactions": [
             "r_hmp_mft"
           ]
+        },
+        {
+          "rule": "R36_hydroxyketone_h2s_to_mercaptoketone",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "H2S"
+          ],
+          "products": [
+            "O=C(O)C(CS)NCC(=O)C(S)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "PENT",
+            "AMMONIA"
+          ],
+          "products": [
+            "N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "CC=O",
+            "AMMONIA"
+          ],
+          "products": [
+            "CC=N"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
         }
       ],
       "products": [
-        {
-          "smiles": "N",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
         {
           "smiles": "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O",
           "first_depth": 1,
@@ -1273,6 +1433,12 @@
           "first_depth": 1,
           "kind": "species",
           "id": "HMP"
+        },
+        {
+          "smiles": "N",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "AMMONIA"
         },
         {
           "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
@@ -1347,7 +1513,19 @@
           "id": null
         },
         {
+          "smiles": "CC=N",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
           "smiles": "CC=NC(CS)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "N=CC(O)C(O)C(O)CO",
           "first_depth": 2,
           "kind": "new",
           "id": null
@@ -1360,6 +1538,12 @@
         },
         {
           "smiles": "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(S)C(O)CO",
           "first_depth": 2,
           "kind": "new",
           "id": null
@@ -1415,14 +1599,14 @@
       ],
       "summary": {
         "steps": {
-          "mechanism_known": 17,
+          "mechanism_known": 20,
           "modelled": 3,
           "proposed": 8
         },
         "products": {
-          "new": 23,
+          "new": 25,
           "registry": 1,
-          "species": 6
+          "species": 7
         }
       }
     },
@@ -1793,6 +1977,749 @@
         "products": {
           "species": 10,
           "new": 3
+        }
+      }
+    },
+    {
+      "charge": "lipid_maillard_cross",
+      "lane": "lipid",
+      "why": "the fatty aldehydes an isolate's lipid makes, with the ammonia and hydrogen sulfide the Maillard side supplies: the cross products no lane names (Zamora 2020, Zhou 2000, Du 2023)",
+      "species": [
+        "DECADIENAL",
+        "HEXANAL",
+        "AMMONIA",
+        "H2S",
+        "Cys"
+      ],
+      "depth": 1,
+      "steps": [
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "Cys"
+          ],
+          "products": [
+            "CCCCCC=CC=CC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "HEXANAL",
+            "Cys"
+          ],
+          "products": [
+            "CCCCCC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R08_cysteine_thermolysis",
+          "depth": 1,
+          "reactants": [
+            "Cys"
+          ],
+          "products": [
+            "CC=O",
+            "AMMONIA",
+            "H2S"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_cys_h2s"
+          ]
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "Cys"
+          ],
+          "products": [
+            "NC(CSSCC(N)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "Cys"
+          ],
+          "products": [
+            "CCCCCC=CC(CC=O)SCC(N)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "Cys"
+          ],
+          "products": [
+            "CCCCCC=CC=CC(O)SCC(N)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "HEXANAL",
+            "Cys"
+          ],
+          "products": [
+            "CCCCCC(O)SCC(N)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "Cys"
+          ],
+          "products": [
+            "CCCCCC=CC=CC1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "HEXANAL",
+            "Cys"
+          ],
+          "products": [
+            "CCCCCC1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R33_dienal_ammonia_to_alkylpyridine",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "AMMONIA"
+          ],
+          "products": [
+            "PENTYLPYRIDINE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R34_dienal_h2s_to_alkylthiophene",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "H2S"
+          ],
+          "products": [
+            "HEXYLTHIOPHENE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R35_dienal_h2s_to_alkylthiapyran",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "H2S"
+          ],
+          "products": [
+            "PENTYLTHIAPYRAN"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 1,
+          "reactants": [
+            "DECADIENAL",
+            "AMMONIA"
+          ],
+          "products": [
+            "CCCCCC=CC=CC=N"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 1,
+          "reactants": [
+            "HEXANAL",
+            "AMMONIA"
+          ],
+          "products": [
+            "HEXANAL_IMINE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        }
+      ],
+      "products": [
+        {
+          "smiles": "CCCCCC(O)SCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC1NC(C(=O)O)CS1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC(CC=O)SCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC(O)SCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC1NC(C(=O)O)CS1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC=N",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC=NC(CS)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=NC(CS)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(N)C(=O)O)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC=O",
+          "first_depth": 1,
+          "kind": "registry",
+          "id": "acetaldehyde"
+        },
+        {
+          "smiles": "CCCCCC1C=CC=CS1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "PENTYLTHIAPYRAN"
+        },
+        {
+          "smiles": "CCCCCC=N",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "HEXANAL_IMINE"
+        },
+        {
+          "smiles": "CCCCCCc1cccs1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "HEXYLTHIOPHENE"
+        },
+        {
+          "smiles": "CCCCCc1ccccn1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "PENTYLPYRIDINE"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "mechanism_known": 11,
+          "modelled": 1,
+          "proposed": 2
+        },
+        "products": {
+          "new": 9,
+          "registry": 1,
+          "species": 4
+        }
+      }
+    },
+    {
+      "charge": "lipid_maillard_thiazoles",
+      "lane": "lipid",
+      "why": "Elmore 1997's pot: a lipid alkanal, a Maillard hydroxyketone, ammonia and hydrogen sulfide give the 2-alkyl-3-thiazolines and, oxidised, the registry's 2-alkyl-4-methylthiazoles; the dienal in the same charge shows where the H2S goes instead (Farmer 1990, Mottram 2002)",
+      "species": [
+        "HEXANAL",
+        "ACETOL",
+        "ACETOIN",
+        "AMMONIA",
+        "H2S",
+        "DECADIENAL"
+      ],
+      "depth": 3,
+      "steps": [
+        {
+          "rule": "R33_dienal_ammonia_to_alkylpyridine",
+          "depth": 1,
+          "reactants": [
+            "AMMONIA",
+            "DECADIENAL"
+          ],
+          "products": [
+            "PENTYLPYRIDINE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R34_dienal_h2s_to_alkylthiophene",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "DECADIENAL"
+          ],
+          "products": [
+            "HEXYLTHIOPHENE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R35_dienal_h2s_to_alkylthiapyran",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "DECADIENAL"
+          ],
+          "products": [
+            "PENTYLTHIAPYRAN"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R36_hydroxyketone_h2s_to_mercaptoketone",
+          "depth": 1,
+          "reactants": [
+            "ACETOL",
+            "H2S"
+          ],
+          "products": [
+            "MP"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R36_hydroxyketone_h2s_to_mercaptoketone",
+          "depth": 1,
+          "reactants": [
+            "ACETOIN",
+            "H2S"
+          ],
+          "products": [
+            "MERCAPTOBUTANONE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 1,
+          "reactants": [
+            "HEXANAL",
+            "AMMONIA"
+          ],
+          "products": [
+            "HEXANAL_IMINE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 1,
+          "reactants": [
+            "AMMONIA",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC=CC=N"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "MP",
+            "MP"
+          ],
+          "products": [
+            "CC(=O)CSSCC(C)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "MP",
+            "MERCAPTOBUTANONE"
+          ],
+          "products": [
+            "CC(=O)CSSC(C)C(C)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "MERCAPTOBUTANONE",
+            "MERCAPTOBUTANONE"
+          ],
+          "products": [
+            "CC(=O)C(C)SSC(C)C(C)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 2,
+          "reactants": [
+            "DECADIENAL",
+            "MP"
+          ],
+          "products": [
+            "CCCCCC=CC(CC=O)SCC(C)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 2,
+          "reactants": [
+            "DECADIENAL",
+            "MERCAPTOBUTANONE"
+          ],
+          "products": [
+            "CCCCCC=CC(CC=O)SC(C)C(C)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "HEXANAL",
+            "MP"
+          ],
+          "products": [
+            "CCCCCC(O)SCC(C)=O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "HEXANAL",
+            "MERCAPTOBUTANONE"
+          ],
+          "products": [
+            "CCCCCC(O)SC(C)C(C)=O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "DECADIENAL",
+            "MP"
+          ],
+          "products": [
+            "CCCCCC=CC=CC(O)SCC(C)=O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "DECADIENAL",
+            "MERCAPTOBUTANONE"
+          ],
+          "products": [
+            "CCCCCC=CC=CC(O)SC(C)C(C)=O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R38_mercaptoketone_aldimine_to_thiazoline",
+          "depth": 2,
+          "reactants": [
+            "MP",
+            "HEXANAL_IMINE"
+          ],
+          "products": [
+            "THIAZOLINE_2PE_4ME"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R38_mercaptoketone_aldimine_to_thiazoline",
+          "depth": 2,
+          "reactants": [
+            "MP",
+            "CCCCCC=CC=CC=N"
+          ],
+          "products": [
+            "CCCCCC=CC=CC1N=C(C)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R38_mercaptoketone_aldimine_to_thiazoline",
+          "depth": 2,
+          "reactants": [
+            "MERCAPTOBUTANONE",
+            "HEXANAL_IMINE"
+          ],
+          "products": [
+            "THIAZOLINE_2PE_45DM"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R38_mercaptoketone_aldimine_to_thiazoline",
+          "depth": 2,
+          "reactants": [
+            "MERCAPTOBUTANONE",
+            "CCCCCC=CC=CC=N"
+          ],
+          "products": [
+            "CCCCCC=CC=CC1N=C(C)C(C)S1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R39_thiazoline_to_thiazole",
+          "depth": 3,
+          "reactants": [
+            "THIAZOLINE_2PE_4ME"
+          ],
+          "products": [
+            "CCCCCc1nc(C)cs1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R39_thiazoline_to_thiazole",
+          "depth": 3,
+          "reactants": [
+            "THIAZOLINE_2PE_45DM"
+          ],
+          "products": [
+            "CCCCCc1nc(C)c(C)s1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        }
+      ],
+      "products": [
+        {
+          "smiles": "CCCCCC=CC=CC=N",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(C)S",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "MERCAPTOBUTANONE"
+        },
+        {
+          "smiles": "CC(=O)CS",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "MP"
+        },
+        {
+          "smiles": "CCCCCC1C=CC=CS1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "PENTYLTHIAPYRAN"
+        },
+        {
+          "smiles": "CCCCCC=N",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "HEXANAL_IMINE"
+        },
+        {
+          "smiles": "CCCCCCc1cccs1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "HEXYLTHIOPHENE"
+        },
+        {
+          "smiles": "CCCCCc1ccccn1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "PENTYLPYRIDINE"
+        },
+        {
+          "smiles": "CC(=O)C(C)SSC(C)C(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)CSSC(C)C(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)CSSCC(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC(O)SC(C)C(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC(O)SCC(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC(CC=O)SC(C)C(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC(CC=O)SCC(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC(O)SC(C)C(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC(O)SCC(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC1N=C(C)C(C)S1",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC1N=C(C)CS1",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC1N=C(C)C(C)S1",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "THIAZOLINE_2PE_45DM"
+        },
+        {
+          "smiles": "CCCCCC1N=C(C)CS1",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "THIAZOLINE_2PE_4ME"
+        },
+        {
+          "smiles": "CCCCCc1nc(C)c(C)s1",
+          "first_depth": 3,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCc1nc(C)cs1",
+          "first_depth": 3,
+          "kind": "registry",
+          "id": "2_pentyl_4_methylthiazole"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "mechanism_known": 18,
+          "proposed": 4
+        },
+        "products": {
+          "species": 8,
+          "new": 13,
+          "registry": 1
         }
       }
     },
@@ -2190,7 +3117,7 @@
           ],
           "products": [
             "CC=O",
-            "N",
+            "AMMONIA",
             "H2S"
           ],
           "placement": "modelled",
@@ -3033,6 +3960,84 @@
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "MGO",
+            "AMMONIA"
+          ],
+          "products": [
+            "CC(=O)C=N"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "GO",
+            "AMMONIA"
+          ],
+          "products": [
+            "N=CC=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "CC(N=CC=O)C(=O)O",
+            "AMMONIA"
+          ],
+          "products": [
+            "CC(N=CC=N)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "O=CC=NC(CS)C(=O)O",
+            "AMMONIA"
+          ],
+          "products": [
+            "N=CC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "CC=O",
+            "AMMONIA"
+          ],
+          "products": [
+            "CC=N"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R37_alkanal_ammonia_to_aldimine",
+          "depth": 2,
+          "reactants": [
+            "O=CCS",
+            "AMMONIA"
+          ],
+          "products": [
+            "N=CCS"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
         }
       ],
       "products": [
@@ -3068,12 +4073,6 @@
         },
         {
           "smiles": "CC(N=CC=O)C(=O)O",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
-          "smiles": "N",
           "first_depth": 1,
           "kind": "new",
           "id": null
@@ -3121,6 +4120,12 @@
           "id": "AKM"
         },
         {
+          "smiles": "N",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "AMMONIA"
+        },
+        {
           "smiles": "S",
           "first_depth": 1,
           "kind": "species",
@@ -3158,6 +4163,12 @@
         },
         {
           "smiles": "CC(=O)C(O)SCC=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C=N",
           "first_depth": 2,
           "kind": "new",
           "id": null
@@ -3283,6 +4294,12 @@
           "id": null
         },
         {
+          "smiles": "CC(N=CC=N)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
           "smiles": "CC(N=CC=NC(C)C(=O)O)C(=O)O",
           "first_depth": 2,
           "kind": "new",
@@ -3325,6 +4342,12 @@
           "id": null
         },
         {
+          "smiles": "CC=N",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
           "smiles": "CC=NC(C)C(=O)O",
           "first_depth": 2,
           "kind": "new",
@@ -3344,6 +4367,24 @@
         },
         {
           "smiles": "CC=NCC(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "N=CC=NC(CS)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "N=CC=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "N=CCS",
           "first_depth": 2,
           "kind": "new",
           "id": null
@@ -3477,13 +4518,13 @@
       ],
       "summary": {
         "steps": {
-          "mechanism_known": 46,
+          "mechanism_known": 52,
           "modelled": 3,
           "proposed": 24
         },
         "products": {
-          "new": 66,
-          "species": 4,
+          "new": 71,
+          "species": 5,
           "registry": 3
         }
       }
@@ -3651,7 +4692,7 @@
           ],
           "products": [
             "CC=O",
-            "N",
+            "AMMONIA",
             "H2S"
           ],
           "placement": "modelled",
@@ -4401,6 +5442,45 @@
           "engine_reactions": [
             "r_mgo_mp"
           ]
+        },
+        {
+          "rule": "R34_dienal_h2s_to_alkylthiophene",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "DECADIENAL"
+          ],
+          "products": [
+            "HEXYLTHIOPHENE"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R35_dienal_h2s_to_alkylthiapyran",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "DECADIENAL"
+          ],
+          "products": [
+            "PENTYLTHIAPYRAN"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R36_hydroxyketone_h2s_to_mercaptoketone",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "NF"
+          ],
+          "products": [
+            "CC1=C(S)C(=O)CO1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
         }
       ],
       "products": [
@@ -4436,6 +5516,12 @@
         },
         {
           "smiles": "CC(=O)C=NC(CS)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC1=C(S)C(=O)CO1",
           "first_depth": 1,
           "kind": "new",
           "id": null
@@ -4627,12 +5713,6 @@
           "id": null
         },
         {
-          "smiles": "N",
-          "first_depth": 1,
-          "kind": "new",
-          "id": null
-        },
-        {
           "smiles": "NC(=O)CCSCc1ccco1",
           "first_depth": 1,
           "kind": "new",
@@ -4777,6 +5857,18 @@
           "id": "MP"
         },
         {
+          "smiles": "CCCCCC1C=CC=CS1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "PENTYLTHIAPYRAN"
+        },
+        {
+          "smiles": "CCCCCCc1cccs1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "HEXYLTHIOPHENE"
+        },
+        {
           "smiles": "CSSc1ccoc1C",
           "first_depth": 1,
           "kind": "species",
@@ -4787,6 +5879,12 @@
           "first_depth": 1,
           "kind": "species",
           "id": "MFTD"
+        },
+        {
+          "smiles": "N",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "AMMONIA"
         },
         {
           "smiles": "NC(=O)CCSCC(N)C(=O)O",
@@ -4809,30 +5907,30 @@
       ],
       "summary": {
         "steps": {
-          "mechanism_known": 31,
+          "mechanism_known": 34,
           "modelled": 8,
           "proposed": 28
         },
         "products": {
           "new": 58,
-          "species": 7,
+          "species": 10,
           "registry": 2
         }
       }
     }
   ],
   "summary": {
-    "rules": 31,
-    "steps": 219,
+    "rules": 38,
+    "steps": 270,
     "steps_by_placement": {
-      "modelled": 25,
-      "mechanism_known": 128,
-      "proposed": 66
+      "modelled": 26,
+      "mechanism_known": 172,
+      "proposed": 72
     },
     "products_by_kind": {
-      "species": 50,
-      "new": 172,
-      "registry": 7
+      "species": 68,
+      "new": 203,
+      "registry": 9
     }
   }
 }

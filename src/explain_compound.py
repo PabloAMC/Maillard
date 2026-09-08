@@ -403,11 +403,20 @@ def _hypotheses_for(species_key: Optional[str], query: str) -> Dict[str, Any]:
     # a compound the engine has no species for may still be a LITERATURE structure the rules name
     # (data/species/literature_structures.yml, keyed by its registry id): match those keys too
     keys = {species_key} if species_key is not None else set()
-    if registry_id is not None:
+    if species_key is None:
         try:
+            import re
+
             from src.network_hypotheses import structures as _structures
 
-            keys |= {k for k, st in _structures.load().items() if st.registry_id == registry_id}
+            table = _structures.load()
+            if registry_id is not None:
+                keys |= {k for k, st in table.items() if st.registry_id == registry_id}
+            # a literature structure with no registry entry names itself in its note ("2-pentylpyridine,
+            # the fatty-green ..."): match the query as a whole word there, so a product only the rules
+            # know is still found and the answer is "no rate, not no route" rather than "no vocabulary"
+            pattern = re.compile(r"(?<![\w-])" + re.escape(query.strip().lower()) + r"(?![\w-])")
+            keys |= {k for k, st in table.items() if st.kind == "molecule" and pattern.search(st.note.lower())}
         except Exception:
             pass
     seen = set()
@@ -428,8 +437,8 @@ def _hypotheses_for(species_key: Optional[str], query: str) -> Dict[str, Any]:
             for product in charge.get("products", []):
                 if product.get("id") == registry_id:
                     reached_by.append(charge["charge"])
-            if any(s["charge"] == charge["charge"] and set(s["products"]) & keys for s in steps):
-                reached_by.append(charge["charge"])
+        if any(s["charge"] == charge["charge"] and set(s["products"]) & keys for s in steps):
+            reached_by.append(charge["charge"])
     return {
         "available": True,
         "artifact": "results/validation/network_hypotheses.json",

@@ -80,15 +80,18 @@ extraction dossiers) and the table gained two MEASURED entries beside the sequen
 
 | matrix | free thiol | disulfide | amine | what the spread is |
 |---|---|---|---|---|
-| soy isolate | 0.0067 (0.0047 to 0.0080) | 0.0457 (0.038 to 0.053) | 0.379 (lysine), 0.4 to 1.0 available | three isolates and two thiol reagents; the disulfide is half-cystine minus free thiol over two in every paper, not a direct assay |
-| pea isolate | 0.0159 (0.0021 to 0.0174) | 0.0257 (0.0042 to 0.0297) | 0.524 (lysine), 0.4 to 1.0 available | the centre is Gao 2020's whole isolate at three extraction pHs; Xiao 2024, Chen 2022 and Shen 2022 sit inside the band; the globulin fraction alone (Chihi 2016) carries a fifth |
+| soy isolate | 0.0067 (0.0047 to 0.0080) | 0.0457 (0.038 to 0.053) | 0.36 (lysine, 0.31 to 0.58), 0.4 to 1.0 available | three isolates and two thiol reagents; the disulfide is half-cystine minus free thiol over two in every paper, not a direct assay |
+| pea isolate | 0.0159 (0.0021 to 0.0174) | 0.0257 (0.0042 to 0.0297) | 0.47 (lysine, 0.40 to 0.70), 0.4 to 1.0 available | the centre is Gao 2020's whole isolate at three extraction pHs; Xiao 2024, Chen 2022 and Shen 2022 sit inside the band; the globulin fraction alone (Chihi 2016) carries a fifth |
 
 *(Later the same night, after the second batch of papers: Xiao 2024 added a third soy and a second pea
 isolate, and the book it sits in gives the amino-acid composition, so the amine pool is the lysine
 content per gram of protein with β-lactoglobulin's declared availability band. The TNBS free-amino
 numbers of that laboratory, 8 to 10 mmol/g, are twenty times the lysine content and are recorded as
 an artefact, not used. With an amine pool on file, hexanal, the enals and HMF now bind to the two
-isolates by the declared brackets; the "amine not on file" note is gone from their answers.)*
+isolates by the declared brackets; the "amine not on file" note is gone from their answers. Later
+still, two commercial-isolate papers (Jaeger 2023, Gorissen 2018) and one protein preparation
+(Tang 2024) gave lysine per gram of protein directly, and the centres moved from the flour values
+to the commercial-isolate means, 0.47 (pea) and 0.36 (soy), with the measured spread as the band.)*
 
 What this changed at first: a spec that names `soy_isolate` or `pea_isolate` with a loading charges
 the sulfur lane's disulfide pool from a dossier instead of refusing; at that point no paper gave an

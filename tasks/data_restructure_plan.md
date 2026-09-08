@@ -1438,6 +1438,174 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       (2-alkenal)/(alkanal) ratio 0.09 -> 0.56; Miyazaki's isomer-resolved area ratios (n = 1, no IS);
       the oleate isomer distribution (Choe & Min Table 1, second-hand from Frankel 1985: 26-28 / 22-25
       / 22-24 / 26-28 %). Registry fix: 1-octen-3-ol SMILES was C7 (off_flavour_targets.yml).
+- [ ] **B19 reading log (2026-09-08, Strecker cluster).** Six dossiers (huang2017, hidalgo2013, zamora2015,
+      weenen2001, parker2013, kocadagli2021): no per-amino-acid second-order Strecker constant in water yet.
+      Huang 2017 Leu/Ile: k1 (amino-acid loss) and k2 (intermediate -> aldehyde) at 100 C in 1/min, Ea2 83-121
+      kJ/mol, but concentrations unprinted (only the 10:1 ratio) and the printed Arrhenius lines miss Table 1
+      by 5-7x -> not convertible. Hidalgo 2013: Ea 38.2 (Phe + glyoxylic acid, a transamination, zero order,
+      levels figure-only). Zamora 2015: PEA/PAC split on 11 lipid carbonyls (air multiplies the aldehyde 6-9x;
+      Ea pairs cross) -> programme 7's lipid-carbonyl Strecker. Weenen 2001: yields at reflux, no rate.
+      Kocadagli 2021: within-study ratios only (5x Met/Ile/Leu/Val -> aldehydes 4.2-5.0x), SI not on disk.
+      Parker 2013 fetch list for the rate rows: Chan & Reineccius 1994 ref 16 (3-MB, PAC PZO rates + Ea, pH 6-8,
+      75-115 C), Cremer & Eichner 2000, Balagiannis 2009 JAFC, Desclaux 2006, Low 2007, Koutsidis 2008,
+      Jusino 1997. Registry gaps: 2-ethyl-3,6-dimethylpyrazine, 2,3-diethyl-5-methylpyrazine, 2,3-pentanedione,
+      3,4-hexanedione, formaldehyde, parent pyrazine; R07's SMIRKS excludes glycine -> formaldehyde.
+- [ ] **B19 reading log (2026-09-08, methionine chain).** Six dossiers (cheng2020, chin1994, schutte1972,
+      zhang2023, yu1995, tang2024). The chain methional -> methanethiol -> DMDS / DMTS is now documented but
+      only Chin & Lindsay 1994 gives OXIDANT-resolved kinetics: 41.6 uM MeSH, pH 6.3 phosphate, 30 C: Cu(II)
+      1 ppm removes 70 % in 30 min in air and 30 % under N2; Fe(III) 4 ppm < 15 % in 300 min; DMDS recovers
+      only 23-77 % of the lost MeSH (the rest non-volatile); NO DMTS without H2S, and ascorbate + Fe(III) with
+      1 ppm H2S gives 7x the DMTS (H2O2 / hydroxyl radical, benzoate -50 %, phytate -75 %). This is the
+      oxidant structure B17 named for the thiol dimers, measured on methanethiol. Schutte 1972: methional ->
+      MeSH needs a catalyst (ninhydrin high, pH 9 moderate, uncatalysed at pH 6 trace; ordinal). Zhang 2023
+      (storage at 50 C after a 115 C cook, pH 4.9): DMDS 133 -> 4086 ng/mL over 56 d in Met/Xyl (0.76 uM/d),
+      DMTS x127 in Met/TTCA (TTCA supplies the H2S), MeSH itself never measured. Yu 1995: one point at 180 C,
+      methional:DMDS 4.3 (Met) vs 0.03 (MetSO): the isolate methionine's oxidation state decides the split.
+      Cheng 2020: the 100 C time series exists but only as chromatograms (request the numbers). Still to
+      fetch: Pan 2025 (zero-order rates at 120 C, on the list). Registry: methional, methanethiol, DMDS,
+      DMTS exist; methionine, MetSO, MMFT, methyl furfuryl disulfide do not.
+      UPDATE 2026-09-09 (deng2022, monforte2021, pan2025, yao2025, zhang2024b read). Pan 2025 is the first
+      rate table on the chain: Met 0.268 mmol/L in a fruit-sugar pot (fructose 111 + glucose 83 + sucrose
+      44 mmol/L, citrate pH 6.2, sealed, 30-600 s), zero-order K for methional 1.82e-4 / 16.8e-4 / 89.9e-4
+      at 100 / 120 / 140 C, methanethiol 1.58e-4 / 2.34e-4 / 6.34e-4, DMDS 0.015e-4 / 0.070e-4 / 0.187e-4,
+      DMTS 0.026e-6 / 0.121e-6 / 0.054e-6 (UNIT NOT PRINTED; the two anchor levels 626 ug/L methional and
+      26 ug/L MeSH at 140 C / 600 s make it umol L-1 s-1); apparent barriers 125 / 44 / 81 kJ/mol; at 120 C
+      MeSH accrues at 14 % of the methional rate, DMDS at 3 % of MeSH's, DMTS at 2 % of DMDS's -- in a sealed
+      pot without oxidant the disulfides are a small sink, which is B17's oxidant-limited picture on a
+      second thiol. Pseudo-first-order in Met (dicarbonyl supply steady, my assumption): 3.8e-4 1/min at
+      120 C. Deng 2022 (Met + Glc 200 + 200 mM, pH 7.5, 120 C, RF = 1): methional 18.5 / 25.3 / 75.8 / 87.8 /
+      77.7 ug/L at 30-240 min, from the Met Amadori compound 1.4-2.6x more and peaking at 120 min then
+      falling (apparent loss >= 6.9e-3 1/min); parent pyrazine 0.09 umol/L in 120 min, two hundred times
+      below Zhou 2024's fed-glyoxal pot: the sugar pot's dicarbonyl supply, not the condensation, limits
+      pyrazine yield (B18's supply caveat measured in the same laboratory). Monforte 2021: phenylacetaldehyde
+      Ea 73.5 +/- 0.8 kJ/mol, but on the o-quinone / Fe / Cu / O2 route at pH 3.4 (wine), Weibull release
+      constants 0.014-0.354 1/min from 40 to 80 C, pH 3.4 -> 7 only x1.2; NOT the R07 barrier. Yao 2025
+      (tea): methional alone at 100 C gives DMDS, DMTS, bis(methylthio)methane and methyl (methylthio)methyl
+      disulfide (a product-set constraint without sugar), EGCG consumes methional completely; all time
+      courses figure-only (SI not on disk); DMTS threshold 0.4 ug/L in green tea. Zhang 2024b (the
+      MMFT / Met + thiamine + xylose paper, Food Chem. 2024, re-read against the older Zhang2024 dossier):
+      the 8.7 % (Cys arm) and 54.2 % (cystine arm) MFT-dimer shares that B17's T3 uses as measured targets
+      are 300-dpi figure read-offs; the printed text supports only the ORDERING cystine > Cys = GSH and
+      "dimer rises with additive"; the MMFT zero-order constants (0.0028 / 0.0031) carry no printed unit or
+      run length. DEFECT: re-label the Zhang 2024 target in `generate_kinetic_core_b17_ship_rule.py` and the
+      B17 prereg sec. 6 as figure-derived (Zhou 2023's 6.5-9.6 % stays measured), or request the raw data
+      ("upon reasonable request"). Consequence for programme
+      6: Pan 2025 + Chin & Lindsay 1994 + Deng 2022 are enough to pre-register a methionine arm (methional
+      formation zero-order in a sugar excess, MeSH release, an oxidant-gated dimerisation) once the unit
+      of Pan's table is settled by the authors or by the anchor levels; per-amino-acid Strecker constants
+      on glyoxal / methylglyoxal in water are still missing (Chan & Reineccius 1994 ref 16, Cremer &
+      Eichner 2000, Balagiannis 2009 not on disk).
+- [ ] **Programme 7 reading log (2026-09-08, tang2024).** Lysine before heating: soy protein 84.2, pea protein
+      101.7 mg per g protein = 0.576 / 0.696 mmol/g protein (preparations at 78 % protein), above the flour
+      values the matrix table carries (0.379 / 0.524); glucose 4:1 w/w, wet 85 C / 30 min: lysine -22 % (soy)
+      / -8 % (pea), furosine +1.4 / +1.9 mg/g protein, CML x1 / x2, CEL x2; dry 60 C, aw 0.6, 48 h: lysine
+      -47 / -49 %, CML x12 / x48, CEL x9 / x16. All single end points (no rate); NT/W/D absolutes for
+      furosine, CML, CEL figure-only. Table centre for the amine pool to be reset when Gorissen 2018 and
+      Jaeger 2023 (commercial isolates) are read, with a band spanning flour to Tang.
+- [ ] **Programme 7 reading log (2026-09-08, isolate composition: jaeger2023, gorissen2018, sagesser2024).**
+      Matrix table amine pool reset to commercial isolates: pea 0.47 (Jaeger 0.539 +/- 0.075, Gorissen 0.40;
+      band 0.40-0.70 with Tang 0.696), soy 0.36 (Jaeger 0.410, Gorissen 0.31; band 0.31-0.58 with Tang 0.576)
+      mmol Lys per g protein. Jaeger 2023 also gives what programme 7 needs for the FREE pools: pea isolate
+      free amino acids total 0.079 g/100 g DM (0.0049 mmol/g powder, ~1 % of bound lysine; Arg 0.053, no free
+      Lys), soy isolate every free amino acid n.d.; free sugars (sucrose + glucose + fructose + maltose, one
+      sum) 0.19 / 0.06 g/100 g DM; fat 8.51 / 1.72 %; N x 6.25 protein 81.2 / 89.2 %. Sagesser 2024:
+      everything in raster figures; its total amino-acid table is Sagesser 2023 Bioresour. Technol. 390:129849
+      (Nutralys F85M, the material behind Snel 2023's binding constants) -> fetch.
+      DEFECT FOUND: `data/benchmarks/maillard_validation_benchmarks.md` sec. 2.3 and
+      `docs/protocols/{pea,soy}_matrix_meaty_benchmark.md` attribute Lys ~7.2 / ~6.4, Cys ~0.9 / ~1.1,
+      Met ~0.9 / ~1.3 g per 100 g protein and an Asn + Asp column to Gorissen 2018; none of those numbers is
+      in the paper (its lysine is 5.9 / 4.6 % of protein). To correct with the dossier's values and the
+      citation gate re-run; not edited tonight.
+- [ ] **B19 reading log (2026-09-08, roasty heterocycles: blank2003, hofmann1998b, adams2008, shu1999,
+      cerny1994, vanlancker2012).** FIT-able rows found: Hofmann 1998b fed 1-pyrroline (2 mM, 0.5 M phosphate,
+      100 C, 30 min, SIDA) + MGO -> 2-acetyl-1-pyrroline 28.7 mol % (MGO 5x), 5.3 % (1:1); + hydroxyacetone ->
+      ATHP < 0.008 / 0.07 / 0.86 / 3.07 % at pH 3 / 5 / 7 / 9; proline 400 mM + MGO 4 / 40 / 400 mM -> AP
+      0.0058 / 0.0125 / 0.0179 mol % (apparent bilinear AP ~9e-4, ATHP ~1.4e-4 L/(mmol min), lower bounds,
+      the dossier's). Blank 2003: Glc + Pro 100 + 100 mM, 0.2 M phosphate, reflux 2 h, IDA: AP 0.0022 /
+      0.0032 / 0.0030 and ATHP 0.010 / 0.036 / 0.009 mol % at pH 6 / 7 / 8 (validation levels; time courses
+      figure-only). Cerny 1994 (SIDA, 180 C dry): MGO + Ala -> 2-ethyl-3,6-DMP (I) 0.094, 2-ethyl-3,5-DMP (II)
+      0.0099 mol % of Ala, I:II 9.5-18.6 => ~95-97 % aminoacetone in the aminoketone pool; no alanine => none:
+      the aldehyde-addition step needs acetaldehyde from alanine. Adams 2008 (Ala + MGO ~850 mM, calibrated):
+      2,5(6)-DMP 0.02 mol % at 130 C pH 7 vs 0.042 at pH 4 -- the OPPOSITE pH sign to B18's slope, at a 40x
+      higher MGO and with the pyrrole sink dominant; recorded against B18 as a regime to check, not merged.
+      Van Lancker 2012: peptides give 8-34x the DMP of free amino acids with MGO at 130 C (peak areas), no
+      Strecker aldehyde adducts (no decarboxylation) -> programme 7's peptide amine. Registry fix made:
+      2_ethyl_3_5_dimethylpyrazine SMILES was the 3,6-isomer (desirable_targets.yml corrected, InChIKey
+      JZBCTZLGKSYRSF). Species the wave needs rows for: 1-pyrroline, 2-acetyl-1-pyrroline, ATHP,
+      hydroxyacetone, aminoacetone, 2-ethyl-3,6-dimethylpyrazine, acetaldehyde (exists).
+- [ ] **Programme 7 reading log (2026-09-08, lipid-Maillard I: zamora2020, kim1998, zhou2000, du2023).** Rule R33
+      written (2,4-alkadienal + NH3 -> 2-alkylpyridine; positive controls decadienal -> 2-pentylpyridine and
+      nonadienal -> 2-butylpyridine; AMMONIA, PENTYLPYRIDINE, BUTYLPYRIDINE, NONADIENAL_24 as literature
+      species; charge `lipid_maillard_cross`). Numbers: Zamora 2020 2-pentylpyridine 14.68 +/- 0.58 umol/mmol
+      Gln (0.29 % of the dienal) on silica at 180 C, homologue series C6-C10 dienal 34.1 -> 14.7; Zhou 2000
+      soy isolate baseline 0.14-0.21 ppm, + 5.64 mM dienal 2.0-2.6, + 8.05 mM NH3 4.2-4.6, at room temperature,
+      pH 9 > 7 > 4.5, isotopes fix the atoms (dienal C5 -> ring C2, N from NH3); Kim 1998 all pyridine data
+      figure-only, ammonia ratios only (oil/water 0.078 for Gln); Du 2023 (Cys + Glc + 10 mM C9 aldehyde,
+      150 C, RF = 1): 2-pentylthiophene 238.65 ug/L from the 2,4-dienal only, 2-butylpyridine 191, thiazole
+      sum x3 with the dienal, and NO 2-pentyl- or 2-hexyl-4-methylthiazole in any system. No rate anywhere;
+      the isolate's own dienal and ammonia never measured. Registry gaps: 2-pentylpyridine, 2-pentylthiophene,
+      2-hexylthiophene, 2-butylpyridine, ammonia.
+- [ ] **Programme 7 reading log (2026-09-08, glycation kinetics: nguyen2016, troise2015, berk2021, quan2020).**
+      FIRST RATES for protein-bound lysine, Nguyen 2016 (casein 30 g/L, glucose or lactose 10:1, 0.1 M
+      phosphate pH 6.8, 120 / 130 C, SIDA): sugar + Lys -> Amadori k3 1.5-1.7e-4 L/(mmol min); Amadori -> CML
+      k7 8.8e-3 / 6.0e-3 1/min; Amadori -> CEL k9 2.3e-3 / 2.0e-3; CML loss k11 0.29 / 0.077 (k7 and k11
+      correlated: carry the pair); no barriers (two temperatures). STRUCTURAL: the glyoxal -> CML route fitted
+      to ZERO in Nguyen 2016 AND in Berk 2021 (sesame) -- the opposite of parameters_dicarbonyl.py's "glyoxal
+      is the CML precursor" docstring; CML comes from the Amadori compound in both. Berk 2021 (sesame,
+      180-220 C, no aw): FL -> CML k8 5.5 / 29 / 62 e-3 1/min, Ea 113 kJ/mol; MGO + bound Lys -> CEL Ea 92;
+      five negative barriers elsewhere (missing steps), constants per kg seed. Troise 2015: soybean at 110 C,
+      lysine 3.45 -> 2.60 g/100 g protein in 60 min (apparent 4.7e-3 1/min, two-point), furosine peak at
+      30 min, CML + CEL = 6 % of lysine lost; SIDA method with LOD/LOQ. Quan 2020 (pre-proof): rate table
+      stays REFUSED (no units); glyoxal LEVELS in Lys + Glc at pH 7: 0.052-0.127 mM (100 C), 0.144-0.605 mM
+      (130 C), an early maximum then decline at 130 C -> B18's dicarbonyl question, order of magnitude only
+      (derivatising charge as printed is 500x below the glyoxal measured). Registry gaps: glyoxal,
+      methylglyoxal, 3-DG, 1-DG, fructoselysine, protein-bound lysine.
+- [ ] **Programme 7 reading log (2026-09-09, lipid-Maillard II: mottram2002b, farmer1990, whitfield1988,
+      elmore1997).** Rules R34-R39 written with controls (thiophene / thiapyran pair on the 2,4-dienal +
+      H2S substructure; hydroxyketone + H2S -> mercaptoketone; alkanal + NH3 -> aldimine; mercaptoketone +
+      aldimine -> 2-alkyl-3-thiazoline; thiazoline -> thiazole), eleven literature species, charge
+      `lipid_maillard_thiazoles` (depth 3) that reaches the registry's 2-pentyl-4-methylthiazole and
+      2-hexyl analogue. Numbers: Farmer 1990 (Cys + ribose + 1 % lipid, 140 C, relative areas none / BTG /
+      lecithin / PC / PE): 2-pentylthiapyran 0 / 35 / 3150 / 34700 / 12500, 2-hexylthiophene 0 / 0 / 184 /
+      1220 / 436, 2-pentylpyridine 0 / 26 / 279 / 5210 / 429; MFT falls to 0.40 / 0.15 / 0.27 / 0.24 of the
+      no-lipid pot, FFT flat at 0.62-0.72, mercaptoketones halved by every phospholipid, thiazoles and
+      pyrazines unchanged. Whitfield 1988 (15 g/L lecithin): MFT 2595.8 -> 872.6 ng (3.0x), FFT 2.0x,
+      2-thiophenethiol 3.4x, methylpyrazine 1.7-3.3x with all three amino acids; 2-pentylpyridine only with
+      cysteine (194.7 ng vs Gly 9.0, Lys 1.9: free NH3 is the donor). Mottram 2002 (FAME pots): linolenate
+      gives C1-C3 thiapyrans (2-ethylthiapyran 399 ng per 0.5 mmol), linoleate C3-C6 thiophenes (7-21 ng);
+      pure dienal + H2S up to 100:1 thiapyran : thiophene, the Cys + ribose + linoleate pot the reverse, so
+      NO branch ratio encoded. Elmore 1997 (alkanal + hydroxyketone + (NH4)2S, 140 C, area %): 3-thiazolines
+      15-42 %, thiazole / thiazoline 0.002-0.05 in hydroxyketone pots and about 1 in dione pots (dione route
+      needs no oxidant); 2-pentylthiophene 21 % from 2,4-nonadienal. THE SINK NUMBER for a lipid-carrying
+      isolate: the thiols fall 2-4x at 6-15 g/L phospholipid, the dienal + H2S adducts are the sink; W7's
+      variant (a) should read this before enlarging any oxygen reservoir. Not written: Farmer's alkanol + H2S
+      -> alkanethiol (asserted, not shown), Elmore's trialkylpyridine (three reactants), the enal
+      thiophenone. Registry gaps: 2-hexylthiophene, 2-pentylthiophene, the thiapyrans, the 3-thiazolines.
+- [ ] **B18 dicarbonyl reading log (2026-09-09: xia2022, yu2020, hamzalioglu2026).** Aqueous Amadori
+      kinetics to set the pyrazine step's supply against. Xia 2022 (Glc + Gly 200 + 200 mM, no buffer,
+      100-130 C): Amadori formation 0.060 -> 0.430 mmol/(L min), Ea 84.8 (trunk 96.8 at pH 6.8 phosphate;
+      Yu 2018 64.8 at pH 10: barrier falls with pH, buffer confounded); Amadori -> 3-DG 0.0131 / 0.0357
+      mmol/(L min) at 120 / 130 C, -> 1-DG 0.0055 / 0.0094 (semi-quantitative), GO >> MGO at 130 C in the
+      glycine pot (figure-only ratio). Yu 2020 (Glc + Lys 150 + 150 mM, 0.1 M phosphate pH 7, 100-120 C,
+      multiresponse): Ea Amadori 89.6 +/- 4.3, -> 3-DG 83.4 +/- 5.9, -> MGO 112.8 +/- 5.3 (trunk 97.1 /
+      124.5: same 27-30 kJ/mol gap in both laboratories), MGO + Lys -> melanoidin Ea 110.2 (the only MGO-sink
+      barrier in a lysine pot), 1-DG not detected at pH 7, time unit of the rate constants unresolved (do
+      not use the k values). Hamzalioglu 2026 (whole milk, lactose + casein lysine, 110-140 C, per kg dry
+      matter): Amadori -> 3-DG Ea 64 +/- 20, -> glucosone 76 +/- 21 (the only aqueous Amadori -> glucosone
+      entry), 1-DG -> diacetyl Ea 18.9 +/- 7.9; the glyoxal sink fits to ZERO at all four temperatures and
+      the 3-DG sink to zero above 110 C; GO + Lys -> CML 1000-10000x below the Amadori route (agrees with
+      nguyen2016 / berk2021 against the parameters_dicarbonyl docstring); dicarbonyl levels 3-DG 51, 1-DG 12,
+      MGO 10, GO 14 umol/kg dm. Constants do not transfer (lactose, bound lysine, 30 s sampling artefacts);
+      barriers and the no-sink finding do. Consequence for B18's glyoxal-sink conditionality (0.59 dex): the
+      aqueous data want a SMALLER glyoxal sink than the trunk's 180 C value, not a larger one.
+- [ ] **B17 oxygen reading log (2026-09-09: xu2010).** Ribose + cysteine 50 + 50 mM, pyrophosphate pH 5.6,
+      140 C, 60 min under air, 10-40 MPa N2 or 10-40 MPa CO2 (HS-SPME, RF = 1): MFT 7.2 (air), 7.0-7.4 (N2),
+      34.6-58.1 (CO2) ng/mL; bis(2-methyl-3-furyl) disulfide 3.0 / 2.9-4.0 / 18.6-30.6; dimer share of
+      MFT-equivalents 29.6 % (air), 28.9-35.3 % (N2), 33.5-37.1 % (CO2). An inert pressurising gas changes
+      neither the thiol nor the disulfide: the oxidant is internal to the pot (dicarbonyls, cystine
+      exchange) or the dimer forms during sampling; it is not the dissolved oxygen the B11 reservoir stands
+      for. Together with farmer1990 / whitfield1988 above this fixes W7's next variant: an internal oxidant
+      charged from the sugar side, not a bigger oxygen pool. No rate, no barrier (one time, one temperature).
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

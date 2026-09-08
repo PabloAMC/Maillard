@@ -19,6 +19,18 @@ CHARGES: Dict[str, Dict[str, Any]] = {
     "asparagine_glucose": {"species": ["Asn", "Glc"], "lane": "acrylamide", "why": "the acrylamide lane's pot (De Vleeschouwer)"},
     "linoleate_hydroperoxides": {"species": ["LOOH_13_ct", "LOOH_9_ct", "LOOH_10"], "lane": "lipid",
                                  "why": "the lipid lane's hydroperoxide pool (Frankel 1989) and the 10-hydroperoxide it lacks (Miyazaki 2023)"},
+    "lipid_maillard_cross": {
+        "species": ["DECADIENAL", "HEXANAL", "AMMONIA", "H2S", "Cys"],
+        "lane": "lipid",
+        "why": "the fatty aldehydes an isolate's lipid makes, with the ammonia and hydrogen sulfide the Maillard side supplies: the cross products no lane names (Zamora 2020, Zhou 2000, Du 2023)",
+        "depth": 1,
+    },
+    "lipid_maillard_thiazoles": {
+        "species": ["HEXANAL", "ACETOL", "ACETOIN", "AMMONIA", "H2S", "DECADIENAL"],
+        "lane": "lipid",
+        "why": "Elmore 1997's pot: a lipid alkanal, a Maillard hydroxyketone, ammonia and hydrogen sulfide give the 2-alkyl-3-thiazolines and, oxidised, the registry's 2-alkyl-4-methylthiazoles; the dienal in the same charge shows where the H2S goes instead (Farmer 1990, Mottram 2002)",
+        "depth": 3,
+    },
     "oleate_hydroperoxides": {
         "species": ["OL_8_OOH", "OL_9_OOH", "OL_10_OOH", "OL_11_OOH"],
         "lane": "lipid",

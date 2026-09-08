@@ -90,7 +90,9 @@ slice along the coordinate is flat to four decimals over two decades either side
 - **T2 failed**, as in B16: the fed-ribose MFT row moves +1.90 dex; 16 B9 rows move more than 0.3 dex.
 - **T3 failed, and this is the finding.** The model's dimer shares are 0.04 / 0.35 / 0.90 % of the
   free thiol at pH 6 / 7 / 8 in Zhou 2023's pot (measured 8.6 / 6.5 / 9.6 %) and 0.39 % in Zhang
-  2024's cysteine arm (measured 8.7 %): ten to two hundred times too little disulfide, with both
+  2024's cysteine arm (measured 8.7 %; a later re-read of the paper's text, `zhang2024b_extraction.md`,
+  finds this share is a figure read-off and the printed text supports only the ordering cystine >
+  cysteine = glutathione, so Zhou 2023's shares carry the comparison): ten to two hundred times too little disulfide, with both
   dimerisation constants already on the upper edge of their bands. The dimerisation is not
   rate-limited; it is oxidant-limited. The ambient oxidant pool the lane charges (the B11 reservoir
   shipped inert) runs out, so the disulfide channel cannot hold the 7 to 10 % of the thiol the two

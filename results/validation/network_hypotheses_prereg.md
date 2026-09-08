@@ -122,3 +122,24 @@ dihydrofuran intermediate R31 assumes and draws R32's scission for the 10-hydrop
 now cite it as corroboration beside Miyazaki 2023. Its twenty barriers are DFT and are recorded as
 inadmissible. Rules and steps unchanged: 31 rules, 219 steps.*
 
+*Second night (the lipid-Maillard cross products; twelve dossiers: zamora2020, kim1998, zhou2000,
+du2023, mottram2002b, farmer1990, whitfield1988, elmore1997 and the four dicarbonyl papers logged
+in the backlog). Seven more rules, R33 to R39, each with positive and negative controls: the
+2,4-dienal + ammonia to 2-alkylpyridine route (Zhou 2000's isotopes fix the atoms), the pair of
+regiochemistries of hydrogen sulfide on the same dienal (1,4-addition to the 2-alkylthiophene,
+1,6-addition to the 2-alkyl-2H-thiapyran; Farmer 1990 Figure 1, Mottram 2002 Figure 3; no branch
+ratio is encoded because the two laboratories find opposite ratios), and Elmore 1997's four-step
+thiazoline route (hydroxyketone + H2S to the mercaptoketone, alkanal + NH3 to the aldimine, the two
+to the 2-alkyl-3-thiazoline, oxidation to the thiazole) written as four rules because the
+enumerator takes at most two reactants. Two new charges: `lipid_maillard_cross` (2,4-decadienal,
+hexanal, ammonia, H2S, cysteine, depth 1) and `lipid_maillard_thiazoles` (hexanal, acetol, acetoin,
+ammonia, H2S, 2,4-decadienal, depth 3), the second reaching the registry's
+2-pentyl-4-methylthiazole and its 2-hexyl analogue at depth 3. `explain` now also matches a
+literature species by the name in its own note, so 2-pentylpyridine and 2-hexylthiophene, which no
+registry row names, answer "no rate, not no route" instead of "no vocabulary entry". 38 rules, 270
+steps (26 modelled, 172 mechanism known, 72 proposed); T1 to T4 unchanged; every control passes.
+One registry correction fell out of the roasty reading: 2-ethyl-3,5-dimethylpyrazine's SMILES was
+the 3,6-isomer against its own InChI, fixed at the source. What these rules do not carry, and the
+backlog records: Farmer's alkanol + H2S to alkanethiol (asserted, not shown), Elmore's
+trialkylpyridine (three reactants), the enal thiophenone, and any rate.*
+
