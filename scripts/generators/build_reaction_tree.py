@@ -45,13 +45,11 @@ OUT = ROOT / "docs" / "assets" / "thiol_sink"
 V = data_paths.VALIDATION_DIR
 INK, MUTED = "#1E2A2C", "#5E6B6E"
 HIDDEN = {"FRAG_C", "FRAG_N", "FRAG_S", "CBX", "ACID", "OLG", "OX", "OXR", "OXV", "MELE", "PROT_SS", "PRB", "MEL_N", "MEL"}
-STATUS_STYLE = {
-    "measured directly, with its temperature dependence": ("#2B5DA8", "-", 2.0),
-    "fitted at 145 °C and identified; temperature dependence NOT measured": ("#178F6E", "-", 2.0),
-    "fitted, identified, with its temperature dependence": ("#35A383", "-", 2.0),
-    "fitted but not identified (left on its band)": ("#D9822B", "--", 2.0),
-    "fitted in an earlier calibration and frozen since": ("#8A6BBF", "-", 1.6),
-    "only a timescale bracket is known": ("#9AA6A3", "--", 1.4),
+STATUS_STYLE = {   # the same scale as the field scheme in build_thiol_sink_figures.FIELD_STATUS
+    "rate known at several temperatures (measured, or fitted with its barrier)": ("#2B5DA8", "-", 2.0),
+    "rate known at one temperature only (fitted at 145 °C; no measured barrier)": ("#178F6E", "-", 2.0),
+    "carried from an earlier calibration, not re-examined": ("#9AA6A3", "-", 1.6),
+    "only a band or a bracket is known": ("#D9822B", "--", 2.0),
     "no rate constant (instantaneous or lumped)": ("#C9D0CD", "-", 1.0),
 }
 NODE_FILL = {"good": "#D9EFE3", "mid": "#FBE9D0", "bad": "#F6D9D9", "none": "#F2F3F1"}
@@ -87,28 +85,27 @@ def constant_status(lane: str) -> Dict[str, str]:
         if ec in ("measured_rate", "measured_activation_energy"):
             out[key] = S[0]
         elif ec == "bounded_from_a_timescale_bracket":
-            out[key] = S[5]
+            out[key] = S[3]
         elif ec == "derived_from_fit_data":
             if lane == SULFUR:
                 if key in fit_free:
-                    # the rate is pinned at 145 C; the shared formation / sink barriers are NOT identified (B8 review, B16)
                     out[key] = S[1] if identified.get(key, False) else S[3]
                 else:
-                    out[key] = S[4]
+                    out[key] = S[2]
             else:
                 r = reason.get(key, {})
                 rate = next((v for k, v in r.items() if "log10_k" in k), "")
                 ea = next((v for k, v in r.items() if "ea" in k), "")
                 if not r:
-                    out[key] = S[4]
+                    out[key] = S[2]
                 elif "unidentified" in rate or "drawn" in rate:
                     out[key] = S[3]
                 elif ea and ("unidentified" in ea or "drawn" in ea):
                     out[key] = S[1]
                 else:
-                    out[key] = S[2]
+                    out[key] = S[0]
         else:
-            out[key] = S[6]
+            out[key] = S[4]
     return out
 
 
@@ -206,7 +203,7 @@ def draw_lane(reactions, species_list, lane: str, title: str, fname: str, figsiz
     G = nx.DiGraph()
     edges = []
     for r in reactions:
-        none = list(STATUS_STYLE)[6]
+        none = list(STATUS_STYLE)[4]
         st = status.get(r.parameter_key, none) if r.parameter_key else none
         visible_products = [b for b in r.products if b not in HIDDEN]
         for a in r.reactants:
@@ -259,7 +256,7 @@ def draw_lane(reactions, species_list, lane: str, title: str, fname: str, figsiz
             counts[st] += 1
     handles = [plt.Line2D([0], [0], color=c, ls=ls, lw=lw, label=f"{s} ({counts.get(s, 0)})") for s, (c, ls, lw) in STATUS_STYLE.items()]
     handles += [plt.Rectangle((0, 0), 1, 1, fc=NODE_FILL[q], ec=NODE_EDGE[q], label=t)
-                for q, t in (("good", "measured on the panel, within 3x"), ("mid", "3-10x off"), ("bad", "more than 10x off"), ("none", "not measured on the panel"))]
+                for q, t in (("good", "predicted within 3x where measured"), ("mid", "3-10x off"), ("bad", "more than 10x off"), ("none", "not measured on the panel"))]
     ax.legend(handles=handles, loc="lower left", fontsize=8, frameon=False, ncol=2, title="arrows: how the step's rate constant is known · boxes: how well the panel's measurements of the species are predicted", title_fontsize=8)
     ax.set_title(title, loc="left", fontsize=12, color=INK)
     fig.tight_layout()
@@ -284,7 +281,7 @@ def fig_summary(counts_by_lane: Dict[str, Dict[str, int]]) -> None:
         ax.spines[side].set_visible(False)
     ax.set_xlabel("reaction steps")
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.22), fontsize=8, frameon=False, ncol=2)
-    ax.set_title("How each path's steps are known", loc="left", fontsize=11)
+    ax.set_title("How each path's steps are known (same colours as the chemistry figure)", loc="left", fontsize=11)
     fig.tight_layout()
     fig.savefig(OUT / "13_steps_by_status.png", bbox_inches="tight")
     plt.close(fig)

@@ -385,11 +385,11 @@ def fig_repo_flow() -> None:
 # What the FIELD knows (docs/guides/INTRODUCTION.md, sec. 1-2): the accepted scheme, annotated by
 # how well each part has been measured in the published literature the repository has read.
 # ---------------------------------------------------------------------------
-FIELD_STATUS = {
-    "rates at several temperatures": ("#2B5DA8", "-", 2.4),
-    "rates or yields at one temperature": ("#178F6E", "-", 2.0),
-    "mechanism only (labelling, products)": ("#9AA6A3", "-", 1.6),
-    "measured once, at 121 °C; temperature dependence and reversibility open": ("#B23A3A", "--", 2.0),
+FIELD_STATUS = {   # the same scale the reaction trees use (build_reaction_tree.STATUS_STYLE)
+    "rate known at several temperatures": ("#2B5DA8", "-", 2.4),
+    "rate or yield known at one temperature": ("#178F6E", "-", 2.0),
+    "mechanism known, no rate (labelling, products)": ("#9AA6A3", "-", 1.6),
+    "open: one measurement at 121 °C, no temperature dependence": ("#B23A3A", "--", 2.0),
 }
 
 
@@ -544,6 +544,81 @@ def fig_how_a_model_works() -> None:
     plt.close(fig)
 
 
+def fig_papers_weight() -> None:
+    """Which papers the model takes the most from: fit rows, benchmark pots and directional claims per paper,
+    counted from the frozen generators' row anchors, the paper registry and the claims panel."""
+    import re
+    from collections import Counter
+
+    import yaml
+
+    pat = re.compile(r"\b([A-Z][a-zA-Z\-]+)(?: et al\.?| & (?:van |de |De )?[A-Z][a-zA-Z]+| and [A-Z][a-zA-Z]+)? ((?:19|20)\d{2})\b")
+    rows: Counter = Counter()
+    seen_anchors = set()       # the wave generators re-import earlier rows: count each anchor string once
+    for f in sorted((ROOT / "scripts" / "generators").glob("generate_kinetic_core_b*_fit.py")):
+        text = f.read_text(encoding="utf-8")
+        for m in re.finditer(r'anchor\s*=\s*\(?((?:\s*f?"[^"]*"\s*\+?)+)', text):
+            s = " ".join(re.findall(r'"([^"]*)"', m.group(1)))
+            if s in seen_anchors:
+                continue
+            seen_anchors.add(s)
+            for a, y in set(pat.findall(s)):
+                rows[f"{a} {y}"] += 1
+    panel = yaml.safe_load((ROOT / "docs" / "validation" / "directional_claims_panel.yml").read_text(encoding="utf-8"))
+    claims: Counter = Counter()
+    for c in panel["panel"]:
+        ref = (c.get("source") or {}).get("ref") or ""
+        m = re.match(r"([a-z\-]+)(\d{4})", ref)
+        if m:
+            claims[f"{m.group(1).capitalize()} {m.group(2)}"] += 1
+    reg = yaml.safe_load((ROOT / "data" / "keys" / "papers.yml").read_text(encoding="utf-8"))["papers"]
+    pots: Counter = Counter()
+    for p in reg:
+        n = sum(len(v) for k, v in p["record_ids"].items() if k.startswith("data/benchmarks"))
+        if not n:
+            continue
+        cit = p.get("citation") or ""
+        m = pat.search(cit) or re.match(r"([a-z]+)_?(?:[a-z]+_)*?(\d{4})", p["paper_id"])
+        if m:
+            pots[f"{m.group(1).capitalize()} {m.group(2)}"] += n
+    consts: Counter = Counter()      # rate constants whose registry entry names the paper in its source string
+    for f in ("parameters.py", "parameters_furanic.py", "parameters_dicarbonyl.py", "parameters_sulfur.py", "parameters_acrylamide.py",
+              "parameters_lipid.py", "trunk_conditions.py", "acrylamide_conditions.py"):
+        path = ROOT / "src" / "kinetic_core" / f
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for m in re.finditer(r'source(?:_anchor)?\s*=\s*\(?\s*((?:f?"[^"]*"\s*\+?\s*)+)', text):
+            s = " ".join(re.findall(r'"([^"]*)"', m.group(1)))
+            for a, y in set(pat.findall(s)):
+                consts[f"{a} {y}"] += 1
+    total = lambda k: rows[k] + claims[k] + pots[k] + consts[k]
+    papers = sorted(set(rows) | set(claims) | set(pots) | set(consts), key=lambda k: -total(k))[:12]
+    fig, ax = plt.subplots(figsize=(9.6, 5.0))
+    y = range(len(papers))
+    left = [0] * len(papers)
+    for label, counter, colour in (("rate constants taken from the paper", consts, "#8A6BBF"), ("rows the model was tuned on", rows, "#1E2A2C"),
+                                   ("benchmark pots it is scored on", pots, "#2B5DA8"), ("statements of direction it is scored on", claims, "#4F80D0")):
+        vals = [counter[p] for p in papers]
+        ax.barh(list(y), vals, left=left, color=colour, height=0.62, label=label)
+        left = [a + b for a, b in zip(left, vals)]
+    for i, p in enumerate(papers):
+        ax.text(left[i] + 0.6, i, str(left[i]), va="center", fontsize=8.5, color=INK)
+    ax.set_yticks(list(y))
+    ax.set_yticklabels(papers)
+    ax.invert_yaxis()
+    ax.set_xlabel("records in the repository that cite the paper")
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+    ax.grid(True, axis="x", color="#E7EBE9", linewidth=0.8)
+    ax.set_axisbelow(True)
+    ax.legend(loc="lower right", fontsize=8.5, frameon=False)
+    ax.set_title("The papers this model rests on most, counted from its own records", loc="left", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "17_papers_by_weight.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     fig_map()
@@ -551,6 +626,7 @@ def main() -> int:
     fig_field_scheme()
     fig_field_coverage()
     fig_how_a_model_works()
+    fig_papers_weight()
     fig_funnel()
     fig_scorecard()
     ship = _read(V / "kinetic_core_b16_ship_rule.json")
@@ -561,7 +637,7 @@ def main() -> int:
     fig_yiltirak(ship)
     fig_ttca()
     fig_dicarbonyls(scores)
-    print(f"wrote 13 figures to {OUT}")
+    print(f"wrote 14 figures to {OUT}")
     return 0
 
 
