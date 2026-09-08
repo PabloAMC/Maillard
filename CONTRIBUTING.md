@@ -1,133 +1,125 @@
 # Contributing to Maillard
 
-This file covers project layout, conventions for developers and AI agents, and how to
-run tests. For scientist-facing usage, start with [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md).
+This file covers the project layout, the rules for developers and AI agents, and how to run
+the tests and gates. For using the tool, start with [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md).
+For what the model is and how well it does, start with
+[docs/guides/INTRODUCTION.md](docs/guides/INTRODUCTION.md).
 
 ---
 
-## Project Layout
+## Project layout
 
 ```
-src/            Runtime package — kinetics, retention, headspace,
-                recommend/optimize, reports.
-                Import as: from src.<module> import ...
-                Never mutate sys.path.
+src/            Runtime package. Import as `from src.<module> import ...`; never mutate sys.path.
+  kinetic_core/   The one engine: lanes (trunk, sulfur, acrylamide, lipid), their parameters,
+                  the declared condition terms, the panel, scoring, the Monte-Carlo envelope,
+                  the directional scorer and the fit-target ledger.
+  comparative_cli.py, explain_compound.py, experiment_value.py, report_html.py, model_card.py
+                  The front door's verbs (compare, predict, explain, rank, score, wishlist).
+  data_paths.py, data_access.py, compound_keys.py, paper_keys.py
+                  The only way to reach data/: one constant per curated file, loads that raise
+                  on a missing or malformed file, names resolved through data/keys/.
 
-scripts/        CLI entrypoints and one-shot research scripts.
-                Scientist-facing CLIs route through src/usability_reports.py.
+scripts/        maillard.py (the front door); docker_maillard.sh (every command runs through it);
+                generators/ (the artifacts under results/, the frozen fit waves listed in
+                generators/WAVES.md, the figures and the generated documents); ci/ (the six gates).
 
-data/           Curated inputs only; read-only at runtime (scripts/ci/data_readonly_gate.py).
-                Generated map of every file: data/README.md. Sub-trees: keys/ (compound and paper
-                identity, generated from seeds), schemas/ (JSON Schemas enforced by
-                scripts/ci/schema_gate.py), species/, lit/, benchmarks/, protocols/.
-                Examples live in docs/examples/, intake templates in docs/templates/, test
-                fixtures in tests/fixtures/. Ingestion workflow: data/lit/README.md.
-                Restructure record: tasks/data_restructure_plan.md.
+data/           Curated inputs only, read-only at runtime (scripts/ci/data_readonly_gate.py).
+                Map of every file: data/README.md (generated). keys/ (compound and paper identity),
+                schemas/ (enforced by scripts/ci/schema_gate.py), species/, lit/ (dossiers, re-typed
+                tables, registries), benchmarks/ (the panel; external_validation/ is never fitted),
+                articles/ (PDFs on disk, not tracked). Ingestion workflow: data/lit/README.md.
 
-results/        Generated artifacts. .gitignore'd. Do not hand-edit.
+results/        Generated artifacts. results/validation/ is tracked as frozen evidence (scorecard,
+                envelope, directional scorecard, every fit report and pre-registration); do not
+                hand-edit; the freshness gate checks it against the generators. Map: results/README.md
+                (generated). results/legacy_lane/ is the archive of the retired lane.
 
-tests/          unit/ (fast), scientific/ (regression), scripts/ (integration).
+tests/          unit/ (fast), scientific/ (the headline guards that pin the README's numbers to
+                the artifacts, the frozen-wave hashes, the physics regressions), support.py.
 
-docs/           Human-facing documentation. (Wave S5, 2026-08-28: this map used to omit
-                four real subtrees and name three files that no longer exist. Nine documents
-                were folded into their nearest living home and deleted; see AUDIT.md.)
-  guides/                  Onboarding: QUICKSTART (incl. the command reference), GLOSSARY.
-  reference/               Deep technical: SCIENTIFIC_REFERENCE, VALIDATION_CONTRACT.
-  protocols/               Benchmark intake specs and the PPI/SPI primary protocol.
-  validation/              Frozen evidence: the directional-accuracy panel and report,
-                           the isotope-topology dossier. Read-only records of measurement.
-  notebooks/               Executable walkthroughs.
-  assets/                  Images and diagrams.
-  slr_benchmark_evaluation.md  The systematic literature review two data registries cite.
+docs/           guides/ (INTRODUCTION, REACTION_TREES, SOURCES, QUICKSTART, GLOSSARY),
+                USING_THE_TOOL.md, reference/ (validation contract, fit/hold-out declaration),
+                protocols/, validation/ (the directional claims panel), assets/ (figures),
+                history/ (the retired lane's README and quick start, the August 2026 audit, old
+                roadmaps).
 
-data/research_corpus/  LLM research dumps and syntheses (formerly Gemini_Deep_Research). Not provenance; scanned by the citation gate.
-
-tasks/          todo.md (active roadmap), lessons.md (process lessons).
+tasks/          data_restructure_plan.md (the living record; section 7 is the backlog),
+                test_audit.md, lessons.md.
 ```
 
 ---
 
-## Execution Environment
+## Execution environment
 
 **Always run code inside the Docker container with the `maillard` conda env (Python 3.12).**
-
-Host Python is for editing and static analysis only. Never run `pytest`, `python`, or `pip`
-directly on the host.
+Host Python is for editing and static analysis only.
 
 ```bash
-./scripts/docker_maillard.sh up                # boot container
-./scripts/docker_maillard.sh bootstrap         # install deps (first time)
-./scripts/docker_maillard.sh run "<cmd>"       # arbitrary command in container
+./scripts/docker_maillard.sh up                # boot the container
+./scripts/docker_maillard.sh bootstrap         # build the env from environment.yml (first time)
+./scripts/docker_maillard.sh run "<cmd>"       # any command in the container
 ./scripts/docker_maillard.sh shell             # interactive shell
+./scripts/docker_maillard.sh gates             # the six gates
 ```
 
-If the container is not running: `./scripts/docker_maillard.sh up && ./scripts/docker_maillard.sh bootstrap`
+Dependencies: everything in `environment.yml` and `pyproject.toml` has an importer under
+`src/`, `scripts/` or `tests/`. Add a dependency only together with its consumer.
 
 ---
 
-## Running Tests
+## Running tests
 
 ```bash
 ./scripts/docker_maillard.sh run "pytest tests/unit -q"
 ./scripts/docker_maillard.sh run "pytest tests/scientific -q"
-./scripts/docker_maillard.sh run "pytest tests/ -q"     # full suite
+./scripts/docker_maillard.sh run "pytest tests/ -q"     # everything
+./scripts/docker_maillard.sh gates
 ```
 
-Markers: `regression`, `slow`, `scientific_regression`, `kinetics_validation` (see `pytest.ini`).
+Commit before running the gates: the data read-only gate needs a clean tree, and the freshness
+gate compares tracked artifacts with what the generators produce.
 
 ---
 
-## Key Conventions
+## Rules
 
-### Observable-first governance
-Never promote a target to a tighter prior without a justifying
-artifact in `results/validation/`. No write-back if the result only reproduces existing
-surrogate uncertainty.
+### Fit on primary evidence, validate on levels
+Rate constants, activation energies, fed-intermediate yields, conversions and within-study
+ratios may be fitted. End-of-cook concentrations validate; they are never fitted. The
+declaration is `docs/reference/FIT_HOLDOUT_DECLARATION.md`; `scripts/ci/fit_target_gate.py`
+and `holdout_guard.py` enforce it.
 
-### Confidence tiers
-Records carry `confidence_tier` / `provenance_tier` / `uncertainty_posture` labels. Preserve
-these through the pipeline; never silently upgrade.
+### A re-calibration is a new wave, never an edit
+The fit generators are frozen by hash (`scripts/generators/WAVES.md`). To change one: copy it
+under the next wave id, write the pre-registration with the test it must pass, run it, freeze
+it, rebuild the manifest, add the line to WAVES.md, and add a row to the history table in the
+introduction. A refused wave is kept as a record, not deleted.
 
-### No computed barriers
-Every barrier is a measured literature value or an explicitly labelled surrogate. The
-former xTB → DFT refinement lane was removed on 2026-08-30/09-01; `assert_no_dft_*()`
-guards in `src/kinetic_core/` run at import.
+### No number in code without a source
+Every constant is a measured literature value with its dossier anchor, a value from a frozen
+fit report, or a declared assumption with its band. Nothing is computed from quantum chemistry;
+`assert_no_dft_*()` guards run at import.
 
 ### Data access
-Paths: `from src import data_paths` (one constant per curated file; never a `"data/..."` string).
-Loads: `data_access.load_json / load_yaml` (missing or malformed files raise `DataFileError`).
-Compound names: `compound_keys.resolve(name)`; papers: `paper_keys.for_doi(doi)`. Adding a
-curated file means: a `data_paths` constant, a line in `build_data_readme.py`, and (for
-benchmarks) passing `data/schemas/benchmark.schema.json`.
+Paths through `src/data_paths.py`, loads through `src/data_access.py`, names through
+`compound_keys.resolve()` and `paper_keys.for_doi()`. Adding a curated file means a
+`data_paths` constant, a line in `build_data_readme.py`, and, for a benchmark, passing
+`data/schemas/benchmark.schema.json`. Nothing writes into `data/` at runtime.
 
-### Naming
-Avoid opaque shorthand (`p3`, `wave1`, `c4_c5`). Name scripts/artifacts after the scientific
-job (e.g. `matrix_sigma_residual_derivation`).
+### Headline numbers move together
+The README's numbers are pinned by `tests/scientific/test_core_headline_guards.py`. A change
+that moves a number regenerates the artifact, the model card (`docker_maillard.sh model-card`)
+and the README in the same commit.
 
-### Calibration single-application rule
-`HeadspaceModel.get_matrix_benchmark_headspace_factor()` already applies the matrix observable
-factor — never multiply `calibration_observable_factor` again downstream.
-
-### No synthetic closure
-Internally constructed mixed-matrix benchmarks do not count as external promotion evidence.
+### Names say what things are
+No wave shorthand in user-facing text (the tags live in file names, artifacts and the glossary's
+Part 3). Scripts and artifacts are named after the scientific job.
 
 ---
 
-## Common Pitfalls
+## Workflow for a non-trivial change
 
-| Pitfall | Rule |
-|---------|------|
-| LaTeX-backed plots | Failure must be explicit; no silent fallback |
-| Deleting scripts | Confirm with user first — scripts are often invoked ad-hoc |
-
-Full lessons list: [tasks/lessons.md](tasks/lessons.md)
-
----
-
-## Workflow for Non-Trivial Changes
-
-1. **Plan first** — write plan to `tasks/todo.md` with checkable items
-2. **Check in** before starting implementation
-3. **Track progress** — mark items complete as you go
-4. **Run tests** — never mark complete without proving it works
-5. **Capture lessons** — update `tasks/lessons.md` after any correction
+1. Write the plan into the backlog (`tasks/data_restructure_plan.md`, section 7) with checkable items.
+2. Run both test tiers, commit, run the gates.
+3. Record the outcome in the same backlog entry; add a lesson to `tasks/lessons.md` after any correction.

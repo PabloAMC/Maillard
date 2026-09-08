@@ -9,6 +9,10 @@ ENV/
 *.egg-info/
 *.bak
 
+# Coverage and hypothesis caches
+.coverage
+.hypothesis/
+
 # Conda
 conda_env/
 .conda/

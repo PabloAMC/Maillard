@@ -29,7 +29,7 @@
 > **Verification** Report" and printed its top line as "**Fully Verified** (All values
 > matched): 153 (57.5%)". Same computation, opposite claim. Retitled and re-worded by
 > Wave T3 of the audit remediation; see `scripts/trace_key_values.py` for the full
-> old→new vocabulary map and `tasks/audit_remediation.md` § Wave T3.*
+> old→new vocabulary map and `docs/history/tasks/audit_remediation.md` § Wave T3.*
 
 ---
 

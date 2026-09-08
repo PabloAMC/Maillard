@@ -24,7 +24,7 @@ from src.kinetic_core import scoring
 
 ROOT = Path(__file__).resolve().parents[2]
 README = ROOT / "README.md"
-AUDIT = ROOT / "AUDIT.md"
+AUDIT = ROOT / "docs" / "history" / "AUDIT_legacy_lane_2026-08.md"
 SCORES = data_paths.VALIDATION_DIR / "core_panel_scores.json"
 ENVELOPE = data_paths.VALIDATION_DIR / "core_prediction_uncertainty.json"
 EXAM = data_paths.VALIDATION_DIR / "cutover_final_exam.json"

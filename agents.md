@@ -5,12 +5,12 @@
 - Be concise. Use markdown links for file references (workspace-relative paths).
 
 ## Project Snapshot
-Computational screening framework for meat-like Maillard chemistry in plant-based matrices. Combines deterministic kinetic ODEs (SMIRKS-based reaction families) with matrix-aware retention/headspace physics. The former selective-QM (xTB → DFT) lane was removed on 2026-08-30/09-01; barriers are measured literature values or labelled surrogates.
+A mass-action kinetic model of the Maillard reaction (`src/kinetic_core/`: trunk, sulfur, acrylamide and lipid lanes), scored on held-out literature pots and refusing what the evidence cannot answer. Every rate constant is a measured literature value, a fitted value from a frozen pre-registered fit, or a declared assumption with its band; nothing is computed from quantum chemistry. Read `docs/guides/INTRODUCTION.md` first.
 
 - Mission and architecture: [README.md](README.md); the retirement plan and the improvement backlog:
   [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md)
 - Validation contract & benchmark surface: [docs/reference/VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md)
-- Active roadmap & lessons: [tasks/todo.md](tasks/todo.md), [tasks/lessons.md](tasks/lessons.md)
+- Backlog: [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md) section 7; lessons: [tasks/lessons.md](tasks/lessons.md); old roadmaps under `docs/history/tasks/`
 
 ## Layout
 - `src/` — runtime package: `src/kinetic_core/` (the ONE engine: lanes, parameters, panel, scoring, envelope, fit-target ledger), `comparative_cli.py` (the front door's verbs), `report_html.py`, `explain_compound.py`, `experiment_value.py` (the `rank` verb), `model_card.py`, the literature-side registries. Import as `from src.<module> import ...`; do not mutate `sys.path`. The legacy SMIRKS lane was deleted 2026-09-03 (retirement step B5); its README is `docs/history/`, its artifacts `results/legacy_lane/`.
@@ -31,7 +31,7 @@ Computational screening framework for meat-like Maillard chemistry in plant-base
 ./scripts/docker_maillard.sh bootstrap    # install deps
 ./scripts/docker_maillard.sh run "<cmd>"  # arbitrary command in container
 ./scripts/docker_maillard.sh core-scores  # the core's panel scorecard
-./scripts/docker_maillard.sh gates        # the five CI gates
+./scripts/docker_maillard.sh gates        # the six CI gates
 ```
 
 ## Tests
@@ -52,7 +52,6 @@ Markers: `regression`, `slow`, `scientific_regression`, `kinetics_validation` (s
 - **No synthetic closure**: internally constructed mixed-matrix benchmarks do not count as external promotion evidence.
 
 ## Pitfalls (see [tasks/lessons.md](tasks/lessons.md) for full list)
-- LaTeX-backed plots: failure must be explicit; no silent fallback.
 - Before deleting any script, confirm with the user — scripts are often invoked ad-hoc via `docker_maillard.sh run`.
 - A directory under `data/` that `.gitignore` hides is invisible to every audit and gate (this is how `data/qm` shipped 18 unsourced barriers for four months). `data/*` is ignored by default; whitelist explicitly.
 - Tests must never write into `data/`; `tests/integration/test_matrix_calibration_loop.py` once left 102 calibration files there. Monkeypatch output dirs to `tmp_path`.
@@ -98,11 +97,11 @@ Markers: `regression`, `slow`, `scientific_regression`, `kinetics_validation` (s
 
 ## Task Management
 
-1. **Plan First**: Write plan to `tasks/todo.md` with checkable items
+1. **Plan First**: Write the plan into `tasks/data_restructure_plan.md` section 7 (the backlog) with checkable items
 2. **Verify Plan**: Check in before starting implementation
 3. **Track Progress**: Mark items complete as you go
 4. **Explain Changes**: High-level summary at each step
-5. **Document Results**: Add review section to `tasks/todo.md`
+5. **Document Results**: Record the outcome in the same backlog entry
 6. **Capture Lessons**: Update `tasks/lessons.md` after corrections
 
 ## Core Principles

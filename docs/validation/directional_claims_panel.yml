@@ -2,7 +2,7 @@
 #
 # WHY THIS FILE EXISTS
 # --------------------
-# The model's ABSOLUTE accuracy is documented and poor (see AUDIT.md and
+# The model's ABSOLUTE accuracy is documented and poor (see docs/history/AUDIT_legacy_lane_2026-08.md and
 # results/validation/). Its actual use case is ORDINAL: screening formulations,
 # ranking off-flavour markers, choosing a direction to move a process knob.
 # Nobody had ever measured whether it gets DIRECTIONS right. This panel is the

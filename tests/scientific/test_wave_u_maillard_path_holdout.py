@@ -68,7 +68,7 @@ def test_the_maillard_path_holdout_has_not_shrunk():
     assert len(paths) == EXPECTED_BUNDLE_COUNT, (
         f"{len(paths)} Maillard-path hold-out bundles found, Wave U froze "
         f"{EXPECTED_BUNDLE_COUNT}. If a point was removed for a stated reason, update this "
-        "count in the same commit and record the reason in tasks/audit_remediation.md."
+        "count in the same commit and record the reason in docs/history/tasks/audit_remediation.md."
     )
 
 

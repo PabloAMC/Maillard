@@ -125,7 +125,7 @@ TEXT_SCAN_GLOBS = (
     "src/**/*.py",
     "docs/**/*.md",
     "README.md",
-    "AUDIT.md",
+    "docs/history/AUDIT_legacy_lane_2026-08.md",
 )
 
 # A DOI-shaped token embedded in free text. Deliberately greedy on the suffix and
