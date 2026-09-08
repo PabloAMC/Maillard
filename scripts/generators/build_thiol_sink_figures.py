@@ -103,7 +103,7 @@ def fig_wang(scores) -> None:
                 arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.8))
     ax.set_xticks([30, 60, 90, 120, 180])
     _style(ax, "2-methyl-3-furanthiol, µg per litre (log)", "minutes")
-    ax.set_title("Cysteine + xylose in buffer (Wang 2022): the model at 100 and 140 °C")
+    ax.set_title("Cysteine + xylose, 100 and 140 °C (Wang 2022)")
     ax.legend(loc="lower left")
     fig.tight_layout()
     fig.savefig(OUT / "02_wang2022_shapes.png")
@@ -151,7 +151,7 @@ def fig_yiltirak(ship) -> None:
     ax.set_xticks(list(x))
     ax.set_xticklabels(labels)
     _style(ax, "µg per litre (log scale)")
-    ax.set_title("Ribose + cysteine at 100 and 110 °C (Reading, 2026): a pot no model version was tuned on")
+    ax.set_title("A pot no model version was tuned on (Reading, 2026)")
     ax.legend(loc="upper left", ncol=1)
     fig.tight_layout()
     fig.savefig(OUT / "04_yiltirak_ladder.png")
@@ -174,7 +174,7 @@ def fig_ttca() -> None:
     ax.set_xticklabels(temps)
     ax.set_ylim(0, 11)
     _style(ax, "mmol per litre left after 60 min (of 10)")
-    ax.set_title("The xylose–cysteine intermediate (TTCA), heated alone for 60 min")
+    ax.set_title("TTCA heated alone for 60 min (Zhai 2021)")
     ax.legend(loc="upper right")
     fig.tight_layout()
     fig.savefig(OUT / "05_ttca_decay.png")
@@ -208,57 +208,81 @@ def fig_dicarbonyls(scores) -> None:
 
 
 def fig_map() -> None:
-    """The reaction paths the model carries, coloured by how well each is predicted (docs guide, sec. 'The map')."""
-    from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+    """The chemistry scheme's own layout, coloured by how well THIS MODEL predicts each part: boxes from the
+    scorecard (median fold error of the species the box stands for), arrows from the model's constant status."""
+    import sys as _sys
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
-    GOOD, MID, BAD, NONE = ("#D9EFE3", "#178F6E"), ("#FBE9D0", "#D9822B"), ("#F6D9D9", "#B23A3A"), ("#EEEEEE", "#9AA6A3")
-    nodes = {
-        # key: (x, y, label, status)
-        "S": (0.0, 4.2, "sugar +\namino acid", GOOD), "A": (1.6, 4.2, "Amadori\ncompound", GOOD),
-        "D": (3.2, 4.2, "deoxyosones,\nsmall dicarbonyls", BAD), "B2": (4.9, 4.7, "HMF (2-12x off)", MID),
-        "B": (4.9, 4.05, "brown colour", GOOD), "B3": (4.9, 3.4, "caramel furanone\n(50-270x off)", BAD),
-        "P": (0.0, 2.6, "pentose sugar +\ncysteine", MID), "T": (1.6, 2.6, "ring intermediate\n(TTCA)", MID),
-        "F": (3.2, 2.6, "furanones, furfural\n+ hydrogen sulfide", MID), "M": (4.9, 2.6, "meaty thiols\nMFT and FFT", BAD),
-        "X": (6.5, 2.6, "thiol removal:\ndisulfides, adducts", BAD),
-        "H": (0.0, 1.6, "hexose sugar +\ncysteine", NONE),
-        "N": (0.0, 0.5, "asparagine +\nglucose", MID), "Y": (1.6, 0.5, "acrylamide", MID), "Z": (3.2, 0.5, "acrylamide\nelimination", MID),
-        "L": (4.9, 0.5, "unsaturated fat", MID), "O": (6.5, 0.5, "hydroperoxides,\nhexanal + aldehydes", MID),
-    }
-    edges = [("S", "A"), ("A", "D"), ("D", "B"), ("D", "B2"), ("D", "B3"), ("P", "T"), ("T", "F"), ("F", "M"), ("M", "X"), ("N", "Y"), ("Y", "Z"), ("L", "O")]
-    fig, ax = plt.subplots(figsize=(11, 5.4))
-    ax.set_xlim(-0.8, 7.4)
-    ax.set_ylim(-0.55, 5.1)
+    if str(ROOT / "scripts" / "generators") not in _sys.path:
+        _sys.path.insert(0, str(ROOT / "scripts" / "generators"))
+    import build_reaction_tree as BRT
+    from src.kinetic_core.engine import ACRYLAMIDE, SULFUR, TRUNK
+
+    status = {}
+    for lane in (TRUNK, SULFUR, ACRYLAMIDE):
+        for k, v in BRT.constant_status(lane).items():
+            status.setdefault(k, v)
+    quality = BRT.species_quality()
+    S = list(BRT.STATUS_STYLE)
+    NO_STEP = "no such step in the model"
+    styles = dict(BRT.STATUS_STYLE)
+    styles[NO_STEP] = ("#9AA6A3", ":", 1.6)
+    nodes = _scheme_nodes()
+    nodes["hex"] = (5.1, 0.55, "glucose + cysteine")
+    #: (from, to, representative parameter key or None for a step the model lacks, species the target box stands for)
+    edges = [
+        ("sug", "ama", "k_schiff"), ("ama", "dox", "k_ama_tdg"), ("ama", "dox2", "k_ama_odg"), ("ama", "frag", "k_ama_mgo"),
+        ("dox", "hmf", "k_ddg_hmf"), ("dox2", "fur", "k_af_dmhf"), ("dox2", "frag", "k_odg_da"), ("frag", "str", None),
+        ("frag", "mel", "k_mgo_mel"), ("str", "pyr", None), ("cys", "h2s", "k_cys_h2s"), ("cys", "ttca", "k_ttca_deg"),
+        ("ttca", "thiol", "k_nf_mft"), ("h2s", "thiol", "k_nf_mft"), ("fur", "thiol", "k_nf_mft"), ("hmf", "thiol", "k_fur_fft"),
+        ("thiol", "sink", "k_thiolate_loss"), ("frag", "h2s", None), ("hex", "thiol", None),
+        ("asn", "acr", "k_asn_glc"), ("acr", "acr2", "k_acr_dp"), ("lip", "ald", "k_looh_decomp"), ("ald", "lm", None),
+    ]
+    box_species = {"dox": ["TDG"], "dox2": ["ODG"], "frag": ["MGO", "GO", "DA", "G"], "hmf": ["HMF", "FUR"], "fur": ["DMHF", "NF"],
+                   "thiol": ["MFT", "FFT"], "acr": ["ACR"], "ald": ["HEXANAL"], "sink": ["MFTD"]}
+    order = {"good": 0, "mid": 1, "bad": 2}
+    box_quality = {}
+    for box, keys in box_species.items():
+        qs = [quality[k] for k in keys if k in quality]
+        if qs:
+            box_quality[box] = max(qs, key=lambda q: order[q])
+    box_quality["mel"] = "good"          # browning: the B1 hold-out, median 1.45x over 38 points
+    box_quality["hex"] = "none"
+    fig, ax = plt.subplots(figsize=(15, 8.6))
+    ax.set_xlim(-0.9, 9.5)
+    ax.set_ylim(-3.2, 6.3)
     ax.axis("off")
-    bw, bh = 1.25, 0.62
-    for key, (x, y, label, (fill, edge)) in nodes.items():
-        dashed = key == "H"
-        box = FancyBboxPatch((x - bw / 2, y - bh / 2), bw, bh, boxstyle="round,pad=0.02,rounding_size=0.08", fc=fill, ec=edge, lw=1.4,
-                             ls="--" if dashed else "-")
-        ax.add_patch(box)
-        ax.text(x, y, label, ha="center", va="center", fontsize=9, color=INK if not dashed else MUTED)
-    for a, b in edges:
-        xa, ya = nodes[a][0], nodes[a][1]
-        xb, yb = nodes[b][0], nodes[b][1]
-        ax.add_patch(FancyArrowPatch((xa + bw / 2, ya), (xb - bw / 2, yb), arrowstyle="-|>", mutation_scale=12, color=MUTED, lw=1.2))
-    ax.add_patch(FancyArrowPatch((nodes["H"][0] + bw / 2, nodes["H"][1]), (nodes["M"][0] - 0.1, nodes["M"][1] - bh / 2),
-                                 arrowstyle="-|>", mutation_scale=12, color=MUTED, lw=1.2, ls="--", connectionstyle="arc3,rad=0.25"))
-    ax.text(1.35, 1.0, "no route in the model", fontsize=8.5, color=MUTED, style="italic")
-    legend = [("predicts held-out data within about 1.5x", GOOD), ("right shape; within 3x inside the source lab only", MID),
-              ("wrong by 10x or more, or wrong in direction", BAD), ("no route exists", NONE)]
-    # legend: two rows under the diagram
-    for i, (txt, (fill, edge)) in enumerate(legend):
-        x0 = -0.6 + (i % 2) * 3.9
-        y0 = -0.12 - (i // 2) * 0.34
-        ax.add_patch(FancyBboxPatch((x0, y0), 0.22, 0.18, boxstyle="round,pad=0.01", fc=fill, ec=edge, lw=1.2))
-        ax.text(x0 + 0.3, y0 + 0.09, txt, fontsize=8.5, color=INK, va="center")
-    ax.set_title("The reaction paths the model carries, coloured by how well each one is predicted", loc="left", fontsize=11)
+    bw, bh = 1.35, 0.72
+    for a, b, key in edges:
+        st = NO_STEP if key is None else status.get(key, S[1] if key == "k_looh_decomp" else S[4])
+        colour, ls, lw = styles[st]
+        (xa, ya, _), (xb, yb, _) = nodes[a], nodes[b]
+        rad = 0.0 if abs(ya - yb) < 1e-9 else (0.12 if xb > xa else 0.25)
+        if (a, b) in (("cys", "ttca"), ("h2s", "thiol")):
+            rad = 0.25 if a == "cys" else 0.22
+        ax.add_patch(FancyArrowPatch((xa, ya), (xb, yb), arrowstyle="-|>", mutation_scale=12, color=colour, lw=lw, linestyle=ls,
+                                     connectionstyle=f"arc3,rad={rad}", shrinkA=26, shrinkB=26, zorder=1))
+    for key, (x, y, label) in nodes.items():
+        q = box_quality.get(key, "none")
+        fill = {"good": "#D9EFE3", "mid": "#FBE9D0", "bad": "#F6D9D9", "none": "#F2F3F1"}[q]
+        edge = {"good": "#178F6E", "mid": "#D9822B", "bad": "#B23A3A", "none": "#9AA6A3"}[q]
+        ax.add_patch(FancyBboxPatch((x - bw / 2, y - bh / 2), bw, bh, boxstyle="round,pad=0.02,rounding_size=0.08", fc=fill, ec=edge,
+                                    lw=1.4 if q != "none" else 1.0, ls="--" if key == "hex" else "-", zorder=2))
+        ax.text(x, y, label, ha="center", va="center", fontsize=8.6, color=INK, zorder=3)
+    for x, y, txt in ((-0.85, 6.05, "SUGAR AND AMINO ACID"), (-0.85, 2.25, "SULFUR: CYSTEINE AND A PENTOSE"), (-0.85, 0.15, "ASPARAGINE"), (-0.85, -1.15, "FAT")):
+        ax.text(x, y, txt, fontsize=8.5, color=MUTED, fontweight="bold", ha="left")
+    handles = [plt.Line2D([0], [0], color=c, ls=ls, lw=lw, label=s) for s, (c, ls, lw) in styles.items()]
+    handles += [plt.Rectangle((0, 0), 1, 1, fc=f, ec=e, label=lab) for f, e, lab in
+                (("#D9EFE3", "#178F6E", "predicted within 3x where measured"), ("#FBE9D0", "#D9822B", "3-10x off"),
+                 ("#F6D9D9", "#B23A3A", "more than 10x off"), ("#F2F3F1", "#9AA6A3", "not measured on the panel"))]
+    ax.legend(handles=handles, loc="upper right", bbox_to_anchor=(1.0, 0.0), fontsize=8.5, frameon=False, ncol=2,
+              title="arrows: how the model knows the step's rate · boxes: how well the model predicts the compound", title_fontsize=8.5)
+    ax.set_title("The same map, coloured by how well this model predicts each part", loc="left", fontsize=11.5)
     fig.tight_layout()
-    fig.savefig(OUT / "00_map.png")
+    fig.savefig(OUT / "00_map.png", bbox_inches="tight")
     plt.close(fig)
 
 
-#: The papers whose MEASUREMENTS became rate constants or fit rows, by path (hand-curated from the
-#: parameter registries and the frozen generators' row anchors, 2026-09-07).
 CONSTANT_SOURCES = {
     "sugar and amino acid": ["Martins & van Boekel 2005", "Martins & van Boekel 2003", "Kocadagli & Gokmen 2016", "Pereyra Gonzales 2010",
                              "Bell 1995", "Shu 1988", "Hamzalioglu 2018", "Poisson 2019", "Wang 2008"],
@@ -393,11 +417,8 @@ FIELD_STATUS = {   # the same scale the reaction trees use (build_reaction_tree.
 }
 
 
-def fig_field_scheme() -> None:
-    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
-
-    S = list(FIELD_STATUS)
-    nodes = {
+def _scheme_nodes():
+    return {
         "sug": (0.0, 5.0, "reducing sugar\n+ amino acid"), "ama": (1.7, 5.0, "Amadori / Heyns\ncompound"),
         "dox": (3.4, 5.6, "3-deoxyosone\n(1,2-enolisation)"), "dox2": (3.4, 4.4, "1-deoxyosone\n(2,3-enolisation)"),
         "frag": (3.4, 3.2, "sugar fragments:\nglyoxal, methylglyoxal,\ndiacetyl"),
@@ -410,6 +431,13 @@ def fig_field_scheme() -> None:
         "asn": (0.0, -0.5, "asparagine\n+ sugar"), "acr": (3.4, -0.5, "acrylamide"), "acr2": (5.1, -0.5, "acrylamide\nelimination"),
         "lip": (0.0, -1.8, "unsaturated fat"), "ald": (3.4, -1.8, "hydroperoxides,\naldehydes"), "lm": (5.1, -1.8, "lipid-Maillard:\nalkylthiophenes"),
     }
+
+
+def fig_field_scheme() -> None:
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+
+    S = list(FIELD_STATUS)
+    nodes = _scheme_nodes()
     edges = [   # (from, to, status, label, rad, label dy)
         ("sug", "ama", S[0], "Martins 2005, 3 T", 0.0, 0.48), ("ama", "dox", S[0], "Martins 2005", 0.12, 0.0), ("ama", "dox2", S[0], "", 0.12, 0.0),
         ("ama", "frag", S[0], "Martins 2005; Kocadagli 2016 (glass)", 0.12, 0.0),
@@ -544,9 +572,9 @@ def fig_how_a_model_works() -> None:
     plt.close(fig)
 
 
-def fig_papers_weight() -> None:
-    """Which papers the model takes the most from: fit rows, benchmark pots and directional claims per paper,
-    counted from the frozen generators' row anchors, the paper registry and the claims panel."""
+def paper_usage_counts():
+    """Per paper ('Author Year'): measured rate constants, fit rows, benchmark pots and directional claims,
+    counted from the parameter objects, the frozen generators' row anchors, the paper registry and the claims panel."""
     import re
     from collections import Counter
 
@@ -593,6 +621,13 @@ def fig_papers_weight() -> None:
             src = " ".join(str(getattr(param, a, "") or "") for a in ("source_anchor", "source", "dossier_anchor", "note"))
             for a, y in set(pat.findall(src)):
                 consts[f"{a} {y}"] += 1
+    return {"constants": consts, "fit rows": rows, "benchmark pots": pots, "claims": claims}
+
+
+def fig_papers_weight() -> None:
+    """Which papers the model takes the most from."""
+    counts = paper_usage_counts()
+    consts, rows, pots, claims = counts["constants"], counts["fit rows"], counts["benchmark pots"], counts["claims"]
     total = lambda k: rows[k] + claims[k] + pots[k] + consts[k]
     papers = sorted(set(rows) | set(claims) | set(pots) | set(consts), key=lambda k: -total(k))[:12]
     fig, ax = plt.subplots(figsize=(9.6, 5.0))

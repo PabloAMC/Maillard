@@ -24,11 +24,12 @@ GC-MS.
 > **Start here if you know what the Maillard reaction is and nothing else:**
 > [**Modelling the Maillard reaction: an introduction**](docs/guides/INTRODUCTION.md). Seven short
 > sections, each led by a figure: the chemistry and how well the field has measured it, how a kinetic
-> model is built from that, how well this one does, the one problem that stops it from predicting
-> meaty aroma, the experiment that would settle it, and ten papers to read first. The step-by-step
-> reaction trees are in its [appendix](docs/guides/REACTION_TREES.md).
+> model is built from that, what this repository is made of, how well this model does, the one problem
+> that stops it from predicting meaty aroma, and what is needed next. The step-by-step reaction trees
+> are in its [appendix](docs/guides/REACTION_TREES.md); every paper used, with what was taken from it,
+> in [SOURCES.md](docs/guides/SOURCES.md).
 >
-> [![The reaction paths the model carries, coloured by how well each is predicted](docs/assets/thiol_sink/00_map.png)](docs/guides/INTRODUCTION.md)
+> [![The Maillard reaction map, coloured by how well this model predicts each part](docs/assets/thiol_sink/00_map.png)](docs/guides/INTRODUCTION.md)
 
 > **Who is this for?** Alternative-protein scientists who want to triage formulations and
 > process conditions before burning GC-MS time, and computational chemists who want a
@@ -304,7 +305,7 @@ Three trees, one rule each (`agents.md`):
 | --- | --- | --- |
 | `data/` | curated inputs, **read-only at runtime** (`scripts/ci/data_readonly_gate.py`); paths from `src/data_paths.py`, loads through `src/data_access.py`, names through `data/keys/` | [`data/README.md`](data/README.md) (generated) |
 | `results/` | generated artifacts: the core's scorecard, envelope and directional scorecard (each with a `provenance` block), the frozen fit and hold-out records per wave, the literature ledgers; `results/legacy_lane/` is the archive of the retired lane and of orphaned artifacts | [`results/README.md`](results/README.md) (generated) |
-| `docs/` | human documents: [USING_THE_TOOL.md](docs/USING_THE_TOOL.md), [QUICKSTART.md](docs/guides/QUICKSTART.md), [GLOSSARY.md](docs/guides/GLOSSARY.md), [INTRODUCTION.md](docs/guides/INTRODUCTION.md) (modelling the Maillard reaction, for a reader with no context; appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md)), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md), the retired lane's README under `docs/history/` | |
+| `docs/` | human documents: [USING_THE_TOOL.md](docs/USING_THE_TOOL.md), [QUICKSTART.md](docs/guides/QUICKSTART.md), [GLOSSARY.md](docs/guides/GLOSSARY.md), [INTRODUCTION.md](docs/guides/INTRODUCTION.md) (modelling the Maillard reaction, for a reader with no context; appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md); every paper used, [SOURCES.md](docs/guides/SOURCES.md)), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md), the retired lane's README under `docs/history/` | |
 
 Code: `src/kinetic_core/` (the engine, its parameters, panel, scoring, envelope, fit-target
 ledger), `src/comparative_cli.py` + `scripts/maillard.py` (the front door), `src/report_html.py`,
@@ -353,7 +354,7 @@ Closing the loop from such a measurement back into the constants is a new pre-re
 | **Flavour scientist** — using the tool | [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) |
 | **Food scientist** — first run | [QUICKSTART.md](docs/guides/QUICKSTART.md) |
 | **Scientist** — understanding the output | [GLOSSARY.md](docs/guides/GLOSSARY.md) |
-| **Anyone who knows what the Maillard reaction is** — the chemistry, what is measured, how a model is built from it, how well this one does, what would settle it | [INTRODUCTION.md](docs/guides/INTRODUCTION.md), appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md) |
+| **Anyone who knows what the Maillard reaction is** — the chemistry, what is measured, how a model is built from it, how well this one does, what would decide it | [INTRODUCTION.md](docs/guides/INTRODUCTION.md), appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md), every paper used [SOURCES.md](docs/guides/SOURCES.md) |
 | **Reviewer** — auditing what is verified | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/) → [AUDIT.md](AUDIT.md) |
 | **Experimentalist** — closing the gaps | `maillard wishlist` → [data wishlist](results/validation/data_wishlist.md) → [experiment ranking](results/validation/experiment_value_ranking.md) → [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) |
 | **Maintainer** — extending the chemistry | `src/kinetic_core/` module docstrings → [`tasks/data_restructure_plan.md`](tasks/data_restructure_plan.md) → [CONTRIBUTING.md](CONTRIBUTING.md) |

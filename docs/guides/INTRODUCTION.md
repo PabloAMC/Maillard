@@ -2,7 +2,7 @@
 
 *For a reader who knows what the Maillard reaction is and nothing else. Each section is one figure and
 a few sentences. The figures are made from the repository's own records, so they change when the
-evidence changes. Updated 2026-09-07. Step-by-step reaction trees: [appendix](REACTION_TREES.md).*
+evidence changes. Updated 2026-09-08. Step-by-step reaction trees: [appendix](REACTION_TREES.md).*
 
 The chemistry is known. The rates are measured in one temperature window. The model works where the
 rates were measured and fails where they were not. Each section below shows one part of that.
@@ -60,11 +60,12 @@ scored against. One paper, Hofmann and Schieberle 1998, carries most of the sulf
 
 ## 5. How well the model does
 
-![The reaction paths the model carries, coloured by how well each is predicted](../assets/thiol_sink/00_map.png)
+![The same map as section 1, coloured by how well this model predicts each part](../assets/thiol_sink/00_map.png)
 
-*Green: predicted within a factor of about 1.5 on pots the model never saw. Amber: right in shape, and
-within a factor of 3 only in the laboratory the rates came from. Red: wrong by more than tenfold.
-Grey dashed: no route in the model.*
+*The map from section 1 again. Boxes: how far the model's prediction is from the measurement, on pots it
+was never tuned on. Arrows: whether the model knows the step's rate at several temperatures, at one, or
+only as a range. Brown colour is right. HMF is close. The furanones, the thiols, acrylamide and the fat
+aldehydes are off by more than tenfold on other laboratories' pots. Glucose with cysteine has no route.*
 
 ![Path by path scorecard](../assets/thiol_sink/08_path_scorecard.png)
 
@@ -123,6 +124,9 @@ removal step can be built and tested against the existing series in a day.
 | dossier | the repository's re-typed record of one paper |
 
 ## Sources
+
+Every paper the model uses, alphabetically, with what was taken from each: [SOURCES.md](SOURCES.md),
+made from the repository's records. Where each figure's numbers come from:
 
 | figure | measurement | repository record |
 |---|---|---|
