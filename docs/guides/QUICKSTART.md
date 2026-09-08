@@ -184,8 +184,8 @@ With a loading, the protein's reactive sites are charged: the thiols meet the di
 the sulfur lane's exchange channel, and aldehydes and HMF are bound to the amine and thiol pools by
 declared rates from the adduct dossiers, their brackets shown as an interval. On file:
 β-lactoglobulin (from its sequence), soy isolate and pea isolate (measured thiol and disulfide
-densities; no amine density, so on those two no aldehyde binds and the answer says so). For your
-own isolate, state its sites in mmol per gram:
+densities from several laboratories, the lysine content as the amine pool with a declared
+availability band). For your own isolate, state its sites in mmol per gram:
 
 ```yaml
   protein_g_per_l: 50.0

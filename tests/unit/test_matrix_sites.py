@@ -51,33 +51,30 @@ def test_t5_a_named_matrix_needs_a_loading_and_an_unknown_matrix_says_so():
     assert "no site densities on file" in payload["matrix"]["note"]
 
 
-def test_t2b_the_isolate_densities_are_the_dossiers_numbers_and_say_what_is_missing():
-    """Pea and soy isolates (2026-09-08 addendum): measured densities in mmol per gram of protein from
-    ruan2014 / shimada1988 (soy) and gao2020 / shen2022 / chihi2016 (pea); no amine density is on file, so no
-    aldehyde binds and the answer says so."""
+def test_t2b_the_isolate_densities_are_the_dossiers_numbers():
+    """Pea and soy isolates (2026-09-08 addendum): measured thiol and disulfide densities in mmol per gram of
+    protein from ruan2014 / shimada1988 / xiao2024 (soy) and gao2020 / xiao2024 / chen2022 / shen2022 / chihi2016
+    (pea); the amine pool is the lysine content from the amino-acid composition (xiao2024 section 6), with the
+    same declared availability band as beta-lactoglobulin, so on these isolates the aldehydes bind."""
     table = M.matrices()
     soy, pea = table["soy_isolate"], table["pea_isolate"]
-    assert abs(soy.free_thiol - 0.0078) < 1e-9 and abs(soy.disulfide - 0.050) < 1e-9 and soy.amine == 0.0
-    assert soy.bands["free_thiol"] == (0.0075, 0.0080) and soy.bands["disulfide"] == (0.046, 0.053)
-    assert "ruan2014" in soy.source and "shimada1988" in soy.source
-    assert abs(pea.free_thiol - 0.0159) < 1e-9 and abs(pea.disulfide - 0.0257) < 1e-9 and pea.amine == 0.0
-    assert pea.bands["free_thiol"] == (0.0021, 0.0174) and pea.bands["disulfide"] == (0.0042, 0.0297)
-    assert "gao2020" in pea.source and "chihi2016" in pea.source and "shen2022" in pea.source
-    assert "amine not on file" in pea.note and "protein_sites" in pea.note
-    # the pools charge at the loading, the disulfide pool reaches the sulfur lane, no aldehyde binds
+    assert abs(soy.free_thiol - 0.0067) < 1e-9 and abs(soy.disulfide - 0.0457) < 1e-9 and abs(soy.amine - 0.379) < 1e-9
+    assert soy.bands["free_thiol"] == (0.0047, 0.0080) and soy.bands["disulfide"] == (0.038, 0.053) and soy.amine_band == (0.4, 1.0)
+    assert "ruan2014" in soy.source and "shimada1988" in soy.source and "xiao2024" in soy.source
+    assert abs(pea.free_thiol - 0.0159) < 1e-9 and abs(pea.disulfide - 0.0257) < 1e-9 and abs(pea.amine - 0.524) < 1e-9
+    assert pea.bands["free_thiol"] == (0.0021, 0.0174) and "gao2020" in pea.source and "chihi2016" in pea.source
+    assert "not on file" not in pea.note and "not on file" not in soy.note
+    # the pools charge at the loading, the disulfide pool reaches the sulfur lane, and hexanal now binds
     core = spec_to_core(_spec(matrix="pea_isolate", protein_g_per_l=50.0))
     charged, note = M.resolve(core.process)
-    assert note is None and abs(charged.disulfide - 50.0 * 0.0257) < 1e-9 and charged.amine == 0.0
-    assert "amine not on file" in charged.as_dict()["note"]
+    assert note is None and abs(charged.disulfide - 50.0 * 0.0257) < 1e-9 and abs(charged.amine - 50.0 * 0.524) < 1e-9
+    bound = M.bound_fraction("HEXANAL", charged, [(20.0, 145.0)])
+    assert bound is not None and 0.0 < bound["bound_fraction"] < 1.0 and bound["bound_fraction_corners"][0] <= bound["bound_fraction_corners"][1]
     payload = api.predict(_spec(matrix="soy_isolate", protein_g_per_l=50.0), targets=[FFT])
-    assert abs(payload["matrix"]["sites"]["pools_mmol_per_l"]["disulfide"] - 50.0 * 0.050) < 1e-9
-    assert HEX not in (payload["matrix"]["binding"] or {})
-    assert "amine not on file" in payload["matrix"]["sites"]["note"]
+    assert abs(payload["matrix"]["sites"]["pools_mmol_per_l"]["disulfide"] - 50.0 * 0.0457) < 1e-9
+    assert abs(payload["matrix"]["sites"]["pools_mmol_per_l"]["amine"] - 50.0 * 0.379) < 1e-9
     run = predict(core, [FFT])
-    assert run.run_metadata["matrix_binding"] == {}
     assert run.run_metadata["matrix_sites"]["pools_mmol_per_l"]["disulfide"] == pytest.approx(50.0 * 0.0257)
-
-
 def test_t4_the_disulfide_pool_is_charged_and_the_held_rate_is_weak():
     core = spec_to_core(_spec(matrix="blg", protein_g_per_l=10.0))
     charged, _ = M.resolve(core.process)

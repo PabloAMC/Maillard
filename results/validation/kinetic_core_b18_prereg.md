@@ -166,3 +166,16 @@ asserts they equal this report. Two conditionalities travel on every pyrazine an
 DIC-01), and their loss (Zhou 2024's glyoxal and methylglyoxal time courses are in Figure 4,
 figure-only; the wishlist's "glyoxal loss at two temperatures" stands). Until then the pyrazine
 answer's first line is its own caveat.
+
+**Post-run note (2026-09-08, later the same night).** Zhou et al. 2025 (`zhou2025b_extraction.md`),
+the same laboratory, prints alanine + glyoxal pyrazine formation rates at 70 / 80 / 90 °C
+(0.1165 / 0.2806 / 0.8867 µmol L⁻¹ min⁻¹, Ea 105.0 kJ/mol) whose Arrhenius line has the 2024 slope
+within 4 kJ/mol and an intercept seventy times higher: the 2024 line predicts 0.012 at 90 °C where
+2025 prints 0.887, and the 2025 paper never states the reactant concentrations of those runs. The
+two ladders cannot both be initial rates at 20 + 20 mM. B18 was fitted on the 2024 ladder, whose
+concentrations are printed; the discrepancy is recorded here and in the backlog, and until the
+laboratory's concentrations are known it is a third conditionality on the glyoxal route (up to
+1.85 dex). The 2025 paper also gives the first rate for alanine + xylose → the Amadori compound
+(0.0034 / 0.0060 / 0.0170 mmol L⁻¹ min⁻¹ at 70 / 80 / 90 °C, Ea 83.1 kJ/mol), a trunk quantity the
+sulfur lane's pentose Amadori step could be checked against later.
+

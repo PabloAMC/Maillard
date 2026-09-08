@@ -80,14 +80,20 @@ extraction dossiers) and the table gained two MEASURED entries beside the sequen
 
 | matrix | free thiol | disulfide | amine | what the spread is |
 |---|---|---|---|---|
-| soy isolate | 0.0078 (0.0075 to 0.0080) | 0.050 (0.046 to 0.053) | not on file | two isolates and two thiol reagents agree; the disulfide is half-cystine minus free thiol over two in both papers, not a direct assay |
-| pea isolate | 0.0159 (0.0021 to 0.0174) | 0.0257 (0.0042 to 0.0297) | not on file | the centre is Gao 2020's whole isolate at three extraction pHs (Ellman's in urea, per gram of protein); Shen 2022's whole isolate agrees; the globulin fraction alone (Chihi 2016) carries a fifth, and the band reaches down to it |
+| soy isolate | 0.0067 (0.0047 to 0.0080) | 0.0457 (0.038 to 0.053) | 0.379 (lysine), 0.4 to 1.0 available | three isolates and two thiol reagents; the disulfide is half-cystine minus free thiol over two in every paper, not a direct assay |
+| pea isolate | 0.0159 (0.0021 to 0.0174) | 0.0257 (0.0042 to 0.0297) | 0.524 (lysine), 0.4 to 1.0 available | the centre is Gao 2020's whole isolate at three extraction pHs; Xiao 2024, Chen 2022 and Shen 2022 sit inside the band; the globulin fraction alone (Chihi 2016) carries a fifth |
 
-What this changes: a spec that names `soy_isolate` or `pea_isolate` with a loading charges the
-sulfur lane's disulfide pool from a dossier instead of refusing. What it does not change: no paper
-gives a lysine or free-amine density (Shen 2022's 8.44 mmol/g is physically impossible and is
-recorded as such), so neither isolate binds an aldehyde or HMF; the answer prints "amine not on
-file" and how to state it. The densities are the native isolate's; every paper shows heating moves
+*(Later the same night, after the second batch of papers: Xiao 2024 added a third soy and a second pea
+isolate, and the book it sits in gives the amino-acid composition, so the amine pool is the lysine
+content per gram of protein with β-lactoglobulin's declared availability band. The TNBS free-amino
+numbers of that laboratory, 8 to 10 mmol/g, are twenty times the lysine content and are recorded as
+an artefact, not used. With an amine pool on file, hexanal, the enals and HMF now bind to the two
+isolates by the declared brackets; the "amine not on file" note is gone from their answers.)*
+
+What this changed at first: a spec that names `soy_isolate` or `pea_isolate` with a loading charges
+the sulfur lane's disulfide pool from a dossier instead of refusing; at that point no paper gave an
+amine density (Shen 2022's 8.44 mmol/g is physically impossible and is recorded as such), so the
+answer printed "amine not on file". The second batch closed that, as the note above says. The densities are the native isolate's; every paper shows heating moves
 them (soy loses 90 % of its free thiol at 100 °C in 30 minutes; the pea globulins gain free thiol
 and lose disulfide at 85 °C), and that is not modelled. Chihi 2016's β-lactoglobulin numbers
 (free thiol 0.0425, disulfide 0.1025 mmol/g) sit at 78 % and 94 % of the table's sequence-computed

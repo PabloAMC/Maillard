@@ -4,10 +4,10 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-08",
     "git": {
-      "commit": "db0950660ba101f02f8cdcc79fd039160dcc6a43",
-      "short": "db095066",
+      "commit": "29a0a9e06129c2c0822268445c92ebf1078d9a0d",
+      "short": "29a0a9e0",
       "branch": "cleaning",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [

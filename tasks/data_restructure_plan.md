@@ -1392,13 +1392,30 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       a LOX rate in molar units (needs epsilon 234 and the assay geometry), (iii) the hexanal fate
       (alcohol dehydrogenase to 1-hexanol, binding, evaporation). Until (i) exists the levels above
       are validation rows for a storage model, not fit rows.
+      UPDATE 2026-09-08 (bi2026, fischer2021 read): Bi 2026 prints the SUBSTRATE time course, not the
+      product's: free linoleic acid 10.658 -> 0.309 ug/g supernatant over 0 / 10 / 20 / 40 / 60 s / 2 / 4 /
+      8 min of grinding (1:7 peas:water, n = 3; total FFA 34.55 -> 13.53; 28 lipid subclasses re-typed),
+      i.e. an apparent first-order consumption of about 0.44 /min for free LA (0.12 /min for total FFA;
+      net of release from lipids, two-point). Hexanal + hexanol are FIGURE-ONLY (rise 0-2 min, plateau
+      by 8 min), never printed separately; grinding temperature and pH unstated; no LOX assay. This is
+      the first within-study RATE on the LOX side and a candidate FIT row for a substrate-depletion
+      step; the product side stays unfitted. Fischer 2021: pea isolate carries 3.4-5.1 ug/g hexanal and
+      10-12 ug/g 2-pentylfuran at pH 6.5 (external calibration in water, no IS: lower bounds), hexanal
+      x1.6 at pH 4.5 (a binding/release effect, not a rate); at 35 g/L that is 120-180 ug/L hexanal
+      and 350-420 ug/L 2-pentylfuran carried into a recipe before any heat -- the same order as raw
+      pea milk. Further LOX acquisitions named by Bi 2026: Yan 2024 Food Chem 445:138696, Bi 2022 Food
+      Chem 380:132203, Feng 2021 JAFC 70:289.
 - [x] **B18 (pre-registered and RUN 2026-09-08; SHIPS with two caveats): a pyrazine step on the trunk.**
       Outcome in the prereg sec. 6: five steps (Strecker x2 fitted, condensation x3 declared fast), cost
       2.64 / 10 rows, T1 T2 T5 T6 pass, T3 T4 fail (Leahy's sugar pot: pyrazine absent, total 2.9 dex low,
       apparent barriers 300-460 kJ/mol = the trunk's dicarbonyl SUPPLY in water); glyoxal-sink
       conditionality 0.59 dex (nosink variant). NEXT WAVE ASKED FOR: the small dicarbonyls in water
       (formation from sugar + amine at 70-120 C; loss: Zhou 2024 Fig. 4 GO/MGO time courses are
-      figure-only; Leitzen 2021 DIC-01 on disk). Original entry: Five dossiers read
+      figure-only; Leitzen 2021 DIC-01 on disk). READ LATER THE SAME NIGHT: zhou2025b -- Ala + GO ->
+      pyrazine 0.1165 / 0.2806 / 0.8867 umol/L/min at 70 / 80 / 90 C (Ea 105.0), SEVENTY TIMES the 2024
+      ladder at equal slope, reactant concentrations of those runs unprinted: a third conditionality on
+      k_go_ak (up to 1.85 dex) until resolved; and the first Ala + Xyl -> ARP rate (0.0034 / 0.0060 /
+      0.0170 mmol/L/min, Ea 83.1). Original entry: Five dossiers read
       (zhou2024, leahy1989, leahy1989a, yu2018, balagiannis2015). FIT rows: Zhou 2024's six initial
       rates (Ala + GO -> pyrazine 0.0279 / 0.0791 / 0.1507 umol/L/min; Ala + MGO -> 2,5-DMP 0.0035 /
       0.0100 / 0.0230 at 100 / 110 / 120 C, 20 + 20 mM, pH 8 unbuffered; Ea 100.6 / 111.7 kJ/mol;

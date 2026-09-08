@@ -319,7 +319,7 @@ rules:
     status: net
     terminal: true
     smirks: "[CH2:1][CH1:2]([O:3][OH])[CH1:4]=[CH1:5][CH1:6]=[CH1:7][CH2:8]>>[CH2:1][c:2]1[cH:4][cH:5][cH:6][o:3]1.O=[CH1:7][CH2:8]"
-    source: {dossier: miyazaki2023_extraction.md, anchor: "Figure 2, route LA-13-F: 13-HpODE -> 2-pentylfuran + 9-oxononanoic acid (24 -> 25 -> 26 -> 22 + 23); the mirror route LA-9-F: 9-HpODE -> hexanal + the furan-bearing C12 acid; Table 1: 2-pentylfuran from the 9-, 10- and 13-hydroperoxides and NOT from the 12-hydroperoxide"}
+    source: {dossier: miyazaki2023_extraction.md, anchor: "Figure 2, route LA-13-F: 13-HpODE -> 2-pentylfuran + 9-oxononanoic acid (24 -> 25 -> 26 -> 22 + 23); the mirror route LA-9-F: 9-HpODE -> hexanal + the furan-bearing C12 acid; Table 1: 2-pentylfuran from the 9-, 10- and 13-hydroperoxides and NOT from the 12-hydroperoxide; corroborated by yao2024_extraction.md: the dihydrofuran intermediate (methyl 9-hydroperoxy-9-(5-pentyl-2,5-dihydrofuran-2-yl)nonanoate) detected and quantified at 0.59 mmol/kg in neat methyl linoleate at 180 C, 1 h"}
     conditions: "purified hydroperoxide isomers, 120 C, 5 min, air; the authors' proposed route, intermediates not isolated; three other papers on disk draw other parents for 2-pentylfuran (choe2006: the singlet-oxygen 10-hydroperoxide; yang2024: the 9-hydroperoxide; wanjala2021: 4-hydroxynonenal), recorded, not merged"
     controls:
       positive: [{reactants: [LOOH_13_ct], products: [PENTYLFURAN, ME_9_OXONONANOATE]}, {reactants: [LOOH_9_ct], products: [HEXANAL, ME_8_FURYL_OCTANOATE]}]
@@ -330,7 +330,7 @@ rules:
     status: net
     terminal: true
     smirks: "[#6:7][CH1:8]=[CH1:9][CH1:10]([O:20][OH])[CH2:11][CH1:12]=[CH1:13][CH2:14]>>[#6:7][CH1:8]=[CH1:9][CH1:10]=[O:20].[CH2:11]=[CH1:12][CH1:13]([OH])[CH2:14]"
-    source: {dossier: miyazaki2023_extraction.md, anchor: "Figure 3, route LA-10-B: 10-HpODE -> 10-oxo-8-decenoic acid + 2-octenyl radical (40 <-> 41) -> 1-octen-3-ol (the dominant product, area 144.8 M), 1-octen-3-one, 2-octenal, 2-octen-1-ol"}
+    source: {dossier: miyazaki2023_extraction.md, anchor: "Figure 3, route LA-10-B: 10-HpODE -> 10-oxo-8-decenoic acid + 2-octenyl radical (40 <-> 41) -> 1-octen-3-ol (the dominant product, area 144.8 M), 1-octen-3-one, 2-octenal, 2-octen-1-ol; yao2024_extraction.md draws the same scission for the 10-hydroperoxide (methyl 10-oxo-8-decenoate + 1-octen-3-ol, both detected at 180 C)"}
     conditions: "the 10-hydroperoxide arises by photo-oxidation (choe2006 Table 1: 17 % of the singlet-oxygen mixture) and by isomerisation; purified isomer, 120 C, 5 min, air"
     controls:
       positive: [{reactants: [LOOH_10], products: [OCTEN3OL, ME_10_OXO_8_DECENOATE]}]

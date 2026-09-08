@@ -117,3 +117,8 @@ One correction fell out of the controls: the registry's 1-octen-3-ol SMILES had 
 against its own eight-carbon InChI (`data/species/off_flavour_targets.yml`); fixed at the source and
 the registry regenerated (lesson in `tasks/lessons.md`).
 
+*Later the same night: Yao 2024 (methyl linoleate at 180 °C) was read; it detects and quantifies the
+dihydrofuran intermediate R31 assumes and draws R32's scission for the 10-hydroperoxide, so both rules
+now cite it as corroboration beside Miyazaki 2023. Its twenty barriers are DFT and are recorded as
+inadmissible. Rules and steps unchanged: 31 rules, 219 steps.*
+
