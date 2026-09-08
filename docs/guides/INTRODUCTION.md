@@ -171,12 +171,19 @@ removal step is reversible. Either result decides the next version.
 
 **Without a laboratory.** Two published data sets exist only as figures (a Beijing grid at 100 to
 140 °C and a five-temperature ladder from another Chinese group). Their numbers, from the authors,
-would give the removal step its first data from a third laboratory. And the reversible or saturating
-removal step can be built and tested against the existing series in a day.
+would give the removal step its first data from a third laboratory. The reversible removal step was
+built and tested against the existing series on 8 September 2026 and refused: the data drove it to
+zero, because the model holds a hundredth of the disulfide that two laboratories measure, its oxidant
+running out first (section 6, second-to-last row). That points at the oxygen supply for the
+disulfide share, which is a different quantity from the missing thiol. The saturating removal step,
+on a pool that browning itself makes, is the next one to build.
 
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
 comes from, scores your own measurements, calibrates itself to your laboratory from those
-measurements without touching the shipped model, and lists what to measure next. It refuses questions the
+measurements without touching the shipped model, charges a pea, soy or whey protein's reactive sites
+from measured densities so the thiols and aldehydes meet the protein, answers for the roasted
+pyrazines with the caveat that only the fed-dicarbonyl step is measured, and lists what to measure
+next. It refuses questions the
 evidence cannot answer instead of guessing, and when it refuses it says whether the chemistry has no
 route or only no rate: a small layer of cited reaction rules, run over the model's species, lists the
 steps the literature draws that the model does not have

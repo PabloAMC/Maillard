@@ -290,8 +290,10 @@ python scripts/maillard.py explain 2-pentylfuran   # a refusal, with its declare
 `explain HMF` is worth running for the contrast: it resolves to `lane: trunk`, two formation
 routes, **measured 1 / pinned 1** — and the pinned one keeps the authors' own `Ea = 0`, quoted
 verbatim from their footnote, because no defensible activation energy for that edge exists in any
-paper of the cluster. `explain 2-pentylfuran` prints no routes at all, the reason it is refused,
-and the full list of compounds the model *can* explain.
+paper of the cluster. `explain 2-pentylfuran` prints no route the model HAS, the reason it is
+refused, the full list of compounds the model *can* explain, and, since 8 September 2026, the cited
+rule by which the hypothesis layer reaches it from the linoleate hydroperoxides: the refusal reads
+"no rate, not no route".
 
 Prints every route the model has to that compound, the **evidence class** of each step, and
 the literature anchors those steps rest on:
