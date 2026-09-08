@@ -315,6 +315,19 @@ def _core_buffer(spec: Mapping[str, Any]):
 def _core_process(spec: Mapping[str, Any]):
     from src.kinetic_core.engine import ProcessSpec, ThermalProgram
 
+    process = _build_process(spec, ProcessSpec, ThermalProgram)
+    # the matrix layer's contract is checked at the front door: a named matrix without a loading is
+    # a SpecError here, not a traceback in the engine
+    from src.kinetic_core.matrix_sites import MatrixSpecError, resolve
+
+    try:
+        resolve(process)
+    except MatrixSpecError as exc:
+        raise SpecError(f"{spec.get('name') or 'spec'}: {exc}") from exc
+    return process
+
+
+def _build_process(spec: Mapping[str, Any], ProcessSpec, ThermalProgram):
     return ProcessSpec(
         thermal=ThermalProgram.isothermal(
             float(spec["temp_C"]), float(spec["time_min"])
@@ -323,6 +336,8 @@ def _core_process(spec: Mapping[str, Any]):
         water_activity=float(spec["aw"]) if spec.get("aw") is not None else None,
         matrix=str(spec.get("matrix") or spec.get("protein_type") or "water"),
         buffer=_core_buffer(spec),
+        protein_g_per_l=float(spec["protein_g_per_l"]) if spec.get("protein_g_per_l") is not None else None,
+        protein_sites={str(k): float(v) for k, v in dict(spec["protein_sites"]).items()} if spec.get("protein_sites") else None,
     )
 
 
@@ -441,6 +456,8 @@ def predict_core(
         "declaration": run.declaration.as_dict(),
         "rows": rows,
         "oav_table": oav_payload,
+        "matrix": {"sites": run.run_metadata.get("matrix_sites"), "note": run.run_metadata.get("matrix_sites_note"),
+                   "binding": run.run_metadata.get("matrix_binding") or {}} if run.answered else None,
         "run_metadata": dict(run.run_metadata),
         "caveats": {"core": CORE_CAVEAT},
         "engine": engine_metadata(),
@@ -655,6 +672,22 @@ def render_predict_core_text(payload: Mapping[str, Any]) -> str:
     out.append("")
     out.append(_wrap(payload["caveats"]["core"]))
     out.append("")
+    matrix = payload.get("matrix") or {}
+    if matrix.get("sites"):
+        s = matrix["sites"]
+        pools = s["pools_mmol_per_l"]
+        out.append("")
+        out.append(f"  PROTEIN MATRIX  {s['matrix']} at {s['protein_g_per_l']:g} g/L: sites charged, mmol/L  "
+                   f"free thiol {pools['free_thiol']:.3g}  disulfide {pools['disulfide']:.3g}  amine {pools['amine']:.3g}")
+        out.append(_wrap(f"src: {s['source']}", indent="    "))
+        for compound, b in (matrix.get("binding") or {}).items():
+            lo, hi = b["bound_fraction_corners"]
+            out.append(f"    {compound[:37]:<38} bound to the matrix {100 * b['bound_fraction']:.1f} %  (declared bracket {100 * lo:.1f} to {100 * hi:.1f} %)")
+        if not matrix.get("binding"):
+            out.append("    no requested compound has a declared binding class; the thiols react through the sulfur lane's disulfide channel")
+    elif matrix.get("note"):
+        out.append("")
+        out.append(_wrap(f"protein matrix: {matrix['note']}", indent="  "))
     return "\n".join(out)
 
 

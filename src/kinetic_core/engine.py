@@ -584,6 +584,12 @@ class ProcessSpec:
     #: conditions.vessel). ``None`` = no vessel recorded: the sulfur lane charges the declared
     #: default reservoir and says so.
     vessel: Optional[Any] = None
+    #: 2026-09-08 (the matrix layer): protein loading in g/L and, optionally, the isolate's own site
+    #: densities in mmol per gram ({free_thiol_mmol_per_g, disulfide_mmol_per_g, amine_mmol_per_g}).
+    #: With a named matrix on file, or with protein_sites, the loading charges the reactive-site
+    #: pools (matrix_sites.resolve); without either, nothing is charged and the answer says so.
+    protein_g_per_l: Optional[float] = None
+    protein_sites: Optional[Mapping[str, float]] = None
 
     @property
     def time_min(self) -> float:
@@ -1526,6 +1532,9 @@ class CorePrediction:
         calibrated = dict(self.run_metadata.get("calibration_extra_decades") or {})
         for compound, extra in calibrated.items():
             widths[compound] = math.hypot(float(widths.get(compound, 0.0)), float(extra))
+        # 2026-09-08: the matrix layer's declared binding brackets, priced at their corners
+        for compound, extra in dict(self.run_metadata.get("matrix_extra_decades") or {}).items():
+            widths[compound] = math.hypot(float(widths.get(compound, 0.0)), float(extra))
         return {
             compound: absolute_concentration(
                 value,
@@ -1848,6 +1857,14 @@ def _integrate_program(
         # charge) is left alone. Effect on every panel row: below 1 % at trace
         # thiol (the 2026-09-06 probe).
         state.setdefault("OX", OX_AMBIENT_MMOL_L)
+        # 2026-09-08 (the matrix layer): the protein disulfide pool from the spec's protein loading
+        # and the matrix's site densities; zero, as before, when no loading is stated.
+        if "PROT_SS" not in state:
+            from .matrix_sites import resolve as _resolve_sites
+
+            charged, _note = _resolve_sites(process)
+            if charged is not None and charged.disulfide > 0:
+                state["PROT_SS"] = float(charged.disulfide)
         # B11 (2026-09-07): the headspace reservoir, in ambient units per litre of
         # liquid, from the process's vessel block; the declared default otherwise.
         # Inert while the report's consumers are zero (every wave before B11).
@@ -2093,6 +2110,26 @@ def predict(
             # it is reported in its own unit rather than given an invented one.
             concentrations[compound] = mmol
 
+    # 2026-09-08 (the matrix layer): declared binding of aldehydes and HMF to the charged protein
+    # sites, applied after integration as a pseudo-first-order factor over the thermal programme,
+    # its bracket priced as an interval width. Nothing happens without a stated protein loading.
+    from .matrix_sites import bound_fraction as _bound_fraction
+    from .matrix_sites import resolve as _resolve_sites
+
+    charged_sites, sites_note = _resolve_sites(spec.process)
+    binding: Dict[str, Any] = {}
+    if charged_sites is not None:
+        for compound, key in declaration.mapped_targets.items():
+            result = _bound_fraction(key, charged_sites, spec.process.thermal.segments)
+            if result is None or compound not in concentrations:
+                continue
+            concentrations[compound] = concentrations[compound] * result["remaining_fraction"]
+            binding[compound] = result
+    metadata["matrix_sites"] = charged_sites.as_dict() if charged_sites is not None else None
+    if sites_note:
+        metadata["matrix_sites_note"] = sites_note
+    metadata["matrix_binding"] = binding
+    metadata["matrix_extra_decades"] = {c: r["extra_decades"] for c, r in binding.items()}
     metadata["ph"] = float(spec.process.ph)
     metadata["ph_final"] = spec.process.ph_final
     metadata["buffer"] = (

@@ -17,7 +17,18 @@
     "time_min": {"type": "number", "exclusiveMinimum": 0},
     "ph": {"type": "number", "minimum": 0, "maximum": 14},
     "aw": {"type": "number", "minimum": 0, "maximum": 1},
-    "matrix": {"type": "string", "description": "water (default) or a named matrix"},
+    "matrix": {"type": "string", "description": "water (default), a named matrix with site densities on file (data/species/protein_matrices.yml), or any label"},
+    "protein_g_per_l": {"type": "number", "minimum": 0, "description": "protein loading; with a named matrix or protein_sites it charges the reactive-site pools"},
+    "protein_sites": {
+      "type": "object",
+      "description": "your isolate's reactive sites in mmol per gram of protein; overrides the table",
+      "properties": {
+        "free_thiol_mmol_per_g": {"type": "number", "minimum": 0},
+        "disulfide_mmol_per_g": {"type": "number", "minimum": 0},
+        "amine_mmol_per_g": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
     "protein_type": {"type": "string"},
     "targets": {"type": "array", "items": {"type": "string"}},
     "buffer": {

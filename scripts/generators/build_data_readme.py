@@ -48,6 +48,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/species/desirable_targets.yml": "20 meat-relevant target odorants with odour thresholds; read by `sensory`, `experiment_value`, `recommend`.",
     "data/species/off_flavour_targets.yml": "6 off-note compounds (beany/green/fatty) with thresholds; same readers.",
     "data/species/toxic_markers.yml": "8 safety markers (AGEs, acrylamide, HCAs) with IARC class.",
+    "data/species/protein_matrices.yml": "Reactive-site densities (free thiol, disulfide, amine, mmol per gram) for the protein matrices a dossier states; charged by `protein_g_per_l` in a spec (`src/kinetic_core/matrix_sites.py`).",
     "data/species/structures.yml": "A SMILES (or compound-registry id) for every kinetic-core species key, lumps declared as such; the hypothesis layer's input, checked against the engine's atom counts and molar masses by `tests/unit/test_species_structures.py`.",
     "data/species/precursors.yml": "Precursors by category (amino acids, sugars, exogenous, intermediates, lipids); `src/precursor_resolver.py`.",
     # ---- lit

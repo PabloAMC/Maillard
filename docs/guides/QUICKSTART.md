@@ -166,6 +166,35 @@ the hold-out fold error before and after. The shipped model, the scorecard and e
 artifact are untouched: the calibration is a file under `results/user/<lab>/` that a verb applies
 only when you pass it. Pre-registered in `results/validation/calibration_prereg.md`.
 
+## A protein matrix: `protein_g_per_l` and `protein_sites`
+
+```yaml
+a:
+  name: on_blg
+  precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}
+  temp_C: 145.0
+  time_min: 20.0
+  ph: 5.0
+  aw: 0.98
+  matrix: blg                # site densities on file (data/species/protein_matrices.yml)
+  protein_g_per_l: 10.0
+```
+
+With a loading, the protein's reactive sites are charged: the thiols meet the disulfide pool through
+the sulfur lane's exchange channel, and aldehydes and HMF are bound to the amine and thiol pools by
+declared rates from the adduct dossiers, their brackets shown as an interval. Only β-lactoglobulin
+is on file. For your own isolate, state its sites in mmol per gram:
+
+```yaml
+  protein_g_per_l: 50.0
+  protein_sites: {free_thiol_mmol_per_g: 0.02, disulfide_mmol_per_g: 0.05, amine_mmol_per_g: 0.4}
+```
+
+A named matrix without a loading is refused; a loading with a matrix that has no sites on file
+charges nothing and says so. No site density for pea or soy is on file, because no dossier gives
+one; if you have the measurement, it goes in the spec, and the answer names it. Pre-registered in
+`results/validation/matrix_sites_prereg.md`.
+
 ## Before you trust a result
 
 1. Read the **model card** in [README.md](../../README.md#how-well-calibrated-is-it): every

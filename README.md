@@ -107,8 +107,10 @@ calibration: your levels set a response factor per compound, your contrasts (pot
 time, temperature, pH or recipe) may move the few rate constants they can identify, pulled toward
 the shipped values by their shipped uncertainty, and pots tagged `role: validate` are scored before
 and after. The shipped model never moves; `--calibration` applies the file to `compare`, `predict`
-and `score`. `--json` gives the machine-readable payload of any verb; `--report` writes a
-self-contained HTML page.
+and `score`. A spec may state its protein loading (`protein_g_per_l`, with a matrix on file or its own
+`protein_sites`): the protein's disulfide and amine pools are then charged and the thiols, aldehydes
+and HMF meet them at declared, bracketed rates. `--json` gives the machine-readable payload of any
+verb; `--report` writes a self-contained HTML page.
 
 Regenerate the evidence artifacts:
 

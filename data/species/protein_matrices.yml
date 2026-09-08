@@ -1,0 +1,21 @@
+# Protein matrices as chemistry (2026-09-08, pre-registered in results/validation/matrix_sites_prereg.md).
+#
+# One entry per matrix whose reactive-site densities a dossier on disk states. Sites are per gram of
+# protein; a spec charges them with `protein_g_per_l`. A matrix that is not here is charged only when
+# the spec states its own `protein_sites` (free thiol, disulfide, amine, in mmol per gram); otherwise
+# the engine charges nothing and says so. Nothing here is a rate: the rates are in
+# src/kinetic_core/matrix_sites.py with their own anchors.
+schema_version: 1
+matrices:
+  blg:
+    display_name: beta-lactoglobulin (variant A, 18 362 Da)
+    molar_mass_g_per_mol: 18362
+    source: "anantharamkrishnan2020_extraction.md (18 362 Da, variant A); anantharamkrishnan2020b_extraction.md Methods (15 Lys / 1 free Cys / 2 disulfides / 3 Arg per monomer)"
+    per_monomer: {lysine: 15, free_cysteine: 1, disulfide: 2, arginine: 3}
+    # mmol per gram = count / molar mass * 1000
+    sites_mmol_per_g:
+      free_thiol: 0.05446
+      disulfide: 0.10892
+      amine: 0.81692
+    amine_available_band: [0.4, 1.0]
+    amine_band_note: "anantharamkrishnan2020b flag X-8: the control spectrum shows mono- and di-lactosylated BLG, so not all 15 lysines are free; the band is declared, not measured"

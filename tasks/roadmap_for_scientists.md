@@ -68,6 +68,12 @@ company: three in four.
 
 ## 2. The protein matrix as chemistry, not as a threshold
 
+*Status 2026-09-08: shipped in its bounded form (`src/kinetic_core/matrix_sites.py`, pre-registration
+and outcome in `results/validation/matrix_sites_prereg.md`): sites charged per gram from the table
+(β-lactoglobulin only) or from the spec's own `protein_sites`; the sulfur lane's disulfide channel
+runs with a real pool; aldehydes and HMF bound by declared brackets. Not done: pea and soy site
+densities (no dossier), the envelope draw of the brackets, the electrophile pool made by browning.*
+
 **Why.** Users cook on pea and soy isolates; the engine's protein disulfide sites and electrophile
 pool are zero in every system it has ever run. The adduct dossiers already hold the rates.
 

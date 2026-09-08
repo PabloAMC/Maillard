@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **374**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **375**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -87,6 +87,7 @@ Tracked files: **374**. Local-only (gitignored): scratch runs under `results/qui
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
+| `matrix_sites_prereg.md` | Pre-registration of the protein-matrix layer (reactive sites charged per gram of protein; declared binding of aldehydes and HMF), with its declared tests and outcome. |
 | `model_card.json` | Machine-readable model card; the same content is spliced into README.md between the markers. Written by `model-card` (`src/model_card.py`). |
 | `mycoprotein_reference.*` (2): `mycoprotein_reference.json`, `mycoprotein_reference.md` | Bounded priors for the mycoprotein matrix (`src/mycoprotein_reference.py`). |
 | `network_hypotheses.json` | The hypothesis layer: what the cited reaction rules propose from each lane's reference charge, placed against the engine's reactions (modelled / mechanism known / proposed); steps and products only, no rates (`generate_network_hypotheses.py`, pre-registered in `network_hypotheses_prereg.md`). |
