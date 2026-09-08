@@ -1420,6 +1420,31 @@ states every volatile number is a 120-min endpoint; only the free-Cys curves are
 
 ---
 
+**2026-09-08 (the hypothesis layer and the sink table; owner: "let's do both").**
+- **W7 input ready.** `docs/validation/thiol_sink_candidates.md`: every measured thiol sink from the dossiers on disk
+  (Kumazawa 2003, Mottram 2002, Zhou 2023, Zhang 2024, Hofmann 2002, Gigl 2021, Anantharamkrishnan 2020b, Yuan 2023,
+  Hamzalioglu 2018, the K6b ladder, Zhai 2020/2021, Schieberle 2000) against the model's seven sink channels. Reading:
+  every measured sink has a partner and saturates; the model's dominant sink has neither; the 102 kJ/mol ceiling is
+  the fit asking for a slope no sink shows; Gigl's reversible pool has the wrong sign for an Arrhenius sink. Candidates
+  in order of evidence: (a) a saturable covalent sink on a pool browning makes (Hofmann 2002's rate and plateau),
+  (b) the disulfide made reversible or oxidant-limited (Kumazawa's time-doubling test), (c) thiol-Michael to enals and
+  HMF (28-30 kJ/mol; Hamzalioglu's HMF + Cys rate), (d) Gigl's reversible pool as a declared term. W7's pre-registration
+  should pick (a) and (b) as variants and use the section-8 experiment as the decider.
+- **The hypothesis layer shipped** (`src/network_hypotheses/`, `data/lit/reaction_rules.yml` with 26 cited rules and
+  controls, `data/species/structures.yml`, `results/validation/network_hypotheses.{json,md}` under the freshness gate,
+  pre-registered in `network_hypotheses_prereg.md`; `maillard explain` and the wishlist read it). Follow-ups:
+  - [ ] rules for the routes the panel refuses: oleate hydroperoxide -> nonanal, linoleate -> 2-pentylfuran (Frankel
+    1989's introduction), aldehyde reduction -> 1-hexanol; today the layer says "no cited rule reaches it".
+  - [ ] Strecker products onward: aminoketone + aminoketone -> pyrazine; the panel measures pyrazines and no lane has them.
+  - [ ] a "possible, not modelled" arrow category in the reaction trees (`build_reaction_tree.py`) read from the artifact.
+  - [ ] the forward thiazolidine step (cysteine + pentose -> TTCA, Zhai 2020) as an engine reaction: the engine charges
+    TTCA and models only its ring opening (the layer places R15 as mechanism known).
+- **Molar masses that disagree with the structures** (recorded by `tests/unit/test_species_structures.py`, not corrected,
+  since each moves a reported concentration): SBA 276.24 (Asn + Glc - 2 H2O; the Schiff base is 294.26), THI 337.27
+  (the hydrochloride; the cation is 265.36), DPO and TDP 130.10 (C5H8O4 is 132.11), the four linoleate hydroperoxides
+  310.47 (the hydroxide; the hydroperoxide is 326.48). The LOOH masses convert the lipid lane's mmol/L to ug/L for the
+  hydroperoxide pools; the others are intermediates never reported. One change, guards re-pinned.
+
 ## Appendix A — Disposition of every tracked path under `data/` (current names)
 
 | Path | Consumers (src/scripts/tests) | Disposition |
