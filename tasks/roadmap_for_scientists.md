@@ -187,6 +187,70 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
   any of them needs measured rates: Cao 2020's 24 h levels at three temperatures and Miyazaki's
   isomer-resolved product ratios are the within-study material on disk.
 
+## 5b. Coverage of the declared targets (counted 2026-09-08)
+
+The repository declares twenty desirable odorants and six off-notes for meaty plant-based flavour
+(`data/species/desirable_targets.yml`, `off_flavour_targets.yml`). The engine can name six of the
+twenty and three of the six. The table is the honest map; "rule" is the hypothesis layer, "wave" the
+fitted step.
+
+| compound | pathway | data on disk | rule | wave | what is missing |
+|---|---|---|---|---|---|
+| MFT, FFT, MFT dimer, H2S | pentose + cysteine | many dossiers | yes | B9 (sinks wrong at 100 and 140 °C) | the sink structure (B17a next), the hexose entry |
+| furaneol (DMHF), HMF, furfural | sugar path | Kocadagli, Blank, Hofmann | yes | B7 | furaneol fiftyfold off |
+| 2,5-dimethylpyrazine | Strecker + condensation | Zhou 2024, Leahy 1989 | yes | B18 (fed-dicarbonyl step only) | the dicarbonyl supply in water; Zhou 2025's seventyfold conflict |
+| hexanal, nonanal, 2,4-decadienal | lipid | Frankel slate, Bi 2020, Zhang 2020b, Bi 2026 | yes | B6 (rate assumed) | a measured rate at cooking temperature; the lipoxygenase route before heat |
+| **methional, 3-/2-methylbutanal, 2-methylpropanal, phenylacetaldehyde** | Strecker of Met, Leu, Ile, Val, Phe | Hofmann 2000b (ARP-Phe, one T), Cremer & Eichner 2000 (Ea 115-124, cited not read), Jousse 2002 (lumped), Chan 1994 | R07 (generic) | none: the sugar path carries glycine only | per-amino-acid Strecker rates at two temperatures; methionine's chain to methanethiol, DMDS, DMTS |
+| **dimethyl disulfide, dimethyl trisulfide** | methional → methanethiol → oxidation | Zhang 2024 (MeSH from thiamine only) | no | none | methional → MeSH rate; MeSH oxidation with the same oxidant pool B17 named |
+| **2-ethyl-3,5-dimethylpyrazine, 2,3-dimethylpyrazine, trimethylpyrazine** | aminoketone + Strecker aldehyde | Leahy 1989 (distributions), Yu 2018 (Ea) | R28 (homo pairs only) | B18 makes the parent, 2,5- and methyl- only | the aldehyde-addition step; amino-acid identity |
+| **2-acetyl-1-pyrroline, 2-acetyltetrahydropyridine** | proline / ornithine + dicarbonyl | none | no | none | everything: the bread and crust note of extruded products |
+| **2-pentyl- and 2-hexyl-4-methylthiazole, alkylthiophenes, 2-pentylpyridine** | fatty aldehyde + H2S / NH3 (lipid–Maillard) | none quantitative | no | none | rates or yields from aldehyde + cysteine or ammonia pots; every isolate carries 1-3 % lipid into the cook |
+| 2-methylthiophene, 4,5-dihydro-2-methylthiazole | thiamine / cysteine thermolysis | Hofmann 1998 Table 8 (thiamine) | partly | sulfur lane has thiamine | the thiazoline family |
+| HEMF | pentose + alanine | Blank 1997 (levels) | no | none (alanine and pentose never share a lane) | alanine on the sulfur lane |
+| **2-pentylfuran, 1-octen-3-ol, 1-hexanol** | lipoxygenase and autoxidation before heat | Zhang 2020b, Fischer 2021 levels; Miyazaki 2023 routes | R31, R32 | none | charge them as INPUTS carried by the isolate (Fischer 2021 gives µg per g), not as products |
+| pea methoxypyrazines | biosynthetic, not Maillard | Gao 2020 (figure-only) | not applicable | none | an isolate input with a threshold; nothing to model |
+
+What the table says: the model is deep on one pathway and absent on the three that give a meat
+analogue its Strecker, roasty and lipid–Maillard character, and it treats the isolate's own volatiles
+as products to refuse rather than inputs to carry. The two programmes below follow from it.
+
+## 5c. Programme 6: amino-acid identity on the sugar path (the next wave after B17a)
+
+**Why.** Six of the fourteen missing desirable odorants are Strecker aldehydes or their sulfur
+children, and the roasty pyrazines beyond 2,5-dimethylpyrazine need a Strecker aldehyde to add to
+the ring. The trunk's single amine (glycine) is why none of them can exist.
+
+**Design.** Amino acids become distinguishable reactants on the trunk: one species per class
+(glycine as today; leucine, isoleucine, valine, methionine, phenylalanine, alanine, proline), each
+with its Strecker step on the small dicarbonyls (rule R07 already written), the aldehyde as a
+product species, methional's chain to methanethiol and the two disulfides on the sulfur lane's
+oxidant pool, and the aldehyde-addition step that makes the ethyl- and trimethyl-pyrazines. Rates
+enter as measured or fitted per class; a class without a measured rate is refused by name. Fit rows,
+under the owner's rule: per-amino-acid Strecker rates or yields at two or more temperatures
+(Cremer & Eichner 2000, Hofmann & Schieberle 2000b's ARP-Phe series, the Amrani-Hemaimi 1995 isotope
+fractions stranded since B2, Chan & Reineccius 1994's Strecker Ea, Yu 2018's pyrazine barriers);
+levels validate. Hold-outs: the panel's methional and 3-methylbutanal rows, the Leahy distributions.
+Pre-registration draft: `results/validation/kinetic_core_b19_prereg_draft.md`, to be finished when
+the sources are read. About three weeks after the reading. Chance the Strecker aldehydes land
+within threefold on another laboratory: one in two; the disulfides depend on B17's oxidant finding.
+
+## 5d. Programme 7: the isolate as a reactant and as a carrier
+
+**Why.** A pea or soy isolate holds few free amino acids and much protein-bound lysine and
+arginine; it carries 1 to 3 % lipid and its own volatiles (hexanal, 2-pentylfuran, 1-octen-3-ol,
+methoxypyrazines) into every cook. The model charges free precursors at tens of millimoles and
+refuses the carried volatiles.
+
+**Design.** (i) The matrix table's lysine sites become a slow Maillard reactant (glycation of the
+protein: CML and CEL as the measured markers, colour as the observable), with the free amino acids
+of the isolate charged from its composition. (ii) The isolate's own volatiles enter as declared
+inputs with their measured levels and bands (Fischer 2021, Zhang 2020b), so `predict` reports them
+as carried, with the matrix binding applied, rather than refusing. (iii) The lipid–Maillard cross
+products (2-pentylpyridine, the alkylthiazoles) as rules first, waves when a rate exists. Success:
+a pea-isolate recipe answers hexanal and 2-pentylfuran with an interval and names their origin as
+the isolate; the CML row on the panel becomes evaluable. About four weeks; the glycation rates exist
+in the AGE literature and are the part most likely to land.
+
 ## 6. Cross-cutting engineering, done once
 
 - **One overlay type** for calibrations, matrix declarations and waves, over the engine's existing
@@ -209,6 +273,8 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
 | 2 matrix | 3 weeks | 6, the mass fix | matrix median improves; free rows unchanged |
 | 3 sink | 1 week + laboratory | none | a variant passes its ship rule |
 | 5 chemistry | rules now; waves when data exist | hypothesis layer | each rule cited and controlled |
+| 6 amino-acid identity | 3 weeks after the reading | B17a, the Strecker sources | Strecker aldehydes within threefold on another laboratory |
+| 7 isolate as reactant and carrier | 4 weeks | 6, the matrix layer | carried volatiles answered with their origin; the CML row evaluable |
 
 Calibrate goes first because it makes every other gap something the user's own data can close.
 If a laboratory can run the sink experiment soon, programme 3 moves to the front, since its result

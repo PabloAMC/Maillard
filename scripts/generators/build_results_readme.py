@@ -47,6 +47,7 @@ DESCRIPTIONS: Dict[str, str] = {
     # ---- frozen wave records (scripts/generators/WAVES.md: not re-run; a change is a new wave)
     "results/validation/kinetic_core_b*_fit_report.*": "FROZEN fit reports, one per wave. The engine reads b1 (trunk), the shipped sulfur wave (b9), b3 (acrylamide), b6 (lipid) and b7 (trunk targets); earlier sulfur waves (b2, b2_1..b2_4, b8) are the audit trail of how b9 was reached.",
     "results/validation/kinetic_core_b*_holdout_report.*": "FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports.",
+    "results/validation/kinetic_core_b19_prereg_draft.md": "DRAFT pre-registration of wave B19 (amino-acid identity on the sugar path): the structure, the rows it needs and where they must come from; becomes a pre-registration when the sources are on disk.",
     "results/validation/kinetic_core_b*_prereg.md": "Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests.",
     "results/validation/kinetic_core_b*_diagnosis.md": "Per-wave diagnosis notes; b2_1/b2_2 are quoted by `parameters_sulfur.py` and `panel.py`.",
     "results/validation/kinetic_core_b*_exam*.*": "FROZEN cutover-exam scores per wave / ensemble member (the exam generator was deleted at B5b; these are history).",
