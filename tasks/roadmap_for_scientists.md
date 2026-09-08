@@ -161,7 +161,8 @@ what it has is the level a storage-and-processing model must reach and the enzym
 
 Each starts as a rule in the hypothesis layer and becomes a wave only when a measured rate exists.
 - **Pyrazines** (roasted, nutty): the aminoketone condensation after the Strecker step; the
-  registry has the species. Rule first; a wave when a rate source is read.
+  registry has the species. Rule first (done); the wave is pre-registered (B18) now that a rate
+  source is read; the run is next.
 - **The beany note before any heat**: hexanal from lipoxygenase during processing. Different
   chemistry, its own module and its own data programme; the lipid lane must not be stretched to it.
 - **Extrusion**: two minutes at 130 to 170 °C at low moisture. The process spec already takes a

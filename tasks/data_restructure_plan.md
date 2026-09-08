@@ -1387,6 +1387,20 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       a LOX rate in molar units (needs epsilon 234 and the assay geometry), (iii) the hexanal fate
       (alcohol dehydrogenase to 1-hexanol, binding, evaporation). Until (i) exists the levels above
       are validation rows for a storage model, not fit rows.
+- [ ] **B18 (pre-registered 2026-09-08, not run): a pyrazine step on the trunk.** Five dossiers read
+      (zhou2024, leahy1989, leahy1989a, yu2018, balagiannis2015). FIT rows: Zhou 2024's six initial
+      rates (Ala + GO -> pyrazine 0.0279 / 0.0791 / 0.1507 umol/L/min; Ala + MGO -> 2,5-DMP 0.0035 /
+      0.0100 / 0.0230 at 100 / 110 / 120 C, 20 + 20 mM, pH 8 unbuffered; Ea 100.6 / 111.7 kJ/mol;
+      conversion < 0.2 % so each is a second-order constant 6.98e-8 / 8.75e-9 L/(mmol min) at 100 C)
+      and Leahy 1989's four within-study pH ratios (k(9)/k(7) ~ 2-3, k(9)/k(5) ~ 20-60). Declared:
+      alanine -> glycine transfer (+/- 0.5 dex), the mixed methylpyrazine route (geometric mean).
+      Hold-outs: Leahy's 95 C / 2 h distribution and total, Leahy's and Yu 2018's barriers, Zhou 2023's
+      pyrazine columns out of lane. Prereg `results/validation/kinetic_core_b18_prereg.md`. Registry
+      gap: the parent pyrazine has no molecule row (class alias only); glyoxal, methylglyoxal, glycine,
+      alanine, lysine, glucose have no rows either (precursors are keyed elsewhere). Fetch list from
+      Balagiannis 2015: Huang, Bruechert & Ho 1989 J Food Sci 54:1611 (aqueous, 120-140 C, pH 10, zero
+      order: the only pyrazine rates above 120 C), Parker 2013 JSFA 93:197 (consolidated review),
+      Jusino 1997 JAFC 45:3164 (solid state, first order, Ea 56.5 kJ/mol).
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT
