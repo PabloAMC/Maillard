@@ -4,10 +4,10 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-08",
     "git": {
-      "commit": "f122bfac43e6ad8527d7bbd9cdf206504b998cf5",
-      "short": "f122bfac",
+      "commit": "34da5b51c0b1595c35ec78e14ee9d2caef15b584",
+      "short": "34da5b51",
       "branch": "cleaning",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "f50a9f8c7204f1c24673a33abc6f921b4d10cf54f656bc58c5bbf9829e9ef0f2"
+        "sha256": "5021abe6d7ce1b50e08ed1d4e5dfeeda95b4adc5d374101376e10526b577cf3b"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -574,12 +574,12 @@
     },
     {
       "axis": "ph",
-      "agree": 7,
-      "evaluable": 9,
-      "not_evaluable": 5,
+      "agree": 8,
+      "evaluable": 10,
+      "not_evaluable": 4,
       "verdict": "caution",
-      "wilson_lower_bound": 0.453,
-      "additional_agreeing_claims_to_trust": 2,
+      "wilson_lower_bound": 0.49,
+      "additional_agreeing_claims_to_trust": 1,
       "structural_block": null
     },
     {
@@ -594,12 +594,12 @@
     },
     {
       "axis": "temperature",
-      "agree": 6,
-      "evaluable": 10,
-      "not_evaluable": 3,
+      "agree": 7,
+      "evaluable": 11,
+      "not_evaluable": 2,
       "verdict": "caution",
-      "wilson_lower_bound": 0.313,
-      "additional_agreeing_claims_to_trust": 10,
+      "wilson_lower_bound": 0.354,
+      "additional_agreeing_claims_to_trust": 9,
       "structural_block": null
     }
   ],
@@ -729,7 +729,7 @@
       "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "2 more independent ordering claims on ph (all agreeing)",
+      "if_measured": "1 more independent ordering claims on ph (all agreeing)",
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
     },
     {
@@ -737,7 +737,7 @@
       "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "10 more independent ordering claims on temperature (all agreeing)",
+      "if_measured": "9 more independent ordering claims on temperature (all agreeing)",
       "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
     }
   ],
