@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **383**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **389**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -76,7 +76,11 @@ Tracked files: **383**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b16_lift_members/` (2 files) | B16 lift-variant members (the thiol-sink barrier ceiling raised to 160 kJ/mol; information only, cannot ship). |
 | `kinetic_core_b16_members/` (2 files) | B16 optimiser members (two starts; the thiol-sink wave: B9 + Schieberle 2000's 100 C ratios + Zhai 2021's TTCA rows). |
 | `kinetic_core_b16_ship_rule.*` (2): `kinetic_core_b16_ship_rule.json`, `kinetic_core_b16_ship_rule.md` | The B16 prereg's ship rule (sec. 4) evaluated on the frozen B9 / B16 / B16-lift artifacts without switching the engine (`generate_kinetic_core_b16_ship_rule.py`). |
+| `kinetic_core_b17_fit_report.json` | B17 frozen fit (64 rows, 24 free): the disulfide gives the thiol back, one shared release constant with the dimerisation's measured barrier. Read by the engine only if the B17 ship rule said SHIP (`kinetic_core_b17_prereg.md` sec. 6). |
+| `kinetic_core_b17_laplace_covariance.json` | Laplace covariance at the frozen B17 optimum (`generate_kinetic_core_b8_laplace.py --wave b17`). |
+| `kinetic_core_b17_members/` (2 files) | B17 optimiser members (two starts; the sink-structure wave: B16's 64 rows + the disulfide-release constant). |
 | `kinetic_core_b17_prereg.md` | Pre-registration of wave B17, the sink structure (a reversible disulfide, then a saturable sink on a browning-made pool): variants, rows, hold-outs and the ship rule; written before the generator, not yet run. |
+| `kinetic_core_b17_ship_rule.*` (2): `kinetic_core_b17_ship_rule.json`, `kinetic_core_b17_ship_rule.md` | The B17 prereg's ship rule (sec. 4) evaluated on the frozen B9 / B17 artifacts without switching the engine: the 100 C reference pot, the B9 rows, the dimer shares (Zhou 2023, Zhang 2024), Yiltirak, Wang 2022's 140 C shape, identification (`generate_kinetic_core_b17_ship_rule.py`). |
 | `kinetic_core_b18_ship_rule.*` (2): `kinetic_core_b18_ship_rule.json`, `kinetic_core_b18_ship_rule.md` | The B18 prereg's ship rule (sec. 4) evaluated on the frozen B18 artifacts: T1-T6, the Leahy and Yu hold-outs, the glyoxal-sink conditionality (`generate_kinetic_core_b18_ship_rule.py`). |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |

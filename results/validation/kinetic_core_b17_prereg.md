@@ -71,8 +71,44 @@ experiment in the introduction's section 8 is the only remaining route.
 It will not move the formation steps, the pH structure or the barrier bands; it will not read any
 hold-out; it will not ship a variant that passes T1 by breaking T2.
 
-## 6. Outcome
+## 6. Outcome (2026-09-08, variant (b) run the same night) — DO NOT SHIP, and a sharper diagnosis
 
-*(not yet run; the generator `generate_kinetic_core_b17_fit.py` is to be derived from B16's, with the
-new reaction and coordinate added to the sulfur network and the B23 vector as B10 added the route
-barriers)*
+**What was built.** `ch_dimer_release_mft` / `ch_dimer_release_fft` (MFTD → 2 MFT, FFTD → 2 FFT) in the
+sulfur network on one shared constant `k_dimer_release`, inert (zero) unless a B17 report supplies it,
+so every earlier wave reproduces bit for bit (the B11 discipline); its barrier is the dimerisation's
+own measured 122.2 kJ/mol. Generator `generate_kinetic_core_b17_fit.py`: B16's 64-row objective, the
+constant appended to the vector as B11 appended its oxygen consumers (24 free), two starts, the
+600-evaluation budget; Laplace `--wave b17`; ship rule `generate_kinetic_core_b17_ship_rule.py`.
+
+**The fit.** Both starts land on B16's optimum: cost 931.1 and 931.3 (B16: 931.0), with the release
+constant driven to the floor of its band (log10 −8.26 and −8.09 per minute at 145 °C: off). The cost
+slice along the coordinate is flat to four decimals over two decades either side; the Laplace σ is
+4.8 × 10⁴ dex. The data neither want nor can see a disulfide release.
+
+- **T1 failed**, as in B16: MFT at 100 °C peaks at six hours (110.6 → 97.4 µg/L from 6 to 12 h) where
+  the pot keeps rising; the 360 and 720 min ratios are 0.85 and 0.97 dex low. FFT within 0.35 dex.
+- **T2 failed**, as in B16: the fed-ribose MFT row moves +1.90 dex; 16 B9 rows move more than 0.3 dex.
+- **T3 failed, and this is the finding.** The model's dimer shares are 0.04 / 0.35 / 0.90 % of the
+  free thiol at pH 6 / 7 / 8 in Zhou 2023's pot (measured 8.6 / 6.5 / 9.6 %) and 0.39 % in Zhang
+  2024's cysteine arm (measured 8.7 %): ten to two hundred times too little disulfide, with both
+  dimerisation constants already on the upper edge of their bands. The dimerisation is not
+  rate-limited; it is oxidant-limited. The ambient oxidant pool the lane charges (the B11 reservoir
+  shipped inert) runs out, so the disulfide channel cannot hold the 7 to 10 % of the thiol the two
+  laboratories find there, and making that channel reversible returns nothing because there is
+  nothing to return.
+- **T4 passed**: Yiltirak's four pots, median fold 13.6 (B9: 115), the same gain B16 showed.
+- **T5 failed**: Wang 2022's 140 °C pot, MFT falls 1.32 dex from its 30-minute peak (the pot declines
+  gently); FFT 0.11 dex.
+- **T6 failed**: unidentified, slice flat.
+
+**Variant (a)** (the saturable thioether sink on a pool browning makes) is the next run by this
+pre-registration's own order; it was not run tonight. What T3 adds to its brief: the oxidant supply
+is now a named suspect for the dimer share, which is a different quantity from the missing thiol,
+and the two should not be conflated. A pot that holds 7 to 10 % of its thiol as disulfide with the
+ambient oxidant exhausted needs either a larger reservoir (B11's vessel plumbing exists and ships
+inert) or a second oxidant; that is a question for the laboratory experiment in the introduction's
+section 8, where the disulfides are quantified in the same run.
+
+Kept as a record: `kinetic_core_b17_fit_report.json`, `kinetic_core_b17_laplace_covariance.json`,
+`kinetic_core_b17_ship_rule.{json,md}`, the two members. The engine keeps reading B9; the release
+steps stay in the network at zero.

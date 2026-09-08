@@ -79,9 +79,11 @@ def evidence_class_of(
 
 def _lane_reactions(lane: str) -> Tuple[Any, ...]:
     if lane == "trunk":
-        from src.kinetic_core.network import REACTIONS
+        # TRUNK_REACTIONS, not REACTIONS: the trunk-only steps (B13's dicarbonyls, B18's pyrazines)
+        # run on the trunk integrator and belong on its page
+        from src.kinetic_core.network import TRUNK_REACTIONS
 
-        return tuple(REACTIONS)
+        return tuple(TRUNK_REACTIONS)
     if lane == "sulfur":
         from src.kinetic_core.sulfur import FULL_REACTIONS
 

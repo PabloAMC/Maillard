@@ -51,6 +51,12 @@ with a pool the pot itself makes.
 2. **The barrier band is not a barrier.** The only measured temperature dependence of a thiol sink is Gigl's covalent channel at 6 to 60 °C, and even there a single first-order fit fails inside the window. The model's 102 kJ/mol on the ceiling is the fit asking for a steeper slope than any sink shows, to reconcile 100 °C with 145 °C. A sink whose partner is made by browning rises with temperature through the partner, not through its own barrier.
 3. **The reversible pool has the wrong sign for an Arrhenius sink.** Gigl's free thiol rises with temperature over the first minutes. No first-order sink with a positive barrier can do that. A reversible reservoir with a negative enthalpy can.
 4. **The candidates, in order of evidence.** (a) A saturable covalent sink on a pool the pot makes (melanoidin-type electrophiles from the sugar branch), with Hofmann 2002's rate and plateau as the anchor and the pool charged from browning rather than as an input. (b) The disulfide made reversible or made second-order with a depletable oxidant, which the model already has in form, with Kumazawa's time-doubling test as the check. (c) Thiol-Michael addition to the enals and to HMF, with the 28 to 30 kJ/mol barrier and the HMF + cysteine rate as analogues, for the pots with fat or a hexose. (d) Gigl's reversible pool as a declared term with its measured enthalpy.
+4b. **Candidate (b) was run (wave B17, 2026-09-08) and the data drove it to zero.** Making the
+   disulfide reversible changed nothing, because the model holds 0.04 to 0.9 % of its free thiol as
+   disulfide where Zhou 2023 and Zhang 2024 measure 6.5 to 9.6 %, with both dimerisation constants
+   already on the ceiling of their bands: the channel is oxidant-limited, not rate-limited. The
+   oxidant supply is therefore a suspect for the dimer share; it is not the missing thiol, which is
+   larger than the whole disulfide pool. Candidate (a) is the next run.
 5. **The measurement that decides it** is the one in the introduction's section 8: the reference pot and the fed thiols on the same grid at 100 and 140 °C, with the disulfides quantified in the same run. If the fed thiol levels off with its disulfide, (b) is right; if it keeps falling while a browning marker rises, (a) is.
 
 ### 2b. The dry regime, from the same laboratory (read 2026-09-08)

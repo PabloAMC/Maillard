@@ -1349,7 +1349,12 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       readings). BUT weakening the low-T sinks moves Yiltirak 100/110 C from 198x to 14x: the between-lab
       misses are a LOW-TEMPERATURE SINK problem, and a single Arrhenius sink cannot serve 100 C and 145 C
       at once. Liu 2023's 168 C MFT decline (RIB-T-01) becomes evaluable and agrees. Engine keeps B9.
-- [ ] **W7 (from B16). Sink structure.** Reversible thiol dimerisation (disulfide pool re-releasing thiol,
+- [ ] **W7 (from B16). Sink structure.** UPDATE 2026-09-08: B17 variant (b) RUN, DO NOT SHIP (prereg sec. 6):
+      release driven to its floor, cost = B16's, slice flat; T3 shows the model's dimer share 10-200x below
+      Zhou 2023 / Zhang 2024 with k_dimer_* on their ceiling -> the disulfide channel is OXIDANT-limited
+      (B11's reservoir ships inert). Variant (a) (saturable thioether sink on browning-made MELE) is next;
+      the oxidant supply is a second, separate suspect for the DIMER SHARE, not for the missing thiol.
+      Original entry: Reversible thiol dimerisation (disulfide pool re-releasing thiol,
       temperature-dependent equilibrium) and/or a sink scaling with the carbonyl/melanoidin pool; the
       pentose supply at 100 C (formation dries up at 6 h in the model, not in the pot); the TTCA return
       path (k_ttca_cys against Zhai 2021). Pre-register against B16's ten rows + the fed pots; the

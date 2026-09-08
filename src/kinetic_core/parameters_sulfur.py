@@ -965,6 +965,39 @@ def oxygen_parameters(
     }
 
 
+#: B17 (2026-09-08): the disulfide-release constant's search band, log10 k at 145 C (1/min): the
+#: sulfur fit's own numerical band (FITTED_SULFUR_BOUNDS_LOG10K's shape).
+DIMER_RELEASE_BOUNDS_LOG10K: Tuple[float, float] = (-10.0, 0.5)
+
+
+def dimer_release_parameters(k_dimer_release: float = 0.0) -> Dict[str, SulfurParameter]:
+    """
+    The B17 release constant as a SulfurParameter. The DEFAULT is zero: with it the two release
+    steps (sulfur.py ch_dimer_release_*) carry no flux and every wave before B17 reproduces bit
+    for bit. Its barrier is the dimerisation's own measured one (Zhang 2026 k17, the same
+    ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL the two ch_dimer_* channels carry), so the disulfide's
+    equilibrium constant, not the two rates, carries the temperature dependence -- the
+    pre-registration's declared structure (kinetic_core_b17_prereg.md sec. 2, variant b).
+    """
+    return {
+        "k_dimer_release": _sulfur_parameter(
+            "k_dimer_release", "thiol disulfide dimer -> 2 thiol (release; MFTD and FFTD share it)", 1,
+            k_ref=float(k_dimer_release), ea=ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL,
+            evidence_class="derived_from_fit_data",
+            source_anchor=("B17 (kinetic_core_b17_prereg.md sec. 2): the disulfide made reversible; barrier shared with "
+                           "the dimerisation, " + ZHANG_DISULFIDE_ANCHOR),
+            dossier_anchor=("results/validation/kinetic_core_b17_prereg.md; kumazawa2003_extraction.md (the apparent loss "
+                            "rate halves when the cook doubles); zhou2023_extraction.md sec. 2.1 (dimer 6.5-9.6 % of MFT); "
+                            "zhang2024_extraction.md (dimer share follows the oxidant)"),
+            conditions="aqueous, pH 4.5-7, 100-145 C; the reducing partner is not tracked (pseudo-first order)",
+            ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_release", flags=("b17_dimer_release", "fitted_here", "no_literature_value",
+                                             "measured_Ea_override", "fit_cannot_move_this_barrier"),
+            note="Zero until a B17 report supplies it; the barrier is Zhang 2026's 122.2 kJ/mol, shared with ch_dimer_*.",
+        ),
+    }
+
+
 MEASURED_SULFUR: Mapping[str, SulfurParameter] = {
     # B11 (2026-09-07): the oxygen constants at their INERT defaults (consumers zero),
     # so every frozen generator carries the keys and reproduces exactly.
@@ -1573,6 +1606,12 @@ ZHANG_CYS_AMADORI_FORMATION_NO_SITE = (
     "a later wave that adds the formation edge inherits the measurement rather "
     "than fitting one."
 )
+
+# B17 (2026-09-08): the disulfide-release constant at its INERT default (zero) joins the measured
+# table here, after the Zhang constants its barrier is tied to exist (the B11 discipline: every
+# frozen generator carries the key and reproduces exactly).
+MEASURED_SULFUR = {**MEASURED_SULFUR, **dimer_release_parameters()}
+
 
 # ---------------------------------------------------------------------------
 # (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four

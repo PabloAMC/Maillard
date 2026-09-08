@@ -102,6 +102,10 @@ def frozen_vector(report: Dict[str, Any]) -> np.ndarray:
     oxy = fr.get("oxygen_log10_k") or {}
     if oxy:
         extra += [float(oxy["k_cys_ox"]), float(oxy["k_red_ox"])]
+    # B17: the disulfide-release constant, log10, appended after everything else.
+    rel = fr.get("dimer_release_log10_k") or {}
+    if rel:
+        extra += [float(rel["k_dimer_release"])]
     return np.array(
         [fr["log10_k_ref_at_145C"][k] for k in B23.PARAM_ORDER]
         + [lumped]

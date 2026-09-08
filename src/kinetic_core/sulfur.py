@@ -791,6 +791,21 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "ch_red_ox_nf", {"NF": 1, "OX": 1}, {"FRAG_C": 5, "OXV": 1}, "k_red_ox",
         "B11. The norfuraneol arm of the reductone oxygen sink.",
     ),
+    # ---- B17 (2026-09-08): the disulfide gives the thiol back --------------------------
+    # One shared constant, `k_dimer_release`, INERT (zero) unless a B17 report supplies it,
+    # so every wave before B17 reproduces bit for bit (the B11 discipline). Its barrier is
+    # the dimerisation's own measured one (Zhang 2026 k17, MEASURED_EA_OVERRIDES), so the
+    # equilibrium constant, not the two rates, carries the temperature dependence
+    # (kinetic_core_b17_prereg.md sec. 2, variant b).
+    Reaction(
+        "ch_dimer_release_mft", {"MFTD": 1}, {"MFT": 2}, "k_dimer_release",
+        "B17. bis(2-methyl-3-furyl) disulfide -> 2 MFT (reduction back to the thiol; the "
+        "reducing partner is the pot's reductone pool, not tracked). Zero until B17 supplies it.",
+    ),
+    Reaction(
+        "ch_dimer_release_fft", {"FFTD": 1}, {"FFT": 2}, "k_dimer_release",
+        "B17. bis(2-furfuryl) disulfide -> 2 FFT; shares k_dimer_release.",
+    ),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.

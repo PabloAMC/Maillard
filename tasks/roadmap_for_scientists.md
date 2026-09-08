@@ -103,8 +103,12 @@ will be wide and the card must say so.
 
 ## 3. The thiol sink (W7)
 
-*Status 2026-09-08: pre-registered as wave B17 (`results/validation/kinetic_core_b17_prereg.md`) with
-the variants, the rows, the hold-outs and the ship rule; the generator and the runs are next.*
+*Status 2026-09-08: variant (b) of wave B17 ran the same night and does not ship (prereg section 6):
+the data drive the disulfide release to zero because the model holds 0.04 to 0.9 % of its thiol as
+disulfide where Zhou 2023 and Zhang 2024 measure 6.5 to 9.6 %, with the dimerisation constants on
+their ceiling. The channel is oxidant-limited, which names the ambient oxidant pool (B11's reservoir,
+shipped inert) as a suspect for the dimer share. Variant (a), the saturable sink on a browning-made
+pool, is the next run.*
 
 **Why.** The meaty character the users want is the thiols, and the model loses them too fast at
 every temperature. The candidate table is written (`docs/validation/thiol_sink_candidates.md`).

@@ -1243,3 +1243,16 @@ ran.
    the sulfur and acrylamide networks keep the topology their fits were run on, and a pyrazine target on
    another lane is refused by name (the B13 rule).
 
+## Amendment 28 — 2026-09-08 (Wave B17, variant b: the disulfide gives the thiol back)
+
+1. **NO NEW FIT ROW; ONE NEW COORDINATE.** B16's 64 rows unchanged (B9's 54, Schieberle 2000's seven
+   ratios, Zhai 2021's three TTCA rows); `k_dimer_release` (MFTD → 2 MFT, FFTD → 2 FFT, shared) appended
+   to the vector with the dimerisation's measured barrier (Zhang 2026 k17, 122.2 kJ/mol) so the
+   equilibrium constant carries the temperature dependence. Every B9 band kept.
+2. **WHAT IS VALIDATED.** The Hofmann pH-5 level bundles, Yiltirak 2026's four pots, Wang 2022's 140 °C
+   shape, Zhou 2023's and Zhang 2024's dimer shares, Bolton 1994, the returned Hofmann pH-3 and pH-7 rows:
+   none enters the objective; the ship rule reports them.
+3. **INERT DEFAULT.** The two release steps live in `sulfur.py` at zero unless a shipped report carries
+   `dimer_release_log10_k`; the B17 rule said DO NOT SHIP, so the engine reads B9 and the steps carry no
+   flux. The record stands for the finding it produced: the lane's disulfide channel is oxidant-limited.
+

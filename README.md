@@ -186,13 +186,13 @@ Three things a reader must know, all declared in code and printed on every row t
 [`core_directional_scores.md`](results/validation/core_directional_scores.md) runs every claim of
 the 92-claim literature panel ([`directional_claims_panel.yml`](docs/validation/directional_claims_panel.yml))
 through the same front door a user calls. Nineteen claims are prose-only and 13 more are not
-evaluable on the core: an arm refused because 2,5-dimethylpyrazine and 2-pentylfuran are not core
+evaluable on the core: an arm refused because 2-pentylfuran is not a core
 species or H2S and hydroxyacetaldehyde are not core precursors, or because the comparison moves an
 axis the lane has no term for. **The engine refuses those comparisons outright** (water activity
 on the sulfur and lipid lanes and outside its measured window on the acrylamide lane; pH on the lipid
 lane and outside its window on the acrylamide lane; the trunk answers both with a declared, banded term) rather than returning two identical numbers,
 so they are not evaluable rather than misses. Of the rest: sugar identity 4 of 8, temperature 5 of 9,
-time 2 of 2, cysteine present-vs-absent 2 of 3, pH on the sulfur lane 7 of 9, water activity on the
+time 2 of 2, cysteine present-vs-absent 2 of 3, pH 8 of 10, water activity on the
 trunk 1 of 2 (the peak at a_w 0.6-0.7 is reproduced; a monotone fall with water is not, as
 [`kinetic_core_b12_prereg.md`](results/validation/kinetic_core_b12_prereg.md) expected).
 **The sulfur lane's temperature behaviour was scored for the first time on 2026-09-06** (programme
