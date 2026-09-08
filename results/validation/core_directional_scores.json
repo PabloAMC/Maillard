@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (97 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (99 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-08",
     "git": {
-      "commit": "cc1d665a6da30e89db576421ac06a538a37b1012",
-      "short": "cc1d665a",
+      "commit": "fda59aa907e083d0ceee5274756e5dc39ba1ab58",
+      "short": "fda59aa9",
       "branch": "cleaning",
       "dirty": true
     },
@@ -503,7 +503,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 43.3
+    "wall_seconds": 44.0
   },
   "claims": [
     {

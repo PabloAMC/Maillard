@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (97 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (99 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -43,12 +43,12 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-09-07",
+    "generated_on": "2026-09-08",
     "git": {
-      "commit": "1b3e99066163c59040f074f64d30efeeb37e7f99",
-      "short": "1b3e9906",
+      "commit": "fda59aa907e083d0ceee5274756e5dc39ba1ab58",
+      "short": "fda59aa9",
       "branch": "cleaning",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -409,11 +409,11 @@
         "within_band_rate": 0.0,
         "fold_summary": {
           "n": 1,
-          "median_fold_error": 11.930016362529054,
-          "worst_fold_error": 11.930016362529054,
-          "best_fold_error": 11.930016362529054,
-          "median_abs_log10_error": 1.0766410393242567,
-          "geometric_mean_fold": 11.930016362529052
+          "median_fold_error": 11.930016362529066,
+          "worst_fold_error": 11.930016362529066,
+          "best_fold_error": 11.930016362529066,
+          "median_abs_log10_error": 1.0766410393242571,
+          "geometric_mean_fold": 11.930016362529063
         }
       }
     },
@@ -2728,14 +2728,14 @@
           "target_unit": "ppb",
           "measured": 17400.0,
           "measured_ppb": 17400.0,
-          "predicted": 1458.5059627119706,
-          "fold_error": 11.930016362529054,
-          "abs_log10_error": 1.0766410393242567,
+          "predicted": 1458.505962711969,
+          "fold_error": 11.930016362529066,
+          "abs_log10_error": 1.0766410393242571,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            208.53267951131534,
-            10200.98935213147
+            208.5326795113151,
+            10200.989352131459
           ],
           "measured_within_interval": false,
           "lane": "trunk",
@@ -2754,8 +2754,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 11.930016362529054,
-      "mean_abs_log10_error": 1.0766410393242567,
+      "max_ratio": 11.930016362529066,
+      "mean_abs_log10_error": 1.0766410393242571,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
