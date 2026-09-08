@@ -72,7 +72,7 @@ company: three in four.
 and outcome in `results/validation/matrix_sites_prereg.md`): sites charged per gram from the table
 (β-lactoglobulin only) or from the spec's own `protein_sites`; the sulfur lane's disulfide channel
 runs with a real pool; aldehydes and HMF bound by declared brackets. Same evening: pea and soy
-isolates entered the table with measured thiol and disulfide densities (four dossiers; prereg
+isolates entered the table with measured thiol and disulfide densities (five dossiers; prereg
 section 5); their amine density is still not on file, so they bind no aldehyde. Not done: the
 envelope draw of the brackets, the electrophile pool made by browning.*
 
@@ -151,7 +151,13 @@ page round-trips the template spec.
 
 *Status 2026-09-08: the pyrazine rule is in the hypothesis layer (the layer reaches the three panel
 pyrazines from a Strecker charge); nonanal, 2-pentylfuran and 1-hexanol still lack a cited route.
-The calibrated interval now carries the factor's sigma (programme 1's leftover).*
+The calibrated interval now carries the factor's sigma (programme 1's leftover). The beany note
+now has its first data on disk (`zhang2020b`, `gao2020`, `wang2014`, `wang2015` dossiers): raw pea
+milk at 2 % protein, no heat, holds 164 µg/L hexanal and 387 µg/L 1-hexanol against 437 and 284
+in soy milk, from about 14 mg/L free linoleic acid, with pea lipoxygenase-2 at 2160 U per mg
+protein and no lipoxygenase-1; a finished pea isolate still carries 0.43 of the lipoxygenase it had
+at the curd stage. No time course exists in any of them, so the module still has no rate to fit;
+what it has is the level a storage-and-processing model must reach and the enzyme it must charge.*
 
 Each starts as a rule in the hypothesis layer and becomes a wave only when a measured rate exists.
 - **Pyrazines** (roasted, nutty): the aminoketone condensation after the Strecker step; the

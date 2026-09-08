@@ -74,14 +74,14 @@ binding declared, bracketed and printed, rather than absent.
 
 ## 5. Addendum (2026-09-08, evening): pea and soy isolates enter the table
 
-Four papers were read the same day (`ruan2014`, `shimada1988`, `chihi2016`, `shen2022` extraction
-dossiers) and the table gained two MEASURED entries beside the sequence-computed β-lactoglobulin,
-in mmol per gram of protein, native isolate:
+Five papers were read the same day (`ruan2014`, `shimada1988`, `chihi2016`, `shen2022`, `gao2020`
+extraction dossiers) and the table gained two MEASURED entries beside the sequence-computed
+β-lactoglobulin, in mmol per gram of protein, native isolate:
 
 | matrix | free thiol | disulfide | amine | what the spread is |
 |---|---|---|---|---|
 | soy isolate | 0.0078 (0.0075 to 0.0080) | 0.050 (0.046 to 0.053) | not on file | two isolates and two thiol reagents agree; the disulfide is half-cystine minus free thiol over two in both papers, not a direct assay |
-| pea isolate | 0.0053 (0.0021 to 0.0135) | 0.0042 (one laboratory) | not on file | the globulin fraction (Chihi) and a whole isolate (Shen) differ sixfold in free thiol; the disulfide is the globulins' and a probable lower bound |
+| pea isolate | 0.0159 (0.0021 to 0.0174) | 0.0257 (0.0042 to 0.0297) | not on file | the centre is Gao 2020's whole isolate at three extraction pHs (Ellman's in urea, per gram of protein); Shen 2022's whole isolate agrees; the globulin fraction alone (Chihi 2016) carries a fifth, and the band reaches down to it |
 
 What this changes: a spec that names `soy_isolate` or `pea_isolate` with a loading charges the
 sulfur lane's disulfide pool from a dossier instead of refusing. What it does not change: no paper
@@ -93,4 +93,12 @@ and lose disulfide at 85 °C), and that is not modelled. Chihi 2016's β-lactogl
 (free thiol 0.0425, disulfide 0.1025 mmol/g) sit at 78 % and 94 % of the table's sequence-computed
 values, which is the cross-check T2 lacked. The T2 test now also asserts the two measured entries and
 the missing-amine note; T1, T3, T4, T5 are unchanged and pass.
+
+One tension the reads leave on the binding brackets: Wang & Arntfield 2015 print a canola-protein
+time course at 95 °C in which hexanal goes from 14 to 67 % bound within ten minutes, most of it in
+the first thirty seconds. That is orders of magnitude faster than the ambient adduct brackets this
+layer extrapolates to cooking temperature, and the paper reads it as headspace depletion by a
+denaturing protein, not as adduct formation. The pea values in the same paper are figure-only.
+Recorded, not modelled: the bracket stays the adduct dossiers', and a laboratory that measures
+retention on its own isolate calibrates it through `maillard calibrate`.
 

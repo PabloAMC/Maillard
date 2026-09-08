@@ -1372,6 +1372,21 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       46:1954 (SIDA thiols in cooked meat, a food-matrix validation row). Side finding: the "342" the
       inventory refused as fabricated from Hofmann 1998 is 3-mercapto-2-butanone, 342 ug/100 mmol
       ribose, in Schieberle 2000 Table III (wrong paper and probably wrong analyte); "200" is nowhere.
+- [ ] **LOX-01 (from the 2026-09-08 reads of Zhang 2020b, Gao 2020, Wang 2014, Wang 2015). The beany
+      note before heat.** Levels on disk (no time course anywhere): raw pea milk hexanal 164.18 +/- 11.93
+      ug/L calibrated (soy 437.39), 1-hexanol 387.39 (283.54), 2-pentylfuran 31.66 (16.26), 1-octen-3-ol
+      105.10 (38.73), nonanal 7.88 (8.66); free linoleic acid ~14 300 (pea) / ~58 000 ug/L (soy); C6
+      products are 10.6 mol % of the free linoleic acid; pea LOX-2 2160 +/- 38 and LOX-3 150 +/- 6 U/mg
+      protein (U = 0.001 A234/min), LOX-1 not detected, HPL 0.15 umol/(min mg), ADH 5.7x soy's
+      (hexanol:hexanal 2.3 vs 0.64). Gao 2020: a finished pea isolate keeps 18.6 of 43.7 U/g LOX
+      (0.43) through neutralising and drying; 1.47 % lipid rides into the isolate. Binding: every
+      pea percent-bound value in Wang 2014/2015 is FIGURE-ONLY; canola's printed 95 C time course
+      (hexanal 14 -> 67 % bound in 10 min, most in 30 s) is far faster than the ambient adduct
+      brackets and reads as depletion by a denaturing protein. A LOX module needs: (i) a time
+      course of hexanal during soaking / grinding (Bi 2026, Food Control, on the fetch list), (ii)
+      a LOX rate in molar units (needs epsilon 234 and the assay geometry), (iii) the hexanal fate
+      (alcohol dehydrogenase to 1-hexanol, binding, evaporation). Until (i) exists the levels above
+      are validation rows for a storage model, not fit rows.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

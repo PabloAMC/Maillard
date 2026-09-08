@@ -38,12 +38,13 @@ matrices:
     note: "free thiol is 7-8 % of the half-cystine in both isolates; the disulfide is derived from half-cystine minus free thiol, over two (no paper prints a direct S-S assay of the native isolate)"
     heated_reference: "ruan2014: 100 C / 30 min at 22.5 g/L leaves free SH 0.75 umol/g and S-S 56.6 umol/g; shimada1988: half-cystine constant 80-120 C, free SH down by up to half (figure-only)"
   pea_isolate:
-    display_name: pea protein isolate (native; the globulin fraction and a whole isolate disagree sixfold on free thiol)
-    source: "chihi2016_extraction.md section 4 (pea globulin isolate, 94 % protein: free SH 2.1 +/- 0.1, S-S 4.2 +/- 0.1 umol/g protein, DTNB in 1.5 M GdnCl, DTT for the total, n = 3); shen2022_extraction.md section 4 (whole pea protein isolate: free SH 13.52 +/- 0.09 umol/g, basis per gram protein or powder not stated; no S-S, no total SH)"
+    display_name: pea protein isolate (native, whole isolate; the globulin fraction alone carries about a fifth of the sites)
+    source: "gao2020_extraction.md Table 2 (alkaline-extracted, isoelectric pea isolate, 83-85 % protein N x 6.25: free SH 14.72 / 12.94 / 12.25 umol per g powder and S-S 18.66 / 21.15 / 24.80 at extraction pH 8.5 / 9.0 / 9.5, Ellman's in 8 M urea; per g protein 0.0174 / 0.0155 / 0.0147 and 0.0220 / 0.0254 / 0.0297 mmol/g); shen2022_extraction.md section 4 (whole isolate, free SH 13.52 +/- 0.09 umol/g, basis not stated, agrees); chihi2016_extraction.md section 4 (globulin fraction only, 94 % protein: free SH 2.1 +/- 0.1, S-S 4.2 +/- 0.1 umol/g protein, DTNB in 1.5 M GdnCl)"
     sites_mmol_per_g:
-      free_thiol: 0.0053     # geometric centre of 0.0021 (globulin fraction, Chihi 2016) and 0.0135 (whole isolate, Shen 2022)
-      disulfide: 0.0042      # one laboratory (Chihi 2016, globulin fraction); the dossier reads it as a probable LOWER bound (the paper's own 2-7 Cys per legumin subunit implies more)
+      free_thiol: 0.0159     # mean of Gao 2020's three extraction pHs, per gram of protein
+      disulfide: 0.0257      # mean of Gao 2020's three extraction pHs, per gram of protein
     bands_mmol_per_g:
-      free_thiol: [0.0021, 0.0135]
-    note: "the whole isolate's albumins (Shen 2022) carry more free thiol than the globulin fraction (Chihi 2016); the disulfide density is one laboratory's value for the globulins and a probable lower bound; Shen 2022's free amino number (8.44 mmol/g) is physically implausible and is NOT used for the amine pool"
-    heated_reference: "chihi2016: 85 C / 60 min at 2 wt %, pH 7.2 gives free SH 7.1 and S-S 1.8 umol/g (half-cystine conserved at ~10.5)"
+      free_thiol: [0.0021, 0.0174]   # from the globulin fraction (Chihi 2016) to the pH-8.5 whole isolate (Gao 2020)
+      disulfide: [0.0042, 0.0297]    # from the globulin fraction (Chihi 2016) to the pH-9.5 whole isolate (Gao 2020)
+    note: "the whole isolate's albumins carry most of the free thiol (Gao 2020, Shen 2022 agree; the globulin fraction of Chihi 2016 has a fifth); the band spans both; Shen 2022's free amino number (8.44 mmol/g) is physically implausible and is NOT used for the amine pool; Wang 2014 cites a lysine content of 6.25 g per 100 g protein (0.43 mmol/g) second-hand from Khattab 2009, not entered until that paper is read"
+    heated_reference: "chihi2016: the globulins at 85 C / 60 min, 2 wt %, pH 7.2 give free SH 7.1 and S-S 1.8 umol/g (half-cystine conserved at ~10.5); no heated whole-isolate value is on disk"
