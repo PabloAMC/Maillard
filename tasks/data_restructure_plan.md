@@ -1439,6 +1439,9 @@ states every volatile number is a 120-min endpoint; only the free-Cys curves are
   - [ ] a "possible, not modelled" arrow category in the reaction trees (`build_reaction_tree.py`) read from the artifact.
   - [ ] the forward thiazolidine step (cysteine + pentose -> TTCA, Zhai 2020) as an engine reaction: the engine charges
     TTCA and models only its ring opening (the layer places R15 as mechanism known).
+- **The roadmap for scientists** is `tasks/roadmap_for_scientists.md` (2026-09-08): calibrate on the user's own data
+  (levels fit the response factor, contrasts fit the kinetics), the protein matrix as chemistry, the thiol sink, reach
+  (pip, API, a page), the missing chemistry as rules first; one overlay type and one spec schema across them.
 - **Molar masses that disagree with the structures** (recorded by `tests/unit/test_species_structures.py`, not corrected,
   since each moves a reported concentration): SBA 276.24 (Asn + Glc - 2 H2O; the Schiff base is 294.26), THI 337.27
   (the hydrochloride; the cation is 265.36), DPO and TDP 130.10 (C5H8O4 is 132.11), the four linoleate hydroperoxides

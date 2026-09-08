@@ -49,7 +49,7 @@ docs/           guides/ (INTRODUCTION, REACTION_TREES, SOURCES, QUICKSTART, GLOS
                 roadmaps).
 
 tasks/          data_restructure_plan.md (the living record; section 7 is the backlog),
-                test_audit.md, lessons.md.
+                roadmap_for_scientists.md (the five programmes, in order), test_audit.md, lessons.md.
 ```
 
 ---
