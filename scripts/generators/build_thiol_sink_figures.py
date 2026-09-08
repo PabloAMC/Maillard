@@ -581,16 +581,17 @@ def fig_papers_weight() -> None:
         m = pat.search(cit) or re.match(r"([a-z]+)_?(?:[a-z]+_)*?(\d{4})", p["paper_id"])
         if m:
             pots[f"{m.group(1).capitalize()} {m.group(2)}"] += n
-    consts: Counter = Counter()      # rate constants whose registry entry names the paper in its source string
-    for f in ("parameters.py", "parameters_furanic.py", "parameters_dicarbonyl.py", "parameters_sulfur.py", "parameters_acrylamide.py",
-              "parameters_lipid.py", "trunk_conditions.py", "acrylamide_conditions.py"):
-        path = ROOT / "src" / "kinetic_core" / f
-        if not path.exists():
-            continue
-        text = path.read_text(encoding="utf-8")
-        for m in re.finditer(r'source(?:_anchor)?\s*=\s*\(?\s*((?:f?"[^"]*"\s*\+?\s*)+)', text):
-            s = " ".join(re.findall(r'"([^"]*)"', m.group(1)))
-            for a, y in set(pat.findall(s)):
+    consts: Counter = Counter()      # measured rate constants whose parameter object names the paper in its source anchor
+    from src.kinetic_core.engine import ACRYLAMIDE, SULFUR, TRUNK, core_parameters
+
+    seen_keys = set()
+    for lane in (TRUNK, SULFUR, ACRYLAMIDE):
+        for key, param in core_parameters(lane).items():
+            if key in seen_keys or getattr(param, "evidence_class", None) not in ("measured_rate", "measured_activation_energy"):
+                continue
+            seen_keys.add(key)
+            src = " ".join(str(getattr(param, a, "") or "") for a in ("source_anchor", "source", "dossier_anchor", "note"))
+            for a, y in set(pat.findall(src)):
                 consts[f"{a} {y}"] += 1
     total = lambda k: rows[k] + claims[k] + pots[k] + consts[k]
     papers = sorted(set(rows) | set(claims) | set(pots) | set(consts), key=lambda k: -total(k))[:12]
