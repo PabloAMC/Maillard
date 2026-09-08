@@ -335,10 +335,15 @@ def _core_targets(spec: Mapping[str, Any], targets: Optional[Sequence[str]]):
 
 
 def predict_core(
-    spec: Mapping[str, Any], *, targets: Optional[Sequence[str]] = None
+    spec: Mapping[str, Any], *, targets: Optional[Sequence[str]] = None, calibration=None
 ) -> Dict[str, Any]:
-    """Single-formulation prediction through the kinetic core."""
-    from src.kinetic_core.engine import engine_metadata, predict
+    """Single-formulation prediction through the kinetic core; ``calibration`` is a per-laboratory
+    overlay (src.kinetic_core.calibration.Calibration) or None for the shipped model."""
+    from src.kinetic_core.calibration import predict_calibrated
+    from src.kinetic_core.engine import engine_metadata
+
+    def predict(core_spec, requested):
+        return predict_calibrated(core_spec, requested, calibration)
 
     core_spec = spec_to_core(spec)
     requested = _core_targets(spec, targets)
@@ -465,14 +470,19 @@ def compare_core(
     spec_b: Mapping[str, Any],
     *,
     targets: Optional[Sequence[str]] = None,
+    calibration=None,
 ) -> Dict[str, Any]:
-    """Two-arm comparison through the kinetic core. Ratios lead, as in B4."""
+    """Two-arm comparison through the kinetic core. Ratios lead, as in B4. ``calibration`` is a
+    per-laboratory overlay or None for the shipped model."""
+    from src.kinetic_core.calibration import predict_calibrated
     from src.kinetic_core.engine import compare as core_compare
     from src.kinetic_core.engine import engine_metadata
 
+    predict_fn = (lambda s, targets_: predict_calibrated(s, targets_, calibration)) if calibration is not None else None
+
     core_a, core_b = spec_to_core(spec_a), spec_to_core(spec_b)
     requested = _core_targets(spec_a, targets) or _core_targets(spec_b, targets)
-    payload = core_compare(core_a, core_b, requested) if requested else {
+    payload = core_compare(core_a, core_b, requested, predict_fn=predict_fn) if requested else {
         "comparable": False,
         "reason": "no precursor in either arm maps to a core species",
         "declaration_a": {},

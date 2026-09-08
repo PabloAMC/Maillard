@@ -74,7 +74,7 @@ cd Maillard
 ```
 
 Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`); host
-Python is for editing only. The front door is one script with six verbs. What each answers and
+Python is for editing only. The front door is one script with seven verbs. What each answers and
 when it refuses is the first table of the [quick start](docs/guides/QUICKSTART.md).
 
 ```bash
@@ -85,6 +85,7 @@ python scripts/maillard.py explain 2-methyl-3-furanthiol             # what the 
 python scripts/maillard.py rank --top 10                             # which measurement would teach the model most
 python scripts/maillard.py score --template > my_measurements.yml    # then: score my_measurements.yml
 python scripts/maillard.py wishlist                                  # what to measure next, and what it would unlock
+python scripts/maillard.py calibrate my_measurements.yml --lab "my lab"   # a per-laboratory overlay; apply with --calibration
 ```
 
 `compare` leads with **ratios** between the two arms, the quantity the systematic scale error
@@ -99,7 +100,12 @@ never refits anything, because a refit is always a new pre-registered step
 (`scripts/generators/WAVES.md`). `wishlist` prints the generated data wishlist: which fitted
 constants the evidence does not pin, which rows the engine answers but declares not evaluable,
 what no lane represents, which directional axes are thin, and what each measurement would let you
-predict. `--json` gives the machine-readable payload of any verb; `--report` writes a
+predict. `calibrate` reads the same document `score` reads and writes a per-laboratory
+calibration: your levels set a response factor per compound, your contrasts (pots that differ in
+time, temperature, pH or recipe) may move the few rate constants they can identify, pulled toward
+the shipped values by their shipped uncertainty, and pots tagged `role: validate` are scored before
+and after. The shipped model never moves; `--calibration` applies the file to `compare`, `predict`
+and `score`. `--json` gives the machine-readable payload of any verb; `--report` writes a
 self-contained HTML page.
 
 Regenerate the evidence artifacts:
@@ -355,6 +361,7 @@ shape it reads.
 | **Food scientist** — first run | [QUICKSTART.md](docs/guides/QUICKSTART.md) |
 | **Scientist** — understanding the output | [GLOSSARY.md](docs/guides/GLOSSARY.md) |
 | **Reviewer** — auditing what is verified | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/) → [the August 2026 audit](docs/history/AUDIT_legacy_lane_2026-08.md) |
+| **Laboratory with its own data** — calibrating to it | `maillard calibrate` → the card under `results/user/<lab>/` → `--calibration` on the other verbs; the rule: levels set the response factor, contrasts move the kinetics |
 | **Experimentalist** — closing the gaps | `maillard wishlist` → [data wishlist](results/validation/data_wishlist.md) → [experiment ranking](results/validation/experiment_value_ranking.md) → [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) |
 | **Maintainer** — extending the chemistry | [CONTRIBUTING.md](CONTRIBUTING.md) → `src/kinetic_core/` module docstrings → [`tasks/data_restructure_plan.md`](tasks/data_restructure_plan.md) (section 7 is the backlog) |
 | **Literature curator** — ingestion | [data/lit/README.md](data/lit/README.md) |

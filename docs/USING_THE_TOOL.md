@@ -338,7 +338,26 @@ be written as the program it physically is.
 
 ---
 
-## 6. What this model is good for — and what it is not
+## 6. Your own data: `score`, then `calibrate`
+
+`maillard score my_measurements.yml` scores your pots the way the panel is scored and writes a
+record per pot under `results/user/`; nothing is refitted. `maillard calibrate my_measurements.yml
+--lab "my lab"` goes one step further and writes a calibration file for your laboratory. Two
+things are fitted and only two. Your levels set a **response factor** per compound, the offset
+between what your instrument reports and what the model predicts: a property of the measurement,
+not of the chemistry. Your **contrasts**, pots that differ in time, temperature, pH or recipe,
+may move the few rate constants they can identify, each pulled toward the shipped value by its
+shipped uncertainty; every other constant stays exactly where it was. Pots tagged `role: validate`
+are never fitted and are scored before and after; with four or more untagged pots every second
+one is held out before the fit. The card names what moved, what could not be identified, and the
+hold-out fold error before and after.
+
+Apply the file with `--calibration` on `compare`, `predict` or `score`. The shipped model, the
+scorecard and every tracked artifact are untouched, and a calibration made on one matrix warns
+when applied to another. What it cannot do: fix a structural miss. If the model gets the sign of a
+temperature trend wrong, a factor moves the level and the card will show the trend still wrong.
+
+## 7. What this model is good for — and what it is not
 
 ### Use it for
 

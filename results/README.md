@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **373**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **374**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -37,6 +37,7 @@ Tracked files: **373**. Local-only (gitignored): scratch runs under `results/qui
 
 | files | what it is, who writes it, who reads it |
 |---|---|
+| `calibration_prereg.md` | Pre-registration of `maillard calibrate` (per-laboratory calibration on the user's own data: levels set the response factor, contrasts move the kinetics), with its declared tests and outcome. |
 | `chemistry_family_scope.*` (2): `chemistry_family_scope.json`, `chemistry_family_scope.md` | Which chemistry families are first-class, bounded or gaps (`src/chemistry_family_scope.py`). |
 | `citation_verification_ledger.*` (2): `citation_verification_ledger.json`, `citation_verification_ledger.md` | 2026-08-26 CrossRef identity sweep of every DOI; INPUT to `scripts/ci/citation_gate.py` although it lives here (it is a run record). |
 | `core_directional_scores.*` (2): `core_directional_scores.json`, `core_directional_scores.md` | THE DIRECTIONAL SCORECARD: the 69-claim literature panel scored on the core, per axis. Written by `core-directional` (`src/kinetic_core/directional.py`); read by `src/directional_reliability.py` (CLI reliability tags), the model card and the guards. |

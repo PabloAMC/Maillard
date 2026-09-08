@@ -25,6 +25,10 @@ backlog (`data_restructure_plan.md` section 7) points here; this file is the pla
 
 ## 1. Calibrate on the user's own data (`maillard calibrate`)
 
+*Status 2026-09-08: shipped (`src/kinetic_core/calibration.py`, `user_fit.py`; pre-registration and
+outcome in `results/validation/calibration_prereg.md`). Not yet: the envelope does not carry the
+factor's sigma (the card prints it), and the overlay type is not yet shared with the matrix layer.*
+
 **Why first.** A laboratory's own GC-MS data on its own matrix is worth more to that laboratory than
 any literature pot, and the parity plot says the misses are systematic offsets by path, which is
 exactly what a per-laboratory factor absorbs. Today `score` writes a record and refits nothing.

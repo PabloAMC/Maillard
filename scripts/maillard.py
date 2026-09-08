@@ -249,6 +249,8 @@ def build_parser() -> argparse.ArgumentParser:
             + _SPEC_FIELDS
         ),
     )
+    compare.add_argument("--calibration", default=None, metavar="FILE",
+                         help="a per-laboratory calibration written by `maillard calibrate` (results/user/<lab>/calibration_<date>.json)")
     compare.add_argument(
         "spec",
         nargs="*",
@@ -296,6 +298,8 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     predict.add_argument("spec", help="a single-system spec file")
+    predict.add_argument("--calibration", default=None, metavar="FILE",
+                         help="a per-laboratory calibration written by `maillard calibrate` (results/user/<lab>/calibration_<date>.json)")
     predict.add_argument(
         "--system",
         default=None,
@@ -355,9 +359,34 @@ def build_parser() -> argparse.ArgumentParser:
     )
     score.add_argument("spec", nargs="?", help="a measurement document (YAML or JSON); see --template")
     score.add_argument("--template", action="store_true", help="print an example document and exit")
+    score.add_argument("--calibration", default=None, metavar="FILE",
+                         help="a per-laboratory calibration written by `maillard calibrate` (results/user/<lab>/calibration_<date>.json)")
     score.add_argument("--json", action="store_true", help="emit the payload instead of the table")
     score.add_argument("--out", default=None, help="directory for the records (default results/user/)")
     score.add_argument("--no-write", action="store_true", help="score only; write no record")
+
+    calibrate = verbs.add_parser(
+        "calibrate",
+        help="calibrate the model on YOUR measurements: a per-laboratory overlay, the shipped model untouched",
+        description=(
+            "Read a measurement document (the one `score` reads) and write a calibration: one\n"
+            "response factor per compound from your levels, and the few kinetic coordinates your\n"
+            "contrasts (pots that differ in time, temperature, pH or recipe) can identify, pulled\n"
+            "toward the shipped values by their shipped uncertainty. Records tagged `role: validate`\n"
+            "are never fitted and are scored before and after. The file lands under results/user/<lab>/;\n"
+            "apply it with --calibration on compare, predict or score. Pre-registered in\n"
+            "results/validation/calibration_prereg.md."
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    calibrate.add_argument("spec", nargs="?", help="a measurement document (YAML or JSON); see `score --template`")
+    calibrate.add_argument("--lab", default=None, help="the laboratory's name (default: source.lab of the first record, else 'lab')")
+    calibrate.add_argument("--max-coordinates", type=int, default=4, help="at most this many kinetic coordinates may move (default 4)")
+    calibrate.add_argument("--coordinate", action="append", default=None, metavar="NAME",
+                           help="restrict the kinetic coordinates that may move to this one (repeatable; names as in the card, e.g. b8.k_fft_decay.log10_k_ref_145C)")
+    calibrate.add_argument("--json", action="store_true", help="emit the card payload instead of the text")
+    calibrate.add_argument("--out", default=None, help="directory for the calibration and its card (default results/user/)")
+    calibrate.add_argument("--no-write", action="store_true", help="print the card, write nothing")
 
     rank = verbs.add_parser(
         "rank-experiments",
@@ -436,6 +465,15 @@ def _load_two_arms(paths, ):
     )
 
 
+def _calibration_of(args: argparse.Namespace):
+    path = getattr(args, "calibration", None)
+    if not path:
+        return None
+    from src.kinetic_core.calibration import Calibration
+
+    return Calibration.load(path)
+
+
 def run_compare(args: argparse.Namespace) -> int:
     if args.template:
         print(SPEC_TEMPLATE)
@@ -443,7 +481,7 @@ def run_compare(args: argparse.Namespace) -> int:
     if not args.spec:
         raise SpecError("compare needs a spec. Try `maillard compare --template`.")
     spec_a, spec_b = _load_two_arms(args.spec)
-    payload = compare_core(spec_a, spec_b)
+    payload = compare_core(spec_a, spec_b, calibration=_calibration_of(args))
     print(to_json(payload) if args.json else render_compare_core_text(payload))
     comparison = payload.get("comparison") or {}
     if not comparison.get("comparable"):
@@ -459,7 +497,7 @@ def run_compare(args: argparse.Namespace) -> int:
 def run_predict(args: argparse.Namespace) -> int:
     document = load_spec_document(args.spec)
     spec = select_system(document, source=str(args.spec), arm=args.system)
-    payload = predict_core(spec)
+    payload = predict_core(spec, calibration=_calibration_of(args))
     print(to_json(payload) if args.json else render_predict_core_text(payload))
     if not payload.get("answered"):
         print(envelope_error_text(payload.get("declaration") or {}), file=sys.stderr)
@@ -484,7 +522,7 @@ def run_score(args: argparse.Namespace) -> int:
     if not args.spec:
         raise SpecError("score needs a measurement document. Try `maillard score --template`.")
     try:
-        payload = score_document(load_document(args.spec))
+        payload = score_document(load_document(args.spec), calibration=_calibration_of(args))
     except MeasurementSpecError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
@@ -492,6 +530,34 @@ def run_score(args: argparse.Namespace) -> int:
     print(to_json(payload) if args.json else render_text(payload))
     for path in written:
         print(f"wrote {path}", file=sys.stderr)
+    return 0
+
+
+def run_calibrate(args: argparse.Namespace) -> int:
+    from src import artifact_io
+    from src.kinetic_core.calibration import USER_RESULTS_DIR, _slug
+    from src.kinetic_core.user_fit import calibrate, render_card
+    from src.kinetic_core.user_scoring import MeasurementSpecError, load_document
+
+    if not args.spec:
+        raise SpecError("calibrate needs a measurement document. Try `maillard score --template`.")
+    try:
+        document = load_document(args.spec)
+        lab = args.lab
+        if not lab:
+            systems = document.get("systems") or [document]
+            lab = str(((systems[0] or {}).get("source") or {}).get("lab") or "lab")
+        cal, card = calibrate(document, lab, max_coordinates=args.max_coordinates, coordinates=args.coordinate)
+    except (MeasurementSpecError, ValueError, RuntimeError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    print(to_json(card) if args.json else render_card(card))
+    if not args.no_write:
+        out_dir = Path(args.out) if args.out else USER_RESULTS_DIR
+        path = cal.save(out_dir)
+        card_json, card_md = artifact_io.write_artifact(card, out_dir / _slug(lab) / f"calibration_card_{cal.created}.json", render=render_card)
+        print(f"wrote {path}", file=sys.stderr)
+        print(f"wrote {card_json} and {card_md}", file=sys.stderr)
     return 0
 
 
@@ -545,6 +611,7 @@ def main(argv=None) -> int:
         "predict": run_predict,
         "explain": run_explain,
         "score": run_score,
+        "calibrate": run_calibrate,
         "rank-experiments": run_rank,
         "rank": run_rank,
         "wishlist": run_wishlist,

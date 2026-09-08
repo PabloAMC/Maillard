@@ -60,7 +60,7 @@ import json
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Mapping, Optional, Sequence, Tuple, Callable
 
 import numpy as np
 
@@ -2214,6 +2214,8 @@ def compare(
     spec_a: FormulationSpec,
     spec_b: FormulationSpec,
     targets: Sequence[str],
+    *,
+    predict_fn: Optional[Callable[..., "CorePrediction"]] = None,
 ) -> Dict[str, Any]:
     """
     Per-compound RATIOS between two formulations, via the B4 layer.
@@ -2234,8 +2236,11 @@ def compare(
     predict of the identical arm. The tables are emitted here, from the live
     objects, so there is exactly one implementation to keep correct.
     """
-    run_a = predict(spec_a, targets)
-    run_b = predict(spec_b, targets)
+    # 2026-09-08: a caller may supply the predictor (a per-laboratory calibration wraps `predict`);
+    # the default is byte-identical to the plain engine.
+    _predict = predict_fn or predict
+    run_a = _predict(spec_a, targets)
+    run_b = _predict(spec_b, targets)
 
     if not (run_a.answered and run_b.answered):
         return {

@@ -15,7 +15,11 @@ src/            Runtime package. Import as `from src.<module> import ...`; never
                   the declared condition terms, the panel, scoring, the Monte-Carlo envelope,
                   the directional scorer and the fit-target ledger.
   comparative_cli.py, explain_compound.py, experiment_value.py, report_html.py, model_card.py
-                  The front door's verbs (compare, predict, explain, rank, score, wishlist).
+                  The front door's verbs (compare, predict, explain, rank, score, wishlist, calibrate).
+  calibration.py, user_fit.py, user_scoring.py (under kinetic_core/)
+                  Bring-your-own-data: scoring, and the per-laboratory calibration (levels set the
+                  response factor, contrasts move the kinetics) that overlays the engine's own
+                  override mapping; a calibration lives under results/user/ and no generator reads it.
   network_hypotheses/
                   The hypothesis layer: cited reaction rules (data/lit/reaction_rules.yml) applied to the
                   species' structures (data/species/structures.yml), placed against the engine's reactions.

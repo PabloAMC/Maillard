@@ -19,6 +19,7 @@ give the aroma you want — and see exactly why the model refuses to answer when
 | where a compound comes from in this model | `explain` | the steps, their rates and the papers behind them, then the steps the literature draws that the model lacks ("possible, not modelled") | never |
 | how good the model is on your own measurements | `score` | the same scorecard the panel gets; nothing is refitted | the rows the panel would refuse |
 | what to measure next | `wishlist`, `rank` | the measurements that would free the most predictions | never |
+| calibrate the model to my laboratory | `calibrate` | a per-laboratory file: response factors from your levels, the few rate constants your contrasts can identify, and the hold-out before and after; apply it with `--calibration` | fewer than one fit record; it never moves the shipped model |
 
 A refusal is an answer: it names the missing term or route. Section 5 of the
 [introduction](INTRODUCTION.md) shows which rows on the test panel are refused and why.
@@ -125,6 +126,25 @@ python scripts/maillard.py score my_measurements.yml
 Each measured compound is scored the way the panel scores a benchmark (fold error, the 3x band, the
 reliability interval, or a named refusal), and a bundle-shaped record lands under `results/user/` with
 your provenance. Nothing is refitted: calibration on new data is always a new pre-registered re-calibration (`scripts/generators/WAVES.md`).
+
+
+## Calibrate to your laboratory: `maillard calibrate`
+
+```bash
+python scripts/maillard.py calibrate my_measurements.yml --lab "my lab"
+python scripts/maillard.py compare my_comparison.yml --calibration results/user/my_lab/calibration_2026-09-08.json
+```
+
+The same document `score` reads, with four or more pots. Two things are fitted, and only two.
+Your **levels** set a response factor per compound: the offset between what your instrument
+reports and what the model predicts, a property of the measurement, not of the chemistry. Your
+**contrasts**, pots that differ in time, temperature, pH or recipe, may move the few rate
+constants they can identify, each pulled toward the shipped value by its shipped uncertainty; the
+rest stay exactly where they were. Tag pots `role: validate` to hold them out; untagged pots are
+split every second one before the fit. The card says what moved, what could not be identified, and
+the hold-out fold error before and after. The shipped model, the scorecard and every tracked
+artifact are untouched: the calibration is a file under `results/user/<lab>/` that a verb applies
+only when you pass it. Pre-registered in `results/validation/calibration_prereg.md`.
 
 ## Before you trust a result
 

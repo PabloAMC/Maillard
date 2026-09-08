@@ -173,7 +173,8 @@ would give the removal step its first data from a third laboratory. And the reve
 removal step can be built and tested against the existing series in a day.
 
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
-comes from, scores your own measurements, and lists what to measure next. It refuses questions the
+comes from, scores your own measurements, calibrates itself to your laboratory from those
+measurements without touching the shipped model, and lists what to measure next. It refuses questions the
 evidence cannot answer instead of guessing, and when it refuses it says whether the chemistry has no
 route or only no rate: a small layer of cited reaction rules, run over the model's species, lists the
 steps the literature draws that the model does not have

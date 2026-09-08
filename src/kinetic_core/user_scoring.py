@@ -119,6 +119,10 @@ def validate_system(entry: Mapping[str, Any], *, label: str) -> Dict[str, Any]:
     spec["source"] = {str(k): (v if isinstance(v, (int, float, str, bool)) or v is None else str(v)) for k, v in dict(entry.get("source") or {}).items()}
     if entry.get("matrix"):
         spec["matrix"] = str(entry["matrix"])
+    role = entry.get("role")
+    if role is not None and str(role) not in ("fit", "validate"):
+        raise MeasurementSpecError(f"{label}: role must be 'fit' or 'validate', not {role!r}")
+    spec["role"] = None if role is None else str(role)
     return spec
 
 
@@ -136,8 +140,12 @@ def systems_of(document: Mapping[str, Any]) -> List[Dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 
-def score_system(spec: Mapping[str, Any], *, pass_band: float = PASS_BAND_LEVEL) -> Dict[str, Any]:
+def score_system(spec: Mapping[str, Any], *, pass_band: float = PASS_BAND_LEVEL, calibration=None) -> Dict[str, Any]:
     from src.comparative_cli import spec_to_core
+    from src.kinetic_core.calibration import predict_calibrated
+
+    def predict(core_spec_, compounds):   # the shipped model, or the laboratory's overlay on it
+        return predict_calibrated(core_spec_, compounds, calibration)
 
     core_spec = spec_to_core(spec)
     rows: List[Dict[str, Any]] = []
@@ -195,8 +203,8 @@ def score_system(spec: Mapping[str, Any], *, pass_band: float = PASS_BAND_LEVEL)
     }
 
 
-def score_document(document: Mapping[str, Any], *, pass_band: float = PASS_BAND_LEVEL) -> Dict[str, Any]:
-    systems = [score_system(s, pass_band=pass_band) for s in systems_of(document)]
+def score_document(document: Mapping[str, Any], *, pass_band: float = PASS_BAND_LEVEL, calibration=None) -> Dict[str, Any]:
+    systems = [score_system(s, pass_band=pass_band, calibration=calibration) for s in systems_of(document)]
     all_rows = [r for s in systems for r in s["rows"]]
     return {
         "artifact": "user_measurements_scored",
