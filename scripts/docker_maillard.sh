@@ -199,9 +199,6 @@ run_in_env() {
 bootstrap_env() {
   ensure_container
 
-  # Install system LaTeX packages needed for scienceplots LaTeX rendering mode
-  docker exec "$CONTAINER_NAME" bash -lc "apt-get update -qq && apt-get install -y texlive texlive-latex-extra texlive-fonts-recommended dvipng cm-super 2>&1 | tail -3" || true
-
   if ! env_exists; then
     docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; conda create -n '$ENV_NAME' python=3.12 -y"
   fi
