@@ -1358,6 +1358,20 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       third lab, stated vessel, 100-140 C x 30-180 min; owner's download): on B9 MFT at 100 C peaks at
       90 min (pot rises to 180), at 140 C both thiols fall 3 dex in 150 min (pot declines gently after
       60 min) -- the sinks are too strong at BOTH ends. Headline 19/33 -> 20/37 (FFT rise at 100 C agrees).
+- [ ] **W7b (from the 2026-09-08 reads of Schieberle & Hofmann 1998 and the Weerawatanakorn 2015 review).**
+      The dry 180 C / 6 min pot beside the aqueous 145 C / 20 min pot (same charge, same SIDA): the
+      aqueous column IS Hofmann 1998 Table 2 at tenfold scale (do not enter twice); new are the
+      3-mercapto-2-pentanone (59.9 -> 10.1 ug per pot) and thiazine (42.4 -> 1.0) anchors at 145 C,
+      the only ones for Schieberle 2000's 100 C series (W2 contrast rows: MP 79 ug at 6 h / 100 C vs
+      59.9 at 20 min / 145 C), and the sulfur redistribution dry vs wet (FFT x8, MFT x1.3, MFT/FFT
+      1.6 -> 0.26) as a hold-out shape for W7's sink variants. Fetch list from the review, in order:
+      Mottram, Szauman-Szumski & Dodson 1996 JAFC 44:2349 (thiol + disulfide loss to egg albumin at
+      100 C: a protein sink at cooking temperature); Hofmann, Czerny, Calligaris & Schieberle 2001
+      JAFC 49:2382 (time-resolved thiol loss on coffee melanoidins); Hofmann & Schieberle 1995 JAFC
+      43:2946 (2-acetyl-2-thiazoline loss, water 100 / 145 C and oil); Kerscher & Grosch 1998 JAFC
+      46:1954 (SIDA thiols in cooked meat, a food-matrix validation row). Side finding: the "342" the
+      inventory refused as fabricated from Hofmann 1998 is 3-mercapto-2-butanone, 342 ug/100 mmol
+      ribose, in Schieberle 2000 Table III (wrong paper and probably wrong analyte); "200" is nowhere.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

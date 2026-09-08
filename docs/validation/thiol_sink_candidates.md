@@ -53,6 +53,27 @@ with a pool the pot itself makes.
 4. **The candidates, in order of evidence.** (a) A saturable covalent sink on a pool the pot makes (melanoidin-type electrophiles from the sugar branch), with Hofmann 2002's rate and plateau as the anchor and the pool charged from browning rather than as an input. (b) The disulfide made reversible or made second-order with a depletable oxidant, which the model already has in form, with Kumazawa's time-doubling test as the check. (c) Thiol-Michael addition to the enals and to HMF, with the 28 to 30 kJ/mol barrier and the HMF + cysteine rate as analogues, for the pots with fat or a hexose. (d) Gigl's reversible pool as a declared term with its measured enthalpy.
 5. **The measurement that decides it** is the one in the introduction's section 8: the reference pot and the fed thiols on the same grid at 100 and 140 °C, with the disulfides quantified in the same run. If the fed thiol levels off with its disulfide, (b) is right; if it keeps falling while a browning marker rises, (a) is.
 
+### 2b. The dry regime, from the same laboratory (read 2026-09-08)
+
+Schieberle & Hofmann 1998 (`schieberle1998_extraction.md`) heat the same cysteine + ribose charge
+dry on silica at 180 °C for 6 min and in 0.5 M phosphate at 145 °C for 20 min, both by stable
+isotope dilution. The aqueous column is Hofmann 1998's Table 2 reprinted at tenfold scale (the
+same experiment, not a new run; the fit must not enter it twice). What is new is where the sulfur
+goes when the water leaves: the mercaptoketone falls from 59.9 to 10.1 µg per pot and the thiazine
+from 42.4 to 1.0, while FFT rises eightfold, MFT by a third and 2-acetyl-2-thiazoline sevenfold; the
+MFT to FFT ratio flips from 1.6 to 0.26. Four things change at once (water activity, temperature,
+time, buffer), so this is a hold-out shape for any sink structure, not a coefficient: a sink that
+scales with a browning-made pool should lose MORE thiol in the dry pot, where furfural rises from
+5 to 7900 µg, and the pot loses less. The same chapter is the only 145 °C anchor for
+3-mercapto-2-pentanone and the thiazine, the two compounds Schieberle 2000's 100 °C series follows.
+
+The review read the same evening (`weerawatanakorn2015_extraction.md`) adds no number of its own;
+seven of its ten thiol sources are on disk. The three it names that are not, and that bear on the
+sink: Mottram, Szauman-Szumski & Dodson 1996 (thiol and disulfide loss to egg albumin at 100 °C,
+the only protein sink at cooking temperature the corpus knows of), Hofmann, Czerny, Calligaris &
+Schieberle 2001 (time-resolved thiol loss with coffee melanoidins), and Hofmann & Schieberle 1995
+(2-acetyl-2-thiazoline loss in water at 100 and 145 °C and in oil).
+
 ## 4. What no dossier measures
 
 An activation energy for any thiol sink printed by its authors; a time-resolved thiol loss in a
