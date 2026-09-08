@@ -101,6 +101,9 @@ will be wide and the card must say so.
 
 ## 3. The thiol sink (W7)
 
+*Status 2026-09-08: pre-registered as wave B17 (`results/validation/kinetic_core_b17_prereg.md`) with
+the variants, the rows, the hold-outs and the ship rule; the generator and the runs are next.*
+
 **Why.** The meaty character the users want is the thiols, and the model loses them too fast at
 every temperature. The candidate table is written (`docs/validation/thiol_sink_candidates.md`).
 

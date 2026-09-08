@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **375**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **376**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -76,6 +76,7 @@ Tracked files: **375**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b16_lift_members/` (2 files) | B16 lift-variant members (the thiol-sink barrier ceiling raised to 160 kJ/mol; information only, cannot ship). |
 | `kinetic_core_b16_members/` (2 files) | B16 optimiser members (two starts; the thiol-sink wave: B9 + Schieberle 2000's 100 C ratios + Zhai 2021's TTCA rows). |
 | `kinetic_core_b16_ship_rule.*` (2): `kinetic_core_b16_ship_rule.json`, `kinetic_core_b16_ship_rule.md` | The B16 prereg's ship rule (sec. 4) evaluated on the frozen B9 / B16 / B16-lift artifacts without switching the engine (`generate_kinetic_core_b16_ship_rule.py`). |
+| `kinetic_core_b17_prereg.md` | Pre-registration of wave B17, the sink structure (a reversible disulfide, then a saturable sink on a browning-made pool): variants, rows, hold-outs and the ship rule; written before the generator, not yet run. |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
 | `kinetic_core_b2_4_fit_*.json` (21): `kinetic_core_b2_4_fit_half.json`, `kinetic_core_b2_4_fit_half_s0.json`, `kinetic_core_b2_4_fit_half_s1.json`, `kinetic_core_b2_4_fit_half_s2.json` … | B2.4 ensemble: one fit per weighting (half / measured / shipped) and per start (_s0.._s5). History; `kinetic_core_b2_4_ensemble.json` summarises them. |

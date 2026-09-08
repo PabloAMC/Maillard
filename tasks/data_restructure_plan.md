@@ -1442,6 +1442,8 @@ states every volatile number is a 120-min endpoint; only the free-Cys curves are
 - **The roadmap for scientists** is `tasks/roadmap_for_scientists.md` (2026-09-08): calibrate on the user's own data
   (levels fit the response factor, contrasts fit the kinetics), the protein matrix as chemistry, the thiol sink, reach
   (pip, API, a page), the missing chemistry as rules first; one overlay type and one spec schema across them.
+- **B17 (the sink structure) is pre-registered, not run**: `results/validation/kinetic_core_b17_prereg.md`. The generator
+  derives from B16's with `ch_dimer_release_*` and `k_dimer_release` added to the sulfur network and the B23 vector.
 - **Molar masses that disagree with the structures** (recorded by `tests/unit/test_species_structures.py`, not corrected,
   since each moves a reported concentration): SBA 276.24 (Asn + Glc - 2 H2O; the Schiff base is 294.26), THI 337.27
   (the hydrochloride; the cation is 265.36), DPO and TDP 130.10 (C5H8O4 is 132.11), the four linoleate hydroperoxides

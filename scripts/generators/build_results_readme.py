@@ -81,6 +81,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "results/validation/citation_verification_ledger.*": "2026-08-26 CrossRef identity sweep of every DOI; INPUT to `scripts/ci/citation_gate.py` although it lives here (it is a run record).",
     # ---- decision-support artifacts
     "results/validation/experiment_value_ranking.*": "`rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`.",
+    "results/validation/kinetic_core_b17_prereg.md": "Pre-registration of wave B17, the sink structure (a reversible disulfide, then a saturable sink on a browning-made pool): variants, rows, hold-outs and the ship rule; written before the generator, not yet run.",
     "results/validation/matrix_sites_prereg.md": "Pre-registration of the protein-matrix layer (reactive sites charged per gram of protein; declared binding of aldehydes and HMF), with its declared tests and outcome.",
     "results/validation/calibration_prereg.md": "Pre-registration of `maillard calibrate` (per-laboratory calibration on the user's own data: levels set the response factor, contrasts move the kinetics), with its declared tests and outcome.",
     "results/validation/network_hypotheses.json": "The hypothesis layer: what the cited reaction rules propose from each lane's reference charge, placed against the engine's reactions (modelled / mechanism known / proposed); steps and products only, no rates (`generate_network_hypotheses.py`, pre-registered in `network_hypotheses_prereg.md`).",
