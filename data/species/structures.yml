@@ -1,0 +1,99 @@
+# Structures for the kinetic core's state variables (2026-09-08, the hypothesis layer's first input).
+#
+# One entry per species key in src/kinetic_core/species*.py. `kind: molecule` entries carry a SMILES
+# (stereochemistry omitted on purpose: the rules act on functional groups) or point at the compound
+# registry (`registry_id`, data/keys/compounds.yml) when the compound is already there. `kind: lump`
+# entries are accounting pools or lumped classes with no single structure; the note says why. The
+# enumerator (src/network_hypotheses) treats lumps as terminal and never invents a structure for them.
+#
+# Checked by tests/unit/test_species_structures.py: every species key present exactly once; every
+# molecule's C, N and S counts equal the species table's; where species_*.py declares a molar mass,
+# the SMILES reproduces it to 0.1 g/mol; registry ids resolve and their InChIKey matches.
+schema_version: 1
+species:
+  # ---- trunk: sugar + amino acid ----
+  Glc:   {kind: molecule, smiles: "OCC(O)C(O)C(O)C(O)C=O", note: "open-chain aldehyde form"}
+  Fru:   {kind: molecule, smiles: "OCC(=O)C(O)C(O)C(O)CO", note: "open-chain ketose form"}
+  Gly:   {kind: molecule, smiles: "NCC(=O)O"}
+  SB:    {kind: molecule, smiles: "OCC(O)C(O)C(O)C(O)C=NCC(=O)O", note: "the imine; the source does not resolve glycosylamine from Schiff base"}
+  AMA:   {kind: molecule, smiles: "OCC(O)C(O)C(O)C(=O)CNCC(=O)O", note: "N-(1-deoxy-D-fructos-1-yl)glycine, open-chain"}
+  TDG:   {kind: molecule, smiles: "OCC(O)C(O)CC(=O)C=O"}
+  ODG:   {kind: molecule, smiles: "CC(=O)C(=O)C(O)C(O)CO"}
+  MGO:   {kind: molecule, smiles: "CC(=O)C=O"}
+  FA:    {kind: molecule, smiles: "OC=O"}
+  AA:    {kind: molecule, smiles: "CC(=O)O"}
+  MEL_C: {kind: lump, note: "melanoidin carbon pool"}
+  MEL_N: {kind: lump, note: "melanoidin nitrogen pool"}
+  FRAG_C: {kind: lump, note: "unassigned fragment carbon; an accounting pool"}
+  INT:   {kind: lump, note: "the source (Martins 2005) leaves the cyclic fructose-dehydration intermediate undetermined"}
+  DDG:   {kind: molecule, smiles: "OCC(O)C=CC(=O)C=O", note: "3,4-dideoxyglucosone-3-ene, C6H8O4"}
+  HMF:   {kind: molecule, registry_id: hmf}
+  AF:    {kind: molecule, smiles: "CC1(O)OC(C)=C(O)C1=O", note: "acetylformoin, 2,4-dihydroxy-2,5-dimethyl-3(2H)-furanone, C6H8O4"}
+  DMHF:  {kind: molecule, registry_id: hdmf}
+  G:     {kind: molecule, smiles: "OCC(O)C(O)C(O)C(=O)C=O", note: "glucosone"}
+  GO:    {kind: molecule, smiles: "O=CC=O"}
+  DA:    {kind: molecule, registry_id: 2_3_butanedione}
+  # ---- sulfur: pentose + cysteine (+ thiamine) ----
+  PENT:  {kind: molecule, smiles: "OCC(O)C(O)C(O)C=O", note: "aldopentose, open chain; ribose and xylose share it"}
+  Cys:   {kind: molecule, smiles: "NC(CS)C(=O)O"}
+  THI:   {kind: molecule, smiles: "Cc1ncc(C[n+]2csc(CCO)c2C)c(N)n1", note: "thiamine cation"}
+  H2S:   {kind: molecule, registry_id: hydrogen_sulfide}
+  ARP:   {kind: molecule, smiles: "OCC(O)C(O)C(=O)CNC(C)C(=O)O", note: "N-(1-deoxy-D-xylulos-1-yl)-alanine, open chain"}
+  DPO:   {kind: molecule, smiles: "CC(=O)C(=O)C(O)CO", note: "1-deoxypentosone"}
+  TDP:   {kind: molecule, smiles: "OCC(O)CC(=O)C=O", note: "3-deoxypentosone"}
+  DDP:   {kind: molecule, smiles: "CC(=O)C(=O)CC=O", note: "1,4-dideoxypentosone (1,4-dideoxy-2,3-pentodiulose)"}
+  NF:    {kind: molecule, registry_id: norfuraneol}
+  PTR:   {kind: molecule, smiles: "CC(=O)C(=O)C(C)=O", note: "2,3,4-pentanetrione"}
+  FUR:   {kind: molecule, registry_id: furfural}
+  HA:    {kind: molecule, smiles: "OCC=O", note: "hydroxyacetaldehyde"}
+  MP:    {kind: molecule, registry_id: mercapto_2_propanone}
+  HMP:   {kind: molecule, smiles: "CC(=O)C(S)CCO", note: "5-hydroxy-3-mercapto-2-pentanone"}
+  MESH:  {kind: molecule, registry_id: methanethiol}
+  MFT:   {kind: molecule, registry_id: 2_methyl_3_furanthiol}
+  FFT:   {kind: molecule, registry_id: 2_furfurylthiol}
+  MFTD:  {kind: molecule, registry_id: bis_2_methyl_3_furyl_disulfide}
+  FFTD:  {kind: molecule, smiles: "c1ccc(CSSCc2ccco2)o1", note: "bis(2-furfuryl) disulfide"}
+  MMFT:  {kind: molecule, smiles: "CSSc1ccoc1C", note: "methyl 2-methyl-3-furyl disulfide"}
+  MP3P:  {kind: molecule, smiles: "CCC(=O)C(C)S", note: "2-mercapto-3-pentanone"}
+  MP2P:  {kind: molecule, smiles: "CCC(S)C(C)=O", note: "3-mercapto-2-pentanone"}
+  ACTZ:  {kind: molecule, smiles: "CC(=O)c1nccs1", note: "2-acetylthiazole"}
+  TTCA:  {kind: molecule, smiles: "OCC(O)C(O)C(O)C1NC(C(=O)O)CS1", note: "2-(1,2,3,4-tetrahydroxybutyl)thiazolidine-4-carboxylic acid"}
+  BND:   {kind: lump, note: "matrix-bound MFT conjugate; the partner (MELE) is a lumped electrophile pool"}
+  BND_F: {kind: lump, note: "matrix-bound FFT conjugate"}
+  PRB:   {kind: lump, note: "thiol bound to a protein disulfide site"}
+  OLG:   {kind: lump, note: "C-5 thiol oligomer"}
+  MELE:  {kind: lump, note: "matrix electrophile pool, lumped over at least two measured channels"}
+  OX:    {kind: lump, note: "oxidant equivalents"}
+  OXR:   {kind: lump, note: "headspace oxygen reservoir, ambient units"}
+  OXV:   {kind: lump, note: "dissolved-oxygen vacancy"}
+  PROT_SS: {kind: lump, note: "protein disulfide sites, a matrix input"}
+  FRAG_N: {kind: lump, note: "unassigned fragment nitrogen"}
+  FRAG_S: {kind: lump, note: "unassigned fragment sulfur"}
+  ACID:  {kind: lump, note: "titratable organic-acid equivalents"}
+  CBX:   {kind: lump, note: "carried carboxylate equivalents"}
+  HMFAD: {kind: lump, note: "HMF-cysteinyl adduct pool (thiol-Michael, amine-Michael and Schiff-base adducts lumped)"}
+  DMHFS: {kind: molecule, smiles: "CC1SC(C)=C(O)C1=O", note: "2,5-dimethyl-4-hydroxy-3(2H)-thiophenone"}
+  # ---- acrylamide: asparagine + sugar ----
+  Asn:   {kind: molecule, smiles: "NC(CC(N)=O)C(=O)O"}
+  SBA:   {kind: molecule, smiles: "OCC(O)C(O)C(O)C(O)C=NC(CC(N)=O)C(=O)O", note: "Schiff base of asparagine and glucose"}
+  INT1:  {kind: lump, note: "De Vleeschouwer's Int1 is defined by its molar mass (C10H16N2O6); the source does not resolve its structure"}
+  Asp:   {kind: molecule, smiles: "NC(CC(=O)O)C(=O)O"}
+  ACR:   {kind: molecule, registry_id: acrylamide}
+  ACRCYS: {kind: molecule, smiles: "NC(CSCCC(N)=O)C(=O)O", note: "S-(2-carbamoylethyl)cysteine"}
+  Gln:   {kind: molecule, smiles: "NC(CCC(N)=O)C(=O)O"}
+  Lys:   {kind: molecule, smiles: "NCCCCC(N)C(=O)O"}
+  Ala:   {kind: molecule, smiles: "CC(N)C(=O)O"}
+  # ---- lipid: linoleate hydroperoxides and their products ----
+  LOOH_13_ct: {kind: molecule, smiles: "CCCCCC(OO)/C=C/C=C\\CCCCCCCC(=O)OC", note: "methyl 13-hydroperoxy-9(Z),11(E)-octadecadienoate"}
+  LOOH_13_tt: {kind: molecule, smiles: "CCCCCC(OO)/C=C/C=C/CCCCCCCC(=O)OC"}
+  LOOH_9_ct:  {kind: molecule, smiles: "CCCCC/C=C\\C=C\\C(OO)CCCCCCCC(=O)OC", note: "methyl 9-hydroperoxy-10(E),12(Z)-octadecadienoate"}
+  LOOH_9_tt:  {kind: molecule, smiles: "CCCCC/C=C/C=C/C(OO)CCCCCCCC(=O)OC"}
+  LOOH_OL:    {kind: lump, note: "oleate hydroperoxides, four positional isomers lumped"}
+  PENTANE:    {kind: molecule, smiles: "CCCCC"}
+  HEXANAL:    {kind: molecule, registry_id: hexanal}
+  ME_OCTANOATE: {kind: molecule, smiles: "CCCCCCCC(=O)OC"}
+  DECADIENAL: {kind: molecule, smiles: "CCCCC/C=C/C=C/C=O"}
+  ME_9_OXONONANOATE: {kind: molecule, smiles: "O=CCCCCCCCC(=O)OC"}
+  ME_13_OXO_TRIDECADIENOATE: {kind: molecule, smiles: "O=C/C=C/C=C/CCCCCCCC(=O)OC"}
+  NONANAL:    {kind: molecule, registry_id: nonanal}
+  LIPID_FRAG_C: {kind: lump, note: "unassigned lipid fragment carbon"}

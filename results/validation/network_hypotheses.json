@@ -1,0 +1,2986 @@
+{
+  "artifact": "network_hypotheses",
+  "what_this_is": "What the literature's reaction rules (data/lit/reaction_rules.yml) propose from each lane's reference charge, placed against the engine's own reactions. Steps and products only: no rate, no concentration, and nothing here is read by the engine. Beyond the first step only products that are engine species or registry compounds react further, so the walk stays on the known map.",
+  "placements": {
+    "modelled": "the engine has a reaction with these reactants and this product, with a rate",
+    "mechanism_known": "the rule's source draws this step; the engine has no reaction for it",
+    "proposed": "analogous to a cited rule, on reactants no source shows; no rate, no source"
+  },
+  "rules": [
+    {
+      "id": "R01_amadori",
+      "name": "aldose + primary amine -> Amadori compound",
+      "class": "formation",
+      "status": "net",
+      "source": {
+        "dossier": "martins2005_extraction.md",
+        "anchor": "Table 2, steps 1-2 (glucose + glycine -> DFG)"
+      }
+    },
+    {
+      "id": "R02_schiff_base",
+      "name": "aldehyde + primary amine -> Schiff base",
+      "class": "formation",
+      "status": "established",
+      "source": {
+        "dossier": "devleeschouwer2006_extraction.md",
+        "anchor": "the asparagine + glucose Schiff base of the Zyzak mechanism, step 1 of the fitted scheme"
+      }
+    },
+    {
+      "id": "R03_enolisation_1_2",
+      "name": "Amadori compound -> 3-deoxyosone + amine (1,2-enolisation)",
+      "class": "fragmentation",
+      "status": "net",
+      "source": {
+        "dossier": "martins2005_extraction.md",
+        "anchor": "Table 2, DFG -> 3-deoxyglucosone (step 3)"
+      }
+    },
+    {
+      "id": "R04_enolisation_2_3",
+      "name": "Amadori compound -> 1-deoxyosone + amine (2,3-enolisation)",
+      "class": "fragmentation",
+      "status": "net",
+      "source": {
+        "dossier": "martins2005_extraction.md",
+        "anchor": "Table 2, DFG -> 1-deoxyglucosone (step 4)"
+      }
+    },
+    {
+      "id": "R05a_3dg_to_hmf",
+      "name": "3-deoxyhexosone -> HMF (cyclodehydration)",
+      "class": "cyclisation",
+      "status": "net",
+      "source": {
+        "dossier": "kocadagli2016jafc_extraction.md",
+        "anchor": "3-DG -> HMF step of the fitted scheme (Table 2)"
+      }
+    },
+    {
+      "id": "R05b_3dp_to_furfural",
+      "name": "3-deoxypentosone -> furfural (cyclodehydration)",
+      "class": "cyclisation",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 5, furan-2-aldehyde formed in situ from ribose"
+      }
+    },
+    {
+      "id": "R06_dicarbonyl_cleavage",
+      "name": "alpha-dicarbonyl with an alpha-hydroxyl -> two carbonyl fragments",
+      "class": "fragmentation",
+      "status": "net",
+      "source": {
+        "dossier": "kocadagli2016jafc_extraction.md",
+        "anchor": "glucosone -> glyoxal and 1-DG -> methylglyoxal steps; and hofmann1998_reconciliation.md Table 10, the C2 + C3 fragments of a pentose"
+      }
+    },
+    {
+      "id": "R07_strecker",
+      "name": "alpha-dicarbonyl + alpha-amino acid -> Strecker aldehyde + alpha-aminoketone (+ CO2)",
+      "class": "strecker",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann2000_extraction.md",
+        "anchor": "the Strecker degradation with the dicarbonyl donors of Tables 1-3"
+      }
+    },
+    {
+      "id": "R08_cysteine_thermolysis",
+      "name": "cysteine -> hydrogen sulfide + acetaldehyde + ammonia (+ CO2)",
+      "class": "sulfur_release",
+      "status": "net",
+      "source": {
+        "dossier": "zheng1994_extraction.md",
+        "anchor": "Table I, cysteine thermolysis at four pH values (the lane's k_cys_h2s and its barrier)"
+      }
+    },
+    {
+      "id": "R09_furfural_h2s_to_fft",
+      "name": "furfural + H2S -> 2-furfurylthiol",
+      "class": "sulfur_assembly",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 3, furan-2-aldehyde + H2S -> FFT, 0.48 mol%"
+      }
+    },
+    {
+      "id": "R10_norfuraneol_h2s_to_mft",
+      "name": "norfuraneol + H2S -> 2-methyl-3-furanthiol",
+      "class": "sulfur_assembly",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 4, norfuraneol + H2S -> MFT, 0.19 mol%; whitfield2001_extraction.md Table 1"
+      }
+    },
+    {
+      "id": "R11_c2_c3_recombination_to_mft",
+      "name": "hydroxyacetaldehyde + 1-mercapto-2-propanone -> 2-methyl-3-furanthiol",
+      "class": "sulfur_assembly",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 10, the C2 + C3 recombination pot, 0.24 mol% MFT"
+      }
+    },
+    {
+      "id": "R12_thiol_oxidation_to_disulfide",
+      "name": "two thiols (+ oxidant) -> disulfide",
+      "class": "thiol_sink",
+      "status": "established",
+      "source": {
+        "dossier": "kumazawa2003_extraction.md",
+        "anchor": "Table 3, difurfuryl disulfide the major FFT product at 121 C; zhou2023_extraction.md Table 1; mottram2002_extraction.md Table 1 (mixed disulfides)"
+      }
+    },
+    {
+      "id": "R13_thiol_michael_addition",
+      "name": "thiol + alpha,beta-unsaturated carbonyl -> beta-thioether (Michael adduct)",
+      "class": "thiol_sink",
+      "status": "established",
+      "source": {
+        "dossier": "devleeschouwer2006_extraction.md",
+        "anchor": "the acrylamide + cysteine elimination channel (k_acr_cys); starkenmann2008_extraction.md for thiol adducts of unsaturated carbonyls"
+      }
+    },
+    {
+      "id": "R14_hemithioacetal",
+      "name": "thiol + aldehyde -> hemithioacetal (reversible)",
+      "class": "thiol_sink",
+      "status": "proposed",
+      "source": {
+        "dossier": "hamzalioglu2018_extraction.md",
+        "anchor": "HMF reacting with the thiol group of cysteine (the HMFAD pool); k6b_adduct_kinetics_synthesis.md section 1c for the aldehyde-thiol class"
+      }
+    },
+    {
+      "id": "R15_thiazolidine",
+      "name": "cysteine + aldehyde -> thiazolidine-4-carboxylic acid",
+      "class": "formation",
+      "status": "established",
+      "source": {
+        "dossier": "zhai2020_extraction.md",
+        "anchor": "the xylose-cysteine thiazolidine (TTCA), about 94 % of the group's Cys-Amadori"
+      }
+    },
+    {
+      "id": "R17_asparagine_schiff_to_acrylamide",
+      "name": "asparagine Schiff base -> acrylamide + aminodeoxysugar (+ CO2)",
+      "class": "formation",
+      "status": "net",
+      "source": {
+        "dossier": "devleeschouwer2006_extraction.md",
+        "anchor": "the Schiff base -> acrylamide step of the fitted scheme (k_int1_acr)"
+      }
+    },
+    {
+      "id": "R18a_hydroperoxide_scission_alkane_side",
+      "name": "allylic hydroperoxide -> alkane + 2,4-dienal (beta-scission, side A)",
+      "class": "lipid",
+      "status": "net",
+      "source": {
+        "dossier": "schroen2022_extraction.md",
+        "anchor": "the linoleate hydroperoxide product slate (Frankel 1989) the lipid lane's branch fractions come from"
+      }
+    },
+    {
+      "id": "R18b_hydroperoxide_scission_aldehyde_side",
+      "name": "allylic hydroperoxide -> saturated aldehyde + oxo-alkenoate (beta-scission, side B)",
+      "class": "lipid",
+      "status": "net",
+      "source": {
+        "dossier": "schroen2022_extraction.md",
+        "anchor": "as R18a: hexanal from the 13-hydroperoxide, methyl 9-oxononanoate from the 9-hydroperoxide"
+      }
+    },
+    {
+      "id": "R22_dmhf_h2s_to_thiophenone",
+      "name": "furaneol + H2S -> 2,5-dimethyl-4-hydroxy-3(2H)-thiophenone",
+      "class": "sulfur_assembly",
+      "status": "established",
+      "source": {
+        "dossier": "shu1988_extraction.md",
+        "anchor": "Table I, the thiophenone from furaneol + H2S (a structural constant; the paper reports area percent only)"
+      }
+    },
+    {
+      "id": "R23_thiamine_ring_opening",
+      "name": "thiamine -> 5-hydroxy-3-mercapto-2-pentanone (thiazole ring opening)",
+      "class": "sulfur_release",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 8, thiamin -> MFT via 5-hydroxy-3-mercapto-2-pentanone"
+      }
+    },
+    {
+      "id": "R24_hmp_to_mft",
+      "name": "5-hydroxy-3-mercapto-2-pentanone -> 2-methyl-3-furanthiol (cyclodehydration)",
+      "class": "sulfur_assembly",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 8, the thiamin route"
+      }
+    },
+    {
+      "id": "R25_dideoxypentosone_h2s_to_mft",
+      "name": "1,4-dideoxypentosone + H2S -> 2-methyl-3-furanthiol (the intact-C5 route)",
+      "class": "sulfur_assembly",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 6, ribose + H2S -> MFT with the pentose skeleton intact (isotope labelling)"
+      }
+    },
+    {
+      "id": "R26a_1dp_to_norfuraneol",
+      "name": "1-deoxypentosone -> norfuraneol (cyclisation)",
+      "class": "cyclisation",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 5, norfuraneol formed in situ from ribose (54 530 ug/100 mL)"
+      }
+    },
+    {
+      "id": "R26b_1dg_to_furaneol",
+      "name": "1-deoxyglucosone -> furaneol (cyclisation with the terminal reduction, net)",
+      "class": "cyclisation",
+      "status": "net",
+      "source": {
+        "dossier": "blank1997_extraction.md",
+        "anchor": "furaneol from 1-deoxyglucosone via acetylformoin (the k5b synthesis, the trunk's r_odg_af / r_af_dmhf)"
+      }
+    },
+    {
+      "id": "R27_dicarbonyl_h2s_to_mercaptoketone",
+      "name": "methylglyoxal + H2S -> 1-mercapto-2-propanone",
+      "class": "sulfur_assembly",
+      "status": "net",
+      "source": {
+        "dossier": "hofmann1998_reconciliation.md",
+        "anchor": "Table 7, 2-oxopropanal + H2S (1:1 and 1:2)"
+      }
+    }
+  ],
+  "charges": [
+    {
+      "charge": "sugar_glycine",
+      "lane": "trunk",
+      "why": "the trunk's fitted pot (Martins 2005)",
+      "species": [
+        "Glc",
+        "Gly"
+      ],
+      "depth": 2,
+      "steps": [
+        {
+          "rule": "R01_amadori",
+          "depth": 1,
+          "reactants": [
+            "Glc",
+            "Gly"
+          ],
+          "products": [
+            "AMA"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_schiff > r_amadori"
+          ]
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Glc",
+            "Gly"
+          ],
+          "products": [
+            "SB"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_schiff"
+          ]
+        },
+        {
+          "rule": "R03_enolisation_1_2",
+          "depth": 2,
+          "reactants": [
+            "AMA"
+          ],
+          "products": [
+            "Gly",
+            "TDG"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_ama_mgo",
+            "r_ama_odg",
+            "r_ama_tdg"
+          ]
+        },
+        {
+          "rule": "R04_enolisation_2_3",
+          "depth": 2,
+          "reactants": [
+            "AMA"
+          ],
+          "products": [
+            "ODG",
+            "Gly"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_ama_mgo",
+            "r_ama_odg",
+            "r_ama_tdg"
+          ]
+        }
+      ],
+      "products": [
+        {
+          "smiles": "O=C(O)CN=CC(O)C(O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "SB"
+        },
+        {
+          "smiles": "O=C(O)CNCC(=O)C(O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "AMA"
+        },
+        {
+          "smiles": "CC(=O)C(=O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "ODG"
+        },
+        {
+          "smiles": "O=CC(=O)CC(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "TDG"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "modelled": 4
+        },
+        "products": {
+          "species": 4
+        }
+      }
+    },
+    {
+      "charge": "pentose_cysteine",
+      "lane": "sulfur",
+      "why": "the sulfur lane's reference pot (Hofmann 1998)",
+      "species": [
+        "PENT",
+        "Cys"
+      ],
+      "depth": 2,
+      "steps": [
+        {
+          "rule": "R01_amadori",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R08_cysteine_thermolysis",
+          "depth": 1,
+          "reactants": [
+            "Cys"
+          ],
+          "products": [
+            "CC=O",
+            "N",
+            "H2S"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_cys_h2s"
+          ]
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "Cys"
+          ],
+          "products": [
+            "NC(CSSCC(N)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "TTCA"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "CC=O"
+          ],
+          "products": [
+            "CC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R03_enolisation_1_2",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "Cys",
+            "TDP"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R04_enolisation_2_3",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "DPO",
+            "Cys"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "NC(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)NCC(=O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "PENT",
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)NCC(=O)C(O)C(O)CO"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "PENT",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "CC=O"
+          ],
+          "products": [
+            "CC(O)SCC(N)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CC=O"
+          ],
+          "products": [
+            "CC(O)SCC(NCC(=O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+            "CC=O"
+          ],
+          "products": [
+            "CC(O)SCC(N=CC(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "CC=O"
+          ],
+          "products": [
+            "CC1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        }
+      ],
+      "products": [
+        {
+          "smiles": "N",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(N)C(=O)O)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC=O",
+          "first_depth": 1,
+          "kind": "registry",
+          "id": "acetaldehyde"
+        },
+        {
+          "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "TTCA"
+        },
+        {
+          "smiles": "S",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "H2S"
+        },
+        {
+          "smiles": "CC(O)SCC(N)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(O)SCC(N=CC(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(O)SCC(NCC(=O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC1NC(C(=O)O)CS1",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC=NC(CS)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)N=CC(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)NCC(=O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)NCC(=O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(=O)C(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "DPO"
+        },
+        {
+          "smiles": "O=CC(=O)CC(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "TDP"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "mechanism_known": 13,
+          "modelled": 1,
+          "proposed": 6
+        },
+        "products": {
+          "new": 17,
+          "registry": 1,
+          "species": 4
+        }
+      }
+    },
+    {
+      "charge": "pentose_cysteine_thiamine",
+      "lane": "sulfur",
+      "why": "the thiamine route (Hofmann 1998 Table 8)",
+      "species": [
+        "PENT",
+        "Cys",
+        "THI"
+      ],
+      "depth": 2,
+      "steps": [
+        {
+          "rule": "R01_amadori",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R08_cysteine_thermolysis",
+          "depth": 1,
+          "reactants": [
+            "Cys"
+          ],
+          "products": [
+            "CC=O",
+            "N",
+            "H2S"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_cys_h2s"
+          ]
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "Cys"
+          ],
+          "products": [
+            "NC(CSSCC(N)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "PENT",
+            "Cys"
+          ],
+          "products": [
+            "TTCA"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R23_thiamine_ring_opening",
+          "depth": 1,
+          "reactants": [
+            "THI"
+          ],
+          "products": [
+            "HMP"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_thi_hmp"
+          ]
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "CC=O"
+          ],
+          "products": [
+            "CC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R03_enolisation_1_2",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "Cys",
+            "TDP"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R04_enolisation_2_3",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "DPO",
+            "Cys"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "NC(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "HMP"
+          ],
+          "products": [
+            "CC(=O)C(CCO)SSCC(N)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)NCC(=O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "HMP"
+          ],
+          "products": [
+            "CC(=O)C(CCO)SSCC(NCC(=O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+            "HMP"
+          ],
+          "products": [
+            "CC(=O)C(CCO)SSCC(N=CC(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 2,
+          "reactants": [
+            "HMP",
+            "HMP"
+          ],
+          "products": [
+            "CC(=O)C(CCO)SSC(CCO)C(C)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "PENT",
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)NCC(=O)C(O)C(O)CO"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "PENT",
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "products": [
+            "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "PENT",
+            "HMP"
+          ],
+          "products": [
+            "CC(=O)C(CCO)SC(O)C(O)C(O)C(O)CO"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "CC=O"
+          ],
+          "products": [
+            "CC(O)SCC(N)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+            "CC=O"
+          ],
+          "products": [
+            "CC(O)SCC(NCC(=O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+            "CC=O"
+          ],
+          "products": [
+            "CC(O)SCC(N=CC(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 2,
+          "reactants": [
+            "CC=O",
+            "HMP"
+          ],
+          "products": [
+            "CC(=O)C(CCO)SC(C)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 2,
+          "reactants": [
+            "Cys",
+            "CC=O"
+          ],
+          "products": [
+            "CC1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R24_hmp_to_mft",
+          "depth": 2,
+          "reactants": [
+            "HMP"
+          ],
+          "products": [
+            "MFT"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_hmp_mft"
+          ]
+        }
+      ],
+      "products": [
+        {
+          "smiles": "N",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(N)C(=O)O)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC=O",
+          "first_depth": 1,
+          "kind": "registry",
+          "id": "acetaldehyde"
+        },
+        {
+          "smiles": "CC(=O)C(S)CCO",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "HMP"
+        },
+        {
+          "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "TTCA"
+        },
+        {
+          "smiles": "S",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "H2S"
+        },
+        {
+          "smiles": "CC(=O)C(CCO)SC(C)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(CCO)SC(O)C(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(CCO)SSC(CCO)C(C)=O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(CCO)SSCC(N)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(CCO)SSCC(N=CC(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(CCO)SSCC(NCC(=O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(O)SCC(N)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(O)SCC(N=CC(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(O)SCC(NCC(=O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC1NC(C(=O)O)CS1",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC=NC(CS)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)C(=O)O",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)N=CC(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSC(O)C(O)C(O)C(O)CO)NCC(=O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSSCC(N=CC(O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)N=CC(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CSSCC(NCC(=O)C(O)C(O)CO)C(=O)O)NCC(=O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(=O)C(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "DPO"
+        },
+        {
+          "smiles": "Cc1occc1S",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "MFT"
+        },
+        {
+          "smiles": "O=CC(=O)CC(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "TDP"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "mechanism_known": 17,
+          "modelled": 3,
+          "proposed": 8
+        },
+        "products": {
+          "new": 23,
+          "registry": 1,
+          "species": 6
+        }
+      }
+    },
+    {
+      "charge": "asparagine_glucose",
+      "lane": "acrylamide",
+      "why": "the acrylamide lane's pot (De Vleeschouwer)",
+      "species": [
+        "Asn",
+        "Glc"
+      ],
+      "depth": 2,
+      "steps": [
+        {
+          "rule": "R01_amadori",
+          "depth": 1,
+          "reactants": [
+            "Asn",
+            "Glc"
+          ],
+          "products": [
+            "NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Asn",
+            "Glc"
+          ],
+          "products": [
+            "SBA"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "a_asn_glc_sb"
+          ]
+        },
+        {
+          "rule": "R03_enolisation_1_2",
+          "depth": 2,
+          "reactants": [
+            "NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "products": [
+            "Asn",
+            "TDG"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R04_enolisation_2_3",
+          "depth": 2,
+          "reactants": [
+            "NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "products": [
+            "ODG",
+            "Asn"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R17_asparagine_schiff_to_acrylamide",
+          "depth": 2,
+          "reactants": [
+            "SBA"
+          ],
+          "products": [
+            "ACR",
+            "NCC(O)C(O)C(O)C(O)CO"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "a_sb_int1 > a_int1_acr"
+          ]
+        }
+      ],
+      "products": [
+        {
+          "smiles": "NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(=O)CC(N=CC(O)C(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "SBA"
+        },
+        {
+          "smiles": "NCC(O)C(O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "C=CC(N)=O",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "ACR"
+        },
+        {
+          "smiles": "CC(=O)C(=O)C(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "ODG"
+        },
+        {
+          "smiles": "O=CC(=O)CC(O)C(O)CO",
+          "first_depth": 2,
+          "kind": "species",
+          "id": "TDG"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "mechanism_known": 3,
+          "modelled": 2
+        },
+        "products": {
+          "new": 2,
+          "species": 4
+        }
+      }
+    },
+    {
+      "charge": "linoleate_hydroperoxides",
+      "lane": "lipid",
+      "why": "the lipid lane's hydroperoxide pool (Frankel 1989)",
+      "species": [
+        "LOOH_13_ct",
+        "LOOH_9_ct"
+      ],
+      "depth": 2,
+      "steps": [
+        {
+          "rule": "R18a_hydroperoxide_scission_alkane_side",
+          "depth": 1,
+          "reactants": [
+            "LOOH_13_ct/LOOH_13_tt"
+          ],
+          "products": [
+            "PENTANE",
+            "ME_13_OXO_TRIDECADIENOATE"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "lipid_scission_LOOH_13_tt"
+          ]
+        },
+        {
+          "rule": "R18a_hydroperoxide_scission_alkane_side",
+          "depth": 1,
+          "reactants": [
+            "LOOH_9_ct/LOOH_9_tt"
+          ],
+          "products": [
+            "DECADIENAL",
+            "ME_OCTANOATE"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "lipid_scission_LOOH_9_tt"
+          ]
+        },
+        {
+          "rule": "R18b_hydroperoxide_scission_aldehyde_side",
+          "depth": 1,
+          "reactants": [
+            "LOOH_13_ct/LOOH_13_tt"
+          ],
+          "products": [
+            "HEXANAL",
+            "COC(=O)CCCCCCCC=CCC=O"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "lipid_scission_LOOH_13_tt"
+          ]
+        },
+        {
+          "rule": "R18b_hydroperoxide_scission_aldehyde_side",
+          "depth": 1,
+          "reactants": [
+            "LOOH_9_ct/LOOH_9_tt"
+          ],
+          "products": [
+            "CCCCCC=CCC=O",
+            "ME_9_OXONONANOATE"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "lipid_scission_LOOH_9_tt"
+          ]
+        }
+      ],
+      "products": [
+        {
+          "smiles": "CCCCCC=CCC=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "COC(=O)CCCCCCCC=CCC=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCC",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "PENTANE"
+        },
+        {
+          "smiles": "CCCCCC=CC=CC=O",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "DECADIENAL"
+        },
+        {
+          "smiles": "CCCCCC=O",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "HEXANAL"
+        },
+        {
+          "smiles": "CCCCCCCC(=O)OC",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "ME_OCTANOATE"
+        },
+        {
+          "smiles": "COC(=O)CCCCCCCC=CC=CC=O",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "ME_13_OXO_TRIDECADIENOATE"
+        },
+        {
+          "smiles": "COC(=O)CCCCCCCC=O",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "ME_9_OXONONANOATE"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "modelled": 4
+        },
+        "products": {
+          "species": 6,
+          "new": 2
+        }
+      }
+    },
+    {
+      "charge": "thiol_sink_probe",
+      "lane": "sulfur",
+      "why": "the two thiols with every carbonyl and thiol partner the pots hold: what could remove them",
+      "species": [
+        "MFT",
+        "FFT",
+        "MESH",
+        "Cys",
+        "H2S",
+        "PENT",
+        "NF",
+        "FUR",
+        "HMF",
+        "MGO",
+        "GO",
+        "DA",
+        "DECADIENAL",
+        "HEXANAL",
+        "ACR"
+      ],
+      "depth": 1,
+      "steps": [
+        {
+          "rule": "R01_amadori",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "PENT"
+          ],
+          "products": [
+            "O=C(O)C(CS)NCC(=O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "PENT"
+          ],
+          "products": [
+            "O=C(O)C(CS)N=CC(O)C(O)C(O)CO"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "FUR"
+          ],
+          "products": [
+            "O=C(O)C(CS)N=Cc1ccco1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "HMF"
+          ],
+          "products": [
+            "O=C(O)C(CS)N=Cc1ccc(CO)o1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "MGO"
+          ],
+          "products": [
+            "CC(=O)C=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "GO"
+          ],
+          "products": [
+            "O=CC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC=CC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R02_schiff_base",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "HEXANAL"
+          ],
+          "products": [
+            "CCCCCC=NC(CS)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R07_strecker",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "MGO"
+          ],
+          "products": [
+            "CC(N)C=O",
+            "O=CCS"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R07_strecker",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "DA"
+          ],
+          "products": [
+            "CC(=O)C(C)N",
+            "O=CCS"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R08_cysteine_thermolysis",
+          "depth": 1,
+          "reactants": [
+            "Cys"
+          ],
+          "products": [
+            "CC=O",
+            "N",
+            "H2S"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_cys_h2s"
+          ]
+        },
+        {
+          "rule": "R09_furfural_h2s_to_fft",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "FUR"
+          ],
+          "products": [
+            "FFT"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_fur_fft",
+            "r_fur_fft_hs"
+          ]
+        },
+        {
+          "rule": "R10_norfuraneol_h2s_to_mft",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "NF"
+          ],
+          "products": [
+            "MFT"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_nf_mft"
+          ]
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "MFT"
+          ],
+          "products": [
+            "MFTD"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "ch_dimer_mft"
+          ]
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "FFT"
+          ],
+          "products": [
+            "Cc1occc1SSCc1ccco1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "MESH"
+          ],
+          "products": [
+            "MMFT"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "ch_mmft"
+          ]
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "Cys"
+          ],
+          "products": [
+            "Cc1occc1SSCC(N)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "FFT"
+          ],
+          "products": [
+            "FFTD"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "ch_dimer_fft"
+          ]
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "MESH"
+          ],
+          "products": [
+            "CSSCc1ccco1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "Cys"
+          ],
+          "products": [
+            "NC(CSSCc1ccco1)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "MESH"
+          ],
+          "products": [
+            "CSSC"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "Cys"
+          ],
+          "products": [
+            "CSSCC(N)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R12_thiol_oxidation_to_disulfide",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "Cys"
+          ],
+          "products": [
+            "NC(CSSCC(N)C(=O)O)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC(CC=O)Sc1ccoc1C"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "ACR"
+          ],
+          "products": [
+            "Cc1occc1SCCC(N)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC(CC=O)SCc1ccco1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "ACR"
+          ],
+          "products": [
+            "NC(=O)CCSCc1ccco1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC(CC=O)SC"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "ACR"
+          ],
+          "products": [
+            "CSCCC(N)=O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC(CC=O)SCC(N)C(=O)O"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R13_thiol_michael_addition",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "ACR"
+          ],
+          "products": [
+            "ACRCYS"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "a_acr_cys"
+          ]
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "PENT"
+          ],
+          "products": [
+            "Cc1occc1SC(O)C(O)C(O)C(O)CO"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "FUR"
+          ],
+          "products": [
+            "Cc1occc1SC(O)c1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "HMF"
+          ],
+          "products": [
+            "Cc1occc1SC(O)c1ccc(CO)o1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "MGO"
+          ],
+          "products": [
+            "CC(=O)C(O)Sc1ccoc1C"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "GO"
+          ],
+          "products": [
+            "Cc1occc1SC(O)C=O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC=CC(O)Sc1ccoc1C"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MFT",
+            "HEXANAL"
+          ],
+          "products": [
+            "CCCCCC(O)Sc1ccoc1C"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "PENT"
+          ],
+          "products": [
+            "OCC(O)C(O)C(O)C(O)SCc1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "FUR"
+          ],
+          "products": [
+            "OC(SCc1ccco1)c1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "HMF"
+          ],
+          "products": [
+            "OCc1ccc(C(O)SCc2ccco2)o1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "MGO"
+          ],
+          "products": [
+            "CC(=O)C(O)SCc1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "GO"
+          ],
+          "products": [
+            "O=CC(O)SCc1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC=CC(O)SCc1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "FFT",
+            "HEXANAL"
+          ],
+          "products": [
+            "CCCCCC(O)SCc1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "PENT"
+          ],
+          "products": [
+            "CSC(O)C(O)C(O)C(O)CO"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "FUR"
+          ],
+          "products": [
+            "CSC(O)c1ccco1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "HMF"
+          ],
+          "products": [
+            "CSC(O)c1ccc(CO)o1"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "MGO"
+          ],
+          "products": [
+            "CSC(O)C(C)=O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "GO"
+          ],
+          "products": [
+            "CSC(O)C=O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC=CC(O)SC"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "MESH",
+            "HEXANAL"
+          ],
+          "products": [
+            "CCCCCC(O)SC"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "PENT"
+          ],
+          "products": [
+            "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "FUR"
+          ],
+          "products": [
+            "NC(CSC(O)c1ccco1)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "HMF"
+          ],
+          "products": [
+            "NC(CSC(O)c1ccc(CO)o1)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "MGO"
+          ],
+          "products": [
+            "CC(=O)C(O)SCC(N)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "GO"
+          ],
+          "products": [
+            "NC(CSC(O)C=O)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC=CC(O)SCC(N)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R14_hemithioacetal",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "HEXANAL"
+          ],
+          "products": [
+            "CCCCCC(O)SCC(N)C(=O)O"
+          ],
+          "placement": "proposed",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "PENT"
+          ],
+          "products": [
+            "TTCA"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "FUR"
+          ],
+          "products": [
+            "O=C(O)C1CSC(c2ccco2)N1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "HMF"
+          ],
+          "products": [
+            "O=C(O)C1CSC(c2ccc(CO)o2)N1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "MGO"
+          ],
+          "products": [
+            "CC(=O)C1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "GO"
+          ],
+          "products": [
+            "O=CC1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "DECADIENAL"
+          ],
+          "products": [
+            "CCCCCC=CC=CC1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R15_thiazolidine",
+          "depth": 1,
+          "reactants": [
+            "Cys",
+            "HEXANAL"
+          ],
+          "products": [
+            "CCCCCC1NC(C(=O)O)CS1"
+          ],
+          "placement": "mechanism_known",
+          "engine_reactions": []
+        },
+        {
+          "rule": "R27_dicarbonyl_h2s_to_mercaptoketone",
+          "depth": 1,
+          "reactants": [
+            "H2S",
+            "MGO"
+          ],
+          "products": [
+            "MP"
+          ],
+          "placement": "modelled",
+          "engine_reactions": [
+            "r_mgo_mp"
+          ]
+        }
+      ],
+      "products": [
+        {
+          "smiles": "CC(=O)C(C)N",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(O)SCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(O)SCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C(O)Sc1ccoc1C",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C1NC(C(=O)O)CS1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(=O)C=NC(CS)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC(N)C=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC(O)SC",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC(O)SCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC(O)SCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC(O)Sc1ccoc1C",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC1NC(C(=O)O)CS1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC(CC=O)SC",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC(CC=O)SCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC(CC=O)SCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC(CC=O)Sc1ccoc1C",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC(O)SC",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC(O)SCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC(O)SCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC(O)Sc1ccoc1C",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC1NC(C(=O)O)CS1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=CC=CC=NC(CS)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CCCCCC=NC(CS)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSC(O)C(C)=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSC(O)C(O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSC(O)C=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSC(O)c1ccc(CO)o1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSC(O)c1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSCCC(N)=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSSCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CSSCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "Cc1occc1SC(O)C(O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "Cc1occc1SC(O)C=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "Cc1occc1SC(O)c1ccc(CO)o1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "Cc1occc1SC(O)c1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "Cc1occc1SCCC(N)=O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "Cc1occc1SSCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "Cc1occc1SSCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "N",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(=O)CCSCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSC(O)C=O)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSC(O)c1ccc(CO)o1)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSC(O)c1ccco1)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCC(N)C(=O)O)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "NC(CSSCc1ccco1)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)N=CC(O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)N=Cc1ccc(CO)o1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)N=Cc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C(CS)NCC(=O)C(O)C(O)CO",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C1CSC(c2ccc(CO)o2)N1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=C(O)C1CSC(c2ccco2)N1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=CC(O)SCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=CC1NC(C(=O)O)CS1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=CC=NC(CS)C(=O)O",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "O=CCS",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "OC(SCc1ccco1)c1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "OCC(O)C(O)C(O)C(O)SCc1ccco1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "OCc1ccc(C(O)SCc2ccco2)o1",
+          "first_depth": 1,
+          "kind": "new",
+          "id": null
+        },
+        {
+          "smiles": "CC=O",
+          "first_depth": 1,
+          "kind": "registry",
+          "id": "acetaldehyde"
+        },
+        {
+          "smiles": "CSSC",
+          "first_depth": 1,
+          "kind": "registry",
+          "id": "dimethyl_disulfide"
+        },
+        {
+          "smiles": "CC(=O)CS",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "MP"
+        },
+        {
+          "smiles": "CSSc1ccoc1C",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "MMFT"
+        },
+        {
+          "smiles": "Cc1occc1SSc1ccoc1C",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "MFTD"
+        },
+        {
+          "smiles": "NC(=O)CCSCC(N)C(=O)O",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "ACRCYS"
+        },
+        {
+          "smiles": "O=C(O)C1CSC(C(O)C(O)C(O)CO)N1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "TTCA"
+        },
+        {
+          "smiles": "c1coc(CSSCc2ccco2)c1",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "FFTD"
+        }
+      ],
+      "summary": {
+        "steps": {
+          "mechanism_known": 31,
+          "modelled": 8,
+          "proposed": 28
+        },
+        "products": {
+          "new": 59,
+          "registry": 2,
+          "species": 6
+        }
+      }
+    }
+  ],
+  "summary": {
+    "rules": 26,
+    "steps": 128,
+    "steps_by_placement": {
+      "modelled": 22,
+      "mechanism_known": 64,
+      "proposed": 42
+    },
+    "products_by_kind": {
+      "species": 30,
+      "new": 103,
+      "registry": 4
+    }
+  }
+}

@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **370**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **373**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -88,6 +88,9 @@ Tracked files: **370**. Local-only (gitignored): scratch runs under `results/qui
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
 | `model_card.json` | Machine-readable model card; the same content is spliced into README.md between the markers. Written by `model-card` (`src/model_card.py`). |
 | `mycoprotein_reference.*` (2): `mycoprotein_reference.json`, `mycoprotein_reference.md` | Bounded priors for the mycoprotein matrix (`src/mycoprotein_reference.py`). |
+| `network_hypotheses.json` | The hypothesis layer: what the cited reaction rules propose from each lane's reference charge, placed against the engine's reactions (modelled / mechanism known / proposed); steps and products only, no rates (`generate_network_hypotheses.py`, pre-registered in `network_hypotheses_prereg.md`). |
+| `network_hypotheses.md` | Markdown twin of `network_hypotheses.json`. |
+| `network_hypotheses_prereg.md` | Pre-registration of the hypothesis layer: what runs, what counts as success, and the outcome. |
 | `prefactor_audit.*` (2): `prefactor_audit.json`, `prefactor_audit.md` | Arrhenius prefactor audit (`generate_prefactor_audit.py`); cited by `parameters.py` and pinned by the B8 test. |
 | `trunk_rate_calibration_refit.*` (2): `trunk_rate_calibration_refit.json`, `trunk_rate_calibration_refit.md` | Trunk rate refit record read by `src/kinetic_core/parameters.py` (the trunk constants cite it). |
 | `wave_generators_manifest.json` | SHA-256 of every frozen wave generator; `tests/scientific/test_wave_generators_frozen.py` fails on drift. Written by `scripts/generators/build_wave_manifest.py`. |

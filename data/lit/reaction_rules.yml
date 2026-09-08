@@ -1,0 +1,283 @@
+# Reaction rules for the hypothesis layer (2026-09-08).
+#
+# Each rule is one transformation the literature describes, written as a reaction SMARTS (SMIRKS)
+# over functional groups, with the dossier that shows it, the conditions under which the source saw
+# it, and two kinds of control: a positive one (reactants -> products the source reports; species keys
+# resolve through data/species/structures.yml) and negative ones (reactant sets the rule must NOT fire
+# on). The negative controls are what keeps a rule from matching chemistry it was never written for.
+#
+# `terminal: true` marks a sink or adduct rule: its products are recorded but do not react on, so the
+# enumeration does not walk into adducts of adducts.
+#
+# `status`: established = the mechanism is drawn in the source; net = several elementary steps the
+# source lumps (the rule writes the net change); proposed = the transformation is chemically
+# reasonable and analogous to a cited one, but no source shows it on these reactants.
+#
+# The rules produce NO rates and NO numbers. They propose steps; the engine never reads this file
+# (tests/unit/test_network_hypotheses.py asserts the firewall).
+schema_version: 1
+rules:
+  - id: R01_amadori
+    name: aldose + primary amine -> Amadori compound
+    class: formation
+    status: net
+    smirks: "[CH1:1](=O)[CH1:2]([OH1])[#6:9].[NX3;H2;!$(NC=O):4][C:5]>>[CH2:1]([NH1:4][C:5])[C:2](=O)[#6:9]"
+    source: {dossier: martins2005_extraction.md, anchor: "Table 2, steps 1-2 (glucose + glycine -> DFG)"}
+    conditions: "aqueous, 100-120 C, pH 5.5-7; any alpha-amino acid"
+    controls:
+      positive: [{reactants: [Glc, Gly], products: [AMA]}, {reactants: [PENT, Ala], products: [ARP]}]
+      negative: [{reactants: [Fru, Gly]}]
+  - id: R02_schiff_base
+    name: aldehyde + primary amine -> Schiff base
+    class: formation
+    status: established
+    smirks: "[CH1:1](=O)[#6:2].[NX3;H2;!$(NC=O):3][C:4]>>[CH1:1](=[N:3][C:4])[#6:2]"
+    source: {dossier: devleeschouwer2006_extraction.md, anchor: "the asparagine + glucose Schiff base of the Zyzak mechanism, step 1 of the fitted scheme"}
+    conditions: "aqueous, 120-200 C"
+    controls:
+      positive: [{reactants: [Glc, Asn], products: [SBA]}]
+      negative: [{reactants: [DA, Gly]}]
+  - id: R03_enolisation_1_2
+    name: Amadori compound -> 3-deoxyosone + amine (1,2-enolisation)
+    class: fragmentation
+    status: net
+    smirks: "[CH2:1]([NH1:2][C:3])[C:4](=O)[CH1:5]([OH1])[#6:6]>>[CH1:1](=O)[C:4](=O)[CH2:5][#6:6].[NH2:2][C:3]"
+    source: {dossier: martins2005_extraction.md, anchor: "Table 2, DFG -> 3-deoxyglucosone (step 3)"}
+    conditions: "aqueous, 100-120 C, acid-favoured"
+    controls:
+      positive: [{reactants: [AMA], products: [TDG, Gly]}, {reactants: [ARP], products: [TDP, Ala]}]
+      negative: [{reactants: [Glc]}]
+  - id: R04_enolisation_2_3
+    name: Amadori compound -> 1-deoxyosone + amine (2,3-enolisation)
+    class: fragmentation
+    status: net
+    smirks: "[CH2:1]([NH1:2][C:3])[C:4](=O)[CH1:5]([OH1])[#6:6]>>[CH3:1][C:4](=O)[C:5](=O)[#6:6].[NH2:2][C:3]"
+    source: {dossier: martins2005_extraction.md, anchor: "Table 2, DFG -> 1-deoxyglucosone (step 4)"}
+    conditions: "aqueous, 100-120 C, base-favoured"
+    controls:
+      positive: [{reactants: [AMA], products: [ODG, Gly]}, {reactants: [ARP], products: [DPO, Ala]}]
+      negative: [{reactants: [Glc]}]
+  - id: R05a_3dg_to_hmf
+    name: 3-deoxyhexosone -> HMF (cyclodehydration)
+    class: cyclisation
+    status: net
+    smirks: "[O:1]=[CH:2][C:3](=[O:8])[CH2:4][CH:5]([OH])[CH:6]([OH])[CH2:7][OH:9]>>[O:1]=[CH:2][c:3]1[cH:4][cH:5][c:6]([CH2:7][OH:9])[o:8]1"
+    source: {dossier: kocadagli2016jafc_extraction.md, anchor: "3-DG -> HMF step of the fitted scheme (Table 2)"}
+    conditions: "aqueous or dry, 100-180 C, acid-favoured"
+    controls:
+      positive: [{reactants: [TDG], products: [HMF]}]
+      negative: [{reactants: [TDP]}, {reactants: [ODG]}]
+  - id: R05b_3dp_to_furfural
+    name: 3-deoxypentosone -> furfural (cyclodehydration)
+    class: cyclisation
+    status: net
+    smirks: "[O:1]=[CH:2][C:3](=[O:8])[CH2:4][CH:5]([OH])[CH2:6][OH]>>[O:1]=[CH:2][c:3]1[cH:4][cH:5][cH:6][o:8]1"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 5, furan-2-aldehyde formed in situ from ribose"}
+    conditions: "aqueous, 145 C, pH 5"
+    controls:
+      positive: [{reactants: [TDP], products: [FUR]}]
+      negative: [{reactants: [TDG]}]
+  - id: R06_dicarbonyl_cleavage
+    name: alpha-dicarbonyl with an alpha-hydroxyl -> two carbonyl fragments
+    class: fragmentation
+    status: net
+    smirks: "[CX3:1](=[O:7])[C:2](=[O:8])[CH1:3]([OH:6])[#6:4]>>[C:1](=[O:7])[CH1:2]=[O:8].[CH1:3](=[O:6])[#6:4]"
+    source: {dossier: kocadagli2016jafc_extraction.md, anchor: "glucosone -> glyoxal and 1-DG -> methylglyoxal steps; and hofmann1998_reconciliation.md Table 10, the C2 + C3 fragments of a pentose"}
+    conditions: "aqueous, 100-145 C"
+    controls:
+      positive: [{reactants: [ODG], products: [MGO]}, {reactants: [G], products: [GO]}, {reactants: [DPO], products: [MGO, HA]}]
+      negative: [{reactants: [MGO]}, {reactants: [Glc]}]
+  - id: R07_strecker
+    name: alpha-dicarbonyl + alpha-amino acid -> Strecker aldehyde + alpha-aminoketone (+ CO2)
+    class: strecker
+    status: net
+    smirks: "[C:1](=[O:7])[C:2](=[O:8])[#6:3].[NH2:4][CH1:5]([#6:6])C(=O)[OH]>>[C:1](=[O:7])[C:2]([NH2:4])[#6:3].[CH1:5](=O)[#6:6]"
+    source: {dossier: hofmann2000_extraction.md, anchor: "the Strecker degradation with the dicarbonyl donors of Tables 1-3"}
+    conditions: "aqueous, 100-145 C"
+    controls:
+      positive: [{reactants: [MGO, Ala], products_smiles: ["CC=O"]}]
+      negative: [{reactants: [MGO, Gly]}, {reactants: [Glc, Ala]}]
+  - id: R08_cysteine_thermolysis
+    name: cysteine -> hydrogen sulfide + acetaldehyde + ammonia (+ CO2)
+    class: sulfur_release
+    status: net
+    smirks: "[NH2:1][CH1:2]([CH2:3][SH1:4])C(=O)[OH]>>[SH2:4].[CH3:3][CH1:2]=O.[NH3:1]"
+    source: {dossier: zheng1994_extraction.md, anchor: "Table I, cysteine thermolysis at four pH values (the lane's k_cys_h2s and its barrier)"}
+    conditions: "aqueous, 100-200 C, pH 3-9"
+    controls:
+      positive: [{reactants: [Cys], products: [H2S]}]
+      negative: [{reactants: [Ala]}, {reactants: [MFT]}]
+  - id: R09_furfural_h2s_to_fft
+    name: furfural + H2S -> 2-furfurylthiol
+    class: sulfur_assembly
+    status: net
+    smirks: "[O]=[CH:2][c:3]1[cH:5][cH:6][cH:7][o:8]1.[SH2:4]>>[SH1:4][CH2:2][c:3]1[cH:5][cH:6][cH:7][o:8]1"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 3, furan-2-aldehyde + H2S -> FFT, 0.48 mol%"}
+    conditions: "aqueous, 145 C, pH 5"
+    controls:
+      positive: [{reactants: [FUR, H2S], products: [FFT]}]
+      negative: [{reactants: [MGO, H2S]}, {reactants: [HMF, H2S]}]
+  - id: R10_norfuraneol_h2s_to_mft
+    name: norfuraneol + H2S -> 2-methyl-3-furanthiol
+    class: sulfur_assembly
+    status: net
+    smirks: "[CH3:1][C:2]1=[C:3]([OH])[C:4](=O)[CH2:5][O:6]1.[SH2:7]>>[CH3:1][c:2]1[c:3]([SH1:7])[cH:4][cH:5][o:6]1"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 4, norfuraneol + H2S -> MFT, 0.19 mol%; whitfield2001_extraction.md Table 1"}
+    conditions: "aqueous, 140-145 C, pH 4.5-5"
+    controls:
+      positive: [{reactants: [NF, H2S], products: [MFT]}]
+      negative: [{reactants: [DMHF, H2S]}]
+  - id: R11_c2_c3_recombination_to_mft
+    name: hydroxyacetaldehyde + 1-mercapto-2-propanone -> 2-methyl-3-furanthiol
+    class: sulfur_assembly
+    status: net
+    smirks: "[OH:1][CH2:2][CH1:3]=O.[CH3:4][C:5](=O)[CH2:6][SH1:7]>>[CH3:4][c:5]1[c:6]([SH1:7])[cH:3][cH:2][o:1]1"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 10, the C2 + C3 recombination pot, 0.24 mol% MFT"}
+    conditions: "aqueous, 145 C, pH 3-7"
+    controls:
+      positive: [{reactants: [HA, MP], products: [MFT]}]
+      negative: [{reactants: [HA, MGO]}]
+  - id: R12_thiol_oxidation_to_disulfide
+    terminal: true   # a sink or an adduct: its products do not react on in the enumeration
+    name: two thiols (+ oxidant) -> disulfide
+    class: thiol_sink
+    status: established
+    smirks: "[SH1:1][#6:2].[SH1:3][#6:4]>>[#6:2][S:1][S:3][#6:4]"
+    source: {dossier: kumazawa2003_extraction.md, anchor: "Table 3, difurfuryl disulfide the major FFT product at 121 C; zhou2023_extraction.md Table 1; mottram2002_extraction.md Table 1 (mixed disulfides)"}
+    conditions: "aqueous, 100-145 C, faster above pH 5; needs an oxidant"
+    controls:
+      positive: [{reactants: [MFT, MFT], products: [MFTD]}, {reactants: [FFT, FFT], products: [FFTD]}, {reactants: [MFT, MESH], products: [MMFT]}]
+      negative: [{reactants: [MFT, HEXANAL]}]
+  - id: R13_thiol_michael_addition
+    terminal: true   # a sink or an adduct: its products do not react on in the enumeration
+    name: thiol + alpha,beta-unsaturated carbonyl -> beta-thioether (Michael adduct)
+    class: thiol_sink
+    status: established
+    smirks: "[SH1:1][#6:2].[CH1,CH2:3]=[CH1:4][CX3:5]=[O:6]>>[#6:2][S:1][C:3][CH2:4][C:5]=[O:6]"
+    source: {dossier: devleeschouwer2006_extraction.md, anchor: "the acrylamide + cysteine elimination channel (k_acr_cys); starkenmann2008_extraction.md for thiol adducts of unsaturated carbonyls"}
+    conditions: "aqueous, 20-200 C, faster above the thiol pKa"
+    controls:
+      positive: [{reactants: [Cys, ACR], products: [ACRCYS]}, {reactants: [MFT, DECADIENAL], fires: true}]
+      negative: [{reactants: [MFT, HEXANAL]}, {reactants: [MFT, DA]}]
+  - id: R14_hemithioacetal
+    terminal: true   # a sink or an adduct: its products do not react on in the enumeration
+    name: thiol + aldehyde -> hemithioacetal (reversible)
+    class: thiol_sink
+    status: proposed
+    smirks: "[SH1:1][#6:2].[CH1:3](=[O:4])[#6:5]>>[#6:2][S:1][CH1:3]([OH:4])[#6:5]"
+    source: {dossier: hamzalioglu2018_extraction.md, anchor: "HMF reacting with the thiol group of cysteine (the HMFAD pool); k6b_adduct_kinetics_synthesis.md section 1c for the aldehyde-thiol class"}
+    conditions: "aqueous; an equilibrium, not a sink on its own"
+    controls:
+      positive: [{reactants: [Cys, HMF], fires: true}, {reactants: [MFT, HEXANAL], fires: true}]
+      negative: [{reactants: [MFT, DA]}, {reactants: [MFT, PENTANE]}]
+  - id: R15_thiazolidine
+    terminal: true   # a sink or an adduct: its products do not react on in the enumeration
+    name: cysteine + aldehyde -> thiazolidine-4-carboxylic acid
+    class: formation
+    status: established
+    smirks: "[NH2:1][CH1:2]([CH2:3][SH1:4])[C:5](=O)[OH].[CH1:6](=O)[#6:7]>>[#6:7][CH1:6]1[NH1:1][CH1:2]([C:5](=O)[OH])[CH2:3][S:4]1"
+    source: {dossier: zhai2020_extraction.md, anchor: "the xylose-cysteine thiazolidine (TTCA), about 94 % of the group's Cys-Amadori"}
+    conditions: "aqueous, 25-140 C"
+    controls:
+      positive: [{reactants: [Cys, PENT], products: [TTCA]}]
+      negative: [{reactants: [MFT, PENT]}, {reactants: [Cys, DA]}]
+  - id: R17_asparagine_schiff_to_acrylamide
+    name: asparagine Schiff base -> acrylamide + aminodeoxysugar (+ CO2)
+    class: formation
+    status: net
+    smirks: "[NH2:9][C:8](=O)[CH2:1][CH1:2]([N:3]=[CH1:4][#6:5])C(=O)[OH]>>[NH2:9][C:8](=O)[CH1:2]=[CH2:1].[NH2:3][CH2:4][#6:5]"
+    source: {dossier: devleeschouwer2006_extraction.md, anchor: "the Schiff base -> acrylamide step of the fitted scheme (k_int1_acr)"}
+    conditions: "aqueous or low moisture, 120-200 C"
+    controls:
+      positive: [{reactants: [SBA], products: [ACR]}]
+      negative: [{reactants: [AMA]}]
+  - id: R18a_hydroperoxide_scission_alkane_side
+    name: allylic hydroperoxide -> alkane + 2,4-dienal (beta-scission, side A)
+    class: lipid
+    status: net
+    smirks: "[#6:1][CH2:9][CH1:2]([O:3][OH])[CH1:4]=[CH1:5]>>[#6:1][CH3:9].[O:3]=[CH1:2][CH1:4]=[CH1:5]"
+    source: {dossier: schroen2022_extraction.md, anchor: "the linoleate hydroperoxide product slate (Frankel 1989) the lipid lane's branch fractions come from"}
+    conditions: "any matrix, 25-200 C"
+    controls:
+      positive: [{reactants: [LOOH_13_ct], products: [PENTANE, ME_13_OXO_TRIDECADIENOATE]}, {reactants: [LOOH_9_ct], products: [ME_OCTANOATE, DECADIENAL]}]
+      negative: [{reactants: [HEXANAL]}]
+  - id: R18b_hydroperoxide_scission_aldehyde_side
+    name: allylic hydroperoxide -> saturated aldehyde + oxo-alkenoate (beta-scission, side B)
+    class: lipid
+    status: net
+    smirks: "[#6:1][CH1:2]([O:3][OH])[CH1:4]=[CH1:5][CH1:6]=[CH1:7]>>[#6:1][CH1:2]=[O:3].O=[CH1:4][CH2:5][CH1:6]=[CH1:7]"
+    source: {dossier: schroen2022_extraction.md, anchor: "as R18a: hexanal from the 13-hydroperoxide, methyl 9-oxononanoate from the 9-hydroperoxide"}
+    conditions: "any matrix, 25-200 C"
+    controls:
+      positive: [{reactants: [LOOH_13_ct], products: [HEXANAL]}, {reactants: [LOOH_9_ct], products: [ME_9_OXONONANOATE]}]
+      negative: [{reactants: [HEXANAL]}]
+  - id: R22_dmhf_h2s_to_thiophenone
+    name: furaneol + H2S -> 2,5-dimethyl-4-hydroxy-3(2H)-thiophenone
+    class: sulfur_assembly
+    status: established
+    smirks: "[CH3:1][CH1:2]1[O:3][C:4]([CH3:5])=[C:6]([OH:7])[C:8]1=[O:10].[SH2:9]>>[CH3:1][CH1:2]1[S:9][C:4]([CH3:5])=[C:6]([OH:7])[C:8]1=[O:10]"
+    source: {dossier: shu1988_extraction.md, anchor: "Table I, the thiophenone from furaneol + H2S (a structural constant; the paper reports area percent only)"}
+    conditions: "aqueous, 100 C"
+    controls:
+      positive: [{reactants: [DMHF, H2S], products: [DMHFS]}]
+      negative: [{reactants: [NF, H2S]}]
+  - id: R23_thiamine_ring_opening
+    name: thiamine -> 5-hydroxy-3-mercapto-2-pentanone (thiazole ring opening)
+    class: sulfur_release
+    status: net
+    smirks: "[CH3:1][c:2]1[c:3]([CH2:4][CH2:5][OH:6])[s:7][cH:8][n+:9]1[CH2:10]>>[CH3:1][C:2](=O)[CH1:3]([SH1:7])[CH2:4][CH2:5][OH:6]"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 8, thiamin -> MFT via 5-hydroxy-3-mercapto-2-pentanone"}
+    conditions: "aqueous, 145 C, pH 5"
+    controls:
+      positive: [{reactants: [THI], products: [HMP]}]
+      negative: [{reactants: [ACTZ]}]
+  - id: R24_hmp_to_mft
+    name: 5-hydroxy-3-mercapto-2-pentanone -> 2-methyl-3-furanthiol (cyclodehydration)
+    class: sulfur_assembly
+    status: net
+    smirks: "[CH3:1][C:2](=O)[CH1:3]([SH1:4])[CH2:5][CH2:6][OH:7]>>[CH3:1][c:2]1[c:3]([SH1:4])[cH:5][cH:6][o:7]1"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 8, the thiamin route"}
+    conditions: "aqueous, 145 C"
+    controls:
+      positive: [{reactants: [HMP], products: [MFT]}]
+      negative: [{reactants: [MP]}]
+  - id: R25_dideoxypentosone_h2s_to_mft
+    name: 1,4-dideoxypentosone + H2S -> 2-methyl-3-furanthiol (the intact-C5 route)
+    class: sulfur_assembly
+    status: net
+    smirks: "[CH3:1][C:2](=[O:6])[C:3](=O)[CH2:4][CH1:5]=O.[SH2:7]>>[CH3:1][c:2]1[o:6][cH:5][cH:4][c:3]1[SH1:7]"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 6, ribose + H2S -> MFT with the pentose skeleton intact (isotope labelling)"}
+    conditions: "aqueous, 145 C, pH 5"
+    controls:
+      positive: [{reactants: [DDP, H2S], products: [MFT]}]
+      negative: [{reactants: [DPO, H2S]}]
+  - id: R26a_1dp_to_norfuraneol
+    name: 1-deoxypentosone -> norfuraneol (cyclisation)
+    class: cyclisation
+    status: net
+    smirks: "[CH3:1][C:2](=O)[C:3](=[O:6])[CH1:4]([OH:7])[CH2:5][OH:8]>>[CH3:1][C:2]1=[C:3]([OH:6])[C:4](=[O:7])[CH2:5][O:8]1"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 5, norfuraneol formed in situ from ribose (54 530 ug/100 mL)"}
+    conditions: "aqueous, 145 C, pH 5"
+    controls:
+      positive: [{reactants: [DPO], products: [NF]}]
+      negative: [{reactants: [TDP]}]
+  - id: R26b_1dg_to_furaneol
+    name: 1-deoxyglucosone -> furaneol (cyclisation with the terminal reduction, net)
+    class: cyclisation
+    status: net
+    smirks: "[CH3:1][C:2](=O)[C:3](=[O:6])[CH1:4]([OH:7])[CH1:5]([OH:8])[CH2:9][OH]>>[CH3:1][C:2]1=[C:3]([OH:6])[C:4](=[O:7])[CH1:5]([CH3:9])[O:8]1"
+    source: {dossier: blank1997_extraction.md, anchor: "furaneol from 1-deoxyglucosone via acetylformoin (the k5b synthesis, the trunk's r_odg_af / r_af_dmhf)"}
+    conditions: "aqueous, 100-145 C"
+    controls:
+      positive: [{reactants: [ODG], products: [DMHF]}]
+      negative: [{reactants: [TDG]}]
+  - id: R27_dicarbonyl_h2s_to_mercaptoketone
+    name: methylglyoxal + H2S -> 1-mercapto-2-propanone
+    class: sulfur_assembly
+    status: net
+    smirks: "[CH3:1][C:2](=O)[CH1:3]=O.[SH2:4]>>[CH3:1][C:2](=O)[CH2:3][SH1:4]"
+    source: {dossier: hofmann1998_reconciliation.md, anchor: "Table 7, 2-oxopropanal + H2S (1:1 and 1:2)"}
+    conditions: "aqueous, 145 C, pH 5"
+    controls:
+      positive: [{reactants: [MGO, H2S], products: [MP]}]
+      negative: [{reactants: [DA, H2S]}, {reactants: [GO, H2S]}]

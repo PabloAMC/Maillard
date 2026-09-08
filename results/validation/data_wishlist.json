@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-08",
     "git": {
-      "commit": "3db31f6cc04cae9425fb4b84d0af928f76989545",
-      "short": "3db31f6c",
+      "commit": "a57a56466f531904fe55f1d559d71a3f3aeeefeb",
+      "short": "a57a5646",
       "branch": "cleaning",
       "dirty": true
     },
@@ -371,7 +371,8 @@
           "compound": "2-pentylfuran"
         }
       ],
-      "row_count": 4
+      "row_count": 4,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s",
@@ -390,7 +391,8 @@
           "compound": "2-Methyl-3-furanthiol (MFT)"
         }
       ],
-      "row_count": 3
+      "row_count": 3,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: nonanal",
@@ -409,7 +411,8 @@
           "compound": "nonanal"
         }
       ],
-      "row_count": 3
+      "row_count": 3,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose",
@@ -424,7 +427,8 @@
           "compound": "Furfural"
         }
       ],
-      "row_count": 2
+      "row_count": 2,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML)",
@@ -435,7 +439,8 @@
           "compound": "N\u03b5-(Carboxymethyl)lysine (CML)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL)",
@@ -446,7 +451,8 @@
           "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-mo",
@@ -457,7 +463,8 @@
           "compound": "2-Furfurylthiol (FFT)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an i",
@@ -468,7 +475,8 @@
           "compound": "2-Methyl-3-furanthiol (MFT)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: 1-hexanol",
@@ -479,7 +487,8 @@
           "compound": "1-hexanol"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     }
   ],
   "thin_axes": [

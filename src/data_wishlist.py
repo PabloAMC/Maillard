@@ -203,7 +203,36 @@ def refused_targets(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
         g["rows"].append({"benchmark_id": r["benchmark_id"], "compound": r["compound"]})
     out = [{"what": k, "reason": v["reason"], "rows": v["rows"], "row_count": len(v["rows"])} for k, v in groups.items()]
     out.sort(key=lambda g: -g["row_count"])
+    _annotate_with_hypotheses(out)
     return out
+
+
+def _annotate_with_hypotheses(groups: List[Dict[str, Any]]) -> None:
+    """Whether a cited reaction rule reaches each refused compound (results/validation/network_hypotheses.json):
+    'reachable by rule, unparameterised' separates a missing rate from a missing route."""
+    import json
+
+    path = data_paths.VALIDATION_DIR / "network_hypotheses.json"
+    if not path.exists():
+        for g in groups:
+            g["hypothesis_layer"] = "artifact absent"
+        return
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    reached: Dict[str, set] = {}
+    for charge in payload.get("charges", []):
+        for product in charge.get("products", []):
+            if product.get("id"):
+                reached.setdefault(product["id"], set()).add(charge["charge"])
+    from src import compound_keys
+
+    for g in groups:
+        notes = []
+        for row in g["rows"]:
+            key = compound_keys.resolve(row["compound"])
+            rid = getattr(key, "id", None) if key is not None else None
+            if rid and rid in reached:
+                notes.append(f"{row['compound']}: reachable by a cited rule from {', '.join(sorted(reached[rid]))} (no rate)")
+        g["hypothesis_layer"] = "; ".join(sorted(set(notes))) if notes else "no cited rule reaches it from any reference charge"
 
 
 def _claims_to_trust(agree: int, evaluable: int) -> Optional[int]:
@@ -345,9 +374,9 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
             lines.append(f"- `{r['benchmark_id']}` / {r['compound']} ({r['panel']})")
     else:
         lines.append("None.")
-    lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason |", "|---|---|---|"]
+    lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason | the hypothesis layer |", "|---|---|---|---|"]
     for g in payload["refused_targets"]:
-        lines.append(f"| {g['what']} | {g['row_count']} | {g['reason'][:260]} |")
+        lines.append(f"| {g['what']} | {g['row_count']} | {g['reason'][:260]} | {g.get('hypothesis_layer', '')} |")
     lines += ["", "## 4. Directional axes below 'trust'", "", "| axis | agree / evaluable | not evaluable | verdict | Wilson lower | agreeing claims to reach trust |", "|---|---|---|---|---|---|"]
     for a in payload["thin_axes"]:
         need = "blocked: " + a["structural_block"] if a["structural_block"] else (str(a["additional_agreeing_claims_to_trust"]) if a["additional_agreeing_claims_to_trust"] is not None else "—")

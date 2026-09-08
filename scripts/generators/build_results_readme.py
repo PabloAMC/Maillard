@@ -81,6 +81,9 @@ DESCRIPTIONS: Dict[str, str] = {
     "results/validation/citation_verification_ledger.*": "2026-08-26 CrossRef identity sweep of every DOI; INPUT to `scripts/ci/citation_gate.py` although it lives here (it is a run record).",
     # ---- decision-support artifacts
     "results/validation/experiment_value_ranking.*": "`rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`.",
+    "results/validation/network_hypotheses.json": "The hypothesis layer: what the cited reaction rules propose from each lane's reference charge, placed against the engine's reactions (modelled / mechanism known / proposed); steps and products only, no rates (`generate_network_hypotheses.py`, pre-registered in `network_hypotheses_prereg.md`).",
+    "results/validation/network_hypotheses.md": "Markdown twin of `network_hypotheses.json`.",
+    "results/validation/network_hypotheses_prereg.md": "Pre-registration of the hypothesis layer: what runs, what counts as success, and the outcome.",
     "results/validation/data_wishlist.*": "THE DATA WISHLIST: what to measure next and what each measurement would unlock, derived from the scorecard, the slice profile, the Laplace covariance, the directional scorecard and the value-of-information ranking (`src/data_wishlist.py`; alias `wishlist`; read with `maillard wishlist`). Regenerated and compared by the freshness gate.",
     "results/validation/gap_heatmap.png": "Heat map of the experiment-value ranking (`generate_gap_heatmap.py`).",
     "results/validation/experiment_brief_cards.html": "One card per ranked experiment (`generate_gap_heatmap.py`).",

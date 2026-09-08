@@ -38,6 +38,9 @@ TESTS_ROOT: Path = REPO_ROOT / "tests"
 # --------------------------------------------------------------------------- data/ dirs
 LIT_DIR: Path = DATA_ROOT / "lit"
 SPECIES_DIR: Path = DATA_ROOT / "species"
+#: 2026-09-08: SMILES (or registry id) per engine species key; lumps declared as such. Read by the
+#: hypothesis layer (src/network_hypotheses) and its test; never by the engine.
+SPECIES_STRUCTURES: Path = SPECIES_DIR / "structures.yml"
 BENCHMARKS_DIR: Path = DATA_ROOT / "benchmarks"
 PROTOCOLS_DIR: Path = DATA_ROOT / "protocols"
 TIMESERIES_DIR: Path = LIT_DIR / "timeseries"
@@ -60,6 +63,8 @@ BENCHMARK_SCHEMA: Path = SCHEMAS_DIR / "benchmark.schema.json"
 
 # --------------------------------------------------------------------------- data/lit
 ARRHENIUS_PARAMS: Path = LIT_DIR / "arrhenius_params.yml"
+#: 2026-09-08: the hypothesis layer's cited reaction rules (SMIRKS + controls); never read by the engine.
+REACTION_RULES: Path = LIT_DIR / "reaction_rules.yml"
 HENRY_CONSTANTS: Path = LIT_DIR / "henry_constants.yml"
 BINDING_CONSTANTS: Path = LIT_DIR / "binding_constants.yml"
 LIPID_OXIDATION_CALIBRATION: Path = LIT_DIR / "lipid_oxidation_calibration.json"

@@ -16,6 +16,10 @@ src/            Runtime package. Import as `from src.<module> import ...`; never
                   the directional scorer and the fit-target ledger.
   comparative_cli.py, explain_compound.py, experiment_value.py, report_html.py, model_card.py
                   The front door's verbs (compare, predict, explain, rank, score, wishlist).
+  network_hypotheses/
+                  The hypothesis layer: cited reaction rules (data/lit/reaction_rules.yml) applied to the
+                  species' structures (data/species/structures.yml), placed against the engine's reactions.
+                  Steps and products only, never rates; the engine never imports it (a unit test asserts it).
   data_paths.py, data_access.py, compound_keys.py, paper_keys.py
                   The only way to reach data/: one constant per curated file, loads that raise
                   on a missing or malformed file, names resolved through data/keys/.

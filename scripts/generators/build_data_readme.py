@@ -47,10 +47,12 @@ DESCRIPTIONS: Dict[str, str] = {
     "data/species/desirable_targets.yml": "20 meat-relevant target odorants with odour thresholds; read by `sensory`, `experiment_value`, `recommend`.",
     "data/species/off_flavour_targets.yml": "6 off-note compounds (beany/green/fatty) with thresholds; same readers.",
     "data/species/toxic_markers.yml": "8 safety markers (AGEs, acrylamide, HCAs) with IARC class.",
+    "data/species/structures.yml": "A SMILES (or compound-registry id) for every kinetic-core species key, lumps declared as such; the hypothesis layer's input, checked against the engine's atom counts and molar masses by `tests/unit/test_species_structures.py`.",
     "data/species/precursors.yml": "Precursors by category (amino acids, sugars, exogenous, intermediates, lipids); `src/precursor_resolver.py`.",
     # ---- lit
     "data/lit": "Literature-derived constants, priors, reference payloads and the intake registries. See the per-file lines below and `data/lit/README.md` for the ingestion workflow.",
     "data/lit/README.md": "How to register a paper and run the literature learning loop.",
+    "data/lit/reaction_rules.yml": "The hypothesis layer's reaction rules: one SMIRKS per literature-described transformation with its dossier anchor, conditions and positive/negative controls (`src/network_hypotheses`); the engine never reads it.",
     "data/lit/arrhenius_params.yml": "Pre-exponential factors and activation energies per reaction family (Cantera export lane); its header records a known kJ/kcal collision with `FAST_BARRIERS`.",
     "data/lit/henry_constants.yml": "Air-water partition coefficients and solution enthalpies for 31 volatiles; `src/headspace.py`.",
     "data/lit/binding_constants.yml": "Measured protein-flavour binding constants with verbatim source quotes and verification status; `src/protein_binding.py`. The record shape the rest of this directory should converge on.",

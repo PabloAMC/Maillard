@@ -16,7 +16,7 @@ give the aroma you want — and see exactly why the model refuses to answer when
 |---|---|---|---|
 | which of two recipes gives more of a compound | `compare` | the ratio between the two, per compound, with what was assumed | the two differ in water activity on the thiol or fat path (no water term), or outside 0.34 to 0.99 on the acrylamide path; they differ in pH on the fat path, or outside pH 4 to 8 on the acrylamide path |
 | how much of a compound one recipe gives | `predict` | a level with an interval and the caveats | the compound is not in the model (2-pentylfuran, nonanal, CML), the thiols are asked from glucose or fructose with cysteine (no route), or a dicarbonyl is asked off the sugar path |
-| where a compound comes from in this model | `explain` | the steps, their rates and the papers behind them | never |
+| where a compound comes from in this model | `explain` | the steps, their rates and the papers behind them, then the steps the literature draws that the model lacks ("possible, not modelled") | never |
 | how good the model is on your own measurements | `score` | the same scorecard the panel gets; nothing is refitted | the rows the panel would refuse |
 | what to measure next | `wishlist`, `rank` | the measurements that would free the most predictions | never |
 

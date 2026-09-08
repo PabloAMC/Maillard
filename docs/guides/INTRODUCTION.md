@@ -174,8 +174,12 @@ removal step can be built and tested against the existing series in a day.
 
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
 comes from, scores your own measurements, and lists what to measure next. It refuses questions the
-evidence cannot answer instead of guessing. The table of what it answers and what it refuses is at
-the top of the [quick start](QUICKSTART.md).
+evidence cannot answer instead of guessing, and when it refuses it says whether the chemistry has no
+route or only no rate: a small layer of cited reaction rules, run over the model's species, lists the
+steps the literature draws that the model does not have
+([network_hypotheses.md](../../results/validation/network_hypotheses.md)). For the thiols, the same
+list with the literature's numbers is [the sink table](../validation/thiol_sink_candidates.md). The
+table of what the tool answers and what it refuses is at the top of the [quick start](QUICKSTART.md).
 
 ## Words used here
 
@@ -206,3 +210,4 @@ made from the repository's records. Where each figure's numbers come from:
 | section 7, 100 °C pot | Schieberle, Hofmann & Münch 2000, Table IV | `schieberle2000_extraction.md` |
 | section 7, second pot | Yiltirak et al. 2026, Food Res. Int. | `yiltirak2026_extraction.md` |
 | the trees | the model's reaction lists | `scripts/generators/build_reaction_tree.py`, [REACTION_TREES.md](REACTION_TREES.md) |
+| section 8: what the rules propose | the cited reaction rules and the species' structures | `data/lit/reaction_rules.yml`, `data/species/structures.yml`, `results/validation/network_hypotheses_prereg.md` |

@@ -90,7 +90,8 @@ python scripts/maillard.py wishlist                                  # what to m
 `compare` leads with **ratios** between the two arms, the quantity the systematic scale error
 cancels out of, and prints each arm's envelope declaration. `predict` prints absolutes *with*
 their interval and OAV. `explain` answers a compound with the lane, the declared assumptions and,
-for a refused compound, the reason. `rank` reads the core's Monte-Carlo envelope and orders
+for a refused compound, the reason, and closes with what the cited reaction rules propose that the
+model lacks, so a refusal reads as "no rate" or "no route", whichever is true. `rank` reads the core's Monte-Carlo envelope and orders
 (benchmark, compound) rows by how badly and how uncertainly the model misses them. `score` takes
 **your own measured concentrations** and scores them the way the panel scorecard scores a bundle,
 writing a bundle-shaped record under `results/user/` that the next re-calibration can read; it
@@ -301,7 +302,10 @@ Three trees, one rule each ([CONTRIBUTING.md](CONTRIBUTING.md)):
 
 Code: `src/kinetic_core/` (the engine, its parameters, panel, scoring, envelope, fit-target
 ledger), `src/comparative_cli.py` + `scripts/maillard.py` (the front door), `src/report_html.py`,
-`src/explain_compound.py`, `src/experiment_value.py` (the `rank` verb), `src/model_card.py`; the
+`src/explain_compound.py`, `src/experiment_value.py` (the `rank` verb), `src/model_card.py`;
+`src/network_hypotheses/` (the hypothesis layer: cited reaction rules over the species' structures,
+placed against the engine's reactions as modelled, mechanism known or proposed; steps only, never
+rates, and the engine never imports it); the
 literature side (`src/family_ingestion_plan.py`, `src/literature_intake_registry.py`,
 `scripts/deep_research_tracker.py` and the `generate_*` scripts that write
 `results/literature/`); and the six CI gates under `scripts/ci/`.
