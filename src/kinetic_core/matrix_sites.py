@@ -65,13 +65,21 @@ BINDING_OF_SPECIES: Dict[str, Tuple[str, ...]] = {
 
 @dataclass(frozen=True)
 class Sites:
-    """Site densities in mmol per gram of protein, with their provenance."""
+    """Site densities in mmol per gram of protein, with their provenance.
+
+    Two kinds of entry feed this: a sequence (counts per monomer over a molar mass, as for
+    beta-lactoglobulin) and a measurement (an isolate's free thiol and disulfide in µmol per gram of
+    protein, as for the pea and soy isolates). ``bands`` holds the measured spread in mmol per gram
+    where more than one laboratory or fraction was read; ``note`` says what is NOT on file (an
+    isolate without a measured amine density binds no aldehyde, and the answer says so)."""
 
     free_thiol: float
     disulfide: float
     amine: float
     source: str
     amine_band: Tuple[float, float] = (1.0, 1.0)
+    bands: Mapping[str, Tuple[float, float]] = None  # type: ignore[assignment]
+    note: str = ""
 
 
 @dataclass(frozen=True)
@@ -85,23 +93,42 @@ class ChargedSites:
     amine: float
     source: str
     amine_band: Tuple[float, float]
+    note: str = ""
 
     def as_dict(self) -> Dict[str, Any]:
-        return {"matrix": self.matrix, "protein_g_per_l": self.protein_g_per_l,
-                "pools_mmol_per_l": {"free_thiol": self.free_thiol, "disulfide": self.disulfide, "amine": self.amine},
-                "amine_available_band": list(self.amine_band), "source": self.source}
+        out = {"matrix": self.matrix, "protein_g_per_l": self.protein_g_per_l,
+               "pools_mmol_per_l": {"free_thiol": self.free_thiol, "disulfide": self.disulfide, "amine": self.amine},
+               "amine_available_band": list(self.amine_band), "source": self.source}
+        if self.note:
+            out["note"] = self.note
+        return out
 
 
 def matrices() -> Dict[str, Sites]:
     raw = data_access.load_yaml(data_paths.PROTEIN_MATRICES)["matrices"]
     out = {}
     for key, m in raw.items():
-        # the densities are the dossier's counts over the molar mass, computed here so the file's
-        # rounded convenience values can never drift from the counts (a test asserts they agree)
-        counts, mass = m["per_monomer"], float(m["molar_mass_g_per_mol"])
-        per_g = lambda n: float(n) / mass * 1000.0  # noqa: E731
-        out[key] = Sites(per_g(counts.get("free_cysteine", 0)), per_g(counts.get("disulfide", 0)), per_g(counts.get("lysine", 0)),
-                         str(m["source"]), tuple(float(x) for x in m.get("amine_available_band", [1.0, 1.0])))
+        amine_band = tuple(float(x) for x in m.get("amine_available_band", [1.0, 1.0]))
+        if "per_monomer" in m:
+            # a sequence: the densities are the dossier's counts over the molar mass, computed here so
+            # the file's rounded convenience values can never drift from the counts (a test asserts they agree)
+            counts, mass = m["per_monomer"], float(m["molar_mass_g_per_mol"])
+            per_g = lambda n: float(n) / mass * 1000.0  # noqa: E731
+            out[key] = Sites(per_g(counts.get("free_cysteine", 0)), per_g(counts.get("disulfide", 0)), per_g(counts.get("lysine", 0)),
+                             str(m["source"]), amine_band, {}, str(m.get("note", "")))
+        else:
+            # a measurement: an isolate's densities as the dossiers print them, with the spread across
+            # laboratories or fractions as a band; a pool that is not on file is zero and the note says so
+            measured = m["sites_mmol_per_g"]
+            bands = {k: (float(v[0]), float(v[1])) for k, v in (m.get("bands_mmol_per_g") or {}).items()}
+            missing = [pool for pool in ("free_thiol", "disulfide", "amine") if pool not in measured]
+            note = str(m.get("note", ""))
+            if missing:
+                note = (note + " " if note else "") + (
+                    f"{', '.join(missing)} not on file for this matrix"
+                    + (": no aldehyde or HMF binds to it (state amine_mmol_per_g in protein_sites to bind them)" if "amine" in missing else ""))
+            out[key] = Sites(float(measured.get("free_thiol", 0.0)), float(measured.get("disulfide", 0.0)), float(measured.get("amine", 0.0)),
+                             str(m["source"]), amine_band, bands, note)
     return out
 
 
@@ -136,7 +163,7 @@ def resolve(process) -> Tuple[Optional[ChargedSites], Optional[str]]:
     g = float(g_per_l)
     if g < 0:
         raise MatrixSpecError("protein_g_per_l must be non-negative")
-    return ChargedSites(matrix, g, sites.free_thiol * g, sites.disulfide * g, sites.amine * g, sites.source, sites.amine_band), None
+    return ChargedSites(matrix, g, sites.free_thiol * g, sites.disulfide * g, sites.amine * g, sites.source, sites.amine_band, sites.note), None
 
 
 def _k2(cls: Mapping[str, Any], k_ref: float, ea_kj: float, temp_c: float) -> float:

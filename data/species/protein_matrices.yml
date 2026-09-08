@@ -19,3 +19,31 @@ matrices:
       amine: 0.81692
     amine_available_band: [0.4, 1.0]
     amine_band_note: "anantharamkrishnan2020b flag X-8: the control spectrum shows mono- and di-lactosylated BLG, so not all 15 lysines are free; the band is declared, not measured"
+  # ---- isolates with MEASURED densities (2026-09-08, from the dossiers named; per gram of PROTEIN) ----
+  # A measured entry states `sites_mmol_per_g` as the dossiers print them (µmol per gram / 1000) and the
+  # spread across laboratories or fractions as `bands_mmol_per_g`. A pool that is not on file is left
+  # out, charges nothing, and the answer says so. The densities are the NATIVE isolate's; every dossier
+  # shows heating moves them (soy loses 90 % of its free thiol at 100 C / 30 min, pea globulin gains
+  # free thiol and loses disulfide at 85 C / 60 min), and that change is not modelled: the sites are
+  # charged once, at the start of the cook.
+  soy_isolate:
+    display_name: soy protein isolate (native; laboratory alcohol-washed and commercial isolates agree)
+    source: "ruan2014_extraction.md section 4 (free SH 7.5 +/- 0.26 umol/g protein, DPS in 2 % SDS; S-S ~53 umol/g inferred from the paper's own half-cystine ~114); shimada1988_extraction.md section 4 (total SH 8.0 umol/g protein, DTNB in 6 M urea + 0.5 % SDS; half-cystine 100-104 umol/g by two methods; S-S = (100 - 8)/2 = 46 umol/g derived)"
+    sites_mmol_per_g:
+      free_thiol: 0.0078     # mean of 0.0075 (Ruan 2014) and 0.0080 (Shimada & Cheftel 1988)
+      disulfide: 0.050       # mean of 0.046 (Shimada, derived) and 0.053 (Ruan, inferred): both rest on a half-cystine total, not a direct S-S assay
+    bands_mmol_per_g:
+      free_thiol: [0.0075, 0.0080]
+      disulfide: [0.046, 0.053]
+    note: "free thiol is 7-8 % of the half-cystine in both isolates; the disulfide is derived from half-cystine minus free thiol, over two (no paper prints a direct S-S assay of the native isolate)"
+    heated_reference: "ruan2014: 100 C / 30 min at 22.5 g/L leaves free SH 0.75 umol/g and S-S 56.6 umol/g; shimada1988: half-cystine constant 80-120 C, free SH down by up to half (figure-only)"
+  pea_isolate:
+    display_name: pea protein isolate (native; the globulin fraction and a whole isolate disagree sixfold on free thiol)
+    source: "chihi2016_extraction.md section 4 (pea globulin isolate, 94 % protein: free SH 2.1 +/- 0.1, S-S 4.2 +/- 0.1 umol/g protein, DTNB in 1.5 M GdnCl, DTT for the total, n = 3); shen2022_extraction.md section 4 (whole pea protein isolate: free SH 13.52 +/- 0.09 umol/g, basis per gram protein or powder not stated; no S-S, no total SH)"
+    sites_mmol_per_g:
+      free_thiol: 0.0053     # geometric centre of 0.0021 (globulin fraction, Chihi 2016) and 0.0135 (whole isolate, Shen 2022)
+      disulfide: 0.0042      # one laboratory (Chihi 2016, globulin fraction); the dossier reads it as a probable LOWER bound (the paper's own 2-7 Cys per legumin subunit implies more)
+    bands_mmol_per_g:
+      free_thiol: [0.0021, 0.0135]
+    note: "the whole isolate's albumins (Shen 2022) carry more free thiol than the globulin fraction (Chihi 2016); the disulfide density is one laboratory's value for the globulins and a probable lower bound; Shen 2022's free amino number (8.44 mmol/g) is physically implausible and is NOT used for the amine pool"
+    heated_reference: "chihi2016: 85 C / 60 min at 2 wt %, pH 7.2 gives free SH 7.1 and S-S 1.8 umol/g (half-cystine conserved at ~10.5)"

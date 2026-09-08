@@ -71,3 +71,26 @@ which is the adduct synthesis's own verdict ("does not matter at process tempera
 by the engine. Those rows are a storage and lipoxygenase question (roadmap, programme 5), not a
 binding question. The layer's value is that a laboratory that states its isolate's sites gets the
 binding declared, bracketed and printed, rather than absent.
+
+## 5. Addendum (2026-09-08, evening): pea and soy isolates enter the table
+
+Four papers were read the same day (`ruan2014`, `shimada1988`, `chihi2016`, `shen2022` extraction
+dossiers) and the table gained two MEASURED entries beside the sequence-computed β-lactoglobulin,
+in mmol per gram of protein, native isolate:
+
+| matrix | free thiol | disulfide | amine | what the spread is |
+|---|---|---|---|---|
+| soy isolate | 0.0078 (0.0075 to 0.0080) | 0.050 (0.046 to 0.053) | not on file | two isolates and two thiol reagents agree; the disulfide is half-cystine minus free thiol over two in both papers, not a direct assay |
+| pea isolate | 0.0053 (0.0021 to 0.0135) | 0.0042 (one laboratory) | not on file | the globulin fraction (Chihi) and a whole isolate (Shen) differ sixfold in free thiol; the disulfide is the globulins' and a probable lower bound |
+
+What this changes: a spec that names `soy_isolate` or `pea_isolate` with a loading charges the
+sulfur lane's disulfide pool from a dossier instead of refusing. What it does not change: no paper
+gives a lysine or free-amine density (Shen 2022's 8.44 mmol/g is physically impossible and is
+recorded as such), so neither isolate binds an aldehyde or HMF; the answer prints "amine not on
+file" and how to state it. The densities are the native isolate's; every paper shows heating moves
+them (soy loses 90 % of its free thiol at 100 °C in 30 minutes; the pea globulins gain free thiol
+and lose disulfide at 85 °C), and that is not modelled. Chihi 2016's β-lactoglobulin numbers
+(free thiol 0.0425, disulfide 0.1025 mmol/g) sit at 78 % and 94 % of the table's sequence-computed
+values, which is the cross-check T2 lacked. The T2 test now also asserts the two measured entries and
+the missing-amine note; T1, T3, T4, T5 are unchanged and pass.
+

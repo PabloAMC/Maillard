@@ -176,14 +176,16 @@ a:
   time_min: 20.0
   ph: 5.0
   aw: 0.98
-  matrix: blg                # site densities on file (data/species/protein_matrices.yml)
+  matrix: blg                # on file: blg, soy_isolate, pea_isolate (data/species/protein_matrices.yml)
   protein_g_per_l: 10.0
 ```
 
 With a loading, the protein's reactive sites are charged: the thiols meet the disulfide pool through
 the sulfur lane's exchange channel, and aldehydes and HMF are bound to the amine and thiol pools by
-declared rates from the adduct dossiers, their brackets shown as an interval. Only β-lactoglobulin
-is on file. For your own isolate, state its sites in mmol per gram:
+declared rates from the adduct dossiers, their brackets shown as an interval. On file:
+β-lactoglobulin (from its sequence), soy isolate and pea isolate (measured thiol and disulfide
+densities; no amine density, so on those two no aldehyde binds and the answer says so). For your
+own isolate, state its sites in mmol per gram:
 
 ```yaml
   protein_g_per_l: 50.0
@@ -191,8 +193,9 @@ is on file. For your own isolate, state its sites in mmol per gram:
 ```
 
 A named matrix without a loading is refused; a loading with a matrix that has no sites on file
-charges nothing and says so. No site density for pea or soy is on file, because no dossier gives
-one; if you have the measurement, it goes in the spec, and the answer names it. Pre-registered in
+charges nothing and says so. The pea and soy densities are native values from four papers with
+their spread stated in the table; heating moves them and that is not modelled. If you have your
+own measurement, it goes in the spec and the answer names it. Pre-registered in
 `results/validation/matrix_sites_prereg.md`.
 
 ## Before you trust a result

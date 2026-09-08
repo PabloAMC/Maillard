@@ -680,6 +680,8 @@ def render_predict_core_text(payload: Mapping[str, Any]) -> str:
         out.append(f"  PROTEIN MATRIX  {s['matrix']} at {s['protein_g_per_l']:g} g/L: sites charged, mmol/L  "
                    f"free thiol {pools['free_thiol']:.3g}  disulfide {pools['disulfide']:.3g}  amine {pools['amine']:.3g}")
         out.append(_wrap(f"src: {s['source']}", indent="    "))
+        if s.get("note"):
+            out.append(_wrap(f"note: {s['note']}", indent="    "))
         for compound, b in (matrix.get("binding") or {}).items():
             lo, hi = b["bound_fraction_corners"]
             out.append(f"    {compound[:37]:<38} bound to the matrix {100 * b['bound_fraction']:.1f} %  (declared bracket {100 * lo:.1f} to {100 * hi:.1f} %)")
