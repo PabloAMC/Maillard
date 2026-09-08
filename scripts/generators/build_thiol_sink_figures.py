@@ -2,9 +2,10 @@
 """
 Figures for docs/guides/INTRODUCTION.md and REACTION_TREES.md (2026-09-07).
 
-Six plots of MEASURED against MODEL for the sulfur lane's thiol-sink diagnosis. Model values are
-read from the frozen artifacts (the B16 ship rule, the directional scorecard); measured values are
-literals with their source anchors, re-typed from the extraction dossiers named beside them.
+Figures 00-17: the map, the repository, the field and the thiol-sink diagnosis (model values from the
+frozen artifacts; measured values re-typed from the dossiers named beside them). Figures 18-22
+(2026-09-08): the laboratories' spread, what papers state, one number's path, the parity plot and the
+rows that get no number, all read from the panel scorecard and the benchmark files.
 
     python scripts/generators/build_thiol_sink_figures.py      # writes docs/assets/thiol_sink/*.png
 """
@@ -655,6 +656,249 @@ def fig_papers_weight() -> None:
     plt.close(fig)
 
 
+# ---------------------------------------------------------------------------
+# 2026-09-08: the field's own limits and the repository's own workings
+# ---------------------------------------------------------------------------
+
+LANE_COLOUR = {"trunk": "#2B5DA8", "sulfur": "#178F6E", "acrylamide": "#D9822B", "lipid": "#B5468A"}
+LANE_LABEL = {"trunk": "sugar + amino acid", "sulfur": "pentose + cysteine", "acrylamide": "asparagine + sugar", "lipid": "fat"}
+
+
+def _panel_rows():
+    """Every scored (measured, predicted) pair on the panel, flattened."""
+    s = _read(V / "core_panel_scores.json")
+    out = []
+    for b in s["benchmarks"]:
+        for c in b["compounds"]:
+            out.append({"benchmark_id": b["benchmark_id"], "panel": b["panel"], "role": b["evidence_role"], "conditions": b["conditions"],
+                        "vessel": b["vessel_oxygen"], "quant": b.get("quantification_source", ""), "compound": c["compound"], "lane": c["lane"],
+                        "measured": c["measured"], "predicted": c["predicted"], "fold": c["fold_error"]})
+    return s, out
+
+
+def fig_lab_spread() -> None:
+    """The same two thiols, from cysteine and a pentose or its Amadori compound, measured by five laboratories."""
+    import re
+
+    if str(ROOT / "scripts" / "generators") not in sys.path:
+        sys.path.insert(0, str(ROOT / "scripts" / "generators"))
+    import generate_kinetic_core_b2_3_fit as B23
+
+    _, rows = _panel_rows()
+    pts = []   # (lab, compound, T, ug/L, pH, note)
+    for r in rows:
+        if r["lane"] != "sulfur" or not any(k in r["compound"] for k in ("furanthiol", "Furfurylthiol")):
+            continue
+        bid = r["benchmark_id"]
+        if "norfuraneol" in bid or "c2c3" in bid:
+            continue                                   # fed intermediates, not a sugar + cysteine pot
+        lab = "Hofmann & Schieberle 1998" if "hofmann1998" in bid else "Yiltirak et al. 2026" if "Yiltirak" in bid else "Bolton et al. 1994" if "Bolton" in bid else None
+        if lab is None:
+            continue
+        pts.append((lab, "MFT" if "furanthiol" in r["compound"] else "FFT", r["conditions"]["temp_C"], r["measured"], r["conditions"]["ph"]))
+    systems = B23.SYSTEMS
+    for row in B23.ACTIVE_FIT_ROWS:
+        rid = row["id"]
+        if not (rid.startswith("zhou_pH7_") or rid.startswith("kang_1")) or row["kind"] != "conc" or not rid.endswith(("MFT", "FFT")):
+            continue
+        m = re.search(r"(?:MFT|FFT)\s+(\d+(?:\.\d+)?)", row["anchor"])
+        if not m:
+            continue
+        sysm = systems[row["system"]]
+        pts.append(("Zhou et al. 2023" if rid.startswith("zhou") else "Kang et al. 2026", rid[-3:], float(sysm["t_c"]), float(m.group(1)), float(sysm["ph"])))
+    labs = ["Hofmann & Schieberle 1998", "Bolton et al. 1994", "Zhou et al. 2023", "Kang et al. 2026", "Yiltirak et al. 2026"]
+    colours = dict(zip(labs, ["#2B5DA8", "#8A6BBF", "#D9822B", "#B5468A", "#178F6E"]))
+    jitter = dict(zip(labs, [0.0, -1.2, 1.2, -0.6, 0.6]))
+    fig, ax = plt.subplots(figsize=(8.6, 5.0))
+    for lab, comp, T, y, ph in pts:
+        ax.scatter(T + jitter[lab], y, marker="o" if comp == "MFT" else "^", s=58, facecolor=colours[lab], edgecolor="white", lw=0.8, zorder=3)
+        if lab == "Hofmann & Schieberle 1998" and comp == "MFT":
+            ax.annotate(f"pH {ph:g}", (T, y), xytext=(7, 0), textcoords="offset points", fontsize=8, color=MUTED, va="center")
+    ax.set_yscale("log")
+    ax.set_xlabel("temperature (°C)")
+    ax.set_ylabel("measured thiol (µg per litre, log scale)")
+    ax.set_xlim(92, 158)
+    handles = [plt.Line2D([0], [0], marker="s", ls="", color=colours[l], markersize=8, label=l) for l in labs]
+    handles += [plt.Line2D([0], [0], marker="o", ls="", color=MUTED, markersize=7, label="MFT"), plt.Line2D([0], [0], marker="^", ls="", color=MUTED, markersize=7, label="FFT")]
+    ax.legend(handles=handles, loc="lower right", fontsize=8.5, ncol=2, frameon=False)
+    ax.set_title("The same two thiols, five laboratories", loc="left")
+    ax.grid(True, which="major", axis="y", alpha=0.3)
+    ax.yaxis.set_minor_formatter(NullFormatter())
+    fig.tight_layout()
+    fig.savefig(OUT / "18_lab_spread.png")
+    plt.close(fig)
+
+
+def fig_what_papers_report() -> None:
+    """What the papers behind the test panel state, as a share of panel pots."""
+    s, rows = _panel_rows()
+    pots = {b["benchmark_id"]: b for b in s["benchmarks"]}
+    n = len(pots)
+    buffers = {}
+    for bid in pots:
+        f = ROOT / pots[bid]["bench_file"]
+        d = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+        buffers[bid] = (d.get("conditions") or {}).get("buffer")
+
+    def share(pred):
+        return sum(1 for b in pots.values() if pred(b)) / n
+
+    items = [
+        ("the buffer, or that there was none", share(lambda b: isinstance(buffers[b["benchmark_id"]], dict) and buffers[b["benchmark_id"]].get("species") != "buffer_unknown")),
+        ("how the compound was calibrated", share(lambda b: "class='" in b["quantification_source"] and "undeclared" not in b["quantification_source"] and "default" not in b["quantification_source"])),
+        ("calibrated against a labelled standard", share(lambda b: "isotope" in b["quantification_source"])),
+        ("the liquid volume in the vessel", share(lambda b: b["vessel_oxygen"]["fill_mL"] is not None)),
+        ("the headspace above it", share(lambda b: b["vessel_oxygen"]["headspace_mL"] is not None)),
+        ("the atmosphere (air, nitrogen, sealed)", share(lambda b: b["vessel_oxygen"]["atmosphere"] not in (None, "air_by_default", "unstated"))),
+        ("the full text read here, not a summary", share(lambda b: b["vessel_oxygen"]["provenance_class"] == "primary_source_pdf")),
+    ]
+    fig, ax = plt.subplots(figsize=(8.6, 4.4))
+    ys = range(len(items))[::-1]
+    for y, (label, v) in zip(ys, items):
+        colour = "#178F6E" if v >= 0.67 else "#D9822B" if v >= 0.34 else "#B23A3A"
+        ax.barh(y, v, color=colour, height=0.62)
+        ax.text(v + 0.012, y, f"{v:.0%}", va="center", fontsize=9, color=INK)
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([i[0] for i in items], fontsize=9.5)
+    ax.set_xlim(0, 1.08)
+    ax.set_xticks([0, 0.25, 0.5, 0.75, 1.0])
+    ax.set_xticklabels(["0", "25 %", "50 %", "75 %", "all"])
+    ax.set_xlabel(f"share of the {n} pots on the test panel whose paper states it")
+    ax.set_title("What the papers behind the test panel state", loc="left")
+    ax.grid(True, axis="x", alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(OUT / "19_what_papers_report.png")
+    plt.close(fig)
+
+
+def fig_one_number() -> None:
+    """One measured value followed through the repository, from the PDF to the figure that shows it."""
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+
+    s, rows = _panel_rows()
+    bid = "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026"
+    b = next(x for x in s["benchmarks"] if x["benchmark_id"] == bid)
+    r = next(x for x in rows if x["benchmark_id"] == bid and "furanthiol" in x["compound"])
+    bundle = json.loads((ROOT / b["bench_file"]).read_text(encoding="utf-8"))
+    v = b["vessel_oxygen"]
+    steps = [
+        ("1  the paper", "data/articles/Yiltirak2026.pdf\n+ Yiltirak2026-supplementary.docx",
+         "Table S3: MFT in the buffer pot,\n100 °C for 4 h: 6.88 ± 0.98 µg/L"),
+        ("2  the dossier", "data/lit/extraction_dossiers/\nyiltirak2026_extraction.md",
+         "every table re-typed; the value checked\nagainst the text and the other arms"),
+        ("3  the benchmark file", "data/benchmarks/external_validation/\nmaillard_path/…100C_4h_Yiltirak2026.json",
+         f"measured {r['measured']:.2f} µg/L; {bundle.get('evidence_class')}:\nnever used for tuning; vessel {v['fill_mL']:.0f} mL in {v['fill_mL'] + v['headspace_mL']:.0f} mL"),
+        ("4  the scorecard", "results/validation/core_panel_scores.json",
+         f"the model predicts {r['predicted']:.0f} µg/L:\n{r['fold']:.0f} times too high"),
+        ("5  the direction claim", "docs/validation/directional_claims_panel.yml",
+         "the pot's four temperatures say MFT falls\nas the cook gets hotter; the model says it rises"),
+        ("6  the figures", "docs/assets/thiol_sink/04_yiltirak_ladder.png\n00_map.png, 21_parity.png",
+         "the same number, drawn"),
+    ]
+    fig, ax = plt.subplots(figsize=(12.5, 6.2))
+    ax.axis("off")
+    ax.set_xlim(0, 3)
+    ax.set_ylim(0, 2)
+    pos = {0: (0, 1), 1: (1, 1), 2: (2, 1), 3: (2, 0), 4: (1, 0), 5: (0, 0)}
+    w, h = 0.92, 0.80
+    for i, (title, path, what) in enumerate(steps):
+        cx, cy = pos[i]
+        x0, y0 = cx + 0.04, cy + 0.1
+        ax.add_patch(FancyBboxPatch((x0, y0), w, h, boxstyle="round,pad=0.01,rounding_size=0.03", fc="#F4F6F5", ec="#B9C4C1", lw=1.1))
+        ax.text(x0 + 0.05, y0 + h - 0.08, title, fontsize=10.5, fontweight="bold", color=INK, va="top")
+        ax.text(x0 + 0.05, y0 + h - 0.24, path, fontsize=7.6, family="DejaVu Sans Mono", color=MUTED, va="top")
+        ax.text(x0 + 0.05, y0 + 0.31, what, fontsize=8.8, color=INK, va="top")
+    for a, bb in ((0, 1), (1, 2), (2, 3), (3, 4), (4, 5)):
+        (xa, ya), (xb, yb) = pos[a], pos[bb]
+        if ya == yb:
+            start = (xa + 0.04 + w if xb > xa else xa + 0.04, ya + 0.5)
+            end = (xb + 0.04 if xb > xa else xb + 0.04 + w, yb + 0.5)
+        else:
+            start = (xa + 0.04 + w / 2, ya + 0.1)
+            end = (xb + 0.04 + w / 2, yb + 0.1 + h)
+        ax.add_patch(FancyArrowPatch(start, end, arrowstyle="-|>", mutation_scale=14, color="#5E6B6E", lw=1.3))
+    ax.set_title("One measurement's path through the repository", loc="left", fontsize=11.5)
+    fig.tight_layout()
+    fig.savefig(OUT / "20_one_number.png", bbox_inches="tight")
+    plt.close(fig)
+
+
+def fig_parity() -> None:
+    """Predicted against measured for every scored row on the panel."""
+    import numpy as np
+
+    s, rows = _panel_rows()
+    fig, ax = plt.subplots(figsize=(7.4, 6.6))
+    lo, hi = 1e-2, 1e6
+    xs = np.array([lo, hi])
+    ax.fill_between(xs, xs / 3, xs * 3, color="#178F6E", alpha=0.10, lw=0, label="within 3x")
+    ax.plot(xs, xs, color=INK, lw=1)
+    for f in (10, 100):
+        ax.plot(xs, xs * f, color="#B9C4C1", lw=0.8, ls="--")
+        ax.plot(xs, xs / f, color="#B9C4C1", lw=0.8, ls="--")
+    for r in rows:
+        held_out = r["role"] == "external_holdout"
+        ax.scatter(r["measured"], r["predicted"], s=54, marker="o", facecolor=LANE_COLOUR[r["lane"]] if held_out else "white",
+                   edgecolor=LANE_COLOUR[r["lane"]], lw=1.4, zorder=3)
+    within = sum(1 for r in rows if r["fold"] <= 3)
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(lo, hi)
+    ax.set_xlabel("measured (µg per litre or per kg, log scale)")
+    ax.set_ylabel("predicted (log scale)")
+    ax.text(0.40, 0.97, "model too high", transform=ax.transAxes, fontsize=9, color=MUTED, va="top")
+    ax.text(0.97, 0.40, "model too low", transform=ax.transAxes, fontsize=9, color=MUTED, ha="right")
+    handles = [plt.Line2D([0], [0], marker="o", ls="", color=c, markersize=8, label=LANE_LABEL[l]) for l, c in LANE_COLOUR.items()]
+    handles += [plt.Line2D([0], [0], marker="o", ls="", markerfacecolor="white", markeredgecolor=MUTED, markersize=8, label="pot from the laboratory the rates came from"),
+                plt.Line2D([0], [0], marker="o", ls="", color=MUTED, markersize=8, label="pot from another laboratory"),
+                plt.Rectangle((0, 0), 1, 1, fc="#178F6E", alpha=0.15, label="within 3x")]
+    ax.legend(handles=handles, loc="upper left", fontsize=8.3, frameon=True, framealpha=0.9)
+    ax.set_title(f"Predicted against measured: {within} of {len(rows)} rows within 3x", loc="left")
+    ax.grid(True, alpha=0.25)
+    fig.tight_layout()
+    fig.savefig(OUT / "21_parity.png")
+    plt.close(fig)
+
+
+def fig_no_number() -> None:
+    """Why the rows the panel asks for get no number at all."""
+    import re
+    from collections import Counter
+
+    s = _read(V / "core_panel_scores.json")
+    reasons = Counter()
+    for rc in s["refused_compounds"]:
+        reason = rc["reason"]
+        if "HEXOSE ENTRY" in reason:
+            label = "thiols from glucose or fructose with cysteine: no route in the model"
+        elif reason.startswith("UNREPRESENTED TARGETS"):
+            m = re.match(r"UNREPRESENTED TARGETS: (.+?)\s+--", reason)
+            label = f"compound not in the model: {m.group(1).strip() if m else '?'}"
+        elif reason.startswith("UNMAPPED PRECURSORS"):
+            m = re.match(r"UNMAPPED PRECURSORS '([^']+)'", reason)
+            label = f"ingredient the model has no species for: {m.group(1) if m else '?'}"
+        elif reason.startswith("LANE CONFLICT"):
+            label = "needs two paths run together"
+        else:
+            label = reason.split(":")[0].lower()
+        reasons[label] += 1
+    items = reasons.most_common()
+    fig, ax = plt.subplots(figsize=(8.6, 0.42 * len(items) + 1.4))
+    ys = range(len(items))[::-1]
+    for y, (label, n) in zip(ys, items):
+        ax.barh(y, n, color="#9AA6A3", height=0.62)
+        ax.text(n + 0.1, y, str(n), va="center", fontsize=9, color=INK)
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([i[0] for i in items], fontsize=9)
+    ax.set_xlabel("rows on the test panel")
+    ax.set_title(f"Why {sum(reasons.values())} rows get no number", loc="left")
+    ax.grid(True, axis="x", alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(OUT / "22_no_number.png")
+    plt.close(fig)
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     fig_map()
@@ -673,7 +917,12 @@ def main() -> int:
     fig_yiltirak(ship)
     fig_ttca()
     fig_dicarbonyls(scores)
-    print(f"wrote 14 figures to {OUT}")
+    fig_lab_spread()
+    fig_what_papers_report()
+    fig_one_number()
+    fig_parity()
+    fig_no_number()
+    print(f"wrote 19 figures to {OUT}")
     return 0
 
 

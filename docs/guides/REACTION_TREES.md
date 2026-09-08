@@ -34,6 +34,6 @@ dependence. Those are the arrows the experiment in the introduction measures.
 ## Other figures kept for reference
 
 The dicarbonyl ordering in water against the model, and the intermediate's decay against the model,
-both from the introduction's section 5 material: `docs/assets/thiol_sink/06_dicarbonyls_water.png`,
+both behind the introduction's section 5: `docs/assets/thiol_sink/06_dicarbonyls_water.png`,
 `05_ttca_decay.png`; the 140 and 168 °C shapes: `02_wang2022_shapes.png`, `03_liu2023_168C.png`; the
 literature funnel: `07_literature_funnel.png`.

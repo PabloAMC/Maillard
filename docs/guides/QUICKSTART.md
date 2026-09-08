@@ -10,6 +10,19 @@ which drove the retired screening lane (`run_pipeline.py`, `optimize_formulation
 Decide, before a GC-MS run, which of two formulations or process settings is more likely to
 give the aroma you want — and see exactly why the model refuses to answer when it cannot.
 
+## What it answers and what it refuses
+
+| you ask | command | it answers with | it refuses when |
+|---|---|---|---|
+| which of two recipes gives more of a compound | `compare` | the ratio between the two, per compound, with what was assumed | the two differ in water activity on the thiol or fat path (no water term), or outside 0.34 to 0.99 on the acrylamide path; they differ in pH on the fat path, or outside pH 4 to 8 on the acrylamide path |
+| how much of a compound one recipe gives | `predict` | a level with an interval and the caveats | the compound is not in the model (2-pentylfuran, nonanal, CML), the thiols are asked from glucose or fructose with cysteine (no route), or a dicarbonyl is asked off the sugar path |
+| where a compound comes from in this model | `explain` | the steps, their rates and the papers behind them | never |
+| how good the model is on your own measurements | `score` | the same scorecard the panel gets; nothing is refitted | the rows the panel would refuse |
+| what to measure next | `wishlist`, `rank` | the measurements that would free the most predictions | never |
+
+A refusal is an answer: it names the missing term or route. Section 5 of the
+[introduction](INTRODUCTION.md) shows which rows on the test panel are refused and why.
+
 ## Boot the environment
 
 ```bash

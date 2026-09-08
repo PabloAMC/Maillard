@@ -22,10 +22,10 @@ GC-MS.
 > preceded the retirement is in [AUDIT.md](AUDIT.md).
 
 > **Start here if you know what the Maillard reaction is and nothing else:**
-> [**Modelling the Maillard reaction: an introduction**](docs/guides/INTRODUCTION.md). Seven short
+> [**Modelling the Maillard reaction: an introduction**](docs/guides/INTRODUCTION.md). Eight short
 > sections, each led by a figure: the chemistry and how well the field has measured it, how a kinetic
-> model is built from that, what this repository is made of, how well this model does, the one problem
-> that stops it from predicting meaty aroma, and what is needed next. The step-by-step reaction trees
+> model is built from that, what this repository is made of, how well this model does, how it got
+> here, the one problem that stops it from predicting meaty aroma, and what is needed next. The step-by-step reaction trees
 > are in its [appendix](docs/guides/REACTION_TREES.md); every paper used, with what was taken from it,
 > in [SOURCES.md](docs/guides/SOURCES.md).
 >
