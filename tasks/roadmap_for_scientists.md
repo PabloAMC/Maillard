@@ -134,6 +134,10 @@ page round-trips the template spec.
 
 ## 5. The chemistry users ask about that no lane has
 
+*Status 2026-09-08: the pyrazine rule is in the hypothesis layer (the layer reaches the three panel
+pyrazines from a Strecker charge); nonanal, 2-pentylfuran and 1-hexanol still lack a cited route.
+The calibrated interval now carries the factor's sigma (programme 1's leftover).*
+
 Each starts as a rule in the hypothesis layer and becomes a wave only when a measured rate exists.
 - **Pyrazines** (roasted, nutty): the aminoketone condensation after the Strecker step; the
   registry has the species. Rule first; a wave when a rate source is read.

@@ -18,6 +18,11 @@ CHARGES: Dict[str, Dict[str, Any]] = {
     "pentose_cysteine_thiamine": {"species": ["PENT", "Cys", "THI"], "lane": "sulfur", "why": "the thiamine route (Hofmann 1998 Table 8)"},
     "asparagine_glucose": {"species": ["Asn", "Glc"], "lane": "acrylamide", "why": "the acrylamide lane's pot (De Vleeschouwer)"},
     "linoleate_hydroperoxides": {"species": ["LOOH_13_ct", "LOOH_9_ct"], "lane": "lipid", "why": "the lipid lane's hydroperoxide pool (Frankel 1989)"},
+    "strecker_to_pyrazines": {
+        "species": ["MGO", "GO", "DA", "Ala", "Cys"],
+        "lane": "trunk",
+        "why": "the small dicarbonyls with an amino acid: the Strecker aldehydes, the aminoketones and the pyrazines they condense to (no lane has a pyrazine)",
+    },
     "thiol_sink_probe": {
         "species": ["MFT", "FFT", "MESH", "Cys", "H2S", "PENT", "NF", "FUR", "HMF", "MGO", "GO", "DA", "DECADIENAL", "HEXANAL", "ACR"],
         "lane": "sulfur",

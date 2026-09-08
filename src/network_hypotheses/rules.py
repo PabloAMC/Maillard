@@ -85,20 +85,24 @@ def run_controls(rule: Rule, table: Mapping[str, S.Structure]) -> List[str]:
             raise KeyError(f"{rule.id}: control names {key!r}, which is not a structured species")
         return st.smiles
 
+    def reactant_smiles(ctl) -> List[str]:
+        return [smiles_of(k) for k in ctl.get("reactants", [])] + [str(s) for s in ctl.get("reactants_smiles", [])]
+
     for ctl in rule.controls.get("positive", []):
-        got = apply(rule, [smiles_of(k) for k in ctl["reactants"]])
+        got = apply(rule, reactant_smiles(ctl))
         flat = {p for ps in got for p in ps}
+        label = ctl.get("reactants", []) + ctl.get("reactants_smiles", [])
         if ctl.get("fires"):
             if not got:
-                failures.append(f"{rule.id}: positive control {ctl['reactants']} did not fire")
+                failures.append(f"{rule.id}: positive control {label} did not fire")
             continue
         want = {table[k].canonical for k in ctl.get("products", [])}
         want |= {S.canonical(s) for s in ctl.get("products_smiles", [])}
         missing = want - flat
         if missing:
-            failures.append(f"{rule.id}: positive control {ctl['reactants']} lacks {sorted(missing)}; got {sorted(flat)}")
+            failures.append(f"{rule.id}: positive control {label} lacks {sorted(missing)}; got {sorted(flat)}")
     for ctl in rule.controls.get("negative", []):
-        got = apply(rule, [smiles_of(k) for k in ctl["reactants"]])
+        got = apply(rule, reactant_smiles(ctl))
         if got:
-            failures.append(f"{rule.id}: negative control {ctl['reactants']} fired: {sorted(got)[:3]}")
+            failures.append(f"{rule.id}: negative control {ctl.get('reactants', []) + ctl.get('reactants_smiles', [])} fired: {sorted(got)[:3]}")
     return failures

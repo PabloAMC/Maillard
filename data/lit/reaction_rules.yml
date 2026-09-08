@@ -88,14 +88,14 @@ rules:
       positive: [{reactants: [ODG], products: [MGO]}, {reactants: [G], products: [GO]}, {reactants: [DPO], products: [MGO, HA]}]
       negative: [{reactants: [MGO]}, {reactants: [Glc]}]
   - id: R07_strecker
-    name: alpha-dicarbonyl + alpha-amino acid -> Strecker aldehyde + alpha-aminoketone (+ CO2)
+    name: alpha-dicarbonyl + alpha-amino acid -> Strecker aldehyde + alpha-aminoketone (+ CO2); the amine lands on the carbonyl carbon that was the aldehyde, or either carbonyl of a diketone
     class: strecker
     status: net
-    smirks: "[C:1](=[O:7])[C:2](=[O:8])[#6:3].[NH2:4][CH1:5]([#6:6])C(=O)[OH]>>[C:1](=[O:7])[C:2]([NH2:4])[#6:3].[CH1:5](=O)[#6:6]"
+    smirks: "[C:1](=[O:7])[C:2](=[O:8])[#6:3].[NH2:4][CH1:5]([#6:6])C(=O)[OH]>>[C:1]([NH2:4])[C:2](=[O:8])[#6:3].[CH1:5](=O)[#6:6]"
     source: {dossier: hofmann2000_extraction.md, anchor: "the Strecker degradation with the dicarbonyl donors of Tables 1-3"}
     conditions: "aqueous, 100-145 C"
     controls:
-      positive: [{reactants: [MGO, Ala], products_smiles: ["CC=O"]}]
+      positive: [{reactants: [MGO, Ala], products_smiles: ["CC=O", "CC(=O)CN"]}, {reactants: [DA, Ala], products_smiles: ["CC(=O)C(C)N"]}]
       negative: [{reactants: [MGO, Gly]}, {reactants: [Glc, Ala]}]
   - id: R08_cysteine_thermolysis
     name: cysteine -> hydrogen sulfide + acetaldehyde + ammonia (+ CO2)
@@ -281,3 +281,15 @@ rules:
     controls:
       positive: [{reactants: [MGO, H2S], products: [MP]}]
       negative: [{reactants: [DA, H2S]}, {reactants: [GO, H2S]}]
+  - id: R28_aminoketone_condensation_to_pyrazine
+    name: two alpha-aminoketones -> 2,5-disubstituted pyrazine (condensation, dehydration, oxidation; net)
+    class: strecker
+    status: net
+    terminal: true
+    smirks: "[NH2:1][CH1,CH2:2][C:3](=O)[#6:4].[NH2:5][CH1,CH2:6][C:7](=O)[#6:8]>>[#6:4][c:3]1[n:5][c:6][c:7]([#6:8])[n:1][c:2]1"
+    source: {dossier: zhou2023_extraction.md, anchor: "the paper's mechanism (Fig. 4): the open-chain aminoketone condenses to the pyrazines, and cysteine's Strecker route supplies more alpha-aminoketones (section on pyrazine promotion)"}
+    conditions: "aqueous, 100-145 C; the aminoketones come from the Strecker step (R07)"
+    controls:
+      positive: [{reactants_smiles: ["CC(=O)CN", "CC(=O)CN"], products_smiles: ["Cc1cnc(C)cn1"]}, {reactants_smiles: ["CC(=O)C(C)N", "CC(=O)C(C)N"], products_smiles: ["Cc1nc(C)c(C)nc1C"]}]
+      negative: [{reactants: [MGO, MGO]}, {reactants: [Ala, Ala]}]
+

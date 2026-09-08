@@ -80,3 +80,13 @@ unrestricted run produced adducts of adducts no source names (140 steps, most of
 
 The artifact ships. It is read by `maillard explain` ("possible, not modelled") and by the wishlist
 ("reachable by a cited rule" against each refused compound).
+
+**Addendum, 2026-09-08 evening.** Rule R28 (two alpha-aminoketones to a pyrazine, anchored to Zhou 2023's
+mechanism figure) and a Strecker charge (the small dicarbonyls with alanine and cysteine). The Strecker
+rule now puts the amine on the carbon that was the aldehyde, which is what the pyrazine condensation
+needs (the first version put it on the substituted carbon). With them the layer reaches
+2,5-dimethylpyrazine, trimethylpyrazine and tetramethylpyrazine within two steps, and `maillard
+explain 2,5-dimethylpyrazine` now says the refusal means no rate, not no route. Nonanal from the
+oleate hydroperoxides, 2-pentylfuran and 1-hexanol still have no cited rule: no dossier on disk draws
+their route, and a rule without a source is not written. 27 rules, 201 steps, T1 to T4 unchanged.
+

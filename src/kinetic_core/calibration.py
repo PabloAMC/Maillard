@@ -154,6 +154,10 @@ class Calibration:
         metadata = dict(run.run_metadata)
         metadata["calibration"] = {"lab": self.lab, "response_factors_applied": applied,
                                    "matrix_of_records": self.matrix}
+        # the factor's own uncertainty widens the interval: 1.645 sigma in decades for a 90 % band
+        metadata["calibration_extra_decades"] = {
+            compound: 1.645 * self.response_factors[compound].sigma for compound in applied
+        }
         spec_matrix = str(getattr(run.spec.process, "matrix", "water") or "water")
         if spec_matrix != self.matrix:
             metadata["calibration"]["warning"] = (

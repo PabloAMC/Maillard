@@ -1521,6 +1521,11 @@ class CorePrediction:
         # way B6 prices its Q10 -- by re-integrating at both corners.
         furanic = dict(self.run_metadata.get("furanic_extra_decades") or {})
         widths.update(furanic)
+        # 2026-09-08: a per-laboratory calibration adds its response factor's uncertainty (half-width
+        # in decades) to the compounds it scaled; see calibration.Calibration.apply_factors.
+        calibrated = dict(self.run_metadata.get("calibration_extra_decades") or {})
+        for compound, extra in calibrated.items():
+            widths[compound] = math.hypot(float(widths.get(compound, 0.0)), float(extra))
         return {
             compound: absolute_concentration(
                 value,

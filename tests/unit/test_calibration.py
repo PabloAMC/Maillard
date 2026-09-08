@@ -198,3 +198,18 @@ def test_a_calibration_from_another_matrix_warns_on_the_answer():
     assert "warning" in run.run_metadata["calibration"]
     plain = C.predict_calibrated(spec, [MFT], None)
     assert abs(run.concentrations_ug_per_l[MFT] / plain.concentrations_ug_per_l[MFT] - 10**0.3) < 1e-9
+
+
+def test_a_factors_sigma_widens_the_calibrated_interval():
+    from src.comparative_cli import spec_to_core
+
+    spec = spec_to_core({"name": "x", "precursors": {"L-Cysteine": 10.0, "D-Ribose": 10.0}, "temp_C": 145.0,
+                         "time_min": 20.0, "ph": 5.0, "aw": 0.98})
+    plain = C.predict_calibrated(spec, [MFT], None).absolutes()[MFT]
+    cal = C.Calibration("x", "b9", "2026-09-08", "water", {MFT: C.ResponseFactor(MFT, 0.0, 0.3, 4)}, (), (), ())
+    wide = C.predict_calibrated(spec, [MFT], cal).absolutes()[MFT]
+    plain_w = math.log10(plain.hi_ug_per_l / plain.lo_ug_per_l)
+    wide_w = math.log10(wide.hi_ug_per_l / wide.lo_ug_per_l)
+    assert wide_w > plain_w
+    # 1.645 * 0.3 decades half-width added in quadrature to the band's own half-width
+    assert abs(wide_w / 2 - math.hypot(plain_w / 2, 1.645 * 0.3)) < 1e-6
