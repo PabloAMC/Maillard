@@ -125,8 +125,13 @@ TEXT_SCAN_GLOBS = (
     "src/**/*.py",
     "docs/**/*.md",
     "README.md",
-    "docs/history/AUDIT_legacy_lane_2026-08.md",
 )
+
+# 2026-09-08: the old roadmaps and the audit's remediation log moved from tasks/ (never
+# scanned) to docs/history/tasks/. They are a working log, not a source of citations, and the
+# log quotes placeholder DOIs it was rejecting at the time; scanning it would fail the gate on
+# its own evidence. The audit narrative itself (docs/history/AUDIT_legacy_lane_2026-08.md) stays in scope.
+TEXT_SCAN_EXCLUDE_PREFIXES = ("docs/history/tasks/",)
 
 # A DOI-shaped token embedded in free text. Deliberately greedy on the suffix and
 # then trimmed by `_trim_text_doi`, because prose ends DOIs with sentence
@@ -374,6 +379,8 @@ def _iter_text_files() -> Iterator[Path]:
     for pattern in TEXT_SCAN_GLOBS:
         for path in sorted(ROOT.glob(pattern)):
             if not path.is_file() or path in seen:
+                continue
+            if str(path.relative_to(ROOT)).startswith(TEXT_SCAN_EXCLUDE_PREFIXES):
                 continue
             # Build artefacts and caches are not sources of citations.
             parts = set(path.parts)
