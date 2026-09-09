@@ -145,7 +145,7 @@ def test_acrylamide_request_routes_to_the_acrylamide_lane():
         # SHARPER than the old one, and that the two whose branch fraction is
         # measured are answered elsewhere (see tests/unit/test_kinetic_core_b6.py).
         ("1-hexanol", "no aldehyde-reduction step"),
-        ("2-pentylfuran", "not in Frankel"),
+        ("2-pentylfuran", "not produced by the lipid lane"),
     ],
 )
 def test_unrepresented_compounds_are_declared_out_with_a_named_reason(compound, token):

@@ -131,11 +131,18 @@ refused) — read from
 pinned by `tests/scientific/test_core_headline_guards.py`. A moved number has to move this page
 in the same change.
 
+**Read the denominator, 2026-09-09.** It went from 39 rows to 42 because three nonanal questions
+stopped being refused: a branch fraction measured in 1978 was read into the model this week. The
+numerator did not move, so the pass rate FELL on a change that made the model strictly more capable.
+That is what happens when a model answers more questions, and it is why a bare rate is a poor
+headline. The three new answers land at 3.0x, 3.3x and 7.3x, which is better than this panel's
+median.
+
 | | kinetic core |
 | --- | --- |
-| rows within 3x of the measurement | **4 of 39** (median fold error 30x, geometric mean 43x) |
-| **out of sample** — every row a core fit read removed | **3 of 38** (median 32x); since the primary-evidence refit only one scored row is a fit row |
-| by lane, within 3x | acrylamide 2/12 · sulfur 4/29 · lipid 0/7 · trunk 0/1 |
+| rows within 3x of the measurement | **4 of 42** (median fold error 22x, geometric mean 37x) |
+| **out of sample** — every row a core fit read removed | **3 of 41** (median 24x); since the primary-evidence refit only one scored row is a fit row |
+| by lane, within 3x | acrylamide 2/12 · sulfur 2/19 · lipid 0/10 · trunk 0/1 |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 37** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
 | literature rows inside the 90% Monte-Carlo interval | **7 of 34** evaluable (median width 1.31 dex); **7 of 33** out of sample; 5 rows not evaluable |
 | direction / ranking skill (92-claim literature panel) | **25 of 43** strictly independent evaluable claims; **16 of 31** with pH and water activity set aside, **9 of 12** on pH and water activity; 28 independent claims not evaluable |

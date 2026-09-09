@@ -1846,6 +1846,43 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       **A DEFECT FOUND ON THE WAY.** B4's generator overwrote its own BLIND prediction file on every run,
       date and all, so any later wave could have replaced a pre-registration with a post-hoc prediction
       undetectably. It now refuses without `--refreeze`.
+- [x] **FETCH-16 INCORPORATED (2026-09-09 evening). All sixteen fetched, all read, `reading_audit`
+      back to zero unread on 245 PDFs.** What each became.
+      **SHIPPED.** Wave B28: nonanal answered on three matrices from three laboratories at 3.0x, 3.3x
+      and 7.3x, from a share Selke measured in 1978 and a molar anchor the wave DECLARED rather than
+      measured (band 0.2 to 1.0 on the linoleate anchor; every answer carries it). Refused panel rows
+      25 -> 22. Free result: Frankel 1981 against Frankel 1989, renormalised onto the five products
+      both quantify, agrees within 1.6x on every one -- the first external check the lipid lane's own
+      fit source has ever had, and now figure 31.
+      **LIFTED THEN PUT BACK, WHICH IS THE MORE USEFUL HALF.** 2-pentylfuran's branch fraction is
+      measured and correct; un-refusing it produced answers six to nine ORDERS below measurement,
+      because on the matrix-only path the hexanal these rows are scored against does not come from
+      the lipid lane (the lane's own hexanal is about 1e5 smaller). A near-zero is the absence of a
+      prediction dressed as one. The refusal now names what would lift it: a lipid charge these
+      matrices can integrate, which is a modelling problem, not a measurement.
+      **THE SHIP RULE GAINED THE TEST THAT CATCHES THAT.** A rule counting refusals falling would
+      have called the first run a success. T2 now also requires every row lifted out of REFUSED to be
+      answered within three decades of its measurement.
+      **RECORDED, NOTHING SHIPPED.** (i) `BINDING_AT_PROCESS_TEMPERATURE`: five papers, three signs,
+      and no aqueous constant above 60 C anywhere, so B26's 37 C limit stands and a scalar temperature
+      correction is refuted. (ii) `CHAIN_LENGTH_SLOPE_FIVE_DETERMINATIONS`: the shipped 2.81 sits at
+      the TOP of its evidence, with three new readings at 1.90, 2.15 and 2.23. (iii)
+      `SULFUR_BINDING_GAP`: 21 binding rows and not one sulfur compound; the first plant measurement
+      still cannot ship, for three stated reasons, one of which is an 1118x disagreement between the
+      paper's own two methods. (iv) `PAIRED_THRESHOLD_EVIDENCE`: the corpus holds NO paired
+      water/plant-matrix threshold and `matrix_oav`'s refusal is not liftable by reading.
+      (v) `MELANOIDIN_REPEAT_UNIT_FALSIFIED_FROM_BOTH_SIDES`, now figure 30. (vi) the HMF sink's third
+      reading, with the three cautions that keep it from being a replication.
+      **AMENDED BEFORE RUNNING.** B27's pre-registration: no paper supplies a redox-branch constant,
+      every one belongs to the adduct branch, and the wave now declares in advance which fitted value
+      it would read as evidence against its own structure.
+      **TWO DEFECTS OF MINE, FOUND AND FIXED.** Registering 2-pentylfuran shadowed a literature-only
+      structure and silently broke the hypothesis layer's answer for 2-pentylpyridine; a test caught
+      it. And I told the owner a paper supplied a paired plant-matrix threshold; both its legs are
+      soymilk. Retracted in SEARCH-SIX item 13.
+      **STILL OPEN AND NOW WRITTEN FOR A PERSON.** `docs/guides/EXPERIMENTS.md`: five experiments in
+      the order they are worth funding, each with protocol, what the model predicts today and what
+      each outcome decides; plus three things that look like gaps and are not.
 - [ ] **FETCH-16 (2026-09-09). The download list the six searches produced, checked against all 233
       PDFs on this disk.** Two of the papers the searches returned were ALREADY HERE and already
       dossiered (Cammerer & Kroh 1995 as `Cammerer1994.pdf`; Martins & van Boekel 2003 as
