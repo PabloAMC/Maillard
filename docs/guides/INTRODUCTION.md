@@ -201,11 +201,12 @@ alone cuts the error from 480 times to 18. Most of what looked like laboratories
 same removal problem.*
 
 The model removes thiols far faster than any pot does, at 100 °C and at 140 °C alike. One removal
-step with one temperature dependence cannot fit both, so the step needs a different form. The two
-obvious forms, the disulfides giving the thiol back and a removal that stops when it runs out of
-its partner, were both built and both refused; the figure below shows why. Two smaller faults are
-also known: the ring intermediate that holds the sulfur opens about ten times too fast, and the
-formation steps have no pH dependence where the pots show a strong one.
+step with one temperature dependence cannot fit both, so the step needs a different form. Three
+forms have now been built and all three refused: the disulfides giving the thiol back, a removal
+that stops when it runs out of its partner, and the thiols adding for good to the reactive sugars
+the pot makes. The figure below shows why the first two failed. Two smaller faults are also known:
+the ring intermediate that holds the sulfur opens about ten times too fast, and the formation steps
+have no pH dependence where the pots show a strong one.
 
 ![The two refused removal steps](../assets/thiol_sink/28_two_refused_sinks.png)
 
@@ -214,9 +215,25 @@ laboratory measures at seven to ten percent across pH; the shipped model holds a
 hundredth of that, and neither variant moves it, because the model runs out of oxidant first.
 Right: the binding step of the second variant, measured at room temperature, lets the thiol go
 above 80 °C, so even a pool as large as the whole sugar charge would hold under five percent of it
-during a cook. What both leave standing is a third candidate: an irreversible addition to the
-unsaturated carbonyls a lipid or the sugar makes, with the disulfide share left to an oxidant the
-pot makes for itself.*
+during a cook. What both left standing was a third candidate, the thiols adding for good to the
+reactive sugars: it was built, and the fit switched it off at every temperature.*
+
+**Three failures with one thing in common, found by reading the papers rather than the model.** The
+step that turns two thiols into their disulfide needs an oxidant, and the model tracks how much
+oxidant each pot has. Counting them showed that every one of the fourteen measurements that carry
+the most weight is a pot the model gives no oxidant at all, and no pot anywhere is given a supply
+from the air above it. So all three removal steps were judged against a measurement the model could
+not have reproduced at any setting: the disulfide it was asked to make could not form. Half of that
+is defensible and half is not. The pots fed hydrogen sulfide have a chemical reason to carry none,
+which one of the papers argues directly. Two of the pots have no hydrogen sulfide in them and sit
+beside a near-identical pot from the same laboratory that does carry oxidant, and nothing anywhere
+says why they differ.
+
+That paper also names where the oxidant would come from: the reactive sugars the pot makes on its
+way to its own products, on a flow about sixteen times larger than the thiols'. The pot in question
+has no step that makes one of those sugars from what it is fed, although the paper measures three of
+them in it. So the next thing to build is not a fourth removal step. It is the supply that all three
+were missing, and it is written down before it is run.
 
 ## 8. What is needed next
 

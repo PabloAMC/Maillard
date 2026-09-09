@@ -1847,7 +1847,9 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       date and all, so any later wave could have replaced a pre-registration with a post-hoc prediction
       undetectably. It now refuses without `--refreeze`.
 - [ ] **AUDIT-REMAINDER (2026-09-09). What the incorporation left as waves, each with what it needs.**
-      (i) **B27, the sink's oxidant.** Whitfield 1999 names the oxidant the three refused sink waves said
+      (i) **B27, the sink's oxidant. NOW PRE-REGISTERED AND NOT RUN**
+      (`results/validation/kinetic_core_b27_prereg.md`), so the declaration cannot be revised after an
+      outcome. Whitfield 1999 names the oxidant the three refused sink waves said
       was missing -- the pot's own alpha-dicarbonyls, reduced to hydroxyalkanones -- and prints NO rate, no
       order and no barrier for it, so it is a mechanism proposal with two supporting negatives. Two hard
       facts make this a different question from B17/B25 rather than a fourth structure: `OX` is charged at
