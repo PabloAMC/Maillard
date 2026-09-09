@@ -87,6 +87,14 @@ scored against. One paper, Hofmann and Schieberle 1998, holds up most of the sul
 the file says where the value came from and what it may be used for. This one is marked "never used
 for tuning", so the model's miss on it is a real test.*
 
+![The literature's routes placed against the model's](../assets/thiol_sink/26_hypothesis_layer.png)
+
+*Beside the model sits a small layer of cited reaction rules, each with a positive and a negative
+control from its source paper. Run over the model's own species from each reference charge, the
+rules find the steps the literature draws; the green part is what the model integrates with a rate,
+the rest is what it does not. This is how a refusal can say "no rate, not no route": the right-hand
+list is the registry's compounds that only a rule reaches.*
+
 ## 5. How well the model does
 
 ![The same map as section 1, coloured by how well this model predicts each part](../assets/thiol_sink/00_map.png)
@@ -113,6 +121,28 @@ laboratory at one temperature and pH; glucose with cysteine has no route at all.
 *The rows the panel asks for and the model declines to answer. It says "no route" or "no such
 compound" rather than guessing. Most are the thiols from glucose, and compounds from fat that the
 model does not make.*
+
+![What is asked for, and what the model can name](../assets/thiol_sink/23_coverage_of_declared_targets.png)
+
+*The question a plant-based flavour scientist asks first. Of the twenty odorants the repository
+declares as the targets of a meaty plant-based flavour, the model names six with a rate; two more it
+reaches by a cited route with no rate; twelve it cannot name at all, and they are the Strecker
+aldehydes and the pyrazines beyond the first, whose per-amino-acid rates no paper on disk prints.
+Of the six off-notes it names three.*
+
+![Hexanal on the panel](../assets/thiol_sink/24_fat_path_hexanal.png)
+
+*The fat path, which no earlier figure showed. Every hexanal row is under-predicted, and the cause is
+named: an isolate arrives with hexanal already made by its own enzymes before any heat, and the
+model charges none of it. Nonanal and 2-pentylfuran are refused because no measured branch fraction
+exists; the rules reach both.*
+
+![The pyrazine step: fitted where fed, a thousandfold low from a sugar pot](../assets/thiol_sink/27_pyrazine_step_supply.png)
+
+*The newest step on the sugar path, and its caveat in one picture. Fed the small dicarbonyls, the
+two fitted constants reproduce one laboratory's rates within twenty percent at three temperatures.
+From a sugar and amino acid pot, the total pyrazine comes out three decades low, because the model
+makes far too little glyoxal and methylglyoxal in water. Every pyrazine answer carries that sentence.*
 
 ## 6. How the model got here
 
@@ -158,6 +188,17 @@ disulfides give the thiol back, or the removal stops when it runs out of the par
 smaller faults are also known: the ring intermediate that holds the sulfur opens about ten times
 too fast, and the formation steps have no pH dependence where the pots show a strong one.
 
+![The two refused removal steps](../assets/thiol_sink/28_two_refused_sinks.png)
+
+*Both forms were built and tested. Left: the share of the thiol held as its disulfide, which one
+laboratory measures at seven to ten percent across pH; the shipped model holds a tenth to a
+hundredth of that, and neither variant moves it, because the model runs out of oxidant first.
+Right: the binding step of the second variant, measured at room temperature, lets the thiol go
+above 80 °C, so even a pool as large as the whole sugar charge would hold under five percent of it
+during a cook. What both leave standing is a third candidate: an irreversible addition to the
+unsaturated carbonyls a lipid or the sugar makes, with the disulfide share left to an oxidant the
+pot makes for itself.*
+
 ## 8. What is needed next
 
 **One experiment.** The reference pot (ribose 100 mmol/L, cysteine 33 mmol/L, 0.5 mol/L phosphate,
@@ -197,6 +238,21 @@ steps the literature draws that the model does not have
 ([network_hypotheses.md](../../results/validation/network_hypotheses.md)). For the thiols, the same
 list with the literature's numbers is [the sink table](../validation/thiol_sink_candidates.md). The
 table of what the tool answers and what it refuses is at the top of the [quick start](QUICKSTART.md).
+
+![The protein matrix layer](../assets/thiol_sink/25_protein_matrix_layer.png)
+
+*What a protein loading does. Left: the reactive sites a pea or soy isolate, or whey's main protein,
+brings into the pot, from measured densities with their spread. Right: how much of the aldehyde
+binds to them during a cook, under a percent, because the measured barriers of that binding are
+low; the channel matters over weeks at ambient, not in twenty minutes at 145 °C. The layer is
+honest about being small.*
+
+![A laboratory's own ladder through the calibration](../assets/thiol_sink/29_calibration_reading_ladder.png)
+
+*What your own data does. One laboratory's four-temperature series, two pots fitted and two held
+out: the levels set a response factor per compound, the contrasts move the two rate constants they
+can identify, and the held-out pots go from a hundredfold off to within threefold. The shipped model
+is untouched; the calibration is a file you apply.*
 
 ## Words used here
 

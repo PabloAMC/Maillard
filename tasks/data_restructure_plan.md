@@ -1655,7 +1655,12 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       on GitHub; fixed by allow-listing the folder. No gate checks the figures against the code: four were
       stale (paper counts, step counts, the sugar tree without the pyrazine step). Add the two figure builders
       to the freshness gate's regenerate list (compare PNG bytes with a fixed matplotlib version, or compare
-      the builders' printed count dicts) so the figures cannot lag the artifacts again.
+      the builders' printed count dicts) so the figures cannot lag the artifacts again. UPDATE 2026-09-09: a
+      third builder, `build_story_figures.py`, writes figures 23-29 (coverage of the declared targets, the fat
+      path, the protein matrix layer, the hypothesis layer, the pyrazine step, the two refused sinks, the
+      calibration example); the same gate should cover all three. The hand-typed path scorecard
+      (`08_path_scorecard.png`, static strings in `build_thiol_sink_figures.py`) should be generated from the
+      scorecard artifacts or retired.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

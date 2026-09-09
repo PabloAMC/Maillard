@@ -197,7 +197,10 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
 The repository declares twenty desirable odorants and six off-notes for meaty plant-based flavour
 (`data/species/desirable_targets.yml`, `off_flavour_targets.yml`). The engine can name six of the
 twenty and three of the six. The table is the honest map; "rule" is the hypothesis layer, "wave" the
-fitted step.
+fitted step. The figure is generated from `maillard explain` over the two lists
+(`scripts/generators/build_story_figures.py`):
+
+![What is asked for, and what the model can name](../docs/assets/thiol_sink/23_coverage_of_declared_targets.png)
 
 | compound | pathway | data on disk | rule | wave | what is missing |
 |---|---|---|---|---|---|
