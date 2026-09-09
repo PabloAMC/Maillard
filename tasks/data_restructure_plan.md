@@ -1912,6 +1912,31 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       10.1111/j.1365-2621.2002.tb11374.x (2-pentylpyridine binding to soy at 4, 25 and 74 C -- and
       2-pentylpyridine got a registry id today); Utz, Spaccasassi, Kreissl, Stark, Tanger et al. 2022,
       Foods 11:412 (sensomics decoding of pea protein ISOLATES, where Trikusuma gives one beverage).
+      **IDENTIFIERS.** DOIs below are the ones the search results themselves printed in their links,
+      so they are read off a source and not recalled. Where a link gave only an Elsevier PII, the PII
+      is given instead and resolves directly at `sciencedirect.com/science/article/pii/<PII>`; a DOI
+      is NOT invented for those. Anything fetched must have its DOI confirmed from the PDF before it
+      enters `data/keys/papers.yml`, because the citation gate resolves what it is given.
+      | # | paper | identifier | basis |
+      |---|---|---|---|
+      | 1 | Sun 2025, Food Hydrocolloids | PII `S0268005X25002863` | link only |
+      | 2 | Aspelund & Wilson 1983, JAFC | `10.1021/jf00117a019` | printed in link |
+      | 3 | Crowther, Wilson & Glatz 1980, J Food Process Eng | `10.1111/j.1745-4530.1980.tb00249.x` | printed in link |
+      | 4 | Guo 2019, Food Chem | PII `S0308814619306120` | link only |
+      | 5 | Selke, Frankel & Neff 1978, Lipids | `10.1007/BF02533622` | printed in link |
+      | 6 | Frankel, Neff & Selke 1981, Lipids | `10.1007/BF02534950` | printed in link |
+      | 7 | Luo 2024, Compr Rev Food Sci Food Saf | `10.1111/1541-4337.13389` | printed in link |
+      | 8 | Zheng 2022, Nutrients 14:1364 | `10.3390/nu14071364` | MDPI pattern from 2072-6643/14/7/1364 |
+      | 9 | Wondrak 2002, Biochem Pharmacol | PII `S0006295201009157` | link only |
+      | 10 | Zheng 2023, Food Chemistry: X | PII `S2590157523003632` | link only |
+      | 11 | Coukos & Moellering 2021, ACS Chem Biol | `10.1021/acschembio.1c00553` (PMC8609522, open access) | ACS article id cb1c00553 in the PDF filename |
+      | 12 | Gokmen, Kocadagli, Goncuoglu & Mogol 2012, Food Chem | PII `S0308814611014981` | link only |
+      | 13 | Suppavorasatit, Lee & Cadwallader 2013, J Food Sci | `10.1111/j.1750-3841.2012.03012.x` | printed in link |
+      | 14 | Wright 2006, J Food Sci | `10.1111/j.1365-2621.2006.tb08887.x` | printed in link |
+      | 15 | Xu, Bi, Zhang, Pan et al. 2022, Food Science (China) | `10.7506/spkx1002-6630-20220613-128` | printed in link |
+      | 16 | Mohsin 2018, Food Chem | PII `S0308814617319349` | link only |
+      | + | Zhou, Boatright & Johnson 2002, J Food Sci | `10.1111/j.1365-2621.2002.tb11374.x` | printed in link |
+      | + | Utz 2022, Foods 11:412 | **NO IDENTIFIER RECORDED** -- the MDPI issue number is not in the link, and guessing it would produce a DOI that resolves to the wrong paper. Search the title. | -- |
       **DELIBERATELY NOT FETCHED, with the reason, so nobody re-proposes them.**
       Xiao 2023 and Gao 2023 are density functional theory: standing owner policy, no DFT numbers.
       Zhu 2023 (kafirin), Zhou 2022 (ozonolysis), Jakob 2024 and He 2020 (biorefinery catalysis),
