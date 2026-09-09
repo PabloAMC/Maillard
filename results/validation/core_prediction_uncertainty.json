@@ -1078,7 +1078,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 7.039859871589846e-07,
+          "ci_width_log10": 7.043893472298872e-07,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1088,12 +1088,12 @@
           "measured_ppb": 17400.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1458.5058142239584,
-          "predicted_p5": 1458.5044158277428,
-          "predicted_p50": 1458.5060026873025,
-          "predicted_p95": 1458.5067800472896,
-          "predicted_point": 1458.505962711969,
-          "predicted_std": 0.0007776502370077528,
+          "predicted_mean": 1458.5058252543595,
+          "predicted_p5": 1458.5044196016556,
+          "predicted_p50": 1458.5060086590872,
+          "predicted_p95": 1458.5067851758272,
+          "predicted_point": 1458.5059737773267,
+          "predicted_std": 0.0007783073563821332,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -3151,9 +3151,9 @@
     "generated_on": "2026-09-09",
     "git": {
       "branch": "reactions",
-      "commit": "323c4900a446d930739973f05cbf8c31229198c9",
+      "commit": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd",
       "dirty": true,
-      "short": "323c4900"
+      "short": "efb76fb6"
     },
     "inputs": [
       {
@@ -3674,7 +3674,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 192.7,
+    "wall_seconds": 180.2,
     "workers": 6
   }
 }

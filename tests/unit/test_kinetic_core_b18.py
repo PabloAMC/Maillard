@@ -71,7 +71,9 @@ def test_a_trunk_pot_answers_the_three_pyrazines_with_the_caveats():
     run = predict(_pot(), ["2,5-dimethylpyrazine", "pyrazine", "methylpyrazine", "5-HMF"])
     assert run.answered
     dmp, pz, mpz = (run.require(c) for c in ("2,5-dimethylpyrazine", "pyrazine", "methylpyrazine"))
-    assert dmp > mpz > pz > 0
+    # Until B21 the trunk made almost no glyoxal in water and the order was DMP > MPZ > PZ; B21's aqueous
+    # glucosone route (2026-09-09) supplies glyoxal and the order is PZ > MPZ > DMP, Xia 2022's direction.
+    assert pz > mpz > dmp > 0
     assert sum("PYRAZINES (B18)" in w for w in run.declaration.warnings) == 2
     acid = predict(_pot(ph=5.0), ["2,5-dimethylpyrazine"]).require("2,5-dimethylpyrazine")
     assert acid < dmp

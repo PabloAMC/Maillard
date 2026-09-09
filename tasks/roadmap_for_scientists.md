@@ -180,7 +180,10 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
 - **Pyrazines** (roasted, nutty): the aminoketone condensation after the Strecker step; the
   registry has the species. Rule first (done); the wave (B18) ran and ships with its caveat; what it
   asks for next is the small dicarbonyls in water (their formation from a sugar + amine pot at 70 to
-  120 °C and their loss), which is the trunk's problem, not the step's.
+  120 °C and their loss), which is the trunk's problem, not the step's. *Status 2026-09-09: the
+  glyoxal half of that was done as wave B21 (the Amadori compound's route to glucosone in water,
+  Hamzalioglu 2026; Quan 2020's glyoxal level reproduced) and ships; Leahy's total did not move, so
+  the pyrazine miss is the Strecker step at 95 °C and pH 9 or lysine against glycine, not the supply.*
 - **The beany note before any heat**: hexanal from lipoxygenase during processing. Different
   chemistry, its own module and its own data programme; the lipid lane must not be stretched to it.
 - **Extrusion**: two minutes at 130 to 170 °C at low moisture. The process spec already takes a

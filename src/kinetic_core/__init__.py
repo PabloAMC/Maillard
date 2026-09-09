@@ -320,6 +320,12 @@ def operative_parameters(fitted):
     from .parameters_glycation import GLYCATION_PARAMETERS
 
     parameters.update(GLYCATION_PARAMETERS)
+    # B21 (2026-09-09): the aqueous glucosone route to glyoxal: one new step and the aqueous value
+    # of k_g_go, which REPLACES the B13 glass value in the operative set (the glass entry stays in
+    # DICARBONYL_PARAMETERS as the record). Frozen literals asserted against the B21 report.
+    from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_PARAMETERS
+
+    parameters.update(AQUEOUS_GLYOXAL_PARAMETERS)
     return parameters
 
 

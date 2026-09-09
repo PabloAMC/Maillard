@@ -80,10 +80,13 @@ FROZEN_B18: Mapping[str, float] = {
 PYRAZINE_SUPPLY_CAVEAT = (
     "PYRAZINES (B18): the two Strecker constants are MEASURED on fed glyoxal / methylglyoxal + alanine at "
     "100-120 C (Zhou 2024; alanine -> glycine declared, +/- 0.5 dex). From a sugar + amine pot the yield "
-    "follows the trunk's dicarbonyl SUPPLY, which is not: against Leahy 1989 (lysine + glucose, 95 C, 2 h, "
-    "pH 9) the model's total is 2.9 decades low, pyrazine itself is absent (the trunk makes glyoxal only "
-    "through the B13 dry-glass entry), and the apparent barriers are 300-460 kJ/mol against 150-180 "
-    "measured. Trust a pyrazine number from this model only as a fed-dicarbonyl statement."
+    "follows the trunk's dicarbonyl SUPPLY. Since B21 (2026-09-09) the glyoxal supply in water is fitted "
+    "(the Amadori compound's route to glucosone, Hamzalioglu 2026; Quan 2020's glyoxal level reproduced "
+    "within 0.35 dex) and pyrazine itself is no longer absent; the methylglyoxal supply is Martins' aqueous "
+    "step. Against Leahy 1989 (lysine + glucose, 95 C, 2 h, pH 9) the model's total is still 2.8 decades "
+    "low with apparent barriers of 300-460 kJ/mol against 150-180 measured, so what remains is the "
+    "Strecker step itself at 95 C and pH 9, or lysine against glycine, not the glyoxal. Trust a pyrazine "
+    "number from this model only as a fed-dicarbonyl statement."
 )
 PYRAZINE_SINK_CAVEAT = (
     "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass "

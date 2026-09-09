@@ -81,7 +81,7 @@
 | Kim & Ho 1998 | [10.1021/jf970719z](https://doi.org/10.1021/jf970719z) |  |  |  |  |  | [kim1998_extraction.md](../../data/lit/extraction_dossiers/kim1998_extraction.md) |
 | Knol et al. (2005) | [10.1021/jf050504m](https://doi.org/10.1021/jf050504m) |  | 3 |  |  |  | no dossier (registry entry only) |
 | Knol et al. (2010), Food Chemistry 120:1047 | [10.1016/j.foodchem.2009.11.049](https://doi.org/10.1016/j.foodchem.2009.11.049) | 2 |  |  |  |  | no dossier (registry entry only) |
-| Kocadağlı & Gökmen 2016 (Food Chemistry) | [10.1016/j.foodchem.2016.05.150](https://doi.org/10.1016/j.foodchem.2016.05.150) | 11 |  |  |  |  | [kocadagli2016foodchem_extraction.md](../../data/lit/extraction_dossiers/kocadagli2016foodchem_extraction.md) |
+| Kocadağlı & Gökmen 2016 (Food Chemistry) | [10.1016/j.foodchem.2016.05.150](https://doi.org/10.1016/j.foodchem.2016.05.150) | 10 |  |  |  |  | [kocadagli2016foodchem_extraction.md](../../data/lit/extraction_dossiers/kocadagli2016foodchem_extraction.md) |
 | Kocadağlı & Gökmen 2016 (JAFC) | [10.1021/acs.jafc.6b01862](https://doi.org/10.1021/acs.jafc.6b01862) |  |  |  |  | (same author and year as the row above; any counts are listed there) | [kocadagli2016jafc_extraction.md](../../data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md) |
 | Kocadağlı 2021 | [10.1016/j.foodchem.2020.128024](https://doi.org/10.1016/j.foodchem.2020.128024) |  |  |  |  |  | [kocadagli2021_extraction.md](../../data/lit/extraction_dossiers/kocadagli2021_extraction.md) |
 | Kumazawa & Masuda 2003 | [10.1021/jf021025f](https://doi.org/10.1021/jf021025f) |  | 2 |  |  |  | [kumazawa2003_extraction.md](../../data/lit/extraction_dossiers/kumazawa2003_extraction.md) |

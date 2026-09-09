@@ -149,8 +149,11 @@ exists; the rules reach both.*
 
 *The newest step on the sugar path, and its caveat in one picture. Fed the small dicarbonyls, the
 two fitted constants reproduce one laboratory's rates within twenty percent at three temperatures.
-From a sugar and amino acid pot, the total pyrazine comes out three decades low, because the model
-makes far too little glyoxal and methylglyoxal in water. Every pyrazine answer carries that sentence.*
+From a sugar and amino acid pot, the total pyrazine comes out three decades low. When this figure's
+record was made the reason was the glyoxal supply; the aqueous glucosone route added the next day
+(section 6) brings the glyoxal to the measured level and leaves the pyrazine total where it was, so
+the miss now sits in the Strecker step at that pot's temperature and pH, or in lysine against
+glycine. Every pyrazine answer carries that sentence.*
 
 ## 6. How the model got here
 
@@ -177,6 +180,7 @@ in order, in plain words.
 | the thiol removal made a saturating adduct on an electrophile pool the pot itself makes, feeding the measured room-temperature binding step | the same measured sink, but with a supply that runs out | the pool never forms, because the earlier fits had already switched off the browning step it was tied to; and the measured binding equilibrium lets go of the thiol above 80 °C, so even a large pool would hold under 5 % of it when hot | no; the finding is kept |
 | a pyrazine step added to the sugar path, its two rate constants fitted on one laboratory's fed-dicarbonyl ladders and its pH shape on another's | the roasted note, asked for and refused until a measured rate existed | the fed-dicarbonyl rates fit within 20 %; from a sugar and amino acid pot the yield is a thousandfold low, because the model makes far too little glyoxal and methylglyoxal in water | yes, with that caveat on every answer |
 | the protein's bound lysine made a reactant on the sugar path (glycation to the bound Amadori compound, then CML and CEL), from one laboratory's rates on casein in water and barriers declared from measured steps | isolates are mostly bound lysine, and the safety markers the panel asks for are made on it | the rates reproduce within a factor of 1.5 where the data are firm; the level of CML in the source's own pot within its printed range; a milk laboratory's constant within 20 % at 120 °C; a dry seed's a fiftyfold away | yes, on a pot with a stated protein loading, with the availability band as its interval |
+| the glyoxal supply in water given its own route, from the Amadori compound to glucosone at a milk laboratory's rate, replacing the dry-glass entry | the pyrazine step's caveat: a sugar pot made a ten-thousandth of the glyoxal a laboratory measures | a glucose and amine pot now holds glyoxal within a factor of two of the measurement at 100 °C and inside the measured range at 130 °C; browning unchanged; the pyrazine total still three decades low, so that miss is not the glyoxal | yes, with the transfer band on every glyoxal and pyrazine answer |
 
 ## 7. The one problem that matters most: where the thiols go
 

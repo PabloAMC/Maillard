@@ -79,3 +79,48 @@ enter `parameters_dicarbonyl.py` beside the glass constants, every glyoxal and p
 carries the transfer band, and B18's supply caveat is rewritten to what remains. If T2a fails, the
 step is DO NOT SHIP however well the rows fit: the browning hold-out is the trunk's one
 out-of-sample success and the step must not spend it.
+
+## 6. Outcome (2026-09-09, run the same day) — SHIP
+
+**What was built.** The step `r_ama_g` on the trunk and the aqueous value of `k_g_go` in the
+operative set, the glass value kept in `parameters_dicarbonyl.DICARBONYL_PARAMETERS` as the record;
+`FROZEN_B21` asserted equal to the report by `tests/unit/test_kinetic_core_b21.py`; the transfer
+caveat on every glyoxal, glucosone and pyrazine answer. Generator `generate_kinetic_core_b21_fit.py`,
+ship rule `generate_kinetic_core_b21_ship_rule.py`.
+
+**What happened.** Cost 3.54 on six rows (reduced chi-square 0.89); both coordinates
+identified (sigma 0.09 and 0.14 decades), neither on a bound. T1 passes: the decisive rows within
+0.18 dex; the wide 130 °C glucosone row sits 0.36 dex above its printed centre, inside its interval.
+T2 passes on both counts: the B1 browning hold-out's median fold error moves from 1.43 to 1.31 with
+every point still within threefold (the new route takes a share of the Amadori flux that the browning
+did not need), and not one scored panel row moves (the panel's trunk rows are HMF and browning, which
+the glucosone route does not touch at the 1e-9 level). T3 passes: in Quan 2020's pot the glyoxal at 21
+min is 0.023 mmol/L at 100 °C against the printed 0.052 to 0.127 (-0.35 dex from the range) and 0.387 at
+130 °C, inside 0.144 to 0.605; before the wave the same pot held 3.2e-06 and 4.3e-04 mmol/L, four and two and a
+half decades low. T4, reported: at 130 °C and 80 min in Xia's pot the model's glyoxal is 1.23 mmol/L and
+its methylglyoxal 7.82, so the ordering Xia reports (glyoxal far above) is not reproduced: the model's
+methylglyoxal from Martins' aqueous step is high, or Xia's derivatisation over-reads glyoxal (their
+own flag). T5, reported: Leahy's total pyrazine moves from -2.88 to -2.78 decades. Verdict by the rule: SHIP.
+
+**What it changes, and what it does not.** A sugar and amine pot now holds glyoxal at the level a
+laboratory measures, and pyrazine (the parent) is no longer absent: in the B18 test pot the order of
+the three pyrazines turns from 2,5-dimethyl > methyl > parent to parent > methyl > 2,5-dimethyl, which
+is Xia's direction for the dicarbonyls. The pyrazine step's supply caveat is rewritten accordingly.
+What it does not change: Leahy's total. The 2.8 decades that remain are not glyoxal; they sit in the
+Strecker step at 95 °C and pH 9, in the lysine that stands in as glycine, or in Leahy's own recovery,
+and the caveat now says so. The B13 glyoxal sink is untouched, so B18's conditionality stands.
+
+**An unforeseen finding, recorded after the verdict.** The pre-registration checked the browning
+hold-out and the panel; it did not check B1's own fit rows, Martins 2005's nine concentration
+series at 80, 100 and 120 °C. Re-scored with the frozen B1 vector and the live network, the half
+sum of squares rises from 2017 to 2495 (+24 %); the Amadori compound's median error goes from 0.035
+to 0.093 dex (the model now holds a fifth less of it at 100 °C and two hours), formic acid from 0.089
+to 0.123, while 3-deoxyglucosone, methylglyoxal and 1-deoxyglucosone move by less than 0.01 dex. The
+new route drains the Amadori compound at nine thousandths per minute at 100 °C, the size of Martins'
+own Amadori → 3-deoxyglucosone step, and Martins' Amadori series does not want that drain at his
+pH 6.8 and air-limited headspace. The verdict stands by the rule as written; the tension is stated
+on every glyoxal answer's caveat, the B1 regression pin is moved with the arithmetic written out,
+and the next pre-registration on this route (B21b) is a joint fit of the glucosone rate against
+Hamzalioglu's constants AND Martins' Amadori series, which will either find a rate both accept or
+show that the milk constant does not transfer.
+

@@ -58,10 +58,10 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 13.6, 357, 1.04e+03 |  |
 | TEMP-02 | temperature | independent | Acrylamide | A>B | **agree** | acrylamide | 13.6, 0 |  |
 | TEMP-03 | temperature | independent | HMF | increasing | **agree** | acrylamide | 78, 403, 585 |  |
-| AW-01 | moisture_aw | independent | HMF | decreasing | **disagree** | trunk | 1.35e+03, 1.5e+03, 629 |  |
+| AW-01 | moisture_aw | independent | HMF | decreasing | **disagree** | trunk | 1.1e+03, 1.22e+03, 544 |  |
 | AW-02 | moisture_aw | independent | Acrylamide | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.34-0.99 (De  |
 | CYS-01 | additive_cysteine | independent | FFT | A>B | **agree** | sulfur | 47, 0 |  |
-| CYS-02 | additive_cysteine | independent | HMF | A>B | **disagree** | trunk | 629, 674 |  |
+| CYS-02 | additive_cysteine | independent | HMF | A>B | **disagree** | trunk | 544, 674 |  |
 | SCOPE-01 | scope | independent | CEL | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SCOPE-02 | scope | independent | Methional | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MAT-01 | matrix_identity | independent | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -72,7 +72,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | PROC-03 | process_heating | fit_adjacent | Nonanal | A>B | **not_evaluable** | - | - | arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: nonanal -- the lipid lane exists and nonanal is a species in it, but its ONLY parent is the OLEATE hydrop |
 | PROC-04 | process_heating | independent | 2,5-Dimethylpyrazine | flat | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | PROC-05 | ranking | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 22.8, 22.8 | identical predictions; the lane has no term for the moved axis |
-| TIME-01 | time | independent | HMF | increasing | **agree** | trunk | 10.6, 629, 2.38e+03 |  |
+| TIME-01 | time | independent | HMF | increasing | **agree** | trunk | 10.3, 544, 2.1e+03 |  |
 | LIP-01 | lipid_lane | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 22.8, 22.8 | identical predictions; the lane has no term for the moved axis |
 | LIP-02 | lipid_lane | fit_system_overlap | Hexanal | increasing | **disagree** | lipid | 22.8, 88.6, 88.6 |  |
 | LIP-03 | lipid_lane | independent | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -81,20 +81,20 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | SUG-09 | sugar_identity | independent | FFT | A>B | **agree** | sulfur | 36.9, 33.5 |  |
 | SUG-10 | sugar_identity | independent | 2,5-Dimethylpyrazine | decreasing | **not_evaluable** | - | - | arm 'D-ribose' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was  |
 | SUG-11 | sugar_identity | independent | FFT | A<B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| SUG-12 | sugar_identity | independent | HMF | A>B | **disagree** | trunk | 979, 1.6e+03 |  |
+| SUG-12 | sugar_identity | independent | HMF | A>B | **disagree** | trunk | 881, 1.37e+03 |  |
 | SUG-13 | sugar_identity | independent | Furfural | A>B | **agree** | sulfur | 2.09, 0.405 |  |
-| PH-06 | ph | independent | 2,5-Dimethylpyrazine | increasing | **agree** | trunk | 0.00091, 8.32, 22.9 |  |
+| PH-06 | ph | independent | 2,5-Dimethylpyrazine | increasing | **agree** | trunk | 0.000306, 6.94, 22.7 |  |
 | PH-07 | ph | independent | Furfural | flat | **agree** | sulfur | 2.17, 2.09, 2.08 |  |
-| TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **agree** | trunk | 0.00188, 4.8e-06 |  |
-| TEMP-05 | temperature | independent | HMF | increasing | **disagree** | trunk | 1.22e+03, 797, 689 |  |
+| TEMP-04 | temperature | independent | 2,5-Dimethylpyrazine | A>B | **agree** | trunk | 0.00159, 4.37e-06 |  |
+| TEMP-05 | temperature | independent | HMF | increasing | **disagree** | trunk | 1.04e+03, 757, 680 |  |
 | TEMP-06 | temperature | independent | Furfural | A>B | **agree** | sulfur | 2.09, 0.000551 |  |
-| AW-03 | moisture_aw | independent | HMF | peak | **agree** | trunk | 1.35e+03, 1.53e+03, 762 |  |
+| AW-03 | moisture_aw | independent | HMF | peak | **agree** | trunk | 1.1e+03, 1.24e+03, 647 |  |
 | CYS-03 | additive_cysteine | independent | MFT | A>B | **agree** | sulfur | 12.5, 0 |  |
 | CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's networ |
 | LIP-04 | lipid_lane | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 63.9, 63.9 | identical predictions; the lane has no term for the moved axis |
 | ACR-01 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 0.716, 1.67, 1.43 |  |
 | ACR-02 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 7.64, 935, 4.37 |  |
-| TIME-02 | time | independent | HMF | increasing | **agree** | trunk | 59.7, 1.22e+03, 1.6e+03 |  |
+| TIME-02 | time | independent | HMF | increasing | **agree** | trunk | 55.3, 1.04e+03, 1.37e+03 |  |
 | SCOPE-03 | scope | independent | 2-Pentylfuran | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | HOF-01 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | HOF-02 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 1.67e+03, 2.29e+03 |  |
@@ -120,9 +120,9 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | MENG-01 | temperature | independent | MFT, FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | AW-05 | moisture_aw | fit_adjacent | Acrylamide | flat | **agree** | acrylamide | 640, 640 | identical predictions |
 | PH-ACR-01 | ph | fit_adjacent | Acrylamide | A>B | **agree** | acrylamide | 5.31e+04, 2.73e+04 |  |
-| DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 0.0736, 638, 0.0105, 32.9, 0.0285 |  |
+| DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 0.0736, 12, 0.0105, 38.1, 0.0285 |  |
 | DIC-02 | sugar_identity | independent | glucosone, glyoxal, methylglyoxal, diacetyl | ranking | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **disagree** | trunk | 0.29, 641, 29.8, 0.0282 |  |
+| DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **disagree** | trunk | 0.29, 119, 161, 0.0282 |  |
 | RIB-T-01 | time | independent | MFT | decreasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | RIB-T-02 | time | independent | FFT | flat | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | HEX-T-01 | time | independent | FFT | increasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |

@@ -1139,6 +1139,11 @@ def declare_envelope(
 
         warnings.append(PYRAZINE_SUPPLY_CAVEAT)
         warnings.append(PYRAZINE_SINK_CAVEAT)
+    # --- B21: the aqueous glyoxal supply's own declaration, on glyoxal, glucosone and the pyrazines ---
+    if set(mapped_targets.values()) & (PYRAZINE_TARGET_KEYS | {"GO", "G"}):
+        from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_CAVEAT
+
+        warnings.append(AQUEOUS_GLYOXAL_CAVEAT)
     # --- B20: the glycation arm's own declaration ------------------------------
     if set(mapped_targets.values()) & GLYCATION_TARGET_KEYS:
         from .parameters_glycation import GLYCATION_AVAILABILITY_CAVEAT
@@ -1486,6 +1491,12 @@ def core_parameters(
         from .parameters_furanic import with_fitted_furanic
 
         parameters.update(with_fitted_furanic(float(override["k_dpo_af"])))
+    if "aqueous_glyoxal" in override:
+        # B21: the two aqueous glyoxal-supply constants, log10 at 100 C (the fit generator's candidates).
+        from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_COORDINATES, with_aqueous_glyoxal
+
+        b = override["aqueous_glyoxal"]
+        parameters.update(with_aqueous_glyoxal(*[float(b[k]) for k in AQUEOUS_GLYOXAL_COORDINATES]))
     if "glycation" in override:
         # B20, the same discipline: the frozen literals in parameters_glycation are the default; an
         # explicit block of the five log10 constants at 100 C replaces them.

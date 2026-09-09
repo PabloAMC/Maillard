@@ -28,7 +28,7 @@ does NOT carry these steps (B9's topology is frozen); a sulfur wave that wants d
 """
 from __future__ import annotations
 
-from typing import Mapping, Tuple
+from typing import Dict, Mapping, Tuple
 
 from .parameters import KineticParameter
 from .parameters_furanic import _kocadagli
@@ -77,4 +77,69 @@ DICARBONYL_WISHLIST: Mapping[str, str] = {
     "k_glc_g": "glucosone in a glucose/glycine solution at 100-145 C (the entry is extrapolated from a 160-200 C glass)",
 }
 
-__all__ = ["DICARBONYL_KEYS", "DICARBONYL_PARAMETERS", "DICARBONYL_WISHLIST"]
+# ===========================================================================
+# BUILD WAVE B21 (2026-09-09): THE AQUEOUS GLUCOSONE ROUTE TO GLYOXAL
+# ===========================================================================
+# In water the glucosone comes from the Amadori compound, not from the sugar: Hamzalioglu 2026
+# (whole milk, lactulosyl-lysine, 110-140 C, multiresponse fit) is the only aqueous entry on disk,
+# with first-order constants (basis-free) and a measured barrier. One new step, r_ama_g
+# (AMA -> G + Gly), and an AQUEOUS value for the glucosone -> glyoxal constant k_g_go that replaces
+# the glass value in the operative set (the glass entry above stays as the record and as the
+# "before"). Pre-registered in results/validation/kinetic_core_b21_prereg.md; the fitted values
+# below are FROZEN LITERALS asserted equal to the B21 fit report by tests/unit/test_kinetic_core_b21.py.
+EA_AMA_G_KJ_MOL = 75.9            # Hamzalioglu 2026 Table 2, lactulosyl-lysine -> glucosone, +/- 21.1 (measured)
+EA_G_GO_AQUEOUS_KJ_MOL = 4.2      # Hamzalioglu 2026 Table 2, glucosone -> glyoxal, +/- 15.7 (consistent with zero; the glass says 93.8)
+#: The declared transfer from lactulosyl-lysine in milk to fructosyl-glycine in water, in decades.
+AQUEOUS_TRANSFER_BAND_DECADES = 0.5
+_HAMZALIOGLU = ("Hamzalioglu, Kocadagli & Gokmen 2026, J. Agric. Food Chem. (whole milk, lactose + casein-bound lysine, 110 / 120 / 130 / "
+                "140 C, 0.5-5 min, multiresponse fit): Table 1 steps 4 (LacLys -> glucosone) and 10 (glucosone -> glyoxal), Table 2 barriers; "
+                "hamzalioglu2026_extraction.md sec. 4")
+#: The B21 fit report's optimum (2026-09-09: cost 3.5 on six rows, both coordinates identified); asserted against the report by the unit test.
+FROZEN_B21: Mapping[str, float] = {
+    "log10_k_ama_g_100C": -2.0339128364819725,
+    "log10_k_g_go_aqueous_100C": -0.5104286909031046,
+}
+AQUEOUS_GLYOXAL_COORDINATES: Tuple[str, ...] = tuple(FROZEN_B21)
+AQUEOUS_GLYOXAL_CAVEAT = (
+    "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on "
+    "one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as "
+    "a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal "
+    "barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route "
+    "drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins "
+    "2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is "
+    "the next pre-registration on this route."
+)
+
+
+def with_aqueous_glyoxal(log10_k_ama_g: float, log10_k_g_go: float) -> Dict[str, KineticParameter]:
+    """The aqueous glyoxal-supply block at arbitrary values (the fit generator's hook and the report reader's)."""
+    common = dict(evidence_class="derived_from_fit_data", source_anchor=_HAMZALIOGLU,
+                  dossier_anchor="hamzalioglu2026_extraction.md sec. 4; results/validation/kinetic_core_b21_prereg.md",
+                  conditions="water (milk serum), 110-140 C; first-order constants, no water basis needed; lactulosyl-lysine -> "
+                             "fructosyl-glycine declared (+/- 0.5 dex)",
+                  ph_of_measurement=6.7, temperature_range_c=(110.0, 140.0), rate_transfer="licensed_at_measurement_ph_only", unit="1/min", order=1)
+    return {
+        "k_ama_g": KineticParameter(
+            key="k_ama_g", transformation="Amadori (DFG) -> glucosone + Gly (oxidative cleavage; returns the amine)",
+            k_ref=10.0 ** float(log10_k_ama_g), ea_kj_mol=EA_AMA_G_KJ_MOL,
+            flags=("b21_aqueous_glyoxal", "fitted_wave_b21", "barrier_measured_hamzalioglu2026", "transfer_declared_laclys_to_fructosylglycine"),
+            note="B21 fit rows: Hamzalioglu 2026's four LacLys -> glucosone constants (the 130 C one wide). The only aqueous glucosone entry on disk.",
+            **common),
+        "k_g_go": KineticParameter(
+            key="k_g_go", transformation="glucosone -> glyoxal + C4 residue (AQUEOUS value; the glass value is the record)",
+            k_ref=10.0 ** float(log10_k_g_go), ea_kj_mol=EA_G_GO_AQUEOUS_KJ_MOL,
+            flags=("b21_aqueous_glyoxal", "fitted_wave_b21", "barrier_consistent_with_zero", "replaces_b13_glass_value_in_the_operative_set"),
+            note="B21 fit rows: Hamzalioglu 2026's two determinate glucosone -> glyoxal constants (120, 130 C); the 110 and 140 C ones "
+                 "are indeterminate and reported. The glass barrier (93.8) is the other reading and is reported beside it.",
+            **common),
+    }
+
+
+AQUEOUS_GLYOXAL_PARAMETERS: Mapping[str, KineticParameter] = with_aqueous_glyoxal(
+    FROZEN_B21["log10_k_ama_g_100C"], FROZEN_B21["log10_k_g_go_aqueous_100C"])
+AQUEOUS_GLYOXAL_KEYS: Tuple[str, ...] = tuple(AQUEOUS_GLYOXAL_PARAMETERS)
+#: The glass value of k_g_go, kept for the ship rule's "before" and for the record.
+GLASS_K_G_GO: KineticParameter = DICARBONYL_PARAMETERS["k_g_go"]
+
+__all__ = ["DICARBONYL_KEYS", "DICARBONYL_PARAMETERS", "DICARBONYL_WISHLIST", "AQUEOUS_GLYOXAL_PARAMETERS", "AQUEOUS_GLYOXAL_KEYS",
+           "AQUEOUS_GLYOXAL_COORDINATES", "AQUEOUS_GLYOXAL_CAVEAT", "FROZEN_B21", "with_aqueous_glyoxal", "GLASS_K_G_GO"]

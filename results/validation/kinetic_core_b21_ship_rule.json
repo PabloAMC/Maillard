@@ -1,0 +1,121 @@
+{
+  "artifact": "kinetic_core_b21_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b21_ship_rule",
+    "generated_on": "2026-09-09",
+    "git": {
+      "commit": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd",
+      "short": "efb76fb6",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b21_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b21_fit_report.json",
+        "sha256": "30dea0576198068e76cbe231553faca460f319faa27f14c5ee009d2d2645dac6"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b21_prereg.md",
+  "rule": "SHIP if T1 (decisive rows within 0.3 dex), T2 (browning hold-out median below 2 and within 3x, no panel row moves 0.3 dex), T3 (Quan's glyoxal within the widened range) and T6 (both coordinates identified) hold; T4 and T5 reported",
+  "cost": 3.5430222479547213,
+  "n_rows": 6,
+  "frozen": {
+    "log10_k_ama_g_100C": -2.0339128364819725,
+    "log10_k_g_go_aqueous_100C": -0.5104286909031046
+  },
+  "T1": {
+    "decisive_rows_dex": {
+      "ham_k_ama_g_110C": -0.03535754825615759,
+      "ham_k_ama_g_120C": 0.18437861983992754,
+      "ham_k_ama_g_140C": -0.18131329666269339,
+      "ham_k_g_go_120C": 0.0009670550481836308
+    },
+    "reported_rows_dex": {
+      "ham_k_ama_g_130C": 0.3588025006636568,
+      "ham_k_g_go_130C": -0.010745056038173302
+    },
+    "worst_row": "ham_k_ama_g_120C",
+    "worst_dex": 0.18437861983992754,
+    "pass": true
+  },
+  "T2": {
+    "browning": {
+      "before": {
+        "median_fold_error": 1.4266547598709054,
+        "max_fold_error": 2.84820291290999,
+        "fraction_within_2x": 0.9473684210526315,
+        "fraction_within_3x": 1.0,
+        "n_holdout_points": 38
+      },
+      "after": {
+        "median_fold_error": 1.305283328516029,
+        "max_fold_error": 2.786696478159479,
+        "fraction_within_2x": 0.9473684210526315,
+        "fraction_within_3x": 1.0,
+        "n_holdout_points": 38
+      },
+      "pass": true
+    },
+    "panel": {
+      "n_compared": 39,
+      "worst_abs_dex": 3.2948948851038725e-09,
+      "moved_over_0.01_dex": [],
+      "pass": true
+    },
+    "pass": true
+  },
+  "T3": {
+    "quan": {
+      "100C": {
+        "model_go_mmol_l": 0.023424222570036648,
+        "printed_range": [
+          0.052,
+          0.127
+        ],
+        "within_range_widened_0.5_dex": true,
+        "dex_from_range": -0.34633815769914433
+      },
+      "130C": {
+        "model_go_mmol_l": 0.3870734421365216,
+        "printed_range": [
+          0.144,
+          0.605
+        ],
+        "within_range_widened_0.5_dex": true,
+        "dex_from_range": 0.0
+      }
+    },
+    "pass": true
+  },
+  "T4": {
+    "xia": {
+      "go_mmol_l": 1.227103951547392,
+      "mgo_mmol_l": 7.822770312746105,
+      "go_above_mgo": false
+    },
+    "reported_only": true
+  },
+  "T5": {
+    "leahy": {
+      "model_ug_per_l": 21.935138672394967,
+      "leahy_ug_per_l": 13100.0,
+      "dex": -2.7761309113271295,
+      "b18_dex": -2.875828918477721
+    },
+    "reported_only": true
+  },
+  "T6": {
+    "sigma_dex": {
+      "log10_k_ama_g_100C": 0.08533201859810377,
+      "log10_k_g_go_aqueous_100C": 0.14367394278324797
+    },
+    "on_bound": {
+      "log10_k_ama_g_100C": false,
+      "log10_k_g_go_aqueous_100C": false
+    },
+    "pass": true
+  },
+  "verdict": "SHIP"
+}

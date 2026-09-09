@@ -1679,6 +1679,20 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       two temperatures; a CML benchmark with a stated loading and a real cook (the Foods 2023 row is a proxy);
       the CML-loss barrier (Nguyen's pair falls with T); furosine as a reportable (0.32 x FLP after hydrolysis,
       Krause 2003) not yet written.
+- [x] **B21 (pre-registered and RUN 2026-09-09; SHIPS): the aqueous glucosone route to glyoxal.** r_ama_g (AMA ->
+      G + Gly) fitted on Hamzalioglu 2026's four LacLys -> glucosone constants (Ea 75.9 measured) and k_g_go's
+      aqueous value on the two determinate glucosone -> glyoxal constants (Ea 4.2); cost 3.5, both identified.
+      Quan 2020's glyoxal: before 4.2 / 2.5 dex low, after -0.35 / 0.00 dex from the printed range; browning
+      hold-out 1.43 -> 1.31; panel unmoved; Xia's GO >> MGO NOT reproduced (model MGO 7.8 mM at 130 C / 80 min in
+      200 + 200 -- check the trunk's MGO: Martins' k_ama_mgo plus the DMHF sink; Xia's MGO panel tops at 0.5 mM);
+      Leahy total unchanged (-2.8 dex) -> the pyrazine miss is the Strecker step at 95 C / pH 9 or Lys vs Gly.
+      OPEN: the MGO level in water (Xia figure-only; Quan "rises monotonically", no number; Yu 2020 time unit);
+      the glyoxal sink in water (Ham fits zero; B13's glass sink kept for B18's conditionality); DIC-01 / DIC-03
+      directional claims re-check after regeneration. UNFORESEEN (recorded after the verdict): B1's own fit rows
+      worsen, half SSR 2017 -> 2495 (+24 %), Amadori median error 0.035 -> 0.093 dex, formic 0.089 -> 0.123;
+      3-DG / MGO / 1-DG unchanged. NEXT (B21b, to pre-register): joint fit of k_ama_g on Hamzalioglu's four
+      constants AND Martins 2005's Amadori series (80 / 100 / 120 C), with the transfer band as the prior;
+      if no rate serves both, the milk constant does not transfer to fructosyl-glycine and B21 is refused.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

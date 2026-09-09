@@ -1,0 +1,267 @@
+{
+  "artifact": "kinetic_core_b21_fit_report",
+  "wave": "B21 -- the aqueous glucosone route to glyoxal",
+  "generated_on": "2026-09-09",
+  "generated_by": "scripts/generators/generate_kinetic_core_b21_fit.py",
+  "git": {
+    "head": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd"
+  },
+  "prereg": "results/validation/kinetic_core_b21_prereg.md",
+  "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendment 31",
+  "objective": {
+    "form": "six printed first-order constants (Hamzalioglu 2026, 110-140 C), log10 residuals; two log10 constants at 100 C free, barriers declared",
+    "n_rows": 6,
+    "n_free_parameters": 2,
+    "final_cost": 3.5430222479547213,
+    "best_start": 0,
+    "reduced_chi2": 0.8857555619886804
+  },
+  "rows": [
+    {
+      "id": "ham_k_ama_g_110C",
+      "key": "k_ama_g",
+      "t_c": 110.0,
+      "target": 0.019,
+      "half_width": null,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Hamzalioglu, Kocadagli & Gokmen 2026 (whole milk, 110-140 C, multiresponse fit), Table 1 steps 4 and 10, Table 2; hamzalioglu2026_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "predicted": 0.017514431804708155,
+      "residual_dex": -0.03535754825615759
+    },
+    {
+      "id": "ham_k_ama_g_120C",
+      "key": "k_ama_g",
+      "t_c": 120.0,
+      "target": 0.021,
+      "half_width": null,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Hamzalioglu, Kocadagli & Gokmen 2026 (whole milk, 110-140 C, multiresponse fit), Table 1 steps 4 and 10, Table 2; hamzalioglu2026_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "predicted": 0.03210686593221492,
+      "residual_dex": 0.18437861983992754
+    },
+    {
+      "id": "ham_k_ama_g_130C",
+      "key": "k_ama_g",
+      "t_c": 130.0,
+      "target": 0.025,
+      "half_width": 0.071,
+      "sigma_log": 0.5,
+      "decisive": false,
+      "anchor": "Hamzalioglu, Kocadagli & Gokmen 2026 (whole milk, 110-140 C, multiresponse fit), Table 1 steps 4 and 10, Table 2; hamzalioglu2026_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "predicted": 0.057113991074687405,
+      "residual_dex": 0.3588025006636568
+    },
+    {
+      "id": "ham_k_ama_g_140C",
+      "key": "k_ama_g",
+      "t_c": 140.0,
+      "target": 0.15,
+      "half_width": null,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Hamzalioglu, Kocadagli & Gokmen 2026 (whole milk, 110-140 C, multiresponse fit), Table 1 steps 4 and 10, Table 2; hamzalioglu2026_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "predicted": 0.0988047815698903,
+      "residual_dex": -0.18131329666269339
+    },
+    {
+      "id": "ham_k_g_go_120C",
+      "key": "k_g_go",
+      "t_c": 120.0,
+      "target": 0.33,
+      "half_width": null,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Hamzalioglu, Kocadagli & Gokmen 2026 (whole milk, 110-140 C, multiresponse fit), Table 1 steps 4 and 10, Table 2; hamzalioglu2026_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "predicted": 0.33073563848646703,
+      "residual_dex": 0.0009670550481836308
+    },
+    {
+      "id": "ham_k_g_go_130C",
+      "key": "k_g_go",
+      "t_c": 130.0,
+      "target": 0.35,
+      "half_width": 0.37,
+      "sigma_log": 0.5,
+      "decisive": false,
+      "anchor": "Hamzalioglu, Kocadagli & Gokmen 2026 (whole milk, 110-140 C, multiresponse fit), Table 1 steps 4 and 10, Table 2; hamzalioglu2026_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "predicted": 0.3414467539252205,
+      "residual_dex": -0.010745056038173302
+    }
+  ],
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        -2.22,
+        -0.51
+      ],
+      "x": [
+        -2.0339128364819725,
+        -0.5104286909031046
+      ],
+      "cost": 3.5430222479547213,
+      "nfev": 5,
+      "residuals_dex": {
+        "ham_k_ama_g_110C": -0.03535754825615759,
+        "ham_k_ama_g_120C": 0.18437861983992754,
+        "ham_k_ama_g_130C": 0.3588025006636568,
+        "ham_k_ama_g_140C": -0.18131329666269339,
+        "ham_k_g_go_120C": 0.0009670550481836308,
+        "ham_k_g_go_130C": -0.010745056038173302
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        -2.201347839797086,
+        -0.731572460762401
+      ],
+      "x": [
+        -2.0339128365336783,
+        -0.5104286909071432
+      ],
+      "cost": 3.543022247954722,
+      "nfev": 5,
+      "residuals_dex": {
+        "ham_k_ama_g_110C": -0.03535754830786335,
+        "ham_k_ama_g_120C": 0.18437861978822181,
+        "ham_k_ama_g_130C": 0.35880250061195107,
+        "ham_k_ama_g_140C": -0.18131329671439914,
+        "ham_k_g_go_120C": 0.0009670550441450618,
+        "ham_k_g_go_130C": -0.010745056042211853
+      }
+    }
+  ],
+  "frozen_parameters": {
+    "aqueous_glyoxal": {
+      "log10_k_ama_g_100C": -2.0339128364819725,
+      "log10_k_g_go_aqueous_100C": -0.5104286909031046
+    },
+    "declared_barriers_kj_mol": {
+      "k_ama_g": 75.9,
+      "k_g_go": 4.2
+    },
+    "glass_k_g_go_at_100C": 0.0035436078852363988,
+    "glass_k_g_go_ea": 93.8,
+    "constants_at_120C": {
+      "k_ama_g": 0.03210686593221492,
+      "k_g_go": 0.33073563848646703
+    }
+  },
+  "bands_log10": {
+    "lower": {
+      "log10_k_ama_g_100C": -4.220000000000001,
+      "log10_k_g_go_aqueous_100C": -2.51
+    },
+    "upper": {
+      "log10_k_ama_g_100C": -0.2200000000000002,
+      "log10_k_g_go_aqueous_100C": 1.49
+    }
+  },
+  "laplace": {
+    "sigma": {
+      "log10_k_ama_g_100C": 0.08533201859810377,
+      "log10_k_g_go_aqueous_100C": 0.14367394278324797
+    },
+    "chi2_reduced": 0.8857555619886804,
+    "dof": 4,
+    "identified": {
+      "log10_k_ama_g_100C": true,
+      "log10_k_g_go_aqueous_100C": true
+    },
+    "on_bound": {
+      "log10_k_ama_g_100C": false,
+      "log10_k_g_go_aqueous_100C": false
+    }
+  },
+  "diagnostics": {
+    "before_glass": {
+      "quan2020_glyoxal": {
+        "100C": {
+          "model_go_mmol_l": 3.2276119365144462e-06,
+          "printed_range": [
+            0.052,
+            0.127
+          ],
+          "within_range_widened_0.5_dex": false,
+          "dex_from_range": -4.207122030707942
+        },
+        "130C": {
+          "model_go_mmol_l": 0.00042537688707877886,
+          "printed_range": [
+            0.144,
+            0.605
+          ],
+          "within_range_widened_0.5_dex": false,
+          "dex_from_range": -2.52958860334764
+        }
+      },
+      "xia2022_ordering_130C_80min": {
+        "go_mmol_l": 0.0014130579902680677,
+        "mgo_mmol_l": 8.137804875153194,
+        "go_above_mgo": false
+      },
+      "leahy1989_total_pyrazine_95C_2h": {
+        "model_ug_per_l": 17.43582001129136,
+        "leahy_ug_per_l": 13100.0,
+        "dex": -2.8758289184774974,
+        "b18_dex": -2.875828918477721
+      },
+      "b1_browning_holdout": {
+        "median_fold_error": 1.4266547598709054,
+        "max_fold_error": 2.84820291290999,
+        "fraction_within_2x": 0.9473684210526315,
+        "fraction_within_3x": 1.0,
+        "n_holdout_points": 38
+      }
+    },
+    "after_candidate": {
+      "quan2020_glyoxal": {
+        "100C": {
+          "model_go_mmol_l": 0.023424222570036648,
+          "printed_range": [
+            0.052,
+            0.127
+          ],
+          "within_range_widened_0.5_dex": true,
+          "dex_from_range": -0.34633815769914433
+        },
+        "130C": {
+          "model_go_mmol_l": 0.3870734421365216,
+          "printed_range": [
+            0.144,
+            0.605
+          ],
+          "within_range_widened_0.5_dex": true,
+          "dex_from_range": 0.0
+        }
+      },
+      "xia2022_ordering_130C_80min": {
+        "go_mmol_l": 1.227103951547392,
+        "mgo_mmol_l": 7.822770312746105,
+        "go_above_mgo": false
+      },
+      "leahy1989_total_pyrazine_95C_2h": {
+        "model_ug_per_l": 21.935138672394967,
+        "leahy_ug_per_l": 13100.0,
+        "dex": -2.7761309113271295,
+        "b18_dex": -2.875828918477721
+      },
+      "b1_browning_holdout": {
+        "median_fold_error": 1.305283328516029,
+        "max_fold_error": 2.786696478159479,
+        "fraction_within_2x": 0.9473684210526315,
+        "fraction_within_3x": 1.0,
+        "n_holdout_points": 38
+      }
+    }
+  }
+}

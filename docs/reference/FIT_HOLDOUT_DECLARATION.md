@@ -1293,3 +1293,16 @@ ran.
    B20 reproduces bit for bit; the rule said SHIP, so the frozen literals are read on every loaded
    trunk pot and a glycation target without a loading is refused by name.
 
+## Amendment 31 — 2026-09-09 (Wave B21, the aqueous glucosone route to glyoxal)
+
+1. **SIX NEW FIT ROWS; TWO NEW COORDINATES.** Hamzalioglu 2026 Table 1 (whole milk, 110 to 140 °C):
+   the first-order constants for lactulosyl-lysine → glucosone (four) and glucosone → glyoxal (the
+   two determinate ones) enter as FIT rows; log10 `k_ama_g` and log10 `k_g_go` at 100 °C are free;
+   both barriers DECLARED from that laboratory's measured values. The glass value of `k_g_go` (B13)
+   stays in the table as the record and is no longer operative.
+2. **WHAT IS VALIDATED.** Quan 2020's glyoxal levels (end-of-cook levels validate), Xia 2022's
+   ordering, Leahy 1989's total, and the B1 browning hold-out re-scored through the frozen B1
+   generator: none enters the objective. The rule said SHIP.
+3. **THE TRANSFER.** Lactulosyl-lysine in milk to fructosyl-glycine in water is a declared ± 0.5 dex
+   band on every glyoxal, glucosone and pyrazine answer, the B18 precedent.
+

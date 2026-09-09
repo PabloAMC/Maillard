@@ -45,8 +45,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "323c4900a446d930739973f05cbf8c31229198c9",
-      "short": "323c4900",
+      "commit": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd",
+      "short": "efb76fb6",
       "branch": "reactions",
       "dirty": true
     },
@@ -259,7 +259,7 @@
       "worst_fold_error": 33391.73597895205,
       "best_fold_error": 1.9901918483315129,
       "median_abs_log10_error": 1.4690904559474305,
-      "geometric_mean_fold": 43.78902159636351
+      "geometric_mean_fold": 43.78902158784514
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -297,7 +297,7 @@
           "worst_fold_error": 476.7619131435321,
           "best_fold_error": 1.9901918483315129,
           "median_abs_log10_error": 1.420655261269571,
-          "geometric_mean_fold": 25.446802316948606
+          "geometric_mean_fold": 25.446802309523257
         }
       },
       "trust_loop": {
@@ -331,7 +331,7 @@
           "worst_fold_error": 33391.73597895205,
           "best_fold_error": 1.9901918483315129,
           "median_abs_log10_error": 1.420655261269571,
-          "geometric_mean_fold": 34.520647153078386
+          "geometric_mean_fold": 34.520647144348345
         }
       },
       "predictive": {
@@ -409,11 +409,11 @@
         "within_band_rate": 0.0,
         "fold_summary": {
           "n": 1,
-          "median_fold_error": 11.930016362529066,
-          "worst_fold_error": 11.930016362529066,
-          "best_fold_error": 11.930016362529066,
-          "median_abs_log10_error": 1.0766410393242571,
-          "geometric_mean_fold": 11.930016362529063
+          "median_fold_error": 11.930016272018708,
+          "worst_fold_error": 11.930016272018708,
+          "best_fold_error": 11.930016272018708,
+          "median_abs_log10_error": 1.0766410360293623,
+          "geometric_mean_fold": 11.930016272018706
         }
       }
     },
@@ -430,7 +430,7 @@
         "worst_fold_error": 33391.73597895205,
         "best_fold_error": 1.9901918483315129,
         "median_abs_log10_error": 1.4690904559474305,
-        "geometric_mean_fold": 43.78902159636351
+        "geometric_mean_fold": 43.78902158784514
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
@@ -447,7 +447,7 @@
         "worst_fold_error": 33391.73597895205,
         "best_fold_error": 1.9901918483315129,
         "median_abs_log10_error": 1.501813579680889,
-        "geometric_mean_fold": 47.31092438076307
+        "geometric_mean_fold": 47.31092437131732
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.3
+    "wall_seconds": 9.6
   },
   "benchmarks": [
     {
@@ -2728,14 +2728,14 @@
           "target_unit": "ppb",
           "measured": 17400.0,
           "measured_ppb": 17400.0,
-          "predicted": 1458.505962711969,
-          "fold_error": 11.930016362529066,
-          "abs_log10_error": 1.0766410393242571,
+          "predicted": 1458.5059737773267,
+          "fold_error": 11.930016272018708,
+          "abs_log10_error": 1.0766410360293623,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            208.5326795113151,
-            10200.989352131459
+            208.5326810934058,
+            10200.989429524077
           ],
           "measured_within_interval": false,
           "lane": "trunk",
@@ -2754,8 +2754,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 11.930016362529066,
-      "mean_abs_log10_error": 1.0766410393242571,
+      "max_ratio": 11.930016272018708,
+      "mean_abs_log10_error": 1.0766410360293623,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",

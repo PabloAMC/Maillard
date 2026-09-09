@@ -441,6 +441,7 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
+            "r_ama_g",
             "r_ama_mgo",
             "r_ama_odg",
             "r_ama_tdg"
@@ -458,6 +459,7 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
+            "r_ama_g",
             "r_ama_mgo",
             "r_ama_odg",
             "r_ama_tdg"

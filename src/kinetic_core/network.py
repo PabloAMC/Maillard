@@ -404,11 +404,23 @@ GLYCATION_REACTIONS: Tuple[Reaction, ...] = (
         "B20. CML -> melanoidin pools (Nguyen 2016 k11; sets the CML plateau with k7).",
     ),
 )
-TRUNK_REACTIONS: Tuple[Reaction, ...] = REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS + GLYCATION_REACTIONS
+#: Build Wave B21 (2026-09-09): the aqueous glucosone route. In water the glucosone comes from the
+#: Amadori compound (Hamzalioglu 2026), not from the sugar as in the B13 glass; the step returns the
+#: amine like the trunk's other Amadori decays. Pre-registered in kinetic_core_b21_prereg.md.
+AQUEOUS_GLYOXAL_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_ama_g", {"AMA": 1}, {"G": 1, "Gly": 1}, "k_ama_g",
+        "B21. Amadori (DFG) -> glucosone + glycine (oxidative cleavage; the aqueous glucosone entry, "
+        "Hamzalioglu 2026 step 4). FITTED on four first-order constants at 110-140 C.",
+    ),
+)
+TRUNK_REACTIONS: Tuple[Reaction, ...] = (REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS + GLYCATION_REACTIONS
+                                         + AQUEOUS_GLYOXAL_REACTIONS)
 TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
 DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
 PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)
 GLYCATION_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in GLYCATION_REACTIONS)
+AQUEOUS_GLYOXAL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in AQUEOUS_GLYOXAL_REACTIONS)
 
 #: Build Wave B7's eleven steps, named so a report can say which part of the
 #: trunk is B1's and which is B7's without counting.
