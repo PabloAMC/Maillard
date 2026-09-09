@@ -127,12 +127,22 @@ SECOND_LABORATORY_2016: Mapping[str, Mapping[str, object]] = {
     "k_hmf_self": {
         "shipped": "8.97e-7 /min, Ea zero by declaration (0.9 % lost in 7 days at 5 C), in "
                    "parameters_furanic.py",
-        "measured_elsewhere": "12 / 21 / 103 x 1e-3 /min at 150 / 160 / 170 C",
-        "verdict": "23 000x APART. The furanic channel already prints 'EXPECT HMF TO BE "
-                   "OVER-PREDICTED' and names the empty 50-150 C window as the reason; this puts a "
-                   "measured size on that warning. Half-life at 160 C: about 33 minutes measured "
-                   "against about 1.5 years shipped.",
-        "anchor": "goncuoglu2016_extraction.md sec. 3 Table 1 step k26",
+        "measured_elsewhere": "12 / 21 / 103 x 1e-3 /min at 150 / 160 / 170 C (hazelnut); and about "
+                              "0.111 /min at 180 C from a THIRD reading, Gokmen 2012",
+        "verdict": "23 000x APART on the hazelnut lumped sink, and 1.2e5x apart on Gokmen 2012 "
+                   "('approximately 67 % of the HMF was lost within 10 min' with equimolar "
+                   "asparagine at 180 C, giving 0.111 /min and a half-life near 6 minutes, mine). "
+                   "The furanic channel already prints 'EXPECT HMF TO BE OVER-PREDICTED' and names "
+                   "the empty 50-150 C window as the reason; these put two measured sizes on that "
+                   "warning. Half-life at 160 C: about 33 minutes measured against about 1.5 years "
+                   "shipped. THREE CAUTIONS, none of them small. (i) Gokmen's is the AMINE sink, "
+                   "HMF plus asparagine, not self-degradation, so it is not the same quantity this "
+                   "constant names. (ii) It is one temperature, so no barrier follows; the 90 to "
+                   "180 C series in the same paper was run for ACRYLAMIDE and its 138.78 kJ/mol "
+                   "must not be imported as the HMF-loss barrier. (iii) Gokmen and Goncuoglu are "
+                   "co-authors, so the 1.08x agreement between their two numbers is within-group "
+                   "convergence and not independent replication.",
+        "anchor": "goncuoglu2016_extraction.md sec. 3 Table 1 step k26; gokmen2012_extraction.md",
     },
 }
 #: What this laboratory does NOT settle, said plainly so nobody reads the table as a refit.

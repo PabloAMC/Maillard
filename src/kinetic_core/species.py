@@ -362,6 +362,37 @@ MELANOIDIN_REPEAT_UNIT_FALSIFYING_MEASUREMENT = (
 #: ratio, and the spread across these sources is wider than any one of them justifies fitting
 #: to. It is a wave, it is in the backlog, and the C/N diagnostic should be read as a spread
 #: rather than as a bound until it runs.
+#: THE THIRD READING, AND THE ONE THAT SETTLES THE SHAPE OF THE PROBLEM (2026-09-09 evening,
+#: mohsin2018_extraction.md). Mohsin 2018 measures glucose + ALANINE melanoidins, solvent-free,
+#: dialysed above 12 kDa, and prints C/N about 13 at 130 C rising to about 21 at 200 C.
+#:
+#: Alanine is not glycine and the difference is exactly one carbon per nitrogen: the paper prints
+#: its own landmarks, 9:1 for 1:1 incorporation and 15:1 for 2:1, where glycine would give 8 and 14.
+#: Put on a glycine basis its series reads about 12 at 130 C and 20 at 200 C -- and 12 at 130 C sits
+#: directly on Martins' 11 at 120 C. Five laboratories then make ONE monotonic series, and the
+#: trunk's 8.42 to 9.94 belongs at roughly 60 to 100 C rather than at cooking temperature.
+#:
+#: THE POINT, AND IT IS NOT THE ONE RECORDED THIS MORNING. The repeat unit is falsified from BELOW
+#: at 70 C, where decarboxylated glycine contributes one carbon per nitrogen instead of two, and
+#: from ABOVE at 130 to 200 C, where the polymer takes up more carbohydrate per amine than the unit
+#: allows -- Mohsin's 21:1 lands exactly on an intact 3:1 rung. ONE FIXED UNIT CANNOT DO BOTH. The
+#: morning's note framed this as a floor to clear; it is a temperature-dependent carbohydrate-to-amine
+#: ratio, and a wave that fixes it needs that ratio, not merely a second nitrogen pool.
+#:
+#: Two flags travel with Mohsin: its authors say the 130 and 140 C samples still hold unremoved
+#: glucose and alanine after dialysis, and 13:1 is one of those; and the system is solvent-free with
+#: no pH, unlike every other C/N source in the corpus. Its remaining ten temperatures are in a
+#: supplementary table that is not on this disk.
+MELANOIDIN_REPEAT_UNIT_FALSIFIED_FROM_BOTH_SIDES = (
+    "Below: Mundt & Wedzicha 2004 measure C/N 7.64 +/- 0.21 at 70 C against a structural floor of "
+    "8.0, because about two thirds of the glycine arrives decarboxylated. Above: Mohsin 2018 "
+    "measures 13 at 130 C and 21 at 200 C on glucose + alanine (about 12 and 20 on a glycine basis, "
+    "mine), which is more carbohydrate per amine than one fixed unit allows. A single repeat unit "
+    "cannot be falsified from both directions and still be the right structure. What the corpus "
+    "supports is a carbohydrate-to-amine ratio that RISES with temperature, and the trunk's 8.42 to "
+    "9.94 then belongs at roughly 60 to 100 C rather than at 120 C."
+)
+
 MELANOIDIN_REPEAT_UNIT_SAME_SYSTEM_AT_COOKING_TEMPERATURE = (
     "Martins & van Boekel 2003 (Food Chem. 83:135), glucose + glycine, measured C/N: 11 at "
     "120 C pH 6.8; 15 falling to 11 at 100 C pH 6.8; 19 falling to 16 at 100 C pH 5.5. Its "

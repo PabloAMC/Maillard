@@ -532,6 +532,79 @@ REVERSIBLE_BINDING: Tuple[MatrixParameter, ...] = (
 #: in vitro parent study is Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023, JAFC 71(50):20274,
 #: which `data/lit/binding_constants.yml` already carries under `barallat_perez_2023_jafc`. The keys stay
 #: sealed and the hold-out stands; only the citation changes.
+# ===========================================================================
+# THE SULFUR GAP IN THIS TABLE, MEASURED FOR THE FIRST TIME AND STILL NOT SHIPPABLE
+# ===========================================================================
+# 2026-09-09. REVERSIBLE_BINDING holds 21 constants over five media and not one is a thiol, a
+# disulfide, a trisulfide or any sulfur compound at all -- while the sulfur lane is this model's
+# central output. Sun 2025 (sun2025_extraction.md) is the first paper in the corpus to measure a
+# PLANT protein against sulfur volatiles, and it still does not close the gap. Recorded here so the
+# gap is a known quantity with a size rather than an absence.
+SULFUR_BINDING_GAP: Mapping[str, object] = {
+    "state": "MEASURED ONCE, NOT SHIPPABLE",
+    "source": "Sun, Liang, Qian, Chen & Zhao 2025, Food Hydrocolloids 166:111326; pea protein "
+              "isolate 18 g/L (16.2 g/L protein) in 0.01 M phosphate pH 7.2",
+    "what_it_measured": "headspace depletion at 0.5 mM: dimethyl disulfide 24.73 %, dimethyl "
+                        "trisulfide 27.13 %, lenthionine 38.89 % retained by the protein",
+    "reconstructed_k_g_l_per_g": (1.0e-2, 4.0e-2),
+    "reconstructed_note": "a BAND (mine), not a row: 6 to 14x weaker than this table's pea hexanal "
+                          "constant of 2.537e-1 L/g",
+    "why_it_cannot_ship": (
+        "Three reasons, any one of which is enough. (1) It is HS-SPME DEPLETION, not a partition "
+        "pair: there is no water leg, so the within-run ratio this table is built on does not "
+        "exist and a K_g can only be reconstructed under an assumption. (2) The paper's own two "
+        "ladders disagree by 1118x on the same three compounds in the same lot of the same buffer "
+        "-- the headspace ladder spans 1.57x and the fluorescence ladder 1755x. That beats the 56x "
+        "disagreement already recorded for pea protein in this registry and it is the strongest "
+        "single-paper evidence anywhere that `method` must stay a first-class field. (3) Its "
+        "Table 2 prints K_D equal to K_S to two decimals in all nine rows, which cannot be a "
+        "genuine two-parameter fit."
+    ),
+    "what_it_does_settle": (
+        "The reversibility of dimethyl disulfide on a PLANT protein, directionally: 4 M urea "
+        "significantly RAISES the DMDS headspace peak, i.e. it is released, i.e. bound "
+        "non-covalently. That corroborates the conservative reading this registry already took of "
+        "the DMDS source contradiction, by a different method on a different protein -- though by "
+        "a method that could not see a covalent adduct if one were there, and the figure withholds "
+        "the size."
+    ),
+    "what_would_close_it": "a phase-ratio-variation partition pair on a plant protein against a "
+                           "thiol or a disulfide, i.e. a matrix leg and a water leg in one run",
+}
+
+# ===========================================================================
+# PAIRED THRESHOLDS: WHAT THE CORPUS HAS, AND WHY THE REFUSAL STANDS
+# ===========================================================================
+# 2026-09-09. `matrix_oav` refuses every matrix-corrected threshold. Two papers were fetched to try
+# to lift that and neither does, for different reasons worth keeping apart.
+PAIRED_THRESHOLD_EVIDENCE: Mapping[str, str] = {
+    "wright2006_whey": (
+        "THE ONLY GENUINE PAIRED THRESHOLD IN THE CORPUS, and it is not a plant protein. Wright "
+        "2006 measures dimethyl trisulfide at 0.07 ppt in water and 0.80 ppb in 10 % whey protein "
+        "isolate: 80 panellists, orthonasal DETECTION, ASTM ascending 3-AFC. The shift is 11 429x "
+        "(mine; the paper never computes it). READ BOTH WAYS OR NEITHER: the paper's own water leg "
+        "sits 143x BELOW the water threshold it cites from the literature, and against that "
+        "citation the shift is only about 80x (mine) -- inside the 27-41x cross-study band this "
+        "layer already carries. A K_g proxy from the larger reading would be about 114 L/g, some "
+        "300x the largest constant in this table, which is why it is reported as an unexplained "
+        "residual and not shipped."
+    ),
+    "suppavorasatit_soymilk": (
+        "FETCHED TO LIFT THE REFUSAL AND IT DOES NOT. Its two legs are control soymilk against "
+        "DEAMIDATED soymilk, both about 3 % soy protein, so there is no water leg at all; "
+        "'odourless distilled water' is the flavour stock's solvent and the scale anchor, not a "
+        "comparator. The claim that it supplied a paired plant-matrix threshold was made in error "
+        "on 2026-09-09 and is retracted here."
+    ),
+    "the_standing_position": (
+        "The corpus holds NO paired water/plant-matrix odour threshold. Every plant-protein paper "
+        "read -- Utz 2022, Trikusuma 2020, Xiang 2023, Nedele 2022, Li 2023, Mehle 2020 -- computes "
+        "odour activity in a plant matrix using a WATER threshold, and most take it from one "
+        "database. So `matrix_oav`'s refusal is correct behaviour and is not liftable by reading. "
+        "It needs a sensory panel."
+    ),
+}
+
 HOLDOUT_SEALED_BINDING: Mapping[str, str] = {
     "kg_hexanal_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT (D.6). "
                         "Value not carried in this file.",
@@ -551,6 +624,25 @@ HOLDOUT_SEALED_BINDING: Mapping[str, str] = {
 #: measured THRESHOLD SHIFT does NOT transfer (monotone in gelatin, collapsed in
 #: beef). Nothing here extrapolates a threshold shift by chain length.
 CHAIN_LENGTH_SLOPE_PER_CH2: float = 2.81  # geometric mean of 2.72 and 2.9
+#: CHECKED AT PROCESS TEMPERATURE FOR THE FIRST TIME, 2026-09-09 (aspelund1983_extraction.md).
+#: Aspelund & Wilson 1983 run inverse gas chromatography on a spray-dried soy isolate at 80, 90 and
+#: 100 C -- the only flavour-affinity measurement in the corpus above 60 C -- and their 2-alkanone
+#: series gives 578 cal per CH2 at 90 C, i.e. 2.23x/CH2 (mine), against the 2.81 shipped above.
+#: That is a 1.26x disagreement across two methods, two temperatures and forty years, which is
+#: closer agreement than this layer usually gets.
+#: IT DOES NOT LICENSE A BINDING CONSTANT AT PROCESS TEMPERATURE, AND THE PAPER SAYS SO. There is no
+#: water anywhere in the experiment: it is gas-solid chromatography on a dry powder, and its authors
+#: write that "a reordering of the binding affinities will occur" in aqueous solution. So it checks
+#: the SLOPE, which is a structural regularity, and supplies no row for REVERSIBLE_BINDING. Wave
+#: B26's caveat -- that nothing licenses a plant binding constant at 90 or 140 C -- stands unchanged.
+#: What it does add is a measured DIRECTION: adsorption weakens monotonically as the protein is
+#: heated (its Table III), which is the opposite of what a layer charging sites once at the start of
+#: a cook would assume if it assumed anything.
+CHAIN_LENGTH_SLOPE_CHECKED_DRY_AT_90C = (
+    "Aspelund & Wilson 1983, inverse gas chromatography on dry soy isolate at 80/90/100 C: 578 cal "
+    "per CH2 at 90 C = 2.23x/CH2 (mine) against the 2.81 shipped, a 1.26x disagreement. DRY, so it "
+    "checks the slope and supplies no aqueous binding constant."
+)
 CHAIN_LENGTH_SLOPE_SOURCE = (
     "Andriot 2000 2.72x/CH2 (beta-lactoglobulin, headspace) and Damodaran 1981 "
     "2.9x/CH2 (soy, dialysis), k2_matrix_and_thresholds.md sec. B.6. Both FIT."

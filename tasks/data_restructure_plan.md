@@ -1893,10 +1893,17 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
          5-hydroxymethyl-2-furfural in acrylamide formation from asparagine" -- the ONLY hit in either
          HMF search that measures DEGRADATION in an amino-acid pot rather than formation. Two dossiers
          already cite it. Same group as `kocadagli2016`, `goncuoglu2016` and `hamzalioglu2026`.
-      13. Suppavorasatit, Lee & Cadwallader 2013, J Food Sci -- odour detection thresholds for vanillin
-         and MALTOL measured IN SOYMILK against water. THIS CORRECTS THE CLAIM MADE EARLIER TODAY that
-         no paired threshold exists in a plant matrix; at least one does. Maltol is one of the five
-         compounds registered today.
+      13. Suppavorasatit, Lee & Cadwallader, J Food Sci. **FETCHED, READ, AND IT DOES NOT DO WHAT I
+         SAID IT DID.** I claimed it measured vanillin and maltol thresholds in soymilk against water,
+         and told the owner that this corrected the earlier flat claim that no paired plant-matrix
+         threshold exists. Reading it shows the two legs are **control soymilk against DEAMIDATED
+         soymilk** -- both about 3 % soy protein, so there is no water leg at all. The settling
+         sentence: the test samples were made "by adding the same volume (1 mL) of various flavor
+         compound solutions into 14 mL of either DSM or CSM". "Odourless distilled water" appears only
+         as the flavour stock's solvent, a nose cleanser and the intensity-scale anchor. The only
+         non-soymilk comparator is a CITATION to skim-milk values. **So the original claim stands: the
+         corpus holds no paired water/plant-matrix threshold, and `matrix_oav`'s refusal is not
+         liftable by anything read so far.** The correction I issued was wrong and this is the retraction.
       14. Wright, Carunchia Whetstine, Miracle & Drake 2006, J Food Sci
          10.1111/j.1365-2621.2006.tb08887.x -- dimethyl trisulfide at 0.07 ppt in water against
          0.80 ppb in whey protein isolate, a shift of about 11 000x. A dairy protein, but the second
