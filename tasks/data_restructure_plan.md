@@ -1846,6 +1846,83 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       **A DEFECT FOUND ON THE WAY.** B4's generator overwrote its own BLIND prediction file on every run,
       date and all, so any later wave could have replaced a pre-registration with a post-hoc prediction
       undetectably. It now refuses without `--refreeze`.
+- [ ] **FETCH-16 (2026-09-09). The download list the six searches produced, checked against all 233
+      PDFs on this disk.** Two of the papers the searches returned were ALREADY HERE and already
+      dossiered (Cammerer & Kroh 1995 as `Cammerer1994.pdf`; Martins & van Boekel 2003 as
+      `martins2003c.pdf`) -- see the correction in SEARCH-SIX item 2. Sixteen are not here and are
+      worth fetching, in this order.
+      **(A) Closes a gap the model DECLARES open.**
+      1. Sun, Liang, Qian, Chen & Zhao 2025, Food Hydrocolloids, "Interactions of pea protein with
+         three sulfur-containing flavor compounds". THE largest single omission on this list: the
+         matrix table carries 21 binding rows and NOT ONE is a thiol or a disulfide, while the sulfur
+         lane is the model's central output. Pea protein against dimethyl disulfide, dimethyl
+         trisulfide and lenthionine, with binding constants. 25/31/37 C only, so it inherits wave
+         B26's temperature limit, but it is the sulfur lane crossed with a plant matrix and nothing
+         in the corpus is.
+      2. Aspelund & Wilson 1983, JAFC 10.1021/jf00117a019, soy protein adsorption at 80/90/100 C with
+         HEATS of adsorption. B26 says outright that nothing licenses a plant binding constant above
+         37 C; this is that licence or its refusal.
+      3. Crowther, Wilson & Glatz 1980, J Food Process Eng. Same laboratory as (2): adsorption
+         coefficients at 60 and 70 C on soy heated to 100 and 121 C. A heat of adsorption IS a
+         temperature dependence, which is exactly the quantity B26 lacks.
+      4. Guo, He, Wu, Zeng & Chen 2019, Food Chem., SPI preheated at 80/90/100 C with Klotz constants.
+         Speaks to `matrix_sites.py`'s own note that the sites are charged once at the start of the
+         cook and their change with heating is not modelled.
+      5. Selke, Frankel & Neff 1978, Lipids 10.1007/BF02533622 -- nonanal at 4.0 % and 11 % of the
+         cleavage products of two oleate hydroperoxide pairs. The panel REFUSES nonanal for want of
+         exactly this branch fraction.
+      6. Frankel, Neff & Selke 1981, Lipids 10.1007/BF02534950 -- the same for pure linoleate
+         hydroperoxides, naming 2-pentylfuran as a unique product. The panel's other refused compound.
+      **(B) The pre-registered oxidant wave (B27), including its counter-evidence.**
+      7. Luo, Tian, Li, Zhang, Bi et al. 2024, Compr Rev Food Sci Food Saf 10.1111/1541-4337.13389 --
+         states as a general rule the mechanism B27 rests on: anaerobic thiol oxidation uses
+         dicarbonyls as the oxidant. A second source for a mechanism that had one.
+      8. Zheng, van Dongen, Bakker, Miro Estruch et al. 2022, Nutrients 10.3390/nu14071364 --
+         COUNTER-EVIDENCE, and wanted BEFORE the wave runs: disulfide formation from glutathione was
+         LIMITED over six hours with three dicarbonyls. At 37 C, against a wave about 140 C, so it may
+         not transfer -- which is precisely the kind of risk a pre-registration must name.
+      9. Wondrak, Cervantes-Laurean, Roberts et al. 2002, Biochem Pharmacol -- second-order rate
+         constants for alpha-dicarbonyl + thiol scavengers in water, with the pseudo-first-order
+         method. The adduct branch, not the redox branch, but it is a real constant.
+      10. Zheng, Bakker, Estruch, Widjaja et al. 2023, Food Chemistry: X -- a second-order constant for
+         methylglyoxal + N-acetylcysteine and the reverse constant for the adduct.
+      11. Coukos & Moellering 2021, ACS Chem Biol 10.1021/acschembio.1c00553 (PMC8609522, OPEN ACCESS)
+         -- kinetics of methylglyoxal with model thiols at 25 C. Free; take it.
+      **(C) Named gaps elsewhere.**
+      12. Gokmen, Kocadagli, Goncuoglu & Mogol 2012, Food Chem., "Model studies on the role of
+         5-hydroxymethyl-2-furfural in acrylamide formation from asparagine" -- the ONLY hit in either
+         HMF search that measures DEGRADATION in an amino-acid pot rather than formation. Two dossiers
+         already cite it. Same group as `kocadagli2016`, `goncuoglu2016` and `hamzalioglu2026`.
+      13. Suppavorasatit, Lee & Cadwallader 2013, J Food Sci -- odour detection thresholds for vanillin
+         and MALTOL measured IN SOYMILK against water. THIS CORRECTS THE CLAIM MADE EARLIER TODAY that
+         no paired threshold exists in a plant matrix; at least one does. Maltol is one of the five
+         compounds registered today.
+      14. Wright, Carunchia Whetstine, Miracle & Drake 2006, J Food Sci
+         10.1111/j.1365-2621.2006.tb08887.x -- dimethyl trisulfide at 0.07 ppt in water against
+         0.80 ppb in whey protein isolate, a shift of about 11 000x. A dairy protein, but the second
+         genuine paired-threshold dataset anywhere in reach and on a SULFUR compound.
+      15. Xu, Bi, Zhang, Pan, Lao, Shen & Wu 2022, Food Science (China)
+         10.7506/spkx1002-6630-20220613-128 -- pea protein isolate binding to beef aroma substances
+         WITH heat treatment, by the same group whose 2022 paper wave B26 just shipped.
+      16. Mohsin, Schmitt, Kanzler, Epping, Flemig et al. 2018, Food Chem. -- glucose/ALANINE
+         melanoidins, elemental analysis over 130 to 200 C, C/N 13 to 21. A different amine, but a
+         real temperature series across the cooking window, and the melanoidin question is now open as
+         a spread rather than closed.
+      Also worth having if cheap: Zhou, Boatright & Johnson 2002, J Food Sci
+      10.1111/j.1365-2621.2002.tb11374.x (2-pentylpyridine binding to soy at 4, 25 and 74 C -- and
+      2-pentylpyridine got a registry id today); Utz, Spaccasassi, Kreissl, Stark, Tanger et al. 2022,
+      Foods 11:412 (sensomics decoding of pea protein ISOLATES, where Trikusuma gives one beverage).
+      **DELIBERATELY NOT FETCHED, with the reason, so nobody re-proposes them.**
+      Xiao 2023 and Gao 2023 are density functional theory: standing owner policy, no DFT numbers.
+      Zhu 2023 (kafirin), Zhou 2022 (ozonolysis), Jakob 2024 and He 2020 (biorefinery catalysis),
+      Moon 2026 (allulose storage), Wang 2023 (black garlic), Tang 2019 (hydrothermal liquefaction)
+      and the three soil-melanoidin papers are the wrong system. Sessa 1977, Trindler 2022,
+      Reineccius 2023, Kinsella 1982/1989 and Chen 2025 are reviews whose primary sources are mostly
+      already here. Xiang 2023, Nedele 2022, Li 2023, Tran 2025 and Mehle 2020 all compute odour
+      activity in a plant matrix using WATER thresholds, so they cannot lift the `matrix_oav` refusal,
+      which is the thing that needed lifting; Mehle in particular cannot help the `moisture_aw` axis
+      either, because that axis is blocked for a structural reason (only the trunk lane carries a
+      water-activity term) and not for want of claims.
 - [ ] **SEARCH-SIX (2026-09-09). The six gaps a literature search could still close, and the reason the
       rest cannot.** Asked after the reading audit emptied `data/articles/`, so this list is what remains
       once 228 papers on disk have all been read. Each carries a prior that a usable number exists.
