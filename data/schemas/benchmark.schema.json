@@ -26,8 +26,12 @@
         ],
         "properties": {
           "concentration_mM": {
-            "type": "number",
-            "minimum": 0
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "null means the SOURCE PRINTS NO MOLARITY and cannot -- a protein isolate has no single molar mass (Trikusuma 2020, 2026-09-09). It is not a synonym for zero and not a licence to omit a number the paper gives: a null must be accompanied by a concentration_note saying what the paper does print. It reads as an uncharged precursor, and the key is kept rather than deleted so the gap stays visible."
+          },
+          "concentration_note": {
+            "type": "string"
           }
         },
         "additionalProperties": true
@@ -53,9 +57,13 @@
           "maximum": 14
         },
         "water_activity": {
-          "type": "number",
+          "type": ["number", "null"],
           "minimum": 0,
-          "maximum": 1
+          "maximum": 1,
+          "description": "null means the source reports no water activity, no moisture content and no dry-matter figure, so no value can be derived from it either. A null must be accompanied by a water_activity_note. Downstream, a null a_w means the acrylamide lane's a_w window check reports 'not stated' instead of comparing against a guess."
+        },
+        "water_activity_note": {
+          "type": "string"
         },
         "time_min": {
           "type": "number",
