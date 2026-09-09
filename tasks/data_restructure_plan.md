@@ -1703,6 +1703,14 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       >= 6.9e-3 /min), rows = Deng 2022's two 120 C series (RF = 1: within-series ratios, not levels) + Pan 2025's
       rates as the second laboratory; methional -> MeSH and the disulfide as before. Ask Deng's group for the
       100 / 130 C methional rows (Table 2 has no methional row despite its title).
+- [ ] **B24 (pre-registered and RUN 2026-09-09; DO NOT SHIP): 2-acetyl-1-pyrroline from proline.** Fed 1-pyrroline +
+      MGO rows fit (+0.18 / +0.30 dex; k_pyrl_ap 2.7e-3 L/(mmol min) at 100 C, 3x Hofmann's bilinear lower bound);
+      proline + MGO ladder -1.29 / +0.13 / +1.16 dex (model linear in MGO, source saturating); expt 3 (excess
+      pyrroline) +2.1 dex; apparent cascade barrier 591 vs Chan's 60 kJ/mol (the trunk's MGO supply). Steps at zero,
+      target refused. 2-acetyl-1-pyrroline added to the registry (threshold null: Buttery 1983 not on disk).
+      NEXT (B24b, to pre-register): hydroxyacetone (acetol) as a trunk species made by the Strecker step, the
+      1-pyrroline + acetol -> HOP -> ATHP branch on Hofmann Tables 4 and 5 (pH ladders), a 1-pyrroline loss
+      sized on expt 3, Table 9's AP : ATHP switch as the within-study shape.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

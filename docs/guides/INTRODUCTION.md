@@ -131,12 +131,13 @@ model does not make.*
 
 ![What is asked for, and what the model can name](../assets/thiol_sink/23_coverage_of_declared_targets.png)
 
-*The question a plant-based flavour scientist asks first. Of the twenty odorants the repository
-declares as the targets of a meaty plant-based flavour, the model names six with a rate; two more it
-reaches by a cited route with no rate; twelve it cannot name at all. Most of the twelve are the
-Strecker aldehydes and the pyrazines beyond the first, whose per-amino-acid rates no paper on disk
-prints; the rest are sulfur heterocycles with no measured route. Of the six off-notes it names
-three.*
+*The question a plant-based flavour scientist asks first. Of the twenty-one odorants the repository
+declares as the targets of a meaty plant-based flavour, the model names six with a rate; one more it
+reaches by a cited route with no rate; three (methional, dimethyl disulfide, 2-acetyl-1-pyrroline)
+had a step pre-registered, run and refused on 9 September 2026 and stay in the network at zero;
+eleven it cannot name at all, mostly the Strecker aldehydes and the pyrazines beyond the first, whose
+per-amino-acid rates no paper on disk prints, and sulfur heterocycles with no measured route. Of the
+six off-notes it names three.*
 
 ![Hexanal on the panel](../assets/thiol_sink/24_fat_path_hexanal.png)
 
@@ -182,6 +183,7 @@ in order, in plain words.
 | the protein's bound lysine made a reactant on the sugar path (glycation to the bound Amadori compound, then CML and CEL), from one laboratory's rates on casein in water and barriers declared from measured steps | isolates are mostly bound lysine, and the safety markers the panel asks for are made on it | the rates reproduce within a factor of 1.5 where the data are firm; the level of CML in the source's own pot within its printed range; a milk laboratory's constant within 20 % at 120 °C; a dry seed's a fiftyfold away | yes, on a pot with a stated protein loading, with the availability band as its interval |
 | the glyoxal supply in water given its own route, from the Amadori compound to glucosone at a milk laboratory's rate, replacing the dry-glass entry | the pyrazine step's caveat: a sugar pot made a ten-thousandth of the glyoxal a laboratory measures | a glucose and amine pot now holds glyoxal within a factor of two of the measurement at 100 °C and inside the measured range at 130 °C; browning unchanged; the pyrazine total still three decades low, so that miss is not the glyoxal | yes, with the transfer band on every glyoxal and pyrazine answer |
 | methionine's chain added to the sugar path: methional as its Strecker aldehyde on the free dicarbonyls, then methanethiol and the disulfide, fitted on one laboratory's rates in a fruit-sugar pot | methional is the cooked-potato note at the top of the desirable list and no lane named it | the fit ran the methionine-to-glycine ratio to its ceiling and was still four decades short in that pot, while a second laboratory's methionine and glucose pot came out two decades too high: methional does not form from the free dicarbonyls; the second laboratory's fed Amadori compound says it forms from methionine's own Amadori compound | no; the finding names the next structure |
+| 2-acetyl-1-pyrroline from proline: the Strecker of proline to 1-pyrroline and its acylation by methylglyoxal, on one laboratory's fed yields | the bread-crust and popcorn note of extruded and baked products | the fed acylation fits within a factor of two; the chain from proline rises a thousandfold with the methylglyoxal charge where the source rises threefold, because the competing tetrahydropyridine branch and the pyrroline's own loss are not written | no; the acylation constant is kept in the record for the next structure |
 
 ## 7. The one problem that matters most: where the thiols go
 

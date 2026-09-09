@@ -188,6 +188,18 @@ compounds:
   aliases: []
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_acetyl_1_pyrroline
+  display_name: 2-Acetyl-1-pyrroline
+  kind: molecule
+  smiles: CC(=O)C1=NCCC1
+  inchikey: DQBQWWSFRPLIAX-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C1=NCCC1
+  inchi: InChI=1S/C6H9NO/c1-5(8)6-3-2-4-7-6/h2-4H2,1H3
+  cas: 85213-22-5
+  aliases: []
+  seen_in:
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
 - id: 2_acetylfuran
   display_name: 2-Acetylfuran
   kind: molecule

@@ -330,6 +330,10 @@ def operative_parameters(fitted):
     from .parameters_methionine import METHIONINE_PARAMETERS
 
     parameters.update(METHIONINE_PARAMETERS)
+    # B24 (2026-09-09): 2-acetyl-1-pyrroline from proline, trunk-only, inert without proline in the charge.
+    from .parameters_proline import PROLINE_PARAMETERS
+
+    parameters.update(PROLINE_PARAMETERS)
     return parameters
 
 

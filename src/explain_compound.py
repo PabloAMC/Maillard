@@ -331,12 +331,15 @@ def explain(compound: str) -> Dict[str, Any]:
     lane = _TARGET_LANE.get(species_key, TRUNK)
     # B22 (2026-09-09): a species whose wave was pre-registered, run and REFUSED stays in the network at
     # zero; `explain` says so instead of listing steps that carry no flux as if they were routes.
-    from src.kinetic_core.engine import METHIONINE_TARGET_KEYS
+    from src.kinetic_core.engine import METHIONINE_TARGET_KEYS, PROLINE_TARGET_KEYS
     from src.kinetic_core.parameters_methionine import METHIONINE_NOT_SHIPPED_REASON, METHIONINE_SHIPPED
+    from src.kinetic_core.parameters_proline import PROLINE_NOT_SHIPPED_REASON, PROLINE_SHIPPED
 
-    if species_key in METHIONINE_TARGET_KEYS and not METHIONINE_SHIPPED:
+    unshipped = ((METHIONINE_NOT_SHIPPED_REASON if species_key in METHIONINE_TARGET_KEYS and not METHIONINE_SHIPPED else None)
+                 or (PROLINE_NOT_SHIPPED_REASON if species_key in PROLINE_TARGET_KEYS and not PROLINE_SHIPPED else None))
+    if unshipped:
         payload.update({"answered": False, "state": "refused", "species_key": species_key, "lane": lane,
-                        "reason": METHIONINE_NOT_SHIPPED_REASON, "routes": [], "label": _species_label(species_key)})
+                        "reason": unshipped, "routes": [], "label": _species_label(species_key)})
         payload["hypotheses"] = _hypotheses_for(species_key, str(compound))
         return payload
     payload.update({"species_key": species_key, "lane": lane, "answered": True,

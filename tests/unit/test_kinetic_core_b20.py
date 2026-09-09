@@ -34,7 +34,7 @@ def test_the_five_steps_run_on_the_trunk_only_and_balance():
 
 def test_the_species_are_appended_last_and_are_trunk_only():
     keys = list(species.SPECIES_KEYS)
-    assert keys[-8:-4] == ["LYSP", "FLP", "CML", "CEL"]      # B22 appended MET / MTAL / MSH / DMDS after them
+    assert keys[-11:-7] == ["LYSP", "FLP", "CML", "CEL"]      # then B22 MET / MTAL / MSH / DMDS and B24 PRO / PYRL / AP
     assert {"LYSP", "FLP", "CML", "CEL"} <= set(species.TRUNK_ONLY_KEYS)
     from src.kinetic_core.species_sulfur import SULFUR_STATE_KEYS
     assert not {"LYSP", "FLP", "CML", "CEL"} & set(SULFUR_STATE_KEYS)

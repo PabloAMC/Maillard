@@ -1,0 +1,210 @@
+{
+  "artifact": "kinetic_core_b24_fit_report",
+  "wave": "B24 -- 2-acetyl-1-pyrroline from proline",
+  "generated_on": "2026-09-09",
+  "generated_by": "scripts/generators/generate_kinetic_core_b24_fit.py",
+  "git": {
+    "head": "489f9e5ff6cde8825b234c3f8fe3dda7113dfd2f"
+  },
+  "prereg": "results/validation/kinetic_core_b24_prereg.md",
+  "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendment 33",
+  "objective": {
+    "form": "five 30-minute yields (Hofmann 1998b Tables 7 and 9, 100 C, pH 7), log10 residuals; two log10 constants at 100 C free, barriers declared",
+    "n_rows": 5,
+    "n_free_parameters": 2,
+    "final_cost": 53.69283076855413,
+    "best_start": 0,
+    "reduced_chi2": 17.89761025618471
+  },
+  "rows": [
+    {
+      "id": "hof_t7_e1_pyrl2_mgo10",
+      "initial": {
+        "PYRL": 2.0,
+        "MGO": 10.0
+      },
+      "basis": "PYRL",
+      "target_mol_pct": 28.7,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Hofmann & Schieberle 1998b, JAFC 46:2270, Tables 7 and 9 (0.5 M phosphate pH 7, 100 C, 30 min); hofmann1998b_extraction.md sec. 4",
+      "kind": "fed_yield_mol_pct",
+      "predicted_mol_pct": 43.01926385613362,
+      "residual_dex": 0.17578107775179794
+    },
+    {
+      "id": "hof_t7_e2_pyrl2_mgo2",
+      "initial": {
+        "PYRL": 2.0,
+        "MGO": 2.0
+      },
+      "basis": "PYRL",
+      "target_mol_pct": 5.3,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Hofmann & Schieberle 1998b, JAFC 46:2270, Tables 7 and 9 (0.5 M phosphate pH 7, 100 C, 30 min); hofmann1998b_extraction.md sec. 4",
+      "kind": "fed_yield_mol_pct",
+      "predicted_mol_pct": 10.538400527695499,
+      "residual_dex": 0.2984988309618871
+    },
+    {
+      "id": "hof_t9_pro400_mgo4",
+      "initial": {
+        "PRO": 400.0,
+        "Gly": 400.0,
+        "MGO": 4.0
+      },
+      "basis": "PRO",
+      "target_mol_pct": 0.0058,
+      "sigma_log": 0.25,
+      "decisive": true,
+      "anchor": "Hofmann & Schieberle 1998b, JAFC 46:2270, Tables 7 and 9 (0.5 M phosphate pH 7, 100 C, 30 min); hofmann1998b_extraction.md sec. 4",
+      "kind": "fed_yield_mol_pct",
+      "predicted_mol_pct": 0.0002990821077435079,
+      "residual_dex": -1.2876375609418154
+    },
+    {
+      "id": "hof_t9_pro400_mgo40",
+      "initial": {
+        "PRO": 400.0,
+        "Gly": 400.0,
+        "MGO": 40.0
+      },
+      "basis": "PRO",
+      "target_mol_pct": 0.0125,
+      "sigma_log": 0.25,
+      "decisive": true,
+      "anchor": "Hofmann & Schieberle 1998b, JAFC 46:2270, Tables 7 and 9 (0.5 M phosphate pH 7, 100 C, 30 min); hofmann1998b_extraction.md sec. 4",
+      "kind": "fed_yield_mol_pct",
+      "predicted_mol_pct": 0.01678348240368557,
+      "residual_dex": 0.1279720645687032
+    },
+    {
+      "id": "hof_t9_pro400_mgo400",
+      "initial": {
+        "PRO": 400.0,
+        "Gly": 400.0,
+        "MGO": 400.0
+      },
+      "basis": "PRO",
+      "target_mol_pct": 0.0179,
+      "sigma_log": 0.25,
+      "decisive": true,
+      "anchor": "Hofmann & Schieberle 1998b, JAFC 46:2270, Tables 7 and 9 (0.5 M phosphate pH 7, 100 C, 30 min); hofmann1998b_extraction.md sec. 4",
+      "kind": "fed_yield_mol_pct",
+      "predicted_mol_pct": 0.259370989203641,
+      "residual_dex": 1.1610683673935975
+    }
+  ],
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        -3.05,
+        -4.5
+      ],
+      "x": [
+        -2.561776899512073,
+        -6.620784383439292
+      ],
+      "cost": 53.69283076855413,
+      "nfev": 19,
+      "status": 3,
+      "residuals_dex": {
+        "hof_t7_e1_pyrl2_mgo10": 0.17578107775179794,
+        "hof_t7_e2_pyrl2_mgo2": 0.2984988309618871,
+        "hof_t9_pro400_mgo4": -1.2876375609418154,
+        "hof_t9_pro400_mgo40": 0.1279720645687032,
+        "hof_t9_pro400_mgo400": 1.1610683673935975
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        -3.0313478397970854,
+        -4.721572460762401
+      ],
+      "x": [
+        -2.5647766252097846,
+        -6.618532094593378
+      ],
+      "cost": 53.69331833365575,
+      "nfev": 18,
+      "status": 3,
+      "residuals_dex": {
+        "hof_t7_e1_pyrl2_mgo10": 0.17364974644544015,
+        "hof_t7_e2_pyrl2_mgo2": 0.29584723659696466,
+        "hof_t9_pro400_mgo4": -1.2881640154921128,
+        "hof_t9_pro400_mgo40": 0.12881458245290417,
+        "hof_t9_pro400_mgo400": 1.1631785221473574
+      }
+    }
+  ],
+  "frozen_parameters": {
+    "proline": {
+      "log10_k_pyrl_ap_100C": -2.561776899512073,
+      "log10_k_mgo_pro_100C": -6.620784383439292
+    }
+  },
+  "bands_log10": {
+    "lower": {
+      "log10_k_pyrl_ap_100C": -6.05,
+      "log10_k_mgo_pro_100C": -7.5
+    },
+    "upper": {
+      "log10_k_pyrl_ap_100C": -0.04999999999999982,
+      "log10_k_mgo_pro_100C": -1.5
+    }
+  },
+  "laplace": {
+    "sigma": {
+      "log10_k_pyrl_ap_100C": 0.5318726961374628,
+      "log10_k_mgo_pro_100C": 0.6640557235578926
+    },
+    "chi2_reduced": 17.89761025618471,
+    "dof": 3,
+    "identified": {
+      "log10_k_pyrl_ap_100C": true,
+      "log10_k_mgo_pro_100C": true
+    },
+    "on_bound": {
+      "log10_k_pyrl_ap_100C": false,
+      "log10_k_mgo_pro_100C": false
+    }
+  },
+  "diagnostics": {
+    "hofmann_expt3_pyrl10_mgo2": {
+      "model_mol_pct_of_mgo": 41.20352475017937,
+      "printed_mol_pct_of_mgo": 0.33,
+      "dex": 2.096420429409518
+    },
+    "apparent_ea_glucose_proline_pot": {
+      "model_kj_mol": 590.9136781651249,
+      "chan1994b_kj_mol": 60.2,
+      "temps_c": [
+        75.0,
+        95.0,
+        115.0
+      ],
+      "rates_mmol_l_min": {
+        "75.0": 3.245169635011469e-14,
+        "95.0": 1.391272041424167e-08,
+        "115.0": 4.1487375092459776e-05
+      }
+    },
+    "b18_pot_120C_60min_mmol_l": {
+      "without_proline": {
+        "PZ": 0.0039408679882191955,
+        "MPZ": 0.0013122728896776295,
+        "DMP": 0.000440038930046033,
+        "AP": 0.0
+      },
+      "with_proline_10mM": {
+        "PZ": 0.004716589203245308,
+        "MPZ": 0.00156804659531206,
+        "DMP": 0.0005251018369705268,
+        "AP": 0.0007519772332432507
+      }
+    }
+  }
+}

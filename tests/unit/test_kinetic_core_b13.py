@@ -17,7 +17,7 @@ def _pot(name="pot", precursors=None, t_c=120.0, minutes=60.0):
 
 def test_the_five_steps_run_on_the_trunk_only_and_balance():
     assert set(network.DICARBONYL_REACTION_KEYS) == {"r_glc_g", "r_g_go", "r_odg_da", "r_go_sink", "r_da_sink"}
-    assert len(network.TRUNK_REACTIONS) == len(network.REACTIONS) + 5 + 5 + 5 + 1 + 4   # + B18's five pyrazine steps + B20's five glycation steps + B21's aqueous glucosone step + B22's four methionine steps
+    assert len(network.TRUNK_REACTIONS) == len(network.REACTIONS) + 5 + 5 + 5 + 1 + 4 + 2   # + B18 pyrazine 5, B20 glycation 5, B21 glucosone 1, B22 methionine 4, B24 proline 2
     assert not set(network.DICARBONYL_REACTION_KEYS) & set(network.REACTION_KEYS)
     network.validate_balance(network.TRUNK_REACTIONS)          # raises on an unbalanced step
     from src.kinetic_core.sulfur import FULL_REACTION_KEYS
@@ -26,7 +26,7 @@ def test_the_five_steps_run_on_the_trunk_only_and_balance():
 
 def test_the_species_are_appended_after_every_existing_one():
     keys = list(species.SPECIES_KEYS)
-    assert keys[-16:-13] == ["G", "GO", "DA"]      # B18 appended PZ / DMP / MPZ / AKG / AKM after them; B20 LYSP / FLP / CML / CEL; B22 MET / MTAL / MSH / DMDS
+    assert keys[-19:-16] == ["G", "GO", "DA"]      # B18 appended PZ / DMP / MPZ / AKG / AKM after them; B20 LYSP / FLP / CML / CEL; B22 MET / MTAL / MSH / DMDS; B24 PRO / PYRL / AP
     assert species.INDEX["HMF"] < species.INDEX["G"]
 
 

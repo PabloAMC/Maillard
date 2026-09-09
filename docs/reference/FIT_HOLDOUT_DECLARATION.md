@@ -1319,3 +1319,14 @@ ran.
    stay at zero, the targets are refused by name, the record stands. Methionine as a precursor is
    charged as glycine for the Amadori chemistry, declared.
 
+## Amendment 33 — 2026-09-09 (Wave B24, 2-acetyl-1-pyrroline from proline; refused)
+
+1. **FIVE NEW FIT ROWS; TWO NEW COORDINATES.** Hofmann & Schieberle 1998b Table 7 (fed 1-pyrroline +
+   methylglyoxal, two ratios) and Table 9 (proline + methylglyoxal, three ratios), 30-minute yields at
+   100 °C and pH 7, as FIT rows (fed-intermediate yields fit); the acylation and the proline Strecker
+   constants free, barriers declared (Chan & Reineccius 1994's apparent 60.2; B18's 114.9).
+2. **WHAT IS VALIDATED.** Hofmann's experiment 3 and Chan's apparent barrier: reported.
+3. **VERDICT.** DO NOT SHIP: the fed rows fit, the proline chain does not (its yield saturates in
+   the source and not in the arm, for want of the tetrahydropyridine branch and a pyrroline loss). Steps
+   at zero, target refused by name, record kept; 2-acetyl-1-pyrroline enters the registry.
+

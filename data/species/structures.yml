@@ -49,6 +49,10 @@ species:
   MTAL:  {kind: molecule, registry_id: methional}
   MSH:   {kind: molecule, registry_id: methanethiol, note: "the sugar path's methanethiol pool; the sulfur lane's MESH is the same molecule from thiamine"}
   DMDS:  {kind: molecule, registry_id: dimethyl_disulfide}
+  # ---- B24 (2026-09-09): proline's odorant ----
+  PRO:   {kind: molecule, smiles: "OC(=O)C1CCCN1", note: "L-proline"}
+  PYRL:  {kind: molecule, smiles: "C1CC=NC1", note: "1-pyrroline"}
+  AP:    {kind: molecule, registry_id: 2_acetyl_1_pyrroline}
   # ---- sulfur: pentose + cysteine (+ thiamine) ----
   PENT:  {kind: molecule, smiles: "OCC(O)C(O)C(O)C=O", note: "aldopentose, open chain; ribose and xylose share it"}
   Cys:   {kind: molecule, smiles: "NC(CS)C(=O)O"}

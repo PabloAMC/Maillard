@@ -197,7 +197,7 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
 
 ## 5b. Coverage of the declared targets (counted 2026-09-08)
 
-The repository declares twenty desirable odorants and six off-notes for meaty plant-based flavour
+The repository declares twenty-one desirable odorants (2-acetyl-1-pyrroline joined on 2026-09-09) and six off-notes for meaty plant-based flavour
 (`data/species/desirable_targets.yml`, `off_flavour_targets.yml`). The engine can name six of the
 twenty and three of the six. The table is the honest map; "rule" is the hypothesis layer, "wave" the
 fitted step. The figure is generated from `maillard explain` over the two lists
@@ -214,7 +214,7 @@ fitted step. The figure is generated from `maillard explain` over the two lists
 | **methional, 3-/2-methylbutanal, 2-methylpropanal, phenylacetaldehyde** | Strecker of Met, Leu, Ile, Val, Phe | Chan & Reineccius 1994 (barriers only, 80–90 kJ/mol in water), Cremer & Eichner 2000 (barriers 115–124, dry), Balagiannis 2009 (yield fractions, Ile : Leu 1.6), Pan 2025 (methional rate, unit inferred), Deng 2022 (levels) — all read; none prints a per-amino-acid rate in water | R07 (generic) | B22 for methionine, refused: the free-dicarbonyl Strecker at a ratio to glycine misses Pan 2025 by four decades and Deng 2022 by two the other way | the rate rows for the other amino acids do not exist in the literature read; for methionine the next structure is the methionine Amadori compound's own decay, on Deng 2022's two series (`kinetic_core_b22_prereg.md` section 6) |
 | **dimethyl disulfide, dimethyl trisulfide** | methional → methanethiol → oxidation | Zhang 2024 (MeSH from thiamine only) | no | none | methional → MeSH rate; MeSH oxidation with the same oxidant pool B17 named |
 | **2-ethyl-3,5-dimethylpyrazine, 2,3-dimethylpyrazine, trimethylpyrazine** | aminoketone + Strecker aldehyde | Leahy 1989 (distributions), Yu 2018 (Ea) | R28 (homo pairs only) | B18 makes the parent, 2,5- and methyl- only | the aldehyde-addition step; amino-acid identity |
-| **2-acetyl-1-pyrroline, 2-acetyltetrahydropyridine** | proline / ornithine + dicarbonyl | none | no | none | everything: the bread and crust note of extruded products |
+| **2-acetyl-1-pyrroline, 2-acetyltetrahydropyridine** | proline / ornithine + dicarbonyl | Hofmann 1998b (fed yields), Chan 1994 (apparent barrier) | R? none | B24, refused: the fed acylation fits, the chain from proline saturates in the source and not in the arm | hydroxyacetone as a species, the tetrahydropyridine branch, a pyrroline loss (`kinetic_core_b24_prereg.md` section 6) |
 | **2-pentyl- and 2-hexyl-4-methylthiazole, alkylthiophenes, 2-pentylpyridine** | fatty aldehyde + H2S / NH3 (lipid–Maillard) | Farmer 1990, Whitfield 1988, Mottram 2002, Elmore 1997, Zamora 2020, Zhou 2000 (areas and levels, no rates) | R33 to R39 (routes with controls; `explain` answers "no rate, not no route") | none | rates or yields from aldehyde + cysteine or ammonia pots; every isolate carries 1-3 % lipid into the cook, and 6-15 g/L phospholipid halves the thiols (the sink W7a must read) |
 | 2-methylthiophene, 4,5-dihydro-2-methylthiazole | thiamine / cysteine thermolysis | Hofmann 1998 Table 8 (thiamine) | partly | sulfur lane has thiamine | the thiazoline family |
 | HEMF | pentose + alanine | Blank 1997 (levels) | no | none (alanine and pentose never share a lane) | alanine on the sulfur lane |

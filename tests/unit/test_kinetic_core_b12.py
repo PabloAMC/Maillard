@@ -61,7 +61,10 @@ def test_apply_scales_only_the_named_steps():
     from src.kinetic_core.parameters_methionine import METHIONINE_PH_STEPS
     for key in METHIONINE_PH_STEPS:
         assert out[key].k_ref == pytest.approx(base[key].k_ref * pyrazine_ph_factor(5.5))
-    untouched = [k for k in base if k not in tc.AW_STEPS + tc.PH_STEPS + PYRAZINE_PH_STEPS + METHIONINE_PH_STEPS]
+    from src.kinetic_core.parameters_proline import PROLINE_PH_STEPS
+    for key in PROLINE_PH_STEPS:
+        assert out[key].k_ref == pytest.approx(base[key].k_ref * pyrazine_ph_factor(5.5))
+    untouched = [k for k in base if k not in tc.AW_STEPS + tc.PH_STEPS + PYRAZINE_PH_STEPS + METHIONINE_PH_STEPS + PROLINE_PH_STEPS]
     assert untouched
     for key in untouched:
         assert out[key] == base[key], key

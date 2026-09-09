@@ -440,14 +440,30 @@ METHIONINE_REACTIONS: Tuple[Reaction, ...] = (
         "oxidant is not tracked on this lane; Xu 2010). FITTED on Pan 2025's disulfide rates.",
     ),
 )
+#: Build Wave B24 (2026-09-09): 2-ACETYL-1-PYRROLINE FROM PROLINE, TRUNK-ONLY. Pre-registered in
+#: kinetic_core_b24_prereg.md; constants in parameters_proline.py.
+PROLINE_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_mgo_pro", {"MGO": 1, "PRO": 1}, {"PYRL": 1, "FRAG_C": 4}, "k_mgo_pro",
+        "B24. methylglyoxal + proline -> 1-pyrroline + hydroxyacetone + CO2 (Strecker of a secondary amine; the "
+        "ring nitrogen stays in the pyrroline; hydroxyacetone and CO2 to the fragment pool). FITTED on Hofmann "
+        "& Schieberle 1998b Table 9 (proline + methylglyoxal at three ratios).",
+    ),
+    Reaction(
+        "r_pyrl_ap", {"PYRL": 1, "MGO": 1}, {"AP": 1, "FRAG_C": 1}, "k_pyrl_ap",
+        "B24. 1-pyrroline + methylglyoxal -> 2-acetyl-1-pyrroline + CO2 (acylation at C-2, oxidation in air; "
+        "net). FITTED on Hofmann & Schieberle 1998b Table 7's fed-pyrroline yields.",
+    ),
+)
 TRUNK_REACTIONS: Tuple[Reaction, ...] = (REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS + GLYCATION_REACTIONS
-                                         + AQUEOUS_GLYOXAL_REACTIONS + METHIONINE_REACTIONS)
+                                         + AQUEOUS_GLYOXAL_REACTIONS + METHIONINE_REACTIONS + PROLINE_REACTIONS)
 TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
 DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
 PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)
 GLYCATION_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in GLYCATION_REACTIONS)
 AQUEOUS_GLYOXAL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in AQUEOUS_GLYOXAL_REACTIONS)
 METHIONINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in METHIONINE_REACTIONS)
+PROLINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PROLINE_REACTIONS)
 
 #: Build Wave B7's eleven steps, named so a report can say which part of the
 #: trunk is B1's and which is B7's without counting.

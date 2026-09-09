@@ -217,13 +217,22 @@ SPECIES: Tuple[Species, ...] = (
     Species("MSH", "methanethiol made from methional (the sugar path's pool; the sulfur lane's MESH is thiamine's)", 1, 0,
             "product", True, "B22. The retro-Michael release from methional; acrolein to the fragment pool.", sulfur=1),
     Species("DMDS", "dimethyl disulfide", 2, 0, "product", True,
-            "B22. Two methanethiols on an APPARENT constant: the sugar path tracks no oxidant.", sulfur=2),)
-
+            "B22. Two methanethiols on an APPARENT constant: the sugar path tracks no oxidant.", sulfur=2),
+    # ---- B24 (2026-09-09): 2-ACETYL-1-PYRROLINE FROM PROLINE, trunk-only. The Strecker of proline on
+    # methylglyoxal gives 1-pyrroline (the ring nitrogen stays), and methylglyoxal acylates it.
+    # Pre-registered in results/validation/kinetic_core_b24_prereg.md; constants in parameters_proline.py.
+    Species("PRO", "L-proline (the pyrroline source)", 5, 1, "reactant", True,
+            "B24. Charged from the spec; also charged, declared, as glycine for the Amadori chemistry."),
+    Species("PYRL", "1-pyrroline", 4, 1, "intermediate", True,
+            "B24. Proline's Strecker product; fed by Hofmann & Schieberle 1998b."),
+    Species("AP", "2-acetyl-1-pyrroline", 6, 1, "product", True,
+            "B24. The acylation of 1-pyrroline by methylglyoxal (Hofmann & Schieberle 1998b, Table 7)."),
+)
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
 TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL",
-                                     "MET", "MTAL", "MSH", "DMDS")
+                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 

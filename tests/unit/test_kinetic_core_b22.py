@@ -23,7 +23,7 @@ def _pot(precursors, t_c=120.0, minutes=10.0, ph=6.2):
 def test_the_four_steps_exist_balance_and_are_trunk_only():
     assert set(network.METHIONINE_REACTION_KEYS) == {"r_go_met", "r_mgo_met", "r_mtal_msh", "r_msh_dmds"}
     network.validate_balance(network.TRUNK_REACTIONS)
-    assert list(species.SPECIES_KEYS)[-4:] == ["MET", "MTAL", "MSH", "DMDS"]
+    assert list(species.SPECIES_KEYS)[-7:-3] == ["MET", "MTAL", "MSH", "DMDS"]   # B24 appended PRO / PYRL / AP after them
     from src.kinetic_core.species_sulfur import SULFUR_STATE_KEYS
     assert not {"MET", "MTAL", "MSH", "DMDS"} & set(SULFUR_STATE_KEYS)
 

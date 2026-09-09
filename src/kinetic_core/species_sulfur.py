@@ -427,6 +427,10 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "MTAL": 104.17,   # methional
     "MSH": 48.11,     # methanethiol (the trunk's pool)
     "DMDS": 94.20,    # dimethyl disulfide
+    # B24 (2026-09-09): proline's odorant
+    "PRO": 115.13,    # L-proline
+    "PYRL": 69.11,    # 1-pyrroline
+    "AP": 111.14,     # 2-acetyl-1-pyrroline
     "PENT": 150.13,   # C5H10O5, ribose = xylose
     "ARP": 221.21,    # C8H15NO6, 1-deoxy-xylulosyl-alanine
     "Cys": 121.16,    # C3H7NO2S

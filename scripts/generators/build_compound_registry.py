@@ -112,6 +112,7 @@ SPECIES_IDS = {
     "2,3-Dimethylpyrazine": "2_3_dimethylpyrazine",
     "2,5-Dimethylpyrazine": "2_5_dimethylpyrazine",
     "2-Ethyl-3,5-dimethylpyrazine": "2_ethyl_3_5_dimethylpyrazine",
+    "2-Acetyl-1-pyrroline": "2_acetyl_1_pyrroline",    # B24 (2026-09-09)
     "Dimethyl disulfide": "dimethyl_disulfide",
     "Bis(2-methyl-3-furyl) disulfide": "bis_2_methyl_3_furyl_disulfide",
     "Dimethyl trisulfide": "dimethyl_trisulfide",

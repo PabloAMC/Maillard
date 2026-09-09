@@ -759,6 +759,17 @@ UNTRACKED_TITRATABLE: Mapping[str, str] = {
     "MSH": (
         "methanethiol from methional (pKa 10.3), micromolar: left out like the sulfur lane's MESH."
     ),
+    # B24 (2026-09-09): proline's odorant, trunk-only, zero without proline in the charge.
+    "PRO": (
+        "L-proline (secondary amine pKa 10.6, carboxyl 2.0): left out like the trunk's other amines; charged "
+        "at hundreds of mmol/L only in Hofmann's fed pots, where the phosphate buffer holds the pH."
+    ),
+    "PYRL": (
+        "1-pyrroline (an imine, pKa about 7), micromolar in every pot: left out."
+    ),
+    "AP": (
+        "2-acetyl-1-pyrroline (an imine, weakly basic), sub-micromolar: left out."
+    ),
 }
 
 

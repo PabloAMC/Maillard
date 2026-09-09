@@ -259,6 +259,11 @@ def apply(
 
             if all(key in out for key in METHIONINE_PH_STEPS):
                 out = _scaled(out, METHIONINE_PH_STEPS, fp)
+            # B24: the proline Strecker step, likewise.
+            from .parameters_proline import PROLINE_PH_STEPS
+
+            if all(key in out for key in PROLINE_PH_STEPS):
+                out = _scaled(out, PROLINE_PH_STEPS, fp)
         warnings = list(warnings) + notes
     return out, warnings
 
