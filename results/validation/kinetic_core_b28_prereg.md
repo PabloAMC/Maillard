@@ -108,3 +108,47 @@ Ship rule: **SHIP if T1, T2 and T5 hold.** T3 and T4 are reported.
    not the same as being right, and the wave claims only the first.
 4. Nobody will later mistake the 15 % for two agreeing measurements, because trap (a) is written
    into the parameter's own note and not only here. **90 %.**
+
+## 6. Outcome (2026-09-09, run the same evening) — SHIP, with one half of it withdrawn during the run
+
+**Verdict SHIP.** T1, T2 and T5 held; T3 and T4 are reported. Three refused rows lifted, not seven,
+and the four that did not lift are the more instructive half.
+
+| | before | after |
+|---|---:|---:|
+| refused panel rows | 25 | **22** |
+| nonanal, Trikusuma pea beverage | REFUSED | **7.37 against 24 measured, 3.3x** |
+| nonanal, Li 2026 soy/wheat extrudate | REFUSED | **23.9 against 72.7, 3.0x** |
+| nonanal, Liu 2023 pea isolate | REFUSED | **0.109 against 0.802, 7.3x** |
+| 2-pentylfuran, four rows | REFUSED | **still REFUSED, for a different reason** |
+
+**Prediction 3 was wrong, and wrong in the good direction.** It said at 70 % that the newly answered
+rows would miss by more than a decade, because these are neat hydroperoxides pyrolysed in an injector
+port and the panel's rows are foods. Nonanal lands at 3.0x, 3.3x and 7.3x on three matrices from
+three laboratories. That is better than most of what this model does, on a share measured in 1978 and
+an anchor this wave declared rather than measured. It should not be over-read: three rows, and the
+anchor's band spans a factor of five.
+
+**What was withdrawn, and why it is the useful part.** The first run lifted 2-pentylfuran too, and
+answered it **six to nine orders of magnitude** below measurement. The branch fraction is not the
+problem; it is measured and it is right. The problem is that on the matrix-only path **the hexanal
+these rows are scored against does not come from the lipid lane at all** — the lane's own hexanal in
+the same pot is about 1e5 smaller — so an alkylfuran hung off the lane's hexanal is nearly zero. By
+this layer's own rule a degenerate value is the absence of a prediction dressed as one, so the
+refusal was restored with a sharper reason that now names what would lift it: a lipid charge these
+matrices can actually integrate, which is the same gap the hexanal rows already carry.
+
+**The ship rule was missing the test that catches this, and now has it.** A rule that counts refusals
+falling would have called the first run a success. T2 now also requires that every row lifted out of
+REFUSED be answered within three decades of its measurement. A lift into a near-zero is a regression
+in honesty, not a gain in coverage.
+
+**T3, the first external check this lane's fit source has ever had.** Frankel 1981 against Frankel
+1989, renormalised onto the five products both quantify, agrees **within 1.6x on every one**. It is
+not a two-point Arrhenius: 210 °C neat against 180 °C in hexane, a 25 °C column start against a
+−65 °C cryotrap, packed against capillary. Temperature and light-end loss are confounded and these
+two papers cannot separate them. Prediction 2 said at 60 % that at least two products would be worse
+than 2x; none was.
+
+**Both traps held.** The two 15 % nonanal figures are recorded in the species note as one measurement
+republished, and the two slates are never pooled as printed.

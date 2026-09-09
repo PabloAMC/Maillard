@@ -296,6 +296,11 @@ TARGET_ALIASES: Mapping[str, str] = {
     "methyl octanoate": "ME_OCTANOATE",
     "methyl 9-oxononanoate": "ME_9_OXONONANOATE",
     "methyl 13-oxo-9,11-tridecadienoate": "ME_13_OXO_TRIDECADIENOATE",
+    # -- B28, 2026-09-09: the alkylfuran the lane refused until Frankel 1981 --
+    "2-pentylfuran": "PENTYLFURAN",
+    "2-pentyl furan": "PENTYLFURAN",
+    "2-pentylfuran (pentyl furan)": "PENTYLFURAN",
+    "pentylfuran": "PENTYLFURAN",
     "methanethiol": "MESH",
     "2-acetylthiazole": "ACTZ",
     "norfuraneol": "NF",
@@ -376,17 +381,39 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
         "lane emitted a number for it; this lane refuses. See "
         "parameters_lipid.PROHIBITED_DERIVATIONS."
     ),
+    # WAVE B28 (2026-09-09) TRIED TO LIFT THESE TWO AND PUT THEM BACK, WITH A
+    # SHARPER REASON. The old reason was "no branch fraction ... is measured
+    # anywhere in the fit corpus", and that is no longer true: Frankel, Neff &
+    # Selke 1981 Table III measures it, in the same laboratory and by the same
+    # injector-port method as the slate this lane is fitted on, and the wave
+    # ships it as PENTYLFURAN_PER_HEXANAL -- a ratio, so none of 1981's own
+    # denominator travels with it. Un-refusing it produced predictions six to
+    # nine ORDERS OF MAGNITUDE below measurement, and the cause is not the branch
+    # fraction. It is that on the matrix-only path the hexanal these rows are
+    # scored against does not come from the lipid lane at all: the lane's own
+    # hexanal in the same pot is about 1e5 times smaller. An alkylfuran hung off
+    # the lane's hexanal is therefore ~0, and A NEAR-ZERO ANSWER IS NOT AN
+    # ANSWER -- this layer's own rule is that emitting a degenerate value is the
+    # absence of a prediction dressed as one. So the refusal stands and now says
+    # what would lift it.
     "2-pentylfuran": (
-        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
-        "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The retired "
-        "screening lane's shipped 0.08 had no source. Refused rather than invented."
+        "The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke "
+        "1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here "
+        "as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured "
+        "nowhere in the fit corpus') is retired. It is still refused for a "
+        "different and sharper reason: this row's hexanal is not produced by "
+        "the lipid lane. On the matrix-only path the lane's own hexanal is "
+        "about 1e5 below the hexanal the row is scored against, so an "
+        "alkylfuran hung off it is ~0, and a near-zero answer is the absence of "
+        "a prediction rather than a prediction. WHAT WOULD LIFT IT: a route "
+        "that puts this row's hexanal and its alkylfuran on the same lane -- "
+        "i.e. a lipid charge for these matrices that the lane can actually "
+        "integrate, which is the same gap the hexanal rows already carry."
     ),
     "2-pentyl furan": (
-        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
-        "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The retired "
-        "screening lane's shipped 0.08 had no source. Refused rather than invented."
+        "See '2-pentylfuran': the branch fraction is measured as of 2026-09-09 "
+        "and the refusal now rests on the lane that would carry it, not on the "
+        "missing number."
     ),
     "propanal": (
         "The lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
@@ -521,6 +548,7 @@ LANE_DEFAULT_TARGETS: Mapping[str, Tuple[str, ...]] = {
         "methyl octanoate",
         "methyl 9-oxononanoate",
         "methyl 13-oxo-9,11-tridecadienoate",
+        "nonanal",                # wave B28: answered, on a declared anchor
     ),
 }
 
@@ -1063,7 +1091,8 @@ def declare_envelope(
 
     # --- the lipid lane's own refusals ------------------------------------
     if LIPID in lanes:
-        from .parameters_lipid import LIPID_CARRIERS, oleate_fraction
+        from .parameters_lipid import (
+            LIPID_CARRIERS, OLEATE_MOLAR_ANCHOR_BAND, OLEATE_MOLAR_ANCHOR_CENTRE, oleate_fraction)
 
         if not carriers:
             reasons.append(
@@ -1081,17 +1110,34 @@ def declare_envelope(
                 if c in LIPID_CARRIERS
             )
             if oleate > 0.0:
-                reasons.append(
-                    "UNREPRESENTED TARGETS: nonanal -- the lipid lane exists "
-                    "and nonanal is a species in it, but its ONLY parent is the "
-                    "OLEATE hydroperoxide pool and the oleate -> nonanal branch "
-                    f"fraction is measured NOWHERE in the fit corpus. This "
-                    f"matrix is {100.0 * oleate:.0f} % oleate by fatty-acid "
-                    "share, so the pool is not zero. Frankel 1989 fed linoleate "
-                    "only and nonanal appears in no table, figure or sentence "
-                    "of it -- that ABSENCE is a declared hold-out, and honouring "
-                    "it means refusing here rather than carrying the FAST "
-                    "lane's unsourced 'nonanal 0.15' forward."
+                # WAVE B28 (2026-09-09). This branch used to REFUSE, on the
+                # ground that "the oleate -> nonanal branch fraction is measured
+                # NOWHERE in the fit corpus". It is measured now (Frankel 1981
+                # Table II), so the refusal has become a WARNING -- and the
+                # warning is not decoration. The measured quantity is a SHARE of
+                # a peak-area slate; turning it into an absolute needs a molar
+                # anchor that no source supplies for oleate, so the answer rests
+                # on a declared assumption with a wide band. Anyone reading a
+                # nonanal number out of this lane must see that in the same
+                # breath as the number.
+                warnings.append(
+                    "NONANAL RESTS ON A DECLARED ANCHOR, NOT A MEASURED YIELD. "
+                    f"This matrix is {100.0 * oleate:.0f} % oleate by fatty-acid "
+                    "share. The oleate -> nonanal SHARE is measured -- 15 % of "
+                    "the slate (Selke 1978, republished by Frankel 1981) and "
+                    "10 % (Frankel 1981's own photosensitized column, the only "
+                    "independent determination). But Frankel 1981 prints PEAK "
+                    "AREAS: no internal standard, no response factors, no "
+                    "replicates. No absolute yield from an oleate hydroperoxide "
+                    "exists anywhere in the corpus, so the absolute here assumes "
+                    "the named-product molar yield per oleate hydroperoxide is "
+                    f"{OLEATE_MOLAR_ANCHOR_CENTRE:g} times the measured one per "
+                    "LINOLEATE hydroperoxide, banded "
+                    f"{OLEATE_MOLAR_ANCHOR_BAND[0]:g} to "
+                    f"{OLEATE_MOLAR_ANCHOR_BAND[1]:g}. Read the interval, not "
+                    "the point. Frankel 1989's silence on nonanal remains a "
+                    "declared hold-out and is still honoured: nonanal from a "
+                    "LINOLEATE feed is exactly zero, by construction."
                 )
     if lipid_targets and LIPID not in lanes and not lane_reasons:
         reasons.append(

@@ -40,9 +40,11 @@ WHAT IS *NOT* HERE, AND WHY THAT IS THE POINT
     anywhere in the fit corpus -- so a request for absolute nonanal in a real
     (oleate-bearing) matrix is REFUSED rather than answered with the shipped
     FAST-lane 0.15.
-  * **2-pentylfuran and 1-hexanol are NOT species.** No measured branch
-    fraction exists for the alkylfuran route, and no aldehyde-reduction step is
-    measured anywhere in the corpus. They stay on the engine's
+  * **1-hexanol is NOT a species.** No aldehyde-reduction step is measured
+    anywhere in the corpus and in a thermally processed extrudate the reductant
+    pool is not even identified. (2-pentylfuran WAS in this sentence until wave
+    B28; Frankel 1981 measures it and it is now ``LIPID_B28_PRODUCTS``.) It
+    stays on the engine's
     unrepresented-compound list with sharper reasons.
   * **2-nonenal and methyl 12-oxo-10-dodecenoate are carried as NAMED
     CO-PRODUCTS with no quantitation.** Frankel's introduction names them as the
@@ -135,13 +137,22 @@ LIPID_PRODUCTS: Tuple[Species, ...] = (
 # ---------------------------------------------------------------------------
 
 LIPID_STRUCTURAL: Tuple[Species, ...] = (
-    Species("NONANAL", "nonanal", 9, 0, "product", False,
-            "STRUCTURAL ZERO from linoleate. Frankel 1989 fed pure methyl "
-            "linoleate hydroperoxides and nonanal appears in no table, figure "
-            "or sentence -- the declared HOLD-OUT negative test. It has exactly "
-            "one incoming edge in this network, from LOOH_OL, whose branch "
-            "fraction is unmeasured. So: exactly 0.0 from a linoleate feed, and "
-            "REFUSED in an oleate-bearing matrix."),
+    Species("NONANAL", "nonanal", 9, 0, "product", True,
+            "STRUCTURAL ZERO from linoleate, AND MEASURED FROM OLEATE SINCE "
+            "WAVE B28. Frankel 1989 fed pure methyl linoleate hydroperoxides "
+            "and nonanal appears in no table, figure or sentence -- the "
+            "declared HOLD-OUT negative test, which still holds and is still "
+            "enforced structurally: exactly 0.0 from a linoleate feed. What "
+            "changed is the other end. It has exactly one incoming edge, from "
+            "LOOH_OL, and that edge's SHARE is now measured: 15 % of the "
+            "oleate slate from the autoxidised pool and 10 % from the "
+            "photosensitized one (Frankel 1981 Table II). READ THE TWO "
+            "CAREFULLY -- they are not a replicate pair. The 15 % column is "
+            "footnoted 'Data from ref. 21', which is Selke 1978, so it is that "
+            "single measurement republished; the 10 % is the only independent "
+            "determination in the corpus. And a SHARE is not a yield: see "
+            "OLEATE_MOLAR_ANCHOR in parameters_lipid.py for the declared "
+            "assumption an ABSOLUTE nonanal answer still rests on."),
     Species("LIPID_FRAG_C", "unassigned lipid fragment carbon", 1, 0, "pool", False,
             "B1's FRAG_C discipline, applied here. Every scission has two "
             "halves and Frankel's slate quantifies only some of them (the Hock "
@@ -171,8 +182,33 @@ NAMED_UNQUANTIFIED_COPRODUCTS: Mapping[str, str] = {
 }
 
 
+# ---------------------------------------------------------------------------
+# 3b. WAVE B28 (2026-09-09) -- the two products the lane used to REFUSE
+# ---------------------------------------------------------------------------
+# These are deliberately NOT in LIPID_PRODUCTS. That tuple is Frankel & Gardner
+# 1989's six measured columns and the B6 fitter asserts its input array is
+# exactly (3 systems x those 6); it is the firewall that keeps the hold-out
+# tocopherol columns out of the objective, and B28 does not touch the B6 fit.
+# The slate below comes from a DIFFERENT paper, a different substrate and a
+# different injector temperature, and it is carried separately for that reason.
+LIPID_B28_PRODUCTS: Tuple[Species, ...] = (
+    Species("PENTYLFURAN", "2-pentylfuran", 9, 0, "product", True,
+            "WAVE B28. The alkylfuran the engine refused: 'not in Frankel's "
+            "six-product slate and measured nowhere else in the corpus'. "
+            "Frankel, Neff & Selke 1981 Table III measures it from pure "
+            "linoleate hydroperoxides -- 2.4 % of the whole chromatogram from "
+            "the autoxidised pool, 0.6 % from the photosensitized pool. It is "
+            "carried as a RATIO TO HEXANAL (0.160 and 0.0353) because that is "
+            "denominator-free: 1981's shares are fractions of a ~20-peak "
+            "chromatogram and 1989's are fractions of six peaks, so the two "
+            "must never be pooled as printed. Its origin is UNASSIGNED in the "
+            "source ('?' in the Origin column), so no position gets a "
+            "structural zero for it and none is invented."),
+)
+
+
 LIPID_SPECIES: Tuple[Species, ...] = (
-    LIPID_PRECURSORS + LIPID_PRODUCTS + LIPID_STRUCTURAL
+    LIPID_PRECURSORS + LIPID_PRODUCTS + LIPID_STRUCTURAL + LIPID_B28_PRODUCTS
 )
 
 LIPID_KEYS: Tuple[str, ...] = tuple(s.key for s in LIPID_SPECIES)
@@ -233,6 +269,7 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "ME_9_OXONONANOATE": 186.25,   # C10H18O3
     "ME_13_OXO_TRIDECADIENOATE": 238.32,  # C14H22O3
     "NONANAL": 142.24,      # C9H18O
+    "PENTYLFURAN": 138.21,  # C9H14O, wave B28
 }
 
 
@@ -259,6 +296,7 @@ B4_COMPOUND_KEY: Mapping[str, str] = {
     "HEXANAL": "hexanal",
     "NONANAL": "nonanal",
     "DECADIENAL": "tt_2_4_decadienal",
+    "PENTYLFURAN": "2_pentylfuran",   # wave B28; B4 already carried the structure
 }
 
 #: Products with NO B4 structural record, and therefore no threshold, no

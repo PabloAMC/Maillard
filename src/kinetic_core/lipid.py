@@ -67,8 +67,12 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 from .parameters_lipid import (
     COVALENT_SINK,
+    FRANKEL1981_OLEATE_SLATE,
     FRANKEL_SYSTEM_GEOMETRY,
     FRANKEL_ZERO_ADDITIVE,
+    OLEATE_MOLAR_ANCHOR_BAND,
+    OLEATE_MOLAR_ANCHOR_CENTRE,
+    PENTYLFURAN_PER_HEXANAL,
     K_HEXANAL_SCHROEN,
     K_LOOH_DECOMP_ANCHOR,
     LIPID_CARRIERS,
@@ -93,6 +97,12 @@ from .species_lipid import (
 #: The FIT column that plays the role of "an autoxidised lipid": Frankel's
 #: Table 1 is the autoxidation mixture, which is what Schroen's emulsion makes.
 REFERENCE_AUTOXIDATION_SYSTEM = "mixed_ct_tt_9_13"
+
+#: WAVE B28. The 1981 columns that play the same role: an AUTOXIDISED pool, which
+#: is what a real food lipid makes. The photosensitized columns are carried in the
+#: registry as the second, independent determination and are not the reference.
+REFERENCE_LINOLEATE_1981_COLUMN = "linoleate_autoxidised"
+REFERENCE_OLEATE_1981_COLUMN = "oleate_autoxidised"
 
 #: moles hexanal per mole hydroperoxide consumed. A RATIO of two constants from
 #: the SAME table of the SAME paper, so the hand-fitting offset and the (equal)
@@ -493,6 +503,21 @@ def integrate_lipid(
         for product, yield_per_looh in yields.items():
             state[product] += decomposed_linoleate * yield_per_looh
 
+        # ---- WAVE B28 -------------------------------------------------------
+        # 2-pentylfuran, from the linoleate flux, as a RATIO TO HEXANAL. The
+        # ratio is denominator-free (both are in Frankel 1981's own column), so
+        # nothing of 1981's ~20-peak denominator is imported with it.
+        b28 = _b28_yields(yields)
+        state["PENTYLFURAN"] += decomposed_linoleate * b28["PENTYLFURAN"]
+        # Nonanal, from the oleate flux. ONLY nonanal: the 1981 oleate slate
+        # also names methyl octanoate and methyl 9-oxononanoate, which are
+        # already fitted products of the LINOLEATE slate, and pouring an oleate
+        # contribution into them would move numbers this wave promised not to
+        # touch. The rest of the oleate carbon keeps going to LIPID_FRAG_C, as
+        # it did before, and the slate is carried in the registry for a later
+        # wave that is allowed to move those rows.
+        state["NONANAL"] += consumed_oleate * b28["NONANAL_PER_OLEATE_LOOH"]
+
         # CONSUMPTION. Structurally present, inert by ruling; the assertion is
         # the guard that keeps "inert" a fact rather than a comment.
         sink = _covalent_consumption(state, float(duration))
@@ -508,6 +533,10 @@ def integrate_lipid(
         named_carbon = sum(
             decomposed_linoleate * yields[p] * _carbon_of(p) for p in yields
         )
+        # WAVE B28's two products are named carbon too, or the balance would
+        # close by creating them out of the fragment pool.
+        named_carbon += decomposed_linoleate * b28["PENTYLFURAN"] * _carbon_of("PENTYLFURAN")
+        named_carbon += consumed_oleate * b28["NONANAL_PER_OLEATE_LOOH"] * _carbon_of("NONANAL")
         looh_carbon = (decomposed_linoleate + consumed_oleate) * _carbon_of("LOOH_13_ct")
         state["LIPID_FRAG_C"] += looh_carbon - named_carbon
 
@@ -606,6 +635,29 @@ def slate_yields(
     return {product: value * scale for product, value in flux.items()}
 
 
+def _b28_yields(linoleate_yields: Mapping[str, float]) -> Dict[str, float]:
+    """
+    Wave B28's two products, in moles per mole of hydroperoxide consumed.
+
+    ``PENTYLFURAN`` is hexanal's own yield times the measured 2-pentylfuran /
+    hexanal ratio from the autoxidised column -- the same column the lane already
+    takes as its reference, and a ratio so that no denominator travels with it.
+
+    ``NONANAL_PER_OLEATE_LOOH`` is a SHARE times a DECLARED ANCHOR and it is not
+    a measurement. Frankel 1981 prints peak areas; no absolute yield from an
+    oleate hydroperoxide exists anywhere in the corpus. The anchor assumes the
+    named-product molar yield per oleate hydroperoxide equals the measured one
+    per linoleate hydroperoxide, scaled by a band centred well below 1 because a
+    monoene's hydroperoxide has no bis-allylic hydrogen and decomposes less
+    productively. Every absolute nonanal answer carries that band and a warning.
+    """
+    ratio = PENTYLFURAN_PER_HEXANAL[REFERENCE_LINOLEATE_1981_COLUMN]
+    pentylfuran = float(linoleate_yields.get("HEXANAL", 0.0)) * ratio
+    named_total = sum(linoleate_yields.values()) * OLEATE_MOLAR_ANCHOR_CENTRE
+    share = FRANKEL1981_OLEATE_SLATE[REFERENCE_OLEATE_1981_COLUMN]["NONANAL"] / 100.0
+    return {"PENTYLFURAN": pentylfuran, "NONANAL_PER_OLEATE_LOOH": share * named_total}
+
+
 def _carbon_of(key: str) -> int:
     for species in LIPID_SPECIES:
         if species.key == key:
@@ -671,10 +723,20 @@ def validate_lipid_structure(branch: Optional[BranchModel] = None) -> Dict[str, 
             "falsifies the declared Frankel negative test by construction."
         )
     findings["nonanal"] = (
-        "STRUCTURAL ZERO from every linoleate pool. Its only parent is "
-        "LOOH_OL, whose branch fraction is unmeasured, so it is answered as "
-        "exactly 0.0 for a linoleate feed and REFUSED for an oleate-bearing "
-        "matrix."
+        "STRUCTURAL ZERO from every linoleate pool -- unchanged, and still "
+        "enforced by construction: exactly 0.0 for a linoleate feed, which is "
+        "the declared Frankel negative test. WAVE B28 changed the other end. "
+        "Its only parent is LOOH_OL, and that edge's SHARE is now measured "
+        "(Frankel 1981 Table II). An oleate-bearing matrix is therefore ANSWERED "
+        "rather than refused -- but on a DECLARED MOLAR ANCHOR with a band, "
+        "because the source prints peak areas and no absolute oleate yield "
+        "exists in the corpus. The answer carries that band and says so."
+    )
+    findings["pentylfuran"] = (
+        "WAVE B28. Measured by Frankel 1981 Table III and shipped as a ratio to "
+        "hexanal, so no denominator travels with it. Its PARENT is unknown: the "
+        "source's Origin column reads '?' and its own Results say the origin is "
+        "not well established, so no position gets a structural zero for it."
     )
     if branch is not None:
         findings["simplex_sums"] = {
