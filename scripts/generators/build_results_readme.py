@@ -118,6 +118,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "results/validation/literature_backlog.*": "Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`).",
     "results/validation/matrix_family_coverage.*": "Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`).",
     "results/validation/matrix_family_next_action.*": "Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`).",
+    "results/validation/matrix_family_priority_ranking.*": "The seven matrix families ranked by scope priority, impact and how closable the gap is, each with its primary blocker and the next action (`generate_matrix_family_priority_ranking.py`). Written for the first time on 2026-09-09: its generator was in the repository and had never been run, so the ranking existed only as code.",
     "results/validation/mycoprotein_reference.*": "Bounded priors for the mycoprotein matrix (`src/mycoprotein_reference.py`).",
     # ---- literature ledgers
     "results/literature": "Regenerable literature ledgers (which paper is wired where; mined citation candidates). Read by the citation gate and the literature-side builders.",

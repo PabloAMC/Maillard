@@ -1846,6 +1846,39 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       **A DEFECT FOUND ON THE WAY.** B4's generator overwrote its own BLIND prediction file on every run,
       date and all, so any later wave could have replaced a pre-registration with a post-hoc prediction
       undetectably. It now refuses without `--refreeze`.
+- [ ] **SEARCH-SIX (2026-09-09). The six gaps a literature search could still close, and the reason the
+      rest cannot.** Asked after the reading audit emptied `data/articles/`, so this list is what remains
+      once 228 papers on disk have all been read. Each carries a prior that a usable number exists.
+      The prior matters: a search that comes back empty is only informative if the odds were stated first.
+      1. **Do alpha-dicarbonyls oxidise thiols to disulfides in water, and has anyone measured a rate
+         constant or a barrier for it?** The step wave B27 needs. Whitfield 1999 proposes the mechanism,
+         offers two supporting negatives and measures nothing, so the wave would fit a constant with no
+         independent anchor. Likely physical-organic, not food. **25 %.**
+      2. **Has the elemental C/N of glucose-glycine melanoidins been measured at more than one
+         temperature?** Mundt 2004's 7.64 +/- 0.21 is one point at 70 C, and the authors borrow the
+         temperature direction from refs. 7 and 14 (Cammerer & Kroh 1995; Martins & van Boekel 2003)
+         rather than measuring it. Those two citations are where to look. **65 %**, because the direction
+         is already attributed to a named source.
+      3. **What is the first-order loss rate of HMF in aqueous sugar-amine systems between 50 and
+         150 C?** `k5a` declared gap G2 names this exact window as empty, and Goncuoglu Tas 2016 now
+         sizes the consequence at 23 000x. **55 %.**
+      4. **What branch fraction of linoleate hydroperoxide decomposition goes to 2-pentylfuran, and of
+         oleate hydroperoxide to nonanal?** The panel refuses both targets outright (wishlist sec. 3)
+         for want of a measured branch fraction, not for want of a lane. **45 %.**
+      5. **Have paired odour thresholds been measured for one compound in water and in a plant protein
+         isolate?** Hong 2020's soy paste is the only such dataset in the corpus. A second would decide
+         whether Amendment 6's ~25 % reversible cap -- which wave B26 has now broken on a real hold-out
+         row -- transfers to plant matrices at all. **40 %.**
+      6. **Have aroma binding constants for pea or soy protein been measured above 60 C?** B26's pea
+         constant is at 37 C, a mouth temperature, and the wave says plainly that nothing licenses it at
+         90 or 140 C. **30 %.**
+      **WHY THE REST IS NOT SEARCHABLE.** Every section-1 entry of the data wishlist asks for a
+      fed-intermediate rate at the lane's reference temperature, which is an experiment. The
+      per-amino-acid SECOND-ORDER Strecker constant in water has now had four laboratories read against
+      it and every one printed a barrier or a yield instead, so "nobody has measured it" is the likeliest
+      reading rather than "we have not found it". Hwang 1995's isotope splits live in its figures. Deng
+      2022's 100 and 130 C methional rows were not run. And the thiol sink itself is the vial experiment
+      in the introduction's section 8: about 130 vials, two temperatures, thiols and disulfides in one run.
 - [ ] **AUDIT-REMAINDER (2026-09-09). What the incorporation left as waves, each with what it needs.**
       (i) **B27, the sink's oxidant. NOW PRE-REGISTERED AND NOT RUN**
       (`results/validation/kinetic_core_b27_prereg.md`), so the declaration cannot be revised after an

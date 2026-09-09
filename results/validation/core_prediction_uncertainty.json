@@ -644,7 +644,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.6657188974110174,
+          "ci_width_log10": 0.6657605850714075,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -654,12 +654,12 @@
           "measured_ppb": 11.7,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 122.23887934831677,
-          "predicted_p5": 47.64797770289595,
-          "predicted_p50": 113.08786300337022,
-          "predicted_p95": 220.68020069655324,
-          "predicted_point": 235.9729649351512,
-          "predicted_std": 54.759597130285435,
+          "predicted_mean": 122.23598882756562,
+          "predicted_p5": 47.64304097230254,
+          "predicted_p50": 113.08682219000454,
+          "predicted_p95": 220.678518153388,
+          "predicted_point": 235.96972785838298,
+          "predicted_std": 54.75876113213499,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -3151,9 +3151,9 @@
     "generated_on": "2026-09-09",
     "git": {
       "branch": "reactions",
-      "commit": "62fe149a0c5b585554af8d2512242f5d101c986e",
-      "dirty": true,
-      "short": "62fe149a"
+      "commit": "33630be12168b51ab5766edd358698710406d266",
+      "dirty": false,
+      "short": "33630be1"
     },
     "inputs": [
       {
@@ -3230,7 +3230,7 @@
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "2e64e3a6ced769a1733018e0fe7a1d084c9939c49b8f76487d0c544026e3468f"
+        "sha256": "b59f948a0d09a01409682b6fa30a2e3cf5de0c760e3884701689b441ef466ae1"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
@@ -3242,7 +3242,7 @@
       },
       {
         "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
-        "sha256": "969d7072680549faf00c19514f0b07d060fd934ecd03ee0ac9c10b5e8fcef8e0"
+        "sha256": "43dfe0b02f27ebe94ee929d02925850a90a05b64da6b55556fd636afd7e87cbf"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
@@ -3674,7 +3674,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 212.0,
+    "wall_seconds": 209.5,
     "workers": 6
   }
 }

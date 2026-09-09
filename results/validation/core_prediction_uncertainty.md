@@ -29,7 +29,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 22.839 | 1.136 | 24.901 | 510.072 | no | 2.652 | yes (headspace) | lipid | predictive |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.665 | 1.830 | 11.018 | 64.702 | no | 1.548 | yes (headspace) | sulfur | predictive |
 | soy_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.62e+03 | 0.267 | 0.018 | 0.251 | 3.055 | no | 2.232 | yes (headspace) | lipid | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.973 | 47.648 | 113.088 | 220.680 | no | 0.666 | no (extraction) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 47.643 | 113.087 | 220.679 | no | 0.666 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.780 | 196.941 | 592.829 | no | 0.935 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.95e+03 | 1.94e+03 | 1.95e+03 | 1.95e+03 | no | 0.000606 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 7.722 | 23.335 | 65.458 | no | 0.928 | no (extraction) | acrylamide | external_holdout |
