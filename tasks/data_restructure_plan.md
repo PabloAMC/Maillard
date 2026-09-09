@@ -1517,7 +1517,18 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       Lys), soy isolate every free amino acid n.d.; free sugars (sucrose + glucose + fructose + maltose, one
       sum) 0.19 / 0.06 g/100 g DM; fat 8.51 / 1.72 %; N x 6.25 protein 81.2 / 89.2 %. Sagesser 2024:
       everything in raster figures; its total amino-acid table is Sagesser 2023 Bioresour. Technol. 390:129849
-      (Nutralys F85M, the material behind Snel 2023's binding constants) -> fetch.
+      (Nutralys F85M, the material behind Snel 2023's binding constants) -> fetch. ARRIVED 2026-09-09
+      (`Sagesser2023.pdf`, dossier `sagesser2023_extraction.md`).
+- [ ] **Fetch ledger (2026-09-09).** Arrived and dossiered tonight: Chan & Reineccius 1994 RSC chapter (on
+      disk as `chan2005.pdf`, misnamed; dossier `chan1994b_extraction.md`), Cremer & Eichner 2000
+      (`rainercremer2000.pdf`), Balagiannis 2009 (`balagiannis2009.pdf`), Desclaux 2006 (`desclaux2006.pdf`),
+      Sagesser 2023. Dropped by owner decision: Kim, Hartman & Ho 1996 (JAFC 44:3906, 2-pentylpyridine in
+      water; no source found; Kim 1998 and Zhou 2000 carry the same comparison). Optional, low value: Liu, Liu,
+      Miao, Huang & Lai 2025, J. Sci. Food Agric. 105, "Multi-response kinetic study of Maillard reaction
+      hazards in the glucose-lysine model system" (Hamzalioglu 2026 ref 54; Yu 2020 and Quan 2020 cover the
+      same pot); Winkel C., "Stability of aroma chemicals", in Rowe (ed.) Chemistry and Technology of
+      Flavours and Fragrances, Blackwell 2005, pp. 244-260 (the "Winkel chapter" of hofmann1996's flag; whether
+      it tabulates the 50 C phosphate loss rates is unconfirmed; van Seeventer 2001 is the primary data).
       DEFECT FOUND: `data/benchmarks/maillard_validation_benchmarks.md` sec. 2.3 and
       `docs/protocols/{pea,soy}_matrix_meaty_benchmark.md` attribute Lys ~7.2 / ~6.4, Cys ~0.9 / ~1.1,
       Met ~0.9 / ~1.3 g per 100 g protein and an Asn + Asp column to Gorissen 2018; none of those numbers is
@@ -1613,6 +1624,26 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       exchange) or the dimer forms during sampling; it is not the dissolved oxygen the B11 reservoir stands
       for. Together with farmer1990 / whitfield1988 above this fixes W7's next variant: an internal oxidant
       charged from the sugar side, not a bigger oxygen pool. No rate, no barrier (one time, one temperature).
+- [ ] **B19 reading log (2026-09-09, the four Parker 2013 sources + Sagesser 2023).** VERDICT: no per-amino-acid
+      second-order Strecker constant in water exists in the literature on disk; B19 cannot be pre-registered as a
+      rate fit (draft sec. 5 now says so and gives the identity-ratio form instead). chan1994b (RSC chapter, file
+      misnamed `chan2005.pdf`): glucose 1.25 M + Met/Phe/Pro/Leu 0.19 M each, phosphate pH 6-8, 75-115 C, N2,
+      AED response-normalised; barriers only: 3-methylbutanal 80.3, phenylacetaldehyde 90.0, 2-acetyl-1-pyrroline
+      60.2, 2-acetylfuran 74.1 kJ/mol (whole-cascade, no SD, no k printed). cremer2000: aw 0.52 glass, glucose 1
+      mol/kg + Ala/Val/Ile/Leu 50 mmol/kg, 80-110 C: Ea 115/115/120/124 +/- 6 kJ/mol, rates figure-only, leucine
+      mass balance closes (Leu + Fru-Leu + 3-MB = 100 %), aldehyde rate = Amadori decomposition rate in the steady
+      state. balagiannis2009 (ox-liver extract, 120-140 C): k1 glucose -> Int1 1.36e-2 /min at 130 C, Ea 137 +/- 15
+      (Martins 96.8: no overlap), Strecker step declared diffusion-controlled, yield fractions F_leu 0.0233,
+      F_ile 0.0383 -> Ile : Leu 1.6 per mole present (the one identity number that transports); 3-MB sink
+      2.7e-3 /min. desclaux2006 (4 pp.): ARP -> 1-DG 2.79e-2, -> 3-DG 5.50e-4 /min (xylose + glycine, pH 6, 100 C),
+      ratio 51 : 1 vs Martins' hexose 1.4 : 1; NOTHING on glyoxal / methylglyoxal / diacetyl -- DEFECT in
+      `parker2013_extraction.md` (ref 55 row, sec. 5) and the B19 draft's earlier row, which credited it with
+      tabulated dicarbonyl courses; those are in the Reading thesis (fetch if the dicarbonyl question is pursued).
+      sagesser2023: amino-acid table NOT in the PDF (Fig. 5 raster + supplement); true protein Nutralys F85M 68.9
+      +/- 2.6 g/100 g (vs ~80 by N x 6.25: any per-g-protein density from its supplement reads 1.2x the matrix
+      table's basis), nitrogen factors 4.8-5.7, cysteine "approx. 1.2 %" class-level -> DEFECT in
+      `sagesser2024_extraction.md` flag 2 (it does not give Nutralys lysine). Registry gaps: glyoxal,
+      methylglyoxal, 2,3-pentanedione, hydroxyacetone, the deoxyosones, 2-acetyl-1-pyrroline, the amino acids.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT
