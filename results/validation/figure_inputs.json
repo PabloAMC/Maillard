@@ -93,6 +93,7 @@
         "results/validation/kinetic_core_b17_ship_rule.json",
         "results/validation/kinetic_core_b17a_ship_rule.json",
         "results/validation/kinetic_core_b18_ship_rule.json",
+        "results/validation/kinetic_core_b28_ship_rule.json",
         "results/validation/kinetic_core_b9_fit_report.json",
         "results/validation/network_hypotheses.json",
         "scripts/generators/build_story_figures.py",
@@ -114,12 +115,14 @@
       ],
       "figures": {
         "23_coverage_of_declared_targets.png": "e7a5c1ddb6ca497a35458d21028a9dcbc85ec6abbcd6c3d58cfe16dfc2acf949",
-        "24_fat_path_hexanal.png": "6dd1a389f3ee6fb84426d97bec3130f508445be5094980052c96c93cbb936a9e",
+        "24_fat_path_hexanal.png": "fb6963e43579e046dc0d1f0b54bd046593257a054543670c40151c8fd51a3a23",
         "25_protein_matrix_layer.png": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6",
         "26_hypothesis_layer.png": "185fc901a3e6858aacc4c4d3d1ce36be310eaa49327e214856476920b1fbd085",
         "27_pyrazine_step_supply.png": "91def689a3e0d6e85fc889a39b454f4bf7c3a874531795cdb9cb223e9d62195c",
         "28_two_refused_sinks.png": "e9df171dc56dbf7da46d5afef26ecfa2a97eb335443ccd453f3ca03c98f83ec1",
-        "29_calibration_reading_ladder.png": "c9c970b470677083f7f9dfcf385c71089f03973ca2d6cec3dae418df5ae0c15d"
+        "29_calibration_reading_ladder.png": "c9c970b470677083f7f9dfcf385c71089f03973ca2d6cec3dae418df5ae0c15d",
+        "30_melanoidin_c_over_n.png": "96b73d3f8ede9cae3783d3f0573e43b323feda0769e022b81c339defa143dc42",
+        "31_lipid_slate_crosscheck.png": "ea593997664f87a27d293bb474a47feb46314ef274689b109e88c8ec79321acf"
       }
     }
   },
@@ -127,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "c202f9c81235ee6fce0cc81448a530741065944b",
-      "short": "c202f9c8",
+      "commit": "410f5f072a5dae087db04cb1fe5c0df3689e006b",
+      "short": "410f5f07",
       "branch": "reactions",
       "dirty": true
     },
@@ -168,7 +171,7 @@
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "a35439ff3c78d5b27b90fa0b0ca1333dafa75c95c624446c463377a2e3526dad"
+        "sha256": "a8bcab11d905a654ac2a92df633dac547d08447dfe63a6dadfeff24ee5991fef"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
@@ -191,6 +194,10 @@
         "sha256": "c557bfdfc10881d63a477aaa2884a4df79cad2a24363fec3b79766654f7637c3"
       },
       {
+        "path": "results/validation/kinetic_core_b28_ship_rule.json",
+        "sha256": "fb0c7c18dcee12f52fb418754932e04929d6ccd5d986fc6c80b139416486c9a7"
+      },
+      {
         "path": "results/validation/kinetic_core_b9_fit_report.json",
         "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
       },
@@ -208,7 +215,7 @@
       },
       {
         "path": "scripts/generators/build_story_figures.py",
-        "sha256": "aa63ecdff8a48be4f7d557c491080f1e4790daa0bac215f6abcacd5135db0a7c"
+        "sha256": "ad7a94579cccd98186cdf60f7cc1adb7c88f36bdcca8043e0757b44fb9c1ee34"
       },
       {
         "path": "scripts/generators/build_thiol_sink_figures.py",
@@ -220,7 +227,7 @@
       },
       {
         "path": "src/kinetic_core/lipid.py",
-        "sha256": "def3be8a29d7347c1838e0a55a93dafcbc3c9069ff49fb58824725c18f6bf542"
+        "sha256": "b928f8045aa17c3998b55d37217a0c77e123c35c985595aba71be609a6ac3296"
       },
       {
         "path": "src/kinetic_core/matrix_sites.py",
@@ -240,7 +247,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_dicarbonyl.py",
-        "sha256": "e4efa2a01b74431a8e53bd2b39c796a42b1697929cb54e5b20713dd0d6d6aaa0"
+        "sha256": "a458eaf54f34d0008a96ed78331227297ecd9fa0b1a352a79940ca0f7449d733"
       },
       {
         "path": "src/kinetic_core/parameters_furanic.py",
@@ -248,7 +255,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_lipid.py",
-        "sha256": "16a15f2f9f3a9a02b05988d02feccff88590a1ebe5353241b0fee771a6319418"
+        "sha256": "625d80b3b54556d3dffcf067b0dadbc4a0a088b138aa67307f0d7d67a0de6ada"
       },
       {
         "path": "src/kinetic_core/parameters_pyrazine.py",
@@ -260,7 +267,7 @@
       },
       {
         "path": "src/kinetic_core/species.py",
-        "sha256": "5871bbe602d9c5380fe12138a3a9f73f10ef20201583e4b3a801f806aae9c2c7"
+        "sha256": "af07edd5ad19b62882522a5dc0a3c7a98bce948784319a5762481ca6c8c44a56"
       },
       {
         "path": "src/kinetic_core/species_acrylamide.py",
@@ -372,7 +379,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/24_fat_path_hexanal.png",
-        "sha256": "6dd1a389f3ee6fb84426d97bec3130f508445be5094980052c96c93cbb936a9e"
+        "sha256": "fb6963e43579e046dc0d1f0b54bd046593257a054543670c40151c8fd51a3a23"
       },
       {
         "path": "docs/assets/thiol_sink/25_protein_matrix_layer.png",
@@ -393,6 +400,14 @@
       {
         "path": "docs/assets/thiol_sink/29_calibration_reading_ladder.png",
         "sha256": "c9c970b470677083f7f9dfcf385c71089f03973ca2d6cec3dae418df5ae0c15d"
+      },
+      {
+        "path": "docs/assets/thiol_sink/30_melanoidin_c_over_n.png",
+        "sha256": "96b73d3f8ede9cae3783d3f0573e43b323feda0769e022b81c339defa143dc42"
+      },
+      {
+        "path": "docs/assets/thiol_sink/31_lipid_slate_crosscheck.png",
+        "sha256": "ea593997664f87a27d293bb474a47feb46314ef274689b109e88c8ec79321acf"
       }
     ]
   }
