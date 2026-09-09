@@ -7,6 +7,17 @@ For what the model is and how well it does, start with
 
 ---
 
+## Reading order for a new maintainer
+
+1. [docs/guides/INTRODUCTION.md](docs/guides/INTRODUCTION.md): what the model is, how well it does, what was tried.
+2. This file: the layout, the rules, the tests and gates.
+3. [scripts/generators/WAVES.md](scripts/generators/WAVES.md): the log of every fitted wave; read it from the end, and each wave's pre-registration section 6 for its verdict.
+4. [docs/reference/FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md): which dataset fits and which validates, as amended; search it for a benchmark id.
+5. [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md) section 7: the live backlog and the reading logs. The rest of that file is the record of the September 2026 restructuring.
+6. [tasks/roadmap_for_scientists.md](tasks/roadmap_for_scientists.md): the programmes a flavour scientist would want next, with their status.
+
+Each of the three long records opens with a "how to read this document" note.
+
 ## Project layout
 
 ```

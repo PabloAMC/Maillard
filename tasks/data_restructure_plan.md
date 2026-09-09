@@ -1,6 +1,15 @@
 # Data restructure plan — `cleaning` Phase 2
 
-> Planning round, 2026-09-01. Nothing here has been executed. Companion to the Phase 1 prune
+> **How to read this document (added 2026-09-09).** It is the maintainers' working record, not a
+> guide, and it is long because nothing is deleted from it. Three parts: sections 0 to 5 are the
+> September 2026 restructuring plan and its execution log (done; kept as the record of why the
+> repository is shaped as it is); **section 7 is the live backlog**, with the reading logs from
+> every paper cluster as dated entries; section 6 and the appendices are guardrails and dispositions.
+> A newcomer needs only section 7, and within it the entries marked `- [ ]`. For what the model is
+> and how well it does, read `docs/guides/INTRODUCTION.md` instead; for how to change it,
+> `CONTRIBUTING.md`; for the fitted waves, `scripts/generators/WAVES.md`.
+
+> Planning round, 2026-09-01. The plan below was executed during September 2026 (section 4 logs). Companion to the Phase 1 prune
 > (`2dbe6a9`). Evidence comes from a full read of `data/`, `src/`, `scripts/`, `tests/`, the CI
 > gates and `AUDIT.md`; every claim below cites a path so it can be re-checked.
 

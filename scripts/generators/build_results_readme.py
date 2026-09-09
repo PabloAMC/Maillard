@@ -87,6 +87,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "results/validation/citation_verification_ledger.*": "2026-08-26 CrossRef identity sweep of every DOI; INPUT to `scripts/ci/citation_gate.py` although it lives here (it is a run record).",
     # ---- decision-support artifacts
     "results/validation/experiment_value_ranking.*": "`rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`.",
+    "results/validation/figure_inputs.json": "The records behind every figure under docs/assets/thiol_sink/ (the three builders' inputs and each PNG's hash), with a provenance block the freshness gate re-hashes: a changed scorecard, ship rule, species table or builder fails CI until the figures are rebuilt.",
     "results/validation/kinetic_core_b17a_members": "B17 variant (a) optimiser members (two starts; B16's 64 rows + the electrophile-site yield).",
     "results/validation/kinetic_core_b17a_fit_report.json": "B17 variant (a) frozen fit (64 rows, 24 free): the pot makes the thioether sink's site pool at a fitted yield per deoxyosone decayed; the measured thioether constants untouched. Read by the engine only if the B17a ship rule said SHIP (`kinetic_core_b17_prereg.md` sec. 6).",
     "results/validation/kinetic_core_b17a_laplace_covariance.json": "Laplace covariance at the frozen B17 variant (a) optimum (`generate_kinetic_core_b8_laplace.py --wave b17a`).",

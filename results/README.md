@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **396**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **397**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -52,6 +52,7 @@ Tracked files: **396**. Local-only (gitignored): scratch runs under `results/qui
 | `experiment_value_ranking.*` (2): `experiment_value_ranking.json`, `experiment_value_ranking.md` | `rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`. |
 | `family_ingestion_plan.*` (2): `family_ingestion_plan.json`, `family_ingestion_plan.md` | Ingestion order of the SLR families (`src/family_ingestion_plan.py`; alias `family-ingestion-plan`). |
 | `family_strategy_policy.*` (2): `family_strategy_policy.json`, `family_strategy_policy.md` | The family strategy: quantitative trunk vs bounded lanes (`src/family_strategy_policy.py`). |
+| `figure_inputs.json` | The records behind every figure under docs/assets/thiol_sink/ (the three builders' inputs and each PNG's hash), with a provenance block the freshness gate re-hashes: a changed scorecard, ship rule, species table or builder fails CI until the figures are rebuilt. |
 | `gap_heatmap.png` | Heat map of the experiment-value ranking (`generate_gap_heatmap.py`). |
 | `holdout_frozen/` (2 files) | Hong 2020 hold-out rows frozen before B4; read by the B4 fit generator and `parameters_matrix.py`. |
 | `key_value_trace_report.md` | Where every key numeric value in the core comes from (`scripts/trace_key_values.py`). Read by people. |

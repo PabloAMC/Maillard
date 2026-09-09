@@ -8,6 +8,10 @@ Every paper used: [sources](SOURCES.md).*
 The chemistry is known. The rates are measured in one temperature window, mostly by one laboratory
 per path. The model works where the rates were measured and fails where they were not.
 
+*With ten minutes, read sections 1, 5 and 7: the chemistry, how well the model does, and the one
+problem that decides the rest. The other sections say how the model is built, how it got here and
+what is needed next.*
+
 1. [The chemistry](#1-the-chemistry)
 2. [Where the measurements are, and what they can support](#2-where-the-measurements-are-and-what-they-can-support)
 3. [How a kinetic model works](#3-how-a-kinetic-model-works)
@@ -112,9 +116,12 @@ acrylamide both ways. That is what missing steps look like, not noise.*
 
 ![Path by path scorecard](../assets/thiol_sink/08_path_scorecard.png)
 
-*The same five paths with what we have, how each does, and what is missing. Browning is predicted;
-the small fragments come out in the wrong order in water; the meaty thiols are right only in one
-laboratory at one temperature and pH; glucose with cysteine has no route at all.*
+*The four paths counted from the records: how many papers stand behind each path's measured
+constants, how its rate constants are known, how its held-out rows score, what it refuses, and how
+its directional claims fare. The sugar path rests on measured constants (its browning hold-out is the
+first row of section 6); the thiol path has most of its constants fitted at one temperature or
+carried, and scores worst; the fat path is a fitted split from one product slate with its rate
+assumed. The rows refused for want of an identified route are the thiols from glucose.*
 
 ![Why some rows get no number](../assets/thiol_sink/22_no_number.png)
 

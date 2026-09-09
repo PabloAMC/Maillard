@@ -37,6 +37,8 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+if str(ROOT / "scripts" / "generators") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 from src import data_paths  # noqa: E402
 from src.kinetic_core import acrylamide as acr_mod, network, species, species_acrylamide, species_sulfur, sulfur as sul_mod  # noqa: E402
 from src.kinetic_core.engine import ACRYLAMIDE, SULFUR, TARGET_ALIASES, TRUNK, core_parameters  # noqa: E402
@@ -313,6 +315,12 @@ def main() -> int:
                                                  "The acrylamide path: asparagine and glucose to acrylamide and its elimination",
                                                  "12_tree_acrylamide.png", figsize=(13, 7))
     fig_summary(counts)
+    from figure_manifest import ENGINE_SOURCES, record
+
+    record("scripts/generators/build_reaction_tree.py",
+           [V / "core_panel_scores.json", V / "core_prediction_uncertainty.json", V / "kinetic_core_b9_fit_report.json",
+            V / "kinetic_core_b9_laplace_covariance.json", ROOT / "scripts" / "generators" / "build_reaction_tree.py", *ENGINE_SOURCES],
+           ["10_tree_sugar.png", "11_tree_sulfur.png", "12_tree_acrylamide.png", "13_steps_by_status.png"])
     print("wrote 3 trees + summary:", {k: dict(v) for k, v in counts.items()})
     return 0
 

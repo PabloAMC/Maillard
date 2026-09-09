@@ -411,6 +411,17 @@ def main() -> int:
         "28_sinks": fig_sink_refusals(),
         "29_calibration": fig_calibration(),
     }
+    sys.path.insert(0, str(ROOT / "scripts" / "generators"))
+    from figure_manifest import ENGINE_SOURCES, record
+
+    record("scripts/generators/build_story_figures.py",
+           [V / "core_panel_scores.json", V / "network_hypotheses.json", V / "kinetic_core_b18_ship_rule.json",
+            V / "kinetic_core_b17_ship_rule.json", V / "kinetic_core_b17a_ship_rule.json", V / "kinetic_core_b9_fit_report.json",
+            data_paths.DESIRABLE_TARGETS, data_paths.SPECIES_DIR / "off_flavour_targets.yml", data_paths.SPECIES_DIR / "protein_matrices.yml",
+            ROOT / "data" / "lit" / "reaction_rules.yml", ROOT / "docs" / "examples" / "reading_2026_ladder.yml",
+            ROOT / "scripts" / "generators" / "build_story_figures.py", *ENGINE_SOURCES],
+           ["23_coverage_of_declared_targets.png", "24_fat_path_hexanal.png", "25_protein_matrix_layer.png", "26_hypothesis_layer.png",
+            "27_pyrazine_step_supply.png", "28_two_refused_sinks.png", "29_calibration_reading_ladder.png"])
     print(json.dumps(summary, default=str)[:1500])
     return 0
 

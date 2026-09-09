@@ -1,6 +1,14 @@
 # The fit / hold-out waves are frozen
 
-> Key to the identifiers (B1..B9, the lettered audit waves, Amendment n): `docs/guides/GLOSSARY.md`, Part 3.
+> Key to the identifiers (B1..B19, the lettered audit waves, Amendment n): `docs/guides/GLOSSARY.md`, Part 3.
+>
+> **How to read this document.** The table at the bottom is a log, one row per event, oldest first;
+> read it from the end. Each wave has three files: its pre-registration
+> (`results/validation/kinetic_core_<wave>_prereg.md`, which says what would falsify it before it ran,
+> and whose section 6 carries the verdict), its generator (`generate_kinetic_core_<wave>_fit.py`,
+> frozen by hash) and its ship rule (`kinetic_core_<wave>_ship_rule.md`). The engine reads the last
+> wave whose rule said SHIP on each lane; today B9 for the thiols, B18 for the sugar path's pyrazines.
+> In plain words, the same history is the table in `docs/guides/INTRODUCTION.md`, section 6.
 
 `generate_kinetic_core_b*_{fit,holdout,reports,scorers}.py` and `probe_amine_fate_b2_4.py` produced every
 frozen parameter of the kinetic core (`results/validation/kinetic_core_b*_fit_report.json`) and every

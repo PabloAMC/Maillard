@@ -1,5 +1,15 @@
 # Fit / Hold-out Split Declaration — Kinetic-Core Rebuild (Phase 2)
 
+> **How to read this document.** It answers one question: for every dataset the model has ever seen,
+> was it used to FIT a constant or held out to VALIDATE one, and when did that change? The original
+> declaration (28 August 2026) is the body; every change since is a dated, numbered amendment appended
+> at the end, newest last (Amendment 29 at the time of writing). A dataset's current role is the
+> declaration as amended: search this file for its benchmark id or its dossier name and read the
+> latest amendment that names it. The rule that never changes: a dataset once fitted is never
+> promoted to hold-out. The two CI gates that enforce the split are `scripts/ci/fit_target_gate.py`
+> and `scripts/ci/holdout_guard.py`; the machine-readable index is
+> `results/validation/kinetic_core_b9_fit_targets.json`.
+
 **Declared: 2026-08-28, BEFORE any parameterization of the newly extracted corpus.**
 This document pre-registers the role of every dataset the rebuild may use. It was
 drafted by the Wave K3 extraction synthesis and ratified with the four orchestrator

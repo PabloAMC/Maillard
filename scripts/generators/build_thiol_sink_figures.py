@@ -340,40 +340,89 @@ def fig_funnel() -> None:
     plt.close(fig)
 
 
+def path_scorecard_rows():
+    """Per path, counted from the artifacts and the engine: papers behind the measured constants, rate
+    constants by how they are known, out-of-sample panel rows (scored, within 3x, refused), directional
+    claims (agree / evaluable). Nothing typed."""
+    import re
+    from collections import Counter
+
+    import build_reaction_tree as BRT
+    from src.kinetic_core.engine import ACRYLAMIDE, LIPID, SULFUR, TRUNK, core_parameters
+
+    pat = re.compile(r"\b([A-Z][a-zA-Z\-]+)(?: et al\.?| & (?:van |de |De )?[A-Z][a-zA-Z]+| and [A-Z][a-zA-Z]+)? ((?:19|20)\d{2})\b")
+    sc = _read(V / "core_panel_scores.json")
+    dr = _read(V / "core_directional_scores.json")
+    rows = []
+    for lane, label in ((TRUNK, "sugar + amino acid\n-> browning, furans, pyrazines"), (SULFUR, "pentose + cysteine\n-> meaty thiols"),
+                        (ACRYLAMIDE, "asparagine + glucose\n-> acrylamide"), (LIPID, "unsaturated fat\n-> aldehydes")):
+        papers = set()
+        try:
+            params = core_parameters(lane)
+        except Exception:  # noqa: BLE001 - the lipid lane is a branch model, not a parameter table
+            params = {}
+        for param in params.values():
+            if getattr(param, "evidence_class", None) in ("measured_rate", "measured_activation_energy"):
+                src = " ".join(str(getattr(param, a, "") or "") for a in ("source_anchor", "source", "dossier_anchor", "note"))
+                papers |= {f"{a} {y}" for a, y in pat.findall(src)}
+        status = Counter(BRT.constant_status(lane).values()) if params else Counter()
+        S = list(BRT.STATUS_STYLE)
+        measured = status.get(S[0], 0)
+        one_t = status.get(S[1], 0)
+        other = sum(status.values()) - measured - one_t - status.get("inert", 0)
+        oos = [c for b in sc["benchmarks"] for c in b["compounds"] if c.get("lane") == lane and not c.get("in_core_fit")]
+        within = sum(1 for c in oos if c.get("within_band"))
+        folds = sorted(float(c["fold_error"]) for c in oos if c.get("fold_error"))
+        median = folds[len(folds) // 2] if folds else None
+        refused = [r for b in sc["benchmarks"] for r in b["refused_compounds"] if r.get("lane") == lane]
+        unident = sum(1 for r in refused if r.get("unidentified_route"))
+        claims = [c for c in dr["claims"] if c.get("lane") == lane]
+        evaluable = [c for c in claims if c.get("status") in ("agree", "disagree")]
+        agree = sum(1 for c in evaluable if c["status"] == "agree")
+        rows.append({"path": label, "papers": len(papers), "measured": measured, "one_t": one_t, "other": other,
+                     "oos": len(oos), "within": within, "median": median, "refused": len(refused) - unident,
+                     "unidentified": unident, "agree": agree, "evaluable": len(evaluable), "claims": len(claims)})
+    return rows
+
+
 def fig_scorecard() -> None:
-    """The path-by-path scorecard as an image: what we have, how it does, what we lack."""
-    rows = [
-        ("sugar + amino acid\n-> brown colour", "9", "one glucose-glycine study at 3 temperatures;\nwater-activity and pH ratios",
-         "browning within 1.5x (held out); HMF 2-12x;\ncaramel furanone 50-270x off", "small dicarbonyls: constants from a\nsugar glass, wrong order in water", "#FBE9D0"),
-        ("pentose + cysteine\n-> meaty thiols", "14", "every step at 145 C from one lab's\nfed-intermediate experiments",
-         "2-7x in that lab at 145 C and pH 5;\n20-140x at pH 3 or 7; 10-500x elsewhere", "how fast a thiol is REMOVED, at more\nthan one temperature; pH on formation", "#F6D9D9"),
-        ("hexose + cysteine\n-> meaty thiols", "0", "nothing at step level", "declares 'unknown' (no route)", "the furfural / furfuryl-alcohol route;\none 168 C time series waits as its test", "#EEEEEE"),
-        ("asparagine + glucose\n-> acrylamide", "9", "formation, elimination, pH and\nwater-activity effects, one lab, 120-200 C",
-         "other labs' 180 C pots 2.5-220x (median 9x);\nextrusion in real food 10,000x", "a second laboratory's constants;\nreal-food matrices", "#FBE9D0"),
-        ("unsaturated fat\n-> aldehydes", "2", "six products and their split\nfrom one 1989 study", "cooked rows 4-34x; 40 C storage rows\nnot comparable (model starts from zero)",
-         "nonanal, 2-pentylfuran (no branch);\na storage baseline", "#FBE9D0"),
-    ]
-    cols = ["path", "papers behind\nits constants", "what we have", "how it does", "what we lack"]
-    fig, ax = plt.subplots(figsize=(12.5, 5.2))
+    """The path-by-path scorecard, counted from the artifacts (the hand-typed version was retired 2026-09-09)."""
+    rows = path_scorecard_rows()
+    cols = ["path", "papers behind its\nmeasured constants", "rate constants:\nmeasured with a barrier /\nfitted at one T / band or carried",
+            "out-of-sample panel rows:\nscored / within 3x\n(median fold)", "rows refused\n(of which: no identified route)", "directional claims:\nagree / evaluable\n(declared)"]
+    fig, ax = plt.subplots(figsize=(13.5, 4.6))
     ax.axis("off")
-    widths = [0.15, 0.09, 0.28, 0.24, 0.24]
+    widths = [0.20, 0.13, 0.20, 0.17, 0.14, 0.16]
     x0 = [sum(widths[:i]) for i in range(len(widths))]
     ax.set_xlim(0, 1)
-    ax.set_ylim(0, len(rows) + 1)
+    ax.set_ylim(0, len(rows) + 1.3)
     for i, c in enumerate(cols):
-        ax.text(x0[i] + 0.01, len(rows) + 0.5, c, fontsize=9.5, color=MUTED, va="center", fontweight="bold")
-    ax.plot([0, 1], [len(rows) + 0.1, len(rows) + 0.1], color="#1E2A2C", lw=1)
+        ax.text(x0[i] + widths[i] / 2, len(rows) + 0.65, c, fontsize=8.6, color=MUTED, va="center", ha="center", fontweight="bold")
+    ax.plot([0, 1], [len(rows) + 0.05, len(rows) + 0.05], color="#1E2A2C", lw=1)
     for r, row in enumerate(rows):
         y = len(rows) - r - 0.5
-        ax.add_patch(plt.Rectangle((0, y - 0.5), 1, 1, color=row[-1], alpha=0.55, lw=0))
-        for i, cell in enumerate(row[:-1]):
-            ax.text(x0[i] + 0.01, y, cell, fontsize=9.2 if i else 9.8, color=INK, va="center", fontweight="bold" if i == 0 else "normal",
-                    ha="center" if i == 1 else "left", transform=ax.transData if i != 1 else ax.transData)
-            if i == 1:
-                ax.texts[-1].set_x(x0[1] + widths[1] / 2)
+        share = (row["within"] / row["oos"]) if row["oos"] else None
+        fill = "#EEEEEE" if share is None else ("#D9EFE3" if share >= 0.5 else ("#FBE9D0" if share >= 0.2 else "#F6D9D9"))
+        ax.add_patch(plt.Rectangle((0, y - 0.5), 1, 1, color=fill, alpha=0.6, lw=0))
+        branch_model = (row["measured"] + row["one_t"] + row["other"]) == 0
+        med = row["median"]
+        med_text = "" if not med else (f"\n({med:.0f}x)" if med >= 10 else f"\n({med:.2g}x)")
+        cells = [
+            row["path"], ("branch model,\none product slate" if branch_model else str(row["papers"])),
+            ("n/a (a fitted split,\nrate assumed)" if branch_model else f"{row['measured']} / {row['one_t']} / {row['other']}"),
+            f"{row['oos']} / {row['within']}{med_text}",
+            f"{row['refused'] + row['unidentified']} ({row['unidentified']})",
+            f"{row['agree']} / {row['evaluable']} ({row['claims']})",
+        ]
+        for i, cell in enumerate(cells):
+            ax.text(x0[i] + (0.01 if i == 0 else widths[i] / 2), y, cell, fontsize=9.6 if i == 0 else 9.4, color=INK, va="center",
+                    ha="left" if i == 0 else "center", fontweight="bold" if i == 0 else "normal")
         ax.plot([0, 1], [y - 0.5, y - 0.5], color="#D6DBD8", lw=0.8)
-    ax.set_title("Path by path: what the model has, how it does, what it lacks", loc="left", fontsize=11)
-    fig.tight_layout()
+    ax.set_title("Path by path, counted from the artifacts: what each rests on, how it scores, what it refuses", loc="left", fontsize=11)
+    fig.text(0.01, 0.005, "core_panel_scores.json (rows never in a fit), core_directional_scores.json, the engine's parameter tables and their source anchors. "
+             "Row colour: share of out-of-sample rows within 3x. 'No identified route' is the hexose-to-thiol entry the model declares unidentified.",
+             fontsize=7.8, color=MUTED, wrap=True)
+    fig.tight_layout(rect=(0, 0.05, 1, 1))
     fig.savefig(OUT / "08_path_scorecard.png", bbox_inches="tight")
     plt.close(fig)
 
@@ -922,6 +971,19 @@ def main() -> int:
     fig_one_number()
     fig_parity()
     fig_no_number()
+    from figure_manifest import ENGINE_SOURCES, record
+
+    record("scripts/generators/build_thiol_sink_figures.py",
+           [V / "core_panel_scores.json", V / "core_directional_scores.json", V / "kinetic_core_b16_ship_rule.json",
+            V / "kinetic_core_b9_fit_report.json", V / "kinetic_core_b9_laplace_covariance.json", V / "core_prediction_uncertainty.json",
+            ROOT / "data" / "keys" / "papers.yml", ROOT / "docs" / "validation" / "directional_claims_panel.yml",
+            ROOT / "scripts" / "generators" / "build_thiol_sink_figures.py", ROOT / "scripts" / "generators" / "build_reaction_tree.py",
+            *ENGINE_SOURCES],
+           ["00_map.png", "01_hofmann_pot_100C.png", "02_wang2022_shapes.png", "03_liu2023_168C.png", "04_yiltirak_ladder.png",
+            "05_ttca_decay.png", "06_dicarbonyls_water.png", "07_literature_funnel.png", "08_path_scorecard.png",
+            "09_repository_flow.png", "14_field_scheme.png", "15_field_coverage.png", "16_how_a_kinetic_model_works.png",
+            "17_papers_by_weight.png", "18_lab_spread.png", "19_what_papers_report.png", "20_one_number.png", "21_parity.png",
+            "22_no_number.png"])
     print(f"wrote 19 figures to {OUT}")
     return 0
 
