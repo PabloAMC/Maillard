@@ -624,6 +624,81 @@ HOLDOUT_SEALED_BINDING: Mapping[str, str] = {
 #: measured THRESHOLD SHIFT does NOT transfer (monotone in gelatin, collapsed in
 #: beef). Nothing here extrapolates a threshold shift by chain length.
 CHAIN_LENGTH_SLOPE_PER_CH2: float = 2.81  # geometric mean of 2.72 and 2.9
+# ===========================================================================
+# WHAT HEAT DOES TO FLAVOUR BINDING: FIVE PAPERS, THREE SIGNS, NO SCALAR
+# ===========================================================================
+# 2026-09-09. Wave B26 shipped this layer's first plant-protein constants at 37 C and said outright
+# that nothing licensed them at 90 or 140 C. Five papers were fetched to lift that limit. NONE of
+# them supplies an aqueous binding constant MEASURED above 60 C, so the limit stands -- but between
+# them they refute the thing anyone would reach for next, which is a single temperature correction.
+#
+# THE PREHEAT EFFECT IS NOT A SCALAR AND IT IS NOT ONE-SIGNED. Three papers, three signs:
+#   * DRY soy, measured hot: adsorption FALLS, 1.2 to 1.8x per 10 C over 80-100 C (Aspelund 1983).
+#   * AQUEOUS soy, measured hot: binding RISES, 1.5 to 2.5x from 25 to 74 C, and NON-MONOTONE with
+#     a minimum at 25 C -- 0.241 / 0.159 / 0.396 mol of 2-pentylpyridine per mol of protein at
+#     4 / 25 / 74 C (Zhou, Boatright & Johnson 2002 Table 1).
+#   * AQUEOUS pea, cooked then read cold: SPLIT BY LIGAND. 2-methylpyrazine's per-gram constant
+#     rises 4.27e-2 -> 6.79e-2 -> about 1.97e-1 L/g across native, 100 C and 120 C, while a
+#     thiazole in the same experiment falls 8.17e-1 -> 2.39e-1 (Xu 2022, derived; that paper needs
+#     no molar mass because it prints both the bound fraction and the loading).
+#   * AQUEOUS soy, preheated then read cold: ALSO SPLIT BY LIGAND. Simple esters lose 18 to 21x of
+#     their binding; terpene esters and alcohols GAIN 1.07 to 1.71x (Guo 2019).
+#   * DRY soy, autoclaved then read: binding falls by about half -- 47-49 % for ketones, 43 % for
+#     hexanal -- while the enthalpy is UNCHANGED on every ANOVA (p 0.076 to 0.974). Sites are
+#     REMOVED, not weakened, which is a different mechanism from all of the above (Crowther 1980).
+# A layer that multiplied its binding constants by one temperature factor would be wrong in sign
+# for at least one ligand class in every one of these experiments.
+BINDING_AT_PROCESS_TEMPERATURE: Mapping[str, str] = {
+    "the_limit_stands": (
+        "No paper in the corpus measures an AQUEOUS binding constant at a temperature above 60 C. "
+        "Zhou 2002 measures a bound AMOUNT in water at 74 C, which is not a constant; Aspelund and "
+        "Crowther measure hot but DRY, on powder, with no water anywhere; Guo and Xu heat the "
+        "protein and then read the binding cold. Wave B26's caveat is unchanged."
+    ),
+    "zhou2002_the_nearest_thing": (
+        "Soy protein isolate against 2-pentylpyridine, equilibrium dialysis and SPME. Its 25 C "
+        "Klotz constant is 107 +/- 10 M^-1 on a molar basis the paper STATES (100 000 g/mol), the "
+        "same convention the shipped Damodaran soy rows rest on, giving K_g = 3.21e-3 L/g (mine) "
+        "-- directly comparable to kg_2_heptanone_soy. NOT SHIPPED, and the reason is specific: "
+        "the 74 C arm runs 14 to 20 hours, and these same authors showed that 2-pentylpyridine "
+        "FORMS in soy from 2,4-decadienal and ammonia. A synthesis control was run for their UV arm "
+        "and NOT for the 74 C arm, so some of that rise may be the compound being made rather than "
+        "bound."
+    ),
+    "xu2022_the_covalent_pair": (
+        "Two of Xu 2022's compounds are more than 98 % bound and its authors call that binding "
+        "covalent and irreversible in as many words. Those two are quarantined on the same "
+        "precedent as this table's alkenal rows; the pyrazine and thiazole numbers above are the "
+        "usable half."
+    ),
+    "a_molar_basis_disagreement_worth_knowing": (
+        "Guo 2019 computes its constants on 220 000 g/mol for soy protein. The shipped soy rows in "
+        "this table rest on the 100 000 that Damodaran's source STATES. That is a 2.2x difference "
+        "in the denominator, and it is why Guo's absolute constants are not compared with this "
+        "table's; only its ratios are used."
+    ),
+}
+
+#: FIVE INDEPENDENT DETERMINATIONS OF THE CHAIN-LENGTH SLOPE, AND THE SHIPPED VALUE IS AT THE TOP.
+#: The registry ships 2.81x/CH2, the geometric mean of Andriot's 2.72 and Damodaran's 2.9. Three
+#: more determinations were read on 2026-09-09 and they sit lower: Aspelund's 2.23 (dry, 90 C),
+#: Crowther's 1.90 to 2.15 (dry, and INVARIANT to every processing treatment he applied), and Guo's
+#: 2.86 on native protein, which is within 2 % of the shipped value and is the closest independent
+#: confirmation the constant has. The cluster is 1.9 to 2.9 with most of the mass at 2.0 to 2.4, and
+#: the two determinations supporting 2.81 are both native-protein, high-affinity cases.
+#: NOTHING IS CHANGED HERE. Moving a shipped constant is a wave, the three new determinations are
+#: dry or cold-read, and this layer's rule is that the slope applies to BINDING CONSTANTS in the
+#: same method family. What is recorded is that the shipped value is at the top of its own evidence
+#: rather than in the middle of it.
+CHAIN_LENGTH_SLOPE_FIVE_DETERMINATIONS: Mapping[str, float] = {
+    "andriot2000_blg_headspace_30C": 2.72,
+    "damodaran1981_soy_dialysis_25C": 2.9,
+    "aspelund1983_soy_dry_90C": 2.23,
+    "crowther1980_soy_dry_60_80C_low": 1.90,
+    "crowther1980_soy_dry_60_80C_high": 2.15,
+    "guo2019_soy_native_37C": 2.86,
+}
+
 #: CHECKED AT PROCESS TEMPERATURE FOR THE FIRST TIME, 2026-09-09 (aspelund1983_extraction.md).
 #: Aspelund & Wilson 1983 run inverse gas chromatography on a spray-dried soy isolate at 80, 90 and
 #: 100 C -- the only flavour-affinity measurement in the corpus above 60 C -- and their 2-alkanone
