@@ -260,11 +260,15 @@ measured binding equilibrium lets the thiol go above 80 °C, so it could not hav
 (the saturating-adduct row of section 6). What both refusals leave standing is a third candidate the reading
 of the lipid papers supplies: an irreversible addition of the thiol to unsaturated carbonyls, the
 adducts that halve the thiols when a lipid is present. That was built and tested the same day as a
-third structure and refused too: the fit switched it off at every temperature, because the
-fifty-four fed pots at 145 °C outweigh the seven ratios at 100 °C in the objective, and any removal
-the 100 °C pot could use perturbs them. Three structures refused on the same rows say the next step
-is not a fourth structure. It is the experiment above, or a decision to weigh the objective by
-laboratory rather than by row, which is a change of rule and not a wave.
+third structure and refused too: the fit switched it off at every temperature, because the fed
+pots at 145 °C outweigh the ratios at 100 °C in the objective by two to one, and any removal the
+100 °C pot could use perturbs them. (That count was written down wrongly at first, as fifty-four
+against seven; counting the rows themselves gives twelve fed measurements against six ratios. The
+imbalance is real and it is smaller than the record claimed.) Three structures refused on the same
+rows looked like an argument for a fourth. Reading the papers said otherwise, and section 7 above
+says what: the disulfide those three were scored against could not form in the pots that decide
+the fit, because they carry no oxidant at all. So the next thing to build is the supply, not a
+fourth removal step, and after that the experiment below.
 
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
 comes from, scores your own measurements, calibrates itself to your laboratory from those
