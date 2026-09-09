@@ -1811,6 +1811,81 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       (doi 10.1016/j.foodchem.2008.09.084) and the anchor now says so, with the DOI. STILL OPEN:
       `devleeschouwer2009b.pdf` is Part I (Food Chemistry 114:116-126), a different paper that three shipped
       trunk constants also come from, and it has no dossier either.
+- [x] **AUDIT-INCORPORATION (2026-09-09). What the audit's findings became in the model.** Done in one
+      pass, each item with what it moved and what it deliberately did not.
+      **SHIPPED AS A WAVE.** B26, the first plant protein in the matrix binding table: Bi 2022's
+      pea-isolate partition pair by the registry's own K_g formula, hexanal and an alcohol pooled, the
+      alkenal quarantined, the alkenal CONTRAST excluded from the unsaturation penalty for a two-carbon
+      confound. Pooled `n_alkanal` 0.01151 -> 0.05404 L/g; on the flagship hold-out hexanal 50.3x -> 15.3x
+      and the two methylbutanals 166x -> 70.6x, no sign inverted, the kinetic panel bit-for-bit unchanged.
+      The reversible term now claims 44.2 % of the hexanal log-shift against Amendment 6's ~25 % cap.
+      **CORRECTED IN PLACE (no fitted value moved).** Bolton's two precursor molarities to the monohydrate
+      molar masses the paper specifies (glucose was 10 % high, cysteine 11 %; the MFT prediction moved by
+      6e-6 dex, which is itself the isotope finding restated); the glutamate claim narrowed from "not a
+      reactive precursor" to what the isotope work supports. Trikusuma's `concentration_mM` and
+      `water_activity` withdrawn as unprinted, with the printed mass fraction recorded instead and the
+      loader taught to read a null as "not stated" rather than raise. `k3_final_parameter_inventory.md`
+      B2.7 and B2.10, furfural's pH collapse "15-49x" -> "48.6x to more than 1510x", with where the wrong
+      number came from. B25's record: "54 fed rows at 145 C against seven ratios at 100 C" -> the enumerated
+      truth, 12 fed mol % rows against 6 Schieberle ratios, verified by running the objective's own table.
+      **REGISTERED AS CAPABILITY.** 3-isobutyl-2-methoxypyrazine in `off_flavour_targets.yml` at 0.002 ug/kg
+      -- the first entry the cook does NOT make, odour activity about 15 in the raw pea beverage before any
+      heat and about 36 after UHT, so the mitigation is upstream of the pot and the model must not pretend
+      to a formation step. Registry ids for five compounds the corpus names and could not refer to:
+      2-pentylpyridine, (E,E)-2,4-decadienal, 5-methylfurfural, 2-furanmethanol, maltol.
+      **RECORDED AGAINST SHIPPED CONSTANTS, VALUES UNCHANGED (each is a wave, and each is below).**
+      `SECOND_LABORATORY_2016` in `parameters_dicarbonyl.py`: `k_da_sink`'s zero REJECTED (130e-3 /min
+      measured), `k_go_sink`'s zero barrier REFUTED while its rate agrees to 1.87x, `k_odg_da` 466x apart,
+      `k_hmf_self` 23 000x apart -- and, the more important half, three constants agreeing inside a factor
+      of two across two laboratories, the trunk's first cross-laboratory agreement.
+      `MELANOIDIN_REPEAT_UNIT_FALSIFYING_MEASUREMENT` in `species.py`: the C/N 8.0 structural floor is
+      missed at 7.64 +/- 0.21 by two agreeing methods, because two thirds of the glycine arrives
+      decarboxylated; the trunk's 8.42-9.94 still clears it as a lower bound at 70 C.
+      The oligomerisation channel's reaction ORDER corrected from "ZERO in thiol" to first order, on the
+      paper's own across-pot comparison; nothing downstream moves because the channel has no rate.
+      **A DEFECT FOUND ON THE WAY.** B4's generator overwrote its own BLIND prediction file on every run,
+      date and all, so any later wave could have replaced a pre-registration with a post-hoc prediction
+      undetectably. It now refuses without `--refreeze`.
+- [ ] **AUDIT-REMAINDER (2026-09-09). What the incorporation left as waves, each with what it needs.**
+      (i) **B27, the sink's oxidant.** Whitfield 1999 names the oxidant the three refused sink waves said
+      was missing -- the pot's own alpha-dicarbonyls, reduced to hydroxyalkanones -- and prints NO rate, no
+      order and no barrier for it, so it is a mechanism proposal with two supporting negatives. Two hard
+      facts make this a different question from B17/B25 rather than a fourth structure: `OX` is charged at
+      1 mmol/L in 27 systems and in NONE of the 12 fed 145 C systems nor in either Whitfield pot, `OXR` is
+      zero everywhere, and `ch_dimer_*` is first order in `OX` -- so those pots make STRUCTURALLY zero
+      disulfide while both dimerisation constants sit pinned at the top of their bands. And no reaction
+      anywhere makes DPO, TDP, DDP or MGO from norfuraneol, so a dicarbonyl-sourced oxidant would be
+      exactly zero in the very pot that must show 35 % disulfide -- though the paper MEASURES three
+      diketones in that pot (Table 1 rows 1-3). The missing thing is a source step, not a substrate.
+      New fit row available: the 35 % MFT disulfide share at 140 C, a within-study ratio in a pot the
+      objective already simulates and the only disulfide constraint outside 115-120 C.
+      (ii) **The fed-row charge corrections**, which must ride in that wave because the generators are
+      frozen by manifest: Whitfield norfuraneol 20 -> 50 mmol/L and H2S 40 -> ~97 (2.5x low, and the H2S
+      steps are second order, so it propagates); `whitfield_nf_cys_MFT`'s target 0.150 is the paper's FREE
+      MFT where total is 0.230 (0.19 dex, a third of a sigma); the pot's buffer upgraded from ASSUMED to
+      the printed 0.5 M phosphate pH 4.5.
+      (iii) **The four trunk constants and the melanoidin repeat unit** recorded above; each needs a
+      pre-registration that says which matrix it claims to model, because the hazelnut and the glass
+      disagree on the dicarbonyl ORDER as well as on the rates.
+      (iv) **Re-deriving Amendment 6's ~25 % reversible cap**, which B26 exceeded on a real hold-out row.
+      The cap came from one compound in beef and one dairy protein and has never been re-computed on a
+      plant matrix.
+      (v) **The pea binding constant at process temperature.** Bi's numbers are 37 C, a mouth temperature.
+      Nothing on disk measures a plant-protein binding constant at 90 or 140 C, and the covalent layer's
+      own note is that the sites are charged once at the start of the cook.
+- [ ] **Programme 7 reading log (2026-09-09, trikusuma2020, the isolate's carried volatiles).** The raw
+      3 % w/w pea beverage, before any heat, carries TEN compounds above their own thresholds (the paper's
+      asterisks and this repository's arithmetic agree on which ten): hexanal 331 ug/L against a 4.5
+      threshold (odour activity 74), isovaleric acid 1010 against 120, 2-pentylfuran 59.4 against 6,
+      1-octen-3-ol 7.13 against 1, nonanal 8.24 against 1, p-vinylguaiacol 33.8 against 3,
+      (E,E)-2,4-nonadienal 0.71 against 0.09, methional 0.55 against 0.2, 2-acetyl-1-pyrroline 0.29 against
+      0.14, and IBMP 0.031 against 0.002 (activity 15.5, the highest in the pot). UHT at 140 C / 6 s roughly
+      doubles most of them and multiplies (E,E)-2,4-decadienal by 780x. THE POINT FOR THE MODEL: the
+      benchmark's measured values are a heated pot MINUS a starting pot that was already loaded, and the
+      core predicts formation from zero. Programme 7 needs the control column as a declared initial
+      condition, not just the heated column as a target. The 2-acetyl-1-pyrroline threshold is printed as
+      0.14 in that table and quoted as 0.1 in its own text; `desirable_targets.yml` carries 0.1 from
+      Buttery 1983 read directly, which is the primary source.
 - [ ] **AUDIT-FINDINGS (2026-09-09, from the forty-three papers the reading audit found unread). Every defect
       below is stated with its SIZE, so that none is either ignored or over-dramatised.**
       **In fit rows (both real, both small).** (i) Every B2.x generator configures the Whitfield 1999 pot at

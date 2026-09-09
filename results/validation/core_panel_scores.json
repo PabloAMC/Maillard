@@ -45,8 +45,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "62fe149a0c5b585554af8d2512242f5d101c986e",
-      "short": "62fe149a",
+      "commit": "45f2ebc94cdd3526558f1fe609e6040283cda193",
+      "short": "45f2ebc9",
       "branch": "reactions",
       "dirty": true
     },
@@ -122,7 +122,7 @@
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "2e64e3a6ced769a1733018e0fe7a1d084c9939c49b8f76487d0c544026e3468f"
+        "sha256": "b59f948a0d09a01409682b6fa30a2e3cf5de0c760e3884701689b441ef466ae1"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
@@ -134,7 +134,7 @@
       },
       {
         "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
-        "sha256": "969d7072680549faf00c19514f0b07d060fd934ecd03ee0ac9c10b5e8fcef8e0"
+        "sha256": "43dfe0b02f27ebe94ee929d02925850a90a05b64da6b55556fd636afd7e87cbf"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
@@ -259,7 +259,7 @@
       "worst_fold_error": 33391.73597895205,
       "best_fold_error": 1.9901918483315129,
       "median_abs_log10_error": 1.4690904559474305,
-      "geometric_mean_fold": 43.78902158784514
+      "geometric_mean_fold": 43.78900618523629
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -313,7 +313,7 @@
           "worst_fold_error": 9631.589383870052,
           "best_fold_error": 2.3158474462062624,
           "median_abs_log10_error": 1.5345367034143473,
-          "geometric_mean_fold": 96.75044050994008
+          "geometric_mean_fold": 96.75029303988609
         }
       }
     },
@@ -347,7 +347,7 @@
           "worst_fold_error": 9631.589383870052,
           "best_fold_error": 2.3158474462062624,
           "median_abs_log10_error": 1.5345367034143473,
-          "geometric_mean_fold": 96.75044050994008
+          "geometric_mean_fold": 96.75029303988609
         }
       }
     },
@@ -397,7 +397,7 @@
           "worst_fold_error": 476.7619131435321,
           "best_fold_error": 1.9901918483315129,
           "median_abs_log10_error": 1.4690904559474305,
-          "geometric_mean_fold": 30.280663015052614
+          "geometric_mean_fold": 30.280641152274317
         }
       },
       "trunk": {
@@ -430,7 +430,7 @@
         "worst_fold_error": 33391.73597895205,
         "best_fold_error": 1.9901918483315129,
         "median_abs_log10_error": 1.4690904559474305,
-        "geometric_mean_fold": 43.78902158784514
+        "geometric_mean_fold": 43.78900618523629
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
@@ -447,7 +447,7 @@
         "worst_fold_error": 33391.73597895205,
         "best_fold_error": 1.9901918483315129,
         "median_abs_log10_error": 1.501813579680889,
-        "geometric_mean_fold": 47.31092437131732
+        "geometric_mean_fold": 47.310907291961506
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.7
+    "wall_seconds": 11.5
   },
   "benchmarks": [
     {
@@ -1585,7 +1585,7 @@
         "temp_C": 140,
         "time_min": 0.1,
         "ph": 7.1,
-        "water_activity": 0.98
+        "water_activity": null
       },
       "signal_origin": "external_literature",
       "evidence_role": "predictive",
@@ -1632,7 +1632,7 @@
           "declaration_warnings": [
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
             "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
-            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (0) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
@@ -1898,9 +1898,9 @@
         "headspace_mL": 91.7,
         "status": "computed",
         "o2_mmol": 0.8075134463309884,
-        "thiol_mmol": 0.38960999999999996,
-        "o2_to_thiol": 2.072619918202789,
-        "basis": "91.7 mL headspace of air at closure = 0.808 mmol O2 over 0.390 mmol thiol charged = 2.07 mol/mol (air by default; water: distilled)"
+        "thiol_mmol": 0.34964999999999996,
+        "o2_to_thiol": 2.3094907659973933,
+        "basis": "91.7 mL headspace of air at closure = 0.808 mmol O2 over 0.350 mmol thiol charged = 2.31 mol/mol (air by default; water: distilled)"
       },
       "scale_thresholds": {
         "max_ratio": 3.0,
@@ -1913,14 +1913,14 @@
           "target_unit": "ppb",
           "measured": 11.7,
           "measured_ppb": 11.7,
-          "predicted": 235.9729649351512,
-          "fold_error": 20.168629481636856,
-          "abs_log10_error": 1.3046763876136034,
+          "predicted": 235.96972785838298,
+          "fold_error": 20.1683528084088,
+          "abs_log10_error": 1.304670429921708,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            33.738685976064446,
-            1650.4270563409013
+            33.73822314882238,
+            1650.4044157850938
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -1936,8 +1936,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 20.168629481636856,
-      "mean_abs_log10_error": 1.3046763876136034,
+      "max_ratio": 20.1683528084088,
+      "mean_abs_log10_error": 1.304670429921708,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",

@@ -172,9 +172,9 @@ def limiting_precursor_molar(
 ) -> Tuple[Optional[str], Optional[float]]:
     """The smallest non-zero precursor charge, as ``(name, mol/L)``."""
     items = [
-        (str(name), float(data.get("concentration_mM", 0.0)) / 1000.0)
+        (str(name), float(data.get("concentration_mM") or 0.0) / 1000.0)
         for name, data in (bench.get("precursors") or {}).items()
-        if float(data.get("concentration_mM", 0.0)) > 0.0
+        if float(data.get("concentration_mM") or 0.0) > 0.0
     ]
     if not items:
         return None, None
@@ -303,8 +303,12 @@ def core_spec(bench: Mapping[str, Any], *, use_buffer: bool = True):
     conditions = bench.get("conditions") or {}
     return FormulationSpec(
         name=str(bench.get("benchmark_id")),
+        # 2026-09-09: a null `concentration_mM` means the source does not print one and
+        # the bundle says so beside it -- the Trikusuma isolate, which has no single molar
+        # mass. It reads as an uncharged precursor, the same as an absent key, rather than
+        # raising: the alternative was to delete the key, which would have hidden the gap.
         precursors={
-            str(name): float(data.get("concentration_mM", 0.0))
+            str(name): float(data.get("concentration_mM") or 0.0)
             for name, data in (bench.get("precursors") or {}).items()
         },
         process=ProcessSpec(

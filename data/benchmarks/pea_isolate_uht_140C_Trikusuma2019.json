@@ -5,13 +5,14 @@
   "source_doi": "10.1016/j.foodchem.2019.126082",
   "precursors": {
     "Pea Protein Isolate": {
-      "concentration_mM": 1000.0
+      "concentration_mM": null,
+      "concentration_note": "WITHDRAWN 2026-09-09. This field carried 1000 mM, which is not in the paper and cannot be: a protein isolate has no single molar mass. What the paper prints (Materials, and the beverage preparation) is a MASS FRACTION -- 'pea protein isolate (3 % w/w)', the isolate being 80 % protein, 8 % fat and 2 % sugar w/w -- which works out at about 2.4 % w/w protein and 0.24 % w/w fat (derived, trikusuma2020_extraction.md sec. 2). The row is scored on the matrix-only path, which reads the protein TYPE and not a molarity, so nothing that was scored depended on the withdrawn number; it is removed so that nothing later comes to depend on it."
     }
   },
   "conditions": {
     "temp_C": 140,
     "ph": 7.1,
-    "water_activity": 0.98,
+    "water_activity": null,
     "time_min": 0.1,
     "vessel": {
       "fill_mL": null,
@@ -22,13 +23,14 @@
       "stirred": null,
       "provenance_class": "primary_source_pdf",
       "provenance_note": "Trikusuma, Paravisini & Peterson 2020, Food Chem. 312:126082, read from data/articles/trikusuma2020.pdf on 2026-09-04; this bundle's content_verification.quoted_conditions, verbatim: 'aseptic UHT processing ... processed at a final temperature and pressure of 140 C and 0.55 MPa for 6 s'. A UHT line is a continuous closed process with no fixed headspace (continuous_process); dissolved oxygen in the beverage is not reported. Water source for the 3 % w/w isolate beverage not stated."
-    }
+    },
+    "water_activity_note": "WITHDRAWN 2026-09-09. This field carried 0.98, which is a reasonable guess about a 3 % w/w aqueous dispersion and is not this paper's number: it prints no water activity, no moisture content and no dry-matter figure anywhere (trikusuma2020_extraction.md Flags 7)."
   },
   "metadata": {
     "tier": "PRIMARY",
     "family": "matrix_headspace",
     "execution_path": "matrix_only",
-    "notes": "Executable intake benchmark subset for Trikusuma 2019 UHT pea-protein beverage. Uses only compounds supported by the current matrix-only predictor."
+    "notes": "Executable intake benchmark subset for Trikusuma 2019 UHT pea-protein beverage. Uses only compounds supported by the current matrix-only predictor. TWO FIELDS WITHDRAWN 2026-09-09 as unprinted: the isolate 'molarity' and the water activity. See the notes beside each."
   },
   "source_metadata": {
     "origin": "external_literature",
@@ -39,7 +41,7 @@
     "date": "2026-08-27",
     "wave": "Wave S2 retrieval 2a, recorded by Wave S1b",
     "status": "values_confirmed_citation_year_corrected",
-    "note": "VALUES CONFIRMED against the open-access precursor of the paywalled paper: Trikusuma, M., MS thesis, The Ohio State University 2018, OhioLINK ETD accession osu1531495328317918, Table 6 p.35 — hexanal 781.72 +/- 58.59, 2-pentylfuran 163.16 +/- 15.06, nonanal 23.98 +/- 0.80 ug/L. The uncertainty_pct 8/9/4 recorded here match the SD-derived RSDs 7.5/9.2/3.3%. Conditions match (140 C, 6 s hold, pH 7.16 processed). WHICH COLUMN THIS IS, and it is load-bearing: these are the PROCESSED column. Table 6 also carries a Control column (331 / 59 / 8) and an AGED column (683 / 197 / 22) that differ materially; the process_metadata.state 'heated_matrix' label is what selects Processed and must not be re-read as either of the others. CITATION YEAR: the canonical citation is 2020 (Trikusuma, Paravisini & Peterson, Food Chemistry 312:126082), not 2019. The benchmark_id string 'Trikusuma2019' is retained UNCHANGED as an identifier only — it is referenced by data/lit/benchmark_intake_registry.json, src/matrix_calibration_registry.py, six test modules and every generated artifact, and renaming it would be an identity change, not a citation fix. Read the id as an opaque key; the year in it is wrong.",
+    "note": "VALUES CONFIRMED against the open-access precursor of the paywalled paper: Trikusuma, M., MS thesis, The Ohio State University 2018, OhioLINK ETD accession osu1531495328317918, Table 6 p.35 \u2014 hexanal 781.72 +/- 58.59, 2-pentylfuran 163.16 +/- 15.06, nonanal 23.98 +/- 0.80 ug/L. The uncertainty_pct 8/9/4 recorded here match the SD-derived RSDs 7.5/9.2/3.3%. Conditions match (140 C, 6 s hold, pH 7.16 processed). WHICH COLUMN THIS IS, and it is load-bearing: these are the PROCESSED column. Table 6 also carries a Control column (331 / 59 / 8) and an AGED column (683 / 197 / 22) that differ materially; the process_metadata.state 'heated_matrix' label is what selects Processed and must not be re-read as either of the others. CITATION YEAR: the canonical citation is 2020 (Trikusuma, Paravisini & Peterson, Food Chemistry 312:126082), not 2019. The benchmark_id string 'Trikusuma2019' is retained UNCHANGED as an identifier only \u2014 it is referenced by data/lit/benchmark_intake_registry.json, src/matrix_calibration_registry.py, six test modules and every generated artifact, and renaming it would be an identity change, not a citation fix. Read the id as an opaque key; the year in it is wrong.",
     "source_url": "http://rave.ohiolink.edu/etdc/view?acc_num=osu1531495328317918"
   },
   "process_metadata": {

@@ -51,24 +51,99 @@ DICARBONYL_PARAMETERS: Mapping[str, KineticParameter] = {
         "k_odg_da", "1-deoxyglucosone -> diacetyl + C2", 12.2, 150.8, 8.8, 12,
         flags=("b13_dicarbonyl",),
         note="k_b 12.2 +/- 1.12 x 1e-3 /min at 180 C; Ea 150.8 +/- 8.8 -- the steepest barrier on "
-             "the trunk, so diacetyl is a high-temperature product.",
+             "the trunk, so diacetyl is a high-temperature product. 2026-09-09: 466x below a "
+             "second laboratory at 160 C -- SECOND_LABORATORY_2016.",
     ),
     "k_go_sink": _kocadagli(
         "k_go_sink", "glyoxal -> unassigned (P3)", 32.6, 0.0, None, 15,
         flags=("b13_dicarbonyl", "ea_fixed_to_zero_by_authors"),
         note="k_b 32.6 +/- 8.83 x 1e-3 /min at 180 C; the authors FIXED the barrier to zero "
              "during estimation, so the sink runs at its 180 C rate at every temperature. "
-             "Declared, flagged; the wishlist asks for a glyoxal loss rate at two temperatures.",
+             "Declared, flagged; the wishlist asks for a glyoxal loss rate at two temperatures. "
+             "2026-09-09: a second laboratory now supplies three temperatures and the ZERO "
+             "BARRIER IS REFUTED while the rate agrees to 1.87x -- SECOND_LABORATORY_2016.",
     ),
     "k_da_sink": _kocadagli(
         "k_da_sink", "diacetyl -> unassigned (P5)", 0.0, 0.0, None, 17,
         flags=("b13_dicarbonyl", "rate_zero_in_source"),
         note="Kocadagli step 17: 0 +/- 0 (blank Ea). Diacetyl accumulates in the source's "
-             "glass; carried at zero as a PREDICTION the data may reject.",
+             "glass; carried at zero as a PREDICTION the data may reject. 2026-09-09: A "
+             "SECOND LABORATORY HAS REJECTED IT -- 130e-3 /min in roasted hazelnut. The "
+             "value stays until a wave installs one; see SECOND_LABORATORY_2016.",
     ),
 }
 
 DICARBONYL_KEYS: Tuple[str, ...] = tuple(DICARBONYL_PARAMETERS)
+
+# ===========================================================================
+# THE SECOND LABORATORY (2026-09-09, from the reading audit)
+# ===========================================================================
+# Until this date every constant on the trunk came from ONE laboratory, one amine-free
+# glass, 160-200 C. Goncuoglu Tas & Gokmen 2016 (whole Tombul hazelnuts, 5 g, 150 / 160 /
+# 170 C, 15-120 min, multiresponse fit over 26 steps) is a second laboratory, a second
+# matrix and a real food. Its Table 1 is NOT installed here and NOTHING below changes a
+# shipped value -- a refit is a wave, and this is the record that says which way the wave
+# would push. Rates are as printed, per minute; where the shipped constant lives at another
+# temperature it is transported by its own barrier and that is marked.
+#
+# WHAT AGREES. Three constants inside a factor of two, across two laboratories, two
+# matrices and a 20 C gap: `k_tdg_ddg` 1.5x, `k_ddg_hmf` 1.13x, and `k_go_sink`'s RATE
+# 1.87x. That is the first cross-laboratory agreement the trunk has ever had and it is the
+# more important half of this record.
+#
+# WHAT DOES NOT. Two shipped decisions are refuted outright and two constants disagree by
+# orders of magnitude. Both refuted decisions were flagged as decisions when they shipped,
+# which is why they are checkable now.
+SECOND_LABORATORY_2016: Mapping[str, Mapping[str, object]] = {
+    "k_da_sink": {
+        "shipped": "0 /min, Ea blank: the source measured no diacetyl loss in its glass",
+        "measured_elsewhere": "54 / 130 / 106 x 1e-3 /min at 150 / 160 / 170 C",
+        "verdict": "THE PREDICTION IS REJECTED. The constant ships at zero as 'a prediction the "
+                   "data may reject' and a second laboratory has now rejected it: diacetyl is "
+                   "consumed in a real matrix. The rate is also NON-MONOTONE in temperature over "
+                   "three points, so this measurement supplies a size and not a barrier.",
+        "anchor": "goncuoglu2016_extraction.md sec. 3 Table 1 step k24",
+    },
+    "k_go_sink": {
+        "shipped": "32.6e-3 /min with the BARRIER FIXED TO ZERO by its authors, so it runs at its "
+                   "180 C rate at every temperature",
+        "measured_elsewhere": "18 / 61 / 290 x 1e-3 /min at 150 / 160 / 170 C",
+        "verdict": "THE RATE AGREES (1.87x at 160 C) AND THE ZERO BARRIER IS REFUTED: a sixteenfold "
+                   "rise over 20 C is not a zero barrier. The window is too narrow to put a credible "
+                   "barrier in its place -- a three-point refit gives about 216 kJ/mol, which is not "
+                   "believable -- so the wishlist entry stands unchanged and is now evidenced rather "
+                   "than merely prudent.",
+        "anchor": "goncuoglu2016_extraction.md sec. 3 Table 1 step k25",
+    },
+    "k_odg_da": {
+        "shipped": "12.2e-3 /min at 180 C with Ea 150.8, which transports to 1.92e-3 /min at 160 C",
+        "measured_elsewhere": "371 / 895 / 1073 x 1e-3 /min at 150 / 160 / 170 C",
+        "verdict": "466x APART AT 160 C, and the two credible intervals do not come within two "
+                   "decades of each other. Diacetyl is made far faster in a roasting nut than in an "
+                   "amine-free glass. Nothing here says which is right for a plant-protein cook; it "
+                   "says the constant is matrix-dependent and the model carries one matrix.",
+        "anchor": "goncuoglu2016_extraction.md sec. 3 Table 1 step k17",
+    },
+    "k_hmf_self": {
+        "shipped": "8.97e-7 /min, Ea zero by declaration (0.9 % lost in 7 days at 5 C), in "
+                   "parameters_furanic.py",
+        "measured_elsewhere": "12 / 21 / 103 x 1e-3 /min at 150 / 160 / 170 C",
+        "verdict": "23 000x APART. The furanic channel already prints 'EXPECT HMF TO BE "
+                   "OVER-PREDICTED' and names the empty 50-150 C window as the reason; this puts a "
+                   "measured size on that warning. Half-life at 160 C: about 33 minutes measured "
+                   "against about 1.5 years shipped.",
+        "anchor": "goncuoglu2016_extraction.md sec. 3 Table 1 step k26",
+    },
+}
+#: What this laboratory does NOT settle, said plainly so nobody reads the table as a refit.
+SECOND_LABORATORY_2016_LIMITS = (
+    "A roasting hazelnut is a dry, lipid-rich, whole-tissue matrix and the shipped constants come "
+    "from an aqueous amine-free glass; the authors say themselves that Arrhenius fails across their "
+    "own three temperatures. The dicarbonyl ORDER also inverts between the two: glyoxal about equal "
+    "to methylglyoxal above 3-deoxyglucosone here, the reverse in aqueous Leitzen 2021. So these "
+    "numbers size a disagreement; they do not replace anything, and a wave that installs any of them "
+    "has to say which matrix it claims to be modelling."
+)
 
 #: What would replace each declared decision (read by the wishlist through the flags).
 DICARBONYL_WISHLIST: Mapping[str, str] = {

@@ -306,6 +306,34 @@ def total_sulfur(state) -> float:
 MELANOIDIN_REPEAT_UNIT_CARBON = 8
 MELANOIDIN_REPEAT_UNIT_NITROGEN = 1
 
+#: THE STRUCTURE ABOVE IS FALSIFIED AND THE ANSWER IT PRODUCES IS NOT (2026-09-09,
+#: mundt2004_extraction.md, read in the reading audit).
+#:
+#: Six carbons from 3-deoxyglucosone plus two from an INTACT glycine set a structural FLOOR
+#: of C/N = 8.0 on this pool. Mundt & Wedzicha 2004 measure 7.64 +/- 0.21 on a dialysed
+#: glucose-glycine polymer with no protein in it (Table 1, MW > 12 500, n = 4), by two
+#: independent methods that agree: CHN microanalysis, and a 14C reconstruction giving
+#: whole glycine : DECARBOXYLATED glycine : glucose = 0.289 : 0.662 : 1, i.e. C/N 7.61.
+#: The floor is missed by about 1.7 analytical standard deviations, and the radiochemistry
+#: says exactly why: about two thirds of the incorporated glycine arrives decarboxylated
+#: and contributes ONE carbon per nitrogen, not two.
+#:
+#: What is falsified is the repeat unit's STRUCTURE, not the number the trunk reports. The
+#: measurement is at 70 C and pH 5.5, one point with no series of any kind, and its authors
+#: say (citing others, not measuring it) that amino-acid incorporation falls -- and C/N
+#: rises -- as temperature rises. So 7.64 is a LOWER BOUND for a 120 C polymer and the
+#: trunk's 8.42 to 9.94 clears it. This is a bracket, not a match.
+#:
+#: Nothing is changed here. A repeat unit that mixed decarboxylated and intact glycine
+#: would need a second nitrogen-bearing pool and a branching ratio, neither of which any
+#: source on disk measures at cooking temperature; that is a wave, and it is in the backlog.
+MELANOIDIN_REPEAT_UNIT_FALSIFYING_MEASUREMENT = (
+    "Mundt & Wedzicha 2004 (J. Agric. Food Chem.), glucose 0.25 M + glycine 0.25 M, 0.2 M "
+    "acetate pH 5.5, 70.0 C, dialysed MW > 12 500: C/N 7.64 +/- 0.21 by microanalysis and "
+    "7.61 by 14C reconstruction, against this unit's structural floor of 8.0. Read as a "
+    "lower bound for a 120 C polymer, on the authors' own stated temperature direction."
+)
+
 
 def melanoidin_repeat_units(state) -> float:
     """

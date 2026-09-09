@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "3b5dec76519b612a39d6e18b32a99dad75e2e9b63265365668b72de70958b4fe",
+        "17_papers_by_weight.png": "fd4a474f55b8b6d5a80633ce93ae8fe6f6f17175b2cf6387d688caaa1a60c708",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -113,7 +113,7 @@
         "src/kinetic_core/sulfur.py"
       ],
       "figures": {
-        "23_coverage_of_declared_targets.png": "516a8dfbcf6ec13cd85a70b14183e39386772717a082a192977acaabc58db857",
+        "23_coverage_of_declared_targets.png": "e7a5c1ddb6ca497a35458d21028a9dcbc85ec6abbcd6c3d58cfe16dfc2acf949",
         "24_fat_path_hexanal.png": "6dd1a389f3ee6fb84426d97bec3130f508445be5094980052c96c93cbb936a9e",
         "25_protein_matrix_layer.png": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6",
         "26_hypothesis_layer.png": "185fc901a3e6858aacc4c4d3d1ce36be310eaa49327e214856476920b1fbd085",
@@ -127,8 +127,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "b07aaa900bdc5ae9abab3e0b2af8274ebce245b5",
-      "short": "b07aaa90",
+      "commit": "45f2ebc94cdd3526558f1fe609e6040283cda193",
+      "short": "45f2ebc9",
       "branch": "reactions",
       "dirty": true
     },
@@ -136,7 +136,7 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "be1db968390461a96e0f64f10d4e6a19a7ee76b8bf25ee2c344cd8c051fc529e"
+        "sha256": "cf64a9605642bdf783d8ff3cf7806441e204b7c6b964baf62d69f5db8bb38ad7"
       },
       {
         "path": "data/lit/reaction_rules.yml",
@@ -148,7 +148,7 @@
       },
       {
         "path": "data/species/off_flavour_targets.yml",
-        "sha256": "a7e17039f75cc8d0ae142dfcce42756cbd581a2d160c3cd36f1b61a0fb37e8e3"
+        "sha256": "e4b33a4b695a26f9a649519671a17e78b394adf870998b246cdfc3dcabb4c2d1"
       },
       {
         "path": "data/species/protein_matrices.yml",
@@ -164,11 +164,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "1c6270a57ea496de0bcff594f464e401f832d2855ee06ac2c7082be31c15b33f"
+        "sha256": "4e26332a719f1403a47f0e3b917365d17d8a166c70edd2e966c89618407a3048"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "c38fd10a19f9aab9c2ba91a16a6af029ab1073548be5f29b080938b71a340452"
+        "sha256": "a35439ff3c78d5b27b90fa0b0ca1333dafa75c95c624446c463377a2e3526dad"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
@@ -240,7 +240,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_dicarbonyl.py",
-        "sha256": "974fcc7cd5e0c79fe567b6ae51aac0b24894695dd4def00f0f5583774fb2be97"
+        "sha256": "e4efa2a01b74431a8e53bd2b39c796a42b1697929cb54e5b20713dd0d6d6aaa0"
       },
       {
         "path": "src/kinetic_core/parameters_furanic.py",
@@ -256,11 +256,11 @@
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "98c26a6e9c750a9609a4614d56c5527d5563f8738ca1f5e05fa7165046f3d390"
+        "sha256": "912e3fddc9768592b1243d22843f0a318dfa0a060d2601b1ac30e8b30c36ee61"
       },
       {
         "path": "src/kinetic_core/species.py",
-        "sha256": "dbb9cd892332fe235828eaa970a13bf45f1ac2b7903d6a04576538f559a9f1d0"
+        "sha256": "1c5efb109ce17266176483491255e98e1e8071ccc9ad37d114b8a0516b97fdac"
       },
       {
         "path": "src/kinetic_core/species_acrylamide.py",
@@ -344,7 +344,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "3b5dec76519b612a39d6e18b32a99dad75e2e9b63265365668b72de70958b4fe"
+        "sha256": "fd4a474f55b8b6d5a80633ce93ae8fe6f6f17175b2cf6387d688caaa1a60c708"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
@@ -368,7 +368,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/23_coverage_of_declared_targets.png",
-        "sha256": "516a8dfbcf6ec13cd85a70b14183e39386772717a082a192977acaabc58db857"
+        "sha256": "e7a5c1ddb6ca497a35458d21028a9dcbc85ec6abbcd6c3d58cfe16dfc2acf949"
       },
       {
         "path": "docs/assets/thiol_sink/24_fat_path_hexanal.png",

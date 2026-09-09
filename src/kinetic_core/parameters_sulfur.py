@@ -1205,7 +1205,18 @@ THIOL_CHANNELS: Tuple[Dict[str, Any], ...] = (
         "channel": "acid_catalysed_C5_oligomerisation",
         "reactions": ("ch_oligomer_mft", "ch_oligomer_fft"),
         "dominant_at_c": (50.0, 50.0),
-        "order": "ZERO in thiol (59% of initial per DAY for MFT, 28% for FFT)",
+        "order": (
+            "REPORTED as zero in thiol (59 % of initial per DAY for MFT, 28 % for FFT), and "
+            "CORRECTED 2026-09-09: that is a WITHIN-RUN reading of a linear decay, and it does "
+            "not survive the paper's own comparison ACROSS runs. The process-flavouring pot holds "
+            "the thiols at about 5 uM and loses 59 %/day, i.e. about 2.9 uM/day; the reconstituted "
+            "pots hold 50 uM and lose over 90 %/day, i.e. over 45 uM/day, and 69 %/day even with "
+            "150 mM cysteine added, i.e. 34.5 uM/day. A tenfold larger pool losing at least "
+            "fifteen times more per day is FIRST order, not zero order -- a capacity-limited drain "
+            "would have given the same uM/day in both. On a fractional basis the two agree within "
+            "17 %. The paper prefers a different reading, an anti-oxidative matrix effect worth "
+            "about 10.5x, and both readings are live; the arithmetic above is this repository's. "
+            "Nothing downstream changes, because the channel has no rate at all -- see role."),
         "parameter": "NONE -- see NO_MEASURED_RATE",
         "what_excludes_the_neighbour": (
             "air ~ argon (so it is NOT oxidative), and the MFT mass balance "

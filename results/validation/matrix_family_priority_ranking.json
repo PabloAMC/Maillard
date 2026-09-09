@@ -1,0 +1,131 @@
+{
+  "summary": {
+    "family_count": 7,
+    "active_matrix_priorities": [
+      "pea_isolate",
+      "soy_isolate"
+    ],
+    "bounded_next_candidates": [
+      "mycoprotein"
+    ],
+    "scope_gap_priorities": [
+      "coconut_oil_co_matrix",
+      "other_plant_proteins"
+    ],
+    "policy": "rank_matrix_family_scope_by_product_impact_and_closability_without_overclaiming_broad_pbma_coverage"
+  },
+  "families": [
+    {
+      "matrix_family": "pea_isolate",
+      "category": "plant_protein_matrix",
+      "importance_tier": "critical",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "matrix_benchmark_plus_calibration",
+      "support_class": "explicit_supported",
+      "expansion_status": "promote_primary_benchmark",
+      "scope_priority": "active_matrix_priority",
+      "closability_band": "high",
+      "evidence_landing": "external_benchmark_plus_calibration_review",
+      "priority_score": 433,
+      "primary_blocker": "external quantitative meaty-positive matrix benchmark",
+      "next_best_action": "promote_primary_meaty_positive_pea_benchmark",
+      "priority_rank": 1
+    },
+    {
+      "matrix_family": "soy_isolate",
+      "category": "plant_protein_matrix",
+      "importance_tier": "critical",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "matrix_benchmark_plus_calibration",
+      "support_class": "explicit_supported",
+      "expansion_status": "promote_primary_benchmark",
+      "scope_priority": "active_matrix_priority",
+      "closability_band": "high",
+      "evidence_landing": "external_benchmark_plus_calibration_review",
+      "priority_score": 433,
+      "primary_blocker": "external quantitative SPI meaty-positive benchmark",
+      "next_best_action": "promote_primary_meaty_positive_soy_benchmark",
+      "priority_rank": 2
+    },
+    {
+      "matrix_family": "mycoprotein",
+      "category": "alternative_protein_matrix",
+      "importance_tier": "high",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "bounded_calibration_prior",
+      "support_class": "explicit_supported",
+      "expansion_status": "bounded_expansion_candidate",
+      "scope_priority": "bounded_next_candidate",
+      "closability_band": "medium",
+      "evidence_landing": "bounded_calibration_prior",
+      "priority_score": 322,
+      "primary_blocker": "executable benchmark family",
+      "next_best_action": "land_first_family_specific_mycoprotein_measurement_package",
+      "priority_rank": 3
+    },
+    {
+      "matrix_family": "coconut_oil_co_matrix",
+      "category": "lipid_rich_co_matrix",
+      "importance_tier": "high",
+      "runtime_posture": "indirect_generic_support",
+      "evidence_surface": "generic_fat_fraction_plus_generic_lipid_chemistry",
+      "support_class": "indirect_only",
+      "expansion_status": "blocked_on_family_specific_evidence",
+      "scope_priority": "scope_gap_to_rank",
+      "closability_band": "medium",
+      "evidence_landing": "family_specific_calibration_or_tradeoff_benchmark",
+      "priority_score": 222,
+      "primary_blocker": "coconut-specific lipid profile",
+      "next_best_action": "encode_coconut_oil_as_explicit_open_family_gap",
+      "priority_rank": 4
+    },
+    {
+      "matrix_family": "other_plant_proteins",
+      "category": "alternative_protein_matrix",
+      "importance_tier": "high",
+      "runtime_posture": "open_gap",
+      "evidence_surface": "narrative_only_or_unencoded_literature",
+      "support_class": "open_gap",
+      "expansion_status": "blocked_on_runtime_prior_and_benchmark",
+      "scope_priority": "scope_gap_to_rank",
+      "closability_band": "low",
+      "evidence_landing": "runtime_prior_plus_first_benchmark_design",
+      "priority_score": 221,
+      "primary_blocker": "runtime priors",
+      "next_best_action": "rank_next_family_by_product_impact_and_literature_closability",
+      "priority_rank": 5
+    },
+    {
+      "matrix_family": "extrusion_heavy_systems",
+      "category": "process_regime",
+      "importance_tier": "critical",
+      "runtime_posture": "directional_matrix",
+      "evidence_surface": "exploratory_mode",
+      "support_class": "explicit_supported",
+      "expansion_status": "hold_process_regime_only",
+      "scope_priority": "hold_current_posture",
+      "closability_band": "hold",
+      "evidence_landing": "process_regime_intake_and_warnings",
+      "priority_score": 130,
+      "primary_blocker": "benchmark-grade quantitative closure",
+      "next_best_action": "add_family_specific_process_intake_when_literature_allows",
+      "priority_rank": 6
+    },
+    {
+      "matrix_family": "soy_hydrolysate",
+      "category": "plant_protein_hydrolysate",
+      "importance_tier": "high",
+      "runtime_posture": "qualitative_intake_only",
+      "evidence_surface": "qualitative_intake",
+      "support_class": "explicit_supported",
+      "expansion_status": "hold_intake_only",
+      "scope_priority": "hold_current_posture",
+      "closability_band": "hold",
+      "evidence_landing": "qualitative_intake_only",
+      "priority_score": 120,
+      "primary_blocker": "absolute ppb validation",
+      "next_best_action": "preserve_as_qualitative_design_anchor",
+      "priority_rank": 7
+    }
+  ]
+}

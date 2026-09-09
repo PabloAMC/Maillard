@@ -10,7 +10,7 @@
     "replaces": "thiamine_cys_ribose_100C_Hofmann1996 (deleted 2026-08-26; its DOI 10.1021/jf960062o was never registered with any DOI agency and its reported MFT value 3.14 ppb is numerically pi)",
     "measurement_basis": "Table II: ng MFT per 33.3 g of thermally processed sample (footnote b); systems I / II / IV = 389 +/- 57, 489 +/- 90, 425 +/- 103; the abstract states the same range as ng/33.3 g. Target = system I, 11.7 ppb.",
     "ph_note": "pH 5.5-5.8 before and after processing (Process section); 5.65 used. Not buffered.",
-    "concentration_note": "Table I solids composition (g/100 g): MSG 45.19, NaCl 45.19, IMP 5.73, D-glucose 2.16, thiamine-HCl 1.08, cysteine-HCl 0.43 (system I; 34S-cysteine-HCl 0.43 in II-IV; D-xylose 0.22 in III-IV). 10 g solids + 23.3 g water per vial. Molarities here are per litre of ADDED water (the aqueous phase before dissolution of the salts): glucose 51.5 mM, thiamine-HCl 13.7 mM, cysteine-HCl 11.7 mM. MSG, NaCl and IMP are omitted because they are not reactive precursors on this path; the very high ionic strength is a declared difference from the dilute model systems the sulfur lane was fitted on.",
+    "concentration_note": "Table I solids composition (g/100 g): MSG 45.19, NaCl 45.19, IMP 5.73, D-glucose 2.16, thiamine-HCl 1.08, cysteine-HCl 0.43 (system I; 34S-cysteine-HCl 0.43 in II-IV; D-xylose 0.22 in III-IV). 10 g solids + 23.3 g water per vial. Molarities here are per litre of ADDED water (the aqueous phase before dissolution of the salts): glucose 46.8 mM, thiamine-HCl 13.7 mM, cysteine-HCl 10.5 mM. CORRECTED 2026-09-09 (bolton1993_extraction.md, Reagents): the paper specifies D-GLUCOSE MONOHYDRATE and CYSTEINE-HCl MONOHYDRATE, and this bundle computed both molarities from the ANHYDROUS molar masses, which put glucose 10 % and cysteine 11 % high (51.5 and 11.7 mM). Thiamine-HCl was already right. MSG, NaCl and IMP are omitted from the charge because the core has no step for them, WHICH IS NOT THE SAME AS THEIR BEING INERT: the glutamate alone is about 1 mol/L, twenty times the glucose and eighty times the cysteine, and it is a Maillard reactant that competes for every carbonyl in the pot; the IMP is a ribose source this paper's own introduction cites as an MFT route. The claim this bundle can defend is the narrow one the isotope work supports -- the MFT here is thiamine-derived -- not that the omitted species do nothing. The very high ionic strength (NaCl about 3 mol/L) is a declared difference from the dilute model systems the sulfur lane was fitted on.",
     "independent_corroboration": "11.7-14.7 ppb sits inside Kerscher & Grosch (10.1021/jf970892v) 5-28 ug/kg MFT for real boiled meat.",
     "sulfur_origin_note": "Only 7.5-8.0 percent of MFT sulfur came from 34S-labelled cysteine, i.e. thiamine is the dominant sulfur source in this system; no thiamine gave no MFT.",
     "water_activity_note": "a_w 0.83 at ambient temperature before processing (Process section); the core has no a_w term."
@@ -20,10 +20,10 @@
       "concentration_mM": 13.7
     },
     "L-Cysteine": {
-      "concentration_mM": 11.7
+      "concentration_mM": 10.5
     },
     "D-Glucose": {
-      "concentration_mM": 51.5
+      "concentration_mM": 46.8
     }
   },
   "conditions": {
@@ -46,7 +46,7 @@
     "tier": "PRIMARY",
     "family": "thiamine_fragmentation_support",
     "execution_path": "free_precursor",
-    "notes": "Quantitative Family 03 thiamine-fragmentation anchor: thiamine-HCl + cysteine-HCl + D-glucose (+ MSG, NaCl, IMP) at 30 % solids, sealed vials, 120 C for 60 min, MFT by dichloromethane extraction and GC/MS-SIM against a dodecane internal standard. REBUILT 2026-09-04 FROM THE FULL TEXT (data/articles/bolton1993.pdf): composition from Table I, pH 5.5-5.8 and a_w 0.83 from the Process section, MFT from Table II (system I). Until this date pH, molarities and the value were taken from the indexed abstract with assumed loadings. THE FINDING THIS BENCHMARK CARRIES: no MFT formed without thiamine (system III) and only 7.5-8 % of the MFT carried cysteine's 34S, so the MFT here is thiamine-derived; the sugar/cysteine route contributes nothing measurable at these conditions."
+    "notes": "Quantitative Family 03 thiamine-fragmentation anchor: thiamine-HCl + cysteine-HCl + D-glucose (+ MSG, NaCl, IMP) at 30 % solids, sealed vials, 120 C for 60 min, MFT by dichloromethane extraction and GC/MS-SIM against a dodecane internal standard. REBUILT 2026-09-04 FROM THE FULL TEXT (data/articles/bolton1993.pdf): composition from Table I, pH 5.5-5.8 and a_w 0.83 from the Process section, MFT from Table II (system I). Until this date pH, molarities and the value were taken from the indexed abstract with assumed loadings. MOLARITIES CORRECTED 2026-09-09 to the monohydrate molar masses the Reagents section specifies (glucose was 10 % high, cysteine 11 %). THE FINDING THIS BENCHMARK CARRIES: no MFT formed without thiamine (system III) and only 7.5-8 % of the MFT carried cysteine's 34S, so the MFT here is thiamine-derived; the sugar/cysteine route contributes nothing measurable at these conditions."
   },
   "validation_contract": {
     "scale_thresholds": {

@@ -80,7 +80,8 @@ still moves 1.9 dex); T4 passes (Yiltirak median fold 13.7). Verdict by the rule
 almost no disulfide (oxidant-limited); the saturable thioether because its source is dead at the
 optimum and its equilibrium releases the thiol when hot; the irreversible addition to the pot's own
 osones because the objective does not want it at any temperature. What they share is the objective:
-54 fed-intermediate rows at 145 °C from one laboratory, against seven within-study ratios at 100 °C.
+18 rows at 145 °C against 13 at 100 °C, and inside those, **12 fed-intermediate mol % rows from one laboratory against 6 Schieberle within-study ratios**.
+*(Count corrected 2026-09-09 by enumerating the objective's own row table. This sentence read "54 fed-intermediate rows at 145 °C … against seven within-study ratios at 100 °C" until then: 54 is the size of the whole B9 block, not of its fed rows, and the seventh Schieberle ratio is attached to the 145 °C system, not the 100 °C one. The imbalance is real and it is 2:1 on the decisive rows, not 8:1. The argument stands; the number that was carrying it did not.)*
 Any structure that slows the 100 °C loss also perturbs the 145 °C fed pots, and the fed pots win by
 weight of number. The next step is not a fourth structure on the same rows; it is either the
 experiment of the introduction's section 8 (the reference pot at 100 and 140 °C with the removal

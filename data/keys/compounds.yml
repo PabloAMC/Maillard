@@ -244,6 +244,17 @@ compounds:
   aliases: []
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_furanmethanol
+  display_name: 2-Furanmethanol
+  kind: molecule
+  smiles: OCc1ccco1
+  inchikey: XPFVYQJUAUNWIW-UHFFFAOYSA-N
+  canonical_smiles: OCc1ccco1
+  aliases:
+  - 2-furylmethanol
+  - furfuryl alcohol
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 2_furfurylthiol
   display_name: 2-Furfurylthiol (FFT)
   kind: molecule
@@ -416,19 +427,35 @@ compounds:
   - panel:key
   - species:off_flavour_targets.yml
   identity_source: data/species/off_flavour_targets.yml
+- id: 2_pentylpyridine
+  display_name: 2-Pentylpyridine
+  kind: molecule
+  smiles: CCCCCc1ccccn1
+  inchikey: HSDXVAOHEOSTFZ-UHFFFAOYSA-N
+  canonical_smiles: CCCCCc1ccccn1
+  aliases: []
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 3_isobutyl_2_methoxypyrazine
   display_name: 3-Isobutyl-2-methoxypyrazine (IBMP)
   kind: molecule
   smiles: COc1nccnc1CC(C)C
   inchikey: UXFSPRAGHGMRSQ-UHFFFAOYSA-N
   canonical_smiles: COc1nccnc1CC(C)C
+  inchi: InChI=1S/C9H14N2O/c1-7(2)6-8-9(12-3)11-5-4-10-8/h4-5,7H,6H2,1-3H3
+  cas: 24683-00-9
   class: methoxypyrazines
   aliases:
+  - 2-isobutyl-3-methoxypyrazine
+  - 3-Isobutyl-2-methoxypyrazine
   - 3-isobutyl-2-methoxypyrazine
+  - IBMP
   - ibmp
+  - isobutyl methoxypyrazine
   seen_in:
   - flavor:off_note_reference_anchors
-  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
 - id: 3_methylbutanal
   display_name: 3-Methylbutanal
   kind: molecule
@@ -473,6 +500,15 @@ compounds:
   - 4-vinylguaiacol
   seen_in:
   - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 5_methylfurfural
+  display_name: 5-Methylfurfural
+  kind: molecule
+  smiles: Cc1ccc(C=O)o1
+  inchikey: OUDFNZMQXZILJD-UHFFFAOYSA-N
+  canonical_smiles: Cc1ccc(C=O)o1
+  aliases: []
+  seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: acetaldehyde
   display_name: Acetaldehyde
@@ -672,6 +708,15 @@ compounds:
   - (E)-2-octenal
   seen_in:
   - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: e_e_2_4_decadienal
+  display_name: (E,E)-2,4-Decadienal
+  kind: molecule
+  smiles: CCCCC/C=C/C=C/C=O
+  inchikey: JZQKTMZYLHNFPL-BLHCBFLLSA-N
+  canonical_smiles: CCCCC/C=C/C=C/C=O
+  aliases: []
+  seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: e_e_2_4_heptadienal
   display_name: (E,E)-2,4-Heptadienal
@@ -901,6 +946,16 @@ compounds:
   seen_in:
   - species:toxic_markers.yml
   identity_source: data/species/toxic_markers.yml
+- id: maltol
+  display_name: Maltol
+  kind: molecule
+  smiles: Cc1occc(=O)c1O
+  inchikey: XPCTZQVDEJYUGT-UHFFFAOYSA-N
+  canonical_smiles: Cc1occc(=O)c1O
+  aliases:
+  - 3-hydroxy-2-methyl-4H-pyran-4-one
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: meiqx
   display_name: 2-Amino-3-methylimidazo[4,5-f]quinoxaline (MeIQx)
   kind: molecule
