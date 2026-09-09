@@ -1,0 +1,392 @@
+{
+  "artifact": "kinetic_core_b20_fit_report",
+  "wave": "B20 -- the glycation arm: protein-bound lysine as a reactant on the trunk lane",
+  "generated_on": "2026-09-09",
+  "generated_by": "scripts/generators/generate_kinetic_core_b20_fit.py",
+  "git": {
+    "head": "323c4900a446d930739973f05cbf8c31229198c9"
+  },
+  "prereg": "results/validation/kinetic_core_b20_prereg.md",
+  "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendment 30",
+  "objective": {
+    "form": "ten printed rate constants (Nguyen 2016 M1, 120 / 130 C), log10 residuals over the printed interval; five log10 constants at 100 C free, five barriers declared",
+    "n_rows": 10,
+    "n_free_parameters": 5,
+    "final_cost": 17.205999466614905,
+    "best_start": 1,
+    "reduced_chi2": 3.441199893322981
+  },
+  "rows": [
+    {
+      "id": "nguyen_k_glyc_120C",
+      "key": "k_glyc",
+      "t_c": 120.0,
+      "target": 0.00015,
+      "half_width": 3e-05,
+      "sigma_log": 0.07918124604762482,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 9.594128263797671e-05,
+      "residual_dex": -0.19408573880872967
+    },
+    {
+      "id": "nguyen_k_glyc_130C",
+      "key": "k_glyc",
+      "t_c": 130.0,
+      "target": 0.00016,
+      "half_width": 2.2e-05,
+      "sigma_log": 0.05595140532914999,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.00020000023716819086,
+      "residual_dex": 0.09691052801193385
+    },
+    {
+      "id": "nguyen_k_flp_cml_120C",
+      "key": "k_flp_cml",
+      "t_c": 120.0,
+      "target": 0.0088,
+      "half_width": 0.0066,
+      "sigma_log": 0.24303804868629442,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.0030712143182850425,
+      "residual_dex": -0.45717254831508136
+    },
+    {
+      "id": "nguyen_k_flp_cml_130C",
+      "key": "k_flp_cml",
+      "t_c": 130.0,
+      "target": 0.006,
+      "half_width": 0.0016,
+      "sigma_log": 0.1026623418971477,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.007239784850541702,
+      "residual_dex": 0.08157440978989938
+    },
+    {
+      "id": "nguyen_k_flp_cel_120C",
+      "key": "k_flp_cel",
+      "t_c": 120.0,
+      "target": 0.0023,
+      "half_width": 0.0027,
+      "sigma_log": 0.5,
+      "spans_zero": true,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": false,
+      "predicted": 0.0010071852453547993,
+      "residual_dex": -0.3586184810185894
+    },
+    {
+      "id": "nguyen_k_flp_cel_130C",
+      "key": "k_flp_cel",
+      "t_c": 130.0,
+      "target": 0.002,
+      "half_width": 0.0003,
+      "sigma_log": 0.06069784035361165,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.0020244866833115387,
+      "residual_dex": 0.005284928743322356
+    },
+    {
+      "id": "nguyen_k_flp_decay_120C",
+      "key": "k_flp_decay",
+      "t_c": 120.0,
+      "target": 0.052,
+      "half_width": 0.033,
+      "sigma_log": 0.21341558207949357,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.06845963050011326,
+      "residual_dex": 0.11943120713850325
+    },
+    {
+      "id": "nguyen_k_flp_decay_130C",
+      "key": "k_flp_decay",
+      "t_c": 130.0,
+      "target": 0.15,
+      "half_width": 0.034,
+      "sigma_log": 0.08872656395385518,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.143036954607128,
+      "residual_dex": -0.020643004048183776
+    },
+    {
+      "id": "nguyen_k_cml_loss_120C",
+      "key": "k_cml_loss",
+      "t_c": 120.0,
+      "target": 0.29,
+      "half_width": 0.27,
+      "sigma_log": 0.2857900291072444,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.10405477370453824,
+      "residual_dex": -0.44513598883441774
+    },
+    {
+      "id": "nguyen_k_cml_loss_130C",
+      "key": "k_cml_loss",
+      "t_c": 130.0,
+      "target": 0.077,
+      "half_width": 0.033,
+      "sigma_log": 0.15490195998574316,
+      "spans_zero": false,
+      "anchor": "Nguyen, van der Fels-Klerx & van Boekel 2016, Food Chem. 192:125, Table 1 system M1: sodium caseinate 30 g/L (about 16 mmol/L lysine residues) + glucose 150 mmol/L, 0.1 M phosphate pH 6.8, 120 / 130 C, sealed with air; nguyen2016_extraction.md sec. 4",
+      "kind": "rate_constant",
+      "decisive": true,
+      "predicted": 0.10405477370453824,
+      "residual_dex": 0.1307712838920565
+    }
+  ],
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        -4.51,
+        -2.86,
+        -3.29,
+        -1.91,
+        -0.83
+      ],
+      "x": [
+        -4.707341524585425,
+        -3.3174028520291574,
+        -3.652055191729849,
+        -1.856048900183733,
+        -0.9827379909354617
+      ],
+      "cost": 17.20599946661491,
+      "nfev": 6,
+      "status": 2,
+      "residuals": {
+        "nguyen_k_glyc_120C": -2.451157925698182,
+        "nguyen_k_glyc_130C": 1.7320481484650223,
+        "nguyen_k_flp_cml_120C": -1.8810739749199685,
+        "nguyen_k_flp_cml_130C": 0.7945894112525249,
+        "nguyen_k_flp_cel_120C": -0.7172369620262311,
+        "nguyen_k_flp_cel_130C": 0.0870694693255557,
+        "nguyen_k_flp_decay_120C": 0.5596180277616759,
+        "nguyen_k_flp_decay_130C": -0.23265866646753874,
+        "nguyen_k_cml_loss_120C": -1.5575630480354437,
+        "nguyen_k_cml_loss_130C": 0.8442196851743671
+      },
+      "residuals_dex": {
+        "nguyen_k_glyc_120C": -0.1940857388162934,
+        "nguyen_k_glyc_130C": 0.09691052800437022,
+        "nguyen_k_flp_cml_120C": -0.4571725482991207,
+        "nguyen_k_flp_cml_130C": 0.08157440980586,
+        "nguyen_k_flp_cel_120C": -0.35861848101311555,
+        "nguyen_k_flp_cel_130C": 0.005284928748796267,
+        "nguyen_k_flp_decay_120C": 0.11943120713693625,
+        "nguyen_k_flp_decay_130C": -0.020643004049750738,
+        "nguyen_k_cml_loss_120C": -0.44513598883441774,
+        "nguyen_k_cml_loss_130C": 0.1307712838920565
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        -4.491347839797085,
+        -3.0815724607624007,
+        -2.4035245940556864,
+        -2.088050336347429,
+        -0.6786666268719856
+      ],
+      "x": [
+        -4.707341524577862,
+        -3.317402852045118,
+        -3.652055191735323,
+        -1.856048900182166,
+        -0.9827379909354617
+      ],
+      "cost": 17.205999466614905,
+      "nfev": 7,
+      "status": 2,
+      "residuals": {
+        "nguyen_k_glyc_120C": -2.4511579256026574,
+        "nguyen_k_glyc_130C": 1.7320481486002046,
+        "nguyen_k_flp_cml_120C": -1.88107397498564,
+        "nguyen_k_flp_cml_130C": 0.7945894110970577,
+        "nguyen_k_flp_cel_120C": -0.7172369620371788,
+        "nguyen_k_flp_cel_130C": 0.08706946923537275,
+        "nguyen_k_flp_decay_120C": 0.5596180277690184,
+        "nguyen_k_flp_decay_130C": -0.23265866644987815,
+        "nguyen_k_cml_loss_120C": -1.5575630480354437,
+        "nguyen_k_cml_loss_130C": 0.8442196851743671
+      },
+      "residuals_dex": {
+        "nguyen_k_glyc_120C": -0.19408573880872967,
+        "nguyen_k_glyc_130C": 0.09691052801193385,
+        "nguyen_k_flp_cml_120C": -0.45717254831508136,
+        "nguyen_k_flp_cml_130C": 0.08157440978989938,
+        "nguyen_k_flp_cel_120C": -0.3586184810185894,
+        "nguyen_k_flp_cel_130C": 0.005284928743322356,
+        "nguyen_k_flp_decay_120C": 0.11943120713850325,
+        "nguyen_k_flp_decay_130C": -0.020643004048183776,
+        "nguyen_k_cml_loss_120C": -0.44513598883441774,
+        "nguyen_k_cml_loss_130C": 0.1307712838920565
+      }
+    }
+  ],
+  "frozen_parameters": {
+    "glycation": {
+      "log10_k_glyc_100C": -4.707341524577862,
+      "log10_k_flp_cml_100C": -3.317402852045118,
+      "log10_k_flp_cel_100C": -3.652055191735323,
+      "log10_k_flp_decay_100C": -1.856048900182166,
+      "log10_k_cml_loss_100C": -0.9827379909354617
+    },
+    "declared_barriers_kj_mol": {
+      "k_glyc": 96.8,
+      "k_flp_cml": 113.0,
+      "k_flp_cel": 92.0,
+      "k_flp_decay": 97.1,
+      "k_cml_loss": 0.0
+    },
+    "constants_at_120C": {
+      "k_glyc": 9.594128263797671e-05,
+      "k_flp_cml": 0.0030712143182850425,
+      "k_flp_cel": 0.0010071852453547993,
+      "k_flp_decay": 0.06845963050011326,
+      "k_cml_loss": 0.10405477370453824
+    },
+    "constants_at_130C": {
+      "k_glyc": 0.00020000023716819086,
+      "k_flp_cml": 0.007239784850541702,
+      "k_flp_cel": 0.0020244866833115387,
+      "k_flp_decay": 0.143036954607128,
+      "k_cml_loss": 0.10405477370453824
+    }
+  },
+  "bands_log10": {
+    "lower": {
+      "log10_k_glyc_100C": -6.51,
+      "log10_k_flp_cml_100C": -4.859999999999999,
+      "log10_k_flp_cel_100C": -5.29,
+      "log10_k_flp_decay_100C": -3.91,
+      "log10_k_cml_loss_100C": -2.83
+    },
+    "upper": {
+      "log10_k_glyc_100C": -2.51,
+      "log10_k_flp_cml_100C": -0.8599999999999999,
+      "log10_k_flp_cel_100C": -1.29,
+      "log10_k_flp_decay_100C": 0.09000000000000008,
+      "log10_k_cml_loss_100C": 1.17
+    }
+  },
+  "laplace": {
+    "sigma": {
+      "log10_k_glyc_100C": 0.08476548541211017,
+      "log10_k_flp_cml_100C": 0.1754340034602193,
+      "log10_k_flp_cel_100C": 0.11177674544452744,
+      "log10_k_flp_decay_100C": 0.15198069698492725,
+      "log10_k_cml_loss_100C": 0.2526282628547477
+    },
+    "chi2_reduced": 3.441199893322981,
+    "dof": 5,
+    "identified": {
+      "log10_k_glyc_100C": true,
+      "log10_k_flp_cml_100C": true,
+      "log10_k_flp_cel_100C": true,
+      "log10_k_flp_decay_100C": true,
+      "log10_k_cml_loss_100C": true
+    },
+    "on_bound": {
+      "log10_k_glyc_100C": false,
+      "log10_k_flp_cml_100C": false,
+      "log10_k_flp_cel_100C": false,
+      "log10_k_flp_decay_100C": false,
+      "log10_k_cml_loss_100C": false
+    },
+    "note": "Gauss-Newton at the optimum; sigma scaled by the reduced chi-square when it exceeds one (the rows' intervals are the sigmas)"
+  },
+  "diagnostics": {
+    "nguyen_pot_30min": {
+      "120C": {
+        "LYSP": 13.75180542338323,
+        "FLP": 2.061074771340313,
+        "CML": 0.05287058929637448,
+        "CEL": 0.04621102548294186,
+        "TDG": 1.5803967149604505,
+        "lysine_lost_fraction": 0.14051216103854813
+      },
+      "130C": {
+        "LYSP": 13.727604531943095,
+        "FLP": 1.7975370211213868,
+        "CML": 0.12302755931361037,
+        "CEL": 0.10377131696442825,
+        "TDG": 2.6638003452988075,
+        "lysine_lost_fraction": 0.14202471675355655
+      }
+    },
+    "nguyen_printed_cml_range_mmol_l": [
+      0.025,
+      0.135
+    ],
+    "berk2021_flp_to_cml_180C": {
+      "model_per_min": 0.2987116603351968,
+      "berk_per_min": 0.00554,
+      "dex": 1.7317424110742046,
+      "note": "sesame seed, dry, 180 C; Berk's own barrier (113) is the declared one, so this compares the 100 C anchor"
+    },
+    "hamzalioglu2026_laclys_to_cml": {
+      "110C": {
+        "model_per_min": 0.0012458188979750167,
+        "milk_per_min": 0.00017,
+        "dex": 0.8650059930744572
+      },
+      "120C": {
+        "model_per_min": 0.0030712143182850425,
+        "milk_per_min": 0.0036,
+        "dex": -0.06899237693219994
+      },
+      "130C": {
+        "model_per_min": 0.007239784850541702,
+        "milk_per_min": 0.0014,
+        "dex": 0.713597624495305
+      },
+      "140C": {
+        "model_per_min": 0.01637242816374793,
+        "milk_per_min": 0.0011,
+        "dex": 1.1727204084207745
+      }
+    },
+    "troise2015_direction": "expanded soybean, 110 C, 60 min: about 25 % of the bound lysine lost (a moist solid with sucrose, which the engine cannot charge; direction only)"
+  },
+  "start_vectors": {
+    "0": [
+      -4.51,
+      -2.86,
+      -3.29,
+      -1.91,
+      -0.83
+    ],
+    "1": [
+      -4.491347839797085,
+      -3.0815724607624007,
+      -2.4035245940556864,
+      -2.088050336347429,
+      -0.6786666268719856
+    ]
+  }
+}

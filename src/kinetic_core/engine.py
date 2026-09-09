@@ -225,6 +225,22 @@ TARGET_ALIASES: Mapping[str, str] = {
     "glyoxal": "GO",
     "glucosone": "G",
     "diacetyl": "DA",
+    # B20 (2026-09-09): the glycation arm, trunk lane only, on protein-bound lysine
+    "cml": "CML",
+    "carboxymethyllysine": "CML",
+    "n-epsilon-(carboxymethyl)lysine": "CML",
+    "nε-(carboxymethyl)lysine (cml)": "CML",
+    "nε-(carboxymethyl)lysine": "CML",
+    "cel": "CEL",
+    "carboxyethyllysine": "CEL",
+    "n-epsilon-(carboxyethyl)lysine": "CEL",
+    "nε-(carboxyethyl)lysine (cel)": "CEL",
+    "nε-(carboxyethyl)lysine": "CEL",
+    "fructosyl-lysine": "FLP",
+    "fructosyllysine": "FLP",
+    "fructoselysine": "FLP",
+    "bound lysine": "LYSP",
+    "protein-bound lysine": "LYSP",
     # B18 (2026-09-08): the pyrazine step, trunk lane only
     "pyrazine": "PZ",
     "2,5-dimethylpyrazine": "DMP",
@@ -396,6 +412,10 @@ _TARGET_LANE: Mapping[str, str] = {
     # -- B18, the pyrazine step: trunk-only as the dicarbonyls are
     "PZ": TRUNK,
     "DMP": TRUNK,
+    "CML": TRUNK,
+    "CEL": TRUNK,
+    "FLP": TRUNK,
+    "LYSP": TRUNK,
     "MPZ": TRUNK,
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
@@ -411,7 +431,9 @@ _TARGET_LANE: Mapping[str, str] = {
 DICARBONYL_TARGET_KEYS: frozenset = frozenset({"G", "GO", "DA"})
 #: B18: the pyrazine species, whose steps also exist on the trunk integrator only.
 PYRAZINE_TARGET_KEYS: frozenset = frozenset({"PZ", "DMP", "MPZ"})
-TRUNK_ONLY_TARGET_KEYS: frozenset = DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS
+#: B20: the glycation arm's reportable species, trunk lane only, on a protein loading.
+GLYCATION_TARGET_KEYS: frozenset = frozenset({"CML", "CEL", "FLP", "LYSP"})
+TRUNK_ONLY_TARGET_KEYS: frozenset = DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS | GLYCATION_TARGET_KEYS
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
 _PRECURSOR_LANE: Mapping[str, str] = {
@@ -951,12 +973,27 @@ def declare_envelope(
     # by name instead of answered with the inert zero those state vectors carry.
     dicarbonyls = sorted(c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS)
     pyrazines = sorted(c for c, key in mapped_targets.items() if key in PYRAZINE_TARGET_KEYS)
-    if (dicarbonyls or pyrazines) and lane is not None and lane != TRUNK:
+    glycation = sorted(c for c, key in mapped_targets.items() if key in GLYCATION_TARGET_KEYS)
+    if glycation and lane == TRUNK:
+        # B20: the arm's substrate is protein-bound lysine; without a loading the pool is zero
+        # and a zero would be a structural artefact, not an answer.
+        from .matrix_sites import resolve as _resolve_sites_for_glycation
+        from .parameters_glycation import GLYCATION_NO_PROTEIN_REASON
+
+        try:
+            _charged, _ = _resolve_sites_for_glycation(spec.process)
+        except Exception:  # noqa: BLE001 - a malformed loading is reported by the matrix layer itself
+            _charged = None
+        if _charged is None or _charged.amine <= 0:
+            reasons.append(GLYCATION_NO_PROTEIN_REASON + " Targets: " + ", ".join(repr(c) for c in glycation) + ".")
+    if (dicarbonyls or pyrazines or glycation) and lane is not None and lane != TRUNK:
         named = []
         if dicarbonyls:
             named.append("DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls) + " (wave B13)")
         if pyrazines:
             named.append("PYRAZINE TARGETS " + ", ".join(repr(c) for c in pyrazines) + " (wave B18)")
+        if glycation:
+            named.append("GLYCATION TARGETS " + ", ".join(repr(c) for c in glycation) + " (wave B20)")
         reasons.append(
             " and ".join(named)
             + f" run on the trunk lane only: the {lane} lane's network keeps the topology its fit was run "
@@ -1102,6 +1139,11 @@ def declare_envelope(
 
         warnings.append(PYRAZINE_SUPPLY_CAVEAT)
         warnings.append(PYRAZINE_SINK_CAVEAT)
+    # --- B20: the glycation arm's own declaration ------------------------------
+    if set(mapped_targets.values()) & GLYCATION_TARGET_KEYS:
+        from .parameters_glycation import GLYCATION_AVAILABILITY_CAVEAT
+
+        warnings.append(GLYCATION_AVAILABILITY_CAVEAT)
 
     # --- B7: the furanic channel's own declarations -----------------------
     # Every one of these is an EXTRAPOLATION WARNING, not a refusal, and each
@@ -1444,6 +1486,13 @@ def core_parameters(
         from .parameters_furanic import with_fitted_furanic
 
         parameters.update(with_fitted_furanic(float(override["k_dpo_af"])))
+    if "glycation" in override:
+        # B20, the same discipline: the frozen literals in parameters_glycation are the default; an
+        # explicit block of the five log10 constants at 100 C replaces them.
+        from .parameters_glycation import GLYCATION_COORDINATES, with_fitted_glycation
+
+        b = override["glycation"]
+        parameters.update(with_fitted_glycation(*[float(b[k]) for k in GLYCATION_COORDINATES]))
     if "pyrazine" in override:
         # B18, the same discipline: the frozen literals in parameters_pyrazine are the default;
         # an explicit block {log10_k_go_ak_100C, ea_go_ak_kj_mol, log10_k_mgo_ak_100C,
@@ -1942,6 +1991,19 @@ def _integrate_program(
             reservoir, _basis = oxygen_reservoir_units(process)
             state["OXR"] = reservoir * (1.0 if reservoir_scale is None else float(reservoir_scale))
         state.setdefault("OXV", 0.0)
+    if lane == TRUNK and "LYSP" not in state:
+        # B20 (2026-09-09): the bound-lysine pool from the spec's protein loading and the matrix's
+        # amine density, times the declared available fraction (the band centre); zero, as before,
+        # when no loading is stated, so the glycation steps carry no flux.
+        from .matrix_sites import resolve as _resolve_sites
+        from .parameters_glycation import available_fraction
+
+        try:
+            charged, _note = _resolve_sites(process)
+        except Exception:  # noqa: BLE001 - a malformed loading was already refused by the declaration
+            charged = None
+        if charged is not None and charged.amine > 0:
+            state["LYSP"] = float(charged.amine) * available_fraction(charged.amine_band)
 
     for index, (duration, temperature_c) in enumerate(process.thermal.segments):
         grid = np.array([0.0, float(duration)])

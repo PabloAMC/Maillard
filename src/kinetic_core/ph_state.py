@@ -733,6 +733,24 @@ UNTRACKED_TITRATABLE: Mapping[str, str] = {
         "least consequential entry on this list and it is here so that the "
         "list is exhaustive rather than convenient."
     ),
+    # B20 (2026-09-09): the glycation arm's species, trunk-only, zero without a protein loading.
+    "LYSP": (
+        "protein-bound lysine residue (epsilon-amine, pKa about 10.5). Left out of the charge balance "
+        "for the same reason as Gly: the trunk's amine centres are not in the ledger, and the pool is "
+        "zero in every pot without a protein loading."
+    ),
+    "FLP": (
+        "bound fructosyl-lysine (a secondary amine, pKa about 9). Left out for the same reason as AMA, "
+        "the trunk's free Amadori compound; at most a few mmol/L in a loaded pot."
+    ),
+    "CML": (
+        "N-epsilon-(carboxymethyl)lysine, bound: one carboxyl and one secondary amine per unit, at "
+        "sub-mmol/L levels in every pot the arm has been run on; left out like the trunk's other "
+        "carboxyl-bearing products."
+    ),
+    "CEL": (
+        "N-epsilon-(carboxyethyl)lysine, bound: as CML, at a third of its level."
+    ),
 }
 
 

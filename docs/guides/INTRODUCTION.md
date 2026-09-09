@@ -176,6 +176,7 @@ in order, in plain words.
 | the thiol disulfide made reversible, so the dimer is a reservoir rather than a grave | every measured thiol sink has a partner and saturates or reverses; the model's dominant sink has neither | the data drove the release to zero: the model holds a hundredth of the disulfide two laboratories measure, because its oxidant runs out first | no; the finding is kept |
 | the thiol removal made a saturating adduct on an electrophile pool the pot itself makes, feeding the measured room-temperature binding step | the same measured sink, but with a supply that runs out | the pool never forms, because the earlier fits had already switched off the browning step it was tied to; and the measured binding equilibrium lets go of the thiol above 80 °C, so even a large pool would hold under 5 % of it when hot | no; the finding is kept |
 | a pyrazine step added to the sugar path, its two rate constants fitted on one laboratory's fed-dicarbonyl ladders and its pH shape on another's | the roasted note, asked for and refused until a measured rate existed | the fed-dicarbonyl rates fit within 20 %; from a sugar and amino acid pot the yield is a thousandfold low, because the model makes far too little glyoxal and methylglyoxal in water | yes, with that caveat on every answer |
+| the protein's bound lysine made a reactant on the sugar path (glycation to the bound Amadori compound, then CML and CEL), from one laboratory's rates on casein in water and barriers declared from measured steps | isolates are mostly bound lysine, and the safety markers the panel asks for are made on it | the rates reproduce within a factor of 1.5 where the data are firm; the level of CML in the source's own pot within its printed range; a milk laboratory's constant within 20 % at 120 °C; a dry seed's a fiftyfold away | yes, on a pot with a stated protein loading, with the availability band as its interval |
 
 ## 7. The one problem that matters most: where the thiols go
 
@@ -239,9 +240,10 @@ the pot makes for itself. That is the next step to pre-register.
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
 comes from, scores your own measurements, calibrates itself to your laboratory from those
 measurements without touching the shipped model, charges a pea, soy or whey protein's reactive sites
-from measured densities so the thiols and aldehydes meet the protein, answers for the roasted
-pyrazines with the caveat that only the fed-dicarbonyl step is measured, and lists what to measure
-next. It refuses questions the
+from measured densities so the thiols and aldehydes meet the protein and its bound lysine glycates
+(CML, CEL and the bound Amadori compound, on a pot with a stated protein loading), answers for the
+roasted pyrazines with the caveat that only the fed-dicarbonyl step is measured, and lists what to
+measure next. It refuses questions the
 evidence cannot answer instead of guessing, and when it refuses it says whether the chemistry has no
 route or only no rate: a small layer of cited reaction rules, run over the model's species, lists the
 steps the literature draws that the model does not have

@@ -316,6 +316,10 @@ def operative_parameters(fitted):
     from .parameters_pyrazine import PYRAZINE_PARAMETERS
 
     parameters.update(PYRAZINE_PARAMETERS)
+    # B20 (2026-09-09): the glycation arm, trunk-only, inert without a protein loading.
+    from .parameters_glycation import GLYCATION_PARAMETERS
+
+    parameters.update(GLYCATION_PARAMETERS)
     return parameters
 
 

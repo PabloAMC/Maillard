@@ -336,8 +336,11 @@ def test_extrapolation_beyond_the_measured_window_is_flagged(parameters):
     }
     for line in inside_warnings:
         # B13 (2026-09-07): the dicarbonyl trio is ingested through the same 160-200 C source.
+        # B20 (2026-09-09): the glycation arm's constants were measured at 120-130 C (casein in
+        # water), so a 100 C run is an extrapolation for them too, and says so.
         from src.kinetic_core.parameters_dicarbonyl import DICARBONYL_KEYS
-        assert line.split(":", 1)[0] in furanic_keys | set(DICARBONYL_KEYS), line
+        from src.kinetic_core.parameters_glycation import GLYCATION_KEYS
+        assert line.split(":", 1)[0] in furanic_keys | set(DICARBONYL_KEYS) | set(GLYCATION_KEYS), line
 
 
 # ---------------------------------------------------------------------------

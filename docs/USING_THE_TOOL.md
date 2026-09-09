@@ -246,6 +246,7 @@ Five kinds, none of which emits a number:
 | **unrepresented target** | you asked for a compound the core cannot name. Today the list is 1-hexanol, 2-pentylfuran, propanal, 2-nonenal, HEMF (homofuraneol) and 2,5-dimethyl-4-hydroxy-3(2H)-thiophenone; the engine's `UNREPRESENTED_COMPOUNDS` carries each one's reason. HMF, DMHF and furaneol left this list when the furanic channels were added and now answer. |
 | **lane conflict** | your request needs two Maillard lanes at once; they do not compose, because that would spend the same cysteine twice |
 | **missing sulfur source or asparagine** | the lane was selected but the charge cannot supply the atom the product is made of |
+| **glycation without a protein** | you asked for CML, CEL or fructosyl-lysine on a pot with no protein loading; they are made on protein-bound lysine, so state `protein_g_per_l` with a matrix on file or `protein_sites` |
 | **unidentified route** (a comparison) | one arm reaches the compound only through a step no measurement identifies, as the glucose arm reaches the thiols in Example 1; the ratio is printed as *undefined* with the arm named, never as a magnitude |
 
 Run `python scripts/maillard.py explain <compound>` to see what the model does have, and why.

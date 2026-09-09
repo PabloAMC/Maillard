@@ -20,6 +20,7 @@ give the aroma you want — and see exactly why the model refuses to answer when
 | where a compound comes from in this model | `explain` | the steps, their rates and the papers behind them, then the steps the literature draws that the model lacks ("possible, not modelled") | never |
 | how good the model is on your own measurements | `score` | the same scorecard the panel gets; nothing is refitted | the rows the panel would refuse |
 | what to measure next | `wishlist`, `rank` | the measurements that would free the most predictions | never |
+| how much CML and CEL a cook makes on my isolate | `predict` with `protein_g_per_l` and a matrix on file (or `protein_sites`), targets `CML`, `CEL`, `fructosyl-lysine` | the bound-lysine glycation arm, with the site-availability band as its interval | no protein loading is stated (free lysine is not the substrate), or the request is on the thiol or acrylamide path |
 | calibrate the model to my laboratory | `calibrate` | a per-laboratory file: response factors from your levels, the few rate constants your contrasts can identify, and the hold-out before and after; apply it with `--calibration` | fewer than one fit record; it never moves the shipped model |
 
 A refusal is an answer: it names the missing term or route. Section 5 of the

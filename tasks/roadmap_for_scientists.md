@@ -259,6 +259,12 @@ a pea-isolate recipe answers hexanal and 2-pentylfuran with an interval and name
 the isolate; the CML row on the panel becomes evaluable. About four weeks; the glycation rates exist
 in the AGE literature and are the part most likely to land.
 
+*Status 2026-09-09: part (i) landed as wave B20 and ships (`results/validation/kinetic_core_b20_prereg.md`
+section 6): a pot with a stated protein loading answers CML, CEL and the bound Amadori compound
+from Nguyen 2016's casein rates with declared barriers, the availability band as its interval. The
+panel's CML row stays refused because that benchmark states no protein loading and no cook; a
+benchmark with both is what the wishlist now asks for. Parts (ii) and (iii) are unchanged.*
+
 ## 6. Cross-cutting engineering, done once
 
 - **One overlay type** for calibrations, matrix declarations and waves, over the engine's existing

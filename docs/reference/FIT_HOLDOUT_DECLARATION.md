@@ -1279,3 +1279,17 @@ ran.
 3. **INERT DEFAULT.** The three site steps live in `sulfur.py` at zero unless a shipped report carries
    `mele_site_log10_yield`; the verdict is in `kinetic_core_b17a_ship_rule.md` and the prereg's section 6.
 
+## Amendment 30 — 2026-09-09 (Wave B20, the glycation arm)
+
+1. **TEN NEW FIT ROWS; FIVE NEW COORDINATES.** Nguyen 2016 Table 1, system M1 (casein + glucose,
+   water, pH 6.8, 120 and 130 °C): the printed rate constants k3, k7, k8, k9 and k11 at both
+   temperatures enter as FIT rows (rates fit, by the owner's rule), weighted by their printed
+   intervals. Five log10 constants at 100 °C are free; every barrier is DECLARED from a measured
+   step (Martins 2005, Berk 2021) or flat (the CML loss), none fitted.
+2. **WHAT IS VALIDATED.** Nguyen's printed CML level range (end-of-cook levels validate), Berk 2021's
+   and Hamzalioglu 2026's constants (comparators), Troise 2015 (direction), the panel's CML and CEL
+   proxy row: none enters the objective.
+3. **INERT DEFAULT.** The bound-lysine pool is zero without a protein loading, so every pot before
+   B20 reproduces bit for bit; the rule said SHIP, so the frozen literals are read on every loaded
+   trunk pot and a glycation target without a loading is refused by name.
+

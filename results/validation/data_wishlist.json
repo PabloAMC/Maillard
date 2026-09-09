@@ -4,16 +4,16 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "1bab9e158800e78b86fd6303ac7f7df0c968efe0",
-      "short": "1bab9e15",
-      "branch": "cleaning",
+      "commit": "323c4900a446d930739973f05cbf8c31229198c9",
+      "short": "323c4900",
+      "branch": "reactions",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "38b1dfe393e25f2256f7c5f407e6162e80b3b7e9a71b805181395f0583fd077f"
+        "sha256": "aeed62b4adb3c968fc7731a5e4a1e6d2bc6bf5d917b968481fc4be26eb6c9250"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "01cbcd93e6eef2cadf8e645927804650f242959f63212e5cef162f195b6dd6b1"
+        "sha256": "b17e9f8b4f860d259ff50ca3f321ccf0a92a4f28e4e792ac37f8fdbca1c86727"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -438,8 +438,8 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
-      "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML)",
-      "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "what": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network ",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "rows": [
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -450,8 +450,8 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
-      "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL)",
-      "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "what": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network k",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "rows": [
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",

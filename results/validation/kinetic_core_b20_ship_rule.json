@@ -1,0 +1,101 @@
+{
+  "artifact": "kinetic_core_b20_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b20_ship_rule",
+    "generated_on": "2026-09-09",
+    "git": {
+      "commit": "323c4900a446d930739973f05cbf8c31229198c9",
+      "short": "323c4900",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b20_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b20_fit_report.json",
+        "sha256": "8697f869c45101926c27be9ba336575768bceaa1ca0d521bfa6f5c592de44b3c"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b20_prereg.md",
+  "rule": "SHIP if T1 (the prereg's decisive rows within 0.3 dex), T2 (no scored panel row moves 0.05 dex) and T5 (every coordinate identified, off its bound) hold; T3 and T4 reported",
+  "cost": 17.205999466614905,
+  "n_rows": 10,
+  "frozen": {
+    "log10_k_glyc_100C": -4.707341524577862,
+    "log10_k_flp_cml_100C": -3.317402852045118,
+    "log10_k_flp_cel_100C": -3.652055191735323,
+    "log10_k_flp_decay_100C": -1.856048900182166,
+    "log10_k_cml_loss_100C": -0.9827379909354617
+  },
+  "T1": {
+    "decisive_rows_dex": {
+      "nguyen_k_glyc_120C": -0.19408573880872967,
+      "nguyen_k_glyc_130C": 0.09691052801193385,
+      "nguyen_k_flp_cml_130C": 0.08157440978989938,
+      "nguyen_k_flp_decay_120C": 0.11943120713850325,
+      "nguyen_k_flp_decay_130C": -0.020643004048183776,
+      "nguyen_k_flp_cel_130C": 0.005284928743322356,
+      "nguyen_k_cml_loss_130C": 0.1307712838920565
+    },
+    "reported_rows_dex": {
+      "nguyen_k_flp_cml_120C": -0.45717254831508136,
+      "nguyen_k_flp_cel_120C": -0.3586184810185894,
+      "nguyen_k_cml_loss_120C": -0.44513598883441774
+    },
+    "worst_row": "nguyen_k_glyc_120C",
+    "worst_dex": -0.19408573880872967,
+    "pass": true
+  },
+  "T2": {
+    "n_compared": 39,
+    "worst_dex": 0.0,
+    "worst_benchmark": "thiamine_cys_glucose_120C_Bolton1994",
+    "worst_path": "[0]/predicted",
+    "n_rows_moved_over_0.01_dex": 0,
+    "refused_rows_before_after": [
+      25,
+      25
+    ],
+    "pass": true
+  },
+  "T3": {
+    "cml_mmol_l": 0.05287058929637448,
+    "cel_mmol_l": 0.04621102548294186,
+    "printed_range": [
+      0.025,
+      0.135
+    ],
+    "lysine_lost_fraction": 0.14051216103854813,
+    "pass": true
+  },
+  "T4": {
+    "berk2021_180C_dex": 1.7317424110742046,
+    "hamzalioglu2026_dex": {
+      "110C": 0.8650059930744572,
+      "120C": -0.06899237693219994,
+      "130C": 0.713597624495305,
+      "140C": 1.1727204084207745
+    },
+    "troise2015": "expanded soybean, 110 C, 60 min: about 25 % of the bound lysine lost (a moist solid with sucrose, which the engine cannot charge; direction only)",
+    "reported_only": true
+  },
+  "T5": {
+    "sigma_dex": {
+      "log10_k_glyc_100C": 0.08476548541211017,
+      "log10_k_flp_cml_100C": 0.1754340034602193,
+      "log10_k_flp_cel_100C": 0.11177674544452744,
+      "log10_k_flp_decay_100C": 0.15198069698492725,
+      "log10_k_cml_loss_100C": 0.2526282628547477
+    },
+    "on_bound": {
+      "log10_k_glyc_100C": false,
+      "log10_k_flp_cml_100C": false,
+      "log10_k_flp_cel_100C": false,
+      "log10_k_flp_decay_100C": false,
+      "log10_k_cml_loss_100C": false
+    },
+    "pass": true
+  },
+  "verdict": "SHIP"
+}

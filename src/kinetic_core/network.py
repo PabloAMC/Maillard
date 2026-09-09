@@ -373,10 +373,42 @@ PYRAZINE_REACTIONS: Tuple[Reaction, ...] = (
         "source measures the mixed condensation.",
     ),
 )
-TRUNK_REACTIONS: Tuple[Reaction, ...] = REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS
+#: Build Wave B20 (2026-09-09): THE GLYCATION ARM, TRUNK-ONLY, five steps on protein-bound lysine.
+#: The sugar glycates the bound lysine to the bound Amadori compound (second order, Nguyen 2016 k3);
+#: the Amadori compound oxidises to CML (k7; Berk 2021's barrier), goes to CEL via methylglyoxal
+#: lumped (k9), or decays to 3-deoxyglucosone and gives the lysine back (k8, the dominant loss, the
+#: trunk's own Amadori-decay form); CML is lost into the melanoidin pools (k11). Every constant is
+#: fitted on Nguyen 2016's printed rates; the barriers are declared from measured ones. With no
+#: protein loading LYSP is zero and the five steps carry no flux, so every earlier pot reproduces.
+GLYCATION_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_glc_lysp", {"Glc": 1, "LYSP": 1}, {"FLP": 1}, "k_glyc",
+        "B20. glucose + bound lysine -> bound fructosyl-lysine (Schiff base and Amadori rearrangement "
+        "lumped, as Nguyen 2016 fitted k3; second order, L/(mmol*min)).",
+    ),
+    Reaction(
+        "r_flp_cml", {"FLP": 1}, {"CML": 1, "FRAG_C": 4}, "k_flp_cml",
+        "B20. bound fructosyl-lysine -> CML + C4 fragments (oxidative cleavage; Nguyen 2016 k7, Berk 2021 k8).",
+    ),
+    Reaction(
+        "r_flp_cel", {"FLP": 1}, {"CEL": 1, "FRAG_C": 3}, "k_flp_cel",
+        "B20. bound fructosyl-lysine -> CEL + C3 fragments (via methylglyoxal, lumped; Nguyen 2016 k9).",
+    ),
+    Reaction(
+        "r_flp_decay", {"FLP": 1}, {"TDG": 1, "LYSP": 1}, "k_flp_decay",
+        "B20. bound fructosyl-lysine -> 3-deoxyglucosone + bound lysine (the Amadori decay that returns "
+        "the amine, the trunk's r_ama_tdg form; Nguyen 2016 k8, 'AP -> MRPs', the dominant loss).",
+    ),
+    Reaction(
+        "r_cml_loss", {"CML": 1}, {"MEL_C": 8, "MEL_N": 2}, "k_cml_loss",
+        "B20. CML -> melanoidin pools (Nguyen 2016 k11; sets the CML plateau with k7).",
+    ),
+)
+TRUNK_REACTIONS: Tuple[Reaction, ...] = REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS + GLYCATION_REACTIONS
 TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
 DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
 PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)
+GLYCATION_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in GLYCATION_REACTIONS)
 
 #: Build Wave B7's eleven steps, named so a report can say which part of the
 #: trunk is B1's and which is B7's without counting.

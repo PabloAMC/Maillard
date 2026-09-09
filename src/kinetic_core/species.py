@@ -188,12 +188,28 @@ SPECIES: Tuple[Species, ...] = (
     Species("AKM", "aminoacetone (methylglyoxal's Strecker aminoketone)", 3, 1, "intermediate", False,
             "B18. Methylglyoxal + glycine -> aminoacetone + CO2 + formaldehyde (Strecker, rule "
             "R07). As AKG."),
+    # ---- B20 (2026-09-09): THE GLYCATION ARM, trunk-only. Protein-bound lysine as a reactant:
+    # the matrix layer's amine pool becomes a species, the sugar glycates it to the bound Amadori
+    # compound, which oxidises to CML, goes to CEL, or decays back to the sugar path (3-DG) and
+    # returns the lysine. Rates from Nguyen 2016 (casein + glucose in water, 120 / 130 C), barriers
+    # from Berk 2021 and the trunk's own Amadori steps. Pre-registered in
+    # results/validation/kinetic_core_b20_prereg.md; constants in parameters_glycation.py.
+    Species("LYSP", "protein-bound lysine residue (epsilon-amine site; counted as lysine)", 6, 2, "reactant", True,
+            "B20. Charged from the spec's protein loading and the matrix's amine density times the "
+            "declared available fraction; zero without a loading, so every earlier pot is unchanged."),
+    Species("FLP", "fructosyl-lysine, protein-bound (the bound Amadori compound; furosine's parent)", 12, 2,
+            "intermediate", True, "B20. Nguyen 2016's AP; measured as furosine after acid hydrolysis."),
+    Species("CML", "N-epsilon-(carboxymethyl)lysine (CML), protein-bound", 8, 2, "product", True,
+            "B20. From the bound Amadori compound's oxidative cleavage (Nguyen 2016 k7, Berk 2021 k8); "
+            "the glyoxal route fits to zero in both laboratories and is not written."),
+    Species("CEL", "N-epsilon-(carboxyethyl)lysine (CEL), protein-bound", 9, 2, "product", True,
+            "B20. From the bound Amadori compound via methylglyoxal, lumped as Nguyen 2016 fitted it (k9)."),
 )
 
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
-TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM")
+TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 

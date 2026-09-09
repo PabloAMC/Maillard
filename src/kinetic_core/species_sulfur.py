@@ -417,6 +417,11 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "MPZ": 94.12,     # C5H6N2, 2-methylpyrazine
     "AKG": 59.07,     # C2H5NO, aminoacetaldehyde
     "AKM": 73.09,     # C3H7NO, aminoacetone
+    # B20 (2026-09-09): the glycation arm's species (bound residues counted as the free molecule)
+    "LYSP": 146.19,   # lysine
+    "FLP": 308.33,    # fructosyl-lysine
+    "CML": 204.22,    # N-epsilon-(carboxymethyl)lysine
+    "CEL": 218.25,    # N-epsilon-(carboxyethyl)lysine
     "PENT": 150.13,   # C5H10O5, ribose = xylose
     "ARP": 221.21,    # C8H15NO6, 1-deoxy-xylulosyl-alanine
     "Cys": 121.16,    # C3H7NO2S

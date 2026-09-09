@@ -1670,6 +1670,15 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       calibration example); the same gate should cover all three. The hand-typed path scorecard
       (`08_path_scorecard.png`, static strings in `build_thiol_sink_figures.py`) should be generated from the
       scorecard artifacts or retired.
+- [x] **B20 (pre-registered and RUN 2026-09-09; SHIPS): the glycation arm.** Four trunk-only species (LYSP, FLP,
+      CML, CEL), five steps, Nguyen 2016 M1's ten constants as fit rows (cost 17.2, chi2_red 3.4, all five
+      identified), barriers declared (Martins 96.8 / 97.1, Berk 113 / 92, CML loss flat). Verdict SHIP: decisive
+      rows within 0.19 dex; Nguyen's CML level reproduced; Hamzalioglu milk within 0.07 dex at 120 C; Berk dry
+      seed +1.7 dex. Answers only with `protein_g_per_l`; refused by name otherwise; free lysine is NOT the
+      substrate (it resolves to the acrylamide lane). OPEN: a plant-protein glycation rate (pea, soy) in water at
+      two temperatures; a CML benchmark with a stated loading and a real cook (the Foods 2023 row is a proxy);
+      the CML-loss barrier (Nguyen's pair falls with T); furosine as a reportable (0.32 x FLP after hydrolysis,
+      Krause 2003) not yet written.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

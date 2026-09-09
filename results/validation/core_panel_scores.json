@@ -45,9 +45,9 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "452381a983b9525c0054b3515991904b53209027",
-      "short": "452381a9",
-      "branch": "cleaning",
+      "commit": "323c4900a446d930739973f05cbf8c31229198c9",
+      "short": "323c4900",
+      "branch": "reactions",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.4
+    "wall_seconds": 9.3
   },
   "benchmarks": [
     {
@@ -610,7 +610,7 @@
           "panel": "trust_loop",
           "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
           "envelope_state": "out_of_envelope",
           "lane": "acrylamide",
           "unidentified_route": false
@@ -620,7 +620,7 @@
           "panel": "trust_loop",
           "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
           "envelope_state": "out_of_envelope",
           "lane": "acrylamide",
           "unidentified_route": false
@@ -638,7 +638,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.; UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+        "every target refused: GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.; GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -4078,7 +4078,7 @@
       "panel": "trust_loop",
       "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "envelope_state": "out_of_envelope",
       "lane": "acrylamide",
       "unidentified_route": false
@@ -4088,7 +4088,7 @@
       "panel": "trust_loop",
       "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "envelope_state": "out_of_envelope",
       "lane": "acrylamide",
       "unidentified_route": false
