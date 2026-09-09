@@ -1372,3 +1372,34 @@ ran.
    overwritten, date and all, on every run of its generator, so any later wave that changed the
    registry could have replaced a pre-registration with a post-hoc prediction undetectably. The
    generator now refuses without an explicit `--refreeze`.
+
+## Amendment 36 — 2026-09-09 (Wave B28, the two products the lipid lane refused)
+
+1. **NO NEW FIT ROW, NO NEW COORDINATE, NOTHING FITTED.** Frankel, Neff & Selke 1981's oleate and
+   linoleate slates enter as DATA, in their own module (`parameters_lipid_b28.py`) so that the
+   separation from the B6 fit is physical: different paper, different substrate, different injector
+   temperature, different denominator. The B6 objective is untouched and its six-product slate is
+   asserted unchanged by the ship rule.
+2. **A DECLARED ASSUMPTION, BANDED AND WARNED, IN PLACE OF A REFUSAL.** The oleate → nonanal SHARE
+   is measured. The YIELD is not: 1981 prints peak areas and no absolute yield from an oleate
+   hydroperoxide exists anywhere in the corpus. So an absolute nonanal answer assumes the
+   named-product molar yield per oleate hydroperoxide is 0.45 times the measured one per linoleate
+   hydroperoxide, banded 0.2 to 1.0, and the engine emits a mandatory warning saying so on every
+   nonanal answer. The refusal did not disappear; it changed state, and the layer reports which
+   state it is in.
+3. **THE HOLD-OUT THAT DID NOT MOVE.** Frankel 1989 fed pure linoleate hydroperoxides and nonanal
+   appears in no table, figure or sentence of it. That absence is a declared negative test and it is
+   still honoured structurally: nonanal from a linoleate feed is exactly 0.0, by construction, with
+   its own test.
+4. **WHAT IS VALIDATED.** The three newly answered nonanal rows are external-literature rows in
+   three different matrices from three laboratories, none of which any fit has read. They land at
+   3.0x, 3.3x and 7.3x.
+5. **A REFUSAL RESTORED DURING THE RUN, AND THE RULE THAT NOW CATCHES IT.** 2-pentylfuran's branch
+   fraction is measured and correct, and un-refusing it answered four rows six to nine orders of
+   magnitude below measurement, because those rows' hexanal does not come from the lipid lane. A
+   degenerate value is the absence of a prediction dressed as one. The ship rule now requires every
+   row lifted out of REFUSED to be answered within three decades of its measurement.
+6. **A FIREWALL KEPT STRICT.** The B6 literal firewall forbids twelve values that appear only in
+   that wave's hold-out columns. One of them, 9.7, is also Frankel 1981's photosensitized methyl
+   octanoate share. The collision was resolved by moving this paper's numbers to a file the firewall
+   does not cover, NOT by reformatting the literal or shortening the firewall's list.
