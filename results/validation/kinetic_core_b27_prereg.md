@@ -122,3 +122,59 @@ Ship rule: **SHIP if T1, T2, T3 and T6 hold.** T4 and T5 are reported.
 declaration above cannot be revised after seeing an outcome. The two structural facts it rests on
 were verified by enumeration, not quoted: the oxidant charge per system and the objective's row
 composition.
+
+## 8. Amendment, 2026-09-09 evening: four papers read, STILL NOT RUN
+
+Four papers were fetched and read specifically to anchor this wave's one unanchored constant. The
+amendment is written before any fit has been started, and the fit is still not started.
+
+**The direct answer: not one of them supplies a rate, an order or a barrier for the oxidation of a
+thiol to a disulfide by an alpha-dicarbonyl.** Every constant in all four belongs to the ADDUCT
+branch, and in three cases the adduct was structurally characterised, so that is not an inference.
+
+| paper | what it actually supplies | branch |
+|---|---|---|
+| Wondrak 2002 | four MEASURED second-order constants at 37 C, pH 7.4 (L-cysteine + phenylglyoxal **0.63 +/- 0.04 M^-1 s^-1**, D-penicillamine 24.8, and two more); one temperature, so no barrier | adduct: 2-acylthiazolidines, isolated, NMR and MALDI-TOF. The word "disulfide" never appears |
+| Zheng 2022 | no constant; extent only. Glutathione falls about 18.1 / 8.6 / 1.7 % against methylglyoxal / glyoxal / 3-deoxyglucosone, instantly at 1:1, then flat for six hours | adduct, four conjugates by LC-TOF-MS -- plus the batch's only direct disulfide measurement, and it is unquantified |
+| Zheng 2023 | prints 4.1e4 M^-1 s^-1 and a reverse 7.5e-3 s^-1, but AS CITATIONS to another laboratory, conditions not restated; measures no constant itself | adduct: hemithioacetal formation and hydrolysis |
+| Coukos 2021 | nothing quantitative. An ordering, and a turnover at 2-6 h at 25 C. Every axis is a peak area normalised within its own series, so no constant could be refitted from it | adduct, proven by mass arithmetic |
+
+**Two cautions that now belong to the corpus.** The two thiol-times-dicarbonyl second-order constants
+it holds -- Wondrak's 0.63 and the constant Zheng 2023 cites from Lo 1994 at 4.1e4 -- differ by
+**6.5e4** and are not the same object. And that cited forward/reverse pair implies an equilibrium
+constant of 5.5e6 M^-1, which predicts essentially all of the glutathione bound at Zheng 2023's own
+1:10 ratio against a measured 34.7 %, an inconsistency of at least two decades that the paper does
+not remark on.
+
+**How this moves the odds, and why less than it first appears.** Section 6's prediction 3 ("the wave
+does not ship", 50 %) rises a few points. It does not rise twenty, for four reasons.
+
+1. Zheng 2022's "limited" is never given a number. The disulfide channel was instrumented with four
+   transitions against an authentic standard and the result is one adjective and "data not shown".
+   That adjective spans at least an order of magnitude in the quantity that decides this.
+2. **The same group partly reverses it.** Over 48 hours, with the disulfide on its own calibration
+   curve, Zheng 2023 finds glutathione going to its disulfide as the DOMINANT sink. Both papers
+   attribute that to oxygen autoxidation, and neither ran the dicarbonyl-free blank that would test
+   the attribution. The control the whole question turns on was not run, twice.
+3. A null at 37 C is the weakest kind of null for a route expected to carry the higher barrier, and
+   no paper here has a second temperature.
+4. **A structural mismatch that cuts FOR this wave, not against it.** All three dicarbonyls Zheng
+   tested are alpha-OXOALDEHYDES: they carry an aldehyde carbon, and that is the carbon that makes
+   the hemithioacetal which won. The species section 3(a) would source from norfuraneol --
+   2,3-pentanedione, 2,4-pentanedione, 3,4-hexanedione, the three this pot's own paper measures --
+   are **alkyl diketones with no aldehyde carbon at all**. Remove the aldehyde and you remove the
+   branch that beat the disulfide.
+
+**A BOUND DECLARED BEFORE THE FIT, which is the useful thing this reading produced.** The redox
+constant has no anchor, so the fit could put it anywhere its band allows and call the result an
+estimate. It cannot. The prior these papers establish is that the redox branch is MINOR against the
+adduct branch at 37 C on an oxoaldehyde. Accordingly: **if the fitted `ch_redox_dicarbonyl` constant
+lands within two decades of Wondrak's measured adduct constant of 0.63 M^-1 s^-1, transported to the
+lane's reference temperature, the wave must report that the objective has put a redox step at or
+above the speed of the adduct step that outcompetes it -- and treat that as evidence against the
+structure rather than as a fitted value.** T6's identification test is not sufficient on its own for
+a coordinate with no independent measurement anywhere.
+
+**One more route, noted and structurally unavailable here.** Coukos's mercaptomethylimidazole
+crosslink is a fourth, irreversible carbon sink for a thiol. It needs a guanidine, and the pot that
+must show the 35 % disulfide share has none, so it cannot run there.
