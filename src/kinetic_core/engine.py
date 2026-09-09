@@ -1091,8 +1091,9 @@ def declare_envelope(
 
     # --- the lipid lane's own refusals ------------------------------------
     if LIPID in lanes:
-        from .parameters_lipid import (
-            LIPID_CARRIERS, OLEATE_MOLAR_ANCHOR_BAND, OLEATE_MOLAR_ANCHOR_CENTRE, oleate_fraction)
+        from .parameters_lipid import LIPID_CARRIERS, oleate_fraction
+        from .parameters_lipid_b28 import (
+            OLEATE_MOLAR_ANCHOR_BAND, OLEATE_MOLAR_ANCHOR_CENTRE)
 
         if not carriers:
             reasons.append(

@@ -6,7 +6,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 * independent, excluding pH and water activity: 16/31 (52%); pH and water activity alone: 9/12 (75%)
 * all claims (independent + fit-adjacent + fit-system overlap): 29/59 (49%); 33 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
-* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); a predicted concentration is zero; no direction is defined (4); refused by the engine (2); arm 'processed, 140 C' refused (2); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
+* not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); a predicted concentration is zero; no direction is defined (4); refused by the engine (3); arm 'pH 4.5' refused (1); arm 'processed, 140 C' refused (1); arm 'D-ribose' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
 ## Per category (strictly independent claims)
 
@@ -68,8 +68,8 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | MAT-02 | matrix_identity | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 0.267, 0.339 |  |
 | MAT-03 | matrix_identity | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 0.339, 0.339 | identical predictions; the lane has no term for the moved axis |
 | PROC-01 | process_heating | fit_adjacent | Hexanal | A>B | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in pH and the resolved lane(s) (lipid) carry NO pH term by declaration; the model would return identical a |
-| PROC-02 | process_heating | fit_adjacent | 2-Pentylfuran | A>B | **not_evaluable** | - | - | arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and  |
-| PROC-03 | process_heating | fit_adjacent | Nonanal | A>B | **not_evaluable** | - | - | arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: nonanal -- the lipid lane exists and nonanal is a species in it, but its ONLY parent is the OLEATE hydrop |
+| PROC-02 | process_heating | fit_adjacent | 2-Pentylfuran | A>B | **not_evaluable** | - | - | arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 |
+| PROC-03 | process_heating | fit_adjacent | Nonanal | A>B | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in pH and the resolved lane(s) (lipid) carry NO pH term by declaration; the model would return identical a |
 | PROC-04 | process_heating | independent | 2,5-Dimethylpyrazine | flat | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | PROC-05 | ranking | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 22.8, 22.8 | identical predictions; the lane has no term for the moved axis |
 | TIME-01 | time | independent | HMF | increasing | **agree** | trunk | 10.3, 544, 2.1e+03 |  |

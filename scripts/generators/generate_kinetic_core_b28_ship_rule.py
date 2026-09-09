@@ -40,7 +40,7 @@ SHARED = ("PENTANE", "HEXANAL", "ME_OCTANOATE", "DECADIENAL", "ME_9_OXONONANOATE
 
 def t1() -> Dict[str, Any]:
     from src.kinetic_core.lipid import validate_lipid_structure
-    from src.kinetic_core.parameters_lipid import (
+    from src.kinetic_core.parameters_lipid_b28 import (
         FRANKEL1981_LINOLEATE_SLATE, FRANKEL1981_OLEATE_SLATE, PENTYLFURAN_PER_HEXANAL)
     from src.kinetic_core.species_lipid import FRANKEL_SLATE, LIPID_KEYS
 
@@ -134,8 +134,9 @@ def t2() -> Dict[str, Any]:
 
 def t3() -> Dict[str, Any]:
     """Frankel 1981 against Frankel 1989, renormalised onto the products both quantify."""
-    from src.kinetic_core.parameters_lipid import (
-        FRANKEL1981_LINOLEATE_SLATE, FRANKEL_ZERO_ADDITIVE, FRANKEL1981_MISSING_FROM_1981)
+    from src.kinetic_core.parameters_lipid import FRANKEL_ZERO_ADDITIVE
+    from src.kinetic_core.parameters_lipid_b28 import (
+        FRANKEL1981_LINOLEATE_SLATE, FRANKEL1981_MISSING_FROM_1981)
 
     a = FRANKEL1981_LINOLEATE_SLATE["linoleate_autoxidised"]
     b = FRANKEL_ZERO_ADDITIVE["mixed_ct_tt_9_13"]

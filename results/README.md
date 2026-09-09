@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **430**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **433**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -62,7 +62,7 @@ Tracked files: **430**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
 | `kinetic_core_b*_laplace_covariance.json` (3): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
-| `kinetic_core_b*_prereg.md` (22): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
+| `kinetic_core_b*_prereg.md` (23): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
 | `kinetic_core_b*_profile.*` (4): `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md`, `kinetic_core_b9_profile.json`, `kinetic_core_b9_profile.md` | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
 | `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
 | `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
@@ -97,6 +97,7 @@ Tracked files: **430**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b25_members/` (2 files) | B25 optimiser members (two starts; the sink, variant c: B16's 64 rows + the thiols' addition constant and its barrier). |
 | `kinetic_core_b25_ship_rule.*` (2): `kinetic_core_b25_ship_rule.json`, `kinetic_core_b25_ship_rule.md` | B17's six tests evaluated for B25 on the frozen B9 / B25 artifacts without switching the engine; T6 on the addition constant and its barrier (`generate_kinetic_core_b25_ship_rule.py`). |
 | `kinetic_core_b26_ship_rule.*` (2): `kinetic_core_b26_ship_rule.json`, `kinetic_core_b26_ship_rule.md` | Wave B26's five pre-registered tests: the arithmetic of pooling a plant-protein binding constant with the dairy one, the flagship soy hold-out re-scored against B4's frozen blind predictions, the reversible term's share of each log-shift against Amendment 6's cap, the sensitivity to the assumed protein loading, and the check that nothing else moved (`generate_kinetic_core_b26_ship_rule.py`). |
+| `kinetic_core_b28_ship_rule.*` (2): `kinetic_core_b28_ship_rule.json`, `kinetic_core_b28_ship_rule.md` | Wave B28's five pre-registered tests on the two products the lipid lane used to refuse: the arithmetic of Frankel 1981's two slates, the panel's refused-row count (which must only ever fall, and no lifted row may be answered degenerately), the first external check the lane's fit source has had -- Frankel 1981 against Frankel 1989 renormalised onto the five products both quantify -- the newly answered rows against measurement, and the check that no other lane moved (`generate_kinetic_core_b28_ship_rule.py`). |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
 | `kinetic_core_b2_4_fit_*.json` (21): `kinetic_core_b2_4_fit_half.json`, `kinetic_core_b2_4_fit_half_s0.json`, `kinetic_core_b2_4_fit_half_s1.json`, `kinetic_core_b2_4_fit_half_s2.json` … | B2.4 ensemble: one fit per weighting (half / measured / shipped) and per start (_s0.._s5). History; `kinetic_core_b2_4_ensemble.json` summarises them. |

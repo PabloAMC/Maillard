@@ -13,6 +13,7 @@
 | Anantharamkrishnan et al. (2020) | [10.1021/acs.jafc.0c01925](https://doi.org/10.1021/acs.jafc.0c01925) |  |  |  |  | (same author and year as the row above; any counts are listed there) | [anantharamkrishnan2020b_extraction.md](../../data/lit/extraction_dossiers/anantharamkrishnan2020b_extraction.md) |
 | Andriot 2000 |  |  |  |  |  |  | [andriot2000_extraction.md](../../data/lit/extraction_dossiers/andriot2000_extraction.md) |
 | Apriyantono & Ames 1993 | [10.1002/jsfa.2740610416](https://doi.org/10.1002/jsfa.2740610416) |  |  |  |  |  | [apriyantono1993_extraction.md](../../data/lit/extraction_dossiers/apriyantono1993_extraction.md) |
+| Aspelund 1983 |  |  |  |  |  |  | [aspelund1983_extraction.md](../../data/lit/extraction_dossiers/aspelund1983_extraction.md) |
 | Baek, Linforth, Blake & Taylor 1999 |  |  |  |  |  |  | [baek1999_extraction.md](../../data/lit/extraction_dossiers/baek1999_extraction.md) |
 | Bagiyan, Koroleva, Soroka & Ufimtsev 2004 (Kinet. Catal. 45(3) 372–380; no DOI printed) |  |  |  |  |  |  | [bagiyan2004_extraction.md](../../data/lit/extraction_dossiers/bagiyan2004_extraction.md) |
 | Balagiannis 2009 | [10.1021/jf901443m](https://doi.org/10.1021/jf901443m) |  |  |  |  |  | [balagiannis2009_extraction.md](../../data/lit/extraction_dossiers/balagiannis2009_extraction.md) |
@@ -56,7 +57,9 @@
 | Claeys, De Vleeschouwer & Hendrickx 2005 |  |  | 5 |  |  |  | [claeys2005_extraction.md](../../data/lit/extraction_dossiers/claeys2005_extraction.md) |
 | Conti 2025 | [10.1016/j.foodres.2025.116169](https://doi.org/10.1016/j.foodres.2025.116169) |  |  |  |  |  | [conti2025_extraction.md](../../data/lit/extraction_dossiers/conti2025_extraction.md) |
 | Conti 2025b | [10.1016/j.foodres.2025.116938](https://doi.org/10.1016/j.foodres.2025.116938) |  |  |  |  | (same author and year as the row above; any counts are listed there) | [conti2025b_extraction.md](../../data/lit/extraction_dossiers/conti2025b_extraction.md) |
+| Coukos 2021 | [10.1021/acschembio.1c00553](https://doi.org/10.1021/acschembio.1c00553) |  |  |  |  |  | [coukos2021_extraction.md](../../data/lit/extraction_dossiers/coukos2021_extraction.md) |
 | Cremer 2000 | [10.1016/s0308-8146(00)00122-9](https://doi.org/10.1016/s0308-8146(00)00122-9) |  |  |  |  |  | [cremer2000_extraction.md](../../data/lit/extraction_dossiers/cremer2000_extraction.md) |
+| Crowther 1980 |  |  |  |  |  |  | [crowther1980_extraction.md](../../data/lit/extraction_dossiers/crowther1980_extraction.md) |
 | Damodaran & Kinsella 1981 |  |  |  |  |  |  | [damodaran1981_extraction.md](../../data/lit/extraction_dossiers/damodaran1981_extraction.md) |
 | De Vleeschouwer 2009 Part II | [10.1016/j.foodchem.2008.09.084](https://doi.org/10.1016/j.foodchem.2008.09.084) | 3 | 5 |  |  |  | [devleeschouwer2009_extraction.md](../../data/lit/extraction_dossiers/devleeschouwer2009_extraction.md) |
 | De Vleeschouwer et al. (2008) | [10.1021/bp060389f](https://doi.org/10.1021/bp060389f) |  |  |  |  | the formation window of B14's flat term extended from 0.88-0.99 down to 0.34, the band widened to the union of both papers' point-estimate spreads (0.41-1.39 already covers 0.71-1.09). TAKEN: a … | [devleeschouwer2007_extraction.md](../../data/lit/extraction_dossiers/devleeschouwer2007_extraction.md) |
@@ -72,14 +75,17 @@
 | Feng et al. 2022 |  |  | 4 |  |  |  | [feng2022_extraction.md](../../data/lit/extraction_dossiers/feng2022_extraction.md) |
 | Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760 | [10.1016/j.foodres.2021.110760](https://doi.org/10.1016/j.foodres.2021.110760) |  |  |  |  |  | [fischer2021_extraction.md](../../data/lit/extraction_dossiers/fischer2021_extraction.md) |
 | Frankel & Gardner 1989 |  |  |  |  |  |  | [frankel1989_extraction.md](../../data/lit/extraction_dossiers/frankel1989_extraction.md) |
+| Frankel, Neff & Selke 1981 |  |  |  |  |  |  | [frankel1981_extraction.md](../../data/lit/extraction_dossiers/frankel1981_extraction.md) |
 | Fu et al. (2023) | [10.3390/foods12101967](https://doi.org/10.3390/foods12101967) |  |  | 1 |  |  | no dossier (registry entry only) |
 | Gao et al. 2020 | [10.1016/j.foodres.2020.109045](https://doi.org/10.1016/j.foodres.2020.109045) |  |  |  |  |  | [gao2020_extraction.md](../../data/lit/extraction_dossiers/gao2020_extraction.md) |
 | Ge & Lee 1997 (J. Agric. Food Chem. 45, 1619–1623; JF960458D / S0021-8561(96)00458-X) |  |  |  |  |  |  | [ge1997_extraction.md](../../data/lit/extraction_dossiers/ge1997_extraction.md) |
 | Gigl, Hofmann & Frank 2021 |  |  |  |  |  |  | [gigl2021_extraction.md](../../data/lit/extraction_dossiers/gigl2021_extraction.md) |
+| Gökmen, Kocadağlı, Göncüoğlu & Ataç Mogol 2012 |  |  |  |  |  |  | [gokmen2012_extraction.md](../../data/lit/extraction_dossiers/gokmen2012_extraction.md) |
 | Göncüoğlu Taş & Gökmen 2016 |  |  |  |  |  |  | [goncuoglu2016_extraction.md](../../data/lit/extraction_dossiers/goncuoglu2016_extraction.md) |
 | Göncüoğlu Taş & Gökmen 2016 | [10.1016/j.foodchem.2016.11.159](https://doi.org/10.1016/j.foodchem.2016.11.159) |  |  |  |  | Rate constants (FIT-eligible under the owner's rule, but see caveats — dry matrix, 3-DG-basis quantitation of 1-DG/3,4-DG, HPD often > 50 % of k): Within-study ratios: k5 / k9 (Amadori vs Heyns … | [goncuoglutas2016_extraction.md](../../data/lit/extraction_dossiers/goncuoglutas2016_extraction.md), [goncuoglutas2017_extraction.md](../../data/lit/extraction_dossiers/goncuoglutas2017_extraction.md) |
 | Göncüoğlu Taş, Balagiannis, Ghawi, Gökmen & Parker 2026 | [10.1016/j.fochx.2026.104019](https://doi.org/10.1016/j.fochx.2026.104019) |  |  |  | 2 |  | [goncuoglu2026_extraction.md](../../data/lit/extraction_dossiers/goncuoglu2026_extraction.md) |
 | Gorissen et al. 2018 | [10.1007/s00726-018-2640-5](https://doi.org/10.1007/s00726-018-2640-5) |  |  |  |  |  | [gorissen2018_extraction.md](../../data/lit/extraction_dossiers/gorissen2018_extraction.md) |
+| Guo 2019 | [10.1016/j.foodchem.2019.03.126](https://doi.org/10.1016/j.foodchem.2019.03.126) |  |  |  |  |  | [guo2019_extraction.md](../../data/lit/extraction_dossiers/guo2019_extraction.md) |
 | Guo 2020 | [10.1016/j.foodhyd.2020.105752](https://doi.org/10.1016/j.foodhyd.2020.105752) |  |  |  |  |  | [guo2020_extraction.md](../../data/lit/extraction_dossiers/guo2020_extraction.md) |
 | Gursul Aktag 2020 | [10.1016/j.foodchem.2020.126620](https://doi.org/10.1016/j.foodchem.2020.126620) |  |  |  |  |  | [gursul2020_extraction.md](../../data/lit/extraction_dossiers/gursul2020_extraction.md), [gursulaktag2020_extraction.md](../../data/lit/extraction_dossiers/gursulaktag2020_extraction.md) |
 | Hamzalioglu et al. (2026) | [10.1021/acs.jafc.5c14296](https://doi.org/10.1021/acs.jafc.5c14296) |  |  |  |  |  | [hamzalioglu2026_extraction.md](../../data/lit/extraction_dossiers/hamzalioglu2026_extraction.md) |
@@ -141,6 +147,7 @@
 | Meynier, Rampon, Dalgalarrondo & Genot 2004 | [10.1016/j.idairyj.2004.01.003](https://doi.org/10.1016/j.idairyj.2004.01.003) |  |  |  |  |  | [meynier2004_extraction.md](../../data/lit/extraction_dossiers/meynier2004_extraction.md) |
 | Miao & Roos 2004 | [10.1021/jf049706t](https://doi.org/10.1021/jf049706t) |  |  |  |  |  | [miao2004_extraction.md](../../data/lit/extraction_dossiers/miao2004_extraction.md) |
 | Miyazaki et al. 2023 | [10.1093/bbb/zbac189](https://doi.org/10.1093/bbb/zbac189) |  |  |  |  |  | [miyazaki2023_extraction.md](../../data/lit/extraction_dossiers/miyazaki2023_extraction.md) |
+| Mohsin, Schmitt, Kanzler, Epping, Flemig & Hornemann 2018 |  |  |  |  |  |  | [mohsin2018_extraction.md](../../data/lit/extraction_dossiers/mohsin2018_extraction.md) |
 | Monforte 2021 | [10.1016/j.foodchem.2020.128948](https://doi.org/10.1016/j.foodchem.2020.128948) |  |  |  |  |  | [monforte2021_extraction.md](../../data/lit/extraction_dossiers/monforte2021_extraction.md) |
 | Mottram & Elmore 2002 (ACS Symp. Ser. 826, ch. 5) | [10.1021/bk-2002-0826.ch005](https://doi.org/10.1021/bk-2002-0826.ch005) |  |  |  | 8 |  | [mottram2002b_extraction.md](../../data/lit/extraction_dossiers/mottram2002b_extraction.md) |
 | Mottram & Nobrega (2002) | [10.1021/jf0200826](https://doi.org/10.1021/jf0200826) |  |  |  |  | All Table 1 numbers are headspace ng per mmol sugar, response factor 1, CV ~22 %: use as ratios only. Table 2 is closer to a solution yield. | [mottram2002_extraction.md](../../data/lit/extraction_dossiers/mottram2002_extraction.md) |
@@ -171,6 +178,7 @@
 | Schieberle, Hofmann & Münch 2000 | [10.1021/bk-2000-0756.ch010](https://doi.org/10.1021/bk-2000-0756.ch010) |  | 2 |  | 1 | FIT rows under the owner's rule (within-study ratios fit): the ratios MFT and FFT at 60 / 360 / 720 min over 30 min (six rows) and the 100 C-6 h over 145 C-20 min factor for MFT (x13). Levels (ug/L) … | [schieberle2000_extraction.md](../../data/lit/extraction_dossiers/schieberle2000_extraction.md) |
 | Schroën & Berton-Carabin 2022 | [10.1016/j.foodres.2022.111621](https://doi.org/10.1016/j.foodres.2022.111621) |  |  |  |  |  | [schroen2022_extraction.md](../../data/lit/extraction_dossiers/schroen2022_extraction.md) |
 | Schutte & Koenders 1972 | [10.1021/jf60180a004](https://doi.org/10.1021/jf60180a004) |  |  |  |  |  | [schutte1972_extraction.md](../../data/lit/extraction_dossiers/schutte1972_extraction.md) |
+| Selke, Frankel & Neff 1978 |  |  |  |  |  |  | [selke1978_extraction.md](../../data/lit/extraction_dossiers/selke1978_extraction.md) |
 | Şen & Gökmen 2022 | [10.1016/j.foodchem.2022.133583](https://doi.org/10.1016/j.foodchem.2022.133583) |  |  |  |  |  | [sen2022_extraction.md](../../data/lit/extraction_dossiers/sen2022_extraction.md) |
 | Shen, Hong, Singh, Koppel & Li 2022 | [10.1016/j.foodchem.2022.132687](https://doi.org/10.1016/j.foodchem.2022.132687) |  |  |  |  |  | [shen2022_extraction.md](../../data/lit/extraction_dossiers/shen2022_extraction.md) |
 | Shepelev & Reineccius 2024 | [10.1021/acs.jafc.4c00134](https://doi.org/10.1021/acs.jafc.4c00134) |  |  |  |  |  | [shepelev2024_extraction.md](../../data/lit/extraction_dossiers/shepelev2024_extraction.md) |
@@ -180,12 +188,15 @@
 | Solina 2007 | [10.1016/j.foodchem.2007.02.031](https://doi.org/10.1016/j.foodchem.2007.02.031) |  |  |  |  |  | [solina2007_extraction.md](../../data/lit/extraction_dossiers/solina2007_extraction.md) |
 | Stack, Conrad & Mahmud 2018 | [10.1021/acs.chemrestox.7b00239](https://doi.org/10.1021/acs.chemrestox.7b00239) |  |  |  |  |  | [stack2018_extraction.md](../../data/lit/extraction_dossiers/stack2018_extraction.md) |
 | Starkenmann et al. 2008 | [10.1021/jf801873h](https://doi.org/10.1021/jf801873h) |  |  |  |  | No FIT rows; no thermal or Maillard number exists in the paper. Items a model could use, all already recorded: 1. 22 ng/L retronasal threshold for 3-sulfanylhexan-1-ol (USE-Q in k2/k3). It is … | [starkenmann2008_extraction.md](../../data/lit/extraction_dossiers/starkenmann2008_extraction.md) |
+| Sun 2025 | [10.1016/j.foodhyd.2025.111326](https://doi.org/10.1016/j.foodhyd.2025.111326) |  |  |  |  |  | [sun2025_extraction.md](../../data/lit/extraction_dossiers/sun2025_extraction.md) |
 | Sun, Yang, Liu, Linforth, Zhang & Fisk 2019 | [10.1016/j.foodchem.2019.05.175](https://doi.org/10.1016/j.foodchem.2019.05.175) |  |  |  |  |  | [sun2019_extraction.md](../../data/lit/extraction_dossiers/sun2019_extraction.md) |
+| Suppavorasatit 2012 | [10.1111/j.1750-3841.2012.03012.x](https://doi.org/10.1111/j.1750-3841.2012.03012.x) |  |  |  |  |  | [suppavorasatit2012_extraction.md](../../data/lit/extraction_dossiers/suppavorasatit2012_extraction.md) |
 | Tang, Teodorowicz, Boeren, Wichers & Hettinga 2024 | [10.1016/j.foodres.2024.114224](https://doi.org/10.1016/j.foodres.2024.114224) |  |  |  |  |  | [tang2024_extraction.md](../../data/lit/extraction_dossiers/tang2024_extraction.md) |
 | Tian, Xu, Chen & Yu 2019 | [10.3168/jds.2019-16796](https://doi.org/10.3168/jds.2019-16796) |  |  |  |  | SI: none listed. The companion tian2020.pdf is already in data/articles/ and its Table 1 and Table 2 are transcribed in §2 above; no further retrieval is needed to close §C.18's milk-unit gap. | [tian2019_extraction.md](../../data/lit/extraction_dossiers/tian2019_extraction.md) |
 | Tian, Yu, Yu & Chen 2020b | [10.3168/jds.2019-17495](https://doi.org/10.3168/jds.2019-17495) |  |  |  |  |  | [tian2020b_extraction.md](../../data/lit/extraction_dossiers/tian2020b_extraction.md) |
 | Trikusuma et al. (2020) | [10.1016/j.foodchem.2019.126082](https://doi.org/10.1016/j.foodchem.2019.126082) |  |  |  |  |  | [trikusuma2020_extraction.md](../../data/lit/extraction_dossiers/trikusuma2020_extraction.md) |
 | Troise, Fiore, Wiltafsky & Fogliano 2015 | [10.1016/j.foodchem.2015.04.137](https://doi.org/10.1016/j.foodchem.2015.04.137) |  |  |  |  |  | [troise2015_extraction.md](../../data/lit/extraction_dossiers/troise2015_extraction.md) |
+| Utz 2022 | [10.3390/foods11030412](https://doi.org/10.3390/foods11030412) |  |  |  |  |  | [utz2022_extraction.md](../../data/lit/extraction_dossiers/utz2022_extraction.md) |
 | van Boekel 2005 |  |  |  |  |  |  | [vanboekel2005_extraction.md](../../data/lit/extraction_dossiers/vanboekel2005_extraction.md) |
 | Van Lancker 2012 | [10.1021/jf301315b](https://doi.org/10.1021/jf301315b) |  |  |  |  |  | [vanlancker2012_extraction.md](../../data/lit/extraction_dossiers/vanlancker2012_extraction.md) |
 | van Seeventer, Weenen, Winkel & Kerler 2001 |  |  | 3 |  |  |  | [vanseeventer2001_extraction.md](../../data/lit/extraction_dossiers/vanseeventer2001_extraction.md) |
@@ -203,11 +214,14 @@
 | Weykamp & Penders 1982 (Clin. Chim. Acta 125, 341–350; PII 0009-8981(82)90265-0) |  |  |  |  |  |  | [weykamp1982_extraction.md](../../data/lit/extraction_dossiers/weykamp1982_extraction.md) |
 | Whitfield & Mottram 1999 |  |  | 6 |  |  |  | [whitfield1999_extraction.md](../../data/lit/extraction_dossiers/whitfield1999_extraction.md) |
 | Whitfield et al. 1988 |  |  |  |  |  |  | [whitfield1988_extraction.md](../../data/lit/extraction_dossiers/whitfield1988_extraction.md) |
+| Wondrak 2002 |  |  |  |  |  |  | [wondrak2002_extraction.md](../../data/lit/extraction_dossiers/wondrak2002_extraction.md) |
+| Wright 2006 |  |  |  |  |  |  | [wright2006_extraction.md](../../data/lit/extraction_dossiers/wright2006_extraction.md) |
 | Xia 2022 | [10.1021/acs.jafc.2c06639](https://doi.org/10.1021/acs.jafc.2c06639) |  |  |  |  |  | [xia2022_extraction.md](../../data/lit/extraction_dossiers/xia2022_extraction.md) |
 | Xiao, Flory, Alavi & Li 2025 | [10.1016/j.foodhyd.2025.111119](https://doi.org/10.1016/j.foodhyd.2025.111119) |  |  |  |  |  | [xiao2025_extraction.md](../../data/lit/extraction_dossiers/xiao2025_extraction.md) |
 | Xiao, Hu, Kumar & Li 2024 | [10.1007/978-1-0716-4272-6_10](https://doi.org/10.1007/978-1-0716-4272-6_10) |  |  |  |  |  | [xiao2024_extraction.md](../../data/lit/extraction_dossiers/xiao2024_extraction.md) |
 | Xin et al. 2026b | [10.1016/j.foodres.2026.119010](https://doi.org/10.1016/j.foodres.2026.119010) |  |  |  |  |  | [Xin2026b_extraction.md](../../data/lit/extraction_dossiers/Xin2026b_extraction.md) |
 | Xu 2010 |  |  |  |  |  |  | [xu2010_extraction.md](../../data/lit/extraction_dossiers/xu2010_extraction.md) |
+| Xu 2022 | [10.7506/spkx1002-6630-20220613-128](https://doi.org/10.7506/spkx1002-6630-20220613-128) |  |  |  |  |  | [xu2022_extraction.md](../../data/lit/extraction_dossiers/xu2022_extraction.md) |
 | Yaghmur, Aserin, Abbas & Garti 2005 | [10.1016/j.colsurfa.2004.10.114](https://doi.org/10.1016/j.colsurfa.2004.10.114) |  |  |  |  |  | [yaghmur2005_extraction.md](../../data/lit/extraction_dossiers/yaghmur2005_extraction.md) |
 | Yang et al. 2024 | [10.1016/j.lwt.2024.117083](https://doi.org/10.1016/j.lwt.2024.117083) |  |  |  |  |  | [yang2024_extraction.md](../../data/lit/extraction_dossiers/yang2024_extraction.md) |
 | Yao 2024 | [10.1021/acs.jafc.3c04405](https://doi.org/10.1021/acs.jafc.3c04405) |  |  |  |  |  | [yao2024_extraction.md](../../data/lit/extraction_dossiers/yao2024_extraction.md) |
@@ -230,7 +244,10 @@
 | Zhang et al. 2020b | [10.1016/j.foodchem.2020.127469](https://doi.org/10.1016/j.foodchem.2020.127469) |  |  |  |  | (same author and year as the row above; any counts are listed there) | [zhang2020b_extraction.md](../../data/lit/extraction_dossiers/zhang2020b_extraction.md) |
 | Zhang et al. 2026 | [10.1016/j.foodchem.2026.148681](https://doi.org/10.1016/j.foodchem.2026.148681) |  |  |  |  | THE HEADLINE CROSS-CHECK: k18's Eₐ (118.0) is four times the directly measured browning Eₐ (28.3 and 30.6 kJ mol⁻¹ from two other labs). A fifth-order rate law absorbs the temperature dependence of … | [zhang2026_extraction.md](../../data/lit/extraction_dossiers/zhang2026_extraction.md) |
 | Zhang, Wang & Cao 2023 | [10.1021/acs.jafc.3c02450](https://doi.org/10.1021/acs.jafc.3c02450) |  |  |  |  |  | [zhang2023_extraction.md](../../data/lit/extraction_dossiers/zhang2023_extraction.md) |
+| Zheng 2022 | [10.3390/nu14071364](https://doi.org/10.3390/nu14071364) |  |  |  |  |  | [zheng2022_extraction.md](../../data/lit/extraction_dossiers/zheng2022_extraction.md) |
+| Zheng 2023 | [10.1016/j.fochx.2023.100920](https://doi.org/10.1016/j.fochx.2023.100920) |  |  |  |  |  | [zheng2023_extraction.md](../../data/lit/extraction_dossiers/zheng2023_extraction.md) |
 | Zhou & Boatright 2000 |  |  |  |  |  |  | [zhou2000_extraction.md](../../data/lit/extraction_dossiers/zhou2000_extraction.md) |
+| Zhou 2002 |  |  |  |  |  |  | [zhou2002_extraction.md](../../data/lit/extraction_dossiers/zhou2002_extraction.md) |
 | Zhou 2024 | [10.1021/acs.jafc.4c03706](https://doi.org/10.1021/acs.jafc.4c03706) |  |  |  |  |  | [zhou2024_extraction.md](../../data/lit/extraction_dossiers/zhou2024_extraction.md) |
 | Zhou 2025b | [10.1016/j.foodchem.2025.144764](https://doi.org/10.1016/j.foodchem.2025.144764) |  |  |  | 1 |  | [zhou2025b_extraction.md](../../data/lit/extraction_dossiers/zhou2025b_extraction.md) |
 | Zhou, Diao, Zhang, Yu, Wang, Gu, Ren, Li, Dong & Yi 2025 | [10.1016/j.lwt.2025.117469](https://doi.org/10.1016/j.lwt.2025.117469) |  |  |  |  | (same author and year as the row above; any counts are listed there) | [Zhou2025_extraction.md](../../data/lit/extraction_dossiers/Zhou2025_extraction.md) |

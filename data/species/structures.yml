@@ -116,4 +116,5 @@ species:
   ME_9_OXONONANOATE: {kind: molecule, smiles: "O=CCCCCCCCC(=O)OC"}
   ME_13_OXO_TRIDECADIENOATE: {kind: molecule, smiles: "O=C/C=C/C=C/CCCCCCCC(=O)OC"}
   NONANAL:    {kind: molecule, registry_id: nonanal}
+  PENTYLFURAN: {kind: molecule, registry_id: 2_pentylfuran}   # wave B28, 2026-09-09
   LIPID_FRAG_C: {kind: lump, note: "unassigned lipid fragment carbon"}

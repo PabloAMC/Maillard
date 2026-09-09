@@ -65,14 +65,16 @@ import math
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
-from .parameters_lipid import (
-    COVALENT_SINK,
+from .parameters_lipid_b28 import (
     FRANKEL1981_OLEATE_SLATE,
-    FRANKEL_SYSTEM_GEOMETRY,
-    FRANKEL_ZERO_ADDITIVE,
     OLEATE_MOLAR_ANCHOR_BAND,
     OLEATE_MOLAR_ANCHOR_CENTRE,
     PENTYLFURAN_PER_HEXANAL,
+)
+from .parameters_lipid import (
+    COVALENT_SINK,
+    FRANKEL_SYSTEM_GEOMETRY,
+    FRANKEL_ZERO_ADDITIVE,
     K_HEXANAL_SCHROEN,
     K_LOOH_DECOMP_ANCHOR,
     LIPID_CARRIERS,

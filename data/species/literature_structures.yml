@@ -18,7 +18,14 @@ species:
   # ---- the linoleate 10-hydroperoxide (non-conjugated; a photo-oxidation and isomerisation product; miyazaki2023 Figure 3) ----
   LOOH_10:   {kind: molecule, smiles: "CCCCC/C=C\\CC(OO)/C=C/CCCCCCC(=O)OC", note: "methyl 10-hydroperoxy-8(E),12(Z)-octadecadienoate"}
   # ---- volatile products the rules make that the engine has no species for ----
-  PENTYLFURAN: {kind: molecule, registry_id: 2_pentylfuran}
+  # PENTYLFURAN GRADUATED OUT OF THIS FILE ON 2026-09-09 (wave B28). It sat here because
+  # the rules reached 2-pentylfuran and the engine had no species for it -- 'no rate, not
+  # no route'. Frankel, Neff & Selke 1981 measures its branch fraction, so it is an engine
+  # species now and lives in species_lipid.LIPID_B28_PRODUCTS. It is STILL REFUSED on the
+  # panel, for a different reason that the engine states: the rows asking for it are scored
+  # against a hexanal the lipid lane does not produce. Listing it in both files would trip
+  # the guard that stops a literature key shadowing an engine species, which is why this
+  # note is here instead of the entry.
   OCTEN3OL:    {kind: molecule, registry_id: 1_octen_3_ol}
   OCTANAL:     {kind: molecule, smiles: "CCCCCCCC=O"}
   DECANAL:     {kind: molecule, smiles: "CCCCCCCCCC=O"}

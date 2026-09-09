@@ -186,7 +186,12 @@ def test_an_out_of_envelope_request_renders_refusal_cards_with_named_reasons(
     assert "No number is emitted" in text
     # The engine's own named reasons, verbatim -- not a generic apology.
     assert "Strecker donor" in text and "do not compose" in text
-    assert "not in Frankel 1989" in text or "six-product slate" in text
+    # RE-PINNED BY WAVE B28 (2026-09-09). The card used to say 2-pentylfuran was "not in Frankel
+    # 1989's six-product slate and no branch fraction ... is measured anywhere". The branch
+    # fraction IS measured now, and the compound is still refused for a sharper reason: the rows
+    # that ask for it are scored against a hexanal the lipid lane does not produce. A refusal card
+    # still giving the retired reason would be worse than no card at all.
+    assert "not produced by the lipid lane" in text or "branch fraction EXISTS" in text
     # And the page must say what CAN be asked instead.
     assert "Targets each lane can report" in text
     assert "Compounds the core deliberately refuses" in text

@@ -247,6 +247,14 @@ weeks of GC-MS. The model as shipped predicts that the fed thiol decays to zero 
 after an hour. If instead the thiol levels off with its disulfide and the pot keeps rising, the
 removal step is reversible. Either result decides the next version.
 
+**Four more experiments, and what each would decide.** The one above is the first of five, and the
+other four are set out with their protocols in [what to measure next](EXPERIMENTS.md): a ladder of
+fed intermediates that would pin six sliding constants at once; a sensory panel for the odour
+thresholds this model refuses to correct for a plant matrix; a binding measurement on a plant
+protein in water and hot, which reading has now failed to supply twice; and a melanoidin
+composition series, which would replace a fixed repeat unit that five laboratories falsify from
+both directions. That guide also says what is not worth measuring, and why.
+
 **Without a laboratory.** Two published data sets exist only as figures (a Beijing grid at 100 to
 140 °C and a five-temperature ladder from another Chinese group). Their numbers, from the authors,
 would give the removal step its first data from a third laboratory. The reversible removal step was
