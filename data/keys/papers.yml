@@ -5,11 +5,11 @@ note: 'One row per DOI cited anywhere under data/. paper_id is the intake-regist
   Derived, not curated: this file asserts which records share a paper, not that the DOI is right (scripts/ci/citation_gate.py
   does that). Do not hand-edit: re-run the generator.'
 counts:
-  papers: 361
-  with_dossier: 126
+  papers: 373
+  with_dossier: 141
   with_intake_id: 161
   cited_in_more_than_one_file: 179
-  cited_only_from_code_or_dossier: 115
+  cited_only_from_code_or_dossier: 127
 dossiers_without_printed_doi:
 - data/lit/extraction_dossiers/Xin2026b_extraction.md
 - data/lit/extraction_dossiers/Zhang2024_extraction.md
@@ -17,31 +17,40 @@ dossiers_without_printed_doi:
 - data/lit/extraction_dossiers/ajandouz2008_extraction.md
 - data/lit/extraction_dossiers/ames2001_extraction.md
 - data/lit/extraction_dossiers/amranihemaimi1995_extraction.md
+- data/lit/extraction_dossiers/andriot2000_extraction.md
 - data/lit/extraction_dossiers/apriyantono1993_extraction.md
 - data/lit/extraction_dossiers/baek1999_extraction.md
 - data/lit/extraction_dossiers/bagiyan2004_extraction.md
 - data/lit/extraction_dossiers/berk2021_extraction.md
 - data/lit/extraction_dossiers/blank1996_extraction.md
 - data/lit/extraction_dossiers/blank1997_extraction.md
+- data/lit/extraction_dossiers/bolton1993_extraction.md
 - data/lit/extraction_dossiers/brands2001_extraction.md
 - data/lit/extraction_dossiers/brands2002b_extraction.md
+- data/lit/extraction_dossiers/brewer1995_extraction.md
 - data/lit/extraction_dossiers/buttery1983_extraction.md
 - data/lit/extraction_dossiers/buttery1986_extraction.md
 - data/lit/extraction_dossiers/cammerer1994_extraction.md
+- data/lit/extraction_dossiers/cerny2003_extraction.md
+- data/lit/extraction_dossiers/cerny2008_extraction.md
 - data/lit/extraction_dossiers/chan1994_extraction.md
 - data/lit/extraction_dossiers/chan1994b_extraction.md
 - data/lit/extraction_dossiers/charlesbernard2005_extraction.md
 - data/lit/extraction_dossiers/claeys2005_extraction.md
+- data/lit/extraction_dossiers/damodaran1981_extraction.md
 - data/lit/extraction_dossiers/desclaux2006_extraction.md
 - data/lit/extraction_dossiers/farmer1990_extraction.md
 - data/lit/extraction_dossiers/feng2022_extraction.md
 - data/lit/extraction_dossiers/frankel1989_extraction.md
 - data/lit/extraction_dossiers/ge1997_extraction.md
 - data/lit/extraction_dossiers/gigl2021_extraction.md
+- data/lit/extraction_dossiers/goncuoglu2016_extraction.md
 - data/lit/extraction_dossiers/goncuoglutas2016_extraction.md
 - data/lit/extraction_dossiers/goncuoglutas2017_extraction.md
 - data/lit/extraction_dossiers/gursulaktag2020_extraction.md
 - data/lit/extraction_dossiers/hamzalioglu2018_extraction.md
+- data/lit/extraction_dossiers/hofmann1995_extraction.md
+- data/lit/extraction_dossiers/hofmann2001_extraction.md
 - data/lit/extraction_dossiers/hwang1995_extraction.md
 - data/lit/extraction_dossiers/hwang1995b_extraction.md
 - data/lit/extraction_dossiers/jousse2002_extraction.md
@@ -58,24 +67,35 @@ dossiers_without_printed_doi:
 - data/lit/extraction_dossiers/knol2005_extraction.md
 - data/lit/extraction_dossiers/kocadagli2016foodchem_extraction.md
 - data/lit/extraction_dossiers/kocadagli2016jafc_extraction.md
+- data/lit/extraction_dossiers/kocadagli2016nacl_extraction.md
 - data/lit/extraction_dossiers/lievonen2002_extraction.md
 - data/lit/extraction_dossiers/martin2001_extraction.md
 - data/lit/extraction_dossiers/meng2017_extraction.md
+- data/lit/extraction_dossiers/meynier1995_extraction.md
 - data/lit/extraction_dossiers/miao2004_extraction.md
+- data/lit/extraction_dossiers/mottram1995_extraction.md
+- data/lit/extraction_dossiers/mundt2004_extraction.md
+- data/lit/extraction_dossiers/nedvidek1992_extraction.md
 - data/lit/extraction_dossiers/nguyen2016_extraction.md
 - data/lit/extraction_dossiers/piornos2025_extraction.md
 - data/lit/extraction_dossiers/poisson2019_extraction.md
 - data/lit/extraction_dossiers/quan2020_extraction.md
+- data/lit/extraction_dossiers/ramirezjimenez2000_extraction.md
+- data/lit/extraction_dossiers/rawel2005_extraction.md
 - data/lit/extraction_dossiers/research_round3_channels.md
 - data/lit/extraction_dossiers/research_round4_nulls.md
 - data/lit/extraction_dossiers/schieberle2005_extraction.md
 - data/lit/extraction_dossiers/sen2022_extraction.md
 - data/lit/extraction_dossiers/shu1988_extraction.md
 - data/lit/extraction_dossiers/troise2015_extraction.md
+- data/lit/extraction_dossiers/vanboekel2005_extraction.md
+- data/lit/extraction_dossiers/vanseeventer2001_extraction.md
+- data/lit/extraction_dossiers/vega1994_extraction.md
 - data/lit/extraction_dossiers/wang2008_extraction.md
 - data/lit/extraction_dossiers/wang2026_extraction.md
 - data/lit/extraction_dossiers/weykamp1982_extraction.md
 - data/lit/extraction_dossiers/whitfield1988_extraction.md
+- data/lit/extraction_dossiers/whitfield1999_extraction.md
 - data/lit/extraction_dossiers/xu2010_extraction.md
 - data/lit/extraction_dossiers/zhai2023foodchem_extraction.md
 - data/lit/extraction_dossiers/zhai2023jafc_extraction.md
@@ -645,6 +665,17 @@ papers:
     data/lit/extraction_dossiers/sagesser2023_extraction.md:
     - sagesser2023_extraction
   verification_status: autogenerated_unverified
+- paper_id: yaghmur2005
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.colsurfa.2004.10.114
+  citation: null
+  dossier: data/lit/extraction_dossiers/yaghmur2005_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/yaghmur2005_extraction.md:
+    - yaghmur2005_extraction
+  verification_status: autogenerated_unverified
 - paper_id: doi_10_1016_j_crfs_2022_05_006
   paper_id_source: doi slug (no registry id anywhere)
   doi: 10.1016/j.crfs.2022.05.006
@@ -786,6 +817,17 @@ papers:
     - siripitakpong_2026_fft_retention_payload
     results/literature/slr_incorporation_matrix.json:
     - siripitakpong_2026_fft_retention
+  verification_status: autogenerated_unverified
+- paper_id: goncuoglu2026
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.fochx.2026.104019`
+  citation: null
+  dossier: data/lit/extraction_dossiers/goncuoglu2026_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/goncuoglu2026_extraction.md:
+    - goncuoglu2026_extraction
   verification_status: autogenerated_unverified
 - paper_id: doi_10_1016_j_foodchem
   paper_id_source: doi slug (no registry id anywhere)
@@ -1108,7 +1150,7 @@ papers:
   paper_id_source: benchmark_intake_registry.id
   doi: 10.1016/j.foodchem.2019.126082
   citation: Trikusuma et al. (2020)
-  dossier: null
+  dossier: data/lit/extraction_dossiers/trikusuma2020_extraction.md
   intake_ids:
   - trikusuma_2019
   slr_paper_ids:
@@ -1155,6 +1197,17 @@ papers:
     - zhu_2020_polyphenol_mgo_structure_kinetics
     results/literature/slr_incorporation_matrix.json:
     - zhu_2020_polyphenol_mgo_structure_kinetics
+  verification_status: autogenerated_unverified
+- paper_id: gursul2020
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.foodchem.2020.126620
+  citation: null
+  dossier: data/lit/extraction_dossiers/gursul2020_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/gursul2020_extraction.md:
+    - gursul2020_extraction
   verification_status: autogenerated_unverified
 - paper_id: zhang2020b
   paper_id_source: extraction_dossier stem
@@ -1206,6 +1259,17 @@ papers:
     results/literature/slr_incorporation_matrix.json:
     - comert_gokmen_2021_epicatechin_cysteine_mgo_synergy
   verification_status: autogenerated_unverified
+- paper_id: lee2022
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.foodchem.2021.131917
+  citation: null
+  dossier: data/lit/extraction_dossiers/lee2022_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/lee2022_extraction.md:
+    - lee2022_extraction
+  verification_status: autogenerated_unverified
 - paper_id: ishak_2022_phip_hca_kinetics
   paper_id_source: benchmark_intake_registry.id
   doi: 10.1016/j.foodchem.2022.132372
@@ -1247,12 +1311,12 @@ papers:
     data/lit/extraction_dossiers/shen2022_extraction.md:
     - shen2022_extraction
   verification_status: autogenerated_unverified
-- paper_id: doi_10_1016_j_foodchem_2022_133044
-  paper_id_source: doi slug (no registry id anywhere)
+- paper_id: bi2022
+  paper_id_source: extraction_dossier stem
   doi: 10.1016/j.foodchem.2022.133044
   citation: 'Bi, S.; Pan, X.; Zhang, W.; Ma, Z.; Lao, F.; Shen, Q.; Wu, J. (2022). "Non-covalent interactions of
     selected flavors with pea protein: Role of molecular structure of flavor compounds." Food Chemistry 389: 133044.'
-  dossier: null
+  dossier: data/lit/extraction_dossiers/bi2022_extraction.md
   intake_ids: []
   slr_paper_ids: []
   record_ids:
@@ -1432,6 +1496,17 @@ papers:
   record_ids:
     data/lit/extraction_dossiers/zhou2025b_extraction.md:
     - zhou2025b_extraction
+  verification_status: autogenerated_unverified
+- paper_id: wang2025
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.foodchem.2025.145552
+  citation: null
+  dossier: data/lit/extraction_dossiers/wang2025_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/wang2025_extraction.md:
+    - wang2025_extraction
   verification_status: autogenerated_unverified
 - paper_id: pan2025
   paper_id_source: extraction_dossier stem
@@ -1739,6 +1814,17 @@ papers:
     data/lit/extraction_dossiers/zhang2024b_extraction.md:
     - zhang2024b_extraction
   verification_status: autogenerated_unverified
+- paper_id: lee2024
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.foodres.2024.114183
+  citation: null
+  dossier: data/lit/extraction_dossiers/lee2024_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/lee2024_extraction.md:
+    - lee2024_extraction
+  verification_status: autogenerated_unverified
 - paper_id: tang2024
   paper_id_source: extraction_dossier stem
   doi: 10.1016/j.foodres.2024.114224
@@ -1772,6 +1858,28 @@ papers:
   record_ids:
     results/literature/slr_incorporation_matrix.json:
     - hao_2025_sph_pyrazines
+  verification_status: autogenerated_unverified
+- paper_id: conti2025
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.foodres.2025.116169
+  citation: null
+  dossier: data/lit/extraction_dossiers/conti2025_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/conti2025_extraction.md:
+    - conti2025_extraction
+  verification_status: autogenerated_unverified
+- paper_id: conti2025b
+  paper_id_source: extraction_dossier stem
+  doi: 10.1016/j.foodres.2025.116938
+  citation: null
+  dossier: data/lit/extraction_dossiers/conti2025b_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/conti2025b_extraction.md:
+    - conti2025b_extraction
   verification_status: autogenerated_unverified
 - paper_id: yiltirak2026
   paper_id_source: extraction_dossier stem
@@ -2460,6 +2568,17 @@ papers:
     results/literature/deep_research_backlog.json:
     - acs_jafc_3c02618_binding_prior
   verification_status: autogenerated_unverified
+- paper_id: zhai2023b
+  paper_id_source: extraction_dossier stem
+  doi: 10.1021/acs.jafc.3c04166
+  citation: null
+  dossier: data/lit/extraction_dossiers/zhai2023b_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/zhai2023b_extraction.md:
+    - zhai2023b_extraction
+  verification_status: autogenerated_unverified
 - paper_id: yao2024
   paper_id_source: extraction_dossier stem
   doi: 10.1021/acs.jafc.3c04405
@@ -2698,7 +2817,7 @@ papers:
   paper_id_source: benchmark_intake_registry.id
   doi: 10.1021/acs.jafc.9b07711
   citation: Bi et al. (2020), J. Agric. Food Chem. 68:2718
-  dossier: null
+  dossier: data/lit/extraction_dossiers/bi2020_extraction.md
   intake_ids:
   - acs_2020_raw_pea_hexanal_baseline
   slr_paper_ids:
@@ -2830,6 +2949,17 @@ papers:
   record_ids:
     src/kinetic_core/parameters_pyrazine.py:
     - L103
+  verification_status: autogenerated_unverified
+- paper_id: schieberle1989
+  paper_id_source: extraction_dossier stem
+  doi: 10.1021/bk-1989-0409.ch025
+  citation: null
+  dossier: data/lit/extraction_dossiers/schieberle1989_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/schieberle1989_extraction.md:
+    - schieberle1989_extraction
   verification_status: autogenerated_unverified
 - paper_id: hofmann_schieberle_grosch_1996
   paper_id_source: benchmark_intake_registry.id
@@ -3480,6 +3610,17 @@ papers:
     results/literature/slr_incorporation_matrix.json:
     - lagrain_2010_cystine_elimination_lanthionine
   verification_status: autogenerated_unverified
+- paper_id: fang2010
+  paper_id_source: extraction_dossier stem
+  doi: 10.1021/jf102917v
+  citation: null
+  dossier: data/lit/extraction_dossiers/fang2010_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/fang2010_extraction.md:
+    - fang2010_extraction
+  verification_status: autogenerated_unverified
 - paper_id: doi_10_1021_jf301306g
   paper_id_source: doi slug (no registry id anywhere)
   doi: 10.1021/jf301306g
@@ -3677,6 +3818,17 @@ papers:
   record_ids:
     data/lit/extraction_dossiers/balagiannis2009_extraction.md:
     - balagiannis2009_extraction
+  verification_status: autogenerated_unverified
+- paper_id: fang2009
+  paper_id_source: extraction_dossier stem
+  doi: 10.1021/jf9020587
+  citation: null
+  dossier: data/lit/extraction_dossiers/fang2009_extraction.md
+  intake_ids: []
+  slr_paper_ids: []
+  record_ids:
+    data/lit/extraction_dossiers/fang2009_extraction.md:
+    - fang2009_extraction
   verification_status: autogenerated_unverified
 - paper_id: zamora2010
   paper_id_source: extraction_dossier stem
