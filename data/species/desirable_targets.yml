@@ -267,13 +267,15 @@ compounds:
     cas: "85213-22-5"
     # Added 2026-09-09 (wave B24): the bread-crust / popcorn / cooked-rice note the roadmap's coverage
     # table listed and the registry lacked. Structure from hofmann1998b_extraction.md (the acylation of
-    # 1-pyrroline by methylglyoxal); the odour threshold in water (Buttery et al. 1983, about 0.1 ug/kg)
-    # is cited in the literature and NOT on disk, so it is left null rather than typed from memory.
+    # 1-pyrroline by methylglyoxal). CORRECTED the same day: the threshold source IS on disk
+    # (data/articles/buttery1983.pdf, dossier buttery1983_extraction.md) and prints it, Table II and
+    # p. 825: a 16-judge panel, Guadagni plot, "0.1 part (mL) of compound per 10^9 parts (mL) of water".
+    # That is a volume ratio; 0.1 ug/kg assumes unit density, which the dossier states.
     smiles: "CC(=O)C1=NCCC1"
     inchi: "InChI=1S/C6H9NO/c1-5(8)6-3-2-4-7-6/h2-4H2,1H3"
     precursor: "L-Proline + methylglyoxal (1-pyrroline, then its acylation; Hofmann & Schieberle 1998b)"
     pathway: "Strecker of proline, then acylation of 1-pyrroline"
     sensory_desc: "Popcorn, bread crust, cooked rice, roasted"
-    odour_threshold_ug_per_kg: null
+    odour_threshold_ug_per_kg: 0.1
     priority: "high"
-    notes: "The proline odorant of extruded and baked products. Threshold not on disk (Buttery 1983, cited by hofmann1998b); OAV therefore not computed."
+    notes: "The proline odorant of extruded and baked products. Threshold: Buttery, Ling, Juliano & Turnbaugh 1983, J. Agric. Food Chem. 31:823, Table II and p. 825 (16 judges, water); printed as a volume ratio, 0.1 ug/kg on unit density."

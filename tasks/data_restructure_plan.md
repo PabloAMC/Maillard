@@ -1715,6 +1715,134 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       NEXT (B24b, to pre-register): hydroxyacetone (acetol) as a trunk species made by the Strecker step, the
       1-pyrroline + acetol -> HOP -> ATHP branch on Hofmann Tables 4 and 5 (pH ladders), a 1-pyrroline loss
       sized on expt 3, Table 9's AP : ATHP switch as the within-study shape.
+- [ ] **ACR-02 reading log (2026-09-09, the acrylamide lane's named gap is CLOSED as a comparison).** Four dossiers
+      written from PDFs that had sat unread (`knol2005`, `knol2009`, `knol2010`, `claeys2005`; `devleeschouwer2009`
+      pending). **Two independent laboratories now print an acrylamide ELIMINATION constant.** Knol 2005 (Wageningen;
+      glucose 200 + asparagine 200 mmol/L, 0.1 M phosphate initial pH 6.8, 120-200 C, T_ref 160 C): k6 acrylamide ->
+      products 7.96 / 28.1 / 88.1 / 250 / 650 e-3 min-1 at 120 / 140 / 160 / 180 / 200 C, Ea 85.1 +/- 14 kJ/mol, with
+      the authors' own caveat that no product of the degradation was measured. Claeys 2005 (Leuven, the shipped
+      lane's own laboratory, 0.01 M equimolar pH 6): k_E 111.1 +/- 8.9 e-3 min-1 at its reference, Ea 167.2 +/- 4.3.
+      **The two constants agree within 1.26x at the reference temperature and their BARRIERS differ by a factor of
+      two (85 vs 167 kJ/mol).** That is the shape of the panel's complaint that the lane's time course is inverted:
+      the magnitude of the sink is corroborated, its temperature dependence is not. Knol 2005 also gives the whole
+      network at five temperatures with intervals (Glc + Asn -> Schiff 0.668 e-3 M-1 min-1 at 160 C, Ea 57.6 +/- 8.0;
+      Glc -> Fru 50.1 e-3 min-1, Ea 81.7; Fru + Asn 1.45 e-3 M-1 min-1, Ea 102 +/- 14; Schiff -> acrylamide 2.53 e-3
+      min-1, Ea 94.4; Schiff -> melanoidins 48.7 e-3 min-1, Ea 40.1), and the derived partitions k5/k4 (browning over
+      acrylamide) 89 -> 5.4 and k6/k4 35 across 120-200 C. Knol 2010: the condensation at 0.27e-3 L/(mmol min) at
+      160 C for fructose + asparagine against De Vleeschouwer's 0.22 M-1 min-1 for the same step, **1.2x across two
+      laboratories and two matrices**, and it shows the elimination is UNIDENTIFIABLE in its system by deleting it.
+      Knol 2009: no rate constant at all (its "k1"/"k2" are logistic steepness parameters), but four potato genotypes'
+      acrylamide scale parameters with their precursor concentrations -- the real-food half of the gap, as levels.
+      NEXT (ACR-02a, to pre-register): a second-laboratory comparison wave on the elimination -- both constants at a
+      shared reference, the two barriers as the decision, and the panel's inverted time shape as the test that
+      discriminates them. Registry: no sugar and no amino acid has an id, so every one of these rows names a
+      reactant the compound registry cannot key.
+- [ ] **B24b reading log (2026-09-09, the branch that refused B24 is now on disk).** `schieberle2005_extraction.md`
+      (the book-chapter companion of Hofmann & Schieberle 1998b) repeats that paper's tetrahydropyridine pH ladder
+      number for number (<0.008 / 0.072 / 0.863 / 3.07 mol % at pH 3 / 5 / 7 / 9; 1-pyrroline 2 + hydroxyacetone
+      2 mmol/L, 0.5 M phosphate, 100 C, 30 min) and states in words what B24 lacked: **hydroxyacetone gives ONLY the
+      tetrahydropyridine and methylglyoxal ONLY the pyrroline**, so the branch is a fork on the carbonyl, not a
+      competition for the pyrroline. It also carries one number neither B24 source had: **2-acetylpyrrolidine ->
+      2-acetyl-1-pyrroline by air oxidation, 0.060 / 0.042 / 0.038 min-1 (first order, from the 5 / 30 / 120 min
+      conversions 26 / 72 / >99 %, 0.4 mmol/L in water, 25 C, air)** -- the oxidation B24 folded into its net
+      acylation, now separable. Bilinear lower bounds (mine, in the dossier): 1-pyrroline + hydroxyacetone ->
+      tetrahydropyridine about 1.4e-4 (pH 7), 5.1e-4 (pH 9), 1.2e-5 (pH 5) L/(mmol min). With these, B24b can write
+      hydroxyacetone as a species, the tetrahydropyridine as the competing product, and a pyrroline loss.
+- [ ] **B19 reading log (2026-09-09, the identity ratios: partly there, and the useful part is figure-locked).**
+      `hwang1995` and `hwang1995b` (one experiment in two papers: glucose + 15N-glycine + one tested amino acid,
+      equimolar, on wheat starch at 12-14 % moisture, pH 7, 180 C, 1 h) give pot-against-pot TOTAL PYRAZINE yield
+      ratios against the glycine-only control: Lys 4.34, Phe 3.00, Asn 2.25, Glu 1.98, Ile 1.95, Gln 1.60, Asp 1.54,
+      Arg 0.84 (the only pot below the control). Halved for the doubled amine charge they span 0.42 to 2.17. **But
+      the quantity an identity layer actually wants -- the share of the pyrazine ring nitrogen that came from the
+      tested amino acid rather than from glycine, which the 15N label measures -- is printed only as percentage
+      labels drawn on Figures 1 to 4, so it is figure_only and cannot be fitted.** `amranihemaimi1995` is a
+      carbon-origin bookkeeping study: eleven alkylpyrazines with within-pot percentage shares and forty labelling
+      fractions, and no absolute quantity of anything. `martin2001` pending. `huang2016` is the same file and the
+      same paper as `huang2017_extraction.md`, so it does not fix that paper's missing concentrations. NET: an
+      identity-ratio layer can be fitted on the eight whole-pot ratios above (with the amine-charge correction
+      declared), and the cleaner isotope split needs the figures' numbers from the authors.
+- [ ] **PROV-01 (2026-09-09, three papers whose numbers the engine SHIPS now have dossiers).** `frankel1989` is the
+      whole product slate of the lipid lane: it prints RELATIVE PERCENT of a six-peak sum at one temperature with the
+      total peak area beside it, and **no rate, no yield, no barrier, no nonanal and no 2-pentylfuran anywhere** --
+      which is the lane's declared assumption confirmed at its source, and the reason those two compounds are
+      refused. `buttery1983` is the 2-acetyl-1-pyrroline threshold: printed as a VOLUME ratio, "0.1 part (mL) per
+      10^9 parts (mL) of water" (Guadagni plot, 16 judges), so the 0.1 ug/kg the species table now carries assumes
+      unit density and the dossier says so; its ten-variety level table is the authors' own semi-quantitative
+      peak-area estimate. `buttery1986` adds what 1983 could not measure: the steam-distillation recovery of the
+      compound is 28.0 % (SD 4.9), so the 1983 levels are multiplied by 3.57. `charlesbernard2005` pending (the
+      8-10 mmol sites per g that recasts k_thioether as bimolecular).
+- [ ] **READING-ORDER (2026-09-09, after the first thirteen). Forty-five PDFs are still unread, and the question
+      "is what we lack on disk or not in the literature" now has an evidence-based answer, gap by gap.**
+      ON DISK, decidable without a new download: (i) the acrylamide elimination's two-laboratory disagreement
+      (85.1 +/- 14 against 167.2 +/- 4.3 kJ/mol -- both numbers read today); (ii) B24b's tetrahydropyridine branch
+      (schieberle2005, read today); (iii) B21b's Amadori conflict (Martins' own series are the B1 fit rows);
+      (iv) B22b's methionine Amadori route (Deng 2022's two 120 C series, dossiered); (v) matrix odour thresholds,
+      which `matrix_oav` refuses today -- vega1994 (gelatin, several temperatures) and brewer1995 (a MEAT model) are
+      both on disk unread; (vi) a second laboratory for the TRUNK (Goncouglu2016, hazelnut roasting, multiresponse,
+      a real matrix) and the melanoidin pool's own composition (fang2009, fang2010, mundt2004), which the B1
+      C/N diagnostic has never been checked against.
+      READ THESE FIRST, because they are the sulfur lane's own shipped sources and have never been dossiered:
+      `cerny2003` (JAFC 51:2714, "Formation of Aroma Compounds from Ribose and Cysteine" -- **26 references in this
+      repository**, the intact-skeleton route r_ddp_mft), `hofmann2001` (= the "Hofmann 2002" of `k_thioether`'s
+      anchor, JAFC 50:319, thiols and melanoidins in coffee staling), `vanseeventer2001` (the 50 C zero-order thiol
+      loss, a declared HOLD-OUT), `whitfield1999` (the fed norfuraneol pot). Three sink structures have been refused
+      on an objective built without ever reading these four; that ordering should be corrected before anyone
+      concludes the objective's weighting is the whole story.
+      NOT on disk and NOT fetchable -- these are author requests or an experiment, not downloads: the isotope
+      splits Hwang 1995 draws on its Figures 1-4 (the clean per-amino-acid nitrogen share); Deng 2022's missing
+      100 and 130 C methional rows; a per-amino-acid SECOND-ORDER Strecker constant in water (four laboratories
+      have now been read and every one printed a barrier or a yield instead, so the likeliest reading is that no
+      such constant has been measured); and the thiol sink itself, which B25's outcome says is an experiment.
+- [ ] **PDF-AUDIT (2026-09-09). Fifty-nine papers are on disk and have never been read.** `data/articles/` holds 228
+      PDFs against 178 per-paper dossiers; 59 have no dossier named after them, and several hit gaps this repository
+      names in its own artifacts. The count is now a command, `python scripts/reading_audit.py` (the paper registry
+      deliberately ignores the local PDFs so its output does not depend on the machine; this is the other half), and
+      it also reports the 14 dossiers whose paper is not on this disk. Sorted by what they would unlock:
+      **(A) The acrylamide lane's own named gap, "a second laboratory's constants".** knol2005 (JAFC 53:6133,
+      "Toward a Kinetic Model for Acrylamide Formation in a Glucose-Asparagine Reaction System"), knol2009 (Food
+      Chem 113:103), knol2010 (Food Chem 120:1047), claeys2005 (Biotechnol Prog 21:1525, "Effect of Amino Acids on
+      Acrylamide Formation and ELIMINATION Kinetics" -- the lane's elimination step is the one the panel says is
+      inverted), devleeschouwer2009 (Food Chem 114:535) + devleeschouwer2009b. READING 2026-09-09.
+      **(B) The amino-acid identity question that refused B22 and blocks B19.** hwang1995 (JAFC 43:179, "Relative
+      Reactivities of Amino Acids in Pyrazine Formation") and hwang1995b (JAFC 43:2917, the same for pyridines and
+      pyrroles) are within-study identity ratios by construction; amrani-hemaimi1995 (JAFC 43:2818) is the isotope
+      source the B19 draft calls "on disk, never used"; martin2001 (JAFC 49:3885, Strecker aldehydes AND pyrazines in
+      one fried-potato pot); huang2016 (J Food Process Eng, 2- and 3-methylbutanal kinetics -- check whether it prints
+      the concentrations huang2017 lacks). READING 2026-09-09.
+      **(C) The piece that refused B24.** schieberle2005 ("Mechanistic Studies on the Formation of the Cracker-like
+      Aroma Compounds 2-Acetyltetrahydropyridine and 2-Acetyl-1-pyrroline") is exactly the competing branch B24's
+      section 6 says the arm lacked. READING 2026-09-09.
+      **(D) A second laboratory for the TRUNK, and the melanoidin pool's own composition.** Goncouglu2016 (hazelnut
+      roasting, MULTIRESPONSE kinetics, a real food matrix) and Goncouglu2026; Kocada2016 (NaCl on the alpha-dicarbonyls
+      and HMF -- B21's open item is the dicarbonyl levels in water); fang2009 ("Fate of the Amino Acid in
+      Glucose-Glycine") and fang2010 (13C-labelled melanoidins) and mundt2004 (melanoidin composition from glucose +
+      glycine) bear on the trunk's MEL_C / MEL_N pools and the C/N diagnostic B1 carries; lee2022 / lee2024 (model
+      cakes); ramirez-jimenez2000 (browning indicators in bread); vanboekel2005 (a poster abstract of the very
+      glucose-glycine model B1 is fitted on).
+      **(E) The sulfur lane, including three papers whose numbers are already SHIPPED with no standalone dossier.**
+      hofmann2001 (= the "Hofmann 2002" of `k_thioether`'s source anchor, JAFC 50:319, "Chemical Interactions between
+      Odor-Active Thiols and Melanoidins"), charles-bernard2005 (the 8-10 mmol sites per g that recasts k_thioether as
+      bimolecular), vanseeventer2001 (the 50 C zero-order thiol loss, a declared HOLD-OUT), whitfield1999 (the fed
+      norfuraneol pot), cerny2003 (26 references in this repository, the intact-skeleton route r_ddp_mft), frankel1989
+      (THE lipid lane's whole six-product slate, wave B6) -- every one of these carries a number the engine ships and
+      none has a dossier of its own. Also cerny2008 (HMP identified), mottram1995 (alkanediones + H2S), yaghmur2005
+      (furfural + cysteine), Zhai2023b (TTCA), bolton1993, nedvidek1992, schieberle1989, solina2007.
+      **(F) The matrix layer.** damodaran1981 (carbonyl + soy protein thermodynamics) and vega1994 (the gelatin
+      thresholds) are cited through `k2_matrix_and_thresholds.md` but have no dossier; andriot2000 (methyl ketones +
+      beta-lactoglobulin), jf0480290 (phenolics + proteins), meynier1995, guo2020, Barallat-Perez2024 (lupin),
+      brewer1995 (lipid thresholds in a MEAT model -- matrix thresholds are what `matrix_oav` refuses today).
+      **(G) Plant matrices and the isolate's carried volatiles (programme 7).** bi2020 (key aroma of raw and roasted
+      peas), trikusuma2020, Conti2025, Conti2025b, Gursul2020, Wang2025, bornhorst2017 / bornhorst2017b.
+      Identified since: `1-s2.0-S0308814622010068-main` is Bi, Pan, Zhang et al., Food Chem 389:133044,
+      "Non-covalent interactions of selected flavors with PEA PROTEIN: role of the molecular structure of the flavor
+      compounds" -- the matrix layer's binding brackets are for covalent adducts and this is the non-covalent
+      partner, on the very isolate the matrix table charges; `jf0480290` is Rawel, Meidtner & Kroll 2005, JAFC
+      53:4228, "Binding of Selected Phenolic Compounds to Proteins"; `parker2012` is Parker's review "The kinetics of
+      thermal generation of flavour" (JSFA, doi 10.1002/jsfa.5943), a companion to the parker2013 chapter already
+      dossiered and probably the same fetch list.
+      DONE 2026-09-09: buttery1983 was read for one number and the claim it contradicted was corrected -- the
+      2-acetyl-1-pyrroline threshold IS on disk (Table II and p. 825, 16 judges, "0.1 part per 10^9 parts of water"),
+      so `desirable_targets.yml` no longer carries a null there.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

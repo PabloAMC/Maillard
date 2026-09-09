@@ -238,4 +238,5 @@ own measurement, it goes in the spec and the answer names it. Pre-registered in
 | `./scripts/docker_maillard.sh experiment-value-ranking` | Rank experiments by value of information |
 | `./scripts/docker_maillard.sh wishlist` | Regenerate the data wishlist (what to measure next) |
 | `./scripts/docker_maillard.sh deep-research-audit` | Literature backlog audit |
+| `./scripts/docker_maillard.sh run "python scripts/reading_audit.py"` | Which papers on this machine have been read into a dossier, and which have not |
 | `python scripts/maillard.py {compare,predict,explain,score,rank,wishlist}` | The front door |

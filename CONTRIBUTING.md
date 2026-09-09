@@ -18,6 +18,10 @@ For what the model is and how well it does, start with
 
 Each of the three long records opens with a "how to read this document" note.
 
+Before adding a paper, run `python scripts/reading_audit.py`: it lists the PDFs under `data/articles/`
+that no dossier is named after. The paper registry deliberately ignores those files so that its own
+output does not depend on which machine it runs on; this command is the other half of that check.
+
 ## Project layout
 
 ```
