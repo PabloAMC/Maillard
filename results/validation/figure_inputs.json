@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "1da93433123df44619b6c9537067776a6a0bfe5ea7afcf2d4e3647827e122e77",
+        "17_papers_by_weight.png": "ea6bcd717530f3398c37f23d9909190a51ae7028e1e27ca391b32744f5f5e2e1",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -127,8 +127,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "e518fad6ba28e7be307630d0dc3b195ece0843dc",
-      "short": "e518fad6",
+      "commit": "c202f9c81235ee6fce0cc81448a530741065944b",
+      "short": "c202f9c8",
       "branch": "reactions",
       "dirty": true
     },
@@ -136,7 +136,7 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "cf64a9605642bdf783d8ff3cf7806441e204b7c6b964baf62d69f5db8bb38ad7"
+        "sha256": "b110eaa4cb9e2428dd813720162c834595c74bdd969c044b76f2d4def7c000c3"
       },
       {
         "path": "data/lit/reaction_rules.yml",
@@ -344,7 +344,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "1da93433123df44619b6c9537067776a6a0bfe5ea7afcf2d4e3647827e122e77"
+        "sha256": "ea6bcd717530f3398c37f23d9909190a51ae7028e1e27ca391b32744f5f5e2e1"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
