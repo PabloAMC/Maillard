@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd",
-      "short": "efb76fb6",
+      "commit": "5c5f2857980779835f8befe2e22288449bc68546",
+      "short": "5c5f2857",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "cb2ba3a7cd2eaf9b0bfe1b2f1331c4c52419f54b4f4ceaa1dce010a715277533"
+        "sha256": "5d27d865c58182bffc8ac13b31149fb01003beb34b26fa0a97b700c57350a5b0"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "74c5c61d0893638c0576babcd08d2162c777941605c8a9e1b00e9d999c11dbbc"
+        "sha256": "595297ad2eca9c2c4b3d378f998d77b7b9b9a41b7d62a44212a593be561c5ef0"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",

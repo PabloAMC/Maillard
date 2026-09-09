@@ -422,6 +422,11 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "FLP": 308.33,    # fructosyl-lysine
     "CML": 204.22,    # N-epsilon-(carboxymethyl)lysine
     "CEL": 218.25,    # N-epsilon-(carboxyethyl)lysine
+    # B22 (2026-09-09): the methionine chain
+    "MET": 149.21,    # L-methionine
+    "MTAL": 104.17,   # methional
+    "MSH": 48.11,     # methanethiol (the trunk's pool)
+    "DMDS": 94.20,    # dimethyl disulfide
     "PENT": 150.13,   # C5H10O5, ribose = xylose
     "ARP": 221.21,    # C8H15NO6, 1-deoxy-xylulosyl-alanine
     "Cys": 121.16,    # C3H7NO2S

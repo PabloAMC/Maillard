@@ -204,12 +204,26 @@ SPECIES: Tuple[Species, ...] = (
             "the glyoxal route fits to zero in both laboratories and is not written."),
     Species("CEL", "N-epsilon-(carboxyethyl)lysine (CEL), protein-bound", 9, 2, "product", True,
             "B20. From the bound Amadori compound via methylglyoxal, lumped as Nguyen 2016 fitted it (k9)."),
-)
+
+    # ---- B22 (2026-09-09): THE METHIONINE CHAIN, trunk-only. Methionine as the Strecker substrate on
+    # glyoxal and methylglyoxal (the aminoketones are glycine's, the aldehyde is methionine's), the
+    # aldehyde's retro-Michael release of methanethiol, and the disulfide on an apparent constant.
+    # Pre-registered in results/validation/kinetic_core_b22_prereg.md; constants in parameters_methionine.py.
+    Species("MET", "L-methionine (the Strecker substrate)", 5, 1, "reactant", True,
+            "B22. Charged from the spec; also charged, declared, as glycine at the same molarity for the "
+            "Amadori chemistry that makes the dicarbonyls.", sulfur=1),
+    Species("MTAL", "methional (3-(methylthio)propanal)", 4, 0, "product", True,
+            "B22. The Strecker aldehyde of methionine; Pan 2025's zero-order rates at 100-140 C.", sulfur=1),
+    Species("MSH", "methanethiol made from methional (the sugar path's pool; the sulfur lane's MESH is thiamine's)", 1, 0,
+            "product", True, "B22. The retro-Michael release from methional; acrolein to the fragment pool.", sulfur=1),
+    Species("DMDS", "dimethyl disulfide", 2, 0, "product", True,
+            "B22. Two methanethiols on an APPARENT constant: the sugar path tracks no oxidant.", sulfur=2),)
 
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
-TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL")
+TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL",
+                                     "MET", "MTAL", "MSH", "DMDS")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 

@@ -341,7 +341,8 @@ def test_extrapolation_beyond_the_measured_window_is_flagged(parameters):
         from src.kinetic_core.parameters_dicarbonyl import DICARBONYL_KEYS
         from src.kinetic_core.parameters_dicarbonyl import AQUEOUS_GLYOXAL_KEYS
         from src.kinetic_core.parameters_glycation import GLYCATION_KEYS
-        assert line.split(":", 1)[0] in furanic_keys | set(DICARBONYL_KEYS) | set(GLYCATION_KEYS) | set(AQUEOUS_GLYOXAL_KEYS), line
+        from src.kinetic_core.parameters_methionine import METHIONINE_KEYS
+        assert line.split(":", 1)[0] in furanic_keys | set(DICARBONYL_KEYS) | set(GLYCATION_KEYS) | set(AQUEOUS_GLYOXAL_KEYS) | set(METHIONINE_KEYS), line
 
 
 # ---------------------------------------------------------------------------

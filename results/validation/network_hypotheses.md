@@ -2,7 +2,7 @@
 
 *What the literature's reaction rules (data/lit/reaction_rules.yml) propose from each lane's reference charge, placed against the engine's own reactions. Steps and products only: no rate, no concentration, and nothing here is read by the engine. Beyond the first step only products that are engine species or registry compounds react further, so the walk stays on the known map.*
 
-38 rules; 270 proposed steps: 172 mechanism known, 26 modelled, 72 proposed; products: 203 new, 9 registry, 68 species.
+38 rules; 270 proposed steps: 172 mechanism known, 26 modelled, 72 proposed; products: 203 new, 8 registry, 69 species.
 
 | placement | meaning |
 |---|---|
@@ -299,7 +299,7 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 | R09_furfural_h2s_to_fft | H2S + FUR | FFT | modelled | r_fur_fft, r_fur_fft_hs |
 | R10_norfuraneol_h2s_to_mft | H2S + NF | MFT | modelled | r_nf_mft |
 | R12_thiol_oxidation_to_disulfide | MFT + MFT | MFTD | modelled | ch_dimer_mft |
-| R12_thiol_oxidation_to_disulfide | MFT + MESH | MMFT | modelled | ch_mmft |
+| R12_thiol_oxidation_to_disulfide | MFT + MSH/MESH | MMFT | modelled | ch_mmft |
 | R12_thiol_oxidation_to_disulfide | FFT + FFT | FFTD | modelled | ch_dimer_fft |
 | R13_thiol_michael_addition | Cys + ACR | ACRCYS | modelled | a_acr_cys |
 | R27_dicarbonyl_h2s_to_mercaptoketone | H2S + MGO | MP | modelled | r_mgo_mp |
@@ -315,17 +315,17 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 | R07_strecker | Cys + DA | CC(=O)C(C)N + O=CCS | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | MFT + FFT | Cc1occc1SSCc1ccco1 | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | MFT + Cys | Cc1occc1SSCC(N)C(=O)O | mechanism known |  |
-| R12_thiol_oxidation_to_disulfide | FFT + MESH | CSSCc1ccco1 | mechanism known |  |
+| R12_thiol_oxidation_to_disulfide | FFT + MSH/MESH | CSSCc1ccco1 | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | FFT + Cys | NC(CSSCc1ccco1)C(=O)O | mechanism known |  |
-| R12_thiol_oxidation_to_disulfide | MESH + MESH | CSSC | mechanism known |  |
-| R12_thiol_oxidation_to_disulfide | MESH + Cys | CSSCC(N)C(=O)O | mechanism known |  |
+| R12_thiol_oxidation_to_disulfide | MSH/MESH + MSH/MESH | DMDS | mechanism known |  |
+| R12_thiol_oxidation_to_disulfide | MSH/MESH + Cys | CSSCC(N)C(=O)O | mechanism known |  |
 | R12_thiol_oxidation_to_disulfide | Cys + Cys | NC(CSSCC(N)C(=O)O)C(=O)O | mechanism known |  |
 | R13_thiol_michael_addition | MFT + DECADIENAL | CCCCCC=CC(CC=O)Sc1ccoc1C | mechanism known |  |
 | R13_thiol_michael_addition | MFT + ACR | Cc1occc1SCCC(N)=O | mechanism known |  |
 | R13_thiol_michael_addition | FFT + DECADIENAL | CCCCCC=CC(CC=O)SCc1ccco1 | mechanism known |  |
 | R13_thiol_michael_addition | FFT + ACR | NC(=O)CCSCc1ccco1 | mechanism known |  |
-| R13_thiol_michael_addition | MESH + DECADIENAL | CCCCCC=CC(CC=O)SC | mechanism known |  |
-| R13_thiol_michael_addition | MESH + ACR | CSCCC(N)=O | mechanism known |  |
+| R13_thiol_michael_addition | MSH/MESH + DECADIENAL | CCCCCC=CC(CC=O)SC | mechanism known |  |
+| R13_thiol_michael_addition | MSH/MESH + ACR | CSCCC(N)=O | mechanism known |  |
 | R13_thiol_michael_addition | Cys + DECADIENAL | CCCCCC=CC(CC=O)SCC(N)C(=O)O | mechanism known |  |
 | R15_thiazolidine | Cys + PENT | TTCA | mechanism known |  |
 | R15_thiazolidine | Cys + FUR | O=C(O)C1CSC(c2ccco2)N1 | mechanism known |  |
@@ -351,13 +351,13 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 | R14_hemithioacetal | FFT + GO | O=CC(O)SCc1ccco1 | proposed |  |
 | R14_hemithioacetal | FFT + DECADIENAL | CCCCCC=CC=CC(O)SCc1ccco1 | proposed |  |
 | R14_hemithioacetal | FFT + HEXANAL | CCCCCC(O)SCc1ccco1 | proposed |  |
-| R14_hemithioacetal | MESH + PENT | CSC(O)C(O)C(O)C(O)CO | proposed |  |
-| R14_hemithioacetal | MESH + FUR | CSC(O)c1ccco1 | proposed |  |
-| R14_hemithioacetal | MESH + HMF | CSC(O)c1ccc(CO)o1 | proposed |  |
-| R14_hemithioacetal | MESH + MGO | CSC(O)C(C)=O | proposed |  |
-| R14_hemithioacetal | MESH + GO | CSC(O)C=O | proposed |  |
-| R14_hemithioacetal | MESH + DECADIENAL | CCCCCC=CC=CC(O)SC | proposed |  |
-| R14_hemithioacetal | MESH + HEXANAL | CCCCCC(O)SC | proposed |  |
+| R14_hemithioacetal | MSH/MESH + PENT | CSC(O)C(O)C(O)C(O)CO | proposed |  |
+| R14_hemithioacetal | MSH/MESH + FUR | CSC(O)c1ccco1 | proposed |  |
+| R14_hemithioacetal | MSH/MESH + HMF | CSC(O)c1ccc(CO)o1 | proposed |  |
+| R14_hemithioacetal | MSH/MESH + MGO | CSC(O)C(C)=O | proposed |  |
+| R14_hemithioacetal | MSH/MESH + GO | CSC(O)C=O | proposed |  |
+| R14_hemithioacetal | MSH/MESH + DECADIENAL | CCCCCC=CC=CC(O)SC | proposed |  |
+| R14_hemithioacetal | MSH/MESH + HEXANAL | CCCCCC(O)SC | proposed |  |
 | R14_hemithioacetal | Cys + PENT | NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O | proposed |  |
 | R14_hemithioacetal | Cys + FUR | NC(CSC(O)c1ccco1)C(=O)O | proposed |  |
 | R14_hemithioacetal | Cys + HMF | NC(CSC(O)c1ccc(CO)o1)C(=O)O | proposed |  |
@@ -366,7 +366,7 @@ Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `
 | R14_hemithioacetal | Cys + DECADIENAL | CCCCCC=CC=CC(O)SCC(N)C(=O)O | proposed |  |
 | R14_hemithioacetal | Cys + HEXANAL | CCCCCC(O)SCC(N)C(=O)O | proposed |  |
 
-Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `CC(=O)C(O)SCc1ccco1`; `CC(=O)C(O)Sc1ccoc1C`; `CC(=O)C1NC(C(=O)O)CS1`; `CC(=O)C=NC(CS)C(=O)O`; `CC1=C(S)C(=O)CO1`; `CCCCCC(O)SC`; `CCCCCC(O)SCC(N)C(=O)O`; `CCCCCC(O)SCc1ccco1`; `CCCCCC(O)Sc1ccoc1C`; `CCCCCC1NC(C(=O)O)CS1`; `CCCCCC=CC(CC=O)SC`; `CCCCCC=CC(CC=O)SCC(N)C(=O)O`; `CCCCCC=CC(CC=O)SCc1ccco1`; `CCCCCC=CC(CC=O)Sc1ccoc1C`; `CCCCCC=CC=CC(O)SC`; `CCCCCC=CC=CC(O)SCC(N)C(=O)O`; `CCCCCC=CC=CC(O)SCc1ccco1`; `CCCCCC=CC=CC(O)Sc1ccoc1C`; `CCCCCC=CC=CC1NC(C(=O)O)CS1`; `CCCCCC=CC=CC=NC(CS)C(=O)O`; `CCCCCC=NC(CS)C(=O)O`; `CSC(O)C(C)=O`; `CSC(O)C(O)C(O)C(O)CO`; `CSC(O)C=O`; `CSC(O)c1ccc(CO)o1`; `CSC(O)c1ccco1`; `CSCCC(N)=O`; `CSSCC(N)C(=O)O`; `CSSCc1ccco1`; `Cc1occc1SC(O)C(O)C(O)C(O)CO`; `Cc1occc1SC(O)C=O`; `Cc1occc1SC(O)c1ccc(CO)o1`; `Cc1occc1SC(O)c1ccco1`; `Cc1occc1SCCC(N)=O`; `Cc1occc1SSCC(N)C(=O)O`; `Cc1occc1SSCc1ccco1`; `NC(=O)CCSCc1ccco1`; `NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O`; `NC(CSC(O)C=O)C(=O)O`; `NC(CSC(O)c1ccc(CO)o1)C(=O)O`; `NC(CSC(O)c1ccco1)C(=O)O`; `NC(CSSCC(N)C(=O)O)C(=O)O`; `NC(CSSCc1ccco1)C(=O)O`; `O=C(O)C(CS)N=CC(O)C(O)C(O)CO`; `O=C(O)C(CS)N=Cc1ccc(CO)o1`; `O=C(O)C(CS)N=Cc1ccco1`; `O=C(O)C(CS)NCC(=O)C(O)C(O)CO`; `O=C(O)C1CSC(c2ccc(CO)o2)N1`; `O=C(O)C1CSC(c2ccco2)N1`; `O=CC(O)SCc1ccco1`; `O=CC1NC(C(=O)O)CS1`; `O=CC=NC(CS)C(=O)O`; `O=CCS`; `OC(SCc1ccco1)c1ccco1`; `OCC(O)C(O)C(O)C(O)SCc1ccco1`; `OCc1ccc(C(O)SCc2ccco2)o1`; `CC=O` (acetaldehyde); `CSSC` (dimethyl_disulfide).
+Products that are not engine species: `CC(=O)C(C)N`; `CC(=O)C(O)SCC(N)C(=O)O`; `CC(=O)C(O)SCc1ccco1`; `CC(=O)C(O)Sc1ccoc1C`; `CC(=O)C1NC(C(=O)O)CS1`; `CC(=O)C=NC(CS)C(=O)O`; `CC1=C(S)C(=O)CO1`; `CCCCCC(O)SC`; `CCCCCC(O)SCC(N)C(=O)O`; `CCCCCC(O)SCc1ccco1`; `CCCCCC(O)Sc1ccoc1C`; `CCCCCC1NC(C(=O)O)CS1`; `CCCCCC=CC(CC=O)SC`; `CCCCCC=CC(CC=O)SCC(N)C(=O)O`; `CCCCCC=CC(CC=O)SCc1ccco1`; `CCCCCC=CC(CC=O)Sc1ccoc1C`; `CCCCCC=CC=CC(O)SC`; `CCCCCC=CC=CC(O)SCC(N)C(=O)O`; `CCCCCC=CC=CC(O)SCc1ccco1`; `CCCCCC=CC=CC(O)Sc1ccoc1C`; `CCCCCC=CC=CC1NC(C(=O)O)CS1`; `CCCCCC=CC=CC=NC(CS)C(=O)O`; `CCCCCC=NC(CS)C(=O)O`; `CSC(O)C(C)=O`; `CSC(O)C(O)C(O)C(O)CO`; `CSC(O)C=O`; `CSC(O)c1ccc(CO)o1`; `CSC(O)c1ccco1`; `CSCCC(N)=O`; `CSSCC(N)C(=O)O`; `CSSCc1ccco1`; `Cc1occc1SC(O)C(O)C(O)C(O)CO`; `Cc1occc1SC(O)C=O`; `Cc1occc1SC(O)c1ccc(CO)o1`; `Cc1occc1SC(O)c1ccco1`; `Cc1occc1SCCC(N)=O`; `Cc1occc1SSCC(N)C(=O)O`; `Cc1occc1SSCc1ccco1`; `NC(=O)CCSCc1ccco1`; `NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O`; `NC(CSC(O)C=O)C(=O)O`; `NC(CSC(O)c1ccc(CO)o1)C(=O)O`; `NC(CSC(O)c1ccco1)C(=O)O`; `NC(CSSCC(N)C(=O)O)C(=O)O`; `NC(CSSCc1ccco1)C(=O)O`; `O=C(O)C(CS)N=CC(O)C(O)C(O)CO`; `O=C(O)C(CS)N=Cc1ccc(CO)o1`; `O=C(O)C(CS)N=Cc1ccco1`; `O=C(O)C(CS)NCC(=O)C(O)C(O)CO`; `O=C(O)C1CSC(c2ccc(CO)o2)N1`; `O=C(O)C1CSC(c2ccco2)N1`; `O=CC(O)SCc1ccco1`; `O=CC1NC(C(=O)O)CS1`; `O=CC=NC(CS)C(=O)O`; `O=CCS`; `OC(SCc1ccco1)c1ccco1`; `OCC(O)C(O)C(O)C(O)SCc1ccco1`; `OCc1ccc(C(O)SCc2ccco2)o1`; `CC=O` (acetaldehyde).
 
 ## Rules
 

@@ -1093,7 +1093,7 @@
           "predicted_p50": 1458.5060086590872,
           "predicted_p95": 1458.5067851758272,
           "predicted_point": 1458.5059737773267,
-          "predicted_std": 0.0007783073563821332,
+          "predicted_std": 0.0007783073563925678,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -3151,9 +3151,9 @@
     "generated_on": "2026-09-09",
     "git": {
       "branch": "reactions",
-      "commit": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd",
+      "commit": "5c5f2857980779835f8befe2e22288449bc68546",
       "dirty": true,
-      "short": "efb76fb6"
+      "short": "5c5f2857"
     },
     "inputs": [
       {
@@ -3674,7 +3674,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 180.2,
+    "wall_seconds": 187.8,
     "workers": 6
   }
 }

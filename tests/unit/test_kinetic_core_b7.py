@@ -120,10 +120,11 @@ def test_every_new_species_is_in_the_state_vector():
     # still a prefix of this one.
     # B13 (2026-09-07) appended three trunk-only species after B7's five; B18 (2026-09-08)
     # appended the three pyrazines after those.
-    assert SPECIES_KEYS[-17:-12] == NEW_TRUNK_SPECIES
-    assert SPECIES_KEYS[-12:-9] == ("G", "GO", "DA")
-    assert SPECIES_KEYS[-9:-4] == ("PZ", "DMP", "MPZ", "AKG", "AKM")
-    assert SPECIES_KEYS[-4:] == ("LYSP", "FLP", "CML", "CEL")   # B20 (2026-09-09): the glycation arm
+    assert SPECIES_KEYS[-21:-16] == NEW_TRUNK_SPECIES
+    assert SPECIES_KEYS[-16:-13] == ("G", "GO", "DA")
+    assert SPECIES_KEYS[-13:-8] == ("PZ", "DMP", "MPZ", "AKG", "AKM")
+    assert SPECIES_KEYS[-8:-4] == ("LYSP", "FLP", "CML", "CEL")   # B20 (2026-09-09): the glycation arm
+    assert SPECIES_KEYS[-4:] == ("MET", "MTAL", "MSH", "DMDS")   # B22 (2026-09-09): the methionine chain
 
 
 def test_the_trunk_network_still_balances_with_eleven_more_steps():

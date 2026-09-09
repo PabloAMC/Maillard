@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **408**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **412**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -58,7 +58,7 @@ Tracked files: **408**. Local-only (gitignored): scratch runs under `results/qui
 | `key_value_trace_report.md` | Where every key numeric value in the core comes from (`scripts/trace_key_values.py`). Read by people. |
 | `kinetic_core_b*_diagnosis.md` (3): `kinetic_core_b2_1_diagnosis.md`, `kinetic_core_b2_2_diagnosis.md`, `kinetic_core_b2_3_diagnosis.md` | Per-wave diagnosis notes; b2_1/b2_2 are quoted by `parameters_sulfur.py` and `panel.py`. |
 | `kinetic_core_b*_exam*.*` (27): `kinetic_core_b2_4_exam_half.json`, `kinetic_core_b2_4_exam_half.md`, `kinetic_core_b2_4_exam_measured.json`, `kinetic_core_b2_4_exam_measured.md` … | FROZEN cutover-exam scores per wave / ensemble member (the exam generator was deleted at B5b; these are history). |
-| `kinetic_core_b*_fit_report.*` (33): `kinetic_core_b10_fit_report.json`, `kinetic_core_b10_noyil_fit_report.json`, `kinetic_core_b18_fit_report.json`, `kinetic_core_b18_fit_report.md` … | FROZEN fit reports, one per wave. The engine reads b1 (trunk), the shipped sulfur wave (b9), b3 (acrylamide), b6 (lipid) and b7 (trunk targets); earlier sulfur waves (b2, b2_1..b2_4, b8) are the audit trail of how b9 was reached. |
+| `kinetic_core_b*_fit_report.*` (35): `kinetic_core_b10_fit_report.json`, `kinetic_core_b10_noyil_fit_report.json`, `kinetic_core_b18_fit_report.json`, `kinetic_core_b18_fit_report.md` … | FROZEN fit reports, one per wave. The engine reads b1 (trunk), the shipped sulfur wave (b9), b3 (acrylamide), b6 (lipid) and b7 (trunk targets); earlier sulfur waves (b2, b2_1..b2_4, b8) are the audit trail of how b9 was reached. |
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
 | `kinetic_core_b*_laplace_covariance.json` (3): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
@@ -90,6 +90,7 @@ Tracked files: **408**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b19_prereg_draft.md` | DRAFT pre-registration of wave B19 (amino-acid identity on the sugar path): the structure, the rows it needs and where they must come from; becomes a pre-registration when the sources are on disk. |
 | `kinetic_core_b20_ship_rule.*` (2): `kinetic_core_b20_ship_rule.json`, `kinetic_core_b20_ship_rule.md` | The B20 prereg's ship rule (sec. 4) evaluated on the frozen B20 report and the live engine: the decisive rows, the panel unmoved, Nguyen's CML level, the Berk and Hamzalioglu comparators, identification (`generate_kinetic_core_b20_ship_rule.py`). |
 | `kinetic_core_b21_ship_rule.*` (2): `kinetic_core_b21_ship_rule.json`, `kinetic_core_b21_ship_rule.md` | The B21 prereg's ship rule (sec. 4) on the frozen B21 report and the live panel: the rows, the B1 browning hold-out before and after, the panel, Quan 2020's glyoxal level, Xia's ordering, Leahy's total, identification (`generate_kinetic_core_b21_ship_rule.py`). |
+| `kinetic_core_b22_ship_rule.*` (2): `kinetic_core_b22_ship_rule.json`, `kinetic_core_b22_ship_rule.md` | The B22 prereg's ship rule on the frozen B22 report and the live panel: the rows, the panel, Deng 2022's methional, identification, Chin & Lindsay's half-life; verdict DO NOT SHIP (`generate_kinetic_core_b22_ship_rule.py`). |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
 | `kinetic_core_b2_4_fit_*.json` (21): `kinetic_core_b2_4_fit_half.json`, `kinetic_core_b2_4_fit_half_s0.json`, `kinetic_core_b2_4_fit_half_s1.json`, `kinetic_core_b2_4_fit_half_s2.json` … | B2.4 ensemble: one fit per weighting (half / measured / shipped) and per start (_s0.._s5). History; `kinetic_core_b2_4_ensemble.json` summarises them. |

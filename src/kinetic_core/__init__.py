@@ -326,6 +326,10 @@ def operative_parameters(fitted):
     from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_PARAMETERS
 
     parameters.update(AQUEOUS_GLYOXAL_PARAMETERS)
+    # B22 (2026-09-09): the methionine chain, trunk-only, inert without methionine in the charge.
+    from .parameters_methionine import METHIONINE_PARAMETERS
+
+    parameters.update(METHIONINE_PARAMETERS)
     return parameters
 
 

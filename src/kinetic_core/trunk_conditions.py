@@ -254,6 +254,11 @@ def apply(
         fp, notes = pyrazine_factor(process, pyrazine_slopes)
         if abs(fp - 1.0) > 1e-12:
             out = _scaled(out, PYRAZINE_PH_STEPS, fp)
+            # B22: methionine's Strecker steps are glycine's times an identity ratio; the same pH term.
+            from .parameters_methionine import METHIONINE_PH_STEPS
+
+            if all(key in out for key in METHIONINE_PH_STEPS):
+                out = _scaled(out, METHIONINE_PH_STEPS, fp)
         warnings = list(warnings) + notes
     return out, warnings
 

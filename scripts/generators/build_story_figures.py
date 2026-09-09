@@ -71,16 +71,18 @@ def fig_coverage() -> dict:
         if p.get("answered"):
             return "modelled", f"{p.get('lane', '')}"
         reached = (p.get("hypotheses") or {}).get("reached_in_charges") or []
+        if p.get("state") == "refused" and p.get("species_key"):
+            return "refused", "in the network, no shipped rate"
         if reached:
             return "route", "no rate, not no route"
         return "none", p.get("state", "")
 
     rows = [("desirable", n, *status(n)) for n in desirable] + [("off-note", n, *status(n)) for n in off]
-    counts = {g: {"modelled": 0, "route": 0, "none": 0} for g in ("desirable", "off-note")}
+    counts = {g: {"modelled": 0, "route": 0, "refused": 0, "none": 0} for g in ("desirable", "off-note")}
     for g, _n, st, _ in rows:
         counts[g][st] += 1
-    colour = {"modelled": ("good", GOOD), "route": ("mid", MID), "none": ("none", NONE)}
-    label = {"modelled": "modelled, with a rate", "route": "a cited route, no rate", "none": "nothing"}
+    colour = {"modelled": ("good", GOOD), "route": ("mid", MID), "refused": ("bad", BAD), "none": ("none", NONE)}
+    label = {"modelled": "modelled, with a rate", "route": "a cited route, no rate", "refused": "a step tried and refused; no shipped rate", "none": "nothing"}
 
     n_left = len(desirable)
     fig_h = 0.42 * max(n_left, len(off)) + 1.6
@@ -91,7 +93,7 @@ def fig_coverage() -> dict:
         ax.invert_yaxis()
         ax.axis("off")
         c = counts[group]
-        ax.set_title(f"{group} ({len(names)}): {c['modelled']} modelled, {c['route']} route only, {c['none']} nothing", loc="left")
+        ax.set_title(f"{group} ({len(names)}): {c['modelled']} modelled, {c['route']} route only, {c['refused']} refused, {c['none']} nothing", loc="left")
         for i, (g, n, st, note) in enumerate(r for r in rows if r[0] == group):
             fill, edge = colour[st]
             ax.add_patch(plt.Rectangle((0.0, i - 0.42), 1.0, 0.84, facecolor=FILL[fill], edgecolor=edge, linewidth=1.2))

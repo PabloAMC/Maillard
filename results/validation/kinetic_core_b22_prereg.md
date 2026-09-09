@@ -83,3 +83,46 @@ answers with the arm and its three declarations, the coverage figure moves methi
 and dimethyl disulfide to "modelled", and every methional answer carries the unit and the supply
 conditionality. If it does not ship, the steps stay at their frozen literals with a DO-NOT-SHIP
 note and the four targets are refused by name.
+
+## 6. Outcome (2026-09-09, run the same day) — DO NOT SHIP, and the structure is refuted
+
+**What was built.** The four species and four steps of section 2, trunk-only and appended last;
+methionine charged as MET and, declared, as glycine for the Amadori chemistry; the pH term of the
+pyrazine step applied to the two methionine Strecker steps; the fit generator
+`generate_kinetic_core_b22_fit.py` (Pan's pot integrated at the three temperatures, the mean
+formation rate over 30 to 600 s as the observable) and the ship rule
+`generate_kinetic_core_b22_ship_rule.py`.
+
+**What happened.** The optimiser drove the identity ratio to its ceiling, a hundred times glycine's
+constants, and the disulfide constant to its ceiling too, and the methional rows were still
+3.6 to 5.6 decades below Pan's printed rates
+(methanethiol 2.0 to 5.3, the disulfide 2.6 to 10.6); cost 7374 on nine rows.
+In the same run Deng 2022's pot (methionine 200 + glucose 200 mmol/L, 120 °C) came out
++1.5 to +2.9 decades ABOVE the printed methional and falling where the source rises. T1 fails, T4 fails
+(three of four coordinates on a bound, the barrier of the release step at its floor), T2 passes (no
+panel pot charges methionine). Verdict by the rule: DO NOT SHIP.
+
+**Why, in the numbers.** In Pan's pot the trunk holds 9 µmol/L of glyoxal and 42 µmol/L of
+methylglyoxal at 140 °C and ten minutes, against 268 µmol/L of methionine; with glycine's Strecker
+constants (a few times 1e-7 litres per millimole per minute at 100 °C, from Zhou 2024's fed
+dicarbonyls) the product of the three is a rate of nanomoles per litre per minute, and Pan measures
+half a micromole per litre per minute. A hundredfold ratio does not bridge that; ten-thousandfold
+would, and then Deng's pot, where the amine is a thousand times higher and the trunk makes tens of
+milligrams of glyoxal per litre, overshoots by four decades instead of two. No single ratio serves
+the two pots: methional does not form as free dicarbonyl times methionine with the Strecker
+constants measured on fed dicarbonyls. Deng's own experiment says where it does form: the
+methionine Amadori compound alone gives 1.4 to 2.6 times more methional than methionine plus
+glucose, so the route is the Amadori compound's own decomposition (the sugar moiety supplies the
+dicarbonyl in the same molecule), which is a first-order step in a methionine Amadori compound the
+trunk does not carry. That is the structure the next pre-registration should write: MET + Glc → a
+methionine Amadori compound (the trunk's Amadori formation with methionine as the amine), then
+Amadori-Met → methional + the rest, with Deng's two series (methionine + glucose, and the fed
+Amadori compound) as the rows, and Pan's rates as the second laboratory.
+
+**What is kept.** The species and steps stay in the network at zero (the B17 precedent), the
+optimum is recorded in `parameters_methionine.FROZEN_B22` and asserted against the report, and a
+request for methional, methanethiol from methional or dimethyl disulfide is refused with this
+verdict. Methionine as a precursor now resolves to the sugar path and is charged as glycine for the
+Amadori chemistry, declared on every such answer; before this wave it was refused as unmapped.
+Dimethyl trisulfide is refused with its own reason (no hydrogen sulfide on this path).
+

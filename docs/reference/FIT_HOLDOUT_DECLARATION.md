@@ -1306,3 +1306,16 @@ ran.
 3. **THE TRANSFER.** Lactulosyl-lysine in milk to fructosyl-glycine in water is a declared ± 0.5 dex
    band on every glyoxal, glucosone and pyrazine answer, the B18 precedent.
 
+## Amendment 32 — 2026-09-09 (Wave B22, the methionine chain; refused)
+
+1. **NINE NEW FIT ROWS; FOUR NEW COORDINATES.** Pan 2025 Table 2's zero-order constants for
+   methional, methanethiol and dimethyl disulfide at 100, 120 and 140 °C (unit inferred, declared)
+   entered as FIT rows for an identity ratio on B18's Strecker constants, the methional → methanethiol
+   step and its barrier, and an apparent disulfide constant.
+2. **WHAT IS VALIDATED.** Deng 2022's methional levels and Chin & Lindsay 1994's methanethiol
+   half-life: reported, not fitted.
+3. **VERDICT.** DO NOT SHIP: the ratio ran to its ceiling with Pan's rows still four decades low and
+   Deng's pot two decades high; the structure (free dicarbonyl × methionine) is refuted. The steps
+   stay at zero, the targets are refused by name, the record stands. Methionine as a precursor is
+   charged as glycine for the Amadori chemistry, declared.
+

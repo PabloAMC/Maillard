@@ -196,6 +196,9 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     "l-glutamine": "Gln",
     "lysine": "Lys",
     "l-lysine": "Lys",
+    # B22 (2026-09-09): methionine, the Strecker substrate of the methionine chain, trunk lane
+    "methionine": "MET",
+    "l-methionine": "MET",
     "alanine": "Ala",
     "l-alanine": "Ala",
     "methylglyoxal": "MGO",
@@ -241,6 +244,15 @@ TARGET_ALIASES: Mapping[str, str] = {
     "fructoselysine": "FLP",
     "bound lysine": "LYSP",
     "protein-bound lysine": "LYSP",
+    # B22 (2026-09-09): the methionine chain, trunk lane only
+    "methional": "MTAL",
+    "3-(methylthio)propanal": "MTAL",
+    "3-(methylthio)propionaldehyde": "MTAL",
+    "methional (3-(methylthio)propanal)": "MTAL",
+    "methanethiol from methional": "MSH",
+    "dimethyl disulfide": "DMDS",
+    "dimethyl disulfide (dmds)": "DMDS",
+    "dmds": "DMDS",
     # B18 (2026-09-08): the pyrazine step, trunk lane only
     "pyrazine": "PZ",
     "2,5-dimethylpyrazine": "DMP",
@@ -416,6 +428,9 @@ _TARGET_LANE: Mapping[str, str] = {
     "CEL": TRUNK,
     "FLP": TRUNK,
     "LYSP": TRUNK,
+    "MTAL": TRUNK,
+    "MSH": TRUNK,
+    "DMDS": TRUNK,
     "MPZ": TRUNK,
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
@@ -433,7 +448,9 @@ DICARBONYL_TARGET_KEYS: frozenset = frozenset({"G", "GO", "DA"})
 PYRAZINE_TARGET_KEYS: frozenset = frozenset({"PZ", "DMP", "MPZ"})
 #: B20: the glycation arm's reportable species, trunk lane only, on a protein loading.
 GLYCATION_TARGET_KEYS: frozenset = frozenset({"CML", "CEL", "FLP", "LYSP"})
-TRUNK_ONLY_TARGET_KEYS: frozenset = DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS | GLYCATION_TARGET_KEYS
+#: B22: the methionine chain's reportable species, trunk lane only, on a methionine charge.
+METHIONINE_TARGET_KEYS: frozenset = frozenset({"MTAL", "MSH", "DMDS"})
+TRUNK_ONLY_TARGET_KEYS: frozenset = DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS | GLYCATION_TARGET_KEYS | METHIONINE_TARGET_KEYS
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
 _PRECURSOR_LANE: Mapping[str, str] = {
@@ -974,6 +991,21 @@ def declare_envelope(
     dicarbonyls = sorted(c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS)
     pyrazines = sorted(c for c, key in mapped_targets.items() if key in PYRAZINE_TARGET_KEYS)
     glycation = sorted(c for c, key in mapped_targets.items() if key in GLYCATION_TARGET_KEYS)
+    methionine_targets = sorted(c for c, key in mapped_targets.items() if key in METHIONINE_TARGET_KEYS)
+    if methionine_targets and lane == TRUNK:
+        from .parameters_methionine import METHIONINE_NOT_SHIPPED_REASON, METHIONINE_SHIPPED
+
+        if not METHIONINE_SHIPPED:
+            reasons.append("METHIONINE CHAIN TARGETS " + ", ".join(repr(c) for c in methionine_targets) + ": " + METHIONINE_NOT_SHIPPED_REASON)
+    if methionine_targets and lane == TRUNK and mapped_precursors.get("MET", 0.0) <= 0.0:
+        # B22: the chain's substrate is methionine; without it every level is a structural zero.
+        reasons.append("METHIONINE CHAIN TARGETS " + ", ".join(repr(c) for c in methionine_targets)
+                       + " need methionine in the charge (wave B22): methional is methionine's Strecker aldehyde and "
+                       "methanethiol and the disulfide are made from it. Refused rather than answered with a structural zero.")
+    if any(str(c).strip().lower() in ("dimethyl trisulfide", "dmts") for c in targets):
+        from .parameters_methionine import METHIONINE_NO_DMTS_REASON
+
+        reasons.append("UNREPRESENTED TARGET 'dimethyl trisulfide' (wave B22): " + METHIONINE_NO_DMTS_REASON)
     if glycation and lane == TRUNK:
         # B20: the arm's substrate is protein-bound lysine; without a loading the pool is zero
         # and a zero would be a structural artefact, not an answer.
@@ -986,7 +1018,7 @@ def declare_envelope(
             _charged = None
         if _charged is None or _charged.amine <= 0:
             reasons.append(GLYCATION_NO_PROTEIN_REASON + " Targets: " + ", ".join(repr(c) for c in glycation) + ".")
-    if (dicarbonyls or pyrazines or glycation) and lane is not None and lane != TRUNK:
+    if (dicarbonyls or pyrazines or glycation or methionine_targets) and lane is not None and lane != TRUNK:
         named = []
         if dicarbonyls:
             named.append("DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls) + " (wave B13)")
@@ -994,6 +1026,8 @@ def declare_envelope(
             named.append("PYRAZINE TARGETS " + ", ".join(repr(c) for c in pyrazines) + " (wave B18)")
         if glycation:
             named.append("GLYCATION TARGETS " + ", ".join(repr(c) for c in glycation) + " (wave B20)")
+        if methionine_targets:
+            named.append("METHIONINE CHAIN TARGETS " + ", ".join(repr(c) for c in methionine_targets) + " (wave B22)")
         reasons.append(
             " and ".join(named)
             + f" run on the trunk lane only: the {lane} lane's network keeps the topology its fit was run "
@@ -1144,6 +1178,17 @@ def declare_envelope(
         from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_CAVEAT
 
         warnings.append(AQUEOUS_GLYOXAL_CAVEAT)
+    # --- B22: the methionine chain's own declaration ----------------------------
+    if mapped_precursors.get("MET", 0.0) > 0.0 and lane == TRUNK:
+        warnings.append(f"methionine ({mapped_precursors['MET']:g} mmol/L) is charged as GLYCINE at the same molarity for the sugar "
+                        "path's Amadori chemistry (declared, wave B22); its own Strecker chain did not ship and carries no flux.")
+    if mapped_precursors.get("MET", 0.0) > 0.0 and lane is not None and lane != TRUNK:
+        warnings.append(f"methionine ({mapped_precursors['MET']:g} mmol/L) is carried by the sugar path only (wave B22); "
+                        f"the {lane} lane's network has no methionine step, so it is recorded and not charged.")
+    if set(mapped_targets.values()) & METHIONINE_TARGET_KEYS:
+        from .parameters_methionine import METHIONINE_CAVEAT
+
+        warnings.append(METHIONINE_CAVEAT)
     # --- B20: the glycation arm's own declaration ------------------------------
     if set(mapped_targets.values()) & GLYCATION_TARGET_KEYS:
         from .parameters_glycation import GLYCATION_AVAILABILITY_CAVEAT
@@ -1497,6 +1542,12 @@ def core_parameters(
 
         b = override["aqueous_glyoxal"]
         parameters.update(with_aqueous_glyoxal(*[float(b[k]) for k in AQUEOUS_GLYOXAL_COORDINATES]))
+    if "methionine" in override:
+        # B22: the four methionine coordinates (the fit generator's candidates, a later draw).
+        from .parameters_methionine import METHIONINE_COORDINATES, with_fitted_methionine
+
+        b = override["methionine"]
+        parameters.update(with_fitted_methionine(*[float(b[k]) for k in METHIONINE_COORDINATES]))
     if "glycation" in override:
         # B20, the same discipline: the frozen literals in parameters_glycation are the default; an
         # explicit block of the five log10 constants at 100 C replaces them.
@@ -2002,6 +2053,11 @@ def _integrate_program(
             reservoir, _basis = oxygen_reservoir_units(process)
             state["OXR"] = reservoir * (1.0 if reservoir_scale is None else float(reservoir_scale))
         state.setdefault("OXV", 0.0)
+    if lane == TRUNK and state.get("MET", 0.0) > 0.0:
+        # B22 (2026-09-09): methionine is the Strecker substrate (MET) and, DECLARED, the amine of the
+        # Amadori chemistry that makes the dicarbonyls, charged as glycine at the same molarity (the
+        # same amine plays both roles in turn; kinetic_core_b22_prereg.md sec. 2, declaration v).
+        state["Gly"] = float(state.get("Gly", 0.0)) + float(state["MET"])
     if lane == TRUNK and "LYSP" not in state:
         # B20 (2026-09-09): the bound-lysine pool from the spec's protein loading and the matrix's
         # amine density, times the declared available fraction (the band centre); zero, as before,

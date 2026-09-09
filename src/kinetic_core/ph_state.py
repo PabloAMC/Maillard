@@ -751,6 +751,14 @@ UNTRACKED_TITRATABLE: Mapping[str, str] = {
     "CEL": (
         "N-epsilon-(carboxyethyl)lysine, bound: as CML, at a third of its level."
     ),
+    # B22 (2026-09-09): the methionine chain, trunk-only, zero without methionine in the charge.
+    "MET": (
+        "L-methionine (alpha-amine pKa 9.2, carboxyl 2.3), charged at 0.27 mmol/L in the pot it was fitted on "
+        "and never above a few mmol/L: left out like Gly and Ala, the trunk's other amines."
+    ),
+    "MSH": (
+        "methanethiol from methional (pKa 10.3), micromolar: left out like the sulfur lane's MESH."
+    ),
 }
 
 

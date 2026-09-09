@@ -1693,6 +1693,16 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       3-DG / MGO / 1-DG unchanged. NEXT (B21b, to pre-register): joint fit of k_ama_g on Hamzalioglu's four
       constants AND Martins 2005's Amadori series (80 / 100 / 120 C), with the transfer band as the prior;
       if no rate serves both, the milk constant does not transfer to fructosyl-glycine and B21 is refused.
+- [ ] **B22 (pre-registered and RUN 2026-09-09; DO NOT SHIP): the methionine chain.** Structure refuted: identity
+      ratio on B18's Strecker constants at its ceiling (100x) leaves Pan 2025's methional 3.6-5.6 dex low (glyoxal
+      9 uM, MGO 42 uM at 140 C / 10 min in that pot against 268 uM Met) while Deng 2022's 200 + 200 mM pot is
+      1.5-2.9 dex HIGH and falling where the source rises. Steps in the network at zero; targets refused with the
+      verdict; methionine charged as glycine for the Amadori chemistry (declared). NEXT (B22b, to pre-register):
+      MET + Glc -> Amadori-Met (the trunk's Amadori formation with methionine as the amine), Amadori-Met ->
+      methional (first order; Deng: the fed ARP gives 1.4-2.6x the free pair, peaks at 120 min then falls, loss
+      >= 6.9e-3 /min), rows = Deng 2022's two 120 C series (RF = 1: within-series ratios, not levels) + Pan 2025's
+      rates as the second laboratory; methional -> MeSH and the disulfide as before. Ask Deng's group for the
+      100 / 130 C methional rows (Table 2 has no methional row despite its title).
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

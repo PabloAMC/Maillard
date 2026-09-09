@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "891f3427b4c16cf8144a14f1777ae8753c9351b96cb265d9754f033629d13570",
+        "17_papers_by_weight.png": "56eaca20da34aedc582e38ba2e1f1f0bd8b6e0fb18794c72827d7ff65c9e683e",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -113,10 +113,10 @@
         "src/kinetic_core/sulfur.py"
       ],
       "figures": {
-        "23_coverage_of_declared_targets.png": "3848623b77d0da9e6fba7ba7528b0574c22e616108aa5e1becffe70bc9bb19fa",
+        "23_coverage_of_declared_targets.png": "1ee5a12cf9d8607b0a42bfc64f363929439c5d2a2ae41083a024c6ee68e4a7af",
         "24_fat_path_hexanal.png": "6dd1a389f3ee6fb84426d97bec3130f508445be5094980052c96c93cbb936a9e",
         "25_protein_matrix_layer.png": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6",
-        "26_hypothesis_layer.png": "99b7db1ac77b16160a407d892e21f31358a6606c9e5672ff75f45703a121b2c7",
+        "26_hypothesis_layer.png": "185fc901a3e6858aacc4c4d3d1ce36be310eaa49327e214856476920b1fbd085",
         "27_pyrazine_step_supply.png": "91def689a3e0d6e85fc889a39b454f4bf7c3a874531795cdb9cb223e9d62195c",
         "28_two_refused_sinks.png": "e9df171dc56dbf7da46d5afef26ecfa2a97eb335443ccd453f3ca03c98f83ec1",
         "29_calibration_reading_ladder.png": "c9c970b470677083f7f9dfcf385c71089f03973ca2d6cec3dae418df5ae0c15d"
@@ -127,8 +127,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd",
-      "short": "efb76fb6",
+      "commit": "5c5f2857980779835f8befe2e22288449bc68546",
+      "short": "5c5f2857",
       "branch": "reactions",
       "dirty": true
     },
@@ -164,15 +164,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "74c5c61d0893638c0576babcd08d2162c777941605c8a9e1b00e9d999c11dbbc"
+        "sha256": "595297ad2eca9c2c4b3d378f998d77b7b9b9a41b7d62a44212a593be561c5ef0"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "cb2ba3a7cd2eaf9b0bfe1b2f1331c4c52419f54b4f4ceaa1dce010a715277533"
+        "sha256": "5d27d865c58182bffc8ac13b31149fb01003beb34b26fa0a97b700c57350a5b0"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "3b31f7761cd7d2a95907c892fa64f3ce31676207e1f3ef1b69fcf5af5fab5dd8"
+        "sha256": "f8a56ff50f0d943a265f7f0e17c1f3c66fe0075be78b63bd790c7e475b68f26c"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -200,7 +200,7 @@
       },
       {
         "path": "results/validation/network_hypotheses.json",
-        "sha256": "16da8b467fcb2cef90ee21803840f2f8befe0e4e00872a2f4c084bd02535bf18"
+        "sha256": "517ec3bf18d11142ad96b71ce018d6204185f24feb99b840cba6f25a5c10744e"
       },
       {
         "path": "scripts/generators/build_reaction_tree.py",
@@ -208,7 +208,7 @@
       },
       {
         "path": "scripts/generators/build_story_figures.py",
-        "sha256": "d5e34625e9c43063aea6379daec8727983beedfcbb26b6199df9fe6a72c1367b"
+        "sha256": "aa63ecdff8a48be4f7d557c491080f1e4790daa0bac215f6abcacd5135db0a7c"
       },
       {
         "path": "scripts/generators/build_thiol_sink_figures.py",
@@ -228,7 +228,7 @@
       },
       {
         "path": "src/kinetic_core/network.py",
-        "sha256": "d6474ed3b617c45f4347be195c7d685aff25145ff8cbfd1397faf0175522b4e1"
+        "sha256": "f66a913316bedfb5c76645ba21dbab3154502d7bed08393b3cbbca78d0c3e6e4"
       },
       {
         "path": "src/kinetic_core/parameters.py",
@@ -260,7 +260,7 @@
       },
       {
         "path": "src/kinetic_core/species.py",
-        "sha256": "f92b701bbe62d9f95715bb0a9b31a1aefb24527784f3ea4a3c033217e89d9de1"
+        "sha256": "6aecb493672e49bee194279c0912a51d5934db802f714b56c91c3b2fc6ae8d9f"
       },
       {
         "path": "src/kinetic_core/species_acrylamide.py",
@@ -268,7 +268,7 @@
       },
       {
         "path": "src/kinetic_core/species_sulfur.py",
-        "sha256": "5d67036f9430e259be7a6abd1219b3b9eca48620258c6f55684fcc3eb06fc549"
+        "sha256": "ec948d92d94d38a2c4e4988fde1a6c81f7105b07564ec64302eb272831411b9e"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -344,7 +344,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "891f3427b4c16cf8144a14f1777ae8753c9351b96cb265d9754f033629d13570"
+        "sha256": "56eaca20da34aedc582e38ba2e1f1f0bd8b6e0fb18794c72827d7ff65c9e683e"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
@@ -368,7 +368,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/23_coverage_of_declared_targets.png",
-        "sha256": "3848623b77d0da9e6fba7ba7528b0574c22e616108aa5e1becffe70bc9bb19fa"
+        "sha256": "1ee5a12cf9d8607b0a42bfc64f363929439c5d2a2ae41083a024c6ee68e4a7af"
       },
       {
         "path": "docs/assets/thiol_sink/24_fat_path_hexanal.png",
@@ -380,7 +380,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/26_hypothesis_layer.png",
-        "sha256": "99b7db1ac77b16160a407d892e21f31358a6606c9e5672ff75f45703a121b2c7"
+        "sha256": "185fc901a3e6858aacc4c4d3d1ce36be310eaa49327e214856476920b1fbd085"
       },
       {
         "path": "docs/assets/thiol_sink/27_pyrazine_step_supply.png",

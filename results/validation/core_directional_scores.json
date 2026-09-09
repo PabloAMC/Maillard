@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "efb76fb6571e3872baa75f257a252e2e0a9bdfdd",
-      "short": "efb76fb6",
+      "commit": "5c5f2857980779835f8befe2e22288449bc68546",
+      "short": "5c5f2857",
       "branch": "reactions",
       "dirty": true
     },
@@ -503,7 +503,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 45.5
+    "wall_seconds": 45.0
   },
   "claims": [
     {
@@ -2413,11 +2413,11 @@
       "values_ug_per_l": [
         10.286525861011008,
         543.6798816527045,
-        2102.4716518604605
+        2102.4716497436357
       ],
       "log10_steps": [
         1.7230745403829824,
-        0.587386886158209
+        0.5873868857209497
       ],
       "arms": [
         {
@@ -2490,7 +2490,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 2102.4716518604605
+          "value_ug_per_l": 2102.4716497436357
         }
       ]
     },
@@ -3023,9 +3023,9 @@
       "lane": "trunk",
       "values_ug_per_l": [
         881.2744320862006,
-        1369.7279761338455
+        1369.727975727339
       ],
-      "log10_ratio_B_over_A": 0.19152315577260207,
+      "log10_ratio_B_over_A": 0.19152315564371264,
       "arms": [
         {
           "label": "glycine + D-fructose, 150 C 35 min",
@@ -3077,7 +3077,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1369.7279761338455
+          "value_ug_per_l": 1369.727975727339
         }
       ]
     },
@@ -3166,12 +3166,12 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        0.0003055381015926552,
+        0.0003055381015926567,
         6.944847878106593,
         22.662745855825797
       ],
       "log10_steps": [
-        4.35659736138308,
+        4.356597361383078,
         0.5136497912843419
       ],
       "arms": [
@@ -3201,7 +3201,7 @@
             "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 0.0003055381015926552
+          "value_ug_per_l": 0.0003055381015926567
         },
         {
           "label": "pH 7",
@@ -3450,11 +3450,11 @@
       "values_ug_per_l": [
         1042.2077345754221,
         756.6697712340812,
-        679.9894994274285
+        679.9894994274296
       ],
       "log10_steps": [
         -0.13904790752921123,
-        -0.04640417808841095
+        -0.046404178088410304
       ],
       "arms": [
         {
@@ -3533,7 +3533,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 190 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 679.9894994274285
+          "value_ug_per_l": 679.9894994274296
         }
       ]
     },
@@ -4139,11 +4139,11 @@
       "values_ug_per_l": [
         55.32835862116466,
         1042.2077345754221,
-        1369.7279761338455
+        1369.727975727339
       ],
       "log10_steps": [
         1.275006505324325,
-        0.11868003425007392
+        0.11868003412118447
       ],
       "arms": [
         {
@@ -4222,7 +4222,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1369.7279761338455
+          "value_ug_per_l": 1369.727975727339
         }
       ]
     },

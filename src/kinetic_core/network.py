@@ -414,13 +414,40 @@ AQUEOUS_GLYOXAL_REACTIONS: Tuple[Reaction, ...] = (
         "Hamzalioglu 2026 step 4). FITTED on four first-order constants at 110-140 C.",
     ),
 )
+#: Build Wave B22 (2026-09-09): THE METHIONINE CHAIN, TRUNK-ONLY. The Strecker step of B18 with
+#: methionine as the amino acid: the dicarbonyl keeps its carbons in the aminoketone (glycine's
+#: AKG / AKM by construction), methionine leaves as methional and CO2 (to FRAG_C). Then the
+#: retro-Michael release of methanethiol (acrolein to FRAG_C) and the disulfide on an apparent
+#: constant. Pre-registered in kinetic_core_b22_prereg.md; constants in parameters_methionine.py.
+METHIONINE_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_go_met", {"GO": 1, "MET": 1}, {"AKG": 1, "MTAL": 1, "FRAG_C": 1}, "k_go_met",
+        "B22. glyoxal + methionine -> aminoacetaldehyde + methional + CO2 (Strecker, net). The identity "
+        "ratio to glycine's k_go_ak is FITTED on Pan 2025's methional rates; barrier and pH term are B18's.",
+    ),
+    Reaction(
+        "r_mgo_met", {"MGO": 1, "MET": 1}, {"AKM": 1, "MTAL": 1, "FRAG_C": 1}, "k_mgo_met",
+        "B22. methylglyoxal + methionine -> aminoacetone + methional + CO2 (Strecker, net). Same ratio.",
+    ),
+    Reaction(
+        "r_mtal_msh", {"MTAL": 1}, {"MSH": 1, "FRAG_C": 3}, "k_mtal_msh",
+        "B22. methional -> methanethiol + acrolein (retro-Michael; acrolein to the fragment pool). FITTED "
+        "on Pan 2025's methanethiol rates, barrier free within 20-150 kJ/mol.",
+    ),
+    Reaction(
+        "r_msh_dmds", {"MSH": 2}, {"DMDS": 1}, "k_msh_dmds",
+        "B22. 2 methanethiol -> dimethyl disulfide, an APPARENT second-order constant (the pot's internal "
+        "oxidant is not tracked on this lane; Xu 2010). FITTED on Pan 2025's disulfide rates.",
+    ),
+)
 TRUNK_REACTIONS: Tuple[Reaction, ...] = (REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS + GLYCATION_REACTIONS
-                                         + AQUEOUS_GLYOXAL_REACTIONS)
+                                         + AQUEOUS_GLYOXAL_REACTIONS + METHIONINE_REACTIONS)
 TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
 DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
 PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)
 GLYCATION_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in GLYCATION_REACTIONS)
 AQUEOUS_GLYOXAL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in AQUEOUS_GLYOXAL_REACTIONS)
+METHIONINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in METHIONINE_REACTIONS)
 
 #: Build Wave B7's eleven steps, named so a report can say which part of the
 #: trunk is B1's and which is B7's without counting.
