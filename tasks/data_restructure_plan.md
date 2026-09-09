@@ -1771,6 +1771,46 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       peak-area estimate. `buttery1986` adds what 1983 could not measure: the steam-distillation recovery of the
       compound is 28.0 % (SD 4.9), so the 1983 levels are multiplied by 3.57. `charlesbernard2005` pending (the
       8-10 mmol sites per g that recasts k_thioether as bimolecular).
+- [ ] **PROV-02 (2026-09-09, and it bears on a refusal): the site density behind `k_thioether` is an upper
+      bound, not a titre.** `charlesbernard2005_extraction.md`, written when the PDF was read for the first time.
+      The paper DOES print "8-10 mmol per g dry coffee solids" (p. 4428, restated p. 4430), so the page cite in
+      `parameters_sulfur.py` is right, but the number is **the hydroxylamine DOSE at which a four-point
+      thiol-protection curve levels off** (Figure 3, figure-only; the measured doses are 3.6, 7.2, 14.4 and 21.6,
+      so nothing was measured between 7.2 and 14.4), on WHOLE 1 % coffee solids at pH 5.2 -- not a titration, and
+      not on the MW > 3000 melanoidin fraction the repository applies it to. The dossier reproduces the recast
+      exactly (9.4e-4 /s divided by 0.1125 M = 5.01e-4 L/(mmol min)), and then shows that 9 mmol/g demands one
+      electrophile per 111 g/mol, **below the mass of a single hexose residue**: the density is a ceiling, so
+      `k_thioether` is a LOWER bound on the true constant. **The consequence for wave B17 variant (a): at that
+      density MELE depletes by at most 0.4 % in any system in the corpus, so the "depletable" pool the whole
+      variant was built on does not deplete.** That is a second, independent reason B17a could not have worked,
+      and it was knowable from a PDF that had been on disk unread the whole time.
+- [ ] **B19 UPDATE (2026-09-09): the additive identity-ratio model is refuted before it was written.**
+      `martin2001_extraction.md`. Its competition pot puts six amino acids on ONE glucose pool: leucine's
+      3-methylbutanal rises to 1.24x its single-amino-acid value while isoleucine's, phenylalanine's and
+      methionine's fall to 0.41, 0.37 and 0.19, and the total pyrazines to 0.365 of the sum of the singles.
+      **A linear partition of a shared dicarbonyl pool -- which is exactly the form section 5 of the B19 draft
+      proposes -- predicts 1.00 in every one of those rows.** So the identity layer cannot be a set of independent
+      per-amino-acid ratios; it needs a competition term, and this pot is the within-study shape to fit it on.
+      Usable: same-compound-across-pots ratios (the response factor cancels). Not usable: every cross-compound
+      comparison, including the paper's own amino-acid ranking (peak areas, no response factors ever measured),
+      and the abstract's total-yield figure (figure-only; the dossier reconstructs it from Tables 2 and 4 as
+      Phe 2.30, Met 1.38, Gln 1.33, Leu 1.00, Asn 0.75, Ile 0.72, with the warning that those four small pots are
+      one statistical group and the glucose-only blank is 27-50 % of their totals).
+- [ ] **ACR-03 (2026-09-09): the acrylamide lane's cysteine channel, read from its own source at last.**
+      `devleeschouwer2009_extraction.md`. Three shipped constants (`k_cys_sink`, `k_cys_glc`, `k_asp_sink`) cite
+      this paper and it had never been read. What it adds: **k_E2ref = 49.36 +/- 1.18 L/(mol min), Ea 51.3 +/- 1.5
+      kJ/mol -- the corpus's only MEASURED bimolecular acrylamide-scavenging constant**, and the only measured
+      competitor sugar-consumption constant; it reprints Part I's whole control column as fixed values, which
+      verifies `k_asn_glc` 1.70, `k_int1_acr` 3.57 and `k_asn_asp` 26.43 against a second printing and resolves
+      Part I's "10^-3 mm^-1" unit typo; and its model discrimination positively RULES OUT the alternative
+      mechanism that cysteine works by inhibiting formation. Set beside Claeys 2005's lumped elimination it
+      implies 15.8 L/(mol min) across a 185-fold cysteine change in the same laboratory, a factor of 3 against the
+      factor of about 660 a concentration-independent term would need: the first evidence that the registry's
+      `order_assumed_never_tested_by_the_source` flag can be softened. DEFECT FIXED the same day: `_DV2_SOURCE`
+      in `parameters_acrylamide.py` cited "J Agric Food Chem 57:539-546"; the paper is Food Chemistry 114:535-546
+      (doi 10.1016/j.foodchem.2008.09.084) and the anchor now says so, with the DOI. STILL OPEN:
+      `devleeschouwer2009b.pdf` is Part I (Food Chemistry 114:116-126), a different paper that three shipped
+      trunk constants also come from, and it has no dossier either.
 - [ ] **READING-ORDER (2026-09-09, after the first thirteen). Forty-five PDFs are still unread, and the question
       "is what we lack on disk or not in the literature" now has an evidence-based answer, gap by gap.**
       ON DISK, decidable without a new download: (i) the acrylamide elimination's two-laboratory disagreement

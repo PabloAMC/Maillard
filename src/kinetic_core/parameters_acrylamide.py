@@ -213,8 +213,13 @@ _DV1_CONDITIONS = (
     "log, multiresponse fit by the determinant criterion"
 )
 _DV2_SOURCE = (
-    "De Vleeschouwer et al. 2009 Part II, J Agric Food Chem 57:539-546, "
-    "Table 3 p. 542, CYSTEINE column"
+    # CORRECTED 2026-09-09 (devleeschouwer2009_extraction.md, written when the PDF was read for the
+    # first time): the venue was recorded as "J Agric Food Chem 57:539-546", which is the wrong
+    # journal, volume and start page. The paper is Food Chemistry; the page of Table 3 was right.
+    "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx 2009, 'Role of precursors on the "
+    "kinetics of acrylamide formation and elimination under low moisture conditions using a "
+    "multiresponse approach -- Part II: Competitive reactions', Food Chemistry 114:535-546 "
+    "(doi 10.1016/j.foodchem.2008.09.084), Table 3 p. 542, CYSTEINE column"
 )
 _DV2_CONDITIONS = (
     "as Part I plus equimolar L-cysteine; a_w 0.92 freeze-dried powder "
