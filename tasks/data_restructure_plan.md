@@ -1937,6 +1937,27 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       | 16 | Mohsin 2018, Food Chem | PII `S0308814617319349` | link only |
       | + | Zhou, Boatright & Johnson 2002, J Food Sci | `10.1111/j.1365-2621.2002.tb11374.x` | printed in link |
       | + | Utz 2022, Foods 11:412 | **NO IDENTIFIER RECORDED** -- the MDPI issue number is not in the link, and guessing it would produce a DOI that resolves to the wrong paper. Search the title. | -- |
+      **EXACT TITLES for the seven with no confirmed DOI**, so they can be fetched by title alone.
+      Author lists and journals as the search results printed them.
+      1. Sun, H.; Liang, J.; Qian, Y.; Chen, X.; Zhao, L. "Interactions of pea protein with three
+         sulfur-containing flavor compounds: Insights into molecule structural, non-covalent, and
+         binding mechanisms." *Food Hydrocolloids*, 2025.
+      4. Guo, J.; He, Z.; Wu, S.; Zeng, M.; Chen, J. "Binding of aroma compounds with soy protein
+         isolate in aqueous model: Effect of preheat treatment of soy protein isolate."
+         *Food Chemistry*, 2019.
+      9. Wondrak, G. T.; Cervantes-Laurean, D.; Roberts, M. J.; et al. "Identification of
+         alpha-dicarbonyl scavengers for cellular protection against carbonyl stress."
+         *Biochemical Pharmacology*, 2002.
+      10. Zheng, L.; Bakker, W.; Miro Estruch, I.; Widjaja, F.; et al. "Comparison of the methylglyoxal
+         scavenging effects of kaempferol and glutathione and the consequences for the toxicity of
+         methylglyoxal in SH-SY5Y cells." *Food Chemistry: X*, 2023.
+      12. Gokmen, V.; Kocadagli, T.; Goncuoglu, N.; Mogol, B. A. "Model studies on the role of
+         5-hydroxymethyl-2-furfural in acrylamide formation from asparagine." *Food Chemistry*, 2012.
+      16. Mohsin, G. F.; Schmitt, F.-J.; Kanzler, C.; Epping, J. D.; Flemig, S.; et al. "Structural
+         characterization of melanoidin formed from D-glucose and L-alanine at different temperatures
+         applying FTIR, NMR, EPR, and MALDI-ToF-MS." *Food Chemistry*, 2018.
+      +. Utz, F.; Spaccasassi, A.; Kreissl, J.; Stark, T. D.; Tanger, C.; et al. "Sensomics-Assisted
+         Aroma Decoding of Pea Protein Isolates (Pisum sativum L.)." *Foods* 2022, 11, 412.
       **DELIBERATELY NOT FETCHED, with the reason, so nobody re-proposes them.**
       Xiao 2023 and Gao 2023 are density functional theory: standing owner policy, no DFT numbers.
       Zhu 2023 (kafirin), Zhou 2022 (ozonolysis), Jakob 2024 and He 2020 (biorefinery catalysis),
