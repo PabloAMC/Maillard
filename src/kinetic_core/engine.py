@@ -1313,6 +1313,9 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
         if frozen.get("dimer_release_log10_k"):
             # B17: the disulfide-release constant, log10 (a shipped B17 report or a draw)
             out["dimer_release_log10_k"] = {k: float(v) for k, v in frozen["dimer_release_log10_k"].items()}
+        if frozen.get("mele_site_log10_yield"):
+            # B17a: log10 of the electrophile-site yield per osone decayed (a shipped B17a report or a draw)
+            out["mele_site_log10_yield"] = {k: float(v) for k, v in frozen["mele_site_log10_yield"].items()}
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1364,7 +1367,7 @@ def core_parameters(
         report = None
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
                 "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol", "oxygen",
-                "oxygen_log10_k", "dimer_release_log10_k"} <= set(override):
+                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
         # B10: a report (or a draw) that carries the two route barriers uses them;
@@ -1406,6 +1409,19 @@ def core_parameters(
             from .parameters_sulfur import dimer_release_parameters
 
             parameters.update(dimer_release_parameters(k_dimer_release=10.0 ** float(release["k_dimer_release"])))
+        # B17a: the site yield from the report's (or a draw's) log10 block; k_mele_site = yield x k_osone_decay
+        # at 145 C with the carbonyl-sink family's barrier. The inert zero MEASURED_SULFUR carries otherwise.
+        site: Dict[str, float] = {}
+        if report is not None and report.get("mele_site_log10_yield"):
+            site.update(report["mele_site_log10_yield"])
+        site.update(override.get("mele_site_log10_yield") or {})
+        if site:
+            from .parameters_sulfur import mele_site_parameters
+
+            k_osone = 10.0 ** float(pick("log10_k_ref_at_145C")["k_osone_decay"])
+            ea_family = float(pick("decay_Ea_kJ_mol")["carbonyl_sink"])
+            parameters.update(mele_site_parameters(k_mele_site=(10.0 ** float(site["mele_site_yield"])) * k_osone,
+                                                   ea_kj_mol=ea_family))
     if lane == ACRYLAMIDE:
         report = None
         if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):

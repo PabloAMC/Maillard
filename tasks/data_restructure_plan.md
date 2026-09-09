@@ -1352,8 +1352,15 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
 - [ ] **W7 (from B16). Sink structure.** UPDATE 2026-09-08: B17 variant (b) RUN, DO NOT SHIP (prereg sec. 6):
       release driven to its floor, cost = B16's, slice flat; T3 shows the model's dimer share 10-200x below
       Zhou 2023 / Zhang 2024 with k_dimer_* on their ceiling -> the disulfide channel is OXIDANT-limited
-      (B11's reservoir ships inert). Variant (a) (saturable thioether sink on browning-made MELE) is next;
-      the oxidant supply is a second, separate suspect for the DIMER SHARE, not for the missing thiol.
+      (B11's reservoir ships inert). UPDATE 2026-09-09: variant (a) RUN, DO NOT SHIP (prereg sec. 6b):
+      yield unidentified (slice flat to four figures, sigma 8.6e4) because B16's optimum carries
+      k_osone_decay at log10 -8.6 (the site source is dead) and Stack 2018's K(T) = 0.45 M^-1 at 100 C
+      (a reversible thioether holds < 5 % of the thiol when hot). NEXT (variant c, to pre-register):
+      IRREVERSIBLE addition of the thiol to an electrophile pool sourced from the flux the lane carries at
+      the optimum (ARP / pentose steps, or the trunk's melanoidin) -- the unsaturated-carbonyl adducts of
+      farmer1990 / whitfield1988 / mottram2002b (thiols halved by 6-15 g/L phospholipid) -- with the dimer
+      share left to an INTERNAL oxidant (xu2010: N2 changes nothing). The oxidant supply stays a separate
+      suspect for the DIMER SHARE, not for the missing thiol.
       Original entry: Reversible thiol dimerisation (disulfide pool re-releasing thiol,
       temperature-dependent equilibrium) and/or a sink scaling with the carbonyl/melanoidin pool; the
       pentose supply at 100 C (formation dries up at 6 h in the model, not in the pot); the TTCA return

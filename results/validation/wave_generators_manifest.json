@@ -10,6 +10,8 @@
     "scripts/generators/generate_kinetic_core_b16_ship_rule.py": "202791418bc6ecd57db3f2c8477436f4e2951721d12c0651273b544e129476d7",
     "scripts/generators/generate_kinetic_core_b17_fit.py": "bacaf078894b91575b1e4201d335c85d49276cb76b3056cdc801f42e373b3165",
     "scripts/generators/generate_kinetic_core_b17_ship_rule.py": "d22ae1de47309a90f773923dd4905a77b237004a7a8b8be5d405b3d42818a9f1",
+    "scripts/generators/generate_kinetic_core_b17a_fit.py": "f4dc7be15d17280e9c67cfd7bf836c31540a036b671b0191eab7ce50151892a3",
+    "scripts/generators/generate_kinetic_core_b17a_ship_rule.py": "ed4c62ee90c9897d8a03b5cd56ce0d63f3e4a288fd612d796df4485aabebe388",
     "scripts/generators/generate_kinetic_core_b18_fit.py": "a8c7fb7278b0b2704840f5b6b3535c35817d17ef1c8245c270ec7408f44c67ed",
     "scripts/generators/generate_kinetic_core_b18_ship_rule.py": "48564872734af0dda0a60de883d1d406c3bb633dcd981c8017464cd655d9d7b0",
     "scripts/generators/generate_kinetic_core_b1_fit.py": "a404e335e9deb70d052b39ba01e92830c6ab8c229f6729f5d2c2955068f7ece3",

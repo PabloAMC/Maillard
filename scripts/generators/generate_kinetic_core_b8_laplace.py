@@ -106,6 +106,10 @@ def frozen_vector(report: Dict[str, Any]) -> np.ndarray:
     rel = fr.get("dimer_release_log10_k") or {}
     if rel:
         extra += [float(rel["k_dimer_release"])]
+    # B17a: log10 of the electrophile-site yield, appended after everything else.
+    site = fr.get("mele_site_log10_yield") or {}
+    if site:
+        extra += [float(site["mele_site_yield"])]
     return np.array(
         [fr["log10_k_ref_at_145C"][k] for k in B23.PARAM_ORDER]
         + [lumped]

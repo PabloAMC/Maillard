@@ -38,3 +38,39 @@ def test_an_override_block_switches_the_release_on_and_only_that():
     k = sulfur.sulfur_rate_constants_at(on, 418.15, 5.0)
     assert k["ch_dimer_release_mft"] == pytest.approx(1e-3) and k["ch_dimer_release_fft"] == pytest.approx(1e-3)
     assert dimer_release_parameters()["k_dimer_release"].k_ref == 0.0
+
+
+# ---- variant (a), 2026-09-09: the pot makes its own electrophile sites --------------------------
+from src.kinetic_core.parameters_sulfur import MELE_SITE_YIELD_BOUNDS_LOG10, mele_site_parameters  # noqa: E402
+
+
+def test_variant_a_the_three_site_steps_exist_share_one_constant_and_balance():
+    by_key = {r.key: r for r in sulfur.SULFUR_REACTIONS}
+    for osone in ("DPO", "TDP", "DDP"):
+        r = by_key[f"ch_mele_from_{osone.lower()}"]
+        assert r.reactants == {osone: 1} and r.products == {"FRAG_C": 5, "MELE": 1} and r.parameter_key == "k_mele_site"
+    sulfur.validate_sulfur_balance(sulfur.FULL_REACTIONS)
+
+
+def test_variant_a_the_site_constant_is_inert_by_default():
+    p = MEASURED_SULFUR["k_mele_site"]
+    assert p.k_ref == 0.0 and p.order == 1
+    assert core_parameters(SULFUR)["k_mele_site"].k_ref == 0.0     # no shipped report carries a B17a block
+    assert "mele_site_log10_yield" not in frozen_parameters(SULFUR)
+    assert MELE_SITE_YIELD_BOUNDS_LOG10 == (-4.0, 0.2)
+    assert mele_site_parameters()["k_mele_site"].k_ref == 0.0
+
+
+def test_variant_a_an_override_block_switches_the_sites_on_as_yield_times_k_osone_decay():
+    off = core_parameters(SULFUR)
+    on = core_parameters(SULFUR, frozen={"mele_site_log10_yield": {"mele_site_yield": -1.0}})
+    fr = frozen_parameters(SULFUR)
+    expected = 0.1 * 10.0 ** fr["log10_k_ref_at_145C"]["k_osone_decay"]
+    assert on["k_mele_site"].k_ref == pytest.approx(expected)
+    assert on["k_mele_site"].ea_kj_mol == pytest.approx(fr["decay_Ea_kJ_mol"]["carbonyl_sink"])
+    for key in off:
+        if key != "k_mele_site":
+            assert on[key] == off[key], key
+    k = sulfur.sulfur_rate_constants_at(on, 418.15, 5.0)
+    for osone in ("dpo", "tdp", "ddp"):
+        assert k[f"ch_mele_from_{osone}"] == pytest.approx(expected)

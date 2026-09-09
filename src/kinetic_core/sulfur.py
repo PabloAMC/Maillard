@@ -806,6 +806,25 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "ch_dimer_release_fft", {"FFTD": 1}, {"FFT": 2}, "k_dimer_release",
         "B17. bis(2-furfuryl) disulfide -> 2 FFT; shares k_dimer_release.",
     ),
+    # ---- B17 variant (a) (2026-09-09): the pot makes its own electrophile sites --------------
+    # A parallel branch of the deoxyosone decay in which the browning carbon carries ONE matrix
+    # electrophile site (MELE, zero atoms) into the pool the measured thioether channel drains.
+    # Its rate is the site yield times k_osone_decay (same barrier, the carbonyl-sink family);
+    # at the inert default yield of zero every wave before B17a reproduces bit for bit. The
+    # carbon goes to FRAG_C in full (5 per osone) and no ACID is made here, so the pH drift is
+    # untouched. Pre-registration: kinetic_core_b17_prereg.md sec. 2, variant (a).
+    Reaction(
+        "ch_mele_from_dpo", {"DPO": 1}, {"FRAG_C": 5, "MELE": 1}, "k_mele_site",
+        "B17a. 1-deoxypentosone -> browning fragments + one electrophile site.",
+    ),
+    Reaction(
+        "ch_mele_from_tdp", {"TDP": 1}, {"FRAG_C": 5, "MELE": 1}, "k_mele_site",
+        "B17a. 3-deoxypentosone -> browning fragments + one electrophile site.",
+    ),
+    Reaction(
+        "ch_mele_from_ddp", {"DDP": 1}, {"FRAG_C": 5, "MELE": 1}, "k_mele_site",
+        "B17a. 1,4-dideoxypentosone -> browning fragments + one electrophile site.",
+    ),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.

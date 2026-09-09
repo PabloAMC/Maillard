@@ -114,3 +114,65 @@ section 8, where the disulfides are quantified in the same run.
 Kept as a record: `kinetic_core_b17_fit_report.json`, `kinetic_core_b17_laplace_covariance.json`,
 `kinetic_core_b17_ship_rule.{json,md}`, the two members. The engine keeps reading B9; the release
 steps stay in the network at zero.
+
+## 6b. Outcome, variant (a) (2026-09-09) — DO NOT SHIP, and the reason is structural
+
+**What was built.** Three parallel branches of the deoxyosone decay, `ch_mele_from_dpo` / `_tdp` /
+`_ddp` (DPO, TDP, DDP → 5 FRAG_C + 1 MELE), at rate `k_mele_site` = yield × `k_osone_decay` with the
+carbonyl-sink family's barrier, inert (zero) unless a report supplies `mele_site_log10_yield`, so
+every earlier wave reproduces bit for bit. The sites feed the measured thioether channel
+(`k_thioether`, Hofmann 2002; K(T), Stack 2018), whose constants the fit cannot move. Generator
+`generate_kinetic_core_b17a_fit.py`: B16's 64-row objective, the yield appended to the vector as B11
+appended its oxygen consumers (24 free), band log10 −4 to 0.2, two starts, the 600-evaluation
+budget; Laplace `--wave b17a`; ship rule `generate_kinetic_core_b17a_ship_rule.py` (T6 on the yield;
+Zhang 2024's dimer share reported as figure-derived after `zhang2024b_extraction.md`, Zhou 2023
+alone deciding T3).
+
+**What happened.** Start 0 (B9's optimum, yield at the band centre) converged in 467 evaluations to
+B16's optimum, cost 930.98, with the yield at log10 0.048 (1.1 sites per osone); start 1 (B8's
+perturbation) reached 933.24 with the yield at log10 −3.96, its floor. The same cost at the two ends
+of the band: the cost slice along the yield is flat to the fourth significant figure
+(930.978 to 930.979 over ±1 decade) and the Laplace sigma is 8.6e4 decades. T1, T2, T3 and T5 fail
+exactly as they did for variant (b) (the reference pot's MFT peaks at 6 h and falls; the fed-ribose
+row moves +1.91 dex; the dimer shares are 0.03 to 0.93 % against Zhou's 6.5 to 9.6 %); T4 passes
+(Yiltirak median fold 13.4). Verdict by the pre-registered rule: DO NOT SHIP.
+
+**Why it could not have worked as pre-registered, and what that teaches.** Two facts, both visible
+in the frozen numbers, not in the fit's noise.
+
+1. *The pool has no source at the optimum.* B16's optimum (which this fit re-finds) carries
+   `k_osone_decay` at log10 −8.59 per minute at 145 °C with a 123.5 kJ/mol barrier: the osone decay
+   the sites were tied to is switched off. The fitted site constant is 2.9e-9 per minute; over a
+   twelve-hour cook at 100 °C the pot makes of the order of 1e-9 of its sugar into sites. A yield per
+   osone decayed can be anything when nothing decays. The pre-registration tied the sites to "the
+   caramelisation and Amadori decay at a declared yield per unit of browning carbon"; the lane's
+   browning carbon flows through `r_osone_decay_*`, and the earlier waves had already driven that
+   flux to zero to hold the 145 °C fed pots. The right source, if the idea is tried again, is the
+   flux the lane actually carries at the optimum (the ARP and pentose steps themselves, or the
+   melanoidin pool the trunk makes), not a sink that is dead.
+2. *The measured equilibrium releases the thiol at cook temperature.* Stack 2018's conjugation has
+   K = 5.64 M⁻¹ at 19.4 °C and ΔH = −28.5 kJ/mol, so K = 0.45 M⁻¹ at 100 °C and 0.167 M⁻¹ at 145 °C.
+   Even a pool equal to the whole sugar charge of the reference pot (0.1 M) would hold under 5 % of
+   the thiol at 100 °C and under 2 % at 145 °C. A reversible thioether on this equilibrium cannot be
+   the missing sink at cooking temperature whatever its site density; the channel earns its place at
+   25 to 80 °C, where it was measured. Hofmann 2002's 80 % plateau at 80 °C is a covalent,
+   effectively irreversible binding to melanoidin (CROSSPY-type), a different object from the
+   quinone adduct Stack measured, and the lane lumps the two under one MELE.
+
+**What the record now says about W7.** Both pre-registered structures are refused, for different
+reasons: (b) because the model makes almost no disulfide (oxidant-limited); (a) because its source
+is dead at the optimum and its equilibrium is too weak when hot. What the two share is the
+diagnosis that the thiol loss at 100 °C is neither the disulfide nor a reversible adduct. The
+reading of 2026-09-09 (`farmer1990_extraction.md`, `whitfield1988_extraction.md`,
+`mottram2002b_extraction.md`; backlog "lipid-Maillard II") supplies the third candidate the
+pre-registration did not name: the unsaturated-carbonyl adducts (thiophenes, thiapyrans, Michael
+adducts) that halve the thiols when a lipid supplies electrophiles, an IRREVERSIBLE sink on a pool
+the pot's own sugar fragments and any carried lipid make. And Xu 2010 (`xu2010_extraction.md`) says
+the oxidant behind the disulfide share is internal to the pot, not the headspace. A variant (c),
+irreversible addition to an electrophile pool sourced from the flux the lane carries, with the
+dimer share left to an internal oxidant, is the next thing to pre-register; it is not run tonight.
+
+Kept as a record: `kinetic_core_b17a_fit_report.json`, `kinetic_core_b17a_laplace_covariance.json`,
+`kinetic_core_b17a_ship_rule.{json,md}`, the two members. The engine keeps reading B9; the site steps
+stay at zero.
+

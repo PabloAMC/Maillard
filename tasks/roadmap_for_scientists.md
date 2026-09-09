@@ -108,8 +108,13 @@ will be wide and the card must say so.
 the data drive the disulfide release to zero because the model holds 0.04 to 0.9 % of its thiol as
 disulfide where Zhou 2023 and Zhang 2024 measure 6.5 to 9.6 %, with the dimerisation constants on
 their ceiling. The channel is oxidant-limited, which names the ambient oxidant pool (B11's reservoir,
-shipped inert) as a suspect for the dimer share. Variant (a), the saturable sink on a browning-made
-pool, is the next run.*
+shipped inert) as a suspect for the dimer share. Status 2026-09-09: variant (a), the saturable sink
+on a browning-made pool, ran and does not ship either (prereg section 6b): the pool's source, the
+osone decay, is switched off at the optimum (log10 k −8.6), and Stack 2018's measured equilibrium
+gives K = 0.45 M⁻¹ at 100 °C, so a reversible adduct holds under 5 % of the thiol when hot. Both
+pre-registered structures are refused; the next candidate is an irreversible addition to
+unsaturated carbonyls on a pool the lane's live flux makes (Farmer 1990, Whitfield 1988: a lipid's
+electrophiles halve the thiols), with the disulfide share left to an internal oxidant (Xu 2010).*
 
 **Why.** The meaty character the users want is the thiols, and the model loses them too fast at
 every temperature. The candidate table is written (`docs/validation/thiol_sink_candidates.md`).
@@ -196,7 +201,7 @@ fitted step.
 
 | compound | pathway | data on disk | rule | wave | what is missing |
 |---|---|---|---|---|---|
-| MFT, FFT, MFT dimer, H2S | pentose + cysteine | many dossiers | yes | B9 (sinks wrong at 100 and 140 °C) | the sink structure (B17a next), the hexose entry |
+| MFT, FFT, MFT dimer, H2S | pentose + cysteine | many dossiers | yes | B9 (sinks wrong at 100 and 140 °C) | the sink structure (both B17 variants refused; an irreversible adduct on a live pool is next), the hexose entry |
 | furaneol (DMHF), HMF, furfural | sugar path | Kocadagli, Blank, Hofmann | yes | B7 | furaneol fiftyfold off |
 | 2,5-dimethylpyrazine | Strecker + condensation | Zhou 2024, Leahy 1989 | yes | B18 (fed-dicarbonyl step only) | the dicarbonyl supply in water; Zhou 2025's seventyfold conflict |
 | hexanal, nonanal, 2,4-decadienal | lipid | Frankel slate, Bi 2020, Zhang 2020b, Bi 2026 | yes | B6 (rate assumed) | a measured rate at cooking temperature; the lipoxygenase route before heat |
@@ -214,7 +219,7 @@ What the table says: the model is deep on one pathway and absent on the three th
 analogue its Strecker, roasty and lipid–Maillard character, and it treats the isolate's own volatiles
 as products to refuse rather than inputs to carry. The two programmes below follow from it.
 
-## 5c. Programme 6: amino-acid identity on the sugar path (the next wave after B17a)
+## 5c. Programme 6: amino-acid identity on the sugar path (the next wave once its rates are on disk)
 
 **Why.** Six of the fourteen missing desirable odorants are Strecker aldehydes or their sulfur
 children, and the roasty pyrazines beyond 2,5-dimethylpyrazine need a Strecker aldehyde to add to

@@ -135,6 +135,7 @@ This is the list, in order, in plain words.
 | water activity and pH terms on the acrylamide path, declared from one laboratory's series | the panel moves both | the pH claims agree | yes |
 | thiol removal re-tuned on the twelve-hour 100 °C series and the intermediate's own decay | the model loses thiols too fast at low temperature | peaks at six hours where the pot keeps rising; breaks the 145 °C pots | no |
 | the thiol disulfide made reversible, so the dimer is a reservoir rather than a grave | every measured thiol sink has a partner and saturates or reverses; the model's dominant sink has neither | the data drove the release to zero: the model holds a hundredth of the disulfide two laboratories measure, because its oxidant runs out first | no; the finding is kept |
+| the thiol removal made a saturating adduct on an electrophile pool the pot itself makes, feeding the measured room-temperature binding step | the same measured sink, but with a supply that runs out | the pool never forms, because the earlier fits had already switched off the browning step it was tied to; and the measured binding equilibrium lets go of the thiol above 80 °C, so even a large pool would hold under 5 % of it when hot | no; the finding is kept |
 | a pyrazine step added to the sugar path, its two rate constants fitted on one laboratory's fed-dicarbonyl ladders and its pH shape on another's | the roasted note, asked for and refused until a measured rate existed | the fed-dicarbonyl rates fit within 20 %; from a sugar and amino acid pot the yield is a thousandfold low, because the model makes far too little glyoxal and methylglyoxal in water | yes, with that caveat on every answer |
 
 ## 7. The one problem that matters most: where the thiols go
@@ -176,7 +177,13 @@ built and tested against the existing series on 8 September 2026 and refused: th
 zero, because the model holds a hundredth of the disulfide that two laboratories measure, its oxidant
 running out first (section 6, second-to-last row). That points at the oxygen supply for the
 disulfide share, which is a different quantity from the missing thiol. The saturating removal step,
-on a pool that browning itself makes, is the next one to build.
+on a pool that browning itself makes, was built and tested the next night and refused too: the pool
+never forms, because the earlier fits had switched off the browning step it was tied to, and the
+measured binding equilibrium lets the thiol go above 80 °C, so it could not have held it when hot
+(section 6, third-to-last row). What both refusals leave standing is a third candidate the reading
+of the lipid papers supplies: an irreversible addition of the thiol to unsaturated carbonyls, the
+adducts that halve the thiols when a lipid is present, with the disulfide share left to an oxidant
+the pot makes for itself. That is the next step to pre-register.
 
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
 comes from, scores your own measurements, calibrates itself to your laboratory from those

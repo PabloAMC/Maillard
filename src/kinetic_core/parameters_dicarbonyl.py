@@ -8,8 +8,14 @@ glucose glass at 160 / 180 / 200 C, re-referenced from the paper's T_b = 180 C t
 (`parameters_furanic._kocadagli`). Dossier: `kocadagli2016jafc_extraction.md` sec. 4 (Table 2,
 glucose system, k_b in min^-1 x 10^3 with 95 % HPD).
 
-WHY THESE THREE. Glyoxal is the CML precursor and methylglyoxal (already on the trunk) the
-CEL precursor: the panel's two AGE rows are refused today for want of the species. Diacetyl
+WHY THESE THREE. Glyoxal is A CML precursor by structure and methylglyoxal (already on the
+trunk) the CEL precursor: the panel's two AGE rows are refused today for want of the species.
+CORRECTION (2026-09-09, Nguyen 2016, Berk 2021, Hamzalioglu 2026 read): in every aqueous
+multiresponse fit on disk the glyoxal -> CML route fits to ZERO, or a thousand to ten thousand
+times below the Amadori -> CML route (casein + glucose or lactose at 120-140 C, sesame at
+180-220 C, whole milk at 110-140 C); CML comes from the Amadori compound's oxidative cleavage.
+A CML row that charges glyoxal as the precursor will under-predict; the Amadori route is the
+one to write when the CML row is taken up (tasks/data_restructure_plan.md, glycation log). Diacetyl
 is the buttery odorant and the 3-mercapto-2-butanone precursor Yiltirak 2026 quantifies.
 Glucosone is the oxidative entry that makes glyoxal at all.
 

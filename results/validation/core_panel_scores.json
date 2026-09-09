@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (99 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (102 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -43,12 +43,12 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-09-08",
+    "generated_on": "2026-09-09",
     "git": {
-      "commit": "fda59aa907e083d0ceee5274756e5dc39ba1ab58",
-      "short": "fda59aa9",
+      "commit": "a1862beda8a718c94edfc3f11e023fb70f6ab970",
+      "short": "a1862bed",
       "branch": "cleaning",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.0
+    "wall_seconds": 9.4
   },
   "benchmarks": [
     {

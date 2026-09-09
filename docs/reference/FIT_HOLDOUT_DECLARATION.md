@@ -1256,3 +1256,16 @@ ran.
    `dimer_release_log10_k`; the B17 rule said DO NOT SHIP, so the engine reads B9 and the steps carry no
    flux. The record stands for the finding it produced: the lane's disulfide channel is oxidant-limited.
 
+## Amendment 29 — 2026-09-09 (Wave B17, variant a: a saturable thioether sink on a pool the pot makes)
+
+1. **NO NEW FIT ROW; ONE NEW COORDINATE.** B16's 64 rows unchanged. `log10_mele_site_yield`, the
+   electrophile sites made per deoxyosone decayed (`ch_mele_from_dpo` / `_tdp` / `_ddp`, rate = yield ×
+   `k_osone_decay` with the carbonyl-sink family's barrier), appended to the vector; the sites feed the
+   MEASURED thioether channel (`k_thioether`, Hofmann 2002; K(T), Stack 2018), whose constants the fit
+   cannot move. Band log10 −4 to 0.2 (Charles-Bernard 2005's titrated density as the ceiling). Variant
+   (b)'s release constant stays at its inert zero. Every B9 band kept.
+2. **WHAT IS VALIDATED.** As Amendment 28. Zhang 2024's dimer share is re-labelled FIGURE-DERIVED
+   (`zhang2024b_extraction.md`): it is reported, and only Zhou 2023's shares decide T3.
+3. **INERT DEFAULT.** The three site steps live in `sulfur.py` at zero unless a shipped report carries
+   `mele_site_log10_yield`; the verdict is in `kinetic_core_b17a_ship_rule.md` and the prereg's section 6.
+

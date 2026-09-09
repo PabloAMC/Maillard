@@ -1612,6 +1612,46 @@ ZHANG_CYS_AMADORI_FORMATION_NO_SITE = (
 # frozen generator carries the key and reproduces exactly).
 MEASURED_SULFUR = {**MEASURED_SULFUR, **dimer_release_parameters()}
 
+#: B17 variant (a): log10 of the SITE YIELD, electrophile sites per deoxyosone decayed. The
+#: ceiling is Charles-Bernard 2005's titrated density (8-10 mmol sites per g dry coffee solids;
+#: at 150 g per mol pentose that is 1.2-1.5 sites per sugar carbon skeleton, log10 0.18); the
+#: floor lets the fit say "no such pool".
+MELE_SITE_YIELD_BOUNDS_LOG10: Tuple[float, float] = (-4.0, 0.2)
+#: The barrier the inert zero carries (numerically irrelevant at k = 0); a report supplies the
+#: carbonyl-sink family's fitted barrier through `engine.core_parameters`.
+MELE_SITE_DEFAULT_EA_KJ_MOL: float = 64.1
+
+
+def mele_site_parameters(k_mele_site: float = 0.0, ea_kj_mol: Optional[float] = None) -> Dict[str, SulfurParameter]:
+    """
+    The B17a site-production constant as a SulfurParameter: ``k_mele_site = yield x k_osone_decay``
+    (both at 145 C), with the carbonyl-sink family's barrier, so the sites appear in step with the
+    browning carbon. The DEFAULT is zero: the three ``ch_mele_from_*`` steps (sulfur.py) carry no
+    flux and every wave before B17a reproduces bit for bit. Pre-registration:
+    kinetic_core_b17_prereg.md sec. 2, variant (a).
+    """
+    return {
+        "k_mele_site": _sulfur_parameter(
+            "k_mele_site", "deoxyosone -> browning fragments + matrix electrophile site (DPO, TDP, DDP share it)", 1,
+            k_ref=float(k_mele_site), ea=(MELE_SITE_DEFAULT_EA_KJ_MOL if ea_kj_mol is None else float(ea_kj_mol)),
+            evidence_class="derived_from_fit_data",
+            source_anchor=("B17 variant (a) (kinetic_core_b17_prereg.md sec. 2): the thioether sink's site pool made by the pot "
+                           "itself at a fitted yield per osone decayed; Hofmann & Schieberle 2002 (about 80 % of 400 ug FFT bound "
+                           "by 12.5 g/L melanoidin at 80 C) and Charles-Bernard 2005 (8-10 mmol sites per g dry solids) bound it"),
+            dossier_anchor=("results/validation/kinetic_core_b17_prereg.md; hofmann2002_extraction.md; k3_final_parameter_inventory.md "
+                            "sec. A.4; farmer1990_extraction.md and whitfield1988_extraction.md (the thiols fall 2-4x when a lipid "
+                            "supplies electrophiles, the same channel from the other side)"),
+            conditions="aqueous, pH 4.5-7, 100-145 C; the site is a lump over the melanoidin-bound and small-molecule electrophiles",
+            ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_site_yield", flags=("b17a_site_yield", "fitted_here", "no_literature_value",
+                                                "barrier_is_the_carbonyl_sink_family", "fit_cannot_move_this_barrier"),
+            note="Zero until a B17a report supplies the yield; the barrier is the carbonyl-sink decay family's (k_osone_decay's own).",
+        ),
+    }
+
+
+MEASURED_SULFUR = {**MEASURED_SULFUR, **mele_site_parameters()}
+
 
 # ---------------------------------------------------------------------------
 # (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four
