@@ -50,7 +50,7 @@ _REACTION_RX = re.compile(
     r'(?:,\s*"(?P<doc>(?:[^"\\]|\\.)*)")?', re.S,
 )
 #: Bookkeeping pools a bench scientist does not quantify; dropped from measurement sentences.
-_POOLS = {"FRAG_C", "FRAG_S", "FRAG_N", "CBX", "ACID", "OLG", "OX"}
+_POOLS = {"FRAG_C", "FRAG_S", "FRAG_N", "CBX", "ACID", "OLG", "OX", "OXR", "OXV"}   # B11: the oxygen pools are bookkeeping
 #: Decay-family activation energies are shared by every step of the family, not one reaction.
 _DECAY_FAMILY_TEXT = {
     "thiol_sink": "every step that removes a thiol into the matrix sink (the k_thiol_decay / k_dimer_decay steps)",
@@ -203,7 +203,36 @@ def refused_targets(scorecard: Mapping[str, Any]) -> List[Dict[str, Any]]:
         g["rows"].append({"benchmark_id": r["benchmark_id"], "compound": r["compound"]})
     out = [{"what": k, "reason": v["reason"], "rows": v["rows"], "row_count": len(v["rows"])} for k, v in groups.items()]
     out.sort(key=lambda g: -g["row_count"])
+    _annotate_with_hypotheses(out)
     return out
+
+
+def _annotate_with_hypotheses(groups: List[Dict[str, Any]]) -> None:
+    """Whether a cited reaction rule reaches each refused compound (results/validation/network_hypotheses.json):
+    'reachable by rule, unparameterised' separates a missing rate from a missing route."""
+    import json
+
+    path = data_paths.VALIDATION_DIR / "network_hypotheses.json"
+    if not path.exists():
+        for g in groups:
+            g["hypothesis_layer"] = "artifact absent"
+        return
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    reached: Dict[str, set] = {}
+    for charge in payload.get("charges", []):
+        for product in charge.get("products", []):
+            if product.get("id"):
+                reached.setdefault(product["id"], set()).add(charge["charge"])
+    from src import compound_keys
+
+    for g in groups:
+        notes = []
+        for row in g["rows"]:
+            key = compound_keys.resolve(row["compound"])
+            rid = getattr(key, "id", None) if key is not None else None
+            if rid and rid in reached:
+                notes.append(f"{row['compound']}: reachable by a cited rule from {', '.join(sorted(reached[rid]))} (no rate)")
+        g["hypothesis_layer"] = "; ".join(sorted(set(notes))) if notes else "no cited rule reaches it from any reference charge"
 
 
 def _claims_to_trust(agree: int, evaluable: int) -> Optional[int]:
@@ -230,8 +259,10 @@ def thin_axes(directional: Mapping[str, Any]) -> List[Dict[str, Any]]:
             "wilson_lower_bound": round(wilson_lower(agree, evaluable), 3) if evaluable else None,
             "additional_agreeing_claims_to_trust": _claims_to_trust(agree, evaluable),
             "structural_block": (
-                "no lane carries a water-activity term: the engine refuses every a_w comparison, so "
-                "claims cannot help until a moisture-dependent step is measured and fitted"
+                "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); "
+                "the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w "
+                "comparisons, so claims on those lanes cannot help until a moisture-dependent step is "
+                "measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
                 if axis == "moisture_aw" else None
             ),
         })
@@ -343,9 +374,9 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
             lines.append(f"- `{r['benchmark_id']}` / {r['compound']} ({r['panel']})")
     else:
         lines.append("None.")
-    lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason |", "|---|---|---|"]
+    lines += ["", "## 3. What the panel asks for that no lane represents", "", "| what | rows | the engine's reason | the hypothesis layer |", "|---|---|---|---|"]
     for g in payload["refused_targets"]:
-        lines.append(f"| {g['what']} | {g['row_count']} | {g['reason'][:260]} |")
+        lines.append(f"| {g['what']} | {g['row_count']} | {g['reason'][:260]} | {g.get('hypothesis_layer', '')} |")
     lines += ["", "## 4. Directional axes below 'trust'", "", "| axis | agree / evaluable | not evaluable | verdict | Wilson lower | agreeing claims to reach trust |", "|---|---|---|---|---|---|"]
     for a in payload["thin_axes"]:
         need = "blocked: " + a["structural_block"] if a["structural_block"] else (str(a["additional_agreeing_claims_to_trust"]) if a["additional_agreeing_claims_to_trust"] is not None else "—")

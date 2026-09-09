@@ -117,7 +117,7 @@ def test_the_core_caveat_reads_its_number_from_the_scorecard(monkeypatch, tmp_pa
 def test_the_cli_description_reads_the_directional_headline(monkeypatch, tmp_path):
     import importlib
 
-    maillard = importlib.import_module("scripts.maillard")
+    maillard = importlib.import_module("src.cli")
     fake = tmp_path / "directional.json"
     fake.write_text(json.dumps({"summary": {
         "headline": [3, 4],

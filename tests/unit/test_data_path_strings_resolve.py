@@ -20,6 +20,7 @@ PATH_RE = re.compile(r"^(data|results|docs|src|scripts|tests)/[A-Za-z0-9_./-]+\.
 # as a live reference. Keep this list short and dated.
 HISTORICAL = {
     "data/benchmarks/maillard_validation_benchmarks.md",  # retired record, kept at its path
+    "docs/slr_benchmark_evaluation.md",  # the March 2026 review; moved to docs/history/slr_benchmark_evaluation_2026-03.md on 2026-09-09
 }
 
 

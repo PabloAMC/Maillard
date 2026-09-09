@@ -42,11 +42,11 @@
 | ★ buffer | ★ **PBS 0.2 mol/L** — **BUFFERED**, unlike every other sulfur paper in the corpus except Zhang 2026 and Chan 1994 |
 | pH | **5, 6, 7, 8, 9** |
 | **temperature** | ★ **85, 95, 105, 115, 125 °C** — **FIVE RUNGS** |
-| time | **80, 90, 100, 110, 120 min** (Methods) ⚠ **but Fig. 7 plots 60, 80, 100, 120, 140 min** — see §5.1 |
+| time | **80, 90, 100, 110, 120 min** (Methods §2.3), **paired with the temperature rungs "respectively"** (85 °C/80 min … 125 °C/120 min): the temperature ladder is a CO-VARYING temperature-time design, not one-factor-at-a-time. The separate TIME series is Fig. 7's 60, 80, 100, 120, 140 min (abstract: "reaction time (60–140 min)"). Re-read 2026-09-07; the earlier reading took the 80–120 list for the time series and flagged a discrepancy that this pairing resolves. |
 | vessel | thick-walled pressure-resistant bottle, **precision oil bath, continuous magnetic stirring** |
 | quench | ice bath |
 | replication | **n = 3**, mean ± SD, one-way ANOVA, SPSS 20.0, p < 0.05 |
-| ⚠ **the fixed levels of the other two factors are NEVER STATED** | the design is one-factor-at-a-time, but the paper never says at what pH and time the temperature series was run, nor at what temperature the pH and time series were run. **`[!]` This is the single largest defect in the paper for modelling purposes** — the ladder's other coordinates are unknown |
+| ⚠ **the fixed pH of the temperature series and the fixed temperature/pH of the time series are NEVER STATED** | the temperature series carries its own (paired) times, but the paper never says at what pH it was run, nor at what temperature and pH the time series was run. **`[!]` Still the largest defect for modelling; the times are no longer part of it.** RE-READ 2026-09-07: the CORE CANNOT CHARGE THIS POT EITHER WAY — the engine has no cysteine-xylose Amadori species (its `ARP` is a sulfur-free pentose Amadori; "the cysteine Amadori maps to ARP" in the panel note was wrong), so a run refuses for want of a sulfur source. A Cys-Amadori species that releases its cysteine sulfur (Zhai 2023 / Kang 2026 / this paper all feed it) is the structural addition that makes the ladder evaluable. |
 
 **Inference (marked as inference, not fact):** the Conclusions say *"At a reaction temperature of **105 °C** it is beneficial to promote the formation of 2-acetylthiazole"* and *"when the reaction time is between **100 and 140 min**…"*, and Fig. 2's pH panel and Fig. 7's time panel show mutually consistent magnitudes with Fig. 5's 105 °C column. **Best guess: the pH and time series were run at ~105 °C, and the temperature series at pH 7 for 120 min. NOT VERIFIED.**
 
@@ -355,3 +355,121 @@ Nothing here should be fitted: no absolute scale, no stated fixed conditions, no
 | G4 | **Fig. 2C (the pH panel) was not digitised** in this pass; it carries the FFT↔MFT branching claim that contradicts Kang | digitise Fig. 2C, or use Table S2 when obtained |
 | G5 | **No α-dicarbonyl, no H₂S, no pH-after-heating** | not obtainable |
 | G6 | ⚠ **Nonanal in a lipid-free system** rising 3.6× with temperature — unexplained | flag to the lipid lane; check whether the repo's nonanal anchors assume a lipid-only route |
+
+---
+
+## §9. THE SUPPLEMENTARY, OBTAINED 2026-09-07 (`data/articles/Wang2026-supplementary.docx`, the publisher's mmc1, 403 kB)
+
+Owner-supplied. Tables S2-S4 carry the printed numbers behind Figs. 5-7; **§3.1's digitisation is
+superseded by Table S3 below** (MFT 0 / 2.08 / 4.00 / 8.40 / 1.91 and FFT 6.02 / 14.37 / 7.37 / 1.68 / 0
+ug/L over 85-125 C against the digitised n.d. / ~1 / 2.5 / 6.6 / ~2 and 4.5 / 12.0 / 6.7 / ~1 / n.d.:
+the shapes -- MFT peaks at 115 C, FFT at 95 C and collapses -- are confirmed; the digitised magnitudes
+were within 25 % except at the low bars). **What the SI does NOT add:** the fixed pH and hold time of the
+temperature series, and the fixed temperature and pH of the time series, are still not stated anywhere
+(the docx has no Methods section), so `WANG-01/02` on the directional panel stay `evaluable: false`.
+Table S1 (MS fragments) is not chemistry and is not transcribed. Note the printed CAS for
+bis(2-furfuryl) disulfide and bis(2-thienyl) disulfide is the same (6911-51-9) in the source.
+
+**Table S2 (pH 5/6/7/8/9), all rows, ug/L, mean +/- SD (re-typed from `word/document.xml` of the docx; columns: pH5 | pH6 | pH7 | pH8 | pH9):**
+
+| # | compound | pH5 | pH6 | pH7 | pH8 | pH9 | CAS |
+|---|---|---|---|---|---|---|---|
+| 1 | 2-Methyl-3-furanthiol | 163.79 ± 19.04 | 136.08 ± 10.64 | 80.06 ± 3.98 | 14.91 ± 2.47 | 9.91 ± 1.47 |
+| 2 | 2-Thiophenethiol | 133.25 ± 13.43 | 93.35 ± 6.93 | 41.84 ± 3.31 | 20.34 ± 2.91 | 5.46 ± 0.49 |
+| 3 | 2-Furanethiol | 65.40 ± 6.15 | 40.73 ± 3.33 | 29.17 ± 3.86 | 19.99 ± 3.11 | 7.92 ± 0.93 |
+| 4 | Difurfuryl disulfide | 6.89 ± 0.59 | 12.23 ± 2.73 | 5.77 ± 0.71 | 5.55 ± 0.72 | 4.58 ± 0.55 |
+| 5 | Ethyl mercaptan | 34.66 ± 5.48 | 25.63 ± 3.45 | 22.46 ± 3.12 | 19.65 ± 2.84 | 18.55 ± 1.96 |
+| 6 | 3-Bis(2-methyl-3-furanyl) disulfide | 21.57 ± 3.23 | 19.76 ± 2.68 | 16.87 ± 1.98 | 15.83 ± 1.43 | 13.87 ± 1.49 |
+| 7 | Bis(2-thienyl) disulfide | 13.16 ± 2.35 | 10.59 ± 2.16 | 8.86 ± 1.46 | 7.29 ± 1.49 | 6.81 ± 0.97 |
+| 8 | Bis(2-furfuryl) disulfide | 9.72 ± 1.26 | 7.43 ± 1.71 | 5.59 ± 1.12 | 5.08 ± 0.82 | 4.55 ± 0.53 |
+| 9 | 2-Methyl-3-thienyl(2-methyl-3-furanyl) disulfide | 7.90 ± 0.52 | 8.61 ± 1.13 | 7.26 ± 0.82 | 6.19 ± 0.43 | 4.85 ± 0.25 |
+| 10 | 2-Methyl-3-(methylthio)furan | 6.08 ± 0.81 | 7.26 ± 0.23 | 5.80 ± 0.14 | 4.41 ± 0.27 | 3.52 ± 0.29 |
+| 11 | 3-Mercapto-2-pentanone | 4.27 ± 0.28 | 4.50 ± 0.41 | 5.26 ± 0.38 | 4.63 ± 0.21 | 4.37 ± .15 |
+| 12 | Furfuryl mercaptan | 1.36 ± 0.02 | 1.42 ± 0.09 | 1.39 ± 0.13 | 1.19 ± 0.17 | 1.89 ± 0.06 |
+| 13 | 2-Thiophenemethyl mercaptan | 0.95 ± 0.06 | 0.69 ± 0.04 | 0.52 ± 0.08 | 0.39 ± 0.01 | 0.28 ± 0.02 |
+| 14 | 3-Methylthiothiophene | 0.67 ± 0.07 | 0.62 ± 0.02 | 0.70 ± 0.06 | 0.48 ± 0.03 | 0.56 ± 0.03 |
+| 15 | Pyrazine | 0 | 0 | 0.91 ± 0.21 | 5.29 ± 0.29 | 13.03 ± 1.45 |
+| 16 | Methylpyrazine | 0 | 1.33 ± 0.28 | 2.97 ± 0.22 | 4.90 ± 0.14 | 6.92 ± 1.57 |
+| 17 | 2,5-Dimethylpyrazine | 0 | 0 | 0 | 0.92 ± 0.26 | 1.34 ± 0.19 |
+| 18 | 2-Acetylthiazole | 4.02 ± 0.23 | 7.15 ± 0.49 | 12.76 ± 1.58 | 28.47 ± 3.65 | 46.02 ± 2.50 |
+| 19 | 4,5-Dimethylthiazole | 0 | 0 | 1.34 ± 0.03 | 1.96 ± 0.06 | 2.10 ± 0.06 |
+| 20 | 2-Ethyl-4-methylthiazole | 0 | 0 | 0 | 0.85 ± 0.01 | 1.13 ± 0.02 |
+| 21 | 2,9-Dimethylthiazolo[4,5-f]quinoline | 0 | 0 | 0.67 ± 0.01 | 0.86 ± 0.02 | 0.93 ± 0.01 |
+| 22 | 2-Methylthiophen | 66.31 ± 8.54 | 59.8 ± 4.53 | 22.08 ± 2.65 | 11.45 ± 0.73 | 0.53 ± 0.12 |
+| 23 | 2-Heptylthiophene | 35.42 ± 5.87 | 33.96 ± 4.68 | 30.29 ± 2.95 | 29.56 ± 2.76 | 27.66 ± 1.86 |
+| 24 | 3-Hexylthiophene | 26.47 ± 2.38 | 25.56 ± 1.84 | 24.85 ± 1.48 | 23.34 ± 2.41 | 21.96 ± 1.75 |
+| 25 | 2-Ethyl-5-methylthiophen | 3.95 ± 0.21 | 3.76 ± 0.46 | 3.19 ± 0.82 | 2.76 ± 0.54 | 2.55 ± 0.49 |
+| 26 | Furfural | 118.62 ± 13.80 | 79.39 ± 9.57 | 74.47 ± 7.16 | 51.78 ± 4.22 | 12.21 ± 2.13 |
+| 27 | Nonanal | 1.03 ± 0.21 | 1.27 ± 0.06 | 1.78 ± 0.21 | 2.91 ± 1.16 | 2.58 ± 0.30 |
+| 28 | Pentanaldehyde | 0.86 ± 0.11 | 1.24 ± 0.16 | 1.53 ± 0.27 | 2.04 ± 1.42 | 2.47 ± 0.55 |
+| 29 | 2-Propylfuran | 0.97 ± 0.13 | 0.86 ± 0.18 | 0.88 ± 0.09 | 0.79 ± 0.07 | 0.61 ± 0.09 |
+| 30 | 2-Hexylfuran | 1.13 ± 0.09 | 0.95 ± 0.11 | 0.89 ± 0.07 | 0.84 ± 0.12 | 0.78 ± 0.08 |
+| 31 | 3-Furaldehyde | 1.34 ± 0.03 | 0.83 ± 0.25 | 0.73 ± 0.13 | 0.55 ± 0.05 | 0.26 ± 0.03 |
+
+**Table S3 (85/95/105/115/125 C), all rows, ug/L, mean +/- SD (re-typed from `word/document.xml` of the docx; columns: 85 ℃ | 95 ℃ | 105 ℃ | 115 ℃ | 125 ℃):**
+
+| # | compound | 85 ℃ | 95 ℃ | 105 ℃ | 115 ℃ | 125 ℃ | CAS |
+|---|---|---|---|---|---|---|---|
+| 1 | 2-Thiophenethiol | 9.51 ± 0.27 | 7.66 ± 0.26 | 7.52 ± 0.32 | 7.18 ± 0.35 | 6.04 ± 0.36 |
+| 2 | 2-Furanethiol | 6.02 ± 0.21 | 14.37 ± 0.18 | 7.37 ± 0.13 | 1.68 ± 0.11 | 0 |
+| 3 | 2-Methyl-3-furanthiol | 0 | 2.08 ± 0.30 | 4.00 ± 0.19 | 8.40 ± 0.67 | 1.91 ± 0.33 |
+| 4 | Difurfuryl disulfide | 4.19 ± 0.34 | 0.24 ± 0.08 | 2.40 ± 0.31 | 3.61 ± 0.29 | 6.80 ± 0.36 |
+| 5 | Bis(2-furfuryl) disulfide | 0 | 0 | 5.37 ± 0.61 | 7.92 ± 0.37 | 6.18 ± 0.43 |
+| 6 | 2-Methyl-3-(methylthio)furan | 3.85 ± 0.56 | 2.94 ± 0.61 | 3.05 ± 0.16 | 2.51 ± 0.28 | 1.94 ± 0.06 |
+| 7 | Pyrazine | 0 | 0 | 0.70 ± 0.08 | 3.41 ± 0.28 | 5.63 ± 0.51 |
+| 8 | Methylpyrazine | 0 | 0 | 0 | 2.98 ± 0.16 | 4.44 ± 0.20 |
+| 9 | 2,5-Dimethylpyrazine | 0 | 0 | 0 | 1.54 ± 0.09 | 2.18 ± 0.11 |
+| 10 | 2-Acetylthiazole | 102.83 ± 9.69 | 152.98 ± 12.20 | 193.67 ± 8.92 | 134.01 ± 13.08 | 167.86 ± 11.81 |
+| 11 | 4,5-Dimethylthiazole | 20.34 ± 0.97 | 23.46 ± 0.62 | 19.94 ± 0.91 | 25.06 ± 0.68 | 21.53 ± 0.29 |
+| 12 | 2,9-Dimethylthiazolo[4,5-f]quinoline | 1.26 ± 0.09 | 1.89 ± 0.12 | 2.28 ± 0.11 | 2.56 ± 0.23 | 2.43 ± 0.10 |
+| 13 | 2-Ethyl-4-methylthiazole | 0.89 ± 0.06 | 0.54 ± 0.03 | 0.29 ± 0.01 | 0 | 0 |
+| 14 | 2-Methylthiophen | 2.42 ± 0.23 | 6.46 ± 0.31 | 13.39 ± 1.95 | 15.78 ± 1.45 | 20.74 ± 2.48 |
+| 15 | 2-Heptylthiophene | 1.06 ± 0.12 | 4.29 ± 0.28 | 5.93 ± 0.41 | 7.85 ± 0.19 | 11.28 ± 0.41 |
+| 16 | 3-Hexylthiophene | 0 | 0.91 ± 0.06 | 1.41 ± 0.08 | 1.99 ± 0.24 | 2.73 ± 0.23 |
+| 17 | 2-Ethyl-5-methylthiophen | 0 | 0 | 0.67 ± 0.02 | 0.91 ± 0.01 | 1.16 ± 0.05 |
+| 18 | 3-Butylthiophene | 1.61 ± 0.15 | 0.98 ± 0.08 | 1.17 ± 0.05 | 1.34 ± 0.04 | 1.23 ± 0.02 |
+| 19 | 5-Methyl-2-thiophenecarboxaldehyde | 0 | 0 | 0.95 ± 0.01 | 0 | 1.13 ± 0.08 |
+| 20 | Furfural | 31.81 ± 3.06 | 73.77 ± 5.96 | 142.98 ± 6.16 | 155.41 ± 4.24 | 171.61 ± 14.87 |
+| 21 | Nonanal | 0.24 ± 0.13 | 4.04 ± 0.27 | 2.99 ± 0.26 | 8.18 ± 0.25 | 12.00 ± 1.38 |
+| 22 | 2-Propylfuran | 0.15 ± 0.06 | 0.31 ± 0.02 | 0.30 ± 0.07 | 0.38 ± 0.10 | 0.27 ± 0.03 |
+| 23 | 2-Hexylfuran | 0.10 ± 0.01 | 0.27 ± 0.03 | 0.26 ± 0.01 | 0.50 ± 0.04 | 0.41 ± 0.03 |
+| 24 | 2-Methoxyfuran | 0 | 0.23 ± 02 | 0.36 ± 0.05 | 0.37 ± 0.04 | 0 |
+| 25 | Pentanaldehyde | 0 | 0 | 0.11 ± 0.01 | 0.32 ± 0.01 | 0.27 ± 0.03 |
+| 26 | 3-Furaldehyde | 0 | 0.91 ± 02 | 0.55 ± 0.04 | 0 | 0.43 ± 0.01 |
+| 27 | decylaldehyde | 0 | 0 | 0.12 ± 0.01 | 0.36 ± 0.02 | 0.49 ± 0.08 |
+
+**Table S4 (60/80/100/120/140 min), all rows, ug/L, mean +/- SD (re-typed from `word/document.xml` of the docx; columns: 60 min | 80 min | 100 min | 120 min | 140 min):**
+
+| # | compound | 60 min | 80 min | 100 min | 120 min | 140 min | CAS |
+|---|---|---|---|---|---|---|---|
+| 1 | 2-Thiophenethiol | 8.18 ± 0.83 | 10.40 ± 1.31 | 18.13 ± 1.91 | 15.36 ± 0.72 | 11.55 ± 1.19 |
+| 2 | 2-Methyl-3-furanthiol | 0 | 6.00 ± 0.71 | 13.94 ± 2.56 | 20.19 ± 2.27 | 17.35 ± 1.97 |
+| 3 | 2-Furanethiol | 0.29 ± 0.05 | 5.46 ± 0.80 | 4.89 ± 0.16 | 0.88 ± 0.22 | 0.65 ± 0.04 |
+| 4 | Difurfuryl disulfide | 0.66 ± 0.06 | 0.45 ± 0.18 | 2.00 ± 0.16 | 1.04 ± 0.32 | 1.15 ± 0.16 |
+| 5 | Bis(2-furfuryl) disulfide | 1.12 ± 0.03 | 3.94 ± 0.11 | 4.84 ± 0.24 | 5.09 ± 0.14 | 5.73 ± 0.22 |
+| 6 | 3-Mercapto-2-butanone | 0 | 0.56 ± 0.05 | 0.95 ± 0.09 | 1.27 ± 0.54 | 0.79 ± 0.04 |
+| 7 | 1-Butanethiol | 0.37 ± 0.02 | 0.55 ± 0.05 | 0.71 ± 0.04 | 1.13 ± 0.08 | 0.86 ± 0.11 |
+| 8 | 2-Methyl-3-(methylthio)furan | 0 | 0.22 ± 0.03 | 0.47 ± 0.08 | 0.81 ± 0.09 | 0.73 ± 0.04 |
+| 9 | 2-Thiophenemethyl mercaptan | 0 | 0 | 0.62 ± 0.05 | 0.58 ± 0.04 | 0.70 ± 0.01 |
+| 10 | Pyrazine | 0 | 0 | 1.86 ± 0.10 | 5.57 ± 0.73 | 15.94 ± 1.79 |
+| 11 | Methylpyrazine | 0 | 0 | 0 | 3.12 ± 0.02 | 6.79 ± 0.59 |
+| 12 | 2,5-Dimethylpyrazine | 0 | 0 | 0.56 ± 0.02 | 0.89 ± 0.06 | 1.12 ± 0.06 |
+| 13 | 2-Acetylthiazole | 69.71 ± 2.92 | 59.63 ± 3.16 | 75.90 ± 2.30 | 70.70 ± 1.36 | 44.15 ± 1.29 |
+| 14 | 4,5-Dimethylthiazole | 33.20 ± 1.14 | 29.76 ± 0.45 | 26.43 ± 1.12 | 30.28 ± 0.32 | 25.36 ± 0.54 |
+| 15 | 2-Ethyl-4-methylthiazole | 5.06 ± 0.58 | 4.67 ± 0.29 | 4.16 ± 0..37 | 3.75 ± 0.24 | 2.19 ± 0.51 |
+| 16 | 2,9-Dimethylthiazolo[4,5-f]quinoline | 2.67 ± 0.23 | 3.06 ± 0.14 | 2.50 ± 0.27 | 2.14 ± 0.09 | 1.58 ± 0.07 |
+| 17 | 2-Methylthiophen | 0 | 3.50 ± 0.32 | 138.37 ± 9.36 | 151.17 ± 15.50 | 173.28 ± 20.77 |
+| 18 | 2-Heptylthiophene | 0.96 ± 0.11 | 2.58 ± 0.23 | 10.24 ± 0.85 | 18.42 ± 1.08 | 26.43 ± 0.97 |
+| 19 | 3-Hexylthiophene | 0 | 0.75 ± 0.08 | 1.69 ± 0.12 | 5.28 ± 0.28 | 9.43 ± 0.59 |
+| 20 | 3-Butylthiophene | 0 | 0 | 4.61 ± 0.81 | 3.86 ± 0.42 | 7.95 ± 0.35 |
+| 21 | 5-Methyl-2-thiophenecarboxaldehyde | 0 | 1.09 ± 0.09 | 3.59 ± 0.27 | 5.73 ± 0.22 | 6.94 ± 0.64 |
+| 22 | 3-Thiophenecarboxaldehyde | 0 | 0.59 ± 0.03 | 1.67 ± 0.16 | 2.34 ± 0.24 | 4.01 ± 0.38 |
+| 23 | 1-Pentyl-1H-pyrrole | 0.29 ± 0.01 | 0.92 ± 0.05 | 1.63 ± 0.06 | 2.91 ± 0.13 | 3.65 ± 0.17 |
+| 24 | 2,5-Dimethyl-1H-pyrrole | 0 | 0.68 ± 0.02 | 1.12 ± 0.06 | 1.82 ± 0.21 | 2.09 ± 0.08 |
+| 25 | 6-Pentyl-α-pyrrolidine | 0 | 0 | 0.97 ± 0.01 | 1.19 ± 0.03 | 1.57 ± 0.04 |
+| 26 | Furfural | 77.00 ± 3.29 | 57.82 ± 2.05 | 108.08 ± 5.29 | 177.93 ± 6.60 | 103.18 ± 5.08 |
+| 27 | Nonanal | 8.17 ± 0.49 | 8.71 ± 0.61 | 11.82 ± 1.90 | 10.63 ± 1.98 | 14.50 ± 1.20 |
+| 28 | 2-Propylfuran | 1.85 ± 0.54 | 2.68 ± 0.72 | 4.71 ± 0.68 | 6.60 ± 0.56 | 5.80 ± 0.25 |
+| 29 | 2-Methoxyfuran | 0..86 ± 0.02 | 1.89 ± 0.12 | 2.48 ± 0.23 | 1.67 ± 0.07 | 1.99 ± 0.08 |
+| 30 | 3-Furaldehyde | 0 | 1.35 ± 0.05 | 1.88 ± 0.1.4 | 2.56 ± 0.12 | 2.07 ± 0.06 |
+| 31 | 2-Hexylfuran | 0 | 0 | 0.76 ± 0.08 | 1.34 ± 0.15 | 1.67 ± 0.24 |

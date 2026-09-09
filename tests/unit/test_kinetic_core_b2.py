@@ -136,8 +136,15 @@ def test_a_deliberately_unbalanced_sulfur_step_is_refused():
 def test_trunk_species_are_a_prefix_of_the_sulfur_state():
     from src.kinetic_core.species import SPECIES_KEYS
 
-    for i, key in enumerate(SPECIES_KEYS):
+    from src.kinetic_core.species import TRUNK_ONLY_KEYS
+
+    # B13 (2026-09-07): the trunk's dicarbonyl trio is trunk-only and is left out of the
+    # sulfur state, so the prefix is every trunk species EXCEPT those three.
+    prefix = [key for key in SPECIES_KEYS if key not in TRUNK_ONLY_KEYS]
+    for i, key in enumerate(prefix):
         assert SULFUR_INDEX[key] == i, "B1 indices must survive the extension"
+    for key in TRUNK_ONLY_KEYS:
+        assert key not in SULFUR_INDEX
 
 
 def test_site_pools_carry_no_atoms():
@@ -835,7 +842,8 @@ def test_network_shape_is_pinned():
     # B7 adds SEVEN: five on the trunk (INT, DDG, HMF, AF, DMHF -- the furanic
     # channel, whose parents are all trunk species) and two on this lane
     # (HMFAD, DMHFS -- the two sinks that need a sulfur partner).
-    assert described["n_species"] == 55
+    # B11 (2026-09-07): + OXR (headspace reservoir) and OXV (dissolved-oxygen vacancy)
+    assert described["n_species"] == 57
     # B7 adds ELEVEN steps to the TRUNK -- the furanic channel hangs there
     # because all four of its parents (Fru, 3-DG, 1-DG, MGO) are trunk species.
     # 15 through B6.

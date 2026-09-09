@@ -19,7 +19,17 @@
     "temp_C": 130,
     "ph": 6.0,
     "water_activity": 0.35,
-    "time_min": 0.4167
+    "time_min": 0.4167,
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "twin-screw extruder",
+      "atmosphere": "continuous_process",
+      "water_source": "not_applicable",
+      "stirred": null,
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Ma et al. 2024, Int. J. Mol. Sci. 25:8668, twin-screw extrusion of SPI + corn starch at 30 % moisture (die-zone 130 C; the bundle's 25 s is the residence time). NOT ON DISK as a PDF; the repo carries its Europe PMC full text for the directional panel (second-hand). An extruder has no fixed headspace: oxygen access is process-specific (continuous_process). Water source not applicable to a melt."
+    }
   },
   "sme_kj_per_kg": 250.0,
   "moisture_regime": "lme",

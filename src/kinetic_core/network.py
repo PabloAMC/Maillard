@@ -306,6 +306,78 @@ REACTIONS: Tuple[Reaction, ...] = (
 
 REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in REACTIONS)
 
+#: Build Wave B13 (2026-09-07): the dicarbonyl trio, TRUNK-ONLY. These five steps run
+#: when the trunk lane integrates on its own (`TRUNK_REACTIONS`); the sulfur network
+#: imports `REACTIONS` and keeps exactly the topology wave B9 was fitted on, and the
+#: acrylamide network builds its own. Constants: `parameters_dicarbonyl.py`
+#: (Kocadagli & Gokmen 2016 JAFC, glucose glass, T_b 180 C, re-referenced to 100 C).
+DICARBONYL_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_glc_g", {"Glc": 1}, {"G": 1}, "k_glc_g",
+        "Kocadagli step 9, Glc -> glucosone (oxidative; the source's amine-free glass "
+        "holds air). Ea 125.9 +/- 4.9 kJ/mol.",
+    ),
+    Reaction(
+        "r_g_go", {"G": 1}, {"GO": 1, "FRAG_C": 4}, "k_g_go",
+        "Kocadagli step 10, glucosone -> glyoxal + C4 residue (unmeasured -> FRAG_C). "
+        "Ea 93.8 +/- 6.4.",
+    ),
+    Reaction(
+        "r_odg_da", {"ODG": 1}, {"DA": 1, "FRAG_C": 2}, "k_odg_da",
+        "Kocadagli step 12, 1-deoxyglucosone -> diacetyl + C2 residue. Ea 150.8 +/- 8.8.",
+    ),
+    Reaction(
+        "r_go_sink", {"GO": 1}, {"FRAG_C": 2}, "k_go_sink",
+        "Kocadagli step 15, GO -> P3. Rate measured at 180 C; barrier FIXED TO ZERO by the "
+        "authors, carried as such and flagged.",
+    ),
+    Reaction(
+        "r_da_sink", {"DA": 1}, {"FRAG_C": 4}, "k_da_sink",
+        "Kocadagli step 17, DA -> P5: rate 0 +/- 0 in the source (diacetyl accumulates). "
+        "Carried at ZERO as a prediction, not left undefined.",
+    ),
+)
+#: Build Wave B18 (2026-09-08): the pyrazine step, TRUNK-ONLY, five steps. Two Strecker
+#: deaminations (dicarbonyl + glycine -> aminoketone + CO2 + formaldehyde; hypothesis-layer rule
+#: R07), second order and RATE-DETERMINING, then three aminoketone condensations (rule R28) on one
+#: shared constant DECLARED FAST (Jousse 2002's "I + I -> pyrazines: fast", jousse2002_extraction.md
+#: Table R10), so the measured pyrazine rate is the Strecker rate over two and the mixed pyrazine
+#: follows the two aminoketone pools statistically. Each glycine leaves its two carbons as carbon
+#: dioxide and formaldehyde, booked to the unassigned fragment pool. Constants:
+#: `parameters_pyrazine.py`; pre-registration `results/validation/kinetic_core_b18_prereg.md`.
+PYRAZINE_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_go_ak", {"GO": 1, "Gly": 1}, {"AKG": 1, "FRAG_C": 2}, "k_go_ak",
+        "B18. glyoxal + glycine -> aminoacetaldehyde + CO2 + HCHO (Strecker, net). FITTED to Zhou "
+        "2024's three-temperature pyrazine formation rates on fed glyoxal + alanine (alanine -> "
+        "glycine declared): the rate-determining step of the pyrazine route.",
+    ),
+    Reaction(
+        "r_mgo_ak", {"MGO": 1, "Gly": 1}, {"AKM": 1, "FRAG_C": 2}, "k_mgo_ak",
+        "B18. methylglyoxal + glycine -> aminoacetone + CO2 + HCHO (Strecker, net). FITTED to Zhou "
+        "2024's three-temperature 2,5-dimethylpyrazine rates on fed methylglyoxal + alanine.",
+    ),
+    Reaction(
+        "r_akg_pz", {"AKG": 2}, {"PZ": 1}, "k_cond",
+        "B18. 2 aminoacetaldehyde -> pyrazine (condensation, dehydration, oxidation; net). DECLARED "
+        "FAST (shared k_cond): not rate-determining, sensitivity reported in the ship rule.",
+    ),
+    Reaction(
+        "r_akm_dmp", {"AKM": 2}, {"DMP": 1}, "k_cond",
+        "B18. 2 aminoacetone -> 2,5-dimethylpyrazine (net). Shared declared k_cond.",
+    ),
+    Reaction(
+        "r_ak_mpz", {"AKG": 1, "AKM": 1}, {"MPZ": 1}, "k_cond",
+        "B18. aminoacetaldehyde + aminoacetone -> 2-methylpyrazine (net). Shared declared k_cond: the "
+        "mixed pyrazine follows the two pools statistically (2 sqrt of the two homo rates); no "
+        "source measures the mixed condensation.",
+    ),
+)
+TRUNK_REACTIONS: Tuple[Reaction, ...] = REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS
+TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
+DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
+PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)
+
 #: Build Wave B7's eleven steps, named so a report can say which part of the
 #: trunk is B1's and which is B7's without counting.
 FURANIC_REACTION_KEYS: Tuple[str, ...] = (
@@ -332,7 +404,8 @@ B1_REACTION_KEYS: Tuple[str, ...] = tuple(
 BALANCED_ELEMENTS: Tuple[str, ...] = ("carbon", "nitrogen", "sulfur")
 
 
-def validate_balance(reactions: Sequence[Reaction] = REACTIONS) -> None:
+def validate_balance(reactions: Sequence[Reaction] = None) -> None:
+    reactions = TRUNK_REACTIONS if reactions is None else reactions
     """Raise unless every reaction balances carbon, nitrogen AND sulfur."""
     for reaction in reactions:
         for element in BALANCED_ELEMENTS:
@@ -405,16 +478,17 @@ def _validate_trunk_charge_closure() -> None:
     """Deferred so that ``network`` need not import ``ph_state`` at module top."""
     from .ph_state import validate_charge_closure
 
-    validate_charge_closure(REACTIONS, TRUNK_CENTRE_LEDGER)
+    validate_charge_closure(TRUNK_REACTIONS, TRUNK_CENTRE_LEDGER)
 
 
 _validate_trunk_charge_closure()
 
 
 def stoichiometric_matrix(
-    reactions: Sequence[Reaction] = REACTIONS,
+    reactions: Sequence[Reaction] = None,
 ) -> np.ndarray:
     """(n_species, n_reactions) net stoichiometry."""
+    reactions = TRUNK_REACTIONS if reactions is None else reactions
     matrix = np.zeros((N_SPECIES, len(reactions)), dtype=float)
     for j, reaction in enumerate(reactions):
         for key, coefficient in reaction.reactants.items():
@@ -444,7 +518,7 @@ def rate_constants_at(
     only derived rate in the module.
     """
     out: Dict[str, float] = {}
-    for reaction in REACTIONS:
+    for reaction in TRUNK_REACTIONS:
         if reaction.parameter_key is None:
             continue
         parameter = parameters.get(reaction.parameter_key)
@@ -473,8 +547,8 @@ def rate_constants_at(
 def reaction_rates(state: np.ndarray, k: Mapping[str, float]) -> np.ndarray:
     """Mass-action rate of every reaction, in mmol/(L*min)."""
     y = np.clip(np.asarray(state, dtype=float), 0.0, None)
-    rates = np.empty(len(REACTIONS), dtype=float)
-    for j, reaction in enumerate(REACTIONS):
+    rates = np.empty(len(TRUNK_REACTIONS), dtype=float)
+    for j, reaction in enumerate(TRUNK_REACTIONS):
         value = k[reaction.key]
         for key, coefficient in reaction.reactants.items():
             value *= y[INDEX[key]] ** coefficient

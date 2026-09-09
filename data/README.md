@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **212**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **322**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -58,6 +58,7 @@ Literature-derived constants, priors, reference payloads and the intake registri
 | `matrix_family_coverage_registry.json` | The 8 canonical matrix families and what each supports; the intended closed vocabulary for `matrix_family`. |
 | `process_gap_registry.json` | 5 structural gaps literature cannot close; overlaps `benchmark_intake_registry.structural_gaps`. |
 | `process_state_calibrations.json` | 26 extrusion / heat / shear calibration records (accessibility scaling); `src/extrusion.py`, `matrix_correction`. |
+| `reaction_rules.yml` | The hypothesis layer's reaction rules: one SMIRKS per literature-described transformation with its dossier anchor, conditions and positive/negative controls (`src/network_hypotheses`); the engine never reads it. |
 | `retention_reference_payloads.json` | Volatile retention/release records per protein, incl. withdrawn (`unsourced_withdrawn`) rows; `src/headspace.py`, `literature_runtime`. |
 | `safety_reference_payloads.json` | 43 regulatory and industrial reference limits for undesirable compounds; `src/safety.py`. |
 
@@ -86,6 +87,7 @@ JSON Schemas enforced by `scripts/ci/schema_gate.py`.
 | file | what it is |
 |---|---|
 | `benchmark.schema.json` | Schema every benchmark payload validates against (core fields, closed enums, measured XOR reference volatiles). |
+| `spec.schema.json` | The front door's spec contract: what compare, predict, score, calibrate, the Python API and the page validate a formulation against (`src/comparative_cli.validate_spec`). |
 
 ## `data/species`
 
@@ -94,8 +96,11 @@ Compound and precursor definitions (SMILES, CAS, InChI, odour thresholds). The s
 | file | what it is |
 |---|---|
 | `desirable_targets.yml` | 20 meat-relevant target odorants with odour thresholds; read by `sensory`, `experiment_value`, `recommend`. |
+| `literature_structures.yml` | Structures the hypothesis layer's rules name that are not engine species (oleate hydroperoxide isomers, the linoleate 10-hydroperoxide, 2-pentylfuran, the C8 to C11 alkanals and 2-alkenals, the core fragments); each with the dossier that draws it. Loaded beside structures.yml by `src/network_hypotheses/structures.py`; never read by the engine. |
 | `off_flavour_targets.yml` | 6 off-note compounds (beany/green/fatty) with thresholds; same readers. |
 | `precursors.yml` | Precursors by category (amino acids, sugars, exogenous, intermediates, lipids); `src/precursor_resolver.py`. |
+| `protein_matrices.yml` | Reactive-site densities (free thiol, disulfide, amine, mmol per gram) for the protein matrices a dossier states; charged by `protein_g_per_l` in a spec (`src/kinetic_core/matrix_sites.py`). |
+| `structures.yml` | A SMILES (or compound-registry id) for every kinetic-core species key, lumps declared as such; the hypothesis layer's input, checked against the engine's atom counts and molar masses by `tests/unit/test_species_structures.py`. |
 | `toxic_markers.yml` | 8 safety markers (AGEs, acrylamide, HCAs) with IARC class. |
 
 ## `data/benchmarks/external_validation`
@@ -120,7 +125,7 @@ Verified rows the network cannot execute (see README there); kept off the panel 
 
 Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.
 
-78 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `agcam2022_extraction.md`, `ames2001_extraction.md`, `anantharamkrishnan2020_extraction.md`, `anantharamkrishnan2020b_extraction.md`, `apriyantono1993_extraction.md`, `baek1999_extraction.md`, `bagiyan2004_extraction.md` …
+183 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `ames2001_extraction.md`, `anantharamkrishnan2020_extraction.md`, `anantharamkrishnan2020b_extraction.md`, `apriyantono1993_extraction.md` …
 
 ## `data/lit/timeseries`
 

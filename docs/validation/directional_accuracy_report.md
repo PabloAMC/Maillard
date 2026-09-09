@@ -815,7 +815,7 @@ Each fix was measured alone by emptying the other two family sets at runtime (no
   also corrects §2b of this report by one paper: Cerny 2015's "145 °C / 20 min at 1:3"
   sentence cites Hofmann & Schieberle **1995** (`10.1021/jf00056a042`), not the 1998 paper, so
   Cerny says nothing about this benchmark's conditions. See `## Wave S2b` in
-  `tasks/audit_remediation.md` and the `content_verification_note.wave_s2_followup` block in
+  `docs/history/tasks/audit_remediation.md` and the `content_verification_note.wave_s2_followup` block in
   the benchmark file, which carries both corrections.
 
 ### The internal snapshots
@@ -855,7 +855,7 @@ shipped tree scores **21/29**. This section is the single place that states the 
 and it is the section machine-read by `src/directional_reliability.py`, which is what the
 `maillard` CLI prints as its per-axis reliability tags. **Nothing here is a new measurement.**
 The one row that moved is the Wave T4 Heyns-consistency fix, recorded with its mechanism in
-`tasks/audit_remediation.md` (Wave T4): `SUG-12` (HMF, fructose vs glucose) flipped MISS → OK,
+`docs/history/tasks/audit_remediation.md` (Wave T4): `SUG-12` (HMF, fructose vs glucose) flipped MISS → OK,
 carrying `sugar_identity` 7/8 → 8/8 and the headline 20/29 → 21/29. Waves S3 and S4 both
 re-scored the panel and both found it **byte-identical** at 21/29.
 

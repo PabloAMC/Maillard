@@ -30,7 +30,17 @@
     "temp_C": 120.0,
     "ph": 5.65,
     "water_activity": 0.83,
-    "time_min": 60.0
+    "time_min": 60.0,
+    "vessel": {
+      "fill_mL": 33.3,
+      "vessel_mL": 125.0,
+      "closure": "125 mL glass vial sealed with Teflon-lined septum",
+      "atmosphere": "air_by_default",
+      "water_source": "distilled",
+      "stirred": null,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Bolton, Reineccius & Liardon 1994 (ACS Symp. Ser. 543, ch. 22), read from data/articles/bolton1993.pdf on 2026-09-04; this bundle's content_verification.quoted_conditions, verbatim: 'Samples were prepared in triplicate using 10 g of the model system and 23.3 g of distilled water ... thermally processed at 120 C for one hour in 125 mL glass vials sealed with Teflon-lined septa'. Fill taken as 33.3 mL at 1 g/mL (a 30 %-solids slurry is denser, ~1.1 g/mL, so the true headspace is ~92-95 mL; the 91.7 mL used here errs by < 4 %). No inert-gas step: air_by_default. Water: distilled. Stirring not stated."
+    }
   },
   "metadata": {
     "tier": "PRIMARY",

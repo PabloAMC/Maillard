@@ -250,10 +250,12 @@ def test_out_of_range_conditions_are_a_DECLARED_extrapolation_not_a_refusal():
     assert any("200 C" in w or "extrapolation" in w for w in run.declaration.warnings)
 
 
-def test_the_pH_free_lanes_declare_that_they_ignore_pH():
+def test_the_acrylamide_lane_declares_its_initial_ph_factor():
+    # B15 (2026-09-07): the lane no longer ignores pH; it prints the declared factor and its window.
     run = predict(_acrylamide_spec(), ["Acrylamide"])
     assert run.answered
-    assert any("NO pH term" in w for w in run.declaration.warnings)
+    assert any("pH (B15)" in w and "INITIAL-pH factor" in w for w in run.declaration.warnings)
+    assert not any("NO pH term" in w for w in run.declaration.warnings)
 
 
 def test_declaration_serialises_with_its_reasons():
@@ -316,7 +318,7 @@ _FORBIDDEN_FAST_FIELDS = ("a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_
 
 def test_cli_has_one_lane_and_no_lane_switch():
     """2026-09-03 (retirement step B5): the screening lane and its `--lane` switch are gone."""
-    import scripts.maillard as cli
+    import src.cli as cli
 
     for verb in ("predict", "compare"):
         args = cli.build_parser().parse_args([verb, "spec.yml"])

@@ -39,7 +39,7 @@ import json
 import math
 import multiprocessing
 import statistics
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
@@ -85,12 +85,192 @@ MIN_EVALUABLE_CI_WIDTH_LOG10 = 0.01
 
 NO_UNCERTAINTY = "no_uncertainty_in_fit_report"
 #: B8 (2026-09-03): a Laplace covariance at the sulfur optimum exists; identified
-#: directions are sampled JOINTLY from it, flat ones stay at the optimum.
+#: directions are sampled JOINTLY from it; flat ones are drawn across their declared
+#: bands (2026-09-04 -- they used to stay at the optimum; see the rule note below).
 LAPLACE_SAMPLED = "laplace_covariance_at_b8_optimum"
 LAPLACE_FLAT = "unidentified_direction_in_laplace_covariance"
 #: The covariance of the SHIPPED sulfur wave (B9 since 2026-09-03): the file beside the
 #: fit report the engine reads, named kinetic_core_<wave>_laplace_covariance.json.
 LAPLACE_PATH = data_paths.VALIDATION_DIR / engine._B2_FIT_REPORT.name.replace("_fit_report.json", "_laplace_covariance.json")
+
+# ---------------------------------------------------------------------------
+# Unidentified coordinates (2026-09-04)
+# ---------------------------------------------------------------------------
+#
+# THE RULE THIS REPLACES. Until 2026-09-04 a coordinate was excluded from the
+# envelope *because* the fit could not constrain it: seven of the ten activation
+# energies were `sampled: False` with a reason that said, in effect, "we do not
+# know this one". The envelope therefore propagated the well-measured
+# coordinates and froze the badly-measured ones, which is backwards for an
+# interval, and the measured consequence was a nominal 90 % interval covering
+# 6 of 39 panel rows.
+#
+# THE RULE NOW. A coordinate the fit was FREE to move but could not pin is
+# sampled across its DECLARED band. "Declared" is load-bearing: a band is a
+# statement someone made and sourced (Gigl 2021's covalent-capture range, the
+# fit's own search bounds), never a number invented here. A coordinate with no
+# declared band stays fixed and says so with its own reason, so the gap is
+# visible in the artifact instead of reading as zero uncertainty.
+UNIDENTIFIED_SAMPLED = "unidentified_in_the_fit: sampled across its declared band"
+UNIDENTIFIED_NO_BAND = "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)"
+UNIDENTIFIED_CAPPED = "unidentified_in_the_fit: declared band capped by the prefactor prior"
+#: Held at a literature or derived value the fit never varied. NOT the same as
+#: unidentified: the fit did not fail to pin it, the fit never asked. Its real
+#: uncertainty is whatever the source carries, and no fit report records that.
+FROZEN_NOT_FREE = "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)"
+
+#: Gas constant in kJ/(mol*K), for the prefactor arithmetic below.
+R_KJ_PER_MOL_K = 8.314462618e-3
+
+# THE PREFACTOR PRIOR, and why an Ea band needs one.
+#
+# The core stores each rate as log10 k(T_ref) and an activation energy, so
+# sampling Ea while k(T_ref) stays at its fitted value is exactly the statement
+# "we know the rate here and not its slope". Along that line A and Ea are not
+# independent: holding k(T_ref) fixed,
+#
+#     dEa = ln(10) * R * T_ref * d(log10 A)          [8.0 kJ/mol per decade at 145 C]
+#     d(log10 k(T)) = d(log10 A) * (1 - T_ref / T)
+#
+# so a prefactor wrong by one decade costs only 0.12 dex at 100 C and 0.34 dex
+# at 40 C -- the compensation effect, and the reason a single-temperature
+# measurement is not as hopeless as it first looks.
+#
+# Read backwards, that arithmetic disciplines the bands. `Ea_int1_mel` sits in a
+# search band of (20, 260) kJ/mol; sampling it flat across 240 kJ/mol while
+# k(160 C) is pinned asserts a prefactor uncertain by 240 / 8.3 = 29 DECADES.
+# Nothing is uncertain by 29 decades: transition-state theory caps a
+# unimolecular prefactor at k_B*T/h (~9e12 /s at 418 K) times exp(dS!/R), and
+# even a generous dS! range of -100 to +40 J/(mol*K) spans ~7 decades. So an Ea
+# band is intersected with the widest interval a physical prefactor allows.
+#
+# TWELVE DECADES, and the argument for that number rather than a smaller one.
+# An ELEMENTARY unimolecular step has A in roughly 1e8..1e14 /s -- six decades.
+# But every coordinate this rule actually reaches is a LUMP (`thiol_sink`,
+# `carbonyl_sink`, `Ea_int1_mel`, `Ea_competitor_sugar`, the two B1 fragmentation
+# barriers), and a lump's effective prefactor is the elementary one TIMES a
+# branching fraction times whatever concentration factors the lump swallowed. A
+# branching fraction of 1e-6 is entirely ordinary, so an effective prefactor
+# plausibly spans 1e2..1e14: twelve decades, i.e. +/-48 kJ/mol at 145 C.
+#
+# MEASURED, so the number is not taste (n=80 draws, seed 0, the union panel):
+#
+#   prior width   Ea half-width   coverage      median 90 % width
+#   frozen (old)     0 kJ/mol     6/32  18.8 %      0.949 dex
+#   6 decades       24 kJ/mol     4/33  12.1 %      0.937 dex
+#   12 decades      48 kJ/mol     5/33  15.2 %      1.168 dex
+#   24 decades      96 kJ/mol     5/33  15.2 %      1.279 dex
+#   uncapped        (+/-115)      7/33  21.2 %      1.245 dex
+#
+# Six decades was too tight to change anything (0.937 against the frozen rule's
+# 0.949). Twelve buys most of the available width. AND NOTE WHAT THE COLUMN ON
+# THE RIGHT DOES NOT DO: widening the parameter priors all the way to uncapped
+# moves coverage from 19 % to 21 % against a nominal 90 %. Propagating parameter
+# uncertainty honestly is worth doing and is NOT what closes that gap. The
+# residuals carry systematic per-lane offsets (sulfur +0.84, acrylamide -0.56,
+# lipid -3.53 dex median) that sampling around a wrong centre cannot reproduce:
+# the missing term is model-structure error, and it is a backlog item, not
+# something to smuggle in as a wider prior.
+PREFACTOR_PRIOR_DECADES = 12.0
+
+# NOT EVERY BOUND IS A BAND. A band is samplable when it says where the value
+# LIES: Gigl 2021's (7, 102) kJ/mol covalent-capture range is a measurement with
+# a width, and FITTED_EA_BOUNDS is a search bound on a physical barrier that the
+# prefactor prior above then narrows to something a prefactor can produce. A
+# DEFINITIONAL bound says only what the quantity IS -- a yield per event is a
+# fraction, so it lies in (0, 1) whatever anyone measured -- and drawing flat
+# across it is not "no information", it is the strong claim that 0.5 is as likely
+# as 0.001.
+#
+# Measured, on `acid_yield_per_sink_event` (fitted 3.6e-4, bound (0, 1)): a flat
+# draw lands ~1500x above the fitted value, which pushes the pH trajectory into a
+# regime the fit never visited, floors every sulfur prediction, and made the
+# envelope WORSE on its own metric -- coverage 6/32 -> 4/33 and the median width
+# NARROWER (1.08 -> 0.85 dex) rather than wider. So a definitional bound is not
+# sampled; the coordinate stays fixed and says why, and wanting a real prior for
+# it is a backlog item, not something to invent here.
+DEFINITIONAL_BAND_KINDS = frozenset({"acid_yield"})
+DEFINITIONAL_BAND = (
+    "unidentified_in_the_fit: its bound is DEFINITIONAL (the quantity is a fraction), "
+    "not a measurement of where the value lies, so a flat draw over it would assert "
+    "more than anyone knows; still fixed, and a recorded gap"
+)
+
+#: Each wave's rate reference temperature, the T at which its fit pins log10 k and
+#: therefore the T the compensation arithmetic above is anchored on. They are the
+#: temperatures the fit reports' own parameter blocks are named for
+#: (``k_ref_100C``, ``log10_k_ref_at_160C``, ``log10_k_ref_at_145C``).
+B1_T_REF_C = 100.0
+B3_T_REF_C = 160.0
+B8_T_REF_C = 145.0
+
+
+def ea_halfwidth_from_prefactor(
+    t_ref_c: float, decades: Optional[float] = None
+) -> float:
+    """
+    Half-width in kJ/mol of the Ea interval a ``decades``-wide prefactor prior allows.
+
+    ``decades`` is read from the module global when not given, deliberately at CALL
+    time rather than as a default argument: the width is a scientific declaration
+    someone should be able to move and re-measure, and a default bound at import
+    would silently ignore them (it did, when this was first written -- a sweep over
+    6 / 12 / 24 / uncapped decades returned four identical coverage numbers).
+    """
+    if decades is None:
+        decades = PREFACTOR_PRIOR_DECADES
+    return math.log(10.0) * R_KJ_PER_MOL_K * (t_ref_c + 273.15) * decades / 2.0
+
+
+def capped_ea_band(
+    centre: float, band: Tuple[float, float], t_ref_c: float
+) -> Tuple[Tuple[float, float], bool]:
+    """
+    ``(band, was_capped)``: the declared band, narrowed to the prefactor prior around
+    ``centre`` when it is wider, and always kept inside the declared band.
+    """
+    half = ea_halfwidth_from_prefactor(t_ref_c)
+    lo, hi = float(band[0]), float(band[1])
+    if hi - lo <= 2.0 * half:
+        return (lo, hi), False
+    return (max(lo, centre - half), min(hi, centre + half)), True
+
+
+def unidentified_prior(
+    *,
+    key: str,
+    lane: str,
+    kind: str,
+    centre: float,
+    band: Optional[Tuple[float, float]],
+    unit: str,
+    source: str,
+    t_ref_c: Optional[float] = None,
+) -> "CorePrior":
+    """One free-but-unpinned coordinate: sampled across its declared band, or a recorded gap."""
+    if band is None:
+        return CorePrior(
+            key=key, lane=lane, kind=kind, distribution="fixed", centre=float(centre),
+            sigma=None, band=None, unit=unit, source=source,
+            sampled=False, reason=UNIDENTIFIED_NO_BAND,
+        )
+    lo, hi = float(band[0]), float(band[1])
+    reason = UNIDENTIFIED_SAMPLED
+    if kind == "fitted_ea" and t_ref_c is not None:
+        (lo, hi), capped = capped_ea_band(float(centre), (lo, hi), t_ref_c)
+        if capped:
+            reason = UNIDENTIFIED_CAPPED
+    if hi - lo <= 0.0:
+        return CorePrior(
+            key=key, lane=lane, kind=kind, distribution="fixed", centre=float(centre),
+            sigma=None, band=(lo, hi), unit=unit, source=source,
+            sampled=False, reason="degenerate band (the declaration is a point)",
+        )
+    return CorePrior(
+        key=key, lane=lane, kind=kind, distribution="uniform_band", centre=float(centre),
+        sigma=None, band=(lo, hi), unit=unit, source=source,
+        sampled=True, reason=reason,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -156,45 +336,56 @@ def _b1_priors() -> List[CorePrior]:
         row = fitted.get(key) or {}
         k_sigma = row.get("log10_k_ref_stderr")
         ea_sigma = row.get("ea_stderr_kj_mol")
-        out.append(
-            CorePrior(
-                key=f"b1.{key}.log10_k_ref_100C", lane=TRUNK, kind="fitted_rate",
-                distribution="normal_log10" if k_sigma is not None else "fixed",
-                centre=math.log10(k_ref),
-                sigma=float(k_sigma) if k_sigma is not None else None,
-                band=None, unit="log10(k at 100 C)",
-                source=f"{src}: variant_A.fitted_parameters.{key}.log10_k_ref_stderr",
-                sampled=k_sigma is not None,
-                reason=(
-                    "identified in the fit report (stderr reported)"
-                    if k_sigma is not None else
-                    "unidentified in the fit report (log10_k_ref_stderr is null)"
-                ),
+        if k_sigma is not None:
+            out.append(
+                CorePrior(
+                    key=f"b1.{key}.log10_k_ref_100C", lane=TRUNK, kind="fitted_rate",
+                    distribution="normal_log10", centre=math.log10(k_ref),
+                    sigma=float(k_sigma), band=None, unit="log10(k at 100 C)",
+                    source=f"{src}: variant_A.fitted_parameters.{key}.log10_k_ref_stderr",
+                    sampled=True, reason="identified in the fit report (stderr reported)",
+                )
             )
-        )
-        out.append(
-            CorePrior(
-                key=f"b1.{key}.ea_kj_mol", lane=TRUNK, kind="fitted_ea",
-                distribution="normal" if ea_sigma is not None else "fixed",
-                centre=ea,
-                sigma=float(ea_sigma) if ea_sigma is not None else None,
-                band=tuple(float(b) for b in FITTED_EA_BOUNDS) if ea_sigma is not None else None,
-                unit="kJ/mol",
-                source=f"{src}: variant_A.fitted_parameters.{key}.ea_stderr_kj_mol",
-                sampled=ea_sigma is not None,
-                reason=(
-                    "identified in the fit report (stderr reported); draws are "
-                    "CLIPPED to the fit's own search bounds FITTED_EA_BOUNDS, "
-                    "which the fit itself could not leave"
-                    if ea_sigma is not None else
-                    "unidentified in the fit report (ea_stderr_kj_mol is null)"
-                ),
+        else:
+            # No search bounds are recorded for a B1 rate, so there is no declared
+            # band to sample: the gap is named rather than filled with a guess.
+            out.append(
+                unidentified_prior(
+                    key=f"b1.{key}.log10_k_ref_100C", lane=TRUNK, kind="fitted_rate",
+                    centre=math.log10(k_ref), band=None, unit="log10(k at 100 C)",
+                    source=f"{src}: variant_A.fitted_parameters.{key}.log10_k_ref_stderr is null",
+                )
             )
-        )
+        if ea_sigma is not None:
+            out.append(
+                CorePrior(
+                    key=f"b1.{key}.ea_kj_mol", lane=TRUNK, kind="fitted_ea",
+                    distribution="normal", centre=ea, sigma=float(ea_sigma),
+                    band=tuple(float(b) for b in FITTED_EA_BOUNDS), unit="kJ/mol",
+                    source=f"{src}: variant_A.fitted_parameters.{key}.ea_stderr_kj_mol",
+                    sampled=True,
+                    reason=(
+                        "identified in the fit report (stderr reported); draws are "
+                        "CLIPPED to the fit's own search bounds FITTED_EA_BOUNDS, "
+                        "which the fit itself could not leave"
+                    ),
+                )
+            )
+        else:
+            out.append(
+                unidentified_prior(
+                    key=f"b1.{key}.ea_kj_mol", lane=TRUNK, kind="fitted_ea", centre=ea,
+                    band=tuple(float(b) for b in FITTED_EA_BOUNDS), unit="kJ/mol",
+                    source=f"{src}: ea_stderr_kj_mol is null; band = FITTED_EA_BOUNDS",
+                    t_ref_c=B1_T_REF_C,
+                )
+            )
     return out
 
 
 def _b3_priors() -> List[CorePrior]:
+    from .parameters_acrylamide import FITTED_ACRYLAMIDE_EA_BOUNDS
+
     report = _report(engine._B3_FIT_REPORT)
     src = data_paths.rel(engine._B3_FIT_REPORT)
     frozen = report["frozen_parameters"]
@@ -204,46 +395,55 @@ def _b3_priors() -> List[CorePrior]:
         row = intervals.get(key) or {}
         identified = bool(row.get("identified"))
         half = row.get("ci95_halfwidth")
-        out.append(
-            CorePrior(
-                key=f"b3.{key}.log10_k_ref_160C", lane=ACRYLAMIDE, kind="fitted_rate",
-                distribution="normal_log10" if identified else "fixed",
-                centre=float(value),
-                sigma=float(half) / 1.96 if (identified and half is not None) else None,
-                band=None, unit="log10(k at 160 C)",
-                source=f"{src}: parameter_intervals.{key}.ci95_halfwidth / 1.96",
-                sampled=identified,
-                reason=(
-                    "identified in the fit report (ci95_halfwidth below the "
-                    "identified_threshold)"
-                    if identified else
-                    f"unidentified in the fit report (ci95_halfwidth {half!r} "
-                    f"above identified_threshold {row.get('identified_threshold')!r})"
-                ),
+        if identified:
+            out.append(
+                CorePrior(
+                    key=f"b3.{key}.log10_k_ref_160C", lane=ACRYLAMIDE, kind="fitted_rate",
+                    distribution="normal_log10", centre=float(value),
+                    sigma=float(half) / 1.96 if half is not None else None,
+                    band=None, unit="log10(k at 160 C)",
+                    source=f"{src}: parameter_intervals.{key}.ci95_halfwidth / 1.96",
+                    sampled=True,
+                    reason=("identified in the fit report (ci95_halfwidth below the "
+                            "identified_threshold)"),
+                )
             )
-        )
+        else:
+            out.append(
+                unidentified_prior(
+                    key=f"b3.{key}.log10_k_ref_160C", lane=ACRYLAMIDE, kind="fitted_rate",
+                    centre=float(value), band=None, unit="log10(k at 160 C)",
+                    source=(f"{src}: ci95_halfwidth {half!r} above identified_threshold "
+                            f"{row.get('identified_threshold')!r}; no search band recorded"),
+                )
+            )
     for key, value in frozen["fitted_Ea_kJ_mol"].items():
         row = intervals.get(key) or {}
         identified = bool(row.get("identified"))
         half = row.get("ci95_halfwidth")
-        out.append(
-            CorePrior(
-                key=f"b3.{key}", lane=ACRYLAMIDE, kind="fitted_ea",
-                distribution="normal" if identified else "fixed",
-                centre=float(value),
-                sigma=float(half) / 1.96 if (identified and half is not None) else None,
-                band=None, unit="kJ/mol",
-                source=f"{src}: parameter_intervals.{key}.ci95_halfwidth / 1.96",
-                sampled=identified,
-                reason=(
-                    "identified in the fit report (ci95_halfwidth below the "
-                    "identified_threshold)"
-                    if identified else
-                    f"unidentified in the fit report (ci95_halfwidth {half!r} "
-                    f"above identified_threshold {row.get('identified_threshold')!r})"
-                ),
+        if identified:
+            out.append(
+                CorePrior(
+                    key=f"b3.{key}", lane=ACRYLAMIDE, kind="fitted_ea",
+                    distribution="normal", centre=float(value),
+                    sigma=float(half) / 1.96 if half is not None else None,
+                    band=None, unit="kJ/mol",
+                    source=f"{src}: parameter_intervals.{key}.ci95_halfwidth / 1.96",
+                    sampled=True,
+                    reason=("identified in the fit report (ci95_halfwidth below the "
+                            "identified_threshold)"),
+                )
             )
-        )
+        else:
+            out.append(
+                unidentified_prior(
+                    key=f"b3.{key}", lane=ACRYLAMIDE, kind="fitted_ea", centre=float(value),
+                    band=tuple(float(b) for b in FITTED_ACRYLAMIDE_EA_BOUNDS), unit="kJ/mol",
+                    source=(f"{src}: ci95_halfwidth {half!r} above identified_threshold; "
+                            f"band = FITTED_ACRYLAMIDE_EA_BOUNDS"),
+                    t_ref_c=B3_T_REF_C,
+                )
+            )
     return out
 
 
@@ -288,10 +488,11 @@ def _laplace_lookup(lap: Optional[Dict[str, Any]]) -> Dict[Tuple[str, str], Dict
         return {}
     out: Dict[Tuple[str, str], Dict[str, Any]] = {}
     for i, (coord, sigma, ok, bounds) in enumerate(
-        zip(lap["coordinates"], lap["sigma"], lap["identified"], lap["bounds"])
+        zip(lap["coordinates"], lap["sigma"], lap["identified"], lap["bounds"], strict=True)
     ):
         out[(coord["block"], coord["key"])] = {
             "sigma": float(sigma), "identified": bool(ok), "bounds": tuple(bounds), "index": i,
+            "kind": coord.get("kind", ""),
         }
     return out
 
@@ -310,15 +511,30 @@ def _b8_priors() -> List[CorePrior]:
             return CorePrior(
                 key=key, lane=SULFUR, kind=kind, distribution="fixed", centre=float(centre),
                 sigma=None, band=None, unit=unit, source=f"{src}: frozen_parameters.{block}",
-                sampled=False, reason=NO_UNCERTAINTY if lap is None else "frozen in the sulfur fit (not a free coordinate)",
+                sampled=False,
+                reason=NO_UNCERTAINTY if lap is None else FROZEN_NOT_FREE,
             )
-        if not entry["identified"]:
+        if not entry["identified"] and entry["kind"] in DEFINITIONAL_BAND_KINDS:
             return CorePrior(
                 key=key, lane=SULFUR, kind=kind, distribution="fixed", centre=float(centre),
                 sigma=entry["sigma"], band=entry["bounds"], unit=unit,
-                source=f"{lap_src}: sigma above the identification threshold",
-                sampled=False, reason=LAPLACE_FLAT,
+                source=f"{lap_src}: flat direction with a definitional bound",
+                sampled=False, reason=DEFINITIONAL_BAND,
             )
+        if not entry["identified"]:
+            # 2026-09-04: a flat direction is now SAMPLED across its declared band
+            # rather than frozen at the optimum. The band is the fit's own declared
+            # bound on the coordinate -- for `thiol_sink` that is Gigl 2021's
+            # measured covalent-capture range, which is a measurement WITH A WIDTH:
+            # leaving the point estimate at the bound (backlog pass 7) is right, and
+            # an interval must still integrate across it.
+            out_prior = unidentified_prior(
+                key=key, lane=SULFUR, kind=kind, centre=float(centre),
+                band=entry["bounds"], unit=unit,
+                source=f"{lap_src}: flat direction; band = the coordinate's declared bounds",
+                t_ref_c=B8_T_REF_C,
+            )
+            return replace(out_prior, sigma=entry["sigma"])
         return CorePrior(
             key=key, lane=SULFUR, kind=kind, distribution=distribution, centre=float(centre),
             sigma=entry["sigma"], band=entry["bounds"], unit=unit,
@@ -330,8 +546,16 @@ def _b8_priors() -> List[CorePrior]:
     for key, value in frozen["log10_k_ref_at_145C"].items():
         out.append(prior(f"b8.{key}.log10_k_ref_145C", "log10_k_ref_at_145C", key, value,
                          "log10(k at 145 C)", "fitted_rate", "normal_log10"))
-    out.append(prior("b8.lumped_formation_Ea_kJ_mol", "lumped_formation_Ea_kJ_mol", "",
-                     frozen["lumped_formation_Ea_kJ_mol"], "kJ/mol", "fitted_ea", "normal"))
+    routes = frozen.get("formation_Ea_by_route_kJ_mol") or {}
+    if routes:
+        # B10: two route barriers in their own block; the lumped slot is not a
+        # separate coordinate any more (it equals the sugar-trunk route).
+        for route, value in routes.items():
+            out.append(prior(f"b8.formation_Ea_by_route_kJ_mol.{route}", "formation_Ea_by_route_kJ_mol",
+                             route, value, "kJ/mol", "fitted_ea", "normal"))
+    else:
+        out.append(prior("b8.lumped_formation_Ea_kJ_mol", "lumped_formation_Ea_kJ_mol", "",
+                         frozen["lumped_formation_Ea_kJ_mol"], "kJ/mol", "fitted_ea", "normal"))
     for family, value in (frozen.get("decay_Ea_kJ_mol") or {}).items():
         out.append(prior(f"b8.decay_Ea_kJ_mol.{family}", "decay_Ea_kJ_mol", family, value,
                          "kJ/mol", "fitted_ea", "normal"))
@@ -348,8 +572,9 @@ def sulfur_joint_draw(rng: np.random.Generator) -> Optional[Dict[str, Any]]:
     Returns ``{"maillard_blocks": {...}, "ph_drift": PhDrift | None, "coords": {...}}``
     or None when no covariance artifact exists. The draw is multivariate normal on the
     identified sub-space (Cholesky of the sub-covariance, jittered), added to the
-    frozen optimum and clipped to each coordinate's declared bounds. Unidentified
-    coordinates stay at the optimum.
+    frozen optimum and clipped to each coordinate's declared bounds. UNIDENTIFIED
+    coordinates are drawn uniformly across their declared bands (2026-09-04; they
+    used to stay at the optimum, which is what made the envelope overconfident).
     """
     lap = _laplace()
     if lap is None:
@@ -366,11 +591,30 @@ def sulfur_joint_draw(rng: np.random.Generator) -> Optional[Dict[str, Any]]:
     for k, i in enumerate(idx):
         lo, hi = lap["bounds"][i]
         values[i] = min(max(optimum[i] + z[k], lo), hi)
+    # 2026-09-04: the FLAT directions are no longer left at the optimum. Each is
+    # drawn independently and uniformly across its declared band (Ea bands first
+    # narrowed to the prefactor prior), because a coordinate the fit could not pin
+    # is the one an interval most needs to integrate over. They are drawn
+    # independently rather than jointly on purpose: the covariance has nothing to
+    # say about a direction it is flat in, and B9's matrix is in fact singular
+    # there (|r| > 1 entries, see the improvement backlog).
+    flat = [
+        i for i, ok in enumerate(lap["identified"])
+        if not ok and lap["coordinates"][i].get("kind") not in DEFINITIONAL_BAND_KINDS
+    ]
+    for i in flat:
+        lo, hi = (float(b) for b in lap["bounds"][i])
+        if lap["coordinates"][i].get("kind") == "Ea":
+            (lo, hi), _ = capped_ea_band(float(optimum[i]), (lo, hi), B8_T_REF_C)
+        if hi > lo:
+            values[i] = float(rng.uniform(lo, hi))
+
     blocks: Dict[str, Any] = {}
     ph: Dict[str, float] = {}
     coords: Dict[str, float] = {}
+    drawn = set(idx) | {i for i in flat if lap["bounds"][i][1] > lap["bounds"][i][0]}
     for i, coord in enumerate(lap["coordinates"]):
-        if i not in idx:
+        if i not in drawn:
             continue
         block, key = coord["block"], coord["key"]
         coords[f"b8.{block}.{key}".rstrip(".")] = float(values[i])
@@ -447,6 +691,102 @@ def _declared_band_priors() -> List[CorePrior]:
                 ),
             )
         )
+    from . import trunk_conditions as tc
+
+    # B12 (2026-09-07): the trunk's two declared condition bands. Both are inert on a run at
+    # the reference conditions (a_w None / >= 0.98, pH 6.8), which is every panel row today.
+    out.append(
+        CorePrior(
+            key="trunk.aw_multiplier_scale", lane=TRUNK, kind="declared_band", distribution="uniform",
+            centre=1.0, sigma=None, band=(float(tc.AW_SCALE_BAND[0]), float(tc.AW_SCALE_BAND[1])),
+            unit="scale on (multiplier - 1)",
+            source=f"trunk_conditions.AW_MULTIPLIER_TABLE ({tc.AW_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: 0 = Bell 1995's fixed-molality plateau, 1.2 = the source's 95 % CI",
+        )
+    )
+    out.append(
+        CorePrior(
+            key="trunk.amadori_ph_exponent_decades_per_unit", lane=TRUNK, kind="declared_band",
+            distribution="uniform", centre=float(tc.PH_EXPONENT_DECADES_PER_UNIT), sigma=None,
+            band=(float(tc.PH_EXPONENT_BAND[0]), float(tc.PH_EXPONENT_BAND[1])), unit="decades per pH unit",
+            source=f"trunk_conditions.PH_EXPONENT_BAND ({tc.PH_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the six Martins 2003 per-step ratios span it",
+        )
+    )
+    # B14 (2026-09-07): the acrylamide lane's declared flat a_w multiplier inside De Vleeschouwer
+    # 2008's window; inert at a_w None and outside the window (every panel row today is at a_w
+    # None or outside 0.88-0.99 except where a bundle declares one inside it).
+    from . import acrylamide_conditions as ac
+    out.append(
+        CorePrior(
+            key="acrylamide.aw_multiplier", lane=ACRYLAMIDE, kind="declared_band", distribution="uniform",
+            centre=float(ac.AW_MULTIPLIER), sigma=None, band=(float(ac.AW_SCALE_BAND[0]), float(ac.AW_SCALE_BAND[1])),
+            unit="multiplier on k_int1_acr inside a_w 0.34-0.99",
+            source=f"acrylamide_conditions.KF_TABLE ({ac.AW_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the source's a_w point estimates and the 0.92 column's 95 % HPD, relative to the shipped constant",
+        )
+    )
+    # B15 (2026-09-07): the elimination a_w shape's deficit scale and the two initial-pH exponents.
+    out.append(
+        CorePrior(
+            key="acrylamide.aw_elimination_deficit_scale", lane=ACRYLAMIDE, kind="declared_band", distribution="uniform",
+            centre=1.0, sigma=None, band=(float(ac.AW_ELIMINATION_SCALE_BAND[0]), float(ac.AW_ELIMINATION_SCALE_BAND[1])),
+            unit="scale on (1 - multiplier) of k_acr_dp inside a_w 0.34-0.92",
+            source=f"acrylamide_conditions.AW_ELIMINATION_TABLE ({ac.AW_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: 0 = no elimination a_w effect, 1.2 = 1.2x De Vleeschouwer 2007's k_E shape (SEs up to 90 %)",
+        )
+    )
+    out.append(
+        CorePrior(
+            key="acrylamide.ph_exponent_formation_decades_per_unit", lane=ACRYLAMIDE, kind="declared_band",
+            distribution="uniform", centre=float(ac.PH_EXPONENT_FORMATION), sigma=None,
+            band=(float(ac.PH_EXPONENT_FORMATION_BAND[0]), float(ac.PH_EXPONENT_FORMATION_BAND[1])),
+            unit="decades per pH unit on k_asn_glc", source=f"acrylamide_conditions.PH_SOURCE ({ac.PH_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the potato-matrix slope minus its SE to the phosphate slope plus its SE",
+        )
+    )
+    out.append(
+        CorePrior(
+            key="acrylamide.ph_exponent_elimination_decades_per_unit", lane=ACRYLAMIDE, kind="declared_band",
+            distribution="uniform", centre=float(ac.PH_EXPONENT_ELIMINATION), sigma=None,
+            band=(float(ac.PH_EXPONENT_ELIMINATION_BAND[0]), float(ac.PH_EXPONENT_ELIMINATION_BAND[1])),
+            unit="decades per pH unit on k_acr_dp", source=f"acrylamide_conditions.PH_SOURCE ({ac.PH_SOURCE[:60]}...)",
+            sampled=True, reason="declared band: the two measured slopes and their SEs",
+        )
+    )
+    # B11 (2026-09-07): the oxygen structure's declared bands. SAMPLED only when the shipped
+    # sulfur report carries an "oxygen" block (a B11 report); until then the consumers are
+    # zero by declaration and the reservoir is inert, and the priors say so.
+    from .parameters_sulfur import OXYGEN_BOUNDS_LOG10K, OX_RESERVOIR_SCALE_BAND
+    frozen_oxygen = (_report(engine._B2_FIT_REPORT)["frozen_parameters"]).get("oxygen") or {}
+    b11 = bool(frozen_oxygen)
+    for key in ("k_cys_ox", "k_red_ox"):
+        centre = float(frozen_oxygen.get(key, 0.0))
+        out.append(
+            CorePrior(
+                key=f"sulfur.oxygen.{key}.log10_k", lane=SULFUR, kind="declared_band",
+                distribution="uniform" if b11 else "fixed",
+                centre=(math.log10(centre) if centre > 0 else OXYGEN_BOUNDS_LOG10K[key][0]) if b11 else 0.0,
+                sigma=None, band=tuple(float(v) for v in OXYGEN_BOUNDS_LOG10K[key]),
+                unit="log10(L per ambient unit per min)",
+                source="parameters_sulfur.OXYGEN_BOUNDS_LOG10K (B11 prereg sec. 3b)",
+                sampled=b11,
+                reason=("declared band, sampled uniform in log10 (no measurement pins the consumer)" if b11
+                        else "not a free coordinate of the shipped report (B11 not shipped): the consumer is zero by declaration and the structure inert"),
+            )
+        )
+    out.append(
+        CorePrior(
+            key="sulfur.oxygen.reservoir_scale", lane=SULFUR, kind="declared_band",
+            distribution="log_uniform" if b11 else "fixed", centre=1.0, sigma=None,
+            band=(float(OX_RESERVOIR_SCALE_BAND[0]), float(OX_RESERVOIR_SCALE_BAND[1])),
+            unit="scale on the reservoir (vessel-derived or default)",
+            source="parameters_sulfur.OX_RESERVOIR_SCALE_BAND (saturation band x unrecorded-vessel band)",
+            sampled=b11,
+            reason=("declared band, sampled log-uniform" if b11
+                    else "not a free coordinate of the shipped report (B11 not shipped): the reservoir is inert while the consumers are zero"),
+        )
+    )
     band = float(FURANONE_PARTITION_EA_BAND_KJ_MOL)
     out.append(
         CorePrior(
@@ -545,6 +885,14 @@ def draw_from_rng(
     coords: Dict[str, float] = {}
     q10 = None
     furanone = None
+    trunk_aw_scale = None
+    trunk_ph_exponent = None
+    acrylamide_aw_scale = None
+    acrylamide_aw_elimination_scale = None
+    acrylamide_ph_exponent_formation = None
+    acrylamide_ph_exponent_elimination = None
+    oxygen: Dict[str, float] = {}
+    reservoir_scale = None
     lipid_u = None
     pv_u = None
     k_aw = 1.0
@@ -586,6 +934,10 @@ def draw_from_rng(
                 value = min(max(value, p.band[0]), p.band[1])
             else:
                 raise ValueError(f"{p.key}: no log_uniform routing")
+        elif p.distribution == "uniform_band":
+            # A coordinate the fit was free to move and could not pin: flat across
+            # its declared band, which is the honest shape of "no information here".
+            value = float(rng.uniform(p.band[0], p.band[1]))
         elif p.distribution == "log_uniform_dispersion":
             log_d = float(rng.uniform(math.log10(p.band[0]), math.log10(p.band[1])))
             u = float(rng.uniform(-0.5, 0.5))
@@ -614,6 +966,22 @@ def draw_from_rng(
             pass  # routed through lipid_u / pv_u above
         elif p.key == "furanic.partition_ea_offset_kj_mol":
             furanone = value
+        elif p.key == "trunk.aw_multiplier_scale":
+            trunk_aw_scale = value
+        elif p.key == "trunk.amadori_ph_exponent_decades_per_unit":
+            trunk_ph_exponent = value
+        elif p.key == "acrylamide.aw_multiplier":
+            acrylamide_aw_scale = value
+        elif p.key == "acrylamide.aw_elimination_deficit_scale":
+            acrylamide_aw_elimination_scale = value
+        elif p.key == "acrylamide.ph_exponent_formation_decades_per_unit":
+            acrylamide_ph_exponent_formation = value
+        elif p.key == "acrylamide.ph_exponent_elimination_decades_per_unit":
+            acrylamide_ph_exponent_elimination = value
+        elif p.key.startswith("sulfur.oxygen.") and p.key.endswith(".log10_k"):
+            oxygen[p.key.split(".")[2]] = 10.0 ** value
+        elif p.key == "sulfur.oxygen.reservoir_scale":
+            reservoir_scale = value
         elif p.key == "observable.air_water_partition_constant":
             k_aw = 10.0 ** value
         elif p.key == "observable.hs_spme_same_sample_dispersion":
@@ -629,10 +997,14 @@ def draw_from_rng(
                 merged = dict(frozen_sulfur[block]); merged.update(value); maillard[block] = merged
             else:
                 maillard[block] = value
-        for block in ("log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol", "decay_Ea_kJ_mol"):
-            maillard.setdefault(block, frozen_sulfur[block])
+        for block in ("log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol", "decay_Ea_kJ_mol",
+                      "formation_Ea_by_route_kJ_mol", "oxygen", "oxygen_log10_k"):
+            if block in frozen_sulfur:
+                maillard.setdefault(block, frozen_sulfur[block])
         ph_drift = sulfur["ph_drift"]
         coords.update(sulfur["coords"])
+    if oxygen:
+        maillard["oxygen"] = oxygen   # B11: the drawn consumers (only when a B11 report ships)
     if b3_k or b3_ea:
         frozen_b3 = frozen_parameters(ACRYLAMIDE)
         k_block = dict(frozen_b3["log10_k_ref_at_160C"]); k_block.update(b3_k)
@@ -648,6 +1020,13 @@ def draw_from_rng(
         lipid_fraction_scale=_scale(lipid_u, lipid_lo, lipid_hi),
         peroxide_scale=_scale(pv_u, pv_lo, pv_hi),
         furanone_partition_ea_kj_mol=furanone,
+        trunk_aw_scale=trunk_aw_scale,
+        trunk_ph_exponent=trunk_ph_exponent,
+        acrylamide_aw_scale=acrylamide_aw_scale,
+        acrylamide_aw_elimination_scale=acrylamide_aw_elimination_scale,
+        acrylamide_ph_exponent_formation=acrylamide_ph_exponent_formation,
+        acrylamide_ph_exponent_elimination=acrylamide_ph_exponent_elimination,
+        oxygen_reservoir_scale=reservoir_scale,
         ph_drift=ph_drift,  # the wave's Laplace covariance when present, else the frozen calibration
     )
     coords["lipid.fraction_scale"] = core.lipid_fraction_scale if core.lipid_fraction_scale is not None else float("nan")
@@ -825,9 +1204,9 @@ def propagate_panel(
     else:
         results = [_run_draw(task) for task in tasks]
     for per_draw in results:
-        for job, values in zip(jobs, per_draw):
+        for job, values in zip(jobs, per_draw, strict=True):
             rows = benches[job.bench_index]["rows"]
-            for compound, value in zip(job.compounds, values):
+            for compound, value in zip(job.compounds, values, strict=True):
                 if value is not None and math.isfinite(value):
                     rows[compound]["samples"].append(value)
 
@@ -947,7 +1326,14 @@ def propagate_panel(
                     "together with median_ci_width_log10: a wide interval covering "
                     "a measurement is a weak claim. The SULFUR lane's identified "
                     "coordinates are sampled jointly from the shipped wave's Laplace covariance "
-                    "(see priors[]); unidentified ones stay at the optimum."
+                    "(see priors[]); UNIDENTIFIED ones are drawn uniformly across their "
+                    "declared bands (2026-09-04), narrowed for an activation energy to the "
+                    "prefactor prior and skipped where the bound is definitional rather than "
+                    "measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: "
+                    "widening the parameter priors all the way to uncapped moves coverage from "
+                    "19 % to 21 % against a nominal 90 %. What is left is model-structure "
+                    "error -- systematic per-lane offsets a draw around a wrong centre cannot "
+                    "reproduce -- not parameter uncertainty."
                 ),
             },
             "observable_multiplier_policy": {

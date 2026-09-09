@@ -339,14 +339,16 @@ Each section maps to one validation gap identified in the SLR protocol. For each
 
 **Citation:** Gorissen SHM et al. *Protein content and amino acid composition of commercially available plant-based protein isolates.* Amino Acids. 2018;50(12):1685–1695. DOI: [10.1007/s00726-018-2640-5](https://doi.org/10.1007/s00726-018-2640-5)
 
-**Matrix:** Pea isolate, soy isolate, wheat, casein  
-**Method:** Amino acid analysis by acid hydrolysis (total composition, not reactive fraction)  
+**Matrix:** Pea isolate (mean of 3 commercial products), soy isolate (mean of 7), with wheat, casein and others  
+**Method:** UPLC-MS/MS after 6 M HCl hydrolysis for 12 h, no performic-acid oxidation (so cysteine and methionine are lower bounds); protein by Dumas N x 6.25  
 
-**Key values (g AA per 100g protein, approximate):**
-| Protein | Lysine | Cysteine | Methionine | Asparagine |
+**Key values as printed (corrected 2026-09-09 against the paper, `gorissen2018_extraction.md` sec. 4; the earlier table here carried numbers that are not in the paper):**
+| Protein | Lysine | Cysteine (lower bound) | Methionine (lower bound) | Arginine |
 |---|---|---|---|---|
-| Pea isolate | ~7.2 | ~0.9 | ~0.9 | ~4.5 (Asn+Asp) |
-| Soy isolate | ~6.4 | ~1.1 | ~1.3 | ~5.0 (Asn+Asp) |
+| Pea isolate | 4.7 g/100 g raw material = 5.9 % of protein (0.40 mmol/g protein) | 0.2 g/100 g raw material (~0.25 g/100 g protein) | 0.3 g/100 g raw material = 0.4 % of protein | 5.9 g/100 g raw material |
+| Soy isolate | 3.4 g/100 g raw material = 4.6 % of protein (0.31 mmol/g protein) | 0.2 g/100 g raw material (~0.27 g/100 g protein) | 0.3 g/100 g raw material = 0.4 % of protein | 4.8 g/100 g raw material |
+
+Asparagine is not reported separately (acid hydrolysis returns Asx). Jaeger 2023 (one commercial isolate each, ion chromatography, `jaeger2023_extraction.md` Table 1) gives lysine 6.40 (pea) and 5.34 (soy) g/100 g dry matter and methionine + cysteine 0.61 / 0.94 g/100 g dry matter; the two isolate sources disagree by about 25 % on lysine, which is the band `data/species/protein_matrices.yml` carries (pea 0.40-0.70, soy 0.31-0.58 mmol amine per g protein).
 
 **Benchmark use (SECONDARY):** Provides the denominator for % reactive fractions. Combine with reactive fraction data from §2.1–2.2 to compute `reactive_lys / total_lys` ratio. Needed to parameterize the Lysine Budget relative to protein composition inputs.
 

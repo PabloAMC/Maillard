@@ -1,0 +1,399 @@
+{
+  "artifact": "figure_inputs",
+  "what": "the records behind docs/assets/thiol_sink/*.png: the freshness gate re-hashes every input and every figure listed here, so the figures cannot lag the artifacts without failing CI",
+  "builders": {
+    "scripts/generators/build_reaction_tree.py": {
+      "inputs": [
+        "results/validation/core_panel_scores.json",
+        "results/validation/core_prediction_uncertainty.json",
+        "results/validation/kinetic_core_b9_fit_report.json",
+        "results/validation/kinetic_core_b9_laplace_covariance.json",
+        "scripts/generators/build_reaction_tree.py",
+        "src/kinetic_core/acrylamide.py",
+        "src/kinetic_core/lipid.py",
+        "src/kinetic_core/matrix_sites.py",
+        "src/kinetic_core/network.py",
+        "src/kinetic_core/parameters.py",
+        "src/kinetic_core/parameters_acrylamide.py",
+        "src/kinetic_core/parameters_dicarbonyl.py",
+        "src/kinetic_core/parameters_furanic.py",
+        "src/kinetic_core/parameters_lipid.py",
+        "src/kinetic_core/parameters_pyrazine.py",
+        "src/kinetic_core/parameters_sulfur.py",
+        "src/kinetic_core/species.py",
+        "src/kinetic_core/species_acrylamide.py",
+        "src/kinetic_core/species_sulfur.py",
+        "src/kinetic_core/sulfur.py"
+      ],
+      "figures": {
+        "10_tree_sugar.png": "b99febf43fa78ee0bd80ca1298d7e39916190103a5b476de16b1118675ba4364",
+        "11_tree_sulfur.png": "cb0aae542e9bd87d1332399ee554e120908cedce5e5238e1ceba77eb4bc600fe",
+        "12_tree_acrylamide.png": "fdb088c6b1dde1edb2d4f7fed086d16d00ba98903d3a84683812f1de45fed520",
+        "13_steps_by_status.png": "938aa96166307f0ca489940f9029be1d69175392f609a849d7ced5ac9c835df1"
+      }
+    },
+    "scripts/generators/build_thiol_sink_figures.py": {
+      "inputs": [
+        "data/keys/papers.yml",
+        "docs/validation/directional_claims_panel.yml",
+        "results/validation/core_directional_scores.json",
+        "results/validation/core_panel_scores.json",
+        "results/validation/core_prediction_uncertainty.json",
+        "results/validation/kinetic_core_b16_ship_rule.json",
+        "results/validation/kinetic_core_b9_fit_report.json",
+        "results/validation/kinetic_core_b9_laplace_covariance.json",
+        "scripts/generators/build_reaction_tree.py",
+        "scripts/generators/build_thiol_sink_figures.py",
+        "src/kinetic_core/acrylamide.py",
+        "src/kinetic_core/lipid.py",
+        "src/kinetic_core/matrix_sites.py",
+        "src/kinetic_core/network.py",
+        "src/kinetic_core/parameters.py",
+        "src/kinetic_core/parameters_acrylamide.py",
+        "src/kinetic_core/parameters_dicarbonyl.py",
+        "src/kinetic_core/parameters_furanic.py",
+        "src/kinetic_core/parameters_lipid.py",
+        "src/kinetic_core/parameters_pyrazine.py",
+        "src/kinetic_core/parameters_sulfur.py",
+        "src/kinetic_core/species.py",
+        "src/kinetic_core/species_acrylamide.py",
+        "src/kinetic_core/species_sulfur.py",
+        "src/kinetic_core/sulfur.py"
+      ],
+      "figures": {
+        "00_map.png": "027b40b1850000d75b13ff527b9186219b98d4dc9aca54cfabcadd90e65393de",
+        "01_hofmann_pot_100C.png": "d6c782025cab29da8161f1f94e2232090fddcd47e5456c37f6b8727dc99c7baa",
+        "02_wang2022_shapes.png": "3367bd5cf87e5f2cc3955c5535299e9dec8a33bfcf08fd4df10289e0cf87ebb5",
+        "03_liu2023_168C.png": "1113948b95b865cf25660cae19c88a88fa05323dfe8fb2c9975be08f5733433b",
+        "04_yiltirak_ladder.png": "376df2a20d865a3cd30dc9423bb8b8c684f64b2f17fb42ad39fb33f752435c30",
+        "05_ttca_decay.png": "14da22a3c177b07dc4c2c01a0f54741a120c8253f107087c715b642777cd9444",
+        "06_dicarbonyls_water.png": "5e49dbce9ce01dd6adcc91d0af893e6aade2f8a6d387df58390f8a0f73504397",
+        "07_literature_funnel.png": "54d7eeade8118f84385ca7d2faeb2ebb8e67e44b7848f7d0f4eee4d6d998fb95",
+        "08_path_scorecard.png": "06e45d1b326f2c29f9f3605967669d3ca6ff2bfbf3256be000353c18ac71219d",
+        "09_repository_flow.png": "ce1998b349e78c129def870d52cc2ae2cd4a53b323cd18083b2a42098caf3e09",
+        "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
+        "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
+        "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
+        "17_papers_by_weight.png": "653c705d9f1ced9414997dd99c127c38a6c4862860cce4013bf1d25d1f44a882",
+        "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
+        "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
+        "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
+        "21_parity.png": "b8d88c87fae4468a1d1525f2104e51be94e398dec83a6ae93e82df0578578c05",
+        "22_no_number.png": "b1820e92bfbcb2e8f1d7eee7552eaae26b852a7c3115797faac016e47698d851"
+      }
+    },
+    "scripts/generators/build_story_figures.py": {
+      "inputs": [
+        "data/lit/reaction_rules.yml",
+        "data/species/desirable_targets.yml",
+        "data/species/off_flavour_targets.yml",
+        "data/species/protein_matrices.yml",
+        "docs/examples/reading_2026_ladder.yml",
+        "results/validation/core_panel_scores.json",
+        "results/validation/kinetic_core_b17_ship_rule.json",
+        "results/validation/kinetic_core_b17a_ship_rule.json",
+        "results/validation/kinetic_core_b18_ship_rule.json",
+        "results/validation/kinetic_core_b9_fit_report.json",
+        "results/validation/network_hypotheses.json",
+        "scripts/generators/build_story_figures.py",
+        "src/kinetic_core/acrylamide.py",
+        "src/kinetic_core/lipid.py",
+        "src/kinetic_core/matrix_sites.py",
+        "src/kinetic_core/network.py",
+        "src/kinetic_core/parameters.py",
+        "src/kinetic_core/parameters_acrylamide.py",
+        "src/kinetic_core/parameters_dicarbonyl.py",
+        "src/kinetic_core/parameters_furanic.py",
+        "src/kinetic_core/parameters_lipid.py",
+        "src/kinetic_core/parameters_pyrazine.py",
+        "src/kinetic_core/parameters_sulfur.py",
+        "src/kinetic_core/species.py",
+        "src/kinetic_core/species_acrylamide.py",
+        "src/kinetic_core/species_sulfur.py",
+        "src/kinetic_core/sulfur.py"
+      ],
+      "figures": {
+        "23_coverage_of_declared_targets.png": "3848623b77d0da9e6fba7ba7528b0574c22e616108aa5e1becffe70bc9bb19fa",
+        "24_fat_path_hexanal.png": "6dd1a389f3ee6fb84426d97bec3130f508445be5094980052c96c93cbb936a9e",
+        "25_protein_matrix_layer.png": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6",
+        "26_hypothesis_layer.png": "99b7db1ac77b16160a407d892e21f31358a6606c9e5672ff75f45703a121b2c7",
+        "27_pyrazine_step_supply.png": "91def689a3e0d6e85fc889a39b454f4bf7c3a874531795cdb9cb223e9d62195c",
+        "28_two_refused_sinks.png": "e9df171dc56dbf7da46d5afef26ecfa2a97eb335443ccd453f3ca03c98f83ec1",
+        "29_calibration_reading_ladder.png": "c9c970b470677083f7f9dfcf385c71089f03973ca2d6cec3dae418df5ae0c15d"
+      }
+    }
+  },
+  "provenance": {
+    "artifact": "figure_inputs",
+    "generated_on": "2026-09-09",
+    "git": {
+      "commit": "1bab9e158800e78b86fd6303ac7f7df0c968efe0",
+      "short": "1bab9e15",
+      "branch": "cleaning",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/figure_manifest.py",
+    "inputs": [
+      {
+        "path": "data/keys/papers.yml",
+        "sha256": "6e13c7beb3b442093f67ae6b03e93bf3baf06c741181a7d61aaad241f704c3f4"
+      },
+      {
+        "path": "data/lit/reaction_rules.yml",
+        "sha256": "1a4d1eb49170a78de1c7588c3eb39659f95e7094063aefd4b555aac580a4de6b"
+      },
+      {
+        "path": "data/species/desirable_targets.yml",
+        "sha256": "1b605afb440354e4fefbe50f17c568d73c2009920a6a05e4eb84b179ff6d3879"
+      },
+      {
+        "path": "data/species/off_flavour_targets.yml",
+        "sha256": "a7e17039f75cc8d0ae142dfcce42756cbd581a2d160c3cd36f1b61a0fb37e8e3"
+      },
+      {
+        "path": "data/species/protein_matrices.yml",
+        "sha256": "9a9b47e9104faa3659662ccccebde6375fc478cfb96b35b438adc9d99fe4e1f0"
+      },
+      {
+        "path": "docs/examples/reading_2026_ladder.yml",
+        "sha256": "5c98ffb412e4bef167b6eca921b44b51786b40fc2dd65ff891c0cfeeaf545799"
+      },
+      {
+        "path": "docs/validation/directional_claims_panel.yml",
+        "sha256": "1e6a62cef12231ce4a32757bde7cca2bcee78dc28d174154dea7be7ba4bb22a3"
+      },
+      {
+        "path": "results/validation/core_directional_scores.json",
+        "sha256": "01cbcd93e6eef2cadf8e645927804650f242959f63212e5cef162f195b6dd6b1"
+      },
+      {
+        "path": "results/validation/core_panel_scores.json",
+        "sha256": "38b1dfe393e25f2256f7c5f407e6162e80b3b7e9a71b805181395f0583fd077f"
+      },
+      {
+        "path": "results/validation/core_prediction_uncertainty.json",
+        "sha256": "6c97c08882a16c424dd0362afa9eeb8f3795bb5f3070b7be2724e868ed5c9265"
+      },
+      {
+        "path": "results/validation/kinetic_core_b16_ship_rule.json",
+        "sha256": "5019c2677d490c39d749e066d13a9c4f35a4c1ce4393c60e390280e26474bca5"
+      },
+      {
+        "path": "results/validation/kinetic_core_b17_ship_rule.json",
+        "sha256": "9e54c867d6c42bf7294ebbc9092d550245c06694d4da103bcb78312542e2e4be"
+      },
+      {
+        "path": "results/validation/kinetic_core_b17a_ship_rule.json",
+        "sha256": "4fa2fa6a595ec9b0118aa47b158b58b1c582e6b15b3f9b12024f44a73597af42"
+      },
+      {
+        "path": "results/validation/kinetic_core_b18_ship_rule.json",
+        "sha256": "c557bfdfc10881d63a477aaa2884a4df79cad2a24363fec3b79766654f7637c3"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
+        "sha256": "219cf3a887b27f44b0ced51f273458e5e622e867ced4d74efce4a2587e9a8379"
+      },
+      {
+        "path": "results/validation/network_hypotheses.json",
+        "sha256": "d71c8daa82e18d5834ca2ae709c194892a748c3b710e90cec4bb81eee4b93557"
+      },
+      {
+        "path": "scripts/generators/build_reaction_tree.py",
+        "sha256": "6a67c5e9270fb965f6fdf69ffb7e5893d8b0c34c86d7d94c29af3ea557327508"
+      },
+      {
+        "path": "scripts/generators/build_story_figures.py",
+        "sha256": "d5e34625e9c43063aea6379daec8727983beedfcbb26b6199df9fe6a72c1367b"
+      },
+      {
+        "path": "scripts/generators/build_thiol_sink_figures.py",
+        "sha256": "3264207fc01d4cddec02035863699417ff57244f3ea2f989f6cf5ecf8c6f5a74"
+      },
+      {
+        "path": "src/kinetic_core/acrylamide.py",
+        "sha256": "68797fc715ced720e7621403ea42d9fdbf2a0e550a585f1e7f0f0e12a7f78ce2"
+      },
+      {
+        "path": "src/kinetic_core/lipid.py",
+        "sha256": "def3be8a29d7347c1838e0a55a93dafcbc3c9069ff49fb58824725c18f6bf542"
+      },
+      {
+        "path": "src/kinetic_core/matrix_sites.py",
+        "sha256": "0c6216d771210c78031af19f492051a340286453aec83904f55cdabcb8c6b65a"
+      },
+      {
+        "path": "src/kinetic_core/network.py",
+        "sha256": "ad68a1345f782ca71c4a8e95574a92d92477d077e84aebac5bdbb2e9e660f489"
+      },
+      {
+        "path": "src/kinetic_core/parameters.py",
+        "sha256": "a12e3aa94144d3e6b557378f7a432ec0ca11ac3c12423337eb1e58f48e7217fa"
+      },
+      {
+        "path": "src/kinetic_core/parameters_acrylamide.py",
+        "sha256": "3ecd1eb04b479d66a162cbe038a2eb872723330e9deca6ada34252bcd6b71eaa"
+      },
+      {
+        "path": "src/kinetic_core/parameters_dicarbonyl.py",
+        "sha256": "d3b21777fff8d42b3c1834c92d3fdf05cd2b0312d5c207b7ca00be1add76e980"
+      },
+      {
+        "path": "src/kinetic_core/parameters_furanic.py",
+        "sha256": "7f8295b882106148abe4063100375b43f5ca9ac8d66cf5076af807f6effd74bb"
+      },
+      {
+        "path": "src/kinetic_core/parameters_lipid.py",
+        "sha256": "16a15f2f9f3a9a02b05988d02feccff88590a1ebe5353241b0fee771a6319418"
+      },
+      {
+        "path": "src/kinetic_core/parameters_pyrazine.py",
+        "sha256": "cf0e505472323d73517781bf245451ae9666128aee12efb8f74245e48630593a"
+      },
+      {
+        "path": "src/kinetic_core/parameters_sulfur.py",
+        "sha256": "0a2288f69923e4d2c3d7c35f73ac78410fcd0b974d8eb38764bab2f09289fc56"
+      },
+      {
+        "path": "src/kinetic_core/species.py",
+        "sha256": "cdec66cf5d345ce6930f5ec004d82b85a21de89572b911ffe71f19bcdb591f76"
+      },
+      {
+        "path": "src/kinetic_core/species_acrylamide.py",
+        "sha256": "e3101a832e83cbc55754530b030012e8a209f5313e179640d0e2ec51b38c9526"
+      },
+      {
+        "path": "src/kinetic_core/species_sulfur.py",
+        "sha256": "2cb87f2b5804a65d52a7106a2256abdd7eba3023f8810b65209cc1310dfe845a"
+      },
+      {
+        "path": "src/kinetic_core/sulfur.py",
+        "sha256": "5ce0cff9d2372cdbdf02f5cb45d39d2d4da155e0b712f6923cf60ec9bd80bded"
+      },
+      {
+        "path": "docs/assets/thiol_sink/00_map.png",
+        "sha256": "027b40b1850000d75b13ff527b9186219b98d4dc9aca54cfabcadd90e65393de"
+      },
+      {
+        "path": "docs/assets/thiol_sink/01_hofmann_pot_100C.png",
+        "sha256": "d6c782025cab29da8161f1f94e2232090fddcd47e5456c37f6b8727dc99c7baa"
+      },
+      {
+        "path": "docs/assets/thiol_sink/02_wang2022_shapes.png",
+        "sha256": "3367bd5cf87e5f2cc3955c5535299e9dec8a33bfcf08fd4df10289e0cf87ebb5"
+      },
+      {
+        "path": "docs/assets/thiol_sink/03_liu2023_168C.png",
+        "sha256": "1113948b95b865cf25660cae19c88a88fa05323dfe8fb2c9975be08f5733433b"
+      },
+      {
+        "path": "docs/assets/thiol_sink/04_yiltirak_ladder.png",
+        "sha256": "376df2a20d865a3cd30dc9423bb8b8c684f64b2f17fb42ad39fb33f752435c30"
+      },
+      {
+        "path": "docs/assets/thiol_sink/05_ttca_decay.png",
+        "sha256": "14da22a3c177b07dc4c2c01a0f54741a120c8253f107087c715b642777cd9444"
+      },
+      {
+        "path": "docs/assets/thiol_sink/06_dicarbonyls_water.png",
+        "sha256": "5e49dbce9ce01dd6adcc91d0af893e6aade2f8a6d387df58390f8a0f73504397"
+      },
+      {
+        "path": "docs/assets/thiol_sink/07_literature_funnel.png",
+        "sha256": "54d7eeade8118f84385ca7d2faeb2ebb8e67e44b7848f7d0f4eee4d6d998fb95"
+      },
+      {
+        "path": "docs/assets/thiol_sink/08_path_scorecard.png",
+        "sha256": "06e45d1b326f2c29f9f3605967669d3ca6ff2bfbf3256be000353c18ac71219d"
+      },
+      {
+        "path": "docs/assets/thiol_sink/09_repository_flow.png",
+        "sha256": "ce1998b349e78c129def870d52cc2ae2cd4a53b323cd18083b2a42098caf3e09"
+      },
+      {
+        "path": "docs/assets/thiol_sink/10_tree_sugar.png",
+        "sha256": "b99febf43fa78ee0bd80ca1298d7e39916190103a5b476de16b1118675ba4364"
+      },
+      {
+        "path": "docs/assets/thiol_sink/11_tree_sulfur.png",
+        "sha256": "cb0aae542e9bd87d1332399ee554e120908cedce5e5238e1ceba77eb4bc600fe"
+      },
+      {
+        "path": "docs/assets/thiol_sink/12_tree_acrylamide.png",
+        "sha256": "fdb088c6b1dde1edb2d4f7fed086d16d00ba98903d3a84683812f1de45fed520"
+      },
+      {
+        "path": "docs/assets/thiol_sink/13_steps_by_status.png",
+        "sha256": "938aa96166307f0ca489940f9029be1d69175392f609a849d7ced5ac9c835df1"
+      },
+      {
+        "path": "docs/assets/thiol_sink/14_field_scheme.png",
+        "sha256": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58"
+      },
+      {
+        "path": "docs/assets/thiol_sink/15_field_coverage.png",
+        "sha256": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665"
+      },
+      {
+        "path": "docs/assets/thiol_sink/16_how_a_kinetic_model_works.png",
+        "sha256": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f"
+      },
+      {
+        "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
+        "sha256": "653c705d9f1ced9414997dd99c127c38a6c4862860cce4013bf1d25d1f44a882"
+      },
+      {
+        "path": "docs/assets/thiol_sink/18_lab_spread.png",
+        "sha256": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703"
+      },
+      {
+        "path": "docs/assets/thiol_sink/19_what_papers_report.png",
+        "sha256": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6"
+      },
+      {
+        "path": "docs/assets/thiol_sink/20_one_number.png",
+        "sha256": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24"
+      },
+      {
+        "path": "docs/assets/thiol_sink/21_parity.png",
+        "sha256": "b8d88c87fae4468a1d1525f2104e51be94e398dec83a6ae93e82df0578578c05"
+      },
+      {
+        "path": "docs/assets/thiol_sink/22_no_number.png",
+        "sha256": "b1820e92bfbcb2e8f1d7eee7552eaae26b852a7c3115797faac016e47698d851"
+      },
+      {
+        "path": "docs/assets/thiol_sink/23_coverage_of_declared_targets.png",
+        "sha256": "3848623b77d0da9e6fba7ba7528b0574c22e616108aa5e1becffe70bc9bb19fa"
+      },
+      {
+        "path": "docs/assets/thiol_sink/24_fat_path_hexanal.png",
+        "sha256": "6dd1a389f3ee6fb84426d97bec3130f508445be5094980052c96c93cbb936a9e"
+      },
+      {
+        "path": "docs/assets/thiol_sink/25_protein_matrix_layer.png",
+        "sha256": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6"
+      },
+      {
+        "path": "docs/assets/thiol_sink/26_hypothesis_layer.png",
+        "sha256": "99b7db1ac77b16160a407d892e21f31358a6606c9e5672ff75f45703a121b2c7"
+      },
+      {
+        "path": "docs/assets/thiol_sink/27_pyrazine_step_supply.png",
+        "sha256": "91def689a3e0d6e85fc889a39b454f4bf7c3a874531795cdb9cb223e9d62195c"
+      },
+      {
+        "path": "docs/assets/thiol_sink/28_two_refused_sinks.png",
+        "sha256": "e9df171dc56dbf7da46d5afef26ecfa2a97eb335443ccd453f3ca03c98f83ec1"
+      },
+      {
+        "path": "docs/assets/thiol_sink/29_calibration_reading_ladder.png",
+        "sha256": "c9c970b470677083f7f9dfcf385c71089f03973ca2d6cec3dae418df5ae0c15d"
+      }
+    ]
+  }
+}

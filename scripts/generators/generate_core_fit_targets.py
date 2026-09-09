@@ -67,14 +67,27 @@ def main(argv=None) -> int:
                     "anchor": row.get("anchor", ""),
                 }
             )
+        if row.get("benchmark_id_b"):
+            # B10: a within-study FOLD reads two bundles' values (numerator and
+            # denominator); both leave the strict out-of-sample count.
+            rows.append(
+                {
+                    "id": row["id"] + "__denominator",
+                    "benchmark_id": row["benchmark_id_b"],
+                    "compound": row["benchmark_compound"],
+                    "kind": row["kind"],
+                    "anchor": row.get("anchor", ""),
+                }
+            )
     payload = {
         "artifact": "kinetic_core_fit_targets",
         "lane": "sulfur",
         "fit_report": data_paths.rel(Path(B8.OUT_FIT_REPORT)),
         "generated_by": "scripts/generators/generate_core_fit_targets.py",
         "declaration": (
-            "Level rows of the sulfur objective that are ALSO scored panel bundles. Ratio, share "
-            "and conversion rows constrain nothing a bundle scores and are not listed. Leverage "
+            "Level rows of the sulfur objective that are ALSO scored panel bundles, and (B10) the "
+            "within-study FOLD rows that read two bundles' values. Ratio, share and conversion rows "
+            "that read no bundle constrain nothing a bundle scores and are not listed. Leverage "
             f"is {n_free} free parameters over {n_rows} rows, below the per-row-recovery "
             "threshold: these bundles stay in the coverage counts, annotated in_core_fit."
         ),

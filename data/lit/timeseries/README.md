@@ -40,7 +40,7 @@ files that sentence is now **superseded by this table**, and the fit is the reas
 paragraph below still stands and why the fit was built to be auditable rather than
 convenient.
 
-**This repository has been burned by invented literature values.** See `AUDIT.md` at the
+**This repository has been burned by invented literature values.** See `docs/history/AUDIT_legacy_lane_2026-08.md` at the
 repository root: a 2026-08 audit found roughly 30–45% citation contamination across the
 reference set, anchors tuned to benchmarks that did not exist, and a validation headline
 that was circular. That history is why every file here carries its own provenance block,

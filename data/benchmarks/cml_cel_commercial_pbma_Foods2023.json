@@ -16,7 +16,17 @@
     "temp_C": 150,
     "ph": 6.1,
     "water_activity": 0.45,
-    "time_min": 20
+    "time_min": 20,
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "no cook",
+      "atmosphere": "not_applicable",
+      "water_source": "not_applicable",
+      "stirred": null,
+      "provenance_class": "not_applicable",
+      "provenance_note": "Fu et al. 2023 (Foods, PMC10217484): a survey of COMMERCIAL plant-based meat analogues; the bundle's conditions block is a proxy operating point, not a cook the paper ran. There is no vessel to record (not_applicable). Verified from the PMC full text on 2026-09-04; see content_verification."
+    }
   },
   "metadata": {
     "tier": "PRIMARY",

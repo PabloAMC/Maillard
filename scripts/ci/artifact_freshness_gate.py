@@ -83,12 +83,19 @@ def _live_wishlist() -> Dict:
     return build()
 
 
+def _live_hypotheses() -> Dict:
+    from src.network_hypotheses.report import build
+
+    return build()
+
+
 REGENERATE: Dict[str, Callable[[], Dict]] = {
     "results/validation/core_panel_scores.json": _live_scorecard,
     "results/validation/core_directional_scores.json": _live_directional,
     "results/validation/kinetic_core_b9_fit_targets.json": _live_fit_targets,
     "results/validation/experiment_value_ranking.json": _live_ranking,
     "results/validation/data_wishlist.json": _live_wishlist,
+    "results/validation/network_hypotheses.json": _live_hypotheses,
 }
 
 

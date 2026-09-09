@@ -21,7 +21,7 @@ This report defines and validates the minimum external evidence package for unlo
 
 ## 3. Chemical Justification: Why Ribose + Cysteine in a Pea Matrix
 
-Pea protein isolate is sulfur-deficient relative to animal muscle. Total cysteine content in PPI is approximately 0.8–1.1 g per 100 g protein (Gorissen et al. 2018), but the fraction accessible for Maillard reaction is substantially lower: cysteine is predominantly buried in legumin and vicilin disulfide bridges, and the free thiol fraction under native conditions is near or below detection by Ellman's assay (Prigent et al. 2024). Endogenous ribose is similarly negligible in a cleaned isolate.
+Pea protein isolate is sulfur-deficient relative to animal muscle. Total cysteine in commercial PPI is 0.2 g per 100 g raw material by acid hydrolysis without performic-acid oxidation (a lower bound; Gorissen et al. 2018, mean of three products), 0.74–0.90 g per 100 g protein as half-cystine by Ellman's assay after reduction (Gao et al. 2020; 0.061–0.074 mmol/g), and 0.61 g per 100 g dry matter as methionine + cysteine (Jaeger et al. 2023); the fraction accessible for Maillard reaction is lower still: cysteine is predominantly buried in legumin and vicilin disulfide bridges, and the free thiol fraction under native conditions is near or below detection by Ellman's assay (Prigent et al. 2024). Endogenous ribose is similarly negligible in a cleaned isolate.
 
 The exogenous 1 mM ribose + 1 mM cysteine system is therefore the minimal, cleanest precursor pair capable of producing the target meaty-positive compound panel under aqueous heating conditions. This system is anchored by two tiers of literature evidence:
 

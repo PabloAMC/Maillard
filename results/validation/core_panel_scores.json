@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (93 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (102 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -43,10 +43,10 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-09-04",
+    "generated_on": "2026-09-09",
     "git": {
-      "commit": "1bc4d331d9d3bcb7ca86801e4058a544c2853274",
-      "short": "1bc4d331",
+      "commit": "452381a983b9525c0054b3515991904b53209027",
+      "short": "452381a9",
       "branch": "cleaning",
       "dirty": true
     },
@@ -74,151 +74,151 @@
       },
       {
         "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
-        "sha256": "4699e53b76ceff1821cf3681bd6f8e5f59e0b8c8186da82f3998211d9cf22c0a"
+        "sha256": "fe72f4553a2644fd6abfb24e881ccc62e435a648a973976d5fd46bc5a345e1a8"
       },
       {
         "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
-        "sha256": "541e98c54b9b584d2c09ddb13e308c7f73f06d612a5f7f7959812ee77bfd94dc"
+        "sha256": "329fe17a3b13b88a77ae1810614dbbf7b91db3c95367afaf420b098dbb367dae"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
-        "sha256": "d644025955106a09705322456bbc7d42bbb40f43e511ef26d1c49401901d97c8"
+        "sha256": "b7630539c622871bf44daab616f78042bd625e103d6ec76a44237e9dae63ad9b"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
-        "sha256": "a97b2f836fbb496cf0a3e76a39d4bac8381d259be541d3bb72be466800fc718a"
+        "sha256": "a664ad21718aff7209097d0b6909b463e6f91b5d3dd4784383e5820a1ab51eca"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
-        "sha256": "9118ecd5fac0616effadec76e18704a5ab757fbeee39e594bf795db550435b95"
+        "sha256": "a96fa8fc437d9fee0e69fe8004da06479edbf51cc7d31af64529c9b7e2d3ed5d"
       },
       {
         "path": "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
-        "sha256": "de58e0a35af4d53200a571f5b27191f83e4f36e3805b8034d0b43c87f3e30707"
+        "sha256": "db8fb70d862597dfe04b2272f93c1b50188d1f3b25a5c58fb7c7339a1d50082c"
       },
       {
         "path": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
-        "sha256": "8abd0b3982e2f369c96c3e9e5518a965a887844baf53550ff80bcc87ef45a867"
+        "sha256": "87caac1c46a24d7c44a7a0aea2b7964d5c0a1e70991838a007f4b5d4212d773a"
       },
       {
         "path": "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
-        "sha256": "9c89e375838920b7007288ec978873b3ae962ef7cf34d6011581d0e96fd3e5d4"
+        "sha256": "60bc7cc5c7e04ee3c53cf731f48c3aa1c4bf775552ad6f0d4e35cf79e5fc9a90"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
-        "sha256": "e6998c36fb400bd3374cc4f4820a1aaddf499b3c6648575bd99bd15df73e6723"
+        "sha256": "d31fdfdaa704aac64d820c772c86a60b3de9ab9b7a8e8d40f8a4bd53ca947524"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
-        "sha256": "fc3db9a908ae46b7e64edc222c4353402c509f5a9f9a3aea77ff50eb2fbca887"
+        "sha256": "e32d49f3e456f31e4a2c607280774ec6c8a2b8de520eed5ba7c035410cd6fac8"
       },
       {
         "path": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
-        "sha256": "962869636c313102e4fe0a221687b1e3e4b9fefd7ef3bcd349c47d2ebdbaf908"
+        "sha256": "8de992ed19dee9d8534960cc15748edec9b052112046d21e4b340144881aa8a6"
       },
       {
         "path": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
-        "sha256": "17b002345118637ecc62fdc69c73754d44cbd3a0119affde0fbe790ccee0ef59"
+        "sha256": "2ee2e0225360ec05da37dc5bf2f1f82d970c25ccd0471a70bd73978d2addbb5c"
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "8e7ecea3a7b4c267a96168aeb18c00308623717d8308346a1dc46e79558981b0"
+        "sha256": "2e64e3a6ced769a1733018e0fe7a1d084c9939c49b8f76487d0c544026e3468f"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
-        "sha256": "575d6be493b225f56fbda67013f3f75d8161366af8bd5e42cb256c9fa5052b90"
+        "sha256": "d4595d306169a2a81a2981f0dfdd0460b8d0025bd4963d45c753c459d05ba7d7"
       },
       {
         "path": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
-        "sha256": "1d5afbecf77fa95fc2c5a0be1bf44810800d9ff261a1eb195eb5bfa792825467"
+        "sha256": "cb306359d0570595692a5b85fa262318640c98a843b9ea901c8cc1a6448463c0"
       },
       {
         "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
-        "sha256": "91e4fc7681971254c7f8d30cb83a3a083e0e5f7d0243580759754fb9c85ded1f"
+        "sha256": "969d7072680549faf00c19514f0b07d060fd934ecd03ee0ac9c10b5e8fcef8e0"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
-        "sha256": "8669b741a3344d7e21359e2eb6808ae577459eb9dcf4bd084a35217f52bea073"
+        "sha256": "c10cf27277211e7668b68d39001af274d971f012b6e292fb37bd88997f3a9425"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json",
-        "sha256": "e43ce5974fff91771da1bb29b21654fd163e56732674dbf960857c7ef6c3587e"
+        "sha256": "4005557191b26f4992b15281cca5c730bd497244a5ec03846003f43e72634c50"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019.json",
-        "sha256": "a5477cc81cb8c1803c749c8a9258979802d20b3c251f7271cda276a37f469fe9"
+        "sha256": "337ad5e3c9b8af0a9b9fe9d68aa9218f7f50406a655aaf48f8a6790588b39509"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_10min_Chang2021.json",
-        "sha256": "40adeb2f3aa00763dcff437924f1f805a6f71e9042798eb268d5d8d6816557bb"
+        "sha256": "61219f743234159c82ed2648a33e0c45b15bd7d55027c90b72a45aa6ea25d843"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_Chang2021.json",
-        "sha256": "82472cfc95e6676d68a6369e1a1d3ee9a4ad9582d018287d93f932c482d4d351"
+        "sha256": "dbb843c04dd7f3ff9f61653898a5d890bbf7ce265a0d254a9c925d2436b22d88"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_water_Chang2021.json",
-        "sha256": "d3816842f0a4d738b4470c21821922231abf30983f47984583374a6b983b4ab4"
+        "sha256": "2dd3955fa3252822552472480dc72c72055ce3afdce26398d8e7461d66583184"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_Ye2024.json",
-        "sha256": "c782e0e62303a8579fcb2c35ecf9666f69a5e25ba911d43b583e864581066970"
+        "sha256": "e78a2b62c9ed32bafb966b8d181897283e4681b49a810f72f9f26d496694efbe"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "e461ef1b967c2ad8acf90b59753c3e0b3f26ea929fb60713f7709653e9311c49"
+        "sha256": "3004872736bab6ff8809d21fae8eeabe039e72349238dc414dbed9748218d567"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
-        "sha256": "a51bb3a5ec4a09cbc49f2acceb2e4e34cefa282a357eea4dd4d3ff35d62e4db9"
+        "sha256": "3bd440ee7f86492ded7609ea9cdf62fa109178a2ec87c5a4e8f5f787646ad4ed"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json",
-        "sha256": "18cf754d141e3a2b638f2359ae324968453bfb624ae291a5d65e882f5fcc8e24"
+        "sha256": "af1adbd38b4e055579bb5304860b7ad9fc16345d20c954183dcf7e78c13b61c0"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json",
-        "sha256": "1bfe2d288c4162ff269377b5ffe7c5f69bc1c0b0481a47ba4c5fad221b6163a8"
+        "sha256": "63cfc172d57e28c02d11c719a8880cdad2dd01789bf34aa51a2c0f3354b379f1"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
-        "sha256": "1bda1201a663af1b17d8ff690208b87a1c25f92a47cf92f185cd852a93f9dfae"
+        "sha256": "edd2b24080574d112ed271161472ec0f903f145946f450e65cdd890bd3c9521a"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
-        "sha256": "5a90a4d3232fd187436f7f3d84b202ac713f48b4dbd4f931ea8397017c3c4b2c"
+        "sha256": "0d216cda3fe110c1ca452e944f8846836cbe675079fad8057d9f2a5a4f203f86"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
-        "sha256": "cf20032ad04e00325be93f5fc65aae4e3389825c78cd9a4f772f1f57ca819996"
+        "sha256": "2ec1bc44f15f3523bff139164c0b3cd94d6e8b3e51c820fbee8e7685ae3a19f8"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json",
-        "sha256": "0d460ef5b166dcf24126f56e64d84d35509e1818117a2dd61763cedb434dbd47"
+        "sha256": "d6379ca0eb39fd844e6cd40aad744d31e027bf76f030ceac7dccf87a96e3d33c"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json",
-        "sha256": "ce93fcdf369236d48943780b69e4c2834ee1ed2fa3b3ae6664895d5f8023d8da"
+        "sha256": "1e1ede1bd7ad93aafb3bf3d5b810c074622185328ac1609ae395e10129801594"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json",
-        "sha256": "72eac1cb54b9137fece172391ee1d3f007a4323d7e9e26311f20174bcf630f41"
+        "sha256": "00daaa8e537c8f1fec02d7fb670b9aa8bcf8e9f267f562d8d0c278360420d0ea"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
-        "sha256": "dca526d221bba25ef9fe4b75817a9de704974a37980f3944c45d77c0eff196b1"
+        "sha256": "91c4b50a985cd842cfb5e0a4398ebdc027239250db937a52554646b7235f944d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
-        "sha256": "769621a705a54f132ed8ce56e8fa9f691d81ec4bc6c2238662f6fcdec7c485f5"
+        "sha256": "aa199ad5b23935fd2d20cf5cd2b4bdf0c9cc8b3692cf580e370ef31d5fdfea7d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
-        "sha256": "8ad9a432ada669eb18c8e6b2df2de5c222676cbd47f3ea601be1ee0314517ece"
+        "sha256": "ad0f6b15622d1defd7b22d53d0517c2a92612132b211eba378ec696aeb41c52d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
-        "sha256": "81d7b20add9ed45541298837f3d1b1491cf1967a050f61694d08abc3ad9da18f"
+        "sha256": "6142251527d63cc0b1b88375b9369ab187254f052590ee905bbcd2f0f2ab2f67"
       }
     ]
   },
@@ -255,11 +255,11 @@
     "within_band_rate": 0.10256410256410256,
     "fold_summary": {
       "n": 39,
-      "median_fold_error": 29.475375451170162,
+      "median_fold_error": 29.45034969216489,
       "worst_fold_error": 33391.73597895205,
-      "best_fold_error": 2.007304382023992,
-      "median_abs_log10_error": 1.4694593457546732,
-      "geometric_mean_fold": 43.20653770646806
+      "best_fold_error": 1.9901918483315129,
+      "median_abs_log10_error": 1.4690904559474305,
+      "geometric_mean_fold": 43.78902159636351
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -293,11 +293,11 @@
         "within_band_rate": 0.11538461538461539,
         "fold_summary": {
           "n": 26,
-          "median_fold_error": 26.518640020975525,
-          "worst_fold_error": 480.87283165370377,
-          "best_fold_error": 2.007304382023992,
-          "median_abs_log10_error": 1.4208348694118356,
-          "geometric_mean_fold": 25.730697543150896
+          "median_fold_error": 26.506389554613264,
+          "worst_fold_error": 476.7619131435321,
+          "best_fold_error": 1.9901918483315129,
+          "median_abs_log10_error": 1.420655261269571,
+          "geometric_mean_fold": 25.446802316948606
         }
       },
       "trust_loop": {
@@ -310,10 +310,10 @@
         "fold_summary": {
           "n": 9,
           "median_fold_error": 34.240232376046094,
-          "worst_fold_error": 6077.677246087067,
-          "best_fold_error": 2.322661351654698,
+          "worst_fold_error": 9631.589383870052,
+          "best_fold_error": 2.3158474462062624,
           "median_abs_log10_error": 1.5345367034143473,
-          "geometric_mean_fold": 88.41614948415595
+          "geometric_mean_fold": 96.75044050994008
         }
       }
     },
@@ -327,11 +327,11 @@
         "within_band_rate": 0.1,
         "fold_summary": {
           "n": 30,
-          "median_fold_error": 26.518640020975525,
+          "median_fold_error": 26.506389554613264,
           "worst_fold_error": 33391.73597895205,
-          "best_fold_error": 2.007304382023992,
-          "median_abs_log10_error": 1.4208348694118356,
-          "geometric_mean_fold": 34.85417655022937
+          "best_fold_error": 1.9901918483315129,
+          "median_abs_log10_error": 1.420655261269571,
+          "geometric_mean_fold": 34.520647153078386
         }
       },
       "predictive": {
@@ -344,10 +344,10 @@
         "fold_summary": {
           "n": 9,
           "median_fold_error": 34.240232376046094,
-          "worst_fold_error": 6077.677246087067,
-          "best_fold_error": 2.322661351654698,
+          "worst_fold_error": 9631.589383870052,
+          "best_fold_error": 2.3158474462062624,
           "median_abs_log10_error": 1.5345367034143473,
-          "geometric_mean_fold": 88.41614948415595
+          "geometric_mean_fold": 96.75044050994008
         }
       }
     },
@@ -361,11 +361,11 @@
         "within_band_rate": 0.16666666666666666,
         "fold_summary": {
           "n": 12,
-          "median_fold_error": 7.284575399912638,
-          "worst_fold_error": 4246.739680377244,
+          "median_fold_error": 7.728216855637109,
+          "worst_fold_error": 9631.589383870052,
           "best_fold_error": 2.047740794591987,
-          "median_abs_log10_error": 0.8585876378143256,
-          "geometric_mean_fold": 21.944531819264835
+          "median_abs_log10_error": 0.8806143995319421,
+          "geometric_mean_fold": 23.060159777741976
         }
       },
       "lipid": {
@@ -393,11 +393,11 @@
         "within_band_rate": 0.10526315789473684,
         "fold_summary": {
           "n": 19,
-          "median_fold_error": 29.475375451170162,
-          "worst_fold_error": 480.87283165370377,
-          "best_fold_error": 2.007304382023992,
-          "median_abs_log10_error": 1.4694593457546732,
-          "geometric_mean_fold": 30.396912193435167
+          "median_fold_error": 29.45034969216489,
+          "worst_fold_error": 476.7619131435321,
+          "best_fold_error": 1.9901918483315129,
+          "median_abs_log10_error": 1.4690904559474305,
+          "geometric_mean_fold": 30.280663015052614
         }
       },
       "trunk": {
@@ -409,11 +409,11 @@
         "within_band_rate": 0.0,
         "fold_summary": {
           "n": 1,
-          "median_fold_error": 11.929988259675033,
-          "worst_fold_error": 11.929988259675033,
-          "best_fold_error": 11.929988259675033,
-          "median_abs_log10_error": 1.0766400162804963,
-          "geometric_mean_fold": 11.929988259675033
+          "median_fold_error": 11.930016362529066,
+          "worst_fold_error": 11.930016362529066,
+          "best_fold_error": 11.930016362529066,
+          "median_abs_log10_error": 1.0766410393242571,
+          "geometric_mean_fold": 11.930016362529063
         }
       }
     },
@@ -426,11 +426,11 @@
       "within_band_rate": 0.10256410256410256,
       "fold_summary": {
         "n": 39,
-        "median_fold_error": 29.475375451170162,
+        "median_fold_error": 29.45034969216489,
         "worst_fold_error": 33391.73597895205,
-        "best_fold_error": 2.007304382023992,
-        "median_abs_log10_error": 1.4694593457546732,
-        "geometric_mean_fold": 43.20653770646806
+        "best_fold_error": 1.9901918483315129,
+        "median_abs_log10_error": 1.4690904559474305,
+        "geometric_mean_fold": 43.78902159636351
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
@@ -443,11 +443,11 @@
       "within_band_rate": 0.07894736842105263,
       "fold_summary": {
         "n": 38,
-        "median_fold_error": 31.85780391360813,
+        "median_fold_error": 31.845291034105493,
         "worst_fold_error": 33391.73597895205,
-        "best_fold_error": 2.007304382023992,
-        "median_abs_log10_error": 1.5019980245845104,
-        "geometric_mean_fold": 46.661536331841056
+        "best_fold_error": 1.9901918483315129,
+        "median_abs_log10_error": 1.501813579680889,
+        "geometric_mean_fold": 47.31092438076307
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -460,11 +460,11 @@
       "within_band_rate": 1.0,
       "fold_summary": {
         "n": 1,
-        "median_fold_error": 2.322661351654698,
-        "worst_fold_error": 2.322661351654698,
-        "best_fold_error": 2.322661351654698,
-        "median_abs_log10_error": 0.3659858934726781,
-        "geometric_mean_fold": 2.322661351654698
+        "median_fold_error": 2.3158474462062624,
+        "worst_fold_error": 2.3158474462062624,
+        "best_fold_error": 2.3158474462062624,
+        "median_abs_log10_error": 0.3647099473468732,
+        "geometric_mean_fold": 2.3158474462062624
       },
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
@@ -473,7 +473,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.0
+    "wall_seconds": 9.4
   },
   "benchmarks": [
     {
@@ -499,6 +499,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "continuous_process",
+        "water_source": "not_applicable",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "continuous",
+        "basis": "continuous process: no fixed headspace; oxygen access is process-specific"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.2,
@@ -510,14 +520,14 @@
           "target_unit": "ppb",
           "measured": 150.0,
           "measured_ppb": 150.0,
-          "predicted": 0.03532121375206951,
-          "fold_error": 4246.739680377244,
-          "abs_log10_error": 3.628055640119312,
+          "predicted": 0.015573753616532265,
+          "fold_error": 9631.589383870052,
+          "abs_log10_error": 3.9836979593663417,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.005050118090443184,
-            0.24704137974126053
+            0.002226687209194401,
+            0.10892495394366666
           ],
           "measured_within_interval": false,
           "lane": "acrylamide",
@@ -526,8 +536,8 @@
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
             "the lipid lane's rate anchor was measured at 25 C and this program peaks at 130.0 C: 10.5 decades of 10 C, a factor of 1.45e+03-1.02e+05 on the rate.",
             "'Soy protein isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (50) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14/B15): a_w 0.35 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.75 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
@@ -538,8 +548,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 4246.739680377244,
-      "mean_abs_log10_error": 3.628055640119312,
+      "max_ratio": 9631.589383870052,
+      "mean_abs_log10_error": 3.9836979593663417,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -547,8 +557,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 4247 > 1.50",
-        "mean |log10 ratio| 3.628 > 0.200"
+        "max ratio 9632 > 1.50",
+        "mean |log10 ratio| 3.984 > 0.200"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -578,6 +588,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 1.8,
         "mean_abs_log10_error": 0.25,
@@ -665,6 +685,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -742,6 +775,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -819,6 +865,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -878,6 +937,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -965,6 +1037,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1024,6 +1109,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1111,6 +1209,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1122,14 +1233,14 @@
           "target_unit": "ppb",
           "measured": 1016.0,
           "measured_ppb": 1016.0,
-          "predicted": 2359.823933281173,
-          "fold_error": 2.322661351654698,
-          "abs_log10_error": 0.3659858934726781,
+          "predicted": 2352.9010053455627,
+          "fold_error": 2.3158474462062624,
+          "abs_log10_error": 0.3647099473468732,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            337.40034018581224,
-            16504.929998054562
+            336.4105213236444,
+            16456.51009716816
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1145,8 +1256,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 2.322661351654698,
-      "mean_abs_log10_error": 0.3659858934726781,
+      "max_ratio": 2.3158474462062624,
+      "mean_abs_log10_error": 0.3647099473468732,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1154,8 +1265,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 2.323 > 1.10",
-        "mean |log10 ratio| 0.366 > 0.041"
+        "max ratio 2.316 > 1.10",
+        "mean |log10 ratio| 0.365 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -1203,6 +1314,19 @@
       ],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 50.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 150.0,
+        "status": "computed",
+        "o2_mmol": 1.3196981128642125,
+        "thiol_mmol": 1.0,
+        "o2_to_thiol": 1.3196981128642125,
+        "basis": "150.0 mL headspace of air at closure = 1.320 mmol O2 over 1.000 mmol thiol charged = 1.32 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1262,6 +1386,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -1273,14 +1410,14 @@
           "target_unit": "ppb",
           "measured": 121.0,
           "measured_ppb": 121.0,
-          "predicted": 834.3907135306974,
-          "fold_error": 6.895791020914855,
-          "abs_log10_error": 0.8385840915871423,
+          "predicted": 830.6428774567905,
+          "fold_error": 6.864817169064384,
+          "abs_log10_error": 0.8366289751454157,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            119.29860809645258,
-            5835.84229468448
+            118.76275406579249,
+            5809.629418727244
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1296,14 +1433,14 @@
           "target_unit": "ppb",
           "measured": 198.0,
           "measured_ppb": 198.0,
-          "predicted": 731.0652308544799,
-          "fold_error": 3.6922486406791912,
-          "abs_log10_error": 0.5672909392766813,
+          "predicted": 730.6381801003546,
+          "fold_error": 3.6900918186886593,
+          "abs_log10_error": 0.567037172623479,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            104.52544959375625,
-            5113.169795887099
+            104.46439119542137,
+            5110.182944748314
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1319,8 +1456,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 6.895791020914855,
-      "mean_abs_log10_error": 0.7029375154319117,
+      "max_ratio": 6.864817169064384,
+      "mean_abs_log10_error": 0.7018330738844474,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1328,8 +1465,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 6.896 > 1.10",
-        "mean |log10 ratio| 0.703 > 0.041"
+        "max ratio 6.865 > 1.10",
+        "mean |log10 ratio| 0.702 > 0.041"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -1359,6 +1496,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -1399,7 +1546,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1449,6 +1596,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='dynamic_headspace_gcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "continuous_process",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "continuous",
+        "basis": "continuous process: no fixed headspace; oxygen access is process-specific"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -1488,7 +1645,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1548,6 +1705,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -1559,14 +1726,14 @@
           "target_unit": "ppb",
           "measured": 715.22,
           "measured_ppb": 715.22,
-          "predicted": 7.665186067299656,
-          "fold_error": 93.30758493276376,
-          "abs_log10_error": 1.9699169487899462,
+          "predicted": 7.665186085783273,
+          "fold_error": 93.30758470776443,
+          "abs_log10_error": 1.9699169477427005,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.09594463816564,
-            53.611355355200516
+            1.0959446408083704,
+            53.61135548447745
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -1582,8 +1749,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 93.30758493276376,
-      "mean_abs_log10_error": 1.9699169487899462,
+      "max_ratio": 93.30758470776443,
+      "mean_abs_log10_error": 1.9699169477427005,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1622,6 +1789,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "not_applicable",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -1662,7 +1839,7 @@
           "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -1712,6 +1889,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='internal_standard_gcms_sim'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "distilled",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 33.3,
+        "vessel_mL": 125.0,
+        "headspace_mL": 91.7,
+        "status": "computed",
+        "o2_mmol": 0.8075134463309884,
+        "thiol_mmol": 0.38960999999999996,
+        "o2_to_thiol": 2.072619918202789,
+        "basis": "91.7 mL headspace of air at closure = 0.808 mmol O2 over 0.390 mmol thiol charged = 2.07 mol/mol (air by default; water: distilled)"
+      },
       "scale_thresholds": {
         "max_ratio": 3.0,
         "mean_abs_log10_error": 0.48,
@@ -1723,14 +1913,14 @@
           "target_unit": "ppb",
           "measured": 11.7,
           "measured_ppb": 11.7,
-          "predicted": 236.00845194867944,
-          "fold_error": 20.171662559716193,
-          "abs_log10_error": 1.3047416944821888,
+          "predicted": 235.9729649351512,
+          "fold_error": 20.168629481636856,
+          "abs_log10_error": 1.3046763876136034,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            33.74375979969499,
-            1650.675257346859
+            33.738685976064446,
+            1650.4270563409013
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -1746,8 +1936,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 20.171662559716193,
-      "mean_abs_log10_error": 1.3047416944821888,
+      "max_ratio": 20.168629481636856,
+      "mean_abs_log10_error": 1.3046763876136034,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1786,6 +1976,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -1797,21 +1997,21 @@
           "target_unit": "ppb",
           "measured": 1859.0,
           "measured_ppb": 1859.0,
-          "predicted": 225.43991770383184,
-          "fold_error": 8.24609953256917,
-          "abs_log10_error": 0.916248572544491,
+          "predicted": 203.19417771430946,
+          "fold_error": 9.148884190046772,
+          "abs_log10_error": 0.9613681301697311,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            32.23270340299214,
-            1576.7574894010468
+            29.05207618148847,
+            1421.1677540382593
           ],
           "measured_within_interval": false,
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -1821,21 +2021,21 @@
           "target_unit": "ppb",
           "measured": 12280.0,
           "measured_ppb": 12280.0,
-          "predicted": 1942.1003374734485,
-          "fold_error": 6.3230512672561066,
-          "abs_log10_error": 0.8009267030841603,
+          "predicted": 1946.873339428069,
+          "fold_error": 6.307549521227448,
+          "abs_log10_error": 0.7998606688941531,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            277.67551015020894,
-            13583.314274903636
+            278.357939233364,
+            13616.697300658467
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -1847,8 +2047,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 8.24609953256917,
-      "mean_abs_log10_error": 0.8585876378143256,
+      "max_ratio": 9.148884190046772,
+      "mean_abs_log10_error": 0.8806143995319421,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1856,8 +2056,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 8.246 > 1.50",
-        "mean |log10 ratio| 0.859 > 0.100"
+        "max ratio 9.149 > 1.50",
+        "mean |log10 ratio| 0.881 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -1887,6 +2087,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='internal_standard_with_measured_response_factors'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -1911,8 +2121,8 @@
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 5 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14/B15): a_w 0.98 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.38 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.54 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "DMHF/furanone: the formation edge carries NO activation energy of its own -- none exists in the literature, on any edge, from any of the five papers in the cluster, all of which are single-temperature. Its temperature dependence is INHERITED from the measured 1-deoxyosone step. The reported interval spans a +/-50 kJ/mol partition barrier and is priced by re-integration, not nominated.",
             "DMHF: the LEVEL of the hexose route is a DECLARED TRANSFER from the pentose calibration. There is no absolute hexose DMHF yield in any of the five papers of the cluster -- the intact-C6 structure is settled twice over by CAMOLA and the magnitude is measured nowhere. Blank 1997's 39 cells are all pentose; Wang & Ho's nine are all per mole of methylglyoxal.",
             "DMHF: the Edge B (methylglyoxal, C3+C3) level is DIGITISED FROM A BAR CHART with no text layer, by external-standard HPLC with no recovery correction and an unstated pH hold -- three transmission defects deep, carried as a PRIOR ONLY. Its bracket (below detection in situ; 8-13 % in a real bean; 20 % at a 1.4 M methylglyoxal spike) is a hold-out, not a fit.",
@@ -1939,8 +2149,8 @@
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 5 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14/B15): a_w 0.98 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.38 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.54 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -2004,6 +2214,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='internal_standard_with_measured_response_factors'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2028,8 +2248,8 @@
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 8 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14/B15): a_w 0.98 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.91 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.51 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "DMHF/furanone: the formation edge carries NO activation energy of its own -- none exists in the literature, on any edge, from any of the five papers in the cluster, all of which are single-temperature. Its temperature dependence is INHERITED from the measured 1-deoxyosone step. The reported interval spans a +/-50 kJ/mol partition barrier and is priced by re-integration, not nominated.",
             "DMHF: the LEVEL of the hexose route is a DECLARED TRANSFER from the pentose calibration. There is no absolute hexose DMHF yield in any of the five papers of the cluster -- the intact-C6 structure is settled twice over by CAMOLA and the magnitude is measured nowhere. Blank 1997's 39 cells are all pentose; Wang & Ho's nine are all per mole of methylglyoxal.",
             "DMHF: the Edge B (methylglyoxal, C3+C3) level is DIGITISED FROM A BAR CHART with no text layer, by external-standard HPLC with no recovery correction and an unstated pH hold -- three transmission defects deep, carried as a PRIOR ONLY. Its bracket (below detection in situ; 8-13 % in a real bean; 20 % at a 1.4 M methylglyoxal spike) is a hold-out, not a fit.",
@@ -2056,8 +2276,8 @@
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 8 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14/B15): a_w 0.98 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.91 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.51 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -2121,6 +2341,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2132,21 +2362,21 @@
           "target_unit": "ppb",
           "measured": 28.0,
           "measured_ppb": 28.0,
-          "predicted": 6749.564611049618,
-          "fold_error": 241.0558789660578,
-          "abs_log10_error": 2.382117727693673,
+          "predicted": 6110.035819625069,
+          "fold_error": 218.21556498660962,
+          "abs_log10_error": 2.338885724926507,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            965.0319092695293,
-            47207.37418228687
+            873.5940571729786,
+            42734.422711061605
           ],
           "measured_within_interval": false,
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2156,8 +2386,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 241.0558789660578,
-      "mean_abs_log10_error": 2.382117727693673,
+      "max_ratio": 218.21556498660962,
+      "mean_abs_log10_error": 2.338885724926507,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2165,8 +2395,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 241.1 > 1.50",
-        "mean |log10 ratio| 2.382 > 0.100"
+        "max ratio 218.2 > 1.50",
+        "mean |log10 ratio| 2.339 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -2196,6 +2426,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2207,21 +2447,21 @@
           "target_unit": "ppb",
           "measured": 1459.0,
           "measured_ppb": 1459.0,
-          "predicted": 4031.1000028318,
-          "fold_error": 2.7629198100286496,
-          "abs_log10_error": 0.4413682802956478,
+          "predicted": 3679.8891690436685,
+          "fold_error": 2.522199567541925,
+          "abs_log10_error": 0.40177944688941636,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            576.35423265979,
-            28194.062456764223
+            526.1391919841519,
+            25737.6460502353
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2231,8 +2471,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 2.7629198100286496,
-      "mean_abs_log10_error": 0.4413682802956478,
+      "max_ratio": 2.522199567541925,
+      "mean_abs_log10_error": 0.40177944688941636,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2240,8 +2480,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 2.763 > 1.50",
-        "mean |log10 ratio| 0.441 > 0.100"
+        "max ratio 2.522 > 1.50",
+        "mean |log10 ratio| 0.402 > 0.100"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -2271,6 +2511,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "distilled",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 100.0,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2282,21 +2532,21 @@
           "target_unit": "ppb",
           "measured": 832.0,
           "measured_ppb": 832.0,
-          "predicted": 4031.1000028318,
-          "fold_error": 4.845072118788221,
-          "abs_log10_error": 0.6853002458983755,
+          "predicted": 3679.8891690436685,
+          "fold_error": 4.422943712792871,
+          "abs_log10_error": 0.645711412492144,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            576.35423265979,
-            28194.062456764223
+            526.1391919841519,
+            25737.6460502353
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2306,21 +2556,21 @@
           "target_unit": "ppb",
           "measured": 7000.0,
           "measured_ppb": 7000.0,
-          "predicted": 2108.359358496727,
-          "fold_error": 3.3201171194037067,
-          "abs_log10_error": 0.5211534040093394,
+          "predicted": 2191.616920021592,
+          "fold_error": 3.19398884725303,
+          "abs_log10_error": 0.5043333953388062,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            301.44671166277976,
-            14746.152512466057
+            313.3506207575874,
+            15328.467237474348
           ],
           "measured_within_interval": true,
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -2332,8 +2582,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 4.845072118788221,
-      "mean_abs_log10_error": 0.6032268249538575,
+      "max_ratio": 4.422943712792871,
+      "mean_abs_log10_error": 0.5750224039154751,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2341,8 +2591,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 4.845 > 1.50",
-        "mean |log10 ratio| 0.603 > 0.100"
+        "max ratio 4.423 > 1.50",
+        "mean |log10 ratio| 0.575 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -2372,6 +2622,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": 4.0,
+        "vessel_mL": 25.0,
+        "headspace_mL": 21.0,
+        "status": "computed",
+        "o2_mmol": 0.18394773580098972,
+        "thiol_mmol": 0.0,
+        "o2_to_thiol": null,
+        "basis": "21.0 mL headspace of air at closure = 0.184 mmol O2; no free-thiol precursor charged (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2383,9 +2646,9 @@
           "target_unit": "umol_per_mol_limiting_precursor",
           "measured": 140.58,
           "measured_ppb": null,
-          "predicted": 7037.210980274587,
-          "fold_error": 50.058407883586476,
-          "abs_log10_error": 1.6994770326799427,
+          "predicted": 7004.325426111863,
+          "fold_error": 49.82448019712521,
+          "abs_log10_error": 1.6974427765406583,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": null,
@@ -2393,8 +2656,8 @@
           "lane": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 6.86 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-            "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
+            "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
+            "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.03 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.02 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
           "in_core_fit": false
@@ -2404,8 +2667,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 50.058407883586476,
-      "mean_abs_log10_error": 1.6994770326799427,
+      "max_ratio": 49.82448019712521,
+      "mean_abs_log10_error": 1.6974427765406583,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2413,8 +2676,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 50.06 > 1.50",
-        "mean |log10 ratio| 1.699 > 0.100"
+        "max ratio 49.82 > 1.50",
+        "mean |log10 ratio| 1.697 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -2444,6 +2707,16 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='lcmsms_external_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "unstated",
+        "water_source": "unstated",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2455,20 +2728,21 @@
           "target_unit": "ppb",
           "measured": 17400.0,
           "measured_ppb": 17400.0,
-          "predicted": 1458.5093984387515,
-          "fold_error": 11.929988259675033,
-          "abs_log10_error": 1.0766400162804963,
+          "predicted": 1458.505962711969,
+          "fold_error": 11.930016362529066,
+          "abs_log10_error": 1.0766410393242571,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            208.5331707409229,
-            10201.013382072522
+            208.5326795113151,
+            10200.989352131459
           ],
           "measured_within_interval": false,
           "lane": "trunk",
           "envelope_state": "in_envelope_extrapolated",
           "declaration_warnings": [
-            "pH 4.36 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
+            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 121 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
@@ -2480,8 +2754,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 11.929988259675033,
-      "mean_abs_log10_error": 1.0766400162804963,
+      "max_ratio": 11.930016362529066,
+      "mean_abs_log10_error": 1.0766410393242571,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2520,6 +2794,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2589,6 +2876,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2658,6 +2958,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2669,14 +2982,14 @@
           "target_unit": "ppb",
           "measured": 229.0,
           "measured_ppb": 229.0,
-          "predicted": 1136.9362145195905,
-          "fold_error": 4.964786962967644,
-          "abs_log10_error": 0.6959006178278592,
+          "predicted": 1129.4936778940469,
+          "fold_error": 4.932286803030772,
+          "abs_log10_error": 0.6930483220502578,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            162.55562973933667,
-            7951.88673538346
+            161.4915188309384,
+            7899.832620548818
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -2690,14 +3003,14 @@
           "target_unit": "ppb",
           "measured": 553.0,
           "measured_ppb": 553.0,
-          "predicted": 23.47008909527515,
-          "fold_error": 23.561904590780888,
-          "abs_log10_error": 1.372210393068998,
+          "predicted": 23.469566325769907,
+          "fold_error": 23.562429417061633,
+          "abs_log10_error": 1.3722200665917117,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            3.3556808765502213,
-            164.15299976511622
+            3.3556061325803768,
+            164.1493434439952
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2711,8 +3024,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 23.561904590780888,
-      "mean_abs_log10_error": 1.0340555054484286,
+      "max_ratio": 23.562429417061633,
+      "mean_abs_log10_error": 1.0326341943209847,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2721,7 +3034,7 @@
       "strict_ready": false,
       "blocking_issues": [
         "max ratio 23.56 > 1.10",
-        "mean |log10 ratio| 1.034 > 0.041"
+        "mean |log10 ratio| 1.033 > 0.041"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -2751,6 +3064,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2762,14 +3088,14 @@
           "target_unit": "ppb",
           "measured": 12.0,
           "measured_ppb": 12.0,
-          "predicted": 0.08982307088606299,
-          "fold_error": 133.59596684488247,
-          "abs_log10_error": 2.1257933473352506,
+          "predicted": 0.08979930010614205,
+          "fold_error": 133.63133104396243,
+          "abs_log10_error": 2.125908294249195,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.012842625352711422,
-            0.6282347917047418
+            0.01283922667998898,
+            0.6280685356323878
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2783,14 +3109,14 @@
           "target_unit": "ppb",
           "measured": 25.0,
           "measured_ppb": 25.0,
-          "predicted": 0.17817804670134035,
-          "fold_error": 140.3090922974628,
-          "abs_log10_error": 2.1470858150530954,
+          "predicted": 0.1781427726490388,
+          "fold_error": 140.33687490231668,
+          "abs_log10_error": 2.1471718011952854,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.025475347004844873,
-            1.2462015265294457
+            0.025470303629753017,
+            1.2459548150033128
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2804,8 +3130,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 140.3090922974628,
-      "mean_abs_log10_error": 2.136439581194173,
+      "max_ratio": 140.33687490231668,
+      "mean_abs_log10_error": 2.1365400477222405,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2814,7 +3140,7 @@
       "strict_ready": false,
       "blocking_issues": [
         "max ratio 140.3 > 1.10",
-        "mean |log10 ratio| 2.136 > 0.041"
+        "mean |log10 ratio| 2.137 > 0.041"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -2844,6 +3170,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 100.0,
+        "vessel_mL": 200.0,
+        "headspace_mL": 100.0,
+        "status": "computed",
+        "o2_mmol": 0.897798741909475,
+        "thiol_mmol": 3.3,
+        "o2_to_thiol": 0.272060224821053,
+        "basis": "100.0 mL headspace of air at closure = 0.898 mmol O2 over 3.300 mmol thiol charged = 0.27 mol/mol (air by default; water: unstated)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.1,
         "mean_abs_log10_error": 0.0414,
@@ -2855,14 +3194,14 @@
           "target_unit": "ppb",
           "measured": 96.0,
           "measured_ppb": 96.0,
-          "predicted": 192.70122067430324,
-          "fold_error": 2.007304382023992,
-          "abs_log10_error": 0.3026132326819718,
+          "predicted": 191.05841743982523,
+          "fold_error": 1.9901918483315129,
+          "abs_log10_error": 0.2988949430709018,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            27.5518255801944,
-            1347.778583356744
+            27.316942645771178,
+            1336.2885937845406
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -2876,14 +3215,14 @@
           "target_unit": "ppb",
           "measured": 143.0,
           "measured_ppb": 143.0,
-          "predicted": 548.3339081249936,
-          "fold_error": 3.8345028540209345,
-          "abs_log10_error": 0.5837090653512058,
+          "predicted": 546.3981531352598,
+          "fold_error": 3.8209661058409776,
+          "abs_log10_error": 0.5821731852645617,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            78.39908924033489,
-            3835.1220366593207
+            78.12232096841366,
+            3821.5831026107458
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -2897,8 +3236,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 3.8345028540209345,
-      "mean_abs_log10_error": 0.4431611490165888,
+      "max_ratio": 3.8209661058409776,
+      "mean_abs_log10_error": 0.4405340641677318,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2906,8 +3245,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 3.835 > 1.10",
-        "mean |log10 ratio| 0.443 > 0.041"
+        "max ratio 3.821 > 1.10",
+        "mean |log10 ratio| 0.441 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -2937,6 +3276,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -2948,14 +3300,14 @@
           "target_unit": "ppb",
           "measured": 6.88,
           "measured_ppb": 6.88,
-          "predicted": 64.11583482220847,
-          "fold_error": 9.319162038111696,
-          "abs_log10_error": 0.969376863149555,
+          "predicted": 64.08639804316826,
+          "fold_error": 9.314883436507014,
+          "abs_log10_error": 0.9691774246430469,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            9.167084109631729,
-            448.43488134133264
+            9.162875329848598,
+            448.2289964994278
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2969,14 +3321,14 @@
           "target_unit": "ppb",
           "measured": 1.28,
           "measured_ppb": 1.28,
-          "predicted": 615.5172245167408,
-          "fold_error": 480.87283165370377,
-          "abs_log10_error": 2.682030241003555,
+          "predicted": 610.2552488237211,
+          "fold_error": 476.7619131435321,
+          "abs_log10_error": 2.6783015538373025,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            88.00475239414007,
-            4305.011301889863
+            87.25241135554157,
+            4268.208327210308
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2990,8 +3342,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 480.87283165370377,
-      "mean_abs_log10_error": 1.825703552076555,
+      "max_ratio": 476.7619131435321,
+      "mean_abs_log10_error": 1.8237394892401748,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2999,8 +3351,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 480.9 > 1.50",
-        "mean |log10 ratio| 1.826 > 0.100"
+        "max ratio 476.8 > 1.50",
+        "mean |log10 ratio| 1.824 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3030,6 +3382,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -3041,14 +3406,14 @@
           "target_unit": "ppb",
           "measured": 3.29,
           "measured_ppb": 3.29,
-          "predicted": 96.97398523434984,
-          "fold_error": 29.475375451170162,
-          "abs_log10_error": 1.4694593457546732,
+          "predicted": 96.89165048722249,
+          "fold_error": 29.45034969216489,
+          "abs_log10_error": 1.4690904559474305,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            13.865041008271312,
-            678.2492606132134
+            13.853269040329936,
+            677.673400177789
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3062,14 +3427,14 @@
           "target_unit": "ppb",
           "measured": 1.46,
           "measured_ppb": 1.46,
-          "predicted": 541.7719762774003,
-          "fold_error": 371.0766960804112,
-          "abs_log10_error": 2.569463681156992,
+          "predicted": 535.4957642003135,
+          "fold_error": 366.7779206851462,
+          "abs_log10_error": 2.5644031841048083,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            77.46088448428104,
-            3789.226991580282
+            76.56353105887399,
+            3745.33030949128
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3083,8 +3448,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 371.0766960804112,
-      "mean_abs_log10_error": 2.0194615134558327,
+      "max_ratio": 366.7779206851462,
+      "mean_abs_log10_error": 2.0167468200261194,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3092,8 +3457,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 371.1 > 1.50",
-        "mean |log10 ratio| 2.019 > 0.100"
+        "max ratio 366.8 > 1.50",
+        "mean |log10 ratio| 2.017 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3123,6 +3488,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -3134,14 +3512,14 @@
           "target_unit": "ppb",
           "measured": 2.4,
           "measured_ppb": 2.4,
-          "predicted": 134.71098761915158,
-          "fold_error": 56.1295781746465,
-          "abs_log10_error": 1.7491917784193565,
+          "predicted": 134.51295815039995,
+          "fold_error": 56.047065895999985,
+          "abs_log10_error": 1.7485528818992293,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            19.260561098840647,
-            942.186995082897
+            19.232247456800955,
+            940.8019500067786
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3155,14 +3533,14 @@
           "target_unit": "ppb",
           "measured": 1.68,
           "measured_ppb": 1.68,
-          "predicted": 367.70751722775265,
-          "fold_error": 218.8735221593766,
-          "abs_log10_error": 2.340193226731961,
+          "predicted": 363.44467371980704,
+          "fold_error": 216.33611530940897,
+          "abs_log10_error": 2.335129026930121,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            52.57368554145512,
-            2571.796457358575
+            51.96419733792636,
+            2541.981549263514
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3176,8 +3554,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 218.8735221593766,
-      "mean_abs_log10_error": 2.044692502575659,
+      "max_ratio": 216.33611530940897,
+      "mean_abs_log10_error": 2.041840954414675,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3185,8 +3563,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 218.9 > 1.50",
-        "mean |log10 ratio| 2.045 > 0.100"
+        "max ratio 216.3 > 1.50",
+        "mean |log10 ratio| 2.042 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3216,6 +3594,19 @@
       "core_fit_targets": [],
       "quantification_family": "extraction",
       "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "tap",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 3.0,
+        "vessel_mL": 20.0,
+        "headspace_mL": 17.0,
+        "status": "computed",
+        "o2_mmol": 0.14884578612461075,
+        "thiol_mmol": 0.075,
+        "o2_to_thiol": 1.9846104816614767,
+        "basis": "17.0 mL headspace of air at closure = 0.149 mmol O2 over 0.075 mmol thiol charged = 1.98 mol/mol (air by default; water: tap)"
+      },
       "scale_thresholds": {
         "max_ratio": 1.5,
         "mean_abs_log10_error": 0.1,
@@ -3227,14 +3618,14 @@
           "target_unit": "ppb",
           "measured": 1.71,
           "measured_ppb": 1.71,
-          "predicted": 170.93369250984094,
-          "fold_error": 99.96122368996546,
-          "abs_log10_error": 1.999831563966484,
+          "predicted": 170.53361069796648,
+          "fold_error": 99.72725771810906,
+          "abs_log10_error": 1.998813877054251,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            24.439571608991564,
-            1195.5335266310124
+            24.38236914675494,
+            1192.7352999475067
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3248,14 +3639,14 @@
           "target_unit": "ppb",
           "measured": 1.62,
           "measured_ppb": 1.62,
-          "predicted": 213.74510888651994,
-          "fold_error": 131.94142523859256,
-          "abs_log10_error": 2.12038117104285,
+          "predicted": 211.73994164428964,
+          "fold_error": 130.70366768166028,
+          "abs_log10_error": 2.116287774509065,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            30.56061574521394,
-            1494.9624036965042
+            30.273923123736346,
+            1480.9379909000008
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3269,8 +3660,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 131.94142523859256,
-      "mean_abs_log10_error": 2.060106367504667,
+      "max_ratio": 130.70366768166028,
+      "mean_abs_log10_error": 2.057550825781658,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3278,8 +3669,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 131.9 > 1.50",
-        "mean |log10 ratio| 2.060 > 0.100"
+        "max ratio 130.7 > 1.50",
+        "mean |log10 ratio| 2.058 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3309,6 +3700,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -3387,6 +3788,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "open",
+        "water_source": "not_applicable",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "open",
+        "basis": "open vessel: oxygen is not limited by a headspace"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -3464,6 +3875,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_semi_quantitative_internal_standard'",
+      "vessel_oxygen": {
+        "atmosphere": "continuous_process",
+        "water_source": "unstated",
+        "provenance_class": "repo_verbatim_methods_quote",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "continuous",
+        "basis": "continuous process: no fixed headspace; oxygen access is process-specific"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -3513,7 +3934,7 @@
           "panel": "external_matrix",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
@@ -3573,6 +3994,16 @@
       "core_fit_targets": [],
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcmsms_external_standard_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "not_applicable",
+        "water_source": "not_applicable",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "not_applicable",
+        "basis": "no cook"
+      },
       "scale_thresholds": {
         "max_ratio": 2.0,
         "mean_abs_log10_error": 0.12,
@@ -3757,7 +4188,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -3767,7 +4198,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -3787,7 +4218,7 @@
       "panel": "trust_loop",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false
@@ -3867,7 +4298,7 @@
       "panel": "external_matrix",
       "compound": "2-pentylfuran",
       "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false

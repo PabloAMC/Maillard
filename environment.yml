@@ -1,10 +1,10 @@
 # Maillard runtime environment.
 #
-# 2026-09-01 (cleaning branch, Phase 1a): the xTB / DFT / MLP refinement lane was
-# removed, and with it pyscf, xtb, crest, geometric, ase, pytorch, sella, mace-torch,
-# e3nn, huggingface_hub and the pyGSM build patches. Everything listed here is imported
-# by src/, scripts/ or tests/ (checked with grep on that date); do not add a dependency
-# without a consumer.
+# 2026-09-08: trimmed to what src/, scripts/ and tests/ import (checked with grep). The
+# quantum-chemistry stack left on 2026-09-01 with its lane; cantera, optuna, pandas, tqdm,
+# SciencePlots, hypothesis and the notebook stack left on 2026-09-08 because nothing imports
+# them. Do not add a dependency without a consumer. jsonschema is the schema gate's;
+# rdkit rebuilds the compound registry and backs one unit test.
 name: maillard
 channels:
   - conda-forge
@@ -14,18 +14,10 @@ dependencies:
   - setuptools
   - pytest
   - coverage
-  - hypothesis
   - numpy>=2.0
   - scipy
-  - pandas
   - matplotlib
-  - rdkit
-  - cantera>=3.2.0
-  - pyyaml
-  - optuna
   - networkx
-  - jupyter
-  - ipykernel
-  - ipywidgets
-  - pip:
-      - SciencePlots
+  - pyyaml
+  - jsonschema
+  - rdkit

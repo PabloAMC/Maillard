@@ -1,14 +1,44 @@
-# Quick Start
+# Quick start and command reference
 
-*Rewritten 2026-09-03, when the legacy lane was retired, for the one-engine tool. The previous quick start,
-which drove the retired screening lane (`run_pipeline.py`, `optimize_formulation.py`,
-`run_campaign.py`, `ingest_results.py`), is kept at
+*This page installs the tool, runs each verb once and lists every command. The three worked
+examples, and how to read intervals, refusals and declared extrapolations, are in the
+[tutorial](../USING_THE_TOOL.md); the chemistry and how well the model does are in the
+[introduction](INTRODUCTION.md). The quick start of the retired screening lane is kept at
 [`docs/history/QUICKSTART_legacy_lane_2026-09-03.md`](../history/QUICKSTART_legacy_lane_2026-09-03.md).*
 
 ## Goal
 
 Decide, before a GC-MS run, which of two formulations or process settings is more likely to
 give the aroma you want — and see exactly why the model refuses to answer when it cannot.
+
+## What it answers and what it refuses
+
+| you ask | command | it answers with | it refuses when |
+|---|---|---|---|
+| which of two recipes gives more of a compound | `compare` | the ratio between the two, per compound, with what was assumed | the two differ in water activity on the thiol or fat path (no water term), or outside 0.34 to 0.99 on the acrylamide path; they differ in pH on the fat path, or outside pH 4 to 8 on the acrylamide path |
+| how much of a compound one recipe gives | `predict` | a level with an interval and the caveats | the compound is not in the model (2-pentylfuran, nonanal, CML), the thiols are asked from glucose or fructose with cysteine (no route), or a dicarbonyl is asked off the sugar path |
+| where a compound comes from in this model | `explain` | the steps, their rates and the papers behind them, then the steps the literature draws that the model lacks ("possible, not modelled") | never |
+| how good the model is on your own measurements | `score` | the same scorecard the panel gets; nothing is refitted | the rows the panel would refuse |
+| what to measure next | `wishlist`, `rank` | the measurements that would free the most predictions | never |
+| calibrate the model to my laboratory | `calibrate` | a per-laboratory file: response factors from your levels, the few rate constants your contrasts can identify, and the hold-out before and after; apply it with `--calibration` | fewer than one fit record; it never moves the shipped model |
+
+A refusal is an answer: it names the missing term or route. Section 5 of the
+[introduction](INTRODUCTION.md) shows which rows on the test panel are refused and why.
+
+## Install without the container
+
+```bash
+git clone https://github.com/PabloAMC/Maillard.git && cd Maillard
+python -m venv .venv && source .venv/bin/activate
+pip install -e .            # numpy, scipy, pyyaml, jsonschema, matplotlib, networkx; rdkit is optional
+maillard compare --template > my_comparison.yml
+maillard ui                 # a page on this machine: paste a spec, get the report
+```
+
+`maillard` is the same front door as `python scripts/maillard.py`. Only an editable install inside a
+clone is supported: the package reads its data and frozen artifacts relative to the checkout. From
+Python, `from src import api` gives `compare`, `predict`, `explain`, `score` and `calibrate` returning
+the payloads the verbs print; every spec is checked against `data/schemas/spec.schema.json`.
 
 ## Boot the environment
 
@@ -111,7 +141,63 @@ python scripts/maillard.py score my_measurements.yml
 
 Each measured compound is scored the way the panel scores a benchmark (fold error, the 3x band, the
 reliability interval, or a named refusal), and a bundle-shaped record lands under `results/user/` with
-your provenance. Nothing is refitted: calibration on new data is a new pre-registered fit wave.
+your provenance. Nothing is refitted: calibration on new data is always a new pre-registered re-calibration (`scripts/generators/WAVES.md`).
+
+
+## Calibrate to your laboratory: `maillard calibrate`
+
+```bash
+python scripts/maillard.py calibrate my_measurements.yml --lab "my lab"
+python scripts/maillard.py compare my_comparison.yml --calibration results/user/my_lab/calibration_2026-09-08.json
+python scripts/maillard.py calibrate docs/examples/reading_2026_ladder.yml --lab "Reading 2026"   # a real laboratory's ladder, ten seconds
+```
+
+The last line is a worked example: Yiltirak et al. 2026's four-temperature ladder as one laboratory's
+records, two pots fitted and two held out; its card is
+[reading_2026_calibration_card.md](../examples/reading_2026_calibration_card.md).
+
+The same document `score` reads, with four or more pots. Two things are fitted, and only two.
+Your **levels** set a response factor per compound: the offset between what your instrument
+reports and what the model predicts, a property of the measurement, not of the chemistry. Your
+**contrasts**, pots that differ in time, temperature, pH or recipe, may move the few rate
+constants they can identify, each pulled toward the shipped value by its shipped uncertainty; the
+rest stay exactly where they were. Tag pots `role: validate` to hold them out; untagged pots are
+split every second one before the fit. The card says what moved, what could not be identified, and
+the hold-out fold error before and after. The shipped model, the scorecard and every tracked
+artifact are untouched: the calibration is a file under `results/user/<lab>/` that a verb applies
+only when you pass it. Pre-registered in `results/validation/calibration_prereg.md`.
+
+## A protein matrix: `protein_g_per_l` and `protein_sites`
+
+```yaml
+a:
+  name: on_blg
+  precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}
+  temp_C: 145.0
+  time_min: 20.0
+  ph: 5.0
+  aw: 0.98
+  matrix: blg                # on file: blg, soy_isolate, pea_isolate (data/species/protein_matrices.yml)
+  protein_g_per_l: 10.0
+```
+
+With a loading, the protein's reactive sites are charged: the thiols meet the disulfide pool through
+the sulfur lane's exchange channel, and aldehydes and HMF are bound to the amine and thiol pools by
+declared rates from the adduct dossiers, their brackets shown as an interval. On file:
+β-lactoglobulin (from its sequence), soy isolate and pea isolate (measured thiol and disulfide
+densities from several laboratories, the lysine content as the amine pool with a declared
+availability band). For your own isolate, state its sites in mmol per gram:
+
+```yaml
+  protein_g_per_l: 50.0
+  protein_sites: {free_thiol_mmol_per_g: 0.02, disulfide_mmol_per_g: 0.05, amine_mmol_per_g: 0.4}
+```
+
+A named matrix without a loading is refused; a loading with a matrix that has no sites on file
+charges nothing and says so. The pea and soy densities are native values from four papers with
+their spread stated in the table; heating moves them and that is not modelled. If you have your
+own measurement, it goes in the spec and the answer names it. Pre-registered in
+`results/validation/matrix_sites_prereg.md`.
 
 ## Before you trust a result
 

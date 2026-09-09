@@ -79,6 +79,8 @@ def _spec_from_system(name: str, system: Mapping[str, Any]) -> Dict[str, Any]:
     for key in ("matrix", "protein_type"):
         if system.get(key):
             spec["matrix"] = str(system[key])
+    if system.get("buffer"):
+        spec["buffer"] = dict(system["buffer"])   # 2026-09-07: a stated pot is charged as stated
     return spec
 
 
@@ -171,8 +173,45 @@ def _log_step(a: float, b: float) -> Optional[float]:
     return math.log10(a / b)
 
 
+def _with_input(claim: Mapping[str, Any], key: str, value: float) -> Dict[str, Any]:
+    """A copy of the claim with one system field set on every arm (the unstated-input sweep)."""
+    import copy
+
+    out = copy.deepcopy(dict(claim))
+    conditions = out.get("conditions") or {}
+    if isinstance(conditions, Mapping) and "series" in conditions:
+        for item in conditions["series"]:
+            if isinstance(item, Mapping) and item.get("system") is not None:
+                item["system"][key] = value
+    elif isinstance(conditions, Mapping):
+        for k in ("A", "B"):
+            if isinstance(conditions.get(k), Mapping) and conditions[k].get("system") is not None:
+                conditions[k]["system"][key] = value
+    out.pop("unstated_inputs", None)
+    return out
+
+
 def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[str, Any]:
     """Score one claim on the core; never raises for a refusal."""
+    # 2026-09-07: AN UNSTATED INPUT IS SWEPT, NOT INVENTED. A claim whose source leaves one input
+    # unstated (Wang 2026's series pH) declares ``unstated_inputs: {ph: [5, 7, 9]}``; the claim is
+    # scored at every value and the verdict stands only when it is unanimous. A verdict that
+    # depends on the unstated value is NOT EVALUABLE, and says which values agreed.
+    unstated = claim.get("unstated_inputs") or {}
+    if unstated:
+        (key, values), = list(unstated.items())
+        sweeps = [(float(v), score_claim(_with_input(claim, key, float(v)), flat_tolerance_pct=flat_tolerance_pct)) for v in values]
+        statuses = {s["status"] for _, s in sweeps}
+        base = dict(sweeps[0][1])
+        base["unstated_input_sweep"] = {"input": key, "values": [v for v, _ in sweeps],
+                                        "statuses": {str(v): s["status"] for v, s in sweeps}}
+        if len(statuses) == 1 and statuses <= {"agree", "disagree"}:
+            base["reason"] = (base.get("reason") or "") or None
+            base["unstated_input_note"] = f"unanimous over {key} in {[v for v, _ in sweeps]}"
+            return base
+        by = ", ".join(f"{s['status']} at {key} {v:g}" for v, s in sweeps)
+        return {**base, "status": NOT_EVALUABLE,
+                "reason": f"the verdict depends on the unstated input {key} ({by}); the source does not state it"}
     claim_id = str(claim["claim_id"])
     observables = [str(o) for o in claim.get("observables") or []]
     expected = str(claim.get("expected_relation"))
@@ -193,6 +232,27 @@ def score_claim(claim: Mapping[str, Any], *, flat_tolerance_pct: float) -> Dict[
         return {**base, "status": NOT_EVALUABLE, "reason": "the claim carries no runnable conditions (prose-only)", "arms": []}
     if not observables:
         return {**base, "status": NOT_EVALUABLE, "reason": "the claim names no observable", "arms": []}
+    if claim_type == "ranking":
+        # 2026-09-07: ONE pot, SEVERAL observables, listed in the measured order; the core agrees when
+        # its predicted order is the same, each step more than the flat tolerance apart.
+        if len(arms) != 1:
+            return {**base, "status": NOT_EVALUABLE, "reason": "a ranking claim takes exactly one arm", "arms": []}
+        label, system = arms[0]
+        runs = [_predict_arm(f"{label} :: {o}", system, o) for o in observables]
+        refused = [r for r in runs if r["value_ug_per_l"] is None]
+        if refused:
+            reasons = "; ".join(refused[0]["reasons"]) or f"{refused[0]['label']}: no concentration returned"
+            return {**base, "status": NOT_EVALUABLE, "reason": f"observable {refused[0]['label']!r} refused: {reasons[:400]}", "arms": runs}
+        values = [r["value_ug_per_l"] for r in runs]
+        if any(v <= 0.0 for v in values):
+            return {**base, "status": NOT_EVALUABLE, "reason": "a predicted concentration is zero; no ranking is defined", "arms": runs}
+        steps = [math.log10(values[i + 1] / values[i]) for i in range(len(values) - 1)]
+        agree = all(s < -tol for s in steps)
+        return {
+            **base, "status": "agree" if agree else "disagree", "reason": None, "identical_predictions": False,
+            "mechanism_absent": False, "lane": runs[0]["lane"], "values_ug_per_l": values, "log10_steps": steps,
+            "predicted_order": [o for _, o in sorted(zip(values, observables), key=lambda p: -p[0])], "arms": runs,
+        }
     observable = observables[0]  # the panel lists one observable per claim; the first governs
     runs = [_predict_arm(label, system, observable) for label, system in arms]
     # A STRUCTURAL ZERO: the sulfur lane refusing because the charge has no sulfur source

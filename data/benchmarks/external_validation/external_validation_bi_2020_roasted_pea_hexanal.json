@@ -14,6 +14,16 @@
       "provenance_class": "primary_source_pdf",
       "provenance_note": "As the raw-pea bundle: Bi et al. 2020, JAFC 68:2718, p. 2719, distilled water + NaCl for the headspace isolation, and the roasting itself is DRY (forced-air oven, p. 2719 'Sample Preparation and Roasting Procedures'), so there is no aqueous phase to buffer during the reaction at all. Read from data/articles/bi2020.pdf. ph_disagreement: the paper states no pH anywhere; conditions.ph = 6.0 is an unsourced assumption, reported and not edited.",
       "ph_disagreement": "conditions.ph = 6.0 is unsourced: Bi 2020 states no pH."
+    },
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "forced-air oven, 160 C / 30 min, 500 g peas",
+      "atmosphere": "open",
+      "water_source": "not_applicable",
+      "stirred": null,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Bi et al. 2020, JAFC 68:2718, read from data/articles/bi2020.pdf on 2026-09-04; this bundle's content_verification.quoted_conditions, verbatim: 'The roasted peas (500 g) were prepared using an Isotemp forced-air oven at 160 C for 30 min.' An open forced-air oven: oxygen is not limited by a headspace (open). Water source not applicable to dry roasting."
     }
   },
   "denaturation_state": 0.2,

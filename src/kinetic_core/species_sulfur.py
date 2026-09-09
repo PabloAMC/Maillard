@@ -49,7 +49,7 @@ from __future__ import annotations
 
 from typing import Dict, Mapping, Tuple
 
-from .species import SPECIES, Species
+from .species import SPECIES, TRUNK_ONLY_KEYS, Species
 
 # ---------------------------------------------------------------------------
 # The sulfur block
@@ -231,6 +231,23 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
             "of the MFT pool to the dimer and the REDUCED one (cysteine) only "
             "8.6%. The branch responds to REDOX STATE, not to concentration, "
             "so the oxidant is a state variable."),
+    # ---- Wave B11 (2026-09-07): oxygen as an input --------------------------
+    # `OX` keeps its B2.1-B9 meaning (ambient units: 1.0 = the air-saturated liquid
+    # every fit system was integrated at). `OXR` is the headspace reservoir in the
+    # same units per litre of liquid, charged from the bundle's vessel block; `OXV`
+    # is the dissolved-oxygen VACANCY (saturation minus OX), created by every
+    # O2-consuming step and refilled from the reservoir while it lasts. The pair
+    # makes dissolved oxygen a state that can run out, with mass action only.
+    Species("OXR", "headspace oxygen reservoir (ambient units per litre of liquid)", 0, 0,
+            "site", False,
+            "B11. Zero atoms. Charged from conditions.vessel (vessel.py): headspace O2 in "
+            "mmol per litre of liquid divided by the saturation OX_SAT_MMOL_L; the "
+            "declared default when no vessel is recorded is Hofmann 1998's 100 mL pot."),
+    Species("OXV", "dissolved-oxygen vacancy (saturation minus OX, ambient units)", 0, 0,
+            "site", False,
+            "B11. Zero atoms. Every O2-consuming step produces one; ox_supply consumes one "
+            "against the reservoir. OX + OXV is conserved at the saturation value, so OX "
+            "can never exceed it and refills only while OXR > 0."),
     Species("PROT_SS", "protein disulfide sites (matrix input, titrated)", 0, 0,
             "site", False,
             "B2.1, NEW. ZERO atoms: a disulfide-linkage equivalent, in the units "
@@ -340,7 +357,11 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
 #: are preserved exactly.
-SULFUR_STATE: Tuple[Species, ...] = SPECIES + SULFUR_SPECIES
+# B13 (2026-09-07): the trunk's dicarbonyl trio is TRUNK-ONLY (its steps are not in this
+# network), so it is left out of the sulfur state and the shape B9 was fitted on is kept.
+SULFUR_STATE: Tuple[Species, ...] = (
+    tuple(s for s in SPECIES if s.key not in TRUNK_ONLY_KEYS) + SULFUR_SPECIES
+)
 
 SULFUR_STATE_KEYS: Tuple[str, ...] = tuple(s.key for s in SULFUR_STATE)
 SULFUR_INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SULFUR_STATE)}
@@ -386,6 +407,16 @@ TERMINAL_POOLS: Tuple[str, ...] = (
 # Used ONLY to convert a printed ug/L anchor into the module's mmol/L. Every
 # value is the compound's formula weight; none is fitted and none is a rate.
 MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
+    # B13 (2026-09-07): the trunk's dicarbonyl trio
+    "G": 178.14,      # C6H10O6, glucosone
+    "GO": 58.04,      # C2H2O2, glyoxal
+    "DA": 86.09,      # C4H6O2, 2,3-butanedione
+    # B18 (2026-09-08): the trunk's pyrazine step
+    "PZ": 80.09,      # C4H4N2, pyrazine
+    "DMP": 108.14,    # C6H8N2, 2,5-dimethylpyrazine
+    "MPZ": 94.12,     # C5H6N2, 2-methylpyrazine
+    "AKG": 59.07,     # C2H5NO, aminoacetaldehyde
+    "AKM": 73.09,     # C3H7NO, aminoacetone
     "PENT": 150.13,   # C5H10O5, ribose = xylose
     "ARP": 221.21,    # C8H15NO6, 1-deoxy-xylulosyl-alanine
     "Cys": 121.16,    # C3H7NO2S

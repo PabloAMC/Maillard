@@ -38,6 +38,13 @@ TESTS_ROOT: Path = REPO_ROOT / "tests"
 # --------------------------------------------------------------------------- data/ dirs
 LIT_DIR: Path = DATA_ROOT / "lit"
 SPECIES_DIR: Path = DATA_ROOT / "species"
+#: 2026-09-08: SMILES (or registry id) per engine species key; lumps declared as such. Read by the
+#: hypothesis layer (src/network_hypotheses) and its test; never by the engine.
+SPECIES_STRUCTURES: Path = SPECIES_DIR / "structures.yml"
+#: Structures the hypothesis layer's rules name that are NOT engine species (literature intermediates and products).
+LITERATURE_STRUCTURES: Path = SPECIES_DIR / "literature_structures.yml"
+#: 2026-09-08: reactive-site densities per gram of protein for the matrices a dossier states (the matrix layer).
+PROTEIN_MATRICES: Path = SPECIES_DIR / "protein_matrices.yml"
 BENCHMARKS_DIR: Path = DATA_ROOT / "benchmarks"
 PROTOCOLS_DIR: Path = DATA_ROOT / "protocols"
 TIMESERIES_DIR: Path = LIT_DIR / "timeseries"
@@ -55,11 +62,15 @@ COMPOUND_REGISTRY: Path = KEYS_DIR / "compounds.yml"
 PAPER_REGISTRY: Path = KEYS_DIR / "papers.yml"
 
 # --------------------------------------------------------------------------- data/schemas
+#: 2026-09-08: the front door's spec contract (compare, predict, score, calibrate, the API, the page).
+SPEC_SCHEMA: Path = DATA_ROOT / "schemas" / "spec.schema.json"
 SCHEMAS_DIR: Path = DATA_ROOT / "schemas"
 BENCHMARK_SCHEMA: Path = SCHEMAS_DIR / "benchmark.schema.json"
 
 # --------------------------------------------------------------------------- data/lit
 ARRHENIUS_PARAMS: Path = LIT_DIR / "arrhenius_params.yml"
+#: 2026-09-08: the hypothesis layer's cited reaction rules (SMIRKS + controls); never read by the engine.
+REACTION_RULES: Path = LIT_DIR / "reaction_rules.yml"
 HENRY_CONSTANTS: Path = LIT_DIR / "henry_constants.yml"
 BINDING_CONSTANTS: Path = LIT_DIR / "binding_constants.yml"
 LIPID_OXIDATION_CALIBRATION: Path = LIT_DIR / "lipid_oxidation_calibration.json"

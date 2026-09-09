@@ -36,9 +36,17 @@ SIX STANDING POLICIES, ENFORCED HERE
    line 206, Z0 #13). Nothing in the Module 3 fit corpus varies pH: Claeys is
    0.05 M citrate at pH 6, the extrusion benchmark is pH 6, De Vleeschouwer is
    a freeze-dried powder with no pH at all, and Knol is unbuffered aqueous.
-   One pH, therefore no pH term, therefore no place to put a 2000x factor.
+   One pH, therefore no FITTED pH term, therefore no place to put a 2000x factor.
+   B15 (2026-09-07): De Vleeschouwer 2006 (JAFC 54:7847, on disk) measured the
+   same system at initial pH 4 / 6 / 8 and found log k linear in pH (0.54 and
+   0.34 decades per unit for formation and elimination). That MEASURED
+   within-study ratio is installed as a DECLARED factor with a band in
+   ``acrylamide_conditions.py`` (x0.03 on formation at pH 4, not x2000 at
+   pH 5.5); this registry stays homogeneous at NETWORK_PH and the assertion
+   against the fabricated factor stands.
 
-4. **NO WATER-ACTIVITY TERM EITHER -- BUT a_w IS CARRIED ON EVERY ROW.** This
+4. **NO FITTED WATER-ACTIVITY TERM -- BUT a_w IS CARRIED ON EVERY ROW** (B14/B15 add
+   DECLARED ones from De Vleeschouwer 2007/2008 in ``acrylamide_conditions.py``). This
    is the one axis on which the module's own fit corpus is genuinely split:
    Claeys is dilute aqueous (a_w ~ 1.0), De Vleeschouwer is a freeze-dried
    powder at a_w 0.92, and the extrusion benchmark is a_w 0.35. NOTHING in the

@@ -1,0 +1,86 @@
+{
+  "artifact": "maillard_calibration",
+  "lab": "Reading 2026",
+  "base_wave": "kinetic_core_b9",
+  "created": "2026-09-08",
+  "matrix": "water",
+  "response_factors": {
+    "2-methyl-3-furanthiol": {
+      "log10": -1.396223414848047,
+      "factor": 0.04015841700754454,
+      "sigma_log10": 0.26047231360696893,
+      "n_rows": 2
+    },
+    "2-furfurylthiol": {
+      "log10": -2.6792838683052738,
+      "factor": 0.002092744126422769,
+      "sigma_log10": 0.05,
+      "n_rows": 2
+    }
+  },
+  "overrides": [
+    {
+      "coordinate": {
+        "lane": "sulfur",
+        "block": "log10_k_ref_at_145C",
+        "key": "k_fur_decay",
+        "field": null,
+        "log10": false,
+        "prior_key": "b8.k_fur_decay.log10_k_ref_145C",
+        "unit": "log10(k at 145 C)"
+      },
+      "prior_value": 0.4700476884172956,
+      "prior_sigma": 0.4373472219905324,
+      "value": -0.3040223296364756,
+      "sigma": 0.2352458056419559,
+      "shift": -0.7740700180537712,
+      "band": [
+        -10.0,
+        0.5
+      ]
+    },
+    {
+      "coordinate": {
+        "lane": "sulfur",
+        "block": "log10_k_ref_at_145C",
+        "key": "k_fur_fft",
+        "field": null,
+        "log10": false,
+        "prior_key": "b8.k_fur_fft.log10_k_ref_145C",
+        "unit": "log10(k at 145 C)"
+      },
+      "prior_value": -0.6311161311460204,
+      "prior_sigma": 1.02830242946914,
+      "value": -1.678459106726472,
+      "sigma": 1.0233536439362958,
+      "shift": -1.0473429755804515,
+      "band": [
+        -10.0,
+        0.5
+      ]
+    }
+  ],
+  "fit_records": [
+    "yiltirak_100C",
+    "yiltirak_120C"
+  ],
+  "validate_records": [
+    "yiltirak_110C",
+    "yiltirak_130C"
+  ],
+  "notes": [
+    "roles as tagged in the document"
+  ],
+  "provenance": {
+    "artifact": "maillard_calibration",
+    "generated_on": "2026-09-08",
+    "git": {
+      "commit": "630e54a1046a7531e83de8c4b142c42af8173dea",
+      "short": "630e54a1",
+      "branch": "cleaning",
+      "dirty": false
+    },
+    "generated_by": "src/kinetic_core/user_fit.py",
+    "inputs": []
+  }
+}

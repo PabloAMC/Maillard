@@ -60,7 +60,7 @@ import json
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Mapping, Optional, Sequence, Tuple, Callable
 
 import numpy as np
 
@@ -78,7 +78,11 @@ from .matrix_oav import (
 )
 from .parameters import NETWORK_PH
 from .parameters_acrylamide import MEASURED_ACRYLAMIDE, with_fitted_acrylamide
-from .parameters_sulfur import MEASURED_SULFUR, with_fitted_sulfur
+from .parameters_sulfur import (
+    MEASURED_SULFUR, OX_AMBIENT_MMOL_L, OX_RESERVOIR_DEFAULT_UNITS, OX_SAT_MMOL_L,
+    oxygen_parameters, with_fitted_sulfur,
+)
+from . import acrylamide_conditions, trunk_conditions
 from .species import SPECIES_KEYS
 from .species_acrylamide import ACRYLAMIDE_INDEX, acrylamide_ppb
 from .species_sulfur import (
@@ -195,13 +199,42 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     "alanine": "Ala",
     "l-alanine": "Ala",
     "methylglyoxal": "MGO",
+    # B13 (2026-09-07): the dicarbonyl trio
+    "glyoxal": "GO",
+    "glucosone": "G",
+    "diacetyl": "DA",
+    "2,3-butanedione": "DA",
+    "butane-2,3-dione": "DA",
     "norfuraneol": "NF",
     "amadori": "AMA",
     "arp": "ARP",
+    # W6 (2026-09-07): the xylose-cysteine thiazolidine the sulfur lane carries; Zhai 2020 shows the
+    # group's "Cys-Amadori" intermediate is ~94 % TTCA, so those names charge TTCA.
+    "ttca": "TTCA",
+    "2-threityl-thiazolidine-4-carboxylic acid": "TTCA",
+    "2-(tetrahydroxybutyl)thiazolidine-4-carboxylic acid": "TTCA",
+    "cys-amadori": "TTCA",
+    "cysteine amadori": "TTCA",
+    "cysteine-xylose amadori": "TTCA",
+    "xylose-cysteine amadori": "TTCA",
 }
 
 #: Target-compound synonyms -> core species key.
 TARGET_ALIASES: Mapping[str, str] = {
+    # B13 (2026-09-07): the trunk's dicarbonyls, answerable on the trunk lane only
+    "glyoxal": "GO",
+    "glucosone": "G",
+    "diacetyl": "DA",
+    # B18 (2026-09-08): the pyrazine step, trunk lane only
+    "pyrazine": "PZ",
+    "2,5-dimethylpyrazine": "DMP",
+    "2,5-dimethyl pyrazine": "DMP",
+    "dimethylpyrazine": "DMP",
+    "methylpyrazine": "MPZ",
+    "2-methylpyrazine": "MPZ",
+    "2,3-butanedione": "DA",
+    "butane-2,3-dione": "DA",
+    "methylglyoxal": "MGO",
     "acrylamide": "ACR",
     "2-furfurylthiol": "FFT",
     "2-furfurylthiol (fft)": "FFT",
@@ -242,6 +275,10 @@ TARGET_ALIASES: Mapping[str, str] = {
     "furaneol": "DMHF",
     "2,5-dimethyl-4-hydroxy-3(2h)-furanone": "DMHF",
     "3,4-dideoxyglucosone": "DDG",
+    "3-deoxyglucosone": "TDG",
+    "3-dg": "TDG",
+    "1-deoxyglucosone": "ODG",
+    "1-dg": "ODG",
     "acetylformoin": "AF",
 }
 
@@ -304,14 +341,14 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
     "2-pentylfuran": (
         "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The FAST "
-        "lane's shipped 0.08 has no source. Refused rather than invented."
+        "alkylfuran route is measured anywhere in the fit corpus. The retired "
+        "screening lane's shipped 0.08 had no source. Refused rather than invented."
     ),
     "2-pentyl furan": (
         "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The FAST "
-        "lane's shipped 0.08 has no source. Refused rather than invented."
+        "alkylfuran route is measured anywhere in the fit corpus. The retired "
+        "screening lane's shipped 0.08 had no source. Refused rather than invented."
     ),
     "propanal": (
         "The lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
@@ -349,6 +386,17 @@ _TARGET_LANE: Mapping[str, str] = {
     "DMHF": TRUNK,
     "DDG": TRUNK,
     "AF": TRUNK,
+    # -- B13, the dicarbonyl trio: TRUNK species whose STEPS run only when the trunk
+    # integrates on its own (network.TRUNK_REACTIONS); declare_envelope refuses them on
+    # any other lane rather than returning the inert zero the sulfur state would carry.
+    "G": TRUNK,
+    "GO": TRUNK,
+    "DA": TRUNK,
+    "MGO": TRUNK,
+    # -- B18, the pyrazine step: trunk-only as the dicarbonyls are
+    "PZ": TRUNK,
+    "DMP": TRUNK,
+    "MPZ": TRUNK,
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
     "NONANAL": LIPID,
@@ -358,6 +406,12 @@ _TARGET_LANE: Mapping[str, str] = {
     "ME_9_OXONONANOATE": LIPID,
     "ME_13_OXO_TRIDECADIENOATE": LIPID,
 }
+
+#: B13: the species whose steps exist on the trunk integrator only.
+DICARBONYL_TARGET_KEYS: frozenset = frozenset({"G", "GO", "DA"})
+#: B18: the pyrazine species, whose steps also exist on the trunk integrator only.
+PYRAZINE_TARGET_KEYS: frozenset = frozenset({"PZ", "DMP", "MPZ"})
+TRUNK_ONLY_TARGET_KEYS: frozenset = DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
 _PRECURSOR_LANE: Mapping[str, str] = {
@@ -540,6 +594,16 @@ class ProcessSpec:
     ph_drift: Optional[PhDrift] = None
     #: Free-text matrix descriptor, matched against the B4 threshold matrices.
     matrix: str = "water"
+    #: B11 (2026-09-07): the pot's physical state (`vessel.VesselSpec`, from the bundle's
+    #: conditions.vessel). ``None`` = no vessel recorded: the sulfur lane charges the declared
+    #: default reservoir and says so.
+    vessel: Optional[Any] = None
+    #: 2026-09-08 (the matrix layer): protein loading in g/L and, optionally, the isolate's own site
+    #: densities in mmol per gram ({free_thiol_mmol_per_g, disulfide_mmol_per_g, amine_mmol_per_g}).
+    #: With a named matrix on file, or with protein_sites, the loading charges the reactive-site
+    #: pools (matrix_sites.resolve); without either, nothing is charged and the answer says so.
+    protein_g_per_l: Optional[float] = None
+    protein_sites: Optional[Mapping[str, float]] = None
 
     @property
     def time_min(self) -> float:
@@ -735,16 +799,19 @@ def resolve_lane(
 HEXOSE_ENTRY_UNIDENTIFIED = "HEXOSE ENTRY UNIDENTIFIED"
 #: Species keys of the sugars that reach the thiols only through the unidentified entry.
 _HEXOSE_KEYS = ("Glc", "Fru")
-#: Thiols whose only hexose route is that entry.
-_HEXOSE_ENTRY_TARGETS = ("MFT", "FFT")
+#: Thiols whose only hexose route is that entry, and the products made from them (the two
+#: disulfides and the methanethiol coupling product), which inherit the floor artefact: a ratio
+#: of 1e27 for the dimer on a glucose arm is the same non-number as the thiol's (2026-09-09).
+_HEXOSE_ENTRY_TARGETS = ("MFT", "FFT", "MFTD", "FFTD", "MMFT")
 
 
 def unidentified_routes(
     mapped_precursors: Mapping[str, float], mapped_targets: Mapping[str, str]
 ) -> Tuple[str, ...]:
-    """Target KEYS (``MFT``/``FFT``) whose formation from this charge runs only through the
-    unidentified hexose entry: a hexose is charged, no pentose and no thiamine are, and
-    the target is a thiol. Empty for every other request."""
+    """Target KEYS (``MFT``/``FFT`` and their disulfides and coupling product) whose formation
+    from this charge runs only through the unidentified hexose entry: a hexose is charged, no
+    pentose and no thiamine are, and the target is a thiol or made from one. Empty for every
+    other request."""
     charged = {k for k, v in mapped_precursors.items() if float(v) > 0.0}
     if not any(k in charged for k in _HEXOSE_KEYS) or "PENT" in charged or "THI" in charged:
         return ()
@@ -879,6 +946,24 @@ def declare_envelope(
     lane = lanes[0] if lanes else None
     reasons.extend(lane_reasons)
 
+    # B13: the dicarbonyl steps are trunk-only (the sulfur and acrylamide networks keep the
+    # topology their fits were run on), so a dicarbonyl target on another lane is refused
+    # by name instead of answered with the inert zero those state vectors carry.
+    dicarbonyls = sorted(c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS)
+    pyrazines = sorted(c for c, key in mapped_targets.items() if key in PYRAZINE_TARGET_KEYS)
+    if (dicarbonyls or pyrazines) and lane is not None and lane != TRUNK:
+        named = []
+        if dicarbonyls:
+            named.append("DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls) + " (wave B13)")
+        if pyrazines:
+            named.append("PYRAZINE TARGETS " + ", ".join(repr(c) for c in pyrazines) + " (wave B18)")
+        reasons.append(
+            " and ".join(named)
+            + f" run on the trunk lane only: the {lane} lane's network keeps the topology its fit was run "
+            "on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the "
+            "trunk, or bring a measurement."
+        )
+
     # --- the lipid lane's own refusals ------------------------------------
     if LIPID in lanes:
         from .parameters_lipid import LIPID_CARRIERS, oleate_fraction
@@ -919,7 +1004,7 @@ def declare_envelope(
     # A target whose lane needs a precursor species this charge cannot supply.
     if lane is not None and not unmapped:
         if lane == SULFUR and not (
-            {"Cys", "THI", "PENT", "ARP", "H2S"} & set(mapped_precursors)
+            {"Cys", "THI", "PENT", "ARP", "H2S", "TTCA"} & set(mapped_precursors)   # W6: TTCA carries its cysteine sulfur
         ):
             if set(mapped_targets.values()) & {"MFT", "FFT", "MFTD", "MESH", "ACTZ"}:
                 reasons.append(
@@ -946,18 +1031,14 @@ def declare_envelope(
             f"measured over 80-120 C. This is a numerically sound extrapolation "
             f"of an experimentally unsupported barrier."
         )
-    if lane in (TRUNK, ACRYLAMIDE) and abs(float(spec.process.ph) - NETWORK_PH) > 1e-9:
-        warnings.append(
-            f"pH {spec.process.ph:g} was supplied, but the {lane} lane carries "
-            f"NO pH term at all -- its parameters are homogeneous at pH "
-            f"{NETWORK_PH:g}. The pH is recorded and IGNORED; it changes no "
-            f"rate. Any pH sensitivity in the measurement is unmodelled."
-        )
-    if spec.process.water_activity is not None and lane == ACRYLAMIDE:
-        warnings.append(
-            "water activity is METADATA ONLY on the acrylamide lane: it changes "
-            "no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
-        )
+    # B15 (2026-09-07): the acrylamide lane's declared initial-pH factor is printed by
+    # acrylamide_conditions.declarations below, together with its a_w terms.
+    if lane == TRUNK:
+        # B12: the trunk carries a declared a_w term and a declared pH term (Amadori decay).
+        warnings.extend(trunk_conditions.declarations(spec.process))
+    if lane == ACRYLAMIDE:
+        # B14/B15: the declared a_w terms (window 0.34-0.99) and the declared initial-pH factor.
+        warnings.extend(acrylamide_conditions.declarations(spec.process))
     if spec.process.ph_final is not None and lane != SULFUR:
         warnings.append(
             f"a final pH was supplied but the {lane} lane has no pH trajectory; "
@@ -966,6 +1047,19 @@ def declare_envelope(
     # B2.2: the buffer is an input with a declared default, and its ABSENCE is
     # an extrapolation rather than a silent assumption.
     if lane == SULFUR:
+        # B11: the oxygen reservoir this run will be charged with, and where it came from.
+        # The vessel's ABSENCE is an extrapolation only once it changes a rate, i.e. once the
+        # shipped report consumes oxygen; with inert consumers the reservoir is inert too.
+        reservoir, basis = oxygen_reservoir_units(spec.process)
+        consumers = shipped_oxygen_consumers()
+        if any(v > 0.0 for v in consumers.values()) and getattr(spec.process, "vessel", None) is None:
+            warnings.append(
+                f"OXYGEN RESERVOIR (B11): {reservoir:.0f} ambient units per litre of liquid "
+                f"({basis}; 1 unit = {OX_SAT_MMOL_L:g} mmol/L dissolved at saturation). The "
+                f"shipped report consumes oxygen (k_cys_ox {consumers['k_cys_ox']:.2e}, "
+                f"k_red_ox {consumers['k_red_ox']:.2e} per unit per min), so the vessel is an "
+                "input this run did not receive: declare it (conditions.vessel) to leave the flag."
+            )
         if spec.process.buffer is None:
             warnings.append(BUFFER_ABSENT_WARNING)
         elif spec.process.buffer.is_clamped:
@@ -999,6 +1093,15 @@ def declare_envelope(
                 f"pH term (its anchor is a single pH-6.7 emulsion). The pH is "
                 f"recorded and IGNORED."
             )
+
+    # --- B18: the pyrazine step's own declarations --------------------------
+    # The step is measured (fed dicarbonyls); the supply from a sugar + amine pot is not, and
+    # the ship rule sized both misses. Every pyrazine answer carries them.
+    if set(mapped_targets.values()) & PYRAZINE_TARGET_KEYS:
+        from .parameters_pyrazine import PYRAZINE_SINK_CAVEAT, PYRAZINE_SUPPLY_CAVEAT
+
+        warnings.append(PYRAZINE_SUPPLY_CAVEAT)
+        warnings.append(PYRAZINE_SINK_CAVEAT)
 
     # --- B7: the furanic channel's own declarations -----------------------
     # Every one of these is an EXTRAPOLATION WARNING, not a refusal, and each
@@ -1200,6 +1303,22 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
         out["decay_Ea_kJ_mol"] = {
             k: float(v) for k, v in (frozen.get("decay_Ea_kJ_mol") or {}).items()
         }
+        if frozen.get("formation_Ea_by_route_kJ_mol"):
+            # B10: two barriers by route. The lumped value above is kept for every
+            # reader that predates the split (it equals the sugar-trunk route).
+            out["formation_Ea_by_route_kJ_mol"] = {
+                k: float(v) for k, v in frozen["formation_Ea_by_route_kJ_mol"].items()
+            }
+        if frozen.get("oxygen"):
+            out["oxygen"] = {k: float(v) for k, v in frozen["oxygen"].items()}
+        if frozen.get("oxygen_log10_k"):
+            out["oxygen_log10_k"] = {k: float(v) for k, v in frozen["oxygen_log10_k"].items()}
+        if frozen.get("dimer_release_log10_k"):
+            # B17: the disulfide-release constant, log10 (a shipped B17 report or a draw)
+            out["dimer_release_log10_k"] = {k: float(v) for k, v in frozen["dimer_release_log10_k"].items()}
+        if frozen.get("mele_site_log10_yield"):
+            # B17a: log10 of the electrophile-site yield per osone decayed (a shipped B17a report or a draw)
+            out["mele_site_log10_yield"] = {k: float(v) for k, v in frozen["mele_site_log10_yield"].items()}
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1250,17 +1369,62 @@ def core_parameters(
     if lane == SULFUR:
         report = None
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
-                "decay_Ea_kJ_mol"} <= set(override):
+                "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol", "oxygen",
+                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
+        # B10: a report (or a draw) that carries the two route barriers uses them;
+        # a wave before B10 carries only the lumped value and every route gets it.
+        routes: Dict[str, float] = {}
+        if report is not None and report.get("formation_Ea_by_route_kJ_mol"):
+            routes.update(report["formation_Ea_by_route_kJ_mol"])
+        routes.update(override.get("formation_Ea_by_route_kJ_mol") or {})
+        formation = routes if routes else pick("lumped_formation_Ea_kJ_mol")
         parameters.update(MEASURED_SULFUR)
         parameters.update(
             with_fitted_sulfur(
                 pick("log10_k_ref_at_145C"),
-                pick("lumped_formation_Ea_kJ_mol"),
+                formation,
                 pick("decay_Ea_kJ_mol"),
             )
         )
+        # B11: the oxygen consumers from the report's "oxygen" block (or a draw's), else the
+        # inert zero defaults MEASURED_SULFUR already carries.
+        oxygen: Dict[str, float] = {}
+        if report is not None and report.get("oxygen"):
+            oxygen.update(report["oxygen"])
+        oxygen.update(override.get("oxygen") or {})
+        # the Laplace draw moves the fit's own coordinates, which are log10 (block oxygen_log10_k)
+        for key, value in (override.get("oxygen_log10_k") or {}).items():
+            oxygen[key] = 10.0 ** float(value)
+        if oxygen:
+            parameters.update(oxygen_parameters(
+                k_cys_ox=float(oxygen.get("k_cys_ox", 0.0)),
+                k_red_ox=float(oxygen.get("k_red_ox", 0.0)),
+            ))
+        # B17: the disulfide-release constant from the report's (or a draw's) log10 block; the inert
+        # zero MEASURED_SULFUR carries otherwise.
+        release: Dict[str, float] = {}
+        if report is not None and report.get("dimer_release_log10_k"):
+            release.update(report["dimer_release_log10_k"])
+        release.update(override.get("dimer_release_log10_k") or {})
+        if release:
+            from .parameters_sulfur import dimer_release_parameters
+
+            parameters.update(dimer_release_parameters(k_dimer_release=10.0 ** float(release["k_dimer_release"])))
+        # B17a: the site yield from the report's (or a draw's) log10 block; k_mele_site = yield x k_osone_decay
+        # at 145 C with the carbonyl-sink family's barrier. The inert zero MEASURED_SULFUR carries otherwise.
+        site: Dict[str, float] = {}
+        if report is not None and report.get("mele_site_log10_yield"):
+            site.update(report["mele_site_log10_yield"])
+        site.update(override.get("mele_site_log10_yield") or {})
+        if site:
+            from .parameters_sulfur import mele_site_parameters
+
+            k_osone = 10.0 ** float(pick("log10_k_ref_at_145C")["k_osone_decay"])
+            ea_family = float(pick("decay_Ea_kJ_mol")["carbonyl_sink"])
+            parameters.update(mele_site_parameters(k_mele_site=(10.0 ** float(site["mele_site_yield"])) * k_osone,
+                                                   ea_kj_mol=ea_family))
     if lane == ACRYLAMIDE:
         report = None
         if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):
@@ -1280,6 +1444,17 @@ def core_parameters(
         from .parameters_furanic import with_fitted_furanic
 
         parameters.update(with_fitted_furanic(float(override["k_dpo_af"])))
+    if "pyrazine" in override:
+        # B18, the same discipline: the frozen literals in parameters_pyrazine are the default;
+        # an explicit block {log10_k_go_ak_100C, ea_go_ak_kj_mol, log10_k_mgo_ak_100C,
+        # ea_mgo_ak_kj_mol} (the fit generator's candidates, a later draw) replaces them.
+        from .parameters_pyrazine import with_fitted_pyrazine
+
+        b = override["pyrazine"]
+        parameters.update(with_fitted_pyrazine(
+            float(b["log10_k_go_ak_100C"]), float(b["ea_go_ak_kj_mol"]),
+            float(b["log10_k_mgo_ak_100C"]), float(b["ea_mgo_ak_kj_mol"]),
+        ))
     return parameters
 
 
@@ -1338,6 +1513,22 @@ class CoreDraw:
     """
 
     maillard: Optional[Mapping[str, Any]] = None
+    #: B12 (2026-09-07): the trunk's declared condition bands. ``trunk_aw_scale`` scales the
+    #: water-activity multiplier's excess over 1 (band trunk_conditions.AW_SCALE_BAND);
+    #: ``trunk_ph_exponent`` is the Amadori-decay pH exponent (band PH_EXPONENT_BAND).
+    #: ``None`` = the declared centres.
+    trunk_aw_scale: Optional[float] = None
+    trunk_ph_exponent: Optional[float] = None
+    #: B14 (2026-09-07): the acrylamide lane's declared flat a_w multiplier inside the measured
+    #: window (band acrylamide_conditions.AW_SCALE_BAND). ``None`` = the declared centre, 1.0.
+    acrylamide_aw_scale: Optional[float] = None
+    #: B15: the elimination a_w deficit scale (band AW_ELIMINATION_SCALE_BAND) and the two pH exponents.
+    acrylamide_aw_elimination_scale: Optional[float] = None
+    acrylamide_ph_exponent_formation: Optional[float] = None
+    acrylamide_ph_exponent_elimination: Optional[float] = None
+    #: B11: a multiplicative scale on the sulfur lane's oxygen reservoir (declared band
+    #: OX_RESERVOIR_SCALE_BAND, spanning the saturation band and the unrecorded-vessel band).
+    oxygen_reservoir_scale: Optional[float] = None
     q10: Optional[float] = None
     lipid_fraction_scale: Optional[float] = None
     peroxide_scale: Optional[float] = None
@@ -1406,6 +1597,14 @@ class CorePrediction:
         # way B6 prices its Q10 -- by re-integrating at both corners.
         furanic = dict(self.run_metadata.get("furanic_extra_decades") or {})
         widths.update(furanic)
+        # 2026-09-08: a per-laboratory calibration adds its response factor's uncertainty (half-width
+        # in decades) to the compounds it scaled; see calibration.Calibration.apply_factors.
+        calibrated = dict(self.run_metadata.get("calibration_extra_decades") or {})
+        for compound, extra in calibrated.items():
+            widths[compound] = math.hypot(float(widths.get(compound, 0.0)), float(extra))
+        # 2026-09-08: the matrix layer's declared binding brackets, priced at their corners
+        for compound, extra in dict(self.run_metadata.get("matrix_extra_decades") or {}).items():
+            widths[compound] = math.hypot(float(widths.get(compound, 0.0)), float(extra))
         return {
             compound: absolute_concentration(
                 value,
@@ -1664,6 +1863,38 @@ def _furanone_corner_parameters(
     return out
 
 
+def shipped_oxygen_consumers() -> Dict[str, float]:
+    """The two B11 oxygen consumers as the shipped report carries them (zero = inert)."""
+    frozen = _read(_B2_FIT_REPORT)["frozen_parameters"]
+    block = frozen.get("oxygen") or {}
+    return {"k_cys_ox": float(block.get("k_cys_ox", 0.0)), "k_red_ox": float(block.get("k_red_ox", 0.0))}
+
+
+def oxygen_reservoir_units(process) -> Tuple[float, str]:
+    """
+    B11: the headspace oxygen reservoir in ambient units per litre of liquid, and its basis.
+
+    From the process's vessel block when the fill and vessel volumes are stated and the
+    atmosphere is air; the declared default (Hofmann 1998's 100 mL pot) with a basis that says
+    so otherwise. An open vessel or a continuous process gets a LARGE reservoir (oxygen is not
+    limited by a headspace): ten times the default, said so.
+    """
+    from . import vessel as _vessel
+
+    spec = getattr(process, "vessel", None)
+    if spec is None:
+        return OX_RESERVOIR_DEFAULT_UNITS, "no vessel recorded: the declared default reservoir"
+    if spec.atmosphere in ("open", "continuous_process"):
+        return 10.0 * OX_RESERVOIR_DEFAULT_UNITS, f"{spec.atmosphere}: oxygen not limited by a headspace (10x the default)"
+    if spec.atmosphere == "inert_gas":
+        return 0.0, "inert-gas atmosphere stated: no reservoir"
+    o2 = spec.o2_mmol()
+    if o2 is None or spec.fill_mL is None or spec.fill_mL <= 0:
+        return OX_RESERVOIR_DEFAULT_UNITS, f"vessel {spec.atmosphere} with volumes unstated: the declared default reservoir"
+    mmol_per_l = o2 / (float(spec.fill_mL) / 1000.0)
+    return mmol_per_l / OX_SAT_MMOL_L, f"{spec.headspace_mL:.0f} mL headspace over {spec.fill_mL:g} mL: {mmol_per_l:.1f} mmol O2 per litre"
+
+
 def _integrate_program(
     lane: str,
     parameters: Mapping[str, Any],
@@ -1671,16 +1902,46 @@ def _integrate_program(
     process: ProcessSpec,
     *,
     ph_drift: Optional[PhDrift] = None,
+    trunk_draw: Optional[Tuple[Optional[float], Optional[float]]] = None,
+    acrylamide_draw: Optional[Dict[str, Optional[float]]] = None,
+    reservoir_scale: Optional[float] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """
     Integrate a piecewise-constant thermal program, chaining the state across
     segments, and return the FINAL state as ``{species_key: mmol/L}``.
+
+    ``trunk_draw`` (B12) = ``(aw_scale, ph_exponent)`` from a ``CoreDraw``; ``None`` entries
+    mean the declared centres.
 
     ``ph_drift`` (B2) is consulted only when the process declares none: the
     order is spec, then draw, then the frozen calibration.
     """
     state: Dict[str, float] = dict(initial)
     metadata: Dict[str, Any] = {"segments": [], "lane": lane}
+    if lane == SULFUR:
+        # B10 (2026-09-06): every fit system since B2.3 was integrated with the
+        # ambient oxidant pool charged at OX_AMBIENT_MMOL_L; the engine charged
+        # nothing, so the two oxidant channels carried flux in the fit and none
+        # in use (B11 prereg sec. 2.1). Charged here so fit and deployment agree;
+        # a caller that passes its own "OX" (a fit generator, wave B11's vessel
+        # charge) is left alone. Effect on every panel row: below 1 % at trace
+        # thiol (the 2026-09-06 probe).
+        state.setdefault("OX", OX_AMBIENT_MMOL_L)
+        # 2026-09-08 (the matrix layer): the protein disulfide pool from the spec's protein loading
+        # and the matrix's site densities; zero, as before, when no loading is stated.
+        if "PROT_SS" not in state:
+            from .matrix_sites import resolve as _resolve_sites
+
+            charged, _note = _resolve_sites(process)
+            if charged is not None and charged.disulfide > 0:
+                state["PROT_SS"] = float(charged.disulfide)
+        # B11 (2026-09-07): the headspace reservoir, in ambient units per litre of
+        # liquid, from the process's vessel block; the declared default otherwise.
+        # Inert while the report's consumers are zero (every wave before B11).
+        if "OXR" not in state:
+            reservoir, _basis = oxygen_reservoir_units(process)
+            state["OXR"] = reservoir * (1.0 if reservoir_scale is None else float(reservoir_scale))
+        state.setdefault("OXV", 0.0)
 
     for index, (duration, temperature_c) in enumerate(process.thermal.segments):
         grid = np.array([0.0, float(duration)])
@@ -1713,8 +1974,22 @@ def _integrate_program(
             )
             keys = list(SULFUR_INDEX)
         elif lane == ACRYLAMIDE:
+            # B14 (2026-09-07): the declared flat a_w term inside the measured window scales the
+            # acrylamide-forming step before integration; exactly 1.0 at the centre and outside.
+            d = acrylamide_draw or {}
+            acr_parameters, condition_terms = acrylamide_conditions.apply(
+                parameters, process,
+                aw_scale=d.get("aw_scale"),
+                aw_elimination_deficit_scale=1.0 if d.get("aw_elimination_scale") is None else float(d["aw_elimination_scale"]),
+                ph_exponent_formation=(acrylamide_conditions.PH_EXPONENT_FORMATION
+                                       if d.get("ph_exponent_formation") is None else float(d["ph_exponent_formation"])),
+                ph_exponent_elimination=(acrylamide_conditions.PH_EXPONENT_ELIMINATION
+                                         if d.get("ph_exponent_elimination") is None else float(d["ph_exponent_elimination"])),
+            )
+            if condition_terms:
+                metadata.setdefault("condition_terms", list(condition_terms))
             run = integrate_acrylamide(
-                parameters,
+                acr_parameters,
                 float(temperature_c) + CELSIUS,
                 state,
                 grid,
@@ -1724,8 +1999,18 @@ def _integrate_program(
             )
             keys = list(ACRYLAMIDE_INDEX)
         else:
+            # B12 (2026-09-07): the trunk's declared water-activity and pH terms scale the
+            # named steps' k_ref before integration; exactly 1.0 at the references.
+            aw_scale, ph_exponent = (trunk_draw or (None, None))
+            trunk_parameters, condition_terms = trunk_conditions.apply(
+                parameters, process,
+                aw_scale=1.0 if aw_scale is None else float(aw_scale),
+                ph_exponent=(trunk_conditions.PH_EXPONENT_DECADES_PER_UNIT
+                             if ph_exponent is None else float(ph_exponent)),
+            )
+            metadata.setdefault("condition_terms", list(condition_terms))
             run = integrate(
-                parameters,
+                trunk_parameters,
                 float(temperature_c) + CELSIUS,
                 state,
                 grid,
@@ -1806,9 +2091,21 @@ def predict(
             operative = _furanone_corner_parameters(
                 operative, float(draw.furanone_partition_ea_kj_mol)
             )
+        trunk_draw = (
+            (draw.trunk_aw_scale, draw.trunk_ph_exponent) if draw is not None else None
+        )
+        acrylamide_draw = (
+            {"aw_scale": draw.acrylamide_aw_scale, "aw_elimination_scale": draw.acrylamide_aw_elimination_scale,
+             "ph_exponent_formation": draw.acrylamide_ph_exponent_formation,
+             "ph_exponent_elimination": draw.acrylamide_ph_exponent_elimination}
+            if draw is not None else None
+        )
         final_state, metadata = _integrate_program(
             maillard_lane, operative, dict(declaration.mapped_precursors), spec.process,
             ph_drift=draw.ph_drift if draw is not None else None,
+            trunk_draw=trunk_draw,
+            acrylamide_draw=acrylamide_draw,
+            reservoir_scale=draw.oxygen_reservoir_scale if draw is not None else None,
         )
         metadata["lanes"] = list(lanes)
 
@@ -1831,6 +2128,8 @@ def predict(
                 _furanone_corner_parameters(operative, offset),
                 dict(declaration.mapped_precursors),
                 spec.process,
+                trunk_draw=trunk_draw,
+                acrylamide_draw=acrylamide_draw,
             )
             corners.append(corner_state)
         for key in FURANONE_BANDED_KEYS:
@@ -1881,6 +2180,26 @@ def predict(
             # it is reported in its own unit rather than given an invented one.
             concentrations[compound] = mmol
 
+    # 2026-09-08 (the matrix layer): declared binding of aldehydes and HMF to the charged protein
+    # sites, applied after integration as a pseudo-first-order factor over the thermal programme,
+    # its bracket priced as an interval width. Nothing happens without a stated protein loading.
+    from .matrix_sites import bound_fraction as _bound_fraction
+    from .matrix_sites import resolve as _resolve_sites
+
+    charged_sites, sites_note = _resolve_sites(spec.process)
+    binding: Dict[str, Any] = {}
+    if charged_sites is not None:
+        for compound, key in declaration.mapped_targets.items():
+            result = _bound_fraction(key, charged_sites, spec.process.thermal.segments)
+            if result is None or compound not in concentrations:
+                continue
+            concentrations[compound] = concentrations[compound] * result["remaining_fraction"]
+            binding[compound] = result
+    metadata["matrix_sites"] = charged_sites.as_dict() if charged_sites is not None else None
+    if sites_note:
+        metadata["matrix_sites_note"] = sites_note
+    metadata["matrix_binding"] = binding
+    metadata["matrix_extra_decades"] = {c: r["extra_decades"] for c, r in binding.items()}
     metadata["ph"] = float(spec.process.ph)
     metadata["ph_final"] = spec.process.ph_final
     metadata["buffer"] = (
@@ -1934,7 +2253,15 @@ def predict(
 
 
 #: Lanes whose parameters carry NO pH term (declared in their parameter modules).
-NO_PH_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE, LIPID})
+#: B12 (2026-09-07): the trunk gained a declared pH term on its Amadori-decay steps.
+NO_PH_TERM_LANES = frozenset({LIPID})
+#: B15: lanes whose pH term is measured only inside a window (outside it the factor is held and a
+#: comparison that leaves the window is refused).
+PH_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.PH_WINDOW}
+#: Lanes that carry a water-activity term (B12: the trunk's declared multiplier).
+AW_TERM_LANES = frozenset({TRUNK, ACRYLAMIDE})
+#: B14: lanes whose a_w term exists only inside a measured window (outside it the axis is refused).
+AW_TERM_WINDOWS = {ACRYLAMIDE: acrylamide_conditions.AW_WINDOW}
 
 
 def _lanes_of(declaration) -> Tuple[str, ...]:
@@ -1957,20 +2284,41 @@ def axis_refusal(spec_a, spec_b, declaration_a, declaration_b) -> Optional[str]:
     """
     pa, pb = spec_a.process, spec_b.process
     aw_a, aw_b = pa.water_activity, pb.water_activity
+    lanes = set(_lanes_of(declaration_a)) | set(_lanes_of(declaration_b))
     if aw_a is not None and aw_b is not None and abs(float(aw_a) - float(aw_b)) > 1e-9:
-        return (
-            "REFUSED -- the two arms differ in WATER ACTIVITY and no core lane carries an a_w "
-            "term; the model would return identical arms and call it a comparison. "
-            "Hold a_w fixed, or bring a measurement."
-        )
+        if not (lanes & AW_TERM_LANES):
+            return (
+                f"REFUSED -- the two arms differ in WATER ACTIVITY and the resolved lane(s) "
+                f"({', '.join(sorted(lanes)) or 'none'}) carry no a_w term; the model would return "
+                "identical arms and call it a comparison. The trunk lane carries a declared a_w term "
+                "(B12) and the acrylamide lane a declared flat one inside a_w 0.88-0.99 (B14). Hold "
+                "a_w fixed, or bring a measurement."
+            )
+        for lane_name, (lo, hi) in AW_TERM_WINDOWS.items():
+            if lane_name in lanes and not all(lo - 1e-9 <= float(a) <= hi + 1e-9 for a in (aw_a, aw_b)):
+                return (
+                    f"REFUSED -- the two arms differ in WATER ACTIVITY ({float(aw_a):.2f} vs {float(aw_b):.2f}) "
+                    f"and the {lane_name} lane's a_w term is measured only inside {lo:.2f}-{hi:.2f} "
+                    f"(De Vleeschouwer 2008, B14): outside it the lane carries no term and would return "
+                    "identical arms. Keep both arms inside the window, or bring a measurement."
+                )
     if abs(float(pa.ph) - float(pb.ph)) > 1e-9:
-        lanes = set(_lanes_of(declaration_a)) | set(_lanes_of(declaration_b))
         if lanes and lanes <= NO_PH_TERM_LANES:
             return (
                 f"REFUSED -- the two arms differ in pH and the resolved lane(s) "
                 f"({', '.join(sorted(lanes))}) carry NO pH term by declaration; the model would "
-                "return identical arms. Only the sulfur lane carries a pH trajectory."
+                "return identical arms. The sulfur lane carries a pH trajectory, the trunk a "
+                "declared Amadori-decay pH term (B12) and the acrylamide lane a declared initial-pH "
+                "factor inside pH 4-8 (B15)."
             )
+        for lane_name, (lo, hi) in PH_TERM_WINDOWS.items():
+            if lane_name in lanes and not all(lo - 1e-9 <= float(v) <= hi + 1e-9 for v in (pa.ph, pb.ph)):
+                return (
+                    f"REFUSED -- the two arms differ in pH ({float(pa.ph):g} vs {float(pb.ph):g}) and the "
+                    f"{lane_name} lane's pH factor is measured only inside pH {lo:g}-{hi:g} (De Vleeschouwer "
+                    "2006, B15): outside it the factor is held at the window edge and the arms would not be a "
+                    "comparison. Keep both arms inside the window, or bring a measurement."
+                )
     return None
 
 
@@ -1978,6 +2326,8 @@ def compare(
     spec_a: FormulationSpec,
     spec_b: FormulationSpec,
     targets: Sequence[str],
+    *,
+    predict_fn: Optional[Callable[..., "CorePrediction"]] = None,
 ) -> Dict[str, Any]:
     """
     Per-compound RATIOS between two formulations, via the B4 layer.
@@ -1998,8 +2348,11 @@ def compare(
     predict of the identical arm. The tables are emitted here, from the live
     objects, so there is exactly one implementation to keep correct.
     """
-    run_a = predict(spec_a, targets)
-    run_b = predict(spec_b, targets)
+    # 2026-09-08: a caller may supply the predictor (a per-laboratory calibration wraps `predict`);
+    # the default is byte-identical to the plain engine.
+    _predict = predict_fn or predict
+    run_a = _predict(spec_a, targets)
+    run_b = _predict(spec_b, targets)
 
     if not (run_a.answered and run_b.answered):
         return {
@@ -2181,6 +2534,9 @@ __all__ = [
     "SULFUR",
     "TARGET_ALIASES",
     "axis_refusal",
+    "AW_TERM_LANES",
+    "AW_TERM_WINDOWS",
+    "PH_TERM_WINDOWS",
     "NO_PH_TERM_LANES",
     "TRUNK",
     "ThermalProgram",

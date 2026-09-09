@@ -14,6 +14,16 @@
       "provenance_class": "repo_verbatim_methods_quote",
       "provenance_note": "Liu, Cadwallader & Drake -- thesis sec. 2.9 / Food Chemistry 406: 134998, as carried in data/protocols/external_validation/external_validation_liu_2023_ppi_offnote_baseline.yaml (matrix_format): 'commercial pea protein rehydrated to 10% solids (w/w) in deionized water'. NO BUFFER. The slurry is never heated -- 40 C is a headspace equilibration, not a reaction -- so the buffer field is close to inert here in any case. SOURCE PAPER NOT ON DISK; second-hand. ph_disagreement: the source reports the rehydrated 10%-solids slurries at pH 6.3-7.3 (mean ~6.8) while conditions.ph = 6.0. The protocol YAML already self-declares this ('the proxied pH 6.0 is NOT the source pH ... left unchanged because editing an executable condition would change the prediction'). Reported, not edited.",
       "ph_disagreement": "conditions.ph = 6.0 against a source range of 6.3-7.3 (mean ~6.8); already self-declared in the protocol YAML."
+    },
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "no cook",
+      "atmosphere": "not_applicable",
+      "water_source": "not_applicable",
+      "stirred": null,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Liu, Cadwallader & Drake 2023, Food Chem. 406:134998: commercial pea protein rehydrated to 10 % solids in deionized water and NEVER HEATED; the bundle's 40 C / 10 min is the headspace equilibration, as its buffer block already records. No cook, so no vessel (not_applicable); the PDF is on disk (data/articles/liu2023.pdf, read 2026-09-04)."
     }
   },
   "denaturation_state": 0.0,

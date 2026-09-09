@@ -79,9 +79,11 @@ def evidence_class_of(
 
 def _lane_reactions(lane: str) -> Tuple[Any, ...]:
     if lane == "trunk":
-        from src.kinetic_core.network import REACTIONS
+        # TRUNK_REACTIONS, not REACTIONS: the trunk-only steps (B13's dicarbonyls, B18's pyrazines)
+        # run on the trunk integrator and belong on its page
+        from src.kinetic_core.network import TRUNK_REACTIONS
 
-        return tuple(REACTIONS)
+        return tuple(TRUNK_REACTIONS)
     if lane == "sulfur":
         from src.kinetic_core.sulfur import FULL_REACTIONS
 
@@ -302,6 +304,7 @@ def explain(compound: str) -> Dict[str, Any]:
                 "routes": [],
             }
         )
+        payload["hypotheses"] = _hypotheses_for(None, str(compound))
         return payload
 
     species_key = TARGET_ALIASES.get(query)
@@ -322,6 +325,7 @@ def explain(compound: str) -> Dict[str, Any]:
                 "aliases_known": sorted(TARGET_ALIASES),
             }
         )
+        payload["hypotheses"] = _hypotheses_for(None, str(compound))
         return payload
 
     lane = _TARGET_LANE.get(species_key, TRUNK)
@@ -334,6 +338,7 @@ def explain(compound: str) -> Dict[str, Any]:
         payload["consumption"] = []
         payload["anchors"] = _rank_anchors(routes)
         payload["threshold"] = _threshold_block(species_key)
+        payload["hypotheses"] = _hypotheses_for(species_key, str(compound))
         return payload
 
     reactions = _lane_reactions(lane)
@@ -369,7 +374,79 @@ def explain(compound: str) -> Dict[str, Any]:
     payload["evidence_census"] = {
         cls: sum(1 for r in formation if r["evidence"] == cls) for cls in EVIDENCE_ORDER
     }
+    payload["hypotheses"] = _hypotheses_for(species_key, str(compound))
     return payload
+
+
+def _hypotheses_for(species_key: Optional[str], query: str) -> Dict[str, Any]:
+    """What the hypothesis layer (results/validation/network_hypotheses.json) proposes for this compound:
+    steps that form or consume it which the engine does not model, or, for a compound the engine has
+    no species for, whether any cited rule reaches it at all. Read from the artifact; never computed here."""
+    import json
+
+    from src import data_paths
+
+    path = data_paths.VALIDATION_DIR / "network_hypotheses.json"
+    if not path.exists():
+        return {"available": False, "steps": [], "note": "results/validation/network_hypotheses.json is absent"}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    sources = {r["id"]: r["source"] for r in payload.get("rules", [])}
+    registry_id = None
+    if species_key is None:
+        try:
+            from src import compound_keys
+
+            key = compound_keys.resolve(query)
+            registry_id = getattr(key, "id", None) if key is not None else None
+        except Exception:
+            registry_id = None
+    # a compound the engine has no species for may still be a LITERATURE structure the rules name
+    # (data/species/literature_structures.yml, keyed by its registry id): match those keys too
+    keys = {species_key} if species_key is not None else set()
+    if species_key is None:
+        try:
+            import re
+
+            from src.network_hypotheses import structures as _structures
+
+            table = _structures.load()
+            if registry_id is not None:
+                keys |= {k for k, st in table.items() if st.registry_id == registry_id}
+            # a literature structure with no registry entry names itself in its note ("2-pentylpyridine,
+            # the fatty-green ..."): match the query as a whole word there, so a product only the rules
+            # know is still found and the answer is "no rate, not no route" rather than "no vocabulary"
+            pattern = re.compile(r"(?<![\w-])" + re.escape(query.strip().lower()) + r"(?![\w-])")
+            keys |= {k for k, st in table.items() if st.kind == "molecule" and pattern.search(st.note.lower())}
+        except Exception:
+            pass
+    seen = set()
+    steps = []
+    reached_by = []
+    for charge in payload.get("charges", []):
+        for step in charge.get("steps", []):
+            if step["placement"] == "modelled":
+                continue
+            names = step["reactants"] + step["products"]
+            if keys and any(n in keys or (set(n.split("/")) & keys) for n in names):
+                key = (step["rule"], tuple(step["reactants"]), tuple(step["products"]))
+                if key in seen:
+                    continue
+                seen.add(key)
+                steps.append({**step, "charge": charge["charge"], "source": sources.get(step["rule"], {})})
+        if registry_id is not None:
+            for product in charge.get("products", []):
+                if product.get("id") == registry_id:
+                    reached_by.append(charge["charge"])
+        if any(s["charge"] == charge["charge"] and set(s["products"]) & keys for s in steps):
+            reached_by.append(charge["charge"])
+    return {
+        "available": True,
+        "artifact": "results/validation/network_hypotheses.json",
+        "steps": steps,
+        "reached_in_charges": sorted(set(reached_by)),
+        "registry_id": registry_id,
+        "meaning": payload.get("placements", {}),
+    }
 
 
 def _rank_anchors(routes: Sequence[Mapping[str, Any]], top_n: int = 6) -> List[Dict[str, Any]]:
@@ -442,6 +519,42 @@ def _wrap(text: str, width: int = 88, indent: str = "    ") -> str:
     return "\n".join(lines)
 
 
+def _render_hypotheses(h: Mapping[str, Any], answered: bool) -> List[str]:
+    """The 'possible, not modelled' block: what the cited rules propose that the engine lacks."""
+    out: List[str] = []
+    if not h or not h.get("available"):
+        return out
+    out.append("  POSSIBLE, NOT MODELLED  (the hypothesis layer: cited reaction rules, no rates;")
+    out.append("                          results/validation/network_hypotheses.md)")
+    steps = list(h.get("steps") or [])
+    if not answered:
+        if h.get("reached_in_charges"):
+            out.append("    a cited rule reaches this compound from: " + ", ".join(h["reached_in_charges"]))
+            out.append("    so the refusal means 'no rate', not 'no route'.")
+        else:
+            out.append("    no cited rule reaches this compound from any reference charge either.")
+        out.append("")
+        return out
+    if not steps:
+        out.append("    every step the rules propose for this compound is already in the model")
+        out.append("")
+        return out
+    by_rule: Dict[str, List[Mapping[str, Any]]] = {}
+    for step in steps:
+        by_rule.setdefault(step["rule"], []).append(step)
+    for rule_id, group in by_rule.items():
+        src = group[0].get("source") or {}
+        out.append(f"    [{group[0]['placement']:<15}] {rule_id}")
+        for step in group[:8]:
+            out.append(f"        {' + '.join(step['reactants'])} -> {' + '.join(step['products'])}")
+        if len(group) > 8:
+            out.append(f"        ... and {len(group) - 8} more partners in the artifact")
+        if src.get("dossier"):
+            out.append(_wrap(f"src: {src['dossier']}: {src.get('anchor', '')}", indent="        "))
+    out.append("")
+    return out
+
+
 def render_explain_text(payload: Mapping[str, Any]) -> str:
     out: List[str] = []
     out.append("=" * 96)
@@ -463,6 +576,7 @@ def render_explain_text(payload: Mapping[str, Any]) -> str:
         out.append("")
         out.append("  A refusal is an answer: it says what would have to be measured.")
         out.append("")
+        out.extend(_render_hypotheses(payload.get("hypotheses") or {}, answered=False))
         out.append("  Compounds this model CAN explain:")
         for target in payload.get("known_targets", []):
             out.append(f"    - {target}")
@@ -564,6 +678,7 @@ def render_explain_text(payload: Mapping[str, Any]) -> str:
     else:
         out.append(_wrap(str(threshold.get("reason", "no measured threshold")), indent="    "))
     out.append("")
+    out.extend(_render_hypotheses(payload.get("hypotheses") or {}, answered=True))
     out.append(
         "  Nothing on this page is new data: every line is read from a frozen "
         "registry at run time."

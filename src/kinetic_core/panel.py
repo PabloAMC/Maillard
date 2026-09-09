@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Tuple
 
 from src import data_paths
+from src.kinetic_core.vessel import vessel_from_bundle
 
 # ---------------------------------------------------------------------------
 # Units
@@ -319,6 +320,7 @@ def core_spec(bench: Mapping[str, Any], *, use_buffer: bool = True):
             ),
             matrix=str(bench.get("protein_type") or "water"),
             buffer=buffer_from_bundle(bench) if use_buffer else None,
+            vessel=vessel_from_bundle(bench),
         ),
     )
 

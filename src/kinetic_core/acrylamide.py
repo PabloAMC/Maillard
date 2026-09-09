@@ -533,12 +533,23 @@ def _acrylamide_warnings(
             and measured_aw is not None
             and abs(float(measured_aw) - float(water_activity)) > 0.1
         ):
-            out.append(
-                f"{key}: evaluated at a_w {float(water_activity):.2f}, measured "
-                f"at a_w {float(measured_aw):.2f} -- and this module has NO a_w "
-                f"term, because nothing in its fit corpus measures one step at "
-                f"two water activities."
-            )
+            # B14 (2026-09-07): inside De Vleeschouwer 2008's window (a_w 0.88-0.99) the lane
+            # carries a DECLARED FLAT a_w term (acrylamide_conditions); outside it, none.
+            from .acrylamide_conditions import AW_WINDOW, in_window
+
+            if in_window(water_activity):
+                out.append(
+                    f"{key}: evaluated at a_w {float(water_activity):.2f}, measured at a_w "
+                    f"{float(measured_aw):.2f}; both inside the window {AW_WINDOW[0]:.2f}-"
+                    f"{AW_WINDOW[1]:.2f} where the source found the constants flat (B14)."
+                )
+            else:
+                out.append(
+                    f"{key}: evaluated at a_w {float(water_activity):.2f}, measured "
+                    f"at a_w {float(measured_aw):.2f} -- and this module has NO a_w "
+                    f"term there: its source measured the axis only over "
+                    f"{AW_WINDOW[0]:.2f}-{AW_WINDOW[1]:.2f} (flat), nothing drier."
+                )
     return out
 
 
@@ -556,7 +567,8 @@ def integrate_acrylamide(
     """
     Integrate the acrylamide network at one temperature.
 
-    ``water_activity`` is METADATA ONLY: it changes no rate. It is accepted so
+    ``water_activity`` is metadata HERE: the B14 term is applied by the engine before this
+    call (``acrylamide_conditions.apply``), so this integrator changes no rate. It is accepted so
     that the a_w gap between a run and its parameters is reported rather than
     silently ignored, which is the honest encoding of a corpus that spans
     a_w 0.35-1.0 without measuring the axis.

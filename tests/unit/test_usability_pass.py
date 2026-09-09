@@ -21,7 +21,7 @@ def _maillard(*args):
 
 def test_rank_is_accepted_as_well_as_rank_experiments_and_wishlist_is_a_verb():
     help_text = _maillard("--help").stdout
-    assert "rank" in help_text and "wishlist" in help_text and "Six verbs" in help_text
+    assert "rank" in help_text and "wishlist" in help_text and "Eight verbs" in help_text and "calibrate" in help_text
     assert _maillard("rank", "--help").returncode == 0
     assert _maillard("rank-experiments", "--help").returncode == 0
     assert _maillard("wishlist", "--help").returncode == 0
@@ -66,7 +66,10 @@ def test_the_data_wishlist_builds_from_the_tracked_artifacts_and_names_the_known
     assert payload["summary"]["not_evaluable_rows"] == len(payload["not_evaluable_rows"]) >= 1
     assert any("2-pentylfuran" in g["what"] for g in payload["refused_targets"])
     aw = next(a for a in payload["thin_axes"] if a["axis"] == "moisture_aw")
-    assert aw["structural_block"] and aw["evaluable"] == 0
+    # RE-PINNED 2026-09-07 (B12): the trunk answers a_w with a declared term, so the axis has
+    # evaluable claims (AW-01 miss, AW-03 agree); the block now names the lanes that still refuse.
+    assert aw["structural_block"] and "trunk" in aw["structural_block"]
+    assert aw["evaluable"] == 2 and aw["agree"] == 1
     assert any(u["if_measured"] == "k_glc_ha" for u in payload["what_you_could_predict"])
     text = data_wishlist.render_markdown(payload)
     assert text.startswith("# Data wishlist") and "## 6. What you could predict" in text

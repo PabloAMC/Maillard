@@ -898,7 +898,110 @@ PROTEIN_DISULFIDE_DERIVATION = (
 )
 
 
+# ===========================================================================
+# WAVE B11 (2026-09-07) -- OXYGEN AS AN INPUT: the declared constants
+# ===========================================================================
+#: Saturation of dissolved O2 under the sealed tube's air at cooking temperature,
+#: mmol/L: the ambient unit `OX = 1.0` every fit system was integrated at. ~0.25-0.35
+#: over 100-130 C under 0.21-0.29 atm O2 (Henry's law); declared, banded, sampled.
+OX_SAT_MMOL_L: float = 0.3
+OX_SAT_BAND_MMOL_L: Tuple[float, float] = (0.1, 1.0)
+#: The reservoir a run gets when no vessel is recorded: Hofmann 1998's 100 mL pot in a
+#: 200 mL autoclave, 0.87 mmol O2 over 0.1 L = 8.7 mmol/L, in ambient units. Band: from a
+#: 3 mL tube's 50 mmol/L down to a nearly full vessel, expressed as a scale on the default.
+OX_RESERVOIR_DEFAULT_UNITS: float = 8.7 / OX_SAT_MMOL_L
+OX_RESERVOIR_SCALE_BAND: Tuple[float, float] = (0.1, 10.0)
+#: Gas-liquid resupply, 1/(ambient unit * min): FAST by declaration (a stirred 3 mL tube or a
+#: 100 mL autoclave equilibrates in seconds against cooks of 20-240 min). Not sampled.
+K_OX_SUPPLY_PER_UNIT_MIN: float = 10.0
+#: The two consumers' search bands, log10 of L/(ambient unit * min): wide, because nothing in
+#: the corpus measures either (Bagiyan 2004 prints initial rates, not constants).
+OXYGEN_BOUNDS_LOG10K: Mapping[str, Tuple[float, float]] = {
+    "k_cys_ox": (-5.0, -1.0),
+    "k_red_ox": (-5.0, -1.0),
+}
+OXYGEN_FITTED_KEYS: Tuple[str, ...] = ("k_cys_ox", "k_red_ox")
+OXYGEN_KEYS: Tuple[str, ...] = ("k_ox_supply",) + OXYGEN_FITTED_KEYS
+
+
+def oxygen_parameters(
+    k_cys_ox: float = 0.0, k_red_ox: float = 0.0, k_ox_supply: Optional[float] = None,
+) -> Dict[str, SulfurParameter]:
+    """
+    The B11 oxygen constants as SulfurParameters. The DEFAULTS are zero for the two
+    consumers AND, unless one of them is non-zero, for the resupply: with all three at
+    zero the four B11 steps carry no flux and every wave before B11 reproduces bit for
+    bit (the dimer channels' own draw on the pool is not refilled, exactly as before).
+    A B11 fit report (or an envelope draw) supplies the consumers and switches the
+    declared fast resupply on.
+    """
+    if k_ox_supply is None:
+        k_ox_supply = K_OX_SUPPLY_PER_UNIT_MIN if (k_cys_ox > 0.0 or k_red_ox > 0.0) else 0.0
+    common = dict(
+        evidence_class="derived_from_fit_data",
+        source_anchor="B11 (kinetic_core_b11_prereg.md sec. 3): oxygen as a two-pool state; no "
+                      "literature rate constant exists for either consumer",
+        dossier_anchor="results/validation/kinetic_core_b11_prereg.md; bagiyan2004_extraction.md "
+                       "(initial rates only); yiltirak2026_extraction.md sec. 5",
+        conditions="aqueous, pH 4.5-7, 100-145 C, dissolved O2 in ambient units (1.0 = saturation)",
+        ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+    )
+    return {
+        "k_ox_supply": _sulfur_parameter(
+            "k_ox_supply", "OXR + OXV -> OX (gas-liquid resupply)", 2, k_ref=float(k_ox_supply),
+            ea=None, **{**common, "evidence_class": "structural_constant"},
+            channel="oxygen_supply", flags=("b11_oxygen", "declared_fast_transfer"),
+            note="Declared fast; not fitted, not sampled; zero while the consumers are zero."),
+        "k_cys_ox": _sulfur_parameter(
+            "k_cys_ox", "Cys + OX -> cystine-equivalent (CBX, fragments) + OXV", 2,
+            k_ref=float(k_cys_ox), ea=None, **common, channel="fitted_consumption",
+            ph_factor_kind="thiolate", flags=("b11_oxygen", "fitted_here", "no_literature_value"),
+            note="Cysteine autoxidation through the thiolate; zero until a B11 report supplies it."),
+        "k_red_ox": _sulfur_parameter(
+            "k_red_ox", "reductone (DPO, NF) + OX -> fragments + OXV", 2,
+            k_ref=float(k_red_ox), ea=None, **common, channel="fitted_consumption",
+            flags=("b11_oxygen", "fitted_here", "no_literature_value"),
+            note="The reductone oxygen sink; zero until a B11 report supplies it."),
+    }
+
+
+#: B17 (2026-09-08): the disulfide-release constant's search band, log10 k at 145 C (1/min): the
+#: sulfur fit's own numerical band (FITTED_SULFUR_BOUNDS_LOG10K's shape).
+DIMER_RELEASE_BOUNDS_LOG10K: Tuple[float, float] = (-10.0, 0.5)
+
+
+def dimer_release_parameters(k_dimer_release: float = 0.0) -> Dict[str, SulfurParameter]:
+    """
+    The B17 release constant as a SulfurParameter. The DEFAULT is zero: with it the two release
+    steps (sulfur.py ch_dimer_release_*) carry no flux and every wave before B17 reproduces bit
+    for bit. Its barrier is the dimerisation's own measured one (Zhang 2026 k17, the same
+    ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL the two ch_dimer_* channels carry), so the disulfide's
+    equilibrium constant, not the two rates, carries the temperature dependence -- the
+    pre-registration's declared structure (kinetic_core_b17_prereg.md sec. 2, variant b).
+    """
+    return {
+        "k_dimer_release": _sulfur_parameter(
+            "k_dimer_release", "thiol disulfide dimer -> 2 thiol (release; MFTD and FFTD share it)", 1,
+            k_ref=float(k_dimer_release), ea=ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL,
+            evidence_class="derived_from_fit_data",
+            source_anchor=("B17 (kinetic_core_b17_prereg.md sec. 2): the disulfide made reversible; barrier shared with "
+                           "the dimerisation, " + ZHANG_DISULFIDE_ANCHOR),
+            dossier_anchor=("results/validation/kinetic_core_b17_prereg.md; kumazawa2003_extraction.md (the apparent loss "
+                            "rate halves when the cook doubles); zhou2023_extraction.md sec. 2.1 (dimer 6.5-9.6 % of MFT); "
+                            "zhang2024_extraction.md (dimer share follows the oxidant)"),
+            conditions="aqueous, pH 4.5-7, 100-145 C; the reducing partner is not tracked (pseudo-first order)",
+            ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_release", flags=("b17_dimer_release", "fitted_here", "no_literature_value",
+                                             "measured_Ea_override", "fit_cannot_move_this_barrier"),
+            note="Zero until a B17 report supplies it; the barrier is Zhang 2026's 122.2 kJ/mol, shared with ch_dimer_*.",
+        ),
+    }
+
+
 MEASURED_SULFUR: Mapping[str, SulfurParameter] = {
+    # B11 (2026-09-07): the oxygen constants at their INERT defaults (consumers zero),
+    # so every frozen generator carries the keys and reproduces exactly.
+    **oxygen_parameters(),
     "k_thioether": _sulfur_parameter(
         "k_thioether",
         "R-SH + matrix electrophile site -> matrix-bound thioether",
@@ -1503,6 +1606,52 @@ ZHANG_CYS_AMADORI_FORMATION_NO_SITE = (
     "a later wave that adds the formation edge inherits the measurement rather "
     "than fitting one."
 )
+
+# B17 (2026-09-08): the disulfide-release constant at its INERT default (zero) joins the measured
+# table here, after the Zhang constants its barrier is tied to exist (the B11 discipline: every
+# frozen generator carries the key and reproduces exactly).
+MEASURED_SULFUR = {**MEASURED_SULFUR, **dimer_release_parameters()}
+
+#: B17 variant (a): log10 of the SITE YIELD, electrophile sites per deoxyosone decayed. The
+#: ceiling is Charles-Bernard 2005's titrated density (8-10 mmol sites per g dry coffee solids;
+#: at 150 g per mol pentose that is 1.2-1.5 sites per sugar carbon skeleton, log10 0.18); the
+#: floor lets the fit say "no such pool".
+MELE_SITE_YIELD_BOUNDS_LOG10: Tuple[float, float] = (-4.0, 0.2)
+#: The barrier the inert zero carries (numerically irrelevant at k = 0); a report supplies the
+#: carbonyl-sink family's fitted barrier through `engine.core_parameters`.
+MELE_SITE_DEFAULT_EA_KJ_MOL: float = 64.1
+
+
+def mele_site_parameters(k_mele_site: float = 0.0, ea_kj_mol: Optional[float] = None) -> Dict[str, SulfurParameter]:
+    """
+    The B17a site-production constant as a SulfurParameter: ``k_mele_site = yield x k_osone_decay``
+    (both at 145 C), with the carbonyl-sink family's barrier, so the sites appear in step with the
+    browning carbon. The DEFAULT is zero: the three ``ch_mele_from_*`` steps (sulfur.py) carry no
+    flux and every wave before B17a reproduces bit for bit. Pre-registration:
+    kinetic_core_b17_prereg.md sec. 2, variant (a).
+    """
+    return {
+        "k_mele_site": _sulfur_parameter(
+            "k_mele_site", "deoxyosone -> browning fragments + matrix electrophile site (DPO, TDP, DDP share it)", 1,
+            k_ref=float(k_mele_site), ea=(MELE_SITE_DEFAULT_EA_KJ_MOL if ea_kj_mol is None else float(ea_kj_mol)),
+            evidence_class="derived_from_fit_data",
+            source_anchor=("B17 variant (a) (kinetic_core_b17_prereg.md sec. 2): the thioether sink's site pool made by the pot "
+                           "itself at a fitted yield per osone decayed; Hofmann & Schieberle 2002 (about 80 % of 400 ug FFT bound "
+                           "by 12.5 g/L melanoidin at 80 C) and Charles-Bernard 2005 (8-10 mmol sites per g dry solids) bound it"),
+            dossier_anchor=("results/validation/kinetic_core_b17_prereg.md; hofmann2002_extraction.md; k3_final_parameter_inventory.md "
+                            "sec. A.4; farmer1990_extraction.md and whitfield1988_extraction.md (the thiols fall 2-4x when a lipid "
+                            "supplies electrophiles, the same channel from the other side)"),
+            conditions="aqueous, pH 4.5-7, 100-145 C; the site is a lump over the melanoidin-bound and small-molecule electrophiles",
+            ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_site_yield", flags=("b17a_site_yield", "fitted_here", "no_literature_value",
+                                                "barrier_is_the_carbonyl_sink_family", "fit_cannot_move_this_barrier"),
+            note="Zero until a B17a report supplies the yield; the barrier is the carbonyl-sink decay family's (k_osone_decay's own).",
+        ),
+    }
+
+
+MEASURED_SULFUR = {**MEASURED_SULFUR, **mele_site_parameters()}
+
 
 # ---------------------------------------------------------------------------
 # (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four
@@ -2176,6 +2325,114 @@ FITTED_SULFUR_BOUNDS_LOG10K: Mapping[str, Tuple[float, float]] = {
 LUMPED_FORMATION_EA_BOUNDS: Tuple[float, float] = (20.0, 250.0)
 
 
+# ===========================================================================
+# WAVE B10 (2026-09-06) -- ONE FORMATION BARRIER BECOMES TWO, BY ROUTE
+# ===========================================================================
+#: `results/validation/kinetic_core_b10_prereg.md` sec. 3. Every step that used
+#: to take the single lumped barrier belongs to exactly ONE of two routes:
+#:
+#:   sugar_trunk     -- the carbohydrate side: pentose / Amadori / hexose
+#:                      entries, the deoxyosone branchings, furfural
+#:                      formation, the TTCA steps, and the carbonyl-sink
+#:                      family's fallback when no family barrier is supplied.
+#:   thiol_assembly  -- every step that joins a sulfur nucleophile (H2S, HS-,
+#:                      cysteine, thiamine fragments) to a carbonyl, the H2S
+#:                      loss, and the thiol-sink family's fallback.
+#:
+#: The table is TOTAL over the keys that can reach the lumped barrier
+#: (`FITTED_SULFUR_KEYS` minus `NO_EA_KEYS` minus `MEASURED_EA_OVERRIDES`) and
+#: `tests/unit/test_kinetic_core_b10.py` pins that. Passing ONE number to
+#: `with_fitted_sulfur` still gives every route that number, so every wave
+#: before B10 is reproduced exactly.
+FORMATION_ROUTES: Tuple[str, ...] = ("sugar_trunk", "thiol_assembly")
+
+FORMATION_ROUTE_OF: Mapping[str, str] = {
+    # ---- sugar trunk --------------------------------------------------------
+    "k_pent_dpo": "sugar_trunk", "k_pent_tdp": "sugar_trunk",
+    "k_pent_caramel": "sugar_trunk", "k_pent_thermal": "sugar_trunk",
+    "k_arp_tdp_th": "sugar_trunk", "k_arp_dpo_th": "sugar_trunk",
+    "k_glc_ha": "sugar_trunk", "k_glc_fur": "sugar_trunk",
+    "k_dpo_c2c3": "sugar_trunk", "k_dpo_nf": "sugar_trunk",
+    "k_dpo_ptr": "sugar_trunk", "k_dpo_ddp": "sugar_trunk",
+    "k_tdp_fur": "sugar_trunk",
+    "k_ttca_cys": "sugar_trunk", "k_ttca_deg": "sugar_trunk",
+    # carbonyl-sink family: reached only when no family barrier is supplied
+    "k_nf_decay": "sugar_trunk", "k_fur_decay": "sugar_trunk",
+    "k_osone_decay": "sugar_trunk",
+    # ---- thiol assembly -----------------------------------------------------
+    "k_ddp_mft": "thiol_assembly", "k_ddp_mft_hs": "thiol_assembly",
+    "k_nf_mft": "thiol_assembly", "k_nf_mp3p": "thiol_assembly",
+    "k_fur_fft": "thiol_assembly", "k_fur_fft_hs": "thiol_assembly",
+    "k_mgo_mp": "thiol_assembly", "k_ha_mp_mft": "thiol_assembly",
+    "k_hmp_mft": "thiol_assembly", "k_hmp_mp2p": "thiol_assembly",
+    "k_thi_hmp": "thiol_assembly", "k_thi_mesh": "thiol_assembly",
+    "k_cys_actz": "thiol_assembly", "k_h2s_loss": "thiol_assembly",
+    # the one decay key in no family: a thiol-derived species' sink
+    "k_dimer_decay": "thiol_assembly",
+    # thiol-sink family: reached only when no family barrier is supplied
+    "k_mft_decay": "thiol_assembly", "k_fft_decay": "thiol_assembly",
+    "k_thiol_decay": "thiol_assembly", "k_thiolate_loss": "thiol_assembly",
+}
+
+#: Declared search bands per route (B10 prereg sec. 3b): the lumped band (20,
+#: 250) narrowed by the 2026-09-04 prefactor rule (12 decades = +/-48 kJ/mol at
+#: 145 C) around a SOURCED centre. Neither is a measurement of the route.
+FORMATION_EA_BOUNDS_BY_ROUTE: Mapping[str, Tuple[float, float]] = {
+    "sugar_trunk": (40.0, 135.0),
+    "thiol_assembly": (55.0, 145.0),
+}
+
+#: The centres the bands are organised around, and where each comes from.
+FORMATION_EA_PRIOR_CENTRE: Mapping[str, float] = {
+    # Zhang 2026 k16: the Cys-Amadori enolisation, 86.7 / 84.7 kJ/mol on the two
+    # legs, R^2 1.000 -- the best-conditioned sugar-side barrier in the corpus.
+    "sugar_trunk": ZHANG_EA_CYS_AMADORI_TO_ALPHA_DC_KJ_MOL,
+    # Chan & Reineccius 1994 Table I: six sulfur-volatile formation barriers
+    # (methional pH 6/7/8, 2-acetylthiophene) in (81, 137) kJ/mol, aqueous,
+    # 75-115 C; none is a core species, the CLASS is the right one.
+    "thiol_assembly": 100.0,
+}
+FORMATION_EA_PRIOR_SOURCE: Mapping[str, str] = {
+    "sugar_trunk": (
+        "Zhang 2026 k16 (Cys-Amadori -> alpha-dicarbonyl), 85.7 kJ/mol; "
+        "zhang2026_extraction.md; already a MEASURED override on k_arp_dpo / k_arp_tdp"
+    ),
+    "thiol_assembly": (
+        "Chan & Reineccius 1994, ACS Symp. Ser. 564 ch. 10, Table I: methional "
+        "Ea 102.1 / 106.6 / 81.4 kJ/mol (pH 6/7/8), 2-acetylthiophene 132.9 kJ/mol "
+        "(replicate means); chan1994_extraction.md rows 34-40. A class prior, "
+        "not a step measurement."
+    ),
+}
+
+#: The ambient oxidant every fit system since B2.3 was integrated with
+#: (`generate_kinetic_core_b2_3_fit.OX_AMBIENT_MMOL_L`). Until B10 the engine
+#: charged NOTHING here (B11 prereg sec. 2.1: a fit/deploy inconsistency).
+#: `tests/unit/test_kinetic_core_b10.py` pins the two constants equal.
+OX_AMBIENT_MMOL_L: float = 1.0
+
+
+def formation_route_of(key: str) -> Optional[str]:
+    """Which B10 formation route a fitted key's barrier belongs to, or None."""
+    return FORMATION_ROUTE_OF.get(key)
+
+
+def formation_ea_for(key: str, lumped_formation_ea) -> float:
+    """
+    The barrier a route-sharing step receives: one number for every route
+    (every wave before B10), or the key's route from a ``{route: Ea}`` mapping.
+    """
+    if isinstance(lumped_formation_ea, Mapping):
+        route = formation_route_of(key)
+        if route is None:
+            raise KeyError(
+                f"{key!r} shares the formation barrier but has no route in "
+                f"FORMATION_ROUTE_OF -- add it deliberately."
+            )
+        return float(lumped_formation_ea[route])
+    return float(lumped_formation_ea)
+
+
 def sulfur_placeholders() -> Dict[str, SulfurParameter]:
     """The fitted sulfur steps, unpopulated. Integration refuses them as-is."""
     out: Dict[str, SulfurParameter] = {}
@@ -2242,7 +2499,7 @@ def decay_family_of(key: str) -> Optional[str]:
 
 def with_fitted_sulfur(
     fitted_log10k: Mapping[str, float],
-    lumped_formation_ea: float,
+    lumped_formation_ea,
     decay_ea: Optional[Mapping[str, float]] = None,
 ) -> Dict[str, SulfurParameter]:
     """
@@ -2269,7 +2526,9 @@ def with_fitted_sulfur(
         elif family is not None and family in families:
             ea = float(families[family])
         else:
-            ea = float(lumped_formation_ea)
+            # B10: a float gives every route the same barrier (every wave before
+            # B10, bit for bit); a {route: Ea} mapping gives each step its route's.
+            ea = formation_ea_for(key, lumped_formation_ea)
         out[key] = replace(out[key], k_ref=10.0 ** float(log10k), ea_kj_mol=ea)
     # The one channel that is declared but deliberately unpopulated stays at
     # zero rather than at None, because zero is a PREDICTION (no oligomerisation)

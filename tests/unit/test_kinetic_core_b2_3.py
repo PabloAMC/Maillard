@@ -204,6 +204,7 @@ def test_the_untracked_list_is_pinned_so_nothing_joins_silently():
     """
     assert set(PH.UNTRACKED_TITRATABLE) == {
         "H2S", "Gly", "SB", "AMA", "MEL_N", "THI", "MFT", "FFT", "MESH",
+        "AKG", "AKM",   # B18 (2026-09-08): the trunk-only Strecker aminoketones, same gap as Gly
     }
     for key, reason in PH.UNTRACKED_TITRATABLE.items():
         assert len(reason) > 60, f"{key}: a gap needs a stated reason"
@@ -319,22 +320,30 @@ BUNDLE_BASELINES = {
     # evidence_class and hold_out_history updated; measured block untouched.
     "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5":
         "008cfa372890a196f8b9183ae2ab84800b64238e182d905f3a134499300698b5",
+    # re-pinned 2026-09-06 (programme step R0): the four Yiltirak bundles gained an on-disk
+    # verification block (PDF + supplementary docx read in full; Table S3 exact) and their buffer
+    # provenance moved from second-hand to primary_source_pdf; targets untouched.
     "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026":
-        "03d56fd60b097c85c731c87181f5269a4ea9aa4e4bd38c3f5267cef5f66d8251",
+        "8af70f3bb7e6a62c58b403267cac7e70ab4f2bef663c2be1d1282b2c5bc545ce",
     "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026":
-        "3a51f4621291f6131f01aaa0e1a30b555dcb9ad92fa9aa4f8fa9df086d0996f9",
+        "6b09efd75b9046f3c69f84b4766acb2cd90935c3f2ae1dc8df28beeddaed756b",
     "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026":
-        "060ee66bbad61ba5cbdb8e683c325a5eed657094806920dc1223f792f381de82",
+        "47712c8d178915737e458773de87e05d26e47836722fba2592855acebf5758d8",
     "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026":
-        "907d92f499f897fbdf596de4bd1eae530b45eaa4d03aaf1c8b842dbaca195ad6",
+        "18303ba16cd36934e750b0ae95c7986f782fd54575740c41fba7d65e18750d69",
 }
 
 
 def _hash_without_buffer(payload):
+    # Amendment 9 clause 2 licensed the buffer block; Amendment 19 (2026-09-06, programme step
+    # R1) licensed the vessel block under the same rule. Both are condition-record completions
+    # and both are dropped before hashing, so the baselines below still prove that nothing
+    # else in a bundle moved.
     clone = json.loads(json.dumps(payload))
     conditions = clone.get("conditions")
     if isinstance(conditions, dict):
         conditions.pop("buffer", None)
+        conditions.pop("vessel", None)
     return hashlib.sha256(
         json.dumps(clone, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()

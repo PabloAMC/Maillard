@@ -1,6 +1,15 @@
 # Data restructure plan — `cleaning` Phase 2
 
-> Planning round, 2026-09-01. Nothing here has been executed. Companion to the Phase 1 prune
+> **How to read this document (added 2026-09-09).** It is the maintainers' working record, not a
+> guide, and it is long because nothing is deleted from it. Three parts: sections 0 to 5 are the
+> September 2026 restructuring plan and its execution log (done; kept as the record of why the
+> repository is shaped as it is); **section 7 is the live backlog**, with the reading logs from
+> every paper cluster as dated entries; section 6 and the appendices are guardrails and dispositions.
+> A newcomer needs only section 7, and within it the entries marked `- [ ]`. For what the model is
+> and how well it does, read `docs/guides/INTRODUCTION.md` instead; for how to change it,
+> `CONTRIBUTING.md`; for the fitted waves, `scripts/generators/WAVES.md`.
+
+> Planning round, 2026-09-01. The plan below was executed during September 2026 (section 4 logs). Companion to the Phase 1 prune
 > (`2dbe6a9`). Evidence comes from a full read of `data/`, `src/`, `scripts/`, `tests/`, the CI
 > gates and `AUDIT.md`; every claim below cites a path so it can be re-checked.
 
@@ -960,6 +969,754 @@ hashes for every artifact that carries a block, the envelope included).
       bundles (Pratap-Singh, Trikusuma, Resconi, Bolton, Cerny, ACSRef3) and the matrix bundles are the ones without a
       primary-source pass; one pass per bundle, recorded in the bundle, closes it. Needs the PDFs (`data/articles/`).
 
+### Calibration diagnosis 2026-09-04 (review pass: "why does so little land?")
+
+Measured on the shipped artifacts, not argued from first principles. Signed residuals
+`log10(predicted / measured)` over the 38 scored panel rows of `core_panel_scores.json`.
+
+**The finding, in one line: the corpus pins rate constants at a reference temperature and does not
+pin their temperature slopes, so the core is near-unbiased where its evidence sits and drifts one
+to three orders of magnitude away from it.**
+
+The evidence, in the order it was found:
+
+1. **There is no global scale error to remove.** Median signed residual over all 38 rows is
+   -0.42 dex; 18 rows over-predict, 20 under-predict. Nothing is fixed by one multiplier.
+2. **Per lane the residual is Arrhenius-shaped.** Regressing the signed residual on
+   `1000/T - 1000/T_ref` (T_ref = 145 C, the sulfur fit's own reference):
+
+   | lane | n | intercept at 145 C | implied Ea error | R^2 | residual sd after removing the trend |
+   | --- | ---: | ---: | ---: | ---: | --- |
+   | sulfur | 19 | -0.16 dex | -189 kJ/mol (too shallow) | 0.47 | 1.11 dex (raw 1.52) |
+   | acrylamide | 11 | -1.10 dex | +136 kJ/mol (too steep) | 0.40 | 1.18 dex (raw 1.53) |
+   | lipid | 7 | -1.15 dex | +65 kJ/mol | **0.94** | **0.34 dex** (raw 1.46) |
+
+   The sulfur lane is unbiased at 145 C and runs ~+2 dex (100x over) at 100-130 C. The lipid lane's
+   residual is 94 % explained by a single wrong temperature coefficient -- consistent with its own
+   declared gap (k4 anchored at 25 C, Schroen & Berton-Carabin 2022, Q10 2-3 ASSUMED, no measured
+   temperature dependence).
+3. **The fit cannot identify a slope, structurally.** The 54-row B9 objective spans 100-145 C, but
+   across **35 distinct systems of which ZERO appear at more than one temperature**. Every
+   temperature contrast in the objective is confounded with a change of sugar, amino acid, lab,
+   matrix and analytical method. Accordingly 21 of the 23 free coordinates are
+   `log10_k_ref_at_145C`, only 2 are activation energies, and **both Ea coordinates are among the
+   three the Laplace marks NOT identified** (sigma 29.2 and 60.6 kJ/mol).
+4. **Sigma on an Ea is worth more than every other error combined, away from the reference.**
+   sigma = 60.6 kJ/mol moves a prediction by 0.91 dex (8x) over 145 -> 100 C, and by 2.5 dex (345x)
+   over 145 -> 40 C. The residual sd after removing the T-trend is ~1.1 dex, which is the chain
+   compounding of coordinates whose own sigmas are 0.1-0.7 dex -- real, but second order.
+5. **The envelope hides exactly this.** Of 10 activation-energy priors in
+   `core_prediction_uncertainty.json`, **7 are held FIXED, and the stated reason for each is that the
+   coordinate is unidentified** (`unidentified_direction_in_laplace_covariance`, or a null stderr).
+   The envelope therefore propagates the well-measured coordinates and freezes the badly-measured
+   ones -- the wrong way round for an interval. Measured consequence: a nominal **90 % interval
+   covers 6 of 39 rows (15 %)**.
+6. **Four rows are not tests of the kinetics at all.** Every `matrix_only` row at T = 40 C,
+   t = 10 min (`pea_isolate_40C_PratapSingh2021`, `soy_isolate_40C_PratapSingh2021`,
+   `external_validation_bi_2020_raw_pea_hexanal`, `external_validation_liu_2023_ppi_offnote_baseline`)
+   records the **HS-SPME incubation** (40 C, 10 min -- the fibre exposure in the quantification note)
+   in the `conditions` block as if it were the thermal process, and scores an unheated ingredient's
+   storage-accumulated hexanal against a from-zero 10-minute simulation. They are the four worst
+   rows in the panel (3 357x, 6 078x, 3 717x, 33 392x). The same lane's three genuinely cooked rows
+   land at **3.7x, 8.7x and 34x** -- among the better rows anywhere in the panel. Removing the four
+   moves the median fold from 26.5x to 16.1x (the within-3x count is unchanged at 4/34, so this is
+   the tail, not the body). `acrylamide_spi_extrusion_130C_ACSRef3` (25 s at 130 C, 4 247x) deserves
+   the same look at whether its `conditions` are the process or the analysis.
+
+- [x] **DONE 2026-09-04. Invert the envelope's sampling rule: unidentified => SAMPLED over its
+      declared band, not fixed.** Shipped, with a NEGATIVE result on its stated goal that is worth
+      more than the change: `uncertainty.unidentified_prior` draws a free-but-unpinned coordinate
+      uniformly across its declared band; an Ea band is first narrowed to a 12-decade prefactor
+      prior (`PREFACTOR_PRIOR_DECADES`; holding log10 k(T_ref) fixed, dEa = ln10*R*T_ref*d(log10 A)
+      = 8.0 kJ/mol per decade at 145 C, so the raw (20, 260) search band implied a prefactor
+      uncertain by 29 decades, which nothing is); a DEFINITIONAL bound is NOT sampled (a flat draw
+      over `acid_yield_per_sink_event`'s (0, 1) lands ~1500x above the fitted 3.6e-4, floors every
+      sulfur prediction and made the envelope worse). Sampled priors 35 -> 41, median 90 % width
+      0.98 -> 1.38 dex, coverage 6/32 -> 5/33, out of sample 6/31 -> 5/32; README, the headline
+      guard and the model card re-pinned together; 770 tests and six gates green.
+      **THE NEGATIVE RESULT.** A sweep of the prior width (n=80, seed 0) says parameter uncertainty
+      is NOT what the envelope is missing:
+
+      | prior width | Ea half-width | coverage | median 90 % width |
+      | --- | ---: | ---: | ---: |
+      | frozen (the old rule) | 0 | 6/32 = 18.8 % | 0.949 dex |
+      | 6 decades | 24 kJ/mol | 4/33 = 12.1 % | 0.937 dex |
+      | 12 decades (shipped) | 48 kJ/mol | 5/33 = 15.2 % | 1.168 dex |
+      | 24 decades | 96 kJ/mol | 5/33 = 15.2 % | 1.279 dex |
+      | uncapped | +/-115 kJ/mol | 7/33 = 21.2 % | 1.245 dex |
+
+      Widening the priors all the way to uncapped moves a nominal 90 % interval from 19 % to 21 %
+      actual coverage. The change is still right -- freezing a coordinate BECAUSE the fit could not
+      pin it was indefensible, and the intervals are now wide in the places the physics says they
+      should be -- but it does not make the model honest on its own. Superseded item follows.
+- [ ] **The missing term is MODEL-STRUCTURE error, and the envelope has no way to express it.**
+      Sampling parameters around a wrong centre cannot reproduce a systematic offset, and the
+      residuals carry per-lane offsets of +0.84 (sulfur), -0.56 (acrylamide) and -3.53 dex (lipid)
+      medians, with ~1.1 dex of scatter left after removing each lane's temperature trend. To cover
+      90 % of rows an interval would need ~+/-2.5 dex. Options, in increasing honesty and cost:
+      (a) publish the measured per-lane residual dispersion beside the parameter interval and refuse
+      to call the parameter interval a prediction interval; (b) add a declared per-lane structural
+      dispersion term, fitted on the panel and disclosed as such, so the published interval is a
+      real predictive interval; (c) close the gap physically -- the two-temperature measurements the
+      calibration diagnosis asks for. (a) is a day, (b) is a wave with a prereg, (c) is an
+      experiment. Do NOT smuggle (b) in as a wider parameter prior: the sweep above shows that does
+      not work and would misattribute the error.
+- [ ] (superseded, kept for the record) **Invert the envelope's sampling rule.** Today `uncertainty.py` fixes a coordinate *because* the fit failed to constrain it,
+      which is why a 90 % interval covers 15 %. The two sulfur Ea coordinates already carry a
+      computed sigma (29.2 / 60.6 kJ/mol) in the Laplace artifact and are still `sampled: False`;
+      the trunk and acrylamide ones have no sigma and should be drawn log-uniform over their
+      declared bands. NOTE the distinction the thiol-sink decision turned on (backlog pass 7): Gigl
+      2021's (7, 102) kJ/mol is a MEASURED range, and leaving the point estimate at the bound is
+      right -- but an interval must still integrate across a measured width. Expected effect:
+      intervals widen sharply away from 145 C (to roughly +/-2 dex at 40 C on the lipid lane) and
+      coverage moves toward nominal. This supersedes and generalises the open `k_glc_ha` /
+      `k_glc_fur` item above: the rule is general, not two coordinates.
+- [ ] **Re-aim the data wishlist from levels to SLOPES: every new bundle should be a PAIR at two
+      temperatures in the same system.** No system in the objective appears at two temperatures, so
+      a further single-temperature bundle adds one more constraint to the coordinate class that
+      already has 21 members and zero to the two that dominate the error. `data_wishlist.py` already
+      says this for `Ea_decay_thiol_sink` ("at two temperatures in the same matrix"); make it the
+      wishlist's ranking principle rather than one row's remark, and have the value-of-information
+      ranking score a candidate measurement by whether it moves an *unidentified* coordinate.
+- [ ] **Repair or reclassify the four T = 40 C / t = 10 min matrix rows.** Two honest options:
+      (a) declare the ingredient's incoming hexanal as an initial condition and score the
+      *increment* the process adds; or (b) score these bundles only on the
+      `matrix_ranking_contract` they were curated for (they carry `expected_rank` and `direction`)
+      and drop them from the absolute denominator. Either way the scorecard should not report an
+      absolute fold error for a bundle whose `conditions` block is an analytical method. Add a
+      schema-gate check: a bundle whose `conditions.temp_C`/`time_min` equal its
+      `quantification_note`'s incubation must declare which one the `conditions` are.
+- [ ] **Publish the per-lane temperature trend as a first-class artifact.** The three regressions in
+      the table above are the most useful calibration statement the repo can make, and they cost one
+      short generator over `core_panel_scores.json`. "Unbiased at 145 C, +2 dex at 110 C" tells a
+      user far more than "3 of 38 within 3x", and it converts the headline from a verdict into a
+      usable rule for when to trust an absolute.
+
+- [ ] **B9's Laplace covariance is numerically invalid, and the envelope reads its sampling decisions
+      out of it.** `kinetic_core_b9_laplace_covariance.json` contains **six correlation entries with
+      |r| > 1** (max **+1.900**, `k_thiol_decay` x `k_glc_ha`; also `Ea_decay_carbonyl_sink` x
+      `k_glc_ha` at -1.879), and its `jtj_eigenvalues` hold three values at or below 4e-14 against a
+      largest of 173 -- **one of them negative** (-2.7e-15), which J^T J cannot be. All six bad
+      entries involve `k_glc_ha`, whose sigma is 1.37e-11: B9 dropped the eight Hofmann level rows,
+      the hexose-entry coordinate went to its band floor with a numerically zero Jacobian column, and
+      dividing a noisy covariance by ~0 produces nonsense. B8's matrix is clean (`k_glc_ha` sigma
+      0.495 there), so this arrived with the B9 refit and nothing checked it. **Consequences:** the
+      sigmas quoted for the two Ea coordinates (29.2 / 60.6 kJ/mol) are pseudo-inverse artefacts of a
+      singular matrix, not uncertainties -- the honest statement is that both Ea's lie in the fit's
+      numerical null space and are bounded only by their declared bands (`thiol_sink` [7, 102],
+      `carbonyl_sink` [20, 250] kJ/mol); and `uncertainty.py` decides what to sample from
+      `identified`, which is computed from this matrix. Concrete change: after building the
+      covariance, assert |r| <= 1 + 1e-9 elementwise and every eigenvalue >= -1e-10 * max(eigenvalue),
+      report the numerical rank, and mark coordinates in the null space `unidentified` with reason
+      `rank_deficient` rather than emitting a sigma for them. Then re-derive the identification flags.
+
+### Repository review 2026-09-04 (same pass, engineering side)
+
+- [ ] **The dependency manifests describe a repository that no longer exists.** Measured by AST over
+      `src/` and `scripts/maillard.py`: the entire shipping tool imports exactly **numpy, scipy and
+      pyyaml**. `pyproject.toml` still declares 17 runtime dependencies including `torch`,
+      `mace-torch`, `sella`, `ase` and `cantera` (the QM lane deleted at Phase 1a and the legacy
+      engine deleted at B5); `environment.yml`, cleaned on 2026-09-01 with the rule "do not add a
+      dependency without a consumer", still carries `cantera`, `optuna` and `networkx`, none of
+      which any file imports. Verified empirically: `maillard compare` runs a full two-arm
+      comparison end to end in 8.5 s on a bare venv with only those three packages. Concrete change:
+      cut the runtime set to numpy/scipy/pyyaml; move rdkit + matplotlib to a `data-build` extra
+      (their only consumers are `validate_smiles`, `build_compound_registry`, `generate_gap_heatmap`);
+      add `pytest-timeout` to `environment.yml` (CI/pytest.ini assume it; the container does not have
+      it); and add a seventh gate asserting manifest == imports, in the style of the other six.
+- [ ] **Make the tool `pip install`-able and drop the Docker requirement for the front door.** The
+      package is literally named `src`, so 496 imports read `from src import ...` and 77 files carry
+      a `sys.path.insert` shim; the README's install path is a Docker image built from a conda env.
+      Given the finding above, `pip install maillard` + a `[project.scripts]` entry point is
+      reachable now and would remove the single largest barrier to the stated "highly usable"
+      goal. Docker stays the right answer for regenerating artifacts reproducibly; it should not be
+      required to ask the model a question.
+- [ ] **CI runs three jobs that reference deleted files, and skips the gate that matters most.**
+      `strict-benchmarks` and the whole `validation-benchmarks.yml` workflow invoke
+      `tests/scientific/test_benchmarks.py`, deleted at B5; `ci.yml` also names
+      `tests/scientific/test_honest_headline_guards.py` and `scripts/run_campaign.py`, both gone.
+      `strict-benchmarks` is `continue-on-error: true`, so it builds a full conda env on every
+      non-draft PR to run nothing -- while advertising, as its job NAME in the PR checks list,
+      "RED: 0/14 strict-ready (9/9 PRIMARY fail, 5 SECONDARY unevaluated)": pre-retirement numbers
+      in legacy vocabulary, the most prominent honesty signal the repo publishes and the one place
+      the "docs that cannot drift" pass did not reach. Meanwhile **`artifact_freshness_gate.py` --
+      the sixth gate, written because an artifact drifted silently -- runs only in
+      `docker_maillard.sh gates`, never in CI.** Also: the "Install LaTeX toolchain" step (~2-3 min
+      of apt per unit run) exists for `test_run_campaign_named_comparison_mode`, which no longer
+      exists; nothing in the repo calls `usetex`.
+- [ ] **Adopt `ruff` with a narrow rule set (F, B905, B006) as a seventh CI check.** It found, in one
+      pass: a **duplicate `"r_arp_decay"` key in `CENTRE_LEDGER`** (`src/kinetic_core/sulfur.py:803`
+      shadowed by `:858`) whose two `basis` strings *contradict each other* -- the dead one asserts
+      the Amadori amine is CARRIED, the live one declares it destroyed. No behaviour is wrong
+      (`validate_charge_closure` asserts declared == stoichiometry, so the live entry must be
+      correct, and the module would refuse to import otherwise), but the ledger whose stated
+      contract is that every step is "declared in exactly one place" declares one step twice, and
+      the validator cannot see it because Python collapsed the key before it ran. Also 39 `zip()`
+      calls without `strict=`, of which `uncertainty.py:291` zips four parallel arrays out of the
+      Laplace artifact (`coordinates`/`sigma`/`identified`/`bounds`) -- a length mismatch there
+      would silently sample a subset of coordinates -- and `uncertainty.py:828` zips jobs against
+      worker results. Plus 48 unused imports and 3 unused locals. Nothing here runs today: `black`
+      and `isort` are declared in the dev extra but never configured or invoked, and
+      `pyrightconfig.json` exists but nothing runs pyright.
+- [ ] **Split the wave generators into frozen DECLARATIONS and a tested HARNESS.** 21 138 of the
+      32 033 lines under `scripts/` (66 %) are frozen wave generators, omitted from coverage by
+      policy, and the shipping objective is not written down anywhere -- it is the residue of
+      importing three modules in a fixed order, each mutating the first one's module-level list:
+      `import b2_3` gives 58 rows, `import b8` appends 4 to make 62, `import b9` removes 8 to make
+      54, and `b9.main()` then rebinds `b8`'s `MEMBER_DIR`, `OUT_FIT_REPORT` and `incumbent_vector`
+      at run time. It works only by careful construction, it is untested, and the freeze policy
+      means B10 can only deepen the chain. The freeze is right and should stay -- a changed
+      generator IS a new wave -- but freeze the *declaration* (row table, free-key set, bounds,
+      prereg pointer: small, data-like, one file per wave) and move the invariant machinery
+      (residual assembly, optimiser driver, consolidation, report writing) into `src/kinetic_core/`
+      under test. A new wave then becomes a ~100-line data file, and the objective becomes something
+      a reader can read.
+- [ ] **Live-code hotspots worth splitting** (the frozen waves excluded, since they cannot be
+      touched): `engine.declare_envelope` 334 lines / 50 branches, `uncertainty.propagate_panel`
+      303 / 46, `report_html.declared_assumptions` 242, `sulfur.integrate_sulfur` 231,
+      `scoring.score_benchmark` 188 / 53. Also `make trust-loop` invokes three scripts deleted at
+      B5 (`generate_prediction_uncertainty`, `generate_external_validation_report`,
+      `generate_loo_leverage`) and fails on the first line.
+
+### Reaction-modelling programme (2026-09-06 review, second pass: "we want to model the reactions")
+
+Owner position: the goal is to model the reactions to absolute concentrations, not to retreat
+to within-study ratios. This section records why that IS achievable, what the sulfur lane is
+missing, and the programme. Numbers measured on the shipped artifacts and on the PDFs on disk.
+
+**Proof that it is achievable, inside this repo.** The trunk lane (B1, Martins 2005 glucose/glycine)
+predicts the held-out browning trajectory at 80/100/120 C, 38 points, median 1.45x, 100 % within 3x,
+out of sample. The acrylamide lane, fitted on 16 rate + 12 Ea rows from three kinetics labs, holds
+the best free-precursor rows on the panel (Chang 2021 2.8x / 4.8x). What both have that the sulfur
+lane lacks is data SHAPE: one lab, time-resolved, several temperatures, several species at once
+(mass balance), a fully specified physical state.
+
+**What the sulfur lane has instead.**
+- 54 rows from ~13 labs, endpoints only. **There is no MFT or FFT concentration-versus-time series
+  anywhere in the corpus** (Kang 2026's volatiles are 120-min endpoints, `kang2026_SI_extraction.md`
+  sec. "any time course of the volatiles"; Yiltirak one time per temperature; Hofmann 1998 20 min;
+  Meng 2017 two times). The only time series are Kang's free-Cys curves and Zhou 2023's MGO + Cys arm.
+- One frozen formation Ea (64.1 kJ/mol, `lumped_formation_Ea_kJ_mol`) for every formation step;
+  only the two sink barriers are free (thiol sink at its 102 ceiling).
+- Oxidant pool `OX` is charged ONLY from cystine (Zhang 2024 arm): **zero in every cysteine-only
+  system**, so the oxidative channels carry no flux in Hofmann, Yiltirak, Kang, Zhou.
+- `benchmark.schema.json` has no vessel, fill, atmosphere or water-source field; `henry_constants.yml`
+  carries MFT (0.015) and FFT (0.002) as ESTIMATES, not measurements.
+- Cross-lab spread: Hofmann vs Zhou 64x at the shared pH-7 point with opposite pH sign; Hofmann vs
+  Yiltirak ~115x on ribose + cys in the same 0.5 M phosphate; between-paper residual means span
+  4-5 dex; within-paper sd 0.8-0.9 dex; leave-one-PAPER-out every predictor plateaus at ~12/39.
+
+**The between-lab term is missing INPUTS, not noise, and the largest one is computable from the
+Methods sections.** Yiltirak 2026 (PDF on disk, read 2026-09-06): 3 mL sample in a 20 mL Duran
+tube, air headspace during heating, argon only AFTER heating, buffer made in tap water. Hofmann
+1998: 100 mL in a 200 mL autoclave.
+
+| | Yiltirak 2026 buffer arm | Hofmann 1998 |
+| --- | ---: | ---: |
+| headspace air / O2 at 20 C | 17 mL / 0.148 mmol | 100 mL / 0.87 mmol |
+| cysteine charged | 0.075 mmol | 3.3 mmol |
+| O2 : cysteine (mol) | 2.0 | 0.26 |
+| MFT yield per mol ribose | 2.4e-6 (6.88 ug/L on 25 mM) | 1.7e-5 (198 ug/L on 100 mM) |
+
+7.5x in oxidant availability against 7x in yield, and thiols are the oxidation-labile species. The
+model cannot see this today because neither the bundle nor the network carries oxygen. Second-order
+hidden inputs, same origin: phosphate concentration (general acid-base catalysis; partly modelled in
+`ph_state`), trace metals (tap vs deionised), headspace partition of the thiols at temperature,
+quantification (SIDA vs external calibration). A yield of 1e-6 through >= 6 branching steps also
+means a 3x absolute needs every branching fraction to ~20 %, which single-endpoint data cannot give.
+
+**Programme (R = reaction modelling; W items from the first pass kept where still needed).**
+
+- [x] **R0 DONE 2026-09-06 (`f6450ae`). Yiltirak 2026 in full.** Owner to download the supplementary `mmc1.docx` (Table S3
+      thiols, Table S1 LOD/LOQ, Fig. S5 hexanal). Ingest all 4 matrices x 4 T-t x 3 thiols = 48
+      numbers (+ hexanal in the oil arms) as bundles; the emulsion arms are a within-lab MATRIX
+      contrast (MFT 5.1x / 3.8x / 3.5x / 2.9x emulsion over buffer+oil at 100/110/120/130 C).
+      Verify the 8 existing hold-out rows against S3 (bundle is second-hand today). Record the
+      vessel block (R1) from sec. 2.4.
+- [x] **R1 DONE 2026-09-06 (`415d7c3`; panel bundles only -- fit systems belong to the B10 generator). Physical state on every bundle and fit system.** Schema: `vessel` {fill_mL, vessel_mL,
+      atmosphere: air|N2|argon|sealed_unknown, closure, water_source} + the existing `buffer`;
+      derived `o2_equivalents_mmol` and `o2_to_thiol_ratio`. Back-fill from the Methods of every
+      panel bundle and every fit system (all PDFs on disk except the two hydrolysate PMC papers).
+      Where a paper does not state it, `sealed_unknown` with a declared prior, never a guess.
+- [ ] **R2. Model structure, three changes, each its own prereg wave.** PREREG FOR (a) WRITTEN
+      2026-09-06: `results/validation/kinetic_core_b10_prereg.md`, draft for owner sign-off. PROBE
+      FINDING that reshaped it (no fit; `scratch/ox_probe_2026-09-06.py`): every fit system ran at
+      `OX = 1 mmol/L` while the engine deploys at `OX = 0` (a fit/deploy inconsistency); the shipped
+      oxidant channels are second order in thiol and inert at trace levels (charging the pot's own
+      O2 moves MFT < 10 %, FFT <= 1.7x); the first-order thiolate sink carries no O2 dependence and
+      was fitted on an air-in-excess grid; Yiltirak's 100 C FFT miss (480x vs MFT 9x) is a
+      temperature-structure miss for (c), not an oxygen miss. Forecast for (a) revised down:
+      P(ships) 0.30, P(a Yiltirak rung within 3x after (a) alone) 0.05.
+      **ORDER DECIDED 2026-09-06 (owner: "take the most sensible decision long term"): (c) runs
+      first as wave B10** (`kinetic_core_b10_prereg.md`: one barrier -> two by route, both free,
+      Yiltirak's six within-study folds as fit rows under the owner's rule, its levels stay
+      validation, leave-Yiltirak-out refit alongside, Wang/Meng/Kang-140 as shape hold-outs);
+      **(a) becomes wave B11** (`kinetic_core_b11_prereg.md`). Five sulfur temperature claims added
+      to the directional panel before the fit (YIL-01/02 evaluable and both MISSED by the shipped
+      lane; WANG-01/02, MENG-01 recorded not evaluable): headline 17/26 -> 17/28.
+      **B10 RUN 2026-09-07: RE-MERGE** (`kinetic_core_b10_ship_rule.md`). Neither route barrier identified
+      (Laplace sigma 74 / 52 kJ/mol; the thiol-assembly barrier on its 55 floor in both variants, the sugar
+      trunk at ~50, both BELOW B9's 64); one B9 row +0.40 dex; Yiltirak median 115x -> 90x; Kang 140 C
+      direction not reproduced; carbonyl-sink barrier 92 with the folds vs 226 without. Reading: the
+      ladders are shaped by the SINKS, which the corpus does not pin either. Shipped as B10: the
+      ambient-oxidant consistency fix only; the engine keeps reading B9. Next: R7 (two temperatures,
+      several times, one buffered pot, intermediates measured) and/or B11 (the sink structure).
+      **B11 RUN 2026-09-07: DO NOT SHIP** (`kinetic_core_b11_prereg.md` sec. 9 amendments + sec. 10;
+      `kinetic_core_b11_ship_rule.md`). The two-pool oxygen state (reservoir `OXR` in ambient units
+      from the vessel block, vacancy `OXV`, fast refill, consumers `ch_cys_ox` thiolate-mediated and
+      `ch_red_ox_*` on the reductone pool, dimers vacating) is in the engine; the fit on B9's 54 rows
+      with every system charged from the generator's vessel table (only Hofmann 1998 states volumes)
+      walked both consumers to their floors (3.7e-4 / 1.3e-4 per unit per minute), unidentified
+      (Laplace sigma 8 / 20 dex); Bolton 20.2x unchanged, Yiltirak 130 C unchanged, in-sample worst
+      +0.20 dex (the dimer channels' vacancy cost k_dimer_decay +1.85 dex). Per the prereg the
+      consumers ship at ZERO (declared-inert), the structure, the vessel plumbing and the reservoir
+      arithmetic stay (every earlier wave reproduces to 1e-9), the engine keeps reading B9, and the
+      vessel's absence is an extrapolation flag only once a shipped report consumes oxygen
+      (Amendment 23). Reading: one laboratory's vessel cannot identify an oxygen consumer, and no
+      first-order consumption inside the bands closes a between-lab gap without destroying the pot's
+      cysteine. R2(a-b) closed as a negative result; R3 (paper response factor) is now the leading
+      explanation for between-lab level gaps; R7's oxygen axis is the only measurement that settles it.
+      (a) **Oxygen as an input.** Charge `OX` from headspace + dissolved O2 (Henry) and cystine;
+      split the thiol sink into a thermal term and an oxidative term first order in thiol and in
+      O2 through the thiolate fraction (mechanism already in `ch_thiolate_loss_*`), with a
+      trace-metal multiplier on the water-source flag. Anchors: Hofmann 2002 brew FFT loss
+      0.023/min at 80 C (hold-out today), Kumazawa 2003 pH survival grid, Zhang 2024 cystine arm,
+      Gigl 2021 ceiling. Pre-registered test: the Yiltirak/Hofmann yield gap closes to < 3x with
+      no anchor.
+      (b) **Headspace reservoir during heating.** V_air/V_liq x K_aw(T) for MFT, FFT, H2S, MeSH;
+      flag the K_aw values as estimated; a measured K_aw(T) for MFT/FFT joins the wishlist.
+      (c) **Split formation Ea** into 2-3 coordinates (pentose-osone -> MFT route; furfural +
+      H2S -> FFT route; Strecker/H2S release, prior from Kang's cys-conversion Ea 55.1 kJ/mol),
+      priors from the Zamora 2013 Ea ladder; fitted on within-study temperature folds only
+      (Kang 100/120, Feng, Zhai, Meng 80/95/120, Yiltirak's ladder AFTER R0 moves it to the fit,
+      keeping Kang 140 C and Hofmann pH 3/7 as hold-outs).
+- [ ] **R3. The fit as a hierarchical model.** Response factor per (paper x method) as a declared
+      random effect on the log scale; fed-intermediate yields, conversions and folds enter with no
+      factor; levels enter through their paper's factor. The between-paper sd becomes the published
+      structural term (first-pass item W3). Hold-outs pre-registered per wave: Yiltirak fold SIGNS
+      (currently both wrong: MFT predicted 64 -> 171 vs measured 6.88 -> 1.71; FFT 615 -> 214 vs
+      1.28 -> 1.62), Kang 140 C rung, Meng ladder, Hofmann pH 3 / 7 rows.
+- [ ] **R4. Identifiability before and after.** Profile likelihood on every free coordinate;
+      collapse or fix flat ones (target <= 15 free in the sulfur lane); assert |r| <= 1 and
+      eigenvalues >= 0 on the covariance (the open singular-Laplace item); publish numerical rank.
+- [ ] **R5. Engineering that R3 needs.** A sulfur integration costs ~0.3 s (LSODA, Python RHS);
+      a hierarchical fit by MCMC at ~100 rows x 1e4 evaluations is ~3.5 days. Compile the RHS
+      (numba or JAX; JAX also gives sensitivities and replaces corner re-integration in the
+      envelope). Target: < 1 h per fit.
+- [ ] **R6. Validation targets, pre-registered, in increasing difficulty.** (i) In-lab absolute:
+      predict Hofmann 1998's full-precursor rows from Hofmann's own fed-intermediate rows, same lab,
+      same SIDA: >= 70 % within 2x. (ii) Cross-lab absolute WITH state inputs: Yiltirak buffer arm
+      within 3x, no anchor (today 9x-480x). (iii) Directional >= 80 % on an enlarged independent
+      panel. (iv) One-anchor scorecard as the practitioner headline (17/28 today), kept alongside.
+- [ ] **R7. The experiment the model is built to consume.** The registry's minimum primary
+      experiment (PPI/SPI 5 % slurry, ribose + cysteine 1 mM, 5 time points, 95 / 120 C, SIDA) plus
+      the two axes this analysis adds: atmosphere (air vs N2, two fill ratios) and phosphate (0.05 /
+      0.5 M). This is the only route to absolute ppb in a protein matrix without an anchor; ~4-6
+      weeks of GC-MS at a partner lab.
+- [ ] **W2 (kept). Within-study contrast dataset** from the 78 dossiers: one row per within-paper
+      comparison with verbatim quote; several hundred rows; the fold rows R2(c) and R3 consume.
+- [x] **W4 part 1 DONE 2026-09-07 (wave B12, `3e88b83`):** water activity (Pereyra Gonzales 2010 shape, Bell 1995
+      floor) and Amadori-decay pH (Martins 2003 contrast) as declared banded terms on the trunk; AW-01 miss /
+      AW-03 agree as pre-registered; headline 17/28 -> 18/30. Kocadagli 2016 JAFC was already in the trunk (B7).
+      **B13 (next): glucosone / glyoxal / diacetyl species from Kocadagli JAFC + Gursul Aktag; Lee 2022/2024 and
+      Brands 2002 as validation sets; De Vleeschouwer 2009 for the acrylamide lane's a_w; envelope sampling of the
+      B12 bands; dossiers for Balagiannis 2010, Jousse 2002, Piornos 2025 (owner-supplied 2026-09-07).**
+- [x] **W4 part 2 DONE 2026-09-07 (wave B13).** Trunk lane from the on-disk kinetic papers (Bell 1995,
+      Lievonen 2002, Miao 2004, Pereyra Gonzales 2010, Kocadagli 2016 x2, Sen 2022, Agcam 2022, Hidalgo
+      1993, Zamora 2013, Gursul Aktag 2020; Goncuoglu Tas 2017 has no Ea): glucosone, glyoxal and
+      diacetyl added trunk-only from Kocadagli 2016 (`kinetic_core_b13_prereg.md`, Amendment 22); the
+      envelope samples the B12 a_w/pH bands. Validation search CLOSED: Lee 2022/2024 are baked model
+      cakes (non-isothermal, figure-only, mmol/g DM) and Brands 2002 x2 quantify melanoidins, so no
+      dicarbonyl validation row exists; the wishlist names the pot to run.
+      **B14 DONE 2026-09-07 (owner downloaded De Vleeschouwer 2008, 10.1021/jf8006294):** the lane's
+      shipped constants turn out to be that paper's a_w 0.92 column, and the paper measures them at
+      a_w 0.88 / 0.96 / 0.99 too: no significant change at 95 % HPD. `acrylamide_conditions.py` =
+      a DECLARED FLAT a_w term inside 0.88-0.99 (band 0.41-1.39 sampled by the envelope), refusal
+      across the window boundary; AW-05 (fit_adjacent, flat) agrees; AW-02 (a_w 0.3 / 0.6) stays
+      refused with the window named. Nothing below a_w 0.88 is measured for the lane anywhere in
+      the corpus: the dry-side extrusion claims need a measurement, not a paper.
+      **B15 DONE 2026-09-07 (owner downloaded De Vleeschouwer 2006 pH + 2007 a_w, Zhang 2020
+      dicarbonyls, Zhai 2020/2021 TTCA):** acrylamide lane gains a DECLARED initial-pH factor (ln-slopes
+      0.5414 / 0.3442 = 0.235 / 0.149 decades per unit on k_asn_glc / k_acr_dp, window pH 4-8, held
+      outside) and an elimination a_w shape (2007 k_E, minimum at 0.82, joining the 2008 flat window at
+      0.88); the formation window widens to 0.34-0.99. Amendment 25, `kinetic_core_b15_prereg.md`.
+      Scorer: unstated-input SWEEP (unanimity rule), RANKING claims, buffers on panel systems; TTCA
+      chargeable by name and counted as a sulfur source (Zhai 2020: ~94 % TTCA). Panel: WANG-02 (FFT
+      peak) AGREES at pH 5/7/9 and enters the headline; WANG-01 flips with pH -> n.e.; PH-ACR-01 and
+      AW-05 agree; DIC-01 (Zhang 2020 dicarbonyl ordering, glucose alone 105 C) DISAGREES -- glucosone
+      x10^4 over 3-DG where 3-DG dominates: the glass-to-water transfer of the B7/B13 caramelisation
+      constants is the suspect (first measured constraint on B13). Headline 18/30 -> 19/32. Zhai 2021's
+      zero-order TTCA degradation at 100/120/140 C (0.0027/0.0065/0.0081 /min first-order equivalents;
+      the core's fitted k_ttca_deg gives 0.0022/0.016) qualifies as FIT rows for the next sulfur wave
+      (W6); its printed Ea 81 kJ/mol is not reproducible from its own constants (~35).
+      **B16 RUN 2026-09-07: DO NOT SHIP, with a diagnosis** (`kinetic_core_b16_prereg.md` sec. 6). Fit
+      rows: Schieberle 2000's 100 C ratios (the Hofmann pot: MFT 4.5 -> 179 ug over 30 -> 720 min) and
+      Zhai 2021's TTCA decay at 100/120/140 C; no new coordinate; two variants (thiol-sink ceiling 102
+      kept / 160 lifted). Neither reproduces the 100 C rise (MFT peaks at 6 h in both; the lifted fit runs
+      to its new ceiling), both break the 145 C fed pots (+1.9 / +0.6 dex), the TTCA rows stay 1.25 dex off
+      (the core opens TTCA to cysteine + pentose ~10x too fast: k_ttca_cys, fitted on Kang's free-cysteine
+      readings). BUT weakening the low-T sinks moves Yiltirak 100/110 C from 198x to 14x: the between-lab
+      misses are a LOW-TEMPERATURE SINK problem, and a single Arrhenius sink cannot serve 100 C and 145 C
+      at once. Liu 2023's 168 C MFT decline (RIB-T-01) becomes evaluable and agrees. Engine keeps B9.
+- [ ] **W7 (from B16). Sink structure.** UPDATE 2026-09-08: B17 variant (b) RUN, DO NOT SHIP (prereg sec. 6):
+      release driven to its floor, cost = B16's, slice flat; T3 shows the model's dimer share 10-200x below
+      Zhou 2023 / Zhang 2024 with k_dimer_* on their ceiling -> the disulfide channel is OXIDANT-limited
+      (B11's reservoir ships inert). UPDATE 2026-09-09: variant (a) RUN, DO NOT SHIP (prereg sec. 6b):
+      yield unidentified (slice flat to four figures, sigma 8.6e4) because B16's optimum carries
+      k_osone_decay at log10 -8.6 (the site source is dead) and Stack 2018's K(T) = 0.45 M^-1 at 100 C
+      (a reversible thioether holds < 5 % of the thiol when hot). NEXT (variant c, to pre-register):
+      IRREVERSIBLE addition of the thiol to an electrophile pool sourced from the flux the lane carries at
+      the optimum (ARP / pentose steps, or the trunk's melanoidin) -- the unsaturated-carbonyl adducts of
+      farmer1990 / whitfield1988 / mottram2002b (thiols halved by 6-15 g/L phospholipid) -- with the dimer
+      share left to an INTERNAL oxidant (xu2010: N2 changes nothing). The oxidant supply stays a separate
+      suspect for the DIMER SHARE, not for the missing thiol.
+      Original entry: Reversible thiol dimerisation (disulfide pool re-releasing thiol,
+      temperature-dependent equilibrium) and/or a sink scaling with the carbonyl/melanoidin pool; the
+      pentose supply at 100 C (formation dries up at 6 h in the model, not in the pot); the TTCA return
+      path (k_ttca_cys against Zhai 2021). Pre-register against B16's ten rows + the fed pots; the
+      Yiltirak levels as the out-of-sample lever. Also open: DIC-01/DIC-03 (aqueous glucose dicarbonyls:
+      the B7/B13 glass-to-water transfer), HEX-T-01 (a hexose -> FFT route, Liu 2021). Wang 2022 (FFJ,
+      third lab, stated vessel, 100-140 C x 30-180 min; owner's download): on B9 MFT at 100 C peaks at
+      90 min (pot rises to 180), at 140 C both thiols fall 3 dex in 150 min (pot declines gently after
+      60 min) -- the sinks are too strong at BOTH ends. Headline 19/33 -> 20/37 (FFT rise at 100 C agrees).
+- [ ] **W7b (from the 2026-09-08 reads of Schieberle & Hofmann 1998 and the Weerawatanakorn 2015 review).**
+      The dry 180 C / 6 min pot beside the aqueous 145 C / 20 min pot (same charge, same SIDA): the
+      aqueous column IS Hofmann 1998 Table 2 at tenfold scale (do not enter twice); new are the
+      3-mercapto-2-pentanone (59.9 -> 10.1 ug per pot) and thiazine (42.4 -> 1.0) anchors at 145 C,
+      the only ones for Schieberle 2000's 100 C series (W2 contrast rows: MP 79 ug at 6 h / 100 C vs
+      59.9 at 20 min / 145 C), and the sulfur redistribution dry vs wet (FFT x8, MFT x1.3, MFT/FFT
+      1.6 -> 0.26) as a hold-out shape for W7's sink variants. Fetch list from the review, in order:
+      Mottram, Szauman-Szumski & Dodson 1996 JAFC 44:2349 (thiol + disulfide loss to egg albumin at
+      100 C: a protein sink at cooking temperature); Hofmann, Czerny, Calligaris & Schieberle 2001
+      JAFC 49:2382 (time-resolved thiol loss on coffee melanoidins); Hofmann & Schieberle 1995 JAFC
+      43:2946 (2-acetyl-2-thiazoline loss, water 100 / 145 C and oil); Kerscher & Grosch 1998 JAFC
+      46:1954 (SIDA thiols in cooked meat, a food-matrix validation row). Side finding: the "342" the
+      inventory refused as fabricated from Hofmann 1998 is 3-mercapto-2-butanone, 342 ug/100 mmol
+      ribose, in Schieberle 2000 Table III (wrong paper and probably wrong analyte); "200" is nowhere.
+- [ ] **LOX-01 (from the 2026-09-08 reads of Zhang 2020b, Gao 2020, Wang 2014, Wang 2015). The beany
+      note before heat.** Levels on disk (no time course anywhere): raw pea milk hexanal 164.18 +/- 11.93
+      ug/L calibrated (soy 437.39), 1-hexanol 387.39 (283.54), 2-pentylfuran 31.66 (16.26), 1-octen-3-ol
+      105.10 (38.73), nonanal 7.88 (8.66); free linoleic acid ~14 300 (pea) / ~58 000 ug/L (soy); C6
+      products are 10.6 mol % of the free linoleic acid; pea LOX-2 2160 +/- 38 and LOX-3 150 +/- 6 U/mg
+      protein (U = 0.001 A234/min), LOX-1 not detected, HPL 0.15 umol/(min mg), ADH 5.7x soy's
+      (hexanol:hexanal 2.3 vs 0.64). Gao 2020: a finished pea isolate keeps 18.6 of 43.7 U/g LOX
+      (0.43) through neutralising and drying; 1.47 % lipid rides into the isolate. Binding: every
+      pea percent-bound value in Wang 2014/2015 is FIGURE-ONLY; canola's printed 95 C time course
+      (hexanal 14 -> 67 % bound in 10 min, most in 30 s) is far faster than the ambient adduct
+      brackets and reads as depletion by a denaturing protein. A LOX module needs: (i) a time
+      course of hexanal during soaking / grinding (Bi 2026, Food Control, on the fetch list), (ii)
+      a LOX rate in molar units (needs epsilon 234 and the assay geometry), (iii) the hexanal fate
+      (alcohol dehydrogenase to 1-hexanol, binding, evaporation). Until (i) exists the levels above
+      are validation rows for a storage model, not fit rows.
+      UPDATE 2026-09-08 (bi2026, fischer2021 read): Bi 2026 prints the SUBSTRATE time course, not the
+      product's: free linoleic acid 10.658 -> 0.309 ug/g supernatant over 0 / 10 / 20 / 40 / 60 s / 2 / 4 /
+      8 min of grinding (1:7 peas:water, n = 3; total FFA 34.55 -> 13.53; 28 lipid subclasses re-typed),
+      i.e. an apparent first-order consumption of about 0.44 /min for free LA (0.12 /min for total FFA;
+      net of release from lipids, two-point). Hexanal + hexanol are FIGURE-ONLY (rise 0-2 min, plateau
+      by 8 min), never printed separately; grinding temperature and pH unstated; no LOX assay. This is
+      the first within-study RATE on the LOX side and a candidate FIT row for a substrate-depletion
+      step; the product side stays unfitted. Fischer 2021: pea isolate carries 3.4-5.1 ug/g hexanal and
+      10-12 ug/g 2-pentylfuran at pH 6.5 (external calibration in water, no IS: lower bounds), hexanal
+      x1.6 at pH 4.5 (a binding/release effect, not a rate); at 35 g/L that is 120-180 ug/L hexanal
+      and 350-420 ug/L 2-pentylfuran carried into a recipe before any heat -- the same order as raw
+      pea milk. Further LOX acquisitions named by Bi 2026: Yan 2024 Food Chem 445:138696, Bi 2022 Food
+      Chem 380:132203, Feng 2021 JAFC 70:289.
+- [x] **B18 (pre-registered and RUN 2026-09-08; SHIPS with two caveats): a pyrazine step on the trunk.**
+      Outcome in the prereg sec. 6: five steps (Strecker x2 fitted, condensation x3 declared fast), cost
+      2.64 / 10 rows, T1 T2 T5 T6 pass, T3 T4 fail (Leahy's sugar pot: pyrazine absent, total 2.9 dex low,
+      apparent barriers 300-460 kJ/mol = the trunk's dicarbonyl SUPPLY in water); glyoxal-sink
+      conditionality 0.59 dex (nosink variant). NEXT WAVE ASKED FOR: the small dicarbonyls in water
+      (formation from sugar + amine at 70-120 C; loss: Zhou 2024 Fig. 4 GO/MGO time courses are
+      figure-only; Leitzen 2021 DIC-01 on disk). READ LATER THE SAME NIGHT: zhou2025b -- Ala + GO ->
+      pyrazine 0.1165 / 0.2806 / 0.8867 umol/L/min at 70 / 80 / 90 C (Ea 105.0), SEVENTY TIMES the 2024
+      ladder at equal slope, reactant concentrations of those runs unprinted: a third conditionality on
+      k_go_ak (up to 1.85 dex) until resolved; and the first Ala + Xyl -> ARP rate (0.0034 / 0.0060 /
+      0.0170 mmol/L/min, Ea 83.1). Original entry: Five dossiers read
+      (zhou2024, leahy1989, leahy1989a, yu2018, balagiannis2015). FIT rows: Zhou 2024's six initial
+      rates (Ala + GO -> pyrazine 0.0279 / 0.0791 / 0.1507 umol/L/min; Ala + MGO -> 2,5-DMP 0.0035 /
+      0.0100 / 0.0230 at 100 / 110 / 120 C, 20 + 20 mM, pH 8 unbuffered; Ea 100.6 / 111.7 kJ/mol;
+      conversion < 0.2 % so each is a second-order constant 6.98e-8 / 8.75e-9 L/(mmol min) at 100 C)
+      and Leahy 1989's four within-study pH ratios (k(9)/k(7) ~ 2-3, k(9)/k(5) ~ 20-60). Declared:
+      alanine -> glycine transfer (+/- 0.5 dex), the mixed methylpyrazine route (geometric mean).
+      Hold-outs: Leahy's 95 C / 2 h distribution and total, Leahy's and Yu 2018's barriers, Zhou 2023's
+      pyrazine columns out of lane. Prereg `results/validation/kinetic_core_b18_prereg.md`. Registry
+      gap: the parent pyrazine has no molecule row (class alias only); glyoxal, methylglyoxal, glycine,
+      alanine, lysine, glucose have no rows either (precursors are keyed elsewhere). Fetch list from
+      Balagiannis 2015: Huang, Bruechert & Ho 1989 J Food Sci 54:1611 (aqueous, 120-140 C, pH 10, zero
+      order: the only pyrazine rates above 120 C), Parker 2013 JSFA 93:197 (consolidated review),
+      Jusino 1997 JAFC 45:3164 (solid state, first order, Ea 56.5 kJ/mol).
+- [x] **LIP-RULES (2026-09-08). The refused lipid routes as cited rules.** Six dossiers (miyazaki2023,
+      cao2020, chen2017, yang2024, choe2006, wanjala2021); rules R29-R32 (oleate hydroperoxide
+      scissions to the alkanals and 2-alkenals; the 13-HpODE furyl route to 2-pentylfuran; the 10-HpODE
+      route to 1-octen-3-ol) with `data/species/literature_structures.yml` for the species the engine
+      lacks; `explain` matches literature structures by registry id. Not written: aldehyde -> alcohol
+      (no paper draws it). Left for a wave: Cao 2020's nmol/g at 120 / 150 / 180 C after 24 h and its
+      (2-alkenal)/(alkanal) ratio 0.09 -> 0.56; Miyazaki's isomer-resolved area ratios (n = 1, no IS);
+      the oleate isomer distribution (Choe & Min Table 1, second-hand from Frankel 1985: 26-28 / 22-25
+      / 22-24 / 26-28 %). Registry fix: 1-octen-3-ol SMILES was C7 (off_flavour_targets.yml).
+- [ ] **B19 reading log (2026-09-08, Strecker cluster).** Six dossiers (huang2017, hidalgo2013, zamora2015,
+      weenen2001, parker2013, kocadagli2021): no per-amino-acid second-order Strecker constant in water yet.
+      Huang 2017 Leu/Ile: k1 (amino-acid loss) and k2 (intermediate -> aldehyde) at 100 C in 1/min, Ea2 83-121
+      kJ/mol, but concentrations unprinted (only the 10:1 ratio) and the printed Arrhenius lines miss Table 1
+      by 5-7x -> not convertible. Hidalgo 2013: Ea 38.2 (Phe + glyoxylic acid, a transamination, zero order,
+      levels figure-only). Zamora 2015: PEA/PAC split on 11 lipid carbonyls (air multiplies the aldehyde 6-9x;
+      Ea pairs cross) -> programme 7's lipid-carbonyl Strecker. Weenen 2001: yields at reflux, no rate.
+      Kocadagli 2021: within-study ratios only (5x Met/Ile/Leu/Val -> aldehydes 4.2-5.0x), SI not on disk.
+      Parker 2013 fetch list for the rate rows: Chan & Reineccius 1994 ref 16 (3-MB, PAC PZO rates + Ea, pH 6-8,
+      75-115 C), Cremer & Eichner 2000, Balagiannis 2009 JAFC, Desclaux 2006, Low 2007, Koutsidis 2008,
+      Jusino 1997. Registry gaps: 2-ethyl-3,6-dimethylpyrazine, 2,3-diethyl-5-methylpyrazine, 2,3-pentanedione,
+      3,4-hexanedione, formaldehyde, parent pyrazine; R07's SMIRKS excludes glycine -> formaldehyde.
+- [ ] **B19 reading log (2026-09-08, methionine chain).** Six dossiers (cheng2020, chin1994, schutte1972,
+      zhang2023, yu1995, tang2024). The chain methional -> methanethiol -> DMDS / DMTS is now documented but
+      only Chin & Lindsay 1994 gives OXIDANT-resolved kinetics: 41.6 uM MeSH, pH 6.3 phosphate, 30 C: Cu(II)
+      1 ppm removes 70 % in 30 min in air and 30 % under N2; Fe(III) 4 ppm < 15 % in 300 min; DMDS recovers
+      only 23-77 % of the lost MeSH (the rest non-volatile); NO DMTS without H2S, and ascorbate + Fe(III) with
+      1 ppm H2S gives 7x the DMTS (H2O2 / hydroxyl radical, benzoate -50 %, phytate -75 %). This is the
+      oxidant structure B17 named for the thiol dimers, measured on methanethiol. Schutte 1972: methional ->
+      MeSH needs a catalyst (ninhydrin high, pH 9 moderate, uncatalysed at pH 6 trace; ordinal). Zhang 2023
+      (storage at 50 C after a 115 C cook, pH 4.9): DMDS 133 -> 4086 ng/mL over 56 d in Met/Xyl (0.76 uM/d),
+      DMTS x127 in Met/TTCA (TTCA supplies the H2S), MeSH itself never measured. Yu 1995: one point at 180 C,
+      methional:DMDS 4.3 (Met) vs 0.03 (MetSO): the isolate methionine's oxidation state decides the split.
+      Cheng 2020: the 100 C time series exists but only as chromatograms (request the numbers). Still to
+      fetch: Pan 2025 (zero-order rates at 120 C, on the list). Registry: methional, methanethiol, DMDS,
+      DMTS exist; methionine, MetSO, MMFT, methyl furfuryl disulfide do not.
+      UPDATE 2026-09-09 (deng2022, monforte2021, pan2025, yao2025, zhang2024b read). Pan 2025 is the first
+      rate table on the chain: Met 0.268 mmol/L in a fruit-sugar pot (fructose 111 + glucose 83 + sucrose
+      44 mmol/L, citrate pH 6.2, sealed, 30-600 s), zero-order K for methional 1.82e-4 / 16.8e-4 / 89.9e-4
+      at 100 / 120 / 140 C, methanethiol 1.58e-4 / 2.34e-4 / 6.34e-4, DMDS 0.015e-4 / 0.070e-4 / 0.187e-4,
+      DMTS 0.026e-6 / 0.121e-6 / 0.054e-6 (UNIT NOT PRINTED; the two anchor levels 626 ug/L methional and
+      26 ug/L MeSH at 140 C / 600 s make it umol L-1 s-1); apparent barriers 125 / 44 / 81 kJ/mol; at 120 C
+      MeSH accrues at 14 % of the methional rate, DMDS at 3 % of MeSH's, DMTS at 2 % of DMDS's -- in a sealed
+      pot without oxidant the disulfides are a small sink, which is B17's oxidant-limited picture on a
+      second thiol. Pseudo-first-order in Met (dicarbonyl supply steady, my assumption): 3.8e-4 1/min at
+      120 C. Deng 2022 (Met + Glc 200 + 200 mM, pH 7.5, 120 C, RF = 1): methional 18.5 / 25.3 / 75.8 / 87.8 /
+      77.7 ug/L at 30-240 min, from the Met Amadori compound 1.4-2.6x more and peaking at 120 min then
+      falling (apparent loss >= 6.9e-3 1/min); parent pyrazine 0.09 umol/L in 120 min, two hundred times
+      below Zhou 2024's fed-glyoxal pot: the sugar pot's dicarbonyl supply, not the condensation, limits
+      pyrazine yield (B18's supply caveat measured in the same laboratory). Monforte 2021: phenylacetaldehyde
+      Ea 73.5 +/- 0.8 kJ/mol, but on the o-quinone / Fe / Cu / O2 route at pH 3.4 (wine), Weibull release
+      constants 0.014-0.354 1/min from 40 to 80 C, pH 3.4 -> 7 only x1.2; NOT the R07 barrier. Yao 2025
+      (tea): methional alone at 100 C gives DMDS, DMTS, bis(methylthio)methane and methyl (methylthio)methyl
+      disulfide (a product-set constraint without sugar), EGCG consumes methional completely; all time
+      courses figure-only (SI not on disk); DMTS threshold 0.4 ug/L in green tea. Zhang 2024b (the
+      MMFT / Met + thiamine + xylose paper, Food Chem. 2024, re-read against the older Zhang2024 dossier):
+      the 8.7 % (Cys arm) and 54.2 % (cystine arm) MFT-dimer shares that B17's T3 uses as measured targets
+      are 300-dpi figure read-offs; the printed text supports only the ORDERING cystine > Cys = GSH and
+      "dimer rises with additive"; the MMFT zero-order constants (0.0028 / 0.0031) carry no printed unit or
+      run length. DEFECT: re-label the Zhang 2024 target in `generate_kinetic_core_b17_ship_rule.py` and the
+      B17 prereg sec. 6 as figure-derived (Zhou 2023's 6.5-9.6 % stays measured), or request the raw data
+      ("upon reasonable request"). Consequence for programme
+      6: Pan 2025 + Chin & Lindsay 1994 + Deng 2022 are enough to pre-register a methionine arm (methional
+      formation zero-order in a sugar excess, MeSH release, an oxidant-gated dimerisation) once the unit
+      of Pan's table is settled by the authors or by the anchor levels; per-amino-acid Strecker constants
+      on glyoxal / methylglyoxal in water are still missing (Chan & Reineccius 1994 ref 16, Cremer &
+      Eichner 2000, Balagiannis 2009 not on disk).
+- [ ] **Programme 7 reading log (2026-09-08, tang2024).** Lysine before heating: soy protein 84.2, pea protein
+      101.7 mg per g protein = 0.576 / 0.696 mmol/g protein (preparations at 78 % protein), above the flour
+      values the matrix table carries (0.379 / 0.524); glucose 4:1 w/w, wet 85 C / 30 min: lysine -22 % (soy)
+      / -8 % (pea), furosine +1.4 / +1.9 mg/g protein, CML x1 / x2, CEL x2; dry 60 C, aw 0.6, 48 h: lysine
+      -47 / -49 %, CML x12 / x48, CEL x9 / x16. All single end points (no rate); NT/W/D absolutes for
+      furosine, CML, CEL figure-only. Table centre for the amine pool to be reset when Gorissen 2018 and
+      Jaeger 2023 (commercial isolates) are read, with a band spanning flour to Tang.
+- [ ] **Programme 7 reading log (2026-09-08, isolate composition: jaeger2023, gorissen2018, sagesser2024).**
+      Matrix table amine pool reset to commercial isolates: pea 0.47 (Jaeger 0.539 +/- 0.075, Gorissen 0.40;
+      band 0.40-0.70 with Tang 0.696), soy 0.36 (Jaeger 0.410, Gorissen 0.31; band 0.31-0.58 with Tang 0.576)
+      mmol Lys per g protein. Jaeger 2023 also gives what programme 7 needs for the FREE pools: pea isolate
+      free amino acids total 0.079 g/100 g DM (0.0049 mmol/g powder, ~1 % of bound lysine; Arg 0.053, no free
+      Lys), soy isolate every free amino acid n.d.; free sugars (sucrose + glucose + fructose + maltose, one
+      sum) 0.19 / 0.06 g/100 g DM; fat 8.51 / 1.72 %; N x 6.25 protein 81.2 / 89.2 %. Sagesser 2024:
+      everything in raster figures; its total amino-acid table is Sagesser 2023 Bioresour. Technol. 390:129849
+      (Nutralys F85M, the material behind Snel 2023's binding constants) -> fetch. ARRIVED 2026-09-09
+      (`Sagesser2023.pdf`, dossier `sagesser2023_extraction.md`).
+- [ ] **Fetch ledger (2026-09-09).** Arrived and dossiered tonight: Chan & Reineccius 1994 RSC chapter (on
+      disk as `chan2005.pdf`, misnamed; dossier `chan1994b_extraction.md`), Cremer & Eichner 2000
+      (`rainercremer2000.pdf`), Balagiannis 2009 (`balagiannis2009.pdf`), Desclaux 2006 (`desclaux2006.pdf`),
+      Sagesser 2023. Dropped by owner decision: Kim, Hartman & Ho 1996 (JAFC 44:3906, 2-pentylpyridine in
+      water; no source found; Kim 1998 and Zhou 2000 carry the same comparison). Optional, low value: Liu, Liu,
+      Miao, Huang & Lai 2025, J. Sci. Food Agric. 105, "Multi-response kinetic study of Maillard reaction
+      hazards in the glucose-lysine model system" (Hamzalioglu 2026 ref 54; Yu 2020 and Quan 2020 cover the
+      same pot); Winkel C., "Stability of aroma chemicals", in Rowe (ed.) Chemistry and Technology of
+      Flavours and Fragrances, Blackwell 2005, pp. 244-260 (the "Winkel chapter" of hofmann1996's flag; whether
+      it tabulates the 50 C phosphate loss rates is unconfirmed; van Seeventer 2001 is the primary data).
+      DEFECT FOUND: `data/benchmarks/maillard_validation_benchmarks.md` sec. 2.3 and
+      `docs/protocols/{pea,soy}_matrix_meaty_benchmark.md` attribute Lys ~7.2 / ~6.4, Cys ~0.9 / ~1.1,
+      Met ~0.9 / ~1.3 g per 100 g protein and an Asn + Asp column to Gorissen 2018; none of those numbers is
+      in the paper (its lysine is 5.9 / 4.6 % of protein). To correct with the dossier's values and the
+      citation gate re-run; not edited tonight.
+- [ ] **B19 reading log (2026-09-08, roasty heterocycles: blank2003, hofmann1998b, adams2008, shu1999,
+      cerny1994, vanlancker2012).** FIT-able rows found: Hofmann 1998b fed 1-pyrroline (2 mM, 0.5 M phosphate,
+      100 C, 30 min, SIDA) + MGO -> 2-acetyl-1-pyrroline 28.7 mol % (MGO 5x), 5.3 % (1:1); + hydroxyacetone ->
+      ATHP < 0.008 / 0.07 / 0.86 / 3.07 % at pH 3 / 5 / 7 / 9; proline 400 mM + MGO 4 / 40 / 400 mM -> AP
+      0.0058 / 0.0125 / 0.0179 mol % (apparent bilinear AP ~9e-4, ATHP ~1.4e-4 L/(mmol min), lower bounds,
+      the dossier's). Blank 2003: Glc + Pro 100 + 100 mM, 0.2 M phosphate, reflux 2 h, IDA: AP 0.0022 /
+      0.0032 / 0.0030 and ATHP 0.010 / 0.036 / 0.009 mol % at pH 6 / 7 / 8 (validation levels; time courses
+      figure-only). Cerny 1994 (SIDA, 180 C dry): MGO + Ala -> 2-ethyl-3,6-DMP (I) 0.094, 2-ethyl-3,5-DMP (II)
+      0.0099 mol % of Ala, I:II 9.5-18.6 => ~95-97 % aminoacetone in the aminoketone pool; no alanine => none:
+      the aldehyde-addition step needs acetaldehyde from alanine. Adams 2008 (Ala + MGO ~850 mM, calibrated):
+      2,5(6)-DMP 0.02 mol % at 130 C pH 7 vs 0.042 at pH 4 -- the OPPOSITE pH sign to B18's slope, at a 40x
+      higher MGO and with the pyrrole sink dominant; recorded against B18 as a regime to check, not merged.
+      Van Lancker 2012: peptides give 8-34x the DMP of free amino acids with MGO at 130 C (peak areas), no
+      Strecker aldehyde adducts (no decarboxylation) -> programme 7's peptide amine. Registry fix made:
+      2_ethyl_3_5_dimethylpyrazine SMILES was the 3,6-isomer (desirable_targets.yml corrected, InChIKey
+      JZBCTZLGKSYRSF). Species the wave needs rows for: 1-pyrroline, 2-acetyl-1-pyrroline, ATHP,
+      hydroxyacetone, aminoacetone, 2-ethyl-3,6-dimethylpyrazine, acetaldehyde (exists).
+- [ ] **Programme 7 reading log (2026-09-08, lipid-Maillard I: zamora2020, kim1998, zhou2000, du2023).** Rule R33
+      written (2,4-alkadienal + NH3 -> 2-alkylpyridine; positive controls decadienal -> 2-pentylpyridine and
+      nonadienal -> 2-butylpyridine; AMMONIA, PENTYLPYRIDINE, BUTYLPYRIDINE, NONADIENAL_24 as literature
+      species; charge `lipid_maillard_cross`). Numbers: Zamora 2020 2-pentylpyridine 14.68 +/- 0.58 umol/mmol
+      Gln (0.29 % of the dienal) on silica at 180 C, homologue series C6-C10 dienal 34.1 -> 14.7; Zhou 2000
+      soy isolate baseline 0.14-0.21 ppm, + 5.64 mM dienal 2.0-2.6, + 8.05 mM NH3 4.2-4.6, at room temperature,
+      pH 9 > 7 > 4.5, isotopes fix the atoms (dienal C5 -> ring C2, N from NH3); Kim 1998 all pyridine data
+      figure-only, ammonia ratios only (oil/water 0.078 for Gln); Du 2023 (Cys + Glc + 10 mM C9 aldehyde,
+      150 C, RF = 1): 2-pentylthiophene 238.65 ug/L from the 2,4-dienal only, 2-butylpyridine 191, thiazole
+      sum x3 with the dienal, and NO 2-pentyl- or 2-hexyl-4-methylthiazole in any system. No rate anywhere;
+      the isolate's own dienal and ammonia never measured. Registry gaps: 2-pentylpyridine, 2-pentylthiophene,
+      2-hexylthiophene, 2-butylpyridine, ammonia.
+- [ ] **Programme 7 reading log (2026-09-08, glycation kinetics: nguyen2016, troise2015, berk2021, quan2020).**
+      FIRST RATES for protein-bound lysine, Nguyen 2016 (casein 30 g/L, glucose or lactose 10:1, 0.1 M
+      phosphate pH 6.8, 120 / 130 C, SIDA): sugar + Lys -> Amadori k3 1.5-1.7e-4 L/(mmol min); Amadori -> CML
+      k7 8.8e-3 / 6.0e-3 1/min; Amadori -> CEL k9 2.3e-3 / 2.0e-3; CML loss k11 0.29 / 0.077 (k7 and k11
+      correlated: carry the pair); no barriers (two temperatures). STRUCTURAL: the glyoxal -> CML route fitted
+      to ZERO in Nguyen 2016 AND in Berk 2021 (sesame) -- the opposite of parameters_dicarbonyl.py's "glyoxal
+      is the CML precursor" docstring; CML comes from the Amadori compound in both. Berk 2021 (sesame,
+      180-220 C, no aw): FL -> CML k8 5.5 / 29 / 62 e-3 1/min, Ea 113 kJ/mol; MGO + bound Lys -> CEL Ea 92;
+      five negative barriers elsewhere (missing steps), constants per kg seed. Troise 2015: soybean at 110 C,
+      lysine 3.45 -> 2.60 g/100 g protein in 60 min (apparent 4.7e-3 1/min, two-point), furosine peak at
+      30 min, CML + CEL = 6 % of lysine lost; SIDA method with LOD/LOQ. Quan 2020 (pre-proof): rate table
+      stays REFUSED (no units); glyoxal LEVELS in Lys + Glc at pH 7: 0.052-0.127 mM (100 C), 0.144-0.605 mM
+      (130 C), an early maximum then decline at 130 C -> B18's dicarbonyl question, order of magnitude only
+      (derivatising charge as printed is 500x below the glyoxal measured). Registry gaps: glyoxal,
+      methylglyoxal, 3-DG, 1-DG, fructoselysine, protein-bound lysine.
+- [ ] **Programme 7 reading log (2026-09-09, lipid-Maillard II: mottram2002b, farmer1990, whitfield1988,
+      elmore1997).** Rules R34-R39 written with controls (thiophene / thiapyran pair on the 2,4-dienal +
+      H2S substructure; hydroxyketone + H2S -> mercaptoketone; alkanal + NH3 -> aldimine; mercaptoketone +
+      aldimine -> 2-alkyl-3-thiazoline; thiazoline -> thiazole), eleven literature species, charge
+      `lipid_maillard_thiazoles` (depth 3) that reaches the registry's 2-pentyl-4-methylthiazole and
+      2-hexyl analogue. Numbers: Farmer 1990 (Cys + ribose + 1 % lipid, 140 C, relative areas none / BTG /
+      lecithin / PC / PE): 2-pentylthiapyran 0 / 35 / 3150 / 34700 / 12500, 2-hexylthiophene 0 / 0 / 184 /
+      1220 / 436, 2-pentylpyridine 0 / 26 / 279 / 5210 / 429; MFT falls to 0.40 / 0.15 / 0.27 / 0.24 of the
+      no-lipid pot, FFT flat at 0.62-0.72, mercaptoketones halved by every phospholipid, thiazoles and
+      pyrazines unchanged. Whitfield 1988 (15 g/L lecithin): MFT 2595.8 -> 872.6 ng (3.0x), FFT 2.0x,
+      2-thiophenethiol 3.4x, methylpyrazine 1.7-3.3x with all three amino acids; 2-pentylpyridine only with
+      cysteine (194.7 ng vs Gly 9.0, Lys 1.9: free NH3 is the donor). Mottram 2002 (FAME pots): linolenate
+      gives C1-C3 thiapyrans (2-ethylthiapyran 399 ng per 0.5 mmol), linoleate C3-C6 thiophenes (7-21 ng);
+      pure dienal + H2S up to 100:1 thiapyran : thiophene, the Cys + ribose + linoleate pot the reverse, so
+      NO branch ratio encoded. Elmore 1997 (alkanal + hydroxyketone + (NH4)2S, 140 C, area %): 3-thiazolines
+      15-42 %, thiazole / thiazoline 0.002-0.05 in hydroxyketone pots and about 1 in dione pots (dione route
+      needs no oxidant); 2-pentylthiophene 21 % from 2,4-nonadienal. THE SINK NUMBER for a lipid-carrying
+      isolate: the thiols fall 2-4x at 6-15 g/L phospholipid, the dienal + H2S adducts are the sink; W7's
+      variant (a) should read this before enlarging any oxygen reservoir. Not written: Farmer's alkanol + H2S
+      -> alkanethiol (asserted, not shown), Elmore's trialkylpyridine (three reactants), the enal
+      thiophenone. Registry gaps: 2-hexylthiophene, 2-pentylthiophene, the thiapyrans, the 3-thiazolines.
+- [ ] **B18 dicarbonyl reading log (2026-09-09: xia2022, yu2020, hamzalioglu2026).** Aqueous Amadori
+      kinetics to set the pyrazine step's supply against. Xia 2022 (Glc + Gly 200 + 200 mM, no buffer,
+      100-130 C): Amadori formation 0.060 -> 0.430 mmol/(L min), Ea 84.8 (trunk 96.8 at pH 6.8 phosphate;
+      Yu 2018 64.8 at pH 10: barrier falls with pH, buffer confounded); Amadori -> 3-DG 0.0131 / 0.0357
+      mmol/(L min) at 120 / 130 C, -> 1-DG 0.0055 / 0.0094 (semi-quantitative), GO >> MGO at 130 C in the
+      glycine pot (figure-only ratio). Yu 2020 (Glc + Lys 150 + 150 mM, 0.1 M phosphate pH 7, 100-120 C,
+      multiresponse): Ea Amadori 89.6 +/- 4.3, -> 3-DG 83.4 +/- 5.9, -> MGO 112.8 +/- 5.3 (trunk 97.1 /
+      124.5: same 27-30 kJ/mol gap in both laboratories), MGO + Lys -> melanoidin Ea 110.2 (the only MGO-sink
+      barrier in a lysine pot), 1-DG not detected at pH 7, time unit of the rate constants unresolved (do
+      not use the k values). Hamzalioglu 2026 (whole milk, lactose + casein lysine, 110-140 C, per kg dry
+      matter): Amadori -> 3-DG Ea 64 +/- 20, -> glucosone 76 +/- 21 (the only aqueous Amadori -> glucosone
+      entry), 1-DG -> diacetyl Ea 18.9 +/- 7.9; the glyoxal sink fits to ZERO at all four temperatures and
+      the 3-DG sink to zero above 110 C; GO + Lys -> CML 1000-10000x below the Amadori route (agrees with
+      nguyen2016 / berk2021 against the parameters_dicarbonyl docstring); dicarbonyl levels 3-DG 51, 1-DG 12,
+      MGO 10, GO 14 umol/kg dm. Constants do not transfer (lactose, bound lysine, 30 s sampling artefacts);
+      barriers and the no-sink finding do. Consequence for B18's glyoxal-sink conditionality (0.59 dex): the
+      aqueous data want a SMALLER glyoxal sink than the trunk's 180 C value, not a larger one.
+- [ ] **B17 oxygen reading log (2026-09-09: xu2010).** Ribose + cysteine 50 + 50 mM, pyrophosphate pH 5.6,
+      140 C, 60 min under air, 10-40 MPa N2 or 10-40 MPa CO2 (HS-SPME, RF = 1): MFT 7.2 (air), 7.0-7.4 (N2),
+      34.6-58.1 (CO2) ng/mL; bis(2-methyl-3-furyl) disulfide 3.0 / 2.9-4.0 / 18.6-30.6; dimer share of
+      MFT-equivalents 29.6 % (air), 28.9-35.3 % (N2), 33.5-37.1 % (CO2). An inert pressurising gas changes
+      neither the thiol nor the disulfide: the oxidant is internal to the pot (dicarbonyls, cystine
+      exchange) or the dimer forms during sampling; it is not the dissolved oxygen the B11 reservoir stands
+      for. Together with farmer1990 / whitfield1988 above this fixes W7's next variant: an internal oxidant
+      charged from the sugar side, not a bigger oxygen pool. No rate, no barrier (one time, one temperature).
+- [ ] **B19 reading log (2026-09-09, the four Parker 2013 sources + Sagesser 2023).** VERDICT: no per-amino-acid
+      second-order Strecker constant in water exists in the literature on disk; B19 cannot be pre-registered as a
+      rate fit (draft sec. 5 now says so and gives the identity-ratio form instead). chan1994b (RSC chapter, file
+      misnamed `chan2005.pdf`): glucose 1.25 M + Met/Phe/Pro/Leu 0.19 M each, phosphate pH 6-8, 75-115 C, N2,
+      AED response-normalised; barriers only: 3-methylbutanal 80.3, phenylacetaldehyde 90.0, 2-acetyl-1-pyrroline
+      60.2, 2-acetylfuran 74.1 kJ/mol (whole-cascade, no SD, no k printed). cremer2000: aw 0.52 glass, glucose 1
+      mol/kg + Ala/Val/Ile/Leu 50 mmol/kg, 80-110 C: Ea 115/115/120/124 +/- 6 kJ/mol, rates figure-only, leucine
+      mass balance closes (Leu + Fru-Leu + 3-MB = 100 %), aldehyde rate = Amadori decomposition rate in the steady
+      state. balagiannis2009 (ox-liver extract, 120-140 C): k1 glucose -> Int1 1.36e-2 /min at 130 C, Ea 137 +/- 15
+      (Martins 96.8: no overlap), Strecker step declared diffusion-controlled, yield fractions F_leu 0.0233,
+      F_ile 0.0383 -> Ile : Leu 1.6 per mole present (the one identity number that transports); 3-MB sink
+      2.7e-3 /min. desclaux2006 (4 pp.): ARP -> 1-DG 2.79e-2, -> 3-DG 5.50e-4 /min (xylose + glycine, pH 6, 100 C),
+      ratio 51 : 1 vs Martins' hexose 1.4 : 1; NOTHING on glyoxal / methylglyoxal / diacetyl -- DEFECT in
+      `parker2013_extraction.md` (ref 55 row, sec. 5) and the B19 draft's earlier row, which credited it with
+      tabulated dicarbonyl courses; those are in the Reading thesis (fetch if the dicarbonyl question is pursued).
+      sagesser2023: amino-acid table NOT in the PDF (Fig. 5 raster + supplement); true protein Nutralys F85M 68.9
+      +/- 2.6 g/100 g (vs ~80 by N x 6.25: any per-g-protein density from its supplement reads 1.2x the matrix
+      table's basis), nitrogen factors 4.8-5.7, cysteine "approx. 1.2 %" class-level -> DEFECT in
+      `sagesser2024_extraction.md` flag 2 (it does not give Nutralys lysine). Registry gaps: glyoxal,
+      methylglyoxal, 2,3-pentanedione, hydroxyacetone, the deoxyosones, 2-acetyl-1-pyrroline, the amino acids.
+- [ ] **ENV-B18 (2026-09-09, found while regenerating the reaction trees).** The Monte-Carlo envelope
+      (`generate_core_prediction_uncertainty.py`) does not sample the pyrazine step's two fitted Strecker
+      constants or its pH slopes: `core_prediction_uncertainty.json` has no prior row for `k_go_ak` /
+      `k_mgo_ak`, although `kinetic_core_b18_fit_report.json` carries their Laplace sigma (0.08 dex on
+      log10 k). Every pyrazine interval today is the trunk's interval without the step's own spread.
+      Extend the envelope's prior table with the B18 block (the B10/B11 pattern) and regenerate.
+- [ ] **FIG-01 (2026-09-09).** The introduction's 23 figures were git-ignored (`*.png` with an allow-list that
+      never included `docs/assets/thiol_sink/`), so every figure in README and INTRODUCTION was a broken image
+      on GitHub; fixed by allow-listing the folder. No gate checks the figures against the code: four were
+      stale (paper counts, step counts, the sugar tree without the pyrazine step). Add the two figure builders
+      to the freshness gate's regenerate list (compare PNG bytes with a fixed matplotlib version, or compare
+      the builders' printed count dicts) so the figures cannot lag the artifacts again. UPDATE 2026-09-09: a
+      third builder, `build_story_figures.py`, writes figures 23-29 (coverage of the declared targets, the fat
+      path, the protein matrix layer, the hypothesis layer, the pyrazine step, the two refused sinks, the
+      calibration example); the same gate should cover all three. The hand-typed path scorecard
+      (`08_path_scorecard.png`, static strings in `build_thiol_sink_figures.py`) should be generated from the
+      scorecard artifacts or retired.
+- [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
+      FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
+      norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT
+      0.150 -> < 0.001 mol %, >= 150x; mercaptoketones 74.5 -> 0.03); Cerny 2007's five-point ladder
+      (FFT 431/368/364/185/0 and furfural 208/158/165/0/0 at pH 4-7, peak areas); Mottram 2002's
+      pyrophosphate pair (MFT 3.7x, FFT 1.8x, furfural tr -> 2290 ng/mmol at pH 4.2 vs 5.6). Candidate
+      FIT rows: the Whitfield pH-6.5 mol % (a fed-intermediate yield) and the Mottram/Cerny ratios;
+      the furfural -> FFT branch shuts by pH 7 and the lane has no pH term on it. Panel claims WHI-PH-01,
+      CER07-PH-01/02, MOT02-PH-01/02 record the baseline.
+- [ ] **W9 (from Hofmann & Schieberle 2000b). Oxygen on the Amadori compound.** ARP-Phe at 100 C, pH 7,
+      120 min: Strecker aldehyde 0.06 / 0.55 / 1.38 mol % under argon / air / air + Cu; the same yield
+      from glucose + Phe 0.04 / 0.14 / 0.26. The first measured oxygen dependence of a sugar-path step
+      in the corpus (air / argon = 9.2 on the Amadori, 3.5 on the sugar pot); the companion paper gives
+      air / argon 4.3 / 5.5 / 2.2 / 1.6 for the Strecker ACID from MGO / GO / 3-DG / glucosone while the
+      aldehyde is oxygen-independent from the dicarbonyls. The trunk has no oxygen axis; a declared
+      atmosphere input on the Amadori oxidative branch would make these FIT ratios.
+- [ ] **Sugar-path checks from Brands 2001 and Goncuoglu Tas 2016 (read 2026-09-07):** glucose ->
+      fructose at 120 C agrees within 1.4x; the fructose -> glucose constant does NOT transfer to a
+      fructose-only charge (Brands: 33 % lost in 40 min where the trunk predicts ~80 %); the hazelnut
+      matrix gives 26 steps x 3 roasting temperatures (dry, Arrhenius fails by the authors' own account)
+      with the dicarbonyl order GO ~ MGO > 3-DG, the reverse of aqueous Leitzen 2021: matrix, again.
+- [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
+      stays as hypothesis generator and refusal engine.
+- [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI
+      species on the sulfur lane that releases its cysteine sulfur (retro-Amadori / 1,2-enolisation
+      to the deoxypentosone + cysteine). The core's `ARP` is a sulfur-free pentose Amadori, so the
+      three fed-Amadori series in the corpus (Wang 2026's five-rung ladder, Zhai 2023, Kang 2026)
+      cannot be charged at all today; WANG-01/02 refuse for want of a sulfur source, not for the
+      unstated pH. Wang's ladder is a paired temperature-time design (85 C/80 min ... 125 C/120 min,
+      Methods 2.3) at an unstated pH. Meng 2017 (MENG-01) stays not evaluable for its own reason
+      (a fermented soy sauce with no precursor charge, mixed vessels) -- nothing to read there.
+      Prerequisites: the Cys-Amadori synthesis papers already on disk (Zhai 2019 / Xu 2019 for the
+      preparation, Zhai 2023 for its decomposition products) for the species' stoichiometry.
+
+**Order.** R0 -> R1 -> R2(a) -> R2(c) -> R3 (+R5 in parallel) -> R4 -> R6; W2 alongside R2/R3;
+W4 independent; R7 as soon as a partner lab exists.
+
+**Forecasts (2026-09-06).** R2(a) closes the Yiltirak/Hofmann gap to < 3x: 35 %. R6(i) in-lab
+Hofmann >= 70 % within 2x after R2-R4: 50 %. R6(ii) Yiltirak within 3x without anchor: 30 %.
+Cross-lab absolute >= 50 % within 3x on the present panel without R7: 15 %. With R7 data, absolute
+ppb in PPI/SPI matrices within 3x, no anchor: 60 %.
+
+**Corrections to earlier notes.** (1) "Zero systems at two temperatures" (2026-09-04) is a
+labelling artefact: Kang 100/120, Feng 100/120, Zhai folds, Yiltirak's ladder, Meng's ladder.
+(2) "Kang 2026 has 8-point MFT/FFT time courses" (first pass, this date) is wrong: the SI dossier
+states every volatile number is a 120-min endpoint; only the free-Cys curves are time-resolved.
+
 ## 6. Risks and guardrails
 
 | Risk | Guardrail |
@@ -974,6 +1731,36 @@ hashes for every artifact that carries a block, the envelope included).
 | Losing git history on moves | `git mv`, one directory per commit |
 
 ---
+
+**2026-09-08 (the hypothesis layer and the sink table; owner: "let's do both").**
+- **W7 input ready.** `docs/validation/thiol_sink_candidates.md`: every measured thiol sink from the dossiers on disk
+  (Kumazawa 2003, Mottram 2002, Zhou 2023, Zhang 2024, Hofmann 2002, Gigl 2021, Anantharamkrishnan 2020b, Yuan 2023,
+  Hamzalioglu 2018, the K6b ladder, Zhai 2020/2021, Schieberle 2000) against the model's seven sink channels. Reading:
+  every measured sink has a partner and saturates; the model's dominant sink has neither; the 102 kJ/mol ceiling is
+  the fit asking for a slope no sink shows; Gigl's reversible pool has the wrong sign for an Arrhenius sink. Candidates
+  in order of evidence: (a) a saturable covalent sink on a pool browning makes (Hofmann 2002's rate and plateau),
+  (b) the disulfide made reversible or oxidant-limited (Kumazawa's time-doubling test), (c) thiol-Michael to enals and
+  HMF (28-30 kJ/mol; Hamzalioglu's HMF + Cys rate), (d) Gigl's reversible pool as a declared term. W7's pre-registration
+  should pick (a) and (b) as variants and use the section-8 experiment as the decider.
+- **The hypothesis layer shipped** (`src/network_hypotheses/`, `data/lit/reaction_rules.yml` with 26 cited rules and
+  controls, `data/species/structures.yml`, `results/validation/network_hypotheses.{json,md}` under the freshness gate,
+  pre-registered in `network_hypotheses_prereg.md`; `maillard explain` and the wishlist read it). Follow-ups:
+  - [ ] rules for the routes the panel refuses: oleate hydroperoxide -> nonanal, linoleate -> 2-pentylfuran (Frankel
+    1989's introduction), aldehyde reduction -> 1-hexanol; today the layer says "no cited rule reaches it".
+  - [ ] Strecker products onward: aminoketone + aminoketone -> pyrazine; the panel measures pyrazines and no lane has them.
+  - [ ] a "possible, not modelled" arrow category in the reaction trees (`build_reaction_tree.py`) read from the artifact.
+  - [ ] the forward thiazolidine step (cysteine + pentose -> TTCA, Zhai 2020) as an engine reaction: the engine charges
+    TTCA and models only its ring opening (the layer places R15 as mechanism known).
+- **The roadmap for scientists** is `tasks/roadmap_for_scientists.md` (2026-09-08): calibrate on the user's own data
+  (levels fit the response factor, contrasts fit the kinetics), the protein matrix as chemistry, the thiol sink, reach
+  (pip, API, a page), the missing chemistry as rules first; one overlay type and one spec schema across them.
+- **B17 (the sink structure) is pre-registered, not run**: `results/validation/kinetic_core_b17_prereg.md`. The generator
+  derives from B16's with `ch_dimer_release_*` and `k_dimer_release` added to the sulfur network and the B23 vector.
+- **Molar masses that disagree with the structures** (recorded by `tests/unit/test_species_structures.py`, not corrected,
+  since each moves a reported concentration): SBA 276.24 (Asn + Glc - 2 H2O; the Schiff base is 294.26), THI 337.27
+  (the hydrochloride; the cation is 265.36), DPO and TDP 130.10 (C5H8O4 is 132.11), the four linoleate hydroperoxides
+  310.47 (the hydroxide; the hydroperoxide is 326.48). The LOOH masses convert the lipid lane's mmol/L to ug/L for the
+  hydroperoxide pools; the others are intermediates never reported. One change, guards re-pinned.
 
 ## Appendix A — Disposition of every tracked path under `data/` (current names)
 

@@ -665,7 +665,7 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     Reaction("ch_oligomer_fft", {"FFT": 1}, {"OLG": 1}, "k_oligomer", ""),
     # Channel 3 -- oxidative dimerisation. 115-120 C.
     Reaction(
-        "ch_dimer_mft", {"MFT": 2, "OX": 1}, {"MFTD": 1}, "k_dimer_mft",
+        "ch_dimer_mft", {"MFT": 2, "OX": 1}, {"MFTD": 1, "OXV": 1}, "k_dimer_mft",
         "CHANNEL 3, dominant at 115-120 C -- the channel the 30 C system rules "
         "out at <1.5%. SECOND order in thiol and FIRST in oxidant equivalents, "
         "because Zhang 2024 Fig. 1 shows the branch responds to the additive's "
@@ -674,7 +674,7 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "and cysteine only 8.6%. NOT AROMA LOSS -- the dimer is 15.6x more "
         "potent than the monomer.",
     ),
-    Reaction("ch_dimer_fft", {"FFT": 2, "OX": 1}, {"FFTD": 1}, "k_dimer_fft", ""),
+    Reaction("ch_dimer_fft", {"FFT": 2, "OX": 1}, {"FFTD": 1, "OXV": 1}, "k_dimer_fft", ""),
     # Channel 4 -- radical coupling to methanethiol. 115 C.
     Reaction(
         "ch_mmft", {"MFT": 1, "MESH": 1}, {"MMFT": 1}, "k_mmft",
@@ -759,6 +759,72 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "k5b_dmhf_synthesis.md sec. 8.6 names the failure mode a constant "
         "fitted to its 6.0 % would repeat. The edge ships structural.",
     ),
+    # =======================================================================
+    # WAVE B11 (2026-09-07) -- OXYGEN AS AN INPUT (kinetic_core_b11_prereg.md)
+    # =======================================================================
+    # Dissolved oxygen (OX, ambient units) is resupplied from the headspace
+    # reservoir (OXR) into the vacancy the consumers create (OXV), and consumed by
+    # cysteine autoxidation and by the reductone pool. With k_cys_ox = k_red_ox = 0
+    # and OXR = 0 -- the defaults every wave before B11 runs at -- the four steps
+    # carry no flux and every earlier artefact reproduces exactly.
+    Reaction(
+        "ox_supply", {"OXR": 1, "OXV": 1}, {"OX": 1}, "k_ox_supply",
+        "B11. Gas-liquid resupply: fast (a declared constant), proportional to the "
+        "vacancy, so OX sits at saturation while the reservoir lasts and falls with "
+        "consumption once it is spent.",
+    ),
+    Reaction(
+        "ch_cys_ox", {"Cys": 1, "OX": 1},
+        {"CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "FRAG_S": 1, "OXV": 1}, "k_cys_ox",
+        "B11. Cysteine autoxidation (to cystine and beyond), first order in cysteine "
+        "and in dissolved oxygen, through the thiolate. The products mirror "
+        "r_cys_thermal's routing (carboxyl carried as CBX). NO measurement in the "
+        "corpus pins its rate (Bagiyan 2004 prints initial rates only); B11 fits it "
+        "and expects the objective not to identify it.",
+    ),
+    Reaction(
+        "ch_red_ox_dpo", {"DPO": 1, "OX": 1}, {"FRAG_C": 5, "OXV": 1}, "k_red_ox",
+        "B11. The reductone pool consumes oxygen: the pentose deoxyosone arm. Shares "
+        "k_red_ox with the norfuraneol arm; unmeasured, fitted, expected unidentified.",
+    ),
+    Reaction(
+        "ch_red_ox_nf", {"NF": 1, "OX": 1}, {"FRAG_C": 5, "OXV": 1}, "k_red_ox",
+        "B11. The norfuraneol arm of the reductone oxygen sink.",
+    ),
+    # ---- B17 (2026-09-08): the disulfide gives the thiol back --------------------------
+    # One shared constant, `k_dimer_release`, INERT (zero) unless a B17 report supplies it,
+    # so every wave before B17 reproduces bit for bit (the B11 discipline). Its barrier is
+    # the dimerisation's own measured one (Zhang 2026 k17, MEASURED_EA_OVERRIDES), so the
+    # equilibrium constant, not the two rates, carries the temperature dependence
+    # (kinetic_core_b17_prereg.md sec. 2, variant b).
+    Reaction(
+        "ch_dimer_release_mft", {"MFTD": 1}, {"MFT": 2}, "k_dimer_release",
+        "B17. bis(2-methyl-3-furyl) disulfide -> 2 MFT (reduction back to the thiol; the "
+        "reducing partner is the pot's reductone pool, not tracked). Zero until B17 supplies it.",
+    ),
+    Reaction(
+        "ch_dimer_release_fft", {"FFTD": 1}, {"FFT": 2}, "k_dimer_release",
+        "B17. bis(2-furfuryl) disulfide -> 2 FFT; shares k_dimer_release.",
+    ),
+    # ---- B17 variant (a) (2026-09-09): the pot makes its own electrophile sites --------------
+    # A parallel branch of the deoxyosone decay in which the browning carbon carries ONE matrix
+    # electrophile site (MELE, zero atoms) into the pool the measured thioether channel drains.
+    # Its rate is the site yield times k_osone_decay (same barrier, the carbonyl-sink family);
+    # at the inert default yield of zero every wave before B17a reproduces bit for bit. The
+    # carbon goes to FRAG_C in full (5 per osone) and no ACID is made here, so the pH drift is
+    # untouched. Pre-registration: kinetic_core_b17_prereg.md sec. 2, variant (a).
+    Reaction(
+        "ch_mele_from_dpo", {"DPO": 1}, {"FRAG_C": 5, "MELE": 1}, "k_mele_site",
+        "B17a. 1-deoxypentosone -> browning fragments + one electrophile site.",
+    ),
+    Reaction(
+        "ch_mele_from_tdp", {"TDP": 1}, {"FRAG_C": 5, "MELE": 1}, "k_mele_site",
+        "B17a. 3-deoxypentosone -> browning fragments + one electrophile site.",
+    ),
+    Reaction(
+        "ch_mele_from_ddp", {"DDP": 1}, {"FRAG_C": 5, "MELE": 1}, "k_mele_site",
+        "B17a. 1,4-dideoxypentosone -> browning fragments + one electrophile site.",
+    ),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.
@@ -800,11 +866,13 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
     # model's one calibrated constant: Martins measures that PART of the
     # deoxyosone flux terminates as formic/acetic acid and part as browning
     # polymer, and nothing in the corpus measures the pentose analogue's split.
-    "r_arp_decay": {"carboxyl": +1, "basis": (
-        "ONE lumped-sink acid equivalent (ACID), on the analogy of Martins' "
-        "measured steps 5 and 8. The Amadori's OWN carboxyl and amine are "
-        "separately CARRIED into CBX, so the +1 here is "
-        "the sink's new acid and nothing else.")},
+    # FOUR of the five are declared here; the fifth, `r_arp_decay`, is declared
+    # once below with the B2.3 amine movement as well (2026-09-04: a pre-B2.3
+    # copy of it stood here, silently shadowed by the live entry and asserting
+    # the opposite -- that the Amadori amine is CARRIED, not destroyed. Python
+    # collapses a repeated key before `validate_charge_closure` can see it, so
+    # the validator could not catch it; `test_no_dict_literal_repeats_a_key`
+    # now does).
     "r_osone_decay_dpo": {"carboxyl": +1, "basis": (
         "the lumped deoxyosone sink's acid equivalent; see r_arp_decay.")},
     "r_osone_decay_tdp": {"carboxyl": +1, "basis": (
@@ -828,6 +896,9 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
     "r_cys_h2s": {"amine": -1, "basis": (
         "cysteine thermolysis, Zheng & Ho's route: H2S + NH3 + pyruvic acid. "
         "The carboxyl is CARRIED (CBX, as pyruvate). " + AMINE_FATE_BASIS)},
+    "ch_cys_ox": {"amine": -1, "basis": (
+        "B11 cysteine autoxidation, routed exactly as r_cys_thermal: the carboxyl is "
+        "CARRIED (CBX), the amine leaves with the fragment nitrogen. " + AMINE_FATE_BASIS)},
     "r_cys_thermal": {"amine": -1, "basis": (
         "Kang's lumped non-sulfide cysteine consumption (cystine formation, "
         "self-condensation, degradation). Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
@@ -922,6 +993,8 @@ REACTION_PH_FACTOR: Mapping[str, str] = {
     "ch_dimer_fft": "thiolate",
     "ch_thiolate_loss_mft": "thiolate",
     "ch_thiolate_loss_fft": "thiolate",
+    # B11: cysteine autoxidation also proceeds through the thiolate.
+    "ch_cys_ox": "thiolate",
 }
 
 

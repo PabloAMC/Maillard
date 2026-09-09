@@ -693,6 +693,17 @@ UNTRACKED_TITRATABLE: Mapping[str, str] = {
         "asymmetry with the SULFUR lane's ARP, which IS in the balance and "
         "whose ammonium pKa is a calibrated constant."
     ),
+    "AKG": (
+        "aminoacetaldehyde, B18's Strecker intermediate on the trunk lane (a primary amine, pKa "
+        "about 8). Trunk-only species: the trunk carries no pH state, and the sulfur lane's state "
+        "vector leaves it out, so it is invisible to the charge balance by construction, as Gly. "
+        "Becomes a defect the day the trunk gets a pH state."
+    ),
+    "AKM": (
+        "aminoacetone, B18's second Strecker intermediate on the trunk lane; exactly as AKG. The "
+        "three pyrazines themselves are not titratable at food pH (pyrazine pKa 0.65) and need "
+        "no entry."
+    ),
     "MEL_N": (
         "melanoidins are polyanionic and retain amine nitrogen, so the "
         "terminal polymer really does hold titratable capacity. It is carried "

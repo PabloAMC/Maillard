@@ -142,7 +142,7 @@ MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientifi
 > `cys_ribose_150C_Mottram1994`, `cys_glucose_150C_Farmer1999`, and
 > `thiamine_cys_ribose_100C_Hofmann1996`. They are quarantined under
 > `data/benchmarks/quarantined/` (excluded from the panel) pending human source
-> verification — see the README there and `tasks/audit_remediation.md`. Two of
+> verification — see the README there and `docs/history/tasks/audit_remediation.md`. Two of
 > them were previously listed below as strict-ready; that status is withdrawn.
 > The same audit found the panel headline mixed literature-measured rows with
 > internal synthetic comparators; coverage is now reported split by signal
@@ -168,7 +168,7 @@ MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientifi
 As of the current benchmark summary:
 
 - **Strict-ready count is now 0/17 *(2026-08-28, Wave W: the panel is now 17 and strict-ready is 0/17 — three absolute Hofmann & Schieberle 1998 anchors were added and all three fail. The count of PASSES did not move.)* (2026-08-27 the panel shrank 16 -> 14 when two more benchmarks were quarantined as fabricated; 2026-08-28 it grew 14 -> 17).** The panel has no strict-ready benchmark
-  at all. The sequence, all on this branch and all recorded in `tasks/audit_remediation.md`:
+  at all. The sequence, all on this branch and all recorded in `docs/history/tasks/audit_remediation.md`:
   6/16 → 4/16 when the projection retune cost `spi_hvp_xylose_120C_PMC9905368` and
   `wheat_gluten_hvp_xylose_120C_PMC9905368` their status, then 4/16 → 0/16 when the Wave G1
   chemistry rebuild removed the fabricated MFT shortcut and the fabricated lipid radical
@@ -479,7 +479,7 @@ If any of 1–3 is missing, the paper is **not** hold-out-grade — log it in th
 1. **Extract** the measured marker concentrations and the full process-state, in the paper's own
    units. Record the DOI. Convert to ppb explicitly; show the conversion.
 2. **Add a bundle spec** to `_HOLDOUT_BUNDLE_SPECS` in
-   [src/external_validation.py](../../src/external_validation.py), mirroring the existing entries
+   `src/external_validation.py` (deleted with the legacy lane, 2026-09-03), mirroring the existing entries
    (`bundle_id`, `anchor_ids`, `matrix_context`, `protein_type`, `process_state`, `conditions`,
    `precursors`, `benchmark_alignment`, `analytical_context`). Keep
    `evidence_class = external_validation_only` so it stays out of calibration.

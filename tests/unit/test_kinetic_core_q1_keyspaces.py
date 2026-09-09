@@ -25,6 +25,8 @@ raise, it returns "no measured threshold". So the tests below pin the
 observable consequence, not the implementation.
 """
 
+from pathlib import Path
+
 import pytest
 
 from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram
@@ -282,3 +284,48 @@ def test_the_summary_is_derived_and_cannot_disagree_with_its_fields():
 
     assert "summary" not in {f.name for f in fields(EnvelopeDeclaration)}
     assert isinstance(EnvelopeDeclaration.summary, property)
+
+
+# ---------------------------------------------------------------------------
+# The key space of the source itself: a table may not declare a key twice
+# ---------------------------------------------------------------------------
+
+
+def test_no_dict_literal_repeats_a_key():
+    """
+    2026-09-04. `CENTRE_LEDGER` declared `r_arp_decay` TWICE -- a pre-B2.3 copy
+    saying the Amadori amine is CARRIED, shadowed 55 lines later by the live
+    entry declaring it DESTROYED. Behaviour was correct (the live entry wins and
+    `validate_charge_closure` asserts declared == stoichiometry, so the module
+    would refuse to import otherwise), but the ledger whose whole contract is
+    that every step is declared in exactly one place declared one step twice,
+    and the reader who consults the lumped-sink section reads the dead prose as
+    authoritative.
+
+    `validate_charge_closure` structurally CANNOT catch this: Python collapses a
+    repeated key while building the literal, so by the time any runtime check
+    looks at the mapping the duplicate is gone. Only the source text knows.
+    Hence an AST check, over every module the engine imports.
+    """
+    import ast
+
+    root = Path(__file__).resolve().parents[2] / "src"
+    offenders = []
+    for path in sorted(root.rglob("*.py")):
+        if "__pycache__" in path.parts:
+            continue
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Dict):
+                continue
+            seen = {}
+            for key in node.keys:
+                if not isinstance(key, ast.Constant) or not isinstance(key.value, (str, int)):
+                    continue  # `**splat` is None; a computed key is not a literal
+                if key.value in seen:
+                    offenders.append(
+                        f"{path.relative_to(root.parent)}:{key.lineno} "
+                        f"repeats {key.value!r} (first at line {seen[key.value]})"
+                    )
+                seen[key.value] = key.lineno
+    assert not offenders, "a dict literal declares the same key twice:\n  " + "\n  ".join(offenders)

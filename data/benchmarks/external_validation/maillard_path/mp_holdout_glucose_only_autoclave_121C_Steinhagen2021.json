@@ -48,6 +48,16 @@
       "provenance_class": "unknown",
       "provenance_note": "Steinhagen et al. 2021, Pharmaceuticals 14(11):1121. SOURCE PAPER NOT ON DISK and the repo carries no verbatim statement of the medium beyond '10% (w/v) glucose solution ... autoclaved at 111, 116, and 121 degC'. An unbuffered infusion solution is the LIKELY reading and it is exactly the reading this field refuses to record, because likely is not stated. ph_disagreement, AND IT IS THE ONE THAT BREAKS THE SCALE CONVENTION: conditions.ph = 4.36 is the pH measured AFTER autoclaving (the source's Table 3). The initial / non-autoclaved value is 4.98 (Table 6). Every other bundle's pH is an INITIAL bench reading, so this one is on a different scale from all twenty others -- which is why initial_ph_scale is recorded here as 'at_temperature' rather than 'bench_cooled'. The bundle discloses the choice honestly but a model that treats 4.36 as an initial condition is being handed the answer to part of its own trajectory. Reported, not edited.",
       "ph_disagreement": "conditions.ph = 4.36 is the POST-autoclave measurement; the initial value is 4.98. This bundle's pH is on a different scale from the other twenty."
+    },
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "not stated (autoclaved)",
+      "atmosphere": "unstated",
+      "water_source": "unstated",
+      "stirred": null,
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Steinhagen et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method: 'Glucose solutions (10%, w/v) were autoclaved at 111 degC, 116 degC, and 121 degC for different durations.' The quotation gives neither the vessel, the fill nor the closure; autoclaving implies a vented or loosely closed container but that is an inference, so everything is unstated."
     }
   },
   "metadata": {

@@ -2,10 +2,10 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-04",
+    "generated_on": "2026-09-09",
     "git": {
-      "commit": "1bc4d331d9d3bcb7ca86801e4058a544c2853274",
-      "short": "1bc4d331",
+      "commit": "1bab9e158800e78b86fd6303ac7f7df0c968efe0",
+      "short": "1bab9e15",
       "branch": "cleaning",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "21960ce14e11b420e3d36a7b3fea7013a0869bfeafc104ca4887632574f8260f"
+        "sha256": "38b1dfe393e25f2256f7c5f407e6162e80b3b7e9a71b805181395f0583fd077f"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,15 +25,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "860824fc7b171d15191b77773b5e66e13ef8839cecc269f5fe56b9062f94623e"
+        "sha256": "01cbcd93e6eef2cadf8e645927804650f242959f63212e5cef162f195b6dd6b1"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "20eb6763f8a78b6314d5fb5d7deb314d816ff253406bfc24253c7797d44c28bd"
+        "sha256": "d27d20f3c8f1227f19188ab4669ae1cccdeca8a07de029b0f05fb451acfd7610"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "7127afce506fe97f1dcca4d9c5f1fccb481203791dea455e84985ab285c7f108"
+        "sha256": "5ce0cff9d2372cdbdf02f5cb45d39d2d4da155e0b712f6923cf60ec9bd80bded"
       }
     ]
   },
@@ -87,6 +87,7 @@
       "measurement": "a fed-intermediate rate: glucose heated alone, HA + MGO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
         "MFT",
+        "FFT",
         "MFTD",
         "ACTZ"
       ],
@@ -176,6 +177,7 @@
       "measurement": "a fed-intermediate rate: ARP heated alone, DPO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
         "MFT",
+        "FFT",
         "MFTD",
         "ACTZ",
         "NF"
@@ -194,16 +196,22 @@
         "OX"
       ],
       "products": [
-        "FFTD"
+        "FFTD",
+        "OXV"
       ],
       "what_the_code_says": "",
       "story": "",
       "measurement": "a fed-intermediate rate: FFT + OX heated alone, FFTD quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
-      "unlocks_observables": [],
+      "unlocks_observables": [
+        "MFT",
+        "FFT",
+        "MFTD"
+      ],
       "unlocks_from_charges": [
         "glucose",
         "a pentose (ribose / xylose)",
         "cysteine",
+        "thiamine",
         "hydrogen sulfide"
       ]
     },
@@ -219,12 +227,15 @@
         "OX"
       ],
       "products": [
-        "MFTD"
+        "MFTD",
+        "OXV"
       ],
       "what_the_code_says": "CHANNEL 3, dominant at 115-120 C -- the channel the 30 C system rules",
       "story": "",
       "measurement": "a fed-intermediate rate: MFT + OX heated alone, MFTD quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
+        "MFT",
+        "FFT",
         "MFTD"
       ],
       "unlocks_from_charges": [
@@ -276,7 +287,9 @@
       "story": "",
       "measurement": "a fed-intermediate rate: FUR + hydrogen sulfide heated alone, FFT quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
       "unlocks_observables": [
-        "FFT"
+        "MFT",
+        "FFT",
+        "MFTD"
       ],
       "unlocks_from_charges": [
         "glucose",
@@ -346,7 +359,7 @@
   "refused_targets": [
     {
       "what": "UNREPRESENTED TARGETS: 2-pentylfuran",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
       "rows": [
         {
           "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -365,7 +378,8 @@
           "compound": "2-pentylfuran"
         }
       ],
-      "row_count": 4
+      "row_count": 4,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s",
@@ -384,7 +398,8 @@
           "compound": "2-Methyl-3-furanthiol (MFT)"
         }
       ],
-      "row_count": 3
+      "row_count": 3,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: nonanal",
@@ -403,7 +418,8 @@
           "compound": "nonanal"
         }
       ],
-      "row_count": 3
+      "row_count": 3,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose",
@@ -418,7 +434,8 @@
           "compound": "Furfural"
         }
       ],
-      "row_count": 2
+      "row_count": 2,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML)",
@@ -429,7 +446,8 @@
           "compound": "N\u03b5-(Carboxymethyl)lysine (CML)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL)",
@@ -440,7 +458,8 @@
           "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-mo",
@@ -451,7 +470,8 @@
           "compound": "2-Furfurylthiol (FFT)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an i",
@@ -462,7 +482,8 @@
           "compound": "2-Methyl-3-furanthiol (MFT)"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNREPRESENTED TARGETS: 1-hexanol",
@@ -473,7 +494,8 @@
           "compound": "1-hexanol"
         }
       ],
-      "row_count": 1
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
     }
   ],
   "thin_axes": [
@@ -496,16 +518,6 @@
       "wilson_lower_bound": null,
       "additional_agreeing_claims_to_trust": 4,
       "structural_block": null
-    },
-    {
-      "axis": "moisture_aw",
-      "agree": 0,
-      "evaluable": 0,
-      "not_evaluable": 4,
-      "verdict": "no evaluable claim",
-      "wilson_lower_bound": null,
-      "additional_agreeing_claims_to_trust": 4,
-      "structural_block": "no lane carries a water-activity term: the engine refuses every a_w comparison, so claims cannot help until a moisture-dependent step is measured and fitted"
     },
     {
       "axis": "process_heating",
@@ -538,14 +550,14 @@
       "structural_block": null
     },
     {
-      "axis": "time",
-      "agree": 2,
+      "axis": "moisture_aw",
+      "agree": 1,
       "evaluable": 2,
-      "not_evaluable": 0,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.342,
-      "additional_agreeing_claims_to_trust": 2,
-      "structural_block": null
+      "not_evaluable": 2,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.095,
+      "additional_agreeing_claims_to_trust": 6,
+      "structural_block": "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
     },
     {
       "axis": "additive_cysteine",
@@ -558,33 +570,43 @@
       "structural_block": null
     },
     {
-      "axis": "ph",
-      "agree": 4,
-      "evaluable": 5,
-      "not_evaluable": 5,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.376,
-      "additional_agreeing_claims_to_trust": 3,
+      "axis": "time",
+      "agree": 3,
+      "evaluable": 6,
+      "not_evaluable": 3,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.188,
+      "additional_agreeing_claims_to_trust": 9,
       "structural_block": null
     },
     {
-      "axis": "temperature",
-      "agree": 5,
-      "evaluable": 7,
-      "not_evaluable": 1,
+      "axis": "ph",
+      "agree": 8,
+      "evaluable": 10,
+      "not_evaluable": 4,
       "verdict": "caution",
-      "wilson_lower_bound": 0.359,
-      "additional_agreeing_claims_to_trust": 4,
+      "wilson_lower_bound": 0.49,
+      "additional_agreeing_claims_to_trust": 1,
       "structural_block": null
     },
     {
       "axis": "sugar_identity",
       "agree": 4,
-      "evaluable": 8,
-      "not_evaluable": 6,
+      "evaluable": 10,
+      "not_evaluable": 7,
       "verdict": "do-not-use",
-      "wilson_lower_bound": 0.215,
-      "additional_agreeing_claims_to_trust": 12,
+      "wilson_lower_bound": 0.168,
+      "additional_agreeing_claims_to_trust": 20,
+      "structural_block": null
+    },
+    {
+      "axis": "temperature",
+      "agree": 7,
+      "evaluable": 11,
+      "not_evaluable": 2,
+      "verdict": "caution",
+      "wilson_lower_bound": 0.354,
+      "additional_agreeing_claims_to_trust": 9,
       "structural_block": null
     }
   ],
@@ -592,78 +614,78 @@
     {
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
       "compound": "hexanal",
-      "voi_score": 17.135969145156704,
-      "envelope_miss_log10": 3.4122278271535373,
+      "voi_score": 17.46072171569549,
+      "envelope_miss_log10": 3.464842039653945,
       "template": "missing_positive_flavor_anchor"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 17.03721884477307,
-      "envelope_miss_log10": 2.2524967786736503,
-      "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 16.63920948184031,
-      "envelope_miss_log10": 2.1377993417265677,
+      "voi_score": 12.854685402600802,
+      "envelope_miss_log10": 1.4965904870343925,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 15.208772039652121,
-      "envelope_miss_log10": 1.9030499569037886,
+      "voi_score": 12.531471579808716,
+      "envelope_miss_log10": 1.417157792951579,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 11.984567196329667,
+      "envelope_miss_log10": 1.375924665464233,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 13.621116424818894,
-      "envelope_miss_log10": 1.6892488770475875,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 12.513972652187618,
-      "envelope_miss_log10": 1.7003623885690413,
+      "voi_score": 11.926101231166935,
+      "envelope_miss_log10": 1.3609711701276446,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.706214874282164,
-      "envelope_miss_log10": 1.989022080075591,
+      "voi_score": 11.603790981275134,
+      "envelope_miss_log10": 1.9979283001565558,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.342705723241524,
-      "envelope_miss_log10": 1.146092770162959,
+      "voi_score": 11.484013795214867,
+      "envelope_miss_log10": 1.1835312341038355,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
       "compound": "hexanal",
-      "voi_score": 10.991897820458863,
-      "envelope_miss_log10": 2.6723264625177823,
+      "voi_score": 11.236062474641917,
+      "envelope_miss_log10": 2.7249406750181904,
       "template": "missing_positive_flavor_anchor"
     },
     {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.823615639197705,
-      "envelope_miss_log10": 1.381281216207526,
+      "voi_score": 10.93638982929702,
+      "envelope_miss_log10": 1.4237906624406151,
       "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "compound": "hexanal",
+      "voi_score": 10.231746846610589,
+      "envelope_miss_log10": 2.5113661579192557,
+      "template": "missing_positive_flavor_anchor"
     }
   ],
   "what_you_could_predict": [
     {
       "if_measured": "k_glc_ha",
-      "you_could_predict": "absolute MFT, MFTD, ACTZ from charges containing glucose, as a fitted value instead of a band artefact; 8 panel rows now NOT EVALUABLE would return to the scorecard"
+      "you_could_predict": "absolute MFT, FFT, MFTD, ACTZ from charges containing glucose, as a fitted value instead of a band artefact; 8 panel rows now NOT EVALUABLE would return to the scorecard"
     },
     {
       "if_measured": "Ea_decay_thiol_sink",
@@ -671,15 +693,19 @@
     },
     {
       "if_measured": "k_arp_dpo",
-      "you_could_predict": "absolute MFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact"
+    },
+    {
+      "if_measured": "k_dimer_fft",
+      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "k_dimer_mft",
-      "you_could_predict": "absolute MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "k_fur_fft",
-      "you_could_predict": "absolute FFT from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "4 more independent ordering claims on lipid_lane (all agreeing)",
@@ -702,24 +728,24 @@
       "you_could_predict": "the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "2 more independent ordering claims on time (all agreeing)",
-      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'caution'"
-    },
-    {
       "if_measured": "5 more independent ordering claims on additive_cysteine (all agreeing)",
       "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "3 more independent ordering claims on ph (all agreeing)",
+      "if_measured": "9 more independent ordering claims on time (all agreeing)",
+      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'do-not-use'"
+    },
+    {
+      "if_measured": "1 more independent ordering claims on ph (all agreeing)",
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "4 more independent ordering claims on temperature (all agreeing)",
-      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
+      "if_measured": "20 more independent ordering claims on sugar_identity (all agreeing)",
+      "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "12 more independent ordering claims on sugar_identity (all agreeing)",
-      "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
+      "if_measured": "9 more independent ordering claims on temperature (all agreeing)",
+      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
     }
   ],
   "summary": {

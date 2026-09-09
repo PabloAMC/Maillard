@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **339**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **397**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -37,6 +37,7 @@ Tracked files: **339**. Local-only (gitignored): scratch runs under `results/qui
 
 | files | what it is, who writes it, who reads it |
 |---|---|
+| `calibration_prereg.md` | Pre-registration of `maillard calibrate` (per-laboratory calibration on the user's own data: levels set the response factor, contrasts move the kinetics), with its declared tests and outcome. |
 | `chemistry_family_scope.*` (2): `chemistry_family_scope.json`, `chemistry_family_scope.md` | Which chemistry families are first-class, bounded or gaps (`src/chemistry_family_scope.py`). |
 | `citation_verification_ledger.*` (2): `citation_verification_ledger.json`, `citation_verification_ledger.md` | 2026-08-26 CrossRef identity sweep of every DOI; INPUT to `scripts/ci/citation_gate.py` although it lives here (it is a run record). |
 | `core_directional_scores.*` (2): `core_directional_scores.json`, `core_directional_scores.md` | THE DIRECTIONAL SCORECARD: the 69-claim literature panel scored on the core, per axis. Written by `core-directional` (`src/kinetic_core/directional.py`); read by `src/directional_reliability.py` (CLI reliability tags), the model card and the guards. |
@@ -51,17 +52,42 @@ Tracked files: **339**. Local-only (gitignored): scratch runs under `results/qui
 | `experiment_value_ranking.*` (2): `experiment_value_ranking.json`, `experiment_value_ranking.md` | `rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`. |
 | `family_ingestion_plan.*` (2): `family_ingestion_plan.json`, `family_ingestion_plan.md` | Ingestion order of the SLR families (`src/family_ingestion_plan.py`; alias `family-ingestion-plan`). |
 | `family_strategy_policy.*` (2): `family_strategy_policy.json`, `family_strategy_policy.md` | The family strategy: quantitative trunk vs bounded lanes (`src/family_strategy_policy.py`). |
+| `figure_inputs.json` | The records behind every figure under docs/assets/thiol_sink/ (the three builders' inputs and each PNG's hash), with a provenance block the freshness gate re-hashes: a changed scorecard, ship rule, species table or builder fails CI until the figures are rebuilt. |
 | `gap_heatmap.png` | Heat map of the experiment-value ranking (`generate_gap_heatmap.py`). |
 | `holdout_frozen/` (2 files) | Hong 2020 hold-out rows frozen before B4; read by the B4 fit generator and `parameters_matrix.py`. |
 | `key_value_trace_report.md` | Where every key numeric value in the core comes from (`scripts/trace_key_values.py`). Read by people. |
 | `kinetic_core_b*_diagnosis.md` (3): `kinetic_core_b2_1_diagnosis.md`, `kinetic_core_b2_2_diagnosis.md`, `kinetic_core_b2_3_diagnosis.md` | Per-wave diagnosis notes; b2_1/b2_2 are quoted by `parameters_sulfur.py` and `panel.py`. |
 | `kinetic_core_b*_exam*.*` (27): `kinetic_core_b2_4_exam_half.json`, `kinetic_core_b2_4_exam_half.md`, `kinetic_core_b2_4_exam_measured.json`, `kinetic_core_b2_4_exam_measured.md` … | FROZEN cutover-exam scores per wave / ensemble member (the exam generator was deleted at B5b; these are history). |
-| `kinetic_core_b*_fit_report.*` (23): `kinetic_core_b1_fit_report.json`, `kinetic_core_b1_fit_report.md`, `kinetic_core_b2_1_fit_report.json`, `kinetic_core_b2_1_fit_report.md` … | FROZEN fit reports, one per wave. The engine reads b1 (trunk), the shipped sulfur wave (b9), b3 (acrylamide), b6 (lipid) and b7 (trunk targets); earlier sulfur waves (b2, b2_1..b2_4, b8) are the audit trail of how b9 was reached. |
+| `kinetic_core_b*_fit_report.*` (29): `kinetic_core_b10_fit_report.json`, `kinetic_core_b10_noyil_fit_report.json`, `kinetic_core_b18_fit_report.json`, `kinetic_core_b18_fit_report.md` … | FROZEN fit reports, one per wave. The engine reads b1 (trunk), the shipped sulfur wave (b9), b3 (acrylamide), b6 (lipid) and b7 (trunk targets); earlier sulfur waves (b2, b2_1..b2_4, b8) are the audit trail of how b9 was reached. |
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
-| `kinetic_core_b*_laplace_covariance.json` (2): `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
+| `kinetic_core_b*_laplace_covariance.json` (3): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
-| `kinetic_core_b*_prereg.md` (7): `kinetic_core_b2_2_prereg.md`, `kinetic_core_b2_3_prereg.md`, `kinetic_core_b2_4_prereg.md`, `kinetic_core_b6_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
+| `kinetic_core_b*_prereg.md` (15): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
 | `kinetic_core_b*_profile.*` (4): `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md`, `kinetic_core_b9_profile.json`, `kinetic_core_b9_profile.md` | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
+| `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
+| `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
+| `kinetic_core_b10_ship_rule.*` (2): `kinetic_core_b10_ship_rule.json`, `kinetic_core_b10_ship_rule.md` | The B10 prereg's ship rule (sec. 5) evaluated on the frozen B10 / B10-noyil / B9 artifacts without switching the engine (`generate_kinetic_core_b10_ship_rule.py`). |
+| `kinetic_core_b11_fit_report.json` | B11 frozen fit: B9's 54 rows with every system charged with a headspace oxygen reservoir and the two consumers appended (25 free). NOT read by the engine: the ship rule refused it and the consumers ship at zero (`kinetic_core_b11_prereg.md` sec. 10). |
+| `kinetic_core_b11_laplace_covariance.json` | Laplace covariance at the frozen B11 optimum (`generate_kinetic_core_b8_laplace.py --wave b11`); both oxygen consumers unidentified. |
+| `kinetic_core_b11_members/` (2 files) | B11 optimiser members (two starts, the oxygen-as-input wave); read back by the B11 generator's consolidation. |
+| `kinetic_core_b11_ship_rule.*` (2): `kinetic_core_b11_ship_rule.json`, `kinetic_core_b11_ship_rule.md` | The B11 prereg's ship rule (sec. 5) evaluated on the frozen B11 / B9 artifacts and the panel bundles' vessel blocks without switching the engine (`generate_kinetic_core_b11_ship_rule.py`). |
+| `kinetic_core_b16_fit_report.json` | B16 frozen fit (64 rows, 23 free, every B9 band kept). Read by the engine only if the B16 ship rule said SHIP (`kinetic_core_b16_prereg.md` sec. 6). |
+| `kinetic_core_b16_laplace_covariance.json` | Laplace covariance at the frozen B16 optimum (`generate_kinetic_core_b8_laplace.py --wave b16`). |
+| `kinetic_core_b16_lift_fit_report.json` | B16 lift-variant frozen fit (ceiling 160): what the 100 C series asks of the thiol-sink barrier. Never read by the engine. |
+| `kinetic_core_b16_lift_members/` (2 files) | B16 lift-variant members (the thiol-sink barrier ceiling raised to 160 kJ/mol; information only, cannot ship). |
+| `kinetic_core_b16_members/` (2 files) | B16 optimiser members (two starts; the thiol-sink wave: B9 + Schieberle 2000's 100 C ratios + Zhai 2021's TTCA rows). |
+| `kinetic_core_b16_ship_rule.*` (2): `kinetic_core_b16_ship_rule.json`, `kinetic_core_b16_ship_rule.md` | The B16 prereg's ship rule (sec. 4) evaluated on the frozen B9 / B16 / B16-lift artifacts without switching the engine (`generate_kinetic_core_b16_ship_rule.py`). |
+| `kinetic_core_b17_fit_report.json` | B17 frozen fit (64 rows, 24 free): the disulfide gives the thiol back, one shared release constant with the dimerisation's measured barrier. Read by the engine only if the B17 ship rule said SHIP (`kinetic_core_b17_prereg.md` sec. 6). |
+| `kinetic_core_b17_laplace_covariance.json` | Laplace covariance at the frozen B17 optimum (`generate_kinetic_core_b8_laplace.py --wave b17`). |
+| `kinetic_core_b17_members/` (2 files) | B17 optimiser members (two starts; the sink-structure wave: B16's 64 rows + the disulfide-release constant). |
+| `kinetic_core_b17_prereg.md` | Pre-registration of wave B17, the sink structure (a reversible disulfide, then a saturable sink on a browning-made pool): variants, rows, hold-outs and the ship rule; section 6 carries both variants' outcomes. |
+| `kinetic_core_b17_ship_rule.*` (2): `kinetic_core_b17_ship_rule.json`, `kinetic_core_b17_ship_rule.md` | The B17 prereg's ship rule (sec. 4) evaluated on the frozen B9 / B17 artifacts without switching the engine: the 100 C reference pot, the B9 rows, the dimer shares (Zhou 2023, Zhang 2024), Yiltirak, Wang 2022's 140 C shape, identification (`generate_kinetic_core_b17_ship_rule.py`). |
+| `kinetic_core_b17a_fit_report.json` | B17 variant (a) frozen fit (64 rows, 24 free): the pot makes the thioether sink's site pool at a fitted yield per deoxyosone decayed; the measured thioether constants untouched. Read by the engine only if the B17a ship rule said SHIP (`kinetic_core_b17_prereg.md` sec. 6). |
+| `kinetic_core_b17a_laplace_covariance.json` | Laplace covariance at the frozen B17 variant (a) optimum (`generate_kinetic_core_b8_laplace.py --wave b17a`). |
+| `kinetic_core_b17a_members/` (2 files) | B17 variant (a) optimiser members (two starts; B16's 64 rows + the electrophile-site yield). |
+| `kinetic_core_b17a_ship_rule.*` (2): `kinetic_core_b17a_ship_rule.json`, `kinetic_core_b17a_ship_rule.md` | The B17 prereg's ship rule evaluated for variant (a) on the frozen B9 / B17a artifacts without switching the engine; T6 on the site yield, Zhang 2024's share reported as figure-derived (`generate_kinetic_core_b17a_ship_rule.py`). |
+| `kinetic_core_b18_ship_rule.*` (2): `kinetic_core_b18_ship_rule.json`, `kinetic_core_b18_ship_rule.md` | The B18 prereg's ship rule (sec. 4) evaluated on the frozen B18 artifacts: T1-T6, the Leahy and Yu hold-outs, the glyoxal-sink conditionality (`generate_kinetic_core_b18_ship_rule.py`). |
+| `kinetic_core_b19_prereg_draft.md` | DRAFT pre-registration of wave B19 (amino-acid identity on the sugar path): the structure, the rows it needs and where they must come from; becomes a pre-registration when the sources are on disk. |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
 | `kinetic_core_b2_4_fit_*.json` (21): `kinetic_core_b2_4_fit_half.json`, `kinetic_core_b2_4_fit_half_s0.json`, `kinetic_core_b2_4_fit_half_s1.json`, `kinetic_core_b2_4_fit_half_s2.json` … | B2.4 ensemble: one fit per weighting (half / measured / shipped) and per start (_s0.._s5). History; `kinetic_core_b2_4_ensemble.json` summarises them. |
@@ -73,8 +99,12 @@ Tracked files: **339**. Local-only (gitignored): scratch runs under `results/qui
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
+| `matrix_sites_prereg.md` | Pre-registration of the protein-matrix layer (reactive sites charged per gram of protein; declared binding of aldehydes and HMF), with its declared tests and outcome. |
 | `model_card.json` | Machine-readable model card; the same content is spliced into README.md between the markers. Written by `model-card` (`src/model_card.py`). |
 | `mycoprotein_reference.*` (2): `mycoprotein_reference.json`, `mycoprotein_reference.md` | Bounded priors for the mycoprotein matrix (`src/mycoprotein_reference.py`). |
+| `network_hypotheses.json` | The hypothesis layer: what the cited reaction rules propose from each lane's reference charge, placed against the engine's reactions (modelled / mechanism known / proposed); steps and products only, no rates (`generate_network_hypotheses.py`, pre-registered in `network_hypotheses_prereg.md`). |
+| `network_hypotheses.md` | Markdown twin of `network_hypotheses.json`. |
+| `network_hypotheses_prereg.md` | Pre-registration of the hypothesis layer: what runs, what counts as success, and the outcome. |
 | `prefactor_audit.*` (2): `prefactor_audit.json`, `prefactor_audit.md` | Arrhenius prefactor audit (`generate_prefactor_audit.py`); cited by `parameters.py` and pinned by the B8 test. |
 | `trunk_rate_calibration_refit.*` (2): `trunk_rate_calibration_refit.json`, `trunk_rate_calibration_refit.md` | Trunk rate refit record read by `src/kinetic_core/parameters.py` (the trunk constants cite it). |
 | `wave_generators_manifest.json` | SHA-256 of every frozen wave generator; `tests/scientific/test_wave_generators_frozen.py` fails on drift. Written by `scripts/generators/build_wave_manifest.py`. |

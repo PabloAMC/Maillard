@@ -488,6 +488,18 @@ def test_explain_does_not_crash_on_an_unknown_name_and_says_so_honestly():
     assert "gap in the vocabulary, not a claim about the chemistry" in payload["reason"]
 
 
+def test_explain_finds_a_literature_only_product_by_the_name_in_its_note():
+    """2-pentylpyridine is neither an engine species nor a registry compound; it is a literature
+    structure the lipid-Maillard rules reach (R33). The refusal must say 'no rate', not 'no route'."""
+    payload = explain_compound.explain("2-pentylpyridine")
+    assert payload["answered"] is False
+    hyp = payload["hypotheses"]
+    assert "lipid_maillard_cross" in hyp["reached_in_charges"]
+    assert any(s["rule"].startswith("R33") for s in hyp["steps"])
+    # and a name no note carries still comes back empty-handed, honestly
+    assert explain_compound.explain("unobtainium sulfoxide")["hypotheses"]["reached_in_charges"] == []
+
+
 def test_the_evidence_class_mapping_never_calls_an_assumption_measured():
     """The one mapping every downstream surface trusts."""
     assert explain_compound.evidence_class_of("measured_rate") == explain_compound.MEASURED

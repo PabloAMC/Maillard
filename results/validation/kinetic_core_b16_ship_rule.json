@@ -1,0 +1,320 @@
+{
+  "artifact": "kinetic_core_b16_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b16_ship_rule",
+    "generated_on": "2026-09-07",
+    "git": {
+      "commit": "91df11cababdb045360455eb59bef6ab6d70ae34",
+      "short": "91df11ca",
+      "branch": "cleaning",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b16_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b16_fit_report.json",
+        "sha256": "ff33c040ec0a88253bc218252a4b018cb7e9d818ec58b0d78d381d231ddfcd57"
+      },
+      {
+        "path": "results/validation/kinetic_core_b16_lift_fit_report.json",
+        "sha256": "6014f8ef8e9e7e645cae788f0548a3670028807f6bdfdd3628d8e2f693b6813b"
+      },
+      {
+        "path": "results/validation/kinetic_core_b16_laplace_covariance.json",
+        "sha256": "c93b397c137438d4f1bdfd92d404082981a1ca5f0f22e4664e471a881223c23b"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b16_prereg.md",
+  "b16": {
+    "variant": "b16",
+    "thiol_sink_ea": 101.99999999999892,
+    "ceiling": 102.0,
+    "cost": 930.98127996692,
+    "active_bounds": [
+      "k_dimer_mft",
+      "k_dimer_fft",
+      "k_pent_caramel",
+      "Ea_decay_thiol_sink"
+    ],
+    "T1_shape": {
+      "mft_ug_per_l": [
+        22.498360376918853,
+        54.78872823220928,
+        108.95913371306473,
+        95.72389508906564
+      ],
+      "fft_ug_per_l": [
+        2.0344824535307096,
+        7.9834975058110205,
+        56.27174319189976,
+        59.92474735639415
+      ],
+      "mft_monotone": false,
+      "fft_monotone": true,
+      "fold_rows_dex": {
+        "schieberle_MFT_fold_60_over_30": -0.1673830565660584,
+        "schieberle_MFT_fold_360_over_30": -0.7895670744614814,
+        "schieberle_MFT_fold_720_over_30": -0.864697031433178,
+        "schieberle_FFT_fold_60_over_30": 0.4304446983128325,
+        "schieberle_FFT_fold_360_over_30": -0.045610494136837286,
+        "schieberle_FFT_fold_720_over_30": -0.023476807964637025,
+        "schieberle_MFT_145C20min_over_100C360min": 1.496548419423265
+      },
+      "worst_fold_dex": 1.496548419423265,
+      "pass": false
+    },
+    "T2_in_sample": {
+      "rows_compared": 51,
+      "worst": {
+        "row": "fed_ribose_h2s_MFT",
+        "b9_residual": 0.36986025664699385,
+        "b16_residual": -4.599680178194842,
+        "growth_dex": 1.903418964696532
+      },
+      "n_over_0_3_dex": 16,
+      "n_over_0_5_dex": 12,
+      "pass": false
+    },
+    "T3_yiltirak_levels": {
+      "b9": [
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 6.88,
+          "predicted": 64.08639804316826,
+          "fold": 9.314883436507014
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.28,
+          "predicted": 610.2552488237211,
+          "fold": 476.7619131435321
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 3.29,
+          "predicted": 96.89165048722249,
+          "fold": 29.45034969216489
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.46,
+          "predicted": 535.4957642003135,
+          "fold": 366.7779206851462
+        }
+      ],
+      "b16": [
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 6.88,
+          "predicted": 33.18650985028206,
+          "fold": 4.823620617773555
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.28,
+          "predicted": 23.585902714602476,
+          "fold": 18.426486495783184
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 3.29,
+          "predicted": 41.274014174488464,
+          "fold": 12.545293062154547
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.46,
+          "predicted": 21.343191435586018,
+          "fold": 14.618624270949327
+        }
+      ],
+      "b9_median_fold": 198.11413518865555,
+      "b16_median_fold": 13.581958666551937,
+      "pass": true
+    },
+    "T4_ttca_rows": {
+      "rows_dex": {
+        "zhai2021_ttca_remaining_100C_60min": -0.6843860121154457,
+        "zhai2021_ttca_remaining_120C_60min": -1.25,
+        "zhai2021_ttca_remaining_140C_60min": -1.25
+      },
+      "worst_dex": 1.25,
+      "pass": false
+    },
+    "T6_liu2023_168C": {
+      "mft_ug_per_l": [
+        12.202896529026491,
+        8.478379812269054,
+        5.857459617346621
+      ],
+      "fft_20_60": [
+        18.642299652500895,
+        7.981954153106812
+      ],
+      "evaluable": true,
+      "rib_t_01_decreasing": true,
+      "rib_t_02_flat": false
+    }
+  },
+  "b16_lift": {
+    "variant": "b16_lift",
+    "thiol_sink_ea": 159.9999976950934,
+    "ceiling": 160.0,
+    "cost": 802.2849716338258,
+    "active_bounds": [
+      "k_dimer_mft",
+      "k_dimer_fft",
+      "Ea_decay_thiol_sink"
+    ],
+    "T1_shape": {
+      "mft_ug_per_l": [
+        23.910990624682622,
+        75.25538832830709,
+        357.8522018938662,
+        328.8892584795269
+      ],
+      "fft_ug_per_l": [
+        7.316951850035462,
+        30.212408718396404,
+        267.49705800172336,
+        337.1207737520089
+      ],
+      "mft_monotone": false,
+      "fft_monotone": true,
+      "fold_rows_dex": {
+        "schieberle_MFT_fold_60_over_30": -0.0883222169759566,
+        "schieberle_MFT_fold_360_over_30": -0.47354268455188664,
+        "schieberle_MFT_fold_720_over_30": -0.5447749684298758,
+        "schieberle_FFT_fold_60_over_30": 0.3985336004125369,
+        "schieberle_FFT_fold_360_over_30": -0.11344935956834123,
+        "schieberle_FFT_fold_720_over_30": -0.005098372278551051,
+        "schieberle_MFT_145C20min_over_100C360min": 0.8852691453064682
+      },
+      "worst_fold_dex": 0.8852691453064682,
+      "pass": false
+    },
+    "T2_in_sample": {
+      "rows_compared": 51,
+      "worst": {
+        "row": "kang_100C_cys_conversion",
+        "b9_residual": -0.16257419061035666,
+        "b16_residual": -2.0674502244475668,
+        "growth_dex": 0.5714628101511631
+      },
+      "n_over_0_3_dex": 10,
+      "n_over_0_5_dex": 3,
+      "pass": false
+    },
+    "T3_yiltirak_levels": {
+      "b9": [
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 6.88,
+          "predicted": 64.08639804316826,
+          "fold": 9.314883436507014
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.28,
+          "predicted": 610.2552488237211,
+          "fold": 476.7619131435321
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 3.29,
+          "predicted": 96.89165048722249,
+          "fold": 29.45034969216489
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.46,
+          "predicted": 535.4957642003135,
+          "fold": 366.7779206851462
+        }
+      ],
+      "b16": [
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 6.88,
+          "predicted": 103.63028307833468,
+          "fold": 15.062541145106787
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.28,
+          "predicted": 75.05895661268862,
+          "fold": 58.63980985366298
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "measured": 3.29,
+          "predicted": 110.78722174652016,
+          "fold": 33.673927582528925
+        },
+        {
+          "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "measured": 1.46,
+          "predicted": 72.25066844631124,
+          "fold": 49.486759209802216
+        }
+      ],
+      "b9_median_fold": 198.11413518865555,
+      "b16_median_fold": 41.580343396165574,
+      "pass": true
+    },
+    "T4_ttca_rows": {
+      "rows_dex": {
+        "zhai2021_ttca_remaining_100C_60min": -0.6843874782961809,
+        "zhai2021_ttca_remaining_120C_60min": -1.25,
+        "zhai2021_ttca_remaining_140C_60min": -1.25
+      },
+      "worst_dex": 1.25,
+      "pass": false
+    },
+    "T6_liu2023_168C": {
+      "mft_ug_per_l": [
+        5.588359097945912,
+        3.351255550175343,
+        2.2149272522055945
+      ],
+      "fft_20_60": [
+        20.936012518637597,
+        8.385510910623244
+      ],
+      "evaluable": true,
+      "rib_t_01_decreasing": true,
+      "rib_t_02_flat": false
+    }
+  },
+  "T5_laplace": {
+    "thiol_sink_identified": false,
+    "thiol_sink_sigma": 52.77702254061807,
+    "off_bound": false,
+    "n_identified": 10,
+    "n_free": 23,
+    "pass": false
+  },
+  "verdict": "DO NOT SHIP",
+  "rule": "SHIP if T1 (shape + folds within 0.3 dex), T2 (no B9 row +0.3 dex) and T4 (TTCA rows within 0.1 dex) hold on variant b16"
+}

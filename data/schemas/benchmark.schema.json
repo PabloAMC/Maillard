@@ -73,6 +73,81 @@
         "buffer": {
           "type": "object",
           "description": "Curated from the primary source; carried forward on regeneration (see src/external_validation.py)."
+        },
+        "vessel": {
+          "type": "object",
+          "description": "The physical state of the pot, curated from the primary source with per-field provenance (programme step R1, 2026-09-06; FIT_HOLDOUT_DECLARATION.md Amendment 19). Read by src/kinetic_core/vessel.py for the scorecard's oxygen line; charging the network's oxidant pool from it is step R2(a). Optional at the schema level so quarantined and unreachable files need not carry it; tests/unit/test_benchmark_vessel_block.py requires it on every panel bundle.",
+          "required": [
+            "fill_mL",
+            "vessel_mL",
+            "closure",
+            "atmosphere",
+            "water_source",
+            "stirred",
+            "provenance_class",
+            "provenance_note"
+          ],
+          "properties": {
+            "fill_mL": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "vessel_mL": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "closure": {
+              "type": "string"
+            },
+            "atmosphere": {
+              "type": "string",
+              "enum": [
+                "air_by_default",
+                "air_stated",
+                "inert_gas",
+                "open",
+                "continuous_process",
+                "not_applicable",
+                "unstated"
+              ]
+            },
+            "water_source": {
+              "type": "string",
+              "enum": [
+                "deionised",
+                "distilled",
+                "tap",
+                "unstated",
+                "not_applicable"
+              ]
+            },
+            "stirred": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "provenance_class": {
+              "type": "string",
+              "enum": [
+                "primary_source_pdf",
+                "repo_verbatim_methods_quote",
+                "unknown",
+                "not_applicable"
+              ]
+            },
+            "provenance_note": {
+              "type": "string",
+              "minLength": 120
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": true

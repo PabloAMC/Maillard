@@ -83,6 +83,28 @@ def load_spec_document(path: Path | str) -> Dict[str, Any]:
     return data
 
 
+_SPEC_SCHEMA: Optional[Dict[str, Any]] = None
+
+
+def spec_schema() -> Dict[str, Any]:
+    """data/schemas/spec.schema.json, the one contract every front-door surface validates against."""
+    global _SPEC_SCHEMA
+    if _SPEC_SCHEMA is None:
+        from src import data_access, data_paths
+
+        _SPEC_SCHEMA = dict(data_access.load_json(data_paths.SPEC_SCHEMA))
+    return _SPEC_SCHEMA
+
+
+def _schema_errors(spec: Mapping[str, Any]) -> List[str]:
+    try:
+        import jsonschema
+    except ImportError:  # pragma: no cover - jsonschema is a declared dependency
+        return []
+    validator = jsonschema.Draft202012Validator(spec_schema())
+    return [f"{'/'.join(str(p) for p in e.absolute_path) or '(spec)'}: {e.message}" for e in sorted(validator.iter_errors(dict(spec)), key=str)]
+
+
 def validate_spec(spec: Mapping[str, Any], *, label: str) -> Dict[str, Any]:
     if not isinstance(spec, Mapping):
         raise SpecError(f"{label}: must be a mapping")
@@ -94,6 +116,11 @@ def validate_spec(spec: Mapping[str, Any], *, label: str) -> Dict[str, Any]:
             "not default process conditions, because a defaulted temperature is a silent "
             "chemistry claim."
         )
+    # 2026-09-08: the schema is the contract (types, ranges, the buffer block); the message above
+    # keeps naming a missing condition in the words a bench scientist has read before
+    problems = _schema_errors(spec)
+    if problems:
+        raise SpecError(f"{label}: " + "; ".join(problems[:6]) + " (data/schemas/spec.schema.json)")
     precursors = spec.get("precursors")
     if not isinstance(precursors, Mapping) or not precursors:
         raise SpecError(f"{label}: 'precursors' must be a non-empty mapping of name -> mM")
@@ -269,9 +296,38 @@ def core_caveat() -> str:
 #: Evaluated once at import for callers that read the constant.
 CORE_CAVEAT = core_caveat()
 
+def _core_buffer(spec: Mapping[str, Any]):
+    """2026-09-07: a spec may declare its buffer (``buffer: {kind, phosphate_mol_l, source}``) so a
+    stated pot is charged as stated; without it the sulfur lane keeps its declared default and says so."""
+    raw = spec.get("buffer")
+    if not raw or not isinstance(raw, Mapping):
+        return None
+    from src.kinetic_core.ph_state import BufferSpec
+
+    return BufferSpec(
+        kind=str(raw.get("kind") or "phosphate"),
+        phosphate_mol_l=float(raw.get("phosphate_mol_l") or 0.0),
+        declared=True,
+        source=str(raw.get("source") or "declared in the spec"),
+    )
+
+
 def _core_process(spec: Mapping[str, Any]):
     from src.kinetic_core.engine import ProcessSpec, ThermalProgram
 
+    process = _build_process(spec, ProcessSpec, ThermalProgram)
+    # the matrix layer's contract is checked at the front door: a named matrix without a loading is
+    # a SpecError here, not a traceback in the engine
+    from src.kinetic_core.matrix_sites import MatrixSpecError, resolve
+
+    try:
+        resolve(process)
+    except MatrixSpecError as exc:
+        raise SpecError(f"{spec.get('name') or 'spec'}: {exc}") from exc
+    return process
+
+
+def _build_process(spec: Mapping[str, Any], ProcessSpec, ThermalProgram):
     return ProcessSpec(
         thermal=ThermalProgram.isothermal(
             float(spec["temp_C"]), float(spec["time_min"])
@@ -279,6 +335,9 @@ def _core_process(spec: Mapping[str, Any]):
         ph=float(spec["ph"]),
         water_activity=float(spec["aw"]) if spec.get("aw") is not None else None,
         matrix=str(spec.get("matrix") or spec.get("protein_type") or "water"),
+        buffer=_core_buffer(spec),
+        protein_g_per_l=float(spec["protein_g_per_l"]) if spec.get("protein_g_per_l") is not None else None,
+        protein_sites={str(k): float(v) for k, v in dict(spec["protein_sites"]).items()} if spec.get("protein_sites") else None,
     )
 
 
@@ -318,10 +377,15 @@ def _core_targets(spec: Mapping[str, Any], targets: Optional[Sequence[str]]):
 
 
 def predict_core(
-    spec: Mapping[str, Any], *, targets: Optional[Sequence[str]] = None
+    spec: Mapping[str, Any], *, targets: Optional[Sequence[str]] = None, calibration=None
 ) -> Dict[str, Any]:
-    """Single-formulation prediction through the kinetic core."""
-    from src.kinetic_core.engine import engine_metadata, predict
+    """Single-formulation prediction through the kinetic core; ``calibration`` is a per-laboratory
+    overlay (src.kinetic_core.calibration.Calibration) or None for the shipped model."""
+    from src.kinetic_core.calibration import predict_calibrated
+    from src.kinetic_core.engine import engine_metadata
+
+    def predict(core_spec, requested):
+        return predict_calibrated(core_spec, requested, calibration)
 
     core_spec = spec_to_core(spec)
     requested = _core_targets(spec, targets)
@@ -392,6 +456,8 @@ def predict_core(
         "declaration": run.declaration.as_dict(),
         "rows": rows,
         "oav_table": oav_payload,
+        "matrix": {"sites": run.run_metadata.get("matrix_sites"), "note": run.run_metadata.get("matrix_sites_note"),
+                   "binding": run.run_metadata.get("matrix_binding") or {}} if run.answered else None,
         "run_metadata": dict(run.run_metadata),
         "caveats": {"core": CORE_CAVEAT},
         "engine": engine_metadata(),
@@ -448,14 +514,19 @@ def compare_core(
     spec_b: Mapping[str, Any],
     *,
     targets: Optional[Sequence[str]] = None,
+    calibration=None,
 ) -> Dict[str, Any]:
-    """Two-arm comparison through the kinetic core. Ratios lead, as in B4."""
+    """Two-arm comparison through the kinetic core. Ratios lead, as in B4. ``calibration`` is a
+    per-laboratory overlay or None for the shipped model."""
+    from src.kinetic_core.calibration import predict_calibrated
     from src.kinetic_core.engine import compare as core_compare
     from src.kinetic_core.engine import engine_metadata
 
+    predict_fn = (lambda s, targets_: predict_calibrated(s, targets_, calibration)) if calibration is not None else None
+
     core_a, core_b = spec_to_core(spec_a), spec_to_core(spec_b)
     requested = _core_targets(spec_a, targets) or _core_targets(spec_b, targets)
-    payload = core_compare(core_a, core_b, requested) if requested else {
+    payload = core_compare(core_a, core_b, requested, predict_fn=predict_fn) if requested else {
         "comparable": False,
         "reason": "no precursor in either arm maps to a core species",
         "declaration_a": {},
@@ -601,6 +672,24 @@ def render_predict_core_text(payload: Mapping[str, Any]) -> str:
     out.append("")
     out.append(_wrap(payload["caveats"]["core"]))
     out.append("")
+    matrix = payload.get("matrix") or {}
+    if matrix.get("sites"):
+        s = matrix["sites"]
+        pools = s["pools_mmol_per_l"]
+        out.append("")
+        out.append(f"  PROTEIN MATRIX  {s['matrix']} at {s['protein_g_per_l']:g} g/L: sites charged, mmol/L  "
+                   f"free thiol {pools['free_thiol']:.3g}  disulfide {pools['disulfide']:.3g}  amine {pools['amine']:.3g}")
+        out.append(_wrap(f"src: {s['source']}", indent="    "))
+        if s.get("note"):
+            out.append(_wrap(f"note: {s['note']}", indent="    "))
+        for compound, b in (matrix.get("binding") or {}).items():
+            lo, hi = b["bound_fraction_corners"]
+            out.append(f"    {compound[:37]:<38} bound to the matrix {100 * b['bound_fraction']:.1f} %  (declared bracket {100 * lo:.1f} to {100 * hi:.1f} %)")
+        if not matrix.get("binding"):
+            out.append("    no requested compound has a declared binding class; the thiols react through the sulfur lane's disulfide channel")
+    elif matrix.get("note"):
+        out.append("")
+        out.append(_wrap(f"protein matrix: {matrix['note']}", indent="  "))
     return "\n".join(out)
 
 

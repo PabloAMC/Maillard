@@ -2,7 +2,7 @@
 #
 # WHY THIS FILE EXISTS
 # --------------------
-# The model's ABSOLUTE accuracy is documented and poor (see AUDIT.md and
+# The model's ABSOLUTE accuracy is documented and poor (see docs/history/AUDIT_legacy_lane_2026-08.md and
 # results/validation/). Its actual use case is ORDINAL: screening formulations,
 # ranking off-flavour markers, choosing a direction to move a process knob.
 # Nobody had ever measured whether it gets DIRECTIONS right. This panel is the
@@ -179,7 +179,82 @@ sources:
     doi: "10.3390/foods14152721"
     access: full_text_review
     retrieved_from: "scratchpad/dirlit_flour_maillard_review.txt (Europe PMC full text)"
+  yiltirak2026:
+    citation: "Yiltirak, S., Balagiannis, D. P., Koek, J., Koch, J., Elmore, J. S. (2026). Formation of aroma-potent thiols in heat-stable vegetable oil-in-water emulsion models containing ribose and cysteine. Food Research International 231, 118600."
+    doi: "10.1016/j.foodres.2026.118600"
+    access: full_text_plus_supplementary
+    retrieved_from: "data/articles/Yiltirak2026.pdf + data/articles/Yiltirak2026-supplementary.docx (owner-supplied 2026-09-06); dossier data/lit/extraction_dossiers/yiltirak2026_extraction.md"
+  wang2026:
+    citation: "Wang, X.-L., Wei, C.-K., Wei, D.-W., Yang, C.-M., Liu, Y. (2026). Impact of Amadori rearrangement products of cysteine-xylose-glutamic acid on meat flavor development. Food Research International 230, 118535."
+    doi: "10.1016/j.foodres.2026.118535"
+    access: full_text
+    retrieved_from: "data/articles/Wang2026.pdf; dossier data/lit/extraction_dossiers/wang2026_extraction.md (Fig. 5C digitised; SI Table S2 not on disk)"
+  meng2017:
+    citation: "Meng, Q., Kitagawa, R., Imamura, M., Katayama, H., Obata, A., Sugawara, E. (2017). Contribution of 2-methyl-3-furanthiol to the cooked meat-like aroma of fermented soy sauce. Bioscience, Biotechnology, and Biochemistry 81(1), 168-172."
+    doi: "10.1080/09168451.2016.1238295"
+    access: full_text
+    retrieved_from: "data/articles/meng2017.pdf; dossier data/lit/extraction_dossiers/meng2017_extraction.md (Table 3 raster-verified)"
 
+  devleeschouwer2008:
+    citation: "De Vleeschouwer, K., Van der Plancken, I., Van Loey, A., Hendrickx, M. E. (2008). Investigation of the Influence of Different Moisture Levels on Acrylamide Formation/Elimination Reactions Using Multiresponse Analysis. J. Agric. Food Chem. 56(15), 6460-6470."
+    doi: "10.1021/jf8006294"
+    access: full_text
+    retrieved_from: "data/articles/devleeschouwer2008.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/devleeschouwer2008_extraction.md"
+  devleeschouwer2006:
+    citation: "De Vleeschouwer, K., Van der Plancken, I., Van Loey, A., Hendrickx, M. E. (2006). Impact of pH on the Kinetics of Acrylamide Formation/Elimination Reactions in Model Systems. J. Agric. Food Chem. 54(20), 7847-7855."
+    doi: "10.1021/jf0611264"
+    access: full_text
+    retrieved_from: "data/articles/devleeschouwer2006.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/devleeschouwer2006_extraction.md"
+  devleeschouwer2007:
+    citation: "De Vleeschouwer, K., Van der Plancken, I., Van Loey, A., Hendrickx, M. E. (2007). Kinetics of Acrylamide Formation/Elimination Reactions as Affected by Water Activity. Biotechnol. Prog. 23(3), 722-728."
+    doi: "10.1021/bp060389f"
+    access: full_text
+    retrieved_from: "data/articles/devleeschouwer2008b.pdf (owner's download, 2026-09-07; the 2007 paper); data/lit/extraction_dossiers/devleeschouwer2007_extraction.md"
+  zhang2020:
+    citation: "Zhang, Z., et al. (2021). Kinetics of alpha-dicarbonyl compounds formation in glucose-glutamic acid model of Maillard reaction. Food Sci. Nutr. 9(1), 290-302."
+    doi: "10.1002/fsn3.1995"
+    access: full_text
+    retrieved_from: "data/articles/zhang2020.pdf (owner's download, 2026-09-07; open access); data/lit/extraction_dossiers/zhang2020_extraction.md"
+  leitzen2021:
+    citation: "Leitzen, S., Vogel, M., Steffens, M., Zapf, T., Müller, C. E., Brandl, M. (2021). Quantification of Degradation Products Formed during Heat Sterilization of Glucose Solutions by LC-MS/MS. Pharmaceuticals 14(11), 1121."
+    doi: "10.3390/ph14111121"
+    access: full_text
+    retrieved_from: "data/articles/Leitzen2021.pdf (owner's download, 2026-09-07; open access); data/lit/extraction_dossiers/leitzen2021_extraction.md"
+  liu2023b:
+    citation: "Liu, H., Nie, R., Wei, X., Shi, H., Yu, Y., Gao, R., Zhou, Y., Wang, Z., Zhang, D. (2023). Carbon module labeling approach ... furan and thiophene derivatives: Ribose and cysteine as a classic case study. LWT 182, 114874."
+    doi: "10.1016/j.lwt.2023.114874"
+    access: full_text
+    retrieved_from: "data/articles/Liu2023b.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/liu2023b_extraction.md"
+  liu2021:
+    citation: "Liu, H., Wang, Z., Hui, T., Fang, F., Zhang, D. (2021). New insight into the formation mechanism of 2-furfurylthiol in the glucose-cysteine reaction with ribose. Food Res. Int. 143, 110295."
+    doi: "10.1016/j.foodres.2021.110295"
+    access: full_text
+    retrieved_from: "data/articles/liu2021.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/liu2021_extraction.md"
+  schieberle2000:
+    citation: "Schieberle, P., Hofmann, T., Münch, P. (2000). Studies on potent aroma compounds generated in Maillard-type reactions using the odor-activity-value concept. ACS Symp. Ser. 756, ch. 10, 133-150."
+    doi: "10.1021/bk-2000-0756.ch010"
+    access: full_text
+    retrieved_from: "data/articles/schieberle2000.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/schieberle2000_extraction.md"
+  wang2022:
+    citation: "Wang, Y., Xie, J., Zhang, C., Xu, Y., et al. (2022). Effect of lipid on formation of Maillard and lipid-Maillard meaty flavour compounds in heated cysteine-xylose-methyl linoleate system. Flavour Fragr. J. 37."
+    doi: "10.1002/ffj.3710"
+    access: full_text
+    retrieved_from: "data/articles/Wang2022.pdf (owner's download, 2026-09-07); data/lit/extraction_dossiers/wang2022_extraction.md"
+  whitfield2001:
+    citation: "Whitfield, F. B., Mottram, D. S. (2001). Heterocyclic volatiles formed by heating cysteine or hydrogen sulfide with 4-hydroxy-5-methyl-3(2H)-furanone at pH 6.5. J. Agric. Food Chem. 49, 816-822."
+    doi: "10.1021/jf000897w"
+    access: full_text
+    retrieved_from: "data/articles/whitfield2001.pdf; data/lit/extraction_dossiers/whitfield2001_extraction.md"
+  cerny2007:
+    citation: "Cerny, C., Briffod, M. (2007). Effect of pH on the Maillard reaction of [13C5]xylose, cysteine, and thiamin. J. Agric. Food Chem. 55, 1552-1556."
+    doi: "10.1021/jf062874u"
+    access: full_text
+    retrieved_from: "data/articles/cerny2007.pdf; data/lit/extraction_dossiers/cerny2007_extraction.md"
+  mottram2002:
+    citation: "Mottram, D. S., Nobrega, I. C. C. (2002). Formation of sulfur aroma compounds in reaction mixtures containing cysteine and three different forms of ribose. J. Agric. Food Chem. 50, 4080-4086."
+    doi: "10.1021/jf0116112"
+    access: full_text
+    retrieved_from: "data/articles/mottram2002.pdf; data/lit/extraction_dossiers/mottram2002_extraction.md"
 panel:
 
   # =====================================================================
@@ -1822,3 +1897,498 @@ panel:
       are recorded with their exact stoichiometry in data/benchmarks/
       step_level_unreachable/. The second is the cheapest unblock on the Wave X list: no new
       chemistry, no new barrier, only a trigger moved.
+
+  # =====================================================================
+  # SULFUR TEMPERATURE LADDERS (programme step R2(c), B10 prereg sec. 6, 2026-09-06)
+  # The panel carried no sulfur temperature claim before this block. Added BEFORE
+  # wave B10 fits anything, so the pre-wave score is the recorded baseline.
+  # =====================================================================
+  - claim_id: YIL-01
+    statement: "Under a time-compensated cook (100 C / 4 h, 110 C / 2 h, 120 C / 1 h, 130 C / 0.5 h) in 0.5 M phosphate pH 5.5, MFT from 25 mM ribose + 25 mM cysteine FALLS monotonically: 6.88 -> 3.29 -> 2.4 -> 1.71 ug/L."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["MFT"]
+    conditions:
+      series:
+        - {label: "100 C / 4 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240}}
+        - {label: "110 C / 2 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 110, ph: 5.5, water_activity: 0.98, time_min: 120}}
+        - {label: "120 C / 1 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60}}
+        - {label: "130 C / 0.5 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 130, ph: 5.5, water_activity: 0.98, time_min: 30}}
+    expected_relation: "decreasing"
+    source:
+      ref: yiltirak2026
+      quote: "Buffer 100 C 6.88+/-0.98aA 1.28+/-0.08cB 1.54+/-0.03aA ; Buffer 110 C 3.29+/-0.06bB 1.46+/-0.19abB 1.16+/-0.08bA ; Buffer 120 C 2.4+/-0.16bcB 1.68+/-0.21aA 1.21+/-0.21bA ; Buffer 130 C 1.71+/-0.12cB 1.62+/-0.11abB 0.69+/-0.06cA"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table S3 (supplementary), the four Buffer rows, columns MFT | FFT | 3M2B in ug/L; Tukey letters as printed (lowercase across temperatures: a, b, bc, c for MFT)."
+    source_conditions: "3 mL in a 20 mL PTFE-capped Duran tube under air, magnetically stirred, buffer in tap water; SIDA (MFT-d3), matrix-matched calibration; n = 3."
+    fit_status: independent
+    fit_note: "No fit has read Yiltirak 2026 as of this claim's date. Wave B10 (kinetic_core_b10_prereg.md) declares the six within-study FOLDS of this ladder as fit rows; when it ships, YIL-01 and YIL-02 become fit_adjacent and must be relabelled in the same change."
+    model_scope_note: "Expressible: the axis moved is temperature AND time together (the source's own design); the engine refuses neither. Like every claim on this panel the arms run at the engine's declared default buffer (the runner carries no buffer field), not the source's 0.5 M phosphate; the bundles carry the buffer and the SIGN is the same either way. The bundle series mp_holdout_ribose_cysteine_buffer_*_Yiltirak2026 scores the same four points as absolutes; this claim scores the SIGN, which the 2026-09-06 review found the core gets backwards (predicted 64 -> 171 ug/L)."
+
+  - claim_id: YIL-02
+    statement: "In the same ladder FFT does the opposite: 1.68 ug/L at 120 C / 1 h exceeds 1.28 ug/L at 100 C / 4 h (Tukey a vs c)."
+    claim_type: ordering
+    category: temperature
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "120 C / 1 h"
+        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60}
+      B:
+        label: "100 C / 4 h"
+        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240}
+    expected_relation: "A>B"
+    source:
+      ref: yiltirak2026
+      quote: "FFT formation tended to increase in buffer and buffer/emulsion systems up to 1.68 +/- 0.21 ug/L and 1.87 +/- 0.06 ug/L with increasing heating temperature and decreasing time."
+    source_conditions: "As YIL-01."
+    fit_status: independent
+    fit_note: "As YIL-01: becomes fit_adjacent when B10 ships."
+    model_scope_note: "Expressible. The core today predicts FFT 616 -> 214 ug/L over these two points, i.e. the opposite ordering."
+
+  - claim_id: WANG-01
+    statement: "In a fed Cys-Amadori (TTCA) + Glu-Amadori pot (0.2 M PBS), MFT over the paired ladder 85 C/80 min, 95/90, 105/100, 115/110, 125/120 PEAKS at 115 C (n.d., ~1, 2.5, 6.6, ~2 ug/L) and falls at 125 C."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "85 C / 80 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 85, ph: 7.0, water_activity: 0.98, time_min: 80, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "95 C / 90 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 95, ph: 7.0, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "105 C / 100 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 105, ph: 7.0, water_activity: 0.98, time_min: 100, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "115 C / 110 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 115, ph: 7.0, water_activity: 0.98, time_min: 110, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "125 C / 120 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 125, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+    unstated_inputs:
+      ph: [5.0, 7.0, 9.0]
+    expected_relation: peak
+    source:
+      ref: wang2026
+      quote: "2-Methyl-3-furanthiol (MFT) | n.d. | ~1 | 2.5 | 6.6 | ~2 | PEAKS at 115 C, then falls"
+      quote_form: table_row_reformatted
+      quote_form_note: "Dossier sec. 3.1, digitised from Fig. 5C at 900 dpi (+/-5 % of reading, floor ~2.5 ug/L); Table S2 (SI docx on disk) is the authoritative source. Methods 2.3 pairs the five temperatures with times 80/90/100/110/120 min respectively."
+    source_conditions: "1.0 g Glu-Amadori + 1.0 g Cys-Amadori in 20.0 mL PBS 0.2 mol/L (the Cys intermediate is ~94 % TTCA per Zhai 2020: charged as TTCA 197 mmol/L; the Glu-Amadori has no core species and is left out), thick-walled pressure bottle, oil bath, magnetic stirring; the series pH is NOT stated."
+    fit_status: independent
+    model_scope_note: "Re-read 2026-09-07: the ladder is a paired temperature-time design (Methods 2.3) at an UNSTATED pH, so the claim is scored at pH 5 / 7 / 9 and the verdict stands only if unanimous (the panel sweeps an unstated input rather than inventing it). The Cys intermediate is charged as TTCA (the species the core carries; Zhai 2020). The SHAPE recorded -- a peak -- is the structural claim wave B10 existed to reproduce."
+
+  - claim_id: WANG-02
+    statement: "In the same pot FFT PEAKS at 95 C/90 min (4.5, 12.0, 6.7, ~1, n.d. ug/L over the paired ladder) and collapses to zero by 125 C/120 min."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "85 C / 80 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 85, ph: 7.0, water_activity: 0.98, time_min: 80, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "95 C / 90 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 95, ph: 7.0, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "105 C / 100 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 105, ph: 7.0, water_activity: 0.98, time_min: 100, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "115 C / 110 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 115, ph: 7.0, water_activity: 0.98, time_min: 110, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+        - label: "125 C / 120 min"
+          system: {precursors: {TTCA: 197.0}, temp_C: 125, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2026 sec. 2.3: 20 mL PBS 0.2 mol/L"}}
+    unstated_inputs:
+      ph: [5.0, 7.0, 9.0]
+    expected_relation: peak
+    source:
+      ref: wang2026
+      quote: "2-Furfurylthiol (FFT) | 4.5 | 12.0 | 6.7 | ~1 | n.d. | PEAKS at 95 C, then collapses to zero"
+      quote_form: table_row_reformatted
+      quote_form_note: "As WANG-01."
+    fit_status: independent
+    model_scope_note: "As WANG-01: charged as TTCA, series pH unstated and swept over 5 / 7 / 9 with a unanimity rule. The scorer's peak test asks only for an interior maximum; the RUNG of the peak (95 C measured) is not scored."
+
+  - claim_id: MENG-01
+    statement: "In fermented soy sauce, MFT and FFT both RISE 80 -> 95 -> 120 C at 5 min (MFT 1.2 -> 6.6 -> 11.1 ug/L) and at 20 min (2.4 -> 6.8 -> 18.3), with the apparent barrier FALLING as temperature rises."
+    claim_type: monotonic_direction
+    category: temperature
+    observables: ["MFT", "FFT"]
+    evaluable: false
+    expected_relation: "increasing"
+    conditions: {}
+    source:
+      ref: meng2017
+      quote: "80 C | 1.2 +/- 0.1 | 2.4 +/- 0.3 | 1.2 +/- 0.1 | 1.4 +/- 0.1 ; 95 C | 6.6 +/- 0.4 | 6.8 +/- 0.3 | 5.0 +/- 0.3 | 5.2 +/- 0.1 ; 120 C | 11.1 +/- 0.4 | 18.3 +/- 0.8 | 9.7 +/- 0.7 | 18.2 +/- 0.6"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 3, raw soy sauce A: columns 2M3F 5 min | 2M3F 20 min | 2FM 5 min | 2FM 20 min, ug/L, n = 4 (dossier sec. 4, raster-verified)."
+    fit_status: independent
+    model_scope_note: >-
+      NOT EVALUABLE: a fermented soy sauce has no stated precursor charge, and the 80 and 95 C
+      points were taken in an open cylinder while the 120 C point was autoclaved (dossier sec.
+      6b). Recorded because it is one of only four thiol temperature ladders in the corpus and its
+      concave shape (barrier falling with temperature) is the mirror image of Kang 2026's convex one.
+
+  - claim_id: AW-05
+    statement: "Acrylamide formation in equimolar asparagine-glucose powders does NOT change significantly between initial a_w 0.88 and 0.99 (95 % HPD) when heated at 120-200 C."
+    claim_type: ordering
+    category: moisture_aw
+    observables: ["Acrylamide"]
+    conditions:
+      A:
+        label: "aw 0.88"
+        system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 160, ph: 6.0, water_activity: 0.88, time_min: 20}
+      B:
+        label: "aw 0.99"
+        system: {precursors: {L-Asparagine: 10.0, D-Glucose: 10.0}, temp_C: 160, ph: 6.0, water_activity: 0.99, time_min: 20}
+    expected_relation: flat
+    source:
+      ref: devleeschouwer2008
+      quote: "the corresponding estimated kinetic parameters for acrylamide formation and elimination did not change significantly (based on a 95% confidence level) within the range of water activities tested, nor between the systems in the absence or presence of the potato matrix."
+    source_conditions: "Equimolar Asn + Glc freeze-dried powders equilibrated over saturated salts to a_w 0.88 / 0.92 / 0.96 / 0.99 at 4 C, heated 120-200 C in closed Inox tubes; Table 2 (k_Fref at 160 C: 2.29 / 3.57 / 3.45 / 1.45 x 1e-3 /min, HPDs overlapping)."
+    fit_status: fit_adjacent
+    fit_note: "The acrylamide lane's shipped k_int1_acr and k_asn_glc ARE this paper's a_w 0.92 column (via De Vleeschouwer 2009 Part I), and the B14 flat term is DECLARED from this very finding, so the claim is not independent: it checks that the declared term and the refusal window are wired, not that the model predicts anything. Counted in 'all claims' only."
+    model_scope_note: "B14 (2026-09-07): answerable inside the measured window 0.88-0.99 by construction; a_w moves that leave the window (AW-02's 0.3 / 0.6 arms) stay refused."
+
+  - claim_id: PH-ACR-01
+    statement: "In buffered equimolar asparagine-glucose (phosphate, 0.05 M) at 160 C, net acrylamide after a short heating is HIGHER at initial pH 8 than at pH 4 (formation constant 37.5 vs 4.30 x 1e-3 /M/min; both formation and elimination fall with acidity)."
+    claim_type: ordering
+    category: ph
+    observables: ["Acrylamide"]
+    conditions:
+      A:
+        label: "pH 8"
+        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 8.0, water_activity: 1.0, time_min: 20}
+      B:
+        label: "pH 4"
+        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 4.0, water_activity: 1.0, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: devleeschouwer2006
+      quote: "the reaction rate constants kFref and kEref for acrylamide formation and elimination decrease significantly (alpha = 0.05) with a decreasing pH from 8 to 4. Figure 6 shows a log-linear relation for both rate constants of acrylamide formation and elimination with pH when studied in phosphate buffer"
+    source_conditions: "0.1 M Asn + 0.1 M Glc in 0.05 M phosphate, initial pH 4 / 6 / 8 (room temperature), closed tubes, 120-200 C; Table 1."
+    fit_status: fit_adjacent
+    fit_note: "The B15 pH factor is DECLARED from this paper's slopes, so the claim checks that the factor and the window are wired (formation 0.235 > elimination 0.149 decades per unit, so net acrylamide must rise with pH at 20 min), not that the model predicts anything independently. Counted in 'all claims' only."
+    model_scope_note: "B15 (2026-09-07): answerable inside the measured window pH 4-8; a pH move that leaves the window is refused."
+  - claim_id: DIC-01
+    statement: "In 0.3 M glucose heated alone in water at 105 C for 6 h, the dicarbonyls rank 3-deoxyglucosone > glucosone > methylglyoxal > glyoxal > diacetyl (0.051 / 0.0047 / 0.00064 / 0.00034 / 0.000026 in the paper's unit)."
+    claim_type: ranking
+    category: sugar_identity
+    observables: ["3-deoxyglucosone", "glucosone", "methylglyoxal", "glyoxal", "diacetyl"]
+    conditions:
+      series:
+        - label: "glucose alone, 105 C, 6 h"
+          system: {precursors: {D-Glucose: 300.0}, temp_C: 105, ph: 6.5, water_activity: 0.99, time_min: 360}
+    expected_relation: ranking
+    source:
+      ref: zhang2020
+      quote: "Table 1: 3-Deoxyglucosone 105 C C(t) = 0.0056t + 0.0173; Glucosone 105 C C(t) = 0.0005t + 0.0017 (3-6 hr); Methylglyoxal 105 C C(t) = 1 x 10-4 t + 4 x 10-5; Glyoxal 105 C C(t) = 4 x 10-5 t + 0.0001; Diacetyl 105 C C(t) = 3 x 10-6 t + 8 x 10-6"
+      quote_form: table_rows_reformatted
+    source_conditions: "Glucose-only 0.3 M in water, 250 mL four-neck flask with reflux, oil bath, atmospheric pressure, 90-110 C, 0-6 h, o-PDA / LC-MS/MS; pH not stated (a fresh glucose solution: 6.5 recorded here; the trunk's pH term touches only Amadori decay, absent without an amine, so the value changes no rate)."
+    fit_status: independent
+    fit_note: "The trunk's dicarbonyl constants are Kocadagli & Gokmen 2016's glucose-glass rates at 160-200 C (B7/B13); this is an aqueous pot at 105 C from another laboratory. ⚠ The paper's absolute levels do not mass-balance against its own glucose loss (dossier sec. 3), so only the ORDERING is claimed."
+    model_scope_note: "Evaluable only if the ranking scorer accepts a five-way ordering; if it scores pairs, the first pair (3-DG > glucosone) is the one that matters."
+  - claim_id: DIC-02
+    statement: "In 0.3 M glucose + 0.3 M glutamic acid in water at 100 C for 6 h, glucosone > glyoxal > methylglyoxal > diacetyl."
+    claim_type: ranking
+    category: sugar_identity
+    observables: ["glucosone", "glyoxal", "methylglyoxal", "diacetyl"]
+    conditions: {}
+    evaluable: false
+    expected_relation: ranking
+    source:
+      ref: zhang2020
+      quote: "Table 2 (glucose-Glu): Glucosone 100 C C(t) = 0.0003t + 0.001; Glyoxal 100 C ln C(t) = 0.2617t + ln0.0004 (1-4 hr); Methylglyoxal 100 C C(t) = 0.0001t + 1 x 10-4; Diacetyl 100 C C(t) = 3 x 10-5 t + 2 x 10-5"
+      quote_form: table_rows_reformatted
+    fit_status: independent
+    model_scope_note: "NOT EVALUABLE: the core has no glutamate species (the trunk's amine is glycine); recorded so the ordering is on file for a trunk wave that adds the amino-acid identity."
+
+  - claim_id: DIC-03
+    statement: "In 10 % glucose autoclaved alone in water at 121 C for 18 min, the dicarbonyls rank 3-deoxyglucosone (52 ug/mL) > glucosone (7.5) > glyoxal (5.6) > methylglyoxal (2.6)."
+    claim_type: ranking
+    category: sugar_identity
+    observables: ["3-deoxyglucosone", "glucosone", "glyoxal", "methylglyoxal"]
+    conditions:
+      series:
+        - label: "10 % glucose, 121 C, 18 min"
+          system: {precursors: {D-Glucose: 555.0}, temp_C: 121, ph: 5.0, water_activity: 0.99, time_min: 18}
+    expected_relation: ranking
+    source:
+      ref: leitzen2021
+      quote: "Table 4, scheme A, 121 C: GO 5.6 +/- 1.3; MGO 2.6 +/- 0.2; 2-KDG 7.5 +/- 1.4; 3-DG/3-DGal 52.2 +/- 4.0 ug/mL"
+      quote_form: table_row_reformatted
+    source_conditions: "10 % (w/v) glucose in water (pH 4.98 before, 4.36 after), PP bottles, autoclaved 121 C for 18 min (F0-based scheme A), o-PDA / LC-MS/MS; the same ordering holds at 111 C / 180 min and 116 C / 57 min."
+    fit_status: independent
+    fit_note: "Credible absolute levels (0.06 % of the glucose as 3-DG), unlike Zhang 2020 (DIC-01). The trunk's dicarbonyl constants come from Kocadagli & Gokmen 2016's glucose glass at 160-200 C; this is aqueous at 121 C from a pharmaceutical laboratory."
+    model_scope_note: "The second independent test of the B13 glass-to-water transfer; DIC-01 already misses with glucosone 1e4 above 3-DG."
+  - claim_id: RIB-T-01
+    statement: "In a cysteine-rich cysteine + ribose pot (ribose : cysteine ~ 1 : 15 molar, 0.5 M phosphate, pH 5.88) at 168 C, MFT FALLS from 20 to 60 min (1253 -> 760 -> 628 ng)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "20 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+        - label: "40 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 40, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+        - label: "60 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+    expected_relation: decreasing
+    source:
+      ref: liu2023b
+      quote: "2-methyl-3-furanthiol | 1252.67 +/- 40.70a | 760.33 +/- 17.21b | 628.00 +/- 70.34b"
+      quote_form: table_row_reformatted
+    source_conditions: "Ribose 19.6 mg + cysteine 198 mg per model (the Beijing-duck ratio), 0.5 mol/L tripotassium phosphate, pH 5.88, glass vial, 168 C for 20 / 40 / 60 min; HS-SPME GC-O-MS, ng per vial against 2-methyl-3-heptanone. Charged here at the same molar ratio in 5 mL (ribose 26.1, cysteine 326.6 mmol/L)."
+    fit_status: independent
+    fit_note: "The first measurement in the corpus of MFT DECLINING with time in a cysteine-ribose pot: a direct test of the thiol-sink barrier the sulfur fit holds at its 102 kJ/mol ceiling. Levels are IS-relative and not scored."
+    model_scope_note: "The vial volume is not stated (no vessel block); the sulfur lane runs at the declared default reservoir."
+  - claim_id: RIB-T-02
+    statement: "In the same pot FFT is FLAT from 20 to 60 min at 168 C (175, 198, 170 ng; the 40-min point within SD)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "20 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+        - label: "60 min"
+          system: {precursors: {D-Ribose: 26.1, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Liu 2023 sec. 2.2: 0.5 mol/L tripotassium phosphate"}}
+    expected_relation: flat
+    source:
+      ref: liu2023b
+      quote: "2-furfurylthiol | 175.36 +/- 15.40ab | 197.68 +/- 6.64a | 169.51 +/- 10.62b"
+      quote_form: table_row_reformatted
+    source_conditions: "As RIB-T-01."
+    fit_status: independent
+    model_scope_note: "Flat within the scorer's 5 % tolerance is a strict reading of a 3 % change over 40 min at 168 C; scored on the 20 and 60 min arms."
+  - claim_id: HEX-T-01
+    statement: "In glucose + cysteine (no pentose) in phosphate buffer at pH 5.88 and 168 C, FFT RISES from 20 to 60 min (44.7 -> 107 -> 133 ng), via 2-furfural and 2-furanmethanol from glucose fragmentation."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "20 min"
+          system: {precursors: {D-Glucose: 307.5, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 20}
+        - label: "60 min"
+          system: {precursors: {D-Glucose: 307.5, L-Cysteine: 326.6}, temp_C: 168, ph: 5.88, water_activity: 0.98, time_min: 60}
+    expected_relation: increasing
+    source:
+      ref: liu2021
+      quote: "2-furfurylthiol | 44.73 +/- 10.00c | 107.15 +/- 9.59b | 133.43 +/- 17.30a"
+      quote_form: table_row_reformatted
+    source_conditions: "Glucose 277.00 mg + cysteine 198.00 mg in 5 mL tripotassium phosphate buffer, pH 5.88, 168 C, heated metal block, 20 / 40 / 60 min; HS-SPME GC-MS, ng per vial."
+    fit_status: independent
+    model_scope_note: "EXPECTED NOT EVALUABLE: the sulfur lane declares the hexose entry unidentified and refuses thiol targets on a hexose-only charge. Recorded as the first validation row for a hexose -> furfural / furfuryl alcohol -> FFT route."
+  - claim_id: SCH-T-01
+    statement: "In the Hofmann 1998 pot (ribose 100 mM + cysteine 33 mM, 0.5 M phosphate pH 5.0) held at 100 C, MFT RISES monotonically 30 -> 60 -> 360 -> 720 min (4.5, 13.8, 156, 179 ug per 100 mL) and FFT likewise (2.0, 3.1, 110, 132)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+        - label: "60 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+        - label: "360 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 360, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+        - label: "720 min"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 33.0}, temp_C: 100, ph: 5.0, water_activity: 0.98, time_min: 720, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Schieberle 2000 Table IV footnote: 100 mL 0.5 mol/L phosphate pH 5.0"}}
+    expected_relation: increasing
+    source:
+      ref: schieberle2000
+      quote: "2-Methyl-3-furanthiol | 4.5 | 13.8 | 156 | 179 (ug formed after 30 / 60 / 360 / 720 min at 100 C)"
+      quote_form: table_row_reformatted
+    source_conditions: "Ribose (10 mmol) and cysteine (3.3 mmol) in phosphate buffer (100 mL; 0.5 mol/L; pH 5.0) at 100 C in a laboratory autoclave; stable isotope dilution (Table IV, data from Hofmann & Schieberle)."
+    fit_status: fit_system_overlap
+    fit_note: "The pot is the sulfur fit's Hofmann 1998 Table-1 pentose system (145 C / 20 min in the objective) and wave B16 pre-registers this series' within-study ratios as FIT rows; the level direction is a shape check, not an independent test."
+    model_scope_note: "Before B16 the shipped lane is scored here as the baseline the wave is judged against."
+
+  - claim_id: WANG22-T-01
+    statement: "In cysteine + xylose (400 mM each, 0.2 M phosphate pH 5.5, 15 mL vial) at 100 C, MFT INCREASES with time from 30 to 180 min."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "90 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: increasing
+    source:
+      ref: wang2022
+      quote: "at the lower reaction temperatures of 100 and 110 C, their levels increased with an increase in the reaction time"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+  - claim_id: WANG22-T-02
+    statement: "In the same pot at 100 C, FFT INCREASES with time from 30 to 180 min."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "90 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 90, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: increasing
+    source:
+      ref: wang2022
+      quote: "at the lower reaction temperatures of 100 and 110 C, their levels increased with an increase in the reaction time"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+  - claim_id: WANG22-T-03
+    statement: "In the same pot at 140 C, MFT rises then FALLS within 30-180 min (the decline begins at 60 min)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "60 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "120 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: peak
+    source:
+      ref: wang2022
+      quote: "at higher reaction temperatures of 120-140 C, their levels tended to first increase and then decrease with reaction time ... the amounts of 2-methyl-3-furanethiol and 2-furfurylthiol began to decrease at 60 min"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+  - claim_id: WANG22-T-04
+    statement: "In the same pot at 140 C, FFT rises then FALLS within 30-180 min (the decline begins at 60 min)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "30 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "60 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "120 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+        - label: "180 min"
+          system: {precursors: {L-Cysteine: 400.0, D-Xylose: 400.0}, temp_C: 140, ph: 5.5, water_activity: 0.98, time_min: 180, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Wang 2022 sec. 2.2: 5 mL sodium phosphate buffer (pH 5.5, 0.2 mol/L)"}}
+    expected_relation: peak
+    source:
+      ref: wang2022
+      quote: "at higher reaction temperatures of 120-140 C, their levels tended to first increase and then decrease with reaction time ... the amounts of 2-methyl-3-furanethiol and 2-furfurylthiol began to decrease at 60 min"
+    source_conditions: "Cysteine 0.242 g + xylose 0.300 g (400 mmol/L each) in 5 mL 0.2 M sodium phosphate pH 5.5, 15 mL pressure vial under air, 700 rpm, 100-140 C for 30-180 min; HS-SPME GC-MS, ng/g, n = 2. The grid is a heat map (Figure 3); the direction is the text's statement."
+    fit_status: independent
+    fit_note: "A third laboratory (Beijing Technology and Business University), a stated vessel, the low-temperature sink question B16 could not settle."
+    model_scope_note: "Charged at the paper's 400 mM; the vessel (5 mL in 15 mL) is recorded in the dossier but the panel system carries no vessel block, so the sulfur lane runs at its declared default reservoir."
+
+  - claim_id: WHI-PH-01
+    statement: "Norfuraneol fed with cysteine (50 mM each, 0.5 M phosphate) at 140 C for 60 min gives far MORE free MFT at pH 4.5 than at pH 6.5 (0.150 mol % vs below 0.001 mol %, at least 150-fold)."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "pH 4.5"
+        system: {precursors: {Norfuraneol: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Whitfield & Mottram 1999/2001: 0.5 M phosphate"}}
+      B:
+        label: "pH 6.5"
+        system: {precursors: {Norfuraneol: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Whitfield & Mottram 2001 Methods: 0.5 M phosphate pH 6.5"}}
+    expected_relation: A>B
+    source:
+      ref: whitfield2001
+      quote: "MFT not detected in either duplicate at pH 6.5 (Table 1); 0.150 mol % at pH 4.5 (Whitfield & Mottram 1999 Table 1); the thiol + mercaptoketone class falls from 294 to 7 ug per 10 mg norfuraneol while total volatiles fall only 580 -> 345"
+      quote_form: table_row_reformatted
+    source_conditions: "Sealed ampoules, 140 C, 60 min, dynamic headspace GC-MS against methyl decanoate (response factor 1), duplicates; the 1999 pH-4.5 run is the same laboratory and protocol."
+    fit_status: fit_adjacent
+    fit_note: "The pH-4.5 arm is a sulfur-fit row (whitfield_nf_cys_MFT, a fed-intermediate yield); the pH-6.5 arm is new. The claim tests whether the lane's pH machinery moves the norfuraneol -> MFT step in the measured direction."
+    model_scope_note: "The sulfur lane carries a pH trajectory and thiolate-fraction terms; no explicit pH term on the norfuraneol step exists."
+  - claim_id: CER07-PH-01
+    statement: "In xylose 150 mM + cysteine 50 mM + thiamine 50 mM (0.5 M phosphate, 145 C, 20 min) FFT FALLS monotonically from pH 4 to pH 7 (peak areas 431 / 368 / 185 / 0 at pH 4 / 5 / 6 / 7)."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      series:
+        - label: "pH 4"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 4.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 5"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 6"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 6.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 7"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 7.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+    expected_relation: decreasing
+    source:
+      ref: cerny2007
+      quote: "Table 2: 2-furfurylthiol 431 / 368 / 364 / 185 / 0 at pH 4 / 5 / 5.5 / 6 / 7 (TIC peak areas x 1e-3)"
+      quote_form: table_row_reformatted
+    source_conditions: "Teflon vials, 145 C, 20 min, triplicate (SD <= 23 %), HS-SPME GC-MS peak areas without internal standard; the pH-5.5 point is omitted from the series (no significant step from pH 5)."
+    fit_status: independent
+    fit_note: "Nestle laboratory; not in any fit. Relative units, so only the direction is scored."
+  - claim_id: CER07-PH-02
+    statement: "In the same pot furfural FALLS from pH 4 to pH 6 (208 / 158 / 0 at pH 4 / 5 / 6): the furfural -> FFT branch is shut by neutral pH."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["furfural"]
+    conditions:
+      series:
+        - label: "pH 4"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 4.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 5"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+        - label: "pH 6"
+          system: {precursors: {D-Xylose: 150.0, L-Cysteine: 50.0, Thiamine: 50.0}, temp_C: 145, ph: 6.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Cerny & Briffod 2007: 1 mL 0.5 M potassium phosphate"}}
+    expected_relation: decreasing
+    source:
+      ref: cerny2007
+      quote: "Table 2: furfural 208 / 158 / 165 / 0 / 0 at pH 4 / 5 / 5.5 / 6 / 7"
+      quote_form: table_row_reformatted
+    source_conditions: "As CER07-PH-01."
+    fit_status: independent
+  - claim_id: MOT02-PH-01
+    statement: "Ribose 50 mM + cysteine 50 mM in 0.2 M pyrophosphate buffer at 140 C for 30 min gives 3.7x MORE MFT at pH 4.2 than at pH 5.6."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "pH 4.2"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"}}
+      B:
+        label: "pH 5.6"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"}}
+    expected_relation: A>B
+    source:
+      ref: mottram2002
+      quote: "Table 1, ribose + cysteine in 0.2 M pyrophosphate: MFT pH 4.2 / pH 5.6 = 3.7; FFT 1.8; 3-mercapto-2-pentanone 1.6; furfural trace at 5.6 -> 2290 ng/mmol at 4.2"
+      quote_form: table_row_reformatted
+    source_conditions: "6 mL in an autoclave, 140 C, 30 min, triplicate (CV ~22 %), dynamic headspace on Tenax against 1,2-dichlorobenzene (response factor 1), ng per mmol sugar."
+    fit_status: independent
+    fit_note: "University of Reading, 2002; not in any fit. Pyrophosphate is carried as phosphate of the same molarity in the pH-state model."
+  - claim_id: MOT02-PH-02
+    statement: "In the same pots FFT is 1.8x higher at pH 4.2 than at pH 5.6, and furfural rises from a trace to 2290 ng per mmol."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "pH 4.2"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"}}
+      B:
+        label: "pH 5.6"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"}}
+    expected_relation: A>B
+    source:
+      ref: mottram2002
+      quote: "Table 1: FFT pH 4.2 / 5.6 = 1.8 (ribose, pyrophosphate)"
+      quote_form: table_row_reformatted
+    source_conditions: "As MOT02-PH-01."
+    fit_status: independent

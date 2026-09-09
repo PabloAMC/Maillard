@@ -1,0 +1,52 @@
+# Structures the hypothesis layer's rules name that are NOT kinetic-core species (2026-09-08).
+#
+# The engine's own table (structures.yml) must hold exactly the engine's species; the rules read on
+# 2026-09-08 (miyazaki2023, cao2020, chen2017, yang2024, choe2006 extraction dossiers) name
+# hydroperoxide isomers and products the lipid lane lumps or lacks. They live here, keyed so they
+# never collide with an engine key (src/network_hypotheses/structures.py raises on a clash), and the
+# enumerator treats them as known compounds with no engine reaction: a step onto one of them is
+# placed "mechanism known, not modelled", which is the refusal the wishlist reports. Methyl esters,
+# as for the engine's linoleate hydroperoxides; trans double bonds, the autoxidation geometry. The
+# engine never reads this file.
+schema_version: 1
+species:
+  # ---- oleate hydroperoxides, the four positional isomers the engine lumps as LOOH_OL (cao2020 section 5; Choe & Min 2006 Table 1: 26-28 / 22-25 / 22-24 / 26-28 % of the autoxidation mixture) ----
+  OL_8_OOH:  {kind: molecule, smiles: "CCCCCCCC/C=C/C(OO)CCCCCCC(=O)OC", note: "methyl 8-hydroperoxy-9(E)-octadecenoate"}
+  OL_9_OOH:  {kind: molecule, smiles: "CCCCCCC/C=C/C(OO)CCCCCCCC(=O)OC", note: "methyl 9-hydroperoxy-10(E)-octadecenoate"}
+  OL_10_OOH: {kind: molecule, smiles: "CCCCCCCCC(OO)/C=C/CCCCCCC(=O)OC", note: "methyl 10-hydroperoxy-8(E)-octadecenoate"}
+  OL_11_OOH: {kind: molecule, smiles: "CCCCCCCC(OO)/C=C/CCCCCCCC(=O)OC", note: "methyl 11-hydroperoxy-9(E)-octadecenoate"}
+  # ---- the linoleate 10-hydroperoxide (non-conjugated; a photo-oxidation and isomerisation product; miyazaki2023 Figure 3) ----
+  LOOH_10:   {kind: molecule, smiles: "CCCCC/C=C\\CC(OO)/C=C/CCCCCCC(=O)OC", note: "methyl 10-hydroperoxy-8(E),12(Z)-octadecadienoate"}
+  # ---- volatile products the rules make that the engine has no species for ----
+  PENTYLFURAN: {kind: molecule, registry_id: 2_pentylfuran}
+  OCTEN3OL:    {kind: molecule, registry_id: 1_octen_3_ol}
+  OCTANAL:     {kind: molecule, smiles: "CCCCCCCC=O"}
+  DECANAL:     {kind: molecule, smiles: "CCCCCCCCCC=O"}
+  DECENAL_2E:  {kind: molecule, smiles: "CCCCCCC/C=C/C=O", note: "(E)-2-decenal"}
+  UNDECENAL_2E: {kind: molecule, smiles: "CCCCCCCC/C=C/C=O", note: "(E)-2-undecenal"}
+  # ---- the glyceride-side (here methyl-ester-side) core fragments ----
+  ME_8_OXOOCTANOATE:     {kind: molecule, smiles: "O=CCCCCCCC(=O)OC"}
+  ME_10_OXODECANOATE:    {kind: molecule, smiles: "O=CCCCCCCCCC(=O)OC"}
+  ME_10_OXO_8_DECENOATE: {kind: molecule, smiles: "O=C/C=C/CCCCCCC(=O)OC"}
+  ME_HEPTANOATE:         {kind: molecule, smiles: "CCCCCCC(=O)OC"}
+  ME_8_FURYL_OCTANOATE:  {kind: molecule, smiles: "COC(=O)CCCCCCCc1ccco1", note: "methyl 8-(furan-2-yl)octanoate, the ester-side product of the 9-hydroperoxide's furyl route"}
+  # ---- the negative control every lipid rule must refuse (Yang 2024: stearic acid gives no volatile) ----
+  ME_STEARATE: {kind: molecule, smiles: "CCCCCCCCCCCCCCCCCC(=O)OC"}
+  # ---- lipid-Maillard cross products (2026-09-08; zamora2020, zhou2000, du2023 extraction dossiers) ----
+  AMMONIA:       {kind: molecule, smiles: "N", note: "free ammonia, from glutamine or asparagine deamidation (Kim & Ho 1998) or the isolate's own pool (Zhou & Boatright 2000); the engine has no ammonia species"}
+  PENTYLPYRIDINE: {kind: molecule, smiles: "CCCCCc1ccccn1", note: "2-pentylpyridine, the fatty-green lipid-Maillard marker; not in the compound registry"}
+  BUTYLPYRIDINE:  {kind: molecule, smiles: "CCCCc1ccccn1", note: "2-butylpyridine, the C9-dienal analogue (Du 2023)"}
+  NONADIENAL_24:  {kind: molecule, smiles: "CCCC/C=C/C=C/C=O", note: "(E,E)-2,4-nonadienal (Du 2023's aldehyde C)"}
+
+  # ---- lipid-Maillard sulfur and thiazole cross products (2026-09-09; mottram2002b, farmer1990, whitfield1988, elmore1997 extraction dossiers) ----
+  HEPTADIENAL_24:  {kind: molecule, smiles: "CC/C=C/C=C/C=O", note: "(E,E)-2,4-heptadienal, the linolenate dienal (Mottram 2002 Figure 4)"}
+  HEXYLTHIOPHENE:  {kind: molecule, smiles: "CCCCCCc1cccs1", note: "2-hexylthiophene, the 1,4-addition product of H2S on 2,4-decadienal (Farmer 1990 Figure 1; Mottram 2002 Figure 3); not in the compound registry"}
+  PENTYLTHIOPHENE: {kind: molecule, smiles: "CCCCCc1cccs1", note: "2-pentylthiophene, from (E,E)-2,4-nonadienal + H2S (Elmore 1997: 21 % of area; Whitfield 1988: 95.5 ng with cysteine + lecithin)"}
+  PENTYLTHIAPYRAN: {kind: molecule, smiles: "CCCCCC1C=CC=CS1", note: "2-pentyl-2H-thiapyran, the 1,6-addition regioisomer; the largest lipid-dependent product in Farmer 1990's phospholipid pots, a weak odorant and a dienal sink"}
+  ETHYLTHIAPYRAN:  {kind: molecule, smiles: "CCC1C=CC=CS1", note: "2-ethyl-2H-thiapyran, the linolenate (2,4-heptadienal) analogue: 399 ng in Mottram 2002's methyl linolenate pot"}
+  ACETOL:          {kind: molecule, smiles: "CC(=O)CO", note: "hydroxyacetone (acetol), the hydroxyketone Elmore 1997 heats with alkanals and ammonium sulfide; the engine carries its mercapto product MP but not acetol itself"}
+  ACETOIN:         {kind: molecule, smiles: "CC(O)C(C)=O", note: "3-hydroxy-2-butanone (acetoin), Elmore 1997's second hydroxyketone"}
+  MERCAPTOBUTANONE: {kind: molecule, smiles: "CC(S)C(C)=O", note: "3-mercapto-2-butanone (Farmer 1990 Table 2 row 44 calls it 2-mercapto-3-butanone), from acetoin + H2S"}
+  HEXANAL_IMINE:   {kind: molecule, smiles: "CCCCCC=N", note: "hexanal aldimine (hexylideneamine), Elmore 1997 Figure 1's imine intermediate; never isolated"}
+  THIAZOLINE_2PE_4ME: {kind: molecule, smiles: "CCCCCC1SCC(C)=N1", note: "4-methyl-2-pentyl-3-thiazoline, 18.3 % of area in Elmore 1997's hexanal + acetol + (NH4)2S pot; the reduced precursor of the registry's 2-pentyl-4-methylthiazole"}
+  THIAZOLINE_2PE_45DM: {kind: molecule, smiles: "CCCCCC1SC(C)C(C)=N1", note: "4,5-dimethyl-2-pentyl-3-thiazoline, 36.7 % of area in the hexanal + acetoin pot (Elmore 1997 Table 1)"}

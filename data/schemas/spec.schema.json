@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "maillard/spec.schema.json",
+  "title": "A formulation spec for the front door (compare, predict, score, calibrate, the API and the page)",
+  "description": "One system. Precursors in millimolar; temperature in Celsius; time in minutes; pH; water activity. No condition is defaulted: a defaulted temperature is a silent chemistry claim.",
+  "type": "object",
+  "required": ["precursors", "temp_C", "time_min", "ph", "aw"],
+  "properties": {
+    "name": {"type": "string"},
+    "precursors": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "number", "minimum": 0},
+      "description": "compound name -> millimolar (mM)"
+    },
+    "temp_C": {"type": "number", "minimum": -20, "maximum": 400},
+    "time_min": {"type": "number", "exclusiveMinimum": 0},
+    "ph": {"type": "number", "minimum": 0, "maximum": 14},
+    "aw": {"type": "number", "minimum": 0, "maximum": 1},
+    "matrix": {"type": "string", "description": "water (default), a named matrix with site densities on file (data/species/protein_matrices.yml), or any label"},
+    "protein_g_per_l": {"type": "number", "minimum": 0, "description": "protein loading; with a named matrix or protein_sites it charges the reactive-site pools"},
+    "protein_sites": {
+      "type": "object",
+      "description": "your isolate's reactive sites in mmol per gram of protein; overrides the table",
+      "properties": {
+        "free_thiol_mmol_per_g": {"type": "number", "minimum": 0},
+        "disulfide_mmol_per_g": {"type": "number", "minimum": 0},
+        "amine_mmol_per_g": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "protein_type": {"type": "string"},
+    "targets": {"type": "array", "items": {"type": "string"}},
+    "buffer": {
+      "type": "object",
+      "properties": {
+        "kind": {"type": "string"},
+        "phosphate_mol_l": {"type": "number", "minimum": 0},
+        "source": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "measured": {"type": "object", "description": "score / calibrate only: compound -> {value, unit, uncertainty_pct}"},
+    "role": {"type": "string", "enum": ["fit", "validate"], "description": "calibrate only"},
+    "quantification_class": {"type": ["string", "null"]},
+    "source": {"type": "object"}
+  },
+  "additionalProperties": true
+}

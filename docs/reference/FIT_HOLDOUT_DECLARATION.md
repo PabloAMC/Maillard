@@ -1,5 +1,15 @@
 # Fit / Hold-out Split Declaration — Kinetic-Core Rebuild (Phase 2)
 
+> **How to read this document.** It answers one question: for every dataset the model has ever seen,
+> was it used to FIT a constant or held out to VALIDATE one, and when did that change? The original
+> declaration (28 August 2026) is the body; every change since is a dated, numbered amendment appended
+> at the end, newest last (Amendment 29 at the time of writing). A dataset's current role is the
+> declaration as amended: search this file for its benchmark id or its dossier name and read the
+> latest amendment that names it. The rule that never changes: a dataset once fitted is never
+> promoted to hold-out. The two CI gates that enforce the split are `scripts/ci/fit_target_gate.py`
+> and `scripts/ci/holdout_guard.py`; the machine-readable index is
+> `results/validation/kinetic_core_b9_fit_targets.json`.
+
 **Declared: 2026-08-28, BEFORE any parameterization of the newly extracted corpus.**
 This document pre-registers the role of every dataset the rebuild may use. It was
 drafted by the Wave K3 extraction synthesis and ratified with the four orchestrator
@@ -1041,3 +1051,231 @@ ran.
     deliberately NOT regenerated: it is a pre-registration and re-dating one to
     propagate a prose edit would be worse than leaving the superseded prose
     inside a frozen record of what was believed at freeze time.
+
+## Amendment 19 — 2026-09-06 (programme step R1: the vessel block, a condition-record completion under the Amendment 9 clause 2 licence)
+
+1. **WHAT IS COMPLETED.** Every panel bundle (the 18 top-level files, the 4 external matrix
+   bundles and the 17 maillard_path hold-outs) gains ONE new key, `conditions.vessel`:
+   fill volume, vessel volume, closure, atmosphere during the cook, water source, stirring,
+   and a per-field provenance class and note. It is written by
+   `scripts/generators/complete_benchmark_vessel_fields.py` from each bundle's SOURCE PAPER
+   (PDF on disk) or from a verbatim methods quotation the bundle already carries, and the
+   note names which. Where neither exists the block records `unstated` / `unknown` and says
+   the source is not on disk. Nothing is inferred from a bundle's name or from what would be
+   convenient.
+2. **WHY.** The 2026-09-06 review found the largest between-laboratory residual term to be
+   the oxygen the closed vessel held above the sample (headspace O2 to cysteine 2.0 in
+   Yiltirak 2026 and ~2 in Bolton 1994 against 0.26 in Hofmann 1998; the core is near-unbiased
+   on Hofmann and over-predicts the thiols 9-100x on the other two). The network's oxidant
+   pool is charged from cystine only. The state has to be on the record before any wave can
+   read it.
+3. **WHAT MAY NOT MOVE.** Measured values, compound lists, `evidence_class`, roles,
+   `conditions.temp_C/ph/water_activity/time_min` and the buffer block are byte-identical.
+   `tests/unit/test_kinetic_core_b2_3.py` extends its bundle-hash proof to drop `vessel`
+   alongside `buffer` before hashing, so the baselines pinned for the buffer completion still
+   hold. `tests/unit/test_benchmark_vessel_block.py` checks every panel bundle carries a
+   decided block and that primary readings name the PDF they were read from.
+4. **WHAT CHANGES IN THE ARTIFACTS.** `src/kinetic_core/vessel.py` computes headspace O2
+   (1 atm, 20 C, 20.946 %), thiol charged and their ratio; the scorecard prints them per
+   benchmark (`vessel_oxygen`; an "O2 : thiol" column). **No prediction moves.** Charging
+   `OX` from this block is step R2(a), which will be pre-registered as its own wave with the
+   Yiltirak-versus-Hofmann yield gap as its declared test.
+
+## Amendment 20 — 2026-09-06 (Wave B10, pre-declared before the fit ran: the temperature structure)
+
+1. **THE STRUCTURE.** The sulfur lane's single lumped formation barrier (`lumped_formation_Ea_kJ_mol`,
+   frozen at 64.1 since B9 on 37 steps) becomes two barriers by route
+   (`parameters_sulfur.FORMATION_ROUTE_OF`: `sugar_trunk`, `thiol_assembly`), both FREE, with
+   declared bands narrowed by the 2026-09-04 prefactor rule around sourced centres (Zhang 2026 k16,
+   85.7; Chan & Reineccius 1994's class, 100). One number passed to `with_fitted_sulfur` still gives
+   every route that number, so every wave before B10 is reproduced bit for bit; the route table is
+   total over the keys that can reach the barrier and is pinned by `tests/unit/test_kinetic_core_b10.py`.
+2. **THE ROWS.** Yiltirak 2026's time-compensated ladder enters the objective as SIX within-study
+   FOLDS (consecutive rungs, MFT and FFT, `kind = cross_system_ratio`, sigma_log 0.10), quoted from
+   Table S3 of the supplementary on disk via `yiltirak2026_extraction.md`. Under the owner's rule
+   (2026-09-03: within-study ratios are primary evidence; end-to-end levels validate) the folds fit
+   and the eight LEVELS stay on the hold-out panel. The fit-target index lists BOTH bundles each fold
+   reads, so those rows are `in_core_fit` and leave the strict out-of-sample count. A pre-registered
+   leave-Yiltirak-out refit (`kinetic_core_b10_noyil_fit_report.json`) is reported alongside so the
+   reader can see what the folds taught.
+3. **THE OXIDANT.** Every fit system since B2.3 was integrated with `OX` = 1.0 mmol/L; the engine
+   charged nothing (B11 prereg sec. 2.1). The engine now charges `OX_AMBIENT_MMOL_L` on every sulfur
+   run unless the caller supplies its own; `test_kinetic_core_b10.py` pins the two constants equal
+   and the effect on a trace-thiol prediction below 1 %. The VESSEL-derived charge is B11's, not B10's.
+4. **WHAT MAY NOT MOVE.** No level enters the fit. No proxy charge is invented for Meng 2017 or Wang
+   2026. The Kang 140 C rung, Hofmann 2002's brew and van Seeventer 2001 stay hold-outs. The eight
+   Hofmann Table-1 level rows B9 removed stay removed.
+5. **THE SHIP RULE** is `kinetic_core_b10_prereg.md` sec. 5: both route barriers identified by the
+   Laplace, no B9 row moved more than 0.3 dex, the Kang 140 C direction held, and the Yiltirak
+   fit-adjacent median improved. If the barriers are not identified the split is re-merged and the
+   ambient-oxidant consistency fix ships alone as B10.
+
+## Amendment 21 — 2026-09-07 (Wave B12: water activity and pH on the trunk lane, declared from measured ratios)
+
+1. **TWO DECLARED TERMS, NO FIT.** `src/kinetic_core/trunk_conditions.py` scales the trunk's
+   amine-sugar condensation by a water-activity multiplier (Pereyra Gonzales 2010's k(a_w)/k(0.98),
+   50 and 60 C averaged; band from Bell 1995's fixed-molality plateau to 1.2x the centre) and the three
+   Amadori-decay steps by 10^(0.69 (pH - 6.8)) (Martins & van Boekel 2003 Part II, k(6.8)/k(5.5) at
+   100 and 120 C; band 0.37-0.92 decades per pH unit; window 5.5-6.8). Both are within-study ratios
+   read from dossiers on disk, installed as constants with bands: the standing of a measured
+   barrier override, not of a fitted coordinate.
+2. **WHAT MAY NOT MOVE.** At a_w None or >= 0.98 and pH 6.8 every factor is exactly 1.0; B1, B7 and every
+   panel row reproduce bit for bit (`tests/unit/test_kinetic_core_b12.py`). No fit row is added or
+   read. The sulfur network's copy of the trunk steps and the acrylamide lane are untouched.
+3. **WHAT THE ENGINE NOW ANSWERS.** Water-activity comparisons on the trunk and pH comparisons on the
+   trunk, each printing the term, its band and its source; the acrylamide lane still refuses both.
+   The pre-registered expectations on the directional panel are in `kinetic_core_b12_prereg.md`
+   sec. 3, written before the re-score.
+
+## Amendment 22 — 2026-09-07 (Wave B13: glucosone, glyoxal and diacetyl on the trunk lane, trunk-only)
+
+1. **THREE SPECIES, FIVE STEPS, ONE SOURCE.** Kocadağlı & Gökmen 2016 JAFC's glucose-glass constants
+   for Glc -> glucosone -> glyoxal and 1-DG -> diacetyl and their two sinks, re-referenced from
+   180 C to 100 C through the B7 helper, carried as measured rates with their published HPDs; the
+   glyoxal sink's barrier FIXED TO ZERO by the authors and the diacetyl sink's ZERO rate are carried
+   as the authors left them and flagged (`ea_fixed_to_zero_by_authors`, `rate_zero_in_source`).
+2. **TRUNK ONLY.** `network.TRUNK_REACTIONS` = B1 + B7 + these five; `network.REACTIONS` (what the
+   sulfur network imports) is unchanged, so the sulfur lane keeps the topology B9 was fitted on and
+   the acrylamide lane is untouched. The engine refuses a dicarbonyl target on any other lane by name.
+3. **WHAT MAY NOT MOVE.** No fit row is added or read; the three species are appended after every
+   existing one; predictions at the reference conditions reproduce within 0.1 %
+   (`tests/unit/test_kinetic_core_b13.py`).
+4. **NO VALIDATION ROW EXISTS** for the three species (`kinetic_core_b13_prereg.md` sec. 3); the
+   wishlist names the measurements. Lee 2022 / 2024 is the declared next validation set.
+
+## Amendment 23 — 2026-09-07 (Wave B11: oxygen as a two-pool input on the sulfur lane)
+
+1. **TWO POOLS, FOUR STEPS.** A headspace reservoir `OXR` (ambient units per litre of liquid,
+   1 unit = `OX_SAT_MMOL_L` 0.3 mmol/L dissolved at saturation, band 0.1-1.0 sampled by the
+   envelope) refills a dissolved-oxygen vacancy `OXV` at a declared fast rate (`ox_supply`); every
+   oxygen consumer creates a vacancy, so `OX` never exceeds saturation and falls only once the
+   reservoir is spent. Two NEW consumers, `ch_cys_ox` (cysteine autoxidation, thiolate-mediated)
+   and `ch_red_ox_*` (the reductone pool), carry the only two new FIT coordinates, log10 rate
+   constants in the band (1e-5, 1e-1) per unit per minute; the dimer channels now also vacate.
+2. **WHAT IS FITTED.** B9's 54 objective rows and 23 free coordinates plus the two consumers
+   (25 free); no row added, none removed beyond B9's declared eight. The six Yiltirak folds stay
+   with B10's record. Fit systems are charged from the generator's own vessel table: Hofmann 1998
+   states its volumes (100 mL Table-1 pots -> 29.9 units, 50 mL fed pots -> 88); every other
+   system gets the declared default (29 units) and is marked as identifying neither consumer.
+   The consumers are EXPECTED to be unidentified (one laboratory's vessel, no oxygen contrast).
+3. **WHAT IS VALIDATED.** Bolton 1994 (O2 : thiol 2.07), the Hofmann Table-1 pH-5 level rows
+   (0.27), Yiltirak 2026 130 C (in excess), all scored from the panel bundles' vessel blocks after
+   the fit is frozen, per `kinetic_core_b11_prereg.md` sec. 5 (T1-T3); T5 and T6 are in-sample
+   discipline. Ship rule: T1, T3 and T5; if T1 and T3 both fail the consumers ship as
+   declared-inert (zero) and the structure, the vessel plumbing and the reservoir arithmetic stay.
+4. **WHAT MAY NOT MOVE.** With the consumers at zero every earlier wave reproduces to 1e-9
+   (`tests/unit/test_kinetic_core_b11.py`); the trunk and acrylamide lanes never see the pools.
+   The vessel's absence is an extrapolation flag only while the shipped report consumes oxygen.
+
+## Amendment 24 — 2026-09-07 (Wave B14: a declared flat water-activity term on the acrylamide lane)
+
+1. **ONE DECLARED TERM, NO FIT.** `src/kinetic_core/acrylamide_conditions.py`: inside the measured
+   window a_w 0.88-0.99 (De Vleeschouwer 2008 JAFC 56:6460, Table 2; the lane's shipped constants are
+   that table's a_w 0.92 column) the acrylamide-forming step `k_int1_acr` carries a multiplier of
+   exactly 1.0 -- the source's 95 % HPD finding of no significant change -- with an envelope band
+   (0.41, 1.39): the four point estimates relative to the shipped column united with that column's HPD.
+2. **WHAT MAY NOT MOVE.** At a_w None and outside the window the factor is exactly 1.0; every panel
+   row, fit report and earlier wave reproduces (`tests/unit/test_kinetic_core_b14.py`). No fit row is
+   added or read. Elimination constants and Table 3 (potato matrix) are recorded, not used.
+3. **WHAT THE ENGINE NOW ANSWERS.** Water-activity comparisons on the acrylamide lane whose arms both
+   lie inside 0.88-0.99, flat within the band; comparisons that cross the boundary stay REFUSED with
+   the window named (the dry-side extrusion claims). The new panel claim AW-05 is declared from the
+   same finding and is `fit_adjacent`: it checks the wiring, not the model, and stays out of the
+   independent headline.
+
+## Amendment 25 — 2026-09-07 (Wave B15: pH and the dry-side water activity on the acrylamide lane)
+
+1. **THREE DECLARED TERMS, NO FIT.** `src/kinetic_core/acrylamide_conditions.py`: (a) the B14 flat
+   formation a_w term's window extended from 0.88-0.99 to 0.34-0.99 (De Vleeschouwer 2007, Biotechnol.
+   Prog. 23:722, Table 2: k_F 0.71-1.09 of its 0.92 value); (b) an elimination a_w multiplier on
+   `k_acr_dp` through the 2007 k_E ratios (0.76 / 0.60 / 0.33 / 0.37 at a_w 0.34 / 0.59 / 0.73 / 0.82),
+   joining 1.0 at 0.88 where the 2008 series found the constants flat, deficit scaled 0-1.2 by the
+   envelope; (c) initial-pH factors 10^(0.235 (pH - 6.8)) on `k_asn_glc` and 10^(0.149 (pH - 6.8)) on
+   `k_acr_dp` (De Vleeschouwer 2006, JAFC 54:7847, Table 1, phosphate; the paper's ln-slopes 0.5414 and
+   0.3442 converted to decades; bands 0.114-0.281 and 0.116-0.155 span the potato-matrix slopes and the
+   SEs), measured window pH 4-8, held at the edge outside it. Within-study ratios installed as constants
+   with bands: the standing of a measured barrier override, not of a fitted coordinate.
+2. **WHAT MAY NOT MOVE.** At a_w None and pH 6.8 every factor is exactly 1.0; every panel row, fit
+   report and earlier wave reproduces (`tests/unit/test_kinetic_core_b15.py`). No fit row is added or
+   read. The registry's ban on the fabricated ~2000x pH factor stands: this factor is x0.22 at pH 4.
+3. **WHAT THE ENGINE NOW ANSWERS.** pH comparisons on the acrylamide lane inside 4-8 and a_w
+   comparisons inside 0.34-0.99, each printing the term, its band and its source; comparisons that
+   cross either window are refused with the window named. PH-ACR-01 is declared from the same paper
+   (`fit_adjacent`) and checks the wiring.
+4. **ALSO IN THIS WAVE (W6 groundwork).** The sulfur lane's TTCA is chargeable by name (`TTCA`,
+   `cys-amadori`, ...) and counts as a sulfur source (Zhai 2020: the group's xylose-cysteine intermediate
+   is ~94 % TTCA); the trunk's 3-deoxy- and 1-deoxyglucosone are addressable as targets. No rate moves.
+5. **TWO SCORER RULES, SAME DAY.** (a) An unstated input is SWEPT, not invented: a panel claim may
+   declare `unstated_inputs: {ph: [5, 7, 9]}`; it is scored at every value and the verdict stands only
+   when unanimous, otherwise it is not evaluable and names the values that agreed (Wang 2026's series
+   pH). (b) A `ranking` claim scores one pot's several observables against the measured order, each
+   step beyond the flat tolerance. (c) A panel system may declare its buffer, which the CLI spec now
+   carries to the sulfur lane, so a stated pot is charged as stated.
+
+## Amendment 26 — 2026-09-07 (Wave B16: the thiol sinks against a 100 C time series and measured TTCA decay)
+
+1. **TEN FIT ROWS, NO NEW COORDINATE.** Seven within-study ratios from Schieberle, Hofmann & Münch 2000
+   Table IV (the sulfur fit's own Hofmann 1998 pentose pot at 100 C for 30 / 60 / 360 / 720 min, stable
+   isotope dilution; MFT and FFT at 60 / 360 / 720 min over 30 min, and the text's "factor of 13" between
+   100 C / 6 h and 145 C / 20 min) and three TTCA-remaining rows from Zhai et al. 2021 (TTCA 10 mM, pH 7,
+   100 / 120 / 140 C, 60 min, from the zero-order fits). Under the owner's rule these are ratios and
+   measured rates: FIT. The Schieberle LEVELS and every other row stay validation.
+2. **THE CEILING.** Variant `b16` keeps every B9 band including the thiol-sink barrier ceiling of
+   102 kJ/mol (Gigl 2021; the owner's 2026-09-04 decision). Variant `b16_lift` raises it to 160 kJ/mol
+   as information and cannot ship under the prereg; if only the lifted variant reproduces the series,
+   the wave does not ship and the finding is put to the owner.
+3. **WHAT IS VALIDATED, and the new panel claims.** SCH-T-01 (fit_system_overlap: the pot is the fit's
+   own), RIB-T-01/02 (Liu 2023, LWT 182:114874, 168 C: MFT falls, FFT flat -- independent), HEX-T-01
+   (Liu 2021, FRI 143:110295, glucose + cysteine FFT rises -- not evaluable until a hexose route
+   exists), DIC-03 (Leitzen 2021, Pharmaceuticals 14:1121, aqueous glucose alone at 121 C: 3-DG >
+   glucosone > glyoxal > methylglyoxal -- independent, credible levels; it misses like DIC-01).
+4. **READ, NOT USED.** Hollnagel & Kroh 2000 (dry melt with in-situ trapping; orderings recorded),
+   Hou 2017 (peak areas; the TTCA / Cys-Amadori isomer distinction the core does not carry), Hofmann
+   1996 (thiols in diethyl ether at 6 C). The Wang 2022 (FFJ) supplement holds only the lipid-arm
+   volatiles table; the MFT/FFT temperature-time grid is in the paywalled main text.
+
+## Amendment 27 — 2026-09-08 (Wave B18: a pyrazine step on the trunk)
+
+1. **TEN FIT ROWS, SIX NEW COORDINATES.** Zhou et al. 2024 (J. Agric. Food Chem. 72:18630) Table 2: six
+   pyrazine and 2,5-dimethylpyrazine formation rates from fed 20 mM glyoxal or methylglyoxal + 20 mM
+   alanine, water, initial pH 8, 100 / 110 / 120 °C (MEASURED RATES, 0 to 120 min slopes); Leahy &
+   Reineccius 1989 (ACS Symp. Ser. 409 ch. 18) Table I: four within-study ratios of the lysine + glucose
+   pyrazine and methylpyrazine rates at 95 °C, pH 7 and 5 over pH 9 (WITHIN-STUDY RATIOS). Fitted: the two
+   Strecker constants (log10 k at 100 °C, stored at pH 6.8, and their barriers inside the printed-to-refit
+   bands 100.59 to 103.1 and 111.66 to 114.9 kJ/mol) and the two slopes of the pyrazine pH term. Declared,
+   not fitted: alanine → glycine (±0.5 dex), lysine → glycine (ratios only), the fast condensation
+   (`k_cond`, Jousse 2002 "fast"), the mixed pyrazine as the statistical product of the two pools.
+2. **WHAT IS VALIDATED.** Leahy 1989 ch. 7 Table III (95 °C, 2 h, pH 9: the distribution and the 13.1 ppm
+   total), Leahy's and Yu 2018's whole-cascade barriers, Zhou 2023's pyrazine columns (out of lane, the
+   sulfur network does not carry the step). Their verdict is in the B18 ship rule and on every pyrazine
+   answer: the fed-dicarbonyl step is measured, the sugar-pot supply is not.
+3. **TRUNK ONLY.** The five steps and five species (PZ, DMP, MPZ, AKG, AKM) run on the trunk integrator only;
+   the sulfur and acrylamide networks keep the topology their fits were run on, and a pyrazine target on
+   another lane is refused by name (the B13 rule).
+
+## Amendment 28 — 2026-09-08 (Wave B17, variant b: the disulfide gives the thiol back)
+
+1. **NO NEW FIT ROW; ONE NEW COORDINATE.** B16's 64 rows unchanged (B9's 54, Schieberle 2000's seven
+   ratios, Zhai 2021's three TTCA rows); `k_dimer_release` (MFTD → 2 MFT, FFTD → 2 FFT, shared) appended
+   to the vector with the dimerisation's measured barrier (Zhang 2026 k17, 122.2 kJ/mol) so the
+   equilibrium constant carries the temperature dependence. Every B9 band kept.
+2. **WHAT IS VALIDATED.** The Hofmann pH-5 level bundles, Yiltirak 2026's four pots, Wang 2022's 140 °C
+   shape, Zhou 2023's and Zhang 2024's dimer shares, Bolton 1994, the returned Hofmann pH-3 and pH-7 rows:
+   none enters the objective; the ship rule reports them.
+3. **INERT DEFAULT.** The two release steps live in `sulfur.py` at zero unless a shipped report carries
+   `dimer_release_log10_k`; the B17 rule said DO NOT SHIP, so the engine reads B9 and the steps carry no
+   flux. The record stands for the finding it produced: the lane's disulfide channel is oxidant-limited.
+
+## Amendment 29 — 2026-09-09 (Wave B17, variant a: a saturable thioether sink on a pool the pot makes)
+
+1. **NO NEW FIT ROW; ONE NEW COORDINATE.** B16's 64 rows unchanged. `log10_mele_site_yield`, the
+   electrophile sites made per deoxyosone decayed (`ch_mele_from_dpo` / `_tdp` / `_ddp`, rate = yield ×
+   `k_osone_decay` with the carbonyl-sink family's barrier), appended to the vector; the sites feed the
+   MEASURED thioether channel (`k_thioether`, Hofmann 2002; K(T), Stack 2018), whose constants the fit
+   cannot move. Band log10 −4 to 0.2 (Charles-Bernard 2005's titrated density as the ceiling). Variant
+   (b)'s release constant stays at its inert zero. Every B9 band kept.
+2. **WHAT IS VALIDATED.** As Amendment 28. Zhang 2024's dimer share is re-labelled FIGURE-DERIVED
+   (`zhang2024b_extraction.md`): it is reported, and only Zhou 2023's shares decide T3.
+3. **INERT DEFAULT.** The three site steps live in `sulfur.py` at zero unless a shipped report carries
+   `mele_site_log10_yield`; the verdict is in `kinetic_core_b17a_ship_rule.md` and the prereg's section 6.
+

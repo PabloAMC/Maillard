@@ -304,6 +304,18 @@ def operative_parameters(fitted):
     # FROZEN LITERAL in `parameters_furanic`, and a unit test asserts that it
     # equals the value in the B7 fit report to 1e-9.
     parameters.update(FURANIC_PARAMETERS)
+    # BUILD WAVE B13 (2026-09-07): the dicarbonyl trio's constants, at the same choke
+    # point. The trunk integrator runs their steps (network.TRUNK_REACTIONS); the
+    # sulfur and acrylamide networks do not, and carrying the constants there is inert.
+    from .parameters_dicarbonyl import DICARBONYL_PARAMETERS
+
+    parameters.update(DICARBONYL_PARAMETERS)
+    # BUILD WAVE B18 (2026-09-08): the pyrazine step's constants, at the same choke point. The
+    # two fitted ones are FROZEN LITERALS asserted equal to the B18 fit report by a unit test
+    # (the B7 pattern); the mixed route is declared from them. Trunk-only steps, inert elsewhere.
+    from .parameters_pyrazine import PYRAZINE_PARAMETERS
+
+    parameters.update(PYRAZINE_PARAMETERS)
     return parameters
 
 

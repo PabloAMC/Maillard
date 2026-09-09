@@ -1,38 +1,41 @@
 [project]
 name = "Maillard"
 version = "0.1.0"
-description = "Computational Maillard Reaction Network Explorer for Alt-Protein Science"
+description = "A kinetic model of the Maillard reaction for alternative-protein flavour work, scored on held-out literature pots"
 authors = [
     { name = "PabloAMC" }
 ]
+requires-python = ">=3.12"
+# 2026-09-08: every entry has an importer under src/ or scripts/ (checked by grep). Add a
+# dependency only together with its consumer.
 dependencies = [
-    "rdkit>=2023.9.1",
-    "networkx>=3.2",
-    "numpy>=1.26",
+    "numpy>=2.0",
     "scipy>=1.11",
-    "pandas>=2.1",
-    "matplotlib>=3.8",
-    "SciencePlots>=2.1",
     "pyyaml>=6.0",
-    "tqdm>=4.66",
-    "optuna>=3.5",
-    "cantera>=3.0",
-    "torch>=2.0.0",
-    "mace-torch>=0.3.3",
-    "sella",
-    "ase>=3.23",
-    "pytest>=8.0",
-    "hypothesis>=6.100"
+    "jsonschema>=4.0",
+    "matplotlib>=3.8",
+    "networkx>=3.2",
 ]
 
 [project.optional-dependencies]
+# rdkit is needed only to rebuild data/keys/compounds.yml (scripts/generators/build_compound_registry.py)
+# and by one unit test; the runtime reads the generated registry.
+registry = ["rdkit>=2023.9.1"]
 dev = [
-    "jupyterlab>=4.0",
-    "black",
-    "isort",
-    "pytest-timeout",
-    "types-PyYAML"
+    "pytest>=8.0",
+    "coverage",
+    "rdkit>=2023.9.1",
+    "types-PyYAML",
 ]
+
+# `pip install -e .` inside a clone installs the `maillard` command (src/cli.py). Only an editable
+# install is supported today: the package imports as `src.*` and reads data/ and results/ relative
+# to the clone, so a wheel would need the package renamed and its data declared (roadmap, section 4).
+[project.scripts]
+maillard = "src.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
