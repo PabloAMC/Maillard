@@ -176,16 +176,19 @@ def build_parser() -> argparse.ArgumentParser:
             "READ THIS FIRST. This model's measured skill is ORDINAL, and modest.\n"
             + _headline_lines() +
             "So: compare two formulations and read the RATIO. Never quote an absolute\n"
-            "number as a specification. Read the per-axis reliability tags: water\n"
-            "activity is refused, pH is answered on the sulfur lane only.\n"
+            "number as a specification. Read the reliability grade printed beside each\n"
+            "ratio for the axis the two arms differ on; a lane with no term for that axis\n"
+            "refuses the comparison instead of answering with identical arms.\n"
             "\n"
-            "Six verbs:\n"
-            "  compare           two formulations in, per-compound A/B ratios out\n"
+            "Eight verbs:\n"
+            "  compare           two formulations in, per-compound A/B ratios out -- START HERE\n"
             "  predict           one formulation, with intervals and its caveats inline\n"
             "  explain           where a compound comes from in the model, and on what evidence\n"
             "  score             score YOUR measured concentrations against the model\n"
+            "  calibrate         a per-laboratory overlay from your measurements; the shipped model untouched\n"
             "  rank              which measurement would most reduce the model's error (alias: rank-experiments)\n"
-            "  wishlist          what to measure next and what it would unlock, from the tracked artifacts"
+            "  wishlist          what to measure next and what it would unlock, from the tracked artifacts\n"
+            "  ui                a local page: paste a spec, get the report"
         ),
         epilog=_SPEC_FIELDS,
     )

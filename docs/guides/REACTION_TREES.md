@@ -6,14 +6,17 @@ Each box is a molecule; each arrow is one step, coloured by how its rate constan
 coloured only when the test panel measures that molecule, by how far the prediction is from the
 measurement. Bookkeeping pools (fragment carbon, acid equivalents, oxidant) are hidden, and steps
 whose only products are such pools are drawn into one box, "removed into the matrix": those are the
-sinks. Updated 2026-09-07.*
+sinks. Steps the shipped model carries at exactly zero (the inert defaults of the two refused sink
+variants) are not drawn. Updated 2026-09-09, after the pyrazine step joined the sugar path.*
 
 ![How each path's steps are known](../assets/thiol_sink/13_steps_by_status.png)
 
-The sugar path is almost entirely measured, with temperature dependence. On the pentose–cysteine
-path only four steps are; thirty-one have a rate pinned at 145 °C by the fit but no measured
-temperature dependence, and twenty-eight are kept unchanged from earlier calibrations. That is the
-whole thiol problem in one bar: away from 145 °C every constant is an extrapolation.
+On the sugar path two thirds of the steps are known with their temperature dependence; the rest
+are bands or brackets (the dicarbonyl sinks from a dry glass, the pyrazine condensations declared
+fast). On the pentose–cysteine path only four steps are measured with a barrier; thirty-one have a
+rate pinned at 145 °C by the fit but no measured temperature dependence, and twenty-five are kept
+unchanged from earlier calibrations. That is the whole thiol problem in one bar: away from 145 °C
+every constant is an extrapolation.
 
 ## The sugar path
 

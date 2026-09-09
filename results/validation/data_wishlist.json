@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "c03e55a9ba00aaaead3730c85121affa4ba0c2a7",
-      "short": "c03e55a9",
+      "commit": "452381a983b9525c0054b3515991904b53209027",
+      "short": "452381a9",
       "branch": "cleaning",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "ffb20a0212bea4b59b445588dc02b7c2c52aa99d47c48e1bd78da2adf5857170"
+        "sha256": "38b1dfe393e25f2256f7c5f407e6162e80b3b7e9a71b805181395f0583fd077f"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "d3c8c88efc8d21fbb7d0f43a7d02da32e39765127a47f5d122c4db956296b863"
+        "sha256": "01cbcd93e6eef2cadf8e645927804650f242959f63212e5cef162f195b6dd6b1"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "a636443d609fab6a1222285d012d7925ee94dc2ed45de77b24d8b99ca85d8d1c"
+        "sha256": "d27d20f3c8f1227f19188ab4669ae1cccdeca8a07de029b0f05fb451acfd7610"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -359,7 +359,7 @@
   "refused_targets": [
     {
       "what": "UNREPRESENTED TARGETS: 2-pentylfuran",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
       "rows": [
         {
           "benchmark_id": "pea_isolate_40C_PratapSingh2021",

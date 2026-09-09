@@ -341,14 +341,14 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
     "2-pentylfuran": (
         "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The FAST "
-        "lane's shipped 0.08 has no source. Refused rather than invented."
+        "alkylfuran route is measured anywhere in the fit corpus. The retired "
+        "screening lane's shipped 0.08 had no source. Refused rather than invented."
     ),
     "2-pentyl furan": (
         "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
         "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The FAST "
-        "lane's shipped 0.08 has no source. Refused rather than invented."
+        "alkylfuran route is measured anywhere in the fit corpus. The retired "
+        "screening lane's shipped 0.08 had no source. Refused rather than invented."
     ),
     "propanal": (
         "The lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
@@ -799,16 +799,19 @@ def resolve_lane(
 HEXOSE_ENTRY_UNIDENTIFIED = "HEXOSE ENTRY UNIDENTIFIED"
 #: Species keys of the sugars that reach the thiols only through the unidentified entry.
 _HEXOSE_KEYS = ("Glc", "Fru")
-#: Thiols whose only hexose route is that entry.
-_HEXOSE_ENTRY_TARGETS = ("MFT", "FFT")
+#: Thiols whose only hexose route is that entry, and the products made from them (the two
+#: disulfides and the methanethiol coupling product), which inherit the floor artefact: a ratio
+#: of 1e27 for the dimer on a glucose arm is the same non-number as the thiol's (2026-09-09).
+_HEXOSE_ENTRY_TARGETS = ("MFT", "FFT", "MFTD", "FFTD", "MMFT")
 
 
 def unidentified_routes(
     mapped_precursors: Mapping[str, float], mapped_targets: Mapping[str, str]
 ) -> Tuple[str, ...]:
-    """Target KEYS (``MFT``/``FFT``) whose formation from this charge runs only through the
-    unidentified hexose entry: a hexose is charged, no pentose and no thiamine are, and
-    the target is a thiol. Empty for every other request."""
+    """Target KEYS (``MFT``/``FFT`` and their disulfides and coupling product) whose formation
+    from this charge runs only through the unidentified hexose entry: a hexose is charged, no
+    pentose and no thiamine are, and the target is a thiol or made from one. Empty for every
+    other request."""
     charged = {k for k, v in mapped_precursors.items() if float(v) > 0.0}
     if not any(k in charged for k in _HEXOSE_KEYS) or "PENT" in charged or "THI" in charged:
         return ()

@@ -45,8 +45,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "a1862beda8a718c94edfc3f11e023fb70f6ab970",
-      "short": "a1862bed",
+      "commit": "452381a983b9525c0054b3515991904b53209027",
+      "short": "452381a9",
       "branch": "cleaning",
       "dirty": true
     },
@@ -503,7 +503,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 44.9
+    "wall_seconds": 44.2
   },
   "claims": [
     {
@@ -2172,7 +2172,7 @@
       "statement": "UHT processing RAISES 2-pentylfuran in a pea-protein beverage (59.4 -> 163.2 ug/L).",
       "source": "trikusuma2018",
       "status": "not_evaluable",
-      "reason": "arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented.",
+      "reason": "arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
       "arms": [
         {
           "label": "processed, 140 C",
@@ -2191,7 +2191,7 @@
           "lane": "lipid",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
           ],
           "warnings": [
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
@@ -2218,7 +2218,7 @@
           "lane": "lipid",
           "state": "out_of_envelope",
           "reasons": [
-            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
           ],
           "warnings": [
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",

@@ -1644,6 +1644,18 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       table's basis), nitrogen factors 4.8-5.7, cysteine "approx. 1.2 %" class-level -> DEFECT in
       `sagesser2024_extraction.md` flag 2 (it does not give Nutralys lysine). Registry gaps: glyoxal,
       methylglyoxal, 2,3-pentanedione, hydroxyacetone, the deoxyosones, 2-acetyl-1-pyrroline, the amino acids.
+- [ ] **ENV-B18 (2026-09-09, found while regenerating the reaction trees).** The Monte-Carlo envelope
+      (`generate_core_prediction_uncertainty.py`) does not sample the pyrazine step's two fitted Strecker
+      constants or its pH slopes: `core_prediction_uncertainty.json` has no prior row for `k_go_ak` /
+      `k_mgo_ak`, although `kinetic_core_b18_fit_report.json` carries their Laplace sigma (0.08 dex on
+      log10 k). Every pyrazine interval today is the trunk's interval without the step's own spread.
+      Extend the envelope's prior table with the B18 block (the B10/B11 pattern) and regenerate.
+- [ ] **FIG-01 (2026-09-09).** The introduction's 23 figures were git-ignored (`*.png` with an allow-list that
+      never included `docs/assets/thiol_sink/`), so every figure in README and INTRODUCTION was a broken image
+      on GitHub; fixed by allow-listing the folder. No gate checks the figures against the code: four were
+      stale (paper counts, step counts, the sugar tree without the pyrazine step). Add the two figure builders
+      to the freshness gate's regenerate list (compare PNG bytes with a fixed matplotlib version, or compare
+      the builders' printed count dicts) so the figures cannot lag the artifacts again.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

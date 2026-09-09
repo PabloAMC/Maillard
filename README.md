@@ -75,8 +75,7 @@ cd Maillard
 
 Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`), or, without
 it, `pip install -e .` in a clone gives the same front door as the `maillard` command, a Python API
-(`from src import api`) and a local page (`maillard ui`). The front door has eight verbs. What each
-answers and when it refuses is the first table of the [quick start](docs/guides/QUICKSTART.md).
+(`from src import api`) and a local page (`maillard ui`). The front door has eight verbs.
 
 ```bash
 python scripts/maillard.py compare --template > my_comparison.yml   # two arms, A vs B
@@ -90,27 +89,21 @@ python scripts/maillard.py calibrate my_measurements.yml --lab "my lab"   # a pe
 python scripts/maillard.py ui                                        # a page on this machine: paste a spec, get the report
 ```
 
-`compare` leads with **ratios** between the two arms, the quantity the systematic scale error
-cancels out of, and prints each arm's envelope declaration. `predict` prints absolutes *with*
-their interval and OAV. `explain` answers a compound with the lane, the declared assumptions and,
-for a refused compound, the reason, and closes with what the cited reaction rules propose that the
-model lacks, so a refusal reads as "no rate" or "no route", whichever is true. `rank` reads the core's Monte-Carlo envelope and orders
-(benchmark, compound) rows by how badly and how uncertainly the model misses them. `score` takes
-**your own measured concentrations** and scores them the way the panel scorecard scores a bundle,
-writing a bundle-shaped record under `results/user/` that the next re-calibration can read; it
-never refits anything, because a refit is always a new pre-registered step
-(`scripts/generators/WAVES.md`). `wishlist` prints the generated data wishlist: which fitted
-constants the evidence does not pin, which rows the engine answers but declares not evaluable,
-what no lane represents, which directional axes are thin, and what each measurement would let you
-predict. `calibrate` reads the same document `score` reads and writes a per-laboratory
-calibration: your levels set a response factor per compound, your contrasts (pots that differ in
-time, temperature, pH or recipe) may move the few rate constants they can identify, pulled toward
-the shipped values by their shipped uncertainty, and pots tagged `role: validate` are scored before
-and after. The shipped model never moves; `--calibration` applies the file to `compare`, `predict`
-and `score`. A spec may state its protein loading (`protein_g_per_l`, with a matrix on file or its own
-`protein_sites`): the protein's disulfide and amine pools are then charged and the thiols, aldehydes
-and HMF meet them at declared, bracketed rates. `--json` gives the machine-readable payload of any
-verb; `--report` writes a self-contained HTML page.
+| verb | the question it answers | what it prints |
+| --- | --- | --- |
+| `compare` | which of two recipes gives more of a compound | the ratio between the arms per compound, the quantity the model's scale error cancels out of, with each arm's envelope declaration and a reliability grade for the axis the arms differ on |
+| `predict` | how much of a compound one recipe gives | a level with its reliability interval and odour-activity ratio, and every declared extrapolation |
+| `explain` | where a compound comes from in this model | the steps, their evidence class and the papers behind them; for a refused compound, the reason and whether a cited rule reaches it ("no rate" or "no route") |
+| `score` | how good is the model on my own measurements | the panel's scorecard applied to your pots; a record lands under `results/user/`; nothing is refitted |
+| `calibrate` | make it fit my laboratory | a per-laboratory file: response factors from your levels, the few rate constants your contrasts identify, the hold-out before and after; applied with `--calibration`, the shipped model untouched |
+| `rank`, `wishlist` | what should I measure next | the rows the model misses most and least certainly; the constants the evidence does not pin and what each measurement would unlock |
+| `ui` | the same, in a browser | a page on this machine: paste a spec, get the report |
+
+A spec may state a protein loading (`protein_g_per_l`, with a matrix on file or its own `protein_sites`),
+and the protein's disulfide and amine pools are then charged. `--json` gives the machine-readable
+payload of any verb; `--report` writes a self-contained HTML page. When each verb refuses, and why,
+is the first table of the [quick start](docs/guides/QUICKSTART.md); the worked examples are the
+[tutorial](docs/USING_THE_TOOL.md).
 
 Regenerate the evidence artifacts:
 
@@ -308,7 +301,7 @@ Three trees, one rule each ([CONTRIBUTING.md](CONTRIBUTING.md)):
 | --- | --- | --- |
 | `data/` | curated inputs, **read-only at runtime** (`scripts/ci/data_readonly_gate.py`); paths from `src/data_paths.py`, loads through `src/data_access.py`, names through `data/keys/` | [`data/README.md`](data/README.md) (generated) |
 | `results/` | generated artifacts: the core's scorecard, envelope and directional scorecard (each with a `provenance` block), the frozen fit and hold-out records per re-calibration, the literature ledgers; `results/legacy_lane/` is the archive of the retired lane and of orphaned artifacts | [`results/README.md`](results/README.md) (generated) |
-| `docs/` | human documents: [INTRODUCTION.md](docs/guides/INTRODUCTION.md) (modelling the Maillard reaction, for a reader with no context; appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md); every paper used, [SOURCES.md](docs/guides/SOURCES.md)), [QUICKSTART.md](docs/guides/QUICKSTART.md), [USING_THE_TOOL.md](docs/USING_THE_TOOL.md), [GLOSSARY.md](docs/guides/GLOSSARY.md), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md); the retired lane's README, the August 2026 audit and the old roadmaps under `docs/history/` | |
+| `docs/` | human documents: [INTRODUCTION.md](docs/guides/INTRODUCTION.md) (modelling the Maillard reaction, for a reader with no context; appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md); every paper used, [SOURCES.md](docs/guides/SOURCES.md)), [QUICKSTART.md](docs/guides/QUICKSTART.md) (install and command reference), [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) (the tutorial), [GLOSSARY.md](docs/guides/GLOSSARY.md), [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md), [FIT_HOLDOUT_DECLARATION.md](docs/reference/FIT_HOLDOUT_DECLARATION.md); the retired lane's README, the August 2026 audit and the old roadmaps under `docs/history/` | |
 
 Code: `src/kinetic_core/` (the engine, its parameters, panel, scoring, envelope, fit-target
 ledger), `src/comparative_cli.py` + `scripts/maillard.py` (the front door), `src/report_html.py`,
@@ -361,8 +354,8 @@ shape it reads.
 | --- | --- |
 | **Anyone, first command** | `python scripts/maillard.py compare --template` → the model card above |
 | **Anyone who knows what the Maillard reaction is** — the chemistry, what is measured, how a model is built from it, how well this one does, how it got here, what would decide it | [INTRODUCTION.md](docs/guides/INTRODUCTION.md), appendix [REACTION_TREES.md](docs/guides/REACTION_TREES.md), every paper used [SOURCES.md](docs/guides/SOURCES.md) |
-| **Flavour scientist** — using the tool | [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) |
-| **Food scientist** — first run | [QUICKSTART.md](docs/guides/QUICKSTART.md) |
+| **First run** — install, the eight verbs, when each refuses, the command reference | [QUICKSTART.md](docs/guides/QUICKSTART.md) |
+| **Learning to read the output** — three worked examples, intervals, refusals, declared extrapolations, what the model is and is not for | [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) (the tutorial) |
 | **Scientist** — understanding the output | [GLOSSARY.md](docs/guides/GLOSSARY.md) |
 | **Reviewer** — auditing what is verified | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/) → [the August 2026 audit](docs/history/AUDIT_legacy_lane_2026-08.md) |
 | **Laboratory with its own data** — calibrating to it | `maillard calibrate` → the card under `results/user/<lab>/` → `--calibration` on the other verbs; the rule: levels set the response factor, contrasts move the kinetics |
@@ -381,7 +374,7 @@ and its headline numbers were deleted; everything above is the kinetic core, sco
 The retired lane's README, its artifacts and the August 2026 adversarial audit that preceded the
 retirement are kept verbatim under [`docs/history/`](docs/history/) and
 [`results/legacy_lane/`](results/legacy_lane/). File names and artifacts have short tags for
-their provenance (B1 to B16 for the fits and declared terms, lettered waves for the old audit,
+their provenance (B1 to B18 for the fits and declared terms, lettered waves for the old audit,
 "Amendment n" for the fit/hold-out declaration); the
 [glossary](docs/guides/GLOSSARY.md#part-3--identifiers-you-will-meet-in-the-code-and-the-artifacts)
 has the key.

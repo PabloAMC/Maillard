@@ -82,7 +82,18 @@ def constant_status(lane: str) -> Dict[str, str]:
     out = {}
     for key, param in params.items():
         ec = getattr(param, "evidence_class", None)
+        # a step whose constant the shipped model carries at exactly zero (the inert defaults of the
+        # refused sink variants: the disulfide release, the pot-made electrophile sites) carries no
+        # flux and is not drawn; the tree is the network the model integrates, not the one it could
+        if getattr(param, "k_ref", None) == 0.0 and ec == "derived_from_fit_data":
+            out[key] = "inert"
+            continue
         if ec in ("measured_rate", "measured_activation_energy"):
+            out[key] = S[0]
+        elif "fitted_wave_b18" in (getattr(param, "flags", None) or ()):
+            # the pyrazine step's two Strecker constants: rate and barrier fitted together on a
+            # fed-dicarbonyl ladder at three temperatures (Laplace sigma 0.08 dex); the envelope
+            # does not sample them yet, so the priors table has no row for them
             out[key] = S[0]
         elif ec == "bounded_from_a_timescale_bracket":
             out[key] = S[3]
@@ -205,6 +216,8 @@ def draw_lane(reactions, species_list, lane: str, title: str, fname: str, figsiz
     for r in reactions:
         none = list(STATUS_STYLE)[4]
         st = status.get(r.parameter_key, none) if r.parameter_key else none
+        if st == "inert":
+            continue
         visible_products = [b for b in r.products if b not in HIDDEN]
         for a in r.reactants:
             if a in HIDDEN:

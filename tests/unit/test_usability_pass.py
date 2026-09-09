@@ -21,7 +21,7 @@ def _maillard(*args):
 
 def test_rank_is_accepted_as_well_as_rank_experiments_and_wishlist_is_a_verb():
     help_text = _maillard("--help").stdout
-    assert "rank" in help_text and "wishlist" in help_text and "Six verbs" in help_text
+    assert "rank" in help_text and "wishlist" in help_text and "Eight verbs" in help_text and "calibrate" in help_text
     assert _maillard("rank", "--help").returncode == 0
     assert _maillard("rank-experiments", "--help").returncode == 0
     assert _maillard("wishlist", "--help").returncode == 0

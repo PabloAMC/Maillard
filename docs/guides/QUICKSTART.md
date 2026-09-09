@@ -1,8 +1,9 @@
-# Quick Start
+# Quick start and command reference
 
-*Rewritten 2026-09-03, when the legacy lane was retired, for the one-engine tool. The previous quick start,
-which drove the retired screening lane (`run_pipeline.py`, `optimize_formulation.py`,
-`run_campaign.py`, `ingest_results.py`), is kept at
+*This page installs the tool, runs each verb once and lists every command. The three worked
+examples, and how to read intervals, refusals and declared extrapolations, are in the
+[tutorial](../USING_THE_TOOL.md); the chemistry and how well the model does are in the
+[introduction](INTRODUCTION.md). The quick start of the retired screening lane is kept at
 [`docs/history/QUICKSTART_legacy_lane_2026-09-03.md`](../history/QUICKSTART_legacy_lane_2026-09-03.md).*
 
 ## Goal

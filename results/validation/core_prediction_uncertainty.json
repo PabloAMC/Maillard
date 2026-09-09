@@ -481,7 +481,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
         }
       ],
       "signal_origin": "external_literature"
@@ -532,7 +532,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
         },
         {
           "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -633,7 +633,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
         }
       ],
       "signal_origin": "external_literature"
@@ -1078,7 +1078,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 7.039896663516037e-07,
+          "ci_width_log10": 7.039859871589846e-07,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1088,12 +1088,12 @@
           "measured_ppb": 17400.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1458.505813913766,
-          "predicted_p5": 1458.5044158269898,
-          "predicted_p50": 1458.5060026867654,
-          "predicted_p95": 1458.5067800588924,
-          "predicted_point": 1458.5059627119706,
-          "predicted_std": 0.0007777446638230119,
+          "predicted_mean": 1458.5058142239584,
+          "predicted_p5": 1458.5044158277428,
+          "predicted_p50": 1458.5060026873025,
+          "predicted_p95": 1458.5067800472896,
+          "predicted_point": 1458.505962711969,
+          "predicted_std": 0.0007776502370077528,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1762,7 +1762,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "external_matrix",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
         },
         {
           "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -1832,7 +1832,7 @@
     "lane_networks": {
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so.",
-      "sulfur": "FULL_REACTIONS (97 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (102 steps) = trunk + sulfur, pH trajectory",
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term"
     },
     "lanes": [
@@ -3148,12 +3148,12 @@
   "provenance": {
     "artifact": "core_prediction_uncertainty",
     "generated_by": "src/kinetic_core/uncertainty.py",
-    "generated_on": "2026-09-07",
+    "generated_on": "2026-09-09",
     "git": {
       "branch": "cleaning",
-      "commit": "1b3e99066163c59040f074f64d30efeeb37e7f99",
+      "commit": "452381a983b9525c0054b3515991904b53209027",
       "dirty": true,
-      "short": "1b3e9906"
+      "short": "452381a9"
     },
     "inputs": [
       {
@@ -3425,7 +3425,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -3433,7 +3433,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -3449,7 +3449,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
     },
     {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
@@ -3513,7 +3513,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "external_matrix",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather than invented."
+      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented."
     },
     {
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -3674,7 +3674,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 182.6,
+    "wall_seconds": 158.9,
     "workers": 6
   }
 }

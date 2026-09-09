@@ -471,21 +471,21 @@
     },
     {
       "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
-      "ci_width_log10": 7.039896663516037e-07,
+      "ci_width_log10": 7.039859871589846e-07,
       "compound": "5-Hydroxymethylfurfural (HMF)",
       "decision_relevance": 1.0,
-      "envelope_miss_log10": 1.0766407959456437,
+      "envelope_miss_log10": 1.0766407959490987,
       "inside_ci": false,
       "matrix_family": "free",
       "measured_ppb": 17400.0,
       "odour_threshold_ug_per_kg": null,
-      "predicted_p5": 1458.5044158269898,
-      "predicted_p50": 1458.5060026867654,
-      "predicted_p95": 1458.5067800588924,
+      "predicted_p5": 1458.5044158277428,
+      "predicted_p50": 1458.5060026873025,
+      "predicted_p95": 1458.5067800472896,
       "rank": 27,
       "rationale": "measured outside 90% CI by 1.08 dex; CI width 0.00 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
-      "voi_score": 2.076641007142544
+      "voi_score": 2.076641007144895
     },
     {
       "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",

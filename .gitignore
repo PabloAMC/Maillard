@@ -45,6 +45,8 @@ test_mech.yaml
 !docs/assets/report_intervention_waterfall.png
 !docs/assets/report_comparison_intervention_waterfall.png
 !docs/assets/report_compound_confidence_overlay.png
+!docs/assets/thiol_sink/
+!docs/assets/thiol_sink/*.png
 docs/assets/*.html
 
 # Data rules -- data/ holds curated inputs only. Everything tracked is whitelisted
