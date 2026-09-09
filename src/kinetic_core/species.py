@@ -330,8 +330,43 @@ MELANOIDIN_REPEAT_UNIT_NITROGEN = 1
 MELANOIDIN_REPEAT_UNIT_FALSIFYING_MEASUREMENT = (
     "Mundt & Wedzicha 2004 (J. Agric. Food Chem.), glucose 0.25 M + glycine 0.25 M, 0.2 M "
     "acetate pH 5.5, 70.0 C, dialysed MW > 12 500: C/N 7.64 +/- 0.21 by microanalysis and "
-    "7.61 by 14C reconstruction, against this unit's structural floor of 8.0. Read as a "
-    "lower bound for a 120 C polymer, on the authors' own stated temperature direction."
+    "7.61 by 14C reconstruction, against this unit's structural floor of 8.0."
+)
+
+#: CORRECTED 2026-09-09, THE SAME DAY, AND THE CORRECTION MATTERS MORE THAN THE ORIGINAL.
+#:
+#: The note above was written reading the 7.64 as a LOWER BOUND for a 120 C polymer, on its
+#: authors' stated temperature direction, and concluding that the trunk's 8.42 to 9.94 clears
+#: it. That conclusion was reached without checking the corpus for a measurement at cooking
+#: temperature in the same system. There is one, it was already on this disk and already
+#: dossiered, and it says the opposite: the trunk is LOW, not comfortably above a floor.
+#:
+#: Martins & van Boekel 2003 (Food Chem. 83:135, doi 10.1016/S0308-8146(03)00219-X;
+#: martins2003c_extraction.md sections 7 and 8), glucose + glycine, MEASURED microanalysis:
+#:
+#:      120 C, pH 6.8   C/N = 11, flat over 15 to 60 min
+#:      100 C, pH 6.8   C/N = 15, 14, 11, 11 over 30 to 180 min
+#:      100 C, pH 5.5   C/N = 19 at 60 min, 16 at 180 min
+#:
+#: and its Table 2 compiles nine more literature values from 7 to 13, including Cammerer &
+#: Kroh 1995's own pair for this system: C/N 7 at 60 C and 9 at 100 C (cammerer1994_extraction.md
+#: is that paper, also on disk). The authors' verdict on their own compilation is that the
+#: literature values "are not consistent, either with pH or temperature".
+#:
+#: SO THE HONEST STATEMENT IS THIS. At 70 C one laboratory measures below the structural floor
+#: and falsifies the repeat unit; at 100 to 120 C, in the same sugar and the same amine, the
+#: nearest measurements sit at 11 to 19 while the trunk predicts 8.42 to 9.94. The model is not
+#: bracketed above a floor -- it is between two measurements that disagree with each other by
+#: more than it disagrees with either. Nothing is changed here on that basis: a repeat unit
+#: that mixed decarboxylated and intact glycine needs a second nitrogen pool and a branching
+#: ratio, and the spread across these sources is wider than any one of them justifies fitting
+#: to. It is a wave, it is in the backlog, and the C/N diagnostic should be read as a spread
+#: rather than as a bound until it runs.
+MELANOIDIN_REPEAT_UNIT_SAME_SYSTEM_AT_COOKING_TEMPERATURE = (
+    "Martins & van Boekel 2003 (Food Chem. 83:135), glucose + glycine, measured C/N: 11 at "
+    "120 C pH 6.8; 15 falling to 11 at 100 C pH 6.8; 19 falling to 16 at 100 C pH 5.5. Its "
+    "Table 2 compiles nine further literature values from 7 to 13 and its authors call them "
+    "inconsistent with both pH and temperature. The trunk predicts 8.42 to 9.94."
 )
 
 

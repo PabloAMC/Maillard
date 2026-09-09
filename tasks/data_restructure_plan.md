@@ -1854,14 +1854,33 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
          constant or a barrier for it?** The step wave B27 needs. Whitfield 1999 proposes the mechanism,
          offers two supporting negatives and measures nothing, so the wave would fit a constant with no
          independent anchor. Likely physical-organic, not food. **25 %.**
-      2. **Has the elemental C/N of glucose-glycine melanoidins been measured at more than one
-         temperature?** Mundt 2004's 7.64 +/- 0.21 is one point at 70 C, and the authors borrow the
-         temperature direction from refs. 7 and 14 (Cammerer & Kroh 1995; Martins & van Boekel 2003)
-         rather than measuring it. Those two citations are where to look. **65 %**, because the direction
-         is already attributed to a named source.
+      2. ~~**Has the elemental C/N of glucose-glycine melanoidins been measured at more than one
+         temperature?**~~ **ANSWERED THE SAME DAY, FROM THIS DISK, AND THE SEARCH SHOULD NOT HAVE BEEN
+         PROPOSED.** Both papers named as "where to look" were already here and already dossiered:
+         `Cammerer1994.pdf` / `cammerer1994_extraction.md` IS Cammerer & Kroh 1995, and
+         `martins2003c.pdf` / `martins2003c_extraction.md` IS Martins & van Boekel 2003
+         (10.1016/S0308-8146(03)00219-X). The lesson is the one the reading audit exists for: a gap
+         asserted from a single paper's citation list, without checking the corpus, is not a gap.
+         WHAT THEY SAY, and it reverses the reading recorded earlier the same day: Martins measures
+         glucose + glycine C/N at **11 (120 C pH 6.8), 15 to 11 (100 C pH 6.8) and 19 to 16 (100 C
+         pH 5.5)**, and compiles nine more literature values from 7 to 13 including Cammerer's own
+         **7 at 60 C and 9 at 100 C**. So the trunk's 8.42 to 9.94 is not comfortably above Mundt's
+         70 C floor -- it sits BELOW the nearest same-system measurements at cooking temperature,
+         between two sources that disagree with each other by more than either disagrees with the
+         model. `species.py` now carries both, and the C/N diagnostic should be read as a spread and
+         not as a bound. The wave that would change it still needs a second nitrogen pool and a
+         branching ratio, which nothing on disk measures.
       3. **What is the first-order loss rate of HMF in aqueous sugar-amine systems between 50 and
          150 C?** `k5a` declared gap G2 names this exact window as empty, and Goncuoglu Tas 2016 now
-         sizes the consequence at 23 000x. **55 %.**
+         sizes the consequence at 23 000x. **55 %.** SEARCHED 2026-09-09: the first phrasing returned
+         nothing; the second returned formation barriers, biorefinery systems and one DFT paper (out
+         of scope by standing policy). The only hit that is a DEGRADATION measurement in an amino-acid
+         system is **Gokmen, Kocadagli, Goncuoglu & Mogol 2012, Food Chem., "Model studies on the role
+         of 5-hydroxymethyl-2-furfural in acrylamide formation from asparagine"** (about 67 % of the
+         HMF degraded in an asparagine + HMF pot). It is NOT on disk, though two dossiers already cite
+         it, and it is the same group as `kocadagli2016`, `goncuoglu2016` and `hamzalioglu2026`, whose
+         papers this repository leans on. Also checked and rejected: `lee2024`, already on disk, whose
+         `k_d` is a vapour-loss term the paper says has no identified mechanism, not a chemical rate.
       4. **What branch fraction of linoleate hydroperoxide decomposition goes to 2-pentylfuran, and of
          oleate hydroperoxide to nonanal?** The panel refuses both targets outright (wishlist sec. 3)
          for want of a measured branch fraction, not for want of a lane. **45 %.**
