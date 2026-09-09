@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "a7475f2756dcfa77bb6b5f5fce7bc547d58db260a5a3f2c82846b280a0d15f4e",
+        "17_papers_by_weight.png": "1da93433123df44619b6c9537067776a6a0bfe5ea7afcf2d4e3647827e122e77",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -127,8 +127,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-09",
     "git": {
-      "commit": "fd50f9c355afe0c9129e58ed1f4e9ed679d2aa65",
-      "short": "fd50f9c3",
+      "commit": "e518fad6ba28e7be307630d0dc3b195ece0843dc",
+      "short": "e518fad6",
       "branch": "reactions",
       "dirty": true
     },
@@ -260,7 +260,7 @@
       },
       {
         "path": "src/kinetic_core/species.py",
-        "sha256": "1c5efb109ce17266176483491255e98e1e8071ccc9ad37d114b8a0516b97fdac"
+        "sha256": "5871bbe602d9c5380fe12138a3a9f73f10ef20201583e4b3a801f806aae9c2c7"
       },
       {
         "path": "src/kinetic_core/species_acrylamide.py",
@@ -344,7 +344,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "a7475f2756dcfa77bb6b5f5fce7bc547d58db260a5a3f2c82846b280a0d15f4e"
+        "sha256": "1da93433123df44619b6c9537067776a6a0bfe5ea7afcf2d4e3647827e122e77"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
