@@ -1,6 +1,6 @@
 # Kinetic core B4 -- matrix / OAV output layer: FIT REPORT
 
-Generated 2026-08-29 by `scripts/generators/generate_kinetic_core_b4_fit.py`.
+Generated 2026-09-09 by `scripts/generators/generate_kinetic_core_b4_fit.py`.
 
 ## The four-line answer
 
@@ -23,13 +23,14 @@ Generated 2026-08-29 by `scripts/generators/generate_kinetic_core_b4_fit.py`.
 
 | class | K_g (L/g) | n FIT rows | members | sign | sources |
 |---|---:|---:|---|---|---|
-| branched_alkanal | 0.004096 | 0 | (chain-length surrogate) | suppression | Meynier2002_extraction.md |
-| diketone | 0.073 | 1 | diacetyl | suppression | leksrisompong2010_extraction.md |
-| ester | 0.004908 | 3 | isoamyl_acetate, amyl_acetate, ethyl_pentanoate | suppression | Meynier2002_extraction.md |
-| furanone | -0.062 | 1 | furaneol | enhancement_measured | leksrisompong2010_extraction.md |
-| lactone | -0.023 | 1 | delta_decalactone | enhancement_measured | leksrisompong2010_extraction.md |
-| methyl_ketone | 0.02485 | 3 | 2_heptanone, 2_octanone, 2_nonanone | suppression | andriot2000 via k2 |
-| n_alkanal | 0.01151 | 1 | hexanal | suppression | Meynier2002_extraction.md |
+| alkenol | 0.0414 | 1 | z_2_penten_1_ol@pea_protein_1pct | suppression | bi2022_extraction.md |
+| branched_alkanal | 0.01923 | 0 | (chain-length surrogate) | suppression | Meynier2002_extraction.md, bi2022_extraction.md |
+| diketone | 0.073 | 1 | diacetyl@caseinate_1pct | suppression | leksrisompong2010_extraction.md |
+| ester | 0.004908 | 3 | isoamyl_acetate@skim_milk, amyl_acetate@skim_milk, ethyl_pentanoate@skim_milk | suppression | Meynier2002_extraction.md |
+| furanone | -0.062 | 1 | furaneol@caseinate_1pct | enhancement_measured | leksrisompong2010_extraction.md |
+| lactone | -0.023 | 1 | delta_decalactone@caseinate_1pct | enhancement_measured | leksrisompong2010_extraction.md |
+| methyl_ketone | 0.02485 | 3 | 2_heptanone@beta_lactoglobulin, 2_octanone@beta_lactoglobulin, 2_nonanone@beta_lactoglobulin | suppression | andriot2000 via k2 |
+| n_alkanal | 0.05404 | 2 | hexanal@skim_milk, hexanal@pea_protein_1pct | suppression | Meynier2002_extraction.md, bi2022_extraction.md |
 
 **alpha,beta-unsaturation penalty: 3.73x** from 2 FIT rows (unsat_penalty_gelatin 2.81x, unsat_penalty_dairy_headspace 4.95x), spread 1.76x.
 
@@ -39,7 +40,7 @@ Generated 2026-08-29 by `scripts/generators/generate_kinetic_core_b4_fit.py`.
 
 | compound | matrix | measured | predicted | fold | sign ok | state |
 |---|---|---:|---:|---:|---|---|
-| hexanal | skim_milk | 1.39 | 1.390189 | 1.000136 | yes | predicted |
+| hexanal | skim_milk | 1.39 | 2.831882 | 2.037325 | yes | predicted |
 | ethyl_pentanoate | skim_milk | 1.33 | 1.166396 | 1.140264 | yes | predicted |
 | amyl_acetate | skim_milk | 1.2 | 1.166396 | 1.02881 | yes | predicted |
 | isoamyl_acetate | skim_milk | 1.07 | 1.166396 | 1.09009 | yes | predicted |
@@ -51,9 +52,9 @@ Generated 2026-08-29 by `scripts/generators/generate_kinetic_core_b4_fit.py`.
 
 | compound | water (ug/L) | gelatin 22 C (ug/L) | measured ratio | predicted | state |
 |---|---:|---:|---:|---:|---|
-| pentanal | 12.0 | 41.0 | 3.416667 | 1.3453 | predicted |
-| hexanal | 4.5 | 58.0 | 12.888889 | 1.3453 | predicted |
-| heptanal | 3.0 | 79.0 | 26.333333 | 1.3453 | predicted |
+| pentanal | 12.0 | 41.0 | 3.416667 | 2.621135 | predicted |
+| hexanal | 4.5 | 58.0 | 12.888889 | 2.621135 | predicted |
+| heptanal | 3.0 | 79.0 | 26.333333 | 2.621135 | predicted |
 | t_2_hexenal | 3.0 | 109.0 | 36.333333 | 3.729544 | partial_unsaturation_term_only |
 | t_2_octenal | 3.0 | 109.0 | 36.333333 | 3.729544 | partial_unsaturation_term_only |
 | tt_2_4_decadienal | 0.07 | 64.0 | 914.285714 | 3.729544 | partial_unsaturation_term_only |
@@ -66,9 +67,9 @@ Generated 2026-08-29 by `scripts/generators/generate_kinetic_core_b4_fit.py`.
 | 2 | ethyl-4-methylpentanoate | ester | 1.696999 | [1.490845, 1.981689] | elevated | predicted |
 | 3 | 2-pentyl furan | alkylfuran | 1.0 | [1.0, 1.0] | flat | no_binding_constant_for_class |
 | 4 | 4-vinyl phenol | phenol | 1.0 | [1.0, 1.0] | flat | no_binding_constant_for_class |
-| 5 | hexanal | n_alkanal | 2.63442 | [2.151, 3.302] | elevated | predicted |
-| 6 | 3-methyl butanal | branched_alkanal | 1.581644 | [1.409609, 1.819217] | elevated | predicted_with_chain_length_surrogate |
-| 7 | 2-methyl butanal | branched_alkanal | 1.581644 | [1.409609, 1.819217] | elevated | predicted_with_chain_length_surrogate |
+| 5 | hexanal | n_alkanal | 8.673372 | [6.403783, 11.807566] | elevated | predicted |
+| 6 | 3-methyl butanal | branched_alkanal | 3.730737 | [2.923054, 4.846109] | elevated | predicted_with_chain_length_surrogate |
+| 7 | 2-methyl butanal | branched_alkanal | 3.730737 | [2.923054, 4.846109] | elevated | predicted_with_chain_length_surrogate |
 | 8 | butyric acid | carboxylic_acid | 1.0 | [1.0, 1.0] | flat | no_binding_constant_for_class |
 | 9 | 4-ethyl phenol | phenol | 1.0 | [1.0, 1.0] | flat | no_binding_constant_for_class |
 | 10 | dimethyl disulfide | disulfide | 1.0 | [1.0, 1.0] | flat | no_binding_constant_for_class |

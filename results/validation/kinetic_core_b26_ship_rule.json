@@ -1,0 +1,290 @@
+{
+  "artifact": "kinetic_core_b26_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b26_ship_rule",
+    "generated_on": "2026-09-09",
+    "git": {
+      "commit": "393b0a4bcf3a6f868c769800f5880f9c4b151dd8",
+      "short": "393b0a4b",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b26_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b4_frozen_predictions.json",
+        "sha256": "af96988eef2023cdda49e40f23d4ad9d61db7239c22c1db5718a75d5df0d33a2"
+      },
+      {
+        "path": "results/validation/holdout_frozen/hong2020_paired_thresholds.json",
+        "sha256": "dc1208b25a7f31adbaa17d542ee43d2be5496338bc43b11386fbd3d86359c812"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b26_prereg.md",
+  "rule": "SHIP if T1 (the arithmetic), T2 (every active hold-out row improves and no sign inverts) and T5 (nothing else moves) hold; T3 and T4 reported",
+  "shipped_keys": [
+    "kg_hexanal_pea",
+    "kg_z_2_penten_1_ol_pea"
+  ],
+  "quarantined_key": "kg_t_2_octenal_pea",
+  "T1": {
+    "geometric_mean_expected": 0.054037829342045186,
+    "n_alkanal_after": 0.054037829342045186,
+    "n_alkanal_members": [
+      "hexanal@skim_milk",
+      "hexanal@pea_protein_1pct"
+    ],
+    "branched_after": 0.019230544249838145,
+    "reference_loading_before_after": [
+      33.9,
+      33.9
+    ],
+    "classes_moved": {
+      "n_alkanal": {
+        "before": 0.01151,
+        "after": 0.054037829342045186,
+        "x": 4.694859195659878
+      },
+      "alkenol": {
+        "before": null,
+        "after": 0.04139999999999999,
+        "new_class": true
+      },
+      "branched_alkanal": {
+        "before": 0.004096085409252668,
+        "after": 0.019230544249838145,
+        "x": 4.694859195659878
+      }
+    },
+    "classes_unmoved": [
+      "diketone",
+      "ester",
+      "furanone",
+      "lactone",
+      "methyl_ketone"
+    ],
+    "pass": true
+  },
+  "T2": {
+    "rows": [
+      {
+        "compound": "2_3_dimethylpyrazine",
+        "active_term": false,
+        "measured": 48.88,
+        "predicted_before": 1.0,
+        "predicted_after": 1.0,
+        "fold_before": 48.88,
+        "fold_after": 48.88,
+        "sign_ok": true,
+        "state": "no_binding_constant_for_class",
+        "explained_share_before": 0.0,
+        "explained_share_after": 0.0,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "ethyl_4_methylpentanoate",
+        "active_term": false,
+        "measured": 0.1546,
+        "predicted_before": 1.696999,
+        "predicted_after": 1.6969993425976437,
+        "fold_before": 10.97670763260026,
+        "fold_after": 10.976709848626415,
+        "sign_ok": false,
+        "state": "predicted",
+        "explained_share_before": -0.28328104910886487,
+        "explained_share_after": -0.2832811572468805,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "2_pentylfuran",
+        "active_term": false,
+        "measured": 1359.3,
+        "predicted_before": 1.0,
+        "predicted_after": 1.0,
+        "fold_before": 1359.3,
+        "fold_after": 1359.3,
+        "sign_ok": true,
+        "state": "no_binding_constant_for_class",
+        "explained_share_before": 0.0,
+        "explained_share_after": 0.0,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "4_vinylphenol",
+        "active_term": false,
+        "measured": 151.4,
+        "predicted_before": 1.0,
+        "predicted_after": 1.0,
+        "fold_before": 151.4,
+        "fold_after": 151.4,
+        "sign_ok": true,
+        "state": "no_binding_constant_for_class",
+        "explained_share_before": 0.0,
+        "explained_share_after": 0.0,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "hexanal",
+        "active_term": true,
+        "measured": 132.5,
+        "predicted_before": 2.63442,
+        "predicted_after": 8.673371766570416,
+        "fold_before": 50.29570076145793,
+        "fold_after": 15.276642529113282,
+        "sign_ok": true,
+        "state": "predicted",
+        "explained_share_before": 0.19822913356829625,
+        "explained_share_after": 0.4420794187578199,
+        "ceiling_flag": [
+          "REVERSIBLE TERM EXCEEDS ITS EVIDENCE CEILING: it claims 44.2% of the observed log-shift against Amendment 6's ~25% cap."
+        ]
+      },
+      {
+        "compound": "3_methylbutanal",
+        "active_term": true,
+        "measured": 263.2,
+        "predicted_before": 1.581644,
+        "predicted_after": 3.7307372834770165,
+        "fold_before": 166.40912872934743,
+        "fold_after": 70.54905773335499,
+        "sign_ok": true,
+        "state": "predicted_with_chain_length_surrogate",
+        "explained_share_before": 0.08226661958327652,
+        "explained_share_after": 0.23625087882802365,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "2_methylbutanal",
+        "active_term": true,
+        "measured": 261.4,
+        "predicted_before": 1.581644,
+        "predicted_after": 3.7307372834770165,
+        "fold_before": 165.27107237785492,
+        "fold_after": 70.06657937499618,
+        "sign_ok": true,
+        "state": "predicted_with_chain_length_surrogate",
+        "explained_share_before": 0.08236804629063293,
+        "explained_share_after": 0.23654215308811805,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "butyric_acid",
+        "active_term": false,
+        "measured": 2034.7,
+        "predicted_before": 1.0,
+        "predicted_after": 1.0,
+        "fold_before": 2034.7,
+        "fold_after": 2034.7,
+        "sign_ok": true,
+        "state": "no_binding_constant_for_class",
+        "explained_share_before": 0.0,
+        "explained_share_after": 0.0,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "4_ethylphenol",
+        "active_term": false,
+        "measured": 29.1,
+        "predicted_before": 1.0,
+        "predicted_after": 1.0,
+        "fold_before": 29.1,
+        "fold_after": 29.1,
+        "sign_ok": true,
+        "state": "no_binding_constant_for_class",
+        "explained_share_before": 0.0,
+        "explained_share_after": 0.0,
+        "ceiling_flag": []
+      },
+      {
+        "compound": "dimethyl_disulfide",
+        "active_term": false,
+        "measured": 1754.8,
+        "predicted_before": 1.0,
+        "predicted_after": 1.0,
+        "fold_before": 1754.8,
+        "fold_after": 1754.8,
+        "sign_ok": true,
+        "state": "no_binding_constant_for_class",
+        "explained_share_before": 0.0,
+        "explained_share_after": 0.0,
+        "ceiling_flag": []
+      }
+    ],
+    "rows_made_worse": [],
+    "within_5x_before_after": [
+      0,
+      0
+    ],
+    "signs_correct_before_after": [
+      3,
+      3
+    ],
+    "pass": true
+  },
+  "T3": {
+    "ceiling": 0.25,
+    "explained_share_by_row": {
+      "hexanal": [
+        0.19822913356829625,
+        0.4420794187578199
+      ],
+      "3_methylbutanal": [
+        0.08226661958327652,
+        0.23625087882802365
+      ],
+      "2_methylbutanal": [
+        0.08236804629063293,
+        0.23654215308811805
+      ]
+    },
+    "rows_now_over_the_ceiling": [
+      "hexanal"
+    ],
+    "reading_declared_in_the_prereg": "The cap was computed from ONE compound in beef and one dairy protein. A plant isolate that binds an alkanal 22x harder than cow's milk does is a reason to doubt that the cap transfers, not a reason to shrink a measured constant. The layer's flag stays and starts firing; that is the flag doing its job.",
+    "reported_only": true
+  },
+  "T4": {
+    "loading_half_5_g_per_L": {
+      "kg_pea_l_per_g": 0.5074,
+      "pooled_n_alkanal": 0.07642103113672308,
+      "hong_hexanal_prediction_x": 11.851786421414676
+    },
+    "as_printed_10_g_per_L": {
+      "kg_pea_l_per_g": 0.2537,
+      "pooled_n_alkanal": 0.054037829342045186,
+      "hong_hexanal_prediction_x": 8.673371766570416
+    },
+    "loading_double_20_g_per_L": {
+      "kg_pea_l_per_g": 0.12685,
+      "pooled_n_alkanal": 0.03821051556836154,
+      "hong_hexanal_prediction_x": 6.425893210707338
+    },
+    "method_spread_low_2.5x": {
+      "kg_pea_l_per_g": 0.10148,
+      "pooled_n_alkanal": 0.03417652410646817,
+      "hong_hexanal_prediction_x": 5.85306642311848
+    },
+    "method_spread_high_2.5x": {
+      "kg_pea_l_per_g": 0.63425,
+      "pooled_n_alkanal": 0.08544131026617043,
+      "hong_hexanal_prediction_x": 13.1326660577962
+    },
+    "live": {
+      "hong_hexanal_prediction_x": 8.673371766570416
+    },
+    "reported_only": true
+  },
+  "T5": {
+    "sealed_keys_still_valueless": true,
+    "n_sealed": 6,
+    "unsaturation_penalty_x": 3.7295442080769066,
+    "unsaturation_n_fit_rows": 2,
+    "unsaturation_excluded": {
+      "unsat_penalty_beef": 2.01
+    },
+    "kinetic_panel_identical": true,
+    "pass": true
+  },
+  "verdict": "SHIP"
+}

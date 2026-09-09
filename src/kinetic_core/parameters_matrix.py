@@ -129,8 +129,8 @@ class CompoundStructure:
     #: True only for an alpha,beta-unsaturated CARBONYL (a Michael acceptor).
     #: 4-vinyl phenol has a conjugated C=C and NO carbonyl -> False.
     alpha_beta_unsaturated_carbonyl: bool
-    #: n-alkanal / branched_alkanal / alkenal / methyl_ketone / ester /
-    #: lactone / furanone / diketone / alkylpyrazine / phenol /
+    #: n-alkanal / branched_alkanal / alkenal / alkenol / methyl_ketone /
+    #: ester / lactone / furanone / diketone / alkylpyrazine / phenol /
     #: carboxylic_acid / alkylfuran / disulfide / thiol
     binding_class: str
     notes: str = ""
@@ -148,6 +148,14 @@ COMPOUND_STRUCTURE: Mapping[str, CompoundStructure] = {
         "against hexanal's 1.39x, attributed by the authors to covalent chemistry."),
     "t_2_octenal": CompoundStructure(
         "t_2_octenal", "trans-2-octenal", "alpha,beta-unsaturated aldehyde", 8, True, "alkenal"),
+    # -- WAVE B26: the only alcohol anywhere in the binding table -------
+    "z_2_penten_1_ol": CompoundStructure(
+        "z_2_penten_1_ol", "(Z)-2-penten-1-ol", "alpha,beta-unsaturated primary alcohol",
+        5, False, "alkenol",
+        "A conjugated C=C and NO carbonyl, so it is NOT a Michael acceptor and the "
+        "unsaturation penalty does not apply -- the same reading 4-vinyl phenol gets. "
+        "Its class has one member and no consumer on any scored panel; it is carried "
+        "so that the measurement lives in the registry and not in a dossier alone."),
     "tt_2_4_decadienal": CompoundStructure(
         "tt_2_4_decadienal", "trans,trans-2,4-decadienal",
         "doubly alpha,beta-unsaturated aldehyde", 10, True, "alkenal",
@@ -251,6 +259,23 @@ MATRIX_LOADING: Mapping[str, MatrixLoading] = {
         "vega1994 via k2_matrix_and_thresholds.md sec. A.2: 3 % w/v gelatin in "
         "distilled water = 30 g protein/L, LIPID-FREE, dosed at 22 C then held "
         "18 h at 4 C, i.e. NO thermal step after dosing.", "measured_ratio"),
+    # ---- WAVE B26: the first PLANT-PROTEIN loading in this table.
+    "pea_protein_1pct": MatrixLoading(
+        "pea_protein_1pct", "1 % w/v pea protein isolate in phosphate buffer",
+        10.0, 10.0, 10.0, 0.0, 7.6,
+        "bi2022_extraction.md sec. 2 (10 g/L isolate in 0.01 M potassium phosphate "
+        "pH 7.6, 37 C, 2 h) and sec. 3.8, the phase-ratio-variation run, which says "
+        "all the conditions were the same and does NOT restate the loading.",
+        "measured_ratio",
+        "PRINTED COMPOSITION, INHERITED ACROSS SECTIONS. The 10 g/L is the paper's "
+        "own number for its binding assay, and the partition run the two shipped "
+        "constants come from says the conditions were the same without restating "
+        "it. That is the same standing as the skim-milk row, whose composition is "
+        "cited rather than measured by its own paper, so it is carried as a point "
+        "and not as a declared band -- inventing a band nobody measured would be "
+        "worse than naming the inheritance. Every per-gram constant here is "
+        "inversely proportional to this number, and what the assumption is worth "
+        "is computed on the wave ship rule (T4), across a factor of four."),
     "soy_paste_hong": MatrixLoading(
         "soy_paste_hong", "autoclaved whole-soybean paste (Hong 2020 model)",
         142.0, 100.0, 200.0, 0.12, None,
@@ -435,6 +460,67 @@ REVERSIBLE_BINDING: Tuple[MatrixParameter, ...] = (
         3.0, 30.0, "andriot2000 via k2 sec. (b)", "measured_ratio",
         "FIT (D.6 Module 6)",
         provenance={"molar_basis": "recovered_by_arithmetic"}),
+    # ---- WAVE B26: the first PLANT PROTEIN in this table, from Bi 2022's
+    #      PHASE-RATIO-VARIATION pair -- a matrix leg and a water leg measured
+    #      in the same run on the same instrument, which is exactly the
+    #      construction the Meynier and Leksrisompong rows were built from and
+    #      for the same stated reason: the absolute static-headspace scale is
+    #      suspect and the offset cancels in a within-run ratio. K_g =
+    #      (K_matrix/K_buffer - 1) / 10 g/L. The paper's K is matrix/gas, the
+    #      reciprocal of the registry's air/matrix convention, so its own ratio
+    #      is already the right way up.
+    MatrixParameter(
+        "kg_hexanal_pea", "per-gram reversible binding constant",
+        2.537e-1, "L/g", "hexanal", "pea_protein_1pct", "static_headspace_partition",
+        7.6, 37.0,
+        "bi2022_extraction.md sec. 3.8 / Table S3 (matrix/gas 116.37 over buffer/gas "
+        "32.90) / sec. 2 (10 g/L, inherited -- see the loading record)",
+        "measured_ratio", "FIT (Amendment 4 construction: a within-run partition RATIO)",
+        notes="The first n-alkanal binding constant in this registry that was NOT "
+              "measured on an animal protein, and the class had exactly one row "
+              "before it. It is 22x Meynier's skim-milk value and 173x Damodaran's "
+              "dialysis-derived denatured soy; the second gap is the method gap "
+              "k2 sec. B.3 already names, five times wider here than the 35x it "
+              "recorded, and the first is protein-to-protein at one method family. "
+              "37 C is an in-mouth temperature, not a process one: nothing here "
+              "licenses a pea binding constant at 90 or 140 C.",
+        provenance={"absolute_scale_suspect": True, "ratio_cancels_offset": True,
+                    "cross_study_cross_method": False,
+                    "loading_inherited_not_restated": True,
+                    "within_paper_method_spread_x": 2.5,
+                    "temperature_is_consumption_not_process": True}),
+    MatrixParameter(
+        "kg_z_2_penten_1_ol_pea", "per-gram reversible binding constant",
+        4.14e-2, "L/g", "z_2_penten_1_ol", "pea_protein_1pct",
+        "static_headspace_partition", 7.6, 37.0,
+        "bi2022_extraction.md sec. 3.8 / Table S3 (2065.44 over 1460.49) / sec. 2",
+        "measured_ratio", "FIT (Amendment 4 construction)",
+        notes="The only ALCOHOL in the binding table. Its class has one member and "
+              "no consumer on any scored panel, so it changes no prediction; it is "
+              "carried because a measured constant belongs in the registry. This is "
+              "also the compound on which the paper's own two headspace routes "
+              "disagree by 2.5x, and this row comes from the partition route.",
+        provenance={"absolute_scale_suspect": True, "ratio_cancels_offset": True,
+                    "loading_inherited_not_restated": True,
+                    "class_has_no_panel_consumer": True}),
+    MatrixParameter(
+        "kg_t_2_octenal_pea", "per-gram apparent binding constant",
+        3.834e-1, "L/g", "t_2_octenal", "pea_protein_1pct",
+        "static_headspace_partition", 7.6, 37.0,
+        "bi2022_extraction.md sec. 3.8 / Table S3 (2203.85 over 455.93) / sec. 2",
+        "measured_ratio",
+        "QUARANTINED as a binding constant; NOT used for the unsaturation penalty either",
+        notes="Quarantined on the Meynier t-2-hexenal precedent, which is exact: a "
+              "2-alkenal held two hours at 37 C against a protein carrying about "
+              "0.47 mmol lysine amine per gram, measured by disappearance, is partly "
+              "irreversible Michael chemistry and not partition. The paper's only "
+              "reversibility evidence is a 20 % headspace recovery under guanidine, "
+              "and a 20 % recovery does not show that the other 80 % was reversible. "
+              "It is ALSO excluded from the unsaturation observations, for a second "
+              "and independent reason -- see UNSATURATION_OBSERVATIONS_EXCLUDED.",
+        provenance={"absolute_scale_suspect": True, "quarantined_as_binding": True,
+                    "michael_acceptor_on_a_lysine_rich_protein": True,
+                    "reversibility_evidence": "20 % recovery under guanidine, no more"}),
 )
 
 #: Binding constants that EXIST in the corpus and are deliberately NOT carried
@@ -530,6 +616,22 @@ UNSATURATION_OBSERVATIONS_EXCLUDED: Mapping[str, str] = {
                           "Brewer is declaration D.6 HOLD-OUT and reclassified "
                           "`dose_added_pre_cook`, so a large part of both numbers "
                           "is thermal loss before perception, not perception.",
+    # WAVE B26. This exclusion is a finding, not a formality, and it cost the
+    # layer a number it would have liked: Bi's contrast would have pulled the
+    # fitted penalty from 3.73x down into the 2-3x band the corpus states
+    # independently, which is the direction the layer's own caveat says it
+    # should move. It is excluded anyway.
+    "unsat_penalty_pea": "Bi 2022's pea-isolate partition pair gives 4.834 / 3.537 "
+                         "= 1.367x built the way the two carried observations are. "
+                         "EXCLUDED for a CONFOUND the other two do not have: "
+                         "Meynier's and Vega's are SAME-CARBON pairs, C6 alkenal "
+                         "against C6 alkanal, and Bi's is C8 against C6. Divide out "
+                         "this registry's own measured chain-length slope and two "
+                         "carbons alone would predict about 7.9x on the per-gram "
+                         "constant where Bi measures 1.51x -- so the alkenal is LESS "
+                         "bound than chain length by itself would give. A contrast "
+                         "that inverts once a measured confound is removed is not "
+                         "evidence for a penalty and must not set one.",
 }
 
 #: Ordinal gates the penalty must not contradict (anantharamkrishnan2020b sec. 8).

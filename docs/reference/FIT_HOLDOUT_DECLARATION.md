@@ -1341,3 +1341,34 @@ ran.
 3. **INERT DEFAULT.** The four steps live in `sulfur.py` at zero unless a shipped report carries
    `thiol_addition`; the verdict is in `kinetic_core_b25_ship_rule.md` and the prereg's section 6.
 
+
+## Amendment 35 — 2026-09-09 (Wave B26, the first plant protein in the matrix binding table)
+
+1. **THREE NEW FIT-ELIGIBLE ROWS; NO NEW COORDINATE AND NOTHING FITTED.** Bi 2022's pea-protein
+   phase-ratio-variation pair (a matrix leg and a water leg in the same run) enters the reversible
+   binding table by the registry's existing formula `K_g = (K_water/K_matrix − 1) / protein_g_per_L`
+   — the Amendment 4 construction, adopted for the Meynier and Leksrisompong rows for the stated
+   reason that the absolute static-headspace scale is suspect and the offset cancels in a within-run
+   ratio. Hexanal and (Z)-2-penten-1-ol are carried as FIT; (E)-2-octenal is QUARANTINED as a
+   binding constant on the Meynier t-2-hexenal precedent, a 2-alkenal held two hours against a
+   lysine-rich protein and measured by disappearance. Every value is arithmetic on printed cells, so
+   there is no coordinate to identify and nothing a downstream result could have moved.
+2. **AN EXCLUSION THAT COST THE LAYER A NUMBER IT WANTED.** Bi's alkenal/alkanal contrast, built the
+   way the two carried unsaturation observations are, is 1.367×, and it would have pulled the fitted
+   penalty from 3.73× into the 2–3× band the corpus states independently. It is EXCLUDED because the
+   other two observations are same-carbon pairs and Bi's is C8 against C6: divide out the registry's
+   own measured 2.81×/CH₂ slope and the contrast inverts. The penalty is untouched and remains
+   unvalidated out of sample.
+3. **WHAT IS VALIDATED.** Hong 2020's ten paired soy/water ratios, the flagship hold-out, re-scored
+   against wave B4's FROZEN blind predictions and never entering any objective. Every row that
+   carries a binding term improved and none inverted.
+4. **A CAP EXCEEDED, AND THE READING DECLARED BEFORE THE RUN.** Amendment 6 ruling 2 caps the
+   reversible term at ~25 % of an observed log-shift. The hexanal row now claims 44.2 %. The cap was
+   computed from one compound in beef and one dairy protein; a plant isolate that binds an alkanal
+   22× harder than cow's milk is a reason to doubt that the cap transfers, and the constant is not
+   shrunk to fit it. The layer's flag stays and fires. Re-deriving the cap is a separate question and
+   is in the backlog.
+5. **THE BLIND RECORD IS NOW ACTUALLY FROZEN.** `kinetic_core_b4_frozen_predictions.json` was being
+   overwritten, date and all, on every run of its generator, so any later wave that changed the
+   registry could have replaced a pre-registration with a post-hoc prediction undetectably. The
+   generator now refuses without an explicit `--refreeze`.
