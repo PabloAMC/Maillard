@@ -237,21 +237,21 @@
     },
     {
       "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
-      "ci_width_log10": 0.6657188974110174,
+      "ci_width_log10": 0.6657605850714075,
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "decision_relevance": 4.208317957364725,
-      "envelope_miss_log10": 0.6098586110957427,
+      "decision_relevance": 4.208313960281665,
+      "envelope_miss_log10": 0.609813612209445,
       "inside_ci": false,
       "matrix_family": "free",
       "measured_ppb": 11.7,
       "odour_threshold_ug_per_kg": 0.007,
-      "predicted_p5": 47.64797770289595,
-      "predicted_p50": 113.08786300337022,
-      "predicted_p95": 220.68020069655324,
+      "predicted_p5": 47.64304097230254,
+      "predicted_p50": 113.08682219000454,
+      "predicted_p95": 220.678518153388,
       "rank": 14,
       "rationale": "measured outside 90% CI by 0.61 dex; CI width 0.67 dex; \u22482e+04\u00d7 ODT (decision_relevance=4.21); critical meaty odorant in a FREE-PRECURSOR system \u2014 the open question is absolute yield vs precursor dose and temperature, not matrix transfer",
       "suggested_doe_template": "free_precursor_sulfur_yield",
-      "voi_score": 7.615263939051999
+      "voi_score": 7.615119967020849
     },
     {
       "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",

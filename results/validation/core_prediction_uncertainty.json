@@ -3151,9 +3151,9 @@
     "generated_on": "2026-09-09",
     "git": {
       "branch": "reactions",
-      "commit": "33630be12168b51ab5766edd358698710406d266",
+      "commit": "fd50f9c355afe0c9129e58ed1f4e9ed679d2aa65",
       "dirty": false,
-      "short": "33630be1"
+      "short": "fd50f9c3"
     },
     "inputs": [
       {
@@ -3674,7 +3674,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 209.5,
-    "workers": 6
+    "wall_seconds": 702.2,
+    "workers": 1
   }
 }
