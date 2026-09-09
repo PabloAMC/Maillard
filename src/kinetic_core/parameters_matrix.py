@@ -440,11 +440,17 @@ REVERSIBLE_BINDING: Tuple[MatrixParameter, ...] = (
 #: Binding constants that EXIST in the corpus and are deliberately NOT carried
 #: here because they are declared HOLD-OUT. The keys are registered so that a
 #: caller can see the gap is a governance decision and not an oversight.
+#: ATTRIBUTION CORRECTED 2026-09-09 (barallatperez2024_extraction.md, written when that PDF was read
+#: for the first time): the 2024 paper prints NO binding constant and no binding percentage -- its nine
+#: binding values are unlabelled bars in a figure -- so sealed VALUES cannot have come from it. The
+#: in vitro parent study is Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023, JAFC 71(50):20274,
+#: which `data/lit/binding_constants.yml` already carries under `barallat_perez_2023_jafc`. The keys stay
+#: sealed and the hold-out stands; only the citation changes.
 HOLDOUT_SEALED_BINDING: Mapping[str, str] = {
-    "kg_hexanal_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT (D.6). "
+    "kg_hexanal_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT (D.6). "
                         "Value not carried in this file.",
-    "kg_nonanal_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT.",
-    "kg_2_nonanone_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT.",
+    "kg_nonanal_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT.",
+    "kg_2_nonanone_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT.",
     "kg_hexanal_mucin": "Barallat-Perez 2024 pig gastric mucin -- Module 6 STAR HOLD-OUT.",
     "kg_nonanal_mucin": "Barallat-Perez 2024 mucin -- Module 6 STAR HOLD-OUT.",
     "kg_2_nonanone_mucin": "Barallat-Perez 2024 mucin -- Module 6 STAR HOLD-OUT.",

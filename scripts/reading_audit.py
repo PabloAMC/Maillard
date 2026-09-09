@@ -46,6 +46,21 @@ DOSSIER_DIR = data_paths.EXTRACTION_DOSSIERS_DIR
 ARTICLES_DIR = data_paths.ARTICLES_DIR
 #: Dossiers that are syntheses over many papers, not one paper's reading; they never match a PDF.
 SYNTHESIS_PREFIXES = ("k1_", "k2_", "k3_", "k4_", "k5_", "k6_", "research_", "wave_")
+#: PDFs whose dossier is named after the paper rather than the file. Every entry was confirmed by
+#: opening both, and the dossier says so in its own identity table. Without this map the audit
+#: reports a paper as unread for ever because somebody once saved it under the wrong year.
+FILENAME_ALIASES: Dict[str, str] = {
+    "chan2005.pdf": "chan1994b_extraction.md",          # the RSC 1994 chapter, saved under 2005
+    "rainercremer2000.pdf": "cremer2000_extraction.md",  # first author's given name in the file name
+    "parker2012.pdf": "parker2013_extraction.md",        # J Sci Food Agric 93 (2013), online 2012
+    "Kocada2016.pdf": "kocadagli2016jafc_extraction.md",  # truncated file name
+    "Zhai2023b.pdf": "zhai2023jafc_extraction.md",       # the two Zhai 2023 files are swapped
+    "Gursul2020.pdf": "gursulaktag2020_extraction.md",   # surname pair
+    "Goncouglu2016.pdf": "goncuoglu2016_extraction.md",  # the file name transliterates the surname differently
+    "Goncouglu2026.pdf": "goncuoglu2026_extraction.md",
+    "jf0480290.pdf": "rawel2005_extraction.md",          # the publisher's article id, not an author-year name
+    "1-s2.0-S0308814622010068-main.pdf": "bi2022_extraction.md",   # the publisher's download name
+}
 
 
 def _norm(name: str) -> str:
@@ -62,6 +77,10 @@ def audit() -> Dict[str, object]:
     unread: List[str] = []
     for pdf in pdfs:
         key = _norm(Path(pdf).stem)
+        alias = FILENAME_ALIASES.get(pdf)
+        if alias and alias in dossiers:
+            read[pdf] = [alias]
+            continue
         hits = [d for d, stem in stems.items() if len(stem) > 4 and (key.startswith(stem) or stem.startswith(key))]
         if hits:
             read[pdf] = sorted(hits)

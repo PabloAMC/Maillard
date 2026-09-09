@@ -1811,6 +1811,50 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       (doi 10.1016/j.foodchem.2008.09.084) and the anchor now says so, with the DOI. STILL OPEN:
       `devleeschouwer2009b.pdf` is Part I (Food Chemistry 114:116-126), a different paper that three shipped
       trunk constants also come from, and it has no dossier either.
+- [ ] **AUDIT-FINDINGS (2026-09-09, from the forty-three papers the reading audit found unread). Every defect
+      below is stated with its SIZE, so that none is either ignored or over-dramatised.**
+      **In fit rows (both real, both small).** (i) Every B2.x generator configures the Whitfield 1999 pot at
+      norfuraneol 20 mmol/L and hydrogen sulfide 40 against the paper's printed 50 and about 97
+      (`whitfield1999_extraction.md` section 3 item 6). Sized on the shipped B9 vector: the predicted yield moves
+      from 0.0685 to 0.0766 mol %, **1.12x = 0.05 dex against the row's own sigma of 0.5**, so it is a tenth of one
+      sigma and B9 stands. (ii) `whitfield_nf_cys_MFT` targets 0.150 mol %, which is the paper's FREE MFT; total
+      MFT in that pot is 0.230, because a third of it is disulfide-bound. **0.19 dex**, a third of a sigma. Both
+      corrections belong in the next sulfur wave, not in an edit: the generators are frozen by manifest.
+      **In shipped constants (sized against a second laboratory or a second reading).**
+      `k_da_sink` is carried at 0 as "a prediction the data may reject"; Göncüoğlu 2016 measures 130e-3 /min in
+      roasted hazelnut, so **the prediction is rejected**. `k_go_sink` carries a barrier FIXED TO ZERO by its
+      authors; the same paper measures 18 -> 61 -> 290e-3 /min over 150-170 C, so **the zero barrier is refuted**
+      (the 20 C window is too narrow for a credible barrier of its own). `k_hmf_self` runs **23 000x slower** than
+      that laboratory's HMF sink, which puts a measured size on the "EXPECT HMF TO BE OVER-PREDICTED" warning the
+      furanic channel already prints. `k_odg_da` disagrees by **466x**. Three others agree inside a factor of two
+      (`k_tdg_ddg` 1.5x, `k_ddg_hmf` 1.13x, `k_go_sink`'s rate 1.9x), which is the first cross-laboratory
+      agreement the trunk has ever had.
+      **In the melanoidin pool.** `MELANOIDIN_REPEAT_UNIT_CARBON = 8` (six carbons from 3-deoxyglucosone plus two
+      from an intact glycine) sets a structural FLOOR of C/N = 8.0. Mundt & Wedzicha 2004 measure **7.64 +/- 0.21**
+      on a dialysed glucose-glycine polymer with no protein in it, by two independent methods that agree, because
+      about two thirds of the incorporated glycine arrives DECARBOXYLATED and contributes one carbon per nitrogen,
+      not two. The floor is falsified at about 1.7 analytical standard deviations. The measurement is at 70 C and
+      pH 5.5 and the authors say the ratio rises with temperature, so it is a lower bound for a 120 C polymer and
+      the trunk's 8.42 to 9.94 clears it; what is falsified is the STRUCTURE, not the answer.
+      **In the thiol sink's own sources.** The paper `k_thioether` cites prints **no rate constant, no order and
+      no barrier**: the 9.8e-4 /s is derived from "17 % remaining in 30 min", which the parameter's note should
+      say. Its measured binding capacity is **>= 0.028 mmol thiol per g of melanoidin**, about 320x below the
+      8-10 mmol/g the `MELE` pool is sized on, and Charles-Bernard's own number is a saturating dose above the
+      stoichiometric ceiling, not a titre. `THIOL_CHANNELS` calls the van Seeventer channel "ZERO in thiol" on the
+      authors' within-run fit; across pots a tenfold larger thiol pool loses at least fifteen times more per day,
+      which is first order, not zero.
+      **In benchmarks.** `thiamine_cys_glucose_120C_Bolton1994.json` computes two precursor molarities from
+      anhydrous masses where the paper specifies monohydrates (glucose 10 % high, cysteine 11 % high), and its
+      note that the glutamate is "not a reactive precursor" understates a pot holding about 1 mol/L of it.
+      `pea_isolate_uht_140C_Trikusuma2019.json` carries `concentration_mM: 1000` and `water_activity: 0.98`,
+      neither of which is printed in the paper.
+      **In the inventories.** `k3_final_parameter_inventory.md` rows B2.7 and B2.10 state furfural's pH collapse
+      as "15-49x"; the verified tables give 48.6x to more than 1510x, and the MFT and FFT figures in the same row
+      are exact, so the furfural figure looks to have been computed from a damaged text layer.
+      **Naming collisions found and now aliased in `scripts/reading_audit.py`:** `chan2005.pdf` is the 1994 RSC
+      chapter, `rainercremer2000.pdf` is Cremer & Eichner 2000, `parker2012.pdf` is the paper `parker2013` is
+      written from, `Kocada2016.pdf` is the JAFC Kocadagli, `Zhai2023b.pdf` already had a dossier, `Gursul2020.pdf`
+      already had one, and two Goncuoglu files and `jf0480290.pdf` are transliterations or publisher ids.
 - [ ] **READING-ORDER (2026-09-09, after the first thirteen). Forty-five PDFs are still unread, and the question
       "is what we lack on disk or not in the literature" now has an evidence-based answer, gap by gap.**
       ON DISK, decidable without a new download: (i) the acrylamide elimination's two-laboratory disagreement

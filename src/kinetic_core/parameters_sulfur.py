@@ -1021,7 +1021,19 @@ MEASURED_SULFUR: Mapping[str, SulfurParameter] = {
             "'THE CROSS-VALIDATION' block; k1_kinetic_parameters.md secs. 1a, 1c; "
             "hofmann2002_extraction.md (full text read 2026-09-04: Table 2 gives "
             "9.8e-4 /s exactly, Fig. 6 supports 9.4e-4 within the read-off, "
-            "disulfide <6 ug of 400 ug; the model reactions ran at pH 6.0)"
+            "disulfide <6 ug of 400 ug; the model reactions ran at pH 6.0). "
+            "CORRECTION 2026-09-09, hofmann2001_extraction.md, written when the PDF was read as a "
+            "paper for the first time: THE SOURCE PRINTS NO RATE CONSTANT, NO ORDER AND NO BARRIER. "
+            "The 9.8e-4 /s is DERIVED from Table 2's '17 % (15-19) remaining in 30 min' on a "
+            "first-order reading, which is sound arithmetic on a measured conversion but is not a "
+            "constant the authors state. The same dossier measures the melanoidin's thiol-binding "
+            "CAPACITY at >= 0.028 mmol/g (400 ug of a 500 ug charge on 125 mg), about 320x below the "
+            "8-10 mmol/g site density this recast divides by; charlesbernard2005_extraction.md shows "
+            "that density is a saturating hydroxylamine dose above the stoichiometric ceiling, not a "
+            "titre. The PRODUCT k2 x [E] is what was measured and is unchanged, so no shipped answer "
+            "moves; what the pair means is that a pot charging MELE from a real matrix should charge "
+            "it far lower and carry a correspondingly larger k2, and that the pool the B17 variant (a) "
+            "sink was built on could not deplete. See tasks/data_restructure_plan.md, AUDIT-FINDINGS."
         ),
         conditions=_THIOETHER_CONDITIONS,
         ph=5.6,
@@ -1431,9 +1443,16 @@ ALKALINE_PRIORS: Tuple[Dict[str, Any], ...] = (
     {
         "quantity": "Ea, norfuraneol (M-2) net accumulation",
         "value_set_kj_mol": [121.1, 122.3, 104.9],
-        "ci95_kj_mol": [8.1, 19.5, 8.9],
-        "source_anchor": "Bornhorst et al. 2017b, LWT, Table 2 (1_R0.5_L / 1_R1_L / 2_R2_L)",
-        "dossier_anchor": "k3_final_parameter_inventory.md sec. A.3.6(i)",
+        # CORRECTED 2026-09-09 (bornhorst2017b_extraction.md, written when the PDF was read for the
+        # first time): these three dispersions are the paper's STANDARD ERRORS, not 95 % intervals.
+        # On n = 3 a 95 % interval is about four times the standard error, so the old key understated
+        # the uncertainty by roughly that factor. The key is renamed rather than rescaled: the paper
+        # prints standard errors and nothing else, and inventing an interval from them would be
+        # arithmetic the source does not license. These priors are carried, not operative.
+        "se_kj_mol": [8.1, 19.5, 8.9],
+        # ...and they are in Table 1 of that paper, not Table 2.
+        "source_anchor": "Bornhorst et al. 2017b, LWT, Table 1 (1_R0.5_L / 1_R1_L / 2_R2_L)",
+        "dossier_anchor": "k3_final_parameter_inventory.md sec. A.3.6(i); bornhorst2017b_extraction.md",
         "conditions": (
             "mashed-potato model gel with gellan gum and CaCl2, 80/90/100 C, "
             "come-up time 1.75 min excluded, pH 8.4-9.5"
