@@ -1652,6 +1652,40 @@ def mele_site_parameters(k_mele_site: float = 0.0, ea_kj_mol: Optional[float] = 
 
 MEASURED_SULFUR = {**MEASURED_SULFUR, **mele_site_parameters()}
 
+#: B25 (2026-09-09): the thiols' irreversible addition to the deoxypentosones. log10 k_add at 145 C and its
+#: barrier are both fitted; the bands are wide because nothing on disk measures a thiol-Michael step on an
+#: osone (the matrix layer's aldehyde brackets carry 15-30 kJ/mol; Stack 2018's thiol-quinone forward step 10.8).
+THIOL_ADDITION_BOUNDS_LOG10K: Tuple[float, float] = (-6.0, 0.0)
+THIOL_ADDITION_BOUNDS_EA: Tuple[float, float] = (10.0, 120.0)
+THIOL_ADDITION_DEFAULT_EA_KJ_MOL: float = 40.0
+
+
+def thiol_addition_parameters(k_add: float = 0.0, ea_kj_mol: Optional[float] = None) -> Dict[str, SulfurParameter]:
+    """
+    The B25 addition constant as a SulfurParameter (shared by the four ``ch_add_*`` steps). The DEFAULT is
+    zero: the steps carry no flux and every wave before B25 reproduces bit for bit. Pre-registration:
+    kinetic_core_b25_prereg.md sec. 2.
+    """
+    return {
+        "k_add": _sulfur_parameter(
+            "k_add", "thiol (MFT / FFT) + deoxypentosone (DPO / TDP) -> irreversible adduct (thiol-Michael; net)", 2,
+            k_ref=float(k_add), ea=(THIOL_ADDITION_DEFAULT_EA_KJ_MOL if ea_kj_mol is None else float(ea_kj_mol)),
+            evidence_class="derived_from_fit_data",
+            source_anchor=("B25 (kinetic_core_b25_prereg.md sec. 2): the third sink structure, after B17's reversible disulfide and "
+                           "saturable thioether were refused; the lipid papers' quench (Farmer 1990, Whitfield 1988: the thiols "
+                           "halved by unsaturated-carbonyl electrophiles) as the motivating observation"),
+            dossier_anchor=("results/validation/kinetic_core_b17_prereg.md sec. 6b; farmer1990_extraction.md; whitfield1988_extraction.md; "
+                            "schieberle2000_extraction.md (the 100 C reference pot the first-order sink cannot follow)"),
+            conditions="aqueous, pH 4.5-7, 100-145 C; irreversible; the adduct joins the terminal oligomer pool",
+            ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_addition", flags=("b25_thiol_addition", "fitted_here", "no_literature_value", "barrier_fitted"),
+            note="Zero until a B25 report supplies it.",
+        ),
+    }
+
+
+MEASURED_SULFUR = {**MEASURED_SULFUR, **thiol_addition_parameters()}
+
 
 # ---------------------------------------------------------------------------
 # (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four

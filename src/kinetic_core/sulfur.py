@@ -825,6 +825,20 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "ch_mele_from_ddp", {"DDP": 1}, {"FRAG_C": 5, "MELE": 1}, "k_mele_site",
         "B17a. 1,4-dideoxypentosone -> browning fragments + one electrophile site.",
     ),
+    # ---- B25 (2026-09-09): the thiol sink, variant (c) -----------------------------------------
+    # The meaty thiols add IRREVERSIBLY to the pot's own unsaturated carbonyls, the two deoxypentosones
+    # the lane carries while the sugar lasts; the adduct joins the terminal oligomer pool (OLG, C5 S1;
+    # the osone's carbons to FRAG_C). One shared second-order constant with its own fitted barrier;
+    # at the inert default of zero every wave before B25 reproduces bit for bit. Pre-registration:
+    # kinetic_core_b25_prereg.md.
+    Reaction("ch_add_mft_dpo", {"MFT": 1, "DPO": 1}, {"OLG": 1, "FRAG_C": 5}, "k_add",
+             "B25. MFT + 1-deoxypentosone -> irreversible adduct (thiol-Michael on the enol; net)."),
+    Reaction("ch_add_mft_tdp", {"MFT": 1, "TDP": 1}, {"OLG": 1, "FRAG_C": 5}, "k_add",
+             "B25. MFT + 3-deoxypentosone -> irreversible adduct."),
+    Reaction("ch_add_fft_dpo", {"FFT": 1, "DPO": 1}, {"OLG": 1, "FRAG_C": 5}, "k_add",
+             "B25. FFT + 1-deoxypentosone -> irreversible adduct."),
+    Reaction("ch_add_fft_tdp", {"FFT": 1, "TDP": 1}, {"OLG": 1, "FRAG_C": 5}, "k_add",
+             "B25. FFT + 3-deoxypentosone -> irreversible adduct."),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.

@@ -281,7 +281,7 @@ def main() -> int:
     }
     artifact_io.write_artifact(payload, OUT, render=render)
     print(payload["verdict"], "| T1", T1["pass"], T1["ratios_dex"], T1["still_rising_6_to_12_h"], "| T2", T2["pass"], T2["worst"]["growth_dex"],
-          "| T3", T3["pass"], T3["worst_dex"], "| T4", T4["median_fold"], "| T5", T5["pass"], "| T6", T6["pass"], T6.get("sigma_dex"), T6["slice_verdict"])
+          "| T3", T3["pass"], T3["worst_dex"], "| T4", T4["median_fold"], "| T5", T5["pass"], "| T6", T6["pass"], T6.get("sigma_dex"), {k: v["verdict"] for k, v in T6["slices"].items()})
     return 0
 
 

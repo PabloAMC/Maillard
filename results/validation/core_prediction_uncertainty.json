@@ -1832,7 +1832,7 @@
     "lane_networks": {
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so.",
-      "sulfur": "FULL_REACTIONS (102 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (106 steps) = trunk + sulfur, pH trajectory",
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term"
     },
     "lanes": [
@@ -3151,9 +3151,9 @@
     "generated_on": "2026-09-09",
     "git": {
       "branch": "reactions",
-      "commit": "489f9e5ff6cde8825b234c3f8fe3dda7113dfd2f",
+      "commit": "62fe149a0c5b585554af8d2512242f5d101c986e",
       "dirty": true,
-      "short": "489f9e5f"
+      "short": "62fe149a"
     },
     "inputs": [
       {
@@ -3674,7 +3674,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 275.0,
+    "wall_seconds": 212.0,
     "workers": 6
   }
 }

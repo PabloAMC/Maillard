@@ -1445,6 +1445,9 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
         if frozen.get("mele_site_log10_yield"):
             # B17a: log10 of the electrophile-site yield per osone decayed (a shipped B17a report or a draw)
             out["mele_site_log10_yield"] = {k: float(v) for k, v in frozen["mele_site_log10_yield"].items()}
+        if frozen.get("thiol_addition"):
+            # B25: the thiols' addition to the deoxypentosones, log10 k at 145 C and its barrier
+            out["thiol_addition"] = {k: float(v) for k, v in frozen["thiol_addition"].items()}
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1496,7 +1499,7 @@ def core_parameters(
         report = None
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
                 "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol", "oxygen",
-                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield"} <= set(override):
+                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield", "thiol_addition"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
         # B10: a report (or a draw) that carries the two route barriers uses them;
@@ -1551,6 +1554,15 @@ def core_parameters(
             ea_family = float(pick("decay_Ea_kJ_mol")["carbonyl_sink"])
             parameters.update(mele_site_parameters(k_mele_site=(10.0 ** float(site["mele_site_yield"])) * k_osone,
                                                    ea_kj_mol=ea_family))
+        # B25: the addition constant and its barrier from the report's (or a draw's) block; inert zero otherwise.
+        add: Dict[str, float] = {}
+        if report is not None and report.get("thiol_addition"):
+            add.update(report["thiol_addition"])
+        add.update(override.get("thiol_addition") or {})
+        if add:
+            from .parameters_sulfur import thiol_addition_parameters
+
+            parameters.update(thiol_addition_parameters(k_add=10.0 ** float(add["log10_k_add_145C"]), ea_kj_mol=float(add["ea_add_kj_mol"])))
     if lane == ACRYLAMIDE:
         report = None
         if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):

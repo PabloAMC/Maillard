@@ -110,6 +110,10 @@ def frozen_vector(report: Dict[str, Any]) -> np.ndarray:
     site = fr.get("mele_site_log10_yield") or {}
     if site:
         extra += [float(site["mele_site_yield"])]
+    # B25: the addition constant (log10) and its barrier, appended after everything else.
+    add = fr.get("thiol_addition") or {}
+    if add:
+        extra += [float(add["log10_k_add_145C"]), float(add["ea_add_kj_mol"])]
     return np.array(
         [fr["log10_k_ref_at_145C"][k] for k in B23.PARAM_ORDER]
         + [lumped]

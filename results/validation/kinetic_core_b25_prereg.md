@@ -62,3 +62,29 @@ Ship rule: SHIP if T1, T2 and T6 hold; T3 to T5 are reported. If it ships, the e
 report for the sulfur lane (the first change of the shipped thiol parameters since B9) and the
 introduction's section 7 is rewritten. If it does not ship, the record joins B17's two and the
 laboratory experiment in the introduction's section 8 is the remaining route.
+
+## 6. Outcome (2026-09-09, run the same day) — DO NOT SHIP; the third structure is refused as the first two were
+
+**What was built.** The four addition steps on one constant with its own barrier, inert at zero;
+the `thiol_addition` block through the engine and the Laplace vector; generator, ship rule, tests.
+
+**What happened.** Both starts converged to B16's optimum (cost 931.27 against 930.98) with the
+addition driven to its floor (log10 k_add -6.00) and its barrier to its ceiling (120 kJ/mol),
+which is the optimiser's way of switching the step off at every temperature: sigma unbounded, both
+slices bound-limited. The addition helps no row of B16's objective. T1, T2, T3 and T5 fail as for
+both B17 variants (the reference pot's MFT still peaks at six hours and falls, the fed-ribose row
+still moves 1.9 dex); T4 passes (Yiltirak median fold 13.7). Verdict by the rule: DO NOT SHIP.
+
+**What the three refusals say together.** Three sink structures have now been offered to the same
+64 rows and refused for three different reasons: the reversible disulfide because the model makes
+almost no disulfide (oxidant-limited); the saturable thioether because its source is dead at the
+optimum and its equilibrium releases the thiol when hot; the irreversible addition to the pot's own
+osones because the objective does not want it at any temperature. What they share is the objective:
+54 fed-intermediate rows at 145 °C from one laboratory, against seven within-study ratios at 100 °C.
+Any structure that slows the 100 °C loss also perturbs the 145 °C fed pots, and the fed pots win by
+weight of number. The next step is not a fourth structure on the same rows; it is either the
+experiment of the introduction's section 8 (the reference pot at 100 and 140 °C with the removal
+measured on fed thiols alone) or a pre-registration that re-weights the objective by laboratory
+rather than by row, which is a change of rule the owner would have to make, not a wave. The steps
+stay in the network at zero and the record is kept.
+

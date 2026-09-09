@@ -1330,3 +1330,14 @@ ran.
    the source and not in the arm, for want of the tetrahydropyridine branch and a pyrroline loss). Steps
    at zero, target refused by name, record kept; 2-acetyl-1-pyrroline enters the registry.
 
+## Amendment 34 — 2026-09-09 (Wave B25, the thiol sink, variant c: irreversible addition to the deoxypentosones)
+
+1. **NO NEW FIT ROW; TWO NEW COORDINATES.** B16's 64 rows unchanged. `k_add` (the thiols' irreversible
+   addition to the two deoxypentosones, four steps on one constant) and its barrier appended to the
+   vector; bands log10 −6 to 0 and 10 to 120 kJ/mol. Every B9 band kept; the first-order thiol sinks
+   stay free as in B16.
+2. **WHAT IS VALIDATED.** As Amendments 28 and 29: the Hofmann pH-5 bundles, Yiltirak 2026, Wang 2022,
+   Zhou 2023's shares (Zhang 2024's reported as figure-derived), Bolton 1994, the returned Hofmann rows.
+3. **INERT DEFAULT.** The four steps live in `sulfur.py` at zero unless a shipped report carries
+   `thiol_addition`; the verdict is in `kinetic_core_b25_ship_rule.md` and the prereg's section 6.
+

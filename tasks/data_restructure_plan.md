@@ -1369,7 +1369,11 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       the optimum (ARP / pentose steps, or the trunk's melanoidin) -- the unsaturated-carbonyl adducts of
       farmer1990 / whitfield1988 / mottram2002b (thiols halved by 6-15 g/L phospholipid) -- with the dimer
       share left to an INTERNAL oxidant (xu2010: N2 changes nothing). The oxidant supply stays a separate
-      suspect for the DIMER SHARE, not for the missing thiol.
+      suspect for the DIMER SHARE, not for the missing thiol. UPDATE 2026-09-09 (later): variant (c) RUN as B25,
+      DO NOT SHIP: k_add to its floor, Ea to its ceiling (switched off); cost = B16's. THREE structures refused on
+      the same 64 rows -> the objective's weighting (54 fed rows at 145 C from one lab vs 7 ratios at 100 C) is
+      what refuses any 100 C sink. OWNER DECISION needed: (i) run the section-8 experiment, or (ii) pre-register a
+      re-weighted objective (by laboratory, or Schieberle's ratios up-weighted), which is a rule change.
       Original entry: Reversible thiol dimerisation (disulfide pool re-releasing thiol,
       temperature-dependent equilibrium) and/or a sink scaling with the carbonyl/melanoidin pool; the
       pentose supply at 100 C (formation dries up at 6 h in the model, not in the pot); the TTCA return

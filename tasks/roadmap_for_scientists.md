@@ -114,7 +114,11 @@ osone decay, is switched off at the optimum (log10 k −8.6), and Stack 2018's m
 gives K = 0.45 M⁻¹ at 100 °C, so a reversible adduct holds under 5 % of the thiol when hot. Both
 pre-registered structures are refused; the next candidate is an irreversible addition to
 unsaturated carbonyls on a pool the lane's live flux makes (Farmer 1990, Whitfield 1988: a lipid's
-electrophiles halve the thiols), with the disulfide share left to an internal oxidant (Xu 2010).*
+electrophiles halve the thiols), with the disulfide share left to an internal oxidant (Xu 2010).
+Status 2026-09-09, later: that third structure ran as wave B25 and was refused too (the fit switched
+it off at every temperature). Three refusals on the same 64 rows: the remaining routes are the
+laboratory experiment of the introduction's section 8, or an owner's decision to weigh the
+objective by laboratory rather than by row.*
 
 **Why.** The meaty character the users want is the thiols, and the model loses them too fast at
 every temperature. The candidate table is written (`docs/validation/thiol_sink_candidates.md`).

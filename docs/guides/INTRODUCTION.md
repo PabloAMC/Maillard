@@ -184,6 +184,7 @@ in order, in plain words.
 | the glyoxal supply in water given its own route, from the Amadori compound to glucosone at a milk laboratory's rate, replacing the dry-glass entry | the pyrazine step's caveat: a sugar pot made a ten-thousandth of the glyoxal a laboratory measures | a glucose and amine pot now holds glyoxal within a factor of two of the measurement at 100 °C and inside the measured range at 130 °C; browning unchanged; the pyrazine total still three decades low, so that miss is not the glyoxal | yes, with the transfer band on every glyoxal and pyrazine answer |
 | methionine's chain added to the sugar path: methional as its Strecker aldehyde on the free dicarbonyls, then methanethiol and the disulfide, fitted on one laboratory's rates in a fruit-sugar pot | methional is the cooked-potato note at the top of the desirable list and no lane named it | the fit ran the methionine-to-glycine ratio to its ceiling and was still four decades short in that pot, while a second laboratory's methionine and glucose pot came out two decades too high: methional does not form from the free dicarbonyls; the second laboratory's fed Amadori compound says it forms from methionine's own Amadori compound | no; the finding names the next structure |
 | 2-acetyl-1-pyrroline from proline: the Strecker of proline to 1-pyrroline and its acylation by methylglyoxal, on one laboratory's fed yields | the bread-crust and popcorn note of extruded and baked products | the fed acylation fits within a factor of two; the chain from proline rises a thousandfold with the methylglyoxal charge where the source rises threefold, because the competing tetrahydropyridine branch and the pyrroline's own loss are not written | no; the acylation constant is kept in the record for the next structure |
+| the thiol removal made an irreversible addition to the pot's own sugar intermediates | the third form the two refusals above left standing, from the lipid papers | the fit switched the step off at every temperature: the 145 °C fed pots, fifty-four of the sixty-four rows, want no removal the 100 °C pot could use | no; three structures refused on the same rows points at the rows' weighting or at the laboratory, not at a fourth structure |
 
 ## 7. The one problem that matters most: where the thiols go
 
@@ -241,8 +242,12 @@ never forms, because the earlier fits had switched off the browning step it was 
 measured binding equilibrium lets the thiol go above 80 °C, so it could not have held it when hot
 (the saturating-adduct row of section 6). What both refusals leave standing is a third candidate the reading
 of the lipid papers supplies: an irreversible addition of the thiol to unsaturated carbonyls, the
-adducts that halve the thiols when a lipid is present, with the disulfide share left to an oxidant
-the pot makes for itself. That is the next step to pre-register.
+adducts that halve the thiols when a lipid is present. That was built and tested the same day as a
+third structure and refused too: the fit switched it off at every temperature, because the
+fifty-four fed pots at 145 °C outweigh the seven ratios at 100 °C in the objective, and any removal
+the 100 °C pot could use perturbs them. Three structures refused on the same rows say the next step
+is not a fourth structure. It is the experiment above, or a decision to weigh the objective by
+laboratory rather than by row, which is a change of rule and not a wave.
 
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
 comes from, scores your own measurements, calibrates itself to your laboratory from those

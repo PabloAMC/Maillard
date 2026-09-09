@@ -1,0 +1,349 @@
+{
+  "artifact": "kinetic_core_b25_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b25_ship_rule",
+    "generated_on": "2026-09-09",
+    "git": {
+      "commit": "62fe149a0c5b585554af8d2512242f5d101c986e",
+      "short": "62fe149a",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b25_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b25_fit_report.json",
+        "sha256": "80c509a9885b0791cc27f688db1818c73acf84bef324dce93caba494be7e8a1b"
+      },
+      {
+        "path": "results/validation/kinetic_core_b25_laplace_covariance.json",
+        "sha256": "e3841012ca617899885cd21f7dfad33c3ef839568b95a7fe6ddccaf7bf2080c1"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b25_prereg.md",
+  "rule": "SHIP if T1 (reference pot ratios within 0.5 dex and still rising 6 -> 12 h), T2 (no B9 row +0.3 dex) and T6 (the addition constant and its barrier identified, off their bounds, slices not flat) hold; T3-T5 reported",
+  "cost": 931.2676671387779,
+  "active_bounds": [
+    "k_dimer_mft",
+    "k_dimer_fft",
+    "k_pent_caramel",
+    "Ea_decay_thiol_sink",
+    "log10_k_add",
+    "Ea_add"
+  ],
+  "T1": {
+    "mft_ug_per_l": [
+      22.734535648966563,
+      55.34911369692027,
+      109.59895074094632,
+      95.9892634497295
+    ],
+    "fft_ug_per_l": [
+      1.9090055545415296,
+      7.626920275270425,
+      56.34091096268749,
+      59.53667604898592
+    ],
+    "ratios_dex": {
+      "MFT_360_over_30": -0.856791776384977,
+      "MFT_720_over_30": -0.9741039461725843,
+      "FFT_360_over_30": -0.27034601682556386,
+      "FFT_720_over_30": -0.3255665433906534
+    },
+    "still_rising_6_to_12_h": {
+      "MFT": false,
+      "FFT": true
+    },
+    "pass": false
+  },
+  "T2": {
+    "rows_compared": 51,
+    "worst": {
+      "row": "fed_ribose_h2s_MFT",
+      "b9_residual": 0.36986025664699385,
+      "b25_residual": -4.591972052922935,
+      "growth_dex": 1.8999503083241736
+    },
+    "n_over_0_3_dex": 16,
+    "pass": false
+  },
+  "T3": {
+    "zhou2023": {
+      "6.0": {
+        "model_mft_share_pct": 0.02963995811135344,
+        "zhou_mft_share_pct": 8.6,
+        "answered": true,
+        "dex": -2.462620865702165
+      },
+      "7.0": {
+        "model_mft_share_pct": 0.31262895711280264,
+        "zhou_mft_share_pct": 6.5,
+        "answered": true,
+        "dex": -1.31788415477074
+      },
+      "8.0": {
+        "model_mft_share_pct": 0.7154009299056147,
+        "zhou_mft_share_pct": 9.6,
+        "answered": true,
+        "dex": -1.1277217327135973
+      }
+    },
+    "zhang2024": {
+      "model_mft_share_pct": 0.38404660235224797,
+      "zhang_mft_share_pct": 8.676758571933545,
+      "answered": true,
+      "note": "the cysteine arm; methionine (the paper's methanethiol source) is not a precursor the core charges",
+      "dex": -1.3539735862382984,
+      "evidence": "figure_derived (zhang2024b_extraction.md); reported only"
+    },
+    "worst_dex": 2.462620865702165,
+    "worst_dex_zhou": 2.462620865702165,
+    "pass": false
+  },
+  "T4": {
+    "rows": [
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 6.88,
+        "predicted": 33.50076489156001,
+        "fold": 4.8692972226104665
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.28,
+        "predicted": 23.48753951302193,
+        "fold": 18.349640244548382
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 3.29,
+        "predicted": 41.668306906908576,
+        "fold": 12.66513887747981
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.46,
+        "predicted": 21.53795943077699,
+        "fold": 14.7520270073815
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 2.4,
+        "predicted": 49.91576927734612,
+        "fold": 20.798237198894217
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.68,
+        "predicted": 18.65725754525471,
+        "fold": 11.105510443603993
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "measured": 1.71,
+        "predicted": 57.68427186904723,
+        "fold": 33.73349232108025
+      },
+      {
+        "bundle": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "measured": 1.62,
+        "predicted": 15.573488631079346,
+        "fold": 9.613264587086016
+      }
+    ],
+    "median_fold": 13.708582942430656,
+    "pass": true
+  },
+  "T5": {
+    "minutes": [
+      30.0,
+      60.0,
+      90.0,
+      120.0,
+      150.0,
+      180.0
+    ],
+    "MFT": {
+      "ug_per_l": [
+        1718.6124840069174,
+        1114.6789485828424,
+        552.2070711732641,
+        267.8425806758148,
+        139.6909810157291,
+        82.31104614585003
+      ],
+      "peak_min": 30.0,
+      "decline_from_peak_dex": 1.3197198407234283
+    },
+    "FFT": {
+      "ug_per_l": [
+        520.5611378146833,
+        623.0915781105236,
+        609.540649716033,
+        569.2281418349907,
+        523.5930633885338,
+        479.257190454402
+      ],
+      "peak_min": 60.0,
+      "decline_from_peak_dex": 0.11398324377920063
+    },
+    "pass": false
+  },
+  "T6": {
+    "log10_k_add_145C": -5.99935042376376,
+    "ea_add_kj_mol": 119.95391064044922,
+    "band_log10k": [
+      -6.0,
+      0.0
+    ],
+    "band_ea": [
+      10.0,
+      120.0
+    ],
+    "on_bound": {
+      "log10_k_add": true,
+      "Ea_add": true
+    },
+    "sigma_dex": 24389.45452250456,
+    "sigma_ea": 2732809.3525724374,
+    "identified": {
+      "log10_k_add": false,
+      "Ea_add": false
+    },
+    "n_identified": 7,
+    "n_free": 25,
+    "slices": {
+      "log10_k_add": {
+        "cost_slice": {
+          "-1.0": 931.2676644303132,
+          "-0.5": 931.2676644303132,
+          "+0.0": 931.2676671387779,
+          "+0.5": 931.2694529243465,
+          "+1.0": 931.2750120344795
+        },
+        "verdict": "bound_limited"
+      },
+      "Ea_add": {
+        "cost_slice": {
+          "-30.0": 931.2712468667207,
+          "-15.0": 931.2688605546482,
+          "+0.0": 931.2676671387779,
+          "+15.0": 931.2675229130332,
+          "+30.0": 931.2675229130332
+        },
+        "verdict": "bound_limited"
+      }
+    },
+    "pass": false
+  },
+  "b9_reference": {
+    "T1": {
+      "mft_ug_per_l": [
+        65.89899103326962,
+        130.31141192694528,
+        36.37447210284323,
+        16.241426815084704
+      ],
+      "fft_ug_per_l": [
+        114.3194891208956,
+        446.2464052683525,
+        991.5585660786809,
+        468.0026020971709
+      ],
+      "ratios_dex": {
+        "MFT_360_over_30": -1.7979941506348263,
+        "MFT_720_over_30": -2.2078951029456637,
+        "FFT_360_over_30": -0.8021645937164703,
+        "FFT_720_over_30": -1.2074159427622306
+      },
+      "still_rising_6_to_12_h": {
+        "MFT": false,
+        "FFT": false
+      },
+      "pass": false
+    },
+    "T3": {
+      "zhou2023": {
+        "6.0": {
+          "model_mft_share_pct": 0.13005741212259678,
+          "zhou_mft_share_pct": 8.6,
+          "answered": true,
+          "dex": -1.820363343060675
+        },
+        "7.0": {
+          "model_mft_share_pct": 0.5910749327021759,
+          "zhou_mft_share_pct": 6.5,
+          "answered": true,
+          "dex": -1.041270815192744
+        },
+        "8.0": {
+          "model_mft_share_pct": 1.970346321062171,
+          "zhou_mft_share_pct": 9.6,
+          "answered": true,
+          "dex": -0.687728665706718
+        }
+      },
+      "zhang2024": {
+        "model_mft_share_pct": 0.4269228847475781,
+        "zhang_mft_share_pct": 8.676758571933545,
+        "answered": true,
+        "note": "the cysteine arm; methionine (the paper's methanethiol source) is not a precursor the core charges",
+        "dex": -1.3080080781910206,
+        "evidence": "figure_derived (zhang2024b_extraction.md); reported only"
+      },
+      "worst_dex": 1.820363343060675,
+      "worst_dex_zhou": 1.820363343060675,
+      "pass": false
+    },
+    "T4_median_fold": 115.21546269988467,
+    "T5": {
+      "minutes": [
+        30.0,
+        60.0,
+        90.0,
+        120.0,
+        150.0,
+        180.0
+      ],
+      "MFT": {
+        "ug_per_l": [
+          2512.11652926388,
+          692.8182304515265,
+          145.71543733975386,
+          32.697463520807474,
+          8.692116826422968,
+          2.7732319586479255
+        ],
+        "peak_min": 30.0,
+        "decline_from_peak_dex": 2.9570535847480848
+      },
+      "FFT": {
+        "ug_per_l": [
+          17184.65925850516,
+          7047.711596341671,
+          2370.8714603164985,
+          731.6088487862672,
+          215.2718680894128,
+          61.50086350553256
+        ],
+        "peak_min": 30.0,
+        "decline_from_peak_dex": 2.446259711716073
+      },
+      "pass": false
+    }
+  },
+  "verdict": "DO NOT SHIP"
+}
