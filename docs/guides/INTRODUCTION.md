@@ -2,7 +2,7 @@
 
 *For a reader who knows what the Maillard reaction is and nothing else. Each section is one or two
 figures and a few sentences. The figures are made from the repository's own records, so they change
-when the evidence changes. Updated 2026-09-08. Step-by-step reaction trees: [appendix](REACTION_TREES.md).
+when the evidence changes. Updated 2026-09-09. Step-by-step reaction trees: [appendix](REACTION_TREES.md).
 Every paper used: [sources](SOURCES.md).*
 
 The chemistry is known. The rates are measured in one temperature window, mostly by one laboratory
@@ -126,9 +126,10 @@ model does not make.*
 
 *The question a plant-based flavour scientist asks first. Of the twenty odorants the repository
 declares as the targets of a meaty plant-based flavour, the model names six with a rate; two more it
-reaches by a cited route with no rate; twelve it cannot name at all, and they are the Strecker
-aldehydes and the pyrazines beyond the first, whose per-amino-acid rates no paper on disk prints.
-Of the six off-notes it names three.*
+reaches by a cited route with no rate; twelve it cannot name at all. Most of the twelve are the
+Strecker aldehydes and the pyrazines beyond the first, whose per-amino-acid rates no paper on disk
+prints; the rest are sulfur heterocycles with no measured route. Of the six off-notes it names
+three.*
 
 ![Hexanal on the panel](../assets/thiol_sink/24_fat_path_hexanal.png)
 
@@ -146,8 +147,9 @@ makes far too little glyoxal and methylglyoxal in water. Every pyrazine answer c
 
 ## 6. How the model got here
 
-Every re-calibration was written down before it ran, with the test it had to pass. Most failed.
-This is the list, in order, in plain words.
+Every re-calibration was written down before it ran, with the test it had to pass. Six of the
+seventeen failed, and the failures are kept because each one narrowed the problem. This is the list,
+in order, in plain words.
 
 | what was tried | why | what happened | kept |
 |---|---|---|---|
@@ -183,10 +185,11 @@ alone cuts the error from 480 times to 18. Most of what looked like laboratories
 same removal problem.*
 
 The model removes thiols far faster than any pot does, at 100 °C and at 140 °C alike. One removal
-step with one temperature dependence cannot fit both, so the step needs a different form: either the
-disulfides give the thiol back, or the removal stops when it runs out of the partner it needs. Two
-smaller faults are also known: the ring intermediate that holds the sulfur opens about ten times
-too fast, and the formation steps have no pH dependence where the pots show a strong one.
+step with one temperature dependence cannot fit both, so the step needs a different form. The two
+obvious forms, the disulfides giving the thiol back and a removal that stops when it runs out of
+its partner, were both built and both refused; the figure below shows why. Two smaller faults are
+also known: the ring intermediate that holds the sulfur opens about ten times too fast, and the
+formation steps have no pH dependence where the pots show a strong one.
 
 ![The two refused removal steps](../assets/thiol_sink/28_two_refused_sinks.png)
 
@@ -216,12 +219,12 @@ removal step is reversible. Either result decides the next version.
 would give the removal step its first data from a third laboratory. The reversible removal step was
 built and tested against the existing series on 8 September 2026 and refused: the data drove it to
 zero, because the model holds a hundredth of the disulfide that two laboratories measure, its oxidant
-running out first (section 6, second-to-last row). That points at the oxygen supply for the
+running out first (the reversible-disulfide row of section 6). That points at the oxygen supply for the
 disulfide share, which is a different quantity from the missing thiol. The saturating removal step,
 on a pool that browning itself makes, was built and tested the next night and refused too: the pool
 never forms, because the earlier fits had switched off the browning step it was tied to, and the
 measured binding equilibrium lets the thiol go above 80 °C, so it could not have held it when hot
-(section 6, third-to-last row). What both refusals leave standing is a third candidate the reading
+(the saturating-adduct row of section 6). What both refusals leave standing is a third candidate the reading
 of the lipid papers supplies: an irreversible addition of the thiol to unsaturated carbonyls, the
 adducts that halve the thiols when a lipid is present, with the disulfide share left to an oxidant
 the pot makes for itself. That is the next step to pre-register.
@@ -266,6 +269,13 @@ is untouched; the calibration is a file you apply.*
 | fold error | measured over predicted, or the reverse, whichever is larger; 1 is perfect, 3 is the working threshold |
 | removal, sink | the steps that take an aroma compound out of the pot once it has formed |
 | dossier | the repository's re-typed record of one paper |
+| decade, dex | a factor of ten; 0.3 decades is twofold, 3 decades a thousandfold |
+| refusal | the model declining to give a number, with the reason: no route, no rate, or a compound it cannot name |
+| declared assumption, declared extrapolation | a number the model uses outside where it was measured, printed with every answer that depends on it |
+| rule, hypothesis layer | a reaction drawn in a cited paper, written as a structural transformation with a test case that must fire and one that must not; it places routes, never rates |
+| site, protein matrix | a protein's reactive groups (free thiol, disulfide, amine) counted per gram from measurements, charged into the pot when a loading is stated |
+| response factor | the constant offset between one laboratory's instrument and the model's scale, set by that laboratory's own levels during calibration |
+| resolved | a ratio between two recipes large enough to clear the same-sample scatter of the analytical method |
 
 ## Sources
 
@@ -284,3 +294,4 @@ made from the repository's records. Where each figure's numbers come from:
 | section 7, second pot | Yiltirak et al. 2026, Food Res. Int. | `yiltirak2026_extraction.md` |
 | the trees | the model's reaction lists | `scripts/generators/build_reaction_tree.py`, [REACTION_TREES.md](REACTION_TREES.md) |
 | section 8: what the rules propose | the cited reaction rules and the species' structures | `data/lit/reaction_rules.yml`, `data/species/structures.yml`, `results/validation/network_hypotheses_prereg.md` |
+| section 4: the hypothesis layer; section 5: the declared targets, hexanal, the pyrazine step; section 7: the two refused sinks; section 8: the protein matrix, the calibration | `network_hypotheses.json`; `explain` over the two target lists and the panel scorecard; the pyrazine and sink ship rules; the engine run on the protein matrices; the Reading ladder through `calibrate` | `scripts/generators/build_story_figures.py`, `results/validation/kinetic_core_b18_ship_rule.json`, `kinetic_core_b17_ship_rule.json`, `kinetic_core_b17a_ship_rule.json`, `data/species/protein_matrices.yml`, `docs/examples/reading_2026_ladder.yml` |
