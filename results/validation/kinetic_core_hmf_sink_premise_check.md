@@ -65,3 +65,25 @@ backlog in its place, both better-targeted than the original —
    reactions in this whole area.
 2. **The deoxyosone supply.** The four amine pots miss by 2–6×, and neither end of the HMF step is
    in doubt. That points at how much 3-deoxyglucosone the trunk makes, which is a different wave.
+
+---
+
+## Correction, 2026-09-11: the amine-free route EXISTS, and that changes item 1 above
+
+The section "Where the gap actually is" says an amine-free pot "makes HMF by acid-catalysed dehydration
+of the sugar, and this model has no such route". **That is wrong.** The trunk carries `r_glc_tdg`
+(glucose → 3-deoxyglucosone, `parameters_furanic.k_glc_tdg`, Kocadagli & Gokmen 2016), the amine-free
+caramelisation entry that B7 added precisely so that a glucose-only pot could be answered; the
+Steinhagen bundle's own note expects "a structural zero from the network", and the model does not
+give one — it gives 1459 µg/L, which is that route running.
+
+What is true is narrower and more useful. The constant was measured in a **freeze-dried amorphous
+glucose melt at 160–200 °C, pH not measurable**, and it carries **no pH term**. The Steinhagen pot is
+**aqueous, pH 4.36, 121 °C**. Acid-catalysed sugar dehydration is strongly pH-dependent, so asking a
+melt constant with no pH term about an aqueous pot two pH units below neutral is an extrapolation
+across matrix AND pH, and 11.9× under is the plausible size of it.
+
+So backlog item 1 is re-stated: **not** "refuse the amine-free pot", which would refuse a pot the model
+has a route for, but **"the amine-free entry needs a pH term with an aqueous source"**. Sugar
+dehydration to HMF in acid is among the best-measured reactions in this area, and none of it is on
+disk — no number without a dossier. Item 2 (the deoxyosone supply in the four amine pots) stands.

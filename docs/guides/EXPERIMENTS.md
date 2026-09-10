@@ -36,8 +36,9 @@ lands within threefold of a measurement is what the next pre-registered wave fin
 ### 1. Where the thiols go: one pot, two temperatures, fed and unfed in parallel
 
 **The question.** The model removes the meaty thiols far faster than any real pot does, at 100 °C and
-at 140 °C alike. One removal step with one temperature dependence cannot fit both. Four different
-structures have now been built for that step and all four refused.
+at 140 °C alike. One removal step with one temperature dependence cannot fit both. Five different
+structures have now been built for that step and all five refused — the fifth without a fit, because
+its decisive test turned out to be unreachable by construction (see below).
 
 **Why it cannot be answered by reading.** Four laboratories' papers have been read against this and
 none measures a removal rate on a fed thiol with nothing forming. The one relevant storage study is a
@@ -53,11 +54,21 @@ disulfides in the same run**, plus residual sugar, residual cysteine and the fin
 100 °C under nitrogen.
 
 **Add one arm the earlier version of this list did not have.** A fifth set of vials at 140 °C with
-the fed thiol plus 2,3-pentanedione at 10 mmol/L. That single addition tests the mechanism the newest
-pre-registration rests on, which is that the pot's own diketones are what oxidise the thiol to its
+the fed thiol plus 2,3-pentanedione at 10 mmol/L. That single addition tests the mechanism the fifth
+structure rested on, which is that the pot's own diketones are what oxidise the thiol to its
 disulfide. Four papers were fetched to find a rate for that step and not one supplies one: every
 constant they print belongs to a competing reaction that makes an adduct instead. So this arm is
 currently the only way to get the number.
+
+**What the fifth structure found before it was fitted, and why this arm now matters more.** Building
+the diketone oxidant into the model showed the disulfide shortfall is two different problems wearing
+one name. In the pots where no oxidant was ever charged, supplying one from the diketones works — but
+only if every mercaptoketone-forming event oxidises a thiol, the physical ceiling. In the pots that
+already carry air, the model uses under one per cent of its oxidant and still makes ten times too
+little disulfide: there the shortfall is the dimerisation *rate*, and that rate cannot be raised
+because the same step would then destroy a pure thiol in buffer, which Kumazawa measured surviving.
+So the pure-thiol arm and the pure-thiol-plus-diketone arm above are no longer a side check; together
+they are the measurement that separates a rate the model has wrong from an oxidant it lacks.
 
 **What the model predicts today.** The fed thiol decays to essentially zero, and the reacting pot
 peaks after about an hour and then falls. Both are almost certainly wrong.
@@ -186,6 +197,14 @@ refused rows become answerable.** Nothing else on this page unlocks that many fo
 The general rule is not specific to this model: **a formation measurement without its own blank
 cannot be told apart from a storage measurement.** If your material sat in a warehouse for six
 months, some of what you are about to attribute to your process was in the bag when you opened it.
+
+**One aqueous rate for sugar dehydration.** The model's only amine-free routes from a sugar to its
+deoxyosones are constants measured in a dry glucose melt at 160–200 °C, with no pH term, and they are
+asked about aqueous pots at pH 4–8. Scaling them tenfold, as a probe and not a fit, moves four of the
+five hydroxymethylfurfural rows on the panel inside threefold and halves both furanone misses. Glucose
+to 3-deoxyglucosone in water at 100–140 °C is among the best-measured reactions in this field; a
+single aqueous determination, read from its paper, is worth more to this model than any experiment
+above except the first. The forecast is on record before the reading: 5–20× above the melt values.
 
 **Numbers behind figures.** Two published data sets that bear directly on the thiol problem exist only
 as figures. Their authors' underlying numbers would give that step its first data from a third

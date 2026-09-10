@@ -1040,6 +1040,14 @@ The evidence, in the order it was found:
    `"twin-screw extruder"`, so its conditions are a process and not an analysis. Whatever is wrong
    with 4 247x there, it is not this.
 
+   **Looked at 2026-09-11, and it is the process, under-declared.** The bundle's 130 C / 25 s is the
+   DIE zone and the residence time; an extruder heats the melt through barrel zones before the die,
+   and the source (Ma 2024, on disk only as a second-hand Europe PMC text in the research corpus)
+   prints no zone profile here. The engine can take a multi-zone `ThermalProgram` (the extrusion
+   example in docs/examples), so the fix is a declared profile from the paper, not a model change --
+   and without the PDF nothing can be declared. Left as it is, named: an extrusion row scored on its
+   die zone alone is scored on a fraction of its thermal load.
+
 - [x] **DONE 2026-09-04. Invert the envelope's sampling rule: unidentified => SAMPLED over its
       declared band, not fixed.** Shipped, with a NEGATIVE result on its stated goal that is worth
       more than the change: `uncertainty.unidentified_prior` draws a free-but-unpinned coordinate

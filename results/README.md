@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **464**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **465**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -115,6 +115,7 @@ Tracked files: **464**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b2_4_members/` (18 files) | B2.4 optimiser members (per weighting and start); read back by the B2.4 fit generator's consolidation. |
 | `kinetic_core_b30_ship_rule.*` (2): `kinetic_core_b30_ship_rule.json`, `kinetic_core_b30_ship_rule.md` | Wave B30's single gating test, run BEFORE any constant was fitted: the model must at least fall in thiol from pH 4.5 to 6.5 on the one pot measured at both. It rises, so nothing was fitted, and the artifact attributes why (`generate_kinetic_core_b30_ship_rule.py`). |
 | `kinetic_core_b32_premise_check.*` (1): `kinetic_core_b32_premise_check.md` | Why wave B32 was never pre-registered or run. Three probes, nothing fitted: `k_ama_g` cannot reverse the two pots' order at any value over five decades because the Amadori step is shared, `k_glc_g` is structurally dead at 100 C, and run to matched extent the two pots branch identically (55.4 % against 54.6 %). There was no branching asymmetry to refit. |
+| `kinetic_core_b33_prediction.*` (1): `kinetic_core_b33_prediction.md` | A pre-registered PREDICTION for a wave that cannot be run until a source is read: the three amine-free sugar entries (dry-melt constants with no pH term) are about ten times too slow in water. A x10 probe moves four of the five HMF hold-out rows inside 3x and halves both DMHF misses; the forecast for an aqueous measurement is 5-20x above the melt values, at 55 %. |
 | `kinetic_core_b4_frozen_predictions.json` | B4 predictions frozen before the hold-out was scored; read by `generate_kinetic_core_b4_fit.py` and `parameters_matrix.py`. |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b9`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
