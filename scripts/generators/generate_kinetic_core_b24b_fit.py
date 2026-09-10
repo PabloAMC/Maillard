@@ -168,7 +168,7 @@ def checks(x) -> Dict[str, Any]:
     ref = None
     ladder = {}
     for ph, ug in sorted(ATHP_PH_LADDER_UG.items(), key=lambda kv: float(kv[0])):
-        run = _run(x, {"PYRL": 2.0, "HA": 2.0}, ph=float(ph))
+        run = _run(x, {"PYRL": 2.0, "ACETOL": 2.0}, ph=float(ph))
         ladder[ph] = {"printed_ug": ug, "model_athp_mmol_l": float(run.series("ATHP")[-1])}
     ref = ladder.get("7.0", {}).get("model_athp_mmol_l") or 0.0
     ref_ug = ATHP_PH_LADDER_UG["7.0"]

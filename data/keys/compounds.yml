@@ -214,6 +214,17 @@ compounds:
   - panel:display_name
   - panel:key
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_acetyltetrahydropyridine
+  display_name: 2-Acetyl-1,4,5,6-tetrahydropyridine
+  kind: molecule
+  smiles: CC(=O)C1=NCCCC1
+  inchikey: GNZWXNKZMHJXNU-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C1=NCCCC1
+  aliases:
+  - 2-acetyltetrahydropyridine
+  - athp
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 2_ethyl_3_5_dimethylpyrazine
   display_name: 2-Ethyl-3,5-dimethylpyrazine
   kind: molecule
@@ -901,6 +912,18 @@ compounds:
   - henry_constants
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: hydroxyacetone
+  display_name: Hydroxyacetone
+  kind: molecule
+  smiles: CC(=O)CO
+  inchikey: XLSMFKSTNGKWQX-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)CO
+  aliases:
+  - 1-hydroxy-2-propanone
+  - acetol
+  - hydroxy-2-propanone
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: imp
   display_name: Inosine 5'-monophosphate (IMP)
   kind: molecule

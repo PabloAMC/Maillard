@@ -75,6 +75,13 @@ SEEDS: List[Dict[str, Any]] = [
     dict(id="furan", display_name="Furan", kind="molecule", smiles="c1ccoc1"),
     dict(id="furosine", display_name="Furosine", kind="molecule", smiles="NC(CCCCNCC(=O)c1ccco1)C(=O)O", identity_note="alpha-carbon stereocentre omitted"),
     dict(id="heptanal", display_name="Heptanal", kind="molecule", smiles="CCCCCCC=O"),
+    # WAVE B24b (2026-09-10): the branch that refused B24. Hydroxyacetone is the committed
+    # precursor of the tetrahydropyridine and of nothing else; the tetrahydropyridine is the
+    # competing product 2-acetyl-1-pyrroline is measured against.
+    dict(id="hydroxyacetone", display_name="Hydroxyacetone", kind="molecule", smiles="CC(=O)CO",
+         aliases=["acetol", "1-hydroxy-2-propanone", "hydroxy-2-propanone"]),
+    dict(id="2_acetyltetrahydropyridine", display_name="2-Acetyl-1,4,5,6-tetrahydropyridine",
+         kind="molecule", smiles="CC(=O)C1=NCCCC1", aliases=["athp", "2-acetyltetrahydropyridine"]),
     # ADDED 2026-09-09 from the reading audit: five compounds the corpus measures and
     # names -- four of them in the pea-beverage panel and one in the furanic channel --
     # that had no registry id, so nothing could refer to them by a stable name.

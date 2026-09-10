@@ -4,8 +4,8 @@
     "artifact": "kinetic_core_b24b_ship_rule",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "0b182c86ab8fc538012b786ec5ee76b03356c3b3",
-      "short": "0b182c86",
+      "commit": "0aaecdffa8b8dbc629d4c770522725672704aa0a",
+      "short": "0aaecdff",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/kinetic_core_b24b_fit_report.json",
-        "sha256": "bfd14704708eb159254bb4dd10169e5f7dd38669200697f70600e80ee4870e1c"
+        "sha256": "cde9a597b63ee7eab6a59903f1d76f72bb3f464c864058fd1bd9603e05661eef"
       }
     ]
   },

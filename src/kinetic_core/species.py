@@ -233,8 +233,11 @@ SPECIES: Tuple[Species, ...] = (
     # for the METHYLGLYOXAL, and the two fates are EXCLUSIVE -- Schieberle & Hofmann 2005 state in
     # words that hydroxyacetone gives only the tetrahydropyridine and methylglyoxal only the
     # pyrroline product. That exclusivity is why the shape is a ratio and not a level.
-    Species("HA", "hydroxyacetone (acetol)", 3, 0, "intermediate", True,
-            "B24b. The other half of proline's Strecker on methylglyoxal, which B24 routed to the "
+    Species("ACETOL", "hydroxyacetone (acetol)", 3, 0, "intermediate", True,
+            "B24b. NAMED ACETOL AND NOT 'HA' ON PURPOSE: the sulfur lane already carries HA for "
+            "hydroxyacetALDEHYDE, a C2, and this is hydroxyacetONE, a C3. The first draft of this "
+            "wave used HA and the atom-count guard caught the collision in one run. "
+            "The other half of proline's Strecker on methylglyoxal, which B24 routed to the "
             "fragment pool. It is a species here because it is the committed precursor of the "
             "TETRAHYDROPYRIDINE and of nothing else."),
     Species("ATHP", "2-acetyl-1,4,5,6-tetrahydropyridine", 7, 1, "product", True,
@@ -247,7 +250,7 @@ SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
 TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL",
-                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "HA", "ATHP")
+                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "ACETOL", "ATHP")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 

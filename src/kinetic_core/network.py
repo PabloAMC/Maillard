@@ -444,14 +444,14 @@ METHIONINE_REACTIONS: Tuple[Reaction, ...] = (
 #: kinetic_core_b24_prereg.md; constants in parameters_proline.py.
 PROLINE_REACTIONS: Tuple[Reaction, ...] = (
     Reaction(
-        "r_mgo_pro", {"MGO": 1, "PRO": 1}, {"PYRL": 1, "HA": 1, "FRAG_C": 1}, "k_mgo_pro",
+        "r_mgo_pro", {"MGO": 1, "PRO": 1}, {"PYRL": 1, "ACETOL": 1, "FRAG_C": 1}, "k_mgo_pro",
         "B24, AMENDED BY B24b (2026-09-10). methylglyoxal + proline -> 1-pyrroline + HYDROXYACETONE + CO2 "
         "(Strecker of a secondary amine; the ring nitrogen stays in the pyrroline). B24 routed the "
         "hydroxyacetone to the fragment pool, which is why its arm had no competing branch; it is a species "
         "now. Carbon closes as 3 + 5 = 4 + 3 + 1. FITTED on Hofmann & Schieberle 1998b Table 9.",
     ),
     Reaction(
-        "r_pyrl_ha_athp", {"PYRL": 1, "HA": 1}, {"ATHP": 1}, "k_ha_athp",
+        "r_pyrl_ha_athp", {"PYRL": 1, "ACETOL": 1}, {"ATHP": 1}, "k_ha_athp",
         "B24b. 1-pyrroline + hydroxyacetone -> 2-acetyltetrahydropyridine. THE BRANCH IS EXCLUSIVE AND THE "
         "SOURCE SAYS SO IN WORDS: Schieberle & Hofmann 2005 state that hydroxyacetone gives only this product "
         "and methylglyoxal only 2-acetyl-1-pyrroline, so the two are not competing rates on one substrate -- "

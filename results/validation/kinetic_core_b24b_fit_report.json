@@ -5,8 +5,8 @@
     "artifact": "kinetic_core_b24b_fit_report",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "0b182c86ab8fc538012b786ec5ee76b03356c3b3",
-      "short": "0b182c86",
+      "commit": "0aaecdffa8b8dbc629d4c770522725672704aa0a",
+      "short": "0aaecdff",
       "branch": "reactions",
       "dirty": true
     },

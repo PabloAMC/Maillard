@@ -151,3 +151,11 @@ The two species and three steps stay in the network at zero. `parameters_proline
 empty and `B24B_SHIPPED` is False, so nothing is installed and 2-acetyl-1-pyrroline stays refused
 with B24's verdict. What B24b adds to the record is that the branch is the right mechanism, that a
 first-order pyrroline loss is the wrong sink, and that B18's pH term does not transfer to this step.
+
+### A collision the guards caught, worth one line
+
+The first draft named hydroxyacetone `HA`. The sulfur lane already carries `HA` for
+hydroxyacet**ALDEHYDE**, a C2, where this is hydroxyacet**ONE**, a C3. The atom-count guard in
+`tests/unit/test_species_structures.py` failed on the first run with `('HA', (2,0,0), (3,0,0))`, and
+the trunk-only guard failed beside it. Renamed `ACETOL`. Two species sharing a key across two lanes
+would have been a silent corruption of whichever lane read it second, and it cost one test run.

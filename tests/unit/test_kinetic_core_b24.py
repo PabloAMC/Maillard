@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -18,12 +19,39 @@ def _pot(precursors, t_c=100.0, minutes=30.0, ph=7.0):
     return FormulationSpec(name="pot", precursors=precursors, process=ProcessSpec(thermal=ThermalProgram.isothermal(t_c, minutes), ph=ph))
 
 
-def test_the_two_steps_exist_balance_and_are_trunk_only():
-    assert set(network.PROLINE_REACTION_KEYS) == {"r_mgo_pro", "r_pyrl_ap"}
+REPO = Path(__file__).resolve().parents[2]
+
+
+def test_the_steps_exist_balance_and_are_trunk_only():
+    """WIDENED BY WAVE B24b (2026-09-10): two steps became four, and two species became five."""
+    assert set(network.PROLINE_REACTION_KEYS) == {
+        "r_mgo_pro", "r_pyrl_ap", "r_pyrl_ha_athp", "r_pyrl_loss"}
     network.validate_balance(network.TRUNK_REACTIONS)
-    assert list(species.SPECIES_KEYS)[-3:] == ["PRO", "PYRL", "AP"]
+    assert list(species.SPECIES_KEYS)[-5:] == ["PRO", "PYRL", "AP", "ACETOL", "ATHP"]
     from src.kinetic_core.species_sulfur import SULFUR_STATE_KEYS
-    assert not {"PRO", "PYRL", "AP"} & set(SULFUR_STATE_KEYS)
+    assert not {"PRO", "PYRL", "AP", "ACETOL", "ATHP"} & set(SULFUR_STATE_KEYS)
+
+
+def test_b24b_is_inert_and_its_loss_is_refuted_not_merely_unfitted():
+    """
+    The finding B24b exists for. Its 1-pyrroline loss ran to a bound, and a bound normally means
+    "widen it". It was tested instead: a FIRST-ORDER loss moves the source's two experiments
+    together at every rate, while the source demands they differ by 428x per pyrroline. The
+    structure is refuted, so nothing is installed and the band is not widened.
+    """
+    from src.kinetic_core.parameters_proline import (
+        B24B_SHIPPED, FROZEN_B24B, PROLINE_B24B_COORDINATES, PROLINE_PARAMETERS)
+
+    assert B24B_SHIPPED is False and FROZEN_B24B == {}
+    for key in ("k_ha_athp", "k_pyrl_loss"):
+        assert PROLINE_PARAMETERS[key].k_ref == 0.0, key
+    assert set(PROLINE_B24B_COORDINATES) == {"log10_k_ha_athp_100C", "log10_k_pyrl_loss_100C"}
+    ship = json.loads((REPO / "results/validation/kinetic_core_b24b_ship_rule.json").read_text())
+    assert ship["verdict"] == "DO NOT SHIP"
+    # the ordering of the switch DID come out right; that is the half that worked
+    assert ship["T1"]["ordering_increasing"] is True
+    assert ship["T1"]["pass"] is False          # and the magnitude did not
+    assert ship["T3"]["pass"] is True           # B24's fed rows survived the new sinks
 
 
 def test_the_record_matches_the_report_and_nothing_is_installed():
