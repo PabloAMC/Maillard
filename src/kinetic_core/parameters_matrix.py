@@ -679,17 +679,32 @@ BINDING_AT_PROCESS_TEMPERATURE: Mapping[str, str] = {
     ),
 }
 
-#: FIVE INDEPENDENT DETERMINATIONS OF THE CHAIN-LENGTH SLOPE, AND THE SHIPPED VALUE IS AT THE TOP.
-#: The registry ships 2.81x/CH2, the geometric mean of Andriot's 2.72 and Damodaran's 2.9. Three
-#: more determinations were read on 2026-09-09 and they sit lower: Aspelund's 2.23 (dry, 90 C),
-#: Crowther's 1.90 to 2.15 (dry, and INVARIANT to every processing treatment he applied), and Guo's
-#: 2.86 on native protein, which is within 2 % of the shipped value and is the closest independent
-#: confirmation the constant has. The cluster is 1.9 to 2.9 with most of the mass at 2.0 to 2.4, and
-#: the two determinations supporting 2.81 are both native-protein, high-affinity cases.
-#: NOTHING IS CHANGED HERE. Moving a shipped constant is a wave, the three new determinations are
-#: dry or cold-read, and this layer's rule is that the slope applies to BINDING CONSTANTS in the
-#: same method family. What is recorded is that the shipped value is at the top of its own evidence
-#: rather than in the middle of it.
+#: SIX DETERMINATIONS OF THE CHAIN-LENGTH SLOPE, AND THE SHIPPED VALUE IS CONFIRMED, NOT STRETCHED.
+#:
+#: CORRECTED 2026-09-10. When these were first written up the same day they were read, the summary
+#: said the shipped 2.81 "sits at the TOP of its own evidence" because three new readings came in
+#: at 1.90, 2.15 and 2.23. That framing pooled across METHOD FAMILIES, which is the one thing this
+#: layer's own rule forbids -- the same rule that keeps a dialysis aldehyde constant out of a
+#: headspace pool. Split the six the way the rule requires and the picture inverts:
+#:
+#:   AQUEOUS, which is the family the slope is applied in:
+#:       Andriot 2000 beta-lactoglobulin, headspace, 30 C   2.72
+#:       Damodaran 1981 soy, dialysis, 25 C                 2.90
+#:       Guo 2019 soy, native protein, 37 C                 2.86   <- read 2026-09-09
+#:   geometric mean 2.826, spread 1.07x across three proteins, three methods and 38 years.
+#:
+#:   DRY, gas-solid chromatography on a powder, a different family entirely:
+#:       Aspelund 1983 soy, 90 C                            2.23
+#:       Crowther 1980 soy, 60-80 C                    1.90-2.15   (INVARIANT to every treatment)
+#:
+#: So the aqueous three agree to 7 % and the shipped 2.81 sits in the MIDDLE of them, not at the
+#: top; Guo is an independent third determination landing within 2 % of it. The dry pair is lower
+#: and internally consistent, and it is measuring adsorption onto a powder surface rather than
+#: partition into a hydrated protein -- which is exactly why the rule separates them, and why the
+#: two families disagreeing by about 1.3x is a result about method rather than about chain length.
+#: NOTHING IS CHANGED, and now for a better reason than before: the constant is confirmed.
+CHAIN_LENGTH_SLOPE_AQUEOUS_FAMILY: Tuple[float, ...] = (2.72, 2.90, 2.86)
+CHAIN_LENGTH_SLOPE_DRY_FAMILY: Tuple[float, ...] = (2.23, 1.90, 2.15)
 CHAIN_LENGTH_SLOPE_FIVE_DETERMINATIONS: Mapping[str, float] = {
     "andriot2000_blg_headspace_30C": 2.72,
     "damodaran1981_soy_dialysis_25C": 2.9,
@@ -728,6 +743,23 @@ CHAIN_LENGTH_SLOPE_SOURCE = (
 #: CAP on the reversible term's share of any observed log-shift, and the layer
 #: refuses to report a reversible explanation above it.
 REVERSIBLE_LOG_SHIFT_CEILING: float = 0.25
+#: CAN THIS CAP BE RE-DERIVED? NO, AND THE REASON IS A RULE, NOT A GAP IN THE READING (2026-09-10).
+#: Wave B26 pushed the reversible term through this cap for the first time on a real hold-out row
+#: (44.2 % of the hexanal log-shift against the ~25 % here), and the wave's own record says the cap
+#: was computed from ONE compound in beef and one dairy protein and may not transfer to a plant
+#: isolate. Re-deriving it was put on the backlog. It cannot be done:
+#:   * The beef leg is Brewer 1995, a DECLARED HOLD-OUT, reclassified `dose_added_pre_cook`. Its
+#:     numbers are in this package's hold-out firewall literal list. Re-deriving a shipped cap from
+#:     it would be reading the hold-out, which is the one thing this repository does not do.
+#:   * Re-deriving it on a PLANT matrix needs a paired water/plant-protein odour threshold, and
+#:     PAIRED_THRESHOLD_EVIDENCE records that the corpus holds none -- six plant-protein papers were
+#:     read and every one computes odour activity in a plant matrix from a WATER threshold.
+#: So this cap stays at 0.25, the flag stays, and it fires on the hexanal row. What would settle it
+#: is the sensory panel in docs/guides/EXPERIMENTS.md, experiment 3, and nothing short of it.
+REVERSIBLE_LOG_SHIFT_CEILING_CANNOT_BE_REDERIVED = (
+    "Its beef leg is a declared hold-out and its plant-matrix replacement does not exist in the "
+    "corpus. Experiment 3 of docs/guides/EXPERIMENTS.md is the only route."
+)
 REVERSIBLE_LOG_SHIFT_CEILING_SOURCE = (
     "Amendment 6 ruling 2 (meynier2004_extraction.md sec. 9): reversible 25.4 % "
     "+ covalent 0.06 % = 25.5 % of the 1 304x hexanal log-shift on a "

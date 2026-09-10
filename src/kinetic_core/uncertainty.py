@@ -92,6 +92,10 @@ LAPLACE_FLAT = "unidentified_direction_in_laplace_covariance"
 #: The covariance of the SHIPPED sulfur wave (B9 since 2026-09-03): the file beside the
 #: fit report the engine reads, named kinetic_core_<wave>_laplace_covariance.json.
 LAPLACE_PATH = data_paths.VALIDATION_DIR / engine._B2_FIT_REPORT.name.replace("_fit_report.json", "_laplace_covariance.json")
+#: ENV-B18 (2026-09-10): the pyrazine step's own fit report, which this envelope never read.
+_B18_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b18_fit_report.json"
+#: A coordinate the fit was free to move and could not pin, drawn flat across its DECLARED band.
+UNIDENTIFIED_FLAT = "unidentified_direction_flat_across_its_declared_band"
 
 # ---------------------------------------------------------------------------
 # Unidentified coordinates (2026-09-04)
@@ -635,6 +639,87 @@ def sulfur_joint_draw(rng: np.random.Generator) -> Optional[Dict[str, Any]]:
     return {"maillard_blocks": blocks, "ph_drift": drift, "coords": coords}
 
 
+#: ENV-B18 (2026-09-10). The pyrazine step's coordinates, and the two the engine cannot yet take.
+#: The order is the order the B18 fit report's Laplace vectors are in; it is asserted, not assumed.
+_B18_COORDINATES = (
+    "log10_k_go_ak_100C", "ea_go_ak_kj_mol",
+    "log10_k_mgo_ak_100C", "ea_mgo_ak_kj_mol",
+    "ph_slope_above_7_decades_per_unit", "ph_slope_below_7_decades_per_unit",
+)
+#: The four the engine's `pyrazine` override block accepts. The two pH slopes are module-level
+#: constants read where the pH shape is applied, not entries in the parameter dict, so the envelope
+#: cannot move them without a change to the parameter path -- which is a wave, not a defect fix.
+_B18_SAMPLABLE = _B18_COORDINATES[:4]
+B18_UNSAMPLED_REASON = (
+    "IDENTIFIED AND STILL NOT SAMPLED, and the interval is narrower for it. This coordinate is a "
+    "module-level constant in parameters_pyrazine, not a member of the `pyrazine` override block "
+    "the engine accepts, so the envelope has no way to move it. The consequence, stated rather "
+    "than left to be discovered: every pyrazine interval is still too narrow AWAY FROM pH 7, and "
+    "correctly wide AT pH 7, where both slopes contribute nothing by construction."
+)
+
+
+def _b18_priors() -> List[CorePrior]:
+    """
+    ENV-B18 (2026-09-10). The pyrazine step's own spread, which this envelope never read.
+
+    THE DEFECT THIS CLOSES. `kinetic_core_b18_fit_report.json` has carried a Laplace sigma for the
+    two Strecker constants since 2026-09-08 -- 0.082 and 0.075 dex -- and the priors table had no
+    row for the step at all. So every pyrazine interval the tool published was the trunk's interval
+    with the step's own spread missing: too narrow, in the direction that flatters the model, with
+    nothing in the output saying so. That is different in kind from a refusal, which is an answer
+    the model declines to give. This was an answer it gave, with a number on it, that was wrong.
+    """
+    report = _report(_B18_FIT_REPORT)
+    src = data_paths.rel(_B18_FIT_REPORT)
+    frozen = report["frozen_parameters"]["pyrazine"]
+    lap = report.get("laplace") or {}
+    bounds = report.get("bounds") or {}
+    sigma = list(lap.get("sigma") or [])
+    identified = list(lap.get("identified") or [])
+    on_bound = list(lap.get("on_bound") or [])
+    if len(sigma) != len(_B18_COORDINATES):
+        raise AssertionError(
+            f"the B18 report carries {len(sigma)} Laplace sigmas for {len(_B18_COORDINATES)} named "
+            f"coordinates; the envelope will not guess which is which"
+        )
+
+    out: List[CorePrior] = []
+    for i, name in enumerate(_B18_COORDINATES):
+        centre = float(frozen[name])
+        band = tuple(float(x) for x in bounds[name]) if name in bounds else None
+        is_ea = name.startswith("ea_")
+        unit = "kJ/mol" if is_ea else ("log10(k at 100 C)" if name.startswith("log10_") else "decades per pH unit")
+        kind = "fitted_ea" if is_ea else "fitted_rate"
+        if name not in _B18_SAMPLABLE:
+            out.append(CorePrior(
+                key=f"b18.{name}", lane=TRUNK, kind=kind, distribution="fixed", centre=centre,
+                sigma=float(sigma[i]), band=band, unit=unit,
+                source=f"{src}: laplace.sigma[{i}]", sampled=False, reason=B18_UNSAMPLED_REASON,
+            ))
+            continue
+        if not identified[i]:
+            # On its bound, and the bound is NARROW because it is DECLARED from a measured
+            # barrier rather than fitted. Flat across the declared band is what this envelope
+            # does for every coordinate a fit could not pin; freezing it at the bound the
+            # optimiser pushed it to would understate the interval a second time.
+            out.append(CorePrior(
+                key=f"b18.{name}", lane=TRUNK, kind=kind, distribution="uniform_band",
+                centre=centre, sigma=float(sigma[i]), band=band, unit=unit,
+                source=f"{src}: unidentified, on its {'upper' if on_bound[i] else 'own'} bound; "
+                       f"band = the coordinate's DECLARED bounds",
+                sampled=True, reason=UNIDENTIFIED_FLAT,
+            ))
+            continue
+        out.append(CorePrior(
+            key=f"b18.{name}", lane=TRUNK, kind=kind, distribution="normal_log10",
+            centre=centre, sigma=float(sigma[i]), band=band, unit=unit,
+            source=f"{src}: Gauss-Newton sigma at the frozen optimum",
+            sampled=True, reason=LAPLACE_SAMPLED,
+        ))
+    return out
+
+
 def _declared_band_priors() -> List[CorePrior]:
     from .parameters_furanic import FURANONE_PARTITION_EA_BAND_KJ_MOL
     from .parameters_lipid import LIPID_CARRIERS, Q10_ASSUMPTION
@@ -828,7 +913,8 @@ def _declared_band_priors() -> List[CorePrior]:
 def core_priors() -> Tuple[CorePrior, ...]:
     """The full priors table, in the order the sampler consumes it."""
     return tuple(
-        _b1_priors() + _b3_priors() + _b7_priors() + _b8_priors() + _declared_band_priors()
+        _b1_priors() + _b3_priors() + _b7_priors() + _b8_priors() + _b18_priors()
+        + _declared_band_priors()
     )
 
 
@@ -881,6 +967,7 @@ def draw_from_rng(
     b1 = {k: dict(v) for k, v in frozen_parameters(TRUNK)[engine.B1_VARIANT].items()}
     b3_k: Dict[str, float] = {}
     b3_ea: Dict[str, float] = {}
+    b18: Dict[str, float] = {}   # ENV-B18: the pyrazine block's drawn coordinates
     k_dpo_af: Optional[float] = None
     coords: Dict[str, float] = {}
     q10 = None
@@ -958,6 +1045,11 @@ def draw_from_rng(
             b3_k[p.key.split(".")[1]] = value
         elif p.key.startswith("b3."):
             b3_ea[p.key.split(".")[1]] = value
+        elif p.key.startswith("b18."):
+            # ENV-B18: the pyrazine block the engine's `pyrazine` override accepts. Only the four
+            # coordinates that block takes ever reach here; the two pH slopes are prior rows with
+            # sampled=False and are filtered out above.
+            b18[p.key.split(".", 1)[1]] = value
         elif p.key == "b7.k_dpo_af.log10_k":
             k_dpo_af = 10.0 ** value
         elif p.key == "lipid.q10":
@@ -988,6 +1080,12 @@ def draw_from_rng(
             hs = value
 
     maillard: Dict[str, Any] = {engine.B1_VARIANT: b1}
+    if b18:
+        # The engine's override needs the WHOLE block, so any coordinate this draw did not move
+        # is carried at its frozen value rather than left out.
+        from .parameters_pyrazine import FROZEN_B18
+
+        maillard["pyrazine"] = {k: float(b18.get(k, FROZEN_B18[k])) for k in _B18_SAMPLABLE}
     sulfur = sulfur_joint_draw(rng) if any(p.sampled and p.key.startswith("b8.") for p in priors) else None
     ph_drift = None
     if sulfur is not None:
