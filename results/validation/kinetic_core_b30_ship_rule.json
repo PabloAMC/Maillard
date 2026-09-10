@@ -1,0 +1,54 @@
+{
+  "artifact": "kinetic_core_b30_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b30_ship_rule",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "91f79598a4f5f230982cf8bd5b6bb9447828cd89",
+      "short": "91f79598",
+      "branch": "reactions",
+      "dirty": false
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b30_ship_rule.py",
+    "inputs": []
+  },
+  "prereg": "results/validation/kinetic_core_b30_prereg.md",
+  "rule": "T0 GATES THE WAVE: the model must at least FALL from pH 4.5 to 6.5 on the one pot measured at both. Nothing is fitted unless it does.",
+  "T0": {
+    "arms": {
+      "as_shipped": {
+        "ph_4_5": 0.03830206238610673,
+        "ph_6_5": 0.07766861011146871,
+        "ratio_45_over_65": 0.49314726156598193
+      },
+      "thiolate_loss_off": {
+        "ph_4_5": 0.03843489434796534,
+        "ph_6_5": 0.0990106049493313,
+        "ratio_45_over_65": 0.38818967289043843
+      },
+      "hydrosulfide_branch_off": {
+        "ph_4_5": 0.03830206238610673,
+        "ph_6_5": 0.07766861011146871,
+        "ratio_45_over_65": 0.49314726156598193
+      }
+    },
+    "measured": {
+      "mft_molpct_ph45": 0.15,
+      "mft_molpct_ph65": 0.001,
+      "fold_down_at_least": 150.0,
+      "mercaptoketone_fold_down": 2500.0
+    },
+    "source": "whitfield1999_extraction.md (pH 4.5) and the pH-6.5 arm recorded in the W8 backlog entry from Whitfield 2001; free MFT 0.150 -> < 0.001 mol %, mercaptoketones 74.5 -> 0.03",
+    "model_ratio_45_over_65": 0.49314726156598193,
+    "sign_correct": false,
+    "out_by_x": 304.16877815295413,
+    "pass": false
+  },
+  "attribution": {
+    "thiolate_loss_carries": -0.1049575886755435,
+    "hydrosulfide_branch_is_inactive_on_this_pot": true,
+    "why": "the two-branch sulfide mechanism was built for the deoxypentosone route (r_ddp_mft_hs) and the furfural route (r_fur_fft_hs). The NORFURANEOL route has no hydrosulfide partner -- r_nf_mft and r_nf_mp3p are single steps in neutral H2S -- so on the one pot in the corpus with a measured pH PAIR, the lane's pH mechanism is structurally absent.",
+    "and_supplying_it_would_make_it_worse": "a hydrosulfide branch on the norfuraneol steps pushes the SAME way as the one that already exists: more hydrosulfide at higher pH means faster addition means MORE thiol at pH 6.5, where the measurement wants at least 150x less. The collapse is not in the nucleophile. It is in the substrate or in the sulfide budget, and neither is modelled."
+  },
+  "verdict": "DO NOT SHIP -- and nothing was fitted"
+}

@@ -2249,6 +2249,22 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       DONE 2026-09-09: buttery1983 was read for one number and the claim it contradicted was corrected -- the
       2-acetyl-1-pyrroline threshold IS on disk (Table II and p. 825, 16 judges, "0.1 part per 10^9 parts of water"),
       so `desirable_targets.yml` no longer carries a null there.
+- [x] **W8 -> WAVE B30 (2026-09-10). RUN AND REFUSED BEFORE ANY CONSTANT WAS FITTED, and the
+      entry's own premise was wrong.** W8 said "the lane has no pH term on it". It has one, and a
+      principled one: B2.1 gave the sulfide two protonation states and let both add. The question was
+      never whether a pH term exists but whether the one that exists is right, and on the only pot in
+      the corpus measured at TWO pH values by one laboratory it is not: the model gives 2x MORE thiol
+      at pH 6.5 where Whitfield measures at least 150x LESS. Sign wrong, ratio out by about 300x.
+      TWO ATTRIBUTIONS. The thiolate loss carries almost none of it (0.49 -> 0.39 with it off). And
+      the hydrosulfide branch is not active on this pot AT ALL -- switching it off changes nothing to
+      four figures -- because that branch exists on the deoxypentosone and furfural routes and the
+      NORFURANEOL route has no hydrosulfide partner. So on the one pot with a measured pH pair, the
+      lane's pH mechanism is structurally absent. AND SUPPLYING IT WOULD MAKE IT WORSE: more
+      hydrosulfide at higher pH means faster addition means more thiol, and the measurement wants
+      less. The collapse is in the substrate or the sulfide budget, and neither is modelled.
+      A successor needs a pH term on the SUBSTRATE side before any slope is fitted to Cerny's ladder
+      or Mottram's pair, because those would otherwise be fitted on top of a refuted mechanism.
+      SUPERSEDED, and the original text follows for the record.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT

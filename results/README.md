@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **453**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **456**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -63,7 +63,7 @@ Tracked files: **453**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
 | `kinetic_core_b*_laplace_covariance.json` (3): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
-| `kinetic_core_b*_prereg.md` (26): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
+| `kinetic_core_b*_prereg.md` (27): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
 | `kinetic_core_b*_profile.*` (4): `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md`, `kinetic_core_b9_profile.json`, `kinetic_core_b9_profile.md` | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
 | `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
 | `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
@@ -112,6 +112,7 @@ Tracked files: **453**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
 | `kinetic_core_b2_4_fit_*.json` (21): `kinetic_core_b2_4_fit_half.json`, `kinetic_core_b2_4_fit_half_s0.json`, `kinetic_core_b2_4_fit_half_s1.json`, `kinetic_core_b2_4_fit_half_s2.json` … | B2.4 ensemble: one fit per weighting (half / measured / shipped) and per start (_s0.._s5). History; `kinetic_core_b2_4_ensemble.json` summarises them. |
 | `kinetic_core_b2_4_members/` (18 files) | B2.4 optimiser members (per weighting and start); read back by the B2.4 fit generator's consolidation. |
+| `kinetic_core_b30_ship_rule.*` (2): `kinetic_core_b30_ship_rule.json`, `kinetic_core_b30_ship_rule.md` | Wave B30's single gating test, run BEFORE any constant was fitted: the model must at least fall in thiol from pH 4.5 to 6.5 on the one pot measured at both. It rises, so nothing was fitted, and the artifact attributes why (`generate_kinetic_core_b30_ship_rule.py`). |
 | `kinetic_core_b4_frozen_predictions.json` | B4 predictions frozen before the hold-out was scored; read by `generate_kinetic_core_b4_fit.py` and `parameters_matrix.py`. |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b9`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
