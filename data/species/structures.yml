@@ -54,6 +54,8 @@ species:
   PYRL:  {kind: molecule, smiles: "C1CC=NC1", note: "1-pyrroline"}
   ACETOL:     {kind: molecule, registry_id: hydroxyacetone}          # wave B24b, 2026-09-10
   ATHP:       {kind: molecule, registry_id: 2_acetyltetrahydropyridine}   # wave B24b
+  MARP:       {kind: molecule, registry_id: met_glc_amadori}            # wave B22b, 2026-09-10
+  FRAG_S:     {kind: lump, note: "unassigned fragment sulfur; the sulfur analogue of FRAG_C"}
   AP:    {kind: molecule, registry_id: 2_acetyl_1_pyrroline}
   # ---- sulfur: pentose + cysteine (+ thiamine) ----
   PENT:  {kind: molecule, smiles: "OCC(O)C(O)C(O)C=O", note: "aldopentose, open chain; ribose and xylose share it"}

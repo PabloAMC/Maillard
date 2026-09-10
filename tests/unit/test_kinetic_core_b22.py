@@ -21,7 +21,10 @@ def _pot(precursors, t_c=120.0, minutes=10.0, ph=6.2):
 
 
 def test_the_four_steps_exist_balance_and_are_trunk_only():
-    assert set(network.METHIONINE_REACTION_KEYS) == {"r_go_met", "r_mgo_met", "r_mtal_msh", "r_msh_dmds"}
+    assert set(network.METHIONINE_REACTION_KEYS) == {
+        "r_go_met", "r_mgo_met", "r_mtal_msh", "r_msh_dmds",
+        "r_marp_mtal", "r_marp_loss",           # wave B22b, 2026-09-10
+    }
     network.validate_balance(network.TRUNK_REACTIONS)
     # REWRITTEN 2026-09-10. This asserted a NEGATIVE SLICE, and every later wave shifted it:
     # five wave tests broke at once when B24b appended two species. What a wave actually needs

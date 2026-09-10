@@ -82,6 +82,12 @@ SEEDS: List[Dict[str, Any]] = [
          aliases=["acetol", "1-hydroxy-2-propanone", "hydroxy-2-propanone"]),
     dict(id="2_acetyltetrahydropyridine", display_name="2-Acetyl-1,4,5,6-tetrahydropyridine",
          kind="molecule", smiles="CC(=O)C1=NCCCC1", aliases=["athp", "2-acetyltetrahydropyridine"]),
+    # WAVE B22b (2026-09-10): the route Deng's own experiment names.
+    dict(id="met_glc_amadori", display_name="N-(1-Deoxy-D-fructos-1-yl)-methionine",
+         kind="molecule", smiles="CSCCC(NCC(O)C(O)C(O)C(O)CO)C(=O)O",
+         aliases=["mg-arp", "met-glc amadori compound", "methionine amadori compound"],
+         identity_note="open-chain form; the sugar stereocentres are omitted, so identity is at "
+                       "constitution level only -- the same treatment chlorogenic acid gets here"),
     # ADDED 2026-09-09 from the reading audit: five compounds the corpus measures and
     # names -- four of them in the pea-beverage panel and one in the furanic channel --
     # that had no registry id, so nothing could refer to them by a stable name.

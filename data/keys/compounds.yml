@@ -1005,6 +1005,20 @@ compounds:
   seen_in:
   - benchmarks:measured_volatiles
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: met_glc_amadori
+  display_name: N-(1-Deoxy-D-fructos-1-yl)-methionine
+  kind: molecule
+  smiles: CSCCC(NCC(O)C(O)C(O)C(O)CO)C(=O)O
+  inchikey: HMYXDJQTCLLFFK-UHFFFAOYSA-N
+  canonical_smiles: CSCCC(NCC(O)C(O)C(O)C(O)CO)C(=O)O
+  aliases:
+  - met-glc amadori compound
+  - methionine amadori compound
+  - mg-arp
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: open-chain form; the sugar stereocentres are omitted, so identity is at constitution level only
+    -- the same treatment chlorogenic acid gets here
 - id: methanethiol
   display_name: Methanethiol
   kind: molecule

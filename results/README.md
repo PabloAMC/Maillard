@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **443**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **448**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -63,7 +63,7 @@ Tracked files: **443**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
 | `kinetic_core_b*_laplace_covariance.json` (3): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
-| `kinetic_core_b*_prereg.md` (24): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
+| `kinetic_core_b*_prereg.md` (25): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
 | `kinetic_core_b*_profile.*` (4): `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md`, `kinetic_core_b9_profile.json`, `kinetic_core_b9_profile.md` | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
 | `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
 | `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
@@ -92,6 +92,9 @@ Tracked files: **443**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b20_ship_rule.*` (2): `kinetic_core_b20_ship_rule.json`, `kinetic_core_b20_ship_rule.md` | The B20 prereg's ship rule (sec. 4) evaluated on the frozen B20 report and the live engine: the decisive rows, the panel unmoved, Nguyen's CML level, the Berk and Hamzalioglu comparators, identification (`generate_kinetic_core_b20_ship_rule.py`). |
 | `kinetic_core_b21_ship_rule.*` (2): `kinetic_core_b21_ship_rule.json`, `kinetic_core_b21_ship_rule.md` | The B21 prereg's ship rule (sec. 4) on the frozen B21 report and the live panel: the rows, the B1 browning hold-out before and after, the panel, Quan 2020's glyoxal level, Xia's ordering, Leahy's total, identification (`generate_kinetic_core_b21_ship_rule.py`). |
 | `kinetic_core_b22_ship_rule.*` (2): `kinetic_core_b22_ship_rule.json`, `kinetic_core_b22_ship_rule.md` | The B22 prereg's ship rule on the frozen B22 report and the live panel: the rows, the panel, Deng 2022's methional, identification, Chin & Lindsay's half-life; verdict DO NOT SHIP (`generate_kinetic_core_b22_ship_rule.py`). |
+| `kinetic_core_b22b_fit_report.json` | B22b frozen fit: two coordinates on Deng 2022's five-point methional time course from the FED methionine-glucose Amadori compound. Not read by the engine; the ship rule refused it. |
+| `kinetic_core_b22b_fit_report.md` | The same fit, rendered, with the two-arm check that turned out vacuous because the comparison arm is structurally zero. |
+| `kinetic_core_b22b_ship_rule.*` (2): `kinetic_core_b22b_ship_rule.json`, `kinetic_core_b22b_ship_rule.md` | Wave B22b's tests: the shape and its peak, identification, and the panel. Records that its two-arm check could not be evaluated at all (`generate_kinetic_core_b22b_ship_rule.py`). |
 | `kinetic_core_b24_ship_rule.*` (2): `kinetic_core_b24_ship_rule.json`, `kinetic_core_b24_ship_rule.md` | The B24 prereg's ship rule on the frozen B24 report and the live panel: the fed and proline rows, the panel, Chan's apparent barrier, Hofmann's excess-pyrroline pot, identification; verdict DO NOT SHIP (`generate_kinetic_core_b24_ship_rule.py`). |
 | `kinetic_core_b24b_fit_report.json` | B24b frozen fit: two coordinates on four rows, with B24's two constants HELD rather than refitted so that adding the branch is what is being tested. Not read by the engine; the ship rule refused it. |
 | `kinetic_core_b24b_fit_report.md` | The same fit, rendered, with the checks that were scored and not fitted: B24's fed rows and the pH ladder. |
