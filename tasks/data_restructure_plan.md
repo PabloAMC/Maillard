@@ -1663,7 +1663,7 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       `k_mgo_ak`, although `kinetic_core_b18_fit_report.json` carries their Laplace sigma (0.08 dex on
       log10 k). Every pyrazine interval today is the trunk's interval without the step's own spread.
       Extend the envelope's prior table with the B18 block (the B10/B11 pattern) and regenerate.
-- [ ] **FIG-01 (2026-09-09).** The introduction's 23 figures were git-ignored (`*.png` with an allow-list that
+- [x] **FIG-01 (2026-09-09).** The introduction's 23 figures were git-ignored (`*.png` with an allow-list that **[CLOSED 2026-09-10: all 32 figures are tracked, and `results/validation/figure_inputs.json` puts every figure's inputs and PNG hash under the artifact-freshness gate, which has since caught figure staleness three times.]**
       never included `docs/assets/thiol_sink/`), so every figure in README and INTRODUCTION was a broken image
       on GitHub; fixed by allow-listing the folder. No gate checks the figures against the code: four were
       stale (paper counts, step counts, the sugar tree without the pyrazine step). Add the two figure builders
@@ -1883,7 +1883,7 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       **STILL OPEN AND NOW WRITTEN FOR A PERSON.** `docs/guides/EXPERIMENTS.md`: five experiments in
       the order they are worth funding, each with protocol, what the model predicts today and what
       each outcome decides; plus three things that look like gaps and are not.
-- [ ] **FETCH-16 (2026-09-09). The download list the six searches produced, checked against all 233
+- [x] **FETCH-16 (2026-09-09). The download list the six searches produced, checked against all 233 **[CLOSED 2026-09-10: all sixteen fetched, read and incorporated; see FETCH-16 INCORPORATED above.]**
       PDFs on this disk.** Two of the papers the searches returned were ALREADY HERE and already
       dossiered (Cammerer & Kroh 1995 as `Cammerer1994.pdf`; Martins & van Boekel 2003 as
       `martins2003c.pdf`) -- see the correction in SEARCH-SIX item 2. Sixteen are not here and are
@@ -2107,7 +2107,7 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       condition, not just the heated column as a target. The 2-acetyl-1-pyrroline threshold is printed as
       0.14 in that table and quoted as 0.1 in its own text; `desirable_targets.yml` carries 0.1 from
       Buttery 1983 read directly, which is the primary source.
-- [ ] **AUDIT-FINDINGS (2026-09-09, from the forty-three papers the reading audit found unread). Every defect
+- [x] **AUDIT-FINDINGS (2026-09-09, from the forty-three papers the reading audit found unread). Every defect **[CLOSED 2026-09-10: every defect below was corrected or recorded; see AUDIT-INCORPORATION above. What it left as waves is AUDIT-REMAINDER.]**
       below is stated with its SIZE, so that none is either ignored or over-dramatised.**
       **In fit rows (both real, both small).** (i) Every B2.x generator configures the Whitfield 1999 pot at
       norfuraneol 20 mmol/L and hydrogen sulfide 40 against the paper's printed 50 and about 97
@@ -2151,7 +2151,7 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       chapter, `rainercremer2000.pdf` is Cremer & Eichner 2000, `parker2012.pdf` is the paper `parker2013` is
       written from, `Kocada2016.pdf` is the JAFC Kocadagli, `Zhai2023b.pdf` already had a dossier, `Gursul2020.pdf`
       already had one, and two Goncuoglu files and `jf0480290.pdf` are transliterations or publisher ids.
-- [ ] **READING-ORDER (2026-09-09, after the first thirteen). Forty-five PDFs are still unread, and the question
+- [x] **READING-ORDER (2026-09-09, after the first thirteen). Forty-five PDFs are still unread, and the question **[CLOSED 2026-09-10: zero unread on 245 PDFs. Kept as the record of how the question was answered gap by gap.]**
       "is what we lack on disk or not in the literature" now has an evidence-based answer, gap by gap.**
       ON DISK, decidable without a new download: (i) the acrylamide elimination's two-laboratory disagreement
       (85.1 +/- 14 against 167.2 +/- 4.3 kJ/mol -- both numbers read today); (ii) B24b's tetrahydropyridine branch
@@ -2173,7 +2173,7 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       100 and 130 C methional rows; a per-amino-acid SECOND-ORDER Strecker constant in water (four laboratories
       have now been read and every one printed a barrier or a yield instead, so the likeliest reading is that no
       such constant has been measured); and the thiol sink itself, which B25's outcome says is an experiment.
-- [ ] **PDF-AUDIT (2026-09-09). Fifty-nine papers are on disk and have never been read.** `data/articles/` holds 228
+- [x] **PDF-AUDIT (2026-09-09). Fifty-nine papers are on disk and have never been read.** `data/articles/` holds 228 **[CLOSED 2026-09-10: `reading_audit` reports 245 read, 0 unread. Kept as the record of what the audit found.]**
       PDFs against 178 per-paper dossiers; 59 have no dossier named after them, and several hit gaps this repository
       names in its own artifacts. The count is now a command, `python scripts/reading_audit.py` (the paper registry
       deliberately ignores the local PDFs so its output does not depend on the machine; this is the other half), and
