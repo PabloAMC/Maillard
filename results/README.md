@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **460**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **461**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -107,12 +107,13 @@ Tracked files: **460**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b28_ship_rule.*` (2): `kinetic_core_b28_ship_rule.json`, `kinetic_core_b28_ship_rule.md` | Wave B28's five pre-registered tests on the two products the lipid lane used to refuse: the arithmetic of Frankel 1981's two slates, the panel's refused-row count (which must only ever fall, and no lifted row may be answered degenerately), the first external check the lane's fit source has had -- Frankel 1981 against Frankel 1989 renormalised onto the five products both quantify -- the newly answered rows against measurement, and the check that no other lane moved (`generate_kinetic_core_b28_ship_rule.py`). |
 | `kinetic_core_b29_fit_report.json` | B29 frozen fit: the trunk's first oxygen axis, two multipliers on the two oxidative entries to glucosone, fitted on four within-study atmosphere ratios. Not read by the engine; the ship rule refused it. |
 | `kinetic_core_b29_fit_report.md` | The same fit, rendered, with the check that air is exactly 1. |
-| `kinetic_core_b29_ship_rule.*` (2): `kinetic_core_b29_ship_rule.json`, `kinetic_core_b29_ship_rule.md` | Wave B29's tests, and the diagnosis they produced: both pots make 100 % of their Strecker aldehyde through the oxidative entries, so the two air/argon ratios are forced equal and a non-oxidative route is missing (`generate_kinetic_core_b29_ship_rule.py`). |
+| `kinetic_core_b29_ship_rule.*` (2): `kinetic_core_b29_ship_rule.json`, `kinetic_core_b29_ship_rule.md` | Wave B29's tests and the diagnosis they produced, with two corrections appended from B32's premise check: the reported "oxidative share" is a net difference between two competing channels rather than a share, and the two pots' shares differ by REACTION EXTENT rather than by branching (`generate_kinetic_core_b29_ship_rule.py`). |
 | `kinetic_core_b2_4_amine_fate_probe.json` | B2.4 amine-fate probe (`probe_amine_fate_b2_4.py`); read by `src/kinetic_core/ph_state.py`. |
 | `kinetic_core_b2_4_ensemble.json` | B2.4 ensemble summary read by `generate_kinetic_core_b2_4_reports.py` and its test. |
 | `kinetic_core_b2_4_fit_*.json` (21): `kinetic_core_b2_4_fit_half.json`, `kinetic_core_b2_4_fit_half_s0.json`, `kinetic_core_b2_4_fit_half_s1.json`, `kinetic_core_b2_4_fit_half_s2.json` … | B2.4 ensemble: one fit per weighting (half / measured / shipped) and per start (_s0.._s5). History; `kinetic_core_b2_4_ensemble.json` summarises them. |
 | `kinetic_core_b2_4_members/` (18 files) | B2.4 optimiser members (per weighting and start); read back by the B2.4 fit generator's consolidation. |
 | `kinetic_core_b30_ship_rule.*` (2): `kinetic_core_b30_ship_rule.json`, `kinetic_core_b30_ship_rule.md` | Wave B30's single gating test, run BEFORE any constant was fitted: the model must at least fall in thiol from pH 4.5 to 6.5 on the one pot measured at both. It rises, so nothing was fitted, and the artifact attributes why (`generate_kinetic_core_b30_ship_rule.py`). |
+| `kinetic_core_b32_premise_check.*` (1): `kinetic_core_b32_premise_check.md` | Why wave B32 was never pre-registered or run. Three probes, nothing fitted: `k_ama_g` cannot reverse the two pots' order at any value over five decades because the Amadori step is shared, `k_glc_g` is structurally dead at 100 C, and run to matched extent the two pots branch identically (55.4 % against 54.6 %). There was no branching asymmetry to refit. |
 | `kinetic_core_b4_frozen_predictions.json` | B4 predictions frozen before the hold-out was scored; read by `generate_kinetic_core_b4_fit.py` and `parameters_matrix.py`. |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b9`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
