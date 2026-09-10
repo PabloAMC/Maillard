@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **433**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **438**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -48,6 +48,7 @@ Tracked files: **433**. Local-only (gitignored): scratch runs under `results/qui
 | `d1_exam_panel_reconciliation.*` (2): `d1_exam_panel_reconciliation.json`, `d1_exam_panel_reconciliation.md` | Reconciliation of exam vs panel scoring (D1); read by the B8 and B2.3 report generators. |
 | `data_wishlist.*` (2): `data_wishlist.json`, `data_wishlist.md` | THE DATA WISHLIST: what to measure next and what each measurement would unlock, derived from the scorecard, the slice profile, the Laplace covariance, the directional scorecard and the value-of-information ranking (`src/data_wishlist.py`; alias `wishlist`; read with `maillard wishlist`). Regenerated and compared by the freshness gate. |
 | `deep_research_runtime_queue.*` (2): `deep_research_runtime_queue.json`, `deep_research_runtime_queue.md` | Which mined citations are queued for runtime encoding (`src/deep_research_runtime_queue.py`). |
+| `env_prior_ship_rule.*` (2): `env_prior_ship_rule.json`, `env_prior_ship_rule.md` | ENV-B18 and ENV-B13 evaluated together: whether the two new blocks of Monte-Carlo prior rows widened the intervals they should and left the rest alone, against a noise floor MEASURED from two seeds of identical priors rather than assumed (`generate_env_prior_ship_rule.py`). |
 | `experiment_brief_cards.html` | One card per ranked experiment (`generate_gap_heatmap.py`). |
 | `experiment_value_ranking.*` (2): `experiment_value_ranking.json`, `experiment_value_ranking.md` | `rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`. |
 | `family_ingestion_plan.*` (2): `family_ingestion_plan.json`, `family_ingestion_plan.md` | Ingestion order of the SLR families (`src/family_ingestion_plan.py`; alias `family-ingestion-plan`). |
@@ -106,6 +107,8 @@ Tracked files: **433**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b9`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
+| `kinetic_core_env_b13_prereg.*` (1): `kinetic_core_env_b13_prereg.md` | Pre-registration: the whole dicarbonyl and furanic-sink block had no prior row either, so eight constants were asserted with certainty and five hydroxymethylfurfural rows were published with no interval at all. |
+| `kinetic_core_env_b18_prereg.*` (1): `kinetic_core_env_b18_prereg.md` | Pre-registration: the pyrazine step had no prior row in the envelope, so every pyrazine interval was published without that step's own spread. |
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
@@ -119,3 +122,9 @@ Tracked files: **433**. Local-only (gitignored): scratch runs under `results/qui
 | `prefactor_audit.*` (2): `prefactor_audit.json`, `prefactor_audit.md` | Arrhenius prefactor audit (`generate_prefactor_audit.py`); cited by `parameters.py` and pinned by the B8 test. |
 | `trunk_rate_calibration_refit.*` (2): `trunk_rate_calibration_refit.json`, `trunk_rate_calibration_refit.md` | Trunk rate refit record read by `src/kinetic_core/parameters.py` (the trunk constants cite it). |
 | `wave_generators_manifest.json` | SHA-256 of every frozen wave generator; `tests/scientific/test_wave_generators_frozen.py` fails on drift. Written by `scripts/generators/build_wave_manifest.py`. |
+
+## `results/validation/_env_baseline`
+
+| files | what it is, who writes it, who reads it |
+|---|---|
+| `*` (1): `core_prediction_uncertainty_before_env_priors.json` | The envelope EXACTLY AS IT STOOD before ENV-B18 and ENV-B13 added their prior rows, kept so that their ship rule is reproducible by anyone rather than only by whoever happened to have the old file. It is a frozen comparison baseline and is never regenerated. |

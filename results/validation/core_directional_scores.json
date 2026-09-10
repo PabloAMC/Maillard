@@ -34,8 +34,6 @@
       "2,5-dimethyl-4-hydroxy-3(2h)-thiophenone",
       "2-ethyl-4-hydroxy-5-methyl-3(2h)-furanone",
       "2-nonenal",
-      "2-pentyl furan",
-      "2-pentylfuran",
       "hemf",
       "homofuraneol",
       "propanal"
@@ -43,10 +41,10 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-09-09",
+    "generated_on": "2026-09-10",
     "git": {
-      "commit": "eb72ffd9be2536208723958830e60b1aa8850926",
-      "short": "eb72ffd9",
+      "commit": "ce288def982bbdfb8d49f8c8613c024954d13a13",
+      "short": "ce288def",
       "branch": "reactions",
       "dirty": true
     },
@@ -492,10 +490,9 @@
     },
     "not_evaluable_reasons": {
       "the claim carries no runnable conditions (prose-only)": 18,
+      "refused by the engine": 4,
       "a predicted concentration is zero; no direction is defined": 4,
-      "refused by the engine": 3,
       "arm 'pH 4.5' refused": 1,
-      "arm 'processed, 140 C' refused": 1,
       "arm 'D-ribose' refused": 1,
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 ": 1,
@@ -503,7 +500,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 46.6
+    "wall_seconds": 54.4
   },
   "claims": [
     {
@@ -2175,7 +2172,7 @@
       "statement": "UHT processing RAISES 2-pentylfuran in a pea-protein beverage (59.4 -> 163.2 ug/L).",
       "source": "trikusuma2018",
       "status": "not_evaluable",
-      "reason": "arm 'processed, 140 C' refused: UNREPRESENTED TARGETS: 2-Pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On t",
+      "reason": "refused by the engine: REFUSED -- the two arms differ in pH and the resolved lane(s) (lipid) carry NO pH term by declaration; the model would return identical arms. The sulfur lane carries a pH trajectory, the trunk a declared Amadori-decay pH term (B12) and the acrylamide lane a declared initial-pH factor inside pH 4-8 (B15).",
       "arms": [
         {
           "label": "processed, 140 C",
@@ -2190,19 +2187,17 @@
             "aw": 0.98,
             "matrix": "pea_iso"
           },
-          "answered": false,
+          "answered": true,
           "lane": "lipid",
-          "state": "out_of_envelope",
-          "reasons": [
-            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
             "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 5.042375493543165
         },
         {
           "label": "unprocessed control, 25 C",
@@ -2217,12 +2212,10 @@
             "aw": 0.98,
             "matrix": "pea_iso"
           },
-          "answered": false,
+          "answered": true,
           "lane": "lipid",
-          "state": "out_of_envelope",
-          "reasons": [
-            "UNREPRESENTED TARGETS: 2-Pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
-          ],
+          "state": "in_envelope_extrapolated",
+          "reasons": [],
           "warnings": [
             "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
             "the lipid lane's rate anchor was measured at 25 C and this program peaks at 25.0 C: 0.0 decades of 10 C, a factor of 1-1 on the rate.",
@@ -2230,7 +2223,7 @@
             "temperature program spans 25.0-25.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
             "pH 7.13 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": null
+          "value_ug_per_l": 0.00019560914551183554
         }
       ]
     },

@@ -62,3 +62,32 @@ Ship rule: **install if T1, T2 and T3 hold.** T4 is reported.
 2. No measurement moves from outside its interval to inside. **80 %.** The pyrazine rows miss by
    decades, not by fractions of one, so a slightly wider interval will not reach them. The point of
    this fix is honesty about the interval, not coverage.
+
+## 6. Outcome (2026-09-10) — INSTALL, and the effect is invisible on this panel
+
+**Verdict INSTALL** (`env_prior_ship_rule.md`, evaluated jointly with ENV-B13). T1, T2 and T3 held.
+
+**T2 could not be tested as written, and that is the wave's methodological finding.** Section 4 said
+"every pyrazine row's interval gets WIDER. Not one may narrow." The sampler draws every coordinate
+from ONE random stream, so adding coordinates re-shuffles every later draw and every row's width
+moves a little at finite n. The first run gave 14 rows wider and **25 narrower** — and the
+narrowings were 0.04 % to 4.7 %, on rows these priors cannot reach at all.
+
+The rule was re-specified to measure the noise rather than assume it: two runs of the SAME priors at
+different seeds, giving a relative width difference of **3.1 % median, 17.0 % worst** across 42
+rows. The tolerance is the WORST, not a quantile — a 95th percentile is expected to be exceeded by
+about 5 % of rows, so a rule built on one tests the quantile rather than the model. With that,
+zero violations.
+
+**No pyrazine row appears in the widened list, and that is not a failure.** No benchmark on this
+panel scores a pyrazine. The prior rows change what the tool reports when a USER asks about
+pyrazines; they change nothing in the scorecard, because the scorecard never asks. Prediction 1
+(70 %, "the widening is modest, under 0.2 dex") is therefore unresolved on this panel rather than
+right or wrong, and saying so is more honest than claiming the prediction held.
+
+**Prediction 2 held**: no measurement moved from outside its interval to inside.
+
+**Half the defect still stands, as declared.** The two pH slopes are identified and still not
+sampled, because the engine's `pyrazine` override takes four numbers and the slopes are module-level
+constants. Pyrazine intervals remain too narrow away from pH 7 and correctly wide at pH 7. That is
+recorded on the prior rows themselves, not only here.

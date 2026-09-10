@@ -27,7 +27,7 @@
     "scripts/generators/generate_kinetic_core_b25_fit.py": "4d5ea75955788a7a5aaba59169db7c040e0eb8653f91206e9c446dc667b02416",
     "scripts/generators/generate_kinetic_core_b25_ship_rule.py": "36b7e227a687b0e8f6f2f63cc49ede813f78ba67995668b16c97894fe0be7f16",
     "scripts/generators/generate_kinetic_core_b26_ship_rule.py": "f84b558011bf6268288ae0db17c5292003bd57abccdc190a2b3c8882e54bf22c",
-    "scripts/generators/generate_kinetic_core_b28_ship_rule.py": "3c102b0b06bef26ecc0ca4e7f7bbfe461012b448f081f8c63dd617e24f08017a",
+    "scripts/generators/generate_kinetic_core_b28_ship_rule.py": "2ec27c883ab3ffad0dc53a478828960661215f8c23afebd810c4b05027b73d39",
     "scripts/generators/generate_kinetic_core_b2_1_fit.py": "3dd1ce5ff3a2ddb98c94578b8bc2e2143794441ee59692aff85b772749e93791",
     "scripts/generators/generate_kinetic_core_b2_1_holdout.py": "844fb122d574f136e6ff6939105ca04354c4dc31bcdcfa6b881d8814abe03536",
     "scripts/generators/generate_kinetic_core_b2_2_fit.py": "3f9b414d04c15b1f2fdaca29a21e00abca1695803e28d36f9ab2e96bc56a8707",

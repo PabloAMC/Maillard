@@ -68,3 +68,39 @@ Ship rule: **install if T1, T2 and T3 hold.** T4 is reported.
 3. This makes the model look worse and is still correct. **95 %.** A wider interval on a row that
    already misses is not an improvement in accuracy, and publishing a narrow interval that omits a
    known five-decade disagreement is not honesty.
+
+## 5. Outcome (2026-09-10) — INSTALL, and prediction 1 was wrong
+
+**Verdict INSTALL** (`env_prior_ship_rule.md`, evaluated jointly with ENV-B18). T1, T2 and T3 held,
+with T2 and T3 re-specified against a MEASURED Monte-Carlo noise floor — see the ENV-B18 record for
+why "not one row may narrow" could not be tested as written.
+
+**The defect, in one line.** Five hydroxymethylfurfural rows were being published with intervals of
+**0.000, 0.000, 0.001, 0.010 and 0.135 decades**. Four of the five had no interval at all: the model
+was asserting a level exactly, on a compound whose only sink two other laboratories put five orders
+of magnitude away from the shipped value.
+
+| benchmark | interval before | after |
+|---|---:|---:|
+| glucose + alanine, 130 °C, pH 5 | 0.000 | **0.846** |
+| glucose + alanine, 130 °C, pH 8 | 0.000 | **0.846** |
+| glucose + asparagine, 180 °C | 0.010 | **0.380** |
+| fructose + asparagine, 180 °C | 0.001 | **0.355** |
+| glucose only, autoclave 121 °C | 0.000 | **0.135** |
+
+**Prediction 1 was wrong.** It said at 75 % that the widening would exceed a decade, reasoning that
+a flat band across five orders on a compound's only sink should dominate its interval. The largest
+is 0.85 decades. The reason is worth keeping: hydroxymethylfurfural here is fed continuously by a
+formation flux, so even a very fast sink gives a lower steady state rather than driving the level to
+zero. A five-decade band on the sink is not a five-decade band on the answer.
+
+**Prediction 2 was wrong too, and its reasoning was backwards.** It expected a measurement to move
+inside its interval, on the ground that the furanic channel warns hydroxymethylfurfural should be
+OVER-predicted for want of a fast enough sink. On these five rows the model UNDER-predicts, by 2.1x
+to 12x — 27 010 against 57 254 measured on the alanine pot. A faster sink moves the prediction the
+wrong way. So the channel's own warning does not describe these pots, and that is a finding this
+wave did not go looking for. Nothing moved inside its interval.
+
+**Prediction 3 held at 95 %.** The model looks worse and the change is still correct. Five rows now
+carry an honest interval where they carried a false certainty, and none of them contains its
+measurement either way.

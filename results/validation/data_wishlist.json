@@ -2,10 +2,10 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-09",
+    "generated_on": "2026-09-10",
     "git": {
-      "commit": "bcc49958d700b498991d5064ac918cce91ff36a2",
-      "short": "bcc49958",
+      "commit": "ce288def982bbdfb8d49f8c8613c024954d13a13",
+      "short": "ce288def",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "1de19a32b8805e9b9dc8107f26dc4a50913502bf8adb01e45bda7bcaff3fcbba"
+        "sha256": "da403505e787f4f0e580c00661545dba216efbbb54c8d3c6f4c3296ba7104594"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "7f80214125bbd5141b24daecc96969700a347b2129b1c190c6d20463648730e1"
+        "sha256": "480b24718374e81f2bf6c148bd578d5075a44cb321ac7ae2b85ffd2cdb01739e"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "0d2e94e0ac3155f8e7fff50678ab692f00e154ed0900a2458148a195ead6c447"
+        "sha256": "71fd52fb18908071dcf74ed59afefe3644900fd0964a98c854a712a88aa6bb62"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -358,30 +358,6 @@
   ],
   "refused_targets": [
     {
-      "what": "UNREPRESENTED TARGETS: 2-pentylfuran",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On t",
-      "rows": [
-        {
-          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-          "compound": "2-pentylfuran"
-        },
-        {
-          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "compound": "2-pentylfuran"
-        },
-        {
-          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-          "compound": "2-pentylfuran"
-        },
-        {
-          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
-          "compound": "2-pentylfuran"
-        }
-      ],
-      "row_count": 4,
-      "hypothesis_layer": "no cited rule reaches it from any reference charge"
-    },
-    {
       "what": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s",
       "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
       "rows": [
@@ -594,71 +570,71 @@
     {
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
       "compound": "hexanal",
-      "voi_score": 17.46072171569549,
-      "envelope_miss_log10": 3.464842039653945,
+      "voi_score": 17.309920389053346,
+      "envelope_miss_log10": 3.4517512851496925,
       "template": "missing_positive_flavor_anchor"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.854685402600802,
-      "envelope_miss_log10": 1.4965904870343925,
+      "voi_score": 12.299009330355018,
+      "envelope_miss_log10": 1.302829705272886,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.531471579808716,
-      "envelope_miss_log10": 1.417157792951579,
+      "voi_score": 12.201014779834532,
+      "envelope_miss_log10": 1.312583861386474,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 11.838757671048835,
+      "envelope_miss_log10": 1.3284510402666325,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 11.984567196329667,
-      "envelope_miss_log10": 1.375924665464233,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 11.926101231166935,
-      "envelope_miss_log10": 1.3609711701276446,
+      "voi_score": 11.659100413883483,
+      "envelope_miss_log10": 1.2146117312300535,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.603790981275134,
-      "envelope_miss_log10": 1.9979283001565558,
+      "voi_score": 11.436772702910964,
+      "envelope_miss_log10": 1.978824693224863,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.484013795214867,
-      "envelope_miss_log10": 1.1835312341038355,
+      "voi_score": 11.149623090716506,
+      "envelope_miss_log10": 1.121067359196319,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
       "compound": "hexanal",
-      "voi_score": 11.236062474641917,
-      "envelope_miss_log10": 2.7249406750181904,
+      "voi_score": 11.122682760021528,
+      "envelope_miss_log10": 2.7118499205139375,
       "template": "missing_positive_flavor_anchor"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.93638982929702,
-      "envelope_miss_log10": 1.4237906624406151,
+      "voi_score": 10.966878356051605,
+      "envelope_miss_log10": 1.4226220311908766,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
       "compound": "hexanal",
-      "voi_score": 10.231746846610589,
-      "envelope_miss_log10": 2.5113661579192557,
+      "voi_score": 10.123227468441039,
+      "envelope_miss_log10": 2.4982754034150028,
       "template": "missing_positive_flavor_anchor"
     }
   ],
@@ -731,7 +707,7 @@
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
-    "refused_row_count": 14,
+    "refused_row_count": 10,
     "axes_below_trust": 11,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }

@@ -26,10 +26,10 @@
         "src/kinetic_core/sulfur.py"
       ],
       "figures": {
-        "10_tree_sugar.png": "f71a6f93ae5d3640a5af312e1fce768266bc7a44ced4cb6b79a2afa881862ece",
+        "10_tree_sugar.png": "8d411ebf58912db867aa1373a5c3e8f400af55ab5da1d49f78f9aafddab4c691",
         "11_tree_sulfur.png": "cb0aae542e9bd87d1332399ee554e120908cedce5e5238e1ceba77eb4bc600fe",
         "12_tree_acrylamide.png": "fdb088c6b1dde1edb2d4f7fed086d16d00ba98903d3a84683812f1de45fed520",
-        "13_steps_by_status.png": "b8436c04ed2cf7886541d42da4f3130ad9d8a300cf39e449817f04f916a63cd1"
+        "13_steps_by_status.png": "d0fc49d531fd9ba8e1c31f830d10731eb8221729a3c172aeedc7fef3f7532b19"
       }
     },
     "scripts/generators/build_thiol_sink_figures.py": {
@@ -69,17 +69,17 @@
         "05_ttca_decay.png": "14da22a3c177b07dc4c2c01a0f54741a120c8253f107087c715b642777cd9444",
         "06_dicarbonyls_water.png": "5e49dbce9ce01dd6adcc91d0af893e6aade2f8a6d387df58390f8a0f73504397",
         "07_literature_funnel.png": "f0279f1dcc13e2836d4031fd2c09c81104f438fa5d5fbe822ed61ce8d727fd9a",
-        "08_path_scorecard.png": "a2a165a2cd7cc33f068bb959445085d1e842b41ed3f2406dece09f1b3f93c6bc",
+        "08_path_scorecard.png": "58a75d0908dd0d6c8be125479200a2f5b8e05630d119bd1ad1b60f4aa1aebb99",
         "09_repository_flow.png": "ce1998b349e78c129def870d52cc2ae2cd4a53b323cd18083b2a42098caf3e09",
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "2a538ef8109d3b31aee5b74eb06a995ae0c4a79214fb6d8ae6dd57c2fa8fcbfb",
+        "17_papers_by_weight.png": "f50087239bad4d37b954e8c9fb3d56da6be22fc7bb258ea3655c0f590f2b6575",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
-        "21_parity.png": "ab7c8270f9f83f871bed28b1ff92f5bb549b054f8ffc37318508013284fcb194",
-        "22_no_number.png": "29c623d79e7290fa1a1c4f192850667f940b52527ed861c05b441b4a33df03bd"
+        "21_parity.png": "7e3fa1cf6c5051142d0e339338d78792ba7d56038452ac99ac6a563d1369023e",
+        "22_no_number.png": "37a57938fc77e147c361271eb28ae749a3a4b421475e8b2679f3420c63843b12"
       }
     },
     "scripts/generators/build_story_figures.py": {
@@ -114,8 +114,8 @@
         "src/kinetic_core/sulfur.py"
       ],
       "figures": {
-        "23_coverage_of_declared_targets.png": "e7a5c1ddb6ca497a35458d21028a9dcbc85ec6abbcd6c3d58cfe16dfc2acf949",
-        "24_fat_path_hexanal.png": "fb6963e43579e046dc0d1f0b54bd046593257a054543670c40151c8fd51a3a23",
+        "23_coverage_of_declared_targets.png": "ebd7c16616e5b60b6a52c8cb493cd0db89cdebe1d1c676ea179556cfed1ed1b8",
+        "24_fat_path_hexanal.png": "2fd37fed43abc937fcc2dc4dd7da889addcc3ed6d6949d3e8e653cd3ec73d76b",
         "25_protein_matrix_layer.png": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6",
         "26_hypothesis_layer.png": "185fc901a3e6858aacc4c4d3d1ce36be310eaa49327e214856476920b1fbd085",
         "27_pyrazine_step_supply.png": "91def689a3e0d6e85fc889a39b454f4bf7c3a874531795cdb9cb223e9d62195c",
@@ -128,10 +128,10 @@
   },
   "provenance": {
     "artifact": "figure_inputs",
-    "generated_on": "2026-09-09",
+    "generated_on": "2026-09-10",
     "git": {
-      "commit": "eb72ffd9be2536208723958830e60b1aa8850926",
-      "short": "eb72ffd9",
+      "commit": "ce288def982bbdfb8d49f8c8613c024954d13a13",
+      "short": "ce288def",
       "branch": "reactions",
       "dirty": true
     },
@@ -167,15 +167,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "7f80214125bbd5141b24daecc96969700a347b2129b1c190c6d20463648730e1"
+        "sha256": "480b24718374e81f2bf6c148bd578d5075a44cb321ac7ae2b85ffd2cdb01739e"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "1de19a32b8805e9b9dc8107f26dc4a50913502bf8adb01e45bda7bcaff3fcbba"
+        "sha256": "da403505e787f4f0e580c00661545dba216efbbb54c8d3c6f4c3296ba7104594"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "685fd85b17e7f78a90c8cfc4c416f94b2632dd1f1ee3fd1b8ba237898fb1f095"
+        "sha256": "bf03bd1a0be1a429fd1dab61e5a76bd8c7f9ed4b7a0cbc28097a532612b6a3ca"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -195,7 +195,7 @@
       },
       {
         "path": "results/validation/kinetic_core_b28_ship_rule.json",
-        "sha256": "165b001ccd1ee6e1e2fb75c1aad1e395fb19a9fadb20668b02b4024a5c931d15"
+        "sha256": "16447c7230c2728b281bee1f35fbe5725009e4a6041300c679dd94aef2fbe79e"
       },
       {
         "path": "results/validation/kinetic_core_b9_fit_report.json",
@@ -247,7 +247,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_dicarbonyl.py",
-        "sha256": "a458eaf54f34d0008a96ed78331227297ecd9fa0b1a352a79940ca0f7449d733"
+        "sha256": "c8baed2bfbc2eb1fb3848df5885849b08201852b261a4642f64db5e1d42290c2"
       },
       {
         "path": "src/kinetic_core/parameters_furanic.py",
@@ -315,7 +315,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/08_path_scorecard.png",
-        "sha256": "a2a165a2cd7cc33f068bb959445085d1e842b41ed3f2406dece09f1b3f93c6bc"
+        "sha256": "58a75d0908dd0d6c8be125479200a2f5b8e05630d119bd1ad1b60f4aa1aebb99"
       },
       {
         "path": "docs/assets/thiol_sink/09_repository_flow.png",
@@ -323,7 +323,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/10_tree_sugar.png",
-        "sha256": "f71a6f93ae5d3640a5af312e1fce768266bc7a44ced4cb6b79a2afa881862ece"
+        "sha256": "8d411ebf58912db867aa1373a5c3e8f400af55ab5da1d49f78f9aafddab4c691"
       },
       {
         "path": "docs/assets/thiol_sink/11_tree_sulfur.png",
@@ -335,7 +335,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/13_steps_by_status.png",
-        "sha256": "b8436c04ed2cf7886541d42da4f3130ad9d8a300cf39e449817f04f916a63cd1"
+        "sha256": "d0fc49d531fd9ba8e1c31f830d10731eb8221729a3c172aeedc7fef3f7532b19"
       },
       {
         "path": "docs/assets/thiol_sink/14_field_scheme.png",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "2a538ef8109d3b31aee5b74eb06a995ae0c4a79214fb6d8ae6dd57c2fa8fcbfb"
+        "sha256": "f50087239bad4d37b954e8c9fb3d56da6be22fc7bb258ea3655c0f590f2b6575"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
@@ -367,19 +367,19 @@
       },
       {
         "path": "docs/assets/thiol_sink/21_parity.png",
-        "sha256": "ab7c8270f9f83f871bed28b1ff92f5bb549b054f8ffc37318508013284fcb194"
+        "sha256": "7e3fa1cf6c5051142d0e339338d78792ba7d56038452ac99ac6a563d1369023e"
       },
       {
         "path": "docs/assets/thiol_sink/22_no_number.png",
-        "sha256": "29c623d79e7290fa1a1c4f192850667f940b52527ed861c05b441b4a33df03bd"
+        "sha256": "37a57938fc77e147c361271eb28ae749a3a4b421475e8b2679f3420c63843b12"
       },
       {
         "path": "docs/assets/thiol_sink/23_coverage_of_declared_targets.png",
-        "sha256": "e7a5c1ddb6ca497a35458d21028a9dcbc85ec6abbcd6c3d58cfe16dfc2acf949"
+        "sha256": "ebd7c16616e5b60b6a52c8cb493cd0db89cdebe1d1c676ea179556cfed1ed1b8"
       },
       {
         "path": "docs/assets/thiol_sink/24_fat_path_hexanal.png",
-        "sha256": "fb6963e43579e046dc0d1f0b54bd046593257a054543670c40151c8fd51a3a23"
+        "sha256": "2fd37fed43abc937fcc2dc4dd7da889addcc3ed6d6949d3e8e653cd3ec73d76b"
       },
       {
         "path": "docs/assets/thiol_sink/25_protein_matrix_layer.png",

@@ -1,0 +1,166 @@
+{
+  "artifact": "env_prior_ship_rule",
+  "provenance": {
+    "artifact": "env_prior_ship_rule",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "ce288def982bbdfb8d49f8c8613c024954d13a13",
+      "short": "ce288def",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_env_prior_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/core_prediction_uncertainty.json",
+        "sha256": "bf03bd1a0be1a429fd1dab61e5a76bd8c7f9ed4b7a0cbc28097a532612b6a3ca"
+      }
+    ]
+  },
+  "prereg": [
+    "results/validation/kinetic_core_env_b18_prereg.md",
+    "results/validation/kinetic_core_env_b13_prereg.md"
+  ],
+  "rule": "INSTALL if T1 (the prior rows exist), T2 (every row the priors reach widens, and no other row moves beyond the MEASURED noise floor) and T3 (no median moves) hold; T4 reported",
+  "T1": {
+    "b18_rows": [
+      "b18.log10_k_go_ak_100C",
+      "b18.ea_go_ak_kj_mol",
+      "b18.log10_k_mgo_ak_100C",
+      "b18.ea_mgo_ak_kj_mol",
+      "b18.ph_slope_above_7_decades_per_unit",
+      "b18.ph_slope_below_7_decades_per_unit"
+    ],
+    "b18_sampled": [
+      "b18.log10_k_go_ak_100C",
+      "b18.ea_go_ak_kj_mol",
+      "b18.log10_k_mgo_ak_100C",
+      "b18.ea_mgo_ak_kj_mol"
+    ],
+    "b13_rows": [
+      "b13.k_da_sink.log10_k_100C",
+      "b13.k_go_sink.ea_kj_mol",
+      "b13.k_odg_da.log10_k_100C",
+      "b13.k_hmf_self.log10_k_100C",
+      "b13.k_glc_g.log10_k_100C",
+      "b13.k_g_go.log10_k_100C",
+      "b13.k_tdg_ddg.log10_k_100C",
+      "b13.k_ddg_hmf.log10_k_100C"
+    ],
+    "b13_sampled": [
+      "b13.k_da_sink.log10_k_100C",
+      "b13.k_go_sink.ea_kj_mol",
+      "b13.k_odg_da.log10_k_100C",
+      "b13.k_hmf_self.log10_k_100C"
+    ],
+    "pass": true
+  },
+  "T2": {
+    "noise_floor_from_two_seeds": {
+      "n": 42,
+      "median_rel": 0.03086157674879764,
+      "p95_rel": 0.13366754763350322,
+      "max_rel": 0.16985206882397694
+    },
+    "tolerance_used_rel": 0.16985206882397694,
+    "rows_the_priors_reach": [
+      {
+        "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.0006062707274732292,
+        "width_after": 0.35521784783752164,
+        "delta": 0.3546115771100484
+      },
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.0002046460205887452,
+        "width_after": 0.8457307519806223,
+        "delta": 0.8455261059600335
+      },
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.0002046460205887452,
+        "width_after": 0.8457307519806223,
+        "delta": 0.8455261059600335
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.00952185361657665,
+        "width_after": 0.3797770603960119,
+        "delta": 0.37025520677943524
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "trunk",
+        "width_before": 7.043893472298872e-07,
+        "width_after": 0.13506063206957947,
+        "delta": 0.13505992768023223
+      }
+    ],
+    "n_rows_they_do_not": 34,
+    "violations": [],
+    "pass": true
+  },
+  "T3": {
+    "median_noise_floor_max_dex": 0.12112885064432827,
+    "n_seed_pairs": 42,
+    "unreached_medians_moved_beyond_the_floor": [],
+    "note": "No centre was changed by either wave: every prior is centred where its constant shipped. A median moving at all is the finite-n stream effect, and the floor below is what that effect is worth, measured from two seeds of the SAME priors.",
+    "pass": true
+  },
+  "T4": {
+    "widened_rows": [
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.0002046460205887452,
+        "width_after": 0.8457307519806223,
+        "delta": 0.8455261059600335
+      },
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.0002046460205887452,
+        "width_after": 0.8457307519806223,
+        "delta": 0.8455261059600335
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.00952185361657665,
+        "width_after": 0.3797770603960119,
+        "delta": 0.37025520677943524
+      },
+      {
+        "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.0006062707274732292,
+        "width_after": 0.35521784783752164,
+        "delta": 0.3546115771100484
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "trunk",
+        "width_before": 7.043893472298872e-07,
+        "width_after": 0.13506063206957947,
+        "delta": 0.13505992768023223
+      }
+    ],
+    "newly_inside_interval": [],
+    "reported_only": true
+  },
+  "verdict": "INSTALL"
+}

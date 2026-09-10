@@ -197,7 +197,7 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_of_sample():
+def test_core_envelope_covers_10_of_42_evaluable_literature_rows_and_10_of_41_out_of_sample():
     # RE-PINNED 2026-09-04 (the unidentified-coordinate rule inverted): a coordinate the fit
     # could not pin is now DRAWN across its declared band instead of frozen at the optimum,
     # with an Ea band narrowed to a 12-decade prefactor prior and a definitionally-bounded
@@ -226,7 +226,13 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     lit = s["honest_literature_coverage"]
     # RE-PINNED 2026-09-07 (B15): the extrusion row at a_w 0.35 is now inside the acrylamide window and
     # its interval is sampled (33 -> 34 evaluable, 6 -> 5 not evaluable); three new priors move the stream.
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (7, 34, 5)
+    # RE-PINNED 2026-09-10 (ENV-B18, ENV-B13 and B28 together): 7/34 with 5 NOT EVALUABLE ->
+    # 10/42 with ZERO not evaluable. The five that were not evaluable were the five
+    # hydroxymethylfurfural rows, and the reason they were not evaluable is the defect ENV-B13
+    # closed: their intervals were 0.000 to 0.135 decades wide, and an interval of zero width can
+    # neither contain a measurement nor miss one. They have intervals now, so they count. The other
+    # new rows are B28's nonanal and 2-pentylfuran.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (10, 42, 0)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -235,14 +241,20 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     # RE-PINNED 2026-09-07 (B14): the acrylamide lane's declared flat a_w band joined the draw
     # table (inert on every panel row except the a_w-inside-window acrylamide hold-outs, +0.05 dex);
     # the moved random stream shifts every row by a few hundredths: 5/33 -> 7/33, 1.3376 -> 1.4495 dex.
-    assert lit["median_ci_width_log10"] == pytest.approx(1.3080, abs=5e-4)
+    # RE-PINNED 2026-09-10: 1.3080 -> 1.0411 dex, AND THE FALL IS NOT A NARROWING. Nothing got
+    # tighter: the ship rule measured the Monte-Carlo noise floor from two seeds and confirmed no
+    # row moved beyond it. The median fell because five rows that previously had NO interval, and
+    # were therefore excluded from the median, now have intervals of 0.135 to 0.846 dex -- all
+    # below the old median, so including them pulls it down. A median over a changed row set is not
+    # a comparison; the ship rule's per-row table is.
+    assert lit["median_ci_width_log10"] == pytest.approx(1.0411, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (7, 33)
+    assert (oos["hits"], oos["total"]) == (10, 41)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
-    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
+    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.209, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
-        "headspace": 8, "extraction": 31, "undeclared": 0,
+        "headspace": 11, "extraction": 31, "undeclared": 0,   # +3: B28's nonanal rows
     }
     readme = _doc_text(README)
     _assert_quoted(readme, "7 of 34", "README.md", "the core envelope's literature coverage")
