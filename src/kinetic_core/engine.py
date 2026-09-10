@@ -475,17 +475,12 @@ _TARGET_LANE: Mapping[str, str] = {
 }
 
 #: B13: the species whose steps exist on the trunk integrator only.
-DICARBONYL_TARGET_KEYS: frozenset = frozenset({"G", "GO", "DA"})
-#: B18: the pyrazine species, whose steps also exist on the trunk integrator only.
-PYRAZINE_TARGET_KEYS: frozenset = frozenset({"PZ", "DMP", "MPZ"})
-#: B20: the glycation arm's reportable species, trunk lane only, on a protein loading.
-GLYCATION_TARGET_KEYS: frozenset = frozenset({"CML", "CEL", "FLP", "LYSP"})
-#: B22: the methionine chain's reportable species, trunk lane only, on a methionine charge.
-METHIONINE_TARGET_KEYS: frozenset = frozenset({"MTAL", "MSH", "DMDS"})
-#: B24: 2-acetyl-1-pyrroline and its intermediate, trunk lane only, on a proline charge.
-PROLINE_TARGET_KEYS: frozenset = frozenset({"AP", "PYRL"})
-TRUNK_ONLY_TARGET_KEYS: frozenset = (DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS | GLYCATION_TARGET_KEYS | METHIONINE_TARGET_KEYS
-                                     | PROLINE_TARGET_KEYS)
+# The trunk's optional arms and their target keys are one table now (trunk_arms.py); the names
+# below are re-exported so nothing that imported them from here has to change.
+from .trunk_arms import (  # noqa: E402
+    DICARBONYL_TARGET_KEYS, GLYCATION_TARGET_KEYS, METHIONINE_TARGET_KEYS, PROLINE_TARGET_KEYS,
+    PYRAZINE_TARGET_KEYS, TRUNK_ARMS, TRUNK_ONLY_TARGET_KEYS, named_targets,
+)
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
 _PRECURSOR_LANE: Mapping[str, str] = {
@@ -1030,36 +1025,29 @@ def declare_envelope(
     # B13: the dicarbonyl steps are trunk-only (the sulfur and acrylamide networks keep the
     # topology their fits were run on), so a dicarbonyl target on another lane is refused
     # by name instead of answered with the inert zero those state vectors carry.
-    dicarbonyls = sorted(c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS)
-    pyrazines = sorted(c for c, key in mapped_targets.items() if key in PYRAZINE_TARGET_KEYS)
-    glycation = sorted(c for c, key in mapped_targets.items() if key in GLYCATION_TARGET_KEYS)
-    methionine_targets = sorted(c for c, key in mapped_targets.items() if key in METHIONINE_TARGET_KEYS)
-    proline_targets = sorted(c for c, key in mapped_targets.items() if key in PROLINE_TARGET_KEYS)
-    if proline_targets and lane == TRUNK:
-        from .parameters_proline import PROLINE_NOT_SHIPPED_REASON, PROLINE_SHIPPED
-
-        if not PROLINE_SHIPPED:
-            reasons.append("2-ACETYL-1-PYRROLINE TARGETS " + ", ".join(repr(c) for c in proline_targets) + ": " + PROLINE_NOT_SHIPPED_REASON)
-    if proline_targets and lane == TRUNK and mapped_precursors.get("PRO", 0.0) <= 0.0 and mapped_precursors.get("PYRL", 0.0) <= 0.0:
-        reasons.append("2-ACETYL-1-PYRROLINE TARGETS " + ", ".join(repr(c) for c in proline_targets)
-                       + " need proline (or fed 1-pyrroline) in the charge (wave B24). Refused rather than answered with a structural zero.")
-    if methionine_targets and lane == TRUNK:
-        from .parameters_methionine import METHIONINE_NOT_SHIPPED_REASON, METHIONINE_SHIPPED
-
-        if not METHIONINE_SHIPPED:
-            reasons.append("METHIONINE CHAIN TARGETS " + ", ".join(repr(c) for c in methionine_targets) + ": " + METHIONINE_NOT_SHIPPED_REASON)
-    if methionine_targets and lane == TRUNK and mapped_precursors.get("MET", 0.0) <= 0.0:
-        # B22: the chain's substrate is methionine; without it every level is a structural zero.
-        reasons.append("METHIONINE CHAIN TARGETS " + ", ".join(repr(c) for c in methionine_targets)
-                       + " need methionine in the charge (wave B22): methional is methionine's Strecker aldehyde and "
-                       "methanethiol and the disulfide are made from it. Refused rather than answered with a structural zero.")
+    # The trunk's optional arms, one table (trunk_arms.py): not-shipped refusals, missing-precursor
+    # refusals and the lane-conflict clause, in the orders the hand-written blocks emitted them.
+    arm_targets = {arm.label: named_targets(arm, mapped_targets) for arm in TRUNK_ARMS}
+    for arm in sorted(TRUNK_ARMS, key=lambda a: a.refusal_order):
+        found = arm_targets[arm.label]
+        if not found or lane != TRUNK:
+            continue
+        if arm.shipped is not None:
+            shipped, why = arm.shipped()
+            if not shipped:
+                reasons.append(arm.label + " " + ", ".join(repr(c) for c in found) + ": " + why)
+        if arm.required_precursors is not None and all(
+                mapped_precursors.get(k, 0.0) <= 0.0 for k in arm.required_precursors):
+            reasons.append(arm.label + " " + ", ".join(repr(c) for c in found) + arm.missing_precursor_message)
+    # Two irregular checks stay explicit: this compound has no species key, so it is matched on the
+    # raw target string ...
     if any(str(c).strip().lower() in ("dimethyl trisulfide", "dmts") for c in targets):
         from .parameters_methionine import METHIONINE_NO_DMTS_REASON
 
         reasons.append("UNREPRESENTED TARGET 'dimethyl trisulfide' (wave B22): " + METHIONINE_NO_DMTS_REASON)
+    # ... and the glycation arm refuses on the MATRIX LAYER's charged amine sites, not on a precursor.
+    glycation = arm_targets["GLYCATION TARGETS"]
     if glycation and lane == TRUNK:
-        # B20: the arm's substrate is protein-bound lysine; without a loading the pool is zero
-        # and a zero would be a structural artefact, not an answer.
         from .matrix_sites import resolve as _resolve_sites_for_glycation
         from .parameters_glycation import GLYCATION_NO_PROTEIN_REASON
 
@@ -1069,18 +1057,9 @@ def declare_envelope(
             _charged = None
         if _charged is None or _charged.amine <= 0:
             reasons.append(GLYCATION_NO_PROTEIN_REASON + " Targets: " + ", ".join(repr(c) for c in glycation) + ".")
-    if (dicarbonyls or pyrazines or glycation or methionine_targets or proline_targets) and lane is not None and lane != TRUNK:
-        named = []
-        if dicarbonyls:
-            named.append("DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls) + " (wave B13)")
-        if pyrazines:
-            named.append("PYRAZINE TARGETS " + ", ".join(repr(c) for c in pyrazines) + " (wave B18)")
-        if glycation:
-            named.append("GLYCATION TARGETS " + ", ".join(repr(c) for c in glycation) + " (wave B20)")
-        if methionine_targets:
-            named.append("METHIONINE CHAIN TARGETS " + ", ".join(repr(c) for c in methionine_targets) + " (wave B22)")
-        if proline_targets:
-            named.append("2-ACETYL-1-PYRROLINE TARGETS " + ", ".join(repr(c) for c in proline_targets) + " (wave B24)")
+    if any(arm_targets.values()) and lane is not None and lane != TRUNK:
+        named = [arm.label + " " + ", ".join(repr(c) for c in arm_targets[arm.label]) + f" (wave {arm.wave})"
+                 for arm in sorted(TRUNK_ARMS, key=lambda a: a.conflict_order) if arm_targets[arm.label]]
         reasons.append(
             " and ".join(named)
             + f" run on the trunk lane only: the {lane} lane's network keeps the topology its fit was run "
@@ -1237,43 +1216,25 @@ def declare_envelope(
                 f"recorded and IGNORED."
             )
 
-    # --- B18: the pyrazine step's own declarations --------------------------
-    # The step is measured (fed dicarbonyls); the supply from a sugar + amine pot is not, and
-    # the ship rule sized both misses. Every pyrazine answer carries them.
-    if set(mapped_targets.values()) & PYRAZINE_TARGET_KEYS:
-        from .parameters_pyrazine import PYRAZINE_SINK_CAVEAT, PYRAZINE_SUPPLY_CAVEAT
+    # The arms' own declarations, from the same table: each answer that names an arm's targets
+    # carries that arm's caveats, and an amine the trunk charges as glycine says so.
+    target_keys_here = set(mapped_targets.values())
+    for arm in sorted(TRUNK_ARMS, key=lambda a: a.warning_order):
+        if arm.charged_as_glycine is not None:
+            pkey, on_trunk, on_other = arm.charged_as_glycine
+            amount = mapped_precursors.get(pkey, 0.0)
+            if amount > 0.0 and lane == TRUNK:
+                warnings.append(on_trunk.format(amount=amount, lane=lane))
+            if amount > 0.0 and on_other is not None and lane is not None and lane != TRUNK:
+                warnings.append(on_other.format(amount=amount, lane=lane))
+        if arm.target_caveats is not None and target_keys_here & arm.target_keys:
+            warnings.extend(arm.target_caveats())
+        if arm.label == "PYRAZINE TARGETS" and target_keys_here & (arm.target_keys | {"GO", "G"}):
+            # B21's aqueous glyoxal supply is declared on glyoxal, glucosone AND the pyrazines, which
+            # is a wider set than the pyrazine arm's own targets; it sits here so it keeps its place.
+            from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_CAVEAT
 
-        warnings.append(PYRAZINE_SUPPLY_CAVEAT)
-        warnings.append(PYRAZINE_SINK_CAVEAT)
-    # --- B21: the aqueous glyoxal supply's own declaration, on glyoxal, glucosone and the pyrazines ---
-    if set(mapped_targets.values()) & (PYRAZINE_TARGET_KEYS | {"GO", "G"}):
-        from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_CAVEAT
-
-        warnings.append(AQUEOUS_GLYOXAL_CAVEAT)
-    # --- B24: 2-acetyl-1-pyrroline's own declaration -----------------------------
-    if mapped_precursors.get("PRO", 0.0) > 0.0 and lane == TRUNK:
-        warnings.append(f"proline ({mapped_precursors['PRO']:g} mmol/L) is charged as GLYCINE at the same molarity for the sugar "
-                        "path's Amadori chemistry (declared, wave B24; a secondary amine, so an upper bound on the supply it makes).")
-    if set(mapped_targets.values()) & PROLINE_TARGET_KEYS:
-        from .parameters_proline import PROLINE_CAVEAT
-
-        warnings.append(PROLINE_CAVEAT)
-    # --- B22: the methionine chain's own declaration ----------------------------
-    if mapped_precursors.get("MET", 0.0) > 0.0 and lane == TRUNK:
-        warnings.append(f"methionine ({mapped_precursors['MET']:g} mmol/L) is charged as GLYCINE at the same molarity for the sugar "
-                        "path's Amadori chemistry (declared, wave B22); its own Strecker chain did not ship and carries no flux.")
-    if mapped_precursors.get("MET", 0.0) > 0.0 and lane is not None and lane != TRUNK:
-        warnings.append(f"methionine ({mapped_precursors['MET']:g} mmol/L) is carried by the sugar path only (wave B22); "
-                        f"the {lane} lane's network has no methionine step, so it is recorded and not charged.")
-    if set(mapped_targets.values()) & METHIONINE_TARGET_KEYS:
-        from .parameters_methionine import METHIONINE_CAVEAT
-
-        warnings.append(METHIONINE_CAVEAT)
-    # --- B20: the glycation arm's own declaration ------------------------------
-    if set(mapped_targets.values()) & GLYCATION_TARGET_KEYS:
-        from .parameters_glycation import GLYCATION_AVAILABILITY_CAVEAT
-
-        warnings.append(GLYCATION_AVAILABILITY_CAVEAT)
+            warnings.append(AQUEOUS_GLYOXAL_CAVEAT)
 
     # --- B7: the furanic channel's own declarations -----------------------
     # Every one of these is an EXTRAPOLATION WARNING, not a refusal, and each
