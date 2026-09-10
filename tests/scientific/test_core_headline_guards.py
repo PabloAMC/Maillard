@@ -81,7 +81,7 @@ def test_tracked_scorecard_is_not_stale(tracked_scores, live_scores):
 # --------------------------------------------------------------------------------------
 
 
-def test_core_panel_is_37_bundles_27_answered_42_rows(tracked_scores):
+def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # RE-PINNED 2026-09-04 (later the same day): the furosine bundle's DOI is a bread-baking paper
     # with no extrusion point; quarantined. Its row was always refused (furosine is no core species).
     # RE-PINNED 2026-09-04: two sourceless bundles quarantined (3 rows) and the eight hexose-only
@@ -98,14 +98,18 @@ def test_core_panel_is_37_bundles_27_answered_42_rows(tracked_scores):
     # 1978 and read this week. The BENCHMARK and ANSWERED counts do not move: no new pot entered,
     # three questions inside existing pots stopped being refused. The within-3x count is unchanged
     # at 4, so the three new rows all miss the band -- see the next test, where that is the point.
-    assert s["matched_compound_count"] == 42
+    # RE-PINNED AGAIN 2026-09-10: 42 -> 46. The four 2-pentylfuran rows joined the scored list
+    # once a missing lane entry was found: the compound had been reported in mmol/L instead of
+    # ug/L, which read as the model making almost none of it. Seven rows have now left the refused
+    # list in two days and the within-3x count has not moved.
+    assert s["matched_compound_count"] == 46
     # RE-PINNED BY WAVE B28: 25 -> 22 refused. Exactly the three nonanal rows above; the four
     # 2-pentylfuran rows stay refused, and their REASON changed rather than their status. That
     # matters and is asserted elsewhere: the branch fraction those rows were missing is measured
     # now, and they are refused because the hexanal they are scored against is not produced by the
     # lane that would carry the alkylfuran. Un-refusing them answered four rows six to nine orders
     # of magnitude below measurement, which is worse than refusing.
-    assert s["refused_compound_count"] == 22
+    assert s["refused_compound_count"] == 18
     # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
     # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
@@ -123,7 +127,7 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 16}
 
 
-def test_within_3x_is_4_of_42_and_out_of_sample_3_of_41(tracked_scores):
+def test_within_3x_is_4_of_46_and_out_of_sample_3_of_45(tracked_scores):
     # RE-PINNED 2026-09-04: 6/49 -> 4/39. The two hits lost are Bolton 1994 (its assumed
     # loadings replaced by the paper's Table I: the core now overpredicts MFT 20x) and one of the
     # quarantined Hofmann-derivation rows; the eight hexose thiol rows (all misses) left the count.
@@ -140,14 +144,14 @@ def test_within_3x_is_4_of_42_and_out_of_sample_3_of_41(tracked_scores):
     # on a wave that made the model strictly more capable. That is the honest arithmetic and it is
     # pinned rather than smoothed: answering more questions lowers a pass RATE unless the new
     # answers are good, and two of these three nearly are.
-    assert (s["within_band_count"], s["matched_compound_count"]) == (4, 42)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (4, 42)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (3, 41)
+    assert (s["within_band_count"], s["matched_compound_count"]) == (4, 46)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (4, 46)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (3, 45)
     assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (1, 1)
     assert s["holdout_within_band"] == {"hits": 3, "total": 26}
     readme = _doc_text(README)
-    _assert_quoted(readme, "4 of 42", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "3 of 41", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "4 of 46", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "3 of 45", "README.md", "the core's out-of-sample count")
 
 
 def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_scores):

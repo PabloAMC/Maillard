@@ -2,25 +2,25 @@
 
 pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresholds`, else the global default.
 
-* panel: **37** benchmarks, 27 scored, 10 fully refused; rows **42**, refused rows 22
-* within 3x: 4/42 (0.095); median fold 21.865, geometric mean 37.021, worst 3.34e+04
+* panel: **37** benchmarks, 27 scored, 10 fully refused; rows **46**, refused rows 18
+* within 3x: 4/46 (0.087); median fold 30.888, geometric mean 50.888, worst 4.23e+04
 * evidence roles (core): {'external_holdout': 21, 'predictive': 16}
 * predictive benchmarks passing their contract: NONE; strict-ready: NONE
-* **honest literature: 4/42 within band** (0.095), 27 benchmarks, median fold 21.865, geometric mean 37.021
-* **out-of-sample: 3/41 within band** (0.073), 26 benchmarks, median fold 23.562, geometric mean 39.610
+* **honest literature: 4/46 within band** (0.087), 27 benchmarks, median fold 30.888, geometric mean 50.888
+* **out-of-sample: 3/45 within band** (0.067), 26 benchmarks, median fold 32.326, geometric mean 54.505
 * **rows the sulfur fit read: 1/1 within band** (1.000), 1 benchmarks, median fold 2.316, geometric mean 2.316
 
 ## Per panel / role / lane
 
 | split | key | benchmarks | rows | within band | rate | contract passes | strict-ready | median fold | geo-mean fold |
 |---|---|---|---|---|---|---|---|---|---|
-| panel | external_matrix | 4 | 6 | 0 | 0.000 | 0 | 0 | 8.011 | 66.690 |
+| panel | external_matrix | 4 | 7 | 0 | 0.000 | 0 | 0 | 8.689 | 85.041 |
 | panel | maillard_path_holdout | 17 | 26 | 3 | 0.115 | 0 | 0 | 26.506 | 25.447 |
-| panel | trust_loop | 16 | 10 | 1 | 0.100 | 0 | 0 | 27.204 | 68.926 |
-| evidence_role | external_holdout | 21 | 32 | 3 | 0.094 | 0 | 0 | 17.746 | 30.485 |
-| evidence_role | predictive | 16 | 10 | 1 | 0.100 | 0 | 0 | 27.204 | 68.926 |
+| panel | trust_loop | 16 | 13 | 1 | 0.077 | 0 | 0 | 34.240 | 154.345 |
+| evidence_role | external_holdout | 21 | 33 | 3 | 0.091 | 0 | 0 | 23.562 | 32.869 |
+| evidence_role | predictive | 16 | 13 | 1 | 0.077 | 0 | 0 | 34.240 | 154.345 |
 | lane | acrylamide | - | 12 | 2 | 0.167 | 0 | 0 | 7.728 | 23.060 |
-| lane | lipid | - | 10 | 0 | 0.000 | 0 | 0 | 21.465 | 107.190 |
+| lane | lipid | - | 14 | 0 | 0.000 | 0 | 0 | 199.925 | 225.021 |
 | lane | sulfur | - | 19 | 2 | 0.105 | 0 | 0 | 29.450 | 30.281 |
 | lane | trunk | - | 1 | 0 | 0.000 | 0 | 0 | 11.930 | 11.930 |
 
@@ -39,10 +39,10 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 2.316 | 0.365 | 1.10 / 0.041 | scale-gap | no | 1 | 1.32 |
 | hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 0/1 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - | 1.32 |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 6.865 | 0.702 | 1.10 / 0.041 | scale-gap | no | - | 0.27 |
-| pea_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 1/2 | 0.500 | 3.36e+03 | 3.526 | 2.00 / 0.120 | coverage-gap | no | - | not_applicable |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | PRIMARY | predictive | 2/3 | 0.667 | 34.240 | 1.024 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
+| pea_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 8.52e+03 | 3.728 | 2.00 / 0.120 | scale-gap | no | - | not_applicable |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | PRIMARY | predictive | 3/3 | 1.000 | 34.240 | 1.186 | 2.00 / 0.120 | ranking-gap | no | - | continuous |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | SECONDARY | predictive | 1/1 | 1.000 | 93.308 | 1.970 | 1.50 / 0.100 | scale-gap | no | - | not_applicable |
-| soy_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 1/2 | 0.500 | 6.08e+03 | 3.784 | 2.00 / 0.120 | coverage-gap | no | - | not_applicable |
+| soy_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 4.23e+04 | 4.205 | 2.00 / 0.120 | scale-gap | no | - | not_applicable |
 | thiamine_cys_glucose_120C_Bolton1994 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 20.168 | 1.305 | 3.00 / 0.480 | scale-gap | no | - | 2.31 |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 9.149 | 0.881 | 1.50 / 0.100 | scale-gap | no | - | ambiguous |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | REFERENCE | external_holdout | 2/3 | 0.667 | 52.799 | 1.017 | 1.50 / 0.100 | coverage-gap | no | - | ambiguous |
@@ -63,7 +63,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 130.704 | 2.058 | 1.50 / 0.100 | scale-gap | no | - | 1.98 |
 | external_validation_bi_2020_raw_pea_hexanal | external_matrix | PRIMARY | external_holdout | 1/1 | 1.000 | 3.72e+03 | 3.570 | 2.00 / 0.120 | scale-gap | no | - | not_applicable |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | PRIMARY | external_holdout | 1/1 | 1.000 | 3.657 | 0.563 | 2.00 / 0.120 | scale-gap | no | - | open |
-| external_validation_li_2026_spi_wg_hme_control | external_matrix | PRIMARY | external_holdout | 2/4 | 0.500 | 8.689 | 0.711 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
+| external_validation_li_2026_spi_wg_hme_control | external_matrix | PRIMARY | external_holdout | 3/4 | 0.750 | 365.609 | 1.328 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
 | external_validation_liu_2023_ppi_offnote_baseline | external_matrix | PRIMARY | external_holdout | 2/2 | 1.000 | 3.34e+04 | 2.694 | 2.00 / 0.120 | scale-gap | no | - | not_applicable |
 
 ## Rows
@@ -75,10 +75,13 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Furfurylthiol (FFT) | ppb | 121.000 | 830.643 | 6.865 | no | no | [118.763, 5.81e+03] | yes | sulfur | no |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 730.638 | 3.690 | no | no | [104.464, 5.11e+03] | yes | sulfur | no |
 | pea_isolate_40C_PratapSingh2021 | hexanal | ppb | 1.14e+03 | 0.339 | 3.36e+03 | no | no | [0.012, 9.428] | no | lipid | no |
+| pea_isolate_40C_PratapSingh2021 | 2-pentylfuran | ppb | 638.000 | 0.075 | 8.52e+03 | no | no | [0.00269, 2.082] | no | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | hexanal | ppb | 782.000 | 22.839 | 34.240 | no | no | [0.234, 2.23e+03] | yes | lipid | no |
+| pea_isolate_uht_140C_Trikusuma2019 | 2-pentylfuran | ppb | 163.000 | 5.042 | 32.326 | no | no | [0.052, 492.404] | yes | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | nonanal | ppb | 24.000 | 7.366 | 3.258 | no | no | [0.075, 719.311] | yes | lipid | no |
 | resconi_2023_pbma_beef_identity_benchmark | furfural | ppb | 715.220 | 7.665 | 93.308 | no | no | [1.096, 53.611] | no | sulfur | no |
 | soy_isolate_40C_PratapSingh2021 | hexanal | ppb | 1.62e+03 | 0.267 | 6.08e+03 | no | no | [0.00944, 7.545] | no | lipid | no |
+| soy_isolate_40C_PratapSingh2021 | 2-pentylfuran | ppb | 2.49e+03 | 0.059 | 4.23e+04 | no | no | [0.00208, 1.666] | no | lipid | no |
 | thiamine_cys_glucose_120C_Bolton1994 | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 20.168 | no | no | [33.738, 1.65e+03] | no | sulfur | no |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | Acrylamide | ppb | 1.86e+03 | 203.194 | 9.149 | no | no | [29.052, 1.42e+03] | no | acrylamide | no |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.95e+03 | 6.308 | no | no | [278.358, 1.36e+04] | yes | acrylamide | no |
@@ -108,6 +111,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 130.704 | no | no | [30.274, 1.48e+03] | no | sulfur | no |
 | external_validation_bi_2020_raw_pea_hexanal | hexanal | ppb | 1.26e+03 | 0.339 | 3.72e+03 | no | no | [0.012, 9.428] | no | lipid | no |
 | external_validation_bi_2020_roasted_pea_hexanal | hexanal | ppb | 324.000 | 88.598 | 3.657 | no | no | [4.054, 1.94e+03] | yes | lipid | no |
+| external_validation_li_2026_spi_wg_hme_control | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 365.609 | no | no | [0.471, 502.987] | no | lipid | no |
 | external_validation_li_2026_spi_wg_hme_control | hexanal | ppb | 605.600 | 69.695 | 8.689 | no | no | [2.132, 2.28e+03] | yes | lipid | no |
 | external_validation_li_2026_spi_wg_hme_control | nonanal | ppb | 72.660 | 23.885 | 3.042 | no | no | [0.731, 780.763] | yes | lipid | no |
 | external_validation_liu_2023_ppi_offnote_baseline | hexanal | ppb | 1.13e+04 | 0.339 | 3.34e+04 | no | no | [0.012, 9.428] | no | lipid | no |
@@ -128,9 +132,6 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | hofmann1998_glucose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | hofmann1998_glucose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. |
-| pea_isolate_40C_PratapSingh2021 | trust_loop | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
-| soy_isolate_40C_PratapSingh2021 | trust_loop | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | Furfural | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would s |
 | mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | Furfural | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would s |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
@@ -138,7 +139,6 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 1-hexanol | UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a therm |
-| external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
 
 ## Bundles kept off the scored panel
 

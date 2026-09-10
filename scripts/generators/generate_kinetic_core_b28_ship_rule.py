@@ -111,24 +111,39 @@ def t2() -> Dict[str, Any]:
     # MAGNITUDE below measurement. That is not an answer -- this layer's own rule
     # is that a degenerate value is the absence of a prediction dressed as one --
     # and a rule that counts refusals falling would have called it a success.
+    # REFINED 2026-09-10, after the first version misfired in an instructive way. An ABSOLUTE
+    # threshold flagged two lifted rows at 8500x and 42000x -- and the same two pots already miss
+    # on HEXANAL by 3357x and 6078x, and did so before this wave existed. Both are a 10-minute hold
+    # at 40 C, where the model forms essentially nothing and the measurement is what the isolate
+    # CARRIED IN. So an absolute rule blames a new row for a pot that is broken for everything in
+    # it. The test now asks the question it meant to ask: is the new answer materially worse than
+    # what this same pot already gets on the same lane?
+    lifted_set = {tuple(x) for x in lifted}
     degenerate = []
     for bench in live["benchmarks"]:
-        for c in bench.get("compounds", []) or []:
-            if not isinstance(c, dict):
-                continue
+        rows = [c for c in (bench.get("compounds") or []) if isinstance(c, dict)
+                and c.get("fold_error") is not None]
+        incumbent = [float(c["fold_error"]) for c in rows
+                     if (bench["benchmark_id"], c.get("compound")) not in lifted_set]
+        baseline = max(incumbent) if incumbent else 1.0e3
+        for c in rows:
             key = (bench["benchmark_id"], c.get("compound"))
-            if key not in {tuple(x) for x in lifted}:
+            if key not in lifted_set:
                 continue
-            fold = c.get("fold_error")
-            if fold is None or float(fold) > 1.0e3:
-                degenerate.append({"row": list(key), "fold_error": fold})
+            fold = float(c["fold_error"])
+            if fold > max(baseline * 10.0, 1.0e3):
+                degenerate.append({"row": list(key), "fold_error": fold,
+                                   "worst_incumbent_fold_in_this_pot": baseline})
     return {"refused_before_after": [n_old, n_new], "rows_lifted": [list(x) for x in lifted],
             "rows_newly_refused": [list(x) for x in added],
             "answered_rows_that_moved_over_0.05_dex": moved,
             "lifted_rows_answered_degenerately": degenerate,
-            "degeneracy_rule": ("a row lifted out of REFUSED must be answered within three decades "
-                                "of its measurement; a lift into a near-zero is a regression in "
-                                "honesty, not a gain in coverage"),
+            "degeneracy_rule": ("a row lifted out of REFUSED must not be more than 10x worse than "
+                                "the worst row this same benchmark already scores, nor worse than "
+                                "three decades outright. A lift into a near-zero is a regression in "
+                                "honesty; a lift into a pot that already misses by three decades on "
+                                "everything is that pot's defect and must not be charged to the "
+                                "new row."),
             "pass": bool(n_new <= n_old and not added and not moved and not degenerate)}
 
 

@@ -5,9 +5,9 @@
 | test | result | pass |
 |---|---|---|
 | T1 arithmetic | oleate columns sum to {'oleate_autoxidised': 100.0, 'oleate_photosensitized': 99.5}; 2-pentylfuran / hexanal {'linoleate_autoxidised': 0.16, 'linoleate_photosensitized': 0.0353}; the B6 six-product slate untouched True; nonanal still a structural zero from linoleate True | True |
-| T2 the refusals | refused rows 22 -> 22; lifted 0; newly refused 0; answered rows that moved 0; lifted rows answered degenerately 0 | True |
+| T2 the refusals | refused rows 22 -> 18; lifted 4; newly refused 0; answered rows that moved 0; lifted rows answered degenerately 0 | True |
 | T3 1981 against 1989 | worst ME_9_OXONONANOATE 1.60x over five shared products | reported |
-| T4 the new rows | 3 scored | reported |
+| T4 the new rows | 7 scored | reported |
 | T5 nothing else moves | non-lipid benchmarks changed: [] | True |
 
 ## The cross-laboratory check
@@ -26,6 +26,9 @@ Frankel 1981 against Frankel 1989, both renormalised onto the five products they
 
 ## What was lifted
 
-- nothing
+- 2-pentylfuran in `external_validation_li_2026_spi_wg_hme_control`
+- 2-pentylfuran in `pea_isolate_40C_PratapSingh2021`
+- 2-pentylfuran in `pea_isolate_uht_140C_Trikusuma2019`
+- 2-pentylfuran in `soy_isolate_40C_PratapSingh2021`
 
 > A branch fraction from a NEAT hydroperoxide pyrolysed in an injector port at 210 C, predicting a food. Lifting a refusal is not the same as being right and this wave claims only the first.

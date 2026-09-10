@@ -34,8 +34,6 @@
       "2,5-dimethyl-4-hydroxy-3(2h)-thiophenone",
       "2-ethyl-4-hydroxy-5-methyl-3(2h)-furanone",
       "2-nonenal",
-      "2-pentyl furan",
-      "2-pentylfuran",
       "hemf",
       "homofuraneol",
       "propanal"
@@ -43,10 +41,10 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-09-09",
+    "generated_on": "2026-09-10",
     "git": {
-      "commit": "eb72ffd9be2536208723958830e60b1aa8850926",
-      "short": "eb72ffd9",
+      "commit": "25da68beb2bd92966ad2900393521e566da7386f",
+      "short": "25da68be",
       "branch": "reactions",
       "dirty": true
     },
@@ -249,17 +247,17 @@
     "panel_benchmark_count": 37,
     "scored_benchmark_count": 27,
     "refused_benchmark_count": 10,
-    "matched_compound_count": 42,
-    "refused_compound_count": 22,
+    "matched_compound_count": 46,
+    "refused_compound_count": 18,
     "within_band_count": 4,
-    "within_band_rate": 0.09523809523809523,
+    "within_band_rate": 0.08695652173913043,
     "fold_summary": {
-      "n": 42,
-      "median_fold_error": 21.865391112735217,
-      "worst_fold_error": 33391.73597895205,
+      "n": 46,
+      "median_fold_error": 30.888191682960606,
+      "worst_fold_error": 42300.67940081731,
       "best_fold_error": 1.9901918483315129,
-      "median_abs_log10_error": 1.33844524825671,
-      "geometric_mean_fold": 37.02071962643869
+      "median_abs_log10_error": 1.4893214384719875,
+      "geometric_mean_fold": 50.88784935580182
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -270,18 +268,18 @@
     "by_panel": {
       "external_matrix": {
         "benchmarks": 4,
-        "rows": 6,
+        "rows": 7,
         "within_band": 0,
         "contract_passes": 0,
         "strict_ready": 0,
         "within_band_rate": 0.0,
         "fold_summary": {
-          "n": 6,
-          "median_fold_error": 8.011277857239582,
+          "n": 7,
+          "median_fold_error": 8.68927048137261,
           "worst_fold_error": 33391.73597895205,
           "best_fold_error": 3.0420460788675383,
-          "median_abs_log10_error": 0.9021409468713688,
-          "geometric_mean_fold": 66.69011025463624
+          "median_abs_log10_error": 0.9389833162399543,
+          "geometric_mean_fold": 85.04062818252338
         }
       },
       "maillard_path_holdout": {
@@ -302,52 +300,52 @@
       },
       "trust_loop": {
         "benchmarks": 16,
-        "rows": 10,
+        "rows": 13,
         "within_band": 1,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.1,
+        "within_band_rate": 0.07692307692307693,
         "fold_summary": {
-          "n": 10,
-          "median_fold_error": 27.204292592227446,
-          "worst_fold_error": 9631.589383870052,
+          "n": 13,
+          "median_fold_error": 34.240232376046094,
+          "worst_fold_error": 42300.67940081731,
           "best_fold_error": 2.3158474462062624,
-          "median_abs_log10_error": 1.4196035666680276,
-          "geometric_mean_fold": 68.92633315209461
+          "median_abs_log10_error": 1.5345367034143473,
+          "geometric_mean_fold": 154.3448983573516
         }
       }
     },
     "by_evidence_role": {
       "external_holdout": {
         "benchmarks": 21,
-        "rows": 32,
+        "rows": 33,
         "within_band": 3,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.09375,
+        "within_band_rate": 0.09090909090909091,
         "fold_summary": {
-          "n": 32,
-          "median_fold_error": 17.74622284454017,
+          "n": 33,
+          "median_fold_error": 23.562429417061633,
           "worst_fold_error": 33391.73597895205,
           "best_fold_error": 1.9901918483315129,
-          "median_abs_log10_error": 1.2244305513105371,
-          "geometric_mean_fold": 30.4851619869367
+          "median_abs_log10_error": 1.3722200665917117,
+          "geometric_mean_fold": 32.86875830438901
         }
       },
       "predictive": {
         "benchmarks": 16,
-        "rows": 10,
+        "rows": 13,
         "within_band": 1,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.1,
+        "within_band_rate": 0.07692307692307693,
         "fold_summary": {
-          "n": 10,
-          "median_fold_error": 27.204292592227446,
-          "worst_fold_error": 9631.589383870052,
+          "n": 13,
+          "median_fold_error": 34.240232376046094,
+          "worst_fold_error": 42300.67940081731,
           "best_fold_error": 2.3158474462062624,
-          "median_abs_log10_error": 1.4196035666680276,
-          "geometric_mean_fold": 68.92633315209461
+          "median_abs_log10_error": 1.5345367034143473,
+          "geometric_mean_fold": 154.3448983573516
         }
       }
     },
@@ -370,18 +368,18 @@
       },
       "lipid": {
         "benchmarks": null,
-        "rows": 10,
+        "rows": 14,
         "within_band": 0,
         "contract_passes": 0,
         "strict_ready": 0,
         "within_band_rate": 0.0,
         "fold_summary": {
-          "n": 10,
-          "median_fold_error": 21.464751428709352,
-          "worst_fold_error": 33391.73597895205,
+          "n": 14,
+          "median_fold_error": 199.9245011569648,
+          "worst_fold_error": 42300.67940081731,
           "best_fold_error": 3.0420460788675383,
-          "median_abs_log10_error": 1.236760009827151,
-          "geometric_mean_fold": 107.19040032345316
+          "median_abs_log10_error": 2.0487766540591164,
+          "geometric_mean_fold": 225.02102620368004
         }
       },
       "sulfur": {
@@ -419,35 +417,35 @@
     },
     "honest_literature": {
       "benchmarks": 27,
-      "rows": 42,
+      "rows": 46,
       "within_band": 4,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.09523809523809523,
+      "within_band_rate": 0.08695652173913043,
       "fold_summary": {
-        "n": 42,
-        "median_fold_error": 21.865391112735217,
-        "worst_fold_error": 33391.73597895205,
+        "n": 46,
+        "median_fold_error": 30.888191682960606,
+        "worst_fold_error": 42300.67940081731,
         "best_fold_error": 1.9901918483315129,
-        "median_abs_log10_error": 1.33844524825671,
-        "geometric_mean_fold": 37.02071962643869
+        "median_abs_log10_error": 1.4893214384719875,
+        "geometric_mean_fold": 50.88784935580182
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
     "out_of_sample": {
       "benchmarks": 26,
-      "rows": 41,
+      "rows": 45,
       "within_band": 3,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.07317073170731707,
+      "within_band_rate": 0.06666666666666667,
       "fold_summary": {
-        "n": 41,
-        "median_fold_error": 23.562429417061633,
-        "worst_fold_error": 33391.73597895205,
+        "n": 45,
+        "median_fold_error": 32.32603367375632,
+        "worst_fold_error": 42300.67940081731,
         "best_fold_error": 1.9901918483315129,
-        "median_abs_log10_error": 1.3722200665917117,
-        "geometric_mean_fold": 39.60994547261727
+        "median_abs_log10_error": 1.5095524209965447,
+        "geometric_mean_fold": 54.50472956232477
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -473,7 +471,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.4
+    "wall_seconds": 12.9
   },
   "benchmarks": [
     {
@@ -1538,35 +1536,50 @@
           ],
           "shared_with": null,
           "in_core_fit": false
-        }
-      ],
-      "refused_compounds": [
+        },
         {
-          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-          "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
-          "envelope_state": "out_of_envelope",
+          "measured": 638.0,
+          "measured_ppb": 638.0,
+          "predicted": 0.0748466837558481,
+          "fold_error": 8524.091756438711,
+          "abs_log10_error": 3.9306481159718376,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.002691268069093535,
+            2.0815563241661
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         }
       ],
-      "matched_compounds": 1,
+      "refused_compounds": [],
+      "matched_compounds": 2,
       "total_compounds": 2,
-      "coverage": 0.5,
-      "max_ratio": 3356.8723978840485,
-      "mean_abs_log10_error": 3.52593483307164,
+      "coverage": 1.0,
+      "max_ratio": 8524.091756438711,
+      "mean_abs_log10_error": 3.728291474521739,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "coverage-gap",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "coverage 50.0% < 100%",
-        "max ratio 3357 > 2.00",
-        "mean |log10 ratio| 3.526 > 0.120"
+        "max ratio 8524 > 2.00",
+        "mean |log10 ratio| 3.728 > 0.120"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -1639,6 +1652,32 @@
           "in_core_fit": false
         },
         {
+          "compound": "2-pentylfuran",
+          "target_unit": "ppb",
+          "measured": 163.0,
+          "measured_ppb": 163.0,
+          "predicted": 5.042375493543165,
+          "fold_error": 32.32603367375632,
+          "abs_log10_error": 1.5095524209965447,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.05163552473949842,
+            492.4042264730872
+          ],
+          "measured_within_interval": true,
+          "lane": "lipid",
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (0) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
+        },
+        {
           "compound": "nonanal",
           "target_unit": "ppb",
           "measured": 24.0,
@@ -1666,33 +1705,22 @@
           "in_core_fit": false
         }
       ],
-      "refused_compounds": [
-        {
-          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "panel": "trust_loop",
-          "compound": "2-pentylfuran",
-          "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
-        }
-      ],
-      "matched_compounds": 2,
+      "refused_compounds": [],
+      "matched_compounds": 3,
       "total_compounds": 3,
-      "coverage": 0.6666666666666666,
+      "coverage": 1.0,
       "max_ratio": 34.240232376046094,
-      "mean_abs_log10_error": 1.0237589250280728,
-      "pearson_r_log10": null,
-      "ranking_status": "n/a",
+      "mean_abs_log10_error": 1.1856900903508967,
+      "pearson_r_log10": 0.6788095201160109,
+      "ranking_status": "fail",
       "scale_status": "fail",
-      "overall_status": "coverage-gap",
+      "overall_status": "ranking-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "coverage 66.7% < 100%",
+        "ranking 0.679 < 0.85",
         "max ratio 34.24 > 2.00",
-        "mean |log10 ratio| 1.024 > 0.120"
+        "mean |log10 ratio| 1.186 > 0.120"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -1848,35 +1876,50 @@
           ],
           "shared_with": null,
           "in_core_fit": false
-        }
-      ],
-      "refused_compounds": [
+        },
         {
-          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-          "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
-          "envelope_state": "out_of_envelope",
+          "measured": 2492.0,
+          "measured_ppb": 2492.0,
+          "predicted": 0.05891158334331271,
+          "fold_error": 42300.67940081731,
+          "abs_log10_error": 4.62634734273335,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.002083463687897819,
+            1.665771605320289
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         }
       ],
-      "matched_compounds": 1,
+      "refused_compounds": [],
+      "matched_compounds": 2,
       "total_compounds": 2,
-      "coverage": 0.5,
-      "max_ratio": 6077.677246087067,
-      "mean_abs_log10_error": 3.783737633229085,
+      "coverage": 1.0,
+      "max_ratio": 42300.67940081731,
+      "mean_abs_log10_error": 4.205042487981218,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "coverage-gap",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "coverage 50.0% < 100%",
-        "max ratio 6078 > 2.00",
-        "mean |log10 ratio| 3.784 > 0.120"
+        "max ratio 4.23e+04 > 2.00",
+        "mean |log10 ratio| 4.205 > 0.120"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3909,6 +3952,32 @@
       },
       "compounds": [
         {
+          "compound": "2-pentylfuran",
+          "target_unit": "ppb",
+          "measured": 5625.8,
+          "measured_ppb": 5625.8,
+          "predicted": 15.387486467996423,
+          "fold_error": 365.6087699378835,
+          "abs_log10_error": 2.563016604703885,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.47073684305512703,
+            502.9874829131333
+          ],
+          "measured_within_interval": false,
+          "lane": "lipid",
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 1.16e+04-2.76e+06 on the rate.",
+            "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
+        },
+        {
           "compound": "hexanal",
           "target_unit": "ppb",
           "measured": 605.6,
@@ -3972,33 +4041,24 @@
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "unidentified_route": false
-        },
-        {
-          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
-          "panel": "external_matrix",
-          "compound": "2-pentylfuran",
-          "target_unit": "ppb",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
         }
       ],
-      "matched_compounds": 2,
+      "matched_compounds": 3,
       "total_compounds": 4,
-      "coverage": 0.5,
-      "max_ratio": 8.68927048137261,
-      "mean_abs_log10_error": 0.7110745522037039,
-      "pearson_r_log10": null,
-      "ranking_status": "n/a",
+      "coverage": 0.75,
+      "max_ratio": 365.6087699378835,
+      "mean_abs_log10_error": 1.3283885697037643,
+      "pearson_r_log10": -0.2967475074361543,
+      "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "coverage-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "coverage 50.0% < 100%",
-        "max ratio 8.689 > 2.00",
-        "mean |log10 ratio| 0.711 > 0.120"
+        "coverage 75.0% < 100%",
+        "ranking -0.297 < 0.85",
+        "max ratio 365.6 > 2.00",
+        "mean |log10 ratio| 1.328 > 0.120"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -4234,36 +4294,6 @@
       "unidentified_route": false
     },
     {
-      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-      "panel": "trust_loop",
-      "compound": "2-pentylfuran",
-      "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-      "panel": "trust_loop",
-      "compound": "2-pentylfuran",
-      "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-      "panel": "trust_loop",
-      "compound": "2-pentylfuran",
-      "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
       "panel": "maillard_path_holdout",
       "compound": "Furfural",
@@ -4329,16 +4359,6 @@
       "compound": "1-hexanol",
       "target_unit": "ppb",
       "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
-      "panel": "external_matrix",
-      "compound": "2-pentylfuran",
-      "target_unit": "ppb",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false

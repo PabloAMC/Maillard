@@ -1394,11 +1394,19 @@ ran.
 4. **WHAT IS VALIDATED.** The three newly answered nonanal rows are external-literature rows in
    three different matrices from three laboratories, none of which any fit has read. They land at
    3.0x, 3.3x and 7.3x.
-5. **A REFUSAL RESTORED DURING THE RUN, AND THE RULE THAT NOW CATCHES IT.** 2-pentylfuran's branch
-   fraction is measured and correct, and un-refusing it answered four rows six to nine orders of
-   magnitude below measurement, because those rows' hexanal does not come from the lipid lane. A
-   degenerate value is the absence of a prediction dressed as one. The ship rule now requires every
-   row lifted out of REFUSED to be answered within three decades of its measurement.
+5. **A REFUSAL RESTORED ON A WRONG DIAGNOSIS, AND CORRECTED THE NEXT DAY.** 2-pentylfuran was
+   un-refused, produced answers about 1e5 below measurement, and was refused again on the reading
+   that its rows' hexanal does not come from the lipid lane. **That reading was false.** The engine's
+   `_TARGET_LANE` had no entry for the new species, so it was reported in mmol/L rather than µg/L.
+   Corrected 2026-09-10: the lane makes 5.04 µg/L in the Trikusuma pot against 163 measured, a 32×
+   miss and in line with this panel's median. The compound is answered. The episode is kept in the
+   record because a plausible mechanism explained a unit bug for a day.
+6. **THE DEGENERACY TEST, AND ITS OWN CORRECTION.** The ship rule now requires that a row lifted out
+   of REFUSED not be more than 10× worse than the worst row its own benchmark already scores. An
+   earlier absolute threshold flagged two rows at 8500× and 42000× whose pots already miss on
+   hexanal by 3357× and 6078× — a 10-minute hold at 40 °C, where the model forms nothing and the
+   measurement is what the isolate carried in. Blaming a new row for a pot that is broken for
+   everything in it is not a guard, it is noise.
 6. **A FIREWALL KEPT STRICT.** The B6 literal firewall forbids twelve values that appear only in
    that wave's hold-out columns. One of them, 9.7, is also Frankel 1981's photosensitized methyl
    octanoate share. The collision was resolved by moving this paper's numbers to a file the firewall

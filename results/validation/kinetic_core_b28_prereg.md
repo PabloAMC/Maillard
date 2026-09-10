@@ -152,3 +152,42 @@ than 2x; none was.
 
 **Both traps held.** The two 15 % nonanal figures are recorded in the species note as one measurement
 republished, and the two slates are never pooled as printed.
+
+
+## 7. Correction, 2026-09-10: the withdrawal in section 6 was wrong
+
+Section 6 says 2-pentylfuran was lifted and put back because "the hexanal these rows are scored
+against does not come from the lipid lane at all". **That is false and I should not have concluded
+it from the evidence I had.** The correct account:
+
+**What actually happened.** `_TARGET_LANE` in the engine had no entry for the new species. Without
+one, the concentration loop falls through to its last branch and reports the species in mmol/L
+instead of µg/L — a factor of about 1.4e5 for this compound. The lipid lane makes 3.65e-5 mmol/L of
+it in the Trikusuma pot, which is **5.04 µg/L against 163 measured, a 32× miss**, in line with this
+panel's median of 22×. The lane was right, the branch fraction was right, and a dictionary was one
+line short.
+
+**How the wrong conclusion survived.** The number looked like 1e5 too small, and there was a
+plausible mechanism to hand — the matrix-only path routing around the lipid lane — so I checked
+whether the story was consistent rather than whether it was true. One probe of the integrated state,
+which took a minute the next day, would have shown the ratio to hexanal was exactly the 0.16 that
+was installed. **The ship rule's new degeneracy test was right that something was wrong. The
+diagnosis of what was mine, and it was wrong**, and it was written into five places before it was
+checked.
+
+**The degeneracy test was also mis-specified, and the fix is the more useful half.** With the units
+corrected, two lifted rows still failed it, at 8500× and 42000×. Both are a 10-minute hold at 40 °C,
+and **both pots already miss on hexanal by 3357× and 6078×, and did so before this wave existed.**
+An absolute threshold blames a new row for a pot that is broken for everything in it. The rule now
+asks whether the new answer is materially worse than what the same pot already gets, and those two
+rows are not.
+
+**The real finding underneath, which is a benchmark defect and not a model one.** A 10-minute hold
+at 40 °C forms essentially nothing, so those two rows are measuring **what the isolate carried in**,
+not what the cook made — the same thing the Trikusuma reading found, where ten compounds sit above
+threshold before any heat. The model predicts formation from zero and therefore misses by three to
+four decades on every compound in those pots. Recorded in the backlog as its own item.
+
+**Final state.** Refused rows 25 → 18. Nonanal answered at 3.0×, 3.3× and 7.3×; 2-pentylfuran
+answered at 32×, 366×, 8524× and 42301×, the last two in the two pots that already miss by
+thousands on hexanal.

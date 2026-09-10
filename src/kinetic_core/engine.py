@@ -381,40 +381,27 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
         "lane emitted a number for it; this lane refuses. See "
         "parameters_lipid.PROHIBITED_DERIVATIONS."
     ),
-    # WAVE B28 (2026-09-09) TRIED TO LIFT THESE TWO AND PUT THEM BACK, WITH A
-    # SHARPER REASON. The old reason was "no branch fraction ... is measured
-    # anywhere in the fit corpus", and that is no longer true: Frankel, Neff &
-    # Selke 1981 Table III measures it, in the same laboratory and by the same
-    # injector-port method as the slate this lane is fitted on, and the wave
-    # ships it as PENTYLFURAN_PER_HEXANAL -- a ratio, so none of 1981's own
-    # denominator travels with it. Un-refusing it produced predictions six to
-    # nine ORDERS OF MAGNITUDE below measurement, and the cause is not the branch
-    # fraction. It is that on the matrix-only path the hexanal these rows are
-    # scored against does not come from the lipid lane at all: the lane's own
-    # hexanal in the same pot is about 1e5 times smaller. An alkylfuran hung off
-    # the lane's hexanal is therefore ~0, and A NEAR-ZERO ANSWER IS NOT AN
-    # ANSWER -- this layer's own rule is that emitting a degenerate value is the
-    # absence of a prediction dressed as one. So the refusal stands and now says
-    # what would lift it.
-    "2-pentylfuran": (
-        "The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke "
-        "1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here "
-        "as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured "
-        "nowhere in the fit corpus') is retired. It is still refused for a "
-        "different and sharper reason: this row's hexanal is not produced by "
-        "the lipid lane. On the matrix-only path the lane's own hexanal is "
-        "about 1e5 below the hexanal the row is scored against, so an "
-        "alkylfuran hung off it is ~0, and a near-zero answer is the absence of "
-        "a prediction rather than a prediction. WHAT WOULD LIFT IT: a route "
-        "that puts this row's hexanal and its alkylfuran on the same lane -- "
-        "i.e. a lipid charge for these matrices that the lane can actually "
-        "integrate, which is the same gap the hexanal rows already carry."
-    ),
-    "2-pentyl furan": (
-        "See '2-pentylfuran': the branch fraction is measured as of 2026-09-09 "
-        "and the refusal now rests on the lane that would carry it, not on the "
-        "missing number."
-    ),
+    # 2-pentylfuran and "2-pentyl furan" LEFT this table in WAVE B28 (2026-09-09), came BACK the
+    # same evening on a diagnosis that was wrong, and left again on 2026-09-10. The full record,
+    # because the wrong step is the instructive one:
+    #
+    #   The old reason was "no branch fraction for the linoleate -> alkylfuran route is measured
+    #   anywhere in the fit corpus". Frankel, Neff & Selke 1981 Table III measures it, in the same
+    #   laboratory and by the same injector-port method as the slate this lane is fitted on, and it
+    #   ships as PENTYLFURAN_PER_HEXANAL = 0.16 -- a ratio, so none of 1981's own denominator
+    #   travels with it. Un-refusing it produced predictions about 1e5 below measurement. I read
+    #   that as the lipid lane not being what produces these rows' hexanal, wrote that reasoning
+    #   into five places, and restored the refusal.
+    #
+    #   It was a missing entry in _TARGET_LANE. Without one the concentration loop reports the
+    #   species in mmol/L rather than ug/L. The lane makes 3.65e-5 mmol/L of it, which is 5.0 ug/L,
+    #   against 163 measured -- a 32x miss, in line with this panel's median, not a degenerate
+    #   answer at all. The lane was right, the ratio was right, and the dictionary was short one
+    #   line.
+    #
+    #   WHAT THE EPISODE IS WORTH KEEPING FOR: a plausible mechanistic story explained a unit bug
+    #   for a day. The ship rule's new degeneracy test caught that something was wrong and was
+    #   right to; the diagnosis of WHY was mine and it was wrong.
     "propanal": (
         "The lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
         "scission product; Frankel 1989 fed linoleate only, so the FIT column "
@@ -474,6 +461,12 @@ _TARGET_LANE: Mapping[str, str] = {
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
     "NONANAL": LIPID,
+    # WAVE B28, ADDED 2026-09-10 AND THIS OMISSION COST A WHOLE DIAGNOSIS. Without a lane here the
+    # concentration loop falls through to its last branch and reports the species in mmol/L instead
+    # of ug/L -- a factor of about 1.4e5 for this compound. Read as a prediction it looked like the
+    # lipid lane making almost none of it, and a refusal was restored on that reading. It was a
+    # missing dictionary entry.
+    "PENTYLFURAN": LIPID,
     "PENTANE": LIPID,
     "DECADIENAL": LIPID,
     "ME_OCTANOATE": LIPID,
@@ -549,6 +542,7 @@ LANE_DEFAULT_TARGETS: Mapping[str, Tuple[str, ...]] = {
         "methyl 9-oxononanoate",
         "methyl 13-oxo-9,11-tridecadienoate",
         "nonanal",                # wave B28: answered, on a declared anchor
+        "2-pentylfuran",          # wave B28, restored 2026-09-10 once the unit bug was found
     ),
 }
 

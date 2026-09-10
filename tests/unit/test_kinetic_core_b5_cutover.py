@@ -145,7 +145,10 @@ def test_acrylamide_request_routes_to_the_acrylamide_lane():
         # SHARPER than the old one, and that the two whose branch fraction is
         # measured are answered elsewhere (see tests/unit/test_kinetic_core_b6.py).
         ("1-hexanol", "no aldehyde-reduction step"),
-        ("2-pentylfuran", "not produced by the lipid lane"),
+        # 2-pentylfuran LEFT this list on 2026-09-10. Its branch fraction is measured (Frankel
+        # 1981) and the lane answers it at 5.04 ug/L against 163 measured in the Trikusuma pot.
+        # It was briefly refused again on 2026-09-09 for a reason that turned out to be a unit
+        # bug; see the note in engine.py's unrepresented-target table.
     ],
 )
 def test_unrepresented_compounds_are_declared_out_with_a_named_reason(compound, token):

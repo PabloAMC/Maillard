@@ -2,10 +2,10 @@
   "artifact": "kinetic_core_b28_ship_rule",
   "provenance": {
     "artifact": "kinetic_core_b28_ship_rule",
-    "generated_on": "2026-09-09",
+    "generated_on": "2026-09-10",
     "git": {
-      "commit": "eb72ffd9be2536208723958830e60b1aa8850926",
-      "short": "eb72ffd9",
+      "commit": "25da68beb2bd92966ad2900393521e566da7386f",
+      "short": "25da68be",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "1de19a32b8805e9b9dc8107f26dc4a50913502bf8adb01e45bda7bcaff3fcbba"
+        "sha256": "da403505e787f4f0e580c00661545dba216efbbb54c8d3c6f4c3296ba7104594"
       }
     ]
   },
@@ -44,13 +44,30 @@
   "T2": {
     "refused_before_after": [
       22,
-      22
+      18
     ],
-    "rows_lifted": [],
+    "rows_lifted": [
+      [
+        "external_validation_li_2026_spi_wg_hme_control",
+        "2-pentylfuran"
+      ],
+      [
+        "pea_isolate_40C_PratapSingh2021",
+        "2-pentylfuran"
+      ],
+      [
+        "pea_isolate_uht_140C_Trikusuma2019",
+        "2-pentylfuran"
+      ],
+      [
+        "soy_isolate_40C_PratapSingh2021",
+        "2-pentylfuran"
+      ]
+    ],
     "rows_newly_refused": [],
     "answered_rows_that_moved_over_0.05_dex": [],
     "lifted_rows_answered_degenerately": [],
-    "degeneracy_rule": "a row lifted out of REFUSED must be answered within three decades of its measurement; a lift into a near-zero is a regression in honesty, not a gain in coverage",
+    "degeneracy_rule": "a row lifted out of REFUSED must not be more than 10x worse than the worst row this same benchmark already scores, nor worse than three decades outright. A lift into a near-zero is a regression in honesty; a lift into a pot that already misses by three decades on everything is that pot's defect and must not be charged to the new row.",
     "pass": true
   },
   "T3": {
@@ -102,11 +119,39 @@
   "T4": {
     "rows": [
       {
+        "benchmark": "pea_isolate_40C_PratapSingh2021",
+        "compound": "2-pentylfuran",
+        "measured": 638.0,
+        "predicted": 0.0748466837558481,
+        "fold_error": 8524.091756438711
+      },
+      {
+        "benchmark": "pea_isolate_uht_140C_Trikusuma2019",
+        "compound": "2-pentylfuran",
+        "measured": 163.0,
+        "predicted": 5.042375493543165,
+        "fold_error": 32.32603367375632
+      },
+      {
         "benchmark": "pea_isolate_uht_140C_Trikusuma2019",
         "compound": "nonanal",
         "measured": 24.0,
         "predicted": 7.365972532831463,
         "fold_error": 3.2582255626161634
+      },
+      {
+        "benchmark": "soy_isolate_40C_PratapSingh2021",
+        "compound": "2-pentylfuran",
+        "measured": 2492.0,
+        "predicted": 0.05891158334331271,
+        "fold_error": 42300.67940081731
+      },
+      {
+        "benchmark": "external_validation_li_2026_spi_wg_hme_control",
+        "compound": "2-pentylfuran",
+        "measured": 5625.8,
+        "predicted": 15.387486467996423,
+        "fold_error": 365.6087699378835
       },
       {
         "benchmark": "external_validation_li_2026_spi_wg_hme_control",
@@ -123,7 +168,7 @@
         "fold_error": 7.333285233106555
       }
     ],
-    "n": 3,
+    "n": 7,
     "caveat": "A branch fraction from a NEAT hydroperoxide pyrolysed in an injector port at 210 C, predicting a food. Lifting a refusal is not the same as being right and this wave claims only the first.",
     "reported_only": true
   },

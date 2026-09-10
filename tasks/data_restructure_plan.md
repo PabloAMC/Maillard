@@ -2065,6 +2065,24 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       reading rather than "we have not found it". Hwang 1995's isotope splits live in its figures. Deng
       2022's 100 and 130 C methional rows were not run. And the thiol sink itself is the vial experiment
       in the introduction's section 8: about 130 vials, two temperatures, thiols and disulfides in one run.
+- [ ] **CARRIED-VOLATILES (2026-09-10, found by a ship rule misfiring). Two panel rows measure what
+      the isolate brought with it, and the model predicts formation from zero.**
+      `pea_isolate_40C_PratapSingh2021` and `soy_isolate_40C_PratapSingh2021` are a **10-minute hold
+      at 40 C**. Essentially nothing forms in ten minutes at 40 C, so what was measured is the
+      isolate's carried load, not the cook's product. The model misses by three to four decades on
+      BOTH compounds in BOTH pots, and always has: hexanal 3357x and 6078x, 2-pentylfuran 8524x and
+      42301x. The hexanal misses predate every wave and nothing had named the cause.
+      This is the same thing the Trikusuma reading found from the other side: ten compounds sit above
+      their thresholds in a raw pea beverage **before any heat**, hexanal at 331 ug/L against a
+      threshold of 4.5. A benchmark whose control column is not declared as an initial condition
+      asks a formation model to reproduce a level it did not make.
+      THREE WAYS TO FIX IT, and the choice is the owner's. (i) Declare the control column as the
+      pot's INITIAL condition, which is what programme 7 already wants and which needs a field the
+      benchmark schema does not have. (ii) Score the DIFFERENCE, heated minus control, which is what
+      the model actually predicts -- available for Trikusuma, which prints both columns, and NOT for
+      PratapSingh, which prints one. (iii) Refuse rows whose thermal load cannot form what was
+      measured, on a stated criterion. Until one is chosen the two 40 C rows sit in the panel
+      contributing four of its worst misses for a reason that is not the model's chemistry.
 - [ ] **AUDIT-REMAINDER (2026-09-09). What the incorporation left as waves, each with what it needs.**
       (i) **B27, the sink's oxidant. NOW PRE-REGISTERED AND NOT RUN**
       (`results/validation/kinetic_core_b27_prereg.md`), so the declaration cannot be revised after an
