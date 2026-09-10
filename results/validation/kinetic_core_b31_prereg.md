@@ -176,3 +176,47 @@ with its own suspicion recorded.
 Frozen by `tests/unit/test_kinetic_core_b31.py` (13 tests), including the empty-gap and
 Q10-band checks on the threshold, the overloaded-string check on the three hot `no cook`
 bundles, and the guard that the largest lipid miss survives the rule.
+
+---
+
+# Correction to this wave's own claim, same day, before it was published anywhere but here
+
+The outcome above calls T2 "the first accuracy gain of this whole sequence of waves". **That is
+overstated for two of the three rows, and the pre-registration did not ask the question that would
+have caught it.** T2 asked only that the fold errors fall. They did. But a declared carried level is
+a measurement handed to the model, and a fold error on the TOTAL grades the model partly on the
+number it was given. Split the declaration out of both sides:
+
+| compound | fold on the total | the declared part is | fold on what the cook FORMED |
+|---|---:|---:|---:|
+| hexanal | 2.21x | **93.5 %** of the prediction | **19.7x** |
+| 2-pentylfuran | 2.53x | **92.2 %** | **20.6x** |
+| nonanal | 1.54x | 52.8 % | **2.14x** |
+
+So two of the three rows are inside the 3× band on about six per cent of their own answer. On the
+part the chemistry is responsible for, the lipid lane still under-predicts hexanal and the alkylfuran
+by about twentyfold — which is roughly where the rest of this panel sits, and exactly where they sat
+before. **Nothing about the lane's chemistry got better.** What got better is that the model is no
+longer being charged for raw material, which is a correctness fix to the SCORING, not to the model.
+
+Only **nonanal** is a chemistry result: 2.14× on the formed part, from a route that was refused
+entirely a week ago.
+
+The remedy is in the artifact, not only in this document, so that nobody can quote 2.21× without
+seeing 93.5 % beside it. Every scored row now carries `carried_declared_ug_per_l`,
+`declared_share_of_prediction`, `formed_predicted`, `formed_measured` and `fold_error_formed_only`;
+they are `null` on the 43 rows that declare nothing.
+
+**A rule this implies for any future wave.** A declared input that is most of an answer makes the 3×
+band trivially passable — declare 99 % of a measurement and any model passes. The band is not
+re-defined here, because the total IS what a user of the tool wants predicted, and because with three
+declared rows on the panel a threshold would be fitted to them. What is installed instead is the
+requirement that the split be published on every such row. If a future wave declares carried levels
+widely, the headline should move to the formed-only column and this note is the argument for it.
+
+**One known gap, measured and left.** The declared level is treated as EXACT by the Monte-Carlo
+envelope. Trikusuma prints replicate spreads on all three (331 ± 81.3, 59.4 ± 1.93, 8.24 ± 0.44), so
+the hexanal interval is understated by roughly ±0.09 dex on a 1.44 dex interval — about 12 %, which
+is **below the sampler's own measured noise floor of 17 %** (`env_prior_ship_rule.md`). Sampling it
+could therefore not be shown to change anything, so it is recorded rather than built. It becomes
+worth building the moment more than a handful of rows declare a carried level.

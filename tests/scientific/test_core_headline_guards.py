@@ -218,7 +218,7 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_10_of_42_evaluable_literature_rows_and_10_of_41_out_of_sample():
+def test_core_envelope_covers_11_of_39_evaluable_literature_rows_and_11_of_38_out_of_sample():
     # RE-PINNED 2026-09-04 (the unidentified-coordinate rule inverted): a coordinate the fit
     # could not pin is now DRAWN across its declared band instead of frozen at the optimum,
     # with an Ea band narrowed to a 12-decade prefactor prior and a definitionally-bounded
@@ -253,7 +253,16 @@ def test_core_envelope_covers_10_of_42_evaluable_literature_rows_and_10_of_41_ou
     # closed: their intervals were 0.000 to 0.135 decades wide, and an interval of zero width can
     # neither contain a measurement nor miss one. They have intervals now, so they count. The other
     # new rows are B28's nonanal and 2-pentylfuran.
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (10, 42, 0)
+    # RE-PINNED BY WAVE B31 (2026-09-10): 10/42 -> 11/39, and the two halves of that pull in
+    # opposite directions, as everywhere else in this wave. THREE ROWS LEFT because the four pots
+    # nobody heated are refused (42 -> 39, all misses). ONE ROW ENTERED because a beverage's own
+    # unheated column was declared: hexanal's interval narrowed from 2.652 to 1.441 dex and its
+    # centre moved onto the measurement. That narrowing is NOT the model becoming more certain --
+    # it is 93.5 % of that answer now being a declared constant with no sampled uncertainty of its
+    # own. The envelope treats a declared level as exact; Trikusuma prints 331 +/- 81.3 for it, so
+    # the interval is understated by roughly 12 %, which is below the sampler's own measured noise
+    # floor of 17 % and is recorded in kinetic_core_b31_prereg.md rather than built.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (11, 39, 0)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -268,18 +277,22 @@ def test_core_envelope_covers_10_of_42_evaluable_literature_rows_and_10_of_41_ou
     # were therefore excluded from the median, now have intervals of 0.135 to 0.846 dex -- all
     # below the old median, so including them pulls it down. A median over a changed row set is not
     # a comparison; the ship rule's per-row table is.
-    assert lit["median_ci_width_log10"] == pytest.approx(1.0411, abs=5e-4)
+    # RE-PINNED BY WAVE B31: 1.0411 -> 0.9238 dex. Same caution as the line above -- a median over
+    # a changed row set is not a comparison, and here the set changed twice over.
+    assert lit["median_ci_width_log10"] == pytest.approx(0.9238, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (10, 41)
+    assert (oos["hits"], oos["total"]) == (11, 38)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.209, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
-        "headspace": 11, "extraction": 31, "undeclared": 0,   # +3: B28's nonanal rows
+        # RE-PINNED BY WAVE B31: headspace 11 -> 8. The three that left are the hexanal and
+        # nonanal rows in the pots nobody heated -- headspace-quantified, and refused now.
+        "headspace": 8, "extraction": 31, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "7 of 34", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "7 of 33", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "11 of 39", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "11 of 38", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

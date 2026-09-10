@@ -157,3 +157,51 @@ def test_the_rule_refuses_exactly_seven_rows_and_leaves_every_cooked_miss_standi
     ]
     assert lipid_misses, "the rule swept every lipid miss off the panel"
     assert max(f for _, _, f in lipid_misses) > 100.0
+
+
+def test_a_declared_row_publishes_how_much_of_its_answer_was_declared():
+    """The correction to this wave's own claim, frozen so it cannot be quietly dropped.
+
+    Two of the three declared rows are inside the 3x band on about six per cent of their own
+    answer. A reader who sees 2.21x must see 93.5 % in the same artifact.
+    """
+    scores = json.loads((data_paths.VALIDATION_DIR / "core_panel_scores.json").read_text())
+    rows = {
+        (b["benchmark_id"], c["compound"]): c
+        for b in scores["benchmarks"] for c in b["compounds"]
+    }
+    expected = {  # compound: (declared share, formed-only fold), both to two figures
+        "hexanal": (0.935, 19.7),
+        "2-pentylfuran": (0.922, 20.6),
+        "nonanal": (0.528, 2.14),
+    }
+    for compound, (share, formed) in expected.items():
+        row = rows[("pea_isolate_uht_140C_Trikusuma2019", compound)]
+        assert row["carried_declared_ug_per_l"] > 0.0
+        assert row["declared_share_of_prediction"] == pytest.approx(share, abs=0.005)
+        assert row["fold_error_formed_only"] == pytest.approx(formed, rel=0.02)
+        # The whole point: the total flatters, the formed-only does not.
+        assert row["fold_error"] < row["fold_error_formed_only"]
+    # Only nonanal is a chemistry result on the formed part.
+    inside_on_formed = [
+        c for c in expected
+        if rows[("pea_isolate_uht_140C_Trikusuma2019", c)]["fold_error_formed_only"] <= 3.0
+    ]
+    assert inside_on_formed == ["nonanal"]
+
+
+def test_every_other_row_declares_nothing_and_says_so_with_nulls():
+    scores = json.loads((data_paths.VALIDATION_DIR / "core_panel_scores.json").read_text())
+    declared = [
+        (b["benchmark_id"], c["compound"]) for b in scores["benchmarks"] for c in b["compounds"]
+        if c.get("carried_declared_ug_per_l") is not None
+    ]
+    assert len(declared) == 3 and {b for b, _ in declared} == {"pea_isolate_uht_140C_Trikusuma2019"}
+    for b in scores["benchmarks"]:
+        for c in b["compounds"]:
+            if c["carried_declared_ug_per_l"] is None:
+                # Present as an explicit null, not absent: a reader scanning for the split must be
+                # able to tell "declares nothing" from "this artifact predates the split".
+                for key in ("declared_share_of_prediction", "formed_predicted",
+                            "formed_measured", "fold_error_formed_only"):
+                    assert key in c and c[key] is None

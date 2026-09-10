@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "9d3fbd34fde081078e0405e70572f39d2f7026570944b416eccb6ffc2c655250",
+        "17_papers_by_weight.png": "88a104ef9c6f6cac74323a5380c5a60175ce5e190f2f4a9594cfdde30b103721",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "0333132626bcf1a39e8e8186dcf43de15f1243da",
-      "short": "03331326",
+      "commit": "d8fd36d52929b7f89d616cec1ec86e4acd95e11f",
+      "short": "d8fd36d5",
       "branch": "reactions",
       "dirty": true
     },
@@ -167,15 +167,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "9e79c7e2c06d1fb0cad157e081f08cb4e8bf246412a6e459d3622a2b09d603d3"
+        "sha256": "d2823e4c3961ea12d2415e25128ea55eeb4827aa2579e12b82f4526efe4ca191"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "dc91a1b6cc41141fc558dd716007dbb5237dbfe8393660d0a76359c3fe2a1adf"
+        "sha256": "19f5a0f21b70b895ed620b539ba1020f7bb9c6086d9b0a0c2ea605ef33066d0f"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "bf03bd1a0be1a429fd1dab61e5a76bd8c7f9ed4b7a0cbc28097a532612b6a3ca"
+        "sha256": "3e957b19da52e992e1a0324924353d3bd7ea6ab20a405faf01f4febd10567e4d"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -195,7 +195,7 @@
       },
       {
         "path": "results/validation/kinetic_core_b28_ship_rule.json",
-        "sha256": "df14d60fd1280512fc544b685d79cffec0a2f266455e0e96162cdbf35e49dc33"
+        "sha256": "41dafad6b2900b8a15be03c703891369384b2544ae49bbba54a86f32cf5f0a47"
       },
       {
         "path": "results/validation/kinetic_core_b9_fit_report.json",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "9d3fbd34fde081078e0405e70572f39d2f7026570944b416eccb6ffc2c655250"
+        "sha256": "88a104ef9c6f6cac74323a5380c5a60175ce5e190f2f4a9594cfdde30b103721"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",

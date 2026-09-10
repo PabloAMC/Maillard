@@ -4,8 +4,8 @@
     "artifact": "kinetic_core_b28_ship_rule",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "0333132626bcf1a39e8e8186dcf43de15f1243da",
-      "short": "03331326",
+      "commit": "d8fd36d52929b7f89d616cec1ec86e4acd95e11f",
+      "short": "d8fd36d5",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "dc91a1b6cc41141fc558dd716007dbb5237dbfe8393660d0a76359c3fe2a1adf"
+        "sha256": "19f5a0f21b70b895ed620b539ba1020f7bb9c6086d9b0a0c2ea605ef33066d0f"
       }
     ]
   },
@@ -136,6 +136,7 @@
   },
   "T5": {
     "non_lipid_benchmarks_changed": [],
+    "compared": "compound, target_unit, measured, predicted, fold_error -- not the whole row",
     "pass": true
   },
   "verdict": "SHIP"

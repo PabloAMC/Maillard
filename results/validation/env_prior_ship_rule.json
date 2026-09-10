@@ -4,15 +4,15 @@
     "artifact": "env_prior_ship_rule",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "ce288def982bbdfb8d49f8c8613c024954d13a13",
-      "short": "ce288def",
+      "commit": "d8fd36d52929b7f89d616cec1ec86e4acd95e11f",
+      "short": "d8fd36d5",
       "branch": "reactions",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_env_prior_ship_rule.py",
     "inputs": [
       {
-        "path": "results/validation/core_prediction_uncertainty.json",
+        "path": "results/validation/_env_baseline/core_prediction_uncertainty_after_env_priors.json",
         "sha256": "bf03bd1a0be1a429fd1dab61e5a76bd8c7f9ed4b7a0cbc28097a532612b6a3ca"
       }
     ]
@@ -57,9 +57,9 @@
   },
   "T2": {
     "noise_floor_from_two_seeds": {
-      "n": 42,
-      "median_rel": 0.03086157674879764,
-      "p95_rel": 0.13366754763350322,
+      "n": 39,
+      "median_rel": 0.03294266248968523,
+      "p95_rel": 0.15658422123577312,
       "max_rel": 0.16985206882397694
     },
     "tolerance_used_rel": 0.16985206882397694,
@@ -111,7 +111,7 @@
   },
   "T3": {
     "median_noise_floor_max_dex": 0.12112885064432827,
-    "n_seed_pairs": 42,
+    "n_seed_pairs": 39,
     "unreached_medians_moved_beyond_the_floor": [],
     "note": "No centre was changed by either wave: every prior is centred where its constant shipped. A median moving at all is the finite-n stream effect, and the floor below is what that effect is worth, measured from two seeds of the SAME priors.",
     "pass": true

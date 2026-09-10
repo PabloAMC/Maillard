@@ -126,6 +126,45 @@ def _pearson(xs: Sequence[float], ys: Sequence[float]) -> Optional[float]:
 # ---------------------------------------------------------------------------
 
 
+def _carried_split(
+    spec_without_carried, carried, compound, unit, limiting_molar, predicted, measured,
+) -> Dict[str, Any]:
+    """
+    The same row with the DECLARED starting level removed from both the prediction and the
+    measurement -- the part of the answer the chemistry is actually responsible for.
+
+    Absent (all-``None``) on the 43 rows that declare nothing, which is every row but three.
+    `declared_share_of_prediction` is the honesty number: at 0.94 a fold error on the total is
+    grading the declaration, not the model.
+    """
+    blank = {
+        "carried_declared_ug_per_l": None, "declared_share_of_prediction": None,
+        "formed_predicted": None, "formed_measured": None, "fold_error_formed_only": None,
+    }
+    if (spec_without_carried is None or carried is None or predicted is None
+            or measured is None or unit != "ppb"):
+        return blank
+    run = predict(spec_without_carried, [compound])
+    if not run.answered:
+        return blank
+    formed_predicted = core_native_value(run, compound, unit, limiting_molar)
+    if formed_predicted is None or predicted <= 0:
+        return blank
+    formed_measured = float(measured) - float(carried)
+    return {
+        "carried_declared_ug_per_l": float(carried),
+        "declared_share_of_prediction": (float(predicted) - float(formed_predicted)) / float(predicted),
+        "formed_predicted": float(formed_predicted),
+        "formed_measured": formed_measured,
+        # A measurement BELOW its own declared starting level would mean the cook destroyed more
+        # than it made, which no fold error on this lane can express; it is reported as None
+        # rather than as a number, and no such row exists today.
+        "fold_error_formed_only": (
+            fold_error(float(formed_predicted), formed_measured) if formed_measured > 0 else None
+        ),
+    }
+
+
 def score_benchmark(
     path: Path | str, panel_tag: str, *, pass_band: float = PASS_BAND_LEVEL
 ) -> Dict[str, Any]:
@@ -143,6 +182,24 @@ def score_benchmark(
     family, family_source = quantification_family(bench)
     spec = core_spec(bench, use_buffer=True)
     _, limiting_molar = limiting_precursor_molar(bench)
+    # B31 (2026-09-10). WHEN A POT DECLARES WHAT IT STARTED WITH, SAY HOW MUCH OF THE ANSWER THAT
+    # IS. A declared carried level is a measurement handed to the model, and a fold error computed
+    # on the total then grades the model partly on the number it was given. In the one pot that
+    # declares any, the declared part is 93.5 %, 92.2 % and 52.8 % of the prediction -- so two of
+    # its three rows sit inside the 3x band on about six per cent of their own answer. Every such
+    # row therefore also carries the comparison with the declaration removed from BOTH sides, and
+    # THAT is the number that grades the chemistry. Costs one extra integration per declared row,
+    # and there are three in the whole panel.
+    carried_declared = {
+        str(name).strip().lower(): float(amount)
+        for name, amount in (conditions.get("carried_volatiles") or {}).items()
+        if float(amount) > 0.0
+    }
+    spec_without_carried = None
+    if carried_declared:
+        stripped = dict(bench)
+        stripped["conditions"] = {k: v for k, v in conditions.items() if k != "carried_volatiles"}
+        spec_without_carried = core_spec(stripped, use_buffer=True)
 
     rows: List[Dict[str, Any]] = []
     refused: List[Dict[str, Any]] = []
@@ -204,6 +261,10 @@ def score_benchmark(
                 "declaration_warnings": list(declaration.warnings),
                 "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
                 "in_core_fit": in_core_fit(benchmark_id, compound),
+                **_carried_split(
+                    spec_without_carried, carried_declared.get(compound.strip().lower()),
+                    compound, unit, limiting_molar, predicted, measured,
+                ),
             }
         )
 

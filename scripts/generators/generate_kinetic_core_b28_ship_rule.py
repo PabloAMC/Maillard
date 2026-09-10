@@ -22,7 +22,7 @@ import math
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -202,14 +202,30 @@ def t5() -> Dict[str, Any]:
         return {"status": f"unavailable: {exc}", "pass": False}
     live = scoring.score_panel()
     lipid_families = {"matrix_headspace", "lipid_oxidation"}
+
+    # WHAT "BIT FOR BIT" MEANS HERE, narrowed 2026-09-10. This compared the WHOLE serialised row,
+    # so wave B31 adding five reporting fields to every row (the declared / formed split) made
+    # every non-lipid benchmark read as "changed" and flipped a tracked SHIP to DO NOT SHIP --
+    # while not one predicted value had moved. A ship rule must compare the quantities it is
+    # about. These four are the row: what was asked, what was measured, what the model said, and
+    # how far apart they are. A later wave adding a column cannot move them, and a later wave
+    # moving a prediction cannot hide behind one.
+    def _prediction(row: Dict[str, Any]) -> Tuple[Any, ...]:
+        return (row.get("compound"), row.get("target_unit"), row.get("measured"),
+                row.get("predicted"), row.get("fold_error"))
+
+    def _predictions(bench: Dict[str, Any]) -> List[Tuple[Any, ...]]:
+        return sorted(_prediction(r) for r in (bench.get("compounds") or []))
+
     changed: List[str] = []
     for old_b, new_b in zip(tracked["benchmarks"], live["benchmarks"]):
         if old_b.get("family") in lipid_families:
             continue
-        if json.dumps(old_b.get("compounds"), sort_keys=True, default=str) != \
-           json.dumps(new_b.get("compounds"), sort_keys=True, default=str):
+        if _predictions(old_b) != _predictions(new_b):
             changed.append(old_b["benchmark_id"])
-    return {"non_lipid_benchmarks_changed": changed, "pass": not changed}
+    return {"non_lipid_benchmarks_changed": changed,
+            "compared": "compound, target_unit, measured, predicted, fold_error -- not the whole row",
+            "pass": not changed}
 
 
 def render(p: Dict[str, Any]) -> str:

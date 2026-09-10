@@ -43,10 +43,10 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "0333132626bcf1a39e8e8186dcf43de15f1243da",
-      "short": "03331326",
+      "commit": "d8fd36d52929b7f89d616cec1ec86e4acd95e11f",
+      "short": "d8fd36d5",
       "branch": "reactions",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -471,7 +471,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 10.2
+    "wall_seconds": 9.8
   },
   "benchmarks": [
     {
@@ -539,7 +539,12 @@
             "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -1247,7 +1252,12 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": true
+          "in_core_fit": true,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -1424,7 +1434,12 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -1447,7 +1462,12 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -1613,7 +1633,12 @@
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": 331.0,
+          "declared_share_of_prediction": 0.9354546730947272,
+          "formed_predicted": 22.838630048173226,
+          "formed_measured": 451.0,
+          "fold_error_formed_only": 19.74724399181175
         },
         {
           "compound": "2-pentylfuran",
@@ -1639,7 +1664,12 @@
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": 59.4,
+          "declared_share_of_prediction": 0.9217537302912059,
+          "formed_predicted": 5.042375493543165,
+          "formed_measured": 103.6,
+          "fold_error_formed_only": 20.545871709209536
         },
         {
           "compound": "nonanal",
@@ -1666,7 +1696,12 @@
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": 8.24,
+          "declared_share_of_prediction": 0.5280029797992332,
+          "formed_predicted": 7.365972532831463,
+          "formed_measured": 15.76,
+          "fold_error_formed_only": 2.139568119451281
         }
       ],
       "refused_compounds": [],
@@ -1750,7 +1785,12 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -1916,7 +1956,12 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -2001,7 +2046,12 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2027,7 +2077,12 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -2116,7 +2171,12 @@
             "DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and runs at EXACTLY ZERO. No measurement of DMHF consumption exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a named prohibited derivation. Any DMHF number here is a FORMATION number with no sink."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2142,7 +2202,12 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [
@@ -2243,7 +2308,12 @@
             "DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and runs at EXACTLY ZERO. No measurement of DMHF consumption exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a named prohibited derivation. Any DMHF number here is a FORMATION number with no sink."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2269,7 +2339,12 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [
@@ -2366,7 +2441,12 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -2451,7 +2531,12 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -2536,7 +2621,12 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2562,7 +2652,12 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -2647,7 +2742,12 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.03 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.02 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -2734,7 +2834,12 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -2983,7 +3088,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH3_FFT",
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -3004,7 +3114,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH3_MFT",
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3089,7 +3204,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH7_FFT",
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -3110,7 +3230,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH7_MFT",
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3195,7 +3320,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -3216,7 +3346,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3301,7 +3436,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -3322,7 +3462,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3407,7 +3552,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -3428,7 +3578,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3513,7 +3668,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -3534,7 +3694,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3619,7 +3784,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -3640,7 +3810,12 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3796,7 +3971,12 @@
             "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
@@ -3883,7 +4063,12 @@
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "hexanal",
@@ -3909,7 +4094,12 @@
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         },
         {
           "compound": "nonanal",
@@ -3936,7 +4126,12 @@
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [
