@@ -51,24 +51,35 @@ def test_phi_splits_the_mercaptoketone_flux_exactly_and_touches_nothing_else():
 
 
 def test_the_generator_installs_the_printed_charges_and_restores_them():
+    """Run in a SUBPROCESS: importing a fit generator rebinds B2.3's module state (B9 removes rows, B16 adds
+    them, B27 swaps two and appends one), and an in-process import leaked that into the B2.4 tests."""
+    import subprocess
     import sys
-    sys.path.insert(0, str(data_paths.REPO_ROOT / "scripts" / "generators"))
-    import generate_kinetic_core_b2_3_fit as B23
-    import generate_kinetic_core_b27_fit as B27  # configure() at import
-    try:
-        assert len(B23.ACTIVE_FIT_ROWS) == 65 and len(B27.ALL_KEYS) == 49 and B27.K_SLOT == 48
-        assert B23.SYSTEMS["whitfield_nf_cys"]["initial"] == {"NF": 50.0, "Cys": 50.0}
-        assert B23.SYSTEMS["whitfield_nf_h2s"]["initial"] == {"NF": 50.0, "H2S": 97.0}
-        assert B23.SYSTEMS["whitfield_nf_cys"]["buffer"].declared and B23.SYSTEMS["whitfield_nf_cys"]["buffer"].phosphate_mol_l == 0.5
-        row = next(r for r in B23.ACTIVE_FIT_ROWS if r["id"] == "whitfield_nf_cys_MFT")
-        assert row["kind"] == "molpct_total" and row["species_terms"] == {"MFT": 1, "MFTD": 2} and row["target"] == 0.230
-        floor = next(r for r in B23.ACTIVE_FIT_ROWS if r["id"] == "whitfield_mft_disulfide_share_floor")
-        assert floor["kind"] == "floor" and floor["target"] == 0.35
-    finally:
-        B27.restore()
-    assert len(B23.ACTIVE_FIT_ROWS) == 64 or "whitfield_mft_disulfide_share_floor" not in {r["id"] for r in B23.ACTIVE_FIT_ROWS}
-    assert B23.SYSTEMS["whitfield_nf_cys"]["initial"] == {"NF": 20.0, "Cys": 20.0}
-    assert next(r for r in B23.ACTIVE_FIT_ROWS if r["id"] == "whitfield_nf_cys_MFT")["target"] == 0.150
+    code = r"""
+import sys, json
+sys.path.insert(0, "scripts/generators")
+import generate_kinetic_core_b2_3_fit as B23
+import generate_kinetic_core_b27_fit as B27   # configure() at import
+on = dict(rows=len(B23.ACTIVE_FIT_ROWS), keys=len(B27.ALL_KEYS), slot=B27.K_SLOT,
+          cys=B23.SYSTEMS["whitfield_nf_cys"]["initial"], h2s=B23.SYSTEMS["whitfield_nf_h2s"]["initial"],
+          buffer=[B23.SYSTEMS["whitfield_nf_cys"]["buffer"].declared, B23.SYSTEMS["whitfield_nf_cys"]["buffer"].phosphate_mol_l],
+          row=next(r for r in B23.ACTIVE_FIT_ROWS if r["id"] == "whitfield_nf_cys_MFT"),
+          floor=next(r for r in B23.ACTIVE_FIT_ROWS if r["id"] == "whitfield_mft_disulfide_share_floor"))
+B27.restore()
+off = dict(ids=[r["id"] for r in B23.ACTIVE_FIT_ROWS], cys=B23.SYSTEMS["whitfield_nf_cys"]["initial"],
+           target=next(r for r in B23.ACTIVE_FIT_ROWS if r["id"] == "whitfield_nf_cys_MFT")["target"])
+print(json.dumps({"on": on, "off": off}, default=str))
+"""
+    out = subprocess.run([sys.executable, "-c", code], cwd=data_paths.REPO_ROOT, capture_output=True, text=True, check=True)
+    got = json.loads(out.stdout.strip().splitlines()[-1])
+    on, off = got["on"], got["off"]
+    assert on["rows"] == 65 and on["keys"] == 49 and on["slot"] == 48
+    assert on["cys"] == {"NF": 50.0, "Cys": 50.0} and on["h2s"] == {"NF": 50.0, "H2S": 97.0}
+    assert on["buffer"] == [True, 0.5]
+    assert on["row"]["kind"] == "molpct_total" and on["row"]["species_terms"] == {"MFT": 1, "MFTD": 2} and on["row"]["target"] == 0.230
+    assert on["floor"]["kind"] == "floor" and on["floor"]["target"] == 0.35
+    assert "whitfield_mft_disulfide_share_floor" not in off["ids"]
+    assert off["cys"] == {"NF": 20.0, "Cys": 20.0} and off["target"] == 0.150
 
 
 def test_the_gate_fired_before_the_fit_and_the_record_says_why():
