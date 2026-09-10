@@ -51,7 +51,11 @@ species:
   PENTYLTHIOPHENE: {kind: molecule, smiles: "CCCCCc1cccs1", note: "2-pentylthiophene, from (E,E)-2,4-nonadienal + H2S (Elmore 1997: 21 % of area; Whitfield 1988: 95.5 ng with cysteine + lecithin)"}
   PENTYLTHIAPYRAN: {kind: molecule, smiles: "CCCCCC1C=CC=CS1", note: "2-pentyl-2H-thiapyran, the 1,6-addition regioisomer; the largest lipid-dependent product in Farmer 1990's phospholipid pots, a weak odorant and a dienal sink"}
   ETHYLTHIAPYRAN:  {kind: molecule, smiles: "CCC1C=CC=CS1", note: "2-ethyl-2H-thiapyran, the linolenate (2,4-heptadienal) analogue: 399 ng in Mottram 2002's methyl linolenate pot"}
-  ACETOL:          {kind: molecule, smiles: "CC(=O)CO", note: "hydroxyacetone (acetol), the hydroxyketone Elmore 1997 heats with alkanals and ammonium sulfide; the engine carries its mercapto product MP but not acetol itself"}
+  # ACETOL GRADUATED OUT OF THIS FILE ON 2026-09-10 (wave B24b). Its note here read "the engine
+  # carries its mercapto product MP but not acetol itself", and that is no longer true: it is
+  # a trunk species now, the committed precursor of the tetrahydropyridine. It lives in
+  # species.py. Listing it in both files would trip the guard that stops a literature key
+  # shadowing an engine species -- the same guard that caught 2-pentylfuran yesterday.
   ACETOIN:         {kind: molecule, smiles: "CC(O)C(C)=O", note: "3-hydroxy-2-butanone (acetoin), Elmore 1997's second hydroxyketone"}
   MERCAPTOBUTANONE: {kind: molecule, smiles: "CC(S)C(C)=O", note: "3-mercapto-2-butanone (Farmer 1990 Table 2 row 44 calls it 2-mercapto-3-butanone), from acetoin + H2S"}
   HEXANAL_IMINE:   {kind: molecule, smiles: "CCCCCC=N", note: "hexanal aldimine (hexylideneamine), Elmore 1997 Figure 1's imine intermediate; never isolated"}

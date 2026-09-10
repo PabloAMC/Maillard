@@ -17,7 +17,11 @@ def _pot(name="pot", precursors=None, t_c=120.0, minutes=60.0):
 
 def test_the_five_steps_run_on_the_trunk_only_and_balance():
     assert set(network.DICARBONYL_REACTION_KEYS) == {"r_glc_g", "r_g_go", "r_odg_da", "r_go_sink", "r_da_sink"}
-    assert len(network.TRUNK_REACTIONS) == len(network.REACTIONS) + 5 + 5 + 5 + 1 + 4 + 2   # + B18 pyrazine 5, B20 glycation 5, B21 glucosone 1, B22 methionine 4, B24 proline 2
+    # 2026-09-10: the running sum is kept, and B24b's two steps are added to it. A later wave that
+    # appends steps has to change this line, which is the point: the count is a tripwire on the
+    # trunk's size, not a description of it.
+    assert len(network.TRUNK_REACTIONS) == len(network.REACTIONS) + 5 + 5 + 5 + 1 + 4 + 4
+    # B18 pyrazine 5, B20 glycation 5, B21 glucosone 1, B22 methionine 4, B24 proline 2 + B24b 2
     assert not set(network.DICARBONYL_REACTION_KEYS) & set(network.REACTION_KEYS)
     network.validate_balance(network.TRUNK_REACTIONS)          # raises on an unbalanced step
     from src.kinetic_core.sulfur import FULL_REACTION_KEYS
@@ -26,7 +30,12 @@ def test_the_five_steps_run_on_the_trunk_only_and_balance():
 
 def test_the_species_are_appended_after_every_existing_one():
     keys = list(species.SPECIES_KEYS)
-    assert keys[-19:-16] == ["G", "GO", "DA"]      # B18 appended PZ / DMP / MPZ / AKG / AKM after them; B20 LYSP / FLP / CML / CEL; B22 MET / MTAL / MSH / DMDS; B24 PRO / PYRL / AP
+    # REWRITTEN 2026-09-10. This asserted a NEGATIVE SLICE, and every later wave shifted it:
+    # five wave tests broke at once when B24b appended two species. What a wave actually needs
+    # is that its own species come AFTER everything that existed before it -- an ORDERING, not
+    # a position -- and an ordering survives any number of later appends.
+    assert [k for k in keys if k in ("G", "GO", "DA")] == ["G", "GO", "DA"]
+    assert min(species.INDEX[k] for k in ("G", "GO", "DA")) > species.INDEX["HMF"]
     assert species.INDEX["HMF"] < species.INDEX["G"]
 
 

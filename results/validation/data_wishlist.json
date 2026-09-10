@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "ce288def982bbdfb8d49f8c8613c024954d13a13",
-      "short": "ce288def",
+      "commit": "ba2dcd8a75e66674ca3ba18f75ce14c2acf8a646",
+      "short": "ba2dcd8a",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "da403505e787f4f0e580c00661545dba216efbbb54c8d3c6f4c3296ba7104594"
+        "sha256": "ea84974fdb25b3c6a7b5bb2d55a7661d423bef90892c0c946b3f75d646c02cdc"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",

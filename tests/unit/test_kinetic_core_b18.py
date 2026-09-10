@@ -34,7 +34,13 @@ def test_the_five_steps_run_on_the_trunk_only_and_balance():
 
 def test_the_species_are_appended_after_every_existing_one_and_are_trunk_only():
     keys = list(species.SPECIES_KEYS)
-    assert keys[-16:-11] == ["PZ", "DMP", "MPZ", "AKG", "AKM"]      # then B20 LYSP / FLP / CML / CEL; B22 MET / MTAL / MSH / DMDS; B24 PRO / PYRL / AP
+    # REWRITTEN 2026-09-10. This asserted a NEGATIVE SLICE, and every later wave shifted it:
+    # five wave tests broke at once when B24b appended two species. What a wave actually needs
+    # is that its own species come AFTER everything that existed before it -- an ORDERING, not
+    # a position -- and an ordering survives any number of later appends.
+    _b18 = ["PZ", "DMP", "MPZ", "AKG", "AKM"]
+    assert [k for k in keys if k in _b18] == _b18
+    assert min(species.INDEX[k] for k in _b18) > max(species.INDEX[k] for k in ("G", "GO", "DA"))
     assert set(("PZ", "DMP", "MPZ", "AKG", "AKM")) <= set(species.TRUNK_ONLY_KEYS)
     from src.kinetic_core.species_sulfur import SULFUR_STATE_KEYS
     assert not {"PZ", "DMP", "MPZ", "AKG", "AKM"} & set(SULFUR_STATE_KEYS)

@@ -23,7 +23,14 @@ def _pot(precursors, t_c=120.0, minutes=10.0, ph=6.2):
 def test_the_four_steps_exist_balance_and_are_trunk_only():
     assert set(network.METHIONINE_REACTION_KEYS) == {"r_go_met", "r_mgo_met", "r_mtal_msh", "r_msh_dmds"}
     network.validate_balance(network.TRUNK_REACTIONS)
-    assert list(species.SPECIES_KEYS)[-7:-3] == ["MET", "MTAL", "MSH", "DMDS"]   # B24 appended PRO / PYRL / AP after them
+    # REWRITTEN 2026-09-10. This asserted a NEGATIVE SLICE, and every later wave shifted it:
+    # five wave tests broke at once when B24b appended two species. What a wave actually needs
+    # is that its own species come AFTER everything that existed before it -- an ORDERING, not
+    # a position -- and an ordering survives any number of later appends.
+    _b22 = ["MET", "MTAL", "MSH", "DMDS"]
+    _keys = list(species.SPECIES_KEYS)
+    assert [k for k in _keys if k in _b22] == _b22
+    assert min(species.INDEX[k] for k in _b22) > species.INDEX["CEL"]
     from src.kinetic_core.species_sulfur import SULFUR_STATE_KEYS
     assert not {"MET", "MTAL", "MSH", "DMDS"} & set(SULFUR_STATE_KEYS)
 
