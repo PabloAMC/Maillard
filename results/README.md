@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **461**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **462**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -120,6 +120,7 @@ Tracked files: **461**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
 | `kinetic_core_env_b13_prereg.*` (1): `kinetic_core_env_b13_prereg.md` | Pre-registration: the whole dicarbonyl and furanic-sink block had no prior row either, so eight constants were asserted with certainty and five hydroxymethylfurfural rows were published with no interval at all. |
 | `kinetic_core_env_b18_prereg.*` (1): `kinetic_core_env_b18_prereg.md` | Pre-registration: the pyrazine step had no prior row in the envelope, so every pyrazine interval was published without that step's own spread. |
+| `kinetic_core_hmf_sink_premise_check.*` (1): `kinetic_core_hmf_sink_premise_check.md` | Why the HMF sink's centre was not moved. It ships at log10 -6.047 against a band floor of -6.05, so it is already inert: switching it off entirely changes all five HMF predictions by 1.000x. The 2-12x deficit is upstream, and the worst row by a factor of two is the one pot with no amine in it at all. |
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
