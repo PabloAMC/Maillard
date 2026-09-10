@@ -26,7 +26,10 @@
         ],
         "properties": {
           "concentration_mM": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "minimum": 0,
             "description": "null means the SOURCE PRINTS NO MOLARITY and cannot -- a protein isolate has no single molar mass (Trikusuma 2020, 2026-09-09). It is not a synonym for zero and not a licence to omit a number the paper gives: a null must be accompanied by a concentration_note saying what the paper does print. It reads as an uncharged precursor, and the key is kept rather than deleted so the gap stays visible."
           },
@@ -57,7 +60,10 @@
           "maximum": 14
         },
         "water_activity": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "minimum": 0,
           "maximum": 1,
           "description": "null means the source reports no water activity, no moisture content and no dry-matter figure, so no value can be derived from it either. A null must be accompanied by a water_activity_note. Downstream, a null a_w means the acrylamide lane's a_w window check reports 'not stated' instead of comparing against a guess."
@@ -156,6 +162,18 @@
             }
           },
           "additionalProperties": false
+        },
+        "carried_volatiles": {
+          "type": "object",
+          "description": "WAVE B31. What the pot STARTS with, in ug/L, for compounds the raw material carries in rather than the cook making. The engine adds it to the integrated concentration before the matrix-binding factor, because the protein cannot tell a carried molecule from a made one. ONLY a level the source PRINTS as an unheated control of the same pot, in the same table and units, may appear here; an inferred or borrowed level may not. Absent means zero, and every row that omits it is bit-for-bit what it was before this field existed.",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "carried_volatiles_anchor": {
+          "type": "string",
+          "description": "The printed table and column the carried levels are read from. Required alongside carried_volatiles: a starting state with no anchor is an assumption."
         }
       },
       "additionalProperties": true

@@ -1411,3 +1411,42 @@ ran.
    that wave's hold-out columns. One of them, 9.7, is also Frankel 1981's photosensitized methyl
    octanoate share. The collision was resolved by moving this paper's numbers to a file the firewall
    does not cover, NOT by reformatting the literal or shortening the firewall's list.
+
+## Amendment 37 — 2026-09-10 (Wave B31, what the isolate arrived with)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** No new coordinate, no new fit row, no constant moved.
+   `conditions.carried_volatiles` is a DECLARED MEASUREMENT — the level a source PRINTS for the
+   unheated material of the same pot, in the same table and the same units — and the engine adds it
+   to the integrated concentration before the matrix-binding factor. It is exactly zero wherever
+   nothing is declared, so 43 of the panel's 46 rows are bit-for-bit what they were.
+2. **WHAT MAY BE DECLARED, AND WHAT MAY NOT.** MAY: a level the source prints as an unheated
+   control of the same pot. Trikusuma 2019 prints one ("non-UHT processed", Table 2) and it is
+   anchored to that column by name in the bundle. MAY NOT: a level inferred, assumed, averaged, or
+   taken from another paper's isolate. A pot with no printed control gets nothing invented for it;
+   it gets clause 4.
+3. **WHAT IS VALIDATED.** The three declared rows are external-literature rows that **no fit has
+   read** (`in_core_fit = False` on all three, `fit_target_of.core = []`). They go from 34.2×, 32.3×
+   and 3.3× to 2.21×, 2.53× and 1.54×, all three entering the 3× band. This is the first accuracy
+   gain of this run of waves and the first time three hold-out rows entered the band together. The
+   gain is not a tuning: the declared levels are 331, 59.4 and 8.24 µg/L, read off the source's own
+   unheated column, and no other value was tried.
+4. **A NEW REFUSAL, AND IT SHRINKS THE SCORED PANEL — WHICH IS DECLARED HERE BECAUSE IT FLATTERS
+   THE HEADLINE.** Four panel pots were never cooked: their 40 °C / 10 min is the HS-SPME headspace
+   incubation, and each bundle's own vessel provenance says so in words written months before this
+   wave. Seven lipid rows in them are now refused rather than answered with a formation from zero.
+   Refused rows 18 → 25, scored rows 46 → 39, and within-3× therefore reads 7/39 instead of 7/46
+   **with no prediction having improved**. The pre-registration's scoreboard prints the middle line
+   (`declared`) precisely so this wave's accuracy claim can be read with the refusal switched off.
+5. **WHAT MAKES THAT REFUSAL A REFUSAL AND NOT A DELETION.** Two independent condition-side
+   declarations must agree, neither of which can see a measurement, and both were fixed before any
+   error was looked at: (a) the bundle's `vessel.closure` is `"no cook"` — a datum recorded for an
+   unrelated purpose, and NOT sufficient alone, because three *hot* bundles carry the same string
+   meaning "there is no vessel to record"; and (b) the hydroperoxide conversion extent over the
+   thermal program is below 1 %. The four incubations sit at 3.826e-3, the mildest real cook on the
+   panel at 0.2578; nothing lies in the 67× gap, and the verdict is unchanged at thresholds of 0.01,
+   0.05 and 0.10 and across the whole Q10 band. **Every lipid miss in a pot that was cooked still
+   stands**, including the panel's largest at 366×, which is the test that the rule is not reaching
+   for the misses.
+6. **THE REFUSAL NAMES ITS OWN CURE.** It is conditional, not permanent: declare the starting state
+   under clause 2 and the row is answered. Trikusuma is the worked example of a pot that took the
+   cure.

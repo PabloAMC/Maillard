@@ -495,6 +495,29 @@ _PRECURSOR_LANE: Mapping[str, str] = {
     "Ala": ACRYLAMIDE,
 }
 
+#: B31 (2026-09-10). THE LINE BETWEEN A COOK AND A HEADSPACE INCUBATION, expressed
+#: as the fraction of the hydroperoxide pool that decomposes over the whole thermal
+#: program. It is NOT a fitted quantity and NOT a tuned one.
+#:
+#: What it separates, computed on the panel's own conditions with the lane's own
+#: anchored decomposition constant:
+#:
+#:     40 C, 10 min  (the four HS-SPME incubations)      3.826e-3
+#:     140 C, 6 s    (Trikusuma UHT, the mildest cook)   0.2578
+#:     160 C, 25 s   (Li 2026 extrusion)                 0.9994
+#:     160 C, 30 min (Bi 2020 roasted pea)               1.000
+#:
+#: The gap between the first row and the second is a factor of 67 and NOTHING IN THE
+#: PANEL LIES INSIDE IT. Thresholds of 0.01, 0.05 and 0.10 all give the identical
+#: verdict on every row, which is what a threshold that is not doing any fitting looks
+#: like. The verdict also survives the Q10 band end to end: at q10 = 2.0, the corner
+#: that slows the hot pots most, the two sides are 2.824e-3 and 2.855e-2 -- still on
+#: opposite sides of the line.
+#:
+#: The 1 % figure is chosen as the round number at the bottom of that empty gap, and
+#: it is used ONLY to refuse, never to scale anything.
+UNCOOKED_LOOH_CONVERSION_LIMIT = 0.01
+
 #: B6. A LIPID CARRIER is not a precursor species: it is a matrix declaration
 #: that resolves to a hydroperoxide pool through
 #: ``parameters_lipid.LIPID_CARRIERS``, whose lipid fraction and peroxide value
@@ -675,6 +698,12 @@ class ProcessSpec:
     #: pools (matrix_sites.resolve); without either, nothing is charged and the answer says so.
     protein_g_per_l: Optional[float] = None
     protein_sites: Optional[Mapping[str, float]] = None
+    #: B31 (2026-09-10): what the pot STARTS with, in ug/L, for compounds the raw material carries
+    #: in rather than the cook making. Added to the integrated concentration BEFORE the
+    #: matrix-binding factor, because the protein cannot tell a carried molecule from a made one.
+    #: ``None`` or absent means zero, so every pot that declares nothing is bit-for-bit unchanged.
+    #: Only a level the source PRINTS as an unheated control of the same pot may be put here.
+    carried_volatiles: Optional[Mapping[str, float]] = None
     #: B29 (2026-09-10): the pot's atmosphere -- "argon", "air" or "air_cu". ``None`` means air,
     #: which is what every fit row in this model was run in, so a spec that says nothing gets
     #: exactly the answer it got before the axis existed. Anything else with no fitted multiplier
@@ -1118,6 +1147,91 @@ def declare_envelope(
                     "declared hold-out and is still honoured: nonanal from a "
                     "LINOLEATE feed is exactly zero, by construction."
                 )
+        # -- B31 T3 (2026-09-10): A POT THAT WAS NEVER COOKED ------------------
+        # Four panel pots hold at 40 C for ten minutes and are not cooks at all: the
+        # 40 C / 10 min block is the HS-SPME headspace incubation, and each bundle's own
+        # vessel provenance says so in as many words ("never heated", "an UNHEATED protein
+        # powder", "No cook"). What they measure is what the raw material ARRIVED WITH.
+        # A formation model asked to make 1260 ug/kg of hexanal out of a flour nobody
+        # heated is not being tested on its chemistry, and scoring the miss as a chemistry
+        # failure -- 3357x, 6078x, 3717x, 33392x -- misreports what is wrong.
+        #
+        # TWO INDEPENDENT DECLARATIONS HAVE TO AGREE before a row is refused, because
+        # either alone is unsafe:
+        #   1. the bundle's vessel says `closure: "no cook"`. This is a datum the bundles
+        #      recorded months before this wave and it owes nothing to any prediction --
+        #      but the string is OVERLOADED. Three hot bundles carry it meaning "no vessel
+        #      to record" (a synthetic snapshot; two commercial products whose conditions
+        #      block is a proxy operating point). It cannot be the whole rule.
+        #   2. the thermal load cannot form what was measured: the fraction of the
+        #      hydroperoxide pool that decomposes over the program is below 1 %. The four
+        #      unheated pots sit at 3.8e-3; the coldest real cook in the panel (140 C for
+        #      6 s) sits at 0.258, sixty-seven times higher. NOTHING IN THE PANEL LIES
+        #      BETWEEN THEM, which is why the threshold is not a tuned knob: 0.01, 0.05 and
+        #      0.10 all refuse the same seven rows. The verdict also survives the Q10 band
+        #      -- at the worst corner (q10 = 2.0, which slows the hot pots most) the two
+        #      sides are still 2.8e-3 and 2.9e-2, on opposite sides of the line.
+        # The three hot "no cook" bundles fail clause 2 and are untouched.
+        #
+        # THE REFUSAL IS CONDITIONAL AND NAMES ITS OWN CURE. Declare what the pot started
+        # with (`conditions.carried_volatiles`, this wave's other half) and the row is
+        # answered. Trikusuma does exactly that and is scored. What is refused is the pot
+        # for which NO source on this disk prints a starting state, and the honest report
+        # of that is "cannot be asked", not a four-decade miss.
+        #
+        # This SHRINKS the panel: seven rows leave, all of them misses, so within-3x goes
+        # 7/46 -> 7/39 and out-of-sample 6/45 -> 6/42 on arithmetic alone. That is exactly
+        # the shape of a self-serving rule and is flagged here rather than buried. What
+        # makes it not one: the criterion is condition-side and was fixed before any error
+        # was looked at, and it leaves every lipid miss in a pot that WAS cooked standing
+        # -- including the panel's largest, 2-pentylfuran at 366x in li 2026.
+        if carriers and lipid_targets:
+            vessel = getattr(spec.process, "vessel", None)
+            closure = _norm(str(getattr(vessel, "closure", "") or ""))
+            if closure == "no cook":
+                from .parameters_lipid import k_looh_decomp_per_min
+
+                exponent = sum(
+                    k_looh_decomp_per_min(float(temperature_c)) * float(duration)
+                    for duration, temperature_c in spec.process.thermal.segments
+                )
+                extent = 1.0 - math.exp(-exponent)
+                if extent < UNCOOKED_LOOH_CONVERSION_LIMIT:
+                    carried_declared = {
+                        _norm(str(name))
+                        for name, amount in (
+                            getattr(spec.process, "carried_volatiles", None) or {}
+                        ).items()
+                        if float(amount) > 0.0
+                    }
+                    # `mapped_targets` is {requested name -> species key}, so a compound
+                    # counts as declared when the CALLER'S OWN NAME for it was declared,
+                    # through the same alias table the request came in on.
+                    undeclared = sorted(
+                        {
+                            name for name, key in mapped_targets.items()
+                            if _TARGET_LANE.get(key) == LIPID
+                            and _norm(str(name)) not in carried_declared
+                        }
+                    )
+                    if undeclared:
+                        reasons.append(
+                            "THIS POT WAS NEVER COOKED, so what it measures is what the raw "
+                            "material ARRIVED WITH, and this lane models FORMATION. The "
+                            "bundle's own vessel says so (closure = 'no cook'), and the "
+                            "physics agrees: over this thermal program only "
+                            f"{100.0 * extent:.2f} % of the hydroperoxide pool decomposes, "
+                            f"against {100.0 * UNCOOKED_LOOH_CONVERSION_LIMIT:.0f} % taken as "
+                            "the floor for a cook and 25.8 % for the mildest real cook in the "
+                            "panel. There is no thermal step here to model, so "
+                            + ", ".join(undeclared)
+                            + " is refused rather than answered with a formation from zero. "
+                            "THE CURE IS A DECLARED STARTING STATE: put the level the source "
+                            "prints for the unheated material in conditions.carried_volatiles "
+                            "and the row is answered. Only a level the source PRINTS may go "
+                            "there; nothing may be inferred from another paper's isolate."
+                        )
+
     if lipid_targets and LIPID not in lanes and not lane_reasons:
         reasons.append(
             "a lipid product was requested but the lipid lane was not selected"
@@ -2384,6 +2498,19 @@ def predict(
     from .matrix_sites import bound_fraction as _bound_fraction
     from .matrix_sites import resolve as _resolve_sites
 
+    # B31: what the pot started with. Added BEFORE the binding factor below, because the protein
+    # binds a carried molecule and a made one alike. Zero unless the bundle declares it, and the
+    # declaration may only quote a printed unheated control of the same pot.
+    carried = dict(getattr(spec.process, "carried_volatiles", None) or {})
+    carried_applied: Dict[str, float] = {}
+    if carried:
+        lookup = {str(c).strip().lower(): c for c in concentrations}
+        for name, amount in carried.items():
+            key = lookup.get(str(name).strip().lower())
+            if key is None or float(amount) <= 0.0:
+                continue
+            concentrations[key] = float(concentrations[key]) + float(amount)
+            carried_applied[key] = float(amount)
     charged_sites, sites_note = _resolve_sites(spec.process)
     binding: Dict[str, Any] = {}
     if charged_sites is not None:
@@ -2397,6 +2524,7 @@ def predict(
     if sites_note:
         metadata["matrix_sites_note"] = sites_note
     metadata["matrix_binding"] = binding
+    metadata["carried_volatiles"] = carried_applied
     metadata["matrix_extra_decades"] = {c: r["extra_decades"] for c, r in binding.items()}
     metadata["ph"] = float(spec.process.ph)
     metadata["ph_final"] = spec.process.ph_final

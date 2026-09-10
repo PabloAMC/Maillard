@@ -322,6 +322,11 @@ def core_spec(bench: Mapping[str, Any], *, use_buffer: bool = True):
                 if conditions.get("water_activity") is not None
                 else None
             ),
+            # B31: what the pot starts with. Absent means zero.
+            carried_volatiles=(
+                {str(k): float(v) for k, v in (conditions.get("carried_volatiles") or {}).items()}
+                or None
+            ),
             matrix=str(bench.get("protein_type") or "water"),
             buffer=buffer_from_bundle(bench) if use_buffer else None,
             vessel=vessel_from_bundle(bench),
