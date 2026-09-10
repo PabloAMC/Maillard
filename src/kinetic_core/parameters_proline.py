@@ -48,6 +48,40 @@ FROZEN_B24: Mapping[str, float] = {
 PROLINE_SHIPPED = False
 INERT_B24: Mapping[str, float] = {"log10_k_pyrl_ap_100C": -300.0, "log10_k_mgo_pro_100C": -300.0}
 PROLINE_COORDINATES: Tuple[str, ...] = tuple(FROZEN_B24)
+
+# ===========================================================================
+# WAVE B24b (2026-09-10): THE BRANCH THAT REFUSED B24
+# ===========================================================================
+# B24's own outcome names this wave and what it needs. Two more species (hydroxyacetone and the
+# tetrahydropyridine) and three coordinates: the branch constant, the pH gate on it, and the
+# 1-pyrroline loss B24 had none of.
+#
+# THE ONE THING THAT MAKES THIS FITTABLE, and it is a statement in a source rather than an
+# inference: Schieberle & Hofmann 2005 say in words that hydroxyacetone gives ONLY the
+# tetrahydropyridine and methylglyoxal gives ONLY 2-acetyl-1-pyrroline. So the two products are not
+# competing rates on one substrate. They are competing claims on the METHYLGLYOXAL -- the amino acid
+# turns it into hydroxyacetone and commits it to one branch, the pyrroline acylates it and commits
+# it to the other. That is why an excess of proline drives the tetrahydropyridine and an excess of
+# methylglyoxal drives the pyrroline product, and why the fit target is a RATIO.
+EA_HA_ATHP_KJ_MOL = EA_PYRL_AP_KJ_MOL   # declared equal to the acylation's: no barrier is measured
+                                        # for this step anywhere, and both are condensations of
+                                        # 1-pyrroline with a small carbonyl in the same pot.
+#: Schieberle & Hofmann 2005 Table 2, the tetrahydropyridine against pH, as RATIOS to the pH-7 rung.
+#: The pH-3 rung is CENSORED ("<0.1 ug") and enters as a one-sided bound, never as a point.
+ATHP_PH_LADDER_UG: Mapping[str, float] = {"5.0": 0.9, "7.0": 10.8, "9.0": 38.4}
+ATHP_PH_LADDER_CENSORED: Mapping[str, float] = {"3.0": 0.1}
+ATHP_PH_SOURCE = ("Schieberle & Hofmann 2005 (ACS Symp. Ser.) Table 2, re-read from 200-dpi rasters "
+                  "because the OCR layer dropped the pH 9.0 row; identical charge, buffer, time and "
+                  "temperature to Hofmann & Schieberle 1998b Table 4, which it confirms to the digit. "
+                  "schieberle2005_extraction.md")
+#: Hofmann & Schieberle 1998b Table 9: the AP : ATHP molar ratio across a hundredfold methylglyoxal
+#: ladder against 400 mmol/L proline. THE SHAPE THIS WAVE IS FITTED ON.
+AP_ATHP_SWITCH: Mapping[float, float] = {4.0: 0.16, 40.0: 0.51, 400.0: 12.8}
+AP_ATHP_SWITCH_SOURCE = ("Hofmann & Schieberle 1998b Table 9, proline 400 mmol/L + methylglyoxal "
+                         "4 / 40 / 400 mmol/L, 0.5 M phosphate pH 7, 100 C, 30 min; a ratio inside "
+                         "one analysis, so the response factor and the extraction cancel")
+#: Experiment 3: 1-pyrroline in fivefold excess over methylglyoxal. What sizes the pyrroline loss.
+PYRL_EXCESS_ROW: Mapping[str, float] = {"pyrl_mmol_l": 10.0, "mgo_mmol_l": 2.0, "ap_molpct_of_mgo": 0.33}
 _HOFMANN = ("Hofmann & Schieberle 1998b, J. Agric. Food Chem. 46:2270 (doi 10.1021/jf970990g): Table 7 (1-pyrroline 2 mmol/L + "
             "methylglyoxal 10 or 2 mmol/L, 0.5 M phosphate pH 7, 100 C, 30 min: 28.7 and 5.3 mol %), Table 9 (proline 400 mmol/L + "
             "methylglyoxal 4 / 40 / 400 mmol/L: 0.0058 / 0.0125 / 0.0179 mol % of proline); hofmann1998b_extraction.md sec. 4")
@@ -82,6 +116,25 @@ def _p(key, transformation, log10_k, ea, note, flags):
     )
 
 
+def with_fitted_proline_b24b(log10_k_ha_athp: float, log10_k_pyrl_loss: float) -> Dict[str, KineticParameter]:
+    """B24b's two new constants. Zero until a B24b report supplies them."""
+    return {
+        "k_ha_athp": _p("k_ha_athp", "1-pyrroline + hydroxyacetone -> 2-acetyltetrahydropyridine", log10_k_ha_athp,
+                        EA_HA_ATHP_KJ_MOL,
+                        "B24b fit rows: Hofmann & Schieberle 1998b Table 9's three AP : ATHP ratios, and "
+                        "Schieberle & Hofmann 2005 Table 2's pH ladder as ratios to pH 7. Barrier DECLARED "
+                        "equal to the acylation's; none is measured for this step anywhere.",
+                        ("barrier_declared_equal_to_acylation", "exclusive_branch_stated_by_source")),
+        "k_pyrl_loss": _p("k_pyrl_loss", "1-pyrroline -> melanoidin pools (its own loss, first order)", log10_k_pyrl_loss,
+                          EA_HA_ATHP_KJ_MOL,
+                          "B24b fit row: Hofmann & Schieberle 1998b Table 7 experiment 3, 1-pyrroline in "
+                          "fivefold excess giving 0.33 mol % of the methylglyoxal where B24 made 41. The "
+                          "source measures a DISAPPEARANCE and names no product, so the sink is accounting "
+                          "and not mechanism.",
+                          ("first_order_is_the_crudest_form", "no_product_named_by_source")),
+    }
+
+
 def with_fitted_proline(log10_k_pyrl_ap: float, log10_k_mgo_pro: float) -> Dict[str, KineticParameter]:
     """The proline block at arbitrary values (the fit generator's hook and the report reader's)."""
     return {
@@ -94,11 +147,23 @@ def with_fitted_proline(log10_k_pyrl_ap: float, log10_k_mgo_pro: float) -> Dict[
     }
 
 
-PROLINE_PARAMETERS: Mapping[str, KineticParameter] = with_fitted_proline(
-    *[(FROZEN_B24 if PROLINE_SHIPPED else INERT_B24)[k] for k in PROLINE_COORDINATES])
+#: B24b's optimum, once its report exists. Inert until then, exactly as B24's two are.
+FROZEN_B24B: Mapping[str, float] = {}
+B24B_SHIPPED = False
+INERT_B24B: Mapping[str, float] = {"log10_k_ha_athp_100C": -300.0, "log10_k_pyrl_loss_100C": -300.0}
+PROLINE_B24B_COORDINATES: Tuple[str, ...] = tuple(INERT_B24B)
+
+PROLINE_PARAMETERS: Mapping[str, KineticParameter] = {
+    **with_fitted_proline(*[(FROZEN_B24 if PROLINE_SHIPPED else INERT_B24)[k] for k in PROLINE_COORDINATES]),
+    **with_fitted_proline_b24b(
+        *[(FROZEN_B24B if B24B_SHIPPED else INERT_B24B)[k] for k in PROLINE_B24B_COORDINATES]),
+}
 PROLINE_KEYS: Tuple[str, ...] = tuple(PROLINE_PARAMETERS)
 #: The proline Strecker step takes B18's pH term (an amine-dependent step).
-PROLINE_PH_STEPS: Tuple[str, ...] = ("k_mgo_pro",)
+#: B24b adds k_ha_athp: it condenses 1-pyrroline (an amine) with a carbonyl, the same shape B18's
+#: term was fitted for. The transfer is DECLARED and CHECKED against a ladder it was not fitted on
+#: (Schieberle & Hofmann 2005 Table 2); the check is reported on the B24b ship rule.
+PROLINE_PH_STEPS: Tuple[str, ...] = ("k_mgo_pro", "k_ha_athp")
 
 PROLINE_WISHLIST: Mapping[str, str] = {
     "k_pyrl_ap": "1-pyrroline + methylglyoxal at a second temperature (Hofmann's pot at 80 or 120 C) for a measured barrier",

@@ -1,0 +1,103 @@
+{
+  "artifact": "kinetic_core_b24b_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b24b_ship_rule",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "0b182c86ab8fc538012b786ec5ee76b03356c3b3",
+      "short": "0b182c86",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b24b_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b24b_fit_report.json",
+        "sha256": "bfd14704708eb159254bb4dd10169e5f7dd38669200697f70600e80ee4870e1c"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b24b_prereg.md",
+  "rule": "SHIP if T1 (the switch), T2 (the pyrroline excess), T3 (B24's fed rows) and T5 hold",
+  "T1": {
+    "ordering_increasing": true,
+    "residuals_dex": {
+      "switch_mgo4": 0.5713920650678482,
+      "switch_mgo40": 0.2542747878036851,
+      "switch_mgo400": -1.0111356983544355
+    },
+    "worst": "switch_mgo400",
+    "worst_dex": 1.0111356983544355,
+    "model_span_x": 2.092002617440589,
+    "printed_span_x": 80.0,
+    "pass": false
+  },
+  "T2": {
+    "dex": 1.992796037075542,
+    "predicted_mol_pct": 32.45711968386957,
+    "pass": false
+  },
+  "T3": {
+    "rows": {
+      "hof_t7_e1_pyrl2_mgo10": {
+        "target_mol_pct": 28.7,
+        "predicted_mol_pct": 32.26138542830867,
+        "dex": 0.05080111699936055
+      },
+      "hof_t7_e2_pyrl2_mgo2": {
+        "target_mol_pct": 5.3,
+        "predicted_mol_pct": 7.7263013168436965,
+        "dex": 0.1636957715223782
+      }
+    },
+    "worst_dex": 0.1636957715223782,
+    "pass": true
+  },
+  "T4": {
+    "sigma": {
+      "log10_k_ha_athp_100C": 0.9440762056375223,
+      "log10_k_pyrl_loss_100C": 7.950521432342639
+    },
+    "identified": {
+      "log10_k_ha_athp_100C": true,
+      "log10_k_pyrl_loss_100C": false
+    },
+    "on_bound": {
+      "log10_k_ha_athp_100C": false,
+      "log10_k_pyrl_loss_100C": true
+    },
+    "reported_only": true
+  },
+  "T4b": {
+    "ladder": {
+      "5.0": {
+        "printed_ug": 0.9,
+        "model_athp_mmol_l": 1.5946976337580736,
+        "printed_ratio_to_ph7": 0.08333333333333333,
+        "model_ratio_to_ph7": 0.8197614298672131,
+        "dex": 0.9928687267640244
+      },
+      "7.0": {
+        "printed_ug": 10.8,
+        "model_athp_mmol_l": 1.945319181479893,
+        "printed_ratio_to_ph7": 1.0,
+        "model_ratio_to_ph7": 1.0,
+        "dex": 0.0
+      },
+      "9.0": {
+        "printed_ug": 38.4,
+        "model_athp_mmol_l": 1.973861408068267,
+        "printed_ratio_to_ph7": 3.5555555555555554,
+        "model_ratio_to_ph7": 1.0146722588560817,
+        "dex": -0.5445816819567226
+      }
+    },
+    "worst_dex": 0.9928687267640244,
+    "reported_only": true
+  },
+  "T5": {
+    "panel_identical": true,
+    "pass": true
+  },
+  "verdict": "DO NOT SHIP"
+}

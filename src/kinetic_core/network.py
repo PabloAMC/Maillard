@@ -444,10 +444,30 @@ METHIONINE_REACTIONS: Tuple[Reaction, ...] = (
 #: kinetic_core_b24_prereg.md; constants in parameters_proline.py.
 PROLINE_REACTIONS: Tuple[Reaction, ...] = (
     Reaction(
-        "r_mgo_pro", {"MGO": 1, "PRO": 1}, {"PYRL": 1, "FRAG_C": 4}, "k_mgo_pro",
-        "B24. methylglyoxal + proline -> 1-pyrroline + hydroxyacetone + CO2 (Strecker of a secondary amine; the "
-        "ring nitrogen stays in the pyrroline; hydroxyacetone and CO2 to the fragment pool). FITTED on Hofmann "
-        "& Schieberle 1998b Table 9 (proline + methylglyoxal at three ratios).",
+        "r_mgo_pro", {"MGO": 1, "PRO": 1}, {"PYRL": 1, "HA": 1, "FRAG_C": 1}, "k_mgo_pro",
+        "B24, AMENDED BY B24b (2026-09-10). methylglyoxal + proline -> 1-pyrroline + HYDROXYACETONE + CO2 "
+        "(Strecker of a secondary amine; the ring nitrogen stays in the pyrroline). B24 routed the "
+        "hydroxyacetone to the fragment pool, which is why its arm had no competing branch; it is a species "
+        "now. Carbon closes as 3 + 5 = 4 + 3 + 1. FITTED on Hofmann & Schieberle 1998b Table 9.",
+    ),
+    Reaction(
+        "r_pyrl_ha_athp", {"PYRL": 1, "HA": 1}, {"ATHP": 1}, "k_ha_athp",
+        "B24b. 1-pyrroline + hydroxyacetone -> 2-acetyltetrahydropyridine. THE BRANCH IS EXCLUSIVE AND THE "
+        "SOURCE SAYS SO IN WORDS: Schieberle & Hofmann 2005 state that hydroxyacetone gives only this product "
+        "and methylglyoxal only 2-acetyl-1-pyrroline, so the two are not competing rates on one substrate -- "
+        "they are competing claims on the METHYLGLYOXAL. pH-gated on Schieberle & Hofmann 2005 Table 2 "
+        "(<0.1 / 0.9 / 10.8 / 38.4 ug at pH 3 / 5 / 7 / 9). Carbon closes as 4 + 3 = 7.",
+    ),
+    Reaction(
+        "r_pyrl_loss", {"PYRL": 1}, {"MEL_C": 4, "MEL_N": 1}, "k_pyrl_loss",
+        "B24b. 1-pyrroline's own loss, first order. B24 had none, and with 1-pyrroline fed in fivefold "
+        "excess it made 41 mol % of the methylglyoxal into the product against a printed 0.33 -- 2.1 decades "
+        "out. Sized on that experiment (Hofmann & Schieberle 1998b Table 7, experiment 3). The lost "
+        "1-pyrroline goes to the MELANOIDIN pools and not to the fragment pool, because it carries a "
+        "NITROGEN and the fragment pool holds carbon only; a nitrogen-bearing residue that browning "
+        "does not account for would leave the nitrogen balance open. What this does NOT claim is that "
+        "the loss is browning: the source measures a disappearance and names no product, so this is "
+        "the accounting sink that keeps both atoms, not a mechanism.",
     ),
     Reaction(
         "r_pyrl_ap", {"PYRL": 1, "MGO": 1}, {"AP": 1, "FRAG_C": 1}, "k_pyrl_ap",

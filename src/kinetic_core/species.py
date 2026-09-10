@@ -227,12 +227,27 @@ SPECIES: Tuple[Species, ...] = (
             "B24. Proline's Strecker product; fed by Hofmann & Schieberle 1998b."),
     Species("AP", "2-acetyl-1-pyrroline", 6, 1, "product", True,
             "B24. The acylation of 1-pyrroline by methylglyoxal (Hofmann & Schieberle 1998b, Table 7)."),
+    # ---- WAVE B24b (2026-09-10): the branch that refused B24 --------------
+    # B24 had no competing product and no loss of 1-pyrroline, so its whole-chain yield rose almost
+    # linearly with the methylglyoxal charge where the source's rises threefold. The competition is
+    # for the METHYLGLYOXAL, and the two fates are EXCLUSIVE -- Schieberle & Hofmann 2005 state in
+    # words that hydroxyacetone gives only the tetrahydropyridine and methylglyoxal only the
+    # pyrroline product. That exclusivity is why the shape is a ratio and not a level.
+    Species("HA", "hydroxyacetone (acetol)", 3, 0, "intermediate", True,
+            "B24b. The other half of proline's Strecker on methylglyoxal, which B24 routed to the "
+            "fragment pool. It is a species here because it is the committed precursor of the "
+            "TETRAHYDROPYRIDINE and of nothing else."),
+    Species("ATHP", "2-acetyl-1,4,5,6-tetrahydropyridine", 7, 1, "product", True,
+            "B24b. The competing product. Made from 1-pyrroline and hydroxyacetone and NOT from "
+            "methylglyoxal, so an excess of the amino acid drives this branch and an excess of "
+            "methylglyoxal drives 2-acetyl-1-pyrroline. Hofmann & Schieberle 1998b Table 9's "
+            "AP : ATHP ratio swings 0.16 -> 12.8 across a hundredfold methylglyoxal ladder."),
 )
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
 TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL",
-                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP")
+                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "HA", "ATHP")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 
