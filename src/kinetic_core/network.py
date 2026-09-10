@@ -439,6 +439,23 @@ METHIONINE_REACTIONS: Tuple[Reaction, ...] = (
         "B22. 2 methanethiol -> dimethyl disulfide, an APPARENT second-order constant (the pot's internal "
         "oxidant is not tracked on this lane; Xu 2010). FITTED on Pan 2025's disulfide rates.",
     ),
+    Reaction(
+        "r_marp_mtal", {"MARP": 1}, {"MTAL": 1, "MEL_C": 7, "MEL_N": 1}, "k_marp_mtal",
+        "B22b. The methionine Amadori compound decomposes to methional, first order. THE ROUTE DENG'S OWN "
+        "EXPERIMENT NAMES: the fed Amadori compound gives 1.4 to 2.6 times more methional than methionine "
+        "plus glucose, so the dicarbonyl arrives inside the molecule rather than as a free pool. Carbon "
+        "closes as 11 = 4 + 7 and the NITROGEN goes to the melanoidin pool, not to the fragment pool, "
+        "which holds carbon only: the Strecker aldehyde takes no nitrogen with it and the residue is a "
+        "nitrogen-bearing sugar fragment the source does not measure. FITTED on Deng 2022 Table 1's "
+        "five-point time course at 120 C.",
+    ),
+    Reaction(
+        "r_marp_loss", {"MARP": 1}, {"MEL_C": 11, "MEL_N": 1, "FRAG_S": 1}, "k_marp_loss",
+        "B22b. The Amadori compound's own competing loss, first order -- what every other Amadori compound "
+        "in this model has. It is here because Deng's series RISES to 120 minutes and then FALLS, and a "
+        "single first-order decomposition of a fed pool saturates rather than falling. The sink keeps both "
+        "the carbon and the nitrogen; it is accounting, and the source names no product.",
+    ),
 )
 #: Build Wave B24 (2026-09-09): 2-ACETYL-1-PYRROLINE FROM PROLINE, TRUNK-ONLY. Pre-registered in
 #: kinetic_core_b24_prereg.md; constants in parameters_proline.py.

@@ -1,0 +1,196 @@
+{
+  "wave": "B22b",
+  "artifact": "kinetic_core_b22b_fit_report",
+  "provenance": {
+    "artifact": "kinetic_core_b22b_fit_report",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "f168c3d4ebede99939aaa55ce37b44ec6c596bbd",
+      "short": "f168c3d4",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b22b_fit.py",
+    "inputs": []
+  },
+  "prereg": "results/validation/kinetic_core_b22b_prereg.md",
+  "source": "Deng, Wang, Zhang et al. 2022, Table 1 (methionine + glucose 0.2 + 0.2 mol/L against the Met-Glc Amadori compound 0.2 mol/L, initial pH 7.5 unbuffered, sealed vials, 120 C, 30-240 min; HS-SPME-GC-MS, semi-quantitative); deng2022_extraction.md",
+  "objective": {
+    "times_min": [
+      30.0,
+      60.0,
+      120.0,
+      180.0,
+      240.0
+    ],
+    "targets_umol_l": {
+      "30.0": 0.244,
+      "60.0": 0.52,
+      "120.0": 1.887,
+      "180.0": 1.477,
+      "240.0": 0.822
+    },
+    "sigma_log": 0.3,
+    "n_rows": 5,
+    "n_free": 2,
+    "final_cost": 5.6705316142908595
+  },
+  "bounds": {
+    "log10_k_marp_mtal_120C": [
+      -5.920818753952375,
+      2.079181246047625
+    ],
+    "log10_k_marp_loss_120C": [
+      -6.3979400086720375,
+      1.6020599913279625
+    ]
+  },
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        -1.9208187539523751,
+        -2.3979400086720375
+      ],
+      "x": [
+        -4.918867477666416,
+        0.489477345308364
+      ],
+      "cost": 5.67053161429086,
+      "nfev": 7,
+      "residuals_dex": {
+        "30.0": 0.5052936503005145,
+        "60.0": 0.17668013300444482,
+        "120.0": -0.3830884235256874,
+        "180.0": -0.2766970186727055,
+        "240.0": -0.022188340900806392
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        -2.4210991855346613,
+        -1.7454218976464615
+      ],
+      "x": [
+        -4.844703696295522,
+        0.5636411262199892
+      ],
+      "cost": 5.6705316142908595,
+      "nfev": 24,
+      "residuals_dex": {
+        "30.0": 0.5052936507597818,
+        "60.0": 0.17668013346371206,
+        "120.0": -0.3830884230664201,
+        "180.0": -0.27669701821343823,
+        "240.0": -0.022188340441539136
+      }
+    },
+    {
+      "start": 2,
+      "x0": [
+        -1.0005765331506749,
+        -2.0424424018696046
+      ],
+      "x": [
+        -4.7067262055325925,
+        0.7016186173863045
+      ],
+      "cost": 5.6705316142908595,
+      "nfev": 19,
+      "residuals_dex": {
+        "30.0": 0.505293650356397,
+        "60.0": 0.1766801330603272,
+        "120.0": -0.38308842346980493,
+        "180.0": -0.2766970186168231,
+        "240.0": -0.022188340844923982
+      }
+    }
+  ],
+  "best_start": 1,
+  "frozen_parameters": {
+    "methionine_b22b": {
+      "log10_k_marp_mtal_120C": -4.844703696295522,
+      "log10_k_marp_loss_120C": 0.5636411262199892
+    }
+  },
+  "predicted_umol_l": {
+    "30.0": 0.7810583454390208,
+    "60.0": 0.7810583454390208,
+    "120.0": 0.7810583454390208,
+    "180.0": 0.7810583454390208,
+    "240.0": 0.7810583454390208
+  },
+  "residual_by_row_dex": {
+    "30.0": 0.5052936507597818,
+    "60.0": 0.17668013346371206,
+    "120.0": -0.3830884230664201,
+    "180.0": -0.27669701821343823,
+    "240.0": -0.022188340441539136
+  },
+  "peak_time_min": 30.0,
+  "laplace": {
+    "sigma": {
+      "log10_k_marp_mtal_120C": 0.09222724044744404,
+      "log10_k_marp_loss_120C": 0.0922272404474495
+    },
+    "chi2_reduced": 1.8901772047636198,
+    "dof": 3,
+    "identified": {
+      "log10_k_marp_mtal_120C": true,
+      "log10_k_marp_loss_120C": true
+    },
+    "on_bound": {
+      "log10_k_marp_mtal_120C": false,
+      "log10_k_marp_loss_120C": false
+    }
+  },
+  "two_arm_check": {
+    "rows": {
+      "30.0": {
+        "printed_binary_umol_l": 0.178,
+        "printed_arp_umol_l": 0.244,
+        "printed_arp_over_binary": 1.3707865168539326,
+        "model_binary_umol_l": 0.0,
+        "model_arp_umol_l": 0.7810583454390208,
+        "model_arp_over_binary": 7.810583454390206e+29
+      },
+      "60.0": {
+        "printed_binary_umol_l": 0.243,
+        "printed_arp_umol_l": 0.52,
+        "printed_arp_over_binary": 2.139917695473251,
+        "model_binary_umol_l": 0.0,
+        "model_arp_umol_l": 0.7810583454390208,
+        "model_arp_over_binary": 7.810583454390206e+29
+      },
+      "120.0": {
+        "printed_binary_umol_l": 0.727,
+        "printed_arp_umol_l": 1.887,
+        "printed_arp_over_binary": 2.595598349381018,
+        "model_binary_umol_l": 0.0,
+        "model_arp_umol_l": 0.7810583454390208,
+        "model_arp_over_binary": 7.810583454390206e+29
+      },
+      "180.0": {
+        "printed_binary_umol_l": 0.843,
+        "printed_arp_umol_l": 1.477,
+        "printed_arp_over_binary": 1.752075919335706,
+        "model_binary_umol_l": 0.0,
+        "model_arp_umol_l": 0.7810583454390208,
+        "model_arp_over_binary": 7.810583454390206e+29
+      },
+      "240.0": {
+        "printed_binary_umol_l": 0.746,
+        "printed_arp_umol_l": 0.822,
+        "printed_arp_over_binary": 1.101876675603217,
+        "model_binary_umol_l": 0.0,
+        "model_arp_umol_l": 0.7810583454390208,
+        "model_arp_over_binary": 7.810583454390206e+29
+      }
+    },
+    "direction_holds_at_every_time": true,
+    "note": "The binary arm rests on charging methionine as GLYCINE for the Amadori chemistry, a declared substitution B22 already found overshoots Deng's pot by 1.5 to 2.9 decades. This check is where that shows."
+  },
+  "reference_temperature_K": 393.15,
+  "reference_ph": 7.5
+}

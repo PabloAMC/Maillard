@@ -245,12 +245,33 @@ SPECIES: Tuple[Species, ...] = (
             "methylglyoxal, so an excess of the amino acid drives this branch and an excess of "
             "methylglyoxal drives 2-acetyl-1-pyrroline. Hofmann & Schieberle 1998b Table 9's "
             "AP : ATHP ratio swings 0.16 -> 12.8 across a hundredfold methylglyoxal ladder."),
+    # ---- B22b (2026-09-10): the route Deng's own experiment names -------
+    Species("MARP", "N-(1-deoxy-D-fructos-1-yl)-methionine (the methionine-glucose Amadori compound)",
+            11, 1, "intermediate", True,
+            "B22b. B22 built methional as free dicarbonyl times methionine and the data refuted it. "
+            "Deng 2022 charged THIS compound alone and got 1.4 to 2.6 times more methional than "
+            "methionine plus glucose, so the sugar moiety supplies the dicarbonyl inside the same "
+            "molecule. Carbon is glucose's 6 plus methionine's 5; nitrogen and sulfur are "
+            "methionine's.", sulfur=1),
+    Species("FRAG_S", "unassigned fragment sulfur", 0, 0, "pool", False,
+            "B22b (2026-09-10). The sulfur analogue of FRAG_C, and it exists for the same reason: a "
+            "step that loses a sulfur-bearing molecule to an unmeasured product has to put the sulfur "
+            "somewhere, and the melanoidin pools hold carbon and nitrogen only. Adding it was forced "
+            "by the balance guard, which refused the first draft of r_marp_loss. "
+            "APPENDED AT THE END AND TRUNK-ONLY, and both matter: the first draft put it beside "
+            "FRAG_C in the middle of this list, which would have shifted the INDEX of every species "
+            "after it and silently re-shaped the sulfur lane's state vector -- the vector the B9 fit "
+            "was run on. THE SULFUR LANE ALREADY HAS A KEY OF THIS NAME, and that is fine where "
+            "`HA` was not: there the same key meant two DIFFERENT compounds, a C2 and a C3, on two "
+            "lanes; here it means the SAME pool on two separate state vectors, which is exactly what "
+            "FRAG_C does. The sulfur state stays 57 keys with no duplicate. "
+            "An accounting pool, not a species; nothing consumes it", sulfur=1),
 )
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
 TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL",
-                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "ACETOL", "ATHP")
+                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "ACETOL", "ATHP", "MARP", "FRAG_S")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 

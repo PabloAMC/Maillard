@@ -66,6 +66,44 @@ INERT_B22: Mapping[str, float] = {
 }
 METHIONINE_COORDINATES: Tuple[str, ...] = tuple(FROZEN_B22)
 
+# ===========================================================================
+# WAVE B22b (2026-09-10): THE ROUTE DENG'S OWN EXPERIMENT NAMES
+# ===========================================================================
+# B22 built methional as free dicarbonyl times methionine and two laboratories refuted it at once.
+# Deng 2022 charged the isolated methionine-glucose Amadori compound and got 1.4 to 2.6 times MORE
+# methional than methionine plus glucose, so the dicarbonyl arrives inside the molecule. That is a
+# first-order step in a species the core did not carry, and a FED experiment, which is the cleanest
+# kind of row this repository fits.
+DENG_ARP_MMOL_L = 200.0
+DENG_T_C = 120.0
+DENG_PH = 7.5
+#: Deng 2022 Table 1, MG-ARP arm: methional in umol/L at 30 / 60 / 120 / 180 / 240 min.
+#: SEMI-QUANTITATIVE -- headspace SPME against dichlorobenzene with the response factor taken as 1,
+#: which is why the rows carry 0.30 dex and not less.
+DENG_ARP_METHIONAL_UMOL_L: Mapping[float, float] = {
+    30.0: 0.244, 60.0: 0.520, 120.0: 1.887, 180.0: 1.477, 240.0: 0.822,
+}
+#: The same table's Met + Glc arm. NOT a fit row: it is the two-arm direction check.
+DENG_BINARY_METHIONAL_UMOL_L: Mapping[float, float] = {
+    30.0: 0.178, 60.0: 0.243, 120.0: 0.727, 180.0: 0.843, 240.0: 0.746,
+}
+DENG_SOURCE = ("Deng, Wang, Zhang et al. 2022, Table 1 (methionine + glucose 0.2 + 0.2 mol/L against "
+               "the Met-Glc Amadori compound 0.2 mol/L, initial pH 7.5 unbuffered, sealed vials, "
+               "120 C, 30-240 min; HS-SPME-GC-MS, semi-quantitative); deng2022_extraction.md")
+#: ONE TEMPERATURE, so no barrier is licensed. Declared equal to B22's methional-release barrier,
+#: which is itself a band centre: the 100 and 130 C methional series exist only in a figure and
+#: Deng's Table 2 has no methional row at all.
+EA_MARP_KJ_MOL = float(sum(EA_MTAL_MSH_BAND_KJ_MOL) / 2.0)
+EA_MARP_DECLARED = ("DECLARED, not fitted: Deng prints methional at ONE temperature in a table and "
+                    "the other two only in a figure, so no Arrhenius is licensed. Set to the centre "
+                    "of B22's methional-release band.")
+
+
+FROZEN_B22B: Mapping[str, float] = {}
+B22B_SHIPPED = False
+INERT_B22B: Mapping[str, float] = {"log10_k_marp_mtal_120C": -300.0, "log10_k_marp_loss_120C": -300.0}
+METHIONINE_B22B_COORDINATES: Tuple[str, ...] = tuple(INERT_B22B)
+
 _PAN = ("Pan et al. 2025 (methionine 0.268 mmol/L + fructose 111 + glucose 83 + sucrose 44 mmol/L, 50 mmol/L citrate pH 6.2, "
         "100 / 120 / 140 C, 30-600 s; Table 2 zero-order constants, unit inferred as umol L-1 s-1 from the printed endpoints); "
         "pan2025_extraction.md sec. 4")
@@ -100,6 +138,25 @@ def _p(key, transformation, k_ref, ea, order, unit, note, flags):
     )
 
 
+def with_fitted_methionine_b22b(log10_k_marp_mtal: float, log10_k_marp_loss: float) -> Dict[str, KineticParameter]:
+    """B22b's two constants. Zero until a B22b report supplies them."""
+    def _pow(v: float) -> float:
+        return 0.0 if float(v) < -100.0 else 10.0 ** float(v)
+
+    return {
+        "k_marp_mtal": _p("k_marp_mtal", "methionine-glucose Amadori compound -> methional (first order)",
+                          _pow(log10_k_marp_mtal), EA_MARP_KJ_MOL, 1, "1/min",
+                          f"B22b fit rows: {DENG_SOURCE}. Barrier: {EA_MARP_DECLARED}",
+                          ("barrier_declared_one_temperature", "semi_quantitative_rows")),
+        "k_marp_loss": _p("k_marp_loss", "the same Amadori compound's competing loss (first order)",
+                          _pow(log10_k_marp_loss), EA_MARP_KJ_MOL, 1, "1/min",
+                          "B22b: present because Deng's series RISES to 120 min and then FALLS, and a "
+                          "single first-order decomposition of a fed pool saturates rather than falling. "
+                          f"Barrier: {EA_MARP_DECLARED}",
+                          ("barrier_declared_one_temperature", "no_product_named_by_source")),
+    }
+
+
 def with_fitted_methionine(log10_ratio: float, log10_k_mtal_msh: float, ea_mtal_msh: float, log10_k_msh_dmds: float) -> Dict[str, KineticParameter]:
     """The methionine block at arbitrary values (the fit generator's hook and the report reader's)."""
     def _pow(v: float) -> float:
@@ -128,8 +185,11 @@ def with_fitted_methionine(log10_ratio: float, log10_k_mtal_msh: float, ea_mtal_
     }
 
 
-METHIONINE_PARAMETERS: Mapping[str, KineticParameter] = with_fitted_methionine(
-    *[(FROZEN_B22 if METHIONINE_SHIPPED else INERT_B22)[k] for k in METHIONINE_COORDINATES])
+METHIONINE_PARAMETERS: Mapping[str, KineticParameter] = {
+    **with_fitted_methionine(*[(FROZEN_B22 if METHIONINE_SHIPPED else INERT_B22)[k] for k in METHIONINE_COORDINATES]),
+    **with_fitted_methionine_b22b(
+        *[(FROZEN_B22B if B22B_SHIPPED else INERT_B22B)[k] for k in METHIONINE_B22B_COORDINATES]),
+}
 METHIONINE_KEYS: Tuple[str, ...] = tuple(METHIONINE_PARAMETERS)
 #: The two Strecker steps share B18's pH term (trunk_conditions applies it to PYRAZINE_PH_STEPS + these).
 METHIONINE_PH_STEPS: Tuple[str, ...] = ("k_go_met", "k_mgo_met")
