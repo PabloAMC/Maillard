@@ -178,3 +178,89 @@ a coordinate with no independent measurement anywhere.
 **One more route, noted and structurally unavailable here.** Coukos's mercaptomethylimidazole
 crosslink is a fourth, irreversible carbon sink for a thiol. It needs a guanidine, and the pot that
 must show the 35 % disulfide share has none, so it cannot run there.
+
+## 9. Amendment, 2026-09-10: four probes, STILL NOT RUN, and the wave's structure is vindicated by them
+
+Four probes on the shipped B9 vector. **No fit was started and no constant moved.** They were run to
+decide whether this wave is worth building, and they sharpen its case in a way section 1's
+enumeration could not.
+
+### 9.1 The enumerated premise re-verified, independently
+
+35 systems, 58 active rows. **OX is charged in 18 systems and is exactly zero in 17**, including all
+**fourteen** fed mol % rows. `OXR` is zero in every system in the repository. Section 1's claim holds
+to the row.
+
+### 9.2 The dimer channel is not broken — it is starved, and almost exactly first order in oxidant
+
+| dimer-share row | its pot's OX | target | shipped | ×10 | ×100 |
+|---|---:|---:|---:|---:|---:|
+| `zhou_pH7_dimer_over_MFT` | 1.0 (ambient) | 0.0323 | 0.00294 | 0.0292 | 0.275 |
+| `zhang_fig1_cys_dimer_over_MFT` | 1.0 (ambient) | 0.0429 | 0.00487 | 0.0482 | 0.441 |
+| `zhang_fig1_gcys_dimer_over_MFT` | **62.4 (a measured cystine charge)** | 0.2711 | **0.285** | 2.03 | 9.26 |
+
+Two things follow, and the second is new.
+
+**The shipped misses are 11×, 8.8× and 0.95× — not the 2.4 decades the refused waves recorded.** Those
+failures were measured at each refused wave's OWN fitted vector, which had moved the thiol chemistry;
+at the shipped vector the deficit is one decade, not two and a half.
+
+**The one pot whose oxidant is not a convention gets its disulfide share right.** `zhang_fig1_gcys` is
+charged from a MEASURED cystine loading of 62.4 and lands at 0.95× of target. The two pots that are
+short are the two on the ambient convention of 1.0. That is the strongest evidence this question has
+that the deficit is an oxidant-BUDGET problem and not a broken channel — and it comes from the
+corpus, not from an argument.
+
+### 9.3 The obvious cheap fix is refused, and refusing it is what makes the case for this wave
+
+The one-line change would be to raise the ambient convention. Measured over the whole objective:
+
+| ambient × | total cost | rows worse by > 0.3 dex |
+|---:|---:|---:|
+| 1 | 587.3 | — |
+| 3 | **583.4** | 0 |
+| 10 | 591.1 | 1 |
+| 30 | 616.3 | 4 |
+| 100 | 670.5 | 4 |
+
+At ×10 the two short dimer rows go to **−0.11 and +0.13 sigmas** — essentially exact, a 1.0 and 0.89
+decade gain, which is section 6's prediction 1 met twice over. And the bill arrives immediately:
+
+```
+zhou_pH7_dimer_over_MFT         -0.997 dex   residual -2.60 -> -0.11
+zhang_fig1_cys_dimer_over_MFT   -0.894 dex   residual -2.36 -> +0.13
+kumazawa_FFT_retention_pH5_4    +0.296 dex   residual -0.69 -> -2.16
+kumazawa_FFT_retention_pH6_0    +0.590 dex   residual -0.44 -> -3.39
+```
+
+Kumazawa's rows are the purest measurement in the corpus: **1 ppm of 2-furfurylthiol alone in buffer,
+heated 121 °C for 10 min, scored as the heated half over the unheated half of the same solution**, with
+no formation chemistry anywhere. Raising a global oxidant makes more disulfide there too, and the
+thiol stops surviving. So a global oxidant cannot be the answer, and **the ambient convention is not
+quietly changed by this wave or any other**.
+
+### 9.4 Why that refusal is an argument FOR this wave's structure, not against it
+
+The two measurements are not in conflict; they are in different pots, and the difference between the
+pots is exactly the one this wave's oxidant is selective on.
+
+* Zhou's and Zhang's pots are **Maillard pots full of α-dicarbonyls**.
+* Kumazawa's pot is **a pure thiol in buffer with no dicarbonyl in it at all**.
+
+A dicarbonyl-sourced oxidant (`ch_redox_dicarbonyl`) supplies equivalents in the first and **exactly
+none in the second, by construction**. That is the whole difference between the change refused in 9.3
+and the change proposed in section 3, and it was not part of the argument when this wave was written.
+
+**A prediction this adds, declared now and before the fit.** T2 (every B9 fit row within 0.3 dex of
+its B9 residual) is the historical killer, and 9.3 shows precisely which rows would kill it —
+Kumazawa's four. Because those pots carry no dicarbonyl, **this wave should move them by nothing at
+all**, and if a fitted `ch_redox_dicarbonyl` does move them it will mean the step is being used as a
+disguised global oxidant. **T2 is therefore re-read as a targeted test rather than a broad one: the
+four Kumazawa rows must move by less than 0.05 dex.** Probability that they do: **80 %.**
+
+Section 6's prediction 1 (T3 improves by more than one decade on at least two of Zhou's three shares)
+rises from 60 % to **80 %**, because 9.2 measures the channel's oxidant response directly and 9.3
+shows a decade is available on exactly two of the three. Prediction 3 (the wave does not ship, 50 %)
+falls to **40 %**.
+
+**STILL NOT RUN.** Written before the fit was started.
