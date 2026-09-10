@@ -439,29 +439,8 @@
       "bench_file": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.1281757575066633,
-          "compound": "hexanal",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "lipid",
-          "measured": 1138.0,
-          "measured_ppb": 1138.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 0.8710427040944658,
-          "predicted_p5": 0.029779635943767365,
-          "predicted_p50": 0.27801437096389336,
-          "predicted_p95": 4.0003237600161095,
-          "predicted_point": 0.33900603452109773,
-          "predicted_std": 1.5208899787701433,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 0.5,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -469,7 +448,7 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
@@ -477,11 +456,19 @@
       "refused_compounds": [
         {
           "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
           "compound": "2-pentylfuran",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         }
       ],
       "signal_origin": "external_literature"
@@ -492,27 +479,47 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.55020282115268,
+          "ci_width_log10": 1.440980801596586,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "lipid",
           "measured": 782.0,
           "measured_ppb": 782.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 73.85109459807411,
-          "predicted_p5": 0.9598960814479345,
-          "predicted_p50": 21.280408745372554,
-          "predicted_p95": 340.74307625169394,
-          "predicted_point": 22.838630048173226,
-          "predicted_std": 154.60419533368017,
+          "predicted_mean": 626.867374188477,
+          "predicted_p5": 73.66115180607643,
+          "predicted_p50": 402.2512094548963,
+          "predicted_p95": 2033.3835557415173,
+          "predicted_point": 353.83863004817323,
+          "predicted_std": 711.9253027239478,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.5502028211526797,
+          "ci_width_log10": 1.4351040950943503,
+          "compound": "2-pentylfuran",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 163.0,
+          "measured_ppb": 163.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 115.54724397670782,
+          "predicted_p5": 13.522393185502622,
+          "predicted_p50": 74.36503688554832,
+          "predicted_p95": 368.2626336326565,
+          "predicted_point": 64.44237549354317,
+          "predicted_std": 131.70008617792257,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.7781364426686366,
           "compound": "nonanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -522,17 +529,17 @@
           "measured_ppb": 24.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 23.818641187388703,
-          "predicted_p5": 0.30958810381376567,
-          "predicted_p50": 6.8634110704192,
-          "predicted_p95": 109.89731586913778,
-          "predicted_point": 7.365972532831463,
-          "predicted_std": 49.86333479224984,
+          "predicted_mean": 37.58557213550025,
+          "predicted_p5": 2.3623299468534573,
+          "predicted_p50": 17.719212977293815,
+          "predicted_p95": 141.73496413010483,
+          "predicted_point": 15.605972532831462,
+          "predicted_std": 58.413436523413786,
           "shared_with": null,
           "target_unit": "ppb"
         }
       ],
-      "coverage_rate": 0.6666666666666666,
+      "coverage_rate": 1.0,
       "evidence_role": "predictive",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -540,21 +547,12 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 3,
       "panel": "trust_loop",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='dynamic_headspace_gcmsms'",
-      "refused_compounds": [
-        {
-          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "compound": "2-pentylfuran",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "panel": "trust_loop",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
-        }
-      ],
+      "refused_compounds": [],
       "signal_origin": "external_literature"
     },
     {
@@ -603,29 +601,8 @@
       "bench_file": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.1281757575066638,
-          "compound": "hexanal",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "lipid",
-          "measured": 1621.71,
-          "measured_ppb": 1621.71,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 0.6857862894630894,
-          "predicted_p5": 0.023439455387997528,
-          "predicted_p50": 0.21882421456512896,
-          "predicted_p95": 3.148641927238486,
-          "predicted_point": 0.26683055620370266,
-          "predicted_std": 1.1971253731228453,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 0.5,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "predictive",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -633,7 +610,7 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "trust_loop",
       "protein_type": "soy_iso",
       "quantification_family": "headspace",
@@ -641,11 +618,19 @@
       "refused_compounds": [
         {
           "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
           "compound": "2-pentylfuran",
           "envelope_state": "out_of_envelope",
           "lane": "lipid",
           "panel": "trust_loop",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         }
       ],
       "signal_origin": "external_literature"
@@ -1640,29 +1625,8 @@
       "bench_file": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
       "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.1281757575066633,
-          "compound": "hexanal",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "lipid",
-          "measured": 1260.0,
-          "measured_ppb": 1260.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 0.8710427040944658,
-          "predicted_p5": 0.029779635943767365,
-          "predicted_p50": 0.27801437096389336,
-          "predicted_p95": 4.0003237600161095,
-          "predicted_point": 0.33900603452109773,
-          "predicted_std": 1.5208899787701433,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -1670,12 +1634,21 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 0,
       "panel": "external_matrix",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -1727,6 +1700,26 @@
       "compounds": [
         {
           "ci_width_log10": 2.131756975879704,
+          "compound": "2-pentylfuran",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "lipid",
+          "measured": 5625.8,
+          "measured_ppb": 5625.8,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 35.603729259526425,
+          "predicted_p5": 1.1704591836690412,
+          "predicted_p50": 10.861483482584806,
+          "predicted_p95": 158.5306533322463,
+          "predicted_point": 15.387486467996423,
+          "predicted_std": 66.10581795891493,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 2.131756975879704,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1766,7 +1759,7 @@
           "target_unit": "ppb"
         }
       ],
-      "coverage_rate": 0.5,
+      "coverage_rate": 0.75,
       "evidence_role": "external_holdout",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -1774,7 +1767,7 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 3,
       "panel": "external_matrix",
       "protein_type": "soy_iso",
       "quantification_family": "headspace",
@@ -1787,14 +1780,6 @@
           "lane": "lipid",
           "panel": "external_matrix",
           "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS."
-        },
-        {
-          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
-          "compound": "2-pentylfuran",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "panel": "external_matrix",
-          "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
         }
       ],
       "signal_origin": "external_literature"
@@ -1803,49 +1788,8 @@
       "bench_file": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
       "buffer_applied": true,
-      "compounds": [
-        {
-          "ci_width_log10": 2.1281757575066633,
-          "compound": "hexanal",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": false,
-          "lane": "lipid",
-          "measured": 11320.0,
-          "measured_ppb": 11320.0,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 0.8710427040944658,
-          "predicted_p5": 0.029779635943767365,
-          "predicted_p50": 0.27801437096389336,
-          "predicted_p95": 4.0003237600161095,
-          "predicted_point": 0.33900603452109773,
-          "predicted_std": 1.5208899787701433,
-          "shared_with": null,
-          "target_unit": "ppb"
-        },
-        {
-          "ci_width_log10": 2.1281757575066638,
-          "compound": "nonanal",
-          "envelope_state": "in_envelope_extrapolated",
-          "in_core_fit": false,
-          "inside_ci": true,
-          "lane": "lipid",
-          "measured": 0.8018,
-          "measured_ppb": 0.8018,
-          "n_finite_samples": 200,
-          "observable_multipliers_applied": true,
-          "predicted_mean": 0.28093088857561654,
-          "predicted_p5": 0.009604603250581418,
-          "predicted_p50": 0.0896658957184805,
-          "predicted_p95": 1.2901945027595316,
-          "predicted_point": 0.10933708079159744,
-          "predicted_std": 0.4905212696842811,
-          "shared_with": null,
-          "target_unit": "ppb"
-        }
-      ],
-      "coverage_rate": 1.0,
+      "compounds": [],
+      "coverage_rate": 0.0,
       "evidence_role": "external_holdout",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -1853,12 +1797,29 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 2,
+      "matched_compounds": 0,
       "panel": "external_matrix",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcmsms_external_standard_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "nonanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        }
+      ],
       "signal_origin": "external_literature"
     }
   ],
@@ -1895,8 +1856,6 @@
       "2,5-dimethyl-4-hydroxy-3(2h)-thiophenone",
       "2-ethyl-4-hydroxy-5-methyl-3(2h)-furanone",
       "2-nonenal",
-      "2-pentyl furan",
-      "2-pentylfuran",
       "hemf",
       "homofuraneol",
       "propanal"
@@ -3398,9 +3357,9 @@
     "generated_on": "2026-09-10",
     "git": {
       "branch": "reactions",
-      "commit": "ce288def982bbdfb8d49f8c8613c024954d13a13",
-      "dirty": false,
-      "short": "ce288def"
+      "commit": "0333132626bcf1a39e8e8186dcf43de15f1243da",
+      "dirty": true,
+      "short": "03331326"
     },
     "inputs": [
       {
@@ -3477,7 +3436,7 @@
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "b59f948a0d09a01409682b6fa30a2e3cf5de0c760e3884701689b441ef466ae1"
+        "sha256": "ef4292aed20708d6f0b30345d3879db73e46b9cc0a1439f3235a90379d4c940e"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
@@ -3668,19 +3627,27 @@
     },
     {
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-      "compound": "2-pentylfuran",
+      "compound": "hexanal",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
-      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
       "compound": "2-pentylfuran",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "compound": "hexanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -3688,7 +3655,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "trust_loop",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
@@ -3739,6 +3706,14 @@
       "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
     },
     {
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "compound": "hexanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
       "compound": "1-hexanol",
       "envelope_state": "out_of_envelope",
@@ -3747,12 +3722,20 @@
       "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS."
     },
     {
-      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
-      "compound": "2-pentylfuran",
+      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+      "compound": "hexanal",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "panel": "external_matrix",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so the old reason ('measured nowhere in the fit corpus') is retired. It is still refused for a different and sharper reason: this row's hexanal is not produced by the lipid lane. On the matrix-only path the lane's own hexanal is about 1e5 below the hexanal the row is scored against, so an alkylfuran hung off it is ~0, and a near-zero answer is the absence of a prediction rather than a prediction. WHAT WOULD LIFT IT: a route that puts this row's hexanal and its alkylfuran on the same lane -- i.e. a lipid charge for these matrices that the lane can actually integrate, which is the same gap the hexanal rows already carry."
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+      "compound": "nonanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     }
   ],
   "skipped_bundles": [
@@ -3770,27 +3753,27 @@
     }
   ],
   "summary": {
-    "benchmark_count": 27,
-    "ci_coverage_hits": 10,
-    "ci_coverage_rate": 0.23809523809523808,
+    "benchmark_count": 23,
+    "ci_coverage_hits": 11,
+    "ci_coverage_rate": 0.28205128205128205,
     "ci_level_pct": 90,
     "fixed_prior_count": 46,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 10,
-      "median_ci_width_log10": 1.041118030098489,
+      "hits": 11,
+      "median_ci_width_log10": 0.9238378705585015,
       "not_evaluable": 0,
-      "rate": 0.23809523809523808,
-      "total": 42
+      "rate": 0.28205128205128205,
+      "total": 39
     },
-    "matched_compound_count": 42,
+    "matched_compound_count": 39,
     "n_samples": 200,
     "observable_multiplier_policy": {
       "rows_by_family": {
         "extraction": 31,
-        "headspace": 11,
+        "headspace": 8,
         "undeclared": 0
       },
       "rule": "the K_aw (+/-0.5 dex) and HS-SPME same-sample dispersion bands multiply a ppb row only when the bundle's quantification_class is a headspace method, or is undeclared (then the core's own absolute_concentration convention is kept and the row says so); extraction-based quantification (SIDA, HPLC, LC-MS/MS) never passed through an air/water partition or a fibre.",
@@ -3798,23 +3781,23 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 10,
+      "hits": 11,
       "not_evaluable": 0,
       "rows_the_core_fit_read": {
         "hits": 0,
         "not_evaluable": 0,
         "total": 1
       },
-      "total": 41
+      "total": 38
     },
     "panel_benchmark_count": 37,
     "panel_split": {
       "external_matrix": {
-        "ci_coverage_rate": 0.6666666666666666,
-        "hits": 4,
-        "median_ci_width_log10": 2.129966366693184,
+        "ci_coverage_rate": 0.75,
+        "hits": 3,
+        "median_ci_width_log10": 2.131756975879704,
         "not_evaluable": 0,
-        "total": 6
+        "total": 4
       },
       "maillard_path_holdout": {
         "ci_coverage_rate": 0.15384615384615385,
@@ -3824,11 +3807,11 @@
         "total": 26
       },
       "trust_loop": {
-        "ci_coverage_rate": 0.2,
-        "hits": 2,
-        "median_ci_width_log10": 1.9680504166633934,
+        "ci_coverage_rate": 0.4444444444444444,
+        "hits": 4,
+        "median_ci_width_log10": 1.4351040950943503,
         "not_evaluable": 0,
-        "total": 10
+        "total": 9
       }
     },
     "parameter_sources": [
@@ -3853,7 +3836,7 @@
         "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
       }
     ],
-    "refused_compound_count": 22,
+    "refused_compound_count": 25,
     "sampled_prior_count": 55,
     "seed": 0,
     "shared_with_holdout_panel": {
@@ -3862,11 +3845,11 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.23809523809523808,
-        "hits": 10,
-        "median_ci_width_log10": 1.041118030098489,
+        "ci_coverage_rate": 0.28205128205128205,
+        "hits": 11,
+        "median_ci_width_log10": 0.9238378705585015,
         "not_evaluable": 0,
-        "total": 42
+        "total": 39
       },
       "fitted_row": {
         "ci_coverage_rate": null,
@@ -3897,7 +3880,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 664.1,
+    "wall_seconds": 641.2,
     "workers": 1
   }
 }

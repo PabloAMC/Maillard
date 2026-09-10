@@ -161,7 +161,31 @@ cannot run today for want of exactly this series.
 
 ## Cheaper than a laboratory
 
-Two things would help and cost an email.
+Three things would help and cost an email, and the first is the single cheapest way to make this
+model answer more questions than any experiment on the list above.
+
+**Run your blank.** If you are measuring volatiles in a heated plant protein, measure the SAME
+material unheated, in the same run, and print that column beside the heated one. It costs one extra
+vial. What it is worth, measured rather than argued:
+
+A pea beverage paper printed both columns. Between 36 % and 42 % of every volatile level it reports
+for the heated product was already in the beverage before any heat — hexanal 331 of 782 µg/L,
+2-pentylfuran 59.4 of 163, nonanal 8.24 of 24.0. Scored against the totals, this model missed those
+three by 34x, 32x and 3.3x. Told what the beverage started with, it lands at **2.2x, 2.5x and 1.5x**,
+all three inside the threefold band, on rows no fit has read. Nothing in the model changed. It simply
+stopped being charged for raw material it never had to make.
+
+The other side of the same coin is four pots this model now REFUSES. They are unheated protein
+powders and flours whose measured hexanal is entirely what the ingredient arrived with, and no source
+on file prints anything prior to compare against. Asked to form those levels from zero in ten
+minutes, the model missed by factors of 3 357, 6 078, 3 717 and 33 392. Those are not chemistry
+failures, and reporting them as such would be dishonest, so the rows are refused — and the refusal
+prints the cure, which is this blank. **Supply an unheated column for those materials and seven
+refused rows become answerable.** Nothing else on this page unlocks that many for that little.
+
+The general rule is not specific to this model: **a formation measurement without its own blank
+cannot be told apart from a storage measurement.** If your material sat in a warehouse for six
+months, some of what you are about to attribute to your process was in the bag when you opened it.
 
 **Numbers behind figures.** Two published data sets that bear directly on the thiol problem exist only
 as figures. Their authors' underlying numbers would give that step its first data from a third
@@ -180,11 +204,15 @@ read against this gap and every one printed a barrier or a yield instead of a ra
 reading is that nobody has measured it because the measurement is hard, not because it was missed.
 That makes it a research project, not a gap to fill.
 
-**Do not measure 2-pentylfuran's branch fraction.** It was measured in 1981 and entered the model this
-week. The compound is still refused, and the reason is now different: the rows that ask for it are
-scored against a hexanal the lipid lane does not produce, so hanging an alkylfuran off the lane's own
-hexanal gives a number a hundred thousand times too small. What that refusal needs is a lipid charge
-these matrices can integrate, which is a modelling problem and not a measurement.
+**Do not measure 2-pentylfuran's branch fraction.** It was measured in 1981 and entered the model.
+This entry previously said the compound was still refused because the rows asking for it are scored
+against a hexanal the lipid lane does not produce. **That was wrong and is retracted.** The lane's
+answers looked a hundred thousand times too small because the engine had no unit-conversion entry for
+the new species and was reporting it in mmol/L instead of µg/L. With that fixed the compound is
+answered, and in the one pot that declares its own starting state it lands at 2.5x. The branch
+fraction is not the gap. Where the alkylfuran still misses badly — 366x in an extruded soy row — the
+gap is the size of that matrix's hydroperoxide pool, which is a declared input nobody has measured
+for it, and a peroxide value would close it.
 
 **Do not add more directional claims to the moisture axis.** That axis reads "do not use", and more
 agreeing claims will not lift it, because only one of the model's four lanes carries a water-activity

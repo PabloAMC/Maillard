@@ -272,6 +272,19 @@ from Nguyen 2016's casein rates with declared barriers, the availability band as
 panel's CML row stays refused because that benchmark states no protein loading and no cook; a
 benchmark with both is what the wishlist now asks for. Parts (ii) and (iii) are unchanged.*
 
+*Status 2026-09-10: **part (ii) has landed, in the half that could be done honestly** (wave B31,
+`results/validation/kinetic_core_b31_prereg.md`). `conditions.carried_volatiles` charges the
+isolate's own volatiles as DECLARED INPUTS, added before the matrix binding, so a pot answers with
+them included. The design above said "with their measured levels and bands (Fischer 2021, Zhang
+2020b)"; **that part is deliberately NOT done and should not be done from those sources.** A level
+taken from another paper's isolate is not this pot's starting state, and a wave that installs one
+would be inventing the number it is then scored on. The rule is narrow: only a level the source
+PRINTS as an unheated control of the SAME pot may be declared. Trikusuma 2019 prints one and its
+three rows moved into the 3x band; the four pots that print none are refused, with the cure named
+on the refusal. What is still open in (ii) is therefore not code but SOURCES -- an unheated column
+for the PratapSingh isolates, and for any new plant-protein benchmark, which the wishlist should
+ask for as a condition of ingestion. Part (iii) is unchanged.*
+
 ## 6. Cross-cutting engineering, done once
 
 - **One overlay type** for calibrations, matrix declarations and waves, over the engine's existing

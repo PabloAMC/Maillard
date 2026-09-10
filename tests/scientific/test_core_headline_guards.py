@@ -92,7 +92,10 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     mercapto-2-propanone precursors, CML/CEL/furosine targets, 2-pentylfuran)."""
     s = tracked_scores["summary"]
     assert s["panel_benchmark_count"] == 37
-    assert s["scored_benchmark_count"] == 27
+    # RE-PINNED BY WAVE B31 (2026-09-10): 27 -> 23 scored bundles. Four pots were found never to
+    # have been cooked -- their "40 C for 10 min" is the HS-SPME incubation of the measurement --
+    # and every lipid row in them is refused, which empties them. No bundle left the PANEL.
+    assert s["scored_benchmark_count"] == 23
     # RE-PINNED BY WAVE B28 (2026-09-09): 39 -> 42 rows. Three nonanal rows left the refused list
     # and joined the scored one, because the oleate branch fraction the lane needed was measured in
     # 1978 and read this week. The BENCHMARK and ANSWERED counts do not move: no new pot entered,
@@ -102,14 +105,20 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # once a missing lane entry was found: the compound had been reported in mmol/L instead of
     # ug/L, which read as the model making almost none of it. Seven rows have now left the refused
     # list in two days and the within-3x count has not moved.
-    assert s["matched_compound_count"] == 46
+    # RE-PINNED BY WAVE B31 (2026-09-10): 46 -> 39. Seven rows went back to refused, in the four
+    # pots nobody heated. This is the first re-pin in this file that LOWERS the denominator, which
+    # raises the rate without a single prediction improving, so the direction is called out here
+    # rather than left for a reader to notice: see kinetic_core_b31_prereg.md for the criterion and
+    # for why it is not reaching for the misses (the panel's largest lipid miss, 366x, survives it).
+    assert s["matched_compound_count"] == 39
     # RE-PINNED BY WAVE B28: 25 -> 22 refused. Exactly the three nonanal rows above; the four
     # 2-pentylfuran rows stay refused, and their REASON changed rather than their status. That
     # matters and is asserted elsewhere: the branch fraction those rows were missing is measured
     # now, and they are refused because the hexanal they are scored against is not produced by the
     # lane that would carry the alkylfuran. Un-refusing them answered four rows six to nine orders
     # of magnitude below measurement, which is worse than refusing.
-    assert s["refused_compound_count"] == 18
+    # RE-PINNED BY WAVE B31: 18 -> 25 refused. Exactly the seven rows above.
+    assert s["refused_compound_count"] == 25
     # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
     # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
@@ -144,14 +153,26 @@ def test_within_3x_is_4_of_46_and_out_of_sample_3_of_45(tracked_scores):
     # on a wave that made the model strictly more capable. That is the honest arithmetic and it is
     # pinned rather than smoothed: answering more questions lowers a pass RATE unless the new
     # answers are good, and two of these three nearly are.
-    assert (s["within_band_count"], s["matched_compound_count"]) == (4, 46)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (4, 46)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (3, 45)
+    # RE-PINNED BY WAVE B31 (2026-09-10): 4/46 -> 7/39 and 3/45 -> 6/38. TWO SEPARATE CAUSES,
+    # and they must not be reported as one.
+    #   NUMERATOR +3, and it is the only accuracy gain: Trikusuma 2019 prints a non-UHT column,
+    #   36-42 % of every level it measures was in the beverage before any heat, and declaring that
+    #   as the pot's starting state moved hexanal 34.2x -> 2.21x, 2-pentylfuran 32.3x -> 2.53x and
+    #   nonanal 3.3x -> 1.54x. All three entered the band together and none is a fit row.
+    #   DENOMINATOR -7, and it improves the rate on arithmetic alone: four pots were never cooked
+    #   and their lipid rows are refused. Nothing about the model got better by that subtraction.
+    # A reader who wants the accuracy claim WITHOUT the subtraction should read 7/46 -- the wave's
+    # pre-registration prints that line for exactly this reason.
+    assert (s["within_band_count"], s["matched_compound_count"]) == (7, 39)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (7, 39)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (6, 38)
     assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (1, 1)
     assert s["holdout_within_band"] == {"hits": 3, "total": 26}
     readme = _doc_text(README)
-    _assert_quoted(readme, "4 of 46", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "3 of 45", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "7 of 39", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "6 of 38", "README.md", "the core's out-of-sample count")
+    # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
+    _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 
 
 def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_scores):

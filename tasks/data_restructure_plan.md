@@ -1023,6 +1023,23 @@ The evidence, in the order it was found:
    the tail, not the body). `acrylamide_spi_extrusion_130C_ACSRef3` (25 s at 130 C, 4 247x) deserves
    the same look at whether its `conditions` are the process or the analysis.
 
+   **CLOSED 2026-09-10 by wave B31** (`results/validation/kinetic_core_b31_prereg.md`). This
+   diagnosis was right and it named the right four pots. They are now REFUSED rather than scored,
+   on two condition-side declarations that must agree: the bundle's own `vessel.closure` of
+   `"no cook"` (which is not sufficient alone -- three HOT bundles carry the same string meaning
+   "no vessel to record"), and a hydroperoxide conversion extent below 1 % over the thermal program
+   (3.826e-3 for these four against 0.2578 for the mildest real cook, with nothing in the 67x gap).
+   The refusal is conditional and names its cure: `conditions.carried_volatiles` accepts a starting
+   state the SOURCE PRINTS, and a pot that declares one is scored. Trikusuma 2019 declares one, and
+   its three rows went from 34.2x / 32.3x / 3.3x to 2.21x / 2.53x / 1.54x -- all three inside the 3x
+   band, none of them a fit row. Panel effect: rows 46 -> 39, refused 18 -> 25, within-3x 4 -> 7,
+   median fold 31x -> 9.3x. **Most of that median fall is the subtraction, not the fix**, and the
+   README says so beside the number.
+
+   The acrylamide row is a DIFFERENT problem and stays open: its vessel closure is
+   `"twin-screw extruder"`, so its conditions are a process and not an analysis. Whatever is wrong
+   with 4 247x there, it is not this.
+
 - [x] **DONE 2026-09-04. Invert the envelope's sampling rule: unidentified => SAMPLED over its
       declared band, not fixed.** Shipped, with a NEGATIVE result on its stated goal that is worth
       more than the change: `uncertainty.unidentified_prior` draws a free-but-unpinned coordinate

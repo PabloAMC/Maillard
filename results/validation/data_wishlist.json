@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "4f0e2c7fa39fcf9033b0fc8f9933d61421db7cc8",
-      "short": "4f0e2c7f",
+      "commit": "0333132626bcf1a39e8e8186dcf43de15f1243da",
+      "short": "03331326",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "f79a9855cfaa58a1e78438df82f1310a9810ae82f9dd07aa6cf87685ea483fb4"
+        "sha256": "dc91a1b6cc41141fc558dd716007dbb5237dbfe8393660d0a76359c3fe2a1adf"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "480b24718374e81f2bf6c148bd578d5075a44cb321ac7ae2b85ffd2cdb01739e"
+        "sha256": "9e79c7e2c06d1fb0cad157e081f08cb4e8bf246412a6e459d3622a2b09d603d3"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -357,6 +357,42 @@
     }
   ],
   "refused_targets": [
+    {
+      "what": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. Th",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to m",
+      "rows": [
+        {
+          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+          "compound": "hexanal"
+        },
+        {
+          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+          "compound": "2-pentylfuran"
+        },
+        {
+          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+          "compound": "hexanal"
+        },
+        {
+          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+          "compound": "2-pentylfuran"
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "hexanal"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "hexanal"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "nonanal"
+        }
+      ],
+      "row_count": 7,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
     {
       "what": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s",
       "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
@@ -707,7 +743,7 @@
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
-    "refused_row_count": 10,
+    "refused_row_count": 17,
     "axes_below_trust": 11,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }

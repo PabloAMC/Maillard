@@ -4,7 +4,7 @@
 
 Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one fed-intermediate measurement each turns a band artefact into a fitted value. 2: panel rows the engine answers but declares not evaluable. 3: what the panel asks for that no lane represents. 4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the envelope misses most (value of information). 6: what each measurement would let you predict.
 
-**At a glance:** 10 fitted coordinates unidentified by primary evidence · 8 panel rows answered but not evaluable · 10 panel rows refused (targets no lane represents) · 11 directional axes below 'trust' (rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5).
+**At a glance:** 10 fitted coordinates unidentified by primary evidence · 8 panel rows answered but not evaluable · 17 panel rows refused (targets no lane represents) · 11 directional axes below 'trust' (rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5).
 
 ## 1. Fitted coordinates the data do not identify
 
@@ -38,6 +38,7 @@ The engine returns a number but declares the route unidentified; the rows leave 
 
 | what | rows | the engine's reason | the hypothesis layer |
 |---|---|---|---|
+| THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. Th | 7 | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool | no cited rule reaches it from any reference charge |
 | UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s | 3 | UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | no cited rule reaches it from any reference charge |
 | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose | 2 | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single  | no cited rule reaches it from any reference charge |
 | GLYCATION TARGETS 'Nε-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network  | 1 | GLYCATION TARGETS 'Nε-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or br | no cited rule reaches it from any reference charge |

@@ -2,20 +2,20 @@
 
 n_samples = 200, seed = 0, CI level = 90 %.
 
-* benchmarks with an envelope: **27** of 37 on the panel; matched rows **42**; refused rows 22
-* mixed-population coverage: 10/42 (0.238)
-* **honest literature coverage: 10/42 (0.238)**, median CI width 1.041 log10; 0 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 10/41 (0 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
+* benchmarks with an envelope: **23** of 37 on the panel; matched rows **39**; refused rows 25
+* mixed-population coverage: 11/39 (0.282)
+* **honest literature coverage: 11/39 (0.282)**, median CI width 0.924 log10; 0 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 11/38 (0 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
 * sampled priors 55, fixed 46; lanes with NO sampled fit uncertainty: none
-* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 11, extraction 31, undeclared 0
+* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 8, extraction 31, undeclared 0
 
 ## Per panel
 
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
-| external_matrix | 4 | 6 | 0.667 | 2.130 | 0 |
+| external_matrix | 3 | 4 | 0.750 | 2.132 | 0 |
 | maillard_path_holdout | 4 | 26 | 0.154 | 0.914 | 0 |
-| trust_loop | 2 | 10 | 0.200 | 1.968 | 0 |
+| trust_loop | 4 | 9 | 0.444 | 1.435 | 0 |
 
 ## Rows
 
@@ -25,11 +25,10 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.35e+03 | 1.62e+03 | 2.28e+03 | 2.86e+03 | no | 0.247 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 830.643 | 37.394 | 652.651 | 8.57e+03 | yes | 2.360 | no (extraction) | sulfur | predictive |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 730.638 | 411.166 | 672.826 | 1.23e+03 | no | 0.475 | no (extraction) | sulfur | predictive |
-| pea_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.14e+03 | 0.339 | 0.030 | 0.278 | 4.000 | no | 2.128 | yes (headspace) | lipid | predictive |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 22.839 | 0.960 | 21.280 | 340.743 | no | 2.550 | yes (headspace) | lipid | predictive |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 7.366 | 0.310 | 6.863 | 109.897 | yes | 2.550 | yes (headspace) | lipid | predictive |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.839 | 73.661 | 402.251 | 2.03e+03 | yes | 1.441 | yes (headspace) | lipid | predictive |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 13.522 | 74.365 | 368.263 | yes | 1.435 | yes (headspace) | lipid | predictive |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.362 | 17.719 | 141.735 | yes | 1.778 | yes (headspace) | lipid | predictive |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.665 | 1.405 | 11.014 | 90.298 | no | 1.808 | yes (headspace) | sulfur | predictive |
-| soy_isolate_40C_PratapSingh2021 | trust_loop | hexanal | ppb | 1.62e+03 | 0.267 | 0.023 | 0.219 | 3.149 | no | 2.128 | yes (headspace) | lipid | predictive |
 | thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 48.719 | 104.031 | 216.682 | no | 0.648 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 69.866 | 186.040 | 573.774 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.95e+03 | 859.244 | 1.93e+03 | 1.95e+03 | no | 0.355 | no (extraction) | acrylamide | external_holdout |
@@ -57,12 +56,10 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 363.445 | 34.506 | 257.905 | 1.12e+03 | no | 1.511 | no (extraction) | sulfur | external_holdout |
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.534 | 45.250 | 102.179 | 228.443 | no | 0.703 | no (extraction) | sulfur | external_holdout |
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 34.512 | 194.988 | 944.426 | no | 1.437 | no (extraction) | sulfur | external_holdout |
-| external_validation_bi_2020_raw_pea_hexanal | external_matrix | hexanal | ppb | 1.26e+03 | 0.339 | 0.030 | 0.278 | 4.000 | no | 2.128 | yes (headspace) | lipid | external_holdout |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 88.598 | 7.395 | 69.413 | 1.06e+03 | yes | 2.157 | yes (headspace) | lipid | external_holdout |
+| external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 1.170 | 10.861 | 158.531 | no | 2.132 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 69.695 | 5.301 | 49.195 | 718.039 | yes | 2.132 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | nonanal | ppb | 72.660 | 23.885 | 1.817 | 16.860 | 246.079 | yes | 2.132 | yes (headspace) | lipid | external_holdout |
-| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | hexanal | ppb | 1.13e+04 | 0.339 | 0.030 | 0.278 | 4.000 | no | 2.128 | yes (headspace) | lipid | external_holdout |
-| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | nonanal | ppb | 0.802 | 0.109 | 0.0096 | 0.090 | 1.290 | yes | 2.128 | yes (headspace) | lipid | external_holdout |
 
 ## Refused rows
 
@@ -79,17 +76,20 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | hofmann1998_glucose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | hofmann1998_glucose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. |
-| pea_isolate_40C_PratapSingh2021 | trust_loop | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
-| soy_isolate_40C_PratapSingh2021 | trust_loop | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
+| pea_isolate_40C_PratapSingh2021 | trust_loop | hexanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal progr |
+| pea_isolate_40C_PratapSingh2021 | trust_loop | 2-pentylfuran | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal progr |
+| soy_isolate_40C_PratapSingh2021 | trust_loop | hexanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal progr |
+| soy_isolate_40C_PratapSingh2021 | trust_loop | 2-pentylfuran | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal progr |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | Furfural | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would s |
 | mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | Furfural | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would s |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them  |
+| external_validation_bi_2020_raw_pea_hexanal | external_matrix | hexanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal progr |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 1-hexanol | UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a therm |
-| external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | UNREPRESENTED TARGETS: 2-pentylfuran -- The branch fraction EXISTS as of 2026-09-09 -- Frankel, Neff & Selke 1981 Table III, 2.4 % of the autoxidised linoleate slate, carried here as PENTYLFURAN_PER_HEXANAL = 0.16 -- so  |
+| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | hexanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal progr |
+| external_validation_liu_2023_ppi_offnote_baseline | external_matrix | nonanal | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal progr |
 
 ## Bundles kept off the scored panel
 

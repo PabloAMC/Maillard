@@ -43,10 +43,10 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "81acf1addc3754586cdfb26a00df6cb2bb2bc9ca",
-      "short": "81acf1ad",
+      "commit": "0333132626bcf1a39e8e8186dcf43de15f1243da",
+      "short": "03331326",
       "branch": "reactions",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -471,7 +471,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 10.5
+    "wall_seconds": 10.2
   },
   "benchmarks": [
     {
