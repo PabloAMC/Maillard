@@ -556,7 +556,10 @@ def test_a_protein_isolate_never_charges_a_maillard_network():
 # ===========================================================================
 
 
-@pytest.mark.parametrize("compound", ["1-hexanol", "2-pentylfuran", "propanal"])
+# 2-pentylfuran left this list on 2026-09-10: its branch fraction is measured (Frankel 1981) and
+# the lane answers it. It was in the list for one day on a diagnosis that turned out to be a unit
+# bug, which is recorded in engine.py's unrepresented-target table.
+@pytest.mark.parametrize("compound", ["1-hexanol", "propanal"])
 def test_unmeasured_branches_stay_refused_with_a_sharper_reason(compound):
     assert compound in UNREPRESENTED_COMPOUNDS
     reason = UNREPRESENTED_COMPOUNDS[compound]

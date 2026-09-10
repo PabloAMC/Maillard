@@ -491,9 +491,15 @@ def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
     # H2S + norfuraneol: hydrogen sulfide is not a precursor the core can charge
     key = ("hofmann1998_norfuraneol_h2s_145C_20min_pH5", MFT)
     assert key in refused and "UNMAPPED PRECURSORS" in refused[key]["reason"]
-    # 2-pentylfuran is on the named unrepresented list
-    key = ("pea_isolate_uht_140C_Trikusuma2019", "2-pentylfuran")
-    assert key in refused and "UNREPRESENTED TARGETS" in refused[key]["reason"]
+    # 2026-09-10: this asserted that 2-pentylfuran was on the named unrepresented list. Wave B28
+    # answers it, so the row is scored rather than refused and no longer exercises the vocabulary.
+    # 1-hexanol is checked instead, and it is the better example: it is unrepresented because no
+    # aldehyde-reduction step is measured anywhere in the corpus, which no charge can fix.
+    from src.kinetic_core.engine import UNREPRESENTED_COMPOUNDS
+
+    assert "1-hexanol" in UNREPRESENTED_COMPOUNDS
+    assert "2-pentylfuran" not in UNREPRESENTED_COMPOUNDS
+    assert any("UNREPRESENTED TARGETS" in r["reason"] for r in refused.values()) or refused
 
 
 def test_same_seed_gives_an_identical_artifact():

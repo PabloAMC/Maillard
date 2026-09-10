@@ -64,7 +64,11 @@ def test_the_data_wishlist_builds_from_the_tracked_artifacts_and_names_the_known
     glc = next(c for c in payload["unidentified_coordinates"] if c["key"] == "k_glc_ha")
     assert glc["reaction"] == "r_glc_c2c3" and "MFT" in glc["unlocks_observables"] and "glucose" in glc["unlocks_from_charges"]
     assert payload["summary"]["not_evaluable_rows"] == len(payload["not_evaluable_rows"]) >= 1
-    assert any("2-pentylfuran" in g["what"] for g in payload["refused_targets"])
+    # 2026-09-10: 2-pentylfuran left the refused list when wave B28 answered it, so the wishlist
+    # no longer names it. What the wishlist must still do is name SOMETHING as a refused target
+    # with a reason, which is the property this line was really guarding.
+    assert payload["refused_targets"], "the wishlist must still name what the core refuses"
+    assert all(g.get("what") for g in payload["refused_targets"])
     aw = next(a for a in payload["thin_axes"] if a["axis"] == "moisture_aw")
     # RE-PINNED 2026-09-07 (B12): the trunk answers a_w with a declared term, so the axis has
     # evaluable claims (AW-01 miss, AW-03 agree); the block now names the lanes that still refuse.
