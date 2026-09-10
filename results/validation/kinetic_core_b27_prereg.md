@@ -264,3 +264,105 @@ shows a decade is available on exactly two of the three. Prediction 3 (the wave 
 falls to **40 %**.
 
 **STILL NOT RUN.** Written before the fit was started.
+
+## 10. Amendment, 2026-09-11, written BEFORE the fit is started: the structure is simplified to ONE coordinate
+
+Section 3 proposed two steps and two fitted constants: a source step `r_nf_dicarbonyl` making an
+α-dicarbonyl from norfuraneol, and a second-order redox couple consuming it to deliver oxidant
+equivalents. Reading the lane before building shows that is one step too many, and the reason is
+in section 1's own sentence: **the oxidant supply "scales with a flux sixteen times the thiol's" —
+the mercaptoketone flux — and the lane already carries that flux as `r_nf_mp3p`.** Whitfield's
+Figure 6 says exactly this: the reduction of the dicarbonyl on the way to the mercaptoketone IS the
+redox system. A separate dicarbonyl species with its own source rate would put a coordinate in the
+vector that nothing measures (only the product of the two constants would be observable), and the
+identification test T6 would then be failing on a coordinate the structure never needed.
+
+**What is built instead.** One step, `ch_redox_mp3p`: NF + H₂S → MP3P + OX, running in parallel to
+`r_nf_mp3p` with rate `φ · k_nf_mp3p`, while `r_nf_mp3p` runs at `(1 − φ) · k_nf_mp3p`. Same
+barrier, same pH factor (`neutral_h2s`), so **the total mercaptoketone flux is unchanged for every
+φ** — the 16.3 : 1 ratio row cannot move — and each mercaptoketone formed through the redox branch
+delivers **one oxidant equivalent** to `OX`, in the pool's own units, where one equivalent makes one
+disulfide. **φ is the one fitted coordinate**, the fraction of mercaptoketone-forming events that
+oxidise a thiol on the way. It is a branching ratio and has no barrier of its own. At φ = 0 every
+earlier wave reproduces bit for bit. Band: log10 φ ∈ [−4, 0].
+
+**The declared ceiling replaces section 8's Wondrak bound.** φ cannot exceed 1: one dicarbonyl
+reduction is one disulfide. **If the fit pins φ at its ceiling, the objective is asking for more
+oxidant than the mercaptoketone flux can supply, and that is evidence AGAINST the structure, to be
+reported as such and not as a fitted value.** Section 8's bound on a second-order redox constant no
+longer applies because no such constant exists in the vector.
+
+**T6 is re-read for one coordinate**: Laplace sigma on log10 φ below one decade, off both bounds,
+slice not flat.
+
+**Two row kinds are added to the objective's vocabulary**, both inert on every existing row:
+`molpct_total` (a mol % over a list of species with multiplicities, so total MFT = MFT + 2 × dimer)
+and `floor` (one-sided: no penalty ABOVE the target), for the Whitfield share row, which section 4
+declared a lower bound. The three charge corrections of section 4 are installed by this wave's own
+generator at import, with the original values restored on exit, so the frozen B2.3 generator is not
+edited: norfuraneol 50, cysteine 50, H₂S 97 mmol/L; the buffer declared as the printed 0.5 M
+phosphate at pH 4.5; the `whitfield_nf_cys_MFT` target as the printed total, 0.230 mol %, over the
+printed basis of 50.
+
+Predictions stand as revised in section 9. **Still not run at the time of writing.**
+
+---
+
+# Outcome (2026-09-11): the gate fired before the fit. NOT FITTED, DO NOT SHIP.
+
+`kinetic_core_b27_ship_rule.md` is the record. The structure of section 10 was built (`sulfur.py
+ch_redox_mp3p`, `parameters_sulfur.apply_dicarbonyl_redox`, the engine hook, the two row kinds, the
+charge corrections installed by the generator) and the fit was **not started**, because two probes at
+the shipped B9 vector settle the ship rule before any constant could move:
+
+**G1 — the decisive test T3 is unreachable, by this structure or by any oxidant source.** In Zhou's
+and Zhang's pots the dimer step consumes **0.001 %, 0.49 % and 0.10 %** of the charged oxidant. The
+pool there is not a budget; it is a constant multiplier on the dimer rate. The entire mercaptoketone
+flux at φ = 1 would raise it by **0.35 %, 0.41 % and 0.01 %**, against the roughly ninefold a decade
+on the share needs. What those rows want is the dimer RATE CONSTANT, which is at its band ceiling and
+is opposed by Kumazawa's retention rows. Since the rule is SHIP only if T3 holds, no fit result could
+have shipped.
+
+**G2 — in the one pot the structure does fix, φ must sit at its physical ceiling.** Whitfield's
+cysteine pot, whose oxidant is genuinely zero, climbs from 0 % disulfide-bound MFT to 5.5 % at φ = 0.1,
+15.4 % at φ = 0.316, 22.3 % at φ = 0.5 and reaches the 35 % floor **only at φ = 1.0 exactly** — every
+mercaptoketone-forming event oxidising a thiol. Section 10 declared that outcome disqualifying before
+the fit, and it is honoured.
+
+**G3 — the fit-free T2 held, and section 9's targeted prediction held.** At φ = 1 no row of the 65
+worsens by more than 0.3 dex (worst +0.00), and the four Kumazawa rows move by **0.0000 dex**, as
+predicted at 80 %, because they carry no norfuraneol. T1 and T5 fail at φ = 1 and fail identically
+under B9 itself; φ changes them in the fourth decimal.
+
+## Section 9 was wrong about what it had found, and this is the correction
+
+Section 9 said the disulfide deficit was "an oxidant BUDGET problem", on two observations: the pot
+charged with a measured cystine loading of 62.4 landing at 0.95× of target, and a ×10 ambient oxidant
+fixing the two short rows exactly. Both observations are right and the reading was wrong. **The
+consumers use under one per cent of the pool in every ambient pot**, so 62.4 is a 62-fold multiplier
+on the rate and ×10 is a tenfold one — neither is a budget being met. The deficit in the ambient pots
+is a RATE deficit that the oxidant term happens to multiply. Only in the fed pots, where OX is exactly
+zero and the dimer flux is exactly zero, was the budget reading correct — and there the structure works,
+but only at its ceiling. Prediction 1's revision from 60 % to 80 % rested on the wrong reading and
+should not have been made.
+
+## What the sink question was, then (prediction 4, the 95 % one)
+
+It was two questions wearing one name. In the **fed** pots it was an oxidant question: three sink
+structures were scored on rows where disulfide formation was arithmetically impossible, exactly as
+section 1 said. In the **ambient** pots it never was: the channel has all the oxidant it can use and
+makes ten times too little disulfide anyway, and the only lever is a rate constant already pinned by
+the purest measurement in the corpus. That second half is the finding this wave leaves behind.
+
+## What is kept, and one named debt
+
+The step, the parameter and the hook stay, inert at φ = 0, as B17's and B25's refused structures do.
+The three Whitfield charge corrections are installed only by this wave's generator and restored on
+exit, so the shipped objective is unchanged. **That is a debt**: the printed charges (norfuraneol 50,
+cysteine 50, H₂S 97 mmol/L; 0.5 M phosphate at pH 4.5; total MFT 0.230 mol %) are facts, and the next
+sulfur refit must carry them.
+
+Predictions, scored: 1 (T3 improves by a decade on two shares) — **wrong**; 2 (T6 holds) — not tested,
+no fit; 3 (does not ship, 50 % then 40 %) — **right, for a reason the wave did not anticipate**; 4
+(a statement of whether the sink question was a sink question) — **delivered**, and the answer is
+"half of it".

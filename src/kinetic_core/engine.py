@@ -1569,6 +1569,9 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
         if frozen.get("thiol_addition"):
             # B25: the thiols' addition to the deoxypentosones, log10 k at 145 C and its barrier
             out["thiol_addition"] = {k: float(v) for k, v in frozen["thiol_addition"].items()}
+        if frozen.get("dicarbonyl_redox"):
+            # B27: log10 of the oxidant yield per mercaptoketone formed (a shipped B27 report or a draw)
+            out["dicarbonyl_redox"] = {k: float(v) for k, v in frozen["dicarbonyl_redox"].items()}
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1620,7 +1623,8 @@ def core_parameters(
         report = None
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
                 "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol", "oxygen",
-                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield", "thiol_addition"} <= set(override):
+                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield", "thiol_addition",
+                "dicarbonyl_redox"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
         # B10: a report (or a draw) that carries the two route barriers uses them;
@@ -1684,6 +1688,16 @@ def core_parameters(
             from .parameters_sulfur import thiol_addition_parameters
 
             parameters.update(thiol_addition_parameters(k_add=10.0 ** float(add["log10_k_add_145C"]), ea_kj_mol=float(add["ea_add_kj_mol"])))
+        # B27: the dicarbonyl redox yield from the report's (or a draw's) block. Applied LAST because it
+        # rescales k_nf_mp3p, which the fitted block above has just set; inert (phi = 0) otherwise.
+        redox: Dict[str, float] = {}
+        if report is not None and report.get("dicarbonyl_redox"):
+            redox.update(report["dicarbonyl_redox"])
+        redox.update(override.get("dicarbonyl_redox") or {})
+        if redox:
+            from .parameters_sulfur import apply_dicarbonyl_redox
+
+            apply_dicarbonyl_redox(parameters, float(redox["log10_ox_yield_per_mercaptoketone"]))
     if lane == ACRYLAMIDE:
         report = None
         if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):

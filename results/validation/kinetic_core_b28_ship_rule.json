@@ -4,16 +4,16 @@
     "artifact": "kinetic_core_b28_ship_rule",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "d8fd36d52929b7f89d616cec1ec86e4acd95e11f",
-      "short": "d8fd36d5",
+      "commit": "191dfd841629515f6827f01510017f557836d7f6",
+      "short": "191dfd84",
       "branch": "reactions",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "scripts/generators/generate_kinetic_core_b28_ship_rule.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "19f5a0f21b70b895ed620b539ba1020f7bb9c6086d9b0a0c2ea605ef33066d0f"
+        "sha256": "195ba6307bc7ce0bfe029310bedbc6864a6c45478b6ee664ab7bb48b451c5de6"
       }
     ]
   },

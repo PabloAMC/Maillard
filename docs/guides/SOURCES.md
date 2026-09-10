@@ -212,7 +212,7 @@
 | Weenen 2001 | [10.1021/bk-2001-0794.ch015](https://doi.org/10.1021/bk-2001-0794.ch015) |  |  |  |  |  | [weenen2001_extraction.md](../../data/lit/extraction_dossiers/weenen2001_extraction.md) |
 | Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176 | [10.1016/j.jfda.2015.02.001](https://doi.org/10.1016/j.jfda.2015.02.001) |  |  |  |  |  | [weerawatanakorn2015_extraction.md](../../data/lit/extraction_dossiers/weerawatanakorn2015_extraction.md) |
 | Weykamp & Penders 1982 (Clin. Chim. Acta 125, 341–350; PII 0009-8981(82)90265-0) |  |  |  |  |  |  | [weykamp1982_extraction.md](../../data/lit/extraction_dossiers/weykamp1982_extraction.md) |
-| Whitfield & Mottram 1999 |  |  | 6 |  |  |  | [whitfield1999_extraction.md](../../data/lit/extraction_dossiers/whitfield1999_extraction.md) |
+| Whitfield & Mottram 1999 |  |  | 11 |  |  |  | [whitfield1999_extraction.md](../../data/lit/extraction_dossiers/whitfield1999_extraction.md) |
 | Whitfield et al. 1988 |  |  |  |  |  |  | [whitfield1988_extraction.md](../../data/lit/extraction_dossiers/whitfield1988_extraction.md) |
 | Wondrak 2002 |  |  |  |  |  |  | [wondrak2002_extraction.md](../../data/lit/extraction_dossiers/wondrak2002_extraction.md) |
 | Wright 2006 |  |  |  |  |  |  | [wright2006_extraction.md](../../data/lit/extraction_dossiers/wright2006_extraction.md) |

@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **462**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **464**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -104,6 +104,7 @@ Tracked files: **462**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b25_members/` (2 files) | B25 optimiser members (two starts; the sink, variant c: B16's 64 rows + the thiols' addition constant and its barrier). |
 | `kinetic_core_b25_ship_rule.*` (2): `kinetic_core_b25_ship_rule.json`, `kinetic_core_b25_ship_rule.md` | B17's six tests evaluated for B25 on the frozen B9 / B25 artifacts without switching the engine; T6 on the addition constant and its barrier (`generate_kinetic_core_b25_ship_rule.py`). |
 | `kinetic_core_b26_ship_rule.*` (2): `kinetic_core_b26_ship_rule.json`, `kinetic_core_b26_ship_rule.md` | Wave B26's five pre-registered tests: the arithmetic of pooling a plant-protein binding constant with the dairy one, the flagship soy hold-out re-scored against B4's frozen blind predictions, the reversible term's share of each log-shift against Amendment 6's cap, the sensitivity to the assumed protein loading, and the check that nothing else moved (`generate_kinetic_core_b26_ship_rule.py`). |
+| `kinetic_core_b27_ship_rule.*` (2): `kinetic_core_b27_ship_rule.json`, `kinetic_core_b27_ship_rule.md` | Wave B27's ship rule, evaluated as a GATE before any constant was fitted (the B30 discipline): the decisive dimer-share test is unreachable by any oxidant source because the ambient pots use under 1 % of their oxidant pool, and the one pot the redox couple fixes needs its single coordinate at the physical ceiling. NOT FITTED, DO NOT SHIP; the structure stays inert (`generate_kinetic_core_b27_ship_rule.py`). |
 | `kinetic_core_b28_ship_rule.*` (2): `kinetic_core_b28_ship_rule.json`, `kinetic_core_b28_ship_rule.md` | Wave B28's five pre-registered tests on the two products the lipid lane used to refuse: the arithmetic of Frankel 1981's two slates, the panel's refused-row count (which must only ever fall, and no lifted row may be answered degenerately), the first external check the lane's fit source has had -- Frankel 1981 against Frankel 1989 renormalised onto the five products both quantify -- the newly answered rows against measurement, and the check that no other lane moved (`generate_kinetic_core_b28_ship_rule.py`). |
 | `kinetic_core_b29_fit_report.json` | B29 frozen fit: the trunk's first oxygen axis, two multipliers on the two oxidative entries to glucosone, fitted on four within-study atmosphere ratios. Not read by the engine; the ship rule refused it. |
 | `kinetic_core_b29_fit_report.md` | The same fit, rendered, with the check that air is exactly 1. |

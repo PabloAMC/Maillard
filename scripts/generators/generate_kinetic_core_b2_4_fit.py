@@ -288,6 +288,10 @@ def residual_vector(x_full: np.ndarray, weight: float, quick: bool) -> np.ndarra
         elif row["kind"] in ("ceiling", "peak_fraction_ceiling"):
             out[i] = max(0.0, math.log10((p + B23.FLOOR) / (t + B23.FLOOR))) / float(
                 row["sigma_log"])
+        elif row["kind"] == "floor":
+            # B27: one-sided the other way -- no penalty above the floor (mirrors B23.residuals)
+            out[i] = min(0.0, math.log10((p + B23.FLOOR) / (t + B23.FLOOR))) / float(
+                row["sigma_log"])
         else:
             out[i] = math.log10((p + B23.FLOOR) / (t + B23.FLOOR)) / float(
                 row["sigma_log"])

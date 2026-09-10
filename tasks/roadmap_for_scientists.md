@@ -131,6 +131,19 @@ time-doubling as the check. Ship rule declared before the run, as for every wave
 in the introduction's section 8 decides between them; the two figure-only Chinese data sets are the
 fallback if no laboratory is available.
 
+*Status 2026-09-11: a FOURTH structure, B27 (the oxidant the three refused waves were never given:
+Whitfield 1999's dicarbonyl redox couple, entering as a co-product of the mercaptoketone flux the lane
+already carries) was built, gated at the shipped vector, and NOT FITTED. Its decisive test is
+unreachable by any oxidant source: in the ambient pots the dimer step uses under 1 % of its oxidant
+pool, so the pool is a multiplier, not a budget, and the deficit there is the dimer RATE CONSTANT,
+already at its ceiling and held there by Kumazawa's pure-thiol retention rows. In the fed pots the
+budget is genuinely zero and the couple fixes them — but only at φ = 1, its physical ceiling. So the
+"sink question" was two questions: an oxidant question in the fed pots, answered, and a rate question
+in the ambient pots, which is now the sharpest statement of programme 3's remaining gap. The next
+variant must be a disulfide route that does NOT dimerise a pure thiol in buffer — which is precisely
+what the laboratory experiment in the introduction's section 8 separates. See
+`results/validation/kinetic_core_b27_ship_rule.md`.*
+
 **Success.** About one week of modelling plus the laboratory. Chance a variant ships: one in three
 without the experiment, two in three with it.
 

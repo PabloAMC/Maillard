@@ -1718,6 +1718,61 @@ MEASURED_SULFUR = {**MEASURED_SULFUR, **thiol_addition_parameters()}
 
 
 # ---------------------------------------------------------------------------
+# B27 (2026-09-11): the dicarbonyl redox couple -- oxidant as a co-product of the mercaptoketone flux
+# ---------------------------------------------------------------------------
+#: log10 of phi, the fraction of mercaptoketone-forming events that deliver one oxidant equivalent.
+#: The CEILING IS PHYSICAL: one dicarbonyl reduction is one disulfide, so phi <= 1. A fit that pins phi
+#: at 0 (log10 = 0) is asking the mercaptoketone flux for more oxidant than it can supply, and the
+#: pre-registration (kinetic_core_b27_prereg.md sec. 10) declares that evidence AGAINST the structure.
+DICARBONYL_REDOX_BOUNDS_LOG10_YIELD: Tuple[float, float] = (-4.0, 0.0)
+
+
+def dicarbonyl_redox_parameters(k_redox: float = 0.0, ea_kj_mol: Optional[float] = None) -> Dict[str, SulfurParameter]:
+    """
+    The B27 redox branch of ``r_nf_mp3p`` as a SulfurParameter (``sulfur.py ch_redox_mp3p``). Its constant is
+    NOT free: it is ``phi x k_nf_mp3p`` with ``r_nf_mp3p`` at ``(1 - phi) x k_nf_mp3p`` (see
+    ``apply_dicarbonyl_redox``), so the DEFAULT here is the inert zero and every wave before B27 reproduces
+    bit for bit. Pre-registration: kinetic_core_b27_prereg.md sec. 3 and sec. 10.
+    """
+    return {
+        "k_redox_mp3p": _sulfur_parameter(
+            "k_redox_mp3p", "norfuraneol + H2S -> 2-mercapto-3-pentanone + one oxidant equivalent (the redox branch)", 2,
+            k_ref=float(k_redox), ea=ea_kj_mol,
+            evidence_class="derived_from_fit_data",
+            source_anchor=("Whitfield & Mottram 1999 J. Agric. Food Chem. 47:1626, p. 1631 and Figure 6 ('Proposed redox "
+                           "reaction between thiols and alpha-dicarbonyl compounds'): aerial oxidation is unfavourable at these "
+                           "H2S levels, and the dicarbonyl reduced to a hydroxyalkanone on the way to the mercaptoketone is the "
+                           "redox system that makes the disulfides"),
+            dossier_anchor="whitfield1999_extraction.md; results/validation/kinetic_core_b27_prereg.md sec. 1, 3, 9, 10",
+            conditions="aqueous, pH 4.5-7, 100-145 C; the branch shares r_nf_mp3p's barrier and neutral-H2S pH factor",
+            ph=4.5, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_redox_yield", ph_factor_kind="neutral_h2s",
+            flags=("b27_dicarbonyl_redox", "fitted_here", "no_literature_value", "barrier_is_k_nf_mp3p", "fit_cannot_move_this_barrier"),
+            note="Zero until a B27 report supplies phi; the constant is phi x k_nf_mp3p, never fitted on its own.",
+        ),
+    }
+
+
+def apply_dicarbonyl_redox(parameters: Dict[str, SulfurParameter], log10_yield: float) -> Dict[str, SulfurParameter]:
+    """
+    Install phi = 10**log10_yield on an assembled parameter set, IN PLACE and returned: ``r_nf_mp3p`` at
+    ``(1 - phi) k`` and ``ch_redox_mp3p`` at ``phi k``, both with ``k_nf_mp3p``'s barrier, so the total
+    mercaptoketone flux is exactly what it was for every phi.
+    """
+    phi = 10.0 ** float(log10_yield)
+    if not 0.0 <= phi <= 1.0:
+        raise ValueError(f"the redox yield is a fraction; got phi = {phi!r}")
+    base = parameters["k_nf_mp3p"]
+    k = float(base.k_ref)
+    parameters["k_nf_mp3p"] = replace(base, k_ref=(1.0 - phi) * k)
+    parameters.update(dicarbonyl_redox_parameters(k_redox=phi * k, ea_kj_mol=base.ea_kj_mol))
+    return parameters
+
+
+MEASURED_SULFUR = {**MEASURED_SULFUR, **dicarbonyl_redox_parameters()}
+
+
+# ---------------------------------------------------------------------------
 # (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four
 # ---------------------------------------------------------------------------
 #: FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 1. Kang et al. 2026's Table S4

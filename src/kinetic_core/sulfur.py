@@ -839,6 +839,21 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
              "B25. FFT + 1-deoxypentosone -> irreversible adduct."),
     Reaction("ch_add_fft_tdp", {"FFT": 1, "TDP": 1}, {"OLG": 1, "FRAG_C": 5}, "k_add",
              "B25. FFT + 3-deoxypentosone -> irreversible adduct."),
+    # ---- B27 (2026-09-11): the oxidant the three refused sink waves were never given ------------
+    # Whitfield & Mottram 1999 p. 1631 and Figure 6: the alpha-dicarbonyl reduced to a hydroxyalkanone
+    # on the way to a mercaptoketone is the redox system that makes the disulfides, because aerial
+    # oxidation is unfavourable at these H2S levels. The lane already carries that flux as r_nf_mp3p,
+    # so the oxidant is delivered as a CO-PRODUCT of a parallel branch of it: this step runs at
+    # phi x k_nf_mp3p and r_nf_mp3p at (1 - phi) x k_nf_mp3p (parameters_sulfur.apply_dicarbonyl_redox),
+    # same barrier and pH factor, so the total mercaptoketone flux is unchanged for every phi and one
+    # OX equivalent (one disulfide) is made per mercaptoketone formed through this branch. phi is the
+    # ONE fitted coordinate; at the inert default of zero every wave before B27 reproduces bit for bit.
+    # OX here is chemistry-derived and NOT bounded by the O2 saturation that ox_supply respects; it
+    # shares the pool because the consumers (ch_dimer_*, ch_cys_ox, ch_red_ox_*) cannot tell them apart.
+    # Pre-registration: kinetic_core_b27_prereg.md sec. 3 and sec. 10.
+    Reaction("ch_redox_mp3p", {"NF": 1, "H2S": 1}, {"MP3P": 1, "OX": 1}, "k_redox_mp3p",
+             "B27. NF + H2S -> 2-mercapto-3-pentanone + one oxidant equivalent (the dicarbonyl's "
+             "reduction on the way to the mercaptoketone oxidises a thiol; Whitfield 1999 Figure 6)."),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.
@@ -996,6 +1011,8 @@ REACTION_PH_FACTOR: Mapping[str, str] = {
     "r_ddp_mft_hs": "hs_anion",
     "r_nf_mft": "neutral_h2s",
     "r_nf_mp3p": "neutral_h2s",
+    # B27: the redox branch of r_nf_mp3p carries the SAME factor, so the split leaves the total flux exact.
+    "ch_redox_mp3p": "neutral_h2s",
     "r_mgo_mp": "neutral_h2s",
     "r_fur_fft": "neutral_h2s",
     "r_fur_fft_hs": "hs_anion",

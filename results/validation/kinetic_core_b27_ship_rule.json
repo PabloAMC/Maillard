@@ -1,0 +1,292 @@
+{
+  "artifact": "kinetic_core_b27_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b27_ship_rule",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "23b75fb19e85748b4004b3d401a1f206400c4b11",
+      "short": "23b75fb1",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b27_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b27_prereg.md",
+        "sha256": "3b5d490dde133fef181f729fd4820202a35de1b44bcd1ce7cee073e4872b579b"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b27_prereg.md",
+  "rule": "SHIP if T1, T2, T3 (Zhou 2023's three dimer shares within 0.3 dex) and T6 hold; evaluated here as a GATE before the fit, at the shipped B9 vector with phi swept over its band",
+  "fitted": false,
+  "G1": {
+    "pots": {
+      "zhou_arp_cys_pH7": {
+        "ox_charged": 1.0,
+        "ox_consumed": 1.3792504398566537e-05,
+        "consumed_fraction": 1.3792504398566537e-05,
+        "mercaptoketone_flux_mmol_l": 0.003506560161936008,
+        "supply_at_phi_1_over_pool": 0.003506560161936008,
+        "dimer_flux": 1.3792504398566537e-05
+      },
+      "zhang_fig1_cys": {
+        "ox_charged": 1.0,
+        "ox_consumed": 0.004871217265641116,
+        "consumed_fraction": 0.004871217265641116,
+        "mercaptoketone_flux_mmol_l": 0.0041002535533342195,
+        "supply_at_phi_1_over_pool": 0.0041002535533342195,
+        "dimer_flux": 0.004871217265641116
+      },
+      "zhang_fig1_gcys": {
+        "ox_charged": 62.4,
+        "ox_consumed": 0.06223499873173237,
+        "consumed_fraction": 0.0009973557489059675,
+        "mercaptoketone_flux_mmol_l": 0.004109193157156061,
+        "supply_at_phi_1_over_pool": 6.585245444160355e-05,
+        "dimer_flux": 0.06223499873173237
+      }
+    },
+    "needed_supply_over_pool_for_one_decade": 9.0,
+    "best_available_at_phi_1": 0.0041002535533342195,
+    "reachable": false,
+    "reading": "In the ambient pots the oxidant is NOT a budget: the consumers use well under one per cent of it, so it acts as a constant multiplier on the dimer rate. The whole mercaptoketone flux at phi = 1 would raise that multiplier by under one per cent. What those rows need is the dimer RATE CONSTANT, which sits at its band ceiling and is opposed by Kumazawa's retention rows. No oxidant SOURCE reaches T3."
+  },
+  "G2": {
+    "charge": {
+      "NF": 50.0,
+      "Cys": 50.0
+    },
+    "curve": [
+      {
+        "phi": 0.0001,
+        "mft_disulfide_share": 5.777520476218696e-05,
+        "total_mft_molpct": 0.07687670163463026
+      },
+      {
+        "phi": 0.01,
+        "mft_disulfide_share": 0.005744252355974593,
+        "total_mft_molpct": 0.07730893131523985
+      },
+      {
+        "phi": 0.1,
+        "mft_disulfide_share": 0.054583453881575476,
+        "total_mft_molpct": 0.0812314106782622
+      },
+      {
+        "phi": 0.2,
+        "mft_disulfide_share": 0.1034464921888094,
+        "total_mft_molpct": 0.08557547206186956
+      },
+      {
+        "phi": 0.316,
+        "mft_disulfide_share": 0.15407990773381525,
+        "total_mft_molpct": 0.09059589420440106
+      },
+      {
+        "phi": 0.5,
+        "mft_disulfide_share": 0.22348499284360815,
+        "total_mft_molpct": 0.09851848663419278
+      },
+      {
+        "phi": 0.708,
+        "mft_disulfide_share": 0.28921712074015976,
+        "total_mft_molpct": 0.1074149147787271
+      },
+      {
+        "phi": 1.0,
+        "mft_disulfide_share": 0.3644621510959223,
+        "total_mft_molpct": 0.11979888455857952
+      }
+    ],
+    "floor": 0.35,
+    "phi_first_reaching_floor": 1.0,
+    "at_ceiling": true,
+    "reading": "The pot whose oxidant is genuinely zero. The share climbs with phi and reaches the 35 % floor only at phi = 1.0 exactly -- every mercaptoketone-forming event oxidising a thiol. The pre-registration (sec. 10) declared that a phi pinned at its ceiling means the objective is asking the mercaptoketone flux for more than it can supply, and is evidence against the structure rather than a fitted value."
+  },
+  "G3": {
+    "cost_phi_0": 1539.0363418576337,
+    "cost_phi_1": 1459.2918854911231,
+    "rows_compared": 62,
+    "worst": {
+      "row": "whitfield_nf_h2s_MFT",
+      "residual_phi_0": -6.325282462783389,
+      "residual_phi_1": -6.325319745294845,
+      "growth_dex": 1.8641255727924744e-05
+    },
+    "n_over_0_3_dex": 0,
+    "kumazawa_max_abs_growth_dex": 0.0,
+    "kumazawa": [
+      {
+        "row": "kumazawa_FFT_retention_pH5_0",
+        "residual_phi_0": -0.7040082726517622,
+        "residual_phi_1": -0.7040082726517622,
+        "growth_dex": 0.0
+      },
+      {
+        "row": "kumazawa_FFT_retention_pH5_4",
+        "residual_phi_0": -0.6858029498102656,
+        "residual_phi_1": -0.6858029498102656,
+        "growth_dex": 0.0
+      },
+      {
+        "row": "kumazawa_FFT_retention_pH6_0",
+        "residual_phi_0": -0.4409753911647485,
+        "residual_phi_1": -0.4409753911647485,
+        "growth_dex": 0.0
+      },
+      {
+        "row": "kumazawa_FFT_retention_pH6_4",
+        "residual_phi_0": 1.415876194247764,
+        "residual_phi_1": 1.415876194247764,
+        "growth_dex": 0.0
+      }
+    ],
+    "improved": [
+      {
+        "row": "whitfield_mft_disulfide_share_floor",
+        "residual_phi_0": -12.602610000288015,
+        "residual_phi_1": 0.0,
+        "growth_dex": -3.780783000086404
+      },
+      {
+        "row": "whitfield_nf_cys_MFT",
+        "residual_phi_0": -0.9518616958291726,
+        "residual_phi_1": -0.5654393456289554,
+        "growth_dex": -0.1932111751001086
+      }
+    ],
+    "pass": true
+  },
+  "T1": {
+    "mft_ug_per_l": [
+      65.89899063389667,
+      130.31140440487295,
+      36.37446947686428,
+      16.24142639689145
+    ],
+    "fft_ug_per_l": [
+      114.3194881390229,
+      446.2463278454892,
+      991.5505186659112,
+      467.9989536599673
+    ],
+    "ratios_dex": {
+      "MFT_360_over_30": -1.7979941793558196,
+      "MFT_720_over_30": -2.207895111496129,
+      "FFT_360_over_30": -0.80216811470117,
+      "FFT_720_over_30": -1.2074193247020377
+    },
+    "still_rising_6_to_12_h": {
+      "MFT": false,
+      "FFT": false
+    },
+    "pass": false
+  },
+  "T5": {
+    "minutes": [
+      30.0,
+      60.0,
+      90.0,
+      120.0,
+      150.0,
+      180.0
+    ],
+    "MFT": {
+      "ug_per_l": [
+        2511.5873837382405,
+        692.7584033690406,
+        145.7127622270892,
+        32.69733463660713,
+        8.692108106729952,
+        2.773231190093001
+      ],
+      "peak_min": 30.0,
+      "decline_from_peak_dex": 2.956962216838446
+    },
+    "FFT": {
+      "ug_per_l": [
+        17072.5440943011,
+        7002.079532644338,
+        2364.171326318066,
+        730.9150097560902,
+        215.21046057090078,
+        61.49584574047287
+      ],
+      "peak_min": 30.0,
+      "decline_from_peak_dex": 2.4434524644160858
+    },
+    "pass": false
+  },
+  "b9_reference": {
+    "T1": {
+      "mft_ug_per_l": [
+        65.89899103326962,
+        130.31141192694528,
+        36.37447210284323,
+        16.241426815084704
+      ],
+      "fft_ug_per_l": [
+        114.3194891208956,
+        446.2464052683525,
+        991.5585660786809,
+        468.0026020971709
+      ],
+      "ratios_dex": {
+        "MFT_360_over_30": -1.7979941506348263,
+        "MFT_720_over_30": -2.2078951029456637,
+        "FFT_360_over_30": -0.8021645937164703,
+        "FFT_720_over_30": -1.2074159427622306
+      },
+      "still_rising_6_to_12_h": {
+        "MFT": false,
+        "FFT": false
+      },
+      "pass": false
+    },
+    "T5": {
+      "minutes": [
+        30.0,
+        60.0,
+        90.0,
+        120.0,
+        150.0,
+        180.0
+      ],
+      "MFT": {
+        "ug_per_l": [
+          2512.11652926388,
+          692.8182304515265,
+          145.71543733975386,
+          32.697463520807474,
+          8.692116826422968,
+          2.7732319586479255
+        ],
+        "peak_min": 30.0,
+        "decline_from_peak_dex": 2.9570535847480848
+      },
+      "FFT": {
+        "ug_per_l": [
+          17184.65925850516,
+          7047.711596341671,
+          2370.8714603164985,
+          731.6088487862672,
+          215.2718680894128,
+          61.50086350553256
+        ],
+        "peak_min": 30.0,
+        "decline_from_peak_dex": 2.446259711716073
+      },
+      "pass": false
+    }
+  },
+  "verdict": "NOT FITTED -- DO NOT SHIP",
+  "why": [
+    "T3 is unreachable: the ambient pots are not oxidant-limited (G1)",
+    "the one pot the structure fixes needs phi at its physical ceiling, which the pre-registration declared disqualifying (G2)"
+  ]
+}
