@@ -2065,6 +2065,14 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       reading rather than "we have not found it". Hwang 1995's isotope splits live in its figures. Deng
       2022's 100 and 130 C methional rows were not run. And the thiol sink itself is the vial experiment
       in the introduction's section 8: about 130 vials, two temperatures, thiols and disulfides in one run.
+- [x] **ROUTING (2026-09-10). CLOSED, and it was never a routing problem.** This was listed as a
+      modelling problem no paper could close: 2-pentylfuran needed "a lipid charge these matrices can
+      integrate", because the rows asking for it appeared to be scored against a hexanal the lipid
+      lane does not produce. **That diagnosis was wrong.** The lane produces both; `_TARGET_LANE` had
+      no entry for the new species, so the concentration loop reported it in mmol/L rather than ug/L.
+      One line. The lane answers it at 5.04 ug/L against 163 measured in the Trikusuma pot, a 32x
+      miss and in line with this panel's median of 31x. See the correction in
+      `kinetic_core_b28_prereg.md` section 7.
 - [ ] **CARRIED-VOLATILES (2026-09-10, found by a ship rule misfiring). Two panel rows measure what
       the isolate brought with it, and the model predicts formation from zero.**
       `pea_isolate_40C_PratapSingh2021` and `soy_isolate_40C_PratapSingh2021` are a **10-minute hold
@@ -2264,12 +2272,22 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       with the dicarbonyl order GO ~ MGO > 3-DG, the reverse of aqueous Leitzen 2021: matrix, again.
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
-- [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI
-      species on the sulfur lane that releases its cysteine sulfur (retro-Amadori / 1,2-enolisation
-      to the deoxypentosone + cysteine). The core's `ARP` is a sulfur-free pentose Amadori, so the
-      three fed-Amadori series in the corpus (Wang 2026's five-rung ladder, Zhai 2023, Kang 2026)
-      cannot be charged at all today; WANG-01/02 refuse for want of a sulfur source, not for the
-      unstated pH. Wang's ladder is a paired temperature-time design (85 C/80 min ... 125 C/120 min,
+- [ ] **W6 (found 2026-09-07; PREMISE CORRECTED 2026-09-10 before anyone built on it).** A
+      CYSTEINE-XYLOSE AMADORI species on the sulfur lane that releases its cysteine sulfur
+      (retro-Amadori / 1,2-enolisation to the deoxypentosone + cysteine).
+      **WHAT THIS ENTRY GOT WRONG.** It said all three fed-Amadori series "cannot be charged at all
+      today" and that "WANG-01/02 refuse for want of a sulfur source, not for the unstated pH".
+      Wave B15, written the SAME DAY, had already charged Wang's ladder as TTCA 197 mmol/L in 0.2 M
+      phosphate and swept the unstated pH. Today's directional scorecard shows **WANG-02 AGREES**
+      and enters the independent headline, and **WANG-01 is not evaluable for exactly the unstated
+      pH** the entry said was not the reason -- its verdict flips, agreeing at pH 7 and disagreeing
+      at 5 and 9. So one of the three series is charged and scored.
+      **WHAT IS ACTUALLY LEFT, which is smaller and still real.** Zhai 2023 and Kang 2026 have
+      dossiers and NO benchmark bundle and no claim, so they are read and unused. And the Wang
+      charge is a DECLARED PROXY: TTCA is the cysteine-sugar thiazolidine, not a Cys-Amadori, and
+      whether it stands in for one is a question this entry should be asking and was not. The
+      species would replace a declared proxy with the thing itself and make two read datasets
+      usable -- a fair wave, on an honest statement of what it buys. Wang's ladder is a paired temperature-time design (85 C/80 min ... 125 C/120 min,
       Methods 2.3) at an unstated pH. Meng 2017 (MENG-01) stays not evaluable for its own reason
       (a fermented soy sauce with no precursor charge, mixed vessels) -- nothing to read there.
       Prerequisites: the Cys-Amadori synthesis papers already on disk (Zhai 2019 / Xu 2019 for the
