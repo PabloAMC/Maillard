@@ -1,0 +1,158 @@
+{
+  "wave": "B29",
+  "artifact": "kinetic_core_b29_fit_report",
+  "provenance": {
+    "artifact": "kinetic_core_b29_fit_report",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "c7cd9acd0a7ee119a42173ed9d4b53eb23c3e520",
+      "short": "c7cd9acd",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b29_fit.py",
+    "inputs": []
+  },
+  "prereg": "results/validation/kinetic_core_b29_prereg.md",
+  "source": "Hofmann & Schieberle 2000b, J. Agric. Food Chem. 48:4301, Table 2; hofmann2000b_extraction.md",
+  "observable": "AKG",
+  "lever_on": [
+    "k_ama_g",
+    "k_glc_g"
+  ],
+  "objective": {
+    "targets": {
+      "arp_air_over_argon": 9.2,
+      "glc_air_over_argon": 3.5,
+      "arp_aircu_over_air": 2.5,
+      "glc_aircu_over_air": 1.9
+    },
+    "sigma_log": 0.15,
+    "n_rows": 4,
+    "n_free": 2,
+    "final_cost": 5.59738148844915
+  },
+  "bounds": {
+    "log10_f_argon": [
+      -3.0,
+      0.0
+    ],
+    "log10_f_air_cu": [
+      0.0,
+      2.0
+    ]
+  },
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        -0.9637878273455552,
+        0.3979400086720376
+      ],
+      "x": [
+        -1.3088483608968717,
+        1.1030380300483675
+      ],
+      "cost": 5.598720288460225,
+      "nfev": 27,
+      "residuals_dex": {
+        "arp_air_over_argon": -0.21116765157201262,
+        "glc_air_over_argon": 0.22167674658688094,
+        "arp_aircu_over_air": -0.16455668567939752,
+        "glc_aircu_over_air": 0.07183276857245474
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        -1.2139280431366983,
+        0.7241990641848255
+      ],
+      "x": [
+        -1.306770640003221,
+        1.0996622229476014
+      ],
+      "cost": 5.598798188480984,
+      "nfev": 21,
+      "residuals_dex": {
+        "arp_air_over_argon": -0.2126784320773133,
+        "glc_air_over_argon": 0.2202128644237307,
+        "arp_aircu_over_air": -0.16481115892541703,
+        "glc_aircu_over_air": 0.07130511907229592
+      }
+    },
+    {
+      "start": 2,
+      "x0": [
+        -0.5036667169447051,
+        0.575688812073254
+      ],
+      "x": [
+        -1.305949352450965,
+        1.1663361315908976
+      ],
+      "cost": 5.59738148844915,
+      "nfev": 26,
+      "residuals_dex": {
+        "arp_air_over_argon": -0.2132753389384185,
+        "glc_air_over_argon": 0.21963446921688037,
+        "arp_aircu_over_air": -0.16006909801284688,
+        "glc_aircu_over_air": 0.08119911997048629
+      }
+    }
+  ],
+  "best_start": 2,
+  "frozen_parameters": {
+    "atmosphere": {
+      "log10_f_argon": -1.305949352450965,
+      "log10_f_air_cu": 1.1663361315908976
+    }
+  },
+  "atmosphere_factors": {
+    "air": 1.0,
+    "argon": 0.049436833700471174,
+    "air_cu": 14.666825724176203
+  },
+  "predicted": {
+    "arp_air_over_argon": 5.630053067281943,
+    "arp_aircu_over_air": 1.729302266406556,
+    "glc_air_over_argon": 5.8036673718439244,
+    "glc_aircu_over_air": 2.2906182731034765
+  },
+  "residual_by_row_dex": {
+    "arp_air_over_argon": -0.2132753389384185,
+    "glc_air_over_argon": 0.21963446921688037,
+    "arp_aircu_over_air": -0.16006909801284688,
+    "glc_aircu_over_air": 0.08119911997048629
+  },
+  "laplace": {
+    "sigma": {
+      "log10_f_argon": 0.24798704344057637,
+      "log10_f_air_cu": 1.6152339052079498
+    },
+    "chi2_reduced": 2.798690744224575,
+    "dof": 2,
+    "identified": {
+      "log10_f_argon": true,
+      "log10_f_air_cu": false
+    },
+    "on_bound": {
+      "log10_f_argon": false,
+      "log10_f_air_cu": false
+    }
+  },
+  "air_is_exactly_one": {
+    "parameters_identical": true,
+    "observable_identical": true,
+    "pass": true
+  },
+  "not_fitted": {
+    "strecker_acid_air_over_argon": {
+      "arp": 10.0,
+      "glc": 9.0
+    },
+    "why": "the model has no Strecker acid, and the companion paper shows the ACID is oxygen-dependent even from FED dicarbonyls while the aldehyde is not -- so it is a different step with its own oxygen term, not this one"
+  },
+  "reference_temperature_K": 373.15,
+  "reference_ph": 7.0
+}

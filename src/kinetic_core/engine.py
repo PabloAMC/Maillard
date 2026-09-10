@@ -680,6 +680,11 @@ class ProcessSpec:
     #: pools (matrix_sites.resolve); without either, nothing is charged and the answer says so.
     protein_g_per_l: Optional[float] = None
     protein_sites: Optional[Mapping[str, float]] = None
+    #: B29 (2026-09-10): the pot's atmosphere -- "argon", "air" or "air_cu". ``None`` means air,
+    #: which is what every fit row in this model was run in, so a spec that says nothing gets
+    #: exactly the answer it got before the axis existed. Anything else with no fitted multiplier
+    #: RAISES rather than quietly returning the air answer.
+    atmosphere: Optional[str] = None
 
     @property
     def time_min(self) -> float:

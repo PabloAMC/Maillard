@@ -1,0 +1,82 @@
+{
+  "artifact": "kinetic_core_b29_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b29_ship_rule",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "c7cd9acd0a7ee119a42173ed9d4b53eb23c3e520",
+      "short": "c7cd9acd",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b29_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b29_fit_report.json",
+        "sha256": "e1bbb224a4fc9c79d24fe1ab1ea8bb68cec9fd1642bf3052ea150a2e0a2c84f8"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b29_prereg.md",
+  "rule": "SHIP if T1 (both air/argon ratios on one multiplier), T2, T3 (air exactly 1) and T4 hold",
+  "T1": {
+    "rows": {
+      "arp_air_over_argon": {
+        "printed": 9.2,
+        "model": 5.630053067281943,
+        "dex": -0.2132753389384185
+      },
+      "glc_air_over_argon": {
+        "printed": 3.5,
+        "model": 5.8036673718439244,
+        "dex": 0.21963446921688037
+      }
+    },
+    "model_ratio_of_the_two_pots": 0.9700854143701861,
+    "printed_ratio_of_the_two_pots": 2.6285714285714286,
+    "pass": false
+  },
+  "T2": {
+    "rows": {
+      "arp_aircu_over_air": {
+        "printed": 2.5,
+        "model": 1.729302266406556,
+        "dex": -0.16006909801284688
+      },
+      "glc_aircu_over_air": {
+        "printed": 1.9,
+        "model": 2.2906182731034765,
+        "dex": 0.08119911997048629
+      }
+    },
+    "pass": true
+  },
+  "T3": {
+    "parameters_identical": true,
+    "observable_identical": true,
+    "pass": true
+  },
+  "T4": {
+    "sigma": {
+      "log10_f_argon": 0.24798704344057637,
+      "log10_f_air_cu": 1.6152339052079498
+    },
+    "identified": {
+      "log10_f_argon": true,
+      "log10_f_air_cu": false
+    },
+    "on_bound": {
+      "log10_f_argon": false,
+      "log10_f_air_cu": false
+    },
+    "pass": false
+  },
+  "diagnosis": {
+    "oxidative_share_of_the_strecker_aldehyde": {
+      "fed_amadori": 0.999999999994345,
+      "glucose_glycine": 0.9999999999940739
+    },
+    "what_it_means": "The trunk's ONLY route to the Strecker aldehyde runs through glucosone, in BOTH pots. So the model's aldehyde is 100 % oxygen-dependent by construction, the two pots cannot have different air/argon ratios whatever the multiplier is, and under argon the model goes to ZERO. Hofmann measures 0.06 mol % from the Amadori compound and 0.04 from the sugar pot UNDER ARGON -- small, and not zero. A NON-OXIDATIVE route to the Strecker aldehyde exists and this model does not have one. That is the finding, and it is a structural gap the oxygen axis exposed rather than a bad multiplier."
+  },
+  "verdict": "DO NOT SHIP"
+}

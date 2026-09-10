@@ -225,6 +225,78 @@ def declarations(process) -> List[str]:
     return factors(process)[2]
 
 
+# ===========================================================================
+# WAVE B29 (2026-09-10): THE FIRST OXYGEN AXIS ON THE TRUNK
+# ===========================================================================
+# Until this wave every trunk prediction was at whatever oxygen the fits happened to have, and
+# nothing in the output said so. Two constants were already flagged as oxidative -- `k_glc_g`
+# carries `oxidative_entry_in_air` and `r_ama_g` is the Amadori route to the same glucosone -- so
+# the branch existed and had no lever.
+#
+# WHY THE LEVER GOES ON EXACTLY THESE TWO STEPS, AND IT IS THE SOURCE'S OWN CONTROL THAT SAYS SO.
+# Hofmann & Schieberle's companion paper feeds the DICARBONYLS directly and finds the Strecker
+# ALDEHYDE oxygen-INDEPENDENT (while the Strecker ACID is not). So the aldehyde's oxygen dependence
+# is entirely UPSTREAM of the dicarbonyl -- in getting from the sugar or the Amadori compound to it
+# -- which is where these two entries sit. Putting the lever anywhere else would contradict a
+# measured control.
+#: The two oxidative entries, and nothing else.
+OXIDATIVE_ENTRY_STEPS: Tuple[str, ...] = ("k_ama_g", "k_glc_g")
+#: AIR IS THE REFERENCE AND ITS FACTOR IS EXACTLY 1, by definition rather than by fit: every fit row
+#: in this model was run in a closed vial in air, so air is the atmosphere the constants already
+#: describe. A pot that declares no atmosphere is air, and the answer is bit-for-bit what it was
+#: before this wave existed.
+ATMOSPHERE_REFERENCE = "air"
+ATMOSPHERE_VALUES: Tuple[str, ...] = ("argon", "air", "air_cu")
+#: The fitted multipliers. Empty until a B29 report supplies them; at the default every atmosphere
+#: other than air RAISES a refusal rather than silently returning the air answer.
+ATMOSPHERE_FACTORS: Dict[str, float] = {"air": 1.0}
+ATMOSPHERE_SOURCE = (
+    "Hofmann & Schieberle 2000b Table 2 (ARP-Phe and glucose + Phe, 1 mmol each in 10 mL of 0.5 M "
+    "phosphate pH 7.0, 100 C, 120 min, closed vial under argon / air / air + 5 mmol/L Cu(II)): the "
+    "Strecker aldehyde is 9.2x higher under air than argon from the Amadori compound and 3.5x from "
+    "the sugar pot, and 2.5x / 1.9x higher again with copper. hofmann2000b_extraction.md Table 2"
+)
+ATMOSPHERE_TRANSFER = (
+    "Hofmann's amino acid is PHENYLALANINE and this model's is glycine, so what transfers is not a "
+    "yield but the ratio of one pot TO ITSELF under two atmospheres. The argument that such a ratio "
+    "transfers is the companion paper's fed-dicarbonyl control -- the aldehyde is oxygen-independent "
+    "once the dicarbonyl is supplied -- which places the sensitivity in the sugar chemistry, upstream "
+    "of the amino acid. It is an argument from a measurement, not an assumption, and it is testable: "
+    "one multiplier has to explain BOTH 9.2 and 3.5."
+)
+
+
+def atmosphere_factor(process, factors_table=None) -> Tuple[float, List[str]]:
+    """
+    The multiplier on the two oxidative entries for this pot's declared atmosphere.
+
+    A pot with no declared atmosphere is AIR and gets exactly 1.0 with no warning: that is what
+    every constant in this model already describes. Any other atmosphere with no fitted factor
+    RAISES, because silently returning the air answer for an argon pot would be inventing a
+    number -- the failure mode this repository refuses everywhere else.
+    """
+    table = dict(ATMOSPHERE_FACTORS if factors_table is None else factors_table)
+    name = getattr(process, "atmosphere", None)
+    if name is None or str(name) == ATMOSPHERE_REFERENCE:
+        return 1.0, []
+    key = str(name)
+    if key not in ATMOSPHERE_VALUES:
+        raise ValueError(
+            f"atmosphere {key!r} is not one of {ATMOSPHERE_VALUES}. The axis has three settings "
+            f"because one paper measured three; it is not a continuous oxygen partial pressure."
+        )
+    if key not in table:
+        raise ValueError(
+            f"atmosphere {key!r} has no fitted multiplier. Wave B29 measures it "
+            f"(kinetic_core_b29_prereg.md); until that report ships, only {ATMOSPHERE_REFERENCE!r} "
+            f"can be answered. Returning the air answer for an argon pot would invent a number."
+        )
+    return float(table[key]), [
+        f"ATMOSPHERE {key}: the two oxidative entries to glucosone are scaled by "
+        f"{table[key]:.3g}. {ATMOSPHERE_TRANSFER}"
+    ]
+
+
 def apply(
     parameters: Mapping[str, Any],
     process,
@@ -232,6 +304,7 @@ def apply(
     aw_scale: float = 1.0,
     ph_exponent: float = PH_EXPONENT_DECADES_PER_UNIT,
     pyrazine_slopes=None,
+    atmosphere_factors=None,
 ) -> Tuple[Dict[str, Any], List[str]]:
     """
     The trunk parameter dict with the condition terms applied, and the declarations.
@@ -265,6 +338,11 @@ def apply(
             if all(key in out for key in PROLINE_PH_STEPS):
                 out = _scaled(out, PROLINE_PH_STEPS, fp)
         warnings = list(warnings) + notes
+    # B29: the oxygen axis. Exactly 1.0 for air, which is every fit row in this model.
+    fo, onotes = atmosphere_factor(process, atmosphere_factors)
+    if abs(fo - 1.0) > 1e-12 and all(key in out for key in OXIDATIVE_ENTRY_STEPS):
+        out = _scaled(out, OXIDATIVE_ENTRY_STEPS, fo)
+    warnings = list(warnings) + onotes
     return out, warnings
 
 
@@ -272,5 +350,7 @@ __all__ = [
     "AW_BAND_HIGH_FACTOR", "AW_BAND_LOW_MULTIPLIER", "AW_SCALE_BAND", "AW_MULTIPLIER_TABLE", "AW_SOURCE", "AW_STEPS",
     "AW_TABLE_FLOOR", "PH_EXPONENT_BAND", "PH_EXPONENT_DECADES_PER_UNIT", "PH_MEASURED_WINDOW",
     "PH_SOURCE", "PH_STEPS", "REFERENCE_AW", "REFERENCE_PH", "apply", "aw_band", "aw_multiplier", "pyrazine_factor",
+    "ATMOSPHERE_FACTORS", "ATMOSPHERE_REFERENCE", "ATMOSPHERE_SOURCE", "ATMOSPHERE_TRANSFER",
+    "ATMOSPHERE_VALUES", "OXIDATIVE_ENTRY_STEPS", "atmosphere_factor",
     "declarations", "factors", "ph_band", "ph_factor",
 ]
