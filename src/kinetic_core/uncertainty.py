@@ -96,6 +96,10 @@ LAPLACE_PATH = data_paths.VALIDATION_DIR / engine._B2_FIT_REPORT.name.replace("_
 _B18_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b18_fit_report.json"
 #: A coordinate the fit was free to move and could not pin, drawn flat across its DECLARED band.
 UNIDENTIFIED_FLAT = "unidentified_direction_flat_across_its_declared_band"
+#: ENV-B13 (2026-09-10): a constant TWO laboratories measure and disagree about, drawn flat across
+#: the disagreement. Not a refit -- the centre stays where it shipped and the band says what is
+#: actually known, which is less than a point estimate claims.
+SECOND_LABORATORY_BAND = "two_laboratories_disagree: flat across the disagreement"
 
 # ---------------------------------------------------------------------------
 # Unidentified coordinates (2026-09-04)
@@ -720,6 +724,62 @@ def _b18_priors() -> List[CorePrior]:
     return out
 
 
+def _b13_priors() -> List[CorePrior]:
+    """
+    ENV-B13 (2026-09-10). The eight dicarbonyl and furanic-sink constants, which this table had no
+    row for at all -- so every published interval asserted them with certainty.
+
+    Two of them are declarations their own authors flagged (a rate fixed at zero, a barrier fixed
+    at zero) and a second laboratory refutes both. One is out by 466x and one by up to 1.2e5. The
+    four sampled rows below span those disagreements; the four unsampled ones are listed so that
+    the next person checking for a missing block finds a row and a reason rather than a silence.
+
+    NO CENTRE MOVES. Which laboratory is right for a plant-protein cook is not settled by either --
+    an aqueous amine-free glass against a dry, lipid-rich whole nut, disagreeing on the dicarbonyl
+    ORDER as well as the rates.
+    """
+    from .parameters_dicarbonyl import (
+        AGREEING_SINK_KEYS, AGREEING_SINK_REASON, DICARBONYL_PARAMETERS,
+        DISPUTED_SINK_BANDS, DISPUTED_SINK_KEYS,
+    )
+    from .parameters_furanic import FURANIC_PARAMETERS
+
+    def _base(key):
+        return DICARBONYL_PARAMETERS.get(key) or FURANIC_PARAMETERS[key]
+
+    out: List[CorePrior] = []
+    for key in DISPUTED_SINK_KEYS:
+        base = _base(key)
+        spec = DISPUTED_SINK_BANDS[key]
+        k_band = spec.get("log10_k_100C")
+        ea_band = spec.get("ea_kj_mol")
+        if k_band is not None:
+            out.append(CorePrior(
+                key=f"b13.{key}.log10_k_100C", lane=TRUNK, kind="fitted_rate",
+                distribution="uniform_band", centre=None if base.k_ref <= 0 else math.log10(base.k_ref),
+                sigma=None, band=(float(k_band[0]), float(k_band[1])), unit="log10(k at 100 C)",
+                source=f"ENV-B13 declared band: {spec['basis']}",
+                sampled=True, reason=SECOND_LABORATORY_BAND,
+            ))
+        if ea_band is not None:
+            out.append(CorePrior(
+                key=f"b13.{key}.ea_kj_mol", lane=TRUNK, kind="fitted_ea",
+                distribution="uniform_band", centre=float(base.ea_kj_mol), sigma=None,
+                band=(float(ea_band[0]), float(ea_band[1])), unit="kJ/mol",
+                source=f"ENV-B13 declared band: {spec['basis']}",
+                sampled=True, reason=SECOND_LABORATORY_BAND,
+            ))
+    for key in AGREEING_SINK_KEYS:
+        base = _base(key)
+        out.append(CorePrior(
+            key=f"b13.{key}.log10_k_100C", lane=TRUNK, kind="fitted_rate", distribution="fixed",
+            centre=None if base.k_ref <= 0 else math.log10(base.k_ref), sigma=None, band=None,
+            unit="log10(k at 100 C)", source=base.source_anchor,
+            sampled=False, reason=AGREEING_SINK_REASON,
+        ))
+    return out
+
+
 def _declared_band_priors() -> List[CorePrior]:
     from .parameters_furanic import FURANONE_PARTITION_EA_BAND_KJ_MOL
     from .parameters_lipid import LIPID_CARRIERS, Q10_ASSUMPTION
@@ -913,8 +973,8 @@ def _declared_band_priors() -> List[CorePrior]:
 def core_priors() -> Tuple[CorePrior, ...]:
     """The full priors table, in the order the sampler consumes it."""
     return tuple(
-        _b1_priors() + _b3_priors() + _b7_priors() + _b8_priors() + _b18_priors()
-        + _declared_band_priors()
+        _b1_priors() + _b3_priors() + _b7_priors() + _b8_priors() + _b13_priors()
+        + _b18_priors() + _declared_band_priors()
     )
 
 
@@ -968,6 +1028,7 @@ def draw_from_rng(
     b3_k: Dict[str, float] = {}
     b3_ea: Dict[str, float] = {}
     b18: Dict[str, float] = {}   # ENV-B18: the pyrazine block's drawn coordinates
+    b13: Dict[str, Dict[str, float]] = {}   # ENV-B13: the disputed trunk sinks
     k_dpo_af: Optional[float] = None
     coords: Dict[str, float] = {}
     q10 = None
@@ -1045,6 +1106,10 @@ def draw_from_rng(
             b3_k[p.key.split(".")[1]] = value
         elif p.key.startswith("b3."):
             b3_ea[p.key.split(".")[1]] = value
+        elif p.key.startswith("b13."):
+            # ENV-B13: {constant: {field: value}} for the engine's `disputed_sinks` override.
+            _, name, field = p.key.split(".")
+            b13.setdefault(name, {})[field] = value
         elif p.key.startswith("b18."):
             # ENV-B18: the pyrazine block the engine's `pyrazine` override accepts. Only the four
             # coordinates that block takes ever reach here; the two pH slopes are prior rows with
@@ -1080,6 +1145,8 @@ def draw_from_rng(
             hs = value
 
     maillard: Dict[str, Any] = {engine.B1_VARIANT: b1}
+    if b13:
+        maillard["disputed_sinks"] = b13
     if b18:
         # The engine's override needs the WHOLE block, so any coordinate this draw did not move
         # is carried at its frozen value rather than left out.

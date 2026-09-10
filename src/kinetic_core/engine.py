@@ -1629,6 +1629,14 @@ def core_parameters(
         from .parameters_furanic import with_fitted_furanic
 
         parameters.update(with_fitted_furanic(float(override["k_dpo_af"])))
+    if "disputed_sinks" in override:
+        # ENV-B13 (2026-09-10): the four trunk sinks a second laboratory disputes, at drawn values.
+        # The envelope had no prior row for any of them, so every published interval asserted them
+        # with certainty -- including two whose own authors flagged them as decisions and which the
+        # second laboratory refutes. No centre moves; the envelope integrates across the disagreement.
+        from .parameters_dicarbonyl import with_disputed_sinks
+
+        parameters.update(with_disputed_sinks(override["disputed_sinks"]))
     if "aqueous_glyoxal" in override:
         # B21: the two aqueous glyoxal-supply constants, log10 at 100 C (the fit generator's candidates).
         from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_COORDINATES, with_aqueous_glyoxal

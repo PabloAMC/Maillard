@@ -28,6 +28,8 @@ does NOT carry these steps (B9's topology is frozen); a sulfur wave that wants d
 """
 from __future__ import annotations
 
+import math
+
 from typing import Dict, Mapping, Tuple
 
 from .parameters import KineticParameter
@@ -74,6 +76,112 @@ DICARBONYL_PARAMETERS: Mapping[str, KineticParameter] = {
 }
 
 DICARBONYL_KEYS: Tuple[str, ...] = tuple(DICARBONYL_PARAMETERS)
+
+# ---------------------------------------------------------------------------
+# ENV-B13 (2026-09-10): the disputed sinks, at a drawn value
+# ---------------------------------------------------------------------------
+# The Monte-Carlo envelope had NO prior row for any of these constants, so every published interval
+# asserted them with certainty -- including two whose own authors flagged them as decisions and
+# which a second laboratory has since refuted. This is the hook the envelope moves them through.
+# It changes nothing on the default path: `DISPUTED_SINK_KEYS` is the whole surface, and with no
+# override the module's own literals are used exactly as before.
+#
+# THE BANDS ARE NOT A REFIT. Each spans the two laboratories at a common temperature, and the
+# centre stays where it shipped, because which laboratory is right for a plant-protein cook is not
+# settled by either of them -- an aqueous amine-free glass against a dry, lipid-rich whole nut,
+# disagreeing on the dicarbonyl ORDER as well as the rates.
+_R = 8.314462618          # J/(mol K)
+_T_REF_K = 373.15         # the module's k_ref reference, 100 C
+#: Where a DRAWN barrier pivots. Only k_go_sink needs one: its two laboratories agree on the RATE
+#: at 160 C and disagree only about the barrier, so that is the temperature the draw must preserve.
+_BARRIER_DRAW_ANCHOR_T_K: Mapping[str, float] = {"k_go_sink": 433.15}
+
+DISPUTED_SINK_KEYS: Tuple[str, ...] = ("k_da_sink", "k_go_sink", "k_odg_da", "k_hmf_self")
+
+#: (log10 k at 100 C lo, hi) and (Ea lo, hi) for each. `None` means "not in dispute, do not sample".
+#: Every endpoint below is traceable to a printed number; see SECOND_LABORATORY_2016 for the sources.
+DISPUTED_SINK_BANDS: Mapping[str, Mapping[str, object]] = {
+    "k_da_sink": {
+        "log10_k_100C": (-12.0, -1.94),
+        "ea_kj_mol": None,
+        "basis": "shipped at EXACTLY ZERO with a blank barrier, which -12 stands in for; the upper "
+                 "end is Goncuoglu Tas 2016's 130e-3 /min at 160 C carried to 100 C at this "
+                 "module's own steepest trunk barrier. Flat between them says 'somewhere between "
+                 "nothing and what the second laboratory measured', which is the state of knowledge.",
+    },
+    "k_go_sink": {
+        "log10_k_100C": None,
+        "ea_kj_mol": (0.0, 150.8),
+        "basis": "the RATE is left alone: the two laboratories agree to 1.87x at 160 C, which is "
+                 "the best cross-laboratory agreement on this trunk. The BARRIER is the disputed "
+                 "part -- its authors FIXED it to zero and a sixteenfold rise over 20 C refutes "
+                 "that. The upper end is the steepest barrier this module itself carries "
+                 "(k_odg_da, 150.8). The 20 C window is too narrow to fit a credible barrier and "
+                 "this band does not pretend to be one; it is the honest width of not knowing.",
+    },
+    "k_odg_da": {
+        "log10_k_100C": (-4.63, -1.96),
+        "ea_kj_mol": None,
+        "basis": "the 466x disagreement at 160 C, expressed at 100 C on the shipped barrier. The "
+                 "two credible intervals do not come within two decades of each other.",
+    },
+    "k_hmf_self": {
+        "log10_k_100C": (-6.05, -0.96),
+        "ea_kj_mol": None,
+        "basis": "from the shipped 8.97e-7 /min (one temperature, barrier zero by declaration) up "
+                 "to Gokmen 2012's 0.111 /min at 180 C, the widest of the three readings. The "
+                 "barrier stays at zero: one temperature each, so no Arrhenius is licensed.",
+    },
+}
+#: The four that are NOT in dispute, listed so a reader finds a row rather than a silence.
+AGREEING_SINK_KEYS: Tuple[str, ...] = ("k_glc_g", "k_g_go", "k_tdg_ddg", "k_ddg_hmf")
+AGREEING_SINK_REASON = (
+    "NOT SAMPLED, and not by oversight. k_tdg_ddg (1.5x), k_ddg_hmf (1.13x) and k_go_sink's RATE "
+    "(1.87x) are the first cross-laboratory agreement this trunk has ever had, inside a factor of "
+    "two across two laboratories and two matrices. k_glc_g and k_g_go have one determination each "
+    "and no second laboratory to disagree with them. A band invented for a constant nobody "
+    "disputes would be a fabricated interval."
+)
+
+
+def with_disputed_sinks(overrides: Mapping[str, Mapping[str, float]]) -> Dict[str, KineticParameter]:
+    """
+    Rebuild the disputed sinks at drawn values. ENV-B13's only hook into this module.
+
+    ``overrides`` maps a key in ``DISPUTED_SINK_KEYS`` to ``{"log10_k_100C": x}`` and/or
+    ``{"ea_kj_mol": y}``. Anything absent keeps the shipped literal.
+    """
+    from dataclasses import replace
+
+    out: Dict[str, KineticParameter] = {}
+    for key, block in overrides.items():
+        if key not in DISPUTED_SINK_KEYS:
+            raise KeyError(f"{key} is not a disputed sink; ENV-B13 moves only {DISPUTED_SINK_KEYS}")
+        base = DICARBONYL_PARAMETERS.get(key)
+        if base is None:
+            from .parameters_furanic import FURANIC_PARAMETERS
+
+            base = FURANIC_PARAMETERS[key]
+        fields: Dict[str, object] = {}
+        if block.get("log10_k_100C") is not None:
+            fields["k_ref"] = 10.0 ** float(block["log10_k_100C"])
+        if block.get("ea_kj_mol") is not None:
+            ea = float(block["ea_kj_mol"])
+            fields["ea_kj_mol"] = ea
+            if key in _BARRIER_DRAW_ANCHOR_T_K and block.get("log10_k_100C") is None:
+                # A DRAWN BARRIER MUST PIVOT ABOUT WHERE THE EVIDENCE IS, NOT ABOUT 100 C.
+                # k_go_sink's two laboratories agree to 1.87x at 160 C and disagree only about the
+                # barrier. Holding k_ref at 100 C while the barrier swings would throw the rate at
+                # 160 C across decades and destroy the one agreement this trunk has. So the drawn
+                # barrier is applied with the rate held at the anchor temperature, and k_ref at
+                # 100 C is recomputed from it.
+                t_anchor = _BARRIER_DRAW_ANCHOR_T_K[key]
+                k_anchor = base.k_ref * math.exp(
+                    -(base.ea_kj_mol * 1000.0 / _R) * (1.0 / t_anchor - 1.0 / _T_REF_K))
+                fields["k_ref"] = k_anchor / math.exp(
+                    -(ea * 1000.0 / _R) * (1.0 / t_anchor - 1.0 / _T_REF_K))
+        out[key] = replace(base, **fields) if fields else base
+    return out
 
 # ===========================================================================
 # THE SECOND LABORATORY (2026-09-09, from the reading audit)
