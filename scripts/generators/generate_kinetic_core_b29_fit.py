@@ -60,10 +60,15 @@ TARGETS: Dict[str, float] = {
 SIGMA_LOG = 0.15
 SOURCE = ("Hofmann & Schieberle 2000b, J. Agric. Food Chem. 48:4301, Table 2; "
           "hofmann2000b_extraction.md")
-#: The Strecker aldehyde this model makes. The trunk's amine is glycine, so the observable is the
-#: aminoacetaldehyde pool the pyrazine step feeds on -- the same node Hofmann's phenylacetaldehyde
-#: occupies in his scheme.
-OBSERVABLE = "AKG"
+#: THE OBSERVABLE, CORRECTED 2026-09-10 ON REVIEW. The first run used "AKG" alone, the Strecker
+#: product of GLYOXAL. That is one dicarbonyl's Strecker, not the Strecker aldehyde: methylglyoxal's
+#: Strecker gives AKM by a different route, and Hofmann's phenylacetaldehyde is the aldehyde
+#: whichever dicarbonyl did the Strecker. Measuring AKG alone made the aldehyde look 100 % oxidative
+#: -- because glyoxal comes only through glucosone -- and the wave concluded a non-oxidative route
+#: was missing. It is not missing: AMA -> 1-deoxyosone -> methylglyoxal -> AKM is that route, and
+#: with the observable summed over both Strecker products the non-oxidative share is 45 % in the
+#: Amadori pot and 36 % in the sugar pot. The first conclusion was an artefact of the observable.
+OBSERVABLE: Tuple[str, ...] = ("AKG", "AKM")
 
 
 def _factors(x) -> Dict[str, float]:
@@ -74,7 +79,7 @@ def _run(x, initial, atmosphere) -> float:
     process = SimpleNamespace(ph=PH, water_activity=None, atmosphere=atmosphere)
     params, _ = trunk_conditions.apply(dict(BASE), process, atmosphere_factors=_factors(x))
     run = integrate(params, T_C + CELSIUS, initial, np.array([0.0, MINUTES]), rtol=1e-8, atol=1e-16)
-    return float(run.series(OBSERVABLE)[-1])
+    return sum(float(run.series(k)[-1]) for k in OBSERVABLE)
 
 
 def predictions(x) -> Dict[str, float]:
@@ -140,8 +145,10 @@ def air_is_exactly_one() -> Dict[str, Any]:
     same = all(a[k].k_ref == b[k].k_ref for k in trunk_conditions.OXIDATIVE_ENTRY_STEPS)
     ra = integrate(a, T_C + CELSIUS, glc, np.array([0.0, MINUTES]), rtol=1e-8, atol=1e-16)
     rb = integrate(b, T_C + CELSIUS, glc, np.array([0.0, MINUTES]), rtol=1e-8, atol=1e-16)
+    oa = sum(float(ra.series(k)[-1]) for k in OBSERVABLE)
+    ob = sum(float(rb.series(k)[-1]) for k in OBSERVABLE)
     return {"parameters_identical": bool(same),
-            "observable_identical": bool(float(ra.series(OBSERVABLE)[-1]) == float(rb.series(OBSERVABLE)[-1])),
+            "observable_identical": bool(oa == ob),
             "pass": bool(same)}
 
 
@@ -156,7 +163,7 @@ def build(max_nfev: int) -> Dict[str, Any]:
             "kinetic_core_b29_fit_report",
             generated_by="scripts/generators/generate_kinetic_core_b29_fit.py", inputs=[]),
         "prereg": data_paths.rel(PREREG), "source": SOURCE,
-        "observable": OBSERVABLE,
+        "observable": list(OBSERVABLE),
         "lever_on": list(trunk_conditions.OXIDATIVE_ENTRY_STEPS),
         "objective": {"targets": dict(TARGETS), "sigma_log": SIGMA_LOG, "n_rows": len(TARGETS),
                       "n_free": len(KEYS), "final_cost": float(np.sum(r * r))},
@@ -181,7 +188,7 @@ def render(p: Dict[str, Any]) -> str:
     L = [f"# Wave {WAVE} fit report", "",
          f"Cost {p['objective']['final_cost']:.3f} on {p['objective']['n_rows']} ratios, "
          f"{p['objective']['n_free']} free. Lever on {', '.join(p['lever_on'])}; observable "
-         f"{p['observable']}.", "",
+         f"{' + '.join(p['observable'])} (the total Strecker flux, not one dicarbonyl's).", "",
          f"Fitted factors: {json.dumps({k: round(v, 4) for k, v in p['atmosphere_factors'].items()})}", "",
          "| ratio | printed | model | residual (dex) |", "|---|---:|---:|---:|"]
     for k, target in p["objective"]["targets"].items():

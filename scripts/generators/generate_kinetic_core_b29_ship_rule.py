@@ -48,7 +48,7 @@ def _oxidative_share() -> Dict[str, float]:
                 dict(G.BASE), SimpleNamespace(ph=G.PH, water_activity=None, atmosphere="argon"),
                 atmosphere_factors={"air": 1.0, "argon": f})
             r = integrate(p, G.T_C + 273.15, init, np.array([0.0, G.MINUTES]), rtol=1e-8, atol=1e-16)
-            vals.append(float(r.series(G.OBSERVABLE)[-1]))
+            vals.append(sum(float(r.series(k)[-1]) for k in G.OBSERVABLE))
         out[tag] = 1.0 - (vals[1] / vals[0] if vals[0] > 0 else 0.0)
     return out
 
@@ -73,13 +73,16 @@ def main() -> int:
     diagnosis = {
         "oxidative_share_of_the_strecker_aldehyde": share,
         "what_it_means": (
-            "The trunk's ONLY route to the Strecker aldehyde runs through glucosone, in BOTH pots. "
-            "So the model's aldehyde is 100 % oxygen-dependent by construction, the two pots cannot "
-            "have different air/argon ratios whatever the multiplier is, and under argon the model "
-            "goes to ZERO. Hofmann measures 0.06 mol % from the Amadori compound and 0.04 from the "
-            "sugar pot UNDER ARGON -- small, and not zero. A NON-OXIDATIVE route to the Strecker "
-            "aldehyde exists and this model does not have one. That is the finding, and it is a "
-            "structural gap the oxygen axis exposed rather than a bad multiplier."),
+            "CORRECTED ON REVIEW, 2026-09-10. The first run measured AKG alone -- glyoxal's Strecker "
+            "product -- found it 100 % oxidative in both pots, and concluded that a non-oxidative "
+            "route to the Strecker aldehyde was missing. That was an artefact of the observable: the "
+            "trunk HAS a non-oxidative route (Amadori -> 1-deoxyosone -> methylglyoxal -> AKM), and "
+            "summed over both Strecker products the non-oxidative share is 45 % in the Amadori pot "
+            "and 36 % in the sugar pot. THE REAL FINDING IS THE ORDER. Hofmann's Amadori pot is the "
+            "MORE oxygen-sensitive (9.2x against 3.5x), so its oxidative share must be the larger. "
+            "The model's is the SMALLER. That is a statement about the trunk's branching between "
+            "the oxidative route to glucosone and the non-oxidative routes to the deoxyosones, and "
+            "it is the reason one multiplier cannot serve both pots."),
     }
     ships = bool(t1["pass"] and t2["pass"] and t3["pass"] and t4["pass"])
     payload = {

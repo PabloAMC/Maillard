@@ -4,8 +4,8 @@
     "artifact": "kinetic_core_b29_ship_rule",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "c7cd9acd0a7ee119a42173ed9d4b53eb23c3e520",
-      "short": "c7cd9acd",
+      "commit": "4f0e2c7fa39fcf9033b0fc8f9933d61421db7cc8",
+      "short": "4f0e2c7f",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/kinetic_core_b29_fit_report.json",
-        "sha256": "e1bbb224a4fc9c79d24fe1ab1ea8bb68cec9fd1642bf3052ea150a2e0a2c84f8"
+        "sha256": "249405ac9077105b784a73b824ebdc491085b336cc5e9efcf8f89487aaf3d73f"
       }
     ]
   },
@@ -23,16 +23,16 @@
     "rows": {
       "arp_air_over_argon": {
         "printed": 9.2,
-        "model": 5.630053067281943,
-        "dex": -0.2132753389384185
+        "model": 2.1876378918254007,
+        "dex": -0.6238123902128198
       },
       "glc_air_over_argon": {
         "printed": 3.5,
-        "model": 5.8036673718439244,
-        "dex": 0.21963446921688037
+        "model": 2.7556408888366732,
+        "dex": -0.10384542406041404
       }
     },
-    "model_ratio_of_the_two_pots": 0.9700854143701861,
+    "model_ratio_of_the_two_pots": 0.7938762632996559,
     "printed_ratio_of_the_two_pots": 2.6285714285714286,
     "pass": false
   },
@@ -40,16 +40,16 @@
     "rows": {
       "arp_aircu_over_air": {
         "printed": 2.5,
-        "model": 1.729302266406556,
-        "dex": -0.16006909801284688
+        "model": 1.38714120565479,
+        "dex": -0.25581933583576333
       },
       "glc_aircu_over_air": {
         "printed": 1.9,
-        "model": 2.2906182731034765,
-        "dex": 0.08119911997048629
+        "model": 2.1420749028729826,
+        "dex": 0.052081051974223906
       }
     },
-    "pass": true
+    "pass": false
   },
   "T3": {
     "parameters_identical": true,
@@ -58,25 +58,25 @@
   },
   "T4": {
     "sigma": {
-      "log10_f_argon": 0.24798704344057637,
-      "log10_f_air_cu": 1.6152339052079498
+      "log10_f_argon": 42.08508111561194,
+      "log10_f_air_cu": 18.966831202768297
     },
     "identified": {
-      "log10_f_argon": true,
+      "log10_f_argon": false,
       "log10_f_air_cu": false
     },
     "on_bound": {
-      "log10_f_argon": false,
-      "log10_f_air_cu": false
+      "log10_f_argon": true,
+      "log10_f_air_cu": true
     },
     "pass": false
   },
   "diagnosis": {
     "oxidative_share_of_the_strecker_aldehyde": {
-      "fed_amadori": 0.999999999994345,
-      "glucose_glycine": 0.9999999999940739
+      "fed_amadori": 0.545927452170818,
+      "glucose_glycine": 0.6406133007722868
     },
-    "what_it_means": "The trunk's ONLY route to the Strecker aldehyde runs through glucosone, in BOTH pots. So the model's aldehyde is 100 % oxygen-dependent by construction, the two pots cannot have different air/argon ratios whatever the multiplier is, and under argon the model goes to ZERO. Hofmann measures 0.06 mol % from the Amadori compound and 0.04 from the sugar pot UNDER ARGON -- small, and not zero. A NON-OXIDATIVE route to the Strecker aldehyde exists and this model does not have one. That is the finding, and it is a structural gap the oxygen axis exposed rather than a bad multiplier."
+    "what_it_means": "CORRECTED ON REVIEW, 2026-09-10. The first run measured AKG alone -- glyoxal's Strecker product -- found it 100 % oxidative in both pots, and concluded that a non-oxidative route to the Strecker aldehyde was missing. That was an artefact of the observable: the trunk HAS a non-oxidative route (Amadori -> 1-deoxyosone -> methylglyoxal -> AKM), and summed over both Strecker products the non-oxidative share is 45 % in the Amadori pot and 36 % in the sugar pot. THE REAL FINDING IS THE ORDER. Hofmann's Amadori pot is the MORE oxygen-sensitive (9.2x against 3.5x), so its oxidative share must be the larger. The model's is the SMALLER. That is a statement about the trunk's branching between the oxidative route to glucosone and the non-oxidative routes to the deoxyosones, and it is the reason one multiplier cannot serve both pots."
   },
   "verdict": "DO NOT SHIP"
 }

@@ -128,3 +128,41 @@ because T3 held exactly and the axis costs nothing at air. `ATMOSPHERE_FACTORS` 
 air answer — which is the same discipline every other refusal in this model follows. A successor
 needs the non-oxidative route to the dicarbonyls first; until then the axis has one setting and says
 so.
+
+## 7. Correction on review, 2026-09-10: the "missing route" in section 6 was an artefact of the observable
+
+Section 6 says the model's Strecker aldehyde is "100 % oxygen-dependent by construction" and
+concludes that "a non-oxidative route to the Strecker aldehyde exists and this model does not have
+one". **That conclusion is retracted.** The run behind it measured `AKG` alone, which is the Strecker
+product of GLYOXAL — one dicarbonyl's Strecker, not the Strecker aldehyde. Glyoxal comes only through
+glucosone, so of course it read as fully oxidative. Hofmann's phenylacetaldehyde is the aldehyde
+whichever dicarbonyl did the Strecker, and the model's equivalent is the total over both Strecker
+products, `AKG + AKM`. The trunk **has** the non-oxidative route: Amadori → 1-deoxyosone →
+methylglyoxal → `AKM`. Hofmann's own Figures 2 and 3 show exactly this split — the 1-deoxyosone
+dominates under argon and glucosone under air with copper — and the model's branching agrees with
+them in kind.
+
+Re-run with the correct observable:
+
+| | fed Amadori | glucose + glycine |
+|---|---:|---:|
+| oxidative share of the Strecker flux (model) | **54.6 %** | **64.1 %** |
+| air / argon, printed | **9.2** | **3.5** |
+| air / argon, model at the argon multiplier's FLOOR | 2.19 | 2.76 |
+
+Both multipliers ran to their bounds and neither is identified. **The corrected finding is about
+ORDER and about a FLOOR, and it is a sharper refutation than the wrong one.** Hofmann's Amadori pot
+is the more oxygen-sensitive, so its oxidative share must be the larger; the model's is the smaller.
+And the model's non-oxidative share puts a ceiling of roughly 1 / (non-oxidative share) — about 1.8
+to 2.8 — on any air/argon ratio it can produce, whatever the multiplier, which is why 9.2 is out of
+reach at the floor of the band. So the trunk's branching between the oxidative route to glucosone
+and the non-oxidative routes to the deoxyosones is wrong in the direction the two pots differ, and
+too heavily non-oxidative on the Amadori side. That is a statement about `k_ama_g` against
+`k_ama_odg` and `k_ama_mgo`, and a successor should look there rather than for a route that is not
+missing.
+
+**Prediction 2's 35 % was, in the end, about the right thing** — whether the trunk's own branching
+already differs between the two pots by the right amount — and the answer is no, in the wrong
+direction. The first run got the verdict right for the wrong reason, and the wrong reason was
+written into four places before a review caught it. The axis, T3 and the raise-on-argon behaviour
+are unchanged by this correction.

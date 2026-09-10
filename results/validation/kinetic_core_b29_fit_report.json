@@ -5,8 +5,8 @@
     "artifact": "kinetic_core_b29_fit_report",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "c7cd9acd0a7ee119a42173ed9d4b53eb23c3e520",
-      "short": "c7cd9acd",
+      "commit": "4f0e2c7fa39fcf9033b0fc8f9933d61421db7cc8",
+      "short": "4f0e2c7f",
       "branch": "reactions",
       "dirty": true
     },
@@ -15,7 +15,10 @@
   },
   "prereg": "results/validation/kinetic_core_b29_prereg.md",
   "source": "Hofmann & Schieberle 2000b, J. Agric. Food Chem. 48:4301, Table 2; hofmann2000b_extraction.md",
-  "observable": "AKG",
+  "observable": [
+    "AKG",
+    "AKM"
+  ],
   "lever_on": [
     "k_ama_g",
     "k_glc_g"
@@ -30,7 +33,7 @@
     "sigma_log": 0.15,
     "n_rows": 4,
     "n_free": 2,
-    "final_cost": 5.59738148844915
+    "final_cost": 20.8036328374894
   },
   "bounds": {
     "log10_f_argon": [
@@ -50,16 +53,16 @@
         0.3979400086720376
       ],
       "x": [
-        -1.3088483608968717,
-        1.1030380300483675
+        -2.9999999999999996,
+        1.9997567128392622
       ],
-      "cost": 5.598720288460225,
-      "nfev": 27,
+      "cost": 20.8036328374894,
+      "nfev": 28,
       "residuals_dex": {
-        "arp_air_over_argon": -0.21116765157201262,
-        "glc_air_over_argon": 0.22167674658688094,
-        "arp_aircu_over_air": -0.16455668567939752,
-        "glc_aircu_over_air": 0.07183276857245474
+        "arp_air_over_argon": -0.6238123902128198,
+        "glc_air_over_argon": -0.10384542406041404,
+        "arp_aircu_over_air": -0.25581933583576333,
+        "glc_aircu_over_air": 0.052081051974223906
       }
     },
     {
@@ -69,16 +72,16 @@
         0.7241990641848255
       ],
       "x": [
-        -1.306770640003221,
-        1.0996622229476014
+        -2.915917592714649,
+        1.4226988428755465
       ],
-      "cost": 5.598798188480984,
-      "nfev": 21,
+      "cost": 20.90201187056772,
+      "nfev": 25,
       "residuals_dex": {
-        "arp_air_over_argon": -0.2126784320773133,
-        "glc_air_over_argon": 0.2202128644237307,
-        "arp_aircu_over_air": -0.16481115892541703,
-        "glc_aircu_over_air": 0.07130511907229592
+        "arp_air_over_argon": -0.6244166342344747,
+        "glc_air_over_argon": -0.10471718467999751,
+        "arp_aircu_over_air": -0.2622824685482333,
+        "glc_aircu_over_air": 0.025324926535021535
       }
     },
     {
@@ -88,57 +91,57 @@
         0.575688812073254
       ],
       "x": [
-        -1.305949352450965,
-        1.1663361315908976
+        -2.999956174917863,
+        1.8737221216569633
       ],
-      "cost": 5.59738148844915,
+      "cost": 20.806295341400972,
       "nfev": 26,
       "residuals_dex": {
-        "arp_air_over_argon": -0.2132753389384185,
-        "glc_air_over_argon": 0.21963446921688037,
-        "arp_aircu_over_air": -0.16006909801284688,
-        "glc_aircu_over_air": 0.08119911997048629
+        "arp_air_over_argon": -0.623812676421417,
+        "glc_air_over_argon": -0.10384583757487932,
+        "arp_aircu_over_air": -0.2566329457745369,
+        "glc_aircu_over_air": 0.04852796182538174
       }
     }
   ],
-  "best_start": 2,
+  "best_start": 0,
   "frozen_parameters": {
     "atmosphere": {
-      "log10_f_argon": -1.305949352450965,
-      "log10_f_air_cu": 1.1663361315908976
+      "log10_f_argon": -2.9999999999999996,
+      "log10_f_air_cu": 1.9997567128392622
     }
   },
   "atmosphere_factors": {
     "air": 1.0,
-    "argon": 0.049436833700471174,
-    "air_cu": 14.666825724176203
+    "argon": 0.001000000000000001,
+    "air_cu": 99.94399674871494
   },
   "predicted": {
-    "arp_air_over_argon": 5.630053067281943,
-    "arp_aircu_over_air": 1.729302266406556,
-    "glc_air_over_argon": 5.8036673718439244,
-    "glc_aircu_over_air": 2.2906182731034765
+    "arp_air_over_argon": 2.1876378918254007,
+    "arp_aircu_over_air": 1.38714120565479,
+    "glc_air_over_argon": 2.7556408888366732,
+    "glc_aircu_over_air": 2.1420749028729826
   },
   "residual_by_row_dex": {
-    "arp_air_over_argon": -0.2132753389384185,
-    "glc_air_over_argon": 0.21963446921688037,
-    "arp_aircu_over_air": -0.16006909801284688,
-    "glc_aircu_over_air": 0.08119911997048629
+    "arp_air_over_argon": -0.6238123902128198,
+    "glc_air_over_argon": -0.10384542406041404,
+    "arp_aircu_over_air": -0.25581933583576333,
+    "glc_aircu_over_air": 0.052081051974223906
   },
   "laplace": {
     "sigma": {
-      "log10_f_argon": 0.24798704344057637,
-      "log10_f_air_cu": 1.6152339052079498
+      "log10_f_argon": 42.08508111561194,
+      "log10_f_air_cu": 18.966831202768297
     },
-    "chi2_reduced": 2.798690744224575,
+    "chi2_reduced": 10.4018164187447,
     "dof": 2,
     "identified": {
-      "log10_f_argon": true,
+      "log10_f_argon": false,
       "log10_f_air_cu": false
     },
     "on_bound": {
-      "log10_f_argon": false,
-      "log10_f_air_cu": false
+      "log10_f_argon": true,
+      "log10_f_air_cu": true
     }
   },
   "air_is_exactly_one": {

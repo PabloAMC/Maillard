@@ -43,8 +43,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "a1531b054a12baeb463816178abc198a1d104e2a",
-      "short": "a1531b05",
+      "commit": "4f0e2c7fa39fcf9033b0fc8f9933d61421db7cc8",
+      "short": "4f0e2c7f",
       "branch": "reactions",
       "dirty": true
     },
@@ -471,7 +471,7 @@
       "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.8
+    "wall_seconds": 9.7
   },
   "benchmarks": [
     {

@@ -4,23 +4,23 @@
 
 | test | result | pass |
 |---|---|---|
-| T1 the two air/argon ratios | model separates the pots by 0.97x against a printed 2.63x | False |
-| T2 the copper arm | worst +0.16 dex | True |
+| T1 the two air/argon ratios | model separates the pots by 0.79x against a printed 2.63x | False |
+| T2 the copper arm | worst +0.26 dex | False |
 | T3 air is exactly 1 | parameters identical True, observable identical True | True |
-| T4 identification | sigma {"log10_f_argon": 0.25, "log10_f_air_cu": 1.62} | False |
+| T4 identification | sigma {"log10_f_argon": 42.09, "log10_f_air_cu": 18.97} | False |
 
 | ratio | printed | model | dex |
 |---|---:|---:|---:|
-| arp_air_over_argon | 9.2 | 5.63 | -0.213 |
-| glc_air_over_argon | 3.5 | 5.804 | +0.220 |
-| arp_aircu_over_air | 2.5 | 1.729 | -0.160 |
-| glc_aircu_over_air | 1.9 | 2.291 | +0.081 |
+| arp_air_over_argon | 9.2 | 2.188 | -0.624 |
+| glc_air_over_argon | 3.5 | 2.756 | -0.104 |
+| arp_aircu_over_air | 2.5 | 1.387 | -0.256 |
+| glc_aircu_over_air | 1.9 | 2.142 | +0.052 |
 
 ## What the axis exposed
 
 | pot | share of the Strecker aldehyde made through the oxidative entries |
 |---|---:|
-| fed_amadori | 100.0% |
-| glucose_glycine | 100.0% |
+| fed_amadori | 54.6% |
+| glucose_glycine | 64.1% |
 
-> The trunk's ONLY route to the Strecker aldehyde runs through glucosone, in BOTH pots. So the model's aldehyde is 100 % oxygen-dependent by construction, the two pots cannot have different air/argon ratios whatever the multiplier is, and under argon the model goes to ZERO. Hofmann measures 0.06 mol % from the Amadori compound and 0.04 from the sugar pot UNDER ARGON -- small, and not zero. A NON-OXIDATIVE route to the Strecker aldehyde exists and this model does not have one. That is the finding, and it is a structural gap the oxygen axis exposed rather than a bad multiplier.
+> CORRECTED ON REVIEW, 2026-09-10. The first run measured AKG alone -- glyoxal's Strecker product -- found it 100 % oxidative in both pots, and concluded that a non-oxidative route to the Strecker aldehyde was missing. That was an artefact of the observable: the trunk HAS a non-oxidative route (Amadori -> 1-deoxyosone -> methylglyoxal -> AKM), and summed over both Strecker products the non-oxidative share is 45 % in the Amadori pot and 36 % in the sugar pot. THE REAL FINDING IS THE ORDER. Hofmann's Amadori pot is the MORE oxygen-sensitive (9.2x against 3.5x), so its oxidative share must be the larger. The model's is the SMALLER. That is a statement about the trunk's branching between the oxidative route to glucosone and the non-oxidative routes to the deoxyosones, and it is the reason one multiplier cannot serve both pots.

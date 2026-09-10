@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "a0927109204953f1d6d423cd2c0da16b201ffb11144617775ee2208b229e9c51",
+        "17_papers_by_weight.png": "160ff314a8b68e848ac69c53addaf27bcd6b96a134114b9b32edae3aeaae5949",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "a1531b054a12baeb463816178abc198a1d104e2a",
-      "short": "a1531b05",
+      "commit": "4f0e2c7fa39fcf9033b0fc8f9933d61421db7cc8",
+      "short": "4f0e2c7f",
       "branch": "reactions",
       "dirty": true
     },
@@ -171,7 +171,7 @@
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "b8f0be465d1bbf14b4aacf0019302085c57bae96524ff926dd8ea9de9e646eb2"
+        "sha256": "f79a9855cfaa58a1e78438df82f1310a9810ae82f9dd07aa6cf87685ea483fb4"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
@@ -195,7 +195,7 @@
       },
       {
         "path": "results/validation/kinetic_core_b28_ship_rule.json",
-        "sha256": "5639237f347254ccd596f9b726c4cd7d833c8d9725b5dd7562ebea6d2a94199e"
+        "sha256": "df14d60fd1280512fc544b685d79cffec0a2f266455e0e96162cdbf35e49dc33"
       },
       {
         "path": "results/validation/kinetic_core_b9_fit_report.json",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "a0927109204953f1d6d423cd2c0da16b201ffb11144617775ee2208b229e9c51"
+        "sha256": "160ff314a8b68e848ac69c53addaf27bcd6b96a134114b9b32edae3aeaae5949"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",

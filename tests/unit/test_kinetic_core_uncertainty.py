@@ -499,7 +499,14 @@ def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
 
     assert "1-hexanol" in UNREPRESENTED_COMPOUNDS
     assert "2-pentylfuran" not in UNREPRESENTED_COMPOUNDS
-    assert any("UNREPRESENTED TARGETS" in r["reason"] for r in refused.values()) or refused
+    # The line below was "assert any(...) or refused" until 2026-09-10, which passes whenever ANY
+    # row is refused for any reason -- near-vacuous, and caught on review. The refusal vocabulary
+    # is what is under test, so the vocabulary is what is asserted.
+    vocab = ("UNMAPPED PRECURSORS", "UNREPRESENTED TARGET", "LANE CONFLICT", "NOT EVALUABLE",
+             "GLYCATION TARGETS", "METHIONINE CHAIN TARGETS", "2-ACETYL-1-PYRROLINE TARGETS")
+    assert refused, "the small panel must refuse at least one row"
+    assert all(any(v in r["reason"] for v in vocab) for r in refused.values()), \
+        [r["reason"][:60] for r in refused.values() if not any(v in r["reason"] for v in vocab)]
 
 
 def test_same_seed_gives_an_identical_artifact():
