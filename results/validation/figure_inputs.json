@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "2b198e3048ffe34eb849ae73ce8cf4cebf73334f34366fe84608506e2ae2af06",
+        "17_papers_by_weight.png": "a0927109204953f1d6d423cd2c0da16b201ffb11144617775ee2208b229e9c51",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "796d3edb0cb3ac0a59ec044d1cf896116de8e3bc",
-      "short": "796d3edb",
+      "commit": "a1531b054a12baeb463816178abc198a1d104e2a",
+      "short": "a1531b05",
       "branch": "reactions",
       "dirty": true
     },
@@ -171,7 +171,7 @@
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "ea9e931de36b6edb7382c0460f7b3879ecbf025feafc6e3521be4670e85d73bb"
+        "sha256": "b8f0be465d1bbf14b4aacf0019302085c57bae96524ff926dd8ea9de9e646eb2"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
@@ -195,7 +195,7 @@
       },
       {
         "path": "results/validation/kinetic_core_b28_ship_rule.json",
-        "sha256": "426c7521572ec2bba8f9d8c3ab298d574c115fe013a3a5be9339adc35f1292ed"
+        "sha256": "5639237f347254ccd596f9b726c4cd7d833c8d9725b5dd7562ebea6d2a94199e"
       },
       {
         "path": "results/validation/kinetic_core_b9_fit_report.json",
@@ -263,7 +263,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "912e3fddc9768592b1243d22843f0a318dfa0a060d2601b1ac30e8b30c36ee61"
+        "sha256": "28b3347f9f59fee87dbff493db0b508bd7d0abd846b223a6ef3bb1f2d8bc073e"
       },
       {
         "path": "src/kinetic_core/species.py",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "2b198e3048ffe34eb849ae73ce8cf4cebf73334f34366fe84608506e2ae2af06"
+        "sha256": "a0927109204953f1d6d423cd2c0da16b201ffb11144617775ee2208b229e9c51"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",

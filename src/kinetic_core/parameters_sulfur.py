@@ -1781,6 +1781,48 @@ ZHAI_SWITCH_ON_RETIRED = (
 #: this a ONE-SIDED FIT bound. It is a mass-balance ceiling, not a level: it is
 #: exactly the kind of constraint a network can violate silently.
 KANG_TTCA_FREE_CYS_YIELD_CEILING_MOL_PCT = 16.3
+
+# ===========================================================================
+# THE TTCA-FOR-AMADORI SUBSTITUTION, MEASURED (2026-09-10, backlog W6)
+# ===========================================================================
+# W6 asked for a CYSTEINE-XYLOSE AMADORI species on this lane, on the ground that three fed-Amadori
+# series "cannot be charged at all today". That premise was corrected on 2026-09-10: wave B15 had
+# already charged Wang's ladder as TTCA and swept its unstated pH, and today one of its two claims
+# AGREES and carries the independent headline while the other fails for exactly the unstated pH the
+# entry ruled out.
+#
+# WHAT WAS LEFT WAS THE PROXY ITSELF, and it turns out to be measurable rather than arguable. TTCA
+# is the cysteine-xylose THIAZOLIDINE and the Amadori compound is a different molecule; charging one
+# for the other is a substitution, and until now an undeclared one. Kang 2026 isolates and purifies
+# BOTH and stresses them side by side, which is the comparison that sizes it:
+#
+#   stress                    TTCA loss   ARP loss   ARP / TTCA
+#   40 C, solution, 60 days      7.06 %    12.17 %      1.72x
+#   pH 9, room temperature      11.19 %    21.25 %      1.90x
+#   water activity 0.843, solid 35.77 %    60.61 %      1.69x
+#
+# THE AMADORI COMPOUND IS CONSISTENTLY 1.7 TO 1.9 TIMES LESS STABLE, and the agreement of that
+# factor across three UNRELATED stresses -- heat, alkali and humidity -- is what makes it a declared
+# band rather than a guess. The substitution is therefore usable and is now DECLARED with a size.
+#
+# WHAT THIS IS NOT. These are 60-day STORAGE losses at 4 to 40 C, not cook-temperature rates, and
+# Kang prints no rate constant, half-life, barrier or order anywhere -- every thermal experiment in
+# that paper is a single endpoint at 120 minutes. So this band travels as a STABILITY ratio and must
+# not be read as a rate ratio at 120 C. It is why the W6 species was NOT built: no dataset in the
+# corpus can fit one.
+TTCA_FOR_AMADORI_STABILITY_RATIO_BAND: Tuple[float, float] = (1.69, 1.90)
+TTCA_FOR_AMADORI_ANCHOR = (
+    "Kang 2026 section 3.3 and abstract (p. 3239, 3247): 60-day losses of PURIFIED TTCA against the "
+    "purified xylose-cysteine Amadori compound at 40 C in solution (7.06 vs 12.17 %), at pH 9 "
+    "(11.19 vs 21.25 %) and at water activity 0.843 in the solid (35.77 vs 60.61 %); "
+    "kang2026_extraction.md sec. 6a"
+)
+TTCA_FOR_AMADORI_CAVEAT = (
+    "A STORAGE-STABILITY ratio at 4 to 40 C, not a rate ratio at cooking temperature. Kang prints no "
+    "rate constant, half-life, barrier or reaction order anywhere in the paper, and every thermal "
+    "experiment in it is a single endpoint at 120 minutes. Charging TTCA for an Amadori compound "
+    "carries this band on the STABILITY of the fed intermediate and nothing else."
+)
 KANG_TTCA_CEILING_ANCHOR = (
     "Kang 2026 SI Fig. S3 (digitised, kang2026_SI_extraction.md sec. 6c): peak "
     "free Cys 1.63 mmol/L at 140 C / 40 min against 10 mmol/L TTCA loaded. "

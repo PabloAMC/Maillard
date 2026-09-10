@@ -43,10 +43,10 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-10",
     "git": {
-      "commit": "796d3edb0cb3ac0a59ec044d1cf896116de8e3bc",
-      "short": "796d3edb",
+      "commit": "a1531b054a12baeb463816178abc198a1d104e2a",
+      "short": "a1531b05",
       "branch": "reactions",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [

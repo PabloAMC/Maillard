@@ -2288,6 +2288,27 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       with the dicarbonyl order GO ~ MGO > 3-DG, the reverse of aqueous Leitzen 2021: matrix, again.
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
+- [x] **W6 CLOSED 2026-09-10 WITHOUT BUILDING THE SPECIES, and the reason is that no dataset in the
+      corpus can fit one.** The entry asked for a cysteine-xylose Amadori species. Three checks, in
+      order, and each one shrank the ask:
+      (i) The premise was wrong: wave B15 had already charged Wang's ladder as TTCA and swept its
+      unstated pH, so one of the "uncharged" series is charged and one of its two claims AGREES and
+      carries the independent headline.
+      (ii) Of the two datasets left, Zhai 2023 is not unused at all -- it is the ORIGIN of the
+      corpus's sulfur temperature ladder. And Kang 2026 **contains no kinetics whatsoever**: not one
+      rate constant, half-life, activation energy, reaction order or Arrhenius fit, with every
+      thermal experiment a single endpoint at 120 minutes. A species fitted on it could not be
+      fitted at all.
+      (iii) What was genuinely open was the SUBSTITUTION -- charging the thiazolidine for the
+      Amadori compound -- and that turned out measurable rather than arguable. Kang isolates and
+      stresses BOTH side by side: the Amadori compound loses 1.72x more at 40 C, 1.90x more at pH 9
+      and 1.69x more at water activity 0.843. **1.7 to 1.9 across three unrelated stresses**, which
+      is a declared band rather than a guess.
+      INSTALLED: `TTCA_FOR_AMADORI_STABILITY_RATIO_BAND` in `parameters_sulfur.py`, with the caveat
+      that it is a STORAGE-stability ratio at 4 to 40 C and not a rate ratio at cooking temperature.
+      The substitution is now declared with a size instead of being silent. THE SPECIES IS NOT BUILT
+      and should not be until a paper measures the Amadori compound's decomposition RATE.
+      Original text follows for the record.
 - [ ] **W6 (found 2026-09-07; PREMISE CORRECTED 2026-09-10 before anyone built on it).** A
       CYSTEINE-XYLOSE AMADORI species on the sulfur lane that releases its cysteine sulfur
       (retro-Amadori / 1,2-enolisation to the deoxypentosone + cysteine).
