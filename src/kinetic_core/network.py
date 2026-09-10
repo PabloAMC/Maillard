@@ -450,7 +450,7 @@ METHIONINE_REACTIONS: Tuple[Reaction, ...] = (
         "five-point time course at 120 C.",
     ),
     Reaction(
-        "r_marp_loss", {"MARP": 1}, {"MEL_C": 11, "MEL_N": 1, "FRAG_S": 1}, "k_marp_loss",
+        "r_marp_loss", {"MARP": 1}, {"MEL_C": 11, "MEL_N": 1, "MEL_S": 1}, "k_marp_loss",
         "B22b. The Amadori compound's own competing loss, first order -- what every other Amadori compound "
         "in this model has. It is here because Deng's series RISES to 120 minutes and then FALLS, and a "
         "single first-order decomposition of a fed pool saturates rather than falling. The sink keeps both "

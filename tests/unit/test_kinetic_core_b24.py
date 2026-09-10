@@ -27,7 +27,12 @@ def test_the_steps_exist_balance_and_are_trunk_only():
     assert set(network.PROLINE_REACTION_KEYS) == {
         "r_mgo_pro", "r_pyrl_ap", "r_pyrl_ha_athp", "r_pyrl_loss"}
     network.validate_balance(network.TRUNK_REACTIONS)
-    assert list(species.SPECIES_KEYS)[-5:] == ["PRO", "PYRL", "AP", "ACETOL", "ATHP"]
+    # 2026-09-10: an ORDERING, not a position. B22b appended two more species after these and a
+    # negative slice would break again on the next wave, which is what happened to five other
+    # wave tests the same day.
+    _mine = ["PRO", "PYRL", "AP", "ACETOL", "ATHP"]
+    assert [k for k in species.SPECIES_KEYS if k in _mine] == _mine
+    assert min(species.INDEX[k] for k in _mine) > species.INDEX["DMDS"]
     from src.kinetic_core.species_sulfur import SULFUR_STATE_KEYS
     assert not {"PRO", "PYRL", "AP", "ACETOL", "ATHP"} & set(SULFUR_STATE_KEYS)
 

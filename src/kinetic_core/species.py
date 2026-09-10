@@ -253,25 +253,23 @@ SPECIES: Tuple[Species, ...] = (
             "methionine plus glucose, so the sugar moiety supplies the dicarbonyl inside the same "
             "molecule. Carbon is glucose's 6 plus methionine's 5; nitrogen and sulfur are "
             "methionine's.", sulfur=1),
-    Species("FRAG_S", "unassigned fragment sulfur", 0, 0, "pool", False,
-            "B22b (2026-09-10). The sulfur analogue of FRAG_C, and it exists for the same reason: a "
-            "step that loses a sulfur-bearing molecule to an unmeasured product has to put the sulfur "
-            "somewhere, and the melanoidin pools hold carbon and nitrogen only. Adding it was forced "
-            "by the balance guard, which refused the first draft of r_marp_loss. "
-            "APPENDED AT THE END AND TRUNK-ONLY, and both matter: the first draft put it beside "
-            "FRAG_C in the middle of this list, which would have shifted the INDEX of every species "
-            "after it and silently re-shaped the sulfur lane's state vector -- the vector the B9 fit "
-            "was run on. THE SULFUR LANE ALREADY HAS A KEY OF THIS NAME, and that is fine where "
-            "`HA` was not: there the same key meant two DIFFERENT compounds, a C2 and a C3, on two "
-            "lanes; here it means the SAME pool on two separate state vectors, which is exactly what "
-            "FRAG_C does. The sulfur state stays 57 keys with no duplicate. "
-            "An accounting pool, not a species; nothing consumes it", sulfur=1),
+    Species("MEL_S", "melanoidin pool, SULFUR", 0, 0, "pool", False,
+            "B22b (2026-09-10). mmol of sulfur per litre held in the terminal melanoidin polymer, "
+            "the third member beside MEL_C and MEL_N. It exists because the balance guard refused a "
+            "step that lost a sulfur-bearing molecule to browning: the melanoidin pools held carbon "
+            "and nitrogen only, so the sulfur had nowhere to go. "
+            "NAMED MEL_S AND NOT FRAG_S, and the guards decided that. The first draft called it "
+            "FRAG_S, the sulfur analogue of FRAG_C -- and the sulfur lane ALREADY has a FRAG_S, so a "
+            "trunk-only key of that name broke the invariant that a trunk-only species is absent "
+            "from the sulfur state. Renaming it also made it more accurate: a methionine Amadori "
+            "compound lost to browning puts its sulfur IN the polymer, which is a melanoidin pool "
+            "and not an unassigned fragment. An accounting pool; nothing consumes it", sulfur=1),
 )
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
 TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL",
-                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "ACETOL", "ATHP", "MARP", "FRAG_S")
+                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "ACETOL", "ATHP", "MARP", "MEL_S")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 
