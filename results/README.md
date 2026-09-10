@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **457**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **460**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -137,4 +137,4 @@ Tracked files: **457**. Local-only (gitignored): scratch runs under `results/qui
 
 | files | what it is, who writes it, who reads it |
 |---|---|
-| `*` (1): `core_prediction_uncertainty_before_env_priors.json` | The envelope EXACTLY AS IT STOOD before ENV-B18 and ENV-B13 added their prior rows, kept so that their ship rule is reproducible by anyone rather than only by whoever happened to have the old file. It is a frozen comparison baseline and is never regenerated. |
+| `*` (4): `core_prediction_uncertainty_after_env_priors.json`, `core_prediction_uncertainty_before_env_priors.json`, `core_prediction_uncertainty_seed1.json`, `core_prediction_uncertainty_seed1.md` | The envelope EXACTLY AS IT STOOD before ENV-B18 and ENV-B13 added their prior rows, kept so that their ship rule is reproducible by anyone rather than only by whoever happened to have the old file. It is a frozen comparison baseline and is never regenerated. |
