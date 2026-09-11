@@ -194,6 +194,8 @@ failures, and reporting them as such would be dishonest, so the rows are refused
 prints the cure, which is this blank. **Supply an unheated column for those materials and seven
 refused rows become answerable.** Nothing else on this page unlocks that many for that little.
 
+One more blank is already printed, and it is worth saying how far a blank reaches. The extrusion paper behind this model's only acrylamide process row prints its unextruded control as a bar: about 38 µg/kg of acrylamide in the raw soy-and-starch blend, against about 150 in the extrudate. So a quarter of that row's target was in the bag. It is not declared, because it is read off a figure and because the row misses by 4 247×, which no blank can fix: the process is scored on its die zone alone, and the paper, now read in full, prints ten barrel zones and no residence time. A blank is a correction of the target; it is not a cure for a process declared as one hold.
+
 The general rule is not specific to this model: **a formation measurement without its own blank
 cannot be told apart from a storage measurement.** If your material sat in a warehouse for six
 months, some of what you are about to attribute to your process was in the bag when you opened it.
@@ -211,7 +213,7 @@ it dry — a freeze-dried glucose melt and a roasted hazelnut. Two laboratories 
 other in the same matrix is not a check; it is the same experiment twice. One aqueous determination
 would settle it, and it is the cheapest number on this page.
 
-A candidate exists and is open access, not yet on this disk: Zhang, Sun, Pu, Zhang, Sun & Zhao 2021,
+A candidate exists and is open access, not yet on this disk (asked for on 2026-09-11; it was not among the seven papers that arrived that day): Zhang, Sun, Pu, Zhang, Sun & Zhao 2021,
 *Food Science & Nutrition* 9:290–302 (doi 10.1002/fsn3.1995) heat 0.3 M glucose **in water, alone and
 with glutamic acid, at 90–110 °C for 0–6 h** and quantify 3-deoxyglucosone, 1-deoxyglucosone,
 **3,4-dideoxyglucosone**, glucosone, glyoxal, methylglyoxal and diacetyl, with zero-order formation

@@ -23,7 +23,7 @@
         "within_band": 2
       },
       "lipid": {
-        "median_fold_error": 2.7857188141599183,
+        "median_fold_error": 2.8215149798278483,
         "rows": 8,
         "within_band": 4
       },
@@ -240,7 +240,7 @@
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "4/8 rows within 3x, median 2.79x",
+      "evidence": "4/8 rows within 3x, median 2.82x",
       "system_class": "protein matrix, lipid-derived aldehydes [lipid lane]",
       "verdict": "do-not-use"
     },

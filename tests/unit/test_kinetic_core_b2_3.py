@@ -295,8 +295,12 @@ BUNDLE_BASELINES = {
         "430c4423a31594c63e3b7a579980f4fbfc82fd8256ca6453ea75e3e1b8548e8a",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-03: content_verification block from the PMC full text added
+    # RE-BASELINED BY WAVE B36 (2026-09-11), and the guard was RIGHT to fire: not a condition
+    # completion. The PDF arrived and Table 2 shows the scored nonanal (72.66) was the HMPE-20 min
+    # column; the control column reads 74.37 +/- 0.11 (pre-registered:
+    # results/validation/kinetic_core_b36_prereg.md). Previous: 53edcdb681c3c04ab8b8e4f384cee5b686f040bdbdd28dc914e3131e2295a593
     "external_validation_li_2026_spi_wg_hme_control":
-        "53edcdb681c3c04ab8b8e4f384cee5b686f040bdbdd28dc914e3131e2295a593",
+        "d97d33f09b775b73cf5f5ba27b29fb80f6069cd0a7e93ba4625f899d4183a1ce",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-04: content_verification block from the full text added
     "external_validation_liu_2023_ppi_offnote_baseline":
@@ -431,18 +435,38 @@ def test_a_named_buffer_carries_a_molarity_and_an_unknown_never_does():
             assert block["concentration_M"] > 0.0, key
 
 
+def test_the_buffer_completion_script_is_current():
+    """
+    Added by wave B36 (2026-09-11), after running the script regressed seven bundles whose
+    buffer blocks had been edited in place by B34, B35 and the Yiltirak reading. The vessel
+    script has had this guard since R1; the buffer script now has it too.
+    """
+    import subprocess
+    import sys
+    done = subprocess.run(
+        [sys.executable, "scripts/generators/complete_benchmark_buffer_fields.py", "--check"],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert done.returncode == 0, done.stderr + done.stdout
+
+
 def test_an_unknown_buffer_must_say_the_source_is_not_available():
     """
     THE RULE AGAINST GUESSING. `buffer_unknown` is only legitimate where the
     evidence is absent, and the note has to say so in those words -- otherwise
     it is indistinguishable from laziness, and worse, a plausible guess could
     be relabelled as unknown to dodge scrutiny.
+
+    Amended by wave B36 (2026-09-11): the evidence is absent in two different
+    ways -- the paper is not on disk, or the paper is on disk and does not
+    state the medium. Both are legitimate and the note must say WHICH.
     """
     for key, block in _buffer_blocks():
         if block["species"] != "buffer_unknown":
             continue
         assert block["provenance_class"] == "unknown", key
-        assert "NOT ON DISK" in block["provenance_note"].upper(), key
+        note = block["provenance_note"].upper()
+        assert "NOT ON DISK" in note or "DOES NOT STATE" in note, key
 
 
 def test_a_positive_no_buffer_finding_is_distinct_from_unknown():

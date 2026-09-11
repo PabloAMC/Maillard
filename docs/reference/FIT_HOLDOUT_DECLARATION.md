@@ -1450,3 +1450,31 @@ ran.
 6. **THE REFUSAL NAMES ITS OWN CURE.** It is conditional, not permanent: declare the starting state
    under clause 2 and the row is answered. Trikusuma is the worked example of a pot that took the
    cure.
+
+## Amendment 38 — 2026-09-11 (Wave B36, seven sources arrive)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** No constant moved, no fit row's value or conditions changed.
+   Seven PDFs the 2026-09-11 reading list asked for arrived (Ma 2024, Li 2026, Lin 2021 — the paper
+   the three "Chang 2021" bundles score — Lin 2022, Ye 2024, Singh 2021, Koelsch 1991); each has a
+   dossier, and every number the nine citing bundles had transcribed second-hand was checked against
+   the print (`results/validation/kinetic_core_b36_prereg.md`).
+2. **ONE HOLD-OUT VALUE CHANGES, FROM THE PRINT.** `external_validation_li_2026_spi_wg_hme_control`
+   scored nonanal at 72.66 µg/kg, which Table 2 shows is the 20-minute column; the control column
+   reads 74.37 ± 0.11. The row moves by 2.35 %. The correction is dated, the prior note is retained,
+   and the bundle's frozen hash is re-pinned with the reason. No other measured value moved: Singh
+   2021's hexanal and 2-pentylfuran, Lin 2021's three acrylamide levels and HMF, Lin 2022's
+   acrylamide and HMF, Ye 2024's control and Ma 2024's Figure 2D bar all match.
+3. **PROVENANCE, NOT CONDITIONS.** Nine bundles' vessel and buffer notes said their source was not on
+   disk; it is. The notes are corrected through their generators, the false claims retained and
+   labelled superseded (the B34/B35 practice), and six vessel blocks move from
+   `repo_verbatim_methods_quote` to `primary_source_pdf`. No executable condition field changed.
+4. **WHAT THE PRINT DOES NOT SUPPORT IS NOW LABELLED.** Ma 2024 prints ten barrel zones and no
+   residence time; the extrusion row's 25 s is an assumption and its note says so. Ye 2024 never
+   states the reactant molarity; the bundle's 0.2 M stays the labelled assumption it was.
+5. **A GENERATOR WAS FOUND STALE AND IS NOW GUARDED.** Running the buffer-note generator regressed
+   seven bundles whose blocks B34, B35 and the Yiltirak reading had edited in place. Caught before
+   commit; the current blocks are carried in the generator verbatim, `--check` reports drift, and a
+   unit test runs it, as the vessel generator has had since R1.
+6. **NAMED, NOT ACTED ON.** Ma 2024's unextruded control carries ≈38 µg/kg acrylamide (a figure
+   bar). Declaring it under Amendment 37 would need a printed number, and on a fit row that scores
+   4 247× low it changes no verdict. Recorded in the dossier and in `docs/guides/EXPERIMENTS.md`.

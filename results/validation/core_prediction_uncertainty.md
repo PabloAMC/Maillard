@@ -65,7 +65,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 88.598 | 7.478 | 88.755 | 1.29e+03 | yes | 2.237 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 1.115 | 13.019 | 171.111 | no | 2.186 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 69.695 | 5.052 | 58.967 | 775.022 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
-| external_validation_li_2026_spi_wg_hme_control | external_matrix | nonanal | ppb | 72.660 | 23.885 | 1.732 | 20.209 | 265.608 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
+| external_validation_li_2026_spi_wg_hme_control | external_matrix | nonanal | ppb | 74.370 | 23.885 | 1.732 | 20.209 | 265.608 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
 
 ## Refused rows
 

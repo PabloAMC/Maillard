@@ -21,7 +21,7 @@
       "water_source": "not_applicable",
       "stirred": null,
       "provenance_class": "not_applicable",
-      "provenance_note": "Pratap-Singh et al. 2021, Molecules 26:4104: an UNHEATED protein powder; the bundle's 40 C / 10 min is the HS-SPME incubation (1 g powder in 7 mL water), not a thermal process, as the 2026-09-04 calibration diagnosis records. No cook, so no vessel (not_applicable). SOURCE NOT ON DISK."
+      "provenance_note": "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Singh, Shi, Magreault, Kitts, Jarzebski, Siejak & Pratap-Singh 2021 (Molecules 26:4104), data/articles/singh2021.pdf, dossier singh2021_extraction.md. Table 1 (read as an image) confirms hexanal pea 1138.00 +/- 297.30 and soy 1621.71 +/- 159.69 ppb, fully quantified; the 2-pentylfuran values (pea 638 +/- 49, soy 2492 +/- 199) are SEMI-QUANTIFIED HEXANAL EQUIVALENTS from the prose of sec. 2.4. The 40 C / 10 min is the SPME incubation 'under agitation for 10 min at 40 C' (sec. 4.2): no cook, as this note has said. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: Pratap-Singh et al. 2021, Molecules 26:4104: an UNHEATED protein powder; the bundle's 40 C / 10 min is the HS-SPME incubation (1 g powder in 7 mL water), not a thermal process, as the 2026-09-04 calibration diagnosis records. No cook, so no vessel (not_applicable). SOURCE NOT ON DISK."
     }
   },
   "metadata": {

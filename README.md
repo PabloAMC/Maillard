@@ -308,7 +308,7 @@ constant, which is what makes `rank` useful.
 | Claim type | System class | Measured | Verdict |
 |---|---|---|---|
 | Absolute concentration (ppb) | free precursor, asparagine + reducing sugar [acrylamide lane] | 2/12 rows within 3x, median 7.73x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
-| Absolute concentration (ppb) | protein matrix, lipid-derived aldehydes [lipid lane] | 4/8 rows within 3x, median 2.79x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
+| Absolute concentration (ppb) | protein matrix, lipid-derived aldehydes [lipid lane] | 4/8 rows within 3x, median 2.82x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
 | Absolute concentration (ppb) | free precursor, cysteine / ribose meaty thiols [sulfur lane] | 2/19 rows within 3x, median 29.5x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
 | Absolute concentration (ppb) | free precursor, sugar + amine browning / furanics [trunk lane] | 2/6 rows within 3x, median 22.2x<br/><sub>recomputed live on the union panel; an absolute is never trust by rule</sub> | **do-not-use** |
 | Absolute concentration interval (90% CI) | every lane with sampled uncertainty | 16/44 evaluable literature rows inside; 16/43 out of sample; 1 not evaluable<br/><sub>results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty</sub> | **do-not-use** |

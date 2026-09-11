@@ -51,8 +51,8 @@
       "species": "none",
       "concentration_M": null,
       "initial_ph_scale": "bench_cooled",
-      "provenance_class": "repo_verbatim_methods_quote",
-      "provenance_note": "Chang / Sung et al. 2021, Polymers 13(12):1901, sec. 2.2, verbatim: 'Solutions containing 0.5 g asparagine, 0.5 g glucose, and 0.5 g hydroxymethylfurfural in distilled water were also prepared', and the same pH ladder ('adjusted to 5.8 by adding 1 N NaOH and then 0.001 N NaOH to pH 6.0'). This bundle's own vehicle_note names it 'Deionized water, pH adjusted to 6.0 (Figure 3A arm)'. POSITIVE FINDING OF NO BUFFER, not an absence of information -- and it is the WATER half of the two-arm pair whose arms the exam currently predicts identically. SOURCE PAPER NOT ON DISK; second-hand."
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Lin, Chan, Kao & Sung 2021 (Polymers 13:1901), data/articles/lin2021.pdf, dossier lin2021_extraction.md. The distilled-water arm and its pH ladder are verbatim in sec. 2.2 of the print: a positive finding of no buffer, confirmed. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: Chang / Sung et al. 2021, Polymers 13(12):1901, sec. 2.2, verbatim: 'Solutions containing 0.5 g asparagine, 0.5 g glucose, and 0.5 g hydroxymethylfurfural in distilled water were also prepared', and the same pH ladder ('adjusted to 5.8 by adding 1 N NaOH and then 0.001 N NaOH to pH 6.0'). This bundle's own vehicle_note names it 'Deionized water, pH adjusted to 6.0 (Figure 3A arm)'. POSITIVE FINDING OF NO BUFFER, not an absence of information -- and it is the WATER half of the two-arm pair whose arms the exam currently predicts identically. SOURCE PAPER NOT ON DISK; second-hand."
     },
     "vessel": {
       "fill_mL": 100.0,
@@ -61,8 +61,8 @@
       "atmosphere": "unstated",
       "water_source": "distilled",
       "stirred": null,
-      "provenance_class": "repo_verbatim_methods_quote",
-      "provenance_note": "Chang et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method, verbatim: 'The pH value of each solution was first adjusted to 5.8 ... and topped up with distilled water to 100 mL. Each solution was heated at 180 degC for 10, 20, and 30 min, followed by cooling in tap water.' The quotation names the solution volume (100 mL) but neither the vessel nor whether it was closed, so vessel volume is null and the atmosphere is unstated. Water: distilled."
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Lin, Chan, Kao & Sung 2021 (Polymers 13:1901), data/articles/lin2021.pdf, dossier lin2021_extraction.md ('Chang' in the bundle name is the method reference the paper follows; the DOI was always this paper's). The quotation below is verbatim in sec. 2.2 of the print, which names no heating apparatus, no vessel and no closure: the 100 mL fill stands, vessel volume stays null and the atmosphere stays unstated. The prose values the three bundles score (28, 912 and 1459 ppb; 832 ppb; HMF 7 ppm) are all in the print. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: Chang et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method, verbatim: 'The pH value of each solution was first adjusted to 5.8 ... and topped up with distilled water to 100 mL. Each solution was heated at 180 degC for 10, 20, and 30 min, followed by cooling in tap water.' The quotation names the solution volume (100 mL) but neither the vessel nor whether it was closed, so vessel volume is null and the atmosphere is unstated. Water: distilled."
     }
   },
   "metadata": {

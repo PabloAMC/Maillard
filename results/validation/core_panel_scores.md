@@ -3,24 +3,24 @@
 pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresholds`, else the global default.
 
 * panel: **37** benchmarks, 23 scored, 14 fully refused; rows **45**, refused rows 32
-* within 3x: 10/45 (0.222); median fold 9.315, geometric mean 17.802, worst 9.63e+03
+* within 3x: 10/45 (0.222); median fold 9.315, geometric mean 17.811, worst 9.63e+03
 * evidence roles (core): {'external_holdout': 21, 'predictive': 16}
 * predictive benchmarks passing their contract: NONE; strict-ready: NONE
-* **honest literature: 10/45 within band** (0.222), 23 benchmarks, median fold 9.315, geometric mean 17.802
-* **out-of-sample: 9/44 within band** (0.205), 22 benchmarks, median fold 10.622, geometric mean 18.646
+* **honest literature: 10/45 within band** (0.222), 23 benchmarks, median fold 9.315, geometric mean 17.811
+* **out-of-sample: 9/44 within band** (0.205), 22 benchmarks, median fold 10.622, geometric mean 18.656
 * **rows the sulfur fit read: 1/1 within band** (1.000), 1 benchmarks, median fold 2.316, geometric mean 2.316
 
 ## Per panel / role / lane
 
 | split | key | benchmarks | rows | within band | rate | contract passes | strict-ready | median fold | geo-mean fold |
 |---|---|---|---|---|---|---|---|---|---|
-| panel | external_matrix | 4 | 4 | 0 | 0.000 | 0 | 0 | 6.173 | 13.711 |
+| panel | external_matrix | 4 | 4 | 0 | 0.000 | 0 | 0 | 6.173 | 13.791 |
 | panel | maillard_path_holdout | 17 | 31 | 5 | 0.161 | 0 | 0 | 29.450 | 21.897 |
 | panel | trust_loop | 16 | 10 | 5 | 0.500 | 0 | 0 | 3.110 | 10.400 |
-| evidence_role | external_holdout | 21 | 35 | 5 | 0.143 | 0 | 0 | 23.562 | 20.756 |
+| evidence_role | external_holdout | 21 | 35 | 5 | 0.143 | 0 | 0 | 23.562 | 20.770 |
 | evidence_role | predictive | 16 | 10 | 5 | 0.500 | 0 | 0 | 3.110 | 10.400 |
 | lane | acrylamide | - | 12 | 2 | 0.167 | 0 | 0 | 7.728 | 23.060 |
-| lane | lipid | - | 8 | 4 | 0.500 | 0 | 0 | 2.786 | 5.146 |
+| lane | lipid | - | 8 | 4 | 0.500 | 0 | 0 | 2.822 | 5.161 |
 | lane | sulfur | - | 19 | 2 | 0.105 | 0 | 0 | 29.450 | 30.281 |
 | lane | trunk | - | 6 | 2 | 0.333 | 0 | 0 | 22.182 | 10.320 |
 
@@ -63,7 +63,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 130.704 | 2.058 | 1.50 / 0.100 | scale-gap | no | - | 1.98 |
 | external_validation_bi_2020_raw_pea_hexanal | external_matrix | PRIMARY | external_holdout | 0/2 | 0.000 | - | - | 2.00 / 0.120 | refused | no | - | not_applicable |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | PRIMARY | external_holdout | 1/4 | 0.250 | 3.657 | 0.563 | 2.00 / 0.120 | coverage-gap | no | - | open |
-| external_validation_li_2026_spi_wg_hme_control | external_matrix | PRIMARY | external_holdout | 3/4 | 0.750 | 365.609 | 1.328 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
+| external_validation_li_2026_spi_wg_hme_control | external_matrix | PRIMARY | external_holdout | 3/4 | 0.750 | 365.609 | 1.332 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
 | external_validation_liu_2023_ppi_offnote_baseline | external_matrix | PRIMARY | external_holdout | 0/2 | 0.000 | - | - | 2.00 / 0.120 | refused | no | - | not_applicable |
 
 ## Rows
@@ -114,7 +114,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | external_validation_bi_2020_roasted_pea_hexanal | hexanal | ppb | 324.000 | 88.598 | 3.657 | no | no | [4.054, 1.94e+03] | yes | lipid | no |
 | external_validation_li_2026_spi_wg_hme_control | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 365.609 | no | no | [0.471, 502.987] | no | lipid | no |
 | external_validation_li_2026_spi_wg_hme_control | hexanal | ppb | 605.600 | 69.695 | 8.689 | no | no | [2.132, 2.28e+03] | yes | lipid | no |
-| external_validation_li_2026_spi_wg_hme_control | nonanal | ppb | 72.660 | 23.885 | 3.042 | no | no | [0.731, 780.763] | yes | lipid | no |
+| external_validation_li_2026_spi_wg_hme_control | nonanal | ppb | 74.370 | 23.885 | 3.114 | no | no | [0.731, 780.763] | yes | lipid | no |
 
 ## Refused rows
 

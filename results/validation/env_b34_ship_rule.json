@@ -4,8 +4,8 @@
     "artifact": "env_b34_ship_rule",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "1f5a19d2f46b8a54cf9872884451c5064dc7b930",
-      "short": "1f5a19d2",
+      "commit": "e0701ecef6ce55ae082384ee0ae33cbf768e35ca",
+      "short": "e0701ece",
       "branch": "reactions",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "1b03829426d9bb4c1042dac44be5769fbbe94236722ca2338cf26f503a78c816"
+        "sha256": "67e6cc0f5dabeec951ee9b9b973e3a0c4e40947b5b7d279cc2f5c7c5e7fee5a1"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",

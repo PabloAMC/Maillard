@@ -12,7 +12,7 @@
       "concentration_M": null,
       "initial_ph_scale": "unstated",
       "provenance_class": "unknown",
-      "provenance_note": "Li et al. 2026, Foods 15(5):912. SOURCE PAPER NOT ON DISK and the repo carries NO verbatim methods quotation for the medium. The scored system is a 57 wt%-moisture high-moisture-extrusion melt, not an aqueous solution, so 'buffer' may not even be the right question -- but that is a reason to record UNKNOWN, not a licence to record 'none'. The protocol's own note is explicit: 'The paper does not publish a final-blend pH or water-activity closure' (data/protocols/external_validation/external_validation_li_2026_spi_wg_hme_control.yaml, benchmark_alignment.notes). ph_disagreement: the only pH in the whole record is 7.0 for the WHEAT-GLUTEN ENZYMATIC PRETREATMENT at 30 C -- a different unit operation -- and it has been transposed onto a 160 C extrusion run. conditions.ph = 7.0 is unsourced AS AN EXTRUSION CONDITION. Reported, not edited.",
+      "provenance_note": "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Li, Dai, Mao, An, Bai & Kaur 2026 (Foods 15:912), data/articles/li2026.pdf, dossier li2026_extraction.md -- AND THE PRINT DOES NOT STATE THE MEDIUM: sec. 2.3 gives the blend ratio, moisture (about 57 %), screw speed, feed rate and the six zone temperatures, and no pH or buffer for the extrusion blend. buffer_unknown stays, now because the paper is silent, not absent. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: Li et al. 2026, Foods 15(5):912. SOURCE PAPER NOT ON DISK and the repo carries NO verbatim methods quotation for the medium. The scored system is a 57 wt%-moisture high-moisture-extrusion melt, not an aqueous solution, so 'buffer' may not even be the right question -- but that is a reason to record UNKNOWN, not a licence to record 'none'. The protocol's own note is explicit: 'The paper does not publish a final-blend pH or water-activity closure' (data/protocols/external_validation/external_validation_li_2026_spi_wg_hme_control.yaml, benchmark_alignment.notes). ph_disagreement: the only pH in the whole record is 7.0 for the WHEAT-GLUTEN ENZYMATIC PRETREATMENT at 30 C -- a different unit operation -- and it has been transposed onto a 160 C extrusion run. conditions.ph = 7.0 is unsourced AS AN EXTRUSION CONDITION. Reported, not edited.",
       "ph_disagreement": "conditions.ph = 7.0 is the wheat-gluten pretreatment pH at 30 C, not a stated extrusion condition."
     },
     "vessel": {
@@ -22,8 +22,8 @@
       "atmosphere": "continuous_process",
       "water_source": "unstated",
       "stirred": null,
-      "provenance_class": "repo_verbatim_methods_quote",
-      "provenance_note": "Li et al. 2026, Foods 15(5):912, SOURCE NOT ON DISK; second-hand, from the PMC full text the repo read on 2026-09-03 (content_verification): a high-moisture extrusion melt (57 wt % moisture, 160 C). An extruder has no fixed headspace; oxygen access is process-specific (continuous_process). Water source not stated."
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Li, Dai, Mao, An, Bai & Kaur 2026 (Foods 15:912), data/articles/li2026.pdf, dossier li2026_extraction.md. Read from the print, sec. 2.3: CLEXTRAL Ev025 co-rotating twin-screw, 25 mm screws, SPI : wheat-gluten hydrolysate 6:4 dry basis, 280 rpm, 4.6 kg/h, about 57 % moisture, six barrel zones at 30, 90, 120, 140, 150 and 160 C, cooling die. The print gives no residence time, no blend pH and no water source. Table 2 (read as an image) confirms hexanal, 1-hexanol and 2-pentylfuran and shows the bundle's nonanal was the HMPE-20 min column; B36 corrects it to the control column's 74.37 +/- 0.11 ug/kg. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: Li et al. 2026, Foods 15(5):912, SOURCE NOT ON DISK; second-hand, from the PMC full text the repo read on 2026-09-03 (content_verification): a high-moisture extrusion melt (57 wt % moisture, 160 C). An extruder has no fixed headspace; oxygen access is process-specific (continuous_process). Water source not stated."
     }
   },
   "denaturation_state": 0.8,
@@ -84,10 +84,10 @@
       "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
     },
     "nonanal": {
-      "conc_ppb": 72.66,
-      "content_correction_note": "2026-08-27 (Wave K/M): was 29.42, which is the paper's DECANAL row (volatile table, HMPE-0 min control column); the Nonanal row reads 72.66 +/- 1.46 ug/kg. Off-by-one table-row transcription error, verified against Europe PMC fullTextXML (PMC12984281). See results/validation/content_verification_wave_k.md.",
+      "conc_ppb": 74.37,
+      "content_correction_note": "2026-09-11 (wave B36, the PDF on disk, Table 2 read as an image): was 72.66, which is the Nonanal row's HMPE-20 min column; the HMPE-0 min CONTROL column reads 74.37 +/- 0.11 ug/kg. The 2026-08-27 correction fixed the row and took the column to its right. See data/lit/extraction_dossiers/li2026_extraction.md and results/validation/kinetic_core_b36_prereg.md. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: 2026-08-27 (Wave K/M): was 29.42, which is the paper's DECANAL row (volatile table, HMPE-0 min control column); the Nonanal row reads 72.66 +/- 1.46 ug/kg. Off-by-one table-row transcription error, verified against Europe PMC fullTextXML (PMC12984281). See results/validation/content_verification_wave_k.md.",
       "value_provenance": "reported_point_value",
-      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
+      "value_provenance_note": "A single concentration reported by the source (Table 2, HMPE-0 min, 74.37 +/- 0.11 ug/kg, semi-quantitative against cyclohexanone). Scoring this against a prediction is a genuine test."
     }
   },
   "metadata": {
@@ -126,6 +126,7 @@
     "quoted_quantification": "2.00 g of powdered HMPE was placed in a 20 mL headspace vial, to which 10 uL of the internal standard (cyclohexanone) was added ... 50/30 um DVB/CAR/PDMS fibre ... exposed to the sample for 30 min. Semi-quantitative: C = A x CS x VS / (AS x m). Table header: 'Relative contents (ug/kg)'.",
     "quoted_values": "Table 2, HMPE-0 min (control): 2-pentylfuran 5625.80 +/- 63.75 ug/kg; maltol 221.51 +/- 5.74 ug/kg.",
     "quantification_verdict": "HS-SPME-GC-MS, semi-quantitative relative to cyclohexanone (no compound-specific calibration); the bundle's 2-pentylfuran value matches Table 2.",
-    "verified_on": "2026-09-03"
+    "verified_on": "2026-09-03",
+    "b36_print_check_2026_09_11": "Read from data/articles/li2026.pdf, Table 2, HMPE-0 min: hexanal 605.64 +/- 6.50, 1-hexanol 20.04 +/- 0.66, 2-pentylfuran 5625.80 +/- 63.75 confirmed; nonanal corrected 72.66 -> 74.37 +/- 0.11."
   }
 }

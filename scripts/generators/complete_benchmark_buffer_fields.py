@@ -382,6 +382,491 @@ BUFFER_RECORDS: Dict[str, Dict[str, Any]] = {
 }
 
 
+# ---------------------------------------------------------------------------
+# WAVE B36 (2026-09-11): seven sources arrived. Five buffer notes above open with a
+# "SOURCE PAPER NOT ON DISK; second-hand" claim that was true when written and is false now.
+# The repo's standing practice for a corrected note (B34, B35): the new reading first, the
+# old claim kept after it, labelled superseded. Applied here so the records above stay the
+# audit record as written.
+# ---------------------------------------------------------------------------
+_B36_SUPERSEDED = " ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD: "
+_B36_ON_DISK = {
+    "mp_holdout_glucose_asparagine_180C_10min_Chang2021": ("primary_source_pdf",
+        "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Lin, Chan, Kao & Sung 2021 (Polymers 13:1901), "
+        "data/articles/lin2021.pdf, dossier lin2021_extraction.md. The quotation below is verbatim in sec. 2.2 "
+        "of the print; the print says '1% acetic acid' and no more, so the w/v-versus-v/v ambiguity stands."),
+    "mp_holdout_glucose_asparagine_180C_30min_Chang2021": ("primary_source_pdf",
+        "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Lin, Chan, Kao & Sung 2021 (Polymers 13:1901), "
+        "data/articles/lin2021.pdf, dossier lin2021_extraction.md. The quotation below is verbatim in sec. 2.2 "
+        "of the print; the print says '1% acetic acid' and no more, so the w/v-versus-v/v ambiguity stands."),
+    "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021": ("primary_source_pdf",
+        "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Lin, Chan, Kao & Sung 2021 (Polymers 13:1901), "
+        "data/articles/lin2021.pdf, dossier lin2021_extraction.md. The distilled-water arm and its pH ladder "
+        "are verbatim in sec. 2.2 of the print: a positive finding of no buffer, confirmed."),
+    "mp_holdout_fructose_asparagine_180C_Lin2022": ("primary_source_pdf",
+        "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Lin, Ting, Ndraha, Hsiao & Sung 2022 (Polymers 14:1565), "
+        "data/articles/lin2022.pdf, dossier lin2022_extraction.md. The pH ladder and 'topped up with distilled "
+        "water to 100 mL' are verbatim in sec. 2.2 of the print: no buffer, confirmed."),
+    "mp_holdout_glucose_asparagine_180C_Ye2024": ("primary_source_pdf",
+        "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Ye et al. 2024 (Foods 13:2836), data/articles/ye2024.pdf, "
+        "dossier ye2024_extraction.md. The 0.1 M phosphate buffer at pH 6.86 is verbatim in sec. 2.2 of the print, "
+        "which still never states the reactant molarity."),
+    "external_validation_li_2026_spi_wg_hme_control": ("unknown",
+        "WAVE B36 (2026-09-11): THE SOURCE IS ON DISK -- Li, Dai, Mao, An, Bai & Kaur 2026 (Foods 15:912), "
+        "data/articles/li2026.pdf, dossier li2026_extraction.md -- AND THE PRINT DOES NOT STATE THE MEDIUM: sec. 2.3 "
+        "gives the blend ratio, moisture (about 57 %), screw speed, feed rate and the six zone temperatures, and no "
+        "pH or buffer for the extrusion blend. buffer_unknown stays, now because the paper is silent, not absent."),
+}
+
+
+# ---------------------------------------------------------------------------
+# The records above were written once (Amendment 9, 2026-09-04) and later waves edited SEVEN
+# bundles' buffer blocks in place rather than here: B34 (Steinhagen), B35 (liu_2023), the
+# Yiltirak primary reading (four bundles) and li_2026. Re-running this script on 2026-09-11
+# silently regressed all seven, which wave B36 caught before committing. The blocks as they
+# stand on disk are carried here verbatim, field by field, so that the script reproduces the
+# repository and ``--check`` reports drift instead of pretending there is none. Any future edit
+# to a buffer block belongs HERE, not in the bundle.
+# ---------------------------------------------------------------------------
+_EDITED_IN_PLACE: Dict[str, Dict[str, Any]] = {'external_validation_li_2026_spi_wg_hme_control': {'provenance_note': 'Li et al. 2026, Foods '
+                                                                       '15(5):912. SOURCE PAPER '
+                                                                       'NOT ON DISK and the repo '
+                                                                       'carries NO verbatim '
+                                                                       'methods quotation for the '
+                                                                       'medium. The scored system '
+                                                                       'is a 57 wt%-moisture '
+                                                                       'high-moisture-extrusion '
+                                                                       'melt, not an aqueous '
+                                                                       "solution, so 'buffer' may "
+                                                                       'not even be the right '
+                                                                       'question -- but that is a '
+                                                                       'reason to record UNKNOWN, '
+                                                                       'not a licence to record '
+                                                                       "'none'. The protocol's own "
+                                                                       "note is explicit: 'The "
+                                                                       'paper does not publish a '
+                                                                       'final-blend pH or '
+                                                                       "water-activity closure' "
+                                                                       '(data/protocols/external_validation/external_validation_li_2026_spi_wg_hme_control.yaml, '
+                                                                       'benchmark_alignment.notes). '
+                                                                       'ph_disagreement: the only '
+                                                                       'pH in the whole record is '
+                                                                       '7.0 for the WHEAT-GLUTEN '
+                                                                       'ENZYMATIC PRETREATMENT at '
+                                                                       '30 C -- a different unit '
+                                                                       'operation -- and it has '
+                                                                       'been transposed onto a 160 '
+                                                                       'C extrusion run. '
+                                                                       'conditions.ph = 7.0 is '
+                                                                       'unsourced AS AN EXTRUSION '
+                                                                       'CONDITION. Reported, not '
+                                                                       'edited.'},
+ 'external_validation_liu_2023_ppi_offnote_baseline': {'provenance_note': 'WAVE B35 (2026-09-11): '
+                                                                          'THE SOURCE IS ON DISK '
+                                                                          '-- '
+                                                                          'data/articles/liu2023.pdf, '
+                                                                          '717 KB, read '
+                                                                          '2026-09-04, as this '
+                                                                          "bundle's OWN vessel "
+                                                                          'note already said. This '
+                                                                          'note and that one '
+                                                                          'disagreed: the vessel '
+                                                                          'block was updated when '
+                                                                          'the paper arrived and '
+                                                                          'this one was not. ||| '
+                                                                          'PRIOR NOTE, SUPERSEDED '
+                                                                          'AND RETAINED AS THE '
+                                                                          'AUDIT RECORD, and its '
+                                                                          "'SOURCE PAPER NOT ON "
+                                                                          "DISK; second-hand' was "
+                                                                          'already false when the '
+                                                                          'vessel note was '
+                                                                          'written: Liu, '
+                                                                          'Cadwallader & Drake -- '
+                                                                          'thesis sec. 2.9 / Food '
+                                                                          'Chemistry 406: 134998, '
+                                                                          'as carried in '
+                                                                          'data/protocols/external_validation/external_validation_liu_2023_ppi_offnote_baseline.yaml '
+                                                                          '(matrix_format): '
+                                                                          "'commercial pea protein "
+                                                                          'rehydrated to 10% '
+                                                                          'solids (w/w) in '
+                                                                          "deionized water'. NO "
+                                                                          'BUFFER. The slurry is '
+                                                                          'never heated -- 40 C is '
+                                                                          'a headspace '
+                                                                          'equilibration, not a '
+                                                                          'reaction -- so the '
+                                                                          'buffer field is close '
+                                                                          'to inert here in any '
+                                                                          'case. SOURCE PAPER NOT '
+                                                                          'ON DISK; second-hand. '
+                                                                          'ph_disagreement: the '
+                                                                          'source reports the '
+                                                                          'rehydrated 10%-solids '
+                                                                          'slurries at pH 6.3-7.3 '
+                                                                          '(mean ~6.8) while '
+                                                                          'conditions.ph = 6.0. '
+                                                                          'The protocol YAML '
+                                                                          'already self-declares '
+                                                                          "this ('the proxied pH "
+                                                                          '6.0 is NOT the source '
+                                                                          'pH ... left unchanged '
+                                                                          'because editing an '
+                                                                          'executable condition '
+                                                                          'would change the '
+                                                                          "prediction'). Reported, "
+                                                                          'not edited.'},
+ 'mp_holdout_glucose_only_autoclave_121C_Steinhagen2021': {'ph_disagreement': 'conditions.ph = '
+                                                                              '4.36 sits below '
+                                                                              "Leitzen's printed "
+                                                                              '4.4-5.2 '
+                                                                              'post-autoclave '
+                                                                              'range (4.98 '
+                                                                              'before). Reported, '
+                                                                              'not edited.',
+                                                           'provenance_note': 'WAVE B34 '
+                                                                              '(2026-09-11): THE '
+                                                                              'SOURCE IS ON DISK '
+                                                                              'and the previous '
+                                                                              'note saying '
+                                                                              'otherwise was '
+                                                                              'wrong. Leitzen et '
+                                                                              'al. 2021 '
+                                                                              '(Pharmaceuticals '
+                                                                              '14:1121, '
+                                                                              'data/articles/Leitzen2021.pdf), '
+                                                                              'Methods: 10 % (w/v) '
+                                                                              'glucose in water in '
+                                                                              'PP bottles, '
+                                                                              'autoclaved; NO '
+                                                                              'BUFFER is added, '
+                                                                              'and the paper '
+                                                                              'measures the pH '
+                                                                              'itself -- 4.98 '
+                                                                              'before autoclaving '
+                                                                              'and 4.4-5.2 after '
+                                                                              '(scheme A). This '
+                                                                              "bundle's "
+                                                                              'conditions.ph of '
+                                                                              '4.36 is BELOW the '
+                                                                              'range the paper '
+                                                                              'prints and is left '
+                                                                              'unedited, because '
+                                                                              'changing an '
+                                                                              'executable '
+                                                                              'condition is '
+                                                                              'outside the licence '
+                                                                              'an extraction '
+                                                                              'correction carries; '
+                                                                              'it is reported here '
+                                                                              'instead. ||| PRIOR '
+                                                                              'NOTE, SUPERSEDED '
+                                                                              '2026-09-11 AND '
+                                                                              'RETAINED AS THE '
+                                                                              'AUDIT RECORD -- its '
+                                                                              'claim that the '
+                                                                              'source is not on '
+                                                                              'disk was false when '
+                                                                              'written and is '
+                                                                              'false now: '
+                                                                              'Steinhagen et al. '
+                                                                              '2021, '
+                                                                              'Pharmaceuticals '
+                                                                              '14(11):1121. SOURCE '
+                                                                              'PAPER NOT ON DISK '
+                                                                              'and the repo '
+                                                                              'carries no verbatim '
+                                                                              'statement of the '
+                                                                              "medium beyond '10% "
+                                                                              '(w/v) glucose '
+                                                                              'solution ... '
+                                                                              'autoclaved at 111, '
+                                                                              "116, and 121 degC'. "
+                                                                              'An unbuffered '
+                                                                              'infusion solution '
+                                                                              'is the LIKELY '
+                                                                              'reading and it is '
+                                                                              'exactly the reading '
+                                                                              'this field refuses '
+                                                                              'to record, because '
+                                                                              'likely is not '
+                                                                              'stated. '
+                                                                              'ph_disagreement, '
+                                                                              'AND IT IS THE ONE '
+                                                                              'THAT BRE'},
+ 'mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026': {'provenance_class': 'primary_source_pdf',
+                                                            'provenance_note': 'Yiltirak et al. '
+                                                                               '2026, Food Res. '
+                                                                               'Int. 231:118600, '
+                                                                               'read from '
+                                                                               'data/articles/Yiltirak2026.pdf '
+                                                                               'on 2026-09-06. '
+                                                                               'Sec. 2.1 (p. 2), '
+                                                                               'verbatim: '
+                                                                               "'Potassium "
+                                                                               'phosphate buffer '
+                                                                               '(0.5 M, pH 5.5) '
+                                                                               'was made using '
+                                                                               'potassium '
+                                                                               'dihydrogen '
+                                                                               'phosphate and '
+                                                                               'dipotassium '
+                                                                               'hydrogen phosphate '
+                                                                               "in tap water.' "
+                                                                               'Sec. 2.3 (pp. '
+                                                                               '2-3), verbatim: '
+                                                                               "'All buffer phases "
+                                                                               'were prepared by '
+                                                                               'dissolving ribose '
+                                                                               '(25 mM) and '
+                                                                               'cysteine (25 mM) '
+                                                                               'in potassium '
+                                                                               'phosphate buffer '
+                                                                               "(0.5 M, pH 5.5).' "
+                                                                               'The scored arm is '
+                                                                               'model (iv), '
+                                                                               "'buffer system "
+                                                                               "(100% buffer)' -- "
+                                                                               'oil-free and '
+                                                                               'emulsifier-free. '
+                                                                               'TWO CAVEATS THE '
+                                                                               'SOURCE ITSELF '
+                                                                               'RAISES, carried '
+                                                                               'rather than '
+                                                                               'dropped: the '
+                                                                               'buffer was made in '
+                                                                               'TAP WATER, not '
+                                                                               'deionised water, '
+                                                                               'so trace-metal '
+                                                                               'catalysis is '
+                                                                               'uncontrolled; and '
+                                                                               'the paper reports '
+                                                                               'pH before heating '
+                                                                               'only (0.5 M '
+                                                                               'phosphate; the '
+                                                                               'drift over the '
+                                                                               'cook is not '
+                                                                               'measured). Until '
+                                                                               '2026-09-06 this '
+                                                                               'block was a '
+                                                                               'second-hand '
+                                                                               'reading of the '
+                                                                               "repo's own "
+                                                                               'verbatim quote; '
+                                                                               'the PDF now on '
+                                                                               'disk confirms it '
+                                                                               'word for word.'},
+ 'mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026': {'provenance_class': 'primary_source_pdf',
+                                                            'provenance_note': 'Yiltirak et al. '
+                                                                               '2026, Food Res. '
+                                                                               'Int. 231:118600, '
+                                                                               'read from '
+                                                                               'data/articles/Yiltirak2026.pdf '
+                                                                               'on 2026-09-06. '
+                                                                               'Sec. 2.1 (p. 2), '
+                                                                               'verbatim: '
+                                                                               "'Potassium "
+                                                                               'phosphate buffer '
+                                                                               '(0.5 M, pH 5.5) '
+                                                                               'was made using '
+                                                                               'potassium '
+                                                                               'dihydrogen '
+                                                                               'phosphate and '
+                                                                               'dipotassium '
+                                                                               'hydrogen phosphate '
+                                                                               "in tap water.' "
+                                                                               'Sec. 2.3 (pp. '
+                                                                               '2-3), verbatim: '
+                                                                               "'All buffer phases "
+                                                                               'were prepared by '
+                                                                               'dissolving ribose '
+                                                                               '(25 mM) and '
+                                                                               'cysteine (25 mM) '
+                                                                               'in potassium '
+                                                                               'phosphate buffer '
+                                                                               "(0.5 M, pH 5.5).' "
+                                                                               'The scored arm is '
+                                                                               'model (iv), '
+                                                                               "'buffer system "
+                                                                               "(100% buffer)' -- "
+                                                                               'oil-free and '
+                                                                               'emulsifier-free. '
+                                                                               'TWO CAVEATS THE '
+                                                                               'SOURCE ITSELF '
+                                                                               'RAISES, carried '
+                                                                               'rather than '
+                                                                               'dropped: the '
+                                                                               'buffer was made in '
+                                                                               'TAP WATER, not '
+                                                                               'deionised water, '
+                                                                               'so trace-metal '
+                                                                               'catalysis is '
+                                                                               'uncontrolled; and '
+                                                                               'the paper reports '
+                                                                               'pH before heating '
+                                                                               'only (0.5 M '
+                                                                               'phosphate; the '
+                                                                               'drift over the '
+                                                                               'cook is not '
+                                                                               'measured). Until '
+                                                                               '2026-09-06 this '
+                                                                               'block was a '
+                                                                               'second-hand '
+                                                                               'reading of the '
+                                                                               "repo's own "
+                                                                               'verbatim quote; '
+                                                                               'the PDF now on '
+                                                                               'disk confirms it '
+                                                                               'word for word.'},
+ 'mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026': {'provenance_class': 'primary_source_pdf',
+                                                            'provenance_note': 'Yiltirak et al. '
+                                                                               '2026, Food Res. '
+                                                                               'Int. 231:118600, '
+                                                                               'read from '
+                                                                               'data/articles/Yiltirak2026.pdf '
+                                                                               'on 2026-09-06. '
+                                                                               'Sec. 2.1 (p. 2), '
+                                                                               'verbatim: '
+                                                                               "'Potassium "
+                                                                               'phosphate buffer '
+                                                                               '(0.5 M, pH 5.5) '
+                                                                               'was made using '
+                                                                               'potassium '
+                                                                               'dihydrogen '
+                                                                               'phosphate and '
+                                                                               'dipotassium '
+                                                                               'hydrogen phosphate '
+                                                                               "in tap water.' "
+                                                                               'Sec. 2.3 (pp. '
+                                                                               '2-3), verbatim: '
+                                                                               "'All buffer phases "
+                                                                               'were prepared by '
+                                                                               'dissolving ribose '
+                                                                               '(25 mM) and '
+                                                                               'cysteine (25 mM) '
+                                                                               'in potassium '
+                                                                               'phosphate buffer '
+                                                                               "(0.5 M, pH 5.5).' "
+                                                                               'The scored arm is '
+                                                                               'model (iv), '
+                                                                               "'buffer system "
+                                                                               "(100% buffer)' -- "
+                                                                               'oil-free and '
+                                                                               'emulsifier-free. '
+                                                                               'TWO CAVEATS THE '
+                                                                               'SOURCE ITSELF '
+                                                                               'RAISES, carried '
+                                                                               'rather than '
+                                                                               'dropped: the '
+                                                                               'buffer was made in '
+                                                                               'TAP WATER, not '
+                                                                               'deionised water, '
+                                                                               'so trace-metal '
+                                                                               'catalysis is '
+                                                                               'uncontrolled; and '
+                                                                               'the paper reports '
+                                                                               'pH before heating '
+                                                                               'only (0.5 M '
+                                                                               'phosphate; the '
+                                                                               'drift over the '
+                                                                               'cook is not '
+                                                                               'measured). Until '
+                                                                               '2026-09-06 this '
+                                                                               'block was a '
+                                                                               'second-hand '
+                                                                               'reading of the '
+                                                                               "repo's own "
+                                                                               'verbatim quote; '
+                                                                               'the PDF now on '
+                                                                               'disk confirms it '
+                                                                               'word for word.'},
+ 'mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026': {'provenance_class': 'primary_source_pdf',
+                                                               'provenance_note': 'Yiltirak et al. '
+                                                                                  '2026, Food Res. '
+                                                                                  'Int. '
+                                                                                  '231:118600, '
+                                                                                  'read from '
+                                                                                  'data/articles/Yiltirak2026.pdf '
+                                                                                  'on 2026-09-06. '
+                                                                                  'Sec. 2.1 (p. '
+                                                                                  '2), verbatim: '
+                                                                                  "'Potassium "
+                                                                                  'phosphate '
+                                                                                  'buffer (0.5 M, '
+                                                                                  'pH 5.5) was '
+                                                                                  'made using '
+                                                                                  'potassium '
+                                                                                  'dihydrogen '
+                                                                                  'phosphate and '
+                                                                                  'dipotassium '
+                                                                                  'hydrogen '
+                                                                                  'phosphate in '
+                                                                                  "tap water.' "
+                                                                                  'Sec. 2.3 (pp. '
+                                                                                  '2-3), verbatim: '
+                                                                                  "'All buffer "
+                                                                                  'phases were '
+                                                                                  'prepared by '
+                                                                                  'dissolving '
+                                                                                  'ribose (25 mM) '
+                                                                                  'and cysteine '
+                                                                                  '(25 mM) in '
+                                                                                  'potassium '
+                                                                                  'phosphate '
+                                                                                  'buffer (0.5 M, '
+                                                                                  "pH 5.5).' The "
+                                                                                  'scored arm is '
+                                                                                  'model (iv), '
+                                                                                  "'buffer system "
+                                                                                  "(100% buffer)' "
+                                                                                  '-- oil-free and '
+                                                                                  'emulsifier-free. '
+                                                                                  'TWO CAVEATS THE '
+                                                                                  'SOURCE ITSELF '
+                                                                                  'RAISES, carried '
+                                                                                  'rather than '
+                                                                                  'dropped: the '
+                                                                                  'buffer was made '
+                                                                                  'in TAP WATER, '
+                                                                                  'not deionised '
+                                                                                  'water, so '
+                                                                                  'trace-metal '
+                                                                                  'catalysis is '
+                                                                                  'uncontrolled; '
+                                                                                  'and the paper '
+                                                                                  'reports pH '
+                                                                                  'before heating '
+                                                                                  'only (0.5 M '
+                                                                                  'phosphate; the '
+                                                                                  'drift over the '
+                                                                                  'cook is not '
+                                                                                  'measured). '
+                                                                                  'Until '
+                                                                                  '2026-09-06 this '
+                                                                                  'block was a '
+                                                                                  'second-hand '
+                                                                                  'reading of the '
+                                                                                  "repo's own "
+                                                                                  'verbatim quote; '
+                                                                                  'the PDF now on '
+                                                                                  'disk confirms '
+                                                                                  'it word for '
+                                                                                  'word.'}}
+
+
+def current_record(key: str, record: Dict[str, Any]) -> Dict[str, Any]:
+    """The buffer block a bundle must carry: base record, in-place edits, then the B36 reading."""
+    out = dict(record)
+    out.update(_EDITED_IN_PLACE.get(key, {}))
+    hit = _B36_ON_DISK.get(key)
+    if hit is not None:
+        pclass, prefix = hit
+        out["provenance_class"] = pclass
+        out["provenance_note"] = prefix + _B36_SUPERSEDED + out["provenance_note"]
+    return out
+
+
 def bundle_paths():
     return sorted(BUNDLE_DIR.rglob("*.json"))
 
@@ -420,6 +905,7 @@ def main() -> int:
 
     summary = []
     baselines = {}
+    drift = []
     for path in paths:
         payload = json.loads(path.read_text())
         key = payload.get("benchmark_id") or path.stem
@@ -432,7 +918,10 @@ def main() -> int:
             )
         before = stable_hash_without_buffer(payload)
         conditions = payload.setdefault("conditions", {})
-        conditions["buffer"] = dict(record)
+        wanted = current_record(key, record)
+        if conditions.get("buffer") != wanted:
+            drift.append(key)
+        conditions["buffer"] = wanted
         after = stable_hash_without_buffer(payload)
         if before != after:
             raise SystemExit(
@@ -455,12 +944,13 @@ def main() -> int:
         print(f"{key[:62]:62s} {species:22s} "
               f"{'--' if molarity is None else molarity:>7} "
               f" {klass}{'  [pH DISAGREEMENT]' if disagreement else ''}")
-    n_unknown = sum(1 for r in BUFFER_RECORDS.values()
+    current = {k: current_record(k, r) for k, r in BUFFER_RECORDS.items()}
+    n_unknown = sum(1 for r in current.values()
                     if r["species"] == "buffer_unknown")
-    n_none = sum(1 for r in BUFFER_RECORDS.values() if r["species"] == "none")
-    n_primary = sum(1 for r in BUFFER_RECORDS.values()
+    n_none = sum(1 for r in current.values() if r["species"] == "none")
+    n_primary = sum(1 for r in current.values()
                     if r["provenance_class"] == "primary_source_pdf")
-    n_disagree = sum(1 for r in BUFFER_RECORDS.values() if "ph_disagreement" in r)
+    n_disagree = sum(1 for r in current.values() if "ph_disagreement" in r)
     print(f"\n21 bundles: {n_primary} from a PDF on disk, "
           f"{21 - n_primary - n_unknown} from a repo verbatim quotation, "
           f"{n_unknown} buffer_unknown. "
@@ -468,7 +958,10 @@ def main() -> int:
           f"{n_disagree} carry a pH disagreement with their own source "
           f"(reported, not edited).")
     if args.check:
-        print("--check: nothing was written.")
+        if drift:
+            print("--check: buffer blocks DRIFT from this script on: " + ", ".join(drift))
+            return 1
+        print("--check: buffer blocks current on every bundle; nothing was written.")
     return 0
 
 
