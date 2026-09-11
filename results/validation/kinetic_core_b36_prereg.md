@@ -16,7 +16,7 @@ source was not on disk and gave the owner nine DOIs. The owner downloaded seven 
 | `data/articles/koelsch1991.pdf` | Koelsch, Downes & Labuza 1991, J. Food Sci. 56:816 | none (a lipid-rate candidate named by the search) |
 
 Three named sources did **not** arrive and their bundles keep their "not on disk" notes, which are
-true: Zhang et al. 2021 (Food Sci. Nutr. 9:290, the aqueous 3-DG/3,4-DGE time courses B34 asked for),
+true: Zhang et al. 2021 (Food Sci. Nutr. 9:290, the aqueous 3-DG/3,4-DGE time courses B34 asked for) **[WRONG -- see the correction at the end of §5: it has been on disk since 2026-09-07 as `zhang2020.pdf`]**,
 Schibilsky 2019 (TU Berlin dissertation, two hold-out bundles) and Hernandez et al. 2023 (Molecules
 28:3151, the PBMA identity row).
 
@@ -128,4 +128,16 @@ bundle.
 **What the seven papers did not give.** No rate, no barrier, no time course usable by the trunk:
 Koelsch 1991 is one temperature; the Lin and Ye papers keep their time courses in figures; Ma 2024's
 acrylamide is bars. The reading list's top item, Zhang 2021 (doi 10.1002/fsn3.1995), did not arrive
-and remains the one download that could move a constant.
+and remains the one download that could move a constant. **[WRONG, corrected below.]**
+
+**Correction, 2026-09-11, same day.** CORRECTION 2026-09-11 (same day, on the owner's word): THIS PAPER HAS BEEN ON DISK SINCE 2026-09-07 as `data/articles/zhang2020.pdf`, dossier `zhang2020_extraction.md` (the file is named by its received date, the venue year is 2021), and the audit matched it by year and missed it -- the same error B34 found on the Steinhagen row. The dossier already records that its absolute levels do not mass-balance and that only orderings and time shapes are used (directional claim DIC-01). So the claim that it "did not arrive" was false twice over: it had arrived four days earlier and had already been read. What it can give the aqueous ask is not a rate but a within-study ratio, and it was probed the same day (the engine on 0.3 M glucose in water, pH 6.5, 6 h, the DIC-01 pot; nothing fitted, nothing changed):
+
+| T (°C) | model 3-DG (µg/L) | model 3,4-DDG (µg/L) | model ratio 3,4-DDG / 3-DG | Zhang 2021 Table 1, 6 h, same ratio | model ÷ paper |
+|---:|---:|---:|---:|---:|---:|
+| 90 | 5264 | 106 | 0.020 | 0.212 | 0.095 |
+| 95 | 7062 | 168 | 0.024 | 0.231 | 0.103 |
+| 100 | 9298 | 260 | 0.028 | 0.241 | 0.116 |
+| 105 | 11928 | 391 | 0.033 | 0.259 | 0.126 |
+| 110 | 14659 | 560 | 0.038 | 0.277 | 0.138 |
+
+The paper's ratio is unit-free: both quinoxalines come from one derivatisation and one LC-MS/MS run, so the calibration error that breaks its absolute levels cancels if it is common to the two, which is the assumption this ratio rests on. Read that way, **a second aqueous laboratory says the same thing B34 found on Leitzen 2021: the model's 3-deoxyglucosone → 3,4-dideoxyglucosone step is too slow — 7–10× at 90–110 °C over 6 h here, about 30× at 121 °C over 18 min there** (where 3-DG itself is right to 11 %). The temperature trend disagrees too: the paper's ratio rises 1.3× from 90 to 110 °C, the model's 1.9×. Under the owner's rule a within-study ratio is FIT evidence, so the next wave is a refit of `k_tdg_ddg` (and its barrier) against these two ratios and the Leitzen hold-out, pre-registered before any constant moves. Not done here.

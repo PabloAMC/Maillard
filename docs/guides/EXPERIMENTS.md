@@ -213,12 +213,11 @@ it dry — a freeze-dried glucose melt and a roasted hazelnut. Two laboratories 
 other in the same matrix is not a check; it is the same experiment twice. One aqueous determination
 would settle it, and it is the cheapest number on this page.
 
-A candidate exists and is open access, not yet on this disk (asked for on 2026-09-11; it was not among the seven papers that arrived that day): Zhang, Sun, Pu, Zhang, Sun & Zhao 2021,
+A candidate exists and **is on this disk** — `data/articles/zhang2020.pdf`, read on 2026-09-07 — which this page wrongly called "not yet on this disk" until the owner pointed at the file on 2026-09-11 (the file is named by its received date; the venue year is 2021): Zhang, Sun, Pu, Zhang, Sun & Zhao 2021,
 *Food Science & Nutrition* 9:290–302 (doi 10.1002/fsn3.1995) heat 0.3 M glucose **in water, alone and
 with glutamic acid, at 90–110 °C for 0–6 h** and quantify 3-deoxyglucosone, 1-deoxyglucosone,
 **3,4-dideoxyglucosone**, glucosone, glyoxal, methylglyoxal and diacetyl, with zero-order formation
-constants printed per temperature. It measures the very intermediate this model loses; whether its
-time courses support a 3-DG → 3,4-DGE rate is the first thing to check once it is read.
+constants printed per temperature. It measures the very intermediate this model loses. Its dossier's verdict, written on 2026-09-07: the paper's absolute levels do not mass-balance against its own glucose loss, by orders of magnitude, so no LEVEL can be taken from it. What survives a common calibration error is a **within-study ratio**, and the 3,4-dideoxyglucosone to 3-deoxyglucosone ratio it prints is the one quantity that bears on the ask; see the B36 pre-registration's correction note for what the model predicts against it.
 
 **Numbers behind figures.** Two published data sets that bear directly on the thiol problem exist only
 as figures. Their authors' underlying numbers would give that step its first data from a third
