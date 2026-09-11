@@ -1570,3 +1570,21 @@ ran.
 7. **THE HEADLINE.** Within 3× 10/45 → 12/45; out-of-sample 9/44 → 11/44. Both new hits are HMF rows
    (Schibilsky pH 8, Chang water) that the formic-acid term brought in; no row left. Re-pinned in
    `tests/scientific/test_core_headline_guards.py` with this amendment as the reason.
+
+## Amendment 42 — 2026-09-11 (Wave B43, a review corroborates a refused structure)
+
+1. **NOTHING IS FITTED AND NO REFUSAL IS LIFTED.** Luo et al. 2024 is a comprehensive review with no
+   rate constant, no activation energy, no time course and no temperature series anywhere in it.
+2. **WHAT A REVIEW MAY DO HERE.** It may corroborate that a mechanism is drawn by the literature, and
+   that is recorded in the reaction-rules layer and in a parameter's dossier anchor. It may not
+   support a rate, a barrier or a yield, and nothing in this wave does.
+3. **THE ONE CORROBORATION.** Wave B27's dicarbonyl-redox branch (`k_redox_mp3p`) was built from one
+   laboratory's mechanism figure and gated before the fit. This review states the general rule
+   independently. B27's verdict stands: it was refused because the flux is under 1 % of the oxidant
+   in the pots that carry air and needs its physical ceiling in the pots that do not — a question
+   about size, which a review cannot answer.
+4. **A CAVEAT MADE SHARPER, NOT A NEW ONE.** The review's metal-catalysis pathway was already on
+   disk as kinetics (`bagiyan2004_extraction.md`) and already refused: one temperature, and authors
+   who disclaim a quantitative rate law. What is new is the connection to a caveat this repository
+   already carried in a buffer note — one fit-corpus buffer was made in tap water — and the
+   consequence is a chelator arm on the thiol experiment, not a term in the model.

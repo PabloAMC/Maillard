@@ -249,7 +249,9 @@ pH 5) in 20 mL vials with 5 mL of liquid, volumes written down. Two temperatures
 12 hours and 140 °C for 5 to 120 minutes, one vial per time point, three replicates. Beside it, the
 same buffer with MFT alone and FFT alone at 1 mg/L on the same grid, so removal is measured with
 nothing forming. Measure the thiols by stable-isotope dilution and their disulfides in the same run,
-plus the sugar and cysteine left and the pH. One arm at 100 °C under nitrogen. About 130 vials and two
+plus the sugar and cysteine left and the pH. One arm at 100 °C under nitrogen, and one with a metal chelator: a review of
+these mechanisms names trace copper and iron among the main accelerators of thiol oxidation, and one
+buffer in this model's own fit corpus was made in tap water. About 130 vials and two
 weeks of GC-MS. The model as shipped predicts that the fed thiol decays to zero and that the pot peaks
 after an hour. If instead the thiol levels off with its disulfide and the pot keeps rising, the
 removal step is reversible. Either result decides the next version.

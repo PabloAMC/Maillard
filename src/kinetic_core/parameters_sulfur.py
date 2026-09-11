@@ -1743,7 +1743,12 @@ def dicarbonyl_redox_parameters(k_redox: float = 0.0, ea_kj_mol: Optional[float]
                            "reaction between thiols and alpha-dicarbonyl compounds'): aerial oxidation is unfavourable at these "
                            "H2S levels, and the dicarbonyl reduced to a hydroxyalkanone on the way to the mercaptoketone is the "
                            "redox system that makes the disulfides"),
-            dossier_anchor="whitfield1999_extraction.md; results/validation/kinetic_core_b27_prereg.md sec. 1, 3, 9, 10",
+            dossier_anchor=("whitfield1999_extraction.md; results/validation/kinetic_core_b27_prereg.md sec. 1, 3, 9, 10; "
+                            "luo2024_extraction.md sec. 2 -- B43 (2026-09-11) CORROBORATION OF THE STRUCTURE ONLY: a review "
+                            "states the general rule verbatim, 'The anaerobic oxidation of thiols mainly involves dicarbonyl "
+                            "compounds as oxidants ... carbonyl groups are reduced to hydroxyl groups'. The arrow is drawn by "
+                            "a second, independent source; the RATE is still unmeasured and B27's refusal is unaltered, "
+                            "because that wave was gated on the size of the flux and not on whether the step exists"),
             conditions="aqueous, pH 4.5-7, 100-145 C; the branch shares r_nf_mp3p's barrier and neutral-H2S pH factor",
             ph=4.5, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
             channel="fitted_redox_yield", ph_factor_kind="neutral_h2s",

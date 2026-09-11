@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "ada36ba2493d0360118374214c8a4b37721cd797",
-      "short": "ada36ba2",
+      "commit": "65504a77a585c46623fa9e8c983b341d1b964e62",
+      "short": "65504a77",
       "branch": "reactions",
       "dirty": true
     },
@@ -139,11 +139,11 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "0524a61c002ff335bf82927e8794a4292e9c9e92ce3e95443e94ff3b4a482ab0"
+        "sha256": "7f27df647cd1d13d11a7b080f7fa4212111f80c9b09680e942a19f268d78fdca"
       },
       {
         "path": "data/lit/reaction_rules.yml",
-        "sha256": "1a4d1eb49170a78de1c7588c3eb39659f95e7094063aefd4b555aac580a4de6b"
+        "sha256": "07a6da1222d25f00ede5465948696aa9c32ebd8b10a58092a71613db4efd3c62"
       },
       {
         "path": "data/species/desirable_targets.yml",
@@ -263,7 +263,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "e82f86cf6b71161d0d2c3f73150f3b4db01776619409b441822c34de4635298f"
+        "sha256": "b7434e5da2212dc05e7919afee3d35735a24bd9d0acc319e0a1ff62f0a9a23c4"
       },
       {
         "path": "src/kinetic_core/species.py",

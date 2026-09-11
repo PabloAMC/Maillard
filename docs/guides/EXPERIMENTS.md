@@ -51,7 +51,10 @@ needs and almost no published pot reports it. Two temperatures: 100 °C from 0.5
 with 2-methyl-3-furanthiol alone and 2-furfurylthiol alone at 1 mg/L on the same grid, so removal is
 measured with nothing forming. Measure the two thiols by stable-isotope dilution **and their
 disulfides in the same run**, plus residual sugar, residual cysteine and the final pH. One arm at
-100 °C under nitrogen.
+100 °C under nitrogen, and one arm with a metal chelator: a 2024 review of these mechanisms puts
+trace copper and iron among the main accelerators of thiol oxidation, one buffer in this model's own
+fit corpus was made in tap water, and trace-metal content is exactly the kind of difference between
+laboratories that no rate constant can absorb.
 
 **Add one arm the earlier version of this list did not have.** A fifth set of vials at 140 °C with
 the fed thiol plus 2,3-pentanedione at 10 mmol/L. That single addition tests the mechanism the fifth
