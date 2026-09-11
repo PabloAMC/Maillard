@@ -209,6 +209,19 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     # B13 (2026-09-07): the dicarbonyl trio
     "glyoxal": "GO",
     "glucosone": "G",
+    # B37 (2026-09-11): the 3-deoxy series becomes CHARGEABLE, so that a fed-dicarbonyl pot can be
+    # expressed at all. B13 made glyoxal, glucosone, diacetyl and methylglyoxal chargeable and left
+    # these three as targets only; Mittelmaier et al. 2011 charge pure 3-DG at 120 C and follow
+    # 3,4-DGE, which is the experiment docs/guides/EXPERIMENTS.md asks for by name and which no
+    # spec could express until now. INERT: no bundle, benchmark, directional claim or fit row
+    # charges any of these three (tests/unit/test_kinetic_core_b37.py holds that).
+    "3-deoxyglucosone": "TDG",
+    "3-dg": "TDG",
+    "3,4-dideoxyglucosone": "DDG",
+    "3,4-dideoxyglucosone-3-ene": "DDG",
+    "3,4-dge": "DDG",
+    "1-deoxyglucosone": "ODG",
+    "1-dg": "ODG",
     "diacetyl": "DA",
     "2,3-butanedione": "DA",
     "butane-2,3-dione": "DA",

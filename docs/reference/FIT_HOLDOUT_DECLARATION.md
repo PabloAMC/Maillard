@@ -1478,3 +1478,43 @@ ran.
 6. **NAMED, NOT ACTED ON.** Ma 2024's unextruded control carries ≈38 µg/kg acrylamide (a figure
    bar). Declaring it under Amendment 37 would need a printed number, and on a fit row that scores
    4 247× low it changes no verdict. Recorded in the dossier and in `docs/guides/EXPERIMENTS.md`.
+
+## Amendment 39 — 2026-09-11 (Wave B37, sixteen sources arrive)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** No constant moved, no fit row's value or conditions changed,
+   no target was added. Sixteen PDFs arrived against the B36 reading list; each has a dossier, and
+   `results/validation/kinetic_core_b37_prereg.md` records what each can and cannot support, with
+   four predictions written before any probe ran.
+2. **ONE CODE CHANGE, AND IT IS INERT.** 3-deoxyglucosone, 3,4-dideoxyglucosone and
+   1-deoxyglucosone become chargeable precursors. Wave B13 made the other four dicarbonyls
+   chargeable and left these three as targets only, which meant the fed-intermediate experiment
+   `docs/guides/EXPERIMENTS.md` asks for by name could not be written as a spec at all. No bundle,
+   benchmark, directional claim or fit row charges any of the three, and
+   `tests/unit/test_kinetic_core_b37.py` holds that they stay inert.
+3. **A PROBE REFUTED ITS OWN PREDICTION, AND THE REFUTATION IS THE RESULT.** I predicted the model
+   would produce 3,4-dideoxyglucosone monotonically from a fed 3-deoxyglucosone charge. It peaks at
+   ten minutes and collapses to two thousandths of a percent of the charge by two hours, where the
+   source's pot still holds both compounds. The deficit this repository has been calling a slow
+   `k_tdg_ddg` is, on the evidence of a pot charged with the intermediate itself, **a
+   too-short lifetime for the whole 3-deoxy pool**. Recorded before any constant is touched.
+4. **WHAT THIS MEANS FOR THE NEXT FIT.** Three measurements of the same gap now exist and they
+   disagree in a direction: 32× against Leitzen 2021 (glucose, 121 °C), 7–10× against Zhang 2021
+   (glucose, 90–110 °C), 5.05× against Mittelmaier 2011 (fed 3-DG, 120 °C). **The closer the pot is
+   to the step, the smaller the miss.** A refit that moves one rate constant to close the largest of
+   the three would be fitting an upstream error into a downstream barrier.
+5. **THE LIPID LANE'S TEMPERATURE TERM IS NOW MEASURED, TWICE, AND THE TWO DO NOT AGREE.** Bulk seed
+   oil gives 113.8–122.2 kJ/mol for hexanal specifically; a moist food matrix gives 61–65 kJ/mol.
+   The model's constant Q10 sits above every wet-matrix measurement at every temperature, and its
+   implied barrier nearly doubles across its own operating range depending on the reference
+   temperature it is read at. **No constant moved here**: replacing a constant Q10 with a barrier
+   would move every lipid row in the panel and needs a frozen before/after pair and a ship rule,
+   which is the next wave, not this one.
+6. **ONE PROVENANCE CORRECTION.** `resconi_2023_pbma_beef_identity_benchmark` said its source was not
+   on disk; it is. Corrected through the generator, the prior claim retained and labelled. The print
+   gives a skillet cook with no stated time, which is **not** the bundle's 150 °C / 60 min — that
+   stays a proxy for the unspecified commercial process, so the paper being on disk makes the
+   citation first-hand without making the pot chargeable.
+7. **TWO DOI CORRECTIONS MADE AGAINST MY OWN DRAFT.** A first draft of the Tazi dossier recorded
+   `10.1016/j.foodchem.2009.01.018`, reconstructed from the article's PII rather than read; the
+   printed DOI is `.017`. The Frankel 1993 scan prints no DOI at all, and its identifier is recorded
+   as second-hand. Both are noted in the dossiers themselves.

@@ -43,8 +43,8 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "e0701ecef6ce55ae082384ee0ae33cbf768e35ca",
-      "short": "e0701ece",
+      "commit": "c8b7a843f08b761444e581fed9b88edbe3253df9",
+      "short": "c8b7a843",
       "branch": "reactions",
       "dirty": true
     },
@@ -124,7 +124,7 @@
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
-        "sha256": "d4595d306169a2a81a2981f0dfdd0460b8d0025bd4963d45c753c459d05ba7d7"
+        "sha256": "897fdf00a4672845f63acaddb2ba84a5238cd12d5663986cdc2cff9830252b68"
       },
       {
         "path": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
@@ -471,7 +471,7 @@
       "total": 31
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 10.3
+    "wall_seconds": 9.9
   },
   "benchmarks": [
     {

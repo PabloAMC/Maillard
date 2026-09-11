@@ -197,11 +197,25 @@ _TRIKUSUMA_NOTE = (
     "continuous closed process with no fixed headspace (continuous_process); dissolved oxygen in the "
     "beverage is not reported. Water source for the 3 % w/w isolate beverage not stated."
 )
-_RESCONI_NOTE = (
+_RESCONI_NOTE_PRIOR = (
     "Hernandez, Woerner, Brooks & Legako 2023, Molecules 28:3151: a COMMERCIAL plant-based meat analogue "
     "cooked as a reference product; the bundle's 150 C / 60 min is a proxy for an unspecified commercial "
     "process (process_metadata.extrusion_history = commercial_pbma_unknown). No vessel to record "
     "(not_applicable). SOURCE NOT ON DISK."
+)
+_RESCONI_NOTE = (
+    "WAVE B37 (2026-09-11): THE SOURCE IS ON DISK -- Hernandez, Woerner, Brooks & Legako 2023 "
+    "(Molecules 28:3151), data/articles/hernandez2023.pdf, dossier hernandez2023_extraction.md. Read from "
+    "the print, sec. 4.2: the patties this paper cooked were done on 'an enamel-lined cast-iron skillet "
+    "heated to a surface temperature of 200 +/- 10 degC', 'cooked to an internal temperature of 71 degC' "
+    "and 'flipped at 35 degC', 150 g each. THE PAPER PRINTS NO COOK TIME. That skillet cook is NOT this "
+    "bundle's 150 C / 60 min, which remains a proxy for the unspecified commercial process that made the "
+    "product before it reached the pan -- the print makes the citation first-hand without making the pot "
+    "chargeable. Its furfural values are confirmed against Table 3 (Beyond Meat 987.41, Impossible 64.71, "
+    "third retail brand 1093.54 ng/g; the dispersion printed is the LARGEST standard error of the least "
+    "squares means, one pooled figure per compound, not this column's SD). No vessel to record "
+    "(not_applicable)."
+    + _B36_SUPERSEDED + _RESCONI_NOTE_PRIOR
 )
 _BI_RAW_NOTE = (
     "Bi et al. 2020, JAFC 68:2718, read from data/articles/bi2020.pdf on 2026-09-04: this bundle is RAW "

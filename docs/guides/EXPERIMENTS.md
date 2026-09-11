@@ -206,8 +206,16 @@ on this disk already, the model's 3-deoxyglucosone in an amine-free pot is right
 methylglyoxal to **28 %**. What is wrong is the step immediately after — 3-deoxyglucosone to
 3,4-dideoxyglucosone, **32× too slow**, with hydroxymethylfurfural 12× low downstream of it.
 
-So the ask is narrow and specific: **the rate of 3-deoxyglucosone → 3,4-dideoxyglucosone in water,
-at 100–140 °C and pH 4–7.** The model carries a value for it, and that value's interval was
+So the ask was narrow and specific: **the rate of 3-deoxyglucosone → 3,4-dideoxyglucosone in water,
+at 100–140 °C and pH 4–7.** **It arrived on 2026-09-11 and it changed the question.** Mittelmaier and
+colleagues heat *pure* 3-deoxyglucosone at 120 °C and pH 5 and follow the intermediate: it peaks at
+26.7 µM from a 200 µM charge, at thirty minutes. Run the same pot, this model peaks at 5.3 µM — five
+times low, the smallest of the three independent measurements of this gap — **but it peaks at ten
+minutes and is gone by sixty**, while the real pot still holds both compounds at two hours. The
+model's fault is not mainly that it makes too little of this intermediate. It is that it destroys the
+whole three-deoxy pool far too fast. The same paper shows why that is hard to fix by moving one
+number: the reactions run **both ways**, and a quarter of the fed compound has turned into a sugar
+epimer this model does not carry at all. So the ask has moved on, and it is no longer a rate: The model carries a value for it, and that value's interval was
 deliberately *not* widened because two laboratories agree on it to within 1.5×. Both of them measured
 it dry — a freeze-dried glucose melt and a roasted hazelnut. Two laboratories agreeing with each
 other in the same matrix is not a check; it is the same experiment twice. One aqueous determination
@@ -219,13 +227,32 @@ with glutamic acid, at 90–110 °C for 0–6 h** and quantify 3-deoxyglucosone,
 **3,4-dideoxyglucosone**, glucosone, glyoxal, methylglyoxal and diacetyl, with zero-order formation
 constants printed per temperature. It measures the very intermediate this model loses. Its dossier's verdict, written on 2026-09-07: the paper's absolute levels do not mass-balance against its own glucose loss, by orders of magnitude, so no LEVEL can be taken from it. What survives a common calibration error is a **within-study ratio**, and the 3,4-dideoxyglucosone to 3-deoxyglucosone ratio it prints is the one quantity that bears on the ask; see the B36 pre-registration's correction note for what the model predicts against it.
 
+**A reversible step and a missing epimer.** Does the sugar-dehydration step this model runs one way
+run backwards at cooking temperature, and where does 3-deoxygalactosone go? One laboratory says both
+directions are real. Nothing else on file speaks to it.
+
+**The lipid rate's temperature dependence — answered twice, and the two answers disagree.** This page
+used to ask for it. Two papers now supply it. In bulk seed oil, the barrier for making hexanal from an
+existing peroxide pool is about 114 to 122 kilojoules per mole between 130 and 160 °C. In a real nut
+paste between 60 and 130 °C it is 114 when the matrix is dry and falls to about 62 once it holds
+water. Those are not the same number, and the model currently bridges the gap with a single
+temperature factor that is above every wet-matrix measurement at every temperature, and whose implied
+barrier nearly doubles across the model's own operating range depending on where you read it. **The
+open question is now which of the two applies to a hot, wet plant protein** — and that is answerable
+with one experiment: hexanal against time at three temperatures in the same protein suspension.
+
 **Numbers behind figures.** Two published data sets that bear directly on the thiol problem exist only
 as figures. Their authors' underlying numbers would give that step its first data from a third
 laboratory.
 
-**One supplementary table.** The melanoidin series above exists in part already: a paper measures ten
-temperatures and prints only the two endpoints, with the rest in a supplementary file that is not
-publicly posted. Asking for it would supply most of experiment 5 for nothing.
+**Three supplementary tables.** The melanoidin series above exists in part already: a paper measures
+ten temperatures and prints only the two endpoints, with the rest in a supplementary file that is not
+publicly posted. Asking for it would supply most of experiment 5 for nothing. Two more joined the list
+on 2026-09-11, both of which would answer questions on this page outright. One holds the concentrations
+of the two meaty thiols and all three of their dimers in one pot across five reaction times; the
+published article prints only odour-activity ratios. The other holds a plant protein's volatiles at
+four temperatures with an unheated blank; the published article prints only the class totals. In both
+cases the experiment has been done and the numbers exist.
 
 ---
 

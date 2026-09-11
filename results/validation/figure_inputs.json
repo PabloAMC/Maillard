@@ -68,13 +68,13 @@
         "04_yiltirak_ladder.png": "376df2a20d865a3cd30dc9423bb8b8c684f64b2f17fb42ad39fb33f752435c30",
         "05_ttca_decay.png": "14da22a3c177b07dc4c2c01a0f54741a120c8253f107087c715b642777cd9444",
         "06_dicarbonyls_water.png": "560b365a1df7b1aba758f5f5e3c73af92489553f8166ac7c937b1ddad0c61a1c",
-        "07_literature_funnel.png": "adb283d2ebeeca3ee34e66f51470ff4dbde766c9a657df6a2c02dc4870dc2315",
+        "07_literature_funnel.png": "5a450393246c37a878b904c33d74bb934aacb26b29e9071343eea99661afb465",
         "08_path_scorecard.png": "bd200402a94c4f2309816705c651ae20f42d6bbe0fb2f68557f193199cb8cfe4",
         "09_repository_flow.png": "ce1998b349e78c129def870d52cc2ae2cd4a53b323cd18083b2a42098caf3e09",
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "a4da0696c832f3bcd4bd87ef2d52c2af883b29b3e81427a9bd5bd36cceecd15c",
+        "17_papers_by_weight.png": "4116fa5a5f62c960b1057456ef2bf8ad8334421375efdf4fd2905375ddb339f2",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "39c35a1410f6277837152e63d63cbed71162d5b1290c94d5c217d33485177f5f",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "e0701ecef6ce55ae082384ee0ae33cbf768e35ca",
-      "short": "e0701ece",
+      "commit": "c8b7a843f08b761444e581fed9b88edbe3253df9",
+      "short": "c8b7a843",
       "branch": "reactions",
       "dirty": true
     },
@@ -139,7 +139,7 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "17b805d0e173252729ec42f97a2c5ba0cc7144bfe1cf1520b9490ae0f66ad3ac"
+        "sha256": "6a675473566b170b6131e15692cf438f3d58b8a61bd1e8e0810fde00922d53eb"
       },
       {
         "path": "data/lit/reaction_rules.yml",
@@ -167,15 +167,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "c25e66aca3239f5022c309a3cf64cf58a33787b439628f070cf7b500a2b6556c"
+        "sha256": "a6e301446ab24619946cb99bd6493c5d695d1f92eca8792d13ddadcf1577e9ef"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "5d97a07eb6d78b02a4ba37d3736f6715d45c17503dce192bb4ad27df800510c7"
+        "sha256": "0905b06c330e5547a861298f78493c98d84f9392f263e1f3ea359ceb3133a643"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "67e6cc0f5dabeec951ee9b9b973e3a0c4e40947b5b7d279cc2f5c7c5e7fee5a1"
+        "sha256": "6fe334804fc756a83d733adde232145b3be9f1e70711443aae78903faac0e709"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -311,7 +311,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/07_literature_funnel.png",
-        "sha256": "adb283d2ebeeca3ee34e66f51470ff4dbde766c9a657df6a2c02dc4870dc2315"
+        "sha256": "5a450393246c37a878b904c33d74bb934aacb26b29e9071343eea99661afb465"
       },
       {
         "path": "docs/assets/thiol_sink/08_path_scorecard.png",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "a4da0696c832f3bcd4bd87ef2d52c2af883b29b3e81427a9bd5bd36cceecd15c"
+        "sha256": "4116fa5a5f62c960b1057456ef2bf8ad8334421375efdf4fd2905375ddb339f2"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
