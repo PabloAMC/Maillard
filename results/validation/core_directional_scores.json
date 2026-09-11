@@ -43,8 +43,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "fb0dbd304252d7823d1844d7ddda7486ee6878c5",
-      "short": "fb0dbd30",
+      "commit": "458733f493050a7f8a841f4eb908e6452b08bee8",
+      "short": "458733f4",
       "branch": "reactions",
       "dirty": true
     },
@@ -500,7 +500,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 48.6
+    "wall_seconds": 50.1
   },
   "claims": [
     {

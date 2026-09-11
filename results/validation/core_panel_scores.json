@@ -43,10 +43,10 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "fb0dbd304252d7823d1844d7ddda7486ee6878c5",
-      "short": "fb0dbd30",
+      "commit": "458733f493050a7f8a841f4eb908e6452b08bee8",
+      "short": "458733f4",
       "branch": "reactions",
-      "dirty": true
+      "dirty": false
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -72,7 +72,7 @@
       },
       {
         "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
-        "sha256": "dd305a27e7446306f1a832e8d4c4282c95543299bbf21ea7e7569185a623c850"
+        "sha256": "6c7848dd940ff1d1f09d8c84b60ba99e4ecbed2427b17c9ea5ab752eda736696"
       },
       {
         "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
@@ -188,19 +188,19 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
-        "sha256": "2ec1bc44f15f3523bff139164c0b3cd94d6e8b3e51c820fbee8e7685ae3a19f8"
+        "sha256": "5585d1fe4457ec13ae4d1e8c64a933c82c4deb5f0b0aefe6b185e851468a1b29"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json",
-        "sha256": "d6379ca0eb39fd844e6cd40aad744d31e027bf76f030ceac7dccf87a96e3d33c"
+        "sha256": "ef2325e087b44e398ac5f997ef6b09ba4294040706908224d822fd3bc2c3c005"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json",
-        "sha256": "1e1ede1bd7ad93aafb3bf3d5b810c074622185328ac1609ae395e10129801594"
+        "sha256": "fe7e97331a2ba871331fac9b6776678d7cb0f33efb34c502b7a95e48aea1bf47"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json",
-        "sha256": "00daaa8e537c8f1fec02d7fb670b9aa8bcf8e9f267f562d8d0c278360420d0ea"
+        "sha256": "83f849c1a202104e02c207c8fc4312fed65d48f796935d57bccef7335e46c0db"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
@@ -471,7 +471,7 @@
       "total": 31
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 10.0
+    "wall_seconds": 10.4
   },
   "benchmarks": [
     {
