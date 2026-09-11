@@ -1,0 +1,802 @@
+{
+  "artifact": "lane_offset_diagnostic",
+  "lanes": {
+    "acrylamide": {
+      "correlations": {
+        "ph": {
+          "distinct_levels": 3,
+          "n": 11,
+          "rho": -0.09534625892455924,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": null
+        },
+        "temp_C": {
+          "distinct_levels": 2,
+          "n": 11,
+          "rho": 0.5196152422706632,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": "only 2 distinct value(s) of temp_C in this lane: a rank correlation here is a 2-group comparison, not a trend"
+        },
+        "time_min": {
+          "distinct_levels": 4,
+          "n": 11,
+          "rho": -0.1271701568915748,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": null
+        },
+        "water_activity": {
+          "distinct_levels": 3,
+          "n": 11,
+          "rho": 0.5860942701532694,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": null
+        }
+      },
+      "dex_spread": 6.3225836848850445,
+      "distinct_pots": 7,
+      "median_absolute_dex": 0.795589184875876,
+      "median_signed_dex": -0.43834535257645735,
+      "n": 11,
+      "reads": "low",
+      "rows_reading_high": 3,
+      "sign_consistency": 0.7272727272727273,
+      "systematic": false,
+      "worst_row": "acrylamide_spi_extrusion_130C_ACSRef3",
+      "worst_row_dex": 3.9836979593663417
+    },
+    "lipid": {
+      "correlations": {
+        "ph": {
+          "distinct_levels": 3,
+          "n": 8,
+          "rho": 0.8085428229838166,
+          "tracks": true,
+          "tracks_with_design_support": true,
+          "why_not": null
+        },
+        "temp_C": {
+          "distinct_levels": 2,
+          "n": 8,
+          "rho": -0.8728715609439696,
+          "tracks": true,
+          "tracks_with_design_support": false,
+          "why_not": "only 2 distinct value(s) of temp_C in this lane: a rank correlation here is a 2-group comparison, not a trend"
+        },
+        "time_min": {
+          "distinct_levels": 3,
+          "n": 8,
+          "rho": -0.8085428229838166,
+          "tracks": true,
+          "tracks_with_design_support": true,
+          "why_not": null
+        },
+        "water_activity": {
+          "distinct_levels": 1,
+          "n": 4,
+          "rho": null,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": "only 1 distinct value(s) of water_activity in this lane: a rank correlation here is a 1-group comparison, not a trend"
+        }
+      },
+      "dex_spread": 2.7723995599610562,
+      "distinct_pots": 3,
+      "median_absolute_dex": 0.4481421197003724,
+      "median_signed_dex": -0.4481421197003724,
+      "n": 8,
+      "reads": "low",
+      "rows_reading_high": 1,
+      "sign_consistency": 0.875,
+      "systematic": true,
+      "worst_row": "external_validation_li_2026_spi_wg_hme_control",
+      "worst_row_dex": 2.5630166047038854
+    },
+    "sulfur": {
+      "correlations": {
+        "ph": {
+          "distinct_levels": 5,
+          "n": 19,
+          "rho": 0.13312838025569387,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": null
+        },
+        "temp_C": {
+          "distinct_levels": 6,
+          "n": 19,
+          "rho": -0.8188899172408775,
+          "tracks": true,
+          "tracks_with_design_support": true,
+          "why_not": null
+        },
+        "time_min": {
+          "distinct_levels": 5,
+          "n": 19,
+          "rho": 0.696260353934742,
+          "tracks": true,
+          "tracks_with_design_support": true,
+          "why_not": null
+        },
+        "water_activity": {
+          "distinct_levels": 3,
+          "n": 19,
+          "rho": 0.14150556524244984,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": null
+        }
+      },
+      "dex_spread": 4.825473351978777,
+      "distinct_pots": 11,
+      "median_absolute_dex": 1.4690904569076537,
+      "median_signed_dex": 0.8366289800411992,
+      "n": 19,
+      "reads": "high",
+      "rows_reading_high": 15,
+      "sign_consistency": 0.7894736842105263,
+      "systematic": true,
+      "worst_row": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "worst_row_dex": 2.6783015509011245
+    },
+    "trunk": {
+      "correlations": {
+        "ph": {
+          "distinct_levels": 1,
+          "n": 6,
+          "rho": null,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": "only 1 distinct value(s) of ph in this lane: a rank correlation here is a 1-group comparison, not a trend"
+        },
+        "temp_C": {
+          "distinct_levels": 1,
+          "n": 6,
+          "rho": null,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": "only 1 distinct value(s) of temp_C in this lane: a rank correlation here is a 1-group comparison, not a trend"
+        },
+        "time_min": {
+          "distinct_levels": 1,
+          "n": 6,
+          "rho": null,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": "only 1 distinct value(s) of time_min in this lane: a rank correlation here is a 1-group comparison, not a trend"
+        },
+        "water_activity": {
+          "distinct_levels": 1,
+          "n": 6,
+          "rho": null,
+          "tracks": false,
+          "tracks_with_design_support": false,
+          "why_not": "only 1 distinct value(s) of water_activity in this lane: a rank correlation here is a 1-group comparison, not a trend"
+        }
+      },
+      "dex_spread": 1.9035280064755544,
+      "distinct_pots": 1,
+      "median_absolute_dex": 0.8951166139313784,
+      "median_signed_dex": -0.8951166139313784,
+      "n": 6,
+      "reads": "low",
+      "rows_reading_high": 1,
+      "sign_consistency": 0.8333333333333334,
+      "systematic": true,
+      "worst_row": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "worst_row_dex": 1.7992987974798873
+    }
+  },
+  "prereg": "results/validation/kinetic_core_b46_prereg.md",
+  "rows": [
+    {
+      "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+      "compound": "acrylamide",
+      "declared_share_of_prediction": null,
+      "dex": -3.9836979593663417,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 6.0,
+      "temp_C": 130,
+      "time_min": 0.4167,
+      "water_activity": 0.35
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+      "compound": "DMHF",
+      "declared_share_of_prediction": null,
+      "dex": -2.4311438579419296,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 8.0,
+      "temp_C": 130.0,
+      "time_min": 120.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "compound": "Acrylamide",
+      "declared_share_of_prediction": null,
+      "dex": 2.338885725518703,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 6.0,
+      "temp_C": 180.0,
+      "time_min": 10.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+      "compound": "DMHF",
+      "declared_share_of_prediction": null,
+      "dex": -1.7226285356996802,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 5.0,
+      "temp_C": 130.0,
+      "time_min": 120.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "Acrylamide",
+      "declared_share_of_prediction": null,
+      "dex": -0.9613681301756499,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 6.0,
+      "temp_C": 180.0,
+      "time_min": 30.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "declared_share_of_prediction": null,
+      "dex": -0.795589184875876,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 6.0,
+      "temp_C": 180.0,
+      "time_min": 30.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "Acrylamide",
+      "declared_share_of_prediction": null,
+      "dex": 0.6457114130805282,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 6.0,
+      "temp_C": 180.0,
+      "time_min": 30.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "declared_share_of_prediction": null,
+      "dex": -0.43834535257645735,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 6.0,
+      "temp_C": 180.0,
+      "time_min": 30.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "compound": "Acrylamide",
+      "declared_share_of_prediction": null,
+      "dex": 0.40177944747780053,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 6.0,
+      "temp_C": 180.0,
+      "time_min": 30.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "declared_share_of_prediction": null,
+      "dex": -0.2591735970054798,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 8.0,
+      "temp_C": 130.0,
+      "time_min": 120.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "declared_share_of_prediction": null,
+      "dex": -0.014226558511854339,
+      "in_core_fit": false,
+      "lane": "acrylamide",
+      "ph": 5.0,
+      "temp_C": 130.0,
+      "time_min": 120.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "compound": "2-pentylfuran",
+      "declared_share_of_prediction": null,
+      "dex": -2.5630166047038854,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 7.0,
+      "temp_C": 160.0,
+      "time_min": 0.4167,
+      "water_activity": 0.35
+    },
+    {
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "compound": "hexanal",
+      "declared_share_of_prediction": null,
+      "dex": -0.9389833162399543,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 7.0,
+      "temp_C": 160.0,
+      "time_min": 0.4167,
+      "water_activity": 0.35
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "hexanal",
+      "declared_share_of_prediction": null,
+      "dex": -0.5631188165635999,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 6.0,
+      "temp_C": 160.0,
+      "time_min": 30.0,
+      "water_activity": 0.35
+    },
+    {
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "compound": "nonanal",
+      "declared_share_of_prediction": null,
+      "dex": -0.49326817612824136,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 7.0,
+      "temp_C": 160.0,
+      "time_min": 0.4167,
+      "water_activity": 0.35
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "2-pentylfuran",
+      "declared_share_of_prediction": 0.9217537302912058,
+      "dex": -0.4030160632725034,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 7.1,
+      "temp_C": 140,
+      "time_min": 0.1,
+      "water_activity": null
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "hexanal",
+      "declared_share_of_prediction": 0.9354546730947272,
+      "dex": -0.3444015081466123,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 7.1,
+      "temp_C": 140,
+      "time_min": 0.1,
+      "water_activity": null
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "(E,E)-2,4-decadienal",
+      "declared_share_of_prediction": 0.0007899424496394338,
+      "dex": 0.20938295525717074,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 7.1,
+      "temp_C": 140,
+      "time_min": 0.1,
+      "water_activity": null
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "nonanal",
+      "declared_share_of_prediction": 0.5280029797992333,
+      "dex": -0.18692040350798525,
+      "in_core_fit": false,
+      "lane": "lipid",
+      "ph": 7.1,
+      "temp_C": 140,
+      "time_min": 0.1,
+      "water_activity": null
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": 2.6783015509011245,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 100.0,
+      "time_min": 240.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": 2.564403179424876,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 110.0,
+      "time_min": 120.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": 2.335129038732934,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 120.0,
+      "time_min": 60.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": -2.1471718010776524,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 7.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": -2.1259082942188243,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 7.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": 2.1162877640279243,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 130.0,
+      "time_min": 30.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 1.998813878473477,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 130.0,
+      "time_min": 30.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+      "compound": "furfural",
+      "declared_share_of_prediction": null,
+      "dex": -1.9699599305235729,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 150.0,
+      "time_min": 60.0,
+      "water_activity": 0.95
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 1.748552884117375,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 120.0,
+      "time_min": 60.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 1.4690904569076537,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 110.0,
+      "time_min": 120.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": -1.3722200664974455,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 3.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 1.3046700390025823,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.65,
+      "temp_C": 120.0,
+      "time_min": 60.0,
+      "water_activity": 0.83
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 0.9691774272626362,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.5,
+      "temp_C": 100.0,
+      "time_min": 240.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": 0.8366289800411992,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": 0.693048321796059,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 3.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 0.582173180938921,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 0.5670371730070239,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "declared_share_of_prediction": null,
+      "dex": 0.3647099511965595,
+      "in_core_fit": true,
+      "lane": "sulfur",
+      "ph": 5.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "declared_share_of_prediction": null,
+      "dex": 0.29889494644381015,
+      "in_core_fit": false,
+      "lane": "sulfur",
+      "ph": 5.0,
+      "temp_C": 145.0,
+      "time_min": 20.0,
+      "water_activity": 0.98
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "glucosone",
+      "declared_share_of_prediction": null,
+      "dex": -1.7992987974798873,
+      "in_core_fit": false,
+      "lane": "trunk",
+      "ph": 4.36,
+      "temp_C": 121.0,
+      "time_min": 18.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "glyoxal",
+      "declared_share_of_prediction": null,
+      "dex": -1.541918363656192,
+      "in_core_fit": false,
+      "lane": "trunk",
+      "ph": 4.36,
+      "temp_C": 121.0,
+      "time_min": 18.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "declared_share_of_prediction": null,
+      "dex": -0.9688361147906065,
+      "in_core_fit": false,
+      "lane": "trunk",
+      "ph": 4.36,
+      "temp_C": 121.0,
+      "time_min": 18.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "3,4-dideoxyglucosone",
+      "declared_share_of_prediction": null,
+      "dex": -0.8213971130721505,
+      "in_core_fit": false,
+      "lane": "trunk",
+      "ph": 4.36,
+      "temp_C": 121.0,
+      "time_min": 18.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "3-deoxyglucosone",
+      "declared_share_of_prediction": null,
+      "dex": 0.10422920899566701,
+      "in_core_fit": false,
+      "lane": "trunk",
+      "ph": 4.36,
+      "temp_C": 121.0,
+      "time_min": 18.0,
+      "water_activity": 0.99
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "methylglyoxal",
+      "declared_share_of_prediction": null,
+      "dex": -0.004395232622072738,
+      "in_core_fit": false,
+      "lane": "trunk",
+      "ph": 4.36,
+      "temp_C": 121.0,
+      "time_min": 18.0,
+      "water_activity": 0.99
+    }
+  ],
+  "summary": {
+    "lane_covariate_pairs_tracking": [
+      {
+        "covariate": "temp_C",
+        "lane": "lipid",
+        "n": 8,
+        "rho": -0.8728715609439696
+      },
+      {
+        "covariate": "temp_C",
+        "lane": "sulfur",
+        "n": 19,
+        "rho": -0.8188899172408775
+      },
+      {
+        "covariate": "time_min",
+        "lane": "lipid",
+        "n": 8,
+        "rho": -0.8085428229838166
+      },
+      {
+        "covariate": "ph",
+        "lane": "lipid",
+        "n": 8,
+        "rho": 0.8085428229838166
+      },
+      {
+        "covariate": "time_min",
+        "lane": "sulfur",
+        "n": 19,
+        "rho": 0.696260353934742
+      }
+    ],
+    "lane_covariate_pairs_tracking_with_design_support": [
+      {
+        "covariate": "temp_C",
+        "distinct_levels": 6,
+        "lane": "sulfur",
+        "n": 19,
+        "rho": -0.8188899172408775
+      },
+      {
+        "covariate": "time_min",
+        "distinct_levels": 3,
+        "lane": "lipid",
+        "n": 8,
+        "rho": -0.8085428229838166
+      },
+      {
+        "covariate": "ph",
+        "distinct_levels": 3,
+        "lane": "lipid",
+        "n": 8,
+        "rho": 0.8085428229838166
+      },
+      {
+        "covariate": "time_min",
+        "distinct_levels": 5,
+        "lane": "sulfur",
+        "n": 19,
+        "rho": 0.696260353934742
+      }
+    ],
+    "lanes_systematic": [
+      "lipid",
+      "sulfur",
+      "trunk"
+    ],
+    "lanes_whose_rows_are_one_pot": [
+      "trunk"
+    ],
+    "rows": 44
+  },
+  "thresholds": {
+    "rho_tracks": 0.6,
+    "sign_consistency_systematic": 0.75
+  },
+  "what_this_is": "The SIGNED offset log10(predicted/measured) per lane, its sign consistency, and its rank correlation against each condition the bundles state. A diagnostic, not a fit: nothing here is scored and no constant moves. A correlation LOCALISES a structural error; it does not identify one, and it cannot separate a wrong rate from a measurement whose efficiency changes with the same covariate."
+}
