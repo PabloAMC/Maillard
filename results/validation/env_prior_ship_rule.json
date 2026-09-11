@@ -4,8 +4,8 @@
     "artifact": "env_prior_ship_rule",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
-      "short": "93d0637b",
+      "commit": "1f5a19d2f46b8a54cf9872884451c5064dc7b930",
+      "short": "1f5a19d2",
       "branch": "reactions",
       "dirty": true
     },
@@ -44,7 +44,6 @@
       "b13.k_hmf_self.log10_k_100C",
       "b13.k_glc_g.log10_k_100C",
       "b13.k_g_go.log10_k_100C",
-      "b13.k_tdg_ddg.log10_k_100C",
       "b13.k_ddg_hmf.log10_k_100C"
     ],
     "b13_sampled": [

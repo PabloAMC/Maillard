@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **469**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **477**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -49,6 +49,7 @@ Tracked files: **469**. Local-only (gitignored): scratch runs under `results/qui
 | `d1_exam_panel_reconciliation.*` (2): `d1_exam_panel_reconciliation.json`, `d1_exam_panel_reconciliation.md` | Reconciliation of exam vs panel scoring (D1); read by the B8 and B2.3 report generators. |
 | `data_wishlist.*` (2): `data_wishlist.json`, `data_wishlist.md` | THE DATA WISHLIST: what to measure next and what each measurement would unlock, derived from the scorecard, the slice profile, the Laplace covariance, the directional scorecard and the value-of-information ranking (`src/data_wishlist.py`; alias `wishlist`; read with `maillard wishlist`). Regenerated and compared by the freshness gate. |
 | `deep_research_runtime_queue.*` (2): `deep_research_runtime_queue.json`, `deep_research_runtime_queue.md` | Which mined citations are queued for runtime encoding (`src/deep_research_runtime_queue.py`). |
+| `env_b34_ship_rule.*` (2): `env_b34_ship_rule.json`, `env_b34_ship_rule.md` | ENV-B34's ship rule: prior rows for the 3-deoxyglucosone limb and the amine-free sugar entries, banded on Kocadagli 2016's printed 95 % HPD, judged on widths against the MEASURED Monte-Carlo noise floor with both sides of the comparison frozen (`generate_env_b34_ship_rule.py`). |
 | `env_prior_ship_rule.*` (2): `env_prior_ship_rule.json`, `env_prior_ship_rule.md` | ENV-B18 and ENV-B13 evaluated together: whether the two new blocks of Monte-Carlo prior rows widened the intervals they should and left the rest alone, against a noise floor MEASURED from two seeds of identical priors rather than assumed (`generate_env_prior_ship_rule.py`). |
 | `experiment_brief_cards.html` | One card per ranked experiment (`generate_gap_heatmap.py`). |
 | `experiment_value_ranking.*` (2): `experiment_value_ranking.json`, `experiment_value_ranking.md` | `rank-experiments`: value-of-information ranking of the model's largest envelope misses. Written by `experiment-value-ranking`; read by `generate_gap_heatmap.py`. |
@@ -123,6 +124,8 @@ Tracked files: **469**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
 | `kinetic_core_env_b13_prereg.*` (1): `kinetic_core_env_b13_prereg.md` | Pre-registration: the whole dicarbonyl and furanic-sink block had no prior row either, so eight constants were asserted with certainty and five hydroxymethylfurfural rows were published with no interval at all. |
 | `kinetic_core_env_b18_prereg.*` (1): `kinetic_core_env_b18_prereg.md` | Pre-registration: the pyrazine step had no prior row in the envelope, so every pyrazine interval was published without that step's own spread. |
+| `kinetic_core_env_b34_prereg.*` (1): `kinetic_core_env_b34_prereg.md` | Pre-registration and outcome of ENV-B34: prior rows for the 3-deoxyglucosone limb and the amine-free sugar entries on the source's printed 95 % HPD; INSTALLED under ENV-M1 with four rows newly inside their interval, two amendments to its own reach definition recorded. |
+| `kinetic_core_env_m1_prereg.*` (1): `kinetic_core_env_m1_prereg.md` | Pre-registration and outcome of ENV-M1, one random stream per coordinate: the shared-stream sampler had made every envelope ship rule depend on which seed pair measured the noise floor; ADOPTED, with unreached rows now bit-identical across prior changes. |
 | `kinetic_core_hmf_sink_premise_check.*` (1): `kinetic_core_hmf_sink_premise_check.md` | Why the HMF sink's centre was not moved. It ships at log10 -6.047 against a band floor of -6.05, so it is already inert: switching it off entirely changes all five HMF predictions by 1.000x. The 2-12x deficit is upstream, and the worst row by a factor of two is the one pot with no amine in it at all. |
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
@@ -142,4 +145,4 @@ Tracked files: **469**. Local-only (gitignored): scratch runs under `results/qui
 
 | files | what it is, who writes it, who reads it |
 |---|---|
-| `*` (4): `core_prediction_uncertainty_after_env_priors.json`, `core_prediction_uncertainty_before_env_priors.json`, `core_prediction_uncertainty_seed1.json`, `core_prediction_uncertainty_seed1.md` | The envelope EXACTLY AS IT STOOD before ENV-B18 and ENV-B13 added their prior rows, kept so that their ship rule is reproducible by anyone rather than only by whoever happened to have the old file. It is a frozen comparison baseline and is never regenerated. |
+| `*` (8): `core_prediction_uncertainty_after_env_b34.json`, `core_prediction_uncertainty_after_env_priors.json`, `core_prediction_uncertainty_before_env_b34.json`, `core_prediction_uncertainty_before_env_b34.md` … | FROZEN inputs of the envelope ship rules: the envelope before and after ENV-B18/ENV-B13 and the noise floor measured at their verdict; the envelope before and after ENV-B34, both produced under ENV-M1's per-coordinate streams so unreached rows are bit-identical; and the seed-1 companion the live floor is measured against. Kept so that each rule is reproducible by anyone rather than only by whoever had the old file. |

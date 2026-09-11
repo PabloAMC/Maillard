@@ -133,14 +133,38 @@ DISPUTED_SINK_BANDS: Mapping[str, Mapping[str, object]] = {
                  "barrier stays at zero: one temperature each, so no Arrhenius is licensed.",
     },
 }
-#: The four that are NOT in dispute, listed so a reader finds a row rather than a silence.
-AGREEING_SINK_KEYS: Tuple[str, ...] = ("k_glc_g", "k_g_go", "k_tdg_ddg", "k_ddg_hmf")
+#: ENV-B34 (2026-09-11): the 3-deoxyglucosone limb and the amine-free sugar entries, banded on the
+#: SOURCE'S OWN PRINTED 95 % HPD (Kocadagli & Gokmen 2016 Table 2, glucose system, reparameterised
+#: Arrhenius; kocadagli2016jafc_extraction.md sec. 4). No centre moves. The rate band is the relative
+#: HPD on k_b applied to the shipped 100 C value; the barrier band is the printed Ea +/- HPD. Drawn
+#: independently, the same simplification ENV-B13 made. Wave B34 found k_tdg_ddg 32x too slow in
+#: water on the one aqueous pot that measures its product; until then it sat in AGREEING_SINK_KEYS
+#: because two laboratories agree on it to 1.5x -- both of them measuring it DRY, and this paper's
+#: own NaCl column printing a barrier of 117.7 +/- 11.1 for the same step against 36.9 +/- 6.3 in
+#: the glucose column. Agreement is not accuracy when both laboratories share a matrix.
+HPD_SINK_BANDS: Mapping[str, Mapping[str, object]] = {
+    "k_glc_tdg": {"k_rel_hpd": 2.44 / 4.19, "ea_hpd_kj_mol": 52.7,
+                  "basis": "Table 2 step 3, k_b 4.19 +/- 2.44 (x1e-3), Ea 107.2 +/- 52.7"},
+    "k_tdg_ddg": {"k_rel_hpd": 3.39 / 30.5, "ea_hpd_kj_mol": 6.3,
+                  "basis": "Table 2 step 4, k_b 30.5 +/- 3.39 (x1e-3), Ea 36.9 +/- 6.3; the NaCl column prints Ea 117.7 +/- 11.1 for the same step"},
+    "k_fru_int": {"k_rel_hpd": 22.8 / 330.0, "ea_hpd_kj_mol": 6.6,
+                  "basis": "Table 2 step 6, k_b 330 +/- 22.8 (x1e-3), Ea 100.4 +/- 6.6"},
+    "k_fru_odg": {"k_rel_hpd": 0.40 / 2.11, "ea_hpd_kj_mol": 21.8,
+                  "basis": "Table 2 step 8, k_b 2.11 +/- 0.40 (x1e-3), Ea 99.3 +/- 21.8"},
+}
+HPD_SINK_KEYS: Tuple[str, ...] = tuple(HPD_SINK_BANDS)
+
+#: The three that are NOT sampled, listed so a reader finds a row rather than a silence.
+AGREEING_SINK_KEYS: Tuple[str, ...] = ("k_glc_g", "k_g_go", "k_ddg_hmf")
 AGREEING_SINK_REASON = (
-    "NOT SAMPLED, and not by oversight. k_tdg_ddg (1.5x), k_ddg_hmf (1.13x) and k_go_sink's RATE "
-    "(1.87x) are the first cross-laboratory agreement this trunk has ever had, inside a factor of "
-    "two across two laboratories and two matrices. k_glc_g and k_g_go have one determination each "
-    "and no second laboratory to disagree with them. A band invented for a constant nobody "
-    "disputes would be a fabricated interval."
+    "NOT SAMPLED, and not by oversight. k_ddg_hmf (1.13x) and k_go_sink's RATE (1.87x) are "
+    "cross-laboratory agreements inside a factor of two, and k_ddg_hmf is a timescale bracket with a "
+    "declared zero barrier and no HPD to draw from. k_glc_g and k_g_go have one determination each "
+    "and no second laboratory to disagree with them. A band invented for a constant nobody disputes "
+    "would be a fabricated interval. ENV-B34 (2026-09-11) REMOVED k_tdg_ddg from this list: its 1.5x "
+    "cross-laboratory agreement was two DRY matrices agreeing with each other, wave B34 measured it 32x "
+    "too slow in water, and its own paper prints a threefold barrier disagreement between its glucose "
+    "and NaCl columns. It carries the printed HPD now (HPD_SINK_BANDS)."
 )
 
 
@@ -155,8 +179,8 @@ def with_disputed_sinks(overrides: Mapping[str, Mapping[str, float]]) -> Dict[st
 
     out: Dict[str, KineticParameter] = {}
     for key, block in overrides.items():
-        if key not in DISPUTED_SINK_KEYS:
-            raise KeyError(f"{key} is not a disputed sink; ENV-B13 moves only {DISPUTED_SINK_KEYS}")
+        if key not in DISPUTED_SINK_KEYS and key not in HPD_SINK_KEYS:
+            raise KeyError(f"{key} is not a banded sink; ENV-B13 moves {DISPUTED_SINK_KEYS} and ENV-B34 {HPD_SINK_KEYS}")
         base = DICARBONYL_PARAMETERS.get(key)
         if base is None:
             from .parameters_furanic import FURANIC_PARAMETERS

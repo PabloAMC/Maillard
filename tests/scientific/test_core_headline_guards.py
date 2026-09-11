@@ -287,7 +287,14 @@ def test_core_envelope_coverage_and_widths():
     # bites hardest on the wave's best row: 3-DG is 1.11x on fold and OUTSIDE its own interval.
     # Named in kinetic_core_b34_prereg.md as an ENV wave, not bolted onto a wave about something else.
     # RE-PINNED BY WAVE B35: 11/41 -> 12/42. (E,E)-2,4-decadienal joined and lands inside its interval.
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (12, 42, 3)
+    # RE-PINNED BY ENV-B34 (2026-09-11): 12/42 with 3 not evaluable -> 14/44 with ONE. The 3-DG limb
+    # and the amine-free entries gained prior rows from the source's printed HPD: 3-deoxyglucosone
+    # (1.11x) moved inside its interval and so did the Schibilsky pH-5 HMF row. The one still not
+    # evaluable is glucosone, whose only amine-free route (k_glc_g) carries no flux and has no band.
+    # RE-PINNED BY ENV-M1 (2026-09-11): the whole table is re-seeded -- every coordinate now draws from its
+    # own stream keyed by name (kinetic_core_env_m1_prereg.md), so every envelope number moves once and
+    # no direction is claimed. Under the new streams ENV-B34's priors are in: 16/44, 1 not evaluable.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (16, 44, 1)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -304,9 +311,9 @@ def test_core_envelope_coverage_and_widths():
     # a comparison; the ship rule's per-row table is.
     # RE-PINNED BY WAVE B31: 1.0411 -> 0.9238 dex. Same caution as the line above -- a median over
     # a changed row set is not a comparison, and here the set changed twice over.
-    assert lit["median_ci_width_log10"] == pytest.approx(0.9192, abs=5e-4)
+    assert lit["median_ci_width_log10"] == pytest.approx(0.9874, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (12, 41)
+    assert (oos["hits"], oos["total"]) == (16, 43)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.209, abs=0.01)
@@ -318,8 +325,8 @@ def test_core_envelope_coverage_and_widths():
         "headspace": 9, "extraction": 36, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "12 of 42", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "12 of 41", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "16 of 44", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "16 of 43", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

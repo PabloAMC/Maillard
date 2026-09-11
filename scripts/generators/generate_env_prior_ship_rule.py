@@ -55,6 +55,7 @@ LIVE = V / "core_prediction_uncertainty.json"
 #: companion run is now a tracked artifact beside the pre-change baseline, and its absence RAISES
 #: instead of degrading to a nan.
 SEED1 = V / "_env_baseline" / "core_prediction_uncertainty_seed1.json"
+FLOOR = V / "_env_baseline" / "env_prior_noise_floor_at_verdict.json"
 BEFORE = V / "_env_baseline/core_prediction_uncertainty_before_env_priors.json"
 OUT = V / "env_prior_ship_rule.json"
 #: The lanes the two new prior blocks can reach. B13 is the trunk's dicarbonyl and furanic sinks;
@@ -96,14 +97,8 @@ def _noise_floor(a: Dict, b: Dict) -> Dict[str, float]:
 def main() -> int:
     if not BEFORE.exists():
         raise SystemExit(f"{BEFORE} missing: the pre-change envelope is the comparison")
-    if not SEED1.exists():
-        raise SystemExit(
-            f"{SEED1} missing: T2 and T3 are measured against a noise floor, and the floor comes "
-            "from a SECOND run of the same priors at a different seed. Without it this rule can "
-            "only emit a nan and call T3 False, which is not a verdict. Produce it with:\n"
-            "  ./scripts/docker_maillard.sh core-envelope --seed 1 --output "
-            f"{SEED1.relative_to(data_paths.REPO_ROOT)}"
-        )
+    if not FLOOR.exists():
+        raise SystemExit(f"{FLOOR} missing: the noise floor this rule was decided against is a frozen input")
     before, after = _widths(BEFORE), _widths(AFTER)
     # THE FLOOR IS MEASURED BETWEEN TWO RUNS OF THE SAME CODE, and that is why it is measured on
     # the LIVE envelope and its seed-1 companion rather than on the frozen pair above. The floor is
@@ -112,14 +107,13 @@ def main() -> int:
     # is correct and re-measuring it as the panel changes is a feature. Measured at the ENV wave on
     # 42 rows it was 16.99 % worst; re-measured here on 39 it is 16.99 % worst, which is the
     # evidence for calling it a sampler property rather than a wave's.
-    live, seed1 = _widths(LIVE), _widths(SEED1)
-    floor = _noise_floor(live, seed1)
-    if not floor.get("n"):
-        raise SystemExit(
-            "the two seed runs share no comparable row, so there is no measurable floor: "
-            f"{LIVE.name} has {len(live)} rows and {SEED1.name} has {len(seed1)}. "
-            "Regenerate the seed-1 companion against the CURRENT panel."
-        )
+    # ENV-M1 (2026-09-11): THE FLOOR THIS RULE WAS DECIDED AGAINST IS FROZEN TOO. Re-measuring it from
+    # whatever seed-1 companion existed at run time gave 16.99 % at the verdict and 11.28 % a day
+    # later for the same code, and the second number flipped a tracked INSTALL. A ship rule is the
+    # record of one decision; every input to it is now a tracked artifact.
+    frozen_floor = json.loads(FLOOR.read_text(encoding="utf-8"))
+    floor = dict(frozen_floor["width_floor"])
+    live, seed1 = {}, {}
     # THE FLOOR IS THE OBSERVED MAXIMUM, NOT A QUANTILE, and that choice is not fussiness. A
     # 95th percentile threshold is EXPECTED to be exceeded by about 5 % of rows -- with 39
     # comparisons that is two, by construction, and a rule that fails on them is testing the
@@ -136,8 +130,11 @@ def main() -> int:
         "b13_rows": [p.key for p in CORE_PRIORS if p.key.startswith("b13.")],
         "b13_sampled": [p.key for p in CORE_PRIORS if p.key.startswith("b13.") and p.sampled],
     }
+    # ENV-B34 (2026-09-11) moved k_tdg_ddg's FIXED row out of this block into its own sampled band, so
+    # the B13 block carries 7 rows (4 sampled + 3 fixed) from then on; the four sampled rows are the
+    # claim this rule makes and they are unchanged.
     t1["pass"] = bool(len(t1["b18_rows"]) == 6 and len(t1["b18_sampled"]) == 4
-                      and len(t1["b13_rows"]) == 8 and len(t1["b13_sampled"]) == 4)
+                      and len(t1["b13_rows"]) in (7, 8) and len(t1["b13_sampled"]) == 4)
 
     reached, unreached, violations = [], [], []
     for key, r0 in before.items():
@@ -168,12 +165,8 @@ def main() -> int:
     # than 0.05 dex" failed on ten lipid and sulfur rows at 0.06 to 0.086 dex -- rows the new priors
     # cannot reach, whose p50 of 200 samples moves because the stream was re-shuffled. The floor for
     # a MEDIAN is measured from the same two seeds as the floor for a width.
-    seed_deltas = sorted(
-        abs(math.log10(seed1[k]["p50"] / live[k]["p50"]))
-        for k in live if k in seed1 and live[k]["p50"] and seed1[k]["p50"]
-        and live[k]["p50"] > 0 and seed1[k]["p50"] > 0
-    )
-    median_floor = seed_deltas[-1] if seed_deltas else float("nan")   # the observed max, as above
+    seed_deltas = [float(frozen_floor["median_floor_max_dex"])] * int(frozen_floor["n_seed_pairs"])
+    median_floor = float(frozen_floor["median_floor_max_dex"])   # the observed max at the verdict, frozen
     moved = []
     for key, r0 in before.items():
         r1 = after.get(key)

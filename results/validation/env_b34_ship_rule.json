@@ -1,0 +1,593 @@
+{
+  "artifact": "env_b34_ship_rule",
+  "provenance": {
+    "artifact": "env_b34_ship_rule",
+    "generated_on": "2026-09-11",
+    "git": {
+      "commit": "1f5a19d2f46b8a54cf9872884451c5064dc7b930",
+      "short": "1f5a19d2",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_env_b34_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/_env_baseline/core_prediction_uncertainty_before_env_b34.json",
+        "sha256": "3417bda8398989afd1d64bd5de2b5a90ef45965daa4e59534f144ddd9cfcfbea"
+      },
+      {
+        "path": "results/validation/_env_baseline/core_prediction_uncertainty_after_env_b34.json",
+        "sha256": "1b03829426d9bb4c1042dac44be5769fbbe94236722ca2338cf26f503a78c816"
+      },
+      {
+        "path": "results/validation/_env_baseline/core_prediction_uncertainty_seed1.json",
+        "sha256": "abaad3e48330804b2632216dbeffe6af4a119cd23b68e6b3e68c80304b714f92"
+      },
+      {
+        "path": "results/validation/core_prediction_uncertainty.json",
+        "sha256": "1b03829426d9bb4c1042dac44be5769fbbe94236722ca2338cf26f503a78c816"
+      },
+      {
+        "path": "results/validation/kinetic_core_env_b34_prereg.md",
+        "sha256": "36655595019652adc3f8c684566d2d1c4fc620c0525fae0203cc718c335c8329"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_env_b34_prereg.md",
+  "rule": "INSTALL if T1 (the prior rows exist), T2 (every reached row widens; no other row moves beyond the MEASURED noise floor) and T3 (no unreached median moves) hold; T4 reported",
+  "T1": {
+    "rows": [
+      "b34.k_glc_tdg.log10_k_100C",
+      "b34.k_glc_tdg.ea_kj_mol",
+      "b34.k_tdg_ddg.log10_k_100C",
+      "b34.k_tdg_ddg.ea_kj_mol",
+      "b34.k_fru_int.log10_k_100C",
+      "b34.k_fru_int.ea_kj_mol",
+      "b34.k_fru_odg.log10_k_100C",
+      "b34.k_fru_odg.ea_kj_mol"
+    ],
+    "sampled": [
+      "b34.k_glc_tdg.log10_k_100C",
+      "b34.k_glc_tdg.ea_kj_mol",
+      "b34.k_tdg_ddg.log10_k_100C",
+      "b34.k_tdg_ddg.ea_kj_mol",
+      "b34.k_fru_int.log10_k_100C",
+      "b34.k_fru_int.ea_kj_mol",
+      "b34.k_fru_odg.log10_k_100C",
+      "b34.k_fru_odg.ea_kj_mol"
+    ],
+    "bands": {
+      "b34.k_glc_tdg.log10_k_100C": [
+        -5.406129755260192,
+        -4.827654275541714
+      ],
+      "b34.k_glc_tdg.ea_kj_mol": [
+        54.5,
+        159.9
+      ],
+      "b34.k_tdg_ddg.log10_k_100C": [
+        -2.478757534337661,
+        -2.3818154830807687
+      ],
+      "b34.k_tdg_ddg.ea_kj_mol": [
+        30.599999999999998,
+        43.199999999999996
+      ],
+      "b34.k_fru_int.log10_k_100C": [
+        -2.993702366217273,
+        -2.9335950011169647
+      ],
+      "b34.k_fru_int.ea_kj_mol": [
+        93.80000000000001,
+        107.0
+      ],
+      "b34.k_fru_odg.log10_k_100C": [
+        -5.220943842330665,
+        -5.0542662312417805
+      ],
+      "b34.k_fru_odg.ea_kj_mol": [
+        77.5,
+        121.1
+      ]
+    },
+    "pass": true
+  },
+  "T2": {
+    "noise_floor_from_two_seeds": {
+      "n": 45,
+      "median_rel": 0.056271047907205295,
+      "p95_rel": 0.12324395045659148,
+      "max_rel": 0.20978653678987488
+    },
+    "tolerance_used_rel": 0.20978653678987488,
+    "rows_the_priors_reach": [
+      {
+        "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.24704285588649777,
+        "width_after": 0.3829958117394643,
+        "delta": 0.13595295585296652,
+        "p50_before": 1929.7618887608633,
+        "p50_after": 1819.468788301565
+      },
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "DMHF",
+        "lane": "acrylamide",
+        "width_before": 0.8830935914017732,
+        "width_after": 0.960284322512857,
+        "delta": 0.07719073111108377,
+        "p50_before": 19.238813392831744,
+        "p50_after": 21.18688175751646
+      },
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.6624663755232905,
+        "width_after": 1.1222837035675086,
+        "delta": 0.45981732804421815,
+        "p50_before": 27147.386053441973,
+        "p50_after": 16624.362259859583
+      },
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "compound": "DMHF",
+        "lane": "acrylamide",
+        "width_before": 0.8830935914017732,
+        "width_after": 0.960284322512857,
+        "delta": 0.07719073111108377,
+        "p50_before": 19.238813392831744,
+        "p50_after": 21.18688175751646
+      },
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.6624663755232905,
+        "width_after": 1.1222837035675086,
+        "delta": 0.45981732804421815,
+        "p50_before": 27147.386053441973,
+        "p50_after": 16624.362259859583
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "acrylamide",
+        "width_before": 0.2678588584631869,
+        "width_after": 0.8238683524421617,
+        "delta": 0.5560094939789748,
+        "p50_before": 2152.4196425501896,
+        "p50_after": 2042.729365835502
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)",
+        "lane": "trunk",
+        "width_before": 0.09105683341909801,
+        "width_after": 0.969303227510638,
+        "delta": 0.87824639409154,
+        "p50_before": 1454.2138110413346,
+        "p50_after": 1005.637364025697
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "3-deoxyglucosone",
+        "lane": "trunk",
+        "width_before": 1.4827109192491877e-06,
+        "width_after": 0.9913468521023765,
+        "delta": 0.9913453693914572,
+        "p50_before": 46982.90346861427,
+        "p50_after": 34302.95573222473
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "3,4-dideoxyglucosone",
+        "lane": "trunk",
+        "width_before": 1.0640983832276802e-06,
+        "width_after": 0.9835108871291537,
+        "delta": 0.9835098230307705,
+        "p50_before": 1711.1295284758075,
+        "p50_after": 1213.8194418433877
+      }
+    ],
+    "other_maillard_rows_that_may_move": [
+      {
+        "benchmark": "acrylamide_spi_extrusion_130C_ACSRef3",
+        "compound": "acrylamide",
+        "lane": "acrylamide",
+        "width_before": 0.5362710683735602,
+        "width_after": 0.5362578233289649,
+        "delta": -1.3245044595322497e-05,
+        "p50_before": 0.015538874931331425,
+        "p50_after": 0.015538719447484722
+      },
+      {
+        "benchmark": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.23774029038548022,
+        "width_after": 0.23774029038548022,
+        "delta": 0.0,
+        "p50_before": 2206.6782163816356,
+        "p50_after": 2206.6782163816356
+      },
+      {
+        "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 2.2651487699877344,
+        "width_after": 2.2651487699877344,
+        "delta": 0.0,
+        "p50_before": 817.5347869220079,
+        "p50_after": 817.5347869220079
+      },
+      {
+        "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.46475068134464137,
+        "width_after": 0.46475068134464137,
+        "delta": 0.0,
+        "p50_before": 687.9171691764313,
+        "p50_after": 687.9171691764313
+      },
+      {
+        "benchmark": "resconi_2023_pbma_beef_identity_benchmark",
+        "compound": "furfural",
+        "lane": "sulfur",
+        "width_before": 1.70990992539996,
+        "width_after": 1.6817788845596537,
+        "delta": -0.028131040840306154,
+        "p50_before": 10.29929351800663,
+        "p50_after": 9.628092613957154
+      },
+      {
+        "benchmark": "thiamine_cys_glucose_120C_Bolton1994",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.6462749682809146,
+        "width_after": 0.6462755010660665,
+        "delta": 5.327851518854843e-07,
+        "p50_before": 95.83765117560503,
+        "p50_after": 95.83770779823854
+      },
+      {
+        "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
+        "compound": "Acrylamide",
+        "lane": "acrylamide",
+        "width_before": 0.9150790766051498,
+        "width_after": 0.9135475855152742,
+        "delta": -0.001531491089875603,
+        "p50_before": 202.7768872765491,
+        "p50_after": 199.51640559957653
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+        "compound": "Acrylamide",
+        "lane": "acrylamide",
+        "width_before": 0.8683440390301062,
+        "width_after": 0.8645689209232483,
+        "delta": -0.003775118106857822,
+        "p50_before": 5729.847280734579,
+        "p50_after": 5676.189207475112
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+        "compound": "Acrylamide",
+        "lane": "acrylamide",
+        "width_before": 0.9148226551334774,
+        "width_after": 0.9147267033079947,
+        "delta": -9.595182548272074e-05,
+        "p50_before": 3663.4689887007767,
+        "p50_after": 3618.5290748082907
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "Acrylamide",
+        "lane": "acrylamide",
+        "width_before": 0.9148226551334774,
+        "width_after": 0.9147267033079947,
+        "delta": -9.595182548272074e-05,
+        "p50_before": 3663.4689887007767,
+        "p50_after": 3618.5290748082907
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_Ye2024",
+        "compound": "Acrylamide",
+        "lane": "acrylamide",
+        "width_before": 0.904574329610844,
+        "width_after": 0.9022436251311989,
+        "delta": -0.002330704479645118,
+        "p50_before": 6864.110709855662,
+        "p50_after": 6840.2503979076055
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "glucosone",
+        "lane": "trunk",
+        "width_before": 2.057052881474318e-06,
+        "width_after": 0.0008070617294165263,
+        "delta": 0.0008050046765350519,
+        "p50_before": 119.05907650609991,
+        "p50_after": 119.0859658885243
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "glyoxal",
+        "lane": "trunk",
+        "width_before": 0.08557795848824169,
+        "width_after": 0.08542931177674543,
+        "delta": -0.00014864671149626696,
+        "p50_before": 200.25811883005917,
+        "p50_after": 200.18995850213904
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "methylglyoxal",
+        "lane": "trunk",
+        "width_before": 0.15310199331977326,
+        "width_after": 0.9639314948228529,
+        "delta": 0.8108295015030796,
+        "p50_before": 1928.621521238293,
+        "p50_after": 1343.7397972140714
+      },
+      {
+        "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 2.229657470198881,
+        "width_after": 2.229657470198881,
+        "delta": 0.0,
+        "p50_before": 1121.1218795443724,
+        "p50_after": 1121.1218795443724
+      },
+      {
+        "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.5202928919021055,
+        "width_after": 0.5202928919021055,
+        "delta": 0.0,
+        "p50_before": 22.138654858965513,
+        "p50_after": 22.138654858965513
+      },
+      {
+        "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 2.1621940630173855,
+        "width_after": 2.1621940630173855,
+        "delta": 0.0,
+        "p50_before": 0.08295682918070099,
+        "p50_after": 0.08295682918070099
+      },
+      {
+        "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.84302358612778,
+        "width_after": 0.84302358612778,
+        "delta": 0.0,
+        "p50_before": 0.14462146707034634,
+        "p50_after": 0.14462146707034634
+      },
+      {
+        "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 1.7835596590651897,
+        "width_after": 1.7835596590651897,
+        "delta": 0.0,
+        "p50_before": 228.19430116253125,
+        "p50_after": 228.19430116253125
+      },
+      {
+        "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.3755486968492083,
+        "width_after": 0.3755486968492083,
+        "delta": 0.0,
+        "p50_before": 507.4855998098285,
+        "p50_after": 507.4855998098285
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 1.5414306328583751,
+        "width_after": 1.5414306328583751,
+        "delta": 0.0,
+        "p50_before": 8.363776627320657,
+        "p50_after": 8.363776627320657
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 1.605642846514438,
+        "width_after": 1.605642846514438,
+        "delta": 0.0,
+        "p50_before": 170.79922518224475,
+        "p50_after": 170.79922518224475
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 1.1398766183831042,
+        "width_after": 1.1398766183831042,
+        "delta": 0.0,
+        "p50_before": 21.555594211630734,
+        "p50_after": 21.555594211630734
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 1.5207417423079912,
+        "width_after": 1.5207417423079912,
+        "delta": 0.0,
+        "p50_before": 250.50381725936455,
+        "p50_after": 250.50381725936455
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.8289804143561927,
+        "width_after": 0.8289804143561927,
+        "delta": 0.0,
+        "p50_before": 48.79066904550225,
+        "p50_after": 48.79066904550225
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 1.4078310138067751,
+        "width_after": 1.4078310138067751,
+        "delta": 0.0,
+        "p50_before": 256.4774576311548,
+        "p50_after": 256.4774576311548
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "lane": "sulfur",
+        "width_before": 0.5981764180218926,
+        "width_after": 0.5981764180218926,
+        "delta": 0.0,
+        "p50_before": 94.363282229,
+        "p50_after": 94.363282229
+      },
+      {
+        "benchmark": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+        "compound": "2-Furfurylthiol (FFT)",
+        "lane": "sulfur",
+        "width_before": 1.3225548828717733,
+        "width_after": 1.3225548828717733,
+        "delta": 0.0,
+        "p50_before": 209.9810536641824,
+        "p50_after": 209.9810536641824
+      }
+    ],
+    "n_other_maillard_rows_moved": 11,
+    "n_lipid_rows_bit_identical": 8,
+    "n_lipid_rows": 8,
+    "violations": [],
+    "pass": true
+  },
+  "T3": {
+    "median_noise_floor_max_dex": 0.06925532861318377,
+    "n_seed_pairs": 45,
+    "unreached_medians_moved_beyond_the_floor": [],
+    "maillard_medians_moved_by_the_priors": [
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "methylglyoxal",
+        "dex": 0.15693182893980073,
+        "lane": "trunk"
+      },
+      {
+        "benchmark": "resconi_2023_pbma_beef_identity_benchmark",
+        "compound": "furfural",
+        "dex": 0.029267176052573545,
+        "lane": "sulfur"
+      },
+      {
+        "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
+        "compound": "Acrylamide",
+        "dex": 0.0070398399939191544,
+        "lane": "acrylamide"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+        "compound": "Acrylamide",
+        "dex": 0.005360453060223308,
+        "lane": "acrylamide"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "Acrylamide",
+        "dex": 0.005360453060223308,
+        "lane": "acrylamide"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+        "compound": "Acrylamide",
+        "dex": 0.0040861831472445735,
+        "lane": "acrylamide"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_Ye2024",
+        "compound": "Acrylamide",
+        "dex": 0.001512279515217163,
+        "lane": "acrylamide"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "glyoxal",
+        "dex": 0.00014784266056916227,
+        "lane": "trunk"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "glucosone",
+        "dex": 9.807393293513452e-05,
+        "lane": "trunk"
+      },
+      {
+        "benchmark": "acrylamide_spi_extrusion_130C_ACSRef3",
+        "compound": "acrylamide",
+        "dex": 4.345624428018991e-06,
+        "lane": "acrylamide"
+      },
+      {
+        "benchmark": "thiamine_cys_glucose_120C_Bolton1994",
+        "compound": "2-Methyl-3-furanthiol (MFT)",
+        "dex": 2.5658903070303467e-07,
+        "lane": "sulfur"
+      }
+    ],
+    "largest_maillard_median_move_dex": 0.15693182893980073,
+    "pass": true
+  },
+  "T4": {
+    "n_widened": 9,
+    "newly_inside": [
+      {
+        "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+        "compound": "5-Hydroxymethylfurfural (HMF)"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "compound": "5-Hydroxymethylfurfural (HMF)"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "3-deoxyglucosone"
+      },
+      {
+        "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+        "compound": "methylglyoxal"
+      }
+    ],
+    "newly_outside": [],
+    "coverage_before": [
+      12,
+      42,
+      3
+    ],
+    "coverage_after": [
+      16,
+      44,
+      1
+    ],
+    "median_width_before": 0.9148226551334774,
+    "median_width_after": 0.9874288696157651
+  },
+  "verdict": "INSTALL"
+}

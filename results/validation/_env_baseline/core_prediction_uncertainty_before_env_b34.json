@@ -7,7 +7,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.5362578233289649,
+          "ci_width_log10": 0.5362710683735602,
           "compound": "acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -17,12 +17,12 @@
           "measured_ppb": 150.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 0.015710776592566422,
-          "predicted_p5": 0.007407591914770458,
-          "predicted_p50": 0.015538719447484722,
-          "predicted_p95": 0.025464483534029816,
+          "predicted_mean": 0.015710783535999993,
+          "predicted_p5": 0.007407536149960435,
+          "predicted_p50": 0.015538874931331425,
+          "predicted_p95": 0.025465068453620756,
           "predicted_point": 0.015573753616532265,
-          "predicted_std": 0.005594898444062687,
+          "predicted_std": 0.005594909624743977,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -606,7 +606,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.6817788845596537,
+          "ci_width_log10": 1.70990992539996,
           "compound": "furfural",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -616,12 +616,12 @@
           "measured_ppb": 715.22,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 21.616311875270156,
-          "predicted_p5": 1.4833643515134607,
-          "predicted_p50": 9.628092613957154,
-          "predicted_p95": 71.28968936118525,
+          "predicted_mean": 21.88379401958493,
+          "predicted_p5": 1.5063462158490988,
+          "predicted_p50": 10.29929351800663,
+          "predicted_p95": 77.23865920147854,
           "predicted_point": 7.665186085783273,
-          "predicted_std": 37.88384867024931,
+          "predicted_std": 37.61722711434861,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -686,7 +686,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.6462755010660665,
+          "ci_width_log10": 0.6462749682809146,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -696,12 +696,12 @@
           "measured_ppb": 11.7,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 113.28179485529989,
-          "predicted_p5": 48.365555444529704,
-          "predicted_p50": 95.83770779823854,
-          "predicted_p95": 214.1961600085603,
+          "predicted_mean": 113.28229266750247,
+          "predicted_p5": 48.36569210521819,
+          "predicted_p50": 95.83765117560503,
+          "predicted_p95": 214.19650246386982,
           "predicted_point": 235.96972785838298,
-          "predicted_std": 55.50801797560795,
+          "predicted_std": 55.50831344700032,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -728,7 +728,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9135475855152742,
+          "ci_width_log10": 0.9150790766051498,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -738,17 +738,17 @@
           "measured_ppb": 1859.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 252.87177366543347,
-          "predicted_p5": 68.99642631327077,
-          "predicted_p50": 199.51640559957653,
-          "predicted_p95": 565.4239268678966,
+          "predicted_mean": 253.7453679292405,
+          "predicted_p5": 68.91726197791968,
+          "predicted_p50": 202.7768872765491,
+          "predicted_p95": 566.7703096485855,
           "predicted_point": 203.19417771430946,
-          "predicted_std": 187.80251515921742,
+          "predicted_std": 188.2061040927255,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.3829958117394643,
+          "ci_width_log10": 0.24704285588649777,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -758,12 +758,12 @@
           "measured_ppb": 12280.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1840.6789915602965,
-          "predicted_p5": 1095.4525447822825,
-          "predicted_p50": 1819.468788301565,
-          "predicted_p95": 2645.997200254278,
+          "predicted_mean": 1782.787723135561,
+          "predicted_p5": 1102.3076976159446,
+          "predicted_p50": 1929.7618887608633,
+          "predicted_p95": 1946.909194230333,
           "predicted_point": 1946.873339428069,
-          "predicted_std": 490.3639653330922,
+          "predicted_std": 293.3135232067699,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -790,7 +790,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.960284322512857,
+          "ci_width_log10": 0.8830935914017732,
           "compound": "DMHF",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -800,32 +800,32 @@
           "measured_ppb": 1153.17,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 26.610440729847515,
-          "predicted_p5": 6.595090921660721,
-          "predicted_p50": 21.18688175751646,
-          "predicted_p95": 60.18733442582216,
+          "predicted_mean": 26.100760756420947,
+          "predicted_p5": 7.605386321178043,
+          "predicted_p50": 19.238813392831744,
+          "predicted_p95": 58.105182644088885,
           "predicted_point": 21.84064113843927,
-          "predicted_std": 19.434654363632053,
+          "predicted_std": 17.378104639197428,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.1222837035675086,
+          "ci_width_log10": 0.6624663755232905,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
-          "inside_ci": true,
+          "inside_ci": false,
           "lane": "acrylamide",
           "measured": 57253.94,
           "measured_ppb": 57253.94,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 22933.831247811584,
-          "predicted_p5": 5355.340032066393,
-          "predicted_p50": 16624.362259859583,
-          "predicted_p95": 70969.33809025447,
+          "predicted_mean": 22885.46786337422,
+          "predicted_p5": 6084.200453304165,
+          "predicted_p50": 27147.386053441973,
+          "predicted_p95": 27968.546021469047,
           "predicted_point": 27959.5640967869,
-          "predicted_std": 18814.375525150746,
+          "predicted_std": 7295.2039776331485,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -861,7 +861,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.960284322512857,
+          "ci_width_log10": 0.8830935914017732,
           "compound": "DMHF",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -871,17 +871,17 @@
           "measured_ppb": 5893.98,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 26.610440729847515,
-          "predicted_p5": 6.595090921660721,
-          "predicted_p50": 21.18688175751646,
-          "predicted_p95": 60.18733442582216,
+          "predicted_mean": 26.100760756420947,
+          "predicted_p5": 7.605386321178043,
+          "predicted_p50": 19.238813392831744,
+          "predicted_p95": 58.105182644088885,
           "predicted_point": 21.84064113843927,
-          "predicted_std": 19.434654363632053,
+          "predicted_std": 17.378104639197428,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.1222837035675086,
+          "ci_width_log10": 0.6624663755232905,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -891,12 +891,12 @@
           "measured_ppb": 100635.78,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 22933.831247811584,
-          "predicted_p5": 5355.340032066393,
-          "predicted_p50": 16624.362259859583,
-          "predicted_p95": 70969.33809025447,
+          "predicted_mean": 22885.46786337422,
+          "predicted_p5": 6084.200453304165,
+          "predicted_p50": 27147.386053441973,
+          "predicted_p95": 27968.546021469047,
           "predicted_point": 27959.5640967869,
-          "predicted_std": 18814.375525150746,
+          "predicted_std": 7295.2039776331485,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -932,7 +932,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.8645689209232483,
+          "ci_width_log10": 0.8683440390301062,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -942,12 +942,12 @@
           "measured_ppb": 28.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 6583.104633231468,
-          "predicted_p5": 1942.6639373896533,
-          "predicted_p50": 5676.189207475112,
-          "predicted_p95": 14222.194024584236,
+          "predicted_mean": 6604.964457090561,
+          "predicted_p5": 1940.235583081018,
+          "predicted_p50": 5729.847280734579,
+          "predicted_p95": 14328.426628039831,
           "predicted_point": 6110.035819625069,
-          "predicted_std": 3879.563948308621,
+          "predicted_std": 3891.5935111575927,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -974,7 +974,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9147267033079947,
+          "ci_width_log10": 0.9148226551334774,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -984,12 +984,12 @@
           "measured_ppb": 1459.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 4572.897028739906,
-          "predicted_p5": 1250.5335643001495,
-          "predicted_p50": 3618.5290748082907,
-          "predicted_p95": 10275.951740236866,
+          "predicted_mean": 4586.566000634143,
+          "predicted_p5": 1248.314929707282,
+          "predicted_p50": 3663.4689887007767,
+          "predicted_p95": 10259.987219492965,
           "predicted_point": 3679.8891690436685,
-          "predicted_std": 3396.701440433622,
+          "predicted_std": 3399.964366580635,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1016,7 +1016,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9147267033079947,
+          "ci_width_log10": 0.9148226551334774,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1026,32 +1026,32 @@
           "measured_ppb": 832.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 4572.897028739906,
-          "predicted_p5": 1250.5335643001495,
-          "predicted_p50": 3618.5290748082907,
-          "predicted_p95": 10275.951740236866,
+          "predicted_mean": 4586.566000634143,
+          "predicted_p5": 1248.314929707282,
+          "predicted_p50": 3663.4689887007767,
+          "predicted_p95": 10259.987219492965,
           "predicted_point": 3679.8891690436685,
-          "predicted_std": 3396.701440433622,
+          "predicted_std": 3399.964366580635,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.8238683524421617,
+          "ci_width_log10": 0.2678588584631869,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
-          "inside_ci": true,
+          "inside_ci": false,
           "lane": "acrylamide",
           "measured": 7000.0,
           "measured_ppb": 7000.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 2582.6197963411755,
-          "predicted_p5": 1073.0835041503613,
-          "predicted_p50": 2042.729365835502,
-          "predicted_p95": 7153.224761403693,
+          "predicted_mean": 1988.6369847245044,
+          "predicted_p5": 1186.504757113201,
+          "predicted_p50": 2152.4196425501896,
+          "predicted_p95": 2198.5094780551794,
           "predicted_point": 2191.616920021592,
-          "predicted_std": 1808.3274456961992,
+          "predicted_std": 341.960314544499,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1078,7 +1078,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.9022436251311989,
+          "ci_width_log10": 0.904574329610844,
           "compound": "Acrylamide",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1088,12 +1088,12 @@
           "measured_ppb": null,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 8372.55749662483,
-          "predicted_p5": 2428.887378839241,
-          "predicted_p50": 6840.2503979076055,
-          "predicted_p95": 19393.268187069625,
+          "predicted_mean": 8387.517542831714,
+          "predicted_p5": 2426.645994829128,
+          "predicted_p50": 6864.110709855662,
+          "predicted_p95": 19479.63229007754,
           "predicted_point": 7004.325426111863,
-          "predicted_std": 6142.317512831004,
+          "predicted_std": 6145.760097423127,
           "shared_with": null,
           "target_unit": "umol_per_mol_limiting_precursor"
         }
@@ -1120,7 +1120,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.969303227510638,
+          "ci_width_log10": 0.09105683341909801,
           "compound": "5-Hydroxymethylfurfural (HMF)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1130,37 +1130,37 @@
           "measured_ppb": 17400.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1303.9197251511673,
-          "predicted_p5": 378.49668460368446,
-          "predicted_p50": 1005.637364025697,
-          "predicted_p95": 3526.673928252302,
+          "predicted_mean": 1405.9125635876499,
+          "predicted_p5": 1182.633543432598,
+          "predicted_p50": 1454.2138110413346,
+          "predicted_p95": 1458.50199094617,
           "predicted_point": 1458.5059737773267,
-          "predicted_std": 954.5996443806059,
+          "predicted_std": 106.55342626715418,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9913468521023765,
+          "ci_width_log10": 1.4827109192491877e-06,
           "compound": "3-deoxyglucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
-          "inside_ci": true,
+          "inside_ci": false,
           "lane": "trunk",
           "measured": 52200.0,
           "measured_ppb": 52200.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 43530.24023683206,
-          "predicted_p5": 11842.765597617656,
-          "predicted_p50": 34302.95573222473,
-          "predicted_p95": 116091.38314484361,
+          "predicted_mean": 46982.89186571749,
+          "predicted_p5": 46982.79452714212,
+          "predicted_p50": 46982.90346861427,
+          "predicted_p95": 46982.95492987409,
           "predicted_point": 46982.900428788,
-          "predicted_std": 31025.561988025944,
+          "predicted_std": 0.050852155505311455,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9835108871291537,
+          "ci_width_log10": 1.0640983832276802e-06,
           "compound": "3,4-dideoxyglucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1170,17 +1170,17 @@
           "measured_ppb": 55500.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1584.8745882279875,
-          "predicted_p5": 435.43067939451527,
-          "predicted_p50": 1213.8194418433877,
-          "predicted_p95": 4192.083381254838,
+          "predicted_mean": 1711.129230034478,
+          "predicted_p5": 1711.1266869231456,
+          "predicted_p50": 1711.1295284758075,
+          "predicted_p95": 1711.1308794916622,
           "predicted_point": 1711.1294549099457,
-          "predicted_std": 1162.3943762079805,
+          "predicted_std": 0.001328701235363221,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.0008070617294165263,
+          "ci_width_log10": 2.057052881474318e-06,
           "compound": "glucosone",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1190,17 +1190,17 @@
           "measured_ppb": 7500.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 119.06657846938022,
-          "predicted_p5": 118.92018685731375,
-          "predicted_p50": 119.0859658885243,
-          "predicted_p95": 119.14138507265346,
+          "predicted_mean": 119.05903500696033,
+          "predicted_p5": 119.05869291527355,
+          "predicted_p50": 119.05907650609991,
+          "predicted_p95": 119.05925684278712,
           "predicted_point": 119.05906487059636,
-          "predicted_std": 0.07017064207365106,
+          "predicted_std": 0.00017873153265975274,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.08542931177674543,
+          "ci_width_log10": 0.08557795848824169,
           "compound": "glyoxal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1210,32 +1210,32 @@
           "measured_ppb": 5600.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 195.1573592890219,
-          "predicted_p5": 168.42361086804357,
-          "predicted_p50": 200.18995850213904,
-          "predicted_p95": 205.03702218081756,
+          "predicted_mean": 195.15113198916004,
+          "predicted_p5": 168.38086607749742,
+          "predicted_p50": 200.25811883005917,
+          "predicted_p95": 205.05515771847885,
           "predicted_point": 160.79393481301767,
-          "predicted_std": 11.09788170641985,
+          "predicted_std": 11.102464337478239,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 0.9639314948228529,
+          "ci_width_log10": 0.15310199331977326,
           "compound": "methylglyoxal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
-          "inside_ci": true,
+          "inside_ci": false,
           "lane": "trunk",
           "measured": 2600.0,
           "measured_ppb": 2600.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 1749.2924598567968,
-          "predicted_p5": 485.68000623325884,
-          "predicted_p50": 1343.7397972140714,
-          "predicted_p95": 4469.734430416886,
+          "predicted_mean": 1898.472204505783,
+          "predicted_p5": 1507.4013106903863,
+          "predicted_p50": 1928.621521238293,
+          "predicted_p95": 2144.5238565840828,
           "predicted_point": 2029.733012335392,
-          "predicted_std": 1243.2173780733774,
+          "predicted_std": 208.44854158665282,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -3117,134 +3117,6 @@
     },
     {
       "band": [
-        -5.406129755260192,
-        -4.827654275541714
-      ],
-      "centre": -5.026953780980191,
-      "distribution": "uniform_band",
-      "key": "b34.k_glc_tdg.log10_k_100C",
-      "kind": "fitted_rate",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 3, k_b 4.19 +/- 2.44 (x1e-3), Ea 107.2 +/- 52.7",
-      "unit": "log10(k at 100 C)"
-    },
-    {
-      "band": [
-        54.5,
-        159.9
-      ],
-      "centre": 107.2,
-      "distribution": "uniform_band",
-      "key": "b34.k_glc_tdg.ea_kj_mol",
-      "kind": "fitted_ea",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 3, k_b 4.19 +/- 2.44 (x1e-3), Ea 107.2 +/- 52.7",
-      "unit": "kJ/mol"
-    },
-    {
-      "band": [
-        -2.478757534337661,
-        -2.3818154830807687
-      ],
-      "centre": -2.427587212571361,
-      "distribution": "uniform_band",
-      "key": "b34.k_tdg_ddg.log10_k_100C",
-      "kind": "fitted_rate",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 4, k_b 30.5 +/- 3.39 (x1e-3), Ea 36.9 +/- 6.3; the NaCl column prints Ea 117.7 +/- 11.1 for the same step",
-      "unit": "log10(k at 100 C)"
-    },
-    {
-      "band": [
-        30.599999999999998,
-        43.199999999999996
-      ],
-      "centre": 36.9,
-      "distribution": "uniform_band",
-      "key": "b34.k_tdg_ddg.ea_kj_mol",
-      "kind": "fitted_ea",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 4, k_b 30.5 +/- 3.39 (x1e-3), Ea 36.9 +/- 6.3; the NaCl column prints Ea 117.7 +/- 11.1 for the same step",
-      "unit": "kJ/mol"
-    },
-    {
-      "band": [
-        -2.993702366217273,
-        -2.9335950011169647
-      ],
-      "centre": -2.9626096376988595,
-      "distribution": "uniform_band",
-      "key": "b34.k_fru_int.log10_k_100C",
-      "kind": "fitted_rate",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 6, k_b 330 +/- 22.8 (x1e-3), Ea 100.4 +/- 6.6",
-      "unit": "log10(k at 100 C)"
-    },
-    {
-      "band": [
-        93.80000000000001,
-        107.0
-      ],
-      "centre": 100.4,
-      "distribution": "uniform_band",
-      "key": "b34.k_fru_int.ea_kj_mol",
-      "kind": "fitted_ea",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 6, k_b 330 +/- 22.8 (x1e-3), Ea 100.4 +/- 6.6",
-      "unit": "kJ/mol"
-    },
-    {
-      "band": [
-        -5.220943842330665,
-        -5.0542662312417805
-      ],
-      "centre": -5.129657497425126,
-      "distribution": "uniform_band",
-      "key": "b34.k_fru_odg.log10_k_100C",
-      "kind": "fitted_rate",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 8, k_b 2.11 +/- 0.40 (x1e-3), Ea 99.3 +/- 21.8",
-      "unit": "log10(k at 100 C)"
-    },
-    {
-      "band": [
-        77.5,
-        121.1
-      ],
-      "centre": 99.3,
-      "distribution": "uniform_band",
-      "key": "b34.k_fru_odg.ea_kj_mol",
-      "kind": "fitted_ea",
-      "lane": "trunk",
-      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
-      "sampled": true,
-      "sigma": null,
-      "source": "ENV-B34 printed 95 % HPD: Table 2 step 8, k_b 2.11 +/- 0.40 (x1e-3), Ea 99.3 +/- 21.8",
-      "unit": "kJ/mol"
-    },
-    {
-      "band": [
         -9.191114581712858,
         -5.191114581712858
       ],
@@ -4103,19 +3975,23 @@
   ],
   "summary": {
     "benchmark_count": 23,
-    "ci_coverage_hits": 16,
-    "ci_coverage_rate": 0.35555555555555557,
+    "ci_coverage_hits": 12,
+    "ci_coverage_rate": 0.26666666666666666,
     "ci_level_pct": 90,
+    "excluded_prior_prefixes": [
+      "b34."
+    ],
+    "excluded_prior_rows": 8,
     "fixed_prior_count": 45,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 16,
-      "median_ci_width_log10": 0.9874288696157651,
-      "not_evaluable": 1,
-      "rate": 0.36363636363636365,
-      "total": 44
+      "hits": 12,
+      "median_ci_width_log10": 0.9148226551334774,
+      "not_evaluable": 3,
+      "rate": 0.2857142857142857,
+      "total": 42
     },
     "matched_compound_count": 45,
     "n_samples": 200,
@@ -4130,14 +4006,14 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 16,
-      "not_evaluable": 1,
+      "hits": 12,
+      "not_evaluable": 3,
       "rows_the_core_fit_read": {
         "hits": 0,
         "not_evaluable": 0,
         "total": 1
       },
-      "total": 43
+      "total": 41
     },
     "panel_benchmark_count": 37,
     "panel_split": {
@@ -4149,11 +4025,11 @@
         "total": 4
       },
       "maillard_path_holdout": {
-        "ci_coverage_rate": 0.26666666666666666,
-        "hits": 8,
-        "median_ci_width_log10": 0.962107908667855,
-        "not_evaluable": 1,
-        "total": 30
+        "ci_coverage_rate": 0.14285714285714285,
+        "hits": 4,
+        "median_ci_width_log10": 0.8830935914017732,
+        "not_evaluable": 3,
+        "total": 28
       },
       "trust_loop": {
         "ci_coverage_rate": 0.5,
@@ -4186,7 +4062,7 @@
       }
     ],
     "refused_compound_count": 32,
-    "sampled_prior_count": 63,
+    "sampled_prior_count": 55,
     "seed": 0,
     "shared_with_holdout_panel": {
       "declaration": "The four Hofmann 1998 ribose/cysteine pH-3 and pH-7 rows are the SAME MEASUREMENTS as four rows of the sulfur waves' hold-out panel: NOT independent evidence. Each carries `shared_with`.",
@@ -4194,11 +4070,11 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.36363636363636365,
-        "hits": 16,
-        "median_ci_width_log10": 0.9874288696157651,
-        "not_evaluable": 1,
-        "total": 44
+        "ci_coverage_rate": 0.2857142857142857,
+        "hits": 12,
+        "median_ci_width_log10": 0.9148226551334774,
+        "not_evaluable": 3,
+        "total": 42
       },
       "fitted_row": {
         "ci_coverage_rate": null,
@@ -4229,7 +4105,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 794.8,
+    "wall_seconds": 802.0,
     "workers": 1
   }
 }

@@ -72,16 +72,16 @@ The engine returns a number but declares the route unidentified; the rows leave 
 
 | # | benchmark | compound | VoI | miss (log10) | template |
 |---|---|---|---|---|---|
-| 1 | `mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.30 | 1.30 | free_precursor_sulfur_yield |
-| 2 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.20 | 1.31 | free_precursor_sulfur_yield |
-| 3 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.84 | 1.33 | free_precursor_sulfur_yield |
-| 4 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.66 | 1.21 | free_precursor_sulfur_yield |
-| 5 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 11.44 | 1.98 | free_precursor_sulfur_yield |
-| 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.15 | 1.12 | free_precursor_sulfur_yield |
-| 7 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.97 | 1.42 | free_precursor_sulfur_yield |
-| 8 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 9.48 | 1.55 | missing_positive_flavor_anchor |
-| 9 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Furfurylthiol (FFT) | 9.24 | 1.38 | free_precursor_sulfur_yield |
-| 10 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 8.34 | 0.87 | free_precursor_sulfur_yield |
+| 1 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.66 | 1.45 | free_precursor_sulfur_yield |
+| 2 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.39 | 1.47 | free_precursor_sulfur_yield |
+| 3 | `mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.33 | 1.35 | free_precursor_sulfur_yield |
+| 4 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 11.52 | 1.99 | free_precursor_sulfur_yield |
+| 5 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.48 | 1.23 | free_precursor_sulfur_yield |
+| 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.29 | 1.15 | free_precursor_sulfur_yield |
+| 7 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.97 | 1.48 | free_precursor_sulfur_yield |
+| 8 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 9.43 | 1.52 | missing_positive_flavor_anchor |
+| 9 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Furfurylthiol (FFT) | 9.13 | 1.32 | free_precursor_sulfur_yield |
+| 10 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 8.37 | 0.93 | free_precursor_sulfur_yield |
 
 ## 6. What you could predict if you had it
 

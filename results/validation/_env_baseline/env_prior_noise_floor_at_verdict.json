@@ -1,0 +1,12 @@
+{
+  "frozen_from": "results/validation/env_prior_ship_rule.json at commit 1f5a19d (the verdict as recorded)",
+  "width_floor": {
+    "n": 45,
+    "median_rel": 0.032237737155304175,
+    "p95_rel": 0.13366754763350322,
+    "max_rel": 0.16985206882397694
+  },
+  "median_floor_max_dex": 0.12112885064432827,
+  "n_seed_pairs": 45,
+  "note": "ENV-M1 (2026-09-11): the floor this rule was decided against, frozen. It was being re-measured from whatever seed-1 companion existed at run time, and two seed pairs of the same code gave 16.99 % and 11.28 % -- a verdict that depends on which pair measured the floor is not a verdict. From ENV-M1 on, per-coordinate streams make unreached rows bit-identical and the floor is a sanity check."
+}

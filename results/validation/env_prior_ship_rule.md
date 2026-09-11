@@ -4,7 +4,7 @@
 
 | test | result | pass |
 |---|---|---|
-| T1 prior rows | B18 6 rows, 4 sampled; B13 8 rows, 4 sampled | True |
+| T1 prior rows | B18 6 rows, 4 sampled; B13 7 rows, 4 sampled | True |
 | T2 widths | 5 rows the priors reach; 34 they do not; violations 0 | True |
 | T3 medians | floor 0.121 dex from 45 seed pairs; 0 unreached medians beyond it | True |
 | T4 | 5 widened; newly inside 0 | reported |

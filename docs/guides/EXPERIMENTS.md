@@ -211,6 +211,13 @@ it dry — a freeze-dried glucose melt and a roasted hazelnut. Two laboratories 
 other in the same matrix is not a check; it is the same experiment twice. One aqueous determination
 would settle it, and it is the cheapest number on this page.
 
+A candidate exists and is open access, not yet on this disk: Zhang, Sun, Pu, Zhang, Sun & Zhao 2021,
+*Food Science & Nutrition* 9:290–302 (doi 10.1002/fsn3.1995) heat 0.3 M glucose **in water, alone and
+with glutamic acid, at 90–110 °C for 0–6 h** and quantify 3-deoxyglucosone, 1-deoxyglucosone,
+**3,4-dideoxyglucosone**, glucosone, glyoxal, methylglyoxal and diacetyl, with zero-order formation
+constants printed per temperature. It measures the very intermediate this model loses; whether its
+time courses support a 3-DG → 3,4-DGE rate is the first thing to check once it is read.
+
 **Numbers behind figures.** Two published data sets that bear directly on the thiol problem exist only
 as figures. Their authors' underlying numbers would give that step its first data from a third
 laboratory.

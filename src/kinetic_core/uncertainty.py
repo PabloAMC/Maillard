@@ -100,6 +100,11 @@ UNIDENTIFIED_FLAT = "unidentified_direction_flat_across_its_declared_band"
 #: the disagreement. Not a refit -- the centre stays where it shipped and the band says what is
 #: actually known, which is less than a point estimate claims.
 SECOND_LABORATORY_BAND = "two_laboratories_disagree: flat across the disagreement"
+#: ENV-B34: the band is the source's own printed 95 % HPD on the constant, not a disagreement.
+PRINTED_HPD_BAND = (
+    "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval "
+    "is the measurement's, not a second laboratory's; no centre moves."
+)
 
 # ---------------------------------------------------------------------------
 # Unidentified coordinates (2026-09-04)
@@ -780,6 +785,38 @@ def _b13_priors() -> List[CorePrior]:
     return out
 
 
+def _b34_priors() -> List[CorePrior]:
+    """
+    ENV-B34 (2026-09-11). The 3-deoxyglucosone limb and the amine-free sugar entries, banded on the
+    source's own printed 95 % HPD (parameters_dicarbonyl.HPD_SINK_BANDS). Wave B34 added five
+    hold-out observables and three came back with 1e-6 dex intervals -- 3-deoxyglucosone at 1.11x
+    on fold error and OUTSIDE its own interval, because the constants that make it had no row here.
+    NO CENTRE MOVES. Pre-registration: kinetic_core_env_b34_prereg.md.
+    """
+    from .parameters_dicarbonyl import HPD_SINK_BANDS
+    from .parameters_furanic import FURANIC_PARAMETERS
+
+    out: List[CorePrior] = []
+    for key, spec in HPD_SINK_BANDS.items():
+        base = FURANIC_PARAMETERS[key]
+        rel = float(spec["k_rel_hpd"])
+        centre = math.log10(base.k_ref)
+        out.append(CorePrior(
+            key=f"b34.{key}.log10_k_100C", lane=TRUNK, kind="fitted_rate", distribution="uniform_band",
+            centre=centre, sigma=None,
+            band=(centre + math.log10(max(1.0 - rel, 1e-3)), centre + math.log10(1.0 + rel)),
+            unit="log10(k at 100 C)", source=f"ENV-B34 printed 95 % HPD: {spec['basis']}",
+            sampled=True, reason=PRINTED_HPD_BAND,
+        ))
+        ea = float(base.ea_kj_mol); hpd = float(spec["ea_hpd_kj_mol"])
+        out.append(CorePrior(
+            key=f"b34.{key}.ea_kj_mol", lane=TRUNK, kind="fitted_ea", distribution="uniform_band",
+            centre=ea, sigma=None, band=(max(ea - hpd, 0.0), ea + hpd), unit="kJ/mol",
+            source=f"ENV-B34 printed 95 % HPD: {spec['basis']}", sampled=True, reason=PRINTED_HPD_BAND,
+        ))
+    return out
+
+
 def _declared_band_priors() -> List[CorePrior]:
     from .parameters_furanic import FURANONE_PARTITION_EA_BAND_KJ_MOL
     from .parameters_lipid import LIPID_CARRIERS, Q10_ASSUMPTION
@@ -974,7 +1011,7 @@ def core_priors() -> Tuple[CorePrior, ...]:
     """The full priors table, in the order the sampler consumes it."""
     return tuple(
         _b1_priors() + _b3_priors() + _b7_priors() + _b8_priors() + _b13_priors()
-        + _b18_priors() + _declared_band_priors()
+        + _b34_priors() + _b18_priors() + _declared_band_priors()
     )
 
 
@@ -1020,6 +1057,26 @@ def _lipid_scale_band(priors: Sequence[CorePrior], suffix: str) -> Tuple[float, 
     return min(los), max(his)
 
 
+class _KeyedStreams:
+    """
+    ENV-M1 (2026-09-11): ONE RANDOM STREAM PER COORDINATE. Exactly one integer is consumed from the
+    parent generator per draw (this draw's entropy); every coordinate then gets its own generator
+    seeded from (entropy, sha256 of its key). A coordinate's values depend only on the draw index
+    and its own name, so adding, removing or reordering prior rows cannot move any other row --
+    which is what makes "not one row may narrow" testable as written, where the single shared stream
+    the sampler used until today re-shuffled every later draw whenever a prior was added
+    (kinetic_core_env_m1_prereg.md).
+    """
+
+    def __init__(self, parent: np.random.Generator) -> None:
+        self.entropy = int(parent.integers(0, 2**62))
+
+    def for_key(self, key: str) -> np.random.Generator:
+        import hashlib
+        digest = hashlib.sha256(key.encode("utf-8")).digest()
+        return np.random.default_rng([self.entropy, int.from_bytes(digest[:8], "little")])
+
+
 def draw_from_rng(
     rng: np.random.Generator, index: int, priors: Sequence[CorePrior] = CORE_PRIORS
 ) -> PanelDraw:
@@ -1054,30 +1111,32 @@ def draw_from_rng(
             return None
         return float(10.0 ** (math.log10(lo) + u * (math.log10(hi) - math.log10(lo))))
 
+    streams = _KeyedStreams(rng)
     for p in priors:
         if not p.sampled or p.key.startswith("b8."):
             continue  # b8 coordinates are drawn JOINTLY below
+        g = streams.for_key(p.key)
         if p.distribution == "normal_log10":
-            value = float(rng.normal(p.centre, p.sigma))
+            value = float(g.normal(p.centre, p.sigma))
         elif p.distribution == "normal":
-            value = float(rng.normal(p.centre, p.sigma))
+            value = float(g.normal(p.centre, p.sigma))
             if p.band is not None:
                 value = min(max(value, p.band[0]), p.band[1])
         elif p.distribution == "uniform":
-            value = float(rng.uniform(p.band[0], p.band[1]))
+            value = float(g.uniform(p.band[0], p.band[1]))
         elif p.distribution == "log_uniform":
             if p.kind == "observable":
-                value = float(rng.uniform(p.band[0], p.band[1]))  # already in dex
+                value = float(g.uniform(p.band[0], p.band[1]))  # already in dex
             elif p.key.endswith(".lipid_mass_fraction"):
                 # ONE quantile shared by every carrier (see the prior's reason):
-                # drawn on the first carrier, reused on the rest.
+                # drawn once on its own key, reused on every carrier.
                 if lipid_u is None:
-                    lipid_u = float(rng.uniform(0.0, 1.0))
+                    lipid_u = float(streams.for_key("lipid.shared_mass_fraction_quantile").uniform(0.0, 1.0))
                 value = float(p.centre) * _scale(lipid_u, lipid_lo, lipid_hi)
                 value = min(max(value, p.band[0]), p.band[1])
             elif p.key.endswith(".peroxide_value_meq_per_kg"):
                 if pv_u is None:
-                    pv_u = float(rng.uniform(0.0, 1.0))
+                    pv_u = float(streams.for_key("lipid.shared_peroxide_quantile").uniform(0.0, 1.0))
                 value = float(p.centre) * _scale(pv_u, pv_lo, pv_hi)
                 value = min(max(value, p.band[0]), p.band[1])
             else:
@@ -1085,10 +1144,10 @@ def draw_from_rng(
         elif p.distribution == "uniform_band":
             # A coordinate the fit was free to move and could not pin: flat across
             # its declared band, which is the honest shape of "no information here".
-            value = float(rng.uniform(p.band[0], p.band[1]))
+            value = float(g.uniform(p.band[0], p.band[1]))
         elif p.distribution == "log_uniform_dispersion":
-            log_d = float(rng.uniform(math.log10(p.band[0]), math.log10(p.band[1])))
-            u = float(rng.uniform(-0.5, 0.5))
+            log_d = float(g.uniform(math.log10(p.band[0]), math.log10(p.band[1])))
+            u = float(g.uniform(-0.5, 0.5))
             value = 10.0 ** (log_d * u)
             coords[p.key + ".D"] = 10.0 ** log_d
         else:
@@ -1106,8 +1165,9 @@ def draw_from_rng(
             b3_k[p.key.split(".")[1]] = value
         elif p.key.startswith("b3."):
             b3_ea[p.key.split(".")[1]] = value
-        elif p.key.startswith("b13."):
-            # ENV-B13: {constant: {field: value}} for the engine's `disputed_sinks` override.
+        elif p.key.startswith(("b13.", "b34.")):
+            # ENV-B13 and ENV-B34: {constant: {field: value}} for the engine's `disputed_sinks`
+            # override, which accepts both waves' keys.
             _, name, field = p.key.split(".")
             b13.setdefault(name, {})[field] = value
         elif p.key.startswith("b18."):
@@ -1153,7 +1213,9 @@ def draw_from_rng(
         from .parameters_pyrazine import FROZEN_B18
 
         maillard["pyrazine"] = {k: float(b18.get(k, FROZEN_B18[k])) for k in _B18_SAMPLABLE}
-    sulfur = sulfur_joint_draw(rng) if any(p.sampled and p.key.startswith("b8.") for p in priors) else None
+    # The joint Laplace block draws on one key of its own; adding a b8 coordinate re-shuffles the b8
+    # rows only, which is the smallest thing that can be true of a joint draw.
+    sulfur = sulfur_joint_draw(streams.for_key("b8.joint")) if any(p.sampled and p.key.startswith("b8.") for p in priors) else None
     ph_drift = None
     if sulfur is not None:
         frozen_sulfur = frozen_parameters(SULFUR)

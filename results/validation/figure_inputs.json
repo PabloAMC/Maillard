@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "943af606a821116c9d42dc1c596d8232ed7bb364",
-      "short": "943af606",
+      "commit": "1f5a19d2f46b8a54cf9872884451c5064dc7b930",
+      "short": "1f5a19d2",
       "branch": "reactions",
       "dirty": true
     },
@@ -139,7 +139,7 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "734a4853e8c1e05fe6faa48a9af172e24f53721ae61bd14bfa5ea0201d48c4e0"
+        "sha256": "51b825a19cab6baea0e8360d4b525e9ad6ac4eb5a6653f1b701f328ca9b31964"
       },
       {
         "path": "data/lit/reaction_rules.yml",
@@ -175,7 +175,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "aad3dea0fee08771f69e7c19d47821bbe8da5310104fdb094e469cca479daee7"
+        "sha256": "1b03829426d9bb4c1042dac44be5769fbbe94236722ca2338cf26f503a78c816"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -247,7 +247,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_dicarbonyl.py",
-        "sha256": "c8baed2bfbc2eb1fb3848df5885849b08201852b261a4642f64db5e1d42290c2"
+        "sha256": "4c5c8f4e3daee2a87509cdd4c2238e8b6122585a02ff0d336d61952fda0600a1"
       },
       {
         "path": "src/kinetic_core/parameters_furanic.py",
