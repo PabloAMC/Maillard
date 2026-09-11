@@ -19,7 +19,6 @@ from __future__ import annotations
 
 import json
 import math
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
@@ -32,6 +31,19 @@ from src import artifact_io, data_paths, provenance  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
 SCORECARD = V / "core_panel_scores.json"
+#: 2026-09-11 (review of PR #16). BOTH SIDES OF THIS RULE'S COMPARISON ARE FROZEN. It used to
+#: compare the tracked scorecard at HEAD against a live re-score, so every later wave re-decided
+#: B28's verdict: B31 added reporting columns (T5 narrowed), B34 and B35 added rows (T2 and T5
+#: narrowed again). A ship rule is the record of one decision taken at one moment; the pattern
+#: env_prior_ship_rule adopted first. BEFORE is the panel the commit before B28 started from;
+#: AFTER is the panel at B28's corrected verdict (the 2026-09-10 retraction of the 2-pentylfuran
+#: diagnosis). Nothing here reads the live panel any more.
+B28_BEFORE = data_paths.VALIDATION_DIR / "_b28_baseline" / "core_panel_scores_before_b28.json"
+B28_AFTER = data_paths.VALIDATION_DIR / "_b28_baseline" / "core_panel_scores_after_b28.json"
+
+
+def _frozen_pair():
+    return (json.loads(B28_BEFORE.read_text(encoding="utf-8")), json.loads(B28_AFTER.read_text(encoding="utf-8")))
 OUT = V / "kinetic_core_b28_ship_rule.json"
 #: The five products Frankel 1981 and Frankel 1989 both quantify. The C14 oxo-ester is excluded
 #: from BOTH because 1981 could not identify it for want of an authentic reference.
@@ -67,12 +79,7 @@ def t1() -> Dict[str, Any]:
 def t2() -> Dict[str, Any]:
     from src.kinetic_core import scoring
 
-    try:
-        tracked = json.loads(subprocess.check_output(
-            ["git", "show", "HEAD:" + data_paths.rel(SCORECARD)], cwd=ROOT, text=True))
-    except Exception as exc:  # pragma: no cover
-        return {"status": f"tracked scorecard unavailable: {exc}", "pass": False}
-    live = scoring.score_panel()
+    tracked, live = _frozen_pair()
 
     def refused(payload):
         out = {}
@@ -188,9 +195,7 @@ def t3() -> Dict[str, Any]:
 
 
 def t4() -> Dict[str, Any]:
-    from src.kinetic_core import scoring
-
-    live = scoring.score_panel()
+    _, live = _frozen_pair()
     rows = []
     for bench in live["benchmarks"]:
         for c in bench.get("compounds", []) or []:
@@ -209,12 +214,7 @@ def t4() -> Dict[str, Any]:
 def t5() -> Dict[str, Any]:
     from src.kinetic_core import scoring
 
-    try:
-        tracked = json.loads(subprocess.check_output(
-            ["git", "show", "HEAD:" + data_paths.rel(SCORECARD)], cwd=ROOT, text=True))
-    except Exception as exc:  # pragma: no cover
-        return {"status": f"unavailable: {exc}", "pass": False}
-    live = scoring.score_panel()
+    tracked, live = _frozen_pair()
     lipid_families = {"matrix_headspace", "lipid_oxidation"}
 
     # WHAT "BIT FOR BIT" MEANS HERE, narrowed 2026-09-10. This compared the WHOLE serialised row,
@@ -301,7 +301,7 @@ def main() -> int:
         "provenance": provenance.provenance_block(
             "kinetic_core_b28_ship_rule",
             generated_by="scripts/generators/generate_kinetic_core_b28_ship_rule.py",
-            inputs=[SCORECARD]),
+            inputs=[B28_BEFORE, B28_AFTER]),
         "prereg": data_paths.rel(V / "kinetic_core_b28_prereg.md"),
         "rule": ("SHIP if T1 (the arithmetic), T2 (refusals only ever lift, and nothing answered "
                  "moves) and T5 (no other lane moves) hold; T3 and T4 reported"),

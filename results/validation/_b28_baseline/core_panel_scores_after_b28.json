@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (107 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (106 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -41,10 +41,10 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-09-11",
+    "generated_on": "2026-09-10",
     "git": {
-      "commit": "943af606a821116c9d42dc1c596d8232ed7bb364",
-      "short": "943af606",
+      "commit": "25da68beb2bd92966ad2900393521e566da7386f",
+      "short": "25da68be",
       "branch": "reactions",
       "dirty": true
     },
@@ -120,7 +120,7 @@
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "a0dcaa615ef839c7fc4044cbd6df71b01974727abbf816edc9739d5b4ff382ad"
+        "sha256": "b59f948a0d09a01409682b6fa30a2e3cf5de0c760e3884701689b441ef466ae1"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
@@ -164,7 +164,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "1420cb0477cc0aecfb830b9bdefbe9cc7ae7160a4e3b74c7aff511c56bf5db73"
+        "sha256": "3004872736bab6ff8809d21fae8eeabe039e72349238dc414dbed9748218d567"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
@@ -204,11 +204,11 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
-        "sha256": "8c3c3b02959de5bfc9c610702529bc659cb5bd157924b11f7f7d657ea342fa69"
+        "sha256": "91c4b50a985cd842cfb5e0a4398ebdc027239250db937a52554646b7235f944d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
-        "sha256": "0f754e041e6fe91216a0d2101b78cd5d34cbeccc77d88f5aea16d24862fc8d34"
+        "sha256": "aa199ad5b23935fd2d20cf5cd2b4bdf0c9cc8b3692cf580e370ef31d5fdfea7d"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
@@ -216,7 +216,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
-        "sha256": "f76c219e8d8ee4c90102d8c3f838fdb9f49c685b41f622c70639f770eae4814e"
+        "sha256": "6142251527d63cc0b1b88375b9369ab187254f052590ee905bbcd2f0f2ab2f67"
       }
     ]
   },
@@ -245,19 +245,19 @@
   ],
   "summary": {
     "panel_benchmark_count": 37,
-    "scored_benchmark_count": 23,
-    "refused_benchmark_count": 14,
-    "matched_compound_count": 45,
-    "refused_compound_count": 32,
-    "within_band_count": 10,
-    "within_band_rate": 0.2222222222222222,
+    "scored_benchmark_count": 27,
+    "refused_benchmark_count": 10,
+    "matched_compound_count": 46,
+    "refused_compound_count": 18,
+    "within_band_count": 4,
+    "within_band_rate": 0.08695652173913043,
     "fold_summary": {
-      "n": 45,
-      "median_fold_error": 9.314883436507014,
-      "worst_fold_error": 9631.589383870052,
-      "best_fold_error": 1.1110425180991021,
-      "median_abs_log10_error": 0.9691774246430469,
-      "geometric_mean_fold": 17.80156918234414
+      "n": 46,
+      "median_fold_error": 30.888191682960606,
+      "worst_fold_error": 42300.67940081731,
+      "best_fold_error": 1.9901918483315129,
+      "median_abs_log10_error": 1.4893214384719875,
+      "geometric_mean_fold": 50.88784935580182
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -268,84 +268,84 @@
     "by_panel": {
       "external_matrix": {
         "benchmarks": 4,
-        "rows": 4,
+        "rows": 7,
         "within_band": 0,
         "contract_passes": 0,
         "strict_ready": 0,
         "within_band_rate": 0.0,
         "fold_summary": {
-          "n": 4,
-          "median_fold_error": 6.173109373877999,
-          "worst_fold_error": 365.6087699378835,
+          "n": 7,
+          "median_fold_error": 8.68927048137261,
+          "worst_fold_error": 33391.73597895205,
           "best_fold_error": 3.0420460788675383,
-          "median_abs_log10_error": 0.7510510664017771,
-          "geometric_mean_fold": 13.711063159923292
+          "median_abs_log10_error": 0.9389833162399543,
+          "geometric_mean_fold": 85.04062818252338
         }
       },
       "maillard_path_holdout": {
         "benchmarks": 17,
-        "rows": 31,
-        "within_band": 5,
+        "rows": 26,
+        "within_band": 3,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.16129032258064516,
+        "within_band_rate": 0.11538461538461539,
         "fold_summary": {
-          "n": 31,
-          "median_fold_error": 29.45034969216489,
+          "n": 26,
+          "median_fold_error": 26.506389554613264,
           "worst_fold_error": 476.7619131435321,
-          "best_fold_error": 1.1110425180991021,
-          "median_abs_log10_error": 1.4690904559474305,
-          "geometric_mean_fold": 21.89705339854554
+          "best_fold_error": 1.9901918483315129,
+          "median_abs_log10_error": 1.420655261269571,
+          "geometric_mean_fold": 25.446802309523257
         }
       },
       "trust_loop": {
         "benchmarks": 16,
-        "rows": 10,
-        "within_band": 5,
+        "rows": 13,
+        "within_band": 1,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.5,
+        "within_band_rate": 0.07692307692307693,
         "fold_summary": {
-          "n": 10,
-          "median_fold_error": 3.109741684070479,
-          "worst_fold_error": 9631.589383870052,
-          "best_fold_error": 1.5378727566967958,
-          "median_abs_log10_error": 0.4850266179479912,
-          "geometric_mean_fold": 10.400117266983468
+          "n": 13,
+          "median_fold_error": 34.240232376046094,
+          "worst_fold_error": 42300.67940081731,
+          "best_fold_error": 2.3158474462062624,
+          "median_abs_log10_error": 1.5345367034143473,
+          "geometric_mean_fold": 154.3448983573516
         }
       }
     },
     "by_evidence_role": {
       "external_holdout": {
         "benchmarks": 21,
-        "rows": 35,
-        "within_band": 5,
+        "rows": 33,
+        "within_band": 3,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.14285714285714285,
+        "within_band_rate": 0.09090909090909091,
         "fold_summary": {
-          "n": 35,
+          "n": 33,
           "median_fold_error": 23.562429417061633,
-          "worst_fold_error": 476.7619131435321,
-          "best_fold_error": 1.1110425180991021,
+          "worst_fold_error": 33391.73597895205,
+          "best_fold_error": 1.9901918483315129,
           "median_abs_log10_error": 1.3722200665917117,
-          "geometric_mean_fold": 20.756289973625023
+          "geometric_mean_fold": 32.86875830438901
         }
       },
       "predictive": {
         "benchmarks": 16,
-        "rows": 10,
-        "within_band": 5,
+        "rows": 13,
+        "within_band": 1,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.5,
+        "within_band_rate": 0.07692307692307693,
         "fold_summary": {
-          "n": 10,
-          "median_fold_error": 3.109741684070479,
-          "worst_fold_error": 9631.589383870052,
-          "best_fold_error": 1.5378727566967958,
-          "median_abs_log10_error": 0.4850266179479912,
-          "geometric_mean_fold": 10.400117266983468
+          "n": 13,
+          "median_fold_error": 34.240232376046094,
+          "worst_fold_error": 42300.67940081731,
+          "best_fold_error": 2.3158474462062624,
+          "median_abs_log10_error": 1.5345367034143473,
+          "geometric_mean_fold": 154.3448983573516
         }
       }
     },
@@ -368,18 +368,18 @@
       },
       "lipid": {
         "benchmarks": null,
-        "rows": 8,
-        "within_band": 4,
+        "rows": 14,
+        "within_band": 0,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.5,
+        "within_band_rate": 0.0,
         "fold_summary": {
-          "n": 8,
-          "median_fold_error": 2.7857188141599183,
-          "worst_fold_error": 365.6087699378835,
-          "best_fold_error": 1.5378727566967958,
-          "median_abs_log10_error": 0.4430909257199783,
-          "geometric_mean_fold": 5.146366151585473
+          "n": 14,
+          "median_fold_error": 199.9245011569648,
+          "worst_fold_error": 42300.67940081731,
+          "best_fold_error": 3.0420460788675383,
+          "median_abs_log10_error": 2.0487766540591164,
+          "geometric_mean_fold": 225.02102620368004
         }
       },
       "sulfur": {
@@ -400,52 +400,52 @@
       },
       "trunk": {
         "benchmarks": null,
-        "rows": 6,
-        "within_band": 2,
+        "rows": 1,
+        "within_band": 0,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.3333333333333333,
+        "within_band_rate": 0.0,
         "fold_summary": {
-          "n": 6,
-          "median_fold_error": 22.182366746939493,
-          "worst_fold_error": 62.99394345278661,
-          "best_fold_error": 1.1110425180991021,
-          "median_abs_log10_error": 1.29382557598423,
-          "geometric_mean_fold": 10.320218778350558
+          "n": 1,
+          "median_fold_error": 11.930016272018708,
+          "worst_fold_error": 11.930016272018708,
+          "best_fold_error": 11.930016272018708,
+          "median_abs_log10_error": 1.0766410360293623,
+          "geometric_mean_fold": 11.930016272018706
         }
       }
     },
     "honest_literature": {
-      "benchmarks": 23,
-      "rows": 45,
-      "within_band": 10,
+      "benchmarks": 27,
+      "rows": 46,
+      "within_band": 4,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.2222222222222222,
+      "within_band_rate": 0.08695652173913043,
       "fold_summary": {
-        "n": 45,
-        "median_fold_error": 9.314883436507014,
-        "worst_fold_error": 9631.589383870052,
-        "best_fold_error": 1.1110425180991021,
-        "median_abs_log10_error": 0.9691774246430469,
-        "geometric_mean_fold": 17.80156918234414
+        "n": 46,
+        "median_fold_error": 30.888191682960606,
+        "worst_fold_error": 42300.67940081731,
+        "best_fold_error": 1.9901918483315129,
+        "median_abs_log10_error": 1.4893214384719875,
+        "geometric_mean_fold": 50.88784935580182
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
     "out_of_sample": {
-      "benchmarks": 22,
-      "rows": 44,
-      "within_band": 9,
+      "benchmarks": 26,
+      "rows": 45,
+      "within_band": 3,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.20454545454545456,
+      "within_band_rate": 0.06666666666666667,
       "fold_summary": {
-        "n": 44,
-        "median_fold_error": 10.622449854262861,
-        "worst_fold_error": 9631.589383870052,
-        "best_fold_error": 1.1110425180991021,
-        "median_abs_log10_error": 1.0229092303362046,
-        "geometric_mean_fold": 18.646139562049264
+        "n": 45,
+        "median_fold_error": 32.32603367375632,
+        "worst_fold_error": 42300.67940081731,
+        "best_fold_error": 1.9901918483315129,
+        "median_abs_log10_error": 1.5095524209965447,
+        "geometric_mean_fold": 54.50472956232477
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -467,11 +467,11 @@
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
     "holdout_within_band": {
-      "hits": 5,
-      "total": 31
+      "hits": 3,
+      "total": 26
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.9
+    "wall_seconds": 12.9
   },
   "benchmarks": [
     {
@@ -539,12 +539,7 @@
             "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -613,7 +608,7 @@
           "panel": "trust_loop",
           "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
           "target_unit": "ppb",
-          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxymethyl)lysine (CML)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from.",
+          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
           "envelope_state": "out_of_envelope",
           "lane": "acrylamide",
           "unidentified_route": false
@@ -623,7 +618,7 @@
           "panel": "trust_loop",
           "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)",
           "target_unit": "ppb",
-          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from.",
+          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
           "envelope_state": "out_of_envelope",
           "lane": "acrylamide",
           "unidentified_route": false
@@ -641,7 +636,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxymethyl)lysine (CML)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from.; GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from.",
+        "every target refused: GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.; GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -713,7 +708,7 @@
           "panel": "trust_loop",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "unidentified_route": false
@@ -731,7 +726,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+        "every target refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -803,7 +798,7 @@
           "panel": "trust_loop",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "unidentified_route": false
@@ -821,7 +816,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+        "every target refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -893,7 +888,7 @@
           "panel": "trust_loop",
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "target_unit": "ppb",
-          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "unidentified_route": false
@@ -911,7 +906,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+        "every target refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -1065,7 +1060,7 @@
           "panel": "trust_loop",
           "compound": "2-Furfurylthiol (FFT)",
           "target_unit": "ppb",
-          "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+          "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "unidentified_route": false
@@ -1083,7 +1078,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+        "every target refused: UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
         "ranking n/a < 0.85"
       ],
       "within_band_count": 0,
@@ -1252,12 +1247,7 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": true,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": true
         }
       ],
       "refused_compounds": [],
@@ -1434,12 +1424,7 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -1462,12 +1447,7 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -1529,46 +1509,82 @@
         "mean_abs_log10_error": 0.12,
         "source": "global BenchmarkThresholds default"
       },
-      "compounds": [],
-      "refused_compounds": [
+      "compounds": [
         {
-          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-          "panel": "trust_loop",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
+          "measured": 1138.0,
+          "measured_ppb": 1138.0,
+          "predicted": 0.33900603452109773,
+          "fold_error": 3356.8723978840485,
+          "abs_log10_error": 3.52593483307164,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.012189666531022018,
+            9.428075095347506
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         },
         {
-          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-          "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
+          "measured": 638.0,
+          "measured_ppb": 638.0,
+          "predicted": 0.0748466837558481,
+          "fold_error": 8524.091756438711,
+          "abs_log10_error": 3.9306481159718376,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.002691268069093535,
+            2.0815563241661
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         }
       ],
-      "matched_compounds": 0,
+      "refused_compounds": [],
+      "matched_compounds": 2,
       "total_compounds": 2,
-      "coverage": 0.0,
-      "max_ratio": null,
-      "mean_abs_log10_error": null,
+      "coverage": 1.0,
+      "max_ratio": 8524.091756438711,
+      "mean_abs_log10_error": 3.728291474521739,
       "pearson_r_log10": null,
-      "ranking_status": "fail",
+      "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "refused",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-        "ranking n/a < 0.85"
+        "max ratio 8524 > 2.00",
+        "mean |log10 ratio| 3.728 > 0.120"
       ],
       "within_band_count": 0,
-      "lanes": []
+      "lanes": [
+        "lipid"
+      ]
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -1614,14 +1630,14 @@
           "target_unit": "ppb",
           "measured": 782.0,
           "measured_ppb": 782.0,
-          "predicted": 353.83863004817323,
-          "fold_error": 2.210046992024401,
-          "abs_log10_error": 0.3444015081466123,
-          "within_band": true,
+          "predicted": 22.838630048173226,
+          "fold_error": 34.240232376046094,
+          "abs_log10_error": 1.5345367034143473,
+          "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            3.623419826436667,
-            34553.48320415125
+            0.23387481721240153,
+            2230.265869127795
           ],
           "measured_within_interval": true,
           "lane": "lipid",
@@ -1633,26 +1649,21 @@
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": 331.0,
-          "declared_share_of_prediction": 0.9354546730947272,
-          "formed_predicted": 22.83863004817323,
-          "formed_measured": 451.0,
-          "fold_error_formed_only": 19.747243991811747
+          "in_core_fit": false
         },
         {
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
           "measured": 163.0,
           "measured_ppb": 163.0,
-          "predicted": 64.44237549354317,
-          "fold_error": 2.5293915494522987,
-          "abs_log10_error": 0.4030160632725034,
-          "within_band": true,
+          "predicted": 5.042375493543165,
+          "fold_error": 32.32603367375632,
+          "abs_log10_error": 1.5095524209965447,
+          "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.6599103692951521,
-            6293.005766353429
+            0.05163552473949842,
+            492.4042264730872
           ],
           "measured_within_interval": true,
           "lane": "lipid",
@@ -1664,26 +1675,21 @@
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": 59.4,
-          "declared_share_of_prediction": 0.9217537302912058,
-          "formed_predicted": 5.042375493543169,
-          "formed_measured": 103.6,
-          "fold_error_formed_only": 20.54587170920952
+          "in_core_fit": false
         },
         {
           "compound": "nonanal",
           "target_unit": "ppb",
           "measured": 24.0,
           "measured_ppb": 24.0,
-          "predicted": 15.605972532831462,
-          "fold_error": 1.5378727566967958,
-          "abs_log10_error": 0.18692040350798525,
-          "within_band": true,
-          "within_contract_ratio": true,
+          "predicted": 7.365972532831463,
+          "fold_error": 3.2582255626161634,
+          "abs_log10_error": 0.5129811466417982,
+          "within_band": false,
+          "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.15981010970619292,
-            1523.9735404928028
+            0.07542989557928069,
+            719.3109699774155
           ],
           "measured_within_interval": true,
           "lane": "lipid",
@@ -1696,94 +1702,27 @@
             "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": 8.24,
-          "declared_share_of_prediction": 0.5280029797992333,
-          "formed_predicted": 7.365972532831462,
-          "formed_measured": 15.76,
-          "fold_error_formed_only": 2.139568119451281
-        },
-        {
-          "compound": "(E,E)-2,4-decadienal",
-          "target_unit": "ppb",
-          "measured": 46.9,
-          "measured_ppb": 46.9,
-          "predicted": 75.95490029354261,
-          "fold_error": 1.6195074689454714,
-          "abs_log10_error": 0.20938295525717074,
-          "within_band": true,
-          "within_contract_ratio": true,
-          "interval_ug_per_L": [
-            0.7778022755773536,
-            7417.240936097324
-          ],
-          "measured_within_interval": true,
-          "lane": "lipid",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
-            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 140.0 C: 11.5 decades of 10 C, a factor of 2.9e+03-3.07e+05 on the rate.",
-            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (0) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
-            "pH 7.1 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": 0.06,
-          "declared_share_of_prediction": 0.0007899424496394338,
-          "formed_predicted": 75.8949002935426,
-          "formed_measured": 46.839999999999996,
-          "fold_error_formed_only": 1.6203010310320796
+          "in_core_fit": false
         }
       ],
-      "refused_compounds": [
-        {
-          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "panel": "trust_loop",
-          "compound": "2,5-dimethylpyrazine",
-          "target_unit": "ppb",
-          "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
-        },
-        {
-          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "panel": "trust_loop",
-          "compound": "methional",
-          "target_unit": "ppb",
-          "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
-        },
-        {
-          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "panel": "trust_loop",
-          "compound": "2-acetyl-1-pyrroline",
-          "target_unit": "ppb",
-          "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
-        }
-      ],
-      "matched_compounds": 4,
-      "total_compounds": 7,
-      "coverage": 0.5714285714285714,
-      "max_ratio": 2.5293915494522987,
-      "mean_abs_log10_error": 0.2859302325460679,
-      "pearson_r_log10": 0.9135787128622884,
-      "ranking_status": "pass",
+      "refused_compounds": [],
+      "matched_compounds": 3,
+      "total_compounds": 3,
+      "coverage": 1.0,
+      "max_ratio": 34.240232376046094,
+      "mean_abs_log10_error": 1.1856900903508967,
+      "pearson_r_log10": 0.6788095201160109,
+      "ranking_status": "fail",
       "scale_status": "fail",
-      "overall_status": "coverage-gap",
+      "overall_status": "ranking-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "coverage 57.1% < 100%",
-        "max ratio 2.529 > 2.00",
-        "mean |log10 ratio| 0.286 > 0.120"
+        "ranking 0.679 < 0.85",
+        "max ratio 34.24 > 2.00",
+        "mean |log10 ratio| 1.186 > 0.120"
       ],
-      "within_band_count": 4,
+      "within_band_count": 0,
       "lanes": [
         "lipid"
       ]
@@ -1848,12 +1787,7 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -1915,46 +1849,82 @@
         "mean_abs_log10_error": 0.12,
         "source": "global BenchmarkThresholds default"
       },
-      "compounds": [],
-      "refused_compounds": [
+      "compounds": [
         {
-          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-          "panel": "trust_loop",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
+          "measured": 1621.71,
+          "measured_ppb": 1621.71,
+          "predicted": 0.26683055620370266,
+          "fold_error": 6077.677246087067,
+          "abs_log10_error": 3.783737633229085,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.009436714193068766,
+            7.544844981770498
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         },
         {
-          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-          "panel": "trust_loop",
           "compound": "2-pentylfuran",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
+          "measured": 2492.0,
+          "measured_ppb": 2492.0,
+          "predicted": 0.05891158334331271,
+          "fold_error": 42300.67940081731,
+          "abs_log10_error": 4.62634734273335,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.002083463687897819,
+            1.665771605320289
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         }
       ],
-      "matched_compounds": 0,
+      "refused_compounds": [],
+      "matched_compounds": 2,
       "total_compounds": 2,
-      "coverage": 0.0,
-      "max_ratio": null,
-      "mean_abs_log10_error": null,
+      "coverage": 1.0,
+      "max_ratio": 42300.67940081731,
+      "mean_abs_log10_error": 4.205042487981218,
       "pearson_r_log10": null,
-      "ranking_status": "fail",
+      "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "refused",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-        "ranking n/a < 0.85"
+        "max ratio 4.23e+04 > 2.00",
+        "mean |log10 ratio| 4.205 > 0.120"
       ],
       "within_band_count": 0,
-      "lanes": []
+      "lanes": [
+        "lipid"
+      ]
     },
     {
       "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
@@ -2019,12 +1989,7 @@
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -2109,12 +2074,7 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2140,12 +2100,7 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -2234,12 +2189,7 @@
             "DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and runs at EXACTLY ZERO. No measurement of DMHF consumption exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a named prohibited derivation. Any DMHF number here is a FORMATION number with no sink."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2265,12 +2215,7 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [
@@ -2371,12 +2316,7 @@
             "DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and runs at EXACTLY ZERO. No measurement of DMHF consumption exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a named prohibited derivation. Any DMHF number here is a FORMATION number with no sink."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2402,12 +2342,7 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [
@@ -2504,12 +2439,7 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -2594,12 +2524,7 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -2684,12 +2609,7 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "5-Hydroxymethylfurfural (HMF)",
@@ -2715,12 +2635,7 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -2805,12 +2720,7 @@
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.03 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.02 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -2897,179 +2807,26 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
-        },
-        {
-          "compound": "3-deoxyglucosone",
-          "target_unit": "ppb",
-          "measured": 52200.0,
-          "measured_ppb": 52200.0,
-          "predicted": 46982.900428788,
-          "fold_error": 1.1110425180991021,
-          "abs_log10_error": 0.04573067912313049,
-          "within_band": true,
-          "within_contract_ratio": true,
-          "interval_ug_per_L": [
-            6717.470046821686,
-            328604.8046832479
-          ],
-          "measured_within_interval": true,
-          "lane": "trunk",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
-        },
-        {
-          "compound": "3,4-dideoxyglucosone",
-          "target_unit": "ppb",
-          "measured": 55500.0,
-          "measured_ppb": 55500.0,
-          "predicted": 1711.1294549099457,
-          "fold_error": 32.434717221860275,
-          "abs_log10_error": 1.5110101159390978,
-          "within_band": false,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            244.6520064680561,
-            11967.872463955076
-          ],
-          "measured_within_interval": false,
-          "lane": "trunk",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
-        },
-        {
-          "compound": "glucosone",
-          "target_unit": "ppb",
-          "measured": 7500.0,
-          "measured_ppb": 7500.0,
-          "predicted": 119.05906487059636,
-          "fold_error": 62.99394345278661,
-          "abs_log10_error": 1.7992987962555453,
-          "within_band": false,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            17.022697508491444,
-            832.715315583204
-          ],
-          "measured_within_interval": false,
-          "lane": "trunk",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
-            "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
-        },
-        {
-          "compound": "glyoxal",
-          "target_unit": "ppb",
-          "measured": 5600.0,
-          "measured_ppb": 5600.0,
-          "predicted": 160.79393481301767,
-          "fold_error": 34.82718428721872,
-          "abs_log10_error": 1.5419183639800649,
-          "within_band": false,
-          "within_contract_ratio": false,
-          "interval_ug_per_L": [
-            22.989820359307018,
-            1124.6146802615692
-          ],
-          "measured_within_interval": false,
-          "lane": "trunk",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
-            "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
-        },
-        {
-          "compound": "methylglyoxal",
-          "target_unit": "ppb",
-          "measured": 2600.0,
-          "measured_ppb": 2600.0,
-          "predicted": 2029.733012335392,
-          "fold_error": 1.2809566500613123,
-          "abs_log10_error": 0.10753443266605756,
-          "within_band": true,
-          "within_contract_ratio": true,
-          "interval_ug_per_L": [
-            290.2049594420894,
-            14196.22913848313
-          ],
-          "measured_within_interval": true,
-          "lane": "trunk",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
-            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
-          ],
-          "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
-      "matched_compounds": 6,
-      "total_compounds": 6,
+      "matched_compounds": 1,
+      "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 62.99394345278661,
-      "mean_abs_log10_error": 1.0136889039988763,
-      "pearson_r_log10": 0.5806196504750217,
-      "ranking_status": "fail",
+      "max_ratio": 11.930016272018708,
+      "mean_abs_log10_error": 1.0766410360293623,
+      "pearson_r_log10": null,
+      "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "ranking-gap",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "ranking 0.581 < 0.85",
-        "max ratio 62.99 > 1.50",
-        "mean |log10 ratio| 1.014 > 0.100"
+        "max ratio 11.93 > 1.50",
+        "mean |log10 ratio| 1.077 > 0.100"
       ],
-      "within_band_count": 2,
+      "within_band_count": 0,
       "lanes": [
         "trunk"
       ]
@@ -3299,12 +3056,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH3_FFT",
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -3325,12 +3077,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH3_MFT",
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -3415,12 +3162,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH7_FFT",
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -3441,12 +3183,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": "hofmann_ribose_pH7_MFT",
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -3531,12 +3268,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -3557,12 +3289,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -3647,12 +3374,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -3673,12 +3395,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -3763,12 +3480,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -3789,12 +3501,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -3879,12 +3586,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -3905,12 +3607,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -3995,12 +3692,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "2-Furfurylthiol (FFT)",
@@ -4021,12 +3713,7 @@
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [],
@@ -4088,46 +3775,55 @@
         "mean_abs_log10_error": 0.12,
         "source": "global BenchmarkThresholds default"
       },
-      "compounds": [],
-      "refused_compounds": [
+      "compounds": [
         {
-          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
-          "panel": "external_matrix",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
+          "measured": 1260.0,
+          "measured_ppb": 1260.0,
+          "predicted": 0.33900603452109773,
+          "fold_error": 3716.7479976572067,
+          "abs_log10_error": 3.5701631161301504,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.012189666531022018,
+            9.428075095347506
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
-        },
-        {
-          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
-          "panel": "external_matrix",
-          "compound": "nonanal",
-          "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         }
       ],
-      "matched_compounds": 0,
-      "total_compounds": 2,
-      "coverage": 0.0,
-      "max_ratio": null,
-      "mean_abs_log10_error": null,
+      "refused_compounds": [],
+      "matched_compounds": 1,
+      "total_compounds": 1,
+      "coverage": 1.0,
+      "max_ratio": 3716.7479976572067,
+      "mean_abs_log10_error": 3.5701631161301504,
       "pearson_r_log10": null,
-      "ranking_status": "fail",
+      "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "refused",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-        "ranking n/a < 0.85"
+        "max ratio 3717 > 2.00",
+        "mean |log10 ratio| 3.570 > 0.120"
       ],
       "within_band_count": 0,
-      "lanes": []
+      "lanes": [
+        "lipid"
+      ]
     },
     {
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -4192,59 +3888,22 @@
             "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
-      "refused_compounds": [
-        {
-          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
-          "panel": "external_matrix",
-          "compound": "furaneol",
-          "target_unit": "ppb",
-          "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
-        },
-        {
-          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
-          "panel": "external_matrix",
-          "compound": "2,5-dimethylpyrazine",
-          "target_unit": "ppb",
-          "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-          "envelope_state": "out_of_envelope",
-          "lane": "lipid",
-          "unidentified_route": false
-        },
-        {
-          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
-          "panel": "external_matrix",
-          "compound": "furfural",
-          "target_unit": "ppb",
-          "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-          "envelope_state": "out_of_envelope",
-          "lane": "sulfur",
-          "unidentified_route": false
-        }
-      ],
+      "refused_compounds": [],
       "matched_compounds": 1,
-      "total_compounds": 4,
-      "coverage": 0.25,
+      "total_compounds": 1,
+      "coverage": 1.0,
       "max_ratio": 3.656948266383388,
       "mean_abs_log10_error": 0.5631188165635999,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "coverage-gap",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "coverage 25.0% < 100%",
         "max ratio 3.657 > 2.00",
         "mean |log10 ratio| 0.563 > 0.120"
       ],
@@ -4316,12 +3975,7 @@
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "hexanal",
@@ -4347,12 +4001,7 @@
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         },
         {
           "compound": "nonanal",
@@ -4379,12 +4028,7 @@
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
           "shared_with": null,
-          "in_core_fit": false,
-          "carried_declared_ug_per_l": null,
-          "declared_share_of_prediction": null,
-          "formed_predicted": null,
-          "formed_measured": null,
-          "fold_error_formed_only": null
+          "in_core_fit": false
         }
       ],
       "refused_compounds": [
@@ -4459,46 +4103,83 @@
         "mean_abs_log10_error": 0.12,
         "source": "global BenchmarkThresholds default"
       },
-      "compounds": [],
-      "refused_compounds": [
+      "compounds": [
         {
-          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
-          "panel": "external_matrix",
           "compound": "hexanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
+          "measured": 11320.0,
+          "measured_ppb": 11320.0,
+          "predicted": 0.33900603452109773,
+          "fold_error": 33391.73597895205,
+          "abs_log10_error": 4.523638997864841,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.012189666531022018,
+            9.428075095347506
+          ],
+          "measured_within_interval": false,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         },
         {
-          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
-          "panel": "external_matrix",
           "compound": "nonanal",
           "target_unit": "ppb",
-          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-          "envelope_state": "out_of_envelope",
+          "measured": 0.8018,
+          "measured_ppb": 0.8018,
+          "predicted": 0.10933708079159744,
+          "fold_error": 7.333285233106555,
+          "abs_log10_error": 0.8652985775027833,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.003931441976269723,
+            3.0407665452489288
+          ],
+          "measured_within_interval": true,
           "lane": "lipid",
-          "unidentified_route": false
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.",
+            "the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.",
+            "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
+            "NONANAL RESTS ON A DECLARED ANCHOR, NOT A MEASURED YIELD. This matrix is 26 % oleate by fatty-acid share. The oleate -> nonanal SHARE is measured -- 15 % of the slate (Selke 1978, republished by Frankel 1981) and 10 % (Frankel 1981's own photosensitized column, the only independent determination). But Frankel 1981 prints PEAK AREAS: no internal standard, no response factors, no replicates. No absolute yield from an oleate hydroperoxide exists anywhere in the corpus, so the absolute here assumes the named-product molar yield per oleate hydroperoxide is 0.45 times the measured one per LINOLEATE hydroperoxide, banded 0.2 to 1. Read the interval, not the point. Frankel 1989's silence on nonanal remains a declared hold-out and is still honoured: nonanal from a LINOLEATE feed is exactly zero, by construction.",
+            "temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.",
+            "pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
+          ],
+          "shared_with": null,
+          "in_core_fit": false
         }
       ],
-      "matched_compounds": 0,
+      "refused_compounds": [],
+      "matched_compounds": 2,
       "total_compounds": 2,
-      "coverage": 0.0,
-      "max_ratio": null,
-      "mean_abs_log10_error": null,
+      "coverage": 1.0,
+      "max_ratio": 33391.73597895205,
+      "mean_abs_log10_error": 2.694468787683812,
       "pearson_r_log10": null,
-      "ranking_status": "fail",
+      "ranking_status": "n/a",
       "scale_status": "fail",
-      "overall_status": "refused",
+      "overall_status": "scale-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "every target refused: THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.; THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-        "ranking n/a < 0.85"
+        "max ratio 3.339e+04 > 2.00",
+        "mean |log10 ratio| 2.694 > 0.120"
       ],
       "within_band_count": 0,
-      "lanes": []
+      "lanes": [
+        "lipid"
+      ]
     }
   ],
   "refused_compounds": [
@@ -4507,7 +4188,7 @@
       "panel": "trust_loop",
       "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
       "target_unit": "ppb",
-      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxymethyl)lysine (CML)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from.",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "envelope_state": "out_of_envelope",
       "lane": "acrylamide",
       "unidentified_route": false
@@ -4517,7 +4198,7 @@
       "panel": "trust_loop",
       "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)",
       "target_unit": "ppb",
-      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from.",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
       "envelope_state": "out_of_envelope",
       "lane": "acrylamide",
       "unidentified_route": false
@@ -4527,7 +4208,7 @@
       "panel": "trust_loop",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "unidentified_route": false
@@ -4537,7 +4218,7 @@
       "panel": "trust_loop",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "unidentified_route": false
@@ -4547,7 +4228,7 @@
       "panel": "trust_loop",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "target_unit": "ppb",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "unidentified_route": false
@@ -4577,7 +4258,7 @@
       "panel": "trust_loop",
       "compound": "2-Furfurylthiol (FFT)",
       "target_unit": "ppb",
-      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
+      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "unidentified_route": false
@@ -4610,76 +4291,6 @@
       "reason": "UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-      "panel": "trust_loop",
-      "compound": "hexanal",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-      "panel": "trust_loop",
-      "compound": "2-pentylfuran",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-      "panel": "trust_loop",
-      "compound": "2,5-dimethylpyrazine",
-      "target_unit": "ppb",
-      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-      "panel": "trust_loop",
-      "compound": "methional",
-      "target_unit": "ppb",
-      "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-      "panel": "trust_loop",
-      "compound": "2-acetyl-1-pyrroline",
-      "target_unit": "ppb",
-      "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-      "panel": "trust_loop",
-      "compound": "hexanal",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-      "panel": "trust_loop",
-      "compound": "2-pentylfuran",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
       "unidentified_route": false
     },
     {
@@ -4743,81 +4354,11 @@
       "unidentified_route": true
     },
     {
-      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
-      "panel": "external_matrix",
-      "compound": "hexanal",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
-      "panel": "external_matrix",
-      "compound": "nonanal",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
-      "panel": "external_matrix",
-      "compound": "furaneol",
-      "target_unit": "ppb",
-      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
-      "panel": "external_matrix",
-      "compound": "2,5-dimethylpyrazine",
-      "target_unit": "ppb",
-      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
-      "panel": "external_matrix",
-      "compound": "furfural",
-      "target_unit": "ppb",
-      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable.",
-      "envelope_state": "out_of_envelope",
-      "lane": "sulfur",
-      "unidentified_route": false
-    },
-    {
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
       "panel": "external_matrix",
       "compound": "1-hexanol",
       "target_unit": "ppb",
       "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
-      "panel": "external_matrix",
-      "compound": "hexanal",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
-      "envelope_state": "out_of_envelope",
-      "lane": "lipid",
-      "unidentified_route": false
-    },
-    {
-      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
-      "panel": "external_matrix",
-      "compound": "nonanal",
-      "target_unit": "ppb",
-      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate.",
       "envelope_state": "out_of_envelope",
       "lane": "lipid",
       "unidentified_route": false

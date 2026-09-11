@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Out of sample: 3/38 rows within 3x](https://img.shields.io/badge/out--of--sample-3%2F38%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
+[![Out of sample: 9/44 rows within 3x](https://img.shields.io/badge/out--of--sample-9%2F44%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
 [![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
 
 **Maillard** is a kinetic model of the Maillard reaction for alternative-protein scientists.

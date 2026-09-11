@@ -185,6 +185,10 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     readme = _doc_text(README)
     _assert_quoted(readme, "10 of 45", "README.md", "the core's within-3x count")
     _assert_quoted(readme, "9 of 44", "README.md", "the core's out-of-sample count")
+    # 2026-09-11 (review of PR #16): the BADGE on line 6 had said 3/38 through three re-pins of the
+    # body text below it, because nothing asserted it. The most visible number on the page is now
+    # pinned to the same artifact as the table.
+    _assert_quoted(readme, "out--of--sample-9%2F44%20rows%20within%203x", "README.md", "the out-of-sample badge")
     # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
     _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 

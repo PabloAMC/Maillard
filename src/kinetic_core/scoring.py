@@ -126,41 +126,48 @@ def _pearson(xs: Sequence[float], ys: Sequence[float]) -> Optional[float]:
 # ---------------------------------------------------------------------------
 
 
-def _carried_split(
-    spec_without_carried, carried, compound, unit, limiting_molar, predicted, measured,
-) -> Dict[str, Any]:
+def _carried_split(run, carried, compound, unit, predicted, measured) -> Dict[str, Any]:
     """
     The same row with the DECLARED starting level removed from both the prediction and the
     measurement -- the part of the answer the chemistry is actually responsible for.
 
-    Absent (all-``None``) on the 43 rows that declare nothing, which is every row but three.
-    `declared_share_of_prediction` is the honesty number: at 0.94 a fold error on the total is
-    grading the declaration, not the model.
+    Absent (all-``None``) on every row that declares nothing. `declared_share_of_prediction` is
+    the honesty number: at 0.94 a fold error on the total is grading the declaration, not the
+    model.
+
+    2026-09-11 (review of PR #16): this used to re-integrate the pot with the declaration
+    stripped and subtract the RAW carried level from the measurement, while the engine adds the
+    carried level BEFORE the matrix-binding factor -- so with a protein loading the two sides were
+    on different accountings. The engine already records what it applied (`carried_volatiles`)
+    and what binding kept (`matrix_binding[...]['remaining_fraction']`), so the split is now a
+    subtraction on the engine's own numbers, discounted by the same binding on both sides, with
+    no second integration.
     """
     blank = {
         "carried_declared_ug_per_l": None, "declared_share_of_prediction": None,
         "formed_predicted": None, "formed_measured": None, "fold_error_formed_only": None,
     }
-    if (spec_without_carried is None or carried is None or predicted is None
-            or measured is None or unit != "ppb"):
+    if carried is None or predicted is None or measured is None or unit != "ppb" or predicted <= 0:
         return blank
-    run = predict(spec_without_carried, [compound])
-    if not run.answered:
+    md = run.run_metadata or {}
+    applied = (md.get("carried_volatiles") or {}).get(compound)
+    if applied is None:
         return blank
-    formed_predicted = core_native_value(run, compound, unit, limiting_molar)
-    if formed_predicted is None or predicted <= 0:
-        return blank
-    formed_measured = float(measured) - float(carried)
+    kept = ((md.get("matrix_binding") or {}).get(compound) or {}).get("remaining_fraction", 1.0)
+    carried_model = float(applied) * float(kept)
+    formed_predicted = float(predicted) - carried_model
+    formed_measured = float(measured) - carried_model
     return {
         "carried_declared_ug_per_l": float(carried),
-        "declared_share_of_prediction": (float(predicted) - float(formed_predicted)) / float(predicted),
-        "formed_predicted": float(formed_predicted),
+        "declared_share_of_prediction": carried_model / float(predicted),
+        "formed_predicted": formed_predicted,
         "formed_measured": formed_measured,
-        # A measurement BELOW its own declared starting level would mean the cook destroyed more
-        # than it made, which no fold error on this lane can express; it is reported as None
-        # rather than as a number, and no such row exists today.
+        # A measurement BELOW the carried part would mean the cook destroyed more than it made,
+        # which no fold error on this lane can express; it is reported as None rather than as a
+        # number, and no such row exists today.
         "fold_error_formed_only": (
-            fold_error(float(formed_predicted), formed_measured) if formed_measured > 0 else None
+            fold_error(formed_predicted, formed_measured)
+            if formed_measured > 0 and formed_predicted > 0 else None
         ),
     }
 
@@ -193,13 +200,9 @@ def score_benchmark(
     carried_declared = {
         str(name).strip().lower(): float(amount)
         for name, amount in (conditions.get("carried_volatiles") or {}).items()
-        if float(amount) > 0.0
+        if float(amount) >= 0.0
     }
-    spec_without_carried = None
-    if carried_declared:
-        stripped = dict(bench)
-        stripped["conditions"] = {k: v for k, v in conditions.items() if k != "carried_volatiles"}
-        spec_without_carried = core_spec(stripped, use_buffer=True)
+
 
     rows: List[Dict[str, Any]] = []
     refused: List[Dict[str, Any]] = []
@@ -262,8 +265,7 @@ def score_benchmark(
                 "shared_with": SHARED_WITH_HOLDOUT_PANEL.get((benchmark_id, compound)),
                 "in_core_fit": in_core_fit(benchmark_id, compound),
                 **_carried_split(
-                    spec_without_carried, carried_declared.get(compound.strip().lower()),
-                    compound, unit, limiting_molar, predicted, measured,
+                    run, carried_declared.get(compound.strip().lower()), compound, unit, predicted, measured,
                 ),
             }
         )

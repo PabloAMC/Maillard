@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
-      "short": "93d0637b",
+      "commit": "943af606a821116c9d42dc1c596d8232ed7bb364",
+      "short": "943af606",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "ada1d1d05229af63214f45873cbbbe80eb4b09656da4ce9847c0c7589df39405"
+        "sha256": "a98efb5ad0dac4d7924c4e6ec7f4184f3457c1d53891eb3a456a097bd35c9814"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "440d2c15575dbbca296e0de30c555fd3d7eff9f8716c48c7aa4d363d1d6fe183"
+        "sha256": "488e36ac6c6362c24b5baeb3dfe4d743be70cde9fd25cca3b6630a3caab6c4e2"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
@@ -451,7 +451,7 @@
     },
     {
       "what": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network ",
-      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxymethyl)lysine (CML)': in the acrylamide lane's network no cha",
       "rows": [
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -463,7 +463,7 @@
     },
     {
       "what": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network k",
-      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain",
       "rows": [
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",

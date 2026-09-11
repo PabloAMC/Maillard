@@ -198,10 +198,11 @@ def t5(frozen: Dict[str, Any]) -> Dict[str, Any]:
     live = scoring.score_panel()
 
     def strip(payload):
-        return json.dumps({b["benchmark_id"]: b.get("compounds") for b in payload["benchmarks"]},
-                          sort_keys=True, default=str)
+        return {b["benchmark_id"]: b.get("compounds") for b in payload["benchmarks"]}
 
-    panel_identical = strip(tracked) == strip(live)
+    # 2026-09-11 (review of PR #16): was a byte-for-byte string comparison, which provenance.py
+    # documents as wrong for a scorecard (~7e-8 relative drift between arm64 and x86 runners).
+    panel_identical = not provenance.payload_differences(strip(tracked), strip(live))
     return {"sealed_keys_still_valueless": bool(carried.isdisjoint(HOLDOUT_SEALED_BINDING)),
             "n_sealed": len(HOLDOUT_SEALED_BINDING),
             "unsaturation_penalty_x": penalty["penalty_x"], "unsaturation_n_fit_rows": penalty["n_fit_rows"],

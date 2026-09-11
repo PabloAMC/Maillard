@@ -623,7 +623,25 @@ def default_targets_for(precursors: Mapping[str, float]) -> Tuple[str, ...]:
     out: Tuple[str, ...] = ()
     for lane in lanes:
         out = out + LANE_DEFAULT_TARGETS.get(lane, ())
-    return out
+    # 2026-09-11 (review of PR #16): the docstring says "the compounds the core can report for this
+    # charge", and the table is per LANE, so a ribose + cysteine pot used to be asked for
+    # methanethiol (a methionine product) and answered it as 0.0. Filter each lane's list by what
+    # the charge can actually reach; the lipid lane's defaults are the carrier's business.
+    charged = {k: float(v) for k, v in zip(keys, (precursors[n] for n in precursors if PRECURSOR_ALIASES.get(_norm(n))))}
+    reachable_by_lane = {
+        lane: _reachable_species(lane, {k for k, v in charged.items() if v > 0.0}, None)
+        for lane in lanes if lane in MAILLARD_LANES
+    }
+    kept = []
+    for name in out:
+        key = TARGET_ALIASES.get(_norm(name))
+        lane = _TARGET_LANE.get(key)
+        if lane == LIPID or key is None:
+            kept.append(name)
+            continue
+        if any(key in reach for reach in reachable_by_lane.values()):
+            kept.append(name)
+    return tuple(kept)
 
 
 # ---------------------------------------------------------------------------
@@ -767,6 +785,11 @@ class EnvelopeDeclaration:
     unrepresented_targets: Tuple[Tuple[str, str], ...] = ()
     mapped_precursors: Mapping[str, float] = field(default_factory=dict)
     mapped_targets: Mapping[str, str] = field(default_factory=dict)
+    #: 2026-09-11: requested names whose species no chain of the lane's reactions can reach from
+    #: the charge, when OTHER requested targets can be. They are dropped from the answer and listed
+    #: in `run_metadata["refused_targets"]` by name; a request where NONE is reachable is refused
+    #: whole, in `reasons`, like any other out-of-envelope pot.
+    unreachable_targets: Tuple[str, ...] = ()
     #: B6. Every lane this request needs. ``lane`` stays the PRIMARY (Maillard)
     #: lane so that every pre-B6 caller is unchanged; ``lanes`` is the tuple the
     #: propagator actually runs, and it has more than one member only for a
@@ -941,6 +964,76 @@ def declared_unidentified(declaration: "EnvelopeDeclaration", compound: str) -> 
     return declaration.mapped_targets.get(str(compound)) in _HEXOSE_ENTRY_TARGETS
 
 
+def _lane_reactions(lane: str):
+    """The reaction tuple the integrator will run for this lane."""
+    if lane == SULFUR:
+        from .sulfur import FULL_REACTIONS
+        return FULL_REACTIONS
+    if lane == ACRYLAMIDE:
+        from .acrylamide import FULL_ACRYLAMIDE_REACTIONS
+        return FULL_ACRYLAMIDE_REACTIONS
+    from .network import TRUNK_REACTIONS
+    return TRUNK_REACTIONS
+
+
+def _ambient_seeds(lane: str, process) -> set:
+    """Species `_integrate_program` charges on its own, without a precursor: the oxidant pool
+    and its reservoir on the sulfur lane, and the protein pools when a loading is stated."""
+    seeds = set()
+    if lane == SULFUR:
+        seeds |= {"OX", "OXR", "OXV"}
+    try:
+        from .matrix_sites import resolve as _resolve_sites
+        charged, _ = _resolve_sites(process)
+    except Exception:  # noqa: BLE001 - a malformed loading is reported by the matrix layer itself
+        charged = None
+    if charged is not None:
+        if lane == TRUNK and charged.amine > 0:
+            seeds.add("LYSP")
+        if lane == SULFUR and charged.disulfide > 0:
+            seeds.add("PROT_SS")
+    return seeds
+
+
+def _reachable_species(lane: str, charged: set, process) -> set:
+    """Forward closure: every species some chain of the lane's reactions can make from `charged`."""
+    reachable = set(charged) | _ambient_seeds(lane, process)
+    reactions = _lane_reactions(lane)
+    grew = True
+    while grew:
+        grew = False
+        for r in reactions:
+            if r.products and set(r.reactants) <= reachable and not set(r.products) <= reachable:
+                reachable |= set(r.products)
+                grew = True
+    return reachable
+
+
+def _unreachable_targets(lane: str, mapped_precursors, mapped_targets, process):
+    """The requested names (caller's spelling) whose species no chain of the lane's reactions can
+    reach from the charge. Lipid targets are the lipid lane's business and are never listed."""
+    charged = {k for k, v in mapped_precursors.items() if float(v) > 0.0}
+    reachable = _reachable_species(lane, charged, process)
+    return sorted(
+        name for name, key in mapped_targets.items()
+        if _TARGET_LANE.get(key) != LIPID and key not in reachable
+    )
+
+
+def _carried_by_species(carried: Mapping[str, Any]) -> Dict[str, float]:
+    """{species key: ug/L} from a `carried_volatiles` mapping, resolved through TARGET_ALIASES
+    (the same table a target request comes in on). A name the table does not know is dropped
+    HERE, and only here, so that every consumer sees the same declaration; a negative amount is
+    a data error and is dropped too. Zero is kept: it is a declared 'not detected'."""
+    out: Dict[str, float] = {}
+    for name, amount in (carried or {}).items():
+        key = TARGET_ALIASES.get(_norm(str(name)))
+        if key is None or float(amount) < 0.0:
+            continue
+        out[key] = out.get(key, 0.0) + float(amount)
+    return out
+
+
 def declare_envelope(
     spec: FormulationSpec, targets: Sequence[str]
 ) -> EnvelopeDeclaration:
@@ -1096,6 +1189,30 @@ def declare_envelope(
             _charged = None
         if _charged is None or _charged.amine <= 0:
             reasons.append(GLYCATION_NO_PROTEIN_REASON + " Targets: " + ", ".join(repr(c) for c in glycation) + ".")
+    if lane == TRUNK and not lane_reasons:
+        # 2026-09-11 (review of PR #16). Since B20 a stated protein loading charges the bound-lysine
+        # pool on EVERY trunk run, and the glycation arm recycles glucose through fructosyl-lysine
+        # back to 3-deoxyglucosone. That moves answers that never asked about glycation -- 5-HMF in
+        # a glucose/glycine pot rises by about half at 30 g/L of pea isolate -- and the glycation
+        # caveat was attached only when a glycation target was requested. Say it on every loaded
+        # trunk answer instead.
+        from .matrix_sites import resolve as _resolve_sites_for_loading
+
+        try:
+            _loaded, _ = _resolve_sites_for_loading(spec.process)
+        except Exception:  # noqa: BLE001 - a malformed loading is reported by the matrix layer itself
+            _loaded = None
+        if _loaded is not None and _loaded.amine > 0 and not any(
+            k in GLYCATION_TARGET_KEYS for k in mapped_targets.values()
+        ):
+            warnings.append(
+                "A PROTEIN LOADING IS STATED, SO THE BOUND-LYSINE POOL IS CHARGED "
+                f"({float(_loaded.amine):.3g} mmol/L of amine sites) and the glycation steps run on this "
+                "trunk answer even though no glycation product was asked for: glucose is recycled "
+                "through fructosyl-lysine to 3-deoxyglucosone, which raises the sugar-path products "
+                "downstream of it. The same pot with no loading gives the unloaded number. Read the "
+                "loading as an input that moved this answer, not as decoration."
+            )
     if any(arm_targets.values()) and lane is not None and lane != TRUNK:
         named = [arm.label + " " + ", ".join(repr(c) for c in arm_targets[arm.label]) + f" (wave {arm.wave})"
                  for arm in sorted(TRUNK_ARMS, key=lambda a: a.conflict_order) if arm_targets[arm.label]]
@@ -1207,21 +1324,17 @@ def declare_envelope(
                 )
                 extent = 1.0 - math.exp(-exponent)
                 if extent < UNCOOKED_LOOH_CONVERSION_LIMIT:
-                    carried_declared = {
-                        _norm(str(name))
-                        for name, amount in (
-                            getattr(spec.process, "carried_volatiles", None) or {}
-                        ).items()
-                        if float(amount) > 0.0
-                    }
-                    # `mapped_targets` is {requested name -> species key}, so a compound
-                    # counts as declared when the CALLER'S OWN NAME for it was declared,
-                    # through the same alias table the request came in on.
+                    # A compound counts as declared when its SPECIES was declared, under any of
+                    # the names the alias table accepts, and a declared 0.0 counts (2026-09-11:
+                    # this compared raw strings and dropped zeros, so a level declared under one
+                    # spelling and requested under another read as undeclared).
+                    carried_declared = set(_carried_by_species(
+                        getattr(spec.process, "carried_volatiles", None) or {}
+                    ))
                     undeclared = sorted(
                         {
                             name for name, key in mapped_targets.items()
-                            if _TARGET_LANE.get(key) == LIPID
-                            and _norm(str(name)) not in carried_declared
+                            if _TARGET_LANE.get(key) == LIPID and key not in carried_declared
                         }
                     )
                     if undeclared:
@@ -1279,7 +1392,9 @@ def declare_envelope(
     # A target whose lane needs a precursor species this charge cannot supply.
     if lane is not None and not unmapped:
         if lane == SULFUR and not (
-            {"Cys", "THI", "PENT", "ARP", "H2S", "TTCA"} & set(mapped_precursors)   # W6: TTCA carries its cysteine sulfur
+            # 2026-09-11: PENT was in this set. A pentose carries no sulfur, so a ribose-only
+            # charge asked for a thiol was answered 0.0 instead of refused here.
+            {"Cys", "THI", "ARP", "H2S", "TTCA"} & {k for k, v in mapped_precursors.items() if v > 0.0}   # W6: TTCA carries its cysteine sulfur
         ):
             if set(mapped_targets.values()) & {"MFT", "FFT", "MFTD", "MESH", "ACTZ"}:
                 reasons.append(
@@ -1295,6 +1410,45 @@ def declare_envelope(
                     "NO asparagine. Acrylamide in this network comes only from "
                     "the Asn + Glc initiation."
                 )
+
+    # --- 2026-09-11 (review of PR #16): THE ONE RULE THE THREE GUARDS WERE PROJECTIONS OF ------
+    # B28 (a target reported in the wrong unit), B34 (a silent unit fallback) and B35 (a pot with
+    # no precursor answering 0.0) were each patched where they bit. The invariant underneath all
+    # three is that a requested target must be REACHABLE from what is charged, in the network of
+    # the lane that will run: if no chain of the lane's reactions leads from the charged species
+    # (plus the lane's ambient seeds) to the target's species, the integrator returns exactly
+    # zero for it BY CONSTRUCTION, and that zero is not a prediction. The review found the same
+    # thing waiting on every lane -- a cysteine-only pot answering the thiols, thiamine alone
+    # answering furfurylthiol, asparagine alone answering acrylamide, glycine alone answering
+    # HMF, and a zero-amount charge slipping past the B35 clause because its key was present.
+    # One forward closure over the lane's reaction tuple catches all of them, and the next one.
+    unreachable_targets: Tuple[str, ...] = ()
+    if lane in MAILLARD_LANES and not unmapped and not lane_reasons and not any(
+        "CHARGES NO PRECURSOR" in r for r in reasons
+    ):
+        unreachable = _unreachable_targets(lane, mapped_precursors, mapped_targets, spec.process)
+        answerable = [n for n, k in mapped_targets.items() if _TARGET_LANE.get(k) != LIPID and n not in unreachable]
+        if unreachable and answerable:
+            # A mixed request (the CLI's default target list, say) answers what it can and refuses
+            # the rest BY NAME rather than failing the whole pot for one compound it cannot make.
+            unreachable_targets = tuple(unreachable)
+            warnings.append(
+                "NOT ANSWERED, BY NAME: " + ", ".join(repr(c) for c in unreachable)
+                + f" -- in the {lane} lane's network no chain of reactions leads from what is charged "
+                "to it, so its integrated value would be exactly zero by construction. It is left out "
+                "of the answer and listed under refused_targets; the other targets are answered."
+            )
+        elif unreachable:
+            charged = sorted(k for k, v in mapped_precursors.items() if v > 0.0)
+            reasons.append(
+                "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE "
+                + ", ".join(repr(c) for c in unreachable)
+                + f": in the {lane} lane's network no chain of reactions leads from what is charged "
+                + (f"({', '.join(charged)})" if charged else "(nothing above zero)")
+                + " to it, so the integrator would return exactly zero by construction rather than "
+                "by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: "
+                "declare the precursor this compound is made from."
+            )
 
     # --- conditions ------------------------------------------------------
     peak = spec.process.thermal.peak_temperature_c
@@ -1481,6 +1635,7 @@ def declare_envelope(
         mapped_precursors=mapped_precursors,
         mapped_targets=mapped_targets,
         lipid_carriers=tuple(carriers),
+        unreachable_targets=unreachable_targets,
     )
 
 
@@ -2286,6 +2441,15 @@ def _integrate_program(
             reservoir, _basis = oxygen_reservoir_units(process)
             state["OXR"] = reservoir * (1.0 if reservoir_scale is None else float(reservoir_scale))
         state.setdefault("OXV", 0.0)
+    if lane != TRUNK:
+        # 2026-09-11 (review of PR #16). Methionine, proline and 1-pyrroline are TRUNK species. On
+        # the sulfur or acrylamide lane the declaration promises they are "recorded and not
+        # charged" (trunk_arms.py) -- and then this function handed them to an integrator whose
+        # state vector does not contain them, which raised KeyError("unknown species 'MET'") on any
+        # cysteine + ribose + methionine pot asked for a thiol. Recorded means dropped here.
+        for key in ("MET", "PRO", "PYRL"):
+            if key in state:
+                metadata.setdefault("recorded_not_charged", {})[key] = float(state.pop(key))
     if lane == TRUNK and state.get("PRO", 0.0) > 0.0:
         # B24: proline as the Amadori amine too, declared (kinetic_core_b24_prereg.md sec. 2).
         state["Gly"] = float(state.get("Gly", 0.0)) + float(state["PRO"])
@@ -2570,13 +2734,17 @@ def predict(
     carried = dict(getattr(spec.process, "carried_volatiles", None) or {})
     carried_applied: Dict[str, float] = {}
     if carried:
-        lookup = {str(c).strip().lower(): c for c in concentrations}
-        for name, amount in carried.items():
-            key = lookup.get(str(name).strip().lower())
-            if key is None or float(amount) <= 0.0:
+        # 2026-09-11 (review of PR #16): matched THROUGH THE ALIAS TABLE, not by raw string. A
+        # level declared as '2-pentylfuran' and a target requested as '2-pentyl furan' are the
+        # same species and used to miss each other silently. And a declared 0.0 is a declaration
+        # ("not detected" in the unheated control), not an absence of one.
+        by_species = _carried_by_species(carried)
+        for compound, key in declaration.mapped_targets.items():
+            if compound not in concentrations or key not in by_species:
                 continue
-            concentrations[key] = float(concentrations[key]) + float(amount)
-            carried_applied[key] = float(amount)
+            amount = by_species[key]
+            concentrations[compound] = float(concentrations[compound]) + amount
+            carried_applied[compound] = amount
     charged_sites, sites_note = _resolve_sites(spec.process)
     binding: Dict[str, Any] = {}
     if charged_sites is not None:
@@ -2629,6 +2797,15 @@ def predict(
             for compound, key in declaration.mapped_targets.items()
             if key in furanic_decades
         }
+
+    if declaration.unreachable_targets:
+        metadata["refused_targets"] = {
+            name: "no chain of the lane's reactions leads from the charge to this species; "
+                  "its integrated value is exactly zero by construction and is not reported"
+            for name in declaration.unreachable_targets
+        }
+        for name in declaration.unreachable_targets:
+            concentrations.pop(name, None)
 
     return CorePrediction(
         spec=spec,

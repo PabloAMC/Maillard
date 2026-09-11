@@ -64,8 +64,13 @@ def main() -> int:
             ["git", "show", "HEAD:" + data_paths.rel(V / "core_panel_scores.json")], cwd=ROOT, text=True))
         from src.kinetic_core import scoring
         live = scoring.score_panel()
-        same = (json.dumps([b.get("compounds") for b in tracked["benchmarks"]], sort_keys=True, default=str)
-                == json.dumps([b.get("compounds") for b in live["benchmarks"]], sort_keys=True, default=str))
+        # 2026-09-11 (review of PR #16): compared as strings, byte for byte, which provenance.py
+        # documents as wrong for a scorecard -- the same panel differs by ~7e-8 relative between
+        # arm64 and x86 runners. The tolerance-aware comparison the freshness gate uses.
+        same = not provenance.payload_differences(
+            [b.get("compounds") for b in tracked["benchmarks"]],
+            [b.get("compounds") for b in live["benchmarks"]],
+        )
     except Exception:
         same = False
     t4 = {"panel_identical": bool(same), "pass": bool(same)}

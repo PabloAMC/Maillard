@@ -43,8 +43,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
-      "short": "93d0637b",
+      "commit": "943af606a821116c9d42dc1c596d8232ed7bb364",
+      "short": "943af606",
       "branch": "reactions",
       "dirty": true
     },
@@ -500,7 +500,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 48.1
+    "wall_seconds": 47.0
   },
   "claims": [
     {
@@ -1108,7 +1108,7 @@
       "statement": "Raising pH shifts the Maillard product spectrum from sulfur compounds toward NITROGEN heterocycles - pyrazines and thiazoles increase with pH.",
       "source": "cerny2015",
       "status": "not_evaluable",
-      "reason": "arm 'pH 4.5' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+      "reason": "arm 'pH 4.5' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.; THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from wha",
       "arms": [
         {
           "label": "pH 4.5",
@@ -1127,7 +1127,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Cys, PENT) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
@@ -1154,7 +1155,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Cys, PENT) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
@@ -1181,7 +1183,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Cys, PENT) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
@@ -1811,7 +1814,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "The sulfur lane was selected but the charge contains NO sulfur source (no cysteine, thiamine or sulfide). Every thiol in the core is built from a charged sulfur atom; there is no route that makes one from a sugar alone."
+            "The sulfur lane was selected but the charge contains NO sulfur source (no cysteine, thiamine or sulfide). Every thiol in the core is built from a charged sulfur atom; there is no route that makes one from a sugar alone.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'FFT': in the sulfur lane's network no chain of reactions leads from what is charged (Glc, Gly) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
@@ -2896,7 +2900,7 @@
       "statement": "Total pyrazine yield ranks ribose > xylose > glucose > fructose (a 7-fold spread from ribose to fructose).",
       "source": "ni2021",
       "status": "not_evaluable",
-      "reason": "arm 'D-ribose' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+      "reason": "arm 'D-ribose' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.; THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from wha",
       "arms": [
         {
           "label": "D-ribose",
@@ -2915,7 +2919,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Cys, PENT) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
@@ -2942,7 +2947,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Cys, Glc) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
@@ -2969,7 +2975,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Cys, Fru) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
@@ -3722,7 +3729,7 @@
         0.0
       ],
       "log10_ratio_B_over_A": null,
-      "structural_zero": false,
+      "structural_zero": true,
       "arms": [
         {
           "label": "hydrolysate + xylose + cysteine, 100 C 60 min",
@@ -3760,14 +3767,18 @@
             "ph": 6.5,
             "aw": 0.98
           },
-          "answered": true,
+          "answered": false,
           "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
-          "reasons": [],
+          "state": "out_of_envelope",
+          "reasons": [
+            "The sulfur lane was selected but the charge contains NO sulfur source (no cysteine, thiamine or sulfide). Every thiol in the core is built from a charged sulfur atom; there is no route that makes one from a sugar alone.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'MFT': in the sulfur lane's network no chain of reactions leads from what is charged (Gly, PENT) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
+          ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.0
+          "value_ug_per_l": 0.0,
+          "structural_zero": true
         }
       ]
     },
@@ -3783,7 +3794,7 @@
       "statement": "Adding cysteine SUPPRESSES the pyrazine track: a system with cysteine produced only four pyrazines where the cysteine-free system produced 'a significant amount', and cysteine restrained browning.",
       "source": "zhang2024rice",
       "status": "not_evaluable",
-      "reason": "arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+      "reason": "arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.; THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from wha",
       "arms": [
         {
           "label": "hydrolysate + xylose (no cysteine), 120 C",
@@ -3802,7 +3813,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Gly, PENT) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",
@@ -3830,7 +3842,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement."
+            "PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-Dimethylpyrazine': in the sulfur lane's network no chain of reactions leads from what is charged (Cys, Gly, PENT) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.",

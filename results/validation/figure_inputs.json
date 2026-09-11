@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
-      "short": "93d0637b",
+      "commit": "943af606a821116c9d42dc1c596d8232ed7bb364",
+      "short": "943af606",
       "branch": "reactions",
       "dirty": true
     },
@@ -167,11 +167,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "440d2c15575dbbca296e0de30c555fd3d7eff9f8716c48c7aa4d363d1d6fe183"
+        "sha256": "488e36ac6c6362c24b5baeb3dfe4d743be70cde9fd25cca3b6630a3caab6c4e2"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "ada1d1d05229af63214f45873cbbbe80eb4b09656da4ce9847c0c7589df39405"
+        "sha256": "a98efb5ad0dac4d7924c4e6ec7f4184f3457c1d53891eb3a456a097bd35c9814"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
@@ -195,7 +195,7 @@
       },
       {
         "path": "results/validation/kinetic_core_b28_ship_rule.json",
-        "sha256": "8232339b792b5e39dd8a2cc555745eaca24457d77bef567cf57f588552afca4d"
+        "sha256": "db2e94d97b36c84119b79cf5b6a0c30daf0f034bdfac25651b95863242b17c4a"
       },
       {
         "path": "results/validation/kinetic_core_b9_fit_report.json",
