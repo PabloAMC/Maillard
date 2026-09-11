@@ -61,7 +61,9 @@ def test_every_b37_source_has_a_dossier_naming_the_pdf_it_was_read_from(stem: st
     assert path.exists(), f"{stem}: no dossier"
     text = path.read_text(encoding="utf-8")
     assert B37_SOURCES[stem] in text, f"{stem}: dossier does not name its PDF"
-    assert (ROOT / B37_SOURCES[stem]).exists(), f"{stem}: the PDF it names is not on disk"
+    # The PDF itself is NOT asserted: data/articles/ is gitignored (local, ~160 MB), so CI
+    # never has it. The first push of this test asserted it and failed on CI while passing
+    # locally -- the dossier naming the file is the checkable claim, its presence is not.
 
 
 def test_the_three_deoxy_dicarbonyls_are_chargeable():
