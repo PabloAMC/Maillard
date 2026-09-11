@@ -56,6 +56,24 @@ trace copper and iron among the main accelerators of thiol oxidation, one buffer
 fit corpus was made in tap water, and trace-metal content is exactly the kind of difference between
 laboratories that no rate constant can absorb.
 
+**Two things about that chelator arm were sharpened this week, and getting either wrong wastes the
+arm.** First, **the chelator must be in molar excess over the thiol, not over the metal.** A 2017
+brewing-chemistry study ran exactly this comparison and found that a chelator at one-to-one with the
+copper, and short of the thiol, made the oxidation *worse* rather than better — the loss it was meant
+to suppress roughly doubled, because chelation only delayed the metal's transfer to the thiol until a
+higher temperature. Only a genuine excess over the thiol abolished the effect. Second, **the
+contamination floor is far lower than "tap water" suggests.** That same study measured, in ultrapure
+water, that every transition metal sat below its detection limit until cysteine was added — and the
+cysteine itself, at the highest purity grade sold, carried enough copper to raise the solution to a
+quarter of a micromolar and drive a statistically resolved oxidation at 95 °C. So the reagent is a
+metal source, not just the water, and the no-chelator arm cannot be assumed clean merely because the
+water was. In their cysteine-plus-copper pot the thiol was almost entirely gone within five minutes
+of a gentle 40-to-60 °C ramp; this model keeps 99.5 % of it after five minutes at 95 °C, and 83 %
+after three hours. **That gap is the experiment's whole point**: an identifiability audit has already
+shown the sink cannot be reached by refitting, because the removal barrier and both dimerisation
+rates already sit on their ceilings. What is missing is a catalytic channel whose rate depends on a
+catalyst the model does not carry, and no adjustment of a thermal constant can imitate one.
+
 **Add one arm the earlier version of this list did not have.** A fifth set of vials at 140 °C with
 the fed thiol plus 2,3-pentanedione at 10 mmol/L. That single addition tests the mechanism the fifth
 structure rested on, which is that the pot's own diketones are what oxidise the thiol to its
@@ -150,6 +168,31 @@ cannot be used no matter how carefully it was done. One paper fetched this week 
 **What it decides.** Whether binding weakens with heat, as the dry measurement suggests, or
 strengthens, as two aqueous studies on other proteins report. The model currently charges its binding
 sites once at the start of a cook and does not change them, and has no evidence either way.
+
+**A second leg was added to this experiment this week, and it may matter more than the first.** The
+model holds exactly one way for an aldehyde to attach to a protein: a permanent chemical bond to the
+lysines, with a rate measured on dairy proteins at room temperature. A soy study read this week shows
+that is not the channel a headspace measurement actually sees. Acidifying a soy isolate and holding
+it at 95 °C for five minutes nearly **tripled** the hexanal in the headspace, and in the storage
+globulin alone it rose more than fivefold — heat *releasing* aldehyde, not consuming it. Run against
+that same pot, the model moves hexanal by about one part in ten thousand, downward. The sign is
+wrong and the size is out by roughly four orders of magnitude.
+
+The resolution is that there are two channels and the model has only the small one. The permanent
+bond is real and its measured rate is not in dispute. Sitting on top of it is a much larger,
+**reversible** association — weak, physical, undone by acid and heat together — that governs how much
+aldehyde ever reaches the headspace. So the protocol above needs one addition: **measure the total
+hexanal on the same aliquot as the headspace value**, by exhaustive extraction or by purging to
+completion, at both pH 4.5 and pH 7. Without that pairing the experiment returns a constant for the
+wrong channel.
+
+**What this costs the model until it is done.** In a protein matrix, a headspace measurement reports
+the share that escapes and this model reports the whole amount, and the gap between them moves with
+the sample's acidity and its heating history. Every hexanal row measured that way is therefore
+compared a little unfairly, in a direction that flatters nobody consistently. It would have been easy
+to widen those rows' tolerances on this reasoning and let the scores improve; that was considered
+and refused, because it would raise the headline without establishing a single new fact about the
+chemistry. The mismatch is declared instead, and this measurement is what removes it.
 
 ### 5. The melanoidin's carbon-to-nitrogen ratio, as a series
 
@@ -248,6 +291,27 @@ barrier nearly doubles across the model's own operating range depending on where
 open question is now which of the two applies to a hot, wet plant protein** — and that is answerable
 with one experiment: hexanal against time at three temperatures in the same protein suspension.
 
+**Three more papers were fetched against exactly that question on 2026-09-11, and all three fail** —
+which is worth saying plainly, because it means reading has now been tried hard here and has stopped
+paying. One heats a soy emulsion and looks like a temperature series until you notice the temperatures
+were applied to the *protein powder* before the emulsion was made; every emulsion then reacted at body
+temperature, at a single time point, in units that are ratios rather than concentrations. The second
+heats neat linoleic acid at seven temperatures over 180 K, but reports uncalibrated detector counts
+from a headspace that is purged for half an hour after each hold — and a purge strips a hot cell more
+efficiently than a cool one, so the trend is partly the instrument. Its hexanal also *falls* between
+30 and 60 °C, which no barrier can produce, and stops rising at all above 120 °C.
+
+The third is the one that hurts. It is the right experiment: hexanal in real concentration units, at
+seven temperatures from 50 to 90 °C, in a wet protein solution at neutral pH, with two holding times.
+It fails on availability, not design — **every value is a bar in a figure**, with no data table, no
+unheated control, and the numbers in a supplementary file. Worse, the protein it uses contains no
+measurable fat at all, so the hexanal comes from trace contamination and there is no substrate to
+normalise a rate against. What can be taken from it without reading a single bar height is the shape:
+across a 40 K span, eight of its eleven treatments are statistically indistinguishable, and doubling
+the holding time changes nothing detectable. **That is the signature of a weak temperature
+dependence** — which points toward the wet-matrix figure near 62 rather than the bulk-oil figure near
+120 — but it is a direction, not a number, and it has not been treated as one.
+
 **Two barriers that fail at 50 °C, and two waves on data already here.** A paper that feeds
 3-deoxyglucosone and glucosone at 50 °C with lysine (Gobert & Glomb 2009) prints half-lives of
 40 hours and 8 hours; this model gives about an hour and about three minutes, and sends most of the
@@ -269,7 +333,7 @@ headspace vented and unvented.
 as figures. Their authors' underlying numbers would give that step its first data from a third
 laboratory.
 
-**Three supplementary tables.** The melanoidin series above exists in part already: a paper measures
+**Four supplementary tables.** The melanoidin series above exists in part already: a paper measures
 ten temperatures and prints only the two endpoints, with the rest in a supplementary file that is not
 publicly posted. Asking for it would supply most of experiment 5 for nothing. Two more joined the list
 on 2026-09-11, both of which would answer questions on this page outright. One holds the concentrations
@@ -277,6 +341,16 @@ of the two meaty thiols and all three of their dimers in one pot across five rea
 published article prints only odour-activity ratios. The other holds a plant protein's volatiles at
 four temperatures with an unheated blank; the published article prints only the class totals. In both
 cases the experiment has been done and the numbers exist.
+
+The fourth is the cheapest thing on this entire page. The wet-protein hexanal series described above —
+seven temperatures, two holding times, real concentration units, the exact measurement the fat path's
+open question asks for — is unusable for one reason only: its eleven numbers are drawn as bars and
+printed nowhere. They are in that article's first supplementary table, alongside a heating-and-cooling
+profile the fit would also need. **Retrieving one file would turn the single most-wanted measurement
+on this list from an experiment into an afternoon's work.** It would still need care — there is no
+unheated baseline and no measurable fat in the system, so the result would carry a wide band and would
+not outrank the two measurements already on disk — but it would put a third laboratory on the one axis
+where this model currently interpolates between two that disagree.
 
 ---
 

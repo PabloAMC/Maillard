@@ -855,8 +855,67 @@ _EDITED_IN_PLACE: Dict[str, Dict[str, Any]] = {'external_validation_li_2026_spi_
                                                                                   'word.'}}
 
 
+# ---------------------------------------------------------------------------
+# WAVE B45 (2026-09-11): the tap-water caveat gets a floor and a consequence.
+#
+# These four bundles have said since 2026-09-06 that "the buffer was made in TAP WATER,
+# not deionised water, so trace-metal catalysis is uncontrolled". That was the right
+# thing to write and it was unquantified: nobody knew whether it mattered at 1 % or at
+# 100 %. Baldus, Klie, De & Methner 2017 (JAFC, 10.1021/acs.jafc.6b05472,
+# baldus2017_extraction.md) puts a floor under it, and the floor is low.
+#
+# They measured by ICP-OES that a 0.1 M acetate buffer made with ULTRAPURE Milli-Q water
+# held every transition metal below the 0.08 uM detection limit -- and that adding 300 uM
+# of highest-purity-grade cysteine RAISED copper to 0.26 uM, as a reagent impurity. That
+# 0.26 uM sufficed to drive a statistically resolved thioether oxidation at 95 C / 180 min
+# (DMS 15.32 +/- 0.15 uM with 13 uM cysteine, against a 16.73 +/- 0.11 uM control), and
+# EDTA in MOLAR EXCESS OVER THE THIOL abolished it entirely (16.80 +/- 0.07, same Tukey
+# group as the control). In the cysteine-plus-copper system itself, "Cys was almost
+# completely degraded in 5 minutes during heating from 40-60 C".
+#
+# These are the only four bundles in the corpus with water_source: tap, and they are
+# hold-out rows the thiol sink fails on. B38 found that sink unreachable by any refit --
+# barrier and both dimerisation rates already on their ceilings -- and B45's probe P2
+# measured the shape of the gap: the engine retains 99.49 % of charged cysteine after
+# 5 min at 95 C and 83 % after three hours. The missing quantity is a CATALYTIC CHANNEL,
+# not a larger constant.
+#
+# NOTHING IS EDITED AND NO TOLERANCE MOVES. There is no rate constant to adopt -- Baldus
+# state outright that "there are no rate constants available" -- and inventing one to close
+# the gap is the failure this repository exists to avoid. The clause below records what is
+# uncontrolled, what sizes it, and what a replacement experiment must contain.
+# ---------------------------------------------------------------------------
+_B45_TAP_WATER_FLOOR = (
+    " ||| WAVE B45 (2026-09-11), A FLOOR UNDER THE TAP-WATER CAVEAT ABOVE: Baldus, Klie, De & "
+    "Methner 2017 (J. Agric. Food Chem., 10.1021/acs.jafc.6b05472; dossier baldus2017_extraction.md) "
+    "measured by ICP-OES that a 0.1 M acetate buffer in ULTRAPURE Milli-Q water held every transition "
+    "metal below the 0.08 uM detection limit, and that adding 300 uM of highest-purity-grade cysteine "
+    "raised copper to 0.26 uM AS A REAGENT IMPURITY. That trace drove statistically resolved thioether "
+    "oxidation at 95 C / 180 min (DMS 15.32 +/- 0.15 uM with 13 uM cysteine vs a 16.73 +/- 0.11 uM "
+    "control, n=3, Tukey-Kramer HSD), and EDTA IN MOLAR EXCESS OVER THE THIOL abolished it (16.80 +/- "
+    "0.07, the control's group). In their cysteine-plus-copper system, 'Cys was almost completely "
+    "degraded in 5 minutes during heating from 40-60 C'. A FORTIORI, tap water is not a controlled "
+    "medium for a thiol pot. THE SIZE OF THE EFFECT IN THIS POT IS UNKNOWN AND IS NOT ESTIMATED: this "
+    "bundle is NOT edited, its values are NOT adjusted and its tolerance is NOT widened. What this "
+    "clause records is that the row's thiol trajectory has an uncontrolled catalytic term the model "
+    "does not carry -- B38 found the thiol sink unreachable by refit (barrier and both dimerisation "
+    "rates on their ceilings) and B45's probe P2 measured the gap's shape (the engine keeps 99.49 % of "
+    "charged cysteine after 5 min at 95 C, 83 % after 3 h). A REPLACEMENT EXPERIMENT MUST BE RUN IN "
+    "WATER OF STATED PROVENANCE, PAIRED WITH AND WITHOUT A CHELATOR IN MOLAR EXCESS OVER THE THIOL, "
+    "WITH THE DISULFIDE QUANTIFIED IN THE SAME RUN; Baldus show that a chelator at 1:1 with the metal "
+    "and sub-stoichiometric to the thiol makes matters WORSE, not better (DMS loss ~40 % -> ~72 %), so "
+    "an unchecked 'add EDTA' control can invert the intended comparison."
+)
+_B45_TAP_WATER = (
+    "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+    "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+    "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+    "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+)
+
+
 def current_record(key: str, record: Dict[str, Any]) -> Dict[str, Any]:
-    """The buffer block a bundle must carry: base record, in-place edits, then the B36 reading."""
+    """The buffer block a bundle must carry: base record, in-place edits, the B36 reading, the B45 clause."""
     out = dict(record)
     out.update(_EDITED_IN_PLACE.get(key, {}))
     hit = _B36_ON_DISK.get(key)
@@ -864,6 +923,8 @@ def current_record(key: str, record: Dict[str, Any]) -> Dict[str, Any]:
         pclass, prefix = hit
         out["provenance_class"] = pclass
         out["provenance_note"] = prefix + _B36_SUPERSEDED + out["provenance_note"]
+    if key in _B45_TAP_WATER:
+        out["provenance_note"] = out["provenance_note"] + _B45_TAP_WATER_FLOOR
     return out
 
 

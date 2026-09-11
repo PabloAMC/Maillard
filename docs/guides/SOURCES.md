@@ -19,7 +19,10 @@
 | Balagiannis 2009 | [10.1021/jf901443m](https://doi.org/10.1021/jf901443m) |  |  |  |  |  | [balagiannis2009_extraction.md](../../data/lit/extraction_dossiers/balagiannis2009_extraction.md) |
 | Balagiannis 2015 | [10.1016/b978-1-78242-103-0.00010-2](https://doi.org/10.1016/b978-1-78242-103-0.00010-2) |  |  |  |  |  | [balagiannis2015_extraction.md](../../data/lit/extraction_dossiers/balagiannis2015_extraction.md) |
 | Balagiannis, Howard, Parker, Desforges & Mottram 2010 | [10.1021/bk-2010-1042.ch002](https://doi.org/10.1021/bk-2010-1042.ch002) |  |  |  |  | Lane by lane: Trunk (glucose/fructose/glycine → Amadori, deoxyosones, HMF) — *partial, validation-grade.* Gives a glucose pseudo-first-order disappearance k1 = 7.52 × 10⁻³ min⁻¹ (±22 %) at 130 °C in … | [balagiannis2010_extraction.md](../../data/lit/extraction_dossiers/balagiannis2010_extraction.md) |
+| Baldus et al. 2017 | [10.1021/acs.jafc.6b05472](https://doi.org/10.1021/acs.jafc.6b05472) |  |  |  |  |  | [baldus2017_extraction.md](../../data/lit/extraction_dossiers/baldus2017_extraction.md) |
+| Bao et al. 2022 | [10.1111/jfpp.16445](https://doi.org/10.1111/jfpp.16445) |  |  |  |  |  | [bao2022_extraction.md](../../data/lit/extraction_dossiers/bao2022_extraction.md) |
 | Barallat-Perez 2024 | [10.1021/acs.jafc.3c08819](https://doi.org/10.1021/acs.jafc.3c08819) |  |  |  |  |  | [barallatperez2024_extraction.md](../../data/lit/extraction_dossiers/barallatperez2024_extraction.md) |
+| Bel Rhlid et al. 2002 | [10.1021/jf0202335](https://doi.org/10.1021/jf0202335) |  |  |  |  |  | [belrhlid2002_extraction.md](../../data/lit/extraction_dossiers/belrhlid2002_extraction.md) |
 | Bell 1995/1996 | [10.1016/0963-9969(95)00052-6](https://doi.org/10.1016/0963-9969(95)00052-6) |  |  |  |  |  | [bell1995_extraction.md](../../data/lit/extraction_dossiers/bell1995_extraction.md) |
 | Berk, Gürsul Aktağ & Gökmen 2021 | [10.1007/s00217-021-03787-x](https://doi.org/10.1007/s00217-021-03787-x) |  |  |  |  |  | [berk2021_extraction.md](../../data/lit/extraction_dossiers/berk2021_extraction.md) |
 | Bi et al. (2020), J. Agric. Food Chem. 68:2718 | [10.1021/acs.jafc.9b07711](https://doi.org/10.1021/acs.jafc.9b07711) |  |  |  |  |  | [bi2020_extraction.md](../../data/lit/extraction_dossiers/bi2020_extraction.md) |
@@ -117,6 +120,7 @@
 | Hwang, Hartman & Ho 1995 |  |  |  |  |  |  | [hwang1995_extraction.md](../../data/lit/extraction_dossiers/hwang1995_extraction.md) |
 | Hwang, Hartman & Ho 1995b |  |  |  |  |  | (same author and year as the row above; any counts are listed there) | [hwang1995b_extraction.md](../../data/lit/extraction_dossiers/hwang1995b_extraction.md) |
 | Jaeger et al. 2023 | [10.3390/foods12040798](https://doi.org/10.3390/foods12040798) |  |  |  |  |  | [jaeger2023_extraction.md](../../data/lit/extraction_dossiers/jaeger2023_extraction.md) |
+| Jansson et al. 2020 | [10.1016/j.idairyj.2020.104653](https://doi.org/10.1016/j.idairyj.2020.104653) |  |  |  |  |  | [jansson2020_extraction.md](../../data/lit/extraction_dossiers/jansson2020_extraction.md) |
 | Jousse, Jongen, Agterof, Russell & Braat 2002 | [10.1111/j.1365-2621.2002.tb08772.x](https://doi.org/10.1111/j.1365-2621.2002.tb08772.x) |  |  |  |  | Topology mapping onto the trunk lane (glucose/fructose/glycine → Schiff base → Amadori → 1-/3-deoxyosones → methylglyoxal, formic/acetic acid, HMF, DMHF, melanoidins): Absent from this paper for the … | [jousse2002_extraction.md](../../data/lit/extraction_dossiers/jousse2002_extraction.md) |
 | Kang et al. 2026 | [10.1039/d5fb00932d](https://doi.org/10.1039/d5fb00932d) |  | 13 |  |  |  | [kang2026_SI_extraction.md](../../data/lit/extraction_dossiers/kang2026_SI_extraction.md), [kang2026_extraction.md](../../data/lit/extraction_dossiers/kang2026_extraction.md) |
 | Kim & Ho 1998 | [10.1021/jf970719z](https://doi.org/10.1021/jf970719z) |  |  |  |  |  | [kim1998_extraction.md](../../data/lit/extraction_dossiers/kim1998_extraction.md) |
@@ -138,6 +142,7 @@
 | Leitzen et al. 2021 | [10.3390/ph14111121](https://doi.org/10.3390/ph14111121) |  |  | 1 | 1 | Directional claim DIC-03: glucose alone, 121 C, 18 min, aqueous: 3-DG > glucosone > glyoxal > methylglyoxal (the four species the trunk carries), independent of the B7/B13 sources. The same check … | [leitzen2021_extraction.md](../../data/lit/extraction_dossiers/leitzen2021_extraction.md) |
 | Leksrisompong, Barbano, Foegeding, Gerard & Drake 2010 | [10.1111/j.1745-459x.2009.00264.x](https://doi.org/10.1111/j.1745-459x.2009.00264.x) |  |  |  |  |  | [leksrisompong2010_extraction.md](../../data/lit/extraction_dossiers/leksrisompong2010_extraction.md) |
 | Li et al. (2026) | [10.3390/foods15050912](https://doi.org/10.3390/foods15050912) |  |  |  |  |  | [li2026_extraction.md](../../data/lit/extraction_dossiers/li2026_extraction.md) |
+| Li et al. 2020 | [10.1016/j.foodhyd.2019.06.012](https://doi.org/10.1016/j.foodhyd.2019.06.012) |  |  |  |  |  | [li2020_extraction.md](../../data/lit/extraction_dossiers/li2020_extraction.md) |
 | Li, Jongberg, Andersen, Davies & Lund 2016 | [10.1016/j.freeradbiomed.2016.05.019](https://doi.org/10.1016/j.freeradbiomed.2016.05.019) |  |  |  |  |  | [li2016_extraction.md](../../data/lit/extraction_dossiers/li2016_extraction.md) |
 | Lievonen & Roos 2002 |  |  |  |  |  |  | [lievonen2002_extraction.md](../../data/lit/extraction_dossiers/lievonen2002_extraction.md) |
 | Lin, Chan, Kao & Sung 2021 | [10.3390/polym13121901](https://doi.org/10.3390/polym13121901) |  |  | 3 |  |  | [lin2021_extraction.md](../../data/lit/extraction_dossiers/lin2021_extraction.md) |
@@ -197,6 +202,7 @@
 | Şen & Gökmen 2022 | [10.1016/j.foodchem.2022.133583](https://doi.org/10.1016/j.foodchem.2022.133583) |  |  |  |  |  | [sen2022_extraction.md](../../data/lit/extraction_dossiers/sen2022_extraction.md) |
 | Shen, Hong, Singh, Koppel & Li 2022 | [10.1016/j.foodchem.2022.132687](https://doi.org/10.1016/j.foodchem.2022.132687) |  |  |  |  |  | [shen2022_extraction.md](../../data/lit/extraction_dossiers/shen2022_extraction.md) |
 | Shepelev & Reineccius 2024 | [10.1021/acs.jafc.4c00134](https://doi.org/10.1021/acs.jafc.4c00134) |  |  |  |  |  | [shepelev2024_extraction.md](../../data/lit/extraction_dossiers/shepelev2024_extraction.md) |
+| Shi et al. 2022 | [10.1111/jfpp.16555](https://doi.org/10.1111/jfpp.16555) |  |  |  |  |  | [shi2022_extraction.md](../../data/lit/extraction_dossiers/shi2022_extraction.md) |
 | Shimada & Cheftel 1988 | [10.1021/jf00079a038](https://doi.org/10.1021/jf00079a038) |  |  |  |  |  | [shimada1988_extraction.md](../../data/lit/extraction_dossiers/shimada1988_extraction.md) |
 | Shu & Ho 1988 (JAFC 36:801−803) |  |  |  |  |  |  | [shu1988_extraction.md](../../data/lit/extraction_dossiers/shu1988_extraction.md) |
 | Shu 1999 | [10.1021/jf9813687](https://doi.org/10.1021/jf9813687) |  |  |  |  |  | [shu1999_extraction.md](../../data/lit/extraction_dossiers/shu1999_extraction.md) |
@@ -212,6 +218,7 @@
 | Tian, Yu, Yu & Chen 2020b | [10.3168/jds.2019-17495](https://doi.org/10.3168/jds.2019-17495) |  |  |  |  |  | [tian2020b_extraction.md](../../data/lit/extraction_dossiers/tian2020b_extraction.md) |
 | Trikusuma et al. (2020) | [10.1016/j.foodchem.2019.126082](https://doi.org/10.1016/j.foodchem.2019.126082) |  |  |  |  |  | [trikusuma2020_extraction.md](../../data/lit/extraction_dossiers/trikusuma2020_extraction.md) |
 | Troise, Fiore, Wiltafsky & Fogliano 2015 | [10.1016/j.foodchem.2015.04.137](https://doi.org/10.1016/j.foodchem.2015.04.137) |  |  |  |  |  | [troise2015_extraction.md](../../data/lit/extraction_dossiers/troise2015_extraction.md) |
+| Unlu & Faller 2002 | [10.1016/s0260-8774(01)00148-0](https://doi.org/10.1016/s0260-8774(01)00148-0) |  |  |  |  |  | [unlu2002_extraction.md](../../data/lit/extraction_dossiers/unlu2002_extraction.md) |
 | Utz 2022 | [10.3390/foods11030412](https://doi.org/10.3390/foods11030412) |  |  |  |  |  | [utz2022_extraction.md](../../data/lit/extraction_dossiers/utz2022_extraction.md) |
 | van Boekel 2005 |  |  |  |  |  |  | [vanboekel2005_extraction.md](../../data/lit/extraction_dossiers/vanboekel2005_extraction.md) |
 | Van Lancker 2012 | [10.1021/jf301315b](https://doi.org/10.1021/jf301315b) |  |  |  |  |  | [vanlancker2012_extraction.md](../../data/lit/extraction_dossiers/vanlancker2012_extraction.md) |

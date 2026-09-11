@@ -1588,3 +1588,63 @@ ran.
    who disclaim a quantitative rate law. What is new is the connection to a caveat this repository
    already carried in a buffer note — one fit-corpus buffer was made in tap water — and the
    consequence is a chelator arm on the thiol experiment, not a term in the model.
+
+## Amendment 43 — 2026-09-11 (Wave B45, seven sources arrive and six are refused)
+
+Seven papers were requested by name and downloaded on 2026-09-11: `unlu2002`, `li2020`,
+`jansson2020`, `bao2022`, `belrhlid2002`, `baldus2017`, `shi2022`. All seven were read and each has a
+dossier in `data/lit/extraction_dossiers/`. The pre-registration is
+`results/validation/kinetic_core_b45_prereg.md`, written before the probes ran.
+
+**No constant moved, no fit ran, no tolerance widened, and no benchmark value was edited.** That is
+the whole of this wave's effect on the model's numbers, and it is stated first because six of the
+seven papers were fetched in the expectation that they would supply one.
+
+**What each paper did to the fit/hold-out boundary: nothing.** None was used as a fit target and none
+was used as a hold-out. Six are refused as rate or barrier sources, for reasons recorded in their
+dossiers: a temperature axis applied to the protein rather than the reaction (`li2020`); figure-only
+values with no unheated control and no measurable lipid substrate (`jansson2020`); uncalibrated peak
+areas from a temperature-dependent purge (`bao2022`); a removal rate proportional to a crude enzyme's
+dose, which the authors attribute to impurities (`belrhlid2002`); an absent thiol assay in the only
+chelator arm, with the authors stating outright that no rate constants are available (`baldus2017`);
+and no binding constant, no isotherm and no total-hexanal measurement (`shi2022`).
+
+**Two records changed, both of them notes, both generator-owned.**
+
+1. `unlu2002` measured a geometric mean residence time of **123 s (87.2–173.5)** at 150 rpm and
+   8.55 kg/h on an extruder of length-to-diameter ratio 38.7 — against the acrylamide extrusion row's
+   pot at 150 rpm, 8.57 kg/h and ratio 40. Apportioning it over the three of ten barrel zones that
+   sit at 130 °C gives roughly 37 s against the bundle's declared 25 s: the right order, about 1.5×,
+   not 4×. **The 25 s stays**; the measurement is recorded on the vessel note as corroboration, with
+   its apportioning assumption stated. Generator:
+   `scripts/generators/complete_benchmark_vessel_fields.py`.
+2. `baldus2017` puts a floor under a caveat the four Yiltirak hold-out bundles have carried since
+   2026-09-06. Those four are the only bundles in the corpus with `water_source: tap`, and their note
+   already said trace-metal catalysis is uncontrolled. Baldus measured that a buffer in **ultrapure**
+   water held every transition metal below 0.08 µM, and that adding 300 µM of highest-purity cysteine
+   raised copper to **0.26 µM as a reagent impurity** — enough to drive statistically resolved
+   oxidation at 95 °C/180 min, abolished only by a chelator in **molar excess over the thiol**.
+   A clause recording this is appended to those four bundles' buffer note. **The bundles' values,
+   roles, tolerances and hold-out status are unchanged**; a diff confirms that everything except
+   `provenance_note` is byte-identical in all four. Generator:
+   `scripts/generators/complete_benchmark_buffer_fields.py`.
+
+**Two probes ran, neither scored, both pre-registered with numeric predictions, both held.**
+
+- Against `shi2022`: the engine's declared aldehyde-binding block binds **0.0108 %** of hexanal on
+  the pot Shi heated, where Shi measured a **187 % release**. Roughly four orders of magnitude, sign
+  reversed. The reading is that the declared covalent bracket is fine and a second, larger,
+  reversible channel is missing from the model.
+- Against `baldus2017`: on cysteine alone in buffer at 95 °C the engine retains **99.49 %** at 5 min
+  and **83.34 %** at 180 min, where Baldus's cysteine is nearly gone within 5 min of a 40–60 °C ramp.
+  This identifies the thiol sink's residual as a **missing catalytic channel**, not an under-sized
+  constant — which is consistent with Amendment 40's finding (Wave B38) that the sink's barrier and
+  both dimerisation rates already sit on their ceilings and cannot be refitted.
+
+**One argument was available and was refused, and the refusal is recorded here so it can be
+audited.** `shi2022` supports the claim that a headspace measurement of hexanal in a protein matrix
+under-reports the total by a factor depending on the sample's pH and thermal history. Applied to the
+corpus, that would license widening the tolerance on every such hexanal row and would raise this
+model's headline score. It establishes no new fact about the model's chemistry, so it was declined in
+§4 of the pre-registration before the probes ran, and it is declined here. The mismatch is instead
+declared as a completeness debt in `docs/guides/EXPERIMENTS.md`, experiment 4.
