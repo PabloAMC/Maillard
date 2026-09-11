@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **508**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **509**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -125,6 +125,7 @@ Tracked files: **508**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b39_ship_rule.*` (2): `kinetic_core_b39_ship_rule.json`, `kinetic_core_b39_ship_rule.md` | B39's ship rule (the fed 3-deoxyglucosone fit): DO NOT SHIP by its own pre-registered rule -- the four maxima fit to 0.09 dex and all five coordinates pinned, but the fed pot's 3,4-DGE peaked at 12.5 min against a 20-60 min bracket, because the 3-DG exits had no pH term. Judged on the frozen pair under `_b39_baseline/` (`generate_kinetic_core_b39_ship_rule.py`). |
 | `kinetic_core_b40_ship_rule.*` (2): `kinetic_core_b40_ship_rule.json`, `kinetic_core_b40_ship_rule.md` | B40's ship rule (pH term on BOTH 3-DG exits, refit): DO NOT SHIP -- the peak landed, 3-DG held at 1.36x, 3,4-DGE 32x -> 6x, HMF improved on five pots, and Leitzen's methylglyoxal went 1.28x -> 33x: the term on the fragmentation exit, transferred from Martins' lumped step to Kocadagli's methylglyoxal route, was rejected by the hold-out (`generate_kinetic_core_b40_ship_rule.py`). |
 | `kinetic_core_b41_ship_rule.*` (2): `kinetic_core_b41_ship_rule.json`, `kinetic_core_b41_ship_rule.md` | B41's ship rule (pH term on the formic-acid exit ONLY, refit): judged on the frozen pair under `_b41_baseline/` with Leitzen's methylglyoxal row decisive (`generate_kinetic_core_b41_ship_rule.py`). |
+| `kinetic_core_b45_probe.json` | Wave B45's two COMPLETENESS probes, recomputed from the shipped engine so the digits its pre-registration quotes cannot drift. Neither is scored and neither moved a constant: P1 asks how much hexanal the declared binding block removes on the pot Shi et al. 2022 measured a RELEASE from, P2 asks how much cysteine the sulfur lane keeps on the pot Baldus et al. 2017 measured a metal-catalysed loss from (`generate_kinetic_core_b45_probe.py`). |
 | `kinetic_core_b4_frozen_predictions.json` | B4 predictions frozen before the hold-out was scored; read by `generate_kinetic_core_b4_fit.py` and `parameters_matrix.py`. |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
 | `kinetic_core_b9_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b9`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
