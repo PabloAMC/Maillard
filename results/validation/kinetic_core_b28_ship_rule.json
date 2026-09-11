@@ -2,18 +2,18 @@
   "artifact": "kinetic_core_b28_ship_rule",
   "provenance": {
     "artifact": "kinetic_core_b28_ship_rule",
-    "generated_on": "2026-09-10",
+    "generated_on": "2026-09-11",
     "git": {
-      "commit": "191dfd841629515f6827f01510017f557836d7f6",
-      "short": "191dfd84",
+      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
+      "short": "6616f99e",
       "branch": "reactions",
-      "dirty": false
+      "dirty": true
     },
     "generated_by": "scripts/generators/generate_kinetic_core_b28_ship_rule.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "195ba6307bc7ce0bfe029310bedbc6864a6c45478b6ee664ab7bb48b451c5de6"
+        "sha256": "96f691356609cbfc7e0ec4571dafb1956158dec51a255e974e3c04a7385b72a1"
       }
     ]
   },
@@ -136,7 +136,31 @@
   },
   "T5": {
     "non_lipid_benchmarks_changed": [],
-    "compared": "compound, target_unit, measured, predicted, fold_error -- not the whole row",
+    "non_lipid_rows_added_by_later_waves": {
+      "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021": [
+        [
+          "3,4-dideoxyglucosone",
+          "ppb"
+        ],
+        [
+          "3-deoxyglucosone",
+          "ppb"
+        ],
+        [
+          "glucosone",
+          "ppb"
+        ],
+        [
+          "glyoxal",
+          "ppb"
+        ],
+        [
+          "methylglyoxal",
+          "ppb"
+        ]
+      ]
+    },
+    "compared": "compound, target_unit, measured, predicted, fold_error, over the rows BOTH runs have -- not the whole row, and not rows a later wave added",
     "pass": true
   },
   "verdict": "SHIP"

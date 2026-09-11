@@ -1093,6 +1093,106 @@
           "predicted_std": 113.32385519414001,
           "shared_with": null,
           "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.4785991554158755e-06,
+          "compound": "3-deoxyglucosone",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 52200.0,
+          "measured_ppb": 52200.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 46982.89167911828,
+          "predicted_p5": 46982.79406268905,
+          "predicted_p50": 46982.90345018435,
+          "predicted_p95": 46982.95402059957,
+          "predicted_point": 46982.900428788,
+          "predicted_std": 0.05011499732747626,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.0633755923427426e-06,
+          "compound": "3,4-dideoxyglucosone",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 55500.0,
+          "measured_ppb": 55500.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 1711.1292252549247,
+          "predicted_p5": 1711.1266697974152,
+          "predicted_p50": 1711.1295338455727,
+          "predicted_p95": 1711.1308595180758,
+          "predicted_point": 1711.1294549099457,
+          "predicted_std": 0.001309315267649323,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 2.047751871391655e-06,
+          "compound": "glucosone",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 7500.0,
+          "measured_ppb": 7500.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 119.05903437982157,
+          "predicted_p5": 119.0586918903998,
+          "predicted_p50": 119.05907548723978,
+          "predicted_p95": 119.05925326809181,
+          "predicted_point": 119.05906487059636,
+          "predicted_std": 0.00017611220415093013,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.0817629767980458,
+          "compound": "glyoxal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 5600.0,
+          "measured_ppb": 5600.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 194.77350834578806,
+          "predicted_p5": 169.72382484736568,
+          "predicted_p50": 198.73891924073297,
+          "predicted_p95": 204.8829351203382,
+          "predicted_point": 160.79393481301767,
+          "predicted_std": 11.22432062288241,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.14986094412505074,
+          "compound": "methylglyoxal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 2600.0,
+          "measured_ppb": 2600.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 1909.8832476455818,
+          "predicted_p5": 1530.6779220386509,
+          "predicted_p50": 1974.9848111795663,
+          "predicted_p95": 2161.447853164469,
+          "predicted_point": 2029.733012335392,
+          "predicted_std": 212.3867045835298,
+          "shared_with": null,
+          "target_unit": "ppb"
         }
       ],
       "coverage_rate": 1.0,
@@ -1103,7 +1203,7 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 1,
+      "matched_compounds": 6,
       "panel": "maillard_path_holdout",
       "protein_type": "free",
       "quantification_family": "extraction",
@@ -1828,7 +1928,7 @@
     "lane_networks": {
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so.",
-      "sulfur": "FULL_REACTIONS (106 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (107 steps) = trunk + sulfur, pH trajectory",
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term"
     },
     "lanes": [
@@ -3354,12 +3454,12 @@
   "provenance": {
     "artifact": "core_prediction_uncertainty",
     "generated_by": "src/kinetic_core/uncertainty.py",
-    "generated_on": "2026-09-10",
+    "generated_on": "2026-09-11",
     "git": {
       "branch": "reactions",
-      "commit": "d8fd36d52929b7f89d616cec1ec86e4acd95e11f",
+      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
       "dirty": true,
-      "short": "d8fd36d5"
+      "short": "6616f99e"
     },
     "inputs": [
       {
@@ -3480,7 +3580,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "3004872736bab6ff8809d21fae8eeabe039e72349238dc414dbed9748218d567"
+        "sha256": "952b412ab44cf991dcee457c1a4e8ae3a4c7682c34362d884e52bfb6a20f8b97"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
@@ -3755,7 +3855,7 @@
   "summary": {
     "benchmark_count": 23,
     "ci_coverage_hits": 10,
-    "ci_coverage_rate": 0.2564102564102564,
+    "ci_coverage_rate": 0.22727272727272727,
     "ci_level_pct": 90,
     "fixed_prior_count": 46,
     "honest_literature_coverage": {
@@ -3763,16 +3863,16 @@
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
       "hits": 10,
-      "median_ci_width_log10": 0.9283504722374095,
-      "not_evaluable": 0,
-      "rate": 0.2564102564102564,
-      "total": 39
+      "median_ci_width_log10": 0.8862956826996636,
+      "not_evaluable": 3,
+      "rate": 0.24390243902439024,
+      "total": 41
     },
-    "matched_compound_count": 39,
+    "matched_compound_count": 44,
     "n_samples": 200,
     "observable_multiplier_policy": {
       "rows_by_family": {
-        "extraction": 31,
+        "extraction": 36,
         "headspace": 8,
         "undeclared": 0
       },
@@ -3782,13 +3882,13 @@
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
       "hits": 10,
-      "not_evaluable": 0,
+      "not_evaluable": 3,
       "rows_the_core_fit_read": {
         "hits": 0,
         "not_evaluable": 0,
         "total": 1
       },
-      "total": 38
+      "total": 40
     },
     "panel_benchmark_count": 37,
     "panel_split": {
@@ -3800,11 +3900,11 @@
         "total": 4
       },
       "maillard_path_holdout": {
-        "ci_coverage_rate": 0.15384615384615385,
+        "ci_coverage_rate": 0.14285714285714285,
         "hits": 4,
-        "median_ci_width_log10": 0.8858088117739127,
-        "not_evaluable": 0,
-        "total": 26
+        "median_ci_width_log10": 0.8765710902440199,
+        "not_evaluable": 3,
+        "total": 28
       },
       "trust_loop": {
         "ci_coverage_rate": 0.4444444444444444,
@@ -3845,11 +3945,11 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.2564102564102564,
+        "ci_coverage_rate": 0.24390243902439024,
         "hits": 10,
-        "median_ci_width_log10": 0.9283504722374095,
-        "not_evaluable": 0,
-        "total": 39
+        "median_ci_width_log10": 0.8862956826996636,
+        "not_evaluable": 3,
+        "total": 41
       },
       "fitted_row": {
         "ci_coverage_rate": null,
@@ -3880,7 +3980,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 589.9,
+    "wall_seconds": 584.9,
     "workers": 1
   }
 }

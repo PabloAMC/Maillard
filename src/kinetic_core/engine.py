@@ -417,6 +417,16 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
 }
 
 #: Which lane each target species is reachable in.
+#: B34 (2026-09-11). THE SPECIES THAT ARE NOT MOLECULES, named rather than caught by an `else`.
+#: These are elemental or lumped accounting pools -- a mole of "melanoidin nitrogen" is a mole of N
+#: atoms, not of any compound -- so a molar mass would have to be invented. They are reported in
+#: mmol/L on purpose. Everything else that reaches the reporting loop MUST have a molar mass; see
+#: `_concentrations`, where a missing one now raises instead of silently changing the unit.
+_REPORTED_IN_MMOL_PER_L: frozenset = frozenset({
+    "MEL_C", "MEL_N", "MEL_S", "FRAG_C", "FRAG_N", "FRAG_S",
+    "OX", "OXR", "OXV", "OLG", "MELE", "PROT_SS", "ACID", "CBX", "SB", "LYS_SITES",
+})
+
 _TARGET_LANE: Mapping[str, str] = {
     "ACR": ACRYLAMIDE,
     "FFT": SULFUR,
@@ -2501,10 +2511,23 @@ def predict(
             concentrations[compound] = acrylamide_ppb(mmol)
         elif key in MOLECULAR_WEIGHT_G_PER_MOL:
             concentrations[compound] = mmol_per_litre_to_ug_per_litre(key, mmol)
-        else:
-            # No molecular weight is defined for the elemental melanoidin pool;
-            # it is reported in its own unit rather than given an invented one.
+        elif key in _REPORTED_IN_MMOL_PER_L:
+            # The elemental and lumped pools have no molecular weight because they are not
+            # molecules; they are reported in their own unit rather than given an invented one.
             concentrations[compound] = mmol
+        else:
+            # B34 (2026-09-11). THIS USED TO BE THE `else`, AND THAT COST TWO WAVES. A species with
+            # no molar mass was silently reported in mmol/L, which reads as a prediction between
+            # one and five ORDERS too small: 2-pentylfuran in B28 (diagnosed for a day as a routing
+            # problem), then 3-deoxyglucosone and methylglyoxal the moment B34 asked for them.
+            # A missing weight is now a bug report, not a quiet change of unit.
+            raise KeyError(
+                f"{compound!r} resolves to species {key!r}, which has no molecular weight and is "
+                "not a declared unit-less pool. Reporting it in mmol/L would look like a prediction "
+                f"{'a factor of its molar mass'} too small. Add it to "
+                "species_sulfur.MOLECULAR_WEIGHT_G_PER_MOL, or to engine._REPORTED_IN_MMOL_PER_L "
+                "if it is genuinely not a molecule."
+            )
 
     # 2026-09-08 (the matrix layer): declared binding of aldehydes and HMF to the charged protein
     # sites, applied after integration as a pseudo-first-order factor over the thermal programme,

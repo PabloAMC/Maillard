@@ -4,10 +4,12 @@
   "maillard_path_holdout": true,
   "source_doi": "10.3390/ph14111121",
   "source_metadata": {
-    "citation": "Steinhagen, S. et al. Quantification of Degradation Products Formed during Heat Sterilization of Glucose Solutions by LC-MS/MS: Impact of Autoclaving Temperature and Duration on Degradation. Pharmaceuticals 2021, 14 (11), 1121.",
+    "citation": "Leitzen, S.; Vogel, M.; Steffens, M.; Zapf, T.; Mueller, C. E.; Brandl, M. Quantification of Degradation Products Formed during Heat Sterilization of Glucose Solutions by LC-MS/MS: Impact of Autoclaving Temperature and Duration on Degradation. Pharmaceuticals 2021, 14 (11), 1121.",
     "origin": "external_literature",
     "evidence_class": "external_validation_only",
-    "notes": "MAILLARD-PATH HOLD-OUT (Wave U, 2026-08-27). Never use for calibration, refitting, or any promotion decision."
+    "notes": "MAILLARD-PATH HOLD-OUT (Wave U, 2026-08-27). Never use for calibration, refitting, or any promotion decision.",
+    "citation_correction_2026_09_11": "WAVE B34. The citation read 'Steinhagen, S. et al.' The DOI and title were always correct and the paper is Leitzen et al. 2021: the author list read from the PDF's own front matter is Sarah Leitzen, Matthias Vogel, Michael Steffens, Thomas Zapf, Christa Elisabeth Mueller and Martin Brandl, and the string 'Steinhagen' appears NOWHERE in the paper. The benchmark_id still says Steinhagen2021 and is deliberately NOT renamed: it is referenced by artifacts, tests and figures across this branch, and a wrong id that declares itself wrong here is safer than a silent re-key. The mistake is kept as the audit record. The PDF has been on disk as data/articles/Leitzen2021.pdf since 2026-09-07 and its dossier is data/lit/extraction_dossiers/leitzen2021_extraction.md.",
+    "pdf_on_disk": "data/articles/Leitzen2021.pdf (open access, downloaded 2026-09-07)"
   },
   "content_verification": {
     "access_level": "full_text",
@@ -46,8 +48,8 @@
       "concentration_M": null,
       "initial_ph_scale": "at_temperature",
       "provenance_class": "unknown",
-      "provenance_note": "Steinhagen et al. 2021, Pharmaceuticals 14(11):1121. SOURCE PAPER NOT ON DISK and the repo carries no verbatim statement of the medium beyond '10% (w/v) glucose solution ... autoclaved at 111, 116, and 121 degC'. An unbuffered infusion solution is the LIKELY reading and it is exactly the reading this field refuses to record, because likely is not stated. ph_disagreement, AND IT IS THE ONE THAT BREAKS THE SCALE CONVENTION: conditions.ph = 4.36 is the pH measured AFTER autoclaving (the source's Table 3). The initial / non-autoclaved value is 4.98 (Table 6). Every other bundle's pH is an INITIAL bench reading, so this one is on a different scale from all twenty others -- which is why initial_ph_scale is recorded here as 'at_temperature' rather than 'bench_cooled'. The bundle discloses the choice honestly but a model that treats 4.36 as an initial condition is being handed the answer to part of its own trajectory. Reported, not edited.",
-      "ph_disagreement": "conditions.ph = 4.36 is the POST-autoclave measurement; the initial value is 4.98. This bundle's pH is on a different scale from the other twenty."
+      "provenance_note": "WAVE B34 (2026-09-11): THE SOURCE IS ON DISK and the previous note saying otherwise was wrong. Leitzen et al. 2021 (Pharmaceuticals 14:1121, data/articles/Leitzen2021.pdf), Methods: 10 % (w/v) glucose in water in PP bottles, autoclaved; NO BUFFER is added, and the paper measures the pH itself -- 4.98 before autoclaving and 4.4-5.2 after (scheme A). This bundle's conditions.ph of 4.36 is BELOW the range the paper prints and is left unedited, because changing an executable condition is outside the licence an extraction correction carries; it is reported here instead. ||| PRIOR NOTE, SUPERSEDED 2026-09-11 AND RETAINED AS THE AUDIT RECORD -- its claim that the source is not on disk was false when written and is false now: Steinhagen et al. 2021, Pharmaceuticals 14(11):1121. SOURCE PAPER NOT ON DISK and the repo carries no verbatim statement of the medium beyond '10% (w/v) glucose solution ... autoclaved at 111, 116, and 121 degC'. An unbuffered infusion solution is the LIKELY reading and it is exactly the reading this field refuses to record, because likely is not stated. ph_disagreement, AND IT IS THE ONE THAT BRE",
+      "ph_disagreement": "conditions.ph = 4.36 sits below Leitzen's printed 4.4-5.2 post-autoclave range (4.98 before). Reported, not edited."
     },
     "vessel": {
       "fill_mL": null,
@@ -81,6 +83,58 @@
       "molar_basis": "ug per mL of the 10% (w/v) glucose solution, i.e. 17.4 ug/mL = 17400 ug/L = 17400 ppb. Pure decimal rescaling of the printed unit; no basis is assumed.",
       "unit_commensurable": true,
       "smiles": "O=Cc1ccc(CO)o1"
+    },
+    "3-deoxyglucosone": {
+      "target_unit": "ppb",
+      "target_value": 52200.0,
+      "target_uncertainty": 4000.0,
+      "target_quote": "Table 4, Scheme A, 121 degC / 18 min row: '3-DG (+3-DGal) [ug/mL] +/- SD ... 52.2 +/- 4.0'.",
+      "molar_basis": "ug per mL of the 10 % (w/v) glucose solution, i.e. 52.2 ug/mL = 52200 ug/L = ppb. Pure decimal rescaling of the printed unit; no basis is assumed. Same convention as the 5-HMF row this bundle already carried.",
+      "unit_commensurable": true,
+      "added_by": "WAVE B34 (2026-09-11). The paper measures SIX species the trunk carries in this pot and the bundle scored ONE. These five are end-of-cook levels in a declared hold-out: they VALIDATE and may never be fitted. See results/validation/kinetic_core_b34_prereg.md.",
+      "compound_note": "3-deoxyglucosone; the paper reports 3-DG and its galactose epimer together"
+    },
+    "3,4-dideoxyglucosone": {
+      "target_unit": "ppb",
+      "target_value": 55500.0,
+      "target_uncertainty": 1700.0,
+      "target_quote": "Table 4, Scheme A, 121 degC / 18 min row: '3,4-DGE [ug/mL] +/- SD ... 55.5 +/- 1.7'.",
+      "molar_basis": "ug per mL of the 10 % (w/v) glucose solution, i.e. 55.5 ug/mL = 55500 ug/L = ppb. Pure decimal rescaling of the printed unit; no basis is assumed. Same convention as the 5-HMF row this bundle already carried.",
+      "unit_commensurable": true,
+      "added_by": "WAVE B34 (2026-09-11). The paper measures SIX species the trunk carries in this pot and the bundle scored ONE. These five are end-of-cook levels in a declared hold-out: they VALIDATE and may never be fitted. See results/validation/kinetic_core_b34_prereg.md.",
+      "compound_note": "3,4-dideoxyglucosone-3-ene (3,4-DGE), the trunk's DDG"
+    },
+    "glucosone": {
+      "target_unit": "ppb",
+      "target_value": 7500.0,
+      "target_uncertainty": 1400.0,
+      "target_quote": "Table 4, Scheme A, 121 degC / 18 min row: 'glucosone [ug/mL] +/- SD ... 7.5 +/- 1.4'.",
+      "molar_basis": "ug per mL of the 10 % (w/v) glucose solution, i.e. 7.5 ug/mL = 7500 ug/L = ppb. Pure decimal rescaling of the printed unit; no basis is assumed. Same convention as the 5-HMF row this bundle already carried.",
+      "unit_commensurable": true,
+      "added_by": "WAVE B34 (2026-09-11). The paper measures SIX species the trunk carries in this pot and the bundle scored ONE. These five are end-of-cook levels in a declared hold-out: they VALIDATE and may never be fitted. See results/validation/kinetic_core_b34_prereg.md.",
+      "compound_note": "D-glucosone (2-keto-D-glucose)"
+    },
+    "glyoxal": {
+      "target_unit": "ppb",
+      "target_value": 5600.0,
+      "target_uncertainty": 1300.0,
+      "target_quote": "Table 4, Scheme A, 121 degC / 18 min row: 'GO [ug/mL] +/- SD ... 5.6 +/- 1.3'.",
+      "molar_basis": "ug per mL of the 10 % (w/v) glucose solution, i.e. 5.6 ug/mL = 5600 ug/L = ppb. Pure decimal rescaling of the printed unit; no basis is assumed. Same convention as the 5-HMF row this bundle already carried.",
+      "unit_commensurable": true,
+      "added_by": "WAVE B34 (2026-09-11). The paper measures SIX species the trunk carries in this pot and the bundle scored ONE. These five are end-of-cook levels in a declared hold-out: they VALIDATE and may never be fitted. See results/validation/kinetic_core_b34_prereg.md.",
+      "compound_note": "glyoxal",
+      "smiles": "O=CC=O"
+    },
+    "methylglyoxal": {
+      "target_unit": "ppb",
+      "target_value": 2600.0,
+      "target_uncertainty": 200.0,
+      "target_quote": "Table 4, Scheme A, 121 degC / 18 min row: 'MGO [ug/mL] +/- SD ... 2.6 +/- 0.2'.",
+      "molar_basis": "ug per mL of the 10 % (w/v) glucose solution, i.e. 2.6 ug/mL = 2600 ug/L = ppb. Pure decimal rescaling of the printed unit; no basis is assumed. Same convention as the 5-HMF row this bundle already carried.",
+      "unit_commensurable": true,
+      "added_by": "WAVE B34 (2026-09-11). The paper measures SIX species the trunk carries in this pot and the bundle scored ONE. These five are end-of-cook levels in a declared hold-out: they VALIDATE and may never be fitted. See results/validation/kinetic_core_b34_prereg.md.",
+      "compound_note": "methylglyoxal",
+      "smiles": "CC(=O)C=O"
     }
   }
 }

@@ -309,8 +309,18 @@ BUNDLE_BASELINES = {
         "531bb130e00c5aafe789a2d2e47867924a894df0cc086eaa91a8ed7eb4c8bc3d",
     "mp_holdout_glucose_asparagine_180C_Ye2024":
         "974846cfc0fa87780e208fbc882310c41efcd1caa1d15fc4ae527f648edd204b",
+    # RE-BASELINED BY WAVE B34 (2026-09-11), and this guard was RIGHT to fire: the change is NOT a
+    # condition-record completion, so the helper below is deliberately not widened to hide it.
+    # What moved, all of it pre-registered in results/validation/kinetic_core_b34_prereg.md:
+    #   * source_metadata.citation -- the authors are Leitzen et al., not "Steinhagen"; the DOI and
+    #     title were always right and the benchmark_id is deliberately NOT renamed.
+    #   * holdout_targets -- FIVE observables added. The paper measures six species the trunk
+    #     carries in this pot and the bundle scored one. They are end-of-cook levels in a declared
+    #     hold-out: they VALIDATE and may never be fitted, and the hold-out gate still passes.
+    # The existing 5-HMF target is byte-identical, which the wave's T1 asserts separately.
+    # Previous baseline: fd26c70a0d0020ebbe1fca8dfd63a8cd2668ac008c7aa35ea8e4b7bfc98b2f81
     "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021":
-        "fd26c70a0d0020ebbe1fca8dfd63a8cd2668ac008c7aa35ea8e4b7bfc98b2f81",
+        "fc15e012f6a5cd03f486c6fa3009c2cc50c7e3b43f53bc48a98bd15b531e99d9",
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3":
         "0d18247402d397ef1c35a328d80886b111d6fe42ac12454e0847a82b1cead79e",
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7":

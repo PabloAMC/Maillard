@@ -1,5 +1,28 @@
 # B33, a pre-registered PREDICTION for a wave that cannot be run yet: the amine-free sugar entries are about ten times too slow in water (2026-09-11)
 
+> # RETRACTED 2026-09-11, THE DAY AFTER IT WAS REGISTERED
+>
+> **This prediction is wrong, and it was refuted by a paper that was already on disk.**
+>
+> B33 forecast that the three amine-free sugar entries are about ten times too slow in water, at
+> 55 %. Leitzen et al. 2021 (`data/articles/Leitzen2021.pdf`, open access, downloaded 2026-09-07 —
+> and the very paper the `..._Steinhagen2021` bundle already cites) measures six species the trunk
+> carries in that exact pot. At the shipped vector the entry to **3-deoxyglucosone lands at 1.11×**
+> and **methylglyoxal at 1.28×**. The entries are right.
+>
+> The ×10 scaling this document is built on takes 3-deoxyglucosone from 1.11× to 8.89× and
+> methylglyoxal from 1.28× to 7.76× **in order to buy HMF** — it destroys two right answers to fix
+> one wrong one. The probe was not wrong about what it measured; it watched a single observable and
+> could not see what it was breaking.
+>
+> **What replaces it:** the deficit is the step AFTER the entry. 3,4-dideoxyglucosone is 32× low and
+> HMF 11.9× low downstream of a 3-deoxyglucosone that is right, so the loss is `k_tdg_ddg` — one of
+> the four constants ENV-B13 declined to band because two laboratories agree on it, both of them in
+> dry matrices. See `kinetic_core_b34_prereg.md`.
+>
+> The text below is kept unedited as the record of what was registered and how it failed.
+
+
 ## Where it comes from
 
 Two refusals this week pointed at the same place from different sides. The HMF sink check found the

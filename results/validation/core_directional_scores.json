@@ -41,10 +41,10 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-09-10",
+    "generated_on": "2026-09-11",
     "git": {
-      "commit": "23b75fb19e85748b4004b3d401a1f206400c4b11",
-      "short": "23b75fb1",
+      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
+      "short": "6616f99e",
       "branch": "reactions",
       "dirty": true
     },
@@ -500,7 +500,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 48.5
+    "wall_seconds": 47.4
   },
   "claims": [
     {
@@ -5642,24 +5642,24 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        0.07356569400316243,
+        11927.941625672755,
         12.013602586605895,
-        0.010537322582613742,
+        759.3194653031463,
         38.091724723965356,
         0.028482246051555346
       ],
       "log10_steps": [
-        2.212997924895051,
-        -3.0569429858057053,
-        3.5581003617116873,
+        -2.9968922437862067,
+        1.8007512719808445,
+        -1.2995938960748623,
         -3.126256403281739
       ],
       "predicted_order": [
+        "3-deoxyglucosone",
+        "methylglyoxal",
         "glyoxal",
         "glucosone",
-        "3-deoxyglucosone",
-        "diacetyl",
-        "methylglyoxal"
+        "diacetyl"
       ],
       "arms": [
         {
@@ -5681,7 +5681,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 0.07356569400316243
+          "value_ug_per_l": 11927.941625672755
         },
         {
           "label": "glucose alone, 105 C, 6 h :: glucosone",
@@ -5724,7 +5724,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 0.010537322582613742
+          "value_ug_per_l": 759.3194653031463
         },
         {
           "label": "glucose alone, 105 C, 6 h :: glyoxal",
@@ -5809,21 +5809,21 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        0.2897674875341557,
+        46982.900428788,
         119.05906487059636,
         160.79393481301767,
-        0.028167263562800332
+        2029.733012335392
       ],
       "log10_steps": [
-        2.6137128119382806,
+        -2.596177356742977,
         0.13050719588998083,
-        -3.7565250055079247
+        1.1011692522786247
       ],
       "predicted_order": [
-        "glyoxal",
-        "glucosone",
         "3-deoxyglucosone",
-        "methylglyoxal"
+        "methylglyoxal",
+        "glyoxal",
+        "glucosone"
       ],
       "arms": [
         {
@@ -5846,7 +5846,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 0.2897674875341557
+          "value_ug_per_l": 46982.900428788
         },
         {
           "label": "10 % glucose, 121 C, 18 min :: glucosone",
@@ -5914,7 +5914,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 0.028167263562800332
+          "value_ug_per_l": 2029.733012335392
         }
       ]
     },

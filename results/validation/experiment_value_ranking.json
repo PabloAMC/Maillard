@@ -1,5 +1,5 @@
 {
-  "candidate_count": 39,
+  "candidate_count": 44,
   "candidates": [
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -380,6 +380,60 @@
       "voi_score": 2.856608281313429
     },
     {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "ci_width_log10": 2.046017735557036e-06,
+      "compound": "glucosone",
+      "decision_relevance": 1.0,
+      "envelope_miss_log10": 1.7992980908482883,
+      "inside_ci": false,
+      "matrix_family": "free",
+      "measured_ppb": 7500.0,
+      "odour_threshold_ug_per_kg": null,
+      "predicted_p5": 119.05869735134337,
+      "predicted_p50": 119.05907304986594,
+      "predicted_p95": 119.05925825365807,
+      "rank": 22,
+      "rationale": "measured outside 90% CI by 1.80 dex; CI width 0.00 dex; anchor measurement to constrain prior",
+      "suggested_doe_template": "missing_absolute_anchor",
+      "voi_score": 2.799298704653609
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "ci_width_log10": 1.0536568679864479e-06,
+      "compound": "3,4-dideoxyglucosone",
+      "decision_relevance": 1.0,
+      "envelope_miss_log10": 1.5110097551938708,
+      "inside_ci": false,
+      "matrix_family": "free",
+      "measured_ppb": 55500.0,
+      "odour_threshold_ug_per_kg": null,
+      "predicted_p5": 1711.1267248255863,
+      "predicted_p50": 1711.1295171313204,
+      "predicted_p95": 1711.13087625437,
+      "rank": 23,
+      "rationale": "measured outside 90% CI by 1.51 dex; CI width 0.00 dex; anchor measurement to constrain prior",
+      "suggested_doe_template": "missing_absolute_anchor",
+      "voi_score": 2.511010071290931
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "ci_width_log10": 0.08841403740973848,
+      "compound": "glyoxal",
+      "decision_relevance": 1.0,
+      "envelope_miss_log10": 1.436263025608232,
+      "inside_ci": false,
+      "matrix_family": "free",
+      "measured_ppb": 5600.0,
+      "odour_threshold_ug_per_kg": null,
+      "predicted_p5": 167.3057873074565,
+      "predicted_p50": 197.878438175882,
+      "predicted_p95": 205.08079928521005,
+      "rank": 24,
+      "rationale": "measured outside 90% CI by 1.44 dex; CI width 0.09 dex; anchor measurement to constrain prior",
+      "suggested_doe_template": "missing_absolute_anchor",
+      "voi_score": 2.462787236831154
+    },
+    {
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
       "ci_width_log10": 1.8470760254223957,
       "compound": "2-Furfurylthiol (FFT)",
@@ -392,7 +446,7 @@
       "predicted_p5": 23.186826184428437,
       "predicted_p50": 191.11879269688183,
       "predicted_p95": 1630.4869675449702,
-      "rank": 22,
+      "rank": 25,
       "rationale": "CI width 1.85 dex; \u22482e+04\u00d7 ODT (decision_relevance=4.28); critical meaty odorant in a FREE-PRECURSOR system \u2014 the open question is absolute yield vs precursor dose and temperature, not matrix transfer",
       "suggested_doe_template": "free_precursor_sulfur_yield",
       "voi_score": 2.372367856596796
@@ -410,7 +464,7 @@
       "predicted_p5": 1068.672584889953,
       "predicted_p50": 1453.4593362731334,
       "predicted_p95": 1458.4961950449585,
-      "rank": 23,
+      "rank": 26,
       "rationale": "measured outside 90% CI by 1.08 dex; CI width 0.14 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 2.1171621374406713
@@ -428,7 +482,7 @@
       "predicted_p5": 859.2435001199378,
       "predicted_p50": 1926.7373729944313,
       "predicted_p95": 1946.8572257441738,
-      "rank": 24,
+      "rank": 27,
       "rationale": "measured outside 90% CI by 0.80 dex; CI width 0.36 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.9064296177848272
@@ -446,7 +500,7 @@
       "predicted_p5": 3989.869239829478,
       "predicted_p50": 27009.9644335997,
       "predicted_p95": 27969.803466004738,
-      "rank": 25,
+      "rank": 28,
       "rationale": "measured outside 90% CI by 0.56 dex; CI width 0.85 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.8097822278874718
@@ -464,7 +518,7 @@
       "predicted_p5": 69.86647012735729,
       "predicted_p50": 186.04021758443537,
       "predicted_p95": 573.7737457802072,
-      "rank": 26,
+      "rank": 29,
       "rationale": "measured outside 90% CI by 0.51 dex; CI width 0.91 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.784880278586559
@@ -482,7 +536,7 @@
       "predicted_p5": 917.3419016350475,
       "predicted_p50": 2152.9454252231776,
       "predicted_p95": 2199.4206169177037,
-      "rank": 27,
+      "rank": 30,
       "rationale": "measured outside 90% CI by 0.50 dex; CI width 0.38 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.6167228664083804
@@ -500,7 +554,7 @@
       "predicted_p5": 3989.869239829478,
       "predicted_p50": 27009.9644335997,
       "predicted_p95": 27969.803466004738,
-      "rank": 28,
+      "rank": 31,
       "rationale": "measured outside 90% CI by 0.31 dex; CI width 0.85 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.5648351893938464
@@ -518,7 +572,7 @@
       "predicted_p5": 1265.7308365854929,
       "predicted_p50": 3355.991167282581,
       "predicted_p95": 10383.844421093423,
-      "rank": 29,
+      "rank": 32,
       "rationale": "measured outside 90% CI by 0.18 dex; CI width 0.91 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.4564230780417355
@@ -536,7 +590,7 @@
       "predicted_p5": 1.6607299564677376,
       "predicted_p50": 9.566174118866165,
       "predicted_p95": 53.14539418703021,
-      "rank": 30,
+      "rank": 33,
       "rationale": "CI width 1.51 dex; \u22481e+03\u00d7 ODT (decision_relevance=3.14); critical meaty odorant in a FREE-PRECURSOR system \u2014 the open question is absolute yield vs precursor dose and temperature, not matrix transfer",
       "suggested_doe_template": "free_precursor_sulfur_yield",
       "voi_score": 1.4158983005518404
@@ -554,7 +608,7 @@
       "predicted_p5": 5.3014069096072625,
       "predicted_p50": 49.195345200044045,
       "predicted_p95": 718.0391359958481,
-      "rank": 31,
+      "rank": 34,
       "rationale": "CI width 2.13 dex; \u22481e+02\u00d7 ODT (decision_relevance=2.13); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 1.3615361388347305
@@ -572,7 +626,7 @@
       "predicted_p5": 2514.9689563930433,
       "predicted_p50": 6387.709533189165,
       "predicted_p95": 20640.85942254632,
-      "rank": 32,
+      "rank": 35,
       "rationale": "measured outside 90% CI by 0.00 dex; CI width 0.91 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 1.2742585442007155
@@ -590,7 +644,7 @@
       "predicted_p5": 1.4052490157185584,
       "predicted_p50": 11.01439463277487,
       "predicted_p95": 90.29804871744341,
-      "rank": 33,
+      "rank": 36,
       "rationale": "measured outside 90% CI by 0.90 dex; CI width 1.81 dex; \u22480.2\u00d7 ODT (decision_relevance=0.50); wide envelope \u2014 time-course narrows the rate-limiting step",
       "suggested_doe_template": "missing_kinetic_dataset",
       "voi_score": 1.2205694037364683
@@ -608,7 +662,7 @@
       "predicted_p5": 7.394529483931534,
       "predicted_p50": 69.41290505008553,
       "predicted_p95": 1060.3364740442441,
-      "rank": 34,
+      "rank": 37,
       "rationale": "CI width 2.16 dex; \u22487e+01\u00d7 ODT (decision_relevance=1.86); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 1.201619732991958
@@ -626,10 +680,46 @@
       "predicted_p5": 1.8168463255384066,
       "predicted_p50": 16.859747550846834,
       "predicted_p95": 246.0793498915693,
-      "rank": 35,
+      "rank": 38,
       "rationale": "CI width 2.13 dex; \u22487e+01\u00d7 ODT (decision_relevance=1.86); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 1.1903488317969877
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "ci_width_log10": 0.1451806485374634,
+      "compound": "methylglyoxal",
+      "decision_relevance": 1.0,
+      "envelope_miss_log10": 0.0803796336446526,
+      "inside_ci": false,
+      "matrix_family": "free",
+      "measured_ppb": 2600.0,
+      "odour_threshold_ug_per_kg": null,
+      "predicted_p5": 1546.724859754247,
+      "predicted_p50": 1970.5550018746362,
+      "predicted_p95": 2160.6962307646613,
+      "rank": 39,
+      "rationale": "measured outside 90% CI by 0.08 dex; CI width 0.15 dex; anchor measurement to constrain prior",
+      "suggested_doe_template": "missing_absolute_anchor",
+      "voi_score": 1.1239338282058915
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "ci_width_log10": 1.4715129033782145e-06,
+      "compound": "3-deoxyglucosone",
+      "decision_relevance": 1.0,
+      "envelope_miss_log10": 0.04573017379094371,
+      "inside_ci": false,
+      "matrix_family": "free",
+      "measured_ppb": 52200.0,
+      "odour_threshold_ug_per_kg": null,
+      "predicted_p5": 46982.79590542009,
+      "predicted_p50": 46982.90279278153,
+      "predicted_p95": 46982.95509673018,
+      "rank": 40,
+      "rationale": "measured outside 90% CI by 0.05 dex; CI width 0.00 dex; anchor measurement to constrain prior",
+      "suggested_doe_template": "missing_absolute_anchor",
+      "voi_score": 1.0457306152448147
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -644,7 +734,7 @@
       "predicted_p5": 73.66115180607643,
       "predicted_p50": 402.2512094548963,
       "predicted_p95": 2033.3835557415173,
-      "rank": 36,
+      "rank": 41,
       "rationale": "CI width 1.44 dex; \u22482e+02\u00d7 ODT (decision_relevance=2.24); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 0.9683366083487759
@@ -662,7 +752,7 @@
       "predicted_p5": 2.3623299468534573,
       "predicted_p50": 17.719212977293815,
       "predicted_p95": 141.73496413010483,
-      "rank": 37,
+      "rank": 42,
       "rationale": "CI width 1.78 dex; \u22482e+01\u00d7 ODT (decision_relevance=1.38); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 0.7362611722405009
@@ -680,7 +770,7 @@
       "predicted_p5": 13.522393185502622,
       "predicted_p50": 74.36503688554832,
       "predicted_p95": 368.2626336326565,
-      "rank": 38,
+      "rank": 43,
       "rationale": "CI width 1.44 dex; \u22483e+01\u00d7 ODT (decision_relevance=1.43); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 0.6173974332506174
@@ -698,13 +788,13 @@
       "predicted_p5": 1265.7308365854929,
       "predicted_p50": 3355.991167282581,
       "predicted_p95": 10383.844421093423,
-      "rank": 39,
+      "rank": 44,
       "rationale": "CI width 0.91 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.274205043527918
     }
   ],
   "matrix_filter": null,
-  "miss_count": 28,
+  "miss_count": 33,
   "source": "results/validation/core_prediction_uncertainty.json"
 }

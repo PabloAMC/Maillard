@@ -473,6 +473,17 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
                       # NOMINAL weight for reporting only and no scored
                       # quantity uses it.
     "DMHFS": 144.19,  # C6H8O2S, 2,5-dimethyl-4-hydroxy-3(2H)-thiophenone
+    # B34 (2026-09-11): TWO SPECIES THE TRUNK HAS CARRIED SINCE B1 AND B13 WITH NO MOLAR MASS.
+    # Nothing had ever asked for them as TARGETS, and the reporting loop's `else` branch silently
+    # returns mmol/L for a key it cannot weigh -- so the moment Leitzen 2021's measurements were
+    # added as hold-out rows, 3-deoxyglucosone scored 180 144x and methylglyoxal 92 306x, both of
+    # them a pure unit error (46 980 ug/L read as 0.2898, exactly a factor of its own molar mass).
+    # This is the SAME failure mode as B28's 2-pentylfuran, and it was still live three days later.
+    # `engine._concentrations` now names the pools that legitimately have no mass instead of
+    # catching everything, and a test walks every reachable target.
+    "TDG": 162.14,    # C6H10O5, 3-deoxyglucosone (same formula as INT, a different molecule)
+    "ODG": 162.14,    # C6H10O5, 1-deoxyglucosone (the 1-deoxy isomer; same formula)
+    "MGO": 72.06,     # C3H4O2, methylglyoxal
 }
 
 

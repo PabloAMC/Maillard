@@ -6,12 +6,12 @@
 |---|---|---|
 | T1 prior rows | B18 6 rows, 4 sampled; B13 8 rows, 4 sampled | True |
 | T2 widths | 5 rows the priors reach; 34 they do not; violations 0 | True |
-| T3 medians | floor 0.121 dex from 39 seed pairs; 0 unreached medians beyond it | True |
+| T3 medians | floor 0.121 dex from 44 seed pairs; 0 unreached medians beyond it | True |
 | T4 | 5 widened; newly inside 0 | reported |
 
 ## The measured Monte-Carlo noise floor
 
-Two runs of the SAME priors at different seeds, 39 rows compared. Relative difference in interval width: median 3.29%, 95th percentile 15.66%, worst 16.99%.
+Two runs of the SAME priors at different seeds, 44 rows compared. Relative difference in interval width: median 3.22%, 95th percentile 13.37%, worst 16.99%.
 
 This is why the pre-registrations' "not one row may narrow" could not be tested as written. The sampler draws every coordinate from one stream, so adding coordinates re-shuffles every later draw. Measuring the floor turns an untestable rule into a testable one.
 

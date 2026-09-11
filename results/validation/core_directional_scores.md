@@ -120,9 +120,9 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | MENG-01 | temperature | independent | MFT, FFT | increasing | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | AW-05 | moisture_aw | fit_adjacent | Acrylamide | flat | **agree** | acrylamide | 640, 640 | identical predictions |
 | PH-ACR-01 | ph | fit_adjacent | Acrylamide | A>B | **agree** | acrylamide | 5.31e+04, 2.73e+04 |  |
-| DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 0.0736, 12, 0.0105, 38.1, 0.0285 |  |
+| DIC-01 | sugar_identity | independent | 3-deoxyglucosone, glucosone, methylglyoxal, glyoxal, diacetyl | ranking | **disagree** | trunk | 1.19e+04, 12, 759, 38.1, 0.0285 |  |
 | DIC-02 | sugar_identity | independent | glucosone, glyoxal, methylglyoxal, diacetyl | ranking | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **disagree** | trunk | 0.29, 119, 161, 0.0282 |  |
+| DIC-03 | sugar_identity | independent | 3-deoxyglucosone, glucosone, glyoxal, methylglyoxal | ranking | **disagree** | trunk | 4.7e+04, 119, 161, 2.03e+03 |  |
 | RIB-T-01 | time | independent | MFT | decreasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | RIB-T-02 | time | independent | FFT | flat | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |
 | HEX-T-01 | time | independent | FFT | increasing | **not_evaluable** | - | - | a predicted concentration is zero; no direction is defined |

@@ -41,10 +41,10 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-09-10",
+    "generated_on": "2026-09-11",
     "git": {
-      "commit": "23b75fb19e85748b4004b3d401a1f206400c4b11",
-      "short": "23b75fb1",
+      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
+      "short": "6616f99e",
       "branch": "reactions",
       "dirty": true
     },
@@ -164,7 +164,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "3004872736bab6ff8809d21fae8eeabe039e72349238dc414dbed9748218d567"
+        "sha256": "952b412ab44cf991dcee457c1a4e8ae3a4c7682c34362d884e52bfb6a20f8b97"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
@@ -247,17 +247,17 @@
     "panel_benchmark_count": 37,
     "scored_benchmark_count": 23,
     "refused_benchmark_count": 14,
-    "matched_compound_count": 39,
+    "matched_compound_count": 44,
     "refused_compound_count": 25,
-    "within_band_count": 7,
-    "within_band_rate": 0.1794871794871795,
+    "within_band_count": 9,
+    "within_band_rate": 0.20454545454545456,
     "fold_summary": {
-      "n": 39,
-      "median_fold_error": 9.314883436507014,
+      "n": 44,
+      "median_fold_error": 10.622449854262861,
       "worst_fold_error": 9631.589383870052,
-      "best_fold_error": 1.5378727566967958,
-      "median_abs_log10_error": 0.9691774246430469,
-      "geometric_mean_fold": 20.37613136869946
+      "best_fold_error": 1.1110425180991021,
+      "median_abs_log10_error": 1.0229092303362046,
+      "geometric_mean_fold": 18.798322214733616
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -284,18 +284,18 @@
       },
       "maillard_path_holdout": {
         "benchmarks": 17,
-        "rows": 26,
-        "within_band": 3,
+        "rows": 31,
+        "within_band": 5,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.11538461538461539,
+        "within_band_rate": 0.16129032258064516,
         "fold_summary": {
-          "n": 26,
-          "median_fold_error": 26.506389554613264,
+          "n": 31,
+          "median_fold_error": 29.45034969216489,
           "worst_fold_error": 476.7619131435321,
-          "best_fold_error": 1.9901918483315129,
-          "median_abs_log10_error": 1.420655261269571,
-          "geometric_mean_fold": 25.446802309523257
+          "best_fold_error": 1.1110425180991021,
+          "median_abs_log10_error": 1.4690904559474305,
+          "geometric_mean_fold": 21.89705339854554
         }
       },
       "trust_loop": {
@@ -318,18 +318,18 @@
     "by_evidence_role": {
       "external_holdout": {
         "benchmarks": 21,
-        "rows": 30,
-        "within_band": 3,
+        "rows": 35,
+        "within_band": 5,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.1,
+        "within_band_rate": 0.14285714285714285,
         "fold_summary": {
-          "n": 30,
-          "median_fold_error": 17.74622284454017,
+          "n": 35,
+          "median_fold_error": 23.562429417061633,
           "worst_fold_error": 476.7619131435321,
-          "best_fold_error": 1.9901918483315129,
-          "median_abs_log10_error": 1.2244305513105371,
-          "geometric_mean_fold": 23.43284058234177
+          "best_fold_error": 1.1110425180991021,
+          "median_abs_log10_error": 1.3722200665917117,
+          "geometric_mean_fold": 20.756289973625023
         }
       },
       "predictive": {
@@ -400,52 +400,52 @@
       },
       "trunk": {
         "benchmarks": null,
-        "rows": 1,
-        "within_band": 0,
+        "rows": 6,
+        "within_band": 2,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.0,
+        "within_band_rate": 0.3333333333333333,
         "fold_summary": {
-          "n": 1,
-          "median_fold_error": 11.930016272018708,
-          "worst_fold_error": 11.930016272018708,
-          "best_fold_error": 11.930016272018708,
-          "median_abs_log10_error": 1.0766410360293623,
-          "geometric_mean_fold": 11.930016272018706
+          "n": 6,
+          "median_fold_error": 22.182366746939493,
+          "worst_fold_error": 62.99394345278661,
+          "best_fold_error": 1.1110425180991021,
+          "median_abs_log10_error": 1.29382557598423,
+          "geometric_mean_fold": 10.320218778350558
         }
       }
     },
     "honest_literature": {
       "benchmarks": 23,
-      "rows": 39,
-      "within_band": 7,
+      "rows": 44,
+      "within_band": 9,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.1794871794871795,
+      "within_band_rate": 0.20454545454545456,
       "fold_summary": {
-        "n": 39,
-        "median_fold_error": 9.314883436507014,
+        "n": 44,
+        "median_fold_error": 10.622449854262861,
         "worst_fold_error": 9631.589383870052,
-        "best_fold_error": 1.5378727566967958,
-        "median_abs_log10_error": 0.9691774246430469,
-        "geometric_mean_fold": 20.37613136869946
+        "best_fold_error": 1.1110425180991021,
+        "median_abs_log10_error": 1.0229092303362046,
+        "geometric_mean_fold": 18.798322214733616
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
     "out_of_sample": {
       "benchmarks": 22,
-      "rows": 38,
-      "within_band": 6,
+      "rows": 43,
+      "within_band": 8,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.15789473684210525,
+      "within_band_rate": 0.18604651162790697,
       "fold_summary": {
-        "n": 38,
-        "median_fold_error": 10.622449854262861,
+        "n": 43,
+        "median_fold_error": 11.930016272018708,
         "worst_fold_error": 9631.589383870052,
-        "best_fold_error": 1.5378727566967958,
-        "median_abs_log10_error": 1.0229092303362046,
-        "geometric_mean_fold": 21.57618581592721
+        "best_fold_error": 1.1110425180991021,
+        "median_abs_log10_error": 1.0766410360293623,
+        "geometric_mean_fold": 19.73640912293091
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -467,8 +467,8 @@
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
     "holdout_within_band": {
-      "hits": 3,
-      "total": 26
+      "hits": 5,
+      "total": 31
     },
     "shared_with_holdout_panel": 4,
     "wall_seconds": 9.9
@@ -2840,25 +2840,173 @@
           "formed_predicted": null,
           "formed_measured": null,
           "fold_error_formed_only": null
+        },
+        {
+          "compound": "3-deoxyglucosone",
+          "target_unit": "ppb",
+          "measured": 52200.0,
+          "measured_ppb": 52200.0,
+          "predicted": 46982.900428788,
+          "fold_error": 1.1110425180991021,
+          "abs_log10_error": 0.04573067912313049,
+          "within_band": true,
+          "within_contract_ratio": true,
+          "interval_ug_per_L": [
+            6717.470046821686,
+            328604.8046832479
+          ],
+          "measured_within_interval": true,
+          "lane": "trunk",
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+          ],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "3,4-dideoxyglucosone",
+          "target_unit": "ppb",
+          "measured": 55500.0,
+          "measured_ppb": 55500.0,
+          "predicted": 1711.1294549099457,
+          "fold_error": 32.434717221860275,
+          "abs_log10_error": 1.5110101159390978,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            244.6520064680561,
+            11967.872463955076
+          ],
+          "measured_within_interval": false,
+          "lane": "trunk",
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+          ],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "glucosone",
+          "target_unit": "ppb",
+          "measured": 7500.0,
+          "measured_ppb": 7500.0,
+          "predicted": 119.05906487059636,
+          "fold_error": 62.99394345278661,
+          "abs_log10_error": 1.7992987962555453,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            17.022697508491444,
+            832.715315583204
+          ],
+          "measured_within_interval": false,
+          "lane": "trunk",
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
+          ],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "glyoxal",
+          "target_unit": "ppb",
+          "measured": 5600.0,
+          "measured_ppb": 5600.0,
+          "predicted": 160.79393481301767,
+          "fold_error": 34.82718428721872,
+          "abs_log10_error": 1.5419183639800649,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            22.989820359307018,
+            1124.6146802615692
+          ],
+          "measured_within_interval": false,
+          "lane": "trunk",
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
+            "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
+          ],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "methylglyoxal",
+          "target_unit": "ppb",
+          "measured": 2600.0,
+          "measured_ppb": 2600.0,
+          "predicted": 2029.733012335392,
+          "fold_error": 1.2809566500613123,
+          "abs_log10_error": 0.10753443266605756,
+          "within_band": true,
+          "within_contract_ratio": true,
+          "interval_ug_per_L": [
+            290.2049594420894,
+            14196.22913848313
+          ],
+          "measured_within_interval": true,
+          "lane": "trunk",
+          "envelope_state": "in_envelope_extrapolated",
+          "declaration_warnings": [
+            "pH TERM (B12): pH 4.36 scales the three Amadori-decay steps by x0.02 (10^(0.69 per pH unit); declared band 0.01-0.13; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
+            "pH 4.36 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
+          ],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
         }
       ],
       "refused_compounds": [],
-      "matched_compounds": 1,
-      "total_compounds": 1,
+      "matched_compounds": 6,
+      "total_compounds": 6,
       "coverage": 1.0,
-      "max_ratio": 11.930016272018708,
-      "mean_abs_log10_error": 1.0766410360293623,
-      "pearson_r_log10": null,
-      "ranking_status": "n/a",
+      "max_ratio": 62.99394345278661,
+      "mean_abs_log10_error": 1.0136889039988763,
+      "pearson_r_log10": 0.5806196504750217,
+      "ranking_status": "fail",
       "scale_status": "fail",
-      "overall_status": "scale-gap",
+      "overall_status": "ranking-gap",
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 11.93 > 1.50",
-        "mean |log10 ratio| 1.077 > 0.100"
+        "ranking 0.581 < 0.85",
+        "max ratio 62.99 > 1.50",
+        "mean |log10 ratio| 1.014 > 0.100"
       ],
-      "within_band_count": 0,
+      "within_band_count": 2,
       "lanes": [
         "trunk"
       ]

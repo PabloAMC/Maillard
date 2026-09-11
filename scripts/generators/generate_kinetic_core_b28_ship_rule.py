@@ -210,21 +210,34 @@ def t5() -> Dict[str, Any]:
     # about. These four are the row: what was asked, what was measured, what the model said, and
     # how far apart they are. A later wave adding a column cannot move them, and a later wave
     # moving a prediction cannot hide behind one.
-    def _prediction(row: Dict[str, Any]) -> Tuple[Any, ...]:
-        return (row.get("compound"), row.get("target_unit"), row.get("measured"),
-                row.get("predicted"), row.get("fold_error"))
+    def _predictions(bench: Dict[str, Any]) -> List[Tuple[Any, Tuple[Any, ...]]]:
+        """{(compound, unit): (measured, predicted, fold)} as a sorted list of pairs."""
+        return sorted(((r.get("compound"), r.get("target_unit")),
+                       (r.get("measured"), r.get("predicted"), r.get("fold_error")))
+                      for r in (bench.get("compounds") or []))
 
-    def _predictions(bench: Dict[str, Any]) -> List[Tuple[Any, ...]]:
-        return sorted(_prediction(r) for r in (bench.get("compounds") or []))
-
+    # AND ROWS A LATER WAVE ADDED ARE NOT ROWS THIS WAVE MOVED, narrowed again 2026-09-11. B34 added
+    # five hold-out targets to a trunk bundle that had been scoring one of the six species its own
+    # paper measures. T5 read that as "a non-lipid benchmark changed" and flipped a tracked SHIP to
+    # DO NOT SHIP, while every row the two runs have in common was byte-identical. A ship rule about
+    # whether a wave MOVED something must compare the rows both sides actually have, and REPORT the
+    # rest rather than fail on it.
     changed: List[str] = []
+    rows_added: Dict[str, List[Any]] = {}
     for old_b, new_b in zip(tracked["benchmarks"], live["benchmarks"]):
         if old_b.get("family") in lipid_families:
             continue
-        if _predictions(old_b) != _predictions(new_b):
+        before, after = dict(_predictions(old_b)), dict(_predictions(new_b))
+        shared = set(before) & set(after)
+        if any(before[k] != after[k] for k in shared):
             changed.append(old_b["benchmark_id"])
+        gained = sorted(set(after) - set(before))
+        if gained:
+            rows_added[old_b["benchmark_id"]] = gained
     return {"non_lipid_benchmarks_changed": changed,
-            "compared": "compound, target_unit, measured, predicted, fold_error -- not the whole row",
+            "non_lipid_rows_added_by_later_waves": rows_added,
+            "compared": ("compound, target_unit, measured, predicted, fold_error, over the rows BOTH "
+                         "runs have -- not the whole row, and not rows a later wave added"),
             "pass": not changed}
 
 
@@ -246,7 +259,8 @@ def render(p: Dict[str, Any]) -> str:
          f"shared products | reported |",
          f"| T4 the new rows | {T4['n']} scored | reported |",
          f"| T5 nothing else moves | non-lipid benchmarks changed: "
-         f"{T5.get('non_lipid_benchmarks_changed')} | {T5['pass']} |", "",
+         f"{T5.get('non_lipid_benchmarks_changed') or 'none'}; rows ADDED by later waves (not a move): "
+         f"{T5.get('non_lipid_rows_added_by_later_waves') or 'none'} | {T5['pass']} |", "",
          "## The cross-laboratory check", "",
          "Frankel 1981 against Frankel 1989, both renormalised onto the five products they both "
          "quantify. The C14 oxo-ester is dropped from both: 1981 could not identify it for want of "

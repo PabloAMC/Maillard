@@ -2,19 +2,19 @@
 
 n_samples = 200, seed = 0, CI level = 90 %.
 
-* benchmarks with an envelope: **23** of 37 on the panel; matched rows **39**; refused rows 25
-* mixed-population coverage: 11/39 (0.282)
-* **honest literature coverage: 11/39 (0.282)**, median CI width 0.924 log10; 0 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 11/38 (0 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
+* benchmarks with an envelope: **23** of 37 on the panel; matched rows **44**; refused rows 25
+* mixed-population coverage: 11/44 (0.250)
+* **honest literature coverage: 11/41 (0.268)**, median CI width 0.914 log10; 3 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 11/40 (3 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
 * sampled priors 55, fixed 46; lanes with NO sampled fit uncertainty: none
-* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 8, extraction 31, undeclared 0
+* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 8, extraction 36, undeclared 0
 
 ## Per panel
 
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
 | external_matrix | 3 | 4 | 0.750 | 2.132 | 0 |
-| maillard_path_holdout | 4 | 26 | 0.154 | 0.914 | 0 |
+| maillard_path_holdout | 4 | 28 | 0.143 | 0.914 | 3 |
 | trust_loop | 4 | 9 | 0.444 | 1.435 | 0 |
 
 ## Rows
@@ -42,6 +42,11 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.19e+03 | 917.342 | 2.15e+03 | 2.2e+03 | no | 0.380 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | Acrylamide | umol_per_mol_limiting_precursor | 140.580 | 7e+03 | 2.51e+03 | 6.39e+03 | 2.06e+04 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.46e+03 | 1.07e+03 | 1.45e+03 | 1.46e+03 | no | 0.135 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3-deoxyglucosone | ppb | 5.22e+04 | 4.7e+04 | 4.7e+04 | 4.7e+04 | 4.7e+04 | no | 1.47e-06 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3,4-dideoxyglucosone | ppb | 5.55e+04 | 1.71e+03 | 1.71e+03 | 1.71e+03 | 1.71e+03 | no | 1.05e-06 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glucosone | ppb | 7.5e+03 | 119.059 | 119.059 | 119.059 | 119.059 | no | 2.05e-06 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glyoxal | ppb | 5.6e+03 | 160.794 | 167.306 | 197.878 | 205.081 | no | 0.088 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | methylglyoxal | ppb | 2.6e+03 | 2.03e+03 | 1.55e+03 | 1.97e+03 | 2.16e+03 | no | 0.145 | no (extraction) | trunk | external_holdout |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 1.13e+03 | 67.468 | 875.815 | 1.13e+04 | yes | 2.223 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 23.470 | 12.689 | 21.612 | 41.846 | no | 0.518 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.090 | 0.00441 | 0.075 | 0.495 | no | 2.050 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |

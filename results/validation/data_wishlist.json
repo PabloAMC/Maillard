@@ -2,10 +2,10 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-10",
+    "generated_on": "2026-09-11",
     "git": {
-      "commit": "23b75fb19e85748b4004b3d401a1f206400c4b11",
-      "short": "23b75fb1",
+      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
+      "short": "6616f99e",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "195ba6307bc7ce0bfe029310bedbc6864a6c45478b6ee664ab7bb48b451c5de6"
+        "sha256": "96f691356609cbfc7e0ec4571dafb1956158dec51a255e974e3c04a7385b72a1"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "38ed792a7dcc042143fdcb6b299df370d22ead80061085ee7a2a91178def41fd"
+        "sha256": "2daaa52d68af64f0d9f40fc87a5c1090ad57b13052272a96d3c674f4a8ee0bbf"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "54425905363a8638e34ed64d4d5811ea784e9b5b21aaf4bfffad64e3e05b7492"
+        "sha256": "1d501c96e08d4c3cdbd25ba32f8da9f1dcc55af470b272b45f28e231cf4693ff"
       },
       {
         "path": "src/kinetic_core/sulfur.py",

@@ -198,13 +198,18 @@ The general rule is not specific to this model: **a formation measurement withou
 cannot be told apart from a storage measurement.** If your material sat in a warehouse for six
 months, some of what you are about to attribute to your process was in the bag when you opened it.
 
-**One aqueous rate for sugar dehydration.** The model's only amine-free routes from a sugar to its
-deoxyosones are constants measured in a dry glucose melt at 160–200 °C, with no pH term, and they are
-asked about aqueous pots at pH 4–8. Scaling them tenfold, as a probe and not a fit, moves four of the
-five hydroxymethylfurfural rows on the panel inside threefold and halves both furanone misses. Glucose
-to 3-deoxyglucosone in water at 100–140 °C is among the best-measured reactions in this field; a
-single aqueous determination, read from its paper, is worth more to this model than any experiment
-above except the first. The forecast is on record before the reading: 5–20× above the melt values.
+**One aqueous rate, and it is now a different one than this page said yesterday.** The entry from a
+sugar to 3-deoxyglucosone was the suspect. It is not: measured against a paper that turned out to be
+on this disk already, the model's 3-deoxyglucosone in an amine-free pot is right to **11 %** and its
+methylglyoxal to **28 %**. What is wrong is the step immediately after — 3-deoxyglucosone to
+3,4-dideoxyglucosone, **32× too slow**, with hydroxymethylfurfural 12× low downstream of it.
+
+So the ask is narrow and specific: **the rate of 3-deoxyglucosone → 3,4-dideoxyglucosone in water,
+at 100–140 °C and pH 4–7.** The model carries a value for it, and that value's interval was
+deliberately *not* widened because two laboratories agree on it to within 1.5×. Both of them measured
+it dry — a freeze-dried glucose melt and a roasted hazelnut. Two laboratories agreeing with each
+other in the same matrix is not a check; it is the same experiment twice. One aqueous determination
+would settle it, and it is the cheapest number on this page.
 
 **Numbers behind figures.** Two published data sets that bear directly on the thiol problem exist only
 as figures. Their authors' underlying numbers would give that step its first data from a third

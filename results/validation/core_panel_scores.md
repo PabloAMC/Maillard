@@ -2,12 +2,12 @@
 
 pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresholds`, else the global default.
 
-* panel: **37** benchmarks, 23 scored, 14 fully refused; rows **39**, refused rows 25
-* within 3x: 7/39 (0.179); median fold 9.315, geometric mean 20.376, worst 9.63e+03
+* panel: **37** benchmarks, 23 scored, 14 fully refused; rows **44**, refused rows 25
+* within 3x: 9/44 (0.205); median fold 10.622, geometric mean 18.798, worst 9.63e+03
 * evidence roles (core): {'external_holdout': 21, 'predictive': 16}
 * predictive benchmarks passing their contract: NONE; strict-ready: NONE
-* **honest literature: 7/39 within band** (0.179), 23 benchmarks, median fold 9.315, geometric mean 20.376
-* **out-of-sample: 6/38 within band** (0.158), 22 benchmarks, median fold 10.622, geometric mean 21.576
+* **honest literature: 9/44 within band** (0.205), 23 benchmarks, median fold 10.622, geometric mean 18.798
+* **out-of-sample: 8/43 within band** (0.186), 22 benchmarks, median fold 11.930, geometric mean 19.736
 * **rows the sulfur fit read: 1/1 within band** (1.000), 1 benchmarks, median fold 2.316, geometric mean 2.316
 
 ## Per panel / role / lane
@@ -15,14 +15,14 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | split | key | benchmarks | rows | within band | rate | contract passes | strict-ready | median fold | geo-mean fold |
 |---|---|---|---|---|---|---|---|---|---|
 | panel | external_matrix | 4 | 4 | 0 | 0.000 | 0 | 0 | 6.173 | 13.711 |
-| panel | maillard_path_holdout | 17 | 26 | 3 | 0.115 | 0 | 0 | 26.506 | 25.447 |
+| panel | maillard_path_holdout | 17 | 31 | 5 | 0.161 | 0 | 0 | 29.450 | 21.897 |
 | panel | trust_loop | 16 | 9 | 4 | 0.444 | 0 | 0 | 3.690 | 12.787 |
-| evidence_role | external_holdout | 21 | 30 | 3 | 0.100 | 0 | 0 | 17.746 | 23.433 |
+| evidence_role | external_holdout | 21 | 35 | 5 | 0.143 | 0 | 0 | 23.562 | 20.756 |
 | evidence_role | predictive | 16 | 9 | 4 | 0.444 | 0 | 0 | 3.690 | 12.787 |
 | lane | acrylamide | - | 12 | 2 | 0.167 | 0 | 0 | 7.728 | 23.060 |
 | lane | lipid | - | 7 | 3 | 0.429 | 0 | 0 | 3.042 | 6.071 |
 | lane | sulfur | - | 19 | 2 | 0.105 | 0 | 0 | 29.450 | 30.281 |
-| lane | trunk | - | 1 | 0 | 0.000 | 0 | 0 | 11.930 | 11.930 |
+| lane | trunk | - | 6 | 2 | 0.333 | 0 | 0 | 22.182 | 10.320 |
 
 ## Benchmarks
 
@@ -51,7 +51,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_glucose_asparagine_180C_30min_Chang2021 | maillard_path_holdout | REFERENCE | external_holdout | 1/1 | 1.000 | 2.522 | 0.402 | 1.50 / 0.100 | scale-gap | no | - | ambiguous |
 | mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 4.423 | 0.575 | 1.50 / 0.100 | scale-gap | no | - | ambiguous |
 | mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | REFERENCE | external_holdout | 1/1 | 1.000 | 49.824 | 1.697 | 1.50 / 0.100 | scale-gap | no | - | 0.184 mmol O2, no thiol |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | REFERENCE | external_holdout | 1/1 | 1.000 | 11.930 | 1.077 | 1.50 / 0.100 | scale-gap | no | - | ambiguous |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | REFERENCE | external_holdout | 6/6 | 1.000 | 62.994 | 1.014 | 1.50 / 0.100 | ranking-gap | no | - | ambiguous |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 | maillard_path_holdout | REFERENCE | external_holdout | 0/2 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - | 0.27 |
 | mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 | maillard_path_holdout | REFERENCE | external_holdout | 0/2 | 0.000 | - | - | 1.10 / 0.041 | refused | no | - | 0.27 |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 23.562 | 1.033 | 1.10 / 0.041 | scale-gap | no | - | 0.27 |
@@ -91,6 +91,11 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.19e+03 | 3.194 | no | no | [313.351, 1.53e+04] | yes | acrylamide | no |
 | mp_holdout_glucose_asparagine_180C_Ye2024 | Acrylamide | umol_per_mol_limiting_precursor | 140.580 | 7e+03 | 49.824 | no | no | - | - | acrylamide | no |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.46e+03 | 11.930 | no | no | [208.533, 1.02e+04] | no | trunk | no |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | 3-deoxyglucosone | ppb | 5.22e+04 | 4.7e+04 | 1.111 | yes | yes | [6.72e+03, 3.29e+05] | yes | trunk | no |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | 3,4-dideoxyglucosone | ppb | 5.55e+04 | 1.71e+03 | 32.435 | no | no | [244.652, 1.2e+04] | no | trunk | no |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | glucosone | ppb | 7.5e+03 | 119.059 | 62.994 | no | no | [17.023, 832.715] | no | trunk | no |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | glyoxal | ppb | 5.6e+03 | 160.794 | 34.827 | no | no | [22.990, 1.12e+03] | no | trunk | no |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | methylglyoxal | ppb | 2.6e+03 | 2.03e+03 | 1.281 | yes | yes | [290.205, 1.42e+04] | yes | trunk | no |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | 2-Furfurylthiol (FFT) | ppb | 229.000 | 1.13e+03 | 4.932 | no | no | [161.492, 7.9e+03] | yes | sulfur | no (shared: hofmann_ribose_pH3_FFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 23.470 | 23.562 | no | no | [3.356, 164.149] | no | sulfur | no (shared: hofmann_ribose_pH3_MFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.090 | 133.631 | no | no | [0.013, 0.628] | no | sulfur | no (shared: hofmann_ribose_pH7_FFT) |

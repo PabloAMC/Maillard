@@ -447,6 +447,37 @@ compounds:
   aliases: []
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 3_4_dideoxyglucosone
+  display_name: 3,4-Dideoxyglucosone-3-ene
+  kind: molecule
+  smiles: OC[C@@H](O)C=CC(=O)C=O
+  inchikey: YSSNFXZGTOLNNX-LURJTMIESA-N
+  canonical_smiles: O=CC(=O)C=C[C@H](O)CO
+  aliases:
+  - 3,4-dge
+  - 3,4-dideoxyglucosone
+  - 3,4-dideoxyglucosone-3-ene
+  - ddg
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: the trunk's DDG, the intermediate between 3-deoxyglucosone and 5-HMF.
+- id: 3_deoxyglucosone
+  display_name: 3-Deoxyglucosone
+  kind: molecule
+  smiles: OC[C@@H](O)[C@H](O)CC(=O)C=O
+  inchikey: ZGCHLOWZNKRZSN-PHDIDXHHSA-N
+  canonical_smiles: O=CC(=O)C[C@@H](O)[C@H](O)CO
+  aliases:
+  - 3-deoxy-d-glucosone
+  - 3-deoxyglucosone
+  - 3-deoxyhexosone
+  - 3-dg
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: Leitzen 2021 Table 4 reports 3-DG together with its galactose epimer 3-DGal; the trunk's TDG is
+    the glucose form.
 - id: 3_isobutyl_2_methoxypyrazine
   display_name: 3-Isobutyl-2-methoxypyrazine (IBMP)
   kind: molecule
@@ -790,6 +821,32 @@ compounds:
   - safety:analyte
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
   identity_note: alpha-carbon stereocentre omitted
+- id: glucosone
+  display_name: D-Glucosone
+  kind: molecule
+  smiles: OC[C@@H](O)[C@H](O)[C@@H](O)C(=O)C=O
+  inchikey: DCNMIDLYWOTSGK-SRQIZXRXSA-N
+  canonical_smiles: O=CC(=O)[C@H](O)[C@@H](O)[C@H](O)CO
+  aliases:
+  - 2-keto-d-glucose
+  - d-glucosone
+  - glucos-2-ulose
+  - glucosone
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: glyoxal
+  display_name: Glyoxal
+  kind: molecule
+  smiles: O=CC=O
+  inchikey: LEQAOMBKQFMDFZ-UHFFFAOYSA-N
+  canonical_smiles: O=CC=O
+  aliases:
+  - glyoxal
+  - go
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: gmp
   display_name: Guanosine 5'-monophosphate (GMP)
   kind: molecule
@@ -1052,6 +1109,20 @@ compounds:
   - panel:key
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: methylglyoxal
+  display_name: Methylglyoxal
+  kind: molecule
+  smiles: CC(=O)C=O
+  inchikey: AIJULSRZWUXGPQ-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C=O
+  aliases:
+  - 2-oxopropanal
+  - methylglyoxal
+  - mgo
+  - pyruvaldehyde
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: methylpyrazine
   display_name: 2-Methylpyrazine
   kind: molecule

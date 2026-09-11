@@ -106,6 +106,24 @@ SEEDS: List[Dict[str, Any]] = [
     dict(id="norfuraneol", display_name="Norfuraneol (NF)", kind="molecule", smiles="CC1=C(O)C(=O)CO1", aliases=["4-hydroxy-5-methyl-3(2H)-furanone", "nf"]),
     dict(id="imp", display_name="Inosine 5'-monophosphate (IMP)", kind="molecule", smiles=None, cas="131-99-7", aliases=["imp", "inosine monophosphate", "inosinate"], class_="umami_support_markers"),
     dict(id="gmp", display_name="Guanosine 5'-monophosphate (GMP)", kind="molecule", smiles=None, cas="85-32-5", aliases=["gmp", "guanosine monophosphate", "guanylate"], class_="umami_support_markers"),
+    # --- B34 (2026-09-11): the four dicarbonyls Leitzen 2021 measures in the amine-free pot ------
+    # The trunk has carried all four as species since B1/B7/B13; what was missing was a registry
+    # identity, so a benchmark could not name them as targets. Nothing about the network changes.
+    dict(id="3_deoxyglucosone", display_name="3-Deoxyglucosone", kind="molecule",
+         smiles="OC[C@@H](O)[C@H](O)CC(=O)C=O",
+         aliases=["3-dg", "3-deoxyglucosone", "3-deoxy-d-glucosone", "3-deoxyhexosone"],
+         identity_note="Leitzen 2021 Table 4 reports 3-DG together with its galactose epimer 3-DGal; the trunk's TDG is the glucose form."),
+    dict(id="3_4_dideoxyglucosone", display_name="3,4-Dideoxyglucosone-3-ene", kind="molecule",
+         smiles="OC[C@@H](O)C=CC(=O)C=O",
+         aliases=["3,4-dge", "3,4-dideoxyglucosone", "3,4-dideoxyglucosone-3-ene", "ddg"],
+         identity_note="the trunk's DDG, the intermediate between 3-deoxyglucosone and 5-HMF."),
+    dict(id="glucosone", display_name="D-Glucosone", kind="molecule",
+         smiles="OC[C@@H](O)[C@H](O)[C@@H](O)C(=O)C=O",
+         aliases=["glucosone", "d-glucosone", "2-keto-d-glucose", "glucos-2-ulose"]),
+    dict(id="glyoxal", display_name="Glyoxal", kind="molecule", smiles="O=CC=O",
+         aliases=["glyoxal", "go"]),
+    dict(id="methylglyoxal", display_name="Methylglyoxal", kind="molecule", smiles="CC(=O)C=O",
+         aliases=["methylglyoxal", "mgo", "2-oxopropanal", "pyruvaldehyde"]),
     # --- classes and markers -----------------------------------------------------
     dict(id="pyrazines", display_name="Pyrazines", kind="compound_class", aliases=["pyrazine", "pyrazine_family", "dimethylpyrazine"], members_of_class="pyrazines", identity_note="the bare word 'pyrazine' in benchmark and payload rows means the family, as the retired BENCHMARK_NAME_ALIASES table asserted"),
     dict(id="methoxypyrazines", display_name="Methoxypyrazines", kind="compound_class", aliases=["methoxypyrazines"], members_of_class="methoxypyrazines"),
