@@ -1,0 +1,151 @@
+{
+  "artifact": "kinetic_core_b45_probe",
+  "p1_hexanal_binding": {
+    "measured_comparator": {
+      "acidic_11s_ug_per_l_figure_only": {
+        "after": 220.0,
+        "before": 40.0
+      },
+      "acidic_spi_30mg_ml_ph4p5_95C_5min_ug_per_l": {
+        "after": 66.0,
+        "after_sd": 1.7,
+        "before": 23.0,
+        "before_sd": 0.59
+      },
+      "direction": "RELEASE on heating; the engine's block can only BIND",
+      "release_factor": 2.869565217391304,
+      "source": "shi2022_extraction.md (10.1111/jfpp.16555), Table 2 row 1 and Fig. 4"
+    },
+    "pea_isolate": {
+      "amine_mmol_per_l": 14.1,
+      "charged": true,
+      "programmes": {
+        "extreme_140C_60min": {
+          "bound_fraction": 0.003159250261501212,
+          "bound_fraction_corners": [
+            0.0007275562558203275,
+            0.013662603813811347
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        },
+        "long_cook_100C_45min": {
+          "bound_fraction": 0.0013736158606467708,
+          "bound_fraction_corners": [
+            0.0003417624849754164,
+            0.005512253071776496
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        },
+        "shi_hold_95C_5min": {
+          "bound_fraction": 0.00014145579265256725,
+          "bound_fraction_corners": [
+            3.556570528262526e-05,
+            0.0005625246816692853
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        },
+        "shi_spi_prep_95C_10min": {
+          "bound_fraction": 0.00028289157556382616,
+          "bound_fraction_corners": [
+            7.113014564585907e-05,
+            0.0011247329293211372
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        }
+      }
+    },
+    "soy_isolate": {
+      "amine_mmol_per_l": 10.799999999999999,
+      "charged": true,
+      "programmes": {
+        "extreme_140C_60min": {
+          "bound_fraction": 0.0024207470465836822,
+          "bound_fraction_corners": [
+            0.0005573245926540071,
+            0.010481799450172913
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        },
+        "long_cook_100C_45min": {
+          "bound_fraction": 0.0010523005151349407,
+          "bound_fraction_corners": [
+            0.0002617859911934195,
+            0.004224880985962853
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        },
+        "shi_hold_95C_5min": {
+          "bound_fraction": 0.00010835091142025188,
+          "bound_fraction_corners": [
+            2.7241930192767327e-05,
+            0.00043089833853426907
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        },
+        "shi_spi_prep_95C_10min": {
+          "bound_fraction": 0.00021669008292057867,
+          "bound_fraction_corners": [
+            5.4483118262838026e-05,
+            0.0008616110036904212
+          ],
+          "classes": [
+            "saturated_aldehyde_amine"
+          ]
+        }
+      }
+    }
+  },
+  "p2_cysteine_removal": {
+    "charged_cysteine_mmol_per_l": 0.25,
+    "holds": {
+      "180min": {
+        "answerable": true,
+        "cys_fraction_remaining": 0.8334308109355825,
+        "cys_mmol_per_l": 0.20835770273389562,
+        "ox": 1.0,
+        "oxv": 0.0
+      },
+      "30min": {
+        "answerable": true,
+        "cys_fraction_remaining": 0.9700022556014469,
+        "cys_mmol_per_l": 0.24250056390036173,
+        "ox": 1.0,
+        "oxv": 0.0
+      },
+      "5min": {
+        "answerable": true,
+        "cys_fraction_remaining": 0.994926003896364,
+        "cys_mmol_per_l": 0.248731500974091,
+        "ox": 1.0,
+        "oxv": 0.0
+      }
+    },
+    "measured_comparator": {
+      "all_metals_in_ultrapure_buffer_um": "< 0.08 (ICP-OES detection limit)",
+      "h2o2_peak_um": 71.0,
+      "source": "baldus2017_extraction.md (10.1021/acs.jafc.6b05472)",
+      "statement": "Cys was almost completely degraded in 5 minutes during heating from 40-60 C",
+      "system": "~228-250 uM cysteine, 0.1 M acetate pH 5.5, air-saturated 8 mg/L O2, 18 uM Cu(II)EDTA",
+      "t0_measured_um": 220.0,
+      "trace_cu_from_300um_cysteine_um": 0.26
+    },
+    "ph": 5.5,
+    "temperature_c": 95.0
+  },
+  "prereg": "results/validation/kinetic_core_b45_prereg.md",
+  "what_this_is": "Two COMPLETENESS probes from wave B45. Neither is scored, neither is a benchmark, and neither moved a constant. They ask whether the model contains a channel at all. P1: the declared aldehyde-binding block against a measured hexanal RELEASE. P2: the sulfur lane's thiol removal against a measured metal-catalysed loss the model has no channel for."
+}
