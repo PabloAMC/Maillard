@@ -4,14 +4,14 @@
 
 | test | result | pass |
 |---|---|---|
-| T1 prior rows | 8 rows, 8 sampled | True |
+| T1 prior rows | 6 rows, 6 sampled | True |
 | T2 widths | 9 named rows must widen; 11 other Maillard-lane rows moved (reported); lipid rows bit-identical 8/8; violations 0 | True |
-| T3 medians | lipid (unreached) medians moved: 0 (must be 0, exact under ENV-M1); Maillard-lane medians moved through shared glucose: 11, largest 0.157 dex; the old two-seed floor for comparison 0.069 dex | True |
+| T3 medians | lipid (unreached) medians moved: 0 (must be 0, exact under ENV-M1); Maillard-lane medians moved through shared glucose: 11, largest 0.157 dex; the old two-seed floor for comparison 0.640 dex | True |
 | T4 | 9 widened; newly inside 4, newly outside 0; coverage [12, 42, 3] -> [16, 44, 1]; median width 0.9148 -> 0.9874 dex | reported |
 
 ## The measured Monte-Carlo noise floor
 
-Two runs of the SAME priors at different seeds, 45 rows compared. Relative difference in interval width: median 5.63%, worst 20.98%. The floor is the observed MAXIMUM, not a quantile.
+Two runs of the SAME priors at different seeds, 45 rows compared. Relative difference in interval width: median 5.44%, worst 19.21%. The floor is the observed MAXIMUM, not a quantile.
 
 ## The rows the priors reach
 

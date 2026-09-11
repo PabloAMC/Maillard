@@ -334,6 +334,13 @@ def operative_parameters(fitted):
     from .parameters_proline import PROLINE_PARAMETERS
 
     parameters.update(PROLINE_PARAMETERS)
+    # B39-B41 (2026-09-11): the fed 3-deoxy triangle -- the reverse hydration, the epimer in and out,
+    # and the fitted k_tdg_ddg / k_ddg_hmf. In the base table so that EVERY consumer of the trunk
+    # (the fit generators that call this directly, the hold-out generators, the engine) carries a
+    # parameter for the three new reactions; core_parameters() layers the envelope's draws on top.
+    from .parameters_dicarbonyl import FED_3DEOXY_PARAMETERS
+
+    parameters.update(FED_3DEOXY_PARAMETERS)
     return parameters
 
 

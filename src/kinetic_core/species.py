@@ -129,6 +129,13 @@ SPECIES: Tuple[Species, ...] = (
             "touch it inherit it. Carried as a state variable rather than "
             "lumped away because 3-DG -> 3,4-DG is the RATE-DETERMINING STEP "
             "of the 3-DG limb in two independent matrices (K5a C3)."),
+    Species("DGAL", "3-deoxygalactosone (3-DGal)", 6, 0, "intermediate", True,
+            "B39 (2026-09-11). The C4 epimer of 3-deoxyglucosone, reached ONLY through "
+            "3,4-dideoxyglucosone by the reversible hydration the fed experiments of "
+            "Mittelmaier et al. 2011 prove (3-DG <-> 3,4-DGE <-> 3-DGal). Measured in the "
+            "fit corpus by that paper alone; carried because a quarter of a fed 3-DG "
+            "charge is this compound after an hour at 120 C and the trunk had nowhere to "
+            "put it. No exit of its own: it leaves the way it came."),
     Species("HMF", "5-hydroxymethylfurfural (5-HMF)", 6, 0, "product", True,
             "THE compound of the K5a cluster. NOT norfuraneol: two papers the "
             "repo already holds (whitfield1999, whitfield2001) and two in the "

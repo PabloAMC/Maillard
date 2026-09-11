@@ -358,5 +358,95 @@ AQUEOUS_GLYOXAL_KEYS: Tuple[str, ...] = tuple(AQUEOUS_GLYOXAL_PARAMETERS)
 #: The glass value of k_g_go, kept for the ship rule's "before" and for the record.
 GLASS_K_G_GO: KineticParameter = DICARBONYL_PARAMETERS["k_g_go"]
 
-__all__ = ["DICARBONYL_KEYS", "DICARBONYL_PARAMETERS", "DICARBONYL_WISHLIST", "AQUEOUS_GLYOXAL_PARAMETERS", "AQUEOUS_GLYOXAL_KEYS",
+# ---------------------------------------------------------------------------
+# B39 (2026-09-11): THE FED 3-DEOXYGLUCOSONE TRIANGLE
+# ---------------------------------------------------------------------------
+# Mittelmaier et al. 2011 (mittelmaier2010_extraction.md) feed pure 3-DG, pure 3,4-DGE and pure
+# 3-DGal at 120 C, pH 5, in water, and follow all three: the dehydration is reversible and the enone
+# hydrates to either C4 epimer. The trunk carried 3-DG -> 3,4-DGE one way, 3,4-DGE -> HMF as the only
+# exit, and no epimer. Five coordinates, fitted on that paper's six printed maxima and shares and on
+# Zhang 2021's within-study 3,4-DDG/3-DG ratios (90-110 C): the existing k_tdg_ddg and k_ddg_hmf, and
+# three new steps. ONE barrier is declared for the three new steps, equal to the forward step's
+# 36.9 kJ/mol, because the source measures at one temperature and inventing three would be three
+# fabricated numbers. Pre-registration: results/validation/kinetic_core_b39_prereg.md.
+#
+# INERT UNTIL THE FIT SHIPS: with SHIPPED_B39 False the three new steps run at k = 0 and the two
+# existing constants keep their shipped literals, so every prediction is bit-for-bit what it was.
+EA_FED_3DEOXY_KJ_MOL = 36.9   # the forward step's own barrier (Kocadagli 2016 Table 2 step 4), declared for all three new steps
+FED_3DEOXY_COORDINATES: Tuple[str, ...] = (
+    "log10_k_tdg_ddg_100C", "log10_k_ddg_tdg_100C", "log10_k_ddg_dgal_100C", "log10_k_dgal_ddg_100C", "log10_k_ddg_hmf_100C",
+)
+_FED_3DEOXY_KEY_OF = {
+    "log10_k_tdg_ddg_100C": "k_tdg_ddg", "log10_k_ddg_tdg_100C": "k_ddg_tdg", "log10_k_ddg_dgal_100C": "k_ddg_dgal",
+    "log10_k_dgal_ddg_100C": "k_dgal_ddg", "log10_k_ddg_hmf_100C": "k_ddg_hmf",
+}
+_MITTELMAIER = ("Mittelmaier, Funfrocken, Fenn, Berlich & Pischetsrieder 2011, Anal. Bioanal. Chem. 399:1689 (fed 3-DG / 3,4-DGE / 3-DGal, "
+                "~200 uM, PD model pH 5, 120 C, 0-120 min); Zhang, Sun, Pu, Zhang, Sun & Zhao 2021, Food Sci. Nutr. 9:290 (0.3 M glucose in "
+                "water, 90-110 C, within-study 3,4-DDG/3-DG ratio); mittelmaier2010_extraction.md, zhang2020_extraction.md")
+#: True since wave B41 (2026-09-11). B39 fitted the triangle and did not ship (the fed peak came
+#: 3x early: the 3-DG exits had no pH term); B40 added the term to both exits and did not ship (the
+#: Leitzen methylglyoxal row rejected the fragmentation exit's term); B41 shipped the formic-acid
+#: exit's term with this refit: kinetic_core_b41_ship_rule.json SHIP.
+SHIPPED_B39: bool = True
+#: The B41 fit report's optimum (cost 0.81 on twelve rows, chi2_red 0.12, fed peak at 23 min; all
+#: five coordinates PINNED). Asserted equal to the report by tests/unit/test_kinetic_core_b39.py.
+#: The inert "before" was {None, -30, -30, -30, None}: the furanic literals and k = 0 on the new steps.
+FROZEN_B39: Mapping[str, float] = {
+    "log10_k_tdg_ddg_100C": -1.9325002090039471,
+    "log10_k_ddg_tdg_100C": -1.9647477052223088,
+    "log10_k_ddg_dgal_100C": -1.8115924725920176,
+    "log10_k_dgal_ddg_100C": -1.697993368507553,
+    "log10_k_ddg_hmf_100C": -1.4503764398702186,
+}
+SHIPPING_FIT_REPORT = "results/validation/kinetic_core_b41_fit_report.json"
+
+
+def with_fed_3deoxy(log10: Mapping[str, float]) -> Dict[str, KineticParameter]:
+    """
+    The fed-triangle block at arbitrary values (the fit generator's hook and the envelope's).
+    ``log10`` maps a coordinate in FED_3DEOXY_COORDINATES to log10 k at 100 C; a None keeps the
+    furanic module's literal for the two existing constants.
+    """
+    from dataclasses import replace
+    from .parameters_furanic import FURANIC_PARAMETERS
+
+    out: Dict[str, KineticParameter] = {}
+    fitted = SHIPPED_B39
+    for coord in FED_3DEOXY_COORDINATES:
+        key = _FED_3DEOXY_KEY_OF[coord]
+        value = log10.get(coord)
+        if key in ("k_tdg_ddg", "k_ddg_hmf"):
+            base = FURANIC_PARAMETERS[key]
+            if value is None:
+                out[key] = base
+            else:
+                flags = tuple(base.flags) + (("fitted_wave_b39",) if fitted or value is not None else ())
+                out[key] = replace(base, k_ref=10.0 ** float(value), flags=flags,
+                                   evidence_class="derived_from_fit_data" if fitted else base.evidence_class,
+                                   source_anchor=(_MITTELMAIER if fitted else base.source_anchor))
+            continue
+        k_ref = 0.0 if value is None or value <= -29.0 else 10.0 ** float(value)
+        transformation = {
+            "k_ddg_tdg": "3,4-dideoxyglucosone-3-ene + H2O -> 3-deoxyglucosone (reverse hydration)",
+            "k_ddg_dgal": "3,4-dideoxyglucosone-3-ene + H2O -> 3-deoxygalactosone (epimer hydration)",
+            "k_dgal_ddg": "3-deoxygalactosone -> 3,4-dideoxyglucosone-3-ene (epimer dehydration)",
+        }[key]
+        out[key] = KineticParameter(
+            key=key, transformation=transformation, k_ref=k_ref, ea_kj_mol=EA_FED_3DEOXY_KJ_MOL,
+            evidence_class="derived_from_fit_data" if fitted else "structural_constant",
+            source_anchor=_MITTELMAIER if fitted else "B39 structural step, k = 0 until the fit ships",
+            dossier_anchor="mittelmaier2010_extraction.md sec. 2-4; results/validation/kinetic_core_b39_prereg.md",
+            conditions="water, pH 5, 120 C, fed 200 uM; one declared barrier for the three new steps",
+            ph_of_measurement=5.0, temperature_range_c=(120.0, 120.0), rate_transfer="licensed_at_measurement_ph_only",
+            unit="1/min", order=1,
+            flags=("b39_fed_3deoxy", "barrier_declared_equal_to_forward") + (("fitted_wave_b39",) if fitted else ("inert_until_b39_ships",)),
+            note="Mittelmaier 2011 proves the step by feeding its product; the rate is this wave's fit, the barrier the forward step's.",
+        )
+    return out
+
+
+FED_3DEOXY_PARAMETERS: Mapping[str, KineticParameter] = with_fed_3deoxy(FROZEN_B39)
+FED_3DEOXY_KEYS: Tuple[str, ...] = tuple(FED_3DEOXY_PARAMETERS)
+
+__all__ = ["FED_3DEOXY_COORDINATES", "FED_3DEOXY_PARAMETERS", "FED_3DEOXY_KEYS", "FROZEN_B39", "SHIPPED_B39", "with_fed_3deoxy", "EA_FED_3DEOXY_KJ_MOL", "DICARBONYL_KEYS", "DICARBONYL_PARAMETERS", "DICARBONYL_WISHLIST", "AQUEOUS_GLYOXAL_PARAMETERS", "AQUEOUS_GLYOXAL_KEYS",
            "AQUEOUS_GLYOXAL_COORDINATES", "AQUEOUS_GLYOXAL_CAVEAT", "FROZEN_B21", "with_aqueous_glyoxal", "GLASS_K_G_GO"]

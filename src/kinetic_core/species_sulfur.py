@@ -482,6 +482,7 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     # `engine._concentrations` now names the pools that legitimately have no mass instead of
     # catching everything, and a test walks every reachable target.
     "TDG": 162.14,    # C6H10O5, 3-deoxyglucosone (same formula as INT, a different molecule)
+    "DGAL": 162.14,   # C6H10O5, 3-deoxygalactosone, the C4 epimer of TDG (B39)
     "ODG": 162.14,    # C6H10O5, 1-deoxyglucosone (the 1-deoxy isomer; same formula)
     "MGO": 72.06,     # C3H4O2, methylglyoxal
 }

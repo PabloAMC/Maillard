@@ -3,10 +3,10 @@
 n_samples = 200, seed = 0, CI level = 90 %.
 
 * benchmarks with an envelope: **23** of 37 on the panel; matched rows **45**; refused rows 32
-* mixed-population coverage: 16/45 (0.356)
-* **honest literature coverage: 16/44 (0.364)**, median CI width 0.987 log10; 1 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 16/43 (1 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
-* sampled priors 63, fixed 45; lanes with NO sampled fit uncertainty: none
+* mixed-population coverage: 17/45 (0.378)
+* **honest literature coverage: 17/44 (0.386)**, median CI width 1.009 log10; 1 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 17/43 (1 not evaluable); rows the core fit read: {'hits': 0, 'total': 1, 'not_evaluable': 0}
+* sampled priors 66, fixed 45; lanes with NO sampled fit uncertainty: none
 * observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 9, extraction 36, undeclared 0
 
 ## Per panel
@@ -14,7 +14,7 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
 | external_matrix | 3 | 4 | 0.750 | 2.186 | 0 |
-| maillard_path_holdout | 8 | 30 | 0.267 | 0.962 | 1 |
+| maillard_path_holdout | 9 | 30 | 0.300 | 0.965 | 1 |
 | trust_loop | 5 | 10 | 0.500 | 1.523 | 0 |
 
 ## Rows
@@ -29,25 +29,25 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.955 | 3.174 | 69.381 | 1.24e+03 | yes | 2.593 | yes (headspace) | lipid | predictive |
-| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.665 | 1.483 | 9.628 | 71.290 | no | 1.682 | yes (headspace) | sulfur | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 48.366 | 95.838 | 214.196 | no | 0.646 | no (extraction) | sulfur | predictive |
+| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.663 | 1.483 | 9.626 | 71.213 | no | 1.681 | yes (headspace) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.969 | 48.366 | 95.838 | 214.196 | no | 0.646 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.996 | 199.516 | 565.424 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.95e+03 | 1.1e+03 | 1.82e+03 | 2.65e+03 | no | 0.383 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 1.1e+03 | 1.88e+03 | 2.73e+03 | no | 0.395 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 5.73e+04 | 2.8e+04 | 5.36e+03 | 1.66e+04 | 7.1e+04 | yes | 1.122 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 5.73e+04 | 5.54e+04 | 8.91e+03 | 3.3e+04 | 1.59e+05 | yes | 1.253 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 5.89e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.01e+05 | 2.8e+04 | 5.36e+03 | 1.66e+04 | 7.1e+04 | no | 1.122 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.01e+05 | 5.54e+04 | 8.91e+03 | 3.3e+04 | 1.59e+05 | yes | 1.253 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_10min_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 28.000 | 6.11e+03 | 1.94e+03 | 5.68e+03 | 1.42e+04 | no | 0.865 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_30min_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 1.46e+03 | 3.68e+03 | 1.25e+03 | 3.62e+03 | 1.03e+04 | yes | 0.915 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | Acrylamide | ppb | 832.000 | 3.68e+03 | 1.25e+03 | 3.62e+03 | 1.03e+04 | no | 0.915 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.19e+03 | 1.07e+03 | 2.04e+03 | 7.15e+03 | yes | 0.824 | no (extraction) | acrylamide | external_holdout |
+| mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 7e+03 | 2.55e+03 | 1.12e+03 | 2.18e+03 | 1.21e+04 | yes | 1.031 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_asparagine_180C_Ye2024 | maillard_path_holdout | Acrylamide | umol_per_mol_limiting_precursor | 140.580 | 7e+03 | 2.43e+03 | 6.84e+03 | 1.94e+04 | no | 0.902 | no (extraction) | acrylamide | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.46e+03 | 378.497 | 1.01e+03 | 3.53e+03 | no | 0.969 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3-deoxyglucosone | ppb | 5.22e+04 | 4.7e+04 | 1.18e+04 | 3.43e+04 | 1.16e+05 | yes | 0.991 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3,4-dideoxyglucosone | ppb | 5.55e+04 | 1.71e+03 | 435.431 | 1.21e+03 | 4.19e+03 | no | 0.984 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 1.87e+03 | 471.658 | 1.32e+03 | 4.41e+03 | no | 0.970 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3-deoxyglucosone | ppb | 5.22e+04 | 6.64e+04 | 1.68e+04 | 4.85e+04 | 1.57e+05 | yes | 0.969 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | 3,4-dideoxyglucosone | ppb | 5.55e+04 | 8.37e+03 | 2.1e+03 | 5.79e+03 | 2.04e+04 | no | 0.988 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glucosone | ppb | 7.5e+03 | 119.059 | 118.920 | 119.086 | 119.141 | no | 0.000807 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glyoxal | ppb | 5.6e+03 | 160.794 | 168.424 | 200.190 | 205.037 | no | 0.085 | no (extraction) | trunk | external_holdout |
-| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | methylglyoxal | ppb | 2.6e+03 | 2.03e+03 | 485.680 | 1.34e+03 | 4.47e+03 | yes | 0.964 | no (extraction) | trunk | external_holdout |
+| mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | methylglyoxal | ppb | 2.6e+03 | 2.57e+03 | 622.049 | 1.72e+03 | 5.59e+03 | yes | 0.953 | no (extraction) | trunk | external_holdout |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 1.13e+03 | 60.498 | 1.12e+03 | 1.03e+04 | yes | 2.230 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 23.470 | 11.825 | 22.139 | 39.184 | no | 0.520 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.090 | 0.004 | 0.083 | 0.581 | no | 2.162 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
@@ -190,8 +190,6 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | b13.k_ddg_hmf.log10_k_100C | trunk | fitted_rate | fixed | -0.924 | - | - | no | NOT SAMPLED, and not by oversight. k_ddg_hmf (1.13x) and k_go_sink's RATE (1.87x) are cross-laboratory agreements inside |
 | b34.k_glc_tdg.log10_k_100C | trunk | fitted_rate | uniform_band | -5.027 | - | [-5.406, -4.828] | yes | SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not |
 | b34.k_glc_tdg.ea_kj_mol | trunk | fitted_ea | uniform_band | 107.200 | - | [54.500, 159.900] | yes | SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not |
-| b34.k_tdg_ddg.log10_k_100C | trunk | fitted_rate | uniform_band | -2.428 | - | [-2.479, -2.382] | yes | SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not |
-| b34.k_tdg_ddg.ea_kj_mol | trunk | fitted_ea | uniform_band | 36.900 | - | [30.600, 43.200] | yes | SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not |
 | b34.k_fru_int.log10_k_100C | trunk | fitted_rate | uniform_band | -2.963 | - | [-2.994, -2.934] | yes | SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not |
 | b34.k_fru_int.ea_kj_mol | trunk | fitted_ea | uniform_band | 100.400 | - | [93.800, 107.000] | yes | SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not |
 | b34.k_fru_odg.log10_k_100C | trunk | fitted_rate | uniform_band | -5.130 | - | [-5.221, -5.054] | yes | SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not |
@@ -202,6 +200,11 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | b18.ea_mgo_ak_kj_mol | trunk | fitted_ea | uniform_band | 114.900 | 16.097 | [111.660, 114.900] | yes | unidentified_direction_flat_across_its_declared_band |
 | b18.ph_slope_above_7_decades_per_unit | trunk | fitted_rate | fixed | 0.197 | 0.039 | [0.000, 1.500] | no | IDENTIFIED AND STILL NOT SAMPLED, and the interval is narrower for it. This coordinate is a module-level constant in par |
 | b18.ph_slope_below_7_decades_per_unit | trunk | fitted_rate | fixed | 0.580 | 0.046 | [0.000, 1.500] | no | IDENTIFIED AND STILL NOT SAMPLED, and the interval is narrower for it. This coordinate is a module-level constant in par |
+| b39.log10_k_tdg_ddg_100C | trunk | fitted_rate | normal_log10 | -1.933 | 0.062 | [-4.428, -0.428] | yes | laplace_covariance_at_b8_optimum |
+| b39.log10_k_ddg_tdg_100C | trunk | fitted_rate | normal_log10 | -1.965 | 0.179 | [-4.428, -0.428] | yes | laplace_covariance_at_b8_optimum |
+| b39.log10_k_ddg_dgal_100C | trunk | fitted_rate | normal_log10 | -1.812 | 0.243 | [-4.428, -0.428] | yes | laplace_covariance_at_b8_optimum |
+| b39.log10_k_dgal_ddg_100C | trunk | fitted_rate | normal_log10 | -1.698 | 0.258 | [-4.428, -0.428] | yes | laplace_covariance_at_b8_optimum |
+| b39.log10_k_ddg_hmf_100C | trunk | fitted_rate | normal_log10 | -1.450 | 0.064 | [-2.924, 1.076] | yes | laplace_covariance_at_b8_optimum |
 | lipid.q10 | lipid | declared_band | uniform | 2.449 | - | [2.000, 3.000] | yes | declared corner band, sampled uniform over it |
 | lipid.pea_protein_isolate.lipid_mass_fraction | lipid | declared_band | log_uniform | 0.025 | - | [0.010, 0.060] | yes | declared corner band, sampled log-uniform over it as ONE scale shared by every carrier in a draw (CoreDraw.lipid_fractio |
 | lipid.pea_protein_isolate.peroxide_value_meq_per_kg | lipid | declared_band | log_uniform | 10.000 | - | [2.000, 40.000] | yes | declared corner band, sampled log-uniform over it as ONE scale shared by every carrier in a draw (CoreDraw.peroxide_scal |

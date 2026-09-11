@@ -4,8 +4,8 @@
     "artifact": "env_b34_ship_rule",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "9656d609ba06afbec6292f075146b90f9b724198",
-      "short": "9656d609",
+      "commit": "c365533146db787e5d21919e4f912e992f64faac",
+      "short": "c3655331",
       "branch": "reactions",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "a2c38bdbc19fc7017de6062bf9809e26c8c2a68de9761bbee981f5a842e25564"
+        "sha256": "93f4a7111d2810173d3ae2746464076d2ff2d1d019e49f2eaa5dc8a4e1199214"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",
@@ -39,8 +39,6 @@
     "rows": [
       "b34.k_glc_tdg.log10_k_100C",
       "b34.k_glc_tdg.ea_kj_mol",
-      "b34.k_tdg_ddg.log10_k_100C",
-      "b34.k_tdg_ddg.ea_kj_mol",
       "b34.k_fru_int.log10_k_100C",
       "b34.k_fru_int.ea_kj_mol",
       "b34.k_fru_odg.log10_k_100C",
@@ -49,8 +47,6 @@
     "sampled": [
       "b34.k_glc_tdg.log10_k_100C",
       "b34.k_glc_tdg.ea_kj_mol",
-      "b34.k_tdg_ddg.log10_k_100C",
-      "b34.k_tdg_ddg.ea_kj_mol",
       "b34.k_fru_int.log10_k_100C",
       "b34.k_fru_int.ea_kj_mol",
       "b34.k_fru_odg.log10_k_100C",
@@ -64,14 +60,6 @@
       "b34.k_glc_tdg.ea_kj_mol": [
         54.5,
         159.9
-      ],
-      "b34.k_tdg_ddg.log10_k_100C": [
-        -2.478757534337661,
-        -2.3818154830807687
-      ],
-      "b34.k_tdg_ddg.ea_kj_mol": [
-        30.599999999999998,
-        43.199999999999996
       ],
       "b34.k_fru_int.log10_k_100C": [
         -2.993702366217273,
@@ -90,16 +78,19 @@
         121.1
       ]
     },
+    "superseded_by_a_later_fit": [
+      "k_tdg_ddg"
+    ],
     "pass": true
   },
   "T2": {
     "noise_floor_from_two_seeds": {
       "n": 45,
-      "median_rel": 0.056271047907205295,
-      "p95_rel": 0.12324395045659148,
-      "max_rel": 0.20978653678987488
+      "median_rel": 0.05438342829510866,
+      "p95_rel": 0.12277025801847964,
+      "max_rel": 0.19205054983053316
     },
-    "tolerance_used_rel": 0.20978653678987488,
+    "tolerance_used_rel": 0.19205054983053316,
     "rows_the_priors_reach": [
       {
         "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
@@ -481,7 +472,7 @@
     "pass": true
   },
   "T3": {
-    "median_noise_floor_max_dex": 0.06925532861318377,
+    "median_noise_floor_max_dex": 0.6401077939219731,
     "n_seed_pairs": 45,
     "unreached_medians_moved_beyond_the_floor": [],
     "maillard_medians_moved_by_the_priors": [

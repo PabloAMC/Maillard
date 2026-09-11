@@ -81,10 +81,18 @@ def main() -> int:
     from src.kinetic_core.parameters_dicarbonyl import HPD_SINK_BANDS
     from src.kinetic_core.uncertainty import CORE_PRIORS
 
+    from src.kinetic_core.parameters_dicarbonyl import SHIPPED_B39
+
     rows = [p for p in CORE_PRIORS if p.key.startswith("b34.")]
+    # B41 (2026-09-11) superseded the printed band on k_tdg_ddg with the fed fit's own Laplace row
+    # (b39.log10_k_tdg_ddg_100C), so its two rows are retired here. T1 counts the bands still declared;
+    # the verdict this rule recorded on 2026-09-11 was judged on the frozen pair and is not re-decided
+    # by a later wave retiring one row.
+    superseded = {"k_tdg_ddg"} if SHIPPED_B39 else set()
+    expected = 2 * len([k for k in HPD_SINK_BANDS if k not in superseded])
     t1 = {"rows": [p.key for p in rows], "sampled": [p.key for p in rows if p.sampled],
-          "bands": {p.key: list(p.band) for p in rows},
-          "pass": bool(len(rows) == 2 * len(HPD_SINK_BANDS) and all(p.sampled for p in rows))}
+          "bands": {p.key: list(p.band) for p in rows}, "superseded_by_a_later_fit": sorted(superseded),
+          "pass": bool(len(rows) == expected and all(p.sampled for p in rows))}
 
     reached, maillard_other, unreached, violations = [], [], [], []
     for key, r0 in before.items():

@@ -200,36 +200,40 @@ The general rule is not specific to this model: **a formation measurement withou
 cannot be told apart from a storage measurement.** If your material sat in a warehouse for six
 months, some of what you are about to attribute to your process was in the bag when you opened it.
 
-**One aqueous rate, and it is now a different one than this page said yesterday.** The entry from a
-sugar to 3-deoxyglucosone was the suspect. It is not: measured against a paper that turned out to be
-on this disk already, the model's 3-deoxyglucosone in an amine-free pot is right to **11 %** and its
-methylglyoxal to **28 %**. What is wrong is the step immediately after — 3-deoxyglucosone to
-3,4-dideoxyglucosone, **32× too slow**, with hydroxymethylfurfural 12× low downstream of it.
+**One aqueous rate — asked for, delivered, fitted, and shipped.** This page used to ask for the rate
+of 3-deoxyglucosone → 3,4-dideoxyglucosone in water at 100–140 °C, because the model was 32× low on
+that intermediate in an autoclaved glucose pot while right to 11 % on 3-deoxyglucosone itself. The
+answer arrived on 2026-09-11 in a paper about dialysis fluids (Mittelmaier et al. 2011), which heats
+*pure* 3-deoxyglucosone at 120 °C and pH 5 and follows the intermediate — and it changed the
+question. The dehydration runs **both ways**; the enone hydrates to **either** sugar epimer, and a
+quarter of the fed compound is 3-deoxygalactosone after an hour, a compound the model did not carry.
+So the model's fault was never one slow step. It was a one-way step where the chemistry runs both
+ways, a missing epimer, an exit applied at the wrong pH, and a downstream rate carried from a
+160–200 °C glass with its barrier fixed to zero.
 
-So the ask was narrow and specific: **the rate of 3-deoxyglucosone → 3,4-dideoxyglucosone in water,
-at 100–140 °C and pH 4–7.** **It arrived on 2026-09-11 and it changed the question.** Mittelmaier and
-colleagues heat *pure* 3-deoxyglucosone at 120 °C and pH 5 and follow the intermediate: it peaks at
-26.7 µM from a 200 µM charge, at thirty minutes. Run the same pot, this model peaks at 5.3 µM — five
-times low, the smallest of the three independent measurements of this gap — **but it peaks at ten
-minutes and is gone by sixty**, while the real pot still holds both compounds at two hours. The
-model's fault is not mainly that it makes too little of this intermediate. It is that it destroys the
-whole three-deoxy pool far too fast. The same paper shows why that is hard to fix by moving one
-number: the reactions run **both ways**, and a quarter of the fed compound has turned into a sugar
-epimer this model does not carry at all. So the ask has moved on, and it is no longer a rate: The model carries a value for it, and that value's interval was
-deliberately *not* widened because two laboratories agree on it to within 1.5×. Both of them measured
-it dry — a freeze-dried glucose melt and a roasted hazelnut. Two laboratories agreeing with each
-other in the same matrix is not a check; it is the same experiment twice. One aqueous determination
-would settle it, and it is the cheapest number on this page.
+Three pre-registered waves closed it. The first fitted the reversible triangle on the paper's six
+printed maxima and shares plus a second laboratory's within-study ratios, pinned all five constants
+to a tenth of a decade, and **did not ship**, because the fed pot's peak still came three times too
+early: the 3-deoxyglucosone exit that sets the timing had been measured at pH 6.8 and applied at
+pH 5. The second put the correction — printed in the same 2003 table this model already used for
+its Amadori steps — on both exits, and a hold-out the fit never read rejected one of the two by
+name (methylglyoxal 1.28× → 33×) while keeping the other. The third shipped the one that survived.
+On that hold-out, never read by any of the three fits, 3,4-dideoxyglucosone went **32× → 6.6×**,
+hydroxymethylfurfural **12× → 9.3×**, methylglyoxal **1.28× → 1.01×**, and two hydroxymethylfurfural
+rows on other pots entered the threefold band. The headline moved from 10 of 45 to **12 of 45**.
 
-A candidate exists and **is on this disk** — `data/articles/zhang2020.pdf`, read on 2026-09-07 — which this page wrongly called "not yet on this disk" until the owner pointed at the file on 2026-09-11 (the file is named by its received date; the venue year is 2021): Zhang, Sun, Pu, Zhang, Sun & Zhao 2021,
-*Food Science & Nutrition* 9:290–302 (doi 10.1002/fsn3.1995) heat 0.3 M glucose **in water, alone and
-with glutamic acid, at 90–110 °C for 0–6 h** and quantify 3-deoxyglucosone, 1-deoxyglucosone,
-**3,4-dideoxyglucosone**, glucosone, glyoxal, methylglyoxal and diacetyl, with zero-order formation
-constants printed per temperature. It measures the very intermediate this model loses. Its dossier's verdict, written on 2026-09-07: the paper's absolute levels do not mass-balance against its own glucose loss, by orders of magnitude, so no LEVEL can be taken from it. What survives a common calibration error is a **within-study ratio**, and the 3,4-dideoxyglucosone to 3-deoxyglucosone ratio it prints is the one quantity that bears on the ask; see the B36 pre-registration's correction note for what the model predicts against it.
+What is left on this limb is the residual 6.6× on 3,4-dideoxyglucosone at 121 °C and pH 4.4 — an
+extrapolation of a pH term measured between 5.5 and 6.8 — and the fact that the three new steps
+share one declared barrier because their source has one temperature. **The ask is now: the fed
+experiment repeated at 100 and 140 °C.** Two more temperatures on the same pots would give the
+triangle its own barriers and cost one afternoon.
 
-**A reversible step and a missing epimer.** Does the sugar-dehydration step this model runs one way
-run backwards at cooking temperature, and where does 3-deoxygalactosone go? One laboratory says both
-directions are real. Nothing else on file speaks to it.
+A second aqueous glucose paper is on this disk (`data/articles/zhang2020.pdf`, Zhang et al. 2021,
+*Food Science & Nutrition* 9:290–302): 0.3 M glucose in water at 90–110 °C for 0–6 h, with
+3-deoxyglucosone and 3,4-dideoxyglucosone printed. Its absolute levels do not mass-balance against
+its own glucose loss, so no level is taken from it; its within-study ratio does not depend on the
+calibration and was the fit's temperature axis. Before the fit the model was 7–10× low on that
+ratio at every temperature; after it, within 6 %.
 
 **The lipid rate's temperature dependence — answered twice, and the two answers disagree.** This page
 used to ask for it. Two papers now supply it. In bulk seed oil, the barrier for making hexanal from an

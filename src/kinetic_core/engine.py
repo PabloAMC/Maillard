@@ -222,6 +222,9 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     "3,4-dge": "DDG",
     "1-deoxyglucosone": "ODG",
     "1-dg": "ODG",
+    # B39 (2026-09-11): the epimer Mittelmaier 2011 feeds
+    "3-deoxygalactosone": "DGAL",
+    "3-dgal": "DGAL",
     "diacetyl": "DA",
     "2,3-butanedione": "DA",
     "butane-2,3-dione": "DA",
@@ -335,6 +338,8 @@ TARGET_ALIASES: Mapping[str, str] = {
     "3-dg": "TDG",
     "1-deoxyglucosone": "ODG",
     "1-dg": "ODG",
+    "3-deoxygalactosone": "DGAL",
+    "3-dgal": "DGAL",
     "acetylformoin": "AF",
 }
 
@@ -1938,6 +1943,15 @@ def core_parameters(
 
         b = override["aqueous_glyoxal"]
         parameters.update(with_aqueous_glyoxal(*[float(b[k]) for k in AQUEOUS_GLYOXAL_COORDINATES]))
+    # B39 (2026-09-11): the fed 3-deoxy triangle. The block is ALWAYS applied -- with the three new
+    # steps at k = 0 until the fit ships, so nothing moves -- and an override carries the fit
+    # generator's candidates and the envelope's draws. Applied after the disputed-sink draws so a
+    # fitted centre wins over a printed band on the same constant.
+    from .parameters_dicarbonyl import FED_3DEOXY_PARAMETERS, with_fed_3deoxy
+
+    parameters.update(FED_3DEOXY_PARAMETERS)
+    if "fed_3deoxy" in override:
+        parameters.update(with_fed_3deoxy({k: (None if v is None else float(v)) for k, v in override["fed_3deoxy"].items()}))
     if "proline" in override:
         from .parameters_proline import PROLINE_COORDINATES, with_fitted_proline
 

@@ -729,6 +729,40 @@ def _b18_priors() -> List[CorePrior]:
     return out
 
 
+_B41_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b41_fit_report.json"
+
+
+def _b39_priors() -> List[CorePrior]:
+    """
+    B41 (2026-09-11). The fed 3-deoxyglucosone triangle's five coordinates at the width THEIR OWN
+    DATA give them: the B41 fit report's Gauss-Newton sigma (0.2-0.4 dex), clipped to the fit's
+    bounds. These replace ENV-B34's printed HPD band on k_tdg_ddg (retired in `_b34_priors`): a
+    data-derived width supersedes a printed one on the same constant. The three new steps and
+    k_ddg_hmf had no envelope row before this, which would have published every 3,4-DGE and HMF
+    interval one width too narrow.
+    """
+    from .parameters_dicarbonyl import FED_3DEOXY_COORDINATES, FROZEN_B39, SHIPPED_B39
+
+    if not SHIPPED_B39:
+        return []
+    report = _report(_B41_FIT_REPORT)
+    src = data_paths.rel(_B41_FIT_REPORT)
+    lap = report.get("laplace") or {}
+    bounds = report.get("bounds") or {}
+    out: List[CorePrior] = []
+    for name in FED_3DEOXY_COORDINATES:
+        centre = float(FROZEN_B39[name])
+        sigma = float(lap["sigma"][name])
+        band = tuple(float(v) for v in bounds[name]) if name in bounds else None
+        out.append(CorePrior(
+            key=f"b39.{name}", lane=TRUNK, kind="fitted_rate", distribution="normal_log10",
+            centre=centre, sigma=sigma, band=band, unit="log10(k at 100 C)",
+            source=f"{src}: Gauss-Newton sigma at the B41 optimum (fed pots + within-study ratios)",
+            sampled=True, reason=LAPLACE_SAMPLED,
+        ))
+    return out
+
+
 def _b13_priors() -> List[CorePrior]:
     """
     ENV-B13 (2026-09-10). The eight dicarbonyl and furanic-sink constants, which this table had no
@@ -796,8 +830,14 @@ def _b34_priors() -> List[CorePrior]:
     from .parameters_dicarbonyl import HPD_SINK_BANDS
     from .parameters_furanic import FURANIC_PARAMETERS
 
+    from .parameters_dicarbonyl import SHIPPED_B39
+
     out: List[CorePrior] = []
     for key, spec in HPD_SINK_BANDS.items():
+        if key == "k_tdg_ddg" and SHIPPED_B39:
+            # B41 (2026-09-11): the fed fit gives this constant a data-derived width (b39.*); the
+            # printed band it carried here is superseded, not widened, and both its rows go.
+            continue
         base = FURANIC_PARAMETERS[key]
         rel = float(spec["k_rel_hpd"])
         centre = math.log10(base.k_ref)
@@ -1011,7 +1051,7 @@ def core_priors() -> Tuple[CorePrior, ...]:
     """The full priors table, in the order the sampler consumes it."""
     return tuple(
         _b1_priors() + _b3_priors() + _b7_priors() + _b8_priors() + _b13_priors()
-        + _b34_priors() + _b18_priors() + _declared_band_priors()
+        + _b34_priors() + _b18_priors() + _b39_priors() + _declared_band_priors()
     )
 
 
@@ -1085,6 +1125,7 @@ def draw_from_rng(
     b3_k: Dict[str, float] = {}
     b3_ea: Dict[str, float] = {}
     b18: Dict[str, float] = {}   # ENV-B18: the pyrazine block's drawn coordinates
+    b39: Dict[str, float] = {}   # B41: the fed 3-deoxy triangle's drawn coordinates
     b13: Dict[str, Dict[str, float]] = {}   # ENV-B13: the disputed trunk sinks
     k_dpo_af: Optional[float] = None
     coords: Dict[str, float] = {}
@@ -1175,6 +1216,8 @@ def draw_from_rng(
             # coordinates that block takes ever reach here; the two pH slopes are prior rows with
             # sampled=False and are filtered out above.
             b18[p.key.split(".", 1)[1]] = value
+        elif p.key.startswith("b39."):
+            b39[p.key.split(".", 1)[1]] = value
         elif p.key == "b7.k_dpo_af.log10_k":
             k_dpo_af = 10.0 ** value
         elif p.key == "lipid.q10":
@@ -1213,6 +1256,10 @@ def draw_from_rng(
         from .parameters_pyrazine import FROZEN_B18
 
         maillard["pyrazine"] = {k: float(b18.get(k, FROZEN_B18[k])) for k in _B18_SAMPLABLE}
+    if b39:
+        from .parameters_dicarbonyl import FED_3DEOXY_COORDINATES, FROZEN_B39
+
+        maillard["fed_3deoxy"] = {k: float(b39.get(k, FROZEN_B39[k])) for k in FED_3DEOXY_COORDINATES}
     # The joint Laplace block draws on one key of its own; adding a b8 coordinate re-shuffles the b8
     # rows only, which is the smallest thing that can be true of a joint draw.
     sulfur = sulfur_joint_draw(streams.for_key("b8.joint")) if any(p.sampled and p.key.startswith("b8.") for p in priors) else None

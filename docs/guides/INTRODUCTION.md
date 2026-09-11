@@ -185,6 +185,13 @@ in order, in plain words.
 | methionine's chain added to the sugar path: methional as its Strecker aldehyde on the free dicarbonyls, then methanethiol and the disulfide, fitted on one laboratory's rates in a fruit-sugar pot | methional is the cooked-potato note at the top of the desirable list and no lane named it | the fit ran the methionine-to-glycine ratio to its ceiling and was still four decades short in that pot, while a second laboratory's methionine and glucose pot came out two decades too high: methional does not form from the free dicarbonyls; the second laboratory's fed Amadori compound says it forms from methionine's own Amadori compound | no; the finding names the next structure |
 | 2-acetyl-1-pyrroline from proline: the Strecker of proline to 1-pyrroline and its acylation by methylglyoxal, on one laboratory's fed yields | the bread-crust and popcorn note of extruded and baked products | the fed acylation fits within a factor of two; the chain from proline rises a thousandfold with the methylglyoxal charge where the source rises threefold, because the competing tetrahydropyridine branch and the pyrroline's own loss are not written | no; the acylation constant is kept in the record for the next structure |
 | the thiol removal made an irreversible addition to the pot's own sugar intermediates | the third form the two refusals above left standing, from the lipid papers | the fit switched the step off at every temperature: the 145 °C fed pots, fifty-four of the sixty-four rows, want no removal the 100 °C pot could use | no; three structures refused on the same rows points at the rows' weighting or at the laboratory, not at a fourth structure |
+| a benchmark allowed to declare what its pot arrived with, from the source's own unheated column; pots that were never cooked refused instead of charged for raw material | a pea beverage paper printed both columns, and a third of every level was there before any heat | three external rows went from 34×, 32× and 3× to inside threefold with nothing in the model changed; four raw-powder pots are now refused with the cure named | yes |
+| every benchmark cross-referenced against every paper on disk | one hold-out had scored one of six species its paper prints, and cited an author not on the paper | eight measurements added; the amine-free sugar entry was right to 11 % and the step after it 32× too slow, which located the HMF deficit | yes |
+| twenty-three papers downloaded against the model's own reading list, each read and recorded | the model had been asking for an aqueous dehydration rate, a lipid temperature term and an extrusion residence time | the dehydration rate arrived as a fed experiment the model could not even express; the lipid term arrived twice, from oil and from a nut paste, disagreeing by two; the residence time is measured on a different feed | recorded |
+| every fitted constant audited for what the data determine, at the shipped optimum | no one had asked which of the fifty constants the fit rows can see | twelve of forty-seven are pinned; twenty are constants no row touches; the two fits built on fed pots over small networks are fully pinned and the two built on end-of-cook levels through large networks are mostly blind | yes |
+| the 3-deoxyglucosone step made reversible with its sugar epimer, fitted on the fed pots and a second laboratory's ratios | the fed experiment showed the chemistry runs both ways and a quarter of the charge becomes an epimer the model did not carry | all five constants pinned to a tenth of a decade; did not ship, because the peak came three times early: the exit that sets the timing had been measured at pH 6.8 and applied at pH 5 | no, kept as the record |
+| the exits from 3-deoxyglucosone given the pH term the same 2003 table prints for them, on both exits | the timing | the peak landed; one hold-out row (methylglyoxal at pH 4.4) went from 1.3× to 33×: the term on the fragmentation exit, borrowed from a lumped step, did not transfer | no, kept as the record |
+| the same term on the formic-acid exit alone, refit | the hold-out had kept that one and rejected the other | on the hold-out none of the fits read, 3,4-dideoxyglucosone 32× → 6.6×, HMF 12× → 9×, methylglyoxal 1.3× → 1.0×; two more HMF rows inside threefold; the headline 10 of 45 → 12 of 45 | yes |
 
 ## 7. The one problem that matters most: where the thiols go
 
@@ -246,6 +253,17 @@ plus the sugar and cysteine left and the pH. One arm at 100 °C under nitrogen. 
 weeks of GC-MS. The model as shipped predicts that the fed thiol decays to zero and that the pot peaks
 after an hour. If instead the thiol levels off with its disulfide and the pot keeps rising, the
 removal step is reversible. Either result decides the next version.
+
+**The fed experiment worked, and it says what to fund.** The one wave of 2026 that pinned every
+constant it fitted was the one built on a paper that fed a pure intermediate and followed it
+(section 6's last three rows): five constants to a tenth of a decade, where the fits scored on
+end-of-cook levels through the whole network leave most of their constants unseen by any row. The
+audit of what the data can determine (the row above them) says the same thing from the Fisher
+information: it is the design that pins, not the number of rows. So the fed-intermediate ladder in
+[what to measure next](EXPERIMENTS.md) is not one option among five; it is the shape every
+experiment for this model should take. The thiol sink is the case in point: its barrier and both
+dimerisation rates sit on their ceilings together, so no refit on the present data can move it, and
+only the thiol-against-time experiment above can.
 
 **Four more experiments, and what each would decide.** The one above is the first of five, and the
 other four are set out with their protocols in [what to measure next](EXPERIMENTS.md): a ladder of

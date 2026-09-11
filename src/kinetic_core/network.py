@@ -492,8 +492,34 @@ PROLINE_REACTIONS: Tuple[Reaction, ...] = (
         "net). FITTED on Hofmann & Schieberle 1998b Table 7's fed-pyrroline yields.",
     ),
 )
+#: Build Wave B39 (2026-09-11): THE FED 3-DEOXYGLUCOSONE TRIANGLE. Mittelmaier et al. 2011 charge
+#: pure 3-DG, pure 3,4-DGE and pure 3-DGal at 120 C and show each regenerates the others: the
+#: dehydration 3-DG -> 3,4-DGE the trunk has always carried one way is REVERSIBLE, and the enone
+#: hydrates to EITHER C4 epimer. Three steps, one species (DGAL), constants in
+#: `parameters_dicarbonyl.FED_3DEOXY_PARAMETERS`; inert (k = 0) until the B39 fit ships. Pre-registration
+#: `results/validation/kinetic_core_b39_prereg.md`.
+FED_3DEOXY_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_ddg_tdg", {"DDG": 1}, {"TDG": 1}, "k_ddg_tdg",
+        "B39. 3,4-dideoxyglucosone-3-ene + H2O -> 3-deoxyglucosone: the reverse hydration. Fed 3,4-DGE "
+        "regenerates 3-DG to 26.9 uM at 30 min from 200 uM (Mittelmaier 2011).",
+    ),
+    Reaction(
+        "r_ddg_dgal", {"DDG": 1}, {"DGAL": 1}, "k_ddg_dgal",
+        "B39. 3,4-dideoxyglucosone-3-ene + H2O -> 3-deoxygalactosone, the C4 epimer. Fed 3,4-DGE gives "
+        "37.9 uM 3-DGal at 20 min; fed 3-DG is 26 % 3-DGal by 60 min.",
+    ),
+    Reaction(
+        "r_dgal_ddg", {"DGAL": 1}, {"DDG": 1}, "k_dgal_ddg",
+        "B39. 3-deoxygalactosone -> 3,4-dideoxyglucosone-3-ene: the epimer's dehydration. Fed 3-DGal gives "
+        "46.2 uM 3,4-DGE at 20 min.",
+    ),
+)
+FED_3DEOXY_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in FED_3DEOXY_REACTIONS)
+
 TRUNK_REACTIONS: Tuple[Reaction, ...] = (REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS + GLYCATION_REACTIONS
-                                         + AQUEOUS_GLYOXAL_REACTIONS + METHIONINE_REACTIONS + PROLINE_REACTIONS)
+                                         + AQUEOUS_GLYOXAL_REACTIONS + METHIONINE_REACTIONS + PROLINE_REACTIONS
+                                         + FED_3DEOXY_REACTIONS)
 TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
 DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
 PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)

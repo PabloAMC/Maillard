@@ -1541,3 +1541,32 @@ ran.
 6. **ONE NOTE CORRECTED.** The Ye 2024 bundle's 0.2 M assumption was said to rest on Knol 2005's
    abstract; Knol 2005 is on disk with a dossier that reads the 0.2 M from the print. The assumption
    is unchanged and its provenance upgraded; the bundle's frozen hash is re-pinned with the reason.
+
+## Amendment 41 — 2026-09-11 (Waves B39, B40, B41: the fed 3-deoxyglucosone triangle and the formic-acid exit's pH term)
+
+1. **WHAT IS FITTED, AND ON WHAT.** Five coordinates, log10 k at 100 °C: `k_tdg_ddg` and `k_ddg_hmf`
+   (existing) and `k_ddg_tdg`, `k_ddg_dgal`, `k_dgal_ddg` (new, one declared barrier equal to the
+   forward step's 36.9 kJ/mol). Rows: Mittelmaier et al. 2011's six printed fed maxima and
+   diastereomer shares and two times of maximum (fed 3-DG / 3,4-DGE / 3-DGal, 200 µM, pH 5, 120 °C),
+   and Zhang et al. 2021's four within-study 3,4-DDG/3-DG ratios at 95–110 °C. Under the owner's rule
+   both are FIT evidence: fed yields and within-study ratios. The Leitzen 2021 hold-out was never
+   read by any of the three fits and is the judge.
+2. **WHAT WAS DECLARED, NOT FITTED.** The pH term on `k_tdg_fa`: 10^(0.77·(pH − 6.8)), band (0.65,
+   0.89), from Martins & van Boekel 2003 Table 3 k6 at two temperatures — the same table and the
+   same form as B12's Amadori term. Measured window pH 5.5–6.8; outside it the engine says so.
+3. **WHAT WAS DECLARED, REJECTED BY THE HOLD-OUT, AND KEPT AS THE RECORD.** B40's term on
+   `k_tdg_mgo` (0.63 dex per pH unit, from Martins' lumped "3-DG → fragments" k5) moved Leitzen's
+   methylglyoxal from 1.28× to 33×. It is not applied; it stays in the code as
+   `THREE_DEOXY_EXIT_PH_REJECTED_B40` with the reason, and `k_tdg_mgo` carries no pH term.
+4. **ONE NEW SPECIES.** 3-deoxygalactosone (`DGAL`), reached only through 3,4-DGE, measured in the
+   fit corpus by Mittelmaier alone. It has no exit of its own: it leaves the way it came.
+5. **THE SHIP RULES WERE OBEYED AS WRITTEN, TWICE AGAINST THE MODEL'S INTEREST.** B39's candidate
+   would have lifted the headline to 12/45 and did not ship because its own P1 failed on the peak's
+   timing and P4 by 2 % on HMF. B40's candidate fixed the timing and failed P6 on one row. B41 met
+   every clause. All three records stand.
+6. **THE CENTRE OF `k_tdg_ddg` MOVED, and this is the one licensed way a centre moves**: a fit that
+   shipped under its own pre-registered rule. ENV-B34's printed band on it is retired in favour of
+   the fit's Laplace σ; the other three ENV-B34 bands are untouched.
+7. **THE HEADLINE.** Within 3× 10/45 → 12/45; out-of-sample 9/44 → 11/44. Both new hits are HMF rows
+   (Schibilsky pH 8, Chang water) that the formic-acid term brought in; no row left. Re-pinned in
+   `tests/scientific/test_core_headline_guards.py` with this amendment as the reason.

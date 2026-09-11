@@ -175,20 +175,25 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     # already right about them and nobody had asked. The median fold rose 9.31x -> 10.62x.
     # RE-PINNED BY WAVE B35: 9/44 -> 10/45, 8/43 -> 9/44. The new hit is (E,E)-2,4-decadienal at
     # 1.62x in the Trikusuma pot, a fourth answered compound there.
-    assert (s["within_band_count"], s["matched_compound_count"]) == (10, 45)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (10, 45)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (9, 44)
+    # RE-PINNED BY WAVE B41 (2026-09-11): 10/45 -> 12/45, 9/44 -> 11/44. The fed 3-deoxyglucosone fit
+    # (B39, refit under the formic-acid exit's pH term in B41) brought two HMF rows inside: Schibilsky
+    # pH 8 (3.6x -> 1.6x) and Chang water (3.2x -> 2.6x); no row left. Leitzen's 3,4-DGE went 32x -> 6.6x
+    # and its methylglyoxal 1.28x -> 1.01x. The median fold fell 9.31x -> 9.15x.
+    assert (s["within_band_count"], s["matched_compound_count"]) == (12, 45)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (12, 45)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (11, 44)
     assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (1, 1)
     # RE-PINNED BY WAVE B34: 3/26 -> 5/31. All five new rows are in a maillard_path hold-out bundle,
     # and two of them (3-deoxyglucosone, methylglyoxal) land inside the band.
-    assert s["holdout_within_band"] == {"hits": 5, "total": 31}
+    # RE-PINNED BY WAVE B41: 5/31 -> 7/31 (the two HMF rows above are both hold-outs).
+    assert s["holdout_within_band"] == {"hits": 7, "total": 31}
     readme = _doc_text(README)
-    _assert_quoted(readme, "10 of 45", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "9 of 44", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "12 of 45", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "11 of 44", "README.md", "the core's out-of-sample count")
     # 2026-09-11 (review of PR #16): the BADGE on line 6 had said 3/38 through three re-pins of the
     # body text below it, because nothing asserted it. The most visible number on the page is now
     # pinned to the same artifact as the table.
-    _assert_quoted(readme, "out--of--sample-9%2F44%20rows%20within%203x", "README.md", "the out-of-sample badge")
+    _assert_quoted(readme, "out--of--sample-11%2F44%20rows%20within%203x", "README.md", "the out-of-sample badge")
     # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
     _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 
@@ -294,7 +299,10 @@ def test_core_envelope_coverage_and_widths():
     # RE-PINNED BY ENV-M1 (2026-09-11): the whole table is re-seeded -- every coordinate now draws from its
     # own stream keyed by name (kinetic_core_env_m1_prereg.md), so every envelope number moves once and
     # no direction is claimed. Under the new streams ENV-B34's priors are in: 16/44, 1 not evaluable.
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (16, 44, 1)
+    # RE-PINNED BY WAVE B41: 16/44 -> 17/44. The five b39.* Laplace rows replaced ENV-B34's printed band
+    # on k_tdg_ddg and the triangle's centre moved; the streams are per-coordinate (ENV-M1) so only the
+    # rows those constants reach move.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (17, 44, 1)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -311,9 +319,11 @@ def test_core_envelope_coverage_and_widths():
     # a comparison; the ship rule's per-row table is.
     # RE-PINNED BY WAVE B31: 1.0411 -> 0.9238 dex. Same caution as the line above -- a median over
     # a changed row set is not a comparison, and here the set changed twice over.
-    assert lit["median_ci_width_log10"] == pytest.approx(0.9874, abs=5e-4)
+    # RE-PINNED BY WAVE B41: 0.9874 -> 1.0095 dex; the same caution -- the 3,4-DGE and HMF rows now carry
+    # the fit's own width where they carried a printed band.
+    assert lit["median_ci_width_log10"] == pytest.approx(1.0095, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (16, 43)
+    assert (oos["hits"], oos["total"]) == (17, 43)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.209, abs=0.01)

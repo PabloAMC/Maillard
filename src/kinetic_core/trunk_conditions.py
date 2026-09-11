@@ -129,6 +129,29 @@ PH_SOURCE = (
     "constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)"
 )
 
+# ---------------------------------------------------------------------------
+# B40 (2026-09-11): THE 3-DEOXYGLUCOSONE EXITS' pH TERM. B12 scaled the three Amadori-decay steps
+# from Martins 2003 Table 3 and left the 3-DG exits at their pH-6.8 values everywhere. The same
+# table prints those exits at pH 5.5: k6 (3-DG -> formic acid) is 14x slower at 100 C and 7x at
+# 120 C; k5 (3-DG -> fragments) 6.6x at 100 C. Declared slopes in decades per pH unit, reference
+# pH 6.8, the same measured window. INERT until B40 ships (THREE_DEOXY_EXIT_PH_TERM False).
+# Pre-registration: results/validation/kinetic_core_b40_prereg.md.
+# ---------------------------------------------------------------------------
+#: SHIPPED by wave B41 (2026-09-11, kinetic_core_b41_ship_rule.json: SHIP). B40 tried the term on BOTH
+#: exits and the Leitzen hold-out rejected the one on k_tdg_mgo (its methylglyoxal row went 1.28x ->
+#: 33x) while keeping the one on k_tdg_fa; B41 ships the formic-acid exit's term alone.
+THREE_DEOXY_EXIT_PH_TERM: bool = True
+#: key -> (exponent, band, source rows)
+THREE_DEOXY_EXIT_PH: Mapping[str, Tuple[float, Tuple[float, float], str]] = {
+    "k_tdg_fa": (0.77, (0.65, 0.89), "Martins 2003 Table 3 k6: 1.9e-3 vs 2.74e-2 (100 C), 4.30e-2 vs 3.04e-1 (120 C), pH 5.5 vs 6.8"),
+}
+#: The declaration B40 made and the hold-out rejected, kept as the record and NOT applied: Martins'
+#: k5 is a lumped "3-DG -> fragments" step, and transferring its pH slope to Kocadagli's amine-free
+#: methylglyoxal route moved Leitzen 2021's methylglyoxal from 1.28x to 33x.
+THREE_DEOXY_EXIT_PH_REJECTED_B40: Mapping[str, Tuple[float, Tuple[float, float], str]] = {
+    "k_tdg_mgo": (0.63, (0.37, 0.92), "Martins 2003 Table 3 k5 at 100 C only: 1.38e-2 vs 9.07e-2; REJECTED by the Leitzen methylglyoxal row in B40"),
+}
+
 
 def ph_factor(ph: Optional[float], exponent: float = PH_EXPONENT_DECADES_PER_UNIT) -> float:
     if ph is None:
@@ -321,6 +344,16 @@ def apply(
         out = _scaled(out, AW_STEPS, m_eff)
     if abs(f - 1.0) > 1e-12:
         out = _scaled(out, PH_STEPS, f)
+        if THREE_DEOXY_EXIT_PH_TERM:
+            ph = getattr(process, "ph", None)
+            for key, (exponent, band, source) in THREE_DEOXY_EXIT_PH.items():
+                if key in out and ph is not None:
+                    fx = ph_factor(ph, exponent)
+                    out = _scaled(out, (key,), fx)
+                    warnings.append(
+                        f"pH TERM ON THE 3-DG EXIT (B40): pH {ph:g} scales {key} by x{fx:.3g} "
+                        f"(10^({exponent} per pH unit); declared band {band[0]}-{band[1]}; {source})."
+                    )
     from .parameters_pyrazine import PYRAZINE_PH_STEPS
 
     if all(key in out for key in PYRAZINE_PH_STEPS):
