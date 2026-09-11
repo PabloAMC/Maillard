@@ -29,7 +29,8 @@
         "10_tree_sugar.png": "8f5570b9794eae9a95cb430ada6b4876e8d1368ed26fa4a565f0ee9d16f3dc62",
         "11_tree_sulfur.png": "2e29f53d4d04016ff2cd1f572e141ad295265a976f64455bebf0ab46f27f8f70",
         "12_tree_acrylamide.png": "fdb088c6b1dde1edb2d4f7fed086d16d00ba98903d3a84683812f1de45fed520",
-        "13_steps_by_status.png": "1a9aec5c905a18c1acf2a63adb3cd790ce25eeee0eef2a3ab787bcaaedc1d1bb"
+        "13_steps_by_status.png": "1a9aec5c905a18c1acf2a63adb3cd790ce25eeee0eef2a3ab787bcaaedc1d1bb",
+        "14_fat_path.png": "bd43ad2abd488aa5ce436b77edec6ce330ff4620b68280e9a7b82bae5b2dedb7"
       }
     },
     "scripts/generators/build_thiol_sink_figures.py": {
@@ -130,8 +131,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "5af1e4312d142627d918603741618c64ee40d494",
-      "short": "5af1e431",
+      "commit": "fac3e8b90ab674279f958d475947ebd6a36738bb",
+      "short": "fac3e8b9",
       "branch": "reactions",
       "dirty": true
     },
@@ -211,7 +212,7 @@
       },
       {
         "path": "scripts/generators/build_reaction_tree.py",
-        "sha256": "6a67c5e9270fb965f6fdf69ffb7e5893d8b0c34c86d7d94c29af3ea557327508"
+        "sha256": "d434e144c547aa9fa68aa05b0c5977f19048220ec0a93ea489b72745779a9e98"
       },
       {
         "path": "scripts/generators/build_story_figures.py",
@@ -336,6 +337,10 @@
       {
         "path": "docs/assets/thiol_sink/13_steps_by_status.png",
         "sha256": "1a9aec5c905a18c1acf2a63adb3cd790ce25eeee0eef2a3ab787bcaaedc1d1bb"
+      },
+      {
+        "path": "docs/assets/thiol_sink/14_fat_path.png",
+        "sha256": "bd43ad2abd488aa5ce436b77edec6ce330ff4620b68280e9a7b82bae5b2dedb7"
       },
       {
         "path": "docs/assets/thiol_sink/14_field_scheme.png",
