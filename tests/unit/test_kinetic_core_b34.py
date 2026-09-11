@@ -62,8 +62,10 @@ def test_the_bundle_cites_the_right_authors_and_says_the_pdf_is_on_disk():
 
 
 @pytest.mark.parametrize("compound,fold", [
-    ("3-deoxyglucosone", 1.11), ("methylglyoxal", 1.28), ("5-Hydroxymethylfurfural (HMF)", 11.93),
-    ("3,4-dideoxyglucosone", 32.43), ("glyoxal", 34.83), ("glucosone", 62.99),
+    # RE-PINNED BY WAVE B41 (2026-09-11): 1.11 -> 1.27, 1.28 -> 1.01, 11.93 -> 9.31, 32.43 -> 6.63. The fed
+    # 3-deoxy triangle and the formic-acid exit's pH term, fitted on pots this bundle is not in.
+    ("3-deoxyglucosone", 1.27), ("methylglyoxal", 1.01), ("5-Hydroxymethylfurfural (HMF)", 9.31),
+    ("3,4-dideoxyglucosone", 6.63), ("glyoxal", 34.83), ("glucosone", 62.99),
 ])
 def test_the_six_observables_score_where_the_prereg_said(compound, fold):
     scores = json.loads(SCORES.read_text())
@@ -82,7 +84,9 @@ def test_the_entry_is_right_and_the_step_after_it_is_not():
     scores = json.loads(SCORES.read_text())
     bench = next(b for b in scores["benchmarks"] if b["benchmark_id"].endswith("Steinhagen2021"))
     f = {c["compound"]: c["fold_error"] for c in bench["compounds"]}
-    assert f["3-deoxyglucosone"] < 1.5 < 10.0 < f["3,4-dideoxyglucosone"]
+    # At B34 the step after the entry was 32x low. B41 (2026-09-11) fitted it on fed pots and it is now 6.6x:
+    # still outside threefold, no longer the deficit this test was written about.
+    assert f["3-deoxyglucosone"] < 1.5 and 3.0 < f["3,4-dideoxyglucosone"] < 10.0
     assert f["methylglyoxal"] < 1.5
     # and the two that are structurally absent in an amine-free pot, with a measured size
     assert f["glucosone"] > 30.0 and f["glyoxal"] > 30.0

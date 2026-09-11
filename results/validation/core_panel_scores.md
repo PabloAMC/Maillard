@@ -41,7 +41,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | PRIMARY | predictive | 2/2 | 1.000 | 6.865 | 0.702 | 1.10 / 0.041 | scale-gap | no | - | 0.27 |
 | pea_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 0/2 | 0.000 | - | - | 2.00 / 0.120 | refused | no | - | not_applicable |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | PRIMARY | predictive | 4/7 | 0.571 | 2.529 | 0.286 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
-| resconi_2023_pbma_beef_identity_benchmark | trust_loop | SECONDARY | predictive | 1/1 | 1.000 | 93.332 | 1.970 | 1.50 / 0.100 | scale-gap | no | - | not_applicable |
+| resconi_2023_pbma_beef_identity_benchmark | trust_loop | SECONDARY | predictive | 1/1 | 1.000 | 93.317 | 1.970 | 1.50 / 0.100 | scale-gap | no | - | not_applicable |
 | soy_isolate_40C_PratapSingh2021 | trust_loop | PRIMARY | predictive | 0/2 | 0.000 | - | - | 2.00 / 0.120 | refused | no | - | not_applicable |
 | thiamine_cys_glucose_120C_Bolton1994 | trust_loop | PRIMARY | predictive | 1/1 | 1.000 | 20.168 | 1.305 | 3.00 / 0.480 | scale-gap | no | - | 2.31 |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 9.149 | 0.878 | 1.50 / 0.100 | scale-gap | no | - | ambiguous |
@@ -78,8 +78,8 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | pea_isolate_uht_140C_Trikusuma2019 | 2-pentylfuran | ppb | 163.000 | 64.442 | 2.529 | yes | no | [0.660, 6.29e+03] | yes | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | nonanal | ppb | 24.000 | 15.606 | 1.538 | yes | yes | [0.160, 1.52e+03] | yes | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | (E,E)-2,4-decadienal | ppb | 46.900 | 75.955 | 1.620 | yes | yes | [0.778, 7.42e+03] | yes | lipid | no |
-| resconi_2023_pbma_beef_identity_benchmark | furfural | ppb | 715.220 | 7.663 | 93.332 | no | no | [1.096, 53.598] | no | sulfur | no |
-| thiamine_cys_glucose_120C_Bolton1994 | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.969 | 20.168 | no | no | [33.738, 1.65e+03] | no | sulfur | no |
+| resconi_2023_pbma_beef_identity_benchmark | furfural | ppb | 715.220 | 7.664 | 93.317 | no | no | [1.096, 53.606] | no | sulfur | no |
+| thiamine_cys_glucose_120C_Bolton1994 | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 20.168 | no | no | [33.738, 1.65e+03] | no | sulfur | no |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | Acrylamide | ppb | 1.86e+03 | 203.194 | 9.149 | no | no | [29.052, 1.42e+03] | no | acrylamide | no |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 6.246 | no | no | [281.109, 1.38e+04] | yes | acrylamide | no |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | DMHF | ppb | 1.15e+03 | 21.841 | 52.799 | no | no | [2.223, 214.535] | no | acrylamide | no |

@@ -4,8 +4,8 @@
     "artifact": "kinetic_core_b28_ship_rule",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "c365533146db787e5d21919e4f912e992f64faac",
-      "short": "c3655331",
+      "commit": "fb0dbd304252d7823d1844d7ddda7486ee6878c5",
+      "short": "fb0dbd30",
       "branch": "reactions",
       "dirty": true
     },

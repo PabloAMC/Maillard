@@ -20,7 +20,8 @@ def test_the_five_steps_run_on_the_trunk_only_and_balance():
     # 2026-09-10: the running sum is kept, and B24b's two steps are added to it. A later wave that
     # appends steps has to change this line, which is the point: the count is a tripwire on the
     # trunk's size, not a description of it.
-    assert len(network.TRUNK_REACTIONS) == len(network.REACTIONS) + 5 + 5 + 5 + 1 + 4 + 4 + 2
+    # B39 (2026-09-11): + 3, the fed 3-deoxy triangle (r_ddg_tdg, r_ddg_dgal, r_dgal_ddg).
+    assert len(network.TRUNK_REACTIONS) == len(network.REACTIONS) + 5 + 5 + 5 + 1 + 4 + 4 + 2 + 3
     # B18 pyrazine 5, B20 glycation 5, B21 glucosone 1, B22 methionine 4, B24 proline 2,
     # B24b 2, B22b 2
     assert not set(network.DICARBONYL_REACTION_KEYS) & set(network.REACTION_KEYS)

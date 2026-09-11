@@ -343,8 +343,11 @@ def test_extrapolation_beyond_the_measured_window_is_flagged(parameters):
         from src.kinetic_core.parameters_glycation import GLYCATION_KEYS
         from src.kinetic_core.parameters_methionine import METHIONINE_KEYS
         from src.kinetic_core.parameters_proline import PROLINE_KEYS
+        # B39-B41 (2026-09-11): the fed triangle's three new steps were measured at 120 C only (Mittelmaier
+        # 2011), so a 100 C run is an extrapolation for them and says so.
+        from src.kinetic_core.parameters_dicarbonyl import FED_3DEOXY_KEYS
         assert line.split(":", 1)[0] in (furanic_keys | set(DICARBONYL_KEYS) | set(GLYCATION_KEYS) | set(AQUEOUS_GLYOXAL_KEYS)
-                                          | set(METHIONINE_KEYS) | set(PROLINE_KEYS)), line
+                                          | set(METHIONINE_KEYS) | set(PROLINE_KEYS) | set(FED_3DEOXY_KEYS)), line
 
 
 # ---------------------------------------------------------------------------
@@ -452,10 +455,15 @@ def test_martins_condition_regression(parameters):
     #
     # Against Martins' own fit rows the Amadori compound's median error rises from 0.035 to
     # 0.093 dex (kinetic_core_b21_prereg.md sec. 6, the unforeseen finding); B1 is not refit.
+    # B41 RE-PINNED (2026-09-11): the fed 3-deoxy triangle (k_tdg_ddg +0.5 dex, a reverse hydration,
+    # an epimer, k_ddg_hmf -0.5 dex) fitted on Mittelmaier 2011's fed pots. On this pH-6.8 pot the
+    # pH term is exactly 1, so what moves is the limb itself:
+    #   TDG 0.5685 -> 0.5520 (-2.9 %)   FA 2.0631 -> 2.0035 (-2.9 %)   Gly 179.52 -> 179.76 (+0.13 %)
+    # -- the 3-DG that now cycles through 3,4-DGE and back instead of leaving as formic acid.
     expected = {
-        "Glc": 125.26, "Fru": 16.966, "Gly": 179.52, "AMA": 9.2833,
-        "TDG": 0.5685, "ODG": 0.10056, "MGO": 2.8471, "FA": 2.0631,
-        "AA": 9.2878,
+        "Glc": 125.242, "Fru": 16.965, "Gly": 179.758, "AMA": 9.2909,
+        "TDG": 0.55201, "ODG": 0.10064, "MGO": 2.8467, "FA": 2.0035,
+        "AA": 9.2915,
     }
     for key, value in expected.items():
         assert end[key] == pytest.approx(value, rel=2e-3), f"{key}: {end[key]}"
@@ -465,8 +473,11 @@ def test_martins_condition_regression(parameters):
     # amine-free methylglyoxal source and r_mgo_mel is the carbon-only channel.
     # B21: the melanoidin carbon at 100 C / 120 min follows the Amadori pool down, 10.1493 -> 8.6194
     # (-15 %); the browning HOLD-OUT (variant B, its own sink) improves, 1.43 -> 1.31 median fold.
-    assert float(run.melanoidin_mmol_L()[-1]) == pytest.approx(8.6194, rel=2e-3)
-    assert float(run.melanoidin_c_over_n()[-1]) == pytest.approx(9.5698, rel=2e-3)
+    # B41 (2026-09-11): 8.6194 -> 8.3683 (-2.9 %) and C/N 9.5698 -> 9.6295 (+0.6 %). The 3-DG that used
+    # to reach the melanoidin through r_tdg_mel now partly cycles through 3,4-DGE and the epimer; the
+    # pool loses a little nitrogen-bearing 3-DG + Gly and its carbon share rises.
+    assert float(run.melanoidin_mmol_L()[-1]) == pytest.approx(8.3683, rel=2e-3)
+    assert float(run.melanoidin_c_over_n()[-1]) == pytest.approx(9.6295, rel=2e-3)
 
 
 def test_melanoidin_c_over_n_starts_at_the_step_9_stoichiometry(parameters):

@@ -29,8 +29,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.955 | 3.174 | 69.381 | 1.24e+03 | yes | 2.593 | yes (headspace) | lipid | predictive |
-| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.663 | 1.483 | 9.626 | 71.213 | no | 1.681 | yes (headspace) | sulfur | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.969 | 48.366 | 95.838 | 214.196 | no | 0.646 | no (extraction) | sulfur | predictive |
+| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.664 | 1.483 | 9.627 | 71.258 | no | 1.682 | yes (headspace) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 48.366 | 95.838 | 214.196 | no | 0.646 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.996 | 199.516 | 565.424 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 1.1e+03 | 1.88e+03 | 2.73e+03 | no | 0.395 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |

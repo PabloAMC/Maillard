@@ -64,7 +64,11 @@ def test_apply_scales_only_the_named_steps():
     from src.kinetic_core.parameters_proline import PROLINE_PH_STEPS
     for key in PROLINE_PH_STEPS:
         assert out[key].k_ref == pytest.approx(base[key].k_ref * pyrazine_ph_factor(5.5))
-    untouched = [k for k in base if k not in tc.AW_STEPS + tc.PH_STEPS + PYRAZINE_PH_STEPS + METHIONINE_PH_STEPS + PROLINE_PH_STEPS]
+    # B41 (2026-09-11): the formic-acid exit from 3-DG carries its own pH term (Martins 2003 k6), declared
+    # in tc.THREE_DEOXY_EXIT_PH; it scales by 10^(exponent * (pH - 6.8)) and nothing else new moves.
+    for key, (exponent, _band, _src) in tc.THREE_DEOXY_EXIT_PH.items():
+        assert out[key].k_ref == pytest.approx(base[key].k_ref * 10 ** (exponent * (5.5 - 6.8)))
+    untouched = [k for k in base if k not in tc.AW_STEPS + tc.PH_STEPS + PYRAZINE_PH_STEPS + METHIONINE_PH_STEPS + PROLINE_PH_STEPS + tuple(tc.THREE_DEOXY_EXIT_PH)]
     assert untouched
     for key in untouched:
         assert out[key] == base[key], key

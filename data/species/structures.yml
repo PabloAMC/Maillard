@@ -27,6 +27,7 @@ species:
   FRAG_C: {kind: lump, note: "unassigned fragment carbon; an accounting pool"}
   INT:   {kind: lump, note: "the source (Martins 2005) leaves the cyclic fructose-dehydration intermediate undetermined"}
   DDG:   {kind: molecule, smiles: "OCC(O)C=CC(=O)C=O", note: "3,4-dideoxyglucosone-3-ene, C6H8O4"}
+  DGAL:  {kind: molecule, smiles: "OCC(O)C(O)CC(=O)C=O", note: "3-deoxygalactosone, the C4 epimer of 3-deoxyglucosone (same connectivity, opposite configuration at C4); B39"}
   HMF:   {kind: molecule, registry_id: hmf}
   AF:    {kind: molecule, smiles: "CC1(O)OC(C)=C(O)C1=O", note: "acetylformoin, 2,4-dihydroxy-2,5-dimethyl-3(2H)-furanone, C6H8O4"}
   DMHF:  {kind: molecule, registry_id: hdmf}

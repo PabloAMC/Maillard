@@ -857,7 +857,13 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
 )
 
 #: The full network: B1's trunk first, then the sulfur block.
-FULL_REACTIONS: Tuple[Reaction, ...] = TRUNK_REACTIONS + SULFUR_REACTIONS
+#: B39-B41 (2026-09-11): the fed 3-deoxy triangle (the reverse hydration and the epimer) is trunk chemistry
+#: on the furanic channel this lane already carries, and its two existing constants (k_tdg_ddg, k_ddg_hmf)
+#: are shared through the operative table -- so the lane composes the three steps too, or its 3-DG limb
+#: would run the fitted constants without the return paths they were fitted with.
+from .network import FED_3DEOXY_REACTIONS as _FED_3DEOXY_REACTIONS
+
+FULL_REACTIONS: Tuple[Reaction, ...] = TRUNK_REACTIONS + _FED_3DEOXY_REACTIONS + SULFUR_REACTIONS
 FULL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in FULL_REACTIONS)
 
 

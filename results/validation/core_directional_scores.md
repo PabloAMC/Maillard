@@ -61,7 +61,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | AW-01 | moisture_aw | independent | HMF | decreasing | **disagree** | trunk | 1.3e+03, 1.45e+03, 636 |  |
 | AW-02 | moisture_aw | independent | Acrylamide | peak | **not_evaluable** | - | - | refused by the engine: REFUSED -- the two arms differ in WATER ACTIVITY (0.30 vs 0.60) and the acrylamide lane's a_w term is measured only inside 0.34-0.99 (De  |
 | CYS-01 | additive_cysteine | independent | FFT | A>B | **agree** | sulfur | 46.9, 0 |  |
-| CYS-02 | additive_cysteine | independent | HMF | A>B | **disagree** | trunk | 636, 982 |  |
+| CYS-02 | additive_cysteine | independent | HMF | A>B | **disagree** | trunk | 636, 668 |  |
 | SCOPE-01 | scope | independent | CEL | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SCOPE-02 | scope | independent | Methional | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MAT-01 | matrix_identity | independent | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -76,7 +76,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | LIP-01 | lipid_lane | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 22.8, 22.8 | identical predictions; the lane has no term for the moved axis |
 | LIP-02 | lipid_lane | fit_system_overlap | Hexanal | increasing | **disagree** | lipid | 22.8, 88.6, 88.6 |  |
 | LIP-03 | lipid_lane | independent | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| SUG-07 | sugar_identity | independent | Furfural | A>B | **agree** | sulfur | 1.42e+03, 401 |  |
+| SUG-07 | sugar_identity | independent | Furfural | A>B | **agree** | sulfur | 1.42e+03, 402 |  |
 | SUG-08 | sugar_identity | independent | MFT | A>B | **agree** | sulfur | 10.1, 0 |  |
 | SUG-09 | sugar_identity | independent | FFT | A>B | **agree** | sulfur | 36.9, 33.5 |  |
 | SUG-10 | sugar_identity | independent | 2,5-Dimethylpyrazine | decreasing | **not_evaluable** | - | - | arm 'D-ribose' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was  |

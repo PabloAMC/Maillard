@@ -335,8 +335,8 @@ def test_core_envelope_coverage_and_widths():
         "headspace": 9, "extraction": 36, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "16 of 44", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "16 of 43", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "17 of 44", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "17 of 43", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

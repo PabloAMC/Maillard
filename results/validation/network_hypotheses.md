@@ -18,7 +18,7 @@
 |---|---|---|---|---|
 | R01_amadori | Glc + Gly | AMA | modelled | r_schiff > r_amadori |
 | R02_schiff_base | Glc + Gly | SB | modelled | r_schiff |
-| R03_enolisation_1_2 | AMA | Gly + TDG | modelled | r_ama_g, r_ama_mgo, r_ama_odg, r_ama_tdg |
+| R03_enolisation_1_2 | AMA | Gly + TDG/DGAL | modelled | r_ama_g, r_ama_mgo, r_ama_odg, r_ama_tdg |
 | R04_enolisation_2_3 | AMA | ODG + Gly | modelled | r_ama_g, r_ama_mgo, r_ama_odg, r_ama_tdg |
 
 ## pentose cysteine (sulfur lane, depth 2)
@@ -102,7 +102,7 @@ Products that are not engine species: `NC(CSC(O)C(O)C(O)C(O)CO)C(=O)O`; `NC(CSSC
 | R02_schiff_base | Asn + Glc | SBA | modelled | a_asn_glc_sb |
 | R17_asparagine_schiff_to_acrylamide | SBA | ACR + NCC(O)C(O)C(O)C(O)CO | modelled | a_sb_int1 > a_int1_acr |
 | R01_amadori | Asn + Glc | NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O | mechanism known |  |
-| R03_enolisation_1_2 | NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O | Asn + TDG | mechanism known |  |
+| R03_enolisation_1_2 | NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O | Asn + TDG/DGAL | mechanism known |  |
 | R04_enolisation_2_3 | NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O | ODG + Asn | mechanism known |  |
 
 Products that are not engine species: `NC(=O)CC(NCC(=O)C(O)C(O)C(O)CO)C(=O)O`; `NCC(O)C(O)C(O)C(O)CO`.

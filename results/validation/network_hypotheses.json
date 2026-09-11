@@ -437,7 +437,7 @@
           ],
           "products": [
             "Gly",
-            "TDG"
+            "TDG/DGAL"
           ],
           "placement": "modelled",
           "engine_reactions": [
@@ -489,7 +489,7 @@
           "smiles": "O=CC(=O)CC(O)C(O)CO",
           "first_depth": 2,
           "kind": "species",
-          "id": "TDG"
+          "id": "DGAL"
         }
       ],
       "summary": {
@@ -1658,7 +1658,7 @@
           ],
           "products": [
             "Asn",
-            "TDG"
+            "TDG/DGAL"
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
@@ -1727,7 +1727,7 @@
           "smiles": "O=CC(=O)CC(O)C(O)CO",
           "first_depth": 2,
           "kind": "species",
-          "id": "TDG"
+          "id": "DGAL"
         }
       ],
       "summary": {

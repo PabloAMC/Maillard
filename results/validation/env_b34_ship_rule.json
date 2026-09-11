@@ -4,8 +4,8 @@
     "artifact": "env_b34_ship_rule",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "c365533146db787e5d21919e4f912e992f64faac",
-      "short": "c3655331",
+      "commit": "fb0dbd304252d7823d1844d7ddda7486ee6878c5",
+      "short": "fb0dbd30",
       "branch": "reactions",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "93f4a7111d2810173d3ae2746464076d2ff2d1d019e49f2eaa5dc8a4e1199214"
+        "sha256": "4f9d9381aa2370cb448364c2fa8924eca8dfc7b4fdf0987c7d0834ad9f2c5e1e"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",
@@ -86,7 +86,7 @@
   "T2": {
     "noise_floor_from_two_seeds": {
       "n": 45,
-      "median_rel": 0.05438342829510866,
+      "median_rel": 0.05438342692767772,
       "p95_rel": 0.12277025801847964,
       "max_rel": 0.19205054983053316
     },
