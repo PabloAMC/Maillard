@@ -342,15 +342,23 @@ published article prints only odour-activity ratios. The other holds a plant pro
 four temperatures with an unheated blank; the published article prints only the class totals. In both
 cases the experiment has been done and the numbers exist.
 
-The fourth is the cheapest thing on this entire page. The wet-protein hexanal series described above —
-seven temperatures, two holding times, real concentration units, the exact measurement the fat path's
-open question asks for — is unusable for one reason only: its eleven numbers are drawn as bars and
-printed nowhere. They are in that article's first supplementary table, alongside a heating-and-cooling
-profile the fit would also need. **Retrieving one file would turn the single most-wanted measurement
-on this list from an experiment into an afternoon's work.** It would still need care — there is no
-unheated baseline and no measurable fat in the system, so the result would carry a wide band and would
-not outrank the two measurements already on disk — but it would put a third laboratory on the one axis
-where this model currently interpolates between two that disagree.
+The fourth is the cheapest thing on this entire page, and it is an **email rather than a download.**
+The wet-protein hexanal series described above — seven temperatures, two holding times, real
+concentration units, the exact measurement the fat path's open question asks for — is unusable for one
+reason only: its eleven numbers are drawn as bars and printed nowhere. The experiment has been done.
+Ask its corresponding author for the means and standard deviations behind that figure, and for an
+unheated control, and **the single most-wanted measurement on this list stops being an experiment.**
+
+Fetch the supplementary file in the same breath, because two things a fit would need are in it: the
+calibration curves, and the heating-and-cooling profile that says how much thermal load each nominal
+holding time really carried. But do not expect the file alone to be enough. This page briefly said it
+would be, on the assumption that the first supplementary table held the concentrations; the article
+says that table is an identification list of forty-eight compounds, and the claim is withdrawn.
+
+Even with every number in hand the result would need care, and would not outrank the two measurements
+already on disk: there is no unheated baseline, and the protein contains no measurable fat, so the
+substrate is unquantified. What it would buy is a third laboratory on the one axis where this model
+currently interpolates between two that disagree.
 
 ---
 

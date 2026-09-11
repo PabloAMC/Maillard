@@ -105,8 +105,15 @@ replaces:
   can be read as a total. Until it has one, those rows measure headspace, and the model predicts
   total. Recorded as a **declared measurement-channel mismatch**, not corrected.
 - **For the hexanal barrier itself**, `jansson2020` is entered as the one item on the list that a
-  download could close rather than a bench: its Supplementary Table S1 holds the eleven numeric
-  (T, t) hexanal cells whose absence is the only reason the paper fails.
+  request could close rather than a bench: the eleven numeric (T, t) hexanal cells behind its Fig. 4
+  are the only reason the paper fails, and the experiment has already been run.
+  **CORRECTED 2026-09-11, the same day.** This clause first said a *download* would close it, on the
+  assumption that Supplementary Table S1 held those cells. The article says otherwise: S1 is an
+  identification list of 48 compounds, S2 is the calibration curves, and Fig. S1 is the thermal
+  profile. The supplementary file is still worth fetching, because S2 and Fig. S1 are both needed for
+  a fit and neither is on disk, but the decisive numbers most likely require an author request
+  (Marianne N. Lund, mnl@food.ku.dk). Recorded here rather than edited away, because the claim was
+  made in this file before it was checked.
 
 ## 6. Outcome (written 2026-09-11, after the probes)
 

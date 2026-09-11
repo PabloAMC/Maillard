@@ -132,8 +132,23 @@ and temperature as factors, least-square means at p < 0.05, and sensR for the tr
 temperature" — not a parameterisation.
 
 **Precisely what is needed:** the numeric hexanal means ± SD for the eleven (T, t) cells plus an
-unheated control, which should be in **Supplementary Table S1**; obtainable from the DOI's
-supplementary material or from the corresponding author. Even with them, reasons 2–6 above mean any
+unheated control.
+
+**CORRECTED 2026-09-11, same day, before anyone acted on it.** An earlier draft of this dossier said
+those numbers "should be in Supplementary Table S1". **That was an inference and it is very probably
+wrong.** The paper says what each supplementary item contains, and none of them is a concentration
+table: *"A total of 48 volatile compounds were identified in the heated WPI samples using DHS GC-MS
+(Supplementary material Table S1)"* — an **identification** list; *"Standard curves were prepared for
+selected volatile compounds (Supplementary material Table S2)"* — **calibration curves**; and
+Fig. S1 is the **heating-and-cooling profile**. Nothing in the article states that any supplementary
+item carries the per-treatment hexanal values.
+
+So the retrieval is worth doing but is **not sufficient on its own**: S2 and Fig. S1 are both needed
+for a fit and neither is on disk, while the eleven numbers behind Fig. 4 most likely exist only in the
+authors' own records. **The reliable route is a request to the corresponding author**
+(Marianne N. Lund, mnl@food.ku.dk), asking for the numeric means and standard deviations behind
+Fig. 4 together with an unheated control. Anyone pursuing this should fetch the supplementary file
+too, but should not expect it to close the gap by itself. Even with them, reasons 2–6 above mean any
 resulting barrier must carry a wide band and be treated as a weak-dependence data point, not as an
 equal-weight competitor to the two measurements already on disk. This is entered in `EXPERIMENTS.md`
 as a **retrieval** item, not a measurement item — the one item on that list someone could close by
