@@ -266,6 +266,7 @@
 | Zhang et al. 2026 | [10.1016/j.foodchem.2026.148681](https://doi.org/10.1016/j.foodchem.2026.148681) |  |  |  |  | THE HEADLINE CROSS-CHECK: k18's Eₐ (118.0) is four times the directly measured browning Eₐ (28.3 and 30.6 kJ mol⁻¹ from two other labs). A fifth-order rate law absorbs the temperature dependence of … | [zhang2026_extraction.md](../../data/lit/extraction_dossiers/zhang2026_extraction.md) |
 | Zhang, Guo, Liu & Chang 2012 | [10.1021/jf3016199](https://doi.org/10.1021/jf3016199) |  |  |  |  |  | [zhang2012_extraction.md](../../data/lit/extraction_dossiers/zhang2012_extraction.md) |
 | Zhang, Wang & Cao 2023 | [10.1021/acs.jafc.3c02450](https://doi.org/10.1021/acs.jafc.3c02450) |  |  |  |  |  | [zhang2023_extraction.md](../../data/lit/extraction_dossiers/zhang2023_extraction.md) |
+| Zhao, Ding, Yao, Cao, Pan & Kong (2018), Front. Microbiol. 9:1872 | [10.3389/fmicb.2018.01872](https://doi.org/10.3389/fmicb.2018.01872) | 1 |  |  |  |  | no dossier (registry entry only) |
 | Zheng 2022 | [10.3390/nu14071364](https://doi.org/10.3390/nu14071364) |  |  |  |  |  | [zheng2022_extraction.md](../../data/lit/extraction_dossiers/zheng2022_extraction.md) |
 | Zheng 2023 | [10.1016/j.fochx.2023.100920](https://doi.org/10.1016/j.fochx.2023.100920) |  |  |  |  |  | [zheng2023_extraction.md](../../data/lit/extraction_dossiers/zheng2023_extraction.md) |
 | Zhou & Boatright 2000 |  |  |  |  |  |  | [zhou2000_extraction.md](../../data/lit/extraction_dossiers/zhou2000_extraction.md) |

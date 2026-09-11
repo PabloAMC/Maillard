@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "65504a77a585c46623fa9e8c983b341d1b964e62",
-      "short": "65504a77",
+      "commit": "6011a6ed3cc9ab633dc5613baa903b7791a38197",
+      "short": "6011a6ed",
       "branch": "reactions",
       "dirty": true
     },
@@ -139,7 +139,7 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "7f27df647cd1d13d11a7b080f7fa4212111f80c9b09680e942a19f268d78fdca"
+        "sha256": "906aa8d2a9ee9b515cad87875abfc6b3511313bb196c7ed7353f949eb0476c11"
       },
       {
         "path": "data/lit/reaction_rules.yml",
@@ -239,7 +239,7 @@
       },
       {
         "path": "src/kinetic_core/parameters.py",
-        "sha256": "a12e3aa94144d3e6b557378f7a432ec0ca11ac3c12423337eb1e58f48e7217fa"
+        "sha256": "5a4822241642e22a7a368ef7bbc3c3d6061bdd6b4ef6b314b8f6103505d2ebc9"
       },
       {
         "path": "src/kinetic_core/parameters_acrylamide.py",

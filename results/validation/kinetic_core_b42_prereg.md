@@ -53,21 +53,11 @@ the 3-DG probe was run both ways and the lane changes the half-life by 2.5×, no
 
 **What this says, in order of certainty.**
 
-1. **B21's aqueous glucosone → glyoxal barrier cannot be near zero.** Hamzalioglu's 0.33 /min at
-   120 °C and Gobert's 8-hour half-life at 50 °C are two temperatures on the same step; a barrier
-   that connects them is of the order of 100 kJ/mol, not 4. The model's glyoxal at 50 °C is three
-   decades too high because the constant fitted at 110–140 °C was carried down 70 °C flat. This is
-   the second time a barrier declared "consistent with zero" has failed a low-temperature hold-out
-   (the glass `k_ddg_hmf` was the first, in B41). Next wave: `k_g_go`'s barrier from the two
-   temperatures now on disk, with B21's own glyoxal rows and the pyrazine total as the hold-outs.
-2. **The 3-DG pool's lifetime is still too short, now at 50 °C by 30–80×,** after B41 fixed its
-   120 °C behaviour on fed pots. The exit that dominates at 50 °C is Martins' formic-acid step at
-   30 kJ/mol, which the parameter table has flagged since B1 as conflicting with Knol 2010's
-   84 ± 14. A barrier of 84 would slow that exit about 15× more between 100 and 50 °C. Next wave:
-   Knol's barrier on the formic-acid exit, judged on the Martins fit rows (at the 100 °C reference,
-   unaffected) and on Leitzen and the fed pots.
-3. **Zamora 2015 is a source, not a sink.** 2,4-decadienal breaks to hexanal (11.5 %) with a 21 kJ/mol
-   barrier and a half-life of tens of minutes at 120–200 °C. A candidate lipid-lane step; the hexanal
-   loss the sixteen papers showed remains without a law on disk.
+   84 would slow that exit about 15× more between 100 and 50 °C. **B44 (same day) then found a
+   THIRD reading already on disk**: Yu et al. 2018 print 43.9 ± 10.3 kJ/mol for the same step in
+   a glucose + glycine pot at 70–90 °C — but at pH 10. So the readings are 30 (operative,
+   pH 6.8), 43.9 (pH 10) and 84; the two lowest overlap and Knol's touches neither. The next
+   wave is therefore not 'adopt Knol' but **fit this barrier on the fed pots**, with all three
+   printed values as the prior band and Gobert's 50 °C half-life as the hold-out.
 
 **Nothing moved.** No constant, no artifact but this record and the two dossiers.

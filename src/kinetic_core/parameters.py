@@ -272,7 +272,8 @@ MARTINS_M4: Mapping[str, KineticParameter] = {
     "k_tdg_fa": _martins(
         "k_tdg_fa", "3-deoxyglucosone -> formic acid (+ unmeasured C5 residue)",
         3.45e-2, 30.0, 8.5, 1, 5, k_ci=6.4e-3,
-        flags=("hpd_transcribed_from_table2_2026_09_04", "ea_conflicts_with_knol_2010"),
+        flags=("hpd_transcribed_from_table2_2026_09_04", "ea_conflicts_with_knol_2010",
+               "three_laboratories_disagree_b44"),
         note=(
             "Ea 30 +/- 9 kJ/mol is the lowest barrier in the Martins set and it "
             "CONFLICTS with Knol 2010 T2's formic-acid formation Ea of 84 +/- 14 "
@@ -280,7 +281,19 @@ MARTINS_M4: Mapping[str, KineticParameter] = {
             "2). The intervals do not overlap. Martins' value is operative here "
             "because it was measured on this system in this temperature window; the "
             "Knol value is carried in CROSS_LAB_COMPARATORS and the conflict is "
-            "reported, not averaged."
+            "reported, not averaged. "
+            "B44 (2026-09-11): A THIRD LABORATORY IS ON DISK AND THIS NOTE DID NOT "
+            "CITE IT. Yu, Seow, Ong & Zhou 2018 (Food Chem. 268:2, 10.1016/j.foodchem."
+            "2018.06.108; yu2018_extraction.md Table 1, step 5) measure the same "
+            "transformation -- 3-DG -> formic acid, in a glucose + glycine pot -- and "
+            "print Ea = 43.9 +/- 10.3 kJ/mol thermal (29.1 +/- 5.2 with ultrasound), "
+            "at 70-90 C and pH 10. So the three readings are 30, 43.9 and 84, and the "
+            "two lowest overlap inside their intervals while Knol's does not touch "
+            "either. Yu's pot is at pH 10, far outside this module's measured pH "
+            "window of 5.5-6.8, so it is NOT operative and NOT averaged in; it is "
+            "recorded because a two-way conflict that is really a three-way one "
+            "should say so, and because wave B42 found this exit's barrier is what "
+            "makes the 3-deoxyglucosone pool too short-lived at 50 C."
         )),
     "k_ama_mgo": _martins(
         "k_ama_mgo", "Amadori (DFG) -> methylglyoxal + Gly (+ unmeasured C3 residue)",
@@ -491,6 +504,24 @@ def with_fitted_values(
 # because their transfer is not licensed. They are reported by the fit report
 # so the conflicts are visible.
 CROSS_LAB_COMPARATORS: Tuple[Dict[str, Any], ...] = (
+    {
+        "quantity": "Ea, 3-deoxyglucosone -> formic acid",
+        "value_kj_mol": 43.9,
+        "ci95_kj_mol": 10.3,
+        "source_anchor": "Yu, Seow, Ong & Zhou 2018, Food Chem. 268:2, Table 1 step 5 (thermal arm; the ultrasonic arm prints 29.1 +/- 5.2)",
+        "dossier_anchor": "yu2018_extraction.md Table 1",
+        "conditions": "aqueous glucose + glycine, 70-90 C, pH 10, multiresponse fit",
+        "ph_of_measurement": 10.0,
+        "declared_role": "COMPARATOR ONLY -- never read by any fit",
+        "operative": False,
+        "why_not_operative": (
+            "pH 10 is far outside this module's measured pH window (5.5-6.8) and outside every pot "
+            "the model scores (pH 3-8). B44 records it because the operative value (Martins, 30 +/- 9) "
+            "and the standing comparator (Knol 2010, 84 +/- 14) do not overlap, and this third "
+            "measurement overlaps the first while excluding the second: the disagreement is real and "
+            "is not two-sided. No value is averaged and nothing moves."
+        ),
+    },
     {
         "quantity": "Ea, sugar isomerisation",
         "value_kj_mol": 61.0,
