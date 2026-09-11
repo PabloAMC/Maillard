@@ -205,6 +205,9 @@ def test_the_untracked_list_is_pinned_so_nothing_joins_silently():
     assert set(PH.UNTRACKED_TITRATABLE) == {
         "H2S", "Gly", "SB", "AMA", "MEL_N", "THI", "MFT", "FFT", "MESH",
         "AKG", "AKM",   # B18 (2026-09-08): the trunk-only Strecker aminoketones, same gap as Gly
+        "LYSP", "FLP", "CML", "CEL",   # B20 (2026-09-09): the glycation arm, zero without a protein loading
+        "MET", "MSH",                  # B22 (2026-09-09): the methionine chain
+        "PRO", "PYRL", "AP",           # B24 (2026-09-09): proline's odorant
     }
     for key, reason in PH.UNTRACKED_TITRATABLE.items():
         assert len(reason) > 60, f"{key}: a gap needs a stated reason"
@@ -279,15 +282,25 @@ def test_carbon_nitrogen_and_sulfur_still_balance_everywhere():
 
 BUNDLE_BASELINES = {
     # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
+    # RE-BASELINED BY WAVE B35 (2026-09-11), and the guard was RIGHT to fire: not a condition
+    # completion. Bi 2020 Table 4 prints compounds this bundle never scored, and they were added
+    # (pre-registered: results/validation/kinetic_core_b35_prereg.md). Previous: 7abdfc96d16b97c3366512d6183fd1d2d677220dbc5e1d460b334caeec135f37
     "external_validation_bi_2020_raw_pea_hexanal":
-        "7abdfc96d16b97c3366512d6183fd1d2d677220dbc5e1d460b334caeec135f37",
+        "380be224a88d1cf6b6159b32b6d2eeb4e24d1967e62c3678f66e9fabbd55ae3c",
     # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
+    # RE-BASELINED BY WAVE B35 (2026-09-11), and the guard was RIGHT to fire: not a condition
+    # completion. Bi 2020 Table 4 prints compounds this bundle never scored, and they were added
+    # (pre-registered: results/validation/kinetic_core_b35_prereg.md). Previous: 201752690e3702ac2d87ab3d3380c1d7360408e160213b48cdfe0835d36ac198
     "external_validation_bi_2020_roasted_pea_hexanal":
-        "201752690e3702ac2d87ab3d3380c1d7360408e160213b48cdfe0835d36ac198",
+        "430c4423a31594c63e3b7a579980f4fbfc82fd8256ca6453ea75e3e1b8548e8a",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-03: content_verification block from the PMC full text added
+    # RE-BASELINED BY WAVE B36 (2026-09-11), and the guard was RIGHT to fire: not a condition
+    # completion. The PDF arrived and Table 2 shows the scored nonanal (72.66) was the HMPE-20 min
+    # column; the control column reads 74.37 +/- 0.11 (pre-registered:
+    # results/validation/kinetic_core_b36_prereg.md). Previous: 53edcdb681c3c04ab8b8e4f384cee5b686f040bdbdd28dc914e3131e2295a593
     "external_validation_li_2026_spi_wg_hme_control":
-        "53edcdb681c3c04ab8b8e4f384cee5b686f040bdbdd28dc914e3131e2295a593",
+        "d97d33f09b775b73cf5f5ba27b29fb80f6069cd0a7e93ba4625f899d4183a1ce",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-04: content_verification block from the full text added
     "external_validation_liu_2023_ppi_offnote_baseline":
@@ -304,10 +317,22 @@ BUNDLE_BASELINES = {
         "b9adc2ffe8be995795fc816cc01823b53a5bb4d64876b64377ed45da9b6db532",
     "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021":
         "531bb130e00c5aafe789a2d2e47867924a894df0cc086eaa91a8ed7eb4c8bc3d",
+    # RE-BASELINED BY WAVE B37/B38 (2026-09-11): the precursor provenance note gained a correction --
+    # Knol 2005 is on disk and its dossier confirms the 0.2 M; no measured value moved. Previous: 974846cfc0fa87780e208fbc882310c41efcd1caa1d15fc4ae527f648edd204b
     "mp_holdout_glucose_asparagine_180C_Ye2024":
-        "974846cfc0fa87780e208fbc882310c41efcd1caa1d15fc4ae527f648edd204b",
+        "ddf9f26fb91e7d03f2207e501cb15f8850e2b2990c4da0957e78a25764859d34",
+    # RE-BASELINED BY WAVE B34 (2026-09-11), and this guard was RIGHT to fire: the change is NOT a
+    # condition-record completion, so the helper below is deliberately not widened to hide it.
+    # What moved, all of it pre-registered in results/validation/kinetic_core_b34_prereg.md:
+    #   * source_metadata.citation -- the authors are Leitzen et al., not "Steinhagen"; the DOI and
+    #     title were always right and the benchmark_id is deliberately NOT renamed.
+    #   * holdout_targets -- FIVE observables added. The paper measures six species the trunk
+    #     carries in this pot and the bundle scored one. They are end-of-cook levels in a declared
+    #     hold-out: they VALIDATE and may never be fitted, and the hold-out gate still passes.
+    # The existing 5-HMF target is byte-identical, which the wave's T1 asserts separately.
+    # Previous baseline: fd26c70a0d0020ebbe1fca8dfd63a8cd2668ac008c7aa35ea8e4b7bfc98b2f81
     "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021":
-        "fd26c70a0d0020ebbe1fca8dfd63a8cd2668ac008c7aa35ea8e4b7bfc98b2f81",
+        "fc15e012f6a5cd03f486c6fa3009c2cc50c7e3b43f53bc48a98bd15b531e99d9",
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3":
         "0d18247402d397ef1c35a328d80886b111d6fe42ac12454e0847a82b1cead79e",
     "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7":
@@ -412,18 +437,38 @@ def test_a_named_buffer_carries_a_molarity_and_an_unknown_never_does():
             assert block["concentration_M"] > 0.0, key
 
 
+def test_the_buffer_completion_script_is_current():
+    """
+    Added by wave B36 (2026-09-11), after running the script regressed seven bundles whose
+    buffer blocks had been edited in place by B34, B35 and the Yiltirak reading. The vessel
+    script has had this guard since R1; the buffer script now has it too.
+    """
+    import subprocess
+    import sys
+    done = subprocess.run(
+        [sys.executable, "scripts/generators/complete_benchmark_buffer_fields.py", "--check"],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert done.returncode == 0, done.stderr + done.stdout
+
+
 def test_an_unknown_buffer_must_say_the_source_is_not_available():
     """
     THE RULE AGAINST GUESSING. `buffer_unknown` is only legitimate where the
     evidence is absent, and the note has to say so in those words -- otherwise
     it is indistinguishable from laziness, and worse, a plausible guess could
     be relabelled as unknown to dodge scrutiny.
+
+    Amended by wave B36 (2026-09-11): the evidence is absent in two different
+    ways -- the paper is not on disk, or the paper is on disk and does not
+    state the medium. Both are legitimate and the note must say WHICH.
     """
     for key, block in _buffer_blocks():
         if block["species"] != "buffer_unknown":
             continue
         assert block["provenance_class"] == "unknown", key
-        assert "NOT ON DISK" in block["provenance_note"].upper(), key
+        note = block["provenance_note"].upper()
+        assert "NOT ON DISK" in note or "DOES NOT STATE" in note, key
 
 
 def test_a_positive_no_buffer_finding_is_distinct_from_unknown():

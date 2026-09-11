@@ -1021,7 +1021,19 @@ MEASURED_SULFUR: Mapping[str, SulfurParameter] = {
             "'THE CROSS-VALIDATION' block; k1_kinetic_parameters.md secs. 1a, 1c; "
             "hofmann2002_extraction.md (full text read 2026-09-04: Table 2 gives "
             "9.8e-4 /s exactly, Fig. 6 supports 9.4e-4 within the read-off, "
-            "disulfide <6 ug of 400 ug; the model reactions ran at pH 6.0)"
+            "disulfide <6 ug of 400 ug; the model reactions ran at pH 6.0). "
+            "CORRECTION 2026-09-09, hofmann2001_extraction.md, written when the PDF was read as a "
+            "paper for the first time: THE SOURCE PRINTS NO RATE CONSTANT, NO ORDER AND NO BARRIER. "
+            "The 9.8e-4 /s is DERIVED from Table 2's '17 % (15-19) remaining in 30 min' on a "
+            "first-order reading, which is sound arithmetic on a measured conversion but is not a "
+            "constant the authors state. The same dossier measures the melanoidin's thiol-binding "
+            "CAPACITY at >= 0.028 mmol/g (400 ug of a 500 ug charge on 125 mg), about 320x below the "
+            "8-10 mmol/g site density this recast divides by; charlesbernard2005_extraction.md shows "
+            "that density is a saturating hydroxylamine dose above the stoichiometric ceiling, not a "
+            "titre. The PRODUCT k2 x [E] is what was measured and is unchanged, so no shipped answer "
+            "moves; what the pair means is that a pot charging MELE from a real matrix should charge "
+            "it far lower and carry a correspondingly larger k2, and that the pool the B17 variant (a) "
+            "sink was built on could not deplete. See tasks/data_restructure_plan.md, AUDIT-FINDINGS."
         ),
         conditions=_THIOETHER_CONDITIONS,
         ph=5.6,
@@ -1193,7 +1205,18 @@ THIOL_CHANNELS: Tuple[Dict[str, Any], ...] = (
         "channel": "acid_catalysed_C5_oligomerisation",
         "reactions": ("ch_oligomer_mft", "ch_oligomer_fft"),
         "dominant_at_c": (50.0, 50.0),
-        "order": "ZERO in thiol (59% of initial per DAY for MFT, 28% for FFT)",
+        "order": (
+            "REPORTED as zero in thiol (59 % of initial per DAY for MFT, 28 % for FFT), and "
+            "CORRECTED 2026-09-09: that is a WITHIN-RUN reading of a linear decay, and it does "
+            "not survive the paper's own comparison ACROSS runs. The process-flavouring pot holds "
+            "the thiols at about 5 uM and loses 59 %/day, i.e. about 2.9 uM/day; the reconstituted "
+            "pots hold 50 uM and lose over 90 %/day, i.e. over 45 uM/day, and 69 %/day even with "
+            "150 mM cysteine added, i.e. 34.5 uM/day. A tenfold larger pool losing at least "
+            "fifteen times more per day is FIRST order, not zero order -- a capacity-limited drain "
+            "would have given the same uM/day in both. On a fractional basis the two agree within "
+            "17 %. The paper prefers a different reading, an anti-oxidative matrix effect worth "
+            "about 10.5x, and both readings are live; the arithmetic above is this repository's. "
+            "Nothing downstream changes, because the channel has no rate at all -- see role."),
         "parameter": "NONE -- see NO_MEASURED_RATE",
         "what_excludes_the_neighbour": (
             "air ~ argon (so it is NOT oxidative), and the MFT mass balance "
@@ -1431,9 +1454,16 @@ ALKALINE_PRIORS: Tuple[Dict[str, Any], ...] = (
     {
         "quantity": "Ea, norfuraneol (M-2) net accumulation",
         "value_set_kj_mol": [121.1, 122.3, 104.9],
-        "ci95_kj_mol": [8.1, 19.5, 8.9],
-        "source_anchor": "Bornhorst et al. 2017b, LWT, Table 2 (1_R0.5_L / 1_R1_L / 2_R2_L)",
-        "dossier_anchor": "k3_final_parameter_inventory.md sec. A.3.6(i)",
+        # CORRECTED 2026-09-09 (bornhorst2017b_extraction.md, written when the PDF was read for the
+        # first time): these three dispersions are the paper's STANDARD ERRORS, not 95 % intervals.
+        # On n = 3 a 95 % interval is about four times the standard error, so the old key understated
+        # the uncertainty by roughly that factor. The key is renamed rather than rescaled: the paper
+        # prints standard errors and nothing else, and inventing an interval from them would be
+        # arithmetic the source does not license. These priors are carried, not operative.
+        "se_kj_mol": [8.1, 19.5, 8.9],
+        # ...and they are in Table 1 of that paper, not Table 2.
+        "source_anchor": "Bornhorst et al. 2017b, LWT, Table 1 (1_R0.5_L / 1_R1_L / 2_R2_L)",
+        "dossier_anchor": "k3_final_parameter_inventory.md sec. A.3.6(i); bornhorst2017b_extraction.md",
         "conditions": (
             "mashed-potato model gel with gellan gum and CaCl2, 80/90/100 C, "
             "come-up time 1.75 min excluded, pH 8.4-9.5"
@@ -1652,6 +1682,100 @@ def mele_site_parameters(k_mele_site: float = 0.0, ea_kj_mol: Optional[float] = 
 
 MEASURED_SULFUR = {**MEASURED_SULFUR, **mele_site_parameters()}
 
+#: B25 (2026-09-09): the thiols' irreversible addition to the deoxypentosones. log10 k_add at 145 C and its
+#: barrier are both fitted; the bands are wide because nothing on disk measures a thiol-Michael step on an
+#: osone (the matrix layer's aldehyde brackets carry 15-30 kJ/mol; Stack 2018's thiol-quinone forward step 10.8).
+THIOL_ADDITION_BOUNDS_LOG10K: Tuple[float, float] = (-6.0, 0.0)
+THIOL_ADDITION_BOUNDS_EA: Tuple[float, float] = (10.0, 120.0)
+THIOL_ADDITION_DEFAULT_EA_KJ_MOL: float = 40.0
+
+
+def thiol_addition_parameters(k_add: float = 0.0, ea_kj_mol: Optional[float] = None) -> Dict[str, SulfurParameter]:
+    """
+    The B25 addition constant as a SulfurParameter (shared by the four ``ch_add_*`` steps). The DEFAULT is
+    zero: the steps carry no flux and every wave before B25 reproduces bit for bit. Pre-registration:
+    kinetic_core_b25_prereg.md sec. 2.
+    """
+    return {
+        "k_add": _sulfur_parameter(
+            "k_add", "thiol (MFT / FFT) + deoxypentosone (DPO / TDP) -> irreversible adduct (thiol-Michael; net)", 2,
+            k_ref=float(k_add), ea=(THIOL_ADDITION_DEFAULT_EA_KJ_MOL if ea_kj_mol is None else float(ea_kj_mol)),
+            evidence_class="derived_from_fit_data",
+            source_anchor=("B25 (kinetic_core_b25_prereg.md sec. 2): the third sink structure, after B17's reversible disulfide and "
+                           "saturable thioether were refused; the lipid papers' quench (Farmer 1990, Whitfield 1988: the thiols "
+                           "halved by unsaturated-carbonyl electrophiles) as the motivating observation"),
+            dossier_anchor=("results/validation/kinetic_core_b17_prereg.md sec. 6b; farmer1990_extraction.md; whitfield1988_extraction.md; "
+                            "schieberle2000_extraction.md (the 100 C reference pot the first-order sink cannot follow)"),
+            conditions="aqueous, pH 4.5-7, 100-145 C; irreversible; the adduct joins the terminal oligomer pool",
+            ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_addition", flags=("b25_thiol_addition", "fitted_here", "no_literature_value", "barrier_fitted"),
+            note="Zero until a B25 report supplies it.",
+        ),
+    }
+
+
+MEASURED_SULFUR = {**MEASURED_SULFUR, **thiol_addition_parameters()}
+
+
+# ---------------------------------------------------------------------------
+# B27 (2026-09-11): the dicarbonyl redox couple -- oxidant as a co-product of the mercaptoketone flux
+# ---------------------------------------------------------------------------
+#: log10 of phi, the fraction of mercaptoketone-forming events that deliver one oxidant equivalent.
+#: The CEILING IS PHYSICAL: one dicarbonyl reduction is one disulfide, so phi <= 1. A fit that pins phi
+#: at 0 (log10 = 0) is asking the mercaptoketone flux for more oxidant than it can supply, and the
+#: pre-registration (kinetic_core_b27_prereg.md sec. 10) declares that evidence AGAINST the structure.
+DICARBONYL_REDOX_BOUNDS_LOG10_YIELD: Tuple[float, float] = (-4.0, 0.0)
+
+
+def dicarbonyl_redox_parameters(k_redox: float = 0.0, ea_kj_mol: Optional[float] = None) -> Dict[str, SulfurParameter]:
+    """
+    The B27 redox branch of ``r_nf_mp3p`` as a SulfurParameter (``sulfur.py ch_redox_mp3p``). Its constant is
+    NOT free: it is ``phi x k_nf_mp3p`` with ``r_nf_mp3p`` at ``(1 - phi) x k_nf_mp3p`` (see
+    ``apply_dicarbonyl_redox``), so the DEFAULT here is the inert zero and every wave before B27 reproduces
+    bit for bit. Pre-registration: kinetic_core_b27_prereg.md sec. 3 and sec. 10.
+    """
+    return {
+        "k_redox_mp3p": _sulfur_parameter(
+            "k_redox_mp3p", "norfuraneol + H2S -> 2-mercapto-3-pentanone + one oxidant equivalent (the redox branch)", 2,
+            k_ref=float(k_redox), ea=ea_kj_mol,
+            evidence_class="derived_from_fit_data",
+            source_anchor=("Whitfield & Mottram 1999 J. Agric. Food Chem. 47:1626, p. 1631 and Figure 6 ('Proposed redox "
+                           "reaction between thiols and alpha-dicarbonyl compounds'): aerial oxidation is unfavourable at these "
+                           "H2S levels, and the dicarbonyl reduced to a hydroxyalkanone on the way to the mercaptoketone is the "
+                           "redox system that makes the disulfides"),
+            dossier_anchor=("whitfield1999_extraction.md; results/validation/kinetic_core_b27_prereg.md sec. 1, 3, 9, 10; "
+                            "luo2024_extraction.md sec. 2 -- B43 (2026-09-11) CORROBORATION OF THE STRUCTURE ONLY: a review "
+                            "states the general rule verbatim, 'The anaerobic oxidation of thiols mainly involves dicarbonyl "
+                            "compounds as oxidants ... carbonyl groups are reduced to hydroxyl groups'. The arrow is drawn by "
+                            "a second, independent source; the RATE is still unmeasured and B27's refusal is unaltered, "
+                            "because that wave was gated on the size of the flux and not on whether the step exists"),
+            conditions="aqueous, pH 4.5-7, 100-145 C; the branch shares r_nf_mp3p's barrier and neutral-H2S pH factor",
+            ph=4.5, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_redox_yield", ph_factor_kind="neutral_h2s",
+            flags=("b27_dicarbonyl_redox", "fitted_here", "no_literature_value", "barrier_is_k_nf_mp3p", "fit_cannot_move_this_barrier"),
+            note="Zero until a B27 report supplies phi; the constant is phi x k_nf_mp3p, never fitted on its own.",
+        ),
+    }
+
+
+def apply_dicarbonyl_redox(parameters: Dict[str, SulfurParameter], log10_yield: float) -> Dict[str, SulfurParameter]:
+    """
+    Install phi = 10**log10_yield on an assembled parameter set, IN PLACE and returned: ``r_nf_mp3p`` at
+    ``(1 - phi) k`` and ``ch_redox_mp3p`` at ``phi k``, both with ``k_nf_mp3p``'s barrier, so the total
+    mercaptoketone flux is exactly what it was for every phi.
+    """
+    phi = 10.0 ** float(log10_yield)
+    if not 0.0 <= phi <= 1.0:
+        raise ValueError(f"the redox yield is a fraction; got phi = {phi!r}")
+    base = parameters["k_nf_mp3p"]
+    k = float(base.k_ref)
+    parameters["k_nf_mp3p"] = replace(base, k_ref=(1.0 - phi) * k)
+    parameters.update(dicarbonyl_redox_parameters(k_redox=phi * k, ea_kj_mol=base.ea_kj_mol))
+    return parameters
+
+
+MEASURED_SULFUR = {**MEASURED_SULFUR, **dicarbonyl_redox_parameters()}
+
 
 # ---------------------------------------------------------------------------
 # (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four
@@ -1717,6 +1841,48 @@ ZHAI_SWITCH_ON_RETIRED = (
 #: this a ONE-SIDED FIT bound. It is a mass-balance ceiling, not a level: it is
 #: exactly the kind of constraint a network can violate silently.
 KANG_TTCA_FREE_CYS_YIELD_CEILING_MOL_PCT = 16.3
+
+# ===========================================================================
+# THE TTCA-FOR-AMADORI SUBSTITUTION, MEASURED (2026-09-10, backlog W6)
+# ===========================================================================
+# W6 asked for a CYSTEINE-XYLOSE AMADORI species on this lane, on the ground that three fed-Amadori
+# series "cannot be charged at all today". That premise was corrected on 2026-09-10: wave B15 had
+# already charged Wang's ladder as TTCA and swept its unstated pH, and today one of its two claims
+# AGREES and carries the independent headline while the other fails for exactly the unstated pH the
+# entry ruled out.
+#
+# WHAT WAS LEFT WAS THE PROXY ITSELF, and it turns out to be measurable rather than arguable. TTCA
+# is the cysteine-xylose THIAZOLIDINE and the Amadori compound is a different molecule; charging one
+# for the other is a substitution, and until now an undeclared one. Kang 2026 isolates and purifies
+# BOTH and stresses them side by side, which is the comparison that sizes it:
+#
+#   stress                    TTCA loss   ARP loss   ARP / TTCA
+#   40 C, solution, 60 days      7.06 %    12.17 %      1.72x
+#   pH 9, room temperature      11.19 %    21.25 %      1.90x
+#   water activity 0.843, solid 35.77 %    60.61 %      1.69x
+#
+# THE AMADORI COMPOUND IS CONSISTENTLY 1.7 TO 1.9 TIMES LESS STABLE, and the agreement of that
+# factor across three UNRELATED stresses -- heat, alkali and humidity -- is what makes it a declared
+# band rather than a guess. The substitution is therefore usable and is now DECLARED with a size.
+#
+# WHAT THIS IS NOT. These are 60-day STORAGE losses at 4 to 40 C, not cook-temperature rates, and
+# Kang prints no rate constant, half-life, barrier or order anywhere -- every thermal experiment in
+# that paper is a single endpoint at 120 minutes. So this band travels as a STABILITY ratio and must
+# not be read as a rate ratio at 120 C. It is why the W6 species was NOT built: no dataset in the
+# corpus can fit one.
+TTCA_FOR_AMADORI_STABILITY_RATIO_BAND: Tuple[float, float] = (1.69, 1.90)
+TTCA_FOR_AMADORI_ANCHOR = (
+    "Kang 2026 section 3.3 and abstract (p. 3239, 3247): 60-day losses of PURIFIED TTCA against the "
+    "purified xylose-cysteine Amadori compound at 40 C in solution (7.06 vs 12.17 %), at pH 9 "
+    "(11.19 vs 21.25 %) and at water activity 0.843 in the solid (35.77 vs 60.61 %); "
+    "kang2026_extraction.md sec. 6a"
+)
+TTCA_FOR_AMADORI_CAVEAT = (
+    "A STORAGE-STABILITY ratio at 4 to 40 C, not a rate ratio at cooking temperature. Kang prints no "
+    "rate constant, half-life, barrier or reaction order anywhere in the paper, and every thermal "
+    "experiment in it is a single endpoint at 120 minutes. Charging TTCA for an Amadori compound "
+    "carries this band on the STABILITY of the fed intermediate and nothing else."
+)
 KANG_TTCA_CEILING_ANCHOR = (
     "Kang 2026 SI Fig. S3 (digitised, kang2026_SI_extraction.md sec. 6c): peak "
     "free Cys 1.63 mmol/L at 140 C / 40 min against 10 mmol/L TTCA loaded. "

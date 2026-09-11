@@ -1,0 +1,105 @@
+{
+  "artifact": "kinetic_core_b22_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b22_ship_rule",
+    "generated_on": "2026-09-09",
+    "git": {
+      "commit": "5c5f2857980779835f8befe2e22288449bc68546",
+      "short": "5c5f2857",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b22_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b22_fit_report.json",
+        "sha256": "45c30342a1e08ce65de271b779814d0db675612e03c19ffeaa4fd6255d1d91c3"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b22_prereg.md",
+  "rule": "SHIP if T1 (methional and methanethiol rows within 0.3 dex, disulfide within 0.5, release barrier off its bounds), T2 (no panel row moves 0.05 dex) and T4 (every coordinate identified, the ratio inside its band) hold; T3 and T5 reported",
+  "cost": 7373.941626289298,
+  "n_rows": 9,
+  "frozen": {
+    "log10_identity_ratio_met_over_gly": 1.9999999999999998,
+    "log10_k_mtal_msh_100C": -0.2814742548055645,
+    "ea_mtal_msh_kj_mol": 20.000000254221657,
+    "log10_k_msh_dmds_100C": 1.9999999999999998
+  },
+  "T1": {
+    "methional_and_methanethiol_dex": {
+      "pan_MTAL_rate_100C": -5.565624716150139,
+      "pan_MTAL_rate_120C": -4.525821030649421,
+      "pan_MTAL_rate_140C": -3.6379531389302127,
+      "pan_MSH_rate_100C": -5.321855401990608,
+      "pan_MSH_rate_120C": -3.3695353160359836,
+      "pan_MSH_rate_140C": -1.985010201848133
+    },
+    "disulfide_dex": {
+      "pan_DMDS_rate_100C": -10.564590520211196,
+      "pan_DMDS_rate_120C": -6.434825873503473,
+      "pan_DMDS_rate_140C": -2.644307262403019
+    },
+    "worst_row": "pan_MTAL_rate_100C",
+    "worst_dex": -5.565624716150139,
+    "release_barrier_on_bound": true,
+    "pass": false
+  },
+  "T2": {
+    "n_compared": 39,
+    "worst_dex": 0.0,
+    "pass": true
+  },
+  "T3": {
+    "deng_120min_dex": 1.9304371348886613,
+    "rising_30_to_120": false,
+    "all": {
+      "30min": {
+        "model_ug_per_l": 15847.193763740966,
+        "printed_ug_per_l": 18.52,
+        "dex": 2.9323113857332146
+      },
+      "60min": {
+        "model_ug_per_l": 13225.058060502279,
+        "printed_ug_per_l": 25.27,
+        "dex": 2.7187923454262806
+      },
+      "120min": {
+        "model_ug_per_l": 6454.7154398814955,
+        "printed_ug_per_l": 75.76,
+        "dex": 1.9304371348886613
+      },
+      "180min": {
+        "model_ug_per_l": 3107.8359128759903,
+        "printed_ug_per_l": 87.77,
+        "dex": 1.5491119825529422
+      }
+    },
+    "pass": false,
+    "reported_only": true
+  },
+  "T4": {
+    "sigma": {
+      "log10_identity_ratio_met_over_gly": 2.49774449406597,
+      "log10_k_mtal_msh_100C": 6.15725151314369,
+      "ea_mtal_msh_kj_mol": 643.4431156578437,
+      "log10_k_msh_dmds_100C": 8.77149528551075
+    },
+    "on_bound": {
+      "log10_identity_ratio_met_over_gly": true,
+      "log10_k_mtal_msh_100C": false,
+      "ea_mtal_msh_kj_mol": true,
+      "log10_k_msh_dmds_100C": true
+    },
+    "ratio_inside_band": false,
+    "pass": false
+  },
+  "T5": {
+    "model_min": 69.16205911953453,
+    "chin_min_with_cu": 17.0,
+    "note": "Chin's is copper 1 ppm in air; the model's constant is the apparent one from Pan's pot",
+    "reported_only": true
+  },
+  "verdict": "DO NOT SHIP"
+}

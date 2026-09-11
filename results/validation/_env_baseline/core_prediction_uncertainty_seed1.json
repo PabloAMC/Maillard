@@ -1,0 +1,4235 @@
+{
+  "artifact": "core_prediction_uncertainty",
+  "benchmarks": [
+    {
+      "bench_file": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
+      "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.5292353070807013,
+          "compound": "acrylamide",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 150.0,
+          "measured_ppb": 150.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 0.016372625485776168,
+          "predicted_p5": 0.007623297876526174,
+          "predicted_p50": 0.01600184630703721,
+          "predicted_p95": 0.02578565674027925,
+          "predicted_point": 0.015573753616532265,
+          "predicted_std": 0.00597171132431441,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "trust_loop",
+      "protein_type": "",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
+      "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+          "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
+          "envelope_state": "out_of_envelope",
+          "lane": "acrylamide",
+          "panel": "trust_loop",
+          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxymethyl)lysine (CML)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
+        },
+        {
+          "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+          "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)",
+          "envelope_state": "out_of_envelope",
+          "lane": "acrylamide",
+          "panel": "trust_loop",
+          "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [
+          "kinetic_core_b9_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b9_fit_targets.json"
+        ]
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "out_of_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [
+          "kinetic_core_b9_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b9_fit_targets.json"
+        ]
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "out_of_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [
+          "kinetic_core_b9_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b9_fit_targets.json"
+        ]
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "out_of_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        },
+        {
+          "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [
+          "kinetic_core_b9_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b9_fit_targets.json"
+        ]
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "out_of_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        },
+        {
+          "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.257667983295218,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": true,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 1016.0,
+          "measured_ppb": 1016.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 2196.250480668986,
+          "predicted_p5": 1541.646892332562,
+          "predicted_p50": 2223.6578305049525,
+          "predicted_p95": 2790.3128241420604,
+          "predicted_point": 2352.9010053455627,
+          "predicted_std": 375.1147322279662,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [
+          "kinetic_core_b9_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b9_fit_targets.json"
+        ]
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [
+          "kinetic_core_b9_fit_targets.json"
+        ],
+        "index": [
+          "kinetic_core_b9_fit_targets.json"
+        ]
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "out_of_envelope",
+          "lane": "sulfur",
+          "panel": "trust_loop",
+          "reason": "UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 2.1752213676598218,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "sulfur",
+          "measured": 121.0,
+          "measured_ppb": 121.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 2320.1012153354222,
+          "predicted_p5": 71.30273029532839,
+          "predicted_p50": 793.0823743337352,
+          "predicted_p95": 10674.008090798307,
+          "predicted_point": 830.6428774567905,
+          "predicted_std": 3500.4618917484404,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.4209545539007544,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 198.0,
+          "measured_ppb": 198.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 678.8645809081899,
+          "predicted_p5": 391.86310936966595,
+          "predicted_p50": 647.5541597048527,
+          "predicted_p95": 1032.9729146103143,
+          "predicted_point": 730.6381801003546,
+          "predicted_std": 210.6603217030125,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "trust_loop",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "matrix_only",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "pea_iso",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+          "compound": "2-pentylfuran",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 1.50178661868244,
+          "compound": "hexanal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 782.0,
+          "measured_ppb": 782.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 610.5507773621621,
+          "predicted_p5": 64.32876062537653,
+          "predicted_p50": 383.6495240716289,
+          "predicted_p95": 2042.639862219588,
+          "predicted_point": 353.83863004817323,
+          "predicted_std": 648.1317909232905,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.5201453193553576,
+          "compound": "2-pentylfuran",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 163.0,
+          "measured_ppb": 163.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 111.95437905736688,
+          "predicted_p5": 11.626544494651185,
+          "predicted_p50": 70.77968839893168,
+          "predicted_p95": 385.11991523542184,
+          "predicted_point": 64.44237549354317,
+          "predicted_std": 119.06111218506513,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.7035850883660562,
+          "compound": "nonanal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 24.0,
+          "measured_ppb": 24.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 32.391938771200934,
+          "predicted_p5": 2.270939198646361,
+          "predicted_p50": 17.64066580775224,
+          "predicted_p95": 114.76001466947827,
+          "predicted_point": 15.605972532831462,
+          "predicted_std": 46.683394767397196,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 2.391901852323967,
+          "compound": "(E,E)-2,4-decadienal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 46.9,
+          "measured_ppb": 46.9,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 192.06128873906778,
+          "predicted_p5": 2.8862938152445006,
+          "predicted_p50": 59.548740415653334,
+          "predicted_p95": 711.6105712722792,
+          "predicted_point": 75.95490029354261,
+          "predicted_std": 402.20337795541474,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 0.5714285714285714,
+      "evidence_role": "predictive",
+      "execution_path": "matrix_only",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 4,
+      "panel": "trust_loop",
+      "protein_type": "pea_iso",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='dynamic_headspace_gcmsms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "2,5-dimethylpyrazine",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "methional",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "2-acetyl-1-pyrroline",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
+      "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 1.7707655832423166,
+          "compound": "furfural",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 715.22,
+          "measured_ppb": 715.22,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 22.27365641420439,
+          "predicted_p5": 1.558945811953905,
+          "predicted_p50": 9.371419860816431,
+          "predicted_p95": 91.95950033939708,
+          "predicted_point": 7.665186085783273,
+          "predicted_std": 37.1879270146929,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "trust_loop",
+      "protein_type": "",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "predictive",
+      "execution_path": "matrix_only",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "trust_loop",
+      "protein_type": "soy_iso",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+          "compound": "2-pentylfuran",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
+      "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.6375098802400784,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 11.7,
+          "measured_ppb": 11.7,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 118.2102563114237,
+          "predicted_p5": 47.37287459304163,
+          "predicted_p50": 110.58484763231883,
+          "predicted_p95": 205.60781546117647,
+          "predicted_point": 235.96972785838298,
+          "predicted_std": 53.517287787106085,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "trust_loop",
+      "protein_type": "",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='internal_standard_gcms_sim'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
+      "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.9939897954947241,
+          "compound": "Acrylamide",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 1859.0,
+          "measured_ppb": 1859.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 266.6723222965975,
+          "predicted_p5": 64.27259109896126,
+          "predicted_p50": 218.16292110811253,
+          "predicted_p95": 633.8924863096647,
+          "predicted_point": 203.19417771430946,
+          "predicted_std": 255.81906088201964,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.4633431766893134,
+          "compound": "5-Hydroxymethylfurfural (HMF)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 12280.0,
+          "measured_ppb": 12280.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 1872.930552381209,
+          "predicted_p5": 955.6069314420104,
+          "predicted_p50": 1813.7869554437862,
+          "predicted_p95": 2777.2979136584054,
+          "predicted_point": 1946.873339428069,
+          "predicted_std": 536.7104648321307,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json",
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 1.0781789667497503,
+          "compound": "DMHF",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 1153.17,
+          "measured_ppb": 1153.17,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 27.59842084515422,
+          "predicted_p5": 5.904165968722422,
+          "predicted_p50": 21.62288060090404,
+          "predicted_p95": 70.68667018153907,
+          "predicted_point": 21.84064113843927,
+          "predicted_std": 20.409976725978265,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.269939863432633,
+          "compound": "5-Hydroxymethylfurfural (HMF)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "acrylamide",
+          "measured": 57253.94,
+          "measured_ppb": 57253.94,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 24455.481178762522,
+          "predicted_p5": 3536.0040274985777,
+          "predicted_p50": 17879.21825374311,
+          "predicted_p95": 65834.3594617326,
+          "predicted_point": 27959.5640967869,
+          "predicted_std": 19048.28993702537,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 0.6666666666666666,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='internal_standard_with_measured_response_factors'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+          "compound": "Furfural",
+          "envelope_state": "out_of_envelope",
+          "lane": null,
+          "panel": "maillard_path_holdout",
+          "reason": "LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single integration can answer it."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019.json",
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 1.0781789667497503,
+          "compound": "DMHF",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 5893.98,
+          "measured_ppb": 5893.98,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 27.59842084515422,
+          "predicted_p5": 5.904165968722422,
+          "predicted_p50": 21.62288060090404,
+          "predicted_p95": 70.68667018153907,
+          "predicted_point": 21.84064113843927,
+          "predicted_std": 20.409976725978265,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.269939863432633,
+          "compound": "5-Hydroxymethylfurfural (HMF)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 100635.78,
+          "measured_ppb": 100635.78,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 24455.481178762522,
+          "predicted_p5": 3536.0040274985777,
+          "predicted_p50": 17879.21825374311,
+          "predicted_p95": 65834.3594617326,
+          "predicted_point": 27959.5640967869,
+          "predicted_std": 19048.28993702537,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 0.6666666666666666,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='internal_standard_with_measured_response_factors'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+          "compound": "Furfural",
+          "envelope_state": "out_of_envelope",
+          "lane": null,
+          "panel": "maillard_path_holdout",
+          "reason": "LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single integration can answer it."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_10min_Chang2021.json",
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.9132191200916012,
+          "compound": "Acrylamide",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 28.0,
+          "measured_ppb": 28.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 6877.479393017354,
+          "predicted_p5": 1815.826162647103,
+          "predicted_p50": 5987.789010684115,
+          "predicted_p95": 14869.398108344574,
+          "predicted_point": 6110.035819625069,
+          "predicted_std": 4719.467877309054,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_Chang2021.json",
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.9932587652157645,
+          "compound": "Acrylamide",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "acrylamide",
+          "measured": 1459.0,
+          "measured_ppb": 1459.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 4822.50228433951,
+          "predicted_p5": 1161.3756807356153,
+          "predicted_p50": 3936.616623112497,
+          "predicted_p95": 11434.876879127929,
+          "predicted_point": 3679.8891690436685,
+          "predicted_std": 4621.996067039513,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_water_Chang2021.json",
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.9932587652157645,
+          "compound": "Acrylamide",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 832.0,
+          "measured_ppb": 832.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 4822.50228433951,
+          "predicted_p5": 1161.3756807356153,
+          "predicted_p50": 3936.616623112497,
+          "predicted_p95": 11434.876879127929,
+          "predicted_point": 3679.8891690436685,
+          "predicted_std": 4621.996067039513,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.8328228729821622,
+          "compound": "5-Hydroxymethylfurfural (HMF)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 7000.0,
+          "measured_ppb": 7000.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 2647.8454995520983,
+          "predicted_p5": 955.4377236154422,
+          "predicted_p50": 2155.5537868460274,
+          "predicted_p95": 6501.675014596524,
+          "predicted_point": 2191.616920021592,
+          "predicted_std": 1798.58586290654,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='external_standard_curve_hplc_uv'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_Ye2024.json",
+      "benchmark_id": "mp_holdout_glucose_asparagine_180C_Ye2024",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.9813455112665423,
+          "compound": "Acrylamide",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "acrylamide",
+          "measured": 140.58,
+          "measured_ppb": null,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 8878.666211360498,
+          "predicted_p5": 2110.6576957280604,
+          "predicted_p50": 6980.995783685259,
+          "predicted_p95": 20219.169678330523,
+          "predicted_point": 7004.325426111863,
+          "predicted_std": 8515.708863000074,
+          "shared_with": null,
+          "target_unit": "umol_per_mol_limiting_precursor"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='isotope_dilution_lcmsms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
+      "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.9205043432703445,
+          "compound": "5-Hydroxymethylfurfural (HMF)",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 17400.0,
+          "measured_ppb": 17400.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 1327.01877020662,
+          "predicted_p5": 402.9643746997015,
+          "predicted_p50": 1089.547489095753,
+          "predicted_p95": 3355.6062604437316,
+          "predicted_point": 1458.5059737773267,
+          "predicted_std": 896.0986156524036,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.881351503171641,
+          "compound": "3-deoxyglucosone",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "trunk",
+          "measured": 52200.0,
+          "measured_ppb": 52200.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 43955.58928290912,
+          "predicted_p5": 14119.511788295571,
+          "predicted_p50": 36742.00214928997,
+          "predicted_p95": 107441.28243765768,
+          "predicted_point": 46982.900428788,
+          "predicted_std": 28979.137731771247,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.9095715134940392,
+          "compound": "3,4-dideoxyglucosone",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 55500.0,
+          "measured_ppb": 55500.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 1604.9721725789984,
+          "predicted_p5": 489.6972168328276,
+          "predicted_p50": 1326.7474881275307,
+          "predicted_p95": 3976.4831749300224,
+          "predicted_point": 1711.1294549099457,
+          "predicted_std": 1079.640224366711,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.0007845430127902921,
+          "compound": "glucosone",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 7500.0,
+          "measured_ppb": 7500.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 119.06424929391953,
+          "predicted_p5": 118.92658851543077,
+          "predicted_p50": 119.08189946707056,
+          "predicted_p95": 119.14162083474774,
+          "predicted_point": 119.05906487059636,
+          "predicted_std": 0.06504531004850402,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.08956184750884018,
+          "compound": "glyoxal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "trunk",
+          "measured": 5600.0,
+          "measured_ppb": 5600.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 195.53030469160043,
+          "predicted_p5": 166.9051055806464,
+          "predicted_p50": 200.31594101537084,
+          "predicted_p95": 205.1310813123481,
+          "predicted_point": 160.79393481301767,
+          "predicted_std": 11.242371132890751,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.8998061690345872,
+          "compound": "methylglyoxal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "trunk",
+          "measured": 2600.0,
+          "measured_ppb": 2600.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 1777.019011836525,
+          "predicted_p5": 533.3193603449503,
+          "predicted_p50": 1434.222370781416,
+          "predicted_p95": 4234.415966778214,
+          "predicted_point": 2029.733012335392,
+          "predicted_std": 1205.105964706881,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 6,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='lcmsms_external_calibration_curve'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
+      "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        },
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json",
+      "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        },
+        {
+          "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope_extrapolated",
+          "lane": "sulfur",
+          "panel": "maillard_path_holdout",
+          "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json",
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 2.1260155424484246,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "sulfur",
+          "measured": 229.0,
+          "measured_ppb": 229.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 2943.744289386373,
+          "predicted_p5": 98.47198494912672,
+          "predicted_p50": 1055.8746772701281,
+          "predicted_p95": 13162.192396455745,
+          "predicted_point": 1129.4936778940469,
+          "predicted_std": 4306.62754652078,
+          "shared_with": "hofmann_ribose_pH3_FFT",
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.4561699405096057,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 553.0,
+          "measured_ppb": 553.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 21.958678619901917,
+          "predicted_p5": 12.202217859452826,
+          "predicted_p50": 20.3636190706259,
+          "predicted_p95": 34.8825893370117,
+          "predicted_point": 23.469566325769907,
+          "predicted_std": 7.436151307304956,
+          "shared_with": "hofmann_ribose_pH3_MFT",
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 2.181414187660953,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 12.0,
+          "measured_ppb": 12.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 0.1996010764497792,
+          "predicted_p5": 0.0051635884698008425,
+          "predicted_p50": 0.09005598416523786,
+          "predicted_p95": 0.7840898103636951,
+          "predicted_point": 0.08979930010614205,
+          "predicted_std": 0.28994593650562644,
+          "shared_with": "hofmann_ribose_pH7_FFT",
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.7971770733805145,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 25.0,
+          "measured_ppb": 25.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 0.1512352080612934,
+          "predicted_p5": 0.04210070527325353,
+          "predicted_p50": 0.15158470472576216,
+          "predicted_p95": 0.2639164401665616,
+          "predicted_point": 0.1781427726490388,
+          "predicted_std": 0.0666644944553013,
+          "shared_with": "hofmann_ribose_pH7_MFT",
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 1.8102824024975754,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "sulfur",
+          "measured": 96.0,
+          "measured_ppb": 96.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 505.24515900762657,
+          "predicted_p5": 34.12018254715152,
+          "predicted_p50": 227.59389274747014,
+          "predicted_p95": 2204.4169846399304,
+          "predicted_point": 191.05841743982523,
+          "predicted_std": 688.5374667610433,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 0.34719058798624747,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 143.0,
+          "measured_ppb": 143.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 496.73159174077324,
+          "predicted_p5": 314.2221008945764,
+          "predicted_p50": 488.68718729006946,
+          "predicted_p95": 698.9197549683284,
+          "predicted_point": 546.3981531352598,
+          "predicted_std": 122.66596634262031,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 1.4212904041588352,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "sulfur",
+          "measured": 6.88,
+          "measured_ppb": 6.88,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 15.653929618856187,
+          "predicted_p5": 1.7246311367070024,
+          "predicted_p50": 9.809745811142703,
+          "predicted_p95": 45.49740499512094,
+          "predicted_point": 64.08639804316826,
+          "predicted_std": 16.909957816196247,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.6612784388819948,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 1.28,
+          "measured_ppb": 1.28,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 317.09930205501155,
+          "predicted_p5": 23.97149916853116,
+          "predicted_p50": 192.7683617048916,
+          "predicted_p95": 1098.9391218161866,
+          "predicted_point": 610.2552488237211,
+          "predicted_std": 348.81608898629963,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json",
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 1.1251068427155297,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 3.29,
+          "measured_ppb": 3.29,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 30.943783865878487,
+          "predicted_p5": 5.929962726438753,
+          "predicted_p50": 23.78631715908753,
+          "predicted_p95": 79.09678043342856,
+          "predicted_point": 96.89165048722249,
+          "predicted_std": 25.938590853279234,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.615281245956791,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 1.46,
+          "measured_ppb": 1.46,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 411.29377395995914,
+          "predicted_p5": 34.06099404365418,
+          "predicted_p50": 244.2612018555392,
+          "predicted_p95": 1404.5543991254312,
+          "predicted_point": 535.4957642003135,
+          "predicted_std": 453.02945243764884,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json",
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.8869095165080824,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 2.4,
+          "measured_ppb": 2.4,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 58.96542952901674,
+          "predicted_p5": 17.01167683144543,
+          "predicted_p50": 49.973408965195,
+          "predicted_p95": 131.11628644779162,
+          "predicted_point": 134.51295815039995,
+          "predicted_std": 35.743399108828555,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.5428699249436202,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 1.68,
+          "measured_ppb": 1.68,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 425.06404396172866,
+          "predicted_p5": 39.54894227556014,
+          "predicted_p50": 235.6903126340495,
+          "predicted_p95": 1380.3995144518806,
+          "predicted_point": 363.44467371980704,
+          "predicted_std": 475.4076672442551,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json",
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 0.6251391473066861,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 1.71,
+          "measured_ppb": 1.71,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 104.45568585680745,
+          "predicted_p5": 44.77499325175179,
+          "predicted_p50": 94.67021865565806,
+          "predicted_p95": 188.8750865566349,
+          "predicted_point": 170.53361069796648,
+          "predicted_std": 45.20726714197551,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 1.3693173959850216,
+          "compound": "2-Furfurylthiol (FFT)",
+          "envelope_state": "in_envelope",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "sulfur",
+          "measured": 1.62,
+          "measured_ppb": 1.62,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": false,
+          "predicted_mean": 337.5391436181472,
+          "predicted_p5": 43.34544966487821,
+          "predicted_p50": 208.2819446117689,
+          "predicted_p95": 1014.5206905958307,
+          "predicted_point": 211.73994164428964,
+          "predicted_std": 369.83540366256716,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "free_precursor",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "panel": "maillard_path_holdout",
+      "protein_type": "free",
+      "quantification_family": "extraction",
+      "quantification_source": "quantification_class='stable_isotope_dilution_gcms'",
+      "refused_compounds": [],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "matrix_only",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "external_matrix",
+      "protein_type": "pea_iso",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "nonanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 2.2260491346737563,
+          "compound": "hexanal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 324.0,
+          "measured_ppb": 324.0,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 197.41495253095803,
+          "predicted_p5": 5.804834176077727,
+          "predicted_p50": 77.74372639346635,
+          "predicted_p95": 976.8749039071306,
+          "predicted_point": 88.59846418347784,
+          "predicted_std": 363.20684123032396,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 0.25,
+      "evidence_role": "external_holdout",
+      "execution_path": "matrix_only",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 1,
+      "panel": "external_matrix",
+      "protein_type": "pea_iso",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furaneol",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "2,5-dimethylpyrazine",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furfural",
+          "envelope_state": "out_of_envelope",
+          "lane": "sulfur",
+          "panel": "external_matrix",
+          "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "buffer_applied": true,
+      "compounds": [
+        {
+          "ci_width_log10": 2.19372058849301,
+          "compound": "2-pentylfuran",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "lipid",
+          "measured": 5625.8,
+          "measured_ppb": 5625.8,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 29.20159936325607,
+          "predicted_p5": 0.8287361566200862,
+          "predicted_p50": 12.538386681378643,
+          "predicted_p95": 129.46037939495628,
+          "predicted_point": 15.387486467996423,
+          "predicted_std": 53.69665438398748,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 2.19372058849301,
+          "compound": "hexanal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": false,
+          "lane": "lipid",
+          "measured": 605.6,
+          "measured_ppb": 605.6,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 132.26395486143042,
+          "predicted_p5": 3.753627335534144,
+          "predicted_p50": 56.79060894684199,
+          "predicted_p95": 586.3699985619177,
+          "predicted_point": 69.69514889635887,
+          "predicted_std": 243.210372942451,
+          "shared_with": null,
+          "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 2.19372058849301,
+          "compound": "nonanal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 72.66,
+          "measured_ppb": 72.66,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 45.32820899970677,
+          "predicted_p5": 1.2864064480028656,
+          "predicted_p50": 19.462722056512007,
+          "predicted_p95": 200.95499090299097,
+          "predicted_point": 23.885239774885036,
+          "predicted_std": 83.35068029064999,
+          "shared_with": null,
+          "target_unit": "ppb"
+        }
+      ],
+      "coverage_rate": 0.75,
+      "evidence_role": "external_holdout",
+      "execution_path": "matrix_only",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 3,
+      "panel": "external_matrix",
+      "protein_type": "soy_iso",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_semi_quantitative_internal_standard'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+          "compound": "1-hexanol",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS."
+        }
+      ],
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
+      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+      "buffer_applied": true,
+      "compounds": [],
+      "coverage_rate": 0.0,
+      "evidence_role": "external_holdout",
+      "execution_path": "matrix_only",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "fitted_row": false,
+      "matched_compounds": 0,
+      "panel": "external_matrix",
+      "protein_type": "pea_iso",
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcmsms_external_standard_curve'",
+      "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "hexanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "nonanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        }
+      ],
+      "signal_origin": "external_literature"
+    }
+  ],
+  "engine": {
+    "fits_anything": false,
+    "lane_networks": {
+      "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
+      "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so.",
+      "sulfur": "FULL_REACTIONS (107 steps) = trunk + sulfur, pH trajectory",
+      "trunk": "REACTIONS (26 steps), no pH term, no a_w term"
+    },
+    "lanes": [
+      "trunk",
+      "sulfur",
+      "acrylamide",
+      "lipid"
+    ],
+    "lanes_compose": false,
+    "lipid_lane_cointegrates": {
+      "condition": "revisit the moment the aldehyde-lysine Ea on food proteins is measured -- the amine pool then becomes genuinely shared",
+      "rule": "direct sum with any ONE Maillard lane",
+      "why": "disjoint species sets, and the only candidate coupling (the aldehyde-lysine covalent channel) is INERT BY RULING (docs/reference/FIT_HOLDOUT_DECLARATION.md, amendment 6, ruling 2). Checked at every call by lipid.lane_coupling_verdict, not hard-coded."
+    },
+    "lipid_rate_is_an_assumption": true,
+    "module": "src/kinetic_core/engine.py",
+    "network_ph": 6.8,
+    "parameters_from": [
+      "results/validation/kinetic_core_b1_fit_report.json",
+      "results/validation/kinetic_core_b9_fit_report.json",
+      "results/validation/kinetic_core_b3_fit_report.json"
+    ],
+    "unrepresented_compounds": [
+      "1-hexanol",
+      "2,5-dimethyl-4-hydroxy-3(2h)-thiophenone",
+      "2-ethyl-4-hydroxy-5-methyl-3(2h)-furanone",
+      "2-nonenal",
+      "hemf",
+      "homofuraneol",
+      "propanal"
+    ],
+    "wave": "furanic channels (HMF, DMHF), fit wave B7"
+  },
+  "priors": [
+    {
+      "band": null,
+      "centre": -7.999985940685075,
+      "distribution": "fixed",
+      "key": "b1.k_glc_frag.log10_k_ref_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: variant_A.fitted_parameters.k_glc_frag.log10_k_ref_stderr is null",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        137.83212060907104,
+        223.55851655064848
+      ],
+      "centre": 180.69531857985976,
+      "distribution": "uniform_band",
+      "key": "b1.k_glc_frag.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "unidentified_in_the_fit: declared band capped by the prefactor prior",
+      "sampled": true,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: ea_stderr_kj_mol is null; band = FITTED_EA_BOUNDS",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": null,
+      "centre": -1.6434754135093819,
+      "distribution": "normal_log10",
+      "key": "b1.k_mgo_mel.log10_k_ref_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "identified in the fit report (stderr reported)",
+      "sampled": true,
+      "sigma": 0.11409857756335652,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: variant_A.fitted_parameters.k_mgo_mel.log10_k_ref_stderr",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        20.0,
+        260.0
+      ],
+      "centre": 20.043206355884948,
+      "distribution": "normal",
+      "key": "b1.k_mgo_mel.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "identified in the fit report (stderr reported); draws are CLIPPED to the fit's own search bounds FITTED_EA_BOUNDS, which the fit itself could not leave",
+      "sampled": true,
+      "sigma": 31.4144938602754,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: variant_A.fitted_parameters.k_mgo_mel.ea_stderr_kj_mol",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": null,
+      "centre": -7.460336744485748,
+      "distribution": "fixed",
+      "key": "b1.k_fa_frag.log10_k_ref_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: variant_A.fitted_parameters.k_fa_frag.log10_k_ref_stderr is null",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        20.0,
+        63.39385716435491
+      ],
+      "centre": 20.53065919356619,
+      "distribution": "uniform_band",
+      "key": "b1.k_fa_frag.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "unidentified_in_the_fit: declared band capped by the prefactor prior",
+      "sampled": true,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: ea_stderr_kj_mol is null; band = FITTED_EA_BOUNDS",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": null,
+      "centre": -1.9276399911739752,
+      "distribution": "normal_log10",
+      "key": "b1.k_aa_frag.log10_k_ref_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "identified in the fit report (stderr reported)",
+      "sampled": true,
+      "sigma": 0.08200180308143928,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: variant_A.fitted_parameters.k_aa_frag.log10_k_ref_stderr",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        20.0,
+        260.0
+      ],
+      "centre": 20.000000150449104,
+      "distribution": "normal",
+      "key": "b1.k_aa_frag.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "identified in the fit report (stderr reported); draws are CLIPPED to the fit's own search bounds FITTED_EA_BOUNDS, which the fit itself could not leave",
+      "sampled": true,
+      "sigma": 20.865430678944644,
+      "source": "results/validation/kinetic_core_b1_fit_report.json: variant_A.fitted_parameters.k_aa_frag.ea_stderr_kj_mol",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": null,
+      "centre": -4.49609939573632,
+      "distribution": "fixed",
+      "key": "b3.k_int1_mel.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 1316.322310548673 above identified_threshold 1.0; no search band recorded",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": null,
+      "centre": -0.8978334423341812,
+      "distribution": "normal_log10",
+      "key": "b3.k_acr_dp.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "identified in the fit report (ci95_halfwidth below the identified_threshold)",
+      "sampled": true,
+      "sigma": 0.2272519123154538,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: parameter_intervals.k_acr_dp.ci95_halfwidth / 1.96",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": null,
+      "centre": -7.8355036696571805,
+      "distribution": "fixed",
+      "key": "b3.k_gln_glc.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 2157390.4724324015 above identified_threshold 1.0; no search band recorded",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": null,
+      "centre": -2.595910646804505,
+      "distribution": "fixed",
+      "key": "b3.k_lys_glc.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 27.163628456550253 above identified_threshold 1.0; no search band recorded",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": null,
+      "centre": -6.8723102887066405,
+      "distribution": "fixed",
+      "key": "b3.k_ala_glc.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 446550.9087512145 above identified_threshold 1.0; no search band recorded",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": null,
+      "centre": -1.894602070316578,
+      "distribution": "fixed",
+      "key": "b3.k_acr_gln.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 3.125748413772875 above identified_threshold 1.0; no search band recorded",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": null,
+      "centre": -2.4915117796873094,
+      "distribution": "fixed",
+      "key": "b3.k_acr_lys.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 5.46047262651422 above identified_threshold 1.0; no search band recorded",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": null,
+      "centre": -8.82499890965576,
+      "distribution": "fixed",
+      "key": "b3.k_acr_ala.log10_k_ref_160C",
+      "kind": "fitted_rate",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: no band is declared, still fixed (a recorded gap)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 2305878.1472097607 above identified_threshold 1.0; no search band recorded",
+      "unit": "log10(k at 160 C)"
+    },
+    {
+      "band": [
+        210.2441926736418,
+        260.0
+      ],
+      "centre": 259.9995034093972,
+      "distribution": "uniform_band",
+      "key": "b3.Ea_int1_mel",
+      "kind": "fitted_ea",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: declared band capped by the prefactor prior",
+      "sampled": true,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 122057.37351828751 above identified_threshold; band = FITTED_ACRYLAMIDE_EA_BOUNDS",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": null,
+      "centre": 136.10927178572982,
+      "distribution": "normal",
+      "key": "b3.Ea_acr_dp",
+      "kind": "fitted_ea",
+      "lane": "acrylamide",
+      "reason": "identified in the fit report (ci95_halfwidth below the identified_threshold)",
+      "sampled": true,
+      "sigma": 24.543455189219607,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: parameter_intervals.Ea_acr_dp.ci95_halfwidth / 1.96",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        20.0,
+        69.75531073575542
+      ],
+      "centre": 20.000000000000007,
+      "distribution": "uniform_band",
+      "key": "b3.Ea_competitor_sugar",
+      "kind": "fitted_ea",
+      "lane": "acrylamide",
+      "reason": "unidentified_in_the_fit: declared band capped by the prefactor prior",
+      "sampled": true,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b3_fit_report.json: ci95_halfwidth 4383.491567802573 above identified_threshold; band = FITTED_ACRYLAMIDE_EA_BOUNDS",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": null,
+      "centre": -5.394807039760053,
+      "distribution": "normal_log10",
+      "key": "b7.k_dpo_af.log10_k",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "the furanic-channel fit report carries no parameter stderr; its residual sigma_log10 is used as the log10-k stderr proxy, per the plan. k_odg_af is DERIVED from k_dpo_af and moves with it, as in the fit",
+      "sampled": true,
+      "sigma": 0.04139268515822507,
+      "source": "results/validation/kinetic_core_b7_fit_report.json: fit.sigma_log10 (Blank 1997's own stated maximum SD of 10 %)",
+      "unit": "log10(k, L/(mmol*min))"
+    },
+    {
+      "band": null,
+      "centre": -0.5446463072676107,
+      "distribution": "fixed",
+      "key": "b8.k_pent_dpo.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -0.5022095511358302,
+      "distribution": "fixed",
+      "key": "b8.k_pent_tdp.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -3.0155236916597783,
+      "distribution": "fixed",
+      "key": "b8.k_dpo_c2c3.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -2.309800292550346,
+      "distribution": "normal_log10",
+      "key": "b8.k_arp_dpo.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 1.805127546899361,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -1.726679494015763,
+      "distribution": "normal_log10",
+      "key": "b8.k_arp_tdp.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.6067227708213283,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": 0.43445392481376577,
+      "distribution": "fixed",
+      "key": "b8.k_dpo_nf.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -4.347247153178998,
+      "distribution": "fixed",
+      "key": "b8.k_dpo_ptr.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": 0.04172302756946337,
+      "distribution": "fixed",
+      "key": "b8.k_dpo_ddp.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -3.036775946705196,
+      "distribution": "normal_log10",
+      "key": "b8.k_tdp_fur.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.34006525506117447,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -6.540581367427349,
+      "distribution": "fixed",
+      "key": "b8.k_ddp_mft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -0.6311161311460204,
+      "distribution": "normal_log10",
+      "key": "b8.k_fur_fft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 1.02830242946914,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -2.0246976531089222,
+      "distribution": "normal_log10",
+      "key": "b8.k_nf_mft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.16511633901984668,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -2.8681706124816815,
+      "distribution": "normal_log10",
+      "key": "b8.k_nf_mp3p.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.34837652973817823,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -3.98088714011877,
+      "distribution": "normal_log10",
+      "key": "b8.k_mgo_mp.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.3202692712863992,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -3.8696667868173487,
+      "distribution": "fixed",
+      "key": "b8.k_ha_mp_mft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -8.589075847746692,
+      "distribution": "normal_log10",
+      "key": "b8.k_glc_ha.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 1.3681277353677636e-11,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -2.5882946400737175,
+      "distribution": "fixed",
+      "key": "b8.k_thi_hmp.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -3.273029275775544,
+      "distribution": "fixed",
+      "key": "b8.k_thi_mesh.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -2.6086953372771946,
+      "distribution": "fixed",
+      "key": "b8.k_hmp_mft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -3.4372110320564206,
+      "distribution": "fixed",
+      "key": "b8.k_hmp_mp2p.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -2.9736755938616524,
+      "distribution": "fixed",
+      "key": "b8.k_cys_actz.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": 0.4999999999977239,
+      "distribution": "normal_log10",
+      "key": "b8.k_dimer_mft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.354419327470044,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": 0.49999999737257855,
+      "distribution": "normal_log10",
+      "key": "b8.k_dimer_fft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.5493346621718865,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -1.9837700999787538,
+      "distribution": "fixed",
+      "key": "b8.k_mmft.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": 0.13411252144508923,
+      "distribution": "fixed",
+      "key": "b8.k_mft_decay.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -0.6513682926639731,
+      "distribution": "normal_log10",
+      "key": "b8.k_fft_decay.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.10687865277784232,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -9.70973788050852,
+      "distribution": "normal_log10",
+      "key": "b8.k_dimer_decay.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 1.2022208485890091e-05,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -2.181605124250818,
+      "distribution": "fixed",
+      "key": "b8.k_nf_decay.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": 0.4700476884172956,
+      "distribution": "normal_log10",
+      "key": "b8.k_fur_decay.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.4373472219905324,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -1.3506222526942775,
+      "distribution": "fixed",
+      "key": "b8.k_h2s_loss.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -1.1869450426304384,
+      "distribution": "normal_log10",
+      "key": "b8.k_osone_decay.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.44932077431890416,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -9.166403803266467,
+      "distribution": "normal_log10",
+      "key": "b8.k_thiol_decay.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 9.890665132424999e-05,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -2.534762816786632,
+      "distribution": "normal_log10",
+      "key": "b8.k_pent_caramel.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.6525987843495092,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -3.437313963933767,
+      "distribution": "fixed",
+      "key": "b8.k_pent_thermal.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -4.922868997756941,
+      "distribution": "fixed",
+      "key": "b8.k_glc_fur.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -4.353715425211875,
+      "distribution": "fixed",
+      "key": "b8.k_arp_tdp_th.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -1.2902512237780432,
+      "distribution": "fixed",
+      "key": "b8.k_arp_dpo_th.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -7.69250097808771,
+      "distribution": "fixed",
+      "key": "b8.k_ddp_mft_hs.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -0.009550422129148002,
+      "distribution": "fixed",
+      "key": "b8.k_fur_fft_hs.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": -0.5786517733288119,
+      "distribution": "fixed",
+      "key": "b8.k_ttca_cys.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.log10_k_ref_at_145C",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -1.697597816800862,
+      "distribution": "normal_log10",
+      "key": "b8.k_ttca_deg.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.4081453946493267,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -2.066359667088082,
+      "distribution": "normal_log10",
+      "key": "b8.k_cys_thermal.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.27492395681583914,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": [
+        -10.0,
+        0.5
+      ],
+      "centre": -1.8324679217979647,
+      "distribution": "normal_log10",
+      "key": "b8.k_thiolate_loss.log10_k_ref_145C",
+      "kind": "fitted_rate",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.6607558126963899,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "log10(k at 145 C)"
+    },
+    {
+      "band": null,
+      "centre": 64.0822869313293,
+      "distribution": "fixed",
+      "key": "b8.lumped_formation_Ea_kJ_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded)",
+      "sampled": false,
+      "sigma": null,
+      "source": "results/validation/kinetic_core_b9_fit_report.json: frozen_parameters.lumped_formation_Ea_kJ_mol",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        7.0,
+        102.0
+      ],
+      "centre": 101.99999523142152,
+      "distribution": "uniform_band",
+      "key": "b8.decay_Ea_kJ_mol.thiol_sink",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "unidentified_in_the_fit: sampled across its declared band",
+      "sampled": true,
+      "sigma": 29.239590640517058,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        126.8894862102488,
+        222.9540512992763
+      ],
+      "centre": 174.92176875476255,
+      "distribution": "uniform_band",
+      "key": "b8.decay_Ea_kJ_mol.carbonyl_sink",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "unidentified_in_the_fit: declared band capped by the prefactor prior",
+      "sampled": true,
+      "sigma": 60.565697843281875,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: flat direction; band = the coordinate's declared bounds",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        0.0,
+        1.0
+      ],
+      "centre": 0.00035866464307272216,
+      "distribution": "fixed",
+      "key": "b8.ph_drift.acid_yield_per_sink_event",
+      "kind": "fitted_ph_drift",
+      "lane": "sulfur",
+      "reason": "unidentified_in_the_fit: its bound is DEFINITIONAL (the quantity is a fraction), not a measurement of where the value lies, so a flat draw over it would assert more than anyone knows; still fixed, and a recorded gap",
+      "sampled": false,
+      "sigma": 0.3398326678072241,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: flat direction with a definitional bound",
+      "unit": "mol acid per sink event"
+    },
+    {
+      "band": [
+        5.0,
+        11.0
+      ],
+      "centre": 7.06178000599881,
+      "distribution": "normal",
+      "key": "b8.ph_drift.arp_secondary_ammonium_pKa",
+      "kind": "fitted_ph_drift",
+      "lane": "sulfur",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.48213270985193796,
+      "source": "results/validation/kinetic_core_b9_laplace_covariance.json: Gauss-Newton sigma at the frozen optimum (sampled JOINTLY from the covariance)",
+      "unit": "pKa"
+    },
+    {
+      "band": [
+        -12.0,
+        -1.94
+      ],
+      "centre": null,
+      "distribution": "uniform_band",
+      "key": "b13.k_da_sink.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "two_laboratories_disagree: flat across the disagreement",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B13 declared band: shipped at EXACTLY ZERO with a blank barrier, which -12 stands in for; the upper end is Goncuoglu Tas 2016's 130e-3 /min at 160 C carried to 100 C at this module's own steepest trunk barrier. Flat between them says 'somewhere between nothing and what the second laboratory measured', which is the state of knowledge.",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        0.0,
+        150.8
+      ],
+      "centre": 0.0,
+      "distribution": "uniform_band",
+      "key": "b13.k_go_sink.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "two_laboratories_disagree: flat across the disagreement",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B13 declared band: the RATE is left alone: the two laboratories agree to 1.87x at 160 C, which is the best cross-laboratory agreement on this trunk. The BARRIER is the disputed part -- its authors FIXED it to zero and a sixteenfold rise over 20 C refutes that. The upper end is the steepest barrier this module itself carries (k_odg_da, 150.8). The 20 C window is too narrow to fit a credible barrier and this band does not pretend to be one; it is the honest width of not knowing.",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        -4.63,
+        -1.96
+      ],
+      "centre": -5.640268012936541,
+      "distribution": "uniform_band",
+      "key": "b13.k_odg_da.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "two_laboratories_disagree: flat across the disagreement",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B13 declared band: the 466x disagreement at 160 C, expressed at 100 C on the shipped barrier. The two credible intervals do not come within two decades of each other.",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        -6.05,
+        -0.96
+      ],
+      "centre": -6.047256328957112,
+      "distribution": "uniform_band",
+      "key": "b13.k_hmf_self.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "two_laboratories_disagree: flat across the disagreement",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B13 declared band: from the shipped 8.97e-7 /min (one temperature, barrier zero by declaration) up to Gokmen 2012's 0.111 /min at 180 C, the widest of the three readings. The barrier stays at zero: one temperature each, so no Arrhenius is licensed.",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": null,
+      "centre": -7.2724403357260154,
+      "distribution": "fixed",
+      "key": "b13.k_glc_g.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "NOT SAMPLED, and not by oversight. k_ddg_hmf (1.13x) and k_go_sink's RATE (1.87x) are cross-laboratory agreements inside a factor of two, and k_ddg_hmf is a timescale bracket with a declared zero barrier and no HPD to draw from. k_glc_g and k_g_go have one determination each and no second laboratory to disagree with them. A band invented for a constant nobody disputes would be a fabricated interval. ENV-B34 (2026-09-11) REMOVED k_tdg_ddg from this list: its 1.5x cross-laboratory agreement was two DRY matrices agreeing with each other, wave B34 measured it 32x too slow in water, and its own paper prints a threefold barrier disagreement between its glucose and NaCl columns. It carries the printed HPD now (HPD_SINK_BANDS).",
+      "sampled": false,
+      "sigma": null,
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 9",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": null,
+      "centre": -2.4505543405941244,
+      "distribution": "fixed",
+      "key": "b13.k_g_go.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "NOT SAMPLED, and not by oversight. k_ddg_hmf (1.13x) and k_go_sink's RATE (1.87x) are cross-laboratory agreements inside a factor of two, and k_ddg_hmf is a timescale bracket with a declared zero barrier and no HPD to draw from. k_glc_g and k_g_go have one determination each and no second laboratory to disagree with them. A band invented for a constant nobody disputes would be a fabricated interval. ENV-B34 (2026-09-11) REMOVED k_tdg_ddg from this list: its 1.5x cross-laboratory agreement was two DRY matrices agreeing with each other, wave B34 measured it 32x too slow in water, and its own paper prints a threefold barrier disagreement between its glucose and NaCl columns. It carries the printed HPD now (HPD_SINK_BANDS).",
+      "sampled": false,
+      "sigma": null,
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 10",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": null,
+      "centre": -0.9244530386074692,
+      "distribution": "fixed",
+      "key": "b13.k_ddg_hmf.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "NOT SAMPLED, and not by oversight. k_ddg_hmf (1.13x) and k_go_sink's RATE (1.87x) are cross-laboratory agreements inside a factor of two, and k_ddg_hmf is a timescale bracket with a declared zero barrier and no HPD to draw from. k_glc_g and k_g_go have one determination each and no second laboratory to disagree with them. A band invented for a constant nobody disputes would be a fabricated interval. ENV-B34 (2026-09-11) REMOVED k_tdg_ddg from this list: its 1.5x cross-laboratory agreement was two DRY matrices agreeing with each other, wave B34 measured it 32x too slow in water, and its own paper prints a threefold barrier disagreement between its glucose and NaCl columns. It carries the printed HPD now (HPD_SINK_BANDS).",
+      "sampled": false,
+      "sigma": null,
+      "source": "Kocadagli & Gokmen 2016, J. Agric. Food Chem. 10.1021/acs.jafc.6b01862, Table 2 (GLUCOSE system), reparameterised Arrhenius at T_b = 180 C, step 5",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        -5.406129755260192,
+        -4.827654275541714
+      ],
+      "centre": -5.026953780980191,
+      "distribution": "uniform_band",
+      "key": "b34.k_glc_tdg.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 3, k_b 4.19 +/- 2.44 (x1e-3), Ea 107.2 +/- 52.7",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        54.5,
+        159.9
+      ],
+      "centre": 107.2,
+      "distribution": "uniform_band",
+      "key": "b34.k_glc_tdg.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 3, k_b 4.19 +/- 2.44 (x1e-3), Ea 107.2 +/- 52.7",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        -2.478757534337661,
+        -2.3818154830807687
+      ],
+      "centre": -2.427587212571361,
+      "distribution": "uniform_band",
+      "key": "b34.k_tdg_ddg.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 4, k_b 30.5 +/- 3.39 (x1e-3), Ea 36.9 +/- 6.3; the NaCl column prints Ea 117.7 +/- 11.1 for the same step",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        30.599999999999998,
+        43.199999999999996
+      ],
+      "centre": 36.9,
+      "distribution": "uniform_band",
+      "key": "b34.k_tdg_ddg.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 4, k_b 30.5 +/- 3.39 (x1e-3), Ea 36.9 +/- 6.3; the NaCl column prints Ea 117.7 +/- 11.1 for the same step",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        -2.993702366217273,
+        -2.9335950011169647
+      ],
+      "centre": -2.9626096376988595,
+      "distribution": "uniform_band",
+      "key": "b34.k_fru_int.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 6, k_b 330 +/- 22.8 (x1e-3), Ea 100.4 +/- 6.6",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        93.80000000000001,
+        107.0
+      ],
+      "centre": 100.4,
+      "distribution": "uniform_band",
+      "key": "b34.k_fru_int.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 6, k_b 330 +/- 22.8 (x1e-3), Ea 100.4 +/- 6.6",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        -5.220943842330665,
+        -5.0542662312417805
+      ],
+      "centre": -5.129657497425126,
+      "distribution": "uniform_band",
+      "key": "b34.k_fru_odg.log10_k_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 8, k_b 2.11 +/- 0.40 (x1e-3), Ea 99.3 +/- 21.8",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        77.5,
+        121.1
+      ],
+      "centre": 99.3,
+      "distribution": "uniform_band",
+      "key": "b34.k_fru_odg.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "SAMPLED over the source's own printed 95 % HPD (Kocadagli & Gokmen 2016 Table 2). The interval is the measurement's, not a second laboratory's; no centre moves.",
+      "sampled": true,
+      "sigma": null,
+      "source": "ENV-B34 printed 95 % HPD: Table 2 step 8, k_b 2.11 +/- 0.40 (x1e-3), Ea 99.3 +/- 21.8",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        -9.191114581712858,
+        -5.191114581712858
+      ],
+      "centre": -6.5415452891122525,
+      "distribution": "normal_log10",
+      "key": "b18.log10_k_go_ak_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.08183260861717218,
+      "source": "results/validation/kinetic_core_b18_fit_report.json: Gauss-Newton sigma at the frozen optimum",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        100.59,
+        103.1
+      ],
+      "centre": 103.0999999999812,
+      "distribution": "uniform_band",
+      "key": "b18.ea_go_ak_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "unidentified_direction_flat_across_its_declared_band",
+      "sampled": true,
+      "sigma": 16.157518353952135,
+      "source": "results/validation/kinetic_core_b18_fit_report.json: unidentified, on its upper bound; band = the coordinate's DECLARED bounds",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        -10.092961951313706,
+        -6.092961951313706
+      ],
+      "centre": -7.529714282148093,
+      "distribution": "normal_log10",
+      "key": "b18.log10_k_mgo_ak_100C",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "laplace_covariance_at_b8_optimum",
+      "sampled": true,
+      "sigma": 0.07532045007455257,
+      "source": "results/validation/kinetic_core_b18_fit_report.json: Gauss-Newton sigma at the frozen optimum",
+      "unit": "log10(k at 100 C)"
+    },
+    {
+      "band": [
+        111.66,
+        114.9
+      ],
+      "centre": 114.89999999999999,
+      "distribution": "uniform_band",
+      "key": "b18.ea_mgo_ak_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "trunk",
+      "reason": "unidentified_direction_flat_across_its_declared_band",
+      "sampled": true,
+      "sigma": 16.096566410277887,
+      "source": "results/validation/kinetic_core_b18_fit_report.json: unidentified, on its upper bound; band = the coordinate's DECLARED bounds",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        0.0,
+        1.5
+      ],
+      "centre": 0.19744840125387295,
+      "distribution": "fixed",
+      "key": "b18.ph_slope_above_7_decades_per_unit",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "IDENTIFIED AND STILL NOT SAMPLED, and the interval is narrower for it. This coordinate is a module-level constant in parameters_pyrazine, not a member of the `pyrazine` override block the engine accepts, so the envelope has no way to move it. The consequence, stated rather than left to be discovered: every pyrazine interval is still too narrow AWAY FROM pH 7, and correctly wide AT pH 7, where both slopes contribute nothing by construction.",
+      "sampled": false,
+      "sigma": 0.0388108646772005,
+      "source": "results/validation/kinetic_core_b18_fit_report.json: laplace.sigma[4]",
+      "unit": "decades per pH unit"
+    },
+    {
+      "band": [
+        0.0,
+        1.5
+      ],
+      "centre": 0.5795142879227316,
+      "distribution": "fixed",
+      "key": "b18.ph_slope_below_7_decades_per_unit",
+      "kind": "fitted_rate",
+      "lane": "trunk",
+      "reason": "IDENTIFIED AND STILL NOT SAMPLED, and the interval is narrower for it. This coordinate is a module-level constant in parameters_pyrazine, not a member of the `pyrazine` override block the engine accepts, so the envelope has no way to move it. The consequence, stated rather than left to be discovered: every pyrazine interval is still too narrow AWAY FROM pH 7, and correctly wide AT pH 7, where both slopes contribute nothing by construction.",
+      "sampled": false,
+      "sigma": 0.0459313207815324,
+      "source": "results/validation/kinetic_core_b18_fit_report.json: laplace.sigma[5]",
+      "unit": "decades per pH unit"
+    },
+    {
+      "band": [
+        2.0,
+        3.0
+      ],
+      "centre": 2.449489742783178,
+      "distribution": "uniform",
+      "key": "lipid.q10",
+      "kind": "declared_band",
+      "lane": "lipid",
+      "reason": "declared corner band, sampled uniform over it",
+      "sampled": true,
+      "sigma": null,
+      "source": "parameters_lipid.Q10_ASSUMPTION (Schroen & Berton-Carabin 2022)",
+      "unit": "per 10 C"
+    },
+    {
+      "band": [
+        0.01,
+        0.06
+      ],
+      "centre": 0.025,
+      "distribution": "log_uniform",
+      "key": "lipid.pea_protein_isolate.lipid_mass_fraction",
+      "kind": "declared_band",
+      "lane": "lipid",
+      "reason": "declared corner band, sampled log-uniform over it as ONE scale shared by every carrier in a draw (CoreDraw.lipid_fraction_scale), clipped to this carrier's own band",
+      "sampled": true,
+      "sigma": null,
+      "source": "parameters_lipid.LIPID_CARRIERS['pea_protein_isolate'] (declared_assumption)",
+      "unit": "kg fat / kg"
+    },
+    {
+      "band": [
+        2.0,
+        40.0
+      ],
+      "centre": 10.0,
+      "distribution": "log_uniform",
+      "key": "lipid.pea_protein_isolate.peroxide_value_meq_per_kg",
+      "kind": "declared_band",
+      "lane": "lipid",
+      "reason": "declared corner band, sampled log-uniform over it as ONE scale shared by every carrier in a draw (CoreDraw.peroxide_scale), clipped to this carrier's own band",
+      "sampled": true,
+      "sigma": null,
+      "source": "parameters_lipid.LIPID_CARRIERS['pea_protein_isolate'] (declared_assumption)",
+      "unit": "meq O2 / kg fat"
+    },
+    {
+      "band": [
+        0.008,
+        0.05
+      ],
+      "centre": 0.02,
+      "distribution": "log_uniform",
+      "key": "lipid.soy_protein_isolate.lipid_mass_fraction",
+      "kind": "declared_band",
+      "lane": "lipid",
+      "reason": "declared corner band, sampled log-uniform over it as ONE scale shared by every carrier in a draw (CoreDraw.lipid_fraction_scale), clipped to this carrier's own band",
+      "sampled": true,
+      "sigma": null,
+      "source": "parameters_lipid.LIPID_CARRIERS['soy_protein_isolate'] (declared_assumption)",
+      "unit": "kg fat / kg"
+    },
+    {
+      "band": [
+        2.0,
+        40.0
+      ],
+      "centre": 10.0,
+      "distribution": "log_uniform",
+      "key": "lipid.soy_protein_isolate.peroxide_value_meq_per_kg",
+      "kind": "declared_band",
+      "lane": "lipid",
+      "reason": "declared corner band, sampled log-uniform over it as ONE scale shared by every carrier in a draw (CoreDraw.peroxide_scale), clipped to this carrier's own band",
+      "sampled": true,
+      "sigma": null,
+      "source": "parameters_lipid.LIPID_CARRIERS['soy_protein_isolate'] (declared_assumption)",
+      "unit": "meq O2 / kg fat"
+    },
+    {
+      "band": [
+        1.0,
+        1.0
+      ],
+      "centre": 1.0,
+      "distribution": "fixed",
+      "key": "lipid.frankel_pure_hydroperoxide.lipid_mass_fraction",
+      "kind": "declared_band",
+      "lane": "lipid",
+      "reason": "degenerate band (fed hydroperoxide: the fraction is the definition)",
+      "sampled": false,
+      "sigma": null,
+      "source": "parameters_lipid.LIPID_CARRIERS['frankel_pure_hydroperoxide'] (structural_constant)",
+      "unit": "kg fat / kg"
+    },
+    {
+      "band": [
+        2000.0,
+        2000.0
+      ],
+      "centre": 2000.0,
+      "distribution": "fixed",
+      "key": "lipid.frankel_pure_hydroperoxide.peroxide_value_meq_per_kg",
+      "kind": "declared_band",
+      "lane": "lipid",
+      "reason": "degenerate band (fed hydroperoxide: PV is the definition)",
+      "sampled": false,
+      "sigma": null,
+      "source": "parameters_lipid.LIPID_CARRIERS['frankel_pure_hydroperoxide'] (structural_constant)",
+      "unit": "meq O2 / kg fat"
+    },
+    {
+      "band": [
+        0.0,
+        1.2
+      ],
+      "centre": 1.0,
+      "distribution": "uniform",
+      "key": "trunk.aw_multiplier_scale",
+      "kind": "declared_band",
+      "lane": "trunk",
+      "reason": "declared band: 0 = Bell 1995's fixed-molality plateau, 1.2 = the source's 95 % CI",
+      "sampled": true,
+      "sigma": null,
+      "source": "trunk_conditions.AW_MULTIPLIER_TABLE (Pereyra Gonzales, Naranjo, Leiva & Malec 2010, Int. Dairy J....)",
+      "unit": "scale on (multiplier - 1)"
+    },
+    {
+      "band": [
+        0.37,
+        0.92
+      ],
+      "centre": 0.69,
+      "distribution": "uniform",
+      "key": "trunk.amadori_ph_exponent_decades_per_unit",
+      "kind": "declared_band",
+      "lane": "trunk",
+      "reason": "declared band: the six Martins 2003 per-step ratios span it",
+      "sampled": true,
+      "sigma": null,
+      "source": "trunk_conditions.PH_EXPONENT_BAND (Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II...)",
+      "unit": "decades per pH unit"
+    },
+    {
+      "band": [
+        0.41,
+        1.39
+      ],
+      "centre": 1.0,
+      "distribution": "uniform",
+      "key": "acrylamide.aw_multiplier",
+      "kind": "declared_band",
+      "lane": "acrylamide",
+      "reason": "declared band: the source's a_w point estimates and the 0.92 column's 95 % HPD, relative to the shipped constant",
+      "sampled": true,
+      "sigma": null,
+      "source": "acrylamide_conditions.KF_TABLE (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0...)",
+      "unit": "multiplier on k_int1_acr inside a_w 0.34-0.99"
+    },
+    {
+      "band": [
+        0.0,
+        1.2
+      ],
+      "centre": 1.0,
+      "distribution": "uniform",
+      "key": "acrylamide.aw_elimination_deficit_scale",
+      "kind": "declared_band",
+      "lane": "acrylamide",
+      "reason": "declared band: 0 = no elimination a_w effect, 1.2 = 1.2x De Vleeschouwer 2007's k_E shape (SEs up to 90 %)",
+      "sampled": true,
+      "sigma": null,
+      "source": "acrylamide_conditions.AW_ELIMINATION_TABLE (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0...)",
+      "unit": "scale on (1 - multiplier) of k_acr_dp inside a_w 0.34-0.92"
+    },
+    {
+      "band": [
+        0.114,
+        0.281
+      ],
+      "centre": 0.235,
+      "distribution": "uniform",
+      "key": "acrylamide.ph_exponent_formation_decades_per_unit",
+      "kind": "declared_band",
+      "lane": "acrylamide",
+      "reason": "declared band: the potato-matrix slope minus its SE to the phosphate slope plus its SE",
+      "sampled": true,
+      "sigma": null,
+      "source": "acrylamide_conditions.PH_SOURCE (De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn ...)",
+      "unit": "decades per pH unit on k_asn_glc"
+    },
+    {
+      "band": [
+        0.116,
+        0.155
+      ],
+      "centre": 0.149,
+      "distribution": "uniform",
+      "key": "acrylamide.ph_exponent_elimination_decades_per_unit",
+      "kind": "declared_band",
+      "lane": "acrylamide",
+      "reason": "declared band: the two measured slopes and their SEs",
+      "sampled": true,
+      "sigma": null,
+      "source": "acrylamide_conditions.PH_SOURCE (De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn ...)",
+      "unit": "decades per pH unit on k_acr_dp"
+    },
+    {
+      "band": [
+        -5.0,
+        -1.0
+      ],
+      "centre": 0.0,
+      "distribution": "fixed",
+      "key": "sulfur.oxygen.k_cys_ox.log10_k",
+      "kind": "declared_band",
+      "lane": "sulfur",
+      "reason": "not a free coordinate of the shipped report (B11 not shipped): the consumer is zero by declaration and the structure inert",
+      "sampled": false,
+      "sigma": null,
+      "source": "parameters_sulfur.OXYGEN_BOUNDS_LOG10K (B11 prereg sec. 3b)",
+      "unit": "log10(L per ambient unit per min)"
+    },
+    {
+      "band": [
+        -5.0,
+        -1.0
+      ],
+      "centre": 0.0,
+      "distribution": "fixed",
+      "key": "sulfur.oxygen.k_red_ox.log10_k",
+      "kind": "declared_band",
+      "lane": "sulfur",
+      "reason": "not a free coordinate of the shipped report (B11 not shipped): the consumer is zero by declaration and the structure inert",
+      "sampled": false,
+      "sigma": null,
+      "source": "parameters_sulfur.OXYGEN_BOUNDS_LOG10K (B11 prereg sec. 3b)",
+      "unit": "log10(L per ambient unit per min)"
+    },
+    {
+      "band": [
+        0.1,
+        10.0
+      ],
+      "centre": 1.0,
+      "distribution": "fixed",
+      "key": "sulfur.oxygen.reservoir_scale",
+      "kind": "declared_band",
+      "lane": "sulfur",
+      "reason": "not a free coordinate of the shipped report (B11 not shipped): the reservoir is inert while the consumers are zero",
+      "sampled": false,
+      "sigma": null,
+      "source": "parameters_sulfur.OX_RESERVOIR_SCALE_BAND (saturation band x unrecorded-vessel band)",
+      "unit": "scale on the reservoir (vessel-derived or default)"
+    },
+    {
+      "band": [
+        -50.0,
+        50.0
+      ],
+      "centre": 0.0,
+      "distribution": "uniform",
+      "key": "furanic.partition_ea_offset_kj_mol",
+      "kind": "declared_band",
+      "lane": "trunk",
+      "reason": "declared corner band on the furanone PARTITION barrier, sampled uniform",
+      "sampled": true,
+      "sigma": null,
+      "source": "parameters_furanic.FURANONE_EA_ASSUMPTION (declared, no furanone Ea exists)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        -0.5,
+        0.5
+      ],
+      "centre": 0.0,
+      "distribution": "log_uniform",
+      "key": "observable.air_water_partition_constant",
+      "kind": "observable",
+      "lane": "observable",
+      "reason": "declared +/-0.5 dex band on K_aw, sampled uniform in log10",
+      "sampled": true,
+      "sigma": null,
+      "source": "k4b_paired_thresholds_and_browning.md sec. D.2: total literature spread 9.5x on hexanal K_aw; two independent static-headspace papers land 6-17x below their own cited references for the same methodological reason.",
+      "unit": "dex (multiplier on the ppb)"
+    },
+    {
+      "band": [
+        10.0,
+        23.0
+      ],
+      "centre": 15.165750888103101,
+      "distribution": "log_uniform_dispersion",
+      "key": "observable.hs_spme_same_sample_dispersion",
+      "kind": "observable",
+      "lane": "observable",
+      "reason": "measured 10-23x same-sample dispersion: D is drawn log-uniform over [10, 23] and the multiplier is D^u with u uniform on [-1/2, +1/2], i.e. uniform in log over [1/sqrt(D), sqrt(D)]",
+      "sampled": true,
+      "sigma": null,
+      "source": "Declaration D.6 Module 8, 'Xin 2026 vs Xin 2026b same-sample 10-23x discrepancy -- NOT A DATASET, a CALIBRATION FACT' (sec. E.2.2, sec. B9.1).",
+      "unit": "x (same-sample dispersion D)"
+    }
+  ],
+  "provenance": {
+    "artifact": "core_prediction_uncertainty",
+    "generated_by": "src/kinetic_core/uncertainty.py",
+    "generated_on": "2026-09-11",
+    "git": {
+      "branch": "reactions",
+      "commit": "1f5a19d2f46b8a54cf9872884451c5064dc7b930",
+      "dirty": true,
+      "short": "1f5a19d2"
+    },
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b1_fit_report.json",
+        "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+      },
+      {
+        "path": "results/validation/kinetic_core_b6_fit_report.json",
+        "sha256": "923940a43d2946b5a79afa476578650eb73a11217a80addbf741fff224091a8a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b7_fit_report.json",
+        "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
+        "sha256": "219cf3a887b27f44b0ced51f273458e5e622e867ced4d74efce4a2587e9a8379"
+      },
+      {
+        "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json",
+        "sha256": "fe72f4553a2644fd6abfb24e881ccc62e435a648a973976d5fd46bc5a345e1a8"
+      },
+      {
+        "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json",
+        "sha256": "329fe17a3b13b88a77ae1810614dbbf7b91db3c95367afaf420b098dbb367dae"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
+        "sha256": "b7630539c622871bf44daab616f78042bd625e103d6ec76a44237e9dae63ad9b"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
+        "sha256": "a664ad21718aff7209097d0b6909b463e6f91b5d3dd4784383e5820a1ab51eca"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
+        "sha256": "a96fa8fc437d9fee0e69fe8004da06479edbf51cc7d31af64529c9b7e2d3ed5d"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
+        "sha256": "db8fb70d862597dfe04b2272f93c1b50188d1f3b25a5c58fb7c7339a1d50082c"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
+        "sha256": "87caac1c46a24d7c44a7a0aea2b7964d5c0a1e70991838a007f4b5d4212d773a"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
+        "sha256": "60bc7cc5c7e04ee3c53cf731f48c3aa1c4bf775552ad6f0d4e35cf79e5fc9a90"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
+        "sha256": "d31fdfdaa704aac64d820c772c86a60b3de9ab9b7a8e8d40f8a4bd53ca947524"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
+        "sha256": "e32d49f3e456f31e4a2c607280774ec6c8a2b8de520eed5ba7c035410cd6fac8"
+      },
+      {
+        "path": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
+        "sha256": "8de992ed19dee9d8534960cc15748edec9b052112046d21e4b340144881aa8a6"
+      },
+      {
+        "path": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
+        "sha256": "2ee2e0225360ec05da37dc5bf2f1f82d970c25ccd0471a70bd73978d2addbb5c"
+      },
+      {
+        "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
+        "sha256": "a0dcaa615ef839c7fc4044cbd6df71b01974727abbf816edc9739d5b4ff382ad"
+      },
+      {
+        "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
+        "sha256": "d4595d306169a2a81a2981f0dfdd0460b8d0025bd4963d45c753c459d05ba7d7"
+      },
+      {
+        "path": "data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
+        "sha256": "cb306359d0570595692a5b85fa262318640c98a843b9ea901c8cc1a6448463c0"
+      },
+      {
+        "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
+        "sha256": "43dfe0b02f27ebe94ee929d02925850a90a05b64da6b55556fd636afd7e87cbf"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
+        "sha256": "c10cf27277211e7668b68d39001af274d971f012b6e292fb37bd88997f3a9425"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json",
+        "sha256": "4005557191b26f4992b15281cca5c730bd497244a5ec03846003f43e72634c50"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019.json",
+        "sha256": "337ad5e3c9b8af0a9b9fe9d68aa9218f7f50406a655aaf48f8a6790588b39509"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_10min_Chang2021.json",
+        "sha256": "61219f743234159c82ed2648a33e0c45b15bd7d55027c90b72a45aa6ea25d843"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_Chang2021.json",
+        "sha256": "dbb843c04dd7f3ff9f61653898a5d890bbf7ce265a0d254a9c925d2436b22d88"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_30min_water_Chang2021.json",
+        "sha256": "2dd3955fa3252822552472480dc72c72055ce3afdce26398d8e7461d66583184"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_Ye2024.json",
+        "sha256": "e78a2b62c9ed32bafb966b8d181897283e4681b49a810f72f9f26d496694efbe"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
+        "sha256": "1420cb0477cc0aecfb830b9bdefbe9cc7ae7160a4e3b74c7aff511c56bf5db73"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
+        "sha256": "3bd440ee7f86492ded7609ea9cdf62fa109178a2ec87c5a4e8f5f787646ad4ed"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json",
+        "sha256": "af1adbd38b4e055579bb5304860b7ad9fc16345d20c954183dcf7e78c13b61c0"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json",
+        "sha256": "63cfc172d57e28c02d11c719a8880cdad2dd01789bf34aa51a2c0f3354b379f1"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json",
+        "sha256": "edd2b24080574d112ed271161472ec0f903f145946f450e65cdd890bd3c9521a"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5.json",
+        "sha256": "0d216cda3fe110c1ca452e944f8846836cbe675079fad8057d9f2a5a4f203f86"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026.json",
+        "sha256": "2ec1bc44f15f3523bff139164c0b3cd94d6e8b3e51c820fbee8e7685ae3a19f8"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026.json",
+        "sha256": "d6379ca0eb39fd844e6cd40aad744d31e027bf76f030ceac7dccf87a96e3d33c"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026.json",
+        "sha256": "1e1ede1bd7ad93aafb3bf3d5b810c074622185328ac1609ae395e10129801594"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026.json",
+        "sha256": "00daaa8e537c8f1fec02d7fb670b9aa8bcf8e9f267f562d8d0c278360420d0ea"
+      },
+      {
+        "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
+        "sha256": "8c3c3b02959de5bfc9c610702529bc659cb5bd157924b11f7f7d657ea342fa69"
+      },
+      {
+        "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
+        "sha256": "0f754e041e6fe91216a0d2101b78cd5d34cbeccc77d88f5aea16d24862fc8d34"
+      },
+      {
+        "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
+        "sha256": "ad0f6b15622d1defd7b22d53d0517c2a92612132b211eba378ec696aeb41c52d"
+      },
+      {
+        "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
+        "sha256": "f76c219e8d8ee4c90102d8c3f838fdb9f49c685b41f622c70639f770eae4814e"
+      }
+    ]
+  },
+  "refused_compounds": [
+    {
+      "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+      "compound": "N\u03b5-(Carboxymethyl)lysine (CML)",
+      "envelope_state": "out_of_envelope",
+      "lane": "acrylamide",
+      "panel": "trust_loop",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxymethyl)lysine (CML)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
+    },
+    {
+      "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+      "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)",
+      "envelope_state": "out_of_envelope",
+      "lane": "acrylamide",
+      "panel": "trust_loop",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain of reactions leads from what is charged (Glc, Lys) to it, so the integrator would return exactly zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the precursor this compound is made from."
+    },
+    {
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "out_of_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "out_of_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "out_of_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "out_of_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "out_of_envelope",
+      "lane": "sulfur",
+      "panel": "trust_loop",
+      "reason": "UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+    },
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "compound": "hexanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "compound": "2-pentylfuran",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "2,5-dimethylpyrazine",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "methional",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "2-acetyl-1-pyrroline",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "compound": "hexanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "compound": "2-pentylfuran",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+      "compound": "Furfural",
+      "envelope_state": "out_of_envelope",
+      "lane": null,
+      "panel": "maillard_path_holdout",
+      "reason": "LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single integration can answer it."
+    },
+    {
+      "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+      "compound": "Furfural",
+      "envelope_state": "out_of_envelope",
+      "lane": null,
+      "panel": "maillard_path_holdout",
+      "reason": "LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single integration can answer it."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
+      "compound": "2-Furfurylthiol (FFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "envelope_state": "in_envelope_extrapolated",
+      "lane": "sulfur",
+      "panel": "maillard_path_holdout",
+      "reason": "NOT EVALUABLE: HEXOSE ENTRY UNIDENTIFIED (MFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "compound": "hexanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "compound": "nonanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "furaneol",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "2,5-dimethylpyrazine",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "furfural",
+      "envelope_state": "out_of_envelope",
+      "lane": "sulfur",
+      "panel": "external_matrix",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "compound": "1-hexanol",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "UNREPRESENTED TARGETS: 1-hexanol -- The lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The retired screening lane emitted a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS."
+    },
+    {
+      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+      "compound": "hexanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+      "compound": "nonanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    }
+  ],
+  "skipped_bundles": [
+    {
+      "bench_file": "data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "panel": "trust_loop",
+      "reason": "synthetic snapshot (_Internal2026): legacy-model output, not a measurement"
+    },
+    {
+      "bench_file": "data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "panel": "trust_loop",
+      "reason": "synthetic snapshot (_Internal2026): legacy-model output, not a measurement"
+    }
+  ],
+  "summary": {
+    "benchmark_count": 23,
+    "ci_coverage_hits": 14,
+    "ci_coverage_rate": 0.3111111111111111,
+    "ci_level_pct": 90,
+    "fixed_prior_count": 45,
+    "honest_literature_coverage": {
+      "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
+      "excluded_fitted_rows": 0,
+      "excluded_fitted_rows_that_would_have_been_hits": 0,
+      "hits": 14,
+      "median_ci_width_log10": 1.0781789667497503,
+      "not_evaluable": 1,
+      "rate": 0.3181818181818182,
+      "total": 44
+    },
+    "matched_compound_count": 45,
+    "n_samples": 200,
+    "observable_multiplier_policy": {
+      "rows_by_family": {
+        "extraction": 36,
+        "headspace": 9,
+        "undeclared": 0
+      },
+      "rule": "the K_aw (+/-0.5 dex) and HS-SPME same-sample dispersion bands multiply a ppb row only when the bundle's quantification_class is a headspace method, or is undeclared (then the core's own absolute_concentration convention is kept and the row says so); extraction-based quantification (SIDA, HPLC, LC-MS/MS) never passed through an air/water partition or a fibre.",
+      "undeclared_bundles": []
+    },
+    "out_of_sample_literature_coverage": {
+      "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
+      "hits": 14,
+      "not_evaluable": 1,
+      "rows_the_core_fit_read": {
+        "hits": 0,
+        "not_evaluable": 0,
+        "total": 1
+      },
+      "total": 43
+    },
+    "panel_benchmark_count": 37,
+    "panel_split": {
+      "external_matrix": {
+        "ci_coverage_rate": 0.5,
+        "hits": 2,
+        "median_ci_width_log10": 2.19372058849301,
+        "not_evaluable": 0,
+        "total": 4
+      },
+      "maillard_path_holdout": {
+        "ci_coverage_rate": 0.23333333333333334,
+        "hits": 7,
+        "median_ci_width_log10": 0.9932587652157645,
+        "not_evaluable": 1,
+        "total": 30
+      },
+      "trust_loop": {
+        "ci_coverage_rate": 0.5,
+        "hits": 5,
+        "median_ci_width_log10": 1.5109659690188988,
+        "not_evaluable": 0,
+        "total": 10
+      }
+    },
+    "parameter_sources": [
+      {
+        "report": "results/validation/kinetic_core_b1_fit_report.json",
+        "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+      },
+      {
+        "report": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "report": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+      },
+      {
+        "report": "results/validation/kinetic_core_b6_fit_report.json",
+        "sha256": "923940a43d2946b5a79afa476578650eb73a11217a80addbf741fff224091a8a"
+      },
+      {
+        "report": "results/validation/kinetic_core_b7_fit_report.json",
+        "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
+      }
+    ],
+    "refused_compound_count": 32,
+    "sampled_prior_count": 63,
+    "seed": 1,
+    "shared_with_holdout_panel": {
+      "declaration": "The four Hofmann 1998 ribose/cysteine pH-3 and pH-7 rows are the SAME MEASUREMENTS as four rows of the sulfur waves' hold-out panel: NOT independent evidence. Each carries `shared_with`.",
+      "n": 4
+    },
+    "signal_origin_split": {
+      "external_literature": {
+        "ci_coverage_rate": 0.3181818181818182,
+        "hits": 14,
+        "median_ci_width_log10": 1.0781789667497503,
+        "not_evaluable": 1,
+        "total": 44
+      },
+      "fitted_row": {
+        "ci_coverage_rate": null,
+        "hits": 0,
+        "median_ci_width_log10": null,
+        "not_evaluable": 0,
+        "total": 0
+      },
+      "in_core_fit": {
+        "ci_coverage_rate": 0.0,
+        "hits": 0,
+        "median_ci_width_log10": 0.257667983295218,
+        "not_evaluable": 0,
+        "total": 1
+      },
+      "internal_synthetic": {
+        "ci_coverage_rate": null,
+        "hits": 0,
+        "median_ci_width_log10": null,
+        "not_evaluable": 0,
+        "total": 0
+      }
+    },
+    "sulfur_laplace": {
+      "free": 23,
+      "identified": 20,
+      "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
+      "reduced_chi_square": 1.2090479619053558
+    },
+    "unsampled_lanes": [],
+    "wall_seconds": 795.2,
+    "workers": 1
+  }
+}

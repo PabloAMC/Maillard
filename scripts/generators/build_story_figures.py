@@ -71,16 +71,18 @@ def fig_coverage() -> dict:
         if p.get("answered"):
             return "modelled", f"{p.get('lane', '')}"
         reached = (p.get("hypotheses") or {}).get("reached_in_charges") or []
+        if p.get("state") == "refused" and p.get("species_key"):
+            return "refused", "in the network, no shipped rate"
         if reached:
             return "route", "no rate, not no route"
         return "none", p.get("state", "")
 
     rows = [("desirable", n, *status(n)) for n in desirable] + [("off-note", n, *status(n)) for n in off]
-    counts = {g: {"modelled": 0, "route": 0, "none": 0} for g in ("desirable", "off-note")}
+    counts = {g: {"modelled": 0, "route": 0, "refused": 0, "none": 0} for g in ("desirable", "off-note")}
     for g, _n, st, _ in rows:
         counts[g][st] += 1
-    colour = {"modelled": ("good", GOOD), "route": ("mid", MID), "none": ("none", NONE)}
-    label = {"modelled": "modelled, with a rate", "route": "a cited route, no rate", "none": "nothing"}
+    colour = {"modelled": ("good", GOOD), "route": ("mid", MID), "refused": ("bad", BAD), "none": ("none", NONE)}
+    label = {"modelled": "modelled, with a rate", "route": "a cited route, no rate", "refused": "a step tried and refused; no shipped rate", "none": "nothing"}
 
     n_left = len(desirable)
     fig_h = 0.42 * max(n_left, len(off)) + 1.6
@@ -91,7 +93,7 @@ def fig_coverage() -> dict:
         ax.invert_yaxis()
         ax.axis("off")
         c = counts[group]
-        ax.set_title(f"{group} ({len(names)}): {c['modelled']} modelled, {c['route']} route only, {c['none']} nothing", loc="left")
+        ax.set_title(f"{group} ({len(names)}): {c['modelled']} modelled, {c['route']} route only, {c['refused']} refused, {c['none']} nothing", loc="left")
         for i, (g, n, st, note) in enumerate(r for r in rows if r[0] == group):
             fill, edge = colour[st]
             ax.add_patch(plt.Rectangle((0.0, i - 0.42), 1.0, 0.84, facecolor=FILL[fill], edgecolor=edge, linewidth=1.2))
@@ -400,6 +402,99 @@ def fig_calibration() -> dict:
     return {"before": fb, "after": fa}
 
 
+# ---------------------------------------------------------------------------
+# 30. the melanoidin C/N: falsified from BOTH sides, across five laboratories
+# ---------------------------------------------------------------------------
+def fig_melanoidin_cn() -> dict:
+    """
+    The repeat unit sets C/N = 8 as a floor. One laboratory measures below it and three measure
+    far above it, and the model sits between them. This figure exists because the record said the
+    opposite twice in one day before the corpus was actually looked at.
+    """
+    from src.kinetic_core.species import MELANOIDIN_REPEAT_UNIT_CARBON
+
+    # (temperature C, C/N, label, is_glycine_basis)
+    points = [
+        (70.0, 7.64, "Mundt 2004, glucose + glycine\nBELOW the floor", True, 0.21),
+        (60.0, 7.0, "Cammerer 1995", True, None),
+        (100.0, 9.0, "Cammerer 1995", True, None),
+        (100.0, 15.0, "Martins 2003\npH 6.8, 30 min", True, None),
+        (100.0, 11.0, "Martins 2003\npH 6.8, 180 min", True, None),
+        (120.0, 11.0, "Martins 2003\npH 6.8", True, None),
+        (130.0, 12.0, "Mohsin 2018\n(alanine, -1 C/N)", False, None),
+        (200.0, 20.0, "Mohsin 2018\n(alanine, -1 C/N)", False, None),
+    ]
+    fig, ax = plt.subplots(figsize=(11, 5.4))
+    ax.axhspan(8.42, 9.94, color="#E7EBE9", alpha=0.9, label="what this model predicts, 8.42 to 9.94")
+    ax.axhline(float(MELANOIDIN_REPEAT_UNIT_CARBON), color=BAD, linestyle="--", linewidth=1.6,
+               label="the repeat unit's structural FLOOR, C/N = 8")
+    for t, v, lab, glycine, err in points:
+        colour = INK if glycine else MID
+        ax.errorbar([t], [v], yerr=[[err], [err]] if err else None, fmt="o", color=colour,
+                    markersize=7, capsize=3, zorder=3)
+        ax.annotate(lab, (t, v), textcoords="offset points",
+                    xytext=(8, -18 if v < 8.2 else -4), fontsize=7.6, color=MUTED)
+    xs = [t for t, *_ in points]
+    ys = [v for _, v, *_ in points]
+    order = np.argsort(xs)
+    ax.plot(np.array(xs)[order], np.array(ys)[order], color=MUTED, linewidth=0.9, alpha=0.5, zorder=1)
+    _style(ax, "melanoidin C / N (atoms)", "temperature of the polymer's formation, C")
+    ax.legend(loc="upper left", fontsize=8.5)
+    ax.set_title("The melanoidin repeat unit is falsified from BELOW and from ABOVE", loc="left", fontsize=10.5)
+    fig.text(0.01, 0.005,
+             "Below the floor at 70 C because about two thirds of the glycine arrives DECARBOXYLATED and gives one carbon per nitrogen instead of two "
+             "(Mundt 2004, two methods agreeing). Far above it from 100 C up because the polymer takes up more carbohydrate per amine than one fixed unit "
+             "allows. Mohsin's points are glucose + ALANINE and are shown on a glycine basis by subtracting the one carbon alanine adds, which the paper's "
+             "own landmarks license. One fixed repeat unit cannot be wrong in both directions and still be the right structure: what the corpus supports is "
+             "a carbohydrate-to-amine ratio that RISES with temperature. Nothing in the model is changed on this figure's evidence; the spread across these "
+             "sources is wider than any one of them justifies fitting to.",
+             fontsize=8, color=MUTED, wrap=True)
+    fig.tight_layout(rect=(0, 0.11, 1, 1))
+    fig.savefig(OUT / "30_melanoidin_c_over_n.png", bbox_inches="tight")
+    plt.close(fig)
+    return {"points": [(t, v) for t, v, *_ in points], "floor": MELANOIDIN_REPEAT_UNIT_CARBON}
+
+
+# ---------------------------------------------------------------------------
+# 31. the lipid lane's fit source, checked against itself eight years apart
+# ---------------------------------------------------------------------------
+def fig_lipid_crosscheck() -> dict:
+    """The first external check the lane's own fit source has ever had (wave B28, T3)."""
+    r = _read(V / "kinetic_core_b28_ship_rule.json")["T3"]["rows"]
+    names = list(r)
+    a = [r[k]["frankel1981_renormalised_pct"] for k in names]
+    b = [r[k]["frankel1989_renormalised_pct"] for k in names]
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(13, 5))
+    x = np.arange(len(names))
+    ax.bar(x - 0.2, b, 0.4, color=INK, label="Frankel 1989, 180 C (the lane's FIT source)")
+    ax.bar(x + 0.2, a, 0.4, color=MID, label="Frankel 1981, 210 C (never used before)")
+    ax.set_xticks(x)
+    ax.set_xticklabels([n.replace("_", " ").lower() for n in names], rotation=20, ha="right", fontsize=8)
+    _style(ax, "share of the five products both papers quantify, %")
+    ax.legend(loc="upper left", fontsize=8)
+    ax.set_title("Same laboratory, same author, eight years apart", loc="left", fontsize=10.5)
+    folds = [r[k]["fold"] for k in names]
+    ax2.barh(x, folds, 0.5, color=[GOOD if f < 2.0 else BAD for f in folds])
+    ax2.axvline(1.0, color=MUTED, linewidth=1)
+    ax2.axvline(2.0, color=BAD, linestyle="--", linewidth=1.2, label="2x")
+    ax2.set_yticks(x)
+    ax2.set_yticklabels([n.replace("_", " ").lower() for n in names], fontsize=8)
+    _style(ax2, "", "disagreement, fold")
+    ax2.legend(loc="lower right", fontsize=8)
+    ax2.set_title(f"Worst disagreement {max(folds):.2f}x, on all five", loc="left", fontsize=10.5)
+    fig.text(0.01, 0.005,
+             "The C14 oxo-ester is dropped from BOTH slates and both renormalised over the remaining five, because the 1981 paper could not identify it for "
+             "want of an authentic reference compound -- an analytical absence, not a chemical one. This is NOT a two-point Arrhenius: 210 C neat against "
+             "180 C in hexane, a 25 C column start against a -65 C cryotrap, packed column against capillary. Temperature and light-end loss are confounded "
+             "and these two papers cannot separate them. What it does show is that the distribution the lipid lane is fitted on reproduces, within 1.6 fold, "
+             "in an independent run of the same chemistry.",
+             fontsize=8, color=MUTED, wrap=True)
+    fig.tight_layout(rect=(0, 0.09, 1, 1))
+    fig.savefig(OUT / "31_lipid_slate_crosscheck.png", bbox_inches="tight")
+    plt.close(fig)
+    return {"products": names, "worst_fold": max(folds)}
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     summary = {
@@ -410,6 +505,8 @@ def main() -> int:
         "27_pyrazine": fig_pyrazine(),
         "28_sinks": fig_sink_refusals(),
         "29_calibration": fig_calibration(),
+        "30_melanoidin": fig_melanoidin_cn(),
+        "31_lipid_crosscheck": fig_lipid_crosscheck(),
     }
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
     from figure_manifest import ENGINE_SOURCES, record
@@ -419,9 +516,11 @@ def main() -> int:
             V / "kinetic_core_b17_ship_rule.json", V / "kinetic_core_b17a_ship_rule.json", V / "kinetic_core_b9_fit_report.json",
             data_paths.DESIRABLE_TARGETS, data_paths.SPECIES_DIR / "off_flavour_targets.yml", data_paths.SPECIES_DIR / "protein_matrices.yml",
             ROOT / "data" / "lit" / "reaction_rules.yml", ROOT / "docs" / "examples" / "reading_2026_ladder.yml",
-            ROOT / "scripts" / "generators" / "build_story_figures.py", *ENGINE_SOURCES],
+            ROOT / "scripts" / "generators" / "build_story_figures.py",
+            V / "kinetic_core_b28_ship_rule.json", *ENGINE_SOURCES],
            ["23_coverage_of_declared_targets.png", "24_fat_path_hexanal.png", "25_protein_matrix_layer.png", "26_hypothesis_layer.png",
-            "27_pyrazine_step_supply.png", "28_two_refused_sinks.png", "29_calibration_reading_ladder.png"])
+            "27_pyrazine_step_supply.png", "28_two_refused_sinks.png", "29_calibration_reading_ladder.png",
+            "30_melanoidin_c_over_n.png", "31_lipid_slate_crosscheck.png"])
     print(json.dumps(summary, default=str)[:1500])
     return 0
 

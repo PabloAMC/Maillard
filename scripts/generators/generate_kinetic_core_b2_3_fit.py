@@ -956,6 +956,19 @@ def observables(
             predicted[row["id"]] = run.final(row["species"])
         elif kind == "molpct":
             predicted[row["id"]] = 100.0 * run.final(row["species"]) / float(row["basis"])
+        elif kind == "molpct_total":
+            # B27 (2026-09-11): a mol % over SEVERAL species with multiplicities -- total MFT is the
+            # free thiol plus TWICE the disulfide. No row before B27 uses this kind.
+            predicted[row["id"]] = 100.0 * sum(
+                float(mult) * run.final(sp) for sp, mult in row["species_terms"].items()
+            ) / float(row["basis"])
+        elif kind == "floor":
+            # B27: a one-sided LOWER bound -- the model may exceed the target at no cost. The share
+            # is thiol equivalents in the disulfide over the whole pool; see residuals().
+            terms = row["species_terms"]
+            num = sum(float(m) * run.final(sp) for sp, m in terms["numerator"].items())
+            den = sum(float(m) * run.final(sp) for sp, m in terms["denominator"].items())
+            predicted[row["id"]] = num / den if den > 0 else np.nan
         elif kind == "ratio":
             denominator = run.final(row["species_b"])
             predicted[row["id"]] = (
@@ -1025,6 +1038,9 @@ def residuals(x: np.ndarray, quick: bool = True) -> np.ndarray:
         elif row["kind"] in ("ceiling", "peak_fraction_ceiling"):
             # one-sided: no penalty below the ceiling
             out[i] = max(0.0, math.log10((p + FLOOR) / (t + FLOOR))) / sigma
+        elif row["kind"] == "floor":
+            # B27: one-sided the other way -- no penalty ABOVE the floor
+            out[i] = min(0.0, math.log10((p + FLOOR) / (t + FLOOR))) / sigma
         else:
             out[i] = math.log10((p + FLOOR) / (t + FLOOR)) / sigma
     out = np.clip(out, -25.0, 25.0)

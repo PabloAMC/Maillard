@@ -1,0 +1,504 @@
+{
+  "artifact": "kinetic_core_b39_fit_report",
+  "wave": "B39",
+  "provenance": {
+    "artifact": "kinetic_core_b39_fit_report",
+    "generated_on": "2026-09-11",
+    "git": {
+      "commit": "c365533146db787e5d21919e4f912e992f64faac",
+      "short": "c3655331",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b39_fit.py",
+    "wave": "B39",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b39_prereg.md",
+        "sha256": "d2f3db4e3b5c868992e8a217c515da45b0122902b94382e05f4081daf898a676"
+      },
+      {
+        "path": "data/lit/extraction_dossiers/mittelmaier2010_extraction.md",
+        "sha256": "0634185f343a96aeb4669722e0c8b9e0df8ef3a396092e01c31085976c6f5575"
+      },
+      {
+        "path": "data/lit/extraction_dossiers/zhang2020_extraction.md",
+        "sha256": "d385ba8340e0388e3b31d359408c24c0a43893df432dcca85aab2879f3692008"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b39_prereg.md",
+  "quick": false,
+  "objective": {
+    "form": "weighted least squares on log10(pred/target)/sigma over the decisive rows; fed pots integrated to 120 min on a 0.5-min grid, Zhang pots to 360 min",
+    "n_rows": 12,
+    "n_free": 5,
+    "sigma_log": {
+      "fedTDG_ddg_max_uM": 0.15,
+      "fedTDG_ddg_tmax_min": 0.25,
+      "fedTDG_dgal_share_60min": 0.5,
+      "fedDGAL_ddg_max_uM": 0.15,
+      "fedDGAL_ddg_tmax_min": 0.25,
+      "fedDGAL_tdg_share_60min": 0.5,
+      "fedDDG_tdg_max_uM": 0.15,
+      "fedDDG_dgal_max_uM": 0.15,
+      "zhang_ratio_90C": 0.2,
+      "zhang_ratio_95C": 0.2,
+      "zhang_ratio_100C": 0.2,
+      "zhang_ratio_105C": 0.2,
+      "zhang_ratio_110C": 0.2
+    }
+  },
+  "declaration": {
+    "fed_pot": {
+      "charge_uM": 200.0,
+      "T_C": 120.0,
+      "pH": 5.0,
+      "medium": "water (the PD salts are not printed and are not invented)"
+    },
+    "zhang_pot": {
+      "glucose_mM": 300.0,
+      "pH": 6.5,
+      "minutes": 360.0
+    },
+    "barrier_kj_mol_declared_for_new_steps": 36.9,
+    "not_freed": [
+      "k_tdg_fa (Martins, a B1 fit row)",
+      "k_tdg_mgo (Kocadagli)",
+      "k_glc_tdg (the glucose entry)"
+    ],
+    "holdout_never_read": "Leitzen 2021 (mp_holdout_glucose_only_autoclave_121C_Steinhagen2021)"
+  },
+  "rows": [
+    {
+      "id": "fedTDG_ddg_max_uM",
+      "pot": "TDG",
+      "observable": "max_DDG",
+      "target": 26.7,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 5.292838460990391,
+      "after": 21.496470430562862,
+      "before_dex": -0.702822621968255,
+      "after_dex": -0.0941441036985795
+    },
+    {
+      "id": "fedTDG_ddg_tmax_min",
+      "pot": "TDG",
+      "observable": "tmax_DDG",
+      "target": 30.0,
+      "sigma_log": 0.25,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 10.5,
+      "after": 12.5,
+      "before_dex": -0.4559319556497244,
+      "after_dex": -0.38021124171160603
+    },
+    {
+      "id": "fedTDG_dgal_share_60min",
+      "pot": "TDG",
+      "observable": "share_DGAL_60",
+      "target": 0.26,
+      "sigma_log": 0.5,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 1e-12,
+      "after": 0.6263871509421141,
+      "before_dex": -11.414973347970818,
+      "after_dex": 0.381869492502806
+    },
+    {
+      "id": "fedDGAL_ddg_max_uM",
+      "pot": "DGAL",
+      "observable": "max_DDG",
+      "target": 46.2,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 1e-12,
+      "after": 49.93139285807422,
+      "before_dex": -13.664641975556126,
+      "after_dex": 0.03373170550275964
+    },
+    {
+      "id": "fedDGAL_ddg_tmax_min",
+      "pot": "DGAL",
+      "observable": "tmax_DDG",
+      "target": 20.0,
+      "sigma_log": 0.25,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 1e-12,
+      "after": 20.0,
+      "before_dex": -13.301029995663981,
+      "after_dex": 0.0
+    },
+    {
+      "id": "fedDGAL_tdg_share_60min",
+      "pot": "DGAL",
+      "observable": "share_TDG_60",
+      "target": 0.48,
+      "sigma_log": 0.5,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 1e-12,
+      "after": 0.22687757463001915,
+      "before_dex": -11.681241237375588,
+      "after_dex": -0.3254496665490488
+    },
+    {
+      "id": "fedDDG_tdg_max_uM",
+      "pot": "DDG",
+      "observable": "max_TDG",
+      "target": 26.9,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 1e-12,
+      "after": 28.470056635486245,
+      "before_dex": -13.429752280002408,
+      "after_dex": 0.024636051087458637
+    },
+    {
+      "id": "fedDDG_dgal_max_uM",
+      "pot": "DDG",
+      "observable": "max_DGAL",
+      "target": 37.9,
+      "sigma_log": 0.15,
+      "decisive": true,
+      "anchor": "Mittelmaier et al. 2011, Anal. Bioanal. Chem. 399:1689, Results 'Reaction pathways of 3-DGal formation' (mittelmaier2010_extraction.md sec. 3)",
+      "before": 1e-12,
+      "after": 33.11988943234289,
+      "before_dex": -13.578639209968072,
+      "after_dex": -0.05855033170436974
+    },
+    {
+      "id": "zhang_ratio_90C",
+      "pot": "ZHANG",
+      "observable": 90.0,
+      "target": 0.21198156682027652,
+      "sigma_log": 0.2,
+      "decisive": false,
+      "anchor": "Zhang et al. 2021, Food Sci. Nutr. 9:290, Table 1 glucose-only slopes at 6 h, within-study mass ratio 3,4-DDG/3-DG (zhang2020_extraction.md sec. 2)",
+      "before": 0.020142374495064338,
+      "after": 0.20462553514602164,
+      "before_dex": -1.022187431550014,
+      "after_dex": -0.015338269624847377
+    },
+    {
+      "id": "zhang_ratio_95C",
+      "pot": "ZHANG",
+      "observable": 95.0,
+      "target": 0.2311111111111111,
+      "sigma_log": 0.2,
+      "decisive": true,
+      "anchor": "Zhang et al. 2021, Food Sci. Nutr. 9:290, Table 1 glucose-only slopes at 6 h, within-study mass ratio 3,4-DDG/3-DG (zhang2020_extraction.md sec. 2)",
+      "before": 0.023781552072806442,
+      "after": 0.22975008025463947,
+      "before_dex": -0.9875806306377721,
+      "after_dex": -0.002565153760648052
+    },
+    {
+      "id": "zhang_ratio_100C",
+      "pot": "ZHANG",
+      "observable": 100.0,
+      "target": 0.24109589041095889,
+      "sigma_log": 0.2,
+      "decisive": true,
+      "anchor": "Zhang et al. 2021, Food Sci. Nutr. 9:290, Table 1 glucose-only slopes at 6 h, within-study mass ratio 3,4-DDG/3-DG (zhang2020_extraction.md sec. 2)",
+      "before": 0.027956842512608552,
+      "after": 0.2554382174463539,
+      "before_dex": -0.9357016877153661,
+      "after_dex": 0.025096067161553985
+    },
+    {
+      "id": "zhang_ratio_105C",
+      "pot": "ZHANG",
+      "observable": 105.0,
+      "target": 0.2593320235756385,
+      "sigma_log": 0.2,
+      "decisive": true,
+      "anchor": "Zhang et al. 2021, Food Sci. Nutr. 9:290, Table 1 glucose-only slopes at 6 h, within-study mass ratio 3,4-DDG/3-DG (zhang2020_extraction.md sec. 2)",
+      "before": 0.03274382627406644,
+      "after": 0.28182402618158026,
+      "before_dex": -0.8987267214224002,
+      "after_dex": 0.03612186614018792
+    },
+    {
+      "id": "zhang_ratio_110C",
+      "pot": "ZHANG",
+      "observable": 110.0,
+      "target": 0.2773279352226721,
+      "sigma_log": 0.2,
+      "decisive": true,
+      "anchor": "Zhang et al. 2021, Food Sci. Nutr. 9:290, Table 1 glucose-only slopes at 6 h, within-study mass ratio 3,4-DDG/3-DG (zhang2020_extraction.md sec. 2)",
+      "before": 0.03823088567745817,
+      "after": 0.309229709303973,
+      "before_dex": -0.8605792589953862,
+      "after_dex": 0.04728759394414694
+    }
+  ],
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        -2.427587212571361,
+        -2.427587212571361,
+        -2.427587212571361,
+        -2.427587212571361,
+        -0.9244530386074692
+      ],
+      "x": [
+        -1.8619670908072206,
+        -1.7399459168992093,
+        -1.855913653444611,
+        -1.6776288506025347,
+        -1.5249426444394498
+      ],
+      "cost": 4.048192009918087,
+      "nfev": 31,
+      "status": 3,
+      "seconds": 20.1,
+      "residuals_dex": {
+        "fedTDG_ddg_max_uM": -0.0941441036985795,
+        "fedTDG_ddg_tmax_min": -0.38021124171160603,
+        "fedTDG_dgal_share_60min": 0.381869492502806,
+        "fedDGAL_ddg_max_uM": 0.03373170550275964,
+        "fedDGAL_ddg_tmax_min": 0.0,
+        "fedDGAL_tdg_share_60min": -0.3254496665490488,
+        "fedDDG_tdg_max_uM": 0.024636051087458637,
+        "fedDDG_dgal_max_uM": -0.05855033170436974,
+        "zhang_ratio_95C": -0.002565153760648052,
+        "zhang_ratio_100C": 0.02509606716155398,
+        "zhang_ratio_105C": 0.03612186614018792,
+        "zhang_ratio_110C": 0.04728759394414694
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        -1.852435824570298,
+        -2.2054012083198407,
+        -1.9355137434240979,
+        -1.504511384138358,
+        -0.7103733534503042
+      ],
+      "x": [
+        -1.5965573499588854,
+        -1.5604644360560584,
+        -1.5301858962734027,
+        -1.376769694970071,
+        -1.171187403951066
+      ],
+      "cost": 6.958492914061846,
+      "nfev": 31,
+      "status": 3,
+      "seconds": 17.9,
+      "residuals_dex": {
+        "fedTDG_ddg_max_uM": -0.015196311579949877,
+        "fedTDG_ddg_tmax_min": -0.5477023290053697,
+        "fedTDG_dgal_share_60min": 0.3857570861826103,
+        "fedDGAL_ddg_max_uM": 0.04245194319354204,
+        "fedDGAL_ddg_tmax_min": -0.2798406965940431,
+        "fedDGAL_tdg_share_60min": -0.17347228812493085,
+        "fedDDG_tdg_max_uM": 0.017655583652555044,
+        "fedDDG_dgal_max_uM": -0.024961492466551875,
+        "zhang_ratio_95C": -0.038362278964339594,
+        "zhang_ratio_100C": -0.005621988406959746,
+        "zhang_ratio_105C": 0.010677643543348894,
+        "zhang_ratio_110C": 0.0267816332529708
+      }
+    }
+  ],
+  "best_start": 0,
+  "frozen_parameters": {
+    "fed_3deoxy": {
+      "log10_k_tdg_ddg_100C": -1.8619670908072206,
+      "log10_k_ddg_tdg_100C": -1.7399459168992093,
+      "log10_k_ddg_dgal_100C": -1.855913653444611,
+      "log10_k_dgal_ddg_100C": -1.6776288506025347,
+      "log10_k_ddg_hmf_100C": -1.5249426444394498
+    },
+    "start_log10": {
+      "log10_k_tdg_ddg_100C": -2.427587212571361,
+      "log10_k_ddg_tdg_100C": -2.427587212571361,
+      "log10_k_ddg_dgal_100C": -2.427587212571361,
+      "log10_k_dgal_ddg_100C": -2.427587212571361,
+      "log10_k_ddg_hmf_100C": -0.9244530386074692
+    }
+  },
+  "bounds": {
+    "log10_k_tdg_ddg_100C": [
+      -4.4275872125713605,
+      -0.4275872125713609
+    ],
+    "log10_k_ddg_tdg_100C": [
+      -4.4275872125713605,
+      -0.4275872125713609
+    ],
+    "log10_k_ddg_dgal_100C": [
+      -4.4275872125713605,
+      -0.4275872125713609
+    ],
+    "log10_k_dgal_ddg_100C": [
+      -4.4275872125713605,
+      -0.4275872125713609
+    ],
+    "log10_k_ddg_hmf_100C": [
+      -2.924453038607469,
+      1.0755469613925308
+    ]
+  },
+  "laplace": {
+    "sigma": {
+      "log10_k_tdg_ddg_100C": 0.08419871122626368,
+      "log10_k_ddg_tdg_100C": 0.14628011469087027,
+      "log10_k_ddg_dgal_100C": 0.16427885477698473,
+      "log10_k_dgal_ddg_100C": 0.21381521005853973,
+      "log10_k_ddg_hmf_100C": 0.16652608606770186
+    },
+    "conditional_sigma": {
+      "log10_k_tdg_ddg_100C": 0.02680242346203714,
+      "log10_k_ddg_tdg_100C": 0.02761525402624155,
+      "log10_k_ddg_dgal_100C": 0.027810559640907836,
+      "log10_k_dgal_ddg_100C": 0.1836415709648047,
+      "log10_k_ddg_hmf_100C": 0.027707183932763592
+    },
+    "chi2_reduced": 0.5783131442740125,
+    "dof": 7,
+    "on_bound": {
+      "log10_k_tdg_ddg_100C": false,
+      "log10_k_ddg_tdg_100C": false,
+      "log10_k_ddg_dgal_100C": false,
+      "log10_k_dgal_ddg_100C": false,
+      "log10_k_ddg_hmf_100C": false
+    },
+    "identified": {
+      "log10_k_tdg_ddg_100C": true,
+      "log10_k_ddg_tdg_100C": true,
+      "log10_k_ddg_dgal_100C": true,
+      "log10_k_dgal_ddg_100C": true,
+      "log10_k_ddg_hmf_100C": true
+    },
+    "b38_verdict": {
+      "log10_k_tdg_ddg_100C": "PINNED",
+      "log10_k_ddg_tdg_100C": "PINNED",
+      "log10_k_ddg_dgal_100C": "PINNED",
+      "log10_k_dgal_ddg_100C": "PINNED",
+      "log10_k_ddg_hmf_100C": "PINNED"
+    },
+    "collinear_pairs": [],
+    "n_pinned": 5
+  },
+  "constants_per_min": {
+    "before_120C": {
+      "k_tdg_ddg": 0.006841890518721866,
+      "k_ddg_tdg": 0.0,
+      "k_ddg_dgal": 0.0,
+      "k_dgal_ddg": 0.0,
+      "k_ddg_hmf": 0.11900000000000001,
+      "k_tdg_fa": 0.05642191484514219,
+      "k_tdg_mgo": 0.009797616365317981
+    },
+    "after_120C": {
+      "k_tdg_ddg": 0.02516495987480683,
+      "k_ddg_tdg": 0.03332862648212,
+      "k_ddg_dgal": 0.025518179006230737,
+      "k_dgal_ddg": 0.03847108921432818,
+      "k_ddg_hmf": 0.029857769126700587,
+      "k_tdg_fa": 0.05642191484514219,
+      "k_tdg_mgo": 0.009797616365317981
+    },
+    "after_100C": {
+      "k_tdg_ddg": 0.013741460986599894,
+      "k_ddg_tdg": 0.018199274817819577,
+      "k_ddg_dgal": 0.013934338183238762,
+      "k_dgal_ddg": 0.021007344107865488,
+      "k_ddg_hmf": 0.029857769126700587,
+      "k_tdg_fa": 0.0345,
+      "k_tdg_mgo": 0.0024392888534061643
+    }
+  },
+  "fed_pot_before_after": {
+    "before": {
+      "TDG:max_DDG": 5.292838460990391,
+      "TDG:tmax_DDG": 10.5,
+      "TDG:max_DGAL": 0.0,
+      "TDG:tmax_DGAL": 0.0,
+      "TDG:share_DGAL_60": 0.0,
+      "TDG:share_TDG_60": 1.0,
+      "TDG:pool_60_uM": 2.843964931324574,
+      "DDG:max_TDG": 0.0,
+      "DDG:tmax_TDG": 0.0,
+      "DDG:max_DGAL": 0.0,
+      "DDG:tmax_DGAL": 0.0,
+      "DDG:share_DGAL_60": 0.0,
+      "DDG:share_TDG_60": 0.0,
+      "DDG:pool_60_uM": 0.1585504168429327,
+      "DGAL:max_TDG": 0.0,
+      "DGAL:tmax_TDG": 0.0,
+      "DGAL:max_DDG": 0.0,
+      "DGAL:tmax_DDG": 0.0,
+      "DGAL:share_DGAL_60": 1.0,
+      "DGAL:share_TDG_60": 0.0,
+      "DGAL:pool_60_uM": 200.0,
+      "ZHANG:90.0": 0.020142374495064338,
+      "ZHANG:95.0": 0.023781552072806442,
+      "ZHANG:100.0": 0.027956842512608552,
+      "ZHANG:105.0": 0.03274382627406644,
+      "ZHANG:110.0": 0.03823088567745817
+    },
+    "after": {
+      "TDG:max_DDG": 21.496470430562862,
+      "TDG:tmax_DDG": 12.5,
+      "TDG:max_DGAL": 8.040225112721753,
+      "TDG:tmax_DGAL": 34.5,
+      "TDG:share_DGAL_60": 0.6263871509421141,
+      "TDG:share_TDG_60": 0.37361284905788583,
+      "TDG:pool_60_uM": 15.359558865642956,
+      "DDG:max_TDG": 28.470056635486245,
+      "DDG:tmax_TDG": 12.5,
+      "DDG:max_DGAL": 33.11988943234289,
+      "DDG:tmax_DGAL": 20.0,
+      "DDG:share_DGAL_60": 0.7202284030374311,
+      "DDG:share_TDG_60": 0.2797715969625689,
+      "DDG:pool_60_uM": 39.56844330294659,
+      "DGAL:max_TDG": 16.053664607591003,
+      "DGAL:tmax_TDG": 34.5,
+      "DGAL:max_DDG": 49.93139285807422,
+      "DGAL:tmax_DDG": 20.0,
+      "DGAL:share_DGAL_60": 0.7731224253699809,
+      "DGAL:share_TDG_60": 0.22687757463001915,
+      "DGAL:pool_60_uM": 82.64149006647395,
+      "ZHANG:90.0": 0.20462553514602164,
+      "ZHANG:95.0": 0.22975008025463947,
+      "ZHANG:100.0": 0.2554382174463539,
+      "ZHANG:105.0": 0.28182402618158026,
+      "ZHANG:110.0": 0.309229709303973
+    }
+  },
+  "predictions": {
+    "P1_rows_fit": {
+      "maxima_within_0p3_dex": true,
+      "tmax_in_brackets": false,
+      "chi2_reduced": 0.5783131442740125,
+      "held": false
+    },
+    "P2_k_tdg_ddg_up_0p5_to_1p2_dex": {
+      "delta_dex": 0.5656201217641403,
+      "held": true
+    },
+    "P3_k_ddg_hmf_down_at_least_0p5_dex": {
+      "delta_dex": -0.6004896058319806,
+      "held": true
+    },
+    "P5_three_pinned_reverse_pair_collinear": {
+      "n_pinned": 5,
+      "collinear_pairs": [],
+      "held": true
+    }
+  },
+  "wall_seconds": 40.0
+}

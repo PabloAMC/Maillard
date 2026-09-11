@@ -187,15 +187,45 @@ def test_pure_linoleate_feed_yields_exactly_zero_nonanal(frozen):
     assert "NONANAL" not in run.refusals
 
 
-def test_nonanal_is_refused_in_an_oleate_bearing_matrix():
+def test_nonanal_is_answered_on_a_declared_anchor_and_says_so():
+    """
+    RE-WRITTEN BY WAVE B28 (2026-09-09). Through B27 this test was
+    ``test_nonanal_is_refused_in_an_oleate_bearing_matrix`` and asserted a refusal, because the
+    oleate branch fraction was measured nowhere in the corpus. Frankel 1981 Table II measures it,
+    so the refusal is gone.
+
+    What replaced it is NOT an unqualified answer, and this test guards that distinction. The
+    measured quantity is a SHARE of a peak-area slate; turning a share into an absolute needs a
+    molar anchor, and no source supplies one for oleate. So the answer rests on a declared
+    assumption with a wide band, and the run must SAY so in the same breath as the number. A
+    future change that quietly drops the warning would leave a number that looks measured and is
+    not -- which is exactly the failure the refusal used to prevent.
+    """
     spec = FormulationSpec(
         "pea", {"Pea Protein Isolate": 1.0},
         ProcessSpec(thermal=ThermalProgram.isothermal(140.0, 5.0), matrix="water"),
     )
     run = predict(spec, ["nonanal"])
-    assert not run.answered
-    assert any("oleate" in r.lower() for r in run.declaration.reasons)
-    assert not run.concentrations_ug_per_l
+    assert run.answered
+    assert not any("oleate -> nonanal branch" in r.lower() for r in run.declaration.reasons)
+    warnings = " ".join(run.declaration.warnings).lower()
+    assert "declared anchor" in warnings
+    assert "not a measured yield" in warnings
+    # and the two oleate shares must not be presented as a replicate pair
+    assert "republished" in warnings or "selke 1978" in warnings
+
+
+def test_nonanal_from_a_linoleate_feed_is_still_exactly_zero():
+    """
+    The declared Frankel negative test, which wave B28 did NOT touch. Frankel 1989 fed pure
+    linoleate hydroperoxides and nonanal appears in no table, figure or sentence of it. That
+    absence is a hold-out, and it is honoured structurally rather than numerically: nonanal has
+    exactly one incoming edge and it comes from the OLEATE pool.
+    """
+    from src.kinetic_core.lipid import validate_lipid_structure
+
+    findings = validate_lipid_structure()
+    assert "STRUCTURAL ZERO from every linoleate pool" in findings["nonanal"]
 
 
 def test_the_shipped_nonanal_0_15_is_only_ever_quoted_to_be_refuted():
@@ -526,7 +556,10 @@ def test_a_protein_isolate_never_charges_a_maillard_network():
 # ===========================================================================
 
 
-@pytest.mark.parametrize("compound", ["1-hexanol", "2-pentylfuran", "propanal"])
+# 2-pentylfuran left this list on 2026-09-10: its branch fraction is measured (Frankel 1981) and
+# the lane answers it. It was in the list for one day on a diagnosis that turned out to be a unit
+# bug, which is recorded in engine.py's unrepresented-target table.
+@pytest.mark.parametrize("compound", ["1-hexanol", "propanal"])
 def test_unmeasured_branches_stay_refused_with_a_sharper_reason(compound):
     assert compound in UNREPRESENTED_COMPOUNDS
     reason = UNREPRESENTED_COMPOUNDS[compound]

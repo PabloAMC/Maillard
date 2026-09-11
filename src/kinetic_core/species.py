@@ -129,6 +129,13 @@ SPECIES: Tuple[Species, ...] = (
             "touch it inherit it. Carried as a state variable rather than "
             "lumped away because 3-DG -> 3,4-DG is the RATE-DETERMINING STEP "
             "of the 3-DG limb in two independent matrices (K5a C3)."),
+    Species("DGAL", "3-deoxygalactosone (3-DGal)", 6, 0, "intermediate", True,
+            "B39 (2026-09-11). The C4 epimer of 3-deoxyglucosone, reached ONLY through "
+            "3,4-dideoxyglucosone by the reversible hydration the fed experiments of "
+            "Mittelmaier et al. 2011 prove (3-DG <-> 3,4-DGE <-> 3-DGal). Measured in the "
+            "fit corpus by that paper alone; carried because a quarter of a fed 3-DG "
+            "charge is this compound after an hour at 120 C and the trunk had nowhere to "
+            "put it. No exit of its own: it leaves the way it came."),
     Species("HMF", "5-hydroxymethylfurfural (5-HMF)", 6, 0, "product", True,
             "THE compound of the K5a cluster. NOT norfuraneol: two papers the "
             "repo already holds (whitfield1999, whitfield2001) and two in the "
@@ -188,12 +195,88 @@ SPECIES: Tuple[Species, ...] = (
     Species("AKM", "aminoacetone (methylglyoxal's Strecker aminoketone)", 3, 1, "intermediate", False,
             "B18. Methylglyoxal + glycine -> aminoacetone + CO2 + formaldehyde (Strecker, rule "
             "R07). As AKG."),
-)
+    # ---- B20 (2026-09-09): THE GLYCATION ARM, trunk-only. Protein-bound lysine as a reactant:
+    # the matrix layer's amine pool becomes a species, the sugar glycates it to the bound Amadori
+    # compound, which oxidises to CML, goes to CEL, or decays back to the sugar path (3-DG) and
+    # returns the lysine. Rates from Nguyen 2016 (casein + glucose in water, 120 / 130 C), barriers
+    # from Berk 2021 and the trunk's own Amadori steps. Pre-registered in
+    # results/validation/kinetic_core_b20_prereg.md; constants in parameters_glycation.py.
+    Species("LYSP", "protein-bound lysine residue (epsilon-amine site; counted as lysine)", 6, 2, "reactant", True,
+            "B20. Charged from the spec's protein loading and the matrix's amine density times the "
+            "declared available fraction; zero without a loading, so every earlier pot is unchanged."),
+    Species("FLP", "fructosyl-lysine, protein-bound (the bound Amadori compound; furosine's parent)", 12, 2,
+            "intermediate", True, "B20. Nguyen 2016's AP; measured as furosine after acid hydrolysis."),
+    Species("CML", "N-epsilon-(carboxymethyl)lysine (CML), protein-bound", 8, 2, "product", True,
+            "B20. From the bound Amadori compound's oxidative cleavage (Nguyen 2016 k7, Berk 2021 k8); "
+            "the glyoxal route fits to zero in both laboratories and is not written."),
+    Species("CEL", "N-epsilon-(carboxyethyl)lysine (CEL), protein-bound", 9, 2, "product", True,
+            "B20. From the bound Amadori compound via methylglyoxal, lumped as Nguyen 2016 fitted it (k9)."),
 
+    # ---- B22 (2026-09-09): THE METHIONINE CHAIN, trunk-only. Methionine as the Strecker substrate on
+    # glyoxal and methylglyoxal (the aminoketones are glycine's, the aldehyde is methionine's), the
+    # aldehyde's retro-Michael release of methanethiol, and the disulfide on an apparent constant.
+    # Pre-registered in results/validation/kinetic_core_b22_prereg.md; constants in parameters_methionine.py.
+    Species("MET", "L-methionine (the Strecker substrate)", 5, 1, "reactant", True,
+            "B22. Charged from the spec; also charged, declared, as glycine at the same molarity for the "
+            "Amadori chemistry that makes the dicarbonyls.", sulfur=1),
+    Species("MTAL", "methional (3-(methylthio)propanal)", 4, 0, "product", True,
+            "B22. The Strecker aldehyde of methionine; Pan 2025's zero-order rates at 100-140 C.", sulfur=1),
+    Species("MSH", "methanethiol made from methional (the sugar path's pool; the sulfur lane's MESH is thiamine's)", 1, 0,
+            "product", True, "B22. The retro-Michael release from methional; acrolein to the fragment pool.", sulfur=1),
+    Species("DMDS", "dimethyl disulfide", 2, 0, "product", True,
+            "B22. Two methanethiols on an APPARENT constant: the sugar path tracks no oxidant.", sulfur=2),
+    # ---- B24 (2026-09-09): 2-ACETYL-1-PYRROLINE FROM PROLINE, trunk-only. The Strecker of proline on
+    # methylglyoxal gives 1-pyrroline (the ring nitrogen stays), and methylglyoxal acylates it.
+    # Pre-registered in results/validation/kinetic_core_b24_prereg.md; constants in parameters_proline.py.
+    Species("PRO", "L-proline (the pyrroline source)", 5, 1, "reactant", True,
+            "B24. Charged from the spec; also charged, declared, as glycine for the Amadori chemistry."),
+    Species("PYRL", "1-pyrroline", 4, 1, "intermediate", True,
+            "B24. Proline's Strecker product; fed by Hofmann & Schieberle 1998b."),
+    Species("AP", "2-acetyl-1-pyrroline", 6, 1, "product", True,
+            "B24. The acylation of 1-pyrroline by methylglyoxal (Hofmann & Schieberle 1998b, Table 7)."),
+    # ---- WAVE B24b (2026-09-10): the branch that refused B24 --------------
+    # B24 had no competing product and no loss of 1-pyrroline, so its whole-chain yield rose almost
+    # linearly with the methylglyoxal charge where the source's rises threefold. The competition is
+    # for the METHYLGLYOXAL, and the two fates are EXCLUSIVE -- Schieberle & Hofmann 2005 state in
+    # words that hydroxyacetone gives only the tetrahydropyridine and methylglyoxal only the
+    # pyrroline product. That exclusivity is why the shape is a ratio and not a level.
+    Species("ACETOL", "hydroxyacetone (acetol)", 3, 0, "intermediate", True,
+            "B24b. NAMED ACETOL AND NOT 'HA' ON PURPOSE: the sulfur lane already carries HA for "
+            "hydroxyacetALDEHYDE, a C2, and this is hydroxyacetONE, a C3. The first draft of this "
+            "wave used HA and the atom-count guard caught the collision in one run. "
+            "The other half of proline's Strecker on methylglyoxal, which B24 routed to the "
+            "fragment pool. It is a species here because it is the committed precursor of the "
+            "TETRAHYDROPYRIDINE and of nothing else."),
+    Species("ATHP", "2-acetyl-1,4,5,6-tetrahydropyridine", 7, 1, "product", True,
+            "B24b. The competing product. Made from 1-pyrroline and hydroxyacetone and NOT from "
+            "methylglyoxal, so an excess of the amino acid drives this branch and an excess of "
+            "methylglyoxal drives 2-acetyl-1-pyrroline. Hofmann & Schieberle 1998b Table 9's "
+            "AP : ATHP ratio swings 0.16 -> 12.8 across a hundredfold methylglyoxal ladder."),
+    # ---- B22b (2026-09-10): the route Deng's own experiment names -------
+    Species("MARP", "N-(1-deoxy-D-fructos-1-yl)-methionine (the methionine-glucose Amadori compound)",
+            11, 1, "intermediate", True,
+            "B22b. B22 built methional as free dicarbonyl times methionine and the data refuted it. "
+            "Deng 2022 charged THIS compound alone and got 1.4 to 2.6 times more methional than "
+            "methionine plus glucose, so the sugar moiety supplies the dicarbonyl inside the same "
+            "molecule. Carbon is glucose's 6 plus methionine's 5; nitrogen and sulfur are "
+            "methionine's.", sulfur=1),
+    Species("MEL_S", "melanoidin pool, SULFUR", 0, 0, "pool", False,
+            "B22b (2026-09-10). mmol of sulfur per litre held in the terminal melanoidin polymer, "
+            "the third member beside MEL_C and MEL_N. It exists because the balance guard refused a "
+            "step that lost a sulfur-bearing molecule to browning: the melanoidin pools held carbon "
+            "and nitrogen only, so the sulfur had nowhere to go. "
+            "NAMED MEL_S AND NOT FRAG_S, and the guards decided that. The first draft called it "
+            "FRAG_S, the sulfur analogue of FRAG_C -- and the sulfur lane ALREADY has a FRAG_S, so a "
+            "trunk-only key of that name broke the invariant that a trunk-only species is absent "
+            "from the sulfur state. Renaming it also made it more accurate: a methionine Amadori "
+            "compound lost to browning puts its sulfur IN the polymer, which is a melanoidin pool "
+            "and not an unassigned fragment. An accounting pool; nothing consumes it", sulfur=1),
+)
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)
 #: B13: species whose steps exist on the trunk integrator only. The sulfur and acrylamide
 #: state vectors leave them out, so those lanes keep the shape their fits were run on.
-TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM")
+TRUNK_ONLY_KEYS: Tuple[str, ...] = ("G", "GO", "DA", "PZ", "DMP", "MPZ", "AKG", "AKM", "LYSP", "FLP", "CML", "CEL",
+                                     "MET", "MTAL", "MSH", "DMDS", "PRO", "PYRL", "AP", "ACETOL", "ATHP", "MARP", "MEL_S")
 INDEX: Mapping[str, int] = {s.key: i for i, s in enumerate(SPECIES)}
 BY_KEY: Mapping[str, Species] = {s.key: s for s in SPECIES}
 
@@ -266,6 +349,100 @@ def total_sulfur(state) -> float:
 #: back into the molar concentration the browning readout is expressed in.
 MELANOIDIN_REPEAT_UNIT_CARBON = 8
 MELANOIDIN_REPEAT_UNIT_NITROGEN = 1
+
+#: THE STRUCTURE ABOVE IS FALSIFIED AND THE ANSWER IT PRODUCES IS NOT (2026-09-09,
+#: mundt2004_extraction.md, read in the reading audit).
+#:
+#: Six carbons from 3-deoxyglucosone plus two from an INTACT glycine set a structural FLOOR
+#: of C/N = 8.0 on this pool. Mundt & Wedzicha 2004 measure 7.64 +/- 0.21 on a dialysed
+#: glucose-glycine polymer with no protein in it (Table 1, MW > 12 500, n = 4), by two
+#: independent methods that agree: CHN microanalysis, and a 14C reconstruction giving
+#: whole glycine : DECARBOXYLATED glycine : glucose = 0.289 : 0.662 : 1, i.e. C/N 7.61.
+#: The floor is missed by about 1.7 analytical standard deviations, and the radiochemistry
+#: says exactly why: about two thirds of the incorporated glycine arrives decarboxylated
+#: and contributes ONE carbon per nitrogen, not two.
+#:
+#: What is falsified is the repeat unit's STRUCTURE, not the number the trunk reports. The
+#: measurement is at 70 C and pH 5.5, one point with no series of any kind, and its authors
+#: say (citing others, not measuring it) that amino-acid incorporation falls -- and C/N
+#: rises -- as temperature rises. So 7.64 is a LOWER BOUND for a 120 C polymer and the
+#: trunk's 8.42 to 9.94 clears it. This is a bracket, not a match.
+#:
+#: Nothing is changed here. A repeat unit that mixed decarboxylated and intact glycine
+#: would need a second nitrogen-bearing pool and a branching ratio, neither of which any
+#: source on disk measures at cooking temperature; that is a wave, and it is in the backlog.
+MELANOIDIN_REPEAT_UNIT_FALSIFYING_MEASUREMENT = (
+    "Mundt & Wedzicha 2004 (J. Agric. Food Chem.), glucose 0.25 M + glycine 0.25 M, 0.2 M "
+    "acetate pH 5.5, 70.0 C, dialysed MW > 12 500: C/N 7.64 +/- 0.21 by microanalysis and "
+    "7.61 by 14C reconstruction, against this unit's structural floor of 8.0."
+)
+
+#: CORRECTED 2026-09-09, THE SAME DAY, AND THE CORRECTION MATTERS MORE THAN THE ORIGINAL.
+#:
+#: The note above was written reading the 7.64 as a LOWER BOUND for a 120 C polymer, on its
+#: authors' stated temperature direction, and concluding that the trunk's 8.42 to 9.94 clears
+#: it. That conclusion was reached without checking the corpus for a measurement at cooking
+#: temperature in the same system. There is one, it was already on this disk and already
+#: dossiered, and it says the opposite: the trunk is LOW, not comfortably above a floor.
+#:
+#: Martins & van Boekel 2003 (Food Chem. 83:135, doi 10.1016/S0308-8146(03)00219-X;
+#: martins2003c_extraction.md sections 7 and 8), glucose + glycine, MEASURED microanalysis:
+#:
+#:      120 C, pH 6.8   C/N = 11, flat over 15 to 60 min
+#:      100 C, pH 6.8   C/N = 15, 14, 11, 11 over 30 to 180 min
+#:      100 C, pH 5.5   C/N = 19 at 60 min, 16 at 180 min
+#:
+#: and its Table 2 compiles nine more literature values from 7 to 13, including Cammerer &
+#: Kroh 1995's own pair for this system: C/N 7 at 60 C and 9 at 100 C (cammerer1994_extraction.md
+#: is that paper, also on disk). The authors' verdict on their own compilation is that the
+#: literature values "are not consistent, either with pH or temperature".
+#:
+#: SO THE HONEST STATEMENT IS THIS. At 70 C one laboratory measures below the structural floor
+#: and falsifies the repeat unit; at 100 to 120 C, in the same sugar and the same amine, the
+#: nearest measurements sit at 11 to 19 while the trunk predicts 8.42 to 9.94. The model is not
+#: bracketed above a floor -- it is between two measurements that disagree with each other by
+#: more than it disagrees with either. Nothing is changed here on that basis: a repeat unit
+#: that mixed decarboxylated and intact glycine needs a second nitrogen pool and a branching
+#: ratio, and the spread across these sources is wider than any one of them justifies fitting
+#: to. It is a wave, it is in the backlog, and the C/N diagnostic should be read as a spread
+#: rather than as a bound until it runs.
+#: THE THIRD READING, AND THE ONE THAT SETTLES THE SHAPE OF THE PROBLEM (2026-09-09 evening,
+#: mohsin2018_extraction.md). Mohsin 2018 measures glucose + ALANINE melanoidins, solvent-free,
+#: dialysed above 12 kDa, and prints C/N about 13 at 130 C rising to about 21 at 200 C.
+#:
+#: Alanine is not glycine and the difference is exactly one carbon per nitrogen: the paper prints
+#: its own landmarks, 9:1 for 1:1 incorporation and 15:1 for 2:1, where glycine would give 8 and 14.
+#: Put on a glycine basis its series reads about 12 at 130 C and 20 at 200 C -- and 12 at 130 C sits
+#: directly on Martins' 11 at 120 C. Five laboratories then make ONE monotonic series, and the
+#: trunk's 8.42 to 9.94 belongs at roughly 60 to 100 C rather than at cooking temperature.
+#:
+#: THE POINT, AND IT IS NOT THE ONE RECORDED THIS MORNING. The repeat unit is falsified from BELOW
+#: at 70 C, where decarboxylated glycine contributes one carbon per nitrogen instead of two, and
+#: from ABOVE at 130 to 200 C, where the polymer takes up more carbohydrate per amine than the unit
+#: allows -- Mohsin's 21:1 lands exactly on an intact 3:1 rung. ONE FIXED UNIT CANNOT DO BOTH. The
+#: morning's note framed this as a floor to clear; it is a temperature-dependent carbohydrate-to-amine
+#: ratio, and a wave that fixes it needs that ratio, not merely a second nitrogen pool.
+#:
+#: Two flags travel with Mohsin: its authors say the 130 and 140 C samples still hold unremoved
+#: glucose and alanine after dialysis, and 13:1 is one of those; and the system is solvent-free with
+#: no pH, unlike every other C/N source in the corpus. Its remaining ten temperatures are in a
+#: supplementary table that is not on this disk.
+MELANOIDIN_REPEAT_UNIT_FALSIFIED_FROM_BOTH_SIDES = (
+    "Below: Mundt & Wedzicha 2004 measure C/N 7.64 +/- 0.21 at 70 C against a structural floor of "
+    "8.0, because about two thirds of the glycine arrives decarboxylated. Above: Mohsin 2018 "
+    "measures 13 at 130 C and 21 at 200 C on glucose + alanine (about 12 and 20 on a glycine basis, "
+    "mine), which is more carbohydrate per amine than one fixed unit allows. A single repeat unit "
+    "cannot be falsified from both directions and still be the right structure. What the corpus "
+    "supports is a carbohydrate-to-amine ratio that RISES with temperature, and the trunk's 8.42 to "
+    "9.94 then belongs at roughly 60 to 100 C rather than at 120 C."
+)
+
+MELANOIDIN_REPEAT_UNIT_SAME_SYSTEM_AT_COOKING_TEMPERATURE = (
+    "Martins & van Boekel 2003 (Food Chem. 83:135), glucose + glycine, measured C/N: 11 at "
+    "120 C pH 6.8; 15 falling to 11 at 100 C pH 6.8; 19 falling to 16 at 100 C pH 5.5. Its "
+    "Table 2 compiles nine further literature values from 7 to 13 and its authors call them "
+    "inconsistent with both pH and temperature. The trunk predicts 8.42 to 9.94."
+)
 
 
 def melanoidin_repeat_units(state) -> float:

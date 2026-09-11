@@ -1,0 +1,281 @@
+{
+  "artifact": "kinetic_core_b22_fit_report",
+  "wave": "B22 -- the methionine chain on the sugar path",
+  "generated_on": "2026-09-09",
+  "generated_by": "scripts/generators/generate_kinetic_core_b22_fit.py",
+  "git": {
+    "head": "5c5f2857980779835f8befe2e22288449bc68546"
+  },
+  "prereg": "results/validation/kinetic_core_b22_prereg.md",
+  "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendment 32",
+  "objective": {
+    "form": "nine zero-order rates (Pan 2025, 100 / 120 / 140 C) as mean formation rates over 30-600 s in Pan's pot; four free",
+    "n_rows": 9,
+    "n_free_parameters": 4,
+    "final_cost": 7373.941626289298,
+    "best_start": 0,
+    "reduced_chi2": 1474.7883252578592
+  },
+  "rows": [
+    {
+      "id": "pan_MTAL_rate_100C",
+      "species": "MTAL",
+      "t_c": 100.0,
+      "target": 0.010938000000000002,
+      "sigma_log": 0.15,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": true,
+      "predicted": 2.973809899818385e-08,
+      "residual_dex": -5.565624716150139
+    },
+    {
+      "id": "pan_MTAL_rate_120C",
+      "species": "MTAL",
+      "t_c": 120.0,
+      "target": 0.1008,
+      "sigma_log": 0.15,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": true,
+      "predicted": 3.0035820584800282e-06,
+      "residual_dex": -4.525821030649421
+    },
+    {
+      "id": "pan_MTAL_rate_140C",
+      "species": "MTAL",
+      "t_c": 140.0,
+      "target": 0.5394,
+      "sigma_log": 0.15,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": true,
+      "predicted": 0.0001241531672337792,
+      "residual_dex": -3.6379531389302127
+    },
+    {
+      "id": "pan_MSH_rate_100C",
+      "species": "MSH",
+      "t_c": 100.0,
+      "target": 0.009474,
+      "sigma_log": 0.15,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": true,
+      "predicted": 4.515210254491489e-08,
+      "residual_dex": -5.321855401990608
+    },
+    {
+      "id": "pan_MSH_rate_120C",
+      "species": "MSH",
+      "t_c": 120.0,
+      "target": 0.014052,
+      "sigma_log": 0.15,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": true,
+      "predicted": 6.00071257312738e-06,
+      "residual_dex": -3.3695353160359836
+    },
+    {
+      "id": "pan_MSH_rate_140C",
+      "species": "MSH",
+      "t_c": 140.0,
+      "target": 0.038009999999999995,
+      "sigma_log": 0.15,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": true,
+      "predicted": 0.00039344829510052325,
+      "residual_dex": -1.985010201848133
+    },
+    {
+      "id": "pan_DMDS_rate_100C",
+      "species": "DMDS",
+      "t_c": 100.0,
+      "target": 9e-05,
+      "sigma_log": 0.25,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": false,
+      "predicted": 2.452742684397301e-15,
+      "residual_dex": -10.564590520211196
+    },
+    {
+      "id": "pan_DMDS_rate_120C",
+      "species": "DMDS",
+      "t_c": 120.0,
+      "target": 0.00042,
+      "sigma_log": 0.25,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": false,
+      "predicted": 1.5432042720506724e-10,
+      "residual_dex": -6.434825873503473
+    },
+    {
+      "id": "pan_DMDS_rate_140C",
+      "species": "DMDS",
+      "t_c": 140.0,
+      "target": 0.001122,
+      "sigma_log": 0.25,
+      "anchor": "Pan et al. 2025 Table 2 (unit inferred as umol L-1 s-1 from the printed 626.31 ug/L methional and 26.43 ug/L methanethiol at 140 C / 600 s; pan2025_extraction.md sec. 4)",
+      "kind": "mean_rate_umol_l_min",
+      "decisive": false,
+      "predicted": 2.5449871538269753e-06,
+      "residual_dex": -2.644307262403019
+    }
+  ],
+  "members": [
+    {
+      "start": 0,
+      "x0": [
+        0.0,
+        -2.0,
+        64.0,
+        -1.0
+      ],
+      "x": [
+        1.9999999999999998,
+        -0.2814742548055645,
+        20.000000254221657,
+        1.9999999999999998
+      ],
+      "cost": 7373.941626289298,
+      "nfev": 130,
+      "status": 2,
+      "residuals_dex": {
+        "pan_MTAL_rate_100C": -5.565624716150139,
+        "pan_MTAL_rate_120C": -4.525821030649421,
+        "pan_MTAL_rate_140C": -3.6379531389302127,
+        "pan_MSH_rate_100C": -5.321855401990608,
+        "pan_MSH_rate_120C": -3.3695353160359836,
+        "pan_MSH_rate_140C": -1.985010201848133,
+        "pan_DMDS_rate_100C": -10.564590520211196,
+        "pan_DMDS_rate_120C": -6.434825873503473,
+        "pan_DMDS_rate_140C": -2.644307262403019
+      }
+    },
+    {
+      "start": 1,
+      "x0": [
+        0.018652160202914454,
+        -2.221572460762401,
+        90.59426217832942,
+        -1.1780503363474293
+      ],
+      "x": [
+        1.9999999999999998,
+        -0.28146973343998877,
+        20.000006969229513,
+        1.9999999999999998
+      ],
+      "cost": 7373.94164302023,
+      "nfev": 91,
+      "status": 2,
+      "residuals_dex": {
+        "pan_MTAL_rate_100C": -5.565627651402104,
+        "pan_MTAL_rate_120C": -4.52582430370227,
+        "pan_MTAL_rate_140C": -3.637956954223786,
+        "pan_MSH_rate_100C": -5.321853468784869,
+        "pan_MSH_rate_120C": -3.3695336779431373,
+        "pan_MSH_rate_140C": -1.9850090326923142,
+        "pan_DMDS_rate_100C": -10.564586345550433,
+        "pan_DMDS_rate_120C": -6.434822300148826,
+        "pan_DMDS_rate_140C": -2.6443045756165224
+      }
+    }
+  ],
+  "frozen_parameters": {
+    "methionine": {
+      "log10_identity_ratio_met_over_gly": 1.9999999999999998,
+      "log10_k_mtal_msh_100C": -0.2814742548055645,
+      "ea_mtal_msh_kj_mol": 20.000000254221657,
+      "log10_k_msh_dmds_100C": 1.9999999999999998
+    }
+  },
+  "bands": {
+    "lower": {
+      "log10_identity_ratio_met_over_gly": -2.0,
+      "log10_k_mtal_msh_100C": -5.0,
+      "ea_mtal_msh_kj_mol": 20.0,
+      "log10_k_msh_dmds_100C": -4.0
+    },
+    "upper": {
+      "log10_identity_ratio_met_over_gly": 2.0,
+      "log10_k_mtal_msh_100C": 1.0,
+      "ea_mtal_msh_kj_mol": 150.0,
+      "log10_k_msh_dmds_100C": 2.0
+    }
+  },
+  "laplace": {
+    "sigma": {
+      "log10_identity_ratio_met_over_gly": 2.49774449406597,
+      "log10_k_mtal_msh_100C": 6.15725151314369,
+      "ea_mtal_msh_kj_mol": 643.4431156578437,
+      "log10_k_msh_dmds_100C": 8.77149528551075
+    },
+    "chi2_reduced": 1474.7883252578592,
+    "dof": 5,
+    "identified": {
+      "log10_identity_ratio_met_over_gly": false,
+      "log10_k_mtal_msh_100C": false,
+      "ea_mtal_msh_kj_mol": false,
+      "log10_k_msh_dmds_100C": false
+    },
+    "on_bound": {
+      "log10_identity_ratio_met_over_gly": true,
+      "log10_k_mtal_msh_100C": false,
+      "ea_mtal_msh_kj_mol": true,
+      "log10_k_msh_dmds_100C": true
+    }
+  },
+  "diagnostics": {
+    "deng2022_methional_120C": {
+      "30min": {
+        "model_ug_per_l": 15847.193763740966,
+        "printed_ug_per_l": 18.52,
+        "dex": 2.9323113857332146
+      },
+      "60min": {
+        "model_ug_per_l": 13225.058060502279,
+        "printed_ug_per_l": 25.27,
+        "dex": 2.7187923454262806
+      },
+      "120min": {
+        "model_ug_per_l": 6454.7154398814955,
+        "printed_ug_per_l": 75.76,
+        "dex": 1.9304371348886613
+      },
+      "180min": {
+        "model_ug_per_l": 3107.8359128759903,
+        "printed_ug_per_l": 87.77,
+        "dex": 1.5491119825529422
+      },
+      "rising_30_to_120": false
+    },
+    "chin1994_methanethiol_half_life_30C": {
+      "model_min": 69.16205911953453,
+      "chin_min_with_cu": 17.0,
+      "note": "Chin's is copper 1 ppm in air; the model's constant is the apparent one from Pan's pot"
+    },
+    "pan_pot_140C_10min_mmol_l": {
+      "GO": 0.009443737996037446,
+      "MGO": 0.04240345689199803,
+      "MTAL": 1.1798338519014203e-06,
+      "MSH": 3.7378044583170464e-06,
+      "DMDS": 2.4177377961499742e-08,
+      "MET": 0.26799503400693403
+    }
+  },
+  "declared": {
+    "pan_initial_mmol_l": {
+      "Fru": 111.0,
+      "Glc": 83.0,
+      "MET": 0.268,
+      "Gly": 0.268
+    },
+    "unit": "umol L-1 s-1 inferred",
+    "sucrose": "omitted"
+  }
+}

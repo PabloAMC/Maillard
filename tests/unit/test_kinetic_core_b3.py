@@ -709,7 +709,7 @@ def test_network_shape_is_pinned():
     # B7 adds SEVEN more, all inherited and none of them acrylamide's: five on
     # the trunk (the furanic channel) and two on the sulfur block. 57 through
     # B6.
-    assert described["n_species"] == 66   # B11: OXR, OXV
+    assert described["n_species"] == 67   # B11: OXR, OXV; B39: DGAL
     # ... and ELEVEN more trunk REACTIONS, which this lane DOES compose,
     # because the furanic channel hangs on the trunk rather than in a lane of
     # its own. That is deliberate and it is what lets a glucose/alanine pot --

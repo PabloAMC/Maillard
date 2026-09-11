@@ -623,13 +623,26 @@ PROHIBITED_DERIVATIONS: Mapping[str, str] = {
         "constant is ever pre-multiplied by it."
     ),
     "oleate -> nonanal branch fraction": (
-        "Measured nowhere in the fit corpus. Frankel 1989 fed linoleate only. "
-        "The retired screening lane's shipped 0.15 had no source. Requests for absolute "
-        "nonanal in an oleate-bearing matrix are REFUSED."
+        "LIFTED IN PART BY WAVE B28 (2026-09-09), and the part matters. Through "
+        "B27 this read: 'Measured nowhere in the fit corpus. Frankel 1989 fed "
+        "linoleate only. The retired screening lane's shipped 0.15 had no "
+        "source. Requests for absolute nonanal in an oleate-bearing matrix are "
+        "REFUSED.' The SHARE is now measured -- Frankel 1981 Table II, 15 % "
+        "(Selke 1978 republished) and 10 % (independent). The YIELD is not: "
+        "1981 prints peak areas and no oleate molar anchor exists anywhere. So "
+        "an absolute nonanal answer now rests on OLEATE_MOLAR_ANCHOR_ASSUMPTION "
+        "with a band, and says so, instead of being refused outright. Those are "
+        "different states and the lane reports which one it is in."
     ),
     "linoleate -> 2-pentylfuran branch fraction": (
-        "Not in Frankel's six-product slate and measured nowhere else in the "
-        "corpus. The retired screening lane's shipped 0.08 had no source."
+        "LIFTED BY WAVE B28 (2026-09-09). Through B27 this read: 'Not in "
+        "Frankel's six-product slate and measured nowhere else in the corpus. "
+        "The retired screening lane's shipped 0.08 had no source.' Both clauses "
+        "were true of the corpus as it then stood. Frankel 1981 Table III "
+        "measures it, in the same laboratory and by the same method, and it "
+        "ships as PENTYLFURAN_PER_HEXANAL -- a ratio, so no denominator and no "
+        "anchor is imported with it. What is still NOT known is its parent: see "
+        "PENTYLFURAN_ORIGIN_UNASSIGNED."
     ),
     "aldehyde -> alcohol reduction (hexanal -> 1-hexanol)": (
         "No reduction step is measured anywhere in the corpus, and in a "

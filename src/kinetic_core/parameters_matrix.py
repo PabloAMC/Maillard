@@ -129,8 +129,8 @@ class CompoundStructure:
     #: True only for an alpha,beta-unsaturated CARBONYL (a Michael acceptor).
     #: 4-vinyl phenol has a conjugated C=C and NO carbonyl -> False.
     alpha_beta_unsaturated_carbonyl: bool
-    #: n-alkanal / branched_alkanal / alkenal / methyl_ketone / ester /
-    #: lactone / furanone / diketone / alkylpyrazine / phenol /
+    #: n-alkanal / branched_alkanal / alkenal / alkenol / methyl_ketone /
+    #: ester / lactone / furanone / diketone / alkylpyrazine / phenol /
     #: carboxylic_acid / alkylfuran / disulfide / thiol
     binding_class: str
     notes: str = ""
@@ -148,6 +148,14 @@ COMPOUND_STRUCTURE: Mapping[str, CompoundStructure] = {
         "against hexanal's 1.39x, attributed by the authors to covalent chemistry."),
     "t_2_octenal": CompoundStructure(
         "t_2_octenal", "trans-2-octenal", "alpha,beta-unsaturated aldehyde", 8, True, "alkenal"),
+    # -- WAVE B26: the only alcohol anywhere in the binding table -------
+    "z_2_penten_1_ol": CompoundStructure(
+        "z_2_penten_1_ol", "(Z)-2-penten-1-ol", "alpha,beta-unsaturated primary alcohol",
+        5, False, "alkenol",
+        "A conjugated C=C and NO carbonyl, so it is NOT a Michael acceptor and the "
+        "unsaturation penalty does not apply -- the same reading 4-vinyl phenol gets. "
+        "Its class has one member and no consumer on any scored panel; it is carried "
+        "so that the measurement lives in the registry and not in a dossier alone."),
     "tt_2_4_decadienal": CompoundStructure(
         "tt_2_4_decadienal", "trans,trans-2,4-decadienal",
         "doubly alpha,beta-unsaturated aldehyde", 10, True, "alkenal",
@@ -251,6 +259,23 @@ MATRIX_LOADING: Mapping[str, MatrixLoading] = {
         "vega1994 via k2_matrix_and_thresholds.md sec. A.2: 3 % w/v gelatin in "
         "distilled water = 30 g protein/L, LIPID-FREE, dosed at 22 C then held "
         "18 h at 4 C, i.e. NO thermal step after dosing.", "measured_ratio"),
+    # ---- WAVE B26: the first PLANT-PROTEIN loading in this table.
+    "pea_protein_1pct": MatrixLoading(
+        "pea_protein_1pct", "1 % w/v pea protein isolate in phosphate buffer",
+        10.0, 10.0, 10.0, 0.0, 7.6,
+        "bi2022_extraction.md sec. 2 (10 g/L isolate in 0.01 M potassium phosphate "
+        "pH 7.6, 37 C, 2 h) and sec. 3.8, the phase-ratio-variation run, which says "
+        "all the conditions were the same and does NOT restate the loading.",
+        "measured_ratio",
+        "PRINTED COMPOSITION, INHERITED ACROSS SECTIONS. The 10 g/L is the paper's "
+        "own number for its binding assay, and the partition run the two shipped "
+        "constants come from says the conditions were the same without restating "
+        "it. That is the same standing as the skim-milk row, whose composition is "
+        "cited rather than measured by its own paper, so it is carried as a point "
+        "and not as a declared band -- inventing a band nobody measured would be "
+        "worse than naming the inheritance. Every per-gram constant here is "
+        "inversely proportional to this number, and what the assumption is worth "
+        "is computed on the wave ship rule (T4), across a factor of four."),
     "soy_paste_hong": MatrixLoading(
         "soy_paste_hong", "autoclaved whole-soybean paste (Hong 2020 model)",
         142.0, 100.0, 200.0, 0.12, None,
@@ -435,16 +460,156 @@ REVERSIBLE_BINDING: Tuple[MatrixParameter, ...] = (
         3.0, 30.0, "andriot2000 via k2 sec. (b)", "measured_ratio",
         "FIT (D.6 Module 6)",
         provenance={"molar_basis": "recovered_by_arithmetic"}),
+    # ---- WAVE B26: the first PLANT PROTEIN in this table, from Bi 2022's
+    #      PHASE-RATIO-VARIATION pair -- a matrix leg and a water leg measured
+    #      in the same run on the same instrument, which is exactly the
+    #      construction the Meynier and Leksrisompong rows were built from and
+    #      for the same stated reason: the absolute static-headspace scale is
+    #      suspect and the offset cancels in a within-run ratio. K_g =
+    #      (K_matrix/K_buffer - 1) / 10 g/L. The paper's K is matrix/gas, the
+    #      reciprocal of the registry's air/matrix convention, so its own ratio
+    #      is already the right way up.
+    MatrixParameter(
+        "kg_hexanal_pea", "per-gram reversible binding constant",
+        2.537e-1, "L/g", "hexanal", "pea_protein_1pct", "static_headspace_partition",
+        7.6, 37.0,
+        "bi2022_extraction.md sec. 3.8 / Table S3 (matrix/gas 116.37 over buffer/gas "
+        "32.90) / sec. 2 (10 g/L, inherited -- see the loading record)",
+        "measured_ratio", "FIT (Amendment 4 construction: a within-run partition RATIO)",
+        notes="The first n-alkanal binding constant in this registry that was NOT "
+              "measured on an animal protein, and the class had exactly one row "
+              "before it. It is 22x Meynier's skim-milk value and 173x Damodaran's "
+              "dialysis-derived denatured soy; the second gap is the method gap "
+              "k2 sec. B.3 already names, five times wider here than the 35x it "
+              "recorded, and the first is protein-to-protein at one method family. "
+              "37 C is an in-mouth temperature, not a process one: nothing here "
+              "licenses a pea binding constant at 90 or 140 C.",
+        provenance={"absolute_scale_suspect": True, "ratio_cancels_offset": True,
+                    "cross_study_cross_method": False,
+                    "loading_inherited_not_restated": True,
+                    "within_paper_method_spread_x": 2.5,
+                    "temperature_is_consumption_not_process": True}),
+    MatrixParameter(
+        "kg_z_2_penten_1_ol_pea", "per-gram reversible binding constant",
+        4.14e-2, "L/g", "z_2_penten_1_ol", "pea_protein_1pct",
+        "static_headspace_partition", 7.6, 37.0,
+        "bi2022_extraction.md sec. 3.8 / Table S3 (2065.44 over 1460.49) / sec. 2",
+        "measured_ratio", "FIT (Amendment 4 construction)",
+        notes="The only ALCOHOL in the binding table. Its class has one member and "
+              "no consumer on any scored panel, so it changes no prediction; it is "
+              "carried because a measured constant belongs in the registry. This is "
+              "also the compound on which the paper's own two headspace routes "
+              "disagree by 2.5x, and this row comes from the partition route.",
+        provenance={"absolute_scale_suspect": True, "ratio_cancels_offset": True,
+                    "loading_inherited_not_restated": True,
+                    "class_has_no_panel_consumer": True}),
+    MatrixParameter(
+        "kg_t_2_octenal_pea", "per-gram apparent binding constant",
+        3.834e-1, "L/g", "t_2_octenal", "pea_protein_1pct",
+        "static_headspace_partition", 7.6, 37.0,
+        "bi2022_extraction.md sec. 3.8 / Table S3 (2203.85 over 455.93) / sec. 2",
+        "measured_ratio",
+        "QUARANTINED as a binding constant; NOT used for the unsaturation penalty either",
+        notes="Quarantined on the Meynier t-2-hexenal precedent, which is exact: a "
+              "2-alkenal held two hours at 37 C against a protein carrying about "
+              "0.47 mmol lysine amine per gram, measured by disappearance, is partly "
+              "irreversible Michael chemistry and not partition. The paper's only "
+              "reversibility evidence is a 20 % headspace recovery under guanidine, "
+              "and a 20 % recovery does not show that the other 80 % was reversible. "
+              "It is ALSO excluded from the unsaturation observations, for a second "
+              "and independent reason -- see UNSATURATION_OBSERVATIONS_EXCLUDED.",
+        provenance={"absolute_scale_suspect": True, "quarantined_as_binding": True,
+                    "michael_acceptor_on_a_lysine_rich_protein": True,
+                    "reversibility_evidence": "20 % recovery under guanidine, no more"}),
 )
 
 #: Binding constants that EXIST in the corpus and are deliberately NOT carried
 #: here because they are declared HOLD-OUT. The keys are registered so that a
 #: caller can see the gap is a governance decision and not an oversight.
+#: ATTRIBUTION CORRECTED 2026-09-09 (barallatperez2024_extraction.md, written when that PDF was read
+#: for the first time): the 2024 paper prints NO binding constant and no binding percentage -- its nine
+#: binding values are unlabelled bars in a figure -- so sealed VALUES cannot have come from it. The
+#: in vitro parent study is Barallat-Perez, Janssen, Martins, Fogliano & Oliviero 2023, JAFC 71(50):20274,
+#: which `data/lit/binding_constants.yml` already carries under `barallat_perez_2023_jafc`. The keys stay
+#: sealed and the hold-out stands; only the citation changes.
+# ===========================================================================
+# THE SULFUR GAP IN THIS TABLE, MEASURED FOR THE FIRST TIME AND STILL NOT SHIPPABLE
+# ===========================================================================
+# 2026-09-09. REVERSIBLE_BINDING holds 21 constants over five media and not one is a thiol, a
+# disulfide, a trisulfide or any sulfur compound at all -- while the sulfur lane is this model's
+# central output. Sun 2025 (sun2025_extraction.md) is the first paper in the corpus to measure a
+# PLANT protein against sulfur volatiles, and it still does not close the gap. Recorded here so the
+# gap is a known quantity with a size rather than an absence.
+SULFUR_BINDING_GAP: Mapping[str, object] = {
+    "state": "MEASURED ONCE, NOT SHIPPABLE",
+    "source": "Sun, Liang, Qian, Chen & Zhao 2025, Food Hydrocolloids 166:111326; pea protein "
+              "isolate 18 g/L (16.2 g/L protein) in 0.01 M phosphate pH 7.2",
+    "what_it_measured": "headspace depletion at 0.5 mM: dimethyl disulfide 24.73 %, dimethyl "
+                        "trisulfide 27.13 %, lenthionine 38.89 % retained by the protein",
+    "reconstructed_k_g_l_per_g": (1.0e-2, 4.0e-2),
+    "reconstructed_note": "a BAND (mine), not a row: 6 to 14x weaker than this table's pea hexanal "
+                          "constant of 2.537e-1 L/g",
+    "why_it_cannot_ship": (
+        "Three reasons, any one of which is enough. (1) It is HS-SPME DEPLETION, not a partition "
+        "pair: there is no water leg, so the within-run ratio this table is built on does not "
+        "exist and a K_g can only be reconstructed under an assumption. (2) The paper's own two "
+        "ladders disagree by 1118x on the same three compounds in the same lot of the same buffer "
+        "-- the headspace ladder spans 1.57x and the fluorescence ladder 1755x. That beats the 56x "
+        "disagreement already recorded for pea protein in this registry and it is the strongest "
+        "single-paper evidence anywhere that `method` must stay a first-class field. (3) Its "
+        "Table 2 prints K_D equal to K_S to two decimals in all nine rows, which cannot be a "
+        "genuine two-parameter fit."
+    ),
+    "what_it_does_settle": (
+        "The reversibility of dimethyl disulfide on a PLANT protein, directionally: 4 M urea "
+        "significantly RAISES the DMDS headspace peak, i.e. it is released, i.e. bound "
+        "non-covalently. That corroborates the conservative reading this registry already took of "
+        "the DMDS source contradiction, by a different method on a different protein -- though by "
+        "a method that could not see a covalent adduct if one were there, and the figure withholds "
+        "the size."
+    ),
+    "what_would_close_it": "a phase-ratio-variation partition pair on a plant protein against a "
+                           "thiol or a disulfide, i.e. a matrix leg and a water leg in one run",
+}
+
+# ===========================================================================
+# PAIRED THRESHOLDS: WHAT THE CORPUS HAS, AND WHY THE REFUSAL STANDS
+# ===========================================================================
+# 2026-09-09. `matrix_oav` refuses every matrix-corrected threshold. Two papers were fetched to try
+# to lift that and neither does, for different reasons worth keeping apart.
+PAIRED_THRESHOLD_EVIDENCE: Mapping[str, str] = {
+    "wright2006_whey": (
+        "THE ONLY GENUINE PAIRED THRESHOLD IN THE CORPUS, and it is not a plant protein. Wright "
+        "2006 measures dimethyl trisulfide at 0.07 ppt in water and 0.80 ppb in 10 % whey protein "
+        "isolate: 80 panellists, orthonasal DETECTION, ASTM ascending 3-AFC. The shift is 11 429x "
+        "(mine; the paper never computes it). READ BOTH WAYS OR NEITHER: the paper's own water leg "
+        "sits 143x BELOW the water threshold it cites from the literature, and against that "
+        "citation the shift is only about 80x (mine) -- inside the 27-41x cross-study band this "
+        "layer already carries. A K_g proxy from the larger reading would be about 114 L/g, some "
+        "300x the largest constant in this table, which is why it is reported as an unexplained "
+        "residual and not shipped."
+    ),
+    "suppavorasatit_soymilk": (
+        "FETCHED TO LIFT THE REFUSAL AND IT DOES NOT. Its two legs are control soymilk against "
+        "DEAMIDATED soymilk, both about 3 % soy protein, so there is no water leg at all; "
+        "'odourless distilled water' is the flavour stock's solvent and the scale anchor, not a "
+        "comparator. The claim that it supplied a paired plant-matrix threshold was made in error "
+        "on 2026-09-09 and is retracted here."
+    ),
+    "the_standing_position": (
+        "The corpus holds NO paired water/plant-matrix odour threshold. Every plant-protein paper "
+        "read -- Utz 2022, Trikusuma 2020, Xiang 2023, Nedele 2022, Li 2023, Mehle 2020 -- computes "
+        "odour activity in a plant matrix using a WATER threshold, and most take it from one "
+        "database. So `matrix_oav`'s refusal is correct behaviour and is not liftable by reading. "
+        "It needs a sensory panel."
+    ),
+}
+
 HOLDOUT_SEALED_BINDING: Mapping[str, str] = {
-    "kg_hexanal_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT (D.6). "
+    "kg_hexanal_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT (D.6). "
                         "Value not carried in this file.",
-    "kg_nonanal_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT.",
-    "kg_2_nonanone_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT.",
+    "kg_nonanal_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT.",
+    "kg_2_nonanone_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT.",
     "kg_hexanal_mucin": "Barallat-Perez 2024 pig gastric mucin -- Module 6 STAR HOLD-OUT.",
     "kg_nonanal_mucin": "Barallat-Perez 2024 mucin -- Module 6 STAR HOLD-OUT.",
     "kg_2_nonanone_mucin": "Barallat-Perez 2024 mucin -- Module 6 STAR HOLD-OUT.",
@@ -459,6 +624,115 @@ HOLDOUT_SEALED_BINDING: Mapping[str, str] = {
 #: measured THRESHOLD SHIFT does NOT transfer (monotone in gelatin, collapsed in
 #: beef). Nothing here extrapolates a threshold shift by chain length.
 CHAIN_LENGTH_SLOPE_PER_CH2: float = 2.81  # geometric mean of 2.72 and 2.9
+# ===========================================================================
+# WHAT HEAT DOES TO FLAVOUR BINDING: FIVE PAPERS, THREE SIGNS, NO SCALAR
+# ===========================================================================
+# 2026-09-09. Wave B26 shipped this layer's first plant-protein constants at 37 C and said outright
+# that nothing licensed them at 90 or 140 C. Five papers were fetched to lift that limit. NONE of
+# them supplies an aqueous binding constant MEASURED above 60 C, so the limit stands -- but between
+# them they refute the thing anyone would reach for next, which is a single temperature correction.
+#
+# THE PREHEAT EFFECT IS NOT A SCALAR AND IT IS NOT ONE-SIGNED. Three papers, three signs:
+#   * DRY soy, measured hot: adsorption FALLS, 1.2 to 1.8x per 10 C over 80-100 C (Aspelund 1983).
+#   * AQUEOUS soy, measured hot: binding RISES, 1.5 to 2.5x from 25 to 74 C, and NON-MONOTONE with
+#     a minimum at 25 C -- 0.241 / 0.159 / 0.396 mol of 2-pentylpyridine per mol of protein at
+#     4 / 25 / 74 C (Zhou, Boatright & Johnson 2002 Table 1).
+#   * AQUEOUS pea, cooked then read cold: SPLIT BY LIGAND. 2-methylpyrazine's per-gram constant
+#     rises 4.27e-2 -> 6.79e-2 -> about 1.97e-1 L/g across native, 100 C and 120 C, while a
+#     thiazole in the same experiment falls 8.17e-1 -> 2.39e-1 (Xu 2022, derived; that paper needs
+#     no molar mass because it prints both the bound fraction and the loading).
+#   * AQUEOUS soy, preheated then read cold: ALSO SPLIT BY LIGAND. Simple esters lose 18 to 21x of
+#     their binding; terpene esters and alcohols GAIN 1.07 to 1.71x (Guo 2019).
+#   * DRY soy, autoclaved then read: binding falls by about half -- 47-49 % for ketones, 43 % for
+#     hexanal -- while the enthalpy is UNCHANGED on every ANOVA (p 0.076 to 0.974). Sites are
+#     REMOVED, not weakened, which is a different mechanism from all of the above (Crowther 1980).
+# A layer that multiplied its binding constants by one temperature factor would be wrong in sign
+# for at least one ligand class in every one of these experiments.
+BINDING_AT_PROCESS_TEMPERATURE: Mapping[str, str] = {
+    "the_limit_stands": (
+        "No paper in the corpus measures an AQUEOUS binding constant at a temperature above 60 C. "
+        "Zhou 2002 measures a bound AMOUNT in water at 74 C, which is not a constant; Aspelund and "
+        "Crowther measure hot but DRY, on powder, with no water anywhere; Guo and Xu heat the "
+        "protein and then read the binding cold. Wave B26's caveat is unchanged."
+    ),
+    "zhou2002_the_nearest_thing": (
+        "Soy protein isolate against 2-pentylpyridine, equilibrium dialysis and SPME. Its 25 C "
+        "Klotz constant is 107 +/- 10 M^-1 on a molar basis the paper STATES (100 000 g/mol), the "
+        "same convention the shipped Damodaran soy rows rest on, giving K_g = 3.21e-3 L/g (mine) "
+        "-- directly comparable to kg_2_heptanone_soy. NOT SHIPPED, and the reason is specific: "
+        "the 74 C arm runs 14 to 20 hours, and these same authors showed that 2-pentylpyridine "
+        "FORMS in soy from 2,4-decadienal and ammonia. A synthesis control was run for their UV arm "
+        "and NOT for the 74 C arm, so some of that rise may be the compound being made rather than "
+        "bound."
+    ),
+    "xu2022_the_covalent_pair": (
+        "Two of Xu 2022's compounds are more than 98 % bound and its authors call that binding "
+        "covalent and irreversible in as many words. Those two are quarantined on the same "
+        "precedent as this table's alkenal rows; the pyrazine and thiazole numbers above are the "
+        "usable half."
+    ),
+    "a_molar_basis_disagreement_worth_knowing": (
+        "Guo 2019 computes its constants on 220 000 g/mol for soy protein. The shipped soy rows in "
+        "this table rest on the 100 000 that Damodaran's source STATES. That is a 2.2x difference "
+        "in the denominator, and it is why Guo's absolute constants are not compared with this "
+        "table's; only its ratios are used."
+    ),
+}
+
+#: SIX DETERMINATIONS OF THE CHAIN-LENGTH SLOPE, AND THE SHIPPED VALUE IS CONFIRMED, NOT STRETCHED.
+#:
+#: CORRECTED 2026-09-10. When these were first written up the same day they were read, the summary
+#: said the shipped 2.81 "sits at the TOP of its own evidence" because three new readings came in
+#: at 1.90, 2.15 and 2.23. That framing pooled across METHOD FAMILIES, which is the one thing this
+#: layer's own rule forbids -- the same rule that keeps a dialysis aldehyde constant out of a
+#: headspace pool. Split the six the way the rule requires and the picture inverts:
+#:
+#:   AQUEOUS, which is the family the slope is applied in:
+#:       Andriot 2000 beta-lactoglobulin, headspace, 30 C   2.72
+#:       Damodaran 1981 soy, dialysis, 25 C                 2.90
+#:       Guo 2019 soy, native protein, 37 C                 2.86   <- read 2026-09-09
+#:   geometric mean 2.826, spread 1.07x across three proteins, three methods and 38 years.
+#:
+#:   DRY, gas-solid chromatography on a powder, a different family entirely:
+#:       Aspelund 1983 soy, 90 C                            2.23
+#:       Crowther 1980 soy, 60-80 C                    1.90-2.15   (INVARIANT to every treatment)
+#:
+#: So the aqueous three agree to 7 % and the shipped 2.81 sits in the MIDDLE of them, not at the
+#: top; Guo is an independent third determination landing within 2 % of it. The dry pair is lower
+#: and internally consistent, and it is measuring adsorption onto a powder surface rather than
+#: partition into a hydrated protein -- which is exactly why the rule separates them, and why the
+#: two families disagreeing by about 1.3x is a result about method rather than about chain length.
+#: NOTHING IS CHANGED, and now for a better reason than before: the constant is confirmed.
+CHAIN_LENGTH_SLOPE_AQUEOUS_FAMILY: Tuple[float, ...] = (2.72, 2.90, 2.86)
+CHAIN_LENGTH_SLOPE_DRY_FAMILY: Tuple[float, ...] = (2.23, 1.90, 2.15)
+CHAIN_LENGTH_SLOPE_FIVE_DETERMINATIONS: Mapping[str, float] = {
+    "andriot2000_blg_headspace_30C": 2.72,
+    "damodaran1981_soy_dialysis_25C": 2.9,
+    "aspelund1983_soy_dry_90C": 2.23,
+    "crowther1980_soy_dry_60_80C_low": 1.90,
+    "crowther1980_soy_dry_60_80C_high": 2.15,
+    "guo2019_soy_native_37C": 2.86,
+}
+
+#: CHECKED AT PROCESS TEMPERATURE FOR THE FIRST TIME, 2026-09-09 (aspelund1983_extraction.md).
+#: Aspelund & Wilson 1983 run inverse gas chromatography on a spray-dried soy isolate at 80, 90 and
+#: 100 C -- the only flavour-affinity measurement in the corpus above 60 C -- and their 2-alkanone
+#: series gives 578 cal per CH2 at 90 C, i.e. 2.23x/CH2 (mine), against the 2.81 shipped above.
+#: That is a 1.26x disagreement across two methods, two temperatures and forty years, which is
+#: closer agreement than this layer usually gets.
+#: IT DOES NOT LICENSE A BINDING CONSTANT AT PROCESS TEMPERATURE, AND THE PAPER SAYS SO. There is no
+#: water anywhere in the experiment: it is gas-solid chromatography on a dry powder, and its authors
+#: write that "a reordering of the binding affinities will occur" in aqueous solution. So it checks
+#: the SLOPE, which is a structural regularity, and supplies no row for REVERSIBLE_BINDING. Wave
+#: B26's caveat -- that nothing licenses a plant binding constant at 90 or 140 C -- stands unchanged.
+#: What it does add is a measured DIRECTION: adsorption weakens monotonically as the protein is
+#: heated (its Table III), which is the opposite of what a layer charging sites once at the start of
+#: a cook would assume if it assumed anything.
+CHAIN_LENGTH_SLOPE_CHECKED_DRY_AT_90C = (
+    "Aspelund & Wilson 1983, inverse gas chromatography on dry soy isolate at 80/90/100 C: 578 cal "
+    "per CH2 at 90 C = 2.23x/CH2 (mine) against the 2.81 shipped, a 1.26x disagreement. DRY, so it "
+    "checks the slope and supplies no aqueous binding constant."
+)
 CHAIN_LENGTH_SLOPE_SOURCE = (
     "Andriot 2000 2.72x/CH2 (beta-lactoglobulin, headspace) and Damodaran 1981 "
     "2.9x/CH2 (soy, dialysis), k2_matrix_and_thresholds.md sec. B.6. Both FIT."
@@ -469,6 +743,23 @@ CHAIN_LENGTH_SLOPE_SOURCE = (
 #: CAP on the reversible term's share of any observed log-shift, and the layer
 #: refuses to report a reversible explanation above it.
 REVERSIBLE_LOG_SHIFT_CEILING: float = 0.25
+#: CAN THIS CAP BE RE-DERIVED? NO, AND THE REASON IS A RULE, NOT A GAP IN THE READING (2026-09-10).
+#: Wave B26 pushed the reversible term through this cap for the first time on a real hold-out row
+#: (44.2 % of the hexanal log-shift against the ~25 % here), and the wave's own record says the cap
+#: was computed from ONE compound in beef and one dairy protein and may not transfer to a plant
+#: isolate. Re-deriving it was put on the backlog. It cannot be done:
+#:   * The beef leg is Brewer 1995, a DECLARED HOLD-OUT, reclassified `dose_added_pre_cook`. Its
+#:     numbers are in this package's hold-out firewall literal list. Re-deriving a shipped cap from
+#:     it would be reading the hold-out, which is the one thing this repository does not do.
+#:   * Re-deriving it on a PLANT matrix needs a paired water/plant-protein odour threshold, and
+#:     PAIRED_THRESHOLD_EVIDENCE records that the corpus holds none -- six plant-protein papers were
+#:     read and every one computes odour activity in a plant matrix from a WATER threshold.
+#: So this cap stays at 0.25, the flag stays, and it fires on the hexanal row. What would settle it
+#: is the sensory panel in docs/guides/EXPERIMENTS.md, experiment 3, and nothing short of it.
+REVERSIBLE_LOG_SHIFT_CEILING_CANNOT_BE_REDERIVED = (
+    "Its beef leg is a declared hold-out and its plant-matrix replacement does not exist in the "
+    "corpus. Experiment 3 of docs/guides/EXPERIMENTS.md is the only route."
+)
 REVERSIBLE_LOG_SHIFT_CEILING_SOURCE = (
     "Amendment 6 ruling 2 (meynier2004_extraction.md sec. 9): reversible 25.4 % "
     "+ covalent 0.06 % = 25.5 % of the 1 304x hexanal log-shift on a "
@@ -524,6 +815,22 @@ UNSATURATION_OBSERVATIONS_EXCLUDED: Mapping[str, str] = {
                           "Brewer is declaration D.6 HOLD-OUT and reclassified "
                           "`dose_added_pre_cook`, so a large part of both numbers "
                           "is thermal loss before perception, not perception.",
+    # WAVE B26. This exclusion is a finding, not a formality, and it cost the
+    # layer a number it would have liked: Bi's contrast would have pulled the
+    # fitted penalty from 3.73x down into the 2-3x band the corpus states
+    # independently, which is the direction the layer's own caveat says it
+    # should move. It is excluded anyway.
+    "unsat_penalty_pea": "Bi 2022's pea-isolate partition pair gives 4.834 / 3.537 "
+                         "= 1.367x built the way the two carried observations are. "
+                         "EXCLUDED for a CONFOUND the other two do not have: "
+                         "Meynier's and Vega's are SAME-CARBON pairs, C6 alkenal "
+                         "against C6 alkanal, and Bi's is C8 against C6. Divide out "
+                         "this registry's own measured chain-length slope and two "
+                         "carbons alone would predict about 7.9x on the per-gram "
+                         "constant where Bi measures 1.51x -- so the alkenal is LESS "
+                         "bound than chain length by itself would give. A contrast "
+                         "that inverts once a measured confound is removed is not "
+                         "evidence for a penalty and must not set one.",
 }
 
 #: Ordinal gates the penalty must not contradict (anantharamkrishnan2020b sec. 8).

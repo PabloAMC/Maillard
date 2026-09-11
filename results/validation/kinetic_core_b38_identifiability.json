@@ -1,0 +1,1424 @@
+{
+  "provenance": {
+    "artifact": "kinetic_core_b38_identifiability",
+    "generated_on": "2026-09-11",
+    "git": {
+      "commit": "fb0dbd304252d7823d1844d7ddda7486ee6878c5",
+      "short": "fb0dbd30",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b38_identifiability.py",
+    "wave": "B38",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b38_prereg.md",
+        "sha256": "ef862196fa4805f7ff47dd46d1b23ef76bcf2c9e8d430850de73b291c7c6b2ca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b8_laplace_covariance.json",
+        "sha256": "72e5426dab7ce5fdc78df17d76fd179fcf4eae7a6987547f1444686759b1187a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+      },
+      {
+        "path": "results/validation/kinetic_core_b18_fit_report.json",
+        "sha256": "cc88208cc76d617340f00123c7f3cdd05cad979fc9b719f1e78aedc6f5eb0afe"
+      },
+      {
+        "path": "results/validation/kinetic_core_b20_fit_report.json",
+        "sha256": "8697f869c45101926c27be9ba336575768bceaa1ca0d521bfa6f5c592de44b3c"
+      },
+      {
+        "path": "results/validation/kinetic_core_b21_fit_report.json",
+        "sha256": "30dea0576198068e76cbe231553faca460f319faa27f14c5ee009d2d2645dac6"
+      },
+      {
+        "path": "results/validation/kinetic_core_b1_fit_report.json",
+        "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+      }
+    ]
+  },
+  "method": "central-difference Jacobian of each shipped fit's own sigma-weighted residuals at its shipped optimum; FIM = J^T J; Sigma = pinv(FIM) * chi2_red; marginal vs conditional 95 % half-widths; eigen-analysis of the correlation-normalised FIM; |corr| >= 0.9 pairs; cross with uncertainty.core_priors()",
+  "thresholds": {
+    "pinned_ci95_halfwidth": {
+      "log10k": 0.5,
+      "ea": 30.0,
+      "yield": 0.15,
+      "pka": 0.5,
+      "other": 0.5
+    },
+    "weak_ci95_halfwidth": {
+      "log10k": 1.5,
+      "ea": 90.0,
+      "yield": 0.5,
+      "pka": 1.5,
+      "other": 1.5
+    },
+    "null_eigenvalue_fraction": 0.001,
+    "collinear_abs_corr": 0.9
+  },
+  "summary": {
+    "total_free_coordinates": 47,
+    "pinned": 14,
+    "at_bound": 6,
+    "not_pinned": 27,
+    "collinear_not_insensitive": 8,
+    "fits": [
+      "B8 (sulfur, 23 free)",
+      "B3 (acrylamide, 11 free)",
+      "B18 (dicarbonyl sinks, 6 free)",
+      "B20 (glycation, 5 free)",
+      "B21 (aqueous glucosone -> glyoxal, 2 free)"
+    ]
+  },
+  "predictions": {
+    "P1_fewer_than_40pct_pinned": {
+      "pinned": 14,
+      "total_free": 47,
+      "fraction": 0.2978723404255319,
+      "held": true
+    },
+    "P2_b3_three_null_and_competitors_insensitive": {
+      "null_directions": 1,
+      "competitors": {
+        "k_gln_glc": {
+          "ci95_conditional": 32641.110063256547,
+          "insensitive": true
+        },
+        "k_ala_glc": {
+          "ci95_conditional": 138366.8579629846,
+          "insensitive": true
+        },
+        "k_acr_ala": {
+          "ci95_conditional": 936650.1633864243,
+          "insensitive": true
+        }
+      },
+      "held": false
+    },
+    "P3_b8_thiol_sink_at_bound_plus_one_more_barrier": {
+      "thiol_sink": {
+        "value": 101.99996428867523,
+        "at_bound": true
+      },
+      "barriers_at_bound": [
+        "Ea_decay_thiol_sink"
+      ],
+      "held": false
+    },
+    "P4_collinearity_dominant": {
+      "not_pinned": 27,
+      "collinear_not_insensitive": 8,
+      "held": false
+    },
+    "P5_priors_mostly_prior_dominated": {
+      "n": 29,
+      "prior_dominated": 7,
+      "held": false
+    },
+    "P6_b18_barriers_pinned_by_band": {
+      "barriers": [
+        {
+          "key": "ea_go_ak_kj_mol",
+          "value": 103.0999999999812,
+          "verdict": "AT_BOUND",
+          "ci95_halfwidth_marginal": 291.4510897360556,
+          "at_bound": true
+        },
+        {
+          "key": "ea_mgo_ak_kj_mol",
+          "value": 114.89999999999999,
+          "verdict": "AT_BOUND",
+          "ci95_halfwidth_marginal": 289.9792380267676,
+          "at_bound": true
+        }
+      ],
+      "held": true
+    },
+    "P7_nothing_moves": {
+      "held": true,
+      "how": "this generator writes one artifact and reads the rest"
+    }
+  },
+  "fits": [
+    {
+      "fit": "B8 (sulfur, 23 free)",
+      "note": "the shipped sulfur vector: B8's 23 free coordinates at its Laplace optimum on top of B2.4-half",
+      "n_rows": 62,
+      "n_free": 23,
+      "dof": 39,
+      "cost_at_optimum": 20.082485492223682,
+      "reduced_chi_square": 1.0298710508832658,
+      "verdict_counts": {
+        "AT_BOUND": 3,
+        "PINNED": 6,
+        "WEAK": 10,
+        "UNIDENTIFIED": 4
+      },
+      "not_pinned": 14,
+      "collinear_not_insensitive": 7,
+      "eigenvalues_over_max": [
+        1.0,
+        0.6217352798545808,
+        0.5186324619597551,
+        0.4599059303207795,
+        0.3494423416886378,
+        0.30839394534390985,
+        0.29157325993406374,
+        0.24581568109686697,
+        0.22788475976628583,
+        0.2206231518171085,
+        0.1903908689001856,
+        0.16683405740673884,
+        0.13378547072070593,
+        0.11138496191573416,
+        0.10321715795899232,
+        0.06742389471069336,
+        0.05735150100908078,
+        0.04348193659434844,
+        0.029175495338658337,
+        0.018541251586786035,
+        0.0178527873209024,
+        0.009973486559599069,
+        0.005098194730387232
+      ],
+      "null_directions": [],
+      "collinear_pairs": [
+        {
+          "a": "k_dimer_decay",
+          "b": "k_thiol_decay",
+          "corr": 0.9999502518236837
+        }
+      ],
+      "coordinates": [
+        {
+          "key": "k_tdp_fur",
+          "kind": "log10k",
+          "value": -3.0051921435963624,
+          "ci95_halfwidth_marginal": 0.6170831050554971,
+          "ci95_halfwidth_conditional": 0.21320131995473707,
+          "sensitivity_norm": 9.329483640578083,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        },
+        {
+          "key": "k_nf_mft",
+          "kind": "log10k",
+          "value": -2.0424158919406534,
+          "ci95_halfwidth_marginal": 0.2967366001492691,
+          "ci95_halfwidth_conditional": 0.2044952960760895,
+          "sensitivity_norm": 9.726669829741587,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_nf_mp3p",
+          "kind": "log10k",
+          "value": -2.859350530861254,
+          "ci95_halfwidth_marginal": 0.6773200590804686,
+          "ci95_halfwidth_conditional": 0.6151315638230932,
+          "sensitivity_norm": 3.2335492822140557,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_mgo_mp",
+          "kind": "log10k",
+          "value": -3.8910765875807862,
+          "ci95_halfwidth_marginal": 0.4066042380116407,
+          "ci95_halfwidth_conditional": 0.3813336993360355,
+          "sensitivity_norm": 5.216056776861445,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_glc_ha",
+          "kind": "log10k",
+          "value": -0.7565040590842266,
+          "ci95_halfwidth_marginal": 0.39932904476111175,
+          "ci95_halfwidth_conditional": 0.24671732516259592,
+          "sensitivity_norm": 8.062093836971155,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_dimer_fft",
+          "kind": "log10k",
+          "value": 0.49999999994526745,
+          "ci95_halfwidth_marginal": 0.9555347019358601,
+          "ci95_halfwidth_conditional": 0.6755005048202619,
+          "sensitivity_norm": 2.944569563566239,
+          "at_bound": true,
+          "verdict": "AT_BOUND",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_fft_decay",
+          "kind": "log10k",
+          "value": -0.6570979044951178,
+          "ci95_halfwidth_marginal": 0.19409734095944897,
+          "ci95_halfwidth_conditional": 0.15010710537730526,
+          "sensitivity_norm": 13.250926541203551,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_fur_decay",
+          "kind": "log10k",
+          "value": 0.43644748973031144,
+          "ci95_halfwidth_marginal": 1.058581535602422,
+          "ci95_halfwidth_conditional": 0.22839517102620996,
+          "sensitivity_norm": 8.70884536538259,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        },
+        {
+          "key": "k_pent_caramel",
+          "kind": "log10k",
+          "value": -2.597331361068918,
+          "ci95_halfwidth_marginal": 1.1202815660390064,
+          "ci95_halfwidth_conditional": 0.8486415944116332,
+          "sensitivity_norm": 2.3438142082187183,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_cys_thermal",
+          "kind": "log10k",
+          "value": -2.0521779937167826,
+          "ci95_halfwidth_marginal": 0.49461083430681896,
+          "ci95_halfwidth_conditional": 0.3939035735666325,
+          "sensitivity_norm": 5.049606960041719,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_thiolate_loss",
+          "kind": "log10k",
+          "value": -1.8338685339947247,
+          "ci95_halfwidth_marginal": 1.2037072394754373,
+          "ci95_halfwidth_conditional": 0.47532073739212966,
+          "sensitivity_norm": 4.184665364234764,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        },
+        {
+          "key": "ph_acid_yield_per_sink_event",
+          "kind": "yield",
+          "value": 3.7639956828727502e-06,
+          "ci95_halfwidth_marginal": 1.1381303007970485,
+          "ci95_halfwidth_conditional": 0.41942669861747683,
+          "sensitivity_norm": 4.742326211525754,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "ph_arp_secondary_ammonium_pKa",
+          "kind": "pka",
+          "value": 7.091897397059156,
+          "ci95_halfwidth_marginal": 0.8586264186369998,
+          "ci95_halfwidth_conditional": 0.6328890962134506,
+          "sensitivity_norm": 3.1428227134387785,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_fur_fft",
+          "kind": "log10k",
+          "value": -0.5497409390831485,
+          "ci95_halfwidth_marginal": 1.303041371785106,
+          "ci95_halfwidth_conditional": 0.376167444129859,
+          "sensitivity_norm": 5.2876937058399935,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        },
+        {
+          "key": "k_osone_decay",
+          "kind": "log10k",
+          "value": -1.2133199114247055,
+          "ci95_halfwidth_marginal": 0.9233367028783248,
+          "ci95_halfwidth_conditional": 0.3775128614791174,
+          "sensitivity_norm": 5.268848904575401,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        },
+        {
+          "key": "k_dimer_decay",
+          "kind": "log10k",
+          "value": -9.563111726782221,
+          "ci95_halfwidth_marginal": 0.2515550953100637,
+          "ci95_halfwidth_conditional": 31682948.050286952,
+          "sensitivity_norm": 6.278008673657367e-08,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_ttca_deg",
+          "kind": "log10k",
+          "value": -1.6940835941301198,
+          "ci95_halfwidth_marginal": 0.7310732806264351,
+          "ci95_halfwidth_conditional": 0.23762205671272477,
+          "sensitivity_norm": 8.37068012197227,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        },
+        {
+          "key": "k_thiol_decay",
+          "kind": "log10k",
+          "value": -9.48317359133314,
+          "ci95_halfwidth_marginal": 10547.617754742356,
+          "ci95_halfwidth_conditional": 7492.34113000843,
+          "sensitivity_norm": 0.0002654788659716479,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "Ea_decay_thiol_sink",
+          "kind": "ea",
+          "value": 101.99996428867523,
+          "ci95_halfwidth_marginal": 54.23839429131372,
+          "ci95_halfwidth_conditional": 22.900678433743067,
+          "sensitivity_norm": 0.08685586466017485,
+          "at_bound": true,
+          "verdict": "AT_BOUND",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "Ea_decay_carbonyl_sink",
+          "kind": "ea",
+          "value": 166.67452548840458,
+          "ci95_halfwidth_marginal": 124.31542868396231,
+          "ci95_halfwidth_conditional": 37.1121106685382,
+          "sensitivity_norm": 0.05359593380264404,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_dimer_mft",
+          "kind": "log10k",
+          "value": 0.49999997748315655,
+          "ci95_halfwidth_marginal": 0.6429104681774965,
+          "ci95_halfwidth_conditional": 0.4686888467270106,
+          "sensitivity_norm": 4.243877874537745,
+          "at_bound": true,
+          "verdict": "AT_BOUND",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_arp_dpo",
+          "kind": "log10k",
+          "value": -2.3247717793716665,
+          "ci95_halfwidth_marginal": 4.19764980675769,
+          "ci95_halfwidth_conditional": 3.1411506517439394,
+          "sensitivity_norm": 0.6332259885602957,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_arp_tdp",
+          "kind": "log10k",
+          "value": -1.790443666443704,
+          "ci95_halfwidth_marginal": 0.8229655763307269,
+          "ci95_halfwidth_conditional": 0.3969384261364706,
+          "sensitivity_norm": 5.010999428872424,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        }
+      ],
+      "wall_seconds": 60.2
+    },
+    {
+      "fit": "B3 (acrylamide, 11 free)",
+      "note": "the shipped acrylamide vector at the B3 report's optimum",
+      "n_rows": 30,
+      "n_free": 11,
+      "dof": 19,
+      "cost_at_optimum": 52.707935851517945,
+      "reduced_chi_square": 5.548203773843994,
+      "verdict_counts": {
+        "AT_BOUND": 1,
+        "PINNED": 1,
+        "WEAK": 1,
+        "UNIDENTIFIED": 8
+      },
+      "not_pinned": 9,
+      "collinear_not_insensitive": 0,
+      "eigenvalues_over_max": [
+        1.0,
+        0.6757666777888955,
+        0.4521161093561808,
+        0.36339999311342214,
+        0.3264890067804431,
+        0.27551170212099635,
+        0.20345686070211488,
+        0.12939366535197236,
+        0.033980057305238544,
+        0.024338935619118172,
+        9.111218114905094e-06
+      ],
+      "null_directions": [
+        {
+          "eigenvalue_over_max": 9.111218114905094e-06,
+          "loadings": [
+            {
+              "key": "Ea_int1_mel",
+              "weight": -0.7072190184781154
+            },
+            {
+              "key": "k_int1_mel",
+              "weight": 0.7068898469484534
+            },
+            {
+              "key": "k_ala_glc",
+              "weight": -0.006662144709005477
+            }
+          ]
+        }
+      ],
+      "collinear_pairs": [
+        {
+          "a": "k_int1_mel",
+          "b": "Ea_int1_mel",
+          "corr": -0.9999397557201573
+        },
+        {
+          "a": "k_ala_glc",
+          "b": "k_acr_ala",
+          "corr": 0.9116318960189357
+        }
+      ],
+      "coordinates": [
+        {
+          "key": "k_int1_mel",
+          "kind": "log10k",
+          "value": -4.49609939573632,
+          "ci95_halfwidth_marginal": 1118.7275423218878,
+          "ci95_halfwidth_conditional": 8.487558650803523,
+          "sensitivity_norm": 0.543938105983757,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_acr_dp",
+          "kind": "log10k",
+          "value": -0.8978334423341812,
+          "ci95_halfwidth_marginal": 0.4382686741847554,
+          "ci95_halfwidth_conditional": 0.4312449029358202,
+          "sensitivity_norm": 10.705533086917896,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "k_gln_glc",
+          "kind": "log10k",
+          "value": -7.8355036696571805,
+          "ci95_halfwidth_marginal": 38369.42921604274,
+          "ci95_halfwidth_conditional": 32641.110063256547,
+          "sensitivity_norm": 0.0001414384059854954,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_lys_glc",
+          "kind": "log10k",
+          "value": -2.595910646804505,
+          "ci95_halfwidth_marginal": 25.363701264668506,
+          "ci95_halfwidth_conditional": 10.051125577122454,
+          "sensitivity_norm": 0.45932234569352987,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_ala_glc",
+          "kind": "log10k",
+          "value": -6.8723102887066405,
+          "ci95_halfwidth_marginal": 396301.26575419947,
+          "ci95_halfwidth_conditional": 138366.8579629846,
+          "sensitivity_norm": 3.336569641683389e-05,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_acr_gln",
+          "kind": "log10k",
+          "value": -1.894602070316578,
+          "ci95_halfwidth_marginal": 2.0344787942829723,
+          "ci95_halfwidth_conditional": 2.0003962567128784,
+          "sensitivity_norm": 2.307896028825036,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_acr_lys",
+          "kind": "log10k",
+          "value": -2.4915117796873094,
+          "ci95_halfwidth_marginal": 5.101493828143327,
+          "ci95_halfwidth_conditional": 4.323965156553567,
+          "sensitivity_norm": 1.0677020766337264,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "k_acr_ala",
+          "kind": "log10k",
+          "value": -8.82499890965576,
+          "ci95_halfwidth_marginal": 2675397.2509997315,
+          "ci95_halfwidth_conditional": 936650.1633864243,
+          "sensitivity_norm": 4.928955075663027e-06,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "Ea_int1_mel",
+          "kind": "ea",
+          "value": 259.9995034093972,
+          "ci95_halfwidth_marginal": 109761.43623028736,
+          "ci95_halfwidth_conditional": 832.3498905274316,
+          "sensitivity_norm": 0.005546593601422439,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "Ea_acr_dp",
+          "kind": "ea",
+          "value": 136.10927178572982,
+          "ci95_halfwidth_marginal": 47.34766968294012,
+          "ci95_halfwidth_conditional": 43.674253232922844,
+          "sensitivity_norm": 0.10570773934753669,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "Ea_competitor_sugar",
+          "kind": "ea",
+          "value": 20.000000000000007,
+          "ci95_halfwidth_marginal": 4447.498305968636,
+          "ci95_halfwidth_conditional": 1790.391945535814,
+          "sensitivity_norm": 0.002578601064674958,
+          "at_bound": true,
+          "verdict": "AT_BOUND",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        }
+      ],
+      "wall_seconds": 18.0
+    },
+    {
+      "fit": "B18 (dicarbonyl sinks, 6 free)",
+      "note": "the shipped B18 vector at its best member",
+      "n_rows": 10,
+      "n_free": 6,
+      "dof": 4,
+      "cost_at_optimum": 112.30133866732028,
+      "reduced_chi_square": 56.15066933366014,
+      "verdict_counts": {
+        "AT_BOUND": 2,
+        "PINNED": 0,
+        "WEAK": 3,
+        "UNIDENTIFIED": 1
+      },
+      "not_pinned": 4,
+      "collinear_not_insensitive": 1,
+      "eigenvalues_over_max": [
+        1.0,
+        0.6650255482217641,
+        0.37850251639109483,
+        0.12715395591845774,
+        0.09497286352952335,
+        0.04088446534664118
+      ],
+      "null_directions": [],
+      "collinear_pairs": [],
+      "coordinates": [
+        {
+          "key": "log10_k_go_ak_100C",
+          "kind": "log10k",
+          "value": -6.5415452891122525,
+          "ci95_halfwidth_marginal": 1.8100823952742235,
+          "ci95_halfwidth_conditional": 0.8213473992263758,
+          "sensitivity_norm": 17.88161144939979,
+          "at_bound": false,
+          "verdict": "UNIDENTIFIED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "ea_go_ak_kj_mol",
+          "kind": "ea",
+          "value": 103.0999999999812,
+          "ci95_halfwidth_marginal": 291.4510897360556,
+          "ci95_halfwidth_conditional": 182.8180367390339,
+          "sensitivity_norm": 0.08033679455220431,
+          "at_bound": true,
+          "verdict": "AT_BOUND",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "log10_k_mgo_ak_100C",
+          "kind": "log10k",
+          "value": -7.529714282148093,
+          "ci95_halfwidth_marginal": 1.2464369854200035,
+          "ci95_halfwidth_conditional": 0.8159077313161681,
+          "sensitivity_norm": 18.00082839544735,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "ea_mgo_ak_kj_mol",
+          "kind": "ea",
+          "value": 114.89999999999999,
+          "ci95_halfwidth_marginal": 289.9792380267676,
+          "ci95_halfwidth_conditional": 182.11372772860338,
+          "sensitivity_norm": 0.080647490121275,
+          "at_bound": true,
+          "verdict": "AT_BOUND",
+          "collinear_not_insensitive": false,
+          "insensitive": true
+        },
+        {
+          "key": "ph_slope_above_7_decades_per_unit",
+          "kind": "other",
+          "value": 0.19744840125387295,
+          "ci95_halfwidth_marginal": 0.8847004415131379,
+          "ci95_halfwidth_conditional": 0.42260681925621646,
+          "sensitivity_norm": 34.753379237443674,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": true,
+          "insensitive": false
+        },
+        {
+          "key": "ph_slope_below_7_decades_per_unit",
+          "kind": "other",
+          "value": 0.5795142879227316,
+          "ci95_halfwidth_marginal": 1.1833250552208718,
+          "ci95_halfwidth_conditional": 0.8815319924168428,
+          "sensitivity_norm": 16.6607850699492,
+          "at_bound": false,
+          "verdict": "WEAK",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        }
+      ],
+      "wall_seconds": 1.9
+    },
+    {
+      "fit": "B20 (glycation, 5 free)",
+      "note": "the shipped B20 vector at its best member",
+      "n_rows": 10,
+      "n_free": 5,
+      "dof": 5,
+      "cost_at_optimum": 8.602999733307453,
+      "reduced_chi_square": 3.441199893322981,
+      "verdict_counts": {
+        "AT_BOUND": 0,
+        "PINNED": 5,
+        "WEAK": 0,
+        "UNIDENTIFIED": 0
+      },
+      "not_pinned": 0,
+      "collinear_not_insensitive": 0,
+      "eigenvalues_over_max": [
+        1.0,
+        0.9999999999999998,
+        0.9999999999999998,
+        0.9999999999999998,
+        0.9999999999999997
+      ],
+      "null_directions": [],
+      "collinear_pairs": [],
+      "coordinates": [
+        {
+          "key": "log10_k_glyc_100C",
+          "kind": "log10k",
+          "value": -4.707341524577862,
+          "ci95_halfwidth_marginal": 0.16614035140722871,
+          "ci95_halfwidth_conditional": 0.16614035140722871,
+          "sensitivity_norm": 21.884463133140557,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "log10_k_flp_cml_100C",
+          "kind": "log10k",
+          "value": -3.317402852045118,
+          "ci95_halfwidth_marginal": 0.34385064678271626,
+          "ci95_halfwidth_conditional": 0.3438506467827163,
+          "sensitivity_norm": 10.574045532030311,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "log10_k_flp_cel_100C",
+          "kind": "log10k",
+          "value": -3.652055191735323,
+          "ci95_halfwidth_marginal": 0.21908242107171888,
+          "ci95_halfwidth_conditional": 0.21908242107171888,
+          "sensitivity_norm": 16.596002442880923,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "log10_k_flp_decay_100C",
+          "kind": "log10k",
+          "value": -1.856048900182166,
+          "ci95_halfwidth_marginal": 0.29788216609055096,
+          "ci95_halfwidth_conditional": 0.29788216609055096,
+          "sensitivity_norm": 12.205807561481429,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "log10_k_cml_loss_100C",
+          "kind": "log10k",
+          "value": -0.9827379909354617,
+          "ci95_halfwidth_marginal": 0.4951513951952907,
+          "ci95_halfwidth_conditional": 0.4951513951952907,
+          "sensitivity_norm": 7.34299131655379,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        }
+      ],
+      "wall_seconds": 0.0
+    },
+    {
+      "fit": "B21 (aqueous glucosone -> glyoxal, 2 free)",
+      "note": "the shipped B21 vector at its best member",
+      "n_rows": 6,
+      "n_free": 2,
+      "dof": 4,
+      "cost_at_optimum": 1.7715111239773609,
+      "reduced_chi_square": 0.8857555619886804,
+      "verdict_counts": {
+        "AT_BOUND": 0,
+        "PINNED": 2,
+        "WEAK": 0,
+        "UNIDENTIFIED": 0
+      },
+      "not_pinned": 0,
+      "collinear_not_insensitive": 0,
+      "eigenvalues_over_max": [
+        1.0,
+        1.0
+      ],
+      "null_directions": [],
+      "collinear_pairs": [],
+      "coordinates": [
+        {
+          "key": "log10_k_ama_g_100C",
+          "kind": "log10k",
+          "value": -2.0339128364819725,
+          "ci95_halfwidth_marginal": 0.15740735987784388,
+          "ci95_halfwidth_conditional": 0.15740735987784388,
+          "sensitivity_norm": 11.718930554163117,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        },
+        {
+          "key": "log10_k_g_go_aqueous_100C",
+          "kind": "log10k",
+          "value": -0.5104286909031046,
+          "ci95_halfwidth_marginal": 0.2650275522392401,
+          "ci95_halfwidth_conditional": 0.2650275522392401,
+          "sensitivity_norm": 6.960204339273579,
+          "at_bound": false,
+          "verdict": "PINNED",
+          "collinear_not_insensitive": false,
+          "insensitive": false
+        }
+      ],
+      "wall_seconds": 0.0
+    }
+  ],
+  "b8_frozen": {
+    "fit": "B8 frozen coordinates (25)",
+    "coordinates": [
+      {
+        "key": "k_pent_dpo",
+        "kind": "log10k",
+        "value": -0.5446463072676107,
+        "ci95_halfwidth_conditional": 0.08425166473076257,
+        "sensitivity_norm": 23.608533232235516,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_pent_tdp",
+        "kind": "log10k",
+        "value": -0.5022095511358302,
+        "ci95_halfwidth_conditional": 0.10141072871429806,
+        "sensitivity_norm": 19.613883579035285,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_dpo_c2c3",
+        "kind": "log10k",
+        "value": -3.0155236916597783,
+        "ci95_halfwidth_conditional": 1.193930607676219,
+        "sensitivity_norm": 1.6659747341084865,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_dpo_nf",
+        "kind": "log10k",
+        "value": 0.43445392481376577,
+        "ci95_halfwidth_conditional": 0.12042795469466377,
+        "sensitivity_norm": 16.51658231438443,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_dpo_ptr",
+        "kind": "log10k",
+        "value": -4.347247153178998,
+        "ci95_halfwidth_conditional": 119.08819110111106,
+        "sensitivity_norm": 0.016702396839486593,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_dpo_ddp",
+        "kind": "log10k",
+        "value": 0.04172302756946337,
+        "ci95_halfwidth_conditional": 0.12116390372633573,
+        "sensitivity_norm": 16.41626066423146,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_ddp_mft",
+        "kind": "log10k",
+        "value": -6.540581367427349,
+        "ci95_halfwidth_conditional": 800.4931576285145,
+        "sensitivity_norm": 0.0024847910412626375,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_ha_mp_mft",
+        "kind": "log10k",
+        "value": -3.8696667868173487,
+        "ci95_halfwidth_conditional": 0.4130019899208588,
+        "sensitivity_norm": 4.816098409231695,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_thi_hmp",
+        "kind": "log10k",
+        "value": -2.5882946400737175,
+        "ci95_halfwidth_conditional": 0.45200246390882876,
+        "sensitivity_norm": 4.40054731000001,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_thi_mesh",
+        "kind": "log10k",
+        "value": -3.273029275775544,
+        "ci95_halfwidth_conditional": 0.9907450263415484,
+        "sensitivity_norm": 2.0076388715391515,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_hmp_mft",
+        "kind": "log10k",
+        "value": -2.6086953372771946,
+        "ci95_halfwidth_conditional": 0.48669974844471803,
+        "sensitivity_norm": 4.0868281379300955,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_hmp_mp2p",
+        "kind": "log10k",
+        "value": -3.4372110320564206,
+        "ci95_halfwidth_conditional": 1.1963103725298478,
+        "sensitivity_norm": 1.662660687678478,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_cys_actz",
+        "kind": "log10k",
+        "value": -2.9736755938616524,
+        "ci95_halfwidth_conditional": 1.0260490229720367,
+        "sensitivity_norm": 1.9385606166320393,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_mmft",
+        "kind": "log10k",
+        "value": -1.9837700999787538,
+        "ci95_halfwidth_conditional": 0.9899237954482797,
+        "sensitivity_norm": 2.0093043886945283,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_mft_decay",
+        "kind": "log10k",
+        "value": 0.13411252144508923,
+        "ci95_halfwidth_conditional": 0.19118461087099056,
+        "sensitivity_norm": 10.403861574452607,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_nf_decay",
+        "kind": "log10k",
+        "value": -2.181605124250818,
+        "ci95_halfwidth_conditional": 2.495749357435371,
+        "sensitivity_norm": 0.7969783587208158,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_h2s_loss",
+        "kind": "log10k",
+        "value": -1.3506222526942775,
+        "ci95_halfwidth_conditional": 0.34924206841910693,
+        "sensitivity_norm": 5.695356907233779,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_pent_thermal",
+        "kind": "log10k",
+        "value": -3.437313963933767,
+        "ci95_halfwidth_conditional": 0.9027682023753046,
+        "sensitivity_norm": 2.203287866623894,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_glc_fur",
+        "kind": "log10k",
+        "value": -4.922868997756941,
+        "ci95_halfwidth_conditional": 0.49426769601089077,
+        "sensitivity_norm": 4.024252935647135,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_arp_tdp_th",
+        "kind": "log10k",
+        "value": -4.353715425211875,
+        "ci95_halfwidth_conditional": 230.83841317222485,
+        "sensitivity_norm": 0.008616669120764437,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_arp_dpo_th",
+        "kind": "log10k",
+        "value": -1.2902512237780432,
+        "ci95_halfwidth_conditional": 0.39524244876907916,
+        "sensitivity_norm": 5.032501526245432,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_ddp_mft_hs",
+        "kind": "log10k",
+        "value": -7.69250097808771,
+        "ci95_halfwidth_conditional": 203.04019901733733,
+        "sensitivity_norm": 0.009796376462857631,
+        "data_visible_if_freed": false
+      },
+      {
+        "key": "k_fur_fft_hs",
+        "kind": "log10k",
+        "value": -0.009550422129148002,
+        "ci95_halfwidth_conditional": 0.43137618018636475,
+        "sensitivity_norm": 4.610959802667018,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "k_ttca_cys",
+        "kind": "log10k",
+        "value": -0.5786517733288119,
+        "ci95_halfwidth_conditional": 0.145635402772523,
+        "sensitivity_norm": 13.657793289274636,
+        "data_visible_if_freed": true
+      },
+      {
+        "key": "Ea_lumped_formation",
+        "kind": "ea",
+        "value": 64.0822869313293,
+        "ci95_halfwidth_conditional": 9.70480688622266,
+        "sensitivity_norm": 0.20495598212171756,
+        "data_visible_if_freed": true
+      }
+    ],
+    "n_data_visible_if_freed": 14
+  },
+  "b1_from_report": {
+    "fit": "B1 (trunk) -- read from its own report, not recomputed",
+    "n_entries_with_standard_errors": 0,
+    "verdict_counts": {},
+    "entries": []
+  },
+  "priors_cross": {
+    "n_priors_on_fitted_coordinates": 29,
+    "prior_dominated": 7,
+    "data_dominated": 22,
+    "rows": [
+      {
+        "prior": "b3.k_acr_dp.log10_k_ref_160C",
+        "coordinate": "k_acr_dp",
+        "fit": "B3 (acrylamide, 11 free)",
+        "prior_halfwidth": 0.44541374813828943,
+        "data_ci95_halfwidth": 0.4382686741847554,
+        "verdict": "PINNED",
+        "dominance": "data-dominated",
+        "reason": "identified in the fit report (ci95_halfwidth below the ident"
+      },
+      {
+        "prior": "b3.Ea_int1_mel",
+        "coordinate": "Ea_int1_mel",
+        "fit": "B3 (acrylamide, 11 free)",
+        "prior_halfwidth": 24.877903663179097,
+        "data_ci95_halfwidth": 109761.43623028736,
+        "verdict": "UNIDENTIFIED",
+        "dominance": "prior-dominated",
+        "reason": "unidentified_in_the_fit: declared band capped by the prefact"
+      },
+      {
+        "prior": "b3.Ea_acr_dp",
+        "coordinate": "Ea_acr_dp",
+        "fit": "B3 (acrylamide, 11 free)",
+        "prior_halfwidth": 48.10517217087043,
+        "data_ci95_halfwidth": 47.34766968294012,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "identified in the fit report (ci95_halfwidth below the ident"
+      },
+      {
+        "prior": "b3.Ea_competitor_sugar",
+        "coordinate": "Ea_competitor_sugar",
+        "fit": "B3 (acrylamide, 11 free)",
+        "prior_halfwidth": 24.877655367877708,
+        "data_ci95_halfwidth": 4447.498305968636,
+        "verdict": "AT_BOUND",
+        "dominance": "prior-dominated",
+        "reason": "unidentified_in_the_fit: declared band capped by the prefact"
+      },
+      {
+        "prior": "b8.k_arp_dpo.log10_k_ref_145C",
+        "coordinate": "k_arp_dpo",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 4.19764980675769,
+        "verdict": "UNIDENTIFIED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_arp_tdp.log10_k_ref_145C",
+        "coordinate": "k_arp_tdp",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.8229655763307269,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_tdp_fur.log10_k_ref_145C",
+        "coordinate": "k_tdp_fur",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.6170831050554971,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_fur_fft.log10_k_ref_145C",
+        "coordinate": "k_fur_fft",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 1.303041371785106,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_nf_mft.log10_k_ref_145C",
+        "coordinate": "k_nf_mft",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.2967366001492691,
+        "verdict": "PINNED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_nf_mp3p.log10_k_ref_145C",
+        "coordinate": "k_nf_mp3p",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.6773200590804686,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_mgo_mp.log10_k_ref_145C",
+        "coordinate": "k_mgo_mp",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.4066042380116407,
+        "verdict": "PINNED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_glc_ha.log10_k_ref_145C",
+        "coordinate": "k_glc_ha",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.39932904476111175,
+        "verdict": "PINNED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_dimer_mft.log10_k_ref_145C",
+        "coordinate": "k_dimer_mft",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.6429104681774965,
+        "verdict": "AT_BOUND",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_dimer_fft.log10_k_ref_145C",
+        "coordinate": "k_dimer_fft",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.9555347019358601,
+        "verdict": "AT_BOUND",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_fft_decay.log10_k_ref_145C",
+        "coordinate": "k_fft_decay",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.19409734095944897,
+        "verdict": "PINNED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_dimer_decay.log10_k_ref_145C",
+        "coordinate": "k_dimer_decay",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.2515550953100637,
+        "verdict": "PINNED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_fur_decay.log10_k_ref_145C",
+        "coordinate": "k_fur_decay",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 1.058581535602422,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_osone_decay.log10_k_ref_145C",
+        "coordinate": "k_osone_decay",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.9233367028783248,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_thiol_decay.log10_k_ref_145C",
+        "coordinate": "k_thiol_decay",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 10547.617754742356,
+        "verdict": "UNIDENTIFIED",
+        "dominance": "prior-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_pent_caramel.log10_k_ref_145C",
+        "coordinate": "k_pent_caramel",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 1.1202815660390064,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_ttca_deg.log10_k_ref_145C",
+        "coordinate": "k_ttca_deg",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.7310732806264351,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_cys_thermal.log10_k_ref_145C",
+        "coordinate": "k_cys_thermal",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 0.49461083430681896,
+        "verdict": "PINNED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b8.k_thiolate_loss.log10_k_ref_145C",
+        "coordinate": "k_thiolate_loss",
+        "fit": "B8 (sulfur, 23 free)",
+        "prior_halfwidth": 5.25,
+        "data_ci95_halfwidth": 1.2037072394754373,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b18.log10_k_go_ak_100C",
+        "coordinate": "log10_k_go_ak_100C",
+        "fit": "B18 (dicarbonyl sinks, 6 free)",
+        "prior_halfwidth": 2.0,
+        "data_ci95_halfwidth": 1.8100823952742235,
+        "verdict": "UNIDENTIFIED",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b18.ea_go_ak_kj_mol",
+        "coordinate": "ea_go_ak_kj_mol",
+        "fit": "B18 (dicarbonyl sinks, 6 free)",
+        "prior_halfwidth": 1.2549999999999955,
+        "data_ci95_halfwidth": 291.4510897360556,
+        "verdict": "AT_BOUND",
+        "dominance": "prior-dominated",
+        "reason": "unidentified_direction_flat_across_its_declared_band"
+      },
+      {
+        "prior": "b18.log10_k_mgo_ak_100C",
+        "coordinate": "log10_k_mgo_ak_100C",
+        "fit": "B18 (dicarbonyl sinks, 6 free)",
+        "prior_halfwidth": 2.0,
+        "data_ci95_halfwidth": 1.2464369854200035,
+        "verdict": "WEAK",
+        "dominance": "data-dominated",
+        "reason": "laplace_covariance_at_b8_optimum"
+      },
+      {
+        "prior": "b18.ea_mgo_ak_kj_mol",
+        "coordinate": "ea_mgo_ak_kj_mol",
+        "fit": "B18 (dicarbonyl sinks, 6 free)",
+        "prior_halfwidth": 1.6200000000000045,
+        "data_ci95_halfwidth": 289.9792380267676,
+        "verdict": "AT_BOUND",
+        "dominance": "prior-dominated",
+        "reason": "unidentified_direction_flat_across_its_declared_band"
+      },
+      {
+        "prior": "b18.ph_slope_above_7_decades_per_unit",
+        "coordinate": "ph_slope_above_7_decades_per_unit",
+        "fit": "B18 (dicarbonyl sinks, 6 free)",
+        "prior_halfwidth": 0.75,
+        "data_ci95_halfwidth": 0.8847004415131379,
+        "verdict": "WEAK",
+        "dominance": "prior-dominated",
+        "reason": "IDENTIFIED AND STILL NOT SAMPLED, and the interval is narrow"
+      },
+      {
+        "prior": "b18.ph_slope_below_7_decades_per_unit",
+        "coordinate": "ph_slope_below_7_decades_per_unit",
+        "fit": "B18 (dicarbonyl sinks, 6 free)",
+        "prior_halfwidth": 0.75,
+        "data_ci95_halfwidth": 1.1833250552208718,
+        "verdict": "WEAK",
+        "dominance": "prior-dominated",
+        "reason": "IDENTIFIED AND STILL NOT SAMPLED, and the interval is narrow"
+      }
+    ]
+  },
+  "wall_seconds": 146.4
+}

@@ -491,9 +491,28 @@ def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
     # H2S + norfuraneol: hydrogen sulfide is not a precursor the core can charge
     key = ("hofmann1998_norfuraneol_h2s_145C_20min_pH5", MFT)
     assert key in refused and "UNMAPPED PRECURSORS" in refused[key]["reason"]
-    # 2-pentylfuran is on the named unrepresented list
-    key = ("pea_isolate_uht_140C_Trikusuma2019", "2-pentylfuran")
-    assert key in refused and "UNREPRESENTED TARGETS" in refused[key]["reason"]
+    # 2026-09-10: this asserted that 2-pentylfuran was on the named unrepresented list. Wave B28
+    # answers it, so the row is scored rather than refused and no longer exercises the vocabulary.
+    # 1-hexanol is checked instead, and it is the better example: it is unrepresented because no
+    # aldehyde-reduction step is measured anywhere in the corpus, which no charge can fix.
+    from src.kinetic_core.engine import UNREPRESENTED_COMPOUNDS
+
+    assert "1-hexanol" in UNREPRESENTED_COMPOUNDS
+    assert "2-pentylfuran" not in UNREPRESENTED_COMPOUNDS
+    # The line below was "assert any(...) or refused" until 2026-09-10, which passes whenever ANY
+    # row is refused for any reason -- near-vacuous, and caught on review. The refusal vocabulary
+    # is what is under test, so the vocabulary is what is asserted.
+    # EXTENDED BY WAVE B35 (2026-09-11) as the panel gained rows: 'PYRAZINE TARGETS' is B18's arm on
+    # the same lane-conflict clause as the methionine and pyrroline arms, and 'CHARGES NO PRECURSOR'
+    # is B35's own -- a Maillard target on a pot that charges only a lipid carrier, which used to be
+    # answered with a silent 0.0. 'WAS NEVER COOKED' is B31's. The list is maintained deliberately:
+    # a refusal reason that is not in it is either a typo or a new category that deserves a decision.
+    vocab = ("UNMAPPED PRECURSORS", "UNREPRESENTED TARGET", "LANE CONFLICT", "NOT EVALUABLE",
+             "GLYCATION TARGETS", "METHIONINE CHAIN TARGETS", "2-ACETYL-1-PYRROLINE TARGETS",
+             "PYRAZINE TARGETS", "CHARGES NO PRECURSOR", "WAS NEVER COOKED")
+    assert refused, "the small panel must refuse at least one row"
+    assert all(any(v in r["reason"] for v in vocab) for r in refused.values()), \
+        [r["reason"][:60] for r in refused.values() if not any(v in r["reason"] for v in vocab)]
 
 
 def test_same_seed_gives_an_identical_artifact():

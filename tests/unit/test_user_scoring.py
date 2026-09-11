@@ -66,11 +66,17 @@ def test_rows_are_scored_like_the_panel_scorecard(scored):
 
 
 def test_an_unrepresented_compound_is_a_refusal_with_the_engines_reason():
+    """
+    2026-09-10: this used 2-pentylfuran, which the lipid lane ANSWERS now (wave B28). Its refusal
+    in this template's pot is a different and weaker thing -- no lipid carrier is declared -- so it
+    no longer exercises what the test is named for. 1-hexanol replaces it: no aldehyde-reduction
+    step is measured anywhere in the corpus, so it is unrepresented for a reason no charge can fix.
+    """
     document = yaml.safe_load(us.TEMPLATE)
-    document["systems"][0]["measured"]["2-pentylfuran"] = {"value": 5.0, "unit": "ppb"}
+    document["systems"][0]["measured"]["1-hexanol"] = {"value": 5.0, "unit": "ppb"}
     payload = us.score_document(document)
     system = payload["systems"][0]
-    assert [x["compound"] for x in system["refused"]] == ["2-pentylfuran"]
+    assert [x["compound"] for x in system["refused"]] == ["1-hexanol"]
     assert "UNREPRESENTED" in system["refused"][0]["reason"]
     assert payload["summary"]["refused_rows"] == 1 and payload["summary"]["scored_rows"] == 2
 

@@ -417,6 +417,20 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "MPZ": 94.12,     # C5H6N2, 2-methylpyrazine
     "AKG": 59.07,     # C2H5NO, aminoacetaldehyde
     "AKM": 73.09,     # C3H7NO, aminoacetone
+    # B20 (2026-09-09): the glycation arm's species (bound residues counted as the free molecule)
+    "LYSP": 146.19,   # lysine
+    "FLP": 308.33,    # fructosyl-lysine
+    "CML": 204.22,    # N-epsilon-(carboxymethyl)lysine
+    "CEL": 218.25,    # N-epsilon-(carboxyethyl)lysine
+    # B22 (2026-09-09): the methionine chain
+    "MET": 149.21,    # L-methionine
+    "MTAL": 104.17,   # methional
+    "MSH": 48.11,     # methanethiol (the trunk's pool)
+    "DMDS": 94.20,    # dimethyl disulfide
+    # B24 (2026-09-09): proline's odorant
+    "PRO": 115.13,    # L-proline
+    "PYRL": 69.11,    # 1-pyrroline
+    "AP": 111.14,     # 2-acetyl-1-pyrroline
     "PENT": 150.13,   # C5H10O5, ribose = xylose
     "ARP": 221.21,    # C8H15NO6, 1-deoxy-xylulosyl-alanine
     "Cys": 121.16,    # C3H7NO2S
@@ -459,6 +473,18 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
                       # NOMINAL weight for reporting only and no scored
                       # quantity uses it.
     "DMHFS": 144.19,  # C6H8O2S, 2,5-dimethyl-4-hydroxy-3(2H)-thiophenone
+    # B34 (2026-09-11): TWO SPECIES THE TRUNK HAS CARRIED SINCE B1 AND B13 WITH NO MOLAR MASS.
+    # Nothing had ever asked for them as TARGETS, and the reporting loop's `else` branch silently
+    # returns mmol/L for a key it cannot weigh -- so the moment Leitzen 2021's measurements were
+    # added as hold-out rows, 3-deoxyglucosone scored 180 144x and methylglyoxal 92 306x, both of
+    # them a pure unit error (46 980 ug/L read as 0.2898, exactly a factor of its own molar mass).
+    # This is the SAME failure mode as B28's 2-pentylfuran, and it was still live three days later.
+    # `engine._concentrations` now names the pools that legitimately have no mass instead of
+    # catching everything, and a test walks every reachable target.
+    "TDG": 162.14,    # C6H10O5, 3-deoxyglucosone (same formula as INT, a different molecule)
+    "DGAL": 162.14,   # C6H10O5, 3-deoxygalactosone, the C4 epimer of TDG (B39)
+    "ODG": 162.14,    # C6H10O5, 1-deoxyglucosone (the 1-deoxy isomer; same formula)
+    "MGO": 72.06,     # C3H4O2, methylglyoxal
 }
 
 

@@ -2,8 +2,17 @@
 """
 The reaction tree the model carries, drawn from the code (2026-09-07), for docs/guides/REACTION_TREES.md.
 
-One figure per lane (sugar, pentose-cysteine, acrylamide). Species are boxes; every step in the lane's
-reaction list is an arrow, coloured by HOW ITS RATE CONSTANT IS KNOWN:
+One figure per lane. THE ENGINE HAS FOUR LANES AND THREE OF THEM ARE STEP LISTS: sugar,
+pentose-cysteine and acrylamide are mass-action networks whose every step carries a rate constant, and
+they get the tree below. THE FAT LANE IS NOT A STEP LIST -- it declares no reactions at all (0 against
+63, 83 and 20) and no kinetic parameters of the shared type -- so drawing it in this visual language
+would be a lie by omission in the other direction. It gets its own figure, `14_fat_path.png`, drawn by
+`draw_fat_path` at the bottom of this file, in the shape it actually has: a pool, one rate, and a
+frozen product slate. Until 2026-09-11 this docstring said "one figure per lane" and then listed three,
+and docs/guides/REACTION_TREES.md showed three trees without mentioning that a fourth path existed.
+
+Species are boxes; every step in the lane's reaction list is an arrow, coloured by HOW ITS RATE
+CONSTANT IS KNOWN:
 
   measured directly          a published rate for this step (evidence_class measured_rate / measured_activation_energy)
   fitted, identified         a fitted coordinate the data pin down (Laplace / fit-report standard error)
@@ -41,6 +50,7 @@ if str(ROOT / "scripts" / "generators") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "generators"))
 from src import data_paths  # noqa: E402
 from src.kinetic_core import acrylamide as acr_mod, network, species, species_acrylamide, species_sulfur, sulfur as sul_mod  # noqa: E402
+from src.kinetic_core import lipid as lip_mod, parameters_lipid as PL  # noqa: E402
 from src.kinetic_core.engine import ACRYLAMIDE, SULFUR, TARGET_ALIASES, TRUNK, core_parameters  # noqa: E402
 
 OUT = ROOT / "docs" / "assets" / "thiol_sink"
@@ -302,6 +312,117 @@ def fig_summary(counts_by_lane: Dict[str, Dict[str, int]]) -> None:
     plt.close(fig)
 
 
+# ---------------------------------------------------------------------------
+# THE FAT PATH (2026-09-11). Not a tree, and the figure says so.
+# ---------------------------------------------------------------------------
+#: Frankel's six-product slate, in the order the figure lays them out.
+FAT_PRODUCTS = ("PENTANE", "HEXANAL", "ME_OCTANOATE", "DECADIENAL",
+                "ME_9_OXONONANOATE", "ME_13_OXO_TRIDECADIENOATE")
+FAT_LABELS = {
+    "PENTANE": "pentane", "HEXANAL": "hexanal", "ME_OCTANOATE": "methyl octanoate",
+    "DECADIENAL": "2,4-decadienal", "ME_9_OXONONANOATE": "methyl 9-oxononanoate",
+    "ME_13_OXO_TRIDECADIENOATE": "methyl 13-oxo-\ntridecadienoate",
+}
+FAT_COLUMN_LABELS = {
+    "mixed_ct_tt_9_13": "mixed 9-/13-,\ncis,trans + trans,trans",
+    "pure_ct_13": "pure 13-,\ncis,trans",
+    "tt_9_13": "9-/13-,\ntrans,trans",
+}
+
+
+def draw_fat_path(fname: str = "14_fat_path.png") -> Dict[str, int]:
+    """The fat path drawn as what it is: a declared carrier, one lumped rate, a frozen slate.
+
+    Every number on this figure is read from `parameters_lipid` at draw time, so the figure cannot
+    drift from the module. Nothing here is a step list and the figure's own subtitle says so."""
+    quality = species_quality()
+    slate = PL.FRANKEL_ZERO_ADDITIVE
+    q10 = PL.Q10_ASSUMPTION
+    anchor = PL.K_LOOH_DECOMP_ANCHOR
+    bracket_colour = STATUS_STYLE["only a band or a bracket is known"][0]
+
+    fig, ax = plt.subplots(figsize=(17.0, 8.6))
+    ax.axis("off")
+
+    def box(x, y, w, h, text, fill, edge, fontsize=8.5, weight="normal"):
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.02,rounding_size=0.06",
+                                    linewidth=1.4, facecolor=fill, edgecolor=edge, zorder=2))
+        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fontsize,
+                color=INK, zorder=3, weight=weight)
+
+    def arrow(x0, y0, x1, y1, colour, style="-", lw=2.0):
+        ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle="-|>", mutation_scale=13,
+                                     linewidth=lw, linestyle=style, color=colour,
+                                     shrinkA=2, shrinkB=2, zorder=1))
+
+    # --- stage 1: the carrier, every field a declared assumption -------------
+    ax.text(0.95, 7.95, "1. what the matrix brings", ha="center", fontsize=10, weight="bold", color=INK)
+    carriers = [c for c in PL.LIPID_CARRIERS.values() if c.evidence_class == "declared_assumption"]
+    for i, c in enumerate(carriers):
+        y = 6.35 - i * 1.30
+        box(0.05, y, 1.8, 1.0,
+            f"{c.display}\nlipid {c.lipid_mass_fraction * 100:.1f} % "
+            f"[{c.lipid_lo * 100:.1f}–{c.lipid_hi * 100:.1f}]\n"
+            f"peroxide value {c.peroxide_value_meq_per_kg:.0f}\n[{c.pv_lo:.0f}–{c.pv_hi:.0f}] meq/kg",
+            NODE_FILL["none"], "#B23A3A", fontsize=7.6)
+    ax.text(0.95, 4.80, "NOT measured for any matrix\nin the corpus. The band spans an\nunoxidised isolate to a rancid one.",
+            ha="center", va="top", fontsize=7.4, color="#B23A3A", style="italic")
+
+    # --- stage 2: the pool ---------------------------------------------------
+    ax.text(3.55, 7.95, "2. the pool", ha="center", fontsize=10, weight="bold", color=INK)
+    box(2.65, 5.35, 1.8, 2.0,
+        "hydroperoxide pool\n\nresolved by POSITION\n(9- / 13-)\nand GEOMETRY\n(cis,trans / trans,trans)",
+        NODE_FILL["none"], MUTED, fontsize=8.0)
+    for i in range(len(carriers)):
+        arrow(1.85, 6.85 - i * 1.30, 2.65, 6.35, bracket_colour, style="--", lw=1.8)
+
+    # --- the one rate --------------------------------------------------------
+    arrow(4.45, 6.35, 7.35, 6.35, bracket_colour, style="--", lw=2.6)
+    ax.text(5.90, 6.60,
+            f"ONE rate for the whole lane\n"
+            f"k = {anchor.value:g} {anchor.unit or ''} at "
+            f"{anchor.temperature_of_measurement_c:g} °C".rstrip(),
+            ha="center", va="bottom", fontsize=8.2, color=INK, weight="bold")
+    ax.text(5.90, 6.12,
+            f"evidence: {anchor.evidence_class.replace('_', ' ')}\n"
+            f"carried to cooking temperature by a Q10 of {q10.lo:g}–{q10.hi:g},\n"
+            f"licensed by its source only for {q10.licensed_span_c[0]:g}–{q10.licensed_span_c[1]:g} °C",
+            ha="center", va="top", fontsize=7.8, color="#B23A3A", style="italic")
+
+    # --- stage 3: the frozen slate ------------------------------------------
+    ax.text(9.9, 7.95, "3. the product slate: shares FITTED to Frankel 1989 and FROZEN",
+            ha="center", fontsize=10, weight="bold", color=INK)
+    cols = list(slate)
+    x0, colw = 7.35, 1.45
+    for j, col in enumerate(cols):
+        ax.text(x0 + 2.55 + j * colw, 7.45, FAT_COLUMN_LABELS.get(col, col), ha="center", va="top",
+                fontsize=7.2, color=MUTED)
+    for i, prod in enumerate(FAT_PRODUCTS):
+        y = 6.55 - i * 1.02
+        q = quality.get(prod, "none")
+        box(x0, y, 2.35, 0.80, FAT_LABELS[prod], NODE_FILL[q], NODE_EDGE[q], fontsize=8.0)
+        for j, col in enumerate(cols):
+            share = slate[col].get(prod)
+            ax.text(x0 + 2.55 + j * colw, y + 0.40, f"{share:g} %" if share is not None else "–",
+                    ha="center", va="center", fontsize=8.0, color=INK)
+
+    ax.text(x0 + 1.18, 0.28,
+            "Box colour is the panel's median fold error for that compound, the same scale as the three trees.\n"
+            "Grey means the panel never measures it.",
+            ha="center", va="bottom", fontsize=7.4, color=MUTED)
+
+    ax.set_title("The fat path is NOT a step list: a declared carrier, one lumped rate, and a frozen product slate\n"
+                 "The branch DISTRIBUTION is measured. The absolute RATE is not.",
+                 fontsize=11.5, color=INK, loc="left")
+    ax.set_xlim(-0.1, 12.6)
+    ax.set_ylim(0.0, 8.6)
+    fig.tight_layout()
+    fig.savefig(OUT / fname, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    return {"products": len(FAT_PRODUCTS), "frankel_columns": len(cols),
+            "reactions": 0, "declared_carriers": len(carriers)}
+
+
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     counts = {}
@@ -315,13 +436,16 @@ def main() -> int:
                                                  "The acrylamide path: asparagine and glucose to acrylamide and its elimination",
                                                  "12_tree_acrylamide.png", figsize=(13, 7))
     fig_summary(counts)
+    fat = draw_fat_path()
     from figure_manifest import ENGINE_SOURCES, record
 
     record("scripts/generators/build_reaction_tree.py",
            [V / "core_panel_scores.json", V / "core_prediction_uncertainty.json", V / "kinetic_core_b9_fit_report.json",
             V / "kinetic_core_b9_laplace_covariance.json", ROOT / "scripts" / "generators" / "build_reaction_tree.py", *ENGINE_SOURCES],
-           ["10_tree_sugar.png", "11_tree_sulfur.png", "12_tree_acrylamide.png", "13_steps_by_status.png"])
+           ["10_tree_sugar.png", "11_tree_sulfur.png", "12_tree_acrylamide.png", "13_steps_by_status.png",
+            "14_fat_path.png"])
     print("wrote 3 trees + summary:", {k: dict(v) for k, v in counts.items()})
+    print("wrote the fat path (not a tree; it declares no reactions):", fat)
     return 0
 
 

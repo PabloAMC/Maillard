@@ -71,7 +71,11 @@ REFUSED_SPEC = {
     # homofuraneol -- replaces it and is refused for a SHARPER reason: the
     # compound is real and its route is understood, but it needs a C2 Strecker
     # donor and the core cannot put alanine and a pentose in the same lane.
-    "targets": ["2-methyl-3-furanthiol (MFT)", "HEMF", "2-pentylfuran"],
+    # 2026-09-10: "2-pentylfuran" was the third target here and is ANSWERED now, so it no longer
+    # exercises a refusal card. "propanal" replaces it and is refused for a reason of the same
+    # shape: the lipid lane forms no propanal, because Frankel 1989 fed linoleate only and an oil's
+    # fatty-acid profile is not a transferable branch fraction.
+    "targets": ["2-methyl-3-furanthiol (MFT)", "HEMF", "propanal"],
     "temp_C": 140.0,
     "time_min": 30.0,
     "ph": 5.0,
@@ -186,7 +190,12 @@ def test_an_out_of_envelope_request_renders_refusal_cards_with_named_reasons(
     assert "No number is emitted" in text
     # The engine's own named reasons, verbatim -- not a generic apology.
     assert "Strecker donor" in text and "do not compose" in text
-    assert "not in Frankel 1989" in text or "six-product slate" in text
+    # RE-PINNED BY WAVE B28 (2026-09-09). The card used to say 2-pentylfuran was "not in Frankel
+    # 1989's six-product slate and no branch fraction ... is measured anywhere". The branch
+    # fraction IS measured now, and the compound is still refused for a sharper reason: the rows
+    # that ask for it are scored against a hexanal the lipid lane does not produce. A refusal card
+    # still giving the retired reason would be worse than no card at all.
+    assert "forms no propanal" in text or "alpha-LINOLENATE scission product" in text
     # And the page must say what CAN be asked instead.
     assert "Targets each lane can report" in text
     assert "Compounds the core deliberately refuses" in text
@@ -208,7 +217,7 @@ def test_the_cli_names_the_lane_and_the_missing_species_on_stderr(refused_payloa
     assert "OUT OF ENVELOPE" in message
     assert "Lane resolved: sulfur" in message
     assert "missing species" in message
-    assert "HEMF" in message and "2-pentylfuran" in message
+    assert "HEMF" in message and "propanal" in message
     # It reuses the EnvelopeDeclaration's own text rather than paraphrasing it.
     for reason in refused_payload["declaration"]["reasons"]:
         assert reason.split(":")[0] in message

@@ -346,10 +346,22 @@ def test_aldehyde_binding_constants_are_never_pooled_across_methods():
     assert headspace.method == "static_headspace_partition"
     assert dialysis.method == "gel_filtration"
     assert headspace.value != dialysis.value
-    # and the fitted class constant uses the headspace family only
+    # and the fitted class constant uses the headspace family only.
+    # RE-PINNED BY WAVE B26. Through B25 this asserted that the pooled constant EQUALS
+    # the single headspace row, which was true only because the class had one member.
+    # It now has two, so the claim the test is actually making -- that the dialysis
+    # determination is excluded -- is asserted directly instead.
     classes = fit_class_binding_constants()
     assert classes["n_alkanal"]["method_family"] == "headspace"
-    assert classes["n_alkanal"]["k_g_l_per_g"] == pytest.approx(headspace.value)
+    assert classes["n_alkanal"]["n_fit_rows"] == 2
+    headspace_values = [p.value for p in REVERSIBLE_BINDING
+                        if p.compound == "hexanal"
+                        and p.method in ("headspace_depletion", "static_headspace_partition")]
+    assert len(headspace_values) == 2
+    assert classes["n_alkanal"]["k_g_l_per_g"] == pytest.approx(
+        math.exp(sum(math.log(v) for v in headspace_values) / 2.0))
+    assert dialysis.value not in headspace_values
+    assert classes["n_alkanal"]["k_g_l_per_g"] > dialysis.value
 
 
 def test_the_quarantined_alkenal_constant_never_becomes_a_binding_class():
@@ -589,9 +601,19 @@ def test_frozen_predictions_exist_and_predate_the_score():
 # =========================================================================
 
 def test_pinned_fit_row_reproduction_meynier_hexanal():
-    """The layer must reproduce the FIT row it was built from, to 4 digits."""
+    """
+    RE-PINNED BY WAVE B26, and the re-pinning is the cost of that wave, stated.
+
+    Through B25 the layer reproduced Meynier's own hexanal row to 1.390x, exactly, because
+    the n-alkanal class held nothing but that row. Pooling a second, plant-protein
+    determination into the class means the class no longer reproduces either of its members:
+    it now over-predicts Meynier's dairy row by about 2x. That is what pooling across
+    proteins costs, it is visible here rather than buried, and the layer accepts it because
+    a class constant assembled from one cow's-milk measurement was never a class constant.
+    """
     prediction = predict_matrix_shift("hexanal", "skim_milk")
-    assert prediction.predicted_ratio == pytest.approx(1.390, abs=1e-3)
+    assert prediction.predicted_ratio == pytest.approx(2.832, abs=1e-3)
+    assert prediction.predicted_ratio / 1.390 == pytest.approx(2.037, abs=1e-3)
 
 
 def test_pinned_soy_hexanal_prediction_is_small_and_says_so():
@@ -600,9 +622,17 @@ def test_pinned_soy_hexanal_prediction_is_small_and_says_so():
     hexanal in a dense protein paste, because a single-digit shift is all
     reversible binding can produce. Amendment 6 already computed that this
     under-explains a real matrix shift by ~0.75 of the log.
+
+    RE-PINNED BY WAVE B26. The window was 1.5-5.0x while the class held one dairy row.
+    A plant-protein row joined it and the prediction rose to 8.67x, which is still a
+    single-digit shift against a measured 132.5x, so the honesty this test guards is
+    intact and the fold error merely fell from 50x to 15x. What DID change is that the
+    reversible term now claims 44 % of that row's log-shift against Amendment 6's ~25 %
+    cap, so the layer flags itself; wave B26's ship rule records that as a finding about
+    the cap, which was computed from one compound in beef.
     """
     prediction = predict_matrix_shift("hexanal", "soy_paste_hong")
-    assert 1.5 < prediction.predicted_ratio < 5.0
+    assert 5.0 < prediction.predicted_ratio < 10.0
     assert prediction.terms["covalent_ceiling"]["state"] == "structurally_allowed"
     # RE-PINNED BY WAVE B8: this asserted "UNMEASURED" in the process-temperature
     # report through B7. The Ea is measured (Amendment 17 clause 6) and the

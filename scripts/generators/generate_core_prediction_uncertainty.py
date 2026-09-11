@@ -48,14 +48,23 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--workers", type=int, default=1,
         help="worker processes over draws (result is independent of this)",
     )
+    parser.add_argument(
+        "--exclude-prior-prefix", action="append", default=[],
+        help="drop every prior row whose key starts with this prefix (an ENV ship rule's BEFORE side, "
+             "produced under the same per-coordinate streams as its AFTER; repeatable)",
+    )
     args = parser.parse_args(argv)
 
-    from src.kinetic_core.uncertainty import propagate_panel, write_artifact
+    from src.kinetic_core.uncertainty import CORE_PRIORS, propagate_panel, write_artifact
 
+    priors = tuple(p for p in CORE_PRIORS if not any(p.key.startswith(x) for x in args.exclude_prior_prefix))
     started = time.perf_counter()
     payload = propagate_panel(
-        n_samples=args.n_samples, seed=args.seed, workers=args.workers
+        n_samples=args.n_samples, seed=args.seed, workers=args.workers, priors=priors
     )
+    if args.exclude_prior_prefix:
+        payload["summary"]["excluded_prior_prefixes"] = list(args.exclude_prior_prefix)
+        payload["summary"]["excluded_prior_rows"] = len(CORE_PRIORS) - len(priors)
     wall = time.perf_counter() - started
     payload["summary"]["wall_seconds"] = round(wall, 1)
     payload["summary"]["workers"] = int(args.workers)

@@ -316,6 +316,31 @@ def operative_parameters(fitted):
     from .parameters_pyrazine import PYRAZINE_PARAMETERS
 
     parameters.update(PYRAZINE_PARAMETERS)
+    # B20 (2026-09-09): the glycation arm, trunk-only, inert without a protein loading.
+    from .parameters_glycation import GLYCATION_PARAMETERS
+
+    parameters.update(GLYCATION_PARAMETERS)
+    # B21 (2026-09-09): the aqueous glucosone route to glyoxal: one new step and the aqueous value
+    # of k_g_go, which REPLACES the B13 glass value in the operative set (the glass entry stays in
+    # DICARBONYL_PARAMETERS as the record). Frozen literals asserted against the B21 report.
+    from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_PARAMETERS
+
+    parameters.update(AQUEOUS_GLYOXAL_PARAMETERS)
+    # B22 (2026-09-09): the methionine chain, trunk-only, inert without methionine in the charge.
+    from .parameters_methionine import METHIONINE_PARAMETERS
+
+    parameters.update(METHIONINE_PARAMETERS)
+    # B24 (2026-09-09): 2-acetyl-1-pyrroline from proline, trunk-only, inert without proline in the charge.
+    from .parameters_proline import PROLINE_PARAMETERS
+
+    parameters.update(PROLINE_PARAMETERS)
+    # B39-B41 (2026-09-11): the fed 3-deoxy triangle -- the reverse hydration, the epimer in and out,
+    # and the fitted k_tdg_ddg / k_ddg_hmf. In the base table so that EVERY consumer of the trunk
+    # (the fit generators that call this directly, the hold-out generators, the engine) carries a
+    # parameter for the three new reactions; core_parameters() layers the envelope's draws on top.
+    from .parameters_dicarbonyl import FED_3DEOXY_PARAMETERS
+
+    parameters.update(FED_3DEOXY_PARAMETERS)
     return parameters
 
 

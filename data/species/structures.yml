@@ -27,6 +27,7 @@ species:
   FRAG_C: {kind: lump, note: "unassigned fragment carbon; an accounting pool"}
   INT:   {kind: lump, note: "the source (Martins 2005) leaves the cyclic fructose-dehydration intermediate undetermined"}
   DDG:   {kind: molecule, smiles: "OCC(O)C=CC(=O)C=O", note: "3,4-dideoxyglucosone-3-ene, C6H8O4"}
+  DGAL:  {kind: molecule, smiles: "OCC(O)C(O)CC(=O)C=O", note: "3-deoxygalactosone, the C4 epimer of 3-deoxyglucosone (same connectivity, opposite configuration at C4); B39"}
   HMF:   {kind: molecule, registry_id: hmf}
   AF:    {kind: molecule, smiles: "CC1(O)OC(C)=C(O)C1=O", note: "acetylformoin, 2,4-dihydroxy-2,5-dimethyl-3(2H)-furanone, C6H8O4"}
   DMHF:  {kind: molecule, registry_id: hdmf}
@@ -39,6 +40,24 @@ species:
   MPZ:   {kind: molecule, registry_id: methylpyrazine}
   AKG:   {kind: molecule, smiles: "NCC=O", note: "aminoacetaldehyde, the Strecker aminoketone of glyoxal"}
   AKM:   {kind: molecule, smiles: "CC(=O)CN", note: "aminoacetone, the Strecker aminoketone of methylglyoxal"}
+  # ---- B20 (2026-09-09): the glycation arm; bound residues drawn as the free molecule ----
+  LYSP:  {kind: molecule, smiles: "NCCCCC(N)C(=O)O", note: "protein-bound lysine residue, counted as lysine"}
+  FLP:   {kind: molecule, smiles: "O=C(CNCCCCC(N)C(=O)O)C(O)C(O)C(O)CO", note: "fructosyl-lysine (bound Amadori compound), open-chain form"}
+  CML:   {kind: molecule, registry_id: cml}
+  CEL:   {kind: molecule, registry_id: cel}
+  # ---- B22 (2026-09-09): the methionine chain ----
+  MET:   {kind: molecule, smiles: "CSCCC(N)C(=O)O", note: "L-methionine"}
+  MTAL:  {kind: molecule, registry_id: methional}
+  MSH:   {kind: molecule, registry_id: methanethiol, note: "the sugar path's methanethiol pool; the sulfur lane's MESH is the same molecule from thiamine"}
+  DMDS:  {kind: molecule, registry_id: dimethyl_disulfide}
+  # ---- B24 (2026-09-09): proline's odorant ----
+  PRO:   {kind: molecule, smiles: "OC(=O)C1CCCN1", note: "L-proline"}
+  PYRL:  {kind: molecule, smiles: "C1CC=NC1", note: "1-pyrroline"}
+  ACETOL:     {kind: molecule, registry_id: hydroxyacetone}          # wave B24b, 2026-09-10
+  ATHP:       {kind: molecule, registry_id: 2_acetyltetrahydropyridine}   # wave B24b
+  MARP:       {kind: molecule, registry_id: met_glc_amadori}            # wave B22b, 2026-09-10
+  MEL_S:      {kind: lump, note: "melanoidin pool, sulfur; the third member beside MEL_C and MEL_N"}
+  AP:    {kind: molecule, registry_id: 2_acetyl_1_pyrroline}
   # ---- sulfur: pentose + cysteine (+ thiamine) ----
   PENT:  {kind: molecule, smiles: "OCC(O)C(O)C(O)C=O", note: "aldopentose, open chain; ribose and xylose share it"}
   Cys:   {kind: molecule, smiles: "NC(CS)C(=O)O"}
@@ -102,4 +121,5 @@ species:
   ME_9_OXONONANOATE: {kind: molecule, smiles: "O=CCCCCCCCC(=O)OC"}
   ME_13_OXO_TRIDECADIENOATE: {kind: molecule, smiles: "O=C/C=C/C=C/CCCCCCCC(=O)OC"}
   NONANAL:    {kind: molecule, registry_id: nonanal}
+  PENTYLFURAN: {kind: molecule, registry_id: 2_pentylfuran}   # wave B28, 2026-09-09
   LIPID_FRAG_C: {kind: lump, note: "unassigned lipid fragment carbon"}

@@ -120,9 +120,21 @@ def test_every_new_species_is_in_the_state_vector():
     # still a prefix of this one.
     # B13 (2026-09-07) appended three trunk-only species after B7's five; B18 (2026-09-08)
     # appended the three pyrazines after those.
-    assert SPECIES_KEYS[-13:-8] == NEW_TRUNK_SPECIES
-    assert SPECIES_KEYS[-8:-5] == ("G", "GO", "DA")
-    assert SPECIES_KEYS[-5:] == ("PZ", "DMP", "MPZ", "AKG", "AKM")
+    # REWRITTEN 2026-09-10. This asserted a NEGATIVE SLICE, and every later wave shifted it:
+    # five wave tests broke at once when B24b appended two species. What a wave actually needs
+    # is that its own species come AFTER everything that existed before it -- an ORDERING, not
+    # a position -- and an ordering survives any number of later appends.
+    from src.kinetic_core.species import INDEX
+
+    for _group in (list(NEW_TRUNK_SPECIES), ["G", "GO", "DA"], ["PZ", "DMP", "MPZ", "AKG", "AKM"],
+                   ["LYSP", "FLP", "CML", "CEL"]):
+        assert [k for k in SPECIES_KEYS if k in _group] == list(_group)
+    assert max(INDEX[k] for k in NEW_TRUNK_SPECIES) < INDEX["G"] < INDEX["PZ"] < INDEX["LYSP"]
+    for _group in (["MET", "MTAL", "MSH", "DMDS"],          # B22, the methionine chain
+                   ["PRO", "PYRL", "AP"],                   # B24, proline's odorant
+                   ["ACETOL", "ATHP"]):                     # B24b, the branch that refused B24
+        assert [k for k in SPECIES_KEYS if k in _group] == list(_group)
+    assert INDEX["CEL"] < INDEX["MET"] < INDEX["PRO"] < INDEX["ACETOL"]
 
 
 def test_the_trunk_network_still_balances_with_eleven_more_steps():

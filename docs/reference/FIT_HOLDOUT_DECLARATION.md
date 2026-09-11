@@ -1279,3 +1279,372 @@ ran.
 3. **INERT DEFAULT.** The three site steps live in `sulfur.py` at zero unless a shipped report carries
    `mele_site_log10_yield`; the verdict is in `kinetic_core_b17a_ship_rule.md` and the prereg's section 6.
 
+## Amendment 30 — 2026-09-09 (Wave B20, the glycation arm)
+
+1. **TEN NEW FIT ROWS; FIVE NEW COORDINATES.** Nguyen 2016 Table 1, system M1 (casein + glucose,
+   water, pH 6.8, 120 and 130 °C): the printed rate constants k3, k7, k8, k9 and k11 at both
+   temperatures enter as FIT rows (rates fit, by the owner's rule), weighted by their printed
+   intervals. Five log10 constants at 100 °C are free; every barrier is DECLARED from a measured
+   step (Martins 2005, Berk 2021) or flat (the CML loss), none fitted.
+2. **WHAT IS VALIDATED.** Nguyen's printed CML level range (end-of-cook levels validate), Berk 2021's
+   and Hamzalioglu 2026's constants (comparators), Troise 2015 (direction), the panel's CML and CEL
+   proxy row: none enters the objective.
+3. **INERT DEFAULT.** The bound-lysine pool is zero without a protein loading, so every pot before
+   B20 reproduces bit for bit; the rule said SHIP, so the frozen literals are read on every loaded
+   trunk pot and a glycation target without a loading is refused by name.
+
+## Amendment 31 — 2026-09-09 (Wave B21, the aqueous glucosone route to glyoxal)
+
+1. **SIX NEW FIT ROWS; TWO NEW COORDINATES.** Hamzalioglu 2026 Table 1 (whole milk, 110 to 140 °C):
+   the first-order constants for lactulosyl-lysine → glucosone (four) and glucosone → glyoxal (the
+   two determinate ones) enter as FIT rows; log10 `k_ama_g` and log10 `k_g_go` at 100 °C are free;
+   both barriers DECLARED from that laboratory's measured values. The glass value of `k_g_go` (B13)
+   stays in the table as the record and is no longer operative.
+2. **WHAT IS VALIDATED.** Quan 2020's glyoxal levels (end-of-cook levels validate), Xia 2022's
+   ordering, Leahy 1989's total, and the B1 browning hold-out re-scored through the frozen B1
+   generator: none enters the objective. The rule said SHIP.
+3. **THE TRANSFER.** Lactulosyl-lysine in milk to fructosyl-glycine in water is a declared ± 0.5 dex
+   band on every glyoxal, glucosone and pyrazine answer, the B18 precedent.
+
+## Amendment 32 — 2026-09-09 (Wave B22, the methionine chain; refused)
+
+1. **NINE NEW FIT ROWS; FOUR NEW COORDINATES.** Pan 2025 Table 2's zero-order constants for
+   methional, methanethiol and dimethyl disulfide at 100, 120 and 140 °C (unit inferred, declared)
+   entered as FIT rows for an identity ratio on B18's Strecker constants, the methional → methanethiol
+   step and its barrier, and an apparent disulfide constant.
+2. **WHAT IS VALIDATED.** Deng 2022's methional levels and Chin & Lindsay 1994's methanethiol
+   half-life: reported, not fitted.
+3. **VERDICT.** DO NOT SHIP: the ratio ran to its ceiling with Pan's rows still four decades low and
+   Deng's pot two decades high; the structure (free dicarbonyl × methionine) is refuted. The steps
+   stay at zero, the targets are refused by name, the record stands. Methionine as a precursor is
+   charged as glycine for the Amadori chemistry, declared.
+
+## Amendment 33 — 2026-09-09 (Wave B24, 2-acetyl-1-pyrroline from proline; refused)
+
+1. **FIVE NEW FIT ROWS; TWO NEW COORDINATES.** Hofmann & Schieberle 1998b Table 7 (fed 1-pyrroline +
+   methylglyoxal, two ratios) and Table 9 (proline + methylglyoxal, three ratios), 30-minute yields at
+   100 °C and pH 7, as FIT rows (fed-intermediate yields fit); the acylation and the proline Strecker
+   constants free, barriers declared (Chan & Reineccius 1994's apparent 60.2; B18's 114.9).
+2. **WHAT IS VALIDATED.** Hofmann's experiment 3 and Chan's apparent barrier: reported.
+3. **VERDICT.** DO NOT SHIP: the fed rows fit, the proline chain does not (its yield saturates in
+   the source and not in the arm, for want of the tetrahydropyridine branch and a pyrroline loss). Steps
+   at zero, target refused by name, record kept; 2-acetyl-1-pyrroline enters the registry.
+
+## Amendment 34 — 2026-09-09 (Wave B25, the thiol sink, variant c: irreversible addition to the deoxypentosones)
+
+1. **NO NEW FIT ROW; TWO NEW COORDINATES.** B16's 64 rows unchanged. `k_add` (the thiols' irreversible
+   addition to the two deoxypentosones, four steps on one constant) and its barrier appended to the
+   vector; bands log10 −6 to 0 and 10 to 120 kJ/mol. Every B9 band kept; the first-order thiol sinks
+   stay free as in B16.
+2. **WHAT IS VALIDATED.** As Amendments 28 and 29: the Hofmann pH-5 bundles, Yiltirak 2026, Wang 2022,
+   Zhou 2023's shares (Zhang 2024's reported as figure-derived), Bolton 1994, the returned Hofmann rows.
+3. **INERT DEFAULT.** The four steps live in `sulfur.py` at zero unless a shipped report carries
+   `thiol_addition`; the verdict is in `kinetic_core_b25_ship_rule.md` and the prereg's section 6.
+
+
+## Amendment 35 — 2026-09-09 (Wave B26, the first plant protein in the matrix binding table)
+
+1. **THREE NEW FIT-ELIGIBLE ROWS; NO NEW COORDINATE AND NOTHING FITTED.** Bi 2022's pea-protein
+   phase-ratio-variation pair (a matrix leg and a water leg in the same run) enters the reversible
+   binding table by the registry's existing formula `K_g = (K_water/K_matrix − 1) / protein_g_per_L`
+   — the Amendment 4 construction, adopted for the Meynier and Leksrisompong rows for the stated
+   reason that the absolute static-headspace scale is suspect and the offset cancels in a within-run
+   ratio. Hexanal and (Z)-2-penten-1-ol are carried as FIT; (E)-2-octenal is QUARANTINED as a
+   binding constant on the Meynier t-2-hexenal precedent, a 2-alkenal held two hours against a
+   lysine-rich protein and measured by disappearance. Every value is arithmetic on printed cells, so
+   there is no coordinate to identify and nothing a downstream result could have moved.
+2. **AN EXCLUSION THAT COST THE LAYER A NUMBER IT WANTED.** Bi's alkenal/alkanal contrast, built the
+   way the two carried unsaturation observations are, is 1.367×, and it would have pulled the fitted
+   penalty from 3.73× into the 2–3× band the corpus states independently. It is EXCLUDED because the
+   other two observations are same-carbon pairs and Bi's is C8 against C6: divide out the registry's
+   own measured 2.81×/CH₂ slope and the contrast inverts. The penalty is untouched and remains
+   unvalidated out of sample.
+3. **WHAT IS VALIDATED.** Hong 2020's ten paired soy/water ratios, the flagship hold-out, re-scored
+   against wave B4's FROZEN blind predictions and never entering any objective. Every row that
+   carries a binding term improved and none inverted.
+4. **A CAP EXCEEDED, AND THE READING DECLARED BEFORE THE RUN.** Amendment 6 ruling 2 caps the
+   reversible term at ~25 % of an observed log-shift. The hexanal row now claims 44.2 %. The cap was
+   computed from one compound in beef and one dairy protein; a plant isolate that binds an alkanal
+   22× harder than cow's milk is a reason to doubt that the cap transfers, and the constant is not
+   shrunk to fit it. The layer's flag stays and fires. Re-deriving the cap is a separate question and
+   is in the backlog.
+5. **THE BLIND RECORD IS NOW ACTUALLY FROZEN.** `kinetic_core_b4_frozen_predictions.json` was being
+   overwritten, date and all, on every run of its generator, so any later wave that changed the
+   registry could have replaced a pre-registration with a post-hoc prediction undetectably. The
+   generator now refuses without an explicit `--refreeze`.
+
+## Amendment 36 — 2026-09-09 (Wave B28, the two products the lipid lane refused)
+
+1. **NO NEW FIT ROW, NO NEW COORDINATE, NOTHING FITTED.** Frankel, Neff & Selke 1981's oleate and
+   linoleate slates enter as DATA, in their own module (`parameters_lipid_b28.py`) so that the
+   separation from the B6 fit is physical: different paper, different substrate, different injector
+   temperature, different denominator. The B6 objective is untouched and its six-product slate is
+   asserted unchanged by the ship rule.
+2. **A DECLARED ASSUMPTION, BANDED AND WARNED, IN PLACE OF A REFUSAL.** The oleate → nonanal SHARE
+   is measured. The YIELD is not: 1981 prints peak areas and no absolute yield from an oleate
+   hydroperoxide exists anywhere in the corpus. So an absolute nonanal answer assumes the
+   named-product molar yield per oleate hydroperoxide is 0.45 times the measured one per linoleate
+   hydroperoxide, banded 0.2 to 1.0, and the engine emits a mandatory warning saying so on every
+   nonanal answer. The refusal did not disappear; it changed state, and the layer reports which
+   state it is in.
+3. **THE HOLD-OUT THAT DID NOT MOVE.** Frankel 1989 fed pure linoleate hydroperoxides and nonanal
+   appears in no table, figure or sentence of it. That absence is a declared negative test and it is
+   still honoured structurally: nonanal from a linoleate feed is exactly 0.0, by construction, with
+   its own test.
+4. **WHAT IS VALIDATED.** The three newly answered nonanal rows are external-literature rows in
+   three different matrices from three laboratories, none of which any fit has read. They land at
+   3.0x, 3.3x and 7.3x.
+5. **A REFUSAL RESTORED ON A WRONG DIAGNOSIS, AND CORRECTED THE NEXT DAY.** 2-pentylfuran was
+   un-refused, produced answers about 1e5 below measurement, and was refused again on the reading
+   that its rows' hexanal does not come from the lipid lane. **That reading was false.** The engine's
+   `_TARGET_LANE` had no entry for the new species, so it was reported in mmol/L rather than µg/L.
+   Corrected 2026-09-10: the lane makes 5.04 µg/L in the Trikusuma pot against 163 measured, a 32×
+   miss and in line with this panel's median. The compound is answered. The episode is kept in the
+   record because a plausible mechanism explained a unit bug for a day.
+6. **THE DEGENERACY TEST, AND ITS OWN CORRECTION.** The ship rule now requires that a row lifted out
+   of REFUSED not be more than 10× worse than the worst row its own benchmark already scores. An
+   earlier absolute threshold flagged two rows at 8500× and 42000× whose pots already miss on
+   hexanal by 3357× and 6078× — a 10-minute hold at 40 °C, where the model forms nothing and the
+   measurement is what the isolate carried in. Blaming a new row for a pot that is broken for
+   everything in it is not a guard, it is noise.
+6. **A FIREWALL KEPT STRICT.** The B6 literal firewall forbids twelve values that appear only in
+   that wave's hold-out columns. One of them, 9.7, is also Frankel 1981's photosensitized methyl
+   octanoate share. The collision was resolved by moving this paper's numbers to a file the firewall
+   does not cover, NOT by reformatting the literal or shortening the firewall's list.
+
+## Amendment 37 — 2026-09-10 (Wave B31, what the isolate arrived with)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** No new coordinate, no new fit row, no constant moved.
+   `conditions.carried_volatiles` is a DECLARED MEASUREMENT — the level a source PRINTS for the
+   unheated material of the same pot, in the same table and the same units — and the engine adds it
+   to the integrated concentration before the matrix-binding factor. It is exactly zero wherever
+   nothing is declared, so 43 of the panel's 46 rows are bit-for-bit what they were.
+2. **WHAT MAY BE DECLARED, AND WHAT MAY NOT.** MAY: a level the source prints as an unheated
+   control of the same pot. Trikusuma 2019 prints one ("non-UHT processed", Table 2) and it is
+   anchored to that column by name in the bundle. MAY NOT: a level inferred, assumed, averaged, or
+   taken from another paper's isolate. A pot with no printed control gets nothing invented for it;
+   it gets clause 4.
+3. **WHAT IS VALIDATED.** The three declared rows are external-literature rows that **no fit has
+   read** (`in_core_fit = False` on all three, `fit_target_of.core = []`). They go from 34.2×, 32.3×
+   and 3.3× to 2.21×, 2.53× and 1.54×, all three entering the 3× band. This is the first accuracy
+   gain of this run of waves and the first time three hold-out rows entered the band together. The
+   gain is not a tuning: the declared levels are 331, 59.4 and 8.24 µg/L, read off the source's own
+   unheated column, and no other value was tried.
+4. **A NEW REFUSAL, AND IT SHRINKS THE SCORED PANEL — WHICH IS DECLARED HERE BECAUSE IT FLATTERS
+   THE HEADLINE.** Four panel pots were never cooked: their 40 °C / 10 min is the HS-SPME headspace
+   incubation, and each bundle's own vessel provenance says so in words written months before this
+   wave. Seven lipid rows in them are now refused rather than answered with a formation from zero.
+   Refused rows 18 → 25, scored rows 46 → 39, and within-3× therefore reads 7/39 instead of 7/46
+   **with no prediction having improved**. The pre-registration's scoreboard prints the middle line
+   (`declared`) precisely so this wave's accuracy claim can be read with the refusal switched off.
+5. **WHAT MAKES THAT REFUSAL A REFUSAL AND NOT A DELETION.** Two independent condition-side
+   declarations must agree, neither of which can see a measurement, and both were fixed before any
+   error was looked at: (a) the bundle's `vessel.closure` is `"no cook"` — a datum recorded for an
+   unrelated purpose, and NOT sufficient alone, because three *hot* bundles carry the same string
+   meaning "there is no vessel to record"; and (b) the hydroperoxide conversion extent over the
+   thermal program is below 1 %. The four incubations sit at 3.826e-3, the mildest real cook on the
+   panel at 0.2578; nothing lies in the 67× gap, and the verdict is unchanged at thresholds of 0.01,
+   0.05 and 0.10 and across the whole Q10 band. **Every lipid miss in a pot that was cooked still
+   stands**, including the panel's largest at 366×, which is the test that the rule is not reaching
+   for the misses.
+6. **THE REFUSAL NAMES ITS OWN CURE.** It is conditional, not permanent: declare the starting state
+   under clause 2 and the row is answered. Trikusuma is the worked example of a pot that took the
+   cure.
+
+## Amendment 38 — 2026-09-11 (Wave B36, seven sources arrive)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** No constant moved, no fit row's value or conditions changed.
+   Seven PDFs the 2026-09-11 reading list asked for arrived (Ma 2024, Li 2026, Lin 2021 — the paper
+   the three "Chang 2021" bundles score — Lin 2022, Ye 2024, Singh 2021, Koelsch 1991); each has a
+   dossier, and every number the nine citing bundles had transcribed second-hand was checked against
+   the print (`results/validation/kinetic_core_b36_prereg.md`).
+2. **ONE HOLD-OUT VALUE CHANGES, FROM THE PRINT.** `external_validation_li_2026_spi_wg_hme_control`
+   scored nonanal at 72.66 µg/kg, which Table 2 shows is the 20-minute column; the control column
+   reads 74.37 ± 0.11. The row moves by 2.35 %. The correction is dated, the prior note is retained,
+   and the bundle's frozen hash is re-pinned with the reason. No other measured value moved: Singh
+   2021's hexanal and 2-pentylfuran, Lin 2021's three acrylamide levels and HMF, Lin 2022's
+   acrylamide and HMF, Ye 2024's control and Ma 2024's Figure 2D bar all match.
+3. **PROVENANCE, NOT CONDITIONS.** Nine bundles' vessel and buffer notes said their source was not on
+   disk; it is. The notes are corrected through their generators, the false claims retained and
+   labelled superseded (the B34/B35 practice), and six vessel blocks move from
+   `repo_verbatim_methods_quote` to `primary_source_pdf`. No executable condition field changed.
+4. **WHAT THE PRINT DOES NOT SUPPORT IS NOW LABELLED.** Ma 2024 prints ten barrel zones and no
+   residence time; the extrusion row's 25 s is an assumption and its note says so. Ye 2024 never
+   states the reactant molarity; the bundle's 0.2 M stays the labelled assumption it was.
+5. **A GENERATOR WAS FOUND STALE AND IS NOW GUARDED.** Running the buffer-note generator regressed
+   seven bundles whose blocks B34, B35 and the Yiltirak reading had edited in place. Caught before
+   commit; the current blocks are carried in the generator verbatim, `--check` reports drift, and a
+   unit test runs it, as the vessel generator has had since R1.
+6. **NAMED, NOT ACTED ON.** Ma 2024's unextruded control carries ≈38 µg/kg acrylamide (a figure
+   bar). Declaring it under Amendment 37 would need a printed number, and on a fit row that scores
+   4 247× low it changes no verdict. Recorded in the dossier and in `docs/guides/EXPERIMENTS.md`.
+
+## Amendment 39 — 2026-09-11 (Wave B37, sixteen sources arrive)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** No constant moved, no fit row's value or conditions changed,
+   no target was added. Sixteen PDFs arrived against the B36 reading list; each has a dossier, and
+   `results/validation/kinetic_core_b37_prereg.md` records what each can and cannot support, with
+   four predictions written before any probe ran.
+2. **ONE CODE CHANGE, AND IT IS INERT.** 3-deoxyglucosone, 3,4-dideoxyglucosone and
+   1-deoxyglucosone become chargeable precursors. Wave B13 made the other four dicarbonyls
+   chargeable and left these three as targets only, which meant the fed-intermediate experiment
+   `docs/guides/EXPERIMENTS.md` asks for by name could not be written as a spec at all. No bundle,
+   benchmark, directional claim or fit row charges any of the three, and
+   `tests/unit/test_kinetic_core_b37.py` holds that they stay inert.
+3. **A PROBE REFUTED ITS OWN PREDICTION, AND THE REFUTATION IS THE RESULT.** I predicted the model
+   would produce 3,4-dideoxyglucosone monotonically from a fed 3-deoxyglucosone charge. It peaks at
+   ten minutes and collapses to two thousandths of a percent of the charge by two hours, where the
+   source's pot still holds both compounds. The deficit this repository has been calling a slow
+   `k_tdg_ddg` is, on the evidence of a pot charged with the intermediate itself, **a
+   too-short lifetime for the whole 3-deoxy pool**. Recorded before any constant is touched.
+4. **WHAT THIS MEANS FOR THE NEXT FIT.** Three measurements of the same gap now exist and they
+   disagree in a direction: 32× against Leitzen 2021 (glucose, 121 °C), 7–10× against Zhang 2021
+   (glucose, 90–110 °C), 5.05× against Mittelmaier 2011 (fed 3-DG, 120 °C). **The closer the pot is
+   to the step, the smaller the miss.** A refit that moves one rate constant to close the largest of
+   the three would be fitting an upstream error into a downstream barrier.
+5. **THE LIPID LANE'S TEMPERATURE TERM IS NOW MEASURED, TWICE, AND THE TWO DO NOT AGREE.** Bulk seed
+   oil gives 113.8–122.2 kJ/mol for hexanal specifically; a moist food matrix gives 61–65 kJ/mol.
+   The model's constant Q10 sits above every wet-matrix measurement at every temperature, and its
+   implied barrier nearly doubles across its own operating range depending on the reference
+   temperature it is read at. **No constant moved here**: replacing a constant Q10 with a barrier
+   would move every lipid row in the panel and needs a frozen before/after pair and a ship rule,
+   which is the next wave, not this one.
+6. **ONE PROVENANCE CORRECTION.** `resconi_2023_pbma_beef_identity_benchmark` said its source was not
+   on disk; it is. Corrected through the generator, the prior claim retained and labelled. The print
+   gives a skillet cook with no stated time, which is **not** the bundle's 150 °C / 60 min — that
+   stays a proxy for the unspecified commercial process, so the paper being on disk makes the
+   citation first-hand without making the pot chargeable.
+7. **TWO DOI CORRECTIONS MADE AGAINST MY OWN DRAFT.** A first draft of the Tazi dossier recorded
+   `10.1016/j.foodchem.2009.01.018`, reconstructed from the article's PII rather than read; the
+   printed DOI is `.017`. The Frankel 1993 scan prints no DOI at all, and its identifier is recorded
+   as second-hand. Both are noted in the dossiers themselves.
+
+## Amendment 40 — 2026-09-11 (Wave B38, the identifiability audit)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** It reads every fit that shipped and asks, at the optimum that
+   shipped, which of its coordinates the data determine. Method and thresholds were fixed in
+   `results/validation/kinetic_core_b38_prereg.md` before any Jacobian was computed.
+2. **THE RESULT.** 47 free coordinates: 12 pinned, 6 on a declared bound, 29 weak or unidentified, of
+   which 9 collinear and 20 insensitive. The fits built on fed or within-study rows over small
+   networks (B20, B21) are fully pinned; the fits that scored end-of-cook levels through large
+   networks (B3, B8, B18) are mostly blind. This is the owner's rule — rates, fed yields and ratios
+   FIT; levels VALIDATE — read back from the Fisher information.
+3. **WHAT A REFIT CAN AND CANNOT DO, NOW ON RECORD.** The thiol sink cannot be moved by refitting on
+   the present data (its barrier and both dimer rates sit on their ceilings). The acrylamide
+   competitor channels cannot be moved by refitting (the rows never touch them). The 3-deoxy pool
+   can be, if the fit is designed like B21 on a fed pot. Named debts are re-ranked accordingly in
+   the pre-registration's §7.
+4. **THE ENVELOPE'S PRIORS ARE DATA-DOMINATED WHERE A FIT EXISTS** (21 of 29) and prior-dominated
+   exactly where the data are blind. I predicted the reverse and was wrong.
+5. **TWO GAPS RECORDED.** B18's fit has χ²_red 57 and both its barriers are pure band; the B1 trunk
+   report stores no per-parameter standard errors. Neither is acted on here.
+6. **ONE NOTE CORRECTED.** The Ye 2024 bundle's 0.2 M assumption was said to rest on Knol 2005's
+   abstract; Knol 2005 is on disk with a dossier that reads the 0.2 M from the print. The assumption
+   is unchanged and its provenance upgraded; the bundle's frozen hash is re-pinned with the reason.
+
+## Amendment 41 — 2026-09-11 (Waves B39, B40, B41: the fed 3-deoxyglucosone triangle and the formic-acid exit's pH term)
+
+1. **WHAT IS FITTED, AND ON WHAT.** Five coordinates, log10 k at 100 °C: `k_tdg_ddg` and `k_ddg_hmf`
+   (existing) and `k_ddg_tdg`, `k_ddg_dgal`, `k_dgal_ddg` (new, one declared barrier equal to the
+   forward step's 36.9 kJ/mol). Rows: Mittelmaier et al. 2011's six printed fed maxima and
+   diastereomer shares and two times of maximum (fed 3-DG / 3,4-DGE / 3-DGal, 200 µM, pH 5, 120 °C),
+   and Zhang et al. 2021's four within-study 3,4-DDG/3-DG ratios at 95–110 °C. Under the owner's rule
+   both are FIT evidence: fed yields and within-study ratios. The Leitzen 2021 hold-out was never
+   read by any of the three fits and is the judge.
+2. **WHAT WAS DECLARED, NOT FITTED.** The pH term on `k_tdg_fa`: 10^(0.77·(pH − 6.8)), band (0.65,
+   0.89), from Martins & van Boekel 2003 Table 3 k6 at two temperatures — the same table and the
+   same form as B12's Amadori term. Measured window pH 5.5–6.8; outside it the engine says so.
+3. **WHAT WAS DECLARED, REJECTED BY THE HOLD-OUT, AND KEPT AS THE RECORD.** B40's term on
+   `k_tdg_mgo` (0.63 dex per pH unit, from Martins' lumped "3-DG → fragments" k5) moved Leitzen's
+   methylglyoxal from 1.28× to 33×. It is not applied; it stays in the code as
+   `THREE_DEOXY_EXIT_PH_REJECTED_B40` with the reason, and `k_tdg_mgo` carries no pH term.
+4. **ONE NEW SPECIES.** 3-deoxygalactosone (`DGAL`), reached only through 3,4-DGE, measured in the
+   fit corpus by Mittelmaier alone. It has no exit of its own: it leaves the way it came.
+5. **THE SHIP RULES WERE OBEYED AS WRITTEN, TWICE AGAINST THE MODEL'S INTEREST.** B39's candidate
+   would have lifted the headline to 12/45 and did not ship because its own P1 failed on the peak's
+   timing and P4 by 2 % on HMF. B40's candidate fixed the timing and failed P6 on one row. B41 met
+   every clause. All three records stand.
+6. **THE CENTRE OF `k_tdg_ddg` MOVED, and this is the one licensed way a centre moves**: a fit that
+   shipped under its own pre-registered rule. ENV-B34's printed band on it is retired in favour of
+   the fit's Laplace σ; the other three ENV-B34 bands are untouched.
+7. **THE HEADLINE.** Within 3× 10/45 → 12/45; out-of-sample 9/44 → 11/44. Both new hits are HMF rows
+   (Schibilsky pH 8, Chang water) that the formic-acid term brought in; no row left. Re-pinned in
+   `tests/scientific/test_core_headline_guards.py` with this amendment as the reason.
+
+## Amendment 42 — 2026-09-11 (Wave B43, a review corroborates a refused structure)
+
+1. **NOTHING IS FITTED AND NO REFUSAL IS LIFTED.** Luo et al. 2024 is a comprehensive review with no
+   rate constant, no activation energy, no time course and no temperature series anywhere in it.
+2. **WHAT A REVIEW MAY DO HERE.** It may corroborate that a mechanism is drawn by the literature, and
+   that is recorded in the reaction-rules layer and in a parameter's dossier anchor. It may not
+   support a rate, a barrier or a yield, and nothing in this wave does.
+3. **THE ONE CORROBORATION.** Wave B27's dicarbonyl-redox branch (`k_redox_mp3p`) was built from one
+   laboratory's mechanism figure and gated before the fit. This review states the general rule
+   independently. B27's verdict stands: it was refused because the flux is under 1 % of the oxidant
+   in the pots that carry air and needs its physical ceiling in the pots that do not — a question
+   about size, which a review cannot answer.
+4. **A CAVEAT MADE SHARPER, NOT A NEW ONE.** The review's metal-catalysis pathway was already on
+   disk as kinetics (`bagiyan2004_extraction.md`) and already refused: one temperature, and authors
+   who disclaim a quantitative rate law. What is new is the connection to a caveat this repository
+   already carried in a buffer note — one fit-corpus buffer was made in tap water — and the
+   consequence is a chelator arm on the thiol experiment, not a term in the model.
+
+## Amendment 43 — 2026-09-11 (Wave B45, seven sources arrive and six are refused)
+
+Seven papers were requested by name and downloaded on 2026-09-11: `unlu2002`, `li2020`,
+`jansson2020`, `bao2022`, `belrhlid2002`, `baldus2017`, `shi2022`. All seven were read and each has a
+dossier in `data/lit/extraction_dossiers/`. The pre-registration is
+`results/validation/kinetic_core_b45_prereg.md`, written before the probes ran.
+
+**No constant moved, no fit ran, no tolerance widened, and no benchmark value was edited.** That is
+the whole of this wave's effect on the model's numbers, and it is stated first because six of the
+seven papers were fetched in the expectation that they would supply one.
+
+**What each paper did to the fit/hold-out boundary: nothing.** None was used as a fit target and none
+was used as a hold-out. Six are refused as rate or barrier sources, for reasons recorded in their
+dossiers: a temperature axis applied to the protein rather than the reaction (`li2020`); figure-only
+values with no unheated control and no measurable lipid substrate (`jansson2020`); uncalibrated peak
+areas from a temperature-dependent purge (`bao2022`); a removal rate proportional to a crude enzyme's
+dose, which the authors attribute to impurities (`belrhlid2002`); an absent thiol assay in the only
+chelator arm, with the authors stating outright that no rate constants are available (`baldus2017`);
+and no binding constant, no isotherm and no total-hexanal measurement (`shi2022`).
+
+**Two records changed, both of them notes, both generator-owned.**
+
+1. `unlu2002` measured a geometric mean residence time of **123 s (87.2–173.5)** at 150 rpm and
+   8.55 kg/h on an extruder of length-to-diameter ratio 38.7 — against the acrylamide extrusion row's
+   pot at 150 rpm, 8.57 kg/h and ratio 40. Apportioning it over the three of ten barrel zones that
+   sit at 130 °C gives roughly 37 s against the bundle's declared 25 s: the right order, about 1.5×,
+   not 4×. **The 25 s stays**; the measurement is recorded on the vessel note as corroboration, with
+   its apportioning assumption stated. Generator:
+   `scripts/generators/complete_benchmark_vessel_fields.py`.
+2. `baldus2017` puts a floor under a caveat the four Yiltirak hold-out bundles have carried since
+   2026-09-06. Those four are the only bundles in the corpus with `water_source: tap`, and their note
+   already said trace-metal catalysis is uncontrolled. Baldus measured that a buffer in **ultrapure**
+   water held every transition metal below 0.08 µM, and that adding 300 µM of highest-purity cysteine
+   raised copper to **0.26 µM as a reagent impurity** — enough to drive statistically resolved
+   oxidation at 95 °C/180 min, abolished only by a chelator in **molar excess over the thiol**.
+   A clause recording this is appended to those four bundles' buffer note. **The bundles' values,
+   roles, tolerances and hold-out status are unchanged**; a diff confirms that everything except
+   `provenance_note` is byte-identical in all four. Generator:
+   `scripts/generators/complete_benchmark_buffer_fields.py`.
+
+**Two probes ran, neither scored, both pre-registered with numeric predictions, both held.**
+
+- Against `shi2022`: the engine's declared aldehyde-binding block binds **0.0108 %** of hexanal on
+  the pot Shi heated, where Shi measured a **187 % release**. Roughly four orders of magnitude, sign
+  reversed. The reading is that the declared covalent bracket is fine and a second, larger,
+  reversible channel is missing from the model.
+- Against `baldus2017`: on cysteine alone in buffer at 95 °C the engine retains **99.49 %** at 5 min
+  and **83.34 %** at 180 min, where Baldus's cysteine is nearly gone within 5 min of a 40–60 °C ramp.
+  This identifies the thiol sink's residual as a **missing catalytic channel**, not an under-sized
+  constant — which is consistent with Amendment 40's finding (Wave B38) that the sink's barrier and
+  both dimerisation rates already sit on their ceilings and cannot be refitted.
+
+**One argument was available and was refused, and the refusal is recorded here so it can be
+audited.** `shi2022` supports the claim that a headspace measurement of hexanal in a protein matrix
+under-reports the total by a factor depending on the sample's pH and thermal history. Applied to the
+corpus, that would license widening the tolerance on every such hexanal row and would raise this
+model's headline score. It establishes no new fact about the model's chemistry, so it was declined in
+§4 of the pre-registration before the probes ran, and it is declined here. The mismatch is instead
+declared as a completeness debt in `docs/guides/EXPERIMENTS.md`, experiment 4.

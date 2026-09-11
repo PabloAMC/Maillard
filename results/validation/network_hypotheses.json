@@ -437,10 +437,11 @@
           ],
           "products": [
             "Gly",
-            "TDG"
+            "TDG/DGAL"
           ],
           "placement": "modelled",
           "engine_reactions": [
+            "r_ama_g",
             "r_ama_mgo",
             "r_ama_odg",
             "r_ama_tdg"
@@ -458,6 +459,7 @@
           ],
           "placement": "modelled",
           "engine_reactions": [
+            "r_ama_g",
             "r_ama_mgo",
             "r_ama_odg",
             "r_ama_tdg"
@@ -487,7 +489,7 @@
           "smiles": "O=CC(=O)CC(O)C(O)CO",
           "first_depth": 2,
           "kind": "species",
-          "id": "TDG"
+          "id": "DGAL"
         }
       ],
       "summary": {
@@ -1656,7 +1658,7 @@
           ],
           "products": [
             "Asn",
-            "TDG"
+            "TDG/DGAL"
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
@@ -1725,7 +1727,7 @@
           "smiles": "O=CC(=O)CC(O)C(O)CO",
           "first_depth": 2,
           "kind": "species",
-          "id": "TDG"
+          "id": "DGAL"
         }
       ],
       "summary": {
@@ -4764,7 +4766,7 @@
           "depth": 1,
           "reactants": [
             "MFT",
-            "MESH"
+            "MSH/MESH"
           ],
           "products": [
             "MMFT"
@@ -4807,7 +4809,7 @@
           "depth": 1,
           "reactants": [
             "FFT",
-            "MESH"
+            "MSH/MESH"
           ],
           "products": [
             "CSSCc1ccco1"
@@ -4832,11 +4834,11 @@
           "rule": "R12_thiol_oxidation_to_disulfide",
           "depth": 1,
           "reactants": [
-            "MESH",
-            "MESH"
+            "MSH/MESH",
+            "MSH/MESH"
           ],
           "products": [
-            "CSSC"
+            "DMDS"
           ],
           "placement": "mechanism_known",
           "engine_reactions": []
@@ -4845,7 +4847,7 @@
           "rule": "R12_thiol_oxidation_to_disulfide",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "Cys"
           ],
           "products": [
@@ -4923,7 +4925,7 @@
           "rule": "R13_thiol_michael_addition",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "DECADIENAL"
           ],
           "products": [
@@ -4936,7 +4938,7 @@
           "rule": "R13_thiol_michael_addition",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "ACR"
           ],
           "products": [
@@ -5159,7 +5161,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "PENT"
           ],
           "products": [
@@ -5172,7 +5174,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "FUR"
           ],
           "products": [
@@ -5185,7 +5187,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "HMF"
           ],
           "products": [
@@ -5198,7 +5200,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "MGO"
           ],
           "products": [
@@ -5211,7 +5213,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "GO"
           ],
           "products": [
@@ -5224,7 +5226,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "DECADIENAL"
           ],
           "products": [
@@ -5237,7 +5239,7 @@
           "rule": "R14_hemithioacetal",
           "depth": 1,
           "reactants": [
-            "MESH",
+            "MSH/MESH",
             "HEXANAL"
           ],
           "products": [
@@ -5839,12 +5841,6 @@
           "id": "acetaldehyde"
         },
         {
-          "smiles": "CSSC",
-          "first_depth": 1,
-          "kind": "registry",
-          "id": "dimethyl_disulfide"
-        },
-        {
           "smiles": "CC(=O)CN",
           "first_depth": 1,
           "kind": "species",
@@ -5867,6 +5863,12 @@
           "first_depth": 1,
           "kind": "species",
           "id": "HEXYLTHIOPHENE"
+        },
+        {
+          "smiles": "CSSC",
+          "first_depth": 1,
+          "kind": "species",
+          "id": "DMDS"
         },
         {
           "smiles": "CSSc1ccoc1C",
@@ -5913,8 +5915,8 @@
         },
         "products": {
           "new": 58,
-          "species": 10,
-          "registry": 2
+          "species": 11,
+          "registry": 1
         }
       }
     }
@@ -5928,9 +5930,9 @@
       "proposed": 72
     },
     "products_by_kind": {
-      "species": 68,
+      "species": 69,
       "new": 203,
-      "registry": 9
+      "registry": 8
     }
   }
 }

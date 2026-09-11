@@ -338,6 +338,14 @@ def _build_process(spec: Mapping[str, Any], ProcessSpec, ThermalProgram):
         buffer=_core_buffer(spec),
         protein_g_per_l=float(spec["protein_g_per_l"]) if spec.get("protein_g_per_l") is not None else None,
         protein_sites={str(k): float(v) for k, v in dict(spec["protein_sites"]).items()} if spec.get("protein_sites") else None,
+        # 2026-09-11 (review of PR #16): the two fields the engine gained this week were not
+        # copied here, so a spec declaring them validated and was answered as if it had not --
+        # while the engine's own refusal text told the user to declare exactly this one.
+        carried_volatiles=(
+            {str(k): float(v) for k, v in dict(spec["carried_volatiles"]).items()}
+            if spec.get("carried_volatiles") else None
+        ),
+        atmosphere=str(spec["atmosphere"]) if spec.get("atmosphere") is not None else None,
     )
 
 

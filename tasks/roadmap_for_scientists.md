@@ -114,7 +114,11 @@ osone decay, is switched off at the optimum (log10 k −8.6), and Stack 2018's m
 gives K = 0.45 M⁻¹ at 100 °C, so a reversible adduct holds under 5 % of the thiol when hot. Both
 pre-registered structures are refused; the next candidate is an irreversible addition to
 unsaturated carbonyls on a pool the lane's live flux makes (Farmer 1990, Whitfield 1988: a lipid's
-electrophiles halve the thiols), with the disulfide share left to an internal oxidant (Xu 2010).*
+electrophiles halve the thiols), with the disulfide share left to an internal oxidant (Xu 2010).
+Status 2026-09-09, later: that third structure ran as wave B25 and was refused too (the fit switched
+it off at every temperature). Three refusals on the same 64 rows: the remaining routes are the
+laboratory experiment of the introduction's section 8, or an owner's decision to weigh the
+objective by laboratory rather than by row.*
 
 **Why.** The meaty character the users want is the thiols, and the model loses them too fast at
 every temperature. The candidate table is written (`docs/validation/thiol_sink_candidates.md`).
@@ -126,6 +130,19 @@ every temperature. The candidate table is written (`docs/validation/thiol_sink_c
 time-doubling as the check. Ship rule declared before the run, as for every wave. The experiment
 in the introduction's section 8 decides between them; the two figure-only Chinese data sets are the
 fallback if no laboratory is available.
+
+*Status 2026-09-11: a FOURTH structure, B27 (the oxidant the three refused waves were never given:
+Whitfield 1999's dicarbonyl redox couple, entering as a co-product of the mercaptoketone flux the lane
+already carries) was built, gated at the shipped vector, and NOT FITTED. Its decisive test is
+unreachable by any oxidant source: in the ambient pots the dimer step uses under 1 % of its oxidant
+pool, so the pool is a multiplier, not a budget, and the deficit there is the dimer RATE CONSTANT,
+already at its ceiling and held there by Kumazawa's pure-thiol retention rows. In the fed pots the
+budget is genuinely zero and the couple fixes them — but only at φ = 1, its physical ceiling. So the
+"sink question" was two questions: an oxidant question in the fed pots, answered, and a rate question
+in the ambient pots, which is now the sharpest statement of programme 3's remaining gap. The next
+variant must be a disulfide route that does NOT dimerise a pure thiol in buffer — which is precisely
+what the laboratory experiment in the introduction's section 8 separates. See
+`results/validation/kinetic_core_b27_ship_rule.md`.*
 
 **Success.** About one week of modelling plus the laboratory. Chance a variant ships: one in three
 without the experiment, two in three with it.
@@ -180,7 +197,10 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
 - **Pyrazines** (roasted, nutty): the aminoketone condensation after the Strecker step; the
   registry has the species. Rule first (done); the wave (B18) ran and ships with its caveat; what it
   asks for next is the small dicarbonyls in water (their formation from a sugar + amine pot at 70 to
-  120 °C and their loss), which is the trunk's problem, not the step's.
+  120 °C and their loss), which is the trunk's problem, not the step's. *Status 2026-09-09: the
+  glyoxal half of that was done as wave B21 (the Amadori compound's route to glucosone in water,
+  Hamzalioglu 2026; Quan 2020's glyoxal level reproduced) and ships; Leahy's total did not move, so
+  the pyrazine miss is the Strecker step at 95 °C and pH 9 or lysine against glycine, not the supply.*
 - **The beany note before any heat**: hexanal from lipoxygenase during processing. Different
   chemistry, its own module and its own data programme; the lipid lane must not be stretched to it.
 - **Extrusion**: two minutes at 130 to 170 °C at low moisture. The process spec already takes a
@@ -194,7 +214,7 @@ Each starts as a rule in the hypothesis layer and becomes a wave only when a mea
 
 ## 5b. Coverage of the declared targets (counted 2026-09-08)
 
-The repository declares twenty desirable odorants and six off-notes for meaty plant-based flavour
+The repository declares twenty-one desirable odorants (2-acetyl-1-pyrroline joined on 2026-09-09) and six off-notes for meaty plant-based flavour
 (`data/species/desirable_targets.yml`, `off_flavour_targets.yml`). The engine can name six of the
 twenty and three of the six. The table is the honest map; "rule" is the hypothesis layer, "wave" the
 fitted step. The figure is generated from `maillard explain` over the two lists
@@ -208,10 +228,10 @@ fitted step. The figure is generated from `maillard explain` over the two lists
 | furaneol (DMHF), HMF, furfural | sugar path | Kocadagli, Blank, Hofmann | yes | B7 | furaneol fiftyfold off |
 | 2,5-dimethylpyrazine | Strecker + condensation | Zhou 2024, Leahy 1989 | yes | B18 (fed-dicarbonyl step only) | the dicarbonyl supply in water; Zhou 2025's seventyfold conflict |
 | hexanal, nonanal, 2,4-decadienal | lipid | Frankel slate, Bi 2020, Zhang 2020b, Bi 2026 | yes | B6 (rate assumed) | a measured rate at cooking temperature; the lipoxygenase route before heat |
-| **methional, 3-/2-methylbutanal, 2-methylpropanal, phenylacetaldehyde** | Strecker of Met, Leu, Ile, Val, Phe | Chan & Reineccius 1994 (barriers only, 80–90 kJ/mol in water), Cremer & Eichner 2000 (barriers 115–124, dry), Balagiannis 2009 (yield fractions, Ile : Leu 1.6), Pan 2025 (methional rate, unit inferred), Deng 2022 (levels) — all read; none prints a per-amino-acid rate in water | R07 (generic) | none: the sugar path carries glycine only | the rate rows do not exist in the literature read; the wave can only be an identity-ratio layer on glycine's fitted step (`kinetic_core_b19_prereg_draft.md` section 5); methionine's chain to methanethiol, DMDS, DMTS |
+| **methional, 3-/2-methylbutanal, 2-methylpropanal, phenylacetaldehyde** | Strecker of Met, Leu, Ile, Val, Phe | Chan & Reineccius 1994 (barriers only, 80–90 kJ/mol in water), Cremer & Eichner 2000 (barriers 115–124, dry), Balagiannis 2009 (yield fractions, Ile : Leu 1.6), Pan 2025 (methional rate, unit inferred), Deng 2022 (levels) — all read; none prints a per-amino-acid rate in water | R07 (generic) | B22 for methionine, refused: the free-dicarbonyl Strecker at a ratio to glycine misses Pan 2025 by four decades and Deng 2022 by two the other way | the rate rows for the other amino acids do not exist in the literature read; for methionine the next structure is the methionine Amadori compound's own decay, on Deng 2022's two series (`kinetic_core_b22_prereg.md` section 6) |
 | **dimethyl disulfide, dimethyl trisulfide** | methional → methanethiol → oxidation | Zhang 2024 (MeSH from thiamine only) | no | none | methional → MeSH rate; MeSH oxidation with the same oxidant pool B17 named |
 | **2-ethyl-3,5-dimethylpyrazine, 2,3-dimethylpyrazine, trimethylpyrazine** | aminoketone + Strecker aldehyde | Leahy 1989 (distributions), Yu 2018 (Ea) | R28 (homo pairs only) | B18 makes the parent, 2,5- and methyl- only | the aldehyde-addition step; amino-acid identity |
-| **2-acetyl-1-pyrroline, 2-acetyltetrahydropyridine** | proline / ornithine + dicarbonyl | none | no | none | everything: the bread and crust note of extruded products |
+| **2-acetyl-1-pyrroline, 2-acetyltetrahydropyridine** | proline / ornithine + dicarbonyl | Hofmann 1998b (fed yields), Chan 1994 (apparent barrier) | R? none | B24, refused: the fed acylation fits, the chain from proline saturates in the source and not in the arm | hydroxyacetone as a species, the tetrahydropyridine branch, a pyrroline loss (`kinetic_core_b24_prereg.md` section 6) |
 | **2-pentyl- and 2-hexyl-4-methylthiazole, alkylthiophenes, 2-pentylpyridine** | fatty aldehyde + H2S / NH3 (lipid–Maillard) | Farmer 1990, Whitfield 1988, Mottram 2002, Elmore 1997, Zamora 2020, Zhou 2000 (areas and levels, no rates) | R33 to R39 (routes with controls; `explain` answers "no rate, not no route") | none | rates or yields from aldehyde + cysteine or ammonia pots; every isolate carries 1-3 % lipid into the cook, and 6-15 g/L phospholipid halves the thiols (the sink W7a must read) |
 | 2-methylthiophene, 4,5-dihydro-2-methylthiazole | thiamine / cysteine thermolysis | Hofmann 1998 Table 8 (thiamine) | partly | sulfur lane has thiamine | the thiazoline family |
 | HEMF | pentose + alanine | Blank 1997 (levels) | no | none (alanine and pentose never share a lane) | alanine on the sulfur lane |
@@ -258,6 +278,25 @@ products (2-pentylpyridine, the alkylthiazoles) as rules first, waves when a rat
 a pea-isolate recipe answers hexanal and 2-pentylfuran with an interval and names their origin as
 the isolate; the CML row on the panel becomes evaluable. About four weeks; the glycation rates exist
 in the AGE literature and are the part most likely to land.
+
+*Status 2026-09-09: part (i) landed as wave B20 and ships (`results/validation/kinetic_core_b20_prereg.md`
+section 6): a pot with a stated protein loading answers CML, CEL and the bound Amadori compound
+from Nguyen 2016's casein rates with declared barriers, the availability band as its interval. The
+panel's CML row stays refused because that benchmark states no protein loading and no cook; a
+benchmark with both is what the wishlist now asks for. Parts (ii) and (iii) are unchanged.*
+
+*Status 2026-09-10: **part (ii) has landed, in the half that could be done honestly** (wave B31,
+`results/validation/kinetic_core_b31_prereg.md`). `conditions.carried_volatiles` charges the
+isolate's own volatiles as DECLARED INPUTS, added before the matrix binding, so a pot answers with
+them included. The design above said "with their measured levels and bands (Fischer 2021, Zhang
+2020b)"; **that part is deliberately NOT done and should not be done from those sources.** A level
+taken from another paper's isolate is not this pot's starting state, and a wave that installs one
+would be inventing the number it is then scored on. The rule is narrow: only a level the source
+PRINTS as an unheated control of the SAME pot may be declared. Trikusuma 2019 prints one and its
+three rows moved into the 3x band; the four pots that print none are refused, with the cure named
+on the refusal. What is still open in (ii) is therefore not code but SOURCES -- an unheated column
+for the PratapSingh isolates, and for any new plant-protein benchmark, which the wishlist should
+ask for as a condition of ingestion. Part (iii) is unchanged.*
 
 ## 6. Cross-cutting engineering, done once
 

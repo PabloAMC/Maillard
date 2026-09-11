@@ -131,12 +131,13 @@ model does not make.*
 
 ![What is asked for, and what the model can name](../assets/thiol_sink/23_coverage_of_declared_targets.png)
 
-*The question a plant-based flavour scientist asks first. Of the twenty odorants the repository
-declares as the targets of a meaty plant-based flavour, the model names six with a rate; two more it
-reaches by a cited route with no rate; twelve it cannot name at all. Most of the twelve are the
-Strecker aldehydes and the pyrazines beyond the first, whose per-amino-acid rates no paper on disk
-prints; the rest are sulfur heterocycles with no measured route. Of the six off-notes it names
-three.*
+*The question a plant-based flavour scientist asks first. Of the twenty-one odorants the repository
+declares as the targets of a meaty plant-based flavour, the model names six with a rate; one more it
+reaches by a cited route with no rate; three (methional, dimethyl disulfide, 2-acetyl-1-pyrroline)
+had a step pre-registered, run and refused on 9 September 2026 and stay in the network at zero;
+eleven it cannot name at all, mostly the Strecker aldehydes and the pyrazines beyond the first, whose
+per-amino-acid rates no paper on disk prints, and sulfur heterocycles with no measured route. Of the
+six off-notes it names three.*
 
 ![Hexanal on the panel](../assets/thiol_sink/24_fat_path_hexanal.png)
 
@@ -149,8 +150,11 @@ exists; the rules reach both.*
 
 *The newest step on the sugar path, and its caveat in one picture. Fed the small dicarbonyls, the
 two fitted constants reproduce one laboratory's rates within twenty percent at three temperatures.
-From a sugar and amino acid pot, the total pyrazine comes out three decades low, because the model
-makes far too little glyoxal and methylglyoxal in water. Every pyrazine answer carries that sentence.*
+From a sugar and amino acid pot, the total pyrazine comes out three decades low. When this figure's
+record was made the reason was the glyoxal supply; the aqueous glucosone route added the next day
+(section 6) brings the glyoxal to the measured level and leaves the pyrazine total where it was, so
+the miss now sits in the Strecker step at that pot's temperature and pH, or in lysine against
+glycine. Every pyrazine answer carries that sentence.*
 
 ## 6. How the model got here
 
@@ -176,6 +180,18 @@ in order, in plain words.
 | the thiol disulfide made reversible, so the dimer is a reservoir rather than a grave | every measured thiol sink has a partner and saturates or reverses; the model's dominant sink has neither | the data drove the release to zero: the model holds a hundredth of the disulfide two laboratories measure, because its oxidant runs out first | no; the finding is kept |
 | the thiol removal made a saturating adduct on an electrophile pool the pot itself makes, feeding the measured room-temperature binding step | the same measured sink, but with a supply that runs out | the pool never forms, because the earlier fits had already switched off the browning step it was tied to; and the measured binding equilibrium lets go of the thiol above 80 °C, so even a large pool would hold under 5 % of it when hot | no; the finding is kept |
 | a pyrazine step added to the sugar path, its two rate constants fitted on one laboratory's fed-dicarbonyl ladders and its pH shape on another's | the roasted note, asked for and refused until a measured rate existed | the fed-dicarbonyl rates fit within 20 %; from a sugar and amino acid pot the yield is a thousandfold low, because the model makes far too little glyoxal and methylglyoxal in water | yes, with that caveat on every answer |
+| the protein's bound lysine made a reactant on the sugar path (glycation to the bound Amadori compound, then CML and CEL), from one laboratory's rates on casein in water and barriers declared from measured steps | isolates are mostly bound lysine, and the safety markers the panel asks for are made on it | the rates reproduce within a factor of 1.5 where the data are firm; the level of CML in the source's own pot within its printed range; a milk laboratory's constant within 20 % at 120 °C; a dry seed's a fiftyfold away | yes, on a pot with a stated protein loading, with the availability band as its interval |
+| the glyoxal supply in water given its own route, from the Amadori compound to glucosone at a milk laboratory's rate, replacing the dry-glass entry | the pyrazine step's caveat: a sugar pot made a ten-thousandth of the glyoxal a laboratory measures | a glucose and amine pot now holds glyoxal within a factor of two of the measurement at 100 °C and inside the measured range at 130 °C; browning unchanged; the pyrazine total still three decades low, so that miss is not the glyoxal | yes, with the transfer band on every glyoxal and pyrazine answer |
+| methionine's chain added to the sugar path: methional as its Strecker aldehyde on the free dicarbonyls, then methanethiol and the disulfide, fitted on one laboratory's rates in a fruit-sugar pot | methional is the cooked-potato note at the top of the desirable list and no lane named it | the fit ran the methionine-to-glycine ratio to its ceiling and was still four decades short in that pot, while a second laboratory's methionine and glucose pot came out two decades too high: methional does not form from the free dicarbonyls; the second laboratory's fed Amadori compound says it forms from methionine's own Amadori compound | no; the finding names the next structure |
+| 2-acetyl-1-pyrroline from proline: the Strecker of proline to 1-pyrroline and its acylation by methylglyoxal, on one laboratory's fed yields | the bread-crust and popcorn note of extruded and baked products | the fed acylation fits within a factor of two; the chain from proline rises a thousandfold with the methylglyoxal charge where the source rises threefold, because the competing tetrahydropyridine branch and the pyrroline's own loss are not written | no; the acylation constant is kept in the record for the next structure |
+| the thiol removal made an irreversible addition to the pot's own sugar intermediates | the third form the two refusals above left standing, from the lipid papers | the fit switched the step off at every temperature: the 145 °C fed pots, fifty-four of the sixty-four rows, want no removal the 100 °C pot could use | no; three structures refused on the same rows points at the rows' weighting or at the laboratory, not at a fourth structure |
+| a benchmark allowed to declare what its pot arrived with, from the source's own unheated column; pots that were never cooked refused instead of charged for raw material | a pea beverage paper printed both columns, and a third of every level was there before any heat | three external rows went from 34×, 32× and 3× to inside threefold with nothing in the model changed; four raw-powder pots are now refused with the cure named | yes |
+| every benchmark cross-referenced against every paper on disk | one hold-out had scored one of six species its paper prints, and cited an author not on the paper | eight measurements added; the amine-free sugar entry was right to 11 % and the step after it 32× too slow, which located the HMF deficit | yes |
+| twenty-three papers downloaded against the model's own reading list, each read and recorded | the model had been asking for an aqueous dehydration rate, a lipid temperature term and an extrusion residence time | the dehydration rate arrived as a fed experiment the model could not even express; the lipid term arrived twice, from oil and from a nut paste, disagreeing by two; the residence time is measured on a different feed | recorded |
+| every fitted constant audited for what the data determine, at the shipped optimum | no one had asked which of the fifty constants the fit rows can see | twelve of forty-seven are pinned; twenty are constants no row touches; the two fits built on fed pots over small networks are fully pinned and the two built on end-of-cook levels through large networks are mostly blind | yes |
+| the 3-deoxyglucosone step made reversible with its sugar epimer, fitted on the fed pots and a second laboratory's ratios | the fed experiment showed the chemistry runs both ways and a quarter of the charge becomes an epimer the model did not carry | all five constants pinned to a tenth of a decade; did not ship, because the peak came three times early: the exit that sets the timing had been measured at pH 6.8 and applied at pH 5 | no, kept as the record |
+| the exits from 3-deoxyglucosone given the pH term the same 2003 table prints for them, on both exits | the timing | the peak landed; one hold-out row (methylglyoxal at pH 4.4) went from 1.3× to 33×: the term on the fragmentation exit, borrowed from a lumped step, did not transfer | no, kept as the record |
+| the same term on the formic-acid exit alone, refit | the hold-out had kept that one and rejected the other | on the hold-out none of the fits read, 3,4-dideoxyglucosone 32× → 6.6×, HMF 12× → 9×, methylglyoxal 1.3× → 1.0×; two more HMF rows inside threefold; the headline 10 of 45 → 12 of 45 | yes |
 
 ## 7. The one problem that matters most: where the thiols go
 
@@ -192,11 +208,12 @@ alone cuts the error from 480 times to 18. Most of what looked like laboratories
 same removal problem.*
 
 The model removes thiols far faster than any pot does, at 100 °C and at 140 °C alike. One removal
-step with one temperature dependence cannot fit both, so the step needs a different form. The two
-obvious forms, the disulfides giving the thiol back and a removal that stops when it runs out of
-its partner, were both built and both refused; the figure below shows why. Two smaller faults are
-also known: the ring intermediate that holds the sulfur opens about ten times too fast, and the
-formation steps have no pH dependence where the pots show a strong one.
+step with one temperature dependence cannot fit both, so the step needs a different form. Three
+forms have now been built and all three refused: the disulfides giving the thiol back, a removal
+that stops when it runs out of its partner, and the thiols adding for good to the reactive sugars
+the pot makes. The figure below shows why the first two failed. Two smaller faults are also known:
+the ring intermediate that holds the sulfur opens about ten times too fast, and the formation steps
+have no pH dependence where the pots show a strong one.
 
 ![The two refused removal steps](../assets/thiol_sink/28_two_refused_sinks.png)
 
@@ -205,9 +222,25 @@ laboratory measures at seven to ten percent across pH; the shipped model holds a
 hundredth of that, and neither variant moves it, because the model runs out of oxidant first.
 Right: the binding step of the second variant, measured at room temperature, lets the thiol go
 above 80 °C, so even a pool as large as the whole sugar charge would hold under five percent of it
-during a cook. What both leave standing is a third candidate: an irreversible addition to the
-unsaturated carbonyls a lipid or the sugar makes, with the disulfide share left to an oxidant the
-pot makes for itself.*
+during a cook. What both left standing was a third candidate, the thiols adding for good to the
+reactive sugars: it was built, and the fit switched it off at every temperature.*
+
+**Three failures with one thing in common, found by reading the papers rather than the model.** The
+step that turns two thiols into their disulfide needs an oxidant, and the model tracks how much
+oxidant each pot has. Counting them showed that every one of the fourteen measurements that carry
+the most weight is a pot the model gives no oxidant at all, and no pot anywhere is given a supply
+from the air above it. So all three removal steps were judged against a measurement the model could
+not have reproduced at any setting: the disulfide it was asked to make could not form. Half of that
+is defensible and half is not. The pots fed hydrogen sulfide have a chemical reason to carry none,
+which one of the papers argues directly. Two of the pots have no hydrogen sulfide in them and sit
+beside a near-identical pot from the same laboratory that does carry oxidant, and nothing anywhere
+says why they differ.
+
+That paper also names where the oxidant would come from: the reactive sugars the pot makes on its
+way to its own products, on a flow about sixteen times larger than the thiols'. The pot in question
+has no step that makes one of those sugars from what it is fed, although the paper measures three of
+them in it. So the next thing to build is not a fourth removal step. It is the supply that all three
+were missing, and it is written down before it is run.
 
 ## 8. What is needed next
 
@@ -216,10 +249,31 @@ pH 5) in 20 mL vials with 5 mL of liquid, volumes written down. Two temperatures
 12 hours and 140 °C for 5 to 120 minutes, one vial per time point, three replicates. Beside it, the
 same buffer with MFT alone and FFT alone at 1 mg/L on the same grid, so removal is measured with
 nothing forming. Measure the thiols by stable-isotope dilution and their disulfides in the same run,
-plus the sugar and cysteine left and the pH. One arm at 100 °C under nitrogen. About 130 vials and two
+plus the sugar and cysteine left and the pH. One arm at 100 °C under nitrogen, and one with a metal chelator: a review of
+these mechanisms names trace copper and iron among the main accelerators of thiol oxidation, and one
+buffer in this model's own fit corpus was made in tap water. About 130 vials and two
 weeks of GC-MS. The model as shipped predicts that the fed thiol decays to zero and that the pot peaks
 after an hour. If instead the thiol levels off with its disulfide and the pot keeps rising, the
 removal step is reversible. Either result decides the next version.
+
+**The fed experiment worked, and it says what to fund.** The one wave of 2026 that pinned every
+constant it fitted was the one built on a paper that fed a pure intermediate and followed it
+(section 6's last three rows): five constants to a tenth of a decade, where the fits scored on
+end-of-cook levels through the whole network leave most of their constants unseen by any row. The
+audit of what the data can determine (the row above them) says the same thing from the Fisher
+information: it is the design that pins, not the number of rows. So the fed-intermediate ladder in
+[what to measure next](EXPERIMENTS.md) is not one option among five; it is the shape every
+experiment for this model should take. The thiol sink is the case in point: its barrier and both
+dimerisation rates sit on their ceilings together, so no refit on the present data can move it, and
+only the thiol-against-time experiment above can.
+
+**Four more experiments, and what each would decide.** The one above is the first of five, and the
+other four are set out with their protocols in [what to measure next](EXPERIMENTS.md): a ladder of
+fed intermediates that would pin six sliding constants at once; a sensory panel for the odour
+thresholds this model refuses to correct for a plant matrix; a binding measurement on a plant
+protein in water and hot, which reading has now failed to supply twice; and a melanoidin
+composition series, which would replace a fixed repeat unit that five laboratories falsify from
+both directions. That guide also says what is not worth measuring, and why.
 
 **Without a laboratory.** Two published data sets exist only as figures (a Beijing grid at 100 to
 140 °C and a five-temperature ladder from another Chinese group). Their numbers, from the authors,
@@ -233,15 +287,24 @@ never forms, because the earlier fits had switched off the browning step it was 
 measured binding equilibrium lets the thiol go above 80 °C, so it could not have held it when hot
 (the saturating-adduct row of section 6). What both refusals leave standing is a third candidate the reading
 of the lipid papers supplies: an irreversible addition of the thiol to unsaturated carbonyls, the
-adducts that halve the thiols when a lipid is present, with the disulfide share left to an oxidant
-the pot makes for itself. That is the next step to pre-register.
+adducts that halve the thiols when a lipid is present. That was built and tested the same day as a
+third structure and refused too: the fit switched it off at every temperature, because the fed
+pots at 145 °C outweigh the ratios at 100 °C in the objective by two to one, and any removal the
+100 °C pot could use perturbs them. (That count was written down wrongly at first, as fifty-four
+against seven; counting the rows themselves gives twelve fed measurements against six ratios. The
+imbalance is real and it is smaller than the record claimed.) Three structures refused on the same
+rows looked like an argument for a fourth. Reading the papers said otherwise, and section 7 above
+says what: the disulfide those three were scored against could not form in the pots that decide
+the fit, because they carry no oxidant at all. So the next thing to build is the supply, not a
+fourth removal step, and after that the experiment below.
 
 **What the tool can do today.** It compares two recipes, predicts one, explains where a compound
 comes from, scores your own measurements, calibrates itself to your laboratory from those
 measurements without touching the shipped model, charges a pea, soy or whey protein's reactive sites
-from measured densities so the thiols and aldehydes meet the protein, answers for the roasted
-pyrazines with the caveat that only the fed-dicarbonyl step is measured, and lists what to measure
-next. It refuses questions the
+from measured densities so the thiols and aldehydes meet the protein and its bound lysine glycates
+(CML, CEL and the bound Amadori compound, on a pot with a stated protein loading), answers for the
+roasted pyrazines with the caveat that only the fed-dicarbonyl step is measured, and lists what to
+measure next. It refuses questions the
 evidence cannot answer instead of guessing, and when it refuses it says whether the chemistry has no
 route or only no rate: a small layer of cited reaction rules, run over the model's species, lists the
 steps the literature draws that the model does not have

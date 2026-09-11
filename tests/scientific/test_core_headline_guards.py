@@ -81,7 +81,7 @@ def test_tracked_scorecard_is_not_stale(tracked_scores, live_scores):
 # --------------------------------------------------------------------------------------
 
 
-def test_core_panel_is_37_bundles_27_answered_39_rows(tracked_scores):
+def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # RE-PINNED 2026-09-04 (later the same day): the furosine bundle's DOI is a bread-baking paper
     # with no extrusion point; quarantined. Its row was always refused (furosine is no core species).
     # RE-PINNED 2026-09-04: two sourceless bundles quarantined (3 rows) and the eight hexose-only
@@ -92,9 +92,40 @@ def test_core_panel_is_37_bundles_27_answered_39_rows(tracked_scores):
     mercapto-2-propanone precursors, CML/CEL/furosine targets, 2-pentylfuran)."""
     s = tracked_scores["summary"]
     assert s["panel_benchmark_count"] == 37
-    assert s["scored_benchmark_count"] == 27
-    assert s["matched_compound_count"] == 39
-    assert s["refused_compound_count"] == 25
+    # RE-PINNED BY WAVE B31 (2026-09-10): 27 -> 23 scored bundles. Four pots were found never to
+    # have been cooked -- their "40 C for 10 min" is the HS-SPME incubation of the measurement --
+    # and every lipid row in them is refused, which empties them. No bundle left the PANEL.
+    assert s["scored_benchmark_count"] == 23
+    # RE-PINNED BY WAVE B28 (2026-09-09): 39 -> 42 rows. Three nonanal rows left the refused list
+    # and joined the scored one, because the oleate branch fraction the lane needed was measured in
+    # 1978 and read this week. The BENCHMARK and ANSWERED counts do not move: no new pot entered,
+    # three questions inside existing pots stopped being refused. The within-3x count is unchanged
+    # at 4, so the three new rows all miss the band -- see the next test, where that is the point.
+    # RE-PINNED AGAIN 2026-09-10: 42 -> 46. The four 2-pentylfuran rows joined the scored list
+    # once a missing lane entry was found: the compound had been reported in mmol/L instead of
+    # ug/L, which read as the model making almost none of it. Seven rows have now left the refused
+    # list in two days and the within-3x count has not moved.
+    # RE-PINNED BY WAVE B31 (2026-09-10): 46 -> 39. Seven rows went back to refused, in the four
+    # pots nobody heated. This is the first re-pin in this file that LOWERS the denominator, which
+    # raises the rate without a single prediction improving, so the direction is called out here
+    # rather than left for a reader to notice: see kinetic_core_b31_prereg.md for the criterion and
+    # for why it is not reaching for the misses (the panel's largest lipid miss, 366x, survives it).
+    # RE-PINNED BY WAVE B34 (2026-09-11): 39 -> 44, and NOT by a model change. A hold-out bundle
+    # scored ONE of the six species its own paper measures; the other five were added. Three of them
+    # are 32x, 35x and 63x, so the median fold error WORSENS while the rate rises.
+    # RE-PINNED BY WAVE B35 (2026-09-11): 44 -> 45. Eight measurements were added from papers on
+    # disk; FIVE of them became refusals rather than rows, so the scored count rises by one.
+    assert s["matched_compound_count"] == 45
+    # RE-PINNED BY WAVE B28: 25 -> 22 refused. Exactly the three nonanal rows above; the four
+    # 2-pentylfuran rows stay refused, and their REASON changed rather than their status. That
+    # matters and is asserted elsewhere: the branch fraction those rows were missing is measured
+    # now, and they are refused because the hexanal they are scored against is not produced by the
+    # lane that would carry the alkylfuran. Un-refusing them answered four rows six to nine orders
+    # of magnitude below measurement, which is worse than refusing.
+    # RE-PINNED BY WAVE B31: 18 -> 25 refused. Exactly the seven rows above.
+    # RE-PINNED BY WAVE B35: 25 -> 32. Three compounds whose waves were refused (B18, B22, B24),
+    # two a pot has no precursor for, one never-cooked nonanal, one lane conflict.
+    assert s["refused_compound_count"] == 32
     # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
     # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
@@ -112,7 +143,7 @@ def test_core_evidence_roles_are_40_predictive_and_the_legacy_split_is_kept_besi
     assert s["evidence_role_totals"] == {"external_holdout": 21, "predictive": 16}
 
 
-def test_within_3x_is_4_of_39_and_out_of_sample_3_of_38(tracked_scores):
+def test_within_3x_and_out_of_sample_counts(tracked_scores):
     # RE-PINNED 2026-09-04: 6/49 -> 4/39. The two hits lost are Bolton 1994 (its assumed
     # loadings replaced by the paper's Table I: the core now overpredicts MFT 20x) and one of the
     # quarantined Hofmann-derivation rows; the eight hexose thiol rows (all misses) left the count.
@@ -122,14 +153,49 @@ def test_within_3x_is_4_of_39_and_out_of_sample_3_of_38(tracked_scores):
     at 5/48 (was 4/40). The hexose rows are the story: glucose and fructose MFT predict ZERO
     without the level rows -- the hexose-to-thiol route has no primary-evidence support."""
     s = tracked_scores["summary"]
-    assert (s["within_band_count"], s["matched_compound_count"]) == (4, 39)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (4, 39)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (3, 38)
+    # RE-PINNED BY WAVE B28 (2026-09-09): denominators 39 -> 42 and 38 -> 41, NUMERATORS UNCHANGED.
+    # The three nonanal rows land at 3.0x, 3.3x and 7.3x. The first two are inside a factor of
+    # three and still do not count here, because this band is 3x on a row whose contract allows it
+    # and nonanal's rows carry tighter contracts. So the headline rate FALLS, from 4/39 to 4/42,
+    # on a wave that made the model strictly more capable. That is the honest arithmetic and it is
+    # pinned rather than smoothed: answering more questions lowers a pass RATE unless the new
+    # answers are good, and two of these three nearly are.
+    # RE-PINNED BY WAVE B31 (2026-09-10): 4/46 -> 7/39 and 3/45 -> 6/38. TWO SEPARATE CAUSES,
+    # and they must not be reported as one.
+    #   NUMERATOR +3, and it is the only accuracy gain: Trikusuma 2019 prints a non-UHT column,
+    #   36-42 % of every level it measures was in the beverage before any heat, and declaring that
+    #   as the pot's starting state moved hexanal 34.2x -> 2.21x, 2-pentylfuran 32.3x -> 2.53x and
+    #   nonanal 3.3x -> 1.54x. All three entered the band together and none is a fit row.
+    #   DENOMINATOR -7, and it improves the rate on arithmetic alone: four pots were never cooked
+    #   and their lipid rows are refused. Nothing about the model got better by that subtraction.
+    # A reader who wants the accuracy claim WITHOUT the subtraction should read 7/46 -- the wave's
+    # pre-registration prints that line for exactly this reason.
+    # RE-PINNED BY WAVE B34 (2026-09-11): 7/39 -> 9/44, 6/38 -> 8/43. The two new hits are
+    # 3-deoxyglucosone (1.11x) and methylglyoxal (1.28x) in the amine-free pot -- the model was
+    # already right about them and nobody had asked. The median fold rose 9.31x -> 10.62x.
+    # RE-PINNED BY WAVE B35: 9/44 -> 10/45, 8/43 -> 9/44. The new hit is (E,E)-2,4-decadienal at
+    # 1.62x in the Trikusuma pot, a fourth answered compound there.
+    # RE-PINNED BY WAVE B41 (2026-09-11): 10/45 -> 12/45, 9/44 -> 11/44. The fed 3-deoxyglucosone fit
+    # (B39, refit under the formic-acid exit's pH term in B41) brought two HMF rows inside: Schibilsky
+    # pH 8 (3.6x -> 1.6x) and Chang water (3.2x -> 2.6x); no row left. Leitzen's 3,4-DGE went 32x -> 6.6x
+    # and its methylglyoxal 1.28x -> 1.01x. The median fold fell 9.31x -> 9.15x.
+    assert (s["within_band_count"], s["matched_compound_count"]) == (12, 45)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (12, 45)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (11, 44)
     assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (1, 1)
-    assert s["holdout_within_band"] == {"hits": 3, "total": 26}
+    # RE-PINNED BY WAVE B34: 3/26 -> 5/31. All five new rows are in a maillard_path hold-out bundle,
+    # and two of them (3-deoxyglucosone, methylglyoxal) land inside the band.
+    # RE-PINNED BY WAVE B41: 5/31 -> 7/31 (the two HMF rows above are both hold-outs).
+    assert s["holdout_within_band"] == {"hits": 7, "total": 31}
     readme = _doc_text(README)
-    _assert_quoted(readme, "4 of 39", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "3 of 38", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "12 of 45", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "11 of 44", "README.md", "the core's out-of-sample count")
+    # 2026-09-11 (review of PR #16): the BADGE on line 6 had said 3/38 through three re-pins of the
+    # body text below it, because nothing asserted it. The most visible number on the page is now
+    # pinned to the same artifact as the table.
+    _assert_quoted(readme, "out--of--sample-11%2F44%20rows%20within%203x", "README.md", "the out-of-sample badge")
+    # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
+    _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 
 
 def test_no_core_benchmark_is_strict_ready_since_bolton_1994_was_read(tracked_scores):
@@ -175,7 +241,7 @@ def test_the_xylose_row_is_a_hold_out_again_and_no_hofmann_level_row_is_in_the_f
 # --------------------------------------------------------------------------------------
 
 
-def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_of_sample():
+def test_core_envelope_coverage_and_widths():
     # RE-PINNED 2026-09-04 (the unidentified-coordinate rule inverted): a coordinate the fit
     # could not pin is now DRAWN across its declared band instead of frozen at the optimum,
     # with an Ea band narrowed to a 12-decade prefactor prior and a definitionally-bounded
@@ -204,7 +270,39 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     lit = s["honest_literature_coverage"]
     # RE-PINNED 2026-09-07 (B15): the extrusion row at a_w 0.35 is now inside the acrylamide window and
     # its interval is sampled (33 -> 34 evaluable, 6 -> 5 not evaluable); three new priors move the stream.
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (7, 34, 5)
+    # RE-PINNED 2026-09-10 (ENV-B18, ENV-B13 and B28 together): 7/34 with 5 NOT EVALUABLE ->
+    # 10/42 with ZERO not evaluable. The five that were not evaluable were the five
+    # hydroxymethylfurfural rows, and the reason they were not evaluable is the defect ENV-B13
+    # closed: their intervals were 0.000 to 0.135 decades wide, and an interval of zero width can
+    # neither contain a measurement nor miss one. They have intervals now, so they count. The other
+    # new rows are B28's nonanal and 2-pentylfuran.
+    # RE-PINNED BY WAVE B31 (2026-09-10): 10/42 -> 11/39, and the two halves of that pull in
+    # opposite directions, as everywhere else in this wave. THREE ROWS LEFT because the four pots
+    # nobody heated are refused (42 -> 39, all misses). ONE ROW ENTERED because a beverage's own
+    # unheated column was declared: hexanal's interval narrowed from 2.652 to 1.441 dex and its
+    # centre moved onto the measurement. That narrowing is NOT the model becoming more certain --
+    # it is 93.5 % of that answer now being a declared constant with no sampled uncertainty of its
+    # own. The envelope treats a declared level as exact; Trikusuma prints 331 +/- 81.3 for it, so
+    # the interval is understated by roughly 12 %, which is below the sampler's own measured noise
+    # floor of 17 % and is recorded in kinetic_core_b31_prereg.md rather than built.
+    # RE-PINNED BY WAVE B34 (2026-09-11): 11/39 with none unevaluable -> 11/41 with THREE. The five
+    # new rows brought two evaluable ones and three with intervals of ~1e-6 dex -- 3-deoxyglucosone,
+    # 3,4-dideoxyglucosone and glucosone have no CorePrior row, so the envelope publishes them as
+    # EXACT. That is the defect ENV-B13 fixed for the HMF rows, still true of the 3-DG limb, and it
+    # bites hardest on the wave's best row: 3-DG is 1.11x on fold and OUTSIDE its own interval.
+    # Named in kinetic_core_b34_prereg.md as an ENV wave, not bolted onto a wave about something else.
+    # RE-PINNED BY WAVE B35: 11/41 -> 12/42. (E,E)-2,4-decadienal joined and lands inside its interval.
+    # RE-PINNED BY ENV-B34 (2026-09-11): 12/42 with 3 not evaluable -> 14/44 with ONE. The 3-DG limb
+    # and the amine-free entries gained prior rows from the source's printed HPD: 3-deoxyglucosone
+    # (1.11x) moved inside its interval and so did the Schibilsky pH-5 HMF row. The one still not
+    # evaluable is glucosone, whose only amine-free route (k_glc_g) carries no flux and has no band.
+    # RE-PINNED BY ENV-M1 (2026-09-11): the whole table is re-seeded -- every coordinate now draws from its
+    # own stream keyed by name (kinetic_core_env_m1_prereg.md), so every envelope number moves once and
+    # no direction is claimed. Under the new streams ENV-B34's priors are in: 16/44, 1 not evaluable.
+    # RE-PINNED BY WAVE B41: 16/44 -> 17/44. The five b39.* Laplace rows replaced ENV-B34's printed band
+    # on k_tdg_ddg and the triangle's centre moved; the streams are per-coordinate (ENV-M1) so only the
+    # rows those constants reach move.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (17, 44, 1)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -213,18 +311,32 @@ def test_core_envelope_covers_5_of_33_evaluable_literature_rows_and_5_of_32_out_
     # RE-PINNED 2026-09-07 (B14): the acrylamide lane's declared flat a_w band joined the draw
     # table (inert on every panel row except the a_w-inside-window acrylamide hold-outs, +0.05 dex);
     # the moved random stream shifts every row by a few hundredths: 5/33 -> 7/33, 1.3376 -> 1.4495 dex.
-    assert lit["median_ci_width_log10"] == pytest.approx(1.3080, abs=5e-4)
+    # RE-PINNED 2026-09-10: 1.3080 -> 1.0411 dex, AND THE FALL IS NOT A NARROWING. Nothing got
+    # tighter: the ship rule measured the Monte-Carlo noise floor from two seeds and confirmed no
+    # row moved beyond it. The median fell because five rows that previously had NO interval, and
+    # were therefore excluded from the median, now have intervals of 0.135 to 0.846 dex -- all
+    # below the old median, so including them pulls it down. A median over a changed row set is not
+    # a comparison; the ship rule's per-row table is.
+    # RE-PINNED BY WAVE B31: 1.0411 -> 0.9238 dex. Same caution as the line above -- a median over
+    # a changed row set is not a comparison, and here the set changed twice over.
+    # RE-PINNED BY WAVE B41: 0.9874 -> 1.0095 dex; the same caution -- the 3,4-DGE and HMF rows now carry
+    # the fit's own width where they carried a printed band.
+    assert lit["median_ci_width_log10"] == pytest.approx(1.0095, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (7, 33)
+    assert (oos["hits"], oos["total"]) == (17, 43)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
-    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.21, abs=0.01)
+    assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.209, abs=0.01)
     assert s["observable_multiplier_policy"]["rows_by_family"] == {
-        "headspace": 8, "extraction": 31, "undeclared": 0,
+        # RE-PINNED BY WAVE B31: headspace 11 -> 8. The three that left are the hexanal and
+        # nonanal rows in the pots nobody heated -- headspace-quantified, and refused now.
+        # B34: extraction 31 -> 36, the five new LC-MS/MS rows.
+        # B35: headspace 8 -> 9, the decadienal row.
+        "headspace": 9, "extraction": 36, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "7 of 34", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "7 of 33", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "17 of 44", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "17 of 43", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

@@ -1023,6 +1023,31 @@ The evidence, in the order it was found:
    the tail, not the body). `acrylamide_spi_extrusion_130C_ACSRef3` (25 s at 130 C, 4 247x) deserves
    the same look at whether its `conditions` are the process or the analysis.
 
+   **CLOSED 2026-09-10 by wave B31** (`results/validation/kinetic_core_b31_prereg.md`). This
+   diagnosis was right and it named the right four pots. They are now REFUSED rather than scored,
+   on two condition-side declarations that must agree: the bundle's own `vessel.closure` of
+   `"no cook"` (which is not sufficient alone -- three HOT bundles carry the same string meaning
+   "no vessel to record"), and a hydroperoxide conversion extent below 1 % over the thermal program
+   (3.826e-3 for these four against 0.2578 for the mildest real cook, with nothing in the 67x gap).
+   The refusal is conditional and names its cure: `conditions.carried_volatiles` accepts a starting
+   state the SOURCE PRINTS, and a pot that declares one is scored. Trikusuma 2019 declares one, and
+   its three rows went from 34.2x / 32.3x / 3.3x to 2.21x / 2.53x / 1.54x -- all three inside the 3x
+   band, none of them a fit row. Panel effect: rows 46 -> 39, refused 18 -> 25, within-3x 4 -> 7,
+   median fold 31x -> 9.3x. **Most of that median fall is the subtraction, not the fix**, and the
+   README says so beside the number.
+
+   The acrylamide row is a DIFFERENT problem and stays open: its vessel closure is
+   `"twin-screw extruder"`, so its conditions are a process and not an analysis. Whatever is wrong
+   with 4 247x there, it is not this.
+
+   **Looked at 2026-09-11, and it is the process, under-declared.** The bundle's 130 C / 25 s is the
+   DIE zone and the residence time; an extruder heats the melt through barrel zones before the die,
+   and the source (Ma 2024, on disk only as a second-hand Europe PMC text in the research corpus)
+   prints no zone profile here. The engine can take a multi-zone `ThermalProgram` (the extrusion
+   example in docs/examples), so the fix is a declared profile from the paper, not a model change --
+   and without the PDF nothing can be declared. Left as it is, named: an extrusion row scored on its
+   die zone alone is scored on a fraction of its thermal load.
+
 - [x] **DONE 2026-09-04. Invert the envelope's sampling rule: unidentified => SAMPLED over its
       declared band, not fixed.** Shipped, with a NEGATIVE result on its stated goal that is worth
       more than the change: `uncertainty.unidentified_prior` draws a free-but-unpinned coordinate
@@ -1369,7 +1394,11 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       the optimum (ARP / pentose steps, or the trunk's melanoidin) -- the unsaturated-carbonyl adducts of
       farmer1990 / whitfield1988 / mottram2002b (thiols halved by 6-15 g/L phospholipid) -- with the dimer
       share left to an INTERNAL oxidant (xu2010: N2 changes nothing). The oxidant supply stays a separate
-      suspect for the DIMER SHARE, not for the missing thiol.
+      suspect for the DIMER SHARE, not for the missing thiol. UPDATE 2026-09-09 (later): variant (c) RUN as B25,
+      DO NOT SHIP: k_add to its floor, Ea to its ceiling (switched off); cost = B16's. THREE structures refused on
+      the same 64 rows -> the objective's weighting (54 fed rows at 145 C from one lab vs 7 ratios at 100 C) is
+      what refuses any 100 C sink. OWNER DECISION needed: (i) run the section-8 experiment, or (ii) pre-register a
+      re-weighted objective (by laboratory, or Schieberle's ratios up-weighted), which is a rule change.
       Original entry: Reversible thiol dimerisation (disulfide pool re-releasing thiol,
       temperature-dependent equilibrium) and/or a sink scaling with the carbonyl/melanoidin pool; the
       pentose supply at 100 C (formation dries up at 6 h in the model, not in the pot); the TTCA return
@@ -1659,7 +1688,7 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       `k_mgo_ak`, although `kinetic_core_b18_fit_report.json` carries their Laplace sigma (0.08 dex on
       log10 k). Every pyrazine interval today is the trunk's interval without the step's own spread.
       Extend the envelope's prior table with the B18 block (the B10/B11 pattern) and regenerate.
-- [ ] **FIG-01 (2026-09-09).** The introduction's 23 figures were git-ignored (`*.png` with an allow-list that
+- [x] **FIG-01 (2026-09-09).** The introduction's 23 figures were git-ignored (`*.png` with an allow-list that **[CLOSED 2026-09-10: all 32 figures are tracked, and `results/validation/figure_inputs.json` puts every figure's inputs and PNG hash under the artifact-freshness gate, which has since caught figure staleness three times.]**
       never included `docs/assets/thiol_sink/`), so every figure in README and INTRODUCTION was a broken image
       on GitHub; fixed by allow-listing the folder. No gate checks the figures against the code: four were
       stale (paper counts, step counts, the sugar tree without the pyrazine step). Add the two figure builders
@@ -1670,6 +1699,597 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       calibration example); the same gate should cover all three. The hand-typed path scorecard
       (`08_path_scorecard.png`, static strings in `build_thiol_sink_figures.py`) should be generated from the
       scorecard artifacts or retired.
+- [x] **B20 (pre-registered and RUN 2026-09-09; SHIPS): the glycation arm.** Four trunk-only species (LYSP, FLP,
+      CML, CEL), five steps, Nguyen 2016 M1's ten constants as fit rows (cost 17.2, chi2_red 3.4, all five
+      identified), barriers declared (Martins 96.8 / 97.1, Berk 113 / 92, CML loss flat). Verdict SHIP: decisive
+      rows within 0.19 dex; Nguyen's CML level reproduced; Hamzalioglu milk within 0.07 dex at 120 C; Berk dry
+      seed +1.7 dex. Answers only with `protein_g_per_l`; refused by name otherwise; free lysine is NOT the
+      substrate (it resolves to the acrylamide lane). OPEN: a plant-protein glycation rate (pea, soy) in water at
+      two temperatures; a CML benchmark with a stated loading and a real cook (the Foods 2023 row is a proxy);
+      the CML-loss barrier (Nguyen's pair falls with T); furosine as a reportable (0.32 x FLP after hydrolysis,
+      Krause 2003) not yet written.
+- [x] **B21 (pre-registered and RUN 2026-09-09; SHIPS): the aqueous glucosone route to glyoxal.** r_ama_g (AMA ->
+      G + Gly) fitted on Hamzalioglu 2026's four LacLys -> glucosone constants (Ea 75.9 measured) and k_g_go's
+      aqueous value on the two determinate glucosone -> glyoxal constants (Ea 4.2); cost 3.5, both identified.
+      Quan 2020's glyoxal: before 4.2 / 2.5 dex low, after -0.35 / 0.00 dex from the printed range; browning
+      hold-out 1.43 -> 1.31; panel unmoved; Xia's GO >> MGO NOT reproduced (model MGO 7.8 mM at 130 C / 80 min in
+      200 + 200 -- check the trunk's MGO: Martins' k_ama_mgo plus the DMHF sink; Xia's MGO panel tops at 0.5 mM);
+      Leahy total unchanged (-2.8 dex) -> the pyrazine miss is the Strecker step at 95 C / pH 9 or Lys vs Gly.
+      OPEN: the MGO level in water (Xia figure-only; Quan "rises monotonically", no number; Yu 2020 time unit);
+      the glyoxal sink in water (Ham fits zero; B13's glass sink kept for B18's conditionality); DIC-01 / DIC-03
+      directional claims re-check after regeneration. UNFORESEEN (recorded after the verdict): B1's own fit rows
+      worsen, half SSR 2017 -> 2495 (+24 %), Amadori median error 0.035 -> 0.093 dex, formic 0.089 -> 0.123;
+      3-DG / MGO / 1-DG unchanged. NEXT (B21b, to pre-register): joint fit of k_ama_g on Hamzalioglu's four
+      constants AND Martins 2005's Amadori series (80 / 100 / 120 C), with the transfer band as the prior;
+      if no rate serves both, the milk constant does not transfer to fructosyl-glycine and B21 is refused.
+- [ ] **B22 (pre-registered and RUN 2026-09-09; DO NOT SHIP): the methionine chain.** Structure refuted: identity
+      ratio on B18's Strecker constants at its ceiling (100x) leaves Pan 2025's methional 3.6-5.6 dex low (glyoxal
+      9 uM, MGO 42 uM at 140 C / 10 min in that pot against 268 uM Met) while Deng 2022's 200 + 200 mM pot is
+      1.5-2.9 dex HIGH and falling where the source rises. Steps in the network at zero; targets refused with the
+      verdict; methionine charged as glycine for the Amadori chemistry (declared). NEXT (B22b, to pre-register):
+      MET + Glc -> Amadori-Met (the trunk's Amadori formation with methionine as the amine), Amadori-Met ->
+      methional (first order; Deng: the fed ARP gives 1.4-2.6x the free pair, peaks at 120 min then falls, loss
+      >= 6.9e-3 /min), rows = Deng 2022's two 120 C series (RF = 1: within-series ratios, not levels) + Pan 2025's
+      rates as the second laboratory; methional -> MeSH and the disulfide as before. Ask Deng's group for the
+      100 / 130 C methional rows (Table 2 has no methional row despite its title).
+- [ ] **B24 (pre-registered and RUN 2026-09-09; DO NOT SHIP): 2-acetyl-1-pyrroline from proline.** Fed 1-pyrroline +
+      MGO rows fit (+0.18 / +0.30 dex; k_pyrl_ap 2.7e-3 L/(mmol min) at 100 C, 3x Hofmann's bilinear lower bound);
+      proline + MGO ladder -1.29 / +0.13 / +1.16 dex (model linear in MGO, source saturating); expt 3 (excess
+      pyrroline) +2.1 dex; apparent cascade barrier 591 vs Chan's 60 kJ/mol (the trunk's MGO supply). Steps at zero,
+      target refused. 2-acetyl-1-pyrroline added to the registry (threshold null: Buttery 1983 not on disk).
+      NEXT (B24b, to pre-register): hydroxyacetone (acetol) as a trunk species made by the Strecker step, the
+      1-pyrroline + acetol -> HOP -> ATHP branch on Hofmann Tables 4 and 5 (pH ladders), a 1-pyrroline loss
+      sized on expt 3, Table 9's AP : ATHP switch as the within-study shape.
+- [ ] **ACR-02 reading log (2026-09-09, the acrylamide lane's named gap is CLOSED as a comparison).** Four dossiers
+      written from PDFs that had sat unread (`knol2005`, `knol2009`, `knol2010`, `claeys2005`; `devleeschouwer2009`
+      pending). **Two independent laboratories now print an acrylamide ELIMINATION constant.** Knol 2005 (Wageningen;
+      glucose 200 + asparagine 200 mmol/L, 0.1 M phosphate initial pH 6.8, 120-200 C, T_ref 160 C): k6 acrylamide ->
+      products 7.96 / 28.1 / 88.1 / 250 / 650 e-3 min-1 at 120 / 140 / 160 / 180 / 200 C, Ea 85.1 +/- 14 kJ/mol, with
+      the authors' own caveat that no product of the degradation was measured. Claeys 2005 (Leuven, the shipped
+      lane's own laboratory, 0.01 M equimolar pH 6): k_E 111.1 +/- 8.9 e-3 min-1 at its reference, Ea 167.2 +/- 4.3.
+      **The two constants agree within 1.26x at the reference temperature and their BARRIERS differ by a factor of
+      two (85 vs 167 kJ/mol).** That is the shape of the panel's complaint that the lane's time course is inverted:
+      the magnitude of the sink is corroborated, its temperature dependence is not. Knol 2005 also gives the whole
+      network at five temperatures with intervals (Glc + Asn -> Schiff 0.668 e-3 M-1 min-1 at 160 C, Ea 57.6 +/- 8.0;
+      Glc -> Fru 50.1 e-3 min-1, Ea 81.7; Fru + Asn 1.45 e-3 M-1 min-1, Ea 102 +/- 14; Schiff -> acrylamide 2.53 e-3
+      min-1, Ea 94.4; Schiff -> melanoidins 48.7 e-3 min-1, Ea 40.1), and the derived partitions k5/k4 (browning over
+      acrylamide) 89 -> 5.4 and k6/k4 35 across 120-200 C. Knol 2010: the condensation at 0.27e-3 L/(mmol min) at
+      160 C for fructose + asparagine against De Vleeschouwer's 0.22 M-1 min-1 for the same step, **1.2x across two
+      laboratories and two matrices**, and it shows the elimination is UNIDENTIFIABLE in its system by deleting it.
+      Knol 2009: no rate constant at all (its "k1"/"k2" are logistic steepness parameters), but four potato genotypes'
+      acrylamide scale parameters with their precursor concentrations -- the real-food half of the gap, as levels.
+      NEXT (ACR-02a, to pre-register): a second-laboratory comparison wave on the elimination -- both constants at a
+      shared reference, the two barriers as the decision, and the panel's inverted time shape as the test that
+      discriminates them. Registry: no sugar and no amino acid has an id, so every one of these rows names a
+      reactant the compound registry cannot key.
+- [ ] **B24b reading log (2026-09-09, the branch that refused B24 is now on disk).** `schieberle2005_extraction.md`
+      (the book-chapter companion of Hofmann & Schieberle 1998b) repeats that paper's tetrahydropyridine pH ladder
+      number for number (<0.008 / 0.072 / 0.863 / 3.07 mol % at pH 3 / 5 / 7 / 9; 1-pyrroline 2 + hydroxyacetone
+      2 mmol/L, 0.5 M phosphate, 100 C, 30 min) and states in words what B24 lacked: **hydroxyacetone gives ONLY the
+      tetrahydropyridine and methylglyoxal ONLY the pyrroline**, so the branch is a fork on the carbonyl, not a
+      competition for the pyrroline. It also carries one number neither B24 source had: **2-acetylpyrrolidine ->
+      2-acetyl-1-pyrroline by air oxidation, 0.060 / 0.042 / 0.038 min-1 (first order, from the 5 / 30 / 120 min
+      conversions 26 / 72 / >99 %, 0.4 mmol/L in water, 25 C, air)** -- the oxidation B24 folded into its net
+      acylation, now separable. Bilinear lower bounds (mine, in the dossier): 1-pyrroline + hydroxyacetone ->
+      tetrahydropyridine about 1.4e-4 (pH 7), 5.1e-4 (pH 9), 1.2e-5 (pH 5) L/(mmol min). With these, B24b can write
+      hydroxyacetone as a species, the tetrahydropyridine as the competing product, and a pyrroline loss.
+- [ ] **B19 reading log (2026-09-09, the identity ratios: partly there, and the useful part is figure-locked).**
+      `hwang1995` and `hwang1995b` (one experiment in two papers: glucose + 15N-glycine + one tested amino acid,
+      equimolar, on wheat starch at 12-14 % moisture, pH 7, 180 C, 1 h) give pot-against-pot TOTAL PYRAZINE yield
+      ratios against the glycine-only control: Lys 4.34, Phe 3.00, Asn 2.25, Glu 1.98, Ile 1.95, Gln 1.60, Asp 1.54,
+      Arg 0.84 (the only pot below the control). Halved for the doubled amine charge they span 0.42 to 2.17. **But
+      the quantity an identity layer actually wants -- the share of the pyrazine ring nitrogen that came from the
+      tested amino acid rather than from glycine, which the 15N label measures -- is printed only as percentage
+      labels drawn on Figures 1 to 4, so it is figure_only and cannot be fitted.** `amranihemaimi1995` is a
+      carbon-origin bookkeeping study: eleven alkylpyrazines with within-pot percentage shares and forty labelling
+      fractions, and no absolute quantity of anything. `martin2001` pending. `huang2016` is the same file and the
+      same paper as `huang2017_extraction.md`, so it does not fix that paper's missing concentrations. NET: an
+      identity-ratio layer can be fitted on the eight whole-pot ratios above (with the amine-charge correction
+      declared), and the cleaner isotope split needs the figures' numbers from the authors.
+- [ ] **PROV-01 (2026-09-09, three papers whose numbers the engine SHIPS now have dossiers).** `frankel1989` is the
+      whole product slate of the lipid lane: it prints RELATIVE PERCENT of a six-peak sum at one temperature with the
+      total peak area beside it, and **no rate, no yield, no barrier, no nonanal and no 2-pentylfuran anywhere** --
+      which is the lane's declared assumption confirmed at its source, and the reason those two compounds are
+      refused. `buttery1983` is the 2-acetyl-1-pyrroline threshold: printed as a VOLUME ratio, "0.1 part (mL) per
+      10^9 parts (mL) of water" (Guadagni plot, 16 judges), so the 0.1 ug/kg the species table now carries assumes
+      unit density and the dossier says so; its ten-variety level table is the authors' own semi-quantitative
+      peak-area estimate. `buttery1986` adds what 1983 could not measure: the steam-distillation recovery of the
+      compound is 28.0 % (SD 4.9), so the 1983 levels are multiplied by 3.57. `charlesbernard2005` pending (the
+      8-10 mmol sites per g that recasts k_thioether as bimolecular).
+- [ ] **PROV-02 (2026-09-09, and it bears on a refusal): the site density behind `k_thioether` is an upper
+      bound, not a titre.** `charlesbernard2005_extraction.md`, written when the PDF was read for the first time.
+      The paper DOES print "8-10 mmol per g dry coffee solids" (p. 4428, restated p. 4430), so the page cite in
+      `parameters_sulfur.py` is right, but the number is **the hydroxylamine DOSE at which a four-point
+      thiol-protection curve levels off** (Figure 3, figure-only; the measured doses are 3.6, 7.2, 14.4 and 21.6,
+      so nothing was measured between 7.2 and 14.4), on WHOLE 1 % coffee solids at pH 5.2 -- not a titration, and
+      not on the MW > 3000 melanoidin fraction the repository applies it to. The dossier reproduces the recast
+      exactly (9.4e-4 /s divided by 0.1125 M = 5.01e-4 L/(mmol min)), and then shows that 9 mmol/g demands one
+      electrophile per 111 g/mol, **below the mass of a single hexose residue**: the density is a ceiling, so
+      `k_thioether` is a LOWER bound on the true constant. **The consequence for wave B17 variant (a): at that
+      density MELE depletes by at most 0.4 % in any system in the corpus, so the "depletable" pool the whole
+      variant was built on does not deplete.** That is a second, independent reason B17a could not have worked,
+      and it was knowable from a PDF that had been on disk unread the whole time.
+- [ ] **B19 UPDATE (2026-09-09): the additive identity-ratio model is refuted before it was written.**
+      `martin2001_extraction.md`. Its competition pot puts six amino acids on ONE glucose pool: leucine's
+      3-methylbutanal rises to 1.24x its single-amino-acid value while isoleucine's, phenylalanine's and
+      methionine's fall to 0.41, 0.37 and 0.19, and the total pyrazines to 0.365 of the sum of the singles.
+      **A linear partition of a shared dicarbonyl pool -- which is exactly the form section 5 of the B19 draft
+      proposes -- predicts 1.00 in every one of those rows.** So the identity layer cannot be a set of independent
+      per-amino-acid ratios; it needs a competition term, and this pot is the within-study shape to fit it on.
+      Usable: same-compound-across-pots ratios (the response factor cancels). Not usable: every cross-compound
+      comparison, including the paper's own amino-acid ranking (peak areas, no response factors ever measured),
+      and the abstract's total-yield figure (figure-only; the dossier reconstructs it from Tables 2 and 4 as
+      Phe 2.30, Met 1.38, Gln 1.33, Leu 1.00, Asn 0.75, Ile 0.72, with the warning that those four small pots are
+      one statistical group and the glucose-only blank is 27-50 % of their totals).
+- [ ] **ACR-03 (2026-09-09): the acrylamide lane's cysteine channel, read from its own source at last.**
+      `devleeschouwer2009_extraction.md`. Three shipped constants (`k_cys_sink`, `k_cys_glc`, `k_asp_sink`) cite
+      this paper and it had never been read. What it adds: **k_E2ref = 49.36 +/- 1.18 L/(mol min), Ea 51.3 +/- 1.5
+      kJ/mol -- the corpus's only MEASURED bimolecular acrylamide-scavenging constant**, and the only measured
+      competitor sugar-consumption constant; it reprints Part I's whole control column as fixed values, which
+      verifies `k_asn_glc` 1.70, `k_int1_acr` 3.57 and `k_asn_asp` 26.43 against a second printing and resolves
+      Part I's "10^-3 mm^-1" unit typo; and its model discrimination positively RULES OUT the alternative
+      mechanism that cysteine works by inhibiting formation. Set beside Claeys 2005's lumped elimination it
+      implies 15.8 L/(mol min) across a 185-fold cysteine change in the same laboratory, a factor of 3 against the
+      factor of about 660 a concentration-independent term would need: the first evidence that the registry's
+      `order_assumed_never_tested_by_the_source` flag can be softened. DEFECT FIXED the same day: `_DV2_SOURCE`
+      in `parameters_acrylamide.py` cited "J Agric Food Chem 57:539-546"; the paper is Food Chemistry 114:535-546
+      (doi 10.1016/j.foodchem.2008.09.084) and the anchor now says so, with the DOI. STILL OPEN:
+      `devleeschouwer2009b.pdf` is Part I (Food Chemistry 114:116-126), a different paper that three shipped
+      trunk constants also come from, and it has no dossier either.
+- [x] **AUDIT-INCORPORATION (2026-09-09). What the audit's findings became in the model.** Done in one
+      pass, each item with what it moved and what it deliberately did not.
+      **SHIPPED AS A WAVE.** B26, the first plant protein in the matrix binding table: Bi 2022's
+      pea-isolate partition pair by the registry's own K_g formula, hexanal and an alcohol pooled, the
+      alkenal quarantined, the alkenal CONTRAST excluded from the unsaturation penalty for a two-carbon
+      confound. Pooled `n_alkanal` 0.01151 -> 0.05404 L/g; on the flagship hold-out hexanal 50.3x -> 15.3x
+      and the two methylbutanals 166x -> 70.6x, no sign inverted, the kinetic panel bit-for-bit unchanged.
+      The reversible term now claims 44.2 % of the hexanal log-shift against Amendment 6's ~25 % cap.
+      **CORRECTED IN PLACE (no fitted value moved).** Bolton's two precursor molarities to the monohydrate
+      molar masses the paper specifies (glucose was 10 % high, cysteine 11 %; the MFT prediction moved by
+      6e-6 dex, which is itself the isotope finding restated); the glutamate claim narrowed from "not a
+      reactive precursor" to what the isotope work supports. Trikusuma's `concentration_mM` and
+      `water_activity` withdrawn as unprinted, with the printed mass fraction recorded instead and the
+      loader taught to read a null as "not stated" rather than raise. `k3_final_parameter_inventory.md`
+      B2.7 and B2.10, furfural's pH collapse "15-49x" -> "48.6x to more than 1510x", with where the wrong
+      number came from. B25's record: "54 fed rows at 145 C against seven ratios at 100 C" -> the enumerated
+      truth, 12 fed mol % rows against 6 Schieberle ratios, verified by running the objective's own table.
+      **REGISTERED AS CAPABILITY.** 3-isobutyl-2-methoxypyrazine in `off_flavour_targets.yml` at 0.002 ug/kg
+      -- the first entry the cook does NOT make, odour activity about 15 in the raw pea beverage before any
+      heat and about 36 after UHT, so the mitigation is upstream of the pot and the model must not pretend
+      to a formation step. Registry ids for five compounds the corpus names and could not refer to:
+      2-pentylpyridine, (E,E)-2,4-decadienal, 5-methylfurfural, 2-furanmethanol, maltol.
+      **RECORDED AGAINST SHIPPED CONSTANTS, VALUES UNCHANGED (each is a wave, and each is below).**
+      `SECOND_LABORATORY_2016` in `parameters_dicarbonyl.py`: `k_da_sink`'s zero REJECTED (130e-3 /min
+      measured), `k_go_sink`'s zero barrier REFUTED while its rate agrees to 1.87x, `k_odg_da` 466x apart,
+      `k_hmf_self` 23 000x apart -- and, the more important half, three constants agreeing inside a factor
+      of two across two laboratories, the trunk's first cross-laboratory agreement.
+      `MELANOIDIN_REPEAT_UNIT_FALSIFYING_MEASUREMENT` in `species.py`: the C/N 8.0 structural floor is
+      missed at 7.64 +/- 0.21 by two agreeing methods, because two thirds of the glycine arrives
+      decarboxylated; the trunk's 8.42-9.94 still clears it as a lower bound at 70 C.
+      The oligomerisation channel's reaction ORDER corrected from "ZERO in thiol" to first order, on the
+      paper's own across-pot comparison; nothing downstream moves because the channel has no rate.
+      **A DEFECT FOUND ON THE WAY.** B4's generator overwrote its own BLIND prediction file on every run,
+      date and all, so any later wave could have replaced a pre-registration with a post-hoc prediction
+      undetectably. It now refuses without `--refreeze`.
+- [x] **FETCH-16 INCORPORATED (2026-09-09 evening). All sixteen fetched, all read, `reading_audit`
+      back to zero unread on 245 PDFs.** What each became.
+      **SHIPPED.** Wave B28: nonanal answered on three matrices from three laboratories at 3.0x, 3.3x
+      and 7.3x, from a share Selke measured in 1978 and a molar anchor the wave DECLARED rather than
+      measured (band 0.2 to 1.0 on the linoleate anchor; every answer carries it). Refused panel rows
+      25 -> 22. Free result: Frankel 1981 against Frankel 1989, renormalised onto the five products
+      both quantify, agrees within 1.6x on every one -- the first external check the lipid lane's own
+      fit source has ever had, and now figure 31.
+      **LIFTED THEN PUT BACK, WHICH IS THE MORE USEFUL HALF.** 2-pentylfuran's branch fraction is
+      measured and correct; un-refusing it produced answers six to nine ORDERS below measurement,
+      because on the matrix-only path the hexanal these rows are scored against does not come from
+      the lipid lane (the lane's own hexanal is about 1e5 smaller). A near-zero is the absence of a
+      prediction dressed as one. The refusal now names what would lift it: a lipid charge these
+      matrices can integrate, which is a modelling problem, not a measurement.
+      **THE SHIP RULE GAINED THE TEST THAT CATCHES THAT.** A rule counting refusals falling would
+      have called the first run a success. T2 now also requires every row lifted out of REFUSED to be
+      answered within three decades of its measurement.
+      **RECORDED, NOTHING SHIPPED.** (i) `BINDING_AT_PROCESS_TEMPERATURE`: five papers, three signs,
+      and no aqueous constant above 60 C anywhere, so B26's 37 C limit stands and a scalar temperature
+      correction is refuted. (ii) `CHAIN_LENGTH_SLOPE_FIVE_DETERMINATIONS`: the shipped 2.81 sits at
+      the TOP of its evidence, with three new readings at 1.90, 2.15 and 2.23. (iii)
+      `SULFUR_BINDING_GAP`: 21 binding rows and not one sulfur compound; the first plant measurement
+      still cannot ship, for three stated reasons, one of which is an 1118x disagreement between the
+      paper's own two methods. (iv) `PAIRED_THRESHOLD_EVIDENCE`: the corpus holds NO paired
+      water/plant-matrix threshold and `matrix_oav`'s refusal is not liftable by reading.
+      (v) `MELANOIDIN_REPEAT_UNIT_FALSIFIED_FROM_BOTH_SIDES`, now figure 30. (vi) the HMF sink's third
+      reading, with the three cautions that keep it from being a replication.
+      **AMENDED BEFORE RUNNING.** B27's pre-registration: no paper supplies a redox-branch constant,
+      every one belongs to the adduct branch, and the wave now declares in advance which fitted value
+      it would read as evidence against its own structure.
+      **TWO DEFECTS OF MINE, FOUND AND FIXED.** Registering 2-pentylfuran shadowed a literature-only
+      structure and silently broke the hypothesis layer's answer for 2-pentylpyridine; a test caught
+      it. And I told the owner a paper supplied a paired plant-matrix threshold; both its legs are
+      soymilk. Retracted in SEARCH-SIX item 13.
+      **STILL OPEN AND NOW WRITTEN FOR A PERSON.** `docs/guides/EXPERIMENTS.md`: five experiments in
+      the order they are worth funding, each with protocol, what the model predicts today and what
+      each outcome decides; plus three things that look like gaps and are not.
+- [x] **FETCH-16 (2026-09-09). The download list the six searches produced, checked against all 233 **[CLOSED 2026-09-10: all sixteen fetched, read and incorporated; see FETCH-16 INCORPORATED above.]**
+      PDFs on this disk.** Two of the papers the searches returned were ALREADY HERE and already
+      dossiered (Cammerer & Kroh 1995 as `Cammerer1994.pdf`; Martins & van Boekel 2003 as
+      `martins2003c.pdf`) -- see the correction in SEARCH-SIX item 2. Sixteen are not here and are
+      worth fetching, in this order.
+      **(A) Closes a gap the model DECLARES open.**
+      1. Sun, Liang, Qian, Chen & Zhao 2025, Food Hydrocolloids, "Interactions of pea protein with
+         three sulfur-containing flavor compounds". THE largest single omission on this list: the
+         matrix table carries 21 binding rows and NOT ONE is a thiol or a disulfide, while the sulfur
+         lane is the model's central output. Pea protein against dimethyl disulfide, dimethyl
+         trisulfide and lenthionine, with binding constants. 25/31/37 C only, so it inherits wave
+         B26's temperature limit, but it is the sulfur lane crossed with a plant matrix and nothing
+         in the corpus is.
+      2. Aspelund & Wilson 1983, JAFC 10.1021/jf00117a019, soy protein adsorption at 80/90/100 C with
+         HEATS of adsorption. B26 says outright that nothing licenses a plant binding constant above
+         37 C; this is that licence or its refusal.
+      3. Crowther, Wilson & Glatz 1980, J Food Process Eng. Same laboratory as (2): adsorption
+         coefficients at 60 and 70 C on soy heated to 100 and 121 C. A heat of adsorption IS a
+         temperature dependence, which is exactly the quantity B26 lacks.
+      4. Guo, He, Wu, Zeng & Chen 2019, Food Chem., SPI preheated at 80/90/100 C with Klotz constants.
+         Speaks to `matrix_sites.py`'s own note that the sites are charged once at the start of the
+         cook and their change with heating is not modelled.
+      5. Selke, Frankel & Neff 1978, Lipids 10.1007/BF02533622 -- nonanal at 4.0 % and 11 % of the
+         cleavage products of two oleate hydroperoxide pairs. The panel REFUSES nonanal for want of
+         exactly this branch fraction.
+      6. Frankel, Neff & Selke 1981, Lipids 10.1007/BF02534950 -- the same for pure linoleate
+         hydroperoxides, naming 2-pentylfuran as a unique product. The panel's other refused compound.
+      **(B) The pre-registered oxidant wave (B27), including its counter-evidence.**
+      7. Luo, Tian, Li, Zhang, Bi et al. 2024, Compr Rev Food Sci Food Saf 10.1111/1541-4337.13389 --
+         states as a general rule the mechanism B27 rests on: anaerobic thiol oxidation uses
+         dicarbonyls as the oxidant. A second source for a mechanism that had one.
+      8. Zheng, van Dongen, Bakker, Miro Estruch et al. 2022, Nutrients 10.3390/nu14071364 --
+         COUNTER-EVIDENCE, and wanted BEFORE the wave runs: disulfide formation from glutathione was
+         LIMITED over six hours with three dicarbonyls. At 37 C, against a wave about 140 C, so it may
+         not transfer -- which is precisely the kind of risk a pre-registration must name.
+      9. Wondrak, Cervantes-Laurean, Roberts et al. 2002, Biochem Pharmacol -- second-order rate
+         constants for alpha-dicarbonyl + thiol scavengers in water, with the pseudo-first-order
+         method. The adduct branch, not the redox branch, but it is a real constant.
+      10. Zheng, Bakker, Estruch, Widjaja et al. 2023, Food Chemistry: X -- a second-order constant for
+         methylglyoxal + N-acetylcysteine and the reverse constant for the adduct.
+      11. Coukos & Moellering 2021, ACS Chem Biol 10.1021/acschembio.1c00553 (PMC8609522, OPEN ACCESS)
+         -- kinetics of methylglyoxal with model thiols at 25 C. Free; take it.
+      **(C) Named gaps elsewhere.**
+      12. Gokmen, Kocadagli, Goncuoglu & Mogol 2012, Food Chem., "Model studies on the role of
+         5-hydroxymethyl-2-furfural in acrylamide formation from asparagine" -- the ONLY hit in either
+         HMF search that measures DEGRADATION in an amino-acid pot rather than formation. Two dossiers
+         already cite it. Same group as `kocadagli2016`, `goncuoglu2016` and `hamzalioglu2026`.
+      13. Suppavorasatit, Lee & Cadwallader, J Food Sci. **FETCHED, READ, AND IT DOES NOT DO WHAT I
+         SAID IT DID.** I claimed it measured vanillin and maltol thresholds in soymilk against water,
+         and told the owner that this corrected the earlier flat claim that no paired plant-matrix
+         threshold exists. Reading it shows the two legs are **control soymilk against DEAMIDATED
+         soymilk** -- both about 3 % soy protein, so there is no water leg at all. The settling
+         sentence: the test samples were made "by adding the same volume (1 mL) of various flavor
+         compound solutions into 14 mL of either DSM or CSM". "Odourless distilled water" appears only
+         as the flavour stock's solvent, a nose cleanser and the intensity-scale anchor. The only
+         non-soymilk comparator is a CITATION to skim-milk values. **So the original claim stands: the
+         corpus holds no paired water/plant-matrix threshold, and `matrix_oav`'s refusal is not
+         liftable by anything read so far.** The correction I issued was wrong and this is the retraction.
+      14. Wright, Carunchia Whetstine, Miracle & Drake 2006, J Food Sci
+         10.1111/j.1365-2621.2006.tb08887.x -- dimethyl trisulfide at 0.07 ppt in water against
+         0.80 ppb in whey protein isolate, a shift of about 11 000x. A dairy protein, but the second
+         genuine paired-threshold dataset anywhere in reach and on a SULFUR compound.
+      15. Xu, Bi, Zhang, Pan, Lao, Shen & Wu 2022, Food Science (China)
+         10.7506/spkx1002-6630-20220613-128 -- pea protein isolate binding to beef aroma substances
+         WITH heat treatment, by the same group whose 2022 paper wave B26 just shipped.
+      16. Mohsin, Schmitt, Kanzler, Epping, Flemig et al. 2018, Food Chem. -- glucose/ALANINE
+         melanoidins, elemental analysis over 130 to 200 C, C/N 13 to 21. A different amine, but a
+         real temperature series across the cooking window, and the melanoidin question is now open as
+         a spread rather than closed.
+      Also worth having if cheap: Zhou, Boatright & Johnson 2002, J Food Sci
+      10.1111/j.1365-2621.2002.tb11374.x (2-pentylpyridine binding to soy at 4, 25 and 74 C -- and
+      2-pentylpyridine got a registry id today); Utz, Spaccasassi, Kreissl, Stark, Tanger et al. 2022,
+      Foods 11:412 (sensomics decoding of pea protein ISOLATES, where Trikusuma gives one beverage).
+      **IDENTIFIERS.** DOIs below are the ones the search results themselves printed in their links,
+      so they are read off a source and not recalled. Where a link gave only an Elsevier PII, the PII
+      is given instead and resolves directly at `sciencedirect.com/science/article/pii/<PII>`; a DOI
+      is NOT invented for those. Anything fetched must have its DOI confirmed from the PDF before it
+      enters `data/keys/papers.yml`, because the citation gate resolves what it is given.
+      | # | paper | identifier | basis |
+      |---|---|---|---|
+      | 1 | Sun 2025, Food Hydrocolloids | PII `S0268005X25002863` | link only |
+      | 2 | Aspelund & Wilson 1983, JAFC | `10.1021/jf00117a019` | printed in link |
+      | 3 | Crowther, Wilson & Glatz 1980, J Food Process Eng | `10.1111/j.1745-4530.1980.tb00249.x` | printed in link |
+      | 4 | Guo 2019, Food Chem | PII `S0308814619306120` | link only |
+      | 5 | Selke, Frankel & Neff 1978, Lipids | `10.1007/BF02533622` | printed in link |
+      | 6 | Frankel, Neff & Selke 1981, Lipids | `10.1007/BF02534950` | printed in link |
+      | 7 | Luo 2024, Compr Rev Food Sci Food Saf | `10.1111/1541-4337.13389` | printed in link |
+      | 8 | Zheng 2022, Nutrients 14:1364 | `10.3390/nu14071364` | MDPI pattern from 2072-6643/14/7/1364 |
+      | 9 | Wondrak 2002, Biochem Pharmacol | PII `S0006295201009157` | link only |
+      | 10 | Zheng 2023, Food Chemistry: X | PII `S2590157523003632` | link only |
+      | 11 | Coukos & Moellering 2021, ACS Chem Biol | `10.1021/acschembio.1c00553` (PMC8609522, open access) | ACS article id cb1c00553 in the PDF filename |
+      | 12 | Gokmen, Kocadagli, Goncuoglu & Mogol 2012, Food Chem | PII `S0308814611014981` | link only |
+      | 13 | Suppavorasatit, Lee & Cadwallader 2013, J Food Sci | `10.1111/j.1750-3841.2012.03012.x` | printed in link |
+      | 14 | Wright 2006, J Food Sci | `10.1111/j.1365-2621.2006.tb08887.x` | printed in link |
+      | 15 | Xu, Bi, Zhang, Pan et al. 2022, Food Science (China) | `10.7506/spkx1002-6630-20220613-128` | printed in link |
+      | 16 | Mohsin 2018, Food Chem | PII `S0308814617319349` | link only |
+      | + | Zhou, Boatright & Johnson 2002, J Food Sci | `10.1111/j.1365-2621.2002.tb11374.x` | printed in link |
+      | + | Utz 2022, Foods 11:412 | **NO IDENTIFIER RECORDED** -- the MDPI issue number is not in the link, and guessing it would produce a DOI that resolves to the wrong paper. Search the title. | -- |
+      **EXACT TITLES for the seven with no confirmed DOI**, so they can be fetched by title alone.
+      Author lists and journals as the search results printed them.
+      1. Sun, H.; Liang, J.; Qian, Y.; Chen, X.; Zhao, L. "Interactions of pea protein with three
+         sulfur-containing flavor compounds: Insights into molecule structural, non-covalent, and
+         binding mechanisms." *Food Hydrocolloids*, 2025.
+      4. Guo, J.; He, Z.; Wu, S.; Zeng, M.; Chen, J. "Binding of aroma compounds with soy protein
+         isolate in aqueous model: Effect of preheat treatment of soy protein isolate."
+         *Food Chemistry*, 2019.
+      9. Wondrak, G. T.; Cervantes-Laurean, D.; Roberts, M. J.; et al. "Identification of
+         alpha-dicarbonyl scavengers for cellular protection against carbonyl stress."
+         *Biochemical Pharmacology*, 2002.
+      10. Zheng, L.; Bakker, W.; Miro Estruch, I.; Widjaja, F.; et al. "Comparison of the methylglyoxal
+         scavenging effects of kaempferol and glutathione and the consequences for the toxicity of
+         methylglyoxal in SH-SY5Y cells." *Food Chemistry: X*, 2023.
+      12. Gokmen, V.; Kocadagli, T.; Goncuoglu, N.; Mogol, B. A. "Model studies on the role of
+         5-hydroxymethyl-2-furfural in acrylamide formation from asparagine." *Food Chemistry*, 2012.
+      16. Mohsin, G. F.; Schmitt, F.-J.; Kanzler, C.; Epping, J. D.; Flemig, S.; et al. "Structural
+         characterization of melanoidin formed from D-glucose and L-alanine at different temperatures
+         applying FTIR, NMR, EPR, and MALDI-ToF-MS." *Food Chemistry*, 2018.
+      +. Utz, F.; Spaccasassi, A.; Kreissl, J.; Stark, T. D.; Tanger, C.; et al. "Sensomics-Assisted
+         Aroma Decoding of Pea Protein Isolates (Pisum sativum L.)." *Foods* 2022, 11, 412.
+      **DELIBERATELY NOT FETCHED, with the reason, so nobody re-proposes them.**
+      Xiao 2023 and Gao 2023 are density functional theory: standing owner policy, no DFT numbers.
+      Zhu 2023 (kafirin), Zhou 2022 (ozonolysis), Jakob 2024 and He 2020 (biorefinery catalysis),
+      Moon 2026 (allulose storage), Wang 2023 (black garlic), Tang 2019 (hydrothermal liquefaction)
+      and the three soil-melanoidin papers are the wrong system. Sessa 1977, Trindler 2022,
+      Reineccius 2023, Kinsella 1982/1989 and Chen 2025 are reviews whose primary sources are mostly
+      already here. Xiang 2023, Nedele 2022, Li 2023, Tran 2025 and Mehle 2020 all compute odour
+      activity in a plant matrix using WATER thresholds, so they cannot lift the `matrix_oav` refusal,
+      which is the thing that needed lifting; Mehle in particular cannot help the `moisture_aw` axis
+      either, because that axis is blocked for a structural reason (only the trunk lane carries a
+      water-activity term) and not for want of claims.
+- [ ] **SEARCH-SIX (2026-09-09). The six gaps a literature search could still close, and the reason the
+      rest cannot.** Asked after the reading audit emptied `data/articles/`, so this list is what remains
+      once 228 papers on disk have all been read. Each carries a prior that a usable number exists.
+      The prior matters: a search that comes back empty is only informative if the odds were stated first.
+      1. **Do alpha-dicarbonyls oxidise thiols to disulfides in water, and has anyone measured a rate
+         constant or a barrier for it?** The step wave B27 needs. Whitfield 1999 proposes the mechanism,
+         offers two supporting negatives and measures nothing, so the wave would fit a constant with no
+         independent anchor. Likely physical-organic, not food. **25 %.**
+      2. ~~**Has the elemental C/N of glucose-glycine melanoidins been measured at more than one
+         temperature?**~~ **ANSWERED THE SAME DAY, FROM THIS DISK, AND THE SEARCH SHOULD NOT HAVE BEEN
+         PROPOSED.** Both papers named as "where to look" were already here and already dossiered:
+         `Cammerer1994.pdf` / `cammerer1994_extraction.md` IS Cammerer & Kroh 1995, and
+         `martins2003c.pdf` / `martins2003c_extraction.md` IS Martins & van Boekel 2003
+         (10.1016/S0308-8146(03)00219-X). The lesson is the one the reading audit exists for: a gap
+         asserted from a single paper's citation list, without checking the corpus, is not a gap.
+         WHAT THEY SAY, and it reverses the reading recorded earlier the same day: Martins measures
+         glucose + glycine C/N at **11 (120 C pH 6.8), 15 to 11 (100 C pH 6.8) and 19 to 16 (100 C
+         pH 5.5)**, and compiles nine more literature values from 7 to 13 including Cammerer's own
+         **7 at 60 C and 9 at 100 C**. So the trunk's 8.42 to 9.94 is not comfortably above Mundt's
+         70 C floor -- it sits BELOW the nearest same-system measurements at cooking temperature,
+         between two sources that disagree with each other by more than either disagrees with the
+         model. `species.py` now carries both, and the C/N diagnostic should be read as a spread and
+         not as a bound. The wave that would change it still needs a second nitrogen pool and a
+         branching ratio, which nothing on disk measures.
+      3. **What is the first-order loss rate of HMF in aqueous sugar-amine systems between 50 and
+         150 C?** `k5a` declared gap G2 names this exact window as empty, and Goncuoglu Tas 2016 now
+         sizes the consequence at 23 000x. **55 %.** SEARCHED 2026-09-09: the first phrasing returned
+         nothing; the second returned formation barriers, biorefinery systems and one DFT paper (out
+         of scope by standing policy). The only hit that is a DEGRADATION measurement in an amino-acid
+         system is **Gokmen, Kocadagli, Goncuoglu & Mogol 2012, Food Chem., "Model studies on the role
+         of 5-hydroxymethyl-2-furfural in acrylamide formation from asparagine"** (about 67 % of the
+         HMF degraded in an asparagine + HMF pot). It is NOT on disk, though two dossiers already cite
+         it, and it is the same group as `kocadagli2016`, `goncuoglu2016` and `hamzalioglu2026`, whose
+         papers this repository leans on. Also checked and rejected: `lee2024`, already on disk, whose
+         `k_d` is a vapour-loss term the paper says has no identified mechanism, not a chemical rate.
+      4. **What branch fraction of linoleate hydroperoxide decomposition goes to 2-pentylfuran, and of
+         oleate hydroperoxide to nonanal?** The panel refuses both targets outright (wishlist sec. 3)
+         for want of a measured branch fraction, not for want of a lane. **45 %.**
+      5. **Have paired odour thresholds been measured for one compound in water and in a plant protein
+         isolate?** Hong 2020's soy paste is the only such dataset in the corpus. A second would decide
+         whether Amendment 6's ~25 % reversible cap -- which wave B26 has now broken on a real hold-out
+         row -- transfers to plant matrices at all. **40 %.**
+      6. **Have aroma binding constants for pea or soy protein been measured above 60 C?** B26's pea
+         constant is at 37 C, a mouth temperature, and the wave says plainly that nothing licenses it at
+         90 or 140 C. **30 %.**
+      **WHY THE REST IS NOT SEARCHABLE.** Every section-1 entry of the data wishlist asks for a
+      fed-intermediate rate at the lane's reference temperature, which is an experiment. The
+      per-amino-acid SECOND-ORDER Strecker constant in water has now had four laboratories read against
+      it and every one printed a barrier or a yield instead, so "nobody has measured it" is the likeliest
+      reading rather than "we have not found it". Hwang 1995's isotope splits live in its figures. Deng
+      2022's 100 and 130 C methional rows were not run. And the thiol sink itself is the vial experiment
+      in the introduction's section 8: about 130 vials, two temperatures, thiols and disulfides in one run.
+- [x] **ROUTING (2026-09-10). CLOSED, and it was never a routing problem.** This was listed as a
+      modelling problem no paper could close: 2-pentylfuran needed "a lipid charge these matrices can
+      integrate", because the rows asking for it appeared to be scored against a hexanal the lipid
+      lane does not produce. **That diagnosis was wrong.** The lane produces both; `_TARGET_LANE` had
+      no entry for the new species, so the concentration loop reported it in mmol/L rather than ug/L.
+      One line. The lane answers it at 5.04 ug/L against 163 measured in the Trikusuma pot, a 32x
+      miss and in line with this panel's median of 31x. See the correction in
+      `kinetic_core_b28_prereg.md` section 7.
+- [ ] **CARRIED-VOLATILES (2026-09-10, found by a ship rule misfiring). Two panel rows measure what
+      the isolate brought with it, and the model predicts formation from zero.**
+      `pea_isolate_40C_PratapSingh2021` and `soy_isolate_40C_PratapSingh2021` are a **10-minute hold
+      at 40 C**. Essentially nothing forms in ten minutes at 40 C, so what was measured is the
+      isolate's carried load, not the cook's product. The model misses by three to four decades on
+      BOTH compounds in BOTH pots, and always has: hexanal 3357x and 6078x, 2-pentylfuran 8524x and
+      42301x. The hexanal misses predate every wave and nothing had named the cause.
+      This is the same thing the Trikusuma reading found from the other side: ten compounds sit above
+      their thresholds in a raw pea beverage **before any heat**, hexanal at 331 ug/L against a
+      threshold of 4.5. A benchmark whose control column is not declared as an initial condition
+      asks a formation model to reproduce a level it did not make.
+      THREE WAYS TO FIX IT, and the choice is the owner's. (i) Declare the control column as the
+      pot's INITIAL condition, which is what programme 7 already wants and which needs a field the
+      benchmark schema does not have. (ii) Score the DIFFERENCE, heated minus control, which is what
+      the model actually predicts -- available for Trikusuma, which prints both columns, and NOT for
+      PratapSingh, which prints one. (iii) Refuse rows whose thermal load cannot form what was
+      measured, on a stated criterion. Until one is chosen the two 40 C rows sit in the panel
+      contributing four of its worst misses for a reason that is not the model's chemistry.
+- [ ] **AUDIT-REMAINDER (2026-09-09). What the incorporation left as waves, each with what it needs.**
+      (i) **B27, the sink's oxidant. NOW PRE-REGISTERED AND NOT RUN**
+      (`results/validation/kinetic_core_b27_prereg.md`), so the declaration cannot be revised after an
+      outcome. Whitfield 1999 names the oxidant the three refused sink waves said
+      was missing -- the pot's own alpha-dicarbonyls, reduced to hydroxyalkanones -- and prints NO rate, no
+      order and no barrier for it, so it is a mechanism proposal with two supporting negatives. Two hard
+      facts make this a different question from B17/B25 rather than a fourth structure: `OX` is charged at
+      1 mmol/L in 27 systems and in NONE of the 12 fed 145 C systems nor in either Whitfield pot, `OXR` is
+      zero everywhere, and `ch_dimer_*` is first order in `OX` -- so those pots make STRUCTURALLY zero
+      disulfide while both dimerisation constants sit pinned at the top of their bands. And no reaction
+      anywhere makes DPO, TDP, DDP or MGO from norfuraneol, so a dicarbonyl-sourced oxidant would be
+      exactly zero in the very pot that must show 35 % disulfide -- though the paper MEASURES three
+      diketones in that pot (Table 1 rows 1-3). The missing thing is a source step, not a substrate.
+      New fit row available: the 35 % MFT disulfide share at 140 C, a within-study ratio in a pot the
+      objective already simulates and the only disulfide constraint outside 115-120 C.
+      (ii) **The fed-row charge corrections**, which must ride in that wave because the generators are
+      frozen by manifest: Whitfield norfuraneol 20 -> 50 mmol/L and H2S 40 -> ~97 (2.5x low, and the H2S
+      steps are second order, so it propagates); `whitfield_nf_cys_MFT`'s target 0.150 is the paper's FREE
+      MFT where total is 0.230 (0.19 dex, a third of a sigma); the pot's buffer upgraded from ASSUMED to
+      the printed 0.5 M phosphate pH 4.5.
+      (iii) **The four trunk constants and the melanoidin repeat unit** recorded above; each needs a
+      pre-registration that says which matrix it claims to model, because the hazelnut and the glass
+      disagree on the dicarbonyl ORDER as well as on the rates.
+      (iv) **Re-deriving Amendment 6's ~25 % reversible cap**, which B26 exceeded on a real hold-out row.
+      The cap came from one compound in beef and one dairy protein and has never been re-computed on a
+      plant matrix.
+      (v) **The pea binding constant at process temperature.** Bi's numbers are 37 C, a mouth temperature.
+      Nothing on disk measures a plant-protein binding constant at 90 or 140 C, and the covalent layer's
+      own note is that the sites are charged once at the start of the cook.
+- [ ] **Programme 7 reading log (2026-09-09, trikusuma2020, the isolate's carried volatiles).** The raw
+      3 % w/w pea beverage, before any heat, carries TEN compounds above their own thresholds (the paper's
+      asterisks and this repository's arithmetic agree on which ten): hexanal 331 ug/L against a 4.5
+      threshold (odour activity 74), isovaleric acid 1010 against 120, 2-pentylfuran 59.4 against 6,
+      1-octen-3-ol 7.13 against 1, nonanal 8.24 against 1, p-vinylguaiacol 33.8 against 3,
+      (E,E)-2,4-nonadienal 0.71 against 0.09, methional 0.55 against 0.2, 2-acetyl-1-pyrroline 0.29 against
+      0.14, and IBMP 0.031 against 0.002 (activity 15.5, the highest in the pot). UHT at 140 C / 6 s roughly
+      doubles most of them and multiplies (E,E)-2,4-decadienal by 780x. THE POINT FOR THE MODEL: the
+      benchmark's measured values are a heated pot MINUS a starting pot that was already loaded, and the
+      core predicts formation from zero. Programme 7 needs the control column as a declared initial
+      condition, not just the heated column as a target. The 2-acetyl-1-pyrroline threshold is printed as
+      0.14 in that table and quoted as 0.1 in its own text; `desirable_targets.yml` carries 0.1 from
+      Buttery 1983 read directly, which is the primary source.
+- [x] **AUDIT-FINDINGS (2026-09-09, from the forty-three papers the reading audit found unread). Every defect **[CLOSED 2026-09-10: every defect below was corrected or recorded; see AUDIT-INCORPORATION above. What it left as waves is AUDIT-REMAINDER.]**
+      below is stated with its SIZE, so that none is either ignored or over-dramatised.**
+      **In fit rows (both real, both small).** (i) Every B2.x generator configures the Whitfield 1999 pot at
+      norfuraneol 20 mmol/L and hydrogen sulfide 40 against the paper's printed 50 and about 97
+      (`whitfield1999_extraction.md` section 3 item 6). Sized on the shipped B9 vector: the predicted yield moves
+      from 0.0685 to 0.0766 mol %, **1.12x = 0.05 dex against the row's own sigma of 0.5**, so it is a tenth of one
+      sigma and B9 stands. (ii) `whitfield_nf_cys_MFT` targets 0.150 mol %, which is the paper's FREE MFT; total
+      MFT in that pot is 0.230, because a third of it is disulfide-bound. **0.19 dex**, a third of a sigma. Both
+      corrections belong in the next sulfur wave, not in an edit: the generators are frozen by manifest.
+      **In shipped constants (sized against a second laboratory or a second reading).**
+      `k_da_sink` is carried at 0 as "a prediction the data may reject"; Göncüoğlu 2016 measures 130e-3 /min in
+      roasted hazelnut, so **the prediction is rejected**. `k_go_sink` carries a barrier FIXED TO ZERO by its
+      authors; the same paper measures 18 -> 61 -> 290e-3 /min over 150-170 C, so **the zero barrier is refuted**
+      (the 20 C window is too narrow for a credible barrier of its own). `k_hmf_self` runs **23 000x slower** than
+      that laboratory's HMF sink, which puts a measured size on the "EXPECT HMF TO BE OVER-PREDICTED" warning the
+      furanic channel already prints. `k_odg_da` disagrees by **466x**. Three others agree inside a factor of two
+      (`k_tdg_ddg` 1.5x, `k_ddg_hmf` 1.13x, `k_go_sink`'s rate 1.9x), which is the first cross-laboratory
+      agreement the trunk has ever had.
+      **In the melanoidin pool.** `MELANOIDIN_REPEAT_UNIT_CARBON = 8` (six carbons from 3-deoxyglucosone plus two
+      from an intact glycine) sets a structural FLOOR of C/N = 8.0. Mundt & Wedzicha 2004 measure **7.64 +/- 0.21**
+      on a dialysed glucose-glycine polymer with no protein in it, by two independent methods that agree, because
+      about two thirds of the incorporated glycine arrives DECARBOXYLATED and contributes one carbon per nitrogen,
+      not two. The floor is falsified at about 1.7 analytical standard deviations. The measurement is at 70 C and
+      pH 5.5 and the authors say the ratio rises with temperature, so it is a lower bound for a 120 C polymer and
+      the trunk's 8.42 to 9.94 clears it; what is falsified is the STRUCTURE, not the answer.
+      **In the thiol sink's own sources.** The paper `k_thioether` cites prints **no rate constant, no order and
+      no barrier**: the 9.8e-4 /s is derived from "17 % remaining in 30 min", which the parameter's note should
+      say. Its measured binding capacity is **>= 0.028 mmol thiol per g of melanoidin**, about 320x below the
+      8-10 mmol/g the `MELE` pool is sized on, and Charles-Bernard's own number is a saturating dose above the
+      stoichiometric ceiling, not a titre. `THIOL_CHANNELS` calls the van Seeventer channel "ZERO in thiol" on the
+      authors' within-run fit; across pots a tenfold larger thiol pool loses at least fifteen times more per day,
+      which is first order, not zero.
+      **In benchmarks.** `thiamine_cys_glucose_120C_Bolton1994.json` computes two precursor molarities from
+      anhydrous masses where the paper specifies monohydrates (glucose 10 % high, cysteine 11 % high), and its
+      note that the glutamate is "not a reactive precursor" understates a pot holding about 1 mol/L of it.
+      `pea_isolate_uht_140C_Trikusuma2019.json` carries `concentration_mM: 1000` and `water_activity: 0.98`,
+      neither of which is printed in the paper.
+      **In the inventories.** `k3_final_parameter_inventory.md` rows B2.7 and B2.10 state furfural's pH collapse
+      as "15-49x"; the verified tables give 48.6x to more than 1510x, and the MFT and FFT figures in the same row
+      are exact, so the furfural figure looks to have been computed from a damaged text layer.
+      **Naming collisions found and now aliased in `scripts/reading_audit.py`:** `chan2005.pdf` is the 1994 RSC
+      chapter, `rainercremer2000.pdf` is Cremer & Eichner 2000, `parker2012.pdf` is the paper `parker2013` is
+      written from, `Kocada2016.pdf` is the JAFC Kocadagli, `Zhai2023b.pdf` already had a dossier, `Gursul2020.pdf`
+      already had one, and two Goncuoglu files and `jf0480290.pdf` are transliterations or publisher ids.
+- [x] **READING-ORDER (2026-09-09, after the first thirteen). Forty-five PDFs are still unread, and the question **[CLOSED 2026-09-10: zero unread on 245 PDFs. Kept as the record of how the question was answered gap by gap.]**
+      "is what we lack on disk or not in the literature" now has an evidence-based answer, gap by gap.**
+      ON DISK, decidable without a new download: (i) the acrylamide elimination's two-laboratory disagreement
+      (85.1 +/- 14 against 167.2 +/- 4.3 kJ/mol -- both numbers read today); (ii) B24b's tetrahydropyridine branch
+      (schieberle2005, read today); (iii) B21b's Amadori conflict (Martins' own series are the B1 fit rows);
+      (iv) B22b's methionine Amadori route (Deng 2022's two 120 C series, dossiered); (v) matrix odour thresholds,
+      which `matrix_oav` refuses today -- vega1994 (gelatin, several temperatures) and brewer1995 (a MEAT model) are
+      both on disk unread; (vi) a second laboratory for the TRUNK (Goncouglu2016, hazelnut roasting, multiresponse,
+      a real matrix) and the melanoidin pool's own composition (fang2009, fang2010, mundt2004), which the B1
+      C/N diagnostic has never been checked against.
+      READ THESE FIRST, because they are the sulfur lane's own shipped sources and have never been dossiered:
+      `cerny2003` (JAFC 51:2714, "Formation of Aroma Compounds from Ribose and Cysteine" -- **26 references in this
+      repository**, the intact-skeleton route r_ddp_mft), `hofmann2001` (= the "Hofmann 2002" of `k_thioether`'s
+      anchor, JAFC 50:319, thiols and melanoidins in coffee staling), `vanseeventer2001` (the 50 C zero-order thiol
+      loss, a declared HOLD-OUT), `whitfield1999` (the fed norfuraneol pot). Three sink structures have been refused
+      on an objective built without ever reading these four; that ordering should be corrected before anyone
+      concludes the objective's weighting is the whole story.
+      NOT on disk and NOT fetchable -- these are author requests or an experiment, not downloads: the isotope
+      splits Hwang 1995 draws on its Figures 1-4 (the clean per-amino-acid nitrogen share); Deng 2022's missing
+      100 and 130 C methional rows; a per-amino-acid SECOND-ORDER Strecker constant in water (four laboratories
+      have now been read and every one printed a barrier or a yield instead, so the likeliest reading is that no
+      such constant has been measured); and the thiol sink itself, which B25's outcome says is an experiment.
+- [x] **PDF-AUDIT (2026-09-09). Fifty-nine papers are on disk and have never been read.** `data/articles/` holds 228 **[CLOSED 2026-09-10: `reading_audit` reports 245 read, 0 unread. Kept as the record of what the audit found.]**
+      PDFs against 178 per-paper dossiers; 59 have no dossier named after them, and several hit gaps this repository
+      names in its own artifacts. The count is now a command, `python scripts/reading_audit.py` (the paper registry
+      deliberately ignores the local PDFs so its output does not depend on the machine; this is the other half), and
+      it also reports the 14 dossiers whose paper is not on this disk. Sorted by what they would unlock:
+      **(A) The acrylamide lane's own named gap, "a second laboratory's constants".** knol2005 (JAFC 53:6133,
+      "Toward a Kinetic Model for Acrylamide Formation in a Glucose-Asparagine Reaction System"), knol2009 (Food
+      Chem 113:103), knol2010 (Food Chem 120:1047), claeys2005 (Biotechnol Prog 21:1525, "Effect of Amino Acids on
+      Acrylamide Formation and ELIMINATION Kinetics" -- the lane's elimination step is the one the panel says is
+      inverted), devleeschouwer2009 (Food Chem 114:535) + devleeschouwer2009b. READING 2026-09-09.
+      **(B) The amino-acid identity question that refused B22 and blocks B19.** hwang1995 (JAFC 43:179, "Relative
+      Reactivities of Amino Acids in Pyrazine Formation") and hwang1995b (JAFC 43:2917, the same for pyridines and
+      pyrroles) are within-study identity ratios by construction; amrani-hemaimi1995 (JAFC 43:2818) is the isotope
+      source the B19 draft calls "on disk, never used"; martin2001 (JAFC 49:3885, Strecker aldehydes AND pyrazines in
+      one fried-potato pot); huang2016 (J Food Process Eng, 2- and 3-methylbutanal kinetics -- check whether it prints
+      the concentrations huang2017 lacks). READING 2026-09-09.
+      **(C) The piece that refused B24.** schieberle2005 ("Mechanistic Studies on the Formation of the Cracker-like
+      Aroma Compounds 2-Acetyltetrahydropyridine and 2-Acetyl-1-pyrroline") is exactly the competing branch B24's
+      section 6 says the arm lacked. READING 2026-09-09.
+      **(D) A second laboratory for the TRUNK, and the melanoidin pool's own composition.** Goncouglu2016 (hazelnut
+      roasting, MULTIRESPONSE kinetics, a real food matrix) and Goncouglu2026; Kocada2016 (NaCl on the alpha-dicarbonyls
+      and HMF -- B21's open item is the dicarbonyl levels in water); fang2009 ("Fate of the Amino Acid in
+      Glucose-Glycine") and fang2010 (13C-labelled melanoidins) and mundt2004 (melanoidin composition from glucose +
+      glycine) bear on the trunk's MEL_C / MEL_N pools and the C/N diagnostic B1 carries; lee2022 / lee2024 (model
+      cakes); ramirez-jimenez2000 (browning indicators in bread); vanboekel2005 (a poster abstract of the very
+      glucose-glycine model B1 is fitted on).
+      **(E) The sulfur lane, including three papers whose numbers are already SHIPPED with no standalone dossier.**
+      hofmann2001 (= the "Hofmann 2002" of `k_thioether`'s source anchor, JAFC 50:319, "Chemical Interactions between
+      Odor-Active Thiols and Melanoidins"), charles-bernard2005 (the 8-10 mmol sites per g that recasts k_thioether as
+      bimolecular), vanseeventer2001 (the 50 C zero-order thiol loss, a declared HOLD-OUT), whitfield1999 (the fed
+      norfuraneol pot), cerny2003 (26 references in this repository, the intact-skeleton route r_ddp_mft), frankel1989
+      (THE lipid lane's whole six-product slate, wave B6) -- every one of these carries a number the engine ships and
+      none has a dossier of its own. Also cerny2008 (HMP identified), mottram1995 (alkanediones + H2S), yaghmur2005
+      (furfural + cysteine), Zhai2023b (TTCA), bolton1993, nedvidek1992, schieberle1989, solina2007.
+      **(F) The matrix layer.** damodaran1981 (carbonyl + soy protein thermodynamics) and vega1994 (the gelatin
+      thresholds) are cited through `k2_matrix_and_thresholds.md` but have no dossier; andriot2000 (methyl ketones +
+      beta-lactoglobulin), jf0480290 (phenolics + proteins), meynier1995, guo2020, Barallat-Perez2024 (lupin),
+      brewer1995 (lipid thresholds in a MEAT model -- matrix thresholds are what `matrix_oav` refuses today).
+      **(G) Plant matrices and the isolate's carried volatiles (programme 7).** bi2020 (key aroma of raw and roasted
+      peas), trikusuma2020, Conti2025, Conti2025b, Gursul2020, Wang2025, bornhorst2017 / bornhorst2017b.
+      Identified since: `1-s2.0-S0308814622010068-main` is Bi, Pan, Zhang et al., Food Chem 389:133044,
+      "Non-covalent interactions of selected flavors with PEA PROTEIN: role of the molecular structure of the flavor
+      compounds" -- the matrix layer's binding brackets are for covalent adducts and this is the non-covalent
+      partner, on the very isolate the matrix table charges; `jf0480290` is Rawel, Meidtner & Kroll 2005, JAFC
+      53:4228, "Binding of Selected Phenolic Compounds to Proteins"; `parker2012` is Parker's review "The kinetics of
+      thermal generation of flavour" (JSFA, doi 10.1002/jsfa.5943), a companion to the parker2013 chapter already
+      dossiered and probably the same fetch list.
+      DONE 2026-09-09: buttery1983 was read for one number and the claim it contradicted was corrected -- the
+      2-acetyl-1-pyrroline threshold IS on disk (Table II and p. 825, 16 judges, "0.1 part per 10^9 parts of water"),
+      so `desirable_targets.yml` no longer carries a null there.
+- [x] **W8 -> WAVE B30 (2026-09-10). RUN AND REFUSED BEFORE ANY CONSTANT WAS FITTED, and the
+      entry's own premise was wrong.** W8 said "the lane has no pH term on it". It has one, and a
+      principled one: B2.1 gave the sulfide two protonation states and let both add. The question was
+      never whether a pH term exists but whether the one that exists is right, and on the only pot in
+      the corpus measured at TWO pH values by one laboratory it is not: the model gives 2x MORE thiol
+      at pH 6.5 where Whitfield measures at least 150x LESS. Sign wrong, ratio out by about 300x.
+      TWO ATTRIBUTIONS. The thiolate loss carries almost none of it (0.49 -> 0.39 with it off). And
+      the hydrosulfide branch is not active on this pot AT ALL -- switching it off changes nothing to
+      four figures -- because that branch exists on the deoxypentosone and furfural routes and the
+      NORFURANEOL route has no hydrosulfide partner. So on the one pot with a measured pH pair, the
+      lane's pH mechanism is structurally absent. AND SUPPLYING IT WOULD MAKE IT WORSE: more
+      hydrosulfide at higher pH means faster addition means more thiol, and the measurement wants
+      less. The collapse is in the substrate or the sulfide budget, and neither is modelled.
+      A successor needs a pH term on the SUBSTRATE side before any slope is fitted to Cerny's ladder
+      or Mottram's pair, because those would otherwise be fitted on top of a refuted mechanism.
+      SUPERSEDED, and the original text follows for the record.
 - [ ] **W8 (from the 2026-09-07 reads of Whitfield 2001, Cerny 2007, Mottram 2002). pH on the thiol
       FORMATION steps.** The corpus now holds three pH contrasts on the pentose-cysteine path: the fed
       norfuraneol + cysteine pot at pH 4.5 (Whitfield 1999, a fit row) vs 6.5 (Whitfield 2001: free MFT
@@ -1693,12 +2313,43 @@ means a 3x absolute needs every branching fraction to ~20 %, which single-endpoi
       with the dicarbonyl order GO ~ MGO > 3-DG, the reverse of aqueous Leitzen 2021: matrix, again.
 - [ ] **W5 (kept, lower priority).** Lumped per-product surrogate on the time series; the network
       stays as hypothesis generator and refusal engine.
-- [ ] **W6 (found 2026-09-07 on re-reading Wang 2026 and Meng 2017).** A CYSTEINE-XYLOSE AMADORI
-      species on the sulfur lane that releases its cysteine sulfur (retro-Amadori / 1,2-enolisation
-      to the deoxypentosone + cysteine). The core's `ARP` is a sulfur-free pentose Amadori, so the
-      three fed-Amadori series in the corpus (Wang 2026's five-rung ladder, Zhai 2023, Kang 2026)
-      cannot be charged at all today; WANG-01/02 refuse for want of a sulfur source, not for the
-      unstated pH. Wang's ladder is a paired temperature-time design (85 C/80 min ... 125 C/120 min,
+- [x] **W6 CLOSED 2026-09-10 WITHOUT BUILDING THE SPECIES, and the reason is that no dataset in the
+      corpus can fit one.** The entry asked for a cysteine-xylose Amadori species. Three checks, in
+      order, and each one shrank the ask:
+      (i) The premise was wrong: wave B15 had already charged Wang's ladder as TTCA and swept its
+      unstated pH, so one of the "uncharged" series is charged and one of its two claims AGREES and
+      carries the independent headline.
+      (ii) Of the two datasets left, Zhai 2023 is not unused at all -- it is the ORIGIN of the
+      corpus's sulfur temperature ladder. And Kang 2026 **contains no kinetics whatsoever**: not one
+      rate constant, half-life, activation energy, reaction order or Arrhenius fit, with every
+      thermal experiment a single endpoint at 120 minutes. A species fitted on it could not be
+      fitted at all.
+      (iii) What was genuinely open was the SUBSTITUTION -- charging the thiazolidine for the
+      Amadori compound -- and that turned out measurable rather than arguable. Kang isolates and
+      stresses BOTH side by side: the Amadori compound loses 1.72x more at 40 C, 1.90x more at pH 9
+      and 1.69x more at water activity 0.843. **1.7 to 1.9 across three unrelated stresses**, which
+      is a declared band rather than a guess.
+      INSTALLED: `TTCA_FOR_AMADORI_STABILITY_RATIO_BAND` in `parameters_sulfur.py`, with the caveat
+      that it is a STORAGE-stability ratio at 4 to 40 C and not a rate ratio at cooking temperature.
+      The substitution is now declared with a size instead of being silent. THE SPECIES IS NOT BUILT
+      and should not be until a paper measures the Amadori compound's decomposition RATE.
+      Original text follows for the record.
+- [ ] **W6 (found 2026-09-07; PREMISE CORRECTED 2026-09-10 before anyone built on it).** A
+      CYSTEINE-XYLOSE AMADORI species on the sulfur lane that releases its cysteine sulfur
+      (retro-Amadori / 1,2-enolisation to the deoxypentosone + cysteine).
+      **WHAT THIS ENTRY GOT WRONG.** It said all three fed-Amadori series "cannot be charged at all
+      today" and that "WANG-01/02 refuse for want of a sulfur source, not for the unstated pH".
+      Wave B15, written the SAME DAY, had already charged Wang's ladder as TTCA 197 mmol/L in 0.2 M
+      phosphate and swept the unstated pH. Today's directional scorecard shows **WANG-02 AGREES**
+      and enters the independent headline, and **WANG-01 is not evaluable for exactly the unstated
+      pH** the entry said was not the reason -- its verdict flips, agreeing at pH 7 and disagreeing
+      at 5 and 9. So one of the three series is charged and scored.
+      **WHAT IS ACTUALLY LEFT, which is smaller and still real.** Zhai 2023 and Kang 2026 have
+      dossiers and NO benchmark bundle and no claim, so they are read and unused. And the Wang
+      charge is a DECLARED PROXY: TTCA is the cysteine-sugar thiazolidine, not a Cys-Amadori, and
+      whether it stands in for one is a question this entry should be asking and was not. The
+      species would replace a declared proxy with the thing itself and make two read datasets
+      usable -- a fair wave, on an honest statement of what it buys. Wang's ladder is a paired temperature-time design (85 C/80 min ... 125 C/120 min,
       Methods 2.3) at an unstated pH. Meng 2017 (MENG-01) stays not evaluable for its own reason
       (a fermented soy sauce with no precursor charge, mixed vessels) -- nothing to read there.
       Prerequisites: the Cys-Amadori synthesis papers already on disk (Zhai 2019 / Xu 2019 for the

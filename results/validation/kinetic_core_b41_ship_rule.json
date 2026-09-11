@@ -1,0 +1,156 @@
+{
+  "artifact": "kinetic_core_b41_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b41_ship_rule",
+    "generated_on": "2026-09-11",
+    "git": {
+      "commit": "c365533146db787e5d21919e4f912e992f64faac",
+      "short": "c3655331",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b41_ship_rule.py",
+    "wave": "B41",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b41_prereg.md",
+        "sha256": "b2f15e8c9e518547e2e50cb4ce989ce4c429f975828fd1fd9ebe5e2abfe02e16"
+      },
+      {
+        "path": "results/validation/kinetic_core_b41_fit_report.json",
+        "sha256": "4d37ce110800d3faa4d9b3144958d8e9a6d78fc7c534ea2860d4b4ad38b1c939"
+      },
+      {
+        "path": "results/validation/_b41_baseline/core_panel_scores_before_b41.json",
+        "sha256": "1a53e6383f03d683ed5c1753942aff37f4be066c555e98bf32553f0442cd6177"
+      },
+      {
+        "path": "results/validation/_b41_baseline/core_panel_scores_after_b41.json",
+        "sha256": "8d945ab27fda85e343fab5f89821a0785928dd15b8eca34eff8ec099b6cebac2"
+      }
+    ]
+  },
+  "rule": "SHIP if P1, P2 (Leitzen: 3,4-DGE < 10x, 3-DG <= 3x, HMF within 3 %, METHYLGLYOXAL within 3 % of 1.28x) and P3 (no row leaves the band); P4 reported (prereg sec. 5)",
+  "P1": {
+    "maxima_within_0p3_dex": true,
+    "tmax_in_brackets": true,
+    "chi2_reduced": 0.11589347241631102,
+    "held": true
+  },
+  "P2": {
+    "b39_delta_dex": 0.5656201217641403,
+    "b41_delta_dex": 0.49508700356741375,
+    "held": true
+  },
+  "P2_methylglyoxal_row": {
+    "fold_before_after": [
+      1.2809566500613123,
+      1.010171781531992
+    ],
+    "rule": "within 3 % of before or <= 3x",
+    "pass": true
+  },
+  "P2_3dg_row": {
+    "fold_before_after": [
+      1.1110425180991021,
+      1.2712448571778727
+    ],
+    "pass": true
+  },
+  "P4": {
+    "leitzen_fold_before_after": {
+      "3,4-dideoxyglucosone": [
+        32.434717221860275,
+        6.6282230255062276
+      ],
+      "3-deoxyglucosone": [
+        1.1110425180991021,
+        1.2712448571778727
+      ],
+      "5-Hydroxymethylfurfural (HMF)": [
+        11.930016272018708,
+        9.307565792217199
+      ],
+      "methylglyoxal": [
+        1.2809566500613123,
+        1.010171781531992
+      ]
+    },
+    "rule": "3,4-DGE after < 10x; HMF after within 3 % of before (or <= 3x)",
+    "pass": true
+  },
+  "P5": {
+    "n_pinned": 4,
+    "collinear_pairs": [],
+    "held": true
+  },
+  "P6": {
+    "left_band": [],
+    "entered_band": [
+      [
+        "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+        "5-Hydroxymethylfurfural (HMF)"
+      ],
+      [
+        "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+        "5-Hydroxymethylfurfural (HMF)"
+      ]
+    ],
+    "counts": {
+      "before": {
+        "within": 10,
+        "rows": 45
+      },
+      "after": {
+        "within": 12,
+        "rows": 45
+      }
+    },
+    "pass": true
+  },
+  "other_rows_moved": [
+    {
+      "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "fold_before": 2.047740794591987,
+      "fold_after": 1.033300307216494
+    },
+    {
+      "benchmark": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "fold_before": 3.5993329385119064,
+      "fold_after": 1.816241509160269
+    },
+    {
+      "benchmark": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "fold_before": 3.19398884725303,
+      "fold_after": 2.7437551488833485
+    },
+    {
+      "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "3,4-dideoxyglucosone",
+      "fold_before": 32.434717221860275,
+      "fold_after": 6.6282230255062276
+    },
+    {
+      "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "3-deoxyglucosone",
+      "fold_before": 1.1110425180991021,
+      "fold_after": 1.2712448571778727
+    },
+    {
+      "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "5-Hydroxymethylfurfural (HMF)",
+      "fold_before": 11.930016272018708,
+      "fold_after": 9.307565792217199
+    },
+    {
+      "benchmark": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
+      "compound": "methylglyoxal",
+      "fold_before": 1.2809566500613123,
+      "fold_after": 1.010171781531992
+    }
+  ],
+  "verdict": "SHIP"
+}

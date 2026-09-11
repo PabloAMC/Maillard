@@ -1,0 +1,77 @@
+{
+  "artifact": "kinetic_core_b24_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b24_ship_rule",
+    "generated_on": "2026-09-09",
+    "git": {
+      "commit": "489f9e5ff6cde8825b234c3f8fe3dda7113dfd2f",
+      "short": "489f9e5f",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b24_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b24_fit_report.json",
+        "sha256": "b310481af28c7ac0eaf989fb5accc82a2f5999026673f12945477ea61ab1f46c"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b24_prereg.md",
+  "rule": "SHIP if T1 (fed rows within 0.3 dex, proline rows within 0.5 and in order), T2 (no panel row moves 0.05 dex) and T5 (both identified, off their bounds) hold; T3 and T4 reported",
+  "cost": 53.69283076855413,
+  "n_rows": 5,
+  "frozen": {
+    "log10_k_pyrl_ap_100C": -2.561776899512073,
+    "log10_k_mgo_pro_100C": -6.620784383439292
+  },
+  "T1": {
+    "fed_pyrroline_dex": {
+      "hof_t7_e1_pyrl2_mgo10": 0.17578107775179794,
+      "hof_t7_e2_pyrl2_mgo2": 0.2984988309618871
+    },
+    "proline_dex": {
+      "hof_t9_pro400_mgo4": -1.2876375609418154,
+      "hof_t9_pro400_mgo40": 0.1279720645687032,
+      "hof_t9_pro400_mgo400": 1.1610683673935975
+    },
+    "proline_order_ok": true,
+    "pass": false
+  },
+  "T2": {
+    "n_compared": 39,
+    "worst_dex": 0.0,
+    "pass": true
+  },
+  "T3": {
+    "model_kj_mol": 590.9136781651249,
+    "chan1994b_kj_mol": 60.2,
+    "temps_c": [
+      75.0,
+      95.0,
+      115.0
+    ],
+    "rates_mmol_l_min": {
+      "75.0": 3.245169635011469e-14,
+      "95.0": 1.391272041424167e-08,
+      "115.0": 4.1487375092459776e-05
+    }
+  },
+  "T4": {
+    "model_mol_pct_of_mgo": 41.20352475017937,
+    "printed_mol_pct_of_mgo": 0.33,
+    "dex": 2.096420429409518
+  },
+  "T5": {
+    "sigma": {
+      "log10_k_pyrl_ap_100C": 0.5318726961374628,
+      "log10_k_mgo_pro_100C": 0.6640557235578926
+    },
+    "on_bound": {
+      "log10_k_pyrl_ap_100C": false,
+      "log10_k_mgo_pro_100C": false
+    },
+    "pass": true
+  },
+  "verdict": "DO NOT SHIP"
+}

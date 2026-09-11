@@ -74,3 +74,32 @@ def test_variant_a_an_override_block_switches_the_sites_on_as_yield_times_k_oson
     k = sulfur.sulfur_rate_constants_at(on, 418.15, 5.0)
     for osone in ("dpo", "tdp", "ddp"):
         assert k[f"ch_mele_from_{osone}"] == pytest.approx(expected)
+
+
+# ---- B25 (2026-09-09), the third sink structure: irreversible addition to the deoxypentosones -----
+from src.kinetic_core.parameters_sulfur import THIOL_ADDITION_BOUNDS_EA, THIOL_ADDITION_BOUNDS_LOG10K, thiol_addition_parameters  # noqa: E402
+
+
+def test_b25_the_four_addition_steps_exist_share_one_constant_and_balance():
+    by_key = {r.key: r for r in sulfur.SULFUR_REACTIONS}
+    for thiol in ("mft", "fft"):
+        for osone in ("dpo", "tdp"):
+            r = by_key[f"ch_add_{thiol}_{osone}"]
+            assert r.reactants == {thiol.upper(): 1, osone.upper(): 1} and r.products == {"OLG": 1, "FRAG_C": 5} and r.parameter_key == "k_add"
+    sulfur.validate_sulfur_balance(sulfur.FULL_REACTIONS)
+
+
+def test_b25_the_addition_is_inert_by_default_and_an_override_switches_it_on():
+    assert MEASURED_SULFUR["k_add"].k_ref == 0.0 and MEASURED_SULFUR["k_add"].order == 2
+    assert core_parameters(SULFUR)["k_add"].k_ref == 0.0
+    assert "thiol_addition" not in frozen_parameters(SULFUR)
+    assert THIOL_ADDITION_BOUNDS_LOG10K == (-6.0, 0.0) and THIOL_ADDITION_BOUNDS_EA == (10.0, 120.0)
+    on = core_parameters(SULFUR, frozen={"thiol_addition": {"log10_k_add_145C": -3.0, "ea_add_kj_mol": 50.0}})
+    off = core_parameters(SULFUR)
+    assert on["k_add"].k_ref == pytest.approx(1e-3) and on["k_add"].ea_kj_mol == 50.0
+    for key in off:
+        if key != "k_add":
+            assert on[key] == off[key], key
+    k = sulfur.sulfur_rate_constants_at(on, 418.15, 5.0)
+    assert k["ch_add_mft_dpo"] == pytest.approx(1e-3) and k["ch_add_fft_tdp"] == pytest.approx(1e-3)
+    assert thiol_addition_parameters()["k_add"].k_ref == 0.0

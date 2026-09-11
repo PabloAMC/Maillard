@@ -843,7 +843,8 @@ def test_network_shape_is_pinned():
     # channel, whose parents are all trunk species) and two on this lane
     # (HMFAD, DMHFS -- the two sinks that need a sulfur partner).
     # B11 (2026-09-07): + OXR (headspace reservoir) and OXV (dissolved-oxygen vacancy)
-    assert described["n_species"] == 57
+    # B39 (2026-09-11): + DGAL, 3-deoxygalactosone, the fed triangle's epimer.
+    assert described["n_species"] == 58
     # B7 adds ELEVEN steps to the TRUNK -- the furanic channel hangs there
     # because all four of its parents (Fru, 3-DG, 1-DG, MGO) are trunk species.
     # 15 through B6.

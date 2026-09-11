@@ -1,0 +1,82 @@
+{
+  "artifact": "kinetic_core_b29_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b29_ship_rule",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "4f0e2c7fa39fcf9033b0fc8f9933d61421db7cc8",
+      "short": "4f0e2c7f",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b29_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b29_fit_report.json",
+        "sha256": "249405ac9077105b784a73b824ebdc491085b336cc5e9efcf8f89487aaf3d73f"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b29_prereg.md",
+  "rule": "SHIP if T1 (both air/argon ratios on one multiplier), T2, T3 (air exactly 1) and T4 hold",
+  "T1": {
+    "rows": {
+      "arp_air_over_argon": {
+        "printed": 9.2,
+        "model": 2.1876378918254007,
+        "dex": -0.6238123902128198
+      },
+      "glc_air_over_argon": {
+        "printed": 3.5,
+        "model": 2.7556408888366732,
+        "dex": -0.10384542406041404
+      }
+    },
+    "model_ratio_of_the_two_pots": 0.7938762632996559,
+    "printed_ratio_of_the_two_pots": 2.6285714285714286,
+    "pass": false
+  },
+  "T2": {
+    "rows": {
+      "arp_aircu_over_air": {
+        "printed": 2.5,
+        "model": 1.38714120565479,
+        "dex": -0.25581933583576333
+      },
+      "glc_aircu_over_air": {
+        "printed": 1.9,
+        "model": 2.1420749028729826,
+        "dex": 0.052081051974223906
+      }
+    },
+    "pass": false
+  },
+  "T3": {
+    "parameters_identical": true,
+    "observable_identical": true,
+    "pass": true
+  },
+  "T4": {
+    "sigma": {
+      "log10_f_argon": 42.08508111561194,
+      "log10_f_air_cu": 18.966831202768297
+    },
+    "identified": {
+      "log10_f_argon": false,
+      "log10_f_air_cu": false
+    },
+    "on_bound": {
+      "log10_f_argon": true,
+      "log10_f_air_cu": true
+    },
+    "pass": false
+  },
+  "diagnosis": {
+    "oxidative_share_of_the_strecker_aldehyde": {
+      "fed_amadori": 0.545927452170818,
+      "glucose_glycine": 0.6406133007722868
+    },
+    "what_it_means": "CORRECTED ON REVIEW, 2026-09-10. The first run measured AKG alone -- glyoxal's Strecker product -- found it 100 % oxidative in both pots, and concluded that a non-oxidative route to the Strecker aldehyde was missing. That was an artefact of the observable: the trunk HAS a non-oxidative route (Amadori -> 1-deoxyosone -> methylglyoxal -> AKM), and summed over both Strecker products the non-oxidative share is 45 % in the Amadori pot and 36 % in the sugar pot. THE REAL FINDING IS THE ORDER. Hofmann's Amadori pot is the MORE oxygen-sensitive (9.2x against 3.5x), so its oxidative share must be the larger. The model's is the SMALLER. That is a statement about the trunk's branching between the oxidative route to glucosone and the non-oxidative routes to the deoxyosones, and it is the reason one multiplier cannot serve both pots."
+  },
+  "verdict": "DO NOT SHIP"
+}

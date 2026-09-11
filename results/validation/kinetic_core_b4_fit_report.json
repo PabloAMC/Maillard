@@ -1,7 +1,7 @@
 {
   "wave": "B4 -- matrix / OAV output layer",
   "generated_by": "scripts/generators/generate_kinetic_core_b4_fit.py",
-  "generated_on": "2026-08-29",
+  "generated_on": "2026-09-09",
   "declaration": {
     "document": "docs/reference/FIT_HOLDOUT_DECLARATION.md, amendments 1-6",
     "fit_rows_used": [
@@ -49,9 +49,9 @@
         "k_g_l_per_g": 0.004908446074631294,
         "n_fit_rows": 3,
         "members": [
-          "isoamyl_acetate",
-          "amyl_acetate",
-          "ethyl_pentanoate"
+          "isoamyl_acetate@skim_milk",
+          "amyl_acetate@skim_milk",
+          "ethyl_pentanoate@skim_milk"
         ],
         "reference_loading_g_per_l": 33.9,
         "method_family": "headspace",
@@ -61,23 +61,25 @@
         ]
       },
       "n_alkanal": {
-        "k_g_l_per_g": 0.01151,
-        "n_fit_rows": 1,
+        "k_g_l_per_g": 0.054037829342045186,
+        "n_fit_rows": 2,
         "members": [
-          "hexanal"
+          "hexanal@skim_milk",
+          "hexanal@pea_protein_1pct"
         ],
         "reference_loading_g_per_l": 33.9,
         "method_family": "headspace",
         "sign": "suppression",
         "sources": [
-          "Meynier2002_extraction.md"
+          "Meynier2002_extraction.md",
+          "bi2022_extraction.md"
         ]
       },
       "diketone": {
         "k_g_l_per_g": 0.07300000000000001,
         "n_fit_rows": 1,
         "members": [
-          "diacetyl"
+          "diacetyl@caseinate_1pct"
         ],
         "reference_loading_g_per_l": 10.0,
         "method_family": "headspace",
@@ -90,7 +92,7 @@
         "k_g_l_per_g": -0.023,
         "n_fit_rows": 1,
         "members": [
-          "delta_decalactone"
+          "delta_decalactone@caseinate_1pct"
         ],
         "reference_loading_g_per_l": 10.0,
         "method_family": "headspace",
@@ -103,7 +105,7 @@
         "k_g_l_per_g": -0.062,
         "n_fit_rows": 1,
         "members": [
-          "furaneol"
+          "furaneol@caseinate_1pct"
         ],
         "reference_loading_g_per_l": 10.0,
         "method_family": "headspace",
@@ -116,9 +118,9 @@
         "k_g_l_per_g": 0.024848979576924935,
         "n_fit_rows": 3,
         "members": [
-          "2_heptanone",
-          "2_octanone",
-          "2_nonanone"
+          "2_heptanone@beta_lactoglobulin",
+          "2_octanone@beta_lactoglobulin",
+          "2_nonanone@beta_lactoglobulin"
         ],
         "reference_loading_g_per_l": 0.0,
         "method_family": "headspace",
@@ -127,8 +129,21 @@
           "andriot2000 via k2"
         ]
       },
+      "alkenol": {
+        "k_g_l_per_g": 0.04139999999999999,
+        "n_fit_rows": 1,
+        "members": [
+          "z_2_penten_1_ol@pea_protein_1pct"
+        ],
+        "reference_loading_g_per_l": 10.0,
+        "method_family": "headspace",
+        "sign": "suppression",
+        "sources": [
+          "bi2022_extraction.md"
+        ]
+      },
       "branched_alkanal": {
-        "k_g_l_per_g": 0.004096085409252668,
+        "k_g_l_per_g": 0.019230544249838145,
         "n_fit_rows": 0,
         "members": [],
         "reference_loading_g_per_l": 33.9,
@@ -136,7 +151,8 @@
         "sign": "suppression",
         "surrogate": "CHAIN-LENGTH EXTRAPOLATED from the C6 n-alkanal by the measured 2.81x/CH2 slope (Andriot 2.72, Damodaran 2.9, agreeing to 6 %). The slope is measured on BINDING CONSTANTS. It is NOT applied to any threshold shift, because k2 sec. D.3 shows the chain-length structure of the shift does not transfer between matrices. Branch position is unmeasured anywhere, so 2-methyl and 3-methyl butanal get the SAME value and the layer cannot distinguish them.",
         "sources": [
-          "Meynier2002_extraction.md"
+          "Meynier2002_extraction.md",
+          "bi2022_extraction.md"
         ]
       }
     },
@@ -176,7 +192,7 @@
       "declared_assumption",
       "reference_input"
     ],
-    "n_binding_constants": 16,
+    "n_binding_constants": 19,
     "binding_constants": [
       {
         "key": "kg_isoamyl_acetate_dairy",
@@ -457,12 +473,71 @@
           "molar_basis": "recovered_by_arithmetic"
         },
         "notes": ""
+      },
+      {
+        "key": "kg_hexanal_pea",
+        "compound": "hexanal",
+        "medium": "pea_protein_1pct",
+        "value_l_per_g": 0.2537,
+        "method": "static_headspace_partition",
+        "pH": 7.6,
+        "temperature_c": 37.0,
+        "source": "bi2022_extraction.md sec. 3.8 / Table S3 (matrix/gas 116.37 over buffer/gas 32.90) / sec. 2 (10 g/L, inherited -- see the loading record)",
+        "role": "FIT (Amendment 4 construction: a within-run partition RATIO)",
+        "evidence_class": "measured_ratio",
+        "provenance": {
+          "absolute_scale_suspect": true,
+          "ratio_cancels_offset": true,
+          "cross_study_cross_method": false,
+          "loading_inherited_not_restated": true,
+          "within_paper_method_spread_x": 2.5,
+          "temperature_is_consumption_not_process": true
+        },
+        "notes": "The first n-alkanal binding constant in this registry that was NOT measured on an animal protein, and the class had exactly one row before it. It is 22x Meynier's skim-milk value and 173x Damodaran's dialysis-derived denatured soy; the second gap is the method gap k2 sec. B.3 already names, five times wider here than the 35x it recorded, and the first is protein-to-protein at one method family. 37 C is an in-mouth temperature, not a process one: nothing here licenses a pea binding constant at 90 or 140 C."
+      },
+      {
+        "key": "kg_z_2_penten_1_ol_pea",
+        "compound": "z_2_penten_1_ol",
+        "medium": "pea_protein_1pct",
+        "value_l_per_g": 0.0414,
+        "method": "static_headspace_partition",
+        "pH": 7.6,
+        "temperature_c": 37.0,
+        "source": "bi2022_extraction.md sec. 3.8 / Table S3 (2065.44 over 1460.49) / sec. 2",
+        "role": "FIT (Amendment 4 construction)",
+        "evidence_class": "measured_ratio",
+        "provenance": {
+          "absolute_scale_suspect": true,
+          "ratio_cancels_offset": true,
+          "loading_inherited_not_restated": true,
+          "class_has_no_panel_consumer": true
+        },
+        "notes": "The only ALCOHOL in the binding table. Its class has one member and no consumer on any scored panel, so it changes no prediction; it is carried because a measured constant belongs in the registry. This is also the compound on which the paper's own two headspace routes disagree by 2.5x, and this row comes from the partition route."
+      },
+      {
+        "key": "kg_t_2_octenal_pea",
+        "compound": "t_2_octenal",
+        "medium": "pea_protein_1pct",
+        "value_l_per_g": 0.3834,
+        "method": "static_headspace_partition",
+        "pH": 7.6,
+        "temperature_c": 37.0,
+        "source": "bi2022_extraction.md sec. 3.8 / Table S3 (2203.85 over 455.93) / sec. 2",
+        "role": "QUARANTINED as a binding constant; NOT used for the unsaturation penalty either",
+        "evidence_class": "measured_ratio",
+        "provenance": {
+          "absolute_scale_suspect": true,
+          "quarantined_as_binding": true,
+          "michael_acceptor_on_a_lysine_rich_protein": true,
+          "reversibility_evidence": "20 % recovery under guanidine, no more"
+        },
+        "notes": "Quarantined on the Meynier t-2-hexenal precedent, which is exact: a 2-alkenal held two hours at 37 C against a protein carrying about 0.47 mmol lysine amine per gram, measured by disappearance, is partly irreversible Michael chemistry and not partition. The paper's only reversibility evidence is a 20 % headspace recovery under guanidine, and a 20 % recovery does not show that the other 80 % was reversible. It is ALSO excluded from the unsaturation observations, for a second and independent reason -- see UNSATURATION_OBSERVATIONS_EXCLUDED."
       }
     ],
     "holdout_sealed_binding": {
-      "kg_hexanal_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT (D.6). Value not carried in this file.",
-      "kg_nonanal_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT.",
-      "kg_2_nonanone_lupin": "Barallat-Perez 2024 lupin -- Module 6 STAR HOLD-OUT.",
+      "kg_hexanal_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT (D.6). Value not carried in this file.",
+      "kg_nonanal_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT.",
+      "kg_2_nonanone_lupin": "Barallat-Perez 2023 (JAFC 71:20274) lupin -- Module 6 STAR HOLD-OUT.",
       "kg_hexanal_mucin": "Barallat-Perez 2024 pig gastric mucin -- Module 6 STAR HOLD-OUT.",
       "kg_nonanal_mucin": "Barallat-Perez 2024 mucin -- Module 6 STAR HOLD-OUT.",
       "kg_2_nonanone_mucin": "Barallat-Perez 2024 mucin -- Module 6 STAR HOLD-OUT."
@@ -488,7 +563,8 @@
       }
     ],
     "unsaturation_observations_excluded": {
-      "unsat_penalty_beef": "Brewer 1995 gives 2 623x / 1 304x = 2.01x. EXCLUDED: Brewer is declaration D.6 HOLD-OUT and reclassified `dose_added_pre_cook`, so a large part of both numbers is thermal loss before perception, not perception."
+      "unsat_penalty_beef": "Brewer 1995 gives 2 623x / 1 304x = 2.01x. EXCLUDED: Brewer is declaration D.6 HOLD-OUT and reclassified `dose_added_pre_cook`, so a large part of both numbers is thermal loss before perception, not perception.",
+      "unsat_penalty_pea": "Bi 2022's pea-isolate partition pair gives 4.834 / 3.537 = 1.367x built the way the two carried observations are. EXCLUDED for a CONFOUND the other two do not have: Meynier's and Vega's are SAME-CARBON pairs, C6 alkenal against C6 alkanal, and Bi's is C8 against C6. Divide out this registry's own measured chain-length slope and two carbons alone would predict about 7.9x on the per-gram constant where Bi measures 1.51x -- so the alkenal is LESS bound than chain length by itself would give. A contrast that inverts once a measured confound is removed is not evidence for a penalty and must not set one."
     },
     "unsaturation_ordinal_gates": [
       "G-1 aldehyde reactivity ordering: enals >> hexanal > benzaldehyde ~ furfural > citral > vanillin (none). A model that ranks any pair the other way is falsified.",
@@ -643,6 +719,18 @@
         "evidence_class": "measured_ratio",
         "notes": ""
       },
+      "pea_protein_1pct": {
+        "protein_g_per_L": 10.0,
+        "protein_band_g_per_L": [
+          10.0,
+          10.0
+        ],
+        "fat_volume_fraction": 0.0,
+        "pH": 7.6,
+        "source": "bi2022_extraction.md sec. 2 (10 g/L isolate in 0.01 M potassium phosphate pH 7.6, 37 C, 2 h) and sec. 3.8, the phase-ratio-variation run, which says all the conditions were the same and does NOT restate the loading.",
+        "evidence_class": "measured_ratio",
+        "notes": "PRINTED COMPOSITION, INHERITED ACROSS SECTIONS. The 10 g/L is the paper's own number for its binding assay, and the partition run the two shipped constants come from says the conditions were the same without restating it. That is the same standing as the skim-milk row, whose composition is cited rather than measured by its own paper, so it is carried as a point and not as a declared band -- inventing a band nobody measured would be worse than naming the inheritance. Every per-gram constant here is inversely proportional to this number, and what the assumption is worth is computed on the wave ship rule (T4), across a factor of four."
+      },
       "soy_paste_hong": {
         "protein_g_per_L": 142.0,
         "protein_band_g_per_L": [
@@ -665,7 +753,7 @@
       "a general matrix correction factor (k2 sec. D.1: a uniform 33x misplaces the extremes by 10x and 28x in opposite directions)",
       "any partition-derived threshold (Amendment 6; refuted 3 ways on matched samples)",
       "any term monotone in log P (k4b hold-out guard #4; Hong r = -0.05)",
-      "protein_source_registry.json's mocked differentiation (no_verifiable_source)",
+      "protein_source_registry.json's mocked differentiation (no_verifiable_source; file WITHDRAWN 2026-09-01, not re-derived here)",
       "Barallat-Perez lupin and mucin constants (Module 6 HOLD-OUT)",
       "Leksrisompong's 24 BETs as table entries (Amendment 4 makes only its K RATIOS fit-eligible)",
       "Hong 2020's soy thresholds as table entries (GATING HOLD-OUT)",
@@ -678,9 +766,9 @@
         "k_g_l_per_g": 0.004908446074631294,
         "n_fit_rows": 3,
         "members": [
-          "isoamyl_acetate",
-          "amyl_acetate",
-          "ethyl_pentanoate"
+          "isoamyl_acetate@skim_milk",
+          "amyl_acetate@skim_milk",
+          "ethyl_pentanoate@skim_milk"
         ],
         "reference_loading_g_per_l": 33.9,
         "method_family": "headspace",
@@ -690,23 +778,25 @@
         ]
       },
       "n_alkanal": {
-        "k_g_l_per_g": 0.01151,
-        "n_fit_rows": 1,
+        "k_g_l_per_g": 0.054037829342045186,
+        "n_fit_rows": 2,
         "members": [
-          "hexanal"
+          "hexanal@skim_milk",
+          "hexanal@pea_protein_1pct"
         ],
         "reference_loading_g_per_l": 33.9,
         "method_family": "headspace",
         "sign": "suppression",
         "sources": [
-          "Meynier2002_extraction.md"
+          "Meynier2002_extraction.md",
+          "bi2022_extraction.md"
         ]
       },
       "diketone": {
         "k_g_l_per_g": 0.07300000000000001,
         "n_fit_rows": 1,
         "members": [
-          "diacetyl"
+          "diacetyl@caseinate_1pct"
         ],
         "reference_loading_g_per_l": 10.0,
         "method_family": "headspace",
@@ -719,7 +809,7 @@
         "k_g_l_per_g": -0.023,
         "n_fit_rows": 1,
         "members": [
-          "delta_decalactone"
+          "delta_decalactone@caseinate_1pct"
         ],
         "reference_loading_g_per_l": 10.0,
         "method_family": "headspace",
@@ -732,7 +822,7 @@
         "k_g_l_per_g": -0.062,
         "n_fit_rows": 1,
         "members": [
-          "furaneol"
+          "furaneol@caseinate_1pct"
         ],
         "reference_loading_g_per_l": 10.0,
         "method_family": "headspace",
@@ -745,9 +835,9 @@
         "k_g_l_per_g": 0.024848979576924935,
         "n_fit_rows": 3,
         "members": [
-          "2_heptanone",
-          "2_octanone",
-          "2_nonanone"
+          "2_heptanone@beta_lactoglobulin",
+          "2_octanone@beta_lactoglobulin",
+          "2_nonanone@beta_lactoglobulin"
         ],
         "reference_loading_g_per_l": 0.0,
         "method_family": "headspace",
@@ -756,8 +846,21 @@
           "andriot2000 via k2"
         ]
       },
+      "alkenol": {
+        "k_g_l_per_g": 0.04139999999999999,
+        "n_fit_rows": 1,
+        "members": [
+          "z_2_penten_1_ol@pea_protein_1pct"
+        ],
+        "reference_loading_g_per_l": 10.0,
+        "method_family": "headspace",
+        "sign": "suppression",
+        "sources": [
+          "bi2022_extraction.md"
+        ]
+      },
       "branched_alkanal": {
-        "k_g_l_per_g": 0.004096085409252668,
+        "k_g_l_per_g": 0.019230544249838145,
         "n_fit_rows": 0,
         "members": [],
         "reference_loading_g_per_l": 33.9,
@@ -765,7 +868,8 @@
         "sign": "suppression",
         "surrogate": "CHAIN-LENGTH EXTRAPOLATED from the C6 n-alkanal by the measured 2.81x/CH2 slope (Andriot 2.72, Damodaran 2.9, agreeing to 6 %). The slope is measured on BINDING CONSTANTS. It is NOT applied to any threshold shift, because k2 sec. D.3 shows the chain-length structure of the shift does not transfer between matrices. Branch position is unmeasured anywhere, so 2-methyl and 3-methyl butanal get the SAME value and the layer cannot distinguish them.",
         "sources": [
-          "Meynier2002_extraction.md"
+          "Meynier2002_extraction.md",
+          "bi2022_extraction.md"
         ]
       }
     },
@@ -790,8 +894,8 @@
       "compound": "hexanal",
       "matrix": "skim_milk",
       "measured_ratio": 1.39,
-      "predicted_ratio": 1.390189,
-      "fold_error": 1.000136,
+      "predicted_ratio": 2.831882,
+      "fold_error": 2.037325,
       "sign_measured": "elevated",
       "sign_predicted": "elevated",
       "state": "predicted",
@@ -870,7 +974,7 @@
       "threshold_water_ug_per_L": 12.0,
       "threshold_gelatin_22C_ug_per_L": 41.0,
       "measured_ratio": 3.416667,
-      "predicted_ratio": 1.3453,
+      "predicted_ratio": 2.621135,
       "state": "predicted",
       "role": "FIT (lookup-table entries, D.6 Module 7)",
       "cross_method_ratio": true
@@ -880,7 +984,7 @@
       "threshold_water_ug_per_L": 4.5,
       "threshold_gelatin_22C_ug_per_L": 58.0,
       "measured_ratio": 12.888889,
-      "predicted_ratio": 1.3453,
+      "predicted_ratio": 2.621135,
       "state": "predicted",
       "role": "FIT (lookup-table entries, D.6 Module 7)",
       "cross_method_ratio": true
@@ -890,7 +994,7 @@
       "threshold_water_ug_per_L": 3.0,
       "threshold_gelatin_22C_ug_per_L": 79.0,
       "measured_ratio": 26.333333,
-      "predicted_ratio": 1.3453,
+      "predicted_ratio": 2.621135,
       "state": "predicted",
       "role": "FIT (lookup-table entries, D.6 Module 7)",
       "cross_method_ratio": true
@@ -1170,21 +1274,21 @@
     {
       "compound": "hexanal",
       "matrix": "soy_paste_hong",
-      "predicted_matrix_over_water_ratio": 2.63442,
+      "predicted_matrix_over_water_ratio": 8.673372,
       "predicted_interval": [
-        2.151,
-        3.302
+        6.403783,
+        11.807566
       ],
       "predicted_sign": "elevated",
       "terms": {
         "reversible_binding": {
           "state": "measured",
           "chem_class": "n_alkanal",
-          "k_g_l_per_g": 0.01151,
-          "factor_x": 2.63442,
+          "k_g_l_per_g": 0.054037829342045186,
+          "factor_x": 8.673371766570416,
           "factor_interval": [
-            2.151,
-            3.302
+            6.403782934204519,
+            11.807565868409037
           ],
           "protein_g_per_l": 142.0,
           "protein_band_g_per_l": [
@@ -1192,10 +1296,11 @@
             200.0
           ],
           "reference_loading_g_per_l": 33.9,
-          "n_fit_rows": 1,
+          "n_fit_rows": 2,
           "surrogate": null,
           "sources": [
-            "Meynier2002_extraction.md"
+            "Meynier2002_extraction.md",
+            "bi2022_extraction.md"
           ]
         },
         "alpha_beta_unsaturation": {
@@ -1236,21 +1341,21 @@
     {
       "compound": "3_methylbutanal",
       "matrix": "soy_paste_hong",
-      "predicted_matrix_over_water_ratio": 1.581644,
+      "predicted_matrix_over_water_ratio": 3.730737,
       "predicted_interval": [
-        1.409609,
-        1.819217
+        2.923054,
+        4.846109
       ],
       "predicted_sign": "elevated",
       "terms": {
         "reversible_binding": {
           "state": "measured",
           "chem_class": "branched_alkanal",
-          "k_g_l_per_g": 0.004096085409252668,
-          "factor_x": 1.5816441281138789,
+          "k_g_l_per_g": 0.019230544249838145,
+          "factor_x": 3.7307372834770165,
           "factor_interval": [
-            1.4096085409252668,
-            1.8192170818505335
+            2.923054424983815,
+            4.84610884996763
           ],
           "protein_g_per_l": 142.0,
           "protein_band_g_per_l": [
@@ -1261,7 +1366,8 @@
           "n_fit_rows": 0,
           "surrogate": "CHAIN-LENGTH EXTRAPOLATED from the C6 n-alkanal by the measured 2.81x/CH2 slope (Andriot 2.72, Damodaran 2.9, agreeing to 6 %). The slope is measured on BINDING CONSTANTS. It is NOT applied to any threshold shift, because k2 sec. D.3 shows the chain-length structure of the shift does not transfer between matrices. Branch position is unmeasured anywhere, so 2-methyl and 3-methyl butanal get the SAME value and the layer cannot distinguish them.",
           "sources": [
-            "Meynier2002_extraction.md"
+            "Meynier2002_extraction.md",
+            "bi2022_extraction.md"
           ]
         },
         "alpha_beta_unsaturation": {
@@ -1302,21 +1408,21 @@
     {
       "compound": "2_methylbutanal",
       "matrix": "soy_paste_hong",
-      "predicted_matrix_over_water_ratio": 1.581644,
+      "predicted_matrix_over_water_ratio": 3.730737,
       "predicted_interval": [
-        1.409609,
-        1.819217
+        2.923054,
+        4.846109
       ],
       "predicted_sign": "elevated",
       "terms": {
         "reversible_binding": {
           "state": "measured",
           "chem_class": "branched_alkanal",
-          "k_g_l_per_g": 0.004096085409252668,
-          "factor_x": 1.5816441281138789,
+          "k_g_l_per_g": 0.019230544249838145,
+          "factor_x": 3.7307372834770165,
           "factor_interval": [
-            1.4096085409252668,
-            1.8192170818505335
+            2.923054424983815,
+            4.84610884996763
           ],
           "protein_g_per_l": 142.0,
           "protein_band_g_per_l": [
@@ -1327,7 +1433,8 @@
           "n_fit_rows": 0,
           "surrogate": "CHAIN-LENGTH EXTRAPOLATED from the C6 n-alkanal by the measured 2.81x/CH2 slope (Andriot 2.72, Damodaran 2.9, agreeing to 6 %). The slope is measured on BINDING CONSTANTS. It is NOT applied to any threshold shift, because k2 sec. D.3 shows the chain-length structure of the shift does not transfer between matrices. Branch position is unmeasured anywhere, so 2-methyl and 3-methyl butanal get the SAME value and the layer cannot distinguish them.",
           "sources": [
-            "Meynier2002_extraction.md"
+            "Meynier2002_extraction.md",
+            "bi2022_extraction.md"
           ]
         },
         "alpha_beta_unsaturation": {
@@ -1838,7 +1945,7 @@
   "counts": {
     "water_thresholds": 27,
     "matrix_thresholds": 27,
-    "binding_constants": 16,
+    "binding_constants": 19,
     "hong_compounds_with_a_term": 4,
     "hong_compounds_without_a_term": 6
   }

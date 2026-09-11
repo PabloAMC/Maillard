@@ -59,7 +59,9 @@ SEEDS: List[Dict[str, Any]] = [
     dict(id="2_3_butanedione", display_name="2,3-Butanedione", kind="molecule", smiles="CC(=O)C(C)=O", aliases=["diacetyl"]),
     dict(id="2_acetylfuran", display_name="2-Acetylfuran", kind="molecule", smiles="CC(=O)c1ccco1"),
     dict(id="2_methyltetrahydrofuran_3_one", display_name="2-Methyltetrahydrofuran-3-one", kind="molecule", smiles="CC1OCCC1=O"),
-    dict(id="3_isobutyl_2_methoxypyrazine", display_name="3-Isobutyl-2-methoxypyrazine (IBMP)", kind="molecule", smiles="COc1nccnc1CC(C)C", aliases=["ibmp"], class_="methoxypyrazines"),
+    # 3_isobutyl_2_methoxypyrazine was seeded here until 2026-09-09. It is now a species
+    # in off_flavour_targets.yml, which carries its CAS and InChI as well; its class and
+    # its short alias are kept below so nothing that referred to it stops resolving.
     dict(id="4_vinylguaiacol", display_name="4-Vinylguaiacol", kind="molecule", smiles="C=Cc1ccc(O)c(OC)c1"),
     dict(id="acetaldehyde", display_name="Acetaldehyde", kind="molecule", smiles="CC=O"),
     dict(id="acetoin", display_name="Acetoin", kind="molecule", smiles="CC(O)C(C)=O"),
@@ -73,6 +75,27 @@ SEEDS: List[Dict[str, Any]] = [
     dict(id="furan", display_name="Furan", kind="molecule", smiles="c1ccoc1"),
     dict(id="furosine", display_name="Furosine", kind="molecule", smiles="NC(CCCCNCC(=O)c1ccco1)C(=O)O", identity_note="alpha-carbon stereocentre omitted"),
     dict(id="heptanal", display_name="Heptanal", kind="molecule", smiles="CCCCCCC=O"),
+    # WAVE B24b (2026-09-10): the branch that refused B24. Hydroxyacetone is the committed
+    # precursor of the tetrahydropyridine and of nothing else; the tetrahydropyridine is the
+    # competing product 2-acetyl-1-pyrroline is measured against.
+    dict(id="hydroxyacetone", display_name="Hydroxyacetone", kind="molecule", smiles="CC(=O)CO",
+         aliases=["acetol", "1-hydroxy-2-propanone", "hydroxy-2-propanone"]),
+    dict(id="2_acetyltetrahydropyridine", display_name="2-Acetyl-1,4,5,6-tetrahydropyridine",
+         kind="molecule", smiles="CC(=O)C1=NCCCC1", aliases=["athp", "2-acetyltetrahydropyridine"]),
+    # WAVE B22b (2026-09-10): the route Deng's own experiment names.
+    dict(id="met_glc_amadori", display_name="N-(1-Deoxy-D-fructos-1-yl)-methionine",
+         kind="molecule", smiles="CSCCC(NCC(O)C(O)C(O)C(O)CO)C(=O)O",
+         aliases=["mg-arp", "met-glc amadori compound", "methionine amadori compound"],
+         identity_note="open-chain form; the sugar stereocentres are omitted, so identity is at "
+                       "constitution level only -- the same treatment chlorogenic acid gets here"),
+    # ADDED 2026-09-09 from the reading audit: five compounds the corpus measures and
+    # names -- four of them in the pea-beverage panel and one in the furanic channel --
+    # that had no registry id, so nothing could refer to them by a stable name.
+    dict(id="2_pentylpyridine", display_name="2-Pentylpyridine", kind="molecule", smiles="CCCCCc1ccccn1"),
+    dict(id="e_e_2_4_decadienal", display_name="(E,E)-2,4-Decadienal", kind="molecule", smiles="CCCCC/C=C/C=C/C=O"),
+    dict(id="5_methylfurfural", display_name="5-Methylfurfural", kind="molecule", smiles="Cc1ccc(C=O)o1"),
+    dict(id="2_furanmethanol", display_name="2-Furanmethanol", kind="molecule", smiles="OCc1ccco1", aliases=["furfuryl alcohol", "2-furylmethanol"]),
+    dict(id="maltol", display_name="Maltol", kind="molecule", smiles="Cc1occc(=O)c1O", aliases=["3-hydroxy-2-methyl-4H-pyran-4-one"]),
     dict(id="methylpyrazine", display_name="2-Methylpyrazine", kind="molecule", smiles="Cc1cnccn1", class_="pyrazines"),
     dict(id="tetramethylpyrazine", display_name="Tetramethylpyrazine", kind="molecule", smiles="Cc1nc(C)c(C)nc1C", class_="pyrazines"),
     dict(id="2_6_dimethylpyrazine", display_name="2,6-Dimethylpyrazine", kind="molecule", smiles="Cc1cncc(C)n1", class_="pyrazines"),
@@ -83,6 +106,24 @@ SEEDS: List[Dict[str, Any]] = [
     dict(id="norfuraneol", display_name="Norfuraneol (NF)", kind="molecule", smiles="CC1=C(O)C(=O)CO1", aliases=["4-hydroxy-5-methyl-3(2H)-furanone", "nf"]),
     dict(id="imp", display_name="Inosine 5'-monophosphate (IMP)", kind="molecule", smiles=None, cas="131-99-7", aliases=["imp", "inosine monophosphate", "inosinate"], class_="umami_support_markers"),
     dict(id="gmp", display_name="Guanosine 5'-monophosphate (GMP)", kind="molecule", smiles=None, cas="85-32-5", aliases=["gmp", "guanosine monophosphate", "guanylate"], class_="umami_support_markers"),
+    # --- B34 (2026-09-11): the four dicarbonyls Leitzen 2021 measures in the amine-free pot ------
+    # The trunk has carried all four as species since B1/B7/B13; what was missing was a registry
+    # identity, so a benchmark could not name them as targets. Nothing about the network changes.
+    dict(id="3_deoxyglucosone", display_name="3-Deoxyglucosone", kind="molecule",
+         smiles="OC[C@@H](O)[C@H](O)CC(=O)C=O",
+         aliases=["3-dg", "3-deoxyglucosone", "3-deoxy-d-glucosone", "3-deoxyhexosone"],
+         identity_note="Leitzen 2021 Table 4 reports 3-DG together with its galactose epimer 3-DGal; the trunk's TDG is the glucose form."),
+    dict(id="3_4_dideoxyglucosone", display_name="3,4-Dideoxyglucosone-3-ene", kind="molecule",
+         smiles="OC[C@@H](O)C=CC(=O)C=O",
+         aliases=["3,4-dge", "3,4-dideoxyglucosone", "3,4-dideoxyglucosone-3-ene", "ddg"],
+         identity_note="the trunk's DDG, the intermediate between 3-deoxyglucosone and 5-HMF."),
+    dict(id="glucosone", display_name="D-Glucosone", kind="molecule",
+         smiles="OC[C@@H](O)[C@H](O)[C@@H](O)C(=O)C=O",
+         aliases=["glucosone", "d-glucosone", "2-keto-d-glucose", "glucos-2-ulose"]),
+    dict(id="glyoxal", display_name="Glyoxal", kind="molecule", smiles="O=CC=O",
+         aliases=["glyoxal", "go"]),
+    dict(id="methylglyoxal", display_name="Methylglyoxal", kind="molecule", smiles="CC(=O)C=O",
+         aliases=["methylglyoxal", "mgo", "2-oxopropanal", "pyruvaldehyde"]),
     # --- classes and markers -----------------------------------------------------
     dict(id="pyrazines", display_name="Pyrazines", kind="compound_class", aliases=["pyrazine", "pyrazine_family", "dimethylpyrazine"], members_of_class="pyrazines", identity_note="the bare word 'pyrazine' in benchmark and payload rows means the family, as the retired BENCHMARK_NAME_ALIASES table asserted"),
     dict(id="methoxypyrazines", display_name="Methoxypyrazines", kind="compound_class", aliases=["methoxypyrazines"], members_of_class="methoxypyrazines"),
@@ -112,6 +153,7 @@ SPECIES_IDS = {
     "2,3-Dimethylpyrazine": "2_3_dimethylpyrazine",
     "2,5-Dimethylpyrazine": "2_5_dimethylpyrazine",
     "2-Ethyl-3,5-dimethylpyrazine": "2_ethyl_3_5_dimethylpyrazine",
+    "2-Acetyl-1-pyrroline": "2_acetyl_1_pyrroline",    # B24 (2026-09-09)
     "Dimethyl disulfide": "dimethyl_disulfide",
     "Bis(2-methyl-3-furyl) disulfide": "bis_2_methyl_3_furyl_disulfide",
     "Dimethyl trisulfide": "dimethyl_trisulfide",
@@ -126,6 +168,7 @@ SPECIES_IDS = {
     "Nonanal": "nonanal",
     "1-Octen-3-ol": "1_octen_3_ol",
     "2-Pentylfuran": "2_pentylfuran",
+    "3-Isobutyl-2-methoxypyrazine (IBMP)": "3_isobutyl_2_methoxypyrazine",  # 2026-09-09
     "1-Hexanol": "1_hexanol",
     "Furfural": "furfural",
     "Nε-(Carboxymethyl)lysine (CML)": "cml",
@@ -139,6 +182,7 @@ SPECIES_IDS = {
 }
 # Extra spellings for species compounds that the automatic gather cannot derive.
 EXTRA_ALIASES = {
+    "3_isobutyl_2_methoxypyrazine": ["ibmp", "2-isobutyl-3-methoxypyrazine", "isobutyl methoxypyrazine"],
     "2_methyl_3_furanthiol": ["2-methyl-3-furylthiol", "2-methylfuran-3-thiol", "2methylfuran3thiol", "2methyl3furylthiol"],
     "2_furfurylthiol": ["2-furylmethanethiol", "2furylmethanethiol", "furfuryl mercaptan"],
     "bis_2_methyl_3_furyl_disulfide": ["2-methyl-3-furyl 2-methyl-3-furyl disulfide", "mft disulfide", "bis(2-methyl-3-furyl) disulphide"],
@@ -188,6 +232,14 @@ def _gather_spellings() -> Dict[str, set]:
     return seen
 
 
+#: Chemical classes for species-YAML compounds. The YAMLs have no class column and most
+#: entries need none; this map exists so that a compound moved OUT of SEEDS into a species
+#: file does not silently lose the class its seed carried.
+SPECIES_CLASS_OVERRIDES = {
+    "3_isobutyl_2_methoxypyrazine": "methoxypyrazines",
+}
+
+
 def _species_entries() -> List[Dict[str, Any]]:
     out = []
     for p, default_class in (
@@ -211,7 +263,7 @@ def _species_entries() -> List[Dict[str, Any]]:
                     smiles=c.get("smiles"),
                     inchi=c.get("inchi"),
                     cas=c.get("cas"),
-                    class_=default_class,
+                    class_=SPECIES_CLASS_OVERRIDES.get(cid, default_class),
                     aliases=sorted(aliases),
                     identity_source=data_paths.rel(p),
                 )

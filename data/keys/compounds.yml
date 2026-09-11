@@ -171,6 +171,7 @@ compounds:
   - 2,5-dimethylpyrazine
   - 25dimethylpyrazine
   seen_in:
+  - benchmarks:measured_volatiles
   - benchmarks:reference_volatiles
   - henry_constants
   - panel:alias
@@ -188,6 +189,20 @@ compounds:
   aliases: []
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_acetyl_1_pyrroline
+  display_name: 2-Acetyl-1-pyrroline
+  kind: molecule
+  smiles: CC(=O)C1=NCCC1
+  inchikey: DQBQWWSFRPLIAX-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C1=NCCC1
+  inchi: InChI=1S/C6H9NO/c1-5(8)6-3-2-4-7-6/h2-4H2,1H3
+  cas: 85213-22-5
+  aliases:
+  - 2-acetyl-1-pyrroline
+  seen_in:
+  - benchmarks:measured_volatiles
+  - species:desirable_targets.yml
+  identity_source: data/species/desirable_targets.yml
 - id: 2_acetylfuran
   display_name: 2-Acetylfuran
   kind: molecule
@@ -201,6 +216,17 @@ compounds:
   - panel:alias
   - panel:display_name
   - panel:key
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_acetyltetrahydropyridine
+  display_name: 2-Acetyl-1,4,5,6-tetrahydropyridine
+  kind: molecule
+  smiles: CC(=O)C1=NCCCC1
+  inchikey: GNZWXNKZMHJXNU-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C1=NCCCC1
+  aliases:
+  - 2-acetyltetrahydropyridine
+  - athp
+  seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 2_ethyl_3_5_dimethylpyrazine
   display_name: 2-Ethyl-3,5-dimethylpyrazine
@@ -230,6 +256,17 @@ compounds:
   canonical_smiles: CCc1cnccn1
   class: pyrazines
   aliases: []
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 2_furanmethanol
+  display_name: 2-Furanmethanol
+  kind: molecule
+  smiles: OCc1ccco1
+  inchikey: XPFVYQJUAUNWIW-UHFFFAOYSA-N
+  canonical_smiles: OCc1ccco1
+  aliases:
+  - 2-furylmethanol
+  - furfuryl alcohol
   seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: 2_furfurylthiol
@@ -404,19 +441,66 @@ compounds:
   - panel:key
   - species:off_flavour_targets.yml
   identity_source: data/species/off_flavour_targets.yml
+- id: 2_pentylpyridine
+  display_name: 2-Pentylpyridine
+  kind: molecule
+  smiles: CCCCCc1ccccn1
+  inchikey: HSDXVAOHEOSTFZ-UHFFFAOYSA-N
+  canonical_smiles: CCCCCc1ccccn1
+  aliases: []
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 3_4_dideoxyglucosone
+  display_name: 3,4-Dideoxyglucosone-3-ene
+  kind: molecule
+  smiles: OC[C@@H](O)C=CC(=O)C=O
+  inchikey: YSSNFXZGTOLNNX-LURJTMIESA-N
+  canonical_smiles: O=CC(=O)C=C[C@H](O)CO
+  aliases:
+  - 3,4-dge
+  - 3,4-dideoxyglucosone
+  - 3,4-dideoxyglucosone-3-ene
+  - ddg
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: the trunk's DDG, the intermediate between 3-deoxyglucosone and 5-HMF.
+- id: 3_deoxyglucosone
+  display_name: 3-Deoxyglucosone
+  kind: molecule
+  smiles: OC[C@@H](O)[C@H](O)CC(=O)C=O
+  inchikey: ZGCHLOWZNKRZSN-PHDIDXHHSA-N
+  canonical_smiles: O=CC(=O)C[C@@H](O)[C@H](O)CO
+  aliases:
+  - 3-deoxy-d-glucosone
+  - 3-deoxyglucosone
+  - 3-deoxyhexosone
+  - 3-dg
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: Leitzen 2021 Table 4 reports 3-DG together with its galactose epimer 3-DGal; the trunk's TDG is
+    the glucose form.
 - id: 3_isobutyl_2_methoxypyrazine
   display_name: 3-Isobutyl-2-methoxypyrazine (IBMP)
   kind: molecule
   smiles: COc1nccnc1CC(C)C
   inchikey: UXFSPRAGHGMRSQ-UHFFFAOYSA-N
   canonical_smiles: COc1nccnc1CC(C)C
+  inchi: InChI=1S/C9H14N2O/c1-7(2)6-8-9(12-3)11-5-4-10-8/h4-5,7H,6H2,1-3H3
+  cas: 24683-00-9
   class: methoxypyrazines
   aliases:
+  - 2-isobutyl-3-methoxypyrazine
+  - 3-Isobutyl-2-methoxypyrazine
   - 3-isobutyl-2-methoxypyrazine
+  - IBMP
   - ibmp
+  - isobutyl methoxypyrazine
   seen_in:
   - flavor:off_note_reference_anchors
-  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  - species:off_flavour_targets.yml
+  identity_source: data/species/off_flavour_targets.yml
 - id: 3_methylbutanal
   display_name: 3-Methylbutanal
   kind: molecule
@@ -461,6 +545,15 @@ compounds:
   - 4-vinylguaiacol
   seen_in:
   - flavor:off_note_reference_anchors
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: 5_methylfurfural
+  display_name: 5-Methylfurfural
+  kind: molecule
+  smiles: Cc1ccc(C=O)o1
+  inchikey: OUDFNZMQXZILJD-UHFFFAOYSA-N
+  canonical_smiles: Cc1ccc(C=O)o1
+  aliases: []
+  seen_in: []
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: acetaldehyde
   display_name: Acetaldehyde
@@ -661,6 +754,17 @@ compounds:
   seen_in:
   - flavor:off_note_reference_anchors
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: e_e_2_4_decadienal
+  display_name: (E,E)-2,4-Decadienal
+  kind: molecule
+  smiles: CCCCC/C=C/C=C/C=O
+  inchikey: JZQKTMZYLHNFPL-BLHCBFLLSA-N
+  canonical_smiles: CCCCC/C=C/C=C/C=O
+  aliases:
+  - (E,E)-2,4-decadienal
+  seen_in:
+  - benchmarks:measured_volatiles
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: e_e_2_4_heptadienal
   display_name: (E,E)-2,4-Heptadienal
   kind: molecule
@@ -722,6 +826,32 @@ compounds:
   - safety:analyte
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
   identity_note: alpha-carbon stereocentre omitted
+- id: glucosone
+  display_name: D-Glucosone
+  kind: molecule
+  smiles: OC[C@@H](O)[C@H](O)[C@@H](O)C(=O)C=O
+  inchikey: DCNMIDLYWOTSGK-SRQIZXRXSA-N
+  canonical_smiles: O=CC(=O)[C@H](O)[C@@H](O)[C@H](O)CO
+  aliases:
+  - 2-keto-d-glucose
+  - d-glucosone
+  - glucos-2-ulose
+  - glucosone
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: glyoxal
+  display_name: Glyoxal
+  kind: molecule
+  smiles: O=CC=O
+  inchikey: LEQAOMBKQFMDFZ-UHFFFAOYSA-N
+  canonical_smiles: O=CC=O
+  aliases:
+  - glyoxal
+  - go
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: gmp
   display_name: Guanosine 5'-monophosphate (GMP)
   kind: molecule
@@ -756,6 +886,7 @@ compounds:
   - hdmf
   seen_in:
   - benchmarks:holdout_targets
+  - benchmarks:measured_volatiles
   - benchmarks:reference_volatiles
   - flavor:furanone_reference_anchors
   - panel:alias
@@ -844,6 +975,18 @@ compounds:
   - henry_constants
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: hydroxyacetone
+  display_name: Hydroxyacetone
+  kind: molecule
+  smiles: CC(=O)CO
+  inchikey: XLSMFKSTNGKWQX-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)CO
+  aliases:
+  - 1-hydroxy-2-propanone
+  - acetol
+  - hydroxy-2-propanone
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: imp
   display_name: Inosine 5'-monophosphate (IMP)
   kind: molecule
@@ -889,6 +1032,16 @@ compounds:
   seen_in:
   - species:toxic_markers.yml
   identity_source: data/species/toxic_markers.yml
+- id: maltol
+  display_name: Maltol
+  kind: molecule
+  smiles: Cc1occc(=O)c1O
+  inchikey: XPCTZQVDEJYUGT-UHFFFAOYSA-N
+  canonical_smiles: Cc1occc(=O)c1O
+  aliases:
+  - 3-hydroxy-2-methyl-4H-pyran-4-one
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: meiqx
   display_name: 2-Amino-3-methylimidazo[4,5-f]quinoxaline (MeIQx)
   kind: molecule
@@ -915,6 +1068,20 @@ compounds:
   seen_in:
   - benchmarks:measured_volatiles
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+- id: met_glc_amadori
+  display_name: N-(1-Deoxy-D-fructos-1-yl)-methionine
+  kind: molecule
+  smiles: CSCCC(NCC(O)C(O)C(O)C(O)CO)C(=O)O
+  inchikey: HMYXDJQTCLLFFK-UHFFFAOYSA-N
+  canonical_smiles: CSCCC(NCC(O)C(O)C(O)C(O)CO)C(=O)O
+  aliases:
+  - met-glc amadori compound
+  - methionine amadori compound
+  - mg-arp
+  seen_in: []
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
+  identity_note: open-chain form; the sugar stereocentres are omitted, so identity is at constitution level only
+    -- the same treatment chlorogenic acid gets here
 - id: methanethiol
   display_name: Methanethiol
   kind: molecule
@@ -948,6 +1115,20 @@ compounds:
   - panel:key
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
+- id: methylglyoxal
+  display_name: Methylglyoxal
+  kind: molecule
+  smiles: CC(=O)C=O
+  inchikey: AIJULSRZWUXGPQ-UHFFFAOYSA-N
+  canonical_smiles: CC(=O)C=O
+  aliases:
+  - 2-oxopropanal
+  - methylglyoxal
+  - mgo
+  - pyruvaldehyde
+  seen_in:
+  - benchmarks:holdout_targets
+  identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: methylpyrazine
   display_name: 2-Methylpyrazine
   kind: molecule

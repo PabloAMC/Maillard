@@ -723,7 +723,11 @@ def fit_class_binding_constants() -> Dict[str, Dict[str, object]]:
         out[chem_class] = {
             "k_g_l_per_g": pooled,
             "n_fit_rows": len(values),
-            "members": [p.compound for p in parameters],
+            # WAVE B26: qualified by MEDIUM. Until this wave every class had at
+            # most one row per compound, so a bare compound name identified it;
+            # `n_alkanal` now pools hexanal in skim milk with hexanal in a pea
+            # isolate and a bare list would print "hexanal, hexanal".
+            "members": [f"{p.compound}@{p.medium}" for p in parameters],
             "reference_loading_g_per_l": max(
                 MATRIX_LOADING[p.medium].protein_g_per_l or 0.0
                 if p.medium in MATRIX_LOADING else 0.0 for p in parameters),

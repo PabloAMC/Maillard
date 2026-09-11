@@ -373,10 +373,160 @@ PYRAZINE_REACTIONS: Tuple[Reaction, ...] = (
         "source measures the mixed condensation.",
     ),
 )
-TRUNK_REACTIONS: Tuple[Reaction, ...] = REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS
+#: Build Wave B20 (2026-09-09): THE GLYCATION ARM, TRUNK-ONLY, five steps on protein-bound lysine.
+#: The sugar glycates the bound lysine to the bound Amadori compound (second order, Nguyen 2016 k3);
+#: the Amadori compound oxidises to CML (k7; Berk 2021's barrier), goes to CEL via methylglyoxal
+#: lumped (k9), or decays to 3-deoxyglucosone and gives the lysine back (k8, the dominant loss, the
+#: trunk's own Amadori-decay form); CML is lost into the melanoidin pools (k11). Every constant is
+#: fitted on Nguyen 2016's printed rates; the barriers are declared from measured ones. With no
+#: protein loading LYSP is zero and the five steps carry no flux, so every earlier pot reproduces.
+GLYCATION_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_glc_lysp", {"Glc": 1, "LYSP": 1}, {"FLP": 1}, "k_glyc",
+        "B20. glucose + bound lysine -> bound fructosyl-lysine (Schiff base and Amadori rearrangement "
+        "lumped, as Nguyen 2016 fitted k3; second order, L/(mmol*min)).",
+    ),
+    Reaction(
+        "r_flp_cml", {"FLP": 1}, {"CML": 1, "FRAG_C": 4}, "k_flp_cml",
+        "B20. bound fructosyl-lysine -> CML + C4 fragments (oxidative cleavage; Nguyen 2016 k7, Berk 2021 k8).",
+    ),
+    Reaction(
+        "r_flp_cel", {"FLP": 1}, {"CEL": 1, "FRAG_C": 3}, "k_flp_cel",
+        "B20. bound fructosyl-lysine -> CEL + C3 fragments (via methylglyoxal, lumped; Nguyen 2016 k9).",
+    ),
+    Reaction(
+        "r_flp_decay", {"FLP": 1}, {"TDG": 1, "LYSP": 1}, "k_flp_decay",
+        "B20. bound fructosyl-lysine -> 3-deoxyglucosone + bound lysine (the Amadori decay that returns "
+        "the amine, the trunk's r_ama_tdg form; Nguyen 2016 k8, 'AP -> MRPs', the dominant loss).",
+    ),
+    Reaction(
+        "r_cml_loss", {"CML": 1}, {"MEL_C": 8, "MEL_N": 2}, "k_cml_loss",
+        "B20. CML -> melanoidin pools (Nguyen 2016 k11; sets the CML plateau with k7).",
+    ),
+)
+#: Build Wave B21 (2026-09-09): the aqueous glucosone route. In water the glucosone comes from the
+#: Amadori compound (Hamzalioglu 2026), not from the sugar as in the B13 glass; the step returns the
+#: amine like the trunk's other Amadori decays. Pre-registered in kinetic_core_b21_prereg.md.
+AQUEOUS_GLYOXAL_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_ama_g", {"AMA": 1}, {"G": 1, "Gly": 1}, "k_ama_g",
+        "B21. Amadori (DFG) -> glucosone + glycine (oxidative cleavage; the aqueous glucosone entry, "
+        "Hamzalioglu 2026 step 4). FITTED on four first-order constants at 110-140 C.",
+    ),
+)
+#: Build Wave B22 (2026-09-09): THE METHIONINE CHAIN, TRUNK-ONLY. The Strecker step of B18 with
+#: methionine as the amino acid: the dicarbonyl keeps its carbons in the aminoketone (glycine's
+#: AKG / AKM by construction), methionine leaves as methional and CO2 (to FRAG_C). Then the
+#: retro-Michael release of methanethiol (acrolein to FRAG_C) and the disulfide on an apparent
+#: constant. Pre-registered in kinetic_core_b22_prereg.md; constants in parameters_methionine.py.
+METHIONINE_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_go_met", {"GO": 1, "MET": 1}, {"AKG": 1, "MTAL": 1, "FRAG_C": 1}, "k_go_met",
+        "B22. glyoxal + methionine -> aminoacetaldehyde + methional + CO2 (Strecker, net). The identity "
+        "ratio to glycine's k_go_ak is FITTED on Pan 2025's methional rates; barrier and pH term are B18's.",
+    ),
+    Reaction(
+        "r_mgo_met", {"MGO": 1, "MET": 1}, {"AKM": 1, "MTAL": 1, "FRAG_C": 1}, "k_mgo_met",
+        "B22. methylglyoxal + methionine -> aminoacetone + methional + CO2 (Strecker, net). Same ratio.",
+    ),
+    Reaction(
+        "r_mtal_msh", {"MTAL": 1}, {"MSH": 1, "FRAG_C": 3}, "k_mtal_msh",
+        "B22. methional -> methanethiol + acrolein (retro-Michael; acrolein to the fragment pool). FITTED "
+        "on Pan 2025's methanethiol rates, barrier free within 20-150 kJ/mol.",
+    ),
+    Reaction(
+        "r_msh_dmds", {"MSH": 2}, {"DMDS": 1}, "k_msh_dmds",
+        "B22. 2 methanethiol -> dimethyl disulfide, an APPARENT second-order constant (the pot's internal "
+        "oxidant is not tracked on this lane; Xu 2010). FITTED on Pan 2025's disulfide rates.",
+    ),
+    Reaction(
+        "r_marp_mtal", {"MARP": 1}, {"MTAL": 1, "MEL_C": 7, "MEL_N": 1}, "k_marp_mtal",
+        "B22b. The methionine Amadori compound decomposes to methional, first order. THE ROUTE DENG'S OWN "
+        "EXPERIMENT NAMES: the fed Amadori compound gives 1.4 to 2.6 times more methional than methionine "
+        "plus glucose, so the dicarbonyl arrives inside the molecule rather than as a free pool. Carbon "
+        "closes as 11 = 4 + 7 and the NITROGEN goes to the melanoidin pool, not to the fragment pool, "
+        "which holds carbon only: the Strecker aldehyde takes no nitrogen with it and the residue is a "
+        "nitrogen-bearing sugar fragment the source does not measure. FITTED on Deng 2022 Table 1's "
+        "five-point time course at 120 C.",
+    ),
+    Reaction(
+        "r_marp_loss", {"MARP": 1}, {"MEL_C": 11, "MEL_N": 1, "MEL_S": 1}, "k_marp_loss",
+        "B22b. The Amadori compound's own competing loss, first order -- what every other Amadori compound "
+        "in this model has. It is here because Deng's series RISES to 120 minutes and then FALLS, and a "
+        "single first-order decomposition of a fed pool saturates rather than falling. The sink keeps both "
+        "the carbon and the nitrogen; it is accounting, and the source names no product.",
+    ),
+)
+#: Build Wave B24 (2026-09-09): 2-ACETYL-1-PYRROLINE FROM PROLINE, TRUNK-ONLY. Pre-registered in
+#: kinetic_core_b24_prereg.md; constants in parameters_proline.py.
+PROLINE_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_mgo_pro", {"MGO": 1, "PRO": 1}, {"PYRL": 1, "ACETOL": 1, "FRAG_C": 1}, "k_mgo_pro",
+        "B24, AMENDED BY B24b (2026-09-10). methylglyoxal + proline -> 1-pyrroline + HYDROXYACETONE + CO2 "
+        "(Strecker of a secondary amine; the ring nitrogen stays in the pyrroline). B24 routed the "
+        "hydroxyacetone to the fragment pool, which is why its arm had no competing branch; it is a species "
+        "now. Carbon closes as 3 + 5 = 4 + 3 + 1. FITTED on Hofmann & Schieberle 1998b Table 9.",
+    ),
+    Reaction(
+        "r_pyrl_ha_athp", {"PYRL": 1, "ACETOL": 1}, {"ATHP": 1}, "k_ha_athp",
+        "B24b. 1-pyrroline + hydroxyacetone -> 2-acetyltetrahydropyridine. THE BRANCH IS EXCLUSIVE AND THE "
+        "SOURCE SAYS SO IN WORDS: Schieberle & Hofmann 2005 state that hydroxyacetone gives only this product "
+        "and methylglyoxal only 2-acetyl-1-pyrroline, so the two are not competing rates on one substrate -- "
+        "they are competing claims on the METHYLGLYOXAL. pH-gated on Schieberle & Hofmann 2005 Table 2 "
+        "(<0.1 / 0.9 / 10.8 / 38.4 ug at pH 3 / 5 / 7 / 9). Carbon closes as 4 + 3 = 7.",
+    ),
+    Reaction(
+        "r_pyrl_loss", {"PYRL": 1}, {"MEL_C": 4, "MEL_N": 1}, "k_pyrl_loss",
+        "B24b. 1-pyrroline's own loss, first order. B24 had none, and with 1-pyrroline fed in fivefold "
+        "excess it made 41 mol % of the methylglyoxal into the product against a printed 0.33 -- 2.1 decades "
+        "out. Sized on that experiment (Hofmann & Schieberle 1998b Table 7, experiment 3). The lost "
+        "1-pyrroline goes to the MELANOIDIN pools and not to the fragment pool, because it carries a "
+        "NITROGEN and the fragment pool holds carbon only; a nitrogen-bearing residue that browning "
+        "does not account for would leave the nitrogen balance open. What this does NOT claim is that "
+        "the loss is browning: the source measures a disappearance and names no product, so this is "
+        "the accounting sink that keeps both atoms, not a mechanism.",
+    ),
+    Reaction(
+        "r_pyrl_ap", {"PYRL": 1, "MGO": 1}, {"AP": 1, "FRAG_C": 1}, "k_pyrl_ap",
+        "B24. 1-pyrroline + methylglyoxal -> 2-acetyl-1-pyrroline + CO2 (acylation at C-2, oxidation in air; "
+        "net). FITTED on Hofmann & Schieberle 1998b Table 7's fed-pyrroline yields.",
+    ),
+)
+#: Build Wave B39 (2026-09-11): THE FED 3-DEOXYGLUCOSONE TRIANGLE. Mittelmaier et al. 2011 charge
+#: pure 3-DG, pure 3,4-DGE and pure 3-DGal at 120 C and show each regenerates the others: the
+#: dehydration 3-DG -> 3,4-DGE the trunk has always carried one way is REVERSIBLE, and the enone
+#: hydrates to EITHER C4 epimer. Three steps, one species (DGAL), constants in
+#: `parameters_dicarbonyl.FED_3DEOXY_PARAMETERS`; inert (k = 0) until the B39 fit ships. Pre-registration
+#: `results/validation/kinetic_core_b39_prereg.md`.
+FED_3DEOXY_REACTIONS: Tuple[Reaction, ...] = (
+    Reaction(
+        "r_ddg_tdg", {"DDG": 1}, {"TDG": 1}, "k_ddg_tdg",
+        "B39. 3,4-dideoxyglucosone-3-ene + H2O -> 3-deoxyglucosone: the reverse hydration. Fed 3,4-DGE "
+        "regenerates 3-DG to 26.9 uM at 30 min from 200 uM (Mittelmaier 2011).",
+    ),
+    Reaction(
+        "r_ddg_dgal", {"DDG": 1}, {"DGAL": 1}, "k_ddg_dgal",
+        "B39. 3,4-dideoxyglucosone-3-ene + H2O -> 3-deoxygalactosone, the C4 epimer. Fed 3,4-DGE gives "
+        "37.9 uM 3-DGal at 20 min; fed 3-DG is 26 % 3-DGal by 60 min.",
+    ),
+    Reaction(
+        "r_dgal_ddg", {"DGAL": 1}, {"DDG": 1}, "k_dgal_ddg",
+        "B39. 3-deoxygalactosone -> 3,4-dideoxyglucosone-3-ene: the epimer's dehydration. Fed 3-DGal gives "
+        "46.2 uM 3,4-DGE at 20 min.",
+    ),
+)
+FED_3DEOXY_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in FED_3DEOXY_REACTIONS)
+
+TRUNK_REACTIONS: Tuple[Reaction, ...] = (REACTIONS + DICARBONYL_REACTIONS + PYRAZINE_REACTIONS + GLYCATION_REACTIONS
+                                         + AQUEOUS_GLYOXAL_REACTIONS + METHIONINE_REACTIONS + PROLINE_REACTIONS
+                                         + FED_3DEOXY_REACTIONS)
 TRUNK_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in TRUNK_REACTIONS)
 DICARBONYL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in DICARBONYL_REACTIONS)
 PYRAZINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PYRAZINE_REACTIONS)
+GLYCATION_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in GLYCATION_REACTIONS)
+AQUEOUS_GLYOXAL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in AQUEOUS_GLYOXAL_REACTIONS)
+METHIONINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in METHIONINE_REACTIONS)
+PROLINE_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in PROLINE_REACTIONS)
 
 #: Build Wave B7's eleven steps, named so a report can say which part of the
 #: trunk is B1's and which is B7's without counting.

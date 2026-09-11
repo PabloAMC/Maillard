@@ -1,0 +1,76 @@
+{
+  "artifact": "kinetic_core_b22b_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b22b_ship_rule",
+    "generated_on": "2026-09-10",
+    "git": {
+      "commit": "09bbea891a99f47ec0527df936dde987b3dc5ca7",
+      "short": "09bbea89",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b22b_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b22b_fit_report.json",
+        "sha256": "e2e9117036e49f9c48a405ed1a4e4195d7b5019098de17527d2d067469aff2ff"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b22b_prereg.md",
+  "rule": "SHIP if T1 (the shape and its peak), T2, T3 and T4 hold",
+  "T1": {
+    "residuals_dex": {
+      "30.0": 0.5052936507597818,
+      "60.0": 0.17668013346371206,
+      "120.0": -0.3830884230664201,
+      "180.0": -0.27669701821343823,
+      "240.0": -0.022188340441539136
+    },
+    "worst_row_min": "30.0",
+    "worst_dex": 0.5052936507597818,
+    "model_peak_min": 30.0,
+    "printed_peak_min": 120.0,
+    "peak_in_window": false,
+    "pass": false
+  },
+  "T2": {
+    "state": "VACUOUS",
+    "why": "wave B22 did not ship, so its four steps are inert at zero and the model has NO route from methionine and glucose to methional. The binary arm is structurally zero, so the ratio divides by nothing. The pre-registration assumed the arm rested on a declared substitution; it rests on nothing.",
+    "model_binary_umol_l": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "printed_arp_over_binary": [
+      1.3707865168539326,
+      2.139917695473251,
+      2.595598349381018,
+      1.752075919335706,
+      1.101876675603217
+    ],
+    "pass": null
+  },
+  "T3": {
+    "sigma": {
+      "log10_k_marp_mtal_120C": 0.09222724044744404,
+      "log10_k_marp_loss_120C": 0.0922272404474495
+    },
+    "identified": {
+      "log10_k_marp_mtal_120C": true,
+      "log10_k_marp_loss_120C": true
+    },
+    "on_bound": {
+      "log10_k_marp_mtal_120C": false,
+      "log10_k_marp_loss_120C": false
+    },
+    "pass": true
+  },
+  "T4": {
+    "panel_identical": true,
+    "pass": true
+  },
+  "verdict": "DO NOT SHIP"
+}

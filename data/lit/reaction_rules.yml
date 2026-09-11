@@ -144,7 +144,7 @@ rules:
     status: established
     smirks: "[SH1:1][#6:2].[SH1:3][#6:4]>>[#6:2][S:1][S:3][#6:4]"
     source: {dossier: kumazawa2003_extraction.md, anchor: "Table 3, difurfuryl disulfide the major FFT product at 121 C; zhou2023_extraction.md Table 1; mottram2002_extraction.md Table 1 (mixed disulfides)"}
-    conditions: "aqueous, 100-145 C, faster above pH 5; needs an oxidant"
+    conditions: "aqueous, 100-145 C, faster above pH 5; needs an oxidant. B43 (2026-09-11), luo2024_extraction.md sec. 2-3: the review distinguishes TWO oxidants -- aerobic (O2, 'occurs rapidly at room temperature', accelerated by trace Cu2+ and Fe3+/Fe2+) and anaerobic ('mainly involves dicarbonyl compounds as oxidants'), the latter being the structure wave B27 built inert and gated. No rate in either case"
     controls:
       positive: [{reactants: [MFT, MFT], products: [MFTD]}, {reactants: [FFT, FFT], products: [FFTD]}, {reactants: [MFT, MESH], products: [MMFT]}]
       negative: [{reactants: [MFT, HEXANAL]}]

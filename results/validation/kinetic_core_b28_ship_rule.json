@@ -1,0 +1,199 @@
+{
+  "artifact": "kinetic_core_b28_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b28_ship_rule",
+    "generated_on": "2026-09-11",
+    "git": {
+      "commit": "fb0dbd304252d7823d1844d7ddda7486ee6878c5",
+      "short": "fb0dbd30",
+      "branch": "reactions",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b28_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/_b28_baseline/core_panel_scores_before_b28.json",
+        "sha256": "a35439ff3c78d5b27b90fa0b0ca1333dafa75c95c624446c463377a2e3526dad"
+      },
+      {
+        "path": "results/validation/_b28_baseline/core_panel_scores_after_b28.json",
+        "sha256": "da403505e787f4f0e580c00661545dba216efbbb54c8d3c6f4c3296ba7104594"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b28_prereg.md",
+  "rule": "SHIP if T1 (the arithmetic), T2 (refusals only ever lift, and nothing answered moves) and T5 (no other lane moves) hold; T3 and T4 reported",
+  "T1": {
+    "oleate_column_sums_pct": {
+      "oleate_autoxidised": 100.0,
+      "oleate_photosensitized": 99.5
+    },
+    "pentylfuran_per_hexanal": {
+      "linoleate_autoxidised": 0.16,
+      "linoleate_photosensitized": 0.03529411764705882
+    },
+    "linoleate_1981_columns": [
+      "linoleate_autoxidised",
+      "linoleate_photosensitized"
+    ],
+    "new_species_present": [
+      "PENTYLFURAN",
+      "NONANAL"
+    ],
+    "b6_six_product_slate_untouched": true,
+    "nonanal_still_zero_from_linoleate": true,
+    "pentylfuran_parent_declared_unknown": true,
+    "pass": true
+  },
+  "T2": {
+    "refused_before_after": [
+      25,
+      18
+    ],
+    "rows_lifted": [
+      [
+        "external_validation_li_2026_spi_wg_hme_control",
+        "2-pentylfuran"
+      ],
+      [
+        "external_validation_li_2026_spi_wg_hme_control",
+        "nonanal"
+      ],
+      [
+        "external_validation_liu_2023_ppi_offnote_baseline",
+        "nonanal"
+      ],
+      [
+        "pea_isolate_40C_PratapSingh2021",
+        "2-pentylfuran"
+      ],
+      [
+        "pea_isolate_uht_140C_Trikusuma2019",
+        "2-pentylfuran"
+      ],
+      [
+        "pea_isolate_uht_140C_Trikusuma2019",
+        "nonanal"
+      ],
+      [
+        "soy_isolate_40C_PratapSingh2021",
+        "2-pentylfuran"
+      ]
+    ],
+    "rows_newly_refused": [],
+    "rows_introduced_by_later_waves_not_this_one": [],
+    "answered_rows_that_moved_over_0.05_dex": [],
+    "lifted_rows_answered_degenerately": [],
+    "degeneracy_rule": "a row lifted out of REFUSED must not be more than 10x worse than the worst row this same benchmark already scores, nor worse than three decades outright. A lift into a near-zero is a regression in honesty; a lift into a pot that already misses by three decades on everything is that pot's defect and must not be charged to the new row.",
+    "pass": true
+  },
+  "T3": {
+    "products_compared": [
+      "PENTANE",
+      "HEXANAL",
+      "ME_OCTANOATE",
+      "DECADIENAL",
+      "ME_9_OXONONANOATE"
+    ],
+    "excluded": "ME_13_OXO_TRIDECADIENOATE: not identified in 1981 for want of an authentic reference compound, not absent from the chemistry. It is 20 % of the 1989 mixed-geometry slate, so it must be dropped from BOTH slates before they are compared, and the comparison renormalised.",
+    "rows": {
+      "PENTANE": {
+        "frankel1981_renormalised_pct": 13.580246913580245,
+        "frankel1989_renormalised_pct": 20.0,
+        "fold": 1.4727272727272729,
+        "direction": "1989_higher"
+      },
+      "HEXANAL": {
+        "frankel1981_renormalised_pct": 20.576131687242796,
+        "frankel1989_renormalised_pct": 13.75,
+        "fold": 1.4964459408903852,
+        "direction": "1981_higher"
+      },
+      "ME_OCTANOATE": {
+        "frankel1981_renormalised_pct": 20.576131687242796,
+        "frankel1989_renormalised_pct": 21.25,
+        "fold": 1.03275,
+        "direction": "1989_higher"
+      },
+      "DECADIENAL": {
+        "frankel1981_renormalised_pct": 19.204389574759944,
+        "frankel1989_renormalised_pct": 28.75,
+        "fold": 1.4970535714285715,
+        "direction": "1989_higher"
+      },
+      "ME_9_OXONONANOATE": {
+        "frankel1981_renormalised_pct": 26.06310013717421,
+        "frankel1989_renormalised_pct": 16.25,
+        "fold": 1.6038830853645667,
+        "direction": "1981_higher"
+      }
+    },
+    "worst_product": "ME_9_OXONONANOATE",
+    "worst_fold": 1.6038830853645667,
+    "note": "Same laboratory, same first author, eight years apart. 210 C neat against 180 C in hexane, a 25 C column start against a -65 C cryotrap, packed against capillary. This is the first external check the lane's own fit source has had, and it is not a two-point Arrhenius: temperature and light-end loss are confounded and these two papers cannot separate them.",
+    "reported_only": true
+  },
+  "T4": {
+    "rows": [
+      {
+        "benchmark": "pea_isolate_40C_PratapSingh2021",
+        "compound": "2-pentylfuran",
+        "measured": 638.0,
+        "predicted": 0.0748466837558481,
+        "fold_error": 8524.091756438711
+      },
+      {
+        "benchmark": "pea_isolate_uht_140C_Trikusuma2019",
+        "compound": "2-pentylfuran",
+        "measured": 163.0,
+        "predicted": 5.042375493543165,
+        "fold_error": 32.32603367375632
+      },
+      {
+        "benchmark": "pea_isolate_uht_140C_Trikusuma2019",
+        "compound": "nonanal",
+        "measured": 24.0,
+        "predicted": 7.365972532831463,
+        "fold_error": 3.2582255626161634
+      },
+      {
+        "benchmark": "soy_isolate_40C_PratapSingh2021",
+        "compound": "2-pentylfuran",
+        "measured": 2492.0,
+        "predicted": 0.05891158334331271,
+        "fold_error": 42300.67940081731
+      },
+      {
+        "benchmark": "external_validation_li_2026_spi_wg_hme_control",
+        "compound": "2-pentylfuran",
+        "measured": 5625.8,
+        "predicted": 15.387486467996423,
+        "fold_error": 365.6087699378835
+      },
+      {
+        "benchmark": "external_validation_li_2026_spi_wg_hme_control",
+        "compound": "nonanal",
+        "measured": 72.66,
+        "predicted": 23.885239774885036,
+        "fold_error": 3.0420460788675383
+      },
+      {
+        "benchmark": "external_validation_liu_2023_ppi_offnote_baseline",
+        "compound": "nonanal",
+        "measured": 0.8018,
+        "predicted": 0.10933708079159744,
+        "fold_error": 7.333285233106555
+      }
+    ],
+    "n": 7,
+    "caveat": "A branch fraction from a NEAT hydroperoxide pyrolysed in an injector port at 210 C, predicting a food. Lifting a refusal is not the same as being right and this wave claims only the first.",
+    "reported_only": true
+  },
+  "T5": {
+    "non_lipid_benchmarks_changed": [],
+    "non_lipid_rows_added_by_later_waves": {},
+    "compared": "compound, target_unit, measured, predicted, fold_error, over the rows BOTH runs have -- not the whole row, and not rows a later wave added",
+    "pass": true
+  },
+  "verdict": "SHIP"
+}

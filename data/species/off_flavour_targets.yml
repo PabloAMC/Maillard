@@ -104,3 +104,22 @@ compounds:
     mitigation: "pH adjustment (alkalinity reduces furfural); bisulfite trapping"
     priority: "medium"
     notes: "Key intermediate for furfurylthiol (FFT) in the presence of H2S."
+
+  # ADDED 2026-09-09 (trikusuma2020_extraction.md sec. 3 Table 2). The first compound in this
+  # file that the cook does NOT make. Every other entry is a lipid-oxidation or Maillard
+  # product; this one is a methoxypyrazine the pea plant synthesises, which arrives in the
+  # isolate and is carried through. It matters because it is the most potent thing in the
+  # measured beverage relative to its threshold BEFORE any heat, and because no amount of
+  # reaction control removes what was already there -- the mitigation is upstream of the pot.
+  - name: "3-Isobutyl-2-methoxypyrazine (IBMP)"
+    cas: "24683-00-9"
+    smiles: "COc1nccnc1CC(C)C"
+    inchi: "InChI=1S/C9H14N2O/c1-7(2)6-8-9(12-3)11-5-4-10-8/h4-5,7H,6H2,1-3H3"
+    origin: "Plant biosynthesis in Pisum sativum; carried into the protein isolate, not formed by cooking"
+    pathway: "NOT a reaction product. Native to the raw material and concentrated by isolation."
+    sensory_desc: "Green pea, bell pepper, earthy"
+    odour_threshold_ug_per_kg: 0.002
+    odour_threshold_source: "trikusuma2020_extraction.md sec. 3, Table 2 (the paper's own printed threshold column, Leffingwell & Associates compilation). Not re-measured by that paper."
+    mitigation: "Upstream of the reaction: raw-material selection and the isolation process. Heating INCREASES it here -- 0.031 to 0.072 ug/L across the UHT step and 0.115 after ageing -- so no reaction-control strategy in this model reduces it."
+    priority: "critical"
+    notes: "Measured at 0.031 +/- 0.003 ug/L in the unheated 3 % w/w pea beverage against a 0.002 ug/L threshold: odour activity about 15 before any heat, and about 36 after UHT (both computed, not printed). The model has no formation step for it and must not pretend to one; it is registered so that a formulation answer can say what the isolate brings with it. See also programme 7(ii)."

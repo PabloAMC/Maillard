@@ -50,6 +50,87 @@ DOI_FIELDS = {"doi", "source_doi", "doi_new", "resolved_doi", "primary_doi"}
 ID_FIELDS = ("id", "paper_id", "benchmark_id", "artifact_id", "registry_id", "reference_id", "evidence_id", "record_id", "source_id")
 normalise_doi = paper_keys.normalise_doi
 
+# --- which dossier is a paper's dossier -------------------------------------------------
+#
+# A dossier declares the paper it is FOR in its identity block: a markdown table row whose
+# first cell is labelled DOI, or -- for the handful of dossiers with no identity table -- a
+# "DOI ..." line in the header preamble, above the first section heading or rule.
+#
+# The label is spelled a dozen ways across the 290 files (``DOI``, ``**DOI**``, ``DOI / PII``,
+# ``DOI / article ID``, ``DOI as printed``, ``★ **DOI**``) and the value is usually wrapped in
+# a code span and bold. Until 2026-09-11 only the bare ``| DOI |`` spelling was read, which
+# left 89 dossiers unlinked.
+#
+# Only the FIRST labelled line counts, and it counts even when it carries no DOI: a dossier
+# whose identity row says "NO DOI IS PRINTED IN THE PDF" has none, and every DOI further down
+# such a file belongs to another paper. Widening instead to "the DOI appears anywhere in the
+# dossier text" would mis-assign 37 papers -- zhang2024b_extraction.md names a competitor's
+# DOI (10.1021/acs.jafc.4c05736) in its opening paragraph while its own identity row reads
+# 10.1016/j.foodres.2024.114149, blank1996_extraction.md quotes the DOI of Blank 1997 whose
+# own dossier is blank1997_extraction.md, and the k*_synthesis / research_round* files cite
+# dozens of DOIs each without being the dossier for any of them.
+DOSSIER_DOI_LABEL = re.compile(r"^[\s>*_`\u2605\u2606\u2714\u2705\u26a0\ufe0f]*doi\b", re.I)
+DOSSIER_NO_DOI = re.compile(r"^[\s*_`]*no\s+doi\b", re.I)
+DOSSIER_HEADER_END = re.compile(r"^(?:-{3,}\s*$|#{2,6}\s)")
+
+
+def dossier_identity_doi(text: str) -> Optional[str]:
+    """The DOI a dossier declares as its own subject, or ``None``."""
+    in_header = True
+    for line in text.splitlines():
+        stripped = line.strip()
+        if in_header and DOSSIER_HEADER_END.match(stripped):
+            in_header = False
+        if stripped.startswith("|"):
+            cells = stripped.split("|")
+            if len(cells) < 3:
+                continue
+            cell = cells[1].strip()
+            if DOSSIER_NO_DOI.match(cell):
+                return None
+            if DOSSIER_DOI_LABEL.match(cell):
+                return normalise_doi(stripped)
+        elif in_header and DOSSIER_DOI_LABEL.match(stripped):
+            return normalise_doi(stripped)
+    return None
+
+
+# --- DOIs cited from source code --------------------------------------------------------
+#
+# The kinetic-core modules carry their provenance in comments and long string literals, both
+# of which the source formatter wraps -- inside an implicitly concatenated literal
+#
+#     "CITE IT. Yu, Seow, Ong & Zhou 2018 (Food Chem. 268:2, 10.1016/j.foodchem."
+#     "2018.06.108; yu2018_extraction.md Table 1, step 5) measure the same "
+#
+# and across a continued comment
+#
+#     # `data/articles/Kocadagli2016.pdf` (LONGER stem) = Food Chem 10.1016/j.foodchem
+#     #                                  .2016.05.150 = glucose/wheat flour = NOT this
+#
+# Reading physical lines cut the DOI at the wrap, and the leftover trailing "." was then
+# trimmed as punctuation, so the fragments "10.1016/j.foodchem" and "10.1021/acs.jafc"
+# entered the registry as papers of their own while the real DOIs went unrecorded. Rejoin
+# across the wrap first. A fragment is a wrap, not a whole DOI, only when it ends the line
+# on a "." or a "/" or the next line resumes with a "."; a complete DOI that merely happens
+# to end a line is left alone.
+_WRAP_TAIL = re.compile(r"(10\.\d{4,9}/[^\s\"'`|\]]*)[\"']?\s*$")
+_WRAP_HEAD = re.compile(r"^[\s#*]*[\"']?([^\s\"'`|\]]+)")
+
+
+def code_doi_lines(lines: List[str]) -> List[str]:
+    """``lines`` with any DOI split across a source wrap rejoined onto its opening line."""
+    out = []
+    for i, line in enumerate(lines):
+        tail = _WRAP_TAIL.search(line)
+        if tail and i + 1 < len(lines):
+            head = _WRAP_HEAD.match(lines[i + 1])
+            cont = head.group(1) if head else ""
+            if cont and (tail.group(1).endswith((".", "/")) or cont.startswith(".")):
+                line = line[: tail.end(1)] + cont
+        out.append(line)
+    return out
+
 
 def _records(payload: Any, rel: str, out: Dict[str, Dict[str, Set[str]]], citations: Dict[str, List[str]]) -> None:
     """Walk a payload; every dict with a DOI field contributes (doi -> file -> record id)."""
@@ -96,15 +177,16 @@ def gather() -> Dict[str, Any]:
 
     # dossier identity tables
     dossier_by_doi: Dict[str, str] = {}
+    dossiers_by_doi: Dict[str, List[str]] = {}
     dossiers_without_doi: List[str] = []
     for f in sorted(glob.glob(str(data_paths.EXTRACTION_DOSSIERS_DIR / "*.md"))):
         text = Path(f).read_text(encoding="utf-8", errors="replace")
-        found = None
-        for line in text.splitlines():
-            if re.match(r"^\|\s*DOI\s*\|", line):
-                found = normalise_doi(line)
-                break
+        found = dossier_identity_doi(text)
         if found:
+            # Several papers have more than one dossier (a re-read, or the same paper filed
+            # under two years). First by filename wins, deterministically; the rest are
+            # reported in dossiers_sharing_a_doi rather than dropped silently.
+            dossiers_by_doi.setdefault(found, []).append(data_paths.rel(f))
             dossier_by_doi.setdefault(found, data_paths.rel(f))
         else:
             dossiers_without_doi.append(data_paths.rel(f))
@@ -116,8 +198,9 @@ def gather() -> Dict[str, Any]:
     # (src/barrier_constants.py was in this list until retirement step B5b, 2026-09-03.)
     code_files = sorted(glob.glob(str(data_paths.REPO_ROOT / "src" / "kinetic_core" / "*.py")))
     for f in code_files:
-        for lineno, line in enumerate(Path(f).read_text(encoding="utf-8", errors="replace").splitlines(), 1):
-            for m in re.finditer(r"10\.\d{4,9}/[^\s\"'|\]]+", line):
+        lines = Path(f).read_text(encoding="utf-8", errors="replace").splitlines()
+        for lineno, line in enumerate(code_doi_lines(lines), 1):
+            for m in paper_keys.DOI_RE.finditer(line):
                 d = normalise_doi(m.group(0))
                 if d:
                     by_doi.setdefault(d, {}).setdefault(data_paths.rel(f), set()).add(f"L{lineno}")
@@ -194,6 +277,7 @@ def gather() -> Dict[str, Any]:
             ),
         },
         "dossiers_without_printed_doi": dossiers_without_doi,
+        "dossiers_sharing_a_doi": {d: fs for d, fs in sorted(dossiers_by_doi.items()) if len(fs) > 1},
         "papers": papers,
     }
 

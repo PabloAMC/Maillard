@@ -3,13 +3,13 @@
   "core_envelope": {
     "available": true,
     "ci_level_pct": 90,
-    "literature_hits": 7,
-    "literature_not_evaluable": 5,
-    "literature_total": 34,
-    "median_ci_width_log10": 1.307977261234268,
+    "literature_hits": 17,
+    "literature_not_evaluable": 1,
+    "literature_total": 44,
+    "median_ci_width_log10": 1.0094779070745503,
     "n_samples": 200,
-    "out_of_sample_hits": 7,
-    "out_of_sample_total": 33,
+    "out_of_sample_hits": 17,
+    "out_of_sample_total": 43,
     "path": "results/validation/core_prediction_uncertainty.json",
     "seed": 0,
     "unsampled_lanes": []
@@ -18,39 +18,39 @@
     "available": true,
     "by_lane": {
       "acrylamide": {
-        "median_fold_error": 7.728216855637109,
+        "median_fold_error": 7.697350087806779,
         "rows": 12,
-        "within_band": 2
+        "within_band": 4
       },
       "lipid": {
-        "median_fold_error": 3356.8723978840485,
-        "rows": 7,
-        "within_band": 0
+        "median_fold_error": 2.8215149798278483,
+        "rows": 8,
+        "within_band": 4
       },
       "sulfur": {
-        "median_fold_error": 29.45034969216489,
+        "median_fold_error": 29.450349757279497,
         "rows": 19,
         "within_band": 2
       },
       "trunk": {
-        "median_fold_error": 11.930016362529066,
-        "rows": 1,
-        "within_band": 0
+        "median_fold_error": 7.967894408861714,
+        "rows": 6,
+        "within_band": 2
       }
     },
-    "median_fold_error": 29.45034969216489,
-    "out_of_sample_median_fold_error": 31.845291034105493,
-    "out_of_sample_rows": 38,
-    "out_of_sample_within_band": 3,
+    "median_fold_error": 9.148884190171456,
+    "out_of_sample_median_fold_error": 9.228224991194327,
+    "out_of_sample_rows": 44,
+    "out_of_sample_within_band": 11,
     "pass_band_level": 3.0,
-    "rows": 39,
-    "scored": 27,
+    "rows": 45,
+    "scored": 23,
     "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
     "strict_ready": 0,
     "strict_ready_ids": [],
     "total": 37,
-    "within_band": 4,
-    "worst_fold_error": 33391.73597895205
+    "within_band": 12,
+    "worst_fold_error": 9631.589383870052
   },
   "directional": {
     "available": true,
@@ -170,7 +170,7 @@
   ],
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
-    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 4/39 rows within 3x (median fold error 29.5x, worst 3.34e+04x); out of sample -- every row a core fit read removed -- 3/38 (median 31.8x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 7/34 evaluable literature rows (5 not evaluable: the no lane carries no sampled uncertainty), 7/33 out of sample.",
+    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 12/45 rows within 3x (median fold error 9.15x, worst 9.63e+03x); out of sample -- every row a core fit read removed -- 11/44 (median 9.23x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 17/44 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 17/43 out of sample.",
     "**Directional and ranking claims are the product, and on the kinetic core they score 25/43 on strictly independent literature claims** (28 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 16/31 once pH and water activity are set aside, and 9/12 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
@@ -233,14 +233,14 @@
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "2/12 rows within 3x, median 7.73x",
+      "evidence": "4/12 rows within 3x, median 7.7x",
       "system_class": "free precursor, asparagine + reducing sugar [acrylamide lane]",
       "verdict": "do-not-use"
     },
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "0/7 rows within 3x, median 3.36e+03x",
+      "evidence": "4/8 rows within 3x, median 2.82x",
       "system_class": "protein matrix, lipid-derived aldehydes [lipid lane]",
       "verdict": "do-not-use"
     },
@@ -254,14 +254,14 @@
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "0/1 rows within 3x, median 11.9x",
+      "evidence": "2/6 rows within 3x, median 7.97x",
       "system_class": "free precursor, sugar + amine browning / furanics [trunk lane]",
       "verdict": "do-not-use"
     },
     {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
-      "evidence": "7/34 evaluable literature rows inside; 7/33 out of sample; 5 not evaluable",
+      "evidence": "17/44 evaluable literature rows inside; 17/43 out of sample; 1 not evaluable",
       "system_class": "every lane with sampled uncertainty",
       "verdict": "do-not-use"
     },
@@ -338,7 +338,7 @@
     {
       "basis": "recomputed live; strict-ready is the repository's own passing bar",
       "claim_type": "Any claim of benchmark-grade agreement",
-      "evidence": "0/37 strict-ready (none); 4/39 rows within 3x, out-of-sample 3/38",
+      "evidence": "0/37 strict-ready (none); 12/45 rows within 3x, out-of-sample 11/44",
       "system_class": "the union panel: trust loop + hold-outs + matrix bundles",
       "verdict": "do-not-use"
     },

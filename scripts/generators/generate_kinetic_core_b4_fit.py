@@ -540,12 +540,26 @@ def main(argv: list[str] | None = None) -> int:
             "kinetic_core_b4_frozen_predictions.json."
         )
     )
-    parser.parse_args(argv)
+    parser.add_argument(
+        "--refreeze", action="store_true",
+        help=("Overwrite kinetic_core_b4_frozen_predictions.json. REFUSED BY DEFAULT since wave "
+              "B26 (2026-09-09): that file is the record of a BLIND prediction, written before "
+              "this wave read the paired thresholds, and re-running after a later wave changes "
+              "the registry would replace a pre-registration with a prediction made by somebody "
+              "who has seen the answer. Nothing detects that afterwards, because the file's own "
+              "'frozen_on' date is rewritten with it."))
+    args = parser.parse_args(argv)
 
     report = build()
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(report, indent=2, default=str))
     OUT_MD.write_text(to_markdown(report))
+    if FROZEN_PREDICTIONS.exists() and not args.refreeze:
+        print(f"KEPT {FROZEN_PREDICTIONS.relative_to(REPO)} (the blind record; pass --refreeze "
+              f"to overwrite it, and say in the commit why that is legitimate)")
+        print(f"wrote {OUT_JSON.relative_to(REPO)}")
+        print(f"wrote {OUT_MD.relative_to(REPO)}")
+        return 0
     FROZEN_PREDICTIONS.write_text(json.dumps({
         "frozen_on": str(date.today()),
         "declaration": "Amendment 4 gating hold-out: Hong 2020 paired ratios.",

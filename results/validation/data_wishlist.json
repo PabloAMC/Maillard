@@ -2,18 +2,18 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-09",
+    "generated_on": "2026-09-11",
     "git": {
-      "commit": "1bab9e158800e78b86fd6303ac7f7df0c968efe0",
-      "short": "1bab9e15",
-      "branch": "cleaning",
+      "commit": "5af1e4312d142627d918603741618c64ee40d494",
+      "short": "5af1e431",
+      "branch": "reactions",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "38b1dfe393e25f2256f7c5f407e6162e80b3b7e9a71b805181395f0583fd077f"
+        "sha256": "1105ce0b47cb4c813ea11db624d882c6a4ae6b918b6b94023771d54dc96de14c"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,15 +25,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "01cbcd93e6eef2cadf8e645927804650f242959f63212e5cef162f195b6dd6b1"
+        "sha256": "421235556dc56a63af92367c71ca477e55b8b75912a2ccd2de3ba2665e9b23c3"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "d27d20f3c8f1227f19188ab4669ae1cccdeca8a07de029b0f05fb451acfd7610"
+        "sha256": "0d798a4a224c0330002bae727b050cbeaf54323c3990577c94a4262fd9a02ca3"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "5ce0cff9d2372cdbdf02f5cb45d39d2d4da155e0b712f6923cf60ec9bd80bded"
+        "sha256": "e079d2a60135dfed00164e96439fffa16e73ed9bce01f6209e8eaf08a611f3d2"
       }
     ]
   },
@@ -358,32 +358,48 @@
   ],
   "refused_targets": [
     {
-      "what": "UNREPRESENTED TARGETS: 2-pentylfuran",
-      "reason": "UNREPRESENTED TARGETS: 2-pentylfuran -- The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the linoleate -> alkylfuran route is measured anywhere in the fit corpus. The retired screening lane's shipped 0.08 had no source. Refused rather than invented.",
+      "what": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. Th",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to m",
       "rows": [
+        {
+          "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+          "compound": "hexanal"
+        },
         {
           "benchmark_id": "pea_isolate_40C_PratapSingh2021",
           "compound": "2-pentylfuran"
         },
         {
-          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "compound": "2-pentylfuran"
+          "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+          "compound": "hexanal"
         },
         {
           "benchmark_id": "soy_isolate_40C_PratapSingh2021",
           "compound": "2-pentylfuran"
         },
         {
-          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
-          "compound": "2-pentylfuran"
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "hexanal"
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "nonanal"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "hexanal"
+        },
+        {
+          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+          "compound": "nonanal"
         }
       ],
-      "row_count": 4,
+      "row_count": 8,
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxi",
       "rows": [
         {
           "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
@@ -402,23 +418,19 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
-      "what": "UNREPRESENTED TARGETS: nonanal",
-      "reason": "UNREPRESENTED TARGETS: nonanal -- the lipid lane exists and nonanal is a species in it, but its ONLY parent is the OLEATE hydroperoxide pool and the oleate -> nonanal branch fraction is measured NOWHERE in the fit corpus. This matrix is 26 % oleate by fatty-acid share, so the pool is not zero. Frankel 1989 fed linoleate only and nonanal appears in no table, figure or sentence of it -- that ABSENCE",
+      "what": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topolo",
+      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a p",
       "rows": [
         {
           "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
-          "compound": "nonanal"
+          "compound": "2,5-dimethylpyrazine"
         },
         {
-          "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
-          "compound": "nonanal"
-        },
-        {
-          "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
-          "compound": "nonanal"
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "2,5-dimethylpyrazine"
         }
       ],
-      "row_count": 3,
+      "row_count": 2,
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
@@ -438,8 +450,8 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
-      "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML)",
-      "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxymethyl)lysine (CML) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "what": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network ",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxymethyl)lysine (CML)': in the acrylamide lane's network no cha",
       "rows": [
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -450,8 +462,8 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
-      "what": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL)",
-      "reason": "UNREPRESENTED TARGETS: N\u03b5-(Carboxyethyl)lysine (CEL) -- not a species in any core lane, and not on the named unrepresented-compound list either: the engine has no vocabulary entry for it.",
+      "what": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network k",
+      "reason": "GLYCATION TARGETS 'N\u03b5-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'N\u03b5-(Carboxyethyl)lysine (CEL)': in the acrylamide lane's network no chain",
       "rows": [
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -463,7 +475,7 @@
     },
     {
       "what": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-mo",
-      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for t",
       "rows": [
         {
           "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
@@ -480,6 +492,54 @@
         {
           "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
           "compound": "2-Methyl-3-furanthiol (MFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology ",
+      "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it r",
+      "rows": [
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "methional"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keep",
+      "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, whic",
+      "rows": [
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "2-acetyl-1-pyrroline"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not ",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declar",
+      "rows": [
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furaneol"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not ",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declar",
+      "rows": [
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furfural"
         }
       ],
       "row_count": 1,
@@ -612,74 +672,74 @@
   ],
   "largest_misses": [
     {
-      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
-      "compound": "hexanal",
-      "voi_score": 17.46072171569549,
-      "envelope_miss_log10": 3.464842039653945,
-      "template": "missing_positive_flavor_anchor"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.854685402600802,
-      "envelope_miss_log10": 1.4965904870343925,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.531471579808716,
-      "envelope_miss_log10": 1.417157792951579,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 11.984567196329667,
-      "envelope_miss_log10": 1.375924665464233,
+      "voi_score": 12.656872712834398,
+      "envelope_miss_log10": 1.4483087769889744,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 11.926101231166935,
-      "envelope_miss_log10": 1.3609711701276446,
+      "voi_score": 12.388340415573103,
+      "envelope_miss_log10": 1.4694584694999107,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 12.325797147728688,
+      "envelope_miss_log10": 1.3458500702130587,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.603790981275134,
-      "envelope_miss_log10": 1.9979283001565558,
+      "voi_score": 11.518243917815044,
+      "envelope_miss_log10": 1.989073293884062,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 11.483948373676999,
+      "envelope_miss_log10": 1.2315940089864008,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.484013795214867,
-      "envelope_miss_log10": 1.1835312341038355,
+      "voi_score": 11.29247050280676,
+      "envelope_miss_log10": 1.1496145252412275,
       "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-      "compound": "hexanal",
-      "voi_score": 11.236062474641917,
-      "envelope_miss_log10": 2.7249406750181904,
-      "template": "missing_positive_flavor_anchor"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.93638982929702,
-      "envelope_miss_log10": 1.4237906624406151,
+      "voi_score": 10.966718481227442,
+      "envelope_miss_log10": 1.4761165365218465,
       "template": "free_precursor_sulfur_yield"
     },
     {
-      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
-      "compound": "hexanal",
-      "voi_score": 10.231746846610589,
-      "envelope_miss_log10": 2.5113661579192557,
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "compound": "2-pentylfuran",
+      "voi_score": 9.429220820932823,
+      "envelope_miss_log10": 1.516905402952657,
       "template": "missing_positive_flavor_anchor"
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 9.125893421100836,
+      "envelope_miss_log10": 1.3150820210917238,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "voi_score": 8.370075117476679,
+      "envelope_miss_log10": 0.9291760760069337,
+      "template": "free_precursor_sulfur_yield"
     }
   ],
   "what_you_could_predict": [
@@ -751,7 +811,7 @@
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
-    "refused_row_count": 17,
+    "refused_row_count": 24,
     "axes_below_trust": 11,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }

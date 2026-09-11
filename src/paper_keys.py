@@ -16,9 +16,16 @@ from typing import Dict, Mapping, Optional, Tuple
 from src import data_access, data_paths
 
 # A DOI is "10.<registrant>/<suffix>"; the suffix may contain ()<>:; (Wiley). We stop at
-# whitespace, quotes, a markdown table pipe or a closing bracket, then trim trailing
-# punctuation and markdown emphasis.
-_DOI_RE = re.compile(r"10\.\d{4,9}/[^\s\"'|\]]+", re.I)
+# whitespace, quotes, a markdown table pipe, a markdown code backtick or a closing
+# bracket, then trim trailing punctuation and markdown emphasis.
+#
+# The backtick was missing until 2026-09-11. The extraction dossiers print the DOI in a
+# code span -- ``| DOI | `10.1016/j.foodchem.2004.04.006` | p. 257 footer |`` -- so the
+# closing backtick was swallowed into the DOI. That spelling never matched the same DOI
+# read from a JSON registry, which put nine papers in data/keys/papers.yml twice: once
+# clean with no dossier, once backticked holding the dossier link.
+DOI_RE = re.compile(r"10\.\d{4,9}/[^\s\"'`|\]]+", re.I)
+_DOI_RE = DOI_RE  # historical name
 
 
 def normalise_doi(raw: str) -> Optional[str]:

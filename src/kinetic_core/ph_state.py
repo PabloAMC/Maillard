@@ -733,6 +733,43 @@ UNTRACKED_TITRATABLE: Mapping[str, str] = {
         "least consequential entry on this list and it is here so that the "
         "list is exhaustive rather than convenient."
     ),
+    # B20 (2026-09-09): the glycation arm's species, trunk-only, zero without a protein loading.
+    "LYSP": (
+        "protein-bound lysine residue (epsilon-amine, pKa about 10.5). Left out of the charge balance "
+        "for the same reason as Gly: the trunk's amine centres are not in the ledger, and the pool is "
+        "zero in every pot without a protein loading."
+    ),
+    "FLP": (
+        "bound fructosyl-lysine (a secondary amine, pKa about 9). Left out for the same reason as AMA, "
+        "the trunk's free Amadori compound; at most a few mmol/L in a loaded pot."
+    ),
+    "CML": (
+        "N-epsilon-(carboxymethyl)lysine, bound: one carboxyl and one secondary amine per unit, at "
+        "sub-mmol/L levels in every pot the arm has been run on; left out like the trunk's other "
+        "carboxyl-bearing products."
+    ),
+    "CEL": (
+        "N-epsilon-(carboxyethyl)lysine, bound: as CML, at a third of its level."
+    ),
+    # B22 (2026-09-09): the methionine chain, trunk-only, zero without methionine in the charge.
+    "MET": (
+        "L-methionine (alpha-amine pKa 9.2, carboxyl 2.3), charged at 0.27 mmol/L in the pot it was fitted on "
+        "and never above a few mmol/L: left out like Gly and Ala, the trunk's other amines."
+    ),
+    "MSH": (
+        "methanethiol from methional (pKa 10.3), micromolar: left out like the sulfur lane's MESH."
+    ),
+    # B24 (2026-09-09): proline's odorant, trunk-only, zero without proline in the charge.
+    "PRO": (
+        "L-proline (secondary amine pKa 10.6, carboxyl 2.0): left out like the trunk's other amines; charged "
+        "at hundreds of mmol/L only in Hofmann's fed pots, where the phosphate buffer holds the pH."
+    ),
+    "PYRL": (
+        "1-pyrroline (an imine, pKa about 7), micromolar in every pot: left out."
+    ),
+    "AP": (
+        "2-acetyl-1-pyrroline (an imine, weakly basic), sub-micromolar: left out."
+    ),
 }
 
 

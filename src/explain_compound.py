@@ -329,6 +329,19 @@ def explain(compound: str) -> Dict[str, Any]:
         return payload
 
     lane = _TARGET_LANE.get(species_key, TRUNK)
+    # B22 (2026-09-09): a species whose wave was pre-registered, run and REFUSED stays in the network at
+    # zero; `explain` says so instead of listing steps that carry no flux as if they were routes.
+    from src.kinetic_core.engine import METHIONINE_TARGET_KEYS, PROLINE_TARGET_KEYS
+    from src.kinetic_core.parameters_methionine import METHIONINE_NOT_SHIPPED_REASON, METHIONINE_SHIPPED
+    from src.kinetic_core.parameters_proline import PROLINE_NOT_SHIPPED_REASON, PROLINE_SHIPPED
+
+    unshipped = ((METHIONINE_NOT_SHIPPED_REASON if species_key in METHIONINE_TARGET_KEYS and not METHIONINE_SHIPPED else None)
+                 or (PROLINE_NOT_SHIPPED_REASON if species_key in PROLINE_TARGET_KEYS and not PROLINE_SHIPPED else None))
+    if unshipped:
+        payload.update({"answered": False, "state": "refused", "species_key": species_key, "lane": lane,
+                        "reason": unshipped, "routes": [], "label": _species_label(species_key)})
+        payload["hypotheses"] = _hypotheses_for(species_key, str(compound))
+        return payload
     payload.update({"species_key": species_key, "lane": lane, "answered": True,
                     "state": "answered", "label": _species_label(species_key)})
 
@@ -564,12 +577,13 @@ def render_explain_text(payload: Mapping[str, Any]) -> str:
 
     if not payload.get("answered"):
         state = payload.get("state")
-        header = (
-            "  REFUSED -- this compound is on the engine's named "
-            "unrepresented-compound list."
-            if state == "refused"
-            else "  NO VOCABULARY ENTRY."
-        )
+        if state == "refused" and payload.get("species_key"):
+            header = ("  REFUSED -- the step that would make this compound was pre-registered, run and "
+                      "refused; it stays in the network at zero (no shipped rate).")
+        elif state == "refused":
+            header = "  REFUSED -- this compound is on the engine's named unrepresented-compound list."
+        else:
+            header = "  NO VOCABULARY ENTRY."
         out.append(header)
         out.append("")
         out.append(_wrap(str(payload.get("reason", "")), indent="    "))

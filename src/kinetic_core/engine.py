@@ -196,12 +196,35 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     "l-glutamine": "Gln",
     "lysine": "Lys",
     "l-lysine": "Lys",
+    # B22 (2026-09-09): methionine, the Strecker substrate of the methionine chain, trunk lane
+    "methionine": "MET",
+    "l-methionine": "MET",
+    # B24 (2026-09-09): proline, the 1-pyrroline source, trunk lane
+    "proline": "PRO",
+    "l-proline": "PRO",
+    "1-pyrroline": "PYRL",
     "alanine": "Ala",
     "l-alanine": "Ala",
     "methylglyoxal": "MGO",
     # B13 (2026-09-07): the dicarbonyl trio
     "glyoxal": "GO",
     "glucosone": "G",
+    # B37 (2026-09-11): the 3-deoxy series becomes CHARGEABLE, so that a fed-dicarbonyl pot can be
+    # expressed at all. B13 made glyoxal, glucosone, diacetyl and methylglyoxal chargeable and left
+    # these three as targets only; Mittelmaier et al. 2011 charge pure 3-DG at 120 C and follow
+    # 3,4-DGE, which is the experiment docs/guides/EXPERIMENTS.md asks for by name and which no
+    # spec could express until now. INERT: no bundle, benchmark, directional claim or fit row
+    # charges any of these three (tests/unit/test_kinetic_core_b37.py holds that).
+    "3-deoxyglucosone": "TDG",
+    "3-dg": "TDG",
+    "3,4-dideoxyglucosone": "DDG",
+    "3,4-dideoxyglucosone-3-ene": "DDG",
+    "3,4-dge": "DDG",
+    "1-deoxyglucosone": "ODG",
+    "1-dg": "ODG",
+    # B39 (2026-09-11): the epimer Mittelmaier 2011 feeds
+    "3-deoxygalactosone": "DGAL",
+    "3-dgal": "DGAL",
     "diacetyl": "DA",
     "2,3-butanedione": "DA",
     "butane-2,3-dione": "DA",
@@ -225,6 +248,37 @@ TARGET_ALIASES: Mapping[str, str] = {
     "glyoxal": "GO",
     "glucosone": "G",
     "diacetyl": "DA",
+    # B20 (2026-09-09): the glycation arm, trunk lane only, on protein-bound lysine
+    "cml": "CML",
+    "carboxymethyllysine": "CML",
+    "n-epsilon-(carboxymethyl)lysine": "CML",
+    "nε-(carboxymethyl)lysine (cml)": "CML",
+    "nε-(carboxymethyl)lysine": "CML",
+    "cel": "CEL",
+    "carboxyethyllysine": "CEL",
+    "n-epsilon-(carboxyethyl)lysine": "CEL",
+    "nε-(carboxyethyl)lysine (cel)": "CEL",
+    "nε-(carboxyethyl)lysine": "CEL",
+    "fructosyl-lysine": "FLP",
+    "fructosyllysine": "FLP",
+    "fructoselysine": "FLP",
+    "bound lysine": "LYSP",
+    "protein-bound lysine": "LYSP",
+    # B24 (2026-09-09): 2-acetyl-1-pyrroline, trunk lane only
+    "2-acetyl-1-pyrroline": "AP",
+    "2-acetyl-1-pyrroline (2-ap)": "AP",
+    "2-ap": "AP",
+    "acetylpyrroline": "AP",
+    "1-pyrroline": "PYRL",
+    # B22 (2026-09-09): the methionine chain, trunk lane only
+    "methional": "MTAL",
+    "3-(methylthio)propanal": "MTAL",
+    "3-(methylthio)propionaldehyde": "MTAL",
+    "methional (3-(methylthio)propanal)": "MTAL",
+    "methanethiol from methional": "MSH",
+    "dimethyl disulfide": "DMDS",
+    "dimethyl disulfide (dmds)": "DMDS",
+    "dmds": "DMDS",
     # B18 (2026-09-08): the pyrazine step, trunk lane only
     "pyrazine": "PZ",
     "2,5-dimethylpyrazine": "DMP",
@@ -258,6 +312,11 @@ TARGET_ALIASES: Mapping[str, str] = {
     "methyl octanoate": "ME_OCTANOATE",
     "methyl 9-oxononanoate": "ME_9_OXONONANOATE",
     "methyl 13-oxo-9,11-tridecadienoate": "ME_13_OXO_TRIDECADIENOATE",
+    # -- B28, 2026-09-09: the alkylfuran the lane refused until Frankel 1981 --
+    "2-pentylfuran": "PENTYLFURAN",
+    "2-pentyl furan": "PENTYLFURAN",
+    "2-pentylfuran (pentyl furan)": "PENTYLFURAN",
+    "pentylfuran": "PENTYLFURAN",
     "methanethiol": "MESH",
     "2-acetylthiazole": "ACTZ",
     "norfuraneol": "NF",
@@ -279,6 +338,8 @@ TARGET_ALIASES: Mapping[str, str] = {
     "3-dg": "TDG",
     "1-deoxyglucosone": "ODG",
     "1-dg": "ODG",
+    "3-deoxygalactosone": "DGAL",
+    "3-dgal": "DGAL",
     "acetylformoin": "AF",
 }
 
@@ -338,18 +399,27 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
         "lane emitted a number for it; this lane refuses. See "
         "parameters_lipid.PROHIBITED_DERIVATIONS."
     ),
-    "2-pentylfuran": (
-        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
-        "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The retired "
-        "screening lane's shipped 0.08 had no source. Refused rather than invented."
-    ),
-    "2-pentyl furan": (
-        "The lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
-        "six-product slate and no branch fraction for the linoleate -> "
-        "alkylfuran route is measured anywhere in the fit corpus. The retired "
-        "screening lane's shipped 0.08 had no source. Refused rather than invented."
-    ),
+    # 2-pentylfuran and "2-pentyl furan" LEFT this table in WAVE B28 (2026-09-09), came BACK the
+    # same evening on a diagnosis that was wrong, and left again on 2026-09-10. The full record,
+    # because the wrong step is the instructive one:
+    #
+    #   The old reason was "no branch fraction for the linoleate -> alkylfuran route is measured
+    #   anywhere in the fit corpus". Frankel, Neff & Selke 1981 Table III measures it, in the same
+    #   laboratory and by the same injector-port method as the slate this lane is fitted on, and it
+    #   ships as PENTYLFURAN_PER_HEXANAL = 0.16 -- a ratio, so none of 1981's own denominator
+    #   travels with it. Un-refusing it produced predictions about 1e5 below measurement. I read
+    #   that as the lipid lane not being what produces these rows' hexanal, wrote that reasoning
+    #   into five places, and restored the refusal.
+    #
+    #   It was a missing entry in _TARGET_LANE. Without one the concentration loop reports the
+    #   species in mmol/L rather than ug/L. The lane makes 3.65e-5 mmol/L of it, which is 5.0 ug/L,
+    #   against 163 measured -- a 32x miss, in line with this panel's median, not a degenerate
+    #   answer at all. The lane was right, the ratio was right, and the dictionary was short one
+    #   line.
+    #
+    #   WHAT THE EPISODE IS WORTH KEEPING FOR: a plausible mechanistic story explained a unit bug
+    #   for a day. The ship rule's new degeneracy test caught that something was wrong and was
+    #   right to; the diagnosis of WHY was mine and it was wrong.
     "propanal": (
         "The lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
         "scission product; Frankel 1989 fed linoleate only, so the FIT column "
@@ -365,6 +435,16 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
 }
 
 #: Which lane each target species is reachable in.
+#: B34 (2026-09-11). THE SPECIES THAT ARE NOT MOLECULES, named rather than caught by an `else`.
+#: These are elemental or lumped accounting pools -- a mole of "melanoidin nitrogen" is a mole of N
+#: atoms, not of any compound -- so a molar mass would have to be invented. They are reported in
+#: mmol/L on purpose. Everything else that reaches the reporting loop MUST have a molar mass; see
+#: `_concentrations`, where a missing one now raises instead of silently changing the unit.
+_REPORTED_IN_MMOL_PER_L: frozenset = frozenset({
+    "MEL_C", "MEL_N", "MEL_S", "FRAG_C", "FRAG_N", "FRAG_S",
+    "OX", "OXR", "OXV", "OLG", "MELE", "PROT_SS", "ACID", "CBX", "SB", "LYS_SITES",
+})
+
 _TARGET_LANE: Mapping[str, str] = {
     "ACR": ACRYLAMIDE,
     "FFT": SULFUR,
@@ -396,10 +476,25 @@ _TARGET_LANE: Mapping[str, str] = {
     # -- B18, the pyrazine step: trunk-only as the dicarbonyls are
     "PZ": TRUNK,
     "DMP": TRUNK,
+    "CML": TRUNK,
+    "CEL": TRUNK,
+    "FLP": TRUNK,
+    "LYSP": TRUNK,
+    "MTAL": TRUNK,
+    "MSH": TRUNK,
+    "DMDS": TRUNK,
+    "AP": TRUNK,
+    "PYRL": TRUNK,
     "MPZ": TRUNK,
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
     "NONANAL": LIPID,
+    # WAVE B28, ADDED 2026-09-10 AND THIS OMISSION COST A WHOLE DIAGNOSIS. Without a lane here the
+    # concentration loop falls through to its last branch and reports the species in mmol/L instead
+    # of ug/L -- a factor of about 1.4e5 for this compound. Read as a prediction it looked like the
+    # lipid lane making almost none of it, and a refusal was restored on that reading. It was a
+    # missing dictionary entry.
+    "PENTYLFURAN": LIPID,
     "PENTANE": LIPID,
     "DECADIENAL": LIPID,
     "ME_OCTANOATE": LIPID,
@@ -408,10 +503,12 @@ _TARGET_LANE: Mapping[str, str] = {
 }
 
 #: B13: the species whose steps exist on the trunk integrator only.
-DICARBONYL_TARGET_KEYS: frozenset = frozenset({"G", "GO", "DA"})
-#: B18: the pyrazine species, whose steps also exist on the trunk integrator only.
-PYRAZINE_TARGET_KEYS: frozenset = frozenset({"PZ", "DMP", "MPZ"})
-TRUNK_ONLY_TARGET_KEYS: frozenset = DICARBONYL_TARGET_KEYS | PYRAZINE_TARGET_KEYS
+# The trunk's optional arms and their target keys are one table now (trunk_arms.py); the names
+# below are re-exported so nothing that imported them from here has to change.
+from .trunk_arms import (  # noqa: E402
+    DICARBONYL_TARGET_KEYS, GLYCATION_TARGET_KEYS, METHIONINE_TARGET_KEYS, PROLINE_TARGET_KEYS,
+    PYRAZINE_TARGET_KEYS, TRUNK_ARMS, TRUNK_ONLY_TARGET_KEYS, named_targets,
+)
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
 _PRECURSOR_LANE: Mapping[str, str] = {
@@ -425,6 +522,29 @@ _PRECURSOR_LANE: Mapping[str, str] = {
     "Lys": ACRYLAMIDE,
     "Ala": ACRYLAMIDE,
 }
+
+#: B31 (2026-09-10). THE LINE BETWEEN A COOK AND A HEADSPACE INCUBATION, expressed
+#: as the fraction of the hydroperoxide pool that decomposes over the whole thermal
+#: program. It is NOT a fitted quantity and NOT a tuned one.
+#:
+#: What it separates, computed on the panel's own conditions with the lane's own
+#: anchored decomposition constant:
+#:
+#:     40 C, 10 min  (the four HS-SPME incubations)      3.826e-3
+#:     140 C, 6 s    (Trikusuma UHT, the mildest cook)   0.2578
+#:     160 C, 25 s   (Li 2026 extrusion)                 0.9994
+#:     160 C, 30 min (Bi 2020 roasted pea)               1.000
+#:
+#: The gap between the first row and the second is a factor of 67 and NOTHING IN THE
+#: PANEL LIES INSIDE IT. Thresholds of 0.01, 0.05 and 0.10 all give the identical
+#: verdict on every row, which is what a threshold that is not doing any fitting looks
+#: like. The verdict also survives the Q10 band end to end: at q10 = 2.0, the corner
+#: that slows the hot pots most, the two sides are 2.824e-3 and 2.855e-2 -- still on
+#: opposite sides of the line.
+#:
+#: The 1 % figure is chosen as the round number at the bottom of that empty gap, and
+#: it is used ONLY to refuse, never to scale anything.
+UNCOOKED_LOOH_CONVERSION_LIMIT = 0.01
 
 #: B6. A LIPID CARRIER is not a precursor species: it is a matrix declaration
 #: that resolves to a hydroperoxide pool through
@@ -467,6 +587,8 @@ LANE_DEFAULT_TARGETS: Mapping[str, Tuple[str, ...]] = {
         "methyl octanoate",
         "methyl 9-oxononanoate",
         "methyl 13-oxo-9,11-tridecadienoate",
+        "nonanal",                # wave B28: answered, on a declared anchor
+        "2-pentylfuran",          # wave B28, restored 2026-09-10 once the unit bug was found
     ),
 }
 
@@ -519,7 +641,25 @@ def default_targets_for(precursors: Mapping[str, float]) -> Tuple[str, ...]:
     out: Tuple[str, ...] = ()
     for lane in lanes:
         out = out + LANE_DEFAULT_TARGETS.get(lane, ())
-    return out
+    # 2026-09-11 (review of PR #16): the docstring says "the compounds the core can report for this
+    # charge", and the table is per LANE, so a ribose + cysteine pot used to be asked for
+    # methanethiol (a methionine product) and answered it as 0.0. Filter each lane's list by what
+    # the charge can actually reach; the lipid lane's defaults are the carrier's business.
+    charged = {k: float(v) for k, v in zip(keys, (precursors[n] for n in precursors if PRECURSOR_ALIASES.get(_norm(n))))}
+    reachable_by_lane = {
+        lane: _reachable_species(lane, {k for k, v in charged.items() if v > 0.0}, None)
+        for lane in lanes if lane in MAILLARD_LANES
+    }
+    kept = []
+    for name in out:
+        key = TARGET_ALIASES.get(_norm(name))
+        lane = _TARGET_LANE.get(key)
+        if lane == LIPID or key is None:
+            kept.append(name)
+            continue
+        if any(key in reach for reach in reachable_by_lane.values()):
+            kept.append(name)
+    return tuple(kept)
 
 
 # ---------------------------------------------------------------------------
@@ -604,6 +744,17 @@ class ProcessSpec:
     #: pools (matrix_sites.resolve); without either, nothing is charged and the answer says so.
     protein_g_per_l: Optional[float] = None
     protein_sites: Optional[Mapping[str, float]] = None
+    #: B31 (2026-09-10): what the pot STARTS with, in ug/L, for compounds the raw material carries
+    #: in rather than the cook making. Added to the integrated concentration BEFORE the
+    #: matrix-binding factor, because the protein cannot tell a carried molecule from a made one.
+    #: ``None`` or absent means zero, so every pot that declares nothing is bit-for-bit unchanged.
+    #: Only a level the source PRINTS as an unheated control of the same pot may be put here.
+    carried_volatiles: Optional[Mapping[str, float]] = None
+    #: B29 (2026-09-10): the pot's atmosphere -- "argon", "air" or "air_cu". ``None`` means air,
+    #: which is what every fit row in this model was run in, so a spec that says nothing gets
+    #: exactly the answer it got before the axis existed. Anything else with no fitted multiplier
+    #: RAISES rather than quietly returning the air answer.
+    atmosphere: Optional[str] = None
 
     @property
     def time_min(self) -> float:
@@ -652,6 +803,11 @@ class EnvelopeDeclaration:
     unrepresented_targets: Tuple[Tuple[str, str], ...] = ()
     mapped_precursors: Mapping[str, float] = field(default_factory=dict)
     mapped_targets: Mapping[str, str] = field(default_factory=dict)
+    #: 2026-09-11: requested names whose species no chain of the lane's reactions can reach from
+    #: the charge, when OTHER requested targets can be. They are dropped from the answer and listed
+    #: in `run_metadata["refused_targets"]` by name; a request where NONE is reachable is refused
+    #: whole, in `reasons`, like any other out-of-envelope pot.
+    unreachable_targets: Tuple[str, ...] = ()
     #: B6. Every lane this request needs. ``lane`` stays the PRIMARY (Maillard)
     #: lane so that every pre-B6 caller is unchanged; ``lanes`` is the tuple the
     #: propagator actually runs, and it has more than one member only for a
@@ -826,6 +982,76 @@ def declared_unidentified(declaration: "EnvelopeDeclaration", compound: str) -> 
     return declaration.mapped_targets.get(str(compound)) in _HEXOSE_ENTRY_TARGETS
 
 
+def _lane_reactions(lane: str):
+    """The reaction tuple the integrator will run for this lane."""
+    if lane == SULFUR:
+        from .sulfur import FULL_REACTIONS
+        return FULL_REACTIONS
+    if lane == ACRYLAMIDE:
+        from .acrylamide import FULL_ACRYLAMIDE_REACTIONS
+        return FULL_ACRYLAMIDE_REACTIONS
+    from .network import TRUNK_REACTIONS
+    return TRUNK_REACTIONS
+
+
+def _ambient_seeds(lane: str, process) -> set:
+    """Species `_integrate_program` charges on its own, without a precursor: the oxidant pool
+    and its reservoir on the sulfur lane, and the protein pools when a loading is stated."""
+    seeds = set()
+    if lane == SULFUR:
+        seeds |= {"OX", "OXR", "OXV"}
+    try:
+        from .matrix_sites import resolve as _resolve_sites
+        charged, _ = _resolve_sites(process)
+    except Exception:  # noqa: BLE001 - a malformed loading is reported by the matrix layer itself
+        charged = None
+    if charged is not None:
+        if lane == TRUNK and charged.amine > 0:
+            seeds.add("LYSP")
+        if lane == SULFUR and charged.disulfide > 0:
+            seeds.add("PROT_SS")
+    return seeds
+
+
+def _reachable_species(lane: str, charged: set, process) -> set:
+    """Forward closure: every species some chain of the lane's reactions can make from `charged`."""
+    reachable = set(charged) | _ambient_seeds(lane, process)
+    reactions = _lane_reactions(lane)
+    grew = True
+    while grew:
+        grew = False
+        for r in reactions:
+            if r.products and set(r.reactants) <= reachable and not set(r.products) <= reachable:
+                reachable |= set(r.products)
+                grew = True
+    return reachable
+
+
+def _unreachable_targets(lane: str, mapped_precursors, mapped_targets, process):
+    """The requested names (caller's spelling) whose species no chain of the lane's reactions can
+    reach from the charge. Lipid targets are the lipid lane's business and are never listed."""
+    charged = {k for k, v in mapped_precursors.items() if float(v) > 0.0}
+    reachable = _reachable_species(lane, charged, process)
+    return sorted(
+        name for name, key in mapped_targets.items()
+        if _TARGET_LANE.get(key) != LIPID and key not in reachable
+    )
+
+
+def _carried_by_species(carried: Mapping[str, Any]) -> Dict[str, float]:
+    """{species key: ug/L} from a `carried_volatiles` mapping, resolved through TARGET_ALIASES
+    (the same table a target request comes in on). A name the table does not know is dropped
+    HERE, and only here, so that every consumer sees the same declaration; a negative amount is
+    a data error and is dropped too. Zero is kept: it is a declared 'not detected'."""
+    out: Dict[str, float] = {}
+    for name, amount in (carried or {}).items():
+        key = TARGET_ALIASES.get(_norm(str(name)))
+        if key is None or float(amount) < 0.0:
+            continue
+        out[key] = out.get(key, 0.0) + float(amount)
+    return out
+
+
 def declare_envelope(
     spec: FormulationSpec, targets: Sequence[str]
 ) -> EnvelopeDeclaration:
@@ -949,14 +1175,65 @@ def declare_envelope(
     # B13: the dicarbonyl steps are trunk-only (the sulfur and acrylamide networks keep the
     # topology their fits were run on), so a dicarbonyl target on another lane is refused
     # by name instead of answered with the inert zero those state vectors carry.
-    dicarbonyls = sorted(c for c, key in mapped_targets.items() if key in DICARBONYL_TARGET_KEYS)
-    pyrazines = sorted(c for c, key in mapped_targets.items() if key in PYRAZINE_TARGET_KEYS)
-    if (dicarbonyls or pyrazines) and lane is not None and lane != TRUNK:
-        named = []
-        if dicarbonyls:
-            named.append("DICARBONYL TARGETS " + ", ".join(repr(c) for c in dicarbonyls) + " (wave B13)")
-        if pyrazines:
-            named.append("PYRAZINE TARGETS " + ", ".join(repr(c) for c in pyrazines) + " (wave B18)")
+    # The trunk's optional arms, one table (trunk_arms.py): not-shipped refusals, missing-precursor
+    # refusals and the lane-conflict clause, in the orders the hand-written blocks emitted them.
+    arm_targets = {arm.label: named_targets(arm, mapped_targets) for arm in TRUNK_ARMS}
+    for arm in sorted(TRUNK_ARMS, key=lambda a: a.refusal_order):
+        found = arm_targets[arm.label]
+        if not found or lane != TRUNK:
+            continue
+        if arm.shipped is not None:
+            shipped, why = arm.shipped()
+            if not shipped:
+                reasons.append(arm.label + " " + ", ".join(repr(c) for c in found) + ": " + why)
+        if arm.required_precursors is not None and all(
+                mapped_precursors.get(k, 0.0) <= 0.0 for k in arm.required_precursors):
+            reasons.append(arm.label + " " + ", ".join(repr(c) for c in found) + arm.missing_precursor_message)
+    # Two irregular checks stay explicit: this compound has no species key, so it is matched on the
+    # raw target string ...
+    if any(str(c).strip().lower() in ("dimethyl trisulfide", "dmts") for c in targets):
+        from .parameters_methionine import METHIONINE_NO_DMTS_REASON
+
+        reasons.append("UNREPRESENTED TARGET 'dimethyl trisulfide' (wave B22): " + METHIONINE_NO_DMTS_REASON)
+    # ... and the glycation arm refuses on the MATRIX LAYER's charged amine sites, not on a precursor.
+    glycation = arm_targets["GLYCATION TARGETS"]
+    if glycation and lane == TRUNK:
+        from .matrix_sites import resolve as _resolve_sites_for_glycation
+        from .parameters_glycation import GLYCATION_NO_PROTEIN_REASON
+
+        try:
+            _charged, _ = _resolve_sites_for_glycation(spec.process)
+        except Exception:  # noqa: BLE001 - a malformed loading is reported by the matrix layer itself
+            _charged = None
+        if _charged is None or _charged.amine <= 0:
+            reasons.append(GLYCATION_NO_PROTEIN_REASON + " Targets: " + ", ".join(repr(c) for c in glycation) + ".")
+    if lane == TRUNK and not lane_reasons:
+        # 2026-09-11 (review of PR #16). Since B20 a stated protein loading charges the bound-lysine
+        # pool on EVERY trunk run, and the glycation arm recycles glucose through fructosyl-lysine
+        # back to 3-deoxyglucosone. That moves answers that never asked about glycation -- 5-HMF in
+        # a glucose/glycine pot rises by about half at 30 g/L of pea isolate -- and the glycation
+        # caveat was attached only when a glycation target was requested. Say it on every loaded
+        # trunk answer instead.
+        from .matrix_sites import resolve as _resolve_sites_for_loading
+
+        try:
+            _loaded, _ = _resolve_sites_for_loading(spec.process)
+        except Exception:  # noqa: BLE001 - a malformed loading is reported by the matrix layer itself
+            _loaded = None
+        if _loaded is not None and _loaded.amine > 0 and not any(
+            k in GLYCATION_TARGET_KEYS for k in mapped_targets.values()
+        ):
+            warnings.append(
+                "A PROTEIN LOADING IS STATED, SO THE BOUND-LYSINE POOL IS CHARGED "
+                f"({float(_loaded.amine):.3g} mmol/L of amine sites) and the glycation steps run on this "
+                "trunk answer even though no glycation product was asked for: glucose is recycled "
+                "through fructosyl-lysine to 3-deoxyglucosone, which raises the sugar-path products "
+                "downstream of it. The same pot with no loading gives the unloaded number. Read the "
+                "loading as an input that moved this answer, not as decoration."
+            )
+    if any(arm_targets.values()) and lane is not None and lane != TRUNK:
+        named = [arm.label + " " + ", ".join(repr(c) for c in arm_targets[arm.label]) + f" (wave {arm.wave})"
+                 for arm in sorted(TRUNK_ARMS, key=lambda a: a.conflict_order) if arm_targets[arm.label]]
         reasons.append(
             " and ".join(named)
             + f" run on the trunk lane only: the {lane} lane's network keeps the topology its fit was run "
@@ -967,6 +1244,8 @@ def declare_envelope(
     # --- the lipid lane's own refusals ------------------------------------
     if LIPID in lanes:
         from .parameters_lipid import LIPID_CARRIERS, oleate_fraction
+        from .parameters_lipid_b28 import (
+            OLEATE_MOLAR_ANCHOR_BAND, OLEATE_MOLAR_ANCHOR_CENTRE)
 
         if not carriers:
             reasons.append(
@@ -984,27 +1263,156 @@ def declare_envelope(
                 if c in LIPID_CARRIERS
             )
             if oleate > 0.0:
-                reasons.append(
-                    "UNREPRESENTED TARGETS: nonanal -- the lipid lane exists "
-                    "and nonanal is a species in it, but its ONLY parent is the "
-                    "OLEATE hydroperoxide pool and the oleate -> nonanal branch "
-                    f"fraction is measured NOWHERE in the fit corpus. This "
-                    f"matrix is {100.0 * oleate:.0f} % oleate by fatty-acid "
-                    "share, so the pool is not zero. Frankel 1989 fed linoleate "
-                    "only and nonanal appears in no table, figure or sentence "
-                    "of it -- that ABSENCE is a declared hold-out, and honouring "
-                    "it means refusing here rather than carrying the FAST "
-                    "lane's unsourced 'nonanal 0.15' forward."
+                # WAVE B28 (2026-09-09). This branch used to REFUSE, on the
+                # ground that "the oleate -> nonanal branch fraction is measured
+                # NOWHERE in the fit corpus". It is measured now (Frankel 1981
+                # Table II), so the refusal has become a WARNING -- and the
+                # warning is not decoration. The measured quantity is a SHARE of
+                # a peak-area slate; turning it into an absolute needs a molar
+                # anchor that no source supplies for oleate, so the answer rests
+                # on a declared assumption with a wide band. Anyone reading a
+                # nonanal number out of this lane must see that in the same
+                # breath as the number.
+                warnings.append(
+                    "NONANAL RESTS ON A DECLARED ANCHOR, NOT A MEASURED YIELD. "
+                    f"This matrix is {100.0 * oleate:.0f} % oleate by fatty-acid "
+                    "share. The oleate -> nonanal SHARE is measured -- 15 % of "
+                    "the slate (Selke 1978, republished by Frankel 1981) and "
+                    "10 % (Frankel 1981's own photosensitized column, the only "
+                    "independent determination). But Frankel 1981 prints PEAK "
+                    "AREAS: no internal standard, no response factors, no "
+                    "replicates. No absolute yield from an oleate hydroperoxide "
+                    "exists anywhere in the corpus, so the absolute here assumes "
+                    "the named-product molar yield per oleate hydroperoxide is "
+                    f"{OLEATE_MOLAR_ANCHOR_CENTRE:g} times the measured one per "
+                    "LINOLEATE hydroperoxide, banded "
+                    f"{OLEATE_MOLAR_ANCHOR_BAND[0]:g} to "
+                    f"{OLEATE_MOLAR_ANCHOR_BAND[1]:g}. Read the interval, not "
+                    "the point. Frankel 1989's silence on nonanal remains a "
+                    "declared hold-out and is still honoured: nonanal from a "
+                    "LINOLEATE feed is exactly zero, by construction."
                 )
+        # -- B31 T3 (2026-09-10): A POT THAT WAS NEVER COOKED ------------------
+        # Four panel pots hold at 40 C for ten minutes and are not cooks at all: the
+        # 40 C / 10 min block is the HS-SPME headspace incubation, and each bundle's own
+        # vessel provenance says so in as many words ("never heated", "an UNHEATED protein
+        # powder", "No cook"). What they measure is what the raw material ARRIVED WITH.
+        # A formation model asked to make 1260 ug/kg of hexanal out of a flour nobody
+        # heated is not being tested on its chemistry, and scoring the miss as a chemistry
+        # failure -- 3357x, 6078x, 3717x, 33392x -- misreports what is wrong.
+        #
+        # TWO INDEPENDENT DECLARATIONS HAVE TO AGREE before a row is refused, because
+        # either alone is unsafe:
+        #   1. the bundle's vessel says `closure: "no cook"`. This is a datum the bundles
+        #      recorded months before this wave and it owes nothing to any prediction --
+        #      but the string is OVERLOADED. Three hot bundles carry it meaning "no vessel
+        #      to record" (a synthetic snapshot; two commercial products whose conditions
+        #      block is a proxy operating point). It cannot be the whole rule.
+        #   2. the thermal load cannot form what was measured: the fraction of the
+        #      hydroperoxide pool that decomposes over the program is below 1 %. The four
+        #      unheated pots sit at 3.8e-3; the coldest real cook in the panel (140 C for
+        #      6 s) sits at 0.258, sixty-seven times higher. NOTHING IN THE PANEL LIES
+        #      BETWEEN THEM, which is why the threshold is not a tuned knob: 0.01, 0.05 and
+        #      0.10 all refuse the same seven rows. The verdict also survives the Q10 band
+        #      -- at the worst corner (q10 = 2.0, which slows the hot pots most) the two
+        #      sides are still 2.8e-3 and 2.9e-2, on opposite sides of the line.
+        # The three hot "no cook" bundles fail clause 2 and are untouched.
+        #
+        # THE REFUSAL IS CONDITIONAL AND NAMES ITS OWN CURE. Declare what the pot started
+        # with (`conditions.carried_volatiles`, this wave's other half) and the row is
+        # answered. Trikusuma does exactly that and is scored. What is refused is the pot
+        # for which NO source on this disk prints a starting state, and the honest report
+        # of that is "cannot be asked", not a four-decade miss.
+        #
+        # This SHRINKS the panel: seven rows leave, all of them misses, so within-3x goes
+        # 7/46 -> 7/39 and out-of-sample 6/45 -> 6/42 on arithmetic alone. That is exactly
+        # the shape of a self-serving rule and is flagged here rather than buried. What
+        # makes it not one: the criterion is condition-side and was fixed before any error
+        # was looked at, and it leaves every lipid miss in a pot that WAS cooked standing
+        # -- including the panel's largest, 2-pentylfuran at 366x in li 2026.
+        if carriers and lipid_targets:
+            vessel = getattr(spec.process, "vessel", None)
+            closure = _norm(str(getattr(vessel, "closure", "") or ""))
+            if closure == "no cook":
+                from .parameters_lipid import k_looh_decomp_per_min
+
+                exponent = sum(
+                    k_looh_decomp_per_min(float(temperature_c)) * float(duration)
+                    for duration, temperature_c in spec.process.thermal.segments
+                )
+                extent = 1.0 - math.exp(-exponent)
+                if extent < UNCOOKED_LOOH_CONVERSION_LIMIT:
+                    # A compound counts as declared when its SPECIES was declared, under any of
+                    # the names the alias table accepts, and a declared 0.0 counts (2026-09-11:
+                    # this compared raw strings and dropped zeros, so a level declared under one
+                    # spelling and requested under another read as undeclared).
+                    carried_declared = set(_carried_by_species(
+                        getattr(spec.process, "carried_volatiles", None) or {}
+                    ))
+                    undeclared = sorted(
+                        {
+                            name for name, key in mapped_targets.items()
+                            if _TARGET_LANE.get(key) == LIPID and key not in carried_declared
+                        }
+                    )
+                    if undeclared:
+                        reasons.append(
+                            "THIS POT WAS NEVER COOKED, so what it measures is what the raw "
+                            "material ARRIVED WITH, and this lane models FORMATION. The "
+                            "bundle's own vessel says so (closure = 'no cook'), and the "
+                            "physics agrees: over this thermal program only "
+                            f"{100.0 * extent:.2f} % of the hydroperoxide pool decomposes, "
+                            f"against {100.0 * UNCOOKED_LOOH_CONVERSION_LIMIT:.0f} % taken as "
+                            "the floor for a cook and 25.8 % for the mildest real cook in the "
+                            "panel. There is no thermal step here to model, so "
+                            + ", ".join(undeclared)
+                            + " is refused rather than answered with a formation from zero. "
+                            "THE CURE IS A DECLARED STARTING STATE: put the level the source "
+                            "prints for the unheated material in conditions.carried_volatiles "
+                            "and the row is answered. Only a level the source PRINTS may go "
+                            "there; nothing may be inferred from another paper's isolate."
+                        )
+
     if lipid_targets and LIPID not in lanes and not lane_reasons:
         reasons.append(
             "a lipid product was requested but the lipid lane was not selected"
+        )
+    # -- B35 (2026-09-11): A POT WITH NO MAILLARD PRECURSOR ANSWERS NO MAILLARD TARGET ---------
+    # A matrix-only charge declares a protein isolate and nothing else. The isolate is a LIPID
+    # CARRIER and is deliberately kept out of `mapped_precursors` (see LIPID_CARRIER_ALIASES), so
+    # the trunk, sulfur and acrylamide networks are integrated from an all-zero state and every
+    # species in them stays zero BY CONSTRUCTION. Until this clause they were reported as 0.0 with
+    # no refusal and no warning -- the audit found furaneol and furfural scored that way against
+    # measurements of 2780 and 327 ug/kg, and 5-HMF would have been the same.
+    #
+    # THIS IS THE THIRD TIME THIS FAMILY OF BUG HAS COST A WAVE. B28 spent a day on 2-pentylfuran
+    # reported in the wrong unit; B34 found the same silent unit fallback still catching two more
+    # species; this is the same idea one level up -- an absence of a prediction dressed as one. The
+    # repo's own words for it, from B28's record: "A near-zero is the absence of a prediction
+    # dressed as one, so the refusal was restored with a sharper reason naming what would lift it."
+    #
+    # The lipid lane is exempt because its charge IS the carrier: it needs no free precursor.
+    non_lipid_targets = sorted(
+        name for name, key in mapped_targets.items() if _TARGET_LANE.get(key) != LIPID
+    )
+    if non_lipid_targets and not mapped_precursors and not lane_reasons:
+        reasons.append(
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE "
+            + ", ".join(repr(c) for c in non_lipid_targets)
+            + ". The charge declares only a matrix/lipid carrier, which is not a precursor: it "
+            "resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, "
+            "sulfur or acrylamide networks, so every species there is zero by construction rather "
+            "than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: "
+            "declare the sugar and amino acid this matrix brings to the cook, and the question "
+            "becomes answerable."
         )
 
     # A target whose lane needs a precursor species this charge cannot supply.
     if lane is not None and not unmapped:
         if lane == SULFUR and not (
-            {"Cys", "THI", "PENT", "ARP", "H2S", "TTCA"} & set(mapped_precursors)   # W6: TTCA carries its cysteine sulfur
+            # 2026-09-11: PENT was in this set. A pentose carries no sulfur, so a ribose-only
+            # charge asked for a thiol was answered 0.0 instead of refused here.
+            {"Cys", "THI", "ARP", "H2S", "TTCA"} & {k for k, v in mapped_precursors.items() if v > 0.0}   # W6: TTCA carries its cysteine sulfur
         ):
             if set(mapped_targets.values()) & {"MFT", "FFT", "MFTD", "MESH", "ACTZ"}:
                 reasons.append(
@@ -1020,6 +1428,45 @@ def declare_envelope(
                     "NO asparagine. Acrylamide in this network comes only from "
                     "the Asn + Glc initiation."
                 )
+
+    # --- 2026-09-11 (review of PR #16): THE ONE RULE THE THREE GUARDS WERE PROJECTIONS OF ------
+    # B28 (a target reported in the wrong unit), B34 (a silent unit fallback) and B35 (a pot with
+    # no precursor answering 0.0) were each patched where they bit. The invariant underneath all
+    # three is that a requested target must be REACHABLE from what is charged, in the network of
+    # the lane that will run: if no chain of the lane's reactions leads from the charged species
+    # (plus the lane's ambient seeds) to the target's species, the integrator returns exactly
+    # zero for it BY CONSTRUCTION, and that zero is not a prediction. The review found the same
+    # thing waiting on every lane -- a cysteine-only pot answering the thiols, thiamine alone
+    # answering furfurylthiol, asparagine alone answering acrylamide, glycine alone answering
+    # HMF, and a zero-amount charge slipping past the B35 clause because its key was present.
+    # One forward closure over the lane's reaction tuple catches all of them, and the next one.
+    unreachable_targets: Tuple[str, ...] = ()
+    if lane in MAILLARD_LANES and not unmapped and not lane_reasons and not any(
+        "CHARGES NO PRECURSOR" in r for r in reasons
+    ):
+        unreachable = _unreachable_targets(lane, mapped_precursors, mapped_targets, spec.process)
+        answerable = [n for n, k in mapped_targets.items() if _TARGET_LANE.get(k) != LIPID and n not in unreachable]
+        if unreachable and answerable:
+            # A mixed request (the CLI's default target list, say) answers what it can and refuses
+            # the rest BY NAME rather than failing the whole pot for one compound it cannot make.
+            unreachable_targets = tuple(unreachable)
+            warnings.append(
+                "NOT ANSWERED, BY NAME: " + ", ".join(repr(c) for c in unreachable)
+                + f" -- in the {lane} lane's network no chain of reactions leads from what is charged "
+                "to it, so its integrated value would be exactly zero by construction. It is left out "
+                "of the answer and listed under refused_targets; the other targets are answered."
+            )
+        elif unreachable:
+            charged = sorted(k for k, v in mapped_precursors.items() if v > 0.0)
+            reasons.append(
+                "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE "
+                + ", ".join(repr(c) for c in unreachable)
+                + f": in the {lane} lane's network no chain of reactions leads from what is charged "
+                + (f"({', '.join(charged)})" if charged else "(nothing above zero)")
+                + " to it, so the integrator would return exactly zero by construction rather than "
+                "by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: "
+                "declare the precursor this compound is made from."
+            )
 
     # --- conditions ------------------------------------------------------
     peak = spec.process.thermal.peak_temperature_c
@@ -1094,14 +1541,25 @@ def declare_envelope(
                 f"recorded and IGNORED."
             )
 
-    # --- B18: the pyrazine step's own declarations --------------------------
-    # The step is measured (fed dicarbonyls); the supply from a sugar + amine pot is not, and
-    # the ship rule sized both misses. Every pyrazine answer carries them.
-    if set(mapped_targets.values()) & PYRAZINE_TARGET_KEYS:
-        from .parameters_pyrazine import PYRAZINE_SINK_CAVEAT, PYRAZINE_SUPPLY_CAVEAT
+    # The arms' own declarations, from the same table: each answer that names an arm's targets
+    # carries that arm's caveats, and an amine the trunk charges as glycine says so.
+    target_keys_here = set(mapped_targets.values())
+    for arm in sorted(TRUNK_ARMS, key=lambda a: a.warning_order):
+        if arm.charged_as_glycine is not None:
+            pkey, on_trunk, on_other = arm.charged_as_glycine
+            amount = mapped_precursors.get(pkey, 0.0)
+            if amount > 0.0 and lane == TRUNK:
+                warnings.append(on_trunk.format(amount=amount, lane=lane))
+            if amount > 0.0 and on_other is not None and lane is not None and lane != TRUNK:
+                warnings.append(on_other.format(amount=amount, lane=lane))
+        if arm.target_caveats is not None and target_keys_here & arm.target_keys:
+            warnings.extend(arm.target_caveats())
+        if arm.label == "PYRAZINE TARGETS" and target_keys_here & (arm.target_keys | {"GO", "G"}):
+            # B21's aqueous glyoxal supply is declared on glyoxal, glucosone AND the pyrazines, which
+            # is a wider set than the pyrazine arm's own targets; it sits here so it keeps its place.
+            from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_CAVEAT
 
-        warnings.append(PYRAZINE_SUPPLY_CAVEAT)
-        warnings.append(PYRAZINE_SINK_CAVEAT)
+            warnings.append(AQUEOUS_GLYOXAL_CAVEAT)
 
     # --- B7: the furanic channel's own declarations -----------------------
     # Every one of these is an EXTRAPOLATION WARNING, not a refusal, and each
@@ -1195,6 +1653,7 @@ def declare_envelope(
         mapped_precursors=mapped_precursors,
         mapped_targets=mapped_targets,
         lipid_carriers=tuple(carriers),
+        unreachable_targets=unreachable_targets,
     )
 
 
@@ -1319,6 +1778,12 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
         if frozen.get("mele_site_log10_yield"):
             # B17a: log10 of the electrophile-site yield per osone decayed (a shipped B17a report or a draw)
             out["mele_site_log10_yield"] = {k: float(v) for k, v in frozen["mele_site_log10_yield"].items()}
+        if frozen.get("thiol_addition"):
+            # B25: the thiols' addition to the deoxypentosones, log10 k at 145 C and its barrier
+            out["thiol_addition"] = {k: float(v) for k, v in frozen["thiol_addition"].items()}
+        if frozen.get("dicarbonyl_redox"):
+            # B27: log10 of the oxidant yield per mercaptoketone formed (a shipped B27 report or a draw)
+            out["dicarbonyl_redox"] = {k: float(v) for k, v in frozen["dicarbonyl_redox"].items()}
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1370,7 +1835,8 @@ def core_parameters(
         report = None
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
                 "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol", "oxygen",
-                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield"} <= set(override):
+                "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield", "thiol_addition",
+                "dicarbonyl_redox"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
         # B10: a report (or a draw) that carries the two route barriers uses them;
@@ -1425,6 +1891,25 @@ def core_parameters(
             ea_family = float(pick("decay_Ea_kJ_mol")["carbonyl_sink"])
             parameters.update(mele_site_parameters(k_mele_site=(10.0 ** float(site["mele_site_yield"])) * k_osone,
                                                    ea_kj_mol=ea_family))
+        # B25: the addition constant and its barrier from the report's (or a draw's) block; inert zero otherwise.
+        add: Dict[str, float] = {}
+        if report is not None and report.get("thiol_addition"):
+            add.update(report["thiol_addition"])
+        add.update(override.get("thiol_addition") or {})
+        if add:
+            from .parameters_sulfur import thiol_addition_parameters
+
+            parameters.update(thiol_addition_parameters(k_add=10.0 ** float(add["log10_k_add_145C"]), ea_kj_mol=float(add["ea_add_kj_mol"])))
+        # B27: the dicarbonyl redox yield from the report's (or a draw's) block. Applied LAST because it
+        # rescales k_nf_mp3p, which the fitted block above has just set; inert (phi = 0) otherwise.
+        redox: Dict[str, float] = {}
+        if report is not None and report.get("dicarbonyl_redox"):
+            redox.update(report["dicarbonyl_redox"])
+        redox.update(override.get("dicarbonyl_redox") or {})
+        if redox:
+            from .parameters_sulfur import apply_dicarbonyl_redox
+
+            apply_dicarbonyl_redox(parameters, float(redox["log10_ox_yield_per_mercaptoketone"]))
     if lane == ACRYLAMIDE:
         report = None
         if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):
@@ -1444,6 +1929,47 @@ def core_parameters(
         from .parameters_furanic import with_fitted_furanic
 
         parameters.update(with_fitted_furanic(float(override["k_dpo_af"])))
+    if "disputed_sinks" in override:
+        # ENV-B13 (2026-09-10): the four trunk sinks a second laboratory disputes, at drawn values.
+        # The envelope had no prior row for any of them, so every published interval asserted them
+        # with certainty -- including two whose own authors flagged them as decisions and which the
+        # second laboratory refutes. No centre moves; the envelope integrates across the disagreement.
+        from .parameters_dicarbonyl import with_disputed_sinks
+
+        parameters.update(with_disputed_sinks(override["disputed_sinks"]))
+    if "aqueous_glyoxal" in override:
+        # B21: the two aqueous glyoxal-supply constants, log10 at 100 C (the fit generator's candidates).
+        from .parameters_dicarbonyl import AQUEOUS_GLYOXAL_COORDINATES, with_aqueous_glyoxal
+
+        b = override["aqueous_glyoxal"]
+        parameters.update(with_aqueous_glyoxal(*[float(b[k]) for k in AQUEOUS_GLYOXAL_COORDINATES]))
+    # B39 (2026-09-11): the fed 3-deoxy triangle. The block is ALWAYS applied -- with the three new
+    # steps at k = 0 until the fit ships, so nothing moves -- and an override carries the fit
+    # generator's candidates and the envelope's draws. Applied after the disputed-sink draws so a
+    # fitted centre wins over a printed band on the same constant.
+    from .parameters_dicarbonyl import FED_3DEOXY_PARAMETERS, with_fed_3deoxy
+
+    parameters.update(FED_3DEOXY_PARAMETERS)
+    if "fed_3deoxy" in override:
+        parameters.update(with_fed_3deoxy({k: (None if v is None else float(v)) for k, v in override["fed_3deoxy"].items()}))
+    if "proline" in override:
+        from .parameters_proline import PROLINE_COORDINATES, with_fitted_proline
+
+        b = override["proline"]
+        parameters.update(with_fitted_proline(*[float(b[k]) for k in PROLINE_COORDINATES]))
+    if "methionine" in override:
+        # B22: the four methionine coordinates (the fit generator's candidates, a later draw).
+        from .parameters_methionine import METHIONINE_COORDINATES, with_fitted_methionine
+
+        b = override["methionine"]
+        parameters.update(with_fitted_methionine(*[float(b[k]) for k in METHIONINE_COORDINATES]))
+    if "glycation" in override:
+        # B20, the same discipline: the frozen literals in parameters_glycation are the default; an
+        # explicit block of the five log10 constants at 100 C replaces them.
+        from .parameters_glycation import GLYCATION_COORDINATES, with_fitted_glycation
+
+        b = override["glycation"]
+        parameters.update(with_fitted_glycation(*[float(b[k]) for k in GLYCATION_COORDINATES]))
     if "pyrazine" in override:
         # B18, the same discipline: the frozen literals in parameters_pyrazine are the default;
         # an explicit block {log10_k_go_ak_100C, ea_go_ak_kj_mol, log10_k_mgo_ak_100C,
@@ -1942,6 +2468,36 @@ def _integrate_program(
             reservoir, _basis = oxygen_reservoir_units(process)
             state["OXR"] = reservoir * (1.0 if reservoir_scale is None else float(reservoir_scale))
         state.setdefault("OXV", 0.0)
+    if lane != TRUNK:
+        # 2026-09-11 (review of PR #16). Methionine, proline and 1-pyrroline are TRUNK species. On
+        # the sulfur or acrylamide lane the declaration promises they are "recorded and not
+        # charged" (trunk_arms.py) -- and then this function handed them to an integrator whose
+        # state vector does not contain them, which raised KeyError("unknown species 'MET'") on any
+        # cysteine + ribose + methionine pot asked for a thiol. Recorded means dropped here.
+        for key in ("MET", "PRO", "PYRL"):
+            if key in state:
+                metadata.setdefault("recorded_not_charged", {})[key] = float(state.pop(key))
+    if lane == TRUNK and state.get("PRO", 0.0) > 0.0:
+        # B24: proline as the Amadori amine too, declared (kinetic_core_b24_prereg.md sec. 2).
+        state["Gly"] = float(state.get("Gly", 0.0)) + float(state["PRO"])
+    if lane == TRUNK and state.get("MET", 0.0) > 0.0:
+        # B22 (2026-09-09): methionine is the Strecker substrate (MET) and, DECLARED, the amine of the
+        # Amadori chemistry that makes the dicarbonyls, charged as glycine at the same molarity (the
+        # same amine plays both roles in turn; kinetic_core_b22_prereg.md sec. 2, declaration v).
+        state["Gly"] = float(state.get("Gly", 0.0)) + float(state["MET"])
+    if lane == TRUNK and "LYSP" not in state:
+        # B20 (2026-09-09): the bound-lysine pool from the spec's protein loading and the matrix's
+        # amine density, times the declared available fraction (the band centre); zero, as before,
+        # when no loading is stated, so the glycation steps carry no flux.
+        from .matrix_sites import resolve as _resolve_sites
+        from .parameters_glycation import available_fraction
+
+        try:
+            charged, _note = _resolve_sites(process)
+        except Exception:  # noqa: BLE001 - a malformed loading was already refused by the declaration
+            charged = None
+        if charged is not None and charged.amine > 0:
+            state["LYSP"] = float(charged.amine) * available_fraction(charged.amine_band)
 
     for index, (duration, temperature_c) in enumerate(process.thermal.segments):
         grid = np.array([0.0, float(duration)])
@@ -2175,10 +2731,23 @@ def predict(
             concentrations[compound] = acrylamide_ppb(mmol)
         elif key in MOLECULAR_WEIGHT_G_PER_MOL:
             concentrations[compound] = mmol_per_litre_to_ug_per_litre(key, mmol)
-        else:
-            # No molecular weight is defined for the elemental melanoidin pool;
-            # it is reported in its own unit rather than given an invented one.
+        elif key in _REPORTED_IN_MMOL_PER_L:
+            # The elemental and lumped pools have no molecular weight because they are not
+            # molecules; they are reported in their own unit rather than given an invented one.
             concentrations[compound] = mmol
+        else:
+            # B34 (2026-09-11). THIS USED TO BE THE `else`, AND THAT COST TWO WAVES. A species with
+            # no molar mass was silently reported in mmol/L, which reads as a prediction between
+            # one and five ORDERS too small: 2-pentylfuran in B28 (diagnosed for a day as a routing
+            # problem), then 3-deoxyglucosone and methylglyoxal the moment B34 asked for them.
+            # A missing weight is now a bug report, not a quiet change of unit.
+            raise KeyError(
+                f"{compound!r} resolves to species {key!r}, which has no molecular weight and is "
+                "not a declared unit-less pool. Reporting it in mmol/L would look like a prediction "
+                f"{'a factor of its molar mass'} too small. Add it to "
+                "species_sulfur.MOLECULAR_WEIGHT_G_PER_MOL, or to engine._REPORTED_IN_MMOL_PER_L "
+                "if it is genuinely not a molecule."
+            )
 
     # 2026-09-08 (the matrix layer): declared binding of aldehydes and HMF to the charged protein
     # sites, applied after integration as a pseudo-first-order factor over the thermal programme,
@@ -2186,6 +2755,23 @@ def predict(
     from .matrix_sites import bound_fraction as _bound_fraction
     from .matrix_sites import resolve as _resolve_sites
 
+    # B31: what the pot started with. Added BEFORE the binding factor below, because the protein
+    # binds a carried molecule and a made one alike. Zero unless the bundle declares it, and the
+    # declaration may only quote a printed unheated control of the same pot.
+    carried = dict(getattr(spec.process, "carried_volatiles", None) or {})
+    carried_applied: Dict[str, float] = {}
+    if carried:
+        # 2026-09-11 (review of PR #16): matched THROUGH THE ALIAS TABLE, not by raw string. A
+        # level declared as '2-pentylfuran' and a target requested as '2-pentyl furan' are the
+        # same species and used to miss each other silently. And a declared 0.0 is a declaration
+        # ("not detected" in the unheated control), not an absence of one.
+        by_species = _carried_by_species(carried)
+        for compound, key in declaration.mapped_targets.items():
+            if compound not in concentrations or key not in by_species:
+                continue
+            amount = by_species[key]
+            concentrations[compound] = float(concentrations[compound]) + amount
+            carried_applied[compound] = amount
     charged_sites, sites_note = _resolve_sites(spec.process)
     binding: Dict[str, Any] = {}
     if charged_sites is not None:
@@ -2199,6 +2785,7 @@ def predict(
     if sites_note:
         metadata["matrix_sites_note"] = sites_note
     metadata["matrix_binding"] = binding
+    metadata["carried_volatiles"] = carried_applied
     metadata["matrix_extra_decades"] = {c: r["extra_decades"] for c, r in binding.items()}
     metadata["ph"] = float(spec.process.ph)
     metadata["ph_final"] = spec.process.ph_final
@@ -2237,6 +2824,15 @@ def predict(
             for compound, key in declaration.mapped_targets.items()
             if key in furanic_decades
         }
+
+    if declaration.unreachable_targets:
+        metadata["refused_targets"] = {
+            name: "no chain of the lane's reactions leads from the charge to this species; "
+                  "its integrated value is exactly zero by construction and is not reported"
+            for name in declaration.unreachable_targets
+        }
+        for name in declaration.unreachable_targets:
+            concentrations.pop(name, None)
 
     return CorePrediction(
         spec=spec,
