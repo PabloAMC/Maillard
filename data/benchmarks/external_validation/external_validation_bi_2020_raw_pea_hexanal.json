@@ -70,6 +70,13 @@
         "verdict": "THE WAVE I RED-TEAM POSED A TWO-BRANCH QUESTION AND THE PAPER ANSWERS IT: the concentration is the MEASURED quantity and the OAV is the DERIVED one, not the other way round. Table 4's footnote h defines the OAV as the 'ratio of concentration to odor threshold', and the concentration column carries a standard deviation (1260 +/- 114) while the OAV column carries none. So the repository's arithmetic (OAV 280 x 4.5 ppb = 1260) was running the paper's own calculation BACKWARDS and landing on the right number by construction.",
         "wave": "Wave W"
       }
+    },
+    "nonanal": {
+      "conc_ppb": 69.8,
+      "uncertainty_pct": 10.59,
+      "uncertainty_basis": "Bi et al. 2020, J. Agric. Food Chem. 68:2718, Table 4 ('Odor Thresholds, Ions Used for Quantitation, Calibration Equations, Coefficients of Determination (R2), Concentrations, and OAVs of Odorants in Raw and Roasted Peas'), footnote f: 'The concentrations are the means of three repeated measurements +/- standard deviation (to three significant figures).' Added by wave B35 (2026-09-11): the bundle scored ONE of the four compounds this table prints that this model can be asked for. Read from data/articles/bi2020.pdf via bi2020_extraction.md. row 14, RAW column: '69.8 +/- 7.39'.",
+      "value_provenance": "primary_source_table_value_verified",
+      "added_by": "WAVE B35 -- see results/validation/kinetic_core_b35_prereg.md"
     }
   },
   "metadata": {

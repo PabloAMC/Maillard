@@ -113,7 +113,9 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # RE-PINNED BY WAVE B34 (2026-09-11): 39 -> 44, and NOT by a model change. A hold-out bundle
     # scored ONE of the six species its own paper measures; the other five were added. Three of them
     # are 32x, 35x and 63x, so the median fold error WORSENS while the rate rises.
-    assert s["matched_compound_count"] == 44
+    # RE-PINNED BY WAVE B35 (2026-09-11): 44 -> 45. Eight measurements were added from papers on
+    # disk; FIVE of them became refusals rather than rows, so the scored count rises by one.
+    assert s["matched_compound_count"] == 45
     # RE-PINNED BY WAVE B28: 25 -> 22 refused. Exactly the three nonanal rows above; the four
     # 2-pentylfuran rows stay refused, and their REASON changed rather than their status. That
     # matters and is asserted elsewhere: the branch fraction those rows were missing is measured
@@ -121,7 +123,9 @@ def test_core_panel_is_37_bundles_27_answered_46_rows(tracked_scores):
     # lane that would carry the alkylfuran. Un-refusing them answered four rows six to nine orders
     # of magnitude below measurement, which is worse than refusing.
     # RE-PINNED BY WAVE B31: 18 -> 25 refused. Exactly the seven rows above.
-    assert s["refused_compound_count"] == 25
+    # RE-PINNED BY WAVE B35: 25 -> 32. Three compounds whose waves were refused (B18, B22, B24),
+    # two a pot has no precursor for, one never-cooked nonanal, one lane conflict.
+    assert s["refused_compound_count"] == 32
     # 2026-09-03: the xylose pH-5 bundle left the hold-out (the B2-B8 fit had read it) and
     # returned once wave B9 removed the Hofmann level rows from the objective.
     assert {k: v["benchmarks"] for k, v in s["by_panel"].items()} == {
@@ -169,16 +173,18 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     # RE-PINNED BY WAVE B34 (2026-09-11): 7/39 -> 9/44, 6/38 -> 8/43. The two new hits are
     # 3-deoxyglucosone (1.11x) and methylglyoxal (1.28x) in the amine-free pot -- the model was
     # already right about them and nobody had asked. The median fold rose 9.31x -> 10.62x.
-    assert (s["within_band_count"], s["matched_compound_count"]) == (9, 44)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (9, 44)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (8, 43)
+    # RE-PINNED BY WAVE B35: 9/44 -> 10/45, 8/43 -> 9/44. The new hit is (E,E)-2,4-decadienal at
+    # 1.62x in the Trikusuma pot, a fourth answered compound there.
+    assert (s["within_band_count"], s["matched_compound_count"]) == (10, 45)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (10, 45)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (9, 44)
     assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (1, 1)
     # RE-PINNED BY WAVE B34: 3/26 -> 5/31. All five new rows are in a maillard_path hold-out bundle,
     # and two of them (3-deoxyglucosone, methylglyoxal) land inside the band.
     assert s["holdout_within_band"] == {"hits": 5, "total": 31}
     readme = _doc_text(README)
-    _assert_quoted(readme, "9 of 44", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "8 of 43", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "10 of 45", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "9 of 44", "README.md", "the core's out-of-sample count")
     # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
     _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 
@@ -276,7 +282,8 @@ def test_core_envelope_coverage_and_widths():
     # EXACT. That is the defect ENV-B13 fixed for the HMF rows, still true of the 3-DG limb, and it
     # bites hardest on the wave's best row: 3-DG is 1.11x on fold and OUTSIDE its own interval.
     # Named in kinetic_core_b34_prereg.md as an ENV wave, not bolted onto a wave about something else.
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (11, 41, 3)
+    # RE-PINNED BY WAVE B35: 11/41 -> 12/42. (E,E)-2,4-decadienal joined and lands inside its interval.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (12, 42, 3)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -293,9 +300,9 @@ def test_core_envelope_coverage_and_widths():
     # a comparison; the ship rule's per-row table is.
     # RE-PINNED BY WAVE B31: 1.0411 -> 0.9238 dex. Same caution as the line above -- a median over
     # a changed row set is not a comparison, and here the set changed twice over.
-    assert lit["median_ci_width_log10"] == pytest.approx(0.9145, abs=5e-4)
+    assert lit["median_ci_width_log10"] == pytest.approx(0.9192, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (11, 40)
+    assert (oos["hits"], oos["total"]) == (12, 41)
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.209, abs=0.01)
@@ -303,11 +310,12 @@ def test_core_envelope_coverage_and_widths():
         # RE-PINNED BY WAVE B31: headspace 11 -> 8. The three that left are the hexanal and
         # nonanal rows in the pots nobody heated -- headspace-quantified, and refused now.
         # B34: extraction 31 -> 36, the five new LC-MS/MS rows.
-        "headspace": 8, "extraction": 36, "undeclared": 0,
+        # B35: headspace 8 -> 9, the decadienal row.
+        "headspace": 9, "extraction": 36, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "11 of 41", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "11 of 40", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "12 of 42", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "12 of 41", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

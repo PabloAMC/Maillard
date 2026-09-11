@@ -69,17 +69,17 @@
         "05_ttca_decay.png": "14da22a3c177b07dc4c2c01a0f54741a120c8253f107087c715b642777cd9444",
         "06_dicarbonyls_water.png": "560b365a1df7b1aba758f5f5e3c73af92489553f8166ac7c937b1ddad0c61a1c",
         "07_literature_funnel.png": "f0279f1dcc13e2836d4031fd2c09c81104f438fa5d5fbe822ed61ce8d727fd9a",
-        "08_path_scorecard.png": "ba2dd334e6ae3794aaa831bab5e1006a77d652b2de829d843dce86e2f72c7f61",
+        "08_path_scorecard.png": "edc6f11d862a6d5685623a93d9cdf221142c6ebc035ad284aa5b16ce29ce67ce",
         "09_repository_flow.png": "ce1998b349e78c129def870d52cc2ae2cd4a53b323cd18083b2a42098caf3e09",
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "e24f0ad356380d1ab888ee36d10ee104f1a31d0dbd94bf278a4f852f5faca373",
+        "17_papers_by_weight.png": "c869a6be1ea6b3f3b03f7b2dfb821e93c24fac57f728783ac3ab8cd55eb48df6",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "a81b61c57f40909fc4a21980c0b7f95410ce660f100051349a8ffeedce3e68c6",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
-        "21_parity.png": "13c99489e14f5eab7613f49f3e2bc3795c896d686d9f43990cdc014f2099c804",
-        "22_no_number.png": "3ce72c732c7e44579048b01ee97eff6ce716ee7a838c48143cf3e284be9e8f5b"
+        "21_parity.png": "4f14d746c38337d6446a0b2d810fd4c493fbc4da050a90e55fec4dba15e6ef6d",
+        "22_no_number.png": "3704d0a6cb04fef38468835a0dda36a95d5eb5f1d36ebcca420d31ab041450de"
       }
     },
     "scripts/generators/build_story_figures.py": {
@@ -115,7 +115,7 @@
       ],
       "figures": {
         "23_coverage_of_declared_targets.png": "ebd7c16616e5b60b6a52c8cb493cd0db89cdebe1d1c676ea179556cfed1ed1b8",
-        "24_fat_path_hexanal.png": "ccec13c3bbbfb07462df1159a6b8b19688396257a353344caabfa9b661120b3b",
+        "24_fat_path_hexanal.png": "95fa1e30e9367767ce57b0f69f61ed8dabbe91645680635b60dfed67cad9b81a",
         "25_protein_matrix_layer.png": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6",
         "26_hypothesis_layer.png": "185fc901a3e6858aacc4c4d3d1ce36be310eaa49327e214856476920b1fbd085",
         "27_pyrazine_step_supply.png": "91def689a3e0d6e85fc889a39b454f4bf7c3a874531795cdb9cb223e9d62195c",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
-      "short": "6616f99e",
+      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
+      "short": "93d0637b",
       "branch": "reactions",
       "dirty": true
     },
@@ -167,15 +167,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "2daaa52d68af64f0d9f40fc87a5c1090ad57b13052272a96d3c674f4a8ee0bbf"
+        "sha256": "440d2c15575dbbca296e0de30c555fd3d7eff9f8716c48c7aa4d363d1d6fe183"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "96f691356609cbfc7e0ec4571dafb1956158dec51a255e974e3c04a7385b72a1"
+        "sha256": "ada1d1d05229af63214f45873cbbbe80eb4b09656da4ce9847c0c7589df39405"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "036fc321fae86f301d5ad649751f707e1eb797d44b6c2159dcf3aa8b6f3ab5a2"
+        "sha256": "aad3dea0fee08771f69e7c19d47821bbe8da5310104fdb094e469cca479daee7"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -195,7 +195,7 @@
       },
       {
         "path": "results/validation/kinetic_core_b28_ship_rule.json",
-        "sha256": "55f2510c1af99360a7ad768a8550d079b545305dd0e6efc425cc218befddaf24"
+        "sha256": "8232339b792b5e39dd8a2cc555745eaca24457d77bef567cf57f588552afca4d"
       },
       {
         "path": "results/validation/kinetic_core_b9_fit_report.json",
@@ -315,7 +315,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/08_path_scorecard.png",
-        "sha256": "ba2dd334e6ae3794aaa831bab5e1006a77d652b2de829d843dce86e2f72c7f61"
+        "sha256": "edc6f11d862a6d5685623a93d9cdf221142c6ebc035ad284aa5b16ce29ce67ce"
       },
       {
         "path": "docs/assets/thiol_sink/09_repository_flow.png",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "e24f0ad356380d1ab888ee36d10ee104f1a31d0dbd94bf278a4f852f5faca373"
+        "sha256": "c869a6be1ea6b3f3b03f7b2dfb821e93c24fac57f728783ac3ab8cd55eb48df6"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
@@ -367,11 +367,11 @@
       },
       {
         "path": "docs/assets/thiol_sink/21_parity.png",
-        "sha256": "13c99489e14f5eab7613f49f3e2bc3795c896d686d9f43990cdc014f2099c804"
+        "sha256": "4f14d746c38337d6446a0b2d810fd4c493fbc4da050a90e55fec4dba15e6ef6d"
       },
       {
         "path": "docs/assets/thiol_sink/22_no_number.png",
-        "sha256": "3ce72c732c7e44579048b01ee97eff6ce716ee7a838c48143cf3e284be9e8f5b"
+        "sha256": "3704d0a6cb04fef38468835a0dda36a95d5eb5f1d36ebcca420d31ab041450de"
       },
       {
         "path": "docs/assets/thiol_sink/23_coverage_of_declared_targets.png",
@@ -379,7 +379,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/24_fat_path_hexanal.png",
-        "sha256": "ccec13c3bbbfb07462df1159a6b8b19688396257a353344caabfa9b661120b3b"
+        "sha256": "95fa1e30e9367767ce57b0f69f61ed8dabbe91645680635b60dfed67cad9b81a"
       },
       {
         "path": "docs/assets/thiol_sink/25_protein_matrix_layer.png",

@@ -59,7 +59,7 @@
       "water_source": "unstated",
       "stirred": null,
       "provenance_class": "repo_verbatim_methods_quote",
-      "provenance_note": "Steinhagen et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method: 'Glucose solutions (10%, w/v) were autoclaved at 111 degC, 116 degC, and 121 degC for different durations.' The quotation gives neither the vessel, the fill nor the closure; autoclaving implies a vented or loosely closed container but that is an inference, so everything is unstated."
+      "provenance_note": "WAVE B35 (2026-09-11): THE SOURCE IS ON DISK -- Leitzen et al. 2021 (Pharmaceuticals 14:1121), data/articles/Leitzen2021.pdf, dossier leitzen2021_extraction.md. ||| PRIOR NOTE, SUPERSEDED AND RETAINED AS THE AUDIT RECORD: Steinhagen et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification.quoted_method: 'Glucose solutions (10%, w/v) were autoclaved at 111 degC, 116 degC, and 121 degC for different durations.' The quotation gives neither the vessel, the fill nor the closure; autoclaving implies a vented or loosely closed container but that is an inference, so everything is unstated."
     }
   },
   "metadata": {

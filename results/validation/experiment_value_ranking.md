@@ -4,7 +4,7 @@
 
 _Ranks `(benchmark, compound)` pairs by the value of a confirmatory experiment now: combines envelope miss, CI width, and ODT-anchored decision relevance._
 
-Total candidates: **44** (out-of-CI: **33**). Source: `results/validation/core_prediction_uncertainty.json`.
+Total candidates: **45** (out-of-CI: **33**). Source: `results/validation/core_prediction_uncertainty.json`.
 
 | Rank | VoI | Benchmark | Matrix | Compound | In CI | Miss (dex) | Width (dex) | Meas (ppb) | P50 (ppb) | DoE template | Rationale |
 | ---: | ---: | --- | --- | --- | :---: | ---: | ---: | ---: | ---: | --- | --- |
@@ -49,6 +49,7 @@ Total candidates: **44** (out-of-CI: **33**). Source: `results/validation/core_p
 | 39 | 1.12 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | `free` | methylglyoxal | ✗ | 0.08 | 0.15 | 2.6e+03 | 1.97e+03 | `missing_absolute_anchor` | measured outside 90% CI by 0.08 dex; CI width 0.15 dex; anchor measurement to constrain prior |
 | 40 | 1.05 | `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021` | `free` | 3-deoxyglucosone | ✗ | 0.05 | 0.00 | 5.22e+04 | 4.7e+04 | `missing_absolute_anchor` | measured outside 90% CI by 0.05 dex; CI width 0.00 dex; anchor measurement to constrain prior |
 | 41 | 0.97 | `pea_isolate_uht_140C_Trikusuma2019` | `pea_iso` | hexanal | ✓ | 0.00 | 1.44 | 782 | 402 | `missing_positive_flavor_anchor` | CI width 1.44 dex; ≈2e+02× ODT (decision_relevance=2.24); off-note marker — focused band quantitation |
-| 42 | 0.74 | `pea_isolate_uht_140C_Trikusuma2019` | `pea_iso` | nonanal | ✓ | 0.00 | 1.78 | 24 | 17.7 | `missing_positive_flavor_anchor` | CI width 1.78 dex; ≈2e+01× ODT (decision_relevance=1.38); off-note marker — focused band quantitation |
-| 43 | 0.62 | `pea_isolate_uht_140C_Trikusuma2019` | `pea_iso` | 2-pentylfuran | ✓ | 0.00 | 1.44 | 163 | 74.4 | `missing_positive_flavor_anchor` | CI width 1.44 dex; ≈3e+01× ODT (decision_relevance=1.43); off-note marker — focused band quantitation |
-| 44 | 0.27 | `mp_holdout_glucose_asparagine_180C_30min_Chang2021` | `free` | Acrylamide | ✓ | 0.00 | 0.91 | 1.46e+03 | 3.36e+03 | `missing_absolute_anchor` | CI width 0.91 dex; safety marker — needs SIDA-grade absolute anchor |
+| 42 | 0.76 | `pea_isolate_uht_140C_Trikusuma2019` | `pea_iso` | (E,E)-2,4-decadienal | ✓ | 0.00 | 2.54 | 46.9 | 70.9 | `missing_kinetic_dataset` | CI width 2.54 dex; wide envelope — time-course narrows the rate-limiting step |
+| 43 | 0.74 | `pea_isolate_uht_140C_Trikusuma2019` | `pea_iso` | nonanal | ✓ | 0.00 | 1.78 | 24 | 17.7 | `missing_positive_flavor_anchor` | CI width 1.78 dex; ≈2e+01× ODT (decision_relevance=1.38); off-note marker — focused band quantitation |
+| 44 | 0.62 | `pea_isolate_uht_140C_Trikusuma2019` | `pea_iso` | 2-pentylfuran | ✓ | 0.00 | 1.44 | 163 | 74.4 | `missing_positive_flavor_anchor` | CI width 1.44 dex; ≈3e+01× ODT (decision_relevance=1.43); off-note marker — focused band quantitation |
+| 45 | 0.27 | `mp_holdout_glucose_asparagine_180C_30min_Chang2021` | `free` | Acrylamide | ✓ | 0.00 | 0.91 | 1.46e+03 | 3.36e+03 | `missing_absolute_anchor` | CI width 0.91 dex; safety marker — needs SIDA-grade absolute anchor |

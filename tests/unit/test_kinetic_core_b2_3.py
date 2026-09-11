@@ -282,11 +282,17 @@ def test_carbon_nitrogen_and_sulfur_still_balance_everywhere():
 
 BUNDLE_BASELINES = {
     # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
+    # RE-BASELINED BY WAVE B35 (2026-09-11), and the guard was RIGHT to fire: not a condition
+    # completion. Bi 2020 Table 4 prints compounds this bundle never scored, and they were added
+    # (pre-registered: results/validation/kinetic_core_b35_prereg.md). Previous: 7abdfc96d16b97c3366512d6183fd1d2d677220dbc5e1d460b334caeec135f37
     "external_validation_bi_2020_raw_pea_hexanal":
-        "7abdfc96d16b97c3366512d6183fd1d2d677220dbc5e1d460b334caeec135f37",
+        "380be224a88d1cf6b6159b32b6d2eeb4e24d1967e62c3678f66e9fabbd55ae3c",
     # re-pinned 2026-09-04: quantification_class + content_verification from the full text added
+    # RE-BASELINED BY WAVE B35 (2026-09-11), and the guard was RIGHT to fire: not a condition
+    # completion. Bi 2020 Table 4 prints compounds this bundle never scored, and they were added
+    # (pre-registered: results/validation/kinetic_core_b35_prereg.md). Previous: 201752690e3702ac2d87ab3d3380c1d7360408e160213b48cdfe0835d36ac198
     "external_validation_bi_2020_roasted_pea_hexanal":
-        "201752690e3702ac2d87ab3d3380c1d7360408e160213b48cdfe0835d36ac198",
+        "430c4423a31594c63e3b7a579980f4fbfc82fd8256ca6453ea75e3e1b8548e8a",
     # re-pinned 2026-09-03: quantification_class + quantification_note added (measured block untouched)
     # re-pinned 2026-09-03: content_verification block from the PMC full text added
     "external_validation_li_2026_spi_wg_hme_control":

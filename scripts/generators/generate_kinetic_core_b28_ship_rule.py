@@ -95,8 +95,21 @@ def t2() -> Dict[str, Any]:
     n_new = sum(len(v) for v in new_ref.values())
     lifted = sorted({(b, c) for b, cs in old_ref.items() for c in cs
                      if c not in new_ref.get(b, set())})
-    added = sorted({(b, c) for b, cs in new_ref.items() for c in cs
-                    if c not in old_ref.get(b, set())})
+    # A ROW THE BASELINE NEVER HAD IS NOT A ROW THIS WAVE REFUSED, narrowed 2026-09-11 for the same
+    # reason as T5 one commit earlier. B35 added eight measurements from papers on disk and five of
+    # them are refusals; T2 counted those as "newly refused by B28" and flipped a tracked SHIP to DO
+    # NOT SHIP while B28's own toggle had lifted and refused exactly nothing. The test is about what
+    # THIS wave does to rows that existed when its baseline was frozen; rows a later wave INTRODUCED
+    # are reported beside the verdict instead of deciding it.
+    tracked_rows = {(bb["benchmark_id"], c.get("compound"))
+                    for bb in tracked["benchmarks"] for c in (bb.get("compounds") or [])
+                    if isinstance(c, dict)}
+    tracked_rows |= {(b, c) for b, cs in old_ref.items() for c in cs}
+    added_all = sorted({(b, c) for b, cs in new_ref.items() for c in cs
+                        if c not in old_ref.get(b, set())})
+    added = [x for x in added_all if tuple(x) in tracked_rows]
+    introduced_by_later_waves = [x for x in added_all if tuple(x) not in tracked_rows]
+    n_new -= len(introduced_by_later_waves)
     old_ans, new_ans = answered(tracked), answered(live)
     moved = []
     for key, before in old_ans.items():
@@ -136,6 +149,7 @@ def t2() -> Dict[str, Any]:
                                    "worst_incumbent_fold_in_this_pot": baseline})
     return {"refused_before_after": [n_old, n_new], "rows_lifted": [list(x) for x in lifted],
             "rows_newly_refused": [list(x) for x in added],
+            "rows_introduced_by_later_waves_not_this_one": [list(x) for x in introduced_by_later_waves],
             "answered_rows_that_moved_over_0.05_dex": moved,
             "lifted_rows_answered_degenerately": degenerate,
             "degeneracy_rule": ("a row lifted out of REFUSED must not be more than 10x worse than "

@@ -1,5 +1,5 @@
 {
-  "candidate_count": 44,
+  "candidate_count": 45,
   "candidates": [
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -741,6 +741,24 @@
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "ci_width_log10": 2.5384107628093675,
+      "compound": "(E,E)-2,4-decadienal",
+      "decision_relevance": 1.0,
+      "envelope_miss_log10": 0.0,
+      "inside_ci": true,
+      "matrix_family": "pea_iso",
+      "measured_ppb": 46.9,
+      "odour_threshold_ug_per_kg": null,
+      "predicted_p5": 3.2786678220091496,
+      "predicted_p50": 70.93381086417963,
+      "predicted_p95": 1132.6824752293035,
+      "rank": 42,
+      "rationale": "CI width 2.54 dex; wide envelope \u2014 time-course narrows the rate-limiting step",
+      "suggested_doe_template": "missing_kinetic_dataset",
+      "voi_score": 0.7615232288428102
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
       "ci_width_log10": 1.7781364426686366,
       "compound": "nonanal",
       "decision_relevance": 1.380211241711606,
@@ -752,7 +770,7 @@
       "predicted_p5": 2.3623299468534573,
       "predicted_p50": 17.719212977293815,
       "predicted_p95": 141.73496413010483,
-      "rank": 42,
+      "rank": 43,
       "rationale": "CI width 1.78 dex; \u22482e+01\u00d7 ODT (decision_relevance=1.38); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 0.7362611722405009
@@ -770,7 +788,7 @@
       "predicted_p5": 13.522393185502622,
       "predicted_p50": 74.36503688554832,
       "predicted_p95": 368.2626336326565,
-      "rank": 43,
+      "rank": 44,
       "rationale": "CI width 1.44 dex; \u22483e+01\u00d7 ODT (decision_relevance=1.43); off-note marker \u2014 focused band quantitation",
       "suggested_doe_template": "missing_positive_flavor_anchor",
       "voi_score": 0.6173974332506174
@@ -788,7 +806,7 @@
       "predicted_p5": 1265.7308365854929,
       "predicted_p50": 3355.991167282581,
       "predicted_p95": 10383.844421093423,
-      "rank": 44,
+      "rank": 45,
       "rationale": "CI width 0.91 dex; safety marker \u2014 needs SIDA-grade absolute anchor",
       "suggested_doe_template": "missing_absolute_anchor",
       "voi_score": 0.274205043527918

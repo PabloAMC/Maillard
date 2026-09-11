@@ -110,7 +110,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
         }
       ],
       "signal_origin": "external_literature"
@@ -144,7 +144,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
         }
       ],
       "signal_origin": "external_literature"
@@ -178,7 +178,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+          "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
         }
       ],
       "signal_origin": "external_literature"
@@ -250,7 +250,7 @@
           "envelope_state": "out_of_envelope",
           "lane": "sulfur",
           "panel": "trust_loop",
-          "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+          "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
         }
       ],
       "signal_origin": "external_literature"
@@ -537,9 +537,29 @@
           "predicted_std": 58.413436523413786,
           "shared_with": null,
           "target_unit": "ppb"
+        },
+        {
+          "ci_width_log10": 2.5384107628093675,
+          "compound": "(E,E)-2,4-decadienal",
+          "envelope_state": "in_envelope_extrapolated",
+          "in_core_fit": false,
+          "inside_ci": true,
+          "lane": "lipid",
+          "measured": 46.9,
+          "measured_ppb": 46.9,
+          "n_finite_samples": 200,
+          "observable_multipliers_applied": true,
+          "predicted_mean": 245.51432811751042,
+          "predicted_p5": 3.2786678220091496,
+          "predicted_p50": 70.93381086417963,
+          "predicted_p95": 1132.6824752293035,
+          "predicted_point": 75.95490029354261,
+          "predicted_std": 513.8137575515,
+          "shared_with": null,
+          "target_unit": "ppb"
         }
       ],
-      "coverage_rate": 1.0,
+      "coverage_rate": 0.5714285714285714,
       "evidence_role": "predictive",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -547,12 +567,37 @@
         "index": []
       },
       "fitted_row": false,
-      "matched_compounds": 3,
+      "matched_compounds": 4,
       "panel": "trust_loop",
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='dynamic_headspace_gcmsms'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "2,5-dimethylpyrazine",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "methional",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "2-acetyl-1-pyrroline",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "trust_loop",
+          "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -1747,6 +1792,14 @@
           "lane": "lipid",
           "panel": "external_matrix",
           "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "nonanal",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
         }
       ],
       "signal_origin": "external_literature"
@@ -1777,7 +1830,7 @@
           "target_unit": "ppb"
         }
       ],
-      "coverage_rate": 1.0,
+      "coverage_rate": 0.25,
       "evidence_role": "external_holdout",
       "execution_path": "matrix_only",
       "fit_target_of": {
@@ -1790,7 +1843,32 @@
       "protein_type": "pea_iso",
       "quantification_family": "headspace",
       "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_curve'",
-      "refused_compounds": [],
+      "refused_compounds": [
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furaneol",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "2,5-dimethylpyrazine",
+          "envelope_state": "out_of_envelope",
+          "lane": "lipid",
+          "panel": "external_matrix",
+          "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furfural",
+          "envelope_state": "out_of_envelope",
+          "lane": "sulfur",
+          "panel": "external_matrix",
+          "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+        }
+      ],
       "signal_origin": "external_literature"
     },
     {
@@ -3457,9 +3535,9 @@
     "generated_on": "2026-09-11",
     "git": {
       "branch": "reactions",
-      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
+      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
       "dirty": true,
-      "short": "6616f99e"
+      "short": "93d0637b"
     },
     "inputs": [
       {
@@ -3536,7 +3614,7 @@
       },
       {
         "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
-        "sha256": "ef4292aed20708d6f0b30345d3879db73e46b9cc0a1439f3235a90379d4c940e"
+        "sha256": "a0dcaa615ef839c7fc4044cbd6df71b01974727abbf816edc9739d5b4ff382ad"
       },
       {
         "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json",
@@ -3580,7 +3658,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
-        "sha256": "952b412ab44cf991dcee457c1a4e8ae3a4c7682c34362d884e52bfb6a20f8b97"
+        "sha256": "1420cb0477cc0aecfb830b9bdefbe9cc7ae7160a4e3b74c7aff511c56bf5db73"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json",
@@ -3620,11 +3698,11 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
-        "sha256": "91c4b50a985cd842cfb5e0a4398ebdc027239250db937a52554646b7235f944d"
+        "sha256": "8c3c3b02959de5bfc9c610702529bc659cb5bd157924b11f7f7d657ea342fa69"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
-        "sha256": "aa199ad5b23935fd2d20cf5cd2b4bdf0c9cc8b3692cf580e370ef31d5fdfea7d"
+        "sha256": "0f754e041e6fe91216a0d2101b78cd5d34cbeccc77d88f5aea16d24862fc8d34"
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
@@ -3632,7 +3710,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
-        "sha256": "6142251527d63cc0b1b88375b9369ab187254f052590ee905bbcd2f0f2ab2f67"
+        "sha256": "f76c219e8d8ee4c90102d8c3f838fdb9f49c685b41f622c70639f770eae4814e"
       }
     ]
   },
@@ -3659,7 +3737,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
@@ -3667,7 +3745,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
@@ -3675,7 +3753,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
     },
     {
       "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
@@ -3699,7 +3777,7 @@
       "envelope_state": "out_of_envelope",
       "lane": "sulfur",
       "panel": "trust_loop",
-      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
     },
     {
       "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
@@ -3740,6 +3818,30 @@
       "lane": "lipid",
       "panel": "trust_loop",
       "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so 2-pentylfuran is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "2,5-dimethylpyrazine",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "methional",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "compound": "2-acetyl-1-pyrroline",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "trust_loop",
+      "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -3814,6 +3916,38 @@
       "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so hexanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
     },
     {
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "compound": "nonanal",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool decomposes, against 1 % taken as the floor for a cook and 25.8 % for the mildest real cook in the panel. There is no thermal step here to model, so nonanal is refused rather than answered with a formation from zero. THE CURE IS A DECLARED STARTING STATE: put the level the source prints for the unheated material in conditions.carried_volatiles and the row is answered. Only a level the source PRINTS may go there; nothing may be inferred from another paper's isolate."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "furaneol",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "2,5-dimethylpyrazine",
+      "envelope_state": "out_of_envelope",
+      "lane": "lipid",
+      "panel": "external_matrix",
+      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "furfural",
+      "envelope_state": "out_of_envelope",
+      "lane": "sulfur",
+      "panel": "external_matrix",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
+    },
+    {
       "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
       "compound": "1-hexanol",
       "envelope_state": "out_of_envelope",
@@ -3854,26 +3988,26 @@
   ],
   "summary": {
     "benchmark_count": 23,
-    "ci_coverage_hits": 11,
-    "ci_coverage_rate": 0.25,
+    "ci_coverage_hits": 12,
+    "ci_coverage_rate": 0.26666666666666666,
     "ci_level_pct": 90,
     "fixed_prior_count": 46,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 11,
-      "median_ci_width_log10": 0.914471870418015,
+      "hits": 12,
+      "median_ci_width_log10": 0.9191548704882583,
       "not_evaluable": 3,
-      "rate": 0.2682926829268293,
-      "total": 41
+      "rate": 0.2857142857142857,
+      "total": 42
     },
-    "matched_compound_count": 44,
+    "matched_compound_count": 45,
     "n_samples": 200,
     "observable_multiplier_policy": {
       "rows_by_family": {
         "extraction": 36,
-        "headspace": 8,
+        "headspace": 9,
         "undeclared": 0
       },
       "rule": "the K_aw (+/-0.5 dex) and HS-SPME same-sample dispersion bands multiply a ppb row only when the bundle's quantification_class is a headspace method, or is undeclared (then the core's own absolute_concentration convention is kept and the row says so); extraction-based quantification (SIDA, HPLC, LC-MS/MS) never passed through an air/water partition or a fibre.",
@@ -3881,14 +4015,14 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 11,
+      "hits": 12,
       "not_evaluable": 3,
       "rows_the_core_fit_read": {
         "hits": 0,
         "not_evaluable": 0,
         "total": 1
       },
-      "total": 40
+      "total": 41
     },
     "panel_benchmark_count": 37,
     "panel_split": {
@@ -3907,11 +4041,11 @@
         "total": 28
       },
       "trust_loop": {
-        "ci_coverage_rate": 0.4444444444444444,
-        "hits": 4,
-        "median_ci_width_log10": 1.4351040950943503,
+        "ci_coverage_rate": 0.5,
+        "hits": 5,
+        "median_ci_width_log10": 1.4380424483454681,
         "not_evaluable": 0,
-        "total": 9
+        "total": 10
       }
     },
     "parameter_sources": [
@@ -3936,7 +4070,7 @@
         "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
       }
     ],
-    "refused_compound_count": 25,
+    "refused_compound_count": 32,
     "sampled_prior_count": 55,
     "seed": 0,
     "shared_with_holdout_panel": {
@@ -3945,11 +4079,11 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.2682926829268293,
-        "hits": 11,
-        "median_ci_width_log10": 0.914471870418015,
+        "ci_coverage_rate": 0.2857142857142857,
+        "hits": 12,
+        "median_ci_width_log10": 0.9191548704882583,
         "not_evaluable": 3,
-        "total": 41
+        "total": 42
       },
       "fitted_row": {
         "ci_coverage_rate": null,
@@ -3980,7 +4114,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 620.4,
+    "wall_seconds": 641.8,
     "workers": 1
   }
 }

@@ -4,8 +4,8 @@
     "artifact": "env_prior_ship_rule",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
-      "short": "6616f99e",
+      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
+      "short": "93d0637b",
       "branch": "reactions",
       "dirty": true
     },
@@ -57,7 +57,7 @@
   },
   "T2": {
     "noise_floor_from_two_seeds": {
-      "n": 44,
+      "n": 45,
       "median_rel": 0.032237737155304175,
       "p95_rel": 0.13366754763350322,
       "max_rel": 0.16985206882397694
@@ -111,7 +111,7 @@
   },
   "T3": {
     "median_noise_floor_max_dex": 0.12112885064432827,
-    "n_seed_pairs": 44,
+    "n_seed_pairs": 45,
     "unreached_medians_moved_beyond_the_floor": [],
     "note": "No centre was changed by either wave: every prior is centred where its constant shipped. A median moving at all is the finite-n stream effect, and the floor below is what that effect is worth, measured from two seeds of the SAME priors.",
     "pass": true

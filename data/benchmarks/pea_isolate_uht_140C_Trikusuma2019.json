@@ -28,9 +28,13 @@
     "carried_volatiles": {
       "hexanal": 331.0,
       "2-pentylfuran": 59.4,
-      "nonanal": 8.24
+      "nonanal": 8.24,
+      "2,5-dimethylpyrazine": 2.46,
+      "methional": 0.55,
+      "2-acetyl-1-pyrroline": 0.29,
+      "(E,E)-2,4-decadienal": 0.06
     },
-    "carried_volatiles_anchor": "Trikusuma, Paravisini & Peterson 2020 Table 2, the 'non-UHT processed' column, same table and same ug/L units as the 'UHT processed' column this bundle scores: hexanal 331 +/- 81.3, 2-pentylfuran 59.4 +/- 1.93, nonanal 8.24 +/- 0.44. The beverage as mixed, no heat. trikusuma2020_extraction.md sec. 3 Table 2. ADDED 2026-09-10 by wave B31: the panel had been scoring the heated column against a model that forms from zero, so 36 to 42 % of every measured level was raw material the model was being charged for."
+    "carried_volatiles_anchor": "Trikusuma, Paravisini & Peterson 2020 Table 2, the 'non-UHT processed' column, same table and same ug/L units as the 'UHT processed' column this bundle scores: hexanal 331 +/- 81.3, 2-pentylfuran 59.4 +/- 1.93, nonanal 8.24 +/- 0.44. The beverage as mixed, no heat. trikusuma2020_extraction.md sec. 3 Table 2. ADDED 2026-09-10 by wave B31: the panel had been scoring the heated column against a model that forms from zero, so 36 to 42 % of every measured level was raw material the model was being charged for. ||| WAVE B35 (2026-09-11): four more compounds from the SAME non-UHT column, on the same terms -- 2,5-dimethylpyrazine 2.46 +/- 0.12, methional 0.55 +/- 0.04, 2-acetyl-1-pyrroline 0.29 +/- 0.01, (E,E)-2,4-decadienal 0.06 +/- 0.005 ug/L. Declaring a carried level for three of the paper's seven compounds and not the other four would have been arbitrary."
   },
   "metadata": {
     "tier": "PRIMARY",
@@ -100,6 +104,34 @@
     "nonanal": {
       "conc_ppb": 24.0,
       "uncertainty_pct": 4
+    },
+    "2,5-dimethylpyrazine": {
+      "conc_ppb": 2.29,
+      "uncertainty_pct": 5.68,
+      "uncertainty_basis": "Trikusuma, Paravisini & Peterson 2020, Food Chem. 312:126082, Table 2, the 'UHT processed' column, same table and same ug/L units as the three compounds this bundle already scored. Added by wave B35 (2026-09-11): the paper prints SEVEN compounds this model can be asked for and the bundle scored three. Control ('non-UHT processed') values are declared alongside in conditions.carried_volatiles, as wave B31 requires for this pot. Printed '2.29 +/- 0.13'.",
+      "value_provenance": "primary_source_table_value_verified",
+      "added_by": "WAVE B35 -- see results/validation/kinetic_core_b35_prereg.md"
+    },
+    "methional": {
+      "conc_ppb": 3.1,
+      "uncertainty_pct": 8.06,
+      "uncertainty_basis": "Trikusuma, Paravisini & Peterson 2020, Food Chem. 312:126082, Table 2, the 'UHT processed' column, same table and same ug/L units as the three compounds this bundle already scored. Added by wave B35 (2026-09-11): the paper prints SEVEN compounds this model can be asked for and the bundle scored three. Control ('non-UHT processed') values are declared alongside in conditions.carried_volatiles, as wave B31 requires for this pot. Printed '3.1 +/- 0.25'.",
+      "value_provenance": "primary_source_table_value_verified",
+      "added_by": "WAVE B35 -- see results/validation/kinetic_core_b35_prereg.md"
+    },
+    "2-acetyl-1-pyrroline": {
+      "conc_ppb": 0.41,
+      "uncertainty_pct": 12.2,
+      "uncertainty_basis": "Trikusuma, Paravisini & Peterson 2020, Food Chem. 312:126082, Table 2, the 'UHT processed' column, same table and same ug/L units as the three compounds this bundle already scored. Added by wave B35 (2026-09-11): the paper prints SEVEN compounds this model can be asked for and the bundle scored three. Control ('non-UHT processed') values are declared alongside in conditions.carried_volatiles, as wave B31 requires for this pot. Printed '0.41 +/- 0.05'.",
+      "value_provenance": "primary_source_table_value_verified",
+      "added_by": "WAVE B35 -- see results/validation/kinetic_core_b35_prereg.md"
+    },
+    "(E,E)-2,4-decadienal": {
+      "conc_ppb": 46.9,
+      "uncertainty_pct": 5.39,
+      "uncertainty_basis": "Trikusuma, Paravisini & Peterson 2020, Food Chem. 312:126082, Table 2, the 'UHT processed' column, same table and same ug/L units as the three compounds this bundle already scored. Added by wave B35 (2026-09-11): the paper prints SEVEN compounds this model can be asked for and the bundle scored three. Control ('non-UHT processed') values are declared alongside in conditions.carried_volatiles, as wave B31 requires for this pot. Printed '46.9 +/- 2.53'.",
+      "value_provenance": "primary_source_table_value_verified",
+      "added_by": "WAVE B35 -- see results/validation/kinetic_core_b35_prereg.md"
     }
   },
   "protein_type": "pea_iso",

@@ -112,6 +112,14 @@ _YE_NOTE = (
     "inert-gas step in the quotation: air_by_default. Water source for the buffer not stated."
 )
 _STEINHAGEN_NOTE = (
+    # WAVE B35 (2026-09-11): this note used to open "SOURCE NOT ON DISK". It is on disk, and was when
+    # the note was written: the paper is Leitzen et al. 2021, data/articles/Leitzen2021.pdf since
+    # 2026-09-07, dossier leitzen2021_extraction.md. B34 corrected this bundle's citation and its
+    # BUFFER note and missed this one; the audit that followed it found the miss. The false claim is
+    # kept below, labelled, because it is the audit record.
+    "WAVE B35 (2026-09-11): THE SOURCE IS ON DISK -- Leitzen et al. 2021 (Pharmaceuticals 14:1121), "
+    "data/articles/Leitzen2021.pdf, dossier leitzen2021_extraction.md. ||| PRIOR NOTE, SUPERSEDED AND "
+    "RETAINED AS THE AUDIT RECORD: "
     "Steinhagen et al. 2021, SOURCE NOT ON DISK; second-hand, from this bundle's own content_verification."
     "quoted_method: 'Glucose solutions (10%, w/v) were autoclaved at 111 degC, 116 degC, and 121 degC for "
     "different durations.' The quotation gives neither the vessel, the fill nor the closure; autoclaving "

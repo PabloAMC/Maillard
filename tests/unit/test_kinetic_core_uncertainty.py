@@ -502,8 +502,14 @@ def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
     # The line below was "assert any(...) or refused" until 2026-09-10, which passes whenever ANY
     # row is refused for any reason -- near-vacuous, and caught on review. The refusal vocabulary
     # is what is under test, so the vocabulary is what is asserted.
+    # EXTENDED BY WAVE B35 (2026-09-11) as the panel gained rows: 'PYRAZINE TARGETS' is B18's arm on
+    # the same lane-conflict clause as the methionine and pyrroline arms, and 'CHARGES NO PRECURSOR'
+    # is B35's own -- a Maillard target on a pot that charges only a lipid carrier, which used to be
+    # answered with a silent 0.0. 'WAS NEVER COOKED' is B31's. The list is maintained deliberately:
+    # a refusal reason that is not in it is either a typo or a new category that deserves a decision.
     vocab = ("UNMAPPED PRECURSORS", "UNREPRESENTED TARGET", "LANE CONFLICT", "NOT EVALUABLE",
-             "GLYCATION TARGETS", "METHIONINE CHAIN TARGETS", "2-ACETYL-1-PYRROLINE TARGETS")
+             "GLYCATION TARGETS", "METHIONINE CHAIN TARGETS", "2-ACETYL-1-PYRROLINE TARGETS",
+             "PYRAZINE TARGETS", "CHARGES NO PRECURSOR", "WAS NEVER COOKED")
     assert refused, "the small panel must refuse at least one row"
     assert all(any(v in r["reason"] for v in vocab) for r in refused.values()), \
         [r["reason"][:60] for r in refused.values() if not any(v in r["reason"] for v in vocab)]

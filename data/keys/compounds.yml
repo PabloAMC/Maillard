@@ -171,6 +171,7 @@ compounds:
   - 2,5-dimethylpyrazine
   - 25dimethylpyrazine
   seen_in:
+  - benchmarks:measured_volatiles
   - benchmarks:reference_volatiles
   - henry_constants
   - panel:alias
@@ -196,8 +197,10 @@ compounds:
   canonical_smiles: CC(=O)C1=NCCC1
   inchi: InChI=1S/C6H9NO/c1-5(8)6-3-2-4-7-6/h2-4H2,1H3
   cas: 85213-22-5
-  aliases: []
+  aliases:
+  - 2-acetyl-1-pyrroline
   seen_in:
+  - benchmarks:measured_volatiles
   - species:desirable_targets.yml
   identity_source: data/species/desirable_targets.yml
 - id: 2_acetylfuran
@@ -757,8 +760,10 @@ compounds:
   smiles: CCCCC/C=C/C=C/C=O
   inchikey: JZQKTMZYLHNFPL-BLHCBFLLSA-N
   canonical_smiles: CCCCC/C=C/C=C/C=O
-  aliases: []
-  seen_in: []
+  aliases:
+  - (E,E)-2,4-decadienal
+  seen_in:
+  - benchmarks:measured_volatiles
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
 - id: e_e_2_4_heptadienal
   display_name: (E,E)-2,4-Heptadienal
@@ -881,6 +886,7 @@ compounds:
   - hdmf
   seen_in:
   - benchmarks:holdout_targets
+  - benchmarks:measured_volatiles
   - benchmarks:reference_volatiles
   - flavor:furanone_reference_anchors
   - panel:alias

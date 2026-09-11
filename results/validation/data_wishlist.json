@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
-      "short": "6616f99e",
+      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
+      "short": "93d0637b",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "96f691356609cbfc7e0ec4571dafb1956158dec51a255e974e3c04a7385b72a1"
+        "sha256": "ada1d1d05229af63214f45873cbbbe80eb4b09656da4ce9847c0c7589df39405"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "2daaa52d68af64f0d9f40fc87a5c1090ad57b13052272a96d3c674f4a8ee0bbf"
+        "sha256": "440d2c15575dbbca296e0de30c555fd3d7eff9f8716c48c7aa4d363d1d6fe183"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "1d501c96e08d4c3cdbd25ba32f8da9f1dcc55af470b272b45f28e231cf4693ff"
+        "sha256": "090cf23c4dc6482c33d06dcb7ef9951a90c739d723a7a0498f43ecf875d0b159"
       },
       {
         "path": "src/kinetic_core/sulfur.py",
@@ -382,6 +382,10 @@
           "compound": "hexanal"
         },
         {
+          "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+          "compound": "nonanal"
+        },
+        {
           "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
           "compound": "hexanal"
         },
@@ -390,12 +394,12 @@
           "compound": "nonanal"
         }
       ],
-      "row_count": 7,
+      "row_count": 8,
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
       "what": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxi",
       "rows": [
         {
           "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
@@ -411,6 +415,22 @@
         }
       ],
       "row_count": 3,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topolo",
+      "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a p",
+      "rows": [
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "2,5-dimethylpyrazine"
+        },
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "2,5-dimethylpyrazine"
+        }
+      ],
+      "row_count": 2,
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
@@ -455,7 +475,7 @@
     },
     {
       "what": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-mo",
-      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for t",
       "rows": [
         {
           "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
@@ -472,6 +492,54 @@
         {
           "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
           "compound": "2-Methyl-3-furanthiol (MFT)"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology ",
+      "reason": "METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'methional'. The charge declares only a matrix/lipid carrier, which is not a precursor: it r",
+      "rows": [
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "methional"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keep",
+      "reason": "2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-acetyl-1-pyrroline'. The charge declares only a matrix/lipid carrier, whic",
+      "rows": [
+        {
+          "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "compound": "2-acetyl-1-pyrroline"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not ",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declar",
+      "rows": [
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furaneol"
+        }
+      ],
+      "row_count": 1,
+      "hypothesis_layer": "no cited rule reaches it from any reference charge"
+    },
+    {
+      "what": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not ",
+      "reason": "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furfural'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declar",
+      "rows": [
+        {
+          "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+          "compound": "furfural"
         }
       ],
       "row_count": 1,
@@ -743,7 +811,7 @@
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
-    "refused_row_count": 17,
+    "refused_row_count": 24,
     "axes_below_trust": 11,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }

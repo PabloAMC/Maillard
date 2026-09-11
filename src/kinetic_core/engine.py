@@ -1246,6 +1246,35 @@ def declare_envelope(
         reasons.append(
             "a lipid product was requested but the lipid lane was not selected"
         )
+    # -- B35 (2026-09-11): A POT WITH NO MAILLARD PRECURSOR ANSWERS NO MAILLARD TARGET ---------
+    # A matrix-only charge declares a protein isolate and nothing else. The isolate is a LIPID
+    # CARRIER and is deliberately kept out of `mapped_precursors` (see LIPID_CARRIER_ALIASES), so
+    # the trunk, sulfur and acrylamide networks are integrated from an all-zero state and every
+    # species in them stays zero BY CONSTRUCTION. Until this clause they were reported as 0.0 with
+    # no refusal and no warning -- the audit found furaneol and furfural scored that way against
+    # measurements of 2780 and 327 ug/kg, and 5-HMF would have been the same.
+    #
+    # THIS IS THE THIRD TIME THIS FAMILY OF BUG HAS COST A WAVE. B28 spent a day on 2-pentylfuran
+    # reported in the wrong unit; B34 found the same silent unit fallback still catching two more
+    # species; this is the same idea one level up -- an absence of a prediction dressed as one. The
+    # repo's own words for it, from B28's record: "A near-zero is the absence of a prediction
+    # dressed as one, so the refusal was restored with a sharper reason naming what would lift it."
+    #
+    # The lipid lane is exempt because its charge IS the carrier: it needs no free precursor.
+    non_lipid_targets = sorted(
+        name for name, key in mapped_targets.items() if _TARGET_LANE.get(key) != LIPID
+    )
+    if non_lipid_targets and not mapped_precursors and not lane_reasons:
+        reasons.append(
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE "
+            + ", ".join(repr(c) for c in non_lipid_targets)
+            + ". The charge declares only a matrix/lipid carrier, which is not a precursor: it "
+            "resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, "
+            "sulfur or acrylamide networks, so every species there is zero by construction rather "
+            "than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: "
+            "declare the sugar and amino acid this matrix brings to the cook, and the question "
+            "becomes answerable."
+        )
 
     # A target whose lane needs a precursor species this charge cannot supply.
     if lane is not None and not unmapped:

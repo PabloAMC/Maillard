@@ -8,7 +8,7 @@
 | T2 the refusals | refused rows 25 -> 25; lifted 0; newly refused 0; answered rows that moved 0; lifted rows answered degenerately 0 | True |
 | T3 1981 against 1989 | worst ME_9_OXONONANOATE 1.60x over five shared products | reported |
 | T4 the new rows | 4 scored | reported |
-| T5 nothing else moves | non-lipid benchmarks changed: none; rows ADDED by later waves (not a move): {'mp_holdout_glucose_only_autoclave_121C_Steinhagen2021': [('3,4-dideoxyglucosone', 'ppb'), ('3-deoxyglucosone', 'ppb'), ('glucosone', 'ppb'), ('glyoxal', 'ppb'), ('methylglyoxal', 'ppb')]} | True |
+| T5 nothing else moves | non-lipid benchmarks changed: none; rows ADDED by later waves (not a move): none | True |
 
 ## The cross-laboratory check
 

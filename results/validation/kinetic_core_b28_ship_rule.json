@@ -4,8 +4,8 @@
     "artifact": "kinetic_core_b28_ship_rule",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
-      "short": "6616f99e",
+      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
+      "short": "93d0637b",
       "branch": "reactions",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "96f691356609cbfc7e0ec4571dafb1956158dec51a255e974e3c04a7385b72a1"
+        "sha256": "ada1d1d05229af63214f45873cbbbe80eb4b09656da4ce9847c0c7589df39405"
       }
     ]
   },
@@ -48,6 +48,36 @@
     ],
     "rows_lifted": [],
     "rows_newly_refused": [],
+    "rows_introduced_by_later_waves_not_this_one": [
+      [
+        "external_validation_bi_2020_raw_pea_hexanal",
+        "nonanal"
+      ],
+      [
+        "external_validation_bi_2020_roasted_pea_hexanal",
+        "2,5-dimethylpyrazine"
+      ],
+      [
+        "external_validation_bi_2020_roasted_pea_hexanal",
+        "furaneol"
+      ],
+      [
+        "external_validation_bi_2020_roasted_pea_hexanal",
+        "furfural"
+      ],
+      [
+        "pea_isolate_uht_140C_Trikusuma2019",
+        "2,5-dimethylpyrazine"
+      ],
+      [
+        "pea_isolate_uht_140C_Trikusuma2019",
+        "2-acetyl-1-pyrroline"
+      ],
+      [
+        "pea_isolate_uht_140C_Trikusuma2019",
+        "methional"
+      ]
+    ],
     "answered_rows_that_moved_over_0.05_dex": [],
     "lifted_rows_answered_degenerately": [],
     "degeneracy_rule": "a row lifted out of REFUSED must not be more than 10x worse than the worst row this same benchmark already scores, nor worse than three decades outright. A lift into a near-zero is a regression in honesty; a lift into a pot that already misses by three decades on everything is that pot's defect and must not be charged to the new row.",
@@ -136,30 +166,7 @@
   },
   "T5": {
     "non_lipid_benchmarks_changed": [],
-    "non_lipid_rows_added_by_later_waves": {
-      "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021": [
-        [
-          "3,4-dideoxyglucosone",
-          "ppb"
-        ],
-        [
-          "3-deoxyglucosone",
-          "ppb"
-        ],
-        [
-          "glucosone",
-          "ppb"
-        ],
-        [
-          "glyoxal",
-          "ppb"
-        ],
-        [
-          "methylglyoxal",
-          "ppb"
-        ]
-      ]
-    },
+    "non_lipid_rows_added_by_later_waves": {},
     "compared": "compound, target_unit, measured, predicted, fold_error, over the rows BOTH runs have -- not the whole row, and not rows a later wave added",
     "pass": true
   },

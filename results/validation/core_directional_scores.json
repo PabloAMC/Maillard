@@ -43,8 +43,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "6616f99e84796429276e0e40a0bf1387d889a273",
-      "short": "6616f99e",
+      "commit": "93d0637b9defc382f229449cfc60f429b941a5ee",
+      "short": "93d0637b",
       "branch": "reactions",
       "dirty": true
     },
@@ -500,7 +500,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 47.4
+    "wall_seconds": 48.1
   },
   "claims": [
     {
@@ -4710,7 +4710,7 @@
       "statement": "Of the four MFT precursor systems in Table 10, the hydroxyacetaldehyde/mercapto-2-propanone pair is the most effective - ahead of norfuraneol/H2S (268.1 vs 211.2 ug).",
       "source": "hofmann1998",
       "status": "not_evaluable",
-      "reason": "arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+      "reason": "arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.; THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'MFT'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lan",
       "arms": [
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4729,7 +4729,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+            "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'MFT'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
@@ -4836,7 +4837,7 @@
       "statement": "From hydroxyacetaldehyde + mercapto-2-propanone, MFT formation RISES strongly with pH: 15.5 ug at pH 3.0, 268.1 at pH 5.0, 311.5 at pH 7.0 - a 20x rise from pH 3 to pH 7.",
       "source": "hofmann1998",
       "status": "not_evaluable",
-      "reason": "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+      "reason": "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused: UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.; THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'MFT'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lan",
       "arms": [
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0",
@@ -4855,7 +4856,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+            "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'MFT'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
@@ -4879,7 +4881,8 @@
           "lane": "sulfur",
           "state": "out_of_envelope",
           "reasons": [
-            "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge."
+            "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
+            "THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'MFT'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so every species there is zero by construction rather than by prediction. Refused rather than answered with that zero. THE CURE IS A CHARGE: declare the sugar and amino acid this matrix brings to the cook, and the question becomes answerable."
           ],
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
