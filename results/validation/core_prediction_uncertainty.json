@@ -3650,9 +3650,9 @@
     "generated_on": "2026-09-11",
     "git": {
       "branch": "reactions",
-      "commit": "c8b7a843f08b761444e581fed9b88edbe3253df9",
+      "commit": "9656d609ba06afbec6292f075146b90f9b724198",
       "dirty": true,
-      "short": "c8b7a843"
+      "short": "9656d609"
     },
     "inputs": [
       {
@@ -3769,7 +3769,7 @@
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_asparagine_180C_Ye2024.json",
-        "sha256": "7a4bbd30caa62f2a1932a1dd9a9f35fd18baa4bfc7f7cf03150a4935541776f0"
+        "sha256": "d668299c24feb27a5b1a44cd24fce8d28c08b892c3d13a72c5f40d3b6da96575"
       },
       {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json",
@@ -4229,7 +4229,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 196.6,
+    "wall_seconds": 273.5,
     "workers": 6
   }
 }

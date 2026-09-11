@@ -1518,3 +1518,26 @@ ran.
    `10.1016/j.foodchem.2009.01.018`, reconstructed from the article's PII rather than read; the
    printed DOI is `.017`. The Frankel 1993 scan prints no DOI at all, and its identifier is recorded
    as second-hand. Both are noted in the dossiers themselves.
+
+## Amendment 40 — 2026-09-11 (Wave B38, the identifiability audit)
+
+1. **NOTHING IS FITTED IN THIS WAVE.** It reads every fit that shipped and asks, at the optimum that
+   shipped, which of its coordinates the data determine. Method and thresholds were fixed in
+   `results/validation/kinetic_core_b38_prereg.md` before any Jacobian was computed.
+2. **THE RESULT.** 47 free coordinates: 12 pinned, 6 on a declared bound, 29 weak or unidentified, of
+   which 9 collinear and 20 insensitive. The fits built on fed or within-study rows over small
+   networks (B20, B21) are fully pinned; the fits that scored end-of-cook levels through large
+   networks (B3, B8, B18) are mostly blind. This is the owner's rule — rates, fed yields and ratios
+   FIT; levels VALIDATE — read back from the Fisher information.
+3. **WHAT A REFIT CAN AND CANNOT DO, NOW ON RECORD.** The thiol sink cannot be moved by refitting on
+   the present data (its barrier and both dimer rates sit on their ceilings). The acrylamide
+   competitor channels cannot be moved by refitting (the rows never touch them). The 3-deoxy pool
+   can be, if the fit is designed like B21 on a fed pot. Named debts are re-ranked accordingly in
+   the pre-registration's §7.
+4. **THE ENVELOPE'S PRIORS ARE DATA-DOMINATED WHERE A FIT EXISTS** (21 of 29) and prior-dominated
+   exactly where the data are blind. I predicted the reverse and was wrong.
+5. **TWO GAPS RECORDED.** B18's fit has χ²_red 57 and both its barriers are pure band; the B1 trunk
+   report stores no per-parameter standard errors. Neither is acted on here.
+6. **ONE NOTE CORRECTED.** The Ye 2024 bundle's 0.2 M assumption was said to rest on Knol 2005's
+   abstract; Knol 2005 is on disk with a dossier that reads the 0.2 M from the print. The assumption
+   is unchanged and its provenance upgraded; the bundle's frozen hash is re-pinned with the reason.

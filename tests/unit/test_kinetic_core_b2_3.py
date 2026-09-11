@@ -317,8 +317,10 @@ BUNDLE_BASELINES = {
         "b9adc2ffe8be995795fc816cc01823b53a5bb4d64876b64377ed45da9b6db532",
     "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021":
         "531bb130e00c5aafe789a2d2e47867924a894df0cc086eaa91a8ed7eb4c8bc3d",
+    # RE-BASELINED BY WAVE B37/B38 (2026-09-11): the precursor provenance note gained a correction --
+    # Knol 2005 is on disk and its dossier confirms the 0.2 M; no measured value moved. Previous: 974846cfc0fa87780e208fbc882310c41efcd1caa1d15fc4ae527f648edd204b
     "mp_holdout_glucose_asparagine_180C_Ye2024":
-        "974846cfc0fa87780e208fbc882310c41efcd1caa1d15fc4ae527f648edd204b",
+        "ddf9f26fb91e7d03f2207e501cb15f8850e2b2990c4da0957e78a25764859d34",
     # RE-BASELINED BY WAVE B34 (2026-09-11), and this guard was RIGHT to fire: the change is NOT a
     # condition-record completion, so the helper below is deliberately not widened to hide it.
     # What moved, all of it pre-registered in results/validation/kinetic_core_b34_prereg.md:

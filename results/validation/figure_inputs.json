@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "4116fa5a5f62c960b1057456ef2bf8ad8334421375efdf4fd2905375ddb339f2",
+        "17_papers_by_weight.png": "c8e0ebda59c582652bdbde0ebf1a4b8215e94fb4fa9507ad51a711bfbd88e84e",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "39c35a1410f6277837152e63d63cbed71162d5b1290c94d5c217d33485177f5f",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -130,8 +130,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-09-11",
     "git": {
-      "commit": "c8b7a843f08b761444e581fed9b88edbe3253df9",
-      "short": "c8b7a843",
+      "commit": "9656d609ba06afbec6292f075146b90f9b724198",
+      "short": "9656d609",
       "branch": "reactions",
       "dirty": true
     },
@@ -167,15 +167,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "a6e301446ab24619946cb99bd6493c5d695d1f92eca8792d13ddadcf1577e9ef"
+        "sha256": "f4312628295056bacc4459c846664d1a1180f3101ac3b2797528abdc92bd1af3"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "0905b06c330e5547a861298f78493c98d84f9392f263e1f3ea359ceb3133a643"
+        "sha256": "1a53e6383f03d683ed5c1753942aff37f4be066c555e98bf32553f0442cd6177"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "6fe334804fc756a83d733adde232145b3be9f1e70711443aae78903faac0e709"
+        "sha256": "a2c38bdbc19fc7017de6062bf9809e26c8c2a68de9761bbee981f5a842e25564"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "4116fa5a5f62c960b1057456ef2bf8ad8334421375efdf4fd2905375ddb339f2"
+        "sha256": "c8e0ebda59c582652bdbde0ebf1a4b8215e94fb4fa9507ad51a711bfbd88e84e"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
