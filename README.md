@@ -291,7 +291,8 @@ constant, which is what makes `rank` useful.
 > under `data/` and `results/literature/`, including nested records), of which
 > **65 carry numeric payloads** and **65 of those are consumed at runtime**. Both rises in that
 > count were the repository getting more honest, not worse; both falls were deletions, not
-> verifications. The registries are `data/keys/papers.yml` (285 DOIs) and
+> verifications. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
+> extraction dossier) and
 > `data/keys/compounds.yml` (74 InChIKey-resolved compounds); `scripts/ci/citation_gate.py`
 > blocks a dead or confabulated DOI.
 
