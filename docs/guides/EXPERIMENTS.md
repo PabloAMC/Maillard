@@ -245,6 +245,23 @@ barrier nearly doubles across the model's own operating range depending on where
 open question is now which of the two applies to a hot, wet plant protein** — and that is answerable
 with one experiment: hexanal against time at three temperatures in the same protein suspension.
 
+**Two barriers that fail at 50 °C, and two waves on data already here.** A paper that feeds
+3-deoxyglucosone and glucosone at 50 °C with lysine (Gobert & Glomb 2009) prints half-lives of
+40 hours and 8 hours; this model gives about an hour and about three minutes, and sends most of the
+glucosone to glyoxal where the paper finds 0.07 %. Both were predicted before the probe ran. Two
+barriers are the reason and both alternatives are already on disk from other laboratories: the
+formic-acid exit's 30 kJ/mol (Martins) against 84 (Knol 2010), and the aqueous glucosone → glyoxal
+step's 4 kJ/mol, fitted at 110–140 °C and never tested below. **The ask is not a measurement; it is
+two pre-registered waves, each with its own hold-out.**
+
+**A hexanal source the fat path lacks, and the loss it still lacks.** 2,4-decadienal, which this
+model already makes, breaks to hexanal with an 11.5 % yield and a half-life of tens of minutes at
+120–200 °C (Zamora 2015). That is a step to add, not an experiment. The *loss* of hexanal that four
+papers show when an isolate is heated has no law on disk, and the reason is now clearer: it is
+mostly not chemistry — an enzyme switched off, a volatile stripped, an aldehyde bound — and the
+measurement that would separate the three is the unheated-column experiment above, run with the
+headspace vented and unvented.
+
 **Numbers behind figures.** Two published data sets that bear directly on the thiol problem exist only
 as figures. Their authors' underlying numbers would give that step its first data from a third
 laboratory.
