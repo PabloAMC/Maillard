@@ -84,3 +84,35 @@ def test_the_amendment_is_recorded_as_post_hoc_rather_than_folded_into_the_metho
     assert "## 6. Amendment 1 — made AFTER seeing the first run" in text
     assert text.index("## 3. Predictions") < text.index("## 5. Outcome")
     assert text.index("## 5. Outcome") < text.index("## 6. Amendment 1")
+
+
+def test_the_wishlist_derives_the_portfolio_gap_from_this_diagnostic():
+    """B46's conclusion was that three of four lanes cannot support a trend statement at all, which
+    is a gap in the benchmark portfolio rather than in the model. That must reach the wishlist as a
+    DERIVED section, so it cannot go stale while the diagnostic moves."""
+    wishlist = json.loads((ROOT / "results" / "validation" / "data_wishlist.json").read_text())
+    gaps = wishlist["lane_design_gaps"]
+    assert wishlist["summary"]["lanes_that_cannot_support_a_trend"] == len(gaps)
+    by_lane = {g["lane"]: g for g in gaps}
+    # the trunk's rows are one pot: every trend statement about it is blocked
+    assert by_lane["trunk"]["single_pot"] is True
+    assert "ONE pot" in by_lane["trunk"]["what_is_blocked"]
+    # the fat lane is flat in temperature, which is what withdrew P3
+    assert "temp_C" in by_lane["lipid"]["conditions_with_fewer_than_3_levels"]
+    # sulfur is the one lane with a design behind it, so it must NOT appear here
+    assert "sulfur" not in by_lane
+    for g in gaps:
+        assert g["measurement"], g["lane"]
+
+
+def test_the_experiments_guide_records_that_formation_is_now_implicated():
+    """Experiment 1 was written across several rounds as a story about removal. The diagnostic says
+    the reacting pots read HIGH, and the sink is already pinned. If that correction is dropped, the
+    guide sends someone to measure the wrong half."""
+    guide = (ROOT / "docs" / "guides" / "EXPERIMENTS.md").read_text()
+    exp1 = guide.split("### 1. Where the thiols go")[1].split("### 2.")[0]
+    # prose is hard-wrapped, so a phrase can straddle a newline: normalise whitespace before matching
+    flat = " ".join(exp1.split()).lower()
+    assert "reads high on both meaty thiols, not low" in flat
+    assert "the formation side is now equally implicated" in flat
+    assert "99.5" in flat

@@ -94,6 +94,33 @@ they are the measurement that separates a rate the model has wrong from an oxida
 **What the model predicts today.** The fed thiol decays to essentially zero, and the reacting pot
 peaks after about an hour and then falls. Both are almost certainly wrong.
 
+**And the reacting pots are wrong in the direction nobody here was looking.** This entry has been
+written, through several rounds, as a story about removal: the model strips the thiols too fast, so
+the cure is a better sink. A signed-error diagnostic run on 2026-09-11 says that is at most half the
+problem. Across nineteen scored rows from eleven separate pots, **the model reads high on both meaty
+thiols, not low** — roughly thirtyfold on the roasted one and sixfold on the meaty one — and it is
+consistently high, on the same side in four rows out of five. A sink that is too weak would indeed
+produce that. But the identifiability audit had already found this sink pinned against its ceiling in
+three places at once, so it cannot be made stronger on the present evidence, and a channel that
+cannot move cannot be the whole explanation. **The formation side is now equally implicated, and no
+wave has ever examined it.**
+
+The two findings fit together rather than competing. A separate probe the same week showed the model
+holding on to 99.5 % of its cysteine after five minutes at 95 °C, where a real pot carrying trace
+copper has lost nearly all of it. Cysteine the model fails to lose is cysteine still available to
+make thiols. So one missing removal step, upstream of everything this entry has been arguing about,
+would show up downstream as exactly the over-production now measured. That also explains the last
+piece: the over-prediction is **largest at the lowest temperatures** and shrinks as the pot gets
+hotter, which is what a missing catalytic channel looks like when thermal chemistry is slow enough
+for catalysis to dominate.
+
+**What this changes about the protocol above: one measurement, already listed, becomes the pivot.**
+Residual cysteine is in the list of things to measure. Treat it as a primary readout rather than a
+housekeeping check, on the chelator arm and the arm without it, because the difference between those
+two cysteine curves is the size of the missing channel. If cysteine disappears faster without the
+chelator and the thiols come down with it, the over-production is explained and the sink was never
+the main story.
+
 **What each outcome decides.** If the fed thiol levels off and its disulfide accounts for the
 difference, the removal step is reversible and the disulfide branch is real. If the thiol levels off
 and the disulfide does not account for it, the sink is something else and the fourth structure is

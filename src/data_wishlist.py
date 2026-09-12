@@ -279,6 +279,50 @@ def largest_misses(ranking: Optional[Mapping[str, Any]], top: int = 10) -> List[
              "template": r.get("suggested_doe_template")} for r in rows[:top]]
 
 
+#: Wave B46. The per-lane offset diagnostic records, per lane, how many distinct pots it rests on and
+#: how many distinct levels of each condition exist in it. Where a lane has fewer than three levels of
+#: a condition, NO diagnostic can tell a trend from a two-group comparison there, however many rows it
+#: has -- so the gap is in the benchmark portfolio, not in the model. This section derives that.
+LANE_OFFSETS_PATH = data_paths.VALIDATION_DIR / "lane_offset_diagnostic.json"
+MIN_LEVELS_FOR_A_TREND = 3
+
+
+def lane_design_gaps(diagnostic: Optional[Mapping[str, Any]]) -> List[Dict[str, Any]]:
+    """Lanes that cannot support a trend statement, and the condition each one is flat in.
+
+    Derived, not curated: every number comes from ``lane_offset_diagnostic.json``. Empty when that
+    artifact is absent, so the wishlist still builds without it."""
+    if not diagnostic:
+        return []
+    out: List[Dict[str, Any]] = []
+    for lane, block in sorted(diagnostic.get("lanes", {}).items()):
+        flat = sorted(
+            cov for cov, c in block.get("correlations", {}).items()
+            if c.get("distinct_levels", 0) < MIN_LEVELS_FOR_A_TREND
+        )
+        if not flat and block.get("distinct_pots", 99) > 1:
+            continue
+        out.append({
+            "lane": lane,
+            "scored_rows": block["n"],
+            "distinct_pots": block["distinct_pots"],
+            "conditions_with_fewer_than_3_levels": flat,
+            "single_pot": block["distinct_pots"] == 1,
+            "what_is_blocked": (
+                "every trend statement about this lane: its rows are ONE pot, so any per-lane "
+                "summary is a statement about that pot"
+                if block["distinct_pots"] == 1 else
+                "a trend statement against " + ", ".join(flat)
+            ),
+            "measurement": (
+                f"rows for the {lane} lane that vary ONE condition at a time over at least three "
+                f"levels, holding the others fixed"
+                + (f"; the conditions currently flat are {', '.join(flat)}" if flat else "")
+            ),
+        })
+    return out
+
+
 def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: Path = PROFILE_PATH,
           laplace_path: Path = LAPLACE_PATH, directional_path: Path = data_paths.CORE_DIRECTIONAL_SCORES,
           ranking_path: Path = RANKING_PATH, sulfur_source: Optional[str] = None) -> Dict[str, Any]:
@@ -293,6 +337,8 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
     refused = refused_targets(scorecard)
     axes = thin_axes(directional)
     misses = largest_misses(ranking)
+    offsets = data_access.load_json(LANE_OFFSETS_PATH, missing_ok=True)
+    design_gaps = lane_design_gaps(offsets)
     unlocked = []
     for c in coords:
         if c["unlocks_observables"]:
@@ -314,14 +360,17 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
         "artifact": "data_wishlist",
         "provenance": provenance.provenance_block(
             "data_wishlist", generated_by="src/data_wishlist.py",
-            inputs=[scorecard_path, profile_path, laplace_path, directional_path, ranking_path, SULFUR_MODULE],
+            inputs=[scorecard_path, profile_path, laplace_path, directional_path, ranking_path,
+                    LANE_OFFSETS_PATH, SULFUR_MODULE],
         ),
         "how_to_read": (
             "Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one "
             "fed-intermediate measurement each turns a band artefact into a fitted value. 2: panel rows the "
             "engine answers but declares not evaluable. 3: what the panel asks for that no lane represents. "
             "4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the "
-            "envelope misses most (value of information). 6: what each measurement would let you predict."
+            "envelope misses most (value of information). 6: what each measurement would let you predict. "
+            "7: lanes whose benchmark rows cannot support a trend statement at all -- a gap in the "
+            "PORTFOLIO rather than in the model, and one no amount of modelling closes."
         ),
         "unidentified_coordinates": coords,
         "not_evaluable_rows": nev,
@@ -329,11 +378,13 @@ def build(*, scorecard_path: Path = data_paths.CORE_PANEL_SCORES, profile_path: 
         "thin_axes": axes,
         "largest_misses": misses,
         "what_you_could_predict": unlocked,
+        "lane_design_gaps": design_gaps,
         "summary": {
             "unidentified_coordinates": len(coords),
             "not_evaluable_rows": len(nev),
             "refused_row_count": sum(g["row_count"] for g in refused),
             "axes_below_trust": len(axes),
+            "lanes_that_cannot_support_a_trend": len(design_gaps),
             "trust_rule": f"rate >= {TRUST_MIN_RATE} on >= {MIN_EVALUABLE_FOR_TRUST} claims and Wilson lower bound > {COIN}",
         },
     }
@@ -392,7 +443,29 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
     for u in payload["what_you_could_predict"]:
         lines.append(f"- **If** `{u['if_measured']}` were measured: {u['you_could_predict']}.")
     lines += ["", "Nothing above is a forecast of accuracy: 'unlocks' means the observable sits downstream of the step in the network, so a measured rate would replace a band artefact with a fitted value. Whether the fitted value lands within 3x of a measurement is what the next pre-registered wave finds out (`scripts/generators/WAVES.md`)."]
+    lines += _render_lane_design_gaps(payload)
     return "\n".join(lines) + "\n"
 
 
 __all__ = ["OUTPUT_JSON", "build", "render_markdown", "sulfur_reactions", "downstream_observables", "upstream_charges"]
+
+
+def _render_lane_design_gaps(payload: Mapping[str, Any]) -> List[str]:
+    """Section 7. Derived from the per-lane offset diagnostic (wave B46)."""
+    gaps = payload.get("lane_design_gaps") or []
+    if not gaps:
+        return []
+    lines = ["", "## 7. Lanes whose rows cannot support a trend statement", "",
+             "This is a gap in the benchmark PORTFOLIO, not in the model, and no amount of modelling "
+             "closes it. A rank correlation across two levels of a condition is a two-group "
+             "comparison, not a trend; a per-lane summary built from one pot is a statement about "
+             "that pot. Derived from `lane_offset_diagnostic.json`.", "",
+             "| lane | scored rows | distinct pots | conditions with < 3 levels | what this blocks |",
+             "|---|---:|---:|---|---|"]
+    for g in gaps:
+        flat = ", ".join(g["conditions_with_fewer_than_3_levels"]) or "none"
+        lines.append(f"| {g['lane']} | {g['scored_rows']} | {g['distinct_pots']} | {flat} | "
+                     f"{g['what_is_blocked']} |")
+    lines += ["", "**The measurement, in each case:** " + gaps[0]["measurement"].split(";")[0] + ", for the "
+              "lane concerned. One pot per level, the other conditions held.", ""]
+    return lines
