@@ -2,11 +2,11 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-11",
+    "generated_on": "2026-09-12",
     "git": {
-      "commit": "5af1e4312d142627d918603741618c64ee40d494",
-      "short": "5af1e431",
-      "branch": "reactions",
+      "commit": "5fb988a1304040b44b8ec66971c28cb5fac81cff",
+      "short": "5fb988a1",
+      "branch": "lane-offsets",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
@@ -32,12 +32,16 @@
         "sha256": "0d798a4a224c0330002bae727b050cbeaf54323c3990577c94a4262fd9a02ca3"
       },
       {
+        "path": "results/validation/lane_offset_diagnostic.json",
+        "sha256": "f95d1365924fdddbc6fb1e6a998d4cfb961dae61c7d4d62c6494e05bdcc84f60"
+      },
+      {
         "path": "src/kinetic_core/sulfur.py",
         "sha256": "e079d2a60135dfed00164e96439fffa16e73ed9bce01f6209e8eaf08a611f3d2"
       }
     ]
   },
-  "how_to_read": "Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one fed-intermediate measurement each turns a band artefact into a fitted value. 2: panel rows the engine answers but declares not evaluable. 3: what the panel asks for that no lane represents. 4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the envelope misses most (value of information). 6: what each measurement would let you predict.",
+  "how_to_read": "Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one fed-intermediate measurement each turns a band artefact into a fitted value. 2: panel rows the engine answers but declares not evaluable. 3: what the panel asks for that no lane represents. 4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the envelope misses most (value of information). 6: what each measurement would let you predict. 7: lanes whose benchmark rows cannot support a trend statement at all -- a gap in the PORTFOLIO rather than in the model, and one no amount of modelling closes.",
   "unidentified_coordinates": [
     {
       "key": "k_dimer_decay",
@@ -808,11 +812,51 @@
       "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
     }
   ],
+  "lane_design_gaps": [
+    {
+      "lane": "acrylamide",
+      "scored_rows": 11,
+      "distinct_pots": 7,
+      "conditions_with_fewer_than_3_levels": [
+        "temp_C"
+      ],
+      "single_pot": false,
+      "what_is_blocked": "a trend statement against temp_C",
+      "measurement": "rows for the acrylamide lane that vary ONE condition at a time over at least three levels, holding the others fixed; the conditions currently flat are temp_C"
+    },
+    {
+      "lane": "lipid",
+      "scored_rows": 8,
+      "distinct_pots": 3,
+      "conditions_with_fewer_than_3_levels": [
+        "temp_C",
+        "water_activity"
+      ],
+      "single_pot": false,
+      "what_is_blocked": "a trend statement against temp_C, water_activity",
+      "measurement": "rows for the lipid lane that vary ONE condition at a time over at least three levels, holding the others fixed; the conditions currently flat are temp_C, water_activity"
+    },
+    {
+      "lane": "trunk",
+      "scored_rows": 6,
+      "distinct_pots": 1,
+      "conditions_with_fewer_than_3_levels": [
+        "ph",
+        "temp_C",
+        "time_min",
+        "water_activity"
+      ],
+      "single_pot": true,
+      "what_is_blocked": "every trend statement about this lane: its rows are ONE pot, so any per-lane summary is a statement about that pot",
+      "measurement": "rows for the trunk lane that vary ONE condition at a time over at least three levels, holding the others fixed; the conditions currently flat are ph, temp_C, time_min, water_activity"
+    }
+  ],
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
     "refused_row_count": 24,
     "axes_below_trust": 11,
+    "lanes_that_cannot_support_a_trend": 3,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"
   }
 }

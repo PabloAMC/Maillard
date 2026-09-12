@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **509**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **512**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -68,7 +68,7 @@ Tracked files: **509**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b*_holdout_report.*` (22): `kinetic_core_b1_holdout_report.json`, `kinetic_core_b1_holdout_report.md`, `kinetic_core_b2_1_holdout_report.json`, `kinetic_core_b2_1_holdout_report.md` … | FROZEN pre-registered hold-out scores beside each fit report. Read by people and by the frozen generators' own reports. |
 | `kinetic_core_b*_laplace_covariance.json` (3): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b8_laplace_covariance.json`, `kinetic_core_b9_laplace_covariance.json` | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
-| `kinetic_core_b*_prereg.md` (38): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
+| `kinetic_core_b*_prereg.md` (39): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
 | `kinetic_core_b*_profile.*` (4): `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md`, `kinetic_core_b9_profile.json`, `kinetic_core_b9_profile.md` | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
 | `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
 | `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
@@ -135,6 +135,7 @@ Tracked files: **509**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_env_b34_prereg.*` (1): `kinetic_core_env_b34_prereg.md` | Pre-registration and outcome of ENV-B34: prior rows for the 3-deoxyglucosone limb and the amine-free sugar entries on the source's printed 95 % HPD; INSTALLED under ENV-M1 with four rows newly inside their interval, two amendments to its own reach definition recorded. |
 | `kinetic_core_env_m1_prereg.*` (1): `kinetic_core_env_m1_prereg.md` | Pre-registration and outcome of ENV-M1, one random stream per coordinate: the shared-stream sampler had made every envelope ship rule depend on which seed pair measured the noise floor; ADOPTED, with unreached rows now bit-identical across prior changes. |
 | `kinetic_core_hmf_sink_premise_check.*` (1): `kinetic_core_hmf_sink_premise_check.md` | Why the HMF sink's centre was not moved. It ships at log10 -6.047 against a band floor of -6.05, so it is already inert: switching it off entirely changes all five HMF predictions by 1.000x. The 2-12x deficit is upstream, and the worst row by a factor of two is the one pot with no amine in it at all. |
+| `lane_offset_diagnostic.*` (2): `lane_offset_diagnostic.json`, `lane_offset_diagnostic.md` | Wave B46: the SIGNED offset log10(predicted/measured) per lane, its sign consistency, and its rank correlation against each condition the bundles state, with the number of distinct pots and covariate levels each number rests on. A diagnostic, not a fit: nothing is scored and no constant moves. Its one claim with a design behind it is that the sulfur lane over-predicts the meaty thiols and the over-prediction shrinks with temperature (`generate_lane_offset_diagnostic.py`). |
 | `literature_backlog.*` (2): `literature_backlog.json`, `literature_backlog.md` | Encoded / ready / wet-lab queues over the intake registry (`src/literature_intake_registry.py`). |
 | `matrix_family_coverage.*` (2): `matrix_family_coverage.json`, `matrix_family_coverage.md` | Matrix families: explicit vs indirect support (`src/matrix_family_coverage.py`; alias `matrix-family-coverage`). |
 | `matrix_family_next_action.*` (2): `matrix_family_next_action.json`, `matrix_family_next_action.md` | Which bounded matrix family advances next (`src/matrix_family_next_action.py`; alias `family-next-action`). |
