@@ -2503,3 +2503,25 @@ states every volatile number is a 120-min endpoint; only the free-Cys curves are
 - `scripts/sync_backlog.py` **or** `scripts/ingest_deep_research_markdown.py` — three writers of one file; keep `deep_research_tracker.py`.
 - `tests/scripts/{test_run_computational_gap_dft,test_run_computational_gap_xtb,test_react_ot_seed_coverage,test_import_react_ot_colab_artifacts,test_open_react_ot_colab}.py` — import scripts deleted in Phase 1.
 - `tests/scientific/{test_refinement_campaign,test_refinement_watchlist,test_refinement_governance,test_offline_refinement_governance,test_mlp_assessment}.py`, `tests/unit/test_wave_r1_barrier_offset_retirement.py` — import `src` modules deleted in Phase 1 (check whether any surviving assertion is worth porting first).
+
+### Cultivated tissue as a spec (2026-09-13, owner request: "projects that help animals")
+
+Cultivated muscle and fat are grown, not exercised, aged or bled, so their precursor pools differ
+from slaughtered tissue in ways nobody has mapped. Those pools are this engine's inputs, so a
+cultivated tissue enters as a **spec**, not as chemistry: no species, no reaction, no parameter, and
+`core_panel_scores.json` cannot move. The intended deliverable is a ranked table of which precursor
+to restore, in medium or scaffold, to close the largest gap against beef.
+
+Before any of that, one question decides whether the engine belongs in the answer at all: does its
+ranking differ from the ranking a chemist reads straight off the composition gap? The engine's only
+route to disagreeing runs through the sulfur lane, which the core panel scores worst. So the
+invariance test comes first and its decision rule is declared before the run.
+
+- [x] Pre-registration written: [results/validation/cultivated_tissue_invariance_prereg.md](../results/validation/cultivated_tissue_invariance_prereg.md)
+- [ ] Composition box assembled (`results/cultivated_tissue_invariance/`), every range labelled `sourced` or `stub`
+- [ ] Sweep generator `scripts/generators/cultivated_tissue_invariance.py`, naive and engine rankings per draw
+- [ ] Parameter envelope drawn on top of each candidate reversal
+- [ ] Verdict recorded against T1 / T2 / T3 in the pre-registration's own section 3
+- [ ] Test: `core_panel_scores.json` unchanged with this branch present
+- [ ] On T1 only: the module as designed in the pre-registration's section 5
+- [ ] On T2 or T3: the composition corpus and gap map ship instead, and the module is not built
