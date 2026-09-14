@@ -1,9 +1,9 @@
 # Muroya et al. 2019 — EXTRACTION (beef loin, CE-TOFMS, absolute pools at 0, 1 and 14 days)
 
-**Source on disk:** none. Read 2026-09-14 from the publisher's open-access PDF
-(`animbiosci.org/upload/pdf/ajas-18-0648.pdf`) through an automated fetch; the numbers below are
-as that read returned them and have NOT been checked against the PDF by eye. Verify before any
-panel use. Written for the cultivated-tissue composition box
+**Source on disk:** `data/articles/Muroya2019.pdf` (the publisher's open-access PDF). First read
+2026-09-14 through an automated fetch of the same PDF; Table 1 then checked against the PDF by eye
+later the same day: **every number in section 2 matched** (means and SEs, all eleven rows). Two
+additions from the check are marked below. Written for the cultivated-tissue composition box
 (`src/cultivated_tissue_invariance.py`), not for the core fit.
 
 | field | value |
@@ -14,8 +14,12 @@ panel use. Written for the cultivated-tissue composition box
 
 ## 1. Methods
 
-Longissimus thoracis from n = 3 Japanese Black steers, stored at 2 °C, sampled at 0, 1 and 14 days
-post-mortem. Capillary-electrophoresis time-of-flight MS with absolute quantification against
+Longissimus thoracis from n = 3 Japanese Black steers (28 months, 632-739 kg), stored at 2 °C, sampled
+at 0 (30 min), 1 and 14 days post-mortem. **Added at the PDF check:** the muscle blocks were 36.5 %
+crude fat, 14.2 % protein and 47.7 % moisture (Wagyu marbling); intramuscular fat was removed by
+hand before the lean pieces were frozen, and the nmol/g are per g of that trimmed lean, whose own
+moisture is not printed. The 75 % moisture used below is the usual lean-beef figure; if the trimmed
+lean still carried fat, the mM in tissue water would be higher, by a factor well under two. Capillary-electrophoresis time-of-flight MS with absolute quantification against
 standards. Table 1 prints "Mean (nmol/g)" with SE; compounds not detected at any time point are
 omitted from the table.
 
@@ -35,8 +39,10 @@ omitted from the table.
 | leucine | 263 ± 26 | 315 ± 19 | 827 ± 133 |
 | glycine | 1 083 ± 16 | 1 121 ± 165 | 1 273 ± 63 |
 
-Free glucose, free ribose and thiamine are not in Table 1 as returned (the read says glucose and
-fructose were not absolutely quantified; thiamine appears in the text but not in the table).
+Free glucose, free ribose and thiamine are not in Table 1 (confirmed at the PDF check). Thiamine
+appears only in Table 3 and Figure 4 as a RELATIVE content (peak area, no standard) that rose over
+aging; Table 3 also prints relative contents for Cys, Leu and Met that are not the absolute values
+and must not be mixed with Table 1.
 
 ## 3. What the repo takes
 

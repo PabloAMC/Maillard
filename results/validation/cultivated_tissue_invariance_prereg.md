@@ -331,3 +331,24 @@ beef range, so the plan's step "point the glucose and ribose notes at aliani2013
 and was not carried out. The sweep was not rerun on the corrected box; that is a separate decision,
 and section 7 says what such a run would and would not show. The pattern behind the Bischof failure is
 recorded in `tasks/lessons.md`.
+
+**Addendum, same evening: the three remaining PDFs arrived** (`Muroya2019`, `Joo2022`,
+`lombardi-boccia2005`) and were checked the same way.
+
+- `muroya2019`: every number in Table 1 matched. The check added one caveat: the Wagyu muscle blocks
+  were 36.5 % fat and 47.7 % moisture, the fat was trimmed by hand before analysis, and the trimmed
+  lean's moisture is not printed, so the 75 % used in the conversion is an assumption that could
+  understate the mM by a factor under two. Thiamine in this paper is relative content only (Table 3).
+- `joo2022`: every number matched, and the methods settled the open question: the amino acids were
+  acid-hydrolysed (6 M HCl, 110 °C, 24 h), so Table 1's cysteine is protein cysteine as a share of the
+  total. It was rightly not taken. IMP 1.98 mmol/kg in bovine cultured tissue confirmed.
+- `lombardiboccia2005`: the excerpt's two numbers were right; the per-cut table is now on file, with the
+  DOI confirmed (10.1016/j.jfca.2003.10.007). Beef total thiamine 0.01 to 0.08 ± 0.01 mg/100 g across
+  five raw cuts, and **not detected in any cut after cooking**, the behaviour the sulfur lane's thiamine
+  route presupposes. The box's beef thiamine range is now sourced from Table 2 alone, 0.00044 to
+  0.0040 mM (the unread review that supplied the 0.0049 corner is no longer cited).
+
+Every range the box cites now rests on a table read by eye from a PDF on disk: 7 beef ranges sourced,
+0 secondary, 5 cultivated stubs. The cultivated side is unchanged: none of the three papers measures
+free ribose, cysteine, thiamine or glucose in cultured muscle (Joo 2022 measured only IMP and
+hydrolysed amino acids in its cultured tissue).

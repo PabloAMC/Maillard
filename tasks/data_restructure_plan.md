@@ -2533,7 +2533,8 @@ invariance test comes first and its decision rule is declared before the run.
 - [x] Box moved on the primaries: beef ribose 0.33-2.2 mM sourced (was 0.4-2.5 secondary from the cited point), glucose 2.4-15 sourced (was 1.2-11 with a review corner), cysteine top 0.14 → 0.23, leucine 0.35-2.4 → 0.29-3.2; IMP, ribose 5-phosphate unchanged with the new laboratories cited; thiamine unchanged (no PDF). `hwang2026` cited on no range. 6 sourced, 1 secondary, 5 stub
 - [x] Searched the four PDFs for free ribose, cysteine, thiamine or glucose in cultured muscle: nothing; the four rankable cultivated stubs stay stubs and the test assertion stands
 - [ ] ~~Aliani 2013 dossier, BOX pointed at it~~ — not done: it is a chicken paper (Meat Science 94, 55-62) and cannot source a beef range
-- [ ] Still unchecked against a PDF: `muroya2019` (Asian-Australas J Anim Sci 32:1172, 10.5713/ajas.18.0648), `joo2022` (Food Sci Anim Resour 42:175, 10.5851/kosfa.2021.e72), `lombardiboccia2005` (J Food Compos Anal 18:39, DOI unconfirmed). Muroya 2019 carries the box's cysteine lower corner and the whole ribose 5-phosphate range
+- [x] The last three PDFs arrived the same evening and were checked: `muroya2019` all numbers matched (caveat: Wagyu blocks 47.7 % moisture, fat trimmed, lean moisture not printed); `joo2022` all matched and its amino acids are acid-hydrolysed totals, so cysteine is rightly not taken; `lombardiboccia2005` rewritten from Table 2 (DOI 10.1016/j.jfca.2003.10.007), beef thiamine now sourced 0.00044-0.0040 mM, and thiamine was not detected in any cooked beef cut. Every cited range now rests on a table read by eye: 7 sourced, 0 secondary, 5 cultivated stubs
+- [ ] Next decision (owner): rerun the sweep on the corrected box as a prediction (~2 h), or wait for a cultured-muscle composition measurement. Section 7 says what a rerun can and cannot show
 
 ### Native runtime beside the container (2026-09-14, owner: "can we remove OrbStack?")
 

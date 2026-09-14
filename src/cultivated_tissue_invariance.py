@@ -37,9 +37,9 @@ naming the extraction dossier it came from. Three labels:
 * ``stub``      -- no measurement found; the range is a sensitivity device and nothing else;
 * ``secondary`` -- a number read from a review or an abstract, not from the table that measured it;
 * ``sourced``   -- read from the measuring paper's own table. The dossier's "Source on disk" line says
-                   whether that table was read from the PDF by eye (koutsidis2008a, koutsidis2008b,
-                   bischof2023, kim2024b as of 2026-09-14) or through an automated fetch of the
-                   open-access text, unchecked (muroya2019, joo2022).
+                   whether that table was read from the PDF by eye. As of the evening of 2026-09-14 every
+                   dossier the box cites has been (koutsidis2008a, koutsidis2008b, bischof2023, kim2024b,
+                   muroya2019, joo2022, lombardiboccia2005).
 
 The box is declared here, in code, next to the other declared assumptions, rather than under
 ``data/`` where it would read as curated. Both boxes are echoed into the artifact directory.
@@ -167,9 +167,10 @@ BOX: Mapping[str, Mapping[str, Range]] = {
                           "Koutsidis 2008a Table 3: 0.05-0.17 mmol/kg across 30 steers at 10 d, whose top is the upper "
                           "corner (0.23 mM); the span is ageing plus animal spread",
                           ("muroya2019", "koutsidis2008b", "koutsidis2008a")),
-        "thiamine": Range(0.00044, 0.0049, "secondary",
-                          "0.01-0.08 mg/100 g across beef cuts (Lombardi-Boccia 2005, excerpt) and 0.08-0.11 mg/100 g "
-                          "(Ramalingam 2019 via Lee 2025); about twofold below the stub",
+        "thiamine": Range(0.00044, 0.0040, "sourced",
+                          "Lombardi-Boccia 2005 Table 2: total thiamine 0.01-0.08 (+/- 0.01) mg/100 g across five raw beef "
+                          "cuts by HPLC after acid hydrolysis, lowest mean to highest mean + SD; not detected in any cut after "
+                          "cooking; about twofold below the stub",
                           ("lombardiboccia2005",)),
         "glucose": Range(2.4, 15.0, "sourced",
                          "Bischof 2023 Table 1 with the alpha- and beta-glucose rows SUMMED (the first read took one anomer "
