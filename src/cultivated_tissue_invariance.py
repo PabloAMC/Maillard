@@ -26,14 +26,21 @@ under joint draws of the core's priors and records whether the same precursor st
 The verdict is then read off section 3 mechanically. The thresholds are the pre-registration's;
 this file does not own them and does not adjust them.
 
-THE COMPOSITION BOX IS A SENSITIVITY DEVICE, NOT DATA
------------------------------------------------------
-Every range below is labelled ``stub``. None is a measurement. They are wide on purpose: if the
-ordering is stable across the whole box the values never mattered, and if it flips inside the
-box the finding is that composition must be measured before anything is predicted. The box is
-echoed into the artifact directory so the record shows exactly what was swept; it is declared
-here, in code, next to the other declared assumptions, rather than under ``data/`` where it
-would read as curated.
+TWO BOXES
+---------
+``STUB_BOX`` is the box the declared run of 2026-09-13 swept: every range a stub, none a
+measurement, wide on purpose. It is frozen here because the artifact of that run echoes it and
+the two must stay identical (a test checks). ``BOX`` is the current box: the same shape, with a
+range replaced wherever the literature read of 2026-09-14 found a measurement, each such range
+naming the extraction dossier it came from. Three labels:
+
+* ``stub``      -- no measurement found; the range is a sensitivity device and nothing else;
+* ``secondary`` -- a number read from a review or an abstract, not from the table that measured it;
+* ``sourced``   -- read from the measuring paper's own table (through an automated fetch of the
+                   open-access text; the dossier says so, and says it was not checked by eye).
+
+The box is declared here, in code, next to the other declared assumptions, rather than under
+``data/`` where it would read as curated. Both boxes are echoed into the artifact directory.
 """
 from __future__ import annotations
 
@@ -104,16 +111,21 @@ SEED = 0
 N_ENVELOPE = 50
 
 
+LABELS: Tuple[str, ...] = ("stub", "secondary", "sourced")
+
+
 @dataclass(frozen=True)
 class Range:
     lo_mM: float
     hi_mM: float
-    label: str  # "stub" or "sourced"
+    label: str  # one of LABELS
     note: str
+    #: extraction dossier stems under data/lit/extraction_dossiers/ (empty for a stub)
+    dossiers: Tuple[str, ...] = ()
 
 
-#: THE COMPOSITION BOX. Every entry is a stub (see the module docstring). mM in tissue water.
-BOX: Mapping[str, Mapping[str, Range]] = {
+#: THE BOX THE DECLARED RUN SWEPT (2026-09-13). Frozen. Every entry a stub. mM in tissue water.
+STUB_BOX: Mapping[str, Mapping[str, Range]] = {
     "beef": {
         "ribose": Range(0.3, 5.0, "stub", "post-mortem ribose from IMP breakdown in aged beef; order of magnitude only"),
         "cysteine": Range(0.05, 0.5, "stub", "free cysteine in raw muscle; order of magnitude only"),
@@ -132,6 +144,75 @@ BOX: Mapping[str, Mapping[str, Range]] = {
         "IMP": Range(0.1, 3.0, "stub", "unrankable by the engine"),
         "ribose-5-phosphate": Range(0.01, 0.1, "stub", "unrankable by the engine"),
     },
+}
+
+#: THE CURRENT BOX (literature read of 2026-09-14). mM in tissue water. A stub here is a stub
+#: because the read found NO measurement of that pool in that tissue; the gap map in the artifact
+#: lists them. Beef moisture taken as 75 %, the pig construct of kim2024b as 90 % (its Table 3).
+BOX: Mapping[str, Mapping[str, Range]] = {
+    "beef": {
+        "ribose": Range(0.4, 2.5, "secondary",
+                        "one cited point, 0.26 mg/g (Aliani 2013 via Hwang 2026) = 2.3 mM as the upper corner; "
+                        "one sixth of it as the lower, from Koutsidis 2008b's abstract (sixfold rise over 21 d)",
+                        ("hwang2026", "koutsidis2008b")),
+        "cysteine": Range(0.002, 0.14, "sourced",
+                          "Muroya 2019 Table 1: 1.6 nmol/g at D0 to 107 nmol/g at D14, n = 3 steers; the span is ageing, "
+                          "not a laboratory spread; D0 sits at the detection floor",
+                          ("muroya2019",)),
+        "thiamine": Range(0.00044, 0.0049, "secondary",
+                          "0.01-0.08 mg/100 g across beef cuts (Lombardi-Boccia 2005, excerpt) and 0.08-0.11 mg/100 g "
+                          "(Ramalingam 2019 via Lee 2025); about twofold below the stub",
+                          ("lombardiboccia2005",)),
+        "glucose": Range(1.2, 11.0, "sourced",
+                         "Bischof 2023 Table 1: 1.83 +/- 0.91 to 4.16 +/- 1.48 umol/g wet across two breeds and 28 d "
+                         "(1.2-7.5 mM); upper corner 11 mM from the cited 1.48 mg/g (Aliani 2013 via Hwang 2026)",
+                         ("bischof2023", "hwang2026")),
+        "leucine": Range(0.35, 2.4, "sourced",
+                         "Muroya 2019: 263-827 nmol/g (0.35-1.1 mM); Bischof 2023: 0.59-1.47 umol/g +/- SD (0.64-2.4 mM); "
+                         "unrankable by the engine",
+                         ("muroya2019", "bischof2023")),
+        "IMP": Range(0.1, 10.0, "sourced",
+                     "Muroya 2019: 78 nmol/g pre-rigor to 7574 nmol/g at D1 (0.10-10 mM); Bischof 2023 inside it; "
+                     "unrankable by the engine",
+                     ("muroya2019", "bischof2023")),
+        "ribose-5-phosphate": Range(0.005, 0.1, "sourced",
+                                    "Muroya 2019: non-detect at D0, 57-70 nmol/g at D1-D14 (to 0.093 mM); lower corner set at "
+                                    "0.005 because the draw is log-uniform; unrankable by the engine",
+                                    ("muroya2019",)),
+    },
+    "cultivated_muscle": {
+        "ribose": Range(0.01, 2.0, "stub",
+                        "NO MEASUREMENT FOUND in cultured muscle of any species (read of 2026-09-14); range unchanged from the stub box"),
+        "cysteine": Range(0.02, 0.5, "stub",
+                          "NO MEASUREMENT FOUND: Joo 2022 prints cysteine only as a percent of total amino acids with no absolute "
+                          "total and no free/hydrolysed statement; Kim 2024b's free-amino-acid table omits it; range unchanged"),
+        "thiamine": Range(0.0003, 0.01, "stub",
+                          "NO MEASUREMENT FOUND in cultured muscle; DMEM carries ~12 uM thiamine HCl, what a washed construct "
+                          "retains is unknown; range unchanged"),
+        "glucose": Range(0.1, 10.0, "stub",
+                         "NO MEASUREMENT FOUND in cultured muscle; note Joo 2022 proliferated in glucose-free DMEM; range unchanged"),
+        "leucine": Range(0.1, 1.0, "sourced",
+                         "Kim 2024b Table 4: 35.8 mg/kg free leucine in a pig gelatin-scaffold construct at 90 % moisture "
+                         "(0.30 mM), CONFOUNDED by 49.6 mg/kg in the scaffold-only arm; one point, pig, widened tenfold; "
+                         "unrankable by the engine",
+                         ("kim2024b",)),
+        "IMP": Range(0.0003, 3.0, "sourced",
+                     "two primaries four decades apart: Kim 2024b pig construct 0.11 mg/kg (0.00035 mM); Joo 2022 bovine "
+                     "2D tissue 1.98 mmol/kg (2.6 mM); the box carries both corners; unrankable by the engine",
+                     ("kim2024b", "joo2022")),
+        "ribose-5-phosphate": Range(0.01, 0.1, "stub",
+                                    "NO MEASUREMENT FOUND in cultured muscle; range unchanged; unrankable by the engine"),
+    },
+}
+
+#: For every stub in the current box: the measurement that would close it. One experiment covers
+#: all of them (see the artifact's gap map).
+CLOSES_WITH: Mapping[str, str] = {
+    "ribose": "free ribose by GC-MS (oxime-TMS) or enzymatic assay on the washed construct extract; CE-MS panels do not carry it",
+    "cysteine": "free cysteine by CE-TOFMS with thiol protection at extraction, as Muroya 2019 did for beef; report cystine alongside",
+    "thiamine": "thiamine and its phosphates by HPLC-fluorescence (thiochrome) on the same extract",
+    "glucose": "free glucose by enzymatic assay or GC-MS on the same extract; state the harvest wash",
+    "ribose-5-phosphate": "on the CE-TOFMS panel with cysteine; it was quantified in beef by that method",
 }
 
 #: Section 3, as declared and amended (A5). Read, never edited, here.
@@ -154,9 +235,10 @@ def _log_uniform(rng: np.random.Generator, r: Range) -> float:
     return float(10 ** rng.uniform(math.log10(r.lo_mM), math.log10(r.hi_mM)))
 
 
-def draw_compositions(rng: np.random.Generator) -> Tuple[Dict[str, float], Dict[str, float]]:
-    beef = {p: _log_uniform(rng, r) for p, r in BOX["beef"].items()}
-    cult = {p: _log_uniform(rng, r) for p, r in BOX["cultivated_muscle"].items()}
+def draw_compositions(rng: np.random.Generator, box: Mapping[str, Mapping[str, Range]]
+                      ) -> Tuple[Dict[str, float], Dict[str, float]]:
+    beef = {p: _log_uniform(rng, r) for p, r in box["beef"].items()}
+    cult = {p: _log_uniform(rng, r) for p, r in box["cultivated_muscle"].items()}
     return beef, cult
 
 
@@ -247,13 +329,13 @@ def run_arm(precursors: Mapping[str, float], temp_c: float, time_min: float, nam
 
 def evaluate_draw(index: int, beef: Mapping[str, float], cult: Mapping[str, float],
                   temp_c: float, time_min: float) -> Dict[str, Any]:
-    naive_all = naive_ranking(beef, cult, list(BOX["beef"].keys()))
+    naive_all = naive_ranking(beef, cult, list(beef.keys()))
     naive = naive_ranking(beef, cult, CANDIDATES)
     base = run_arm(cult, temp_c, time_min, f"draw{index}-cultivated")
     record: Dict[str, Any] = {
         "draw": index,
-        "beef_mM": {p: beef[p] for p in BOX["beef"]},
-        "cultivated_mM": {p: cult[p] for p in BOX["cultivated_muscle"]},
+        "beef_mM": dict(beef),
+        "cultivated_mM": dict(cult),
         "restorable": naive,
         "naive_ranking": naive,
         "naive_ranking_all_declared": naive_all,
@@ -324,12 +406,12 @@ def envelope_on_reversal(record: Mapping[str, Any], temp_c: float, time_min: flo
 
 
 def sweep_programme(label: str, temp_c: float, time_min: float, *, n_draws: int, seed: int,
-                    n_envelope: int) -> Dict[str, Any]:
+                    n_envelope: int, box: Mapping[str, Mapping[str, Range]] = BOX) -> Dict[str, Any]:
     rng = np.random.default_rng(np.random.SeedSequence(seed))
     t0 = time.time()
     draws = []
     for i in range(n_draws):
-        beef, cult = draw_compositions(rng)
+        beef, cult = draw_compositions(rng, box)
         draws.append(evaluate_draw(i, beef, cult, temp_c, time_min))
     evaluated = [d for d in draws if d["top_agree"] is not None]
     refused = [d for d in draws if d["engine_refused"]]
@@ -422,21 +504,44 @@ def verdict(summary: Mapping[str, Any]) -> Dict[str, Any]:
     return {"verdict": result, "clauses": c, "thresholds": dict(th)}
 
 
-def build(*, n_draws: int = N_DRAWS, seed: int = SEED, n_envelope: int = N_ENVELOPE) -> Dict[str, Any]:
+def box_echo(box: Mapping[str, Mapping[str, Range]]) -> Dict[str, Dict[str, Dict[str, Any]]]:
+    return {
+        tissue: {p: {"lo_mM": r.lo_mM, "hi_mM": r.hi_mM, "label": r.label, "note": r.note,
+                     "dossiers": list(r.dossiers)} for p, r in rows.items()}
+        for tissue, rows in box.items()
+    }
+
+
+def gap_map(box: Mapping[str, Mapping[str, Range]]) -> List[Dict[str, Any]]:
+    """Every stub in ``box``: what it is, and the measurement that would close it."""
+    out = []
+    for tissue, rows in box.items():
+        for p, r in rows.items():
+            if r.label == "stub":
+                out.append({"tissue": tissue, "precursor": p, "lo_mM": r.lo_mM, "hi_mM": r.hi_mM,
+                            "engine_rankable": p in CANDIDATES, "note": r.note,
+                            "closes_with": CLOSES_WITH.get(p, "")})
+    return out
+
+
+def build(*, n_draws: int = N_DRAWS, seed: int = SEED, n_envelope: int = N_ENVELOPE,
+          box: Mapping[str, Mapping[str, Range]] = BOX, run_kind: str = "prediction") -> Dict[str, Any]:
+    """``run_kind`` is ``declared`` for the pre-registered stub-box run of 2026-09-13 and
+    ``prediction`` for every run on a box with measured ranges (pre-registration section 7)."""
     programmes = []
     for label, temp_c, time_min in PROGRAMMES:
-        result = sweep_programme(label, temp_c, time_min, n_draws=n_draws, seed=seed, n_envelope=n_envelope)
+        result = sweep_programme(label, temp_c, time_min, n_draws=n_draws, seed=seed, n_envelope=n_envelope, box=box)
         result["verdict"] = verdict(result["summary"])
         programmes.append(result)
-    box_echo = {
-        tissue: {p: {"lo_mM": r.lo_mM, "hi_mM": r.hi_mM, "label": r.label, "note": r.note} for p, r in rows.items()}
-        for tissue, rows in BOX.items()
-    }
+    labels = [r.label for rows in box.values() for r in rows.values()]
     return {
         "provenance": provenance.provenance_block(
             ARTIFACT, generated_by="src/cultivated_tissue_invariance.py", inputs=[PREREG]
         ),
         "pre_registration": data_paths.rel(PREREG),
+        "run_kind": run_kind,
+        "box_labels": {lab: labels.count(lab) for lab in LABELS},
+        "gap_map": gap_map(box),
         "design": {
             "candidates": list(CANDIDATES),
             "unrankable_declared_candidates": dict(UNRANKABLE),
@@ -444,7 +549,7 @@ def build(*, n_draws: int = N_DRAWS, seed: int = SEED, n_envelope: int = N_ENVEL
             "metric_targets": list(METRIC_TARGETS),
             "fixed_conditions": dict(FIXED_CONDITIONS),
             "n_draws": n_draws, "seed": seed, "n_envelope": n_envelope,
-            "composition_box": box_echo,
+            "composition_box": box_echo(box),
             "structural_refusals": [
                 "trunk arm (methional, pyrazines, furaneol on glucose + glycine): methional refused, pyrazines ~1e-13 ug/L, no water threshold on any target; no decision metric (A1)",
                 "cultivated fat: no route from tissue lipid to any lane (A1)",
@@ -470,11 +575,20 @@ def _pct(x: Optional[float]) -> str:
 
 def render_markdown(payload: Mapping[str, Any]) -> str:
     L: List[str] = []
+    kind = payload.get("run_kind", "declared")
+    counts = payload.get("box_labels", {})
     L.append("# Does the kinetic layer change what to add to cultivated tissue?")
     L.append("")
-    L.append(f"*Generated {payload['provenance']['generated_on']} by `{payload['provenance']['generated_by']}`. "
-             f"Pre-registration: `{payload['pre_registration']}`. The composition box is a sensitivity device; "
-             "every range is a stub, none is a measurement.*")
+    if kind == "declared":
+        L.append(f"*Generated {payload['provenance']['generated_on']} by `{payload['provenance']['generated_by']}`. "
+                 f"Pre-registration: `{payload['pre_registration']}`. THE DECLARED RUN: the composition box is a "
+                 "sensitivity device; every range is a stub, none is a measurement.*")
+    else:
+        L.append(f"*Generated {payload['provenance']['generated_on']} by `{payload['provenance']['generated_by']}`. "
+                 f"Pre-registration: `{payload['pre_registration']}`. A PREDICTION RUN on the current box "
+                 f"({counts.get('sourced', 0)} sourced, {counts.get('secondary', 0)} secondary, {counts.get('stub', 0)} stub "
+                 "ranges). It is not a resolution of the declared run's verdict (pre-registration section 7): the "
+                 "same statistics are reported against the same thresholds so the two runs can be read side by side.*")
     L.append("")
     d = payload["design"]
     L.append("## Verdict, by programme")
@@ -528,13 +642,39 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
             for t, n in sorted(s["refusals_by_text"].items(), key=lambda kv: -kv[1]):
                 L.append(f"- ×{n}: {t[:220]}{'…' if len(t) > 220 else ''}")
             L.append("")
+    gaps = payload.get("gap_map") or []
+    if gaps:
+        L.append("## Gap map: what has not been measured")
+        L.append("")
+        L.append("Every stub in the box this run swept. A stub is a range with no measurement behind it; the engine's "
+                 "ranking depends on the cultivated-side values of the four rankable precursors, so a stub there "
+                 "is a gap in the answer, not only in the table.")
+        L.append("")
+        L.append("| tissue | precursor | engine can rank it | swept range mM | what would close it |")
+        L.append("|---|---|---|---|---|")
+        for g in gaps:
+            L.append(f"| {g['tissue']} | {g['precursor']} | {'yes' if g['engine_rankable'] else 'no'} | "
+                     f"{g['lo_mM']} to {g['hi_mM']} | {g['closes_with'] or '—'} |")
+        L.append("")
+        rankable_gaps = [g for g in gaps if g["engine_rankable"] and g["tissue"] == "cultivated_muscle"]
+        if rankable_gaps:
+            L.append(f"**One experiment closes the rankable gaps.** {len(rankable_gaps)} of the four precursors the engine "
+                     "can rank have no published measurement in cultured muscle. Muroya 2019 quantified cysteine, "
+                     "ribose 5-phosphate, IMP and leucine in beef on one CE-TOFMS run; the same panel on washed "
+                     "cultured bovine myotubes, with free ribose and glucose by GC-MS or enzymatic assay and thiamine "
+                     "by thiochrome HPLC on the same extract, beside a beef sample handled identically, turns every "
+                     "cultivated stub into a sourced range in one campaign. Three biological replicates, two harvest "
+                     "washes (none; PBS), one ageing arm (24 h at 2 °C) to see whether the IMP-to-ribose route runs "
+                     "in a construct at all.")
+            L.append("")
     L.append("## The composition box that was swept")
     L.append("")
-    L.append("| tissue | precursor | lo mM | hi mM | label | note |")
-    L.append("|---|---|---|---|---|---|")
+    L.append("| tissue | precursor | lo mM | hi mM | label | dossiers | note |")
+    L.append("|---|---|---|---|---|---|---|")
     for tissue, rows in d["composition_box"].items():
         for c, r in rows.items():
-            L.append(f"| {tissue} | {c} | {r['lo_mM']} | {r['hi_mM']} | {r['label']} | {r['note']} |")
+            L.append(f"| {tissue} | {c} | {r['lo_mM']} | {r['hi_mM']} | {r['label']} | "
+                     f"{', '.join(r.get('dossiers') or []) or '—'} | {r['note']} |")
     L.append("")
     L.append(f"Fixed in every spec: pH {d['fixed_conditions']['ph']}, a_w {d['fixed_conditions']['aw']}, matrix "
              f"{d['fixed_conditions']['matrix']}, phosphate {d['fixed_conditions']['buffer']['phosphate_mol_l']} mol/L. "
@@ -543,20 +683,26 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
     return "\n".join(L)
 
 
-def write(payload: Mapping[str, Any]) -> Tuple[Any, Any]:
+def write(payload: Mapping[str, Any], stem: Optional[str] = None) -> Tuple[Any, Any]:
+    """Write the JSON, its markdown twin and the box echo. ``stem`` names the files; the
+    declared run of 2026-09-13 owns the default stem and is not overwritten by a prediction run."""
     import yaml
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    BOX_ECHO.write_text(
-        "# Echo of the declared composition box (src/cultivated_tissue_invariance.py). Every range is a stub.\n"
-        "# This file is generated; edit the module, not this file.\n"
+    json_path = OUTPUT_JSON if stem is None else OUTPUT_DIR / f"{stem}.json"
+    echo_path = BOX_ECHO if stem is None else OUTPUT_DIR / f"{stem}_box.yml"
+    echo_path.write_text(
+        f"# Echo of the composition box this run swept (src/cultivated_tissue_invariance.py; run_kind = "
+        f"{payload.get('run_kind', 'declared')}). Labels: stub = no measurement found; secondary = read from a review "
+        "or abstract; sourced = read from the measuring paper's table. This file is generated; edit the module, not this file.\n"
         + yaml.safe_dump(payload["design"]["composition_box"], sort_keys=False),
         encoding="utf-8",
     )
-    return artifact_io.write_artifact(payload, OUTPUT_JSON, render=render_markdown)
+    return artifact_io.write_artifact(payload, json_path, render=render_markdown)
 
 
 __all__ = [
-    "BOX", "CANDIDATES", "METRIC_TARGETS", "OUTPUT_JSON", "PROGRAMMES", "TARGETS", "THRESHOLDS",
-    "build", "evaluate_draw", "kendall_tau", "naive_ranking", "render_markdown", "verdict", "write",
+    "BOX", "CANDIDATES", "CLOSES_WITH", "LABELS", "METRIC_TARGETS", "OUTPUT_JSON", "PROGRAMMES", "STUB_BOX",
+    "TARGETS", "THRESHOLDS", "box_echo", "build", "evaluate_draw", "gap_map", "kendall_tau", "naive_ranking",
+    "render_markdown", "verdict", "write",
 ]

@@ -6,10 +6,12 @@ results/validation/cultivated_tissue_invariance_prereg.md (sections 3 and 6). Th
 own any threshold; it sweeps the declared composition box through the front door, draws the
 parameter envelope on every reversal, and reads the verdict off the pre-registration.
 
-    python scripts/generators/generate_cultivated_tissue_invariance.py                # the declared run
-    python scripts/generators/generate_cultivated_tissue_invariance.py --draws 20 --envelope 5   # a smoke run
+    python scripts/generators/generate_cultivated_tissue_invariance.py                 # prediction on the current box
+    python scripts/generators/generate_cultivated_tissue_invariance.py --box stub       # re-sweep the declared run's box
+    python scripts/generators/generate_cultivated_tissue_invariance.py --draws 20 --envelope 5 --stem smoke   # a smoke run
 
-A smoke run writes to the same paths; do not commit one as the declared run.
+The declared run of 2026-09-13 lives at cultivated_tissue_invariance.{json,md}; a prediction run on the
+current box writes measured_box_prediction.{json,md} beside it and never overwrites the declared run.
 """
 from __future__ import annotations
 
@@ -23,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import data_paths  # noqa: E402
-from src.cultivated_tissue_invariance import N_DRAWS, N_ENVELOPE, SEED, build, write  # noqa: E402
+from src.cultivated_tissue_invariance import BOX, N_DRAWS, N_ENVELOPE, SEED, STUB_BOX, build, write  # noqa: E402
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -31,9 +33,19 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--draws", type=int, default=N_DRAWS, help=f"composition draws per programme (declared: {N_DRAWS})")
     parser.add_argument("--envelope", type=int, default=N_ENVELOPE, help=f"parameter draws per reversal (declared: {N_ENVELOPE})")
     parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--box", choices=("current", "stub"), default="current",
+                        help="'stub' re-sweeps the frozen 2026-09-13 box (the declared run); 'current' sweeps the box with "
+                             "the measured ranges, as a prediction (default)")
+    parser.add_argument("--stem", default=None,
+                        help="output file stem under results/cultivated_tissue_invariance/; defaults to the declared run's "
+                             "stem for --box stub and to 'measured_box_prediction' for --box current")
     args = parser.parse_args(argv)
-    payload = build(n_draws=args.draws, seed=args.seed, n_envelope=args.envelope)
-    json_path, md_path = write(payload)
+    if args.box == "stub":
+        box, kind, stem = STUB_BOX, "declared", args.stem
+    else:
+        box, kind, stem = BOX, "prediction", (args.stem or "measured_box_prediction")
+    payload = build(n_draws=args.draws, seed=args.seed, n_envelope=args.envelope, box=box, run_kind=kind)
+    json_path, md_path = write(payload, stem=stem)
     for p in payload["programmes"]:
         s, v = p["summary"], p["verdict"]
         print(

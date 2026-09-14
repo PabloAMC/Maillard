@@ -232,3 +232,45 @@ in different pairs reads as scattered under that clause and lands as indetermina
 right to exist and wrong in shape: the next such pre-registration should ask whether one
 *precursor* moves consistently in one direction, not whether one *pair* recurs. Recorded in
 `tasks/lessons.md`; not applied retroactively here.
+
+## 8. The composition read (2026-09-14): what exists, what does not
+
+Section 7 said the indeterminate verdict is resolved by measuring composition. The first step is
+to find out what has already been measured. One day of reading, through automated fetches of
+open-access texts and abstracts (the dossiers say which, and say that none was checked against a
+PDF by eye). Seven dossiers under `data/lit/extraction_dossiers/`: `muroya2019`, `bischof2023`,
+`kim2024b`, `joo2022`, `koutsidis2008b`, `hwang2026`, `lombardiboccia2005`.
+
+**Beef: every range now has a source.** Cysteine, leucine, IMP and ribose 5-phosphate from one
+CE-TOFMS table (Muroya 2019, three steers, 0 to 14 days); glucose, leucine and IMP from one NMR
+table (Bischof 2023, fourteen bulls, 0 to 28 days); ribose and thiamine only at second hand (a
+cited point plus an abstract's fold-change; two reviews' ranges). Two beef ranges moved against
+the stub: cysteine is 0.002 to 0.14 mM, not 0.05 to 0.5 (the stub's centre was above the measured
+top), and thiamine is 0.0004 to 0.005 mM, about twofold below the stub.
+
+**Cultured muscle: none of the four rankable precursors has been measured.** Free ribose, free
+cysteine, thiamine and free glucose in cultured muscle of any species: no measurement found. What
+exists is IMP (two primaries, four decades apart: 0.11 mg/kg in a pig gelatin construct, Kim
+2024b; 1.98 mmol/kg in bovine 2D tissue, Joo 2022) and one confounded free-leucine point (Kim
+2024b; the scaffold alone carried more leucine than the construct). The one untargeted
+metabolomics comparison (Park 2025, chicken) reports fold-changes only. Joo 2022 prints cysteine
+as a percent of total amino acids with no absolute total, which does not convert.
+
+So the read closed the beef side and left the side that decides the ranking open. The engine's
+ranking depends on the cultivated-side values of ribose, cysteine, thiamine and glucose, and
+all four remain stubs. That is the gap map, and it is short.
+
+**The one experiment.** Muroya 2019's CE-TOFMS panel quantified cysteine, ribose 5-phosphate,
+IMP and leucine in beef in one run. The same panel on washed cultured bovine myotubes, with free
+ribose and free glucose by GC-MS or enzymatic assay and thiamine by thiochrome HPLC on the same
+extract, beside a beef sample handled identically, turns every cultivated stub into a sourced
+range in one campaign. Three biological replicates; two harvest washes (none, PBS) because the
+medium is the obvious confound; one 24-hour, 2 °C ageing arm, because whether the IMP-to-ribose
+route runs at all in a construct is the single fact that most changes the ribose stub. Perhaps
+thirty samples. No cooking, no GC-O, no aroma work: composition only.
+
+**The prediction run.** The sweep is rerun on the current box (7 sourced, 2 secondary, 5 stub
+ranges) to `results/cultivated_tissue_invariance/measured_box_prediction.{json,md}`, with the
+same design and the same statistics against the same thresholds, labelled a prediction and not a
+verdict. Its outcome is recorded below when it finishes. What it can show: how the beef-side
+narrowing moves the rankings. What it cannot show: anything the four cultivated stubs decide.
