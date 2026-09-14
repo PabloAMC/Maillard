@@ -2518,10 +2518,10 @@ route to disagreeing runs through the sulfur lane, which the core panel scores w
 invariance test comes first and its decision rule is declared before the run.
 
 - [x] Pre-registration written: [results/validation/cultivated_tissue_invariance_prereg.md](../results/validation/cultivated_tissue_invariance_prereg.md)
-- [ ] Composition box assembled (`results/cultivated_tissue_invariance/`), every range labelled `sourced` or `stub`
-- [ ] Sweep generator `scripts/generators/cultivated_tissue_invariance.py`, naive and engine rankings per draw
-- [ ] Parameter envelope drawn on top of each candidate reversal
-- [ ] Verdict recorded against T1 / T2 / T3 in the pre-registration's own section 3
-- [ ] Test: `core_panel_scores.json` unchanged with this branch present
-- [ ] On T1 only: the module as designed in the pre-registration's section 5
-- [ ] On T2 or T3: the composition corpus and gap map ship instead, and the module is not built
+- [x] Composition box declared in `src/cultivated_tissue_invariance.py` (a stub is code, not curated data), echoed to `results/cultivated_tissue_invariance/composition_box.yml`; every range `stub`
+- [x] Sweep: `src/cultivated_tissue_invariance.py` + `scripts/generators/generate_cultivated_tissue_invariance.py`, naive and engine rankings per draw
+- [x] Parameter envelope drawn on top of each reversal (50 joint draws; the sulfur lane's Laplace covariance)
+- [x] Verdict recorded: **indeterminate on both programmes** (pre-registration section 7). T1 failed on the concentration clause alone: 40 % disagreement, 100 % envelope survival, but one direction (glucose demoted) spread across pairs rather than one pair
+- [x] Test: importing the module leaves a reference prediction byte-identical (`tests/unit/test_cultivated_tissue_invariance.py`); the scorecard itself is guarded by the freshness gate, which this branch does not touch
+- [ ] ~~On T1 only: the module as designed in the pre-registration's section 5~~ — T1 did not fire; not built
+- [ ] Next: the composition corpus. For each of the seven box precursors, an extraction dossier with a measured range in cultured bovine or porcine muscle and in beef, flipping `stub` to `sourced`; then the sweep reruns on the measured box as a prediction. The thiamine row (worth as much as cysteine at 100 °C, nothing at 140 °C) is the one model-specific claim and waits on the reference-pot experiment

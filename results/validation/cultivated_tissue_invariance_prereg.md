@@ -101,3 +101,134 @@ rather than by a second project:
 **On T2 or T3**, the deliverable is the composition corpus and its gap map: what has been measured in
 cultured muscle and fat, what has not, and the one experiment that would close the largest gap. That
 corpus is the asset either way, and it is citable without this engine.
+
+## 6. Amendments before the run (2026-09-13, same day, no draw taken yet)
+
+The engine was asked, before any sweep, which of section 2's declared names it can take. The
+answers below change the design. Every change is recorded here, dated, before the first draw, and
+none of section 3's logic is relaxed; where a threshold is re-declared, the reason is the size of
+the candidate set, which was not known when section 3 was written.
+
+**A1 — the lanes do not compose, so the engine cannot rank across the meaty set at once.** The
+three Maillard lanes refuse each other (`engine.resolve_lanes`). Cysteine, ribose and thiamine
+force the sulfur lane; methional and the pyrazines run on the trunk only and are carried inert in
+the sulfur network; hexanal needs a lipid carrier and no tissue-fat carrier exists. So:
+
+- The **sulfur arm is the decision arm.** Precursors ribose, cysteine, thiamine, glucose. Targets
+  2-methyl-3-furanthiol, 2-furfurylthiol, furfural, hydrogen sulfide, methanethiol, furaneol.
+- The **trunk arm is refused by construction.** Asked for methional, 2-methylpyrazine,
+  2,5-dimethylpyrazine and furaneol on glucose + glycine, the engine refuses methional (the
+  methionine chain did not ship, wave B22), returns the pyrazines at ~1e-13 µg/L from a sugar +
+  amine pot, and has no water threshold for any of the four. No decision metric exists on that
+  arm. Recorded as a refusal; not swept.
+- **Cultivated fat is refused by construction.** No route from tissue lipid to any lane. Recorded.
+- **Hexanal is dropped from the target set** for the same reason. Recorded.
+
+**A2 — three of the eight declared candidate precursors are not species in any lane.** Leucine,
+IMP/inosine and ribose-5-phosphate are refused (`UNMAPPED PRECURSORS`). The engine cannot rank
+them. The naive ranking is therefore computed over the four the engine takes, so that E and N are
+compared on the same set; the naive ranking over all eight is also reported, for the reader, with
+the three unrankable ones marked. This is the first structural refusal of the run and is reported
+as such in the artifact; it does not trigger T3, which is about targets.
+
+**A3 — the decision metric is summed odour-activity over targets with a measured water threshold.**
+Of the sulfur arm's six targets, three carry a threshold in the corpus (MFT 0.005 µg/L, FFT
+0.006 µg/L, furfural 3000 µg/L; Zhou 2023 SI Table S2). Hydrogen sulfide, methanethiol and
+furaneol have `no_measured_threshold_for_this_matrix` and are reported as concentration ratios,
+outside the metric. In practice the metric is MFT + FFT.
+
+**A4 — the naive ranking is fractional deficit, not absolute.** Section 2 said absolute molar
+deficit. Glucose sits at millimolar and thiamine at micromolar, so absolute deficit would rank
+glucose first in nearly every draw, which no chemist would do; it would be a straw man that hands
+T1 to the engine. N is now `1 − cultivated/beef` per precursor, ties broken by absolute deficit. A
+precursor whose cultivated draw is at or above its beef draw has nothing to restore and is dropped
+from that draw's ranking in both N and E.
+
+**A5 — Kendall tau re-declared for four candidates.** With n = 4 one adjacent swap gives τ = 0.67
+and τ ≥ 0.9 means identical order, which makes T2 unreachable by construction. T2 is now
+`top(E) == top(N)` in at least 90 % of draws **and** mean τ ≥ 0.75. T1 is unchanged.
+
+**A6 — declared, fixed, not swept:** phosphate buffer 0.03 mol/L in every spec (the muscle
+phosphate pool, order of magnitude; identical across arms, so it cancels in the ranking);
+`matrix: water`, no protein loading; a_w 0.98; pH 6.0. Two programmes as declared: 100 °C for
+20 min and 140 °C for 5 min.
+
+**A7 — the composition box.** 200 draws per programme, seed 0, each precursor log-uniform within
+its range because the ranges span decades. Every range in `composition_box.yml` is labelled
+`stub`; none is sourced. That is the honest state today and is what the module, if built, would
+replace. Ranges are deliberately wide and overlapping.
+
+**A8 — the parameter envelope.** For each composition draw in which `top(E) != top(N)`, 50 joint
+draws of the core's priors (`kinetic_core.uncertainty.sample_draws`; the sulfur lane's identified
+coordinates from the Laplace covariance, the thiol sink's flat direction uniform across its band)
+re-run the two arms. The observable multipliers (K_aw, HS-SPME) are the same in both arms and
+cancel. The reversal "survives" a draw if the same precursor still wins.
+
+## 7. Outcome (2026-09-13, the declared run: 200 draws per programme, seed 0, 50 envelope draws per reversal)
+
+Artifact: `results/cultivated_tissue_invariance/cultivated_tissue_invariance.{json,md}`; the box that
+was swept is echoed beside it. Wall time 33 min at 100 °C, 80 min at 140 °C.
+
+**Verdict on both programmes: indeterminate.** Read off section 3 mechanically:
+
+| clause | threshold | 100 °C / 20 min | 140 °C / 5 min |
+|---|---|---|---|
+| T3: draws the engine refused | ≥ 50 % | 0 % | 0 % |
+| T1: draws where top(E) ≠ top(N) | ≥ 20 % | **40 %** | **38 %** |
+| T1: share of disagreements carried by the dominant reversal | ≥ 50 % | 27 % (cysteine over glucose) | 32 % (cysteine over glucose) |
+| T1: envelope survival of that reversal | ≥ 80 % | **100 %** | **100 %** |
+| T2: top agreement | ≥ 90 % | 60 % | 62 % |
+| T2: mean Kendall τ | ≥ 0.75 | 0.35 | 0.33 |
+
+T3 did not fire: the engine answered every draw on the sulfur arm. T2 did not fire: the engine's
+ranking is far from the naive one. T1 failed on exactly one clause, concentration. So by the rule
+declared in section 3 the result is indeterminate, and section 3 says what that means: it is
+resolved by measuring composition, not by rerunning with a narrower box, and it is not a licence to
+build the module.
+
+**What the disagreement actually is.** It is not one reversal. It is one direction, spread across
+pairs. Over the draws the engine answered, restoring each precursor to its beef level changed the
+metric (MFT + FFT + furfural odour-activity) by these medians, relative to the cultivated baseline:
+
+| precursor restored | 100 °C / 20 min | 140 °C / 5 min |
+|---|---|---|
+| ribose | +124 % | +306 % |
+| cysteine | +69 % | +193 % |
+| thiamine | +66 % | +9 % |
+| glucose | +4 % | +6 % |
+
+The engine puts glucose last in 87 of the 104 draws where glucose and cysteine were both
+restorable; the naive ranking puts it last in 25. Glucose is millimolar in beef, so it often carries
+a large fractional deficit, and the fractional-deficit rule promotes it. The engine knows that a
+hexose reaches the thiols only through the unidentified entry, at a fraction of the pentose's yield,
+and demotes it every time. That is the direction, and because which *pair* it shows up in depends on
+which precursors happened to be restorable in the draw, no single pair reached half.
+
+**What this does and does not say about the engine.** The engine's disagreement with the naive
+rule is robust to the rates (survival 100 % for the dominant reversal on both programmes; 95 % and
+99 % averaged over every reversal). It is also, mostly, textbook: pentose over hexose for the meaty
+thiols, cysteine as the sulfur donor. A flavour chemist would demote glucose by hand. So the sweep
+shows the engine beats *no chemistry*; it was not sharp enough to show it beats *a chemist*, and no
+model-free baseline can encode what a chemist knows without becoming a model. That limit was named
+in section 1 and it held.
+
+The one row a chemist would not produce by hand is thiamine: worth as much as cysteine at 100 °C,
+nearly nothing at 140 °C. That is a kinetic claim, it comes from the thiamine route's own
+temperature dependence, and it sits in the lane the core panel scores worst. It is the sweep's only
+candidate for a prediction the model adds, and it is exactly the kind that needs the reference-pot
+experiment before it is believed.
+
+**What follows, per section 5.** T1 did not fire, so the module is not built. The deliverable is
+the composition corpus and its gap map: every range in the box is a stub, and the ranking's
+sensitivity to the box is the evidence that composition must be measured first. When a measured
+range exists for a precursor, its `stub` label flips to `sourced` with the dossier cited, the test
+in `tests/unit/test_cultivated_tissue_invariance.py` that asserts "nothing is sourced today" is
+edited to say which, and the sweep is rerun on the narrower box as a *prediction*, not as a
+resolution of this verdict.
+
+**A lesson for the next pre-registration of a ranking comparison.** Section 3's concentration
+clause assumed a disagreement would look like one reversal. A consistent direction that shows up
+in different pairs reads as scattered under that clause and lands as indeterminate. The clause was
+right to exist and wrong in shape: the next such pre-registration should ask whether one
+*precursor* moves consistently in one direction, not whether one *pair* recurs. Recorded in
+`tasks/lessons.md`; not applied retroactively here.

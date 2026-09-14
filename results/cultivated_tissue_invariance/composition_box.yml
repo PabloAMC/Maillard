@@ -1,0 +1,75 @@
+# Echo of the declared composition box (src/cultivated_tissue_invariance.py). Every range is a stub.
+# This file is generated; edit the module, not this file.
+beef:
+  ribose:
+    lo_mM: 0.3
+    hi_mM: 5.0
+    label: stub
+    note: post-mortem ribose from IMP breakdown in aged beef; order of magnitude only
+  cysteine:
+    lo_mM: 0.05
+    hi_mM: 0.5
+    label: stub
+    note: free cysteine in raw muscle; order of magnitude only
+  thiamine:
+    lo_mM: 0.001
+    hi_mM: 0.01
+    label: stub
+    note: beef thiamine ~0.05-0.15 mg/100 g; order of magnitude only
+  glucose:
+    lo_mM: 1.0
+    hi_mM: 10.0
+    label: stub
+    note: free glucose in post-mortem muscle; order of magnitude only
+  leucine:
+    lo_mM: 0.3
+    hi_mM: 1.5
+    label: stub
+    note: free leucine; unrankable by the engine, reported for the naive ranking only
+  IMP:
+    lo_mM: 1.0
+    hi_mM: 8.0
+    label: stub
+    note: inosine monophosphate in aged beef; unrankable by the engine
+  ribose-5-phosphate:
+    lo_mM: 0.01
+    hi_mM: 0.1
+    label: stub
+    note: unrankable by the engine
+cultivated_muscle:
+  ribose:
+    lo_mM: 0.01
+    hi_mM: 2.0
+    label: stub
+    note: no ageing step; IMP-to-ribose route depends on post-harvest handling; deliberately
+      wide
+  cysteine:
+    lo_mM: 0.02
+    hi_mM: 0.5
+    label: stub
+    note: medium-fed cells; deliberately wide
+  thiamine:
+    lo_mM: 0.0003
+    hi_mM: 0.01
+    label: stub
+    note: DMEM carries ~12 uM thiamine; intracellular pool unknown; deliberately wide
+  glucose:
+    lo_mM: 0.1
+    hi_mM: 10.0
+    label: stub
+    note: depends on the harvest wash; deliberately wide
+  leucine:
+    lo_mM: 0.2
+    hi_mM: 3.0
+    label: stub
+    note: medium is leucine-rich; unrankable by the engine
+  IMP:
+    lo_mM: 0.1
+    hi_mM: 3.0
+    label: stub
+    note: unrankable by the engine
+  ribose-5-phosphate:
+    lo_mM: 0.01
+    hi_mM: 0.1
+    label: stub
+    note: unrankable by the engine

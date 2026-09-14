@@ -126,3 +126,12 @@
   (`off_flavour_targets.yml`, copied into the generated registry). Rule: every structure a rule names is checked by
   RDKit against an independent identifier (InChI or atom count) when it enters; a curated SMILES is data, not truth.
 
+- **A pre-registered ranking comparison should ask about a direction, not a pair.** The cultivated-tissue
+  invariance test (2026-09-13) declared T1 as "one reversal carries ≥ 50 % of the disagreements". The engine
+  disagreed with the naive rule in 40 % of draws, robustly (100 % envelope survival), and in one consistent
+  direction (glucose demoted every time), but the direction surfaced in whichever pair happened to be restorable
+  in the draw, so no pair reached half and the verdict fell to indeterminate. Rule: when a comparison is between
+  rankings, the concentration clause names a *precursor* that moves consistently in one direction across draws,
+  never a recurring *pair*. Also: before declaring the candidate set, ask the engine which names it takes and
+  which lanes compose; three of eight declared candidates and the whole trunk arm were refused by construction,
+  and the thresholds had been sized for a set the engine could not rank (section 6 of the pre-registration).
