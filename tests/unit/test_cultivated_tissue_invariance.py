@@ -97,8 +97,10 @@ def test_every_non_stub_range_in_the_current_box_names_a_dossier_on_disk():
             for stem in r.dossiers:
                 assert (dossiers / f"{stem}_extraction.md").exists(), (tissue, name, stem)
     assert seen_non_stub > 0
-    # The read of 2026-09-14 found nothing for the four rankable precursors in cultured muscle.
-    # If a later read does, this assertion is edited to name what it found.
+    # The read of 2026-09-14 found nothing for the four rankable precursors in cultured muscle, and the
+    # by-eye pass over the PDFs on disk later that day (koutsidis2008a/b, Bischof2023, Kim2024, Dashmaa2026)
+    # found nothing either (pre-registration section 9). If a later read does, this assertion is edited
+    # to name what it found.
     for name in CANDIDATES:
         assert BOX["cultivated_muscle"][name].label == "stub", name
     # ...and every beef-side range is measured or cited.
