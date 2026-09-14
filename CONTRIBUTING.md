@@ -79,13 +79,17 @@ tasks/          data_restructure_plan.md (the living record; section 7 is the ba
 
 ## Execution environment
 
-**Always run code inside the Docker container with the `maillard` conda env (Python 3.12).**
-Host Python is for editing and static analysis only.
+**Always run code in the `maillard` conda env (Python 3.12) through `./scripts/docker_maillard.sh`.**
+The script runs the same verbs on either of two backends: a local conda env (native; the default
+when no `docker` binary is on PATH, or `MAILLARD_RUNTIME=native`) or the validated container
+(`MAILLARD_RUNTIME=docker`). `environment.yml` has been a plain conda env since the QM lane left on
+2026-09-01, so the container is optional. An ad-hoc system Python is for editing and static
+analysis only.
 
 ```bash
-./scripts/docker_maillard.sh up                # boot the container
-./scripts/docker_maillard.sh bootstrap         # build the env from environment.yml (first time)
-./scripts/docker_maillard.sh run "<cmd>"       # any command in the container
+./scripts/docker_maillard.sh bootstrap         # create or update the env from environment.yml
+./scripts/docker_maillard.sh status            # runtime, env, interpreter
+./scripts/docker_maillard.sh run "<cmd>"       # any command in the env
 ./scripts/docker_maillard.sh shell             # interactive shell
 ./scripts/docker_maillard.sh gates             # the six gates
 ```

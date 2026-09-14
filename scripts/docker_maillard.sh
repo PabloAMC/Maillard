@@ -2,6 +2,20 @@
 
 set -euo pipefail
 
+# 2026-09-14: two runtimes behind one set of verbs. The container is optional. Since the QM lane
+# left (2026-09-01) environment.yml is a plain conda env, so the same commands run NATIVELY in a
+# local conda env called `maillard`. Selection: MAILLARD_RUNTIME=native|docker; unset, native is
+# chosen when no `docker` binary is on PATH, docker otherwise. Every verb below is unchanged; only
+# `run_in_env`, `up`, `bootstrap`, `shell` and `status` know which backend they are on.
+if [ -n "${MAILLARD_RUNTIME:-}" ]; then
+  RUNTIME="$MAILLARD_RUNTIME"
+elif command -v docker >/dev/null 2>&1; then
+  RUNTIME="docker"
+else
+  RUNTIME="native"
+fi
+case "$RUNTIME" in native|docker) ;; *) echo >&2 "MAILLARD_RUNTIME must be native or docker, got '$RUNTIME'"; exit 2 ;; esac
+
 IMAGE_NAME="${MAILLARD_IMAGE_NAME:-condaforge/miniforge3}"
 # 2026-09-03: the container follows the HOST architecture. Until this date it was pinned to
 # linux/amd64, which on Apple Silicon runs under Rosetta -- where forked worker processes serialise
@@ -63,17 +77,19 @@ usage() {
   cat <<'EOF'
 Usage: ./scripts/docker_maillard.sh <command> [args...]
 
-Single Docker entrypoint for the Maillard workbench. All commands run inside
-the maillard conda env (Python 3.12) in the validated container.
+Single entrypoint for the Maillard workbench. Every command runs inside the
+maillard conda env (Python 3.12), either natively (a local conda env; the
+default when no `docker` binary is found, or MAILLARD_RUNTIME=native) or in
+the validated container (MAILLARD_RUNTIME=docker, or docker on PATH).
 (2026-09-03, retirement step B5: the legacy screening lane's commands --
 quickstart pipeline runs, campaigns, ingest, the matrix/family report lanes --
 are gone with it. The front door is scripts/maillard.py.)
 
-== Container lifecycle ==
-  up                                 Boot the validated container (one-time).
-  bootstrap                          Install the conda env + dependencies.
+== Environment lifecycle ==
+  up                                 Boot the container (docker runtime; a no-op natively).
+  bootstrap                          Create or update the maillard conda env from environment.yml.
   shell                              Open an interactive bash shell in the env.
-  status                             Show container + env status.
+  status                             Show runtime, env and interpreter.
   notebook                           Launch Jupyter on port 8888.
 
 == Daily loop ==
@@ -159,6 +175,43 @@ run_generator_script() {
   fi
 }
 
+# ---- native backend -------------------------------------------------------------------------
+native_conda_sh() {
+  # The conda.sh of whichever conda is on PATH (miniforge, miniconda, anaconda), or the usual homes.
+  local base
+  if command -v conda >/dev/null 2>&1; then
+    base="$(conda info --base 2>/dev/null || true)"
+    if [ -n "$base" ] && [ -f "$base/etc/profile.d/conda.sh" ]; then echo "$base/etc/profile.d/conda.sh"; return 0; fi
+  fi
+  local cand
+  for cand in "$HOME/miniforge3" "$HOME/mambaforge" "$HOME/miniconda3" "$HOME/anaconda3" /opt/homebrew/Caskroom/miniforge/base /opt/conda /usr/local/miniforge3; do
+    if [ -f "$cand/etc/profile.d/conda.sh" ]; then echo "$cand/etc/profile.d/conda.sh"; return 0; fi
+  done
+  echo >&2 "[docker_maillard.sh] no conda found. Install miniforge (brew install --cask miniforge) or set MAILLARD_RUNTIME=docker."
+  exit 2
+}
+
+native_env_exists() {
+  local sh; sh="$(native_conda_sh)"
+  bash -lc "source '$sh' && conda env list | awk '{print \$1}' | grep -qx '$ENV_NAME'"
+}
+
+native_run_in_env() {
+  local sh; sh="$(native_conda_sh)"
+  local command="$1"
+  bash -lc "set -eo pipefail; source '$sh'; export MKL_INTERFACE_LAYER=LP64; set +u; conda activate '$ENV_NAME'; set -u; cd '$WORKSPACE_DIR'; $command"
+}
+
+native_bootstrap_env() {
+  local sh; sh="$(native_conda_sh)"
+  if native_env_exists; then
+    bash -lc "set -eo pipefail; source '$sh'; conda env update -n '$ENV_NAME' --file '$WORKSPACE_DIR/environment.yml'"
+  else
+    bash -lc "set -eo pipefail; source '$sh'; conda env create -n '$ENV_NAME' --file '$WORKSPACE_DIR/environment.yml'"
+  fi
+}
+
+# ---- docker backend -------------------------------------------------------------------------
 container_exists() {
   docker ps -a --format '{{.Names}}' | grep -qx "$CONTAINER_NAME"
 }
@@ -190,6 +243,7 @@ env_exists() {
 }
 
 run_in_env() {
+  if [ "$RUNTIME" = "native" ]; then native_run_in_env "$1"; return; fi
   ensure_container
   local command="$1"
   # We use 'export MKL_INTERFACE_LAYER=LP64' and 'set +u' to bypass common Conda activation script bugs
@@ -197,6 +251,7 @@ run_in_env() {
 }
 
 bootstrap_env() {
+  if [ "$RUNTIME" = "native" ]; then native_bootstrap_env; return; fi
   ensure_container
 
   if ! env_exists; then
@@ -207,10 +262,19 @@ bootstrap_env() {
 }
 
 status() {
+  echo "runtime: $RUNTIME"
+  if [ "$RUNTIME" = "native" ]; then
+    if native_env_exists; then
+      run_in_env "python --version && python -c 'import rdkit, numpy, scipy; print(\"rdkit\", rdkit.__version__, \"numpy\", numpy.__version__, \"scipy\", scipy.__version__)'"
+    else
+      echo "Conda environment '$ENV_NAME' has not been created yet. Run: ./scripts/docker_maillard.sh bootstrap"
+    fi
+    return
+  fi
   ensure_container
   docker ps -a --filter "name=$CONTAINER_NAME"
   if env_exists; then
-    run_in_env "python --version && python -c 'import rdkit, cantera; print(rdkit.__version__, cantera.__version__)'"
+    run_in_env "python --version && python -c 'import rdkit; print(rdkit.__version__)'"
   else
     echo "Conda environment '$ENV_NAME' has not been created yet. Run: ./scripts/docker_maillard.sh bootstrap"
   fi
@@ -222,12 +286,16 @@ case "$cmd" in
     usage
     ;;
   up)
-    ensure_container
+    if [ "$RUNTIME" = "native" ]; then echo "runtime: native (nothing to boot)"; else ensure_container; fi
     ;;
   bootstrap)
     bootstrap_env
     ;;
   shell)
+    if [ "$RUNTIME" = "native" ]; then
+      sh="$(native_conda_sh)"
+      exec bash -lc "source '$sh'; set +u; conda activate '$ENV_NAME'; cd '$WORKSPACE_DIR'; exec bash -i"
+    fi
     ensure_container
     docker exec -it "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; set +u; conda activate '$ENV_NAME'; set -u; cd '$WORKSPACE_MOUNT'; exec bash -i"
     ;;

@@ -2529,3 +2529,18 @@ invariance test comes first and its decision rule is declared before the run.
 - [ ] Prediction run on the current box → `results/cultivated_tissue_invariance/measured_box_prediction.{json,md}` (in progress 2026-09-14)
 - [ ] The thiamine row (worth as much as cysteine at 100 °C, nothing at 140 °C) is the one model-specific claim and waits on the reference-pot experiment
 - [ ] Verify the seven dossiers against the PDFs by eye; `koutsidis2008b` is abstract-only and its tables carry the beef ribose values this box needs most
+
+### Native runtime beside the container (2026-09-14, owner: "can we remove OrbStack?")
+
+Since the QM lane left (2026-09-01) `environment.yml` is a plain conda env, so the container no
+longer earns its disk. `scripts/docker_maillard.sh` now has two backends behind the same verbs:
+native (a local conda env; the default when no `docker` binary is on PATH, or
+`MAILLARD_RUNTIME=native`) and docker (unchanged). `up` is a no-op natively; `bootstrap` creates or
+updates the env; `status` says which runtime. `agents.md`, `CONTRIBUTING.md` and the README's
+getting-started say the same. Every script name and every `docker_maillard.sh <verb>` reference in
+the code and docs is unchanged on purpose. The `.github/workflows/docker-publish.yml` image build is
+untouched; it can be retired separately if the container is never used again.
+
+- [x] Native backend in the script, docs updated
+- [ ] Confirm on the owner's Mac: `brew install --cask miniforge`, `./scripts/docker_maillard.sh bootstrap`, `status`, `gates`
+- [ ] Then uninstall OrbStack from its own app menu (removes its VM disk); delete `~/OrbStack` and `~/.orbstack` if left behind

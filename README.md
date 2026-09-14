@@ -70,11 +70,12 @@ assumption* with its band.
 ```bash
 git clone https://github.com/PabloAMC/Maillard.git
 cd Maillard
-./scripts/docker_maillard.sh up && ./scripts/docker_maillard.sh bootstrap
+./scripts/docker_maillard.sh bootstrap      # a local conda env from environment.yml (needs conda on PATH)
 ```
 
-Everything runs inside the container (`./scripts/docker_maillard.sh run "<command>"`), or, without
-it, `pip install -e .` in a clone gives the same front door as the `maillard` command, a Python API
+Everything runs in that env (`./scripts/docker_maillard.sh run "<command>"`; the same script drives
+the optional container when `docker` is on PATH or `MAILLARD_RUNTIME=docker`), or, without it,
+`pip install -e .` in a clone gives the same front door as the `maillard` command, a Python API
 (`from src import api`) and a local page (`maillard ui`). The front door has eight verbs.
 
 ```bash
