@@ -36,8 +36,10 @@ naming the extraction dossier it came from. Three labels:
 
 * ``stub``      -- no measurement found; the range is a sensitivity device and nothing else;
 * ``secondary`` -- a number read from a review or an abstract, not from the table that measured it;
-* ``sourced``   -- read from the measuring paper's own table (through an automated fetch of the
-                   open-access text; the dossier says so, and says it was not checked by eye).
+* ``sourced``   -- read from the measuring paper's own table. The dossier's "Source on disk" line says
+                   whether that table was read from the PDF by eye (koutsidis2008a, koutsidis2008b,
+                   bischof2023, kim2024b as of 2026-09-14) or through an automated fetch of the
+                   open-access text, unchecked (muroya2019, joo2022).
 
 The box is declared here, in code, next to the other declared assumptions, rather than under
 ``data/`` where it would read as curated. Both boxes are echoed into the artifact directory.
@@ -148,37 +150,47 @@ STUB_BOX: Mapping[str, Mapping[str, Range]] = {
 
 #: THE CURRENT BOX (literature read of 2026-09-14). mM in tissue water. A stub here is a stub
 #: because the read found NO measurement of that pool in that tissue; the gap map in the artifact
-#: lists them. Beef moisture taken as 75 %, the pig construct of kim2024b as 90 % (its Table 3).
+#: lists them. Beef moisture taken as 75 %, the pig construct of kim2024b as 90 % (its text and Fig. 3A).
+#: Beef sugar and amino-acid ranges were re-set on 2026-09-14 from the PDFs of Koutsidis 2008a/b and the
+#: corrected Table 1 of Bischof 2023 (pre-registration section 9).
 BOX: Mapping[str, Mapping[str, Range]] = {
     "beef": {
-        "ribose": Range(0.4, 2.5, "secondary",
-                        "one cited point, 0.26 mg/g (Aliani 2013 via Hwang 2026) = 2.3 mM as the upper corner; "
-                        "one sixth of it as the lower, from Koutsidis 2008b's abstract (sixfold rise over 21 d)",
-                        ("hwang2026", "koutsidis2008b")),
-        "cysteine": Range(0.002, 0.14, "sourced",
-                          "Muroya 2019 Table 1: 1.6 nmol/g at D0 to 107 nmol/g at D14, n = 3 steers; the span is ageing, "
-                          "not a laboratory spread; D0 sits at the detection floor",
-                          ("muroya2019",)),
+        "ribose": Range(0.33, 2.2, "sourced",
+                        "Koutsidis 2008b Table 2: 0.25 mmol/kg at day 1 to 1.67 at day 21 (n = 16 steers, GC-MS), "
+                        "0.33-2.2 mM at 75 % moisture; Koutsidis 2008a Table 1: 0.57-1.08 mmol/kg across 30 steers at "
+                        "10 d (0.76-1.44 mM) sits inside; the cited 0.26 mg/g point (Aliani 2013 via Hwang 2026, 2.3 mM) "
+                        "sits at the top edge and is no longer a corner",
+                        ("koutsidis2008b", "koutsidis2008a")),
+        "cysteine": Range(0.002, 0.23, "sourced",
+                          "Muroya 2019 Table 1: 1.6 nmol/g at D0 to 107 nmol/g at D14, n = 3 steers, CE-TOFMS (D0 at the "
+                          "detection floor); Koutsidis 2008b Table 4: 0.05-0.16 mmol/kg over 21 d, n = 16, GC-MS; "
+                          "Koutsidis 2008a Table 3: 0.05-0.17 mmol/kg across 30 steers at 10 d, whose top is the upper "
+                          "corner (0.23 mM); the span is ageing plus animal spread",
+                          ("muroya2019", "koutsidis2008b", "koutsidis2008a")),
         "thiamine": Range(0.00044, 0.0049, "secondary",
                           "0.01-0.08 mg/100 g across beef cuts (Lombardi-Boccia 2005, excerpt) and 0.08-0.11 mg/100 g "
                           "(Ramalingam 2019 via Lee 2025); about twofold below the stub",
                           ("lombardiboccia2005",)),
-        "glucose": Range(1.2, 11.0, "sourced",
-                         "Bischof 2023 Table 1: 1.83 +/- 0.91 to 4.16 +/- 1.48 umol/g wet across two breeds and 28 d "
-                         "(1.2-7.5 mM); upper corner 11 mM from the cited 1.48 mg/g (Aliani 2013 via Hwang 2026)",
-                         ("bischof2023", "hwang2026")),
-        "leucine": Range(0.35, 2.4, "sourced",
-                         "Muroya 2019: 263-827 nmol/g (0.35-1.1 mM); Bischof 2023: 0.59-1.47 umol/g +/- SD (0.64-2.4 mM); "
-                         "unrankable by the engine",
-                         ("muroya2019", "bischof2023")),
+        "glucose": Range(2.4, 15.0, "sourced",
+                         "Bischof 2023 Table 1 with the alpha- and beta-glucose rows SUMMED (the first read took one anomer "
+                         "row as the total): 4.43 +/- 2.61 to 10.01 +/- 1.42 umol/g wet across two breeds and 28 d, mean "
+                         "-/+ SD = 2.4-15 mM; Koutsidis 2008b Table 2 (7.33-10.3 mmol/kg, 9.8-13.7 mM) and 2008a Table 1 "
+                         "(6.94-10.6 mmol/kg across 30 steers) sit inside; the cited 1.48 mg/g (11 mM) too",
+                         ("bischof2023", "koutsidis2008b", "koutsidis2008a")),
+        "leucine": Range(0.29, 3.2, "sourced",
+                         "Muroya 2019: 263-827 nmol/g (0.35-1.1 mM); Bischof 2023 (corrected rows): 0.29 +/- 0.07 to "
+                         "1.53 +/- 0.52 umol/g (0.29-2.7 mM); Koutsidis 2008b: 0.43-1.75 mmol/kg; Koutsidis 2008a: "
+                         "0.78-2.40 mmol/kg across 30 steers (to 3.2 mM); unrankable by the engine",
+                         ("muroya2019", "bischof2023", "koutsidis2008b", "koutsidis2008a")),
         "IMP": Range(0.1, 10.0, "sourced",
-                     "Muroya 2019: 78 nmol/g pre-rigor to 7574 nmol/g at D1 (0.10-10 mM); Bischof 2023 inside it; "
-                     "unrankable by the engine",
-                     ("muroya2019", "bischof2023")),
+                     "Muroya 2019: 78 nmol/g pre-rigor to 7574 nmol/g at D1 (0.10-10 mM); Bischof 2023 (corrected rows, "
+                     "1.1-4.8 mM), Koutsidis 2008b (3.5-8.4 mM) and 2008a (3.3-5.9 mM) inside it; unrankable by the engine",
+                     ("muroya2019", "bischof2023", "koutsidis2008b", "koutsidis2008a")),
         "ribose-5-phosphate": Range(0.005, 0.1, "sourced",
-                                    "Muroya 2019: non-detect at D0, 57-70 nmol/g at D1-D14 (to 0.093 mM); lower corner set at "
-                                    "0.005 because the draw is log-uniform; unrankable by the engine",
-                                    ("muroya2019",)),
+                                    "Muroya 2019: non-detect at D0, 57-70 nmol/g at D1-D14 (to 0.093 mM); Koutsidis 2008b: "
+                                    "0.04 mmol/kg flat over 21 d (0.053 mM); lower corner set at 0.005 because the draw is "
+                                    "log-uniform; unrankable by the engine",
+                                    ("muroya2019", "koutsidis2008b")),
     },
     "cultivated_muscle": {
         "ribose": Range(0.01, 2.0, "stub",

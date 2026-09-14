@@ -1,9 +1,12 @@
 # Kim, Jung & Jo 2024 — EXTRACTION (3D-cultured pig muscle stem cells: free amino acids, nucleotides)
 
-**Source on disk:** none. Read 2026-09-14 from the open-access full text at PMC (PMC11811360)
-through an automated fetch; not checked against the PDF by eye. The stem is `kim2024b` because
-`kim1998` already exists and a `kim2024` may follow. Written for the cultivated-tissue composition
-box, not for the core fit.
+**Source on disk:** `data/articles/Kim2024.pdf` (the publisher's PDF). First read 2026-09-14 from the
+open-access full text at PMC (PMC11811360) through an automated fetch; Tables 2 to 4, the culture
+protocol and the moisture statement then checked against the PDF by eye the same day. Every number in
+section 2 matched the PDF. One correction: the construct's ~90 % moisture is stated in the text and
+Fig. 3A, not in Table 3 (Table 3 is total amino acids per gram of protein). The stem is `kim2024b`
+because `kim1998` already exists and a `kim2024` may follow. Written for the cultivated-tissue
+composition box, not for the core fit.
 
 | field | value |
 |---|---|
@@ -16,7 +19,7 @@ box, not for the core fit.
 Porcine muscle stem cells at 1e7 cells/mL in a cross-linked gelatin hydrogel, 44-day culture,
 analysed at day 16. Control: commercial pig leg meat. Scaffold-only arm analysed alongside. Free
 amino acids and nucleotide-related compounds by HPLC, reported in mg/kg (Table 4 for free amino
-acids). Moisture of the cultivated construct about 90 % (Table 3).
+acids). Moisture of the cultivated construct about 90 % (text and Fig. 3A).
 
 ## 2. Findings that matter
 
@@ -54,4 +57,6 @@ Cultivated-side points for the composition box, in mM in tissue water at 90 % mo
   carries 49.6 mg/kg of free leucine, more than the construct, so the gelatin contributes an
   unknown share of the construct's value. Carried as one point of a wide range, pig not bovine.
 
-Nothing here for ribose, glucose, thiamine, cysteine or ribose 5-phosphate in cultured tissue.
+Nothing here for ribose, glucose, thiamine, cysteine or ribose 5-phosphate in cultured tissue. The PDF was
+searched for each of them on 2026-09-14: glucose appears only in a cited C2C12 fasting experiment
+(no medium glucose, alanine rose); ribose, thiamine and cysteine do not appear at all.

@@ -274,3 +274,60 @@ ranges) to `results/cultivated_tissue_invariance/measured_box_prediction.{json,m
 same design and the same statistics against the same thresholds, labelled a prediction and not a
 verdict. Its outcome is recorded below when it finishes. What it can show: how the beef-side
 narrowing moves the rankings. What it cannot show: anything the four cultivated stubs decide.
+
+## 9. The dossiers checked against the PDFs (2026-09-14, later the same day)
+
+Section 8's read was automated and unchecked; its dossiers said so. Four of the PDFs are now on disk
+(`koutsidis2008a`, `koutsidis2008b`, `Bischof2023`, `Kim2024`, plus `Dashmaa2026`, which is the review
+filed as `hwang2026` after its corresponding author). Every number in those dossiers' section 2 was read
+against the paper's own table by eye. Three of the seven dossiers could not be checked (`muroya2019`,
+`joo2022`, `lombardiboccia2005`: no PDF on disk); their "Source on disk" lines still say unchecked.
+
+**What the check found.**
+
+- `kim2024b`: every number matched. One misattribution (the construct's 90 % moisture is in the text
+  and Fig. 3A, not Table 3).
+- `koutsidis2008b`: the abstract-only dossier is replaced by the tables. Beef free ribose 0.25 to
+  1.67 mmol/kg over 21 days (n = 16), free glucose 7.33 to 10.3, free cysteine 0.05 to 0.16, IMP 6.27 to
+  2.63, ribose 5-phosphate 0.04 flat. The first primary beef ribose values on file.
+- `koutsidis2008a` (new): the companion paper, 30 steers at 10 days, two breeds, two diets, with the range
+  across individual animals printed: ribose 0.57 to 1.08 mmol/kg, glucose 6.94 to 10.6, cysteine 0.05 to
+  0.17, leucine 0.78 to 2.40.
+- `bischof2023`: **every number in the automated dossier was wrong.** Table 1 prints glucose as two
+  anomer rows (α and β); the fetch returned the α row for one breed and the β row for the other under
+  "glucose", and returned numbers for IMP, inosine, hypoxanthine, leucine and methionine that appear
+  nowhere in the table. The dossier's own suspicion (repeated columns) was a symptom of a worse fault.
+  Corrected: free glucose (α + β) 4.43 ± 2.61 to 10.01 ± 1.42 µmol/g; IMP 1.00 to 3.19; leucine 0.29 to
+  1.53.
+- `hwang2026`: the one sentence taken was read correctly, but the paper it cites, Aliani et al. 2013
+  (Meat Science 94, 55-62), is titled "Post-slaughter changes in ATP metabolites, reducing and
+  phosphorylated sugars in **chicken** meat". The review says "beef". The 2.3 mM ribose and 11 mM glucose
+  that section 8 used as corners were chicken values, and this review is now cited on no range.
+
+**What moved in the box** (`BOX` in `src/cultivated_tissue_invariance.py`; `STUB_BOX` untouched):
+
+| beef range | section 8 | now | why |
+|---|---|---|---|
+| ribose | 0.4 to 2.5 mM, secondary | **0.33 to 2.2 mM, sourced** | Koutsidis 2008b Table 2 over 21 d; 2008a inside it |
+| glucose | 1.2 to 11 mM, sourced + secondary corner | **2.4 to 15 mM, sourced** | Bischof anomers summed, mean ∓ SD; both Koutsidis inside |
+| cysteine | 0.002 to 0.14 mM | **0.002 to 0.23 mM** | Koutsidis 2008a's spread across 30 animals sets the top |
+| leucine | 0.35 to 2.4 mM | 0.29 to 3.2 mM | corrected Bischof rows; Koutsidis 2008a's spread |
+| IMP, ribose 5-phosphate | unchanged | unchanged | the new primaries sit inside Muroya 2019's spans |
+| thiamine | 0.00044 to 0.0049 mM, secondary | unchanged | Lombardi-Boccia 2005 has no PDF on disk |
+
+The box now has 6 beef ranges sourced from a measuring paper's table read by eye, 1 secondary
+(thiamine), and the same 5 stubs on the cultivated side. Section 8's line "7 sourced, 2 secondary, 5 stub"
+described the box before this check; a prediction run was started on that box and was not committed, so
+no artifact of it exists and none is cited.
+
+**Cultured muscle: still nothing.** The four PDFs were searched for free ribose, free cysteine, thiamine
+and free glucose in cultured muscle cells or constructs. Kim 2024b mentions glucose only in a cited
+C2C12 fasting experiment; the two Koutsidis papers and Bischof 2023 are slaughtered beef; the review has
+no cultured-meat content. The four rankable cultivated stubs stay stubs and the test that asserts it is
+unchanged. The gap map of section 8 stands.
+
+**What was not done, and why.** No dossier for Aliani 2013: it is a chicken paper and cannot source a
+beef range, so the plan's step "point the glucose and ribose notes at aliani2013" was wrong in premise
+and was not carried out. The sweep was not rerun on the corrected box; that is a separate decision,
+and section 7 says what such a run would and would not show. The pattern behind the Bischof failure is
+recorded in `tasks/lessons.md`.
