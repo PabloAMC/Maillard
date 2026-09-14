@@ -135,3 +135,15 @@
   never a recurring *pair*. Also: before declaring the candidate set, ask the engine which names it takes and
   which lanes compose; three of eight declared candidates and the whole trunk arm were refused by construction,
   and the thresholds had been sized for a set the engine could not rank (section 6 of the pre-registration).
+
+- **An automated read of a table is a claim about the table, not the table.** The 2026-09-14 composition read wrote
+  seven dossiers from fetched HTML and abstracts. Checked against the PDFs the same day: Kim 2024b matched; Bischof
+  2023 did not on a single number (the fetch returned the α-glucose row for one breed and the β-glucose row for the
+  other under "glucose", and IMP, inosine, leucine and methionine values that appear nowhere in Table 1, while the
+  dossier's own flag named a milder fault, repeated columns); and the review used for two beef sugar corners cites a
+  paper whose title says CHICKEN (Aliani 2013), which the fetch never showed because the reference list did not come
+  through. Two of three box corners that rested on unchecked reads were wrong in kind, not in digit. Rule: a range
+  enters a box, a dossier's section 2, or a note as `sourced` only from the measuring paper's table read by eye from
+  the PDF on disk; an automated read is `secondary` at best and its dossier says so in the first line. A value taken
+  from a review is traced to the primary's TITLE (species, matrix) before it is used even as a corner. And when the
+  PDF arrives, check its first author against the dossier stem: `hwang2026` is Dashmaa et al.
