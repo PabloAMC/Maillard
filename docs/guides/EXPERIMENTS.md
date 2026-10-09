@@ -67,6 +67,16 @@ as over-production, and it matters most where thermal chemistry is slowest, whic
 the offset is largest. What is missing is a catalytic channel whose rate depends on a catalyst the
 model does not carry. No adjustment of a thermal constant can imitate one.
 
+**A caution on that story (2026-10-09).** The "lost within five minutes" observation is Baldus's, at
+about 0.25 mM cysteine, and its fastest loss had 18 µM copper present. Reaction-flavour pots carry about
+33 mM. Ehrenberg 1989 measured the copper-catalysed rate law (37 °C, pH 7.2; `ehrenberg1989` dossier):
+above about 1 mM cysteine the rate is set by the copper, not by the cysteine, so 0.25-1 µM copper
+removes well under 1 % of a 33 mM charge per minute at 37 °C. Two more things are unknown: how fast the
+catalysed rate is at pH 5 (probably 10-100 times slower than at pH 7.2), and how it changes with
+temperature (never measured). So the copper channel alone is now an unlikely explanation of the
+thiol over-prediction in these pots: perhaps one chance in seven to ten. Arm D below still tests it
+directly, and the residual-cysteine curve remains the pivot.
+
 **Why it cannot be answered by reading.** Six laboratories' papers have been read against this. None
 measures a removal rate on a fed thiol with nothing forming in a defined buffer; the closest starts
 every run from a thioacetate and its loss rate scales with the dose of a crude enzyme. The one
