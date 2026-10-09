@@ -177,6 +177,11 @@ def normalize_intake_entry(entry: Mapping[str, Any], *, root: Path = data_paths.
         encoding_status=encoding_status,
         template_kind=template_kind,
     )
+    # 2026-10-09: a source nobody can find is never queued for encoding. Deleting an
+    # unsourced runtime artifact otherwise re-queued its intake entry as "ready", inviting
+    # the same unsourced numbers back in.
+    if str(entry.get("source_status", "")).strip() == "no_verifiable_source":
+        backlog_queue = None
     return {
         "id": str(entry.get("id", "unknown")),
         "citation": str(entry.get("citation", "unknown")),

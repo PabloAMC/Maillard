@@ -33,14 +33,20 @@ def test_deep_research_runtime_queue_selects_non_benchmark_runtime_batch_from_ba
     # reason moves from "already_landed_in_runtime_registry" to "already_runtime_bound".
     # It is still excluded, and the total excluded count is unchanged at 6 -- the queue
     # behaviour is identical, only the provenance label is now accurate.
-    assert summary["landed_runtime_citation_count"] == 5
+    # UPDATED 2026-10-09: the Ordoudi (2014) process-state record was deleted (no verifiable
+    # source; tasks/data_restructure_plan.md, "After the gap search"). Landed count 5 -> 4.
+    # Ordoudi is still excluded; its backlog string carries a PMC suffix the intake citation
+    # lacks, so it is classified from its backlog status ("already_runtime_bound"), as
+    # Blank/Devaud/Grosch was in 2026-08. Excluded count unchanged at 6. Batch selection
+    # now skips intake sources marked no_verifiable_source (Malia 2025 reopened batch 01).
+    assert summary["landed_runtime_citation_count"] == 4
     assert summary["computational_prior_count"] == 0
     assert summary["safety_reference_count"] == 0
     assert summary["excluded_candidate_count"] == 6
 
     assert rows == {}
 
-    assert excluded["Ordoudi et al. (2014 / PMC12484514)"]["reason"] == "already_landed_in_runtime_registry"
+    assert excluded["Ordoudi et al. (2014 / PMC12484514)"]["reason"] == "already_runtime_bound"
     assert excluded["Hrncirik & Zeelenberg (2014)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Aliani & Farmer (2005)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Blank, Devaud & Grosch (2003)"]["reason"] == "already_runtime_bound"
