@@ -74,6 +74,33 @@ The failures are not mainly a shortage of numbers. Five measured facts say so.
 Reading another hundred papers of the same kind adds rows of the same shape, and the identifiability audit
 says it is the shape that fails: "it is the design that pins, not the number of rows."
 
+## What the literature does not contain (searched 2026-10-09)
+
+Four targeted searches against the ~440 papers already registered filled one gap out of about fifteen.
+The gaps that decide the model's accuracy are empty; reading cannot close them. Each paper named here has
+a dossier under `data/lit/extraction_dossiers/`, read by eye against its PDF.
+
+| gap | verdict | closest evidence |
+|---|---|---|
+| Meaty-thiol formation at ≥ 2 temperatures, absolute, in a defined system | empty | one four-temperature emulsion series with one time point each (`yiltirak2026`) |
+| Loss rate of free meaty thiols in buffer at ≥ 2 temperatures | empty | mechanism only: copper/iron thiol oxidation (`kreitman2016`); protein turning disulfides back into thiols at 100 °C (`mottram1996`) |
+| Free cysteine against time in a heated sugar–cysteine pot | empty | copper rate law at 25–37 °C (`ehrenberg1989`) |
+| Thiamine to meaty thiol at ≥ 2 temperatures | empty | total thiamine loss only, Ea 23–121 kJ/mol by matrix (`mauri1992`, `ramaswamy1990`, `brehm2020`) |
+| Odour thresholds in plant protein vs water, same panel | effectively empty | one soymilk thesis with a different panel per test (Norton 2003, no dossier) |
+| Flavour binding to plant protein at ≥ 50 °C in water | empty | 21 °C constants for five proteins (`snel2023`, `snel2023b`); heat pre-treatment read at 37 °C (`heng2005`) |
+| Hexanal formation rate in wet plant protein | empty | whey at 50–90 °C, figure only (`jansson2020`) |
+| Same-sample quantified comparison of beef and a plant analogue | empty | sniffing panels only (`thong2024`) |
+| Designed precursor study inside an analogue, isotope-dilution measured | empty | dose screens with peak areas (`ma2026`, `milani2024`); patents, presence only (`us9943096`) |
+| Furfural loss in water | filled | `almhofer2022` |
+
+## Three testable hypotheses (judgement, not measurement)
+
+| hypothesis | for | against | test | P(holds) |
+|---|---|---|---|---|
+| **Most cysteine is lost in the first minutes of heating**, so the model over-produces meaty thiols | one added fast cysteine sink takes meaty-thiol rows within 3× from 2 to 7 of 19 and weakens the temperature trend (ρ −0.80 → −0.38) | it needs ~90 % of cysteine gone in 5 min at 100 °C, pH 5.5; copper reaches that only with an unmeasured Ea of ~90–110 kJ/mol | free cysteine against time, 0–30 min at 100 °C, ± chelator: one day | ~0.3 for fast loss of any cause; ~0.1–0.15 that copper is the cause |
+| **Thiamine pays off when braising, not searing** | direction matches two meat studies (`thomas2014`, `madruga1997`) | thiamine breakdown at meat pH has Ea ~115 kJ/mol against the engine's 64; a xylose + thiamine flavour at 100–120 °C shows no free meaty thiols (`us20250221436a1`) | experiment 1b below | ~0.3 |
+| **Plant protein can protect meaty aroma**, not only trap it | egg albumin turned up to 45 % of a meaty disulfide back into its thiol at 100 °C (`mottram1996`) | no plant protein tested; no rates | fed disulfide with pea and soy protein at 100 °C, isotope dilution | open |
+
 ## The evidence that the right experiment does help
 
 The repo has two cases where the missing data shape existed. Both worked.
@@ -92,6 +119,7 @@ The repo has two cases where the missing data shape existed. Both worked.
 
 | # | experiment | size | what it buys | why it matters for plant-based products |
 |---|---|---|---|---|
+| 0 | **Residual cysteine, one day**: free cysteine against time in a ribose–cysteine pot, 0–30 min at 100 °C, pH 5–5.5, ± chelator in excess | ~21 samples, one day | Whether fast early cysteine loss explains the meaty-thiol over-prediction (first hypothesis above) | Decides the model's main structural question before anyone pays for experiment 1 |
 | 1 | **Where the thiols go** ([EXPERIMENTS.md §1](EXPERIMENTS.md)): ribose + cysteine at pH 5, 100 °C and 140 °C, against time, with fed-thiol, nitrogen, chelator and diketone arms; isotope-dilution GC | ~130 vials, ~2 weeks of GC | Settles where the 29× over-prediction of meaty thiols comes from: formation, the thiol sink, or precursor loss. A copper-catalysed loss of cysteine is one candidate, now unlikely at 33 mM cysteine (Ehrenberg 1989). Gives the lane its first activation energies. | Ribose + cysteine is the standard reaction flavour behind plant-based meat aroma. Without this, the model cannot say which cooking programme gets the most meat aroma out of it. |
 | 1b | **Thiamine arm in the same pots** ([pre-registration §10](../../results/validation/cultivated_tissue_invariance_prereg.md)): thiamine vs cysteine at both temperatures | +24 vials | Tests the one prediction a flavour chemist would not make unaided: thiamine pays off at braising temperatures and hardly at all when searing. | Thiamine and yeast extract are cheap, common reaction-flavour ingredients. If the claim holds, it is a direct formulation rule; if not, it is one fewer false lead. |
 | 2 | **Binding on pea protein, hot** ([EXPERIMENTS.md §4](EXPERIMENTS.md)): hexanal and an alkenal at 40, 70 and 90 °C, pH 4.5 and 7, headspace *and* total on the same aliquot | one design, not costed in the guide | The reversible protein binding the model lacks, and the temperature dependence of hexanal formation in a wet protein. | Off-note control is half the problem in pea and soy, and this is where the model is out by four orders of magnitude and has the sign wrong. |
