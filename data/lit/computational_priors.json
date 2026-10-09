@@ -962,7 +962,7 @@
     },
     {
       "id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
-      "source": "Bao et al. (2022)",
+      "source": "Cui et al. (2022), J. Agric. Food Chem. 70:11556 (id keeps its pre-repair label; see benchmark_intake_registry citation_repair 2026-08-26)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "key_values": {

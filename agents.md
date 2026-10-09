@@ -20,16 +20,17 @@ A mass-action kinetic model of the Maillard reaction (`src/kinetic_core/`: trunk
 - `tests/` — `unit/` (fast), `scientific/` (regression), plus `scripts/` integration tests.
 
 ## Execution Environment
-**ALWAYS run code inside the Docker container with the `maillard` conda env (Python 3.12).** No exceptions:
+**ALWAYS run code in the `maillard` conda env (Python 3.12, `environment.yml`) through `./scripts/docker_maillard.sh`.** No exceptions:
 - Tests, scripts, validation, benchmarks, smoke checks, and one-off `python -c '...'` invocations all go through `./scripts/docker_maillard.sh run "<cmd>"`.
-- Host Python is for editing/static analysis only — never `pytest`, `python`, or `pip` directly on the host.
-- If the container is not up yet, run `./scripts/docker_maillard.sh up && ./scripts/docker_maillard.sh bootstrap` first.
+- The script has two backends behind the same verbs (2026-09-14): **native**, a local conda env (the default when no `docker` binary is on PATH, or `MAILLARD_RUNTIME=native`), and **docker**, the validated container (`MAILLARD_RUNTIME=docker`, or docker on PATH). Since the QM lane left, `environment.yml` is a plain conda env and the two agree; the container is optional.
+- Never `pytest`, `python`, or `pip` against a system or ad-hoc interpreter; the env exists so that the numbers in `results/validation/` come from one declared package set.
+- First time: `./scripts/docker_maillard.sh bootstrap` (creates or updates the env; natively it needs a conda on PATH, e.g. `brew install --cask miniforge`). `up` is a no-op natively.
 - Subagents and execution helpers must follow the same rule; wrap every command in `./scripts/docker_maillard.sh run "..."`.
 
 ```bash
-./scripts/docker_maillard.sh up           # boot container
-./scripts/docker_maillard.sh bootstrap    # install deps
-./scripts/docker_maillard.sh run "<cmd>"  # arbitrary command in container
+./scripts/docker_maillard.sh bootstrap    # create/update the env (native or container)
+./scripts/docker_maillard.sh status       # which runtime, which interpreter
+./scripts/docker_maillard.sh run "<cmd>"  # arbitrary command in the env
 ./scripts/docker_maillard.sh core-scores  # the core's panel scorecard
 ./scripts/docker_maillard.sh gates        # the six CI gates
 ```

@@ -78,6 +78,9 @@ results/*
 !results/validation/**
 !results/literature/
 !results/literature/*.json
+# 2026-09-13: the cultivated-tissue invariance run is frozen evidence (its pre-registration is under validation/)
+!results/cultivated_tissue_invariance/
+!results/cultivated_tissue_invariance/**
 !results/maillard_results.db
 !results/README.md
 !results/legacy_lane/README.md

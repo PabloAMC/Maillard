@@ -60,6 +60,7 @@ FILENAME_ALIASES: Dict[str, str] = {
     "Goncouglu2026.pdf": "goncuoglu2026_extraction.md",
     "jf0480290.pdf": "rawel2005_extraction.md",          # the publisher's article id, not an author-year name
     "1-s2.0-S0308814622010068-main.pdf": "bi2022_extraction.md",   # the publisher's download name
+    "Dashmaa2026.pdf": "hwang2026_extraction.md",        # dossier named after the corresponding (last) author
 }
 
 

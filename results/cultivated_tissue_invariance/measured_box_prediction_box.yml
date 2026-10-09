@@ -1,0 +1,140 @@
+# Echo of the composition box this run swept (src/cultivated_tissue_invariance.py; run_kind = prediction). Labels: stub = no measurement found; secondary = read from a review or abstract; sourced = read from the measuring paper's table. This file is generated; edit the module, not this file.
+beef:
+  ribose:
+    lo_mM: 0.33
+    hi_mM: 2.2
+    label: sourced
+    note: 'Koutsidis 2008b Table 2: 0.25 mmol/kg at day 1 to 1.67 at day 21 (n = 16
+      steers, GC-MS), 0.33-2.2 mM at 75 % moisture; Koutsidis 2008a Table 1: 0.57-1.08
+      mmol/kg across 30 steers at 10 d (0.76-1.44 mM) sits inside; the cited 0.26
+      mg/g point (Aliani 2013 via Hwang 2026, 2.3 mM) sits at the top edge and is
+      no longer a corner'
+    dossiers:
+    - koutsidis2008b
+    - koutsidis2008a
+  cysteine:
+    lo_mM: 0.002
+    hi_mM: 0.23
+    label: sourced
+    note: 'Muroya 2019 Table 1: 1.6 nmol/g at D0 to 107 nmol/g at D14, n = 3 steers,
+      CE-TOFMS (D0 at the detection floor); Koutsidis 2008b Table 4: 0.05-0.16 mmol/kg
+      over 21 d, n = 16, GC-MS; Koutsidis 2008a Table 3: 0.05-0.17 mmol/kg across
+      30 steers at 10 d, whose top is the upper corner (0.23 mM); the span is ageing
+      plus animal spread'
+    dossiers:
+    - muroya2019
+    - koutsidis2008b
+    - koutsidis2008a
+  thiamine:
+    lo_mM: 0.00044
+    hi_mM: 0.004
+    label: sourced
+    note: 'Lombardi-Boccia 2005 Table 2: total thiamine 0.01-0.08 (+/- 0.01) mg/100
+      g across five raw beef cuts by HPLC after acid hydrolysis, lowest mean to highest
+      mean + SD; not detected in any cut after cooking; about twofold below the stub'
+    dossiers:
+    - lombardiboccia2005
+  glucose:
+    lo_mM: 2.4
+    hi_mM: 15.0
+    label: sourced
+    note: 'Bischof 2023 Table 1 with the alpha- and beta-glucose rows SUMMED (the
+      first read took one anomer row as the total): 4.43 +/- 2.61 to 10.01 +/- 1.42
+      umol/g wet across two breeds and 28 d, mean -/+ SD = 2.4-15 mM; Koutsidis 2008b
+      Table 2 (7.33-10.3 mmol/kg, 9.8-13.7 mM) and 2008a Table 1 (6.94-10.6 mmol/kg
+      across 30 steers) sit inside; the cited 1.48 mg/g (11 mM) too'
+    dossiers:
+    - bischof2023
+    - koutsidis2008b
+    - koutsidis2008a
+  leucine:
+    lo_mM: 0.29
+    hi_mM: 3.2
+    label: sourced
+    note: 'Muroya 2019: 263-827 nmol/g (0.35-1.1 mM); Bischof 2023 (corrected rows):
+      0.29 +/- 0.07 to 1.53 +/- 0.52 umol/g (0.29-2.7 mM); Koutsidis 2008b: 0.43-1.75
+      mmol/kg; Koutsidis 2008a: 0.78-2.40 mmol/kg across 30 steers (to 3.2 mM); unrankable
+      by the engine'
+    dossiers:
+    - muroya2019
+    - bischof2023
+    - koutsidis2008b
+    - koutsidis2008a
+  IMP:
+    lo_mM: 0.1
+    hi_mM: 10.0
+    label: sourced
+    note: 'Muroya 2019: 78 nmol/g pre-rigor to 7574 nmol/g at D1 (0.10-10 mM); Bischof
+      2023 (corrected rows, 1.1-4.8 mM), Koutsidis 2008b (3.5-8.4 mM) and 2008a (3.3-5.9
+      mM) inside it; unrankable by the engine'
+    dossiers:
+    - muroya2019
+    - bischof2023
+    - koutsidis2008b
+    - koutsidis2008a
+  ribose-5-phosphate:
+    lo_mM: 0.005
+    hi_mM: 0.1
+    label: sourced
+    note: 'Muroya 2019: non-detect at D0, 57-70 nmol/g at D1-D14 (to 0.093 mM); Koutsidis
+      2008b: 0.04 mmol/kg flat over 21 d (0.053 mM); lower corner set at 0.005 because
+      the draw is log-uniform; unrankable by the engine'
+    dossiers:
+    - muroya2019
+    - koutsidis2008b
+cultivated_muscle:
+  ribose:
+    lo_mM: 0.01
+    hi_mM: 2.0
+    label: stub
+    note: NO MEASUREMENT FOUND in cultured muscle of any species (read of 2026-09-14);
+      range unchanged from the stub box
+    dossiers: []
+  cysteine:
+    lo_mM: 0.02
+    hi_mM: 0.5
+    label: stub
+    note: 'NO MEASUREMENT FOUND: Joo 2022 prints cysteine only as a percent of total
+      amino acids with no absolute total and no free/hydrolysed statement; Kim 2024b''s
+      free-amino-acid table omits it; range unchanged'
+    dossiers: []
+  thiamine:
+    lo_mM: 0.0003
+    hi_mM: 0.01
+    label: stub
+    note: NO MEASUREMENT FOUND in cultured muscle; DMEM carries ~12 uM thiamine HCl,
+      what a washed construct retains is unknown; range unchanged
+    dossiers: []
+  glucose:
+    lo_mM: 0.1
+    hi_mM: 10.0
+    label: stub
+    note: NO MEASUREMENT FOUND in cultured muscle; note Joo 2022 proliferated in glucose-free
+      DMEM; range unchanged
+    dossiers: []
+  leucine:
+    lo_mM: 0.1
+    hi_mM: 1.0
+    label: sourced
+    note: 'Kim 2024b Table 4: 35.8 mg/kg free leucine in a pig gelatin-scaffold construct
+      at 90 % moisture (0.30 mM), CONFOUNDED by 49.6 mg/kg in the scaffold-only arm;
+      one point, pig, widened tenfold; unrankable by the engine'
+    dossiers:
+    - kim2024b
+  IMP:
+    lo_mM: 0.0003
+    hi_mM: 3.0
+    label: sourced
+    note: 'two primaries four decades apart: Kim 2024b pig construct 0.11 mg/kg (0.00035
+      mM); Joo 2022 bovine 2D tissue 1.98 mmol/kg (2.6 mM); the box carries both corners;
+      unrankable by the engine'
+    dossiers:
+    - kim2024b
+    - joo2022
+  ribose-5-phosphate:
+    lo_mM: 0.01
+    hi_mM: 0.1
+    label: stub
+    note: NO MEASUREMENT FOUND in cultured muscle; range unchanged; unrankable by
+      the engine
+    dossiers: []

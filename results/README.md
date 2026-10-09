@@ -11,12 +11,13 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **512**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **519**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
 | files | what it is, who writes it, who reads it |
 |---|---|
+| `cultivated_tissue_invariance/` (6 files) | The cultivated-tissue invariance sweep (`src/cultivated_tissue_invariance.py`, `generate_cultivated_tissue_invariance.py`): the declared run of 2026-09-13 on the all-stub box (`cultivated_tissue_invariance.{json,md}`, the box it swept echoed in `composition_box.yml`; a test pins the echo to the frozen `STUB_BOX`). The prediction run of 2026-10-09 on the corrected box is `measured_box_prediction.{json,md}`, its box echoed in `measured_box_prediction_box.yml`; it never overwrites the declared run. |
 | `legacy_lane/` (130 files) | ARCHIVE of the retired SMIRKS/Hammond lane and its harness (deleted at B5b), plus artifacts orphaned since; nothing in the tree reads them. See `results/legacy_lane/README.md`. |
 | `literature/` (2 files) | Regenerable literature ledgers (which paper is wired where; mined citation candidates). Read by the citation gate and the literature-side builders. |
 
@@ -47,6 +48,7 @@ Tracked files: **512**. Local-only (gitignored): scratch runs under `results/qui
 | `core_directional_scores.*` (2): `core_directional_scores.json`, `core_directional_scores.md` | THE DIRECTIONAL SCORECARD: the 69-claim literature panel scored on the core, per axis. Written by `core-directional` (`src/kinetic_core/directional.py`); read by `src/directional_reliability.py` (CLI reliability tags), the model card and the guards. |
 | `core_panel_scores.*` (2): `core_panel_scores.json`, `core_panel_scores.md` | THE SCORECARD: the core on the union panel (trust loop + hold-outs + matrix), within-3x and out-of-sample counts. Written by `core-scores` (`src/kinetic_core/scoring.py`); read by the model card, the CLI caveat and the headline guards. |
 | `core_prediction_uncertainty.*` (2): `core_prediction_uncertainty.json`, `core_prediction_uncertainty.md` | THE ENVELOPE: n=200 Monte-Carlo 90% intervals per panel row with coverage split by panel and evidence role. Written by `core-envelope` (`src/kinetic_core/uncertainty.py`, ~5-7 min natively); read by the model card, `rank-experiments` and the guards. |
+| `cultivated_tissue_invariance_prereg.md` | Pre-registration (2026-09-13) of the cultivated-tissue invariance test: does the engine's ranking of which precursor to restore in cultured muscle differ from the ranking read off the composition gap? Sections 1-5 the design and decision rule, 6 the dated amendments before the run, 7 the outcome (INDETERMINATE on both programmes), 8-9 the dated composition reads that followed, 10 the thiamine row against the literature, 11 the prediction run on the corrected box (2026-10-09). |
 | `cutover_final_exam.*` (2): `cutover_final_exam.json`, `cutover_final_exam.md` | FROZEN 2026-09-03 cutover exam (core vs legacy lane, 34 answered / 3 within band). Its generator was deleted at B5b; kept as the record of the cutover decision. |
 | `cutover_prereg.md` | Pre-registration of the cutover exam; pinned by `tests/unit/test_kinetic_core_b5_cutover.py`. |
 | `d1_exam_panel_reconciliation.*` (2): `d1_exam_panel_reconciliation.json`, `d1_exam_panel_reconciliation.md` | Reconciliation of exam vs panel scoring (D1); read by the B8 and B2.3 report generators. |
