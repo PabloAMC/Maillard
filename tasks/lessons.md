@@ -164,3 +164,10 @@
   (README, first paragraph); cultivated tissue is one side study. Rule: before writing anything that argues for
   the model's value, re-read the README's opening paragraph and state the purpose in the first lines; a side
   branch's question is an example, never the frame.
+
+- **Deliverables live in the repository, and outward emails point to it.** On 2026-10-09 an approved
+  "write up the map" was put in a private claude.ai doc, outside the repo, then linked from a draft email the
+  owner had not seen it in. It duplicated `docs/guides/EXPERIMENTS_BRIEF.md`. Rule: a write-up about this
+  model goes into the repo beside what it summarises (extend an existing doc before creating one), passes
+  through a PR like everything else, and an email to a third party is short and links only to published
+  repository files.

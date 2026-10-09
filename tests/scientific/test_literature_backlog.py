@@ -21,10 +21,13 @@ def test_literature_backlog_queues_are_exclusive_and_surface_minimum_primary_exp
     queue_ids = {row["id"] for row in payload["ready_runtime"] + payload["ready_benchmark"]}
     encoded_ids = set(encoded_rows)
     assert queue_ids.isdisjoint(encoded_ids)
+    # 2026-10-09: ordoudi_2014_hmf_peak_window and comunian_2021_thiamine_encapsulation left
+    # both sets. Their intake sources are no_verifiable_source and their process-state
+    # records were deleted (tasks/data_restructure_plan.md, "After the gap search"), so they
+    # are neither encoded nor queued.
     for entry_id in {
         "rizzello_2024_fermentation_cleanup",
         "zhao_2022_moromi_precursor_release",
-        "ordoudi_2014_hmf_peak_window",
     }:
         assert encoded_rows[entry_id]["triage_status"] == "ready_calibration"
     for entry_id in {
@@ -35,7 +38,6 @@ def test_literature_backlog_queues_are_exclusive_and_surface_minimum_primary_exp
         "acs_apts_ref24_3dg_arrhenius_anchor",
         "mottram_nobrega_2002_furanone_bridge",
         "pmc_4419266_pe_interfacial_maillard_kinetics",
-        "comunian_2021_thiamine_encapsulation",
         "voelker_2021_thiamine_kinetics",
         "huang_2022_thiamine_metal_catalysis",
         "wang_2012_gsh_xylose_sulfur_uplift",

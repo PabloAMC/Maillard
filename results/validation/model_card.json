@@ -18,7 +18,7 @@
     "available": true,
     "by_lane": {
       "acrylamide": {
-        "median_fold_error": 7.697350087806779,
+        "median_fold_error": 7.697350087704034,
         "rows": 12,
         "within_band": 4
       },
@@ -28,18 +28,18 @@
         "within_band": 4
       },
       "sulfur": {
-        "median_fold_error": 29.450349757279497,
+        "median_fold_error": 29.450349753336155,
         "rows": 19,
         "within_band": 2
       },
       "trunk": {
-        "median_fold_error": 7.967894408861714,
+        "median_fold_error": 7.967894408860152,
         "rows": 6,
         "within_band": 2
       }
     },
-    "median_fold_error": 9.148884190171456,
-    "out_of_sample_median_fold_error": 9.228224991194327,
+    "median_fold_error": 9.148884189968566,
+    "out_of_sample_median_fold_error": 9.228224991089185,
     "out_of_sample_rows": 44,
     "out_of_sample_within_band": 11,
     "pass_band_level": 3.0,
@@ -50,7 +50,7 @@
     "strict_ready_ids": [],
     "total": 37,
     "within_band": 12,
-    "worst_fold_error": 9631.589383870052
+    "worst_fold_error": 9631.58938385354
   },
   "directional": {
     "available": true,
@@ -177,13 +177,13 @@
   "no_verifiable_source": {
     "available": true,
     "by_status_key": {
-      "source_status": 87,
+      "source_status": 84,
       "status": 38,
       "value_anchor_status": 4,
       "value_status": 4
     },
-    "files": 9,
-    "records": 133,
+    "files": 8,
+    "records": 130,
     "with_numeric_payload": 36
   },
   "sulfur_anchor": {

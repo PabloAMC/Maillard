@@ -275,6 +275,22 @@ def _load_landed_runtime_citations(root: Path) -> Set[str]:
     }
 
 
+def _load_unsourced_citations(root: Path) -> Set[str]:
+    """Citations whose intake entry is marked no_verifiable_source (2026-10-09).
+
+    Such a source is closed, not pending: deleting its unsourced runtime record must not
+    put it back in a batch to be encoded again.
+    """
+    intake = data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
+    return {
+        _normalize_citation(str(entry.get("citation", "")))
+        for entry in intake.get("eligible_references", []) or []
+        if isinstance(entry, Mapping)
+        and str(entry.get("source_status", "")).strip() == "no_verifiable_source"
+        and _normalize_citation(str(entry.get("citation", "")))
+    }
+
+
 def _citation_is_landed(citation: str, landed_citations: Set[str]) -> bool:
     normalized = _normalize_citation(citation)
     if not normalized:
@@ -282,10 +298,14 @@ def _citation_is_landed(citation: str, landed_citations: Set[str]) -> bool:
     return any(normalized in landed or landed in normalized for landed in landed_citations)
 
 
-def _select_curated_batch(landed_citations: Set[str]) -> Mapping[str, Any]:
+def _select_curated_batch(landed_citations: Set[str], unsourced: Set[str] = frozenset()) -> Mapping[str, Any]:
     for batch in CURATED_RUNTIME_BATCHES:
         candidates = batch.get("candidates", []) or []
-        if any(not _citation_is_landed(str(spec.get("citation", "")), landed_citations) for spec in candidates):
+        if any(
+            not _citation_is_landed(str(spec.get("citation", "")), landed_citations)
+            and not _citation_is_landed(str(spec.get("citation", "")), unsourced)
+            for spec in candidates
+        ):
             return batch
     return CURATED_RUNTIME_BATCHES[-1]
 
@@ -345,7 +365,8 @@ def build_deep_research_runtime_queue(root: Path = data_paths.REPO_ROOT) -> Dict
         if isinstance(item, Mapping)
     }
     landed_citations = _load_landed_runtime_citations(root)
-    batch = _select_curated_batch(landed_citations)
+    unsourced = _load_unsourced_citations(root)
+    batch = _select_curated_batch(landed_citations, unsourced)
     next_batch = _next_curated_batch(str(batch.get("batch_id", "")))
     curated_specs: Sequence[Mapping[str, Any]] = batch.get("candidates", []) or []
 
@@ -358,6 +379,14 @@ def build_deep_research_runtime_queue(root: Path = data_paths.REPO_ROOT) -> Dict
                 {
                     "citation": citation,
                     "reason": "already_landed_in_runtime_registry",
+                }
+            )
+            continue
+        if _citation_is_landed(citation, unsourced):  # same containment match as "landed"
+            excluded_candidates.append(
+                {
+                    "citation": citation,
+                    "reason": "no_verifiable_source",
                 }
             )
             continue

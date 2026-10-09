@@ -127,92 +127,6 @@
       "comment": "Contextual soy thermal-history anchor. Useful for provenance and future lysine-damage reporting even without direct volatile output."
     },
     {
-      "id": "de_leyn_2019_thiamine_retention",
-      "kind": "extrusion_retention_context",
-      "protein_type": "soy_iso",
-      "source_citation": "De Leyn & Muylle (2019)",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "soy protein concentrate",
-        "process_state": "extrusion_structured",
-        "temperature_window_c": [
-          140.0,
-          180.0
-        ],
-        "moisture_pct_range": [
-          60.0,
-          75.0
-        ]
-      },
-      "numeric_anchors": {
-        "assay": "thiamine_retention_hplc",
-        "retention_pct_140c": 68.0,
-        "retention_pct_160c": 31.0,
-        "retention_pct_180c": 8.0,
-        "replicates": 3
-      },
-      "what_it_supports": [
-        "Extrusion-conditioned thiamine survival context in soy protein systems",
-        "Metadata-complete thermal-severity framing for extrusion support lanes"
-      ],
-      "what_it_does_not_support": [
-        "Direct DHA or lysinoalanine closure markers",
-        "Reactive lysine or furosine closure under the same extrusion run"
-      ],
-      "comment": "Useful supportive anchor for extrusion severity and donor loss. It improves context for extrusion closure but does not replace a direct damage-marker package.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1021/acs.jafc.de_leyn_2019",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "The stored identifier '10.1021/acs.jafc.de_leyn_2019' is not a DOI at all (a template placeholder). Deep search: the cited coordinates 'JAFC 67:9842' fall inside an unrelated poplar-wood catalysis paper (JAFC 67:9840-9850), and no De Leyn & Muylle publication on thiamine retention in extrusion exists in CrossRef or PubMed. Citation is confabulated."
-      }
-    },
-    {
-      "id": "comunian_2021_thiamine_encapsulation",
-      "kind": "encapsulation_retention_context",
-      "protein_type": "plant_protein_generic",
-      "source_citation": "Comunian et al. (2021)",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "encapsulated thiamine hcl under simulated extrusion",
-        "process_state": "pre_extrusion_additive",
-        "temperature_window_c": [
-          180.0,
-          180.0
-        ],
-        "residence_time_min": 2.0,
-        "release_window_c": [
-          90.0,
-          100.0
-        ]
-      },
-      "numeric_anchors": {
-        "assay": "thiamine_retention_hplc_uv",
-        "free_thiamine_retention_pct": 8.0,
-        "maltodextrin_gum_arabic_retention_pct": 71.0,
-        "alginate_bead_retention_pct": 84.0,
-        "carnauba_wax_retention_pct": 63.0,
-        "replicates": 3
-      },
-      "what_it_supports": [
-        "Cook-triggered thiamine-release framing for protected sulfur support in plant-protein systems",
-        "A bounded process-state calibration that distinguishes free thiamine destruction from encapsulated survival"
-      ],
-      "what_it_does_not_support": [
-        "Twin-screw shear survival in a real pbma extruder",
-        "Direct mft or fft closure under the same thermal run"
-      ],
-      "comment": "Compact encapsulation anchor for delayed-release thiamine. It complements De Leyn by bounding viable protected-addition strategies without claiming direct extrusion closure.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1016/j.foodres.2021.110345",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "10.1016/j.foodres.2021.110345 does not resolve (doi.org 404). A CrossRef author sweep of Comunian's 2021 output plus PubMed found no thiamine-encapsulation publication by that group. Citation is confabulated. If a thiamine-stability prior is needed the real Mauer-group work is Voelker et al. 2018 (10.1016/j.foodres.2018.06.056) - but that is a salt/degradation study, not an encapsulation-retention study."
-      }
-    },
-    {
       "id": "acs_jafc_3c05991_ppi_spi_partitioning",
       "kind": "volatile_partitioning_context",
       "protein_type": "plant_protein_generic",
@@ -247,40 +161,6 @@
       "comment": "Use as a process-state calibration context for plant-protein volatile partitioning until full coefficient extraction is completed.",
       "shared_anchor": true,
       "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: acs_jafc_3c05991_ppi_spi_partitioning, jafc_3c05991_hexanal_binding, jafc_3c05991_ppi_hexanal_binding. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
-    },
-    {
-      "id": "malia_2025_pea_free_sh_crosscheck",
-      "kind": "cysteine_accessibility",
-      "protein_type": "pea_iso",
-      "source_citation": "Malia et al. (2025)",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "pea protein",
-        "assay_family": "Ellman",
-        "temperature_variable": true,
-        "time_variable": true
-      },
-      "numeric_anchors": {
-        "assay": "DTNB / Ellman",
-        "exact_values_extracted": false,
-        "free_sh_reported": true
-      },
-      "what_it_supports": [
-        "Independent pea free-SH cross-check for cysteine accessibility under process-state change",
-        "Additional provenance for pea sulfur accessibility outside the Li 2025 anchor"
-      ],
-      "what_it_does_not_support": [
-        "Exact benchmark-condition coefficient fitting",
-        "Standalone volatile benchmark closure"
-      ],
-      "comment": "Cross-check anchor for pea free-SH behavior. Use as supportive calibration provenance rather than as a replacement for direct benchmark-condition extraction.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1016/j.foodhyd.2024.110509",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "No publication by an author 'Malia' on pea protein exists: PubMed esearch 'Malia[Author] AND pea' returns zero records; CrossRef author search 'Malia' + pea/sulfhydryl/Ellman 2025 returns only unrelated items (law encyclopedia, PDB antibody structures, nursing theses); a CrossRef container search of Food Hydrocolloids 2024-2025 for pea-protein free-sulfhydryl work returns no matching paper; web search likewise found nothing. The attached DOI (10.1016/j.foodhyd.2024.110509) is an unrelated wheat-starch paper, so there is no thread back to a real source. | The citation string itself ('Malia et al. 2025') appears confabulated. The entry is only a 'supportive crosscheck' for pea free-SH, so it is a candidate for deletion rather than repair; if a free-SH prior is needed, a real pea-protein Ellman source should be selected deliberately."
-      }
     },
     {
       "id": "raman_sds_extrusion_disulfide_severity",
@@ -397,36 +277,6 @@
       "comment": "Use as a process-state calibration for fermentation-mediated donor release rather than as a direct flavor benchmark."
     },
     {
-      "id": "ordoudi_2014_hmf_peak_window",
-      "kind": "caramelization_state",
-      "protein_type": "plant_protein_generic",
-      "source_citation": "Ordoudi et al. (2014 / PMC12484514)",
-      "doi": "10.1016/j.foodchem.2014.05.097",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "caramelization model systems",
-        "process_state": "heated_matrix",
-        "temp_C": 125.0,
-        "ph": 5.0,
-        "time_variable": true
-      },
-      "numeric_anchors": {
-        "hmf_peak_mg_per_l": 140.0,
-        "hmf_residual_mg_per_l_at_360_min": 20.0,
-        "secondary_decline_horizon_min": 360.0,
-        "amino_acid_cocatalysis_multiplier": 7.8
-      },
-      "what_it_supports": [
-        "Caramelization severity calibration for HMF-rich peak and decline windows",
-        "Bounded amino-acid co-catalysis context for Family 09 browning support"
-      ],
-      "what_it_does_not_support": [
-        "Direct HDMF or meat-like furanone closure",
-        "A universal HMF time-course outside the encoded pH 5.0 and 125 C window"
-      ],
-      "comment": "Use as the explicit HMF peak-and-decline process-state anchor for caramelization severity rather than as a benchmark payload."
-    },
-    {
       "id": "hrncirik_2014_coconut_oil_thermal_profile",
       "kind": "lipid_co_matrix_thermal_profile",
       "protein_type": "plant_protein_generic",
@@ -453,67 +303,6 @@
         "A full lipid degradation mechanism outside coconut-oil-like systems"
       ],
       "comment": "Use as a co-matrix thermal-profile anchor for coconut-oil-rich systems so lipid-rich plant formulations are not forced onto PUFA-heavy oxidation assumptions."
-    },
-    {
-      "id": "mottram_2001_carnosine_buffered_mft_uplift",
-      "kind": "buffering_state",
-      "protein_type": "plant_protein_generic",
-      "source_citation": "Mottram et al. (2001), JAFC 49:4316",
-      "doi": "10.1021/jf0008644",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "cysteine-ribose model with carnosine buffering",
-        "process_state": "heated_matrix",
-        "buffering_agent": "carnosine",
-        "buffering_concentration_M": 0.1
-      },
-      "numeric_anchors": {
-        "mft_uplift_fraction_vs_unbuffered": 0.61,
-        "optimal_carnosine_concentration_M": 0.1
-      },
-      "what_it_supports": [
-        "Bounded pH-buffering uplift for MFT-positive sulfur systems",
-        "A compact process-state anchor linking carnosine buffering to meaty-sulfur preservation"
-      ],
-      "what_it_does_not_support": [
-        "Exact endpoint closure in intact plant-protein matrices",
-        "A universal buffering rule outside sulfur-positive ribose systems"
-      ],
-      "comment": "Use as a buffering-state calibration so sulfur-support logic can distinguish unbuffered from carnosine-buffered heated systems without pretending exact matrix transfer."
-    },
-    {
-      "id": "yeo_mottram_2023_soy_lecithin_thiophene_uplift",
-      "kind": "phospholipid_crosstalk_state",
-      "protein_type": "plant_protein_generic",
-      "source_citation": "Yeo & Mottram (2023)",
-      "doi": "10.1016/j.foodchem.2023.136009",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "ppi_spi_cysteine_ribose_model_with_soy_lecithin",
-        "process_state": "heated_matrix",
-        "co_matrix_additive": "soy_lecithin",
-        "dosage_window_pct_w_w": [
-          0.5,
-          1.0
-        ]
-      },
-      "numeric_anchors": {
-        "optimal_soy_lecithin_pct_w_w_range": [
-          0.5,
-          1.0
-        ],
-        "alkyl_thiophene_uplift_fold": 2.4,
-        "sensory_confirmation": true
-      },
-      "what_it_supports": [
-        "Phospholipid-assisted uplift of alkyl-thiophene meaty markers in plant-protein sulfur systems",
-        "A compact soy-lecithin dose window for crosstalk-aware formulation tuning"
-      ],
-      "what_it_does_not_support": [
-        "Direct final-product closure for any one PBMA formulation",
-        "A universal phospholipid rule outside the reported cysteine-ribose model systems"
-      ],
-      "comment": "Use as a phospholipid-crosstalk calibration so lecithin supplementation can be treated as a bounded meaty-uplift lever rather than a generic oil addition."
     },
     {
       "id": "wageningen_ref9_hme_rework_hydration_collapse",
