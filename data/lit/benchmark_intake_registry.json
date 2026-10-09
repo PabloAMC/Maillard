@@ -442,7 +442,7 @@
         {
           "artifact_type": "process_state_calibration",
           "artifact_id": "de_leyn_2019_thiamine_retention",
-          "path": "data/lit/process_state_calibrations.json"
+          "path": "deleted 2026-10-09: no source for the value (intake source_status no_verifiable_source; see this entry's repair basis)"
         },
         {
           "artifact_type": "computational_prior",
@@ -515,7 +515,7 @@
         {
           "artifact_type": "process_state_calibration",
           "artifact_id": "comunian_2021_thiamine_encapsulation",
-          "path": "data/lit/process_state_calibrations.json"
+          "path": "deleted 2026-10-09: no source for the value (intake source_status no_verifiable_source; see this entry's repair basis)"
         }
       ],
       "requires_primary_data": false,
@@ -3420,7 +3420,7 @@
         {
           "artifact_type": "process_state_calibration",
           "artifact_id": "ordoudi_2014_hmf_peak_window",
-          "path": "data/lit/process_state_calibrations.json"
+          "path": "deleted 2026-10-09: no source for the value (intake source_status no_verifiable_source; see this entry's repair basis)"
         }
       ],
       "requires_primary_data": false,
@@ -4118,7 +4118,7 @@
         {
           "artifact_type": "process_state_calibration",
           "artifact_id": "mottram_2001_carnosine_buffered_mft_uplift",
-          "path": "data/lit/process_state_calibrations.json"
+          "path": "deleted 2026-10-09: no source for the value (intake source_status no_verifiable_source; see this entry's repair basis)"
         }
       ],
       "requires_primary_data": false,
@@ -6014,7 +6014,7 @@
         {
           "artifact_type": "process_state_calibration",
           "artifact_id": "malia_2025_pea_free_sh_crosscheck",
-          "path": "data/lit/process_state_calibrations.json"
+          "path": "deleted 2026-10-09: no source for the value (intake source_status no_verifiable_source; see this entry's repair basis)"
         }
       ],
       "requires_primary_data": false,

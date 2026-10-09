@@ -287,12 +287,12 @@ constant, which is what makes `rank` useful.
 > ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
 > audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
 > pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> has an `audit_flag` in its registry entry. **87 records are marked
-> `no_verifiable_source`** (re-measured 2026-09-02 across every tracked JSON and YAML file
+> has an `audit_flag` in its registry entry. **84 records are marked
+> `no_verifiable_source`** (re-measured 2026-10-09 across every tracked JSON and YAML file
 > under `data/` and `results/literature/`, including nested records), of which
-> **65 carry numeric payloads** and **65 of those are consumed at runtime**. Both rises in that
-> count were the repository getting more honest, not worse; both falls were deletions, not
-> verifications. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
+> **63 carry numeric payloads** and **63 of those are consumed at runtime**. Both rises in that
+> count were the repository getting more honest, not worse; every fall was a deletion, not a
+> verification. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
 > extraction dossier) and
 > `data/keys/compounds.yml` (74 InChIKey-resolved compounds); `scripts/ci/citation_gate.py`
 > blocks a dead or confabulated DOI.
@@ -329,7 +329,7 @@ constant, which is what makes `rank` useful.
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
 
-**Provenance census (recounted at generation time, not copied).** **87 records** carry `source_status: no_verifiable_source` across 9 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 133 in total. The numeric-payload and runtime-consumed subsets (65 and 65) use a narrower definition than this recount and are pinned separately by the headline guards under `tests/scientific/`.
+**Provenance census (recounted at generation time, not copied).** **84 records** carry `source_status: no_verifiable_source` across 8 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 130 in total. The numeric-payload and runtime-consumed subsets (65 and 65) use a narrower definition than this recount and are pinned separately by the headline guards under `tests/scientific/`.
 
 **Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
 

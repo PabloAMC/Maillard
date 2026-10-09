@@ -89,8 +89,14 @@ def _no_verifiable_source_census():
     return census
 
 
-def test_no_verifiable_source_census_is_87_records_65_numeric_65_reaching_runtime():
-    """no_verifiable_source: 87 flagged · 65 carrying numbers · 65 of those reaching runtime.
+def test_no_verifiable_source_census_is_84_records_63_numeric_63_reaching_runtime():
+    """no_verifiable_source: 84 flagged · 63 carrying numbers · 63 of those reaching runtime.
+
+    RE-PINNED 2026-10-09: 87/65/65 -> 84/63/63. Six process-state calibration records with no
+    source were DELETED from `data/lit/process_state_calibrations.json` (owner decision; their
+    intake entries were already `no_verifiable_source` with a repair basis). Three of the six
+    carried the flag themselves and two of those carried numbers; the other three were
+    unflagged. A fall by deletion, not verification.
 
     RE-PINNED 2026-09-02: 102/80/80 -> 87/65/65. `data/lit/protein_source_registry.json`
     (15 records, every value self-labelled `mocked_placeholder`) was WITHDRAWN together
@@ -154,20 +160,20 @@ def test_no_verifiable_source_census_is_87_records_65_numeric_65_reaching_runtim
         if path.startswith(("data/lit/", "results/literature/"))
     )
 
-    assert total == 87, (
-        f"Repo-wide no_verifiable_source count is {total}, published as 87. "
+    assert total == 84, (
+        f"Repo-wide no_verifiable_source count is {total}, published as 84. "
         f"Per file: { {k: v[0] for k, v in census.items()} }"
     )
-    assert numeric == 65, (
-        f"{numeric} flagged records carry numeric payloads, published as 65."
+    assert numeric == 63, (
+        f"{numeric} flagged records carry numeric payloads, published as 63."
     )
-    assert runtime == 65, (
+    assert runtime == 63, (
         f"{runtime} flagged records with numeric payloads sit in data/lit or the literature "
-        f"ledgers and therefore reach the runtime, published as 65."
+        f"ledgers and therefore reach the runtime, published as 63."
     )
 
     readme = _doc_text(README)
-    _assert_quoted(readme, "87 records", "README.md", "the no_verifiable_source census")
-    _assert_quoted(readme, "65 carry numeric payloads", "README.md", "the numeric subset")
-    _assert_quoted(readme, "65 of those are", "README.md", "the runtime-consumed subset")
+    _assert_quoted(readme, "84 records", "README.md", "the no_verifiable_source census")
+    _assert_quoted(readme, "63 carry numeric payloads", "README.md", "the numeric subset")
+    _assert_quoted(readme, "63 of those are", "README.md", "the runtime-consumed subset")
 
