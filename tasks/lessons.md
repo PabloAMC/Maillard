@@ -147,3 +147,20 @@
   the PDF on disk; an automated read is `secondary` at best and its dossier says so in the first line. A value taken
   from a review is traced to the primary's TITLE (species, matrix) before it is used even as a corner. And when the
   PDF arrives, check its first author against the dossier stem: `hwang2026` is Dashmaa et al.
+
+- **Quote the value the engine runs, not the prior it was searched around; and search for a paper by its stem.**
+  On 2026-10-09 the thiamine route's barrier was described to the owner, and to four reading agents, as "about
+  100 kJ/mol": that is `FORMATION_EA_PRIOR_CENTRE["thiol_assembly"]`, the centre of a search band. The engine runs
+  the frozen lumped barrier, 64.08 kJ/mol, because B10's split was re-merged; three dossiers had to be corrected.
+  The same afternoon `schieberle2000` was reported as "not in the model" from a grep for author-name patterns,
+  when it has a dossier, a registry entry and a role in B16. Rule: before stating a parameter, read it from the
+  frozen fit the engine loads (`core_prediction_uncertainty.json` lists every one with its source); before
+  saying a paper is absent, grep its dossier stem (`<author><year>`) in `data/keys/papers.yml` and
+  `data/lit/extraction_dossiers/`.
+
+- **The project's purpose frames every brief, whatever branch is checked out.** On 2026-10-09 a decision brief
+  on "which experiments are worth running" was written from the `cultivated-tissue` branch and framed the whole
+  model's value around cultivated meat. Maillard exists to help build meat aroma into **plant-based** products
+  (README, first paragraph); cultivated tissue is one side study. Rule: before writing anything that argues for
+  the model's value, re-read the README's opening paragraph and state the purpose in the first lines; a side
+  branch's question is an example, never the frame.

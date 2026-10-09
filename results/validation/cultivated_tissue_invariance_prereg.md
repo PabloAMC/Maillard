@@ -352,3 +352,102 @@ Every range the box cites now rests on a table read by eye from a PDF on disk: 7
 0 secondary, 5 cultivated stubs. The cultivated side is unchanged: none of the three papers measures
 free ribose, cysteine, thiamine or glucose in cultured muscle (Joo 2022 measured only IMP and
 hydrolysed amino acids in its cultured tissue).
+
+## 10. The thiamine row against the literature (2026-10-09)
+
+Section 7 named one row a chemist would not write by hand: restoring thiamine to its beef level is worth
+about as much as restoring cysteine at 100 °C / 20 min (+66 % vs +69 %) and almost nothing at 140 °C /
+5 min (+9 % vs +193 %). This section asks what the literature already says about it, before any
+experiment. Seven PDFs were read by eye (dossiers under `data/lit/extraction_dossiers/`): `brehm2020`
+(with its SI), `ramaswamy1990`, `mauri1992`, `mulley1975`, `jhoo2002`, `thomas2014`, `madruga1997`. Two
+more were read and set aside: `yang2011` holds thiamine fixed in every run, so it cannot separate
+thiamine from cysteine; `schieberle2000` is already in the B16 fit and would be circular.
+
+**What the engine actually runs.** `k_thi_hmp` (thiamine to 5-hydroxy-3-mercapto-2-pentanone) is a rate
+fitted at 145 °C, frozen without a recorded uncertainty, and carried to other temperatures by the frozen
+lumped formation barrier, 64.08 kJ/mol (`kinetic_core_b9_fit_report.json`; B10's route split was
+re-merged). Neither is sampled by the envelope, so section 7's 100 % envelope survival says nothing about
+this row. At 64 kJ/mol the engine converts about 1.8 times more thiamine at 140 °C / 5 min than at
+100 °C / 20 min; the row's 100 °C advantage therefore comes from the competing sugar route gaining more
+from heat, not from thiamine converting faster at 100 °C.
+
+**No paper measures thiamine to MFT, or to its precursor, at two temperatures.** What exists:
+
+| source | conditions | what it measures | apparent Ea of total thiamine loss |
+|---|---|---|---|
+| Mauri 1992, Table 1 | 0.07 M phosphate, pH 5.5 and 4.0, aw 0.95, 3 µM, 80-100 °C | total loss | 114.6-117.6 kJ/mol (pH 5.5), 121.3 (pH 4.0) |
+| Ramaswamy 1990, Table 2 | water, 110-150 °C | total loss | 102.6-118.0 kJ/mol |
+| Ramaswamy 1990, Table 2 | water + glucose, glycine, ascorbate | total loss | 71.1-73.4 kJ/mol |
+| Brehm 2020, SI Table S4 | 0.1 M phosphate pH 6.5, 100 mM, 80/120/180 °C, one point at 120 min | residual thiamine; HMP, MFT and 3-mercapto-2-pentanone trapped as thiamine thioethers | 22.6-45.2 kJ/mol, derived here; weak (batch-to-batch factor ~2, heat-up unreported, 312.0 vs 412.0 printed for one cell) |
+| Mulley 1975, Table 1 | 0.1 M phosphate pH 4.5-6.5, 129.4 °C only | D values | none; k triples from pH 5.5 to 6.5 |
+
+Total loss is a ceiling on the HMP branch, not its value. The engine's 64 kJ/mol sits inside the
+measured spread. The case nearest a meat pot (pH 5.5, micromolar thiamine: Mauri) is about 51 kJ/mol
+higher; if it applies, thiamine at 100 °C runs about 6 times slower than the engine assumes and most of
+the 100 °C advantage goes. If the reactive-mixture value applies (~72), the difference is about 1.3 times
+and the row roughly stands. The literature does not choose between them.
+
+**Direction in real meat, at one temperature each.** Thomas 2014 (model hams, 69 °C, peak areas, no
+calibration): thiamine is the only additive that raised MFT and the furyl disulfides; cysteine with
+xylose or fructose stayed at the control, at every dose, though a clear MFT rise needed thiamine doses
+far above native. Madruga 1997 (beef psoas, 140 °C / 30 min, approximate TIC quantification, one portion
+per arm): free MFT 13 ng/100 g with IMP, 3 with cysteine, trace with thiamine and in the blank. Both
+agree in direction with the row: thiamine matters at low temperature and not at 140 °C, where the ribose
+source leads. Neither runs at 100 °C, and the row's claim is about magnitude there.
+
+**A sink the engine lacks.** Jhoo 2002 shows thiamine's pyrimidine fragment trapping MFT as an
+almost odourless thioether (MAMP; 110 °C, pH 6.5, molar concentrations). The engine has no such step. At
+beef thiamine (0.0004-0.004 mM) it is negligible; in thiamine-dosed reference pots it is not, and it
+would bias any test that adds thiamine at millimolar levels.
+
+**Where the row stands.** Direction: weakly supported at both ends. Magnitude at 100 °C: unresolved,
+with the closest-to-meat kinetics leaning against it. Estimated probability that the row survives the
+reference-pot test: about 0.3 (it was about 0.3 before this read; the kinetics moved it down and the two
+meat studies moved it back). Nothing in the box, the engine or the fit changes. A measured barrier for
+`k_thi_hmp` would change a core parameter and moves `core_panel_scores.json`, so it belongs to a
+pre-registered refit wave, not to this branch.
+
+**The test that decides it.** Thiamine at beef level (micromolar, so Jhoo's sink stays negligible)
+against cysteine at beef level, each in a ribose-containing pH 5.6 pot, at 100 °C / 20 min and
+140 °C / 5 min, with MFT by stable isotope dilution. Three arms (thiamine, cysteine, both) plus a blank
+at each temperature, in triplicate: 24 samples, and it can share the extraction bench of section 8's composition campaign.
+
+## 11. The prediction run on the corrected box (2026-10-09)
+
+Section 8 declared it and section 9 explained why its first attempt was not committed. Run natively, with the
+declared design (200 draws per programme, seed 0, 50 envelope draws per reversal), on the box after the
+by-eye checks: 7 beef ranges sourced, 5 cultivated stubs. Artifact:
+`results/cultivated_tissue_invariance/measured_box_prediction.{json,md}`, box echoed beside it. Wall time
+20 min at 100 °C, 56 min at 140 °C. **It is labelled a prediction, and it resolves nothing in section 7.**
+
+| clause | threshold | 100 °C / 20 min | 140 °C / 5 min |
+|---|---|---|---|
+| T3: draws refused | ≥ 50 % | 0 % | 0 % |
+| T1: top(E) ≠ top(N) | ≥ 20 % | 51 % | 46 % |
+| T1: share carried by the dominant reversal | ≥ 50 % | **64 %** (ribose over glucose) | **74 %** (ribose over glucose) |
+| T1: envelope survival of that reversal | ≥ 80 % | 93 % | 97 % |
+| T2: top agreement / mean τ | ≥ 90 % / ≥ 0.75 | 49 % / 0.15 | 54 % / 0.24 |
+
+Read mechanically, both programmes meet T1. **That does not license section 5's module**, for two reasons
+declared before this run (sections 7 and 8). A prediction on a box whose cultivated side is still all
+stubs cannot resolve a verdict that section 7 said only a composition measurement resolves. And the
+reversal is the one section 7 already described: glucose demoted. The beef glucose range rose (2.4 to 15 mM,
+sourced) and the beef cysteine range fell (top 0.23 mM, against a cultivated stub reaching 0.5). So
+glucose is now usually the largest fractional deficit, cysteine is restorable in only 40 of 200 draws,
+and the scattered direction of section 7 collapses onto one pair. The engine is doing what a flavour
+chemist would do by hand: pentose over hexose for the meaty thiols. Section 7's limit stands. This shows
+the engine beats no chemistry, not that it beats a chemist.
+
+**Median change in the metric on restoring each precursor to its beef level** (over the draws where it was
+restorable; section 7's run reproduced exactly from its own artifact):
+
+| precursor | 100 °C, section 7 → now | 140 °C, section 7 → now | draws restorable now |
+|---|---|---|---|
+| ribose | +124 % → +111 % | +306 % → +287 % | 162 |
+| cysteine | +69 % → +31 % | +193 % → +96 % | 40 |
+| thiamine | +66 % → +24 % | +9 % → +4 % | 85 |
+| glucose | +4 % → +9 % | +6 % → +12 % | 162 |
+
+The thiamine row keeps its shape: comparable to cysteine at 100 °C (+24 % vs +31 %) and close to nothing at
+140 °C. Both shrank because the sourced beef cysteine and thiamine ranges are lower than the stubs, so
+less is restored. Section 10's caveats on that row apply unchanged.
