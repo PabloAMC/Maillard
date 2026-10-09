@@ -4181,7 +4181,7 @@
         {
           "artifact_type": "process_state_calibration",
           "artifact_id": "yeo_mottram_2023_soy_lecithin_thiophene_uplift",
-          "path": "data/lit/process_state_calibrations.json"
+          "path": "deleted 2026-10-09: no source for the value (the cited DOI is Bae et al. 2023 on lignin antioxidants; Yeo 2022 PhD thesis checked by eye, yeo2022_extraction.md, supports none of it)"
         }
       ],
       "requires_primary_data": false,

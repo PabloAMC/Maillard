@@ -482,40 +482,6 @@
       "comment": "Use as a buffering-state calibration so sulfur-support logic can distinguish unbuffered from carnosine-buffered heated systems without pretending exact matrix transfer."
     },
     {
-      "id": "yeo_mottram_2023_soy_lecithin_thiophene_uplift",
-      "kind": "phospholipid_crosstalk_state",
-      "protein_type": "plant_protein_generic",
-      "source_citation": "Yeo & Mottram (2023)",
-      "doi": "10.1016/j.foodchem.2023.136009",
-      "provenance_tier": "direct_measurement",
-      "conditions": {
-        "matrix_label": "ppi_spi_cysteine_ribose_model_with_soy_lecithin",
-        "process_state": "heated_matrix",
-        "co_matrix_additive": "soy_lecithin",
-        "dosage_window_pct_w_w": [
-          0.5,
-          1.0
-        ]
-      },
-      "numeric_anchors": {
-        "optimal_soy_lecithin_pct_w_w_range": [
-          0.5,
-          1.0
-        ],
-        "alkyl_thiophene_uplift_fold": 2.4,
-        "sensory_confirmation": true
-      },
-      "what_it_supports": [
-        "Phospholipid-assisted uplift of alkyl-thiophene meaty markers in plant-protein sulfur systems",
-        "A compact soy-lecithin dose window for crosstalk-aware formulation tuning"
-      ],
-      "what_it_does_not_support": [
-        "Direct final-product closure for any one PBMA formulation",
-        "A universal phospholipid rule outside the reported cysteine-ribose model systems"
-      ],
-      "comment": "Use as a phospholipid-crosstalk calibration so lecithin supplementation can be treated as a bounded meaty-uplift lever rather than a generic oil addition."
-    },
-    {
       "id": "wageningen_ref9_hme_rework_hydration_collapse",
       "kind": "hme_rework_hydration_state",
       "protein_type": "plant_protein_generic",
