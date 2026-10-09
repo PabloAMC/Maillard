@@ -39,6 +39,112 @@ adapt one, keep that shape.
 
 ---
 
+## Protocol cards
+
+One card per experiment, to hand to a laboratory. Each card says what to do, what to record and what
+each result would mean. The reasoning behind each one is in the long sections below. Concentrations are
+starting points; any change is fine if it is written down.
+
+**For every card.** Record the water's source, the reagent lots, the vial and headspace volumes, and
+the time each sample takes to reach temperature (a thermocouple in a dummy vial). Run everything in
+triplicate. Send raw numbers, not only plots.
+
+### Card A: does cysteine disappear in the first minutes? (one day)
+
+| | |
+|---|---|
+| Question | Does free cysteine vanish within minutes of heating a ribose–cysteine mix? The model's meaty-thiol errors are consistent with that, and nothing in the literature measures it. |
+| Size | 2 arms × 7 time points × 3 replicates = 42 samples; about one day |
+| Instrument | HPLC (thiol derivatisation), or a plate reader for Ellman's assay |
+
+1. Make 0.5 mol/L phosphate buffer at pH 5.0 with ultrapure water.
+2. Dissolve ribose (100 mmol/L) and cysteine (33 mmol/L). Use the highest-purity cysteine available and note its lot, since cysteine reagent carries trace copper.
+3. Split into two arms. Arm 1: as made. Arm 2: add EDTA in molar excess over the cysteine (about 40 mmol/L).
+4. Fill 20 mL vials with 5 mL each and seal them.
+5. Heat at 100 °C in a pre-heated block or bath. Remove vials at 0, 1, 2, 5, 10, 20 and 30 minutes.
+6. Quench each vial at once in ice water, then derivatise straight away (or freeze at −80 °C).
+7. Measure free cysteine, and cystine if the method allows. Measure the final pH.
+
+**Read-out.** If cysteine in arm 1 falls by more than about half within 5 minutes, the model's main structural error is located, and arm 2 shows whether trace metals drive it. If cysteine falls slowly, that hypothesis is ruled out.
+
+### Card B: where do the meaty thiols go? (about two weeks of GC)
+
+| | |
+|---|---|
+| Question | Is the model's 29× over-prediction of meaty thiols a formation problem, a missing loss of cysteine, or a missing removal of the thiols themselves? |
+| Size | 130–180 vials depending on how many time points are kept (the grid below gives 180); about two weeks of GC |
+| Instrument | GC-MS with stable-isotope dilution for 2-methyl-3-furanthiol (MFT), 2-furfurylthiol (FFT) and their disulfides |
+
+1. Prepare the Card A buffer (ribose 100 mmol/L, cysteine 33 mmol/L, phosphate 0.5 mol/L, pH 5.0) in 20 mL vials with 5 mL each.
+2. Set up five arms:
+   - **A, the reacting pot:** as made.
+   - **B, fed thiols:** the same buffer without ribose or cysteine, with MFT alone and FFT alone at 1 mg/L.
+   - **C, no oxygen:** arm B prepared and sealed under nitrogen.
+   - **D, chelator:** arms A and B with EDTA in molar excess over the thiol.
+   - **E, diketone:** arm B plus 2,3-pentanedione at 10 mmol/L.
+3. Heat arms A, B and D at 100 °C, sampling at 0.5, 1, 2, 4, 8 and 12 hours, and again at 140 °C, sampling at 5, 10, 20, 40, 80 and 120 minutes. Heat arm C at 100 °C only and arm E at 140 °C only, on the same grids.
+4. Quench in ice water. Measure MFT, FFT and both disulfides in the same run, by isotope dilution.
+5. In arms A and D, also measure free cysteine (Card A method), remaining ribose and the final pH.
+
+**Read-out.**
+- **Cysteine in arm A vs arm D:** if it falls faster without the chelator and the thiols follow, a missing catalysed loss of cysteine explains the over-prediction.
+- **Arm B:** if the fed thiols level off and the disulfides account for the loss, the removal is reversible.
+- **Arm E vs arm B:** if arm E makes more disulfide, the pot's own diketones oxidise the thiols.
+- **The two temperatures** give the first measured activation energies for these steps.
+
+### Card C: does thiamine pay off when braising but not when searing? (24 samples)
+
+| | |
+|---|---|
+| Question | The model predicts thiamine adds as much meaty aroma as cysteine at 100 °C but almost none at 140 °C. True or not? |
+| Size | 4 arms × 2 temperatures × 3 replicates = 24 samples |
+| Instrument | GC-MS with stable-isotope dilution for MFT |
+
+1. Make phosphate buffer at pH 5.6 containing ribose at 1 mmol/L, close to beef.
+2. Make four arms: blank (ribose only); + cysteine 0.1 mmol/L; + thiamine 0.002 mmol/L; + both. These are beef-like levels; keep thiamine this low so it cannot trap the thiol it makes.
+3. Heat one set at 100 °C for 20 minutes and one at 140 °C for 5 minutes, with the come-up time recorded.
+4. Quench and measure MFT by isotope dilution.
+
+**Read-out.** If the thiamine arm gains about as much MFT as the cysteine arm at 100 °C, and much less at 140 °C, the claim holds and becomes a formulation rule. Otherwise it is dropped.
+
+### Card D: are aroma compounds smelled at the same level in pea protein as in water? (one sensory study)
+
+| | |
+|---|---|
+| Question | Every plant-protein study uses odour thresholds measured in water. How far off is that? |
+| Size | 6–8 compounds × 2 media, same panel |
+| Method | Ascending three-alternative forced choice (ASTM E679), orthonasal |
+
+1. Choose 6–8 compounds: hexanal, 3-methylbutanal, a methyl ketone (2-heptanone), an alkylpyrazine (2,5-dimethylpyrazine), a meaty thiol (2-furfurylthiol), dimethyl trisulfide, a methoxypyrazine.
+2. Prepare two media at the same pH: water, and a 3 % w/w pea protein isolate dispersion. Record the isolate's lot and supplier.
+3. For each compound and medium, make a dilution series in 3-fold steps spanning the expected threshold.
+4. Run ascending three-alternative forced-choice tests with the same panel in the same sessions, in randomised order.
+5. Compute each assessor's best-estimate threshold, correct for guessing, and report the group geometric mean with its spread.
+
+**Read-out.** The ratio of threshold in pea protein to threshold in water, per compound: the correction every plant-based odour-activity calculation needs. Report the panel size and screening criterion.
+
+### Card E: how much aldehyde does hot pea protein hold back? (one design)
+
+| | |
+|---|---|
+| Question | How strongly does pea protein bind hexanal at cooking temperatures, and does heat or acid release it? The model has the sign wrong on this. |
+| Size | 2 compounds × 3 temperatures × 2 pH values, plus a time series |
+| Instrument | Static headspace GC (phase-ratio variation), plus exhaustive extraction or purge-and-trap |
+
+1. Disperse pea protein isolate at 3 % w/w in buffer at pH 4.5 and at pH 7. Measure the isolate's lipid content and peroxide value, the largest unknowns on the model's fat lane.
+2. Spike hexanal and (E)-2-hexenal at a known level.
+3. For each temperature (40, 70 and 90 °C), fill vials with different liquid volumes (phase-ratio variation) and equilibrate.
+4. In the same run, on the same instrument, measure the same compounds in buffer without protein (the water reference).
+5. On the same aliquots, measure the total amount of each compound by exhaustive extraction or purge-and-trap, not only the headspace.
+6. Separately, heat unspiked dispersions at the three temperatures and measure hexanal against time (formation).
+
+**Read-out.**
+- **The partition data:** a binding constant at each temperature and pH, which shows whether heat and acid release bound aldehyde.
+- **Headspace vs total:** how much the protein holds back.
+- **The time series:** the temperature dependence of hexanal formation in a wet protein.
+
+---
+
 ## The experiments, in the order I would fund them
 
 ### 1. Where the thiols go: one pot, two temperatures, fed and unfed in parallel
