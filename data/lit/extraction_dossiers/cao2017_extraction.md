@@ -36,7 +36,7 @@ engine pot that charges free cysteine with a pentose therefore treats as free a 
 is, in reality, mostly sequestered in the thiazolidine.
 
 **(b) It gives the first apparent equilibrium constant for TTCA ⇌ Cys + Xyl in the corpus.**
-`zhai2023b_extraction.md` sec. 4(a) concluded that "the K for this one does not exist in the
+`zhai2023jafc_extraction.md` appendix A.4(a) concluded that "the K for this one does not exist in the
 corpus". From this paper's own digitised Figs. 4 and 5 (blank pot), the mass-action ratio
 K_app = [TTCA] / ([Cys][Xyl]) is **58.5-64.6 L/mol at every one of the six sample times from 0.5 to
 5 h** (arithmetic 1), while TTCA itself falls by a third and the pH drifts from 4.7 to 4.15. A
@@ -256,7 +256,7 @@ rate k_f(2[Cys]_eq) + k_r ≥ ln 10/30 min = 0.077 min⁻¹, with [Cys]_eq ≈ 0
 is therefore *fast* compared with every net TTCA loss in the corpus (Zhai 2021's first-order
 equivalents 0.0027-0.0081 min⁻¹ at 100-140 °C, pH 7) — the net loss is slow only because the
 released Cys and Xyl recombine. **This is the quantitative form of the B16 diagnosis** recorded in
-`zhai2023b_extraction.md`: a one-way `r_ttca_cys` fitted where the reverse is active cannot be right.
+`zhai2023jafc_extraction.md` (appendix A): a one-way `r_ttca_cys` fitted where the reverse is active cannot be right.
 Class **derived_assumption** (assumes the 0.5 h point is equilibrated; the 0 → 0.5 h interval is
 unsampled).
 

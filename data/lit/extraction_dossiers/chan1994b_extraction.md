@@ -24,7 +24,7 @@ five-temperature, three-pH run.
 | Authors | F. Chan and G. A. Reineccius, Department of Food Science and Nutrition, University of Minnesota, 1334 Eckles Avenue, St. Paul, MN 55108 |
 | Book | *Maillard Reactions in Chemistry, Food and Health*, T. P. Labuza, G. A. Reineccius, V. M. Monnier, J. O'Brien, J. W. Baynes (eds.), The Royal Society of Chemistry, Cambridge, 1994 (series number not printed in the PDF) |
 | Pages | 131-139 (p. 131 title and summary; Table I p. 134; Table II p. 135; Figures 1-3 pp. 136-137; conclusions and CAS numbers p. 137; references pp. 137-139) |
-| DOI | **none printed anywhere in the PDF.** Do not attach one from memory; the repository citation is book + pages |
+| DOI | `10.1533/9781845698393.3.131` — supplied by the owner 2026-10-27: the Woodhead Publishing digital edition of this 1994 RSC chapter (Crossref dates the digital edition 2005). No DOI is printed in the PDF itself |
 | PDF file name | `data/articles/chan2005.pdf` — **misnamed** (see above); the pdfinfo Title field carries the correct chapter title |
 | On disk vs SI | the whole chapter is on disk; no supplementary material exists |
 | Naming | isovaleraldehyde = 3-methylbutanal (registry `3_methylbutanal`, alias present); phenylacetaldehyde = "2-phenylethanal" in the figure legends; di(H)di(OH)-6-methylpyranone = DDMP = 2,3-dihydro-3,5-dihydroxy-6-methyl-4H-pyran-4-one; "Chan and Reineccius 1994" in this chapter's own reference list is the sulfur chapter (`chan1994_extraction.md`), then "in press" |

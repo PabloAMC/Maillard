@@ -10,8 +10,8 @@ MS/MS) **not on disk**.
 
 **Duplicate check (requested):** `zhou2023_extraction.md` is **Zhou et al. 2023, 10.1021/acs.jafc.2c08360**
 (JAFC 71(5):2472, "Cysteine-induced pH-dependent formation of thiols … N-(1-deoxy-D-xylulos-1-yl)-
-alanine", source `data/articles/Zhou2023b.pdf` + `zhou2023b_supporting.pdf`). There is **no
-`zhou2023b_extraction.md`**. No dossier carries 10.1021/acs.jafc.3c04424 (grep of
+alanine", source `data/articles/Zhou2023b.pdf` + `zhou2023b_supporting.pdf`). There is **no separate
+`zhou2023b` dossier**. No dossier carries 10.1021/acs.jafc.3c04424 (grep of
 `data/lit/extraction_dossiers/`); this is a new paper, not a duplicate. The 2c08360 paper is this one's
 ref. 19 (same ARP preparation) and the ARP + Cys sister study is its ref. 15 (Zhou et al. 2022, JAFC
 70:15202).

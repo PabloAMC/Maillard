@@ -21,7 +21,7 @@ TTCA/ARP yields during vacuum dehydration, **Fig. S3** TTCA/ARP distribution aft
 | DOI as printed | **10.1021/acs.jafc.3c06506** ✔ matches the brief |
 | Funding | NSFC 32001821, 32172330; National Key R&D 2017YFD0400105; Jiangsu KYCX20_1880; King Saud RSP-2023R437 |
 | Group references used | ref 7 = Zhai 2019 (`zhai2019_extraction.md`); ref 13 = Zhai 2020 (`zhai2020_extraction.md`, spray-drying TTCA/ARP ratio); ref 19 = Zhai 2021 (`zhai2021_extraction.md`); ref 10 = Cui et al. (Xyl-Phe thermal reaction-vacuum dehydration) |
-| File-stem note | This is the **fourth** Zhai 2023 item in the corpus: `zhai2023b` / `zhai2023jafc` (JAFC 71:14300, TTCA + Cys), `zhai2023foodchem`, `zhai2023c`. Different paper, different DOI. |
+| File-stem note | This is the **fourth** Zhai 2023 item in the corpus: `zhai2023jafc` (JAFC 71:14300, TTCA + Cys), `zhai2023foodchem`, `zhai2023c`. Different paper, different DOI. |
 
 ## 1. Why it matters (and the limits)
 
@@ -50,7 +50,7 @@ any 1-DX value, or its SI.
 
 ### How it relates to the companion dossiers
 
-| | `zhai2019_extraction.md` | `zhai2020_extraction.md` | **this paper** | `zhai2023b_extraction.md` |
+| | `zhai2019_extraction.md` | `zhai2020_extraction.md` | **this paper** | `zhai2023jafc_extraction.md` |
 |---|---|---|---|---|
 | question | TTCA formation vs T; Cys effect | spray-drying shifts TTCA/ARP ratio | TTCA vs ARP reactivity; water states during dehydration | added Cys vs TTCA |
 | TTCA vs t | **yes**, 70-130 °C | no | **no** (claimed, not shown) | no |

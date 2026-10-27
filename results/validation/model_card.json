@@ -192,6 +192,11 @@
       "detail": "fit_target_gate: PASS",
       "gate": "scripts/ci/fit_target_gate.py",
       "status": "PASS"
+    },
+    {
+      "detail": "dossier_coverage_gate: PASS (every cited dossier exists; the article table is coherent)",
+      "gate": "scripts/ci/dossier_coverage_gate.py",
+      "status": "PASS"
     }
   ],
   "generated_by": "scripts/generators/generate_model_card.py",

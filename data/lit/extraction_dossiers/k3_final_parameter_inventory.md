@@ -34,7 +34,8 @@ given).
 wave indices `z0_index.md`, `z1_disjointness_verdict.md`, `z2_index.md`, `z3_index.md`,
 `k1_kinetic_parameters.md`, `k2_matrix_and_thresholds.md`, and this wave's
 `zhou2023_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`
-(+ its **Wave K3 addendum**), `zhu2023_kafirin_binding_extraction.md`.
+(+ its **Wave K3 addendum**), and a `zhu2023_kafirin_binding` dossier [2026-10-27: never committed; its
+binding constants are in `k1_kinetic_parameters.md` section 3].
 
 ---
 
@@ -74,7 +75,7 @@ have not been checked and should be.
 **3. Three fabrication-class citation defects are now closed as un-re-pointable.**
 `Ea = 129 kJ/mol` for acrylamide (absent from all three Knol papers, Z0 #1 + Z2 #2); the
 `52.1 / 72.9 kJ/mol` pair (true values 94.4 ± 11 / 85.1 ± 14, Z2 #4); and the retired
-`342 / 200 ppb` sulfur anchor (true values 198 / 121 ppb, `hofmann1998_extraction.md`).
+`342 / 200 ppb` sulfur anchor (true values 198 / 121 ppb, `hofmann1998_reconciliation.md`).
 
 **4. No family-level pH term can pass.** Four independent sign-crossings are now on record
 (§B.2). The newest — **Zhou 2023 Figure 3** — has the C0/C1 pyrazines and the C2 pyrazines
@@ -538,7 +539,7 @@ provenance available.
 | 2-nonanone | pig gastric mucin | **1.36 L/g** (12 %) | **per-gram** | " | Barallat-Pérez 2024 | [D] | USE |
 | 2-heptanone / 2-octanone / 2-nonanone / nonanal | soy | 4.40 × 10⁻³ / 1.24 × 10⁻² / **3.72 × 10⁻²** / 4.38 × 10⁻² L/g | **100 000 g/mol — STATED BY SOURCE, three times** | pH 8.0, 30 mM Tris, **10 mM 2-mercaptoethanol**, 25 °C, equilibrium dialysis | Damodaran 1981 | [M]+[D] | **★ USE — the stated molar basis is the datum S4 named as blocking** |
 | hexanal / 1-hexanol | soy, partially denatured | 1.47 × 10⁻³ / 6.99 × 10⁻⁴ L/g; saturation **0.847 and 0.889 mg/g protein**; K **173.4 / 80.3 M⁻¹** | **per-gram** | gel filtration | Arai 1970 **via** Damodaran | [C] | **USE-Q — second-hand. The 1-hexanol row is the FIRST anchor of any kind on that lane; it implies f_free ≈ 0.93 against the shipped fitted 0.063 — 15× off** |
-| **MFT (MFO)** | **kafirin** | **K = 1092.66 (298 K) / 848.23 (318 K) / 404.24 (338 K) M⁻¹**; ΔH **−20.58 kJ/mol**, ΔS **−10.17 J/mol/K** | 24 652 Da, stated | **53 % aqueous ethanol**, kafirin 200 mg/L (8.1 µM) | Zhu 2023 (`zhu2023_kafirin_binding_extraction.md`) | [F] | **USE-Q — the ONLY MFT binding constant in the corpus; van't Hoff checks exactly. ⚠️ 53 % ETHANOL — NOT transferable to aqueous or low-moisture systems** |
+| **MFT (MFO)** | **kafirin** | **K = 1092.66 (298 K) / 848.23 (318 K) / 404.24 (338 K) M⁻¹**; ΔH **−20.58 kJ/mol**, ΔS **−10.17 J/mol/K** | 24 652 Da, stated | **53 % aqueous ethanol**, kafirin 200 mg/L (8.1 µM) | Zhu 2023 (`k1_kinetic_parameters.md` §3; the separate `zhu2023_kafirin_binding` dossier was never committed) | [F] | **USE-Q — the ONLY MFT binding constant in the corpus; van't Hoff checks exactly. ⚠️ 53 % ETHANOL — NOT transferable to aqueous or low-moisture systems** |
 | BMFD / DT / MMFD | kafirin | K(298 K) 1934.33 / 327.42 / 345.36 M⁻¹ | " | " | Zhu 2023 | [F] | **USE-Q** — ⚠️ **DT's printed ΔH (14.22) disagrees with a van't Hoff fit to its own K's (+18.3)** |
 | soy K, native → **denatured** | soy | **930 → 1240 M⁻¹ (+33 %)**, sites unchanged | 100 kDa | after **90 °C / 1 h** | Damodaran 1981 | [M] | **★ USE — fills a declared gap where the repo's file records "qualitative only, NOT MODELLED"** (Z0 #18) |
 | soy K vs temperature | **flat 25 → 45 °C** | — | " | — | Damodaran 1981 | [M] | **USE — a modelling licence** |
@@ -883,7 +884,7 @@ resting on the corpus's own assertion.
 | **B10.2** | **and BOTH single-route controls are run**: MFT is **> 99 % thiamine-derived with no cysteine** and **> 95 % xylose-derived with no thiamine**, against **54 : 46** in the full ternary | — | Cerny 2007b Tables 3 / 5 / 6 |
 | B10.3 | **FFT is > 99 % XYLOSE-derived at every pH and in every control**, including the no-cysteine control — **⇒ thiamine can serve as the sulfur donor for FFT** | — | Cerny 2007 T4, Cerny 2007b T5/T6 |
 | **B10.4** | **★ Ea(destruction) exceeds Ea(formation) by ≳ 70 kJ/mol** for a fed heterocyclic intermediate — a **measured sign reversal on the same 75 → 100 °C step: ×4.2 at 10 min but ×0.177 at 60 min** | Ea_form ≳ 97, Ea_dest ≳ 166 kJ/mol | Hofmann & Schieberle 1996b Fig. 2 **[D]**, 2-acetyl-2-thiazoline |
-| B10.5 | ⚠️ **B10.4 is on 2-acetyl-2-thiazoline, NOT on MFT**, and it is a fed-intermediate experiment. *"It does not measure MFT's temperature response and must never be cited as if it did. What it licenses is the MODEL CHANGE …, not a PARAMETER TRANSFER."* | — | `hofmann1996b_extraction.md`, verbatim |
+| B10.5 | ⚠️ **B10.4 is on 2-acetyl-2-thiazoline, NOT on MFT**, and it is a fed-intermediate experiment. *"It does not measure MFT's temperature response and must never be cited as if it did. What it licenses is the MODEL CHANGE …, not a PARAMETER TRANSFER."* | — | the wave-Z3 `hofmann1996b` dossier, verbatim (that dossier was never committed; this row is where its words survive) |
 | B10.6 | **★ oxygen is REQUIRED**: removing it costs **5.8×** of the 2-acetyl-2-thiazoline yield (9.8 → 1.7 µg); Cu²⁺ buys **2.1–3.9×** | argon 1.7 vs air 9.8 vs Cu²⁺ 20.1 / 38.4 µg | Hofmann 1996b Table 4 |
 | B10.7 | **the norfuraneol Ea is not a constant**: across three studies it spans **64–122 kJ/mol** and is a function of **precursor loading and matrix** | Lau 2003 64.0–122.3; Pandit 2006 81.4–96.1; Bornhorst 104.9–122.3 | `bornhorst2017b_extraction.md` |
 | B10.8 | **norfuraneol plateau FALLS as precursor loading RISES** — 0.47 → 0.24 → 0.10 mg/g for 1_R0.5_L → 1_R1_L → 2_R2_L at 90 °C, while **k rises** 5.1 → 7.4 → 18.3 × 10⁻³ min⁻¹ | — | Bornhorst 2017 Table 1 |
@@ -1430,8 +1431,9 @@ me. **Re-fetch, and rename the existing file so no wave cites it as Zhou.**"
 
 **Both halves are now done.** `data/articles/Zhou2023b.pdf` + `zhou2023b_supporting.pdf` are the
 correct article and its SI. The mis-filed paper (Zhu et al., kafirin × Baijiu, *Food Chem.* 400
-(2023) 133854) has had its dossier **preserved unchanged** as
-`zhu2023_kafirin_binding_extraction.md` — it holds the corpus's only MFT–protein binding
+(2023) 133854) has had its dossier **preserved unchanged** as a
+`zhu2023_kafirin_binding` dossier [2026-10-27: that file never reached the repository; the constants are
+in `k1_kinetic_parameters.md` section 3] — it holds the corpus's only MFT–protein binding
 constants and must not be lost. ⚠️ **`data/articles/Zhou2023.pdf` is still the wrong file for
 DOI 10.1021/acs.jafc.2c08360 and should be renamed.**
 

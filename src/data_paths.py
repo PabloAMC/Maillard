@@ -60,6 +60,9 @@ ARTICLES_DIR: Path = DATA_ROOT / "articles"
 KEYS_DIR: Path = DATA_ROOT / "keys"
 COMPOUND_REGISTRY: Path = KEYS_DIR / "compounds.yml"
 PAPER_REGISTRY: Path = KEYS_DIR / "papers.yml"
+#: 2026-10-27: hand-curated, NOT generated. Which dossier(s) cover a file in ARTICLES_DIR whose stem
+#: names no dossier, or why none does. Read by scripts/ci/dossier_coverage_gate.py and scripts/reading_audit.py.
+PDF_DOSSIER_ALIASES: Path = KEYS_DIR / "pdf_dossier_aliases.yml"
 
 # --------------------------------------------------------------------------- data/schemas
 #: 2026-09-08: the front door's spec contract (compare, predict, score, calibrate, the API, the page).
