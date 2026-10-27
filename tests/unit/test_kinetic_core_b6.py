@@ -630,3 +630,42 @@ def test_products_with_no_b4_record_are_dropped_not_defaulted(frozen):
     assert "hexanal" in per_species
     assert "pentane" not in per_species
     assert "methyl octanoate" not in per_species
+
+
+# ===========================================================================
+# WAVE B48: 2,4-DECADIENAL BREAKS TO HEXANAL (measured, not fitted)
+# ===========================================================================
+
+
+def test_b48_breakage_reproduces_its_source_and_its_holdout():
+    from src.kinetic_core.parameters_lipid import DECADIENAL_BREAKAGE as D
+
+    def share(t_c, minutes):
+        k_hex, k_oct = D.k_per_min("hexanal", t_c), D.k_per_min("octenal", t_c)
+        return (1.0 - math.exp(-(k_hex + k_oct) * minutes)) * k_hex / (k_hex + k_oct)
+
+    # Zamora 2015b's own number at its reference point, and Zamora 2007's 9-14 % at 180 C.
+    assert share(200.0, 60.0) == pytest.approx(0.1154, rel=0.01)
+    assert 0.09 <= share(180.0, 60.0) <= 0.14
+
+
+def test_b48_breakage_is_off_below_its_window_and_moves_carbon_not_creates_it(frozen):
+    import dataclasses
+
+    from src.kinetic_core import lipid
+
+    branch, composition = frozen
+    charge = charge_from_carrier(LIPID_CARRIERS["pea_protein_isolate"], composition)
+    on = integrate_lipid(charge, [(30.0, 140.0)], branch)
+    cold = integrate_lipid(charge, [(30.0, 90.0)], branch)
+    assert on.metadata["segments"][0]["decadienal_broken_mmol_l"] > 0.0
+    assert cold.metadata["segments"][0]["decadienal_broken_mmol_l"] == 0.0
+    assert math.isclose(on.metadata["carbon_in_mmol_l"], on.metadata["carbon_out_mmol_l"], rel_tol=1e-9)
+    saved = lipid.DECADIENAL_BREAKAGE
+    try:
+        lipid.DECADIENAL_BREAKAGE = dataclasses.replace(saved, enabled=False)
+        off = integrate_lipid(charge, [(30.0, 140.0)], branch)
+    finally:
+        lipid.DECADIENAL_BREAKAGE = saved
+    assert on.state_mmol_per_l["HEXANAL"] > off.state_mmol_per_l["HEXANAL"]
+    assert on.state_mmol_per_l["DECADIENAL"] < off.state_mmol_per_l["DECADIENAL"]

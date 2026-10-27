@@ -1,0 +1,84 @@
+{
+  "artifact": "kinetic_core_b48_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b48_ship_rule",
+    "generated_on": "2026-10-27",
+    "git": {
+      "commit": "0342f8c15fadd08a560106cdd03bcac20fa79966",
+      "short": "0342f8c1",
+      "branch": "b47-sulfur-objective-corrected",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b48_ship_rule.py",
+    "inputs": [
+      {
+        "path": "src/kinetic_core/parameters_lipid.py",
+        "sha256": "b67a074e713419b672ed3c7222d4b33fc9883e9c3a670794827ddea981cb9331"
+      },
+      {
+        "path": "src/kinetic_core/lipid.py",
+        "sha256": "082cffac5d85b7c0be81d943d9493995301548d35ad8110fd21a3faea0ad76eb"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b48_prereg.md",
+  "T1_holdout_zamora2007": {
+    "share_to_hexanal_180C_60min": 0.09177362470294188,
+    "zamora2007_printed": [
+      0.09,
+      0.14
+    ],
+    "band": [
+      0.06,
+      0.21
+    ],
+    "pass": true
+  },
+  "T2_lipid_rows": {
+    "off": {
+      "rows": 8,
+      "within_3x": 4,
+      "median_abs_log10": 0.4481421197003723
+    },
+    "on": {
+      "rows": 8,
+      "within_3x": 4,
+      "median_abs_log10": 0.4481421197003723
+    },
+    "pass": true
+  },
+  "T3_directional": {
+    "off": {
+      "agree": 25,
+      "evaluable": 43
+    },
+    "on": {
+      "agree": 25,
+      "evaluable": 43
+    },
+    "pass": true
+  },
+  "T4_rows_moved": [
+    {
+      "benchmark": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compound": "hexanal",
+      "fold_off": 3.656948266383388,
+      "fold_on": 3.3873641848543454,
+      "delta_abs_log10": -0.03325692521272949
+    }
+  ],
+  "union_panel": {
+    "off": {
+      "rows": 45,
+      "within_3x": 12,
+      "median_abs_log10": 0.9613681301660187
+    },
+    "on": {
+      "rows": 45,
+      "within_3x": 12,
+      "median_abs_log10": 0.9613681301660187
+    }
+  },
+  "verdict": "SHIP",
+  "rule": "SHIP if T1 (Zamora 2007 hold-out), T2 (lipid rows) and T3 (directional) hold"
+}
