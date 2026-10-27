@@ -84,3 +84,27 @@ scores worse out of sample means B9's defects were compensating for a structural
 ## 6. Verdict
 
 *(Written after the run, below this line.)*
+
+**DO NOT SHIP** (`kinetic_core_b47_ship_rule.md`, 2026-10-27). The engine keeps reading B9.
+
+- T1 (recorded): both starts at cost 22.90 on the 52 rows (B9's vector there: 36.46). Active bounds
+  `k_dimer_mft`, `k_dimer_fft`, `Ea_decay_thiol_sink` (as B9) and `k_fur_decay` (new; B9's acid-yield
+  floor left).
+- T2 PASS: hold-out sulfur rows 1/14 → 2/14 within 3x, median 1.87 → 1.68 dex; every Yiltirak MFT row
+  improves (100 C 9.3x → 5.7x … 130 C 100x → 57x), the Hofmann ribose pH 3 / pH 7 MFT rows worsen.
+- T3 PASS: Hofmann ribose pH 5 FFT 6.9x → 4.4x, MFT 3.7x → 2.2x. *As implemented the test matched the
+  bundle ids `hofmann1998_*_cysteine_145C_20min_pH5`: the xylose bundle sits in the hold-out panel as
+  `mp_holdout_…` (counted in T2, where it improves: FFT 2.0x → 1.6x, MFT 3.8x → 2.6x), and the glucose and
+  fructose bundles return no scored rows under either wave. Including xylose would not change T3.*
+- **T4 FAIL: directional 25/43 → 24/45.** SUG-09 ("FFT from pentoses, NOT DETECTED from hexoses") flips
+  agree → disagree, and HOF-01 and WANG-01 (hexose claims) turn from not evaluable to disagree.
+- T5 (recorded): Laplace 17/23 identified (B9 20/23).
+- Union panel (recorded): 12/45 → 14/45 within 3x.
+
+**What failed, and why.** The fit bought the corrected Whitfield H2S row back (−6.3σ → −2.4σ) by moving
+`k_glc_ha` +3.6 decades and `k_dimer_decay` +3.7: the hexose route that B9 left dead now makes thiols,
+which is the directional failure. The corrections are right and the level evidence improves, but the
+network cannot hold the excess-H2S row without opening a route the claims panel says is closed. §4a's
+finding — the model destroys MFT in excess H2S — is a structural defect, and B9's wrong concentrations
+were hiding it. B9 therefore stays, knowingly fitted to six rows that misstate their papers; the
+corrected rows are in the B47 generator for the wave that fixes the structure.
