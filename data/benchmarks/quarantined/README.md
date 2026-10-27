@@ -1,5 +1,11 @@
 # Quarantined benchmarks
 
+> **Empty since 2026-10-27.** The last five files (`acrylamide_asparagine_glucose_Parker2012`,
+> `cys_ribose_140C_Hofmann1998`, `furosine_extrusion_crossover_140C_RamirezJimenez2000` and the two
+> `*_PMC9905368` bundles) were deleted under the rule below: source recovery had concluded for each
+> that no source holds its values. Git history keeps them. The sections below are the record of why
+> each one left; "Quarantined; file retained" in the tables means retained until that date.
+
 Files in this directory are **excluded from the validation panel**. The benchmark loader
 (`panel_bundles` in `src/kinetic_core/panel.py`) uses a non-recursive
 `benchmark_dir.glob("*.json")`, so any JSON placed in a subdirectory of `data/benchmarks/`

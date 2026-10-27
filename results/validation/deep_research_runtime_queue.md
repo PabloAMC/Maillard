@@ -8,7 +8,7 @@ Selected runtime candidates: 0
 Process-state calibrations: 0
 Safety references: 0
 Computational priors: 0
-Already landed in runtime registries: 5
+Already landed in runtime registries: 4
 Excluded because already encoded or absent: 6
 
 Out of scope for this batch: benchmark payload promotion.
@@ -41,9 +41,9 @@ Landing registry: data/lit/computational_priors.json
 
 | Citation | Reason |
 | --- | --- |
-| Ordoudi et al. (2014 / PMC12484514) | already_landed_in_runtime_registry |
+| Ordoudi et al. (2014 / PMC12484514) | already_runtime_bound |
 | Hrncirik & Zeelenberg (2014) | already_landed_in_runtime_registry |
 | Aliani & Farmer (2005) | already_landed_in_runtime_registry |
-| Blank, Devaud & Grosch (2003) | already_runtime_bound |
+| Blank, Devaud & Grosch (2003) | no_verifiable_source |
 | Glomb & Monnier (1995) | already_landed_in_runtime_registry |
 | Hidalgo & Zamora (2004) | already_landed_in_runtime_registry |

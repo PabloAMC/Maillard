@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 12: Protein Damage Markers
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering protein damage markers.  
 **Strategic Posture:** `first_class_runtime_lane`  
 **Runtime Concept:** `safety_damage_lane`  
-**Scope & Targets:** Covers target compounds/variables: `CML`, `CEL`, `furosine`, `lysinoalanine`. Preferred payload types: `safety_payload`, `guardrail_entry`. Target runtime modules: `src/safety.py`, `src/extrusion_model.py`.  
+**Scope & Targets:** Covers target compounds/variables: `CML`, `CEL`, `furosine`, `lysinoalanine`. Preferred payload types: `safety_payload`, `guardrail_entry`. Target runtime modules: `src/extrusion.py`.  
 
 ---
 
@@ -186,7 +186,7 @@
 ---
 
 ### Arinzechukwu et al. (2025)
-- **DOI:** [10.3390/foods14010096](https://doi.org/10.3390/foods14010096)
+- **DOI:** [10.1111/1750-3841.70545](https://doi.org/10.1111/1750-3841.70545)
 - **Matrix Family:** commercial_pba_products
 - **Kind:** `safety_reference`
 - **Payload Role:** `benchmark_intake`
@@ -223,8 +223,8 @@
 
 ---
 
-### Henle (2005)
-- **DOI:** [10.1007/s00726-005-0187-z](https://doi.org/10.1007/s00726-005-0187-z)
+### Henle (2005), Amino Acids 29:313
+- **DOI:** [10.1007/s00726-005-0200-2](https://doi.org/10.1007/s00726-005-0200-2)
 - **Matrix Family:** soy_isolate
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -297,8 +297,8 @@
 
 ---
 
-### De Vleeschouwer et al. (2006)
-- **DOI:** [10.1021/jf051197n](https://doi.org/10.1021/jf051197n)
+### De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx (2006), J. Agric. Food Chem. 54:7847
+- **DOI:** [10.1021/jf0611264](https://doi.org/10.1021/jf0611264)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `safety_payload`
@@ -334,7 +334,7 @@
 
 ---
 
-### Zhu et al. (2022)
+### Ma et al. (2022), Front. Nutr. 9:940202
 - **DOI:** [10.3389/fnut.2022.940202](https://doi.org/10.3389/fnut.2022.940202)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -408,7 +408,7 @@
 
 ---
 
-### Zhu et al. (2021)
+### Zhu et al. (2020), J. Sci. Food Agric. 100:5064
 - **DOI:** [10.1002/jsfa.10528](https://doi.org/10.1002/jsfa.10528)
 - **Matrix Family:** chicken
 - **Kind:** `calibration_reference`
@@ -483,8 +483,8 @@
 
 ---
 
-### Krause et al. (2003)
-- **DOI:** [10.1007/s00217-003-0685-6](https://doi.org/10.1007/s00217-003-0685-6)
+### Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277
+- **DOI:** [10.1007/s00217-002-0649-0](https://doi.org/10.1007/s00217-002-0649-0)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -524,7 +524,7 @@
 
 ---
 
-### Hidalgo & Pompei (2000)
+### Hidalgo & Pompei (1999), J. Agric. Food Chem. 48:78
 - **DOI:** [10.1021/jf990120u](https://doi.org/10.1021/jf990120u)
 - **Matrix Family:** tomato
 - **Kind:** `calibration_reference`
@@ -561,7 +561,6 @@
 ---
 
 ### Cantre et al. (2007)
-- **DOI:** [10.1111/j.1745-4549.2007.00109.x](https://doi.org/10.1111/j.1745-4549.2007.00109.x)
 - **Matrix Family:** beef
 - **Kind:** `calibration_reference`
 - **Payload Role:** `safety_payload`
@@ -596,8 +595,8 @@
 
 ---
 
-### Yu et al. (2017)
-- **DOI:** [10.1016/j.tifs.2020.01.021](https://doi.org/10.1016/j.tifs.2020.01.021)
+### Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chemistry 172:802
+- **DOI:** [10.1016/j.foodchem.2014.09.129](https://doi.org/10.1016/j.foodchem.2014.09.129)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `safety_payload`
@@ -669,7 +668,7 @@
 
 ---
 
-### Fratianni et al. (2016)
+### Fratianni et al. (2017), Food Res. Int. 99:862
 - **DOI:** [10.1016/j.foodres.2016.12.009](https://doi.org/10.1016/j.foodres.2016.12.009)
 - **Matrix Family:** apricot
 - **Kind:** `calibration_reference`
@@ -853,7 +852,7 @@
 
 ---
 
-### Urugo et al. (2024)
+### Mandelli et al. (2025)
 - **DOI:** [10.3390/foods14193295](https://doi.org/10.3390/foods14193295)
 - **Matrix Family:** plant_protein_matrix
 - **Kind:** `calibration_reference`
@@ -888,7 +887,7 @@
 
 ---
 
-### Chen et al. (2016)
+### Yu et al. (2016), Food Sci. Biotechnol. 25:1163
 - **DOI:** [10.1007/s10068-016-0185-5](https://doi.org/10.1007/s10068-016-0185-5)
 - **Matrix Family:** high_moisture_melt
 - **Kind:** `calibration_reference`
@@ -924,43 +923,6 @@
 
 ---
 
-### Pruteanu et al. (2023)
-- **DOI:** [10.1016/j.lwt.2024.117316](https://doi.org/10.1016/j.lwt.2024.117316)
-- **Matrix Family:** free_model_system
-- **Kind:** `calibration_reference`
-- **Payload Role:** `safety_reference_payload`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `replicates` | `3` |
-| `glucose_glycine_Ea_kj_mol` | `109.0` |
-| `glucose_phenylalanine_Ea_kj_mol` | `145.0` |
-
-**What it supports:**
-- Apparent Arrhenius activation energy comparison for glucose/glycine (Ea = 109 kJ/mol) and glucose/phenylalanine (Ea = 145 kJ/mol).
-
-**What it does not support:**
-- Complex solid-state protein matrices with native starch.
-
-**Next Action:** Encode browning activation energy safety prior.
-
----
-
 ## Confirmed Gaps and Structural Limitations
 
 - **Matrix Transferability Gap:** Most kinetic and volatile data for `Protein Damage Markers` are derived from simple aqueous buffers or free model systems. Transferability to complex plant-based meat matrices (e.g., Pea Protein Isolate or Soy Protein Isolate) under high-moisture extrusion remains a major gap.
@@ -971,7 +933,7 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 12
 
-Total papers analyzed: **25** (Benchmark-eligible: **0**, Calibration references: **18**, Rejected: **7**)
+Total papers analyzed: **24** (Benchmark-eligible: **0**, Calibration references: **17**, Rejected: **7**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
@@ -980,26 +942,25 @@ Total papers analyzed: **25** (Benchmark-eligible: **0**, Calibration references
 | Fu et al. (2023) | 2/8 | ❌ Rejected | commercial_pbma_products |
 | Ramírez-Jiménez et al. (2000) | 2/8 | ❌ Rejected | mild_legume_extrudate |
 | Arinzechukwu et al. (2025) | 2/8 | ❌ Rejected | commercial_pba_products |
-| Henle (2005) | 2/8 | ❌ Rejected | soy_isolate |
+| Henle (2005), Amino Acids 29:313 | 2/8 | ❌ Rejected | soy_isolate |
 | Fu et al. (2023) | 2/8 | ❌ Rejected | free_model_system |
-| De Vleeschouwer et al. (2006) | 3/8 | ⚠️ Calibration | free_model_system |
-| Zhu et al. (2022) | 3/8 | ⚠️ Calibration | free_model_system |
+| De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx (2006), J. Agric. Food Chem. 54:7847 | 3/8 | ⚠️ Calibration | free_model_system |
+| Ma et al. (2022), Front. Nutr. 9:940202 | 3/8 | ⚠️ Calibration | free_model_system |
 | Sun et al. (2015) | 3/8 | ⚠️ Calibration | beef |
-| Zhu et al. (2021) | 3/8 | ⚠️ Calibration | chicken |
+| Zhu et al. (2020), J. Sci. Food Agric. 100:5064 | 3/8 | ⚠️ Calibration | chicken |
 | Hamzalioglu et al. (2026) | 3/8 | ⚠️ Calibration | milk |
-| Krause et al. (2003) | 3/8 | ⚠️ Calibration | free_model_system |
-| Hidalgo & Pompei (2000) | 3/8 | ⚠️ Calibration | tomato |
+| Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277 | 3/8 | ⚠️ Calibration | free_model_system |
+| Hidalgo & Pompei (1999), J. Agric. Food Chem. 48:78 | 3/8 | ⚠️ Calibration | tomato |
 | Cantre et al. (2007) | 3/8 | ⚠️ Calibration | beef |
-| Yu et al. (2017) | 3/8 | ⚠️ Calibration | free_model_system |
+| Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chemistry 172:802 | 3/8 | ⚠️ Calibration | free_model_system |
 | Charissou et al. (2007) | 3/8 | ⚠️ Calibration | cookie_model |
-| Fratianni et al. (2016) | 3/8 | ⚠️ Calibration | apricot |
+| Fratianni et al. (2017), Food Res. Int. 99:862 | 3/8 | ⚠️ Calibration | apricot |
 | Ma et al. (2024) | 3/8 | ⚠️ Calibration | plant_based_meat_analogue |
 | Knol et al. (2005) | 3/8 | ⚠️ Calibration | free_model_system |
 | De Vleeschouwer et al. (2008) | 3/8 | ⚠️ Calibration | free_model_system |
 | Ishak et al. (2022) | 3/8 | ⚠️ Calibration | free_model_system |
-| Urugo et al. (2024) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
-| Chen et al. (2016) | 3/8 | ⚠️ Calibration | high_moisture_melt |
-| Pruteanu et al. (2023) | 3/8 | ⚠️ Calibration | free_model_system |
+| Mandelli et al. (2025) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
+| Yu et al. (2016), Food Sci. Biotechnol. 25:1163 | 3/8 | ⚠️ Calibration | high_moisture_melt |
 
 ---
 
@@ -1009,24 +970,23 @@ Total papers analyzed: **25** (Benchmark-eligible: **0**, Calibration references
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `De Vleeschouwer et al. (2006)` (Score: 3/8)
-- `Zhu et al. (2022)` (Score: 3/8)
+- `De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx (2006), J. Agric. Food Chem. 54:7847` (Score: 3/8)
+- `Ma et al. (2022), Front. Nutr. 9:940202` (Score: 3/8)
 - `Sun et al. (2015)` (Score: 3/8)
-- `Zhu et al. (2021)` (Score: 3/8)
+- `Zhu et al. (2020), J. Sci. Food Agric. 100:5064` (Score: 3/8)
 - `Hamzalioglu et al. (2026)` (Score: 3/8)
-- `Krause et al. (2003)` (Score: 3/8)
-- `Hidalgo & Pompei (2000)` (Score: 3/8)
+- `Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277` (Score: 3/8)
+- `Hidalgo & Pompei (1999), J. Agric. Food Chem. 48:78` (Score: 3/8)
 - `Cantre et al. (2007)` (Score: 3/8)
-- `Yu et al. (2017)` (Score: 3/8)
+- `Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chemistry 172:802` (Score: 3/8)
 - `Charissou et al. (2007)` (Score: 3/8)
-- `Fratianni et al. (2016)` (Score: 3/8)
+- `Fratianni et al. (2017), Food Res. Int. 99:862` (Score: 3/8)
 - `Ma et al. (2024)` (Score: 3/8)
 - `Knol et al. (2005)` (Score: 3/8)
 - `De Vleeschouwer et al. (2008)` (Score: 3/8)
 - `Ishak et al. (2022)` (Score: 3/8)
-- `Urugo et al. (2024)` (Score: 3/8)
-- `Chen et al. (2016)` (Score: 3/8)
-- `Pruteanu et al. (2023)` (Score: 3/8)
+- `Mandelli et al. (2025)` (Score: 3/8)
+- `Yu et al. (2016), Food Sci. Biotechnol. 25:1163` (Score: 3/8)
 
 ### REJECTED (Score < 3)
 - `Wehrmaker et al. (2022)` (Score: 2/8)
@@ -1034,15 +994,15 @@ Total papers analyzed: **25** (Benchmark-eligible: **0**, Calibration references
 - `Fu et al. (2023)` (Score: 2/8)
 - `Ramírez-Jiménez et al. (2000)` (Score: 2/8)
 - `Arinzechukwu et al. (2025)` (Score: 2/8)
-- `Henle (2005)` (Score: 2/8)
+- `Henle (2005), Amino Acids 29:313` (Score: 2/8)
 - `Fu et al. (2023)` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/safety.py`, `src/extrusion_model.py` must explicitly account for `safety_damage_lane` as a modifier when predicting `CML`, `CEL`, `furosine`, `lysinoalanine` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/extrusion.py` must explicitly account for `safety_damage_lane` as a modifier when predicting `CML`, `CEL`, `furosine`, `lysinoalanine` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `first_class_runtime_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

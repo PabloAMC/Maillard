@@ -88,66 +88,6 @@
       "verified_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727"
     },
     {
-      "citation": "Amarita et al. (2004)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "10_microbial_fermentation.md"
-      ],
-      "descriptions": [
-        "ResearchGate ref. 49 \u2014 Met supplementation \u2192 methional dose-response linear (R\u00b2>0.97); methional 0.04\u21921.38 \u00b5g/g at 0\u20132 mM Met; SAFE GC-MS; IS stated."
-      ],
-      "occurrences": [
-        {
-          "file": "10_microbial_fermentation.md",
-          "line": 603,
-          "description": "ResearchGate ref. 49 \u2014 Met supplementation \u2192 methional dose-response linear (R\u00b2>0.97); methional 0.04\u21921.38 \u00b5g/g at 0\u20132 mM Met; SAFE GC-MS; IS stated.",
-          "raw_line": "8. `Amarita et al. (2004)` \u2014 ResearchGate ref. 49 \u2014 Met supplementation \u2192 methional dose-response linear (R\u00b2>0.97); methional 0.04\u21921.38 \u00b5g/g at 0\u20132 mM Met; SAFE GC-MS; IS stated. 7/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Enumerated the complete PubMed record set for Amarita[Author] (12 papers). Only two 2004 papers exist: Amarita et al., Appl Environ Microbiol 70:7348-7354 (methionine-gamma-lyase gene in Brevibacterium linens, doi 10.1128/AEM.70.12.7348-7354.2004) and Bonnarme, Amarita et al., FEMS Microbiol Lett 236:85-90 (methylthioacetaldehyde as VSC intermediate, doi 10.1016/j.femsle.2004.05.022). Neither is a Met-supplementation dose-response study and neither reports methional in ug/g. No publication was found containing the claimed 0.04 -> 1.38 ug/g methional at 0-2 mM Met with R2>0.97 by SAFE GC-MS.",
-        "caveat": "The only genuine Amarita paper on methional is Amarita, Fernandez-Espla, Requena & Pelaez (2001), 'Conversion of methionine to methional by Lactococcus lactis', FEMS Microbiol Lett 204:189-195, doi 10.1111/j.1574-6968.2001.tb10884.x (PMID 11682200). That is a defensible anchor for the PHENOMENON (enzymatic Met -> methional via aminotransferase + alpha-ketoacid decarboxylase in L. lactis), but it is a 2001 screening letter and is NOT the source of the ug/g dose-response numbers, which remain unsupported. Do not attach the numeric anchors to it."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
-      "citation": "Arntfield et al. (1994/compiled)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "Microwave inactivation; 98% LOX; 87% NSI; hexanal \u221271%; OAV 3.1 post-treatment."
-      ],
-      "occurrences": [
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 715,
-          "description": "Microwave inactivation; 98% LOX; 87% NSI; hexanal \u221271%; OAV 3.1 post-treatment.",
-          "raw_line": "13. `Arntfield et al. (1994/compiled)` \u2014 Microwave inactivation; 98% LOX; 87% NSI; hexanal \u221271%; OAV 3.1 post-treatment. 7/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Enumerated S.D. Arntfield's CrossRef-indexed output for 1990-1998 (20 records): all of it is protein gelation / thermal network / micellization / canola-phenolic work (ovalbumin, vicilin, 12S canola globulin, egg yolk SC-CO2). Nothing on microwave enzyme inactivation, lipoxygenase, NSI, or hexanal. Web searches for the specific bundle (98% LOX inactivation, 87% NSI retention, hexanal -71%, OAV 3.1) returned only unrelated microwave/LOX papers (Wang 1987 J Food Sci; soymilk LOX inactivation 2021). The backlog string itself says '1994/compiled', which suggests the numbers were assembled from several sources and then given a single fabricated author-year.",
-        "caveat": "If a real anchor is wanted for microwave LOX inactivation with protein-solubility retention, the nearest genuine paper is Wang & Toledo, 'Inactivation of Soybean Lipoxygenase by Microwave Heating: Effect of Moisture Content and Exposure Time', J Food Sci 52 (1987), 10.1111/j.1365-2621.1987.tb14078.x - but it does not report the repo's four numbers."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Bacher, Eberhardt & M\u00fcller (2023)",
       "score": "7/8",
       "score_value": 7,
@@ -505,36 +445,6 @@
       "verified_citation": "Grosch, W. (1982), in Food Flavours Part A (Morton & MacLeod, eds.), Elsevier, pp. 325-398"
     },
     {
-      "citation": "Hauck & Tressl (1999)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "09_carbohydrate_degradation.md"
-      ],
-      "descriptions": [
-        "ACS HDMF review \u2014 HDMF from iso-oligosaccharides at 140\u00b0C (3.8 \u00b5g/g), maltose (1.4 \u00b5g/g), MGO self-condensation (2.9 \u00b5g/g); no AA required; SIDA."
-      ],
-      "occurrences": [
-        {
-          "file": "09_carbohydrate_degradation.md",
-          "line": 598,
-          "description": "ACS HDMF review \u2014 HDMF from iso-oligosaccharides at 140\u00b0C (3.8 \u00b5g/g), maltose (1.4 \u00b5g/g), MGO self-condensation (2.9 \u00b5g/g); no AA required; SIDA.",
-          "raw_line": "9. `Hauck & Tressl (1999)` \u2014 ACS HDMF review \u2014 HDMF from iso-oligosaccharides at 140\u00b0C (3.8 \u00b5g/g), maltose (1.4 \u00b5g/g), MGO self-condensation (2.9 \u00b5g/g); no AA required; SIDA. 7/8."
-        }
-      ],
-      "registry_id": "hauck_tressl_1999_hdmf_non_amino",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "The DOI stem is impossible: ACS Symposium Series volume 740 is 'Surfactant-Based Separations' (CrossRef 10.1021/bk-2000-0740.ch001, Scamehorn & Harwell), not a flavour/HDMF volume, and no 10.1021/bk-1999-0740.* chapter exists. 'Hauck & Tressl' is a chimera of two unrelated groups: Tobias Hauck published on HDMF with Wilfried Schwab (e.g. Hauck, Landmann, Raab, Bruhlmann & Schwab (2002), Carbohydr. Res. 337:1185-1191, 10.1016/s0008-6215(02)00121-0), while Roland Tressl's 1999 output is 'Heat Generated Flavors and Precursors' with Rewicki (Flavor Chemistry, 10.1007/978-1-4615-4693-1_26). Neither reports HDMF yields of 3.8 / 1.4 / 2.9 ug/g from iso-oligosaccharides, maltose and methylglyoxal self-condensation at 140 C; repeated CrossRef searches on those terms find nothing.",
-        "caveat": "If a non-amino-acid HDMF-formation anchor is needed, Hauck et al. (2002) Carbohydr. Res. 337:1185-1191 (10.1016/s0008-6215(02)00121-0) genuinely shows chemical HDMF formation from D-fructose-1,6-diphosphate without amino acids - but from a phosphorylated sugar, not from oligosaccharides/maltose, and without the repo's ug/g values."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "J. Agric. Food Chem. 2000 (Ref. 22)",
       "score": "7/8",
       "score_value": 7,
@@ -762,36 +672,6 @@
       "verified_citation": "Liu, Cadwallader & Drake (2023), Food Chem. 406:134998"
     },
     {
-      "citation": "Maehashi et al. (2008)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "05_glutathione_peptides.md"
-      ],
-      "descriptions": [
-        "BSB \u2014 TAV for anserine (6.19), carnosine (2.34) in chicken soup; taste contribution reference."
-      ],
-      "occurrences": [
-        {
-          "file": "05_glutathione_peptides.md",
-          "line": 530,
-          "description": "BSB \u2014 TAV for anserine (6.19), carnosine (2.34) in chicken soup; taste contribution reference.",
-          "raw_line": "8. `Maehashi et al. (2008)` \u2014 BSB \u2014 TAV for anserine (6.19), carnosine (2.34) in chicken soup; taste contribution reference. 7/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Enumerated the complete PubMed author record for Maehashi K (esearch 'Maehashi K[Author]', 42 PMIDs): the only 2008 papers are PMID 18037373 'Bitter peptides activate hTAS2Rs, the human bitter receptors' (BBRC 365:851-5) and PMID 17846099 'Riboflavin-binding protein is a novel bitter inhibitor' (Chem Senses 33:57-63). Neither is a chicken-soup taste-activity-value study. CrossRef author search (Maehashi + taste/chicken) returns only the 1999 BBB 63:555-559 umami-peptide paper and a 2003 Meat Science glutamyl-aminopeptidase paper. Fetched the standard chicken-soup taste review (Zhang et al. 2021, Food Sci Nutr, PMC8498081) and it contains no TAV table and no anserine 6.19 / carnosine 2.34 values. Targeted web searches for the literal numbers 6.19 and 2.34 returned nothing.",
-        "caveat": "The claim (TAV anserine 6.19, carnosine 2.34 in chicken soup) may come from a secondary review's table; it is not traceable to any Maehashi 2008 publication. The genuine Maehashi taste paper is Maehashi, Matsuzaki, Yamamoto & Udaka (1999), Biosci. Biotechnol. Biochem. 63:555-559, doi 10.1271/bbb.63.555 (umami-enhancing peptides from food-protein hydrolysates) - but that is not a chicken-soup TAV source either."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Martins & van Boekel (2003)",
       "score": "7/8",
       "score_value": 7,
@@ -895,66 +775,6 @@
         "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
       },
       "verified_citation": "Chen, Oliveira, Dias & Ismail (2025), Plants 14(2):274"
-    },
-    {
-      "citation": "Mottram et al. (2022)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "10_microbial_fermentation.md"
-      ],
-      "descriptions": [
-        "Massey University mro.massey.ac.nz \u2014 20% koji hydrolysate PBMA; sensory meaty aroma/taste vs. control; GC-MS/O; 3-methylbutanal OAV +3\u20135\u00d7."
-      ],
-      "occurrences": [
-        {
-          "file": "10_microbial_fermentation.md",
-          "line": 601,
-          "description": "Massey University mro.massey.ac.nz \u2014 20% koji hydrolysate PBMA; sensory meaty aroma/taste vs. control; GC-MS/O; 3-methylbutanal OAV +3\u20135\u00d7.",
-          "raw_line": "6. `Mottram et al. (2022)` \u2014 Massey University mro.massey.ac.nz \u2014 20% koji hydrolysate PBMA; sensory meaty aroma/taste vs. control; GC-MS/O; 3-methylbutanal OAV +3\u20135\u00d7. 7/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Searched Massey Research Online directly via its DSpace discovery API (https://mro.massey.ac.nz/server/api/discover/search/objects?query=koji) and by web search for a 2022 Massey thesis/paper on koji hydrolysate in plant-based meat analogues with GC-MS/O and 3-methylbutanal OAV. The Massey repository returns no koji / plant-based-meat-analogue item at all (only Monascus red-fermented-rice, fish sauce, apple-pomace fermentation theses), and no Mottram-authored Massey item exists. Donald S. Mottram is a University of Reading meat-flavour chemist with no Massey affiliation and no 2022 koji/PBMA output.",
-        "caveat": "The claim '20% koji hydrolysate PBMA, sensory meaty aroma vs. control, 3-methylbutanal OAV +3-5x' appears fabricated; the author name looks borrowed from the Reading meat-flavour literature. No stable identifier and no matching record exists."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
-      "citation": "Nakagawa et al. (2004)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "PubMed PMID:15165134 \u2014 Genistein IC\u2085\u2080 48 \u00b5M; 82% AGE inhibition at 100 \u00b5M; daidzein 68%; SPI isoflavone correction factor \u221280% for dicarbonyl pool."
-      ],
-      "occurrences": [
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 701,
-          "description": "PubMed PMID:15165134 \u2014 Genistein IC\u2085\u2080 48 \u00b5M; 82% AGE inhibition at 100 \u00b5M; daidzein 68%; SPI isoflavone correction factor \u221280% for dicarbonyl pool.",
-          "raw_line": "1. `Nakagawa et al. (2004)` \u2014 PubMed PMID:15165134 \u2014 Genistein IC\u2085\u2080 48 \u00b5M; 82% AGE inhibition at 100 \u00b5M; daidzein 68%; SPI isoflavone correction factor \u221280% for dicarbonyl pool. 7/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "The cited PMID 15165134 resolves (NCBI esummary) to Xu M, Deng Z, Li M, Li J, Fu H, Proksch P, Lin W (2004), 'Chemical constituents from the mangrove plant, Aegiceras corniculatum', J Nat Prod 67:762-766, doi 10.1021/np030477z - entirely unrelated to genistein or glycation, a confabulation tell. PubMed searches for genistein+glycation (15 hits) and Nakagawa[Author]+genistein+glycation (1 irrelevant review) returned no paper by Nakagawa on isoflavone AGE inhibition, and no source anywhere reporting genistein IC50 48 uM / 82% AGE inhibition at 100 uM / daidzein 68%.",
-        "caveat": "The nearest genuine literature for genistein anti-glycation is Lv, Shao, Chen, Ho et al. (2011), 'Genistein inhibits advanced glycation end product formation by trapping methylglyoxal', Chem Res Toxicol 24:579-586, doi 10.1021/tx100457h, and Kong et al. (2015), Food Chem 183:36-42, doi 10.1016/j.foodchem.2015.02.122. Neither reports the claimed IC50/percentages, and neither supports the repo's '-80% SPI isoflavone correction factor for the dicarbonyl pool', which appears fabricated."
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "Noda, Tanaka & Takahashi (2003)",
@@ -1771,38 +1591,6 @@
       "verified_citation": "Tannenbaum, Young & Archer (1985), 'Vitamins and Minerals', in Fennema (ed.) Food Chemistry, 2nd edn, Marcel Dekker, pp. 477-544"
     },
     {
-      "citation": "Tran et al. (2023 / PMC9846454)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "09_carbohydrate_degradation.md"
-      ],
-      "descriptions": [
-        "WUR/PMC \u2014 Starch reducing-sugar liberation during HME; pea (18.4 \u00b5mol maltose/g) vs. waxy maize (31.8 \u00b5mol/g); TI starch 66% reduction; GC-MS-IS."
-      ],
-      "occurrences": [
-        {
-          "file": "09_carbohydrate_degradation.md",
-          "line": 599,
-          "description": "WUR/PMC \u2014 Starch reducing-sugar liberation during HME; pea (18.4 \u00b5mol maltose/g) vs. waxy maize (31.8 \u00b5mol/g); TI starch 66% reduction; GC-MS-IS.",
-          "raw_line": "10. `Tran et al. (2023 / PMC9846454)` \u2014 WUR/PMC \u2014 Starch reducing-sugar liberation during HME; pea (18.4 \u00b5mol maltose/g) vs. waxy maize (31.8 \u00b5mol/g); TI starch 66% reduction; GC-MS-IS. 7/8."
-        }
-      ],
-      "registry_id": "tran_2023_reducing_sugar_hme",
-      "runtime_artifact_count": 1,
-      "doi": "10.1016/j.crfs.2022.05.006",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "The record is internally inconsistent before any search: repo_id says 'tran_2023' while the SLR citation string says 'Liu et al. (2022)', and the existing DOI is a self-healing conductive hydrogel paper. Multiple CrossRef queries (HME + pea protein/starch + reducing sugar/maltose liberation; extrusion + starch damage + maltose equivalents + pea/waxy maize + thermally inhibited starch, 2020 onward) and web searches on the exact anchors (18.4 umol maltose/g pea, 31.8 umol/g waxy maize, 'TI starch 66% reduction') returned nothing resembling the claim. No paper measuring reducing-sugar liberation in umol maltose equivalents per g during high-moisture extrusion of pea protein could be located under either author name.",
-        "caveat": "The 'TI' in 'TI starch' most likely means thermally-inhibited starch; if the parent agent has a fuller backlog string naming a journal + volume + page, that would be worth one more CrossRef pass. As it stands the whole triple of numbers is unsourced."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
-    },
-    {
       "citation": "VTechWorks thesis",
       "score": "7/8",
       "score_value": 7,
@@ -1828,77 +1616,6 @@
         "status": "self_referential_pointer",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "Wang et al. (2024)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 2,
-      "files": [
-        "07_reducing_sugars.md"
-      ],
-      "descriptions": [
-        "MDPI Foods 14:3453 \u2014 glucosamine synergy; 0.69 \u00b5mol/mL NH\u2082 depletion; 28.3 \u00b5g/g TVC; bitterness lowest.",
-        "Taylor & Francis DOI:10.1080/10942912.2024.2355888 \u2014 GCPs + amino acids; 30.8% TFC increase; OAVs."
-      ],
-      "occurrences": [
-        {
-          "file": "07_reducing_sugars.md",
-          "line": 742,
-          "description": "MDPI Foods 14:3453 \u2014 glucosamine synergy; 0.69 \u00b5mol/mL NH\u2082 depletion; 28.3 \u00b5g/g TVC; bitterness lowest.",
-          "raw_line": "10. `Wang et al. (2024)` \u2014 MDPI Foods 14:3453 \u2014 glucosamine synergy; 0.69 \u00b5mol/mL NH\u2082 depletion; 28.3 \u00b5g/g TVC; bitterness lowest. 7/8."
-        },
-        {
-          "file": "07_reducing_sugars.md",
-          "line": 743,
-          "description": "Taylor & Francis DOI:10.1080/10942912.2024.2355888 \u2014 GCPs + amino acids; 30.8% TFC increase; OAVs.",
-          "raw_line": "11. `Wang et al. (2024)` \u2014 Taylor & Francis DOI:10.1080/10942912.2024.2355888 \u2014 GCPs + amino acids; 30.8% TFC increase; OAVs. 7/8."
-        }
-      ],
-      "registry_id": "wang_2024_glucosamine_synergy",
-      "runtime_artifact_count": 1,
-      "doi": "10.1080/10942912.2024.2355888",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "The repo's DOI 10.3390/foods14193453 is Wu, Wang, Chen, Tan & Fu (2025), 'Physicochemical and Flavor Characteristics of Maillard Reaction Products from Nile Tilapia Fish Skin Collagen Peptides Induced by Four Reducing Sugars' (PMID 41097620) - collagen peptides plus xylose/glucose/fructose/ribose, no glucosamine. A full PubMed sweep of 'glucosamine AND Maillard' (48 records, all scanned) contains no 2024 paper by any Wang on glucosamine synergy; the glucosamine-Maillard literature is Betti's group (Hrynets, Dhungel, Zhao, 2016-2020), Bak et al. (2021, Foods 10:3008) and Yu et al. (2022, Food Chem. 374:131776). Targeted web search for the anchors '0.69 umol/mL amino depletion' and '28.3 ug/g TVC yield' found nothing.",
-        "caveat": "No candidate publication reports the repo's two numeric anchors; the entry looks confabulated. If a glucosamine anchor is still wanted, the nearest real primary sources are Hrynets/Betti's glucosamine non-enzymatic browning series and Bak et al. (2021) on glucosamine in flavour modulation, neither of which contains these numbers."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
-    },
-    {
-      "citation": "Xu, H. et al. (2025)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "05_glutathione_peptides.md"
-      ],
-      "descriptions": [
-        "PMC11743841 \u2014 Peptide sequence hierarchy table; Cys-Gly-Val 2.68\u00d7, GSH 2.25\u00d7, Leu-Cys 1.60\u00d7, Val-Met 0.14\u00d7."
-      ],
-      "occurrences": [
-        {
-          "file": "05_glutathione_peptides.md",
-          "line": 522,
-          "description": "PMC11743841 \u2014 Peptide sequence hierarchy table; Cys-Gly-Val 2.68\u00d7, GSH 2.25\u00d7, Leu-Cys 1.60\u00d7, Val-Met 0.14\u00d7.",
-          "raw_line": "2. `Xu, H. et al. (2025)` \u2014 PMC11743841 \u2014 Peptide sequence hierarchy table; Cys-Gly-Val 2.68\u00d7, GSH 2.25\u00d7, Leu-Cys 1.60\u00d7, Val-Met 0.14\u00d7. 7/8."
-        }
-      ],
-      "registry_id": "xu_2025_peptide_hierarchy",
-      "runtime_artifact_count": 1,
-      "doi": "10.5851/kosfa.2024.e133",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Both identifiers are wrong. 10.1186/s12934-025-02688-w does not resolve in CrossRef, and the NCBI ID converter shows PMC11743841 = 10.5851/kosfa.2024.e133 = Lee, Lee & Jo (2025), 'Application of Animal Resources into the Maillard Reaction Model System to Improve Meat Flavor', Food Sci. Anim. Resour. 45:303-327 (PMID 39840239) - a Korean review with no author named Xu and no peptide reactivity ratios. CrossRef searches for a 2024-2026 paper reporting a cysteine-peptide reactivity hierarchy for 2-methyl-3-furanthiol (Cys-Gly-Val 2.68x, GSH 2.25x) return nothing matching. The claimed source appears fabricated.",
-        "caveat": "The specific ratios 2.68x and 2.25x could not be traced to any publication; if a peptide-vs-free-cysteine MFT anchor is needed it must be sourced afresh."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
     },
     {
       "citation": "Zhang et al. (2009)",
@@ -2113,36 +1830,6 @@
       "verified_citation": "Buera, Chirife, Resnik & Wetzler (1987), J. Food Sci. 52:1063"
     },
     {
-      "citation": "Choi et al. (2024)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "00_framework_scaffold.md"
-      ],
-      "descriptions": [
-        "PMC \u2014 acrylamide + asparagine in garden peas. LC-MS/MS."
-      ],
-      "occurrences": [
-        {
-          "file": "00_framework_scaffold.md",
-          "line": 608,
-          "description": "PMC \u2014 acrylamide + asparagine in garden peas. LC-MS/MS.",
-          "raw_line": "10. `Choi et al. (2024)` \u2014 PMC \u2014 acrylamide + asparagine in garden peas. LC-MS/MS. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "PubMed esearch for 'acrylamide AND (pea OR peas OR Pisum) AND asparagine', 'Choi[Author] AND acrylamide AND 2024[dp]', and 'acrylamide AND asparagine AND 2024[dp] AND liquid chromatography' returns no 2024 paper by any Choi on acrylamide/asparagine in garden peas; the only 2024 PMC-indexed acrylamide+asparagine legume paper is Jung, Baek, Ma & Lee (2024), Food Sci Biotechnol 33:2333-2342, doi 10.1007/s10068-024-01633-w (PMID 39145120, 'Acrylamide formation in air-fryer roasted legumes as affected by legume species and roasting degree: the correlation of acrylamide with asparagine and reducing sugars'), whose authors do not include a Choi. The cited work appears confabulated.",
-        "caveat": "Jung et al. (2024) 10.1007/s10068-024-01633-w is the nearest real anchor for 'acrylamide vs. free asparagine in roasted legumes, 2024, open in PMC', but it is a legume-species roasting study, not a garden-pea-specific LC-MS/MS study, and the author string is different. I did not confirm peas are among its species set."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Deakin University / ref. 42",
       "score": "6/8",
       "score_value": 6,
@@ -2209,98 +1896,6 @@
       "verified_citation": "Esterbauer, Schaur & Zollner (1991), Free Radic. Biol. Med. 11:81-128"
     },
     {
-      "citation": "Forssell et al. (1992)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "JAFC \u2014 1-octen-3-ol from C18:3; ODT 2.7 ng/L; molar yield 12.5% from C18:3."
-      ],
-      "occurrences": [
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 711,
-          "description": "JAFC \u2014 1-octen-3-ol from C18:3; ODT 2.7 ng/L; molar yield 12.5% from C18:3.",
-          "raw_line": "9. `Forssell et al. (1992)` \u2014 JAFC \u2014 1-octen-3-ol from C18:3; ODT 2.7 ng/L; molar yield 12.5% from C18:3. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef author search on 'Forssell' plus bibliographic searches for '1-octen-3-ol' + linolenic/oat in JAFC 1990-1994 returned nothing; WebSearch found only Forssell et al. (1992) 'Comparison of Methods for Separating Polar Lipids from Oat Oil' (Fett Wiss. Technol.), which has no volatile/ODT content. The claim is also chemically wrong: 1-octen-3-ol arises from the 10-hydroperoxide of LINOLEIC acid (C18:2), not from C18:3. No publication supports 'ODT 2.7 ng/L' or '12.5% molar yield from C18:3'.",
-        "caveat": "The genuine anchor for 1-octen-3-ol from lipid oxidation is Hoffmann, G. (1962), '1-Octen-3-ol and its relation to other oxidative cleavage products from esters of linoleic acid', JAOCS 39:439-444, DOI 10.1007/bf02637660 (record verified in CrossRef) - but that is C18:2, not C18:3, and contains neither of the repo's numbers."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
-      "citation": "Henle (2005)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "07_reducing_sugars.md"
-      ],
-      "descriptions": [
-        "Amino Acids 29:313 \u2014 2.3 \u00b5mol CML/g protein from heated soy glycinin; dicarbonyl consumption estimate."
-      ],
-      "occurrences": [
-        {
-          "file": "07_reducing_sugars.md",
-          "line": 746,
-          "description": "Amino Acids 29:313 \u2014 2.3 \u00b5mol CML/g protein from heated soy glycinin; dicarbonyl consumption estimate.",
-          "raw_line": "14. `Henle (2005)` \u2014 Amino Acids 29:313 \u2014 2.3 \u00b5mol CML/g protein from heated soy glycinin; dicarbonyl consumption estimate. 6/8."
-        }
-      ],
-      "registry_id": "henle_2005_glycinin_cml",
-      "runtime_artifact_count": 1,
-      "doi": "10.1007/s00726-005-0200-2",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef search of Amino Acids 2004-2006 for protein-bound CML/glycation returns exactly one Henle 2005 paper: doi 10.1007/s00726-005-0200-2, Amino Acids 29:313-322 (DOI verified live, sole author T. Henle). That is almost certainly what the dead DOI 10.1007/s00726-005-0187-z was meant to be. However it is a REVIEW of protein-bound AGEs in foods, not a heated soy-glycinin model-system study, so it cannot be the source of the repo's '2.3 umol CML/g protein' from soy glycinin or of a dicarbonyl-consumption estimate.",
-        "caveat": "Reported as no_verifiable_source per the verification bar: the paper I can verify for 'Henle (2005)' provably cannot supply the repo's numeric anchors. Use 10.1007/s00726-005-0200-2 only as a general anchor for protein-bound CML in foods, NOT as the source of the soy-glycinin 2.3 umol CML/g figure. Multiple targeted searches for a Henle 2005 soy/glycinin CML model-system paper found nothing."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
-    },
-    {
-      "citation": "Hildebrand & Gardner (1990)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "Phytochemistry \u2014 HPL cleavage stoichiometry 1:1 HPOD \u2192 hexanal; isoform specificity."
-      ],
-      "occurrences": [
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 710,
-          "description": "Phytochemistry \u2014 HPL cleavage stoichiometry 1:1 HPOD \u2192 hexanal; isoform specificity.",
-          "raw_line": "8. `Hildebrand & Gardner (1990)` \u2014 Phytochemistry \u2014 HPL cleavage stoichiometry 1:1 HPOD \u2192 hexanal; isoform specificity. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef searches restricted to Phytochemistry 1988-1992 with author 'Hildebrand', with author 'Gardner' + 'hydroperoxide lyase', and topic queries ('hydroperoxide lyase hexanal 13-hydroperoxide cleavage soybean') return no co-authored Hildebrand & Gardner paper. Hildebrand's only Phytochemistry papers in that window are on linolenate biosynthesis (10.1016/0031-9422(90)80098-2), soybean fatty-acid composition, and Nicotiana floral volatiles - none on HPL. Gardner has no Phytochemistry HPL paper in that window. The citation string appears fabricated.",
-        "caveat": "Nearest genuine anchors for the claim (HPL cleavage of 13-HPOD to hexanal, isoform/tissue specificity in soybean): Gardner, Weisleder & Plattner (1991), 'Hydroperoxide Lyase and Other Hydroperoxide-Metabolizing Activity in Tissues of Soybean, Glycine max', Plant Physiology 97:1059-1072, DOI 10.1104/pp.97.3.1059; and Matoba, Hidaka, Kitamura & Kaizuma (1985), 'Contribution of hydroperoxide lyase activity to n-hexanal formation in soybean', JAFC 33:856-858, DOI 10.1021/jf00065a022. Neither is Phytochemistry 1990 and I did not confirm an explicit 1:1 HPOD->hexanal stoichiometry figure in either."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Ince et al. (2024)",
       "score": "6/8",
       "score_value": 6,
@@ -2330,36 +1925,6 @@
       }
     },
     {
-      "citation": "Ishii & Saito (1991)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "04_nucleotide_degradation.md"
-      ],
-      "descriptions": [
-        "JAFC \u2014 hypoxanthine bitterness threshold 0.5 mM; OAV framework for bitter metabolite."
-      ],
-      "occurrences": [
-        {
-          "file": "04_nucleotide_degradation.md",
-          "line": 613,
-          "description": "JAFC \u2014 hypoxanthine bitterness threshold 0.5 mM; OAV framework for bitter metabolite.",
-          "raw_line": "11. `Ishii & Saito (1991)` \u2014 JAFC \u2014 hypoxanthine bitterness threshold 0.5 mM; OAV framework for bitter metabolite. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef author searches (Ishii; Saito) combined with 'hypoxanthine', 'bitter', 'taste threshold' return no such paper; the only Ishii taste papers of that era are Ishii & O'Mahony psychophysics papers on umami/salty taste concepts (Chem. Senses, J. Food Sci., J. Sensory Studies), none in JAFC and none on hypoxanthine. PubMed 'Ishii[Author] AND Saito[Author] AND 1991[DP] AND taste' returns 0 records; PubMed hypoxanthine+taste in title/abstract returns only 2 unrelated records (Ichimura et al. 2017 Anim Sci J 'Hypoxanthine enhances the cured meat taste', 10.1111/asj.12625, and a 2026 bamboo fertilizer paper). No publication supports 'Ishii & Saito (1991), JAFC, hypoxanthine bitterness threshold 0.5 mM'.",
-        "caveat": "If an anchor for hypoxanthine taste activity is still wanted, Ichimura, Nakamura, Yoshida & Hattori (2017), Anim. Sci. J. 88:379-385, doi:10.1111/asj.12625 is a genuine primary source on hypoxanthine and meat taste, but it does not report a 0.5 mM bitterness threshold and it is not a JAFC 1991 paper."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "JAFC DOI:10.1021/acs.jafc.3c05991",
       "score": "6/8",
       "score_value": 6,
@@ -2387,38 +1952,6 @@
         "confidence": "high",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "Kamal-Eldin et al. (2003)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "02_lipid_oxidation.md"
-      ],
-      "descriptions": [
-        "Lipids \u2014 triolein oxidation; \u03b2-scission coefficients for C18:1; triplicates."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 603,
-          "description": "Lipids \u2014 triolein oxidation; \u03b2-scission coefficients for C18:1; triplicates.",
-          "raw_line": "15. `Kamal-Eldin et al. (2003)` \u2014 Lipids \u2014 triolein oxidation; \u03b2-scission coefficients for C18:1; triplicates. 6/8."
-        }
-      ],
-      "registry_id": "kamal_eldin_2003_triolein_scission",
-      "runtime_artifact_count": 1,
-      "doi": "10.1002/ejlt.200390032",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "The only real Kamal-Eldin 2003 triolein paper is Kamal-Eldin, Velasco & Dobarganes, 'Oxidation of mixtures of triolein and trilinolein at elevated temperatures', Eur. J. Lipid Sci. Technol. 105:165-170, doi 10.1002/ejlt.200390032 (verified in CrossRef). But that study measures peroxide value, total polar compounds, TAG polymers and triolein/trilinolein loss -- it quantifies no volatile aldehydes at all, so it cannot report 'octanal 3.5%' or 'nonanal 4.2%' C18:1 scission yields. The dead DOI 10.1007/s11745-003-1082-x is a Lipids prefix; no Kamal-Eldin Lipids 2003 triolein-volatiles paper exists in CrossRef.",
-        "caveat": "Nearest real anchors for octanal/nonanal from heated triolein, neither of which reports the repo's percentages: Kamal-Eldin et al. (2003), EJLST 105:165-170, doi 10.1002/ejlt.200390032 (right authors/year/substrate, no volatiles); and Warner, Neff, Byrdwell & Gardner (2001), 'Effect of Oleic and Linoleic Acids on the Production of Deep-Fried Odor in Heated Triolein and Trilinolein', JAFC 49:899-905, doi 10.1021/jf000822f (does report octanal and nonanal from triolein, but is not Kamal-Eldin and the 3.5%/4.2% split was not found in it). Treat the scission-yield split as unsourced."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
     },
     {
       "citation": "LAB pH routing compiled refs 34, 38\u201341",
@@ -2485,38 +2018,6 @@
         "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
       },
       "verified_citation": "Yu et al. (2020), J. Agric. Food Chem. 68:1714-1724"
-    },
-    {
-      "citation": "Malia et al. (2025)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "00_framework_scaffold.md"
-      ],
-      "descriptions": [
-        "Food Res Int, PMC12745828 \u2014 free SH in pea protein. Ellman."
-      ],
-      "occurrences": [
-        {
-          "file": "00_framework_scaffold.md",
-          "line": 605,
-          "description": "Food Res Int, PMC12745828 \u2014 free SH in pea protein. Ellman.",
-          "raw_line": "7. `Malia et al. (2025)` \u2014 Food Res Int, PMC12745828 \u2014 free SH in pea protein. Ellman. 6/8."
-        }
-      ],
-      "registry_id": "malia_2025_pea_free_sh_crosscheck",
-      "runtime_artifact_count": 1,
-      "doi": "10.1016/j.crfs.2025.101173",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "No publication by an author 'Malia' on pea protein exists: PubMed esearch 'Malia[Author] AND pea' returns zero records; CrossRef author search 'Malia' + pea/sulfhydryl/Ellman 2025 returns only unrelated items (law encyclopedia, PDB antibody structures, nursing theses); a CrossRef container search of Food Hydrocolloids 2024-2025 for pea-protein free-sulfhydryl work returns no matching paper; web search likewise found nothing. The attached DOI (10.1016/j.foodhyd.2024.110509) is an unrelated wheat-starch paper, so there is no thread back to a real source.",
-        "caveat": "The citation string itself ('Malia et al. 2025') appears confabulated. The entry is only a 'supportive crosscheck' for pea free-SH, so it is a candidate for deletion rather than repair; if a free-SH prior is needed, a real pea-protein Ellman source should be selected deliberately."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
     },
     {
       "citation": "Mottram (1998)",
@@ -2909,36 +2410,6 @@
       }
     },
     {
-      "citation": "Resmini & Pellegrino (1994)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "07_reducing_sugars.md"
-      ],
-      "descriptions": [
-        "Int Dairy J \u2014 Amadori stability constants; fructose ARP 10\u00d7 less stable than parent sugar."
-      ],
-      "occurrences": [
-        {
-          "file": "07_reducing_sugars.md",
-          "line": 739,
-          "description": "Int Dairy J \u2014 Amadori stability constants; fructose ARP 10\u00d7 less stable than parent sugar.",
-          "raw_line": "7. `Resmini & Pellegrino (1994)` \u2014 Int Dairy J \u2014 Amadori stability constants; fructose ARP 10\u00d7 less stable than parent sugar. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef search restricted to author=Pellegrino AND container-title='International Dairy Journal' for 1992-1997 returns exactly one Resmini/Pellegrino item: 'Coupling of lactulose and furosine indices for quality evaluation of sterilized milk', Int Dairy J 5:647-659 (1995), 10.1016/0958-6946(95)00036-3 - a heat-damage index paper, not Amadori stability constants. The real Resmini & Pellegrino 1994 publication is on protein-bound lysylpyrrolaldehyde in dried pasta (Cereal Chemistry 71), not Int Dairy J. No publication was found reporting 'fructose ARP 10x less stable than the parent sugar'; that claim also reads as chemically garbled (an Amadori product is compared to a sugar).",
-        "caveat": "Nearest genuine Resmini & Pellegrino Int Dairy J paper is 10.1016/0958-6946(95)00036-3 (1995), but it supplies furosine/lactulose heat indices, not Amadori stability constants."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Sessa & Rackis (1977/compiled)",
       "score": "6/8",
       "score_value": 6,
@@ -2966,66 +2437,6 @@
         "confidence": "high",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "Shaw (1990)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "09_carbohydrate_degradation.md"
-      ],
-      "descriptions": [
-        "JAFC \u2014 Maltol yield: maltose/lactose 46\u201349\u00d7 glucose; 1,4-glycosidic linkage obligatory; sucrose gives near-zero maltol; GC-FID IS."
-      ],
-      "occurrences": [
-        {
-          "file": "09_carbohydrate_degradation.md",
-          "line": 597,
-          "description": "JAFC \u2014 Maltol yield: maltose/lactose 46\u201349\u00d7 glucose; 1,4-glycosidic linkage obligatory; sucrose gives near-zero maltol; GC-FID IS.",
-          "raw_line": "8. `Shaw (1990)` \u2014 JAFC \u2014 Maltol yield: maltose/lactose 46\u201349\u00d7 glucose; 1,4-glycosidic linkage obligatory; sucrose gives near-zero maltol; GC-FID IS. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "No publication by any 'Shaw' on maltol formation from disaccharides exists in CrossRef. Searched: query.title='maltol' filtered to JAFC (ISSN 0021-8561) across all years - only 10 hits, none by Shaw and none about maltol yield from maltose/lactose vs glucose; query.author='Shaw' + maltol/disaccharide bibliographic searches return only unrelated work (Shaw P.E. publishes on citrus juice volatiles, not maltol); web search for the '46-49x' ratio and the 1,4-glycosidic-linkage requirement returns nothing. The citation 'Shaw (1990), JAFC' appears to be confabulated.",
-        "caveat": "The underlying phenomenon is real and has genuine anchors, but they are different papers and I could not confirm the 46-49x figures in either: Yaylayan & Mandeville (1994), 'Stereochemical Control of Maltol Formation in Maillard Reaction', JAFC 42:771-775, DOI 10.1021/jf00039a034; and Kramhoeller, Pischetsrieder & Severin (1993), 'Maillard reactions of lactose and maltose', JAFC 41:347-351, DOI 10.1021/jf00027a002. Neither is 'Shaw (1990)' and neither was verified to contain the 46-49x maltol ratio or the near-zero-from-sucrose result."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
-      "citation": "Shibamoto et al. (1980)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "JAFC \u2014 2-pentylfuran from C18:2 conjugated dienes; ODT 6 ppb; triplicates."
-      ],
-      "occurrences": [
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 712,
-          "description": "JAFC \u2014 2-pentylfuran from C18:2 conjugated dienes; ODT 6 ppb; triplicates.",
-          "raw_line": "10. `Shibamoto et al. (1980)` \u2014 JAFC \u2014 2-pentylfuran from C18:2 conjugated dienes; ODT 6 ppb; triplicates. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "PubMed author search 'Shibamoto T[au] AND (furan OR pentylfuran OR lipid)' (87 hits scanned) shows no 1980 JAFC 2-pentylfuran paper; CrossRef JAFC 1977-1984 page/bibliographic scans and a general '2-pentylfuran formation from linoleic acid' search returned nothing by Shibamoto. The primary literature on 2-pentylfuran from linoleate is Chang et al. (1966, Chem. Ind.) and Ho, Smagula & Chang (1978, JAOCS), not Shibamoto 1980, and the classical flavour threshold quoted for 2-pentylfuran in oil is ~1-10 ppm, not 6 ppb.",
-        "caveat": "The phenomenon (2-pentylfuran from linoleic acid autoxidation, soybean-oil reversion flavour) is real and well documented; only the Shibamoto-1980 citation and the '6 ppb' threshold could not be traced to any record."
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "Shu et al. (2024)",
@@ -3096,66 +2507,6 @@
       }
     },
     {
-      "citation": "Van Ruth et al. (2002)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "BACKLOG",
-      "occurrence_count": 1,
-      "files": [
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "JAFC \u2014 olfactory synergy factor 2.1\u00d7 for hexanal + 2-pentylfuran; 3-AFC methodology; n=20."
-      ],
-      "occurrences": [
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 703,
-          "description": "JAFC \u2014 olfactory synergy factor 2.1\u00d7 for hexanal + 2-pentylfuran; 3-AFC methodology; n=20.",
-          "raw_line": "3. `Van Ruth et al. (2002)` \u2014 JAFC \u2014 olfactory synergy factor 2.1\u00d7 for hexanal + 2-pentylfuran; 3-AFC methodology; n=20. 6/8."
-        }
-      ],
-      "registry_id": null,
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Enumerated van Ruth's 2000-2004 output in CrossRef and PubMed. Her only 2002 JAFC paper is van Ruth, King & Giannouli, 'Influence of Lipid Fraction, Emulsifier Fraction, and Mean Particle Diameter of Oil-in-Water Emulsions on the Release of 20 Aroma Compounds', JAFC 50:2365-2371 (10.1021/jf011072s, PMID 11929298) - a headspace partition/release study, not a 3-AFC odour-threshold synergy study. Her other 2002 paper (Food Chem. 79:157-164) is on air/liquid partition coefficients. Web search for a hexanal + 2-pentylfuran synergy factor via 3-AFC finds no such study by van Ruth or anyone else. The claimed '2.1x olfactory synergy factor, 3-AFC, n=20' is not supported by any locatable publication.",
-        "caveat": "van Ruth's work is on physicochemical aroma release, not perceptual mixture interaction; the whole premise of this citation looks confabulated. Genuine 3-AFC mixture-interaction anchors exist (e.g. Atanasova et al. 2005 Chem. Senses 30:209, 10.1093/chemse/bji016) but none covers hexanal + 2-pentylfuran."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
-      "citation": "Wang et al. (2023)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "10_microbial_fermentation.md"
-      ],
-      "descriptions": [
-        "PMC12984349 \u2014 activation energy reduction ~15\u201320% esterification; ~10\u201312% Strecker; isoamyl acetate 4.2 \u00b5g/g vs. trace; GC-MS; IS stated."
-      ],
-      "occurrences": [
-        {
-          "file": "10_microbial_fermentation.md",
-          "line": 602,
-          "description": "PMC12984349 \u2014 activation energy reduction ~15\u201320% esterification; ~10\u201312% Strecker; isoamyl acetate 4.2 \u00b5g/g vs. trace; GC-MS; IS stated.",
-          "raw_line": "7. `Wang et al. (2023)` \u2014 PMC12984349 \u2014 activation energy reduction ~15\u201320% esterification; ~10\u201312% Strecker; isoamyl acetate 4.2 \u00b5g/g vs. trace; GC-MS; IS stated. 6/8."
-        }
-      ],
-      "registry_id": "wang_2023_mft_retention",
-      "runtime_artifact_count": 2,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "The PMCID in the repo description resolves cleanly but to a completely different paper than claimed: NCBI ID converter maps PMC12984349 -> DOI 10.3390/foods15050849, PMID 41829125 = Duan et al. (2026), 'Biomimetic Fermentation Reshapes Precursor Pools to Drive Synergistic Roasting Reactions and Enhance Coffee Flavor Complexity', Foods 15(5):849 - not 'Wang et al. (2023)'. I read the PMC full text: it reports no isoamyl acetate concentration at all (no 4.2 ug/g value, no trace-level control comparison), and it reports no percentage activation-energy reductions - its only energetic statement is a lowering of activation free-energy barriers by ~8.5 kcal/mol, with no 15-20% esterification or 10-12% Strecker split. The only element of the repo description that checks out is the analytical method (SPME-GC-MS with 2-octanol at 1.00 mg/mL as internal standard).",
-        "caveat": "Both the citation string (Wang 2023) and every numeric anchor appear confabulated. If a fermentation/roasting precursor-pool anchor is wanted, 10.3390/foods15050849 is a real and topically adjacent paper for family 10, but it does not supply any of the claimed numbers."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Xiang et al. (2025)",
       "score": "6/8",
       "score_value": 6,
@@ -3183,108 +2534,6 @@
         "confidence": "high",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "Xu et al. (2024)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "02_lipid_oxidation.md"
-      ],
-      "descriptions": [
-        "PMC12309933 \u2014 soybean PBMA storage hexanal; triplicates; IS."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 601,
-          "description": "PMC12309933 \u2014 soybean PBMA storage hexanal; triplicates; IS.",
-          "raw_line": "13. `Xu et al. (2024)` \u2014 PMC12309933 \u2014 soybean PBMA storage hexanal; triplicates; IS. 6/8."
-        }
-      ],
-      "registry_id": "xu_2024_soybean_pbma_hexanal",
-      "runtime_artifact_count": 1,
-      "doi": "10.1016/j.fochx.2025.102795",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Searched CrossRef (author 'Xu' + hexanal/soy meat analogue restricted to 2024; Foods 2024 + 'plant-based meat analogue hexanal storage volatile') and the web for a 2024 soy PBMA paper reporting the payload's claim ('185 ppb hexanal at 4 C after 14 days', from data/lit/flavor_reference_payloads.json). Nothing matches: no 2024 Xu-authored soy PBMA storage-hexanal paper appears anywhere, and the recorded DOI 10.3390/foods13091393 is the unrelated Spizzirri & Restuccia food-waste editorial. The nearest real papers are Sun et al. (2025), Food Chemistry: X, DOI 10.1016/j.fochx.2025.102795 (soybean meat analogue at 4 C vs -18 C - but no per-timepoint hexanal values in the main text, and hexanal decreases rather than accumulating) and Nagassa et al. (2025), Food Chemistry 481:144025, DOI 10.1016/j.foodchem.2025.144025 ('The development of volatile off-flavor compounds in soy protein isolates and plant meat during storage'). Neither is by Xu, neither is 2024, and I could not confirm 185 ppb in either.",
-        "caveat": "Nagassa et al. 2025 (10.1016/j.foodchem.2025.144025) is the closest topical substitute if a soy-PBMA storage-hexanal anchor is needed, but its numbers were not verified and it cannot be the source of a '2024 Xu' 185 ppb figure. Recommend treating the 185 ppb payload as unsourced until a human re-anchors it."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
-    },
-    {
-      "citation": "Yeo & Shibamoto (1991)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 2,
-      "files": [
-        "02_lipid_oxidation.md",
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "JAFC 39:370 \u2014 PL fraction accounts for 82\u201388% of WOF hexanal; absolute values.",
-        "JAFC \u2014 LOX D-value table (70\u00b0C D=28 min, z~10\u00b0C); hexanal OAV comparison pre/post."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 602,
-          "description": "JAFC 39:370 \u2014 PL fraction accounts for 82\u201388% of WOF hexanal; absolute values.",
-          "raw_line": "14. `Yeo & Shibamoto (1991)` \u2014 JAFC 39:370 \u2014 PL fraction accounts for 82\u201388% of WOF hexanal; absolute values. 6/8."
-        },
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 714,
-          "description": "JAFC \u2014 LOX D-value table (70\u00b0C D=28 min, z~10\u00b0C); hexanal OAV comparison pre/post.",
-          "raw_line": "12. `Yeo & Shibamoto (1991)` \u2014 JAFC \u2014 LOX D-value table (70\u00b0C D=28 min, z~10\u00b0C); hexanal OAV comparison pre/post. 6/8."
-        }
-      ],
-      "registry_id": "yeo_shibamoto_1991_wof_hexanal",
-      "runtime_artifact_count": 1,
-      "doi": "10.1021/jf00002a029",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Enumerated Yeo & Shibamoto's 1991 output via CrossRef author search: all of it is microwave Maillard model-system work - 'Effects of moisture content on the Maillard browning model system upon microwave irradiation' (JAFC 39:1860, 10.1021/jf00010a035), 'Microwave-induced volatiles of the Maillard model system under different pH conditions' (JAFC 39:370, 10.1021/jf00002a029), 'Flavor and browning enhancement by electrolytes during microwave irradiation of the Maillard model system' (JAFC 39:948, 10.1021/jf00005a030). None concerns warmed-over flavour, phospholipid-derived hexanal, or lipoxygenase thermal inactivation. Targeted searches for the anchors (phospholipid fraction 82-88% of hexanal; LOX D-value 28 min) returned nothing.",
-        "caveat": "The entry fuses two unrelated claims under a citation that supports neither. For the phospholipid-dominance phenomenon the canonical anchor is Igene & Pearson (1979), 'Role of Phospholipids and Triglycerides in Warmed-Over Flavor Development in Meat Model Systems', J. Food Sci. 44:1285-1290, doi 10.1111/j.1365-2621.1979.tb06420.x - but I did NOT confirm the 82-88% figure in it, and it says nothing about a 28 min LOX D-value, which needs a separate lipoxygenase thermal-inactivation source."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
-    },
-    {
-      "citation": "Yu et al. (2021)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "01_amino_acid_sugar.md"
-      ],
-      "descriptions": [
-        "Xylose + corn protein hydrolysate, two-phase kinetics, absolute volatiles, triplicates."
-      ],
-      "occurrences": [
-        {
-          "file": "01_amino_acid_sugar.md",
-          "line": 609,
-          "description": "Xylose + corn protein hydrolysate, two-phase kinetics, absolute volatiles, triplicates.",
-          "raw_line": "4. `Yu et al. (2021)` \u2014 Xylose + corn protein hydrolysate, two-phase kinetics, absolute volatiles, triplicates. 6/8."
-        }
-      ],
-      "registry_id": "yu_2021_corn_hydrolysate_kinetics",
-      "runtime_artifact_count": 0,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "10.1016/j.lwt.2021.111802 is Patel, Andrade & Rousseau 2021 on W/O emulsion digestion (audit confirmed). CrossRef searches on 'corn protein hydrolysate xylose Maillard volatile' restricted to 2019-2022, plus author-scoped searches on Yu, and web searches for the 100 C / 60 min absolute-volatile dataset, returned no 2021 paper by any Yu on xylose + corn protein hydrolysate volatile kinetics. The nearest real 2021 corn-peptide/xylose paper is Feng, Zhou, Wang, Wang & Xia, Food Bioscience 41:100951, doi 10.1016/j.fbio.2021.100951, but it is about alpha-dicarbonyls and antimicrobial/antioxidant activity, has no author named Yu, and reports no pyrazine or Strecker-aldehyde absolute yields.",
-        "caveat": "The closest genuine match for the repo's described content (xylose + corn protein hydrolysate, staged kinetics, characteristic volatiles) is Li X, Yao Y, Xia X, Zhang F et al. (2024), 'Maillard Reaction Process and Characteristic Volatile Compounds Formed During Secondary Thermal Degradation ... in the Reaction of Xylose-Corn Protein Hydrolysate', JAFC 72:647-656, doi 10.1021/acs.jafc.3c08082 (PMID 38115213) - wrong authors and wrong year for this citation, and I did not verify it contains absolute volatile concentrations at 100 C / 60 min in triplicate. Also note the separate confusion risk with Yu H et al. (2020), Food Chem 317:126458, which is a real 'Yu' Maillard-kinetics paper but on furosine/pyrraline in glucose-lysine."
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "ACS APTS (Ref. 24)",
@@ -3469,36 +2718,6 @@
       }
     },
     {
-      "citation": "Blank & Grosch (1991)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "04_nucleotide_degradation.md"
-      ],
-      "descriptions": [
-        "JAFC 39:1207 \u2014 HDMF in boiled beef 28\u201367 \u00b5g/kg; OAV 4.7\u201311.2; SIDA."
-      ],
-      "occurrences": [
-        {
-          "file": "04_nucleotide_degradation.md",
-          "line": 605,
-          "description": "JAFC 39:1207 \u2014 HDMF in boiled beef 28\u201367 \u00b5g/kg; OAV 4.7\u201311.2; SIDA.",
-          "raw_line": "5. `Blank & Grosch (1991)` \u2014 JAFC 39:1207 \u2014 HDMF in boiled beef 28\u201367 \u00b5g/kg; OAV 4.7\u201311.2; SIDA. 8/8."
-        }
-      ],
-      "registry_id": "blank_grosch_1991_hdmf_anchor",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "The backlog page reference 'JAFC 39:1207' is fabricated: I enumerated all CrossRef records for JAFC volume 39 pages 1195-1220 and p.1207 falls inside Mirvish et al., 'N-Nitrosoatrazine: synthesis, kinetics of formation...', JAFC 39:1205-1210 (10.1021/jf00007a002) - no HDMF paper occupies that page. CrossRef author search for Blank+Grosch 1990-1993 returns only 'Evaluation of Potent Odorants in Dill Seed and Dill Herb by Aroma Extract Dilution Analysis', J. Food Sci. 56:63-67 (10.1111/j.1365-2621.1991.tb07976.x) - not HDMF, not boiled beef. Neither the SLR anchors ('HDMF ODT 0.003 ppb', '78% from ribose+glucose') nor the backlog anchors ('HDMF in boiled beef 28-67 ug/kg, OAV 4.7-11.2') can be tied to any Blank & Grosch 1991 publication.",
-        "caveat": "Nearest genuine Blank sources on HDMF, neither of which is 1991 nor supplies these numbers: Blank & Fay (1996), 'Formation of 4-Hydroxy-2,5-dimethyl-3(2H)-furanone and 4-Hydroxy-2(or 5)-ethyl-5(or 2)-methyl-3(2H)-furanone through Maillard Reaction Based on Pentose Sugars', JAFC 44:531-536, doi:10.1021/jf950439o; and Blank, Fay, Lakner & Schlosser (1997), JAFC 45:2642-2648, doi:10.1021/jf960997i (SIDA quantification of HDMF/HEMF in pentose Maillard model systems). Do not attach the 0.003 ppb threshold to either without reading them."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Blank et al. (2001)",
       "score": "8/8",
       "score_value": 8,
@@ -3526,45 +2745,6 @@
         "confidence": "high",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "Blank, Devaud & Grosch (2003)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "07_reducing_sugars.md"
-      ],
-      "descriptions": [
-        "JAFC DOI:10.1021/jf026123f \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; SIDA with [\u00b2H\u2083]-HDMF; triplicates."
-      ],
-      "occurrences": [
-        {
-          "file": "07_reducing_sugars.md",
-          "line": 733,
-          "description": "JAFC DOI:10.1021/jf026123f \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; SIDA with [\u00b2H\u2083]-HDMF; triplicates.",
-          "raw_line": "3. `Blank, Devaud & Grosch (2003)` \u2014 JAFC DOI:10.1021/jf026123f \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; SIDA with [\u00b2H\u2083]-HDMF; triplicates. 8/8."
-        }
-      ],
-      "registry_id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "runtime_artifact_count": 1,
-      "doi": "10.1021/jf034037p",
-      "doi_resolution": {
-        "basis": "The repo's own DOI 10.1021/jf026123f resolves (HTTP 200) but is Cerny & Davidek (2003), 'Formation of Aroma Compounds from Ribose and Cysteine during the Maillard Reaction', JAFC 51:2714 - unrelated to G6P/HDMF. A PubMed search for ('glucose-6-phosphate' AND (furanone OR furaneol OR Maillard)) returned this JAFC 2003 paper, whose abstract (read in full via efetch) states that glucose-6-phosphate 'stabilized 1- and 3-deoxyglucosone intermediates and increased the subsequent formation of ... 4-hydroxy-2,5-dimethyl-3-(2H)-furanone (Furaneol)' relative to glucose - i.e. exactly the G6P -> HDMF enhancement the repo encodes.",
-        "confidence": "medium",
-        "date": "2026-08-26",
-        "caveat": "Authors/citation string are entirely wrong (Yaylayan et al., not Blank/Devaud/Grosch). The method is pyrolysis-GC/MS, NOT SIDA with [2H3]-HDMF, and the abstract gives fold-enhancements of 9x/6x/5x for other analytes; the specific '4.4x vs glucose' multiplier for HDMF is NOT confirmed and may be fabricated."
-      },
-      "citation_repair": {
-        "old": "Blank, Devaud & Grosch (2003)",
-        "new": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358",
-        "date": "2026-08-26",
-        "basis": "The repo's own DOI 10.1021/jf026123f resolves (HTTP 200) but is Cerny & Davidek (2003), 'Formation of Aroma Compounds from Ribose and Cysteine during the Maillard Reaction', JAFC 51:2714 - unrelated to G6P/HDMF. A PubMed search for ('glucose-6-phosphate' AND (furanone OR furaneol OR Maillard)) returned this JAFC 2003 paper, whose abstract (read in full via efetch) states that glucose-6-phosphate 'stabilized 1- and 3-deoxyglucosone intermediates and increased the subsequent formation of ... 4-hydroxy-2,5-dimethyl-3-(2H)-furanone (Furaneol)' relative to glucose - i.e. exactly the G6P -> HDMF enhancement the repo encodes.",
-        "new_field": "verified_citation",
-        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
-      },
-      "verified_citation": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358"
     },
     {
       "citation": "Cerny & Guntz-Dubini (2008)",
@@ -3604,36 +2784,6 @@
         "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
       },
       "verified_citation": "Cerny & Briffod (2007), JAFC 55:1552-1556"
-    },
-    {
-      "citation": "Comunian et al. (2021)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "03_thiamine_degradation.md"
-      ],
-      "descriptions": [
-        "Food Res Int 144:110345 \u2014 encapsulation comparison; alginate 84% retention; cook-triggered release."
-      ],
-      "occurrences": [
-        {
-          "file": "03_thiamine_degradation.md",
-          "line": 583,
-          "description": "Food Res Int 144:110345 \u2014 encapsulation comparison; alginate 84% retention; cook-triggered release.",
-          "raw_line": "4. `Comunian et al. (2021)` \u2014 Food Res Int 144:110345 \u2014 encapsulation comparison; alginate 84% retention; cook-triggered release. 8/8."
-        }
-      ],
-      "registry_id": "comunian_2021_thiamine_encapsulation",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Direct DOI lookup of 10.1016/j.foodres.2021.110345 (the DOI implied by 'Food Res Int 144:110345') returns HTTP 404 -- that Food Research International article number does not exist. A CrossRef listing of all 2021 works by any author named Comunian (20 records) shows T. A. Comunian published only a Crit Rev Food Sci Nutr review and an Elsevier book chapter in 2021, neither on thiamine; PubMed 'Comunian[Author] AND (thiamine OR thiamin)' returns nothing. No Comunian thiamine-encapsulation paper exists.",
-        "caveat": "If a thiamine-stability prior is needed for this slot, the real Mauer-group work is Voelker et al. 2018 (10.1016/j.foodres.2018.06.056) and Voelker et al. 2021 (10.1016/j.foodres.2020.110084) -- neither is an encapsulation-retention comparison, so the 'alginate 84% retention / cook-triggered release' anchor remains unsourced."
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
@@ -3777,68 +2927,6 @@
       }
     },
     {
-      "citation": "Hofmann, Schieberle & Grosch (1996)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "03_thiamine_degradation.md"
-      ],
-      "descriptions": [
-        "JAFC 44:2873 \u2014 efficiency comparison thiamine vs. Cys/ribose at beef-realistic concentrations; SIDA; OAVs."
-      ],
-      "occurrences": [
-        {
-          "file": "03_thiamine_degradation.md",
-          "line": 581,
-          "description": "JAFC 44:2873 \u2014 efficiency comparison thiamine vs. Cys/ribose at beef-realistic concentrations; SIDA; OAVs.",
-          "raw_line": "2. `Hofmann, Schieberle & Grosch (1996)` \u2014 JAFC 44:2873 \u2014 efficiency comparison thiamine vs. Cys/ribose at beef-realistic concentrations; SIDA; OAVs. 8/8."
-        }
-      ],
-      "registry_id": "hofmann_schieberle_grosch_1996",
-      "runtime_artifact_count": 3,
-      "doi": "10.1021/jf9500703",
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "There is exactly one real Hofmann, Schieberle & Grosch 1996 JAFC paper - 'Model Studies on the Oxidative Stability of Odor-Active Thiols Occurring in Food Flavors', JAFC 44:251-255, doi 10.1021/jf9500703 (verified live in CrossRef with those three authors) - but it is about oxidative DEGRADATION/stability of thiols, contains no thiamine-to-MFT conversion yields and no cysteine augmentation factor, so it cannot carry the repo's anchors. No 1996 publication reporting 'conversion 0.021%' or 'Cys 2.3x MFT' from thiamine was found. The audit's quarantine call (MFT = 3.14 ppb) is corroborated.",
-        "caveat": "The claimed parameter type does exist in the literature, but in a different paper: Hofmann & Schieberle (1998), 'Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol', JAFC 46:235-241, doi 10.1021/jf9705983 (PMID 10554225), which reports stable-isotope-dilution molar yields of MFT (max 1.4 mol% from hydroxyacetaldehyde + mercapto-2-propanone) and states that 'thiamin and norfuraneol/cysteine were less effective precursors of MFT'. That paper is two authors, 1998, and I could NOT confirm 0.021% or a 2.3x cysteine factor in it. Recommendation: drop the entry, or re-point it at 10.1021/jf9705983 and re-extract the yields from the primary tables."
-      },
-      "source_status": "repaired_see_doi",
-      "source_status_note": "2026-08-27: stale no_verifiable_source flag removed \u2014 the round-2 repair pass installed a verified DOI but left the pre-repair flag in place (caught by scripts/ci/citation_gate.py)."
-    },
-    {
-      "citation": "Hrncirik & Zeelenberg (2014)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "02_lipid_oxidation.md"
-      ],
-      "descriptions": [
-        "JAFC 62:9666 \u2014 coconut oil thermal profile; \u03b4-decalactone OAV; comparative to PUFA oils."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 588,
-          "description": "JAFC 62:9666 \u2014 coconut oil thermal profile; \u03b4-decalactone OAV; comparative to PUFA oils.",
-          "raw_line": "2. `Hrncirik & Zeelenberg (2014)` \u2014 JAFC 62:9666 \u2014 coconut oil thermal profile; \u03b4-decalactone OAV; comparative to PUFA oils. 8/8."
-        }
-      ],
-      "registry_id": "hrncirik_2014_coconut_oil_thermal_profile",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Two independent checks kill this citation. (1) I paged the complete CrossRef index of J. Agric. Food Chem. volume 62 / 2014 (1561 records) and inspected every article whose first page falls in 9640-9670: pages 9657-9668 are occupied by Zhang, Lu & Yang, 'Chemical Modification and Degradation of Atrazine in Medicago sativa' - so 'JAFC 62:9666' is inside an unrelated agrochemistry paper and no article starts at 9666. (2) The only Hrncirik & Zeelenberg co-authored paper in CrossRef is 'Stability of Essential Fatty Acids and Formation of Nutritionally Undesirable Compounds in Baking and Shallow Frying', JAOCS 91(4):591-598, 10.1007/s11746-013-2401-2 - I read its abstract: sunflower/rapeseed oil, margarines and butter in sponge cake and fried potato, endpoints are EFA retention, trans fatty acids and polymerised triacylglycerols. No coconut oil, no lactones, no OAV.",
-        "caveat": "10.1007/s11746-013-2401-2 (Hrncirik & Zeelenberg 2014, JAOCS 91:591-598) is a real paper by the cited authors in the cited year, so the author-year string may have been lifted from it - but it cannot support a coconut-oil thermal profile or a delta-decalactone OAV."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Huang (2022)",
       "score": "8/8",
       "score_value": 8,
@@ -3960,83 +3048,6 @@
       }
     },
     {
-      "citation": "JAFC DOI:10.1021/jf034037p (2003)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "04_nucleotide_degradation.md"
-      ],
-      "descriptions": [
-        "G6P \u2192 HDMF 4.4\u00d7 vs. glucose; phosphorylated sugar HDMF yields."
-      ],
-      "occurrences": [
-        {
-          "file": "04_nucleotide_degradation.md",
-          "line": 604,
-          "description": "G6P \u2192 HDMF 4.4\u00d7 vs. glucose; phosphorylated sugar HDMF yields.",
-          "raw_line": "4. `JAFC DOI:10.1021/jf034037p (2003)` \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; phosphorylated sugar HDMF yields. 8/8."
-        }
-      ],
-      "registry_id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "runtime_artifact_count": 1,
-      "doi": "10.1021/jf034037p",
-      "doi_resolution": {
-        "basis": "The repo's own DOI 10.1021/jf026123f resolves (HTTP 200) but is Cerny & Davidek (2003), 'Formation of Aroma Compounds from Ribose and Cysteine during the Maillard Reaction', JAFC 51:2714 - unrelated to G6P/HDMF. A PubMed search for ('glucose-6-phosphate' AND (furanone OR furaneol OR Maillard)) returned this JAFC 2003 paper, whose abstract (read in full via efetch) states that glucose-6-phosphate 'stabilized 1- and 3-deoxyglucosone intermediates and increased the subsequent formation of ... 4-hydroxy-2,5-dimethyl-3-(2H)-furanone (Furaneol)' relative to glucose - i.e. exactly the G6P -> HDMF enhancement the repo encodes.",
-        "confidence": "medium",
-        "date": "2026-08-26",
-        "caveat": "Authors/citation string are entirely wrong (Yaylayan et al., not Blank/Devaud/Grosch). The method is pyrolysis-GC/MS, NOT SIDA with [2H3]-HDMF, and the abstract gives fold-enhancements of 9x/6x/5x for other analytes; the specific '4.4x vs glucose' multiplier for HDMF is NOT confirmed and may be fabricated."
-      },
-      "citation_repair": {
-        "old": "JAFC DOI:10.1021/jf034037p (2003)",
-        "new": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358",
-        "date": "2026-08-26",
-        "basis": "The repo's own DOI 10.1021/jf026123f resolves (HTTP 200) but is Cerny & Davidek (2003), 'Formation of Aroma Compounds from Ribose and Cysteine during the Maillard Reaction', JAFC 51:2714 - unrelated to G6P/HDMF. A PubMed search for ('glucose-6-phosphate' AND (furanone OR furaneol OR Maillard)) returned this JAFC 2003 paper, whose abstract (read in full via efetch) states that glucose-6-phosphate 'stabilized 1- and 3-deoxyglucosone intermediates and increased the subsequent formation of ... 4-hydroxy-2,5-dimethyl-3-(2H)-furanone (Furaneol)' relative to glucose - i.e. exactly the G6P -> HDMF enhancement the repo encodes.",
-        "new_field": "verified_citation",
-        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
-      },
-      "verified_citation": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358"
-    },
-    {
-      "citation": "Liardon, de Weck-Gaudard & Philippossian (1991)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 2,
-      "files": [
-        "04_nucleotide_degradation.md",
-        "07_reducing_sugars.md"
-      ],
-      "descriptions": [
-        "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P.",
-        "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P; triplicates."
-      ],
-      "occurrences": [
-        {
-          "file": "04_nucleotide_degradation.md",
-          "line": 603,
-          "description": "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P.",
-          "raw_line": "3. `Liardon, de Weck-Gaudard & Philippossian (1991)` \u2014 JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P. 8/8."
-        },
-        {
-          "file": "07_reducing_sugars.md",
-          "line": 731,
-          "description": "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P; triplicates.",
-          "raw_line": "1. `Liardon, de Weck-Gaudard & Philippossian (1991)` \u2014 JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P; triplicates. 8/8."
-        }
-      ],
-      "registry_id": "liardon_1991_r5p_donor_potency",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "I enumerated every CrossRef-indexed JAFC article published in 1991 (ISSN 0021-8561, 492 records) and checked the page ranges around 2152: page 2152 falls inside 10.1021/jf00012a009, Laligant et al., 'Surface hydrophobicity and aggregation of beta-lactoglobulin heated near neutral pH', JAFC 39:2147-2155 -- nothing to do with ribose-5-phosphate. The only Liardon JAFC papers in 1991 are 10.1021/jf00010a034 (amino acid isomerization in microwave-heated milk, 39:1857) and 10.1021/jf00003a020 (lysinoalanine racemization, 39:531). Topical CrossRef searches for R5P Maillard reactivity 1989-1993 return nothing by Liardon. The citation 'Liardon, de Weck-Gaudard & Philippossian (1991), JAFC 39:2152' is fabricated (those three are real co-authors, but of Maillard/CML work in the mid-1980s, not an R5P reactivity study).",
-        "caveat": "The claimed anchors (R5P >100x glucose; ribose 7.2x; reaction order 1.5) have no located source. R5P's high flavour-precursor potency is real and well documented in the Mottram group's cysteine/ribose-phosphate work, but that literature will not supply these exact figures."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Liu, Y. (2023 thesis)",
       "score": "8/8",
       "score_value": 8,
@@ -4076,36 +3087,6 @@
       "verified_citation": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998"
     },
     {
-      "citation": "Marquez-Ruiz et al. (2014)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "02_lipid_oxidation.md"
-      ],
-      "descriptions": [
-        "JAFC 62:10295 \u2014 high-oleic olive oil frying volatiles; OAVs for 8 compounds."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 589,
-          "description": "JAFC 62:10295 \u2014 high-oleic olive oil frying volatiles; OAVs for 8 compounds.",
-          "raw_line": "3. `Marquez-Ruiz et al. (2014)` \u2014 JAFC 62:10295 \u2014 high-oleic olive oil frying volatiles; OAVs for 8 compounds. 8/8."
-        }
-      ],
-      "registry_id": "marquez_ruiz_2014_oleic_oav_anchor",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "I enumerated every CrossRef record for JAFC (ISSN 0021-8561) published in 2014 (1561 items) and checked first pages: no article starts at p. 10295. Page 10295 falls inside Granato et al., JAFC 62:10283-10296 (10.1021/jf504480f, antioxidant extraction / response surface), and the next article begins at 10297 (Trujillo et al., nitrohydroxytyrosol). Separately, a CrossRef author sweep shows Gloria Marquez-Ruiz has no JAFC paper in 2014 at all (her 2014 output is in Eur. J. Lipid Sci. Technol. and Lipid Technol.), and no 'high-oleic olive oil frying volatiles with OAVs for 8 compounds' paper by her exists.",
-        "caveat": "Both the venue coordinates and the author/year are fabricated, so the 'nonanal ODT 1.0 ppb / OAV 1-28' anchor has no source behind it. Note also that the SLR entry says matrix 'oleic_model' while the backlog says 'high-oleic olive oil frying' - internally inconsistent. If a real high-oleic frying-volatile anchor is wanted, Huang et al. (2024), Food Res. Int. 192:114749 (10.1016/j.foodres.2024.114749) covers volatile aldehyde distribution in high-oleic sunflower oil during frying, but it is a different paper and I did not verify the OAV numbers in it."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Mottram & Nobrega (2002 / Chapter 9 review)",
       "score": "8/8",
       "score_value": 8,
@@ -4133,83 +3114,6 @@
         "confidence": "high",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "Mottram et al. (2001)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 2,
-      "files": [
-        "02_lipid_oxidation.md",
-        "05_glutathione_peptides.md"
-      ],
-      "descriptions": [
-        "JAFC 49:3712 \u2014 competitive quenching of MFT by lipid aldehydes; SIDA; quantitative f_quench.",
-        "JAFC 49:4316 \u2014 Carnosine pH buffering; optimal 0.1 M; MFT +61% vs. unbuffered."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 598,
-          "description": "JAFC 49:3712 \u2014 competitive quenching of MFT by lipid aldehydes; SIDA; quantitative f_quench.",
-          "raw_line": "10. `Mottram et al. (2001)` \u2014 JAFC 49:3712 \u2014 competitive quenching of MFT by lipid aldehydes; SIDA; quantitative f_quench. 7/8."
-        },
-        {
-          "file": "05_glutathione_peptides.md",
-          "line": 523,
-          "description": "JAFC 49:4316 \u2014 Carnosine pH buffering; optimal 0.1 M; MFT +61% vs. unbuffered.",
-          "raw_line": "3. `Mottram et al. (2001)` \u2014 JAFC 49:4316 \u2014 Carnosine pH buffering; optimal 0.1 M; MFT +61% vs. unbuffered. 8/8."
-        }
-      ],
-      "registry_id": "mottram_2001_mft_quench_buffering_anchor",
-      "runtime_artifact_count": 2,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Both backlog page references are fabricated. Enumerating CrossRef records for JAFC volume 49: p.3712 falls inside Bernabeu et al. 49:3709-3712 (erythromycin thiocyanate medicated premix, 10.1021/jf010169b) and p.4316 falls inside Ames, Guy & Kipping 49:4315-4323 (glycine/glucose model volatiles, 10.1021/jf010198m). Neither is Mottram, and CrossRef author search of Mottram 1999-2003 shows no 2001 JAFC paper on thiol quenching or carnosine. No source gives a quantitative f_quench for MFT by lipid aldehydes or a '+61% MFT at 0.1 M carnosine' figure.",
-        "caveat": "Genuine nearest anchors, both contradicting or falling short of the repo's claims: (a) Elmore, Campo, Enser & Mottram (2002), 'Effect of Lipid Composition on Meat-like Model Systems Containing Cysteine, Ribose, and Polyunsaturated Fatty Acids', JAFC 50:1126-1132, doi:10.1021/jf0108718 - shows lipid suppresses cysteine/ribose sulfur volatiles (the phenomenon) but reports no quench coefficient; also Mottram & Elmore (2005), 'The Interaction of Lipid-Derived Aldehydes with the Maillard Reaction in Meat Systems', doi:10.1533/9781845698447.5.198. (b) Chen & Ho (2002), 'Effects of Carnosine on Volatile Generation from Maillard Reaction of Ribose and Cysteine', JAFC 50:2372-2376, doi:10.1021/jf011244l - the real carnosine paper, and it reports that carnosine DECREASES 2-methyl-3-furanthiol and 2-furfurylthiol, i.e. the opposite sign to the repo's '+61%'."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
-      "citation": "Ohsu et al. (2025)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "05_glutathione_peptides.md"
-      ],
-      "descriptions": [
-        "JAFC (Chem Senses) \u2014 Kokumi CaSR mechanism; \u03b3EV EC\u2085\u2080 0.32 mM; GSH EC\u2085\u2080 0.68 mM; CCK +141%; mouthfulness +2.2 scale units."
-      ],
-      "occurrences": [
-        {
-          "file": "05_glutathione_peptides.md",
-          "line": 524,
-          "description": "JAFC (Chem Senses) \u2014 Kokumi CaSR mechanism; \u03b3EV EC\u2085\u2080 0.32 mM; GSH EC\u2085\u2080 0.68 mM; CCK +141%; mouthfulness +2.2 scale units.",
-          "raw_line": "4. `Ohsu et al. (2025)` \u2014 JAFC (Chem Senses) \u2014 Kokumi CaSR mechanism; \u03b3EV EC\u2085\u2080 0.32 mM; GSH EC\u2085\u2080 0.68 mM; CCK +141%; mouthfulness +2.2 scale units. 8/8."
-        }
-      ],
-      "registry_id": "ohsu_2025_kokumi_casr_anchor",
-      "runtime_artifact_count": 1,
-      "doi": "10.1074/jbc.M109.029165",
-      "doi_resolution": {
-        "basis": "No 'Ohsu et al. (2025)' publication exists. The intended anchor is Ohsu, Amino, Nagasaki et al. (2010), 'Involvement of the Calcium-sensing Receptor in Human Taste Perception', J Biol Chem 285(2):1016-1022, verified in CrossRef and read in PMC.",
-        "confidence": "medium",
-        "date": "2026-08-26",
-        "caveat": "None of this row's four numeric anchors is in the paper: the measured CaSR EC50s are 41.9 nM (gamma-Glu-Val-Gly) and 76.5 nM (glutathione), not 0.32 / 0.68 mM; there is no CCK-secretion data; and the sensory scale runs -2..+2, so '+2.2 mouthfulness units' is out of range."
-      },
-      "citation_repair": {
-        "old": "Ohsu et al. (2025)",
-        "new": "Ohsu et al. (2010), J. Biol. Chem. 285:1016",
-        "date": "2026-08-26",
-        "basis": "See doi_resolution.basis.",
-        "new_field": "verified_citation",
-        "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
-      },
-      "verified_citation": "Ohsu et al. (2010), J. Biol. Chem. 285:1016"
     },
     {
       "citation": "Ordoudi et al. (2014 / PMC12484514)",
@@ -4806,36 +3710,6 @@
       "verified_citation": "Yeo, H. (2022), PhD thesis, University of Reading, doi 10.48683/1926.00111736"
     },
     {
-      "citation": "Zhang et al. (2022)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "02_lipid_oxidation.md"
-      ],
-      "descriptions": [
-        "Food Chem 133961 \u2014 aldehyde unsaturation effect; LOD/LOQ; OAV; triplicates."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 604,
-          "description": "Food Chem 133961 \u2014 aldehyde unsaturation effect; LOD/LOQ; OAV; triplicates.",
-          "raw_line": "16. `Zhang et al. (2022)` \u2014 Food Chem 133961 \u2014 aldehyde unsaturation effect; LOD/LOQ; OAV; triplicates. 8/8."
-        }
-      ],
-      "registry_id": "zhang_2022_unsaturated_aldehyde_potency_anchor",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef search of Food Chemistry for article number 133961 returns exactly one record: 10.1016/j.foodchem.2022.133961, Sha, Jiang, Hu, Zhang, Xie & Lu (2023), Food Chem 400:133961, 'Traceability and identification of fish gelatin from seven cyprinid fishes by HPLC and high-resolution MS' -- no aldehyde-unsaturation or OAV content, and no author named Zhang as first author. Topical CrossRef searches for a 2022 Food Chemistry paper on the effect of aldehyde unsaturation on odour potency by any Zhang returned nothing matching.",
-        "caveat": "The article number 133961 was evidently attached to fabricated content. If an unsaturated-vs-saturated aldehyde potency anchor is needed, it must be sourced independently (odour-threshold compilations rather than a single 2022 Food Chem paper)."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Zhao et al. (2022)",
       "score": "8/8",
       "score_value": 8,
@@ -4863,36 +3737,6 @@
         "confidence": "high",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "ACS Food Sci. Technol. 2022",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "12_protein_damage_markers.md"
-      ],
-      "descriptions": [
-        "SPI/PPI lysine loss (g/16gN), total AA loss, HMF at 140\u00b0C."
-      ],
-      "occurrences": [
-        {
-          "file": "12_protein_damage_markers.md",
-          "line": 522,
-          "description": "SPI/PPI lysine loss (g/16gN), total AA loss, HMF at 140\u00b0C.",
-          "raw_line": "1. ACS Food Sci. Technol. 2022 \u2014 SPI/PPI lysine loss (g/16gN), total AA loss, HMF at 140\u00b0C. 7/8."
-        }
-      ],
-      "registry_id": "acs_2022_pba_lysine_loss_benchmark",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef search restricted to ACS Food Science & Technology (ISSN 2692-1944) for 2021-2023 with query terms 'lysine loss / hydroxymethylfurfural / soy protein isolate / pea protein isolate / thermal / Maillard' returns no paper on SPI/PPI available-lysine loss (g/16 g N), total amino-acid loss and HMF at 140 C. The 2022 ACS FST plant-protein papers retrieved are on emulsions, gels, nanofibrils and pea-protein aroma profiles, none of them a Maillard protein-damage benchmark.",
-        "caveat": "The citation is only 'ACS Food Sci. Technol. 2022' with no authors, volume or page, so identification is intrinsically weak; but a targeted journal-scoped search found nothing matching the claimed measurements. Older SPI available-lysine kinetics do exist (Wolf, Thompson & Reineccius, J. Food Process. Preserv. 1977, 1:271, 10.1111/j.1745-4549.1977.tb00330.x) but that is soy-only, 1977, and has no HMF or PPI data."
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "ACS Food Sci. Technol. 2024 (Ref. 1)",
@@ -5046,36 +3890,6 @@
       }
     },
     {
-      "citation": "Bhandari et al. (1998)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "08_off_note_chemistry.md"
-      ],
-      "descriptions": [
-        "JAFC \u2014 \u03b2-CD K_assoc table (hexanal 1,840; nonanal 2,100; (E)-2-nonenal 3,200); headspace reductions; LOQ stated."
-      ],
-      "occurrences": [
-        {
-          "file": "08_off_note_chemistry.md",
-          "line": 704,
-          "description": "JAFC \u2014 \u03b2-CD K_assoc table (hexanal 1,840; nonanal 2,100; (E)-2-nonenal 3,200); headspace reductions; LOQ stated.",
-          "raw_line": "4. `Bhandari et al. (1998)` \u2014 JAFC \u2014 \u03b2-CD K_assoc table (hexanal 1,840; nonanal 2,100; (E)-2-nonenal 3,200); headspace reductions; LOQ stated. 7/8."
-        }
-      ],
-      "registry_id": "bhandari_1998_beta_cd_aldehyde_binding_anchor",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "There IS a real Bhandari 1998 JAFC paper -- Bhandari, D'Arc & Le Thi Bich, 'Lemon Oil to beta-Cyclodextrin Ratio Effect on the Inclusion Efficiency of beta-Cyclodextrin and the Retention of Oil Volatiles in the Complex', JAFC 46:1494-1499, doi 10.1021/jf970605n (verified by direct CrossRef DOI lookup) -- but it is a lemon-oil inclusion-efficiency study and contains no association-constant (K_assoc) table for hexanal / nonanal / (E)-2-nonenal. CrossRef searches for beta-CD aldehyde binding/association constants returned no paper matching the claimed K values (hexanal 1,840; nonanal 2,100; (E)-2-nonenal 3,200). The claimed content is not attributable to Bhandari (1998).",
-        "caveat": "Do not repair by pointing at 10.1021/jf970605n -- the citation string would then be right but the numbers would still be unsourced. The K_assoc triplet looks fabricated."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
       "citation": "Blank et al. (1997)",
       "score": "7/8",
       "score_value": 7,
@@ -5140,66 +3954,6 @@
         "confidence": "medium",
         "date": "2026-08-26"
       }
-    },
-    {
-      "citation": "Cui et al. (2022)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "04_nucleotide_degradation.md"
-      ],
-      "descriptions": [
-        "J Food Bioactives \u2014 mushroom nucleotide profiles; shiitake GMP 108 mg/100g; EUC calculated."
-      ],
-      "occurrences": [
-        {
-          "file": "04_nucleotide_degradation.md",
-          "line": 615,
-          "description": "J Food Bioactives \u2014 mushroom nucleotide profiles; shiitake GMP 108 mg/100g; EUC calculated.",
-          "raw_line": "13. `Cui et al. (2022)` \u2014 J Food Bioactives \u2014 mushroom nucleotide profiles; shiitake GMP 108 mg/100g; EUC calculated. 7/8."
-        }
-      ],
-      "registry_id": "cui_2022_mushroom_nucleotide_anchor",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "There is exactly one 2022 Journal of Food Bioactives paper on mushroom nucleotide profiles, and it is not by Cui and not about shiitake. I downloaded and text-extracted its PDF: Davila, Routray, Beatty & Du (2022), 'Flavor compounds, free amino acids, and proteins in Agaricus bisporus mushroom powder', J. Food Bioact. 20:17-28, DOI 10.31665/JFB.2022.18325. Its verbatim finding is that 5'-GMP was the predominant nucleotide 'with a content of 0.08 and 0.11% in the two mushroom powders' (i.e. ~80-110 mg/100 g), quantified by HPLC-UV at 259 nm. The repo's anchor is a SHIITAKE (Lentinula edodes) GMP value of 108 mg/100 g plus a calculated EUC - this paper studies only Agaricus bisporus and does not calculate EUC anywhere (the string 'EUC'/'equivalent umami concentration' does not occur in the text).",
-        "caveat": "The 108 mg/100 g number may be a mis-transcription of the 0.11% (110 mg/100 g) A. bisporus figure in Davila et al. If the repo genuinely needs an A. bisporus anchor, 10.31665/JFB.2022.18325 is the correct source; if it needs a shiitake GMP anchor plus EUC, no source was found and a new one must be sourced."
-      },
-      "source_status": "no_verifiable_source"
-    },
-    {
-      "citation": "De Leyn & Muylle (2019)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "03_thiamine_degradation.md"
-      ],
-      "descriptions": [
-        "JAFC 67:9842 \u2014 extrusion retention at 140\u2013180\u00b0C; t\u2081/\u2082 in barrel 0.4\u20134.2 min; three temperatures."
-      ],
-      "occurrences": [
-        {
-          "file": "03_thiamine_degradation.md",
-          "line": 582,
-          "description": "JAFC 67:9842 \u2014 extrusion retention at 140\u2013180\u00b0C; t\u2081/\u2082 in barrel 0.4\u20134.2 min; three temperatures.",
-          "raw_line": "3. `De Leyn & Muylle (2019)` \u2014 JAFC 67:9842 \u2014 extrusion retention at 140\u2013180\u00b0C; t\u2081/\u2082 in barrel 0.4\u20134.2 min; three temperatures. 7/8."
-        }
-      ],
-      "registry_id": "de_leyn_2019",
-      "runtime_artifact_count": 2,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "Decisive negative: I enumerated every CrossRef record for JAFC volume 67 with a first page in 9830-9860 (via ISSN 1520-5118, 2018-06 to 2020-06). Page 9842 lies inside Zhai et al., 'Methanolysis Fractionation and Catalytic Conversion of Poplar Wood toward Methyl Levulinate, Phenolics, and Glucose', JAFC 67:9840-9850 (10.1021/acs.jafc.9b03806). There is therefore no 'De Leyn & Muylle (2019), JAFC 67:9842' article, and CrossRef/PubMed author searches for De Leyn + Muylle on thiamine or extrusion return nothing. The claimed extrusion thiamine half-lives (0.4-4.2 min at 140-180 C) have no locatable source.",
-        "caveat": null
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "Matoba, Terao & Fujimaki (1988)",
@@ -5278,36 +4032,6 @@
         "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
       },
       "verified_citation": "Amado et al. (2024), Chem. Senses 49:bjad049"
-    },
-    {
-      "citation": "Nakamura et al. (1988)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "04_nucleotide_degradation.md"
-      ],
-      "descriptions": [
-        "JAFC 36:1045 \u2014 enzymatic vs. thermal IMP hydrolysis; inosine \u2192 ribose rate-limiting step."
-      ],
-      "occurrences": [
-        {
-          "file": "04_nucleotide_degradation.md",
-          "line": 611,
-          "description": "JAFC 36:1045 \u2014 enzymatic vs. thermal IMP hydrolysis; inosine \u2192 ribose rate-limiting step.",
-          "raw_line": "9. `Nakamura et al. (1988)` \u2014 JAFC 36:1045 \u2014 enzymatic vs. thermal IMP hydrolysis; inosine \u2192 ribose rate-limiting step. 7/8."
-        }
-      ],
-      "registry_id": "nakamura_1988_imp_ribose_release",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "I enumerated all CrossRef records for JAFC (ISSN 0021-8561) published in 1988 and listed pages 1020-1070: JAFC 36:1043-1047 is French, Turner & Sonnett on Canada-thistle teliospore germination, and 36:1048 is Balandrin et al. on neem-seed organosulfur compounds. There is no IMP/inosine/ribose paper at 36:1045. PubMed (Nakamura[Author] AND inosine AND ribose, 1980-1995) returns zero hits, and CrossRef author/topic searches find no Nakamura 1988 paper on enzymatic vs. thermal IMP hydrolysis.",
-        "caveat": "The nearest genuine 1988 source for thermal IMP breakdown is Matoba, Kuchiba, Kimura & Hasegawa (1988), 'Thermal Degradation of Flavor Enhancers, Inosine 5'-monophosphate, and Guanosine 5'-monophosphate in Aqueous Solution', J. Food Sci. 53:1156-1159, DOI 10.1111/j.1365-2621.1988.tb13551.x (follow-up: Kuchiba et al. 1990, JAFC 38:593, 10.1021/jf00093a001). That paper covers thermal, not enzymatic, hydrolysis and I have not confirmed it identifies inosine -> ribose as rate-limiting, so I am not asserting it as the repaired source."
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "Squeo et al. (2023)",
@@ -5989,36 +4713,6 @@
         "note": "The scraped `citation` string is a stable key for runtime/registry joins and is deliberately left unchanged; the verified bibliographic string is in `verified_citation`."
       },
       "verified_citation": "Zhang, Lee & Ho (1993), J. Food Process. Preserv. 17:259"
-    },
-    {
-      "citation": "Li et al. (2010)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "06_alternative_proteins.md"
-      ],
-      "descriptions": [
-        "Deep research kinetic parameters for Li et al. (2010)"
-      ],
-      "occurrences": [
-        {
-          "file": "06_alternative_proteins.md",
-          "line": 999,
-          "description": "Deep research kinetic parameters for Li et al. (2010)",
-          "raw_line": "1. `Li et al. (2010)` \u2014 Bounded priors."
-        }
-      ],
-      "registry_id": "li_2010_phytate_chelation_kinetics",
-      "runtime_artifact_count": 1,
-      "doi_resolution": {
-        "status": "no_verifiable_source",
-        "date": "2026-08-26",
-        "basis": "CrossRef searches for author=Li restricted to 2008-2012 combining phytic acid / phytate with adsorption or chelation kinetics, thermodynamics and activation energy returned only unrelated sorbent papers (humic acid, thiacalixarene resins, attapulgite composites, Mg-alloy phytic-acid conversion coatings). Web searches for the exact anchor '84.54 kJ/mol' together with phytic acid returned nothing. The existing DOI is a minerals-flotation paper, i.e. the record was already pure confabulation, and no phytate-chelation kinetics paper with an apparent Ea of 84.54 kJ/mol could be located.",
-        "caveat": "The nearest real work on phytate-metal binding kinetics is Crea et al. / 'Kinetic and Equilibrium Constants of Phytic Acid and Ferric and Ferrous Phytate Derived from NMR' (JAFC, 10.1021/jf801465y) and Liu et al., 'Adsorption of heavy metal ions by immobilized phytic acid' (PMID 18576128), but neither is a 'Li et al. 2010' and neither reports 84.54 kJ/mol."
-      },
-      "source_status": "no_verifiable_source"
     },
     {
       "citation": "Tan et al. (2001)",

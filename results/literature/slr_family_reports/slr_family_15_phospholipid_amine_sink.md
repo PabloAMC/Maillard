@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 15: PE Stealth Sugar Sink
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering pe stealth sugar sink.  
 **Strategic Posture:** `upstream_precursor_sink`  
 **Runtime Concept:** `sugar_depletion_sink`  
-**Scope & Targets:** Covers target compounds/variables: `PE_glycation_fraction`, `available_sugar_subtraction`. Preferred payload types: `upstream_modifier_payload`, `computational_prior`. Target runtime modules: `src/precursor_resolver.py`, `src/flavor.py`.  
+**Scope & Targets:** Covers target compounds/variables: `PE_glycation_fraction`, `available_sugar_subtraction`. Preferred payload types: `upstream_modifier_payload`, `computational_prior`. Target runtime modules: .  
 
 ---
 
@@ -29,7 +29,7 @@
 ## SECTION 1 — Curated References
 
 ### Solís-Calero et al. (2015)
-- **DOI:** [10.1371/journal.pone.0124658](https://doi.org/10.1371/journal.pone.0124658)
+- **DOI:** [10.1155/2015/319505](https://doi.org/10.1155/2015/319505)
 - **Matrix Family:** phospholipid_interface
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -109,8 +109,8 @@
 
 ---
 
-### Fujimoto et al. (2023)
-- **DOI:** [10.1021/acs.jafc.2c08283](https://doi.org/10.1021/acs.jafc.2c08283)
+### Fujimoto, Hayashi, Hamaguchi, Zhan et al. (2023), J. Oleo Sci. 72:311
+- **DOI:** [10.5650/jos.ess22332](https://doi.org/10.5650/jos.ess22332)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -260,8 +260,8 @@
 
 ---
 
-### Hidalgo et al. (2005)
-- **DOI:** [10.1007/s00217-004-1065-x](https://doi.org/10.1007/s00217-004-1065-x)
+### Zamora, Nogales & Hidalgo (2004), Eur. Food Res. Technol. 220:459
+- **DOI:** [10.1007/s00217-004-1114-z](https://doi.org/10.1007/s00217-004-1114-z)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -297,7 +297,7 @@
 
 ---
 
-### Zamora et al. (2020)
+### Goritschnig et al. (2020), Molecules 25:373
 - **DOI:** [10.3390/molecules25020373](https://doi.org/10.3390/molecules25020373)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -406,7 +406,7 @@
 
 ---
 
-### Biondi et al. (2010)
+### Chiavaro et al. (2010), LWT 43:1104
 - **DOI:** [10.1016/j.lwt.2010.02.016](https://doi.org/10.1016/j.lwt.2010.02.016)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -457,15 +457,15 @@ Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references
 |---|---|---|---|
 | Solís-Calero et al. (2015) | 3/8 | ⚠️ Calibration | phospholipid_interface |
 | Kodate et al. (2018) | 3/8 | ⚠️ Calibration | aminophospholipid_food_matrix |
-| Fujimoto et al. (2023) | 2/8 | ❌ Rejected | free_model_system |
+| Fujimoto, Hayashi, Hamaguchi, Zhan et al. (2023), J. Oleo Sci. 72:311 | 2/8 | ❌ Rejected | free_model_system |
 | Solís-Calero et al. (2015) | 3/8 | ⚠️ Calibration | free_model_system |
 | Solís-Calero et al. (2013) | 3/8 | ⚠️ Calibration | free_model_system |
 | Lertsiri et al. (1998) | 3/8 | ⚠️ Calibration | free_model_system |
-| Hidalgo et al. (2005) | 3/8 | ⚠️ Calibration | free_model_system |
-| Zamora et al. (2020) | 3/8 | ⚠️ Calibration | free_model_system |
+| Zamora, Nogales & Hidalgo (2004), Eur. Food Res. Technol. 220:459 | 3/8 | ⚠️ Calibration | free_model_system |
+| Goritschnig et al. (2020), Molecules 25:373 | 3/8 | ⚠️ Calibration | free_model_system |
 | Hidalgo et al. (2006) | 3/8 | ⚠️ Calibration | free_model_system |
 | Vilanova et al. (2012) | 3/8 | ⚠️ Calibration | free_model_system |
-| Biondi et al. (2010) | 3/8 | ⚠️ Calibration | free_model_system |
+| Chiavaro et al. (2010), LWT 43:1104 | 3/8 | ⚠️ Calibration | free_model_system |
 
 ---
 
@@ -480,21 +480,21 @@ Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references
 - `Solís-Calero et al. (2015)` (Score: 3/8)
 - `Solís-Calero et al. (2013)` (Score: 3/8)
 - `Lertsiri et al. (1998)` (Score: 3/8)
-- `Hidalgo et al. (2005)` (Score: 3/8)
-- `Zamora et al. (2020)` (Score: 3/8)
+- `Zamora, Nogales & Hidalgo (2004), Eur. Food Res. Technol. 220:459` (Score: 3/8)
+- `Goritschnig et al. (2020), Molecules 25:373` (Score: 3/8)
 - `Hidalgo et al. (2006)` (Score: 3/8)
 - `Vilanova et al. (2012)` (Score: 3/8)
-- `Biondi et al. (2010)` (Score: 3/8)
+- `Chiavaro et al. (2010), LWT 43:1104` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Fujimoto et al. (2023)` (Score: 2/8)
+- `Fujimoto, Hayashi, Hamaguchi, Zhan et al. (2023), J. Oleo Sci. 72:311` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/precursor_resolver.py`, `src/flavor.py` must explicitly account for `sugar_depletion_sink` as a modifier when predicting `PE_glycation_fraction`, `available_sugar_subtraction` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `sugar_depletion_sink` as a modifier when predicting `PE_glycation_fraction`, `available_sugar_subtraction` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `upstream_precursor_sink` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

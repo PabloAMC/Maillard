@@ -37,59 +37,6 @@
       ]
     },
     {
-      "id": "cerny_guntz_dubini_2008",
-      "citation": "Cerny & Guntz-Dubini (2008)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload",
-        "benchmark_intake_entry",
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "optimizer",
-        "reporting"
-      ],
-      "repo_next_action": "Expose as the pH-calibrated Family 03 benchmark anchor for thiamine-driven MFT support in the runtime lane.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "thiamine_cys_xylose_145C_Cerny2008",
-          "path": "data/benchmarks/thiamine_cys_xylose_145C_Cerny2008.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        },
-        {
-          "artifact_type": "benchmark_intake_entry",
-          "artifact_id": "cerny_guntz_dubini_2008",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "benchmark_intake_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cerny_2007_thiamine_split_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "foods_2023_cml_cel_proxy_benchmark",
       "citation": "Fu et al. (2023)",
       "kind": "quantitative_benchmark",
@@ -189,116 +136,6 @@
             "thiamine_pathway_priors"
           ],
           "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmc9905368_spi_hvp_xylose_benchmark",
-      "citation": "PMC9905368 (2023)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload"
-      ],
-      "matrix_family": "spi_hvp_xylose",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "benchmark_validation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a sulfur-focused executable benchmark subset tied to the protein-source registry.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
-      "citation": "Cho et al. (2023)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload"
-      ],
-      "matrix_family": "wheat_gluten_hvp_xylose",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "benchmark_validation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Expose as the highest-MFT plant-source sulfur benchmark for protein-source-aware formulation ranking.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
-      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "protein_damage_markers",
-      "slr_family_source": "12",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload",
-        "safety_payload"
-      ],
-      "matrix_family": "mild_legume_extrudate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "benchmark_validation",
-        "safety",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as the reference crossover benchmark and pair it with CEL/CML reporting above the degradation threshold.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-          "path": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        },
-        {
-          "artifact_type": "safety_reference",
-          "artifact_id": "ramirez_jimenez_2000_furosine_crossover",
-          "path": "data/lit/safety_reference_payloads.json",
-          "template_kind": "safety_payload",
           "exists": true
         }
       ]
@@ -668,44 +505,6 @@
       ]
     },
     {
-      "id": "bhandari_1998_beta_cd_aldehyde_binding_anchor",
-      "citation": "Bhandari et al. (1998)",
-      "kind": "directional_prior",
-      "chemistry_family": "off_note_and_maillard_suppression",
-      "slr_family_source": "08",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_encapsulation_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded cyclodextrin-binding prior so Family 08 can expose partial aldehyde suppression without conflating it with protein-binding retention.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "bhandari_1998_beta_cd_aldehyde_binding_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "retention_binding_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "biondi_2010_oil_microwave_degradation",
       "citation": "Chiavaro et al. (2010), LWT 43:1104",
       "kind": "calibration_reference",
@@ -805,43 +604,6 @@
           "path": "data/lit/computational_priors.json",
           "sections": [
             "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "citation": "Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358",
-      "kind": "directional_prior",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded phosphorylated-sugar prior so G6P can outrank glucose when HDMF-support signals matter.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
           ],
           "template_kind": "computational_prior",
           "exists": true
@@ -1621,42 +1383,6 @@
       ]
     },
     {
-      "id": "huang_2021_sulfur_oav_support",
-      "citation": "Huang et al. (2021)",
-      "kind": "directional_prior",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a bounded sulfur-support prior for MFT and FFT prominence rather than as a benchmark payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "huang_2021_sulfur_oav_support_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "sulfur_peptide_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "huang_2022_thiamine_metal_catalysis",
       "citation": "Huang (2022)",
       "kind": "calibration_reference",
@@ -2058,38 +1784,6 @@
       ]
     },
     {
-      "id": "li_2010_phytate_chelation_kinetics",
-      "citation": "Li et al. (2010)",
-      "kind": "calibration_reference",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "computational_prior",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode phytate chelation kinetics prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "li_2010_phytate_chelation_kinetics",
-          "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
       "citation": "Liu et al. (2017), J. Agric. Food Chem. 65:2233",
       "kind": "calibration_reference",
@@ -2116,43 +1810,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "liardon_1991_r5p_donor_potency",
-      "citation": "Liardon et al. (1991)",
-      "kind": "directional_prior",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a donor-potency prior that keeps R5P and ribose above glucose in sulfur-positive routing decisions.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "liardon_1991_r5p_donor_potency_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -2565,51 +2222,6 @@
       ]
     },
     {
-      "id": "mottram_2001_mft_quench_buffering_anchor",
-      "citation": "Mottram & Elmore (2005), in The Maillard Reaction in Foods and Medicine, p.198",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior",
-        "process_state_calibration"
-      ],
-      "matrix_family": "sulfur_model_system",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep the Mottram landing compact by splitting sulfur-quench and buffering support into one bounded prior plus one process-state anchor instead of opening a new benchmark family.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "mottram_2001_lipid_aldehyde_mft_quench_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        },
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "mottram_2001_carnosine_buffered_mft_uplift",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "mottram_nobrega_2002_furanone_bridge",
       "citation": "Mottram & Nobrega (2002)",
       "kind": "directional_prior",
@@ -2841,43 +2453,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "nguyen_2025_ppi_microencapsulated_oil_stabilization",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ohsu_2025_kokumi_casr_anchor",
-      "citation": "Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "gamma_glutamyl_peptide_msg_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Keep the runtime landing compact by linking the CaSR and mouthfulness constants to a bounded Family 05 kokumi prior instead of opening a standalone kokumi solver.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "ohsu_2025_kokumi_casr_support_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "sulfur_peptide_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -3225,43 +2800,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "rawel_2002_cga_cysteine_blocking",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ref41_ppi_sulfur_binding",
-      "citation": "Wang et al. (2020)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_maillard_crosstalk",
-      "slr_family_source": "11",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "pea_protein_isolate",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Keep as a bounded sulfur-binding order prior so Family 11 does not treat all pea-matrix sulfur volatiles as retention-neutral before heat-driven trapping takes over.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "ref41_ppi_sulfur_volatile_binding_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "retention_binding_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -3831,42 +3369,6 @@
       ]
     },
     {
-      "id": "tran_2023_reducing_sugar_hme",
-      "citation": "Liu et al. (2022)",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbonyl_donor_hierarchy",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "pea_protein_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Encode starch reducing-sugar liberation priors during HME.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "tran_2023_starch_liberation_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "carbonyl_donor_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "van_boekel_2001_maillard_kinetics_review",
       "citation": "van Boekel (2001)",
       "kind": "directional_prior",
@@ -4041,38 +3543,6 @@
       ]
     },
     {
-      "id": "wang_2024_glucosamine_synergy",
-      "citation": "Wu et al. (2025)",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbonyl_donor_hierarchy",
-      "slr_family_source": "07",
-      "source_payload_role": "computational_prior",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode glucosamine synergy priors.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "wang_2024_glucosamine_synergy",
-          "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "xu_2025_peptide_hierarchy",
       "citation": "Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1",
       "kind": "calibration_reference",
@@ -4174,42 +3644,6 @@
       ]
     },
     {
-      "id": "yeo_shibamoto_1991_wof_hexanal",
-      "citation": "Yeo & Shibamoto (1991)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation"
-      ],
-      "repo_next_action": "Encode phospholipid hexanal contribution and LOX denaturation priors.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "yeo_shibamoto_1991_wof_hexanal_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "zamora_2010_decadienal_asparagine_decarboxylation",
       "citation": "Hidalgo, Delgado, Navarro & Zamora (2010), J. Agric. Food Chem. 58:10512",
       "kind": "calibration_reference",
@@ -4300,75 +3734,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "zha_2020_ppi_glycation_aggregation",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "zhang_1993_protein_deamidation_ammonia",
-      "citation": "Zhang et al. (1993)",
-      "kind": "calibration_reference",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "computational_prior",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "soy_protein",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode thermal deamidation kinetics.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "zhang_1993_protein_deamidation_ammonia",
-          "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "zhang_2022_unsaturated_aldehyde_potency_anchor",
-      "citation": "Zhang et al. (2022)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aldehyde_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a directional off-note prior so unsaturated aldehyde branches stay visibly higher risk than saturated analogues without opening a new benchmark lane.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "zhang_2022_unsaturated_aldehyde_offnote_potency_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -4479,40 +3844,6 @@
       ]
     },
     {
-      "id": "blank_grosch_1991_hdmf_anchor",
-      "citation": "Tonsbeek, Plancken & van de Weerdhof (1968), J. Agric. Food Chem. 16:1016",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "boiled_beef_reference",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "sensory_scoring"
-      ],
-      "repo_next_action": "Use as the compact Family 04 donor-routing and reporting anchor for HDMF without adding a large inline benchmark block.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "blank_grosch_1991_beef_hdmf_band",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "grosch_1982_hexanal_odt",
       "citation": "Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5)",
       "kind": "calibration_reference",
@@ -4539,38 +3870,6 @@
         {
           "artifact_type": "flavor_reference_payload",
           "artifact_id": "grosch_1982_hexanal_odt_anchor",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "hauck_tressl_1999_hdmf_non_amino",
-      "citation": "Hauck, Landmann, Raab, Bruhlmann & Schwab (2002), Carbohydr. Res. 337:1185",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "flavor_reference_payload",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Expose as a non-amino acid dependent furanone flavor reference payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "hauck_tressl_1999_hdmf_non_amino",
           "path": "data/lit/flavor_reference_payloads.json",
           "template_kind": "flavor_reference_payload",
           "exists": true
@@ -4648,20 +3947,6 @@
           "path": "data/lit/flavor_reference_payloads.json",
           "template_kind": "flavor_reference_payload",
           "exists": true
-        },
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "liu_2023_ppi_heptadienal_band",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        },
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "liu_2023_ppi_ibmp_band",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
         }
       ]
     },
@@ -4692,40 +3977,6 @@
         {
           "artifact_type": "flavor_reference_payload",
           "artifact_id": "liu_cadwallader_2023_pea_aeda_anchor",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "marquez_ruiz_2014_oleic_oav_anchor",
-      "citation": "Marquez-Ruiz et al. (2014)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "high_oleic_oil_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "lipid_oxidation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep as the oleic-rich reference anchor so oil-selection logic does not treat nonanal-dominant systems as equivalent to hexanal-heavy linoleic oxidation.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "marquez_ruiz_2014_oleic_nonanal_oav_band",
           "path": "data/lit/flavor_reference_payloads.json",
           "template_kind": "flavor_reference_payload",
           "exists": true
@@ -5153,114 +4404,6 @@
       ]
     },
     {
-      "id": "wang_2022_lab_hexanal_cleanup_anchor",
-      "citation": "Wang et al. (2022)",
-      "kind": "calibration_reference",
-      "chemistry_family": "off_note_and_maillard_suppression",
-      "slr_family_source": "08",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "lab_fermented_plant_protein",
-      "legacy_status": "ready_for_reference_encoding",
-      "triage_status": "ready_reference",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Keep Wang 2022 as a compact hexanal-cleanup reference anchor that complements, rather than duplicates, the already-landed fermentation cleanup state package.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "wang_2022_lab_hexanal_cleanup_oav_target",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "xu_2024_soybean_pbma_hexanal",
-      "citation": "Xu et al. (2024)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Expose as a soybean PBMA storage flavor reference payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "xu_2024_soybean_pbma_hexanal_anchor",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "fadel_2015_mft_retention",
-      "citation": "Fadel et al. (2015)",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "retention_payload",
-      "target_payload_types": [
-        "intake_registry_entry",
-        "slr_incorporation_ledger"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "intake_registry_entry",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Keep encoded as a soy isolate MFT retention anchor.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "intake_registry_entry",
-          "artifact_id": "fadel_2015_mft_retention",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "intake_registry_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "slr_incorporation_ledger",
-          "artifact_id": "fadel_2015_mft_retention",
-          "path": "results/literature/slr_incorporation_matrix.json",
-          "template_kind": "slr_incorporation_ledger",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "farmer_1991_alkyl_thiazoles",
       "citation": "Farmer & Patterson (1991), Food Chemistry 40:201",
       "kind": "calibration_reference",
@@ -5378,88 +4521,6 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "nishimura_abe_2024",
-          "path": "results/literature/slr_incorporation_matrix.json",
-          "template_kind": "slr_incorporation_ledger",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "siripitakpong_2026_fft_retention",
-      "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "retention_payload",
-      "target_payload_types": [
-        "intake_registry_entry",
-        "slr_incorporation_ledger"
-      ],
-      "matrix_family": "pea_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "intake_registry_entry",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Keep encoded as a pea isolate FFT binding energy anchor.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "intake_registry_entry",
-          "artifact_id": "siripitakpong_2026_fft_retention",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "intake_registry_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "slr_incorporation_ledger",
-          "artifact_id": "siripitakpong_2026_fft_retention",
-          "path": "results/literature/slr_incorporation_matrix.json",
-          "template_kind": "slr_incorporation_ledger",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "wang_2023_mft_retention",
-      "citation": "Wang et al. (2023)",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "retention_payload",
-      "target_payload_types": [
-        "intake_registry_entry",
-        "slr_incorporation_ledger"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "intake_registry_entry",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Keep encoded as a native soy isolate MFT retention anchor.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "intake_registry_entry",
-          "artifact_id": "wang_2023_mft_retention",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "intake_registry_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "slr_incorporation_ledger",
-          "artifact_id": "wang_2023_mft_retention",
           "path": "results/literature/slr_incorporation_matrix.json",
           "template_kind": "slr_incorporation_ledger",
           "exists": true
@@ -5606,85 +4667,6 @@
           "sections": [
             "denaturation_heuristics",
             "matrix_corrections"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "comunian_2021_thiamine_encapsulation",
-      "citation": "Comunian et al. (2021)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "encapsulated_thiamine_additive",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as the compact Family 03 protected-thiamine calibration anchor so delayed-release support is bounded without inflating the intake registry.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "comunian_2021_thiamine_encapsulation",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "de_leyn_2019",
-      "citation": "De Leyn & Muylle (2019)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration",
-        "computational_prior"
-      ],
-      "matrix_family": "soy_protein_extrusion",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "headspace"
-      ],
-      "repo_next_action": "Use as the Family 03 extrusion-survival calibration anchor so pre-extrusion thiamine is down-weighted instead of treated as fully available support.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "de_leyn_2019_thiamine_retention",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cerny_2007_thiamine_split_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
           ],
           "template_kind": "computational_prior",
           "exists": true
@@ -5842,73 +4824,6 @@
             "matrix_corrections"
           ],
           "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "malia_2025_pea_free_sh_crosscheck",
-      "citation": "Malia et al. (2025)",
-      "kind": "calibration_reference",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "pea_protein_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "matrix_correction",
-        "literature_runtime"
-      ],
-      "repo_next_action": "Use as a supportive pea free-SH behavior crosscheck.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "malia_2025_pea_free_sh_crosscheck",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ordoudi_2014_hmf_peak_window",
-      "citation": "Ordoudi et al. (2014)",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "caramelization_model_system",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a caramelization process-state calibration rather than as an executable benchmark.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "ordoudi_2014_hmf_peak_window",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
           "exists": true
         }
       ]
@@ -6101,40 +5016,6 @@
       ]
     },
     {
-      "id": "yeo_mottram_2023_lecithin_crosstalk_anchor",
-      "citation": "Yeo & Mottram (2023)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "plant_protein_plus_lecithin_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "recommend",
-        "reporting"
-      ],
-      "repo_next_action": "Treat soy lecithin as a bounded phospholipid-crosstalk calibration rather than as a generic oil addition or a new executable benchmark.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "yeo_mottram_2023_soy_lecithin_thiophene_uplift",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "zhao_2022_moromi_precursor_release",
       "citation": "Jo et al. (2022), Molecules 27:6182",
       "kind": "calibration_reference",
@@ -6167,31 +5048,6 @@
           "exists": true
         }
       ]
-    },
-    {
-      "id": "yu_2021_corn_hydrolysate_kinetics",
-      "citation": "Yu et al. (2021)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "amino_acid_sugar_core",
-      "slr_family_source": "01",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "reference_payload"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "reference_payload",
-      "runtime_artifacts_present": false,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Encode corn protein hydrolysate kinetic priors.",
-      "runtime_artifacts": []
     },
     {
       "id": "rawel_2005_protein_phenolic_binding",
@@ -6380,39 +5236,6 @@
         {
           "artifact_type": "safety_reference",
           "artifact_id": "davidek_2006_thr_glucose_furan_safety",
-          "path": "data/lit/safety_reference_payloads.json",
-          "template_kind": "safety_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "henle_2005_glycinin_cml",
-      "citation": "Henle (2005), Amino Acids 29:313",
-      "kind": "calibration_reference",
-      "chemistry_family": "protein_damage_markers",
-      "slr_family_source": "12",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "safety_payload"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "safety_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "safety",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Encode soy glycinin dicarbonyl consumption safety reference.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "safety_reference",
-          "artifact_id": "henle_2005_glycinin_cml",
           "path": "data/lit/safety_reference_payloads.json",
           "template_kind": "safety_payload",
           "exists": true
@@ -6968,38 +5791,6 @@
         {
           "artifact_type": "safety_reference_payload",
           "artifact_id": "poulsen_2023_pbma_cml_cel",
-          "path": "data/lit/safety_reference_payloads.json",
-          "template_kind": "safety_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pruteanu_2023_glucose_phe_arrhenius_browning",
-      "citation": "Pruteanu et al. (2023)",
-      "kind": "calibration_reference",
-      "chemistry_family": "protein_damage_markers",
-      "slr_family_source": "12",
-      "source_payload_role": "safety_reference_payload",
-      "target_payload_types": [
-        "safety_reference_payload"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "safety_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode browning activation energy safety prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "safety_reference_payload",
-          "artifact_id": "pruteanu_2023_glucose_phe_arrhenius_browning",
           "path": "data/lit/safety_reference_payloads.json",
           "template_kind": "safety_reference_payload",
           "exists": true
@@ -7333,59 +6124,6 @@
       ]
     },
     {
-      "id": "cerny_guntz_dubini_2008",
-      "citation": "Cerny & Guntz-Dubini (2008)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload",
-        "benchmark_intake_entry",
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "optimizer",
-        "reporting"
-      ],
-      "repo_next_action": "Expose as the pH-calibrated Family 03 benchmark anchor for thiamine-driven MFT support in the runtime lane.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "thiamine_cys_xylose_145C_Cerny2008",
-          "path": "data/benchmarks/thiamine_cys_xylose_145C_Cerny2008.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        },
-        {
-          "artifact_type": "benchmark_intake_entry",
-          "artifact_id": "cerny_guntz_dubini_2008",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "benchmark_intake_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cerny_2007_thiamine_split_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "foods_2023_cml_cel_proxy_benchmark",
       "citation": "Fu et al. (2023)",
       "kind": "quantitative_benchmark",
@@ -7485,116 +6223,6 @@
             "thiamine_pathway_priors"
           ],
           "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmc9905368_spi_hvp_xylose_benchmark",
-      "citation": "PMC9905368 (2023)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload"
-      ],
-      "matrix_family": "spi_hvp_xylose",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "benchmark_validation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a sulfur-focused executable benchmark subset tied to the protein-source registry.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
-      "citation": "Cho et al. (2023)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload"
-      ],
-      "matrix_family": "wheat_gluten_hvp_xylose",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "benchmark_validation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Expose as the highest-MFT plant-source sulfur benchmark for protein-source-aware formulation ranking.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
-      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "protein_damage_markers",
-      "slr_family_source": "12",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "benchmark_payload",
-        "safety_payload"
-      ],
-      "matrix_family": "mild_legume_extrudate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "benchmark_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "benchmark_validation",
-        "safety",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as the reference crossover benchmark and pair it with CEL/CML reporting above the degradation threshold.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "benchmark",
-          "artifact_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-          "path": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json",
-          "template_kind": "benchmark_payload",
-          "exists": true
-        },
-        {
-          "artifact_type": "safety_reference",
-          "artifact_id": "ramirez_jimenez_2000_furosine_crossover",
-          "path": "data/lit/safety_reference_payloads.json",
-          "template_kind": "safety_payload",
           "exists": true
         }
       ]
@@ -7964,44 +6592,6 @@
       ]
     },
     {
-      "id": "bhandari_1998_beta_cd_aldehyde_binding_anchor",
-      "citation": "Bhandari et al. (1998)",
-      "kind": "directional_prior",
-      "chemistry_family": "off_note_and_maillard_suppression",
-      "slr_family_source": "08",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_encapsulation_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded cyclodextrin-binding prior so Family 08 can expose partial aldehyde suppression without conflating it with protein-binding retention.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "bhandari_1998_beta_cd_aldehyde_binding_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "retention_binding_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "biondi_2010_oil_microwave_degradation",
       "citation": "Chiavaro et al. (2010), LWT 43:1104",
       "kind": "calibration_reference",
@@ -8101,43 +6691,6 @@
           "path": "data/lit/computational_priors.json",
           "sections": [
             "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "citation": "Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358",
-      "kind": "directional_prior",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded phosphorylated-sugar prior so G6P can outrank glucose when HDMF-support signals matter.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
           ],
           "template_kind": "computational_prior",
           "exists": true
@@ -8917,42 +7470,6 @@
       ]
     },
     {
-      "id": "huang_2021_sulfur_oav_support",
-      "citation": "Huang et al. (2021)",
-      "kind": "directional_prior",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a bounded sulfur-support prior for MFT and FFT prominence rather than as a benchmark payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "huang_2021_sulfur_oav_support_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "sulfur_peptide_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "huang_2022_thiamine_metal_catalysis",
       "citation": "Huang (2022)",
       "kind": "calibration_reference",
@@ -9354,38 +7871,6 @@
       ]
     },
     {
-      "id": "li_2010_phytate_chelation_kinetics",
-      "citation": "Li et al. (2010)",
-      "kind": "calibration_reference",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "computational_prior",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode phytate chelation kinetics prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "li_2010_phytate_chelation_kinetics",
-          "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
       "citation": "Liu et al. (2017), J. Agric. Food Chem. 65:2233",
       "kind": "calibration_reference",
@@ -9412,43 +7897,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "liardon_1991_r5p_donor_potency",
-      "citation": "Liardon et al. (1991)",
-      "kind": "directional_prior",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a donor-potency prior that keeps R5P and ribose above glucose in sulfur-positive routing decisions.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "liardon_1991_r5p_donor_potency_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -9861,51 +8309,6 @@
       ]
     },
     {
-      "id": "mottram_2001_mft_quench_buffering_anchor",
-      "citation": "Mottram & Elmore (2005), in The Maillard Reaction in Foods and Medicine, p.198",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior",
-        "process_state_calibration"
-      ],
-      "matrix_family": "sulfur_model_system",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep the Mottram landing compact by splitting sulfur-quench and buffering support into one bounded prior plus one process-state anchor instead of opening a new benchmark family.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "mottram_2001_lipid_aldehyde_mft_quench_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        },
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "mottram_2001_carnosine_buffered_mft_uplift",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "mottram_nobrega_2002_furanone_bridge",
       "citation": "Mottram & Nobrega (2002)",
       "kind": "directional_prior",
@@ -10137,43 +8540,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "nguyen_2025_ppi_microencapsulated_oil_stabilization",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ohsu_2025_kokumi_casr_anchor",
-      "citation": "Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "gamma_glutamyl_peptide_msg_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Keep the runtime landing compact by linking the CaSR and mouthfulness constants to a bounded Family 05 kokumi prior instead of opening a standalone kokumi solver.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "ohsu_2025_kokumi_casr_support_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "sulfur_peptide_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -10521,43 +8887,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "rawel_2002_cga_cysteine_blocking",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ref41_ppi_sulfur_binding",
-      "citation": "Wang et al. (2020)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_maillard_crosstalk",
-      "slr_family_source": "11",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "pea_protein_isolate",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Keep as a bounded sulfur-binding order prior so Family 11 does not treat all pea-matrix sulfur volatiles as retention-neutral before heat-driven trapping takes over.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "ref41_ppi_sulfur_volatile_binding_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "retention_binding_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -11127,42 +9456,6 @@
       ]
     },
     {
-      "id": "tran_2023_reducing_sugar_hme",
-      "citation": "Liu et al. (2022)",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbonyl_donor_hierarchy",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "pea_protein_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Encode starch reducing-sugar liberation priors during HME.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "tran_2023_starch_liberation_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "carbonyl_donor_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "van_boekel_2001_maillard_kinetics_review",
       "citation": "van Boekel (2001)",
       "kind": "directional_prior",
@@ -11337,38 +9630,6 @@
       ]
     },
     {
-      "id": "wang_2024_glucosamine_synergy",
-      "citation": "Wu et al. (2025)",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbonyl_donor_hierarchy",
-      "slr_family_source": "07",
-      "source_payload_role": "computational_prior",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode glucosamine synergy priors.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "wang_2024_glucosamine_synergy",
-          "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "xu_2025_peptide_hierarchy",
       "citation": "Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1",
       "kind": "calibration_reference",
@@ -11470,42 +9731,6 @@
       ]
     },
     {
-      "id": "yeo_shibamoto_1991_wof_hexanal",
-      "citation": "Yeo & Shibamoto (1991)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation"
-      ],
-      "repo_next_action": "Encode phospholipid hexanal contribution and LOX denaturation priors.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "yeo_shibamoto_1991_wof_hexanal_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "zamora_2010_decadienal_asparagine_decarboxylation",
       "citation": "Hidalgo, Delgado, Navarro & Zamora (2010), J. Agric. Food Chem. 58:10512",
       "kind": "calibration_reference",
@@ -11596,75 +9821,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "zha_2020_ppi_glycation_aggregation",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "zhang_1993_protein_deamidation_ammonia",
-      "citation": "Zhang et al. (1993)",
-      "kind": "calibration_reference",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "computational_prior",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "soy_protein",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode thermal deamidation kinetics.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "zhang_1993_protein_deamidation_ammonia",
-          "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "zhang_2022_unsaturated_aldehyde_potency_anchor",
-      "citation": "Zhang et al. (2022)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aldehyde_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a directional off-note prior so unsaturated aldehyde branches stay visibly higher risk than saturated analogues without opening a new benchmark lane.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "zhang_2022_unsaturated_aldehyde_offnote_potency_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -11775,40 +9931,6 @@
       ]
     },
     {
-      "id": "blank_grosch_1991_hdmf_anchor",
-      "citation": "Tonsbeek, Plancken & van de Weerdhof (1968), J. Agric. Food Chem. 16:1016",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "boiled_beef_reference",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "sensory_scoring"
-      ],
-      "repo_next_action": "Use as the compact Family 04 donor-routing and reporting anchor for HDMF without adding a large inline benchmark block.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "blank_grosch_1991_beef_hdmf_band",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "grosch_1982_hexanal_odt",
       "citation": "Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5)",
       "kind": "calibration_reference",
@@ -11835,38 +9957,6 @@
         {
           "artifact_type": "flavor_reference_payload",
           "artifact_id": "grosch_1982_hexanal_odt_anchor",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "hauck_tressl_1999_hdmf_non_amino",
-      "citation": "Hauck, Landmann, Raab, Bruhlmann & Schwab (2002), Carbohydr. Res. 337:1185",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "flavor_reference_payload",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Expose as a non-amino acid dependent furanone flavor reference payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "hauck_tressl_1999_hdmf_non_amino",
           "path": "data/lit/flavor_reference_payloads.json",
           "template_kind": "flavor_reference_payload",
           "exists": true
@@ -11944,20 +10034,6 @@
           "path": "data/lit/flavor_reference_payloads.json",
           "template_kind": "flavor_reference_payload",
           "exists": true
-        },
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "liu_2023_ppi_heptadienal_band",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        },
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "liu_2023_ppi_ibmp_band",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
         }
       ]
     },
@@ -11988,40 +10064,6 @@
         {
           "artifact_type": "flavor_reference_payload",
           "artifact_id": "liu_cadwallader_2023_pea_aeda_anchor",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "marquez_ruiz_2014_oleic_oav_anchor",
-      "citation": "Marquez-Ruiz et al. (2014)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "high_oleic_oil_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "lipid_oxidation",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep as the oleic-rich reference anchor so oil-selection logic does not treat nonanal-dominant systems as equivalent to hexanal-heavy linoleic oxidation.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "marquez_ruiz_2014_oleic_nonanal_oav_band",
           "path": "data/lit/flavor_reference_payloads.json",
           "template_kind": "flavor_reference_payload",
           "exists": true
@@ -12449,114 +10491,6 @@
       ]
     },
     {
-      "id": "wang_2022_lab_hexanal_cleanup_anchor",
-      "citation": "Wang et al. (2022)",
-      "kind": "calibration_reference",
-      "chemistry_family": "off_note_and_maillard_suppression",
-      "slr_family_source": "08",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "lab_fermented_plant_protein",
-      "legacy_status": "ready_for_reference_encoding",
-      "triage_status": "ready_reference",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Keep Wang 2022 as a compact hexanal-cleanup reference anchor that complements, rather than duplicates, the already-landed fermentation cleanup state package.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "wang_2022_lab_hexanal_cleanup_oav_target",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "xu_2024_soybean_pbma_hexanal",
-      "citation": "Xu et al. (2024)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "flavor_reference_payload"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "flavor_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Expose as a soybean PBMA storage flavor reference payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "xu_2024_soybean_pbma_hexanal_anchor",
-          "path": "data/lit/flavor_reference_payloads.json",
-          "template_kind": "flavor_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "fadel_2015_mft_retention",
-      "citation": "Fadel et al. (2015)",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "retention_payload",
-      "target_payload_types": [
-        "intake_registry_entry",
-        "slr_incorporation_ledger"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "intake_registry_entry",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Keep encoded as a soy isolate MFT retention anchor.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "intake_registry_entry",
-          "artifact_id": "fadel_2015_mft_retention",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "intake_registry_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "slr_incorporation_ledger",
-          "artifact_id": "fadel_2015_mft_retention",
-          "path": "results/literature/slr_incorporation_matrix.json",
-          "template_kind": "slr_incorporation_ledger",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "farmer_1991_alkyl_thiazoles",
       "citation": "Farmer & Patterson (1991), Food Chemistry 40:201",
       "kind": "calibration_reference",
@@ -12674,88 +10608,6 @@
         {
           "artifact_type": "slr_incorporation_ledger",
           "artifact_id": "nishimura_abe_2024",
-          "path": "results/literature/slr_incorporation_matrix.json",
-          "template_kind": "slr_incorporation_ledger",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "siripitakpong_2026_fft_retention",
-      "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "retention_payload",
-      "target_payload_types": [
-        "intake_registry_entry",
-        "slr_incorporation_ledger"
-      ],
-      "matrix_family": "pea_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "intake_registry_entry",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Keep encoded as a pea isolate FFT binding energy anchor.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "intake_registry_entry",
-          "artifact_id": "siripitakpong_2026_fft_retention",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "intake_registry_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "slr_incorporation_ledger",
-          "artifact_id": "siripitakpong_2026_fft_retention",
-          "path": "results/literature/slr_incorporation_matrix.json",
-          "template_kind": "slr_incorporation_ledger",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "wang_2023_mft_retention",
-      "citation": "Wang et al. (2023)",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "retention_payload",
-      "target_payload_types": [
-        "intake_registry_entry",
-        "slr_incorporation_ledger"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "intake_registry_entry",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "repo_next_action": "Keep encoded as a native soy isolate MFT retention anchor.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "intake_registry_entry",
-          "artifact_id": "wang_2023_mft_retention",
-          "path": "data/lit/benchmark_intake_registry.json",
-          "template_kind": "intake_registry_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "slr_incorporation_ledger",
-          "artifact_id": "wang_2023_mft_retention",
           "path": "results/literature/slr_incorporation_matrix.json",
           "template_kind": "slr_incorporation_ledger",
           "exists": true
@@ -12902,85 +10754,6 @@
           "sections": [
             "denaturation_heuristics",
             "matrix_corrections"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "comunian_2021_thiamine_encapsulation",
-      "citation": "Comunian et al. (2021)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "encapsulated_thiamine_additive",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as the compact Family 03 protected-thiamine calibration anchor so delayed-release support is bounded without inflating the intake registry.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "comunian_2021_thiamine_encapsulation",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "de_leyn_2019",
-      "citation": "De Leyn & Muylle (2019)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration",
-        "computational_prior"
-      ],
-      "matrix_family": "soy_protein_extrusion",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "headspace"
-      ],
-      "repo_next_action": "Use as the Family 03 extrusion-survival calibration anchor so pre-extrusion thiamine is down-weighted instead of treated as fully available support.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "de_leyn_2019_thiamine_retention",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cerny_2007_thiamine_split_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
           ],
           "template_kind": "computational_prior",
           "exists": true
@@ -13138,73 +10911,6 @@
             "matrix_corrections"
           ],
           "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "malia_2025_pea_free_sh_crosscheck",
-      "citation": "Malia et al. (2025)",
-      "kind": "calibration_reference",
-      "chemistry_family": "alternative_protein_matrix_scope",
-      "slr_family_source": "06",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "pea_protein_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "matrix_correction",
-        "literature_runtime"
-      ],
-      "repo_next_action": "Use as a supportive pea free-SH behavior crosscheck.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "malia_2025_pea_free_sh_crosscheck",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ordoudi_2014_hmf_peak_window",
-      "citation": "Ordoudi et al. (2014)",
-      "kind": "calibration_reference",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "caramelization_model_system",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a caramelization process-state calibration rather than as an executable benchmark.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "ordoudi_2014_hmf_peak_window",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
           "exists": true
         }
       ]
@@ -13397,40 +11103,6 @@
       ]
     },
     {
-      "id": "yeo_mottram_2023_lecithin_crosstalk_anchor",
-      "citation": "Yeo & Mottram (2023)",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "process_state_calibration"
-      ],
-      "matrix_family": "plant_protein_plus_lecithin_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "process_state_calibration",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "recommend",
-        "reporting"
-      ],
-      "repo_next_action": "Treat soy lecithin as a bounded phospholipid-crosstalk calibration rather than as a generic oil addition or a new executable benchmark.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "process_state_calibration",
-          "artifact_id": "yeo_mottram_2023_soy_lecithin_thiophene_uplift",
-          "path": "data/lit/process_state_calibrations.json",
-          "template_kind": "process_state_calibration",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "zhao_2022_moromi_precursor_release",
       "citation": "Jo et al. (2022), Molecules 27:6182",
       "kind": "calibration_reference",
@@ -13463,31 +11135,6 @@
           "exists": true
         }
       ]
-    },
-    {
-      "id": "yu_2021_corn_hydrolysate_kinetics",
-      "citation": "Yu et al. (2021)",
-      "kind": "quantitative_benchmark",
-      "chemistry_family": "amino_acid_sugar_core",
-      "slr_family_source": "01",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "reference_payload"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "reference_payload",
-      "runtime_artifacts_present": false,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Encode corn protein hydrolysate kinetic priors.",
-      "runtime_artifacts": []
     },
     {
       "id": "rawel_2005_protein_phenolic_binding",
@@ -13676,39 +11323,6 @@
         {
           "artifact_type": "safety_reference",
           "artifact_id": "davidek_2006_thr_glucose_furan_safety",
-          "path": "data/lit/safety_reference_payloads.json",
-          "template_kind": "safety_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "henle_2005_glycinin_cml",
-      "citation": "Henle (2005), Amino Acids 29:313",
-      "kind": "calibration_reference",
-      "chemistry_family": "protein_damage_markers",
-      "slr_family_source": "12",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "safety_payload"
-      ],
-      "matrix_family": "soy_isolate",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "safety_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "safety",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Encode soy glycinin dicarbonyl consumption safety reference.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "safety_reference",
-          "artifact_id": "henle_2005_glycinin_cml",
           "path": "data/lit/safety_reference_payloads.json",
           "template_kind": "safety_payload",
           "exists": true
@@ -14271,38 +11885,6 @@
       ]
     },
     {
-      "id": "pruteanu_2023_glucose_phe_arrhenius_browning",
-      "citation": "Pruteanu et al. (2023)",
-      "kind": "calibration_reference",
-      "chemistry_family": "protein_damage_markers",
-      "slr_family_source": "12",
-      "source_payload_role": "safety_reference_payload",
-      "target_payload_types": [
-        "safety_reference_payload"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "safety_reference_payload",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime"
-      ],
-      "repo_next_action": "Encode browning activation energy safety prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "safety_reference_payload",
-          "artifact_id": "pruteanu_2023_glucose_phe_arrhenius_browning",
-          "path": "data/lit/safety_reference_payloads.json",
-          "template_kind": "safety_reference_payload",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "smuda_glomb_2013_aa_degradation_pathways",
       "citation": "Smuda & Glomb (2013)",
       "kind": "calibration_reference",
@@ -14553,8 +12135,8 @@
     "encoded_and_ready_ids": []
   },
   "summary": {
-    "intake_reference_count": 205,
-    "encoded_reference_count": 205,
+    "intake_reference_count": 172,
+    "encoded_reference_count": 172,
     "ready_runtime_count": 0,
     "ready_benchmark_count": 0,
     "wet_lab_blocked_count": 4,

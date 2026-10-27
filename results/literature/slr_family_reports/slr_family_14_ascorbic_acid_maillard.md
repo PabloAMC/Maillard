@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 14: Ascorbic Acid Maillard
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering ascorbic acid maillard.  
 **Strategic Posture:** `bounded_upstream_source`  
 **Runtime Concept:** `stealth_dicarbonyl_source`  
-**Scope & Targets:** Covers target compounds/variables: `ascorbic_acid_loss`, `3-deoxythreosone`, `pentosidine_load`. Preferred payload types: `bounded_source_term_payload`, `computational_prior`. Target runtime modules: `src/precursor_resolver.py`, `src/flavor.py`, `src/safety.py`.  
+**Scope & Targets:** Covers target compounds/variables: `ascorbic_acid_loss`, `3-deoxythreosone`, `pentosidine_load`. Preferred payload types: `bounded_source_term_payload`, `computational_prior`. Target runtime modules: .  
 
 ---
 
@@ -107,8 +107,8 @@
 
 ---
 
-### Grandhee & Monnier (1991)
-- **DOI:** [10.1074/jbc.266.18.11644](https://doi.org/10.1074/jbc.266.18.11644)
+### Grandhee & Monnier (1991), J. Biol. Chem. 266:11649
+- **DOI:** [10.1016/s0021-9258(18)99006-x](https://doi.org/10.1016/s0021-9258(18)99006-x)
 - **Matrix Family:** bsa_ascorbic_crosslink_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -147,8 +147,8 @@
 
 ---
 
-### Yu et al. (2018)
-- **DOI:** [10.1590/1678-457X.08717](https://doi.org/10.1590/1678-457X.08717)
+### Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537
+- **DOI:** [10.1590/1678-457x.08717](https://doi.org/10.1590/1678-457x.08717)
 - **Matrix Family:** ascorbic_amino_crosslink_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -185,8 +185,8 @@
 
 ---
 
-### Bi et al. (2020)
-- **DOI:** [10.1021/acs.jafc.9b07711](https://doi.org/10.1021/acs.jafc.9b07711)
+### Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714
+- **DOI:** [10.1021/acs.jafc.0c00200](https://doi.org/10.1021/acs.jafc.0c00200)
 - **Matrix Family:** xylose_alanine_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -377,7 +377,7 @@
 
 ---
 
-### Yu et al. (2018)
+### Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537
 - **DOI:** [10.1590/1678-457x.08717](https://doi.org/10.1590/1678-457x.08717)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -486,7 +486,7 @@
 
 ---
 
-### Hendrickx et al. (1998)
+### Van den Broeck et al. (1998), J. Agric. Food Chem. 46:2001
 - **DOI:** [10.1021/jf9708251](https://doi.org/10.1021/jf9708251)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -524,7 +524,7 @@
 
 ---
 
-### Jian et al. (2012)
+### Hsu et al. (2012), J. Agric. Food Chem. 60:10696
 - **DOI:** [10.1021/jf3032342](https://doi.org/10.1021/jf3032342)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -577,18 +577,18 @@ Total papers analyzed: **14** (Benchmark-eligible: **0**, Calibration references
 |---|---|---|---|
 | Yu et al. (2020) | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Feng et al. (2023) | 2/8 | ❌ Rejected | ascorbic_hcw_model |
-| Grandhee & Monnier (1991) | 2/8 | ❌ Rejected | bsa_ascorbic_crosslink_model |
-| Yu et al. (2018) | 2/8 | ❌ Rejected | ascorbic_amino_crosslink_model |
-| Bi et al. (2020) | 3/8 | ⚠️ Calibration | xylose_alanine_model_system |
+| Grandhee & Monnier (1991), J. Biol. Chem. 266:11649 | 2/8 | ❌ Rejected | bsa_ascorbic_crosslink_model |
+| Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537 | 2/8 | ❌ Rejected | ascorbic_amino_crosslink_model |
+| Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714 | 3/8 | ⚠️ Calibration | xylose_alanine_model_system |
 | Nemet & Monnier (2011) | 2/8 | ❌ Rejected | free_model_system |
 | Smuda & Glomb (2013) | 3/8 | ⚠️ Calibration | free_model_system |
 | Serpen & Gökmen (2007) | 3/8 | ⚠️ Calibration | free_model_system |
 | Yang et al. (2021) | 3/8 | ⚠️ Calibration | free_model_system |
-| Yu et al. (2018) | 3/8 | ⚠️ Calibration | free_model_system |
+| Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537 | 3/8 | ⚠️ Calibration | free_model_system |
 | Manso et al. (2001) | 3/8 | ⚠️ Calibration | free_model_system |
 | Takase et al. (2025) | 3/8 | ⚠️ Calibration | free_model_system |
-| Hendrickx et al. (1998) | 3/8 | ⚠️ Calibration | free_model_system |
-| Jian et al. (2012) | 3/8 | ⚠️ Calibration | free_model_system |
+| Van den Broeck et al. (1998), J. Agric. Food Chem. 46:2001 | 3/8 | ⚠️ Calibration | free_model_system |
+| Hsu et al. (2012), J. Agric. Food Chem. 60:10696 | 3/8 | ⚠️ Calibration | free_model_system |
 
 ---
 
@@ -599,28 +599,28 @@ Total papers analyzed: **14** (Benchmark-eligible: **0**, Calibration references
 
 ### CALIBRATION (Score 3-5)
 - `Yu et al. (2020)` (Score: 3/8)
-- `Bi et al. (2020)` (Score: 3/8)
+- `Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714` (Score: 3/8)
 - `Smuda & Glomb (2013)` (Score: 3/8)
 - `Serpen & Gökmen (2007)` (Score: 3/8)
 - `Yang et al. (2021)` (Score: 3/8)
-- `Yu et al. (2018)` (Score: 3/8)
+- `Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537` (Score: 3/8)
 - `Manso et al. (2001)` (Score: 3/8)
 - `Takase et al. (2025)` (Score: 3/8)
-- `Hendrickx et al. (1998)` (Score: 3/8)
-- `Jian et al. (2012)` (Score: 3/8)
+- `Van den Broeck et al. (1998), J. Agric. Food Chem. 46:2001` (Score: 3/8)
+- `Hsu et al. (2012), J. Agric. Food Chem. 60:10696` (Score: 3/8)
 
 ### REJECTED (Score < 3)
 - `Feng et al. (2023)` (Score: 2/8)
-- `Grandhee & Monnier (1991)` (Score: 2/8)
-- `Yu et al. (2018)` (Score: 2/8)
+- `Grandhee & Monnier (1991), J. Biol. Chem. 266:11649` (Score: 2/8)
+- `Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537` (Score: 2/8)
 - `Nemet & Monnier (2011)` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/precursor_resolver.py`, `src/flavor.py`, `src/safety.py` must explicitly account for `stealth_dicarbonyl_source` as a modifier when predicting `ascorbic_acid_loss`, `3-deoxythreosone`, `pentosidine_load` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `stealth_dicarbonyl_source` as a modifier when predicting `ascorbic_acid_loss`, `3-deoxythreosone`, `pentosidine_load` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `bounded_upstream_source` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

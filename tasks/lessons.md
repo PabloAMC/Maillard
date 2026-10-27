@@ -171,3 +171,17 @@
   model goes into the repo beside what it summarises (extend an existing doc before creating one), passes
   through a PR like everything else, and an email to a third party is short and links only to published
   repository files.
+
+- **A headline number is only as good as its definition; read the test before repeating it.** On
+  2026-10-27 the owner was told, for a meeting with WUR, that "63 unsourced records are used when the model
+  runs", repeated from README. The test behind it counted any record under `data/lit/` as "reaching runtime";
+  a trace showed the front door opens none of those files. Rule: before quoting a repository statistic to
+  anyone outside, open the test or generator that pins it and check that its definition measures what the
+  sentence claims; where it does not, measure (trace, recount) before speaking.
+
+- **A verification claim names its scope, or it reads as total.** The owner believed the literature was sane
+  because the record said "every defective anchor was repaired or explicitly labelled" and "the citation gate
+  blocks a confabulated DOI". Both were true of a narrower scope than they sounded: labelled records stayed in
+  the tree, and the gate never sees a live DOI that points at the wrong paper, nor any value. Rule: a sentence
+  that says something is verified states what was checked (which files, against what) and what was not; an
+  unsourced record is deleted, not labelled and kept.

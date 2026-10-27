@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 3: Thiamine degradation and sulfur support
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering thiamine degradation and sulfur support.  
 **Strategic Posture:** `high_value_support_lane`  
 **Runtime Concept:** `thiamine_fragmentation_support`  
-**Scope & Targets:** Covers target compounds/variables: `thiamine_availability`, `2-methyl-3-furanthiol`. Preferred payload types: `computational_prior`, `flavor_reference_payload`. Target runtime modules: `src/literature_runtime.py`, `src/recommend.py`.  
+**Scope & Targets:** Covers target compounds/variables: `thiamine_availability`, `2-methyl-3-furanthiol`. Preferred payload types: `computational_prior`, `flavor_reference_payload`. Target runtime modules: .  
 
 ---
 
@@ -27,94 +27,6 @@
 ---
 
 ## SECTION 1 — Curated References
-
-### De Leyn & Muylle (2019)
-- **DOI:** [10.1021/acs.jafc.de_leyn_2019](https://doi.org/10.1021/acs.jafc.de_leyn_2019)
-- **Matrix Family:** soy_protein_extrusion
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ✅ | Analytical method / output mode specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 5/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `barrel_temp_C` | `[140.0, 160.0, 180.0]` |
-| `reference_moisture_pct` | `65.0` |
-| `thiamine_retention_pct_by_temp` | `{'140.0': 68.0, '160.0': 31.0, '180.0': 8.0}` |
-| `thiamine_retention_pct_180C_75pct_moisture` | `4.0` |
-| `estimated_half_life_min_by_temp` | `{'140.0': 4.2, '160.0': 1.6, '180.0': 0.6}` |
-| `replicates` | `3` |
-| `volatile_output_mode` | `thiamine_retention_hplc` |
-
-**What it supports:**
-- Quantitative thiamine-survival attenuation for pre-extrusion fortification in soy-like structured matrices
-- Family 03 runtime calibration for barrel-temperature severity rather than binary thiamine availability
-- Scientist-facing evidence that high-moisture extrusion destroys most free thiamine before downstream flavor generation
-
-**What it does not support:**
-- Direct MFT or FFT quantification in the same extrusion run
-- Post-extrusion thiamine addition or encapsulation release behavior
-- A complete plant-matrix volatile benchmark by itself
-
-**Next Action:** Use as the Family 03 extrusion-survival calibration anchor so pre-extrusion thiamine is down-weighted instead of treated as fully available support.
-
----
-
-### Comunian et al. (2021)
-- **DOI:** [10.1016/j.foodres.2021.110345](https://doi.org/10.1016/j.foodres.2021.110345)
-- **Matrix Family:** encapsulated_thiamine_additive
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 4/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `thermal_severity_temp_C` | `180.0` |
-| `thermal_severity_time_min` | `2.0` |
-| `free_thiamine_retention_pct` | `8.0` |
-| `maltodextrin_gum_arabic_retention_pct` | `71.0` |
-| `alginate_bead_retention_pct` | `84.0` |
-| `release_window_c` | `[90.0, 100.0]` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Bounded protected-thiamine survival at extrusion-like severity
-- Cook-triggered sulfur-support framing for encapsulated additives instead of free-thiamine assumptions
-
-**What it does not support:**
-- Commercial twin-screw extrusion shear closure
-- Direct meaty sulfur output in the same run
-
-**Next Action:** Use as the compact Family 03 protected-thiamine calibration anchor so delayed-release support is bounded without inflating the intake registry.
-
----
 
 ### Voelker et al. (2021)
 - **DOI:** [10.1186/s13065-021-00773-y](https://doi.org/10.1186/s13065-021-00773-y)
@@ -162,7 +74,6 @@
 ---
 
 ### Huang (2022)
-- **DOI:** [ClemsonThesis3936](https://doi.org/ClemsonThesis3936)
 - **Matrix Family:** metal_catalyzed_thiamine_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -205,8 +116,8 @@
 
 ---
 
-### Arabshahi & Lund (1988)
-- **DOI:** [10.1021/jf00080a032](https://doi.org/10.1021/jf00080a032)
+### Arabshahi & Lund (1988), J. Food Sci. 53:199
+- **DOI:** [10.1111/j.1365-2621.1988.tb10208.x](https://doi.org/10.1111/j.1365-2621.1988.tb10208.x)
 - **Matrix Family:** starch_based_low_moisture_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -292,8 +203,8 @@
 
 ---
 
-### Hofmann et al. (1996)
-- **DOI:** [10.1021/jf960062o](https://doi.org/10.1021/jf960062o)
+### Bolton, Reineccius, Liardon & Huynh-Ba (1994), ACS Symp. Ser. 543:270-278 -- REPLACES the nonexistent "Hofmann et al. (1996)"
+- **DOI:** [10.1021/bk-1994-0543.ch022](https://doi.org/10.1021/bk-1994-0543.ch022)
 - **Matrix Family:** free_model_system
 - **Kind:** `quantitative_benchmark`
 - **Payload Role:** `benchmark_intake`
@@ -306,44 +217,46 @@
 | ✅ | Conditions T, pH, time specified |
 | ✅ | Analytical method / output mode specified |
 | ✅ | Absolute yields reported |
-| ✅ | Replicates reported |
+| ❌ | Replicates < 3 or not specified |
 | ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
 | ✅ | Odor thresholds / sensory reported |
 
-**Score: 7/8 → Benchmark-eligible**
+**Score: 6/8 → Benchmark-eligible**
 
 **Key Values:**
 | Parameter | Value |
 |---|---|
-| `temp_C` | `100.0` |
-| `time_min` | `30.0` |
-| `ph` | `5.5` |
-| `thiamine_mM` | `0.1` |
-| `cysteine_mM` | `1.0` |
-| `ribose_mM` | `1.0` |
-| `thiamine_alone_mft_ug_per_l` | `0.82` |
-| `cys_ribose_mft_ug_per_l` | `0.31` |
-| `combined_mft_ug_per_l` | `3.14` |
-| `combined_synergy_factor` | `2.64` |
-| `replicates` | `3` |
-| `volatile_output_mode` | `absolute_ug_per_l` |
+| `temp_C` | `120.0` |
+| `time_min` | `60.0` |
+| `ph` | `None` |
+| `ph_note` | `NOT REPORTED in the source. The rebuilt benchmark JSON pins 5.0 only because the loader requires a value; it is not an anchor.` |
+| `thiamine_mM` | `None` |
+| `cysteine_mM` | `None` |
+| `sugar` | `D-glucose` |
+| `molarity_note` | `NOT REPORTED in the indexed abstract. The rebuilt benchmark JSON uses assumed process-flavor loadings (thiamine 1.0 mM, cysteine 10.0 mM, glucose 10.0 mM), marked assumed_not_from_source.` |
+| `mft_ppb_range` | `[11.7, 14.7]` |
+| `mft_ppb_target` | `13.0` |
+| `mft_sulfur_from_cysteine_pct` | `[7.5, 8.0]` |
+| `model_variants` | `4` |
+| `volatile_output_mode` | `absolute_ppb` |
 
 **What it supports:**
-- Beef-realistic MFT comparison between thiamine-only, cysteine plus ribose, and combined precursor systems
-- A conservative synergy floor for Family 03 support under lower precursor concentrations than Cerny 2008
-- Scientist-facing evidence that thiamine remains efficient even at realistic concentration levels
+- A quantitative MFT anchor for the thiamine + cysteine + hexose system at 120 C / 60 min (GC-MS-SIM, 389-489 ng per 33.3 g = 11.7-14.7 ppb)
+- The qualitative claim that thiamine is the dominant sulfur source for MFT in this system (only 7.5-8.0 percent of MFT sulfur came from 34S-cysteine; no thiamine gave no MFT)
+- An order-of-magnitude Family 03 scale check independent of the high-concentration Cerny 2008 pentose optimum
 
 **What it does not support:**
-- Full pH response outside pH 5.5
+- Any pH response -- the source does not report pH
+- A thiamine-alone vs cysteine+sugar synergy factor -- the previously recorded 2.64 had no source and was withdrawn 2026-08-26
 - Extrusion survival or encapsulation protection
 - Plant-protein matrix trapping or release
 
-**Next Action:** Use as the conservative synergy floor for Family 03 so mixed-system support does not rely only on the high-concentration Cerny 2008 optimum.
+**Next Action:** Use as the Family 03 hexose-system MFT scale check. NOTE (2026-08-26): the model currently under-predicts this anchor by ~163x (0.080 ppb vs 13 ppb) and the gap is robust (35-745x) across the assumed-value sweep -- this is now the panel's honest thiamine failure signal, not a passing row.
 
 ---
 
-### Tang et al. (2013)
-- **DOI:** [10.1080/17415993.2012.715206](https://doi.org/10.1080/17415993.2012.715206)
+### Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012)
+- **DOI:** [10.1080/17415993.2012.708933](https://doi.org/10.1080/17415993.2012.708933)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `flavor_reference_payload`
@@ -378,8 +291,8 @@
 
 ---
 
-### Tannenbaum et al. (1985)
-- **DOI:** [10.1021/jf00065a009](https://doi.org/10.1021/jf00065a009)
+### Mauri, Alzamora, Chirife & Tomio (1989), Int. J. Food Sci. Technol. 24:1
+- **DOI:** [10.1111/j.1365-2621.1989.tb00613.x](https://doi.org/10.1111/j.1365-2621.1989.tb00613.x)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -452,6 +365,45 @@
 
 ---
 
+### Mottram (1998)
+- **DOI:** [10.1016/s0308-8146(98)00076-4](https://doi.org/10.1016/s0308-8146(98)00076-4)
+- **Matrix Family:** methionine_model_system
+- **Kind:** `calibration_reference`
+- **Payload Role:** `benchmark_intake`
+- **Status:** `encoded`
+
+| Criterion | Assessment |
+|---|---|
+| ✅ | Matrix family / reactant identity specified |
+| ✅ | Precursor concentrations / loads specified |
+| ❌ | Temperature, time or pH missing from key_values |
+| ❌ | Analytical output mode not specified |
+| ❌ | Yields reported in relative/qualitative mode only |
+| ❌ | Replicates < 3 or not specified |
+| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
+| ❌ | No sensory or odor threshold tags present |
+
+**Score: 2/8 → Rejected**
+
+**Key Values:**
+| Parameter | Value |
+|---|---|
+| `methional_strecker_yield_mol_pct` | `38.0` |
+| `temperature_c` | `150.0` |
+| `amino_acid` | `methionine` |
+
+**What it supports:**
+- Methional Strecker yield anchor: ~38 mol% from methionine at ~150°C
+- General sulfur volatile formation narrative from amino acid Strecker pathways
+
+**What it does not support:**
+- Plant-matrix methional quantification
+- A universal Strecker yield under variable Aw or pH conditions
+
+**Next Action:** Replaces the ghost mottram_wedzicha_1990_methional entry. Use as the methional Strecker yield anchor for Family 03 sulfur reporting.
+
+---
+
 ## Confirmed Gaps and Structural Limitations
 
 - **Matrix Transferability Gap:** Most kinetic and volatile data for `Thiamine degradation and sulfur support` are derived from simple aqueous buffers or free model systems. Transferability to complex plant-based meat matrices (e.g., Pea Protein Isolate or Soy Protein Isolate) under high-moisture extrusion remains a major gap.
@@ -462,20 +414,19 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 3
 
-Total papers analyzed: **10** (Benchmark-eligible: **2**, Calibration references: **6**, Rejected: **2**)
+Total papers analyzed: **9** (Benchmark-eligible: **2**, Calibration references: **4**, Rejected: **3**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| De Leyn & Muylle (2019) | 5/8 | ⚠️ Calibration | soy_protein_extrusion |
-| Comunian et al. (2021) | 4/8 | ⚠️ Calibration | encapsulated_thiamine_additive |
 | Voelker et al. (2021) | 4/8 | ⚠️ Calibration | aqueous_thiamine_model |
 | Huang (2022) | 5/8 | ⚠️ Calibration | metal_catalyzed_thiamine_model |
-| Arabshahi & Lund (1988) | 4/8 | ⚠️ Calibration | starch_based_low_moisture_model |
+| Arabshahi & Lund (1988), J. Food Sci. 53:199 | 4/8 | ⚠️ Calibration | starch_based_low_moisture_model |
 | Cerny & Guntz-Dubini (2008) | 6/8 | ✅ Eligible | free_model_system |
-| Hofmann et al. (1996) | 7/8 | ✅ Eligible | free_model_system |
-| Tang et al. (2013) | 2/8 | ❌ Rejected | free_model_system |
-| Tannenbaum et al. (1985) | 2/8 | ❌ Rejected | free_model_system |
+| Bolton, Reineccius, Liardon & Huynh-Ba (1994), ACS Symp. Ser. 543:270-278 -- REPLACES the nonexistent "Hofmann et al. (1996)" | 6/8 | ✅ Eligible | free_model_system |
+| Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012) | 2/8 | ❌ Rejected | free_model_system |
+| Mauri, Alzamora, Chirife & Tomio (1989), Int. J. Food Sci. Technol. 24:1 | 2/8 | ❌ Rejected | free_model_system |
 | Voelker et al. (2018) | 3/8 | ⚠️ Calibration | free_model_system |
+| Mottram (1998) | 2/8 | ❌ Rejected | methionine_model_system |
 
 ---
 
@@ -483,26 +434,25 @@ Total papers analyzed: **10** (Benchmark-eligible: **2**, Calibration references
 
 ### REFERENCE_ANCHOR / PRIMARY (Score >= 6)
 - `Cerny & Guntz-Dubini (2008)` (Score: 6/8)
-- `Hofmann et al. (1996)` (Score: 7/8)
+- `Bolton, Reineccius, Liardon & Huynh-Ba (1994), ACS Symp. Ser. 543:270-278 -- REPLACES the nonexistent "Hofmann et al. (1996)"` (Score: 6/8)
 
 ### CALIBRATION (Score 3-5)
-- `De Leyn & Muylle (2019)` (Score: 5/8)
-- `Comunian et al. (2021)` (Score: 4/8)
 - `Voelker et al. (2021)` (Score: 4/8)
 - `Huang (2022)` (Score: 5/8)
-- `Arabshahi & Lund (1988)` (Score: 4/8)
+- `Arabshahi & Lund (1988), J. Food Sci. 53:199` (Score: 4/8)
 - `Voelker et al. (2018)` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Tang et al. (2013)` (Score: 2/8)
-- `Tannenbaum et al. (1985)` (Score: 2/8)
+- `Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012)` (Score: 2/8)
+- `Mauri, Alzamora, Chirife & Tomio (1989), Int. J. Food Sci. Technol. 24:1` (Score: 2/8)
+- `Mottram (1998)` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/literature_runtime.py`, `src/recommend.py` must explicitly account for `thiamine_fragmentation_support` as a modifier when predicting `thiamine_availability`, `2-methyl-3-furanthiol` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `thiamine_fragmentation_support` as a modifier when predicting `thiamine_availability`, `2-methyl-3-furanthiol` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `high_value_support_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

@@ -311,12 +311,14 @@ BUNDLE_BASELINES = {
         "af74d73ebf7b3a0e5ab06a6a5979c1bedc631927b156322605576f4d5006dd67",
     "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019":
         "539151b2537cfad852a7c6e77821afbd73059294ce701f4752250da7806da7d5",
+    # re-pinned 2026-10-27: the three Chang2021 bundles' citation now names the paper's real
+    # authors (Lin, Chan, Kao & Sung, per CrossRef); measured block and conditions untouched.
     "mp_holdout_glucose_asparagine_180C_10min_Chang2021":
-        "b2a0a4f3eef22450e8c4f2d29643e16b052555dc74eb73f0cedc297b9c1cd531",
+        "4a87369ccb98ac54430b8234e87771adb56278b66d7caabf4c88f1c906b46e60",
     "mp_holdout_glucose_asparagine_180C_30min_Chang2021":
-        "b9adc2ffe8be995795fc816cc01823b53a5bb4d64876b64377ed45da9b6db532",
+        "209520bc05e586003665574e2ca9c9617754deed28a43bf2dd499422e1eb29f4",
     "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021":
-        "531bb130e00c5aafe789a2d2e47867924a894df0cc086eaa91a8ed7eb4c8bc3d",
+        "93e94b120eba475dc05d0f1b63ca6bd3faf48e34cd195cbfb7a47544b826a5c2",
     # RE-BASELINED BY WAVE B37/B38 (2026-09-11): the precursor provenance note gained a correction --
     # Knol 2005 is on disk and its dossier confirms the 0.2 M; no measured value moved. Previous: 974846cfc0fa87780e208fbc882310c41efcd1caa1d15fc4ae527f648edd204b
     "mp_holdout_glucose_asparagine_180C_Ye2024":

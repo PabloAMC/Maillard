@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 1: Amino acid-sugar Maillard core
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering amino acid-sugar maillard core.  
 **Strategic Posture:** `first_class_core`  
 **Runtime Concept:** `core_reaction_network`  
-**Scope & Targets:** Covers target compounds/variables: `2-methyl-3-furanthiol`, `2-furfurylthiol`, `methional`, `2,5-dimethylpyrazine`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`. Target runtime modules: `src/precursor_resolver.py`, `src/literature_runtime.py`, `src/benchmark_validation.py`.  
+**Scope & Targets:** Covers target compounds/variables: `2-methyl-3-furanthiol`, `2-furfurylthiol`, `methional`, `2,5-dimethylpyrazine`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`. Target runtime modules: .  
 
 ---
 
@@ -109,7 +109,7 @@
 
 ---
 
-### Hofmann & Schieberle (1997/1998), JAFC
+### Kerscher & Grosch (1998), Journal of Agricultural and Food Chemistry 46:1954
 - **DOI:** [10.1021/jf970892v](https://doi.org/10.1021/jf970892v)
 - **Matrix Family:** cooked_meat
 - **Confidence Tier:** high
@@ -163,8 +163,8 @@
 
 ---
 
-### Davidek et al. (2006)
-- **DOI:** [10.1021/jf053246m](https://doi.org/10.1021/jf053246m)
+### Limacher, Kerler, Davidek, Schmalzried & Blank (2008), JAFC 56:3639
+- **DOI:** [10.1021/jf800268t](https://doi.org/10.1021/jf800268t)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -190,35 +190,8 @@
 
 ---
 
-### Martins & van Boekel (2003)
-- **DOI:** [10.1021/jf021111m](https://doi.org/10.1021/jf021111m)
-- **Matrix Family:** free_model_system
-- **Confidence Tier:** high
-- **Incorporation Status:** `encoded_shown`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ✅ | Analytical method / output compounds specified |
-| ❌ | Absolute yields reported (not verified in matrix entry) |
-| ✅ | Replicates / confidence tier verified |
-| ✅ | LOD/LOQ or incorporation status confirmed |
-| ❌ | Odor thresholds / sensory parameters reported (not verified in matrix entry) |
-
-**Score: 6/8 → Benchmark-eligible**
-
-- **Compounds Supported:** furosine, pyrraline
-- **Parameters Supported:** furosine_formation_ea, pyrraline_formation_ea
-- **Exact Numeric Anchors:** furosine Ea 28.5 kcal/mol, pyrraline Ea 31.2 kcal/mol
-- **Notes on Limits:** *Free model system kinetics.*
-- **Next Action:** Use as prior bounds for furosine and pyrraline activation energies.
-
----
-
-### Liu et al. (2023/2024)
-- **DOI:** [10.1021/acs.jafc.9b05898](https://doi.org/10.1021/acs.jafc.9b05898)
+### Yu et al. (2020), J. Agric. Food Chem. 68:1714-1724
+- **DOI:** [10.1021/acs.jafc.0c00200](https://doi.org/10.1021/acs.jafc.0c00200)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** medium
 - **Incorporation Status:** `encoded_shown`
@@ -244,62 +217,8 @@
 
 ---
 
-### Mottram & Wedzicha (1990)
-- **DOI:** [10.1016/0308-8146(90)90009-Q](https://doi.org/10.1016/0308-8146(90)90009-Q)
-- **Matrix Family:** free_model_system
-- **Confidence Tier:** medium
-- **Incorporation Status:** `modeled_not_payloaded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ✅ | Analytical method / output compounds specified |
-| ❌ | Absolute yields reported (not verified in matrix entry) |
-| ✅ | Replicates / confidence tier verified |
-| ❌ | LOD/LOQ or incorporation status confirmed (not verified in matrix entry) |
-| ❌ | Odor thresholds / sensory parameters reported (not verified in matrix entry) |
-
-**Score: 5/8 → Calibration reference**
-
-- **Compounds Supported:** methional
-- **Parameters Supported:** met_mgo_to_methional_conversion_pct
-- **Exact Numeric Anchors:** conversion yield 12%
-- **Notes on Limits:** *Free model system kinetics.*
-- **Next Action:** Use to model methionine-dicarbonyl Strecker kinetics.
-
----
-
-### Yu et al. (2021)
-- **DOI:** [10.1016/j.lwt.2021.111802](https://doi.org/10.1016/j.lwt.2021.111802)
-- **Matrix Family:** free_model_system
-- **Confidence Tier:** medium
-- **Incorporation Status:** `modeled_not_payloaded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ✅ | Analytical method / output compounds specified |
-| ❌ | Absolute yields reported (not verified in matrix entry) |
-| ✅ | Replicates / confidence tier verified |
-| ❌ | LOD/LOQ or incorporation status confirmed (not verified in matrix entry) |
-| ❌ | Odor thresholds / sensory parameters reported (not verified in matrix entry) |
-
-**Score: 5/8 → Calibration reference**
-
-- **Compounds Supported:** pyrazines, strecker aldehydes
-- **Parameters Supported:** corn_hydrolysate_volatile_yield
-- **Exact Numeric Anchors:** absolute volatiles at 100 C / 60 min
-- **Notes on Limits:** *Hydrolysate model system.*
-- **Next Action:** Use to model corn protein hydrolysate kinetics.
-
----
-
-### Perdiguero et al. (2004)
-- **DOI:** [10.1021/jf0494452](https://doi.org/10.1021/jf0494452)
+### Charpentier et al. (2005), JAFC 53:3000-3007 (PMID 15826051)
+- **DOI:** [10.1021/jf040334y](https://doi.org/10.1021/jf040334y)
 - **Matrix Family:** yeast_ye
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -325,7 +244,7 @@
 
 ---
 
-### Bi et al. (2020)
+### Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727
 - **DOI:** [10.1021/acs.jafc.9b07711](https://doi.org/10.1021/acs.jafc.9b07711)
 - **Matrix Family:** raw_pea_flour
 - **Confidence Tier:** high
@@ -433,8 +352,8 @@
 
 ---
 
-### Fujimoto et al. (2023)
-- **DOI:** [10.1021/acs.jafc.2c08283](https://doi.org/10.1021/acs.jafc.2c08283)
+### Fujimoto et al. (2023), J. Oleo Sci. 72:257-262
+- **DOI:** [10.5650/jos.ess22332](https://doi.org/10.5650/jos.ess22332)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -487,8 +406,8 @@
 
 ---
 
-### De Vleeschouwer et al. (2006)
-- **DOI:** [10.1021/jf051197n](https://doi.org/10.1021/jf051197n)
+### De Vleeschouwer, Van der Plancken & Van Loey (2006), JAFC 54:7847
+- **DOI:** [10.1021/jf0611264](https://doi.org/10.1021/jf0611264)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -514,7 +433,7 @@
 
 ---
 
-### Zhu et al. (2022)
+### Ma et al. (2022), Frontiers in Nutrition 9:940202
 - **DOI:** [10.3389/fnut.2022.940202](https://doi.org/10.3389/fnut.2022.940202)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -622,8 +541,8 @@
 
 ---
 
-### Krause et al. (2003)
-- **DOI:** [10.1007/s00217-003-0685-6](https://doi.org/10.1007/s00217-003-0685-6)
+### Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277-283
+- **DOI:** [10.1007/s00217-002-0649-0](https://doi.org/10.1007/s00217-002-0649-0)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -676,8 +595,7 @@
 
 ---
 
-### Cantre et al. (2007)
-- **DOI:** [10.1111/j.1745-4549.2007.00109.x](https://doi.org/10.1111/j.1745-4549.2007.00109.x)
+### Cantre, Garcia, Carpio & Madamba (2007), Philippine Agric. Sci. 90(2):143-152
 - **Matrix Family:** beef
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -703,8 +621,8 @@
 
 ---
 
-### Yu et al. (2017)
-- **DOI:** [10.1016/j.tifs.2020.01.021](https://doi.org/10.1016/j.tifs.2020.01.021)
+### Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chem. 172:802-807 (PMID 25442623)
+- **DOI:** [10.1016/j.foodchem.2014.09.129](https://doi.org/10.1016/j.foodchem.2014.09.129)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -730,7 +648,7 @@
 
 ---
 
-### Charissou et al. (2007)
+### Charissou, Ait-Ameur & Birlouez-Aragon (2007), JAFC 55:4532
 - **DOI:** [10.1021/jf063024j](https://doi.org/10.1021/jf063024j)
 - **Matrix Family:** cookie_model
 - **Confidence Tier:** high
@@ -757,7 +675,7 @@
 
 ---
 
-### Fratianni et al. (2016)
+### Fratianni et al. (2017), Food Research International 99:862
 - **DOI:** [10.1016/j.foodres.2016.12.009](https://doi.org/10.1016/j.foodres.2016.12.009)
 - **Matrix Family:** apricot
 - **Confidence Tier:** high
@@ -784,7 +702,7 @@
 
 ---
 
-### Ma et al. (2024)
+### Ma et al. (2024), Int. J. Mol. Sci. 25:8668
 - **DOI:** [10.3390/ijms25168668](https://doi.org/10.3390/ijms25168668)
 - **Matrix Family:** plant_based_meat_analogue
 - **Confidence Tier:** high
@@ -811,7 +729,7 @@
 
 ---
 
-### Knol et al. (2005)
+### Knol et al. (2005), JAFC 53:6133-6139
 - **DOI:** [10.1021/jf050504m](https://doi.org/10.1021/jf050504m)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -838,7 +756,7 @@
 
 ---
 
-### De Vleeschouwer et al. (2008)
+### De Vleeschouwer et al. (2008), Biotechnol. Prog. 23:722-728
 - **DOI:** [10.1021/bp060389f](https://doi.org/10.1021/bp060389f)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -865,7 +783,7 @@
 
 ---
 
-### Ishak et al. (2022)
+### Ishak et al. (2022), Food Chemistry 384:132372
 - **DOI:** [10.1016/j.foodchem.2022.132372](https://doi.org/10.1016/j.foodchem.2022.132372)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -946,7 +864,7 @@
 
 ---
 
-### Zamora et al. (2010)
+### Hidalgo et al. (2010), Journal of Agricultural and Food Chemistry 58:10512
 - **DOI:** [10.1021/jf102026c](https://doi.org/10.1021/jf102026c)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -973,7 +891,7 @@
 
 ---
 
-### Ding et al. (2020)
+### Troise et al. (2020), Journal of Agricultural and Food Chemistry 68:12107
 - **DOI:** [10.1021/acs.jafc.0c04738](https://doi.org/10.1021/acs.jafc.0c04738)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -999,7 +917,7 @@
 
 ---
 
-### Richards et al. (2009)
+### Carvajal et al. (2009), Journal of Agricultural and Food Chemistry 57:7826
 - **DOI:** [10.1021/jf9013394](https://doi.org/10.1021/jf9013394)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -1052,7 +970,7 @@
 
 ---
 
-### Urugo et al. (2024)
+### Mandelli et al. (2025)
 - **DOI:** [10.3390/foods14193295](https://doi.org/10.3390/foods14193295)
 - **Matrix Family:** plant_protein_matrix
 - **Confidence Tier:** high
@@ -1078,7 +996,7 @@
 
 ---
 
-### Chen et al. (2016)
+### Yu et al. (2016), Food Science and Biotechnology 25:1163
 - **DOI:** [10.1007/s10068-016-0185-5](https://doi.org/10.1007/s10068-016-0185-5)
 - **Matrix Family:** high_moisture_melt
 - **Confidence Tier:** high
@@ -1105,8 +1023,8 @@
 
 ---
 
-### Pruteanu et al. (2023)
-- **DOI:** [10.1016/j.lwt.2024.117316](https://doi.org/10.1016/j.lwt.2024.117316)
+### van Boekel (2001), Nahrung/Food 45:150
+- **DOI:** [10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9](https://doi.org/10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -1185,7 +1103,7 @@
 
 ---
 
-### Liu et al. (2022)
+### Liu et al. (2023), Food Research International 163:112187
 - **DOI:** [10.1016/j.foodres.2022.112187](https://doi.org/10.1016/j.foodres.2022.112187)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -1265,8 +1183,8 @@
 
 ---
 
-### Cömert & Gökmen (2021)
-- **DOI:** [10.1016/j.foodchem.2020.128670](https://doi.org/10.1016/j.foodchem.2020.128670)
+### Cömert & Gökmen (2021), Food Chemistry 369:130884
+- **DOI:** [10.1016/j.foodchem.2021.130884](https://doi.org/10.1016/j.foodchem.2021.130884)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -1318,7 +1236,7 @@
 
 ---
 
-### Li et al. (2017)
+### Liu et al. (2017), Journal of Agricultural and Food Chemistry 65:2233
 - **DOI:** [10.1021/acs.jafc.6b05811](https://doi.org/10.1021/acs.jafc.6b05811)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -1450,8 +1368,8 @@
 
 ---
 
-### Hidalgo et al. (2005)
-- **DOI:** [10.1007/s00217-004-1065-x](https://doi.org/10.1007/s00217-004-1065-x)
+### Zamora, Nogales & Hidalgo (2005), Eur. Food Res. Technol. 220:459-465
+- **DOI:** [10.1007/s00217-004-1114-z](https://doi.org/10.1007/s00217-004-1114-z)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -1477,7 +1395,7 @@
 
 ---
 
-### Zamora et al. (2020)
+### Goritschnig et al. (2020), Molecules 25:373
 - **DOI:** [10.3390/molecules25020373](https://doi.org/10.3390/molecules25020373)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -1556,7 +1474,7 @@
 
 ---
 
-### Biondi et al. (2010)
+### Chiavaro et al. (2010), LWT - Food Science and Technology 43:1104
 - **DOI:** [10.1016/j.lwt.2010.02.016](https://doi.org/10.1016/j.lwt.2010.02.016)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -1661,8 +1579,8 @@
 
 ---
 
-### Mundt & Wedzicha (2007)
-- **DOI:** [10.1016/j.lwt.2006.07.014](https://doi.org/10.1016/j.lwt.2006.07.014)
+### Mundt & Wedzicha (2007), LWT 40:1078-1082
+- **DOI:** [10.1016/j.lwt.2006.07.011](https://doi.org/10.1016/j.lwt.2006.07.011)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -1714,8 +1632,8 @@
 
 ---
 
-### Hofmann et al. (2001)
-- **DOI:** [10.1021/jf001302l](https://doi.org/10.1021/jf001302l)
+### Hofmann & Schieberle (2002), JAFC 50:319-326 (published online 2001)
+- **DOI:** [10.1021/jf010823n](https://doi.org/10.1021/jf010823n)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -1740,8 +1658,8 @@
 
 ---
 
-### Adams et al. (2005)
-- **DOI:** [10.1021/jf047903m](https://doi.org/10.1021/jf047903m)
+### Yu, Li, Yang & Yu (2018), Food Sci. Technol. (Campinas) 38:537-542
+- **DOI:** [10.1590/1678-457x.08717](https://doi.org/10.1590/1678-457x.08717)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -1928,7 +1846,7 @@
 
 ---
 
-### Hendrickx et al. (1998)
+### Van den Broeck et al. (1998), Journal of Agricultural and Food Chemistry 46:2001
 - **DOI:** [10.1021/jf9708251](https://doi.org/10.1021/jf9708251)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -1955,7 +1873,7 @@
 
 ---
 
-### Jian et al. (2012)
+### Hsu et al. (2012), Journal of Agricultural and Food Chemistry 60:10696
 - **DOI:** [10.1021/jf3032342](https://doi.org/10.1021/jf3032342)
 - **Matrix Family:** free_model_system
 - **Confidence Tier:** high
@@ -1978,33 +1896,6 @@
 - **Parameters Supported:** degradation_kinetics, mass_balance, browning_activation_energy
 - **Notes on Limits:** *Surrogate literature transfer limits.*
 - **Next Action:** Encode ethanolic ascorbic degradation prior.
-
----
-
-### Wehrmaker et al. (2022)
-- **DOI:** [10.1021/acsfoodscitech.2c00242](https://doi.org/10.1021/acsfoodscitech.2c00242)
-- **Matrix Family:** pbma
-- **Confidence Tier:** high
-- **Incorporation Status:** `encoded_shown`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Conditions T, pH, time specified (not verified in matrix entry) |
-| ✅ | Analytical method / output compounds specified |
-| ❌ | Absolute yields reported (not verified in matrix entry) |
-| ✅ | Replicates / confidence tier verified |
-| ✅ | LOD/LOQ or incorporation status confirmed |
-| ❌ | Odor thresholds / sensory parameters reported (not verified in matrix entry) |
-
-**Score: 5/8 → Calibration reference**
-
-- **Compounds Supported:** lysine
-- **Parameters Supported:** lysine_loss_extrusion
-- **Exact Numeric Anchors:** Lys loss 22%
-- **Notes on Limits:** *See safety_reference_payloads.json.*
-- **Next Action:** None — fully encoded.
 
 ---
 
@@ -2062,7 +1953,7 @@
 
 ---
 
-### Ramírez-Jiménez et al. (2000)
+### Ramirez-Jimenez, Guerra-Hernandez & Garcia-Villanova (2000), J. Agric. Food Chem. 48:4176-4181
 - **DOI:** [10.1021/jf9907687](https://doi.org/10.1021/jf9907687)
 - **Matrix Family:** toasted_bread
 - **Confidence Tier:** high
@@ -2116,8 +2007,8 @@
 
 ---
 
-### Grandhee & Monnier (1991)
-- **DOI:** [10.1074/jbc.266.18.11644](https://doi.org/10.1074/jbc.266.18.11644)
+### Grandhee & Monnier (1991), JBC 266:11649-11653 (PMID 1904866)
+- **DOI:** [10.1016/s0021-9258(18)99006-x](https://doi.org/10.1016/s0021-9258(18)99006-x)
 - **Matrix Family:** protein_model
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -2144,7 +2035,7 @@
 ---
 
 ### Yu et al. (2018)
-- **DOI:** [10.1590/1678-457X.08717](https://doi.org/10.1590/1678-457X.08717)
+- **DOI:** [10.1590/1678-457x.08717](https://doi.org/10.1590/1678-457x.08717)
 - **Matrix Family:** protein_model
 - **Confidence Tier:** high
 - **Incorporation Status:** `encoded_shown`
@@ -2165,33 +2056,6 @@
 - **Compounds Supported:** CML, crosslinks
 - **Parameters Supported:** aa_crosslink_amino_acid_hierarchy
 - **Exact Numeric Anchors:** Lys Ea 54.94, Arg 50.08, His 35.31 kJ/mol
-- **Notes on Limits:** *See target artifact.*
-- **Next Action:** None — fully encoded.
-
----
-
-### Marquez-Ruiz et al. (2014)
-- **DOI:** [10.1021/jf502636m](https://doi.org/10.1021/jf502636m)
-- **Matrix Family:** oleic_model
-- **Confidence Tier:** high
-- **Incorporation Status:** `encoded_shown`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Conditions T, pH, time specified (not verified in matrix entry) |
-| ✅ | Analytical method / output compounds specified |
-| ✅ | Absolute yields reported |
-| ✅ | Replicates / confidence tier verified |
-| ✅ | LOD/LOQ or incorporation status confirmed |
-| ✅ | Odor thresholds / sensory parameters reported |
-
-**Score: 7/8 → Benchmark-eligible**
-
-- **Compounds Supported:** nonanal
-- **Parameters Supported:** nonanal_oav_anchor
-- **Exact Numeric Anchors:** nonanal ODT 1.0 ppb, OAV 1-28
 - **Notes on Limits:** *See target artifact.*
 - **Next Action:** None — fully encoded.
 
@@ -2226,7 +2090,70 @@
 
 ## SECTION 2 — Backlog Research Candidates (from Deep Research Backlog)
 
-*No backlog research candidates found for Family 01.*
+### Davidek et al. (2006)
+- **Status:** `RUNTIME_BOUND`
+
+| Criterion | Assessment |
+|---|---|
+| ✅ | Reactant identities specified |
+| ✅ | Precursor concentrations specified |
+| ✅ | Conditions T, pH, time specified |
+| ✅ | Analytical method specified |
+| ✅ | Absolute yields reported |
+| ✅ | Replicates reported |
+| ✅ | LOD/LOQ stated |
+| ❌ | Odor thresholds/sensory reported (not mentioned in backlog description) |
+
+**Score: 7/8 → Benchmark-eligible**
+
+**Descriptions / Notes:**
+- Thr + glucose → furan/methylfuran, absolute concentrations with IS, LOD/LOQ stated. SAFETY relevance.
+
+---
+
+### Liu et al. (2023/2024)
+- **Status:** `RUNTIME_BOUND`
+
+| Criterion | Assessment |
+|---|---|
+| ✅ | Reactant identities specified |
+| ✅ | Precursor concentrations specified |
+| ✅ | Conditions T, pH, time specified |
+| ✅ | Analytical method specified |
+| ✅ | Absolute yields reported |
+| ✅ | Replicates reported |
+| ❌ | LOD/LOQ stated (not mentioned in backlog description) |
+| ❌ | Odor thresholds/sensory reported (not mentioned in backlog description) |
+
+**Score: 6/8 → Benchmark-eligible**
+
+**Descriptions / Notes:**
+- Ala + Xyl ARP kinetics ± EGCG; Ea values with SE; stoichiometry constraint.
+
+---
+
+### Blank et al. (1997)
+- **Status:** `RUNTIME_BOUND`
+
+| Criterion | Assessment |
+|---|---|
+| ✅ | Reactant identities specified |
+| ✅ | Precursor concentrations specified |
+| ✅ | Conditions T, pH, time specified |
+| ✅ | Analytical method specified |
+| ✅ | Absolute yields reported |
+| ✅ | Replicates reported |
+| ❌ | LOD/LOQ stated (not mentioned in backlog description) |
+| ✅ | Odor thresholds/sensory reported |
+
+**Score: 7/8 → Benchmark-eligible**
+
+**Descriptions / Notes:**
+- Pro + rhamnose → HDMF, molar yield >40%, SIDA, ODT and OAV cited.
+- JAFC 45:2642 — rhamnose + Pro → HDMF >40 mol%; SIDA; OAV > 80.
+
+---
+
 ## Confirmed Gaps and Structural Limitations
 
 - **Matrix Transferability Gap:** Most kinetic and volatile data for `Amino acid-sugar Maillard core` are derived from simple aqueous buffers or free model systems. Transferability to complex plant-based meat matrices (e.g., Pea Protein Isolate or Soy Protein Isolate) under high-moisture extrusion remains a major gap.
@@ -2237,92 +2164,90 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 1
 
-Total papers analyzed: **82** (Benchmark-eligible: **46**, Calibration references: **36**, Rejected: **0**)
+Total papers analyzed: **80** (Benchmark-eligible: **47**, Calibration references: **33**, Rejected: **0**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Mottram & Nobrega (2002), JAFC 50:1383 | 5/8 | ⚠️ Calibration | free_model_system |
 | Hofmann & Schieberle (1998), JAFC 46:235 | 7/8 | ✅ Eligible | free_model_system |
 | Nishimura & Abe (2024) | 5/8 | ⚠️ Calibration | soy_hydrolysate |
-| Hofmann & Schieberle (1997/1998), JAFC | 6/8 | ✅ Eligible | cooked_meat |
+| Kerscher & Grosch (1998), Journal of Agricultural and Food Chemistry 46:1954 | 6/8 | ✅ Eligible | cooked_meat |
 | Hernandez et al. (2023), Molecules 28:3151 | 7/8 | ✅ Eligible | pbma_vs_meat |
-| Davidek et al. (2006) | 7/8 | ✅ Eligible | free_model_system |
-| Martins & van Boekel (2003) | 6/8 | ✅ Eligible | free_model_system |
-| Liu et al. (2023/2024) | 6/8 | ✅ Eligible | free_model_system |
-| Mottram & Wedzicha (1990) | 5/8 | ⚠️ Calibration | free_model_system |
-| Yu et al. (2021) | 5/8 | ⚠️ Calibration | free_model_system |
-| Perdiguero et al. (2004) | 7/8 | ✅ Eligible | yeast_ye |
-| Bi et al. (2020) | 7/8 | ✅ Eligible | raw_pea_flour |
+| Limacher, Kerler, Davidek, Schmalzried & Blank (2008), JAFC 56:3639 | 7/8 | ✅ Eligible | free_model_system |
+| Yu et al. (2020), J. Agric. Food Chem. 68:1714-1724 | 6/8 | ✅ Eligible | free_model_system |
+| Charpentier et al. (2005), JAFC 53:3000-3007 (PMID 15826051) | 7/8 | ✅ Eligible | yeast_ye |
+| Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727 | 7/8 | ✅ Eligible | raw_pea_flour |
 | Fu et al. (2023) | 7/8 | ✅ Eligible | free_model_system |
 | Poojary et al. (2023) | 6/8 | ✅ Eligible | free_model_system |
 | Nemet & Monnier (2011) | 6/8 | ✅ Eligible | free_model_system |
-| Fujimoto et al. (2023) | 6/8 | ✅ Eligible | free_model_system |
+| Fujimoto et al. (2023), J. Oleo Sci. 72:257-262 | 6/8 | ✅ Eligible | free_model_system |
 | Gigl et al. (2021) | 7/8 | ✅ Eligible | free_model_system |
-| De Vleeschouwer et al. (2006) | 6/8 | ✅ Eligible | free_model_system |
-| Zhu et al. (2022) | 6/8 | ✅ Eligible | free_model_system |
+| De Vleeschouwer, Van der Plancken & Van Loey (2006), JAFC 54:7847 | 6/8 | ✅ Eligible | free_model_system |
+| Ma et al. (2022), Frontiers in Nutrition 9:940202 | 6/8 | ✅ Eligible | free_model_system |
 | Sun et al. (2015) | 6/8 | ✅ Eligible | beef |
 | Zhu et al. (2021) | 6/8 | ✅ Eligible | chicken |
 | Hamzalioglu et al. (2026) | 6/8 | ✅ Eligible | milk |
-| Krause et al. (2003) | 6/8 | ✅ Eligible | free_model_system |
+| Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277-283 | 6/8 | ✅ Eligible | free_model_system |
 | Hidalgo & Pompei (2000) | 5/8 | ⚠️ Calibration | tomato |
-| Cantre et al. (2007) | 5/8 | ⚠️ Calibration | beef |
-| Yu et al. (2017) | 6/8 | ✅ Eligible | free_model_system |
-| Charissou et al. (2007) | 6/8 | ✅ Eligible | cookie_model |
-| Fratianni et al. (2016) | 5/8 | ⚠️ Calibration | apricot |
-| Ma et al. (2024) | 6/8 | ✅ Eligible | plant_based_meat_analogue |
-| Knol et al. (2005) | 5/8 | ⚠️ Calibration | free_model_system |
-| De Vleeschouwer et al. (2008) | 6/8 | ✅ Eligible | free_model_system |
-| Ishak et al. (2022) | 6/8 | ✅ Eligible | free_model_system |
+| Cantre, Garcia, Carpio & Madamba (2007), Philippine Agric. Sci. 90(2):143-152 | 5/8 | ⚠️ Calibration | beef |
+| Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chem. 172:802-807 (PMID 25442623) | 6/8 | ✅ Eligible | free_model_system |
+| Charissou, Ait-Ameur & Birlouez-Aragon (2007), JAFC 55:4532 | 6/8 | ✅ Eligible | cookie_model |
+| Fratianni et al. (2017), Food Research International 99:862 | 5/8 | ⚠️ Calibration | apricot |
+| Ma et al. (2024), Int. J. Mol. Sci. 25:8668 | 6/8 | ✅ Eligible | plant_based_meat_analogue |
+| Knol et al. (2005), JAFC 53:6133-6139 | 5/8 | ⚠️ Calibration | free_model_system |
+| De Vleeschouwer et al. (2008), Biotechnol. Prog. 23:722-728 | 6/8 | ✅ Eligible | free_model_system |
+| Ishak et al. (2022), Food Chemistry 384:132372 | 6/8 | ✅ Eligible | free_model_system |
 | Shu et al. (2019) | 6/8 | ✅ Eligible | free_model_system |
 | Hidalgo et al. (2007) | 5/8 | ⚠️ Calibration | free_model_system |
-| Zamora et al. (2010) | 5/8 | ⚠️ Calibration | free_model_system |
-| Ding et al. (2020) | 4/8 | ⚠️ Calibration | free_model_system |
-| Richards et al. (2009) | 4/8 | ⚠️ Calibration | free_model_system |
+| Hidalgo et al. (2010), Journal of Agricultural and Food Chemistry 58:10512 | 5/8 | ⚠️ Calibration | free_model_system |
+| Troise et al. (2020), Journal of Agricultural and Food Chemistry 68:12107 | 4/8 | ⚠️ Calibration | free_model_system |
+| Carvajal et al. (2009), Journal of Agricultural and Food Chemistry 57:7826 | 4/8 | ⚠️ Calibration | free_model_system |
 | Smagghe et al. (2006) | 6/8 | ✅ Eligible | free_model_system |
-| Urugo et al. (2024) | 4/8 | ⚠️ Calibration | plant_protein_matrix |
-| Chen et al. (2016) | 6/8 | ✅ Eligible | high_moisture_melt |
-| Pruteanu et al. (2023) | 6/8 | ✅ Eligible | free_model_system |
+| Mandelli et al. (2025) | 4/8 | ⚠️ Calibration | plant_protein_matrix |
+| Yu et al. (2016), Food Science and Biotechnology 25:1163 | 6/8 | ✅ Eligible | high_moisture_melt |
+| van Boekel (2001), Nahrung/Food 45:150 | 6/8 | ✅ Eligible | free_model_system |
 | Zhu et al. (2020) | 5/8 | ⚠️ Calibration | free_model_system |
 | Zhu et al. (2020) | 4/8 | ⚠️ Calibration | free_model_system |
-| Liu et al. (2022) | 5/8 | ⚠️ Calibration | free_model_system |
+| Liu et al. (2023), Food Research International 163:112187 | 5/8 | ⚠️ Calibration | free_model_system |
 | Cömert & Gökmen (2019) | 4/8 | ⚠️ Calibration | free_model_system |
 | Munoz et al. (2007) | 6/8 | ✅ Eligible | free_model_system |
-| Cömert & Gökmen (2021) | 4/8 | ⚠️ Calibration | free_model_system |
+| Cömert & Gökmen (2021), Food Chemistry 369:130884 | 4/8 | ⚠️ Calibration | free_model_system |
 | Song et al. (2009) | 5/8 | ⚠️ Calibration | free_model_system |
-| Li et al. (2017) | 4/8 | ⚠️ Calibration | free_model_system |
+| Liu et al. (2017), Journal of Agricultural and Food Chemistry 65:2233 | 4/8 | ⚠️ Calibration | free_model_system |
 | Monforte et al. (2018) | 4/8 | ⚠️ Calibration | free_model_system |
 | Solís-Calero et al. (2015) | 6/8 | ✅ Eligible | free_model_system |
 | Solís-Calero et al. (2013) | 6/8 | ✅ Eligible | free_model_system |
 | Lertsiri et al. (1998) | 4/8 | ⚠️ Calibration | free_model_system |
-| Hidalgo et al. (2005) | 6/8 | ✅ Eligible | free_model_system |
-| Zamora et al. (2020) | 4/8 | ⚠️ Calibration | free_model_system |
+| Zamora, Nogales & Hidalgo (2005), Eur. Food Res. Technol. 220:459-465 | 6/8 | ✅ Eligible | free_model_system |
+| Goritschnig et al. (2020), Molecules 25:373 | 4/8 | ⚠️ Calibration | free_model_system |
 | Hidalgo et al. (2006) | 4/8 | ⚠️ Calibration | free_model_system |
 | Vilanova et al. (2012) | 6/8 | ✅ Eligible | free_model_system |
-| Biondi et al. (2010) | 4/8 | ⚠️ Calibration | free_model_system |
+| Chiavaro et al. (2010), LWT - Food Science and Technology 43:1104 | 4/8 | ⚠️ Calibration | free_model_system |
 | Brands et al. (2002) | 6/8 | ✅ Eligible | free_model_system |
 | Gigl et al. (2021) | 4/8 | ⚠️ Calibration | free_model_system |
 | Suzuki & Philp (1990) | 4/8 | ⚠️ Calibration | free_model_system |
-| Mundt & Wedzicha (2007) | 5/8 | ⚠️ Calibration | free_model_system |
+| Mundt & Wedzicha (2007), LWT 40:1078-1082 | 5/8 | ⚠️ Calibration | free_model_system |
 | Cao et al. (2024) | 4/8 | ⚠️ Calibration | free_model_system |
-| Hofmann et al. (2001) | 4/8 | ⚠️ Calibration | free_model_system |
-| Adams et al. (2005) | 6/8 | ✅ Eligible | free_model_system |
+| Hofmann & Schieberle (2002), JAFC 50:319-326 (published online 2001) | 4/8 | ⚠️ Calibration | free_model_system |
+| Yu, Li, Yang & Yu (2018), Food Sci. Technol. (Campinas) 38:537-542 | 6/8 | ✅ Eligible | free_model_system |
 | Smuda & Glomb (2013) | 6/8 | ✅ Eligible | free_model_system |
 | Serpen & Gökmen (2007) | 6/8 | ✅ Eligible | free_model_system |
 | Yang et al. (2021) | 5/8 | ⚠️ Calibration | free_model_system |
 | Yu et al. (2018) | 6/8 | ✅ Eligible | free_model_system |
 | Manso et al. (2001) | 5/8 | ⚠️ Calibration | free_model_system |
 | Takase et al. (2025) | 4/8 | ⚠️ Calibration | free_model_system |
-| Hendrickx et al. (1998) | 6/8 | ✅ Eligible | free_model_system |
-| Jian et al. (2012) | 4/8 | ⚠️ Calibration | free_model_system |
-| Wehrmaker et al. (2022) | 5/8 | ⚠️ Calibration | pbma |
+| Van den Broeck et al. (1998), Journal of Agricultural and Food Chemistry 46:2001 | 6/8 | ✅ Eligible | free_model_system |
+| Hsu et al. (2012), Journal of Agricultural and Food Chemistry 60:10696 | 4/8 | ⚠️ Calibration | free_model_system |
 | Ma et al. (2024) | 7/8 | ✅ Eligible | spi_heated |
 | Fu et al. (2023) | 7/8 | ✅ Eligible | pbma |
-| Ramírez-Jiménez et al. (2000) | 6/8 | ✅ Eligible | toasted_bread |
+| Ramirez-Jimenez, Guerra-Hernandez & Garcia-Villanova (2000), J. Agric. Food Chem. 48:4176-4181 | 6/8 | ✅ Eligible | toasted_bread |
 | Feng et al. (2023) | 6/8 | ✅ Eligible | hcw_model |
-| Grandhee & Monnier (1991) | 5/8 | ⚠️ Calibration | protein_model |
+| Grandhee & Monnier (1991), JBC 266:11649-11653 (PMID 1904866) | 5/8 | ⚠️ Calibration | protein_model |
 | Yu et al. (2018) | 6/8 | ✅ Eligible | protein_model |
-| Marquez-Ruiz et al. (2014) | 7/8 | ✅ Eligible | oleic_model |
 | Li et al. (2026) | 7/8 | ✅ Eligible | hme_matrix |
+| Davidek et al. (2006) | 7/8 | ✅ Eligible | Unknown (Backlog Candidate) |
+| Liu et al. (2023/2024) | 6/8 | ✅ Eligible | Unknown (Backlog Candidate) |
+| Blank et al. (1997) | 7/8 | ✅ Eligible | Unknown (Backlog Candidate) |
 
 ---
 
@@ -2330,89 +2255,87 @@ Total papers analyzed: **82** (Benchmark-eligible: **46**, Calibration reference
 
 ### REFERENCE_ANCHOR / PRIMARY (Score >= 6)
 - `Hofmann & Schieberle (1998), JAFC 46:235` (Score: 7/8)
-- `Hofmann & Schieberle (1997/1998), JAFC` (Score: 6/8)
+- `Kerscher & Grosch (1998), Journal of Agricultural and Food Chemistry 46:1954` (Score: 6/8)
 - `Hernandez et al. (2023), Molecules 28:3151` (Score: 7/8)
-- `Davidek et al. (2006)` (Score: 7/8)
-- `Martins & van Boekel (2003)` (Score: 6/8)
-- `Liu et al. (2023/2024)` (Score: 6/8)
-- `Perdiguero et al. (2004)` (Score: 7/8)
-- `Bi et al. (2020)` (Score: 7/8)
+- `Limacher, Kerler, Davidek, Schmalzried & Blank (2008), JAFC 56:3639` (Score: 7/8)
+- `Yu et al. (2020), J. Agric. Food Chem. 68:1714-1724` (Score: 6/8)
+- `Charpentier et al. (2005), JAFC 53:3000-3007 (PMID 15826051)` (Score: 7/8)
+- `Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727` (Score: 7/8)
 - `Fu et al. (2023)` (Score: 7/8)
 - `Poojary et al. (2023)` (Score: 6/8)
 - `Nemet & Monnier (2011)` (Score: 6/8)
-- `Fujimoto et al. (2023)` (Score: 6/8)
+- `Fujimoto et al. (2023), J. Oleo Sci. 72:257-262` (Score: 6/8)
 - `Gigl et al. (2021)` (Score: 7/8)
-- `De Vleeschouwer et al. (2006)` (Score: 6/8)
-- `Zhu et al. (2022)` (Score: 6/8)
+- `De Vleeschouwer, Van der Plancken & Van Loey (2006), JAFC 54:7847` (Score: 6/8)
+- `Ma et al. (2022), Frontiers in Nutrition 9:940202` (Score: 6/8)
 - `Sun et al. (2015)` (Score: 6/8)
 - `Zhu et al. (2021)` (Score: 6/8)
 - `Hamzalioglu et al. (2026)` (Score: 6/8)
-- `Krause et al. (2003)` (Score: 6/8)
-- `Yu et al. (2017)` (Score: 6/8)
-- `Charissou et al. (2007)` (Score: 6/8)
-- `Ma et al. (2024)` (Score: 6/8)
-- `De Vleeschouwer et al. (2008)` (Score: 6/8)
-- `Ishak et al. (2022)` (Score: 6/8)
+- `Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277-283` (Score: 6/8)
+- `Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chem. 172:802-807 (PMID 25442623)` (Score: 6/8)
+- `Charissou, Ait-Ameur & Birlouez-Aragon (2007), JAFC 55:4532` (Score: 6/8)
+- `Ma et al. (2024), Int. J. Mol. Sci. 25:8668` (Score: 6/8)
+- `De Vleeschouwer et al. (2008), Biotechnol. Prog. 23:722-728` (Score: 6/8)
+- `Ishak et al. (2022), Food Chemistry 384:132372` (Score: 6/8)
 - `Shu et al. (2019)` (Score: 6/8)
 - `Smagghe et al. (2006)` (Score: 6/8)
-- `Chen et al. (2016)` (Score: 6/8)
-- `Pruteanu et al. (2023)` (Score: 6/8)
+- `Yu et al. (2016), Food Science and Biotechnology 25:1163` (Score: 6/8)
+- `van Boekel (2001), Nahrung/Food 45:150` (Score: 6/8)
 - `Munoz et al. (2007)` (Score: 6/8)
 - `Solís-Calero et al. (2015)` (Score: 6/8)
 - `Solís-Calero et al. (2013)` (Score: 6/8)
-- `Hidalgo et al. (2005)` (Score: 6/8)
+- `Zamora, Nogales & Hidalgo (2005), Eur. Food Res. Technol. 220:459-465` (Score: 6/8)
 - `Vilanova et al. (2012)` (Score: 6/8)
 - `Brands et al. (2002)` (Score: 6/8)
-- `Adams et al. (2005)` (Score: 6/8)
+- `Yu, Li, Yang & Yu (2018), Food Sci. Technol. (Campinas) 38:537-542` (Score: 6/8)
 - `Smuda & Glomb (2013)` (Score: 6/8)
 - `Serpen & Gökmen (2007)` (Score: 6/8)
 - `Yu et al. (2018)` (Score: 6/8)
-- `Hendrickx et al. (1998)` (Score: 6/8)
+- `Van den Broeck et al. (1998), Journal of Agricultural and Food Chemistry 46:2001` (Score: 6/8)
 - `Ma et al. (2024)` (Score: 7/8)
 - `Fu et al. (2023)` (Score: 7/8)
-- `Ramírez-Jiménez et al. (2000)` (Score: 6/8)
+- `Ramirez-Jimenez, Guerra-Hernandez & Garcia-Villanova (2000), J. Agric. Food Chem. 48:4176-4181` (Score: 6/8)
 - `Feng et al. (2023)` (Score: 6/8)
 - `Yu et al. (2018)` (Score: 6/8)
-- `Marquez-Ruiz et al. (2014)` (Score: 7/8)
 - `Li et al. (2026)` (Score: 7/8)
+- `Davidek et al. (2006)` (Score: 7/8)
+- `Liu et al. (2023/2024)` (Score: 6/8)
+- `Blank et al. (1997)` (Score: 7/8)
 
 ### CALIBRATION (Score 3-5)
 - `Mottram & Nobrega (2002), JAFC 50:1383` (Score: 5/8)
 - `Nishimura & Abe (2024)` (Score: 5/8)
-- `Mottram & Wedzicha (1990)` (Score: 5/8)
-- `Yu et al. (2021)` (Score: 5/8)
 - `Hidalgo & Pompei (2000)` (Score: 5/8)
-- `Cantre et al. (2007)` (Score: 5/8)
-- `Fratianni et al. (2016)` (Score: 5/8)
-- `Knol et al. (2005)` (Score: 5/8)
+- `Cantre, Garcia, Carpio & Madamba (2007), Philippine Agric. Sci. 90(2):143-152` (Score: 5/8)
+- `Fratianni et al. (2017), Food Research International 99:862` (Score: 5/8)
+- `Knol et al. (2005), JAFC 53:6133-6139` (Score: 5/8)
 - `Hidalgo et al. (2007)` (Score: 5/8)
-- `Zamora et al. (2010)` (Score: 5/8)
-- `Ding et al. (2020)` (Score: 4/8)
-- `Richards et al. (2009)` (Score: 4/8)
-- `Urugo et al. (2024)` (Score: 4/8)
+- `Hidalgo et al. (2010), Journal of Agricultural and Food Chemistry 58:10512` (Score: 5/8)
+- `Troise et al. (2020), Journal of Agricultural and Food Chemistry 68:12107` (Score: 4/8)
+- `Carvajal et al. (2009), Journal of Agricultural and Food Chemistry 57:7826` (Score: 4/8)
+- `Mandelli et al. (2025)` (Score: 4/8)
 - `Zhu et al. (2020)` (Score: 5/8)
 - `Zhu et al. (2020)` (Score: 4/8)
-- `Liu et al. (2022)` (Score: 5/8)
+- `Liu et al. (2023), Food Research International 163:112187` (Score: 5/8)
 - `Cömert & Gökmen (2019)` (Score: 4/8)
-- `Cömert & Gökmen (2021)` (Score: 4/8)
+- `Cömert & Gökmen (2021), Food Chemistry 369:130884` (Score: 4/8)
 - `Song et al. (2009)` (Score: 5/8)
-- `Li et al. (2017)` (Score: 4/8)
+- `Liu et al. (2017), Journal of Agricultural and Food Chemistry 65:2233` (Score: 4/8)
 - `Monforte et al. (2018)` (Score: 4/8)
 - `Lertsiri et al. (1998)` (Score: 4/8)
-- `Zamora et al. (2020)` (Score: 4/8)
+- `Goritschnig et al. (2020), Molecules 25:373` (Score: 4/8)
 - `Hidalgo et al. (2006)` (Score: 4/8)
-- `Biondi et al. (2010)` (Score: 4/8)
+- `Chiavaro et al. (2010), LWT - Food Science and Technology 43:1104` (Score: 4/8)
 - `Gigl et al. (2021)` (Score: 4/8)
 - `Suzuki & Philp (1990)` (Score: 4/8)
-- `Mundt & Wedzicha (2007)` (Score: 5/8)
+- `Mundt & Wedzicha (2007), LWT 40:1078-1082` (Score: 5/8)
 - `Cao et al. (2024)` (Score: 4/8)
-- `Hofmann et al. (2001)` (Score: 4/8)
+- `Hofmann & Schieberle (2002), JAFC 50:319-326 (published online 2001)` (Score: 4/8)
 - `Yang et al. (2021)` (Score: 5/8)
 - `Manso et al. (2001)` (Score: 5/8)
 - `Takase et al. (2025)` (Score: 4/8)
-- `Jian et al. (2012)` (Score: 4/8)
-- `Wehrmaker et al. (2022)` (Score: 5/8)
-- `Grandhee & Monnier (1991)` (Score: 5/8)
+- `Hsu et al. (2012), Journal of Agricultural and Food Chemistry 60:10696` (Score: 4/8)
+- `Grandhee & Monnier (1991), JBC 266:11649-11653 (PMID 1904866)` (Score: 5/8)
 
 ### REJECTED (Score < 3)
 - *No rejected references.*
@@ -2421,8 +2344,8 @@ Total papers analyzed: **82** (Benchmark-eligible: **46**, Calibration reference
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/precursor_resolver.py`, `src/literature_runtime.py`, `src/benchmark_validation.py` must explicitly account for `core_reaction_network` as a modifier when predicting `2-methyl-3-furanthiol`, `2-furfurylthiol`, `methional`, `2,5-dimethylpyrazine` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `core_reaction_network` as a modifier when predicting `2-methyl-3-furanthiol`, `2-furfurylthiol`, `methional`, `2,5-dimethylpyrazine` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `first_class_core` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

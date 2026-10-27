@@ -35,6 +35,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src import comparative_cli  # noqa: E402
+from src import data_paths  # noqa: E402
 from src import directional_reliability as dr  # noqa: E402
 from src import model_card  # noqa: E402
 
@@ -377,11 +378,9 @@ def test_the_sulfur_anchor_claim_is_checked_not_asserted():
     status = model_card.collect_sulfur_anchor_status()
     assert status["available"], "the sulfur benchmark must be readable for the claim to stand"
 
-    # The retired benchmark's own values must stay marked as unverifiable. If this ever
-    # empties, someone has quietly re-blessed 342/200 ppb -- the exact regression the whole
-    # Wave S2b/S2c trail exists to prevent.
-    assert status["values_without_verifiable_source"]
-    assert not status["values_with_an_anchor"]
+    # 2026-10-27: the retired cys_ribose_140C_Hofmann1998 (342/200 ppb, repo-internal
+    # derivations) was deleted with the rest of quarantine; it must not come back.
+    assert not (data_paths.BENCHMARKS_DIR / "quarantined" / "cys_ribose_140C_Hofmann1998.json").exists()
 
     # The headline flag must be DERIVED from the panel scan, not hardcoded either way.
     verified = status["panel_verified_sulfur_benchmarks"]
@@ -425,8 +424,9 @@ def test_the_sulfur_anchor_claim_is_checked_not_asserted():
 
 
 def test_the_provenance_census_reproduces_the_readme_pinned_source_status_count():
-    """84 is pinned in README prose and by test_data_headline_guards; recount must agree.
+    """0 is pinned in README prose and by test_data_headline_guards; recount must agree.
 
+    RE-PINNED 2026-10-27: 84 -> 0 when every remaining flagged record was deleted.
     RE-PINNED 2026-10-09: 87 -> 84 when six unsourced process-state records were deleted.
 
     RE-PINNED 2026-09-01: 120 -> 102 when data/qm/ (18 records) was deleted with the QM lane.
@@ -434,7 +434,7 @@ def test_the_provenance_census_reproduces_the_readme_pinned_source_status_count(
     """
     census = model_card.collect_no_verifiable_source_census()
     assert census["available"]
-    assert census["by_status_key"]["source_status"] == 84
+    assert census["by_status_key"].get("source_status", 0) == 0
 
 
 def test_a_missing_artifact_is_reported_in_the_card_not_dropped_from_it(monkeypatch, tmp_path):

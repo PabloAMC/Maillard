@@ -2,18 +2,18 @@
   "artifact": "data_wishlist",
   "provenance": {
     "artifact": "data_wishlist",
-    "generated_on": "2026-09-12",
+    "generated_on": "2026-10-27",
     "git": {
-      "commit": "5fb988a1304040b44b8ec66971c28cb5fac81cff",
-      "short": "5fb988a1",
-      "branch": "lane-offsets",
+      "commit": "4606458cd010df200db61965b9bc83b29ee38970",
+      "short": "4606458c",
+      "branch": "provenance-census-trace",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "1105ce0b47cb4c813ea11db624d882c6a4ae6b918b6b94023771d54dc96de14c"
+        "sha256": "8a58e340c8682145b503a1a5df5c223224a0c24cf70ba2ee24a9ff463e3ddaed"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",

@@ -4,7 +4,7 @@
   "maillard_path_holdout": true,
   "source_doi": "10.3390/polym13121901",
   "source_metadata": {
-    "citation": "Chang, Y.-W.; Sung, W.-C.; Chen, J.-Y. (Sung, W.-C. et al.) Effect of Hydroxymethylfurfural and Low-Molecular-Weight Chitosan on Formation of Acrylamide and Hydroxymethylfurfural in a Maillard Model System. Polymers 2021, 13 (12), 1901.",
+    "citation": "Lin, H.-T. V.; Chan, D.-S.; Kao, L.-Y.; Sung, W.-C. Effect of Hydroxymethylfurfural and Low-Molecular-Weight Chitosan on Formation of Acrylamide and Hydroxymethylfurfural during Maillard Reaction in Glucose and Asparagine Model Systems. Polymers 2021, 13 (12), 1901. (Authors corrected 2026-10-27 from CrossRef; the file name keeps the old Chang2021 stem as a stable id.)",
     "crossref_verified": "2026-08-27 via Europe PMC/OpenAlex record for 10.3390/polym13121901, Polymers 13(12):1901, 2021.",
     "origin": "external_literature",
     "evidence_class": "external_validation_only",

@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 10: Microbial fermentation pretreatment
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering microbial fermentation pretreatment.  
 **Strategic Posture:** `upstream_pretreatment_lane`  
 **Runtime Concept:** `fermentation_pretreatment_node`  
-**Scope & Targets:** Covers target compounds/variables: `free_amino_acid_enrichment`, `nucleotide_enrichment`, `pretreatment_pH_shift`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`, `computational_prior`. Target runtime modules: `src/literature_runtime.py`, `src/recommend.py`, `src/matrix_prior_registry.py`.  
+**Scope & Targets:** Covers target compounds/variables: `free_amino_acid_enrichment`, `nucleotide_enrichment`, `pretreatment_pH_shift`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`, `computational_prior`. Target runtime modules: `src/matrix_prior_registry.py`.  
 
 ---
 
@@ -28,7 +28,7 @@
 
 ## SECTION 1 — Curated References
 
-### Rizzello et al. (2024)
+### Flores et al. (2024), J. Agric. Food Chem. 72:5334
 - **DOI:** [10.1021/acs.jafc.3c08432](https://doi.org/10.1021/acs.jafc.3c08432)
 - **Matrix Family:** fermented_plant_based_matrix
 - **Kind:** `calibration_reference`
@@ -69,7 +69,7 @@
 
 ---
 
-### Zhao et al. (2022)
+### Jo et al. (2022), Molecules 27:6182
 - **DOI:** [10.3390/molecules27196182](https://doi.org/10.3390/molecules27196182)
 - **Matrix Family:** moromi_like_fermentation
 - **Kind:** `calibration_reference`
@@ -110,8 +110,8 @@
 
 ---
 
-### Perdiguero et al. (2004)
-- **DOI:** [10.1021/jf0494452](https://doi.org/10.1021/jf0494452)
+### Charpentier, Aussenac, Charpentier & Prome (2005), J. Agric. Food Chem. 53:3000
+- **DOI:** [10.1021/jf040334y](https://doi.org/10.1021/jf040334y)
 - **Matrix Family:** yeast_ye
 - **Kind:** `calibration_reference`
 - **Payload Role:** `process_state_calibration`
@@ -162,9 +162,9 @@ Total papers analyzed: **3** (Benchmark-eligible: **0**, Calibration references:
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Rizzello et al. (2024) | 4/8 | ⚠️ Calibration | fermented_plant_based_matrix |
-| Zhao et al. (2022) | 3/8 | ⚠️ Calibration | moromi_like_fermentation |
-| Perdiguero et al. (2004) | 2/8 | ❌ Rejected | yeast_ye |
+| Flores et al. (2024), J. Agric. Food Chem. 72:5334 | 4/8 | ⚠️ Calibration | fermented_plant_based_matrix |
+| Jo et al. (2022), Molecules 27:6182 | 3/8 | ⚠️ Calibration | moromi_like_fermentation |
+| Charpentier, Aussenac, Charpentier & Prome (2005), J. Agric. Food Chem. 53:3000 | 2/8 | ❌ Rejected | yeast_ye |
 
 ---
 
@@ -174,18 +174,18 @@ Total papers analyzed: **3** (Benchmark-eligible: **0**, Calibration references:
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Rizzello et al. (2024)` (Score: 4/8)
-- `Zhao et al. (2022)` (Score: 3/8)
+- `Flores et al. (2024), J. Agric. Food Chem. 72:5334` (Score: 4/8)
+- `Jo et al. (2022), Molecules 27:6182` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Perdiguero et al. (2004)` (Score: 2/8)
+- `Charpentier, Aussenac, Charpentier & Prome (2005), J. Agric. Food Chem. 53:3000` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/literature_runtime.py`, `src/recommend.py`, `src/matrix_prior_registry.py` must explicitly account for `fermentation_pretreatment_node` as a modifier when predicting `free_amino_acid_enrichment`, `nucleotide_enrichment`, `pretreatment_pH_shift` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/matrix_prior_registry.py` must explicitly account for `fermentation_pretreatment_node` as a modifier when predicting `free_amino_acid_enrichment`, `nucleotide_enrichment`, `pretreatment_pH_shift` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `upstream_pretreatment_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

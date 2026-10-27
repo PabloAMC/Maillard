@@ -287,15 +287,24 @@ constant, which is what makes `rank` useful.
 > ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
 > audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
 > pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> has an `audit_flag` in its registry entry. **84 records are marked
-> `no_verifiable_source`** (re-measured 2026-10-09 across every tracked JSON and YAML file
-> under `data/` and `results/literature/`, including nested records), of which
-> **63 carry numeric payloads** and **63 of those are consumed at runtime**. Both rises in that
-> count were the repository getting more honest, not worse; every fall was a deletion, not a
-> verification. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
+> has an `audit_flag` in its registry entry. **No record in the repository is flagged `no_verifiable_source`**
+> any more: on 2026-10-27 the last 84 were deleted, because every one had been searched for and
+> was fabricated or could not be tied to its number. None of them fed a prediction. Traced
+> under an audit hook (`scripts/trace_runtime_data_reads.py`), `compare`, `predict`, `explain`,
+> `rank`, `score` and `calibrate` read five curated files and no others:
+> `data/keys/compounds.yml`, `data/schemas/spec.schema.json`,
+> `data/species/desirable_targets.yml`, `data/species/off_flavour_targets.yml` and
+> `data/species/protein_matrices.yml`. The rate constants themselves live in
+> `src/kinetic_core/`, each with its evidence class, and the fitted ones are loaded from the
+> frozen fit reports under `results/validation/`. Every fall in the old census was a
+> deletion, not a verification. The registries are `data/keys/papers.yml` (449 papers, 255 of them with an
 > extraction dossier) and
-> `data/keys/compounds.yml` (74 InChIKey-resolved compounds); `scripts/ci/citation_gate.py`
-> blocks a dead or confabulated DOI.
+> `data/keys/compounds.yml` (74 InChIKey-resolved compounds). `scripts/ci/citation_gate.py`
+> is structural and offline: it blocks malformed and known-confabulated DOIs, but a DOI that
+> resolves to the wrong paper is invisible to it, and it never checks a value. Values are
+> checked by reading the paper into a dossier; a read-only audit on 2026-10-27 re-checked the
+> measured rate constants and the scored bundles against the PDFs (see
+> `tasks/data_restructure_plan.md`).
 
 <!-- BEGIN GENERATED: model-card -->
 
@@ -305,7 +314,7 @@ constant, which is what makes `rank` useful.
 
 - **Absolute concentrations are unreliable.** On the union panel the kinetic core lands 12/45 rows within 3x (median fold error 9.15x, worst 9.63e+03x); out of sample -- every row a core fit read removed -- 11/44 (median 9.23x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 17/44 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 17/43 out of sample.
 - **Directional and ranking claims are the product, and on the kinetic core they score 25/43 on strictly independent literature claims** (28 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 16/31 once pH and water activity are set aside, and 9/12 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.
-- **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
+- **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question.
 
 | Claim type | System class | Measured | Verdict |
 |---|---|---|---|
@@ -329,7 +338,7 @@ constant, which is what makes `rank` useful.
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
 
-**Provenance census (recounted at generation time, not copied).** **84 records** carry `source_status: no_verifiable_source` across 8 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 130 in total. The numeric-payload and runtime-consumed subsets (65 and 65) use a narrower definition than this recount and are pinned separately by the headline guards under `tests/scientific/`.
+**Provenance census (recounted at generation time, not copied).** **0 records** carry `source_status: no_verifiable_source` — the figure the provenance note above quotes, reproduced here by recount; an unsourced record is deleted, not flagged. No narrower marker (`value_status`, `value_anchor_status`, a DOI lookup's `status`) carries it either.
 
 **Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
 

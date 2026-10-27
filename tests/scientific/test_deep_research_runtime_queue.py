@@ -49,7 +49,9 @@ def test_deep_research_runtime_queue_selects_non_benchmark_runtime_batch_from_ba
     assert excluded["Ordoudi et al. (2014 / PMC12484514)"]["reason"] == "already_runtime_bound"
     assert excluded["Hrncirik & Zeelenberg (2014)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Aliani & Farmer (2005)"]["reason"] == "already_landed_in_runtime_registry"
-    assert excluded["Blank, Devaud & Grosch (2003)"]["reason"] == "already_runtime_bound"
+    # 2026-10-27: the G6P prior and its backlog item were deleted (no such paper; the 4.4x is
+    # not in Yaylayan 2003), so the citation is now closed rather than "runtime bound".
+    assert excluded["Blank, Devaud & Grosch (2003)"]["reason"] == "no_verifiable_source"
     assert excluded["Glomb & Monnier (1995)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Hidalgo & Zamora (2004)"]["reason"] == "already_landed_in_runtime_registry"
 

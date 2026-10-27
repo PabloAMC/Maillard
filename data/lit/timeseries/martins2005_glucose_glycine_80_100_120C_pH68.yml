@@ -1,5 +1,6 @@
 # Martins & van Boekel -- glucose/glycine multiresponse kinetics at 80, 100 and 120 C, pH 6.8
-# NOTHING IN THIS FILE IS WIRED INTO THE MODEL OR THE CALIBRATION. Data only.
+# The B1 fit's only fit-target file (scripts/generators/generate_kinetic_core_b1_fit.py). Data only:
+# the engine reads the frozen fit, never this file. (Header corrected 2026-10-27; it said "not wired".)
 source:
   citation: "Martins, S.I.F.S. & van Boekel, M.A.J.S. (2005) A kinetic model for the glucose/glycine Maillard reaction pathways. Food Chemistry 90(1-2):257-269."
   doi: "10.1016/j.foodchem.2004.04.006"

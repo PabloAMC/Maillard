@@ -2,11 +2,11 @@
   "artifact": "env_b34_ship_rule",
   "provenance": {
     "artifact": "env_b34_ship_rule",
-    "generated_on": "2026-09-11",
+    "generated_on": "2026-10-27",
     "git": {
-      "commit": "e3f52bd38a8f612206463d6cb47e3ffc22e1ed81",
-      "short": "e3f52bd3",
-      "branch": "reactions",
+      "commit": "4606458cd010df200db61965b9bc83b29ee38970",
+      "short": "4606458c",
+      "branch": "provenance-census-trace",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_env_b34_ship_rule.py",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "c4f59524a735bc4cb2f6c20eb3c435b2b8f1727846e58d7e5094b4d7f23e68e1"
+        "sha256": "1f05cd478668820f2b6d5fea4e242b7dc420c72372ad850d0ec7f5c70bed5dcb"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",
@@ -86,11 +86,11 @@
   "T2": {
     "noise_floor_from_two_seeds": {
       "n": 45,
-      "median_rel": 0.05438342692767772,
-      "p95_rel": 0.12277025801847964,
-      "max_rel": 0.19205054983053316
+      "median_rel": 0.054383428077999875,
+      "p95_rel": 0.12277025802529871,
+      "max_rel": 0.1920505498272883
     },
-    "tolerance_used_rel": 0.19205054983053316,
+    "tolerance_used_rel": 0.1920505498272883,
     "rows_the_priors_reach": [
       {
         "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
@@ -472,7 +472,7 @@
     "pass": true
   },
   "T3": {
-    "median_noise_floor_max_dex": 0.6401077939219731,
+    "median_noise_floor_max_dex": 0.6401077939218952,
     "n_seed_pairs": 45,
     "unreached_medians_moved_beyond_the_floor": [],
     "maillard_medians_moved_by_the_priors": [
@@ -533,13 +533,13 @@
       {
         "benchmark": "acrylamide_spi_extrusion_130C_ACSRef3",
         "compound": "acrylamide",
-        "dex": 4.345624428018991e-06,
+        "dex": 4.345624428018992e-06,
         "lane": "acrylamide"
       },
       {
         "benchmark": "thiamine_cys_glucose_120C_Bolton1994",
         "compound": "2-Methyl-3-furanthiol (MFT)",
-        "dex": 2.5658903070303467e-07,
+        "dex": 2.565890307030347e-07,
         "lane": "sulfur"
       }
     ],

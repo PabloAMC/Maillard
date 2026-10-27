@@ -64,10 +64,12 @@ def test_family_ingestion_plan_surfaces_deep_research_priority_queue():
 
     assert summary["backlog_family_count"] >= 5
     assert summary["backlog_citation_count"] >= 20
-    assert summary["recommended_runtime_queue"][:3] == ["07", "11", "12"]
-    assert summary["recommended_next_family"]["slr_family"] == "07"
+    # UPDATED 2026-10-27: every family-07 backlog citation was a no_verifiable_source record
+    # and was deleted, so 07 no longer leads the queue on citations nobody could find.
+    assert summary["recommended_runtime_queue"][:3] == ["11", "12", "03"]
+    assert summary["recommended_next_family"]["slr_family"] == "11"
     assert (
-        "land donor identity"
+        "lipid-Maillard competition"
         in summary["recommended_next_family"]["recommended_slice"]["focus"]
     )
     assert by_family["11"]["deep_research_backlog"]["high_confidence_count"] >= 4

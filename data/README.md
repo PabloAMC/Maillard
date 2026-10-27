@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **463**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **458**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -113,7 +113,7 @@ Matrix-lane hold-out bundles (`evidence_class: external_validation_only`). Froze
 
 Benchmarks retired for unverifiable sources; kept for forensics, never scored.
 
-6 files covered by the directory description above: `README.md`, `acrylamide_asparagine_glucose_Parker2012.json`, `cys_ribose_140C_Hofmann1998.json`, `furosine_extrusion_crossover_140C_RamirezJimenez2000.json`, `spi_hvp_xylose_120C_PMC9905368.json`, `wheat_gluten_hvp_xylose_120C_PMC9905368.json`
+1 files covered by the directory description above: `README.md`
 
 ## `data/benchmarks/step_level_unreachable`
 

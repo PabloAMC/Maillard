@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 13: Polyphenol-Amino Capping
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering polyphenol-amino capping.  
 **Strategic Posture:** `upstream_precursor_sink`  
 **Runtime Concept:** `precursor_depletion_sink`  
-**Scope & Targets:** Covers target compounds/variables: `quinone_budget`, `cysteine_depletion_factor`. Preferred payload types: `upstream_modifier_payload`, `computational_prior`. Target runtime modules: `src/precursor_resolver.py`, `src/literature_runtime.py`.  
+**Scope & Targets:** Covers target compounds/variables: `quinone_budget`, `cysteine_depletion_factor`. Preferred payload types: `upstream_modifier_payload`, `computational_prior`. Target runtime modules: .  
 
 ---
 
@@ -28,7 +28,7 @@
 
 ## SECTION 1 — Curated References
 
-### J. Agric. Food Chem. 2019 (Ref. 24)
+### Arsad et al. (2020), J. Agric. Food Chem. 68:8931
 - **DOI:** [10.1021/acs.jafc.9b07752](https://doi.org/10.1021/acs.jafc.9b07752)
 - **Matrix Family:** polyphenol_reactive_model_system
 - **Kind:** `directional_prior`
@@ -67,8 +67,8 @@
 
 ---
 
-### Mesías et al. (2020)
-- **DOI:** [10.3390/foods9081026](https://doi.org/10.3390/foods9081026)
+### Zhang et al. (2025)
+- **DOI:** [10.1016/j.fochx.2025.103252](https://doi.org/10.1016/j.fochx.2025.103252)
 - **Matrix Family:** amino_acid_capped_model_system
 - **Kind:** `safety_reference`
 - **Payload Role:** `benchmark_intake`
@@ -105,8 +105,8 @@
 
 ---
 
-### Hosry et al. (2025)
-- **DOI:** [10.3390/foods14111881](https://doi.org/10.3390/foods14111881)
+### Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319
+- **DOI:** [10.1021/jf010823n](https://doi.org/10.1021/jf010823n)
 - **Matrix Family:** coffee_melanoidin_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -290,7 +290,7 @@
 
 ---
 
-### Liu et al. (2022)
+### Liu et al. (2023), Food Res. Int. 163:112187
 - **DOI:** [10.1016/j.foodres.2022.112187](https://doi.org/10.1016/j.foodres.2022.112187)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -398,8 +398,8 @@
 
 ---
 
-### Cömert & Gökmen (2021)
-- **DOI:** [10.1016/j.foodchem.2020.128670](https://doi.org/10.1016/j.foodchem.2020.128670)
+### Comert & Gokmen (2022), Food Chemistry 371:130884
+- **DOI:** [10.1016/j.foodchem.2021.130884](https://doi.org/10.1016/j.foodchem.2021.130884)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -470,7 +470,7 @@
 
 ---
 
-### Li et al. (2017)
+### Liu et al. (2017), J. Agric. Food Chem. 65:2233
 - **DOI:** [10.1021/acs.jafc.6b05811](https://doi.org/10.1021/acs.jafc.6b05811)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -505,7 +505,7 @@
 
 ---
 
-### Monforte et al. (2018)
+### Monforte, Martins & Silva Ferreira (2017), J. Agric. Food Chem. 66:2459
 - **DOI:** [10.1021/acs.jafc.7b00264](https://doi.org/10.1021/acs.jafc.7b00264)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -594,20 +594,20 @@ Total papers analyzed: **15** (Benchmark-eligible: **0**, Calibration references
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| J. Agric. Food Chem. 2019 (Ref. 24) | 2/8 | ❌ Rejected | polyphenol_reactive_model_system |
-| Mesías et al. (2020) | 2/8 | ❌ Rejected | amino_acid_capped_model_system |
-| Hosry et al. (2025) | 3/8 | ⚠️ Calibration | coffee_melanoidin_model |
+| Arsad et al. (2020), J. Agric. Food Chem. 68:8931 | 2/8 | ❌ Rejected | polyphenol_reactive_model_system |
+| Zhang et al. (2025) | 2/8 | ❌ Rejected | amino_acid_capped_model_system |
+| Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319 | 3/8 | ⚠️ Calibration | coffee_melanoidin_model |
 | Poojary et al. (2023) | 2/8 | ❌ Rejected | free_model_system |
 | Shu et al. (2019) | 3/8 | ⚠️ Calibration | free_model_system |
 | Zhu et al. (2020) | 3/8 | ⚠️ Calibration | free_model_system |
 | Zhu et al. (2020) | 3/8 | ⚠️ Calibration | free_model_system |
-| Liu et al. (2022) | 3/8 | ⚠️ Calibration | free_model_system |
+| Liu et al. (2023), Food Res. Int. 163:112187 | 3/8 | ⚠️ Calibration | free_model_system |
 | Cömert & Gökmen (2019) | 3/8 | ⚠️ Calibration | free_model_system |
 | Munoz et al. (2007) | 3/8 | ⚠️ Calibration | free_model_system |
-| Cömert & Gökmen (2021) | 3/8 | ⚠️ Calibration | free_model_system |
+| Comert & Gokmen (2022), Food Chemistry 371:130884 | 3/8 | ⚠️ Calibration | free_model_system |
 | Song et al. (2009) | 3/8 | ⚠️ Calibration | free_model_system |
-| Li et al. (2017) | 3/8 | ⚠️ Calibration | free_model_system |
-| Monforte et al. (2018) | 3/8 | ⚠️ Calibration | free_model_system |
+| Liu et al. (2017), J. Agric. Food Chem. 65:2233 | 3/8 | ⚠️ Calibration | free_model_system |
+| Monforte, Martins & Silva Ferreira (2017), J. Agric. Food Chem. 66:2459 | 3/8 | ⚠️ Calibration | free_model_system |
 | Rawel et al. (2005) | 3/8 | ⚠️ Calibration | soy_isolate |
 
 ---
@@ -618,30 +618,30 @@ Total papers analyzed: **15** (Benchmark-eligible: **0**, Calibration references
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Hosry et al. (2025)` (Score: 3/8)
+- `Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319` (Score: 3/8)
 - `Shu et al. (2019)` (Score: 3/8)
 - `Zhu et al. (2020)` (Score: 3/8)
 - `Zhu et al. (2020)` (Score: 3/8)
-- `Liu et al. (2022)` (Score: 3/8)
+- `Liu et al. (2023), Food Res. Int. 163:112187` (Score: 3/8)
 - `Cömert & Gökmen (2019)` (Score: 3/8)
 - `Munoz et al. (2007)` (Score: 3/8)
-- `Cömert & Gökmen (2021)` (Score: 3/8)
+- `Comert & Gokmen (2022), Food Chemistry 371:130884` (Score: 3/8)
 - `Song et al. (2009)` (Score: 3/8)
-- `Li et al. (2017)` (Score: 3/8)
-- `Monforte et al. (2018)` (Score: 3/8)
+- `Liu et al. (2017), J. Agric. Food Chem. 65:2233` (Score: 3/8)
+- `Monforte, Martins & Silva Ferreira (2017), J. Agric. Food Chem. 66:2459` (Score: 3/8)
 - `Rawel et al. (2005)` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `J. Agric. Food Chem. 2019 (Ref. 24)` (Score: 2/8)
-- `Mesías et al. (2020)` (Score: 2/8)
+- `Arsad et al. (2020), J. Agric. Food Chem. 68:8931` (Score: 2/8)
+- `Zhang et al. (2025)` (Score: 2/8)
 - `Poojary et al. (2023)` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/precursor_resolver.py`, `src/literature_runtime.py` must explicitly account for `precursor_depletion_sink` as a modifier when predicting `quinone_budget`, `cysteine_depletion_factor` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `precursor_depletion_sink` as a modifier when predicting `quinone_budget`, `cysteine_depletion_factor` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `upstream_precursor_sink` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

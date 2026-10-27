@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 11: Maillard/Lipid Crosstalk
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering maillard/lipid crosstalk.  
 **Strategic Posture:** `first_class_runtime_lane`  
 **Runtime Concept:** `lipid_maillard_competition`  
-**Scope & Targets:** Covers target compounds/variables: `hexanal`, `MDA`, `4-HNE`, `radical_quenching_rate`. Preferred payload types: `benchmark_payload`, `computational_prior`. Target runtime modules: `src/lipid_oxidation.py`, `src/flavor.py`.  
+**Scope & Targets:** Covers target compounds/variables: `hexanal`, `MDA`, `4-HNE`, `radical_quenching_rate`. Preferred payload types: `benchmark_payload`, `computational_prior`. Target runtime modules: `src/lipid_oxidation.py`.  
 
 ---
 
@@ -206,7 +206,7 @@
 
 ---
 
-### Bi et al. (2020)
+### Bi et al. (2020), J. Agric. Food Chem. 68:2718
 - **DOI:** [10.1021/acs.jafc.9b07711](https://doi.org/10.1021/acs.jafc.9b07711)
 - **Matrix Family:** raw_pea_flour
 - **Kind:** `quantitative_benchmark`
@@ -254,7 +254,7 @@
 
 ---
 
-### Flores et al. (2024)
+### Flores et al. (2024), J. Agric. Food Chem. 72:5334
 - **DOI:** [10.1021/acs.jafc.3c08432](https://doi.org/10.1021/acs.jafc.3c08432)
 - **Matrix Family:** fermented_textured_pea_protein
 - **Kind:** `calibration_reference`
@@ -296,47 +296,6 @@
 
 ---
 
-### Wang et al. (2020)
-- **DOI:** [10.1021/acs.jafc.9b06882](https://doi.org/10.1021/acs.jafc.9b06882)
-- **Matrix Family:** pea_protein_isolate
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `binding_hierarchy` | `['DMTS', 'DMDS', 'DMS']` |
-| `binding_spontaneous` | `True` |
-| `binding_exothermic` | `True` |
-| `temperature_effect_direction` | `binding_weakens_as_temperature_increases` |
-| `dominant_binding_forces` | `['hydrophobic', 'van_der_waals']` |
-
-**What it supports:**
-- PPI sulfur-volatile binding order support showing DMTS > DMDS > DMS under Stern-Volmer analysis
-- A bounded temperature-weakening prior for sulfur retention before higher-temperature covalent trapping dominates
-
-**What it does not support:**
-- Exact MFT or FFT binding coefficients in pea matrices
-- One-condition absolute sulfur headspace closure for a benchmark product
-
-**Next Action:** Keep as a bounded sulfur-binding order prior so Family 11 does not treat all pea-matrix sulfur volatiles as retention-neutral before heat-driven trapping takes over.
-
----
-
 ### Hidalgo et al. (2007)
 - **DOI:** [10.1021/jf070527w](https://doi.org/10.1021/jf070527w)
 - **Matrix Family:** free_model_system
@@ -373,7 +332,7 @@
 
 ---
 
-### Zamora et al. (2010)
+### Hidalgo, Delgado, Navarro & Zamora (2010), J. Agric. Food Chem. 58:10512
 - **DOI:** [10.1021/jf102026c](https://doi.org/10.1021/jf102026c)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -409,7 +368,7 @@
 
 ---
 
-### Ding et al. (2020)
+### Troise et al. (2020), J. Agric. Food Chem. 68:12662
 - **DOI:** [10.1021/acs.jafc.0c04738](https://doi.org/10.1021/acs.jafc.0c04738)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -444,7 +403,7 @@
 
 ---
 
-### Richards et al. (2009)
+### Carvajal et al. (2009), J. Agric. Food Chem. 57:8134
 - **DOI:** [10.1021/jf9013394](https://doi.org/10.1021/jf9013394)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -483,7 +442,7 @@
 
 ---
 
-### Smagghe et al. (2006)
+### Smagghe et al. (2005), Biochemistry 45:561
 - **DOI:** [10.1021/bi051902l](https://doi.org/10.1021/bi051902l)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -529,7 +488,7 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 11
 
-Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references: **10**, Rejected: **2**)
+Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references: **10**, Rejected: **1**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
@@ -537,14 +496,13 @@ Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references
 | Barallat-Pérez et al. (2023) | 3/8 | ⚠️ Calibration | commercial_ppi_spi |
 | Wang et al. (2023) | 2/8 | ❌ Rejected | plant_protein_matrix |
 | Anantharamkrishnan et al. (2020) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
-| Bi et al. (2020) | 4/8 | ⚠️ Calibration | raw_pea_flour |
-| Flores et al. (2024) | 4/8 | ⚠️ Calibration | fermented_textured_pea_protein |
-| Wang et al. (2020) | 2/8 | ❌ Rejected | pea_protein_isolate |
+| Bi et al. (2020), J. Agric. Food Chem. 68:2718 | 4/8 | ⚠️ Calibration | raw_pea_flour |
+| Flores et al. (2024), J. Agric. Food Chem. 72:5334 | 4/8 | ⚠️ Calibration | fermented_textured_pea_protein |
 | Hidalgo et al. (2007) | 3/8 | ⚠️ Calibration | free_model_system |
-| Zamora et al. (2010) | 3/8 | ⚠️ Calibration | free_model_system |
-| Ding et al. (2020) | 3/8 | ⚠️ Calibration | free_model_system |
-| Richards et al. (2009) | 3/8 | ⚠️ Calibration | free_model_system |
-| Smagghe et al. (2006) | 3/8 | ⚠️ Calibration | free_model_system |
+| Hidalgo, Delgado, Navarro & Zamora (2010), J. Agric. Food Chem. 58:10512 | 3/8 | ⚠️ Calibration | free_model_system |
+| Troise et al. (2020), J. Agric. Food Chem. 68:12662 | 3/8 | ⚠️ Calibration | free_model_system |
+| Carvajal et al. (2009), J. Agric. Food Chem. 57:8134 | 3/8 | ⚠️ Calibration | free_model_system |
+| Smagghe et al. (2005), Biochemistry 45:561 | 3/8 | ⚠️ Calibration | free_model_system |
 
 ---
 
@@ -557,24 +515,23 @@ Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references
 - `Li et al. (2026)` (Score: 4/8)
 - `Barallat-Pérez et al. (2023)` (Score: 3/8)
 - `Anantharamkrishnan et al. (2020)` (Score: 3/8)
-- `Bi et al. (2020)` (Score: 4/8)
-- `Flores et al. (2024)` (Score: 4/8)
+- `Bi et al. (2020), J. Agric. Food Chem. 68:2718` (Score: 4/8)
+- `Flores et al. (2024), J. Agric. Food Chem. 72:5334` (Score: 4/8)
 - `Hidalgo et al. (2007)` (Score: 3/8)
-- `Zamora et al. (2010)` (Score: 3/8)
-- `Ding et al. (2020)` (Score: 3/8)
-- `Richards et al. (2009)` (Score: 3/8)
-- `Smagghe et al. (2006)` (Score: 3/8)
+- `Hidalgo, Delgado, Navarro & Zamora (2010), J. Agric. Food Chem. 58:10512` (Score: 3/8)
+- `Troise et al. (2020), J. Agric. Food Chem. 68:12662` (Score: 3/8)
+- `Carvajal et al. (2009), J. Agric. Food Chem. 57:8134` (Score: 3/8)
+- `Smagghe et al. (2005), Biochemistry 45:561` (Score: 3/8)
 
 ### REJECTED (Score < 3)
 - `Wang et al. (2023)` (Score: 2/8)
-- `Wang et al. (2020)` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/lipid_oxidation.py`, `src/flavor.py` must explicitly account for `lipid_maillard_competition` as a modifier when predicting `hexanal`, `MDA`, `4-HNE`, `radical_quenching_rate` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/lipid_oxidation.py` must explicitly account for `lipid_maillard_competition` as a modifier when predicting `hexanal`, `MDA`, `4-HNE`, `radical_quenching_rate` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `first_class_runtime_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

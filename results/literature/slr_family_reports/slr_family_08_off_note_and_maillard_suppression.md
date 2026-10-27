@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 8: Plant off-notes and Maillard suppression
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering plant off-notes and maillard suppression.  
 **Strategic Posture:** `guardrail_lane`  
 **Runtime Concept:** `off_note_and_maillard_suppression`  
-**Scope & Targets:** Covers target compounds/variables: `dicarbonyl_trapping_factor`, `amino_group_blocking_factor`. Preferred payload types: `benchmark_payload`, `computational_prior`, `safety_payload`. Target runtime modules: `src/literature_runtime.py`, `src/safety.py`.  
+**Scope & Targets:** Covers target compounds/variables: `dicarbonyl_trapping_factor`, `amino_group_blocking_factor`. Preferred payload types: `benchmark_payload`, `computational_prior`, `safety_payload`. Target runtime modules: .  
 
 ---
 
@@ -69,88 +69,7 @@
 
 ---
 
-### Wang et al. (2022)
-- **DOI:** [10.1016/j.lwt.2022.113009](https://doi.org/10.1016/j.lwt.2022.113009)
-- **Matrix Family:** lab_fermented_plant_protein
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_reference_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ✅ | Odor thresholds / sensory reported |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `hexanal_depletion_fraction` | `0.957` |
-| `residual_hexanal_oav` | `0.47` |
-| `adh_aldh_mechanism_confirmed` | `True` |
-| `sensory_panel_reported` | `True` |
-
-**What it supports:**
-- A compact residual-hexanal OAV target after LAB cleanup
-- Scientist-facing reporting support for pushing fermentation-treated systems below the hexanal threshold
-
-**What it does not support:**
-- A universal fermentation kinetics model
-- Exact final-product closure across all plant proteins and starter cultures
-
-**Next Action:** Keep Wang 2022 as a compact hexanal-cleanup reference anchor that complements, rather than duplicates, the already-landed fermentation cleanup state package.
-
----
-
-### Bhandari et al. (1998)
-- **DOI:** [10.1016/S0260-8774(98)00085-4](https://doi.org/10.1016/S0260-8774(98)00085-4)
-- **Matrix Family:** aqueous_encapsulation_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ✅ | Odor thresholds / sensory reported |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `beta_cyclodextrin_loading_wt_pct_reference` | `1.0` |
-| `hexanal_headspace_reduction_fraction` | `0.62` |
-| `nonanal_headspace_reduction_fraction` | `0.68` |
-| `e_2_nonenal_headspace_reduction_fraction` | `0.74` |
-| `hexanal_k_assoc_m_inverse` | `1840.0` |
-
-**What it supports:**
-- A bounded beta-cyclodextrin sequestration surface for hexanal, nonanal, and (E)-2-nonenal
-- Multi-hurdle off-note reasoning that treats cyclodextrin as a partial suppressor rather than a complete fix
-
-**What it does not support:**
-- A standalone encapsulation solver
-- Finished-product sensory closure without complementary off-note mitigation
-
-**Next Action:** Encode as a bounded cyclodextrin-binding prior so Family 08 can expose partial aldehyde suppression without conflating it with protein-binding retention.
-
----
-
-### Liu (2022)
+### Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998
 - **DOI:** [10.1016/j.foodchem.2022.134998](https://doi.org/10.1016/j.foodchem.2022.134998)
 - **Matrix Family:** pea_isolate
 - **Kind:** `calibration_reference`
@@ -188,8 +107,8 @@
 
 ---
 
-### Rawel et al. (2002)
-- **DOI:** [10.1021/jf020082z](https://doi.org/10.1021/jf020082z)
+### Rawel, Rohn, Kruse & Kroll (2002), Food Chemistry 78:443
+- **DOI:** [10.1016/s0308-8146(02)00155-3](https://doi.org/10.1016/s0308-8146(02)00155-3)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -236,15 +155,13 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 8
 
-Total papers analyzed: **5** (Benchmark-eligible: **0**, Calibration references: **4**, Rejected: **1**)
+Total papers analyzed: **3** (Benchmark-eligible: **0**, Calibration references: **2**, Rejected: **1**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Squeo et al. (2023) | 3/8 | ⚠️ Calibration | commercial_pbpi |
-| Wang et al. (2022) | 3/8 | ⚠️ Calibration | lab_fermented_plant_protein |
-| Bhandari et al. (1998) | 3/8 | ⚠️ Calibration | aqueous_encapsulation_model_system |
-| Liu (2022) | 3/8 | ⚠️ Calibration | pea_isolate |
-| Rawel et al. (2002) | 2/8 | ❌ Rejected | free_model_system |
+| Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | 3/8 | ⚠️ Calibration | pea_isolate |
+| Rawel, Rohn, Kruse & Kroll (2002), Food Chemistry 78:443 | 2/8 | ❌ Rejected | free_model_system |
 
 ---
 
@@ -255,19 +172,17 @@ Total papers analyzed: **5** (Benchmark-eligible: **0**, Calibration references:
 
 ### CALIBRATION (Score 3-5)
 - `Squeo et al. (2023)` (Score: 3/8)
-- `Wang et al. (2022)` (Score: 3/8)
-- `Bhandari et al. (1998)` (Score: 3/8)
-- `Liu (2022)` (Score: 3/8)
+- `Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Rawel et al. (2002)` (Score: 2/8)
+- `Rawel, Rohn, Kruse & Kroll (2002), Food Chemistry 78:443` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/literature_runtime.py`, `src/safety.py` must explicitly account for `off_note_and_maillard_suppression` as a modifier when predicting `dicarbonyl_trapping_factor`, `amino_group_blocking_factor` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `off_note_and_maillard_suppression` as a modifier when predicting `dicarbonyl_trapping_factor`, `amino_group_blocking_factor` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `guardrail_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

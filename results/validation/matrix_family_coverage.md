@@ -21,7 +21,7 @@
 | soy_hydrolysate | explicit_supported | hold_intake_only | absolute ppb validation | 1 |
 | mycoprotein | explicit_supported | bounded_expansion_candidate | executable benchmark family | 2 |
 | extrusion_heavy_systems | explicit_supported | hold_process_regime_only | benchmark-grade quantitative closure | 1 |
-| coconut_oil_co_matrix | indirect_only | blocked_on_family_specific_evidence | coconut-specific lipid profile | 3 |
+| coconut_oil_co_matrix | indirect_only | blocked_on_family_specific_evidence | coconut-specific lipid profile | 1 |
 | other_plant_proteins | open_gap | blocked_on_runtime_prior_and_benchmark | runtime priors | 1 |
 
 ## Scope Notes

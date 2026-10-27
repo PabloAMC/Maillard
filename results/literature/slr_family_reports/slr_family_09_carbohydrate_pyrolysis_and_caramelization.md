@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 9: Carbohydrate pyrolysis and caramelization
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering carbohydrate pyrolysis and caramelization.  
 **Strategic Posture:** `failure_mode_lane`  
 **Runtime Concept:** `carbohydrate_pyrolysis_lane`  
-**Scope & Targets:** Covers target compounds/variables: `HMF`, `furfural`, `caramelization_severity`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`, `computational_prior`. Target runtime modules: `src/literature_runtime.py`, `src/recommend.py`.  
+**Scope & Targets:** Covers target compounds/variables: `HMF`, `furfural`, `caramelization_severity`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`, `computational_prior`. Target runtime modules: .  
 
 ---
 
@@ -28,8 +28,8 @@
 
 ## SECTION 1 — Curated References
 
-### Resconi et al. (2023)
-- **DOI:** [10.3390/foods12071511](https://doi.org/10.3390/foods12071511)
+### Hernandez et al. (2023), Molecules 28:3151
+- **DOI:** [10.3390/molecules28073151](https://doi.org/10.3390/molecules28073151)
 - **Matrix Family:** pbma_vs_beef_comparator
 - **Kind:** `quantitative_benchmark`
 - **Payload Role:** `benchmark_intake`
@@ -121,48 +121,8 @@
 
 ---
 
-### Ordoudi et al. (2014)
-- **DOI:** [10.1016/j.foodchem.2014.05.097](https://doi.org/10.1016/j.foodchem.2014.05.097)
-- **Matrix Family:** caramelization_model_system
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `hmf_peak_mg_per_l` | `140.0` |
-| `hmf_residual_mg_per_l_at_360_min` | `20.0` |
-| `secondary_decline_horizon_min` | `360.0` |
-| `amino_acid_cocatalysis_multiplier` | `7.8` |
-
-**What it supports:**
-- An explicit HMF peak-and-decline process-state window at pH 5.0 and 125 C
-- Bounded amino-acid co-catalysis context for caramelization severity
-
-**What it does not support:**
-- Direct HDMF closure
-- A universal time-course outside the reported window
-
-**Next Action:** Use as a caramelization process-state calibration rather than as an executable benchmark.
-
----
-
-### Brands & van Boekel (2002)
-- **DOI:** [10.1021/jf015902m](https://doi.org/10.1021/jf015902m)
+### Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725
+- **DOI:** [10.1021/jf011164h](https://doi.org/10.1021/jf011164h)
 - **Matrix Family:** aqueous_model_system
 - **Kind:** `directional_prior`
 - **Payload Role:** `benchmark_intake`
@@ -203,8 +163,8 @@
 
 ---
 
-### Glomb & Monnier (1995)
-- **DOI:** [10.1021/jf00058a011](https://doi.org/10.1021/jf00058a011)
+### Glomb & Monnier (1995), J. Biol. Chem. 270:10017
+- **DOI:** [10.1074/jbc.270.17.10017](https://doi.org/10.1074/jbc.270.17.10017)
 - **Matrix Family:** aqueous_model_system
 - **Kind:** `directional_prior`
 - **Payload Role:** `benchmark_intake`
@@ -243,8 +203,8 @@
 
 ---
 
-### Ramaswamy & Zareifard (2000)
-- **DOI:** [10.1016/S0260-8774(00)00047-9](https://doi.org/10.1016/S0260-8774(00)00047-9)
+### Quintas, Guimaraes, Baylina, Brandao & Silva (2007), Innov. Food Sci. Emerg. Technol. 8:306
+- **DOI:** [10.1016/j.ifset.2007.02.002](https://doi.org/10.1016/j.ifset.2007.02.002)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -280,48 +240,8 @@
 
 ---
 
-### Hauck & Tressl (1999)
-- **DOI:** [10.1021/bk-1999-0740.ch012](https://doi.org/10.1021/bk-1999-0740.ch012)
-- **Matrix Family:** free_model_system
-- **Kind:** `calibration_reference`
-- **Payload Role:** `flavor_reference_payload`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `hdmf_from_iso_oligosaccharides_ug_per_g` | `3.8` |
-| `hdmf_from_maltose_ug_per_g` | `1.4` |
-| `hdmf_from_mgo_self_condensation_ug_per_g` | `2.9` |
-| `reaction_temp_C` | `140.0` |
-
-**What it supports:**
-- HDMF generation from iso-oligosaccharides (3.8 ug/g) and maltose (1.4 ug/g) at 140 C without amino acids
-- Methylglyoxal (MGO) self-condensation HDMF route yield (2.9 ug/g)
-
-**What it does not support:**
-- Amadori rearrangement activation barriers
-- Peptide-bound lysine trapping kinetics
-
-**Next Action:** Expose as a non-amino acid dependent furanone flavor reference payload.
-
----
-
-### CHITTENDEN & Regeling (1987)
-- **DOI:** [10.1002/recl.19871060202](https://doi.org/10.1002/recl.19871060202)
+### de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35
+- **DOI:** [10.1002/recl.19871060201](https://doi.org/10.1002/recl.19871060201)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -355,8 +275,8 @@
 
 ---
 
-### Luna & Aguilera (2014)
-- **DOI:** [10.1016/j.jfoodeng.2014.06.032](https://doi.org/10.1016/j.jfoodeng.2014.06.032)
+### Luna & Aguilera (2013), Food Biophysics 9:61
+- **DOI:** [10.1007/s11483-013-9317-0](https://doi.org/10.1007/s11483-013-9317-0)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -390,7 +310,7 @@
 
 ---
 
-### Bao et al. (2022)
+### Cui et al. (2022), J. Agric. Food Chem. 70:11556
 - **DOI:** [10.1021/acs.jafc.2c03427](https://doi.org/10.1021/acs.jafc.2c03427)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -435,20 +355,18 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 9
 
-Total papers analyzed: **10** (Benchmark-eligible: **0**, Calibration references: **6**, Rejected: **4**)
+Total papers analyzed: **8** (Benchmark-eligible: **0**, Calibration references: **5**, Rejected: **3**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Resconi et al. (2023) | 5/8 | ⚠️ Calibration | pbma_vs_beef_comparator |
+| Hernandez et al. (2023), Molecules 28:3151 | 5/8 | ⚠️ Calibration | pbma_vs_beef_comparator |
 | Mottram & Nobrega (2002) | 2/8 | ❌ Rejected | caramelization_sulfur_model_system |
-| Ordoudi et al. (2014) | 3/8 | ⚠️ Calibration | caramelization_model_system |
-| Brands & van Boekel (2002) | 3/8 | ⚠️ Calibration | aqueous_model_system |
-| Glomb & Monnier (1995) | 2/8 | ❌ Rejected | aqueous_model_system |
-| Ramaswamy & Zareifard (2000) | 2/8 | ❌ Rejected | free_model_system |
-| Hauck & Tressl (1999) | 2/8 | ❌ Rejected | free_model_system |
-| CHITTENDEN & Regeling (1987) | 3/8 | ⚠️ Calibration | free_model_system |
-| Luna & Aguilera (2014) | 3/8 | ⚠️ Calibration | free_model_system |
-| Bao et al. (2022) | 3/8 | ⚠️ Calibration | free_model_system |
+| Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725 | 3/8 | ⚠️ Calibration | aqueous_model_system |
+| Glomb & Monnier (1995), J. Biol. Chem. 270:10017 | 2/8 | ❌ Rejected | aqueous_model_system |
+| Quintas, Guimaraes, Baylina, Brandao & Silva (2007), Innov. Food Sci. Emerg. Technol. 8:306 | 2/8 | ❌ Rejected | free_model_system |
+| de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35 | 3/8 | ⚠️ Calibration | free_model_system |
+| Luna & Aguilera (2013), Food Biophysics 9:61 | 3/8 | ⚠️ Calibration | free_model_system |
+| Cui et al. (2022), J. Agric. Food Chem. 70:11556 | 3/8 | ⚠️ Calibration | free_model_system |
 
 ---
 
@@ -458,25 +376,23 @@ Total papers analyzed: **10** (Benchmark-eligible: **0**, Calibration references
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Resconi et al. (2023)` (Score: 5/8)
-- `Ordoudi et al. (2014)` (Score: 3/8)
-- `Brands & van Boekel (2002)` (Score: 3/8)
-- `CHITTENDEN & Regeling (1987)` (Score: 3/8)
-- `Luna & Aguilera (2014)` (Score: 3/8)
-- `Bao et al. (2022)` (Score: 3/8)
+- `Hernandez et al. (2023), Molecules 28:3151` (Score: 5/8)
+- `Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725` (Score: 3/8)
+- `de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35` (Score: 3/8)
+- `Luna & Aguilera (2013), Food Biophysics 9:61` (Score: 3/8)
+- `Cui et al. (2022), J. Agric. Food Chem. 70:11556` (Score: 3/8)
 
 ### REJECTED (Score < 3)
 - `Mottram & Nobrega (2002)` (Score: 2/8)
-- `Glomb & Monnier (1995)` (Score: 2/8)
-- `Ramaswamy & Zareifard (2000)` (Score: 2/8)
-- `Hauck & Tressl (1999)` (Score: 2/8)
+- `Glomb & Monnier (1995), J. Biol. Chem. 270:10017` (Score: 2/8)
+- `Quintas, Guimaraes, Baylina, Brandao & Silva (2007), Innov. Food Sci. Emerg. Technol. 8:306` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/literature_runtime.py`, `src/recommend.py` must explicitly account for `carbohydrate_pyrolysis_lane` as a modifier when predicting `HMF`, `furfural`, `caramelization_severity` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `carbohydrate_pyrolysis_lane` as a modifier when predicting `HMF`, `furfural`, `caramelization_severity` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `failure_mode_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

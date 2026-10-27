@@ -24,7 +24,8 @@ def test_literature_backlog_queues_are_exclusive_and_surface_minimum_primary_exp
     # 2026-10-09: ordoudi_2014_hmf_peak_window and comunian_2021_thiamine_encapsulation left
     # both sets. Their intake sources are no_verifiable_source and their process-state
     # records were deleted (tasks/data_restructure_plan.md, "After the gap search"), so they
-    # are neither encoded nor queued.
+    # are neither encoded nor queued. 2026-10-27: the same for blank_grosch_1991_hdmf_anchor,
+    # whose intake record (no_verifiable_source) was deleted with the other 83.
     for entry_id in {
         "rizzello_2024_fermentation_cleanup",
         "zhao_2022_moromi_precursor_release",
@@ -41,7 +42,6 @@ def test_literature_backlog_queues_are_exclusive_and_surface_minimum_primary_exp
         "voelker_2021_thiamine_kinetics",
         "huang_2022_thiamine_metal_catalysis",
         "wang_2012_gsh_xylose_sulfur_uplift",
-        "blank_grosch_1991_hdmf_anchor",
         "liu_2023_ppi_offnote_baseline",
         "pmc11049305_spirulina_offnote_anchor",
         "pmc12155365_sunflower_roasted_anchor",

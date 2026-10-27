@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 16: Melanoidin Polymerization
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering melanoidin polymerization.  
 **Strategic Posture:** `trapping_burden_modifier`  
 **Runtime Concept:** `matrix_trapping_node`  
-**Scope & Targets:** Covers target compounds/variables: `melanoidin_mass`, `TH_scavenging_factor`. Preferred payload types: `trapping_burden_modifier_payload`, `computational_prior`. Target runtime modules: `src/extrusion_model.py`, `src/flavor.py`.  
+**Scope & Targets:** Covers target compounds/variables: `melanoidin_mass`, `TH_scavenging_factor`. Preferred payload types: `trapping_burden_modifier_payload`, `computational_prior`. Target runtime modules: `src/extrusion.py`.  
 
 ---
 
@@ -28,8 +28,8 @@
 
 ## SECTION 1 — Curated References
 
-### Weerawatanakorn et al. (2015)
-- **DOI:** [10.1021/acs.jafc.5b02009](https://doi.org/10.1021/acs.jafc.5b02009)
+### Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176
+- **DOI:** [10.1016/j.jfda.2015.02.001](https://doi.org/10.1016/j.jfda.2015.02.001)
 - **Matrix Family:** melanoidin_trapping_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -336,8 +336,8 @@
 
 ---
 
-### Mundt & Wedzicha (2007)
-- **DOI:** [10.1016/j.lwt.2006.07.014](https://doi.org/10.1016/j.lwt.2006.07.014)
+### Mundt & Wedzicha (2007), LWT 40:1078
+- **DOI:** [10.1016/j.lwt.2006.07.011](https://doi.org/10.1016/j.lwt.2006.07.011)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -409,8 +409,8 @@
 
 ---
 
-### Hofmann et al. (2001)
-- **DOI:** [10.1021/jf001302l](https://doi.org/10.1021/jf001302l)
+### Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319
+- **DOI:** [10.1021/jf010823n](https://doi.org/10.1021/jf010823n)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -445,8 +445,8 @@
 
 ---
 
-### Adams et al. (2005)
-- **DOI:** [10.1021/jf047903m](https://doi.org/10.1021/jf047903m)
+### Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537
+- **DOI:** [10.1590/1678-457x.08717](https://doi.org/10.1590/1678-457x.08717)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -496,7 +496,7 @@ Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Weerawatanakorn et al. (2015) | 2/8 | ❌ Rejected | melanoidin_trapping_model |
+| Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176 | 2/8 | ❌ Rejected | melanoidin_trapping_model |
 | Snel et al. (2023) | 2/8 | ❌ Rejected | spi_ppi_hme_rework |
 | Cruz et al. (2025) | 2/8 | ❌ Rejected | spi_rice_hme_burger_analogues |
 | J. Agric. Food Chem. 2019 (Ref. 21) | 2/8 | ❌ Rejected | pea_protein_hydrolysate_gum_arabic_conjugate |
@@ -504,10 +504,10 @@ Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references
 | Brands et al. (2002) | 3/8 | ⚠️ Calibration | free_model_system |
 | Gigl et al. (2021) | 3/8 | ⚠️ Calibration | free_model_system |
 | Suzuki & Philp (1990) | 3/8 | ⚠️ Calibration | free_model_system |
-| Mundt & Wedzicha (2007) | 3/8 | ⚠️ Calibration | free_model_system |
+| Mundt & Wedzicha (2007), LWT 40:1078 | 3/8 | ⚠️ Calibration | free_model_system |
 | Cao et al. (2024) | 3/8 | ⚠️ Calibration | free_model_system |
-| Hofmann et al. (2001) | 3/8 | ⚠️ Calibration | free_model_system |
-| Adams et al. (2005) | 3/8 | ⚠️ Calibration | free_model_system |
+| Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319 | 3/8 | ⚠️ Calibration | free_model_system |
+| Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537 | 3/8 | ⚠️ Calibration | free_model_system |
 
 ---
 
@@ -520,13 +520,13 @@ Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references
 - `Brands et al. (2002)` (Score: 3/8)
 - `Gigl et al. (2021)` (Score: 3/8)
 - `Suzuki & Philp (1990)` (Score: 3/8)
-- `Mundt & Wedzicha (2007)` (Score: 3/8)
+- `Mundt & Wedzicha (2007), LWT 40:1078` (Score: 3/8)
 - `Cao et al. (2024)` (Score: 3/8)
-- `Hofmann et al. (2001)` (Score: 3/8)
-- `Adams et al. (2005)` (Score: 3/8)
+- `Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319` (Score: 3/8)
+- `Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Weerawatanakorn et al. (2015)` (Score: 2/8)
+- `Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176` (Score: 2/8)
 - `Snel et al. (2023)` (Score: 2/8)
 - `Cruz et al. (2025)` (Score: 2/8)
 - `J. Agric. Food Chem. 2019 (Ref. 21)` (Score: 2/8)
@@ -536,8 +536,8 @@ Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/extrusion_model.py`, `src/flavor.py` must explicitly account for `matrix_trapping_node` as a modifier when predicting `melanoidin_mass`, `TH_scavenging_factor` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/extrusion.py` must explicitly account for `matrix_trapping_node` as a modifier when predicting `melanoidin_mass`, `TH_scavenging_factor` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `trapping_burden_modifier` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*
