@@ -503,45 +503,6 @@
       "citation_caveat": "Citation string is wrong (2008 Limacher et al., Davidek is 3rd author, not 'Davidek et al. 2006'). Yields are reported as up to 330 umol furan / mol precursor under roasting (= 0.033 mol%) and <20 umol/mol under pressure cooking; the repo's '0.045 mol% at 120 C' is NOT confirmed by the abstract. If used as a safety ceiling, the correct order of magnitude is ~0.02-0.04 mol%."
     },
     {
-      "id": "henle_2005_glycinin_cml",
-      "kind": "finished_product_reference",
-      "report_visibility": "default",
-      "target_module": "safety",
-      "chemistry_family": "safety_damage_lane",
-      "slr_family_source": "12",
-      "source_citation": "Henle (2005), Amino Acids 29:313-322 -- but see caveat",
-      "analyte": "CML",
-      "method": {
-        "instrument": "GC-MS",
-        "notes": "Heated soy glycinin model system CML quantification"
-      },
-      "matrix_reference_ranges": [
-        {
-          "matrix_family": "soy_glycinin",
-          "units": "umol_per_g_protein",
-          "point": 2.3
-        }
-      ],
-      "what_it_supports": [
-        "Upper-bound CML yield (2.3 umol/g protein) in heated soy glycinin matrices",
-        "Dicarbonyl consumption estimation baseline for soy glycinin"
-      ],
-      "comment": "Heated soy glycinin model system.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1007/s00726-005-0187-z",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "CrossRef search of Amino Acids 2004-2006 for protein-bound CML/glycation returns exactly one Henle 2005 paper: doi 10.1007/s00726-005-0200-2, Amino Acids 29:313-322 (DOI verified live, sole author T. Henle). That is almost certainly what the dead DOI 10.1007/s00726-005-0187-z was meant to be. However it is a REVIEW of protein-bound AGEs in foods, not a heated soy-glycinin model-system study, so it cannot be the source of the repo's '2.3 umol CML/g protein' from soy glycinin or of a dicarbonyl-consumption estimate. | Reported as no_verifiable_source per the verification bar: the paper I can verify for 'Henle (2005)' provably cannot supply the repo's numeric anchors. Use 10.1007/s00726-005-0200-2 only as a general anchor for protein-bound CML in foods, NOT as the source of the soy-glycinin 2.3 umol CML/g figure. Multiple targeted searches for a Henle 2005 soy/glycinin CML model-system paper found nothing."
-      },
-      "citation_repair": {
-        "old": "Henle (2005)",
-        "new": "Henle (2005), Amino Acids 29:313-322 -- but see caveat",
-        "date": "2026-08-26",
-        "basis": "CrossRef search of Amino Acids 2004-2006 for protein-bound CML/glycation returns exactly one Henle 2005 paper: doi 10.1007/s00726-005-0200-2, Amino Acids 29:313-322 (DOI verified live, sole author T. Henle). That is almost certainly what the dead DOI 10.1007/s00726-005-0187-z was meant to be. However it is a REVIEW of protein-bound AGEs in foods, not a heated soy-glycinin model-system study, so it cannot be the source of the repo's '2.3 umol CML/g protein' from soy glycinin or of a dicarbonyl-consumption estimate. | Reported as no_verifiable_source per the verification bar: the paper I can verify for 'Henle (2005)' provably cannot supply the repo's numeric anchors. Use 10.1007/s00726-005-0200-2 only as a general anchor for protein-bound CML in foods, NOT as the source of the soy-glycinin 2.3 umol CML/g figure. Multiple targeted searches for a Henle 2005 soy/glycinin CML model-system paper found nothing."
-      }
-    },
-    {
       "id": "acrylamide_heat_trapping_2024",
       "kind": "industrial_endpoint_reference",
       "report_visibility": "default",

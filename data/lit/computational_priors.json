@@ -1191,30 +1191,6 @@
       "MFT_yield_from_thiamine_mol_pct": 0.018,
       "FFT_yield_from_thiamine_mol_pct": 0.0035,
       "notes": "MFT 0.018 mol%, FFT 0.0035 mol% from thiamine pyrolysis at 145°C/pH 6."
-    },
-    {
-      "id": "hofmann_schieberle_grosch_1996",
-      "source": "WITHDRAWN - no verifiable source (previously cited as 'Hofmann, Schieberle & Grosch (1996), JAFC 44:2219')",
-      "provenance_tier": "unsourced_withdrawn",
-      "confidence_tier": "low",
-      "source_status": "no_verifiable_source",
-      "reference_conditions": {
-        "T_C": 145,
-        "pH": 6.5
-      },
-      "thiamine_to_MFT_conversion_pct": 0.021,
-      "cysteine_augmentation_MFT_fold": 2.3,
-      "withdrawn_values": [
-        "thiamine_to_MFT_conversion_pct",
-        "cysteine_augmentation_MFT_fold"
-      ],
-      "source_repair": {
-        "date": "2026-08-27",
-        "action": "confidence_tier high -> low; source_status no_verifiable_source",
-        "basis": "2026-08-26 citation sweep + source recovery: the cited JAFC 44:2219 (1996) thiamine/cysteine/ribose MFT paper does not exist. The benchmark built on this reference (thiamine_cys_ribose_100C_Hofmann1996) was DELETED and rebuilt from the verified Bolton & Reineccius 1994 chapter (10.1021/bk-1994-0543.ch022) as data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json, which the model fails honestly. The same repair was applied in data/lit/benchmark_intake_registry.json and data/lit/slr_incorporation_matrix.json, where these two anchors were withdrawn as unsourced.",
-        "id_retained_because": "the id is a stable join key referenced from results/literature/deep_research_backlog.json and tests/unit/test_literature_runtime.py; renaming it would silently break those joins."
-      },
-      "notes": "WITHDRAWN 2026-08-27. The two numbers below (thiamine->MFT conversion 0.021%; cysteine augments MFT 2.3-fold) came from a fabricated source and must not be used as anchors. They are retained in-file, not deleted, so the forensic record and the id join key survive; nothing in the live runtime reads either field (verified 2026-08-27: no consumer outside this file and an archived ingest script, and this entry is not the thiamine_fragmentation lane default - that is cerny_2007_thiamine_split_v1). Replacement lineage: Bolton & Reineccius 1994, 10.1021/bk-1994-0543.ch022 -> data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json."
     }
   ],
   "nucleotide_pathway_priors": [
@@ -2044,42 +2020,6 @@
         "match_basis": "cp citation names no author ('ACS JAFC 0c01925'); DOI resolves to ['Anantharamkrishnan', 'Hoye', 'Reineccius'] 2020 'Journal of Agricultural and Food Chemist'",
         "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
       }
-    },
-    {
-      "id": "ref41_ppi_sulfur_volatile_binding_v1",
-      "source": "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
-      "provenance_tier": "direct_model_assumption",
-      "provenance_tier_history": "literature_derived_transfer until 2026-08-27; demoted by Wave T3 (Wave T1 finding T1-08). That tier asserts a primary source was read and transferred. Nothing was: the `source` field points at reference number 41 inside data/research_corpus/raw/11_maillard_lipid_crosstalk.md, an LLM research dump, and the only DOI ever attached to this claim (10.1021/acs.jafc.9b06882, on the sibling benchmark_intake_registry record `ref41_ppi_sulfur_binding`) was found by the 2026-08-26 citation sweep to be Zhao et al. 2019, a rodent reproductive-toxicology paper -- TOPIC-MISMATCH, recorded in results/validation/citation_verification_ledger.md. `direct_model_assumption` is the honest tier: the DMTS > DMDS > DMS ordering and the binding-site counts are assumptions this model makes, not measurements it inherited.",
-      "source_status": "no_verifiable_source",
-      "source_status_note": "2026-08-27 (Wave T3). Per data/research_corpus/README.md, \"the deep-research report says so\" is not provenance, so this record has none. The `source` string is KEPT verbatim rather than emptied because it is the evidence trail for the finding and is pinned as such by tests/scientific/test_runtime_first_registry_landing.py; it reads as a disclosure (\"ref. 41 in raw/...\"), not as a citation. NO VALUE WAS CHANGED: the ordering, the site counts, the 25 C / pH 7 reference conditions and the runtime behaviour of the Family 11 sulfur-retention lane are all exactly as before. Retiring or re-anchoring this prior is an owner decision [P].",
-      "confidence_tier": "medium",
-      "applicable_protein_types": [
-        "pea_iso",
-        "pea_conc"
-      ],
-      "reference_conditions": {
-        "process_state": "ambient_slurry",
-        "temperature_c": 25.0,
-        "ph": 7.0
-      },
-      "sulfur_volatile_binding_hierarchy": [
-        "DMTS",
-        "DMDS",
-        "DMS"
-      ],
-      "binding_spontaneity": "delta_g_negative",
-      "binding_enthalpy": "delta_h_negative",
-      "dominant_binding_forces": [
-        "hydrophobic",
-        "van_der_waals"
-      ],
-      "binding_site_count_by_compound": {
-        "DMTS": 1.0,
-        "DMDS": 1.0,
-        "DMS": "multiple_low_affinity"
-      },
-      "temperature_effect_direction": "binding_weakens_as_temperature_increases",
-      "notes": "Directional PPI sulfur-volatile binding prior for Family 11. Use to keep sulfur retention non-neutral in pea systems and to interpolate initial non-covalent binding posture before higher-temperature trapping pathways dominate."
     },
     {
       "id": "bhandari_1998_beta_cd_aldehyde_binding_v1",

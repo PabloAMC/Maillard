@@ -261,31 +261,6 @@
       "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: wang_2023_mft_retention, wang_2023_mft_retention_payload. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
-      "id": "fadel_2015_mft_retention",
-      "compound": "2-methyl-3-furanthiol",
-      "source_citation": "Fadel et al. (2015)",
-      "matrix_context": "encapsulated_meat_flavour",
-      "analytical_method": "HS-SPME-GC-MS",
-      "units": "ug_per_g",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "mft_encapsulated_release",
-      "numeric_band_or_point": {
-        "type": "range",
-        "min": 0.5,
-        "max": 2.8,
-        "condition": "encapsulated meat-like flavour"
-      },
-      "notes": "MFT 0.5-2.8 ug/g in encapsulated meat-like flavour system.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1016/j.foodchem.2015.00000",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "The dead DOI 10.1016/j.foodchem.2015.00000 is a placeholder pattern (all-zero article number), i.e. never a real identifier. CrossRef searches for soy-protein-isolate binding/retention of 2-methyl-3-furanthiol with pH and HS-SPME, and an author sweep of Fadel in Food Chemistry 2013-2017, return nothing reporting a percentage retention of MFT by soy isolate at pH 4.0 / 40 C. I could find no publication containing the '47.78% retention' anchor. | Two real 2015 Fadel papers exist and are the plausible confabulation seeds, but neither supports the claim: Lotfy, Fadel, El-Ghorab & Shaheen (2015), Food Chem. 187:7-13, 10.1016/j.foodchem.2015.04.027 (encapsulated beef-like flavourings from mushroom-protein hydrolysate - wrong matrix); and Fadel et al. (2015), Int. J. Food Process. Technol. 2:17-25, 10.15379/2408-9826.2015.02.01.3 (encapsulated meat-like flavouring from acid-hydrolysed soybean protein, in which MFT is the major fresh-sample compound and declines over 6 months' storage - but it is a gum-arabic encapsulation storage study with no pH series, no 40 C isotherm and no 47.78% figure)."
-      }
-    },
-    {
       "id": "mottram_2001_bmfd_retention",
       "compound": "bis(2-methyl-3-furyl)disulfide",
       "source_citation": "Adams et al. (2001)",
@@ -692,66 +667,6 @@
       "numeric_band_or_point": {
         "type": "directional_only",
         "value": "detected and quantified across species; exact values pending extraction"
-      }
-    },
-    {
-      "id": "blank_grosch_1991_beef_hdmf_band",
-      "compound": "HDMF",
-      "source_citation": "Blank & Grosch (1991)",
-      "matrix_context": "boiled_beef_100c_1h",
-      "analytical_method": "SAFE, GC-MS/O, AEDA, and SIDA with [2H4]-HDMF internal standard",
-      "units": "ug_per_kg",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "optimization_constraint",
-      "target_direction": "keep_hdmf_within_beef_relevant_brothy_caramel_band",
-      "numeric_band_or_point": {
-        "type": "range",
-        "min": 28.0,
-        "max": 67.0,
-        "values": {
-          "min_ug_per_kg": 28.0,
-          "max_ug_per_kg": 67.0,
-          "odor_detection_threshold_ug_per_kg": 6.0,
-          "oav_min": 4.7,
-          "oav_max": 11.2,
-          "fd_factor": 256.0
-        }
-      },
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1021/jf00009a012",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "The backlog page reference 'JAFC 39:1207' is fabricated: I enumerated all CrossRef records for JAFC volume 39 pages 1195-1220 and p.1207 falls inside Mirvish et al., 'N-Nitrosoatrazine: synthesis, kinetics of formation...', JAFC 39:1205-1210 (10.1021/jf00007a002) - no HDMF paper occupies that page. CrossRef author search for Blank+Grosch 1990-1993 returns only 'Evaluation of Potent Odorants in Dill Seed and Dill Herb by Aroma Extract Dilution Analysis', J. Food Sci. 56:63-67 (10.1111/j.1365-2621.1991.tb07976.x) - not HDMF, not boiled beef. Neither the SLR anchors ('HDMF ODT 0.003 ppb', '78% from ribose+glucose') nor the backlog anchors ('HDMF in boiled beef 28-67 ug/kg, OAV 4.7-11.2') can be tied to any Blank & Grosch 1991 publication. | Nearest genuine Blank sources on HDMF, neither of which is 1991 nor supplies these numbers: Blank & Fay (1996), 'Formation of 4-Hydroxy-2,5-dimethyl-3(2H)-furanone and 4-Hydroxy-2(or 5)-ethyl-5(or 2)-methyl-3(2H)-furanone through Maillard Reaction Based on Pentose Sugars', JAFC 44:531-536, doi:10.1021/jf950439o; and Blank, Fay, Lakner & Schlosser (1997), JAFC 45:2642-2648, doi:10.1021/jf960997i (SIDA quantification of HDMF/HEMF in pentose Maillard model systems). Do not attach the 0.003 ppb threshold to either without reading them."
-      }
-    },
-    {
-      "id": "hauck_tressl_1999_hdmf_non_amino",
-      "compound": "HDMF",
-      "source_citation": "Hauck & Tressl (1999)",
-      "matrix_context": "sugar_pyrolysis_without_amino_acids",
-      "analytical_method": "SIDA",
-      "units": "ug_per_g",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "non_amino_acid_dependent_furanone_yield",
-      "numeric_band_or_point": {
-        "type": "point",
-        "value": 3.8
-      },
-      "key_values": {
-        "hdmf_from_iso_oligosaccharides_ug_per_g": 3.8,
-        "hdmf_from_maltose_ug_per_g": 1.4,
-        "hdmf_from_mgo_self_condensation_ug_per_g": 2.9,
-        "reaction_temp_C": 140.0
-      },
-      "notes": "Quantifies HDMF from iso-oligosaccharides (3.8 ug/g) and maltose (1.4 ug/g) at 140 C without amino acids.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1021/bk-1999-0740.ch012",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "The DOI stem is impossible: ACS Symposium Series volume 740 is 'Surfactant-Based Separations' (CrossRef 10.1021/bk-2000-0740.ch001, Scamehorn & Harwell), not a flavour/HDMF volume, and no 10.1021/bk-1999-0740.* chapter exists. 'Hauck & Tressl' is a chimera of two unrelated groups: Tobias Hauck published on HDMF with Wilfried Schwab (e.g. Hauck, Landmann, Raab, Bruhlmann & Schwab (2002), Carbohydr. Res. 337:1185-1191, 10.1016/s0008-6215(02)00121-0), while Roland Tressl's 1999 output is 'Heat Generated Flavors and Precursors' with Rewicki (Flavor Chemistry, 10.1007/978-1-4615-4693-1_26). Neither reports HDMF yields of 3.8 / 1.4 / 2.9 ug/g from iso-oligosaccharides, maltose and methylglyoxal self-condensation at 140 C; repeated CrossRef searches on those terms find nothing. | If a non-amino-acid HDMF-formation anchor is needed, Hauck et al. (2002) Carbohydr. Res. 337:1185-1191 (10.1016/s0008-6215(02)00121-0) genuinely shows chemical HDMF formation from D-fructose-1,6-diphosphate without amino acids - but from a phosphorylated sugar, not from oligosaccharides/maltose, and without the repo's ug/g values."
       }
     }
   ],
@@ -1207,39 +1122,6 @@
       "citation_caveat": "Mini-review: any numeric hexanal-reduction band taken from it is second-hand rather than a primary measurement."
     },
     {
-      "id": "marquez_ruiz_2014_oleic_nonanal_oav_band",
-      "compound": "nonanal",
-      "source_citation": "Marquez-Ruiz et al. (2014), JAFC 62:10295",
-      "matrix_context": "high_oleic_olive_oil_deep_frying_180c",
-      "analytical_method": "HS-SPME-GC-MS with hexanal-d12 internal standard across frying-cycle samples",
-      "units": "oav",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "optimization_constraint",
-      "target_direction": "favor_oleic_rich_oils_where_nonanal_dominates_while_hexanal_stays_near_or_below_threshold",
-      "numeric_band_or_point": {
-        "type": "range",
-        "min": 8.0,
-        "max": 22.0,
-        "values": {
-          "nonanal_oav_min": 8.0,
-          "nonanal_oav_max": 22.0,
-          "hexanal_oav_ceiling": 1.5,
-          "temperature_c": 180.0,
-          "frying_cycle_range": [
-            0,
-            20
-          ]
-        }
-      },
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1021/jf502636m",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "I enumerated every CrossRef record for JAFC (ISSN 0021-8561) published in 2014 (1561 items) and checked first pages: no article starts at p. 10295. Page 10295 falls inside Granato et al., JAFC 62:10283-10296 (10.1021/jf504480f, antioxidant extraction / response surface), and the next article begins at 10297 (Trujillo et al., nitrohydroxytyrosol). Separately, a CrossRef author sweep shows Gloria Marquez-Ruiz has no JAFC paper in 2014 at all (her 2014 output is in Eur. J. Lipid Sci. Technol. and Lipid Technol.), and no 'high-oleic olive oil frying volatiles with OAVs for 8 compounds' paper by her exists. | Both the venue coordinates and the author/year are fabricated, so the 'nonanal ODT 1.0 ppb / OAV 1-28' anchor has no source behind it. Note also that the SLR entry says matrix 'oleic_model' while the backlog says 'high-oleic olive oil frying' - internally inconsistent. If a real high-oleic frying-volatile anchor is wanted, Huang et al. (2024), Food Res. Int. 192:114749 (10.1016/j.foodres.2024.114749) covers volatile aldehyde distribution in high-oleic sunflower oil during frying, but it is a different paper and I did not verify the OAV numbers in it."
-      }
-    },
-    {
       "id": "grosch_1982_hexanal_odt_anchor",
       "compound": "hexanal",
       "source_citation": "Grosch, W. (1982), in Food Flavours Part A (Morton & MacLeod, eds.), Elsevier, pp. 325-398",
@@ -1269,29 +1151,6 @@
       },
       "harmonized_citation": "Belitz, Grosch & Schieberle, Food Chemistry, 4th rev. ed., Springer 2009, doi 10.1007/978-3-540-69934-7 (standard aroma-threshold compilation; hexanal aqueous ODT quoted as ~5 ppb by the pea/soy OAV literature, e.g. PMC8271896; cross-check Czerny et al. 2008, 10.1007/s00217-008-0931-x, same low-single-digit ug/L band)",
       "harmonization_note": "2026-08-27: the two reference-repair partitions diverged on this anchor (identifier_unavailable vs compilation-anchored); harmonized to the compilation anchor used in benchmark_intake_registry.json and data/species/off_flavour_targets.yml. Caveat retained: 4.5 ppb specifically has not been read off a primary table (published aqueous hexanal ODTs span 0.3-14 ug/L; 4.5 is in-range but the exact value is compilation-level, not primary-verified)."
-    },
-    {
-      "id": "xu_2024_soybean_pbma_hexanal_anchor",
-      "compound": "hexanal",
-      "source_citation": "Xu et al. (2024)",
-      "matrix_context": "soy_isolate",
-      "analytical_method": "GC-MS with internal standard",
-      "units": "ppb",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "hexanal_storage_accumulation",
-      "numeric_band_or_point": {
-        "type": "point",
-        "value": 185.0
-      },
-      "notes": "Soybean PBMA storage hexanal accumulation baseline of 185 ppb at 4 C after 14 days.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.3390/foods13091393",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "Searched CrossRef (author 'Xu' + hexanal/soy meat analogue restricted to 2024; Foods 2024 + 'plant-based meat analogue hexanal storage volatile') and the web for a 2024 soy PBMA paper reporting the payload's claim ('185 ppb hexanal at 4 C after 14 days', from data/lit/flavor_reference_payloads.json). Nothing matches: no 2024 Xu-authored soy PBMA storage-hexanal paper appears anywhere, and the recorded DOI 10.3390/foods13091393 is the unrelated Spizzirri & Restuccia food-waste editorial. The nearest real papers are Sun et al. (2025), Food Chemistry: X, DOI 10.1016/j.fochx.2025.102795 (soybean meat analogue at 4 C vs -18 C - but no per-timepoint hexanal values in the main text, and hexanal decreases rather than accumulating) and Nagassa et al. (2025), Food Chemistry 481:144025, DOI 10.1016/j.foodchem.2025.144025 ('The development of volatile off-flavor compounds in soy protein isolates and plant meat during storage'). Neither is by Xu, neither is 2024, and I could not confirm 185 ppb in either. | Nagassa et al. 2025 (10.1016/j.foodchem.2025.144025) is the closest topical substitute if a soy-PBMA storage-hexanal anchor is needed, but its numbers were not verified and it cannot be the source of a '2024 Xu' 185 ppb figure. Recommend treating the 185 ppb payload as unsourced until a human re-anchors it."
-      }
     },
     {
       "id": "liu_cadwallader_2023_pea_aeda_anchor",
@@ -1541,54 +1400,6 @@
       },
       "shared_anchor": true,
       "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: liu_2022_ppi_oav_anchors, liu_cadwallader_2023_pea_aeda, liu_cadwallader_2023_pea_aeda_anchor, researchgate_2023_pea_aeda, researchgate_2023_pea_aeda_anchor. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
-    },
-    {
-      "id": "marquez_ruiz_2014_oleic_oav_anchor",
-      "compound": "nonanal",
-      "source_citation": "Marquez-Ruiz et al. (2014)",
-      "matrix_context": "oleic_model",
-      "analytical_method": "GC-MS",
-      "units": "ppb",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "nonanal_oav_from_oleic_oxidation",
-      "numeric_band_or_point": {
-        "type": "point",
-        "value": 1.0,
-        "condition": "nonanal ODT"
-      },
-      "notes": "Nonanal ODT 1.0 ppb from oleic acid oxidation; OAV 1-28.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1021/jf502636m",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "I enumerated every CrossRef record for JAFC (ISSN 0021-8561) published in 2014 (1561 items) and checked first pages: no article starts at p. 10295. Page 10295 falls inside Granato et al., JAFC 62:10283-10296 (10.1021/jf504480f, antioxidant extraction / response surface), and the next article begins at 10297 (Trujillo et al., nitrohydroxytyrosol). Separately, a CrossRef author sweep shows Gloria Marquez-Ruiz has no JAFC paper in 2014 at all (her 2014 output is in Eur. J. Lipid Sci. Technol. and Lipid Technol.), and no 'high-oleic olive oil frying volatiles with OAVs for 8 compounds' paper by her exists. | Both the venue coordinates and the author/year are fabricated, so the 'nonanal ODT 1.0 ppb / OAV 1-28' anchor has no source behind it. Note also that the SLR entry says matrix 'oleic_model' while the backlog says 'high-oleic olive oil frying' - internally inconsistent. If a real high-oleic frying-volatile anchor is wanted, Huang et al. (2024), Food Res. Int. 192:114749 (10.1016/j.foodres.2024.114749) covers volatile aldehyde distribution in high-oleic sunflower oil during frying, but it is a different paper and I did not verify the OAV numbers in it."
-      }
-    },
-    {
-      "id": "yeo_shibamoto_1991_wof_hexanal",
-      "compound": "hexanal",
-      "source_citation": "Yeo & Shibamoto (1991)",
-      "matrix_context": "wof_model",
-      "analytical_method": "GC-MS",
-      "units": "ppb",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "wof_hexanal_threshold",
-      "numeric_band_or_point": {
-        "type": "point",
-        "value": 220.0,
-        "condition": "WOF hexanal ppb"
-      },
-      "notes": "Warmed-over flavour: hexanal 220 ppb benchmark.",
-      "source_status": "no_verifiable_source",
-      "source_status_repair": {
-        "old": "10.1021/jf00002a024",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "Enumerated Yeo & Shibamoto's 1991 output via CrossRef author search: all of it is microwave Maillard model-system work - 'Effects of moisture content on the Maillard browning model system upon microwave irradiation' (JAFC 39:1860, 10.1021/jf00010a035), 'Microwave-induced volatiles of the Maillard model system under different pH conditions' (JAFC 39:370, 10.1021/jf00002a029), 'Flavor and browning enhancement by electrolytes during microwave irradiation of the Maillard model system' (JAFC 39:948, 10.1021/jf00005a030). None concerns warmed-over flavour, phospholipid-derived hexanal, or lipoxygenase thermal inactivation. Targeted searches for the anchors (phospholipid fraction 82-88% of hexanal; LOX D-value 28 min) returned nothing. | The entry fuses two unrelated claims under a citation that supports neither. For the phospholipid-dominance phenomenon the canonical anchor is Igene & Pearson (1979), 'Role of Phospholipids and Triglycerides in Warmed-Over Flavor Development in Meat Model Systems', J. Food Sci. 44:1285-1290, doi 10.1111/j.1365-2621.1979.tb06420.x - but I did NOT confirm the 82-88% figure in it, and it says nothing about a 28 min LOX D-value, which needs a separate lipoxygenase thermal-inactivation source."
-      }
     },
     {
       "id": "rawel_2002_cga_cysteine_blocking",

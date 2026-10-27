@@ -89,8 +89,26 @@ def _no_verifiable_source_census():
     return census
 
 
-def test_no_verifiable_source_census_is_84_records_63_numeric_63_reaching_runtime():
-    """no_verifiable_source: 84 flagged · 63 carrying numbers · 63 of those reaching runtime.
+def test_no_record_carries_no_verifiable_source():
+    """no_verifiable_source: 0 records. An unsourced record is deleted, never kept with a flag.
+
+    RE-PINNED 2026-10-27: 84/63/63 -> 0/0/0, and the "runtime" third of the pin retired. All
+    84 flagged records were DELETED (owner decision): 24 intake candidates, 29 research-backlog
+    items, 18 SLR ledger rows, 7 flavour anchors, 3 retention records (the two pH-release
+    surrogates read only by the retired `src/headspace.py`, and the Fadel 2015 retention), the
+    Henle 2005 CML anchor, and the two flagged computational priors. Every one had been searched
+    for (CrossRef sweeps 2026-08-26/27, gap search 2026-10-09) and was fabricated or could not
+    be tied to its number. The intake citations survive as strings in
+    `closed_unsourced_citations` so the research queue never reopens them. A fall by deletion,
+    not verification.
+
+    The retired "runtime" figure counted every flagged record under data/lit/ or
+    results/literature/ as consumed at runtime. That was a location proxy, and wrong: the trace
+    in `scripts/trace_runtime_data_reads.py` (pinned below) shows the front door never opens
+    any of those files. What the model reads is now measured, not inferred.
+
+    History of the earlier pins, kept because it explains how the flags got there. The last
+    one read: 84 flagged · 63 carrying numbers · 63 of those "reaching runtime".
 
     RE-PINNED 2026-10-09: 87/65/65 -> 84/63/63. Six process-state calibration records with no
     source were DELETED from `data/lit/process_state_calibrations.json` (owner decision; their
@@ -144,36 +162,46 @@ def test_no_verifiable_source_census_is_84_records_63_numeric_63_reaching_runtim
     carry numbers, so the runtime figure moves with the total: 62 -> 80. The honest reading
     is that 80 was always the true runtime figure and 62 was an undercount.
 
-    All three counts are expected to FALL as anchors get verified. When they do, re-pin here
-    and in README.md in the same change. A rise is only acceptable when it is a LABELLING
-    correction of numbers that were already shipping, and the re-pin must say which records
-    moved and why -- a rise with no such account means new unverifiable numbers entered the
-    registries.
+    The pin is zero and stays zero: a record whose source cannot be found is deleted (its
+    citation string may go to `closed_unsourced_citations`), or its value becomes a declared
+    assumption with a band in the code that uses it. It is never shipped with a flag.
     """
     census = _no_verifiable_source_census()
-
-    total = sum(flagged for flagged, _ in census.values())
-    numeric = sum(with_number for _, with_number in census.values())
-    runtime = sum(
-        with_number
-        for path, (_, with_number) in census.items()
-        if path.startswith(("data/lit/", "results/literature/"))
-    )
-
-    assert total == 84, (
-        f"Repo-wide no_verifiable_source count is {total}, published as 84. "
-        f"Per file: { {k: v[0] for k, v in census.items()} }"
-    )
-    assert numeric == 63, (
-        f"{numeric} flagged records carry numeric payloads, published as 63."
-    )
-    assert runtime == 63, (
-        f"{runtime} flagged records with numeric payloads sit in data/lit or the literature "
-        f"ledgers and therefore reach the runtime, published as 63."
+    assert census == {}, (
+        "Records flagged source_status == no_verifiable_source are back: "
+        f"{ {k: v[0] for k, v in census.items()} }. Delete them, or source them."
     )
 
     readme = _doc_text(README)
-    _assert_quoted(readme, "84 records", "README.md", "the no_verifiable_source census")
-    _assert_quoted(readme, "63 carry numeric payloads", "README.md", "the numeric subset")
-    _assert_quoted(readme, "63 of those are", "README.md", "the runtime-consumed subset")
+    _assert_quoted(readme, "No record in the repository is flagged `no_verifiable_source`",
+                   "README.md", "the zero census")
+
+
+#: Every curated file the front door opens, traced (scripts/trace_runtime_data_reads.py).
+FRONT_DOOR_DATA_READS = [
+    "data/keys/compounds.yml",
+    "data/schemas/spec.schema.json",
+    "data/species/desirable_targets.yml",
+    "data/species/off_flavour_targets.yml",
+    "data/species/protein_matrices.yml",
+]
+
+
+def test_the_front_door_reads_only_the_pinned_data_files():
+    """compare / predict / explain / rank / score / calibrate, traced under an audit hook.
+
+    Pinned 2026-10-27. The rate constants live in src/kinetic_core/ with their evidence class;
+    the curated data the front door reads is these five files. A new data dependency of the
+    model must show up here, and in README.md, in the same change.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from trace_runtime_data_reads import trace_front_door  # noqa: PLC0415
+
+    traced = trace_front_door()
+    union = sorted({path for paths in traced.values() for path in paths})
+    assert union == FRONT_DOOR_DATA_READS, f"front-door data reads moved: {traced}"
+
+    readme = _doc_text(README)
+    for path in FRONT_DOOR_DATA_READS:
+        _assert_quoted(readme, path, "README.md", "the traced front-door data reads")
 

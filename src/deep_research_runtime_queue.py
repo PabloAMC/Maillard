@@ -276,18 +276,18 @@ def _load_landed_runtime_citations(root: Path) -> Set[str]:
 
 
 def _load_unsourced_citations(root: Path) -> Set[str]:
-    """Citations whose intake entry is marked no_verifiable_source (2026-10-09).
+    """Citations the intake registry lists as closed for want of a source (2026-10-09).
 
     Such a source is closed, not pending: deleting its unsourced runtime record must not
-    put it back in a batch to be encoded again.
+    put it back in a batch to be encoded again. 2026-10-27: the flagged intake records
+    themselves were deleted; their citation strings live on in ``closed_unsourced_citations``.
     """
     intake = data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
+    closed = intake.get("closed_unsourced_citations", {}) or {}
     return {
-        _normalize_citation(str(entry.get("citation", "")))
-        for entry in intake.get("eligible_references", []) or []
-        if isinstance(entry, Mapping)
-        and str(entry.get("source_status", "")).strip() == "no_verifiable_source"
-        and _normalize_citation(str(entry.get("citation", "")))
+        _normalize_citation(str(citation))
+        for citation in closed.get("citations", []) or []
+        if _normalize_citation(str(citation))
     }
 
 

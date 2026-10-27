@@ -675,17 +675,20 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
 
     census = card.get("no_verifiable_source", {})
     if census.get("available"):
-        source_status = census.get("by_status_key", {}).get("source_status")
-        other = census["records"] - (source_status or 0)
+        source_status = census.get("by_status_key", {}).get("source_status", 0)
+        other = census["records"] - source_status
+        other_keys = ", ".join(
+            f"`{key}`" for key in census.get("by_status_key", {}) if key != "source_status"
+        )
         lines.append(
             f"**Provenance census (recounted at generation time, not copied).** "
-            f"**{source_status} records** carry `source_status: no_verifiable_source` across "
-            f"{census['files']} tracked data files — the figure the provenance note above "
-            f"quotes, reproduced here by recount. A further {other} carry the same marker under "
-            f"a different status key (`status`, `value_status`, `value_anchor_status`), for "
-            f"{census['records']} in total. The numeric-payload and runtime-consumed subsets "
-            f"(65 and 65) use a narrower definition than this recount and are pinned "
-            f"separately by the headline guards under `tests/scientific/`."
+            f"**{source_status} records** carry `source_status: no_verifiable_source` — the "
+            f"figure the provenance note above quotes, reproduced here by recount; an unsourced "
+            f"record is deleted, not flagged. {other} narrower markers remain across "
+            f"{census['files']} tracked data files ({other_keys or 'none'}): a real paper whose "
+            f"one value could not be anchored, an unresolved DOI on a backlog item, or a "
+            f"quarantined benchmark kept as the record of what was wrong. "
+            f"{census['with_numeric_payload']} of them sit beside a number."
         )
         lines.append("")
 

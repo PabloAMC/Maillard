@@ -287,12 +287,16 @@ constant, which is what makes `rank` useful.
 > ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
 > audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
 > pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> has an `audit_flag` in its registry entry. **84 records are marked
-> `no_verifiable_source`** (re-measured 2026-10-09 across every tracked JSON and YAML file
-> under `data/` and `results/literature/`, including nested records), of which
-> **63 carry numeric payloads** and **63 of those are consumed at runtime**. Both rises in that
-> count were the repository getting more honest, not worse; every fall was a deletion, not a
-> verification. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
+> has an `audit_flag` in its registry entry. **No record in the repository is flagged `no_verifiable_source`**
+> any more: on 2026-10-27 the last 84 were deleted, because every one had been searched for and
+> was fabricated or could not be tied to its number. None of them fed a prediction. Traced
+> under an audit hook (`scripts/trace_runtime_data_reads.py`), `compare`, `predict`, `explain`,
+> `rank`, `score` and `calibrate` read five curated files and no others:
+> `data/keys/compounds.yml`, `data/schemas/spec.schema.json`,
+> `data/species/desirable_targets.yml`, `data/species/off_flavour_targets.yml` and
+> `data/species/protein_matrices.yml`. The rate constants themselves live in
+> `src/kinetic_core/`, each with its evidence class. Every fall in the old census was a
+> deletion, not a verification. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
 > extraction dossier) and
 > `data/keys/compounds.yml` (74 InChIKey-resolved compounds); `scripts/ci/citation_gate.py`
 > blocks a dead or confabulated DOI.
