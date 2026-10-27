@@ -543,19 +543,17 @@ def integrate_lipid(
         looh_carbon = (decomposed_linoleate + consumed_oleate) * _carbon_of("LOOH_13_ct")
         state["LIPID_FRAG_C"] += looh_carbon - named_carbon
 
-        # ---- WAVE B48 -------------------------------------------------------
-        # 2,4-decadienal breaks thermally to hexanal (+ C4) and 2-octenal (+ C2),
-        # first order, measured constants (DECADIENAL_BREAKAGE). Solved exactly
-        # for decadienal that is BOTH carried into the segment and made within it
-        # from the hydroperoxides (two first-order steps in series), so a short
-        # hot segment is not credited with breakage of decadienal it has not yet
-        # made. 2-octenal is not a lane species: its carbon and both fragments go
+        # ---- WAVE B48 (revised 2026-10-27) ----------------------------------
+        # 2,4-decadienal breaks thermally, first order (DECADIENAL_BREAKAGE: Zamora 2015b
+        # Fig. 5C), and fixed shares of what breaks become hexanal (11.5 %) and 2-octenal
+        # (0.8 %). Solved exactly for decadienal that is BOTH carried into the segment and made
+        # within it from the hydroperoxides (two first-order steps in series), so a short hot
+        # segment is not credited with breakage of decadienal it has not yet made. 2-octenal is
+        # not a lane species: its carbon, the hexanal channel's C4 and the unnamed remainder go
         # to LIPID_FRAG_C, so carbon still closes as an equality.
         broken = 0.0
         if DECADIENAL_BREAKAGE.enabled and float(temperature_c) >= DECADIENAL_BREAKAGE.window_min_c:
-            k_hex = DECADIENAL_BREAKAGE.k_per_min("hexanal", float(temperature_c))
-            k_oct = DECADIENAL_BREAKAGE.k_per_min("octenal", float(temperature_c))
-            k_brk = k_hex + k_oct
+            k_brk = DECADIENAL_BREAKAGE.k_loss_per_min(float(temperature_c))
             made = decomposed_linoleate * yields.get("DECADIENAL", 0.0)
             carried = state["DECADIENAL"] - made
             dt = float(duration)
@@ -567,12 +565,11 @@ def integrate_lipid(
                 else:
                     left += source * k * dt * math.exp(-k * dt)
             broken = carried + made - left
+            to_hexanal = broken * DECADIENAL_BREAKAGE.share_hexanal
             state["DECADIENAL"] = left
-            state["HEXANAL"] += broken * k_hex / k_brk
-            state["LIPID_FRAG_C"] += broken * (
-                k_hex / k_brk * (_carbon_of("DECADIENAL") - _carbon_of("HEXANAL"))
-                + k_oct / k_brk * _carbon_of("DECADIENAL")
-            )
+            state["HEXANAL"] += to_hexanal
+            state["LIPID_FRAG_C"] += (broken * _carbon_of("DECADIENAL")
+                                      - to_hexanal * _carbon_of("HEXANAL"))
 
         segment_log.append({
             "index": index,

@@ -45,9 +45,12 @@ BINDING_CLASSES: Dict[str, Dict[str, Any]] = {
                   "Ea 29.6 kJ/mol aqueous and 11.6 in coffee (the bracket spans the three temperatures)",
     },
     "hmf_amine": {
-        "k2_bracket": (0.088 / 86400.0 / 0.02, 0.160 / 86400.0 / 0.02), "t_ref_c": 25.0, "ea_band_kj_mol": (10.0, 12.3), "pool": "amine",
-        "source": "hamzalioglu2018_extraction.md: HMF + lysine pseudo-first-order 0.088 / 0.090 / 0.160 day^-1 at 5 / 25 / 50 C with 20 mM lysine, "
-                  "Ea 10.0 (aqueous) to 12.3 (coffee) kJ/mol",
+        # 2026-10-27 (input audit): Hamzalioglu 2018 Table 1 heads every column "k' (x10^-1 day^-1)", so the
+        # printed lysine 0.088 / 0.090 / 0.160 are 0.0088-0.016 day^-1. The x10^-1 was applied to cysteine above
+        # and missed here; this bracket was 10x high.
+        "k2_bracket": (0.0088 / 86400.0 / 0.02, 0.0160 / 86400.0 / 0.02), "t_ref_c": 25.0, "ea_band_kj_mol": (10.0, 12.3), "pool": "amine",
+        "source": "hamzalioglu2018_extraction.md: HMF + lysine pseudo-first-order 0.0088 / 0.0090 / 0.0160 day^-1 (printed 0.088 / "
+                  "0.090 / 0.160 under a x10^-1 column head) at 5 / 25 / 50 C with 20 mM lysine, Ea 10.0 (aqueous) to 12.3 (coffee) kJ/mol",
     },
 }
 

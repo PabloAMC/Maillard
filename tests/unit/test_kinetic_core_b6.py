@@ -640,13 +640,13 @@ def test_products_with_no_b4_record_are_dropped_not_defaulted(frozen):
 def test_b48_breakage_reproduces_its_source_and_its_holdout():
     from src.kinetic_core.parameters_lipid import DECADIENAL_BREAKAGE as D
 
-    def share(t_c, minutes):
-        k_hex, k_oct = D.k_per_min("hexanal", t_c), D.k_per_min("octenal", t_c)
-        return (1.0 - math.exp(-(k_hex + k_oct) * minutes)) * k_hex / (k_hex + k_oct)
-
-    # Zamora 2015b's own number at its reference point, and Zamora 2007's 9-14 % at 180 C.
-    assert share(200.0, 60.0) == pytest.approx(0.1154, rel=0.01)
-    assert 0.09 <= share(180.0, 60.0) <= 0.14
+    # Zamora 2015b Fig. 5C: decadienal nearly gone within 20 min at 200 C (read ~0.3 of 10 left);
+    # its 1 h yield, 11.5 % hexanal, is the share of what broke; Zamora 2007's 9-14 % at 180 C, 1 h.
+    assert math.exp(-D.k_loss_per_min(200.0) * 20.0) < 0.05
+    assert D.share_to_hexanal(200.0, 60.0) == pytest.approx(0.1154, rel=0.01)
+    assert 0.09 <= D.share_to_hexanal(180.0, 60.0) <= 0.14
+    # A long hold can never turn more than the measured share of decadienal into hexanal.
+    assert D.share_to_hexanal(200.0, 1e4) <= D.share_hexanal + 1e-12
 
 
 def test_b48_breakage_is_off_below_its_window_and_moves_carbon_not_creates_it(frozen):

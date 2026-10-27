@@ -4,16 +4,16 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "c7fb4d2b3eb0c6412fea42f319a74f0b2998a50e",
-      "short": "c7fb4d2b",
-      "branch": "b47-sulfur-objective-corrected",
+      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
+      "short": "cb3a21b4",
+      "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "77253fd95e8387e56bbf7a5c6715fc1fcf13d2e3f2b498cb76a06cd2bac463db"
+        "sha256": "8703679193d99cbafe0008bac5485f51621f809fa1712cb58f57d7949af21479"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "102ee7a3a87f62d5cec6ade9ab5ba4b43b2f0f6897c3ccace47e168898d310e2"
+        "sha256": "1c99d0e4582ecde780202fc63d8f633a1882a80fbba22eb3614a4be1cdffbd40"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "53bac71e5a8d6fea7fd04cc78ef98d25d2e016d6a71a2c485fdc94decc012cfd"
+        "sha256": "34dc4106c5028c51fdb8e45059620d78f08a97b56e60f0b9dac01c3984f634a6"
       },
       {
         "path": "results/validation/lane_offset_diagnostic.json",
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "e079d2a60135dfed00164e96439fffa16e73ed9bce01f6209e8eaf08a611f3d2"
+        "sha256": "58a2b3d6499647fb4fca32879ed04fdeec60eb962ca1991964d380f312a41358"
       }
     ]
   },
@@ -299,6 +299,7 @@
         "glucose",
         "a pentose (ribose / xylose)",
         "cysteine",
+        "thiamine",
         "hydrogen sulfide"
       ]
     },
@@ -402,26 +403,6 @@
       "hypothesis_layer": "no cited rule reaches it from any reference charge"
     },
     {
-      "what": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s",
-      "reason": "UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Methyl-3-furanthiol (MFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxi",
-      "rows": [
-        {
-          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
-          "compound": "2-Methyl-3-furanthiol (MFT)"
-        },
-        {
-          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH5",
-          "compound": "2-Methyl-3-furanthiol (MFT)"
-        },
-        {
-          "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
-          "compound": "2-Methyl-3-furanthiol (MFT)"
-        }
-      ],
-      "row_count": 3,
-      "hypothesis_layer": "no cited rule reaches it from any reference charge"
-    },
-    {
       "what": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topolo",
       "reason": "PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2,5-dimethylpyrazine'. The charge declares only a matrix/lipid carrier, which is not a p",
       "rows": [
@@ -472,30 +453,6 @@
         {
           "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
           "compound": "N\u03b5-(Carboxyethyl)lysine (CEL)"
-        }
-      ],
-      "row_count": 1,
-      "hypothesis_layer": "no cited rule reaches it from any reference charge"
-    },
-    {
-      "what": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-mo",
-      "reason": "UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE '2-Furfurylthiol (FFT)'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for t",
-      "rows": [
-        {
-          "benchmark_id": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
-          "compound": "2-Furfurylthiol (FFT)"
-        }
-      ],
-      "row_count": 1,
-      "hypothesis_layer": "no cited rule reaches it from any reference charge"
-    },
-    {
-      "what": "UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an i",
-      "reason": "UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.",
-      "rows": [
-        {
-          "benchmark_id": "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
-          "compound": "2-Methyl-3-furanthiol (MFT)"
         }
       ],
       "row_count": 1,
@@ -604,6 +561,26 @@
       "structural_block": null
     },
     {
+      "axis": "additive_cysteine",
+      "agree": 1,
+      "evaluable": 1,
+      "not_evaluable": 2,
+      "verdict": "caution",
+      "wilson_lower_bound": 0.207,
+      "additional_agreeing_claims_to_trust": 3,
+      "structural_block": null
+    },
+    {
+      "axis": "moisture_aw",
+      "agree": 1,
+      "evaluable": 1,
+      "not_evaluable": 1,
+      "verdict": "caution",
+      "wilson_lower_bound": 0.207,
+      "additional_agreeing_claims_to_trust": 3,
+      "structural_block": "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
+    },
+    {
       "axis": "ranking",
       "agree": 0,
       "evaluable": 1,
@@ -614,63 +591,43 @@
       "structural_block": null
     },
     {
-      "axis": "moisture_aw",
-      "agree": 1,
-      "evaluable": 2,
-      "not_evaluable": 2,
-      "verdict": "do-not-use",
-      "wilson_lower_bound": 0.095,
-      "additional_agreeing_claims_to_trust": 6,
-      "structural_block": "only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source)"
-    },
-    {
-      "axis": "additive_cysteine",
-      "agree": 2,
-      "evaluable": 3,
-      "not_evaluable": 2,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.208,
-      "additional_agreeing_claims_to_trust": 5,
-      "structural_block": null
-    },
-    {
       "axis": "time",
-      "agree": 3,
-      "evaluable": 6,
+      "agree": 1,
+      "evaluable": 1,
       "not_evaluable": 3,
-      "verdict": "do-not-use",
-      "wilson_lower_bound": 0.188,
-      "additional_agreeing_claims_to_trust": 9,
+      "verdict": "caution",
+      "wilson_lower_bound": 0.207,
+      "additional_agreeing_claims_to_trust": 3,
       "structural_block": null
     },
     {
       "axis": "ph",
-      "agree": 8,
-      "evaluable": 10,
-      "not_evaluable": 4,
+      "agree": 5,
+      "evaluable": 8,
+      "not_evaluable": 3,
       "verdict": "caution",
-      "wilson_lower_bound": 0.49,
-      "additional_agreeing_claims_to_trust": 1,
+      "wilson_lower_bound": 0.306,
+      "additional_agreeing_claims_to_trust": 7,
+      "structural_block": null
+    },
+    {
+      "axis": "temperature",
+      "agree": 5,
+      "evaluable": 9,
+      "not_evaluable": 2,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.267,
+      "additional_agreeing_claims_to_trust": 11,
       "structural_block": null
     },
     {
       "axis": "sugar_identity",
       "agree": 4,
       "evaluable": 10,
-      "not_evaluable": 7,
+      "not_evaluable": 5,
       "verdict": "do-not-use",
       "wilson_lower_bound": 0.168,
       "additional_agreeing_claims_to_trust": 20,
-      "structural_block": null
-    },
-    {
-      "axis": "temperature",
-      "agree": 7,
-      "evaluable": 11,
-      "not_evaluable": 2,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.354,
-      "additional_agreeing_claims_to_trust": 9,
       "structural_block": null
     }
   ],
@@ -678,50 +635,57 @@
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.656872747596976,
-      "envelope_miss_log10": 1.448308784306861,
+      "voi_score": 12.656872771009011,
+      "envelope_miss_log10": 1.448308782952391,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.388340333207788,
-      "envelope_miss_log10": 1.4694584492378382,
+      "voi_score": 12.388340363037138,
+      "envelope_miss_log10": 1.4694584542590976,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.325797171848555,
-      "envelope_miss_log10": 1.345850076706011,
+      "voi_score": 12.32579715042301,
+      "envelope_miss_log10": 1.3458500735590615,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.518243919318035,
-      "envelope_miss_log10": 1.9890732939994449,
+      "voi_score": 11.51824391956418,
+      "envelope_miss_log10": 1.9890732939837512,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 11.483948380356328,
-      "envelope_miss_log10": 1.2315940111953654,
+      "voi_score": 11.483948385854157,
+      "envelope_miss_log10": 1.2315940110212549,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.292470501583688,
-      "envelope_miss_log10": 1.1496145248274072,
+      "voi_score": 11.292470501405294,
+      "envelope_miss_log10": 1.1496145248315426,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.966718483266519,
-      "envelope_miss_log10": 1.476116535603704,
+      "voi_score": 10.966718487028459,
+      "envelope_miss_log10": 1.4761165370540985,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "voi_score": 10.597264687689625,
+      "envelope_miss_log10": 1.1191688514405078,
       "template": "free_precursor_sulfur_yield"
     },
     {
@@ -734,15 +698,8 @@
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 9.125893360597656,
-      "envelope_miss_log10": 1.3150820207534344,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
-      "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 8.370075125521799,
-      "envelope_miss_log10": 0.9291760807567484,
+      "voi_score": 9.125893420801578,
+      "envelope_miss_log10": 1.3150820250983462,
       "template": "free_precursor_sulfur_yield"
     }
   ],
@@ -769,7 +726,7 @@
     },
     {
       "if_measured": "k_fur_fft",
-      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact"
+      "you_could_predict": "absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "4 more independent ordering claims on lipid_lane (all agreeing)",
@@ -788,28 +745,28 @@
       "you_could_predict": "the direction of a change along scope with a 'trust' tag instead of 'no evaluable claim'"
     },
     {
+      "if_measured": "3 more independent ordering claims on additive_cysteine (all agreeing)",
+      "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
+    },
+    {
       "if_measured": "7 more independent ordering claims on ranking (all agreeing)",
       "you_could_predict": "the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "5 more independent ordering claims on additive_cysteine (all agreeing)",
-      "you_could_predict": "the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'"
+      "if_measured": "3 more independent ordering claims on time (all agreeing)",
+      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "9 more independent ordering claims on time (all agreeing)",
-      "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'do-not-use'"
-    },
-    {
-      "if_measured": "1 more independent ordering claims on ph (all agreeing)",
+      "if_measured": "7 more independent ordering claims on ph (all agreeing)",
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
+    },
+    {
+      "if_measured": "11 more independent ordering claims on temperature (all agreeing)",
+      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'"
     },
     {
       "if_measured": "20 more independent ordering claims on sugar_identity (all agreeing)",
       "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
-    },
-    {
-      "if_measured": "9 more independent ordering claims on temperature (all agreeing)",
-      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
     }
   ],
   "lane_design_gaps": [
@@ -854,7 +811,7 @@
   "summary": {
     "unidentified_coordinates": 10,
     "not_evaluable_rows": 8,
-    "refused_row_count": 24,
+    "refused_row_count": 19,
     "axes_below_trust": 11,
     "lanes_that_cannot_support_a_trend": 3,
     "trust_rule": "rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5"

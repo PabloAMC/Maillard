@@ -514,13 +514,13 @@ REVERSIBLE_BINDING: Tuple[MatrixParameter, ...] = (
               "2-alkenal held two hours at 37 C against a protein carrying about "
               "0.47 mmol lysine amine per gram, measured by disappearance, is partly "
               "irreversible Michael chemistry and not partition. The paper's only "
-              "reversibility evidence is a 20 % headspace recovery under guanidine, "
+              "reversibility evidence is a 20 % headspace recovery under propylene glycol (Bi 2022 p. 8; 'guanidine' corrected 2026-10-27), "
               "and a 20 % recovery does not show that the other 80 % was reversible. "
               "It is ALSO excluded from the unsaturation observations, for a second "
               "and independent reason -- see UNSATURATION_OBSERVATIONS_EXCLUDED.",
         provenance={"absolute_scale_suspect": True, "quarantined_as_binding": True,
                     "michael_acceptor_on_a_lysine_rich_protein": True,
-                    "reversibility_evidence": "20 % recovery under guanidine, no more"}),
+                    "reversibility_evidence": "20 % recovery under propylene glycol, no more"}),
 )
 
 #: Binding constants that EXIST in the corpus and are deliberately NOT carried
@@ -535,7 +535,7 @@ REVERSIBLE_BINDING: Tuple[MatrixParameter, ...] = (
 # ===========================================================================
 # THE SULFUR GAP IN THIS TABLE, MEASURED FOR THE FIRST TIME AND STILL NOT SHIPPABLE
 # ===========================================================================
-# 2026-09-09. REVERSIBLE_BINDING holds 21 constants over five media and not one is a thiol, a
+# 2026-09-09. REVERSIBLE_BINDING holds 19 constants (21 before the 2026-10-27 recount) over five media and not one is a thiol, a
 # disulfide, a trisulfide or any sulfur compound at all -- while the sulfur lane is this model's
 # central output. Sun 2025 (sun2025_extraction.md) is the first paper in the corpus to measure a
 # PLANT protein against sulfur volatiles, and it still does not close the gap. Recorded here so the

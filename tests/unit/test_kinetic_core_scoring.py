@@ -180,11 +180,19 @@ def test_predicted_point_is_the_deterministic_prediction(small):
 
 
 def test_refusals_use_the_engine_vocabulary_and_a_fully_refused_bundle_is_refused(small):
+    # 2026-10-27: hydrogen sulfide became a nameable precursor, so the fed norfuraneol + H2S bundle that
+    # used to be this test's fully refused example is now SCORED. The unmapped-precursor vocabulary is
+    # exercised directly instead, on a precursor no lane carries (thioacetamide, a WUR sample).
     by_id = {b["benchmark_id"]: b for b in small["benchmarks"]}
     h2s = by_id["hofmann1998_norfuraneol_h2s_145C_20min_pH5"]
-    assert h2s["overall_status"] == "refused" and not h2s["compounds"]
-    assert any("UNMAPPED PRECURSORS" in r["reason"] for r in h2s["refused_compounds"])
-    assert h2s["blocking_issues"] and not h2s["strict_ready"]
+    assert h2s["compounds"] and h2s["overall_status"] != "refused"
+    from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram, predict
+
+    spec = FormulationSpec("tam", {"D-Ribose": 10.0, "Thioacetamide": 10.0},
+                           ProcessSpec(ThermalProgram.isothermal(145.0, 20.0), ph=5.0))
+    run = predict(spec, ["2-Methyl-3-furanthiol (MFT)"])
+    assert not run.answered
+    assert any("UNMAPPED PRECURSORS" in r for r in run.declaration.reasons)
 
 
 def test_status_vocabulary_matches_the_legacy_harness(small):
@@ -213,9 +221,10 @@ def test_coverage_splits_are_consistent(small):
     assert s["honest_literature"]["within_band"] == (
         s["out_of_sample"]["within_band"] + s["in_core_fit"]["within_band"]
     )
-    # B9 (2026-09-03): no Hofmann level row is a fit row any more and the small panel
-    # holds none of the six step-level bundles, so the in-fit split is empty here.
-    assert s["in_core_fit"]["rows"] == 0
+    # B9 (2026-09-03): no Hofmann level row is a fit row any more. 2026-10-27: hydrogen sulfide became
+    # chargeable, so the small panel's fed norfuraneol + H2S bundle -- a declared fit target (Wave X) --
+    # is now scored, and it is the in-fit split's one row.
+    assert s["in_core_fit"]["rows"] == 1
 
 
 def test_markdown_renders(small):

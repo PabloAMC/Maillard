@@ -184,6 +184,9 @@ def test_every_sulfur_species_has_formation_and_consumption():
         # HMF, and Shu & Ho report a GC area percent with no reversibility
         # experiment of any kind. An unmeasured release rate is an invented one.
         "HMFAD", "DMHFS",
+        # B49 (2026-10-27) adds SHET, norfuraneol's lumped sulfur heterocycles: terminal, nothing
+        # downstream of them is measured.
+        "SHET",
     }
     for species in SULFUR_STATE:
         if species.role in ("reactant", "site") or species.key in terminal_by_design:
@@ -844,7 +847,8 @@ def test_network_shape_is_pinned():
     # (HMFAD, DMHFS -- the two sinks that need a sulfur partner).
     # B11 (2026-09-07): + OXR (headspace reservoir) and OXV (dissolved-oxygen vacancy)
     # B39 (2026-09-11): + DGAL, 3-deoxygalactosone, the fed triangle's epimer.
-    assert described["n_species"] == 58
+    # 2026-10-27: + SHET (B49, norfuraneol's heterocycles) and GSH (glutathione, a measured H2S source).
+    assert described["n_species"] == 60
     # B7 adds ELEVEN steps to the TRUNK -- the furanic channel hangs there
     # because all four of its parents (Fru, 3-DG, 1-DG, MGO) are trunk species.
     # 15 through B6.

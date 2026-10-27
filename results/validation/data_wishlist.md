@@ -4,7 +4,7 @@
 
 Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one fed-intermediate measurement each turns a band artefact into a fitted value. 2: panel rows the engine answers but declares not evaluable. 3: what the panel asks for that no lane represents. 4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the envelope misses most (value of information). 6: what each measurement would let you predict. 7: lanes whose benchmark rows cannot support a trend statement at all -- a gap in the PORTFOLIO rather than in the model, and one no amount of modelling closes.
 
-**At a glance:** 10 fitted coordinates unidentified by primary evidence · 8 panel rows answered but not evaluable · 24 panel rows refused (targets no lane represents) · 11 directional axes below 'trust' (rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5).
+**At a glance:** 10 fitted coordinates unidentified by primary evidence · 8 panel rows answered but not evaluable · 19 panel rows refused (targets no lane represents) · 11 directional axes below 'trust' (rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5).
 
 ## 1. Fitted coordinates the data do not identify
 
@@ -39,13 +39,10 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | what | rows | the engine's reason | the hypothesis layer |
 |---|---|---|---|
 | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. Th | 8 | THIS POT WAS NEVER COOKED, so what it measures is what the raw material ARRIVED WITH, and this lane models FORMATION. The bundle's own vessel says so (closure = 'no cook'), and the physics agrees: over this thermal program only 0.38 % of the hydroperoxide pool | no cited rule reaches it from any reference charge |
-| UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named s | 3 | UNMAPPED PRECURSORS 'Hydroxyacetaldehyde', 'Mercapto-2-propanone': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD | no cited rule reaches it from any reference charge |
 | PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topolo | 2 | PYRAZINE TARGETS '2,5-dimethylpyrazine' (wave B18) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measuremen | no cited rule reaches it from any reference charge |
 | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose | 2 | LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single  | no cited rule reaches it from any reference charge |
 | GLYCATION TARGETS 'Nε-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network  | 1 | GLYCATION TARGETS 'Nε-(Carboxymethyl)lysine (CML)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or br | no cited rule reaches it from any reference charge |
 | GLYCATION TARGETS 'Nε-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network k | 1 | GLYCATION TARGETS 'Nε-(Carboxyethyl)lysine (CEL)' (wave B20) run on the trunk lane only: the acrylamide lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bri | no cited rule reaches it from any reference charge |
-| UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-mo | 1 | UNMAPPED PRECURSORS 'Furan-2-aldehyde', 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE ' | no cited rule reaches it from any reference charge |
-| UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an i | 1 | UNMAPPED PRECURSORS 'Hydrogen sulfide': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge. | no cited rule reaches it from any reference charge |
 | METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology  | 1 | METHIONINE CHAIN TARGETS 'methional' (wave B22) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring a measurement.  | no cited rule reaches it from any reference charge |
 | 2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keep | 1 | 2-ACETYL-1-PYRROLINE TARGETS '2-acetyl-1-pyrroline' (wave B24) run on the trunk lane only: the lipid lane's network keeps the topology its fit was run on and carries these species inert. Ask for them in a sugar + amine pot that resolves to the trunk, or bring  | no cited rule reaches it from any reference charge |
 | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not  | 1 | THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 'furaneol'. The charge declares only a matrix/lipid carrier, which is not a precursor: it resolves to a hydroperoxide pool for the lipid lane and charges NOTHING on the trunk, sulfur or acrylamide networks, so ever | no cited rule reaches it from any reference charge |
@@ -60,13 +57,13 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | matrix_identity | 0 / 0 | 1 | no evaluable claim | — | 4 |
 | process_heating | 0 / 0 | 1 | no evaluable claim | — | 4 |
 | scope | 0 / 0 | 3 | no evaluable claim | — | 4 |
+| additive_cysteine | 1 / 1 | 2 | caution | 0.207 | 3 |
+| moisture_aw | 1 / 1 | 1 | caution | 0.207 | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
 | ranking | 0 / 1 | 2 | do-not-use | 0.0 | 7 |
-| moisture_aw | 1 / 2 | 2 | do-not-use | 0.095 | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
-| additive_cysteine | 2 / 3 | 2 | caution | 0.208 | 5 |
-| time | 3 / 6 | 3 | do-not-use | 0.188 | 9 |
-| ph | 8 / 10 | 4 | caution | 0.49 | 1 |
-| sugar_identity | 4 / 10 | 7 | do-not-use | 0.168 | 20 |
-| temperature | 7 / 11 | 2 | caution | 0.354 | 9 |
+| time | 1 / 1 | 3 | caution | 0.207 | 3 |
+| ph | 5 / 8 | 3 | caution | 0.306 | 7 |
+| temperature | 5 / 9 | 2 | do-not-use | 0.267 | 11 |
+| sugar_identity | 4 / 10 | 5 | do-not-use | 0.168 | 20 |
 
 ## 5. Where the envelope misses most (value of information)
 
@@ -79,9 +76,9 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | 5 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.48 | 1.23 | free_precursor_sulfur_yield |
 | 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.29 | 1.15 | free_precursor_sulfur_yield |
 | 7 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.97 | 1.48 | free_precursor_sulfur_yield |
-| 8 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 9.43 | 1.52 | missing_positive_flavor_anchor |
-| 9 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Furfurylthiol (FFT) | 9.13 | 1.32 | free_precursor_sulfur_yield |
-| 10 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 8.37 | 0.93 | free_precursor_sulfur_yield |
+| 8 | `hofmann1998_c2c3_recombination_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 10.60 | 1.12 | free_precursor_sulfur_yield |
+| 9 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 9.43 | 1.52 | missing_positive_flavor_anchor |
+| 10 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Furfurylthiol (FFT) | 9.13 | 1.32 | free_precursor_sulfur_yield |
 
 ## 6. What you could predict if you had it
 
@@ -90,17 +87,17 @@ The engine returns a number but declares the route unidentified; the rows leave 
 - **If** `k_arp_dpo` were measured: absolute MFT, FFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact.
 - **If** `k_dimer_fft` were measured: absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact.
 - **If** `k_dimer_mft` were measured: absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact.
-- **If** `k_fur_fft` were measured: absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, hydrogen sulfide, as a fitted value instead of a band artefact.
+- **If** `k_fur_fft` were measured: absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact.
 - **If** `4 more independent ordering claims on lipid_lane (all agreeing)` were measured: the direction of a change along lipid_lane with a 'trust' tag instead of 'no evaluable claim'.
 - **If** `4 more independent ordering claims on matrix_identity (all agreeing)` were measured: the direction of a change along matrix_identity with a 'trust' tag instead of 'no evaluable claim'.
 - **If** `4 more independent ordering claims on process_heating (all agreeing)` were measured: the direction of a change along process_heating with a 'trust' tag instead of 'no evaluable claim'.
 - **If** `4 more independent ordering claims on scope (all agreeing)` were measured: the direction of a change along scope with a 'trust' tag instead of 'no evaluable claim'.
+- **If** `3 more independent ordering claims on additive_cysteine (all agreeing)` were measured: the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'.
 - **If** `7 more independent ordering claims on ranking (all agreeing)` were measured: the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'.
-- **If** `5 more independent ordering claims on additive_cysteine (all agreeing)` were measured: the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'.
-- **If** `9 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'do-not-use'.
-- **If** `1 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
+- **If** `3 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'caution'.
+- **If** `7 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
+- **If** `11 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'.
 - **If** `20 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
-- **If** `9 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'caution'.
 
 Nothing above is a forecast of accuracy: 'unlocks' means the observable sits downstream of the step in the network, so a measured rate would replace a band artefact with a fitted value. Whether the fitted value lands within 3x of a measurement is what the next pre-registered wave finds out (`scripts/generators/WAVES.md`).
 
