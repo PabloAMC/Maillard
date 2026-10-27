@@ -4,9 +4,9 @@
     "artifact": "env_b34_ship_rule",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "4606458cd010df200db61965b9bc83b29ee38970",
-      "short": "4606458c",
-      "branch": "provenance-census-trace",
+      "commit": "c7fb4d2b3eb0c6412fea42f319a74f0b2998a50e",
+      "short": "c7fb4d2b",
+      "branch": "b47-sulfur-objective-corrected",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_env_b34_ship_rule.py",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "1f05cd478668820f2b6d5fea4e242b7dc420c72372ad850d0ec7f5c70bed5dcb"
+        "sha256": "ebdbb2c3f39a2ba949a3e16136330ff144543a45b12c54553ba06bad4c721af8"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",

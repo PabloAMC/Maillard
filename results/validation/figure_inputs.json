@@ -70,16 +70,16 @@
         "05_ttca_decay.png": "14da22a3c177b07dc4c2c01a0f54741a120c8253f107087c715b642777cd9444",
         "06_dicarbonyls_water.png": "38ade4ec040b9f46d817f0848c24b965f2adad3cc26a2c149f6451468f9c5135",
         "07_literature_funnel.png": "ab33ee3c1bbb48a03e44b6e3220c607e3f6bc20d0bfae87de8dc084cc6cafec4",
-        "08_path_scorecard.png": "b4901014d88b2dac1b9e50a1e299fa918697178ffebc76112693e34cabc96b62",
+        "08_path_scorecard.png": "39ff17a471fd8ee2bd05ba9c3b3f1fcf1148376c8ff3c6f3b0da863231669868",
         "09_repository_flow.png": "ce1998b349e78c129def870d52cc2ae2cd4a53b323cd18083b2a42098caf3e09",
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "71f0425c3269268d180c1946785973883bb5250bfdc577c6583102ee0da9d333",
+        "17_papers_by_weight.png": "66cb69e476e13e3589f9dc5c5a016ce78307767574dde91437bfce25157c9857",
         "18_lab_spread.png": "26d21b131dc9ea33bafb644a482c4db0c6fdd33b36b32c631b32cfef9a2f1703",
         "19_what_papers_report.png": "39c35a1410f6277837152e63d63cbed71162d5b1290c94d5c217d33485177f5f",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
-        "21_parity.png": "e5c46cb6432c6715fddb55e2318c3fadcca7e6de0f745104f45225ceda3e9c94",
+        "21_parity.png": "47a2f13590befbcfb1cc8572a74f8f45cae31e331627949e837de30f4e4b17ca",
         "22_no_number.png": "3704d0a6cb04fef38468835a0dda36a95d5eb5f1d36ebcca420d31ab041450de"
       }
     },
@@ -116,7 +116,7 @@
       ],
       "figures": {
         "23_coverage_of_declared_targets.png": "ebd7c16616e5b60b6a52c8cb493cd0db89cdebe1d1c676ea179556cfed1ed1b8",
-        "24_fat_path_hexanal.png": "c98da8db0272ce19a14fb218e6cbb705b58d7b575992bc47ae35770789cbb1c8",
+        "24_fat_path_hexanal.png": "cae29518d5de8944469ea1012c4cc3daa490e110902dc0fe6b4e2be19589c169",
         "25_protein_matrix_layer.png": "2930b0e2498296ddb9ead290ba4f2afea15151beeea39d7ad48f67cf2e8a33d6",
         "26_hypothesis_layer.png": "185fc901a3e6858aacc4c4d3d1ce36be310eaa49327e214856476920b1fbd085",
         "27_pyrazine_step_supply.png": "91def689a3e0d6e85fc889a39b454f4bf7c3a874531795cdb9cb223e9d62195c",
@@ -131,9 +131,9 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "68aac84cc13c24fe5289d59ac18c0f41ab91f98b",
-      "short": "68aac84c",
-      "branch": "delete-weak-records",
+      "commit": "c7fb4d2b3eb0c6412fea42f319a74f0b2998a50e",
+      "short": "c7fb4d2b",
+      "branch": "b47-sulfur-objective-corrected",
       "dirty": true
     },
     "generated_by": "scripts/generators/figure_manifest.py",
@@ -168,15 +168,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "421235556dc56a63af92367c71ca477e55b8b75912a2ccd2de3ba2665e9b23c3"
+        "sha256": "102ee7a3a87f62d5cec6ade9ab5ba4b43b2f0f6897c3ccace47e168898d310e2"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "8a58e340c8682145b503a1a5df5c223224a0c24cf70ba2ee24a9ff463e3ddaed"
+        "sha256": "77253fd95e8387e56bbf7a5c6715fc1fcf13d2e3f2b498cb76a06cd2bac463db"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "1f05cd478668820f2b6d5fea4e242b7dc420c72372ad850d0ec7f5c70bed5dcb"
+        "sha256": "ebdbb2c3f39a2ba949a3e16136330ff144543a45b12c54553ba06bad4c721af8"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -228,7 +228,7 @@
       },
       {
         "path": "src/kinetic_core/lipid.py",
-        "sha256": "cbcc2d13dc2e510c73b05abb315d18a3228a812ebcb78b2674eedf3514fa28dd"
+        "sha256": "082cffac5d85b7c0be81d943d9493995301548d35ad8110fd21a3faea0ad76eb"
       },
       {
         "path": "src/kinetic_core/matrix_sites.py",
@@ -256,7 +256,7 @@
       },
       {
         "path": "src/kinetic_core/parameters_lipid.py",
-        "sha256": "461fefaf1fb657b140e4e9442e18f7ee93c4360a1842ed232a44a2e4c74773b6"
+        "sha256": "b67a074e713419b672ed3c7222d4b33fc9883e9c3a670794827ddea981cb9331"
       },
       {
         "path": "src/kinetic_core/parameters_pyrazine.py",
@@ -316,7 +316,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/08_path_scorecard.png",
-        "sha256": "b4901014d88b2dac1b9e50a1e299fa918697178ffebc76112693e34cabc96b62"
+        "sha256": "39ff17a471fd8ee2bd05ba9c3b3f1fcf1148376c8ff3c6f3b0da863231669868"
       },
       {
         "path": "docs/assets/thiol_sink/09_repository_flow.png",
@@ -356,7 +356,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "71f0425c3269268d180c1946785973883bb5250bfdc577c6583102ee0da9d333"
+        "sha256": "66cb69e476e13e3589f9dc5c5a016ce78307767574dde91437bfce25157c9857"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",
@@ -372,7 +372,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/21_parity.png",
-        "sha256": "e5c46cb6432c6715fddb55e2318c3fadcca7e6de0f745104f45225ceda3e9c94"
+        "sha256": "47a2f13590befbcfb1cc8572a74f8f45cae31e331627949e837de30f4e4b17ca"
       },
       {
         "path": "docs/assets/thiol_sink/22_no_number.png",
@@ -384,7 +384,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/24_fat_path_hexanal.png",
-        "sha256": "c98da8db0272ce19a14fb218e6cbb705b58d7b575992bc47ae35770789cbb1c8"
+        "sha256": "cae29518d5de8944469ea1012c4cc3daa490e110902dc0fe6b4e2be19589c169"
       },
       {
         "path": "docs/assets/thiol_sink/25_protein_matrix_layer.png",

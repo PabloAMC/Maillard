@@ -595,16 +595,62 @@ LOOH_FORMATION_GAP = (
     "UNDER-predicts, because it cannot make new hydroperoxide."
 )
 
-#: The other consumption channel Frankel's own introduction names, and the
-#: reason it is off.
+#: The other consumption channel Frankel's own introduction names. Declared a gap
+#: through B47; closed by WAVE B48 (2026-10-27) with DECADIENAL_BREAKAGE below.
 DECADIENAL_TO_HEXANAL_GAP = (
-    "NOT MODELLED, DECLARED. Frankel 1989's introduction cites Schieberle & "
-    "Grosch (1981) for 'hexanal may form ... after oxidative decomposition of "
-    "2,4-decadienal'. If that route is live, hexanal and 2,4-decadienal are "
-    "coupled and the fitted 13-OOH/9-OOH split is partly an artefact. No rate "
-    "for it exists in the corpus, so it is a structurally enabled edge with no "
-    "constant: reported as a named risk to the FIT, not silently assumed absent."
+    "CLOSED BY WAVE B48 (2026-10-27). Frankel 1989's introduction cites Schieberle "
+    "& Grosch (1981) for 'hexanal may form ... after oxidative decomposition of "
+    "2,4-decadienal'. Through B47 this read 'No rate for it exists in the corpus'; "
+    "Zamora 2015 (Food Chem 174:89, read at B42) prints the yields and barriers and "
+    "Zamora 2007 (JAFC 55:1308) an independent 9-14 % at 180 C. The step is "
+    "DECADIENAL_BREAKAGE. It does not reopen B6's 13-OOH/9-OOH split: Frankel "
+    "thermolysed in a GC injector (seconds) against a half-life of tens of minutes."
 )
+
+
+@dataclass(frozen=True)
+class DecadienalBreakage:
+    """
+    2,4-decadienal -> hexanal (and -> 2-octenal), first order in decadienal. WAVE B48.
+
+    Every number is printed in Zamora, Navarro, Aguilar & Hidalgo 2015, Food Chem
+    174:89-96 (``zamora2015b_extraction.md`` sec. 2): 1 h at 200 C, pH 8, yields
+    11.5 % hexanal (slope 0.1154) and 0.8 % 2-octenal (slope 0.00821); barriers from
+    initial rates at 120/160/200 C, 21.3 and 29.6 kJ/mol. A yield after 1 h becomes a
+    first-order constant as -ln(1 - y)/60 min. Nothing is fitted. Declared limits: the
+    medium is tetrahydrofuran-buffer at pH 8 (the yield's maximum), there is no pH
+    term, and decadienal's other losses (figure-only) are not modelled.
+    """
+
+    enabled: bool = True
+    #: The barriers were measured at 120/160/200 C. Below this the step is OFF, not
+    #: extrapolated: a 21 kJ/mol barrier carried to storage would break most of the
+    #: decadienal in weeks at room temperature, a claim no source makes.
+    window_min_c: float = 100.0
+    t_ref_c: float = 200.0
+    hexanal_yield_1h_at_ref: float = 0.1154
+    octenal_yield_1h_at_ref: float = 0.00821
+    ea_hexanal_kj_mol: float = 21.3
+    ea_octenal_kj_mol: float = 29.6
+    source: str = ("Zamora, Navarro, Aguilar & Hidalgo 2015, Food Chem 174:89-96, "
+                   "sec. 3.5 (yields) and the Arrhenius plots (barriers); zamora2015b_extraction.md")
+    holdout: str = ("Zamora, Gallardo & Hidalgo 2007, JAFC 55:1308: 9-14 % of 2,4-decadienal to "
+                    "hexanal in 1 h at 180 C, pH 3, phenylalanine present (zamora2007_extraction.md)")
+
+    def k_per_min(self, channel: str, temperature_c: float) -> float:
+        """First-order constant of one channel at ``temperature_c``, 1/min."""
+        if channel == "hexanal":
+            y, ea = self.hexanal_yield_1h_at_ref, self.ea_hexanal_kj_mol
+        elif channel == "octenal":
+            y, ea = self.octenal_yield_1h_at_ref, self.ea_octenal_kj_mol
+        else:
+            raise KeyError(channel)
+        k_ref = -math.log(1.0 - y) / 60.0
+        t, t_ref = float(temperature_c) + 273.15, self.t_ref_c + 273.15
+        return k_ref * math.exp(-ea * 1000.0 / 8.314462618 * (1.0 / t - 1.0 / t_ref))
+
+
+DECADIENAL_BREAKAGE = DecadienalBreakage()
 
 
 # ===========================================================================
@@ -767,6 +813,18 @@ def lipid_registry_metadata() -> Dict[str, Any]:
             "LOOH_formation": LOOH_FORMATION_GAP,
             "decadienal_to_hexanal": DECADIENAL_TO_HEXANAL_GAP,
         },
+        "decadienal_breakage": {
+            "wave": "B48",
+            "enabled": DECADIENAL_BREAKAGE.enabled,
+            "t_ref_C": DECADIENAL_BREAKAGE.t_ref_c,
+            "window_min_C": DECADIENAL_BREAKAGE.window_min_c,
+            "hexanal_yield_1h_at_ref": DECADIENAL_BREAKAGE.hexanal_yield_1h_at_ref,
+            "octenal_yield_1h_at_ref": DECADIENAL_BREAKAGE.octenal_yield_1h_at_ref,
+            "ea_hexanal_kj_mol": DECADIENAL_BREAKAGE.ea_hexanal_kj_mol,
+            "ea_octenal_kj_mol": DECADIENAL_BREAKAGE.ea_octenal_kj_mol,
+            "source": DECADIENAL_BREAKAGE.source,
+            "holdout": DECADIENAL_BREAKAGE.holdout,
+        },
         "prohibited_derivations": dict(PROHIBITED_DERIVATIONS),
         "source_contradictions": dict(LIPID_SOURCE_CONTRADICTIONS),
         "shipped_values_refuted": dict(SHIPPED_VALUES_REFUTED),
@@ -780,7 +838,9 @@ assert_fit_column_is_zero_additive_only()
 
 __all__ = [
     "COVALENT_SINK",
+    "DECADIENAL_BREAKAGE",
     "DECADIENAL_TO_HEXANAL_GAP",
+    "DecadienalBreakage",
     "FRANKEL_ANCHOR",
     "FRANKEL_DOSSIER",
     "FRANKEL_SYSTEM_GEOMETRY",

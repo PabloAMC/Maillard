@@ -3,24 +3,24 @@
 pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresholds`, else the global default.
 
 * panel: **37** benchmarks, 23 scored, 14 fully refused; rows **45**, refused rows 32
-* within 3x: 12/45 (0.267); median fold 9.149, geometric mean 16.490, worst 9.63e+03
+* within 3x: 12/45 (0.267); median fold 9.149, geometric mean 16.461, worst 9.63e+03
 * evidence roles (core): {'external_holdout': 21, 'predictive': 16}
 * predictive benchmarks passing their contract: NONE; strict-ready: NONE
-* **honest literature: 12/45 within band** (0.267), 23 benchmarks, median fold 9.149, geometric mean 16.490
-* **out-of-sample: 11/44 within band** (0.250), 22 benchmarks, median fold 9.228, geometric mean 17.242
+* **honest literature: 12/45 within band** (0.267), 23 benchmarks, median fold 9.149, geometric mean 16.461
+* **out-of-sample: 11/44 within band** (0.250), 22 benchmarks, median fold 9.228, geometric mean 17.211
 * **rows the sulfur fit read: 1/1 within band** (1.000), 1 benchmarks, median fold 2.316, geometric mean 2.316
 
 ## Per panel / role / lane
 
 | split | key | benchmarks | rows | within band | rate | contract passes | strict-ready | median fold | geo-mean fold |
 |---|---|---|---|---|---|---|---|---|---|
-| panel | external_matrix | 4 | 4 | 0 | 0.000 | 0 | 0 | 6.173 | 13.791 |
+| panel | external_matrix | 4 | 4 | 0 | 0.000 | 0 | 0 | 6.034 | 13.526 |
 | panel | maillard_path_holdout | 17 | 31 | 7 | 0.226 | 0 | 0 | 23.562 | 19.579 |
 | panel | trust_loop | 16 | 10 | 5 | 0.500 | 0 | 0 | 3.110 | 10.400 |
-| evidence_role | external_holdout | 21 | 35 | 7 | 0.200 | 0 | 0 | 9.315 | 18.810 |
+| evidence_role | external_holdout | 21 | 35 | 7 | 0.200 | 0 | 0 | 9.315 | 18.769 |
 | evidence_role | predictive | 16 | 10 | 5 | 0.500 | 0 | 0 | 3.110 | 10.400 |
 | lane | acrylamide | - | 12 | 4 | 0.333 | 0 | 0 | 7.697 | 20.300 |
-| lane | lipid | - | 8 | 4 | 0.500 | 0 | 0 | 2.822 | 5.161 |
+| lane | lipid | - | 8 | 4 | 0.500 | 0 | 0 | 2.822 | 5.112 |
 | lane | sulfur | - | 19 | 2 | 0.105 | 0 | 0 | 29.450 | 30.281 |
 | lane | trunk | - | 6 | 2 | 0.333 | 0 | 0 | 7.968 | 7.470 |
 
@@ -62,7 +62,7 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 216.336 | 2.042 | 1.50 / 0.100 | scale-gap | no | - | 1.98 |
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | REFERENCE | external_holdout | 2/2 | 1.000 | 130.704 | 2.058 | 1.50 / 0.100 | scale-gap | no | - | 1.98 |
 | external_validation_bi_2020_raw_pea_hexanal | external_matrix | PRIMARY | external_holdout | 0/2 | 0.000 | - | - | 2.00 / 0.120 | refused | no | - | not_applicable |
-| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | PRIMARY | external_holdout | 1/4 | 0.250 | 3.657 | 0.563 | 2.00 / 0.120 | coverage-gap | no | - | open |
+| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | PRIMARY | external_holdout | 1/4 | 0.250 | 3.387 | 0.530 | 2.00 / 0.120 | coverage-gap | no | - | open |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | PRIMARY | external_holdout | 3/4 | 0.750 | 365.609 | 1.332 | 2.00 / 0.120 | coverage-gap | no | - | continuous |
 | external_validation_liu_2023_ppi_offnote_baseline | external_matrix | PRIMARY | external_holdout | 0/2 | 0.000 | - | - | 2.00 / 0.120 | refused | no | - | not_applicable |
 
@@ -74,10 +74,10 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.35e+03 | 2.316 | yes | no | [336.411, 1.65e+04] | yes | sulfur | yes |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Furfurylthiol (FFT) | ppb | 121.000 | 830.643 | 6.865 | no | no | [118.763, 5.81e+03] | yes | sulfur | no |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 730.638 | 3.690 | no | no | [104.464, 5.11e+03] | yes | sulfur | no |
-| pea_isolate_uht_140C_Trikusuma2019 | hexanal | ppb | 782.000 | 353.839 | 2.210 | yes | no | [3.623, 3.46e+04] | yes | lipid | no |
+| pea_isolate_uht_140C_Trikusuma2019 | hexanal | ppb | 782.000 | 353.841 | 2.210 | yes | no | [3.623, 3.46e+04] | yes | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | 2-pentylfuran | ppb | 163.000 | 64.442 | 2.529 | yes | no | [0.660, 6.29e+03] | yes | lipid | no |
 | pea_isolate_uht_140C_Trikusuma2019 | nonanal | ppb | 24.000 | 15.606 | 1.538 | yes | yes | [0.160, 1.52e+03] | yes | lipid | no |
-| pea_isolate_uht_140C_Trikusuma2019 | (E,E)-2,4-decadienal | ppb | 46.900 | 75.955 | 1.620 | yes | yes | [0.778, 7.42e+03] | yes | lipid | no |
+| pea_isolate_uht_140C_Trikusuma2019 | (E,E)-2,4-decadienal | ppb | 46.900 | 75.951 | 1.619 | yes | yes | [0.778, 7.42e+03] | yes | lipid | no |
 | resconi_2023_pbma_beef_identity_benchmark | furfural | ppb | 715.220 | 7.664 | 93.317 | no | no | [1.096, 53.606] | no | sulfur | no |
 | thiamine_cys_glucose_120C_Bolton1994 | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 20.168 | no | no | [33.738, 1.65e+03] | no | sulfur | no |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | Acrylamide | ppb | 1.86e+03 | 203.194 | 9.149 | no | no | [29.052, 1.42e+03] | no | acrylamide | no |
@@ -111,9 +111,9 @@ pass band = 3.0x; contracts from each bundle's `validation_contract.scale_thresh
 | mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | 2-Furfurylthiol (FFT) | ppb | 1.680 | 363.445 | 216.336 | no | no | [51.964, 2.54e+03] | no | sulfur | no |
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.534 | 99.727 | no | no | [24.382, 1.19e+03] | no | sulfur | no |
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 130.704 | no | no | [30.274, 1.48e+03] | no | sulfur | no |
-| external_validation_bi_2020_roasted_pea_hexanal | hexanal | ppb | 324.000 | 88.598 | 3.657 | no | no | [4.054, 1.94e+03] | yes | lipid | no |
+| external_validation_bi_2020_roasted_pea_hexanal | hexanal | ppb | 324.000 | 95.650 | 3.387 | no | no | [4.373, 2.09e+03] | yes | lipid | no |
 | external_validation_li_2026_spi_wg_hme_control | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 365.609 | no | no | [0.471, 502.987] | no | lipid | no |
-| external_validation_li_2026_spi_wg_hme_control | hexanal | ppb | 605.600 | 69.695 | 8.689 | no | no | [2.132, 2.28e+03] | yes | lipid | no |
+| external_validation_li_2026_spi_wg_hme_control | hexanal | ppb | 605.600 | 69.763 | 8.681 | no | no | [2.134, 2.28e+03] | yes | lipid | no |
 | external_validation_li_2026_spi_wg_hme_control | nonanal | ppb | 74.370 | 23.885 | 3.114 | no | no | [0.731, 780.763] | yes | lipid | no |
 
 ## Refused rows

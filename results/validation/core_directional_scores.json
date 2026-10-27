@@ -41,11 +41,11 @@
   },
   "provenance": {
     "artifact": "core_directional_scores",
-    "generated_on": "2026-09-11",
+    "generated_on": "2026-10-27",
     "git": {
-      "commit": "458733f493050a7f8a841f4eb908e6452b08bee8",
-      "short": "458733f4",
-      "branch": "reactions",
+      "commit": "c7fb4d2b3eb0c6412fea42f319a74f0b2998a50e",
+      "short": "c7fb4d2b",
+      "branch": "b47-sulfur-objective-corrected",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
@@ -283,16 +283,15 @@
           "rate": 0.6666666666666666
         },
         "lipid_lane": {
-          "agree": 0,
+          "agree": 1,
           "evaluable": 3,
           "not_evaluable": 1,
           "misses": [
             "LIP-01",
-            "LIP-02",
             "LIP-04"
           ],
           "mechanism_absent": 2,
-          "rate": 0.0
+          "rate": 0.3333333333333333
         },
         "matrix_identity": {
           "agree": 0,
@@ -401,7 +400,7 @@
         }
       },
       "total": {
-        "agree": 29,
+        "agree": 30,
         "evaluable": 59,
         "not_evaluable": 33,
         "misses": [
@@ -417,7 +416,6 @@
           "MAT-03",
           "PROC-05",
           "LIP-01",
-          "LIP-02",
           "SUG-12",
           "TEMP-05",
           "LIP-04",
@@ -437,7 +435,7 @@
           "CER07-PH-01"
         ],
         "mechanism_absent": 4,
-        "rate": 0.4915254237288136
+        "rate": 0.5084745762711864
       },
       "ph_aw": {
         "agree": 11,
@@ -455,7 +453,7 @@
         "rate": 0.6470588235294118
       },
       "excluding_ph_aw": {
-        "agree": 18,
+        "agree": 19,
         "evaluable": 42,
         "not_evaluable": 27,
         "misses": [
@@ -468,7 +466,6 @@
           "MAT-03",
           "PROC-05",
           "LIP-01",
-          "LIP-02",
           "SUG-12",
           "TEMP-05",
           "LIP-04",
@@ -485,7 +482,7 @@
           "WANG22-T-04"
         ],
         "mechanism_absent": 4,
-        "rate": 0.42857142857142855
+        "rate": 0.4523809523809524
       }
     },
     "not_evaluable_reasons": {
@@ -500,7 +497,7 @@
       "arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 50.1
+    "wall_seconds": 46.6
   },
   "claims": [
     {
@@ -520,7 +517,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        76.26990759195347,
+        76.2699080018035,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -546,7 +543,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 76.26990759195347
+          "value_ug_per_l": 76.2699080018035
         },
         {
           "label": "cysteine + D-glucose",
@@ -590,10 +587,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        57.66754977613299,
-        52.23545191420537
+        57.66754973013037,
+        52.235451351089466
       ],
-      "log10_ratio_B_over_A": -0.04296614281008276,
+      "log10_ratio_B_over_A": -0.04296614714547891,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -615,7 +612,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 57.66754977613299
+          "value_ug_per_l": 57.66754973013037
         },
         {
           "label": "cysteine + D-glucose",
@@ -638,7 +635,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.23545191420537
+          "value_ug_per_l": 52.235451351089466
         }
       ]
     },
@@ -659,8 +656,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        52.23545191420537,
-        52.23545191420537
+        52.235451351089466,
+        52.235451351089466
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -685,7 +682,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.23545191420537
+          "value_ug_per_l": 52.235451351089466
         },
         {
           "label": "MFT in cysteine + glucose",
@@ -708,7 +705,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.23545191420537
+          "value_ug_per_l": 52.235451351089466
         }
       ]
     },
@@ -729,8 +726,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        76.26990759195347,
-        76.26990759195347
+        76.2699080018035,
+        76.2699080018035
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -754,7 +751,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 76.26990759195347
+          "value_ug_per_l": 76.2699080018035
         },
         {
           "label": "FFT in cysteine + ribose",
@@ -776,7 +773,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 76.26990759195347
+          "value_ug_per_l": 76.2699080018035
         }
       ]
     },
@@ -797,10 +794,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        135.76563564269242,
-        147.09808092734042
+        135.76563512060017,
+        147.09808229545786
       ],
-      "log10_ratio_B_over_A": 0.03481714958344409,
+      "log10_ratio_B_over_A": 0.03481715529279061,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -822,7 +819,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 135.76563564269242
+          "value_ug_per_l": 135.76563512060017
         },
         {
           "label": "cysteine + D-glucose",
@@ -844,7 +841,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 147.09808092734042
+          "value_ug_per_l": 147.09808229545786
         }
       ]
     },
@@ -880,10 +877,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        46.784300302797526,
-        83.13708261845925
+        46.78430027227979,
+        83.13708292007382
       ],
-      "log10_ratio_B_over_A": 0.24969464188023072,
+      "log10_ratio_B_over_A": 0.2496946437391092,
       "arms": [
         {
           "label": "pH 4.5",
@@ -905,7 +902,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 46.784300302797526
+          "value_ug_per_l": 46.78430027227979
         },
         {
           "label": "pH 6.5",
@@ -927,7 +924,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 83.13708261845925
+          "value_ug_per_l": 83.13708292007382
         }
       ]
     },
@@ -948,10 +945,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        0.045191406716332844,
-        0.11119602213167054
+        0.0451914170626835,
+        0.11119601528820784
       ],
-      "log10_ratio_B_over_A": 0.3910333910571252,
+      "log10_ratio_B_over_A": 0.3910332648992697,
       "arms": [
         {
           "label": "pH 4.5",
@@ -973,7 +970,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.045191406716332844
+          "value_ug_per_l": 0.0451914170626835
         },
         {
           "label": "pH 6.5",
@@ -995,7 +992,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.11119602213167054
+          "value_ug_per_l": 0.11119601528820784
         }
       ]
     },
@@ -1016,13 +1013,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        65.85040081365598,
-        53.74591283400217,
-        10.855890425835055
+        65.85039995436122,
+        53.745913834808526,
+        10.855890453933911
       ],
       "log10_steps": [
-        -0.08821297928906009,
-        -0.6946799923372899
+        -0.0882129655348389,
+        -0.6946799993002108
       ],
       "arms": [
         {
@@ -1046,7 +1043,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 65.85040081365598
+          "value_ug_per_l": 65.85039995436122
         },
         {
           "label": "pH 5.5",
@@ -1069,7 +1066,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 53.74591283400217
+          "value_ug_per_l": 53.745913834808526
         },
         {
           "label": "pH 7.0",
@@ -1092,7 +1089,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 10.855890425835055
+          "value_ug_per_l": 10.855890453933911
         }
       ]
     },
@@ -1213,13 +1210,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        146.2787284829897,
-        131.09761600262806,
-        58.05211958170592
+        146.27872796979617,
+        131.09761597088715,
+        58.05211945701822
       ],
       "log10_steps": [
-        -0.04758638245074534,
-        -0.3537767129641618
+        -0.04758638103224847,
+        -0.35377671379181463
       ],
       "arms": [
         {
@@ -1242,7 +1239,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 146.2787284829897
+          "value_ug_per_l": 146.27872796979617
         },
         {
           "label": "pH 5.5",
@@ -1264,7 +1261,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 131.09761600262806
+          "value_ug_per_l": 131.09761597088715
         },
         {
           "label": "pH 7.0",
@@ -1286,7 +1283,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 58.05211958170592
+          "value_ug_per_l": 58.05211945701822
         }
       ]
     },
@@ -1307,13 +1304,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        13.564316189635287,
-        356.58111247124765,
-        1038.0493507801925
+        13.564316192459103,
+        356.5811126239919,
+        1038.049354842887
       ],
       "log10_steps": [
-        1.4197604307653457,
-        0.4640596655962676
+        1.4197604308609677,
+        0.46405966710996627
       ],
       "arms": [
         {
@@ -1337,7 +1334,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 13.564316189635287
+          "value_ug_per_l": 13.564316192459103
         },
         {
           "label": "150 C",
@@ -1360,7 +1357,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 356.58111247124765
+          "value_ug_per_l": 356.5811126239919
         },
         {
           "label": "170 C",
@@ -1383,7 +1380,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 1038.0493507801925
+          "value_ug_per_l": 1038.049354842887
         }
       ]
     },
@@ -1404,7 +1401,7 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        13.564316189635287,
+        13.564316192459103,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -1431,7 +1428,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.50 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.66 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 13.564316189635287
+          "value_ug_per_l": 13.564316192459103
         },
         {
           "label": "unheated control, 25 C",
@@ -1476,13 +1473,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        96.33668929218608,
-        472.6391563022098,
-        669.8555476436122
+        96.3366890960332,
+        472.63915608790654,
+        669.8555475800904
       ],
       "log10_steps": [
-        0.6907379811174772,
-        0.1514514601012887
+        0.690737981804835,
+        0.151451460257022
       ],
       "arms": [
         {
@@ -1508,7 +1505,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 96.33668929218608
+          "value_ug_per_l": 96.3366890960332
         },
         {
           "label": "150 C",
@@ -1533,7 +1530,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 472.6391563022098
+          "value_ug_per_l": 472.63915608790654
         },
         {
           "label": "170 C",
@@ -1558,7 +1555,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 669.8555476436122
+          "value_ug_per_l": 669.8555475800904
         }
       ]
     },
@@ -1579,13 +1576,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1303.24872923972,
-        1450.1070991506872,
-        636.1230626343537
+        1303.2487295614428,
+        1450.1070990839394,
+        636.1230626500601
       ],
       "log10_steps": [
-        0.04637276855374654,
-        -0.35785893748154285
+        0.04637276842654528,
+        -0.35785893745082936
       ],
       "arms": [
         {
@@ -1612,7 +1609,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1303.24872923972
+          "value_ug_per_l": 1303.2487295614428
         },
         {
           "label": "aw 0.6",
@@ -1637,7 +1634,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1450.1070991506872
+          "value_ug_per_l": 1450.1070990839394
         },
         {
           "label": "aw 0.98",
@@ -1661,7 +1658,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 636.1230626343537
+          "value_ug_per_l": 636.1230626500601
         }
       ]
     },
@@ -1700,7 +1697,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.30 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 324.90832168434144
+          "value_ug_per_l": 324.90832186352463
         },
         {
           "label": "aw 0.6 (mid moisture)",
@@ -1723,7 +1720,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.60 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.58 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 364.3173992328272
+          "value_ug_per_l": 364.31739938074736
         },
         {
           "label": "aw 0.9 (high moisture)",
@@ -1746,7 +1743,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.90 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 324.90832168434144
+          "value_ug_per_l": 324.90832186352463
         }
       ]
     },
@@ -1767,7 +1764,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        46.94226156084671,
+        46.94226173200586,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -1795,7 +1792,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 46.94226156084671
+          "value_ug_per_l": 46.94226173200586
         },
         {
           "label": "glycine + glucose (no cysteine)",
@@ -1843,10 +1840,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        636.1230626343537,
-        668.1067745192241
+        636.1230626500601,
+        668.106774004654
       ],
-      "log10_ratio_B_over_A": 0.02130473426438275,
+      "log10_ratio_B_over_A": 0.02130473391916979,
       "arms": [
         {
           "label": "glycine + glucose (no cysteine)",
@@ -1870,7 +1867,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 636.1230626343537
+          "value_ug_per_l": 636.1230626500601
         },
         {
           "label": "glycine + glucose + cysteine",
@@ -1896,7 +1893,7 @@
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED.",
             "5-HMF + cysteine: the sink constant is HELD at its 50 C value for this whole program. Holding it UNDER-states the sink; extrapolating it is a named prohibited derivation (furanic extraction dossier, sec. 7.3), and the direction is stated rather than chosen for convenience."
           ],
-          "value_ug_per_l": 668.1067745192241
+          "value_ug_per_l": 668.106774004654
         }
       ]
     },
@@ -2134,7 +2131,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 22.838630048173226
+          "value_ug_per_l": 22.841069612929495
         },
         {
           "label": "unprocessed control, 25 C",
@@ -2332,8 +2329,8 @@
       "mechanism_absent": true,
       "lane": "lipid",
       "values_ug_per_l": [
-        22.838630048173226,
-        22.838630048173226
+        22.841069612929495,
+        22.841069612929495
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -2360,7 +2357,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 22.838630048173226
+          "value_ug_per_l": 22.841069612929495
         },
         {
           "label": "2-pentylfuran",
@@ -2385,7 +2382,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7.16 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 22.838630048173226
+          "value_ug_per_l": 22.841069612929495
         }
       ]
     },
@@ -2406,13 +2403,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        10.066377927756568,
-        636.1230626343537,
-        3100.2952425230455
+        10.06637793254913,
+        636.1230626500601,
+        3100.2952439649316
       ],
       "log10_steps": [
-        1.800667909871286,
-        0.6878619126608592
+        1.8006679096752432,
+        0.6878619128521177
       ],
       "arms": [
         {
@@ -2437,7 +2434,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 10.066377927756568
+          "value_ug_per_l": 10.06637793254913
         },
         {
           "label": "30 min",
@@ -2461,7 +2458,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 636.1230626343537
+          "value_ug_per_l": 636.1230626500601
         },
         {
           "label": "120 min",
@@ -2485,7 +2482,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 3100.2952425230455
+          "value_ug_per_l": 3100.2952439649316
         }
       ]
     },
@@ -2506,8 +2503,8 @@
       "mechanism_absent": true,
       "lane": "lipid",
       "values_ug_per_l": [
-        22.838630048173226,
-        22.838630048173226
+        22.841069612929495,
+        22.841069612929495
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -2534,7 +2531,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 22.838630048173226
+          "value_ug_per_l": 22.841069612929495
         },
         {
           "label": "nonanal, pea isolate",
@@ -2559,7 +2556,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 22.838630048173226
+          "value_ug_per_l": 22.841069612929495
         }
       ]
     },
@@ -2574,19 +2571,19 @@
       "fit_status": "fit_system_overlap",
       "statement": "Heating a plant-protein matrix for longer at a fixed temperature increases the lipid-oxidation markers monotonically (hydroperoxide accumulation).",
       "source": "trikusuma2018",
-      "status": "disagree",
+      "status": "agree",
       "reason": null,
       "identical_predictions": false,
       "mechanism_absent": false,
       "lane": "lipid",
       "values_ug_per_l": [
-        22.838630048173226,
-        88.59846418346781,
-        88.59846418347784
+        22.841069612929495,
+        90.33312677723386,
+        99.05057485280764
       ],
       "log10_steps": [
-        0.5887561439974625,
-        4.918070079421486e-14
+        0.5971306056890539,
+        0.04000995726968382
       ],
       "arms": [
         {
@@ -2612,7 +2609,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 22.838630048173226
+          "value_ug_per_l": 22.841069612929495
         },
         {
           "label": "10 min",
@@ -2637,7 +2634,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 88.59846418346781
+          "value_ug_per_l": 90.33312677723386
         },
         {
           "label": "60 min",
@@ -2662,7 +2659,7 @@
             "'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 88.59846418347784
+          "value_ug_per_l": 99.05057485280764
         }
       ]
     },
@@ -2698,10 +2695,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1416.9854272980704,
-        401.61122422064756
+        1416.985426944591,
+        401.6112212829904
       ],
-      "log10_ratio_B_over_A": -0.5475595418979762,
+      "log10_ratio_B_over_A": -0.5475595449663623,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2723,7 +2720,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1416.9854272980704
+          "value_ug_per_l": 1416.985426944591
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2745,7 +2742,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 401.61122422064756
+          "value_ug_per_l": 401.6112212829904
         }
       ]
     },
@@ -2766,7 +2763,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        10.125850625913463,
+        10.125850618765787,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -2792,7 +2789,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 10.125850625913463
+          "value_ug_per_l": 10.125850618765787
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2836,10 +2833,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        36.85233468056125,
-        33.48419590833837
+        36.852334845123934,
+        33.484195021407686
       ],
-      "log10_ratio_B_over_A": -0.0416251324041949,
+      "log10_ratio_B_over_A": -0.041625145847129535,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2861,7 +2858,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 36.85233468056125
+          "value_ug_per_l": 36.852334845123934
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2884,7 +2881,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 33.48419590833837
+          "value_ug_per_l": 33.484195021407686
         }
       ]
     },
@@ -3020,10 +3017,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        948.3112577606184,
-        1542.8921936147294
+        948.3112584070128,
+        1542.8921951989462
       ],
-      "log10_ratio_B_over_A": 0.21138467543553463,
+      "log10_ratio_B_over_A": 0.21138467558543445,
       "arms": [
         {
           "label": "glycine + D-fructose, 150 C 35 min",
@@ -3049,7 +3046,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 948.3112577606184
+          "value_ug_per_l": 948.3112584070128
         },
         {
           "label": "glycine + D-glucose, 150 C 35 min",
@@ -3075,7 +3072,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1542.8921936147294
+          "value_ug_per_l": 1542.8921951989462
         }
       ]
     },
@@ -3096,10 +3093,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2.086129663361175,
-        0.4051067294260533
+        2.0861294950187506,
+        0.4051067299277329
       ],
-      "log10_ratio_B_over_A": -0.7117718409755256,
+      "log10_ratio_B_over_A": -0.7117718053918494,
       "arms": [
         {
           "label": "glycine + D-glucose, 165 C 8 min",
@@ -3121,7 +3118,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.086129663361175
+          "value_ug_per_l": 2.0861294950187506
         },
         {
           "label": "glycine + D-fructose, 165 C 8 min",
@@ -3143,7 +3140,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.4051067294260533
+          "value_ug_per_l": 0.4051067299277329
         }
       ]
     },
@@ -3164,13 +3161,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        0.00031068988385295925,
-        6.919983974198593,
-        21.84005931457081
+        0.0003106898853517591,
+        6.919983974199177,
+        21.84005931294732
       ],
       "log10_steps": [
-        4.347777975948381,
-        0.4991487248306328
+        4.347777973853336,
+        0.49914872479831274
       ],
       "arms": [
         {
@@ -3199,7 +3196,7 @@
             "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 0.00031068988385295925
+          "value_ug_per_l": 0.0003106898853517591
         },
         {
           "label": "pH 7",
@@ -3227,7 +3224,7 @@
             "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 6.919983974198593
+          "value_ug_per_l": 6.919983974199177
         },
         {
           "label": "pH 9",
@@ -3255,7 +3252,7 @@
             "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 21.84005931457081
+          "value_ug_per_l": 21.84005931294732
         }
       ]
     },
@@ -3276,13 +3273,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2.1737625733160617,
-        2.085266360842528,
-        2.076468571643918
+        2.1737625478039915,
+        2.0852664273610246,
+        2.076468612472769
       ],
       "log10_steps": [
-        -0.0180505697098355,
-        -0.0018361750834734306
+        -0.018050550759115803,
+        -0.0018361803977793268
       ],
       "arms": [
         {
@@ -3305,7 +3302,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.1737625733160617
+          "value_ug_per_l": 2.1737625478039915
         },
         {
           "label": "pH 7",
@@ -3327,7 +3324,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.085266360842528
+          "value_ug_per_l": 2.0852664273610246
         },
         {
           "label": "pH 9",
@@ -3349,7 +3346,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.076468571643918
+          "value_ug_per_l": 2.076468612472769
         }
       ]
     },
@@ -3370,10 +3367,10 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        0.0015956357972458303,
-        4.374437059547041e-06
+        0.0015956357965561778,
+        4.374437259764368e-06
       ],
-      "log10_ratio_B_over_A": -2.5620115987359915,
+      "log10_ratio_B_over_A": -2.562011578670692,
       "arms": [
         {
           "label": "T4 profile, 160 C max",
@@ -3399,7 +3396,7 @@
             "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 0.0015956357972458303
+          "value_ug_per_l": 0.0015956357965561778
         },
         {
           "label": "T1 profile, 145 C max",
@@ -3425,7 +3422,7 @@
             "PYRAZINES (B18): the glyoxal Strecker constant was fitted with the B13 glyoxal sink in force (a dry-glass rate at 180 C, barrier fixed to zero), which removes 98 % of a fed 20 mM glyoxal in two hours at 100 C; with that sink zeroed the constant is 0.59 dex lower (the wave's information-only variant). A pyrazine answer inherits that conditionality until a wave measures the dicarbonyl sinks in water.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 4.374437059547041e-06
+          "value_ug_per_l": 4.374437259764368e-06
         }
       ]
     },
@@ -3446,13 +3443,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1102.8494810823595,
-        725.8781442258912,
-        650.7323863671855
+        1102.849479439638,
+        725.8781442377534,
+        650.7323863827894
       ],
       "log10_steps": [
-        -0.18165252293546788,
-        -0.047461298524128316
+        -0.18165252228147835,
+        -0.047461298520811594
       ],
       "arms": [
         {
@@ -3479,7 +3476,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1102.8494810823595
+          "value_ug_per_l": 1102.849479439638
         },
         {
           "label": "170 C",
@@ -3505,7 +3502,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 170 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 725.8781442258912
+          "value_ug_per_l": 725.8781442377534
         },
         {
           "label": "190 C",
@@ -3531,7 +3528,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 190 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 650.7323863671855
+          "value_ug_per_l": 650.7323863827894
         }
       ]
     },
@@ -3552,10 +3549,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2.085266360842528,
+        2.0852664273610246,
         0.0005508393144899871
       ],
-      "log10_ratio_B_over_A": -3.5781366081759476,
+      "log10_ratio_B_over_A": -3.578136622029629,
       "arms": [
         {
           "label": "roasted, 165 C 8 min",
@@ -3577,7 +3574,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2.085266360842528
+          "value_ug_per_l": 2.0852664273610246
         },
         {
           "label": "raw, 25 C",
@@ -3621,13 +3618,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        1303.24872923972,
-        1474.8571337336105,
-        760.0549176404119
+        1303.2487295614428,
+        1474.8571346107835,
+        760.0549177287609
       ],
       "log10_steps": [
-        0.05372264303978033,
-        -0.28790497988164565
+        0.053722643190866635,
+        -0.28790498008946036
       ],
       "arms": [
         {
@@ -3654,7 +3651,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1303.24872923972
+          "value_ug_per_l": 1303.2487295614428
         },
         {
           "label": "aw 0.65",
@@ -3679,7 +3676,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1474.8571337336105
+          "value_ug_per_l": 1474.8571346107835
         },
         {
           "label": "aw 0.95",
@@ -3704,7 +3701,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 760.0549176404119
+          "value_ug_per_l": 760.0549177287609
         }
       ]
     },
@@ -3725,7 +3722,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        12.486674952622895,
+        12.486674393381051,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -3752,7 +3749,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 12.486674952622895
+          "value_ug_per_l": 12.486674393381051
         },
         {
           "label": "hydrolysate + xylose, no cysteine",
@@ -3872,8 +3869,8 @@
       "mechanism_absent": true,
       "lane": "lipid",
       "values_ug_per_l": [
-        63.92022298491361,
-        63.92022298491361
+        65.29455402170618,
+        65.29455402170618
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -3900,7 +3897,7 @@
             "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 63.92022298491361
+          "value_ug_per_l": 65.29455402170618
         },
         {
           "label": "nonanal, soy isolate (oleic 23%)",
@@ -3925,7 +3922,7 @@
             "'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.",
             "pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED."
           ],
-          "value_ug_per_l": 63.92022298491361
+          "value_ug_per_l": 65.29455402170618
         }
       ]
     },
@@ -3946,13 +3943,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        0.7155924273488727,
-        1.6683850502305226,
-        1.4283360655903137
+        0.7155924273488757,
+        1.6683850559716762,
+        1.4283360662583608
       ],
       "log10_steps": [
-        0.36763055357963076,
-        -0.06746588734198862
+        0.36763055507409886,
+        -0.06746588863333469
       ],
       "arms": [
         {
@@ -3976,7 +3973,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 0.7155924273488727
+          "value_ug_per_l": 0.7155924273488757
         },
         {
           "label": "mid protein (asn 10 mM, glucose 7 mM)",
@@ -3999,7 +3996,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 1.6683850502305226
+          "value_ug_per_l": 1.6683850559716762
         },
         {
           "label": "high protein (asn 20 mM, glucose 3 mM)",
@@ -4022,7 +4019,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 1.4283360655903137
+          "value_ug_per_l": 1.4283360662583608
         }
       ]
     },
@@ -4043,13 +4040,13 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        7.639498358599185,
-        935.1132612715205,
-        4.372780790038081
+        7.639498358442173,
+        935.1132648590018,
+        4.372780686499424
       ],
       "log10_steps": [
-        2.0877993740494984,
-        -2.3301065095063396
+        2.0877993757245576,
+        -2.330106521455693
       ],
       "arms": [
         {
@@ -4073,7 +4070,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 7.639498358599185
+          "value_ug_per_l": 7.639498358442173
         },
         {
           "label": "170 C",
@@ -4096,7 +4093,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 935.1132612715205
+          "value_ug_per_l": 935.1132648590018
         },
         {
           "label": "210 C",
@@ -4120,7 +4117,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.40 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x0.72 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 4.372780790038081
+          "value_ug_per_l": 4.372780686499424
         }
       ]
     },
@@ -4141,13 +4138,13 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        53.216727278687785,
-        1102.8494810823595,
-        1542.8921936147294
+        53.21672746568333,
+        1102.849479439638,
+        1542.8921951989462
       ],
       "log10_steps": [
-        1.3164680803756,
-        0.14581933852082532
+        1.3164680782026623,
+        0.14581933961364427
       ],
       "arms": [
         {
@@ -4174,7 +4171,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 53.216727278687785
+          "value_ug_per_l": 53.21672746568333
         },
         {
           "label": "25 min",
@@ -4200,7 +4197,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1102.8494810823595
+          "value_ug_per_l": 1102.849479439638
         },
         {
           "label": "35 min",
@@ -4226,7 +4223,7 @@
             "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 150 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. The furanic extraction dossier, sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
             "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. The furanic extraction dossier's declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
           ],
-          "value_ug_per_l": 1542.8921936147294
+          "value_ug_per_l": 1542.8921951989462
         }
       ]
     },
@@ -4324,10 +4321,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1670.6580707711169,
-        2290.1219910992336
+        1670.6580669629404,
+        2290.1219869459574
       ],
-      "log10_ratio_B_over_A": 0.1369710440520412,
+      "log10_ratio_B_over_A": 0.13697104425437281,
       "arms": [
         {
           "label": "cysteine + D-fructose, 145 C 20 min pH 5.0",
@@ -4350,7 +4347,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1670.6580707711169
+          "value_ug_per_l": 1670.6580669629404
         },
         {
           "label": "cysteine + D-glucose, 145 C 20 min pH 5.0",
@@ -4373,7 +4370,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2290.1219910992336
+          "value_ug_per_l": 2290.1219869459574
         }
       ]
     },
@@ -4394,10 +4391,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        0.0009112628629569003,
-        0.29713289772513696
+        0.0009112628827629032,
+        0.29713291703662453
       ],
-      "log10_ratio_B_over_A": 2.513307066673207,
+      "log10_ratio_B_over_A": 2.513307085459954,
       "arms": [
         {
           "label": "cysteine + D-ribose, dry-heated 180 C 6 min",
@@ -4419,7 +4416,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.0009112628629569003
+          "value_ug_per_l": 0.0009112628827629032
         },
         {
           "label": "cysteine + D-glucose, dry-heated 180 C 6 min",
@@ -4442,7 +4439,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.29713289772513696
+          "value_ug_per_l": 0.29713291703662453
         }
       ]
     },
@@ -4479,10 +4476,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        189.9472843717453,
-        504.6312534843261
+        189.947284007735,
+        504.6312540460556
       ],
-      "log10_ratio_B_over_A": 0.4243410553728695,
+      "log10_ratio_B_over_A": 0.4243410566885749,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -4504,7 +4501,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 189.9472843717453
+          "value_ug_per_l": 189.947284007735
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -4526,7 +4523,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.6312534843261
+          "value_ug_per_l": 504.6312540460556
         }
       ]
     },
@@ -4547,10 +4544,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1360.2421431199275,
-        1070.3831910792574
+        1360.2421435994654,
+        1070.3831632400893
       ],
-      "log10_ratio_B_over_A": -0.10407694559181055,
+      "log10_ratio_B_over_A": -0.10407695704030763,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -4572,7 +4569,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1360.2421431199275
+          "value_ug_per_l": 1360.2421435994654
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -4594,7 +4591,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1070.3831910792574
+          "value_ug_per_l": 1070.3831632400893
         }
       ]
     },
@@ -4615,8 +4612,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        504.6312534843261,
-        504.6312534843261
+        504.6312540460556,
+        504.6312540460556
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -4640,7 +4637,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.6312534843261
+          "value_ug_per_l": 504.6312540460556
         },
         {
           "label": "FFT, cysteine + ribose, phosphate pH 5.6",
@@ -4662,7 +4659,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.6312534843261
+          "value_ug_per_l": 504.6312540460556
         }
       ]
     },
@@ -4834,7 +4831,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2352.9010262022193
+          "value_ug_per_l": 2352.90103564171
         }
       ]
     },
@@ -4981,15 +4978,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        79.50988231686485,
-        120.51590801983548,
-        162.63891810348846,
-        196.77743951612374
+        79.50988233711838,
+        120.51590813598813,
+        162.6389182721522,
+        196.77743831731934
       ],
       "log10_steps": [
-        0.1806232666220923,
-        0.13018009937481398,
-        0.08275082854364314
+        0.18062326693003547,
+        0.13018009940662562,
+        0.08275082544745854
       ],
       "arms": [
         {
@@ -5012,7 +5009,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 79.50988231686485
+          "value_ug_per_l": 79.50988233711838
         },
         {
           "label": "110 C / 2 h",
@@ -5034,7 +5031,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 120.51590801983548
+          "value_ug_per_l": 120.51590813598813
         },
         {
           "label": "120 C / 1 h",
@@ -5056,7 +5053,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 162.63891810348846
+          "value_ug_per_l": 162.6389182721522
         },
         {
           "label": "130 C / 0.5 h",
@@ -5078,7 +5075,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 196.77743951612374
+          "value_ug_per_l": 196.77743831731934
         }
       ]
     },
@@ -5099,10 +5096,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1212.382688144228,
-        2301.377575184901
+        1212.3826961731284,
+        2301.3775755239194
       ],
-      "log10_ratio_B_over_A": 0.27834815061499146,
+      "log10_ratio_B_over_A": 0.27834814780288997,
       "arms": [
         {
           "label": "120 C / 1 h",
@@ -5124,7 +5121,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1212.382688144228
+          "value_ug_per_l": 1212.3826961731284
         },
         {
           "label": "100 C / 4 h",
@@ -5146,7 +5143,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2301.377575184901
+          "value_ug_per_l": 2301.3775755239194
         }
       ]
     },
@@ -5167,17 +5164,17 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        67.43350853086407,
-        573.7319257479735,
-        1465.1946062901648,
-        2709.4320314404245,
-        4085.7492998649477
+        67.43350874368659,
+        573.7319259917306,
+        1465.194608972904,
+        2709.4320315003542,
+        4085.7493006600316
       ],
       "log10_steps": [
-        0.9298332608169018,
-        0.40718629405954515,
-        0.26698294955404195,
-        0.17839345414368515
+        0.9298332596307685,
+        0.4071862946702135,
+        0.26698294876846446,
+        0.17839345421859243
       ],
       "arms": [
         {
@@ -5202,7 +5199,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 67.43350853086407
+          "value_ug_per_l": 67.43350874368659
         },
         {
           "label": "95 C / 90 min",
@@ -5226,7 +5223,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 573.7319257479735
+          "value_ug_per_l": 573.7319259917306
         },
         {
           "label": "105 C / 100 min",
@@ -5250,7 +5247,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1465.1946062901648
+          "value_ug_per_l": 1465.194608972904
         },
         {
           "label": "115 C / 110 min",
@@ -5274,7 +5271,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2709.4320314404245
+          "value_ug_per_l": 2709.4320315003542
         },
         {
           "label": "125 C / 120 min",
@@ -5298,7 +5295,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 4085.7492998649477
+          "value_ug_per_l": 4085.7493006600316
         }
       ],
       "unstated_input_sweep": {
@@ -5332,17 +5329,17 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        148.8222424677372,
-        3633.439279415473,
-        23197.9163998139,
-        35509.179104652176,
-        22886.211233295417
+        148.8222389195202,
+        3633.439274511656,
+        23197.916411615453,
+        35509.17909912193,
+        22886.21123154382
       ],
       "log10_steps": [
-        1.3876500625926853,
-        0.8051310721644676,
-        0.18489165347079117,
-        -0.19076673043120793
+        1.3876500723609868,
+        0.8051310729715466,
+        0.18489165318221354,
+        -0.19076673039680914
       ],
       "arms": [
         {
@@ -5367,7 +5364,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 148.8222424677372
+          "value_ug_per_l": 148.8222389195202
         },
         {
           "label": "95 C / 90 min",
@@ -5391,7 +5388,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3633.439279415473
+          "value_ug_per_l": 3633.439274511656
         },
         {
           "label": "105 C / 100 min",
@@ -5415,7 +5412,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 23197.9163998139
+          "value_ug_per_l": 23197.916411615453
         },
         {
           "label": "115 C / 110 min",
@@ -5439,7 +5436,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 35509.179104652176
+          "value_ug_per_l": 35509.17909912193
         },
         {
           "label": "125 C / 120 min",
@@ -5463,7 +5460,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 22886.211233295417
+          "value_ug_per_l": 22886.21123154382
         }
       ],
       "unstated_input_sweep": {
@@ -5514,8 +5511,8 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        639.5739340634659,
-        639.5739340634659
+        639.5739338955323,
+        639.5739338955323
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -5540,7 +5537,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.88 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 639.5739340634659
+          "value_ug_per_l": 639.5739338955323
         },
         {
           "label": "aw 0.99",
@@ -5563,7 +5560,7 @@
             "WATER ACTIVITY (B14/B15): a_w 0.99 is inside the measured window 0.34-0.99; the acrylamide lane carries a DECLARED FLAT formation term on k_int1_acr (multiplier 1; envelope band 0.41-1.39) and a declared elimination shape on k_acr_dp (x1.00 here; minimum at a_w 0.82). Source: De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.65 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.76 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 639.5739340634659
+          "value_ug_per_l": 639.5739338955323
         }
       ]
     },
@@ -5584,10 +5581,10 @@
       "mechanism_absent": false,
       "lane": "acrylamide",
       "values_ug_per_l": [
-        53102.885187370615,
-        27317.093000175697
+        53102.885203261285,
+        27317.093000176443
       ],
-      "log10_ratio_B_over_A": -0.28868363661746055,
+      "log10_ratio_B_over_A": -0.2886836367474084,
       "arms": [
         {
           "label": "pH 8",
@@ -5610,7 +5607,7 @@
             "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x1.91 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x1.51 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 53102.885187370615
+          "value_ug_per_l": 53102.885203261285
         },
         {
           "label": "pH 4",
@@ -5633,7 +5630,7 @@
             "WATER ACTIVITY (B14/B15): a_w 1.00 is OUTSIDE the measured window 0.34-0.99 (De Vleeschouwer et al. 2008 JAFC 56:6460 Table 2 (a_w 0.88-0.99) and 2007 Biotechnol. Prog. 23:722 Table 2 (a_w 0.34-0.92); equimolar Asn-Glc powders, 120-200 C, T_ref 160 C). No a_w term applies here: the value is recorded and changes no rate, and a comparison that moves a_w across this boundary is refused.",
             "pH (B15): the acrylamide lane carries a DECLARED INITIAL-pH factor: x0.22 on k_asn_glc (10^(0.235 (pH - 6.8)), band 0.114-0.281) and x0.38 on k_acr_dp (10^(0.149 (pH - 6.8)), band 0.116-0.155), measured window pH 4-8. The source indexes its constants to the INITIAL pH of a pot that drifts by up to two units while heating; this lane has no pH trajectory. Source: De Vleeschouwer et al. 2006 JAFC 54:7847 Table 1 (0.1 M Asn + Glc, 0.05 M phosphate, initial pH 4 / 6 / 8, 120-200 C): ln k linear in pH, slopes 0.5414 +/- 0.106 (formation) and 0.3442 +/- 0.013 (elimination) per pH unit = 0.235 / 0.149 decades."
           ],
-          "value_ug_per_l": 27317.093000175697
+          "value_ug_per_l": 27317.093000176443
         }
       ]
     },
@@ -5658,17 +5655,17 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        15380.839460518793,
-        12.013602559791872,
-        978.4370247577256,
-        38.09172468004815,
-        0.02848224598686646
+        15380.839477261801,
+        12.013602588529048,
+        978.4370059701646,
+        38.091724734604604,
+        0.02848224605619194
       ],
       "log10_steps": [
-        -3.1073067788849484,
-        1.910859618058881,
-        -1.4097022416842782,
-        -3.126256403767396
+        -3.1073067783188497,
+        1.9108596086808747,
+        -1.4097022327231137,
+        -3.1262564033323414
       ],
       "predicted_order": [
         "3-deoxyglucosone",
@@ -5697,7 +5694,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 15380.839460518793
+          "value_ug_per_l": 15380.839477261801
         },
         {
           "label": "glucose alone, 105 C, 6 h :: glucosone",
@@ -5719,7 +5716,7 @@
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 12.013602559791872
+          "value_ug_per_l": 12.013602588529048
         },
         {
           "label": "glucose alone, 105 C, 6 h :: methylglyoxal",
@@ -5740,7 +5737,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 978.4370247577256
+          "value_ug_per_l": 978.4370059701646
         },
         {
           "label": "glucose alone, 105 C, 6 h :: glyoxal",
@@ -5762,7 +5759,7 @@
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 38.09172468004815
+          "value_ug_per_l": 38.091724734604604
         },
         {
           "label": "glucose alone, 105 C, 6 h :: diacetyl",
@@ -5783,7 +5780,7 @@
           "warnings": [
             "pH TERM (B12): pH 6.5 scales the three Amadori-decay steps by x0.62 (10^(0.69 per pH unit); declared band 0.53-0.77; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH."
           ],
-          "value_ug_per_l": 0.02848224598686646
+          "value_ug_per_l": 0.02848224605619194
         }
       ]
     },
@@ -5825,15 +5822,15 @@
       "mechanism_absent": false,
       "lane": "trunk",
       "values_ug_per_l": [
-        65473.06947856041,
-        119.05906453495082,
-        160.79393493292892,
-        2549.9851902331848
+        65473.069478563615,
+        119.05906453604986,
+        160.79393493253662,
+        2549.9851902328087
       ],
       "log10_steps": [
-        -2.740300235883144,
-        0.13050719743819567,
-        1.2002679948021102
+        -2.7403002358791566,
+        0.13050719743312705,
+        1.2002679948031056
       ],
       "predicted_order": [
         "3-deoxyglucosone",
@@ -5862,7 +5859,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 65473.06947856041
+          "value_ug_per_l": 65473.069478563615
         },
         {
           "label": "10 % glucose, 121 C, 18 min :: glucosone",
@@ -5885,7 +5882,7 @@
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 119.05906453495082
+          "value_ug_per_l": 119.05906453604986
         },
         {
           "label": "10 % glucose, 121 C, 18 min :: glyoxal",
@@ -5908,7 +5905,7 @@
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast.",
             "GLYOXAL SUPPLY (B21): the glucosone that makes glyoxal comes from the Amadori compound at a rate fitted on one laboratory's milk constants (lactulosyl-lysine, 110-140 C) and carried to fructosyl-glycine in water as a declared transfer (+/- 0.5 dex on every glyoxal, glucosone and pyrazine answer); the glucosone -> glyoxal barrier is that laboratory's, consistent with zero; the dry-glass glyoxal sink (B13) is unchanged. The route drains the Amadori compound at the size of the trunk's own Amadori -> 3-deoxyglucosone step, and Martins 2005's Amadori series wants a fifth less of that drain (median error 0.035 -> 0.093 dex): a joint refit is the next pre-registration on this route."
           ],
-          "value_ug_per_l": 160.79393493292892
+          "value_ug_per_l": 160.79393493253662
         },
         {
           "label": "10 % glucose, 121 C, 18 min :: methylglyoxal",
@@ -5930,7 +5927,7 @@
             "pH TERM (B12): pH 5 scales the three Amadori-decay steps by x0.06 (10^(0.69 per pH unit); declared band 0.02-0.22; Martins & van Boekel 2003, Carbohydr. Res. 338:1665 (Part II), Table 3: DFG degradation constants at 100 / 120 C x pH 5.5 / 6.8, 95 % HPD (martins2003_extraction.md sec. 5)). The amine-free caramelisation entries and every downstream step carry no pH term: no source contrasts them across pH.",
             "pH 5 is outside the measured window 5.5-6.8: the factor is an extrapolation of a two-point contrast."
           ],
-          "value_ug_per_l": 2549.9851902331848
+          "value_ug_per_l": 2549.9851902328087
         }
       ]
     },
@@ -5971,7 +5968,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.00018954336784269592
+          "value_ug_per_l": 0.00018954336333241057
         },
         {
           "label": "40 min",
@@ -6062,7 +6059,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3.884135499265772e-05
+          "value_ug_per_l": 3.8841354442346454e-05
         },
         {
           "label": "60 min",
@@ -6126,7 +6123,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.5942768357312429
+          "value_ug_per_l": 0.594276804084325
         },
         {
           "label": "60 min",
@@ -6170,15 +6167,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        65.89899116748026,
-        130.31141232414888,
-        36.37447244084731,
-        16.241426952258635
+        65.89899191562768,
+        130.3114119104101,
+        36.374472199259415,
+        16.241426622243562
       ],
       "log10_steps": [
-        0.29610368559418393,
-        -0.554185748498768,
-        -0.3501725200529989
+        0.2961036792847789,
+        -0.5541857500043313,
+        -0.3501725259931277
       ],
       "arms": [
         {
@@ -6204,7 +6201,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 65.89899116748026
+          "value_ug_per_l": 65.89899191562768
         },
         {
           "label": "60 min",
@@ -6229,7 +6226,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 130.31141232414888
+          "value_ug_per_l": 130.3114119104101
         },
         {
           "label": "360 min",
@@ -6254,7 +6251,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 36.37447244084731
+          "value_ug_per_l": 36.374472199259415
         },
         {
           "label": "720 min",
@@ -6279,7 +6276,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 16.241426952258635
+          "value_ug_per_l": 16.241426622243562
         }
       ]
     },
@@ -6300,13 +6297,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        185.2039740620819,
-        498.39788356002435,
-        390.81921485966797
+        185.20397401360364,
+        498.39788249313295,
+        390.8192124122134
       ],
       "log10_steps": [
-        0.4299258879974416,
-        -0.10560028151055369
+        0.4299258871814518,
+        -0.1056002833005975
       ],
       "arms": [
         {
@@ -6332,7 +6329,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 185.2039740620819
+          "value_ug_per_l": 185.20397401360364
         },
         {
           "label": "90 min",
@@ -6357,7 +6354,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 498.39788356002435
+          "value_ug_per_l": 498.39788249313295
         },
         {
           "label": "180 min",
@@ -6382,7 +6379,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 390.81921485966797
+          "value_ug_per_l": 390.8192124122134
         }
       ]
     },
@@ -6403,13 +6400,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2744.2670140394025,
-        20082.945878280298,
-        35674.86669286868
+        2744.267015647389,
+        20082.94585977819,
+        35674.86667718753
       ],
       "log10_steps": [
-        0.8644010524309544,
-        0.24953494107354485
+        0.8644010517763734,
+        0.24953494128275633
       ],
       "arms": [
         {
@@ -6435,7 +6432,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2744.2670140394025
+          "value_ug_per_l": 2744.267015647389
         },
         {
           "label": "90 min",
@@ -6460,7 +6457,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 20082.945878280298
+          "value_ug_per_l": 20082.94585977819
         },
         {
           "label": "180 min",
@@ -6485,7 +6482,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 35674.86669286868
+          "value_ug_per_l": 35674.86667718753
         }
       ]
     },
@@ -6506,15 +6503,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2512.1165304019632,
-        692.818231003783,
-        32.69746406932266,
-        2.773231914848505
+        2512.1165300384096,
+        692.8182314614528,
+        32.69746328105253,
+        2.7732319946855783
       ],
       "log10_steps": [
-        -0.5594204739974074,
-        -1.3261052360899992,
-        -1.0715278817165197
+        -0.5594204736476651,
+        -1.3261052468468575,
+        -1.071527858743884
       ],
       "arms": [
         {
@@ -6540,7 +6537,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2512.1165304019632
+          "value_ug_per_l": 2512.1165300384096
         },
         {
           "label": "60 min",
@@ -6565,7 +6562,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 692.818231003783
+          "value_ug_per_l": 692.8182314614528
         },
         {
           "label": "120 min",
@@ -6590,7 +6587,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 32.69746406932266
+          "value_ug_per_l": 32.69746328105253
         },
         {
           "label": "180 min",
@@ -6615,7 +6612,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2.773231914848505
+          "value_ug_per_l": 2.7732319946855783
         }
       ]
     },
@@ -6636,15 +6633,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        17184.659313928885,
-        7047.711594702134,
-        731.6088514875102,
-        61.50086385865791
+        17184.65930060098,
+        7047.711595731859,
+        731.6088479772098,
+        61.50086462090225
       ],
       "log10_steps": [
-        -0.3870928030253619,
-        -0.9837691724221687,
-        -1.0753977351755932
+        -0.38709280262508233,
+        -0.9837691745693917,
+        -1.0753977277091595
       ],
       "arms": [
         {
@@ -6670,7 +6667,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 17184.659313928885
+          "value_ug_per_l": 17184.65930060098
         },
         {
           "label": "60 min",
@@ -6695,7 +6692,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 7047.711594702134
+          "value_ug_per_l": 7047.711595731859
         },
         {
           "label": "120 min",
@@ -6720,7 +6717,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 731.6088514875102
+          "value_ug_per_l": 731.6088479772098
         },
         {
           "label": "180 min",
@@ -6745,7 +6742,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 61.50086385865791
+          "value_ug_per_l": 61.50086462090225
         }
       ]
     },
@@ -6766,10 +6763,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        4287.033796639415,
-        9105.213959247581
+        4287.033793642432,
+        9105.213857005952
       ],
-      "log10_ratio_B_over_A": 0.327133248272453,
+      "log10_ratio_B_over_A": 0.32713324369940616,
       "arms": [
         {
           "label": "pH 4.5",
@@ -6794,7 +6791,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 4287.033796639415
+          "value_ug_per_l": 4287.033793642432
         },
         {
           "label": "pH 6.5",
@@ -6819,7 +6816,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 9105.213959247581
+          "value_ug_per_l": 9105.213857005952
         }
       ]
     },
@@ -6840,15 +6837,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2461.7464500376914,
-        309.60935753505294,
-        0.018935370188856923,
-        0.10380427294005735
+        2461.74641691535,
+        309.6093586358135,
+        0.018935370233831118,
+        0.10380427288133444
       ],
       "log10_steps": [
-        -0.9004292421295237,
-        -4.2135402781366205,
-        0.7389414308801435
+        -0.9004292347421159,
+        -4.213540278649165,
+        0.7389414296029485
       ],
       "arms": [
         {
@@ -6875,7 +6872,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2461.7464500376914
+          "value_ug_per_l": 2461.74641691535
         },
         {
           "label": "pH 5",
@@ -6901,7 +6898,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 309.60935753505294
+          "value_ug_per_l": 309.6093586358135
         },
         {
           "label": "pH 6",
@@ -6927,7 +6924,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.018935370188856923
+          "value_ug_per_l": 0.018935370233831118
         },
         {
           "label": "pH 7",
@@ -6953,7 +6950,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.10380427294005735
+          "value_ug_per_l": 0.10380427288133444
         }
       ]
     },
@@ -6974,13 +6971,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1028.819936778716,
-        830.3798209836541,
-        89.92511954975842
+        1028.8199323951742,
+        830.3798204455607,
+        89.92511954922506
       ],
       "log10_steps": [
-        -0.09306258468406844,
-        -0.9653957630072802
+        -0.093062583115076,
+        -0.9653957627284294
       ],
       "arms": [
         {
@@ -7007,7 +7004,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1028.819936778716
+          "value_ug_per_l": 1028.8199323951742
         },
         {
           "label": "pH 5",
@@ -7033,7 +7030,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 830.3798209836541
+          "value_ug_per_l": 830.3798204455607
         },
         {
           "label": "pH 6",
@@ -7059,7 +7056,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 89.92511954975842
+          "value_ug_per_l": 89.92511954922506
         }
       ]
     },
@@ -7080,10 +7077,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        403.83102217503915,
-        373.7814424990205
+        403.831023735808,
+        373.78144252591875
       ],
-      "log10_ratio_B_over_A": -0.033581942532084914,
+      "log10_ratio_B_over_A": -0.03358194417933923,
       "arms": [
         {
           "label": "pH 4.2",
@@ -7108,7 +7105,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 403.83102217503915
+          "value_ug_per_l": 403.831023735808
         },
         {
           "label": "pH 5.6",
@@ -7133,7 +7130,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 373.7814424990205
+          "value_ug_per_l": 373.78144252591875
         }
       ]
     },
@@ -7154,10 +7151,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1465.9143564386766,
-        183.3920100081015
+        1465.9143842373687,
+        183.39200963553387
       ],
-      "log10_ratio_B_over_A": -0.9027281876493041,
+      "log10_ratio_B_over_A": -0.902728196767281,
       "arms": [
         {
           "label": "pH 4.2",
@@ -7182,7 +7179,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1465.9143564386766
+          "value_ug_per_l": 1465.9143842373687
         },
         {
           "label": "pH 5.6",
@@ -7207,7 +7204,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 183.3920100081015
+          "value_ug_per_l": 183.39200963553387
         }
       ]
     }

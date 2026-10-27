@@ -43,10 +43,10 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "4606458cd010df200db61965b9bc83b29ee38970",
-      "short": "4606458c",
-      "branch": "provenance-census-trace",
-      "dirty": false
+      "commit": "c7fb4d2b3eb0c6412fea42f319a74f0b2998a50e",
+      "short": "c7fb4d2b",
+      "branch": "b47-sulfur-objective-corrected",
+      "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -257,7 +257,7 @@
       "worst_fold_error": 9631.58938385354,
       "best_fold_error": 1.0101717815321325,
       "median_abs_log10_error": 0.9613681301660187,
-      "geometric_mean_fold": 16.48951447823583
+      "geometric_mean_fold": 16.461099054912708
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -275,11 +275,11 @@
         "within_band_rate": 0.0,
         "fold_summary": {
           "n": 4,
-          "median_fold_error": 6.173109373877999,
+          "median_fold_error": 6.034071431330844,
           "worst_fold_error": 365.6087699378835,
           "best_fold_error": 3.113638410203398,
-          "median_abs_log10_error": 0.7510510664017771,
-          "geometric_mean_fold": 13.79103080039818
+          "median_abs_log10_error": 0.7342102875440413,
+          "geometric_mean_fold": 13.526216641323748
         }
       },
       "maillard_path_holdout": {
@@ -311,7 +311,7 @@
           "worst_fold_error": 9631.58938385354,
           "best_fold_error": 1.5378727566967958,
           "median_abs_log10_error": 0.48502661767985566,
-          "geometric_mean_fold": 10.400219276708315
+          "geometric_mean_fold": 10.400158822779533
         }
       }
     },
@@ -329,7 +329,7 @@
           "worst_fold_error": 476.76190446240724,
           "best_fold_error": 1.0101717815321325,
           "median_abs_log10_error": 0.9691774266124613,
-          "geometric_mean_fold": 18.810397569540932
+          "geometric_mean_fold": 18.7687627476147
         }
       },
       "predictive": {
@@ -345,7 +345,7 @@
           "worst_fold_error": 9631.58938385354,
           "best_fold_error": 1.5378727566967958,
           "median_abs_log10_error": 0.48502661767985566,
-          "geometric_mean_fold": 10.400219276708315
+          "geometric_mean_fold": 10.400158822779533
         }
       }
     },
@@ -379,7 +379,7 @@
           "worst_fold_error": 365.6087699378835,
           "best_fold_error": 1.5378727566967958,
           "median_abs_log10_error": 0.4481421197003723,
-          "geometric_mean_fold": 5.161352022197686
+          "geometric_mean_fold": 5.1115207742511775
         }
       },
       "sulfur": {
@@ -428,7 +428,7 @@
         "worst_fold_error": 9631.58938385354,
         "best_fold_error": 1.0101717815321325,
         "median_abs_log10_error": 0.9613681301660187,
-        "geometric_mean_fold": 16.48951447823583
+        "geometric_mean_fold": 16.461099054912708
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
@@ -445,7 +445,7 @@
         "worst_fold_error": 9631.58938385354,
         "best_fold_error": 1.0101717815321325,
         "median_abs_log10_error": 0.9651021224781401,
-        "geometric_mean_fold": 17.24180864988661
+        "geometric_mean_fold": 17.21142216869188
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -471,7 +471,7 @@
       "total": 31
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 8.7
+    "wall_seconds": 10.4
   },
   "benchmarks": [
     {
@@ -1614,14 +1614,14 @@
           "target_unit": "ppb",
           "measured": 782.0,
           "measured_ppb": 782.0,
-          "predicted": 353.83863004817323,
-          "fold_error": 2.210046992024401,
-          "abs_log10_error": 0.3444015081466123,
+          "predicted": 353.8410696129295,
+          "fold_error": 2.2100317548085586,
+          "abs_log10_error": 0.3443985138837772,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            3.623419826436667,
-            34553.48320415125
+            3.6233712216475196,
+            34554.423183803105
           ],
           "measured_within_interval": true,
           "lane": "lipid",
@@ -1635,10 +1635,10 @@
           "shared_with": null,
           "in_core_fit": false,
           "carried_declared_ug_per_l": 331.0,
-          "declared_share_of_prediction": 0.9354546730947272,
-          "formed_predicted": 22.83863004817323,
+          "declared_share_of_prediction": 0.9354482235826508,
+          "formed_predicted": 22.841069612929516,
           "formed_measured": 451.0,
-          "fold_error_formed_only": 19.747243991811747
+          "fold_error_formed_only": 19.745134866394565
         },
         {
           "compound": "2-pentylfuran",
@@ -1708,14 +1708,14 @@
           "target_unit": "ppb",
           "measured": 46.9,
           "measured_ppb": 46.9,
-          "predicted": 75.95490029354261,
-          "fold_error": 1.6195074689454714,
-          "abs_log10_error": 0.20938295525717074,
+          "predicted": 75.95100898244581,
+          "fold_error": 1.6194244985596122,
+          "abs_log10_error": 0.20936070497151524,
           "within_band": true,
           "within_contract_ratio": true,
           "interval_ug_per_L": [
-            0.7778022755773536,
-            7417.240936097324
+            0.7777700105098357,
+            7416.788623246377
           ],
           "measured_within_interval": true,
           "lane": "lipid",
@@ -1729,10 +1729,10 @@
           "shared_with": null,
           "in_core_fit": false,
           "carried_declared_ug_per_l": 0.06,
-          "declared_share_of_prediction": 0.0007899424496394338,
-          "formed_predicted": 75.8949002935426,
+          "declared_share_of_prediction": 0.000789982921936791,
+          "formed_predicted": 75.89100898244581,
           "formed_measured": 46.839999999999996,
-          "fold_error_formed_only": 1.6203010310320796
+          "fold_error_formed_only": 1.62021795436477
         }
       ],
       "refused_compounds": [
@@ -1771,8 +1771,8 @@
       "total_compounds": 7,
       "coverage": 0.5714285714285714,
       "max_ratio": 2.5293915494522987,
-      "mean_abs_log10_error": 0.2859302325460679,
-      "pearson_r_log10": 0.9135787128622884,
+      "mean_abs_log10_error": 0.28592392140894524,
+      "pearson_r_log10": 0.913586869067831,
       "ranking_status": "pass",
       "scale_status": "fail",
       "overall_status": "coverage-gap",
@@ -4173,14 +4173,14 @@
           "target_unit": "ppb",
           "measured": 324.0,
           "measured_ppb": 324.0,
-          "predicted": 88.59846418347784,
-          "fold_error": 3.656948266383388,
-          "abs_log10_error": 0.5631188165635999,
+          "predicted": 95.64959133968401,
+          "fold_error": 3.3873641848543454,
+          "abs_log10_error": 0.5298618913508704,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            4.0541729474831,
-            1936.1995547191016
+            4.373295255484657,
+            2091.9795689474117
           ],
           "measured_within_interval": true,
           "lane": "lipid",
@@ -4235,8 +4235,8 @@
       "matched_compounds": 1,
       "total_compounds": 4,
       "coverage": 0.25,
-      "max_ratio": 3.656948266383388,
-      "mean_abs_log10_error": 0.5631188165635999,
+      "max_ratio": 3.3873641848543454,
+      "mean_abs_log10_error": 0.5298618913508704,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4245,8 +4245,8 @@
       "strict_ready": false,
       "blocking_issues": [
         "coverage 25.0% < 100%",
-        "max ratio 3.657 > 2.00",
-        "mean |log10 ratio| 0.563 > 0.120"
+        "max ratio 3.387 > 2.00",
+        "mean |log10 ratio| 0.530 > 0.120"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -4328,14 +4328,14 @@
           "target_unit": "ppb",
           "measured": 605.6,
           "measured_ppb": 605.6,
-          "predicted": 69.69514889635887,
-          "fold_error": 8.68927048137261,
-          "abs_log10_error": 0.9389833162399543,
+          "predicted": 69.76332682553394,
+          "fold_error": 8.680778677807343,
+          "abs_log10_error": 0.9385586837372123,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            2.1321269354786883,
-            2278.201029618851
+            2.1337619115029045,
+            2280.911353571904
           ],
           "measured_within_interval": true,
           "lane": "lipid",
@@ -4403,8 +4403,8 @@
       "total_compounds": 4,
       "coverage": 0.75,
       "max_ratio": 365.6087699378835,
-      "mean_abs_log10_error": 1.33175603235736,
-      "pearson_r_log10": -0.29978377989851146,
+      "mean_abs_log10_error": 1.3316144881897796,
+      "pearson_r_log10": -0.2995877720932698,
       "ranking_status": "fail",
       "scale_status": "fail",
       "overall_status": "coverage-gap",

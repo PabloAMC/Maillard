@@ -25,10 +25,10 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.35e+03 | 1.62e+03 | 2.21e+03 | 2.8e+03 | no | 0.238 | no (extraction) | sulfur | predictive [in core fit] |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 830.643 | 44.653 | 817.535 | 8.22e+03 | yes | 2.265 | no (extraction) | sulfur | predictive |
 | hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 730.638 | 389.307 | 687.917 | 1.14e+03 | no | 0.465 | no (extraction) | sulfur | predictive |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.839 | 67.926 | 363.920 | 2.25e+03 | yes | 1.521 | yes (headspace) | lipid | predictive |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.841 | 67.927 | 363.921 | 2.25e+03 | yes | 1.521 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |
-| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.955 | 3.174 | 69.381 | 1.24e+03 | yes | 2.593 | yes (headspace) | lipid | predictive |
+| pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.951 | 3.174 | 69.377 | 1.24e+03 | yes | 2.593 | yes (headspace) | lipid | predictive |
 | resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.664 | 1.483 | 9.627 | 71.258 | no | 1.682 | yes (headspace) | sulfur | predictive |
 | thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 48.366 | 95.838 | 214.196 | no | 0.646 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.996 | 199.516 | 565.424 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
@@ -62,9 +62,9 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 363.445 | 47.165 | 256.477 | 1.21e+03 | no | 1.408 | no (extraction) | sulfur | external_holdout |
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.534 | 51.181 | 94.363 | 202.903 | no | 0.598 | no (extraction) | sulfur | external_holdout |
 | mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 47.750 | 209.981 | 1e+03 | no | 1.323 | no (extraction) | sulfur | external_holdout |
-| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 88.598 | 7.478 | 88.755 | 1.29e+03 | yes | 2.237 | yes (headspace) | lipid | external_holdout |
+| external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 95.650 | 8.070 | 95.829 | 1.39e+03 | yes | 2.237 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 1.115 | 13.019 | 171.111 | no | 2.186 | yes (headspace) | lipid | external_holdout |
-| external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 69.695 | 5.052 | 58.967 | 775.022 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
+| external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 69.763 | 5.056 | 59.007 | 775.564 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | nonanal | ppb | 74.370 | 23.885 | 1.732 | 20.209 | 265.608 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
 
 ## Refused rows
