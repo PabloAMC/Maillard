@@ -2606,9 +2606,47 @@ record under `data/lit/` or `results/literature/`), never a trace.
 - [ ] **Not audited yet:** the ~54 sulfur fit rows typed into `generate_kinetic_core_b2_3_fit.py` (and the other
   fit generators' inline rows) carry no verification marker; the 92-claim directional panel; the 26 matrix
   measured-ratio constants (several cite the k2 synthesis dossier rather than the paper).
-- [ ] **Residual weak records, no effect on predictions:** `arrhenius_params.yml` entries with `audit_flag`
-  (read only by the prefactor-audit report) and about ten `computational_priors.json` records tagged
-  `unanchored_no_doi_field` (side modules only). Same treatment as above is possible; owner's call.
+- [x] **Residual weak records deleted (owner, 2026-10-27: "Delete them too"):** 37 `computational_priors.json`
+  records tagged `unanchored_no_doi_field` (many restated sources already found fabricated); eleven of twelve
+  `arrhenius_params.yml` families (no source for the value, or, for schiff_condensation, none for the
+  prefactor), with its false "verified" header replaced; 17 intake entries whose only encoding was a deleted
+  prior. The closed list became `closed_citations` (reason `closed_no_verified_value`): some are real papers
+  whose recorded value was never checked. `scripts/generators/generate_prefactor_audit.py` could not be
+  re-run: it reads `src/safety.py`, deleted at the engine retirement (pre-existing break).
+- [x] **Hidalgo & Zamora 2004 read** (`hidalgo2004_extraction.md`): the deleted prior had the reactant wrong
+  (4,5-epoxy-2-alkenal, not 4-HNE) and claimed absolute concentrations the paper does not report.
+- [ ] **Lipid-driven Strecker step, candidate sources** (owner's PubMed list, abstracts read 2026-10-27):
+  Zamora, Alcon & Hidalgo 2013 (10.1021/jf305007y) reports Ea of phenylacetaldehyde formation for five
+  lipid carbonyl classes (2,4-alkadienals 28-38 kJ/mol; epoxyalkenals, 4-HNE, oxoalkenals 55-67);
+  Zamora, Gallardo & Hidalgo 2007 (10.1021/jf062838x) gives ~8 % Phe -> phenylacetaldehyde from
+  2,4-decadienal at 180 C, linear in lipid and time, and 9-14 % decadienal -> hexanal (bears on
+  `DECADIENAL_TO_HEXANAL_GAP`). Read both into dossiers before any step is declared.
+
+**Sulfur fit rows checked against the PDFs (2026-10-27, two read-only agents; per-row tables in the
+session scratchpad, findings here).** The 54 rows of the shipped B9 objective
+(`generate_kinetic_core_b2_3_fit.py` + B8's four, minus eight validation rows): 13 exact, 16 converted
+correctly, 4 rounded, 15 read off figures (all within their sigma), and **six with a real defect**:
+- [ ] `whitfield_mercaptoketone_over_MFT` (b2_3 l.661), species: 16.3 is (92 + 74.5 + 77.5)/15, three
+  mercaptoketones over MFT by mass (Whitfield 1999 Table 1), scored against 2-mercapto-3-pentanone alone,
+  whose molar ratio is 4.99. Row 3.3x high (log10 0.51, ~1.3 sigma).
+- [ ] `cerny_isomer_split` (l.706), value: Cerny 2007 Table 2 at pH 5 prints 3-mercapto-2-pentanone 141,
+  2-mercapto-3-pentanone **0** (formed only at pH 6-7); the row's 1:1 is Whitfield's different system.
+- [ ] `whitfield_nf_cys_MFT`, `whitfield_nf_h2s_MFT` (l.652, 656), conditions: the paper mixes 1 mL 0.1 M
+  + 1 mL 0.1 M (50/50 mM; ~50/97 mM with H2S); systems use 20/20 and 20/40 mM (l.394, 397).
+- [ ] `yaghmur_fft_share_ceiling` (l.831; `parameters_sulfur.py:1987`), conditions: the <1 % comes from
+  furfural 0.3 M + Cys 0.6 M at 65 C / 15 h, applied to a 145 C / 20 min ribose pot; its 84.9 %
+  denominator is derived, not printed.
+- [ ] `kang_free_cys_yield_ceiling` (l.785; `parameters_sulfur.py:1843`), conditions: the 16.3 % peak is the
+  140 C curve (SI Fig. S3); the 120 C system's own peak is ~12.1 %.
+- Smaller: three Hofmann rows use the paper's 1-sig-fig mol % where its ug values imply -24/-26/+39 %;
+  anchor strings name the wrong Hofmann table numbers (values right); the Whitfield, van Seeventer and
+  Cerny 2007b buffers are labelled "ASSUMED" though each paper prints 0.5 M phosphate;
+  `data/articles/Zhou2023.pdf` is an unrelated paper (the rows mean Zhou2023b.pdf); Kang SI Table S5's
+  120 C caption appears to be a typo (its pH-7 column equals Table S4's 100 C means), and the Kang SI
+  re-publishes Zhai 2023's TTCA experiment, so the two are not independent.
+- [ ] **Owner decision:** the fit generators are frozen, so correcting these rows is a new fit wave
+  (pre-registered, with a ship rule), not an edit.
+
 - [ ] Minor metadata: the Meynier "2002" dossier is a 2003 paper (Lait 83); `hofmann2001` and `hofmann2002`
   dossiers share DOI 10.1021/jf010823n.
 
