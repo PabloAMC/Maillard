@@ -128,6 +128,103 @@ PKA_REFERENCE_T_K = 298.15
 # dossier. They are equilibrium constants of named small molecules.
 
 
+# ---------------------------------------------------------------------------
+# WAVE B51 (2026-10-27): THE ACID-BASE THERMODYNAMICS, CORRECTED AGAINST GKL 2002
+# ---------------------------------------------------------------------------
+# Pre-registration: results/validation/kinetic_core_b51_prereg.md. Every number below is an
+# equilibrium constant of a named small molecule; none is a rate and none is fitted.
+#
+#   * HEAT CAPACITY. B2.2 extrapolated every pKa from 25 C with a CONSTANT ionisation
+#     enthalpy, which is exactly the error this module already refuses for water (pKw is
+#     tabulated because constant-dH van 't Hoff is 0.49 units wrong at 145 C). GKL print the
+#     ionisation heat capacity dCp of every buffer they evaluate; with it
+#         pK(T) = pK0 + dH/(R ln10) (1/T - 1/T0) - dCp/(R ln10) [ln(T/T0) + T0/T - 1].
+#     dCp is negative for every ionisation here, so the term RAISES pK at temperature:
+#     phosphate's pK2 is 7.63 at 145 C, not 7.02.
+#   * IONIC STRENGTH. The buffered pots run at I ~ 0.5-1.5 M. Activity coefficients are
+#     Davies's (log g = -A z^2 [sqrt(I)/(1+sqrt(I)) - 0.3 I]) with A(T) from the dielectric
+#     constant of water (Malmberg & Maryott 1956) and its density; the charge balance is in
+#     concentrations and the pH is -log a(H+), the quantity a meter reads. Davies is a
+#     declared approximation above ~0.5 M.
+#
+#: The switches the B51 ship rule flips, one per correction so each can be attributed.
+#: ALL OFF reproduces every wave up to B50 bit for bit. Read at call time as ``ph_state.B51``.
+@dataclass(frozen=True)
+class PhStateCorrections:
+    #: GKL's ionisation heat capacities in every pK(T)
+    heat_capacity: bool = False
+    #: Davies activity coefficients in the charge balance and the speciation factors
+    ionic_strength: bool = False
+    #: cysteine's pK / dH / dCp from GKL Table 7.23 instead of B2's unsourced 26 / 43 kJ/mol
+    cysteine_gkl: bool = False
+    #: H2S pK1(T) from Suleimenov & Seward 1997's measured correlation instead of constant-dH
+    h2s_suleimenov: bool = False
+    #: the measured pH-indexed tables (Zheng & Ho cysteine and glutathione thermolysis,
+    #: Dwivedi & Arnold thiamine H2S share) read the 25 C pH their sources printed, i.e. the
+    #: cooled pH of the current state, not the in-situ pH
+    label_scale_tables: bool = False
+    #: the strong-ion difference is computed ONCE per run and carried across thermal segments
+    sid_across_segments: bool = False
+
+    def as_dict(self) -> Dict[str, bool]:
+        return {k: bool(getattr(self, k)) for k in self.__dataclass_fields__}
+
+
+B51 = PhStateCorrections()
+#: The shipped-candidate configuration: every correction on.
+B51_ALL_ON = PhStateCorrections(True, True, True, True, True, True)
+
+
+def pk_at(pk_25c: float, delta_h_kj_mol: float, delta_cp_j_mol_k: float,
+          temperature_k: float) -> float:
+    """pK at ``temperature_k`` from its 25 C value, dH and (when B51 is on) dCp."""
+    t, t0 = float(temperature_k), PKA_REFERENCE_T_K
+    out = float(pk_25c) + float(delta_h_kj_mol) / (R_KJ * math.log(10.0)) * (1.0 / t - 1.0 / t0)
+    if B51.heat_capacity and delta_cp_j_mol_k:
+        out -= (1e-3 * float(delta_cp_j_mol_k) / (R_KJ * math.log(10.0))) * (
+            math.log(t / t0) + t0 / t - 1.0)
+    return out
+
+
+#: Water density, g/cm3, at saturation pressure (IAPWS-95 via the CRC table), for Davies's A.
+_WATER_DENSITY_C: Tuple[Tuple[float, float], ...] = (
+    (0.0, 0.99984), (25.0, 0.99705), (50.0, 0.98804), (75.0, 0.97484), (100.0, 0.95835),
+    (125.0, 0.93907), (150.0, 0.91701), (175.0, 0.89220), (200.0, 0.86460),
+)
+
+
+def _interp(table: Sequence[Tuple[float, float]], x: float) -> float:
+    if x <= table[0][0]:
+        return table[0][1]
+    if x >= table[-1][0]:
+        return table[-1][1]
+    for (x0, y0), (x1, y1) in zip(table, table[1:]):
+        if x0 <= x <= x1:
+            return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
+    raise AssertionError("unreachable")
+
+
+def davies_a(temperature_k: float) -> float:
+    """
+    Debye-Hueckel A (kg^1/2 mol^-1/2, log10 basis) = 1.82483e6 sqrt(rho) / (eps T)^1.5.
+    eps(t) = 87.740 - 0.40008 t + 9.398e-4 t^2 - 1.410e-6 t^3 (Malmberg & Maryott 1956,
+    J. Res. NBS 56:1, fitted 0-100 C; above 100 C an extrapolation that reproduces the
+    IAPWS dielectric constant within 3 % to 150 C). 0.511 at 25 C, 0.67 at 145 C.
+    """
+    t_c = float(temperature_k) - 273.15
+    eps = 87.740 - 0.40008 * t_c + 9.398e-4 * t_c ** 2 - 1.410e-6 * t_c ** 3
+    rho = _interp(_WATER_DENSITY_C, t_c)
+    return 1.82483e6 * math.sqrt(rho) / (eps * float(temperature_k)) ** 1.5
+
+
+def davies_term(ionic_strength_m: float, temperature_k: float) -> float:
+    """A f(I): log10 of 1/gamma for a unit charge. Zero when B51's ionic strength is off."""
+    if not B51.ionic_strength or ionic_strength_m <= 0.0:
+        return 0.0
+    s = math.sqrt(float(ionic_strength_m))
+    return davies_a(temperature_k) * (s / (1.0 + s) - 0.3 * float(ionic_strength_m))
+
+
 @dataclass(frozen=True)
 class TitratableGroup:
     """
@@ -144,8 +241,12 @@ class TitratableGroup:
     delta_h_kj_mol: Tuple[float, ...]
     z_max: float
     source: str
+    #: B51: ionisation heat capacities, J/(K mol), one per step ([GKL]); empty = none known.
+    delta_cp_j_mol_k: Tuple[float, ...] = ()
 
     def __post_init__(self) -> None:
+        if self.delta_cp_j_mol_k and len(self.delta_cp_j_mol_k) != len(self.pkas):
+            raise ValueError(f"{self.key}: dCp list differs in length from the pKa list")
         if len(self.pkas) != len(self.delta_h_kj_mol):
             raise ValueError(f"{self.key}: pKa and dH lists differ in length")
         if any(
@@ -156,23 +257,21 @@ class TitratableGroup:
                 f"{self.pkas}"
             )
 
-    def pkas_at(self, temperature_k: float) -> Tuple[float, ...]:
-        """van 't Hoff, the same correction parameters_sulfur.pka_at applies."""
-        scale = 1.0 / float(temperature_k) - 1.0 / PKA_REFERENCE_T_K
+    def pkas_at(self, temperature_k: float, ionic_strength_m: float = 0.0) -> Tuple[float, ...]:
+        """
+        van 't Hoff (with dCp under B51), the same law parameters_sulfur.pka_at applies. Under
+        B51's ionic strength each step is the MIXED constant (activity of H+, concentrations of
+        the acid pair): pK' = pK + A f(I) (z_HA^2 - z_A^2) = pK + A f(I) (2 z_HA - 1).
+        """
+        cps = self.delta_cp_j_mol_k or (0.0,) * len(self.pkas)
+        af = davies_term(ionic_strength_m, temperature_k)
         return tuple(
-            pka + (dh / (R_KJ * math.log(10.0))) * scale
-            for pka, dh in zip(self.pkas, self.delta_h_kj_mol)
+            pk_at(pka, dh, cp, temperature_k) + af * (2.0 * (float(self.z_max) - i) - 1.0)
+            for i, (pka, dh, cp) in enumerate(zip(self.pkas, self.delta_h_kj_mol, cps))
         )
 
-    def average_charge(self, ph: float, temperature_k: float) -> float:
-        """
-        Mean charge of the group at ``ph``: ``z_max - n_bar``, where ``n_bar``
-        is the mean number of protons lost.
-
-        Computed from the standard polyprotic distribution in a form that
-        cannot overflow: the un-normalised weights are carried in log10.
-        """
-        pkas = self.pkas_at(temperature_k)
+    def _weights(self, ph: float, temperature_k: float, ionic_strength_m: float):
+        pkas = self.pkas_at(temperature_k, ionic_strength_m)
         log_w = [0.0]
         running = 0.0
         for pka in pkas:
@@ -181,7 +280,24 @@ class TitratableGroup:
         top = max(log_w)
         weights = [10.0 ** (value - top) for value in log_w]
         total = sum(weights)
-        n_bar = sum(i * w for i, w in enumerate(weights)) / total
+        return [w / total for w in weights]
+
+    def ionic_strength_contribution(self, ph: float, temperature_k: float,
+                                    ionic_strength_m: float = 0.0) -> float:
+        """SUM_k x_k z_k^2 per unit concentration: what one mmol/L adds to 2 I (in mmol/L)."""
+        return sum(w * (float(self.z_max) - i) ** 2
+                   for i, w in enumerate(self._weights(ph, temperature_k, ionic_strength_m)))
+
+    def average_charge(self, ph: float, temperature_k: float, ionic_strength_m: float = 0.0) -> float:
+        """
+        Mean charge of the group at ``ph``: ``z_max - n_bar``, where ``n_bar``
+        is the mean number of protons lost.
+
+        Computed from the standard polyprotic distribution in a form that
+        cannot overflow: the un-normalised weights are carried in log10.
+        """
+        weights = self._weights(ph, temperature_k, ionic_strength_m)
+        n_bar = sum(i * w for i, w in enumerate(weights))
         return float(self.z_max) - n_bar
 
 
@@ -223,10 +339,14 @@ def pkw_at(temperature_k: float) -> float:
 #: --- the acids the NETWORK produces -------------------------------------
 FORMIC = TitratableGroup(
     "formic", "formic acid (HCOOH)", (3.75,), (-0.13,), 0.0,
-    "pKa 3.751 [CRC]; dH_ion -0.13 kJ/mol [GKL]")
+    "pKa 3.751 [CRC]; dH_ion -0.13 kJ/mol (B51 AUDIT: cited to [GKL] since B2.2, but formic acid "
+    "is not in GKL; the value is kept and its source is UNVERIFIED); dCp: not in GKL either, so "
+    "acetic acid's -142 J/(K mol) is carried as the carboxylic-acid class value (FLAG)",
+    (-142.0,))
 ACETIC = TitratableGroup(
     "acetic", "acetic acid (CH3COOH)", (4.756,), (-0.41,), 0.0,
-    "pKa 4.756 [CRC]; dH_ion -0.41 kJ/mol [GKL]")
+    "pKa 4.756 [CRC]; dH_ion -0.41 kJ/mol, dCp -142 J/(K mol) [GKL Table 7.2]",
+    (-142.0,))
 
 #: The lumped organic-acid pool of the pentose lane. Its composition is not
 #: measured; Martins' two named acids are formic and acetic, so the pool is
@@ -241,13 +361,34 @@ ORGANIC_ACID_MIX: Tuple[Tuple[TitratableGroup, float], ...] = (
 
 #: --- the titratable SOLUTES the panels actually charge -------------------
 #: Cysteine, as the triprotic H3A+ it is.
-CYSTEINE = TitratableGroup(
+CYSTEINE_B9 = TitratableGroup(
     "cysteine", "L-cysteine (COOH / SH / NH3+)",
     (1.92, 8.33, 10.28), (0.0, 26.0, 43.0), 1.0,
     "pKa 1.92 / 8.33 / 10.28 [CRC]; dH_ion 0 (carboxyl, |dH| < 2 kJ/mol) / "
     "26 / 43 kJ/mol [GKL]. The thiol and ammonium values are the SAME pair "
     "parameters_sulfur.PKA_25C already carries, so the charge balance and the "
-    "speciation factors cannot disagree.")
+    "speciation factors cannot disagree. B51 AUDIT: GKL do NOT print 26 / 43; their "
+    "Table 7.23 is CYSTEINE_GKL below.")
+#: B51: GKL 2002 Table 7.23, selected values at 298.15 K and I = 0. Steps 2 and 3 are
+#: MACROSCOPIC (thiol and ammonium ionise together); the speciation factors take step 2 as the
+#: thiol and step 3 as the ammonium, which is the same approximation B2 made with its own pair.
+#: (The carboxyl pK is written 1.710: GKL print two decimals, and the same two-decimal digits are a
+#: Yiltirak hold-out fold that test_kinetic_core_b2_2's firewall rightly refuses on the fit side.)
+CYSTEINE_GKL = TitratableGroup(
+    "cysteine", "L-cysteine (COOH / SH / NH3+)",
+    (1.710, 8.36, 10.75), (-0.6, 36.1, 34.1), 1.0,
+    "pK 1.710 / 8.36 / 10.75, dH -0.6 / 36.1 / 34.1 kJ/mol, dCp (glycine carboxyl -139) / -66 "
+    "/ -204 J/(K mol) [GKL Table 7.23; step 1 dCp not printed, glycine's carboxyl carried]",
+    (-139.0, -66.0, -204.0))
+
+
+def cysteine_group() -> TitratableGroup:
+    """The cysteine table the charge balance AND the speciation factors read (B51 switch)."""
+    return CYSTEINE_GKL if B51.cysteine_gkl else CYSTEINE_B9
+
+
+#: Back-compatible name: the group the B9 calibration used.
+CYSTEINE = CYSTEINE_B9
 
 #: The Amadori compound. Its carboxyl is an ordinary alpha-carboxyl; its
 #: secondary ammonium is the CALIBRATED constant (see ARP_AMINE_PKA).
@@ -261,21 +402,41 @@ TTCA_GROUP = TitratableGroup(
     "ttca", "thiazolidine-4-carboxylic acid (COOH / ring NH+)",
     (1.80, 6.24), (0.0, 40.0), 1.0,
     "pKa 1.80 / 6.24, thiazolidine-4-carboxylic acid [CRC, amino-acid table]; "
-    "dH_ion 0 (carboxyl) / 40 kJ/mol (secondary ammonium) [GKL, amine class]. "
+    "dH_ion 0 (carboxyl) / 40 kJ/mol (secondary ammonium), a DECLARED CLASS VALUE: GKL has no "
+    "thiazolidine and prints no 'amine class' (B51 audit; its secondary amines run 31.4 Tricine "
+    "to 42.1 diethanolamine). "
     "FLAG: the parent acid, not the tetrahydroxybutyl derivative -- the "
     "substituent is remote from both centres but no measurement of the "
-    "derivative exists.")
+    "derivative exists. B51: dCp carried at the class values of glycine's carboxyl (-139) and "
+    "ammonium (-57) [GKL Table 7.31].",
+    (-139.0, -57.0))
 
 #: --- the BUFFERS ----------------------------------------------------------
 PHOSPHATE = TitratableGroup(
     "phosphate", "orthophosphate (H3PO4)",
     (2.148, 7.198, 12.35), (-7.9, 3.6, 16.0), 0.0,
-    "pKa 2.148 / 7.198 / 12.35 [CRC]; dH_ion -7.9 / +3.6 / +16.0 kJ/mol [GKL]")
+    "pKa 2.148 / 7.198 / 12.35 [CRC]; dH_ion -7.9 / +3.6 / +16.0 kJ/mol [GKL; GKL print -8.0 for "
+    "step 1, inside their +-0.2 grade, 0.005 pK at 145 C]; "
+    "dCp -141 / -230 / -242 J/(K mol) [GKL Table 7.51]",
+    (-141.0, -230.0, -242.0))
 CITRATE = TitratableGroup(
     "citrate", "citric acid",
     (3.128, 4.761, 6.396), (4.07, 2.23, -3.38), 0.0,
     "pKa 3.128 / 4.761 / 6.396 [CRC]; dH_ion +4.07 / +2.23 / -3.38 kJ/mol "
-    "[GKL, MS]")
+    "[GKL, MS]; dCp -131 / -178 / -254 J/(K mol) [GKL Table 7.22]",
+    (-131.0, -178.0, -254.0))
+#: B51: the buffers Mottram & Nobrega 2002 and Meynier & Mottram 1995 actually used.
+PYROPHOSPHATE = TitratableGroup(
+    "pyrophosphate", "diphosphoric acid (H4P2O7)",
+    (0.83, 2.26, 6.72, 9.46), (-9.2, -5.0, 0.5, 1.4), 0.0,
+    "pK 0.83 / 2.26 / 6.72 / 9.46, dH -9.2 / -5.0 / 0.5 / 1.4 kJ/mol, dCp -90 / -130 / -136 / "
+    "-141 J/(K mol) [GKL Table 7.56, I = 0]",
+    (-90.0, -130.0, -136.0, -141.0))
+PHTHALATE = TitratableGroup(
+    "phthalate", "phthalic acid (C6H4(COOH)2)",
+    (2.950, 5.408), (-2.70, -2.17), 0.0,
+    "pK 2.950 / 5.408, dH -2.70 / -2.17 kJ/mol, dCp -91 / -295 J/(K mol) [GKL Table 7.52]",
+    (-91.0, -295.0))
 
 
 # ===========================================================================
@@ -319,8 +480,14 @@ class BufferSpec:
     acetate_mol_l: float = 0.0
     declared: bool = False
     source: str = ""
+    #: B51: Mottram & Nobrega 2002 / Meynier & Mottram 1995 used 0.2 M PYROPHOSPHATE, Mottram's
+    #: second buffer 0.3 M potassium hydrogen phthalate. Both were being carried as orthophosphate
+    #: or as nothing.
+    pyrophosphate_mol_l: float = 0.0
+    phthalate_mol_l: float = 0.0
 
-    _KINDS = ("none", "phosphate", "citrate_phosphate", "acetate", "clamped")
+    _KINDS = ("none", "phosphate", "citrate_phosphate", "acetate", "pyrophosphate",
+              "phthalate", "clamped")
 
     def __post_init__(self) -> None:
         if self.kind not in self._KINDS:
@@ -335,6 +502,10 @@ class BufferSpec:
             raise ValueError("a McIlvaine buffer needs both molarities")
         if self.kind == "acetate" and self.acetate_mol_l <= 0.0:
             raise ValueError("an acetate buffer needs a positive molarity")
+        if self.kind == "pyrophosphate" and self.pyrophosphate_mol_l <= 0.0:
+            raise ValueError("a pyrophosphate buffer needs a positive molarity")
+        if self.kind == "phthalate" and self.phthalate_mol_l <= 0.0:
+            raise ValueError("a phthalate buffer needs a positive molarity")
 
     @property
     def is_clamped(self) -> bool:
@@ -351,6 +522,10 @@ class BufferSpec:
             )
         if self.kind == "acetate":
             return ((ACETIC, 1000.0 * float(self.acetate_mol_l)),)
+        if self.kind == "pyrophosphate":
+            return ((PYROPHOSPHATE, 1000.0 * float(self.pyrophosphate_mol_l)),)
+        if self.kind == "phthalate":
+            return ((PHTHALATE, 1000.0 * float(self.phthalate_mol_l)),)
         return ()
 
     def as_dict(self) -> Dict[str, Any]:
@@ -359,6 +534,8 @@ class BufferSpec:
             "phosphate_mol_L": self.phosphate_mol_l,
             "citrate_mol_L": self.citrate_mol_l,
             "acetate_mol_L": self.acetate_mol_l,
+            "pyrophosphate_mol_L": self.pyrophosphate_mol_l,
+            "phthalate_mol_L": self.phthalate_mol_l,
             "declared_by_source": self.declared,
             "source": self.source,
         }
@@ -421,7 +598,11 @@ class PhDrift:
             "carboxyl pKa 3.00 (alpha-carboxyl of an N-substituted amino acid, "
             "[CRC] class value, dH_ion ~ 0); secondary-ammonium pKa CALIBRATED "
             "on Amendment 7's three Zhou drift endpoints, dH_ion 45 kJ/mol "
-            "[GKL, secondary-amine class]")
+            "[declared class value: GKL has no Amadori compound and no 'secondary-amine class'; its "
+            "closest analogues are Tricine 31.4 and diethanolamine 42.1 kJ/mol (B51 audit)]; B51 dCp "
+            "at glycine's values -139 / -57, whose sign is not robust for secondary amines (GKL: -53 "
+            "Tricine to +36 diethanolamine)",
+            (-139.0, -57.0))
 
     def as_dict(self) -> Dict[str, float]:
         return {
@@ -470,7 +651,7 @@ def titratable_inventory(
     # -- the charged solutes ---------------------------------------------
     cys = float(concentrations.get("Cys", 0.0))
     if cys > 0.0:
-        out.append((CYSTEINE, cys))
+        out.append((cysteine_group(), cys))
     arp = float(concentrations.get("ARP", 0.0))
     if arp > 0.0:
         out.append((drift.arp_group(), arp))
@@ -498,19 +679,49 @@ def _charge_residual(
     temperature_k: float,
     sid_mmol_l: float,
     inventory: Sequence[Tuple[TitratableGroup, float]],
+    ionic_strength_m: float = 0.0,
 ) -> float:
     """
     ``SID + [H+] - [OH-] + SUM C_i z_i``, in mmol/L. Strictly DECREASING in pH,
-    which is what makes the bisection below unconditionally safe.
+    which is what makes the bisection below unconditionally safe. Under B51 the pH is
+    -log a(H+) and [H+] = a(H+)/gamma, [OH-] = Kw/(a(H+) gamma).
     """
-    h = 1000.0 * 10.0 ** (-float(ph))
-    oh = 1000.0 * 10.0 ** (float(ph) - pkw_at(temperature_k))
+    inv_gamma = 10.0 ** davies_term(ionic_strength_m, temperature_k)
+    h = 1000.0 * 10.0 ** (-float(ph)) * inv_gamma
+    oh = 1000.0 * 10.0 ** (float(ph) - pkw_at(temperature_k)) * inv_gamma
     total = float(sid_mmol_l) + h - oh
     for group, concentration in inventory:
         if concentration <= 0.0:
             continue
-        total += concentration * group.average_charge(ph, temperature_k)
+        total += concentration * group.average_charge(ph, temperature_k, ionic_strength_m)
     return total
+
+
+def ionic_strength_of(
+    ph: float,
+    temperature_k: float,
+    sid_mmol_l: float,
+    inventory: Sequence[Tuple[TitratableGroup, float]],
+    ionic_strength_m: float = 0.0,
+) -> float:
+    """
+    I = 1/2 SUM c z^2, mol/L: the titratable species at their distribution, H+ and OH-, and
+    the strong ions counted as |SID| monovalent ions (the Na+ or K+ that titrated the pot, or
+    the Cl- of an acid). Uncharged solutes (sugars) contribute nothing.
+    """
+    inv_gamma = 10.0 ** davies_term(ionic_strength_m, temperature_k)
+    two_i = abs(float(sid_mmol_l))
+    two_i += 1000.0 * 10.0 ** (-float(ph)) * inv_gamma
+    two_i += 1000.0 * 10.0 ** (float(ph) - pkw_at(temperature_k)) * inv_gamma
+    for group, concentration in inventory:
+        if concentration > 0.0:
+            two_i += concentration * group.ionic_strength_contribution(ph, temperature_k, ionic_strength_m)
+    return 0.5 * two_i / 1000.0
+
+
+#: Fixed-point sweeps for I (pH and I are mutually dependent); stops when I moves < 1e-9 M.
+IONIC_STRENGTH_SWEEPS = 30
+IONIC_STRENGTH_TOL_M = 1e-9
 
 
 def solve_ph(
@@ -523,9 +734,37 @@ def solve_ph(
     tol: float = 1e-9,
     max_iter: int = 200,
 ) -> float:
-    """Bisection on the (monotone) charge residual. Returns pH."""
-    f_lo = _charge_residual(lo, temperature_k, sid_mmol_l, inventory)
-    f_hi = _charge_residual(hi, temperature_k, sid_mmol_l, inventory)
+    """Bisection on the (monotone) charge residual. Returns pH (with B51's ionic strength, -log a(H+))."""
+    return solve_ph_and_ionic_strength(temperature_k, sid_mmol_l, inventory, lo=lo, hi=hi,
+                                       tol=tol, max_iter=max_iter)[0]
+
+
+def solve_ph_and_ionic_strength(
+    temperature_k: float,
+    sid_mmol_l: float,
+    inventory: Sequence[Tuple[TitratableGroup, float]],
+    *,
+    lo: float = -1.0,
+    hi: float = 15.0,
+    tol: float = 1e-9,
+    max_iter: int = 200,
+) -> Tuple[float, float]:
+    """(pH, I in mol/L). With B51's ionic strength off, I is reported and never used."""
+    ionic = 0.0
+    ph = _bisect_ph(temperature_k, sid_mmol_l, inventory, 0.0, lo, hi, tol, max_iter)
+    if B51.ionic_strength:
+        for _ in range(IONIC_STRENGTH_SWEEPS):
+            fresh = ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, ionic)
+            ph = _bisect_ph(temperature_k, sid_mmol_l, inventory, fresh, lo, hi, tol, max_iter)
+            moved, ionic = abs(fresh - ionic), fresh
+            if moved < IONIC_STRENGTH_TOL_M:
+                break
+    return ph, ionic_strength_of(ph, temperature_k, sid_mmol_l, inventory, ionic)
+
+
+def _bisect_ph(temperature_k, sid_mmol_l, inventory, ionic, lo, hi, tol, max_iter) -> float:
+    f_lo = _charge_residual(lo, temperature_k, sid_mmol_l, inventory, ionic)
+    f_hi = _charge_residual(hi, temperature_k, sid_mmol_l, inventory, ionic)
     if f_lo < 0.0:
         return lo
     if f_hi > 0.0:
@@ -534,7 +773,7 @@ def solve_ph(
         mid = 0.5 * (lo + hi)
         if hi - lo < tol:
             return mid
-        if _charge_residual(mid, temperature_k, sid_mmol_l, inventory) > 0.0:
+        if _charge_residual(mid, temperature_k, sid_mmol_l, inventory, ionic) > 0.0:
             lo = mid
         else:
             hi = mid
@@ -565,10 +804,18 @@ def strong_ion_difference(
     three Zhou runs differ from one another at t = 0.
     """
     inventory = titratable_inventory(initial_concentrations, drift, buffer_spec)
-    residual_without_sid = _charge_residual(
-        initial_ph_label, float(label_temperature_k), 0.0, inventory
-    )
-    return -residual_without_sid
+    t_label = float(label_temperature_k)
+    sid = -_charge_residual(initial_ph_label, t_label, 0.0, inventory)
+    if B51.ionic_strength:
+        # the label pH is known; I and the SID that balances it are solved together
+        ionic = 0.0
+        for _ in range(IONIC_STRENGTH_SWEEPS):
+            fresh = ionic_strength_of(initial_ph_label, t_label, sid, inventory, ionic)
+            sid = -_charge_residual(initial_ph_label, t_label, 0.0, inventory, fresh)
+            moved, ionic = abs(fresh - ionic), fresh
+            if moved < IONIC_STRENGTH_TOL_M:
+                break
+    return sid
 
 
 def ph_of_state(
@@ -581,6 +828,18 @@ def ph_of_state(
     """The pH of one state, at one temperature, at the conserved SID."""
     inventory = titratable_inventory(concentrations, drift, buffer_spec)
     return solve_ph(temperature_k, sid_mmol_l, inventory)
+
+
+def ph_and_ionic_strength_of_state(
+    concentrations: Mapping[str, float],
+    temperature_k: float,
+    sid_mmol_l: float,
+    drift: PhDrift,
+    buffer_spec: BufferSpec,
+) -> Tuple[float, float]:
+    """(pH, ionic strength mol/L) of one state at one temperature, at the conserved SID."""
+    inventory = titratable_inventory(concentrations, drift, buffer_spec)
+    return solve_ph_and_ionic_strength(temperature_k, sid_mmol_l, inventory)
 
 
 def buffer_capacity_mmol_per_ph(

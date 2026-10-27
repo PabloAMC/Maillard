@@ -2532,6 +2532,7 @@ def _integrate_program(
         if charged is not None and charged.amine > 0:
             state["LYSP"] = float(charged.amine) * available_fraction(charged.amine_band)
 
+    sulfur_sid: Optional[float] = None  # B51: the pot's SID, carried across its segments
     for index, (duration, temperature_c) in enumerate(process.thermal.segments):
         grid = np.array([0.0, float(duration)])
         if lane == SULFUR:
@@ -2560,7 +2561,10 @@ def _integrate_program(
                 ),
                 rtol=1e-8,
                 atol=1e-14,
+                sid_mmol_l=sulfur_sid,
             )
+            if sulfur_sid is None:
+                sulfur_sid = run.metadata.get("strong_ion_difference_mmol_L")
             keys = list(SULFUR_INDEX)
         elif lane == ACRYLAMIDE:
             # B14 (2026-09-07): the declared flat a_w term inside the measured window scales the

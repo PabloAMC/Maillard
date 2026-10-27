@@ -438,10 +438,10 @@ panel:
     conditions:
       A:
         label: "pH 4.5"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"}}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
       B:
         label: "pH 6.5"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"}}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
     expected_relation: "A>B"
     source:
       ref: cerny2015
@@ -467,10 +467,10 @@ panel:
     conditions:
       A:
         label: "pH 4.5"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"}}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 4.5, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
       B:
         label: "pH 6.5"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"}}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 35.0}, temp_C: 140, ph: 6.5, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
     expected_relation: "A>B"
     source:
       ref: cerny2015
@@ -1680,10 +1680,10 @@ panel:
     conditions:
       A:
         label: "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"}}
       B:
         label: "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"}}
     expected_relation: "A>B"
     source:
       ref: mottram2002
@@ -1719,10 +1719,10 @@ panel:
     conditions:
       A:
         label: "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"}}
       B:
         label: "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"}}
     expected_relation: "A>B"
     source:
       ref: mottram2002
@@ -1744,11 +1744,11 @@ panel:
       A:
         label: "MFT, cysteine + ribose, phosphate pH 5.6"
         observable: "MFT"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"}}
       B:
         label: "FFT, cysteine + ribose, phosphate pH 5.6"
         observable: "FFT"
-        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"}}
     expected_relation: "A>B"
     source:
       ref: mottram2002
@@ -2570,10 +2570,10 @@ panel:
     conditions:
       A:
         label: "pH 4.2"
-        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"}}
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
       B:
         label: "pH 5.6"
-        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"}}
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
     expected_relation: A>B
     source:
       ref: mottram2002
@@ -2591,10 +2591,10 @@ panel:
     conditions:
       A:
         label: "pH 4.2"
-        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"}}
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
       B:
         label: "pH 5.6"
-        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"}}
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"}}
     expected_relation: A>B
     source:
       ref: mottram2002

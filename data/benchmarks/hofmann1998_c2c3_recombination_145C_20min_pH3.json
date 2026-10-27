@@ -41,6 +41,13 @@
       "stirred": null,
       "provenance_class": "primary_source_pdf",
       "provenance_note": "Hofmann & Schieberle 1998, JAFC 46:235, read from data/articles/hofmann1998.pdf (p. 236, EXPERIMENTAL PROCEDURES, 'Model Experiments'): 'thermally treated for 20 min at 145 degC in a laboratory autoclave (200 mL; Type II; Roth, Germany)'. This bundle's own quoted table footnote gives the fed-intermediate system volume verbatim as 'An aqueous solution (50 mL)' of 1 mmol of each precursor. Headspace = 200 - 50 = 150 mL. ATMOSPHERE: no inert-gas step appears anywhere in the procedures, so the headspace is taken as laboratory air at closure (air_by_default). Water source not stated. Stirring not stated."
+    },
+    "buffer": {
+      "species": "phosphate",
+      "concentration_M": 0.5,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Hofmann & Schieberle 1998, JAFC 46:235, p. 236, EXPERIMENTAL PROCEDURES / 'Model Experiments', verbatim: 'the reactants (amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 degC in a laboratory autoclave (200 mL; Type II; Roth, Germany)'. Read from data/articles/hofmann1998.pdf. Completed by wave B51 (Amendment 44): until 2026-10-27 this trust-loop bundle carried no buffer and was scored unbuffered, while the sulfur fit integrated the same pot in 0.5 M phosphate. The pH is the buffer's nominal bench value."
     }
   },
   "condition_provenance": {

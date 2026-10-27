@@ -1648,3 +1648,26 @@ corpus, that would license widening the tolerance on every such hexanal row and 
 model's headline score. It establishes no new fact about the model's chemistry, so it was declined in
 §4 of the pre-registration before the probes ran, and it is declined here. The mismatch is instead
 declared as a completeness debt in `docs/guides/EXPERIMENTS.md`, experiment 4.
+
+## Amendment 44 — 2026-10-27 (Wave B51, the pH state's buffers completed)
+
+Pre-registration: `results/validation/kinetic_core_b51_prereg.md`, written before any B51 number.
+
+**What changed on the boundary: nothing.** No bundle changed role, no value was edited, no fit row was
+added or removed by this amendment (B51's candidate refit uses B47's 52 rows, already declared).
+
+**Three condition records completed, each a fact read from the source, applied to every arm.**
+
+1. The nine trust-loop Hofmann 1998 bundles (`hofmann1998_*_145C_20min_pH*`) receive the paper's
+   `conditions.buffer` block, 0.5 mol/L phosphate, quoted from the Methods on p. 236 of
+   `data/articles/hofmann1998.pdf` — the same paragraph and the same record their five hold-out
+   siblings have carried since B2.3 (Amendment 9 clause 2). Until now the scorer integrated these pots
+   unbuffered with the extrapolation warning, while every sulfur fit since B2.2 integrated the same pots
+   in 0.5 M phosphate. Generator: `scripts/generators/complete_benchmark_buffer_fields.py`
+   (`TRUST_LOOP_RECORDS`), which refuses to write if anything but `conditions.buffer` moves.
+2. The directional claims PH-01/02 (Meynier & Mottram 1995) and MOT02-PH-01/02 (Mottram & Nobrega 2002)
+   are charged as 0.2 M **pyrophosphate**, the buffer their papers state; they were carried as
+   orthophosphate of the same molarity because the engine had no pyrophosphate. MOT-01/02/03, the same
+   Mottram pots, carried no buffer at all and now carry it.
+3. `BufferSpec` gains `pyrophosphate` and `phthalate` (GKL 2002 Tables 7.56, 7.52).
+

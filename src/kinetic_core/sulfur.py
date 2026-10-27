@@ -147,10 +147,12 @@ from .ph_state import (
     PhDrift,
     buffer_capacity_mmol_per_ph,
     centre_delta,
+    ph_and_ionic_strength_of_state,
     ph_of_state,
     strong_ion_difference,
     validate_charge_closure,
 )
+from . import ph_state as _ph
 from .species_sulfur import (
     N_SULFUR_STATE,
     SITE_POOLS,
@@ -1136,6 +1138,9 @@ def sulfur_rate_constants_at(
     parameters: Mapping[str, Any],
     temperature_k: float,
     ph: float,
+    *,
+    ph_label: Optional[float] = None,
+    ionic_strength_m: float = 0.0,
 ) -> Dict[str, float]:
     """
     Every reaction's rate constant at ``temperature_k`` and ``ph``.
@@ -1152,6 +1157,9 @@ def sulfur_rate_constants_at(
         one step the pH dependence is measured directly.
     """
     out: Dict[str, float] = {}
+    # B51: the MEASURED pH-indexed tables were measured on 25 C labels; under B51 they read the
+    # cooled pH of the state (``ph_label``), every speciation factor reads the in-situ pH.
+    ph_table = float(ph_label) if (ph_label is not None and _ph.B51.label_scale_tables) else ph
     for reaction in FULL_REACTIONS:
         key = reaction.parameter_key
         if key is None:
@@ -1160,12 +1168,12 @@ def sulfur_rate_constants_at(
             out[reaction.key] = oligomerisation_rate()
             continue
         if key == "k_cys_h2s":
-            out[reaction.key] = cysteine_thermolysis_k(ph, float(temperature_k))
+            out[reaction.key] = cysteine_thermolysis_k(ph_table, float(temperature_k))
             continue
         if key == "k_thi_h2s":
             continue  # B50: derived below from the two thiamine steps
         if key == "k_gsh_h2s":
-            out[reaction.key] = glutathione_thermolysis_k(ph, float(temperature_k))
+            out[reaction.key] = glutathione_thermolysis_k(ph_table, float(temperature_k))
             continue
         parameter = parameters.get(key)
         if parameter is None:
@@ -1196,7 +1204,7 @@ def sulfur_rate_constants_at(
             else min(float(temperature_k), float(_cap))
         )
         value *= ph_factor(
-            REACTION_PH_FACTOR.get(reaction.key, ""), ph, float(temperature_k)
+            REACTION_PH_FACTOR.get(reaction.key, ""), ph, float(temperature_k), ionic_strength_m
         )
         out[reaction.key] = value
 
@@ -1214,7 +1222,7 @@ def sulfur_rate_constants_at(
     # thing Stack measures: heating pushes the equilibrium back toward FREE
     # thiol.
     # DERIVED RATE 0 (B50): thiamine's sulfide branch, the measured share of its total thermal loss.
-    _share = thiamine_h2s_share(ph)
+    _share = thiamine_h2s_share(ph_table)
     out["r_thi_h2s"] = (_share / (1.0 - _share)) * (out["r_thi_hmp"] + out["r_thi_mesh"]) if _share > 0.0 else 0.0
 
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
@@ -1396,6 +1404,7 @@ def integrate_sulfur(
     atol: float = 1e-12,
     ph_nodes: int = 41,
     ph_iterations: int = 3,
+    sid_mmol_l: Optional[float] = None,
 ) -> SulfurRun:
     """
     Integrate the sulfur network at one temperature and one pH TRAJECTORY.
@@ -1475,14 +1484,29 @@ def integrate_sulfur(
         # exactly once -- here -- and never again; from this point on the pH is
         # solved from the conserved SID at whatever temperature is being asked
         # about.
-        sid = strong_ion_difference(ph0, initial_map, ph_drift, spec)
-        ph_in_situ_0 = ph_of_state(initial_map, t_k, sid, ph_drift, spec)
-        node_ph = np.full(n_nodes, ph_in_situ_0)
+        # B51: a later thermal segment of the SAME pot passes the SID its first segment computed,
+        # so acid made earlier is not re-titrated away at the segment boundary.
+        if sid_mmol_l is not None and _ph.B51.sid_across_segments:
+            sid = float(sid_mmol_l)
+        else:
+            sid = strong_ion_difference(ph0, initial_map, ph_drift, spec)
+
+        def _node_state(state_map):
+            p_hot, i_hot = ph_and_ionic_strength_of_state(state_map, t_k, sid, ph_drift, spec)
+            p_cool = (ph_of_state(state_map, LABEL_TEMPERATURE_K, sid, ph_drift, spec)
+                      if _ph.B51.label_scale_tables else None)
+            return p_hot, i_hot, p_cool
+
+        p0, i0, c0 = _node_state(initial_map)
+        node_ph = np.full(n_nodes, p0)
+        node_i = np.full(n_nodes, i0)
+        node_cool = [c0] * n_nodes
         solution = None
         for sweep in range(max(int(ph_iterations), 1)):
             k_nodes = np.array([
-                rate_vector(sulfur_rate_constants_at(parameters, t_k, float(p)))
-                for p in node_ph
+                rate_vector(sulfur_rate_constants_at(
+                    parameters, t_k, float(p), ph_label=c, ionic_strength_m=float(i)))
+                for p, i, c in zip(node_ph, node_i, node_cool)
             ])
             solution = _solve_on_time_nodes(
                 k_nodes, node_times, y0, eval_times, duration, method, rtol, atol
@@ -1497,10 +1521,8 @@ def integrate_sulfur(
                 index = int(np.searchsorted(eval_times, t_node))
                 index = min(index, len(eval_times) - 1)
                 row = states[index]
-                fresh[j] = ph_of_state(
-                    {k: float(row[SULFUR_INDEX[k]]) for k in SULFUR_STATE_KEYS},
-                    t_k, sid, ph_drift, spec,
-                )
+                fresh[j], node_i[j], node_cool[j] = _node_state(
+                    {k: float(row[SULFUR_INDEX[k]]) for k in SULFUR_STATE_KEYS})
             ph_convergence = float(np.max(np.abs(fresh - node_ph)))
             node_ph = fresh
             if ph_convergence < 1e-4:
@@ -1588,6 +1610,8 @@ def integrate_sulfur(
             "ph_final_cooled": float(ph_final_cooled),
             "ph_series": [float(v) for v in ph_series],  # type: ignore[union-attr]
             "ph_fixed_point_residual": ph_convergence,
+            "ionic_strength_M_final": float(node_i[-1]),
+            "ph_state_corrections_b51": _ph.B51.as_dict(),
             "ph_drop_units_cooled": float(ph0 - ph_final_cooled),
             "buffer_capacity_initial_mmol_per_pH": buffer_capacity_mmol_per_ph(
                 {key: float(y0[SULFUR_INDEX[key]]) for key in SULFUR_STATE_KEYS},
