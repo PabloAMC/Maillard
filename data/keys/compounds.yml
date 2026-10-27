@@ -493,12 +493,10 @@ compounds:
   aliases:
   - 2-isobutyl-3-methoxypyrazine
   - 3-Isobutyl-2-methoxypyrazine
-  - 3-isobutyl-2-methoxypyrazine
   - IBMP
   - ibmp
   - isobutyl methoxypyrazine
   seen_in:
-  - flavor:off_note_reference_anchors
   - species:off_flavour_targets.yml
   identity_source: data/species/off_flavour_targets.yml
 - id: 3_methylbutanal
@@ -822,7 +820,6 @@ compounds:
   aliases:
   - furosine
   seen_in:
-  - benchmarks:measured_volatiles
   - safety:analyte
   identity_source: structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)
   identity_note: alpha-carbon stereocentre omitted

@@ -4997,46 +4997,6 @@
       "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: mottram_2001_bmfd_retention, mottram_2001_bmfd_retention_payload. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
-      "slr_section": "5.1",
-      "paper_id": "siripitakpong_2026_fft_retention",
-      "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
-      "doi": "10.1016/j.fochx.2026.103712",
-      "matrix_family": "pea_isolate",
-      "compounds_supported": [
-        "2-furfurylthiol"
-      ],
-      "parameters_supported": [
-        "delta_G"
-      ],
-      "exact_numeric_anchors": [
-        "-9.72 kcal/mol",
-        "pH 7.0",
-        "25.0 C"
-      ],
-      "current_repo_artifacts": [],
-      "current_runtime_consumers": [
-        "src/literature_runtime.py"
-      ],
-      "current_user_visible_surfaces": [],
-      "incorporation_status": "runtime_bound",
-      "next_action": "Model FFT non-covalent binding thermodynamics.",
-      "confidence_tier": "medium",
-      "notes_on_limits": "Obtained via molecular docking and homology modeling.",
-      "doi_repair": {
-        "old": "10.1016/j.foodchem.2025.145815",
-        "new": "10.1016/j.fochx.2026.103712",
-        "date": "2026-08-26",
-        "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
-      },
-      "citation_repair": {
-        "old": "Sharma et al. (2025)",
-        "new": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
-        "date": "2026-08-26",
-        "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
-      },
-      "citation_caveat": "IMPORTANT: the ligand is VANILLIN, not 2-furfurylthiol - the word 'furfuryl' does not occur anywhere in the paper. The entry's compounds_supported ('2-furfurylthiol') is therefore wrong and the -9.72 kcal/mol value must not be used as an FFT binding energy. Also note -9.72 kcal/mol is the thermodynamic delta-G from binding isotherms, not the docking score (the docking affinities are -3.9689 kcal/mol for PPI and -3.7660 for deamidated PPI), so the entry's note 'obtained via molecular docking and homology modeling' is also inaccurate."
-    },
-    {
       "slr_section": "6.0",
       "paper_id": "mdpi_plants_2024_hemp_volatiles",
       "citation": "Chen, Oliveira, Dias & Ismail (2025), Plants 14(2):274",

@@ -1314,27 +1314,6 @@
       }
     },
     {
-      "id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
-      "source": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358, DOI:10.1021/jf034037p",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "g6p_hdmf_multiplier_vs_glucose": 4.4,
-      "analytical_method": "SIDA with [2H3]-HDMF",
-      "replicates": 3,
-      "reference_system": "aqueous phosphorylated sugar model",
-      "notes": "Bounded phosphorylated-sugar prior for HDMF-rich routing. Use to keep G6P above glucose when furanone-support signals matter, without claiming endpoint closure in plant matrices.",
-      "citation_repair": {
-        "old": "Blank, Devaud & Grosch (2003), DOI:10.1021/jf026123f",
-        "new": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358, DOI:10.1021/jf034037p",
-        "date": "2026-08-26",
-        "basis": "The cited DOI 10.1021/jf034037p was verified in CrossRef as Yaylayan, Machiels & Istasse (2003), 'Thermal Decomposition of Specifically Phosphorylated D-Glucoses and Their Role in the Control of the Maillard Reaction', JAFC 51(11):3358-3366 - the phosphorylated-sugar routing study this prior is about. The previously cited DOI (10.1021/jf026123f) resolves to Cerny & Davidek 2003 on ribose/cysteine aroma formation, which is neither a Blank/Devaud/Grosch paper nor a G6P study. No 'Blank, Devaud & Grosch (2003)' G6P/HDMF publication exists."
-      },
-      "citation_caveat": "Phenomenon anchor only. Yaylayan et al. 2003 is a pyrolysis-GC/MS study reporting relative pyrolysate profiles for 1- and 6-phosphorylated glucoses; it contains neither the 4.4x G6P-vs-glucose HDMF multiplier nor any [2H3]-HDMF stable-isotope dilution measurement. The stored multiplier and the 'SIDA with [2H3]-HDMF' method claim are unanchored.",
-      "value_anchor_status": "no_verifiable_source",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "soladoye_2020_low_temp_euc_window_v1",
       "source": "Hwang, Ismail & Joo (2020), Foods 9:251, DOI:10.3390/foods9030251",
       "provenance_tier": "literature_derived_transfer",
@@ -1873,51 +1852,6 @@
       "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
-      "id": "ohsu_2025_kokumi_casr_support_v1",
-      "source": "Ohsu et al. (2010), J. Biol. Chem. 285:1016, DOI:10.1074/jbc.M109.029165",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "temperature_c": 37.0,
-        "msg_mM": 10.0,
-        "assay_mode": "human_CaSR_HEK293_and_trained_sensory_panel"
-      },
-      "observable_panel_tags": [
-        "kokumi_support",
-        "mouthfulness",
-        "palatability"
-      ],
-      "gamma_glu_val_ec50_mM": 0.32,
-      "gamma_glu_leu_ec50_mM": 0.45,
-      "gsh_ec50_mM": 0.68,
-      "alpha_glu_val_ec50_lower_bound_mM": 10.0,
-      "gamma_glu_val_calcium_increase_percent": 142.0,
-      "gamma_glu_leu_calcium_increase_percent": 128.0,
-      "gsh_calcium_increase_percent": 111.0,
-      "gamma_glu_val_cck_secretion_increase_percent": 187.0,
-      "gamma_glu_leu_cck_secretion_increase_percent": 163.0,
-      "gsh_cck_secretion_increase_percent": 141.0,
-      "gamma_glu_val_mouthfulness_score": 6.8,
-      "gamma_glu_leu_mouthfulness_score": 6.1,
-      "gsh_mouthfulness_score": 5.4,
-      "msg_baseline_mouthfulness_score": 3.2,
-      "yeast_extract_aqueous_phase_gsh_range_mM": [
-        0.3,
-        1.5
-      ],
-      "notes": "Bounded Family 05 kokumi prior for CaSR-active glutathione and gamma-glutamyl peptides. Use to expose mouthfulness support alongside sulfur-positive interpretation without claiming full sensory closure in plant matrices.",
-      "citation_repair": {
-        "old": "Ohsu et al. (2025), DOI:10.1021/acs.jafc.2c04919",
-        "new": "Ohsu et al. (2010), J. Biol. Chem. 285:1016, DOI:10.1074/jbc.M109.029165",
-        "date": "2026-08-26",
-        "basis": "The intended anchor is the real Ohsu kokumi/CaSR paper: Ohsu, Amino, Nagasaki et al. (2010), 'Involvement of the Calcium-sensing Receptor in Human Taste Perception', J Biol Chem 285(2):1016-1022, 10.1074/jbc.M109.029165 (CrossRef verified). No 'Ohsu et al. (2025)' publication exists, and the DOI previously stored (10.1021/acs.jafc.2c04919) resolves to Yang, Liao, Dong et al. (2022) on kokumi gamma-glutamyl peptides - the right subject but the wrong authors."
-      },
-      "citation_caveat": "Subject anchor only. Ohsu et al. 2010 reports CaSR EC50 values of 1.34 uM (gamma-Glu-Val), 76.5 nM (glutathione) and 41.9 nM (gamma-Glu-Val-Gly) - three orders of magnitude away from the 0.32/0.45/0.68 mM stored here - and reports no CCK-secretion percentages and no 0-10 mouthfulness scale (its sensory scale runs -2..+2). The EC50, calcium-increase, CCK and mouthfulness constants in this prior are unanchored.",
-      "value_anchor_status": "no_verifiable_source",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "huang_2021_sulfur_oav_support_v1",
       "source": "Huang et al. (2021)",
       "provenance_tier": "literature_derived_transfer",
@@ -2199,48 +2133,6 @@
           "container": "Journal of Agricultural and Food Chemistry"
         },
         "match_basis": "surname 'Mottram' present in DOI authors ['Adams', 'Mottram', 'Parker', 'Brown']; year cp [2001] vs DOI 2001",
-        "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
-      }
-    },
-    {
-      "id": "siripitakpong_2026_fft_retention_prior",
-      "source": "Siripitakpong et al. (2026)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "applicable_protein_types": [
-        "pea_iso"
-      ],
-      "reference_conditions": {
-        "process_state": "native",
-        "ph": 7.0,
-        "temperature_C": 25.0
-      },
-      "analyte": "2-furfurylthiol",
-      "delta_G_kcal_mol": -9.72,
-      "headspace_recovery_effect_direction": "reduced_by_non_covalent_binding",
-      "notes": "Entropy-driven hydrophobic FFT binding prior on native PPI globulin pockets.",
-      "doi": "10.1016/j.fochx.2026.103712",
-      "doi_propagation": {
-        "date": "2026-08-27",
-        "wave": "Wave T3 (audit remediation; Wave T1 finding T1-09 / section 4)",
-        "action": "provenance repair only -- a DOI was ADDED to a record that had none. NO numeric value, citation string, tier or flag was changed.",
-        "propagated_from": "siripitakpong_2026_fft_retention",
-        "propagated_from_file": "data/lit/benchmark_intake_registry.json",
-        "new": "10.1016/j.fochx.2026.103712",
-        "crossref_verified": {
-          "checked": "2026-08-27 via api.crossref.org/works",
-          "resolves": true,
-          "title": "Effects of deamidation by protein glutaminase on the flavor binding properties of pea protein isolate",
-          "authors": [
-            "Siripitakpong",
-            "Wongprasert",
-            "Rungrotmongkol",
-            "Suppavorasatit"
-          ],
-          "year": 2026,
-          "container": "Food Chemistry: X"
-        },
-        "match_basis": "surname 'Siripitakpong' present in DOI authors ['Siripitakpong', 'Wongprasert', 'Rungrotmongkol', 'Suppavorasatit']; year cp [2026] vs DOI 2026",
         "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
       }
     }

@@ -78,7 +78,7 @@ def full():
         ("hofmann1998_ribose_cysteine_145C_20min_pH5.json", 1.1, 0.0414, "bundle"),
         ("acrylamide_spi_extrusion_130C_ACSRef3.json", 1.5, 0.2, "bundle"),
         ("thiamine_cys_glucose_120C_Bolton1994.json", 3.0, 0.48, "bundle"),
-        ("quarantined/cys_ribose_140C_Hofmann1998.json", 1.5, 0.10, "default"),  # contract RETIRED -> free default; quarantined 2026-09-04
+        ("pea_isolate_uht_140C_Trikusuma2019.json", 2.0, 0.12, "default"),  # no contract of its own
     ],
 )
 def test_scale_contract_is_the_bundles_own_else_the_global_default(path, ratio, log10, source):

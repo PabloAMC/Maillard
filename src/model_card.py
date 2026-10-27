@@ -61,10 +61,6 @@ DIRECTIONAL_PATH = data_paths.CORE_DIRECTIONAL_SCORES
 
 ROOT = data_paths.REPO_ROOT
 
-# Quarantined 2026-09-04 (a repo-internal derivation, not a measurement); still read here as the
-# record of the sulfur branch's anchor status.
-SULFUR_BENCHMARK_PATH = data_paths.QUARANTINED_BENCHMARKS_DIR / "cys_ribose_140C_Hofmann1998.json"
-
 GATES = (
     "scripts/ci/holdout_guard.py",
     "scripts/ci/citation_gate.py",
@@ -263,36 +259,13 @@ def _is_sulfur_analyte(name: str) -> bool:
 
 
 def collect_sulfur_anchor_status() -> Dict[str, Any]:
-    """Check, rather than assert, that the sulfur branch has no absolute literature anchor."""
-    payload = _read_json(SULFUR_BENCHMARK_PATH)
-    if payload is None:
-        return {"available": False, "path": _relative(SULFUR_BENCHMARK_PATH)}
-    unverifiable: List[str] = []
-    anchored: List[str] = []
-    for name, record in (payload.get("measured_volatiles") or {}).items():
-        if not isinstance(record, Mapping):
-            continue
-        statuses = {
-            str(value)
-            for key, value in record.items()
-            if "status" in key.lower() and isinstance(value, str)
-        }
-        (unverifiable if "no_verifiable_source" in statuses else anchored).append(str(name))
-    # 2026-08-28 (Wave W). This function used to look at the RETIRED benchmark and nothing
-    # else, so `zero_absolute_anchors` was really "the retired file still has no verified
-    # value" -- true, permanent, and no longer the question anyone is asking. The sulfur
-    # branch gained three real anchors when the full text of 10.1021/jf9705983 arrived; a
-    # card that kept printing "zero absolute literature anchors" off this one file would
-    # have been stale in the flattering direction (understating what the model is now
-    # measured against, and hiding that it fails it). So the panel is scanned too, and
-    # `zero_absolute_anchors` is now false iff a PANEL benchmark carries a
-    # primary-source-verified sulfur value.
-    # 2026-08-28 (Wave X). A SECOND scan was added alongside the first, and the reason is
-    # the audit's own rule rather than tidiness: a benchmark that a constant was FITTED
-    # against is not evidence about the model, so listing it among the anchors the model
-    # "fails" would be circular in the flattering direction the moment it stopped failing.
-    # Wave X ingested the first step-level sulfur rows and declared one of them
-    # (hofmann1998_norfuraneol_h2s_145C_20min_pH5, Hofmann Table 4) a fit target. It is
+    """Check, rather than assert, which sulfur values on the panel are absolute literature anchors."""
+    # 2026-10-27: the retired `cys_ribose_140C_Hofmann1998` (two repo-internal derivations,
+    # never measurements) was deleted with the rest of quarantine; this used to read it too.
+    # 2026-08-28 (Wave X). A benchmark that a constant was FITTED against is not evidence
+    # about the model, so listing it among the anchors the model "fails" would be circular in
+    # the flattering direction the moment it stopped failing. Wave X declared one step-level
+    # sulfur row (hofmann1998_norfuraneol_h2s_145C_20min_pH5, Hofmann Table 4) a fit target. It is
     # separated out here rather than dropped, because dropping it would hide a row that IS
     # currently a miss -- exclusion has to be symmetric about which direction it flatters.
     verified: List[str] = []
@@ -314,10 +287,6 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
                 (fitted if is_fit_target else verified).append(f"{path.stem}/{name}")
     return {
         "available": True,
-        "path": _relative(SULFUR_BENCHMARK_PATH),
-        "tier": (payload.get("metadata") or {}).get("tier", payload.get("tier")),
-        "values_without_verifiable_source": sorted(unverifiable),
-        "values_with_an_anchor": sorted(anchored),
         "panel_verified_sulfur_values": sorted(verified),
         "panel_verified_sulfur_benchmarks": sorted(
             {row.split("/", 1)[0] for row in verified}
@@ -331,7 +300,7 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
             "excluding a fitted row removes its MISSES as well as its hits, and at the time "
             "of writing the one row here is a miss."
         ),
-        "zero_absolute_anchors": not anchored and not verified,
+        "zero_absolute_anchors": not verified,
     }
 
 
@@ -466,24 +435,19 @@ def _headline_sentences(card: Mapping[str, Any]) -> List[str]:
                 else ""
             )
             + "The previously shipped claim of ZERO anchors was corrected on 2026-08-28 "
-            "when the full text behind them was obtained; the retired benchmark ("
-            + Path(sulfur.get("path", "")).stem
-            + ") is kept in the tree as the provenance record of the values that were not "
-            "measurements. Absolute agreement is poor and the DIRECTION is a separate "
-            "question."
+            "when the full text behind them was obtained; the retired benchmark "
+            "(cys_ribose_140C_Hofmann1998, two values derived inside the repository, never "
+            "measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION "
+            "is a separate question."
         )
         if sulfur.get("available") and sulfur.get("panel_verified_sulfur_benchmarks")
         else "**The sulfur branch has zero absolute literature anchors.** "
         + (
-            "Both values on its only benchmark ("
-            + Path(sulfur.get("path", "")).stem
-            + ") carry no verifiable source and its tightest contract was retired; the "
-            "shipped numbers are the evidence for nothing but themselves. Its DIRECTION is "
-            "a separate question and is not thereby worthless."
+            "No panel benchmark carries a primary-source-verified sulfur value. Its "
+            "DIRECTION is a separate question and is not thereby worthless."
             if sulfur.get("available") and sulfur.get("zero_absolute_anchors")
-            else "Status could not be verified from "
-            + str(sulfur.get("path", "the benchmark file"))
-            + "; treat this sentence as unconfirmed until it can be."
+            else "Status could not be verified from the panel; treat this sentence as "
+            "unconfirmed until it can be."
         )
     )
     return [first, second, third]
@@ -680,15 +644,18 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
         other_keys = ", ".join(
             f"`{key}`" for key in census.get("by_status_key", {}) if key != "source_status"
         )
+        narrower = (
+            f"{other} narrower markers remain across {census['files']} tracked data files "
+            f"({other_keys}); {census['with_numeric_payload']} of them sit beside a number."
+            if other
+            else "No narrower marker (`value_status`, `value_anchor_status`, a DOI lookup's "
+            "`status`) carries it either."
+        )
         lines.append(
             f"**Provenance census (recounted at generation time, not copied).** "
             f"**{source_status} records** carry `source_status: no_verifiable_source` — the "
             f"figure the provenance note above quotes, reproduced here by recount; an unsourced "
-            f"record is deleted, not flagged. {other} narrower markers remain across "
-            f"{census['files']} tracked data files ({other_keys or 'none'}): a real paper whose "
-            f"one value could not be anchored, an unresolved DOI on a backlog item, or a "
-            f"quarantined benchmark kept as the record of what was wrong. "
-            f"{census['with_numeric_payload']} of them sit beside a number."
+            f"record is deleted, not flagged. {narrower}"
         )
         lines.append("")
 

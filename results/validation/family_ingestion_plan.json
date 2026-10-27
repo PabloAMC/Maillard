@@ -201,7 +201,7 @@
       "deep_research_backlog": {
         "citation_count": 0,
         "high_confidence_count": 3,
-        "occurrence_count": 12,
+        "occurrence_count": 8,
         "top_citations": []
       },
       "execution_priority": {
@@ -263,8 +263,8 @@
       "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 0,
-        "high_confidence_count": 4,
-        "occurrence_count": 19,
+        "high_confidence_count": 3,
+        "occurrence_count": 15,
         "top_citations": []
       },
       "execution_priority": {
@@ -396,7 +396,7 @@
       "deep_research_backlog": {
         "citation_count": 3,
         "high_confidence_count": 1,
-        "occurrence_count": 8,
+        "occurrence_count": 6,
         "top_citations": [
           "Kocada\u011fl\u0131 & G\u00f6kmen (2016)",
           "Brash (1999)",
@@ -671,8 +671,8 @@
       "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 1,
-        "high_confidence_count": 4,
-        "occurrence_count": 9,
+        "high_confidence_count": 3,
+        "occurrence_count": 8,
         "top_citations": [
           "van den Ouweland & Peer (1975)"
         ]
@@ -735,8 +735,8 @@
       "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 1,
-        "high_confidence_count": 3,
-        "occurrence_count": 10,
+        "high_confidence_count": 2,
+        "occurrence_count": 9,
         "top_citations": [
           "Zhang et al. (2009)"
         ]
@@ -797,8 +797,8 @@
       "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 5,
-        "high_confidence_count": 2,
-        "occurrence_count": 8,
+        "high_confidence_count": 1,
+        "occurrence_count": 6,
         "top_citations": [
           "Lee, Jo & Kim (1998)",
           "Rietjens et al. (2023)",
@@ -1077,7 +1077,7 @@
       "deep_research_backlog": {
         "citation_count": 3,
         "high_confidence_count": 4,
-        "occurrence_count": 11,
+        "occurrence_count": 10,
         "top_citations": [
           "Degen et al. (2012)",
           "Mottram (1998)",

@@ -27,9 +27,9 @@
 | 2 | 11 | Maillard/Lipid Crosstalk | 2 | 5 | 1.00 | 0.93 | 84.8 | wire lipid-Maillard competition constants into the runtime competition surface |
 | 3 | 10 | Microbial fermentation pretreatment | 5 | 2 | 0.88 | 0.98 | 84.0 | bind fermentation pretreatment state to precursor release and pH-shift effects |
 | 4 | 08 | Plant off-notes and Maillard suppression | 3 | 1 | 0.78 | 0.98 | 77.9 | Represent inhibitor loads as family-aware priors. |
-| 5 | 05 | Glutathione and peptide support | 5 | 2 | 0.82 | 0.83 | 76.8 | bound peptide and glutathione support with reusable sulfur-lane priors |
-| 6 | 03 | Thiamine degradation and sulfur support | 1 | 4 | 0.82 | 0.78 | 70.6 | promote thiamine from availability cue to calibrated sulfur-support modifier |
-| 7 | 04 | Nucleotide degradation and ribose support | 1 | 3 | 0.82 | 0.78 | 70.6 | encode nucleotide and ribose enrichment as explicit upstream state variables |
+| 5 | 05 | Glutathione and peptide support | 5 | 1 | 0.82 | 0.83 | 76.8 | bound peptide and glutathione support with reusable sulfur-lane priors |
+| 6 | 03 | Thiamine degradation and sulfur support | 1 | 3 | 0.82 | 0.78 | 70.6 | promote thiamine from availability cue to calibrated sulfur-support modifier |
+| 7 | 04 | Nucleotide degradation and ribose support | 1 | 2 | 0.82 | 0.78 | 70.6 | encode nucleotide and ribose enrichment as explicit upstream state variables |
 | 8 | 13 | Polyphenol-Amino Capping | 4 | 2 | 0.60 | 0.93 | 69.9 | Implement the pH-dependent quinone-thiol kinetics. |
 | 9 | 09 | Carbohydrate pyrolysis and caramelization | 3 | 4 | 0.68 | 0.80 | 68.0 | Use first as a severity and failure-mode lane. |
 | 10 | 15 | PE Stealth Sugar Sink | 4 | 2 | 0.60 | 0.78 | 65.4 | Implement the 1:2 sugar-PE stoichiometry multiplier. |

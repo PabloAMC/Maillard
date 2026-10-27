@@ -122,50 +122,6 @@
 
 ---
 
-### Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016
-- **DOI:** [10.1074/jbc.M109.029165](https://doi.org/10.1074/jbc.M109.029165)
-- **Matrix Family:** gamma_glutamyl_peptide_msg_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 4/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `gamma_glu_val_ec50_mM` | `0.32` |
-| `gamma_glu_leu_ec50_mM` | `0.45` |
-| `gsh_ec50_mM` | `0.68` |
-| `gsh_cck_secretion_increase_percent` | `141.0` |
-| `gsh_mouthfulness_scale_increase` | `2.2` |
-| `msg_baseline_mouthfulness_score` | `3.2` |
-| `replicates` | `4` |
-| `sensory_panel_n` | `20` |
-
-**What it supports:**
-- Bounded kokumi-support scoring from CaSR-active glutathione and gamma-glutamyl peptides in the same Family 05 lane used for sulfur-positive support
-- A runtime-visible mouthfulness anchor so glutathione-rich or hydrolysate-rich systems are not treated as purely volatile-sulfur interventions
-
-**What it does not support:**
-- Absolute kokumi endpoint prediction for complete PBMA matrices
-- A standalone sensory solver independent of formulation and process context
-
-**Next Action:** Keep the runtime landing compact by linking the CaSR and mouthfulness constants to a bounded Family 05 kokumi prior instead of opening a standalone kokumi solver.
-
----
-
 ### Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1
 - **DOI:** [10.5851/kosfa.2024.e133](https://doi.org/10.5851/kosfa.2024.e133)
 - **Matrix Family:** free_model_system
@@ -288,48 +244,6 @@
 
 ---
 
-### Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712
-- **DOI:** [10.1016/j.fochx.2026.103712](https://doi.org/10.1016/j.fochx.2026.103712)
-- **Matrix Family:** pea_isolate
-- **Kind:** `calibration_reference`
-- **Payload Role:** `retention_payload`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ✅ | Odor thresholds / sensory reported |
-
-**Score: 5/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `replicates` | `3` |
-| `temperature_C` | `25.0` |
-| `ph` | `7.0` |
-| `analyte` | `2-furfurylthiol` |
-| `binding_parameter_type` | `delta_G` |
-| `value` | `-9.72` |
-| `unit` | `kcal/mol` |
-| `analytical_method` | `molecular_docking` |
-
-**What it supports:**
-- FFT binding Gibbs free energy (delta_G) of -9.72 kcal/mol in native pea protein isolate at pH 7.0, 25°C.
-
-**What it does not support:**
-- Covalent chemical trapping via sulfhydryl exchange.
-
-**Next Action:** Keep encoded as a pea isolate FFT binding energy anchor.
-
----
-
 ### Sun et al. (2026)
 - **DOI:** [10.1016/j.foodhyd.2026.112497](https://doi.org/10.1016/j.foodhyd.2026.112497)
 - **Matrix Family:** soy_isolate
@@ -421,17 +335,15 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 5
 
-Total papers analyzed: **9** (Benchmark-eligible: **1**, Calibration references: **7**, Rejected: **1**)
+Total papers analyzed: **7** (Benchmark-eligible: **1**, Calibration references: **5**, Rejected: **1**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Nishimura & Abe (2024) | 6/8 | ✅ Eligible | soy_hydrolysate |
 | Wang, Yang & Song (2012), Food Chemistry 131:280 | 5/8 | ⚠️ Calibration | glutathione_xylose_model |
-| Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016 | 4/8 | ⚠️ Calibration | gamma_glutamyl_peptide_msg_model |
 | Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1 | 2/8 | ❌ Rejected | free_model_system |
 | Wang et al. (2023) | 5/8 | ⚠️ Calibration | soy_isolate |
 | Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333 | 5/8 | ⚠️ Calibration | soy_isolate |
-| Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712 | 5/8 | ⚠️ Calibration | pea_isolate |
 | Sun et al. (2026) | 3/8 | ⚠️ Calibration | soy_isolate |
 | Sun et al. (2025) | 3/8 | ⚠️ Calibration | pea_isolate |
 
@@ -444,10 +356,8 @@ Total papers analyzed: **9** (Benchmark-eligible: **1**, Calibration references:
 
 ### CALIBRATION (Score 3-5)
 - `Wang, Yang & Song (2012), Food Chemistry 131:280` (Score: 5/8)
-- `Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016` (Score: 4/8)
 - `Wang et al. (2023)` (Score: 5/8)
 - `Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333` (Score: 5/8)
-- `Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712` (Score: 5/8)
 - `Sun et al. (2026)` (Score: 3/8)
 - `Sun et al. (2025)` (Score: 3/8)
 

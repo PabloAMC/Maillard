@@ -142,81 +142,6 @@
       }
     },
     {
-      "id": "ohsu_2025_kokumi_casr_anchor",
-      "citation": "Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016",
-      "doi": "10.1074/jbc.M109.029165",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "payload_role": "benchmark_intake",
-      "observable_panel_tags": [
-        "kokumi_support",
-        "glutathione_support",
-        "peptide_support"
-      ],
-      "process_state_scope": [
-        "heated_matrix",
-        "aqueous_pre_extrusion_model",
-        "extrusion_structured"
-      ],
-      "supporting_families": [
-        "01",
-        "10"
-      ],
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "matrix_family": "gamma_glutamyl_peptide_msg_model",
-      "eligibility": "benchmark_eligible_parameter",
-      "status": "ready_for_calibration_encoding",
-      "what_it_supports": [
-        "Bounded kokumi-support scoring from CaSR-active glutathione and gamma-glutamyl peptides in the same Family 05 lane used for sulfur-positive support",
-        "A runtime-visible mouthfulness anchor so glutathione-rich or hydrolysate-rich systems are not treated as purely volatile-sulfur interventions"
-      ],
-      "what_it_does_not_support": [
-        "Absolute kokumi endpoint prediction for complete PBMA matrices",
-        "A standalone sensory solver independent of formulation and process context"
-      ],
-      "key_values": {
-        "gamma_glu_val_ec50_mM": 0.32,
-        "gamma_glu_leu_ec50_mM": 0.45,
-        "gsh_ec50_mM": 0.68,
-        "gsh_cck_secretion_increase_percent": 141.0,
-        "gsh_mouthfulness_scale_increase": 2.2,
-        "msg_baseline_mouthfulness_score": 3.2,
-        "replicates": 4,
-        "sensory_panel_n": 20
-      },
-      "repo_next_action": "Keep the runtime landing compact by linking the CaSR and mouthfulness constants to a bounded Family 05 kokumi prior instead of opening a standalone kokumi solver.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "ohsu_2025_kokumi_casr_support_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "sulfur_peptide_priors"
-          ]
-        }
-      ],
-      "requires_primary_data": false,
-      "citation_repair": {
-        "old": "Ohsu et al. (2025)",
-        "new": "Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016",
-        "date": "2026-08-26",
-        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
-      },
-      "doi_repair": {
-        "old": "10.1021/acs.jafc.2c04919",
-        "new": "10.1074/jbc.M109.029165",
-        "date": "2026-08-26",
-        "basis": "The stored 10.1021/acs.jafc.2c04919 is Yang et al. (2022), not Ohsu, and no 'Ohsu et al. (2025)' exists. The real Ohsu CaSR paper is 'Involvement of the Calcium-sensing Receptor in Human Taste Perception' (2010)."
-      },
-      "value_anchor_status": "no_verifiable_source",
-      "citation_caveat": "The stored kokumi constants are NOT in this paper: Ohsu et al. (2010) report CaSR EC50s of 41.9 nM (gamma-Glu-Val-Gly) and 76.5 nM (GSH), three orders of magnitude from the stored 0.32/0.68 mM; there is no CCK data; and the sensory scale runs -2..+2, so a '+2.2 mouthfulness units' uplift is out of range. Flagged by the parallel SLR/priors verification."
-    },
-    {
       "id": "squeo_2023",
       "citation": "Squeo et al. (2023)",
       "doi": "10.3390/foods12061331",
@@ -662,7 +587,8 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "thiamine_cys_xylose_145C_Cerny2008",
-          "path": "deleted 2026-09-04: no source for the value (data/benchmarks/quarantined/README.md)"
+          "path": "deleted 2026-10-27: no source for the value (data/benchmarks/quarantined/README.md)",
+          "artifact_status": "deleted"
         },
         {
           "artifact_type": "benchmark_intake_entry",
@@ -2186,16 +2112,6 @@
           "artifact_type": "flavor_reference_payload",
           "artifact_id": "liu_2023_ppi_nonanal_band",
           "path": "data/lit/flavor_reference_payloads.json"
-        },
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "liu_2023_ppi_heptadienal_band",
-          "path": "data/lit/flavor_reference_payloads.json"
-        },
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "liu_2023_ppi_ibmp_band",
-          "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
       "repo_next_action": "Use as the lean PPI matrix-baseline anchor so off-note penalties are explicit before any meaty-positive optimization.",
@@ -2457,9 +2373,8 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/spi_hvp_xylose_120C_PMC9905368.json",
-          "artifact_status": "quarantined",
-          "artifact_status_note": "Benchmark quarantined 2026-08-26 (unverifiable source); path corrected 2026-09-03. Not runtime-bound."
+          "path": "deleted 2026-10-27: no source for the value (data/benchmarks/quarantined/README.md)",
+          "artifact_status": "deleted"
         }
       ],
       "requires_primary_data": false,
@@ -2514,9 +2429,8 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
-          "path": "data/benchmarks/quarantined/wheat_gluten_hvp_xylose_120C_PMC9905368.json",
-          "artifact_status": "quarantined",
-          "artifact_status_note": "Benchmark quarantined 2026-08-26 (unverifiable source); path corrected 2026-09-03. Not runtime-bound."
+          "path": "deleted 2026-10-27: no source for the value (data/benchmarks/quarantined/README.md)",
+          "artifact_status": "deleted"
         }
       ],
       "requires_primary_data": false,
@@ -2692,7 +2606,8 @@
         {
           "artifact_type": "benchmark",
           "artifact_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
-          "path": "data/benchmarks/quarantined/furosine_extrusion_crossover_140C_RamirezJimenez2000.json"
+          "path": "deleted 2026-10-27: no source for the value (data/benchmarks/quarantined/README.md)",
+          "artifact_status": "deleted"
         },
         {
           "artifact_type": "safety_reference",
@@ -9767,79 +9682,6 @@
       }
     },
     {
-      "id": "siripitakpong_2026_fft_retention",
-      "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "payload_role": "retention_payload",
-      "observable_panel_tags": [
-        "core_meaty",
-        "matrix_intake",
-        "retention",
-        "thermodynamics"
-      ],
-      "process_state_scope": [
-        "ambient_slurry"
-      ],
-      "supporting_families": [
-        "01",
-        "03"
-      ],
-      "target_modules": [
-        "literature_runtime",
-        "headspace"
-      ],
-      "matrix_family": "pea_isolate",
-      "eligibility": "benchmark_eligible",
-      "status": "encoded",
-      "what_it_supports": [
-        "FFT binding Gibbs free energy (delta_G) of -9.72 kcal/mol in native pea protein isolate at pH 7.0, 25°C."
-      ],
-      "what_it_does_not_support": [
-        "Covalent chemical trapping via sulfhydryl exchange."
-      ],
-      "key_values": {
-        "replicates": 3,
-        "temperature_C": 25.0,
-        "ph": 7.0,
-        "analyte": "2-furfurylthiol",
-        "binding_parameter_type": "delta_G",
-        "value": -9.72,
-        "unit": "kcal/mol",
-        "analytical_method": "molecular_docking"
-      },
-      "repo_next_action": "Keep encoded as a pea isolate FFT binding energy anchor.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "intake_registry_entry",
-          "artifact_id": "siripitakpong_2026_fft_retention",
-          "path": "data/lit/benchmark_intake_registry.json"
-        },
-        {
-          "artifact_type": "slr_incorporation_ledger",
-          "artifact_id": "siripitakpong_2026_fft_retention",
-          "path": "results/literature/slr_incorporation_matrix.json"
-        }
-      ],
-      "requires_primary_data": false,
-      "doi_repair": {
-        "old": "10.1016/j.foodchem.2025.145815",
-        "new": "10.1016/j.fochx.2026.103712",
-        "date": "2026-08-26",
-        "basis": "The stored 10.1016/j.foodchem.2025.145815 is a Sharma et al. (2025) review with no primary binding data. The real Siripitakpong et al. (2026) paper is 'Effects of deamidation by protein glutaminase on the flavor binding properties of pea protein isolate' - correct author, year and matrix."
-      },
-      "doi": "10.1016/j.fochx.2026.103712",
-      "citation_repair": {
-        "old": "Sharma et al. (2025)",
-        "new": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
-        "date": "2026-08-26",
-        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
-      },
-      "value_anchor_status": "no_verifiable_source",
-      "citation_caveat": "The parallel SLR/priors verification matched the stored delta-G anchors to this paper EXACTLY, but they are isotherm delta-G values for VANILLIN, not molecular-docking scores for 2-furfurylthiol. The entry's compound assignment and method claim ('molecular docking and homology modeling') are therefore both wrong; the number should be re-derived or dropped."
-    },
-    {
       "id": "mdpi_plants_2024_hemp_volatiles",
       "citation": "Chen, Oliveira, Dias & Ismail (2025), Plants 14:274",
       "doi": "10.3390/plants14020274",
@@ -10884,7 +10726,7 @@
     "instrumentation": "HS-SPME-GC-MS with isotopically labelled internal standard; add acrylamide LC-MS/MS for the high-temperature SPI arm."
   },
   "closed_unsourced_citations": {
-    "note": "Sources searched for and not found (CrossRef sweeps 2026-08-26/27; gap search 2026-10-09). Their records were deleted 2026-10-27; the citation strings stay so the deep-research queue never reopens them. Nothing here is a value; the reasons are in git history (git log -S'<citation>' -- data/lit/benchmark_intake_registry.json).",
+    "note": "Sources searched for and not found (CrossRef sweeps 2026-08-26/27; gap search 2026-10-09). Their records were deleted 2026-10-27 (the backlog items among them the same day); the citation strings stay so the deep-research queue never reopens them. Nothing here is a value; the reasons are in git history (git log -S'<citation>' -- data/lit/benchmark_intake_registry.json).",
     "citations": [
       "De Leyn & Muylle (2019)",
       "Comunian et al. (2021)",
@@ -10909,7 +10751,15 @@
       "Li et al. (2010)",
       "Pruteanu et al. (2023)",
       "Fadel et al. (2015)",
-      "Wu et al. (2025)"
+      "Wu et al. (2025)",
+      "Tran et al. (2023 / PMC9846454)",
+      "Wang et al. (2024)",
+      "Xu, H. et al. (2025)",
+      "Henle (2005)",
+      "Kamal-Eldin et al. (2003)",
+      "Blank, Devaud & Grosch (2003)",
+      "Hofmann, Schieberle & Grosch (1996)",
+      "Ohsu et al. (2025)"
     ]
   }
 }

@@ -2,8 +2,8 @@
 
 Queue policy: ready queues are exclusive to non-encoded intake rows; wet_lab_blocked comes only from structural gaps with closure_outcome=wet_lab_only
 
-Encoded references: 178
-Ready runtime: 0
+Encoded references: 172
+Ready runtime: 1
 Ready benchmark: 0
 Wet-lab blocked: 4
 Queue conflicts: 0
@@ -12,7 +12,7 @@ Queue conflicts: 0
 
 | ID | Template | Family | Matrix | Triage | Encoding | Next Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| none | n/a | n/a | n/a | n/a | n/a | no runtime-only backlog remains in the curated intake registry |
+| blank_devaud_grosch_2003_g6p_hdmf_prior | computational_prior | nucleotide_and_ribose_support | aqueous_model_system | ready_directional_prior | template_required | Encode as a bounded phosphorylated-sugar prior so G6P can outrank glucose when HDMF-support signals matter. |
 
 ## Ready Benchmark
 

@@ -446,38 +446,6 @@
     ],
     "pea_protein": [
       {
-        "id": "siripitakpong_2026_fft_retention_payload",
-        "compound": "2-furfurylthiol",
-        "source_citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
-        "doi": "10.1016/j.fochx.2026.103712",
-        "provenance_tier": "literature_derived_transfer",
-        "matrix_context": "native_pea_isolate",
-        "analytical_method": "molecular_docking",
-        "retention_or_release_mode": "free_energy_binding",
-        "direct_binding_or_headspace_measure": "direct_binding_measure",
-        "temperature_context": "25.0 C",
-        "time_context": "docking simulation",
-        "reversibility_assumption": "reversible_non_covalent",
-        "transferability_notes": "Gibbs free energy of binding for FFT to native PPI globulin pockets.",
-        "numeric_reference": {
-          "units": "delta_G_kcal_mol",
-          "value": -9.72
-        },
-        "doi_repair": {
-          "old": "10.1016/j.foodchem.2025.145815",
-          "new": "10.1016/j.fochx.2026.103712",
-          "date": "2026-08-26",
-          "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
-        },
-        "citation_repair": {
-          "old": "Siripitakpong et al. (2026), Food Chemistry",
-          "new": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
-          "date": "2026-08-26",
-          "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
-        },
-        "citation_caveat": "IMPORTANT: the ligand is VANILLIN, not 2-furfurylthiol - the word 'furfuryl' does not occur anywhere in the paper. The entry's compounds_supported ('2-furfurylthiol') is therefore wrong and the -9.72 kcal/mol value must not be used as an FFT binding energy. Also note -9.72 kcal/mol is the thermodynamic delta-G from binding isotherms, not the docking score (the docking affinities are -3.9689 kcal/mol for PPI and -3.7660 for deamidated PPI), so the entry's note 'obtained via molecular docking and homology modeling' is also inaccurate."
-      },
-      {
         "id": "sun_2025_ppi_lenthionine_retention",
         "compound": "lenthionine",
         "source_citation": "Sun et al. (2025), Food Hydrocolloids",

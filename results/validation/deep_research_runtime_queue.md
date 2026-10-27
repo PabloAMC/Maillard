@@ -44,6 +44,6 @@ Landing registry: data/lit/computational_priors.json
 | Ordoudi et al. (2014 / PMC12484514) | already_runtime_bound |
 | Hrncirik & Zeelenberg (2014) | already_landed_in_runtime_registry |
 | Aliani & Farmer (2005) | already_landed_in_runtime_registry |
-| Blank, Devaud & Grosch (2003) | already_runtime_bound |
+| Blank, Devaud & Grosch (2003) | no_verifiable_source |
 | Glomb & Monnier (1995) | already_landed_in_runtime_registry |
 | Hidalgo & Zamora (2004) | already_landed_in_runtime_registry |
