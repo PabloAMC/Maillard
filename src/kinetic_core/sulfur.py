@@ -474,6 +474,16 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "2-mercapto-3-pentanone is 96% unlabelled from Cerny's NF spike -- the "
         "sharpest single-species NF-route marker in the corpus.",
     ),
+    # ---- B49 (2026-10-27): norfuraneol's other sulfide products -------------------------
+    # Whitfield & Mottram 1999 / 2001 Table 2: fed NF + H2S gives mostly dithiolanones,
+    # thiophenones and thiophenes, and the split moves away from thiols between pH 4.5 and
+    # 6.5 even when H2S is fed directly. One lumped step through the HYDROSULFIDE ANION, so its
+    # pH response is the declared mechanism and not a fitted slope. INERT (zero) unless a B49
+    # report supplies `k_nf_shet`, so every earlier wave reproduces bit for bit.
+    Reaction(
+        "r_nf_shet", {"NF": 1, "H2S": 1}, {"SHET": 1}, "k_nf_shet",
+        "B49. Norfuraneol + HS- -> sulfur heterocycles (lumped). Zero until B49 supplies it.",
+    ),
     Reaction(
         "r_ha_mp_mft", {"HA": 1, "MP": 1}, {"MFT": 1}, "k_ha_mp_mft",
         "THE C2+C3 ROUTE. Hofmann 1998 T10's single most effective measured MFT "
@@ -1017,6 +1027,9 @@ REACTION_PH_FACTOR: Mapping[str, str] = {
     "r_ddp_mft_hs": "hs_anion",
     "r_nf_mft": "neutral_h2s",
     "r_nf_mp3p": "neutral_h2s",
+    # B49: the heterocycle branch adds through the hydrosulfide anion; its rise with pH is what
+    # takes norfuraneol away from the thiols (Whitfield 2001, pH 6.5).
+    "r_nf_shet": "hs_anion",
     # B27: the redox branch of r_nf_mp3p carries the SAME factor, so the split leaves the total flux exact.
     "ch_redox_mp3p": "neutral_h2s",
     "r_mgo_mp": "neutral_h2s",

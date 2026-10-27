@@ -1784,6 +1784,9 @@ def frozen_parameters(lane: str) -> Dict[str, Any]:
         if frozen.get("dicarbonyl_redox"):
             # B27: log10 of the oxidant yield per mercaptoketone formed (a shipped B27 report or a draw)
             out["dicarbonyl_redox"] = {k: float(v) for k, v in frozen["dicarbonyl_redox"].items()}
+        if frozen.get("nf_shet_log10_k"):
+            # B49: norfuraneol + HS- -> sulfur heterocycles, log10 k at 145 C (a shipped B49 report or a draw)
+            out["nf_shet_log10_k"] = {k: float(v) for k, v in frozen["nf_shet_log10_k"].items()}
     if lane == ACRYLAMIDE:
         frozen = _read(_B3_FIT_REPORT)["frozen_parameters"]
         out["log10_k_ref_at_160C"] = {
@@ -1836,7 +1839,7 @@ def core_parameters(
         if not {"log10_k_ref_at_145C", "lumped_formation_Ea_kJ_mol",
                 "decay_Ea_kJ_mol", "formation_Ea_by_route_kJ_mol", "oxygen",
                 "oxygen_log10_k", "dimer_release_log10_k", "mele_site_log10_yield", "thiol_addition",
-                "dicarbonyl_redox"} <= set(override):
+                "dicarbonyl_redox", "nf_shet_log10_k"} <= set(override):
             report = _read(_B2_FIT_REPORT)["frozen_parameters"]
         pick = lambda key: override[key] if key in override else report[key]  # noqa: E731
         # B10: a report (or a draw) that carries the two route barriers uses them;
@@ -1910,6 +1913,17 @@ def core_parameters(
             from .parameters_sulfur import apply_dicarbonyl_redox
 
             apply_dicarbonyl_redox(parameters, float(redox["log10_ox_yield_per_mercaptoketone"]))
+        # B49: the heterocycle branch of norfuraneol from the report's (or a draw's) log10 block, with the
+        # lumped formation barrier the same report carries; inert (zero) otherwise.
+        shet: Dict[str, float] = {}
+        if report is not None and report.get("nf_shet_log10_k"):
+            shet.update(report["nf_shet_log10_k"])
+        shet.update(override.get("nf_shet_log10_k") or {})
+        if shet:
+            from .parameters_sulfur import nf_shet_parameters
+
+            parameters.update(nf_shet_parameters(k_nf_shet=10.0 ** float(shet["k_nf_shet"]),
+                                                 ea_kj_mol=float(pick("lumped_formation_Ea_kJ_mol"))))
     if lane == ACRYLAMIDE:
         report = None
         if not {"log10_k_ref_at_160C", "fitted_Ea_kJ_mol"} <= set(override):

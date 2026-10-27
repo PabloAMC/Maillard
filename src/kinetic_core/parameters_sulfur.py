@@ -1778,6 +1778,41 @@ MEASURED_SULFUR = {**MEASURED_SULFUR, **dicarbonyl_redox_parameters()}
 
 
 # ---------------------------------------------------------------------------
+# B49 (2026-10-27): norfuraneol + hydrosulfide -> sulfur heterocycles (lumped)
+# ---------------------------------------------------------------------------
+#: Search band of log10 k_nf_shet at 145 C (1/(mM min)), the same span the lane gives its other
+#: bimolecular sulfide additions. Declared, not measured.
+NF_SHET_BOUNDS_LOG10K: Tuple[float, float] = (-8.0, 1.0)
+
+
+def nf_shet_parameters(k_nf_shet: float = 0.0, ea_kj_mol: float = 64.08) -> Dict[str, SulfurParameter]:
+    """
+    The B49 heterocycle-branch constant as a SulfurParameter. The DEFAULT is zero: ``r_nf_shet``
+    carries no flux and every wave before B49 reproduces bit for bit. Its pH dependence is the
+    ``hs_anion`` factor (a mechanism claim, no number); its barrier is the lumped formation barrier
+    the fit carries for the norfuraneol route. Pre-registration: kinetic_core_b49_prereg.md.
+    """
+    return {
+        "k_nf_shet": _sulfur_parameter(
+            "k_nf_shet", "norfuraneol + HS- -> sulfur heterocycles (dithiolanones, thiophenones, thiophenes; lumped)", 2,
+            k_ref=float(k_nf_shet), ea=float(ea_kj_mol),
+            evidence_class="derived_from_fit_data",
+            source_anchor=("B49 (kinetic_core_b49_prereg.md): Whitfield & Mottram 1999 Table 2, fed norfuraneol + H2S "
+                           "or cysteine at pH 4.5, the heterocycle classes against MFT; pH 6.5 twin (Whitfield & "
+                           "Mottram 2001) held out"),
+            dossier_anchor="whitfield1999_extraction.md; whitfield2001_extraction.md sec. 3 (Table 2)",
+            conditions="aqueous, 0.5 M phosphate, 140 C / 60 min, pH 4.5 (fit) and 6.5 (hold-out)",
+            ph=5.0, t_ref_k=T_REF_S_K, t_range=(100.0, 145.0), rate_transfer="not_licensed",
+            channel="fitted_branch", flags=("b49_nf_shet", "fitted_here", "no_literature_value"),
+            note="Zero until a B49 report supplies it.",
+        ),
+    }
+
+
+MEASURED_SULFUR = {**MEASURED_SULFUR, **nf_shet_parameters()}
+
+
+# ---------------------------------------------------------------------------
 # (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four
 # ---------------------------------------------------------------------------
 #: FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 1. Kang et al. 2026's Table S4

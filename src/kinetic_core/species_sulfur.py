@@ -353,6 +353,17 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
                 "edge SHIPS WITH RATE EXACTLY ZERO and is structural only; see "
                 "``parameters_furanic.EDGE_C_ZERO_BY_DECLARATION``."),
             ),
+    Species("SHET", "sulfur heterocycles from norfuraneol + sulfide (dithiolanones, thiophenones, "
+                    "thiophenes, trithiolanes; lumped)",
+            5, 0, "pool", False, sulfur=1,
+            note=(
+                "WAVE B49 (2026-10-27). Whitfield & Mottram 1999 (pH 4.5) and 2001 (pH 6.5) Table 2: "
+                "fed norfuraneol + H2S gives mostly these classes, not thiols (503 of 616 ug per 10 mg "
+                "at pH 4.5, MFT 12), and the split moves further from thiols at pH 6.5. Lumped as C5 "
+                "with ONE sulfur: dithiolanones carry two, so the pool undercounts the sulfur it "
+                "consumes; H2S is in excess in every pot that charges it. TERMINAL. Its step "
+                "(r_nf_shet) is inert (zero) unless a B49 report supplies the constant."),
+            ),
 )
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
@@ -398,7 +409,7 @@ SITE_POOLS: Tuple[str, ...] = tuple(s.key for s in SULFUR_SPECIES if s.role == "
 #: reversibility experiment of any kind. An unmeasured release rate would be an
 #: invented one.
 TERMINAL_POOLS: Tuple[str, ...] = (
-    "OLG", "PRB", "FRAG_N", "FRAG_S", "ACID", "CBX", "HMFAD", "DMHFS")
+    "OLG", "PRB", "FRAG_N", "FRAG_S", "ACID", "CBX", "HMFAD", "DMHFS", "SHET")
 
 
 # ---------------------------------------------------------------------------

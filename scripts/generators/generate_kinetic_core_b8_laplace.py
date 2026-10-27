@@ -118,6 +118,10 @@ def frozen_vector(report: Dict[str, Any]) -> np.ndarray:
     redox = fr.get("dicarbonyl_redox") or {}
     if redox:
         extra += [float(redox["log10_ox_yield_per_mercaptoketone"])]
+    # B49: log10 of the norfuraneol heterocycle-branch constant, appended after everything else.
+    shet = fr.get("nf_shet_log10_k") or {}
+    if shet:
+        extra += [float(shet["k_nf_shet"])]
     return np.array(
         [fr["log10_k_ref_at_145C"][k] for k in B23.PARAM_ORDER]
         + [lumped]
