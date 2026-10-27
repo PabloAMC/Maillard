@@ -297,10 +297,14 @@ constant, which is what makes `rank` useful.
 > `data/species/protein_matrices.yml`. The rate constants themselves live in
 > `src/kinetic_core/`, each with its evidence class, and the fitted ones are loaded from the
 > frozen fit reports under `results/validation/`. Every fall in the old census was a
-> deletion, not a verification. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
+> deletion, not a verification. The registries are `data/keys/papers.yml` (449 papers, 255 of them with an
 > extraction dossier) and
-> `data/keys/compounds.yml` (74 InChIKey-resolved compounds); `scripts/ci/citation_gate.py`
-> blocks a dead or confabulated DOI.
+> `data/keys/compounds.yml` (74 InChIKey-resolved compounds). `scripts/ci/citation_gate.py`
+> is structural and offline: it blocks malformed and known-confabulated DOIs, but a DOI that
+> resolves to the wrong paper is invisible to it, and it never checks a value. Values are
+> checked by reading the paper into a dossier; a read-only audit on 2026-10-27 re-checked the
+> measured rate constants and the scored bundles against the PDFs (see
+> `tasks/data_restructure_plan.md`).
 
 <!-- BEGIN GENERATED: model-card -->
 

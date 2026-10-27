@@ -898,7 +898,7 @@ USING_THE_TOOL and the validation contract no longer carry numbers or verbs that
 9.8e-4 /s exactly; Fig. 1 gives the 0.023 /min brew hold-out row; disulfide <1.5 %) and Schroën & Berton-Carabin 2022 (lipid lane:
 k4 = 6e-3 /h, k_hexanal = 6e-5 /h for all five emulsifiers, visual-agreement fits, 25 C only) — extraction dossiers written, no
 code change warranted. Martins & van Boekel 2005 was on disk all along (`martins2005.pdf`): Table 2 IS the trunk backbone; all ten constants
-match, the ten k-side HPDs were transcribed and two Ea intervals corrected (step 3 ±1.9, step 10 ±63.4 not ±36); metadata
+match (2026-10-27 re-check: the ten ln k exactly, eight of the ten Ea rounded to the integer, within 0.5 kJ/mol), the ten k-side HPDs were transcribed and two Ea intervals corrected (step 3 ±1.9, step 10 ±63.4 not ±36); metadata
 only, no prediction moves. Every primary source the fit cites three or more times now has a PDF and a dossier.
 
 **Owner decisions executed 2026-09-04 (papers read the same day):** Cerny 2008 read: no MFT quantity in it → the quarantined
@@ -964,8 +964,9 @@ hashes for every artifact that carries a block, the envelope included).
       (`WAVES.md`, hash manifest); the fork/multiprocessing coverage configuration is fixed (`uncertainty.py` 92 %).
 - [x] **Shape-only tests (closed 2026-09-03 by the two test-audit passes):** prose tests deleted, wave contract files
       labelled frozen records, artifact-reading tests either recompute live (guards) or are contract tests by design.
-- [ ] **Bundle verification coverage: 16 panel bundles have no `content_verification` block and only 31 of 278 papers
-      carry an extraction dossier** (the quantification-class half of this item closed on 2026-09-03). The trust-loop
+- [x] **Bundle verification coverage** (closed; confirmed 2026-10-27: all 37 scored bundles carry a
+      `content_verification` block, 255 of 449 papers a dossier). Original item: **16 panel bundles had no
+      `content_verification` block and only 31 of 278 papers carried an extraction dossier** (the quantification-class half of this item closed on 2026-09-03). The trust-loop
       bundles (Pratap-Singh, Trikusuma, Resconi, Bolton, Cerny, ACSRef3) and the matrix bundles are the ones without a
       primary-source pass; one pass per bundle, recorded in the bundle, closes it. Needs the PDFs (`data/articles/`).
 
@@ -2587,10 +2588,29 @@ record under `data/lit/` or `results/literature/`), never a trace.
 - [x] Census guard now pins **zero** (`test_no_record_carries_no_verifiable_source`); model card
   census rewritten (the stale hardcoded "65 and 65" went with it). Family ingestion queue moves
   07 -> 11 first: every family-07 backlog citation was unsourced.
-- [ ] **17 narrower markers remain** (`value_status`, `value_anchor_status`, `doi_resolution.status`):
-  a real paper whose one value could not be anchored (Liu 2023 heptadienal / IBMP bands, Ohsu 2010,
-  Siripitakpong 2026, the Yaylayan-repaired G6P prior), nine backlog DOI lookups, and the quarantined
-  Hofmann 1998 file. Same treatment is possible value by value; not done here.
+- [x] **The 17 narrower markers, deleted the same day** (owner: "Fix them too"): nine backlog items labelled
+  `RUNTIME_BOUND` whose sources do not exist; the Liu 2023 heptadienal and IBMP bands (compounds absent from the
+  source); the G6P/HDMF prior (no Blank/Devaud/Grosch 2003 paper; 4.4x not in Yaylayan 2003); the Ohsu kokumi
+  constants (1000x off the real Ohsu 2010); Siripitakpong 2026 in all four records (a vanillin binding energy
+  relabelled as 2-furfurylthiol). The quarantine was emptied under its own rule (five bundles; git keeps them).
+  The model card's sulfur collector now scans the panel only.
+- [x] **Read-only literature audit (2026-10-27).** What the model's numbers rest on holds up against the PDFs:
+  Kocadagli & Gokmen 2016 10/10, De Vleeschouwer 2009 7/7, Zheng & Ho 1994 exact, Martins & van Boekel 2005
+  ln k exact and Ea rounded to the integer; all 37 scored bundles carry a full-text `content_verification`
+  block; Hofmann 1998 Tables 1-3 and Yiltirak 2026 Table S3 8/8 exact. The defects sat in the literature-side
+  registries (`benchmark_intake_registry`, `computational_priors`, the payload files, the two ledgers), which no
+  prediction or score reads. Fixed here: the three `*_Chang2021` hold-outs named the wrong authors (Lin, Chan,
+  Kao & Sung per CrossRef; values untouched); the Martins time-series header said "not wired" though it is B1's
+  fit file; README overstated the citation gate (structural and offline; a live DOI to the wrong paper is
+  invisible to it, and it never checks values).
+- [ ] **Not audited yet:** the ~54 sulfur fit rows typed into `generate_kinetic_core_b2_3_fit.py` (and the other
+  fit generators' inline rows) carry no verification marker; the 92-claim directional panel; the 26 matrix
+  measured-ratio constants (several cite the k2 synthesis dossier rather than the paper).
+- [ ] **Residual weak records, no effect on predictions:** `arrhenius_params.yml` entries with `audit_flag`
+  (read only by the prefactor-audit report) and about ten `computational_priors.json` records tagged
+  `unanchored_no_doi_field` (side modules only). Same treatment as above is possible; owner's call.
+- [ ] Minor metadata: the Meynier "2002" dossier is a 2003 paper (Lait 83); `hofmann2001` and `hofmann2002`
+  dossiers share DOI 10.1021/jf010823n.
 
 ### Native runtime beside the container (2026-09-14, owner: "can we remove OrbStack?")
 

@@ -178,3 +178,10 @@
   a trace showed the front door opens none of those files. Rule: before quoting a repository statistic to
   anyone outside, open the test or generator that pins it and check that its definition measures what the
   sentence claims; where it does not, measure (trace, recount) before speaking.
+
+- **A verification claim names its scope, or it reads as total.** The owner believed the literature was sane
+  because the record said "every defective anchor was repaired or explicitly labelled" and "the citation gate
+  blocks a confabulated DOI". Both were true of a narrower scope than they sounded: labelled records stayed in
+  the tree, and the gate never sees a live DOI that points at the wrong paper, nor any value. Rule: a sentence
+  that says something is verified states what was checked (which files, against what) and what was not; an
+  unsourced record is deleted, not labelled and kept.
