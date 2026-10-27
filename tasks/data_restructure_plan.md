@@ -2904,3 +2904,45 @@ one dossier (a small alias table for the renamed ones) or to a triage line that 
   Elmore 2002 (`elmore2002`): methyl linoleate cuts MFT 14x and linolenate >80x, FFT barely — an MFT-selective
   lipid coupling. Shu 1985: no H2S measured, cannot test the thermolysis pH law. Registry gaps: ACTZ
   (2-acetylthiazole) not in `data/keys/compounds.yml`.
+- **2026-10-28, design inputs for the TTCA reroute (next wave after B58):** de Roos 2005 (`deroos2005`): Cys + aldose
+  ⇌ Schiff base ⇌ thiazolidine (TTCA, a side reservoir in fast equilibrium) and Schiff base → Cys-Amadori (ring form)
+  → deoxyosones; so the network should be PENT + Cys ⇌ TTCA (K, Cao 2017) with loss written on the bound pool,
+  feeding a Cys-Amadori species that decays to 1-/3-DX (split ≈ 2.5, Zhai 2019), NOT TTCA → DX directly. Measured:
+  purified Cys-Amadori decay in boiling 0.5 M phosphate k ≈ 4.5e-3 min⁻¹ (pH 5), 1.4e-2 (pH 6) — a hold-out band;
+  formation/decay in concentrated pots ~0.5–1.2e-2 min⁻¹ at 90 °C (two-step fit, assumption). Yaghmur 2002: furfural's
+  main cysteine-dependent loss is 2-(2-furanyl)thiazolidine (furfural's TTCA analogue; FFT ≤ 0.09 of it). Also read:
+  Xu 2011 (lard cuts MFT ÷21, oxidised ÷143; ratios only), Gao 2020b (fish hydrolysate raises MFT ×17, FFT ×160 over
+  Cys + Xyl in water at 184 °C — a matrix effect), Qi 2022 (stewed goat: no MFT/FFT detected; methanethiol, DMTS).
+- **2026-10-28, a measured bound on the disulfide side of the thiol sink** (`guth1995`, Guth, Hofmann, Schieberle &
+  Grosch 1995, 100 °C, 2 h, water): with a thiol trap, MFT-MFT loses 86 % (k ≈ 0.0165 min⁻¹) and FFT-FFT ≥ 98 %, the
+  thiols recovered at 62 % / 92 %; without a trap the MFT-MFT pool is conserved (95.5 %) and only scrambles. So
+  disulfide formation is REVERSIBLE at ≥ 100 °C, not an irreversible sink, and disulfide release is far faster than
+  B17's fitted log10 −8.26. Net MFT-MFT decay ≲ 4e-4 min⁻¹. G1 (thiol loss kinetics) otherwise still unmeasured:
+  Dreher 2003's day-42→56 MFT fall (pH 3.8, 35 °C) overlaps zero. Thiamine (G5): no multi-temperature H2S data in
+  hartman1984/1984b, hincelin1992, dreher2003; Dreher's MFT + 2×disulfide = 6.4 % of thiamine at 35 °C contradicts
+  Dwivedi 1972's ≤ 4 % non-thiazole sulfur at 121 °C (recorded, unresolved). Hartman 1984b: MFT peaks at a_w ~0.72
+  (TMP-equivalents) — a second directional a_w series beside Modi 2008.
+- **2026-10-28, real-meat target band extended** (`zhao2017` pork broth, `du2020` grilled mutton, `liu2019` roast duck,
+  with `guth1994` and `fan2018`), µg/kg: **MFT 1.1–3.4**, **FFT 0.5–5.9** (duck 18–158, weak SPME class, outlier),
+  **methional 6.6–160**, hexanal 27–141, DMDS 0.36–0.75, DMTS ~1 (pork). **The MFT disulfide holds 60–71 % of
+  MFT-derived sulfur in mutton and ~60 % in chicken**: a ratio the model can be checked against. Zhang 2023b
+  (`zhang2023b`): methionine + sugar WITHOUT cysteine gives DMTS 3–29 ng/mL, which cuts against the engine's stated
+  reason for refusing DMTS; cysteine cuts DMDS 2 to >100x (directions only; absolute values disagree up to 700x
+  between its figures). Zhang 2022: MFT/FFT only in supplementary tables not on disk.
+- **2026-10-28, glutathione wave inputs from the Ho-lab series:** Lu 2019 (`lu2019`): GSH alone, 7 mM, 110 °C, 2 h loses
+  26.6 %, of which 19.0 points go to GSSG (oxidation) and 7.6 to degradation (total k ≈ 2.6e-3 min⁻¹; non-oxidative
+  ~7e-4, ~2x Zheng's pH 7 H2S constant) — the first measured GSSG pool, matching Zhou 2023c's unaccounted sulfur;
+  GSH traps deoxypentosone (130 mM cuts GO 4.3x, MGO 5.3x, furfural ~60x). Tang 2019 (`tang2019`): GSH–xylose
+  glycation accounts for >96 % of GSH lost at 50–80 °C (Ea fitted under vacuum dehydration, not transferable).
+  Zhang & Ho 1988–1991 (`zhang1988/1989/1991/1991b`): GSH is the poorer sulfur source (sulfur in volatiles 1.6 % vs
+  4.0 %), makes no MFT from IMP at pH 2.2, and reacts with 2,4-decadienal directly. Design consequence: GSH → GSSG
+  (oxidation, measured), GSH + sugar → GSH-ARP / trapped deoxyosone adducts (measured shares), GSH → Cys-Gly + pGlu
+  → Cys (Zhou 2023c), H2S only via the released cysteine.
+- **2026-10-28, Mottram/Hofmann siblings read — no new benchmark-quality rows.** `schieberle1996` isotope-dilution levels
+  are the SAME run as Hofmann 1998 (do not ingest twice) but add pH 5 norfuraneol 545 mg/L (4.8 mol % of ribose) and
+  mercaptoketone levels. Candidate ratio hold-outs: `xu2007` (= xu2008's 1:1 run at pH 5.6) pH series at 140 °C with
+  measured final pH (MFT falls 6.3x from final pH 5.5 to 6.2); `chen2000`/`chen2002` the only paired MFT/FFT at 180 °C
+  in water (MFT/FFT ≈ 0.1 vs 1.6 at 145 °C, a high-temperature shape test); `farmer1992` cysteine + ribose suppress
+  lipid aldehydes (hexanal 0.32–0.83x) — a ratio test for the lipid over-prediction. Low moisture: Hofmann silica (FFT
+  ×8) vs Mottram 1995b dry (FFT trace) disagree, so the dry behaviour is not validatable. Note: `mottram1995b.pdf` is the
+  low-moisture paper (10.1021/jf00052a027), `mottram1995c.pdf` the cellulose one (10.1021/jf00053a033).
