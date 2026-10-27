@@ -132,6 +132,7 @@ from .parameters_sulfur import (
     T_REF_S_K,
     cysteine_thermolysis_k,
     glutathione_thermolysis_k,
+    thiamine_h2s_share,
     oligomerisation_rate,
     ph_factor,
     sulfur_registry_metadata,
@@ -533,6 +534,11 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "sugar route's second order in (deoxyosone x sulfide) -- which is "
         "exactly why the branch fraction MOVES when the loading changes.",
     ),
+    # WAVE B50 (2026-10-27): thiamine also releases H2S at pH >= 6.5 (Dwivedi & Arnold 1971). A
+    # DERIVED rate, not a constant: share(pH) / (1 - share) x the two thiamine steps' total, so the
+    # measured share of degraded thiamine goes to sulfide. Zero at pH < 6.25 -- every fit pot.
+    Reaction("r_thi_h2s", {"THI": 1}, {"H2S": 1, "FRAG_C": 12, "FRAG_N": 4}, "k_thi_h2s",
+             "B50. Thiamine -> H2S, as the measured share of thiamine's thermal loss (Dwivedi & Arnold 1971)."),
     Reaction("r_thi_mesh", {"THI": 1}, {"MESH": 1, "FRAG_C": 11, "FRAG_N": 4},
              "k_thi_mesh",
              "The methanethiol source in Zhang's Fig. 1 system, which contains "
@@ -1156,6 +1162,8 @@ def sulfur_rate_constants_at(
         if key == "k_cys_h2s":
             out[reaction.key] = cysteine_thermolysis_k(ph, float(temperature_k))
             continue
+        if key == "k_thi_h2s":
+            continue  # B50: derived below from the two thiamine steps
         if key == "k_gsh_h2s":
             out[reaction.key] = glutathione_thermolysis_k(ph, float(temperature_k))
             continue
@@ -1205,6 +1213,10 @@ def sulfur_rate_constants_at(
     # temperature-independent, so it could not express the one food-relevant
     # thing Stack measures: heating pushes the equilibrium back toward FREE
     # thiol.
+    # DERIVED RATE 0 (B50): thiamine's sulfide branch, the measured share of its total thermal loss.
+    _share = thiamine_h2s_share(ph)
+    out["r_thi_h2s"] = (_share / (1.0 - _share)) * (out["r_thi_hmp"] + out["r_thi_mesh"]) if _share > 0.0 else 0.0
+
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct
     out["ch_thioether_release_fft"] = out["ch_thioether_fft"] / _k_adduct

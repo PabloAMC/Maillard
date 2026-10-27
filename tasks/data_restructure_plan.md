@@ -2672,6 +2672,35 @@ correctly, 4 rounded, 15 read off figures (all within their sigma), and **six wi
   B1 cites "Fig. 6" for Fig. 8; `parameters_furanic.py:428` credits Blank 1997 with Blank & Fay 1996's
   loading. Interpretive caveats: B41's Zhang rows run at a declared pH 6.5 the paper does not print; Leahy's
   rates are 24 h regressions scored as 2 h means; Nguyen's k8 product mapping is the repository's.
+- [x] **Acrylamide, lipid and matrix inputs checked against the PDFs (2026-10-27): 162 rows.** Clean:
+  Claeys 2005 (20), De Vleeschouwer 2009 I/II and 2006-2008, Knol 2005 k6, Frankel 1989 (B6, 18) and
+  1981 (B28, 52 shares), Schroen, the 19 reversible-binding constants. **Fixed:** `matrix_sites.py`
+  `hmf_amine` 10x high (Hamzalioglu 2018 prints lysine under a x10^-1 head); B48 had turned a yield into
+  a rate (revised, see B48 prereg); prose (Claeys title, "three independent labs" -> two, 3.1e5x,
+  propylene glycol not guanidine, 19 constants). **Logged, in frozen B3 (next acrylamide wave):**
+  `KNOL_LOADING_MMOL_L = 100` where Knol prints 0.2 M (l.140); the De Vleeschouwer "~3 M" loading is
+  not printed (Table 1 moistures imply 2.74 and 1.85 mol/kg); Knol's Ea(k4) scored against the lumped
+  barrier (l.317-327); the extrusion row's aw 0.35 / 42 mM / 25 s are not in Ma 2024. Also open:
+  `hmf_thiol`'s upper corner ~4.5x high (5-50 C rates anchored at 25 C); Schroen's k4 prose/table
+  conflict (1.2x); `acrylamide_conditions.py` puts the k_E minimum at aw 0.82 (the table says 0.73).
+- [x] **Directional claims panel checked against the papers (2026-10-27): all 92.** 20 headline claims
+  defective (5 quote what the paper does not contain, conditions that are not the experiment's, wrong
+  numbers, a double count, one abstract-vs-results reversal). Corrected in the panel (retired, arms set
+  to the paper, or marked not independent; dated notes on each). **Headline 25/43 -> 17/30.** Open, found
+  by the correction pass: the scorer ignores per-arm `observable` keys (SUG-03, MOT-03 are automatic
+  misses; `claim_type: ranking` would express them); SUG-03 keeps invented arms; MOT-01 lacks the buffer
+  its duplicate carries; a duplicate `mottram2002` key in `sources:`.
+- [x] **Glutathione as a measured H2S source** (Zheng & Ho 1994 Table III, refitted per pH); the sulfide,
+  furfural, hydroxyacetaldehyde and mercapto-2-propanone precursors made nameable; `predict` answers
+  the answerable targets and lists the refused ones by name instead of refusing the whole request.
+- [x] **The downloads, read (2026-10-27).** Dwivedi & Arnold 1971 -> wave B50 (thiamine's H2S share,
+  SHIP); open from it: cysteine protects thiamine (the model over-degrades it in Cys + THI pots), the
+  thiazole keeps thiamine's sulfur at pH <= 6 (check `k_thi_hmp`'s basis), and Dwivedi & Arnold 1972 (J.
+  Food Sci., 35S-thiamine) would give the sulfur fates. Brands & van Boekel 2002c and Kabyemela 1999: no
+  anchor for `k_glc_ha` (no glycolaldehyde; 300-400 C), only a soft ceiling of 1e-2 to 1e-3.8 /min at 145 C
+  that neither B9 (2.6e-9) nor B47 (1.1e-5) reaches. Hidalgo 2016 and the Hidalgo & Zamora review: no
+  measured lipid-driven Strecker aldehyde for leucine, isoleucine, valine or methionine anywhere; the step
+  stays unbuilt (at most the phenylalanine constant as a declared assumption, with an air/N2 flag).
 - [ ] **Literature for the three no-experiment gaps (2026-10-27 search): no printed constant found.**
   Downloads that could close them, in order: Arnold & Dwivedi 1971 (JAFC 19:923, "Hydrogen sulfide from
   heat degradation of thiamine"); Brands & van Boekel 2002 (JAFC 50:6725; the PDF in `data/articles/`

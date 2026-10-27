@@ -397,6 +397,28 @@ def _glutathione_arrhenius_pairs() -> Dict[float, Tuple[float, float]]:
 GLUTATHIONE_ARRHENIUS_REFIT: Dict[float, Tuple[float, float]] = _glutathione_arrhenius_pairs()
 
 
+#: WAVE B50 (2026-10-27). THE SHARE OF DEGRADED THIAMINE THAT LEAVES AS H2S, measured by Dwivedi &
+#: Arnold 1971 (J. Agric. Food Chem. 19:923, doi 10.1021/jf60177a033; arnold1971_extraction.md):
+#: 1.2e-4 M thiamine HCl, 0.1 M phosphate, ~100 C, 30 min. Fig. 4 and Figs. 2-3 give ~0.39 (0.34-0.44)
+#: per mol degraded at pH 7.0, ~0.04 (0.03-0.05) at pH 6.5, and essentially none at pH 6.0 and below.
+#: Log-linear between 6.5 and 7.0 (a decade per half unit of pH, as the two points say), zero below
+#: pH 6.25, held at the pH 7.0 value above it (no data). One temperature, so the share is held
+#: constant with temperature: a declared limit, not a measurement.
+THIAMINE_H2S_SHARE_POINTS: Tuple[Tuple[float, float], ...] = ((6.5, 0.04), (7.0, 0.39))
+THIAMINE_H2S_SHARE_FLOOR_PH: float = 6.25
+
+
+def thiamine_h2s_share(ph: float) -> float:
+    """Fraction of thermally degraded thiamine released as H2S at ``ph`` (Dwivedi & Arnold 1971)."""
+    (p0, f0), (p1, f1) = THIAMINE_H2S_SHARE_POINTS
+    x = float(ph)
+    if x < THIAMINE_H2S_SHARE_FLOOR_PH:
+        return 0.0
+    if x >= p1:
+        return f1
+    return 10.0 ** (math.log10(f0) + (x - p0) / (p1 - p0) * (math.log10(f1) - math.log10(f0)))
+
+
 def glutathione_thermolysis_k(ph: float, temperature_k: float) -> float:
     """k for glutathione -> H2S, 1/min. The pH treatment is cysteine's (cysteine_thermolysis_arrhenius):
     the pH-3.0 pair as measured below the mechanism boundary, ln A and Ea linear in pH over 5-9,

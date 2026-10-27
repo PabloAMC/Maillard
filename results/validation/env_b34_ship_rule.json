@@ -4,9 +4,9 @@
     "artifact": "env_b34_ship_rule",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "c7fb4d2b3eb0c6412fea42f319a74f0b2998a50e",
-      "short": "c7fb4d2b",
-      "branch": "b47-sulfur-objective-corrected",
+      "commit": "bfbd2cb489849275c10e874dd6724be9e5b4ffcc",
+      "short": "bfbd2cb4",
+      "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_env_b34_ship_rule.py",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "ebdbb2c3f39a2ba949a3e16136330ff144543a45b12c54553ba06bad4c721af8"
+        "sha256": "07a0c9d5f43f7168d1cd30a65746bd552459d7fabd475d148fef2aa149e03700"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",
@@ -86,11 +86,11 @@
   "T2": {
     "noise_floor_from_two_seeds": {
       "n": 45,
-      "median_rel": 0.054383428077999875,
-      "p95_rel": 0.12277025802529871,
-      "max_rel": 0.1920505498272883
+      "median_rel": 0.05438342839565711,
+      "p95_rel": 0.12277025802529884,
+      "max_rel": 0.19205054982729336
     },
-    "tolerance_used_rel": 0.1920505498272883,
+    "tolerance_used_rel": 0.19205054982729336,
     "rows_the_priors_reach": [
       {
         "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
