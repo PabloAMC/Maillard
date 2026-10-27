@@ -2625,6 +2625,13 @@ record under `data/lit/` or `results/literature/`), never a trace.
   paper is missing.) Zamora, Gallardo & Hidalgo 2008 (10.1021/jf801409w) read into
   `zamora2008_extraction.md`: hydroperoxides degrade Phe to phenylacetaldehyde at 180 C, 12 % at pH 2.15
   to 0.25 % at pH 12; no rates.
+  Zamora, Gallardo & Hidalgo 2007 (10.1021/jf062838x) read into `zamora2007_extraction.md`: ~8 % Phe ->
+  phenylacetaldehyde in 1 h from equimolar 2,4-decadienal (pH 3, 180 C, air), and **9-14 % of the
+  decadienal to hexanal**, linear over the first hour. First measured magnitude for the edge
+  `DECADIENAL_TO_HEXANAL_GAP` (`parameters_lipid.py:600`) declares unmeasured; limits: Phe present,
+  medium probably 2:1 acetonitrile/buffer (methods and captions disagree). A constant is a new wave.
+- [ ] Update `DECADIENAL_TO_HEXANAL_GAP`'s text ("No rate for it exists in the corpus") to cite Zamora
+  2007 when the lipid lane is next touched (the frozen B6 fit report hashes this module, so the edit belongs in a wave).
 
 **Sulfur fit rows checked against the PDFs (2026-10-27, two read-only agents; per-row tables in the
 session scratchpad, findings here).** The 54 rows of the shipped B9 objective
