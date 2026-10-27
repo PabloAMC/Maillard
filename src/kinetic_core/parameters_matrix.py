@@ -514,7 +514,7 @@ REVERSIBLE_BINDING: Tuple[MatrixParameter, ...] = (
               "2-alkenal held two hours at 37 C against a protein carrying about "
               "0.47 mmol lysine amine per gram, measured by disappearance, is partly "
               "irreversible Michael chemistry and not partition. The paper's only "
-              "reversibility evidence is a 20 % headspace recovery under propylene glycol (Bi 2022 p. 8; "guanidine" corrected 2026-10-27), "
+              "reversibility evidence is a 20 % headspace recovery under propylene glycol (Bi 2022 p. 8; 'guanidine' corrected 2026-10-27), "
               "and a 20 % recovery does not show that the other 80 % was reversible. "
               "It is ALSO excluded from the unsaturation observations, for a second "
               "and independent reason -- see UNSATURATION_OBSERVATIONS_EXCLUDED.",

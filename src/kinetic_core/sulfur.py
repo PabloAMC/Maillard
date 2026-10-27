@@ -131,6 +131,7 @@ from .parameters_sulfur import (
     SulfurParameter,
     T_REF_S_K,
     cysteine_thermolysis_k,
+    glutathione_thermolysis_k,
     oligomerisation_rate,
     ph_factor,
     sulfur_registry_metadata,
@@ -237,6 +238,12 @@ OUT_OF_SCOPE: Tuple[Dict[str, str], ...] = (
 
 SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     # ================= SULFUR SUPPLY =====================================
+    # 2026-10-27: glutathione releases H2S too (Zheng & Ho 1994 Table III, measured, pH-resolved).
+    Reaction(
+        "r_gsh_h2s", {"GSH": 1}, {"H2S": 1, "FRAG_C": 10, "FRAG_N": 3}, "k_gsh_h2s",
+        "Glutathione thermolysis to H2S, as measured; the residue is unassigned. Only this channel is "
+        "modelled.",
+    ),
     Reaction(
         "r_cys_h2s", {"Cys": 1},
         {"H2S": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1}, "k_cys_h2s",
@@ -1148,6 +1155,9 @@ def sulfur_rate_constants_at(
             continue
         if key == "k_cys_h2s":
             out[reaction.key] = cysteine_thermolysis_k(ph, float(temperature_k))
+            continue
+        if key == "k_gsh_h2s":
+            out[reaction.key] = glutathione_thermolysis_k(ph, float(temperature_k))
             continue
         parameter = parameters.get(key)
         if parameter is None:

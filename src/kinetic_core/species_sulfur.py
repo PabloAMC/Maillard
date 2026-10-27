@@ -364,6 +364,9 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
                 "consumes; H2S is in excess in every pot that charges it. TERMINAL. Its step "
                 "(r_nf_shet) is inert (zero) unless a B49 report supplies the constant."),
             ),
+    Species("GSH", "glutathione (gamma-glutamyl-cysteinyl-glycine)", 10, 3, "reactant", True, sulfur=1,
+            note=("2026-10-27. A sulfide source only: H2S release measured by Zheng & Ho 1994 (Table III). "
+                  "Its amine, its peptide release and its charge are not modelled.")),
 )
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
@@ -447,6 +450,7 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "Cys": 121.16,    # C3H7NO2S
     "THI": 337.27,    # thiamine hydrochloride, as Zhang 2024 weighs it
     "H2S": 34.08,
+    "GSH": 307.32,    # C10H17N3O6S
     "DPO": 130.10,    # C5H8O4
     "TDP": 130.10,
     "DDP": 114.10,    # C5H6O3

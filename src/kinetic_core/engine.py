@@ -229,6 +229,20 @@ PRECURSOR_ALIASES: Mapping[str, str] = {
     "2,3-butanedione": "DA",
     "butane-2,3-dione": "DA",
     "norfuraneol": "NF",
+    # 2026-10-27: precursors the sulfur lane already carries as species, now nameable. Glutathione is
+    # new (a measured H2S source); the other four were refused by name on panel and directional rows.
+    "glutathione": "GSH",
+    "l-glutathione": "GSH",
+    "gsh": "GSH",
+    "hydrogen sulfide": "H2S",
+    "h2s": "H2S",
+    "furfural": "FUR",
+    "furan-2-aldehyde": "FUR",
+    "2-furaldehyde": "FUR",
+    "hydroxyacetaldehyde": "HA",
+    "glycolaldehyde": "HA",
+    "mercapto-2-propanone": "MP",
+    "1-mercapto-2-propanone": "MP",
     "amadori": "AMA",
     "arp": "ARP",
     # W6 (2026-09-07): the xylose-cysteine thiazolidine the sulfur lane carries; Zhai 2020 shows the
@@ -517,6 +531,11 @@ _PRECURSOR_LANE: Mapping[str, str] = {
     "THI": SULFUR,
     "ARP": SULFUR,
     "NF": SULFUR,
+    "GSH": SULFUR,
+    "H2S": SULFUR,
+    "FUR": SULFUR,
+    "HA": SULFUR,
+    "MP": SULFUR,
     "Asn": ACRYLAMIDE,
     "Gln": ACRYLAMIDE,
     "Lys": ACRYLAMIDE,
@@ -1412,12 +1431,12 @@ def declare_envelope(
         if lane == SULFUR and not (
             # 2026-09-11: PENT was in this set. A pentose carries no sulfur, so a ribose-only
             # charge asked for a thiol was answered 0.0 instead of refused here.
-            {"Cys", "THI", "ARP", "H2S", "TTCA"} & {k for k, v in mapped_precursors.items() if v > 0.0}   # W6: TTCA carries its cysteine sulfur
+            {"Cys", "THI", "ARP", "H2S", "TTCA", "GSH", "MP"} & {k for k, v in mapped_precursors.items() if v > 0.0}   # W6: TTCA carries its cysteine sulfur; 2026-10-27: glutathione and mercapto-2-propanone
         ):
             if set(mapped_targets.values()) & {"MFT", "FFT", "MFTD", "MESH", "ACTZ"}:
                 reasons.append(
                     "The sulfur lane was selected but the charge contains NO "
-                    "sulfur source (no cysteine, thiamine or sulfide). Every "
+                    "sulfur source (no cysteine, glutathione, thiamine or sulfide). Every "
                     "thiol in the core is built from a charged sulfur atom; "
                     "there is no route that makes one from a sugar alone."
                 )

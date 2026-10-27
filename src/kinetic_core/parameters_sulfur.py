@@ -365,6 +365,55 @@ def cysteine_thermolysis_k(ph: float, temperature_k: float) -> float:
     return a * math.exp(-ea / (R_KJ * float(temperature_k)))
 
 
+#: 2026-10-27. GLUTATHIONE -> H2S, Zheng & Ho 1994 Table III: sixteen first-order rate constants
+#: (1/min, as printed; 0.1 M glutathione, otherwise the cysteine protocol), all of whose printed
+#: half-lives reproduce to < 0.2 % (zheng1994_extraction.md sec. 4). Keyed (T in C, pH) -> k.
+ZHENG_GLUTATHIONE_TABLE_III: Dict[Tuple[float, float], float] = {
+    (80.0, 3.0): 4.04e-6, (80.0, 5.0): 4.11e-6, (80.0, 7.0): 3.25e-5, (80.0, 9.0): 1.34e-4,
+    (90.0, 3.0): 1.17e-5, (90.0, 5.0): 1.57e-5, (90.0, 7.0): 7.69e-5, (90.0, 9.0): 2.44e-4,
+    (100.0, 3.0): 2.28e-5, (100.0, 5.0): 4.94e-5, (100.0, 7.0): 2.26e-4, (100.0, 9.0): 7.74e-4,
+    (110.0, 3.0): 4.57e-5, (110.0, 5.0): 7.46e-5, (110.0, 7.0): 3.89e-4, (110.0, 9.0): 1.09e-3,
+}
+
+
+def _glutathione_arrhenius_pairs() -> Dict[float, Tuple[float, float]]:
+    """pH -> (ln A in 1/min, Ea in kJ/mol), least squares over the four printed temperatures.
+
+    Refitted here from Table III itself rather than taken from the paper's Table V, because two of
+    the printed glutathione barriers (pH 3.0 and 5.0) cannot be reproduced from Table III by any
+    subset of its points (zheng1994_extraction.md sec. 5b); a refit of the printed constants is at
+    least consistent with them.
+    """
+    pairs: Dict[float, Tuple[float, float]] = {}
+    for ph in (3.0, 5.0, 7.0, 9.0):
+        xs = [1.0 / (t + 273.15) for t in (80.0, 90.0, 100.0, 110.0)]
+        ys = [math.log(ZHENG_GLUTATHIONE_TABLE_III[(t, ph)]) for t in (80.0, 90.0, 100.0, 110.0)]
+        mx, my = sum(xs) / 4.0, sum(ys) / 4.0
+        slope = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sum((x - mx) ** 2 for x in xs)
+        pairs[ph] = (my - slope * mx, -slope * R_KJ)
+    return pairs
+
+
+GLUTATHIONE_ARRHENIUS_REFIT: Dict[float, Tuple[float, float]] = _glutathione_arrhenius_pairs()
+
+
+def glutathione_thermolysis_k(ph: float, temperature_k: float) -> float:
+    """k for glutathione -> H2S, 1/min. The pH treatment is cysteine's (cysteine_thermolysis_arrhenius):
+    the pH-3.0 pair as measured below the mechanism boundary, ln A and Ea linear in pH over 5-9,
+    clamped above 9."""
+    x = float(ph)
+    if x < ZHENG_MECHANISM_BOUNDARY_PH:
+        ln_a, ea = GLUTATHIONE_ARRHENIUS_REFIT[3.0]
+    else:
+        x = min(x, 9.0)
+        lo = 5.0 if x <= 7.0 else 7.0
+        hi = lo + 2.0
+        w = (x - lo) / 2.0
+        (la0, e0), (la1, e1) = GLUTATHIONE_ARRHENIUS_REFIT[lo], GLUTATHIONE_ARRHENIUS_REFIT[hi]
+        ln_a, ea = la0 + w * (la1 - la0), e0 + w * (e1 - e0)
+    return math.exp(ln_a) * math.exp(-ea / (R_KJ * float(temperature_k)))
+
+
 #: (ii) AQUEOUS ACID-BASE SPECIATION, **AT REACTION TEMPERATURE** (B2.1).
 #:
 #: ===================================================================
@@ -1810,6 +1859,26 @@ def nf_shet_parameters(k_nf_shet: float = 0.0, ea_kj_mol: float = 64.08) -> Dict
 
 
 MEASURED_SULFUR = {**MEASURED_SULFUR, **nf_shet_parameters()}
+
+
+# 2026-10-27: glutathione as a sulfide source, MEASURED (Zheng & Ho 1994 Table III); the rate is
+# evaluated pH-resolved by sulfur.py through glutathione_thermolysis_k, like k_cys_h2s.
+MEASURED_SULFUR = {**MEASURED_SULFUR, "k_gsh_h2s": _sulfur_parameter(
+    "k_gsh_h2s", "glutathione -> H2S (+ unmeasured C10/N3 residue -> FRAG_C, FRAG_N)", 1,
+    k_ref=glutathione_thermolysis_k(5.0, T_REF_S_K), ea=GLUTATHIONE_ARRHENIUS_REFIT[5.0][1],
+    evidence_class="measured_activation_energy",
+    source_anchor=("Zheng & Ho 1994, ACS Symp. Ser. 564:138-146, doi 10.1021/bk-1994-0564.ch011, Table III "
+                   "(16 first-order constants, 0.1 M glutathione, 80-110 C, pH 3/5/7/9); (ln A, Ea) refitted per pH here"),
+    dossier_anchor="data/lit/extraction_dossiers/zheng1994_extraction.md sec. 4 (Table III) and sec. 5b (the barriers)",
+    conditions=("aqueous 0.1 M glutathione, phosphate-buffered to a nominal pH 3/5/7/9, N2-flushed and sealed, "
+                "80-110 C, total sulfide by ISE. Only the H2S release is modelled: glutathione's other Maillard "
+                "chemistry (its amine, its peptide release) is not, and its charge does not enter the pH model."),
+    ph=5.0, t_ref_k=T_REF_S_K, t_range=(80.0, 110.0),
+    rate_transfer="licensed_over_ph_5_to_9_ph3_is_a_separate_mechanism",
+    channel="glutathione_thermolysis",
+    flags=("ph_resolved_measured_set", "refit_of_printed_table", "h2s_release_only"),
+    note="Rates as printed; above 110 C extrapolated on the refitted barrier, as cysteine's are.",
+)}
 
 
 # ---------------------------------------------------------------------------
