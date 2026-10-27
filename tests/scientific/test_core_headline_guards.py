@@ -188,21 +188,25 @@ def test_within_3x_and_out_of_sample_counts(tracked_scores):
     # hits are fed-intermediate rows the sulfur fit read (in_core_fit 1/1 -> 5/6), which the precursor
     # aliases made scoreable; they are not evidence. The one out-of-sample gain is B48's roasted-pea
     # hexanal row (2,4-decadienal breakage, Zamora 2007 share, no fit).
-    assert (s["within_band_count"], s["matched_compound_count"]) == (17, 50)
-    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (17, 50)
-    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (12, 44)
-    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (5, 6)
+    # RE-PINNED 2026-10-27 (B51's buffer facts, Amendment 44): 17/50 -> 18/50, out of sample 12/44 -> 14/44, in-core-fit 5/6 -> 4/6, and NO
+    # constant moved. The nine trust-loop Hofmann bundles now carry the paper's 0.5 M phosphate (they were
+    # scored unbuffered while every fit integrated them buffered): ribose pH 5 FFT 6.9x -> 1.6x and MFT
+    # 3.7x -> 2.8x enter the band (out of sample since B9); one fed-intermediate fit row leaves it.
+    assert (s["within_band_count"], s["matched_compound_count"]) == (18, 50)
+    assert (s["honest_literature"]["within_band"], s["honest_literature"]["rows"]) == (18, 50)
+    assert (s["out_of_sample"]["within_band"], s["out_of_sample"]["rows"]) == (14, 44)
+    assert (s["in_core_fit"]["within_band"], s["in_core_fit"]["rows"]) == (4, 6)
     # RE-PINNED BY WAVE B34: 3/26 -> 5/31. All five new rows are in a maillard_path hold-out bundle,
     # and two of them (3-deoxyglucosone, methylglyoxal) land inside the band.
     # RE-PINNED BY WAVE B41: 5/31 -> 7/31 (the two HMF rows above are both hold-outs).
     assert s["holdout_within_band"] == {"hits": 7, "total": 31}
     readme = _doc_text(README)
-    _assert_quoted(readme, "17 of 50", "README.md", "the core's within-3x count")
-    _assert_quoted(readme, "12 of 44", "README.md", "the core's out-of-sample count")
+    _assert_quoted(readme, "18 of 50", "README.md", "the core's within-3x count")
+    _assert_quoted(readme, "14 of 44", "README.md", "the core's out-of-sample count")
     # 2026-09-11 (review of PR #16): the BADGE on line 6 had said 3/38 through three re-pins of the
     # body text below it, because nothing asserted it. The most visible number on the page is now
     # pinned to the same artifact as the table.
-    _assert_quoted(readme, "out--of--sample-12%2F44%20rows%20within%203x", "README.md", "the out-of-sample badge")
+    _assert_quoted(readme, "out--of--sample-14%2F44%20rows%20within%203x", "README.md", "the out-of-sample badge")
     # The subtraction has to be VISIBLE on the page that carries the rate, not only in the wave.
     _assert_quoted(readme, "never cooked", "README.md", "why the denominator fell")
 
@@ -429,24 +433,26 @@ def test_core_scores_17_of_26_independent_directional_claims():
     # methyl linoleate), 4 marked not independent (a tautology and duplicate cells), and several arms
     # set to the paper's actual pot: 25/43 -> 17/30. Then the precursor aliases and glutathione made one
     # more claim evaluable (a miss): 17/31. The claim count is unchanged; retired claims stay listed.
-    assert s["headline"] == [17, 31]
+    # RE-PINNED 2026-10-27 (B51's buffer facts, Amendment 44): 17/31 -> 18/31. MOT-01 (Mottram & Nobrega 2002, MFT rising as buffered pH falls
+    # 5.6 -> 4.2) agrees once its arms carry the paper's 0.2 M pyrophosphate; they carried no buffer.
+    assert s["headline"] == [18, 31]
     ind = s["independent"]
     assert (ind["excluding_ph_aw"]["agree"], ind["excluding_ph_aw"]["evaluable"]) == (11, 22)
-    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (6, 9)
+    assert (ind["ph_aw"]["agree"], ind["ph_aw"]["evaluable"]) == (7, 9)
     assert ind["total"]["not_evaluable"] == 24
     assert ind["total"]["mechanism_absent"] == 0
     assert s["not_evaluable_reasons"]["refused by the engine"] >= 2
     cats = {k: (v["agree"], v["evaluable"]) for k, v in ind["by_category"].items()}
     assert cats["sugar_identity"] == (4, 10)  # B15/B16: DIC-01 and DIC-03 miss
     assert cats["temperature"] == (5, 9)      # 2026-10-27 audit: TEMP-03 retired; WANG22 shapes retired
-    assert cats["ph"] == (5, 8)               # 2026-10-27 audit: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
+    assert cats["ph"] == (6, 8)               # B51 buffer facts: MOT-01 agrees with its pyrophosphate; 2026-10-27 audit: MOT02-PH-01/02 and PH-03 not independent; arms of PH-01/02 set to Meynier & Mottram 1995
     assert cats["moisture_aw"] == (1, 1)      # 2026-10-27 audit: AW-01 retired (source mismatch)
     assert cats["additive_cysteine"] == (1, 1)  # 2026-10-27 audit: CYS-01 tautology, CYS-02 retired
     assert cats["time"] == (1, 1)             # 2026-10-27 audit: TIME-01 and the four WANG22 time shapes retired
     readme = _doc_text(README)
-    _assert_quoted(readme, "17 of 31", "README.md", "the core's directional headline")
+    _assert_quoted(readme, "18 of 31", "README.md", "the core's directional headline")
     _assert_quoted(readme, "11 of 22", "README.md", "the directional count excluding pH and water activity")
-    _assert_quoted(readme, "6 of 9", "README.md", "the directional count on pH and water activity")
+    _assert_quoted(readme, "7 of 9", "README.md", "the directional count on pH and water activity")
 
 
 def test_directional_scorecard_is_not_stale():

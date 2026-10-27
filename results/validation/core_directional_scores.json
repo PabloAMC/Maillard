@@ -43,16 +43,16 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
-      "short": "cb3a21b4",
-      "branch": "b49-norfuraneol-heterocycles",
+      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
+      "short": "8185d698",
+      "branch": "b51-ph-state-everywhere",
       "dirty": true
     },
     "generated_by": "src/kinetic_core/directional.py",
     "inputs": [
       {
         "path": "docs/validation/directional_claims_panel.yml",
-        "sha256": "40383a4fe7de40bb4a9010d12998c8c4a7c55624f5905ede84ac2e70b90fdc79"
+        "sha256": "1ce5d5e6ccf69d9d5f58cf4ec2a35c93bcb6b10d9f49d8c6df43d06b886949ea"
       },
       {
         "path": "results/validation/kinetic_core_b1_fit_report.json",
@@ -78,7 +78,7 @@
   },
   "panel": {
     "path": "docs/validation/directional_claims_panel.yml",
-    "sha256": "40383a4fe7de40bb4a9010d12998c8c4a7c55624f5905ede84ac2e70b90fdc79",
+    "sha256": "1ce5d5e6ccf69d9d5f58cf4ec2a35c93bcb6b10d9f49d8c6df43d06b886949ea",
     "claims": 92,
     "flat_tolerance_pct": 5.0,
     "generated": "2026-08-27",
@@ -86,7 +86,7 @@
   },
   "summary": {
     "headline": [
-      17,
+      18,
       31
     ],
     "headline_definition": "strictly independent claims (fit_status == independent) the core could evaluate; refused arms and unrepresented observables are NOT EVALUABLE, identical predictions across a moved axis are MISSES",
@@ -125,16 +125,15 @@
           "rate": 1.0
         },
         "ph": {
-          "agree": 5,
+          "agree": 6,
           "evaluable": 8,
           "not_evaluable": 3,
           "misses": [
-            "MOT-01",
             "HOX-03",
             "CER07-PH-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.625
+          "rate": 0.75
         },
         "process_heating": {
           "agree": 0,
@@ -200,7 +199,7 @@
         }
       },
       "total": {
-        "agree": 17,
+        "agree": 18,
         "evaluable": 31,
         "not_evaluable": 24,
         "misses": [
@@ -210,7 +209,6 @@
           "TEMP-05",
           "HOF-02",
           "HOF-03",
-          "MOT-01",
           "MOT-03",
           "HOX-03",
           "YIL-01",
@@ -220,19 +218,18 @@
           "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.5483870967741935
+        "rate": 0.5806451612903226
       },
       "ph_aw": {
-        "agree": 6,
+        "agree": 7,
         "evaluable": 9,
         "not_evaluable": 4,
         "misses": [
-          "MOT-01",
           "HOX-03",
           "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.6666666666666666
+        "rate": 0.7777777777777778
       },
       "excluding_ph_aw": {
         "agree": 11,
@@ -299,8 +296,8 @@
           "evaluable": 15,
           "not_evaluable": 3,
           "misses": [
+            "PH-02",
             "PH-03",
-            "MOT-01",
             "HOX-03",
             "WHI-PH-01",
             "CER07-PH-01"
@@ -385,6 +382,7 @@
           "SUG-02",
           "SUG-03",
           "SUG-04",
+          "PH-02",
           "PH-03",
           "TEMP-01",
           "MAT-02",
@@ -395,7 +393,6 @@
           "TEMP-05",
           "HOF-02",
           "HOF-03",
-          "MOT-01",
           "MOT-03",
           "HOX-01",
           "HOX-03",
@@ -415,8 +412,8 @@
         "evaluable": 16,
         "not_evaluable": 7,
         "misses": [
+          "PH-02",
           "PH-03",
-          "MOT-01",
           "HOX-03",
           "WHI-PH-01",
           "CER07-PH-01"
@@ -461,7 +458,7 @@
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 44.5
+    "wall_seconds": 46.0
   },
   "claims": [
     {
@@ -867,10 +864,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        303.22072915630207,
-        52.49260172365137
+        272.53864404366834,
+        35.65473588362261
       ],
-      "log10_ratio_B_over_A": -0.7616607892490772,
+      "log10_ratio_B_over_A": -0.8833108671396276,
       "arms": [
         {
           "label": "pH 4.5",
@@ -885,9 +882,9 @@
             "ph": 4.5,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -895,7 +892,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 303.22072915630207
+          "value_ug_per_l": 272.53864404366834
         },
         {
           "label": "pH 6.5",
@@ -910,9 +907,9 @@
             "ph": 6.5,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -920,7 +917,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 52.49260172365137
+          "value_ug_per_l": 35.65473588362261
         }
       ]
     },
@@ -935,16 +932,16 @@
       "fit_status": "fit_system_overlap",
       "statement": "Same pH direction for the corresponding disulfide (bis(2-methyl-3-furyl) disulfide): lower at pH 6.5 than at pH 4.5.",
       "source": "cerny2015",
-      "status": "agree",
+      "status": "disagree",
       "reason": null,
       "identical_predictions": false,
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        26.00076124882981,
-        8.657423038783119
+        21.833719435906833,
+        28.360371657157213
       ],
-      "log10_ratio_B_over_A": -0.47759742388149795,
+      "log10_ratio_B_over_A": 0.11358419258731715,
       "arms": [
         {
           "label": "pH 4.5",
@@ -959,9 +956,9 @@
             "ph": 4.5,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -969,7 +966,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 26.00076124882981
+          "value_ug_per_l": 21.833719435906833
         },
         {
           "label": "pH 6.5",
@@ -984,9 +981,9 @@
             "ph": 6.5,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (carried as phosphate of the same molarity)"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Meynier & Mottram 1995: 0.2 M pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -994,7 +991,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 8.657423038783119
+          "value_ug_per_l": 28.360371657157213
         }
       ]
     },
@@ -3777,16 +3774,16 @@
       "fit_status": "independent",
       "statement": "In phosphate-buffered cysteine/ribose at 140 C, MFT rises as the buffered pH falls from 5.6 to 4.2 (2230 -> 8250 ng/mmol sugar).",
       "source": "mottram2002",
-      "status": "disagree",
+      "status": "agree",
       "reason": null,
       "identical_predictions": false,
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        189.94728366974311,
-        504.6312549052048
+        322.8916727704655,
+        231.77259943687176
       ],
-      "log10_ratio_B_over_A": 0.4243410582007567,
+      "log10_ratio_B_over_A": -0.1439947532971508,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3799,16 +3796,19 @@
             "temp_C": 140.0,
             "time_min": 30.0,
             "ph": 4.2,
-            "aw": 0.98
+            "aw": 0.98,
+            "buffer": {
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
+            }
           },
           "answered": true,
           "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
+          "state": "in_envelope",
           "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 189.94728366974311
+          "warnings": [],
+          "value_ug_per_l": 322.8916727704655
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -3821,16 +3821,19 @@
             "temp_C": 140.0,
             "time_min": 30.0,
             "ph": 5.6,
-            "aw": 0.98
+            "aw": 0.98,
+            "buffer": {
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
+            }
           },
           "answered": true,
           "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
+          "state": "in_envelope",
           "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 504.6312549052048
+          "warnings": [],
+          "value_ug_per_l": 231.77259943687176
         }
       ]
     },
@@ -3851,10 +3854,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1360.2421442900688,
-        1070.3831786849055
+        1526.7551777153215,
+        70.48615438646637
       ],
-      "log10_ratio_B_over_A": -0.10407695099426212,
+      "log10_ratio_B_over_A": -1.3356655847104422,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3867,16 +3870,19 @@
             "temp_C": 140.0,
             "time_min": 30.0,
             "ph": 4.2,
-            "aw": 0.98
+            "aw": 0.98,
+            "buffer": {
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
+            }
           },
           "answered": true,
           "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
+          "state": "in_envelope",
           "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 1360.2421442900688
+          "warnings": [],
+          "value_ug_per_l": 1526.7551777153215
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -3889,16 +3895,19 @@
             "temp_C": 140.0,
             "time_min": 30.0,
             "ph": 5.6,
-            "aw": 0.98
+            "aw": 0.98,
+            "buffer": {
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
+            }
           },
           "answered": true,
           "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
+          "state": "in_envelope",
           "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 1070.3831786849055
+          "warnings": [],
+          "value_ug_per_l": 70.48615438646637
         }
       ]
     },
@@ -3919,8 +3928,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        504.6312549052048,
-        504.6312549052048
+        231.77259943687176,
+        231.77259943687176
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -3935,16 +3944,19 @@
             "temp_C": 140.0,
             "time_min": 30.0,
             "ph": 5.6,
-            "aw": 0.98
+            "aw": 0.98,
+            "buffer": {
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
+            }
           },
           "answered": true,
           "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
+          "state": "in_envelope",
           "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 504.6312549052048
+          "warnings": [],
+          "value_ug_per_l": 231.77259943687176
         },
         {
           "label": "FFT, cysteine + ribose, phosphate pH 5.6",
@@ -3957,16 +3969,19 @@
             "temp_C": 140.0,
             "time_min": 30.0,
             "ph": 5.6,
-            "aw": 0.98
+            "aw": 0.98,
+            "buffer": {
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002 Methods: phosphate buffer = 0.2 M pyrophosphate (disodium + tetrasodium mixed to pH) (B51, 2026-10-27: the arm carried no buffer)"
+            }
           },
           "answered": true,
           "lane": "sulfur",
-          "state": "in_envelope_extrapolated",
+          "state": "in_envelope",
           "reasons": [],
-          "warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
-          "value_ug_per_l": 504.6312549052048
+          "warnings": [],
+          "value_ug_per_l": 231.77259943687176
         }
       ]
     },
@@ -5934,10 +5949,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        403.8310236045847,
-        373.7814426665746
+        322.8916727704655,
+        231.77259943687176
       ],
-      "log10_ratio_B_over_A": -0.033581943874789695,
+      "log10_ratio_B_over_A": -0.1439947532971508,
       "arms": [
         {
           "label": "pH 4.2",
@@ -5952,9 +5967,9 @@
             "ph": 4.2,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -5962,7 +5977,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 403.8310236045847
+          "value_ug_per_l": 322.8916727704655
         },
         {
           "label": "pH 5.6",
@@ -5977,9 +5992,9 @@
             "ph": 5.6,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (carried as phosphate of the same molarity)"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -5987,7 +6002,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 373.7814426665746
+          "value_ug_per_l": 231.77259943687176
         }
       ]
     },
@@ -6008,10 +6023,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1465.9144002848532,
-        183.39200918820987
+        1526.7551777153215,
+        70.48615438646637
       ],
-      "log10_ratio_B_over_A": -0.9027282025808555,
+      "log10_ratio_B_over_A": -1.3356655847104422,
       "arms": [
         {
           "label": "pH 4.2",
@@ -6026,9 +6041,9 @@
             "ph": 4.2,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -6036,7 +6051,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1465.9144002848532
+          "value_ug_per_l": 1526.7551777153215
         },
         {
           "label": "pH 5.6",
@@ -6051,9 +6066,9 @@
             "ph": 5.6,
             "aw": 0.98,
             "buffer": {
-              "kind": "phosphate",
-              "phosphate_mol_l": 0.2,
-              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate"
+              "kind": "pyrophosphate",
+              "pyrophosphate_mol_l": 0.2,
+              "source": "Mottram & Nobrega 2002: 0.2 M sodium pyrophosphate (B51, 2026-10-27: charged as pyrophosphate; was carried as orthophosphate)"
             }
           },
           "answered": true,
@@ -6061,7 +6076,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 183.39200918820987
+          "value_ug_per_l": 70.48615438646637
         }
       ]
     }

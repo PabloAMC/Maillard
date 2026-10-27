@@ -22,14 +22,14 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | benchmark | panel | compound | unit | measured | point | p5 | p50 | p95 | inside | width | obs bands | lane | role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | ppb | 150.000 | 0.016 | 0.00741 | 0.016 | 0.025 | no | 0.536 | no (extraction) | acrylamide | predictive |
-| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 310.000 | 4.08e+03 | 4.08e+03 | 4.08e+03 | 4.09e+03 | no | 0.000947 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 5.36e+03 | 3.57e+03 | 3.31e+03 | 3.59e+03 | 3.87e+03 | no | 0.068 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 6.23e+03 | 2.51e+03 | 1.81e+03 | 2.56e+03 | 3.14e+03 | no | 0.239 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.4e+04 | 448.779 | 8.48e+03 | 6.17e+04 | yes | 2.138 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.35e+03 | 1.62e+03 | 2.21e+03 | 2.8e+03 | no | 0.238 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 5.86e+03 | 2.88e+03 | 5.32e+03 | 7.66e+03 | yes | 0.425 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 830.643 | 44.653 | 817.535 | 8.22e+03 | yes | 2.265 | no (extraction) | sulfur | predictive |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 730.638 | 389.307 | 687.917 | 1.14e+03 | no | 0.465 | no (extraction) | sulfur | predictive |
+| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 310.000 | 4.07e+03 | 4.06e+03 | 4.07e+03 | 4.08e+03 | no | 0.00232 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 5.36e+03 | 3.6e+03 | 3.35e+03 | 3.62e+03 | 3.88e+03 | no | 0.064 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 6.23e+03 | 1.34e+03 | 563.333 | 1.39e+03 | 1.9e+03 | no | 0.528 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.42e+04 | 502.609 | 8.63e+03 | 6.23e+04 | yes | 2.093 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 2.21e+03 | 1.5e+03 | 2.08e+03 | 2.63e+03 | no | 0.244 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 5.84e+03 | 2.92e+03 | 5.3e+03 | 7.64e+03 | yes | 0.418 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 191.058 | 28.346 | 228.194 | 1.72e+03 | yes | 1.784 | no (extraction) | sulfur | predictive |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 546.398 | 315.691 | 507.486 | 749.568 | no | 0.376 | no (extraction) | sulfur | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.858 | 67.930 | 363.927 | 2.25e+03 | yes | 1.521 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |

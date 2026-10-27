@@ -110,8 +110,9 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     # RE-PINNED 2026-10-27 (claim audit): 8/10 -> 5/8. MOT02-PH-01/02 (duplicate cells of MOT-01/02) and PH-03
     # (the same Cerny 2007 row as CER07-PH-01) are not independent; PH-01/02 now run Meynier & Mottram's pot.
     # 0.625 is above the 0.60 caution threshold: still 'caution'.
-    assert (ph.agree, ph.evaluable) == (5, 8)
-    assert ph.verdict == dr.verdict_for(5, 8) == dr.VERDICT_CAUTION
+    # RE-PINNED 2026-10-27 (B51's buffer facts, Amendment 44): 5/8 -> 6/8, MOT-01 agrees once charged with its 0.2 M pyrophosphate; still 'caution'.
+    assert (ph.agree, ph.evaluable) == (6, 8)
+    assert ph.verdict == dr.verdict_for(6, 8) == dr.VERDICT_CAUTION
     assert dr.verdict_for(8, 10) == dr.VERDICT_CAUTION
     assert dr.wilson_lower(8, 10) < dr.COIN < dr.wilson_lower(8, 8)
     assert dr.verdict_for(8, 8) == dr.VERDICT_TRUST and dr.verdict_for(7, 7) == dr.VERDICT_TRUST
@@ -361,8 +362,11 @@ def test_the_card_states_all_three_honest_headline_sentences():
     # "anchored and wrong by 12-30x". What the third headline sentence must still do is name
     # the sulfur branch's anchor status honestly, whichever way it currently falls.
     assert "sulfur branch has" in joined and "literature anchors" in joined
+    # RE-PINNED 2026-10-27: "fails every one of them" was a FIXED STRING, and it stopped being true when
+    # the Hofmann pots were scored in their stated 0.5 M phosphate (ribose pH 5 FFT 1.6x, MFT 2.8x). The
+    # card now reads the outcome from the scorecard, so what is pinned is that it states one.
     assert ("zero absolute literature anchors" in joined) or (
-        "fails every one of them" in joined
+        "scored anchor rows within 3x" in joined
     ), (
         "The third headline sentence no longer states the sulfur branch's anchor status "
         "either way. It must say either that the branch is unanchored or that it is "
@@ -425,6 +429,10 @@ def test_the_sulfur_anchor_claim_is_checked_not_asserted():
     assert fitted, "the Wave X fit target must still be recognised as one"
     fitted_benchmarks = {row.split("/", 1)[0] for row in fitted}
     assert fitted_benchmarks == {"hofmann1998_norfuraneol_h2s_145C_20min_pH5"}
+    # 2026-10-27: the outcome of every anchor row is read from the scorecard, never asserted.
+    outcomes = status["anchor_outcomes"]
+    assert [o["row"] for o in outcomes] == status["panel_verified_sulfur_values"]
+    assert all(o["within_3x"] in (True, False, None) for o in outcomes)
     assert not fitted_benchmarks.intersection(verified), (
         "a fit target is being counted as an absolute literature anchor; agreement on a "
         "row a constant was selected against carries no information about the model"

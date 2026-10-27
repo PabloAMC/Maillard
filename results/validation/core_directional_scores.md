@@ -2,8 +2,8 @@
 
 Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 5 %). Nothing in the core was tuned to this panel.
 
-* **headline (strictly independent, evaluable): 17/31 (55%)**; 24 independent claims not evaluable
-* independent, excluding pH and water activity: 11/22 (50%); pH and water activity alone: 6/9 (67%)
+* **headline (strictly independent, evaluable): 18/31 (58%)**; 24 independent claims not evaluable
+* independent, excluding pH and water activity: 11/22 (50%); pH and water activity alone: 7/9 (78%)
 * all claims (independent + fit-adjacent + fit-system overlap): 26/50 (52%); 42 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 3
 * not evaluable, by reason: the claim carries no runnable conditions (prose-only) (32); a predicted concentration is zero; no direction is defined (4); refused by the engine (3); arm 'pH 4.5' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
@@ -16,7 +16,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | lipid_lane | 0 | 0 | - | 1 | - |
 | matrix_identity | 0 | 0 | - | 1 | - |
 | moisture_aw | 1 | 1 | 1.00 | 1 | - |
-| ph | 5 | 8 | 0.62 | 3 | MOT-01, HOX-03, CER07-PH-01 |
+| ph | 6 | 8 | 0.75 | 3 | HOX-03, CER07-PH-01 |
 | process_heating | 0 | 0 | - | 1 | - |
 | ranking | 0 | 1 | 0.00 | 2 | MOT-03 |
 | scope | 0 | 0 | - | 3 | - |
@@ -50,8 +50,8 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | SUG-04 | sugar_identity | fit_adjacent | MFT | A>B | **disagree** | sulfur | 546, 546 | identical predictions |
 | SUG-05 | sugar_identity | fit_system_overlap | Furfural | A>B | **agree** | sulfur | 554, 190 |  |
 | SUG-06 | sugar_identity | retired | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| PH-01 | ph | fit_system_overlap | MFT | A>B | **agree** | sulfur | 303, 52.5 |  |
-| PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **agree** | sulfur | 26, 8.66 |  |
+| PH-01 | ph | fit_system_overlap | MFT | A>B | **agree** | sulfur | 273, 35.7 |  |
+| PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **disagree** | sulfur | 21.8, 28.4 |  |
 | PH-03 | ph | not_independent | FFT | decreasing | **disagree** | sulfur | 2.46e+03, 0.439, 69.7 |  |
 | PH-04 | ph | independent | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | arm 'pH 4.5' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was ru |
 | PH-05 | ph | independent | Furfural | decreasing | **agree** | sulfur | 146, 131, 58.1 |  |
@@ -100,9 +100,9 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | HOF-02 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 1.67e+03, 2.29e+03 |  |
 | HOF-03 | sugar_identity | independent | FFT | A>B | **disagree** | sulfur | 0.000911, 0.297 |  |
 | HOF-04 | moisture_aw | independent | MFT, FFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
-| MOT-01 | ph | independent | MFT | A>B | **disagree** | sulfur | 190, 505 |  |
-| MOT-02 | ph | independent | FFT | A>B | **agree** | sulfur | 1.36e+03, 1.07e+03 |  |
-| MOT-03 | ranking | independent | MFT | A>B | **disagree** | sulfur | 505, 505 | identical predictions |
+| MOT-01 | ph | independent | MFT | A>B | **agree** | sulfur | 323, 232 |  |
+| MOT-02 | ph | independent | FFT | A>B | **agree** | sulfur | 1.53e+03, 70.5 |  |
+| MOT-03 | ranking | independent | MFT | A>B | **disagree** | sulfur | 232, 232 | identical predictions |
 | MOT-04 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-05 | sugar_identity | independent | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | MOT-06 | ph | independent | MFT | A<B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
@@ -134,5 +134,5 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | WHI-PH-01 | ph | fit_adjacent | MFT | A>B | **disagree** | sulfur | 4.29e+03, 9.11e+03 |  |
 | CER07-PH-01 | ph | independent | FFT | decreasing | **disagree** | sulfur | 2.46e+03, 310, 0.0189, 69.7 |  |
 | CER07-PH-02 | ph | independent | furfural | decreasing | **agree** | sulfur | 1.03e+03, 830, 89.9 |  |
-| MOT02-PH-01 | ph | not_independent | MFT | A>B | **agree** | sulfur | 404, 374 |  |
-| MOT02-PH-02 | ph | not_independent | FFT | A>B | **agree** | sulfur | 1.47e+03, 183 |  |
+| MOT02-PH-01 | ph | not_independent | MFT | A>B | **agree** | sulfur | 323, 232 |  |
+| MOT02-PH-02 | ph | not_independent | FFT | A>B | **agree** | sulfur | 1.53e+03, 70.5 |  |
