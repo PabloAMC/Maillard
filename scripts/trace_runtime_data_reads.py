@@ -3,7 +3,8 @@
 
 Runs every verb of ``scripts/maillard.py`` that turns a formulation into an answer on the
 shipped examples, each in its own interpreter under an audit hook, and records every file
-opened under ``data/`` or ``results/literature/``. A trace, not a static guess: until
+opened under ``data/`` or ``results/literature/``. (The engine also loads the frozen fit
+reports under ``results/validation/``: generated evidence, outside this trace's question.) A trace, not a static guess: until
 2026-10-27 the provenance census called any record sitting in ``data/lit/`` "consumed at
 runtime", and the trace showed the front door opens none of those files.
 

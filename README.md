@@ -295,7 +295,8 @@ constant, which is what makes `rank` useful.
 > `data/keys/compounds.yml`, `data/schemas/spec.schema.json`,
 > `data/species/desirable_targets.yml`, `data/species/off_flavour_targets.yml` and
 > `data/species/protein_matrices.yml`. The rate constants themselves live in
-> `src/kinetic_core/`, each with its evidence class. Every fall in the old census was a
+> `src/kinetic_core/`, each with its evidence class, and the fitted ones are loaded from the
+> frozen fit reports under `results/validation/`. Every fall in the old census was a
 > deletion, not a verification. The registries are `data/keys/papers.yml` (430 DOIs, 225 of them with an
 > extraction dossier) and
 > `data/keys/compounds.yml` (74 InChIKey-resolved compounds); `scripts/ci/citation_gate.py`

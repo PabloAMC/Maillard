@@ -171,3 +171,10 @@
   model goes into the repo beside what it summarises (extend an existing doc before creating one), passes
   through a PR like everything else, and an email to a third party is short and links only to published
   repository files.
+
+- **A headline number is only as good as its definition; read the test before repeating it.** On
+  2026-10-27 the owner was told, for a meeting with WUR, that "63 unsourced records are used when the model
+  runs", repeated from README. The test behind it counted any record under `data/lit/` as "reaching runtime";
+  a trace showed the front door opens none of those files. Rule: before quoting a repository statistic to
+  anyone outside, open the test or generator that pins it and check that its definition measures what the
+  sentence claims; where it does not, measure (trace, recount) before speaking.

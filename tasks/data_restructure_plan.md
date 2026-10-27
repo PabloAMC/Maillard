@@ -2566,6 +2566,32 @@ PDFs read by eye into dossiers. Brief: [docs/guides/EXPERIMENTS_BRIEF.md](../doc
 - [x] Author requests drafted for the owner to send (Elmore / Yiltirak time courses and residual cysteine; Beyrer heat-dependent binding, units typo reported; Li / Ma extrusion residence time and ratio basis; Lund / Jansson Fig. 4 hexanal values); addresses checked against current staff pages
 - [x] PR #18 merged into main (6f4ab7e) after CI passed
 
+### The last 84 unsourced records (2026-10-27, owner: "Do them all")
+
+Question from the WUR meeting: how reliable are the data? The README answered "84 records
+`no_verifiable_source`, 63 consumed at runtime". The "runtime" figure was a location proxy (any
+record under `data/lit/` or `results/literature/`), never a trace.
+
+- [x] **Traced the front door** (`scripts/trace_runtime_data_reads.py`, audit hook, one
+  interpreter per verb): `compare`, `predict`, `explain`, `rank`, `score`, `calibrate` read five
+  curated files (`data/keys/compounds.yml`, `data/schemas/spec.schema.json`,
+  `data/species/{desirable_targets,off_flavour_targets,protein_matrices}.yml`). None held a flag,
+  so none of the 63 ever fed a prediction. Pinned by
+  `test_the_front_door_reads_only_the_pinned_data_files` and quoted in README.
+- [x] **Deleted all 84** (each already searched for in the 2026-08 sweeps and the 2026-10-09 gap
+  search): 24 intake candidates, 29 backlog items, 18 SLR ledger rows, 7 flavour anchors, 3
+  retention records, Henle 2005, two computational priors. The two pH-release surrogates were not
+  re-sourced to Fischer 2021: Fischer varied the pH of *extraction*, the surrogate is a *release*
+  pH, and its one reader (`src/headspace.py`) is retired. Intake citations kept as strings in
+  `closed_unsourced_citations` so the runtime queue never reopens them.
+- [x] Census guard now pins **zero** (`test_no_record_carries_no_verifiable_source`); model card
+  census rewritten (the stale hardcoded "65 and 65" went with it). Family ingestion queue moves
+  07 -> 11 first: every family-07 backlog citation was unsourced.
+- [ ] **17 narrower markers remain** (`value_status`, `value_anchor_status`, `doi_resolution.status`):
+  a real paper whose one value could not be anchored (Liu 2023 heptadienal / IBMP bands, Ohsu 2010,
+  Siripitakpong 2026, the Yaylayan-repaired G6P prior), nine backlog DOI lookups, and the quarantined
+  Hofmann 1998 file. Same treatment is possible value by value; not done here.
+
 ### Native runtime beside the container (2026-09-14, owner: "can we remove OrbStack?")
 
 Since the QM lane left (2026-09-01) `environment.yml` is a plain conda env, so the container no
