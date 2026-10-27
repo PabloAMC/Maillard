@@ -107,46 +107,6 @@
 
 ---
 
-### Grandhee & Monnier (1991), J. Biol. Chem. 266:11649
-- **DOI:** [10.1016/s0021-9258(18)99006-x](https://doi.org/10.1016/s0021-9258(18)99006-x)
-- **Matrix Family:** bsa_ascorbic_crosslink_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `pentosidine_glucose_pmol_per_mg_range` | `[13.2, 17.0]` |
-| `pentosidine_ascorbic_acid_pmol_per_mg_range` | `[13.2, 17.0]` |
-| `molar_equivalence_to_glucose` | `True` |
-| `temperature_c` | `37.0` |
-
-**What it supports:**
-- A bounded Family 14 pentosidine ceiling showing that ascorbic acid can match glucose on a molar basis as a cross-link precursor
-- An explicit absolute-yield anchor for AA-driven damage reporting rather than a purely narrative AGE warning
-
-**What it does not support:**
-- A direct SPI or PPI extrusion endpoint benchmark for pentosidine
-- A full oxygen-dependent AA transition network in one payload
-
-**Next Action:** Keep encoded as the Family 14 pentosidine-equivalence anchor so antioxidant AA additions remain visible as a bounded AGE burden source in reporting and safety lanes.
-
----
-
 ### Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537
 - **DOI:** [10.1590/1678-457x.08717](https://doi.org/10.1590/1678-457x.08717)
 - **Matrix Family:** ascorbic_amino_crosslink_model
@@ -571,13 +531,12 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 14
 
-Total papers analyzed: **14** (Benchmark-eligible: **0**, Calibration references: **10**, Rejected: **4**)
+Total papers analyzed: **13** (Benchmark-eligible: **0**, Calibration references: **10**, Rejected: **3**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Yu et al. (2020) | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Feng et al. (2023) | 2/8 | ❌ Rejected | ascorbic_hcw_model |
-| Grandhee & Monnier (1991), J. Biol. Chem. 266:11649 | 2/8 | ❌ Rejected | bsa_ascorbic_crosslink_model |
 | Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537 | 2/8 | ❌ Rejected | ascorbic_amino_crosslink_model |
 | Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714 | 3/8 | ⚠️ Calibration | xylose_alanine_model_system |
 | Nemet & Monnier (2011) | 2/8 | ❌ Rejected | free_model_system |
@@ -611,7 +570,6 @@ Total papers analyzed: **14** (Benchmark-eligible: **0**, Calibration references
 
 ### REJECTED (Score < 3)
 - `Feng et al. (2023)` (Score: 2/8)
-- `Grandhee & Monnier (1991), J. Biol. Chem. 266:11649` (Score: 2/8)
 - `Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537` (Score: 2/8)
 - `Nemet & Monnier (2011)` (Score: 2/8)
 

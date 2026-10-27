@@ -82,87 +82,6 @@
 
 ---
 
-### Mottram & Nobrega (2002)
-- **DOI:** [10.1021/jf0200826](https://doi.org/10.1021/jf0200826)
-- **Matrix Family:** caramelization_sulfur_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `norfuraneol_to_mft_mol_fraction` | `0.014` |
-| `hdmf_cysteine_thiophene_ph_optimum` | `5.1` |
-| `diacetyl_mercaptoketone_bridge_reported` | `True` |
-
-**What it supports:**
-- Bounded bridge from norfuraneol and HDMF-like intermediates into sulfur-positive notes
-- Scientist-facing explanation for why caramel-heavy systems can still retain sulfur-side opportunity when sulfur donors are present
-
-**What it does not support:**
-- Exact MFT or thiophene endpoint closure in one PBMA matrix
-- A standalone sulfur benchmark
-
-**Next Action:** Keep encoded as a bounded sulfur-bridge prior so furanone-rich systems do not get treated as sulfur-disconnected by default.
-
----
-
-### Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725
-- **DOI:** [10.1021/jf011164h](https://doi.org/10.1021/jf011164h)
-- **Matrix Family:** aqueous_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `mgo_mM` | `50.0` |
-| `temperature_c` | `120.0` |
-| `pH` | `6.0` |
-| `time_minutes` | `120.0` |
-| `hdmf_reference_yield_ug_per_g` | `2.9` |
-| `replicates` | `3` |
-
-**What it supports:**
-- A bounded Family 09 C3-route support anchor showing that HDMF can form directly from methylglyoxal-rich fragmentation chemistry
-- Scientist-facing context for alkaline or fragmentation-heavy systems where HDMF support is not purely tied to intact sugar or amino-acid pairing
-
-**What it does not support:**
-- A full standalone caramelization solver driven by explicit methylglyoxal mass balance
-- Direct PBMA endpoint closure without additional matrix-specific benchmark anchors
-
-**Next Action:** Use as a bounded Family 09 methylglyoxal-to-HDMF support prior so the runtime can surface an explicit C3 route without replacing the default Blank & Fay furanone expectation prior.
-
----
-
 ### Glomb & Monnier (1995), J. Biol. Chem. 270:10017
 - **DOI:** [10.1074/jbc.270.17.10017](https://doi.org/10.1074/jbc.270.17.10017)
 - **Matrix Family:** aqueous_model_system
@@ -355,13 +274,11 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 9
 
-Total papers analyzed: **8** (Benchmark-eligible: **0**, Calibration references: **5**, Rejected: **3**)
+Total papers analyzed: **6** (Benchmark-eligible: **0**, Calibration references: **4**, Rejected: **2**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Hernandez et al. (2023), Molecules 28:3151 | 5/8 | ⚠️ Calibration | pbma_vs_beef_comparator |
-| Mottram & Nobrega (2002) | 2/8 | ❌ Rejected | caramelization_sulfur_model_system |
-| Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725 | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Glomb & Monnier (1995), J. Biol. Chem. 270:10017 | 2/8 | ❌ Rejected | aqueous_model_system |
 | Quintas, Guimaraes, Baylina, Brandao & Silva (2007), Innov. Food Sci. Emerg. Technol. 8:306 | 2/8 | ❌ Rejected | free_model_system |
 | de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35 | 3/8 | ⚠️ Calibration | free_model_system |
@@ -377,13 +294,11 @@ Total papers analyzed: **8** (Benchmark-eligible: **0**, Calibration references:
 
 ### CALIBRATION (Score 3-5)
 - `Hernandez et al. (2023), Molecules 28:3151` (Score: 5/8)
-- `Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725` (Score: 3/8)
 - `de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35` (Score: 3/8)
 - `Luna & Aguilera (2013), Food Biophysics 9:61` (Score: 3/8)
 - `Cui et al. (2022), J. Agric. Food Chem. 70:11556` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Mottram & Nobrega (2002)` (Score: 2/8)
 - `Glomb & Monnier (1995), J. Biol. Chem. 270:10017` (Score: 2/8)
 - `Quintas, Guimaraes, Baylina, Brandao & Silva (2007), Innov. Food Sci. Emerg. Technol. 8:306` (Score: 2/8)
 

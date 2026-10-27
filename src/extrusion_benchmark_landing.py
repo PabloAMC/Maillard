@@ -268,9 +268,10 @@ def build_extrusion_disulfide_follow_on_package(root: Path = ROOT) -> Dict[str, 
         },
         "supporting_runtime_sources": {
             "process_state_calibration_id": str(process_entry.get("id", ids["disulfide_context"])),
+            # Only priors that exist: a missing one used to be listed by its intended id anyway
+            # (2026-10-27, when the MFT-disulfide trapping prior was deleted as unanchored).
             "retention_binding_prior_ids": [
-                str(trapping_prior.get("id", ids["mft_disulfide_trapping"])),
-                str(binding_prior.get("id", ids["protein_binding_hierarchy"])),
+                str(prior["id"]) for prior in (trapping_prior, binding_prior) if prior.get("id")
             ],
         },
         "required_same_run_observables": {

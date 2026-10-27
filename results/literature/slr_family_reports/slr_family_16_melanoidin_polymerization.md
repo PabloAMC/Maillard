@@ -28,46 +28,6 @@
 
 ## SECTION 1 — Curated References
 
-### Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176
-- **DOI:** [10.1016/j.jfda.2015.02.001](https://doi.org/10.1016/j.jfda.2015.02.001)
-- **Matrix Family:** melanoidin_trapping_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `mft_rfd_baseline` | `4.0` |
-| `mft_rfd_with_melanoidins` | `2.0` |
-| `melanoidin_loading_reference_mg` | `125.0` |
-| `mechanism` | `crosspy_radical_thioether_adduction` |
-
-**What it supports:**
-- Irreversible CROSSPY-driven MFT trapping support for high-melanoidin process states
-- Family 16 justification for non-recoverable thiol loss instead of purely reversible sulfur attenuation
-
-**What it does not support:**
-- A full texture-to-flavor co-model for WHC, WSI, and G-prime collapse
-- Species-resolved closure for every thiol in every extrusion condition
-
-**Next Action:** Keep encoded as a bounded Family 16 trapping prior until the extrusion severity surface and same-run sulfur retention benchmarks are wider.
-
----
-
 ### Snel et al. (2023)
 - **DOI:** [10.3390/foods12132543](https://doi.org/10.3390/foods12132543)
 - **Matrix Family:** spi_ppi_hme_rework
@@ -492,11 +452,10 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 16
 
-Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references: **7**, Rejected: **5**)
+Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references: **7**, Rejected: **4**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176 | 2/8 | ❌ Rejected | melanoidin_trapping_model |
 | Snel et al. (2023) | 2/8 | ❌ Rejected | spi_ppi_hme_rework |
 | Cruz et al. (2025) | 2/8 | ❌ Rejected | spi_rice_hme_burger_analogues |
 | J. Agric. Food Chem. 2019 (Ref. 21) | 2/8 | ❌ Rejected | pea_protein_hydrolysate_gum_arabic_conjugate |
@@ -526,7 +485,6 @@ Total papers analyzed: **12** (Benchmark-eligible: **0**, Calibration references
 - `Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176` (Score: 2/8)
 - `Snel et al. (2023)` (Score: 2/8)
 - `Cruz et al. (2025)` (Score: 2/8)
 - `J. Agric. Food Chem. 2019 (Ref. 21)` (Score: 2/8)

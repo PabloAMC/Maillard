@@ -28,47 +28,6 @@
 
 ## SECTION 1 — Curated References
 
-### Blank & Fay (1996), J. Agric. Food Chem. 44:531
-- **DOI:** [10.1021/jf950439o](https://doi.org/10.1021/jf950439o)
-- **Matrix Family:** aqueous_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `hdmf_molar_yield_fraction_lower_bound` | `0.4` |
-| `hdmf_odt_ug_per_l` | `0.6` |
-| `hdmf_oav_lower_bound` | `80.0` |
-| `temperature_c` | `145.0` |
-| `replicates` | `3` |
-
-**What it supports:**
-- A bounded rhamnose-plus-proline HDMF routing anchor with unusually high molar yield
-- Scientist-facing context for why minor rhamnose supplementation can matter when proline is available
-
-**What it does not support:**
-- A universal rhamnose donor hierarchy across all amino-acid partners
-- Direct plant-matrix HDMF benchmark closure
-
-**Next Action:** Encode as a bounded rhamnose-plus-proline HDMF prior so Family 07 can surface this donor-specific shortcut without rewriting the broader sugar hierarchy.
-
----
-
 ### Zhang et al. (2024), J. Agric. Food Chem. 72:22461
 - **DOI:** [10.1021/acs.jafc.4c05736](https://doi.org/10.1021/acs.jafc.4c05736)
 - **Matrix Family:** free_model_system
@@ -366,11 +325,10 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 7
 
-Total papers analyzed: **9** (Benchmark-eligible: **0**, Calibration references: **4**, Rejected: **5**)
+Total papers analyzed: **8** (Benchmark-eligible: **0**, Calibration references: **3**, Rejected: **5**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Blank & Fay (1996), J. Agric. Food Chem. 44:531 | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Zhang et al. (2024), J. Agric. Food Chem. 72:22461 | 3/8 | ⚠️ Calibration | free_model_system |
 | Martins & van Boekel (2003), Carbohydr. Res. 338:1665 | 3/8 | ⚠️ Calibration | free_model_system |
 | Nashalian & Yaylayan (2014), J. Agric. Food Chem. 62:8518 | 2/8 | ❌ Rejected | free_model_system |
@@ -388,7 +346,6 @@ Total papers analyzed: **9** (Benchmark-eligible: **0**, Calibration references:
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Blank & Fay (1996), J. Agric. Food Chem. 44:531` (Score: 3/8)
 - `Zhang et al. (2024), J. Agric. Food Chem. 72:22461` (Score: 3/8)
 - `Martins & van Boekel (2003), Carbohydr. Res. 338:1665` (Score: 3/8)
 - `van Boekel (2001)` (Score: 3/8)

@@ -25,7 +25,8 @@ def test_literature_backlog_queues_are_exclusive_and_surface_minimum_primary_exp
     # both sets. Their intake sources are no_verifiable_source and their process-state
     # records were deleted (tasks/data_restructure_plan.md, "After the gap search"), so they
     # are neither encoded nor queued. 2026-10-27: the same for blank_grosch_1991_hdmf_anchor,
-    # whose intake record (no_verifiable_source) was deleted with the other 83.
+    # whose intake record (no_verifiable_source) was deleted with the other 83; and for the
+    # intake entries whose only encoding was one of the 37 unanchored priors deleted the same day.
     for entry_id in {
         "rizzello_2024_fermentation_cleanup",
         "zhao_2022_moromi_precursor_release",
@@ -33,25 +34,18 @@ def test_literature_backlog_queues_are_exclusive_and_surface_minimum_primary_exp
         assert encoded_rows[entry_id]["triage_status"] == "ready_calibration"
     for entry_id in {
         "acs_jafc_3c05991_ppi_spi_partitioning",
-        "acs_jafc_3c02618_binding_prior",
         "acs_jafc_0c01925_protein_binding_hierarchy",
         "resconi_2023_pbma_beef_identity_benchmark",
         "acs_apts_ref24_3dg_arrhenius_anchor",
-        "mottram_nobrega_2002_furanone_bridge",
         "pmc_4419266_pe_interfacial_maillard_kinetics",
-        "voelker_2021_thiamine_kinetics",
-        "huang_2022_thiamine_metal_catalysis",
-        "wang_2012_gsh_xylose_sulfur_uplift",
         "liu_2023_ppi_offnote_baseline",
         "pmc11049305_spirulina_offnote_anchor",
         "pmc12155365_sunflower_roasted_anchor",
         "pmc_2024_pba_cml_cel_ranges_anchor",
         "pmc_12648097_acrylamide_mitigation_anchor",
         "frontiers_2022_hcw_aa_arrhenius_anchor",
-        "pmid_1904866_pentosidine_equivalence_anchor",
         "scielo_brasil_aa_crosslink_hierarchy_anchor",
         "pmc5992167_amadori_pe_burden_anchor",
-        "pmc9351765_crosspy_trapping_anchor",
         "uspto_ptacts_2023_yeast_extract_anchor",
         "wageningen_ref9_hme_rework_hydration_anchor",
         "acs_foodscitech_2024_hme_firmness_anchor",

@@ -39,21 +39,23 @@ def test_deep_research_runtime_queue_selects_non_benchmark_runtime_batch_from_ba
     # lacks, so it is classified from its backlog status ("already_runtime_bound"), as
     # Blank/Devaud/Grosch was in 2026-08. Excluded count unchanged at 6. Batch selection
     # now skips intake sources marked no_verifiable_source (Malia 2025 reopened batch 01).
-    assert summary["landed_runtime_citation_count"] == 4
+    # UPDATED 2026-10-27: 37 computational priors with no value checked against their paper were
+    # deleted; their citations moved to `closed_citations`. Landed 4 -> 3 (Hidalgo & Zamora closed).
+    assert summary["landed_runtime_citation_count"] == 3
     assert summary["computational_prior_count"] == 0
     assert summary["safety_reference_count"] == 0
     assert summary["excluded_candidate_count"] == 6
 
     assert rows == {}
 
-    assert excluded["Ordoudi et al. (2014 / PMC12484514)"]["reason"] == "already_runtime_bound"
+    assert excluded["Ordoudi et al. (2014 / PMC12484514)"]["reason"] == "closed_no_verified_value"
     assert excluded["Hrncirik & Zeelenberg (2014)"]["reason"] == "already_landed_in_runtime_registry"
     assert excluded["Aliani & Farmer (2005)"]["reason"] == "already_landed_in_runtime_registry"
     # 2026-10-27: the G6P prior and its backlog item were deleted (no such paper; the 4.4x is
     # not in Yaylayan 2003), so the citation is now closed rather than "runtime bound".
-    assert excluded["Blank, Devaud & Grosch (2003)"]["reason"] == "no_verifiable_source"
+    assert excluded["Blank, Devaud & Grosch (2003)"]["reason"] == "closed_no_verified_value"
     assert excluded["Glomb & Monnier (1995)"]["reason"] == "already_landed_in_runtime_registry"
-    assert excluded["Hidalgo & Zamora (2004)"]["reason"] == "already_landed_in_runtime_registry"
+    assert excluded["Hidalgo & Zamora (2004)"]["reason"] == "closed_no_verified_value"
 
     assert prepared_next_batch["batch_id"] == ""
     assert prepared_next_batch["summary"]["candidate_count"] == 0

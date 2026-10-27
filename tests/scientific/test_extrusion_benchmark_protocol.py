@@ -113,7 +113,8 @@ def test_extrusion_5_8_follow_on_package_is_trigger_ready_and_runtime_aligned():
     assert payload["summary"]["follow_on_id"] == "extrusion_5_8_disulfide_retention_follow_on_2026"
     assert payload["summary"]["status"] == "trigger_ready_pending_first_measured_spi_extrusion_panel"
     assert payload["supporting_runtime_sources"]["process_state_calibration_id"] == "raman_sds_extrusion_disulfide_severity"
-    assert "acs_jafc_3c02618_mft_disulfide_trapping_v1" in payload["supporting_runtime_sources"]["retention_binding_prior_ids"]
+    # 2026-10-27: the MFT-disulfide trapping prior was deleted (no value checked against its paper).
+    assert "acs_jafc_3c02618_mft_disulfide_trapping_v1" not in payload["supporting_runtime_sources"]["retention_binding_prior_ids"]
     metric_ids = {row["metric_id"] for row in payload["derived_metrics"]}
     assert "free_sh_retention_fraction" in metric_ids
     assert "sulfur_to_pyrazine_retention_ratio" in metric_ids
