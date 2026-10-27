@@ -28,45 +28,6 @@
 
 ## SECTION 1 — Curated References
 
-### Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358
-- **DOI:** [10.1021/jf034037p](https://doi.org/10.1021/jf034037p)
-- **Matrix Family:** aqueous_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `g6p_hdmf_multiplier_vs_glucose` | `4.4` |
-| `analytical_method` | `SIDA_[2H3]-HDMF` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Bounded G6P-versus-glucose uplift for HDMF-rich phosphorylated-sugar routing
-- Directional support for phosphorylated donor prioritization when furanone output matters
-
-**What it does not support:**
-- Direct plant-matrix closure
-- Universal HDMF endpoint concentrations
-
-**Next Action:** Encode as a bounded phosphorylated-sugar prior so G6P can outrank glucose when HDMF-support signals matter.
-
----
-
 ### Blank & Fay (1996), J. Agric. Food Chem. 44:531
 - **DOI:** [10.1021/jf950439o](https://doi.org/10.1021/jf950439o)
 - **Matrix Family:** aqueous_model_system
@@ -405,11 +366,10 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 7
 
-Total papers analyzed: **10** (Benchmark-eligible: **0**, Calibration references: **5**, Rejected: **5**)
+Total papers analyzed: **9** (Benchmark-eligible: **0**, Calibration references: **4**, Rejected: **5**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358 | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Blank & Fay (1996), J. Agric. Food Chem. 44:531 | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Zhang et al. (2024), J. Agric. Food Chem. 72:22461 | 3/8 | ⚠️ Calibration | free_model_system |
 | Martins & van Boekel (2003), Carbohydr. Res. 338:1665 | 3/8 | ⚠️ Calibration | free_model_system |
@@ -428,7 +388,6 @@ Total papers analyzed: **10** (Benchmark-eligible: **0**, Calibration references
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358` (Score: 3/8)
 - `Blank & Fay (1996), J. Agric. Food Chem. 44:531` (Score: 3/8)
 - `Zhang et al. (2024), J. Agric. Food Chem. 72:22461` (Score: 3/8)
 - `Martins & van Boekel (2003), Carbohydr. Res. 338:1665` (Score: 3/8)

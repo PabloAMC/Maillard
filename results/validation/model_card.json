@@ -6,7 +6,7 @@
     "literature_hits": 17,
     "literature_not_evaluable": 1,
     "literature_total": 44,
-    "median_ci_width_log10": 1.0094779070745503,
+    "median_ci_width_log10": 1.0094779070724789,
     "n_samples": 200,
     "out_of_sample_hits": 17,
     "out_of_sample_total": 43,

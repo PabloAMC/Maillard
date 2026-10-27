@@ -5992,84 +5992,9 @@
           "exists": true
         }
       ]
-    },
-    {
-      "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "citation": "Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358",
-      "kind": "directional_prior",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "template_required",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": false,
-      "backlog_queue": "ready_runtime",
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded phosphorylated-sugar prior so G6P can outrank glucose when HDMF-support signals matter.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": false
-        }
-      ]
     }
   ],
-  "ready_runtime": [
-    {
-      "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "citation": "Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358",
-      "kind": "directional_prior",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "template_required",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": false,
-      "backlog_queue": "ready_runtime",
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded phosphorylated-sugar prior so G6P can outrank glucose when HDMF-support signals matter.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": false
-        }
-      ]
-    }
-  ],
+  "ready_runtime": [],
   "ready_benchmark": [],
   "wet_lab_blocked": [
     {
@@ -12210,9 +12135,9 @@
     "encoded_and_ready_ids": []
   },
   "summary": {
-    "intake_reference_count": 173,
+    "intake_reference_count": 172,
     "encoded_reference_count": 172,
-    "ready_runtime_count": 1,
+    "ready_runtime_count": 0,
     "ready_benchmark_count": 0,
     "wet_lab_blocked_count": 4,
     "queue_conflict_count": 0
