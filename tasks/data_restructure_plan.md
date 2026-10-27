@@ -2738,8 +2738,15 @@ each wave's pre-registration). Order and status:
 - [x] **B51 — the pH state against its thermodynamic sources: DO NOT SHIP** (2026-10-27; verdict and
   diagnosis in the prereg §6). The refit fits better and fixes Yiltirak but loses Hofmann pH 5 ~100x,
   because the thiolate-acting thiol sink destroys thiols above pH ~5 once speciation is correct. Switches
-  stay off; the buffer facts ship. Follow-ups: (1) a wave for the 25 °C table scale + SID carry alone;
-  (2) the thiolate assignment of the thiol sink (MFT/FFT thiol pK unmeasured).
+  stay off; the buffer facts ship. Follow-ups: (1) a wave for the 25 °C table scale + SID carry alone —
+  **B51.1, DO NOT SHIP** (fit 18.74 → 15.47, hold-outs fine, but SUG-09 flips through the hexose route to
+  FFT); (2) the thiolate assignment of the thiol sink (MFT/FFT thiol pK unmeasured).
+- [ ] **B52 and B53 deferred (2026-10-27): no blind test is left in the corpus.** Martins 2005 publishes
+  only rate constants, which a reading agent has already compared at step level (mixed: the slope wins
+  on DFG → 3-DG); Davidek's water series is seen; Davidek's phosphate series is B53's fit source, and
+  B53's hold-out (Mottram & Nobrega 2002) is a sulfur-lane pot whose fit pots all sit in 0.5 M phosphate,
+  so the buffer term means a sulfur refit. Each needs a new measurement: the WUR dough data (with pH), or
+  a Davidek-style DFG degradation in water vs phosphate at 120–145 °C.
   Original entry (prereg `results/validation/kinetic_core_b51_prereg.md`):
   Six switches in `ph_state.B51`: GKL 2002 ionisation heat capacities; GKL cysteine constants (the B2
   pair 26 / 43 kJ/mol was cited to GKL and is not in it: GKL Table 7.23 is 36.1 / 34.1); Suleimenov &
