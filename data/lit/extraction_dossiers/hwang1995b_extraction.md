@@ -17,6 +17,7 @@ are not typed as numbers in section 4.
 | Title | "Relative Reactivities of Amino Acids in the Formation of Pyridines, Pyrroles, and Oxazoles" |
 | Authors | Hui-Ing Hwang, Thomas G. Hartman, Chi-Tang Ho (Rutgers, New Brunswick NJ) |
 | Venue | J. Agric. Food Chem. 1995, 43, 2917-2921; received 28 February 1995, accepted 30 June 1995 |
+| DOI | 10.1021/jf00059a027 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Article id | JF950123G (no DOI printed) |
 | Relationship to the companion | The authors state it plainly: "In an earlier paper (Hwang et al., 1995), we reported a total of 56 pyrazines in the reaction systems containing 15N labeled glycine and 8 other amino acids. **In this paper, we further report another 25 nitrogen-containing reaction products**". Same materials, same charges, same drying, same 180 C / 1 h, same purge-and-trap, same internal standard, same 15N arithmetic. **Same pots.** |
 | Naming | Ctrl = glycine only; Gln / Lys / Asn / Phe / Glu / Asp / Ile / Arg = labelled glycine PLUS that amino acid. "Ref" in the figures = "Ctrl" in the table |

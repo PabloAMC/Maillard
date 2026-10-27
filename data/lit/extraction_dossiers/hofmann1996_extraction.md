@@ -7,7 +7,7 @@ pointed to it as the thiol air-vs-nitrogen study). Read-only.
 |---|---|
 | Title | "Model Studies on the Oxidative Stability of Odor-Active Thiols Occurring in Food Flavors" |
 | Venue | J. Agric. Food Chem. 1996, 44, 251-255 |
-| DOI | 10.1021/jf950353b (as printed on the paper; verify) |
+| DOI | 10.1021/jf9500703 (not printed in the PDF; the manuscript code JF9500703 is printed at the end of the article; Crossref match on title, first author, year, journal and pages 251-255, 2026-10-27. Corrected from 10.1021/jf950353b, which does not resolve at Crossref) |
 
 ## What it holds, and why it is NOT the aqueous sink measurement
 

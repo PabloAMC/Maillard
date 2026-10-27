@@ -60,7 +60,7 @@ Fully worked in §7. Summary of the resolution, up front:
 | title | "Kinetic Significance of the Schiff Base Reversion in the Early-Stage Maillard Reaction of a Phenylalanine−Glucose Aqueous Model System" |
 | venue | *Journal of Agricultural and Food Chemistry* |
 | volume/pages/year | **45**, No. 5, 1619–1623, 1997 |
-| DOI | not printed; manuscript ID **JF960458D**; CCC code S0021-8561(96)00458-X |
+| DOI | 10.1021/jf960458d (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27; consistent with the printed manuscript ID JF960458D). As recorded before: not printed; manuscript ID **JF960458D**; CCC code S0021-8561(96)00458-X |
 | received/revised/accepted | "Received for review June 24, 1996. Revised manuscript received February 7, 1997. Accepted February 18, 1997." Abstract published in *Advance ACS Abstracts*, April 1, 1997 |
 | affiliation | Center of Advanced Food Technology, Department of Food Science, and Institute of Marine and Coastal Sciences, Cook College, Rutgers, The State University of New Jersey, New Brunswick, New Jersey 08903-0231. Publication D-10114-2-97 of the New Jersey Agricultural Experiment Station |
 | PDF character | born-digital (Acrobat Distiller 2.1 for SunOS/Solaris, 1997), clean text layer, 5 pp. |

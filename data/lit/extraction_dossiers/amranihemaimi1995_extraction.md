@@ -26,6 +26,7 @@ asks for exactly such ratios after its own fit was refuted.
 | Title | "Mechanisms of Formation of Alkylpyrazines in the Maillard Reaction" |
 | Authors | Miriam Amrani-Hemaimi (Institute of Organic Chemistry, University of Lausanne) and Christoph Cerny (corresponding) and Laurent B. Fay (Nestle Research Centre, Nestec Ltd., Lausanne) |
 | Venue | J. Agric. Food Chem. 1995, 43 (11), 2818-2822. Received December 23 1994; revised July 31 1995; accepted September 11 1995; abstract in Advance ACS Abstracts October 15 1995 |
+| DOI | 10.1021/jf00059a009 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Article id | JF9407228 |
 | Naming | Experiments are numbered 1-8 and the tables use those numbers as column heads: **1** = alanine + glucose, **2** = alanine + fructose, **3** = glycine + glucose, **4** = glycine + fructose (unlabelled, Table 1); **5** = [3-13C]alanine + glucose, **6** = [3-13C]alanine + fructose, **7** = [2-13C]glycine + glucose, **8** = [2-13C]glycine + fructose (Table 2). Compounds are numbered **1-11** in Table 1's order and referred to by number throughout the prose. "2-oxopropanal" is the paper's name for methylglyoxal |
 | Same laboratory | Cerny & Grosch 1994 (Z. Lebensm. Unters. Forsch. 198:210) supplies the apparatus and the beefsteak-frying conditions; `cerny1994_extraction.md`, `cerny2004_extraction.md`, `cerny2007_extraction.md` are the same group |

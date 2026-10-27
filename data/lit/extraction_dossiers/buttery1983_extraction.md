@@ -19,6 +19,7 @@ rank order with no numbers) are re-typed in full. Figure 1 is a synthesis scheme
 | Title | "Cooked Rice Aroma and 2-Acetyl-1-pyrroline" |
 | Authors | Ron G. Buttery, Louisa C. Ling and Jean G. Turnbaugh (Western Regional Research Center, ARS, USDA, Berkeley CA) and Bienvenido O. Juliano (International Rice Research Institute, Manila) |
 | Venue | J. Agric. Food Chem. 1983, 31 (4), 823-826. Received December 13 1982; accepted March 21 1983 |
+| DOI | 10.1021/jf00118a036 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Registry numbers printed | 2-acetyl-1-pyrroline **85213-22-5**; 2-acetylpyrrole 1072-83-9; 2-(1-hydroxyethyl)pyrrolidine 63848-93-1 |
 | Naming | "ppm" in Table I is explicitly defined by footnote a as parts by **weight** per 10^6 parts of rice, dry weight. "parts/10^9 parts of water" in Table II and the threshold sentence is explicitly a **volume** ratio, "part (mL) ... per 10^9 parts (mL)" |
 | Companion | Buttery, Ling & Juliano 1982, Chem. Ind. (London) 958 (the first identification of 2-acetyl-1-pyrroline in rice; **not on disk**) and Buttery, Ling & Mon 1986, JAFC 34:112, the quantitative method (`buttery1986_extraction.md`, on disk) |

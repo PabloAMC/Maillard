@@ -15,7 +15,7 @@ chromatograms, class shares) are FIGURE-ONLY and no value was read from them.
 | Title | "Effect of Pressure on the Maillard Reaction between Ribose and Cysteine in Supercritical Carbon Dioxide" |
 | Authors | Honggao Xu, Wenhao He, Xuan Liu, Yanxiang Gao* (China Agricultural University, Beijing). The paper's own citation line prints "Liu K." for the third author; the byline says Xuan Liu |
 | Venue | Czech Journal of Food Sciences 28 (2010) 192-201. Received October 20 2008, accepted March 17 2010 |
-| DOI | none printed |
+| DOI | 10.17221/189/2008-CJFS (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: none printed |
 | Naming | SC-CO2 / SC-N2 = supercritical carbon dioxide / nitrogen as the pressurising medium; MFT = 2-methyl-3-furanthiol; FFT = 2-furanmethanethiol (2-furfurylthiol); MFTD = bis(2-methyl-3-furyl) disulfide; norfuraneol = 4-hydroxy-5-methyl-3(2H)-furanone; LRI = linear retention index on the (unstated) column |
 | Companions | Xu 2008a (J. Sci. Food Agric. 88, 328: the same apparatus and procedure, SC-CO2 at 40 MPa; the "procedures described previously") and Xu 2008b (Food Res. Int. 41, 730: ribose:cysteine ratios) — neither on disk; Whitfield & Mottram 1999, Mottram & Nobrega 2002, Hofmann & Schieberle 1998 cited for mechanisms (all in the repo) |
 

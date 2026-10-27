@@ -14,7 +14,7 @@ tentatively identified compounds) not carried.
 | Title | "Volatile Compounds Generated from Thermal Reaction of Methionine and Methionine Sulfoxide with or without Glucose" |
 | Authors | Tung-Hsi Yu (Da-Yeh Institute of Technology, Taiwan), Chi-Tang Ho (Rutgers) |
 | Venue | J. Agric. Food Chem. 1995, 43, 1641–1646; received 3 April 1995, accepted 12 April 1995 |
-| DOI | 10.1021/jf00054a040 (not printed in the PDF; JF940522W is the manuscript code) |
+| DOI | 10.1021/jf00054a043 (not printed in the PDF; JF940522W is the manuscript code; Crossref match on title, first author, year, journal and pages 1641-1646, 2026-10-27. Corrected from 10.1021/jf00054a040, which Crossref resolves to Kubo et al. 1995, "Antimicrobial Activity of the Olive Oil Flavor Compounds") |
 | Systems | M = DL-methionine; M+G = + glucose; MS = DL-methionine sulfoxide; MS+G = + glucose; 0.01 mol each in 200 mL water, sealed, 180 °C, 1 h |
 | Analytes | 62 volatiles, GC-FID relative to hexadecane, mg per mol amino acid; GC-MS identification |
 

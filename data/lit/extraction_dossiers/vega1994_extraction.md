@@ -29,7 +29,7 @@ summary table.
 | Title | "Detectable Odor Thresholds of Selected Lipid Oxidation Compounds at Various Temperatures in a Gelatin Model System" |
 | Authors | J. D'Dios Vega and M. Susan Brewer (corresponding) — Division of Foods and Nutrition, University of Illinois, Urbana, IL 61801 |
 | Venue | Journal of Food Lipids **1** (1994) 229-245. Received for publication 23 December 1993; accepted 20 March 1994. Copyright 1994 Food & Nutrition Press, Trumbull, Connecticut |
-| DOI / article ID | none printed on the scan |
+| DOI / article ID | 10.1111/j.1745-4522.1994.tb00249.x (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: none printed on the scan |
 | Matrix | **3 % w/v gelatin dispersion in distilled water** (3 g Knox gelatin per 100 mL), microwave-melted, cooled to 22 C, dosed, then held 18 h at 4 C. **Lipid-free by design** — the authors chose gelatin precisely because it "is devoid of lipid components" |
 | Quantity measured | **DOT = "detectable odor threshold"**, defined as the concentration at which **75 % of panellists detect a difference from a gelatin control**, read off a **linear least-squares regression** of percent-correct against concentration (Fig. 2). Not a BET, not a forced choice, **not corrected for chance** |
 | Naming | "DOT" throughout; "CD" = coefficient of determination of that regression; "OD" = odor descriptor; "BP" = boiling point; "VP" = vapour pressure at 20 C |

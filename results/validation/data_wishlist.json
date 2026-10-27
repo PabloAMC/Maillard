@@ -4,32 +4,32 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
-      "short": "8185d698",
-      "branch": "b51-ph-state-everywhere",
+      "commit": "a8d081edd0b6f487eab746cdff8bacdf3ee80311",
+      "short": "a8d081ed",
+      "branch": "b51-shipped-under-correctness-rule",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "4b5491f1b5281b6c3606d82ad9eb1e51f16b91c427b775716661e656cb92df32"
+        "sha256": "4266cb94805d4c901c55d11c7407d48c4109ddf24ae733933c9ec37ceee1e10b"
       },
       {
-        "path": "results/validation/kinetic_core_b9_profile.json",
-        "sha256": "0c62b193e810837a49c4ab40f54fe77202639fd6e64590219eb730d3dfb7c3f4"
+        "path": "results/validation/kinetic_core_b51_profile.json",
+        "sha256": "74429d4fa47e5ea22572c922da9f79600e16ecb8b8c7c932e40f19a066e5e969"
       },
       {
-        "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
-        "sha256": "219cf3a887b27f44b0ced51f273458e5e622e867ced4d74efce4a2587e9a8379"
+        "path": "results/validation/kinetic_core_b51_laplace_covariance.json",
+        "sha256": "cc5b69ebfaf21c4361d3ed1781b89792dc48748f56729313585350215e84fd76"
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "5088885643e8ded393977162467c58d9ced03562d9e240ed76c8e31773bf0efc"
+        "sha256": "8121619d61c11cf6bd46ff16cbedb84941eb8bcd2218681c5092088701393068"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "2bf4eed5f21d20e28a589bd84d837f52680f39147f75e6e896ccc1c037364d85"
+        "sha256": "cc04fa4f2eba4fbf4815781b2efbc0cdc10c44f9c705b2db02aba67170dca753"
       },
       {
         "path": "results/validation/lane_offset_diagnostic.json",
@@ -44,38 +44,10 @@
   "how_to_read": "Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one fed-intermediate measurement each turns a band artefact into a fitted value. 2: panel rows the engine answers but declares not evaluable. 3: what the panel asks for that no lane represents. 4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the envelope misses most (value of information). 6: what each measurement would let you predict. 7: lanes whose benchmark rows cannot support a trend statement at all -- a gap in the PORTFOLIO rather than in the model, and one no amount of modelling closes.",
   "unidentified_coordinates": [
     {
-      "key": "k_dimer_decay",
-      "kind": "log10k",
-      "profile_verdict": "flat",
-      "sigma_used": 1.2022208485890091e-05,
-      "slice_min_k": -3,
-      "reaction": "3 steps sharing the constant: ch_mftd_decay, ch_fftd_decay, ch_mmft_decay",
-      "reactants": [
-        "MFTD",
-        "FFTD",
-        "MMFT"
-      ],
-      "products": [
-        "FRAG_C",
-        "FRAG_S"
-      ],
-      "what_the_code_says": "",
-      "story": "",
-      "measurement": "a fed-intermediate rate: MFTD + FFTD + MMFT heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
-      "unlocks_observables": [],
-      "unlocks_from_charges": [
-        "glucose",
-        "a pentose (ribose / xylose)",
-        "cysteine",
-        "thiamine",
-        "hydrogen sulfide"
-      ]
-    },
-    {
       "key": "k_glc_ha",
       "kind": "log10k",
       "profile_verdict": "flat",
-      "sigma_used": 1.3681277353677636e-11,
+      "sigma_used": 0.0,
       "slice_min_k": -3,
       "reaction": "r_glc_c2c3",
       "reactants": [
@@ -97,38 +69,6 @@
       ],
       "unlocks_from_charges": [
         "glucose"
-      ]
-    },
-    {
-      "key": "k_thiol_decay",
-      "kind": "log10k",
-      "profile_verdict": "flat",
-      "sigma_used": 9.890665132424999e-05,
-      "slice_min_k": 3,
-      "reaction": "6 steps sharing the constant: r_mp_decay, r_mp3p_decay, r_mp2p_decay, r_hmp_decay, ch_mesh_decay, ch_actz_decay",
-      "reactants": [
-        "MP",
-        "MP3P",
-        "MP2P",
-        "HMP",
-        "MESH",
-        "ACTZ"
-      ],
-      "products": [
-        "FRAG_C",
-        "FRAG_S",
-        "FRAG_N"
-      ],
-      "what_the_code_says": "",
-      "story": "",
-      "measurement": "a fed-intermediate rate: MP + MP3P + MP2P + HMP + MESH + ACTZ heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
-      "unlocks_observables": [],
-      "unlocks_from_charges": [
-        "glucose",
-        "a pentose (ribose / xylose)",
-        "cysteine",
-        "thiamine",
-        "hydrogen sulfide"
       ]
     },
     {
@@ -161,39 +101,39 @@
       ]
     },
     {
-      "key": "k_arp_dpo",
+      "key": "k_dimer_decay",
       "kind": "log10k",
       "profile_verdict": "bound_limited",
-      "sigma_used": 1.805127546899361,
-      "slice_min_k": 0,
-      "reaction": "r_arp_dpo",
+      "sigma_used": 1.05,
+      "slice_min_k": -3,
+      "reaction": "3 steps sharing the constant: ch_mftd_decay, ch_fftd_decay, ch_mmft_decay",
       "reactants": [
-        "ARP"
+        "MFTD",
+        "FFTD",
+        "MMFT"
       ],
       "products": [
-        "DPO",
-        "CBX",
         "FRAG_C",
-        "FRAG_N"
+        "FRAG_S"
       ],
-      "what_the_code_says": "B2.3 CHARGE FIX, AND THIS IS THE SITE B2.2's DIAGNOSIS DID NOT NAME.",
+      "what_the_code_says": "",
       "story": "",
-      "measurement": "a fed-intermediate rate: ARP heated alone, DPO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
-      "unlocks_observables": [
-        "MFT",
-        "FFT",
-        "MFTD",
-        "ACTZ",
-        "NF"
-      ],
-      "unlocks_from_charges": []
+      "measurement": "a fed-intermediate rate: MFTD + FFTD + MMFT heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
+      "unlocks_observables": [],
+      "unlocks_from_charges": [
+        "glucose",
+        "a pentose (ribose / xylose)",
+        "cysteine",
+        "thiamine",
+        "hydrogen sulfide"
+      ]
     },
     {
       "key": "k_dimer_fft",
       "kind": "log10k",
       "profile_verdict": "bound_limited",
-      "sigma_used": 0.5493346621718865,
-      "slice_min_k": 0,
+      "sigma_used": 1.05,
+      "slice_min_k": -3,
       "reaction": "ch_dimer_fft",
       "reactants": [
         "FFT",
@@ -223,7 +163,7 @@
       "key": "k_dimer_mft",
       "kind": "log10k",
       "profile_verdict": "bound_limited",
-      "sigma_used": 0.354419327470044,
+      "sigma_used": 0.3771219012641056,
       "slice_min_k": 1,
       "reaction": "ch_dimer_mft",
       "reactants": [
@@ -254,7 +194,7 @@
       "key": "k_fur_decay",
       "kind": "log10k",
       "profile_verdict": "bound_limited",
-      "sigma_used": 0.4373472219905324,
+      "sigma_used": 0.6459777823613214,
       "slice_min_k": 0,
       "reaction": "r_fur_decay",
       "reactants": [
@@ -277,8 +217,8 @@
       "key": "k_fur_fft",
       "kind": "log10k",
       "profile_verdict": "bound_limited",
-      "sigma_used": 1.02830242946914,
-      "slice_min_k": 0,
+      "sigma_used": 1.05,
+      "slice_min_k": -1,
       "reaction": "r_fur_fft",
       "reactants": [
         "FUR",
@@ -295,6 +235,38 @@
         "FFT",
         "MFTD"
       ],
+      "unlocks_from_charges": [
+        "glucose",
+        "a pentose (ribose / xylose)",
+        "cysteine",
+        "thiamine",
+        "hydrogen sulfide"
+      ]
+    },
+    {
+      "key": "k_thiol_decay",
+      "kind": "log10k",
+      "profile_verdict": "bound_limited",
+      "sigma_used": 1.05,
+      "slice_min_k": 3,
+      "reaction": "6 steps sharing the constant: r_mp_decay, r_mp3p_decay, r_mp2p_decay, r_hmp_decay, ch_mesh_decay, ch_actz_decay",
+      "reactants": [
+        "MP",
+        "MP3P",
+        "MP2P",
+        "HMP",
+        "MESH",
+        "ACTZ"
+      ],
+      "products": [
+        "FRAG_C",
+        "FRAG_S",
+        "FRAG_N"
+      ],
+      "what_the_code_says": "",
+      "story": "",
+      "measurement": "a fed-intermediate rate: MP + MP3P + MP2P + HMP + MESH + ACTZ heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C",
+      "unlocks_observables": [],
       "unlocks_from_charges": [
         "glucose",
         "a pentose (ribose / xylose)",
@@ -592,100 +564,100 @@
     },
     {
       "axis": "time",
-      "agree": 1,
-      "evaluable": 1,
-      "not_evaluable": 3,
+      "agree": 2,
+      "evaluable": 2,
+      "not_evaluable": 2,
       "verdict": "caution",
-      "wilson_lower_bound": 0.207,
-      "additional_agreeing_claims_to_trust": 3,
+      "wilson_lower_bound": 0.342,
+      "additional_agreeing_claims_to_trust": 2,
       "structural_block": null
     },
     {
       "axis": "ph",
-      "agree": 6,
-      "evaluable": 8,
-      "not_evaluable": 3,
-      "verdict": "caution",
-      "wilson_lower_bound": 0.409,
-      "additional_agreeing_claims_to_trust": 3,
+      "agree": 4,
+      "evaluable": 7,
+      "not_evaluable": 2,
+      "verdict": "do-not-use",
+      "wilson_lower_bound": 0.25,
+      "additional_agreeing_claims_to_trust": 8,
       "structural_block": null
     },
     {
       "axis": "temperature",
-      "agree": 5,
+      "agree": 6,
       "evaluable": 9,
       "not_evaluable": 2,
-      "verdict": "do-not-use",
-      "wilson_lower_bound": 0.267,
-      "additional_agreeing_claims_to_trust": 11,
+      "verdict": "caution",
+      "wilson_lower_bound": 0.354,
+      "additional_agreeing_claims_to_trust": 6,
       "structural_block": null
     },
     {
       "axis": "sugar_identity",
-      "agree": 4,
+      "agree": 3,
       "evaluable": 10,
       "not_evaluable": 5,
       "verdict": "do-not-use",
-      "wilson_lower_bound": 0.168,
-      "additional_agreeing_claims_to_trust": 20,
+      "wilson_lower_bound": 0.108,
+      "additional_agreeing_claims_to_trust": 25,
       "structural_block": null
     }
   ],
   "largest_misses": [
     {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.656872771009011,
-      "envelope_miss_log10": 1.448308782952391,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.388340363037138,
-      "envelope_miss_log10": 1.4694584542590976,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.32579715042301,
-      "envelope_miss_log10": 1.3458500735590615,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.51824391956418,
-      "envelope_miss_log10": 1.9890732939837512,
+      "voi_score": 17.670313201995466,
+      "envelope_miss_log10": 3.076800687148934,
       "template": "free_precursor_sulfur_yield"
     },
     {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 11.483948385854157,
-      "envelope_miss_log10": 1.2315940110212549,
-      "template": "free_precursor_sulfur_yield"
-    },
-    {
-      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.292470501405294,
-      "envelope_miss_log10": 1.1496145248315426,
+      "voi_score": 13.889352973564904,
+      "envelope_miss_log10": 2.0244337903182505,
       "template": "free_precursor_sulfur_yield"
     },
     {
-      "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.966718487028459,
-      "envelope_miss_log10": 1.4761165370540985,
+      "voi_score": 12.83922901814561,
+      "envelope_miss_log10": 1.8831046375217813,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.590436114820793,
-      "envelope_miss_log10": 1.117390589483075,
+      "voi_score": 10.570719947313458,
+      "envelope_miss_log10": 1.1124326154173083,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 10.557622414456716,
+      "envelope_miss_log10": 1.0765328300232706,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 9.897429636430953,
+      "envelope_miss_log10": 0.976018692746389,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "voi_score": 9.682123154254924,
+      "envelope_miss_log10": 0.7678074422271881,
+      "template": "free_precursor_sulfur_yield"
+    },
+    {
+      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+      "compound": "2-Furfurylthiol (FFT)",
+      "voi_score": 9.484462915289038,
+      "envelope_miss_log10": 1.5160680307490564,
       "template": "free_precursor_sulfur_yield"
     },
     {
@@ -696,10 +668,10 @@
       "template": "missing_positive_flavor_anchor"
     },
     {
-      "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
-      "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 9.125893420801578,
-      "envelope_miss_log10": 1.3150820250983462,
+      "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH7",
+      "compound": "2-Methyl-3-furanthiol (MFT)",
+      "voi_score": 8.39659183439448,
+      "envelope_miss_log10": 0.5690070196983938,
       "template": "free_precursor_sulfur_yield"
     }
   ],
@@ -711,10 +683,6 @@
     {
       "if_measured": "Ea_decay_thiol_sink",
       "you_could_predict": "absolute MFT, FFT, FUR, MFTD, MESH, ACTZ, NF from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact"
-    },
-    {
-      "if_measured": "k_arp_dpo",
-      "you_could_predict": "absolute MFT, FFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact"
     },
     {
       "if_measured": "k_dimer_fft",
@@ -753,19 +721,19 @@
       "you_could_predict": "the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "3 more independent ordering claims on time (all agreeing)",
+      "if_measured": "2 more independent ordering claims on time (all agreeing)",
       "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "3 more independent ordering claims on ph (all agreeing)",
-      "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
+      "if_measured": "8 more independent ordering claims on ph (all agreeing)",
+      "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'do-not-use'"
     },
     {
-      "if_measured": "11 more independent ordering claims on temperature (all agreeing)",
-      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'"
+      "if_measured": "6 more independent ordering claims on temperature (all agreeing)",
+      "you_could_predict": "the direction of a change along temperature with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "20 more independent ordering claims on sugar_identity (all agreeing)",
+      "if_measured": "25 more independent ordering claims on sugar_identity (all agreeing)",
       "you_could_predict": "the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'"
     }
   ],
@@ -809,7 +777,7 @@
     }
   ],
   "summary": {
-    "unidentified_coordinates": 10,
+    "unidentified_coordinates": 9,
     "not_evaluable_rows": 8,
     "refused_row_count": 19,
     "axes_below_trust": 11,

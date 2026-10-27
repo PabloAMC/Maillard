@@ -12,7 +12,7 @@ now corrected from the rasters).
 | authors | G. A. Bagiyan, I. K. Koroleva, N. V. Soroka, A. V. Ufimtsev |
 | title | "Kinetics of the Catalytic Oxidation Reactions of Thiol Compounds in Aqueous Solutions in the Presence of Copper Ions" |
 | venue | *Kinetics and Catalysis*, Vol. 45, No. 3, 2004, pp. 372–380. Translated from *Kinetika i Kataliz*, Vol. 45, No. 3, 2004, pp. 398–406. Copyright © 2004 MAIK "Nauka/Interperiodica". Article code 0023-1584/04/4503-0372 |
-| DOI | **not printed in the PDF** |
+| DOI | 10.1023/B:KICA.0000032171.81652.91 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: **not printed in the PDF** |
 | received | Received August 20, 2002 |
 | affiliation | Konstantinov Institute of Nuclear Physics, Russian Academy of Sciences, Gatchina, Leningrad oblast, 188300 Russia |
 | PDF character | born-digital (FrameMaker5 → Acrobat Distiller 4.05), clean text layer; English translation of a Russian original |

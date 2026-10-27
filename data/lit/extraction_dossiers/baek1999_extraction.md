@@ -17,6 +17,7 @@ text layer and the raster are both fully usable.
 | Authors | **Inger Baek, Rob S. T. Linforth, Anthony Blake¹, Andrew J. Taylor** |
 | Title | **"Sensory Perception is Related to the Rate of Change of Volatile Concentration In-nose during Eating of Model Gels"** |
 | Venue | ***Chemical Senses* 24: 155–160, 1999** — Oxford University Press |
+| DOI | 10.1093/chemse/24.2.155 (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27) |
 | Accepted | **9 December 1998** |
 | Affiliations | **Samworth Flavour Laboratory, Division of Food Sciences, University of Nottingham, Sutton Bonington Campus, Loughborough LE12 5RD, UK**; ¹ **Corporate R&D, Firmenich SA, Route des Jeunes 1, Geneva 8, Switzerland** |
 | Funding | **UK MAFF** and **BBSRC LINK scheme**, industrial partners **Firmenich, Micromass and Stable Micro Systems** |

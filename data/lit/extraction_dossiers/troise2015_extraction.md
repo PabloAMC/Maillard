@@ -18,6 +18,7 @@ method through Troise et al. 2014.
 | Title | "Quantification of Nε-(2-Furoylmethyl)-L-lysine (furosine), Nε-(Carboxymethyl)-L-lysine (CML), Nε-(Carboxyethyl)-L-lysine (CEL) and Total Lysine through Stable Isotope Dilution Assay and Tandem Mass Spectrometry" |
 | Authors | Antonio Dario Troise (Wageningen / Napoli Federico II, corresponding), Alberto Fiore (Abertay), Markus Wiltafsky (Evonik Industries), Vincenzo Fogliano (Wageningen) |
 | Venue | Food Chemistry, accepted 29 Apr 2015 (received 14 Jan 2015, revised 28 Apr 2015); section "Analytical methods" |
+| DOI | 10.1016/j.foodchem.2015.04.137 (printed in the accepted manuscript, as the source line below records; Crossref-verified on title, first author, year and journal, 2026-10-27) |
 | Type | analytical-method paper with one industrial kinetic demonstration (soybean feed) |
 | Naming | "AP" = Amadori product; furosine is its acid-hydrolysis marker; "MRPs" = Maillard reaction (end) products; concentrations in mg per 100 g protein (lysine in g per 100 g protein) |
 

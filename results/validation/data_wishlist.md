@@ -4,21 +4,20 @@
 
 Sections in order of leverage. 1: fitted coordinates the primary evidence does not pin -- one fed-intermediate measurement each turns a band artefact into a fitted value. 2: panel rows the engine answers but declares not evaluable. 3: what the panel asks for that no lane represents. 4: directional axes below 'trust' and how many agreeing claims would lift them. 5: where the envelope misses most (value of information). 6: what each measurement would let you predict. 7: lanes whose benchmark rows cannot support a trend statement at all -- a gap in the PORTFOLIO rather than in the model, and one no amount of modelling closes.
 
-**At a glance:** 10 fitted coordinates unidentified by primary evidence · 8 panel rows answered but not evaluable · 19 panel rows refused (targets no lane represents) · 11 directional axes below 'trust' (rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5).
+**At a glance:** 9 fitted coordinates unidentified by primary evidence · 8 panel rows answered but not evaluable · 19 panel rows refused (targets no lane represents) · 11 directional axes below 'trust' (rate >= 0.8 on >= 3 claims and Wilson lower bound > 0.5).
 
 ## 1. Fitted coordinates the data do not identify
 
 | coordinate | profile | step | one measurement that would identify it | unlocks |
 |---|---|---|---|---|
-| `k_dimer_decay` | flat | 3 steps sharing the constant: ch_mftd_decay, ch_fftd_decay, ch_mmft_decay | a fed-intermediate rate: MFTD + FFTD + MMFT heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | — |
 | `k_glc_ha` | flat | `r_glc_c2c3`: Glc → HA + MGO + FRAG_C | a fed-intermediate rate: glucose heated alone, HA + MGO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. The hexose fragmentation entry (the primary-evidence refit left it on its band floor; the engine declares 'HEXOSE ENTRY UNIDENTIFIED' on every hexose-only thiol request). | MFT, FFT, MFTD, ACTZ |
-| `k_thiol_decay` | flat | 6 steps sharing the constant: r_mp_decay, r_mp3p_decay, r_mp2p_decay, r_hmp_decay, ch_mesh_decay, ch_actz_decay | a fed-intermediate rate: MP + MP3P + MP2P + HMP + MESH + ACTZ heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | — |
 | `Ea_decay_thiol_sink` | bound_limited | shared barrier of a decay family | the rate of every step that removes a thiol into the matrix sink (the k_thiol_decay / k_dimer_decay steps) at two temperatures in the same matrix (e.g. FFT loss at 30 and 80 C, Hofmann 2002-style), so the barrier is measured rather than banded. Pressed against Gigl 2021's measured covalent-capture ceiling (7-102 kJ/mol); a measurement of the sink's barrier at two temperatures decides whether the band or the model is wrong. | MFT, FFT, FUR, MFTD, MESH, ACTZ, NF |
-| `k_arp_dpo` | bound_limited | `r_arp_dpo`: ARP → DPO + CBX + FRAG_C + FRAG_N | a fed-intermediate rate: ARP heated alone, DPO quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | MFT, FFT, MFTD, ACTZ, NF |
+| `k_dimer_decay` | bound_limited | 3 steps sharing the constant: ch_mftd_decay, ch_fftd_decay, ch_mmft_decay | a fed-intermediate rate: MFTD + FFTD + MMFT heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | — |
 | `k_dimer_fft` | bound_limited | `ch_dimer_fft`: FFT + OX → FFTD + OXV | a fed-intermediate rate: FFT + OX heated alone, FFTD quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | MFT, FFT, MFTD |
 | `k_dimer_mft` | bound_limited | `ch_dimer_mft`: MFT + OX → MFTD + OXV | a fed-intermediate rate: MFT + OX heated alone, MFTD quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | MFT, FFT, MFTD |
 | `k_fur_decay` | bound_limited | `r_fur_decay`: FUR → FRAG_C | a fed-intermediate rate: FUR heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | — |
 | `k_fur_fft` | bound_limited | `r_fur_fft`: FUR + H2S → FFT | a fed-intermediate rate: FUR + hydrogen sulfide heated alone, FFT quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | MFT, FFT, MFTD |
+| `k_thiol_decay` | bound_limited | 6 steps sharing the constant: r_mp_decay, r_mp3p_decay, r_mp2p_decay, r_hmp_decay, ch_mesh_decay, ch_actz_decay | a fed-intermediate rate: MP + MP3P + MP2P + HMP + MESH + ACTZ heated alone, its loss quantified against time (SIDA where a labelled standard exists), at the lane's reference 145 C. | — |
 | `ph_acid_yield_per_sink_event` | bound_limited | (no single step) | titrate the acid formed per mole of pentose deoxyosone consumed (pH before/after a timed heat step). The pH-trajectory model's one calibrated fraction, at its floor: the acid yield of the pentose deoxyosone sink has never been measured. | — |
 
 ## 2. Panel rows answered but not evaluable
@@ -60,31 +59,30 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | additive_cysteine | 1 / 1 | 2 | caution | 0.207 | 3 |
 | moisture_aw | 1 / 1 | 1 | caution | 0.207 | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
 | ranking | 0 / 1 | 2 | do-not-use | 0.0 | 7 |
-| time | 1 / 1 | 3 | caution | 0.207 | 3 |
-| ph | 6 / 8 | 3 | caution | 0.409 | 3 |
-| temperature | 5 / 9 | 2 | do-not-use | 0.267 | 11 |
-| sugar_identity | 4 / 10 | 5 | do-not-use | 0.168 | 20 |
+| time | 2 / 2 | 2 | caution | 0.342 | 2 |
+| ph | 4 / 7 | 2 | do-not-use | 0.25 | 8 |
+| temperature | 6 / 9 | 2 | caution | 0.354 | 6 |
+| sugar_identity | 3 / 10 | 5 | do-not-use | 0.108 | 25 |
 
 ## 5. Where the envelope misses most (value of information)
 
 | # | benchmark | compound | VoI | miss (log10) | template |
 |---|---|---|---|---|---|
-| 1 | `mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.66 | 1.45 | free_precursor_sulfur_yield |
-| 2 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.39 | 1.47 | free_precursor_sulfur_yield |
-| 3 | `mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 12.33 | 1.35 | free_precursor_sulfur_yield |
-| 4 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 11.52 | 1.99 | free_precursor_sulfur_yield |
-| 5 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.48 | 1.23 | free_precursor_sulfur_yield |
-| 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.29 | 1.15 | free_precursor_sulfur_yield |
-| 7 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.97 | 1.48 | free_precursor_sulfur_yield |
-| 8 | `hofmann1998_c2c3_recombination_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 10.59 | 1.12 | free_precursor_sulfur_yield |
+| 1 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 17.67 | 3.08 | free_precursor_sulfur_yield |
+| 2 | `hofmann1998_ribose_cysteine_145C_20min_pH5` | 2-Methyl-3-furanthiol (MFT) | 13.89 | 2.02 | free_precursor_sulfur_yield |
+| 3 | `mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5` | 2-Methyl-3-furanthiol (MFT) | 12.84 | 1.88 | free_precursor_sulfur_yield |
+| 4 | `hofmann1998_c2c3_recombination_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 10.57 | 1.11 | free_precursor_sulfur_yield |
+| 5 | `hofmann1998_ribose_cysteine_145C_20min_pH5` | 2-Furfurylthiol (FFT) | 10.56 | 1.08 | free_precursor_sulfur_yield |
+| 6 | `mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5` | 2-Furfurylthiol (FFT) | 9.90 | 0.98 | free_precursor_sulfur_yield |
+| 7 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 9.68 | 0.77 | free_precursor_sulfur_yield |
+| 8 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Furfurylthiol (FFT) | 9.48 | 1.52 | free_precursor_sulfur_yield |
 | 9 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 9.43 | 1.52 | missing_positive_flavor_anchor |
-| 10 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Furfurylthiol (FFT) | 9.13 | 1.32 | free_precursor_sulfur_yield |
+| 10 | `hofmann1998_c2c3_recombination_145C_20min_pH7` | 2-Methyl-3-furanthiol (MFT) | 8.40 | 0.57 | free_precursor_sulfur_yield |
 
 ## 6. What you could predict if you had it
 
 - **If** `k_glc_ha` were measured: absolute MFT, FFT, MFTD, ACTZ from charges containing glucose, as a fitted value instead of a band artefact; 8 panel rows now NOT EVALUABLE would return to the scorecard.
 - **If** `Ea_decay_thiol_sink` were measured: absolute MFT, FFT, FUR, MFTD, MESH, ACTZ, NF from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact.
-- **If** `k_arp_dpo` were measured: absolute MFT, FFT, MFTD, ACTZ, NF from charges containing its reactants, as a fitted value instead of a band artefact.
 - **If** `k_dimer_fft` were measured: absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact.
 - **If** `k_dimer_mft` were measured: absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact.
 - **If** `k_fur_fft` were measured: absolute MFT, FFT, MFTD from charges containing glucose, a pentose (ribose / xylose), cysteine, thiamine, hydrogen sulfide, as a fitted value instead of a band artefact.
@@ -94,10 +92,10 @@ The engine returns a number but declares the route unidentified; the rows leave 
 - **If** `4 more independent ordering claims on scope (all agreeing)` were measured: the direction of a change along scope with a 'trust' tag instead of 'no evaluable claim'.
 - **If** `3 more independent ordering claims on additive_cysteine (all agreeing)` were measured: the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'.
 - **If** `7 more independent ordering claims on ranking (all agreeing)` were measured: the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'.
-- **If** `3 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'caution'.
-- **If** `3 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
-- **If** `11 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'.
-- **If** `20 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
+- **If** `2 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'caution'.
+- **If** `8 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'do-not-use'.
+- **If** `6 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'caution'.
+- **If** `25 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
 
 Nothing above is a forecast of accuracy: 'unlocks' means the observable sits downstream of the step in the network, so a measured rate would replace a band artefact with a fitted value. Whether the fitted value lands within 3x of a measurement is what the next pre-registered wave finds out (`scripts/generators/WAVES.md`).
 

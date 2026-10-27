@@ -25,7 +25,7 @@ excellent as a shape test, useless as a level"), and its verdict is quoted there
 | Title | "The effect of pH on the formation of volatile compounds in meat-related model systems" |
 | Authors | **Anne Meynier** (corresponding) and **Donald S. Mottram** — University of Reading, Department of Food Science and Technology, Whiteknights, Reading RG6 2AP, UK. **Footnote: "Present address: INRA LEIMA, BP527, 44026 Nantes, Cedex 03, France."** |
 | Venue | **Food Chemistry 52 (1995) 361-366.** Received 16 December 1993; revised version received and accepted 23 March 1994. Elsevier Science Limited, printed in Great Britain, `0308-8146/95/$9.50` |
-| DOI | none printed on the scan |
+| DOI | 10.1016/0308-8146(95)93282-V (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: none printed on the scan |
 | Subject | **the Maillard reaction**: how a **small** pH change (0.5 units at a time, across 4.5-6.5) changes the volatile profile of an amino-acid + ribose model system held at constant pH by a pyrophosphate buffer |
 | Systems | four, run separately: **glycine**, **L-lysine**, **L-cysteine**, **L-methionine**, each with **D(-)-ribose** |
 | Quantity reported | "**Approximate quantities (µg/10 mg ribose)**", by peak area against an octadecane internal standard, **with no response factors determined** — the authors call them "only approximate concentrations" |

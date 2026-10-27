@@ -30,6 +30,7 @@ the inventory attributes to this paper is checked against Table 1 below and they
 | Title | "Development of model food systems for thermal pasteurization applications based on Maillard reaction products" |
 | Authors | Ellen R. Bornhorst, Juming Tang (corresponding, jtang@wsu.edu), Shyam S. Sablani, Gustavo V. Barbosa-Cánovas — Department of Biological Systems Engineering, Washington State University, Pullman, WA 99164-6120, USA |
 | Venue | LWT — Food Science and Technology. Accepted manuscript, © 2016 published by Elsevier under the Elsevier user licence. **Article id S0023643816305825**; the manuscript carries no volume, page or DOI |
+| DOI | 10.1016/j.lwt.2016.09.020 (not printed in the accepted manuscript; Crossref match on title, first author, year and journal (LWT 75, 417-424), 2026-10-27) |
 | Which of the pair | **PART I.** Its companion `bornhorst2017b.pdf` (article id **S0023643817302384**, "Thermal pasteurization process evaluation using mashed potato model food with Maillard reaction products", © 2017, same four authors, same address) is **PART II**. See "Are these two parts of one study?" below |
 | Funding | USDA NIFA agreements 2011-68003-20096 and 2016-68003-24840; USDA National Needs Fellowship 2012-38420-19287 supporting E. Bornhorst's PhD |
 | The marker | **M-2 = 4-hydroxy-5-methyl-3(2H)-furanone**, which is **norfuraneol**, registry id `norfuraneol` in `data/keys/compounds.yml` (the alias "4-hydroxy-5-methyl-3(2H)-furanone" is already listed there) and engine species **`NF`** on the sulfur lane |

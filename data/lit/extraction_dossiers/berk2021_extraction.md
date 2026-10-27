@@ -19,6 +19,7 @@ from `kocadagli2016jafc_extraction.md` section 4); this paper is the same modell
 | Title | "Formation of α-dicarbonyl compounds and glycation products in sesame (Sesamum indicum L.) seeds during roasting: a multiresponse kinetic modelling approach" |
 | Authors | Ecem Berk, Işıl Gürsul Aktağ, Vural Gökmen (corresponding; FoQuS group, Hacettepe University, Ankara) |
 | Venue | European Food Research and Technology, 2021 (Springer); Original Paper |
+| DOI | 10.1007/s00217-021-03787-x (printed in the PDF, as the source line below records; Crossref-verified on title, first author, year and journal, 2026-10-27) |
 | Abbreviations (theirs) | SUC sucrose; GLU glucose; INT intermediates = GLU + FFC; FFC fructofuranosyl cation; bLys protein-bound lysine; FL N-ε-fructoselysine (= furosine x 2.2); HP Heyns product (not measured); 3-DG 3-deoxyglucosone; 1-DG 1-deoxyglucosone; GO glyoxal; MG methylglyoxal; DA diacetyl; CML, CEL; P1..P3 unmeasured products |
 | Lineage | Kocadağlı & Gökmen 2016 (Food Chem 211:892, glucose/wheat flour) and Göncüoğlu Taş & Gökmen 2017 (hazelnut roasting) networks; Athena Visual Studio 14.2; determinant criterion; HPD intervals |
 

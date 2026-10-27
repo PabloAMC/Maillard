@@ -28,7 +28,7 @@ in `k2_matrix_and_thresholds.md` sec. A.1 — but has **no extraction dossier**.
 | Title | "Detectable Odor Thresholds of Selected Lipid Oxidation Compounds in a Meat Model System" |
 | Authors | M. Susan Brewer (corresponding) and Juan D. Vega — Division of Foods & Nutrition, University of Illinois at Urbana-Champaign, Urbana, IL 61801 |
 | Venue | Journal of Food Science **60** (3), 1995, pp. 592-595. MS received 21 August 1994; revised 8 December 1994; accepted 15 January 1995 |
-| DOI / article ID | none printed on the scan |
+| DOI / article ID | 10.1111/j.1365-2621.1995.tb09834.x (not printed in the PDF; Crossref match on title, first author, year and journal, 2026-10-27). As recorded before: none printed on the scan |
 | Matrix | **lean beef top round, thawed, ground through a 0.50 cm plate, mixed 1:1 with distilled water**, 15 g sealed into a 25 mL amber vial, **cooked in a circulating water bath to 70 C internal temperature**, then **held at 45 C** for the sniff |
 | Quantity measured | **DOT**, defined here as the concentration at which a panellist gives the correct triangle-test response **50 % of the time ABOVE CHANCE**, fitted per panellist by non-linear regression, then combined as a **group geometric mean**. ASTM E-1432-91 |
 | Naming | the abstract and Methods both write "**t-2-heptanal**" where Table 1, the Results and the Conclusions all write "**heptanal**"; there is no 2-heptenal anywhere else in the paper and the compound was bought as an alkanal. Read as **heptanal**; the "t-2-" is a typographical error (Flags 5) |
