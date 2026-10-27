@@ -7,7 +7,8 @@
 > (`results/validation/kinetic_core_<wave>_prereg.md`, which says what would falsify it before it ran,
 > and whose section 6 carries the verdict), its generator (`generate_kinetic_core_<wave>_fit.py`,
 > frozen by hash) and its ship rule (`kinetic_core_<wave>_ship_rule.md`). The engine reads the last
-> wave whose rule said SHIP on each lane; today B9 for the thiols, B18 for the sugar path's pyrazines.
+> wave accepted on each lane under the rule below; today B51 for the thiols (since 2026-10-27; B9 before),
+> B18 for the sugar path's pyrazines.
 > In plain words, the same history is the table in `docs/guides/INTRODUCTION.md`, section 6.
 
 `generate_kinetic_core_b*_{fit,holdout,reports,scorers}.py` and `probe_amine_fate_b2_4.py` produced every
@@ -20,6 +21,28 @@ pre-registered hold-out score beside it. Since 2026-09-03 they are **frozen**:
 - **a change to any of them is a new wave**, not an edit: copy, rename to the next wave id, pre-register
   (`results/validation/kinetic_core_<wave>_prereg.md`), run, freeze, then rebuild the manifest with
   `python scripts/generators/build_wave_manifest.py` and add a line below.
+
+## How a change is accepted (owner decision, 2026-10-27)
+
+A change is accepted on what KIND of change it is, not only on whether a score went up. In a model with
+fitted constants, errors compensate: a correct change removes one error, exposes another, and the score
+can fall. Gating every change on the score tunes the model around its own mistakes ("right for the wrong
+reasons" on a 50-row panel) and makes it extrapolate worse to foods, which is what it is for.
+
+| kind of change | accepted on | what the scores do |
+| --- | --- | --- |
+| **1. Correction**: data that misstates its source; a unit, scale or sign error; a wrong citation; a code bug; a measured constant replacing an unsourced or wrong one | **verification of the change itself**, independent of the rest of the model: checked against its source table or paper, against a derivation or limiting case (e.g. the dCp law must reproduce pKw), against the code's invariants (all-off reproduces the previous wave bit for bit, conservation) | **reported, never a veto.** A score that falls names a compensating error elsewhere; it is written into the wave's record and the model card, and the exposed assumption becomes the next wave |
+| **2. Refit after a correction**: the constants re-estimated because the physics they were fitted under changed | the pre-declared objective (the fit's own rows) | reported; a fit under corrected physics ships with its corrected physics, because old constants are calibrated on the old errors |
+| **3. Modelling choice with real alternatives**: a new mechanism or species, a fitted parameter added, which protonation state reacts, a dose law | **a pre-registered hold-out test**, as before | decide |
+
+Rules that make the first row safe rather than a licence: the verification is written down before the
+change ships (which source, which check); "fundamental reasons" alone are not a verification; and any
+fall in a hold-out score is diagnosed in the record, with the assumption it exposes named. Ship-rule tests
+written for kind 3 are noise-aware from now on: a tolerance set by the panel's own resampling noise, not
+"not one claim fewer" on ~30 claims (binomial noise ±3).
+
+Precedent: B8's measured barriers were "declared BLIND … NOT contingent on a scorecard … It ships even
+where it scores worse" (`engine.py`, the B8 note). This section writes that practice down as the rule.
 
 Three non-wave derivatives import them and fit nothing: `generate_kinetic_core_b8_laplace.py` (a covariance at the
 frozen B8 optimum), `generate_kinetic_core_b8_profile.py` (slice profiles around it) and `generate_core_fit_targets.py`
@@ -138,3 +161,4 @@ B5b, so their `run_exam()` paths raise if called. The exam artifact `cutover_fin
 | 2026-10-27 | **B51** `generate_kinetic_core_b51_fit.py`: the pH state corrected against its thermodynamic sources — six switches in `ph_state.B51` (GKL 2002 ionisation heat capacities; GKL cysteine constants, the B2 pair cited to GKL is not in it; Suleimenov & Seward 1997 H2S pK1, 6.49 not 5.94 at 145 °C; Davies ionic strength; the measured pH tables on their 25 °C scale; the SID carried across thermal segments), refitted on B47's 52 rows. Data facts for every arm: nine trust-loop Hofmann bundles get their 0.5 M phosphate (Amendment 44), the Mottram/Meynier pots their pyrophosphate. Ship rule `generate_kinetic_core_b51_ship_rule.py`; prereg `kinetic_core_b51_prereg.md`. | the constants under every pH factor |
 | 2026-10-27 | **B51 result: DO NOT SHIP** (`kinetic_core_b51_ship_rule.md`). The refit fits its rows far better (cost 20.41 vs B47's 22.90) and moves every Yiltirak hold-out toward the measurement (MFT 120 °C 56x → 5.1x), but predicts Hofmann ribose/xylose pH 5 ~100x too low (T3 3/4 → 0/4): with correct speciation the thiolate-acting thiol sink destroys the thiols above pH ~5. Attribution: the 25 °C table scale alone improves B9 (18.74 → 15.47); GKL cysteine and dCp cost ~7 each. Switches stay off; the buffer data facts ship (baseline 18/50). | the corrected physics exposes the thiolate sink |
 | 2026-10-27 | **B51.1: DO NOT SHIP** (`kinetic_core_b51_1_ship_rule.md`; prereg `kinetic_core_b51_1_prereg.md`). The two B51 corrections that touch no speciation (the 25 °C scale for the measured pH tables; the SID across segments), B9 frozen. Fit 18.74 → 15.47, hold-outs unchanged or better, but SUG-09 flips (directional 18/31 → 17/31): faster cysteine thermolysis in the unbuffered pots feeds the hexose route to FFT, which should make none. | the hexose entry blocks a correct fix again |
+| 2026-10-27 | **Acceptance rule changed; B51 and B51.1 RE-DECIDED: SHIP** (owner decision, section above). Every B51 switch is a kind-1 correction (GKL / Suleimenov constants checked against their tables, the dCp law against pKw, all-off reproducing B50 bit for bit, the SID carry a bug fix); the B51 refit is its kind-2 fit. The engine now reads `kinetic_core_b51_fit_report.json`, its Laplace covariance (15/23 identified) and profile (4 quadratic / 10 asymmetric / 1 flat / 8 bound-limited); the fit-target record is B51's. Recorded worse: the Hofmann ribose/xylose pH 5 pots (~100x low) and SUG-09, both exposing named assumptions (the thiolate-acting thiol sink; the hexose entry), which are the next waves. B51.1 is contained in B51. | correct physics ships; its misses name the next fix |

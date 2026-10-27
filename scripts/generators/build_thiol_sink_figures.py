@@ -28,6 +28,7 @@ from src import data_paths  # noqa: E402
 
 OUT = ROOT / "docs" / "assets" / "thiol_sink"
 V = data_paths.VALIDATION_DIR
+from src.kinetic_core.engine import _B2_FIT_REPORT as _SHIPPED_FIT  # noqa: E402  (the shipped sulfur fit)
 
 MEASURED = "#2B5DA8"     # what the pot measured
 SHIPPED = "#178F6E"      # the calibration the tool ships today (wave B9)
@@ -976,7 +977,7 @@ def main() -> int:
 
     record("scripts/generators/build_thiol_sink_figures.py",
            [V / "core_panel_scores.json", V / "core_directional_scores.json", V / "kinetic_core_b16_ship_rule.json",
-            V / "kinetic_core_b9_fit_report.json", V / "kinetic_core_b9_laplace_covariance.json", V / "core_prediction_uncertainty.json",
+            _SHIPPED_FIT, V / _SHIPPED_FIT.name.replace("_fit_report.json", "_laplace_covariance.json"), V / "core_prediction_uncertainty.json",
             ROOT / "data" / "keys" / "papers.yml", ROOT / "docs" / "validation" / "directional_claims_panel.yml",
             ROOT / "scripts" / "generators" / "build_thiol_sink_figures.py", ROOT / "scripts" / "generators" / "build_reaction_tree.py",
             *ENGINE_SOURCES],

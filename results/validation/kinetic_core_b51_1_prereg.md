@@ -61,3 +61,10 @@ reaches FFT through the hexose route. The correction is right; the defect it mov
 (`r_glc_c2c3` / `r_glc_fur`, unidentified since B9). Both switches stay in the code, off, until that entry
 is fixed; the SID carry (a bug fix, inert on every single-segment pot) is held back with it because the
 rule was written for the pair.
+
+## 6. Re-decision under the changed acceptance rule (2026-10-27, owner decision)
+
+Both switches are kind-1 corrections (`scripts/generators/WAVES.md`, "How a change is accepted"): the SID
+carry is a bug fix and the 25 °C scale is the scale the three tables' sources printed. They ship, as part
+of B51 (`kinetic_core_b51_prereg.md` §7), which contains them; the SUG-09 flip is recorded as exposing the
+hexose entry, whose earlier "agreement" rested on 33 µg/L of FFT from a hexose the paper does not detect.

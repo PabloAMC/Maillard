@@ -31,6 +31,7 @@ if str(ROOT) not in sys.path:
 from src import data_paths  # noqa: E402
 
 V = data_paths.VALIDATION_DIR
+from src.kinetic_core.engine import _B2_FIT_REPORT as _SHIPPED_FIT  # noqa: E402  (the shipped sulfur fit)
 OUT = ROOT / "docs" / "assets" / "thiol_sink"
 INK, MUTED = "#1F2A2E", "#5B6B70"
 GOOD, MID, BAD, NONE = "#178F6E", "#D9822B", "#B23A3A", "#9AA6A3"
@@ -513,7 +514,7 @@ def main() -> int:
 
     record("scripts/generators/build_story_figures.py",
            [V / "core_panel_scores.json", V / "network_hypotheses.json", V / "kinetic_core_b18_ship_rule.json",
-            V / "kinetic_core_b17_ship_rule.json", V / "kinetic_core_b17a_ship_rule.json", V / "kinetic_core_b9_fit_report.json",
+            V / "kinetic_core_b17_ship_rule.json", V / "kinetic_core_b17a_ship_rule.json", _SHIPPED_FIT,
             data_paths.DESIRABLE_TARGETS, data_paths.SPECIES_DIR / "off_flavour_targets.yml", data_paths.SPECIES_DIR / "protein_matrices.yml",
             ROOT / "data" / "lit" / "reaction_rules.yml", ROOT / "docs" / "examples" / "reading_2026_ladder.yml",
             ROOT / "scripts" / "generators" / "build_story_figures.py",

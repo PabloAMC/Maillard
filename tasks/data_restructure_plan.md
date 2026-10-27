@@ -2806,3 +2806,16 @@ each wave's pre-registration). Order and status:
 - Backlog, not started: volatile stripping during open or vented processing (Henry's constants already
   in the corpus); protein-thiol binding as a candidate identity of the thiol sink in matrices; a helper
   that builds heat-up ramps from a process description.
+
+### Reading list from the WUR collaboration (Bei Wang, 2026-10-27): overlap with the corpus
+
+24 unique papers (26 entries, two duplicated), on volatile formation from amino acids, sugars, thiamine and
+glutathione. Matched by DOI, then by first author + year with each candidate PDF's first-page DOI checked.
+**8 of 24 were already known to the corpus (33 %); 5 had been read.**
+
+| status | papers |
+| --- | --- |
+| read (dossier) | Cerny & Briffod 2007 JAFC (`cerny2007`); Meynier & Mottram 1995 (`meynier1995`); Hou 2017 (`hou2017`); Liu 2023 LWT (`liu2023b`); Wang 2026 FRI (`wang2026`) |
+| PDF on disk, unread | Wang, Yang & Song 2012 (`wang2012.pdf`, glutathione–xylose); Cerny 2007 LWT (`cerny2007b.pdf`, carbon origin) — dossiers being written 2026-10-27 |
+| cited, not on disk | Cerny 2015 (book chapter; quoted by claims PH-01/PH-02) |
+| not in the corpus | priority A (quantitative, could anchor or test a step): Zheng et al. 1997 (furaneol + cysteine / glutathione / H2S, 10.1021/jf960624h); Cerny & Guntz-Dubini 2013 (cysteine-S-conjugates, a candidate identity for the thiol sink, 10.1016/j.foodchem.2013.04.043); Modi, Linforth & Taylor 2008 (pH AND water activity on meaty aroma, the a_w axis the sulfur lane refuses, 10.3923/ajft.2008.68.78); Farmer, Mottram & Whitfield 1989 (cysteine–ribose–phospholipid, 10.1002/jsfa.2740490311); Martins et al. 2010 (precursor synergy/competition, 10.1021/bk-2010-1042.ch008); Cha, Debnath & Lee 2019 (α-dicarbonyls and volatiles, 10.1038/s41598-019-41824-8). Priority B (Xie / Ho labs, ARP and TTCA intermediates): Cao 2017 (10.1016/j.foodres.2017.06.012); Zhao 2019 (10.1016/j.foodchem.2018.08.096); Zhai 2019 (10.1021/acs.jafc.9b04374); Zhai 2023 (10.1021/acs.jafc.3c06506); Zhang 2025 lysine (10.1016/j.foodchem.2024.142529); Du 2025 (10.1016/j.foodres.2024.115645); Xu 2013 peptide–xylose (10.1016/j.foodres.2013.07.066). Priority C (reviews / identification only): Sun 2022, Sohail 2022, Garbusov 1976, Cerny 2015 |

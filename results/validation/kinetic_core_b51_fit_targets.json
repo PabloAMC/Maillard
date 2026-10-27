@@ -1,9 +1,9 @@
 {
   "artifact": "kinetic_core_fit_targets",
   "lane": "sulfur",
-  "fit_report": "results/validation/kinetic_core_b9_fit_report.json",
+  "fit_report": "results/validation/kinetic_core_b51_fit_report.json",
   "generated_by": "scripts/generators/generate_core_fit_targets.py",
-  "declaration": "Level rows of the sulfur objective that are ALSO scored panel bundles, and (B10) the within-study FOLD rows that read two bundles' values. Ratio, share and conversion rows that read no bundle constrain nothing a bundle scores and are not listed. Leverage is 23 free parameters over 54 rows, below the per-row-recovery threshold: these bundles stay in the coverage counts, annotated in_core_fit.",
+  "declaration": "Level rows of the sulfur objective that are ALSO scored panel bundles, and (B10) the within-study FOLD rows that read two bundles' values. Ratio, share and conversion rows that read no bundle constrain nothing a bundle scores and are not listed. Leverage is 23 free parameters over 52 rows, below the per-row-recovery threshold: these bundles stay in the coverage counts, annotated in_core_fit.",
   "fit_target_ids": [
     "hofmann1998_c2c3_recombination_145C_20min_pH3",
     "hofmann1998_c2c3_recombination_145C_20min_pH5",
@@ -14,7 +14,7 @@
   ],
   "fit_leverage": {
     "free_parameters": 23,
-    "fitted_rows": 54
+    "fitted_rows": 52
   },
   "rows": [
     {
@@ -36,7 +36,7 @@
       "benchmark_id": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "kind": "molpct",
-      "anchor": "Hofmann 1998 T4: norfuraneol + cysteine -> MFT, 50.8 ug, 0.05 mol%"
+      "anchor": "Hofmann 1998 Table 10: 50.8 ug -> 0.0445 mol% (printed 0.05) || B9: Hofmann 1998 T4: norfuraneol + cysteine -> MFT, 50.8 ug, 0.05 mol%"
     },
     {
       "id": "fed_c2c3_MFT",
@@ -50,7 +50,7 @@
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "kind": "molpct",
-      "anchor": "Hofmann 1998 T10 pH ladder: 15.5 ug at pH 3.0"
+      "anchor": "Hofmann 1998 Table 8, pH 3.0: 15.5 ug -> 0.0136 mol% (printed 0.01) || B9: Hofmann 1998 T10 pH ladder: 15.5 ug at pH 3.0"
     },
     {
       "id": "fed_c2c3_MFT_pH7",
@@ -60,5 +60,5 @@
       "anchor": "Hofmann 1998 T10 pH ladder: 311.5 ug at pH 7.0"
     }
   ],
-  "wave": "b9"
+  "wave": "b51"
 }
