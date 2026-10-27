@@ -2615,7 +2615,9 @@ record under `data/lit/` or `results/literature/`), never a trace.
   re-run: it reads `src/safety.py`, deleted at the engine retirement (pre-existing break).
 - [x] **Hidalgo & Zamora 2004 read** (`hidalgo2004_extraction.md`): the deleted prior had the reactant wrong
   (4,5-epoxy-2-alkenal, not 4-HNE) and claimed absolute concentrations the paper does not report.
-- [ ] **Lipid-driven Strecker step, candidate sources** (owner's PubMed list, abstracts read 2026-10-27):
+- [x] **Lipid-driven Strecker step: reviewed, not built** (B48 prereg sec. 5): phenylalanine-only data; the
+  Strecker aldehydes that matter are refused (B22). Unlocks with one paper measuring a lipid carbonyl with
+  leucine or methionine at cooking temperature. Candidate sources were (owner's PubMed list, abstracts read 2026-10-27):
   Zamora, Alcon & Hidalgo 2013 (10.1021/jf305007y) reports Ea of phenylacetaldehyde formation for five
   lipid carbonyl classes (2,4-alkadienals 28-38 kJ/mol; epoxyalkenals, 4-HNE, oxoalkenals 55-67);
   Zamora, Gallardo & Hidalgo 2007 (10.1021/jf062838x) gives ~8 % Phe -> phenylacetaldehyde from
@@ -2630,8 +2632,10 @@ record under `data/lit/` or `results/literature/`), never a trace.
   decadienal to hexanal**, linear over the first hour. First measured magnitude for the edge
   `DECADIENAL_TO_HEXANAL_GAP` (`parameters_lipid.py:600`) declares unmeasured; limits: Phe present,
   medium probably 2:1 acetonitrile/buffer (methods and captions disagree). A constant is a new wave.
-- [ ] Update `DECADIENAL_TO_HEXANAL_GAP`'s text ("No rate for it exists in the corpus") to cite Zamora
-  2007 when the lipid lane is next touched (the frozen B6 fit report hashes this module, so the edit belongs in a wave).
+- [x] **Wave B48 (2026-10-27): SHIP.** The 2,4-decadienal -> hexanal step built from Zamora 2015b's printed
+  yields and barriers (it had been a named candidate since B42, so "the first measured magnitude" above was
+  wrong: 2015b came first); Zamora 2007's 9-14 % at 180 C reproduced as a hold-out (9.2 %); off below 100 C.
+  `DECADIENAL_TO_HEXANAL_GAP` rewritten as closed. (Correction: B6's report names the module, it does not hash it.)
 
 **Sulfur fit rows checked against the PDFs (2026-10-27, two read-only agents; per-row tables in the
 session scratchpad, findings here).** The 54 rows of the shipped B9 objective
@@ -2655,8 +2659,14 @@ correctly, 4 rounded, 15 read off figures (all within their sigma), and **six wi
   `data/articles/Zhou2023.pdf` is an unrelated paper (the rows mean Zhou2023b.pdf); Kang SI Table S5's
   120 C caption appears to be a typo (its pH-7 column equals Table S4's 100 C means), and the Kang SI
   re-publishes Zhai 2023's TTCA experiment, so the two are not independent.
-- [ ] **Owner decision:** the fit generators are frozen, so correcting these rows is a new fit wave
-  (pre-registered, with a ship rule), not an edit.
+- [x] **Refit as wave B47 (2026-10-27): DO NOT SHIP.** All six corrected (plus the Hofmann micrograms and
+  the three buffer labels); out-of-sample levels improved (hold-out sulfur 1/14 -> 2/14, union 12/45 ->
+  14/45) but the directional panel lost a claim (25/43 -> 24/45): the corrected excess-H2S Whitfield row
+  was bought back by opening the hexose route (`k_glc_ha` +3.6 decades; SUG-09 flips). The engine keeps
+  B9. `kinetic_core_b47_prereg.md` sec. 6.
+- [ ] **Next sulfur question (structural):** at B9's optimum the model destroys MFT in excess H2S (fed
+  norfuraneol: 0.012 mol % at 20/40 mM, 8e-5 at the paper's 50/97 mM). Find the consuming route and
+  whether any measurement licenses it; until then the corrected rows wait in the B47 generator.
 
 - [ ] Minor metadata: the Meynier "2002" dossier is a 2003 paper (Lait 83); `hofmann2001` and `hofmann2002`
   dossiers share DOI 10.1021/jf010823n.

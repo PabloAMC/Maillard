@@ -479,7 +479,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.5210173160890863,
+          "ci_width_log10": 1.5210199174659405,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -489,12 +489,12 @@
           "measured_ppb": 782.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 603.2449912781765,
-          "predicted_p5": 67.92634048347688,
-          "predicted_p50": 363.9204660339906,
-          "predicted_p95": 2254.5274830357985,
-          "predicted_point": 353.83863004817323,
-          "predicted_std": 695.7878781391565,
+          "predicted_mean": 603.2546870250208,
+          "predicted_p5": 67.92676146134463,
+          "predicted_p50": 363.9212571718816,
+          "predicted_p95": 2254.5549601143,
+          "predicted_point": 353.8410696129295,
+          "predicted_std": 695.8000789082258,
           "shared_with": null,
           "target_unit": "ppb"
         },
@@ -539,7 +539,7 @@
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.592634654092786,
+          "ci_width_log10": 2.5926344527603313,
           "compound": "(E,E)-2,4-decadienal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -549,12 +549,12 @@
           "measured_ppb": 46.9,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 266.90253712993905,
-          "predicted_p5": 3.1737125049097883,
-          "predicted_p50": 69.38065387295005,
-          "predicted_p95": 1242.2306402434874,
-          "predicted_point": 75.95490029354261,
-          "predicted_std": 526.1568781993892,
+          "predicted_mean": 266.8870715977412,
+          "predicted_p5": 3.173554241423851,
+          "predicted_p50": 69.37690192879046,
+          "predicted_p95": 1242.1681180912867,
+          "predicted_point": 75.95100898244581,
+          "predicted_std": 526.1254206700469,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1810,7 +1810,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 2.2372794782374577,
+          "ci_width_log10": 2.2374450984232124,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1820,12 +1820,12 @@
           "measured_ppb": 324.0,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 233.46934192947404,
-          "predicted_p5": 7.478260305399203,
-          "predicted_p50": 88.755069375935,
-          "predicted_p95": 1291.4573145106363,
-          "predicted_point": 88.59846418347784,
-          "predicted_std": 404.77848095636034,
+          "predicted_mean": 251.99035149485718,
+          "predicted_p5": 8.070200279696545,
+          "predicted_p50": 95.82850716279349,
+          "predicted_p95": 1394.213909653888,
+          "predicted_point": 95.64959133968401,
+          "predicted_std": 436.9002477286683,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1897,7 +1897,7 @@
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 2.1858155498925895,
+          "ci_width_log10": 2.185791515718293,
           "compound": "hexanal",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -1907,12 +1907,12 @@
           "measured_ppb": 605.6,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 165.20788630012058,
-          "predicted_p5": 5.0524055334447056,
-          "predicted_p50": 58.96693420808781,
-          "predicted_p95": 775.0215026671904,
-          "predicted_point": 69.69514889635887,
-          "predicted_std": 298.81851022450394,
+          "predicted_mean": 165.36270730980064,
+          "predicted_p5": 5.056223089527976,
+          "predicted_p50": 59.00665687647968,
+          "predicted_p95": 775.5641810661367,
+          "predicted_point": 69.76332682553394,
+          "predicted_std": 299.09366793626816,
           "shared_with": null,
           "target_unit": "ppb"
         },
@@ -3697,10 +3697,10 @@
     "generated_by": "src/kinetic_core/uncertainty.py",
     "generated_on": "2026-10-27",
     "git": {
-      "branch": "provenance-census-trace",
-      "commit": "4606458cd010df200db61965b9bc83b29ee38970",
+      "branch": "b47-sulfur-objective-corrected",
+      "commit": "c7fb4d2b3eb0c6412fea42f319a74f0b2998a50e",
       "dirty": true,
-      "short": "4606458c"
+      "short": "c7fb4d2b"
     },
     "inputs": [
       {
@@ -4206,7 +4206,7 @@
       "trust_loop": {
         "ci_coverage_rate": 0.5,
         "hits": 5,
-        "median_ci_width_log10": 1.5234142786376974,
+        "median_ci_width_log10": 1.5234155793261244,
         "not_evaluable": 0,
         "total": 10
       }
@@ -4277,7 +4277,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 899.0,
+    "wall_seconds": 698.6,
     "workers": 1
   }
 }

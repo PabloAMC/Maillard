@@ -4,7 +4,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 
 * **headline (strictly independent, evaluable): 25/43 (58%)**; 28 independent claims not evaluable
 * independent, excluding pH and water activity: 16/31 (52%); pH and water activity alone: 9/12 (75%)
-* all claims (independent + fit-adjacent + fit-system overlap): 29/59 (49%); 33 not evaluable
+* all claims (independent + fit-adjacent + fit-system overlap): 30/59 (51%); 33 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 4
 * not evaluable, by reason: the claim carries no runnable conditions (prose-only) (18); refused by the engine (4); a predicted concentration is zero; no direction is defined (4); arm 'pH 4.5' refused (1); arm 'D-ribose' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20  (1); arm 'norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0' refused (1); arm 'hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
@@ -29,7 +29,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | category | agree | evaluable | rate | not evaluable |
 |---|---|---|---|---|
 | additive_cysteine | 2 | 3 | 0.67 | 2 |
-| lipid_lane | 0 | 3 | 0.00 | 1 |
+| lipid_lane | 1 | 3 | 0.33 | 1 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 2 | 3 | 0.67 | 2 |
 | ph | 9 | 14 | 0.64 | 4 |
@@ -74,7 +74,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | PROC-05 | ranking | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 22.8, 22.8 | identical predictions; the lane has no term for the moved axis |
 | TIME-01 | time | independent | HMF | increasing | **agree** | trunk | 10.1, 636, 3.1e+03 |  |
 | LIP-01 | lipid_lane | fit_adjacent | Hexanal | A>B | **disagree** | lipid | 22.8, 22.8 | identical predictions; the lane has no term for the moved axis |
-| LIP-02 | lipid_lane | fit_system_overlap | Hexanal | increasing | **disagree** | lipid | 22.8, 88.6, 88.6 |  |
+| LIP-02 | lipid_lane | fit_system_overlap | Hexanal | increasing | **agree** | lipid | 22.8, 90.3, 99.1 |  |
 | LIP-03 | lipid_lane | independent | Hexanal | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | SUG-07 | sugar_identity | independent | Furfural | A>B | **agree** | sulfur | 1.42e+03, 402 |  |
 | SUG-08 | sugar_identity | independent | MFT | A>B | **agree** | sulfur | 10.1, 0 |  |
@@ -91,7 +91,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | AW-03 | moisture_aw | independent | HMF | peak | **agree** | trunk | 1.3e+03, 1.47e+03, 760 |  |
 | CYS-03 | additive_cysteine | independent | MFT | A>B | **agree** | sulfur | 12.5, 0 |  |
 | CYS-04 | additive_cysteine | independent | 2,5-Dimethylpyrazine | A>B | **not_evaluable** | - | - | arm 'hydrolysate + xylose (no cysteine), 120 C' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's networ |
-| LIP-04 | lipid_lane | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 63.9, 63.9 | identical predictions; the lane has no term for the moved axis |
+| LIP-04 | lipid_lane | fit_system_overlap | Hexanal | A>B | **disagree** | lipid | 65.3, 65.3 | identical predictions; the lane has no term for the moved axis |
 | ACR-01 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 0.716, 1.67, 1.43 |  |
 | ACR-02 | temperature | independent | Acrylamide | peak | **agree** | acrylamide | 7.64, 935, 4.37 |  |
 | TIME-02 | time | independent | HMF | increasing | **agree** | trunk | 53.2, 1.1e+03, 1.54e+03 |  |
