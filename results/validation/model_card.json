@@ -177,14 +177,13 @@
   "no_verifiable_source": {
     "available": true,
     "by_status_key": {
-      "source_status": 84,
-      "status": 38,
+      "status": 9,
       "value_anchor_status": 4,
       "value_status": 4
     },
-    "files": 8,
-    "records": 130,
-    "with_numeric_payload": 36
+    "files": 5,
+    "records": 17,
+    "with_numeric_payload": 4
   },
   "sulfur_anchor": {
     "available": true,

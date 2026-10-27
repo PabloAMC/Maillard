@@ -333,7 +333,7 @@ constant, which is what makes `rank` useful.
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
 
-**Provenance census (recounted at generation time, not copied).** **84 records** carry `source_status: no_verifiable_source` across 8 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 130 in total. The numeric-payload and runtime-consumed subsets (65 and 65) use a narrower definition than this recount and are pinned separately by the headline guards under `tests/scientific/`.
+**Provenance census (recounted at generation time, not copied).** **0 records** carry `source_status: no_verifiable_source` — the figure the provenance note above quotes, reproduced here by recount; an unsourced record is deleted, not flagged. 17 narrower markers remain across 5 tracked data files (`status`, `value_status`, `value_anchor_status`): a real paper whose one value could not be anchored, an unresolved DOI on a backlog item, or a quarantined benchmark kept as the record of what was wrong. 4 of them sit beside a number.
 
 **Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
 

@@ -1,5 +1,5 @@
 # Systematic Literature Review — Family 6: Alternative protein matrix scope
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering alternative protein matrix scope.  
 **Strategic Posture:** `matrix_scope_lane`  
 **Runtime Concept:** `matrix_family_scope_extension`  
@@ -106,7 +106,7 @@
 
 ---
 
-### Liu (2023)
+### Liu, Y. (2021), "Flavor Chemistry of Pea Proteins", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998
 - **DOI:** [10.1016/j.foodchem.2022.134998](https://doi.org/10.1016/j.foodchem.2022.134998)
 - **Matrix Family:** pea_protein_isolate
 - **Kind:** `quantitative_benchmark`
@@ -129,13 +129,17 @@
 **Key Values:**
 | Parameter | Value |
 |---|---|
-| `hexanal_ppb_range` | `[15.0, 180.0]` |
-| `nonanal_ppb_range` | `[5.0, 50.0]` |
-| `ee_2_4_heptadienal_ppb_range` | `[0.5, 8.0]` |
-| `methoxypyrazine_ppb_max` | `0.08` |
+| `hexanal_ppb_range` | `[2445.0, 52454.0]` |
+| `nonanal_ppb_range` | `[0.188, 3.42]` |
+| `ee_2_4_heptadienal_ppb_range` | `None` |
+| `ipmp_ppb_range` | `[6.126, 57.0]` |
+| `methional_ppb_range` | `[15.5, 182.0]` |
+| `2_pentylfuran_ppb_range` | `[25.5, 1628.0]` |
+| `methoxypyrazine_ppb_max` | `57.0` |
 | `mft_detected` | `False` |
 | `meaty_potential_multiplier` | `0.12` |
-| `replicate_lot_count` | `6` |
+| `replicate_lot_count` | `2` |
+| `units_basis` | `ug/L of the rehydrated 10%-solids (w/w) slurry, read as ppb` |
 
 **What it supports:**
 - Compact PPI off-note baseline for hexanal, nonanal, unsaturated aldehydes, and methoxypyrazine
@@ -330,7 +334,6 @@
 ---
 
 ### Fraser et al. (2018)
-- **DOI:** [US9943096B2](https://doi.org/US9943096B2)
 - **Matrix Family:** yeast_extract_reaction_flavor
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -368,7 +371,7 @@
 
 ---
 
-### Liu et al. (2022)
+### Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998
 - **DOI:** [10.1016/j.foodchem.2022.134998](https://doi.org/10.1016/j.foodchem.2022.134998)
 - **Matrix Family:** pea_protein_isolate
 - **Kind:** `calibration_reference`
@@ -403,44 +406,6 @@
 - Extrusion process-shear texturization parameters
 
 **Next Action:** Expose as a pea protein heating volatile AEDA reference payload.
-
----
-
-### Malia et al. (2025)
-- **DOI:** [10.1016/j.foodhyd.2024.110509](https://doi.org/10.1016/j.foodhyd.2024.110509)
-- **Matrix Family:** pea_protein_isolate
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `assay` | `DTNB / Ellman` |
-| `free_sh_reported` | `True` |
-
-**What it supports:**
-- Pea protein free-SH levels and DSC thermal denaturation crosscheck.
-- Cysteine accessibility baseline in heated matrices.
-
-**What it does not support:**
-- Absolute volatile yield curves
-- Lysine-loss kinetics
-
-**Next Action:** Use as a supportive pea free-SH behavior crosscheck.
 
 ---
 
@@ -558,8 +523,8 @@
 
 ---
 
-### Ilo et al. (1996)
-- **DOI:** [10.1006/fstl.1996.0090](https://doi.org/10.1006/fstl.1996.0090)
+### Ilo & Berghofer (2003), J. Food Sci. 68:496
+- **DOI:** [10.1111/j.1365-2621.2003.tb05701.x](https://doi.org/10.1111/j.1365-2621.2003.tb05701.x)
 - **Matrix Family:** maize_grits
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -595,7 +560,7 @@
 
 ---
 
-### Liu et al. (2022)
+### Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998
 - **DOI:** [10.1016/j.foodchem.2022.134998](https://doi.org/10.1016/j.foodchem.2022.134998)
 - **Matrix Family:** pea_protein_isolate
 - **Kind:** `calibration_reference`
@@ -630,79 +595,6 @@
 - Extrusion process-shear texturization parameters
 
 **Next Action:** Expose as a pea protein heating volatile AEDA reference payload.
-
----
-
-### Zhang et al. (1993)
-- **DOI:** [10.1111/j.1745-4530.1993.tb00179.x](https://doi.org/10.1111/j.1745-4530.1993.tb00179.x)
-- **Matrix Family:** soy_protein
-- **Kind:** `calibration_reference`
-- **Payload Role:** `computational_prior`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `asn_deamidation_Ea_range_kj_mol` | `[25.1, 113.0]` |
-| `gln_deamidation_Ea_range_kj_mol` | `[120.0, 268.0]` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Deamidation of asparagine (Ea 25.1-113 kJ/mol) vs. glutamine (Ea 120-268 kJ/mol) in protein melts yielding free ammonia.
-
-**What it does not support:**
-- Free amino acid solutions without protein structural constraints
-
-**Next Action:** Encode thermal deamidation kinetics.
-
----
-
-### Li et al. (2010)
-- **DOI:** [10.1016/j.mineng.2010.05.003](https://doi.org/10.1016/j.mineng.2010.05.003)
-- **Matrix Family:** free_model_system
-- **Kind:** `calibration_reference`
-- **Payload Role:** `computational_prior`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `chelation_Ea_kj_mol` | `84.54` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Adsorption and coordinate covalent chelation activation energy of phytic acid binding metal ions (Ea 84.54 kJ/mol).
-
-**What it does not support:**
-- Divalent cation complexes without phosphate ester coordination
-
-**Next Action:** Encode phytate chelation kinetics prior.
 
 ---
 
@@ -811,7 +703,7 @@
 
 ---
 
-### Pereira et al. (2020)
+### Garcia-Diez & Mora-Diez (2020), Antioxidants 9:756
 - **DOI:** [10.3390/antiox9080756](https://doi.org/10.3390/antiox9080756)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -847,8 +739,8 @@
 
 ---
 
-### Sun et al. (2020)
-- **DOI:** [10.1016/j.meatsci.2020.108151](https://doi.org/10.1016/j.meatsci.2020.108151)
+### Sun, Tang, Wang, Rasco, Lai & Huang (2016), Meat Science 116:1
+- **DOI:** [10.1016/j.meatsci.2016.01.009](https://doi.org/10.1016/j.meatsci.2016.01.009)
 - **Matrix Family:** high_moisture_melt
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -884,7 +776,7 @@
 
 ---
 
-### Shirai et al. (2015)
+### Kampf et al. (2015), Environ. Sci. Technol. 49:10859
 - **DOI:** [10.1021/acs.est.5b02902](https://doi.org/10.1021/acs.est.5b02902)
 - **Matrix Family:** plant_protein_matrix
 - **Kind:** `calibration_reference`
@@ -919,8 +811,8 @@
 
 ---
 
-### Chen et al. (2024)
-- **DOI:** [10.3390/plants13020274](https://doi.org/10.3390/plants13020274)
+### Chen, Oliveira, Dias & Ismail (2025), Plants 14:274
+- **DOI:** [10.3390/plants14020274](https://doi.org/10.3390/plants14020274)
 - **Matrix Family:** hemp_protein
 - **Kind:** `calibration_reference`
 - **Payload Role:** `flavor_reference_payload`
@@ -956,8 +848,8 @@
 
 ---
 
-### Chambers et al. (2018)
-- **DOI:** [10.3390/foods7080126](https://doi.org/10.3390/foods7080126)
+### Zhao, Ding, Yao, Cao, Pan & Kong (2018), Front. Microbiol. 9:1872
+- **DOI:** [10.3389/fmicb.2018.01872](https://doi.org/10.3389/fmicb.2018.01872)
 - **Matrix Family:** soy_isolate
 - **Kind:** `calibration_reference`
 - **Payload Role:** `process_state_calibration`
@@ -1030,8 +922,8 @@
 
 ---
 
-### Šimková et al. (2023)
-- **DOI:** [10.3390/foods12061349](https://doi.org/10.3390/foods12061349)
+### Balfany, Gutierrez, Moncada & Komarnytsky (2023), Nutrients 15:1327
+- **DOI:** [10.3390/nu15061327](https://doi.org/10.3390/nu15061327)
 - **Matrix Family:** rubisco
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -1068,8 +960,8 @@
 
 ---
 
-### Streule et al. (2024)
-- **DOI:** [10.3390/foods13162590](https://doi.org/10.3390/foods13162590)
+### Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608
+- **DOI:** [10.3390/foods13162608](https://doi.org/10.3390/foods13162608)
 - **Matrix Family:** lentil_protein
 - **Kind:** `calibration_reference`
 - **Payload Role:** `flavor_reference_payload`
@@ -1104,8 +996,8 @@
 
 ---
 
-### PMC11889959 (2025)
-- **DOI:** [10.1016/j.foodchem.2025.142222](https://doi.org/10.1016/j.foodchem.2025.142222)
+### Park, Park, Kim & Lee (2025), Curr. Res. Food Sci. 10:100999
+- **DOI:** [10.1016/j.crfs.2025.100999](https://doi.org/10.1016/j.crfs.2025.100999)
 - **Matrix Family:** soy_isolate
 - **Kind:** `calibration_reference`
 - **Payload Role:** `flavor_reference_payload`
@@ -1150,39 +1042,36 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 6
 
-Total papers analyzed: **29** (Benchmark-eligible: **0**, Calibration references: **21**, Rejected: **8**)
+Total papers analyzed: **26** (Benchmark-eligible: **0**, Calibration references: **19**, Rejected: **7**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Asen & Aluko (2022) | 4/8 | ⚠️ Calibration | pea_protein |
 | Li et al. (2025) | 4/8 | ⚠️ Calibration | pea_protein |
-| Liu (2023) | 3/8 | ⚠️ Calibration | pea_protein_isolate |
+| Liu, Y. (2021), "Flavor Chemistry of Pea Proteins", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | 3/8 | ⚠️ Calibration | pea_protein_isolate |
 | Huseynli et al. (2025) | 2/8 | ❌ Rejected | sunflower_protein_roasted |
 | Paraskevopoulou et al. (2024) | 3/8 | ⚠️ Calibration | spirulina_dried_supplement |
 | PMC9905368 (2023) | 4/8 | ⚠️ Calibration | spi_hvp_xylose |
 | Cho et al. (2023) | 4/8 | ⚠️ Calibration | wheat_gluten_hvp_xylose |
 | Fraser et al. (2018) | 3/8 | ⚠️ Calibration | yeast_extract_reaction_flavor |
-| Liu et al. (2022) | 2/8 | ❌ Rejected | pea_protein_isolate |
-| Malia et al. (2025) | 2/8 | ❌ Rejected | pea_protein_isolate |
+| Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | 2/8 | ❌ Rejected | pea_protein_isolate |
 | Lagrain et al. (2010) | 3/8 | ⚠️ Calibration | wheat_gliadin |
 | Morel et al. (2002) | 3/8 | ⚠️ Calibration | wheat_gluten |
 | Rombouts et al. (2012) | 3/8 | ⚠️ Calibration | wheat_gluten |
-| Ilo et al. (1996) | 3/8 | ⚠️ Calibration | maize_grits |
-| Liu et al. (2022) | 2/8 | ❌ Rejected | pea_protein_isolate |
-| Zhang et al. (1993) | 3/8 | ⚠️ Calibration | soy_protein |
-| Li et al. (2010) | 3/8 | ⚠️ Calibration | free_model_system |
+| Ilo & Berghofer (2003), J. Food Sci. 68:496 | 3/8 | ⚠️ Calibration | maize_grits |
+| Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998 | 2/8 | ❌ Rejected | pea_protein_isolate |
 | Zha et al. (2020) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
 | Kutzli et al. (2020) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
 | Nguyen et al. (2025) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
-| Pereira et al. (2020) | 2/8 | ❌ Rejected | free_model_system |
-| Sun et al. (2020) | 3/8 | ⚠️ Calibration | high_moisture_melt |
-| Shirai et al. (2015) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
-| Chen et al. (2024) | 4/8 | ⚠️ Calibration | hemp_protein |
-| Chambers et al. (2018) | 2/8 | ❌ Rejected | soy_isolate |
+| Garcia-Diez & Mora-Diez (2020), Antioxidants 9:756 | 2/8 | ❌ Rejected | free_model_system |
+| Sun, Tang, Wang, Rasco, Lai & Huang (2016), Meat Science 116:1 | 3/8 | ⚠️ Calibration | high_moisture_melt |
+| Kampf et al. (2015), Environ. Sci. Technol. 49:10859 | 3/8 | ⚠️ Calibration | plant_protein_matrix |
+| Chen, Oliveira, Dias & Ismail (2025), Plants 14:274 | 4/8 | ⚠️ Calibration | hemp_protein |
+| Zhao, Ding, Yao, Cao, Pan & Kong (2018), Front. Microbiol. 9:1872 | 2/8 | ❌ Rejected | soy_isolate |
 | Williams (2025) | 3/8 | ⚠️ Calibration | fava_bean |
-| Šimková et al. (2023) | 2/8 | ❌ Rejected | rubisco |
-| Streule et al. (2024) | 3/8 | ⚠️ Calibration | lentil_protein |
-| PMC11889959 (2025) | 2/8 | ❌ Rejected | soy_isolate |
+| Balfany, Gutierrez, Moncada & Komarnytsky (2023), Nutrients 15:1327 | 2/8 | ❌ Rejected | rubisco |
+| Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608 | 3/8 | ⚠️ Calibration | lentil_protein |
+| Park, Park, Kim & Lee (2025), Curr. Res. Food Sci. 10:100999 | 2/8 | ❌ Rejected | soy_isolate |
 
 ---
 
@@ -1194,7 +1083,7 @@ Total papers analyzed: **29** (Benchmark-eligible: **0**, Calibration references
 ### CALIBRATION (Score 3-5)
 - `Asen & Aluko (2022)` (Score: 4/8)
 - `Li et al. (2025)` (Score: 4/8)
-- `Liu (2023)` (Score: 3/8)
+- `Liu, Y. (2021), "Flavor Chemistry of Pea Proteins", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998` (Score: 3/8)
 - `Paraskevopoulou et al. (2024)` (Score: 3/8)
 - `PMC9905368 (2023)` (Score: 4/8)
 - `Cho et al. (2023)` (Score: 4/8)
@@ -1202,27 +1091,24 @@ Total papers analyzed: **29** (Benchmark-eligible: **0**, Calibration references
 - `Lagrain et al. (2010)` (Score: 3/8)
 - `Morel et al. (2002)` (Score: 3/8)
 - `Rombouts et al. (2012)` (Score: 3/8)
-- `Ilo et al. (1996)` (Score: 3/8)
-- `Zhang et al. (1993)` (Score: 3/8)
-- `Li et al. (2010)` (Score: 3/8)
+- `Ilo & Berghofer (2003), J. Food Sci. 68:496` (Score: 3/8)
 - `Zha et al. (2020)` (Score: 3/8)
 - `Kutzli et al. (2020)` (Score: 3/8)
 - `Nguyen et al. (2025)` (Score: 3/8)
-- `Sun et al. (2020)` (Score: 3/8)
-- `Shirai et al. (2015)` (Score: 3/8)
-- `Chen et al. (2024)` (Score: 4/8)
+- `Sun, Tang, Wang, Rasco, Lai & Huang (2016), Meat Science 116:1` (Score: 3/8)
+- `Kampf et al. (2015), Environ. Sci. Technol. 49:10859` (Score: 3/8)
+- `Chen, Oliveira, Dias & Ismail (2025), Plants 14:274` (Score: 4/8)
 - `Williams (2025)` (Score: 3/8)
-- `Streule et al. (2024)` (Score: 3/8)
+- `Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608` (Score: 3/8)
 
 ### REJECTED (Score < 3)
 - `Huseynli et al. (2025)` (Score: 2/8)
-- `Liu et al. (2022)` (Score: 2/8)
-- `Malia et al. (2025)` (Score: 2/8)
-- `Liu et al. (2022)` (Score: 2/8)
-- `Pereira et al. (2020)` (Score: 2/8)
-- `Chambers et al. (2018)` (Score: 2/8)
-- `Šimková et al. (2023)` (Score: 2/8)
-- `PMC11889959 (2025)` (Score: 2/8)
+- `Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998` (Score: 2/8)
+- `Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998` (Score: 2/8)
+- `Garcia-Diez & Mora-Diez (2020), Antioxidants 9:756` (Score: 2/8)
+- `Zhao, Ding, Yao, Cao, Pan & Kong (2018), Front. Microbiol. 9:1872` (Score: 2/8)
+- `Balfany, Gutierrez, Moncada & Komarnytsky (2023), Nutrients 15:1327` (Score: 2/8)
+- `Park, Park, Kim & Lee (2025), Curr. Res. Food Sci. 10:100999` (Score: 2/8)
 
 ---
 
@@ -1232,4 +1118,4 @@ Total papers analyzed: **29** (Benchmark-eligible: **0**, Calibration references
 2. **Dynamic Calibration Offsets:** Apply the identified `matrix_scope_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

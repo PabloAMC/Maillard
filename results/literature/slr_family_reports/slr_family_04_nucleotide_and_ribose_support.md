@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 4: Nucleotide degradation and ribose support
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering nucleotide degradation and ribose support.  
 **Strategic Posture:** `high_value_support_lane`  
 **Runtime Concept:** `nucleotide_and_ribose_support`  
-**Scope & Targets:** Covers target compounds/variables: `IMP`, `GMP`, `ribose-5-phosphate`. Preferred payload types: `flavor_reference_payload`, `computational_prior`. Target runtime modules: `src/literature_runtime.py`, `src/recommend.py`.  
+**Scope & Targets:** Covers target compounds/variables: `IMP`, `GMP`, `ribose-5-phosphate`. Preferred payload types: `flavor_reference_payload`, `computational_prior`. Target runtime modules: .  
 
 ---
 
@@ -28,8 +28,8 @@
 
 ## SECTION 1 — Curated References
 
-### Tanaka et al. (2025)
-- **DOI:** [10.1093/chemse/bjaf043](https://doi.org/10.1093/chemse/bjaf043)
+### Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049
+- **DOI:** [10.1093/chemse/bjad049](https://doi.org/10.1093/chemse/bjad049)
 - **Matrix Family:** aqueous_model_system
 - **Kind:** `quantitative_benchmark`
 - **Payload Role:** `benchmark_intake`
@@ -116,7 +116,7 @@
 
 ---
 
-### Soladoye et al. (2020)
+### Hwang, Ismail & Joo (2020), Foods 9:251
 - **DOI:** [10.3390/foods9030251](https://doi.org/10.3390/foods9030251)
 - **Matrix Family:** animal_meat_low_temperature_reference
 - **Kind:** `calibration_reference`
@@ -158,7 +158,7 @@
 
 ---
 
-### Ahlberg & Mohammadi (2021)
+### Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236
 - **DOI:** [10.4014/jmb.2207.07057](https://doi.org/10.4014/jmb.2207.07057)
 - **Matrix Family:** commercial_yeast_extract
 - **Kind:** `calibration_reference`
@@ -199,8 +199,8 @@
 
 ---
 
-### Cui et al. (2022)
-- **DOI:** [10.31665/JFB.2022.18309](https://doi.org/10.31665/JFB.2022.18309)
+### Liu et al. (2022), LWT 168:113651
+- **DOI:** [10.1016/j.lwt.2022.113651](https://doi.org/10.1016/j.lwt.2022.113651)
 - **Matrix Family:** commercial_dried_mushroom
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -285,8 +285,8 @@
 
 ---
 
-### Epstein et al. (1988)
-- **DOI:** [10.1021/jf00083a026](https://doi.org/10.1021/jf00083a026)
+### Kavitha & Modi (2007), LWT 40:1280
+- **DOI:** [10.1016/j.lwt.2006.07.014](https://doi.org/10.1016/j.lwt.2006.07.014)
 - **Matrix Family:** aqueous_and_food_matrix_comparison
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -327,88 +327,8 @@
 
 ---
 
-### Blank & Grosch (1991)
-- **DOI:** [10.1021/jf00009a012](https://doi.org/10.1021/jf00009a012)
-- **Matrix Family:** boiled_beef_reference
-- **Kind:** `quantitative_benchmark`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `hdmf_ug_per_kg_range` | `[28.0, 67.0]` |
-| `hdmf_odt_ug_per_kg` | `6.0` |
-| `hdmf_oav_range` | `[4.7, 11.2]` |
-| `fd_factor` | `256.0` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Beef-relevant HDMF target band for brothy-caramel support
-- OAV-bounded donor-routing support showing HDMF is sensorially active well below overt caramelization overload
-
-**What it does not support:**
-- A full PBMA benchmark by itself
-- Direct proof that endogenous IMP is required for HDMF closure in plant matrices
-
-**Next Action:** Use as the compact Family 04 donor-routing and reporting anchor for HDMF without adding a large inline benchmark block.
-
----
-
-### Liardon et al. (1991)
-- **DOI:** [10.1021/acs.jafc.liardon_1991](https://doi.org/10.1021/acs.jafc.liardon_1991)
-- **Matrix Family:** aqueous_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `r5p_vs_glucose_multiplier_floor` | `100.0` |
-| `ribose_vs_glucose_multiplier` | `7.2` |
-| `r5p_reaction_order` | `1.5` |
-
-**What it supports:**
-- Large donor-strength separation between R5P, ribose, and glucose
-- A bounded reaction-order prior for high-potency reducing sugar routing
-
-**What it does not support:**
-- Matrix-specific retention or trapping
-- A direct plant benchmark
-
-**Next Action:** Encode as a donor-potency prior that keeps R5P and ribose above glucose in sulfur-positive routing decisions.
-
----
-
-### Aliani & Farmer (2005)
-- **DOI:** [10.1021/jf0401831](https://doi.org/10.1021/jf0401831)
+### Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067
+- **DOI:** [10.1021/jf050085t](https://doi.org/10.1021/jf050085t)
 - **Matrix Family:** meat_model_system
 - **Kind:** `directional_prior`
 - **Payload Role:** `benchmark_intake`
@@ -447,8 +367,8 @@
 
 ---
 
-### Finnigan et al. (2019)
-- **DOI:** [10.1039/c9fo00878e](https://doi.org/10.1039/c9fo00878e)
+### Finnigan, Wall, Wilde, Stephens et al. (2019), Curr. Dev. Nutr. 3:nzz021
+- **DOI:** [10.1093/cdn/nzz021](https://doi.org/10.1093/cdn/nzz021)
 - **Matrix Family:** mycoprotein
 - **Kind:** `calibration_reference`
 - **Payload Role:** `process_state_calibration`
@@ -494,21 +414,19 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 4
 
-Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references: **8**, Rejected: **3**)
+Total papers analyzed: **9** (Benchmark-eligible: **0**, Calibration references: **7**, Rejected: **2**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Tanaka et al. (2025) | 3/8 | ⚠️ Calibration | aqueous_model_system |
+| Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049 | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Yamaguchi & Ninomiya (2000) | 3/8 | ⚠️ Calibration | aqueous_and_food_matrix_review |
-| Soladoye et al. (2020) | 3/8 | ⚠️ Calibration | animal_meat_low_temperature_reference |
-| Ahlberg & Mohammadi (2021) | 3/8 | ⚠️ Calibration | commercial_yeast_extract |
-| Cui et al. (2022) | 3/8 | ⚠️ Calibration | commercial_dried_mushroom |
+| Hwang, Ismail & Joo (2020), Foods 9:251 | 3/8 | ⚠️ Calibration | animal_meat_low_temperature_reference |
+| Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236 | 3/8 | ⚠️ Calibration | commercial_yeast_extract |
+| Liu et al. (2022), LWT 168:113651 | 3/8 | ⚠️ Calibration | commercial_dried_mushroom |
 | Matoba et al. (1988) | 3/8 | ⚠️ Calibration | aqueous_model_system |
-| Epstein et al. (1988) | 3/8 | ⚠️ Calibration | aqueous_and_food_matrix_comparison |
-| Blank & Grosch (1991) | 3/8 | ⚠️ Calibration | boiled_beef_reference |
-| Liardon et al. (1991) | 2/8 | ❌ Rejected | aqueous_model_system |
-| Aliani & Farmer (2005) | 2/8 | ❌ Rejected | meat_model_system |
-| Finnigan et al. (2019) | 2/8 | ❌ Rejected | mycoprotein |
+| Kavitha & Modi (2007), LWT 40:1280 | 3/8 | ⚠️ Calibration | aqueous_and_food_matrix_comparison |
+| Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067 | 2/8 | ❌ Rejected | meat_model_system |
+| Finnigan, Wall, Wilde, Stephens et al. (2019), Curr. Dev. Nutr. 3:nzz021 | 2/8 | ❌ Rejected | mycoprotein |
 
 ---
 
@@ -518,26 +436,24 @@ Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Tanaka et al. (2025)` (Score: 3/8)
+- `Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049` (Score: 3/8)
 - `Yamaguchi & Ninomiya (2000)` (Score: 3/8)
-- `Soladoye et al. (2020)` (Score: 3/8)
-- `Ahlberg & Mohammadi (2021)` (Score: 3/8)
-- `Cui et al. (2022)` (Score: 3/8)
+- `Hwang, Ismail & Joo (2020), Foods 9:251` (Score: 3/8)
+- `Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236` (Score: 3/8)
+- `Liu et al. (2022), LWT 168:113651` (Score: 3/8)
 - `Matoba et al. (1988)` (Score: 3/8)
-- `Epstein et al. (1988)` (Score: 3/8)
-- `Blank & Grosch (1991)` (Score: 3/8)
+- `Kavitha & Modi (2007), LWT 40:1280` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Liardon et al. (1991)` (Score: 2/8)
-- `Aliani & Farmer (2005)` (Score: 2/8)
-- `Finnigan et al. (2019)` (Score: 2/8)
+- `Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067` (Score: 2/8)
+- `Finnigan, Wall, Wilde, Stephens et al. (2019), Curr. Dev. Nutr. 3:nzz021` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/literature_runtime.py`, `src/recommend.py` must explicitly account for `nucleotide_and_ribose_support` as a modifier when predicting `IMP`, `GMP`, `ribose-5-phosphate` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `nucleotide_and_ribose_support` as a modifier when predicting `IMP`, `GMP`, `ribose-5-phosphate` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `high_value_support_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

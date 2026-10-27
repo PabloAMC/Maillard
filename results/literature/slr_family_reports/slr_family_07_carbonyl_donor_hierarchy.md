@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 7: Reducing sugar and carbonyl donor hierarchy
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering reducing sugar and carbonyl donor hierarchy.  
 **Strategic Posture:** `immediate_expansion_lane`  
 **Runtime Concept:** `carbonyl_donor_hierarchy`  
-**Scope & Targets:** Covers target compounds/variables: `ribose`, `xylose`, `glucose`, `fructose`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`. Target runtime modules: `src/precursor_resolver.py`, `src/literature_runtime.py`.  
+**Scope & Targets:** Covers target compounds/variables: `ribose`, `xylose`, `glucose`, `fructose`. Preferred payload types: `benchmark_payload`, `flavor_reference_payload`. Target runtime modules: .  
 
 ---
 
@@ -28,8 +28,8 @@
 
 ## SECTION 1 — Curated References
 
-### Cerny & Davídek (2003)
-- **DOI:** [10.1021/jf026123f](https://doi.org/10.1021/jf026123f)
+### Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358
+- **DOI:** [10.1021/jf034037p](https://doi.org/10.1021/jf034037p)
 - **Matrix Family:** aqueous_model_system
 - **Kind:** `directional_prior`
 - **Payload Role:** `benchmark_intake`
@@ -67,50 +67,8 @@
 
 ---
 
-### Maillard & van Boekel (1992)
-- **DOI:** [10.1016/0308-8146(92)90216-Q](https://doi.org/10.1016/0308-8146(92)90216-Q)
-- **Matrix Family:** aqueous_sugar_lysine_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `ribose_vs_glucose_multiplier` | `8.2` |
-| `xylose_vs_glucose_multiplier` | `5.9` |
-| `fructose_vs_glucose_multiplier` | `0.65` |
-| `maltose_vs_glucose_multiplier` | `0.1` |
-| `glucose_ea_kj_per_mol` | `106.0` |
-| `ribose_ea_kj_per_mol` | `114.0` |
-
-**What it supports:**
-- Quantitative sugar-reactivity hierarchy across ribose, pentoses, hexoses, and disaccharides
-- A temperature-aware donor-priority anchor so ribose and other pentoses are not treated as fixed scalar uplifts relative to glucose
-
-**What it does not support:**
-- Direct plant-matrix closure for PPI or SPI systems
-- A full downstream sulfur-yield benchmark without matching amino-acid and matrix context
-
-**Next Action:** Keep as the quantitative donor-hierarchy prior so Family 07 can reason over pentose-versus-hexose reactivity with explicit k_obs and Ea support rather than only R5P-specific evidence.
-
----
-
-### Blank et al. (1997)
-- **DOI:** [10.1021/jf960777q](https://doi.org/10.1021/jf960777q)
+### Blank & Fay (1996), J. Agric. Food Chem. 44:531
+- **DOI:** [10.1021/jf950439o](https://doi.org/10.1021/jf950439o)
 - **Matrix Family:** aqueous_model_system
 - **Kind:** `directional_prior`
 - **Payload Role:** `benchmark_intake`
@@ -150,46 +108,7 @@
 
 ---
 
-### Liu et al. (2022)
-- **DOI:** [10.1016/j.carbpol.2022.120468](https://doi.org/10.1016/j.carbpol.2022.120468)
-- **Matrix Family:** pea_protein_isolate
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `pea_maltose_liberation_umol_g` | `18.4` |
-| `waxy_maize_maltose_liberation_umol_g` | `31.8` |
-| `ti_starch_reduction_pct` | `66.0` |
-
-**What it supports:**
-- Starch reducing-sugar liberation during HME (maltose generation)
-- Compares pea starch (18.4 umol/g) versus waxy maize starch (31.8 umol/g) yield parameters
-
-**What it does not support:**
-- Free ribose or glucose addition rates
-- Volatile recovery yields under vacuum packaging
-
-**Next Action:** Encode starch reducing-sugar liberation priors during HME.
-
----
-
-### Huang et al. (2024)
+### Zhang et al. (2024), J. Agric. Food Chem. 72:22461
 - **DOI:** [10.1021/acs.jafc.4c05736](https://doi.org/10.1021/acs.jafc.4c05736)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
@@ -226,8 +145,8 @@
 
 ---
 
-### Martins & van Boekel (2003)
-- **DOI:** [10.1021/jf025830v](https://doi.org/10.1021/jf025830v)
+### Martins & van Boekel (2003), Carbohydr. Res. 338:1665
+- **DOI:** [10.1016/s0008-6215(03)00174-5](https://doi.org/10.1016/s0008-6215(03)00174-5)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -261,8 +180,8 @@
 
 ---
 
-### Nashalian & Yaylayan (2014)
-- **DOI:** [10.1021/acsomega.7b00321](https://doi.org/10.1021/acsomega.7b00321)
+### Nashalian & Yaylayan (2014), J. Agric. Food Chem. 62:8518
+- **DOI:** [10.1021/jf502751n](https://doi.org/10.1021/jf502751n)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -296,45 +215,8 @@
 
 ---
 
-### Wang et al. (2024)
-- **DOI:** [10.3390/foods13213453](https://doi.org/10.3390/foods13213453)
-- **Matrix Family:** free_model_system
-- **Kind:** `calibration_reference`
-- **Payload Role:** `computational_prior`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `amino_depletion_umol_ml` | `0.69` |
-| `tvc_yield_ug_g` | `28.3` |
-
-**What it supports:**
-- Glucosamine synergy and amino group depletion kinetics
-- Glucosamine MRPs exhibit 0.69 umol/mL amino group depletion and 28.3 ug/g TVC yield with low bitterness
-
-**What it does not support:**
-- GSH sulfur release rates
-
-**Next Action:** Encode glucosamine synergy priors.
-
----
-
-### Blank & Mottram (Mercaptoketone labelling 2002)
-- **DOI:** [10.1021/jf020582d](https://doi.org/10.1021/jf020582d)
+### Cerny & Davidek (2004), J. Agric. Food Chem. 52:958
+- **DOI:** [10.1021/jf035265m](https://doi.org/10.1021/jf035265m)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -368,8 +250,8 @@
 
 ---
 
-### Buera et al. (1987)
-- **DOI:** [10.1111/j.1365-2621.1987.tb14251.x](https://doi.org/10.1111/j.1365-2621.1987.tb14251.x)
+### Buera, Chirife, Resnik & Wetzler (1987), J. Food Sci. 52:1063
+- **DOI:** [10.1111/j.1365-2621.1987.tb14276.x](https://doi.org/10.1111/j.1365-2621.1987.tb14276.x)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -405,8 +287,8 @@
 
 ---
 
-### Poulsen et al. (2023)
-- **DOI:** [10.1016/j.foodchem.2023.136200](https://doi.org/10.1016/j.foodchem.2023.136200)
+### Fu, Ma, Wang, Sun, Chen, Cheng & Liu (2023), Foods 12:1967
+- **DOI:** [10.3390/foods12101967](https://doi.org/10.3390/foods12101967)
 - **Matrix Family:** plant_based_meat_analogue
 - **Kind:** `calibration_reference`
 - **Payload Role:** `safety_payload`
@@ -441,6 +323,78 @@
 
 ---
 
+### van Boekel (2001)
+- **DOI:** [10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9](https://doi.org/10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9)
+- **Matrix Family:** lysine_sugar_model_system
+- **Kind:** `directional_prior`
+- **Payload Role:** `benchmark_intake`
+- **Status:** `encoded`
+
+| Criterion | Assessment |
+|---|---|
+| ✅ | Matrix family / reactant identity specified |
+| ✅ | Precursor concentrations / loads specified |
+| ❌ | Temperature, time or pH missing from key_values |
+| ❌ | Analytical output mode not specified |
+| ❌ | Yields reported in relative/qualitative mode only |
+| ✅ | Replicates reported |
+| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
+| ❌ | No sensory or odor threshold tags present |
+
+**Score: 3/8 → Calibration reference**
+
+**Key Values:**
+| Parameter | Value |
+|---|---|
+| `ribose_k_obs_at_60c_milli_per_hour` | `98.4` |
+| `glucose_k_obs_at_60c_milli_per_hour` | `12.0` |
+| `ribose_vs_glucose_relative_reactivity` | `8.2` |
+| `glucose_ea_kj_per_mol` | `106.0` |
+| `ribose_ea_kj_per_mol` | `114.0` |
+| `replicates` | `3` |
+
+**What it supports:**
+- Quantitative k_obs and Ea for 9 sugars at pH 6, 50-70°C in lysine model system
+- Pentose >> hexose >> disaccharide reactivity hierarchy with temperature-dependence
+
+**What it does not support:**
+- Plant-matrix endpoint closure
+- A universal Maillard rate under extruder shear or low-moisture conditions
+
+**Next Action:** Wired as the authoritative sugar-reactivity prior for Family 07. Activation energies (glucose 106 kJ/mol, ribose 114 kJ/mol) are now hardcoded in curated_pathways.py.
+
+---
+
+### Martins, Jongen & van Boekel (2000), Trends Food Sci. Technol. 11:364
+- **DOI:** [10.1016/s0924-2244(01)00022-x](https://doi.org/10.1016/s0924-2244(01)00022-x)
+- **Matrix Family:** lysine_sugar_model_system
+- **Kind:** `directional_prior`
+- **Payload Role:** `benchmark_intake`
+- **Status:** `ready_for_directional_prior_encoding`
+
+| Criterion | Assessment |
+|---|---|
+| ✅ | Matrix family / reactant identity specified |
+| ❌ | Precursor concentrations not specified |
+| ❌ | Temperature, time or pH missing from key_values |
+| ❌ | Analytical output mode not specified |
+| ❌ | Yields reported in relative/qualitative mode only |
+| ❌ | Replicates < 3 or not specified |
+| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
+| ❌ | No sensory or odor threshold tags present |
+
+**Score: 1/8 → Rejected**
+
+**What it supports:**
+- Mechanistic kinetic modelling framework for the Maillard reaction hierarchy
+
+**What it does not support:**
+- Standalone plant-matrix benchmark closure
+
+**Next Action:** Keep as co-reference to van_boekel_2001 for mechanistic context in Family 07.
+
+---
+
 ## Confirmed Gaps and Structural Limitations
 
 - **Matrix Transferability Gap:** Most kinetic and volatile data for `Reducing sugar and carbonyl donor hierarchy` are derived from simple aqueous buffers or free model systems. Transferability to complex plant-based meat matrices (e.g., Pea Protein Isolate or Soy Protein Isolate) under high-moisture extrusion remains a major gap.
@@ -451,21 +405,20 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 7
 
-Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references: **4**, Rejected: **7**)
+Total papers analyzed: **10** (Benchmark-eligible: **0**, Calibration references: **5**, Rejected: **5**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Cerny & Davídek (2003) | 3/8 | ⚠️ Calibration | aqueous_model_system |
-| Maillard & van Boekel (1992) | 2/8 | ❌ Rejected | aqueous_sugar_lysine_model_system |
-| Blank et al. (1997) | 3/8 | ⚠️ Calibration | aqueous_model_system |
-| Liu et al. (2022) | 2/8 | ❌ Rejected | pea_protein_isolate |
-| Huang et al. (2024) | 3/8 | ⚠️ Calibration | free_model_system |
-| Martins & van Boekel (2003) | 3/8 | ⚠️ Calibration | free_model_system |
-| Nashalian & Yaylayan (2014) | 2/8 | ❌ Rejected | free_model_system |
-| Wang et al. (2024) | 2/8 | ❌ Rejected | free_model_system |
-| Blank & Mottram (Mercaptoketone labelling 2002) | 2/8 | ❌ Rejected | free_model_system |
-| Buera et al. (1987) | 2/8 | ❌ Rejected | free_model_system |
-| Poulsen et al. (2023) | 2/8 | ❌ Rejected | plant_based_meat_analogue |
+| Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358 | 3/8 | ⚠️ Calibration | aqueous_model_system |
+| Blank & Fay (1996), J. Agric. Food Chem. 44:531 | 3/8 | ⚠️ Calibration | aqueous_model_system |
+| Zhang et al. (2024), J. Agric. Food Chem. 72:22461 | 3/8 | ⚠️ Calibration | free_model_system |
+| Martins & van Boekel (2003), Carbohydr. Res. 338:1665 | 3/8 | ⚠️ Calibration | free_model_system |
+| Nashalian & Yaylayan (2014), J. Agric. Food Chem. 62:8518 | 2/8 | ❌ Rejected | free_model_system |
+| Cerny & Davidek (2004), J. Agric. Food Chem. 52:958 | 2/8 | ❌ Rejected | free_model_system |
+| Buera, Chirife, Resnik & Wetzler (1987), J. Food Sci. 52:1063 | 2/8 | ❌ Rejected | free_model_system |
+| Fu, Ma, Wang, Sun, Chen, Cheng & Liu (2023), Foods 12:1967 | 2/8 | ❌ Rejected | plant_based_meat_analogue |
+| van Boekel (2001) | 3/8 | ⚠️ Calibration | lysine_sugar_model_system |
+| Martins, Jongen & van Boekel (2000), Trends Food Sci. Technol. 11:364 | 1/8 | ❌ Rejected | lysine_sugar_model_system |
 
 ---
 
@@ -475,26 +428,25 @@ Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Cerny & Davídek (2003)` (Score: 3/8)
-- `Blank et al. (1997)` (Score: 3/8)
-- `Huang et al. (2024)` (Score: 3/8)
-- `Martins & van Boekel (2003)` (Score: 3/8)
+- `Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358` (Score: 3/8)
+- `Blank & Fay (1996), J. Agric. Food Chem. 44:531` (Score: 3/8)
+- `Zhang et al. (2024), J. Agric. Food Chem. 72:22461` (Score: 3/8)
+- `Martins & van Boekel (2003), Carbohydr. Res. 338:1665` (Score: 3/8)
+- `van Boekel (2001)` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Maillard & van Boekel (1992)` (Score: 2/8)
-- `Liu et al. (2022)` (Score: 2/8)
-- `Nashalian & Yaylayan (2014)` (Score: 2/8)
-- `Wang et al. (2024)` (Score: 2/8)
-- `Blank & Mottram (Mercaptoketone labelling 2002)` (Score: 2/8)
-- `Buera et al. (1987)` (Score: 2/8)
-- `Poulsen et al. (2023)` (Score: 2/8)
+- `Nashalian & Yaylayan (2014), J. Agric. Food Chem. 62:8518` (Score: 2/8)
+- `Cerny & Davidek (2004), J. Agric. Food Chem. 52:958` (Score: 2/8)
+- `Buera, Chirife, Resnik & Wetzler (1987), J. Food Sci. 52:1063` (Score: 2/8)
+- `Fu, Ma, Wang, Sun, Chen, Cheng & Liu (2023), Foods 12:1967` (Score: 2/8)
+- `Martins, Jongen & van Boekel (2000), Trends Food Sci. Technol. 11:364` (Score: 1/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/precursor_resolver.py`, `src/literature_runtime.py` must explicitly account for `carbonyl_donor_hierarchy` as a modifier when predicting `ribose`, `xylose`, `glucose`, `fructose` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `carbonyl_donor_hierarchy` as a modifier when predicting `ribose`, `xylose`, `glucose`, `fructose` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `immediate_expansion_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

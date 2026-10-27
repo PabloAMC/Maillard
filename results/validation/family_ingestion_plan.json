@@ -62,32 +62,32 @@
       "09",
       "06"
     ],
-    "backlog_family_count": 14,
-    "backlog_citation_count": 50,
+    "backlog_family_count": 13,
+    "backlog_citation_count": 38,
     "recommended_runtime_queue": [
-      "07",
       "11",
       "12",
       "03",
-      "04"
+      "04",
+      "05"
     ],
     "recommended_next_family": {
-      "slr_family": "07",
-      "family_id": "carbonyl_donor_hierarchy",
-      "display_name": "Reducing sugar and carbonyl donor hierarchy",
-      "priority_score": 82.9,
+      "slr_family": "11",
+      "family_id": "lipid_maillard_crosstalk",
+      "display_name": "Maillard/Lipid Crosstalk",
+      "priority_score": 84.8,
       "recommended_slice": {
-        "focus": "land donor identity as a benchmark-facing formulation variable",
+        "focus": "wire lipid-Maillard competition constants into the runtime competition surface",
         "target_modules": [
-          "src/precursor_resolver.py",
-          "src/literature_runtime.py"
+          "src/lipid_oxidation.py"
         ],
         "candidate_citations": [
-          "Resmini & Pellegrino (1994)"
+          "DOI ref. 40 in raw/11_maillard_lipid_crosstalk.md",
+          "Deakin University / ref. 42"
         ],
         "preferred_payload_types": [
           "benchmark_payload",
-          "flavor_reference_payload"
+          "computational_prior"
         ]
       }
     },
@@ -113,11 +113,7 @@
       "benchmarkability_status": "already_benchmarked_core",
       "implementation_wave": 0,
       "order_in_wave": 0,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/literature_runtime.py",
-        "src/benchmark_validation.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "2-methyl-3-furanthiol",
         "2-furfurylthiol",
@@ -133,10 +129,16 @@
       "next_curation_actions": [
         "Keep as the quantitative trunk and dependency map."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/benchmark_validation.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 0,
         "high_confidence_count": 0,
-        "occurrence_count": 5,
+        "occurrence_count": 4,
         "top_citations": []
       },
       "execution_priority": {
@@ -146,11 +148,7 @@
         "priority_score": 16.8,
         "recommended_slice": {
           "focus": "Keep as the quantitative trunk and dependency map.",
-          "target_modules": [
-            "src/precursor_resolver.py",
-            "src/literature_runtime.py",
-            "src/benchmark_validation.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [],
           "preferred_payload_types": [
             "benchmark_payload",
@@ -176,8 +174,7 @@
       "implementation_wave": 1,
       "order_in_wave": 1,
       "target_runtime_modules": [
-        "src/lipid_oxidation.py",
-        "src/literature_runtime.py"
+        "src/lipid_oxidation.py"
       ],
       "target_compounds_or_state_variables": [
         "hexanal",
@@ -197,10 +194,14 @@
       "next_curation_actions": [
         "Split into adverse-marker and carbonyl-competition sub-lanes."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 0,
-        "high_confidence_count": 7,
-        "occurrence_count": 17,
+        "high_confidence_count": 3,
+        "occurrence_count": 12,
         "top_citations": []
       },
       "execution_priority": {
@@ -211,8 +212,7 @@
         "recommended_slice": {
           "focus": "split adverse lipid markers from carbonyl-competition priors",
           "target_modules": [
-            "src/lipid_oxidation.py",
-            "src/literature_runtime.py"
+            "src/lipid_oxidation.py"
           ],
           "candidate_citations": [],
           "preferred_payload_types": [
@@ -238,10 +238,7 @@
       "benchmarkability_status": "benchmark_ready_donor_lane",
       "implementation_wave": 1,
       "order_in_wave": 2,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/literature_runtime.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "ribose",
         "xylose",
@@ -259,28 +256,26 @@
       "next_curation_actions": [
         "Encode donor identity as a first-class formulation variable."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/literature_runtime.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
-        "citation_count": 1,
-        "high_confidence_count": 5,
-        "occurrence_count": 22,
-        "top_citations": [
-          "Resmini & Pellegrino (1994)"
-        ]
+        "citation_count": 0,
+        "high_confidence_count": 4,
+        "occurrence_count": 19,
+        "top_citations": []
       },
       "execution_priority": {
         "impact_score": 0.96,
-        "ease_score": 0.98,
-        "evidence_score": 0.412,
-        "priority_score": 82.9,
+        "ease_score": 0.88,
+        "evidence_score": 0.0,
+        "priority_score": 69.6,
         "recommended_slice": {
           "focus": "land donor identity as a benchmark-facing formulation variable",
-          "target_modules": [
-            "src/precursor_resolver.py",
-            "src/literature_runtime.py"
-          ],
-          "candidate_citations": [
-            "Resmini & Pellegrino (1994)"
-          ],
+          "target_modules": [],
+          "candidate_citations": [],
           "preferred_payload_types": [
             "benchmark_payload",
             "flavor_reference_payload"
@@ -305,8 +300,6 @@
       "implementation_wave": 1,
       "order_in_wave": 3,
       "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py",
         "src/matrix_prior_registry.py"
       ],
       "target_compounds_or_state_variables": [
@@ -325,32 +318,35 @@
       "next_curation_actions": [
         "Implement fermentation as an upstream state modifier."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
-        "citation_count": 7,
+        "citation_count": 5,
         "high_confidence_count": 2,
-        "occurrence_count": 11,
+        "occurrence_count": 8,
         "top_citations": [
-          "Amarita et al. (2004)",
           "Bacher, Eberhardt & M\u00fcller (2023)",
-          "Deng et al. (2024)"
+          "Deng et al. (2024)",
+          "Noda, Tanaka & Takahashi (2003)"
         ]
       },
       "execution_priority": {
         "impact_score": 0.88,
-        "ease_score": 0.95,
+        "ease_score": 0.98,
         "evidence_score": 0.6,
-        "priority_score": 83.1,
+        "priority_score": 84.0,
         "recommended_slice": {
           "focus": "bind fermentation pretreatment state to precursor release and pH-shift effects",
           "target_modules": [
-            "src/literature_runtime.py",
-            "src/recommend.py",
             "src/matrix_prior_registry.py"
           ],
           "candidate_citations": [
-            "Amarita et al. (2004)",
             "Bacher, Eberhardt & M\u00fcller (2023)",
-            "Deng et al. (2024)"
+            "Deng et al. (2024)",
+            "Noda, Tanaka & Takahashi (2003)"
           ],
           "preferred_payload_types": [
             "benchmark_payload",
@@ -376,10 +372,7 @@
       "benchmarkability_status": "negative_control_and_guardrail_lane",
       "implementation_wave": 1,
       "order_in_wave": 4,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/safety.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "dicarbonyl_trapping_factor",
         "amino_group_blocking_factor"
@@ -395,31 +388,33 @@
       "next_curation_actions": [
         "Represent inhibitor loads as family-aware priors."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/safety.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
-        "citation_count": 9,
+        "citation_count": 3,
         "high_confidence_count": 1,
-        "occurrence_count": 15,
+        "occurrence_count": 8,
         "top_citations": [
-          "Arntfield et al. (1994/compiled)",
           "Kocada\u011fl\u0131 & G\u00f6kmen (2016)",
-          "Nakagawa et al. (2004)"
+          "Brash (1999)",
+          "Sessa & Rackis (1977/compiled)"
         ]
       },
       "execution_priority": {
         "impact_score": 0.78,
         "ease_score": 0.98,
-        "evidence_score": 0.6,
-        "priority_score": 79.5,
+        "evidence_score": 0.537,
+        "priority_score": 77.9,
         "recommended_slice": {
           "focus": "Represent inhibitor loads as family-aware priors.",
-          "target_modules": [
-            "src/literature_runtime.py",
-            "src/safety.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
-            "Arntfield et al. (1994/compiled)",
             "Kocada\u011fl\u0131 & G\u00f6kmen (2016)",
-            "Nakagawa et al. (2004)"
+            "Brash (1999)",
+            "Sessa & Rackis (1977/compiled)"
           ],
           "preferred_payload_types": [
             "benchmark_payload",
@@ -445,8 +440,7 @@
       "implementation_wave": 1,
       "order_in_wave": 5,
       "target_runtime_modules": [
-        "src/lipid_oxidation.py",
-        "src/sensory.py"
+        "src/lipid_oxidation.py"
       ],
       "target_compounds_or_state_variables": [
         "hexanal",
@@ -467,6 +461,10 @@
       "next_curation_actions": [
         "Implement the hexanal/MFT competition surface."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/sensory.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 2,
         "high_confidence_count": 5,
@@ -484,8 +482,7 @@
         "recommended_slice": {
           "focus": "wire lipid-Maillard competition constants into the runtime competition surface",
           "target_modules": [
-            "src/lipid_oxidation.py",
-            "src/sensory.py"
+            "src/lipid_oxidation.py"
           ],
           "candidate_citations": [
             "DOI ref. 40 in raw/11_maillard_lipid_crosstalk.md",
@@ -514,7 +511,6 @@
       "implementation_wave": 1,
       "order_in_wave": 6,
       "target_runtime_modules": [
-        "src/safety.py",
         "src/extrusion.py"
       ],
       "target_compounds_or_state_variables": [
@@ -535,10 +531,14 @@
       "next_curation_actions": [
         "Integrate AGE/ALE kinetics into the safety module."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/safety.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 2,
         "high_confidence_count": 2,
-        "occurrence_count": 17,
+        "occurrence_count": 16,
         "top_citations": [
           "Raman/SDS",
           "Refs. 7 + 9 (TGase)"
@@ -552,7 +552,6 @@
         "recommended_slice": {
           "focus": "expand safety damage proxies with benchmark-backed guardrail payloads",
           "target_modules": [
-            "src/safety.py",
             "src/extrusion.py"
           ],
           "candidate_citations": [
@@ -581,10 +580,7 @@
       "benchmarkability_status": "mechanistic_modifier",
       "implementation_wave": 1,
       "order_in_wave": 7,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/literature_runtime.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "quinone_budget",
         "cysteine_depletion_factor"
@@ -601,6 +597,11 @@
       "next_curation_actions": [
         "Implement the pH-dependent quinone-thiol kinetics."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/literature_runtime.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 4,
         "high_confidence_count": 2,
@@ -618,10 +619,7 @@
         "priority_score": 69.9,
         "recommended_slice": {
           "focus": "Implement the pH-dependent quinone-thiol kinetics.",
-          "target_modules": [
-            "src/precursor_resolver.py",
-            "src/literature_runtime.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
             "J. Agric. Food Chem. 2023 (Ref. 18)",
             "PMC PMCID:PMC12844103 (Ref. 3)",
@@ -649,10 +647,7 @@
       "benchmarkability_status": "calibration_ready_support_lane",
       "implementation_wave": 2,
       "order_in_wave": 1,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "thiamine_availability",
         "2-methyl-3-furanthiol"
@@ -669,10 +664,15 @@
       "next_curation_actions": [
         "Model thiamine first as an availability modifier."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 1,
-        "high_confidence_count": 5,
-        "occurrence_count": 11,
+        "high_confidence_count": 4,
+        "occurrence_count": 9,
         "top_citations": [
           "van den Ouweland & Peer (1975)"
         ]
@@ -684,10 +684,7 @@
         "priority_score": 70.6,
         "recommended_slice": {
           "focus": "promote thiamine from availability cue to calibrated sulfur-support modifier",
-          "target_modules": [
-            "src/literature_runtime.py",
-            "src/recommend.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
             "van den Ouweland & Peer (1975)"
           ],
@@ -713,10 +710,7 @@
       "benchmarkability_status": "calibration_ready_support_lane",
       "implementation_wave": 2,
       "order_in_wave": 2,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "IMP",
         "GMP",
@@ -734,29 +728,29 @@
       "next_curation_actions": [
         "Encode nucleotide enrichment state variables explicitly."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
-        "citation_count": 2,
-        "high_confidence_count": 5,
-        "occurrence_count": 16,
+        "citation_count": 1,
+        "high_confidence_count": 3,
+        "occurrence_count": 10,
         "top_citations": [
-          "Zhang et al. (2009)",
-          "Ishii & Saito (1991)"
+          "Zhang et al. (2009)"
         ]
       },
       "execution_priority": {
         "impact_score": 0.82,
         "ease_score": 0.78,
-        "evidence_score": 0.475,
-        "priority_score": 72.2,
+        "evidence_score": 0.412,
+        "priority_score": 70.6,
         "recommended_slice": {
           "focus": "encode nucleotide and ribose enrichment as explicit upstream state variables",
-          "target_modules": [
-            "src/literature_runtime.py",
-            "src/recommend.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
-            "Zhang et al. (2009)",
-            "Ishii & Saito (1991)"
+            "Zhang et al. (2009)"
           ],
           "preferred_payload_types": [
             "flavor_reference_payload",
@@ -780,10 +774,7 @@
       "benchmarkability_status": "support_lane_with_bounded_quantitative_anchors",
       "implementation_wave": 2,
       "order_in_wave": 3,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "glutathione_support_factor",
         "kokumi_support_signal"
@@ -799,14 +790,19 @@
       "next_curation_actions": [
         "Model peptide-bound sulfur as a support lane."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
-        "citation_count": 6,
-        "high_confidence_count": 3,
-        "occurrence_count": 11,
+        "citation_count": 5,
+        "high_confidence_count": 2,
+        "occurrence_count": 8,
         "top_citations": [
           "Lee, Jo & Kim (1998)",
-          "Maehashi et al. (2008)",
-          "Rietjens et al. (2023)"
+          "Rietjens et al. (2023)",
+          "Rocha et al. (2024)"
         ]
       },
       "execution_priority": {
@@ -816,14 +812,11 @@
         "priority_score": 76.8,
         "recommended_slice": {
           "focus": "bound peptide and glutathione support with reusable sulfur-lane priors",
-          "target_modules": [
-            "src/literature_runtime.py",
-            "src/recommend.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
             "Lee, Jo & Kim (1998)",
-            "Maehashi et al. (2008)",
-            "Rietjens et al. (2023)"
+            "Rietjens et al. (2023)",
+            "Rocha et al. (2024)"
           ],
           "preferred_payload_types": [
             "computational_prior",
@@ -847,11 +840,7 @@
       "benchmarkability_status": "bounded_source_term",
       "implementation_wave": 2,
       "order_in_wave": 4,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/sensory.py",
-        "src/safety.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "ascorbic_acid_loss",
         "3-deoxythreosone",
@@ -871,6 +860,12 @@
       "next_curation_actions": [
         "Implement the biphasic AA functionality."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/sensory.py",
+        "retired 2026-09-03 (B5b): src/safety.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 3,
         "high_confidence_count": 4,
@@ -883,16 +878,12 @@
       },
       "execution_priority": {
         "impact_score": 0.58,
-        "ease_score": 0.7,
+        "ease_score": 0.73,
         "evidence_score": 0.537,
-        "priority_score": 60.5,
+        "priority_score": 61.4,
         "recommended_slice": {
           "focus": "bound ascorbic-acid dicarbonyl source terms before they leak into safety claims",
-          "target_modules": [
-            "src/precursor_resolver.py",
-            "src/sensory.py",
-            "src/safety.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
             "PubMed PMID:20420424 (Ref. 35)",
             "Refs. 10 + 33 (combined)",
@@ -920,10 +911,7 @@
       "benchmarkability_status": "mechanistic_to_bounded_closure",
       "implementation_wave": 2,
       "order_in_wave": 5,
-      "target_runtime_modules": [
-        "src/precursor_resolver.py",
-        "src/sensory.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "PE_glycation_fraction",
         "available_sugar_subtraction"
@@ -941,6 +929,11 @@
       "next_curation_actions": [
         "Implement the 1:2 sugar-PE stoichiometry multiplier."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/precursor_resolver.py",
+        "retired 2026-09-03 (B5b): src/sensory.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 4,
         "high_confidence_count": 2,
@@ -958,10 +951,7 @@
         "priority_score": 65.4,
         "recommended_slice": {
           "focus": "Implement the 1:2 sugar-PE stoichiometry multiplier.",
-          "target_modules": [
-            "src/precursor_resolver.py",
-            "src/sensory.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
             "J. Agric. Food Chem. 2000 (Ref. 22)",
             "PMC PMCID:PMC1329438 (Refs. 36/37)",
@@ -990,8 +980,7 @@
       "implementation_wave": 2,
       "order_in_wave": 6,
       "target_runtime_modules": [
-        "src/extrusion.py",
-        "src/sensory.py"
+        "src/extrusion.py"
       ],
       "target_compounds_or_state_variables": [
         "melanoidin_mass",
@@ -1010,6 +999,10 @@
       "next_curation_actions": [
         "Implement pseudo-zero-order melanoidin accumulation."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/sensory.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
         "citation_count": 4,
         "high_confidence_count": 3,
@@ -1028,8 +1021,7 @@
         "recommended_slice": {
           "focus": "Implement pseudo-zero-order melanoidin accumulation.",
           "target_modules": [
-            "src/extrusion.py",
-            "src/sensory.py"
+            "src/extrusion.py"
           ],
           "candidate_citations": [
             "MDPI Foods 2023 Ref. 26 + CABI Ref. 27",
@@ -1059,10 +1051,7 @@
       "benchmarkability_status": "severity_and_failure_mode_lane",
       "implementation_wave": 3,
       "order_in_wave": 1,
-      "target_runtime_modules": [
-        "src/literature_runtime.py",
-        "src/recommend.py"
-      ],
+      "target_runtime_modules": [],
       "target_compounds_or_state_variables": [
         "HMF",
         "furfural",
@@ -1080,10 +1069,15 @@
       "next_curation_actions": [
         "Use first as a severity and failure-mode lane."
       ],
+      "retired_runtime_modules": [
+        "retired 2026-09-03 (B5b): src/literature_runtime.py",
+        "retired 2026-09-03 (B5b): src/recommend.py"
+      ],
+      "retirement_note": "deleted 2026-09-03 (retirement step B5b, the legacy screening lane and its harness); the kinetic core's lane coverage is declared in src/kinetic_core/__init__.py",
       "deep_research_backlog": {
-        "citation_count": 4,
+        "citation_count": 3,
         "high_confidence_count": 4,
-        "occurrence_count": 13,
+        "occurrence_count": 11,
         "top_citations": [
           "Degen et al. (2012)",
           "Mottram (1998)",
@@ -1093,14 +1087,11 @@
       "execution_priority": {
         "impact_score": 0.68,
         "ease_score": 0.8,
-        "evidence_score": 0.6,
-        "priority_score": 69.6,
+        "evidence_score": 0.537,
+        "priority_score": 68.0,
         "recommended_slice": {
           "focus": "Use first as a severity and failure-mode lane.",
-          "target_modules": [
-            "src/literature_runtime.py",
-            "src/recommend.py"
-          ],
+          "target_modules": [],
           "candidate_citations": [
             "Degen et al. (2012)",
             "Mottram (1998)",
@@ -1149,7 +1140,7 @@
       "deep_research_backlog": {
         "citation_count": 1,
         "high_confidence_count": 5,
-        "occurrence_count": 25,
+        "occurrence_count": 24,
         "top_citations": [
           "ResearchGate 2025 (six-source comparison)"
         ]

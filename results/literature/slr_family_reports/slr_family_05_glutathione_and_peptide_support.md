@@ -1,9 +1,9 @@
 # Systematic Literature Review — Family 5: Glutathione and peptide support
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-10-27  
 **Objective:** Identify papers with quantitative data usable as benchmarks or calibration references covering glutathione and peptide support.  
 **Strategic Posture:** `high_value_support_lane`  
 **Runtime Concept:** `sulfur_peptide_support`  
-**Scope & Targets:** Covers target compounds/variables: `glutathione_support_factor`, `kokumi_support_signal`. Preferred payload types: `computational_prior`, `flavor_reference_payload`. Target runtime modules: `src/literature_runtime.py`, `src/recommend.py`.  
+**Scope & Targets:** Covers target compounds/variables: `glutathione_support_factor`, `kokumi_support_signal`. Preferred payload types: `computational_prior`, `flavor_reference_payload`. Target runtime modules: .  
 
 ---
 
@@ -78,8 +78,8 @@
 
 ---
 
-### Koblar et al. (2011)
-- **DOI:** [10.1016/j.foodchem.2011.07.037](https://doi.org/10.1016/j.foodchem.2011.07.037)
+### Wang, Yang & Song (2012), Food Chemistry 131:280
+- **DOI:** [10.1016/j.foodchem.2011.08.079](https://doi.org/10.1016/j.foodchem.2011.08.079)
 - **Matrix Family:** glutathione_xylose_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -122,8 +122,8 @@
 
 ---
 
-### Ohsu et al. (2025)
-- **DOI:** [10.1021/acs.jafc.2c04919](https://doi.org/10.1021/acs.jafc.2c04919)
+### Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016
+- **DOI:** [10.1074/jbc.M109.029165](https://doi.org/10.1074/jbc.M109.029165)
 - **Matrix Family:** gamma_glutamyl_peptide_msg_model
 - **Kind:** `calibration_reference`
 - **Payload Role:** `benchmark_intake`
@@ -166,48 +166,8 @@
 
 ---
 
-### Huang et al. (2021)
-- **DOI:** [10.1016/j.lwt.2021.111352](https://doi.org/10.1016/j.lwt.2021.111352)
-- **Matrix Family:** aqueous_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `mft_oav` | `9550.0` |
-| `fft_oav` | `24800.0` |
-| `identified_volatile_count` | `89` |
-| `replicates` | `3` |
-
-**What it supports:**
-- High-OAV support for sulfur markers in cysteine-xylose-glutamate systems
-- Bounded interpretation that MFT and FFT stay strongly favored in sulfur-positive pentose systems
-
-**What it does not support:**
-- Absolute ppb closure
-- Matrix-specific trapping or release
-
-**Next Action:** Keep encoded as a bounded sulfur-support prior for MFT and FFT prominence rather than as a benchmark payload.
-
----
-
-### Xu, H. et al. (2025), PMC11743841
-- **DOI:** [10.1186/s12934-025-02688-w](https://doi.org/10.1186/s12934-025-02688-w)
+### Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1
+- **DOI:** [10.5851/kosfa.2024.e133](https://doi.org/10.5851/kosfa.2024.e133)
 - **Matrix Family:** free_model_system
 - **Kind:** `calibration_reference`
 - **Payload Role:** `computational_prior`
@@ -241,48 +201,6 @@
 - Absolute volatile partitioning values
 
 **Next Action:** Encode peptide sequence reactivity hierarchy priors.
-
----
-
-### Fadel et al. (2015)
-- **DOI:** [10.1016/j.foodchem.2015.00000](https://doi.org/10.1016/j.foodchem.2015.00000)
-- **Matrix Family:** soy_isolate
-- **Kind:** `calibration_reference`
-- **Payload Role:** `retention_payload`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ✅ | Odor thresholds / sensory reported |
-
-**Score: 5/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `replicates` | `3` |
-| `temperature_C` | `40.0` |
-| `ph` | `4.0` |
-| `analyte` | `2-methyl-3-furanthiol` |
-| `binding_parameter_type` | `percentage_retention` |
-| `value` | `47.78` |
-| `unit` | `%` |
-| `analytical_method` | `HS-SPME-GC-MS` |
-
-**What it supports:**
-- MFT percentage retention of 47.78% in heat-denatured soy isolate at pH 4.0, 40°C.
-
-**What it does not support:**
-- Extrusion high-shear physical matrix transformations.
-
-**Next Action:** Keep encoded as a soy isolate MFT retention anchor.
 
 ---
 
@@ -328,7 +246,7 @@
 
 ---
 
-### Adams et al. (2001)
+### Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333
 - **DOI:** [10.1021/jf0100797](https://doi.org/10.1021/jf0100797)
 - **Matrix Family:** soy_isolate
 - **Kind:** `calibration_reference`
@@ -370,8 +288,8 @@
 
 ---
 
-### Sharma et al. (2025)
-- **DOI:** [10.1016/j.foodchem.2025.145815](https://doi.org/10.1016/j.foodchem.2025.145815)
+### Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712
+- **DOI:** [10.1016/j.fochx.2026.103712](https://doi.org/10.1016/j.fochx.2026.103712)
 - **Matrix Family:** pea_isolate
 - **Kind:** `calibration_reference`
 - **Payload Role:** `retention_payload`
@@ -503,19 +421,17 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 5
 
-Total papers analyzed: **11** (Benchmark-eligible: **1**, Calibration references: **9**, Rejected: **1**)
+Total papers analyzed: **9** (Benchmark-eligible: **1**, Calibration references: **7**, Rejected: **1**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Nishimura & Abe (2024) | 6/8 | ✅ Eligible | soy_hydrolysate |
-| Koblar et al. (2011) | 5/8 | ⚠️ Calibration | glutathione_xylose_model |
-| Ohsu et al. (2025) | 4/8 | ⚠️ Calibration | gamma_glutamyl_peptide_msg_model |
-| Huang et al. (2021) | 3/8 | ⚠️ Calibration | aqueous_model_system |
-| Xu, H. et al. (2025), PMC11743841 | 2/8 | ❌ Rejected | free_model_system |
-| Fadel et al. (2015) | 5/8 | ⚠️ Calibration | soy_isolate |
+| Wang, Yang & Song (2012), Food Chemistry 131:280 | 5/8 | ⚠️ Calibration | glutathione_xylose_model |
+| Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016 | 4/8 | ⚠️ Calibration | gamma_glutamyl_peptide_msg_model |
+| Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1 | 2/8 | ❌ Rejected | free_model_system |
 | Wang et al. (2023) | 5/8 | ⚠️ Calibration | soy_isolate |
-| Adams et al. (2001) | 5/8 | ⚠️ Calibration | soy_isolate |
-| Sharma et al. (2025) | 5/8 | ⚠️ Calibration | pea_isolate |
+| Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333 | 5/8 | ⚠️ Calibration | soy_isolate |
+| Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712 | 5/8 | ⚠️ Calibration | pea_isolate |
 | Sun et al. (2026) | 3/8 | ⚠️ Calibration | soy_isolate |
 | Sun et al. (2025) | 3/8 | ⚠️ Calibration | pea_isolate |
 
@@ -527,25 +443,23 @@ Total papers analyzed: **11** (Benchmark-eligible: **1**, Calibration references
 - `Nishimura & Abe (2024)` (Score: 6/8)
 
 ### CALIBRATION (Score 3-5)
-- `Koblar et al. (2011)` (Score: 5/8)
-- `Ohsu et al. (2025)` (Score: 4/8)
-- `Huang et al. (2021)` (Score: 3/8)
-- `Fadel et al. (2015)` (Score: 5/8)
+- `Wang, Yang & Song (2012), Food Chemistry 131:280` (Score: 5/8)
+- `Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016` (Score: 4/8)
 - `Wang et al. (2023)` (Score: 5/8)
-- `Adams et al. (2001)` (Score: 5/8)
-- `Sharma et al. (2025)` (Score: 5/8)
+- `Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333` (Score: 5/8)
+- `Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712` (Score: 5/8)
 - `Sun et al. (2026)` (Score: 3/8)
 - `Sun et al. (2025)` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Xu, H. et al. (2025), PMC11743841` (Score: 2/8)
+- `Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1` (Score: 2/8)
 
 ---
 
 ## Model corrections identified during review
 
-1. **Precursor Sourcing & Translation:** The precursor resolution logic in `src/literature_runtime.py`, `src/recommend.py` must explicitly account for `sulfur_peptide_support` as a modifier when predicting `glutathione_support_factor`, `kokumi_support_signal` yields.
+1. **Precursor Sourcing & Translation:** The precursor resolution logic in  must explicitly account for `sulfur_peptide_support` as a modifier when predicting `glutathione_support_factor`, `kokumi_support_signal` yields.
 2. **Dynamic Calibration Offsets:** Apply the identified `high_value_support_lane` parameters to set the relative boundaries and calibration offsets for the chemical species.
 3. **Environmental Sensitivities:** Implement temperature and pH scaling factors to simulate matrices where buffering or thermal degradation deviates from optimal model system pathways.
 
-*Programmatically generated on 2026-05-29 using Maillard Ingestion Pipeline.*
+*Programmatically generated on 2026-10-27 using Maillard Ingestion Pipeline.*

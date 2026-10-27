@@ -25,47 +25,46 @@
 | ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | 1 | 12 | Protein Damage Markers | 2 | 2 | 1.00 | 0.95 | 85.4 | expand safety damage proxies with benchmark-backed guardrail payloads |
 | 2 | 11 | Maillard/Lipid Crosstalk | 2 | 5 | 1.00 | 0.93 | 84.8 | wire lipid-Maillard competition constants into the runtime competition surface |
-| 3 | 10 | Microbial fermentation pretreatment | 7 | 2 | 0.88 | 0.95 | 83.1 | bind fermentation pretreatment state to precursor release and pH-shift effects |
-| 4 | 07 | Reducing sugar and carbonyl donor hierarchy | 1 | 5 | 0.96 | 0.98 | 82.9 | land donor identity as a benchmark-facing formulation variable |
-| 5 | 08 | Plant off-notes and Maillard suppression | 9 | 1 | 0.78 | 0.98 | 79.5 | Represent inhibitor loads as family-aware priors. |
-| 6 | 05 | Glutathione and peptide support | 6 | 3 | 0.82 | 0.83 | 76.8 | bound peptide and glutathione support with reusable sulfur-lane priors |
-| 7 | 04 | Nucleotide degradation and ribose support | 2 | 5 | 0.82 | 0.78 | 72.2 | encode nucleotide and ribose enrichment as explicit upstream state variables |
-| 8 | 03 | Thiamine degradation and sulfur support | 1 | 5 | 0.82 | 0.78 | 70.6 | promote thiamine from availability cue to calibrated sulfur-support modifier |
-| 9 | 13 | Polyphenol-Amino Capping | 4 | 2 | 0.60 | 0.93 | 69.9 | Implement the pH-dependent quinone-thiol kinetics. |
-| 10 | 09 | Carbohydrate pyrolysis and caramelization | 4 | 4 | 0.68 | 0.80 | 69.6 | Use first as a severity and failure-mode lane. |
-| 11 | 15 | PE Stealth Sugar Sink | 4 | 2 | 0.60 | 0.78 | 65.4 | Implement the 1:2 sugar-PE stoichiometry multiplier. |
-| 12 | 06 | Alternative protein matrix scope | 1 | 5 | 0.68 | 0.78 | 64.3 | extend matrix-family scope without over-claiming transferred closure |
-| 13 | 16 | Melanoidin Polymerization | 4 | 3 | 0.54 | 0.78 | 62.7 | Implement pseudo-zero-order melanoidin accumulation. |
-| 14 | 14 | Ascorbic Acid Maillard | 3 | 4 | 0.58 | 0.70 | 60.5 | bound ascorbic-acid dicarbonyl source terms before they leak into safety claims |
+| 3 | 10 | Microbial fermentation pretreatment | 5 | 2 | 0.88 | 0.98 | 84.0 | bind fermentation pretreatment state to precursor release and pH-shift effects |
+| 4 | 08 | Plant off-notes and Maillard suppression | 3 | 1 | 0.78 | 0.98 | 77.9 | Represent inhibitor loads as family-aware priors. |
+| 5 | 05 | Glutathione and peptide support | 5 | 2 | 0.82 | 0.83 | 76.8 | bound peptide and glutathione support with reusable sulfur-lane priors |
+| 6 | 03 | Thiamine degradation and sulfur support | 1 | 4 | 0.82 | 0.78 | 70.6 | promote thiamine from availability cue to calibrated sulfur-support modifier |
+| 7 | 04 | Nucleotide degradation and ribose support | 1 | 3 | 0.82 | 0.78 | 70.6 | encode nucleotide and ribose enrichment as explicit upstream state variables |
+| 8 | 13 | Polyphenol-Amino Capping | 4 | 2 | 0.60 | 0.93 | 69.9 | Implement the pH-dependent quinone-thiol kinetics. |
+| 9 | 09 | Carbohydrate pyrolysis and caramelization | 3 | 4 | 0.68 | 0.80 | 68.0 | Use first as a severity and failure-mode lane. |
+| 10 | 15 | PE Stealth Sugar Sink | 4 | 2 | 0.60 | 0.78 | 65.4 | Implement the 1:2 sugar-PE stoichiometry multiplier. |
+| 11 | 06 | Alternative protein matrix scope | 1 | 5 | 0.68 | 0.78 | 64.3 | extend matrix-family scope without over-claiming transferred closure |
+| 12 | 16 | Melanoidin Polymerization | 4 | 3 | 0.54 | 0.78 | 62.7 | Implement pseudo-zero-order melanoidin accumulation. |
+| 13 | 14 | Ascorbic Acid Maillard | 3 | 4 | 0.58 | 0.73 | 61.4 | bound ascorbic-acid dicarbonyl source terms before they leak into safety claims |
 
 ## Target Modules
 
 | SLR | Target Modules | Target Observables or State Variables |
 | --- | --- | --- |
-| 01 | src/precursor_resolver.py; src/literature_runtime.py; src/benchmark_validation.py | 2-methyl-3-furanthiol; 2-furfurylthiol; methional; 2,5-dimethylpyrazine |
-| 02 | src/lipid_oxidation.py; src/literature_runtime.py | hexanal; 2-pentylfuran; nonanal; carbonyl_competition_factor |
-| 07 | src/precursor_resolver.py; src/literature_runtime.py | ribose; xylose; glucose; fructose |
-| 10 | src/literature_runtime.py; src/recommend.py; src/matrix_prior_registry.py | free_amino_acid_enrichment; nucleotide_enrichment; pretreatment_pH_shift |
-| 08 | src/literature_runtime.py; src/safety.py | dicarbonyl_trapping_factor; amino_group_blocking_factor |
-| 11 | src/lipid_oxidation.py; src/sensory.py | hexanal; MDA; 4-HNE; radical_quenching_rate |
-| 12 | src/safety.py; src/extrusion.py | CML; CEL; furosine; lysinoalanine |
-| 13 | src/precursor_resolver.py; src/literature_runtime.py | quinone_budget; cysteine_depletion_factor |
-| 03 | src/literature_runtime.py; src/recommend.py | thiamine_availability; 2-methyl-3-furanthiol |
-| 04 | src/literature_runtime.py; src/recommend.py | IMP; GMP; ribose-5-phosphate |
-| 05 | src/literature_runtime.py; src/recommend.py | glutathione_support_factor; kokumi_support_signal |
-| 14 | src/precursor_resolver.py; src/sensory.py; src/safety.py | ascorbic_acid_loss; 3-deoxythreosone; pentosidine_load |
-| 15 | src/precursor_resolver.py; src/sensory.py | PE_glycation_fraction; available_sugar_subtraction |
-| 16 | src/extrusion.py; src/sensory.py | melanoidin_mass; TH_scavenging_factor |
-| 09 | src/literature_runtime.py; src/recommend.py | HMF; furfural; caramelization_severity |
+| 01 | none | 2-methyl-3-furanthiol; 2-furfurylthiol; methional; 2,5-dimethylpyrazine |
+| 02 | src/lipid_oxidation.py | hexanal; 2-pentylfuran; nonanal; carbonyl_competition_factor |
+| 07 | none | ribose; xylose; glucose; fructose |
+| 10 | src/matrix_prior_registry.py | free_amino_acid_enrichment; nucleotide_enrichment; pretreatment_pH_shift |
+| 08 | none | dicarbonyl_trapping_factor; amino_group_blocking_factor |
+| 11 | src/lipid_oxidation.py | hexanal; MDA; 4-HNE; radical_quenching_rate |
+| 12 | src/extrusion.py | CML; CEL; furosine; lysinoalanine |
+| 13 | none | quinone_budget; cysteine_depletion_factor |
+| 03 | none | thiamine_availability; 2-methyl-3-furanthiol |
+| 04 | none | IMP; GMP; ribose-5-phosphate |
+| 05 | none | glutathione_support_factor; kokumi_support_signal |
+| 14 | none | ascorbic_acid_loss; 3-deoxythreosone; pentosidine_load |
+| 15 | none | PE_glycation_fraction; available_sugar_subtraction |
+| 16 | src/extrusion.py | melanoidin_mass; TH_scavenging_factor |
+| 09 | none | HMF; furfural; caramelization_severity |
 | 06 | src/matrix_family_coverage.py; src/matrix_prior_registry.py | matrix_family_support_posture; sulfur_deficiency_risk |
 
 Families tracked: 16
 Recommended first wave: 02, 07, 10, 08, 11, 12, 13
 Active build sequence: 01, 02, 07, 10, 08, 11, 12, 13, 03, 04, 05, 14, 15, 16, 09, 06
-Backlog-bearing families: 14
-Backlog citations mapped to family plan: 50
-Recommended runtime queue: 07, 11, 12, 03, 04
-Recommended next slice: 07 Reducing sugar and carbonyl donor hierarchy -> land donor identity as a benchmark-facing formulation variable
+Backlog-bearing families: 13
+Backlog citations mapped to family plan: 38
+Recommended runtime queue: 11, 12, 03, 04, 05
+Recommended next slice: 11 Maillard/Lipid Crosstalk -> wire lipid-Maillard competition constants into the runtime competition surface
 Mapped scope families: 16
 Unmapped scope families: none
 Policy: extend_the_quantitative_core_by_explicit_family_lanes_with_machine_readable_payloads_not_narrative_only_docs
