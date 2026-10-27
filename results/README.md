@@ -11,7 +11,7 @@ regenerates (`core-scores`, `core-directional`, `core-envelope`, `model-card`, .
 (`scripts/generators/WAVES.md`: not re-run, a change is a new wave). Every live artifact carries a
 `provenance` block (git head, date, input hashes: `src/provenance.py`).
 
-Tracked files: **549**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
+Tracked files: **551**. Local-only (gitignored): scratch runs under `results/quickstart/`, `results/user/`.
 
 ## `results`
 
@@ -71,7 +71,7 @@ Tracked files: **549**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b*_laplace_covariance.json` (6): `kinetic_core_b10_laplace_covariance.json`, `kinetic_core_b47_laplace_covariance.json`, `kinetic_core_b49_laplace_covariance.json`, `kinetic_core_b51_laplace_covariance.json` … | Gauss-Newton covariance at a frozen sulfur optimum (`generate_kinetic_core_b8_laplace.py --wave`). The envelope samples the one matching the shipped fit report; older waves are history. |
 | `kinetic_core_b*_panel*.*` (10): `kinetic_core_b2_4_panel_half.json`, `kinetic_core_b2_4_panel_half.md`, `kinetic_core_b2_4_panel_measured.json`, `kinetic_core_b2_4_panel_measured.md` … | FROZEN per-wave panel scores written by the wave report generators; history. |
 | `kinetic_core_b*_prereg.md` (45): `kinetic_core_b10_prereg.md`, `kinetic_core_b11_prereg.md`, `kinetic_core_b12_prereg.md`, `kinetic_core_b13_prereg.md` … | Pre-registrations written BEFORE each wave ran: what would falsify it. Read by people and pinned by the wave tests. |
-| `kinetic_core_b*_profile.*` (4): `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md`, `kinetic_core_b9_profile.json`, `kinetic_core_b9_profile.md` | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
+| `kinetic_core_b*_profile.*` (6): `kinetic_core_b51_profile.json`, `kinetic_core_b51_profile.md`, `kinetic_core_b8_profile.json`, `kinetic_core_b8_profile.md` … | Slice profiles of the sulfur objective around a frozen optimum (`generate_kinetic_core_b8_profile.py --wave`): quadratic / asymmetric / flat / bound-limited per coordinate. Read by people. |
 | `kinetic_core_b10_members/` (2 files) | B10 optimiser members (two starts, the temperature-structure wave); read back by the B10 generator's consolidation. |
 | `kinetic_core_b10_noyil_members/` (2 files) | B10 leave-Yiltirak-out members (prereg T5); read back by `generate_kinetic_core_b10_fit.py --without-yiltirak --consolidate`. |
 | `kinetic_core_b10_ship_rule.*` (2): `kinetic_core_b10_ship_rule.json`, `kinetic_core_b10_ship_rule.md` | The B10 prereg's ship rule (sec. 5) evaluated on the frozen B10 / B10-noyil / B9 artifacts without switching the engine (`generate_kinetic_core_b10_ship_rule.py`). |
@@ -136,10 +136,10 @@ Tracked files: **549**. Local-only (gitignored): scratch runs under `results/qui
 | `kinetic_core_b4_frozen_predictions.json` | B4 predictions frozen before the hold-out was scored; read by `generate_kinetic_core_b4_fit.py` and `parameters_matrix.py`. |
 | `kinetic_core_b50_ship_rule.*` (2): `kinetic_core_b50_ship_rule.json`, `kinetic_core_b50_ship_rule.md` | The B50 prereg's ship rule: the panel and the directional claims scored with thiamine's H2S branch off and on, B9's cost compared both ways, and a ribose + thiamine probe at pH 5 / 6.5 / 7; SHIP (`generate_kinetic_core_b50_ship_rule.py`). |
 | `kinetic_core_b51_1_ship_rule.*` (2): `kinetic_core_b51_1_ship_rule.json`, `kinetic_core_b51_1_ship_rule.md` | The B51.1 prereg's ship rule: B9 frozen with the 25 °C table scale and the SID carry on vs all off; DO NOT SHIP (SUG-09 flips through the hexose route) (`generate_kinetic_core_b51_1_ship_rule.py`). |
+| `kinetic_core_b51_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b51`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
 | `kinetic_core_b51_members/` (2 files) | B51 optimiser members (two starts, every pH-state correction on); read back by the B51 generator's consolidation. |
 | `kinetic_core_b51_ship_rule.*` (2): `kinetic_core_b51_ship_rule.json`, `kinetic_core_b51_ship_rule.md` | The B51 prereg's ship rule (sec. 5): baseline, the B51 refit and B9 under the corrected pH state, each scored in a child process, plus per-switch attribution; DO NOT SHIP (Hofmann pH 5 pots ~100x low under correct speciation) (`generate_kinetic_core_b51_ship_rule.py`). |
 | `kinetic_core_b8_members/` (2 files) | B8 optimiser members (two starts); read back by the B8 generator's consolidation. |
-| `kinetic_core_b9_fit_targets.json` | Which panel rows the shipped sulfur fit read (`fit_target_ids`, leverage). Written by `generate_core_fit_targets.py --wave b9`; read by `src/kinetic_core/fit_targets.py` and `scripts/ci/fit_target_gate.py`. |
 | `kinetic_core_b9_members/` (2 files) | B9 optimiser members (two starts); read back by the B9 generator's consolidation. |
 | `kinetic_core_env_b13_prereg.*` (1): `kinetic_core_env_b13_prereg.md` | Pre-registration: the whole dicarbonyl and furanic-sink block had no prior row either, so eight constants were asserted with certainty and five hydroxymethylfurfural rows were published with no interval at all. |
 | `kinetic_core_env_b18_prereg.*` (1): `kinetic_core_env_b18_prereg.md` | Pre-registration: the pyrazine step had no prior row in the envelope, so every pyrazine interval was published without that step's own spread. |
