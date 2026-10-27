@@ -73,7 +73,9 @@ def test_the_data_wishlist_builds_from_the_tracked_artifacts_and_names_the_known
     # RE-PINNED 2026-09-07 (B12): the trunk answers a_w with a declared term, so the axis has
     # evaluable claims (AW-01 miss, AW-03 agree); the block now names the lanes that still refuse.
     assert aw["structural_block"] and "trunk" in aw["structural_block"]
-    assert aw["evaluable"] == 2 and aw["agree"] == 1
+    # RE-PINNED 2026-10-27 (claim audit): AW-01 retired -- its quote was a background citation and
+    # Ma 2024's own 3-DG rises with moisture -- so one evaluable claim remains (AW-03, agree).
+    assert aw["evaluable"] == 1 and aw["agree"] == 1
     assert any(u["if_measured"] == "k_glc_ha" for u in payload["what_you_could_predict"])
     text = data_wishlist.render_markdown(payload)
     assert text.startswith("# Data wishlist") and "## 6. What you could predict" in text

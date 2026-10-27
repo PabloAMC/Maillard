@@ -488,9 +488,10 @@ def test_predicted_point_is_the_deterministic_prediction(small_artifact):
 
 def test_refused_rows_use_the_engine_refusal_vocabulary(small_artifact):
     refused = {(r["benchmark_id"], r["compound"]): r for r in small_artifact["refused_compounds"]}
-    # H2S + norfuraneol: hydrogen sulfide is not a precursor the core can charge
+    # 2026-10-27: H2S + norfuraneol used to be refused here (hydrogen sulfide was not chargeable); it is
+    # now a nameable precursor and the row is scored, so it is no longer an example of a refusal.
     key = ("hofmann1998_norfuraneol_h2s_145C_20min_pH5", MFT)
-    assert key in refused and "UNMAPPED PRECURSORS" in refused[key]["reason"]
+    assert key not in refused
     # 2026-09-10: this asserted that 2-pentylfuran was on the named unrepresented list. Wave B28
     # answers it, so the row is scored rather than refused and no longer exercises the vocabulary.
     # 1-hexanol is checked instead, and it is the better example: it is unrepresented because no
@@ -601,7 +602,8 @@ def test_extraction_rows_do_not_carry_the_headspace_bands(small_artifact):
     assert trikusuma["quantification_family"] == "headspace"
     assert all(c["observable_multipliers_applied"] for c in trikusuma["compounds"])
     policy = small_artifact["summary"]["observable_multiplier_policy"]
+    # 2026-10-27: + the fed norfuraneol + H2S bundle, scored since hydrogen sulfide became chargeable.
     assert policy["rows_by_family"]["extraction"] == len(hofmann["compounds"]) + len(
         by_id["mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7"]["compounds"]
-    )
+    ) + len(by_id["hofmann1998_norfuraneol_h2s_145C_20min_pH5"]["compounds"])
     assert "pea_isolate_uht_140C_Trikusuma2019" not in policy["undeclared_bundles"]

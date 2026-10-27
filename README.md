@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Out of sample: 11/44 rows within 3x](https://img.shields.io/badge/out--of--sample-11%2F44%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
+[![Out of sample: 12/44 rows within 3x](https://img.shields.io/badge/out--of--sample-12%2F44%20rows%20within%203x-red.svg)](results/validation/core_panel_scores.md)
 [![Strict-ready: 0/37 benchmarks](https://img.shields.io/badge/strict--ready-0%2F37-red.svg)](results/validation/core_panel_scores.md)
 
 **Maillard** is a kinetic model of the Maillard reaction for alternative-protein scientists.
@@ -206,13 +206,13 @@ of this, and most of that fall is the refusals, not the fix.
 
 | | kinetic core |
 | --- | --- |
-| rows within 3x of the measurement | **12 of 45** (median fold error 9.1x, geometric mean 16x) |
-| **out of sample** — every row a core fit read removed | **11 of 44** (median 9.2x); since the primary-evidence refit only one scored row is a fit row |
-| by lane, within 3x | acrylamide 2/12 · sulfur 2/19 · lipid 4/8 · trunk 2/6 |
-| rows refused rather than answered | **32**, of which 7 are pots nobody heated and 3 are compounds a pot has no precursor for — every refusal names its cure |
+| rows within 3x of the measurement | **17 of 50** (median fold error 7.7x, geometric mean 14x); five of the new rows are fed-intermediate pots the sulfur fit read, scoreable since the precursor aliases of 2026-10-27 |
+| **out of sample** — every row a core fit read removed | **12 of 44** (median 9.2x); six scored rows are fit rows (5 of 6 within 3x, which is not evidence) |
+| by lane, within 3x | acrylamide 4/12 · sulfur 6/24 · lipid 5/8 · trunk 2/6 |
+| rows refused rather than answered | **27**: 8 in pots nobody heated, 8 that need the unidentified hexose entry, 2 lane conflicts, 2 compounds a pot has no precursor for, 7 targets a lane does not carry — every refusal names its cure |
 | strict-ready (passes its own contract; PRIMARY; free precursor) | **0 of 37** — `thiamine_cys_glucose_120C_Bolton1994` passed at 1.34x on ASSUMED loadings; read in full on 2026-09-04 (Table I: glucose 51.5 mM, thiamine 13.7 mM, pH 5.65) the core overpredicts its MFT 20x |
-| literature rows inside the 90% Monte-Carlo interval | **17 of 44** (median width 1.01 dex); **17 of 43** out of sample; 1 row not evaluable — glucosone in the amine-free pot, whose only route carries no flux and has no band |
-| direction / ranking skill (92-claim literature panel) | **25 of 43** strictly independent evaluable claims; **16 of 31** with pH and water activity set aside, **9 of 12** on pH and water activity; 28 independent claims not evaluable |
+| literature rows inside the 90% Monte-Carlo interval | **19 of 48** (median width 0.98 dex); **17 of 43** out of sample; 2 rows not evaluable — a fed-intermediate row the fit read, and glucosone in the amine-free pot, whose only route carries no flux and has no band |
+| direction / ranking skill (92-claim literature panel) | **17 of 31** strictly independent evaluable claims; **11 of 22** with pH and water activity set aside, **6 of 9** on pH and water activity; 24 independent claims not evaluable; 15 claims retired by the 2026-10-27 audit against the papers |
 
 Three things a reader must know, all declared in code and printed on every row they touch:
 
@@ -222,8 +222,8 @@ Three things a reader must know, all declared in code and printed on every row t
   Hofmann 1998 Table 1 levels of FFT and MFT for ribose, xylose, glucose and fructose + cysteine and
   then scored those same four bundles; the refit ([pre-registration](results/validation/kinetic_core_b9_prereg.md))
   removed the eight rows and refitted with everything else unchanged. **What the split revealed: without those rows the core predicts zero MFT from glucose and fructose.** The hexose entry to the thiols (`r_glc_c2c3` / `r_glc_fur`) is real chemistry but its rate constants are identified by no step-level measurement in the corpus; the refit left them on their band floor. Since 2026-09-04 the engine DECLARES this (`HEXOSE ENTRY UNIDENTIFIED`) on any hexose-only charge asked for MFT or FFT: the number is still returned, both scorers list the row as not evaluable instead of scoring a band-floor artefact, and the ordering "pentose above hexose" stays a claim the model supports structurally. The four returned Hofmann bundles' hexose rows are therefore off the absolute count; the two pentose ones score 1 of 4 within 3x. Every fit row now declares its bundle
-  (`results/validation/kinetic_core_b9_fit_targets.json`); the only scored row the fit read is the
-  C2 + C3 recombination pot, flagged `in_core_fit`.
+  (`results/validation/kinetic_core_b9_fit_targets.json`); the scored rows the fit read are the
+  fed-intermediate pots (C2 + C3 recombination, norfuraneol + H2S, furfural + H2S), six rows, each flagged `in_core_fit`.
 - **Two bundles were quarantined and one was read in full (2026-09-04).** `cys_ribose_140C_Hofmann1998` (a
   repo-internal derivation the file itself labels "not a measurement") and `thiamine_cys_xylose_145C_Cerny2008`
   (an MFT value never located in the paper) left the scored panel (`data/benchmarks/quarantined/README.md`).
@@ -249,19 +249,21 @@ Three things a reader must know, all declared in code and printed on every row t
   every panel bundle declares its class (`benchmark.schema.json` enum, `schema_gate`); eleven say
   `undeclared` with the reason in a `quantification_note`, get the bands by default, and say so.
 
-**Directional and ranking claims are the product, and the core scores 25 of 43 on them.**
+**Directional and ranking claims are the product, and the core scores 17 of 31 on them** (25 of 43 before
+the 2026-10-27 audit checked every claim against its paper: 15 retired, 4 not independent, several arms
+reset to the paper's pot).
 [`core_directional_scores.md`](results/validation/core_directional_scores.md) runs every claim of
 the 92-claim literature panel ([`directional_claims_panel.yml`](docs/validation/directional_claims_panel.yml))
-through the same front door a user calls. Nineteen claims are prose-only and 13 more are not
-evaluable on the core: an arm refused because 2-pentylfuran is not a core
-species or H2S and hydroxyacetaldehyde are not core precursors, or because the comparison moves an
-axis the lane has no term for. **The engine refuses those comparisons outright** (water activity
+through the same front door a user calls. Of the 55 independent claims, 17 are prose-only and 7 more
+are not evaluable on the core: a predicted concentration of zero, an arm refused (2,5-dimethylpyrazine
+off the trunk), or a verdict that flips with an input the paper does not state. Comparisons that move an
+axis the lane has no term for are refused too. **The engine refuses those comparisons outright** (water activity
 on the sulfur and lipid lanes and outside its measured window on the acrylamide lane; pH on the lipid
 lane and outside its window on the acrylamide lane; the trunk answers both with a declared, banded term) rather than returning two identical numbers,
-so they are not evaluable rather than misses. Of the rest: sugar identity 4 of 8, temperature 5 of 9,
-time 2 of 2, cysteine present-vs-absent 2 of 3, pH 8 of 10, water activity on the
-trunk 1 of 2 (the peak at a_w 0.6-0.7 is reproduced; a monotone fall with water is not, as
-[`kinetic_core_b12_prereg.md`](results/validation/kinetic_core_b12_prereg.md) expected).
+so they are not evaluable rather than misses. Of the rest: sugar identity 4 of 10, temperature 5 of 9,
+time 1 of 1, cysteine present-vs-absent 1 of 1, pH 5 of 8, ranking 0 of 1, water activity on the
+trunk 1 of 1 (the peak at a_w 0.6-0.7 is reproduced; the monotone-fall claim AW-01 was retired by the
+2026-10-27 audit as a source mismatch).
 **The sulfur lane's temperature behaviour was scored for the first time on 2026-09-06** (programme
 step R2(c), [`kinetic_core_b10_prereg.md`](results/validation/kinetic_core_b10_prereg.md)): the panel
 had no sulfur temperature claim. Yiltirak 2026's time-compensated ladder gives two evaluable

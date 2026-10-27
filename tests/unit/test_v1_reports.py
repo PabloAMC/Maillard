@@ -75,7 +75,10 @@ REFUSED_SPEC = {
     # exercises a refusal card. "propanal" replaces it and is refused for a reason of the same
     # shape: the lipid lane forms no propanal, because Frankel 1989 fed linoleate only and an oil's
     # fatty-acid profile is not a transferable branch fraction.
-    "targets": ["2-methyl-3-furanthiol (MFT)", "HEMF", "propanal"],
+    # 2026-10-27: MFT left this list. Since predict answers the answerable targets and lists the rest,
+    # MFT here made the request a PARTIAL answer; this spec's job is a FULLY refused one (partial
+    # answers have their own test in test_comparative_cli_2026_08.py).
+    "targets": ["HEMF", "propanal"],
     "temp_C": 140.0,
     "time_min": 30.0,
     "ph": 5.0,

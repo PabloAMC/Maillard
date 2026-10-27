@@ -98,13 +98,21 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     assert dr.TRUST_MIN_RATE == 0.80
     assert dr.CAUTION_MIN_RATE == 0.60
     assert dr.MIN_EVALUABLE_FOR_TRUST == 3
-    assert dr.reliability_for_axis("moisture_aw", counts).verdict == dr.VERDICT_DO_NOT_USE
+    # RE-PINNED 2026-10-27 (claim audit): AW-01 retired as a source mismatch, so the a_w axis is 1/1, not 1/2.
+    # One agreeing claim is below MIN_EVALUABLE_FOR_TRUST: 'caution' under the standing rule, never 'trust'.
+    aw = dr.reliability_for_axis("moisture_aw", counts)
+    assert (aw.agree, aw.evaluable) == (1, 1)
+    assert aw.verdict == dr.VERDICT_CAUTION != dr.VERDICT_TRUST
     ph = dr.reliability_for_axis("ph", counts)
     # RE-PINNED 2026-09-07 (thiol pH reads: Cerny 2007, Mottram 2002 claims): 4/5 -> 7/9, still below 0.80: 'caution'.
     # RE-PINNED 2026-09-08 (B18: PH-06, 2,5-dimethylpyrazine rising with pH, now evaluable and agrees): 7/9 -> 8/10;
     # the rate touches 0.80 but the Wilson lower bound (0.49) is still under the coin, so the axis stays 'caution'.
-    assert (ph.agree, ph.evaluable) == (8, 10)
-    assert ph.verdict == dr.verdict_for(8, 10) == dr.VERDICT_CAUTION
+    # RE-PINNED 2026-10-27 (claim audit): 8/10 -> 5/8. MOT02-PH-01/02 (duplicate cells of MOT-01/02) and PH-03
+    # (the same Cerny 2007 row as CER07-PH-01) are not independent; PH-01/02 now run Meynier & Mottram's pot.
+    # 0.625 is above the 0.60 caution threshold: still 'caution'.
+    assert (ph.agree, ph.evaluable) == (5, 8)
+    assert ph.verdict == dr.verdict_for(5, 8) == dr.VERDICT_CAUTION
+    assert dr.verdict_for(8, 10) == dr.VERDICT_CAUTION
     assert dr.wilson_lower(8, 10) < dr.COIN < dr.wilson_lower(8, 8)
     assert dr.verdict_for(8, 8) == dr.VERDICT_TRUST and dr.verdict_for(7, 7) == dr.VERDICT_TRUST
 
