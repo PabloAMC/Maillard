@@ -406,6 +406,27 @@ GLUTATHIONE_ARRHENIUS_REFIT: Dict[float, Tuple[float, float]] = _glutathione_arr
 #: pH 6.25, held at the pH 7.0 value above it (no data). One temperature, so the share is held
 #: constant with temperature: a declared limit, not a measurement.
 THIAMINE_H2S_SHARE_POINTS: Tuple[Tuple[float, float], ...] = ((6.5, 0.04), (7.0, 0.39))
+# ---------------------------------------------------------------------------
+# WAVE B58 (2026-10-27): TTCA FORMATION AS A MEASURED EQUILIBRIUM
+# ---------------------------------------------------------------------------
+# Cysteine and a pentose condense to TTCA (2-threityl-thiazolidine-4-carboxylic acid) quickly and almost
+# completely; the lane could only break TTCA down. Cao et al. 2017 (cao2017_extraction.md; Cys + Xyl 0.40 M
+# each, 0.2 M phosphate pH 5.5 -> 4.15, 90 C, 0.5-5 h) measure [TTCA]/([Cys][Xyl]) = 58.5-64.6 L/mol at all
+# six sample times: an apparent equilibrium K ~ 60 L/mol (band 45-75), established within 30 min. The
+# forward rate is DERIVED by detailed balance, k_form = K x k_ttca_cys, so the step adds no fitted constant.
+# DECLARED ASSUMPTION: K is held constant across temperature and pH (it should depend on pH through the
+# free amine and thiol; nothing in the corpus measures how). Pre-registration: kinetic_core_b58_prereg.md.
+@dataclass(frozen=True)
+class TtcaFormation:
+    enabled: bool = False
+    k_l_per_mmol: float = 0.060
+    band_l_per_mmol: Tuple[float, float] = (0.045, 0.075)
+    source: str = ("Cao, Xie et al. 2017, Food Res. Int. (10.1016/j.foodres.2017.06.012): [TTCA]/([Cys][Xyl]) "
+                   "= 58.5-64.6 L/mol at 90 C, pH 5.5 -> 4.15, all six sample times 0.5-5 h")
+
+
+TTCA_FORMATION = TtcaFormation()
+
 THIAMINE_H2S_SHARE_FLOOR_PH: float = 6.25
 
 
