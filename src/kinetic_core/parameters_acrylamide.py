@@ -188,9 +188,10 @@ class AcrylamideParameter:
 # ===========================================================================
 # Three sources, all printed at T_ref = 160 C, all in the 120-200 C window.
 #
-#   Claeys, W., De Vleeschouwer, K. & Hendrickx, M. (2005) "Kinetics of
-#   acrylamide formation and elimination in equimolar asparagine/glucose model
-#   systems", Biotechnol. Prog. 21:1525-1530, Table 2 p. 1528.
+#   Claeys, W., De Vleeschouwer, K. & Hendrickx, M. (2005) "Effect of Amino
+#   Acids on Acrylamide Formation and Elimination Kinetics", Biotechnol. Prog.
+#   21:1525-1530, doi 10.1021/bp050194s, Table 2 p. 1528. (Title corrected
+#   2026-10-27; it was given as a different paper's.)
 #   FIT (control AND the four competitor systems), declaration D.5.
 #
 #   De Vleeschouwer, K. et al. (2009) Part I, Food Chem. 114:116-126, Table 3
@@ -454,7 +455,8 @@ ASN_SCHIFF_AMADORI_SPLIT: Dict[str, Any] = {
 # instead of the ~0.4-3 % the corpus measures. So the sink exists, is named
 # (browning: Int1 into the melanoidin mass pool), and is FITTED.
 #
-# GROUP 2 -- acrylamide's first-order elimination. THREE independent labs
+# GROUP 2 -- acrylamide's first-order elimination. THREE sources from TWO labs
+# (Claeys and De Vleeschouwer are the same KU Leuven Hendrickx group; corrected 2026-10-27)
 # measure this same constant and they agree to 1.26x on the rate at 160 C
 # (0.1111 Claeys, 0.100 De Vleeschouwer, 0.0881 Knol) while disagreeing by 2x
 # on the barrier (167.2 / 113.2 / 85.1 kJ/mol). All three are FIT rows. Fitting

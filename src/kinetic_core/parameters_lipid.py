@@ -16,7 +16,7 @@ not an oversight:
   cooking temperatures in aqueous or protein systems. The only measured
   ``k_hexanal`` is at 25 C and was hand-fitted without standard errors.
   Extrapolating it to the repo's window using its authors' own Q10 = 2-3 spans
-  11.5 decades of 10 C steps (~3e3-8e5x) and is **the repo's assumption, not
+  11.5 decades of 10 C steps (~3e3-3.1e5x; "8e5" corrected 2026-10-27) and is **the repo's assumption, not
   the authors'**."
 
   ``k3`` §C.9 on Frankel 1989 -- "NOT a yield source ... no absolute yield and
@@ -332,7 +332,7 @@ class Q10Assumption:
         "(declared gap: research_round3_channels.md sec. F.3, re-affirming k3 "
         "sec. C.9). The Q10 applied here is the authors' own stated 2-3, but "
         "they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of "
-        "10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; "
+        "10 C steps (a factor of 3e3-3.1e5). The BRANCH DISTRIBUTION is measured; "
         "the ABSOLUTE RATE is not. Ratios between formulations at a common rate "
         "assumption are first-class; absolute ppb inherits this band."
     )
@@ -611,43 +611,49 @@ DECADIENAL_TO_HEXANAL_GAP = (
 @dataclass(frozen=True)
 class DecadienalBreakage:
     """
-    2,4-decadienal -> hexanal (and -> 2-octenal), first order in decadienal. WAVE B48.
+    2,4-decadienal breaks thermally, first order, and a FIXED SHARE of what breaks becomes hexanal
+    (and 2-octenal). WAVE B48, REVISED THE SAME DAY (2026-10-27) after the input audit.
 
-    Every number is printed in Zamora, Navarro, Aguilar & Hidalgo 2015, Food Chem
-    174:89-96 (``zamora2015b_extraction.md`` sec. 2): 1 h at 200 C, pH 8, yields
-    11.5 % hexanal (slope 0.1154) and 0.8 % 2-octenal (slope 0.00821); barriers from
-    initial rates at 120/160/200 C, 21.3 and 29.6 kJ/mol. A yield after 1 h becomes a
-    first-order constant as -ln(1 - y)/60 min. Nothing is fitted. Declared limits: the
-    medium is tetrahydrofuran-buffer at pH 8 (the yield's maximum), there is no pH
-    term, and decadienal's other losses (figure-only) are not modelled.
+    Zamora, Navarro, Aguilar & Hidalgo 2015, Food Chem 174:89-96 (``zamora2015b_extraction.md``):
+      * Fig. 5C, decadienal disappearance, read off the figure [F]: about 4.4 of 10 left at 5 min,
+        1.5 at 10, 0.3 at 20 min at 200 C (k ~ 0.17 /min); ~0.06 /min at 160 C; ~0.043 /min at
+        120 C; an Arrhenius line through the three gives ~27 kJ/mol, and the text says the
+        barriers are "always very similar and about 25 kJ/mol";
+      * the 1 h yields at 200 C, printed: 11.5 % hexanal (slope 0.1154), 0.8 % 2-octenal (slope
+        0.00821) -- at 200 C the decadienal is gone well inside the hour, so these are the
+        SHARES of the decadienal that broke.
+    The first version (the same morning) turned the 11.5 % yield into a first-order conversion
+    rate, which left ~88 % of the decadienal intact after 1 h at 200 C and let hexanal climb to
+    most of the decadienal on long holds; Zamora 2007's 1 h hold-out could not see it. Declared
+    limits: tetrahydrofuran-buffer at pH 8 (the yields' maximum), no pH term, the rate is a
+    figure read, and the shares are held constant with temperature.
     """
 
     enabled: bool = True
-    #: The barriers were measured at 120/160/200 C. Below this the step is OFF, not
-    #: extrapolated: a 21 kJ/mol barrier carried to storage would break most of the
-    #: decadienal in weeks at room temperature, a claim no source makes.
+    #: The rates were measured at 120/160/200 C. Below this the step is OFF, not extrapolated:
+    #: a ~27 kJ/mol barrier carried to storage would break most of the decadienal in days at
+    #: room temperature, a claim no source makes.
     window_min_c: float = 100.0
     t_ref_c: float = 200.0
-    hexanal_yield_1h_at_ref: float = 0.1154
-    octenal_yield_1h_at_ref: float = 0.00821
-    ea_hexanal_kj_mol: float = 21.3
-    ea_octenal_kj_mol: float = 29.6
-    source: str = ("Zamora, Navarro, Aguilar & Hidalgo 2015, Food Chem 174:89-96, "
-                   "sec. 3.5 (yields) and the Arrhenius plots (barriers); zamora2015b_extraction.md")
+    k_loss_per_min_at_ref: float = 0.17
+    ea_loss_kj_mol: float = 26.6
+    share_hexanal: float = 0.1154
+    share_octenal: float = 0.00821
+    source: str = ("Zamora, Navarro, Aguilar & Hidalgo 2015, Food Chem 174:89-96: Fig. 5C (decadienal "
+                   "disappearance at 120/160/200 C, read off the figure) and sec. 3.5 (1 h yields as shares); "
+                   "zamora2015b_extraction.md")
     holdout: str = ("Zamora, Gallardo & Hidalgo 2007, JAFC 55:1308: 9-14 % of 2,4-decadienal to "
                     "hexanal in 1 h at 180 C, pH 3, phenylalanine present (zamora2007_extraction.md)")
 
-    def k_per_min(self, channel: str, temperature_c: float) -> float:
-        """First-order constant of one channel at ``temperature_c``, 1/min."""
-        if channel == "hexanal":
-            y, ea = self.hexanal_yield_1h_at_ref, self.ea_hexanal_kj_mol
-        elif channel == "octenal":
-            y, ea = self.octenal_yield_1h_at_ref, self.ea_octenal_kj_mol
-        else:
-            raise KeyError(channel)
-        k_ref = -math.log(1.0 - y) / 60.0
+    def k_loss_per_min(self, temperature_c: float) -> float:
+        """Total first-order loss constant of 2,4-decadienal at ``temperature_c``, 1/min."""
         t, t_ref = float(temperature_c) + 273.15, self.t_ref_c + 273.15
-        return k_ref * math.exp(-ea * 1000.0 / 8.314462618 * (1.0 / t - 1.0 / t_ref))
+        return self.k_loss_per_min_at_ref * math.exp(
+            -self.ea_loss_kj_mol * 1000.0 / 8.314462618 * (1.0 / t - 1.0 / t_ref))
+
+    def share_to_hexanal(self, temperature_c: float, minutes: float) -> float:
+        """Hexanal made per decadienal present at t = 0, after ``minutes`` at ``temperature_c``."""
+        return (1.0 - math.exp(-self.k_loss_per_min(temperature_c) * float(minutes))) * self.share_hexanal
 
 
 DECADIENAL_BREAKAGE = DecadienalBreakage()
@@ -818,10 +824,10 @@ def lipid_registry_metadata() -> Dict[str, Any]:
             "enabled": DECADIENAL_BREAKAGE.enabled,
             "t_ref_C": DECADIENAL_BREAKAGE.t_ref_c,
             "window_min_C": DECADIENAL_BREAKAGE.window_min_c,
-            "hexanal_yield_1h_at_ref": DECADIENAL_BREAKAGE.hexanal_yield_1h_at_ref,
-            "octenal_yield_1h_at_ref": DECADIENAL_BREAKAGE.octenal_yield_1h_at_ref,
-            "ea_hexanal_kj_mol": DECADIENAL_BREAKAGE.ea_hexanal_kj_mol,
-            "ea_octenal_kj_mol": DECADIENAL_BREAKAGE.ea_octenal_kj_mol,
+            "k_loss_per_min_at_ref": DECADIENAL_BREAKAGE.k_loss_per_min_at_ref,
+            "ea_loss_kj_mol": DECADIENAL_BREAKAGE.ea_loss_kj_mol,
+            "share_hexanal": DECADIENAL_BREAKAGE.share_hexanal,
+            "share_octenal": DECADIENAL_BREAKAGE.share_octenal,
             "source": DECADIENAL_BREAKAGE.source,
             "holdout": DECADIENAL_BREAKAGE.holdout,
         },

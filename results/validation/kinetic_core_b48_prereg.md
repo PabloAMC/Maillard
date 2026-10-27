@@ -81,3 +81,24 @@ both ways. T3: directional 25/43 both ways. T4: one row moved more than 0.01 dex
 Bi 2020 roasted-pea hexanal, 3.66x → 3.39x — the only scored pot hot and long enough for the step to
 act. The expectation in §3 held: the step is real and small on the present panel. It ships enabled;
 `DECADIENAL_TO_HEXANAL_GAP` now reads as closed.
+
+### Revision, same day (2026-10-27): the step as first shipped was mis-modelled, and the input audit caught it
+
+The read-only audit of the acrylamide, lipid and matrix inputs (backlog, 2026-10-27) found that §2 turned
+Zamora 2015b's **yield** into a **conversion rate**: k = −ln(1 − 0.1154)/60 with no other loss of
+decadienal. The paper says decadienal "decreased exponentially" and Fig. 5C shows it nearly gone within
+20 min at 200 °C, so the 11.5 % is the **share** of what broke. As first shipped, ~88 % of the decadienal
+survived 1 h at 200 °C (truth: ~0 %), and on long holds hexanal could climb towards most of the
+decadienal (truth: ~11.5 %). The Zamora 2007 hold-out did not catch it because it is also a 1 h end point
+— a hold-out with the same shape as the fit data cannot test a rate.
+
+**Revised structure** (`DecadienalBreakage`): one total first-order loss read off Fig. 5C — k ≈ 0.17 /min
+at 200 °C (4.4 of 10 left at 5 min, 1.5 at 10, 0.3 at 20), ~0.06 at 160 °C and ~0.043 at 120 °C, an
+Arrhenius line through the three at 26.6 kJ/mol (the paper: "about 25 kJ/mol") — and the printed 1 h yields
+as fixed shares (hexanal 0.1154, 2-octenal 0.00821, the rest to fragments). The window (off below 100 °C)
+and the exact series solution are unchanged. The rate is a figure read, labelled as such.
+
+**Ship rule re-run on the revised step: SHIP.** T1: 11.5 % at 180 °C, 1 h (printed 9–14 %). T2: lipid rows
+**4/8 → 5/8** within 3x, median |log10 error| 0.448 → 0.437. T3: directional 25/43 both ways. T4: one row
+moved, Bi 2020 roasted-pea hexanal 3.66x → **2.96x** (now inside 3x). New test: no hold of any length turns
+more than the measured share into hexanal.

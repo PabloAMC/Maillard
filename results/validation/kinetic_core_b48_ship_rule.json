@@ -4,26 +4,26 @@
     "artifact": "kinetic_core_b48_ship_rule",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "0342f8c15fadd08a560106cdd03bcac20fa79966",
-      "short": "0342f8c1",
-      "branch": "b47-sulfur-objective-corrected",
+      "commit": "067deb8cc6ee82a1f611d8dd21ed52296effbeff",
+      "short": "067deb8c",
+      "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_kinetic_core_b48_ship_rule.py",
     "inputs": [
       {
         "path": "src/kinetic_core/parameters_lipid.py",
-        "sha256": "b67a074e713419b672ed3c7222d4b33fc9883e9c3a670794827ddea981cb9331"
+        "sha256": "4129474972d82dc49ddae62067949c565f8a8c923720d3eb70cebbe8795a4492"
       },
       {
         "path": "src/kinetic_core/lipid.py",
-        "sha256": "082cffac5d85b7c0be81d943d9493995301548d35ad8110fd21a3faea0ad76eb"
+        "sha256": "abb7ea2386110d4e7b41258c09abcfe475f8ec3e27bf1721f414b0fa966a525f"
       }
     ]
   },
   "prereg": "results/validation/kinetic_core_b48_prereg.md",
   "T1_holdout_zamora2007": {
-    "share_to_hexanal_180C_60min": 0.09177362470294188,
+    "share_to_hexanal_180C_60min": 0.11534038480305332,
     "zamora2007_printed": [
       0.09,
       0.14
@@ -42,8 +42,8 @@
     },
     "on": {
       "rows": 8,
-      "within_3x": 4,
-      "median_abs_log10": 0.4481421197003723
+      "within_3x": 5,
+      "median_abs_log10": 0.43709360924770346
     },
     "pass": true
   },
@@ -63,20 +63,20 @@
       "benchmark": "external_validation_bi_2020_roasted_pea_hexanal",
       "compound": "hexanal",
       "fold_off": 3.656948266383388,
-      "fold_on": 3.3873641848543454,
-      "delta_abs_log10": -0.03325692521272949
+      "fold_on": 2.9591784474227487,
+      "delta_abs_log10": -0.09194766134069626
     }
   ],
   "union_panel": {
     "off": {
       "rows": 45,
       "within_3x": 12,
-      "median_abs_log10": 0.9613681301660187
+      "median_abs_log10": 0.9613681301738599
     },
     "on": {
       "rows": 45,
-      "within_3x": 12,
-      "median_abs_log10": 0.9613681301660187
+      "within_3x": 13,
+      "median_abs_log10": 0.9613681301738599
     }
   },
   "verdict": "SHIP",

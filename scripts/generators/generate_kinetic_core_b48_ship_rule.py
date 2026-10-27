@@ -73,8 +73,7 @@ def _summary(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
 def _t1() -> Dict[str, Any]:
     from src.kinetic_core.parameters_lipid import DECADIENAL_BREAKAGE as D
 
-    k_hex, k_oct = D.k_per_min("hexanal", 180.0), D.k_per_min("octenal", 180.0)
-    share = (1.0 - math.exp(-(k_hex + k_oct) * 60.0)) * k_hex / (k_hex + k_oct)
+    share = D.share_to_hexanal(180.0, 60.0)
     return {"share_to_hexanal_180C_60min": share, "zamora2007_printed": [0.09, 0.14], "band": list(HOLDOUT_BAND),
             "pass": HOLDOUT_BAND[0] <= share <= HOLDOUT_BAND[1]}
 
