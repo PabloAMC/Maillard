@@ -163,7 +163,7 @@ and lysine differ from the control; cysteine and alanine do not.
 | reported amino-acid stock impurities (Becalski et al., cited) | 0.3 % asparagine in an aspartic acid standard; 0.8 % cysteine in a glutamine standard | Results |
 | SH vs NH2 reactivity toward conjugated vinyls (Friedman, cited) | 100-300x | Results |
 | glutamine's Arrhenius crossing | the k_E curve of the glutamine system crosses the control's "around 180 C"; the k_F curves "run parallel" | Results, Fig. 3 |
-| Rydberg et al.'s contrary result (cited) | 35 mM added amino acids to potato at 180 C / 25 min: glutamine and glycine -76 to -70 %, lysine -57 %, alanine -14 %; endogenous free asparagine 17 mM; pH not stated | Results |
+| Rydberg et al.'s contrary result (cited) | 35 mM added amino acids to potato at 180 C / 25 min: glutamine and glycine -76 to -70 %, lysine -57 %, alanine -14 %; endogenous free asparagine 17 mM; pH not stated | Results. *2026-10-27, against the primary (`rydberg2003_extraction.md`, Table 1): Rydberg print lysine -43 % and -88 % on two rows and state the pH of every row; the -57 % and "pH not stated" are this secondary citation's, not the source's.* |
 
 ### Arithmetic on the printed constants (all mine)
 

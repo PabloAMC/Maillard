@@ -58,6 +58,7 @@ import math
 from dataclasses import asdict, dataclass, replace
 from typing import Any, Dict, Mapping, Optional, Tuple
 
+from . import ph_state as _ph
 from .parameters import EVIDENCE_CLASSES, R_KJ
 
 #: Reference temperature of the sulfur module: 145 C, the temperature of the
@@ -515,7 +516,30 @@ THIOL_PKA_CAVEAT = (
 )
 
 
-def pka_at(name: str, temperature_k: float) -> float:
+#: B51: the cysteine thiol and ammonium from GKL 2002 Table 7.23 (pK, dH kJ/mol, dCp J/(K mol)),
+#: the same constants ph_state.CYSTEINE_GKL carries, so the two cannot disagree.
+PKA_GKL_CYSTEINE: Mapping[str, Tuple[float, float, float]] = {
+    "thiol": (8.36, 36.1, -66.0),
+    "cysteine_amine": (10.75, 34.1, -204.0),
+}
+
+
+def h2s_pk1_suleimenov_seward(temperature_k: float) -> float:
+    """
+    pK1 of aqueous H2S at saturation pressure, Suleimenov & Seward 1997, Geochim. Cosmochim.
+    Acta 61:5187 (UV spectrophotometry, 25-350 C; data/articles/suleimenov1997.pdf), Eq. 22:
+        log10 K1 = 782.43945 + 0.361261 T - 1.6722e-4 T^2 - 20565.7315 / T - 142.741722 ln T.
+    6.98 at 25 C, 6.47 at 100 C, 6.49 at 145 C; the paper's Table 2 (s.v.p.) prints 6.99 / 6.49 /
+    6.49 at 25 / 100 / 150 C (+-0.013-0.022). The sulfide pK1 has a shallow MINIMUM (6.45 near 117 C),
+    where constant-dH van 't Hoff (dH 22 kJ/mol) puts it at 5.94 and still falling.
+    """
+    t = float(temperature_k)
+    log_k1 = (782.43945 + 0.361261 * t - 1.6722e-4 * t * t - 20565.7315 / t
+              - 142.741722 * math.log(t))
+    return -log_k1
+
+
+def pka_at(name: str, temperature_k: float, ionic_strength_m: float = 0.0) -> float:
     """
     The pKa of ``name`` at ``temperature_k``, by van 't Hoff.
 
@@ -524,38 +548,56 @@ def pka_at(name: str, temperature_k: float) -> float:
     Endothermic ionisation (dH > 0) therefore LOWERS the pKa as temperature
     rises, which is the correction B2 omitted. At this module's 418.15 K
     reference the three pKa move 7.05 -> 5.94, 10.28 -> 8.09 and 8.33 -> 6.99.
+
+    B51 (switches in ``ph_state.B51``): the sulfide from Suleimenov & Seward's measured
+    correlation; cysteine's pair from GKL with its dCp; and, under ionic strength, the MIXED
+    constant of a neutral acid ionising to a monoanion, pK' = pK - A f(I) (all three steps are
+    0 -> -1 on the microscopic route that dominates below pH 8).
     """
     if name not in PKA_25C:
         raise KeyError(f"no pKa registered for {name!r}")
-    shift = (
-        float(DELTA_H_IONISATION_KJ_MOL[name]) / (R_KJ * math.log(10.0))
-    ) * (1.0 / float(temperature_k) - 1.0 / PKA_REFERENCE_T_K)
-    return float(PKA_25C[name]) + shift
+    b51 = _ph.B51
+    if name == "h2s_1" and b51.h2s_suleimenov:
+        pk = h2s_pk1_suleimenov_seward(temperature_k)
+    elif name in PKA_GKL_CYSTEINE and b51.cysteine_gkl:
+        pk25, dh, dcp = PKA_GKL_CYSTEINE[name]
+        pk = _ph.pk_at(pk25, dh, dcp, temperature_k)
+    else:
+        shift = (
+            float(DELTA_H_IONISATION_KJ_MOL[name]) / (R_KJ * math.log(10.0))
+        ) * (1.0 / float(temperature_k) - 1.0 / PKA_REFERENCE_T_K)
+        pk = float(PKA_25C[name]) + shift
+    return pk - _ph.davies_term(ionic_strength_m, temperature_k)
 
 
-def neutral_h2s_fraction(ph: float, temperature_k: float = T_REF_S_K) -> float:
+def neutral_h2s_fraction(ph: float, temperature_k: float = T_REF_S_K,
+                         ionic_strength_m: float = 0.0) -> float:
     """Fraction of the sulfide pool present as NEUTRAL H2S, at temperature."""
-    return 1.0 / (1.0 + 10.0 ** (float(ph) - pka_at("h2s_1", temperature_k)))
+    return 1.0 / (1.0 + 10.0 ** (float(ph) - pka_at("h2s_1", temperature_k, ionic_strength_m)))
 
 
-def hydrosulfide_fraction(ph: float, temperature_k: float = T_REF_S_K) -> float:
+def hydrosulfide_fraction(ph: float, temperature_k: float = T_REF_S_K,
+                          ionic_strength_m: float = 0.0) -> float:
     """Fraction present as the HYDROSULFIDE ANION HS-, at temperature."""
-    return 1.0 - neutral_h2s_fraction(ph, temperature_k)
+    return 1.0 - neutral_h2s_fraction(ph, temperature_k, ionic_strength_m)
 
 
-def free_amine_fraction(ph: float, temperature_k: float = T_REF_S_K) -> float:
+def free_amine_fraction(ph: float, temperature_k: float = T_REF_S_K,
+                        ionic_strength_m: float = 0.0) -> float:
     """Fraction of cysteine carrying a FREE alpha-amino group, at temperature."""
     return 1.0 / (
-        1.0 + 10.0 ** (pka_at("cysteine_amine", temperature_k) - float(ph))
+        1.0 + 10.0 ** (pka_at("cysteine_amine", temperature_k, ionic_strength_m) - float(ph))
     )
 
 
-def thiolate_fraction(ph: float, temperature_k: float = T_REF_S_K) -> float:
+def thiolate_fraction(ph: float, temperature_k: float = T_REF_S_K,
+                      ionic_strength_m: float = 0.0) -> float:
     """Fraction of a thiol present as the THIOLATE ANION, at temperature."""
-    return 1.0 / (1.0 + 10.0 ** (pka_at("thiol", temperature_k) - float(ph)))
+    return 1.0 / (1.0 + 10.0 ** (pka_at("thiol", temperature_k, ionic_strength_m) - float(ph)))
 
 
-def ph_factor(kind: str, ph: float, temperature_k: float = T_REF_S_K) -> float:
+def ph_factor(kind: str, ph: float, temperature_k: float = T_REF_S_K,
+              ionic_strength_m: float = 0.0) -> float:
     """
     The multiplicative pH factor of a step, normalised to 1 at pH 5 AND at the
     SAME temperature -- so that a fitted k_ref always means "k at pH 5", with no
@@ -599,29 +641,33 @@ def ph_factor(kind: str, ph: float, temperature_k: float = T_REF_S_K) -> float:
     both midpoints sit inside pH 5-9 rather than three units outside it, so the
     peak is broad instead of knife-edged. Nothing here is fitted.
     """
+    # B51: the NUMERATOR sees the pot's ionic strength and the normaliser does not, so a
+    # fitted k_ref is "k at pH 5, this temperature, infinite dilution" -- otherwise an activity
+    # effect would cancel exactly in the ratio wherever pH << pKa.
     t_k = float(temperature_k)
+    i_m = float(ionic_strength_m)
     if kind == "":
         return 1.0
     if kind == "acid":
         return 10.0 ** (PH_NORMALISATION - float(ph))
     if kind == "base":
         return (
-            free_amine_fraction(ph, t_k)
+            free_amine_fraction(ph, t_k, i_m)
             / free_amine_fraction(PH_NORMALISATION, t_k)
         )
     if kind == "neutral_h2s":
         return (
-            neutral_h2s_fraction(ph, t_k)
+            neutral_h2s_fraction(ph, t_k, i_m)
             / neutral_h2s_fraction(PH_NORMALISATION, t_k)
         )
     if kind == "hs_anion":
         return (
-            hydrosulfide_fraction(ph, t_k)
+            hydrosulfide_fraction(ph, t_k, i_m)
             / hydrosulfide_fraction(PH_NORMALISATION, t_k)
         )
     if kind == "thiolate":
         return (
-            thiolate_fraction(ph, t_k) / thiolate_fraction(PH_NORMALISATION, t_k)
+            thiolate_fraction(ph, t_k, i_m) / thiolate_fraction(PH_NORMALISATION, t_k)
         )
     raise ValueError(f"unknown pH factor kind {kind!r}")
 

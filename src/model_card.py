@@ -285,8 +285,30 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
                 if not _is_sulfur_analyte(str(name)):
                     continue
                 (fitted if is_fit_target else verified).append(f"{path.stem}/{name}")
+    # 2026-10-27: the card used to print "the model fails every one of them" as a fixed string. It
+    # stopped being true when the Hofmann pots were scored in their stated buffer (ribose pH 5 FFT
+    # 1.6x, MFT 2.8x), so the outcome is now READ from the tracked scorecard, split by whether a
+    # core fit read the row (the scorer's `in_core_fit` flag).
+    scored: Dict[Tuple[str, str], Mapping[str, Any]] = {}
+    scores = _read_json(data_paths.VALIDATION_DIR / "core_panel_scores.json")
+    if isinstance(scores, Mapping):
+        for bench in scores.get("benchmarks") or []:
+            for row in bench.get("compounds") or []:
+                scored[(str(bench.get("benchmark_id")), str(row.get("compound")))] = row
+    outcomes = []
+    for key in sorted(verified):
+        bench_id, name = key.split("/", 1)
+        row = scored.get((bench_id, name))
+        outcomes.append({
+            "row": key,
+            "scored": row is not None,
+            "within_3x": bool(row.get("within_band")) if row else None,
+            "fold_error": row.get("fold_error") if row else None,
+            "in_core_fit": bool(row.get("in_core_fit")) if row else None,
+        })
     return {
         "available": True,
+        "anchor_outcomes": outcomes,
         "panel_verified_sulfur_values": sorted(verified),
         "panel_verified_sulfur_benchmarks": sorted(
             {row.split("/", 1)[0] for row in verified}
@@ -302,6 +324,17 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
         ),
         "zero_absolute_anchors": not verified,
     }
+
+
+def _anchor_tally(sulfur: Mapping[str, Any]) -> str:
+    """'k of n scored anchor rows within 3x (k' of n' that no core fit read)', from the scorecard."""
+    rows = [o for o in (sulfur.get("anchor_outcomes") or []) if o.get("scored")]
+    oos = [o for o in rows if not o.get("in_core_fit")]
+    hit = sum(1 for o in rows if o.get("within_3x"))
+    hit_oos = sum(1 for o in oos if o.get("within_3x"))
+    return (f"{hit} of its {len(rows)} scored anchor rows within 3x ({hit_oos} of the {len(oos)} that "
+            f"no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not "
+            f"evidence)")
 
 
 def run_gates(gates: Tuple[str, ...] = GATES) -> List[Dict[str, Any]]:
@@ -412,7 +445,9 @@ def _headline_sentences(card: Mapping[str, Any]) -> List[str]:
         (
             "**The sulfur branch has "
             + str(len(sulfur.get("panel_verified_sulfur_benchmarks") or []))
-            + " absolute literature anchors, and the model fails every one of them.** "
+            + " absolute literature anchors, and the model lands "
+            + _anchor_tally(sulfur)
+            + ".** "
             "They are the primary-source-verified stable-isotope-dilution rows in "
             + ", ".join(sulfur.get("panel_verified_sulfur_benchmarks") or [])
             + ". "

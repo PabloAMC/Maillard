@@ -61,7 +61,7 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | moisture_aw | 1 / 1 | 1 | caution | 0.207 | blocked: only the trunk lane carries a water-activity term (a declared multiplier, wave B12); the acrylamide, sulfur and lipid lanes carry none and the engine refuses their a_w comparisons, so claims on those lanes cannot help until a moisture-dependent step is measured and fitted there (De Vleeschouwer 2009 is the acrylamide lane's source) |
 | ranking | 0 / 1 | 2 | do-not-use | 0.0 | 7 |
 | time | 1 / 1 | 3 | caution | 0.207 | 3 |
-| ph | 5 / 8 | 3 | caution | 0.306 | 7 |
+| ph | 6 / 8 | 3 | caution | 0.409 | 3 |
 | temperature | 5 / 9 | 2 | do-not-use | 0.267 | 11 |
 | sugar_identity | 4 / 10 | 5 | do-not-use | 0.168 | 20 |
 
@@ -76,7 +76,7 @@ The engine returns a number but declares the route unidentified; the rows leave 
 | 5 | `mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026` | 2-Furfurylthiol (FFT) | 11.48 | 1.23 | free_precursor_sulfur_yield |
 | 6 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 11.29 | 1.15 | free_precursor_sulfur_yield |
 | 7 | `mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026` | 2-Methyl-3-furanthiol (MFT) | 10.97 | 1.48 | free_precursor_sulfur_yield |
-| 8 | `hofmann1998_c2c3_recombination_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 10.60 | 1.12 | free_precursor_sulfur_yield |
+| 8 | `hofmann1998_c2c3_recombination_145C_20min_pH3` | 2-Methyl-3-furanthiol (MFT) | 10.59 | 1.12 | free_precursor_sulfur_yield |
 | 9 | `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | 9.43 | 1.52 | missing_positive_flavor_anchor |
 | 10 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7` | 2-Furfurylthiol (FFT) | 9.13 | 1.32 | free_precursor_sulfur_yield |
 
@@ -95,7 +95,7 @@ The engine returns a number but declares the route unidentified; the rows leave 
 - **If** `3 more independent ordering claims on additive_cysteine (all agreeing)` were measured: the direction of a change along additive_cysteine with a 'trust' tag instead of 'caution'.
 - **If** `7 more independent ordering claims on ranking (all agreeing)` were measured: the direction of a change along ranking with a 'trust' tag instead of 'do-not-use'.
 - **If** `3 more independent ordering claims on time (all agreeing)` were measured: the direction of a change along time with a 'trust' tag instead of 'caution'.
-- **If** `7 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
+- **If** `3 more independent ordering claims on ph (all agreeing)` were measured: the direction of a change along ph with a 'trust' tag instead of 'caution'.
 - **If** `11 more independent ordering claims on temperature (all agreeing)` were measured: the direction of a change along temperature with a 'trust' tag instead of 'do-not-use'.
 - **If** `20 more independent ordering claims on sugar_identity (all agreeing)` were measured: the direction of a change along sugar_identity with a 'trust' tag instead of 'do-not-use'.
 

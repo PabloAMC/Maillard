@@ -76,10 +76,15 @@ def test_with_consumers_on_the_reservoir_depletes_and_the_thiols_respond():
     # minute drains the 30-unit reservoir inside the 20 min cook.
     fast = {**base, **oxygen_parameters(k_cys_ox=50.0, k_red_ox=0.0)}
     state, _ = engine._integrate_program(SULFUR, fast, dict(decl.mapped_precursors), spec.process)
-    assert state["OXR"] < 1.0 and state["OX"] < 0.6          # the reservoir is spent (probe: OX 0.52)
     slow = {**base, **oxygen_parameters(k_cys_ox=1e-5, k_red_ox=0.0)}
     state2, _ = engine._integrate_program(SULFUR, slow, dict(decl.mapped_precursors), spec.process)
     assert state2["OX"] == pytest.approx(1.0, abs=0.05)
+    # RE-PINNED 2026-10-27 (B51's buffer facts, Amendment 44): this bundle now carries the paper's 0.5 M
+    # phosphate. Buffered, the pot's thiols stay below their pK, so the only large consumer is cysteine,
+    # and cysteine runs out (0.0 of 33 mM) before the reservoir does: probe OXR 30 -> 10.1 at
+    # k_cys_ox = 50 and still 7.7 at 2000, OX saturated. Unbuffered it drained (OXR < 1, OX 0.52).
+    # The mechanism pinned is unchanged: the reservoir is drawn down by the consumers.
+    assert state["OXR"] < 0.5 * state2["OXR"]
     # the thiols respond -- and in the direction the chemistry sets: autoxidation removes the
     # sulfur SOURCE (cysteine 0.04 mM left of 33), so the thiols fall with heavy consumption
     assert state["Cys"] < 0.1 * state2["Cys"]

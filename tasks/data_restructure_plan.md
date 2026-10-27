@@ -2729,3 +2729,73 @@ untouched; it can be retired separately if the container is never used again.
 - [x] Native backend in the script, docs updated
 - [x] Confirmed on the owner's Mac (2026-10-09): `status` reports native, Python 3.12.14; the six gates and the nine cultivated-tissue tests pass natively
 - [x] OrbStack removed (2026-10-09): app gone, `~/OrbStack`, `~/.orbstack`, the dangling `/usr/local/bin` links and the `~/.zprofile` / `~/.ssh/config` hooks removed. Left for the owner: `~/Library/Group Containers/HUAQ24HBR6.dev.orbstack` (macOS-protected; delete in Finder)
+
+### Condition-modelling programme (2026-10-27, owner: "do all the recommended points ... the best possible modelling of the data we have")
+
+Four literature/code reviews ran first (findings in the session record; the numbers that matter are in
+each wave's pre-registration). Order and status:
+
+- [x] **B51 — the pH state against its thermodynamic sources: DO NOT SHIP** (2026-10-27; verdict and
+  diagnosis in the prereg §6). The refit fits better and fixes Yiltirak but loses Hofmann pH 5 ~100x,
+  because the thiolate-acting thiol sink destroys thiols above pH ~5 once speciation is correct. Switches
+  stay off; the buffer facts ship. Follow-ups: (1) a wave for the 25 °C table scale + SID carry alone;
+  (2) the thiolate assignment of the thiol sink (MFT/FFT thiol pK unmeasured).
+  Original entry (prereg `results/validation/kinetic_core_b51_prereg.md`):
+  Six switches in `ph_state.B51`: GKL 2002 ionisation heat capacities; GKL cysteine constants (the B2
+  pair 26 / 43 kJ/mol was cited to GKL and is not in it: GKL Table 7.23 is 36.1 / 34.1); Suleimenov &
+  Seward 1997's H2S pK1 (6.49 at 145 °C, not 5.94); Davies ionic strength; the measured pH tables on
+  their 25 °C scale; the SID carried across segments (a bug: drift reset at every segment). Data facts
+  for every arm: the nine trust-loop Hofmann bundles get their 0.5 M phosphate (Amendment 44), the
+  Mottram / Meynier claims their pyrophosphate; the CLI reads every buffer molarity. Refit on B47's rows.
+- [ ] **B52 — trunk pH by speciation.** k0 + kb·α_DFG(in-situ pH, T) on the three Amadori-decay steps,
+  DFG amine pKa 8.2 (Martins 2003 Part I; Mossine 1994), dH 40 kJ/mol (band 31–45, Tricine/glycine
+  class); keep the slope on `k_tdg_fa`; no glycine speciation on `k_schiff`. DFG amine pKa CONFIRMED by
+  Mossine 1994 (8.18 at 25 °C, 0.2 M KNO3, concentration constant); no paper measures its dH (Tricine
+  31.4 and glycine 44.2 bracket it). **Hold-out:** Martins 2005b pH 4.8 / 7.5 columns. Davidek 2002's
+  WATER series is a declared NON-BLIND check (already compared: speciation within ~20 %, slope ~2.5x
+  off). Davidek's PHOSPHATE series belongs to B53 as its fit source and is NOT a B52 test (a series
+  cannot be both). Dossiers: davidek2002, mossine1994.
+- [ ] **B53 — general buffer catalysis.** κ_P(pH) on Amadori degradation / 2,3-enolisation from Davidek
+  2002's phosphate series (dossier digitisation: 18–21 / 24–26 / 9.4–11.7 / 2.4–2.7 M⁻¹ at pH 5 / 6 / 7 / 8,
+  90 °C; per mol H2PO4⁻ it collapses to one constant ≈ 15–30 M⁻¹, supporting H2PO4⁻ as the catalyst; a
+  0.5–0.8 h induction period at pH 5–6 makes one first-order k a compromise there), linear to 0.1 M and √ above (Reynolds 1959); no term
+  on 1,2-enolisation or acrylamide. Hold-out: Mottram & Nobrega 2002 buffered vs unbuffered (MFT
+  2.2–2.6x, FFT flat). Foods carry ~0.04 M phosphate (Koutsidis 2008b). Dossiers read 2026-10-27
+  (bell1997, potman1989, rizzi2004) say ONE κ will not do:
+  - amine loss, Bell 1997 (25 °C, pH 7.0 held, 0.02–0.5 M): κ ≈ 10–11 M⁻¹, linear and [P]^0.56 equally good;
+  - sugar loss, Potman 1989 (100 °C, pH 5.6 start): catalysed rate ∝ [P]^1.3, κ 31 → 54 M⁻¹ from 0.1 to
+    0.5 M, and ~9 M⁻¹ in concentrated (30–40 % dry matter) runs, so κ does not transfer across reactant
+    concentration;
+  - phosphate degrades ribose with NO amine (Rizzi 2004: A420 0.262 vs 0.003): a separate phosphate-driven
+    sugar-degradation step, not a multiplier;
+  - carboxylates: citrate κ ≈ 0 at 25 °C (Bell), ≈ 12–38 at 100 °C (Rizzi), so temperature-dependent;
+  - which phosphate ion catalyses is unresolved; ionic strength never controlled.
+  Design consequence: per-step catalytic terms in absolute (third-order) form, with the dose exponent and the
+  temperature dependence as declared bands, and the dilute-to-concentrated transfer as a stated risk.
+- [ ] **B54 — water activity: declare the concentration basis, gate on the glass.** A mechanistic a_w
+  model from measured constants does not beat the table (whole-phase concentration explains
+  Pereyra Gonzales and De Vleeschouwer with no fitted constant; molality and universal WLF fail by 4x
+  and 10^3). Do: concentration per dry matter + moisture, re-derive the trunk table as a residual,
+  Gordon–Taylor Tg as a warn/refuse gate. Hold-outs: Leahy 1989a Table IV, Pereyra 37 °C, Bell Table 3.
+  **Needs:** a pea/soy/gluten sorption isotherm and Tg-vs-moisture curve (Kyomugasho 2021 or similar).
+- [ ] **B55 — activation-energy prior for the single-temperature sulfur constants** (31 constants fitted
+  at 145 °C only): a declared prior from the spread of the corpus's measured Ea, so the envelope carries
+  the temperature extrapolation. Hold-out: the Yiltirak ladder.
+- [ ] **B56 — structural discrepancy in the envelope**: a per-lane model-error term from the fit
+  residuals, so the 90 % interval stops covering 19/48.
+- [ ] **B57 — the trunk's acid pool as two named species** (formic, acetic, Martins' measured yields) in
+  place of the fixed 1:1 mix.
+- Acrylamide speciation: Rydberg 2003 is now read (`rydberg2003_extraction.md`): potato, 25 min, pH set
+  cold before heating; net acrylamide peaks at pH 7.7 (180 C) and ~8.0 (160 C), ~1.7x over native pH
+  5.7. **Recorded contradiction:** Rydberg's Table 2 spike recovery says acrylamide is lost FASTER at
+  low pH (47 / 31 / 22 % at pH 3.0 / 4.8 / 5.7), the opposite sign to the lane's elimination slope
+  (+0.149 dec/pH); the wave must decide it before switching. Still needs a measured asparagine
+  ionisation enthalpy (not in GKL).
+- **Thiamine (from Dwivedi & Arnold 1972, read 2026-10-27):** at pH ≤ 6 and 121 °C at least 96 % of
+  thiamine loss is bridge cleavage to 4-methyl-5-(β-hydroxyethyl)thiazole, a channel the model does
+  not carry, so `k_thi_hmp + k_thi_mesh` is not the thiamine loss rate. B50's pH-7 H2S share (0.39,
+  ~100 °C) probably overstates the 120 °C share 1.3–2.3x (Dwivedi & Arnold 1971 at 120 °C: 0.31 →
+  0.17 over 5–30 min). Candidate: a bridge-cleavage step anchored on the 1972 k table (pH 3.5–8, 121 °C).
+- Backlog, not started: volatile stripping during open or vented processing (Henry's constants already
+  in the corpus); protein-thiol binding as a candidate identity of the thiol sink in matrices; a helper
+  that builds heat-up ramps from a process description.

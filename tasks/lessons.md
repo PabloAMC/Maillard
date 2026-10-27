@@ -185,3 +185,16 @@
   the tree, and the gate never sees a live DOI that points at the wrong paper, nor any value. Rule: a sentence
   that says something is verified states what was checked (which files, against what) and what was not; an
   unsourced record is deleted, not labelled and kept.
+
+## Textbook constants carry citations that were never checked (2026-10-27, B51)
+
+- **What happened.** The cysteine thiol and ammonium ionisation enthalpies (26 and 43 kJ/mol) had been
+  cited to Goldberg, Kishore & Lennen 2002 for two months; GKL's Table 7.23 prints 36.1 and 34.1. The H2S
+  pK1 was extrapolated by constant-dH van 't Hoff to 5.94 at 145 °C; Suleimenov & Seward measured 6.49.
+  No ionisation heat capacity was carried anywhere, though the module itself tabulates pKw because
+  constant-dH van 't Hoff is 0.49 units wrong for water at 145 °C. Every sulfur fit since B2.1 was
+  calibrated on these speciation factors.
+- **Rule.** "Textbook" and "immovable" are claims, not exemptions: an equilibrium constant gets the
+  same check against its cited table as a rate constant gets against its paper. Any temperature
+  extrapolation over more than ~50 K carries the source's dCp, or a measured high-temperature
+  correlation, or says why not.

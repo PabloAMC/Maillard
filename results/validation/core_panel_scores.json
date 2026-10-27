@@ -43,9 +43,9 @@
     "artifact": "core_panel_scores",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
-      "short": "cb3a21b4",
-      "branch": "b49-norfuraneol-heterocycles",
+      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
+      "short": "8185d698",
+      "branch": "b51-ph-state-everywhere",
       "dirty": false
     },
     "generated_by": "src/kinetic_core/scoring.py",
@@ -80,39 +80,39 @@
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH3.json",
-        "sha256": "b7630539c622871bf44daab616f78042bd625e103d6ec76a44237e9dae63ad9b"
+        "sha256": "4a8b51d4fd20e0972287ce5fb104960f85db554bdbcb5f72e33f03b6e1f73d28"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH5.json",
-        "sha256": "a664ad21718aff7209097d0b6909b463e6f91b5d3dd4784383e5820a1ab51eca"
+        "sha256": "8f75ba262c8f1758826eb640c195afc168fd59e64cd41be5feb0d603c15d0fb8"
       },
       {
         "path": "data/benchmarks/hofmann1998_c2c3_recombination_145C_20min_pH7.json",
-        "sha256": "a96fa8fc437d9fee0e69fe8004da06479edbf51cc7d31af64529c9b7e2d3ed5d"
+        "sha256": "4f6ad7c8c5b13a87027cfe4b0c360fed9b12c2234845b9323c400a16ba3b90ca"
       },
       {
         "path": "data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
-        "sha256": "db8fb70d862597dfe04b2272f93c1b50188d1f3b25a5c58fb7c7339a1d50082c"
+        "sha256": "e04894958074e4f6b405060fe628cde405d104bce9c086d6ab4be78f49158fbe"
       },
       {
         "path": "data/benchmarks/hofmann1998_furan2aldehyde_h2s_145C_20min_pH5.json",
-        "sha256": "87caac1c46a24d7c44a7a0aea2b7964d5c0a1e70991838a007f4b5d4212d773a"
+        "sha256": "daa2ceb2b740bca4999afa314b70fac9c0207d94cf01dad0cc981514d9be46fc"
       },
       {
         "path": "data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
-        "sha256": "60bc7cc5c7e04ee3c53cf731f48c3aa1c4bf775552ad6f0d4e35cf79e5fc9a90"
+        "sha256": "bbe95f2aa67fc59ed06811b36e60b30711b23a9356b0abfb3a6db8f219560b02"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_cysteine_145C_20min_pH5.json",
-        "sha256": "d31fdfdaa704aac64d820c772c86a60b3de9ab9b7a8e8d40f8a4bd53ca947524"
+        "sha256": "3a4fe5e0632f7a0b3062d813a7bd8dbce6942b82fe3f36abaa20d30a11a76d8e"
       },
       {
         "path": "data/benchmarks/hofmann1998_norfuraneol_h2s_145C_20min_pH5.json",
-        "sha256": "e32d49f3e456f31e4a2c607280774ec6c8a2b8de520eed5ba7c035410cd6fac8"
+        "sha256": "7be03951d06fc7b390ed55d7792578673df94156fb673913b055db9a4b0ea588"
       },
       {
         "path": "data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
-        "sha256": "8de992ed19dee9d8534960cc15748edec9b052112046d21e4b340144881aa8a6"
+        "sha256": "6cb47d5c81a3ba173f06e5303b53ba3315b04e8158614d62af9677401319900c"
       },
       {
         "path": "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
@@ -249,15 +249,15 @@
     "refused_benchmark_count": 9,
     "matched_compound_count": 50,
     "refused_compound_count": 27,
-    "within_band_count": 17,
-    "within_band_rate": 0.34,
+    "within_band_count": 18,
+    "within_band_rate": 0.36,
     "fold_summary": {
       "n": 50,
-      "median_fold_error": 7.7418955787584585,
+      "median_fold_error": 7.623598491069307,
       "worst_fold_error": 9631.58938385354,
       "best_fold_error": 1.0101717815321325,
-      "median_abs_log10_error": 0.886042272797009,
-      "geometric_mean_fold": 13.561433146873279
+      "median_abs_log10_error": 0.8784263407538495,
+      "geometric_mean_fold": 13.240871503726028
     },
     "evidence_role_totals": {
       "external_holdout": 21,
@@ -301,17 +301,17 @@
       "trust_loop": {
         "benchmarks": 16,
         "rows": 15,
-        "within_band": 9,
+        "within_band": 10,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.6,
+        "within_band_rate": 0.6666666666666666,
         "fold_summary": {
           "n": 15,
-          "median_fold_error": 2.482439038301332,
+          "median_fold_error": 2.209926978429618,
           "worst_fold_error": 9631.58938385354,
-          "best_fold_error": 1.2729243931033987,
-          "median_abs_log10_error": 0.39487859225123917,
-          "geometric_mean_fold": 6.413893015067558
+          "best_fold_error": 1.286846367406353,
+          "median_abs_log10_error": 0.3443779237353335,
+          "geometric_mean_fold": 5.922317094578576
         }
       }
     },
@@ -335,17 +335,17 @@
       "predictive": {
         "benchmarks": 16,
         "rows": 15,
-        "within_band": 9,
+        "within_band": 10,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.6,
+        "within_band_rate": 0.6666666666666666,
         "fold_summary": {
           "n": 15,
-          "median_fold_error": 2.482439038301332,
+          "median_fold_error": 2.209926978429618,
           "worst_fold_error": 9631.58938385354,
-          "best_fold_error": 1.2729243931033987,
-          "median_abs_log10_error": 0.39487859225123917,
-          "geometric_mean_fold": 6.413893015067558
+          "best_fold_error": 1.286846367406353,
+          "median_abs_log10_error": 0.3443779237353335,
+          "geometric_mean_fold": 5.922317094578576
         }
       }
     },
@@ -385,17 +385,17 @@
       "sulfur": {
         "benchmarks": null,
         "rows": 24,
-        "within_band": 6,
+        "within_band": 7,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.25,
+        "within_band_rate": 0.2916666666666667,
         "fold_summary": {
           "n": 24,
-          "median_fold_error": 16.669564409772892,
+          "median_fold_error": 16.652412683844457,
           "worst_fold_error": 476.76191129600323,
-          "best_fold_error": 1.2729243931033987,
-          "median_abs_log10_error": 1.2121410007938813,
-          "geometric_mean_fold": 17.91989770448188
+          "best_fold_error": 1.286846367406353,
+          "median_abs_log10_error": 1.2115747010649223,
+          "geometric_mean_fold": 17.048718578248593
         }
       },
       "trunk": {
@@ -418,51 +418,51 @@
     "honest_literature": {
       "benchmarks": 28,
       "rows": 50,
-      "within_band": 17,
+      "within_band": 18,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.34,
+      "within_band_rate": 0.36,
       "fold_summary": {
         "n": 50,
-        "median_fold_error": 7.7418955787584585,
+        "median_fold_error": 7.623598491069307,
         "worst_fold_error": 9631.58938385354,
         "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 0.886042272797009,
-        "geometric_mean_fold": 13.561433146873279
+        "median_abs_log10_error": 0.8784263407538495,
+        "geometric_mean_fold": 13.240871503726028
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
     "out_of_sample": {
       "benchmarks": 22,
       "rows": 44,
-      "within_band": 12,
+      "within_band": 14,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.2727272727272727,
+      "within_band_rate": 0.3181818181818182,
       "fold_summary": {
         "n": 44,
         "median_fold_error": 9.2282249910892,
         "worst_fold_error": 9631.58938385354,
         "best_fold_error": 1.0101717815321325,
         "median_abs_log10_error": 0.9651021224781408,
-        "geometric_mean_fold": 17.154554593252218
+        "geometric_mean_fold": 16.481843278039268
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
     "in_core_fit": {
       "benchmarks": 6,
       "rows": 6,
-      "within_band": 5,
+      "within_band": 4,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.8333333333333334,
+      "within_band_rate": 0.6666666666666666,
       "fold_summary": {
         "n": 6,
-        "median_fold_error": 1.908762978351394,
-        "worst_fold_error": 13.170794164180709,
-        "best_fold_error": 1.2729243931033987,
-        "median_abs_log10_error": 0.2706434563257921,
-        "geometric_mean_fold": 2.419713540929585
+        "median_fold_error": 1.8344492445720135,
+        "worst_fold_error": 13.13649071232384,
+        "best_fold_error": 1.286846367406353,
+        "median_abs_log10_error": 0.25574511329910776,
+        "geometric_mean_fold": 2.6582492688350454
       },
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
@@ -471,7 +471,7 @@
       "total": 31
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 9.4
+    "wall_seconds": 10.9
   },
   "benchmarks": [
     {
@@ -712,21 +712,19 @@
           "target_unit": "ppb",
           "measured": 310.0,
           "measured_ppb": 310.0,
-          "predicted": 4082.9461908960197,
-          "fold_error": 13.170794164180709,
-          "abs_log10_error": 1.1196119625641288,
+          "predicted": 4072.31212082039,
+          "fold_error": 13.13649071232384,
+          "abs_log10_error": 1.1184793631062102,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            583.7670405576583,
-            28556.68175755083
+            582.2466140502077,
+            28482.30562307853
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": true,
           "carried_declared_ug_per_l": null,
@@ -740,8 +738,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 13.170794164180709,
-      "mean_abs_log10_error": 1.1196119625641288,
+      "max_ratio": 13.13649071232384,
+      "mean_abs_log10_error": 1.1184793631062102,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -749,8 +747,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 13.17 > 1.10",
-        "mean |log10 ratio| 1.120 > 0.041"
+        "max ratio 13.14 > 1.10",
+        "mean |log10 ratio| 1.118 > 0.041"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -822,21 +820,19 @@
           "target_unit": "ppb",
           "measured": 5362.0,
           "measured_ppb": 5362.0,
-          "predicted": 3570.67107505791,
-          "fold_error": 1.5016785044847734,
-          "abs_log10_error": 0.17657696417731789,
+          "predicted": 3596.9016689605396,
+          "fold_error": 1.4907274353011581,
+          "abs_log10_error": 0.17339824428082548,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            510.5235261094512,
-            24973.759825363664
+            514.2738954404875,
+            25157.22017173295
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": true,
           "carried_declared_ug_per_l": null,
@@ -850,8 +846,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.5016785044847734,
-      "mean_abs_log10_error": 0.17657696417731789,
+      "max_ratio": 1.4907274353011581,
+      "mean_abs_log10_error": 0.17339824428082548,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -859,8 +855,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 1.502 > 1.10",
-        "mean |log10 ratio| 0.177 > 0.041"
+        "max ratio 1.491 > 1.10",
+        "mean |log10 ratio| 0.173 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -932,21 +928,19 @@
           "target_unit": "ppb",
           "measured": 6230.0,
           "measured_ppb": 6230.0,
-          "predicted": 2509.6285966655705,
-          "fold_error": 2.482439038301332,
-          "abs_log10_error": 0.39487859225123917,
-          "within_band": true,
+          "predicted": 1339.6379568473355,
+          "fold_error": 4.6505102129694045,
+          "abs_log10_error": 0.6675006024645163,
+          "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            358.81894844487783,
-            17552.684217202488
+            191.53729902961467,
+            9369.61032925825
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": true,
           "carried_declared_ug_per_l": null,
@@ -960,8 +954,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 2.482439038301332,
-      "mean_abs_log10_error": 0.39487859225123917,
+      "max_ratio": 4.6505102129694045,
+      "mean_abs_log10_error": 0.6675006024645163,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -969,10 +963,10 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 2.482 > 1.10",
-        "mean |log10 ratio| 0.395 > 0.041"
+        "max ratio 4.651 > 1.10",
+        "mean |log10 ratio| 0.668 > 0.041"
       ],
-      "within_band_count": 1,
+      "within_band_count": 0,
       "lanes": [
         "sulfur"
       ]
@@ -1124,21 +1118,19 @@
           "target_unit": "ppb",
           "measured": 11016.0,
           "measured_ppb": 11016.0,
-          "predicted": 14022.535114427039,
-          "fold_error": 1.2729243931033987,
-          "abs_log10_error": 0.10480260896934632,
+          "predicted": 14175.899583348384,
+          "fold_error": 1.286846367406353,
+          "abs_log10_error": 0.10952670092897376,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            2004.898777044252,
-            98075.52046354472
+            2026.8263553083348,
+            99148.17244746457
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": true,
           "carried_declared_ug_per_l": null,
@@ -1152,8 +1144,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.2729243931033987,
-      "mean_abs_log10_error": 0.10480260896934632,
+      "max_ratio": 1.286846367406353,
+      "mean_abs_log10_error": 0.10952670092897376,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1161,8 +1153,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 1.273 > 1.10",
-        "mean |log10 ratio| 0.105 > 0.041"
+        "max ratio 1.287 > 1.10",
+        "mean |log10 ratio| 0.110 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -1316,21 +1308,19 @@
           "target_unit": "ppb",
           "measured": 1016.0,
           "measured_ppb": 1016.0,
-          "predicted": 2352.9010114535026,
-          "fold_error": 2.3158474522180144,
-          "abs_log10_error": 0.3647099484742664,
+          "predicted": 2213.021790704355,
+          "fold_error": 2.178171053842869,
+          "abs_log10_error": 0.33809198231739007,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            336.4105221969388,
-            16456.510139887927
+            316.4110230817371,
+            15478.175818379026
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": true,
           "carried_declared_ug_per_l": null,
@@ -1344,8 +1334,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 2.3158474522180144,
-      "mean_abs_log10_error": 0.3647099484742664,
+      "max_ratio": 2.178171053842869,
+      "mean_abs_log10_error": 0.33809198231739007,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1353,8 +1343,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 2.316 > 1.10",
-        "mean |log10 ratio| 0.365 > 0.041"
+        "max ratio 2.178 > 1.10",
+        "mean |log10 ratio| 0.338 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -1426,21 +1416,19 @@
           "target_unit": "ppb",
           "measured": 4224.0,
           "measured_ppb": 4224.0,
-          "predicted": 5857.7058868625745,
-          "fold_error": 1.3867674921549655,
-          "abs_log10_error": 0.14200365260998016,
+          "predicted": 5838.499333851746,
+          "fold_error": 1.3822204862338414,
+          "abs_log10_error": 0.1405773254672571,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            837.5167024379782,
-            40969.59279391263
+            834.7706087874067,
+            40835.25954621695
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": true,
           "carried_declared_ug_per_l": null,
@@ -1454,8 +1442,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.3867674921549655,
-      "mean_abs_log10_error": 0.14200365260998016,
+      "max_ratio": 1.3822204862338414,
+      "mean_abs_log10_error": 0.1405773254672571,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1463,8 +1451,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 1.387 > 1.10",
-        "mean |log10 ratio| 0.142 > 0.041"
+        "max ratio 1.382 > 1.10",
+        "mean |log10 ratio| 0.141 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -1518,21 +1506,19 @@
           "target_unit": "ppb",
           "measured": 121.0,
           "measured_ppb": 121.0,
-          "predicted": 830.6428813075452,
-          "fold_error": 6.864817200888803,
-          "abs_log10_error": 0.8366289771587496,
-          "within_band": false,
+          "predicted": 191.0584187276661,
+          "fold_error": 1.578995196096414,
+          "abs_log10_error": 0.19838080872140842,
+          "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            118.7627546163615,
-            5809.629445659946
+            27.31694282990269,
+            1336.2886027918748
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": false,
           "carried_declared_ug_per_l": null,
@@ -1546,21 +1532,19 @@
           "target_unit": "ppb",
           "measured": 198.0,
           "measured_ppb": 198.0,
-          "predicted": 730.6381793034808,
-          "fold_error": 3.6900918146640445,
-          "abs_log10_error": 0.5670371721498138,
-          "within_band": false,
+          "predicted": 546.3981501553859,
+          "fold_error": 2.7595866169463936,
+          "abs_log10_error": 0.4408440300995948,
+          "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            104.46439108148681,
-            5110.18293917487
+            78.1223205423605,
+            3821.583081769102
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
-          "envelope_state": "in_envelope_extrapolated",
-          "declaration_warnings": [
-            "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
-          ],
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
           "shared_with": null,
           "in_core_fit": false,
           "carried_declared_ug_per_l": null,
@@ -1574,8 +1558,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 6.864817200888803,
-      "mean_abs_log10_error": 0.7018330746542817,
+      "max_ratio": 2.7595866169463936,
+      "mean_abs_log10_error": 0.3196124194105016,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1583,10 +1567,10 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 6.865 > 1.10",
-        "mean |log10 ratio| 0.702 > 0.041"
+        "max ratio 2.76 > 1.10",
+        "mean |log10 ratio| 0.320 > 0.041"
       ],
-      "within_band_count": 0,
+      "within_band_count": 2,
       "lanes": [
         "sulfur"
       ]

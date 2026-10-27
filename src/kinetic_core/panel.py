@@ -278,6 +278,14 @@ def buffer_from_bundle(bench: Mapping[str, Any]):
         return BufferSpec(
             kind="acetate", acetate_mol_l=float(molarity), declared=True,
             source=note)
+    if species == "pyrophosphate":
+        return BufferSpec(
+            kind="pyrophosphate", pyrophosphate_mol_l=float(molarity), declared=True,
+            source=note)
+    if species == "phthalate":
+        return BufferSpec(
+            kind="phthalate", phthalate_mol_l=float(molarity), declared=True,
+            source=note)
     if species == "citrate_phosphate":
         return BufferSpec(
             kind="citrate_phosphate", phosphate_mol_l=float(molarity) * 2.0 / 3.0,

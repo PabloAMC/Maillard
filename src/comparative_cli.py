@@ -304,9 +304,15 @@ def _core_buffer(spec: Mapping[str, Any]):
         return None
     from src.kinetic_core.ph_state import BufferSpec
 
+    # B51 (2026-10-27): every molarity BufferSpec knows is read, so an acetate, McIlvaine,
+    # pyrophosphate or phthalate spec is charged as stated instead of raising on a zero molarity.
     return BufferSpec(
         kind=str(raw.get("kind") or "phosphate"),
         phosphate_mol_l=float(raw.get("phosphate_mol_l") or 0.0),
+        citrate_mol_l=float(raw.get("citrate_mol_l") or 0.0),
+        acetate_mol_l=float(raw.get("acetate_mol_l") or 0.0),
+        pyrophosphate_mol_l=float(raw.get("pyrophosphate_mol_l") or 0.0),
+        phthalate_mol_l=float(raw.get("phthalate_mol_l") or 0.0),
         declared=True,
         source=str(raw.get("source") or "declared in the spec"),
     )

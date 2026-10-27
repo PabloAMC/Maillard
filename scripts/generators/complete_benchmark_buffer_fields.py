@@ -932,6 +932,60 @@ def bundle_paths():
     return sorted(BUNDLE_DIR.rglob("*.json"))
 
 
+# ---------------------------------------------------------------------------
+# WAVE B51 (2026-10-27, FIT_HOLDOUT_DECLARATION.md Amendment 44): THE NINE TRUST-LOOP HOFMANN
+# BUNDLES. The 21 external bundles above got their buffer at B2.3; the nine trust-loop bundles from
+# the SAME paper and the SAME 'Model Experiments' paragraph never did, so the scorer integrated them
+# UNBUFFERED (with the extrapolation warning) while every sulfur fit since B2.2 integrated the same
+# pots in 0.5 M phosphate (generate_kinetic_core_b2_3_fit.BUFFER_HOFMANN). Same licence, same fence:
+# exactly one key, conditions.buffer, and everything else byte-identical by hash.
+# ---------------------------------------------------------------------------
+TRUST_LOOP_DIR = data_paths.BENCHMARKS_DIR
+_HOFMANN_TRUST_LOOP = dict(
+    _HOFMANN,
+    provenance_note=(
+        "Hofmann & Schieberle 1998, JAFC 46:235, p. 236, EXPERIMENTAL PROCEDURES / 'Model "
+        "Experiments', verbatim: 'the reactants (amounts detailed in the tables) were dissolved in "
+        "phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at "
+        "145 degC in a laboratory autoclave (200 mL; Type II; Roth, Germany)'. Read from "
+        "data/articles/hofmann1998.pdf. Completed by wave B51 (Amendment 44): until 2026-10-27 this "
+        "trust-loop bundle carried no buffer and was scored unbuffered, while the sulfur fit "
+        "integrated the same pot in 0.5 M phosphate. The pH is the buffer's nominal bench value."
+    ),
+)
+TRUST_LOOP_RECORDS: Dict[str, Dict[str, Any]] = {
+    name: _HOFMANN_TRUST_LOOP for name in (
+        "hofmann1998_c2c3_recombination_145C_20min_pH3",
+        "hofmann1998_c2c3_recombination_145C_20min_pH5",
+        "hofmann1998_c2c3_recombination_145C_20min_pH7",
+        "hofmann1998_fructose_cysteine_145C_20min_pH5",
+        "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
+        "hofmann1998_glucose_cysteine_145C_20min_pH5",
+        "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
+        "hofmann1998_norfuraneol_h2s_145C_20min_pH5",
+        "hofmann1998_ribose_cysteine_145C_20min_pH5",
+    )
+}
+
+
+def complete_trust_loop(check: bool) -> list:
+    """Write (or with ``check`` only compare) the B51 trust-loop buffer blocks; returns the drifted ids."""
+    drift = []
+    for key, record in TRUST_LOOP_RECORDS.items():
+        path = TRUST_LOOP_DIR / f"{key}.json"
+        payload = json.loads(path.read_text())
+        before = stable_hash_without_buffer(payload)
+        conditions = payload.setdefault("conditions", {})
+        if conditions.get("buffer") != record:
+            drift.append(key)
+        conditions["buffer"] = dict(record)
+        if stable_hash_without_buffer(payload) != before:
+            raise SystemExit(f"{path.name}: the edit changed something other than conditions.buffer.")
+        if not check:
+            path.write_text(json.dumps(payload, indent=2) + "\n")
+    return drift
+
+
 def stable_hash_without_buffer(payload: Dict[str, Any]) -> str:
     """
     SHA-256 of the whole bundle with ``conditions.buffer`` removed.
@@ -1018,6 +1072,8 @@ def main() -> int:
           f"{n_none} state NO BUFFER positively. "
           f"{n_disagree} carry a pH disagreement with their own source "
           f"(reported, not edited).")
+    drift += complete_trust_loop(args.check)
+    print(f"B51: {len(TRUST_LOOP_RECORDS)} trust-loop Hofmann bundles carry the 0.5 M phosphate block.")
     if args.check:
         if drift:
             print("--check: buffer blocks DRIFT from this script on: " + ", ".join(drift))

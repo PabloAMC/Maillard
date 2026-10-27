@@ -4,16 +4,16 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
-      "short": "cb3a21b4",
-      "branch": "b49-norfuraneol-heterocycles",
+      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
+      "short": "8185d698",
+      "branch": "b51-ph-state-everywhere",
       "dirty": true
     },
     "generated_by": "src/data_wishlist.py",
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "8703679193d99cbafe0008bac5485f51621f809fa1712cb58f57d7949af21479"
+        "sha256": "4b5491f1b5281b6c3606d82ad9eb1e51f16b91c427b775716661e656cb92df32"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "1c99d0e4582ecde780202fc63d8f633a1882a80fbba22eb3614a4be1cdffbd40"
+        "sha256": "5088885643e8ded393977162467c58d9ced03562d9e240ed76c8e31773bf0efc"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "34dc4106c5028c51fdb8e45059620d78f08a97b56e60f0b9dac01c3984f634a6"
+        "sha256": "2bf4eed5f21d20e28a589bd84d837f52680f39147f75e6e896ccc1c037364d85"
       },
       {
         "path": "results/validation/lane_offset_diagnostic.json",
@@ -37,7 +37,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "58a2b3d6499647fb4fca32879ed04fdeec60eb962ca1991964d380f312a41358"
+        "sha256": "f5c36ab8d8262ea1827d9d1a0bd821415bae697d37413ee5d2848b5cfae27cee"
       }
     ]
   },
@@ -602,12 +602,12 @@
     },
     {
       "axis": "ph",
-      "agree": 5,
+      "agree": 6,
       "evaluable": 8,
       "not_evaluable": 3,
       "verdict": "caution",
-      "wilson_lower_bound": 0.306,
-      "additional_agreeing_claims_to_trust": 7,
+      "wilson_lower_bound": 0.409,
+      "additional_agreeing_claims_to_trust": 3,
       "structural_block": null
     },
     {
@@ -684,8 +684,8 @@
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.597264687689625,
-      "envelope_miss_log10": 1.1191688514405078,
+      "voi_score": 10.590436114820793,
+      "envelope_miss_log10": 1.117390589483075,
       "template": "free_precursor_sulfur_yield"
     },
     {
@@ -757,7 +757,7 @@
       "you_could_predict": "the direction of a change along time with a 'trust' tag instead of 'caution'"
     },
     {
-      "if_measured": "7 more independent ordering claims on ph (all agreeing)",
+      "if_measured": "3 more independent ordering claims on ph (all agreeing)",
       "you_could_predict": "the direction of a change along ph with a 'trust' tag instead of 'caution'"
     },
     {
