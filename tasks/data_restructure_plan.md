@@ -2664,6 +2664,21 @@ correctly, 4 rounded, 15 read off figures (all within their sigma), and **six wi
   14/45) but the directional panel lost a claim (25/43 -> 24/45): the corrected excess-H2S Whitfield row
   was bought back by opening the hexose route (`k_glc_ha` +3.6 decades; SUG-09 flips). The engine keeps
   B9. `kinetic_core_b47_prereg.md` sec. 6.
+- [x] **Trunk fit rows checked against the PDFs (2026-10-27): no transcription defect.** B1 (367 time
+  points re-extracted from Martins 2005 Fig. 8's vector paths, all within 0.69 % of full scale), B7, B18,
+  B20, B21, B41: 69 rows exact, converted correctly or digitised. Metadata only, in frozen files (left for
+  the next wave that touches them): B21's rows say "no interval printed" where Hamzalioglu 2026 prints
+  +/-21/5/6 % (the 0.15 dex sigma is 2-7x loose); B18 says "R2 >= 0.99" where Zhou 2024 prints 0.963-0.995;
+  B1 cites "Fig. 6" for Fig. 8; `parameters_furanic.py:428` credits Blank 1997 with Blank & Fay 1996's
+  loading. Interpretive caveats: B41's Zhang rows run at a declared pH 6.5 the paper does not print; Leahy's
+  rates are 24 h regressions scored as 2 h means; Nguyen's k8 product mapping is the repository's.
+- [ ] **Literature for the three no-experiment gaps (2026-10-27 search): no printed constant found.**
+  Downloads that could close them, in order: Arnold & Dwivedi 1971 (JAFC 19:923, "Hydrogen sulfide from
+  heat degradation of thiamine"); Brands & van Boekel 2002 (JAFC 50:6725; the PDF in `data/articles/`
+  named brands2002 is a different paper); Dwivedi & Arnold 1973 review (JAFC 21:54); Kabyemela 1999 (Ind
+  Eng Chem Res 38:2888; glucose retro-aldol, but at 300-400 C); Hayami 1961. Correction: `k_glc_ha` makes
+  glycolaldehyde (hydroxyacetaldehyde), not hydroxyacetone. MFT stability in clean buffer at cooking
+  temperature: none published (round-4 search agrees); van Seeventer 2001 has 50 C only.
 - [ ] **Next sulfur question (structural):** at B9's optimum the model destroys MFT in excess H2S (fed
   norfuraneol: 0.012 mol % at 20/40 mM, 8e-5 at the paper's 50/97 mM). Find the consuming route and
   whether any measurement licenses it; until then the corrected rows wait in the B47 generator.

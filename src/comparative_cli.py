@@ -424,6 +424,22 @@ def predict_core(
         }
 
     run = predict(core_spec, requested)
+    # 2026-10-27: ONE REFUSED TARGET NO LONGER SINKS THE OTHERS. A request for MFT and methional
+    # used to return nothing, because methional has no route; MFT alone is answered. When a
+    # multi-target request is refused, the targets that are answerable ON THEIR OWN are answered
+    # together in one integration and the rest are listed with their own reasons. A refusal that
+    # is about the targets TOGETHER (a lane conflict: summing two lanes spends the same cysteine
+    # twice) survives, because the answerable subset is then refused again and nothing is split.
+    refused_targets: List[Dict[str, Any]] = []
+    if not run.answered and len(requested) > 1:
+        alone = {t: predict(core_spec, [t]) for t in requested}
+        answerable = [t for t in requested if alone[t].answered]
+        if answerable and len(answerable) < len(requested):
+            subset = predict(core_spec, answerable)
+            if subset.answered:
+                refused_targets = [{"target": t, "reasons": list(alone[t].declaration.reasons)}
+                                   for t in requested if t not in answerable]
+                run = subset
     rows: List[Dict[str, Any]] = []
     oav_payload: Dict[str, Any] = {}
     if run.answered:
@@ -462,6 +478,7 @@ def predict_core(
         "system": {"name": core_spec.name, "spec": dict(spec)},
         "answered": run.answered,
         "declaration": run.declaration.as_dict(),
+        "refused_targets": refused_targets,
         "rows": rows,
         "oav_table": oav_payload,
         "matrix": {"sites": run.run_metadata.get("matrix_sites"), "note": run.run_metadata.get("matrix_sites_note"),
@@ -659,6 +676,10 @@ def render_predict_core_text(payload: Mapping[str, Any]) -> str:
     out.append("")
     _render_declaration(payload.get("declaration") or {}, out)
     out.append("")
+    for refused in payload.get("refused_targets") or []:
+        out.append(_wrap(f"NOT ANSWERED, BY NAME: {refused['target']!r} -- "
+                         + " ".join(refused["reasons"]) + " The other targets are answered below."))
+        out.append("")
     if not payload.get("answered"):
         out.append("  NO NUMBER IS EMITTED. The core declined this request above.")
         out.append("")

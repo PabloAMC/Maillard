@@ -493,3 +493,17 @@ def test_a_one_armed_comparison_spec_exits_nonzero_with_a_usable_hint(tmp_path):
     proc = _run_cli("compare", str(bad), expect_ok=False)
     assert proc.returncode == 2
     assert "--template" in proc.stderr
+
+
+def test_one_refused_target_does_not_sink_the_others():
+    """2026-10-27. MFT + FFT + methional used to return nothing because methional has no route
+    (B22); the two thiols are answered alone. Now they are answered together and methional is
+    listed by name with its own reason."""
+    spec = {"name": "partial", "precursors": {"D-Ribose": 50.0, "L-Cysteine": 10.0, "L-Methionine": 10.0},
+            "temp_C": 150.0, "time_min": 10.0, "ph": 6.0, "aw": 0.98}
+    targets = ["2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)", "Methional (3-(methylthio)propanal)"]
+    payload = comparative_cli.predict_core(spec, targets=targets)
+    assert payload["answered"]
+    assert {r["compound"] for r in payload["rows"]} >= {"2-Methyl-3-furanthiol (MFT)", "2-Furfurylthiol (FFT)"}
+    refused = {r["target"] for r in payload["refused_targets"]}
+    assert len(refused) == 1 and "methional" in next(iter(refused)).lower()

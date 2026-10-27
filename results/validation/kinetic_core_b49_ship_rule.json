@@ -1,0 +1,379 @@
+{
+  "artifact": "kinetic_core_b49_ship_rule",
+  "provenance": {
+    "artifact": "kinetic_core_b49_ship_rule",
+    "generated_on": "2026-10-27",
+    "git": {
+      "commit": "3220603e7125503e051239ede4338277b6d0f682",
+      "short": "3220603e",
+      "branch": "b49-norfuraneol-heterocycles",
+      "dirty": true
+    },
+    "generated_by": "scripts/generators/generate_kinetic_core_b49_ship_rule.py",
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b9_fit_report.json",
+        "sha256": "c27e21b956fb6be7d3c7e402139cdba467e8ffe18b898611a4db33f5b07c2dca"
+      },
+      {
+        "path": "results/validation/kinetic_core_b49_fit_report.json",
+        "sha256": "40ac09edc84641e5bb09354bf6d8f3f739f94f6f8aa91fee721eabda4a4a6aeb"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
+        "sha256": "219cf3a887b27f44b0ced51f273458e5e622e867ced4d74efce4a2587e9a8379"
+      },
+      {
+        "path": "results/validation/kinetic_core_b49_laplace_covariance.json",
+        "sha256": "a5d1757e14efcab6789e3718387997121ac2cc2c41b321efc776d9e41ec440c5"
+      }
+    ]
+  },
+  "prereg": "results/validation/kinetic_core_b49_prereg.md",
+  "T1_mechanism_pH6_5": {
+    "b9": {
+      "mft_molpct_pH4_5": 0.0768723669108827,
+      "mft_molpct_pH6_5": 0.15952485117701512,
+      "fall_factor": 0.4818833325572707
+    },
+    "b49": {
+      "mft_molpct_pH4_5": 0.07487018026045231,
+      "mft_molpct_pH6_5": 0.0743278752419722,
+      "fall_factor": 1.007296118942115
+    },
+    "measured": {
+      "mft_molpct_pH4_5": 0.15,
+      "mft_molpct_pH6_5": "< 0.001 (not detected)",
+      "fall_factor": ">= 150"
+    },
+    "pass": false,
+    "b49_cost": 28.98917990359694
+  },
+  "T2_holdout_sulfur": {
+    "b9": {
+      "rows": 14,
+      "within_3x": 1,
+      "median_abs_log10": 1.8736833823079146,
+      "detail": [
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 4.932286822153985,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 23.562429418942845,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 133.63133123997073,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 140.33687482638516,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 1.99019182454872,
+          "within": true
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 3.820966075364827,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 9.314883478725779,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 476.7619044650165,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 29.45034962944069,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 366.7779220972294,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 56.04706628978601,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 216.3361166007465,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 99.72725831767458,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 130.70366848340444,
+          "within": false
+        }
+      ]
+    },
+    "b49": {
+      "rows": 14,
+      "within_3x": 3,
+      "median_abs_log10": 1.68298028752596,
+      "detail": [
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 2.3467363018625966,
+          "within": true
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 55.35483619596579,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 232.18273104137862,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 548.769315473567,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 1.2953739680228775,
+          "within": true
+        },
+        {
+          "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 2.044207940484722,
+          "within": true
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 4.343196925772112,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 386.26379721323895,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 13.030875797561505,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 299.66850477217537,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 24.033172494792748,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 167.6844800780379,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 41.95705577178761,
+          "within": false
+        },
+        {
+          "benchmark": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "panel": "maillard_path_holdout",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 92.14933453715642,
+          "within": false
+        }
+      ]
+    },
+    "pass": true
+  },
+  "T3_hofmann_pH5": {
+    "b9": {
+      "rows": 2,
+      "within_3x": 0,
+      "median_abs_log10": 0.7018330761506452,
+      "detail": [
+        {
+          "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "panel": "trust_loop",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 6.864817242418347,
+          "within": false
+        },
+        {
+          "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "panel": "trust_loop",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 3.69009181776884,
+          "within": false
+        }
+      ]
+    },
+    "b49": {
+      "rows": 2,
+      "within_3x": 1,
+      "median_abs_log10": 0.3587402247408973,
+      "detail": [
+        {
+          "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "panel": "trust_loop",
+          "lane": "sulfur",
+          "compound": "2-Furfurylthiol (FFT)",
+          "fold": 3.1668476970078943,
+          "within": false
+        },
+        {
+          "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+          "panel": "trust_loop",
+          "lane": "sulfur",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "fold": 1.6476056481984724,
+          "within": true
+        }
+      ]
+    },
+    "pass": true
+  },
+  "T4_directional": {
+    "b9": {
+      "agree": 25,
+      "evaluable": 43
+    },
+    "b49": {
+      "agree": 25,
+      "evaluable": 44
+    },
+    "pass": true
+  },
+  "T5_laplace": {
+    "b9": {
+      "identified": 20,
+      "free": 23,
+      "chi2_red": null
+    },
+    "b49": {
+      "identified": 17,
+      "free": 24,
+      "chi2_red": null
+    }
+  },
+  "union_panel": {
+    "b9": {
+      "rows": 45,
+      "within_3x": 12,
+      "median_abs_log10": 0.9613681301738599
+    },
+    "b49": {
+      "rows": 45,
+      "within_3x": 15,
+      "median_abs_log10": 0.9385586837372123
+    }
+  },
+  "verdict": "DO NOT SHIP",
+  "rule": "SHIP if T1 (pH 6.5 mechanism, held out), T2 (hold-out sulfur rows), T3 (Hofmann pH-5 bundles) and T4 (directional) hold"
+}

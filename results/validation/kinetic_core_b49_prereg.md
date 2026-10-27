@@ -72,3 +72,29 @@ right sign and roughly the right size, but the fit may keep the sink fast), the 
 ## 5. Verdict
 
 *(Written after the run, below this line.)*
+
+**DO NOT SHIP** (`kinetic_core_b49_ship_rule.md`, 2026-10-27). The engine keeps B9; `r_nf_shet` stays in
+the network at zero.
+
+| test | B9 | B49 | pass |
+| --- | --- | --- | --- |
+| T1 Whitfield pot, NF + Cys 50/50 mM, 140 °C: MFT fall pH 4.5 → 6.5 (measured ≥ 150x) | 0.48x (rises) | 1.01x | **no** |
+| T2 hold-out sulfur rows within 3x | 1/14 (1.87 dex) | 3/14 (1.68 dex) | yes |
+| T3 Hofmann ribose pH 5 within 3x | 0/2 (0.70 dex) | 1/2 (0.36 dex) | yes |
+| T4 directional, independent agree | 25/43 | 25/44 | yes |
+| T5 Laplace (recorded) | 20/23 | 17/24; `k_nf_shet` identified (σ 0.39 dex) | — |
+| union within 3x (recorded) | 12/45 | 15/45 | — |
+
+Both starts at cost 28.99; log10 k_nf_shet −3.45; the excess-H2S row −2.0σ → −1.6σ without the hexose
+route opening (`k_glc_ha` +1.0 decade, against B47's +3.6).
+
+**Why T1 failed, probed after the verdict.** The branch does what §2 declared: SHET/MFT rises 85x (Cys pot)
+and 44x (H2S pot) from pH 4.5 to 6.5. MFT nevertheless stays flat in the cysteine pot because the model's
+pot is H2S-limited (77 % of the norfuraneol unreacted after 60 min) and cysteine releases H2S faster at
+pH 6.5 (Zheng & Ho's measured pH dependence), which cancels the branch. In the H2S-fed pot MFT does fall
+(2.9x). The fit also moved `k_thiol_decay` +6.65 decades (unidentified, σ 7 dex), so MFT levels still
+follow the timing of formation against a fast sink: early-made MFT in the H2S pot is destroyed, the
+cysteine pot keeps making it — which is why the two new ratio rows pull opposite ways (+2.0σ, −2.45σ;
+model SHET/MFT 225 vs 1.55 at pH 4.5 where the paper has 35 vs 15). **The heterocycle branch is the right
+chemistry and the wrong lever:** until the thiol sink is measured (EXPERIMENTS_BRIEF row 1, "where the
+thiols go"), the sulfur lane's levels and their pH response are set by a constant no source pins.

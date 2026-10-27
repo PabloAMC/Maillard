@@ -66,6 +66,7 @@ NEW_ROWS: Tuple[Dict[str, Any], ...] = (
 )
 
 _B8_ALL_KEYS, _B8_FREE_KEYS = B8.ALL_KEYS, B8.FREE_KEYS
+_B23_BUILD_ORIGINAL = B23.build_parameters   # B9's builder, for the ship rule's B9 comparison
 ALL_KEYS: Tuple[str, ...] = tuple(_B8_ALL_KEYS) + ("log10_k_nf_shet",)
 SHET_SLOT = len(ALL_KEYS) - 1
 FREE_KEYS: Tuple[str, ...] = tuple(_B8_FREE_KEYS) + ("log10_k_nf_shet",)
