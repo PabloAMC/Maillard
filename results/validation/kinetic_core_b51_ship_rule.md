@@ -8,11 +8,11 @@
 | --- | --- | --- | --- | --- | --- |
 | T2 hold-out sulfur rows within 3x | 1/14 (median 1.87 dex) | 1/14 (median 1.61 dex) | True | 0/14 (median 1.42 dex) | True |
 | T3 Hofmann ribose + xylose pH 5 | 3/4 (median 0.37 dex) | 0/4 (median 1.80 dex) | False | 0/4 (median 2.48 dex) | False |
-| T4 directional, independent agree | 18/31 | 18/32 | True | 17/31 | False |
-| T5 pH-axis claims (recorded) | 6/8 | 5/8 | — | 5/8 | — |
+| T4 directional, independent agree | 17/30 | 17/31 | True | 16/30 | False |
+| T5 pH-axis claims (recorded) | 5/7 | 4/7 | — | 4/7 | — |
 | union panel within 3x (recorded) | 18/50 (median 0.88 dex) | 16/50 (median 0.95 dex) | — | 15/50 (median 0.95 dex) | — |
 
-**T1 (recorded), cost on B47's 52 rows:** baseline 36.46, (A) 20.41, (B) 43.29. Laplace for (A): {'identified': 15, 'free': 23}.
+**T1 (recorded), cost on B47's 52 rows:** baseline 36.46, (A) 20.41, (B) 43.29. Laplace for (A): {'identified': 17, 'free': 23}.
 
 **Per-switch attribution** — B9's frozen vector on its own 54 rows, one switch on at a time:
 
