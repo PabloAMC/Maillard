@@ -131,8 +131,8 @@
     "artifact": "figure_inputs",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "bfbd2cb489849275c10e874dd6724be9e5b4ffcc",
-      "short": "bfbd2cb4",
+      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
+      "short": "cb3a21b4",
       "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
@@ -140,7 +140,7 @@
     "inputs": [
       {
         "path": "data/keys/papers.yml",
-        "sha256": "d3505a472c4e10d79f130a896ea088a5f86ad6f00f549c319908b6391853ec9e"
+        "sha256": "b9490475f74ded0709d4c81805b2f299f4741056c5f1175cc2e8f30e262fa3c7"
       },
       {
         "path": "data/lit/reaction_rules.yml",
@@ -168,15 +168,15 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "5182426f3fd3da907898349ec8418db9be577c2080965abb561cb3ea2372633c"
+        "sha256": "1c99d0e4582ecde780202fc63d8f633a1882a80fbba22eb3614a4be1cdffbd40"
       },
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "77418a973b629e4dc38eafdb1b1d41631f32b19c452969033298da6388a7b2b6"
+        "sha256": "8703679193d99cbafe0008bac5485f51621f809fa1712cb58f57d7949af21479"
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "07a0c9d5f43f7168d1cd30a65746bd552459d7fabd475d148fef2aa149e03700"
+        "sha256": "2eb307babb809d5bc25716a3dfc8b882382ddc56b8c0589d8112af9c7afa7b01"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -284,7 +284,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/00_map.png",
-        "sha256": "9e6111c6bb4076a920c71c039ecb62f4d8e229a6ac1e1b2d5dcc164305e24b44"
+        "sha256": "ced6299cdc53856fb7b0ec9a8baa24ff8046153f7adacb97bd004cb1d30375af"
       },
       {
         "path": "docs/assets/thiol_sink/01_hofmann_pot_100C.png",
@@ -316,7 +316,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/08_path_scorecard.png",
-        "sha256": "39ff17a471fd8ee2bd05ba9c3b3f1fcf1148376c8ff3c6f3b0da863231669868"
+        "sha256": "6122e7d60c1291cbfef189065821aeae98468fdb0e239a3fc43543d3f8008566"
       },
       {
         "path": "docs/assets/thiol_sink/09_repository_flow.png",
@@ -356,7 +356,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "66cb69e476e13e3589f9dc5c5a016ce78307767574dde91437bfce25157c9857"
+        "sha256": "14df84b552c4b59ed318fc401a7f6c3721c4f7a6f97696654b04a5706633d1af"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",

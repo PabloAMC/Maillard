@@ -4,7 +4,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 
 * **headline (strictly independent, evaluable): 17/31 (55%)**; 24 independent claims not evaluable
 * independent, excluding pH and water activity: 11/22 (50%); pH and water activity alone: 6/9 (67%)
-* all claims (independent + fit-adjacent + fit-system overlap): 27/50 (54%); 42 not evaluable
+* all claims (independent + fit-adjacent + fit-system overlap): 26/50 (52%); 42 not evaluable
 * misses where the lane carries no term for the moved axis (identical predictions): 3
 * not evaluable, by reason: the claim carries no runnable conditions (prose-only) (32); a predicted concentration is zero; no direction is defined (4); refused by the engine (3); arm 'pH 4.5' refused (1); arm 'hydrolysate + xylose (no cysteine), 120 C' refused (1); the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d (1)
 
@@ -32,7 +32,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | lipid_lane | 0 | 1 | 0.00 | 3 |
 | matrix_identity | 0 | 2 | 0.00 | 1 |
 | moisture_aw | 1 | 1 | 1.00 | 4 |
-| ph | 11 | 15 | 0.73 | 3 |
+| ph | 10 | 15 | 0.67 | 3 |
 | process_heating | 0 | 0 | - | 4 |
 | ranking | 1 | 4 | 0.25 | 2 |
 | scope | 0 | 0 | - | 3 |
@@ -52,7 +52,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | SUG-06 | sugar_identity | retired | MFT | A>B | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | PH-01 | ph | fit_system_overlap | MFT | A>B | **agree** | sulfur | 303, 52.5 |  |
 | PH-02 | ph | fit_system_overlap | bis(2-methyl-3-furyl) disulfide | A>B | **agree** | sulfur | 26, 8.66 |  |
-| PH-03 | ph | not_independent | FFT | decreasing | **agree** | sulfur | 2.46e+03, 0.439, 0.104 |  |
+| PH-03 | ph | not_independent | FFT | decreasing | **disagree** | sulfur | 2.46e+03, 0.439, 69.7 |  |
 | PH-04 | ph | independent | 2,5-Dimethylpyrazine | increasing | **not_evaluable** | - | - | arm 'pH 4.5' refused: PYRAZINE TARGETS '2,5-Dimethylpyrazine' (wave B18) run on the trunk lane only: the sulfur lane's network keeps the topology its fit was ru |
 | PH-05 | ph | independent | Furfural | decreasing | **agree** | sulfur | 146, 131, 58.1 |  |
 | TEMP-01 | temperature | independent | Acrylamide | decreasing | **disagree** | acrylamide | 13.6, 357, 1.04e+03 |  |
@@ -132,7 +132,7 @@ Panel `docs/validation/directional_claims_panel.yml` (92 claims, flat tolerance 
 | WANG22-T-03 | time | retired | MFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WANG22-T-04 | time | retired | FFT | peak | **not_evaluable** | - | - | the claim carries no runnable conditions (prose-only) |
 | WHI-PH-01 | ph | fit_adjacent | MFT | A>B | **disagree** | sulfur | 4.29e+03, 9.11e+03 |  |
-| CER07-PH-01 | ph | independent | FFT | decreasing | **disagree** | sulfur | 2.46e+03, 310, 0.0189, 0.104 |  |
+| CER07-PH-01 | ph | independent | FFT | decreasing | **disagree** | sulfur | 2.46e+03, 310, 0.0189, 69.7 |  |
 | CER07-PH-02 | ph | independent | furfural | decreasing | **agree** | sulfur | 1.03e+03, 830, 89.9 |  |
 | MOT02-PH-01 | ph | not_independent | MFT | A>B | **agree** | sulfur | 404, 374 |  |
 | MOT02-PH-02 | ph | not_independent | FFT | A>B | **agree** | sulfur | 1.47e+03, 183 |  |

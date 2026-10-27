@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (112 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (113 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -43,8 +43,8 @@
     "artifact": "core_directional_scores",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "bfbd2cb489849275c10e874dd6724be9e5b4ffcc",
-      "short": "bfbd2cb4",
+      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
+      "short": "cb3a21b4",
       "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
@@ -295,17 +295,18 @@
           "rate": 1.0
         },
         "ph": {
-          "agree": 11,
+          "agree": 10,
           "evaluable": 15,
           "not_evaluable": 3,
           "misses": [
+            "PH-03",
             "MOT-01",
             "HOX-03",
             "WHI-PH-01",
             "CER07-PH-01"
           ],
           "mechanism_absent": 0,
-          "rate": 0.7333333333333333
+          "rate": 0.6666666666666666
         },
         "process_heating": {
           "agree": 0,
@@ -377,13 +378,14 @@
         }
       },
       "total": {
-        "agree": 27,
+        "agree": 26,
         "evaluable": 50,
         "not_evaluable": 42,
         "misses": [
           "SUG-02",
           "SUG-03",
           "SUG-04",
+          "PH-03",
           "TEMP-01",
           "MAT-02",
           "MAT-03",
@@ -406,20 +408,21 @@
           "CER07-PH-01"
         ],
         "mechanism_absent": 3,
-        "rate": 0.54
+        "rate": 0.52
       },
       "ph_aw": {
-        "agree": 12,
+        "agree": 11,
         "evaluable": 16,
         "not_evaluable": 7,
         "misses": [
+          "PH-03",
           "MOT-01",
           "HOX-03",
           "WHI-PH-01",
           "CER07-PH-01"
         ],
         "mechanism_absent": 0,
-        "rate": 0.75
+        "rate": 0.6875
       },
       "excluding_ph_aw": {
         "agree": 15,
@@ -458,7 +461,7 @@
       "arm 'hydrolysate + xylose (no cysteine), 120 C' refused": 1,
       "the verdict depends on the unstated input ph (disagree at ph 5, agree at ph 7, d": 1
     },
-    "wall_seconds": 82.9
+    "wall_seconds": 44.5
   },
   "claims": [
     {
@@ -478,7 +481,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        546.3981501558004,
+        546.3981501553859,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -507,7 +510,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 546.3981501558004
+          "value_ug_per_l": 546.3981501553859
         },
         {
           "label": "cysteine + D-glucose",
@@ -555,10 +558,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        191.05841872700762,
-        275.6723548150385
+        191.0584187276661,
+        275.6723518378604
       ],
-      "log10_ratio_B_over_A": 0.15922703700316293,
+      "log10_ratio_B_over_A": 0.159227032311417,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -583,7 +586,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 191.05841872700762
+          "value_ug_per_l": 191.0584187276661
         },
         {
           "label": "cysteine + D-glucose",
@@ -610,7 +613,7 @@
           "warnings": [
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support."
           ],
-          "value_ug_per_l": 275.6723548150385
+          "value_ug_per_l": 275.6723518378604
         }
       ]
     },
@@ -631,8 +634,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        52.235451635598885,
-        52.235451635598885
+        52.23545211542461,
+        52.23545211542461
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -657,7 +660,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.235451635598885
+          "value_ug_per_l": 52.23545211542461
         },
         {
           "label": "MFT in cysteine + glucose",
@@ -680,7 +683,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 52.235451635598885
+          "value_ug_per_l": 52.23545211542461
         }
       ]
     },
@@ -701,8 +704,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        546.3981501558004,
-        546.3981501558004
+        546.3981501553859,
+        546.3981501553859
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -729,7 +732,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 546.3981501558004
+          "value_ug_per_l": 546.3981501553859
         },
         {
           "label": "FFT in cysteine + ribose",
@@ -754,7 +757,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 546.3981501558004
+          "value_ug_per_l": 546.3981501553859
         }
       ]
     },
@@ -775,10 +778,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        554.2052318096861,
-        190.20175512404398
+        554.2052318084121,
+        190.20175662451456
       ],
-      "log10_ratio_B_over_A": -0.4644561011359778,
+      "log10_ratio_B_over_A": -0.4644560977089012,
       "arms": [
         {
           "label": "cysteine + D-ribose",
@@ -803,7 +806,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 554.2052318096861
+          "value_ug_per_l": 554.2052318084121
         },
         {
           "label": "cysteine + D-glucose",
@@ -828,7 +831,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 190.20175512404398
+          "value_ug_per_l": 190.20175662451456
         }
       ]
     },
@@ -864,10 +867,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        303.22072872119674,
-        52.49260184707972
+        303.22072915630207,
+        52.49260172365137
       ],
-      "log10_ratio_B_over_A": -0.7616607876047109,
+      "log10_ratio_B_over_A": -0.7616607892490772,
       "arms": [
         {
           "label": "pH 4.5",
@@ -892,7 +895,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 303.22072872119674
+          "value_ug_per_l": 303.22072915630207
         },
         {
           "label": "pH 6.5",
@@ -917,7 +920,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 52.49260184707972
+          "value_ug_per_l": 52.49260172365137
         }
       ]
     },
@@ -938,10 +941,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        26.00076184993762,
-        8.657423032009325
+        26.00076124882981,
+        8.657423038783119
       ],
-      "log10_ratio_B_over_A": -0.477597434261692,
+      "log10_ratio_B_over_A": -0.47759742388149795,
       "arms": [
         {
           "label": "pH 4.5",
@@ -966,7 +969,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 26.00076184993762
+          "value_ug_per_l": 26.00076124882981
         },
         {
           "label": "pH 6.5",
@@ -991,7 +994,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 8.657423032009325
+          "value_ug_per_l": 8.657423038783119
         }
       ]
     },
@@ -1006,19 +1009,19 @@
       "fit_status": "not_independent",
       "statement": "Raising pH from 4 to 7 in a cysteine/xylose/thiamine system SUPPRESSES 2-furanmethanethiol (FFT) formation - FFT is favoured with decreasing pH.",
       "source": "cerny2015",
-      "status": "agree",
+      "status": "disagree",
       "reason": null,
       "identical_predictions": false,
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2461.7464278169523,
-        0.43899103617163415,
-        0.10380427282842275
+        2461.7464246728987,
+        0.43899103617163604,
+        69.72247892914018
       ],
       "log10_steps": [
-        -3.7487876639933497,
-        -0.6262404219395844
+        -3.7487876634386827,
+        2.200917167314916
       ],
       "arms": [
         {
@@ -1045,7 +1048,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2461.7464278169523
+          "value_ug_per_l": 2461.7464246728987
         },
         {
           "label": "pH 5.5",
@@ -1071,7 +1074,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.43899103617163415
+          "value_ug_per_l": 0.43899103617163604
         },
         {
           "label": "pH 7.0",
@@ -1097,7 +1100,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.10380427282842275
+          "value_ug_per_l": 69.72247892914018
         }
       ]
     },
@@ -1218,13 +1221,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        146.2787279195894,
-        131.09761628275768,
-        58.052119562039906
+        146.27872791988378,
+        131.09761524510137,
+        58.05211956199722
       ],
       "log10_steps": [
-        -0.04758637985003578,
-        -0.3537767140392867
+        -0.047586383288412554,
+        -0.3537767106021033
       ],
       "arms": [
         {
@@ -1247,7 +1250,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 146.2787279195894
+          "value_ug_per_l": 146.27872791988378
         },
         {
           "label": "pH 5.5",
@@ -1269,7 +1272,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 131.09761628275768
+          "value_ug_per_l": 131.09761524510137
         },
         {
           "label": "pH 7.0",
@@ -1291,7 +1294,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 58.052119562039906
+          "value_ug_per_l": 58.05211956199722
         }
       ]
     },
@@ -1526,7 +1529,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        46.94226143264281,
+        46.942260796549675,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -1554,7 +1557,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 46.94226143264281
+          "value_ug_per_l": 46.942260796549675
         },
         {
           "label": "glycine + glucose (no cysteine)",
@@ -2225,10 +2228,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1416.9854249586172,
-        401.6112304659201
+        1416.9854249586167,
+        401.61121378621215
       ],
-      "log10_ratio_B_over_A": -0.5475595344274379,
+      "log10_ratio_B_over_A": -0.5475595524645461,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2250,7 +2253,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1416.9854249586172
+          "value_ug_per_l": 1416.9854249586167
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2272,7 +2275,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 401.6112304659201
+          "value_ug_per_l": 401.61121378621215
         }
       ]
     },
@@ -2293,7 +2296,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        10.125850621531093,
+        10.12585062153108,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -2319,7 +2322,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 10.125850621531093
+          "value_ug_per_l": 10.12585062153108
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2363,10 +2366,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        36.85233494599798,
-        33.484193839028656
+        36.852334945997754,
+        33.48419644270874
       ],
-      "log10_ratio_B_over_A": -0.041625162371516235,
+      "log10_ratio_B_over_A": -0.04162512860143516,
       "arms": [
         {
           "label": "cysteine + D-ribose, 110 C 90 min",
@@ -2388,7 +2391,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 36.85233494599798
+          "value_ug_per_l": 36.852334945997754
         },
         {
           "label": "cysteine + D-glucose, 110 C 90 min",
@@ -2411,7 +2414,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 33.484193839028656
+          "value_ug_per_l": 33.48419644270874
         }
       ]
     },
@@ -3167,7 +3170,7 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        40.84960063909062,
+        40.84960068618912,
         0.0
       ],
       "log10_ratio_B_over_A": null,
@@ -3194,7 +3197,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 40.84960063909062
+          "value_ug_per_l": 40.84960068618912
         },
         {
           "label": "hydrolysate + xylose, no cysteine",
@@ -3625,10 +3628,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1670.6580718680436,
-        2290.121994439381
+        1670.6580811000986,
+        2290.121991934409
       ],
-      "log10_ratio_B_over_A": 0.1369710444003099,
+      "log10_ratio_B_over_A": 0.13697104152536071,
       "arms": [
         {
           "label": "cysteine + D-fructose, 145 C 20 min pH 5.0",
@@ -3651,7 +3654,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1670.6580718680436
+          "value_ug_per_l": 1670.6580811000986
         },
         {
           "label": "cysteine + D-glucose, 145 C 20 min pH 5.0",
@@ -3674,7 +3677,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2290.121994439381
+          "value_ug_per_l": 2290.121991934409
         }
       ]
     },
@@ -3695,10 +3698,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        0.0009112629066898084,
-        0.2971329011514269
+        0.0009112629148457658,
+        0.2971328873531796
       ],
-      "log10_ratio_B_over_A": 2.51330705083867,
+      "log10_ratio_B_over_A": 2.513307026783908,
       "arms": [
         {
           "label": "cysteine + D-ribose, dry-heated 180 C 6 min",
@@ -3720,7 +3723,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.0009112629066898084
+          "value_ug_per_l": 0.0009112629148457658
         },
         {
           "label": "cysteine + D-glucose, dry-heated 180 C 6 min",
@@ -3743,7 +3746,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.2971329011514269
+          "value_ug_per_l": 0.2971328873531796
         }
       ]
     },
@@ -3780,10 +3783,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        189.94728442666678,
-        504.63125462550715
+        189.94728366974311,
+        504.6312549052048
       ],
-      "log10_ratio_B_over_A": 0.42434105622941765,
+      "log10_ratio_B_over_A": 0.4243410582007567,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3805,7 +3808,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 189.94728442666678
+          "value_ug_per_l": 189.94728366974311
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -3827,7 +3830,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.63125462550715
+          "value_ug_per_l": 504.6312549052048
         }
       ]
     },
@@ -3848,10 +3851,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1360.2421523374326,
-        1070.3831618496001
+        1360.2421442900688,
+        1070.3831786849055
       ],
-      "log10_ratio_B_over_A": -0.10407696039431591,
+      "log10_ratio_B_over_A": -0.10407695099426212,
       "arms": [
         {
           "label": "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min",
@@ -3873,7 +3876,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1360.2421523374326
+          "value_ug_per_l": 1360.2421442900688
         },
         {
           "label": "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min",
@@ -3895,7 +3898,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1070.3831618496001
+          "value_ug_per_l": 1070.3831786849055
         }
       ]
     },
@@ -3916,8 +3919,8 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        504.63125462550715,
-        504.63125462550715
+        504.6312549052048,
+        504.6312549052048
       ],
       "log10_ratio_B_over_A": 0.0,
       "arms": [
@@ -3941,7 +3944,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.63125462550715
+          "value_ug_per_l": 504.6312549052048
         },
         {
           "label": "FFT, cysteine + ribose, phosphate pH 5.6",
@@ -3963,7 +3966,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 504.63125462550715
+          "value_ug_per_l": 504.6312549052048
         }
       ]
     },
@@ -4029,10 +4032,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        3570.6710750579027,
-        5857.705886853211
+        3570.67107505791,
+        5857.7058868625745
       ],
-      "log10_ratio_B_over_A": 0.2149777166654998,
+      "log10_ratio_B_over_A": 0.21497771666619309,
       "arms": [
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4054,7 +4057,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 3570.6710750579027
+          "value_ug_per_l": 3570.67107505791
         },
         {
           "label": "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4076,7 +4079,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 5857.705886853211
+          "value_ug_per_l": 5857.7058868625745
         }
       ]
     },
@@ -4097,10 +4100,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        5857.705886853211,
-        2352.901009593067
+        5857.7058868625745,
+        2352.9010114535026
       ],
-      "log10_ratio_B_over_A": -0.39612390605627096,
+      "log10_ratio_B_over_A": -0.39612390571356915,
       "arms": [
         {
           "label": "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4122,7 +4125,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 5857.705886853211
+          "value_ug_per_l": 5857.7058868625745
         },
         {
           "label": "norfuraneol + cysteine, 1 mmol each in 50 mL, 145 C 20 min pH 5.0",
@@ -4144,7 +4147,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2352.901009593067
+          "value_ug_per_l": 2352.9010114535026
         }
       ]
     },
@@ -4165,10 +4168,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2509.628596665535,
-        4082.946190896351
+        2509.6285966655705,
+        4082.9461908960197
       ],
-      "log10_ratio_B_over_A": 0.2113642019905123,
+      "log10_ratio_B_over_A": 0.211364201990471,
       "arms": [
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0",
@@ -4190,7 +4193,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2509.628596665535
+          "value_ug_per_l": 2509.6285966655705
         },
         {
           "label": "hydroxyacetaldehyde + mercapto-2-propanone at pH 3.0",
@@ -4212,7 +4215,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 4082.946190896351
+          "value_ug_per_l": 4082.9461908960197
         }
       ]
     },
@@ -4293,15 +4296,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        79.50988231898286,
-        120.51590782818502,
-        162.6389184775893,
-        196.77743886182122
+        79.50988231905377,
+        120.5159079984279,
+        162.63891842380215,
+        196.77743925293524
       ],
       "log10_steps": [
-        0.18062326591988648,
-        0.13018010106441183,
-        0.08275082610061435
+        0.18062326653299118,
+        0.13018010030729207,
+        0.08275082710744401
       ],
       "arms": [
         {
@@ -4324,7 +4327,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 79.50988231898286
+          "value_ug_per_l": 79.50988231905377
         },
         {
           "label": "110 C / 2 h",
@@ -4346,7 +4349,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 120.51590782818502
+          "value_ug_per_l": 120.5159079984279
         },
         {
           "label": "120 C / 1 h",
@@ -4368,7 +4371,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 162.6389184775893
+          "value_ug_per_l": 162.63891842380215
         },
         {
           "label": "130 C / 0.5 h",
@@ -4390,7 +4393,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 196.77743886182122
+          "value_ug_per_l": 196.77743925293524
         }
       ]
     },
@@ -4411,10 +4414,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1212.3826882006324,
-        2301.377576266161
+        1212.382687434436,
+        2301.377576260772
       ],
-      "log10_ratio_B_over_A": 0.27834815079883185,
+      "log10_ratio_B_over_A": 0.2783481510722784,
       "arms": [
         {
           "label": "120 C / 1 h",
@@ -4436,7 +4439,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 1212.3826882006324
+          "value_ug_per_l": 1212.382687434436
         },
         {
           "label": "100 C / 4 h",
@@ -4458,7 +4461,7 @@
           "warnings": [
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 2301.377576266161
+          "value_ug_per_l": 2301.377576260772
         }
       ]
     },
@@ -4479,17 +4482,17 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        67.43350855866974,
-        573.7319253976556,
-        1465.1946062205373,
-        2709.4320315626514,
-        4085.7492996620167
+        67.43350860370059,
+        573.7319251681786,
+        1465.1946076881204,
+        2709.4320312936566,
+        4085.7493010396747
       ],
       "log10_steps": [
-        0.9298332603726458,
-        0.40718629430408515,
-        0.2669829495942718,
-        0.17839345410252283
+        0.9298332599089262,
+        0.40718629491279346,
+        0.2669829491161522,
+        0.1783934542920781
       ],
       "arms": [
         {
@@ -4514,7 +4517,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 67.43350855866974
+          "value_ug_per_l": 67.43350860370059
         },
         {
           "label": "95 C / 90 min",
@@ -4538,7 +4541,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 573.7319253976556
+          "value_ug_per_l": 573.7319251681786
         },
         {
           "label": "105 C / 100 min",
@@ -4562,7 +4565,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1465.1946062205373
+          "value_ug_per_l": 1465.1946076881204
         },
         {
           "label": "115 C / 110 min",
@@ -4586,7 +4589,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2709.4320315626514
+          "value_ug_per_l": 2709.4320312936566
         },
         {
           "label": "125 C / 120 min",
@@ -4610,7 +4613,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 4085.7492996620167
+          "value_ug_per_l": 4085.7493010396747
         }
       ],
       "unstated_input_sweep": {
@@ -4644,17 +4647,17 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        148.82224207824234,
-        3633.4392759719567,
-        23197.91641492048,
-        35509.179113027414,
-        22886.211232389214
+        148.8222402671777,
+        3633.439276607922,
+        23197.916411896087,
+        35509.17909757158,
+        22886.21122988872
       ],
       "log10_steps": [
-        1.3876500633177193,
-        0.8051310728588755,
-        0.18489165329041002,
-        -0.1907667305508375
+        1.3876500686788005,
+        0.80513107272624,
+        0.18489165315799816,
+        -0.19076673040925515
       ],
       "arms": [
         {
@@ -4679,7 +4682,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 148.82224207824234
+          "value_ug_per_l": 148.8222402671777
         },
         {
           "label": "95 C / 90 min",
@@ -4703,7 +4706,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3633.4392759719567
+          "value_ug_per_l": 3633.439276607922
         },
         {
           "label": "105 C / 100 min",
@@ -4727,7 +4730,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 23197.91641492048
+          "value_ug_per_l": 23197.916411896087
         },
         {
           "label": "115 C / 110 min",
@@ -4751,7 +4754,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 35509.179113027414
+          "value_ug_per_l": 35509.17909757158
         },
         {
           "label": "125 C / 120 min",
@@ -4775,7 +4778,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 22886.211232389214
+          "value_ug_per_l": 22886.21122988872
         }
       ],
       "unstated_input_sweep": {
@@ -5228,7 +5231,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.0001895433702363782
+          "value_ug_per_l": 0.0001895433884696649
         },
         {
           "label": "40 min",
@@ -5319,7 +5322,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 3.8841355312595775e-05
+          "value_ug_per_l": 3.884135451066134e-05
         },
         {
           "label": "60 min",
@@ -5383,7 +5386,7 @@
             "HEXOSE ENTRY UNIDENTIFIED (FFT): the only route from a hexose to these thiols is the C2+C3 fragmentation entry, whose rate constants no primary measurement identifies (the primary-evidence refit left them on their band floor). The number below is a floor artefact, not a fit; the scorecard and the envelope list this row as not evaluable, and the ordering 'pentose above hexose' is the structural claim the model does support.",
             "no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift."
           ],
-          "value_ug_per_l": 0.5942768413240052
+          "value_ug_per_l": 0.5942768131579885
         },
         {
           "label": "60 min",
@@ -5427,15 +5430,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        65.89899102120779,
-        130.3114118358826,
-        36.37447247205118,
-        16.241426767249745
+        65.89899102120789,
+        130.3114118358827,
+        36.37447248843807,
+        16.241426799169055
       ],
       "log10_steps": [
-        0.2961036849308981,
-        -0.554185746498942,
-        -0.350172525372682
+        0.2961036849308978,
+        -0.5541857463032903,
+        -0.35017252471481414
       ],
       "arms": [
         {
@@ -5461,7 +5464,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 65.89899102120779
+          "value_ug_per_l": 65.89899102120789
         },
         {
           "label": "60 min",
@@ -5486,7 +5489,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 130.3114118358826
+          "value_ug_per_l": 130.3114118358827
         },
         {
           "label": "360 min",
@@ -5511,7 +5514,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 36.37447247205118
+          "value_ug_per_l": 36.37447248843807
         },
         {
           "label": "720 min",
@@ -5536,7 +5539,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 16.241426767249745
+          "value_ug_per_l": 16.241426799169055
         }
       ]
     },
@@ -5617,10 +5620,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        4287.033797074528,
-        9105.213987006353
+        4287.033802371995,
+        9105.214160662583
       ],
-      "log10_ratio_B_over_A": 0.32713324955239387,
+      "log10_ratio_B_over_A": 0.32713325729867826,
       "arms": [
         {
           "label": "pH 4.5",
@@ -5645,7 +5648,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 4287.033797074528
+          "value_ug_per_l": 4287.033802371995
         },
         {
           "label": "pH 6.5",
@@ -5670,7 +5673,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 9105.213987006353
+          "value_ug_per_l": 9105.214160662583
         }
       ]
     },
@@ -5691,15 +5694,15 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        2461.7464278169523,
-        309.60935532318155,
-        0.0189353702021651,
-        0.10380427282842275
+        2461.7464246728987,
+        309.6093553253987,
+        0.018935370202165073,
+        69.72247892914018
       ],
       "log10_steps": [
-        -0.9004292413120334,
-        -4.213540274728758,
-        0.7389414301078573
+        -0.9004292407542581,
+        -4.213540274731868,
+        3.5660990193623605
       ],
       "arms": [
         {
@@ -5726,7 +5729,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 2461.7464278169523
+          "value_ug_per_l": 2461.7464246728987
         },
         {
           "label": "pH 5",
@@ -5752,7 +5755,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 309.60935532318155
+          "value_ug_per_l": 309.6093553253987
         },
         {
           "label": "pH 6",
@@ -5778,7 +5781,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.0189353702021651
+          "value_ug_per_l": 0.018935370202165073
         },
         {
           "label": "pH 7",
@@ -5804,7 +5807,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 0.10380427282842275
+          "value_ug_per_l": 69.72247892914018
         }
       ]
     },
@@ -5825,13 +5828,13 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1028.8199342214266,
-        830.3798213611086,
-        89.92511954915237
+        1028.8199291928725,
+        830.3798213629881,
+        89.92511954915238
       ],
       "log10_steps": [
-        -0.09306258340715165,
-        -0.9653957632076184
+        -0.09306258128347134,
+        -0.9653957632086014
       ],
       "arms": [
         {
@@ -5858,7 +5861,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1028.8199342214266
+          "value_ug_per_l": 1028.8199291928725
         },
         {
           "label": "pH 5",
@@ -5884,7 +5887,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 830.3798213611086
+          "value_ug_per_l": 830.3798213629881
         },
         {
           "label": "pH 6",
@@ -5910,7 +5913,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 89.92511954915237
+          "value_ug_per_l": 89.92511954915238
         }
       ]
     },
@@ -5931,10 +5934,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        403.83102434779676,
-        373.78144267205744
+        403.8310236045847,
+        373.7814426665746
       ],
-      "log10_ratio_B_over_A": -0.03358194466769636,
+      "log10_ratio_B_over_A": -0.033581943874789695,
       "arms": [
         {
           "label": "pH 4.2",
@@ -5959,7 +5962,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 403.83102434779676
+          "value_ug_per_l": 403.8310236045847
         },
         {
           "label": "pH 5.6",
@@ -5984,7 +5987,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 373.78144267205744
+          "value_ug_per_l": 373.7814426665746
         }
       ]
     },
@@ -6005,10 +6008,10 @@
       "mechanism_absent": false,
       "lane": "sulfur",
       "values_ug_per_l": [
-        1465.9144252813987,
-        183.3920091659673
+        1465.9144002848532,
+        183.39200918820987
       ],
-      "log10_ratio_B_over_A": -0.9027282100390508,
+      "log10_ratio_B_over_A": -0.9027282025808555,
       "arms": [
         {
           "label": "pH 4.2",
@@ -6033,7 +6036,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 1465.9144252813987
+          "value_ug_per_l": 1465.9144002848532
         },
         {
           "label": "pH 5.6",
@@ -6058,7 +6061,7 @@
           "state": "in_envelope",
           "reasons": [],
           "warnings": [],
-          "value_ug_per_l": 183.3920091659673
+          "value_ug_per_l": 183.39200918820987
         }
       ]
     }

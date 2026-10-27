@@ -4,8 +4,8 @@
     "artifact": "env_b34_ship_rule",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "bfbd2cb489849275c10e874dd6724be9e5b4ffcc",
-      "short": "bfbd2cb4",
+      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
+      "short": "cb3a21b4",
       "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "07a0c9d5f43f7168d1cd30a65746bd552459d7fabd475d148fef2aa149e03700"
+        "sha256": "2eb307babb809d5bc25716a3dfc8b882382ddc56b8c0589d8112af9c7afa7b01"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",
@@ -86,7 +86,7 @@
   "T2": {
     "noise_floor_from_two_seeds": {
       "n": 45,
-      "median_rel": 0.05438342839565711,
+      "median_rel": 0.05438342839571838,
       "p95_rel": 0.12277025802529884,
       "max_rel": 0.19205054982729336
     },

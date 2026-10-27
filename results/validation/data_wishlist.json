@@ -4,8 +4,8 @@
     "artifact": "data_wishlist",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "bfbd2cb489849275c10e874dd6724be9e5b4ffcc",
-      "short": "bfbd2cb4",
+      "commit": "cb3a21b4f10b3c0aa503cf8ea25148a41214d3bc",
+      "short": "cb3a21b4",
       "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "results/validation/core_panel_scores.json",
-        "sha256": "77418a973b629e4dc38eafdb1b1d41631f32b19c452969033298da6388a7b2b6"
+        "sha256": "8703679193d99cbafe0008bac5485f51621f809fa1712cb58f57d7949af21479"
       },
       {
         "path": "results/validation/kinetic_core_b9_profile.json",
@@ -25,11 +25,11 @@
       },
       {
         "path": "results/validation/core_directional_scores.json",
-        "sha256": "5182426f3fd3da907898349ec8418db9be577c2080965abb561cb3ea2372633c"
+        "sha256": "1c99d0e4582ecde780202fc63d8f633a1882a80fbba22eb3614a4be1cdffbd40"
       },
       {
         "path": "results/validation/experiment_value_ranking.json",
-        "sha256": "48b3f2709272c4148f062fa7a3c115ef89889213e8d2750982d662761078355e"
+        "sha256": "34dc4106c5028c51fdb8e45059620d78f08a97b56e60f0b9dac01c3984f634a6"
       },
       {
         "path": "results/validation/lane_offset_diagnostic.json",
@@ -635,57 +635,57 @@
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.656872753406306,
-      "envelope_miss_log10": 1.448308777166278,
+      "voi_score": 12.656872771009011,
+      "envelope_miss_log10": 1.448308782952391,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.388340341662442,
-      "envelope_miss_log10": 1.469458454384674,
+      "voi_score": 12.388340363037138,
+      "envelope_miss_log10": 1.4694584542590976,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 12.325797135266072,
-      "envelope_miss_log10": 1.3458500672819893,
+      "voi_score": 12.32579715042301,
+      "envelope_miss_log10": 1.3458500735590615,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.518243919564112,
-      "envelope_miss_log10": 1.9890732939837485,
+      "voi_score": 11.51824391956418,
+      "envelope_miss_log10": 1.9890732939837512,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 11.483948408676067,
-      "envelope_miss_log10": 1.2315940078174448,
+      "voi_score": 11.483948385854157,
+      "envelope_miss_log10": 1.2315940110212549,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 11.292470501447859,
-      "envelope_miss_log10": 1.1496145248314298,
+      "voi_score": 11.292470501405294,
+      "envelope_miss_log10": 1.1496145248315426,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.966718487670498,
-      "envelope_miss_log10": 1.4761165370566336,
+      "voi_score": 10.966718487028459,
+      "envelope_miss_log10": 1.4761165370540985,
       "template": "free_precursor_sulfur_yield"
     },
     {
       "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "voi_score": 10.597264687688817,
-      "envelope_miss_log10": 1.1191688514404123,
+      "voi_score": 10.597264687689625,
+      "envelope_miss_log10": 1.1191688514405078,
       "template": "free_precursor_sulfur_yield"
     },
     {
@@ -698,8 +698,8 @@
     {
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
       "compound": "2-Furfurylthiol (FFT)",
-      "voi_score": 9.125893422646028,
-      "envelope_miss_log10": 1.31508202509834,
+      "voi_score": 9.125893420801578,
+      "envelope_miss_log10": 1.3150820250983462,
       "template": "free_precursor_sulfur_yield"
     }
   ],
