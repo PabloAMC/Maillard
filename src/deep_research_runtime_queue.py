@@ -276,14 +276,14 @@ def _load_landed_runtime_citations(root: Path) -> Set[str]:
 
 
 def _load_unsourced_citations(root: Path) -> Set[str]:
-    """Citations the intake registry lists as closed for want of a source (2026-10-09).
+    """Citations the intake registry lists as closed (2026-10-09; list since 2026-10-27).
 
-    Such a source is closed, not pending: deleting its unsourced runtime record must not
-    put it back in a batch to be encoded again. 2026-10-27: the flagged intake records
-    themselves were deleted; their citation strings live on in ``closed_unsourced_citations``.
+    Such a source is closed, not pending: deleting a record for want of a source, or of a value
+    checked against the paper, must not put it back in a batch to be encoded again. Reopening
+    one means reading the paper into a dossier first.
     """
     intake = data_access.load_json(_under_root(root, data_paths.BENCHMARK_INTAKE_REGISTRY))
-    closed = intake.get("closed_unsourced_citations", {}) or {}
+    closed = intake.get("closed_citations", {}) or {}
     return {
         _normalize_citation(str(citation))
         for citation in closed.get("citations", []) or []
@@ -386,7 +386,7 @@ def build_deep_research_runtime_queue(root: Path = data_paths.REPO_ROOT) -> Dict
             excluded_candidates.append(
                 {
                     "citation": citation,
-                    "reason": "no_verifiable_source",
+                    "reason": "closed_no_verified_value",
                 }
             )
             continue

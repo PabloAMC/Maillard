@@ -2,7 +2,7 @@
 
 Queue policy: ready queues are exclusive to non-encoded intake rows; wet_lab_blocked comes only from structural gaps with closure_outcome=wet_lab_only
 
-Encoded references: 172
+Encoded references: 156
 Ready runtime: 0
 Ready benchmark: 0
 Wet-lab blocked: 4

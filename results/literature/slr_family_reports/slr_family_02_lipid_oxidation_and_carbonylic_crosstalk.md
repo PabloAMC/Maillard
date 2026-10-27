@@ -78,54 +78,6 @@
 
 ---
 
-### Lincoln & Girard (2025)
-- **DOI:** [10.1002/sfp2.1044](https://doi.org/10.1002/sfp2.1044)
-- **Matrix Family:** ppi_spi_glucose_lipid_polyphenol
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ✅ | Analytical method / output mode specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ✅ | Odor thresholds / sensory reported |
-
-**Score: 5/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `ph` | `7.0` |
-| `glucose_to_protein_w_w` | `1.0` |
-| `corn_oil_wt_pct` | `0.55` |
-| `spi_temp_C` | `90.0` |
-| `ppi_temp_C` | `95.0` |
-| `heating_time_h` | `1.0` |
-| `storage_temp_C` | `37.0` |
-| `storage_duration_days` | `14` |
-| `polyphenol_examples` | `['catechin', 'tannic acid', 'green tea extract', 'grape seed extract']` |
-| `volatile_output_mode` | `directional_volatiles` |
-
-**What it supports:**
-- Directional Strecker suppression prior for glucose plus lipids plus polyphenols in SPI and PPI systems
-- Joint Maillard-lipid crosstalk framing for formulation reporting
-- Scientist-facing provenance for polyphenol-driven Strecker moderation
-
-**What it does not support:**
-- Absolute concentration targets
-- Strict quantitative optimizer calibration
-- Benchmark promotion into the authoritative free-precursor surface
-
-**Next Action:** Encode as a structured crosstalk prior and keep its directional status explicit until full quantitative extraction is available.
-
----
-
 ### Lin, Fay, Welti & Blank (2001), Lipids 36:749
 - **DOI:** [10.1007/s11745-001-0781-x](https://doi.org/10.1007/s11745-001-0781-x)
 - **Matrix Family:** lipid_rich_model_system
@@ -204,46 +156,6 @@
 
 ---
 
-### Globisch, Kaden & Henle (2015), J. Agric. Food Chem. 63:5273
-- **DOI:** [10.1021/acs.jafc.5b01502](https://doi.org/10.1021/acs.jafc.5b01502)
-- **Matrix Family:** lipid_oxidation_model_system
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ✅ | Odor thresholds / sensory reported |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `target_offnote` | `2-pentylpyrrole` |
-| `reactant_pairing` | `4-HNE + phenylalanine` |
-| `absolute_concentrations_reported` | `True` |
-| `loq_reported` | `True` |
-
-**What it supports:**
-- Bounded 4-HNE-to-2-pentylpyrrole off-note routing in oxidized lipid systems
-- Absolute-concentration and LOQ-backed guardrail support for pyrrolic off-notes
-
-**What it does not support:**
-- Matrix-specific concentration closure
-- A complete secondary lipid-oxidation mechanism
-
-**Next Action:** Use as a bounded 4-HNE pyrrole guardrail so oxidized-lipid systems can surface pyrrolic off-note risk explicitly.
-
----
-
 ### Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5)
 - **DOI:** [10.1007/978-3-540-69934-7](https://doi.org/10.1007/978-3-540-69934-7)
 - **Matrix Family:** free_model_system
@@ -315,43 +227,6 @@
 - Aqueous phase pH effects
 
 **Next Action:** Encode lipid hexanal beta-scission yield prior.
-
----
-
-### Ullrich & Grosch (1988), J. Am. Oil Chem. Soc. 65:1313
-- **DOI:** [10.1007/bf02542413](https://doi.org/10.1007/bf02542413)
-- **Matrix Family:** free_model_system
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `c183_to_propanal_beta_scission_yield_pct` | `8.2` |
-| `c183_to_heptadienal_beta_scission_yield_pct` | `5.4` |
-
-**What it supports:**
-- C18:3 to propanal/2,4-heptadienal beta-scission yield splits.
-
-**What it does not support:**
-- C18:1/C18:2 scission crosstalk
-- pH sensitivity
-
-**Next Action:** Encode lipid c183 scission split yield prior.
 
 ---
 
@@ -588,18 +463,15 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 2
 
-Total papers analyzed: **14** (Benchmark-eligible: **1**, Calibration references: **8**, Rejected: **5**)
+Total papers analyzed: **11** (Benchmark-eligible: **1**, Calibration references: **6**, Rejected: **4**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Trikusuma et al. (2020) | 6/8 | ✅ Eligible | pea_uht_beverage |
-| Lincoln & Girard (2025) | 5/8 | ⚠️ Calibration | ppi_spi_glucose_lipid_polyphenol |
 | Lin, Fay, Welti & Blank (2001), Lipids 36:749 | 3/8 | ⚠️ Calibration | lipid_rich_model_system |
 | Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591 | 3/8 | ⚠️ Calibration | coconut_oil_co_matrix |
-| Globisch, Kaden & Henle (2015), J. Agric. Food Chem. 63:5273 | 3/8 | ⚠️ Calibration | lipid_oxidation_model_system |
 | Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5) | 3/8 | ⚠️ Calibration | free_model_system |
 | Frankel (1983), Prog. Lipid Res. 22:1 | 2/8 | ❌ Rejected | free_model_system |
-| Ullrich & Grosch (1988), J. Am. Oil Chem. Soc. 65:1313 | 2/8 | ❌ Rejected | free_model_system |
 | Farmer & Patterson (1991), Food Chemistry 40:201 | 2/8 | ❌ Rejected | free_model_system |
 | Esterbauer, Schaur & Zollner (1991), Free Radic. Biol. Med. 11:81 | 2/8 | ❌ Rejected | free_model_system |
 | Kamal-Eldin, Velasco & Dobarganes (2003), Eur. J. Lipid Sci. Technol. 105:329 | 2/8 | ❌ Rejected | free_model_system |
@@ -615,10 +487,8 @@ Total papers analyzed: **14** (Benchmark-eligible: **1**, Calibration references
 - `Trikusuma et al. (2020)` (Score: 6/8)
 
 ### CALIBRATION (Score 3-5)
-- `Lincoln & Girard (2025)` (Score: 5/8)
 - `Lin, Fay, Welti & Blank (2001), Lipids 36:749` (Score: 3/8)
 - `Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591` (Score: 3/8)
-- `Globisch, Kaden & Henle (2015), J. Agric. Food Chem. 63:5273` (Score: 3/8)
 - `Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5)` (Score: 3/8)
 - `Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133` (Score: 3/8)
 - `Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546` (Score: 3/8)
@@ -626,7 +496,6 @@ Total papers analyzed: **14** (Benchmark-eligible: **1**, Calibration references
 
 ### REJECTED (Score < 3)
 - `Frankel (1983), Prog. Lipid Res. 22:1` (Score: 2/8)
-- `Ullrich & Grosch (1988), J. Am. Oil Chem. Soc. 65:1313` (Score: 2/8)
 - `Farmer & Patterson (1991), Food Chemistry 40:201` (Score: 2/8)
 - `Esterbauer, Schaur & Zollner (1991), Free Radic. Biol. Med. 11:81` (Score: 2/8)
 - `Kamal-Eldin, Velasco & Dobarganes (2003), Eur. J. Lipid Sci. Technol. 105:329` (Score: 2/8)

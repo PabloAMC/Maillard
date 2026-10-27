@@ -158,89 +158,6 @@
 
 ---
 
-### Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236
-- **DOI:** [10.4014/jmb.2207.07057](https://doi.org/10.4014/jmb.2207.07057)
-- **Matrix Family:** commercial_yeast_extract
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `standard_autolysate_imp_mg_per_100g_dw_range` | `[120.0, 250.0]` |
-| `standard_autolysate_gmp_mg_per_100g_dw_range` | `[45.0, 90.0]` |
-| `high_nucleotide_imp_mg_per_100g_dw_range` | `[1200.0, 2400.0]` |
-| `high_nucleotide_gmp_mg_per_100g_dw_range` | `[300.0, 650.0]` |
-| `amp_deaminase_euc_uplift_factor_vs_standard_range` | `[5.0, 6.0]` |
-
-**What it supports:**
-- A bounded Family 04 grade window for yeast-extract nucleotide support instead of treating all yeast extracts as compositionally equivalent
-- Scientist-facing context that AMP-deaminase treatment can convert weak-umami autolysates into high-IMP support inputs
-
-**What it does not support:**
-- A universal grade assignment for any yeast extract label that lacks compositional detail
-- Direct PBMA endpoint closure for combined nucleotide plus glutamate systems
-
-**Next Action:** Use as a Family 04 source-profile anchor so yeast-extract additions expose bounded grade-driven nucleotide support rather than behaving like a single default composition.
-
----
-
-### Liu et al. (2022), LWT 168:113651
-- **DOI:** [10.1016/j.lwt.2022.113651](https://doi.org/10.1016/j.lwt.2022.113651)
-- **Matrix Family:** commercial_dried_mushroom
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `shiitake_gmp_mg_per_100g_dw` | `108.0` |
-| `shiitake_total_euc_g_msg_per_100g` | `2.1` |
-| `porcini_gmp_mg_per_100g_dw` | `82.0` |
-| `porcini_total_euc_g_msg_per_100g` | `1.8` |
-| `enoki_gmp_mg_per_100g_dw` | `45.0` |
-| `oyster_gmp_mg_per_100g_dw` | `28.0` |
-
-**What it supports:**
-- A bounded Family 04 clean-label nucleotide support anchor for shiitake, porcini, enoki, and oyster powders
-- Species-specific GMP and EUC context so mushroom additions can be interpreted as more than a generic savoury cue
-
-**What it does not support:**
-- Combined PBMA endpoint closure for mushroom plus yeast-extract blends
-- Thermal retention kinetics for mushroom nucleotides under extrusion or consumer cooking
-
-**Next Action:** Use as a Family 04 source-profile anchor so mushroom additions expose bounded species-specific nucleotide support, especially when shiitake or porcini are present.
-
----
-
 ### Matoba et al. (1988)
 - **DOI:** [10.1111/j.1365-2621.1988.tb13551.x](https://doi.org/10.1111/j.1365-2621.1988.tb13551.x)
 - **Matrix Family:** aqueous_model_system
@@ -414,15 +331,13 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 4
 
-Total papers analyzed: **9** (Benchmark-eligible: **0**, Calibration references: **7**, Rejected: **2**)
+Total papers analyzed: **7** (Benchmark-eligible: **0**, Calibration references: **5**, Rejected: **2**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049 | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Yamaguchi & Ninomiya (2000) | 3/8 | ⚠️ Calibration | aqueous_and_food_matrix_review |
 | Hwang, Ismail & Joo (2020), Foods 9:251 | 3/8 | ⚠️ Calibration | animal_meat_low_temperature_reference |
-| Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236 | 3/8 | ⚠️ Calibration | commercial_yeast_extract |
-| Liu et al. (2022), LWT 168:113651 | 3/8 | ⚠️ Calibration | commercial_dried_mushroom |
 | Matoba et al. (1988) | 3/8 | ⚠️ Calibration | aqueous_model_system |
 | Kavitha & Modi (2007), LWT 40:1280 | 3/8 | ⚠️ Calibration | aqueous_and_food_matrix_comparison |
 | Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067 | 2/8 | ❌ Rejected | meat_model_system |
@@ -439,8 +354,6 @@ Total papers analyzed: **9** (Benchmark-eligible: **0**, Calibration references:
 - `Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049` (Score: 3/8)
 - `Yamaguchi & Ninomiya (2000)` (Score: 3/8)
 - `Hwang, Ismail & Joo (2020), Foods 9:251` (Score: 3/8)
-- `Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236` (Score: 3/8)
-- `Liu et al. (2022), LWT 168:113651` (Score: 3/8)
 - `Matoba et al. (1988)` (Score: 3/8)
 - `Kavitha & Modi (2007), LWT 40:1280` (Score: 3/8)
 

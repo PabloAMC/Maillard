@@ -8,8 +8,7 @@
   "excluded_candidates": [
     {
       "citation": "Ordoudi et al. (2014 / PMC12484514)",
-      "reason": "already_runtime_bound",
-      "registry_id": "ordoudi_2014_hmf_peak_window"
+      "reason": "closed_no_verified_value"
     },
     {
       "citation": "Hrncirik & Zeelenberg (2014)",
@@ -21,7 +20,7 @@
     },
     {
       "citation": "Blank, Devaud & Grosch (2003)",
-      "reason": "no_verifiable_source"
+      "reason": "closed_no_verified_value"
     },
     {
       "citation": "Glomb & Monnier (1995)",
@@ -29,7 +28,7 @@
     },
     {
       "citation": "Hidalgo & Zamora (2004)",
-      "reason": "already_landed_in_runtime_registry"
+      "reason": "closed_no_verified_value"
     }
   ],
   "prepared_next_batch": {
@@ -48,7 +47,7 @@
     "process_state_calibration_count": 0,
     "safety_reference_count": 0,
     "computational_prior_count": 0,
-    "landed_runtime_citation_count": 4,
+    "landed_runtime_citation_count": 3,
     "excluded_candidate_count": 6,
     "themes": {}
   }

@@ -105,45 +105,6 @@
 
 ---
 
-### Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319
-- **DOI:** [10.1021/jf010823n](https://doi.org/10.1021/jf010823n)
-- **Matrix Family:** coffee_melanoidin_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 3/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `fft_reduction_factor` | `16.0` |
-| `volatile_adduct_range_ug_per_l` | `[5.0, 270.0]` |
-| `crosspy_mediated` | `True` |
-
-**What it supports:**
-- FFT 16x reduction via CROSSPY-radical mediated covalent binding to melanoidins under warm storage conditions
-- Quantified QA/CQA/QAL-volatile adduct bounds ranging from 5 to 270 ug/L
-
-**What it does not support:**
-- Direct pea-protein or soy-protein matrix volatile benchmarking
-- Reversible non-covalent binding kinetics
-
-**Next Action:** Keep as the Family 13 covalent thiol-depletion anchor for CROSSPY-mediated capping modeling.
-
----
-
 ### Poojary et al. (2023)
 - **DOI:** [10.1016/j.foodchem.2022.134406](https://doi.org/10.1016/j.foodchem.2022.134406)
 - **Matrix Family:** free_model_system
@@ -590,13 +551,12 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 13
 
-Total papers analyzed: **15** (Benchmark-eligible: **0**, Calibration references: **12**, Rejected: **3**)
+Total papers analyzed: **14** (Benchmark-eligible: **0**, Calibration references: **11**, Rejected: **3**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Arsad et al. (2020), J. Agric. Food Chem. 68:8931 | 2/8 | ❌ Rejected | polyphenol_reactive_model_system |
 | Zhang et al. (2025) | 2/8 | ❌ Rejected | amino_acid_capped_model_system |
-| Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319 | 3/8 | ⚠️ Calibration | coffee_melanoidin_model |
 | Poojary et al. (2023) | 2/8 | ❌ Rejected | free_model_system |
 | Shu et al. (2019) | 3/8 | ⚠️ Calibration | free_model_system |
 | Zhu et al. (2020) | 3/8 | ⚠️ Calibration | free_model_system |
@@ -618,7 +578,6 @@ Total papers analyzed: **15** (Benchmark-eligible: **0**, Calibration references
 - *No primary benchmark-eligible references found.*
 
 ### CALIBRATION (Score 3-5)
-- `Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319` (Score: 3/8)
 - `Shu et al. (2019)` (Score: 3/8)
 - `Zhu et al. (2020)` (Score: 3/8)
 - `Zhu et al. (2020)` (Score: 3/8)

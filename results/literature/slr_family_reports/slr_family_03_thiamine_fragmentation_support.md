@@ -28,181 +28,6 @@
 
 ## SECTION 1 — Curated References
 
-### Voelker et al. (2021)
-- **DOI:** [10.1186/s13065-021-00773-y](https://doi.org/10.1186/s13065-021-00773-y)
-- **Matrix Family:** aqueous_thiamine_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 4/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `temp_c_points` | `[40.0, 55.0, 70.0]` |
-| `ph_points` | `[3.0, 4.0, 5.0, 6.0, 7.0]` |
-| `tmn_low_conc_k_obs_per_h_ph3_70c` | `0.0011` |
-| `tmn_low_conc_k_obs_per_h_ph6_70c` | `0.0435` |
-| `tmn_low_conc_ea_kcal_per_mol_ph3` | `28.4` |
-| `tmn_low_conc_ea_kcal_per_mol_ph6_midpoint` | `18.5` |
-| `neutral_ph_high_concentration_multiplier` | `9.3` |
-| `storage_retention_pct_25c_ph3_day392` | `91.0` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Primary Family 03 Arrhenius anchor for pH-sensitive thiamine disappearance
-- Bounded concentration dependence at neutral pH instead of a single global disappearance rate
-
-**What it does not support:**
-- Direct MFT-forming step kinetics separate from overall thiamine disappearance
-- Real plant-matrix metal effects without an explicit cofactor correction
-
-**Next Action:** Use as the primary Family 03 Arrhenius calibration anchor while keeping Cerny as the default flavor-yield prior for the runtime lane.
-
----
-
-### Huang (2022)
-- **Matrix Family:** metal_catalyzed_thiamine_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 5/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `ph` | `6.0` |
-| `temp_c_points` | `[25.0, 55.0]` |
-| `fe3_acceleration_vs_control` | `19.0` |
-| `cu_plus_acceleration_vs_control` | `12.0` |
-| `fe2_acceleration_vs_control` | `8.0` |
-| `zn2_acceleration_vs_control` | `1.5` |
-| `fe3_loss_pct_55c_day7` | `95.98` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Bounded Fe3+ and Cu+ acceleration factors for thiamine loss in metal-bearing matrices
-- A direct matrix-correction bridge from aqueous thiamine kinetics to iron-rich plant systems
-
-**What it does not support:**
-- Compound-specific sulfur volatile closure under the same run
-- Extrusion shear effects beyond metal-assisted degradation
-
-**Next Action:** Use as the compact Family 03 matrix-correction anchor for iron- and copper-rich systems without changing the default thiamine flavor prior.
-
----
-
-### Arabshahi & Lund (1988), J. Food Sci. 53:199
-- **DOI:** [10.1111/j.1365-2621.1988.tb10208.x](https://doi.org/10.1111/j.1365-2621.1988.tb10208.x)
-- **Matrix Family:** starch_based_low_moisture_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 4/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `water_activity_points` | `[0.3, 0.65, 0.9]` |
-| `temperature_c_points` | `[110.0, 130.0, 150.0]` |
-| `starch_ea_kcal_per_mol_by_aw` | `{'0.3': 26.8, '0.65': 23.4, '0.9': 20.1}` |
-| `cellulose_ea_kcal_per_mol_aw_0_65` | `24.1` |
-| `replicates` | `3` |
-
-**What it supports:**
-- A bounded Family 03 aw-dependent Arrhenius anchor for thiamine loss in starch-like matrices
-- Runtime-visible attenuation of thiamine support under wetter extrusion-like conditions instead of treating water activity as a generic scalar
-
-**What it does not support:**
-- Direct MFT-forming step kinetics separate from overall thiamine disappearance
-- A universal plant-matrix correction outside starch-like or starch-containing systems
-
-**Next Action:** Use as the bounded Family 03 aw-dependent support anchor so wetter extrusion-like thiamine systems no longer inherit the same effective Arrhenius posture as drier starch-rich systems.
-
----
-
-### Cerny & Guntz-Dubini (2008)
-- **DOI:** [10.1021/jf801762c](https://doi.org/10.1021/jf801762c)
-- **Matrix Family:** free_model_system
-- **Kind:** `quantitative_benchmark`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `encoded`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ✅ | Analytical method / output mode specified |
-| ✅ | Absolute yields reported |
-| ✅ | Replicates reported |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ✅ | Odor thresholds / sensory reported |
-
-**Score: 6/8 → Benchmark-eligible**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `temp_C` | `145.0` |
-| `time_min` | `20.0` |
-| `ph_points` | `[4.0, 5.0, 6.0, 7.0, 8.0]` |
-| `thiamine_alone_mft_ug_per_g` | `{'4.0': 0.02, '5.0': 0.14, '6.0': 0.58, '7.0': 0.42, '8.0': 0.19}` |
-| `mixed_system_mft_ug_per_g` | `{'5.5': 3.11, '6.0': 2.47}` |
-| `mixed_system_synergy_factor_vs_thiamine_alone` | `4.3` |
-| `replicates` | `3` |
-| `volatile_output_mode` | `absolute_ug_per_g` |
-
-**What it supports:**
-- pH-resolved quantitative MFT surface for thiamine alone at 145 C / 20 min
-- Mixed thiamine plus cysteine plus xylose uplift near the pH 5.5 to 6.0 optimum window
-- Benchmark-facing anchor for Family 03 sulfur support instead of generic availability-only heuristics
-
-**What it does not support:**
-- SPI or PPI matrix retention effects
-- Extrusion survival before cooking
-- A complete consumer-cook kinetic reconstruction outside the reported pH and temperature window
-
-**Next Action:** Expose as the pH-calibrated Family 03 benchmark anchor for thiamine-driven MFT support in the runtime lane.
-
----
-
 ### Bolton, Reineccius, Liardon & Huynh-Ba (1994), ACS Symp. Ser. 543:270-278 -- REPLACES the nonexistent "Hofmann et al. (1996)"
 - **DOI:** [10.1021/bk-1994-0543.ch022](https://doi.org/10.1021/bk-1994-0543.ch022)
 - **Matrix Family:** free_model_system
@@ -414,14 +239,10 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 3
 
-Total papers analyzed: **9** (Benchmark-eligible: **2**, Calibration references: **4**, Rejected: **3**)
+Total papers analyzed: **5** (Benchmark-eligible: **1**, Calibration references: **1**, Rejected: **3**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
-| Voelker et al. (2021) | 4/8 | ⚠️ Calibration | aqueous_thiamine_model |
-| Huang (2022) | 5/8 | ⚠️ Calibration | metal_catalyzed_thiamine_model |
-| Arabshahi & Lund (1988), J. Food Sci. 53:199 | 4/8 | ⚠️ Calibration | starch_based_low_moisture_model |
-| Cerny & Guntz-Dubini (2008) | 6/8 | ✅ Eligible | free_model_system |
 | Bolton, Reineccius, Liardon & Huynh-Ba (1994), ACS Symp. Ser. 543:270-278 -- REPLACES the nonexistent "Hofmann et al. (1996)" | 6/8 | ✅ Eligible | free_model_system |
 | Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012) | 2/8 | ❌ Rejected | free_model_system |
 | Mauri, Alzamora, Chirife & Tomio (1989), Int. J. Food Sci. Technol. 24:1 | 2/8 | ❌ Rejected | free_model_system |
@@ -433,13 +254,9 @@ Total papers analyzed: **9** (Benchmark-eligible: **2**, Calibration references:
 ## Consolidated entries for benchmark_schema.json — Family 3
 
 ### REFERENCE_ANCHOR / PRIMARY (Score >= 6)
-- `Cerny & Guntz-Dubini (2008)` (Score: 6/8)
 - `Bolton, Reineccius, Liardon & Huynh-Ba (1994), ACS Symp. Ser. 543:270-278 -- REPLACES the nonexistent "Hofmann et al. (1996)"` (Score: 6/8)
 
 ### CALIBRATION (Score 3-5)
-- `Voelker et al. (2021)` (Score: 4/8)
-- `Huang (2022)` (Score: 5/8)
-- `Arabshahi & Lund (1988), J. Food Sci. 53:199` (Score: 4/8)
 - `Voelker et al. (2018)` (Score: 3/8)
 
 ### REJECTED (Score < 3)

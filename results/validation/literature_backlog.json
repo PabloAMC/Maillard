@@ -94,8 +94,7 @@
       "source_payload_role": "benchmark_intake",
       "target_payload_types": [
         "benchmark_payload",
-        "benchmark_intake_entry",
-        "computational_prior"
+        "benchmark_intake_entry"
       ],
       "matrix_family": "free_model_system",
       "legacy_status": "encoded",
@@ -126,16 +125,6 @@
           "artifact_id": "hofmann_schieberle_grosch_1996",
           "path": "data/lit/benchmark_intake_registry.json",
           "template_kind": "benchmark_intake_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cerny_2007_thiamine_split_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
           "exists": true
         }
       ]
@@ -293,80 +282,6 @@
       ]
     },
     {
-      "id": "acs_jafc_3c02618_binding_prior",
-      "citation": "Wang et al. (2023)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_maillard_crosstalk",
-      "slr_family_source": "11",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "plant_protein_matrix",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Keep linked to the landed retention prior so Family 11 retention logic stays traceable in the intake surface.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "acs_jafc_3c02618_mft_disulfide_trapping_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "retention_binding_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ahlberg_2021_yeast_extract_grade_anchor",
-      "citation": "Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "commercial_yeast_extract",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a Family 04 source-profile anchor so yeast-extract additions expose bounded grade-driven nucleotide support rather than behaving like a single default composition.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "aliani_2005_donor_potency_nucleotide_context",
       "citation": "Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067",
       "kind": "directional_prior",
@@ -397,43 +312,6 @@
           "path": "data/lit/computational_priors.json",
           "sections": [
             "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "arabshahi_1988_aw_thiamine_kinetics",
-      "citation": "Arabshahi & Lund (1988), J. Food Sci. 53:199",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "starch_based_low_moisture_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as the bounded Family 03 aw-dependent support anchor so wetter extrusion-like thiamine systems no longer inherit the same effective Arrhenius posture as drier starch-rich systems.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "arabshahi_1988_aw_dependent_thiamine_ea_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
           ],
           "template_kind": "computational_prior",
           "exists": true
@@ -537,43 +415,6 @@
       ]
     },
     {
-      "id": "blank_1997_rhamnose_proline_hdmf_anchor",
-      "citation": "Blank & Fay (1996), J. Agric. Food Chem. 44:531",
-      "kind": "directional_prior",
-      "chemistry_family": "carbonyl_donor_hierarchy",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded rhamnose-plus-proline HDMF prior so Family 07 can surface this donor-specific shortcut without rewriting the broader sugar hierarchy.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "blank_1997_rhamnose_proline_hdmf_uplift_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "carbonyl_donor_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "blank_2001_epoxydecenal_guardrail",
       "citation": "Lin, Fay, Welti & Blank (2001), Lipids 36:749",
       "kind": "directional_prior",
@@ -669,43 +510,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "brands_2002_casein_sugar_melanoidin",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "brands_2002_mgo_hdmf_anchor",
-      "citation": "Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725",
-      "kind": "directional_prior",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a bounded Family 09 methylglyoxal-to-HDMF support prior so the runtime can surface an explicit C3 route without replacing the default Blank & Fay furanone expectation prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "brands_2002_mgo_hdmf_c3_route_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "furanone_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -866,43 +670,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "cui_2022_mushroom_nucleotide_anchor",
-      "citation": "Liu et al. (2022), LWT 168:113651",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "commercial_dried_mushroom",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a Family 04 source-profile anchor so mushroom additions expose bounded species-specific nucleotide support, especially when shiitake or porcini are present.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cui_2022_mushroom_gmp_euc_window_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -1150,42 +917,6 @@
       ]
     },
     {
-      "id": "grosch_1999_c183_propanal_scission",
-      "citation": "Ullrich & Grosch (1988), J. Am. Oil Chem. Soc. 65:1313",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation"
-      ],
-      "repo_next_action": "Encode lipid c183 scission split yield prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "grosch_1999_c183_propanal_scission_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "hendrickx_1998_ascorbic_isobaric_degradation",
       "citation": "Van den Broeck et al. (1998), J. Agric. Food Chem. 46:2001",
       "kind": "calibration_reference",
@@ -1314,43 +1045,6 @@
       ]
     },
     {
-      "id": "hidalgo_zamora_2004_4hne_pentylpyrrole",
-      "citation": "Globisch, Kaden & Henle (2015), J. Agric. Food Chem. 63:5273",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "lipid_oxidation_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a bounded 4-HNE pyrrole guardrail so oxidized-lipid systems can surface pyrrolic off-note risk explicitly.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "hidalgo_zamora_2004_4hne_pentylpyrrole_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "hofmann_2001_melanoidin_thioether",
       "citation": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
       "kind": "calibration_reference",
@@ -1377,42 +1071,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "hofmann_2001_melanoidin_thioether",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "huang_2022_thiamine_metal_catalysis",
-      "citation": "Huang (2022)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "metal_catalyzed_thiamine_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "matrix_correction",
-        "literature_runtime"
-      ],
-      "repo_next_action": "Use as the compact Family 03 matrix-correction anchor for iron- and copper-rich systems without changing the default thiamine flavor prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "huang_2022_thiamine_metal_catalysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -1816,43 +1474,6 @@
       ]
     },
     {
-      "id": "lincoln_2025",
-      "citation": "Lincoln & Girard (2025)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "ppi_spi_glucose_lipid_polyphenol",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "optimizer",
-        "reporting"
-      ],
-      "repo_next_action": "Encode as a structured crosstalk prior and keep its directional status explicit until full quantitative extraction is available.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "directional_prior",
-          "artifact_id": "lincoln_2025_polyphenol_crosstalk_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "strecker_crosstalk_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "liu_2020_egcg_arp_kinetics",
       "citation": "Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714",
       "kind": "calibration_reference",
@@ -2222,42 +1843,6 @@
       ]
     },
     {
-      "id": "mottram_nobrega_2002_furanone_bridge",
-      "citation": "Mottram & Nobrega (2002)",
-      "kind": "directional_prior",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "caramelization_sulfur_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a bounded sulfur-bridge prior so furanone-rich systems do not get treated as sulfur-disconnected by default.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "mottram_nobrega_2002_furanone_sulfur_bridge_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "furanone_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "mouritsen_2024_umami_thresholds",
       "citation": "Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049",
       "kind": "quantitative_benchmark",
@@ -2523,42 +2108,6 @@
       ]
     },
     {
-      "id": "pmc12154226_crosspy_thiol_adduction",
-      "citation": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
-      "kind": "calibration_reference",
-      "chemistry_family": "polyphenol_amino_capping",
-      "slr_family_source": "13",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "coffee_melanoidin_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Keep as the Family 13 covalent thiol-depletion anchor for CROSSPY-mediated capping modeling.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "pmc12154226_crosspy_thiol_capping_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "polyphenol_thiol_capping_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "pmc3199460_ascorbic_dicarbonyl",
       "citation": "Nemet & Monnier (2011)",
       "kind": "calibration_reference",
@@ -2585,42 +2134,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "pmc3199460_ascorbic_dicarbonyl",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmc9351765_crosspy_trapping_anchor",
-      "citation": "Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176",
-      "kind": "calibration_reference",
-      "chemistry_family": "melanoidin_polymerization",
-      "slr_family_source": "16",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "melanoidin_trapping_model",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a bounded Family 16 trapping prior until the extrusion severity surface and same-run sulfur retention benchmarks are wider.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "pmc9351765_crosspy_mft_scavenging_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "melanoidin_trapping_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -2699,43 +2212,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "pmid36878579_pe_stoichiometry",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmid_1904866_pentosidine_equivalence_anchor",
-      "citation": "Grandhee & Monnier (1991), J. Biol. Chem. 266:11649",
-      "kind": "calibration_reference",
-      "chemistry_family": "ascorbic_acid_maillard",
-      "slr_family_source": "14",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "bsa_ascorbic_crosslink_model",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "safety",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as the Family 14 pentosidine-equivalence anchor so antioxidant AA additions remain visible as a bounded AGE burden source in reporting and safety lanes.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "pmid_1904866_aa_pentosidine_equivalence_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "ascorbic_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -3058,16 +2534,6 @@
       ],
       "repo_next_action": "Use as a Family 04 mild-heating reference so long low-temperature windows report preserved-versus-collapsed EUC context explicitly while keeping PBMA transfer bounded.",
       "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "soladoye_2020_low_temp_euc_window_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        },
         {
           "artifact_type": "computational_prior",
           "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
@@ -3464,79 +2930,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "voelker_2018_thiamine_salt_degradation",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "voelker_2021_thiamine_kinetics",
-      "citation": "Voelker et al. (2021)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_thiamine_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Use as the primary Family 03 Arrhenius calibration anchor while keeping Cerny as the default flavor-yield prior for the runtime lane.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "voelker_2021_thiamine_arrhenius_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "wang_2012_gsh_xylose_sulfur_uplift",
-      "citation": "Wang, Yang & Song (2012), Food Chemistry 131:280",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "glutathione_xylose_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep the runtime landing compact by linking this citation to the existing Family 05 sulfur-peptide prior instead of cloning a second peptide-uplift payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "wang_xu_glutathione_peptide_support_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "sulfur_peptide_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -6181,8 +5574,7 @@
       "source_payload_role": "benchmark_intake",
       "target_payload_types": [
         "benchmark_payload",
-        "benchmark_intake_entry",
-        "computational_prior"
+        "benchmark_intake_entry"
       ],
       "matrix_family": "free_model_system",
       "legacy_status": "encoded",
@@ -6213,16 +5605,6 @@
           "artifact_id": "hofmann_schieberle_grosch_1996",
           "path": "data/lit/benchmark_intake_registry.json",
           "template_kind": "benchmark_intake_entry",
-          "exists": true
-        },
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cerny_2007_thiamine_split_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
           "exists": true
         }
       ]
@@ -6380,80 +5762,6 @@
       ]
     },
     {
-      "id": "acs_jafc_3c02618_binding_prior",
-      "citation": "Wang et al. (2023)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_maillard_crosstalk",
-      "slr_family_source": "11",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "plant_protein_matrix",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "headspace",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Keep linked to the landed retention prior so Family 11 retention logic stays traceable in the intake surface.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "acs_jafc_3c02618_mft_disulfide_trapping_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "retention_binding_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "ahlberg_2021_yeast_extract_grade_anchor",
-      "citation": "Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "commercial_yeast_extract",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a Family 04 source-profile anchor so yeast-extract additions expose bounded grade-driven nucleotide support rather than behaving like a single default composition.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "aliani_2005_donor_potency_nucleotide_context",
       "citation": "Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067",
       "kind": "directional_prior",
@@ -6484,43 +5792,6 @@
           "path": "data/lit/computational_priors.json",
           "sections": [
             "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "arabshahi_1988_aw_thiamine_kinetics",
-      "citation": "Arabshahi & Lund (1988), J. Food Sci. 53:199",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "starch_based_low_moisture_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Use as the bounded Family 03 aw-dependent support anchor so wetter extrusion-like thiamine systems no longer inherit the same effective Arrhenius posture as drier starch-rich systems.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "arabshahi_1988_aw_dependent_thiamine_ea_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
           ],
           "template_kind": "computational_prior",
           "exists": true
@@ -6624,43 +5895,6 @@
       ]
     },
     {
-      "id": "blank_1997_rhamnose_proline_hdmf_anchor",
-      "citation": "Blank & Fay (1996), J. Agric. Food Chem. 44:531",
-      "kind": "directional_prior",
-      "chemistry_family": "carbonyl_donor_hierarchy",
-      "slr_family_source": "07",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Encode as a bounded rhamnose-plus-proline HDMF prior so Family 07 can surface this donor-specific shortcut without rewriting the broader sugar hierarchy.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "blank_1997_rhamnose_proline_hdmf_uplift_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "carbonyl_donor_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "blank_2001_epoxydecenal_guardrail",
       "citation": "Lin, Fay, Welti & Blank (2001), Lipids 36:749",
       "kind": "directional_prior",
@@ -6756,43 +5990,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "brands_2002_casein_sugar_melanoidin",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "brands_2002_mgo_hdmf_anchor",
-      "citation": "Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725",
-      "kind": "directional_prior",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a bounded Family 09 methylglyoxal-to-HDMF support prior so the runtime can surface an explicit C3 route without replacing the default Blank & Fay furanone expectation prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "brands_2002_mgo_hdmf_c3_route_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "furanone_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -6953,43 +6150,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "cui_2022_mushroom_nucleotide_anchor",
-      "citation": "Liu et al. (2022), LWT 168:113651",
-      "kind": "calibration_reference",
-      "chemistry_family": "nucleotide_and_ribose_support",
-      "slr_family_source": "04",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "commercial_dried_mushroom",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting",
-        "recommend"
-      ],
-      "repo_next_action": "Use as a Family 04 source-profile anchor so mushroom additions expose bounded species-specific nucleotide support, especially when shiitake or porcini are present.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "cui_2022_mushroom_gmp_euc_window_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -7237,42 +6397,6 @@
       ]
     },
     {
-      "id": "grosch_1999_c183_propanal_scission",
-      "citation": "Ullrich & Grosch (1988), J. Am. Oil Chem. Soc. 65:1313",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "free_model_system",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation"
-      ],
-      "repo_next_action": "Encode lipid c183 scission split yield prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "grosch_1999_c183_propanal_scission_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "hendrickx_1998_ascorbic_isobaric_degradation",
       "citation": "Van den Broeck et al. (1998), J. Agric. Food Chem. 46:2001",
       "kind": "calibration_reference",
@@ -7401,43 +6525,6 @@
       ]
     },
     {
-      "id": "hidalgo_zamora_2004_4hne_pentylpyrrole",
-      "citation": "Globisch, Kaden & Henle (2015), J. Agric. Food Chem. 63:5273",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "lipid_oxidation_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "lipid_oxidation",
-        "reporting"
-      ],
-      "repo_next_action": "Use as a bounded 4-HNE pyrrole guardrail so oxidized-lipid systems can surface pyrrolic off-note risk explicitly.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "hidalgo_zamora_2004_4hne_pentylpyrrole_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "lipid_offnote_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "hofmann_2001_melanoidin_thioether",
       "citation": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
       "kind": "calibration_reference",
@@ -7464,42 +6551,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "hofmann_2001_melanoidin_thioether",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "huang_2022_thiamine_metal_catalysis",
-      "citation": "Huang (2022)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "metal_catalyzed_thiamine_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "matrix_correction",
-        "literature_runtime"
-      ],
-      "repo_next_action": "Use as the compact Family 03 matrix-correction anchor for iron- and copper-rich systems without changing the default thiamine flavor prior.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "huang_2022_thiamine_metal_catalysis_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -7903,43 +6954,6 @@
       ]
     },
     {
-      "id": "lincoln_2025",
-      "citation": "Lincoln & Girard (2025)",
-      "kind": "directional_prior",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "ppi_spi_glucose_lipid_polyphenol",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "optimizer",
-        "reporting"
-      ],
-      "repo_next_action": "Encode as a structured crosstalk prior and keep its directional status explicit until full quantitative extraction is available.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "directional_prior",
-          "artifact_id": "lincoln_2025_polyphenol_crosstalk_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "strecker_crosstalk_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "liu_2020_egcg_arp_kinetics",
       "citation": "Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714",
       "kind": "calibration_reference",
@@ -8309,42 +7323,6 @@
       ]
     },
     {
-      "id": "mottram_nobrega_2002_furanone_bridge",
-      "citation": "Mottram & Nobrega (2002)",
-      "kind": "directional_prior",
-      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
-      "slr_family_source": "09",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "caramelization_sulfur_model_system",
-      "legacy_status": "ready_for_directional_prior_encoding",
-      "triage_status": "ready_directional_prior",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a bounded sulfur-bridge prior so furanone-rich systems do not get treated as sulfur-disconnected by default.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "mottram_nobrega_2002_furanone_sulfur_bridge_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "furanone_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "mouritsen_2024_umami_thresholds",
       "citation": "Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049",
       "kind": "quantitative_benchmark",
@@ -8610,42 +7588,6 @@
       ]
     },
     {
-      "id": "pmc12154226_crosspy_thiol_adduction",
-      "citation": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
-      "kind": "calibration_reference",
-      "chemistry_family": "polyphenol_amino_capping",
-      "slr_family_source": "13",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "coffee_melanoidin_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Keep as the Family 13 covalent thiol-depletion anchor for CROSSPY-mediated capping modeling.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "pmc12154226_crosspy_thiol_capping_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "polyphenol_thiol_capping_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
       "id": "pmc3199460_ascorbic_dicarbonyl",
       "citation": "Nemet & Monnier (2011)",
       "kind": "calibration_reference",
@@ -8672,42 +7614,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "pmc3199460_ascorbic_dicarbonyl",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmc9351765_crosspy_trapping_anchor",
-      "citation": "Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176",
-      "kind": "calibration_reference",
-      "chemistry_family": "melanoidin_polymerization",
-      "slr_family_source": "16",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "melanoidin_trapping_model",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as a bounded Family 16 trapping prior until the extrusion severity surface and same-run sulfur retention benchmarks are wider.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "pmc9351765_crosspy_mft_scavenging_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "melanoidin_trapping_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -8786,43 +7692,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "pmid36878579_pe_stoichiometry",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "pmid_1904866_pentosidine_equivalence_anchor",
-      "citation": "Grandhee & Monnier (1991), J. Biol. Chem. 266:11649",
-      "kind": "calibration_reference",
-      "chemistry_family": "ascorbic_acid_maillard",
-      "slr_family_source": "14",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "bsa_ascorbic_crosslink_model",
-      "legacy_status": "encoded",
-      "triage_status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "safety",
-        "reporting"
-      ],
-      "repo_next_action": "Keep encoded as the Family 14 pentosidine-equivalence anchor so antioxidant AA additions remain visible as a bounded AGE burden source in reporting and safety lanes.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "pmid_1904866_aa_pentosidine_equivalence_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "ascorbic_pathway_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -9145,16 +8014,6 @@
       ],
       "repo_next_action": "Use as a Family 04 mild-heating reference so long low-temperature windows report preserved-versus-collapsed EUC context explicitly while keeping PBMA transfer bounded.",
       "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "soladoye_2020_low_temp_euc_window_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "nucleotide_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        },
         {
           "artifact_type": "computational_prior",
           "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
@@ -9551,79 +8410,6 @@
           "artifact_type": "computational_prior",
           "artifact_id": "voelker_2018_thiamine_salt_degradation",
           "path": "data/lit/computational_priors.json",
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "voelker_2021_thiamine_kinetics",
-      "citation": "Voelker et al. (2021)",
-      "kind": "calibration_reference",
-      "chemistry_family": "thiamine_fragmentation_support",
-      "slr_family_source": "03",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "aqueous_thiamine_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction"
-      ],
-      "repo_next_action": "Use as the primary Family 03 Arrhenius calibration anchor while keeping Cerny as the default flavor-yield prior for the runtime lane.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "voelker_2021_thiamine_arrhenius_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "thiamine_pathway_priors"
-          ],
-          "template_kind": "computational_prior",
-          "exists": true
-        }
-      ]
-    },
-    {
-      "id": "wang_2012_gsh_xylose_sulfur_uplift",
-      "citation": "Wang, Yang & Song (2012), Food Chemistry 131:280",
-      "kind": "calibration_reference",
-      "chemistry_family": "glutathione_and_peptide_support",
-      "slr_family_source": "05",
-      "source_payload_role": "benchmark_intake",
-      "target_payload_types": [
-        "computational_prior"
-      ],
-      "matrix_family": "glutathione_xylose_model",
-      "legacy_status": "ready_for_calibration_encoding",
-      "triage_status": "ready_calibration",
-      "encoding_status": "encoded_runtime_artifact",
-      "template_kind": "computational_prior",
-      "runtime_artifacts_present": true,
-      "backlog_queue": null,
-      "requires_primary_data": false,
-      "target_modules": [
-        "literature_runtime",
-        "matrix_correction",
-        "reporting"
-      ],
-      "repo_next_action": "Keep the runtime landing compact by linking this citation to the existing Family 05 sulfur-peptide prior instead of cloning a second peptide-uplift payload.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "wang_xu_glutathione_peptide_support_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "sulfur_peptide_priors"
-          ],
           "template_kind": "computational_prior",
           "exists": true
         }
@@ -12135,8 +10921,8 @@
     "encoded_and_ready_ids": []
   },
   "summary": {
-    "intake_reference_count": 172,
-    "encoded_reference_count": 172,
+    "intake_reference_count": 156,
+    "encoded_reference_count": 156,
     "ready_runtime_count": 0,
     "ready_benchmark_count": 0,
     "wet_lab_blocked_count": 4,

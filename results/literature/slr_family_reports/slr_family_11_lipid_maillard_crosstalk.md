@@ -129,45 +129,6 @@
 
 ---
 
-### Wang et al. (2023)
-- **DOI:** [10.1021/acs.jafc.3c02618](https://doi.org/10.1021/acs.jafc.3c02618)
-- **Matrix Family:** plant_protein_matrix
-- **Kind:** `directional_prior`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_directional_prior_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ❌ | Temperature, time or pH missing from key_values |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ❌ | Replicates < 3 or not specified |
-| ⚠️ | LOD/LOQ not explicitly confirmed (qualitative/provisional status) |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 2/8 → Rejected**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `mft_disulfide_trapping_reported` | `True` |
-| `pyrazine_pi_stacking_reported` | `True` |
-| `headspace_recovery_effect_direction` | `reduced_by_covalent_and_non_covalent_binding` |
-
-**What it supports:**
-- MFT disulfide trapping and pyrazine pi-stacking support for Family 11 retention behavior
-- Bounded protein-aroma binding reasoning for sulfur and pyrazine visibility
-
-**What it does not support:**
-- Exact compound-specific benchmark closure
-- One-condition absolute headspace prediction
-
-**Next Action:** Keep linked to the landed retention prior so Family 11 retention logic stays traceable in the intake surface.
-
----
-
 ### Anantharamkrishnan et al. (2020)
 - **DOI:** [10.1021/acs.jafc.0c01925](https://doi.org/10.1021/acs.jafc.0c01925)
 - **Matrix Family:** plant_protein_matrix
@@ -488,13 +449,12 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 11
 
-Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references: **10**, Rejected: **1**)
+Total papers analyzed: **10** (Benchmark-eligible: **0**, Calibration references: **10**, Rejected: **0**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Li et al. (2026) | 4/8 | ⚠️ Calibration | spi_wheat_gluten_hme |
 | Barallat-Pérez et al. (2023) | 3/8 | ⚠️ Calibration | commercial_ppi_spi |
-| Wang et al. (2023) | 2/8 | ❌ Rejected | plant_protein_matrix |
 | Anantharamkrishnan et al. (2020) | 3/8 | ⚠️ Calibration | plant_protein_matrix |
 | Bi et al. (2020), J. Agric. Food Chem. 68:2718 | 4/8 | ⚠️ Calibration | raw_pea_flour |
 | Flores et al. (2024), J. Agric. Food Chem. 72:5334 | 4/8 | ⚠️ Calibration | fermented_textured_pea_protein |
@@ -524,7 +484,7 @@ Total papers analyzed: **11** (Benchmark-eligible: **0**, Calibration references
 - `Smagghe et al. (2005), Biochemistry 45:561` (Score: 3/8)
 
 ### REJECTED (Score < 3)
-- `Wang et al. (2023)` (Score: 2/8)
+- *No rejected references.*
 
 ---
 

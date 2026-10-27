@@ -796,49 +796,8 @@
       "notes": "Directional mycoprotein prior only; intended for bounded ranking support and trust reporting rather than quantitative closure."
     }
   ],
-  "pyrazine_control_priors": [
-    {
-      "id": "slr_pyrazine_control_surface_v1",
-      "source": "Laemont 2023, Arsa 2022, Wang 2021, Hao 2025",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "propensity_cap": 1.75,
-      "notes": "Directional pyrazine control surface: pH dominates, fructose and pentoses increase pyrazines, peptide-rich systems can intensify pyrazine formation.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    }
-  ],
+  "pyrazine_control_priors": [],
   "strecker_crosstalk_priors": [
-    {
-      "id": "lincoln_2025_polyphenol_crosstalk_v1",
-      "source": "Lincoln et al. (2025), Sustainable Food Proteins 10.1002/sfp2.1044",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "applicable_protein_types": [
-        "pea_iso",
-        "soy_iso",
-        "pea_conc",
-        "soy_conc"
-      ],
-      "required_sugars": [
-        "glucose"
-      ],
-      "required_context": [
-        "lipids",
-        "polyphenols"
-      ],
-      "polyphenol_examples": [
-        "catechin",
-        "tannic acid",
-        "green tea extract",
-        "grape seed extract"
-      ],
-      "effect_direction": "suppress_strecker_and_moderate_oxidative_crosstalk",
-      "summary": "Glucose plus lipid plus polyphenol systems in SPI/PPI can suppress Strecker aldehydes through alpha-dicarbonyl competition while altering post-heating oxidative stability.",
-      "notes": "Directional prior only; full quantitative volatile units and internal-standard details remain unresolved in the repo.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
     {
       "id": "hidalgo_2007_decadienal_phenylalanine_styrene",
       "source": "Hidalgo et al. (2007)",
@@ -899,48 +858,6 @@
   ],
   "furanone_priors": [
     {
-      "id": "blank_fay_1996_furanone_expectation_v1",
-      "source": "Blank and Fay 1996 plus Watanabe 2015 meat-side reference context",
-      "provenance_tier": "mechanistic_surrogate",
-      "confidence_tier": "low",
-      "notes": "Mechanistic expectation only: pentose plus alanine supports HEMF; pentose plus glycine or alanine supports DMHF.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "mottram_nobrega_2002_furanone_sulfur_bridge_v1",
-      "source": "Mottram & Nobrega (2002 / Chapter 9 review)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "norfuraneol_to_mft_mol_fraction": 0.014,
-      "hdmf_cysteine_thiophene_ph_optimum": 5.1,
-      "diacetyl_mercaptoketone_bridge_reported": true,
-      "analytical_method": "SIDA",
-      "notes": "Bounded bridge prior tying caramel/furanone intermediates to sulfur-positive branches. Use for Family 09 reporting and routing support without claiming one-condition endpoint closure.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "brands_2002_mgo_hdmf_c3_route_v1",
-      "source": "Brands & van Boekel (2002) with bounded absolute-yield context carried forward from the repo's Hauck & Tressl 1999 HDMF synthesis cross-reference",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "route_type": "methylglyoxal_self_condensation",
-      "reference_conditions": {
-        "mgo_mM": 50.0,
-        "temperature_c": 120.0,
-        "pH": 6.0,
-        "time_minutes": 120.0,
-        "matrix": "aqueous_model"
-      },
-      "hdmf_reference_yield_ug_per_g": 2.9,
-      "route_independent_of_amino_acids": true,
-      "analytical_method": "GC-MS with internal standard",
-      "notes": "Bounded Family 09 support prior showing that HDMF can arise directly from methylglyoxal-rich fragmentation chemistry without an amino-acid partner. Use for runtime-visible C3-route context only; do not treat this as a full standalone caramelization closure model.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
       "source": "de Bruijn et al. (1987)",
       "provenance_tier": "literature_derived_transfer",
@@ -972,178 +889,6 @@
     }
   ],
   "thiamine_pathway_priors": [
-    {
-      "id": "cerny_2007_thiamine_split_v1",
-      "source": "Cerny 2007 isotope-labeled thiamine partitioning plus Cerny & Guntz-Dubini 2008 pH-resolved MFT yields and Hofmann et al. 1996 beef-realistic synergy context",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "mixed_pentose_fraction": 0.5,
-      "thiamine_only_fraction": 1.0,
-      "thiamine_only_reference_total_precursor_mM": 10.0,
-      "thiamine_alone_ph_points": [
-        4.0,
-        5.0,
-        6.0,
-        7.0,
-        8.0
-      ],
-      "thiamine_alone_mft_yield_ug_per_g": [
-        0.02,
-        0.14,
-        0.58,
-        0.42,
-        0.19
-      ],
-      "reference_ph": 6.0,
-      "reference_yield_ug_per_g": 0.58,
-      "mixed_system_reference_ph": 6.0,
-      "mixed_system_reference_yield_ug_per_g": 2.47,
-      "mixed_system_reference_total_precursor_mM": 30.0,
-      "mixed_system_optimal_ph": 5.5,
-      "mixed_system_optimal_yield_ug_per_g": 3.11,
-      "mixed_system_optimal_total_precursor_mM": 30.0,
-      "mixed_system_synergy_factor_peak": 4.3,
-      "mixed_system_dilute_loading_uplift_ceiling": 1.15,
-      "beef_realistic_synergy_factor": 2.64,
-      "beef_reference_yield_ug_per_g": 3.14,
-      "beef_reference_total_precursor_mM": 2.1,
-      "observable_efficiency_floor": 0.03,
-      "observable_efficiency_ceiling": 1.1,
-      "extrusion_retention_reference_id": "de_leyn_2019_thiamine_retention",
-      "notes": "Use for bounded Family 03 support scoring: Cerny 2007 sets mixed-source attribution, Cerny 2008 sets the pH-sensitive MFT window, Hofmann 1996 sets a conservative mixed-system synergy floor plus a dilute mixed-system uplift ceiling for low-total-precursor cases, and De Leyn 2019 attenuates pre-extrusion thiamine survival.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "voelker_2021_thiamine_arrhenius_v1",
-      "source": "Voelker, Taylor & Mauer (2021)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "temperature_c_points": [
-          40.0,
-          55.0,
-          70.0
-        ],
-        "ph_points": [
-          3.0,
-          4.0,
-          5.0,
-          6.0,
-          7.0
-        ],
-        "low_concentration_mg_per_ml": 1.0,
-        "high_concentration_mg_per_ml": 20.0,
-        "salt_forms": [
-          "thiamine_mononitrate",
-          "thiamine_hcl"
-        ]
-      },
-      "tmn_low_conc_k_obs_per_hour_at_70c_by_ph": {
-        "3.0": 0.0011,
-        "6.0": 0.0435,
-        "7.0": 0.055
-      },
-      "tcl_low_conc_k_obs_per_hour_at_70c_by_ph": {
-        "3.0": 0.0009
-      },
-      "tmn_low_conc_ea_kcal_per_mol_by_ph": {
-        "3.0": 28.4,
-        "6.0": 18.5,
-        "7.0": 19.5
-      },
-      "tcl_low_conc_ea_kcal_per_mol_by_ph": {
-        "3.0": 31.6
-      },
-      "neutral_ph_high_concentration_multiplier_vs_low_concentration": 9.3,
-      "storage_retention_pct_25c_ph3_day392": 91.0,
-      "notes": "Primary aqueous Arrhenius anchor for Family 03. Use to keep acidic thiamine systems slow, neutral systems fast, and neutral high-concentration systems explicitly super-linear instead of treating thiamine disappearance as a single global first-order constant.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "arabshahi_1988_aw_dependent_thiamine_ea_v1",
-      "source": "Arabshahi & Lund (1988)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "temperature_c_points": [
-          110.0,
-          130.0,
-          150.0
-        ],
-        "water_activity_points": [
-          0.3,
-          0.65,
-          0.9
-        ],
-        "matrix": "starch_model",
-        "thiamine_form": "thiamine_hcl"
-      },
-      "reference_aw": 0.65,
-      "starch_ea_kcal_per_mol_by_aw": {
-        "0.3": 26.8,
-        "0.65": 23.4,
-        "0.9": 20.1
-      },
-      "starch_ea_standard_error_kcal_per_mol_by_aw": {
-        "0.3": 2.1,
-        "0.65": 1.8,
-        "0.9": 1.5
-      },
-      "cellulose_ea_kcal_per_mol_at_aw_0_65": 24.1,
-      "pbma_high_moisture_aw_window": [
-        0.75,
-        0.95
-      ],
-      "notes": "Bounded Family 03 aw-dependent Arrhenius support prior for starch-like matrices. Use to attenuate thiamine survival under wetter extrusion-like conditions and modestly relax that penalty under drier low-moisture conditions without replacing the Cerny yield surface or the Voelker aqueous pH anchor.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "huang_2022_thiamine_metal_catalysis_v1",
-      "source": "Huang (2022)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "ph": 6.0,
-        "temperature_c_points": [
-          25.0,
-          55.0
-        ],
-        "incubation_days": 7.0,
-        "thiamine_mM": 0.1
-      },
-      "metal_acceleration_vs_control": {
-        "cu_plus": 12.0,
-        "fe2_plus": 8.0,
-        "fe3_plus": 19.0,
-        "zn2_plus": 1.5
-      },
-      "loss_pct_day7_by_temp_c": {
-        "25.0": {
-          "control": 5.0,
-          "cu_plus": 64.0,
-          "fe2_plus": 45.0,
-          "fe3_plus": 78.34,
-          "zn2_plus": 12.0
-        },
-        "55.0": {
-          "control": 18.0,
-          "cu_plus": 61.94,
-          "fe2_plus": 72.0,
-          "fe3_plus": 95.98,
-          "zn2_plus": 25.0
-        }
-      },
-      "dominant_matrix_risk_metals": [
-        "fe3_plus",
-        "cu_plus"
-      ],
-      "notes": "Bounded metal-catalysis correction for Family 03. Use to accelerate thiamine loss when iron-rich or copper-rich plant matrices are present, with Fe3+ as the strongest practical catalyst in the curated literature surface.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
     {
       "id": "tannenbaum_1985_thiamine_ea",
       "source": "Tannenbaum, Archer & Young (1985)",
@@ -1265,19 +1010,6 @@
       }
     },
     {
-      "id": "liardon_1991_r5p_donor_potency_v1",
-      "source": "Liardon, de Weck-Gaudard & Philippossian (1991)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "r5p_vs_glucose_multiplier_floor": 100.0,
-      "ribose_vs_glucose_multiplier": 7.2,
-      "r5p_reaction_order": 1.5,
-      "reference_system": "aqueous sulfur-containing Maillard model",
-      "notes": "Directional donor-potency prior for upstream sugar routing. Use to keep ribose and especially R5P clearly above glucose when prioritizing sulfur-positive routes.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "aliani_2005_donor_potency_nucleotide_context_v1",
       "source": "Aliani & Farmer (2005)",
       "provenance_tier": "literature_derived_transfer",
@@ -1314,131 +1046,6 @@
       }
     },
     {
-      "id": "soladoye_2020_low_temp_euc_window_v1",
-      "source": "Hwang, Ismail & Joo (2020), Foods 9:251, DOI:10.3390/foods9030251",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "reference_conditions": {
-        "matrix": "beef_steak_sous_vide",
-        "temperature_c_points": [
-          60.0,
-          70.0
-        ],
-        "hold_time_h_points": [
-          2.0,
-          12.0
-        ],
-        "endpoint": "equivalent_umami_concentration"
-      },
-      "raw_euc_percent_msg": 0.18,
-      "euc_percent_msg_by_condition": {
-        "60C_2h": 0.13,
-        "60C_12h": 0.04,
-        "70C_12h": 0.15
-      },
-      "imp_mg_per_100g_by_condition": {
-        "60C_2h": 38.0,
-        "60C_12h": 6.0,
-        "70C_12h": 51.0
-      },
-      "glutamate_mg_per_100g_by_condition": {
-        "60C_2h": 14.0,
-        "60C_12h": 18.0,
-        "70C_12h": 15.0
-      },
-      "best_case_euc_fraction_of_raw": 0.83,
-      "notes": "Low-temperature EUC window anchor for Family 04. Use for scientist-facing mild-heating context and bounded PBMA transfer reasoning, not as a universal kinetic override for nucleotide hydrolysis.",
-      "citation_repair": {
-        "old": "Soladoye et al. (2020), DOI:10.3390/foods9030251",
-        "new": "Hwang, Ismail & Joo (2020), Foods 9:251, DOI:10.3390/foods9030251",
-        "date": "2026-08-26",
-        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Hwang, Ismail & Joo (2020), 'Identification of Umami Taste in Sous-Vide Beef by Chemical Analyses, Equivalent Umami Concentration, and Electronic Tongue System' - the right study for this low-temperature EUC window, but not 'Soladoye et al. (2020)'."
-      },
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1",
-      "source": "Ahlberg & Mohammadi (2021), PMC9998214",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "reference_basis": "commercial_yeast_extract_dry_weight",
-      "standard_autolysate_imp_mg_per_100g_dw_range": [
-        120.0,
-        250.0
-      ],
-      "standard_autolysate_gmp_mg_per_100g_dw_range": [
-        45.0,
-        90.0
-      ],
-      "high_nucleotide_imp_mg_per_100g_dw_range": [
-        1200.0,
-        2400.0
-      ],
-      "high_nucleotide_gmp_mg_per_100g_dw_range": [
-        300.0,
-        650.0
-      ],
-      "amp_deaminase_euc_uplift_factor_vs_standard_range": [
-        5.0,
-        6.0
-      ],
-      "cmp_penalty_mg_per_100g_dw_range": [
-        90.0,
-        200.0
-      ],
-      "notes": "Ingredient-source reference window for Family 04. Use to expose how strongly yeast-extract grade and AMP-deaminase treatment can change practical nucleotide support without replacing the existing Matoba or Soladoye thermal logic.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "cui_2022_mushroom_gmp_euc_window_v1",
-      "source": "Liu, Bau, Jin et al. (2022), LWT 164:113651, DOI:10.1016/j.lwt.2022.113651",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "reference_basis": "commercial_dried_mushroom_powder",
-      "species_profiles": {
-        "shiitake": {
-          "imp_mg_per_100g_dw": 36.0,
-          "gmp_mg_per_100g_dw": 108.0,
-          "amp_mg_per_100g_dw": 24.0,
-          "nucleotide_only_euc_g_msg_per_100g": 0.34,
-          "total_euc_g_msg_per_100g": 2.1
-        },
-        "porcini": {
-          "imp_mg_per_100g_dw": 12.0,
-          "gmp_mg_per_100g_dw": 82.0,
-          "amp_mg_per_100g_dw": 18.0,
-          "nucleotide_only_euc_g_msg_per_100g": 0.21,
-          "total_euc_g_msg_per_100g": 1.8
-        },
-        "enoki": {
-          "imp_mg_per_100g_dw": 8.0,
-          "gmp_mg_per_100g_dw": 45.0,
-          "amp_mg_per_100g_dw": 32.0,
-          "nucleotide_only_euc_g_msg_per_100g": 0.12,
-          "total_euc_g_msg_per_100g": 1.2
-        },
-        "oyster": {
-          "imp_mg_per_100g_dw": 6.0,
-          "gmp_mg_per_100g_dw": 28.0,
-          "amp_mg_per_100g_dw": 48.0,
-          "nucleotide_only_euc_g_msg_per_100g": 0.09,
-          "total_euc_g_msg_per_100g": 0.8
-        }
-      },
-      "notes": "Ingredient-source reference window for Family 04. Use to expose species-specific mushroom GMP and EUC context when clean-label nucleotide support is supplied by shiitake, porcini, enoki, or oyster powders.",
-      "citation_repair": {
-        "old": "Cui et al. (2022), DOI:10.1016/j.lwt.2022.113651",
-        "new": "Liu, Bau, Jin et al. (2022), LWT 164:113651, DOI:10.1016/j.lwt.2022.113651",
-        "date": "2026-08-26",
-        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Liu, Bau, Jin et al. (2022), 'Comparison of different drying techniques for shiitake mushroom (Lentinus edodes): Changes in volatile compounds, taste properties, and texture qualities' - a plausible source for the shiitake GMP/EUC window, but not 'Cui et al. (2022)'."
-      },
-      "citation_caveat": "Verified as the shiitake drying/taste study only. The porcini, enoki and oyster species profiles in this prior are NOT covered by it and remain unanchored.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "mouritsen_2024_umami_thresholds",
       "source": "Mouritsen et al. (2024)",
       "provenance_tier": "literature_derived_transfer",
@@ -1464,21 +1071,6 @@
       "IMP_hydrolysis_k_1_per_min": 0.0035,
       "IMP_to_inosine_Ea_kj_mol": 76.0,
       "notes": "IMP hydrolysis to inosine: k=3.5×10⁻³ min⁻¹ at 80°C; Ea=76 kJ/mol."
-    },
-    {
-      "id": "blank_grosch_1991_hdmf_anchor",
-      "source": "Blank & Grosch (2001), JAFC 49:2985",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "reference_conditions": {
-        "T_C": 145,
-        "pH": 6.0
-      },
-      "HDMF_ODT_ppb": 0.003,
-      "HDMF_from_ribose_glucose_pct": 78.0,
-      "notes": "HDMF (sotolon) ODT 0.003 ppb; 78% formed via ribose+glucose pathway.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     }
   ],
   "carbonyl_donor_priors": [
@@ -1607,57 +1199,6 @@
       }
     },
     {
-      "id": "blank_1997_rhamnose_proline_hdmf_uplift_v1",
-      "source": "Blank et al. (1997), DOI:10.1021/jf960777q",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "temperature_c": 145.0,
-        "amino_acid_partner": "proline",
-        "sugar_partner": "rhamnose",
-        "analytical_method": "SIDA with [2H3]-HDMF"
-      },
-      "supporting_families": [
-        "09"
-      ],
-      "observable_panel_tags": [
-        "donor_hierarchy",
-        "carbonyl_donor",
-        "hdmf",
-        "furanone_support"
-      ],
-      "hdmf_molar_yield_fraction_lower_bound": 0.4,
-      "hdmf_odt_ug_per_l": 0.6,
-      "hdmf_oav_lower_bound": 80.0,
-      "replicates": 3,
-      "notes": "Bounded rhamnose-plus-proline HDMF prior for Family 07. Use to expose that rhamnose can drive unusually strong HDMF support when proline is present, without reclassifying rhamnose as a universal fast donor across plant matrices.",
-      "audit_flag": "2026-08-26: DEAD DOI. 10.1021/jf960777q does not resolve (CrossRef 404) and no Blank et al. 1997 rhamnose-plus-proline HDMF source could be located by bibliographic search. Value UNCHANGED and currently unanchored.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "tran_2023_starch_liberation_v1",
-      "source": "Tran et al. (2023 / PMC9846454)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "applicable_protein_types": [
-        "pea_iso",
-        "plant_protein_generic"
-      ],
-      "reference_conditions": {
-        "process_state": "extrusion_structured",
-        "extrusion_mode": "hme"
-      },
-      "sugar_liberation_umol_g": {
-        "pea_starch_maltose": 18.4,
-        "waxy_maize_starch_maltose": 31.8,
-        "ti_starch_reduction_pct": 66.0
-      },
-      "notes": "Starch reducing-sugar liberation during HME. Highlights maltose liberation and TI starch reduction.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "quintas_2000_sucrose_caramelisation",
       "source": "Quintas et al. (2000)",
       "provenance_tier": "literature_derived_transfer",
@@ -1707,17 +1248,6 @@
       "notes": "Copper-catalyzed enolization (rate k = 0.41 s-1) and decarboxylation kinetics in model systems."
     },
     {
-      "id": "wang_2024_glucosamine_synergy",
-      "source": "Wu et al. (2025)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "amino_depletion_umol_ml": 0.69,
-      "tvc_yield_ug_g": 28.3,
-      "notes": "Glucosamine synergy and amino group depletion kinetics.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "blank_mottram_2002_ribose_labeling",
       "source": "Blank & Mottram (Mercaptoketone labelling 2002)",
       "provenance_tier": "literature_derived_transfer",
@@ -1749,21 +1279,6 @@
       "cys_content_pct": 1.9,
       "gly_content_pct": 9.5,
       "notes": "Rubisco amino acid composition and low temperature Amadori kinetics."
-    },
-    {
-      "id": "tran_2023_reducing_sugar_hme",
-      "source": "Tran et al. (2023)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "reference_conditions": {
-        "process": "HME",
-        "T_C": 150
-      },
-      "glucose_vs_fructose_reactivity_ratio": 1.4,
-      "xylose_vs_glucose_reactivity_ratio": 2.3,
-      "notes": "Reducing sugar reactivity hierarchy in HME: xylose (2.3x) > fructose (1.4x) > glucose.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
       "id": "davidek_2006_thr_glucose_furan",
@@ -1800,76 +1315,9 @@
       },
       "EGCG_ARP_k2_L_per_mol_per_s": 8.5,
       "notes": "EGCG traps Amadori rearrangement products; k₂=8.5 L/mol/s at 100°C."
-    },
-    {
-      "id": "yu_2021_corn_hydrolysate_kinetics",
-      "source": "Yu et al. (2021)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "reference_conditions": {
-        "T_C": 120,
-        "matrix": "corn_hydrolysate"
-      },
-      "browning_rate_A420_per_h": 0.032,
-      "pyrazine_fold_vs_wheat": 2.1,
-      "notes": "Corn hydrolysate browning 0.032 A420/h at 120°C; 2.1x more pyrazines vs wheat.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     }
   ],
   "sulfur_peptide_priors": [
-    {
-      "id": "wang_xu_glutathione_peptide_support_v1",
-      "protein_type": "soy_iso",
-      "reference_conditions": {
-        "temp_C": 120.0,
-        "time_min": 30.0,
-        "ph": 6.0,
-        "carbonyl_partner": "xylose"
-      },
-      "gsh_mft_ratio_vs_free_cysteine": 2.25,
-      "gsh_fft_ratio_vs_free_cysteine": 2.4,
-      "generic_peptide_ratio_vs_free_cysteine": 1.41,
-      "hydrolysate_ratio_vs_free_cysteine": 1.6,
-      "peak_sequence_ratio_vs_free_cysteine": 2.68,
-      "pyrazine_tradeoff_ratio_vs_free_cysteine": 0.75,
-      "gsh_buffered_release_bonus": 0.08,
-      "qualitative_intake_anchor_id": "nishimura_abe_2024",
-      "retention_proxy_ids": [
-        "zhang_2026_spi_lenthionine_retention",
-        "hofmann_2001_melanoidin_fft_trapping"
-      ],
-      "source": "Bounded sulfur-support prior distilled from Wang et al. GSH vs cysteine sulfur yields, Xu et al. peptide hierarchy, and Nishimura & Abe soy hydrolysate intake support",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "process_state_applicability": [
-        "heated_matrix",
-        "aqueous_pre_extrusion_model",
-        "extrusion_structured"
-      ],
-      "notes": "Use for Family 05 runtime scoring as a bounded uplift prior. It supports sulfur-positive interpretation, not absolute MFT or FFT concentration claims in SPI benchmarks.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "huang_2021_sulfur_oav_support_v1",
-      "source": "Huang et al. (2021)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "temp_C": 100.0,
-        "carbonyl_partner": "xylose",
-        "sulfur_source": "cysteine",
-        "amino_acid_support": "glutamate"
-      },
-      "mft_oav": 9550.0,
-      "fft_oav": 24800.0,
-      "identified_volatile_count": 89,
-      "replicates": 3,
-      "notes": "High-OAV sulfur-support prior for pentose plus sulfur model systems. Use as bounded evidence that MFT and FFT remain strongly favored when sulfur donors are paired with xylose and glutamate support.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
     {
       "id": "xu_2025_peptide_hierarchy",
       "source": "Xu, H. et al. (2025)",
@@ -1888,28 +1336,6 @@
     }
   ],
   "retention_binding_priors": [
-    {
-      "id": "acs_jafc_3c02618_mft_disulfide_trapping_v1",
-      "source": "ACS JAFC 3c02618",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "applicable_protein_types": [
-        "pea_iso",
-        "soy_iso",
-        "pea_conc",
-        "soy_conc"
-      ],
-      "reference_conditions": {
-        "process_state": "heated_matrix",
-        "temperature_variable": true
-      },
-      "mft_disulfide_trapping_reported": true,
-      "pyrazine_pi_stacking_reported": true,
-      "headspace_recovery_effect_direction": "reduced_by_covalent_and_non_covalent_binding",
-      "notes": "Bounded retention prior from protein-aroma binding literature. Use to support Family 11 retention reasoning without pretending compound-specific benchmark closure.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
     {
       "id": "acs_jafc_0c01925_protein_binding_hierarchy_v1",
       "source": "ACS JAFC 0c01925",
@@ -1956,64 +1382,6 @@
       }
     },
     {
-      "id": "bhandari_1998_beta_cd_aldehyde_binding_v1",
-      "source": "Bhandari et al. (1998)",
-      "chemistry_family": "off_note_and_maillard_suppression",
-      "slr_family_source": "08",
-      "payload_role": "computational_prior",
-      "observable_panel_tags": [
-        "off_note",
-        "guardrail",
-        "binding_support",
-        "encapsulation"
-      ],
-      "process_state_scope": [
-        "ambient_slurry",
-        "aqueous_pre_extrusion_model",
-        "heated_matrix"
-      ],
-      "supporting_families": [
-        "02",
-        "08",
-        "11"
-      ],
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "temperature_c": 25.0,
-        "beta_cyclodextrin_loading_wt_pct": 1.0,
-        "complexation_time_h_range": [
-          2.0,
-          24.0
-        ],
-        "internal_standard": "2-heptanone"
-      },
-      "k_assoc_m_inverse_by_compound": {
-        "hexanal": 1840.0,
-        "nonanal": 2100.0,
-        "e_2_nonenal": 3200.0,
-        "2_pentylfuran": 1100.0,
-        "1_octen_3_ol": 890.0
-      },
-      "headspace_reduction_fraction_at_1pct_w_w_by_compound": {
-        "hexanal": 0.62,
-        "nonanal": 0.68,
-        "e_2_nonenal": 0.74,
-        "2_pentylfuran": 0.44,
-        "1_octen_3_ol": 0.38
-      },
-      "oav_reduction_factor_at_1pct_w_w_by_compound": {
-        "hexanal": 2.6,
-        "nonanal": 3.1,
-        "e_2_nonenal": 3.8,
-        "2_pentylfuran": 1.8,
-        "1_octen_3_ol": 1.6
-      },
-      "notes": "Bounded beta-cyclodextrin encapsulation prior for Family 08 guardrails. Use as a partial aldehyde-suppression surface for hexanal, nonanal, and unsaturated aldehydes, not as a complete off-note elimination model.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "pmid36878579_pe_stoichiometry",
       "source": "PubMed PMID:36878579 (Ref. 39)",
       "provenance_tier": "literature_derived_transfer",
@@ -2029,26 +1397,6 @@
         "sugar_pe_molar_stoichiometry": 0.5
       },
       "notes": "1:2 sugar to phospholipid (PE) stoichiometry and pyridinium derivative UV absorption at 350 nm."
-    },
-    {
-      "id": "fadel_2015_mft_retention_prior",
-      "source": "Fadel et al. (2015)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "applicable_protein_types": [
-        "soy_iso"
-      ],
-      "reference_conditions": {
-        "process_state": "heated_matrix",
-        "ph": 4.0,
-        "temperature_C": 40.0
-      },
-      "analyte": "2-methyl-3-furanthiol",
-      "percentage_retention": 47.78,
-      "headspace_recovery_effect_direction": "reduced_by_non_covalent_binding",
-      "notes": "MFT retention prior under low pH conditions (reversible non-covalent binding contribution).",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
       "id": "wang_2023_mft_retention_prior",
@@ -2139,24 +1487,6 @@
   ],
   "dicarbonyl_sink_priors": [
     {
-      "id": "nakagawa_2004_isoflavone_dicarbonyl_sink_v1",
-      "source": "Nakagawa et al. (2004), PubMed PMID:15165134",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "supporting_families": [
-        "08",
-        "12"
-      ],
-      "genistein_ic50_uM": 48.0,
-      "age_inhibition_fraction_at_100uM": 0.82,
-      "daidzein_inhibition_fraction_at_100uM": 0.68,
-      "spi_dicarbonyl_pool_multiplier": 0.2,
-      "effect_direction": "suppress_age_formation_and_dicarbonyl_burden",
-      "notes": "Bounded soy-isoflavone prior for AGE and dicarbonyl suppression. Use as a guardrail-side modifier with explicit uncertainty, not as endpoint closure.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "jafc_2020_egcg_deoxyosone_trapping_v1",
       "source": "J. Agric. Food Chem. 2020 (Ref. 25)",
       "provenance_tier": "literature_derived_transfer",
@@ -2240,22 +1570,6 @@
         "match_basis": "cp citation names no author ('J. Agric. Food Chem. 2019 (Ref. 24)'); DOI resolves to ['Arsad', 'Zainudin', 'De Gobba'] 2020 'Journal of Agricultural and Food Chemist'",
         "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
       }
-    },
-    {
-      "id": "pmc12154226_crosspy_thiol_capping_v1",
-      "source": "PMC PMCID:PMC12154226 (Ref. 2)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "fft_reduction_factor": 16.0,
-      "volatile_adduct_range_ug_per_l": [
-        5.0,
-        270.0
-      ],
-      "crosspy_mediated": true,
-      "effect_direction": "melanoidins_scavenge_thiols_via_crosspy_pyrazinium_intermediates",
-      "notes": "Covalent capping and thiol-depletion prior for Family 13. Use to model non-reversible FFT loss when melanoidin and pyrazinium pathways are active, complementing the non-covalent catechol capping priors.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
       "id": "rawel_2002_cga_cysteine_blocking",
@@ -2458,53 +1772,6 @@
       }
     },
     {
-      "id": "hidalgo_zamora_2004_4hne_pentylpyrrole_v1",
-      "source": "Hidalgo & Zamora (2004), JAFC 52:7126",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "precursor_fatty_acid": "4_hydroxynonenal",
-      "target_offnote": "2-pentylpyrrole",
-      "reactant_pairing": "4-HNE + phenylalanine",
-      "absolute_concentrations_reported": true,
-      "loq_reported": true,
-      "effect_direction": "flag_4hne_derived_pyrrole_risk",
-      "notes": "Bounded off-note prior for oxidized-lipid systems where 4-HNE can route into pyrrolic aroma defects. Use as a reporting and guardrail prior, not as endpoint concentration closure.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "mottram_2001_lipid_aldehyde_mft_quench_v1",
-      "source": "Mottram et al. (2001), JAFC 49:3712",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "competitive_target": "2-methyl-3-furanthiol",
-      "competing_offnote_family": "lipid_aldehydes",
-      "hexanal_to_cysteine_ratio_threshold": 0.5,
-      "mft_quench_fraction_range": [
-        0.15,
-        0.4
-      ],
-      "effect_direction": "lipid_aldehydes_compete_for_sulfur_and_suppress_mft",
-      "notes": "Bounded sulfur-quench prior for Family 02. Use to penalize MFT expectations when lipid-derived aldehydes rise into the competitive regime instead of treating sulfur yield as independent from off-note burden.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "zhang_2022_unsaturated_aldehyde_offnote_potency_v1",
-      "source": "Zhang et al. (2022), Food Chemistry 133961",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium_low",
-      "target_offnote": "unsaturated_aldehydes",
-      "comparison_baseline": "saturated_aldehydes",
-      "oav_reported": true,
-      "lod_loq_reported": true,
-      "triplicates": true,
-      "effect_direction": "unsaturated_aldehydes_carry_stronger_cross_reaction_and_offnote_pressure_than_saturated_analogues",
-      "notes": "Directional lipid-off-note prior for Family 02. Use to weight unsaturated aldehyde branches above saturated analogues in guardrail and crosstalk reporting without claiming a full kinetic mechanism.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
       "id": "frankel_1982_c182_hexanal_scission_v1",
       "source": "Frankel et al. (1982)",
       "provenance_tier": "literature_derived_transfer",
@@ -2541,23 +1808,6 @@
         "match_basis": "surname 'Frankel' present in DOI authors ['Frankel']; year cp [1982] vs DOI 1983",
         "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
       }
-    },
-    {
-      "id": "grosch_1999_c183_propanal_scission_v1",
-      "source": "Grosch & Wieser (1999)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "applicable_protein_types": [
-        "free"
-      ],
-      "reference_conditions": {},
-      "yields": {
-        "c183_to_propanal_beta_scission_yield_pct": 8.2,
-        "c183_to_heptadienal_beta_scission_yield_pct": 5.4
-      },
-      "notes": "C18:3 to propanal/2,4-heptadienal beta-scission yield splits.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
       "id": "esterbauer_1991_4hne_kinetics_v1",
@@ -2638,27 +1888,6 @@
         "match_basis": "surname 'Kamal-Eldin' present in DOI authors ['Kamal-Eldin','Velasco','Dobarganes'] and year 2003 == 2003. NOTE: the automated surname check first rejected this pair because CrossRef spells the name with U+2010 HYPHEN ('Kamal‐Eldin') and the repo uses ASCII '-'; confirmed by Unicode normalisation, not by relaxing the rule.",
         "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
       }
-    },
-    {
-      "id": "yeo_shibamoto_1991_wof_hexanal_v1",
-      "source": "Yeo & Shibamoto (1991)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "applicable_protein_types": [
-        "free"
-      ],
-      "reference_conditions": {},
-      "yields": {
-        "phospholipid_hexanal_fraction_pct_range": [
-          82.0,
-          88.0
-        ],
-        "lox_d_value_70C_min": 28.0,
-        "lox_z_value_C": 10.0
-      },
-      "notes": "Phospholipid contribution to hexanal and LOX denaturation kinetics.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
       "id": "tan_2001_oil_dsc_oxidation",
@@ -2839,46 +2068,6 @@
       },
       "hexanal_hme_ug_per_g": 1.8,
       "notes": "HME baseline hexanal 1.8 ug/g; lipid oxidation contribution to off-notes."
-    },
-    {
-      "id": "xu_2024_soybean_pbma_hexanal",
-      "source": "Xu et al. (2024)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "reference_conditions": {
-        "matrix": "pbma_soy"
-      },
-      "hexanal_ug_per_g_pbma_soy": 2.4,
-      "notes": "Soy-based PBMA hexanal 2.4 ug/g; benchmark for plant-based meat analog.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "yeo_shibamoto_1991_wof_hexanal",
-      "source": "Yeo & Shibamoto (1991)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "reference_conditions": {
-        "matrix": "wof_model"
-      },
-      "hexanal_wof_ppb": 220.0,
-      "notes": "Warmed-over flavour (WOF) hexanal benchmark: 220 ppb.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
-    {
-      "id": "marquez_ruiz_2014_oleic_oav_anchor",
-      "source": "Marquez-Ruiz et al. (2014)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "nonanal_ODT_ppb": 1.0,
-      "nonanal_OAV_range": [
-        1.0,
-        28.0
-      ],
-      "notes": "Nonanal ODT 1.0 ppb; OAV 1-28 from oleic acid oxidation.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     }
   ],
   "dicarbonyl_fragmentation_priors": [
@@ -3014,33 +2203,6 @@
         "match_basis": "cp citation names no author ('SciELO Brasil (Ref. 4)'); DOI resolves to ['YU', 'LI', 'YANG'] 2017 'Food Science and Technology'",
         "why_this_was_needed": "The 2026-08-26 citation repair installed this DOI on the benchmark_intake_registry.json record but not on its computational_priors.json twin -- and the twin is the copy src/literature_runtime.py actually reads, so the runtime-facing registry was the unanchored one. Same shape as the Wave R finding: one entry fixed, its neighbour left."
       }
-    },
-    {
-      "id": "pmid_1904866_aa_pentosidine_equivalence_v1",
-      "source": "PubMed PMID:1904866 (Ref. 5)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "reference_conditions": {
-        "matrix_context": "bsa_ascorbic_acid_vs_glucose_model",
-        "temperature_c": 37.0,
-        "kinetic_observable": "pentosidine_fluorescence_hplc"
-      },
-      "pentosidine_yield_pmol_per_mg_protein_range": {
-        "glucose": [
-          13.2,
-          17.0
-        ],
-        "ascorbic_acid_equivalent": [
-          13.2,
-          17.0
-        ]
-      },
-      "molar_equivalence_to_glucose": true,
-      "saturation_ceiling_pmol_per_mg_protein": 17.0,
-      "effect_direction": "ascorbic_acid_can_match_glucose_as_a_pentosidine_precursor_on_a_molar_basis",
-      "notes": "Family 14 pentosidine-equivalence prior for AA-driven cross-link burden. Use to keep antioxidant ascorbate additions visible as a bounded AGE source term instead of treating AA as chemically benign once dicarbonyl formation starts.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
       "id": "pmc3199460_ascorbic_dicarbonyl",
@@ -3193,24 +2355,6 @@
     }
   ],
   "melanoidin_trapping_priors": [
-    {
-      "id": "pmc9351765_crosspy_mft_scavenging_v1",
-      "source": "PMC PMCID:PMC9351765 (Ref. 12)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "medium",
-      "target_compound": "2-methyl-3-furanthiol",
-      "mechanism": "crosspy_radical_thioether_adduction",
-      "melanoidin_loading_reference_mg": 125.0,
-      "relative_fd_drop": {
-        "baseline": 4.0,
-        "with_melanoidins": 2.0
-      },
-      "irreversible_trapping": true,
-      "effect_direction": "dense_melanoidin_networks_irreversibly_scavenge_mft_before_headspace_release",
-      "notes": "Family 16 trapping prior for CROSSPY-driven thioether adduction. Use to justify non-recoverable MFT loss when melanoidin burden is already high, rather than treating thiol suppression as purely reversible binding.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
-    },
     {
       "id": "jafc_2019_ref21_pea_gum_arabic_architecture_v1",
       "source": "Zha et al. (2019)",
@@ -3678,18 +2822,6 @@
         ]
       },
       "notes": "Ammonia release from asparagine and glutamine deamidation."
-    },
-    {
-      "id": "li_2010_phytate_chelation_kinetics",
-      "source": "Li et al. (2010)",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "chelation_kinetics": {
-        "apparent_ea_kj_mol": 84.54
-      },
-      "notes": "Coordinate covalent chelation of metals by phytic acid.",
-      "source_anchor_status": "unanchored_no_doi_field",
-      "source_anchor_note": "2026-08-27 (Wave T3, audit remediation; Wave T1 finding T1-09). DISCLOSURE, not a verdict: no record with this id in any data/lit/*.json carries a `doi` field, so nothing in the repository resolves this citation to a paper. Wave T3 propagated CrossRef-verified DOIs into 18 sibling-anchored twins in this file; this record was not one of them -- either no sibling record carries a DOI field, or the sibling's DOI resolves to a DIFFERENT paper than this record's citation names (a re-attribution, which is a content decision, not a propagation). This flag deliberately does NOT assert `no_verifiable_source`: some of these citations may well be retrievable, nobody has tried. NO VALUE WAS INVENTED OR CHANGED. Treat every number in this record as unanchored until a DOI is verified and installed."
     },
     {
       "id": "zha_2020_ppi_glycation_aggregation",

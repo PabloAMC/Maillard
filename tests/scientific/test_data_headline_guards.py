@@ -99,7 +99,7 @@ def test_no_record_carries_no_verifiable_source():
     Henle 2005 CML anchor, and the two flagged computational priors. Every one had been searched
     for (CrossRef sweeps 2026-08-26/27, gap search 2026-10-09) and was fabricated or could not
     be tied to its number. The intake citations survive as strings in
-    `closed_unsourced_citations` so the research queue never reopens them. A fall by deletion,
+    `closed_citations` so the research queue never reopens them. A fall by deletion,
     not verification.
 
     The retired "runtime" figure counted every flagged record under data/lit/ or
@@ -163,7 +163,7 @@ def test_no_record_carries_no_verifiable_source():
     is that 80 was always the true runtime figure and 62 was an undercount.
 
     The pin is zero and stays zero: a record whose source cannot be found is deleted (its
-    citation string may go to `closed_unsourced_citations`), or its value becomes a declared
+    citation string may go to `closed_citations`), or its value becomes a declared
     assumption with a band in the code that uses it. It is never shipped with a flag.
     """
     census = _no_verifiable_source_census()

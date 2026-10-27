@@ -78,50 +78,6 @@
 
 ---
 
-### Wang, Yang & Song (2012), Food Chemistry 131:280
-- **DOI:** [10.1016/j.foodchem.2011.08.079](https://doi.org/10.1016/j.foodchem.2011.08.079)
-- **Matrix Family:** glutathione_xylose_model
-- **Kind:** `calibration_reference`
-- **Payload Role:** `benchmark_intake`
-- **Status:** `ready_for_calibration_encoding`
-
-| Criterion | Assessment |
-|---|---|
-| ✅ | Matrix family / reactant identity specified |
-| ✅ | Precursor concentrations / loads specified |
-| ✅ | Conditions T, pH, time specified |
-| ❌ | Analytical output mode not specified |
-| ❌ | Yields reported in relative/qualitative mode only |
-| ✅ | Replicates reported |
-| ✅ | LOD/LOQ stated |
-| ❌ | No sensory or odor threshold tags present |
-
-**Score: 5/8 → Calibration reference**
-
-**Key Values:**
-| Parameter | Value |
-|---|---|
-| `temp_C` | `120.0` |
-| `time_h` | `2.0` |
-| `ph` | `5.5` |
-| `mft_ratio_vs_free_cysteine` | `2.25` |
-| `fft_ratio_vs_free_cysteine` | `2.4` |
-| `bis_furyl_disulfide_ratio_vs_free_cysteine` | `4.4` |
-| `pyrazine_ratio_vs_free_cysteine` | `0.75` |
-| `replicates` | `3` |
-
-**What it supports:**
-- Bounded sulfur-yield uplift when glutathione replaces free cysteine at equal loading
-- Family 05 support for higher MFT, FFT, and disulfide output with a pyrazine tradeoff
-
-**What it does not support:**
-- Absolute SPI or PPI benchmark closure in protein matrices
-- Sequence-specific peptide ranking beyond the bounded sulfur-peptide prior already encoded
-
-**Next Action:** Keep the runtime landing compact by linking this citation to the existing Family 05 sulfur-peptide prior instead of cloning a second peptide-uplift payload.
-
----
-
 ### Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1
 - **DOI:** [10.5851/kosfa.2024.e133](https://doi.org/10.5851/kosfa.2024.e133)
 - **Matrix Family:** free_model_system
@@ -335,12 +291,11 @@
 
 ## EXECUTIVE SUMMARY: COVERAGE MAP FOR FAMILY 5
 
-Total papers analyzed: **7** (Benchmark-eligible: **1**, Calibration references: **5**, Rejected: **1**)
+Total papers analyzed: **6** (Benchmark-eligible: **1**, Calibration references: **4**, Rejected: **1**)
 
 | Reference | Score | Status | Focus |
 |---|---|---|---|
 | Nishimura & Abe (2024) | 6/8 | ✅ Eligible | soy_hydrolysate |
-| Wang, Yang & Song (2012), Food Chemistry 131:280 | 5/8 | ⚠️ Calibration | glutathione_xylose_model |
 | Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1 | 2/8 | ❌ Rejected | free_model_system |
 | Wang et al. (2023) | 5/8 | ⚠️ Calibration | soy_isolate |
 | Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333 | 5/8 | ⚠️ Calibration | soy_isolate |
@@ -355,7 +310,6 @@ Total papers analyzed: **7** (Benchmark-eligible: **1**, Calibration references:
 - `Nishimura & Abe (2024)` (Score: 6/8)
 
 ### CALIBRATION (Score 3-5)
-- `Wang, Yang & Song (2012), Food Chemistry 131:280` (Score: 5/8)
 - `Wang et al. (2023)` (Score: 5/8)
 - `Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333` (Score: 5/8)
 - `Sun et al. (2026)` (Score: 3/8)

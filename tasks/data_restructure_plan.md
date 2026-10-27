@@ -2584,7 +2584,7 @@ record under `data/lit/` or `results/literature/`), never a trace.
   retention records, Henle 2005, two computational priors. The two pH-release surrogates were not
   re-sourced to Fischer 2021: Fischer varied the pH of *extraction*, the surrogate is a *release*
   pH, and its one reader (`src/headspace.py`) is retired. Intake citations kept as strings in
-  `closed_unsourced_citations` so the runtime queue never reopens them.
+  `closed_unsourced_citations` (renamed `closed_citations` the same day) so the runtime queue never reopens them.
 - [x] Census guard now pins **zero** (`test_no_record_carries_no_verifiable_source`); model card
   census rewritten (the stale hardcoded "65 and 65" went with it). Family ingestion queue moves
   07 -> 11 first: every family-07 backlog citation was unsourced.
