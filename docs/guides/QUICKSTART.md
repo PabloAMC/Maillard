@@ -218,7 +218,7 @@ own measurement, it goes in the spec and the answer names it. Pre-registered in
 ./scripts/docker_maillard.sh core-scores      # results/validation/core_panel_scores.*   (~15 s)
 ./scripts/docker_maillard.sh core-envelope    # results/validation/core_prediction_uncertainty.* (~5-7 min natively)
 ./scripts/docker_maillard.sh model-card       # re-splices the README model card
-./scripts/docker_maillard.sh gates            # the six CI gates
+./scripts/docker_maillard.sh gates            # the seven CI gates
 ./scripts/docker_maillard.sh pytest tests/unit
 ./scripts/docker_maillard.sh pytest tests/scientific
 ```
@@ -233,7 +233,7 @@ own measurement, it goes in the spec and the answer names it. Pre-registered in
 | `./scripts/docker_maillard.sh core-scores` | The core's panel scorecard |
 | `./scripts/docker_maillard.sh core-envelope [--n-samples N --workers W]` | The core's Monte-Carlo envelope |
 | `./scripts/docker_maillard.sh model-card` | Regenerate the README model card |
-| `./scripts/docker_maillard.sh gates` | Run the six CI gates (incl. artifact freshness) |
+| `./scripts/docker_maillard.sh gates` | Run the seven CI gates (incl. artifact freshness) |
 | `./scripts/docker_maillard.sh data-readme` | Regenerate `data/README.md` |
 | `./scripts/docker_maillard.sh experiment-value-ranking` | Rank experiments by value of information |
 | `./scripts/docker_maillard.sh wishlist` | Regenerate the data wishlist (what to measure next) |

@@ -51,6 +51,7 @@ from src import data_access, data_paths  # noqa: E402
 from src.text_utils import normalize_compound_name as norm  # noqa: E402
 
 HAND = "structure entered by hand 2026-09-01 (standard chemical identity, not a measurement)"
+HAND_2026_10_27 = HAND.replace("2026-09-01", "2026-10-27")
 
 # --------------------------------------------------------------------------- seeds
 # (id, display_name, kind, smiles, extra) -- aliases beyond the automatic ones go in extra.
@@ -124,6 +125,33 @@ SEEDS: List[Dict[str, Any]] = [
          aliases=["glyoxal", "go"]),
     dict(id="methylglyoxal", display_name="Methylglyoxal", kind="molecule", smiles="CC(=O)C=O",
          aliases=["methylglyoxal", "mgo", "2-oxopropanal", "pyruvaldehyde"]),
+    # --- 2026-10-27: sulfur-lane precursors and intermediates the engine carries as species
+    # (TTCA, ACTZ, GSH, Cys, PENT) and the TTCA/glutathione reading names, which had no
+    # registry id (tasks/data_restructure_plan.md, "Missing from data/keys/compounds.yml").
+    # The engine's own species name is an alias where it is unique to the compound; PENT is
+    # not, because the engine lumps xylose and ribose into one pentose. The sugars carry their
+    # stereocentres (open-chain aldehydo form) so that xylose and ribose do not share an
+    # InChIKey. The Cys-Amadori compound is NOT aliased to TTCA: it is a different molecule.
+    dict(id="ttca", identity_source=HAND_2026_10_27, display_name="2-Threityl-thiazolidine-4-carboxylic acid (TTCA)", kind="molecule",
+         smiles="OC(=O)C1CSC(N1)C(O)C(O)C(O)CO",
+         aliases=["2-(1,2,3,4-tetrahydroxybutyl)thiazolidine-4-carboxylic acid",
+                  "2-(tetrahydroxybutyl)thiazolidine-4-carboxylic acid"],
+         identity_note="the cysteine-xylose thiazolidine (engine species TTCA); stereocentres omitted, so "
+                       "identity is at constitution level only"),
+    dict(id="2_acetylthiazole", identity_source=HAND_2026_10_27, display_name="2-Acetylthiazole", kind="molecule", smiles="CC(=O)c1nccs1",
+         cas="24295-03-2", aliases=["actz", "1-(1,3-thiazol-2-yl)ethanone"],
+         identity_note="engine species ACTZ"),
+    dict(id="cysteine", identity_source=HAND_2026_10_27, display_name="L-Cysteine", kind="molecule", smiles="N[C@@H](CS)C(=O)O",
+         cas="52-90-4", aliases=["cysteine", "cys"], identity_note="engine species Cys"),
+    dict(id="glutathione", identity_source=HAND_2026_10_27, display_name="Glutathione (GSH)", kind="molecule",
+         smiles="N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O", cas="70-18-8",
+         aliases=["gsh", "l-glutathione", "reduced glutathione"], identity_note="engine species GSH"),
+    dict(id="xylose", identity_source=HAND_2026_10_27, display_name="D-Xylose", kind="molecule", smiles="O=C[C@H](O)[C@@H](O)[C@H](O)CO",
+         cas="58-86-6", aliases=["xylose"],
+         identity_note="open-chain (aldehydo) form; the engine lumps it with ribose as PENT"),
+    dict(id="ribose", identity_source=HAND_2026_10_27, display_name="D-Ribose", kind="molecule", smiles="O=C[C@H](O)[C@H](O)[C@H](O)CO",
+         cas="50-69-1", aliases=["ribose"],
+         identity_note="open-chain (aldehydo) form; the engine lumps it with xylose as PENT"),
     # --- classes and markers -----------------------------------------------------
     dict(id="pyrazines", display_name="Pyrazines", kind="compound_class", aliases=["pyrazine", "pyrazine_family", "dimethylpyrazine"], members_of_class="pyrazines", identity_note="the bare word 'pyrazine' in benchmark and payload rows means the family, as the retired BENCHMARK_NAME_ALIASES table asserted"),
     dict(id="methoxypyrazines", display_name="Methoxypyrazines", kind="compound_class", aliases=["methoxypyrazines"], members_of_class="methoxypyrazines"),

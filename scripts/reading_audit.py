@@ -40,28 +40,22 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src import data_paths  # noqa: E402
+from src import data_access, data_paths  # noqa: E402
 
 DOSSIER_DIR = data_paths.EXTRACTION_DOSSIERS_DIR
 ARTICLES_DIR = data_paths.ARTICLES_DIR
 #: Dossiers that are syntheses over many papers, not one paper's reading; they never match a PDF.
 SYNTHESIS_PREFIXES = ("k1_", "k2_", "k3_", "k4_", "k5_", "k6_", "research_", "wave_")
-#: PDFs whose dossier is named after the paper rather than the file. Every entry was confirmed by
-#: opening both, and the dossier says so in its own identity table. Without this map the audit
-#: reports a paper as unread for ever because somebody once saved it under the wrong year.
-FILENAME_ALIASES: Dict[str, str] = {
-    "chan2005.pdf": "chan1994b_extraction.md",          # the RSC 1994 chapter, saved under 2005
-    "rainercremer2000.pdf": "cremer2000_extraction.md",  # first author's given name in the file name
-    "parker2012.pdf": "parker2013_extraction.md",        # J Sci Food Agric 93 (2013), online 2012
-    "Kocada2016.pdf": "kocadagli2016jafc_extraction.md",  # truncated file name
-    "Zhai2023b.pdf": "zhai2023jafc_extraction.md",       # the two Zhai 2023 files are swapped
-    "Gursul2020.pdf": "gursulaktag2020_extraction.md",   # surname pair
-    "Goncouglu2016.pdf": "goncuoglu2016_extraction.md",  # the file name transliterates the surname differently
-    "Goncouglu2026.pdf": "goncuoglu2026_extraction.md",
-    "jf0480290.pdf": "rawel2005_extraction.md",          # the publisher's article id, not an author-year name
-    "1-s2.0-S0308814622010068-main.pdf": "bi2022_extraction.md",   # the publisher's download name
-    "Dashmaa2026.pdf": "hwang2026_extraction.md",        # dossier named after the corresponding (last) author
-}
+#: PDFs whose dossier is named after the paper rather than the file, and PDFs triaged without one,
+#: live in data/keys/pdf_dossier_aliases.yml (2026-10-27; until then a map in this file). The same
+#: table drives scripts/ci/dossier_coverage_gate.py, so the audit and the gate cannot disagree.
+ALIAS_TABLE = data_paths.PDF_DOSSIER_ALIASES
+
+
+def _alias_table() -> Dict[str, Dict[str, object]]:
+    payload = data_access.load_yaml(ALIAS_TABLE) if ALIAS_TABLE.exists() else None
+    payload = payload or {}
+    return {section: dict(payload.get(section) or {}) for section in ("aliases", "triaged", "pending")}
 
 
 def _norm(name: str) -> str:
@@ -74,13 +68,22 @@ def audit() -> Dict[str, object]:
     per_paper = [d for d in dossiers if not d.startswith(SYNTHESIS_PREFIXES)]
     stems = {d: _norm(d.replace("_extraction.md", "").replace(".md", "")) for d in per_paper}
 
+    table = _alias_table()
     read: Dict[str, List[str]] = {}
     unread: List[str] = []
+    triaged: Dict[str, str] = {}
     for pdf in pdfs:
-        key = _norm(Path(pdf).stem)
-        alias = FILENAME_ALIASES.get(pdf)
-        if alias and alias in dossiers:
-            read[pdf] = [alias]
+        stem = Path(pdf).stem
+        key = _norm(stem)
+        if stem in table["aliases"]:
+            targets = table["aliases"][stem]
+            targets = [targets] if isinstance(targets, str) else list(targets)
+            hits = [f for t in targets for f in (f"{t}_extraction.md", f"{t}.md") if f in dossiers]
+            if hits:
+                read[pdf] = sorted(hits)
+                continue
+        if stem in table["triaged"]:
+            triaged[pdf] = str(table["triaged"][stem])
             continue
         hits = [d for d, stem in stems.items() if len(stem) > 4 and (key.startswith(stem) or stem.startswith(key))]
         if hits:
@@ -93,8 +96,9 @@ def audit() -> Dict[str, object]:
     return {
         "articles_dir": data_paths.rel(ARTICLES_DIR),
         "counts": {"pdfs": len(pdfs), "dossiers": len(dossiers), "per_paper_dossiers": len(per_paper),
-                   "pdfs_read": len(read), "pdfs_unread": len(unread), "dossiers_without_a_pdf_here": len(unmatched)},
+                   "pdfs_read": len(read), "pdfs_triaged": len(triaged), "pdfs_unread": len(unread), "dossiers_without_a_pdf_here": len(unmatched)},
         "unread": unread,
+        "triaged": triaged,
         "dossiers_without_a_pdf_here": unmatched,
         "note": ("a name match, not a verified identity; a PDF read into one of the synthesis inventories under "
                  "another name shows as unread, and a dossier written from an article this machine does not hold "
@@ -115,6 +119,7 @@ def main(argv=None) -> int:
     print(f"{c['pdfs']} PDFs under {report['articles_dir']}; {c['per_paper_dossiers']} per-paper dossiers "
           f"({c['dossiers']} dossier files in all).")
     print(f"  read:   {c['pdfs_read']}")
+    print(f"  triaged without a dossier: {c['pdfs_triaged']}")
     print(f"  UNREAD: {c['pdfs_unread']}")
     print(f"  dossiers whose paper is not on this disk: {c['dossiers_without_a_pdf_here']}")
     if args.quiet:

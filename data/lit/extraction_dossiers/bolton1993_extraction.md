@@ -244,7 +244,7 @@ it makes plain that this is a bouillon, not a model solution.
 thiamine charged = **0.0011 mol %**, i.e. about **11 parts per million of the thiamine** ends as MFT.
 Even at the highest system (489 ng) it is 0.0013 mol %. **The MFT channel is a trace branch off
 thiamine**, which is the same order of magnitude as the trace-branch finding in the TTCA pot (see
-`zhai2023b_extraction.md` section 3) and is worth knowing before anyone expects a thiamine lane to
+`zhai2023jafc_extraction.md` appendix A.3) and is worth knowing before anyone expects a thiamine lane to
 carry appreciable flux.
 
 **7. The ceiling on the sugar route (mine).** ≤ 10 ng (system III's limit) against ~440 ng (the

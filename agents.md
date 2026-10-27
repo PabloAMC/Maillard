@@ -14,7 +14,7 @@ A mass-action kinetic model of the Maillard reaction (`src/kinetic_core/`: trunk
 
 ## Layout
 - `src/` — runtime package: `src/kinetic_core/` (the ONE engine: lanes, parameters, panel, scoring, envelope, fit-target ledger), `comparative_cli.py` (the front door's verbs), `report_html.py`, `explain_compound.py`, `experiment_value.py` (the `rank` verb), `model_card.py`, the literature-side registries. Import as `from src.<module> import ...`; do not mutate `sys.path`. The legacy SMIRKS lane was deleted 2026-09-03 (retirement step B5); its README is `docs/history/`, its artifacts `results/legacy_lane/`.
-- `scripts/` — `maillard.py` (compare / predict / explain / rank), `generators/` (the core artifacts, the fit waves, the literature ledgers, the registries), `ci/` (five gates), `deep_research_tracker.py`.
+- `scripts/` — `maillard.py` (compare / predict / explain / rank), `generators/` (the core artifacts, the fit waves, the literature ledgers, the registries), `ci/` (seven gates), `deep_research_tracker.py`.
 - `data/` — curated inputs only, READ-ONLY at runtime (`scripts/ci/data_readonly_gate.py`). Map: [data/README.md](data/README.md) (generated). Paths come from `src/data_paths.py`, loads from `src/data_access.py` (missing files raise), names resolve via `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`), benchmarks validate against `data/schemas/` (`scripts/ci/schema_gate.py`). Never write a `"data/..."` string or a `json.load` of a curated file in code. Restructure record: [tasks/data_restructure_plan.md](tasks/data_restructure_plan.md).
 - `results/` — generated artifacts (`results/validation/` is tracked as frozen evidence). Do not hand-edit. Generators write here, never into `data/`.
 - `tests/` — `unit/` (fast), `scientific/` (regression), plus `scripts/` integration tests.
@@ -32,7 +32,7 @@ A mass-action kinetic model of the Maillard reaction (`src/kinetic_core/`: trunk
 ./scripts/docker_maillard.sh status       # which runtime, which interpreter
 ./scripts/docker_maillard.sh run "<cmd>"  # arbitrary command in the env
 ./scripts/docker_maillard.sh core-scores  # the core's panel scorecard
-./scripts/docker_maillard.sh gates        # the six CI gates
+./scripts/docker_maillard.sh gates        # the seven CI gates
 ```
 
 ## Tests

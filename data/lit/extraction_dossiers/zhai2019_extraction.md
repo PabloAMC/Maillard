@@ -21,7 +21,7 @@ tagged **[D]** with its read error. The Supporting Information (TIC and MS/MS of
 | DOI as printed | **10.1021/acs.jafc.9b04374** ✔ matches the brief |
 | Funding | NSFC 31671826; Jiangnan Postgraduate JNKY19_009; National Key R&D 2017YFD0400105; JUFSTR20180204; King Saud RG-1440-020 |
 | Abbreviations as defined | **TTCA** 2-threityl-thiazolidine-4-carboxylic acid; **ARP** Amadori rearrangement product (here = **Cys-Amadori**, N-(1-deoxy-D-xylulos-1-yl)-L-cysteine — Table 1 labels it "Cys-Amadori"); MRI Maillard reaction intermediate; 1-DX 1-deoxypentose-2-ulose; 3-DX 3-deoxypentose-2-ulose; GO glyoxal |
-| Children on disk | `zhai2020_extraction.md` (spray-drying TTCA/ARP ratio), `zhai2021_extraction.md` (TTCA ± extra Xyl, the kinetic fit), `zhai2023b_extraction.md` = `zhai2023jafc_extraction.md` (TTCA ± extra Cys, 90-150 °C), `zhai2023c_extraction.md` (dehydration), `kang2026_extraction.md` |
+| Children on disk | `zhai2020_extraction.md` (spray-drying TTCA/ARP ratio), `zhai2021_extraction.md` (TTCA ± extra Xyl, the kinetic fit), `zhai2023jafc_extraction.md` (TTCA ± extra Cys, 90-150 °C), `zhai2023c_extraction.md` (dehydration), `kang2026_extraction.md` |
 
 ## 1. Why it matters
 
@@ -44,12 +44,12 @@ pH 7.4, against a measured TDP/DPO ≈ 2.5. The authors' route is TTCA → Cys-A
 
 **(c) Added cysteine suppresses all three dicarbonyls** (at 60 min: 3-DX to 20 %, GO to 23 %, 1-DX to
 45 % of the TTCA-alone values [D]) — the same perturbation as Zhai 2023b, at one temperature, with
-numbers. This is the origin of the "cysteine blocks TTCA" line that `zhai2023b_extraction.md` reads
+numbers. This is the origin of the "cysteine blocks TTCA" line that `zhai2023jafc_extraction.md` reads
 as evidence that `r_ttca_cys` is reversible.
 
 ### How it relates to the companion dossiers
 
-| | **this paper (2019)** | `zhai2021_extraction.md` | `zhai2023b_extraction.md` | `cao2017_extraction.md` |
+| | **this paper (2019)** | `zhai2021_extraction.md` | `zhai2023jafc_extraction.md` | `cao2017_extraction.md` |
 |---|---|---|---|---|
 | start | **free Xyl 165 + Cys 82.6 mM** (2 : 1); and TTCA 5 mM ± Cys 5 mM | purified TTCA 10 mM ± Xyl 10 mM | purified TTCA 10 mM ± Cys 0.1-10 mol/mol | free Cys + Xyl 0.4 M each |
 | pH | 7.4 (NaOH), unbuffered | 5.5-8 | 5.5-8.5 | 5.5 phosphate, drifts to 4.15 |
@@ -237,7 +237,7 @@ dicarbonyls at 60 min = 496 µmol/L = **9.9 % of the 5 mmol/L TTCA charge**.
    that consumes TTCA without regenerating it (e.g. trans-thiazolidination or thiol addition to the
    open-chain Schiff base); (iii) the claim is wrong. **Do not encode "Cys converts TTCA back to
    Cys + Xyl" as a forward rate law.** The quantitative result that survives is Fig. 3B (downstream
-   dicarbonyls suppressed). Note that `zhai2023b_extraction.md` leans on the same claim from the
+   dicarbonyls suppressed). Note that `zhai2023jafc_extraction.md` leans on the same claim from the
    2023 paper; the mass-action reading (Cys addition *stabilises* TTCA, which delays everything
    downstream) explains the 2023 delays without needing this mechanism.
 2. **"ARP" here is the cysteine Amadori compound**, not the engine's `ARP` (alanine Amadori, Zhou

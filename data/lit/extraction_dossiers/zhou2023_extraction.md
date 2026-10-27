@@ -21,7 +21,8 @@ Every figure-derived number below is tagged **[fig]**.
 > ⚠️ **FILENAME NOTE.** The previous `Zhou2023_extraction.md` in this scratchpad documented a
 > *different* paper (`data/articles/Zhou2023.pdf` = **Zhu et al., kafirin × pickle-like odorants,
 > Food Chem. 400 (2023) 133854**), which was mis-filed under this DOI. That dossier has been
-> **preserved unchanged** as `zhu2023_kafirin_binding_extraction.md` — it holds the only
+> **preserved unchanged** as a `zhu2023_kafirin_binding` dossier [2026-10-27: that file never reached
+> the repository; the binding constants are in `k1_kinetic_parameters.md` §3] — it holds the only
 > MFT–protein *binding constants* in the corpus (K ≈ 1.1 × 10³ M⁻¹ at 25 °C) and must not be
 > lost. `data/articles/Zhou2023.pdf` is still the wrong file for DOI 10.1021/acs.jafc.2c08360.
 

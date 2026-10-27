@@ -51,7 +51,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--skip-gates",
         action="store_true",
-        help="do not run the three CI gates (faster; the gate line is then omitted)",
+        help="do not run the four CI gates (faster; the gate line is then omitted)",
     )
     return parser.parse_args()
 

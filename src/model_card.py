@@ -65,6 +65,7 @@ GATES = (
     "scripts/ci/holdout_guard.py",
     "scripts/ci/citation_gate.py",
     "scripts/ci/fit_target_gate.py",
+    "scripts/ci/dossier_coverage_gate.py",
 )
 
 README_BEGIN = "<!-- BEGIN GENERATED: model-card -->"

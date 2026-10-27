@@ -2837,6 +2837,21 @@ genuinely unread (`wang2012`, `cerny2007b`), and one of those was in use. Cause:
 on disk has a record, or that a dossier a file cites exists. **Proposed gate:** every PDF maps to at least
 one dossier (a small alias table for the renamed ones) or to a triage line that says why not, and every
 `*_extraction.md` named in code, data or another dossier exists.
+- [x] **2026-10-27, the gate built: `scripts/ci/dossier_coverage_gate.py`** (seventh gate; `gates` lane, CI
+  gates job, model card). (a) every `*_extraction.md` named in a tracked file under src/ scripts/ data/
+  docs/ tests/ tasks/ exists (names compared lower-cased, letters and digits only); (b) every .pdf/.docx/.txt
+  in `data/articles/` has a dossier of its stem or a line in the hand-curated
+  `data/keys/pdf_dossier_aliases.yml` (`aliases` 28, `triaged` 3, `pending` 34 at commit time); skipped with a note where
+  the articles are absent (CI, worktrees: `--articles-dir`). A `pending` line whose file gains a dossier
+  fails as stale. `scripts/reading_audit.py` now reads the same table instead of its own map. Every alias
+  checked against the PDF's first page. Found on the way: `Zhou2023.pdf` name-matched `zhou2023` but is Zhu
+  et al. 2023 (kafirin), read only in `k1_kinetic_parameters.md` section 3, and the
+  `zhu2023_kafirin_binding`, `hofmann1996b` and `hofmann1998` dossiers that k2/k3/zhou2023 cited were never
+  committed (references repointed or reworded; the Hofmann 1996b quote survives only in k3 B10.5).
+  The `zhai2023b` dossier folded into `zhai2023jafc_extraction.md` as appendix A (same paper) and deleted;
+  `chan1994b` given the owner's DOI 10.1533/9781845698393.3.131; TTCA, 2-acetylthiazole, cysteine,
+  glutathione, xylose and ribose added to `compounds.yml`. Open: the 34 `pending` PDFs (33 downloaded
+  2026-10-27 late, plus `Liu2023.pdf`, the pea-protein Food Chem paper never read).
 - **2026-10-27, from `sohail2022` (review) — candidate primary papers quantifying meaty thiols in cooked
   meats, not in the corpus:** Fan et al. 2018 JAFC 10.1021/acs.jafc.8b03297 (stewed chicken broth; top);
   Guth & Grosch 1994 JAFC 10.1021/jf00048a039 (stewed beef juice; quantities unverified); Liu et al. 2019 JAFC

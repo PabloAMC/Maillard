@@ -115,8 +115,8 @@ python scripts/generators/generate_model_card.py                        # re-spl
 ```
 
 Test tiers and gates: `pytest tests/unit -q`, `pytest tests/scientific -q`,
-and `python scripts/ci/<gate>.py` for the six gates (citation, data read-only, fit-then-score,
-hold-out isolation, benchmark schema, artifact freshness: tracked artifacts equal what the code
+and `python scripts/ci/<gate>.py` for the seven gates (citation, data read-only, fit-then-score,
+hold-out isolation, benchmark schema, dossier coverage, artifact freshness: tracked artifacts equal what the code
 produces, modulo date and git head, and every recorded input still hashes the same).
 
 ---
@@ -346,7 +346,7 @@ constant, which is what makes `rank` useful.
 
 **Provenance census (recounted at generation time, not copied).** **0 records** carry `source_status: no_verifiable_source` — the figure the provenance note above quotes, reproduced here by recount; an unsourced record is deleted, not flagged. No narrower marker (`value_status`, `value_anchor_status`, a DOI lookup's `status`) carries it either.
 
-**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
+**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS · `dossier_coverage_gate.py` PASS.
 
 **How to use this model in one line:** compare two formulations and read the ratio (`python scripts/maillard.py compare`), never quote the absolute number, and treat pH and moisture directions as caution-only: declared terms exist on the sulfur lane (pH) the trunk (water activity, Amadori-decay pH) and the acrylamide lane (pH and water activity inside measured windows), none on lipid.
 
@@ -401,7 +401,7 @@ placed against the engine's reactions as modelled, mechanism known or proposed; 
 rates, and the engine never imports it); the
 literature side (`src/family_ingestion_plan.py`, `src/literature_intake_registry.py`,
 `scripts/deep_research_tracker.py` and the `generate_*` scripts that write
-`results/literature/`); and the six CI gates under `scripts/ci/`.
+`results/literature/`); and the seven CI gates under `scripts/ci/`.
 
 **Dependencies:** NumPy and SciPy (integration), PyYAML and jsonschema (data and gates),
 Matplotlib and NetworkX (figures). RDKit is needed only to rebuild the compound registry.
