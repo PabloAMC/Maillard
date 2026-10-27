@@ -7,9 +7,9 @@
 | test | branch off | branch on | pass |
 | --- | --- | --- | --- |
 | T1 B9 cost, branch off vs on (same code) | 18.7402315243 | 18.7402315243 | True |
-| T2 union within 3x | 17/50 | 17/50 | True |
+| T2 union within 3x | 18/50 | 18/50 | True |
 | T2 sulfur median abs log10 | 1.212 | 1.212 | |
-| T3 directional, independent agree | 17/31 | 17/31 | True |
+| T3 directional, independent agree | 18/31 | 18/31 | True |
 
 ### T4 ribose 50 mM + thiamine 10 mM, 150 C, 10 min, 0.5 M phosphate (ug/L)
 

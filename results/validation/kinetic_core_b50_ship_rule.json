@@ -4,16 +4,16 @@
     "artifact": "kinetic_core_b50_ship_rule",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "bfbd2cb489849275c10e874dd6724be9e5b4ffcc",
-      "short": "bfbd2cb4",
-      "branch": "b49-norfuraneol-heterocycles",
-      "dirty": true
+      "commit": "07a4f041194c6e7161faee27d0d754bff6b3743b",
+      "short": "07a4f041",
+      "branch": "b51-ph-state-everywhere",
+      "dirty": false
     },
     "generated_by": "scripts/generators/generate_kinetic_core_b50_ship_rule.py",
     "inputs": [
       {
         "path": "src/kinetic_core/parameters_sulfur.py",
-        "sha256": "df225ca1a39bbd60c433ccd80b807deb8723fa4a9164fac8a1b142c7cde4706f"
+        "sha256": "5437aadf7e6c8fe1d61bd0dbceb0a4b34c35bbbba02baedca235525089cb7b0b"
       }
     ]
   },
@@ -26,33 +26,33 @@
   "T2_panel": {
     "off": {
       "rows": 50,
-      "within_3x": 17,
-      "median_abs_log10": 0.886042272797009
+      "within_3x": 18,
+      "median_abs_log10": 0.8784263407538495
     },
     "on": {
       "rows": 50,
-      "within_3x": 17,
-      "median_abs_log10": 0.886042272797009
+      "within_3x": 18,
+      "median_abs_log10": 0.8784263407538495
     },
     "sulfur_off": {
       "rows": 24,
-      "within_3x": 6,
-      "median_abs_log10": 1.2121410007938813
+      "within_3x": 7,
+      "median_abs_log10": 1.2115747010649223
     },
     "sulfur_on": {
       "rows": 24,
-      "within_3x": 6,
-      "median_abs_log10": 1.2121410007938813
+      "within_3x": 7,
+      "median_abs_log10": 1.2115747010649223
     },
     "pass": true
   },
   "T3_directional": {
     "off": {
-      "agree": 17,
+      "agree": 18,
       "evaluable": 31
     },
     "on": {
-      "agree": 17,
+      "agree": 18,
       "evaluable": 31
     },
     "pass": true
