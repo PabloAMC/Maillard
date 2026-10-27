@@ -961,7 +961,8 @@ def main() -> int:
     ship = _read(V / "kinetic_core_b16_ship_rule.json")
     scores = _read(V / "core_directional_scores.json")
     fig_schieberle(ship)
-    fig_wang(scores)
+    # 2026-10-27: fig_wang retired with WANG22-T-01..04 -- Wang 2022 ran that grid WITH 1 % methyl
+    # linoleate, so a lipid-free model curve against it compared different pots (claim audit).
     fig_liu(ship)
     fig_yiltirak(ship)
     fig_ttca()
@@ -979,7 +980,7 @@ def main() -> int:
             ROOT / "data" / "keys" / "papers.yml", ROOT / "docs" / "validation" / "directional_claims_panel.yml",
             ROOT / "scripts" / "generators" / "build_thiol_sink_figures.py", ROOT / "scripts" / "generators" / "build_reaction_tree.py",
             *ENGINE_SOURCES],
-           ["00_map.png", "01_hofmann_pot_100C.png", "02_wang2022_shapes.png", "03_liu2023_168C.png", "04_yiltirak_ladder.png",
+           ["00_map.png", "01_hofmann_pot_100C.png", "03_liu2023_168C.png", "04_yiltirak_ladder.png",
             "05_ttca_decay.png", "06_dicarbonyls_water.png", "07_literature_funnel.png", "08_path_scorecard.png",
             "09_repository_flow.png", "14_field_scheme.png", "15_field_coverage.png", "16_how_a_kinetic_model_works.png",
             "17_papers_by_weight.png", "18_lab_spread.png", "19_what_papers_report.png", "20_one_number.png", "21_parity.png",

@@ -8,8 +8,8 @@
 | --- | --- | --- | --- |
 | T1 Zamora 2007 hold-out (180 C, 60 min, share to hexanal; printed 9-14 %, band 6-21 %) | — | 11.5 % | True |
 | T2 lipid rows within 3x | 4/8 (median 0.448 dex) | 5/8 (median 0.437 dex) | True |
-| T3 directional, independent agree | 25/43 | 25/43 | True |
-| union panel within 3x (recorded) | 12/45 | 13/45 | — |
+| T3 directional, independent agree | 17/31 | 17/31 | True |
+| union panel within 3x (recorded) | 16/50 | 17/50 | — |
 
 ### T4 rows that moved by more than 0.01 dex
 

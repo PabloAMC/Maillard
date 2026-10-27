@@ -80,7 +80,8 @@ written up in [the experiments guide](EXPERIMENTS.md), experiment 4.
 
 The dicarbonyl ordering in water against the model, and the intermediate's decay against the model,
 both behind the introduction's section 5: `docs/assets/thiol_sink/06_dicarbonyls_water.png`,
-`05_ttca_decay.png`; the 140 and 168 °C shapes: `02_wang2022_shapes.png`, `03_liu2023_168C.png`; the
+`05_ttca_decay.png`; the 168 °C shape: `03_liu2023_168C.png` (the 140 °C Wang 2022 figure was retired on
+2026-10-27: that pot contained 1 % methyl linoleate, which the model did not charge); the
 literature funnel: `07_literature_funnel.png`. Two more belong to the fat path and were built before
 it had a section to sit in: how its hexanal is arrived at, and the product slate checked against a
 second source: `24_fat_path_hexanal.png`, `31_lipid_slate_crosscheck.png`.

@@ -3,10 +3,10 @@
   "core_envelope": {
     "available": true,
     "ci_level_pct": 90,
-    "literature_hits": 17,
-    "literature_not_evaluable": 1,
-    "literature_total": 44,
-    "median_ci_width_log10": 1.0094779070724789,
+    "literature_hits": 19,
+    "literature_not_evaluable": 2,
+    "literature_total": 48,
+    "median_ci_width_log10": 0.9793151880814256,
     "n_samples": 200,
     "out_of_sample_hits": 17,
     "out_of_sample_total": 43,
@@ -18,19 +18,19 @@
     "available": true,
     "by_lane": {
       "acrylamide": {
-        "median_fold_error": 7.697350087704034,
+        "median_fold_error": 7.697350087704038,
         "rows": 12,
         "within_band": 4
       },
       "lipid": {
-        "median_fold_error": 2.8215149798278483,
+        "median_fold_error": 2.7442849984375237,
         "rows": 8,
-        "within_band": 4
+        "within_band": 5
       },
       "sulfur": {
-        "median_fold_error": 29.450349753336155,
-        "rows": 19,
-        "within_band": 2
+        "median_fold_error": 16.669564409772892,
+        "rows": 24,
+        "within_band": 6
       },
       "trunk": {
         "median_fold_error": 7.967894408860152,
@@ -38,26 +38,26 @@
         "within_band": 2
       }
     },
-    "median_fold_error": 9.148884189968566,
-    "out_of_sample_median_fold_error": 9.228224991089185,
+    "median_fold_error": 7.7418955787584585,
+    "out_of_sample_median_fold_error": 9.2282249910892,
     "out_of_sample_rows": 44,
-    "out_of_sample_within_band": 11,
+    "out_of_sample_within_band": 12,
     "pass_band_level": 3.0,
-    "rows": 45,
-    "scored": 23,
+    "rows": 50,
+    "scored": 28,
     "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
     "strict_ready": 0,
     "strict_ready_ids": [],
     "total": 37,
-    "within_band": 12,
+    "within_band": 17,
     "worst_fold_error": 9631.58938385354
   },
   "directional": {
     "available": true,
     "categories": {
       "additive_cysteine": [
-        2,
-        3
+        1,
+        1
       ],
       "lipid_lane": [
         0,
@@ -69,11 +69,11 @@
       ],
       "moisture_aw": [
         1,
-        2
+        1
       ],
       "ph": [
-        8,
-        10
+        5,
+        8
       ],
       "process_heating": [
         0,
@@ -92,33 +92,28 @@
         10
       ],
       "temperature": [
-        7,
-        11
+        5,
+        9
       ],
       "time": [
-        3,
-        6
+        1,
+        1
       ]
     },
     "claims": 92,
     "excluding_ph_aw": [
-      16,
-      31
+      11,
+      22
     ],
     "headline": [
-      25,
-      43
+      17,
+      31
     ],
     "mechanism_absent_misses": 0,
     "misses": {
-      "additive_cysteine": [
-        "CYS-02"
-      ],
-      "moisture_aw": [
-        "AW-01"
-      ],
       "ph": [
         "MOT-01",
+        "HOX-03",
         "CER07-PH-01"
       ],
       "ranking": [
@@ -137,18 +132,13 @@
         "TEMP-05",
         "YIL-01",
         "YIL-02"
-      ],
-      "time": [
-        "WANG22-T-01",
-        "WANG22-T-03",
-        "WANG22-T-04"
       ]
     },
-    "not_evaluable": 28,
+    "not_evaluable": 24,
     "path": "results/validation/core_directional_scores.json",
     "ph_aw": [
-      9,
-      12
+      6,
+      9
     ]
   },
   "gates": [
@@ -170,8 +160,8 @@
   ],
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
-    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 12/45 rows within 3x (median fold error 9.15x, worst 9.63e+03x); out of sample -- every row a core fit read removed -- 11/44 (median 9.23x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 17/44 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 17/43 out of sample.",
-    "**Directional and ranking claims are the product, and on the kinetic core they score 25/43 on strictly independent literature claims** (28 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 16/31 once pH and water activity are set aside, and 9/12 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
+    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 17/50 rows within 3x (median fold error 7.74x, worst 9.63e+03x); out of sample -- every row a core fit read removed -- 12/44 (median 9.23x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 19/48 evaluable literature rows (2 not evaluable: the no lane carries no sampled uncertainty), 17/43 out of sample.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 17/31 on strictly independent literature claims** (24 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 11/22 once pH and water activity are set aside, and 6/9 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
     "**The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
@@ -228,14 +218,14 @@
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "4/8 rows within 3x, median 2.82x",
+      "evidence": "5/8 rows within 3x, median 2.74x",
       "system_class": "protein matrix, lipid-derived aldehydes [lipid lane]",
       "verdict": "do-not-use"
     },
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "2/19 rows within 3x, median 29.5x",
+      "evidence": "6/24 rows within 3x, median 16.7x",
       "system_class": "free precursor, cysteine / ribose meaty thiols [sulfur lane]",
       "verdict": "do-not-use"
     },
@@ -249,7 +239,7 @@
     {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
-      "evidence": "17/44 evaluable literature rows inside; 17/43 out of sample; 1 not evaluable",
+      "evidence": "19/48 evaluable literature rows inside; 17/43 out of sample; 2 not evaluable",
       "system_class": "every lane with sampled uncertainty",
       "verdict": "do-not-use"
     },
@@ -261,25 +251,25 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: CYS-02",
+      "basis": "",
       "claim_type": "Direction / ranking on `additive_cysteine`",
-      "evidence": "2/3 on the directional panel (independent claims)",
+      "evidence": "1/1 on the directional panel (independent claims)",
       "system_class": "free precursor (cysteine present vs absent)",
       "verdict": "caution"
     },
     {
       "basis": "misses: TEMP-01, TEMP-05, YIL-01, YIL-02",
       "claim_type": "Direction / ranking on `temperature`",
-      "evidence": "7/11 on the directional panel (independent claims)",
+      "evidence": "5/9 on the directional panel (independent claims)",
       "system_class": "any (temperature moved, everything else held)",
-      "verdict": "caution"
+      "verdict": "do-not-use"
     },
     {
-      "basis": "misses: WANG22-T-01, WANG22-T-03, WANG22-T-04",
+      "basis": "",
       "claim_type": "Direction / ranking on `time`",
-      "evidence": "3/6 on the directional panel (independent claims)",
+      "evidence": "1/1 on the directional panel (independent claims)",
       "system_class": "any (time moved, everything else held)",
-      "verdict": "do-not-use"
+      "verdict": "caution"
     },
     {
       "basis": "",
@@ -296,18 +286,18 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: MOT-01, CER07-PH-01",
+      "basis": "misses: MOT-01, HOX-03, CER07-PH-01",
       "claim_type": "Direction / ranking on `ph`",
-      "evidence": "8/10 on the directional panel (independent claims)",
+      "evidence": "5/8 on the directional panel (independent claims)",
       "system_class": "any (pH moved)",
       "verdict": "caution"
     },
     {
-      "basis": "misses: AW-01",
+      "basis": "",
       "claim_type": "Direction / ranking on `moisture_aw`",
-      "evidence": "1/2 on the directional panel (independent claims)",
+      "evidence": "1/1 on the directional panel (independent claims)",
       "system_class": "any (water activity moved)",
-      "verdict": "do-not-use"
+      "verdict": "caution"
     },
     {
       "basis": "misses: MOT-03",
@@ -326,7 +316,7 @@
     {
       "basis": "recomputed live; strict-ready is the repository's own passing bar",
       "claim_type": "Any claim of benchmark-grade agreement",
-      "evidence": "0/37 strict-ready (none); 12/45 rows within 3x, out-of-sample 11/44",
+      "evidence": "0/37 strict-ready (none); 17/50 rows within 3x, out-of-sample 12/44",
       "system_class": "the union panel: trust loop + hold-outs + matrix bundles",
       "verdict": "do-not-use"
     },

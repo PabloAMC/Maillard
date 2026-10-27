@@ -4,8 +4,8 @@
     "artifact": "kinetic_core_b48_ship_rule",
     "generated_on": "2026-10-27",
     "git": {
-      "commit": "067deb8cc6ee82a1f611d8dd21ed52296effbeff",
-      "short": "067deb8c",
+      "commit": "8069ca8ba50c53adc8e72be1ae02b1745b253652",
+      "short": "8069ca8b",
       "branch": "b49-norfuraneol-heterocycles",
       "dirty": true
     },
@@ -13,7 +13,7 @@
     "inputs": [
       {
         "path": "src/kinetic_core/parameters_lipid.py",
-        "sha256": "4129474972d82dc49ddae62067949c565f8a8c923720d3eb70cebbe8795a4492"
+        "sha256": "4f97712de0fed2323c6334586eecb41aa169f0266edd0d714ea64011883ce119"
       },
       {
         "path": "src/kinetic_core/lipid.py",
@@ -49,12 +49,12 @@
   },
   "T3_directional": {
     "off": {
-      "agree": 25,
-      "evaluable": 43
+      "agree": 17,
+      "evaluable": 31
     },
     "on": {
-      "agree": 25,
-      "evaluable": 43
+      "agree": 17,
+      "evaluable": 31
     },
     "pass": true
   },
@@ -69,14 +69,14 @@
   ],
   "union_panel": {
     "off": {
-      "rows": 45,
-      "within_3x": 12,
-      "median_abs_log10": 0.9613681301738599
+      "rows": 50,
+      "within_3x": 16,
+      "median_abs_log10": 0.887806146699352
     },
     "on": {
-      "rows": 45,
-      "within_3x": 13,
-      "median_abs_log10": 0.9613681301738599
+      "rows": 50,
+      "within_3x": 17,
+      "median_abs_log10": 0.886042272797009
     }
   },
   "verdict": "SHIP",
