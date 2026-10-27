@@ -2620,7 +2620,11 @@ record under `data/lit/` or `results/literature/`), never a trace.
   lipid carbonyl classes (2,4-alkadienals 28-38 kJ/mol; epoxyalkenals, 4-HNE, oxoalkenals 55-67);
   Zamora, Gallardo & Hidalgo 2007 (10.1021/jf062838x) gives ~8 % Phe -> phenylacetaldehyde from
   2,4-decadienal at 180 C, linear in lipid and time, and 9-14 % decadienal -> hexanal (bears on
-  `DECADIENAL_TO_HEXANAL_GAP`). Read both into dossiers before any step is declared.
+  `DECADIENAL_TO_HEXANAL_GAP`). Read both into dossiers before any step is declared. (Correction, same day:
+  Zamora 2013 was already transcribed in `zamora2013_extraction.md`, wave K6b, 2026-08-29; only the 2007
+  paper is missing.) Zamora, Gallardo & Hidalgo 2008 (10.1021/jf801409w) read into
+  `zamora2008_extraction.md`: hydroperoxides degrade Phe to phenylacetaldehyde at 180 C, 12 % at pH 2.15
+  to 0.25 % at pH 12; no rates.
 
 **Sulfur fit rows checked against the PDFs (2026-10-27, two read-only agents; per-row tables in the
 session scratchpad, findings here).** The 54 rows of the shipped B9 objective
