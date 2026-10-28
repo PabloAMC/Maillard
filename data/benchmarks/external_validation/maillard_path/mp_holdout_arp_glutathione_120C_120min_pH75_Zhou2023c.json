@@ -1,0 +1,115 @@
+{
+  "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+  "evidence_class": "external_validation_only",
+  "maillard_path_holdout": true,
+  "source_doi": "10.1021/acs.jafc.3c04424",
+  "source_metadata": {
+    "citation": "Zhou, T.; Xia, X.; Cui, H.; Hayat, K.; Zhang, X.; Ho, C.-T. Promotion or Inhibition Effects of Exogenous Glutathione-Degraded Amino Acids on the Formation of 2,3-Butanedione and Pyrazines via Varied Pathways of Interaction with alpha-Dicarbonyl Compounds Derived from N-(1-Deoxy-D-xylulos-1-yl)-alanine. J. Agric. Food Chem. 2023, 71, 14312-14321.",
+    "citation_note": "Transcribed from data/articles/zhou2023c.pdf p. 1 (DOI printed); dossier data/lit/extraction_dossiers/zhou2023c_extraction.md (read 2026-10-27). NOT the fit paper 10.1021/acs.jafc.2c08360 (zhou2023_extraction.md), which is the same laboratory's ARP +/- cysteine study.",
+    "origin": "external_literature",
+    "evidence_class": "external_validation_only",
+    "notes": "MAILLARD-PATH HOLD-OUT (2026-10-28, FIT_HOLDOUT_DECLARATION.md Amendment 45). Added BLIND: no prediction, score or envelope integration was run on this pot before the bundle was frozen (engine.declare_envelope only, which refuses or accepts without integrating; verdict in_envelope). Never use for calibration, refitting, or any promotion decision."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "data/articles/zhou2023c.pdf (publisher PDF, 10 pp., gitignored), Methods re-read from the text layer and Figure 1 from a 200 dpi render on 2026-10-28.",
+    "retrieval_date": "2026-10-28",
+    "quoted_method": "Thermal Treatment of Reaction Systems, verbatim: 'Reaction systems of ARP (20 mmol/L) with or without GSH (20 mmol/L) addition were prepared, and the initial pH of the resultant mixtures was adjusted to 7.5 with a 3 mol/L NaOH solution before the heat treatment. All the samples were transferred to the pressure-resistant bottles and then heated in an oil bath at a temperature of 120 C for 30, 60, 90, and 120 min separately.' ARP = N-(1-deoxy-D-xylulos-1-yl)-alanine, purified (the engine's fed ARP species).",
+    "quoted_quantification": "Verbatim: 'Three mL of the sample and 2 mL of a saturated sodium chloride solution were mixed in the headspace vial with the addition of 1,2-dichlorobenzene (5 uL, 0.0018 ug/uL in methanol) as an internal standard.' ... 'To quantitate each volatile compound, different concentrations of available chemical standards with a fixed content of an internal standard were applied to establish the calibration curves. In order to maintain the same matrix as the Maillard reaction solutions, the chemical standards were dissolved in the water phase to draw the calibration curves.'",
+    "quoted_table": "Figure 1 (p. 14314), 'Heat map of volatile compounds generated from ARP and the ARP-GSH/Cys models under 120 C at an initial pH of 7.5.' Every cell is printed as a number; the ARP+GSH columns at 30 / 60 / 90 / 120 min read (checked on a 200 dpi render, 2026-10-28): 2-Methyl-3-furanthiol 5.91x10^1 / 6.41x10^1 / 5.71x10^1 / 8.10x10^0; 2-Furfurylthiol 1.24x10^2 / 3.83x10^2 / 2.70x10^2 / 1.16x10^2; Furfural 1.13x10^2 / 3.97x10^2 / 5.75x10^2 / 7.16x10^2. Units are not printed on the figure; ug/L follows from the Methods (calibration x in ug/L) and from the ARP+GSH-60 cells that also appear in Table 1 (ug/L), e.g. 2,3-butanedione 6.87x10^1 = 68.7.",
+    "quantification_class": "hs_spme_gcms_internal_standard_calibration_curve",
+    "quantification_verdict": "ABSOLUTE BY AUTHENTIC-STANDARD CALIBRATION, HEADSPACE CLASS. HS-SPME with compound-specific calibration curves of authentic standards in water against one internal standard; no isotope dilution. The heat map prints no SD (Table 1, which has SDs, does not list MFT, FFT or furfural), so target_uncertainty is null, not invented. Between-paper caution from the same laboratory: Zhou 2022 and Zhou 2023 report the nominally identical ARP + Cys pot 4-8x apart in MFT/FFT (zhou2022_extraction.md sec. 5).",
+    "what_is_deliberately_not_ingested": "(a) The ARP-alone columns: ARP alone at pH 7, 60 min is a FIT pot (Zhou 2023, furfural row), so its furfural here would re-score a fit system. (b) The ARP+Cys-60 column (MFT 1.15x10^3, FFT 5.11x10^2): the same nominal pot as the B47 fit row zhou_arp_cys_pH7 at pH 7.5 instead of 7, i.e. a reproducibility comparison, not a test; it is used only as the arm of directional claim Z23C-GSH-01. (c) 2,3-butanedione and pyrazines: trunk-lane targets the sulfur lane refuses. (d) GSH, Cys-Gly, pGlu, dicarbonyl time courses: figure-digitised."
+  },
+  "fit_holdout_status": "INDEPENDENT AT THE ROW LEVEL, SAME-LABORATORY AT THE SYSTEM LEVEL, AND SAID SO. No fit read Zhou 2023c (10.1021/acs.jafc.3c04424) or any glutathione pot; the engine's GSH chemistry is Zheng & Ho 1994's measured H2S constant, not fitted. The ARP half of the network WAS fitted on the sister paper Zhou 2023 (10.1021/acs.jafc.2c08360: ARP and ARP + Cys at 120 C, 60 min, pH 6/7/8), same laboratory and ARP preparation. This pot (ARP + GSH, pH 7.5, unbuffered) is a state no fit row integrates.",
+  "precursor_concentration_provenance": {
+    "status": "FULLY_STATED_IN_SOURCE",
+    "derivation": "ARP 20 mmol/L and GSH 20 mmol/L, printed (quoted_method).",
+    "residual_caveats": "(a) Unbuffered: initial pH 7.5 set with NaOH; the authors note ARP breakdown acidifies the pot and the drift is not measured. (b) Bottle volume, fill and headspace gas not stated. (c) The paper's own GSH balance leaves ~81 % of the lost cysteine moiety unaccounted (probably GSSG), a pool the engine does not carry."
+  },
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "ARP": {
+      "concentration_mM": 20.0,
+      "concentration_note": "N-(1-deoxy-D-xylulos-1-yl)-alanine (Ala-xylose Amadori compound), purified by the authors; the engine's fed 'ARP' species, whose chemistry was fitted on the same laboratory's Zhou 2023 pots."
+    },
+    "Glutathione": {
+      "concentration_mM": 20.0
+    }
+  },
+  "conditions": {
+    "temp_C": 120.0,
+    "ph": 7.5,
+    "ph_basis": "initial",
+    "water_activity": 0.98,
+    "water_activity_note": "Not stated by the source; 0.98 is this repository's convention for a dilute aqueous pot.",
+    "time_min": 120.0,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Zhou, Xia, Cui, Hayat, Zhang & Ho 2023, J. Agric. Food Chem. 71:14312, 'Thermal Treatment of Reaction Systems', read from data/articles/zhou2023c.pdf on 2026-10-28, verbatim: 'Reaction systems of ARP (20 mmol/L) with or without GSH (20 mmol/L) addition were prepared, and the initial pH of the resultant mixtures was adjusted to 7.5 with a 3 mol/L NaOH solution before the heat treatment.' NO BUFFER: an aqueous pot with its start pH set by NaOH; the authors attribute a rapid pH fall during heating to ARP breakdown, which is not measured. Dossier: zhou2023c_extraction.md."
+    },
+    "vessel": {
+      "fill_mL": null,
+      "vessel_mL": null,
+      "closure": "pressure-resistant bottle, sealed, oil bath (volume and fill not stated)",
+      "atmosphere": "air_by_default",
+      "water_source": "unstated",
+      "stirred": null,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Zhou, Xia, Cui, Hayat, Zhang & Ho 2023, J. Agric. Food Chem. 71:14312, read from data/articles/zhou2023c.pdf on 2026-10-28, verbatim: 'All the samples were transferred to the pressure-resistant bottles and then heated in an oil bath at a temperature of 120 C for 30, 60, 90, and 120 min separately.' Bottle volume, fill, headspace gas, stirring and water grade are not stated; no inert gas is mentioned (air_by_default). Dossier: zhou2023c_extraction.md."
+    }
+  },
+  "metadata": {
+    "tier": "REFERENCE",
+    "family": "free_aa_sulfur",
+    "execution_path": "free_precursor",
+    "notes": "One of a FOUR-POINT time series (30/60/90/120 min) of ARP + glutathione 20/20 mM, unbuffered, initial pH 7.5, 120 C. This is the 120 min point. The series is the first glutathione-sourced thiol level the repository holds: MFT plateaus then collapses (59 -> 64 -> 57 -> 8 ug/L), FFT peaks at 60 min (124 -> 383 -> 270 -> 116)."
+  },
+  "reference_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 8.1,
+      "uncertainty_pct": null
+    },
+    "2-Furfurylthiol (FFT)": {
+      "conc_ppb": 116.0,
+      "uncertainty_pct": null
+    },
+    "Furfural": {
+      "conc_ppb": 716.0,
+      "uncertainty_pct": null
+    }
+  },
+  "holdout_targets": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "target_unit": "ppb",
+      "target_value": 8.1,
+      "target_uncertainty": null,
+      "target_quote": "Figure 1 (p. 14314), 'Heat map of volatile compounds generated from ARP and the ARP-GSH/Cys models under 120 C at an initial pH of 7.5.' Every cell is printed as a number; the ARP+GSH columns at 30 / 60 / 90 / 120 min read (checked on a 200 dpi render, 2026-10-28): 2-Methyl-3-furanthiol 5.91x10^1 / 6.41x10^1 / 5.71x10^1 / 8.10x10^0; 2-Furfurylthiol 1.24x10^2 / 3.83x10^2 / 2.70x10^2 / 1.16x10^2; Furfural 1.13x10^2 / 3.97x10^2 / 5.75x10^2 / 7.16x10^2. Units are not printed on the figure; ug/L follows from the Methods (calibration x in ug/L) and from the ARP+GSH-60 cells that also appear in Table 1 (ug/L), e.g. 2,3-butanedione 6.87x10^1 = 68.7.",
+      "molar_basis": "ug/L of the aqueous reaction solution, read as ug/kg at 1 kg/L: numerically the model's ppb. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "Cc1occc1S"
+    },
+    "2-Furfurylthiol (FFT)": {
+      "target_unit": "ppb",
+      "target_value": 116.0,
+      "target_uncertainty": null,
+      "target_quote": "Figure 1 (p. 14314), 'Heat map of volatile compounds generated from ARP and the ARP-GSH/Cys models under 120 C at an initial pH of 7.5.' Every cell is printed as a number; the ARP+GSH columns at 30 / 60 / 90 / 120 min read (checked on a 200 dpi render, 2026-10-28): 2-Methyl-3-furanthiol 5.91x10^1 / 6.41x10^1 / 5.71x10^1 / 8.10x10^0; 2-Furfurylthiol 1.24x10^2 / 3.83x10^2 / 2.70x10^2 / 1.16x10^2; Furfural 1.13x10^2 / 3.97x10^2 / 5.75x10^2 / 7.16x10^2. Units are not printed on the figure; ug/L follows from the Methods (calibration x in ug/L) and from the ARP+GSH-60 cells that also appear in Table 1 (ug/L), e.g. 2,3-butanedione 6.87x10^1 = 68.7.",
+      "molar_basis": "ug/L of the aqueous reaction solution, read as ug/kg at 1 kg/L: numerically the model's ppb. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "SCc1ccco1"
+    },
+    "Furfural": {
+      "target_unit": "ppb",
+      "target_value": 716.0,
+      "target_uncertainty": null,
+      "target_quote": "Figure 1 (p. 14314), 'Heat map of volatile compounds generated from ARP and the ARP-GSH/Cys models under 120 C at an initial pH of 7.5.' Every cell is printed as a number; the ARP+GSH columns at 30 / 60 / 90 / 120 min read (checked on a 200 dpi render, 2026-10-28): 2-Methyl-3-furanthiol 5.91x10^1 / 6.41x10^1 / 5.71x10^1 / 8.10x10^0; 2-Furfurylthiol 1.24x10^2 / 3.83x10^2 / 2.70x10^2 / 1.16x10^2; Furfural 1.13x10^2 / 3.97x10^2 / 5.75x10^2 / 7.16x10^2. Units are not printed on the figure; ug/L follows from the Methods (calibration x in ug/L) and from the ARP+GSH-60 cells that also appear in Table 1 (ug/L), e.g. 2,3-butanedione 6.87x10^1 = 68.7.",
+      "molar_basis": "ug/L of the aqueous reaction solution, read as ug/kg at 1 kg/L: numerically the model's ppb. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "O=Cc1ccco1"
+    }
+  }
+}

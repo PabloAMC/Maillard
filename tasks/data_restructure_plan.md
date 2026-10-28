@@ -3009,3 +3009,11 @@ one dossier (a small alias table for the renamed ones) or to a triage line that 
   lipid aldehydes (hexanal 0.32–0.83x) — a ratio test for the lipid over-prediction. Low moisture: Hofmann silica (FFT
   ×8) vs Mottram 1995b dry (FFT trace) disagree, so the dry behaviour is not validatable. Note: `mottram1995b.pdf` is the
   low-moisture paper (10.1021/jf00052a027), `mottram1995c.pdf` the cellulose one (10.1021/jf00053a033).
+- [x] **2026-10-28, blind hold-outs from these readings (FIT_HOLDOUT_DECLARATION.md Amendment 45).** Five
+  Maillard-path bundles, 16 rows: `..._Zhang2025b` (Cys + Xyl 40/40 mM, 0.2 M phosphate pH 6.5, 120 C, 50 min:
+  MFT, FFT, MFT disulfide, 2-acetylthiazole; HS-SPME semi-quant) and `mp_holdout_arp_glutathione_120C_{30..120}min_pH75_Zhou2023c`
+  (MFT, FFT, furfural; calibration-curve HS-SPME). 27 directional claims (ZHA25, ZHOU22, Z23C, CHEN02/00, XU07,
+  WANG12, HIN92, ZHG91/88, FAR92, ZHG23B, MOD08, HAR84B, MAD95, MAR10): 16 fully in envelope, 6 refused on an arm
+  (lysine lane conflict, GSH -> 2-acetylthiazole, unmapped lipids, methionine chain), 5 prose-only. Zhou 2022 and
+  Chen 2000/2002 deliberately NOT bundled (fit-pot reproducibility; charge ambiguity). Scores NOT regenerated: the
+  next regeneration is the first per-row score (aggregate breach disclosed in the amendment, sec. 6).
