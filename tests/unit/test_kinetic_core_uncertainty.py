@@ -270,7 +270,9 @@ def test_sulfur_priors_follow_the_b8_laplace_covariance():
         (c["block"], c["key"]) for c, ok in zip(lap["coordinates"], lap["identified"], strict=True)
         if not ok and c.get("kind") in unc.DEFINITIONAL_BAND_KINDS
     }
-    sulfur = [p for p in unc.CORE_PRIORS if p.lane == "sulfur"]
+    # B55 (2026-10-28) rows are sulfur-lane barrier priors, not Laplace coordinates; tested in
+    # test_kinetic_core_b55_b56.py.
+    sulfur = [p for p in unc.CORE_PRIORS if p.lane == "sulfur" and not p.key.startswith("b55.")]
     assert sulfur
     sampled = {p.key for p in sulfur if p.sampled}
     assert len(identified) == lap["identified_count"]

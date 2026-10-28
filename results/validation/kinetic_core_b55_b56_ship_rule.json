@@ -1,0 +1,391 @@
+{
+  "arms": {
+    "A": "results/validation/_b55_b56_arms/core_prediction_uncertainty_baseline.json",
+    "B": "results/validation/_b55_b56_arms/core_prediction_uncertainty_b55.json",
+    "C": "results/validation/_b55_b56_arms/core_prediction_uncertainty_b56.json",
+    "D": "results/validation/_b55_b56_arms/core_prediction_uncertainty_b55_b56.json"
+  },
+  "artifact": "kinetic_core_b55_b56_ship_rule",
+  "artifact_own_definitions": {
+    "A": {
+      "honest_literature": [
+        19,
+        48,
+        2
+      ],
+      "honest_literature_median_width": 0.9793151880814256,
+      "out_of_sample": [
+        17,
+        43,
+        1
+      ]
+    },
+    "B": {
+      "honest_literature": [
+        22,
+        48,
+        2
+      ],
+      "honest_literature_median_width": 1.1418137018591747,
+      "out_of_sample": [
+        20,
+        43,
+        1
+      ]
+    },
+    "C": {
+      "honest_literature": [
+        30,
+        50,
+        0
+      ],
+      "honest_literature_median_width": 2.1507571997469235,
+      "out_of_sample": [
+        25,
+        44,
+        0
+      ]
+    },
+    "D": {
+      "honest_literature": [
+        31,
+        50,
+        0
+      ],
+      "honest_literature_median_width": 2.2590187179676287,
+      "out_of_sample": [
+        26,
+        44,
+        0
+      ]
+    }
+  },
+  "b55": {
+    "T1_invariance_at_145C_and_off_sulfur": {
+      "failures": [],
+      "pass": true,
+      "rows_checked": 40
+    },
+    "T2_widening_away_from_145C": {
+      "median_delta_width": 0.6967815296755846,
+      "min_delta_width": 0.013152438414795409,
+      "pass": true,
+      "rows": [
+        {
+          "T_C": 100.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "delta_width": 1.4382673496011267,
+          "inside_A": false,
+          "inside_B": true,
+          "measured": 1.28,
+          "p50_A": 170.79922395020847,
+          "p50_B": 60.79022414889929,
+          "width_A": 1.6056428512113243,
+          "width_B": 3.043910200812451
+        },
+        {
+          "T_C": 100.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "delta_width": 1.1566651210227132,
+          "inside_A": true,
+          "inside_B": true,
+          "measured": 6.88,
+          "p50_A": 8.363776661169855,
+          "p50_B": 9.18922164139871,
+          "width_A": 1.5414306322355766,
+          "width_B": 2.69809575325829
+        },
+        {
+          "T_C": 110.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "delta_width": 0.9201620018629022,
+          "inside_A": false,
+          "inside_B": false,
+          "measured": 1.46,
+          "p50_A": 250.50381267373695,
+          "p50_B": 118.12656336803497,
+          "width_A": 1.5207417663138973,
+          "width_B": 2.4409037681767995
+        },
+        {
+          "T_C": 110.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "delta_width": 0.9720809339149215,
+          "inside_A": false,
+          "inside_B": true,
+          "measured": 3.29,
+          "p50_A": 21.555594448225616,
+          "p50_B": 21.88773187941086,
+          "width_A": 1.1398766137295753,
+          "width_B": 2.1119575476444967
+        },
+        {
+          "T_C": 120.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "delta_width": 0.5082195835387335,
+          "inside_A": false,
+          "inside_B": false,
+          "measured": 1.68,
+          "p50_A": 256.477464588793,
+          "p50_B": 162.39878846110955,
+          "width_A": 1.4078310098269993,
+          "width_B": 1.9160505933657328
+        },
+        {
+          "T_C": 120.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "delta_width": 0.6334081647709402,
+          "inside_A": false,
+          "inside_B": false,
+          "measured": 2.4,
+          "p50_A": 48.79066914725774,
+          "p50_B": 46.57555174201053,
+          "width_A": 0.8289804148849271,
+          "width_B": 1.4623885796558673
+        },
+        {
+          "T_C": 130.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "compound": "2-Furfurylthiol (FFT)",
+          "delta_width": 0.1459222797220665,
+          "inside_A": false,
+          "inside_B": false,
+          "measured": 1.62,
+          "p50_A": 209.9810552109946,
+          "p50_B": 163.42755762326186,
+          "width_A": 1.3225548950812474,
+          "width_B": 1.4684771748033139
+        },
+        {
+          "T_C": 130.0,
+          "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "delta_width": 0.39589788902439826,
+          "inside_A": false,
+          "inside_B": false,
+          "measured": 1.71,
+          "p50_A": 94.36328262035366,
+          "p50_B": 90.42192854871436,
+          "width_A": 0.5981764174540491,
+          "width_B": 0.9940743064784474
+        },
+        {
+          "T_C": 150.0,
+          "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+          "compound": "furfural",
+          "delta_width": 0.013152438414795409,
+          "inside_A": false,
+          "inside_B": false,
+          "measured": 715.22,
+          "p50_A": 9.627383388811474,
+          "p50_B": 10.592709867850562,
+          "width_A": 1.6816190089400151,
+          "width_B": 1.6947714473548106
+        },
+        {
+          "T_C": 120.0,
+          "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "delta_width": 0.7601548945802291,
+          "inside_A": false,
+          "inside_B": true,
+          "measured": 11.7,
+          "p50_A": 95.83768766720411,
+          "p50_B": 41.240192024741724,
+          "width_A": 0.6462756736678236,
+          "width_B": 1.4064305682480527
+        }
+      ],
+      "thresholds": {
+        "median_at_least": 0.1,
+        "no_row_narrows_by_more_than": 0.05
+      }
+    },
+    "T3_no_coverage_loss": {
+      "hits_A": 17,
+      "hits_B": 20,
+      "pass": true,
+      "total": 44
+    },
+    "verdict": "SHIP"
+  },
+  "b56": {
+    "T4_out_of_sample_coverage_in_band": {
+      "band": [
+        0.7,
+        0.95
+      ],
+      "hits": 26,
+      "median_width_log10": 2.3677719784125832,
+      "pass": false,
+      "rate": 0.5909090909090909,
+      "reference_median_width_log10": 1.2528415385826794,
+      "reference_rate": 0.45454545454545453,
+      "total": 44
+    },
+    "judged_arm": "D",
+    "reference_arm": "B",
+    "sigma_log10_by_lane": {
+      "acrylamide": 1.187681988581986,
+      "lipid": 0.12006670974305152,
+      "sulfur": 0.49104203954799486,
+      "trunk": 0.13482413748658642
+    },
+    "verdict": "DO NOT SHIP"
+  },
+  "coverage_out_of_sample": {
+    "A": {
+      "by_lane": {
+        "acrylamide": {
+          "hits": 4,
+          "median_width_log10": 0.9147267009792087,
+          "total": 12
+        },
+        "lipid": {
+          "hits": 7,
+          "median_width_log10": 2.185716426516688,
+          "total": 8
+        },
+        "sulfur": {
+          "hits": 4,
+          "median_width_log10": 1.3651929524541233,
+          "total": 18
+        },
+        "trunk": {
+          "hits": 2,
+          "median_width_log10": 0.9614674976927069,
+          "total": 6
+        }
+      },
+      "hits": 17,
+      "median_width_log10": 1.009477907072482,
+      "rate": 0.38636363636363635,
+      "total": 44
+    },
+    "B": {
+      "by_lane": {
+        "acrylamide": {
+          "hits": 4,
+          "median_width_log10": 0.9147267009792087,
+          "total": 12
+        },
+        "lipid": {
+          "hits": 7,
+          "median_width_log10": 2.185716426516688,
+          "total": 8
+        },
+        "sulfur": {
+          "hits": 7,
+          "median_width_log10": 1.7391655596569349,
+          "total": 18
+        },
+        "trunk": {
+          "hits": 2,
+          "median_width_log10": 0.9614674976927069,
+          "total": 6
+        }
+      },
+      "hits": 20,
+      "median_width_log10": 1.2528415385826794,
+      "rate": 0.45454545454545453,
+      "total": 44
+    },
+    "C": {
+      "by_lane": {
+        "acrylamide": {
+          "hits": 8,
+          "median_width_log10": 3.982322869078475,
+          "total": 12
+        },
+        "lipid": {
+          "hits": 7,
+          "median_width_log10": 2.2037153091207635,
+          "total": 8
+        },
+        "sulfur": {
+          "hits": 8,
+          "median_width_log10": 2.0495359144961727,
+          "total": 18
+        },
+        "trunk": {
+          "hits": 2,
+          "median_width_log10": 1.0130977273247264,
+          "total": 6
+        }
+      },
+      "hits": 25,
+      "median_width_log10": 2.201219936082368,
+      "rate": 0.5681818181818182,
+      "total": 44
+    },
+    "D": {
+      "by_lane": {
+        "acrylamide": {
+          "hits": 8,
+          "median_width_log10": 3.982322869078475,
+          "total": 12
+        },
+        "lipid": {
+          "hits": 7,
+          "median_width_log10": 2.2037153091207635,
+          "total": 8
+        },
+        "sulfur": {
+          "hits": 9,
+          "median_width_log10": 2.3677719784125832,
+          "total": 18
+        },
+        "trunk": {
+          "hits": 2,
+          "median_width_log10": 1.0130977273247264,
+          "total": 6
+        }
+      },
+      "hits": 26,
+      "median_width_log10": 2.3677719784125832,
+      "rate": 0.5909090909090909,
+      "total": 44
+    }
+  },
+  "fixed_denominator_out_of_sample_rows": 44,
+  "prereg": "results/validation/kinetic_core_b55_b56_prereg.md",
+  "provenance": {
+    "artifact": "kinetic_core_b55_b56_ship_rule",
+    "generated_by": "scripts/generators/generate_kinetic_core_b55_b56_ship_rule.py",
+    "generated_on": "2026-10-27",
+    "git": {
+      "branch": "worktree-agent-a267a3f6843234126",
+      "commit": "dc966f714c6daedb37a36b6bf80659dfe7cde51e",
+      "dirty": true,
+      "short": "dc966f71"
+    },
+    "inputs": [
+      {
+        "path": "results/validation/_b55_b56_arms/core_prediction_uncertainty_baseline.json",
+        "sha256": "0fdc2167488d4b4475645ac4efa82bead3cb561aa37e1a750dedad89ffd710df"
+      },
+      {
+        "path": "results/validation/_b55_b56_arms/core_prediction_uncertainty_b55.json",
+        "sha256": "8326611a1dab7f91c1368a8853a27ee38efb7d778dba2945857e19baa35f522d"
+      },
+      {
+        "path": "results/validation/_b55_b56_arms/core_prediction_uncertainty_b56.json",
+        "sha256": "502c53177673c9048b75adea928608d32a1ec1cc5ae89ac6e1b762ab5079d581"
+      },
+      {
+        "path": "results/validation/_b55_b56_arms/core_prediction_uncertainty_b55_b56.json",
+        "sha256": "9fcf3c9504c21af649b716ed5c1e99674316e58808be972e475ba6d5bc78b3fa"
+      },
+      {
+        "path": "results/validation/kinetic_core_b56_structural_discrepancy.json",
+        "sha256": "01b83938e9557fe8433588b7dfae3566d7189056a854168f515b05bd31f4981c"
+      }
+    ]
+  }
+}

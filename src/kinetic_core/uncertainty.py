@@ -27,6 +27,14 @@ WHAT IS SAMPLED, AND FROM WHERE (the design is settled in
     report. Every sulfur prior is listed ``sampled: false`` with reason
     ``no_uncertainty_in_fit_report``. Nothing is invented for it; a Laplace
     covariance at the B8 optimum is a later step.
+  * B55 (2026-10-28, SHIPPED): the 31 sulfur constants known at 145 C only draw
+    their barrier from the measured barriers of their reaction class
+    (``ea_class_prior``), k(145 C) held -- so off-145 C intervals widen and
+    145 C ones do not move.
+  * B56 (2026-10-28, NOT SHIPPED, switch off): a per-lane structural-discrepancy
+    term from in-sample fit residuals. It reached 59 % out-of-sample coverage
+    against a pre-registered [70, 95] %: the model's structural error is mostly
+    invisible on the rows it was fitted to.
 
 Draws are independent, seeded from ``numpy.random.SeedSequence(seed).spawn(n)``,
 so the artifact is reproducible to the byte for a given ``(n, seed)`` and
@@ -216,6 +224,28 @@ DEFINITIONAL_BAND = (
 B1_T_REF_C = 100.0
 B3_T_REF_C = 160.0
 B8_T_REF_C = 145.0
+
+# ---------------------------------------------------------------------------
+# B55 and B56 (2026-10-28; kinetic_core_b55_b56_prereg.md)
+# ---------------------------------------------------------------------------
+#
+# B55: the 31 sulfur constants quoted at 145 C with a barrier nobody measured get a prior row each,
+# drawn from the measured barriers of their reaction class (src/kinetic_core/ea_class_prior.py), with
+# k(145 C) held. B56: each sample of a row on lane L is multiplied by 10^(sigma_L * z), sigma_L the
+# in-sample structural discrepancy of kinetic_core_b56_structural_discrepancy.json. Both are read at
+# CALL time from these switches, so a ship rule can run every arm from one checkout.
+#: B55 SHIPPED 2026-10-28 (kinetic_core_b55_b56_ship_rule.md: T1-T3 pass; out of sample 17 -> 20 of 44).
+B55_SINGLE_TEMPERATURE_EA_PRIOR: bool = True
+#: B56 NOT SHIPPED 2026-10-28: T4 failed LOW (26/44 = 59 % against [70 %, 95 %]). In-sample residuals
+#: understate the out-of-sample error; the term stays available behind this switch and is off.
+B56_STRUCTURAL_DISCREPANCY: bool = False
+DISCREPANCY_PATH = data_paths.VALIDATION_DIR / "kinetic_core_b56_structural_discrepancy.json"
+#: The prior rows' distribution and reason.
+EMPIRICAL_CLASS = "empirical_measured_class"
+B55_REASON = (
+    "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); "
+    "drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held"
+)
 
 
 def ea_halfwidth_from_prefactor(
@@ -1047,11 +1077,46 @@ def _declared_band_priors() -> List[CorePrior]:
     return out
 
 
-def core_priors() -> Tuple[CorePrior, ...]:
-    """The full priors table, in the order the sampler consumes it."""
+def _b55_priors() -> List[CorePrior]:
+    """
+    B55 (2026-10-28). One row per sulfur constant known at 145 C only: its barrier drawn from the
+    measured barriers of its class (ea_class_prior). ``centre`` is the shipped barrier (None for the
+    policy-2 key held at 145 C), ``band`` the class's measured range, which a draw never leaves.
+    """
+    from .ea_class_prior import class_values, single_temperature_targets, source_line
+
+    values = class_values()
+    src = source_line()
+    out: List[CorePrior] = []
+    for key, klass, shipped in single_temperature_targets():
+        v = values[klass]
+        out.append(CorePrior(
+            key=f"b55.{key}.ea_kj_mol", lane=SULFUR, kind="fitted_ea", distribution=EMPIRICAL_CLASS,
+            centre=shipped, sigma=None, band=(float(min(v)), float(max(v))), unit="kJ/mol",
+            source=f"class {klass}; {src}", sampled=True, reason=B55_REASON,
+        ))
+    return out
+
+
+def _b55_class_of(key: str) -> str:
+    """The class a ``b55.<key>.ea_kj_mol`` row draws from (cached via the targets table)."""
+    from .ea_class_prior import single_temperature_targets
+
+    return {k: c for k, c, _ in single_temperature_targets()}[key]
+
+
+def core_priors(single_temperature_ea_prior: Optional[bool] = None) -> Tuple[CorePrior, ...]:
+    """The full priors table, in the order the sampler consumes it.
+
+    ``single_temperature_ea_prior`` switches B55's rows in; ``None`` reads
+    ``B55_SINGLE_TEMPERATURE_EA_PRIOR`` at call time.
+    """
+    if single_temperature_ea_prior is None:
+        single_temperature_ea_prior = B55_SINGLE_TEMPERATURE_EA_PRIOR
     return tuple(
         _b1_priors() + _b3_priors() + _b7_priors() + _b8_priors() + _b13_priors()
         + _b34_priors() + _b18_priors() + _b39_priors() + _declared_band_priors()
+        + (_b55_priors() if single_temperature_ea_prior else [])
     )
 
 
@@ -1127,6 +1192,8 @@ def draw_from_rng(
     b18: Dict[str, float] = {}   # ENV-B18: the pyrazine block's drawn coordinates
     b39: Dict[str, float] = {}   # B41: the fed 3-deoxy triangle's drawn coordinates
     b13: Dict[str, Dict[str, float]] = {}   # ENV-B13: the disputed trunk sinks
+    b55: Dict[str, float] = {}   # B55: drawn barriers of the single-temperature sulfur constants
+    b55_values: Optional[Dict[str, Tuple[float, ...]]] = None
     k_dpo_af: Optional[float] = None
     coords: Dict[str, float] = {}
     q10 = None
@@ -1191,6 +1258,13 @@ def draw_from_rng(
             u = float(g.uniform(-0.5, 0.5))
             value = 10.0 ** (log_d * u)
             coords[p.key + ".D"] = 10.0 ** log_d
+        elif p.distribution == EMPIRICAL_CLASS:
+            # B55: the inverse empirical CDF of the class's measured barriers at a uniform quantile.
+            from .ea_class_prior import class_values, empirical_quantile
+
+            if b55_values is None:
+                b55_values = class_values()
+            value = empirical_quantile(b55_values[_b55_class_of(p.key.split(".")[1])], float(g.uniform(0.0, 1.0)))
         else:
             raise ValueError(f"{p.key}: distribution {p.distribution!r} is not samplable")
         coords[p.key] = value
@@ -1218,6 +1292,8 @@ def draw_from_rng(
             b18[p.key.split(".", 1)[1]] = value
         elif p.key.startswith("b39."):
             b39[p.key.split(".", 1)[1]] = value
+        elif p.key.startswith("b55."):
+            b55[p.key.split(".")[1]] = value
         elif p.key == "b7.k_dpo_af.log10_k":
             k_dpo_af = 10.0 ** value
         elif p.key == "lipid.q10":
@@ -1279,6 +1355,8 @@ def draw_from_rng(
         coords.update(sulfur["coords"])
     if oxygen:
         maillard["oxygen"] = oxygen   # B11: the drawn consumers (only when a B11 report ships)
+    if b55:
+        maillard["single_temperature_ea_kj_mol"] = b55   # B55: read by core_parameters' sulfur branch
     if b3_k or b3_ea:
         frozen_b3 = frozen_parameters(ACRYLAMIDE)
         k_block = dict(frozen_b3["log10_k_ref_at_160C"]); k_block.update(b3_k)
@@ -1359,6 +1437,26 @@ def _run_draw(args: Tuple[PanelDraw, Tuple[_Job, ...]]) -> List[List[Optional[fl
     return out
 
 
+def _discrepancy_sigmas(setting: Any) -> Dict[str, float]:
+    """B56: ``{lane: sigma_log10}`` for a switch setting (see :func:`propagate_panel`); {} when off."""
+    if setting is None:
+        setting = B56_STRUCTURAL_DISCREPANCY
+    if setting is False:
+        return {}
+    if setting is True:
+        payload = data_access.load_json(DISCREPANCY_PATH)
+        return {str(k): float(v) for k, v in payload["sigma_log10_by_lane"].items()}
+    return {str(k): float(v) for k, v in dict(setting).items()}
+
+
+def _discrepancy_normals(seed: int, benchmark_id: str, compound: str, n: int) -> np.ndarray:
+    """``n`` standard normals for one row, keyed on (seed, benchmark, compound) -- one per draw index."""
+    import hashlib
+
+    digest = hashlib.sha256(f"b56|{benchmark_id}|{compound}".encode("utf-8")).digest()
+    return np.random.default_rng([int(seed), int.from_bytes(digest[:8], "little")]).standard_normal(int(n))
+
+
 def _percentile(values: Sequence[float], pct: float) -> float:
     return float(np.percentile(np.asarray(values, dtype=float), pct, method="linear"))
 
@@ -1369,7 +1467,8 @@ def propagate_panel(
     n_samples: int = 200,
     seed: int = 0,
     workers: int = 1,
-    priors: Sequence[CorePrior] = CORE_PRIORS,
+    priors: Optional[Sequence[CorePrior]] = None,
+    structural_discrepancy: Any = None,
 ) -> Dict[str, Any]:
     """
     Re-integrate every answerable (benchmark, compound) of the panel per draw.
@@ -1378,7 +1477,14 @@ def propagate_panel(
     from :func:`panel_bundles`. ``workers > 1`` fans the draws out over
     processes; the result is identical for any worker count because each
     draw is seeded independently and collected by index.
+
+    ``priors`` ``None`` means :func:`core_priors` under the module switches.
+    ``structural_discrepancy`` (B56): ``None`` reads ``B56_STRUCTURAL_DISCREPANCY``;
+    ``True`` / ``False`` force it; a ``{lane: sigma_log10}`` mapping uses those values.
     """
+    if priors is None:
+        priors = core_priors()
+    discrepancy = _discrepancy_sigmas(structural_discrepancy)
     if bundles is None:
         bundles, skipped = panel_bundles()
     else:
@@ -1454,6 +1560,7 @@ def propagate_panel(
                 "observable_multipliers_applied": observable,
                 "in_core_fit": in_core_fit(benchmark_id, compound),
                 "samples": [],
+                "draw_index": [],
             }
             by_lane.setdefault(declaration.lane, []).append((compound, unit, observable))
         for lane, pairs in by_lane.items():
@@ -1477,12 +1584,31 @@ def propagate_panel(
             results = pool.map(_run_draw, tasks, chunksize=1)
     else:
         results = [_run_draw(task) for task in tasks]
-    for per_draw in results:
+    for draw_index, per_draw in enumerate(results):
         for job, values in zip(jobs, per_draw, strict=True):
             rows = benches[job.bench_index]["rows"]
             for compound, value in zip(job.compounds, values, strict=True):
                 if value is not None and math.isfinite(value):
                     rows[compound]["samples"].append(value)
+                    rows[compound]["draw_index"].append(draw_index)
+
+    # ---- B56: the structural-discrepancy term -----------------------------
+    # One z per (draw, row), from a stream keyed on (seed, benchmark, compound) and indexed by the
+    # draw, so every arm that applies the term uses the same z and the point prediction is untouched.
+    if discrepancy:
+        for entry in benches:
+            for compound, row in entry["rows"].items():
+                sigma = float(discrepancy.get(str(row["lane"]), 0.0))
+                row["structural_sigma_log10"] = sigma
+                if sigma <= 0.0 or not row["samples"]:
+                    continue
+                z = _discrepancy_normals(int(seed), entry["benchmark_id"], compound, int(n_samples))
+                row["samples"] = [
+                    v * 10.0 ** (sigma * float(z[j])) for v, j in zip(row["samples"], row["draw_index"])
+                ]
+    for entry in benches:
+        for row in entry["rows"].values():
+            row.pop("draw_index")
 
     # ---- percentiles, coverage, the split -------------------------------
     minimum = max(5, int(n_samples) // 4)
@@ -1569,7 +1695,8 @@ def propagate_panel(
         "engine": engine_metadata(),
         "provenance": provenance.provenance_block(
             "core_prediction_uncertainty", generated_by="src/kinetic_core/uncertainty.py",
-            inputs=(*engine.fit_report_paths(), LAPLACE_PATH, *(path for path, _tag in bundles)),
+            inputs=(*engine.fit_report_paths(), LAPLACE_PATH, *(path for path, _tag in bundles),
+                    *((DISCREPANCY_PATH,) if discrepancy else ())),
         ),
         "summary": {
             "n_samples": int(n_samples),
@@ -1644,6 +1771,24 @@ def propagate_panel(
                     "since the primary-evidence refit only the step-level bundles). The stronger claim."
                 ),
             },
+            "single_temperature_ea_prior": {
+                "applied": any(p.key.startswith("b55.") for p in priors),
+                "rows": sum(1 for p in priors if p.key.startswith("b55.")),
+                "definition": (
+                    "B55 (kinetic_core_b55_b56_prereg.md): the sulfur constants known at 145 C only draw "
+                    "their barrier from the measured barriers of their reaction class; k(145 C) is held."
+                ),
+            },
+            "structural_discrepancy": {
+                "applied": bool(discrepancy),
+                "sigma_log10_by_lane": dict(sorted(discrepancy.items())),
+                "source": data_paths.rel(DISCREPANCY_PATH) if discrepancy else None,
+                "definition": (
+                    "B56: each sample of a row on lane L is multiplied by 10^(sigma_L z), z ~ N(0, 1) per "
+                    "(draw, row). sigma_L is a DECLARED MODEL-ERROR ASSUMPTION estimated from in-sample "
+                    "fit residuals only (dof-corrected), never from a panel row."
+                ),
+            },
             "sampled_prior_count": len(sampled),
             "fixed_prior_count": len(priors) - len(sampled),
             "unsampled_lanes": sorted(
@@ -1700,6 +1845,13 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         f"{s['out_of_sample_literature_coverage']['total']} "
         f"({s['out_of_sample_literature_coverage']['not_evaluable']} not evaluable); rows the core fit read: "
         f"{s['out_of_sample_literature_coverage']['rows_the_core_fit_read']}",
+        f"* B55 single-temperature Ea prior: "
+        f"{'on (' + str(s['single_temperature_ea_prior']['rows']) + ' rows)' if s.get('single_temperature_ea_prior', {}).get('applied') else 'off'}; "
+        f"B56 structural discrepancy: "
+        + (
+            ", ".join(f"{k} {v:.3f}" for k, v in s["structural_discrepancy"]["sigma_log10_by_lane"].items()) + " dex"
+            if s.get("structural_discrepancy", {}).get("applied") else "off"
+        ),
         f"* sampled priors {s['sampled_prior_count']}, fixed {s['fixed_prior_count']}; "
         f"lanes with NO sampled fit uncertainty: {', '.join(s['unsampled_lanes']) or 'none'}",
         "* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: "

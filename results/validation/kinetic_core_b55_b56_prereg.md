@@ -163,3 +163,26 @@ in-sample σ.
 ## 7. Verdict
 
 (filled in after the run, below this line, never above it)
+
+### Verdict (2026-10-28; `kinetic_core_b55_b56_ship_rule.{json,md}`, arms in `_b55_b56_arms/`)
+
+The baseline arm reproduces the committed envelope exactly (19/48, 0.9793 dex; out of sample 17/43,
+or 17/44 on the fixed denominator).
+
+**B55: SHIP.** T1 pass (40 rows checked — every 145 °C row and every non-sulfur row — bit-identical);
+T2 pass (median Δwidth **+0.70 dex** over the ten sulfur rows away from 145 °C, smallest +0.013 at
+Resconi's 150 °C); T3 pass (out of sample **17 → 20 of 44**: Yiltirak 100 °C FFT, 110 °C MFT and Bolton
+120 °C MFT move inside). Predictions 1–4 held (prediction 4, 0–3 hits, at its edge). The class medians
+(~101–104 kJ/mol) sit above the shipped 64.08, so the off-145 medians moved — downward for FFT at
+100–120 °C (171 → 61 µg/L at 100 °C against a measured 1.3), i.e. toward the measurement, not claimed in
+advance. Shipped: `B55_SINGLE_TEMPERATURE_EA_PRIOR = True`; envelope 22/48 (1.14 dex), 20/43 out of sample.
+
+**B56: DO NOT SHIP.** σ_lane (in sample, dof-corrected): sulfur 0.491, trunk 0.135, acrylamide 1.188,
+lipid 0.120 dex. Prediction 5 failed on acrylamide (1.19 above the declared [0.4, 0.9]; B3's rate rows
+miss by 0.95 dex RMS in sample). T4 on arm D (B55 + B56): **26/44 = 59 %** against [70 %, 95 %], median
+width 2.37 dex (B: 45 %, 1.25 dex). Per lane, D vs B: acrylamide 8/12 vs 4/12 (width 3.98 vs 0.91),
+sulfur 9/18 vs 7/18, lipid 7/8 both, trunk 2/6 both. Predictions 6 (15 % pass) and 7 (fails low) held.
+The term stays in the code behind `B56_STRUCTURAL_DISCREPANCY = False`. What it says: on the sulfur and
+trunk lanes the out-of-sample misses are 1–3 dex and the in-sample residuals 0.1–0.5 dex, so the
+structural error is invisible on the rows the model was fitted to; an honest discrepancy term needs a
+declared held-out calibration split, not a larger in-sample σ.

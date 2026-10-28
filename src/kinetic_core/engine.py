@@ -1876,6 +1876,19 @@ def core_parameters(
                 pick("decay_Ea_kJ_mol"),
             )
         )
+        # B55 (2026-10-28): a Monte-Carlo draw's barrier for a constant known at 145 C only. k_ref stays
+        # the fitted value at T_ref (418.15 K), so k(145 C) is unchanged; only the slope away from it
+        # moves. A key carrying a MEASURED barrier is refused: a draw never overwrites a measurement.
+        single_t = override.get("single_temperature_ea_kj_mol") or {}
+        if single_t:
+            from dataclasses import replace as _replace
+
+            from .parameters_sulfur import MEASURED_EA_OVERRIDES
+
+            for key, ea in single_t.items():
+                if key in MEASURED_EA_OVERRIDES:
+                    raise ValueError(f"{key!r} carries a measured barrier; a B55 draw may not replace it")
+                parameters[key] = _replace(parameters[key], ea_kj_mol=float(ea))
         # B11: the oxygen consumers from the report's "oxygen" block (or a draw's), else the
         # inert zero defaults MEASURED_SULFUR already carries.
         oxygen: Dict[str, float] = {}

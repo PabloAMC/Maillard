@@ -2799,3 +2799,14 @@ each wave's pre-registration). Order and status:
 - Backlog, not started: volatile stripping during open or vented processing (Henry's constants already
   in the corpus); protein-thiol binding as a candidate identity of the thiol sink in matrices; a helper
   that builds heat-up ramps from a process description.
+
+### Envelope honesty: B55 / B56 (2026-10-28, owner: "the 90 % interval covers 20 of 48")
+
+- [x] **B55** — Ea prior for the 31 sulfur constants known at 145 °C only, from the corpus's measured
+  barriers by class (`src/kinetic_core/ea_class_prior.py`). SHIPPED: out of sample 17 → 20 of 44, every
+  145 °C row bit-identical (`results/validation/kinetic_core_b55_b56_ship_rule.md`).
+- [x] **B56** — per-lane structural discrepancy from in-sample residuals. NOT SHIPPED: 59 % against a
+  pre-registered [70, 95] % (fails low; acrylamide σ 1.19 dex does most of the work). Switch kept, off.
+- [ ] Next: a declared held-out CALIBRATION split (`FIT_HOLDOUT_DECLARATION.md` amendment) on which a
+  discrepancy σ may be estimated without touching the scored out-of-sample rows; and the joint
+  (k(145 °C), Ea) refit B55 ignores (it overstates width near the fit's own temperatures).
