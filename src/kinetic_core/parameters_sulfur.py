@@ -132,7 +132,7 @@ class SulfurParameter:
                 f"{UNIT_BY_ORDER[self.order]!r}, got {self.unit!r}"
             )
         if self.ph_factor not in (
-            "", "acid", "base", "neutral_h2s", "hs_anion", "thiolate"
+            "", "acid", "base", "neutral_h2s", "hs_anion", "thiolate", "hydroxide"
         ):
             raise ValueError(f"{self.key}: unknown ph_factor {self.ph_factor!r}")
 
@@ -427,6 +427,47 @@ class TtcaFormation:
 
 TTCA_FORMATION = TtcaFormation()
 
+
+# ---------------------------------------------------------------------------
+# WAVE B61 (2026-10-28): NORFURANEOL'S HYDROXIDE-CATALYSED DECAY, MEASURED
+# ---------------------------------------------------------------------------
+# Mikami, Nakamura, Yamada & Murata 2017 (mikami2017_extraction.md) heat pure norfuraneol (1.7-1.8 mM)
+# alone in 0.2 M Na/K phosphate pH 8.0 at 100 C: first order, k = 0.032 1/min (t1/2 22 min; Fig. 6B,
+# figure-read +-10 %), ~710x the engine's pH-independent r_nf_decay at 100 C. Their xylose-lysine pot
+# bounds it at >= 1.8e-3 1/min at pH 7 and shows no net loss at pH 6 -- what specific-base catalysis
+# (a decade per pH unit) predicts from the pH 8 point. So a PARALLEL step r_nf_decay_oh with the
+# "hydroxide" pH factor; r_nf_decay is untouched. The constant is MEASURED at 100 C; at the engine's
+# pH 5 normalisation log10 k = log10(0.032) - 3. DECLARED ASSUMPTION: the barrier was never measured;
+# its point value is the median of the corpus's measured carbohydrate-class barriers (B55's
+# ea_class_prior, 103.7 kJ/mol), with k held at the 100 C anchor. Pre-registration:
+# kinetic_core_b61_prereg.md. Off until a SHIP verdict.
+@dataclass(frozen=True)
+class NfHydroxideDecay:
+    enabled: bool = False
+    k_ph8_per_min: float = 0.032
+    #: Amendment 1 (before any fit): the IN-SITU pH the engine computes for Mikami's pot (0.2 M phosphate,
+    #: label pH 8.0, 100 C), not the label, so the engine reproduces the measured constant in its own
+    #: description of the measured pot. Anchored at the label the engine gave 0.0387 1/min (+0.08 dex).
+    ph_of_measurement: float = 8.082
+    t_anchor_c: float = 100.0
+    ea_kj_mol: float = 103.7
+    source: str = ("Mikami, Nakamura, Yamada & Murata 2017, Food Sci. Technol. Res. 23:283 (10.3136/fstr.23.283), "
+                   "Fig. 6B: norfuraneol 1.7-1.8 mM alone, 0.2 M phosphate pH 8.0, 100 C, k = 0.032 1/min")
+
+    @property
+    def log10_k_anchor_ph5(self) -> float:
+        """log10 k at the anchor temperature, normalised to pH 5 like every engine pH factor."""
+        return math.log10(self.k_ph8_per_min) - (self.ph_of_measurement - PH_NORMALISATION)
+
+    def k_ph5(self, temperature_k: float, ea_kj_mol: Optional[float] = None) -> float:
+        """k at pH 5 and ``temperature_k``, Arrhenius from the 100 C anchor."""
+        ea = self.ea_kj_mol if ea_kj_mol is None else float(ea_kj_mol)
+        t_anchor_k = self.t_anchor_c + 273.15
+        return 10.0 ** self.log10_k_anchor_ph5 * math.exp(-ea / R_KJ * (1.0 / float(temperature_k) - 1.0 / t_anchor_k))
+
+
+NF_HYDROXIDE_DECAY = NfHydroxideDecay()
+
 THIAMINE_H2S_SHARE_FLOOR_PH: float = 6.25
 
 
@@ -624,7 +665,7 @@ def ph_factor(kind: str, ph: float, temperature_k: float = T_REF_S_K,
     SAME temperature -- so that a fitted k_ref always means "k at pH 5", with no
     temperature dependence smuggled in through the normalisation.
 
-    FIVE KINDS. The assignment of a step to a kind is a STRUCTURAL claim about
+    SIX KINDS. The assignment of a step to a kind is a STRUCTURAL claim about
     its mechanism and carries no number:
 
       * ``"acid"`` -- 1,2-enolisation / dehydration to the 3-deoxyosone. Acid-
@@ -657,6 +698,11 @@ def ph_factor(kind: str, ph: float, temperature_k: float = T_REF_S_K,
         same grid). B2 had no pH dependence on either lane, which is why it
         loaded the whole observed FFT-versus-pH slope onto FORMATION.
 
+      * ``"hydroxide"`` -- B61 (2026-10-28): SPECIFIC-BASE catalysis, [OH-]
+        relative to pH 5 at the same temperature, one decade per pH unit (Kw cancels
+        in the ratio). Not ``"base"``, which is the cysteine free-amine fraction.
+        Norfuraneol's ring opening through its enolate (Mikami 2017).
+
     WHERE THE MAXIMUM COMES FROM. [1-deoxypentosone] rises with pH while
     [neutral H2S] falls, so their product is peaked; at reaction temperature
     both midpoints sit inside pH 5-9 rather than three units outside it, so the
@@ -676,6 +722,8 @@ def ph_factor(kind: str, ph: float, temperature_k: float = T_REF_S_K,
             free_amine_fraction(ph, t_k, i_m)
             / free_amine_fraction(PH_NORMALISATION, t_k)
         )
+    if kind == "hydroxide":
+        return 10.0 ** (float(ph) - PH_NORMALISATION)
     if kind == "neutral_h2s":
         return (
             neutral_h2s_fraction(ph, t_k, i_m)

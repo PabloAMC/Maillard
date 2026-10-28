@@ -884,6 +884,11 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     Reaction("r_ttca_form", {"Cys": 1, "PENT": 1}, {"TTCA": 1}, "k_ttca_form",
              "B58. Cysteine + pentose -> TTCA, the forward half of the measured TTCA equilibrium "
              "(Cao 2017, K ~ 60 L/mol); detailed balance against r_ttca_cys."),
+    # B61 (2026-10-28): norfuraneol's hydroxide-catalysed decay, measured at pH 8 / 100 C by Mikami 2017
+    # (parameters_sulfur.NF_HYDROXIDE_DECAY); in parallel with the pH-independent r_nf_decay, zero while
+    # the wave's switch is off.
+    Reaction("r_nf_decay_oh", {"NF": 1}, {"FRAG_C": 5}, "k_nf_decay_oh",
+             "B61. Norfuraneol -> fragments through its enolate, specific-base catalysed (Mikami 2017)."),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.
@@ -1179,6 +1184,8 @@ def sulfur_rate_constants_at(
             continue  # B50: derived below from the two thiamine steps
         if key == "k_ttca_form":
             continue  # B58: derived below from r_ttca_cys by detailed balance
+        if key == "k_nf_decay_oh":
+            continue  # B61: a measured constant, below
         if key == "k_gsh_h2s":
             out[reaction.key] = glutathione_thermolysis_k(ph_table, float(temperature_k))
             continue
@@ -1237,6 +1244,13 @@ def sulfur_rate_constants_at(
 
     _ttca = _ps.TTCA_FORMATION
     out["r_ttca_form"] = float(_ttca.k_l_per_mmol) * out["r_ttca_cys"] if _ttca.enabled else 0.0
+
+    # DERIVED RATE 0c (B61): norfuraneol's hydroxide-catalysed decay, Mikami 2017's measured constant.
+    _nf_oh = _ps.NF_HYDROXIDE_DECAY
+    out["r_nf_decay_oh"] = (
+        _nf_oh.k_ph5(float(temperature_k)) * ph_factor("hydroxide", ph, float(temperature_k), ionic_strength_m)
+        if _nf_oh.enabled else 0.0
+    )
 
     _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
     out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct
