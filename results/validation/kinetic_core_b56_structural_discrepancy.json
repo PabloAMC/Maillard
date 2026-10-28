@@ -1,0 +1,377 @@
+{
+  "artifact": "kinetic_core_b56_structural_discrepancy",
+  "estimator": "sigma_L^2 = sum_f c_f sum_i r_i^2 / sum_f n_used_f, c_f = n_f/(n_f - p_f); r_i the log10 residual at the frozen optimum of a two-sided row the fit read. A DECLARED MODEL-ERROR ASSUMPTION estimated in sample only, not a measurement; the parameter share is the dof correction and is not subtracted again.",
+  "lanes": {
+    "acrylamide": {
+      "fits": [
+        {
+          "dof_correction": 1.5789473684210527,
+          "fit": "results/validation/kinetic_core_b3_fit_report.json",
+          "how": "rows[] of kind rate / ppb: log10(fold_error); Ea rows (kJ/mol) and the ceiling row excluded",
+          "n_free": 11,
+          "n_rows_in_objective": 30,
+          "n_used": 17,
+          "residuals_log10": {
+            "claeys_ala_kE_160C": 0.08890794374135315,
+            "claeys_ala_kF_160C": -0.23844273966505436,
+            "claeys_control_kE_160C": 0.0564524987249513,
+            "claeys_control_kF_160C": -0.22516470954103435,
+            "claeys_cys_kE_160C": -0.31094043416154765,
+            "claeys_cys_kF_160C": -0.27241195125704065,
+            "claeys_gln_kE_160C": -0.033430127575438506,
+            "claeys_gln_kF_160C": -0.7858330633517548,
+            "claeys_lys_kE_160C": -0.2530744381207262,
+            "claeys_lys_kF_160C": -0.3684891061785945,
+            "dv1_glucose_kE_160C": 0.1021665576658189,
+            "knol2005_k6_120C": -0.46868790120007586,
+            "knol2005_k6_140C": -0.14109072184480825,
+            "knol2005_k6_160C": 0.15719064925377094,
+            "knol2005_k6_180C": 0.42864170724387646,
+            "knol2005_k6_200C": 0.6768416146804989,
+            "spi_extrusion_130C_acrylamide_ppb": -3.628049921003801
+          },
+          "rms_log10_uncorrected": 0.9451839611779137
+        }
+      ],
+      "n_used": 17,
+      "rms_log10_uncorrected": 0.9451839611779137,
+      "sigma_log10": 1.187681988581986
+    },
+    "lipid": {
+      "fits": [
+        {
+          "dof_correction": 3.0,
+          "fit": "results/validation/kinetic_core_b6_fit_report.json",
+          "how": "fit_table: log10(predicted / measured relative %)",
+          "n_free": 12,
+          "n_rows_in_objective": 18,
+          "n_used": 18,
+          "residuals_log10": {
+            "mixed_ct_tt_9_13:DECADIENAL": 0.001110924066619424,
+            "mixed_ct_tt_9_13:HEXANAL": -0.018290538667770924,
+            "mixed_ct_tt_9_13:ME_13_OXO_TRIDECADIENOATE": 0.0620951362626628,
+            "mixed_ct_tt_9_13:ME_9_OXONONANOATE": 0.02184141502929152,
+            "mixed_ct_tt_9_13:ME_OCTANOATE": 0.015963779192488002,
+            "mixed_ct_tt_9_13:PENTANE": -0.12444686260562132,
+            "pure_ct_13:DECADIENAL": 0.15354475176865487,
+            "pure_ct_13:HEXANAL": 0.007503925007008727,
+            "pure_ct_13:ME_13_OXO_TRIDECADIENOATE": -0.014200925574394334,
+            "pure_ct_13:ME_9_OXONONANOATE": -0.16290965220873996,
+            "pure_ct_13:ME_OCTANOATE": -0.11778326773053871,
+            "pure_ct_13:PENTANE": 0.04288559949691991,
+            "tt_9_13:DECADIENAL": -1.5959619571457196e-14,
+            "tt_9_13:HEXANAL": -6.421104620727732e-11,
+            "tt_9_13:ME_13_OXO_TRIDECADIENOATE": -6.358322081008543e-11,
+            "tt_9_13:ME_9_OXONONANOATE": -1.8418654611168173e-14,
+            "tt_9_13:ME_OCTANOATE": -3.678909284900946e-14,
+            "tt_9_13:PENTANE": 1.2356743632404988e-09
+          },
+          "rms_log10_uncorrected": 0.06932054719086345
+        }
+      ],
+      "n_used": 18,
+      "rms_log10_uncorrected": 0.06932054719086345,
+      "sigma_log10": 0.12006670974305152
+    },
+    "sulfur": {
+      "fits": [
+        {
+          "dof_correction": 1.7419354838709677,
+          "fit": "results/validation/kinetic_core_b9_laplace_covariance.json",
+          "how": "residuals_at_optimum x the row's sigma_log (B2.3/B8 row table); pH, ceiling and floor rows excluded",
+          "n_free": 23,
+          "n_rows_in_objective": 54,
+          "n_used": 49,
+          "residuals_log10": {
+            "cerny_isomer_split": -0.11404486200524808,
+            "cerny_ternary_thiamine_share": -0.1773839161427162,
+            "fed_c2c3_MFT": -0.13128860935581801,
+            "fed_c2c3_MFT_pH3": 1.2530938110043583,
+            "fed_c2c3_MFT_pH7": -0.3376627931230592,
+            "fed_furfural_h2s_FFT": 0.16963537568148956,
+            "fed_mgo_h2s_1to1_MP": 0.025265075142483124,
+            "fed_mgo_h2s_1to2_MP": -0.02553901278532274,
+            "fed_nf_cys_MFT": 0.30933609623791275,
+            "fed_nf_h2s_MFT": 0.12900975729222705,
+            "fed_ribose_h2s_FFT": 0.011824858501194734,
+            "fed_ribose_h2s_MFT": 0.16643711549114723,
+            "fed_tdp_h2s_FFT": 0.1422053293750088,
+            "fed_thiamine_MFT": -0.07595792080800833,
+            "feng_ARP_conversion_100C": 0.06875420382851569,
+            "feng_ARP_conversion_120C": 0.019855231100481395,
+            "hofmann_ribose_FUR_insitu": -0.11722208119381848,
+            "hofmann_ribose_NF_insitu": 0.11202542377350894,
+            "kang_100C_FFT": -0.25194149609721245,
+            "kang_100C_FUR": 0.5914633630830852,
+            "kang_100C_MFT": -0.15796485224684842,
+            "kang_100C_MFT_over_FFT": 0.09417896568048231,
+            "kang_100C_cys_conversion": -0.048772257183106994,
+            "kang_120C_FFT": -0.1984010251510564,
+            "kang_120C_FUR": 0.16024492812516974,
+            "kang_120C_MFT": -0.11784701329575904,
+            "kang_120C_cys_conversion": -0.06566612911077901,
+            "kumazawa_FFT_retention_pH3_0": -0.1606389195844664,
+            "kumazawa_FFT_retention_pH4_0": -0.14862007832842059,
+            "kumazawa_FFT_retention_pH5_0": -0.1408016545278535,
+            "kumazawa_FFT_retention_pH5_4": -0.1371605899622034,
+            "kumazawa_FFT_retention_pH6_0": -0.08819507823285608,
+            "kumazawa_FFT_retention_pH6_4": 0.28317523884951806,
+            "vanseeventer_cys_conversion": 0.20261920060912078,
+            "vanseeventer_ribose_conversion": 0.12493873660815519,
+            "whitfield_mercaptoketone_over_MFT": -0.21872171020296502,
+            "whitfield_nf_cys_MFT": -0.3391934615029076,
+            "whitfield_nf_h2s_MFT": -0.998893033029931,
+            "zhai_FFT_fold_120_over_100": 0.053540474395261495,
+            "zhai_MFT_fold_120_over_100": 0.04011784539826609,
+            "zhang_fig1_cys_MMFT_over_MFT": 0.5362865956737781,
+            "zhang_fig1_cys_dimer_over_MFT": -0.9449537202142659,
+            "zhang_fig1_gcys_dimer_over_MFT": 0.02152794068551526,
+            "zhou_pH7_ACTZ": -0.08902364428128272,
+            "zhou_pH7_FFT": -0.47297530677147526,
+            "zhou_pH7_FUR_arp_alone": -0.2568665789814732,
+            "zhou_pH7_MFT": -0.5580294615829545,
+            "zhou_pH7_MFT_over_FFT": -0.08508822839052953,
+            "zhou_pH7_dimer_over_MFT": -1.0405542047722363
+          },
+          "rms_log10_uncorrected": 0.3720511420118927
+        }
+      ],
+      "n_used": 49,
+      "rms_log10_uncorrected": 0.3720511420118927,
+      "sigma_log10": 0.49104203954799486
+    },
+    "trunk": {
+      "fits": [
+        {
+          "dof_correction": 1.023121387283237,
+          "fit": "results/validation/kinetic_core_b1_fit_report.json (variant_A, the variant every lane inherits)",
+          "grouped_robust": {
+            "1-DG@100C": {
+              "n": 14,
+              "robust_sigma_log10": 0.09109254447300613
+            },
+            "1-DG@120C": {
+              "n": 9,
+              "robust_sigma_log10": 0.13700686446564048
+            },
+            "1-DG@80C": {
+              "n": 11,
+              "robust_sigma_log10": 0.054366086937583706
+            },
+            "3-DG@100C": {
+              "n": 12,
+              "robust_sigma_log10": 0.06142180013237506
+            },
+            "3-DG@120C": {
+              "n": 8,
+              "robust_sigma_log10": 0.11118673360730588
+            },
+            "3-DG@80C": {
+              "n": 16,
+              "robust_sigma_log10": 0.1134753240293618
+            },
+            "DFG@100C": {
+              "n": 15,
+              "robust_sigma_log10": 0.019348997135013035
+            },
+            "DFG@120C": {
+              "n": 13,
+              "robust_sigma_log10": 0.08043029621712747
+            },
+            "DFG@80C": {
+              "n": 16,
+              "robust_sigma_log10": 0.106682512920743
+            },
+            "acetic_acid@100C": {
+              "n": 17,
+              "robust_sigma_log10": 0.03853493966048247
+            },
+            "acetic_acid@120C": {
+              "n": 13,
+              "robust_sigma_log10": 0.06462579291282904
+            },
+            "acetic_acid@80C": {
+              "n": 12,
+              "robust_sigma_log10": 0.05783131362170827
+            },
+            "formic_acid@100C": {
+              "n": 12,
+              "robust_sigma_log10": 0.08742829346542384
+            },
+            "formic_acid@120C": {
+              "n": 11,
+              "robust_sigma_log10": 0.4687296731046831
+            },
+            "formic_acid@80C": {
+              "n": 8,
+              "robust_sigma_log10": 0.07061350606922624
+            },
+            "fructose@100C": {
+              "n": 16,
+              "robust_sigma_log10": 0.23814052287057547
+            },
+            "fructose@120C": {
+              "n": 13,
+              "robust_sigma_log10": 0.21580083863126698
+            },
+            "fructose@80C": {
+              "n": 13,
+              "robust_sigma_log10": 0.24953160957140322
+            },
+            "glucose@100C": {
+              "n": 15,
+              "robust_sigma_log10": 0.01329562769694531
+            },
+            "glucose@120C": {
+              "n": 12,
+              "robust_sigma_log10": 0.04174220572368264
+            },
+            "glucose@80C": {
+              "n": 17,
+              "robust_sigma_log10": 0.010816142489940539
+            },
+            "glycine@100C": {
+              "n": 13,
+              "robust_sigma_log10": 0.003756875754182463
+            },
+            "glycine@120C": {
+              "n": 12,
+              "robust_sigma_log10": 0.008360396649708744
+            },
+            "glycine@80C": {
+              "n": 19,
+              "robust_sigma_log10": 0.015732411299383405
+            },
+            "methylglyoxal@100C": {
+              "n": 17,
+              "robust_sigma_log10": 0.09635944235945909
+            },
+            "methylglyoxal@120C": {
+              "n": 10,
+              "robust_sigma_log10": 0.09420132533142524
+            },
+            "methylglyoxal@80C": {
+              "n": 10,
+              "robust_sigma_log10": 0.1508240011401071
+            }
+          },
+          "how": "the report prints no row residuals: per (species, T) group, sum r^2 ~ n_g x (1.4826 x log10 median fold error)^2 (a declared robust approximation)",
+          "n_free": 8,
+          "n_rows_in_objective": 354,
+          "n_used": 354,
+          "rms_log10_uncorrected": 0.13482863458124955
+        },
+        {
+          "dof_correction": 1.5,
+          "fit": "results/validation/kinetic_core_b7_fit_report.json",
+          "how": "fit.residual_log10_fold",
+          "n_free": 1,
+          "n_rows_in_objective": 3,
+          "n_used": 3,
+          "residuals_log10": {
+            "arabinose/glycine HDMF": -0.147954834792293,
+            "ribose/glycine HDMF": 0.0033128405383560356,
+            "xylose/glycine HDMF": 0.14464199333482539
+          },
+          "rms_log10_uncorrected": 0.11947512193858457
+        },
+        {
+          "dof_correction": 2.5,
+          "fit": "results/validation/kinetic_core_b18_fit_report.json",
+          "how": "residual_by_row_dex",
+          "n_free": 6,
+          "n_rows_in_objective": 10,
+          "n_used": 10,
+          "residuals_log10": {
+            "leahy_MPZ_k_ph5_over_ph9": 0.02816413879941869,
+            "leahy_MPZ_k_ph7_over_ph9": -0.1296960311193227,
+            "leahy_PZ_k_ph5_over_ph9": -0.006889640328595883,
+            "leahy_PZ_k_ph7_over_ph9": 0.12452402477493961,
+            "zhou_DMP_rate_100C": 0.07147192480747723,
+            "zhou_DMP_rate_110C": -0.02433401952053703,
+            "zhou_DMP_rate_120C": -0.04860938020303173,
+            "zhou_PZ_rate_100C": 0.02487198366385232,
+            "zhou_PZ_rate_110C": -0.050995003884905944,
+            "zhou_PZ_rate_120C": 0.026110596750925832
+          },
+          "rms_log10_uncorrected": 0.06718042924330332
+        },
+        {
+          "dof_correction": 1.7142857142857142,
+          "fit": "results/validation/kinetic_core_b41_fit_report.json",
+          "how": "rows[].after_dex over the decisive rows",
+          "n_free": 5,
+          "n_rows_in_objective": 12,
+          "n_used": 12,
+          "residuals_log10": {
+            "fedDDG_dgal_max_uM": 0.010025831405676092,
+            "fedDDG_tdg_max_uM": 0.022765766952469138,
+            "fedDGAL_ddg_max_uM": 0.03762216982431096,
+            "fedDGAL_ddg_tmax_min": 0.031408464251624114,
+            "fedDGAL_tdg_share_60min": -0.21195858298620168,
+            "fedTDG_ddg_max_uM": 0.058254281876173195,
+            "fedTDG_ddg_tmax_min": -0.11539341870206953,
+            "fedTDG_dgal_share_60min": 0.0658270850804584,
+            "zhang_ratio_100C": -0.029896160593431684,
+            "zhang_ratio_105C": -0.008241762698150102,
+            "zhang_ratio_110C": 0.013975933971127017,
+            "zhang_ratio_95C": -0.06788837918376618
+          },
+          "rms_log10_uncorrected": 0.07892793708333848
+        }
+      ],
+      "n_used": 379,
+      "rms_log10_uncorrected": 0.13194297695847854,
+      "sigma_log10": 0.13482413748658642
+    }
+  },
+  "prereg": "results/validation/kinetic_core_b55_b56_prereg.md",
+  "provenance": {
+    "artifact": "kinetic_core_b56_structural_discrepancy",
+    "generated_by": "scripts/generators/generate_kinetic_core_b56_structural_discrepancy.py",
+    "generated_on": "2026-10-27",
+    "git": {
+      "branch": "worktree-agent-a267a3f6843234126",
+      "commit": "dc966f714c6daedb37a36b6bf80659dfe7cde51e",
+      "dirty": true,
+      "short": "dc966f71"
+    },
+    "inputs": [
+      {
+        "path": "results/validation/kinetic_core_b18_fit_report.json",
+        "sha256": "cc88208cc76d617340f00123c7f3cdd05cad979fc9b719f1e78aedc6f5eb0afe"
+      },
+      {
+        "path": "results/validation/kinetic_core_b1_fit_report.json",
+        "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b3_fit_report.json",
+        "sha256": "0263e84f19094f100ec562df30bf9945b49be6a0fd1f293f10a47840e46aabf6"
+      },
+      {
+        "path": "results/validation/kinetic_core_b41_fit_report.json",
+        "sha256": "4d37ce110800d3faa4d9b3144958d8e9a6d78fc7c534ea2860d4b4ad38b1c939"
+      },
+      {
+        "path": "results/validation/kinetic_core_b6_fit_report.json",
+        "sha256": "923940a43d2946b5a79afa476578650eb73a11217a80addbf741fff224091a8a"
+      },
+      {
+        "path": "results/validation/kinetic_core_b7_fit_report.json",
+        "sha256": "4691435ae8bc7802099ebff955fb36af1b3401e200b75486850827cd54a23c04"
+      },
+      {
+        "path": "results/validation/kinetic_core_b9_laplace_covariance.json",
+        "sha256": "219cf3a887b27f44b0ced51f273458e5e622e867ced4d74efce4a2587e9a8379"
+      }
+    ]
+  },
+  "sigma_log10_by_lane": {
+    "acrylamide": 1.187681988581986,
+    "lipid": 0.12006670974305152,
+    "sulfur": 0.49104203954799486,
+    "trunk": 0.13482413748658642
+  },
+  "wave": "B56"
+}

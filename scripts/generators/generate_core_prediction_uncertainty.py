@@ -53,18 +53,29 @@ def main(argv: Optional[List[str]] = None) -> int:
         help="drop every prior row whose key starts with this prefix (an ENV ship rule's BEFORE side, "
              "produced under the same per-coordinate streams as its AFTER; repeatable)",
     )
+    parser.add_argument(
+        "--b55", choices=("default", "on", "off"), default="default",
+        help="B55 single-temperature Ea prior (default: the module switch, i.e. the shipped behaviour)",
+    )
+    parser.add_argument(
+        "--b56", choices=("default", "on", "off"), default="default",
+        help="B56 structural-discrepancy term (default: the module switch, i.e. the shipped behaviour)",
+    )
     args = parser.parse_args(argv)
 
-    from src.kinetic_core.uncertainty import CORE_PRIORS, propagate_panel, write_artifact
+    from src.kinetic_core.uncertainty import core_priors, propagate_panel, write_artifact
 
-    priors = tuple(p for p in CORE_PRIORS if not any(p.key.startswith(x) for x in args.exclude_prior_prefix))
+    switch = {"default": None, "on": True, "off": False}
+    table = core_priors(single_temperature_ea_prior=switch[args.b55])
+    priors = tuple(p for p in table if not any(p.key.startswith(x) for x in args.exclude_prior_prefix))
     started = time.perf_counter()
     payload = propagate_panel(
-        n_samples=args.n_samples, seed=args.seed, workers=args.workers, priors=priors
+        n_samples=args.n_samples, seed=args.seed, workers=args.workers, priors=priors,
+        structural_discrepancy=switch[args.b56],
     )
     if args.exclude_prior_prefix:
         payload["summary"]["excluded_prior_prefixes"] = list(args.exclude_prior_prefix)
-        payload["summary"]["excluded_prior_rows"] = len(CORE_PRIORS) - len(priors)
+        payload["summary"]["excluded_prior_rows"] = len(table) - len(priors)
     wall = time.perf_counter() - started
     payload["summary"]["wall_seconds"] = round(wall, 1)
     payload["summary"]["workers"] = int(args.workers)

@@ -3017,3 +3017,14 @@ one dossier (a small alias table for the renamed ones) or to a triage line that 
   (lysine lane conflict, GSH -> 2-acetylthiazole, unmapped lipids, methionine chain), 5 prose-only. Zhou 2022 and
   Chen 2000/2002 deliberately NOT bundled (fit-pot reproducibility; charge ambiguity). Scores NOT regenerated: the
   next regeneration is the first per-row score (aggregate breach disclosed in the amendment, sec. 6).
+
+### Envelope honesty: B55 / B56 (2026-10-28, owner: "the 90 % interval covers 20 of 48")
+
+- [x] **B55** — Ea prior for the 31 sulfur constants known at 145 °C only, from the corpus's measured
+  barriers by class (`src/kinetic_core/ea_class_prior.py`). SHIPPED: out of sample 17 → 20 of 44, every
+  145 °C row bit-identical (`results/validation/kinetic_core_b55_b56_ship_rule.md`).
+- [x] **B56** — per-lane structural discrepancy from in-sample residuals. NOT SHIPPED: 59 % against a
+  pre-registered [70, 95] % (fails low; acrylamide σ 1.19 dex does most of the work). Switch kept, off.
+- [ ] Next: a declared held-out CALIBRATION split (`FIT_HOLDOUT_DECLARATION.md` amendment) on which a
+  discrepancy σ may be estimated without touching the scored out-of-sample rows; and the joint
+  (k(145 °C), Ea) refit B55 ignores (it overstates width near the fit's own temperatures).

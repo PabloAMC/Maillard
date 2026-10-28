@@ -320,6 +320,10 @@ def test_core_envelope_coverage_and_widths():
     # rows those constants reach move.
     # RE-PINNED 2026-10-27: 17/44 (1 n.e.) -> 19/48 (2 n.e.). The four new evaluable rows are the
     # fed-intermediate rows above, which the out-of-sample count excludes (still 17/43).
+    # RE-PINNED BY WAVE B55 (2026-10-28): 19/48 -> 22/48. The 31 sulfur constants known at 145 C only
+    # now draw their barrier from the measured barriers of their class (kinetic_core_b55_b56_ship_rule.md);
+    # every 145 C and non-sulfur row is bit-identical, the off-145 C sulfur rows widen (median +0.70 dex)
+    # and three of them (Yiltirak 100 C FFT, 110 C MFT, Bolton 120 C MFT) move inside.
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): 19/48 -> 20/48; sampled from B51's Laplace covariance (17/23 identified,
     # PSD by construction since the eigen-pseudo-inverse fix).
     assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (20, 48, 2)
@@ -342,6 +346,8 @@ def test_core_envelope_coverage_and_widths():
     # RE-PINNED BY WAVE B41: 0.9874 -> 1.0095 dex; the same caution -- the 3,4-DGE and HMF rows now carry
     # the fit's own width where they carried a printed band.
     # RE-PINNED 2026-10-27: 1.0095 -> 0.9793 dex over a changed row set (four more rows); not a narrowing.
+    # RE-PINNED BY WAVE B55 (2026-10-28): 0.9793 -> 1.1418 dex over the SAME row set -- a real widening,
+    # all of it on the sulfur rows away from 145 C.
     # RE-PINNED 2026-10-27 (B51 SHIPS under the acceptance rule, WAVES.md): 0.9793 -> 1.0095 dex (B51's covariance).
     assert lit["median_ci_width_log10"] == pytest.approx(1.0095, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
