@@ -2512,6 +2512,39 @@ MEASURED_EA_OVERRIDES: Mapping[str, float] = {
     "k_arp_tdp": ZHANG_EA_CYS_AMADORI_TO_ALPHA_DC_KJ_MOL,
 }
 
+# ---------------------------------------------------------------------------
+# WAVE B62 (2026-10-28): FURFURAL'S OWN BARRIERS, SWITCHED
+# ---------------------------------------------------------------------------
+# The engine's furfural sink (`r_fur_decay`, 0.38 1/min at 145 C) shares the carbonyl-sink family's fitted
+# 143.5 kJ/mol, ABOVE the lumped 64 kJ/mol its formation (`r_tdp_fur`) runs on -- so the model's furfural falls
+# with temperature where Kang 2026 measures it rising, and Yiltirak's FFT excess grows as T falls. Measured in
+# cysteine systems: furfural LOSS, Yaghmur 2005 (pH 5, 40-70 C, 46.5 kJ/mol, yaghmur2005_extraction.md); net
+# furfural FORMATION, Schirle-Keller & Reineccius 1992 (glucose + Cys, 80-150 C, Table 2 147 kJ/mol,
+# schirle1992_extraction.md). Garrett 1969 / Danon 2014 measure amine-free acid chemistry that carries no flux
+# in any scored pot and are NOT used. Only furfural's two steps move: norfuraneol formation measures 81-93
+# kJ/mol (Lau 2003, Pandit 2006), so the shared 64 is not raised. Pre-registration: kinetic_core_b62_prereg.md.
+# Off until a SHIP verdict.
+@dataclass(frozen=True)
+class FurfuralBarriers:
+    enabled: bool = False
+    #: (fitted key, measured barrier kJ/mol): the fit cannot move these, like MEASURED_EA_OVERRIDES
+    barriers_kj_mol: Tuple[Tuple[str, float], ...] = (("k_tdp_fur", 147.0), ("k_fur_decay", 46.5))
+    source: str = ("k_tdp_fur: Schirle-Keller & Reineccius 1992, ACS Symp. Ser. 490 ch. 19, Table 2, 35.18 kcal/mol; "
+                   "k_fur_decay: Yaghmur, Aserin, Abbas & Garti 2005, furfural disappearance with cysteine, water arm, "
+                   "46.50 kJ/mol")
+
+    def overrides(self) -> Dict[str, float]:
+        return dict(self.barriers_kj_mol) if self.enabled else {}
+
+
+FURFURAL_BARRIERS = FurfuralBarriers()
+
+
+def measured_ea_overrides() -> Dict[str, float]:
+    """Every barrier the fit cannot move: the shipped measurements plus any switched-on wave's (B62)."""
+    return {**MEASURED_EA_OVERRIDES, **FURFURAL_BARRIERS.overrides()}
+
+
 #: Which source each override came from, so a value can never be lifted out of
 #: this module without its conditions travelling with it.
 MEASURED_EA_OVERRIDE_ANCHORS: Mapping[str, str] = {
@@ -2922,14 +2955,15 @@ def with_fitted_sulfur(
     """
     out = sulfur_placeholders()
     families = dict(decay_ea or {})
+    measured = measured_ea_overrides()
     for key, log10k in fitted_log10k.items():
         if key not in out:
             raise KeyError(f"{key!r} is not a fitted sulfur step")
         family = decay_family_of(key)
         if key in NO_EA_KEYS:
             ea = None
-        elif key in MEASURED_EA_OVERRIDES:
-            ea = float(MEASURED_EA_OVERRIDES[key])
+        elif key in measured:
+            ea = float(measured[key])
         elif family is not None and family in families:
             ea = float(families[family])
         else:

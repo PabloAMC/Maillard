@@ -165,7 +165,7 @@ def single_temperature_targets() -> Tuple[Tuple[str, str, Optional[float]], ...]
     lumped = float(frozen["lumped_formation_Ea_kJ_mol"])
     out = []
     for key in frozen["log10_k_ref_at_145C"]:
-        if key in ps.MEASURED_EA_OVERRIDES or ps.decay_family_of(key) is not None:
+        if key in ps.measured_ea_overrides() or ps.decay_family_of(key) is not None:
             continue
         route = ps.FORMATION_ROUTE_OF.get(key)
         shipped = None if key in ps.NO_EA_KEYS else lumped
