@@ -2540,6 +2540,28 @@ class FurfuralBarriers:
 FURFURAL_BARRIERS = FurfuralBarriers()
 
 
+# ---------------------------------------------------------------------------
+# WAVE B63 (2026-10-28): THE POINT BARRIER OF A SINGLE-TEMPERATURE CONSTANT IS ITS MEASURED CLASS'S MEDIAN
+# ---------------------------------------------------------------------------
+# 31 sulfur constants are known at 145 C only and share the lumped route barrier (64.08 kJ/mol), which the
+# fit never identified (B2.3; B10's route split failed: Laplace sigma 74 / 52). Since B55 the ENVELOPE draws
+# each of them from the measured barriers of its class while the POINT kept 64.08, so off 145 C the point sat
+# in its own prior's lower tail (Yiltirak and Zhou FFT points 1-1.4 dex above their envelope medians; the
+# independent review of 2026-10-28). The evidence is the class: the point takes its median, k(145 C) held.
+# The medians are constants here because the class prior reads the registries THROUGH this module (a cycle);
+# tests/unit/test_kinetic_core_b63.py asserts they equal ``ea_class_prior``'s computed medians.
+# Pre-registration: kinetic_core_b63_prereg.md. Off until accepted.
+ROUTE_CLASS_MEDIAN_EA_KJ_MOL: Mapping[str, float] = {"sugar_trunk": 103.7, "thiol_assembly": 100.9}
+
+
+@dataclass(frozen=True)
+class SingleTemperatureBarriers:
+    enabled: bool = False
+
+
+SINGLE_TEMPERATURE_BARRIERS = SingleTemperatureBarriers()
+
+
 def measured_ea_overrides() -> Dict[str, float]:
     """Every barrier the fit cannot move: the shipped measurements plus any switched-on wave's (B62)."""
     return {**MEASURED_EA_OVERRIDES, **FURFURAL_BARRIERS.overrides()}
@@ -2966,6 +2988,9 @@ def with_fitted_sulfur(
             ea = float(measured[key])
         elif family is not None and family in families:
             ea = float(families[family])
+        elif SINGLE_TEMPERATURE_BARRIERS.enabled and formation_route_of(key) in ROUTE_CLASS_MEDIAN_EA_KJ_MOL:
+            # B63: a route-sharing constant takes its measured class's median, not the unidentified lump
+            ea = float(ROUTE_CLASS_MEDIAN_EA_KJ_MOL[formation_route_of(key)])
         else:
             # B10: a float gives every route the same barrier (every wave before
             # B10, bit for bit); a {route: Ea} mapping gives each step its route's.

@@ -169,6 +169,8 @@ def single_temperature_targets() -> Tuple[Tuple[str, str, Optional[float]], ...]
             continue
         route = ps.FORMATION_ROUTE_OF.get(key)
         shipped = None if key in ps.NO_EA_KEYS else lumped
+        if shipped is not None and ps.SINGLE_TEMPERATURE_BARRIERS.enabled and route in ps.ROUTE_CLASS_MEDIAN_EA_KJ_MOL:
+            shipped = float(ps.ROUTE_CLASS_MEDIAN_EA_KJ_MOL[route])  # B63: the point sits at its class's median
         out.append((key, CLASS_OF_ROUTE[route], shipped))
     return tuple(out)
 

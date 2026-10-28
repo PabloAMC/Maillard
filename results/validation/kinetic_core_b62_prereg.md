@@ -117,6 +117,14 @@ other key's barrier is unchanged.
 **Audit verdict: the ORDER is grounded; the magnitudes are transfers with wide bands.** Accept (A) when V1
 passes and the envelope carries both bands. The T-tests then show what the transfer does to the panel.
 
+## 4b. Amendment 2 (2026-10-28, before any B62 fit or score)
+
+Order changed: B63 (single-temperature barriers at their measured class's median) runs before B62, so B62's
+baseline is whatever ships after B61 and B63. `generate_kinetic_core_b62_fit.py` now imports the shipped wave's
+fit module by the engine's report name, instead of a hard-coded B61/B60 choice. Measured overrides take
+precedence over B63's class medians, so B62's two barriers (147 and 46.5 kJ/mol) are unaffected by B63. Nothing
+else in this pre-registration changes.
+
 ## 5. Verdict
 
 *(appended after the ship rule runs; nothing above this line is edited after that)*

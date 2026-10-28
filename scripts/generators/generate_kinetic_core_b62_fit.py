@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import dataclasses
+import importlib
 import json
 import sys
 from pathlib import Path
@@ -35,12 +36,10 @@ from src.kinetic_core import engine  # noqa: E402
 from src.kinetic_core import parameters_sulfur as ps  # noqa: E402
 from src.kinetic_core import ph_state, sulfur  # noqa: E402
 
-#: The baseline is what ships (prereg sec. 2): B61's module (its step on) if the engine reads B61, else B60's.
+#: The baseline is what ships (prereg sec. 2): the fit module of the wave the engine reads (B60, B61, B63, ...),
+#: which installs that wave's rows, physics and switches; read from the report's name, never hard-coded.
 SHIPPED_REPORT = engine._B2_FIT_REPORT
-if "b61" in SHIPPED_REPORT.name:
-    import generate_kinetic_core_b61_fit as B60  # noqa: E402,N812  (B60's objective with B61's step on)
-else:
-    import generate_kinetic_core_b60_fit as B60  # noqa: E402  (B51's rows and physics, B60's numerics)
+B60 = importlib.import_module("generate_" + SHIPPED_REPORT.name.replace("_fit_report.json", "_fit"))  # noqa: N816
 
 B51, B9, B23, B8 = B60.B51, B60.B9, B60.B23, B60.B8
 
