@@ -82,7 +82,7 @@ def main(argv=None) -> int:
 
     if args.consolidate:
         payload = B8.consolidate()
-        payload["wave"] = "B51 -- the pH state corrected against its thermodynamic sources, refitted on B47's rows (2026-10-27)"
+        payload["wave"] = "B58 -- TTCA formation as a measured equilibrium, refitted on B51's objective (2026-10-27)"
         payload["generated_by"] = "scripts/generators/generate_kinetic_core_b58_fit.py"
         payload["prereg"] = data_paths.rel(PREREG)
         payload["objective"]["form"] = (

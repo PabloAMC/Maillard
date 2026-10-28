@@ -1316,6 +1316,9 @@ class SulfurRun:
     #: for a clamped or prescribed-trajectory run, so that a caller cannot
     #: mistake an interpolation for a prediction.
     ph_series: Optional[np.ndarray] = None
+    #: B60: (node_times, k_nodes) -- the rate vectors the solver interpolated between, so a flux
+    #: audit (``reaction_flux_integrals``) uses exactly the constants the trajectory saw.
+    rate_nodes: Optional[Tuple[np.ndarray, np.ndarray]] = None
 
     def series(self, species_key: str) -> np.ndarray:
         return self.concentrations[:, SULFUR_INDEX[species_key]]
@@ -1367,6 +1370,61 @@ def _sulfur_extrapolation_warnings(
     return out
 
 
+#: B60 (2026-10-28): WHERE THE pH NODES SIT. "uniform" is the grid every wave through B58 ran on:
+#: ``ph_nodes`` points equally spaced in time. It is not converged. In a cysteine + pentose pot the
+#: in-situ pH falls most of its way in the first ~0.1 % of the run (Hofmann ribose pH 5, 145 C: 5.27
+#: -> 4.47 within 0.07 of 20 min), while the first uniform node sits at duration/40, so every rate
+#: constant through the transient is evaluated at the wrong pH; doubling the nodes moved that pot's MFT
+#: 39x and its final cysteine 220x. "log_and_linear" adds ``ph_nodes`` points geometrically spaced from
+#: 1e-5 x duration, which resolves the transient (41 vs 81 per family agree within 2 % on MFT and FFT
+#: in the three probe pots; results/validation/kinetic_core_b60_node_convergence.json). Frozen waves
+#: set "uniform" to reproduce their numbers. Pre-registration: kinetic_core_b60_prereg.md.
+PH_NODE_GRID: str = "log_and_linear"
+
+
+#: B60 amendment 1: HOW THE pH FIXED POINT IS ITERATED. "fixed_sweeps" is every wave through B58: plain
+#: Picard sweeps, stopped after ``ph_iterations`` whatever the residual. In the Kang TTCA pots it
+#: oscillates between two branches (final pH 5.52 / 6.55 / 5.56 / 6.37 after sweeps 2-5, residual ~1 pH)
+#: and settles only after ~20-40 sweeps. "relaxed_converged" under-relaxes each sweep by
+#: PH_FIXED_POINT_RELAXATION and iterates until the residual is below PH_FIXED_POINT_TOLERANCE (at least
+#: ``ph_iterations`` sweeps, at most PH_FIXED_POINT_MAX_SWEEPS). omega = 0.7 reached < 1e-3 pH within ~8
+#: sweeps on every probe system, where omega = 1 needed 40; the converged answer is the same for every omega
+#: tried (1.0 / 0.7 / 0.5 / 0.3), so the damping selects no branch. The tolerance is 1e-3 pH, not 1e-4: the
+#: residual floors at 3e-5 - 6e-4 pH from the ODE tolerances. A run left above PH_FIXED_POINT_FLAG is marked
+#: ``ph_fixed_point_converged = False`` in its metadata.
+PH_FIXED_POINT: str = "relaxed_converged"
+PH_FIXED_POINT_RELAXATION: float = 0.7
+PH_FIXED_POINT_TOLERANCE: float = 1e-3
+PH_FIXED_POINT_MAX_SWEEPS: int = 40
+PH_FIXED_POINT_FLAG: float = 1e-2
+
+
+#: B60: HOW THE SHARE ROWS' FLUX BUDGET IS INTEGRATED. "closed" is ``reaction_flux_integrals`` on a
+#: linear-and-log output grid with the run's own node constants (closes to < 1 %; see
+#: ``sulfur_flux_budget``). "linear_rederived" is every wave through B58, which did not close; frozen
+#: waves set it, with PH_NODE_GRID = "uniform" and PH_FIXED_POINT = "fixed_sweeps", to reproduce their numbers.
+FLUX_BUDGET: str = "closed"
+
+
+def ph_node_times(duration: float, n_nodes: int) -> np.ndarray:
+    """The times at which the dynamic pH (and with it every rate constant) is evaluated."""
+    linear = np.linspace(0.0, duration, n_nodes)
+    if PH_NODE_GRID == "uniform":
+        return linear
+    if PH_NODE_GRID != "log_and_linear":
+        raise ValueError(f"unknown PH_NODE_GRID {PH_NODE_GRID!r}")
+    return np.unique(np.concatenate([linear, np.geomspace(duration * 1e-5, duration, n_nodes)]))
+
+
+def rate_vector_at(node_times: np.ndarray, k_nodes: np.ndarray, t: float) -> np.ndarray:
+    """The rate vector at time ``t``: linear in time between the two nodes that bracket it."""
+    n_nodes = len(node_times)
+    lo = min(max(int(np.searchsorted(node_times, t, side="right")) - 1, 0), n_nodes - 2)
+    span = float(node_times[lo + 1] - node_times[lo])
+    w = min(max((float(t) - float(node_times[lo])) / span, 0.0), 1.0) if span > 0.0 else 0.0
+    return k_nodes[lo] * (1.0 - w) + k_nodes[lo + 1] * w
+
+
 def _solve_on_time_nodes(
     k_nodes: np.ndarray,
     node_times: np.ndarray,
@@ -1386,16 +1444,8 @@ def _solve_on_time_nodes(
     """
     from scipy.integrate import solve_ivp
 
-    n_nodes = len(node_times)
-    span = max(float(node_times[-1] - node_times[0]), 1e-12)
-
     def rhs(t: float, y: np.ndarray) -> np.ndarray:
-        position = (float(t) - node_times[0]) / span * (n_nodes - 1)
-        position = min(max(position, 0.0), float(n_nodes - 1))
-        lo = min(int(position), n_nodes - 2)
-        w = position - lo
-        k_t = k_nodes[lo] * (1.0 - w) + k_nodes[lo + 1] * w
-        return sulfur_derivatives(y, k_t)
+        return sulfur_derivatives(y, rate_vector_at(node_times, k_nodes, t))
 
     return solve_ivp(
         rhs, (0.0, duration), y0, t_eval=t_eval, method=method, rtol=rtol, atol=atol
@@ -1485,8 +1535,8 @@ def integrate_sulfur(
 
     if dynamic:
         assert ph_drift is not None
-        n_nodes = max(int(ph_nodes), 5)
-        node_times = np.linspace(0.0, duration, n_nodes)
+        node_times = ph_node_times(duration, max(int(ph_nodes), 5))
+        n_nodes = len(node_times)
         # every requested output time, plus the internal nodes, in one sorted
         # evaluation grid so that no extra integration is needed
         eval_times = np.unique(np.concatenate([grid, node_times]))
@@ -1515,7 +1565,14 @@ def integrate_sulfur(
         node_i = np.full(n_nodes, i0)
         node_cool = [c0] * n_nodes
         solution = None
-        for sweep in range(max(int(ph_iterations), 1)):
+        relaxed = PH_FIXED_POINT == "relaxed_converged"
+        if not relaxed and PH_FIXED_POINT != "fixed_sweeps":
+            raise ValueError(f"unknown PH_FIXED_POINT {PH_FIXED_POINT!r}")
+        min_sweeps = max(int(ph_iterations), 1)
+        max_sweeps = max(min_sweeps, PH_FIXED_POINT_MAX_SWEEPS) if relaxed else min_sweeps
+        sweeps_run = 0
+        for sweep in range(max_sweeps):
+            sweeps_run = sweep + 1
             k_nodes = np.array([
                 rate_vector(sulfur_rate_constants_at(
                     parameters, t_k, float(p), ph_label=c, ionic_strength_m=float(i)))
@@ -1537,9 +1594,14 @@ def integrate_sulfur(
                 fresh[j], node_i[j], node_cool[j] = _node_state(
                     {k: float(row[SULFUR_INDEX[k]]) for k in SULFUR_STATE_KEYS})
             ph_convergence = float(np.max(np.abs(fresh - node_ph)))
-            node_ph = fresh
-            if ph_convergence < 1e-4:
-                break
+            if relaxed:
+                node_ph = node_ph + PH_FIXED_POINT_RELAXATION * (fresh - node_ph)
+                if ph_convergence < PH_FIXED_POINT_TOLERANCE and sweeps_run >= min_sweeps:
+                    break
+            else:
+                node_ph = fresh
+                if ph_convergence < 1e-4:
+                    break
         assert solution is not None
         keep = np.searchsorted(eval_times, grid)
         keep = np.clip(keep, 0, len(eval_times) - 1)
@@ -1623,6 +1685,10 @@ def integrate_sulfur(
             "ph_final_cooled": float(ph_final_cooled),
             "ph_series": [float(v) for v in ph_series],  # type: ignore[union-attr]
             "ph_fixed_point_residual": ph_convergence,
+            "ph_fixed_point_sweeps": sweeps_run,
+            "ph_fixed_point_converged": bool(ph_convergence <= PH_FIXED_POINT_FLAG),
+            "ph_numerics_b60": {"node_grid": PH_NODE_GRID, "fixed_point": PH_FIXED_POINT,
+                                "relaxation": PH_FIXED_POINT_RELAXATION, "n_nodes": int(n_nodes)},
             "ionic_strength_M_final": float(node_i[-1]),
             "ph_state_corrections_b51": _ph.B51.as_dict(),
             "ph_drop_units_cooled": float(ph0 - ph_final_cooled),
@@ -1645,6 +1711,7 @@ def integrate_sulfur(
         ph_final=ph1,
         metadata=metadata,
         ph_series=ph_series,
+        rate_nodes=(np.asarray(node_times, dtype=float), np.asarray(k_nodes, dtype=float)),
     )
     for element in BALANCED_ELEMENTS:
         metadata[f"{element}_closure"] = run.element_closure(element)
@@ -1663,8 +1730,38 @@ def sulfur_flux_budget(
     ph_drift: Optional[PhDrift] = None,
     n_points: int = 201,
 ) -> Dict[str, float]:
-    """Time-integrated flux through every reaction, mmol/L."""
-    grid = np.linspace(0.0, float(duration_min), int(n_points))
+    """Time-integrated flux through every reaction, mmol/L.
+
+    B60: the rates are integrated on the union of a linear and a log-spaced output grid (a
+    cysteine + pentose transient lasts seconds; a linear grid of 101 points over 20 min does not see
+    it) and evaluated with the run's own node constants (``SulfurRun.rate_nodes``), so they are the
+    rates the trajectory saw -- B51's ionic strength and label-scale pH included. Before B60 the
+    budget re-derived the constants from the pH series alone and did not close (in Cao 2017's pot it
+    booked 2 575 mM of 3-deoxypentosone made from 400 mM of xylose).
+    """
+    duration = float(duration_min)
+    if FLUX_BUDGET == "linear_rederived":
+        return _legacy_flux_budget(parameters, temperature_k, initial, duration, ph, ph_final,
+                                   buffer_spec, ph_drift, n_points)
+    if FLUX_BUDGET != "closed":
+        raise ValueError(f"unknown FLUX_BUDGET {FLUX_BUDGET!r}")
+    grid = np.unique(np.concatenate([
+        np.linspace(0.0, duration, int(n_points)),
+        np.geomspace(duration * 1e-7, duration, int(n_points)),
+    ]))
+    run = integrate_sulfur(
+        parameters, temperature_k, initial, grid, ph=ph, ph_final=ph_final,
+        buffer_spec=buffer_spec, ph_drift=ph_drift,
+    )
+    return reaction_flux_integrals(run)
+
+
+def _legacy_flux_budget(parameters, temperature_k, initial, duration, ph, ph_final, buffer_spec,
+                        ph_drift, n_points) -> Dict[str, float]:
+    """The budget every wave through B58 scored its share rows on (``FLUX_BUDGET = "linear_rederived"``):
+    a linear output grid, constants re-derived from the pH series alone. Kept only so frozen waves
+    reproduce their numbers; it does not close."""
+    grid = np.linspace(0.0, duration, int(n_points))
     run = integrate_sulfur(
         parameters, temperature_k, initial, grid, ph=ph, ph_final=ph_final,
         buffer_spec=buffer_spec, ph_drift=ph_drift,
@@ -1681,6 +1778,38 @@ def sulfur_flux_budget(
         rows.append(sulfur_reaction_rates(run.concentrations[i], k_t))
     integral = np.trapezoid(np.array(rows), grid, axis=0)
     return {r.key: float(integral[j]) for j, r in enumerate(FULL_REACTIONS)}
+
+
+def reaction_flux_integrals(run: "SulfurRun") -> Dict[str, float]:
+    """Integral over the run of every reaction's rate, mmol/L, by the trapezoid rule on the run's
+    own output grid with the constants the solver used. Only as accurate as that grid is dense:
+    ``flux_closure`` says how well it closes."""
+    if run.rate_nodes is None:
+        raise ValueError("the run carries no rate nodes")
+    node_times, k_nodes = run.rate_nodes
+    rows = [
+        sulfur_reaction_rates(run.concentrations[i], rate_vector_at(node_times, k_nodes, float(t)))
+        for i, t in enumerate(run.times_min)
+    ]
+    integral = np.trapezoid(np.array(rows), run.times_min, axis=0)
+    return {r.key: float(integral[j]) for j, r in enumerate(FULL_REACTIONS)}
+
+
+def flux_closure(run: "SulfurRun", flux: Mapping[str, float], species: Sequence[str]) -> Dict[str, float]:
+    """For each species, |(final - initial) - net integrated production| over the larger of the
+    species' initial amount and its gross turnover: the relative error of the flux budget."""
+    out: Dict[str, float] = {}
+    for key in species:
+        net, gross = 0.0, 0.0
+        for rxn in FULL_REACTIONS:
+            nu = rxn.products.get(key, 0) - rxn.reactants.get(key, 0)
+            if nu:
+                net += nu * flux[rxn.key]
+                gross += abs(nu) * abs(flux[rxn.key])
+        change = run.final(key) - float(run.concentrations[0, SULFUR_INDEX[key]])
+        scale = max(float(run.concentrations[0, SULFUR_INDEX[key]]), gross, 1e-30)
+        out[key] = abs(change - net) / scale
+    return out
 
 
 # ---------------------------------------------------------------------------

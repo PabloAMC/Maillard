@@ -99,7 +99,7 @@ def main(argv=None) -> int:
     tasks = []
     for j, i in enumerate(idx):
         lo, hi = float(lower[i]), float(upper[i])
-        sigma = float(lap["sigma"][j])
+        sigma = float("nan") if lap["sigma"][j] is None else float(lap["sigma"][j])
         if not (np.isfinite(sigma) and lap["identified"][j]):
             sigma = 0.1 * (hi - lo)
         tasks.append((j, i, keys[j], lap["coordinates"][j]["kind"], x_opt, lo, hi, sigma, jtj_diag[j]))

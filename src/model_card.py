@@ -367,28 +367,32 @@ def run_gates(gates: Tuple[str, ...] = GATES) -> List[Dict[str, Any]]:
 #: the change itself, and every row it made worse is named here with the assumption it exposes, until the
 #: wave that fixes that assumption removes the entry. Declared, not computed: the ROWS are declared; their
 #: current fold errors are read live from the scorecard.
+#: 2026-10-28: B51's entry for the Hofmann ribose / xylose pH 5 pots ("~100x low", blamed on the
+#: thiolate-acting thiol sink) LEFT: on B60's converged pH trajectory those rows are 1.5-3.6x, so the
+#: miss was the unconverged numerics, not the sink (kinetic_core_b60_prereg.md sec. 6; tasks/lessons.md).
+#: B51.1's SUG-09 entry left too: on B60 the claim agrees again (ribose 60 vs glucose 32 ug/L FFT). The
+#: hexose entry it named is still unidentified; the scorecard keeps that row not evaluable.
 KNOWN_EXPOSED_ASSUMPTIONS: Tuple[Dict[str, Any], ...] = (
     {
-        "wave": "B51 (the pH state on GKL / Suleimenov & Seward constants)",
-        "rows": (
-            ("hofmann1998_ribose_cysteine_145C_20min_pH5", "2-Furfurylthiol (FFT)"),
-            ("hofmann1998_ribose_cysteine_145C_20min_pH5", "2-Methyl-3-furanthiol (MFT)"),
-            ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "2-Furfurylthiol (FFT)"),
-            ("mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5", "2-Methyl-3-furanthiol (MFT)"),
-        ),
+        "wave": "B60 (the pH trajectory converged: log-and-linear nodes, relaxed fixed point, closed flux budget)",
+        "rows": (),
+        "fit_rows": ("kang_120C_MFT", "kang_100C_MFT", "zhai_MFT_fold_120_over_100", "kang_100C_MFT_over_FFT"),
         "assumption": (
-            "the unidentified thiol sink is declared to act through the THIOLATE, with cysteine's thiol pK "
-            "standing in for MFT and FFT (neither is measured); under correct speciation it destroys the "
-            "thiols above pH ~5, so these buffered pH 5 pots are predicted ~100x low"
+            "the cysteine-catalysed pentose trunk (r_pent_dpo / r_pent_tdp, one shared Ea of 64 kJ/mol) destroys "
+            "cysteine and pentose in seconds where Cao 2017 and Zhang 2025b measure hours, so on a converged "
+            "trajectory the 100-120 C cysteine + pentose pots over-make MFT (fit rows up to +2.5 sigma; the old "
+            "oscillating pH hid it). B59 replaces the trunk with de Roos's Cys-Amadori network"
         ),
     },
     {
-        "wave": "B51 (the 25 C scale for the measured pH tables)",
+        "wave": "B60 (the pH trajectory converged)",
         "rows": (),
-        "claims": ("SUG-09",),
+        "claims": ("YIL-02", "CER07-PH-02"),
         "assumption": (
-            "the hexose entry to the thiols (r_glc_c2c3 / r_glc_fur, unidentified since B9) makes FFT from "
-            "a hexose that the paper does not detect; faster cysteine thermolysis in unbuffered pots feeds it"
+            "the furfural branch's temperature and pH dependence (TDP -> furfural -> + H2S -> FFT) is not measured: "
+            "the model's FFT/MFT is 6-60x the measured ratio and the excess grows as the temperature falls, so FFT "
+            "no longer rises from 100 C / 4 h to 120 C / 1 h, and furfural no longer falls monotonically from pH 4 "
+            "to 6 (docs/guides/SULFUR_FLUX_MAP.md sec. 5)"
         ),
     },
 )
@@ -709,6 +713,7 @@ def render_model_card_markdown(card: Mapping[str, Any]) -> str:
         for entry in exposed:
             named = [f"{r['benchmark']} {r['compound']} ({_fold(r['fold_error'])})" for r in entry["rows"]]
             named += [f"claim {c}" for c in entry.get("claims", ())]
+            named += [f"fit row {r}" for r in entry.get("fit_rows", ())]
             lines.append(f"- {entry['wave']}: {'; '.join(named)}. Exposes: {entry['assumption']}.")
     lines.append("")
     lines.append("| Claim type | System class | Measured | Verdict |")

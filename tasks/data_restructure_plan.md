@@ -2792,6 +2792,54 @@ each wave's pre-registration). Order and status:
   residuals, so the 90 % interval stops covering 19/48.
 - [ ] **B57 — the trunk's acid pool as two named species** (formic, acetic, Martins' measured yields) in
   place of the fixed 1:1 mix.
+- [x] **B58 — TTCA formation as a measured equilibrium** (Cao 2017, K ≈ 60 L/mol): DO NOT SHIP 2026-10-28,
+  T1 fails ~1000x because the trunk consumes the pentose in seconds (`kinetic_core_b58_prereg.md` sec. 5).
+- [ ] **B60 — a converged pH trajectory (kind 1, numerics)** — found by the flux attribution
+  (`build_sulfur_flux_attribution.py`, `results/validation/sulfur_flux_attribution.md`), prereg
+  `kinetic_core_b60_prereg.md`:
+  - [x] log-and-linear pH-node grid (`sulfur.PH_NODE_GRID`); the 41-point uniform grid missed a transient
+    of seconds (Hofmann ribose pH 5 MFT 39x)
+  - [x] under-relaxed, convergence-checked pH fixed point (`sulfur.PH_FIXED_POINT`); the Picard sweep
+    oscillated ~1 pH unit in the Kang pots and was stopped after 2 (fit) / 4 (scorers) sweeps unchecked
+  - [x] flux budget on the run's own node constants, closure-checked (`reaction_flux_integrals`, `flux_closure`)
+  - [x] verification V1–V5 (`generate_kinetic_core_b60_verification.py`), all pass: 41 vs 81 nodes
+    0.001 dex, closure ≤ 0.43 %, fixed point ≤ 9.6e-4 pH on 37 systems; quick setting 17 nodes / rtol 1e-5.
+    The old numerics were off by up to 0.83 dex on 17 of 52 fit rows
+  - [x] refit (`generate_kinetic_core_b60_fit.py`): SHIP (A), cost 27.13 against (B), B51's vector on
+    the new numerics, at 33.16 (prereg sec. 6). B51's 20.41 was flattered by the unconverged pH; the rows
+    made worse are the 100–120 °C cysteine + pentose thiol rows (Kang, Zhai fold; up to +2.5 σ), i.e. the
+    trunk timescale (B59), now on the model card. Legacy switch `sulfur.FLUX_BUDGET` added for frozen waves
+  - [ ] Laplace and profile on B60; engine, fit-target record and freshness gate switched to B60 (done);
+    re-pin the headline guards; regenerate the scorecards, envelope and model card
+- [ ] **B59 — the trunk's timescale and the TTCA → Cys-Amadori route (kind 3)**. The flux map shows every
+  cysteine + pentose pot runs its whole trunk in seconds: cysteine half-life 2.4 s (Hofmann, 145 °C), 0.5 s
+  (Zhang 2025b, 120 °C, pH 6.5), against Cao 2017's ~0 % cysteine destroyed in 5 h at 90 °C and Zhang
+  2025b's ~48 % in 50 min. Cause: the fit rows are 145 °C endpoint yields, which fix branch ratios but not
+  timescales, and the trunk shares one Ea (64 kJ/mol; the two measured points imply ≥ ~150). Plan:
+  - [ ] network per de Roos 2005: PENT + Cys ⇌ TTCA (K from Cao, ring speciation for the pH dependence),
+    Schiff base → Cys-Amadori (new species CAMA) → 1-/3-deoxyosone + Cys RELEASED (2,3-enolisation frees
+    the amino acid), retiring the direct cysteine-catalysed `r_pent_dpo` / `r_pent_tdp`
+  - [ ] measured time courses as FIT rows: Cao 2017 blank arm (free Cys, free Xyl, TTCA, Cys-Amadori, pH,
+    six times, 90 °C); hold-outs: Zhang 2025b blank (120 °C, pH 6.5), Zhai 2019 (unbuffered), de Roos's
+    purified Cys-Amadori decay band (4.5e-3 / 1.4e-2 min⁻¹ at pH 5 / 6, 100 °C)
+  - [ ] the trunk's Ea freed from the shared lumped formation Ea (prior from the corpus spread, B55)
+  - [ ] the Strecker sulfur (`r_dpo_ddp` → FRAG_S today): a declared split to H2S + acetaldehyde vs ring
+    products (Du 2023: 84 % of a thiophene C2 unit is cysteine Strecker acetaldehyde), band 0–1. On B60
+    this decides the Hofmann ribose pH 7 arm: Strecker takes 100 % of the cysteine in seconds, so H2S made
+    is 0.0002 mM and MFT is 4 900x low (`SULFUR_FLUX_MAP.md` sec. 5)
+  - [ ] the enolisation pH law: at pH 3 the acid factor sends 99.6 % of the pentose to TDP and MFT is 22x
+    low where Hofmann measures it highest; candidates are the Cys-Amadori 2,3-enolisation (this wave's
+    route) and phosphate catalysis (0.5 M in every Hofmann arm), neither with a measured rate law yet
+  - [ ] hold-out to pre-register: the SHAPE of Hofmann's ribose pH 3 / 5 / 7 sweep (MFT 553 / 198 / 25,
+    FFT 229 / 121 / 12 ppb; the pH 3 and 7 arms are `mp_holdout_*`, never fitted)
+  - [ ] data caveat to carry: Zhang 2025b prints identical HPLC calibrations for cysteine and xylose
+  - [ ] note: `k_ddp_mft` sits at 3e-7 (the DDP intact-skeleton route is off; all MFT via norfuraneol)
+- [ ] **FFT/MFT temperature mis-weighting (found 2026-10-28 by the flux map on B60).** The model's FFT/MFT
+  is 3.7 at Hofmann pH 5 (measured 0.6) and 13–20 across Yiltirak 100–130 °C (measured 0.2–0.9). The
+  excess grows as T falls: Yiltirak FFT 234x high at 100 °C, 59x at 130 °C, MFT within 1.5–7x. FFT is 95–99 %
+  furfural + H2S, so the furfural branch's Ea (`r_tdp_fur`, `r_fur_fft_hs`, shared lumped 64 kJ/mol)
+  against norfuraneol + H2S is the suspect. Needs a measured furfural + H2S → FFT barrier or an FFT time
+  course at two temperatures before any wave; search the corpus first
 - Acrylamide speciation: Rydberg 2003 is now read (`rydberg2003_extraction.md`): potato, 25 min, pH set
   cold before heating; net acrylamide peaks at pH 7.7 (180 C) and ~8.0 (160 C), ~1.7x over native pH
   5.7. **Recorded contradiction:** Rydberg's Table 2 spike recovery says acrylamide is lost FASTER at

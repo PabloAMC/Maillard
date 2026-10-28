@@ -504,7 +504,8 @@ def _laplace_lookup(lap: Optional[Dict[str, Any]]) -> Dict[Tuple[str, str], Dict
         zip(lap["coordinates"], lap["sigma"], lap["identified"], lap["bounds"], strict=True)
     ):
         out[(coord["block"], coord["key"])] = {
-            "sigma": float(sigma), "identified": bool(ok), "bounds": tuple(bounds), "index": i,
+            # None: a direction the rows do not constrain (the Laplace's dropped subspace, 2026-10-28)
+            "sigma": None if sigma is None else float(sigma), "identified": bool(ok), "bounds": tuple(bounds), "index": i,
             "kind": coord.get("kind", ""),
         }
     return out

@@ -58,6 +58,10 @@ def wave_module(wave: str):
     """The wave's fit module (B8, or B9 which imports B8 and removes rows)."""
     return importlib.import_module(f"generate_kinetic_core_{wave}_fit")
 THRESHOLDS = {"Ea": 60.0, "log10k": 3.0, "acid_yield": 0.5, "pka": 1.5}
+#: The share of a coordinate's unit vector in JtJ's dropped subspace above which its sigma is unbounded.
+#: Any real weight on a direction of zero curvature makes the variance infinite; 1e-6 sits far above the
+#: eigensolver's round-off (~1e-14) and far below any physically meaningful mixing.
+NULL_WEIGHT_TOL = 1e-6
 STEPS = {"Ea": 2.0, "log10k": 0.05, "acid_yield": 0.01, "pka": 0.1}
 
 
@@ -192,6 +196,13 @@ def main(argv=None) -> int:
     keep = w > 1e-12 * float(np.max(w))
     cov = (v[:, keep] / w[keep]) @ v[:, keep].T * chi2_red
     sigmas = np.sqrt(np.clip(np.diag(cov), 0.0, None))
+    # 2026-10-28 (a correction, B60): a DROPPED direction is one the rows do not constrain, so its variance
+    # is unbounded, not zero; the pseudo-inverse silently gave it zero. On B51 and B60 that labelled three
+    # constants no row responds to IDENTIFIED with sigmas of 1e-10 to 0.02 (k_glc_ha has an exactly zero
+    # Jacobian column) and the envelope pinned them at the optimum. A coordinate whose unit vector carries
+    # more than NULL_WEIGHT_TOL of its weight in the dropped subspace now gets an infinite sigma.
+    null_weight = np.sum(v[:, ~keep] ** 2, axis=1)
+    sigmas = np.where(null_weight > NULL_WEIGHT_TOL, np.inf, sigmas)
     eig = np.linalg.eigvalsh(jtj)
     # A coordinate is IDENTIFIED when its sigma is below the kind's threshold AND the
     # Gaussian is a usable local picture: an optimum sitting ON a bound with a sigma that
@@ -235,7 +246,8 @@ def main(argv=None) -> int:
         "bounds": [[float(lower[i]), float(upper[i])] for i in idx],
         "steps": steps,
         "difference_sides": sides,
-        "sigma": [float(s) for s in sigmas],
+        "sigma": [float(s) if np.isfinite(s) else None for s in sigmas],  # None: a dropped (unconstrained) direction
+        "null_space_weight": [float(x) for x in null_weight],
         "ci95_halfwidth": [None if not ok else 1.96 * float(s) for s, ok in zip(sigmas, identified)],
         "identified": identified,
         "at_bound": at_bound,

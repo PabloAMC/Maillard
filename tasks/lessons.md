@@ -198,3 +198,39 @@
   same check against its cited table as a rate constant gets against its paper. Any temperature
   extrapolation over more than ~50 K carries the source's dCp, or a measured high-temperature
   correlation, or says why not.
+
+## A misfit was blamed on a mechanism before the paths and the numerics were checked (2026-10-28, B60)
+
+- **What happened.** After B51, the Hofmann ribose/xylose pH 5 rows sat ~100x low and the record blamed
+  "the thiolate-acting thiol sink". A flux attribution two days later showed that sink takes 0–4 % of MFT's
+  loss in those pots. The real causes were (1) a pH trajectory solved on 41 uniform nodes that missed a
+  transient lasting seconds, and a pH fixed point that oscillated ~1 pH unit and was stopped after 2–4
+  sweeps without checking its residual (MFT moved 39x when both were fixed); and (2) a trunk that destroys
+  cysteine in ~1 s where three measured pots say hours, because endpoint fit rows constrain branch ratios
+  but not timescales. The residual `ph_fixed_point_residual` had been written to every run's metadata and
+  read by nobody.
+- **Rule.** Before attributing a misfit to a mechanism: (a) show the numerics converged at the speed of
+  the fastest transient (refine the grid, iterate the fixed point to tolerance); (b) run
+  `build_sulfur_flux_attribution.py` and confirm the blamed channel actually carries the flux; (c) compare
+  the intermediates' lifetimes with any time course in the corpus. A diagnostic a code writes must be
+  asserted somewhere, or it is decoration.
+- **Confirmed by the result.** On B60's converged numerics those four rows went from 37–118x off to
+  1.5–3.6x with no change to the sink, and the B51 model-card entry was withdrawn. Two more things showed
+  up. First, B51's reported fit cost (20.4) was itself flattered by the unconverged numerics: the same
+  vector costs 33.2 integrated correctly. A fit's cost is only as good as the integrator inside its
+  objective. Second, a legacy switch must cover EVERY numerical change: the closed flux budget also moved
+  a frozen wave's share rows (4.6e-5 relative). Run the frozen-wave tests before declaring a numerics
+  correction backward-compatible.
+
+## A pseudo-inverse reported "identified" for directions the data never saw (2026-10-28, B60)
+
+- **What happened.** The Laplace covariance drops JᵀJ's near-null eigen-directions (to keep it PSD) and
+  then reads σ off the diagonal. A dropped direction contributes ZERO variance, so a constant with an
+  exactly zero Jacobian column (`k_glc_ha`: no fit row contains glucose) came out σ = 1e-9 and
+  "IDENTIFIED". `k_thiol_decay` and `k_dimer_decay` did the same, in B51 and in B60. The envelope sampled
+  "identified" constants from the covariance, so it pinned all three at the optimum.
+- **Rule.** Truncating a pseudo-inverse is a statement that those directions have INFINITE variance, and
+  the output must say so: record each coordinate's weight in the dropped subspace and mark it
+  unidentified. More generally, a sigma far below the step used to differentiate (1e-9 against a 0.05
+  step) is a red flag, not a precision.
+

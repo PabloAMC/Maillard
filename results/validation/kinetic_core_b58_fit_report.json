@@ -1,5 +1,5 @@
 {
-  "wave": "B51 -- the pH state corrected against its thermodynamic sources, refitted on B47's rows (2026-10-27)",
+  "wave": "B58 -- TTCA formation as a measured equilibrium, refitted on B51's objective (2026-10-27)",
   "generated_by": "scripts/generators/generate_kinetic_core_b58_fit.py",
   "prereg": "results/validation/kinetic_core_b58_prereg.md",
   "declaration": "docs/reference/FIT_HOLDOUT_DECLARATION.md Amendments 16, 17",

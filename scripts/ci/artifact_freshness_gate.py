@@ -62,7 +62,7 @@ def _live_fit_targets() -> Dict:
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / "fit_targets.json"
         subprocess.run(
-            [sys.executable, "scripts/generators/generate_core_fit_targets.py", "--wave", "b51", "--output", str(out)],
+            [sys.executable, "scripts/generators/generate_core_fit_targets.py", "--wave", "b60", "--output", str(out)],
             cwd=str(ROOT), check=True, capture_output=True, text=True, timeout=600,
         )
         return json.loads(out.read_text(encoding="utf-8"))
@@ -92,7 +92,7 @@ def _live_hypotheses() -> Dict:
 REGENERATE: Dict[str, Callable[[], Dict]] = {
     "results/validation/core_panel_scores.json": _live_scorecard,
     "results/validation/core_directional_scores.json": _live_directional,
-    "results/validation/kinetic_core_b51_fit_targets.json": _live_fit_targets,
+    "results/validation/kinetic_core_b60_fit_targets.json": _live_fit_targets,
     "results/validation/experiment_value_ranking.json": _live_ranking,
     "results/validation/data_wishlist.json": _live_wishlist,
     "results/validation/network_hypotheses.json": _live_hypotheses,

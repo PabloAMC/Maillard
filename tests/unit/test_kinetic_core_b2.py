@@ -779,10 +779,14 @@ def _b50_acid_base_constants():
     switches off and restores them afterwards."""
     from src.kinetic_core import ph_state
 
-    saved = ph_state.B51
+    from src.kinetic_core import sulfur as _sulfur
+
+    saved = ph_state.B51, _sulfur.PH_NODE_GRID, _sulfur.PH_FIXED_POINT, _sulfur.FLUX_BUDGET
     ph_state.B51 = ph_state.PhStateCorrections()
+    # B60: the pH numerics and flux budget every wave through B58 ran on
+    _sulfur.PH_NODE_GRID, _sulfur.PH_FIXED_POINT, _sulfur.FLUX_BUDGET = "uniform", "fixed_sweeps", "linear_rederived"
     yield
-    ph_state.B51 = saved
+    ph_state.B51, _sulfur.PH_NODE_GRID, _sulfur.PH_FIXED_POINT, _sulfur.FLUX_BUDGET = saved
 
 
 @pytest.mark.parametrize("relative", RUNTIME_FILES + (FIT_FILE,))
