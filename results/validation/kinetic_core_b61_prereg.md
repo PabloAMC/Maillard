@@ -107,6 +107,25 @@ own in-situ pH for the measured pot: log10 k_OH(100 °C, pH 5) = log10(0.032) �
 log10 k_OH(145 °C, pH 5) = **−3.015**. Every other number in sec. 2 stands. The pH 7 check gives 3.9 × 10⁻³ min⁻¹
 (≥ 1.8 × 10⁻³ ✓). The probe that found this ran the engine only on Mikami's NF-alone pot, never on a panel row.
 
+## 4b. Amendment 2 (2026-10-28): acceptance by evidence audit, before any ship-rule result
+
+The owner changed the acceptance rule the same day (`scripts/generators/WAVES.md`, "Evidence decides, scores
+diagnose"). Written when both fit starts had printed in-sample progress (best cost 25.56 at 100 evaluations),
+and before any member file, ship-rule child or hold-out number existed. **The verdict is now the evidence audit
+below. T1 stays a gate, because it is the audit's item 4. T2-T5 are run and recorded exactly as in sec. 3, as
+diagnosis.** Candidate (A), the refit, is preferred under the kind-2 rule; (B) is recorded.
+
+| audit item | finding |
+| --- | --- |
+| 1. established for the regime | Mikami 2017 heats norfuraneol alone in aqueous 0.2 M phosphate at pH 8, 100 °C: base-catalysed loss, first order, measured. In the same paper the loss is slower at pH 7 (floor 1.8e-3 /min) and absent at pH 6, which is a decade per pH unit. 4-Hydroxy-3(2H)-furanones are enols; ring opening through the enolate is the textbook route. Regime match: aqueous, buffered, pH 6-8, 100 °C. The engine's pots run at 90-145 °C and pH 3-7.5. |
+| 2. carries flux | `r_nf_decay` already takes 79-100 % of norfuraneol's loss in seven of the eight attribution pots (`sulfur_flux_attribution.md`), so norfuraneol's loss is the branch that decides MFT's carbon supply. |
+| 3. constants measured, bands carried | k is measured (0.032 /min at pH 8, 100 °C, ±10 %). The pH law (a decade per unit) is consistent with Mikami's pH 7 and pH 6 observations; declared. The barrier is not measured: point value = the carbohydrate class median (103.7 kJ/mol), band = that class's empirical distribution, k(100 °C) held. **Before the engine reads B61 this band must be drawn by the envelope** (`uncertainty.py`); until then the barrier's uncertainty is not carried, and the README says so. No new free parameter. |
+| 4. verified in the engine | Amendment 1: the engine reproduces 0.0320 /min for Mikami's pot at its in-situ pH 8.082, and 3.3e-3 /min at pH 7 (≥ 1.8e-3). T1 re-checks it per arm. |
+| 5. no contradiction with a direct measurement | Lau 2003 (whey gel, 116 °C) and Pandit 2006 (mashed potato, 121 °C) show flat norfuraneol plateaus. B61 predicts 6-15 % loss at pH 6-6.5 and 39 % at pH 7 over Pandit's plateau, so they agree only if the matrices sit at pH ≤ 6.3-6.6 (neither paper reports pH) or the amine supply limits the plateau. **Declared tension, not a contradiction**: both are solid matrices of unknown pH. Haleva-Toledo 1999 measures furaneol loss at pH 3.5 only, where the term is inert; no bearing. |
+
+**Audit verdict: grounded at the measured point (pH 8, 100 °C); the temperature extrapolation rests on a class
+prior with its band.** Accept (A) when T1 passes in the ship rule and the envelope carries the barrier band.
+
 ## 5. Verdict
 
 *(appended after the ship rule runs; nothing above this line is edited after that)*

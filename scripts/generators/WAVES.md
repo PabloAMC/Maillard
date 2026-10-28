@@ -7,7 +7,7 @@
 > (`results/validation/kinetic_core_<wave>_prereg.md`, which says what would falsify it before it ran,
 > and whose section 6 carries the verdict), its generator (`generate_kinetic_core_<wave>_fit.py`,
 > frozen by hash) and its ship rule (`kinetic_core_<wave>_ship_rule.md`). The engine reads the last
-> wave accepted on each lane under the rule below; today B51 for the thiols (since 2026-10-27; B9 before),
+> wave accepted on each lane under the rule below; today B60 for the thiols (since 2026-10-28; B51 from 2026-10-27, B9 before),
 > B18 for the sugar path's pyrazines.
 > In plain words, the same history is the table in `docs/guides/INTRODUCTION.md`, section 6.
 
@@ -43,6 +43,39 @@ written for kind 3 are noise-aware from now on: a tolerance set by the panel's o
 
 Precedent: B8's measured barriers were "declared BLIND … NOT contingent on a scorecard … It ships even
 where it scores worse" (`engine.py`, the B8 note). This section writes that practice down as the rule.
+
+### Evidence decides, scores diagnose (owner direction, 2026-10-28; supersedes kind 3's score gate)
+
+Owner: *"I am worried that we depend too much on 'whether a given change improves a certain number'. I am not
+sure that is how we should be doing things, given how far we are from accuracy. Instead, I have repeatedly
+argued for being scientifically grounded."*
+
+Why the gate fails here: with rows ~10x off in many places, the errors compensate. A correct mechanism can
+lower the score by removing an error that was hiding another, and a wrong one can raise it by adding an error
+that cancels one. Gating on scores selects for cancellations. Every change, kind 3 included, is now accepted on
+an **evidence audit**, written in its pre-registration before any result:
+
+1. **Established for the regime.** The mechanism is shown in a system that matches the step: the same
+   catalysis (amine vs acid vs base), a comparable pH and temperature, an aqueous or the stated matrix. A
+   measurement of an idle route is not evidence for a busy one (lessons, 2026-10-28).
+2. **Carries flux.** The step it changes carries flux in the pots the model answers
+   (`sulfur_flux_attribution.md`). Otherwise the change makes no claim and is not made.
+3. **Constants from measurement.** Each constant is a measurement or a measured class, and its band is carried
+   into the envelope. A transfer (temperature, sugar, matrix) is declared with its direction of risk. No new
+   free fitted parameter unless the profile shows the data identify it.
+4. **Verified in the engine.** The engine reproduces the source measurement in its own description of the
+   measured system: a written check, as B61's T1.
+5. **Contradicts no direct measurement.** Every corpus measurement that bears directly on the step is listed,
+   and any tension is resolved or declared.
+
+**Scores are diagnosis.** Hold-out predictions are still pre-registered and recorded before they are seen,
+because a miss is how the next error is found. They are not a gate. A row that gets worse after a grounded
+change names a compensating error, which is written into the record. Kind 2 refits ship with the change they
+follow, refitting only coordinates the data identify. **A choice the evidence does not settle is not shipped
+on scores either.** It is recorded as an open hypothesis with its alternatives, carried in the envelope where
+possible, and sent to the experiment ranking. Progress is read on three axes, never on one: evidence grounding
+(the share of each pot's flux on measured, in-regime constants), out-of-sample accuracy, and the
+typical-yield baseline (`null_model_baselines.md`).
 
 Three non-wave derivatives import them and fit nothing: `generate_kinetic_core_b8_laplace.py` (a covariance at the
 frozen B8 optimum), `generate_kinetic_core_b8_profile.py` (slice profiles around it) and `generate_core_fit_targets.py`
@@ -163,5 +196,10 @@ B5b, so their `run_exam()` paths raise if called. The exam artifact `cutover_fin
 | 2026-10-27 | **B51.1: DO NOT SHIP** (`kinetic_core_b51_1_ship_rule.md`; prereg `kinetic_core_b51_1_prereg.md`). The two B51 corrections that touch no speciation (the 25 °C scale for the measured pH tables; the SID across segments), B9 frozen. Fit 18.74 → 15.47, hold-outs unchanged or better, but SUG-09 flips (directional 18/31 → 17/31): faster cysteine thermolysis in the unbuffered pots feeds the hexose route to FFT, which should make none. | the hexose entry blocks a correct fix again |
 | 2026-10-27 | **Acceptance rule changed; B51 and B51.1 RE-DECIDED: SHIP** (owner decision, section above). Every B51 switch is a kind-1 correction (GKL / Suleimenov constants checked against their tables, the dCp law against pKw, all-off reproducing B50 bit for bit, the SID carry a bug fix); the B51 refit is its kind-2 fit. The engine now reads `kinetic_core_b51_fit_report.json`, its Laplace covariance (15/23 identified) and profile (4 quadratic / 10 asymmetric / 1 flat / 8 bound-limited); the fit-target record is B51's. Recorded worse: the Hofmann ribose/xylose pH 5 pots (~100x low) and SUG-09, both exposing named assumptions (the thiolate-acting thiol sink; the hexose entry), which are the next waves. B51.1 is contained in B51. | correct physics ships; its misses name the next fix |
 | 2026-10-28 | **B58: DO NOT SHIP** (`kinetic_core_b58_ship_rule.md`; prereg `kinetic_core_b58_prereg.md`). TTCA formation Cys + PENT → TTCA by detailed balance with Cao 2017's K ≈ 60 L/mol (`parameters_sulfur.TTCA_FORMATION`, off). T1 fails by ~1000x in both arms (Zhang 2025b 0.0005 vs 18 mM; Zhai 2019 0.02 vs 58 mM): the lane consumes the pentose in seconds, before any equilibrium can hold it. T3 (Hofmann pH 5) improves 1.80 → 0.43–0.71 dex: the rows are governed by how long free cysteine survives the first seconds. Computed on the unconverged 41-node pH grid (B60). | the trunk's timescale is unconstrained (B59) |
+| 2026-10-28 | **B60** `generate_kinetic_core_b60_fit.py`: the pH trajectory converged (kind 1). Log-and-linear pH nodes (`sulfur.PH_NODE_GRID`; the 41 uniform nodes missed a seconds-long transient), an under-relaxed fixed point iterated to 1e-3 pH (`PH_FIXED_POINT`; the Picard sweep oscillated ~1 pH unit and stopped unchecked after 2–4 sweeps), and a flux budget on the run's own node constants (`FLUX_BUDGET`); frozen waves pin all three legacy switches. Verification `generate_kinetic_core_b60_verification.py` (V1–V5 pass); prereg `kinetic_core_b60_prereg.md`. Found by `build_sulfur_flux_attribution.py`. | numerics nobody had checked |
+| 2026-10-28 | **B60: SHIP** (prereg sec. 6). Refit 27.13 vs B51's vector on the new numerics 33.16; B51's own 20.41 was flattered by the unconverged pH. The Hofmann ribose/xylose pH 5 hold-outs go 37–118x → 1.5–3.6x (B51's thiolate-sink diagnosis withdrawn); panel 16 → 19 of 50 within 3x. Recorded worse: the Kang / Zhai thiol rows (+2.5 σ, the trunk timescale, B59) and YIL-02 / CER07-PH-02 (the furfural branch). Laplace 16/23 identified after a correction (directions dropped from the pseudo-inverse are unidentified, not σ = 0); profile 7 quadratic / 6 asymmetric / 1 flat / 9 bound-limited. | a fit is only as good as the integrator in its objective |
 | 2026-10-28 | **B55 + B56 pre-registered** (`kinetic_core_b55_b56_prereg.md`), envelope only, no fit: B55 draws the barrier of the 31 sulfur constants known at 145 °C only (30 on the unidentified lumped 64.08 kJ/mol, `k_mmft` with none) from the measured barriers of their class (`src/kinetic_core/ea_class_prior.py`: 20 carbohydrate-side, 15 sulfur-side, read from the registries), k(145 °C) held; B56 adds a per-lane log-normal discrepancy σ_L from in-sample fit residuals only (`generate_kinetic_core_b56_structural_discrepancy.py`). Ship rule `generate_kinetic_core_b55_b56_ship_rule.py`. | the envelope sampled parameter uncertainty only |
 | 2026-10-28 | **B55: SHIP; B56: DO NOT SHIP** (`kinetic_core_b55_b56_ship_rule.md`). B55: every 145 °C and non-sulfur row bit-identical, off-145 °C sulfur rows +0.70 dex median, out of sample 17 → 20 of 44; envelope 22/48 (1.14 dex), 20/43. B56: σ sulfur 0.49 / trunk 0.14 / acrylamide 1.19 / lipid 0.12 dex reach 26/44 = 59 % against a pre-registered [70, 95] %; it fails low, as predicted: the structural error is not visible in sample. Switch kept, off. | an interval is honest about the slope, not yet about the structure |
+| 2026-10-28 | **ENV correction (kind 1), the data-admissible flat draws** (`uncertainty._admissible_bands`; `generate_kinetic_core_b8_profile.py` walks every unidentified coordinate to its bounds). After B60's Laplace null-space fix, three unidentified sulfur constants were drawn flat across the optimiser's box [-10, 0.5]; the fit rows reject its top (slice cost +714 at the top of `k_thiol_decay`), and those draws put 6-7 dex intervals on the Hofmann recombination rows they were fitted on. Each unidentified coordinate is now drawn over the slice interval whose cost rise stays within 0.5 × 3.84 × χ²_red (3.59), the threshold the Laplace's own scaling implies. The rows were decomposed one by one: smooth misfit, no failed integrations. Result: 36/65 literature coverage at a median 1.87 dex (B51-era 20/48 at 1.01). The gain is width, and the README says so. |
+| 2026-10-28 | **B61 pre-registered** (`kinetic_core_b61_prereg.md`, 4a72c92): norfuraneol's hydroxide-catalysed decay, measured by Mikami 2017 (0.032 1/min at pH 8, 100 °C; ~710x the engine's), anchored at the engine's in-situ pH for the measured pot (Amendment 1), barrier declared at the carbohydrate-class median 103.7 kJ/mol. Switch `NF_HYDROXIDE_DECAY`. |
+| 2026-10-28 | **B62 pre-registered** (`kinetic_core_b62_prereg.md`, 26a813a): furfural's own barriers, formation 147 (Schirle-Keller 1992) and loss 46.5 kJ/mol (Yaghmur 2005), both measured in cysteine systems; norfuraneol untouched (Lau 2003, Pandit 2006). Switch `FURFURAL_BARRIERS`; baseline is whatever ships after B61. |

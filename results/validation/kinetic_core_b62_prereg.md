@@ -97,6 +97,26 @@ Moves expected:
 
 Probabilities (mine, before any number): T1 ≈ 0.6. T2 ≈ 0.6. T3 ≈ 0.75. T4 ≈ 0.8. **SHIP (A or B) ≈ 0.35.**
 
+## 4a. Amendment 1 (2026-10-28): acceptance by evidence audit, before any B62 fit or score
+
+The owner changed the acceptance rule the same day (`scripts/generators/WAVES.md`, "Evidence decides, scores
+diagnose"). No B62 fit, member or score exists. **The verdict is now the evidence audit below. T1-T4 are run and
+recorded exactly as in sec. 3, as diagnosis.** Candidate (A), the refit, is preferred under the kind-2 rule.
+Item 4 needs its own verification test, added here: **V1**, the engine reproduces the declared barriers, so that
+k(T) for `k_tdp_fur` and `k_fur_decay` between 100 and 145 °C matches 147 and 46.5 kJ/mol to 0.1 kJ/mol, and every
+other key's barrier is unchanged.
+
+| audit item | finding |
+| --- | --- |
+| 1. established for the regime | The ORDER (formation steeper than loss) is shown in cysteine systems twice. Schirle-Keller 1992: furfural from glucose + cysteine in water, 100-150 °C, 147 kJ/mol, rising ~30x from 100 to 120 °C. Yaghmur 2005: furfural loss with cysteine, pH 5, 40-70 °C, 46.5 kJ/mol. Kang 2026 measures furfural rising 1.7x from 100 to 120 °C from purified TTCA. Amine-free acid chemistry (Garrett, Danon) shows the same order but is not used. |
+| 2. carries flux | `r_tdp_fur` makes 100 % of the furfural in every attribution pot. `r_fur_decay` takes 39-100 % of its loss (51-95 % in the pots at 100-145 °C). |
+| 3. constants measured, bands carried | Both barriers are measured, and both are TRANSFERS. Formation comes from a hexose, as net accumulation; band 117-189 kJ/mol (the abstract's 117 to the dossier's refit 189). Loss comes from 40-70 °C, and is a pseudo-first-order lump at ~0.6 M cysteine; band 46.5-115 kJ/mol (Yaghmur's slope up to the cysteine-scaled bridge, sec. 1). Direction of risk: both make furfural's temperature dependence too strong if the true values sit inside the bands. **Before the engine reads B62 both bands must be drawn by the envelope.** No new free parameter: the 145 °C constants stay the fit's, as before. |
+| 4. verified in the engine | V1 above, checked by the ship rule before T1-T4 are read. |
+| 5. no contradiction with a direct measurement | Kang's 100 °C MFT/FFT ratio is in-sample and moves away (the B60 slice). That is a score, not a measurement of either barrier: recorded as diagnosis. Yaghmur's absolute rate at 65 °C bridges to 77-115 kJ/mol rather than 46.5 (sec. 1). This is a tension inside the loss band; declared, and it is why the band reaches 115. No measurement in the corpus puts furfural's loss barrier above its formation barrier in a cysteine system. |
+
+**Audit verdict: the ORDER is grounded; the magnitudes are transfers with wide bands.** Accept (A) when V1
+passes and the envelope carries both bands. The T-tests then show what the transfer does to the panel.
+
 ## 5. Verdict
 
 *(appended after the ship rule runs; nothing above this line is edited after that)*
