@@ -1,6 +1,6 @@
 # B8 sulfur objective: slice profiles around the frozen optimum
 
-cost at optimum 27.132; 161 evaluations; verdicts {'asymmetric': 6, 'bound_limited': 9, 'flat': 1, 'quadratic': 7}
+cost at optimum 27.132; 329 evaluations; verdicts {'asymmetric': 6, 'bound_limited': 9, 'flat': 1, 'quadratic': 7}
 
 | coordinate | kind | sigma used | rise -2s | rise +2s | quadratic +2s | asymmetry | slice min k | verdict |
 |---|---|---|---|---|---|---|---|---|
@@ -27,3 +27,15 @@ cost at optimum 27.132; 161 evaluations; verdicts {'asymmetric': 6, 'bound_limit
 | k_dimer_mft | log10k | 0.404 | 14.722 | 0.000 | 5.813 | 30081125.28 | 0 | **bound_limited** |
 | k_arp_dpo | log10k | 2.5 | 0.136 | 16.802 | 5.061 | 123.78 | 0 | **bound_limited** |
 | k_arp_tdp | log10k | 0.939 | 40.699 | 65.225 | 42.486 | 1.60 | 0 | **quadratic** |
+
+## Data-admissible bands of the unidentified coordinates (slice cost rise <= 3.59)
+
+| coordinate | declared band | admissible band |
+|---|---|---|
+| k_glc_ha | [-10, 0.5] | [-10, 0.5] |
+| k_dimer_fft | [-10, 0.5] | [-10, 0.4408] |
+| ph_acid_yield_per_sink_event | [0, 1] | [0, 0.4189] |
+| k_fur_fft | [-10, 0.5] | [-10, 0.5] |
+| k_dimer_decay | [-10, 0.5] | [-10, -0.8679] |
+| k_thiol_decay | [-10, 0.5] | [-10, -1.353] |
+| Ea_decay_carbonyl_sink | [20, 250] | [91.9, 250] |

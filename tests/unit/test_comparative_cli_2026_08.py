@@ -113,8 +113,9 @@ def test_water_activity_is_never_trusted_and_ph_is_tagged_by_the_standing_rule()
     # RE-PINNED 2026-10-27 (B51's buffer facts, Amendment 44): 5/8 -> 6/8, MOT-01 agrees once charged with its 0.2 M pyrophosphate; still 'caution'.
     # RE-PINNED 2026-10-27 (B51 ships; PH-04/PH-05 retired against the Cerny 2015 chapter): 6/8 -> 4/7. Below
     # the 0.60 caution rate, so the standing rule now says do-not-use for pH-direction claims.
-    assert (ph.agree, ph.evaluable) == (4, 7)
-    assert ph.verdict == dr.verdict_for(4, 7) == dr.VERDICT_DO_NOT_USE
+    # RE-PINNED 2026-10-28 (B60 ships; Amendment 45's blind claims scored): 4/7 -> 5/10, still under 0.60: do-not-use.
+    assert (ph.agree, ph.evaluable) == (5, 10)
+    assert ph.verdict == dr.verdict_for(5, 10) == dr.VERDICT_DO_NOT_USE
     assert dr.verdict_for(8, 10) == dr.VERDICT_CAUTION
     assert dr.wilson_lower(8, 10) < dr.COIN < dr.wilson_lower(8, 8)
     assert dr.verdict_for(8, 8) == dr.VERDICT_TRUST and dr.verdict_for(7, 7) == dr.VERDICT_TRUST

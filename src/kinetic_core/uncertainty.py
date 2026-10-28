@@ -100,6 +100,11 @@ LAPLACE_FLAT = "unidentified_direction_in_laplace_covariance"
 #: The covariance of the SHIPPED sulfur wave (B9 since 2026-09-03): the file beside the
 #: fit report the engine reads, named kinetic_core_<wave>_laplace_covariance.json.
 LAPLACE_PATH = data_paths.VALIDATION_DIR / engine._B2_FIT_REPORT.name.replace("_fit_report.json", "_laplace_covariance.json")
+#: 2026-10-28 (B60): the same wave's slice profile, whose ``admissible_band`` per unidentified coordinate
+#: is the part of the declared box the fit rows do not reject. An unidentified coordinate is drawn flat
+#: across that, not across the optimiser's box: B60's k_thiol_decay drawn to the top of [-10, 0.5] put
+#: 6-7 dex on Hofmann's recombination pots in draws the rows exclude (slice cost +714).
+PROFILE_PATH = data_paths.VALIDATION_DIR / engine._B2_FIT_REPORT.name.replace("_fit_report.json", "_profile.json")
 #: ENV-B18 (2026-09-10): the pyrazine step's own fit report, which this envelope never read.
 _B18_FIT_REPORT = data_paths.VALIDATION_DIR / "kinetic_core_b18_fit_report.json"
 #: A coordinate the fit was free to move and could not pin, drawn flat across its DECLARED band.
@@ -525,10 +530,36 @@ def _laplace() -> Optional[Dict[str, Any]]:
     return dict(payload)
 
 
+def _admissible_bands(lap: Optional[Dict[str, Any]]) -> Dict[int, Tuple[float, float]]:
+    """``{laplace index: (lo, hi)}`` -- the declared bound cut to the profile's data-admissible band.
+
+    Empty when the wave's profile predates the walk. A profile taken at a different optimum than the
+    Laplace is refused rather than read: its bands would belong to another objective.
+    """
+    profile = data_access.load_json(PROFILE_PATH, missing_ok=True)
+    if lap is None or not profile:
+        return {}
+    walked = {r["key"]: r["admissible_band"] for r in profile.get("rows", ()) if "admissible_band" in r}
+    if not walked:
+        return {}
+    if not math.isclose(float(profile["cost_at_optimum"]), float(lap["cost_at_optimum"]), rel_tol=1e-6):
+        raise ValueError(
+            f"{data_paths.rel(PROFILE_PATH)} was taken at cost {profile['cost_at_optimum']}, the Laplace at "
+            f"{lap['cost_at_optimum']}: regenerate the profile for this wave"
+        )
+    out: Dict[int, Tuple[float, float]] = {}
+    for i, key in enumerate(lap["keys"]):
+        if key in walked:
+            lo, hi = (float(b) for b in lap["bounds"][i])
+            out[i] = (max(lo, float(walked[key][0])), min(hi, float(walked[key][1])))
+    return out
+
+
 def _laplace_lookup(lap: Optional[Dict[str, Any]]) -> Dict[Tuple[str, str], Dict[str, Any]]:
     """``{(block, key): {sigma, identified, bounds, index}}`` for every free coordinate."""
     if lap is None:
         return {}
+    admissible = _admissible_bands(lap)
     out: Dict[Tuple[str, str], Dict[str, Any]] = {}
     for i, (coord, sigma, ok, bounds) in enumerate(
         zip(lap["coordinates"], lap["sigma"], lap["identified"], lap["bounds"], strict=True)
@@ -536,7 +567,7 @@ def _laplace_lookup(lap: Optional[Dict[str, Any]]) -> Dict[Tuple[str, str], Dict
         out[(coord["block"], coord["key"])] = {
             # None: a direction the rows do not constrain (the Laplace's dropped subspace, 2026-10-28)
             "sigma": None if sigma is None else float(sigma), "identified": bool(ok), "bounds": tuple(bounds), "index": i,
-            "kind": coord.get("kind", ""),
+            "kind": coord.get("kind", ""), "admissible": admissible.get(i),
         }
     return out
 
@@ -572,10 +603,13 @@ def _b8_priors() -> List[CorePrior]:
             # measured covalent-capture range, which is a measurement WITH A WIDTH:
             # leaving the point estimate at the bound (backlog pass 7) is right, and
             # an interval must still integrate across it.
+            admissible = entry["admissible"]
             out_prior = unidentified_prior(
                 key=key, lane=SULFUR, kind=kind, centre=float(centre),
-                band=entry["bounds"], unit=unit,
-                source=f"{lap_src}: flat direction; band = the coordinate's declared bounds",
+                band=entry["bounds"] if admissible is None else admissible, unit=unit,
+                source=(f"{lap_src}: flat direction; band = the coordinate's declared bounds" if admissible is None
+                        else f"{lap_src}: flat direction; band = the declared bounds cut to the data-admissible "
+                             f"slice band ({data_paths.rel(PROFILE_PATH)})"),
                 t_ref_c=B8_T_REF_C,
             )
             return replace(out_prior, sigma=entry["sigma"])
@@ -646,8 +680,9 @@ def sulfur_joint_draw(rng: np.random.Generator) -> Optional[Dict[str, Any]]:
         i for i, ok in enumerate(lap["identified"])
         if not ok and lap["coordinates"][i].get("kind") not in DEFINITIONAL_BAND_KINDS
     ]
+    admissible = _admissible_bands(lap)
     for i in flat:
-        lo, hi = (float(b) for b in lap["bounds"][i])
+        lo, hi = admissible.get(i) or (float(b) for b in lap["bounds"][i])
         if lap["coordinates"][i].get("kind") == "Ea":
             (lo, hi), _ = capped_ea_band(float(optimum[i]), (lo, hi), B8_T_REF_C)
         if hi > lo:

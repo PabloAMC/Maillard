@@ -2,40 +2,53 @@
 
 n_samples = 200, seed = 0, CI level = 90 %.
 
-* benchmarks with an envelope: **28** of 37 on the panel; matched rows **50**; refused rows 27
-* mixed-population coverage: 20/50 (0.400)
-* **honest literature coverage: 20/48 (0.417)**, median CI width 1.009 log10; 2 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 18/43 (1 not evaluable); rows the core fit read: {'hits': 2, 'total': 5, 'not_evaluable': 1}
-* sampled priors 66, fixed 45; lanes with NO sampled fit uncertainty: none
-* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 9, extraction 41, undeclared 0
+* benchmarks with an envelope: **33** of 42 on the panel; matched rows **66**; refused rows 27
+* mixed-population coverage: 36/66 (0.545)
+* **honest literature coverage: 36/65 (0.554)**, median CI width 1.869 log10; 1 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 33/59 (1 not evaluable); rows the core fit read: {'hits': 3, 'total': 6, 'not_evaluable': 0}
+* B55 single-temperature Ea prior: on (31 rows); B56 structural discrepancy: off
+* sampled priors 97, fixed 45; lanes with NO sampled fit uncertainty: none
+* observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 25, extraction 41, undeclared 0
 
 ## Per panel
 
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
 | external_matrix | 3 | 4 | 0.750 | 2.186 | 0 |
-| maillard_path_holdout | 10 | 30 | 0.333 | 0.970 | 1 |
-| trust_loop | 7 | 14 | 0.500 | 1.072 | 1 |
+| maillard_path_holdout | 23 | 46 | 0.500 | 2.006 | 1 |
+| trust_loop | 10 | 15 | 0.667 | 1.297 | 0 |
 
 ## Rows
 
 | benchmark | panel | compound | unit | measured | point | p5 | p50 | p95 | inside | width | obs bands | lane | role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | acrylamide_spi_extrusion_130C_ACSRef3 | trust_loop | acrylamide | ppb | 150.000 | 0.016 | 0.00741 | 0.016 | 0.025 | no | 0.536 | no (extraction) | acrylamide | predictive |
-| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 310.000 | 4.03e+03 | 4.02e+03 | 4.03e+03 | 4.07e+03 | no | 0.0057 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 5.36e+03 | 2.92e+03 | 2.67e+03 | 2.98e+03 | 3.47e+03 | no | 0.115 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 6.23e+03 | 1.15e+03 | 720.737 | 1.21e+03 | 1.68e+03 | no | 0.368 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.79e+04 | 135.278 | 7.12e+03 | 4.77e+04 | yes | 2.547 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 1.48e+03 | 902.083 | 1.45e+03 | 2.12e+03 | yes | 0.371 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 8.7e+03 | 5.07e+03 | 7.78e+03 | 9.18e+03 | no | 0.257 | no (extraction) | sulfur | predictive [in core fit] |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 2.565 | 0.203 | 1.854 | 10.145 | no | 1.698 | no (extraction) | sulfur | predictive |
-| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 1.675 | 0.898 | 1.476 | 1.872 | no | 0.319 | no (extraction) | sulfur | predictive |
+| hofmann1998_c2c3_recombination_145C_20min_pH3 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 310.000 | 4.03e+03 | 3.05e+03 | 4.03e+03 | 4.07e+03 | no | 0.125 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_c2c3_recombination_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 5.36e+03 | 2.92e+03 | 2.11e+03 | 2.96e+03 | 3.45e+03 | no | 0.213 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_c2c3_recombination_145C_20min_pH7 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 6.23e+03 | 1.15e+03 | 537.211 | 1.18e+03 | 1.74e+03 | no | 0.510 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_furan2aldehyde_h2s_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 1.1e+04 | 1.7e+04 | 9.261 | 7.07e+03 | 5.48e+04 | yes | 3.772 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_norfuraneol_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 1.02e+03 | 1.07e+03 | 471.481 | 1.07e+03 | 1.87e+03 | yes | 0.598 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_norfuraneol_h2s_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 4.22e+03 | 8.27e+03 | 3.73e+03 | 7.07e+03 | 9.07e+03 | yes | 0.386 | no (extraction) | sulfur | predictive [in core fit] |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Furfurylthiol (FFT) | ppb | 121.000 | 346.617 | 16.447 | 177.976 | 1.22e+03 | yes | 1.869 | no (extraction) | sulfur | predictive |
+| hofmann1998_ribose_cysteine_145C_20min_pH5 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 198.000 | 93.633 | 37.127 | 95.921 | 219.557 | yes | 0.772 | no (extraction) | sulfur | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | hexanal | ppb | 782.000 | 353.858 | 67.930 | 363.927 | 2.25e+03 | yes | 1.521 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.702 | 3.163 | 69.137 | 1.24e+03 | yes | 2.593 | yes (headspace) | lipid | predictive |
-| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 55.309 | 2.490 | 43.189 | 3.37e+03 | yes | 3.132 | yes (headspace) | sulfur | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.817 | 49.860 | 110.479 | 209.304 | no | 0.623 | no (extraction) | sulfur | predictive |
+| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 46.453 | 1.67e-08 | 24.152 | 1.07e+04 | yes | 11.809 | yes (headspace) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 232.916 | 19.570 | 82.882 | 388.216 | no | 1.297 | no (extraction) | sulfur | predictive |
+| mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 8.100 | 1.31e+03 | 18.899 | 322.541 | 3.84e+03 | no | 2.308 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 116.000 | 129.540 | 0.019 | 5.193 | 622.566 | yes | 4.517 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c | maillard_path_holdout | Furfural | ppb | 716.000 | 24.138 | 0.011 | 4.736 | 386.463 | no | 4.562 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 59.100 | 844.862 | 12.449 | 188.362 | 1.71e+03 | yes | 2.137 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 124.000 | 25.671 | 0.024 | 1.927 | 185.895 | yes | 3.888 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c | maillard_path_holdout | Furfural | ppb | 113.000 | 4.595 | 0.028 | 1.727 | 69.759 | no | 3.400 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 64.100 | 1.75e+03 | 18.278 | 324.855 | 3.93e+03 | yes | 2.333 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 383.000 | 73.488 | 0.025 | 4.560 | 445.495 | yes | 4.258 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c | maillard_path_holdout | Furfural | ppb | 397.000 | 8.835 | 0.030 | 3.386 | 194.757 | no | 3.814 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 57.100 | 1.65e+03 | 20.615 | 348.926 | 3.95e+03 | yes | 2.282 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 270.000 | 110.837 | 0.024 | 4.762 | 576.440 | yes | 4.387 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c | maillard_path_holdout | Furfural | ppb | 575.000 | 16.172 | 0.021 | 4.112 | 325.617 | no | 4.190 | yes (headspace) | sulfur | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.996 | 199.516 | 565.424 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 1.1e+03 | 1.88e+03 | 2.73e+03 | no | 0.395 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
@@ -53,20 +66,24 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glucosone | ppb | 7.5e+03 | 119.059 | 118.920 | 119.086 | 119.141 | no | 0.000807 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | glyoxal | ppb | 5.6e+03 | 160.794 | 168.424 | 200.190 | 205.037 | no | 0.085 | no (extraction) | trunk | external_holdout |
 | mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 | maillard_path_holdout | methylglyoxal | ppb | 2.6e+03 | 2.57e+03 | 622.049 | 1.72e+03 | 5.59e+03 | yes | 0.953 | no (extraction) | trunk | external_holdout |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 2.53e+03 | 144.051 | 1.43e+03 | 1.01e+04 | yes | 1.848 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 41.322 | 18.964 | 42.261 | 94.388 | no | 0.697 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.183 | 0.00482 | 0.094 | 0.366 | no | 1.880 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
-| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.00529 | 2.15e-05 | 0.00478 | 0.021 | no | 2.989 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_MFT) |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 2.565 | 0.203 | 1.854 | 10.145 | no | 1.698 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 1.675 | 0.898 | 1.476 | 1.872 | no | 0.319 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 9.798 | 0.336 | 1.901 | 10.704 | yes | 1.503 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 178.092 | 5.688 | 39.818 | 170.171 | no | 1.476 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 11.280 | 0.856 | 3.174 | 13.292 | yes | 1.191 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 156.412 | 6.619 | 39.547 | 177.880 | no | 1.429 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 12.261 | 1.955 | 4.851 | 15.879 | yes | 0.910 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 114.942 | 6.767 | 36.199 | 163.448 | no | 1.383 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 12.567 | 3.275 | 7.346 | 19.641 | no | 0.778 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 71.403 | 4.690 | 30.451 | 137.209 | no | 1.466 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 229.000 | 1.52e+03 | 56.235 | 710.590 | 6.78e+03 | yes | 2.081 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_FFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 553.000 | 24.707 | 8.920 | 25.378 | 70.653 | no | 0.899 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH3_MFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 12.000 | 0.170 | 0.00319 | 0.075 | 0.328 | no | 2.012 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_FFT) |
+| mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.0051 | 3.28e-05 | 0.00429 | 0.021 | no | 2.809 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_MFT) |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 346.617 | 16.447 | 177.976 | 1.22e+03 | yes | 1.869 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 93.633 | 37.127 | 95.921 | 219.557 | yes | 0.772 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 10.334 | 0.194 | 3.569 | 83.929 | yes | 2.636 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 299.499 | 0.271 | 12.621 | 422.813 | yes | 3.194 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 12.015 | 0.596 | 5.519 | 76.404 | yes | 2.108 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 246.542 | 0.621 | 19.017 | 367.092 | yes | 2.772 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 12.859 | 1.389 | 7.672 | 52.086 | yes | 1.574 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 167.266 | 1.658 | 23.995 | 285.632 | yes | 2.236 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 12.681 | 2.527 | 9.590 | 35.304 | no | 1.145 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 96.098 | 2.626 | 23.394 | 166.040 | no | 1.801 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 22.630 | 0.510 | 0.023 | 0.336 | 3.353 | no | 2.173 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 0.290 | 2.414 | 0.014 | 0.406 | 6.299 | yes | 2.654 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b | maillard_path_holdout | Bis(2-methyl-3-furyl) disulfide | ppb | 18.250 | 0.000636 | 2.91e-06 | 0.000195 | 0.011 | no | 3.577 | yes (headspace) | sulfur | external_holdout |
+| mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b | maillard_path_holdout | 2-Acetylthiazole | ppb | 114.130 | 0.065 | 0.00455 | 0.049 | 0.455 | no | 1.999 | yes (headspace) | sulfur | external_holdout |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 109.490 | 9.240 | 109.689 | 1.6e+03 | yes | 2.237 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 1.115 | 13.019 | 171.111 | no | 2.186 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 70.264 | 5.084 | 59.299 | 779.558 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
@@ -136,36 +153,36 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | b8.k_pent_dpo.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.545 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_pent_tdp.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.502 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_dpo_c2c3.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.016 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_arp_dpo.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -2.664 | 3.372 | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
-| b8.k_arp_tdp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.968 | 0.783 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_arp_dpo.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.634 | 2.500 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_arp_tdp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.965 | 0.939 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_dpo_nf.log10_k_ref_145C | sulfur | fitted_rate | fixed | 0.434 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_dpo_ptr.log10_k_ref_145C | sulfur | fitted_rate | fixed | -4.347 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_dpo_ddp.log10_k_ref_145C | sulfur | fitted_rate | fixed | 0.042 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_tdp_fur.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.309 | 0.369 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_tdp_fur.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.491 | 0.376 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_ddp_mft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -6.541 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_fur_fft.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -1.480 | 7.578 | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
-| b8.k_nf_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.435 | 0.214 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_nf_mp3p.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.617 | 0.487 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_mgo_mp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.946 | 0.346 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_fur_fft.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -1.643 | 15.718 | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
+| b8.k_nf_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.666 | 0.274 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_nf_mp3p.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.793 | 0.578 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_mgo_mp.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -3.946 | 0.398 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_ha_mp_mft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.870 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_glc_ha.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -8.589 | 1.22e-10 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_glc_ha.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -8.589 | - | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
 | b8.k_thi_hmp.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.588 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_thi_mesh.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.273 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_hmp_mft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.609 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_hmp_mp2p.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.437 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_cys_actz.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.974 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_dimer_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | 0.500 | 0.374 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_dimer_fft.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -0.913 | 14.282 | [-10.000, 0.500] | yes | unidentified_in_the_fit: sampled across its declared band |
+| b8.k_dimer_mft.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | 0.500 | 0.404 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_dimer_fft.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -1.460 | 67.997 | [-10.000, 0.441] | yes | unidentified_in_the_fit: sampled across its declared band |
 | b8.k_mmft.log10_k_ref_145C | sulfur | fitted_rate | fixed | -1.984 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_mft_decay.log10_k_ref_145C | sulfur | fitted_rate | fixed | 0.134 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_fft_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.829 | 0.260 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_dimer_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -9.217 | 0.00362 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_fft_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.828 | 0.315 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_dimer_decay.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -9.139 | - | [-10.000, -0.868] | yes | unidentified_in_the_fit: sampled across its declared band |
 | b8.k_nf_decay.log10_k_ref_145C | sulfur | fitted_rate | fixed | -2.182 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_fur_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.513 | 0.646 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_fur_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -0.417 | 0.884 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_h2s_loss.log10_k_ref_145C | sulfur | fitted_rate | fixed | -1.351 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_osone_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.062 | 0.412 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_thiol_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -8.023 | 3.34e-05 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_pent_caramel.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.231 | 0.770 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_osone_decay.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.162 | 0.604 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_thiol_decay.log10_k_ref_145C | sulfur | fitted_rate | uniform_band | -7.614 | - | [-10.000, -1.353] | yes | unidentified_in_the_fit: sampled across its declared band |
+| b8.k_pent_caramel.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.249 | 0.833 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.k_pent_thermal.log10_k_ref_145C | sulfur | fitted_rate | fixed | -3.437 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_glc_fur.log10_k_ref_145C | sulfur | fitted_rate | fixed | -4.923 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_arp_tdp_th.log10_k_ref_145C | sulfur | fitted_rate | fixed | -4.354 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
@@ -173,14 +190,14 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | b8.k_ddp_mft_hs.log10_k_ref_145C | sulfur | fitted_rate | fixed | -7.693 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_fur_fft_hs.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.00955 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
 | b8.k_ttca_cys.log10_k_ref_145C | sulfur | fitted_rate | fixed | -0.579 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.k_ttca_deg.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.529 | 0.280 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_cys_thermal.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.287 | 0.317 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
-| b8.k_thiolate_loss.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.557 | 0.395 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_ttca_deg.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.212 | 1.892 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_cys_thermal.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -2.124 | 0.353 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
+| b8.k_thiolate_loss.log10_k_ref_145C | sulfur | fitted_rate | normal_log10 | -1.547 | 0.471 | [-10.000, 0.500] | yes | laplace_covariance_at_b8_optimum |
 | b8.lumped_formation_Ea_kJ_mol | sulfur | fitted_ea | fixed | 64.082 | - | - | no | frozen in the sulfur fit (not a free coordinate; source uncertainty unrecorded) |
-| b8.decay_Ea_kJ_mol.thiol_sink | sulfur | fitted_ea | uniform_band | 102.000 | 30.273 | [7.000, 102.000] | yes | unidentified_in_the_fit: sampled across its declared band |
-| b8.decay_Ea_kJ_mol.carbonyl_sink | sulfur | fitted_ea | uniform_band | 150.269 | 75.580 | [102.237, 198.301] | yes | unidentified_in_the_fit: declared band capped by the prefactor prior |
-| b8.ph_drift.acid_yield_per_sink_event | sulfur | fitted_ph_drift | fixed | 6.91e-05 | 0.137 | [0.000, 1.000] | no | unidentified_in_the_fit: its bound is DEFINITIONAL (the quantity is a fraction), not a measurement of where the value li |
-| b8.ph_drift.arp_secondary_ammonium_pKa | sulfur | fitted_ph_drift | normal | 7.144 | 0.519 | [5.000, 11.000] | yes | laplace_covariance_at_b8_optimum |
+| b8.decay_Ea_kJ_mol.thiol_sink | sulfur | fitted_ea | normal | 101.254 | 32.822 | [7.000, 102.000] | yes | laplace_covariance_at_b8_optimum |
+| b8.decay_Ea_kJ_mol.carbonyl_sink | sulfur | fitted_ea | uniform_band | 143.538 | 140.102 | [95.506, 191.570] | yes | unidentified_in_the_fit: declared band capped by the prefactor prior |
+| b8.ph_drift.acid_yield_per_sink_event | sulfur | fitted_ph_drift | fixed | 7.5e-05 | 0.535 | [0.000, 1.000] | no | unidentified_in_the_fit: its bound is DEFINITIONAL (the quantity is a fraction), not a measurement of where the value li |
+| b8.ph_drift.arp_secondary_ammonium_pKa | sulfur | fitted_ph_drift | normal | 7.068 | 0.599 | [5.000, 11.000] | yes | laplace_covariance_at_b8_optimum |
 | b13.k_da_sink.log10_k_100C | trunk | fitted_rate | uniform_band | - | - | [-12.000, -1.940] | yes | two_laboratories_disagree: flat across the disagreement |
 | b13.k_go_sink.ea_kj_mol | trunk | fitted_ea | uniform_band | 0.000 | - | [0.000, 150.800] | yes | two_laboratories_disagree: flat across the disagreement |
 | b13.k_odg_da.log10_k_100C | trunk | fitted_rate | uniform_band | -5.640 | - | [-4.630, -1.960] | yes | two_laboratories_disagree: flat across the disagreement |
@@ -224,3 +241,34 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | furanic.partition_ea_offset_kj_mol | trunk | declared_band | uniform | 0.000 | - | [-50.000, 50.000] | yes | declared corner band on the furanone PARTITION barrier, sampled uniform |
 | observable.air_water_partition_constant | observable | observable | log_uniform | 0.000 | - | [-0.500, 0.500] | yes | declared +/-0.5 dex band on K_aw, sampled uniform in log10 |
 | observable.hs_spme_same_sample_dispersion | observable | observable | log_uniform_dispersion | 15.166 | - | [10.000, 23.000] | yes | measured 10-23x same-sample dispersion: D is drawn log-uniform over [10, 23] and the multiplier is D^u with u uniform on |
+| b55.k_pent_dpo.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_pent_tdp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_c2c3.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_nf.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_ptr.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_ddp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_tdp_fur.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ddp_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_fur_fft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_nf_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_nf_mp3p.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_mgo_mp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ha_mp_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_glc_ha.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_thi_hmp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_thi_mesh.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_hmp_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_hmp_mp2p.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_cys_actz.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_mmft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | - | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dimer_decay.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_h2s_loss.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_pent_caramel.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_pent_thermal.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_glc_fur.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_arp_tdp_th.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_arp_dpo_th.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ddp_mft_hs.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_fur_fft_hs.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ttca_cys.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ttca_deg.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |

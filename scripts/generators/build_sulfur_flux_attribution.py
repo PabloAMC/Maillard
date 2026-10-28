@@ -12,6 +12,12 @@ write a budget that does not close to 1 %.
 Also recorded per pot: the time by which half the charged cysteine and pentose are gone, and the in-situ pH
 at 0.1 % and at the end of the run -- the two numbers that showed the trunk runs in seconds.
 
+EVIDENCE GROUNDING (2026-10-28, owner: "scientifically grounded"; WAVES.md "Evidence decides, scores
+diagnose"): the share of the pot's integrated reaction flux that runs through steps whose rate constant is a
+measurement, a fit, or neither. Each step is graded by its parameter's ``evidence_class``. A step with no
+parameter (a rate derived from others, e.g. a detailed-balance reverse) is graded "derived". This measures how
+much of the answer rests on evidence, not whether the answer is right.
+
     python scripts/generators/build_sulfur_flux_attribution.py
     # writes results/validation/sulfur_flux_attribution.{json,md}
 """
@@ -96,6 +102,30 @@ def _engine_arguments(name: str, pot) -> Tuple:
     return captured["args"]
 
 
+#: evidence_class -> the grounding bucket it counts toward
+GROUNDING = {"measured_rate": "measured", "measured_activation_energy": "measured",
+             "derived_from_fit_data": "fitted", "bounded_from_a_timescale_bracket": "bounded",
+             "structural_constant": "measured"}
+
+
+def _grade(rxn, parameters) -> str:
+    if rxn.parameter_key is None or rxn.parameter_key not in parameters:
+        return "derived"
+    return GROUNDING.get(getattr(parameters[rxn.parameter_key], "evidence_class", ""), "unclassified")
+
+
+def _grounding(flux: Dict[str, float], parameters) -> Dict[str, float]:
+    """Share of the pot's total integrated reaction flux per evidence grade."""
+    totals: Dict[str, float] = {}
+    for rxn in sulfur.FULL_REACTIONS:
+        f = flux.get(rxn.key, 0.0)
+        if f > 0:
+            g = _grade(rxn, parameters)
+            totals[g] = totals.get(g, 0.0) + f
+    whole = sum(totals.values())
+    return {g: v / whole for g, v in sorted(totals.items())} if whole > 0 else {}
+
+
 def _half_time(run, key: str):
     series = run.series(key)
     if series[0] <= 0:
@@ -146,6 +176,8 @@ def main() -> int:
             "closure_relative_error": closure,
             "fixed_point_residual_pH": run.metadata.get("ph_fixed_point_residual"),
             "species": {k: _ranked(flux, k) for k in TRACK},
+            "evidence_grounding": _grounding(flux, parameters),
+            "grade_of_reaction": {rxn.key: _grade(rxn, parameters) for rxn in sulfur.FULL_REACTIONS if flux.get(rxn.key, 0.0) > 0},
         }
         print(f"  {name}: Cys t1/2 {pots[name]['half_time_min']['Cys']}, closure {max(closure.values()):.1e}", flush=True)
 
@@ -171,12 +203,16 @@ def main() -> int:
                   f"Half-life of the charged cysteine / pentose: {p['half_time_min']['Cys']} / "
                   f"{p['half_time_min']['PENT']} min of {p['minutes']:g}; in-situ pH "
                   + (f"{ph['start']:.2f} -> {ph['at_0.1_percent_of_run']:.2f} (0.1 % of the run) -> {ph['end']:.2f}." if ph else "clamped."),
+                  "", "Evidence grounding of the flux: " + ", ".join(f"{g} {v:.0%}" for g, v in p["evidence_grounding"].items())
+                  + " (step grades in brackets below: m measured, f fitted, b bounded, d derived).",
                   "", "| species | final mM | made by (share) | used by (share) |", "| --- | --- | --- | --- |"]
         for key in TRACK:
             s = p["species"][key]
             if s["made"]["total_mmol_L"] + s["used"]["total_mmol_L"] <= 1e-12:
                 continue
-            fmt = lambda side: ", ".join(f"{r['reaction']} {r['share']:.0%}" for r in s[side]["top"][:3]) or "—"  # noqa: E731
+            grade = p["grade_of_reaction"]
+            fmt = lambda side: ", ".join(f"{r['reaction']} [{grade.get(r['reaction'], '?')[0]}] {r['share']:.0%}"  # noqa: E731
+                                         for r in s[side]["top"][:3]) or "—"
             lines.append(f"| {key} | {p['final_mmol_L'][key]:.3g} | {fmt('made')} | {fmt('used')} |")
         lines.append("")
     OUT_MD.write_text("\n".join(lines))

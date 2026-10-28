@@ -306,7 +306,13 @@ def test_a_flat_Ea_is_drawn_and_its_band_respects_the_prefactor_prior():
     per_decade = unc.ea_halfwidth_from_prefactor(unc.B8_T_REF_C, decades=2.0)
     assert per_decade == pytest.approx(8.0, abs=0.05)
     assert half == pytest.approx(per_decade * unc.PREFACTOR_PRIOR_DECADES / 2.0)
-    for key in ("b8.decay_Ea_kJ_mol.thiol_sink", "b8.decay_Ea_kJ_mol.carbonyl_sink"):
+    # Which sink barrier is flat is the shipped wave's fact, read from its Laplace: both under B9,
+    # only the carbonyl sink under B60 (whose thiol sink is identified and drawn jointly).
+    lap = unc._laplace()
+    flat = [f"b8.decay_Ea_kJ_mol.{c['key']}" for c, ok in zip(lap["coordinates"], lap["identified"])
+            if c["block"] == "decay_Ea_kJ_mol" and not ok]
+    assert flat, "the test needs at least one unidentified sink barrier"
+    for key in flat:
         p_ = by_key[key]
         assert p_.sampled and p_.distribution == "uniform_band"
         assert p_.band[1] - p_.band[0] <= 2 * half + 1e-9
@@ -315,8 +321,39 @@ def test_a_flat_Ea_is_drawn_and_its_band_respects_the_prefactor_prior():
     # and the draw actually moves them
     import numpy as np
     rng = np.random.default_rng(11)
-    seen = {unc.sulfur_joint_draw(rng)["coords"]["b8.decay_Ea_kJ_mol.thiol_sink"] for _ in range(6)}
+    seen = {unc.sulfur_joint_draw(rng)["coords"][flat[0]] for _ in range(6)}
     assert len(seen) == 6, "a flat direction that never moves is the old bug"
+
+
+def test_an_unidentified_coordinate_is_drawn_inside_its_data_admissible_band():
+    """B60: the flat draw spans the profile's admissible band, not the optimiser's whole box."""
+    lap = unc._laplace()
+    bands = unc._admissible_bands(lap)
+    assert bands, "the shipped wave's profile carries no admissible bands"
+    import numpy as np
+    rng = np.random.default_rng(3)
+    draws = [unc.sulfur_joint_draw(rng)["coords"] for _ in range(20)]
+    for i, (lo, hi) in bands.items():
+        declared = lap["bounds"][i]
+        assert declared[0] <= lo < hi <= declared[1]
+        c = lap["coordinates"][i]
+        if c["kind"] == "Ea" or c["kind"] in unc.DEFINITIONAL_BAND_KINDS:
+            continue  # an Ea is further capped by the prefactor prior; a definitional band is not drawn
+        key = f"b8.{c['block']}.{c['key']}"
+        assert all(lo - 1e-12 <= d[key] <= hi + 1e-12 for d in draws), key
+
+
+def test_admissible_band_interpolates_the_first_crossing():
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts" / "generators"))
+    from generate_kinetic_core_b8_profile import admissible_band
+    walk = [{"side": "down", "value": -5.0, "cost": 10.0}, {"side": "down", "value": -10.0, "cost": 10.0},
+            {"side": "up", "value": -2.0, "cost": 10.5}, {"side": "up", "value": -1.0, "cost": 16.55},
+            {"side": "up", "value": 0.5, "cost": 700.0}]
+    lo, hi = admissible_band(-7.6, -10.0, 0.5, walk, 10.0, 3.59)
+    assert lo == -10.0  # never crossed: the declared bound
+    assert hi == pytest.approx(-2.0 + (3.59 - 0.5) / (6.55 - 0.5))
 
 
 

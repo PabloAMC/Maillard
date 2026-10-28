@@ -2,11 +2,11 @@
   "artifact": "env_b34_ship_rule",
   "provenance": {
     "artifact": "env_b34_ship_rule",
-    "generated_on": "2026-10-27",
+    "generated_on": "2026-10-28",
     "git": {
-      "commit": "a8d081edd0b6f487eab746cdff8bacdf3ee80311",
-      "short": "a8d081ed",
-      "branch": "b51-shipped-under-correctness-rule",
+      "commit": "4a72c92d730b8bb95bb4c4f716581c206ba72bcc",
+      "short": "4a72c92d",
+      "branch": "b58-ttca-formation",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_env_b34_ship_rule.py",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "0a394a98c881536d59e3c956136a7d9198290ae1341a3f7cfc771da76b332506"
+        "sha256": "36cf79bec67ed41e786341e477d83a3370d2cf09eb21d91e0df0af4c0cf88a8b"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",
@@ -86,11 +86,11 @@
   "T2": {
     "noise_floor_from_two_seeds": {
       "n": 45,
-      "median_rel": 0.07953939056136565,
-      "p95_rel": 0.32001610312623113,
-      "max_rel": 0.73331742580331
+      "median_rel": 0.08767242004188865,
+      "p95_rel": 0.5501906062238263,
+      "max_rel": 0.8500487233798969
     },
-    "tolerance_used_rel": 0.73331742580331,
+    "tolerance_used_rel": 0.8500487233798969,
     "rows_the_priors_reach": [
       {
         "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
@@ -472,7 +472,7 @@
     "pass": true
   },
   "T3": {
-    "median_noise_floor_max_dex": 2.6423209410008828,
+    "median_noise_floor_max_dex": 1.5478844859336547,
     "n_seed_pairs": 45,
     "unreached_medians_moved_beyond_the_floor": [],
     "maillard_medians_moved_by_the_priors": [

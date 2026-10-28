@@ -11,7 +11,7 @@
     ],
     "lane_networks": {
       "trunk": "REACTIONS (26 steps), no pH term, no a_w term",
-      "sulfur": "FULL_REACTIONS (113 steps) = trunk + sulfur, pH trajectory",
+      "sulfur": "FULL_REACTIONS (114 steps) = trunk + sulfur, pH trajectory",
       "acrylamide": "FULL_ACRYLAMIDE_REACTIONS (42 steps) = trunk + acrylamide; sulfur STEPS deliberately absent",
       "lipid": "a hydroperoxide pool resolved by position (9-/13-) and geometry (cis,trans / trans,trans), decomposing first-order into Frankel 1989's six-product measured slate. The DISTRIBUTION is fitted and frozen; the RATE is a declared, bounded ASSUMPTION and every prediction says so."
     },
@@ -24,7 +24,7 @@
     "lipid_rate_is_an_assumption": true,
     "parameters_from": [
       "results/validation/kinetic_core_b1_fit_report.json",
-      "results/validation/kinetic_core_b51_fit_report.json",
+      "results/validation/kinetic_core_b60_fit_report.json",
       "results/validation/kinetic_core_b3_fit_report.json"
     ],
     "fits_anything": false,
@@ -41,12 +41,12 @@
   },
   "provenance": {
     "artifact": "core_panel_scores",
-    "generated_on": "2026-10-27",
+    "generated_on": "2026-10-28",
     "git": {
-      "commit": "a8d081edd0b6f487eab746cdff8bacdf3ee80311",
-      "short": "a8d081ed",
-      "branch": "b51-shipped-under-correctness-rule",
-      "dirty": false
+      "commit": "587d96a2541044221a9cf9934751372d00600698",
+      "short": "587d96a2",
+      "branch": "b58-ttca-formation",
+      "dirty": true
     },
     "generated_by": "src/kinetic_core/scoring.py",
     "inputs": [
@@ -55,8 +55,8 @@
         "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
       },
       {
-        "path": "results/validation/kinetic_core_b51_fit_report.json",
-        "sha256": "6831994252eb8a1d45f8d9802a81b9aaffb69dbb1e3f591bb3d4e20fd55558f1"
+        "path": "results/validation/kinetic_core_b60_fit_report.json",
+        "sha256": "8e33492dea4c5d84c36eac4f1f9f4c9a87143597367574b58ff0af5a183215c3"
       },
       {
         "path": "results/validation/kinetic_core_b3_fit_report.json",
@@ -135,6 +135,22 @@
         "sha256": "43dfe0b02f27ebe94ee929d02925850a90a05b64da6b55556fd636afd7e87cbf"
       },
       {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c.json",
+        "sha256": "7f92dc83e58d2e6da41add608eb51c0fbf80ff7666f72b3c408fdd1a78f7a8ad"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c.json",
+        "sha256": "d9ecfaa01d102ccc66d75ade3d3d4cda6040fcc356a906e16f1b607df9358089"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c.json",
+        "sha256": "cf709197e0307487e5804350ee393fe8813036b98289d2cf44bda0952505c056"
+      },
+      {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c.json",
+        "sha256": "fffd2e5732f82a458143a7a79bc4d46930a65075259d7178b079f46eee37ff4a"
+      },
+      {
         "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_fructose_asparagine_180C_Lin2022.json",
         "sha256": "031a2e87d5c6a61452187898a349fe81146218ab944e8f094be00d9ae1823e68"
       },
@@ -203,6 +219,10 @@
         "sha256": "83f849c1a202104e02c207c8fc4312fed65d48f796935d57bccef7335e46c0db"
       },
       {
+        "path": "data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json",
+        "sha256": "aa80c461e26a8827174d58ec29a219563bf7333b6c9af934730f7d0eeb52ecf6"
+      },
+      {
         "path": "data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
         "sha256": "8c3c3b02959de5bfc9c610702529bc659cb5bd157924b11f7f7d657ea342fa69"
       },
@@ -227,8 +247,8 @@
       "sha256": "eebfb67971a2c0f604f257e532525dbdfb8b69f2b0f683561a730a99b21f8d3a"
     },
     {
-      "report": "results/validation/kinetic_core_b51_fit_report.json",
-      "sha256": "6831994252eb8a1d45f8d9802a81b9aaffb69dbb1e3f591bb3d4e20fd55558f1"
+      "report": "results/validation/kinetic_core_b60_fit_report.json",
+      "sha256": "8e33492dea4c5d84c36eac4f1f9f4c9a87143597367574b58ff0af5a183215c3"
     },
     {
       "report": "results/validation/kinetic_core_b3_fit_report.json",
@@ -244,27 +264,31 @@
     }
   ],
   "summary": {
-    "panel_benchmark_count": 37,
-    "scored_benchmark_count": 28,
+    "panel_benchmark_count": 42,
+    "scored_benchmark_count": 33,
     "refused_benchmark_count": 9,
-    "matched_compound_count": 50,
+    "matched_compound_count": 66,
     "refused_compound_count": 27,
-    "within_band_count": 16,
-    "within_band_rate": 0.32,
+    "within_band_count": 21,
+    "within_band_rate": 0.3181818181818182,
     "fold_summary": {
-      "n": 50,
-      "median_fold_error": 8.883929073298354,
-      "worst_fold_error": 9631.58938385354,
+      "n": 66,
+      "median_fold_error": 7.870779728916462,
+      "worst_fold_error": 28681.014327158067,
       "best_fold_error": 1.0101717815321325,
-      "median_abs_log10_error": 0.9484118493006441,
-      "geometric_mean_fold": 13.537987659923033
+      "median_abs_log10_error": 0.8952914455776485,
+      "geometric_mean_fold": 14.18129211909695
     },
     "evidence_role_totals": {
-      "external_holdout": 21,
+      "external_holdout": 26,
       "predictive": 16
     },
-    "predictive_passes": [],
-    "strict_ready": [],
+    "predictive_passes": [
+      "hofmann1998_norfuraneol_cysteine_145C_20min_pH5"
+    ],
+    "strict_ready": [
+      "hofmann1998_norfuraneol_cysteine_145C_20min_pH5"
+    ],
     "by_panel": {
       "external_matrix": {
         "benchmarks": 4,
@@ -283,69 +307,69 @@
         }
       },
       "maillard_path_holdout": {
-        "benchmarks": 17,
-        "rows": 31,
-        "within_band": 7,
+        "benchmarks": 22,
+        "rows": 47,
+        "within_band": 10,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.22580645161290322,
+        "within_band_rate": 0.2127659574468085,
         "fold_summary": {
-          "n": 31,
-          "median_fold_error": 11.05882031112474,
-          "worst_fold_error": 4722.558672000399,
+          "n": 47,
+          "median_fold_error": 14.29545771289258,
+          "worst_fold_error": 28681.014327158067,
           "best_fold_error": 1.0101717815321325,
-          "median_abs_log10_error": 1.0437088014990417,
-          "geometric_mean_fold": 16.854160977190435
+          "median_abs_log10_error": 1.155198065185522,
+          "geometric_mean_fold": 19.410627802336744
         }
       },
       "trust_loop": {
         "benchmarks": 16,
         "rows": 15,
-        "within_band": 8,
-        "contract_passes": 0,
-        "strict_ready": 0,
-        "within_band_rate": 0.5333333333333333,
+        "within_band": 10,
+        "contract_passes": 1,
+        "strict_ready": 1,
+        "within_band_rate": 0.6666666666666666,
         "fold_summary": {
           "n": 15,
-          "median_fold_error": 2.5293915494522987,
+          "median_fold_error": 2.209926978429618,
           "worst_fold_error": 9631.58938385354,
-          "best_fold_error": 1.4599242176143181,
-          "median_abs_log10_error": 0.40301606327250333,
-          "geometric_mean_fold": 8.692102951627906
+          "best_fold_error": 1.0572202533945545,
+          "median_abs_log10_error": 0.3443779237353335,
+          "geometric_mean_fold": 5.422065289194194
         }
       }
     },
     "by_evidence_role": {
       "external_holdout": {
-        "benchmarks": 21,
-        "rows": 35,
-        "within_band": 8,
+        "benchmarks": 26,
+        "rows": 51,
+        "within_band": 11,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.22857142857142856,
+        "within_band_rate": 0.21568627450980393,
         "fold_summary": {
-          "n": 35,
+          "n": 51,
           "median_fold_error": 9.307565792209804,
-          "worst_fold_error": 4722.558672000399,
+          "worst_fold_error": 28681.014327158067,
           "best_fold_error": 1.0101717815321325,
           "median_abs_log10_error": 0.9688361147902614,
-          "geometric_mean_fold": 16.36906199273914
+          "geometric_mean_fold": 18.815897496543716
         }
       },
       "predictive": {
         "benchmarks": 16,
         "rows": 15,
-        "within_band": 8,
-        "contract_passes": 0,
-        "strict_ready": 0,
-        "within_band_rate": 0.5333333333333333,
+        "within_band": 10,
+        "contract_passes": 1,
+        "strict_ready": 1,
+        "within_band_rate": 0.6666666666666666,
         "fold_summary": {
           "n": 15,
-          "median_fold_error": 2.5293915494522987,
+          "median_fold_error": 2.209926978429618,
           "worst_fold_error": 9631.58938385354,
-          "best_fold_error": 1.4599242176143181,
-          "median_abs_log10_error": 0.40301606327250333,
-          "geometric_mean_fold": 8.692102951627906
+          "best_fold_error": 1.0572202533945545,
+          "median_abs_log10_error": 0.3443779237353335,
+          "geometric_mean_fold": 5.422065289194194
         }
       }
     },
@@ -384,18 +408,18 @@
       },
       "sulfur": {
         "benchmarks": null,
-        "rows": 24,
-        "within_band": 5,
+        "rows": 40,
+        "within_band": 10,
         "contract_passes": 0,
         "strict_ready": 0,
-        "within_band_rate": 0.20833333333333334,
+        "within_band_rate": 0.25,
         "fold_summary": {
-          "n": 24,
-          "median_fold_error": 13.191989989126515,
-          "worst_fold_error": 4722.558672000399,
-          "best_fold_error": 1.424121134340477,
-          "median_abs_log10_error": 1.1202648628790786,
-          "geometric_mean_fold": 17.855415319600937
+          "n": 40,
+          "median_fold_error": 13.648057497355655,
+          "worst_fold_error": 28681.014327158067,
+          "best_fold_error": 1.0572202533945545,
+          "median_abs_log10_error": 1.134581687463521,
+          "geometric_mean_fold": 17.256408245758504
         }
       },
       "trunk": {
@@ -416,36 +440,36 @@
       }
     },
     "honest_literature": {
-      "benchmarks": 28,
-      "rows": 50,
-      "within_band": 16,
-      "contract_passes": 0,
-      "strict_ready": 0,
-      "within_band_rate": 0.32,
+      "benchmarks": 33,
+      "rows": 66,
+      "within_band": 21,
+      "contract_passes": 1,
+      "strict_ready": 1,
+      "within_band_rate": 0.3181818181818182,
       "fold_summary": {
-        "n": 50,
-        "median_fold_error": 8.883929073298354,
-        "worst_fold_error": 9631.58938385354,
+        "n": 66,
+        "median_fold_error": 7.870779728916462,
+        "worst_fold_error": 28681.014327158067,
         "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 0.9484118493006441,
-        "geometric_mean_fold": 13.537987659923033
+        "median_abs_log10_error": 0.8952914455776485,
+        "geometric_mean_fold": 14.18129211909695
       },
       "definition": "external-literature rows with fit-recovery benchmarks removed, by the repository's leverage rule (src/fit_target_index.py): rows a LOW-leverage fit saw stay in, annotated in_core_fit"
     },
     "out_of_sample": {
-      "benchmarks": 22,
-      "rows": 44,
-      "within_band": 12,
+      "benchmarks": 27,
+      "rows": 60,
+      "within_band": 17,
       "contract_passes": 0,
       "strict_ready": 0,
-      "within_band_rate": 0.2727272727272727,
+      "within_band_rate": 0.2833333333333333,
       "fold_summary": {
-        "n": 44,
-        "median_fold_error": 10.18319305166727,
-        "worst_fold_error": 9631.58938385354,
+        "n": 60,
+        "median_fold_error": 8.883929073298354,
+        "worst_fold_error": 28681.014327158067,
         "best_fold_error": 1.0101717815321325,
-        "median_abs_log10_error": 1.0062724581446516,
-        "geometric_mean_fold": 16.68227290749252
+        "median_abs_log10_error": 0.9484118493006441,
+        "geometric_mean_fold": 16.720822333559536
       },
       "definition": "honest_literature rows MINUS every row a core fit read (fit_targets.kinetic_core_*_fit_targets.json): the strongest claim the panel supports"
     },
@@ -458,20 +482,20 @@
       "within_band_rate": 0.6666666666666666,
       "fold_summary": {
         "n": 6,
-        "median_fold_error": 1.947291347969204,
-        "worst_fold_error": 13.001146092055336,
-        "best_fold_error": 1.4599242176143181,
-        "median_abs_log10_error": 0.28870549768907167,
-        "geometric_mean_fold": 2.926932165912884
+        "median_fold_error": 1.8971193514294862,
+        "worst_fold_error": 13.000657281818732,
+        "best_fold_error": 1.0572202533945545,
+        "median_abs_log10_error": 0.2778729827043354,
+        "geometric_mean_fold": 2.730847893849181
       },
       "definition": "literature rows the sulfur fit read; reported, never pooled"
     },
     "holdout_within_band": {
-      "hits": 7,
-      "total": 31
+      "hits": 10,
+      "total": 47
     },
     "shared_with_holdout_panel": 4,
-    "wall_seconds": 21.4
+    "wall_seconds": 112.1
   },
   "benchmarks": [
     {
@@ -665,15 +689,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b51_fit_targets.json",
+          "record": "kinetic_core_b60_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -712,14 +736,14 @@
           "target_unit": "ppb",
           "measured": 310.0,
           "measured_ppb": 310.0,
-          "predicted": 4030.355288537154,
-          "fold_error": 13.001146092055336,
-          "abs_log10_error": 1.1139816384234522,
+          "predicted": 4030.2037573638067,
+          "fold_error": 13.000657281818732,
+          "abs_log10_error": 1.1139653097415199,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            576.247755709196,
-            28188.853823557172
+            576.2260902498729,
+            28187.79399389219
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -738,8 +762,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 13.001146092055336,
-      "mean_abs_log10_error": 1.1139816384234522,
+      "max_ratio": 13.000657281818732,
+      "mean_abs_log10_error": 1.1139653097415199,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -773,15 +797,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b51_fit_targets.json",
+          "record": "kinetic_core_b60_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -820,14 +844,14 @@
           "target_unit": "ppb",
           "measured": 5362.0,
           "measured_ppb": 5362.0,
-          "predicted": 2922.336461209064,
-          "fold_error": 1.8348332134834224,
-          "abs_log10_error": 0.263596592971838,
+          "predicted": 2919.6509380647494,
+          "fold_error": 1.8365209108024838,
+          "abs_log10_error": 0.2639958776279118,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            417.8266447100481,
-            20439.219232747368
+            417.44267690224274,
+            20420.43631810702
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -846,8 +870,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.8348332134834224,
-      "mean_abs_log10_error": 0.263596592971838,
+      "max_ratio": 1.8365209108024838,
+      "mean_abs_log10_error": 0.2639958776279118,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -855,7 +879,7 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 1.835 > 1.10",
+        "max ratio 1.837 > 1.10",
         "mean |log10 ratio| 0.264 > 0.041"
       ],
       "within_band_count": 1,
@@ -881,15 +905,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b51_fit_targets.json",
+          "record": "kinetic_core_b60_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -928,14 +952,14 @@
           "target_unit": "ppb",
           "measured": 6230.0,
           "measured_ppb": 6230.0,
-          "predicted": 1152.1377353380751,
-          "fold_error": 5.407339599177274,
-          "abs_log10_error": 0.7329836455914082,
+          "predicted": 1146.4759197447625,
+          "fold_error": 5.434043482908016,
+          "abs_log10_error": 0.73512310929561,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            164.72909625230946,
-            8058.208242439369
+            163.9195873392454,
+            8018.608733038858
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -954,8 +978,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 5.407339599177274,
-      "mean_abs_log10_error": 0.7329836455914082,
+      "max_ratio": 5.434043482908016,
+      "mean_abs_log10_error": 0.73512310929561,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -963,8 +987,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 5.407 > 1.10",
-        "mean |log10 ratio| 0.733 > 0.041"
+        "max ratio 5.434 > 1.10",
+        "mean |log10 ratio| 0.735 > 0.041"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -1071,15 +1095,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b51_fit_targets.json",
+          "record": "kinetic_core_b60_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1118,14 +1142,14 @@
           "target_unit": "ppb",
           "measured": 11016.0,
           "measured_ppb": 11016.0,
-          "predicted": 17856.374243169477,
-          "fold_error": 1.6209490053712308,
-          "abs_log10_error": 0.20976935227341192,
+          "predicted": 17014.10599418542,
+          "fold_error": 1.5444903771047038,
+          "abs_log10_error": 0.1887852067887507,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            2553.0492589561804,
-            124889.91349994119
+            2432.624345161957,
+            118998.97464937335
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1144,8 +1168,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.6209490053712308,
-      "mean_abs_log10_error": 0.20976935227341192,
+      "max_ratio": 1.5444903771047038,
+      "mean_abs_log10_error": 0.1887852067887507,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1153,8 +1177,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 1.621 > 1.10",
-        "mean |log10 ratio| 0.210 > 0.041"
+        "max ratio 1.544 > 1.10",
+        "mean |log10 ratio| 0.189 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -1261,15 +1285,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b51_fit_targets.json",
+          "record": "kinetic_core_b60_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1308,14 +1332,14 @@
           "target_unit": "ppb",
           "measured": 1016.0,
           "measured_ppb": 1016.0,
-          "predicted": 1483.2830050961472,
-          "fold_error": 1.4599242176143181,
-          "abs_log10_error": 0.16433031282134514,
+          "predicted": 1074.1357774488674,
+          "fold_error": 1.0572202533945545,
+          "abs_log10_error": 0.024165474411660504,
           "within_band": true,
-          "within_contract_ratio": false,
+          "within_contract_ratio": true,
           "interval_ug_per_L": [
-            212.07522453398397,
-            10374.28336120657
+            153.57661713901186,
+            7512.651925073562
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1334,18 +1358,15 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 1.4599242176143181,
-      "mean_abs_log10_error": 0.16433031282134514,
+      "max_ratio": 1.0572202533945545,
+      "mean_abs_log10_error": 0.024165474411660504,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
-      "scale_status": "fail",
-      "overall_status": "scale-gap",
+      "scale_status": "pass",
+      "overall_status": "pass-no-ranking",
       "strict_gate_eligible": true,
-      "strict_ready": false,
-      "blocking_issues": [
-        "max ratio 1.46 > 1.10",
-        "mean |log10 ratio| 0.164 > 0.041"
-      ],
+      "strict_ready": true,
+      "blocking_issues": [],
       "within_band_count": 1,
       "lanes": [
         "sulfur"
@@ -1369,15 +1390,15 @@
       "evidence_role": "predictive",
       "fit_target_of": {
         "core": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ],
         "index": [
-          "kinetic_core_b51_fit_targets.json"
+          "kinetic_core_b60_fit_targets.json"
         ]
       },
       "core_fit_targets": [
         {
-          "record": "kinetic_core_b51_fit_targets.json",
+          "record": "kinetic_core_b60_fit_targets.json",
           "lane": "sulfur",
           "leverage_class": "global_low_leverage",
           "free_parameters": 23,
@@ -1416,14 +1437,14 @@
           "target_unit": "ppb",
           "measured": 4224.0,
           "measured_ppb": 4224.0,
-          "predicted": 8700.381813889859,
-          "fold_error": 2.0597494824549853,
-          "abs_log10_error": 0.3138144024063053,
+          "predicted": 8269.399953646607,
+          "fold_error": 1.9577177920564885,
+          "abs_log10_error": 0.291750087780759,
           "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1243.9537299171575,
-            60851.65540080538
+            1182.3332741665456,
+            57837.30957041302
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -1442,8 +1463,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 2.0597494824549853,
-      "mean_abs_log10_error": 0.3138144024063053,
+      "max_ratio": 1.9577177920564885,
+      "mean_abs_log10_error": 0.291750087780759,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1451,8 +1472,8 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 2.06 > 1.10",
-        "mean |log10 ratio| 0.314 > 0.041"
+        "max ratio 1.958 > 1.10",
+        "mean |log10 ratio| 0.292 > 0.041"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -1506,16 +1527,16 @@
           "target_unit": "ppb",
           "measured": 121.0,
           "measured_ppb": 121.0,
-          "predicted": 2.5645144899325207,
-          "fold_error": 47.182420093553006,
-          "abs_log10_error": 1.6737802130718393,
-          "within_band": false,
+          "predicted": 346.6167649315865,
+          "fold_error": 2.8646013630709626,
+          "abs_log10_error": 0.45706419423916117,
+          "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.366666364007751,
-            17.9365636301857
+            49.558194894402135,
+            2424.284863232771
           ],
-          "measured_within_interval": false,
+          "measured_within_interval": true,
           "lane": "sulfur",
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
@@ -1532,16 +1553,16 @@
           "target_unit": "ppb",
           "measured": 198.0,
           "measured_ppb": 198.0,
-          "predicted": 1.6750585396329571,
-          "fold_error": 118.20482407939382,
-          "abs_log10_error": 2.072635200981017,
-          "within_band": false,
+          "predicted": 93.63341226749424,
+          "fold_error": 2.114629758812471,
+          "abs_log10_error": 0.32523433966367316,
+          "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.2394946983682321,
-            11.715587569638972
+            13.387416199260482,
+            654.884838296044
           ],
-          "measured_within_interval": false,
+          "measured_within_interval": true,
           "lane": "sulfur",
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
@@ -1558,8 +1579,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 118.20482407939382,
-      "mean_abs_log10_error": 1.8732077070264284,
+      "max_ratio": 2.8646013630709626,
+      "mean_abs_log10_error": 0.39114926695141716,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1567,10 +1588,10 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 118.2 > 1.10",
-        "mean |log10 ratio| 1.873 > 0.041"
+        "max ratio 2.865 > 1.10",
+        "mean |log10 ratio| 0.391 > 0.041"
       ],
-      "within_band_count": 0,
+      "within_band_count": 2,
       "lanes": [
         "sulfur"
       ]
@@ -1916,14 +1937,14 @@
           "target_unit": "ppb",
           "measured": 715.22,
           "measured_ppb": 715.22,
-          "predicted": 55.30864868632143,
-          "fold_error": 12.931431466646618,
-          "abs_log10_error": 1.1116466025026317,
+          "predicted": 46.452689560711484,
+          "fold_error": 15.39674035591074,
+          "abs_log10_error": 1.1874287860777932,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            7.907859827506441,
-            386.8362219657002
+            6.6416621338938375,
+            324.89643765705074
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -1944,8 +1965,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 12.931431466646618,
-      "mean_abs_log10_error": 1.1116466025026317,
+      "max_ratio": 15.39674035591074,
+      "mean_abs_log10_error": 1.1874287860777932,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -1953,8 +1974,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 12.93 > 1.50",
-        "mean |log10 ratio| 1.112 > 0.100"
+        "max ratio 15.4 > 1.50",
+        "mean |log10 ratio| 1.187 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -2087,14 +2108,14 @@
           "target_unit": "ppb",
           "measured": 11.7,
           "measured_ppb": 11.7,
-          "predicted": 235.81693749255635,
-          "fold_error": 20.155293802782595,
-          "abs_log10_error": 1.3043891332257238,
+          "predicted": 232.91571325339726,
+          "fold_error": 19.907325919093783,
+          "abs_log10_error": 1.2990129266985548,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            33.716377654046276,
-            1649.3357791564113
+            33.3015695696624,
+            1629.0442216801719
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -2115,8 +2136,8 @@
       "matched_compounds": 1,
       "total_compounds": 1,
       "coverage": 1.0,
-      "max_ratio": 20.155293802782595,
-      "mean_abs_log10_error": 1.3043891332257238,
+      "max_ratio": 19.907325919093783,
+      "mean_abs_log10_error": 1.2990129266985548,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -2124,10 +2145,570 @@
       "strict_gate_eligible": true,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 20.16 > 3.00",
-        "mean |log10 ratio| 1.304 > 0.480"
+        "max ratio 19.91 > 3.00",
+        "mean |log10 ratio| 1.299 > 0.480"
       ],
       "within_band_count": 0,
+      "lanes": [
+        "sulfur"
+      ]
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c",
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c.json",
+      "panel": "maillard_path_holdout",
+      "tier": "REFERENCE",
+      "family": "free_aa_sulfur",
+      "execution_path": "free_precursor",
+      "protein_type": "free",
+      "conditions": {
+        "temp_C": 120.0,
+        "time_min": 120.0,
+        "ph": 7.5,
+        "water_activity": 0.98
+      },
+      "signal_origin": "external_literature",
+      "evidence_role": "external_holdout",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "core_fit_targets": [],
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
+      "scale_thresholds": {
+        "max_ratio": 1.5,
+        "mean_abs_log10_error": 0.1,
+        "source": "global BenchmarkThresholds default"
+      },
+      "compounds": [
+        {
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "target_unit": "ppb",
+          "measured": 8.1,
+          "measured_ppb": 8.1,
+          "predicted": 1305.955240705862,
+          "fold_error": 161.2290420624521,
+          "abs_log10_error": 2.207443273644197,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            186.72144826878537,
+            9134.028824969335
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "2-Furfurylthiol (FFT)",
+          "target_unit": "ppb",
+          "measured": 116.0,
+          "measured_ppb": 116.0,
+          "predicted": 129.54014944023567,
+          "fold_error": 1.1167254262089281,
+          "abs_log10_error": 0.04794640450247584,
+          "within_band": true,
+          "within_contract_ratio": true,
+          "interval_ug_per_L": [
+            18.52125062062789,
+            906.0214485899392
+          ],
+          "measured_within_interval": true,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "Furfural",
+          "target_unit": "ppb",
+          "measured": 716.0,
+          "measured_ppb": 716.0,
+          "predicted": 24.137597101194398,
+          "fold_error": 29.66326751574498,
+          "abs_log10_error": 1.472218988428614,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            3.4511191103513164,
+            168.82164167329432
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        }
+      ],
+      "refused_compounds": [],
+      "matched_compounds": 3,
+      "total_compounds": 3,
+      "coverage": 1.0,
+      "max_ratio": 161.2290420624521,
+      "mean_abs_log10_error": 1.2425362221917624,
+      "pearson_r_log10": -0.9998548050365764,
+      "ranking_status": "fail",
+      "scale_status": "fail",
+      "overall_status": "ranking-gap",
+      "strict_gate_eligible": false,
+      "strict_ready": false,
+      "blocking_issues": [
+        "ranking -1.000 < 0.85",
+        "max ratio 161.2 > 1.50",
+        "mean |log10 ratio| 1.243 > 0.100"
+      ],
+      "within_band_count": 1,
+      "lanes": [
+        "sulfur"
+      ]
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c",
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c.json",
+      "panel": "maillard_path_holdout",
+      "tier": "REFERENCE",
+      "family": "free_aa_sulfur",
+      "execution_path": "free_precursor",
+      "protein_type": "free",
+      "conditions": {
+        "temp_C": 120.0,
+        "time_min": 30.0,
+        "ph": 7.5,
+        "water_activity": 0.98
+      },
+      "signal_origin": "external_literature",
+      "evidence_role": "external_holdout",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "core_fit_targets": [],
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
+      "scale_thresholds": {
+        "max_ratio": 1.5,
+        "mean_abs_log10_error": 0.1,
+        "source": "global BenchmarkThresholds default"
+      },
+      "compounds": [
+        {
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "target_unit": "ppb",
+          "measured": 59.1,
+          "measured_ppb": 59.1,
+          "predicted": 844.8615508319515,
+          "fold_error": 14.29545771289258,
+          "abs_log10_error": 1.155198065185522,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            120.79569608579304,
+            5909.076756900448
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "2-Furfurylthiol (FFT)",
+          "target_unit": "ppb",
+          "measured": 124.0,
+          "measured_ppb": 124.0,
+          "predicted": 25.670764832420303,
+          "fold_error": 4.830397567406992,
+          "abs_log10_error": 0.6839828769679456,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            3.6703266990116585,
+            179.5448256033662
+          ],
+          "measured_within_interval": true,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "Furfural",
+          "target_unit": "ppb",
+          "measured": 113.0,
+          "measured_ppb": 113.0,
+          "predicted": 4.594963849634168,
+          "fold_error": 24.59214124372199,
+          "abs_log10_error": 1.3907963445112697,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.6569737445845942,
+            32.137802999715134
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        }
+      ],
+      "refused_compounds": [],
+      "matched_compounds": 3,
+      "total_compounds": 3,
+      "coverage": 1.0,
+      "max_ratio": 24.59214124372199,
+      "mean_abs_log10_error": 1.0766590955549125,
+      "pearson_r_log10": -0.9026080573404525,
+      "ranking_status": "fail",
+      "scale_status": "fail",
+      "overall_status": "ranking-gap",
+      "strict_gate_eligible": false,
+      "strict_ready": false,
+      "blocking_issues": [
+        "ranking -0.903 < 0.85",
+        "max ratio 24.59 > 1.50",
+        "mean |log10 ratio| 1.077 > 0.100"
+      ],
+      "within_band_count": 0,
+      "lanes": [
+        "sulfur"
+      ]
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c",
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c.json",
+      "panel": "maillard_path_holdout",
+      "tier": "REFERENCE",
+      "family": "free_aa_sulfur",
+      "execution_path": "free_precursor",
+      "protein_type": "free",
+      "conditions": {
+        "temp_C": 120.0,
+        "time_min": 60.0,
+        "ph": 7.5,
+        "water_activity": 0.98
+      },
+      "signal_origin": "external_literature",
+      "evidence_role": "external_holdout",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "core_fit_targets": [],
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
+      "scale_thresholds": {
+        "max_ratio": 1.5,
+        "mean_abs_log10_error": 0.1,
+        "source": "global BenchmarkThresholds default"
+      },
+      "compounds": [
+        {
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "target_unit": "ppb",
+          "measured": 64.1,
+          "measured_ppb": 64.1,
+          "predicted": 1748.8197481769012,
+          "fold_error": 27.28267937873481,
+          "abs_log10_error": 1.4358870192930266,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            250.040848233167,
+            12231.483508492747
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "2-Furfurylthiol (FFT)",
+          "target_unit": "ppb",
+          "measured": 383.0,
+          "measured_ppb": 383.0,
+          "predicted": 73.48805525675505,
+          "fold_error": 5.211731330511628,
+          "abs_log10_error": 0.7169820193422111,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            10.507095251274668,
+            513.9854675596209
+          ],
+          "measured_within_interval": true,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "Furfural",
+          "target_unit": "ppb",
+          "measured": 397.0,
+          "measured_ppb": 397.0,
+          "predicted": 8.835422427452816,
+          "fold_error": 44.932769571545215,
+          "abs_log10_error": 1.6525631885144387,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            1.263261419915746,
+            61.7961478446344
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        }
+      ],
+      "refused_compounds": [],
+      "matched_compounds": 3,
+      "total_compounds": 3,
+      "coverage": 1.0,
+      "max_ratio": 44.932769571545215,
+      "mean_abs_log10_error": 1.2684774090498923,
+      "pearson_r_log10": -0.9241065198761361,
+      "ranking_status": "fail",
+      "scale_status": "fail",
+      "overall_status": "ranking-gap",
+      "strict_gate_eligible": false,
+      "strict_ready": false,
+      "blocking_issues": [
+        "ranking -0.924 < 0.85",
+        "max ratio 44.93 > 1.50",
+        "mean |log10 ratio| 1.268 > 0.100"
+      ],
+      "within_band_count": 0,
+      "lanes": [
+        "sulfur"
+      ]
+    },
+    {
+      "benchmark_id": "mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c",
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c.json",
+      "panel": "maillard_path_holdout",
+      "tier": "REFERENCE",
+      "family": "free_aa_sulfur",
+      "execution_path": "free_precursor",
+      "protein_type": "free",
+      "conditions": {
+        "temp_C": 120.0,
+        "time_min": 90.0,
+        "ph": 7.5,
+        "water_activity": 0.98
+      },
+      "signal_origin": "external_literature",
+      "evidence_role": "external_holdout",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "core_fit_targets": [],
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_internal_standard_calibration_curve'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": null,
+        "vessel_mL": null,
+        "headspace_mL": null,
+        "status": "ambiguous",
+        "basis": "closed vessel with volumes or atmosphere the source leaves unstated"
+      },
+      "scale_thresholds": {
+        "max_ratio": 1.5,
+        "mean_abs_log10_error": 0.1,
+        "source": "global BenchmarkThresholds default"
+      },
+      "compounds": [
+        {
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "target_unit": "ppb",
+          "measured": 57.1,
+          "measured_ppb": 57.1,
+          "predicted": 1645.1264262771613,
+          "fold_error": 28.811320950563243,
+          "abs_log10_error": 1.4595631704077685,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            235.21509721396984,
+            11506.238292066246
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "2-Furfurylthiol (FFT)",
+          "target_unit": "ppb",
+          "measured": 270.0,
+          "measured_ppb": 270.0,
+          "predicted": 110.83672177407993,
+          "fold_error": 2.4360157507215416,
+          "abs_log10_error": 0.3866800920188579,
+          "within_band": true,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            15.847092278472548,
+            775.2071280807168
+          ],
+          "measured_within_interval": true,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "Furfural",
+          "target_unit": "ppb",
+          "measured": 575.0,
+          "measured_ppb": 575.0,
+          "predicted": 16.171519447804577,
+          "fold_error": 35.55633729136449,
+          "abs_log10_error": 1.5509170173129052,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            2.3121539221886636,
+            113.10580958346021
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        }
+      ],
+      "refused_compounds": [],
+      "matched_compounds": 3,
+      "total_compounds": 3,
+      "coverage": 1.0,
+      "max_ratio": 35.55633729136449,
+      "mean_abs_log10_error": 1.1323867599131772,
+      "pearson_r_log10": -0.9949436122719311,
+      "ranking_status": "fail",
+      "scale_status": "fail",
+      "overall_status": "ranking-gap",
+      "strict_gate_eligible": false,
+      "strict_ready": false,
+      "blocking_issues": [
+        "ranking -0.995 < 0.85",
+        "max ratio 35.56 > 1.50",
+        "mean |log10 ratio| 1.132 > 0.100"
+      ],
+      "within_band_count": 1,
       "lanes": [
         "sulfur"
       ]
@@ -3369,16 +3950,16 @@
           "target_unit": "ppb",
           "measured": 229.0,
           "measured_ppb": 229.0,
-          "predicted": 2532.469851247565,
-          "fold_error": 11.05882031112474,
-          "abs_log10_error": 1.0437088014990417,
+          "predicted": 1523.270747310501,
+          "fold_error": 6.651837324500005,
+          "abs_log10_error": 0.8229416196912176,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            362.0847205042027,
-            17712.439062734284
+            217.79254845637763,
+            10653.96307659554
           ],
-          "measured_within_interval": false,
+          "measured_within_interval": true,
           "lane": "sulfur",
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
@@ -3395,14 +3976,14 @@
           "target_unit": "ppb",
           "measured": 553.0,
           "measured_ppb": 553.0,
-          "predicted": 41.32159187676484,
-          "fold_error": 13.382833886197696,
-          "abs_log10_error": 1.1265480873347051,
+          "predicted": 24.707237592100633,
+          "fold_error": 22.38210556475988,
+          "abs_log10_error": 1.349900939750109,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            5.90803362895573,
-            289.0088415985745
+            3.532564549015098,
+            172.80578485188823
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3421,8 +4002,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 13.382833886197696,
-      "mean_abs_log10_error": 1.0851284444168734,
+      "max_ratio": 22.38210556475988,
+      "mean_abs_log10_error": 1.0864212797206632,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3430,8 +4011,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 13.38 > 1.10",
-        "mean |log10 ratio| 1.085 > 0.041"
+        "max ratio 22.38 > 1.10",
+        "mean |log10 ratio| 1.086 > 0.041"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3485,14 +4066,14 @@
           "target_unit": "ppb",
           "measured": 12.0,
           "measured_ppb": 12.0,
-          "predicted": 0.18304770112394114,
-          "fold_error": 65.5566823637672,
-          "abs_log10_error": 1.816616967052726,
+          "predicted": 0.16959779504376088,
+          "fold_error": 70.75563686959298,
+          "abs_log10_error": 1.8497610443919792,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.02617159515946391,
-            1.280260552809423
+            0.024248569113783345,
+            1.1861900778036365
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3511,14 +4092,14 @@
           "target_unit": "ppb",
           "measured": 25.0,
           "measured_ppb": 25.0,
-          "predicted": 0.005293740477640356,
-          "fold_error": 4722.558672000399,
-          "abs_log10_error": 3.6741773622037663,
+          "predicted": 0.00509621752530742,
+          "fold_error": 4905.5990792881075,
+          "abs_log10_error": 3.690692051663328,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.0007568826694319509,
-            0.037025141909564456
+            0.0007286414475459715,
+            0.03564363947826602
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3537,8 +4118,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 4722.558672000399,
-      "mean_abs_log10_error": 2.7453971646282462,
+      "max_ratio": 4905.5990792881075,
+      "mean_abs_log10_error": 2.7702265480276536,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3546,8 +4127,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 4723 > 1.10",
-        "mean |log10 ratio| 2.745 > 0.041"
+        "max ratio 4906 > 1.10",
+        "mean |log10 ratio| 2.770 > 0.041"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3601,16 +4182,16 @@
           "target_unit": "ppb",
           "measured": 96.0,
           "measured_ppb": 96.0,
-          "predicted": 2.5645144899325207,
-          "fold_error": 37.43398618992635,
-          "abs_log10_error": 1.5732660757949577,
+          "predicted": 346.6167649315865,
+          "fold_error": 3.6105913013706927,
+          "abs_log10_error": 0.5575783315160429,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.366666364007751,
-            17.9365636301857
+            49.558194894402135,
+            2424.284863232771
           ],
-          "measured_within_interval": false,
+          "measured_within_interval": true,
           "lane": "sulfur",
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
@@ -3627,16 +4208,16 @@
           "target_unit": "ppb",
           "measured": 143.0,
           "measured_ppb": 143.0,
-          "predicted": 1.6750585396329571,
-          "fold_error": 85.37015072400665,
-          "abs_log10_error": 1.9313060481845477,
-          "within_band": false,
+          "predicted": 93.63341226749424,
+          "fold_error": 1.5272326035867847,
+          "abs_log10_error": 0.1839051868672039,
+          "within_band": true,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            0.2394946983682321,
-            11.715587569638972
+            13.387416199260482,
+            654.884838296044
           ],
-          "measured_within_interval": false,
+          "measured_within_interval": true,
           "lane": "sulfur",
           "envelope_state": "in_envelope",
           "declaration_warnings": [],
@@ -3653,8 +4234,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 85.37015072400665,
-      "mean_abs_log10_error": 1.7522860619897527,
+      "max_ratio": 3.6105913013706927,
+      "mean_abs_log10_error": 0.3707417591916234,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3662,10 +4243,10 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 85.37 > 1.10",
-        "mean |log10 ratio| 1.752 > 0.041"
+        "max ratio 3.611 > 1.10",
+        "mean |log10 ratio| 0.371 > 0.041"
       ],
-      "within_band_count": 0,
+      "within_band_count": 1,
       "lanes": [
         "sulfur"
       ]
@@ -3717,14 +4298,14 @@
           "target_unit": "ppb",
           "measured": 6.88,
           "measured_ppb": 6.88,
-          "predicted": 9.797953404262481,
-          "fold_error": 1.424121134340477,
-          "abs_log10_error": 0.15354693153270793,
+          "predicted": 10.33444791663891,
+          "fold_error": 1.5020999878835624,
+          "abs_log10_error": 0.176698842615408,
           "within_band": true,
-          "within_contract_ratio": true,
+          "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.400881127231541,
-            68.52822059343201
+            1.4775874562210694,
+            72.28053628369683
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -3743,14 +4324,14 @@
           "target_unit": "ppb",
           "measured": 1.28,
           "measured_ppb": 1.28,
-          "predicted": 178.09189812223195,
-          "fold_error": 139.1342954079937,
-          "abs_log10_error": 2.143434193044787,
+          "predicted": 299.4987213644264,
+          "fold_error": 233.9833760659581,
+          "abs_log10_error": 2.3691850029687496,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            25.46302974698179,
-            1245.5989916337007
+            42.82140249890119,
+            2094.7348490332147
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3769,8 +4350,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 139.1342954079937,
-      "mean_abs_log10_error": 1.1484905622887474,
+      "max_ratio": 233.9833760659581,
+      "mean_abs_log10_error": 1.2729419227920789,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3778,8 +4359,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 139.1 > 1.50",
-        "mean |log10 ratio| 1.148 > 0.100"
+        "max ratio 234 > 1.50",
+        "mean |log10 ratio| 1.273 > 0.100"
       ],
       "within_band_count": 1,
       "lanes": [
@@ -3833,14 +4414,14 @@
           "target_unit": "ppb",
           "measured": 3.29,
           "measured_ppb": 3.29,
-          "predicted": 11.280258751181687,
-          "fold_error": 3.4286500763470174,
-          "abs_log10_error": 0.5351231638357836,
+          "predicted": 12.015186836403757,
+          "fold_error": 3.6520324730710505,
+          "abs_log10_error": 0.562534630530626,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.6128165692178384,
-            78.89566608019175
+            1.7178943178027746,
+            84.03585320564763
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -3859,14 +4440,14 @@
           "target_unit": "ppb",
           "measured": 1.46,
           "measured_ppb": 1.46,
-          "predicted": 156.41214463978585,
-          "fold_error": 107.13160591766155,
-          "abs_log10_error": 2.0299176150958793,
+          "predicted": 246.54230592010032,
+          "fold_error": 168.86459309595912,
+          "abs_log10_error": 2.227538597853825,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            22.36332552881531,
-            1093.967842988927
+            35.249857717976255,
+            1724.350466736862
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -3885,8 +4466,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 107.13160591766155,
-      "mean_abs_log10_error": 1.2825203894658315,
+      "max_ratio": 168.86459309595912,
+      "mean_abs_log10_error": 1.3950366141922257,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -3894,8 +4475,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 107.1 > 1.50",
-        "mean |log10 ratio| 1.283 > 0.100"
+        "max ratio 168.9 > 1.50",
+        "mean |log10 ratio| 1.395 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -3949,14 +4530,14 @@
           "target_unit": "ppb",
           "measured": 2.4,
           "measured_ppb": 2.4,
-          "predicted": 12.26087164681334,
-          "fold_error": 5.108696519505559,
-          "abs_log10_error": 0.7083101043227431,
+          "predicted": 12.859461265417423,
+          "fold_error": 5.358108860590593,
+          "abs_log10_error": 0.729011532914131,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.7530215734601158,
-            85.7542062319928
+            1.8386060690236874,
+            89.94082355258482
           ],
           "measured_within_interval": true,
           "lane": "sulfur",
@@ -3975,14 +4556,14 @@
           "target_unit": "ppb",
           "measured": 1.68,
           "measured_ppb": 1.68,
-          "predicted": 114.94178284370822,
-          "fold_error": 68.41772788315966,
-          "abs_log10_error": 1.8351686473966784,
+          "predicted": 167.26635837441702,
+          "fold_error": 99.56330855620061,
+          "abs_log10_error": 1.9980993200762338,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            16.43402123611317,
-            803.9184843121737
+            23.91522749695156,
+            1169.8836921959128
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4001,8 +4582,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 68.41772788315966,
-      "mean_abs_log10_error": 1.2717393758597106,
+      "max_ratio": 99.56330855620061,
+      "mean_abs_log10_error": 1.3635554264951824,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4010,8 +4591,8 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 68.42 > 1.50",
-        "mean |log10 ratio| 1.272 > 0.100"
+        "max ratio 99.56 > 1.50",
+        "mean |log10 ratio| 1.364 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [
@@ -4065,14 +4646,14 @@
           "target_unit": "ppb",
           "measured": 1.71,
           "measured_ppb": 1.71,
-          "predicted": 12.566660916937044,
-          "fold_error": 7.348924512828681,
-          "abs_log10_error": 0.8662237863876303,
+          "predicted": 12.681291393120274,
+          "fold_error": 7.415959879017704,
+          "abs_log10_error": 0.8701673715722075,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            1.79674237919898,
-            87.89293803582292
+            1.813131890769916,
+            88.69467919895165
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4091,14 +4672,14 @@
           "target_unit": "ppb",
           "measured": 1.62,
           "measured_ppb": 1.62,
-          "predicted": 71.40343258953904,
-          "fold_error": 44.07619295650557,
-          "abs_log10_error": 1.6442040756489806,
+          "predicted": 96.09786516381412,
+          "fold_error": 59.319669854206246,
+          "abs_log10_error": 1.7731987252812358,
           "within_band": false,
           "within_contract_ratio": false,
           "interval_ug_per_L": [
-            10.209042338445796,
-            499.4053326989163
+            13.739776065546813,
+            672.1215575120856
           ],
           "measured_within_interval": false,
           "lane": "sulfur",
@@ -4117,8 +4698,8 @@
       "matched_compounds": 2,
       "total_compounds": 2,
       "coverage": 1.0,
-      "max_ratio": 44.07619295650557,
-      "mean_abs_log10_error": 1.2552139310183055,
+      "max_ratio": 59.319669854206246,
+      "mean_abs_log10_error": 1.3216830484267217,
       "pearson_r_log10": null,
       "ranking_status": "n/a",
       "scale_status": "fail",
@@ -4126,8 +4707,177 @@
       "strict_gate_eligible": false,
       "strict_ready": false,
       "blocking_issues": [
-        "max ratio 44.08 > 1.50",
-        "mean |log10 ratio| 1.255 > 0.100"
+        "max ratio 59.32 > 1.50",
+        "mean |log10 ratio| 1.322 > 0.100"
+      ],
+      "within_band_count": 0,
+      "lanes": [
+        "sulfur"
+      ]
+    },
+    {
+      "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+      "bench_file": "data/benchmarks/external_validation/maillard_path/mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b.json",
+      "panel": "maillard_path_holdout",
+      "tier": "REFERENCE",
+      "family": "free_aa_sulfur",
+      "execution_path": "free_precursor",
+      "protein_type": "free",
+      "conditions": {
+        "temp_C": 120.0,
+        "time_min": 50.0,
+        "ph": 6.5,
+        "water_activity": 0.98
+      },
+      "signal_origin": "external_literature",
+      "evidence_role": "external_holdout",
+      "fit_target_of": {
+        "core": [],
+        "index": []
+      },
+      "core_fit_targets": [],
+      "quantification_family": "headspace",
+      "quantification_source": "quantification_class='hs_spme_gcms_semi_quantitative_internal_standard'",
+      "vessel_oxygen": {
+        "atmosphere": "air_by_default",
+        "water_source": "unstated",
+        "provenance_class": "primary_source_pdf",
+        "fill_mL": 5.0,
+        "vessel_mL": 15.0,
+        "headspace_mL": 10.0,
+        "status": "computed",
+        "o2_mmol": 0.08842987419094749,
+        "thiol_mmol": 0.2,
+        "o2_to_thiol": 0.4421493709547374,
+        "basis": "10.0 mL headspace of air at closure = 0.088 mmol O2 over 0.200 mmol thiol charged = 0.44 mol/mol (air by default; water: unstated)"
+      },
+      "scale_thresholds": {
+        "max_ratio": 1.5,
+        "mean_abs_log10_error": 0.1,
+        "source": "global BenchmarkThresholds default"
+      },
+      "compounds": [
+        {
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "target_unit": "ppb",
+          "measured": 22.63,
+          "measured_ppb": 22.63,
+          "predicted": 0.5097743007625314,
+          "fold_error": 44.39219467546629,
+          "abs_log10_error": 1.6473066163451118,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.07288595562979618,
+            3.565430890936849
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "2-Furfurylthiol (FFT)",
+          "target_unit": "ppb",
+          "measured": 0.29,
+          "measured_ppb": 0.29,
+          "predicted": 2.4144238778564135,
+          "fold_error": 8.32559957881522,
+          "abs_log10_error": 0.9204155195830895,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.34520687168759173,
+            16.886809446941662
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "Bis(2-methyl-3-furyl) disulfide",
+          "target_unit": "ppb",
+          "measured": 18.25,
+          "measured_ppb": 18.25,
+          "predicted": 0.0006363094342419775,
+          "fold_error": 28681.014327158067,
+          "abs_log10_error": 4.457594506441295,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            9.097755834613129e-05,
+            0.004450434848613003
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        },
+        {
+          "compound": "2-Acetylthiazole",
+          "target_unit": "ppb",
+          "measured": 114.13,
+          "measured_ppb": 114.13,
+          "predicted": 0.06495568483960075,
+          "fold_error": 1757.0440567569804,
+          "abs_log10_error": 3.2447826512884443,
+          "within_band": false,
+          "within_contract_ratio": false,
+          "interval_ug_per_L": [
+            0.009287163272139083,
+            0.4543089067507838
+          ],
+          "measured_within_interval": false,
+          "lane": "sulfur",
+          "envelope_state": "in_envelope",
+          "declaration_warnings": [],
+          "shared_with": null,
+          "in_core_fit": false,
+          "carried_declared_ug_per_l": null,
+          "declared_share_of_prediction": null,
+          "formed_predicted": null,
+          "formed_measured": null,
+          "fold_error_formed_only": null
+        }
+      ],
+      "refused_compounds": [],
+      "matched_compounds": 4,
+      "total_compounds": 4,
+      "coverage": 1.0,
+      "max_ratio": 28681.014327158067,
+      "mean_abs_log10_error": 2.567524823414485,
+      "pearson_r_log10": -0.5111588509611981,
+      "ranking_status": "fail",
+      "scale_status": "fail",
+      "overall_status": "ranking-gap",
+      "strict_gate_eligible": false,
+      "strict_ready": false,
+      "blocking_issues": [
+        "ranking -0.511 < 0.85",
+        "max ratio 2.868e+04 > 1.50",
+        "mean |log10 ratio| 2.568 > 0.100"
       ],
       "within_band_count": 0,
       "lanes": [

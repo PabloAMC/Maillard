@@ -4,8 +4,8 @@
     "artifact": "sulfur_flux_attribution",
     "generated_on": "2026-10-28",
     "git": {
-      "commit": "f84c157478a207ddacca49fee2b22a514fa29479",
-      "short": "f84c1574",
+      "commit": "1562c0ef151f8868c47c03b148d319ec76994ca4",
+      "short": "1562c0ef",
       "branch": "b58-ttca-formation",
       "dirty": true
     },
@@ -17,7 +17,7 @@
       },
       {
         "path": "src/kinetic_core/sulfur.py",
-        "sha256": "266f71e3aa64f1040aaf597dd01aa061fa97f349c15b88e928d7d3d8a682111a"
+        "sha256": "184950851387eaa9681076d45fe3909cb73f54222dc10ac0853a1281eca0b8f7"
       }
     ]
   },
@@ -440,6 +440,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 5.516488048147657e-16,
+        "fitted": 0.9993863521945306,
+        "measured": 0.0006136478054687425
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     },
     "hofmann1998_ribose_cys_ph3_145C_20min": {
@@ -855,6 +902,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 1.5177431563182713e-19,
+        "fitted": 0.9921507025844605,
+        "measured": 0.007849297415539525
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     },
     "hofmann1998_ribose_cys_ph7_145C_20min": {
@@ -1270,6 +1364,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 2.3658798601497953e-15,
+        "fitted": 0.9999987790090599,
+        "measured": 1.2209909379123793e-06
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     },
     "cao2017_xylose_cys_90C_300min": {
@@ -1685,6 +1826,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 2.6714271012255182e-17,
+        "fitted": 0.9987339195359983,
+        "measured": 0.001266080464001647
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     },
     "zhang2025b_xylose_cys_ph65_120C_50min": {
@@ -2100,6 +2288,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 3.910671688988975e-18,
+        "fitted": 0.9998477955830445,
+        "measured": 0.00015220441695546093
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     },
     "zhai2019_xylose_cys_unbuffered_90C_160min": {
@@ -2515,6 +2750,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 9.620283841272758e-16,
+        "fitted": 0.9997395849132018,
+        "measured": 0.00026041508679722046
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     },
     "yiltirak_ribose_cys_120C_60min": {
@@ -2930,6 +3212,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 8.473873401518218e-17,
+        "fitted": 0.9991272048842949,
+        "measured": 0.0008727951157050317
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     },
     "food_like_unbuffered_ribose_cys_140C_30min": {
@@ -3345,6 +3674,53 @@
             ]
           }
         }
+      },
+      "evidence_grounding": {
+        "bounded": 1.802126050163851e-17,
+        "fitted": 0.980543719129038,
+        "measured": 0.019456280870961944
+      },
+      "grade_of_reaction": {
+        "r_mgo_mel": "fitted",
+        "r_mgo_dmhf": "bounded",
+        "r_cys_h2s": "measured",
+        "r_cys_thermal": "fitted",
+        "r_h2s_loss": "fitted",
+        "r_pent_dpo": "fitted",
+        "r_pent_tdp": "fitted",
+        "r_pent_caramel": "fitted",
+        "r_pent_thermal_dpo": "fitted",
+        "r_dpo_nf": "fitted",
+        "r_dpo_ptr": "fitted",
+        "r_dpo_ddp": "fitted",
+        "r_dpo_c2c3": "fitted",
+        "r_tdp_fur": "fitted",
+        "r_osone_decay_dpo": "fitted",
+        "r_osone_decay_tdp": "fitted",
+        "r_osone_decay_ddp": "fitted",
+        "r_ptr_decay": "fitted",
+        "r_ddp_mft": "fitted",
+        "r_ddp_mft_hs": "fitted",
+        "r_nf_mft": "fitted",
+        "r_nf_mp3p": "fitted",
+        "r_ha_mp_mft": "fitted",
+        "r_mgo_mp": "fitted",
+        "r_fur_fft": "fitted",
+        "r_fur_fft_hs": "fitted",
+        "r_fur_decay": "fitted",
+        "r_nf_decay": "fitted",
+        "r_mp_decay": "fitted",
+        "r_mp3p_decay": "fitted",
+        "r_cys_actz": "fitted",
+        "ch_dimer_mft": "fitted",
+        "ch_dimer_fft": "fitted",
+        "ch_thiolate_loss_fft": "fitted",
+        "ch_thiolate_loss_mft": "fitted",
+        "ch_mft_decay": "fitted",
+        "ch_fft_decay": "fitted",
+        "ch_mftd_decay": "fitted",
+        "ch_fftd_decay": "fitted",
+        "ch_actz_decay": "fitted"
       }
     }
   }

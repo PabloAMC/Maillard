@@ -891,6 +891,20 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
              "B61. Norfuraneol -> fragments through its enolate, specific-base catalysed (Mikami 2017)."),
 )
 
+def inactive_reactions() -> frozenset:
+    """Reactions in the network whose wave switch is OFF: their rate is structurally zero, so nothing reading
+    the network (the hypothesis layer) may count them as modelled. B58's TTCA formation and B61's
+    hydroxide-catalysed norfuraneol decay sit in SULFUR_REACTIONS either way."""
+    from . import parameters_sulfur as _ps
+
+    off = set()
+    if not _ps.TTCA_FORMATION.enabled:
+        off.add("r_ttca_form")
+    if not _ps.NF_HYDROXIDE_DECAY.enabled:
+        off.add("r_nf_decay_oh")
+    return frozenset(off)
+
+
 #: The full network: B1's trunk first, then the sulfur block.
 #: B39-B41 (2026-09-11): the fed 3-deoxy triangle (the reverse hydration and the epimer) is trunk chemistry
 #: on the furanic channel this lane already carries, and its two existing constants (k_tdg_ddg, k_ddg_hmf)

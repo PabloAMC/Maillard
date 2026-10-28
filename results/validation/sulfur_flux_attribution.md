@@ -8,18 +8,20 @@ Measured: thiol yields only (hofmann1998_extraction.md); no cysteine or sugar ti
 
 Half-life of the charged cysteine / pentose: 0.04036732727363128 / 0.037241742733257394 min of 20; in-situ pH 5.27 -> 4.89 (0.1 % of the run) -> 4.47.
 
+Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 2.3 | — | r_dpo_ddp 98%, r_cys_thermal 1%, r_cys_h2s 0% |
-| PENT | 0 | — | r_pent_tdp 60%, r_pent_dpo 40%, r_pent_caramel 0% |
-| DPO | 0 | r_pent_dpo 100%, r_pent_thermal_dpo 0% | r_dpo_ddp 76%, r_dpo_nf 24%, r_osone_decay_dpo 1% |
-| TDP | 15.2 | r_pent_tdp 100%, r_pent_caramel 0% | r_osone_decay_tdp 100%, r_tdp_fur 0% |
-| DDP | 7.65 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% |
-| NF | 8.2 | r_dpo_nf 100% | r_nf_decay 98%, r_nf_mft 1%, r_nf_mp3p 0% |
-| FUR | 0.0144 | r_tdp_fur 100% | r_fur_decay 95%, r_fur_fft_hs 5%, r_fur_fft 0% |
-| H2S | 0.0631 | r_cys_h2s 100% | r_h2s_loss 58%, r_nf_mft 25%, r_fur_fft_hs 14% |
-| MFT | 0.00082 | r_nf_mft 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% | ch_mft_decay 99%, ch_thiolate_loss_mft 1%, ch_dimer_mft 0% |
-| FFT | 0.00304 | r_fur_fft_hs 95%, r_fur_fft 5% | ch_fft_decay 92%, ch_thiolate_loss_fft 8%, ch_dimer_fft 0% |
+| Cys | 2.3 | — | r_dpo_ddp [f] 98%, r_cys_thermal [f] 1%, r_cys_h2s [m] 0% |
+| PENT | 0 | — | r_pent_tdp [f] 60%, r_pent_dpo [f] 40%, r_pent_caramel [f] 0% |
+| DPO | 0 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 76%, r_dpo_nf [f] 24%, r_osone_decay_dpo [f] 1% |
+| TDP | 15.2 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 100%, r_tdp_fur [f] 0% |
+| DDP | 7.65 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
+| NF | 8.2 | r_dpo_nf [f] 100% | r_nf_decay [f] 98%, r_nf_mft [f] 1%, r_nf_mp3p [f] 0% |
+| FUR | 0.0144 | r_tdp_fur [f] 100% | r_fur_decay [f] 95%, r_fur_fft_hs [f] 5%, r_fur_fft [f] 0% |
+| H2S | 0.0631 | r_cys_h2s [m] 100% | r_h2s_loss [f] 58%, r_nf_mft [f] 25%, r_fur_fft_hs [f] 14% |
+| MFT | 0.00082 | r_nf_mft [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% | ch_mft_decay [f] 99%, ch_thiolate_loss_mft [f] 1%, ch_dimer_mft [f] 0% |
+| FFT | 0.00304 | r_fur_fft_hs [f] 95%, r_fur_fft [f] 5% | ch_fft_decay [f] 92%, ch_thiolate_loss_fft [f] 8%, ch_dimer_fft [f] 0% |
 
 ## hofmann1998_ribose_cys_ph3_145C_20min
 
@@ -27,18 +29,20 @@ Measured: MFT 553 / FFT 229 ppb (the pH 3 arm of the sweep; MFT 553 -> 198 -> 25
 
 Half-life of the charged cysteine / pentose: None / 0.0034556519610157294 min of 20; in-situ pH 3.71 -> 3.71 (0.1 % of the run) -> 3.70.
 
+Evidence grounding of the flux: bounded 0%, fitted 99%, measured 1% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 26.9 | — | r_cys_thermal 74%, r_cys_h2s 23%, r_dpo_ddp 3% |
-| PENT | 0 | — | r_pent_tdp 100%, r_pent_dpo 0%, r_pent_caramel 0% |
-| DPO | 0 | r_pent_dpo 100%, r_pent_thermal_dpo 0% | r_dpo_ddp 50%, r_dpo_nf 49%, r_osone_decay_dpo 1% |
-| TDP | 25 | r_pent_tdp 100%, r_pent_caramel 0% | r_osone_decay_tdp 100%, r_tdp_fur 0% |
-| DDP | 0.0458 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% |
-| NF | 0.149 | r_dpo_nf 100% | r_nf_decay 84%, r_nf_mft 15%, r_nf_mp3p 1% |
-| FUR | 0.0203 | r_tdp_fur 100% | r_fur_decay 88%, r_fur_fft_hs 9%, r_fur_fft 3% |
-| H2S | 0.901 | r_cys_h2s 100% | r_h2s_loss 92%, r_fur_fft_hs 6%, r_fur_fft 2% |
-| MFT | 0.000216 | r_nf_mft 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% | ch_mft_decay 100%, ch_thiolate_loss_mft 0%, ch_dimer_mft 0% |
-| FFT | 0.0133 | r_fur_fft_hs 77%, r_fur_fft 23% | ch_fft_decay 99%, ch_thiolate_loss_fft 1%, ch_dimer_fft 0% |
+| Cys | 26.9 | — | r_cys_thermal [f] 74%, r_cys_h2s [m] 23%, r_dpo_ddp [f] 3% |
+| PENT | 0 | — | r_pent_tdp [f] 100%, r_pent_dpo [f] 0%, r_pent_caramel [f] 0% |
+| DPO | 0 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 50%, r_dpo_nf [f] 49%, r_osone_decay_dpo [f] 1% |
+| TDP | 25 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 100%, r_tdp_fur [f] 0% |
+| DDP | 0.0458 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
+| NF | 0.149 | r_dpo_nf [f] 100% | r_nf_decay [f] 84%, r_nf_mft [f] 15%, r_nf_mp3p [f] 1% |
+| FUR | 0.0203 | r_tdp_fur [f] 100% | r_fur_decay [f] 88%, r_fur_fft_hs [f] 9%, r_fur_fft [f] 3% |
+| H2S | 0.901 | r_cys_h2s [m] 100% | r_h2s_loss [f] 92%, r_fur_fft_hs [f] 6%, r_fur_fft [f] 2% |
+| MFT | 0.000216 | r_nf_mft [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% | ch_mft_decay [f] 100%, ch_thiolate_loss_mft [f] 0%, ch_dimer_mft [f] 0% |
+| FFT | 0.0133 | r_fur_fft_hs [f] 77%, r_fur_fft [f] 23% | ch_fft_decay [f] 99%, ch_thiolate_loss_fft [f] 1%, ch_dimer_fft [f] 0% |
 
 ## hofmann1998_ribose_cys_ph7_145C_20min
 
@@ -46,18 +50,20 @@ Measured: MFT 25 / FFT 12 ppb (the pH 7 arm of the sweep).
 
 Half-life of the charged cysteine / pentose: 0.00023228972276806878 / 5.5 min of 20; in-situ pH 7.24 -> 7.22 (0.1 % of the run) -> 7.22.
 
+Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 0 | — | r_dpo_ddp 100%, r_cys_h2s 0%, r_cys_thermal 0% |
-| PENT | 45.8 | — | r_pent_dpo 89%, r_pent_caramel 10%, r_pent_thermal_dpo 1% |
-| DPO | 0.00601 | r_pent_dpo 99%, r_pent_thermal_dpo 1% | r_dpo_ddp 68%, r_dpo_nf 31%, r_osone_decay_dpo 1% |
-| TDP | 2.93 | r_pent_caramel 100%, r_pent_tdp 0% | r_osone_decay_tdp 100%, r_tdp_fur 0% |
-| DDP | 8.32 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft_hs 0%, r_ddp_mft 0% |
-| NF | 13.5 | r_dpo_nf 100% | r_nf_decay 100%, r_nf_mft 0%, r_nf_mp3p 0% |
-| FUR | 0.00231 | r_tdp_fur 100% | r_fur_decay 100%, r_fur_fft_hs 0%, r_fur_fft 0% |
-| H2S | 3.08e-05 | r_cys_h2s 100% | r_h2s_loss 60%, r_fur_fft_hs 34%, r_nf_mft 5% |
-| MFT | 4.46e-08 | r_nf_mft 100%, r_ddp_mft_hs 0%, r_ddp_mft 0% | ch_mft_decay 52%, ch_thiolate_loss_mft 48%, ch_dimer_mft 0% |
-| FFT | 1.49e-06 | r_fur_fft_hs 100%, r_fur_fft 0% | ch_thiolate_loss_fft 89%, ch_fft_decay 11%, ch_dimer_fft 0% |
+| Cys | 0 | — | r_dpo_ddp [f] 100%, r_cys_h2s [m] 0%, r_cys_thermal [f] 0% |
+| PENT | 45.8 | — | r_pent_dpo [f] 89%, r_pent_caramel [f] 10%, r_pent_thermal_dpo [f] 1% |
+| DPO | 0.00601 | r_pent_dpo [f] 99%, r_pent_thermal_dpo [f] 1% | r_dpo_ddp [f] 68%, r_dpo_nf [f] 31%, r_osone_decay_dpo [f] 1% |
+| TDP | 2.93 | r_pent_caramel [f] 100%, r_pent_tdp [f] 0% | r_osone_decay_tdp [f] 100%, r_tdp_fur [f] 0% |
+| DDP | 8.32 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft_hs [f] 0%, r_ddp_mft [f] 0% |
+| NF | 13.5 | r_dpo_nf [f] 100% | r_nf_decay [f] 100%, r_nf_mft [f] 0%, r_nf_mp3p [f] 0% |
+| FUR | 0.00231 | r_tdp_fur [f] 100% | r_fur_decay [f] 100%, r_fur_fft_hs [f] 0%, r_fur_fft [f] 0% |
+| H2S | 3.08e-05 | r_cys_h2s [m] 100% | r_h2s_loss [f] 60%, r_fur_fft_hs [f] 34%, r_nf_mft [f] 5% |
+| MFT | 4.46e-08 | r_nf_mft [f] 100%, r_ddp_mft_hs [f] 0%, r_ddp_mft [f] 0% | ch_mft_decay [f] 52%, ch_thiolate_loss_mft [f] 48%, ch_dimer_mft [f] 0% |
+| FFT | 1.49e-06 | r_fur_fft_hs [f] 100%, r_fur_fft [f] 0% | ch_thiolate_loss_fft [f] 89%, ch_fft_decay [f] 11%, ch_dimer_fft [f] 0% |
 
 ## cao2017_xylose_cys_90C_300min
 
@@ -65,18 +71,20 @@ Measured: free Cys + TTCA + Cys-Amadori = 0.425 M of 0.40 at 5 h: no measurable 
 
 Half-life of the charged cysteine / pentose: None / 0.030698789768422653 min of 300; in-situ pH 5.28 -> 3.91 (0.1 % of the run) -> 3.55.
 
+Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 266 | — | r_dpo_ddp 54%, r_cys_thermal 45%, r_cys_h2s 1% |
-| PENT | 0 | — | r_pent_tdp 81%, r_pent_dpo 19%, r_pent_caramel 0% |
-| DPO | 0 | r_pent_dpo 100%, r_pent_thermal_dpo 0% | r_dpo_ddp 96%, r_dpo_nf 4%, r_osone_decay_dpo 0% |
-| TDP | 310 | r_pent_tdp 100%, r_pent_caramel 0% | r_osone_decay_tdp 87%, r_tdp_fur 13% |
-| DDP | 69.4 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% |
-| NF | 2.79 | r_dpo_nf 100% | r_nf_mft 65%, r_nf_decay 31%, r_nf_mp3p 5% |
-| FUR | 1.43 | r_tdp_fur 100% | r_fur_fft_hs 43%, r_fur_decay 39%, r_fur_fft 17% |
-| H2S | 0.242 | r_cys_h2s 100% | r_fur_fft_hs 43%, r_h2s_loss 35%, r_fur_fft 17% |
-| MFT | 0.00559 | r_nf_mft 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% | ch_mft_decay 100%, ch_thiolate_loss_mft 0%, ch_dimer_mft 0% |
-| FFT | 0.23 | r_fur_fft_hs 71%, r_fur_fft 29% | ch_fft_decay 99%, ch_thiolate_loss_fft 1%, ch_dimer_fft 0% |
+| Cys | 266 | — | r_dpo_ddp [f] 54%, r_cys_thermal [f] 45%, r_cys_h2s [m] 1% |
+| PENT | 0 | — | r_pent_tdp [f] 81%, r_pent_dpo [f] 19%, r_pent_caramel [f] 0% |
+| DPO | 0 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 96%, r_dpo_nf [f] 4%, r_osone_decay_dpo [f] 0% |
+| TDP | 310 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 87%, r_tdp_fur [f] 13% |
+| DDP | 69.4 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
+| NF | 2.79 | r_dpo_nf [f] 100% | r_nf_mft [f] 65%, r_nf_decay [f] 31%, r_nf_mp3p [f] 5% |
+| FUR | 1.43 | r_tdp_fur [f] 100% | r_fur_fft_hs [f] 43%, r_fur_decay [f] 39%, r_fur_fft [f] 17% |
+| H2S | 0.242 | r_cys_h2s [m] 100% | r_fur_fft_hs [f] 43%, r_h2s_loss [f] 35%, r_fur_fft [f] 17% |
+| MFT | 0.00559 | r_nf_mft [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% | ch_mft_decay [f] 100%, ch_thiolate_loss_mft [f] 0%, ch_dimer_mft [f] 0% |
+| FFT | 0.23 | r_fur_fft_hs [f] 71%, r_fur_fft [f] 29% | ch_fft_decay [f] 99%, ch_thiolate_loss_fft [f] 1%, ch_dimer_fft [f] 0% |
 
 ## zhang2025b_xylose_cys_ph65_120C_50min
 
@@ -84,18 +92,20 @@ Measured: free Cys 1.0 + TTCA 18.2 + Cys-Amadori 1.6 = 20.8 of 40 mM at 50 min: 
 
 Half-life of the charged cysteine / pentose: 0.008994354575643945 / 0.005116464961403773 min of 50; in-situ pH 6.54 -> 6.28 (0.1 % of the run) -> 6.21.
 
+Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 0.371 | — | r_dpo_ddp 100%, r_cys_thermal 0%, r_cys_h2s 0% |
-| PENT | 0 | — | r_pent_dpo 100%, r_pent_tdp 0%, r_pent_caramel 0% |
-| DPO | 0 | r_pent_dpo 100%, r_pent_thermal_dpo 0% | r_dpo_ddp 99%, r_dpo_nf 1%, r_osone_decay_dpo 0% |
-| TDP | 0.0386 | r_pent_tdp 95%, r_pent_caramel 5% | r_osone_decay_tdp 98%, r_tdp_fur 2% |
-| DDP | 30.8 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft_hs 0%, r_ddp_mft 0% |
-| NF | 0.383 | r_dpo_nf 100% | r_nf_decay 99%, r_nf_mft 0%, r_nf_mp3p 0% |
-| FUR | 6.61e-05 | r_tdp_fur 100% | r_fur_decay 51%, r_fur_fft_hs 49%, r_fur_fft 0% |
-| H2S | 0.00931 | r_cys_h2s 100% | r_h2s_loss 97%, r_fur_fft_hs 2%, r_nf_mft 1% |
-| MFT | 4.47e-06 | r_nf_mft 97%, r_ddp_mft_hs 2%, r_ddp_mft 1% | ch_mft_decay 72%, ch_thiolate_loss_mft 28%, ch_dimer_mft 0% |
-| FFT | 2.11e-05 | r_fur_fft_hs 100%, r_fur_fft 0% | ch_thiolate_loss_fft 79%, ch_fft_decay 21%, ch_dimer_fft 0% |
+| Cys | 0.371 | — | r_dpo_ddp [f] 100%, r_cys_thermal [f] 0%, r_cys_h2s [m] 0% |
+| PENT | 0 | — | r_pent_dpo [f] 100%, r_pent_tdp [f] 0%, r_pent_caramel [f] 0% |
+| DPO | 0 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 99%, r_dpo_nf [f] 1%, r_osone_decay_dpo [f] 0% |
+| TDP | 0.0386 | r_pent_tdp [f] 95%, r_pent_caramel [f] 5% | r_osone_decay_tdp [f] 98%, r_tdp_fur [f] 2% |
+| DDP | 30.8 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft_hs [f] 0%, r_ddp_mft [f] 0% |
+| NF | 0.383 | r_dpo_nf [f] 100% | r_nf_decay [f] 99%, r_nf_mft [f] 0%, r_nf_mp3p [f] 0% |
+| FUR | 6.61e-05 | r_tdp_fur [f] 100% | r_fur_decay [f] 51%, r_fur_fft_hs [f] 49%, r_fur_fft [f] 0% |
+| H2S | 0.00931 | r_cys_h2s [m] 100% | r_h2s_loss [f] 97%, r_fur_fft_hs [f] 2%, r_nf_mft [f] 1% |
+| MFT | 4.47e-06 | r_nf_mft [f] 97%, r_ddp_mft_hs [f] 2%, r_ddp_mft [f] 1% | ch_mft_decay [f] 72%, ch_thiolate_loss_mft [f] 28%, ch_dimer_mft [f] 0% |
+| FFT | 2.11e-05 | r_fur_fft_hs [f] 100%, r_fur_fft [f] 0% | ch_thiolate_loss_fft [f] 79%, ch_fft_decay [f] 21%, ch_dimer_fft [f] 0% |
 
 ## zhai2019_xylose_cys_unbuffered_90C_160min
 
@@ -103,18 +113,20 @@ Measured: TTCA plateau 54-63 mM (65-77 % of the cysteine) at 70-90 C (zhai2019_e
 
 Half-life of the charged cysteine / pentose: None / 0.14425138201695334 min of 160; in-situ pH 6.33 -> 4.37 (0.1 % of the run) -> 3.70.
 
+Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 42.1 | — | r_dpo_ddp 88%, r_cys_thermal 12%, r_cys_h2s 0% |
-| PENT | 0 | — | r_pent_tdp 74%, r_pent_dpo 26%, r_pent_caramel 0% |
-| DPO | 4.15e-24 | r_pent_dpo 100%, r_pent_thermal_dpo 0% | r_dpo_ddp 82%, r_dpo_nf 18%, r_osone_decay_dpo 0% |
-| TDP | 119 | r_pent_tdp 100%, r_pent_caramel 0% | r_osone_decay_tdp 87%, r_tdp_fur 13% |
-| DDP | 34.8 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% |
-| NF | 7.98 | r_dpo_nf 100% | r_nf_decay 79%, r_nf_mft 20%, r_nf_mp3p 1% |
-| FUR | 0.354 | r_tdp_fur 100% | r_fur_decay 83%, r_fur_fft_hs 12%, r_fur_fft 5% |
-| H2S | 0.0382 | r_cys_h2s 100% | r_h2s_loss 54%, r_nf_mft 21%, r_fur_fft_hs 17% |
-| MFT | 0.00182 | r_nf_mft 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% | ch_mft_decay 100%, ch_thiolate_loss_mft 0%, ch_dimer_mft 0% |
-| FFT | 0.00394 | r_fur_fft_hs 72%, r_fur_fft 28% | ch_fft_decay 99%, ch_thiolate_loss_fft 1%, ch_dimer_fft 0% |
+| Cys | 42.1 | — | r_dpo_ddp [f] 88%, r_cys_thermal [f] 12%, r_cys_h2s [m] 0% |
+| PENT | 0 | — | r_pent_tdp [f] 74%, r_pent_dpo [f] 26%, r_pent_caramel [f] 0% |
+| DPO | 4.15e-24 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 82%, r_dpo_nf [f] 18%, r_osone_decay_dpo [f] 0% |
+| TDP | 119 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 87%, r_tdp_fur [f] 13% |
+| DDP | 34.8 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
+| NF | 7.98 | r_dpo_nf [f] 100% | r_nf_decay [f] 79%, r_nf_mft [f] 20%, r_nf_mp3p [f] 1% |
+| FUR | 0.354 | r_tdp_fur [f] 100% | r_fur_decay [f] 83%, r_fur_fft_hs [f] 12%, r_fur_fft [f] 5% |
+| H2S | 0.0382 | r_cys_h2s [m] 100% | r_h2s_loss [f] 54%, r_nf_mft [f] 21%, r_fur_fft_hs [f] 17% |
+| MFT | 0.00182 | r_nf_mft [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% | ch_mft_decay [f] 100%, ch_thiolate_loss_mft [f] 0%, ch_dimer_mft [f] 0% |
+| FFT | 0.00394 | r_fur_fft_hs [f] 72%, r_fur_fft [f] 28% | ch_fft_decay [f] 99%, ch_thiolate_loss_fft [f] 1%, ch_dimer_fft [f] 0% |
 
 ## yiltirak_ribose_cys_120C_60min
 
@@ -122,18 +134,20 @@ Measured: thiol yields only.
 
 Half-life of the charged cysteine / pentose: 0.13126569743697344 / 0.06355522351063742 min of 60; in-situ pH 5.65 -> 5.51 (0.1 % of the run) -> 5.16.
 
+Evidence grounding of the flux: bounded 0%, fitted 100%, measured 0% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 3.2 | — | r_dpo_ddp 97%, r_cys_thermal 3%, r_cys_h2s 0% |
-| PENT | 1.23e-23 | — | r_pent_dpo 90%, r_pent_tdp 10%, r_pent_caramel 0% |
-| DPO | 0 | r_pent_dpo 100%, r_pent_thermal_dpo 0% | r_dpo_ddp 94%, r_dpo_nf 6%, r_osone_decay_dpo 0% |
-| TDP | 1.76 | r_pent_tdp 100%, r_pent_caramel 0% | r_osone_decay_tdp 98%, r_tdp_fur 2% |
-| DDP | 15.7 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% |
-| NF | 1.4 | r_dpo_nf 100% | r_nf_decay 97%, r_nf_mft 2%, r_nf_mp3p 0% |
-| FUR | 0.00418 | r_tdp_fur 100% | r_fur_decay 68%, r_fur_fft_hs 32%, r_fur_fft 0% |
-| H2S | 0.0287 | r_cys_h2s 100% | r_h2s_loss 80%, r_fur_fft_hs 14%, r_nf_mft 5% |
-| MFT | 0.000113 | r_nf_mft 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% | ch_mft_decay 96%, ch_thiolate_loss_mft 4%, ch_dimer_mft 0% |
-| FFT | 0.00147 | r_fur_fft_hs 99%, r_fur_fft 1% | ch_fft_decay 71%, ch_thiolate_loss_fft 29%, ch_dimer_fft 0% |
+| Cys | 3.2 | — | r_dpo_ddp [f] 97%, r_cys_thermal [f] 3%, r_cys_h2s [m] 0% |
+| PENT | 1.23e-23 | — | r_pent_dpo [f] 90%, r_pent_tdp [f] 10%, r_pent_caramel [f] 0% |
+| DPO | 0 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_ddp [f] 94%, r_dpo_nf [f] 6%, r_osone_decay_dpo [f] 0% |
+| TDP | 1.76 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 98%, r_tdp_fur [f] 2% |
+| DDP | 15.7 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
+| NF | 1.4 | r_dpo_nf [f] 100% | r_nf_decay [f] 97%, r_nf_mft [f] 2%, r_nf_mp3p [f] 0% |
+| FUR | 0.00418 | r_tdp_fur [f] 100% | r_fur_decay [f] 68%, r_fur_fft_hs [f] 32%, r_fur_fft [f] 0% |
+| H2S | 0.0287 | r_cys_h2s [m] 100% | r_h2s_loss [f] 80%, r_fur_fft_hs [f] 14%, r_nf_mft [f] 5% |
+| MFT | 0.000113 | r_nf_mft [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% | ch_mft_decay [f] 96%, ch_thiolate_loss_mft [f] 4%, ch_dimer_mft [f] 0% |
+| FFT | 0.00147 | r_fur_fft_hs [f] 99%, r_fur_fft [f] 1% | ch_fft_decay [f] 71%, ch_thiolate_loss_fft [f] 29%, ch_dimer_fft [f] 0% |
 
 ## food_like_unbuffered_ribose_cys_140C_30min
 
@@ -141,15 +155,17 @@ Measured: a constructed reference, no measurement.
 
 Half-life of the charged cysteine / pentose: None / 0.09820220846365162 min of 30; in-situ pH 4.70 -> 4.66 (0.1 % of the run) -> 3.72.
 
+Evidence grounding of the flux: bounded 0%, fitted 98%, measured 2% (step grades in brackets below: m measured, f fitted, b bounded, d derived).
+
 | species | final mM | made by (share) | used by (share) |
 | --- | --- | --- | --- |
-| Cys | 7.56 | — | r_cys_thermal 65%, r_dpo_ddp 19%, r_cys_h2s 16% |
-| PENT | 0 | — | r_pent_tdp 90%, r_pent_dpo 10%, r_pent_caramel 0% |
-| DPO | 5.68e-38 | r_pent_dpo 100%, r_pent_thermal_dpo 0% | r_dpo_nf 51%, r_dpo_ddp 48%, r_osone_decay_dpo 1% |
-| TDP | 2.57 | r_pent_tdp 100%, r_pent_caramel 0% | r_osone_decay_tdp 99%, r_tdp_fur 1% |
-| DDP | 0.134 | r_dpo_ddp 100% | r_osone_decay_ddp 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% |
-| NF | 0.444 | r_dpo_nf 100% | r_nf_decay 94%, r_nf_mft 6%, r_nf_mp3p 0% |
-| FUR | 0.00324 | r_tdp_fur 100% | r_fur_decay 95%, r_fur_fft_hs 3%, r_fur_fft 1% |
-| H2S | 0.23 | r_cys_h2s 100% | r_h2s_loss 97%, r_nf_mft 2%, r_fur_fft_hs 1% |
-| MFT | 0.000188 | r_nf_mft 100%, r_ddp_mft 0%, r_ddp_mft_hs 0% | ch_mft_decay 100%, ch_thiolate_loss_mft 0%, ch_dimer_mft 0% |
-| FFT | 0.000524 | r_fur_fft_hs 76%, r_fur_fft 24% | ch_fft_decay 99%, ch_thiolate_loss_fft 1%, ch_dimer_fft 0% |
+| Cys | 7.56 | — | r_cys_thermal [f] 65%, r_dpo_ddp [f] 19%, r_cys_h2s [m] 16% |
+| PENT | 0 | — | r_pent_tdp [f] 90%, r_pent_dpo [f] 10%, r_pent_caramel [f] 0% |
+| DPO | 5.68e-38 | r_pent_dpo [f] 100%, r_pent_thermal_dpo [f] 0% | r_dpo_nf [f] 51%, r_dpo_ddp [f] 48%, r_osone_decay_dpo [f] 1% |
+| TDP | 2.57 | r_pent_tdp [f] 100%, r_pent_caramel [f] 0% | r_osone_decay_tdp [f] 99%, r_tdp_fur [f] 1% |
+| DDP | 0.134 | r_dpo_ddp [f] 100% | r_osone_decay_ddp [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% |
+| NF | 0.444 | r_dpo_nf [f] 100% | r_nf_decay [f] 94%, r_nf_mft [f] 6%, r_nf_mp3p [f] 0% |
+| FUR | 0.00324 | r_tdp_fur [f] 100% | r_fur_decay [f] 95%, r_fur_fft_hs [f] 3%, r_fur_fft [f] 1% |
+| H2S | 0.23 | r_cys_h2s [m] 100% | r_h2s_loss [f] 97%, r_nf_mft [f] 2%, r_fur_fft_hs [f] 1% |
+| MFT | 0.000188 | r_nf_mft [f] 100%, r_ddp_mft [f] 0%, r_ddp_mft_hs [f] 0% | ch_mft_decay [f] 100%, ch_thiolate_loss_mft [f] 0%, ch_dimer_mft [f] 0% |
+| FFT | 0.000524 | r_fur_fft_hs [f] 76%, r_fur_fft [f] 24% | ch_fft_decay [f] 99%, ch_thiolate_loss_fft [f] 1%, ch_dimer_fft [f] 0% |

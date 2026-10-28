@@ -1661,10 +1661,10 @@ panel:
     conditions:
       A:
         label: "cysteine + D-fructose, 145 C 20 min pH 5.0"
-        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"}}
       B:
         label: "cysteine + D-glucose, 145 C 20 min pH 5.0"
-        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"}}
     expected_relation: "A>B"
     source:
       ref: hofmann1998
@@ -1696,10 +1696,10 @@ panel:
     conditions:
       A:
         label: "cysteine + D-fructose, 145 C 20 min pH 5.0"
-        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"}}
       B:
         label: "cysteine + D-glucose, 145 C 20 min pH 5.0"
-        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Hofmann & Schieberle 1998 Table 1 footnote a: cysteine 3.3 mmol + carbohydrate 10.0 mmol in 100 mL, pH 5.0, 0.5 M phosphate"}}
     expected_relation: "A>B"
     source:
       ref: hofmann1998
@@ -2175,10 +2175,10 @@ panel:
     observables: ["MFT"]
     conditions:
       series:
-        - {label: "100 C / 4 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240}}
-        - {label: "110 C / 2 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 110, ph: 5.5, water_activity: 0.98, time_min: 120}}
-        - {label: "120 C / 1 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60}}
-        - {label: "130 C / 0.5 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 130, ph: 5.5, water_activity: 0.98, time_min: 30}}
+        - {label: "100 C / 4 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"}}}
+        - {label: "110 C / 2 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 110, ph: 5.5, water_activity: 0.98, time_min: 120, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"}}}
+        - {label: "120 C / 1 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"}}}
+        - {label: "130 C / 0.5 h", system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 130, ph: 5.5, water_activity: 0.98, time_min: 30, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"}}}
     expected_relation: "decreasing"
     source:
       ref: yiltirak2026
@@ -2188,7 +2188,7 @@ panel:
     source_conditions: "3 mL in a 20 mL PTFE-capped Duran tube under air, magnetically stirred, buffer in tap water; SIDA (MFT-d3), matrix-matched calibration; n = 3."
     fit_status: independent
     fit_note: "No fit has read Yiltirak 2026 as of this claim's date. Wave B10 (kinetic_core_b10_prereg.md) declares the six within-study FOLDS of this ladder as fit rows; when it ships, YIL-01 and YIL-02 become fit_adjacent and must be relabelled in the same change."
-    model_scope_note: "Expressible: the axis moved is temperature AND time together (the source's own design); the engine refuses neither. Like every claim on this panel the arms run at the engine's declared default buffer (the runner carries no buffer field), not the source's 0.5 M phosphate; the bundles carry the buffer and the SIGN is the same either way. The bundle series mp_holdout_ribose_cysteine_buffer_*_Yiltirak2026 scores the same four points as absolutes; this claim scores the SIGN, which the 2026-09-06 review found the core gets backwards (predicted 64 -> 171 ug/L)."
+    model_scope_note: "Expressible: the axis moved is temperature AND time together (the source's own design); the engine refuses neither. The arms carry the source's 0.5 M potassium phosphate (added 2026-10-28; until then they ran unbuffered, from a time when the runner had no buffer field). The bundle series mp_holdout_ribose_cysteine_buffer_*_Yiltirak2026 scores the same four points as absolutes; this claim scores the SIGN, which the 2026-09-06 review found the core gets backwards (predicted 64 -> 171 ug/L)."
 
   - claim_id: YIL-02
     statement: "In the same ladder FFT does the opposite: 1.68 ug/L at 120 C / 1 h exceeds 1.28 ug/L at 100 C / 4 h (Tukey a vs c)."
@@ -2198,10 +2198,10 @@ panel:
     conditions:
       A:
         label: "120 C / 1 h"
-        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60}
+        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 120, ph: 5.5, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"}}
       B:
         label: "100 C / 4 h"
-        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240}
+        system: {precursors: {D-Ribose: 25.0, L-Cysteine: 25.0}, temp_C: 100, ph: 5.5, water_activity: 0.98, time_min: 240, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Yiltirak 2026 sec. 2.3: ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)"}}
     expected_relation: "A>B"
     source:
       ref: yiltirak2026
@@ -2336,10 +2336,10 @@ panel:
     conditions:
       A:
         label: "pH 8"
-        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 8.0, water_activity: 1.0, time_min: 20}
+        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 8.0, water_activity: 1.0, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.05, source: "De Vleeschouwer 2006: equimolar asparagine-glucose in 0.05 M phosphate"}}
       B:
         label: "pH 4"
-        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 4.0, water_activity: 1.0, time_min: 20}
+        system: {precursors: {L-Asparagine: 100.0, D-Glucose: 100.0}, temp_C: 160, ph: 4.0, water_activity: 1.0, time_min: 20, buffer: {kind: phosphate, phosphate_mol_l: 0.05, source: "De Vleeschouwer 2006: equimolar asparagine-glucose in 0.05 M phosphate"}}
     expected_relation: "A>B"
     source:
       ref: devleeschouwer2006

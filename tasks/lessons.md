@@ -234,3 +234,26 @@
   unidentified. More generally, a sigma far below the step used to differentiate (1e-9 against a 0.05
   step) is a red flag, not a precision.
 
+
+## The flat-draw box and the flux-less barrier (2026-10-28, B60 envelope and the B62 design)
+
+- **What happened (1).** After the Laplace fix, three unidentified coordinates were drawn flat across the
+  optimiser's box [-10, 0.5]. The fit rows reject the top 1.5-2 decades of that box (slice cost +714 at
+  the top of `k_thiol_decay`), and those draws put 6-9 dex intervals on rows the coordinates were fitted
+  on. Coverage rose from 20/50 to 38/66, mostly bought with width.
+- **Rule (1).** An optimiser bound is not a prior. Draw an unidentified coordinate over the range the data
+  ADMIT: the profile's walk to each bound, cut at the same Δχ² the Laplace uses. Before reporting a
+  coverage gain, look at the widths that bought it.
+- **What happened (2).** I told Pablo that three sources put furfural FORMATION at ~128 kJ/mol. Two of
+  them (Garrett 1969, Danon 2014) measure amine-free, acid-catalysed pentose -> furfural, a route that
+  carries ~0 flux in every pot we score. The flux attribution showed that `r_pent_tdp` (amine-catalysed)
+  makes 95-100 % of the 3-deoxyosone. Pablo approved the wave on that claim; I caught it afterwards and
+  corrected it.
+- **Rule (2).** Before mapping a literature barrier or rate onto an engine step, check that the step
+  carries the flux in the pots it will be scored on (`sulfur_flux_attribution.md`). Also check that the
+  measured system's catalysis regime is the operative one. A barrier for an idle route says nothing about
+  the busy one.
+- **And (3), compute.** I ran 12+ processes on 10 cores (load ~170). Every job ran at ~50 % and the user
+  had no CPU left. Cap my parallel work at about half the cores, nice it, and stop superseded probes.
+  `scipy.optimize.least_squares`' `max_nfev` does not count finite-difference Jacobian evaluations, so
+  budget a k-parameter refit at ~(k+1) x max_nfev integrations.

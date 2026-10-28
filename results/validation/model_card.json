@@ -3,13 +3,13 @@
   "core_envelope": {
     "available": true,
     "ci_level_pct": 90,
-    "literature_hits": 20,
-    "literature_not_evaluable": 2,
-    "literature_total": 48,
-    "median_ci_width_log10": 1.009477907072482,
+    "literature_hits": 36,
+    "literature_not_evaluable": 1,
+    "literature_total": 65,
+    "median_ci_width_log10": 1.8693793417285811,
     "n_samples": 200,
-    "out_of_sample_hits": 18,
-    "out_of_sample_total": 43,
+    "out_of_sample_hits": 33,
+    "out_of_sample_total": 59,
     "path": "results/validation/core_prediction_uncertainty.json",
     "seed": 0,
     "unsampled_lanes": []
@@ -28,9 +28,9 @@
         "within_band": 5
       },
       "sulfur": {
-        "median_fold_error": 13.191989989126515,
-        "rows": 24,
-        "within_band": 5
+        "median_fold_error": 13.648057497355655,
+        "rows": 40,
+        "within_band": 10
       },
       "trunk": {
         "median_fold_error": 7.967894408860152,
@@ -38,23 +38,29 @@
         "within_band": 2
       }
     },
-    "median_fold_error": 8.883929073298354,
-    "out_of_sample_median_fold_error": 10.18319305166727,
-    "out_of_sample_rows": 44,
-    "out_of_sample_within_band": 12,
+    "median_fold_error": 7.870779728916462,
+    "out_of_sample_median_fold_error": 8.883929073298354,
+    "out_of_sample_rows": 60,
+    "out_of_sample_within_band": 17,
     "pass_band_level": 3.0,
-    "rows": 50,
-    "scored": 28,
+    "rows": 66,
+    "scored": 33,
     "source": "recomputed live: src.kinetic_core.scoring.score_panel over the union panel",
-    "strict_ready": 0,
-    "strict_ready_ids": [],
-    "total": 37,
-    "within_band": 16,
-    "worst_fold_error": 9631.58938385354
+    "strict_ready": 1,
+    "strict_ready_ids": [
+      "hofmann1998_norfuraneol_cysteine_145C_20min_pH5"
+    ],
+    "total": 42,
+    "within_band": 21,
+    "worst_fold_error": 28681.014327158067
   },
   "directional": {
     "available": true,
     "categories": {
+      "additive_amine": [
+        0,
+        0
+      ],
       "additive_cysteine": [
         1,
         1
@@ -72,8 +78,8 @@
         1
       ],
       "ph": [
-        4,
-        7
+        5,
+        10
       ],
       "process_heating": [
         0,
@@ -88,40 +94,45 @@
         0
       ],
       "sugar_identity": [
-        3,
-        10
+        5,
+        11
+      ],
+      "sulfur_donor": [
+        2,
+        2
       ],
       "temperature": [
-        6,
+        5,
         9
       ],
       "time": [
         2,
-        2
+        3
       ]
     },
-    "claims": 92,
+    "claims": 119,
     "excluding_ph_aw": [
-      12,
-      23
+      15,
+      27
     ],
     "headline": [
-      17,
-      31
+      21,
+      38
     ],
     "mechanism_absent_misses": 0,
     "misses": {
       "ph": [
         "PH-07",
         "HOX-03",
-        "CER07-PH-01"
+        "CER07-PH-01",
+        "CER07-PH-02",
+        "MOD08-PH-01"
       ],
       "ranking": [
         "MOT-03"
       ],
       "sugar_identity": [
         "SUG-03",
-        "SUG-09",
         "SUG-12",
         "HOF-02",
         "HOF-03",
@@ -131,50 +142,40 @@
       "temperature": [
         "TEMP-01",
         "TEMP-05",
-        "YIL-01"
+        "YIL-01",
+        "YIL-02"
+      ],
+      "time": [
+        "Z23C-T-01"
       ]
     },
-    "not_evaluable": 22,
+    "not_evaluable": 37,
     "path": "results/validation/core_directional_scores.json",
     "ph_aw": [
-      5,
-      8
+      6,
+      11
     ]
   },
   "exposed_assumptions": [
     {
-      "assumption": "the unidentified thiol sink is declared to act through the THIOLATE, with cysteine's thiol pK standing in for MFT and FFT (neither is measured); under correct speciation it destroys the thiols above pH ~5, so these buffered pH 5 pots are predicted ~100x low",
-      "rows": [
-        {
-          "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
-          "compound": "2-Furfurylthiol (FFT)",
-          "fold_error": 47.182420093553006
-        },
-        {
-          "benchmark": "hofmann1998_ribose_cysteine_145C_20min_pH5",
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "fold_error": 118.20482407939382
-        },
-        {
-          "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
-          "compound": "2-Furfurylthiol (FFT)",
-          "fold_error": 37.43398618992635
-        },
-        {
-          "benchmark": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
-          "compound": "2-Methyl-3-furanthiol (MFT)",
-          "fold_error": 85.37015072400665
-        }
-      ],
-      "wave": "B51 (the pH state on GKL / Suleimenov & Seward constants)"
-    },
-    {
-      "assumption": "the hexose entry to the thiols (r_glc_c2c3 / r_glc_fur, unidentified since B9) makes FFT from a hexose that the paper does not detect; faster cysteine thermolysis in unbuffered pots feeds it",
-      "claims": [
-        "SUG-09"
+      "assumption": "the cysteine-catalysed pentose trunk (r_pent_dpo / r_pent_tdp, one shared Ea of 64 kJ/mol) destroys cysteine and pentose in seconds where Cao 2017 and Zhang 2025b measure hours, so on a converged trajectory the 100-120 C cysteine + pentose pots over-make MFT (fit rows up to +2.5 sigma; the old oscillating pH hid it). B59 replaces the trunk with de Roos's Cys-Amadori network",
+      "fit_rows": [
+        "kang_120C_MFT",
+        "kang_100C_MFT",
+        "zhai_MFT_fold_120_over_100",
+        "kang_100C_MFT_over_FFT"
       ],
       "rows": [],
-      "wave": "B51 (the 25 C scale for the measured pH tables)"
+      "wave": "B60 (the pH trajectory converged: log-and-linear nodes, relaxed fixed point, closed flux budget)"
+    },
+    {
+      "assumption": "the furfural branch's temperature and pH dependence (TDP -> furfural -> + H2S -> FFT) is not measured: the model's FFT/MFT is 6-60x the measured ratio and the excess grows as the temperature falls, so FFT no longer rises from 100 C / 4 h to 120 C / 1 h, and furfural no longer falls monotonically from pH 4 to 6 (docs/guides/SULFUR_FLUX_MAP.md sec. 5)",
+      "claims": [
+        "YIL-02",
+        "CER07-PH-02"
+      ],
+      "rows": [],
+      "wave": "B60 (the pH trajectory converged)"
     }
   ],
   "gates": [
@@ -194,16 +195,16 @@
       "status": "PASS"
     },
     {
-      "detail": "dossier_coverage_gate: PASS (every cited dossier exists; the article table is coherent)",
+      "detail": "dossier_coverage_gate: note -- 32 lines in data/keys/pdf_dossier_aliases.yml",
       "gate": "scripts/ci/dossier_coverage_gate.py",
-      "status": "PASS"
+      "status": "FAIL"
     }
   ],
   "generated_by": "scripts/generators/generate_model_card.py",
   "headline_sentences": [
-    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 16/50 rows within 3x (median fold error 8.88x, worst 9.63e+03x); out of sample -- every row a core fit read removed -- 12/44 (median 10.2x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 20/48 evaluable literature rows (2 not evaluable: the no lane carries no sampled uncertainty), 18/43 out of sample.",
-    "**Directional and ranking claims are the product, and on the kinetic core they score 17/31 on strictly independent literature claims** (22 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 12/23 once pH and water activity are set aside, and 5/8 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
-    "**The sulfur branch has 8 absolute literature anchors, and the model lands 3 of its 7 scored anchor rows within 3x (0 of the 2 that no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not evidence).** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question."
+    "**Absolute concentrations are unreliable.** On the union panel the kinetic core lands 21/66 rows within 3x (median fold error 7.87x, worst 2.87e+04x); out of sample -- every row a core fit read removed -- 17/60 (median 8.88x). Nothing in this repository licenses a ppb number as a specification. The core's 90% Monte-Carlo interval covers 36/65 evaluable literature rows (1 not evaluable: the no lane carries no sampled uncertainty), 33/59 out of sample.",
+    "**Directional and ranking claims are the product, and on the kinetic core they score 21/38 on strictly independent literature claims** (37 independent claims not evaluable: refused arms, prose-only claims, observables the core does not represent) -- 15/27 once pH and water activity are set aside, and 6/11 on pH and water activity themselves, 0 of the misses being identical predictions across an axis the lane carries no term for. A coin scores ~0.5 on binary orderings; read the per-axis rows below, not the aggregate.",
+    "**The sulfur branch has 8 absolute literature anchors, and the model lands 5 of its 7 scored anchor rows within 3x (2 of the 2 that no core fit read; the rest are fed-intermediate rows the sulfur fit read, which are not evidence).** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998, two values derived inside the repository, never measured) was deleted on 2026-10-27. Absolute agreement is poor and the DIRECTION is a separate question."
   ],
   "no_verifiable_source": {
     "available": true,
@@ -215,21 +216,21 @@
   "sulfur_anchor": {
     "anchor_outcomes": [
       {
-        "fold_error": 13.001146092055336,
+        "fold_error": 13.000657281818732,
         "in_core_fit": true,
         "row": "hofmann1998_c2c3_recombination_145C_20min_pH3/2-Methyl-3-furanthiol (MFT)",
         "scored": true,
         "within_3x": false
       },
       {
-        "fold_error": 1.8348332134834224,
+        "fold_error": 1.8365209108024838,
         "in_core_fit": true,
         "row": "hofmann1998_c2c3_recombination_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)",
         "scored": true,
         "within_3x": true
       },
       {
-        "fold_error": 5.407339599177274,
+        "fold_error": 5.434043482908016,
         "in_core_fit": true,
         "row": "hofmann1998_c2c3_recombination_145C_20min_pH7/2-Methyl-3-furanthiol (MFT)",
         "scored": true,
@@ -250,7 +251,7 @@
         "within_3x": null
       },
       {
-        "fold_error": 1.6209490053712308,
+        "fold_error": 1.5444903771047038,
         "in_core_fit": true,
         "row": "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5/2-Furfurylthiol (FFT)",
         "scored": true,
@@ -271,25 +272,25 @@
         "within_3x": null
       },
       {
-        "fold_error": 1.4599242176143181,
+        "fold_error": 1.0572202533945545,
         "in_core_fit": true,
         "row": "hofmann1998_norfuraneol_cysteine_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)",
         "scored": true,
         "within_3x": true
       },
       {
-        "fold_error": 47.182420093553006,
+        "fold_error": 2.8646013630709626,
         "in_core_fit": false,
         "row": "hofmann1998_ribose_cysteine_145C_20min_pH5/2-Furfurylthiol (FFT)",
         "scored": true,
-        "within_3x": false
+        "within_3x": true
       },
       {
-        "fold_error": 118.20482407939382,
+        "fold_error": 2.114629758812471,
         "in_core_fit": false,
         "row": "hofmann1998_ribose_cysteine_145C_20min_pH5/2-Methyl-3-furanthiol (MFT)",
         "scored": true,
-        "within_3x": false
+        "within_3x": true
       }
     ],
     "available": true,
@@ -345,7 +346,7 @@
     {
       "basis": "recomputed live on the union panel; an absolute is never trust by rule",
       "claim_type": "Absolute concentration (ppb)",
-      "evidence": "5/24 rows within 3x, median 13.2x",
+      "evidence": "10/40 rows within 3x, median 13.6x",
       "system_class": "free precursor, cysteine / ribose meaty thiols [sulfur lane]",
       "verdict": "do-not-use"
     },
@@ -359,14 +360,14 @@
     {
       "basis": "results/validation/core_prediction_uncertainty.json (n=200); the no lane has no sampled uncertainty",
       "claim_type": "Absolute concentration interval (90% CI)",
-      "evidence": "20/48 evaluable literature rows inside; 18/43 out of sample; 2 not evaluable",
+      "evidence": "36/65 evaluable literature rows inside; 33/59 out of sample; 1 not evaluable",
       "system_class": "every lane with sampled uncertainty",
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: SUG-03, SUG-09, SUG-12, HOF-02, HOF-03, DIC-01, DIC-03",
+      "basis": "misses: SUG-03, SUG-12, HOF-02, HOF-03, DIC-01, DIC-03",
       "claim_type": "Direction / ranking on `sugar_identity`",
-      "evidence": "3/10 on the directional panel (independent claims)",
+      "evidence": "5/11 on the directional panel (independent claims)",
       "system_class": "any (sugar swap, conditions held)",
       "verdict": "do-not-use"
     },
@@ -378,16 +379,16 @@
       "verdict": "caution"
     },
     {
-      "basis": "misses: TEMP-01, TEMP-05, YIL-01",
+      "basis": "misses: TEMP-01, TEMP-05, YIL-01, YIL-02",
       "claim_type": "Direction / ranking on `temperature`",
-      "evidence": "6/9 on the directional panel (independent claims)",
+      "evidence": "5/9 on the directional panel (independent claims)",
       "system_class": "any (temperature moved, everything else held)",
-      "verdict": "caution"
+      "verdict": "do-not-use"
     },
     {
-      "basis": "",
+      "basis": "misses: Z23C-T-01",
       "claim_type": "Direction / ranking on `time`",
-      "evidence": "2/2 on the directional panel (independent claims)",
+      "evidence": "2/3 on the directional panel (independent claims)",
       "system_class": "any (time moved, everything else held)",
       "verdict": "caution"
     },
@@ -406,9 +407,9 @@
       "verdict": "do-not-use"
     },
     {
-      "basis": "misses: PH-07, HOX-03, CER07-PH-01",
+      "basis": "misses: PH-07, HOX-03, CER07-PH-01, CER07-PH-02, MOD08-PH-01",
       "claim_type": "Direction / ranking on `ph`",
-      "evidence": "4/7 on the directional panel (independent claims)",
+      "evidence": "5/10 on the directional panel (independent claims)",
       "system_class": "any (pH moved)",
       "verdict": "do-not-use"
     },
@@ -436,9 +437,9 @@
     {
       "basis": "recomputed live; strict-ready is the repository's own passing bar",
       "claim_type": "Any claim of benchmark-grade agreement",
-      "evidence": "0/37 strict-ready (none); 16/50 rows within 3x, out-of-sample 12/44",
+      "evidence": "1/42 strict-ready (hofmann1998_norfuraneol_cysteine_145C_20min_pH5); 21/66 rows within 3x, out-of-sample 17/60",
       "system_class": "the union panel: trust loop + hold-outs + matrix bundles",
-      "verdict": "do-not-use"
+      "verdict": "caution"
     },
     {
       "basis": "this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is",

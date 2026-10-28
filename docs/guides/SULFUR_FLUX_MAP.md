@@ -170,14 +170,90 @@ the flux map names directly. The Hofmann pH 3 and pH 7 arms are now pots in the 
   the temperature falls (Yiltirak FFT 234x high at 100 °C / 4 h, 59x at 130 °C / 30 min; MFT within
   1.5–7x). FFT is 95–99 % furfural + H2S, MFT 100 % norfuraneol + H2S, and both draw on the same H2S. So
   the mis-weighting sits in the furfural branch's temperature dependence (`r_tdp_fur`, `r_fur_fft_hs`)
-  against the norfuraneol branch, or in the FFT-specific sink. It is not a pH effect.
+  against the norfuraneol branch, or in the FFT-specific sink. It is not a pH effect. **Where it sits
+  (revised 2026-10-28 after a row-by-row check and two literature rounds):** the ORDER of furfural's two
+  barriers is inverted. Loss (`r_fur_decay`) runs on the carbonyl-sink family's fitted 143.5 kJ/mol, above
+  the lumped 64 its formation (`r_tdp_fur`) runs on, so furfural falls as temperature rises. Kang's
+  purified-TTCA ladder shows the opposite: the model's furfural FALLS 2.5x from 100 to 120 °C where the
+  measurement RISES 1.7x. Lowering the decay barrier ALONE is rejected by the fit rows. The slice decomposition
+  shows Kang's 120 °C furfural and Zhou's 120 °C furfural going too low, and Kang's 100 °C MFT/FFT moving from
+  3x to 19x, with smooth, real misfit and no failed integrations (the data-admissible band is ≥ 92 kJ/mol with
+  formation held at 64). The measurements in cysteine systems put formation steep and loss shallow:
+  Schirle-Keller & Reineccius 1992 at 147 kJ/mol (net furfural from glucose + cysteine; raw data rise ~30x from
+  100 to 120 °C), and Yaghmur 2005 at 46.5 kJ/mol (furfural loss with cysteine, pH 5, 40-70 °C). Garrett 1969
+  and Danon 2014 measure amine-free acid chemistry that carries no flux in our pots and do not bear on it.
+  Norfuraneol formation measures 81-93 kJ/mol (Lau 2003, Pandit 2006), so only furfural's two steps should
+  move. **Wave B62 tests exactly this**, pre-registered with Yiltirak's FFT temperature ladder as the
+  hold-out (`results/validation/kinetic_core_b62_prereg.md`).
 
 All three are statements about paths, not constants, and none can be fixed by refitting B60's free set.
 The first two are B59's subject: the Strecker sulfur split, and the enolisation pH law through the
 Cys-Amadori route. Hofmann's pH sweep is the natural pre-registered hold-out for both, since its shape
-(MFT falling ~20x and FFT ~19x from pH 3 to 7) is what a correct mechanism must reproduce. The third
-needs a measured furfural + H2S → FFT barrier, or FFT time courses at two temperatures; it is on the
-download list.
+(MFT falling ~20x and FFT ~19x from pH 3 to 7) is what a correct mechanism must reproduce. The third is
+B62's subject: furfural's two barriers, from measurements in cysteine systems. A measured furfural + H2S → FFT
+barrier, or FFT time courses at two temperatures, would still be the decisive data; no paper found in six
+literature rounds has either.
+
+### 5b. The first blind score of Amendment 45's hold-outs (2026-10-28)
+
+Amendment 45 added five hold-out bundles (16 rows) blind: only `declare_envelope` had run on them.
+B60 is the first calibration to score them: **2 of 16 within 3x**. The misses are not scatter. They
+repeat the section 5 pattern and add one new failure.
+
+| pot | MFT | FFT | furfural | other |
+| --- | --- | --- | --- | --- |
+| Zhou 2023c, Ala-xylose ARP + glutathione 20/20 mM, pH 7.5 unbuffered, 120 °C, 30 / 60 / 90 / 120 min | 14x / 27x / 29x / 161x **high** | 0.2x / 0.19x / 0.41x / 1.1x | 0.04x / 0.02x / 0.03x / 0.03x **low** | — |
+| Zhang 2025b, xylose + Cys 40/40 mM, pH 6.5 phosphate, 120 °C, 50 min | 0.02x **low** | 8x high | — | bis(2-methyl-3-furyl) disulfide 3e-5x, 2-acetylthiazole 6e-4x |
+
+- **Zhou: glutathione is not cysteine.** The engine treats glutathione as an H2S source only, through
+  Zheng & Ho 1994's measured constant. Measured MFT plateaus and then collapses (59 → 64 → 57 → 8 µg/L),
+  while the model's MFT keeps rising. That is a missing MFT SINK in a glutathione pot. The paper's own
+  balance leaves ~81 % of the lost cysteine moiety unaccounted for, probably as GSSG and mixed disulfides,
+  which are thiol–disulfide exchange partners for MFT that the engine does not carry. Furfural 25–45x low
+  in the same pot says the ARP's 3-deoxypentosone exit is too weak at pH 7.5, or furfural is consumed
+  too fast. The FFT branch landing within 5x anyway means FFT's own formation is too strong per furfural.
+  That is the same FFT/MFT mis-weighting seen in Yiltirak.
+- **Zhang: the dimer and the thiazole are absent, not mis-rated.** A disulfide 30 000x low means the
+  oxidative coupling MFT → bis(2-methyl-3-furyl) disulfide carries essentially no flux in a phosphate
+  pot at 120 °C. The oxidant pool (B27: the ambient pots use under 1 % of it) is the suspect. Zhang's
+  numbers are HS-SPME semi-quantitative (internal standard, no response factors), so ratios between
+  compounds can carry 10x errors. 4–5 orders of magnitude cannot be a response factor. 2-Acetylthiazole
+  1 750x low says the cysteamine / thiazole route (Hofmann & Schieberle 1995) is effectively absent.
+- **The FFT/MFT ratio is wrong in both directions.** In Zhang it is 370x too high (measured 0.013, model
+  4.7); in Zhou it is 70–140x too LOW. The furfural-decay barrier of section 5 cannot fix both, so the
+  ratio depends on something the model does not represent: the thiol source (Cys vs GSH), or the
+  Amadori entry (Zhou feeds a pre-formed ARP, Zhang a free sugar).
+
+None of this is fitted. Every number above is out-of-sample evidence for B59's design: a de Roos
+Cys-Amadori path and a Strecker sulfur split. They add a third structural item, glutathione as its own
+species (thiol–disulfide exchange, the GSSG pool), and Zhou's four-point series is its natural hold-out.
+
+## 5c. What the answers rest on: the grounding ledger (2026-10-28)
+
+The flux attribution now grades every step by its rate constant's evidence class
+(`results/validation/sulfur_flux_attribution.md`, "Evidence grounding of the flux"). **In every reference pot,
+98-100 % of the integrated reaction flux runs through FITTED constants.** The one measured step that carries
+flux is cysteine thermolysis (Zheng & Ho 1994), at 0.4 % on average. The sulfur lane's network is mechanistic,
+but its rates are fitted. That is why scores move the way they do: a fit compensates.
+
+Six trunk steps carry 94 % of the flux, averaged over the eight reference pots. For each, the best measurement
+the corpus now holds:
+
+| step | flux share (mean / max) | today | best available measurement | regime match |
+| --- | --- | --- | --- | --- |
+| `r_pent_tdp` pentose → 3-deoxyosone (amine-catalysed, "acid") | 31 % / 59 % | fitted | the de Roos route as measured: TTCA and Cys-Amadori time courses (Cao 2017, 90 °C); TTCA degradation at 100/120/140 °C (Zhai 2021, Kang 2026); Cys-Amadori → α-dicarbonyl Ea 85.7 kJ/mol (Zhang 2026 k16) | good (cysteine + pentose, aqueous, buffered) |
+| `r_pent_dpo` pentose → 1-deoxyosone (amine-catalysed, "base") | 23 % / 45 % | fitted | same; the Amadori decay pH law ~0.17 dex/unit and Ea 75 ± 10 (Deng 2021, a Met-glucose analogue) | analogue (another amino acid, a hexose) |
+| `r_dpo_ddp` Strecker on cysteine | 19 % / 45 % | fitted | cysteine + 3-deoxyosone binding and slow release (Edwards & Wedzicha 1991/92, 55 °C); H2S yield ≤ 8 mol % (Kobayasi 1965) | partial (hexose osone, 55 °C) |
+| `r_osone_decay_*` lumped osone sink | 19 % / 41 % | fitted (family barrier) | none measured for pentosones in the corpus; the trunk lane's fed 3-deoxyglucosone kinetics (B39-B41) are the hexose analogue | weak |
+| `r_dpo_nf` 1-deoxyosone → norfuraneol | 3 % / 12 % | fitted | norfuraneol formation Ea 81.5 (Lau 2003) and 93 kJ/mol (Pandit 2006), yield ~2.4 mol % of ribose (Pandit) | moderate (amines in a matrix) |
+| `r_cys_thermal` | 3 % / 11 % | fitted k, measured Ea (Kang) | Cao 2017: ~0 % of cysteine destroyed in 5 h at 90 °C (a bound) | good |
+
+**What this means for the waves.** The trunk is B59b's subject, and the ledger says what B59b is FOR: to
+replace the fitted trunk with the measured de Roos route (TTCA ⇌ Cys-Amadori → deoxyosones), so that most of the
+flux runs on measured constants. Scoring better is not the aim. B61 adds a measured step on the norfuraneol
+branch, and B62 measured barriers on the furfural branch, whose 145 °C rates stay fitted. Both are small in flux
+and matter for the observables. Progress is read here first: the grounding share, then accuracy, then the
+typical-yield baseline.
 
 ## 6. Smaller findings
 

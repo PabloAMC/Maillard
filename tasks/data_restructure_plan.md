@@ -875,6 +875,79 @@ layer and the report on the core. Owner decision on staging requested 2026-09-03
 
 ## 7. Improvement backlog (standing owner request 2026-09-03: "suggest ideas that improve the codebase and add them here")
 
+### North star: the best Maillard model possible, and how we converge on it (2026-10-28)
+
+Owner, 2026-10-28: *"I want to be ambitious and aim to have the best model possible. I am not sure if we are
+succeeding. I'd do all the steps you had previously planned, but I want to keep in mind what would be the best way
+to do things so we slowly converge there."* Every wave below is judged against this section as well as its own
+ship rule. A wave that passes its rule but moves us away from the target is a local win, and is recorded as one.
+
+**Where we are (honest, 2026-10-28).** Governance is strong: provenance, pre-registration, refusals, frozen
+evidence. Prediction is weak: out of sample 17/60 within 3x, median ~9x; the blind Amendment-45 hold-outs 2/16;
+independent directional agreement 21/38 (55 %, indistinguishable from chance). The binding constraint is
+identifiability. The sulfur network has ~45 constants, 23 fitted on 52 mostly-endpoint rows from many labs and
+methods; 31 constants are known at one temperature only, and 7 of the 23 fitted ones are unidentified. Six
+literature rounds on 2026-10-28 found that the missing rate data mostly do not exist.
+
+**The target (what "best possible" means here).**
+1. **Mechanistic where the data identify it, honest where they do not.** A reduced, identifiable network per lane;
+   no constant whose posterior is its prior presented as known.
+2. **Uncertainty by the simplest method that is honest.** Laplace where the profile is quadratic, flat draws over
+   the data-admissible range where it is not (B60). A full Bayesian posterior only if this demonstrably
+   miscovers. Owner, 2026-10-28: *"I prefer simplicity, let's not overcomplicate the statistical analysis."*
+3. **A simple measurement model.** Two error scales, one for calibrated methods (SIDA, calibrated HS-SPME,
+   HPLC) and one for semi-quantitative HS-SPME, read off the residuals. No per-laboratory terms unless the
+   residuals demand them. Today a semi-quant SPME row and a SIDA row carry similar weight.
+4. **Time courses over endpoints.** Fit rows that constrain timescales (intermediates over time), in the
+   multiresponse style of van Boekel. Endpoints only constrain branch ratios. That is how the seconds-vs-hours
+   trunk error survived.
+5. **Our own designed data where the literature is silent.** A SIDA time-course study chosen by the
+   value-of-information ranking: ribose + cysteine in phosphate at 3 T x 3 pH, tracking Cys, TTCA, NF, furfural,
+   H2S, MFT and FFT. With the WUR collaboration this is reachable, and it should outrank further literature mining.
+6. **Beats the baseline, or says so.** On the same rows the engine must beat a compound's TYPICAL YIELD (the
+   median yield per limiting precursor in the other studies, leave-one-study-out). If it does not, the mechanism
+   is not paying for itself, and the headline says so.
+7. **Fast and explicit engineering.** A compiled right-hand side with analytic Jacobians, so an objective
+   evaluation takes well under a second (it is 27 s). Configuration as explicit objects, not module-level
+   switches monkeypatched in place. Numerical convergence asserted in every run, not merely recorded. Waves as
+   declarative specs, not import chains (B61 -> B60 -> B51 -> B47 -> B9 -> B8 -> B2.4 -> B2.3).
+8. **A declared usefulness bar.** Out of sample within 3x >= 40 % and independent directional agreement >= 65 %,
+   against the baselines. Owner to confirm the numbers. If after B59 plus two waves we are below it, the
+   project's headline becomes "evidence map + experiment designer" rather than "predictive simulator", and that
+   is said plainly.
+
+**0. Grounding comes first (owner, 2026-10-28: "scientifically grounded", not "improves a number").** The flux
+attribution grades every step by evidence class. On B60, 98-100 % of every reference pot's flux runs on FITTED
+constants (`SULFUR_FLUX_MAP.md` sec. 5c, the grounding ledger). The first measure of progress is that share
+moving toward measured, in-regime constants. Accuracy and the baseline come second and third, and every change
+is accepted by its evidence audit (`WAVES.md`, "Evidence decides, scores diagnose").
+
+**Convergence path (each item small, each one moves toward the target).**
+- [x] **C1 Baseline (target 6).** `scripts/generators/build_null_model_baselines.py` →
+  `results/validation/null_model_baselines.md`. **Result on B60, 2026-10-28:** on 50 ppb rows the engine and the
+  typical-yield baseline tie at 15 within 3x (engine median 7.9x, baseline 12.6x). Out of sample the engine has
+  11/44 and the baseline 15/44 (medians 8.9x vs 10.4x). By lane, the engine wins sulfur (10 vs 8; median 10x vs
+  36x) and loses acrylamide (4 vs 5; 4.4x vs 1.9x). **The mechanism does not yet pay for itself overall.** A
+  log-linear regression was tried and did worse than the constant; it was dropped for simplicity. Re-run after
+  every shipped wave.
+- [ ] **C2 Usefulness bar (target 8).** Owner confirms or edits the numbers; the model card prints the bar and
+  where we stand against it.
+- [ ] **C3 Measurement model (target 3).** Two classes (calibrated vs semi-quantitative) from the bundles'
+  `quantification_family`; one residual scale each; weight the fit and the envelope by it.
+- [ ] **C4 Identifiability-first network (targets 1, 2).** From the B60/B61 profiles, lump or freeze every
+  coordinate the data cannot see. Each future kind-3 wave states which identifiable direction it adds.
+- [ ] **C5 Speed (target 7).** Profile the 27 s evaluation (the pH fixed point x nodes x solve_ivp). Then a compiled
+  RHS (numba) and an analytic Jacobian. Goal: 10x first, then 100x. It unlocks C6.
+- [ ] **C6 Posterior (target 2), only if needed.** Check the envelope's coverage of out-of-sample rows against its
+  nominal 90 %. Only if it miscovers after C3, consider sampling the reduced network's posterior.
+- [ ] **C7 Explicit configuration (target 7).** One `EngineConfig` passed through `integrate_sulfur` and the
+  engine, replacing `ph_state.B51`, `PH_NODE_GRID`, `PH_FIXED_POINT`, `FLUX_BUDGET`, `TTCA_FORMATION`,
+  `NF_HYDROXIDE_DECAY` and `FURFURAL_BARRIERS` as globals. Frozen waves become configs, not monkeypatches.
+- [ ] **C8 Designed experiment (targets 4, 5).** A one-page protocol from the value-of-information ranking, for
+  the WUR conversation (draft only; Pablo sends).
+- [ ] **C9 Waves keep moving forward (B61, B62, then B59).** Each kind-3 wave pre-registers which target it
+  serves, and records whether it reduced unidentified directions or added them.
+
 
 Not scheduled; each is a self-contained change with its motivation. Strike or promote as decided.
 
@@ -2809,8 +2882,23 @@ each wave's pre-registration). Order and status:
     the new numerics, at 33.16 (prereg sec. 6). B51's 20.41 was flattered by the unconverged pH; the rows
     made worse are the 100–120 °C cysteine + pentose thiol rows (Kang, Zhai fold; up to +2.5 σ), i.e. the
     trunk timescale (B59), now on the model card. Legacy switch `sulfur.FLUX_BUDGET` added for frozen waves
-  - [ ] Laplace and profile on B60; engine, fit-target record and freshness gate switched to B60 (done);
-    re-pin the headline guards; regenerate the scorecards, envelope and model card
+  - [x] Laplace and profile on B60 (Laplace null-space fix: 16/23 identified); engine, fit-target record and
+    freshness gate switched to B60; scorecards, envelope (with the data-admissible flat draws) and model card
+    regenerated; headline guards re-pinned (2026-10-28)
+  - [x] data facts found on the way (kind 1): the directional claims YIL-01 / YIL-02 (Yiltirak, 0.5 M
+    potassium phosphate), HOF-01 / HOF-02 (Hofmann Table 1, 0.5 M phosphate, as their sibling claims
+    already declare) and PH-ACR-01 (De Vleeschouwer 2006, 0.05 M phosphate) ran UNBUFFERED; their arms
+    now carry the source's buffer. HEX-T-01 (Liu 2021) stays undeclared: the paper gives no concentration
+  - [x] Laplace: directions dropped from the pseudo-inverse are now unidentified (σ = null); three
+    constants no row sees had been labelled identified with σ ~ 0 (B51 too)
+- [ ] **B59 — APPROVED by Pablo 2026-10-28 ("Go ahead with B59 after B61 and B62").** Run as two
+  pre-registered sub-waves, smallest first: one structural change and one hold-out each, so attribution
+  stays clean (owner: "I prefer simplicity"). B59a: the Strecker sulfur to H2S, at a fraction measured by
+  Kobayasi 1965 and bounded by the reductant the same step makes (Rizzi 2010 identifies it as the 1-deoxyosone
+  itself). The hold-out is Hofmann's pH 7 arm and the pH 3 / 5 / 7 sweep shape; this is the panel's largest
+  error (MFT 4 900x low). B59b: the de Roos TTCA → Cys-Amadori route with Cao 2017's time course as fit rows,
+  which is the trunk timescale. Each states which north-star target it serves and whether it adds or removes
+  unidentified directions. Baseline for each: whatever ships after B61 and B62.
 - [ ] **B59 — the trunk's timescale and the TTCA → Cys-Amadori route (kind 3)**. The flux map shows every
   cysteine + pentose pot runs its whole trunk in seconds: cysteine half-life 2.4 s (Hofmann, 145 °C), 0.5 s
   (Zhang 2025b, 120 °C, pH 6.5), against Cao 2017's ~0 % cysteine destroyed in 5 h at 90 °C and Zhang
@@ -2840,6 +2928,15 @@ each wave's pre-registration). Order and status:
   furfural + H2S, so the furfural branch's Ea (`r_tdp_fur`, `r_fur_fft_hs`, shared lumped 64 kJ/mol)
   against norfuraneol + H2S is the suspect. Needs a measured furfural + H2S → FFT barrier or an FFT time
   course at two temperatures before any wave; search the corpus first
+  - [x] → **B62** (pre-registered 2026-10-28, `kinetic_core_b62_prereg.md`). The decay barrier ALONE is rejected
+    by the fit rows (row-by-row slice decomposition); the cysteine-system measurements put formation steep
+    (147, Schirle-Keller 1992) and loss shallow (46.5, Yaghmur 2005). Earlier note, kept: sharper suspect (~55 %): furfural's DECAY barrier is the carbonyl-sink family's 143 kJ/mol
+    (unidentified, σ 140) under a 64 kJ/mol formation, so furfural survives too long at low T. Kang's
+    TTCA ladder agrees (furfural 3.6x high at 100 °C, on target at 120 °C; model falls 2.5x where the
+    data rise 1.7x). Candidate wave: split `k_fur_decay`'s barrier from the family with Yaghmur 2005's
+    46.5 kJ/mol (apparent, pH 5, 40–70 °C) as the band centre; hold-outs Yiltirak FFT ladder, YIL-02
+  - [ ] literature: `docs/guides/LITERATURE_SEARCH_2026-10_PATHS.md` (no aqueous T-series for
+    furfural + H2S → FFT found; Garrett & Dvorchik 1969 for pentose → furfural acid kinetics)
 - Acrylamide speciation: Rydberg 2003 is now read (`rydberg2003_extraction.md`): potato, 25 min, pH set
   cold before heating; net acrylamide peaks at pH 7.7 (180 C) and ~8.0 (160 C), ~1.7x over native pH
   5.7. **Recorded contradiction:** Rydberg's Table 2 spike recovery says acrylamide is lost FASTER at

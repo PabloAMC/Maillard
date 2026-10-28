@@ -22,7 +22,7 @@ def engine_reactions() -> List[Tuple[str, str, Set[str], Set[str]]]:
     from src.kinetic_core import acrylamide, lipid, network, sulfur
 
     out = []
-    seen = set()
+    seen = set(sulfur.inactive_reactions())  # a switched-off wave step is not modelled
     for lane, reactions in (("trunk", getattr(network, "TRUNK_REACTIONS", network.REACTIONS)),
                             ("sulfur", sulfur.SULFUR_REACTIONS),
                             ("acrylamide", getattr(acrylamide, "FULL_ACRYLAMIDE_REACTIONS", acrylamide.ACRYLAMIDE_REACTIONS))):
