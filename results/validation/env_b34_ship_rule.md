@@ -11,7 +11,7 @@
 
 ## The measured Monte-Carlo noise floor
 
-Two runs of the SAME priors at different seeds, 45 rows compared. Relative difference in interval width: median 5.63%, worst 21.96%. The floor is the observed MAXIMUM, not a quantile.
+Two runs of the SAME priors at different seeds, 45 rows compared. Relative difference in interval width: median 7.55%, worst 54.67%. The floor is the observed MAXIMUM, not a quantile.
 
 ## The rows the priors reach
 

@@ -666,7 +666,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.6816190089400151,
+          "ci_width_log10": 1.6947714473548106,
           "compound": "furfural",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
@@ -676,12 +676,12 @@
           "measured_ppb": 715.22,
           "n_finite_samples": 200,
           "observable_multipliers_applied": true,
-          "predicted_mean": 21.61357819186727,
-          "predicted_p5": 1.4832606234913412,
-          "predicted_p50": 9.627383388811474,
-          "predicted_p95": 71.2584672381578,
+          "predicted_mean": 25.038422655134685,
+          "predicted_p5": 1.7037629375517098,
+          "predicted_p50": 10.592709867850562,
+          "predicted_p95": 84.36855560702304,
           "predicted_point": 7.664427563223355,
-          "predicted_std": 37.880720419513224,
+          "predicted_std": 43.37323112066124,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -746,22 +746,22 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.6462756736678236,
+          "ci_width_log10": 1.4064305682480527,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope_extrapolated",
           "in_core_fit": false,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "sulfur",
           "measured": 11.7,
           "measured_ppb": 11.7,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 113.28155980528584,
-          "predicted_p5": 48.36552212638803,
-          "predicted_p50": 95.83768766720411,
-          "predicted_p95": 214.19609758075285,
+          "predicted_mean": 71.09452829173391,
+          "predicted_p5": 9.210295443442961,
+          "predicted_p50": 41.240192024741724,
+          "predicted_p95": 234.80326400744795,
           "predicted_point": 235.96951546777137,
-          "predicted_std": 55.50795687541955,
+          "predicted_std": 81.35254628108407,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1584,7 +1584,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.5414306322355766,
+          "ci_width_log10": 2.69809575325829,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1594,32 +1594,32 @@
           "measured_ppb": 6.88,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 16.34583897285502,
-          "predicted_p5": 1.6186119927487228,
-          "predicted_p50": 8.363776661169855,
-          "predicted_p95": 56.3084258078166,
+          "predicted_mean": 37.25427665000676,
+          "predicted_p5": 0.35901405075381265,
+          "predicted_p50": 9.18922164139871,
+          "predicted_p95": 179.1460344694894,
           "predicted_point": 64.08639808800353,
-          "predicted_std": 20.856133934892593,
+          "predicted_std": 81.26078158648569,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.6056428512113243,
+          "ci_width_log10": 3.043910200812451,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "sulfur",
           "measured": 1.28,
           "measured_ppb": 1.28,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 259.05873969292065,
-          "predicted_p5": 21.81744956398682,
-          "predicted_p50": 170.79922395020847,
-          "predicted_p95": 879.9273807582089,
+          "predicted_mean": 201.42776218983195,
+          "predicted_p5": 0.6328600164268594,
+          "predicted_p50": 60.79022414889929,
+          "predicted_p95": 700.1931520098949,
           "predicted_point": 610.2552464588841,
-          "predicted_std": 283.17894310855695,
+          "predicted_std": 396.05859262551985,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1646,27 +1646,27 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 1.1398766137295753,
+          "ci_width_log10": 2.1119575476444967,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
-          "inside_ci": false,
+          "inside_ci": true,
           "lane": "sulfur",
           "measured": 3.29,
           "measured_ppb": 3.29,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 31.69444668071679,
-          "predicted_p5": 6.268665858707723,
-          "predicted_p50": 21.555594448225616,
-          "predicted_p95": 86.50709631741883,
+          "predicted_mean": 55.02219499353509,
+          "predicted_p5": 1.8301794060785326,
+          "predicted_p50": 21.88773187941086,
+          "predicted_p95": 236.83790557049593,
           "predicted_point": 96.89165073527211,
-          "predicted_std": 30.71469544008571,
+          "predicted_std": 95.24518534783248,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.5207417663138973,
+          "ci_width_log10": 2.4409037681767995,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1676,12 +1676,12 @@
           "measured_ppb": 1.46,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 338.6460149443947,
-          "predicted_p5": 32.3744895306479,
-          "predicted_p50": 250.50381267373695,
-          "predicted_p95": 1073.8526560636506,
+          "predicted_mean": 259.04130387307873,
+          "predicted_p5": 3.1877494755772244,
+          "predicted_p50": 118.12656336803497,
+          "predicted_p95": 879.8080901429761,
           "predicted_point": 535.4957580664627,
-          "predicted_std": 351.32877828428263,
+          "predicted_std": 439.12230054406655,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1708,7 +1708,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.8289804148849271,
+          "ci_width_log10": 1.4623885796558673,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1718,17 +1718,17 @@
           "measured_ppb": 2.4,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 60.098004217108574,
-          "predicted_p5": 20.388596100202296,
-          "predicted_p50": 48.79066914725774,
-          "predicted_p95": 137.52059332728973,
+          "predicted_mean": 80.28927246755686,
+          "predicted_p5": 9.469833819738211,
+          "predicted_p50": 46.57555174201053,
+          "predicted_p95": 274.6192252312416,
           "predicted_point": 134.51295872785641,
-          "predicted_std": 41.89279383170847,
+          "predicted_std": 99.12600803049618,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.4078310098269993,
+          "ci_width_log10": 1.9160505933657328,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1738,12 +1738,12 @@
           "measured_ppb": 1.68,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 354.57263809392447,
-          "predicted_p5": 47.16480733098533,
-          "predicted_p50": 256.477464588793,
-          "predicted_p95": 1206.282630858345,
+          "predicted_mean": 277.74032649291627,
+          "predicted_p5": 9.512901446664209,
+          "predicted_p50": 162.39878846110955,
+          "predicted_p95": 784.08580382662,
           "predicted_point": 363.444679163718,
-          "predicted_std": 362.85714161260347,
+          "predicted_std": 426.95567484006125,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -1770,7 +1770,7 @@
       "buffer_applied": true,
       "compounds": [
         {
-          "ci_width_log10": 0.5981764174540491,
+          "ci_width_log10": 0.9940743064784474,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1780,17 +1780,17 @@
           "measured_ppb": 1.71,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 107.05296986524554,
-          "predicted_p5": 51.181457295791674,
-          "predicted_p50": 94.36328262035366,
-          "predicted_p95": 202.90327873544203,
+          "predicted_mean": 118.0593706730097,
+          "predicted_p5": 31.818420467875452,
+          "predicted_p50": 90.42192854871436,
+          "predicted_p95": 313.872251730009,
           "predicted_point": 170.5336107852122,
-          "predicted_std": 52.752893773607205,
+          "predicted_std": 90.70334352639696,
           "shared_with": null,
           "target_unit": "ppb"
         },
         {
-          "ci_width_log10": 1.3225548950812474,
+          "ci_width_log10": 1.4684771748033139,
           "compound": "2-Furfurylthiol (FFT)",
           "envelope_state": "in_envelope",
           "in_core_fit": false,
@@ -1800,12 +1800,12 @@
           "measured_ppb": 1.62,
           "n_finite_samples": 200,
           "observable_multipliers_applied": false,
-          "predicted_mean": 293.1963998792553,
-          "predicted_p5": 47.75001021222792,
-          "predicted_p50": 209.9810552109946,
-          "predicted_p95": 1003.5253875057266,
+          "predicted_mean": 239.45853183221448,
+          "predicted_p5": 23.07110977241429,
+          "predicted_p50": 163.42755762326186,
+          "predicted_p95": 678.4934514394545,
           "predicted_point": 211.73993849121825,
-          "predicted_std": 302.8235271760111,
+          "predicted_std": 291.913693213851,
           "shared_with": null,
           "target_unit": "ppb"
         }
@@ -3750,17 +3750,513 @@
       "sigma": null,
       "source": "Declaration D.6 Module 8, 'Xin 2026 vs Xin 2026b same-sample 10-23x discrepancy -- NOT A DATASET, a CALIBRATION FACT' (sec. E.2.2, sec. B9.1).",
       "unit": "x (same-sample dispersion D)"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_pent_dpo.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_pent_tdp.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_dpo_c2c3.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_dpo_nf.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_dpo_ptr.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_dpo_ddp.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_tdp_fur.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_ddp_mft.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_fur_fft.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_nf_mft.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_nf_mp3p.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_mgo_mp.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_ha_mp_mft.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_glc_ha.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_thi_hmp.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_thi_mesh.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_hmp_mft.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_hmp_mp2p.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_cys_actz.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": null,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_mmft.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_dimer_decay.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_h2s_loss.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_pent_caramel.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_pent_thermal.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_glc_fur.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_arp_tdp_th.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_arp_dpo_th.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_ddp_mft_hs.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        29.675,
+        133.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_fur_fft_hs.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class sulfur; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_ttca_cys.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
+    },
+    {
+      "band": [
+        30.0,
+        237.0
+      ],
+      "centre": 64.0822869313293,
+      "distribution": "empirical_measured_class",
+      "key": "b55.k_ttca_deg.ea_kj_mol",
+      "kind": "fitted_ea",
+      "lane": "sulfur",
+      "reason": "B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIRICAL distribution of the measured barriers of its reaction class, k(145 C) held",
+      "sampled": true,
+      "sigma": null,
+      "source": "class carbohydrate; B55 measured-barrier class prior (src/kinetic_core/ea_class_prior.py; carbohydrate: n=20, median 103.7, range 30.0-237.0 kJ/mol; sulfur: n=15, median 100.9, range 29.7-133.0 kJ/mol)",
+      "unit": "kJ/mol"
     }
   ],
   "provenance": {
     "artifact": "core_prediction_uncertainty",
     "generated_by": "src/kinetic_core/uncertainty.py",
-    "generated_on": "2026-10-27",
+    "generated_on": "2026-10-28",
     "git": {
-      "branch": "b51-ph-state-everywhere",
-      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
+      "branch": "worktree-agent-a267a3f6843234126",
+      "commit": "dc966f714c6daedb37a36b6bf80659dfe7cde51e",
       "dirty": true,
-      "short": "8185d698"
+      "short": "dc966f71"
     },
     "inputs": [
       {
@@ -4171,18 +4667,18 @@
   ],
   "summary": {
     "benchmark_count": 28,
-    "ci_coverage_hits": 19,
-    "ci_coverage_rate": 0.38,
+    "ci_coverage_hits": 22,
+    "ci_coverage_rate": 0.44,
     "ci_level_pct": 90,
     "fixed_prior_count": 45,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator; computed identically across the trust-loop, maillard_path hold-out and external-matrix panels. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim. The SULFUR lane's identified coordinates are sampled jointly from the shipped wave's Laplace covariance (see priors[]); UNIDENTIFIED ones are drawn uniformly across their declared bands (2026-09-04), narrowed for an activation energy to the prefactor prior and skipped where the bound is definitional rather than measured. THIS DOES NOT CLOSE THE COVERAGE GAP and is not meant to: widening the parameter priors all the way to uncapped moves coverage from 19 % to 21 % against a nominal 90 %. What is left is model-structure error -- systematic per-lane offsets a draw around a wrong centre cannot reproduce -- not parameter uncertainty.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 19,
-      "median_ci_width_log10": 0.9793151880814256,
+      "hits": 22,
+      "median_ci_width_log10": 1.1418137018591747,
       "not_evaluable": 2,
-      "rate": 0.3958333333333333,
+      "rate": 0.4583333333333333,
       "total": 48
     },
     "matched_compound_count": 50,
@@ -4198,7 +4694,7 @@
     },
     "out_of_sample_literature_coverage": {
       "definition": "honest_literature_coverage MINUS every row a core fit read (src/kinetic_core/fit_targets.py, from the shipped wave's fit-target record; since the primary-evidence refit only the step-level bundles). The stronger claim.",
-      "hits": 17,
+      "hits": 20,
       "not_evaluable": 1,
       "rows_the_core_fit_read": {
         "hits": 2,
@@ -4217,16 +4713,16 @@
         "total": 4
       },
       "maillard_path_holdout": {
-        "ci_coverage_rate": 0.3,
-        "hits": 9,
-        "median_ci_width_log10": 0.9648898379368858,
+        "ci_coverage_rate": 0.36666666666666664,
+        "hits": 11,
+        "median_ci_width_log10": 0.9793151880814256,
         "not_evaluable": 1,
         "total": 30
       },
       "trust_loop": {
-        "ci_coverage_rate": 0.5,
-        "hits": 7,
-        "median_ci_width_log10": 1.0836567380911988,
+        "ci_coverage_rate": 0.5714285714285714,
+        "hits": 8,
+        "median_ci_width_log10": 1.4637341853813135,
         "not_evaluable": 1,
         "total": 14
       }
@@ -4254,7 +4750,7 @@
       }
     ],
     "refused_compound_count": 27,
-    "sampled_prior_count": 66,
+    "sampled_prior_count": 97,
     "seed": 0,
     "shared_with_holdout_panel": {
       "declaration": "The four Hofmann 1998 ribose/cysteine pH-3 and pH-7 rows are the SAME MEASUREMENTS as four rows of the sulfur waves' hold-out panel: NOT independent evidence. Each carries `shared_with`.",
@@ -4262,9 +4758,9 @@
     },
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.3958333333333333,
-        "hits": 19,
-        "median_ci_width_log10": 0.9793151880814256,
+        "ci_coverage_rate": 0.4583333333333333,
+        "hits": 22,
+        "median_ci_width_log10": 1.1418137018591747,
         "not_evaluable": 2,
         "total": 48
       },
@@ -4290,6 +4786,17 @@
         "total": 0
       }
     },
+    "single_temperature_ea_prior": {
+      "applied": true,
+      "definition": "B55 (kinetic_core_b55_b56_prereg.md): the sulfur constants known at 145 C only draw their barrier from the measured barriers of their reaction class; k(145 C) is held.",
+      "rows": 31
+    },
+    "structural_discrepancy": {
+      "applied": false,
+      "definition": "B56: each sample of a row on lane L is multiplied by 10^(sigma_L z), z ~ N(0, 1) per (draw, row). sigma_L is a DECLARED MODEL-ERROR ASSUMPTION estimated from in-sample fit residuals only (dof-corrected), never from a panel row.",
+      "sigma_log10_by_lane": {},
+      "source": null
+    },
     "sulfur_laplace": {
       "free": 23,
       "identified": 20,
@@ -4297,7 +4804,7 @@
       "reduced_chi_square": 1.2090479619053558
     },
     "unsampled_lanes": [],
-    "wall_seconds": 628.4,
-    "workers": 1
+    "wall_seconds": 218.1,
+    "workers": 8
   }
 }

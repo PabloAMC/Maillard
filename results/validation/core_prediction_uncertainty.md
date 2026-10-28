@@ -3,10 +3,11 @@
 n_samples = 200, seed = 0, CI level = 90 %.
 
 * benchmarks with an envelope: **28** of 37 on the panel; matched rows **50**; refused rows 27
-* mixed-population coverage: 19/50 (0.380)
-* **honest literature coverage: 19/48 (0.396)**, median CI width 0.979 log10; 2 not evaluable; 0 fitted rows excluded
-* out-of-sample literature coverage: 17/43 (1 not evaluable); rows the core fit read: {'hits': 2, 'total': 5, 'not_evaluable': 1}
-* sampled priors 66, fixed 45; lanes with NO sampled fit uncertainty: none
+* mixed-population coverage: 22/50 (0.440)
+* **honest literature coverage: 22/48 (0.458)**, median CI width 1.142 log10; 2 not evaluable; 0 fitted rows excluded
+* out-of-sample literature coverage: 20/43 (1 not evaluable); rows the core fit read: {'hits': 2, 'total': 5, 'not_evaluable': 1}
+* B55 single-temperature Ea prior: on (31 rows); B56 structural discrepancy: off
+* sampled priors 97, fixed 45; lanes with NO sampled fit uncertainty: none
 * observable bands (K_aw, HS-SPME) applied by quantification family -- rows: headspace 9, extraction 41, undeclared 0
 
 ## Per panel
@@ -14,8 +15,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | panel | hits | total | rate | median width (log10) | not evaluable |
 |---|---|---|---|---|---|
 | external_matrix | 3 | 4 | 0.750 | 2.186 | 0 |
-| maillard_path_holdout | 9 | 30 | 0.300 | 0.965 | 1 |
-| trust_loop | 7 | 14 | 0.500 | 1.084 | 1 |
+| maillard_path_holdout | 11 | 30 | 0.367 | 0.979 | 1 |
+| trust_loop | 8 | 14 | 0.571 | 1.464 | 1 |
 
 ## Rows
 
@@ -34,8 +35,8 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | 2-pentylfuran | ppb | 163.000 | 64.442 | 12.355 | 69.268 | 414.631 | yes | 1.526 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | nonanal | ppb | 24.000 | 15.606 | 2.463 | 17.466 | 166.040 | yes | 1.829 | yes (headspace) | lipid | predictive |
 | pea_isolate_uht_140C_Trikusuma2019 | trust_loop | (E,E)-2,4-decadienal | ppb | 46.900 | 75.702 | 3.163 | 69.137 | 1.24e+03 | yes | 2.593 | yes (headspace) | lipid | predictive |
-| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.664 | 1.483 | 9.627 | 71.258 | no | 1.682 | yes (headspace) | sulfur | predictive |
-| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 48.366 | 95.838 | 214.196 | no | 0.646 | no (extraction) | sulfur | predictive |
+| resconi_2023_pbma_beef_identity_benchmark | trust_loop | furfural | ppb | 715.220 | 7.664 | 1.704 | 10.593 | 84.369 | no | 1.695 | yes (headspace) | sulfur | predictive |
+| thiamine_cys_glucose_120C_Bolton1994 | trust_loop | 2-Methyl-3-furanthiol (MFT) | ppb | 11.700 | 235.970 | 9.210 | 41.240 | 234.803 | yes | 1.406 | no (extraction) | sulfur | predictive |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | Acrylamide | ppb | 1.86e+03 | 203.194 | 68.996 | 199.516 | 565.424 | no | 0.914 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_fructose_asparagine_180C_Lin2022 | maillard_path_holdout | 5-Hydroxymethylfurfural (HMF) | ppb | 1.23e+04 | 1.97e+03 | 1.1e+03 | 1.88e+03 | 2.73e+03 | no | 0.395 | no (extraction) | acrylamide | external_holdout |
 | mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 | maillard_path_holdout | DMHF | ppb | 1.15e+03 | 21.841 | 6.595 | 21.187 | 60.187 | no | 0.960 | no (extraction) | acrylamide | external_holdout |
@@ -59,14 +60,14 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 25.000 | 0.178 | 0.037 | 0.145 | 0.256 | no | 0.843 | no (extraction) | sulfur | external_holdout (shared: hofmann_ribose_pH7_MFT) |
 | mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 96.000 | 191.058 | 28.346 | 228.194 | 1.72e+03 | yes | 1.784 | no (extraction) | sulfur | external_holdout |
 | mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 143.000 | 546.398 | 315.691 | 507.486 | 749.568 | no | 0.376 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 64.086 | 1.619 | 8.364 | 56.308 | yes | 1.541 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 610.255 | 21.817 | 170.799 | 879.927 | no | 1.606 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 96.892 | 6.269 | 21.556 | 86.507 | no | 1.140 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 535.496 | 32.374 | 250.504 | 1.07e+03 | no | 1.521 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 134.513 | 20.389 | 48.791 | 137.521 | no | 0.829 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 363.445 | 47.165 | 256.477 | 1.21e+03 | no | 1.408 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.534 | 51.181 | 94.363 | 202.903 | no | 0.598 | no (extraction) | sulfur | external_holdout |
-| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 47.750 | 209.981 | 1e+03 | no | 1.323 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 6.880 | 64.086 | 0.359 | 9.189 | 179.146 | yes | 2.698 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.280 | 610.255 | 0.633 | 60.790 | 700.193 | yes | 3.044 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 3.290 | 96.892 | 1.830 | 21.888 | 236.838 | yes | 2.112 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.460 | 535.496 | 3.188 | 118.127 | 879.808 | no | 2.441 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 2.400 | 134.513 | 9.470 | 46.576 | 274.619 | no | 1.462 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.680 | 363.445 | 9.513 | 162.399 | 784.086 | no | 1.916 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Methyl-3-furanthiol (MFT) | ppb | 1.710 | 170.534 | 31.818 | 90.422 | 313.872 | no | 0.994 | no (extraction) | sulfur | external_holdout |
+| mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 | maillard_path_holdout | 2-Furfurylthiol (FFT) | ppb | 1.620 | 211.740 | 23.071 | 163.428 | 678.493 | no | 1.468 | no (extraction) | sulfur | external_holdout |
 | external_validation_bi_2020_roasted_pea_hexanal | external_matrix | hexanal | ppb | 324.000 | 109.490 | 9.240 | 109.689 | 1.6e+03 | yes | 2.237 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | 2-pentylfuran | ppb | 5.63e+03 | 15.387 | 1.115 | 13.019 | 171.111 | no | 2.186 | yes (headspace) | lipid | external_holdout |
 | external_validation_li_2026_spi_wg_hme_control | external_matrix | hexanal | ppb | 605.600 | 70.264 | 5.084 | 59.299 | 779.558 | yes | 2.186 | yes (headspace) | lipid | external_holdout |
@@ -224,3 +225,34 @@ n_samples = 200, seed = 0, CI level = 90 %.
 | furanic.partition_ea_offset_kj_mol | trunk | declared_band | uniform | 0.000 | - | [-50.000, 50.000] | yes | declared corner band on the furanone PARTITION barrier, sampled uniform |
 | observable.air_water_partition_constant | observable | observable | log_uniform | 0.000 | - | [-0.500, 0.500] | yes | declared +/-0.5 dex band on K_aw, sampled uniform in log10 |
 | observable.hs_spme_same_sample_dispersion | observable | observable | log_uniform_dispersion | 15.166 | - | [10.000, 23.000] | yes | measured 10-23x same-sample dispersion: D is drawn log-uniform over [10, 23] and the multiplier is D^u with u uniform on |
+| b55.k_pent_dpo.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_pent_tdp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_c2c3.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_nf.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_ptr.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dpo_ddp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_tdp_fur.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ddp_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_fur_fft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_nf_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_nf_mp3p.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_mgo_mp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ha_mp_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_glc_ha.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_thi_hmp.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_thi_mesh.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_hmp_mft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_hmp_mp2p.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_cys_actz.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_mmft.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | - | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_dimer_decay.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_h2s_loss.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_pent_caramel.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_pent_thermal.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_glc_fur.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_arp_tdp_th.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_arp_dpo_th.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ddp_mft_hs.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_fur_fft_hs.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [29.675, 133.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ttca_cys.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |
+| b55.k_ttca_deg.ea_kj_mol | sulfur | fitted_ea | empirical_measured_class | 64.082 | - | [30.000, 237.000] | yes | B55: the barrier was never measured (lumped formation Ea, unidentified since B2.3, or none at all); drawn from the EMPIR |

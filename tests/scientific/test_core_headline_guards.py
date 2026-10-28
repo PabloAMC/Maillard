@@ -317,7 +317,11 @@ def test_core_envelope_coverage_and_widths():
     # rows those constants reach move.
     # RE-PINNED 2026-10-27: 17/44 (1 n.e.) -> 19/48 (2 n.e.). The four new evaluable rows are the
     # fed-intermediate rows above, which the out-of-sample count excludes (still 17/43).
-    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (19, 48, 2)
+    # RE-PINNED BY WAVE B55 (2026-10-28): 19/48 -> 22/48. The 31 sulfur constants known at 145 C only
+    # now draw their barrier from the measured barriers of their class (kinetic_core_b55_b56_ship_rule.md);
+    # every 145 C and non-sulfur row is bit-identical, the off-145 C sulfur rows widen (median +0.70 dex)
+    # and three of them (Yiltirak 100 C FFT, 110 C MFT, Bolton 120 C MFT) move inside.
+    assert (lit["hits"], lit["total"], lit["not_evaluable"]) == (22, 48, 2)
     # RE-PINNED 2026-09-07 (B10 ships the ambient-oxidant consistency fix: the engine now charges
     # OX_AMBIENT_MMOL_L on every sulfur run, as every fit system was): 1.3753 -> 1.3691 dex; every
     # count is unchanged (4/39, 3/38, 5/33, 17/28).
@@ -337,9 +341,11 @@ def test_core_envelope_coverage_and_widths():
     # RE-PINNED BY WAVE B41: 0.9874 -> 1.0095 dex; the same caution -- the 3,4-DGE and HMF rows now carry
     # the fit's own width where they carried a printed band.
     # RE-PINNED 2026-10-27: 1.0095 -> 0.9793 dex over a changed row set (four more rows); not a narrowing.
-    assert lit["median_ci_width_log10"] == pytest.approx(0.9793, abs=5e-4)
+    # RE-PINNED BY WAVE B55 (2026-10-28): 0.9793 -> 1.1418 dex over the SAME row set -- a real widening,
+    # all of it on the sulfur rows away from 145 C.
+    assert lit["median_ci_width_log10"] == pytest.approx(1.1418, abs=5e-4)
     oos = s["out_of_sample_literature_coverage"]
-    assert (oos["hits"], oos["total"]) == (17, 43)
+    assert (oos["hits"], oos["total"]) == (20, 43)   # B55 (2026-10-28): 17 -> 20
     assert s["unsampled_lanes"] == []
     assert s["sulfur_laplace"]["identified"] == 20 and s["sulfur_laplace"]["free"] == 23
     assert s["sulfur_laplace"]["reduced_chi_square"] == pytest.approx(1.209, abs=0.01)
@@ -352,8 +358,8 @@ def test_core_envelope_coverage_and_widths():
         "headspace": 9, "extraction": 41, "undeclared": 0,
     }
     readme = _doc_text(README)
-    _assert_quoted(readme, "19 of 48", "README.md", "the core envelope's literature coverage")
-    _assert_quoted(readme, "17 of 43", "README.md", "the core envelope's out-of-sample coverage")
+    _assert_quoted(readme, "22 of 48", "README.md", "the core envelope's literature coverage")
+    _assert_quoted(readme, "20 of 43", "README.md", "the core envelope's out-of-sample coverage")
     _assert_quoted(readme, "20 of 23", "README.md", "the identified sulfur coordinates")
 
 

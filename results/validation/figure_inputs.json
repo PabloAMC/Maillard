@@ -74,7 +74,7 @@
         "14_field_scheme.png": "d4cca1986945ac7f2b71fb55ffb4ef572637f4719bf1c790e80df76a50ac0c58",
         "15_field_coverage.png": "02e826f7e2fc680dec25d48c600817dce311a9f8c9e58fef78aafd434ef79665",
         "16_how_a_kinetic_model_works.png": "ec42f4b23685c868f3912c6e20856fccd38c19e4a9eaf4507f5081672631b14f",
-        "17_papers_by_weight.png": "a7903bbb95d419c84860b16d4b39a93e33781f3564e96245b0b832802d9b5601",
+        "17_papers_by_weight.png": "9d5866ecc1040a85eac80c0db4cd2bcec7d195a03f65aacd86d528ae351395dd",
         "18_lab_spread.png": "8cc189939db766fe9b7b9f8784e5b732efebf988a53487016965978be4f6f643",
         "19_what_papers_report.png": "47e2c2a6c29f23afa718cf7541a0f77392cc4ad254d2913ffb374567035e41cd",
         "20_one_number.png": "4ffb08df57923cc582cb29d0018bdefabfb5af70c38bef165cb6b0b8044c0b24",
@@ -128,11 +128,11 @@
   },
   "provenance": {
     "artifact": "figure_inputs",
-    "generated_on": "2026-10-27",
+    "generated_on": "2026-10-28",
     "git": {
-      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
-      "short": "8185d698",
-      "branch": "b51-ph-state-everywhere",
+      "commit": "dc966f714c6daedb37a36b6bf80659dfe7cde51e",
+      "short": "dc966f71",
+      "branch": "worktree-agent-a267a3f6843234126",
       "dirty": true
     },
     "generated_by": "scripts/generators/figure_manifest.py",
@@ -175,7 +175,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "5f645d8cca913ae5e372a439d57016b67b835af87c0953b110e7f8d625d693c9"
+        "sha256": "fdea317b3a1ea623101a6c8aab053da4afbbef701d365d89e3d80f8490f1d740"
       },
       {
         "path": "results/validation/kinetic_core_b16_ship_rule.json",
@@ -351,7 +351,7 @@
       },
       {
         "path": "docs/assets/thiol_sink/17_papers_by_weight.png",
-        "sha256": "a7903bbb95d419c84860b16d4b39a93e33781f3564e96245b0b832802d9b5601"
+        "sha256": "9d5866ecc1040a85eac80c0db4cd2bcec7d195a03f65aacd86d528ae351395dd"
       },
       {
         "path": "docs/assets/thiol_sink/18_lab_spread.png",

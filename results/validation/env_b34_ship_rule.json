@@ -2,11 +2,11 @@
   "artifact": "env_b34_ship_rule",
   "provenance": {
     "artifact": "env_b34_ship_rule",
-    "generated_on": "2026-10-27",
+    "generated_on": "2026-10-28",
     "git": {
-      "commit": "8185d698495879807f6571e39417f3a3c937ccb0",
-      "short": "8185d698",
-      "branch": "b51-ph-state-everywhere",
+      "commit": "dc966f714c6daedb37a36b6bf80659dfe7cde51e",
+      "short": "dc966f71",
+      "branch": "worktree-agent-a267a3f6843234126",
       "dirty": true
     },
     "generated_by": "scripts/generators/generate_env_b34_ship_rule.py",
@@ -25,7 +25,7 @@
       },
       {
         "path": "results/validation/core_prediction_uncertainty.json",
-        "sha256": "5f645d8cca913ae5e372a439d57016b67b835af87c0953b110e7f8d625d693c9"
+        "sha256": "fdea317b3a1ea623101a6c8aab053da4afbbef701d365d89e3d80f8490f1d740"
       },
       {
         "path": "results/validation/kinetic_core_env_b34_prereg.md",
@@ -86,11 +86,11 @@
   "T2": {
     "noise_floor_from_two_seeds": {
       "n": 45,
-      "median_rel": 0.05625287070206642,
-      "p95_rel": 0.12324395036853387,
-      "max_rel": 0.219595509955976
+      "median_rel": 0.07551113479274701,
+      "p95_rel": 0.45422882763145167,
+      "max_rel": 0.5467178439997896
     },
-    "tolerance_used_rel": 0.219595509955976,
+    "tolerance_used_rel": 0.5467178439997896,
     "rows_the_priors_reach": [
       {
         "benchmark": "mp_holdout_fructose_asparagine_180C_Lin2022",
