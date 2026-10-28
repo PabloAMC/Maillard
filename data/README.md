@@ -10,7 +10,7 @@ code comes from `src/data_paths.py`; every load goes through `src/data_access.py
 Names resolve through `data/keys/` (`src/compound_keys.py`, `src/paper_keys.py`). Benchmarks validate
 against `data/schemas/` (`scripts/ci/schema_gate.py`). The restructure record is `tasks/data_restructure_plan.md`.
 
-Tracked files: **510**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
+Tracked files: **548**. Local-only (gitignored): `data/articles/` (primary-source PDFs, ~160 MB).
 
 ## `data (top level)`
 
@@ -126,7 +126,7 @@ Verified rows the network cannot execute (see README there); kept off the panel 
 
 Per-paper extraction records (verbatim quotes, digitised tables, unit reconciliations) cited as provenance strings by `src/kinetic_core/`. `k*_` and `research_round*` files are cross-paper syntheses.
 
-375 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `almhofer2022_extraction.md`, `ames2001_extraction.md`, `amranihemaimi1995_extraction.md`, `anantharamkrishnan2020_extraction.md` …
+408 files covered by the directory description above: `Cai2024_extraction.md`, `Meynier2002_extraction.md`, `Xin2026b_extraction.md`, `Zhang2024_extraction.md`, `Zhou2025_extraction.md`, `adams2008_extraction.md`, `agcam2022_extraction.md`, `ajandouz2008_extraction.md`, `almhofer2022_extraction.md`, `ames2001_extraction.md`, `amranihemaimi1995_extraction.md`, `anantharamkrishnan2020_extraction.md` …
 
 ## `data/lit/timeseries`
 
@@ -150,4 +150,4 @@ The intake YAML each matrix hold-out bundle was materialised from; frozen alongs
 
 Free-precursor hold-out bundles: the network's out-of-sample test, hand-authored, scored on `holdout_targets`.
 
-17 files covered by the directory description above: `mp_holdout_fructose_asparagine_180C_Lin2022.json`, `mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json`, `mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019.json`, `mp_holdout_glucose_asparagine_180C_10min_Chang2021.json`, `mp_holdout_glucose_asparagine_180C_30min_Chang2021.json`, `mp_holdout_glucose_asparagine_180C_30min_water_Chang2021.json`, `mp_holdout_glucose_asparagine_180C_Ye2024.json`, `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json`, `mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3.json`, `mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7.json`, `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3.json`, `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7.json` …
+22 files covered by the directory description above: `mp_holdout_arp_glutathione_120C_120min_pH75_Zhou2023c.json`, `mp_holdout_arp_glutathione_120C_30min_pH75_Zhou2023c.json`, `mp_holdout_arp_glutathione_120C_60min_pH75_Zhou2023c.json`, `mp_holdout_arp_glutathione_120C_90min_pH75_Zhou2023c.json`, `mp_holdout_fructose_asparagine_180C_Lin2022.json`, `mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019.json`, `mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019.json`, `mp_holdout_glucose_asparagine_180C_10min_Chang2021.json`, `mp_holdout_glucose_asparagine_180C_30min_Chang2021.json`, `mp_holdout_glucose_asparagine_180C_30min_water_Chang2021.json`, `mp_holdout_glucose_asparagine_180C_Ye2024.json`, `mp_holdout_glucose_only_autoclave_121C_Steinhagen2021.json` …

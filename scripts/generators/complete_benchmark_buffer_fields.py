@@ -379,7 +379,44 @@ BUFFER_RECORDS: Dict[str, Dict[str, Any]] = {
             "from the other twenty."
         ),
     ),
+    # 2026-10-28 (FIT_HOLDOUT_DECLARATION.md Amendment 45): five hold-outs added blind, their buffer
+    # read from the PDF when each bundle was written. Same fence: only conditions.buffer is set here.
+    "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b": dict(
+        species="phosphate",
+        concentration_M=0.2,
+        initial_ph_scale="bench_cooled",
+        provenance_class="primary_source_pdf",
+        provenance_note=(
+            "Zhang, Tan, He, Hu, Li & Xie 2025, Food Chem. 469:142529, sec. 2.2 (Model reaction), read "
+            "from data/articles/zhang2025b.pdf on 2026-10-28, verbatim: 'In a 15-mL pressure glass vial, "
+            "0.2 mmol of cysteine, 0.2 mmol of xylose, lysine at 0, 1, 2, 4, 6, 8, or 16 times the amount "
+            "of cysteine, and 5 mL of phosphate buffer (0.2 mol/L, pH 6.5) were added.' The counter-ion "
+            "(sodium or potassium) is not stated; the pH is the bench value before heating and no "
+            "post-heating pH is reported. Dossier: zhang2025b_extraction.md."
+        ),
+    ),
+    **{
+        f"mp_holdout_arp_glutathione_120C_{t}min_pH75_Zhou2023c": dict(
+            species="none",
+            concentration_M=None,
+            initial_ph_scale="bench_cooled",
+            provenance_class="primary_source_pdf",
+            provenance_note=(
+                "Zhou, Xia, Cui, Hayat, Zhang & Ho 2023, J. Agric. Food Chem. 71:14312, 'Thermal Treatment "
+                "of Reaction Systems', read from data/articles/zhou2023c.pdf on 2026-10-28, verbatim: "
+                "'Reaction systems of ARP (20 mmol/L) with or without GSH (20 mmol/L) addition were "
+                "prepared, and the initial pH of the resultant mixtures was adjusted to 7.5 with a 3 mol/L "
+                "NaOH solution before the heat treatment.' NO BUFFER: an aqueous pot with its start pH set "
+                "by NaOH; the authors attribute a rapid pH fall during heating to ARP breakdown, which is "
+                "not measured. Dossier: zhou2023c_extraction.md."
+            ),
+        )
+        for t in (30, 60, 90, 120)
+    },
 }
+
+#: The frozen bundles this script decides. 21 at B2.3; 26 since Amendment 45 (2026-10-28).
+N_FROZEN_BUNDLES = len(BUFFER_RECORDS)
 
 
 # ---------------------------------------------------------------------------
@@ -1015,8 +1052,8 @@ def main() -> int:
     args = parser.parse_args()
 
     paths = bundle_paths()
-    if len(paths) != 21:
-        raise SystemExit(f"expected 21 frozen bundles, found {len(paths)}")
+    if len(paths) != N_FROZEN_BUNDLES:
+        raise SystemExit(f"expected {N_FROZEN_BUNDLES} frozen bundles, found {len(paths)}")
 
     summary = []
     baselines = {}
@@ -1028,7 +1065,7 @@ def main() -> int:
         if record is None:
             raise SystemExit(
                 f"{path.name}: no buffer record declared for benchmark_id "
-                f"{key!r}. Every one of the 21 bundles must be decided, "
+                f"{key!r}. Every one of the {N_FROZEN_BUNDLES} bundles must be decided, "
                 f"including as buffer_unknown -- silence is not an option."
             )
         before = stable_hash_without_buffer(payload)
@@ -1066,8 +1103,8 @@ def main() -> int:
     n_primary = sum(1 for r in current.values()
                     if r["provenance_class"] == "primary_source_pdf")
     n_disagree = sum(1 for r in current.values() if "ph_disagreement" in r)
-    print(f"\n21 bundles: {n_primary} from a PDF on disk, "
-          f"{21 - n_primary - n_unknown} from a repo verbatim quotation, "
+    print(f"\n{N_FROZEN_BUNDLES} bundles: {n_primary} from a PDF on disk, "
+          f"{N_FROZEN_BUNDLES - n_primary - n_unknown} from a repo verbatim quotation, "
           f"{n_unknown} buffer_unknown. "
           f"{n_none} state NO BUFFER positively. "
           f"{n_disagree} carry a pH disagreement with their own source "

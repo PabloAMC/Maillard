@@ -66,6 +66,10 @@
 #                           their columns in reading order. Which rows this affects is
 #                           stated per claim.
 #   transliterated        - Greek letters written out (alpha-, epsilon-); otherwise exact.
+#                           (2026-10-28: also a subscript written inline, e.g. a_w.)
+#   verbatim_ocr_spacing_restored - (2026-10-28) the source is a scan whose OCR text layer
+#                           runs words together ("cysteineshowedaclearsignificant"); the words
+#                           and punctuation are verbatim, the printed page's spaces restored.
 #
 # Generated: 2026-08-27, Wave S2. Nothing in the model was tuned to build this.
 
@@ -270,6 +274,86 @@ sources:
     doi: "10.1021/jf0116112"
     access: full_text
     retrieved_from: "data/articles/mottram2002.pdf; data/lit/extraction_dossiers/mottram2002_extraction.md"
+  zhang2025b:
+    citation: "Zhang, C., Tan, J., He, J., Hu, Q., Li, J., Xie, J. (2025). Effect of lysine on the cysteine-xylose Maillard reaction to form flavor compounds. Food Chem. 469, 142529."
+    doi: "10.1016/j.foodchem.2024.142529"
+    access: full_text
+    retrieved_from: "data/articles/zhang2025b.pdf; data/lit/extraction_dossiers/zhang2025b_extraction.md (quotes re-checked against the PDF text layer 2026-10-28)"
+  zhou2022:
+    citation: "Zhou, T., Xia, X., Cui, H., Hayat, K., Zhang, X., Ho, C.-T. (2022). Competitive formation of 2,3-butanedione and pyrazines through intervention of added cysteine during thermal processing of alanine-xylose Amadori compounds. J. Agric. Food Chem. 70, 15202-15212."
+    doi: "10.1021/acs.jafc.2c07026"
+    access: full_text
+    retrieved_from: "data/articles/zhou2022.pdf; data/lit/extraction_dossiers/zhou2022_extraction.md"
+  zhou2023c:
+    citation: "Zhou, T., Xia, X., Cui, H., Hayat, K., Zhang, X., Ho, C.-T. (2023). Promotion or inhibition effects of exogenous glutathione-degraded amino acids on the formation of 2,3-butanedione and pyrazines via varied pathways of interaction with alpha-dicarbonyl compounds derived from N-(1-deoxy-D-xylulos-1-yl)-alanine. J. Agric. Food Chem. 71, 14312-14321."
+    doi: "10.1021/acs.jafc.3c04424"
+    access: full_text
+    retrieved_from: "data/articles/zhou2023c.pdf (Figure 1 heat map read on a 200 dpi render 2026-10-28); data/lit/extraction_dossiers/zhou2023c_extraction.md"
+  chen2000:
+    citation: "Chen, Y., Xing, J., Chin, C.-K., Ho, C.-T. (2000). Effect of urea on volatile generation from Maillard reaction of cysteine and ribose. J. Agric. Food Chem. 48, 3512-3516."
+    doi: "10.1021/jf991076l"
+    access: full_text
+    retrieved_from: "data/articles/chen2000.pdf; data/lit/extraction_dossiers/chen2000_extraction.md"
+  chen2002:
+    citation: "Chen, Y., Ho, C.-T. (2002). Effects of carnosine on volatile generation from Maillard reaction of ribose and cysteine. J. Agric. Food Chem. 50, 2372-2376."
+    doi: "10.1021/jf011244l"
+    access: full_text
+    retrieved_from: "data/articles/chen2002.pdf; data/lit/extraction_dossiers/chen2002_extraction.md"
+  xu2007:
+    citation: "Xu, H., Gao, Y., Liu, X., Zhao, J. (2008, online 2007). Effects of supercritical carbon dioxide on volatile formation from Maillard reaction between ribose and cysteine. J. Sci. Food Agric. 88, 328-335."
+    doi: "10.1002/jsfa.3093"
+    access: full_text
+    retrieved_from: "data/articles/xu2007.pdf; data/lit/extraction_dossiers/xu2007_extraction.md"
+  wang2012:
+    citation: "Wang, R., Yang, C., Song, H. (2012). Key meat flavour compounds formation mechanism in a glutathione-xylose Maillard reaction. Food Chem. 131, 280-285."
+    doi: "10.1016/j.foodchem.2011.08.079"
+    access: full_text
+    retrieved_from: "data/articles/wang2012.pdf; data/lit/extraction_dossiers/wang2012_extraction.md"
+  martins2010:
+    citation: "Martins, S. I. F. S., Leussink, A., Rosing, E. A. E., Desclaux, G. A., Boucon, C. (2010). Meat flavor generation in complex Maillard model systems: reactants synergetic and/or competition effect? ACS Symp. Ser. 1042, ch. 8, 71-83."
+    doi: "10.1021/bk-2010-1042.ch008"
+    access: full_text
+    retrieved_from: "data/articles/martins2010.pdf; data/lit/extraction_dossiers/martins2010_extraction.md"
+  hincelin1992:
+    citation: "Hincelin, O., Ames, J. M., Apriyantono, A., Elmore, J. S. (1992). The effect of xylose on the generation of volatiles from heated thiamine. Food Chem. 44, 381-389."
+    doi: "10.1016/0308-8146(92)90272-4"
+    access: full_text
+    retrieved_from: "data/articles/hincelin1992.pdf; data/lit/extraction_dossiers/hincelin1992_extraction.md (DOI from Crossref; not printed on the PDF)"
+  zhang1991b:
+    citation: "Zhang, Y., Ho, C.-T. (1991). Comparison of the volatile compounds formed from the thermal reaction of glucose with cysteine and glutathione. J. Agric. Food Chem. 39, 760-763."
+    doi: "10.1021/jf00004a029"
+    access: full_text
+    retrieved_from: "data/articles/zhang1991b.pdf (scan with OCR text layer); data/lit/extraction_dossiers/zhang1991b_extraction.md (DOI from Crossref)"
+  zhang1988:
+    citation: "Zhang, Y., Chien, M., Ho, C.-T. (1988). Comparison of the volatile compounds obtained from thermal degradation of cysteine and glutathione in water. J. Agric. Food Chem. 36, 992-996."
+    doi: "10.1021/jf00083a022"
+    access: full_text
+    retrieved_from: "data/articles/zhang1988.pdf (scan with OCR text layer); data/lit/extraction_dossiers/zhang1988_extraction.md (DOI from Crossref)"
+  farmer1992:
+    citation: "Farmer, L. J., Mottram, D. S. (1992). Effect of cysteine and ribose on the volatile thermal degradation products of a triglyceride and three phospholipids. J. Sci. Food Agric. 60, 489-497."
+    doi: "10.1002/jsfa.2740600414"
+    access: full_text
+    retrieved_from: "data/articles/farmer1992.pdf; data/lit/extraction_dossiers/farmer1992_extraction.md (Table 1 read from page images; the text layer drops a column)"
+  zhang2023b:
+    citation: "Zhang, Z., Wang, B., Cao, Y. (2023). Factors influencing on the formation of dimethyl disulfide and dimethyl trisulfide in model systems. Food Res. Int. 172, 113200."
+    doi: "10.1016/j.foodres.2023.113200"
+    access: full_text
+    retrieved_from: "data/articles/zhang2023b.pdf; data/lit/extraction_dossiers/zhang2023b_extraction.md"
+  madruga1995:
+    citation: "Madruga, M. S., Mottram, D. S. (1995). The effect of pH on the formation of Maillard-derived aroma volatiles using a cooked meat system. J. Sci. Food Agric. 68, 305-310."
+    doi: "10.1002/jsfa.2740680308"
+    access: full_text
+    retrieved_from: "data/articles/madruga1995.pdf; data/lit/extraction_dossiers/madruga1995_extraction.md (DOI from Crossref)"
+  modi2008:
+    citation: "Modi, V. K., Linforth, R., Taylor, A. J. (2008). Effect of pH and water activity in generation of selected meaty aroma compounds in a meat model system. Am. J. Food Technol. 3, 68-78."
+    doi: "10.3923/ajft.2008.68.78"
+    access: full_text
+    retrieved_from: "data/articles/modi2008.pdf (image-only scan; Table 4 and the p. 75 text re-read on a 110 dpi render 2026-10-28); data/lit/extraction_dossiers/modi2008_extraction.md"
+  hartman1984b:
+    citation: "Hartman, G. J., Scheide, J. D., Ho, C.-T. (1984). Effect of water activity on the major volatiles produced in a model system approximating cooked meat. J. Food Sci. 49, 607-613."
+    doi: "10.1111/j.1365-2621.1984.tb12480.x"
+    access: full_text
+    retrieved_from: "data/articles/hartman1984b.pdf (scan with OCR text layer); data/lit/extraction_dossiers/hartman1984b_extraction.md (DOI from Crossref)"
 panel:
 
   # =====================================================================
@@ -2623,3 +2707,575 @@ panel:
     source_conditions: "As MOT02-PH-01."
     fit_status: not_independent
     audit_2026_10_27: "MARKED NOT INDEPENDENT - DUPLICATE of MOT-02 (the same Table 1 FFT cells, ribose phosphate-block pH 5.6 = 1750 vs pH 4.2 = 3160), which keeps the headline slot. Was independent (agree); still scored in 'all claims'. Unlike MOT-02 this row carries the 0.2 M buffer block."
+
+  # =====================================================================
+  # 2026-10-28 BLIND HOLD-OUTS FROM THE 2026-10-27/28 DOSSIER READING
+  # (FIT_HOLDOUT_DECLARATION.md Amendment 45). Written BEFORE any model run:
+  # the only engine call made on these arms was declare_envelope, which accepts
+  # or refuses without integrating. Arms are the papers' own pots. Where the
+  # engine refuses, the claim is kept with its arms so the refusal is on record
+  # and the claim becomes evaluable when the missing species or term arrives.
+  # =====================================================================
+  - claim_id: ZHA25-LYS-01
+    statement: "In cysteine + xylose 40/40 mM (0.2 M phosphate pH 6.5, 120 C, 50 min), MFT PEAKS with added lysine: 22.63 ng/mL with none, 32.56 at lysine 1x cysteine, 0.58 at 16x (Table 2, Duncan b / a / f)."
+    claim_type: monotonic_direction
+    category: additive_amine
+    observables: ["MFT"]
+    conditions:
+      series:
+        - {label: "lysine 0x", system: {precursors: {L-Cysteine: 40.0, D-Xylose: 40.0}, temp_C: 120, ph: 6.5, water_activity: 0.98, time_min: 50, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Zhang 2025b sec. 2.2: 5 mL phosphate buffer 0.2 mol/L, pH 6.5"}}}
+        - {label: "lysine 1x (40 mM)", system: {precursors: {L-Cysteine: 40.0, D-Xylose: 40.0, L-Lysine: 40.0}, temp_C: 120, ph: 6.5, water_activity: 0.98, time_min: 50, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Zhang 2025b sec. 2.2: 5 mL phosphate buffer 0.2 mol/L, pH 6.5"}}}
+        - {label: "lysine 16x (640 mM)", system: {precursors: {L-Cysteine: 40.0, D-Xylose: 40.0, L-Lysine: 640.0}, temp_C: 120, ph: 6.5, water_activity: 0.98, time_min: 50, buffer: {kind: phosphate, phosphate_mol_l: 0.2, source: "Zhang 2025b sec. 2.2: 5 mL phosphate buffer 0.2 mol/L, pH 6.5"}}}
+    expected_relation: peak
+    source:
+      ref: zhang2025b
+      quote: "As shown in Fig. S2, the sub-amount of sulfur-containing compounds and the amounts of some individual compounds such as 2-methyl-3-furanthiol, 2-acetylthiazole, bis(2-methyl-3-furyl) disulfide, and 2-thiophenemethenethiol first rose with addition of lysine at (1 × Cys level), then fell thereafter."
+    source_conditions: "0.2 mmol Cys + 0.2 mmol Xyl + lysine 0-16x in 5 mL 0.2 M phosphate pH 6.5 (start), 15 mL sealed pressure vial, 120 C, 50 min; HS-SPME with one internal standard (semi-quantitative); n = 3. Lysine form (free base or HCl) not stated."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. No fit reads Zhang 2025b. The lysine-0 arm is also scored as a level in mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b."
+    model_scope_note: "REFUSED by declare_envelope (2026-10-28) on the two lysine arms: 'LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once.' Lysine is an acrylamide-lane species and does not compose with cysteine. Kept with its arms as the evidence base for a generic competing-amine term on the sulfur lane."
+
+  - claim_id: ZHOU22-T-01
+    statement: "Ala-xylose ARP 20 mM + cysteine 20 mM (unbuffered, initial pH 7, 120 C): MFT RISES monotonically over 30 / 60 / 90 / 120 min (63.28 -> 202.87 -> 262.91 -> 344.87 ug/L; Duncan a < b < c < d)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["MFT"]
+    conditions:
+      series:
+        - {label: "30 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 30, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+        - {label: "60 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+        - {label: "90 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 90, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+        - {label: "120 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+    expected_relation: increasing
+    source:
+      ref: zhou2022
+      quote: "2-methyl-3-furanthiol | 1303 | 1316 | MS, RI, S | ND | 63.28 ± 4.93a | ND | 202.87 ± 17.41b | ND | 262.91 ± 15.44c | ND | 344.87 ± 12.05d"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 1, columns RI | KI | ID | ARP 30 | ARP+Cys 30 | ARP 60 | ARP+Cys 60 | ARP 90 | ARP+Cys 90 | ARP 120 | ARP+Cys 120 (ug/L); the SDs and letters sit on the line below the means in the PDF text layer and are re-attached."
+    source_conditions: "Pressure-resistant bottle, oil bath; volume and headspace not stated; HS-SPME with external calibration (Table S1, not on disk) and 1,2-dichlorobenzene; n = 3."
+    fit_status: fit_system_overlap
+    fit_note: "Added blind 2026-10-28. Zhou 2022 itself is in no fit, but its 60-min arm is the nominal pot of the B47 fit rows zhou_arp_cys_pH7 (Zhou 2023, same laboratory, MFT 1588.57 ug/L there vs 202.87 here). The claim is the TIME SHAPE through that pot, which no fit row constrains (the fit reads one 60-min endpoint)."
+    model_scope_note: "Expressible: declare_envelope in_envelope on the sulfur lane at 30 and 120 min (2026-10-28). Not scored as absolute levels on purpose: the same laboratory's two papers disagree 4-8x at the identical nominal 60-min pot (zhou2022_extraction.md sec. 5), so a level row would test reproducibility, not the model."
+
+  - claim_id: ZHOU22-T-02
+    statement: "In the same pots FFT also RISES monotonically over 30 / 60 / 90 / 120 min (74.51 -> 187.13 -> 306.19 -> 418.68 ug/L; Duncan a < b < c < d)."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - {label: "30 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 30, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+        - {label: "60 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+        - {label: "90 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 90, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+        - {label: "120 min", system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}}
+    expected_relation: increasing
+    source:
+      ref: zhou2022
+      quote: "2-furfurylthiol | 1430 | 1430 | MS, RI, S | ND | 74.51 ± 3.99a | ND | 187.13 ± 11.32b | ND | 306.19 ± 12.09c | ND | 418.68 ± 15.03d"
+      quote_form: table_row_reformatted
+      quote_form_note: "As ZHOU22-T-01."
+    source_conditions: "As ZHOU22-T-01."
+    fit_status: fit_system_overlap
+    fit_note: "As ZHOU22-T-01 (the 60-min arm is the nominal pot of the B47 fit row on Zhou 2023's FFT, 757.97 ug/L there)."
+    model_scope_note: "As ZHOU22-T-01."
+
+  - claim_id: ZHOU22-CYS-01
+    statement: "At 120 min, cysteine HALVES furfural from the Ala-xylose ARP: 1261.12 ug/L from ARP alone vs 510.92 with 20 mM cysteine (Duncan e vs b; the ratio is 0.41-0.57 at every time)."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["furfural"]
+    conditions:
+      A:
+        label: "ARP alone, 120 min"
+        system: {precursors: {ARP: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}
+      B:
+        label: "ARP + cysteine, 120 min"
+        system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Zhou 2022: aqueous, initial pH 7 set with 3 M NaOH, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: zhou2022
+      quote: "furfural | 1461 | 1460 | MS, RI, S | 442.78 ± 27.70b | 252.49 ± 18.08a | 828.66 ± 91.83c | 434.91 ± 13.71b | 1046.54 ± 85.39d | 524.77 ± 38.71b | 1261.12 ± 118.93e | 510.92 ± 36.03b"
+      quote_form: table_row_reformatted
+      quote_form_note: "As ZHOU22-T-01; the claim uses the two 120-min cells."
+    source_conditions: "As ZHOU22-T-01."
+    fit_status: fit_system_overlap
+    fit_note: "Added blind 2026-10-28. ARP alone at 60 min (Zhou 2023 furfural 1339.37 ug/L) is a B47 fit row; the 120-min ratio is not."
+    model_scope_note: "Expressible: in_envelope on the sulfur lane for both arms (2026-10-28)."
+
+  - claim_id: Z23C-GSH-01
+    statement: "With the same Ala-xylose ARP (20 mM, initial pH 7.5, unbuffered, 120 C, 60 min), free cysteine gives ~18x MORE MFT than glutathione at the same molarity: 1.15x10^3 vs 6.41x10^1 ug/L."
+    claim_type: ordering
+    category: sulfur_donor
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "ARP + cysteine 20 mM"
+        system: {precursors: {ARP: 20.0, L-Cysteine: 20.0}, temp_C: 120, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"}}
+      B:
+        label: "ARP + glutathione 20 mM"
+        system: {precursors: {ARP: 20.0, Glutathione: 20.0}, temp_C: 120, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: zhou2023c
+      quote: "Comparatively, as shown in Figure 1, the types and amounts of sulfur-containing compounds during the heating treatment of the ARP−Cys model (120 °C, 60 min) were much more abundant than those in the ARP−GSH model."
+    source_conditions: "Figure 1 heat-map cells (printed numbers, no SD): MFT ARP+Cys-60 1.15x10^3, ARP+GSH-60 6.41x10^1 ug/L. HS-SPME, authentic-standard calibration curves in water with an internal standard; pressure-resistant bottles, volume not stated."
+    fit_status: fit_system_overlap
+    fit_note: "Added blind 2026-10-28. The ARP + Cys arm is the nominal pot of the B47 fit row zhou_arp_cys_pH7 at pH 7.5 instead of 7 (same laboratory); the GSH arm was never fitted (the engine's GSH chemistry is Zheng & Ho 1994's measured H2S constant)."
+    model_scope_note: "Expressible: in_envelope on the sulfur lane for both arms (2026-10-28). FFT is NOT claimed: 5.11x10^2 vs 3.83x10^2 (1.3x) without a printed SD is not a resolvable direction."
+
+  - claim_id: Z23C-T-01
+    statement: "In ARP + glutathione 20/20 mM (initial pH 7.5, unbuffered, 120 C), FFT PEAKS at 60 min: 124, 383, 270, 116 ug/L at 30 / 60 / 90 / 120 min."
+    claim_type: monotonic_direction
+    category: time
+    observables: ["FFT"]
+    conditions:
+      series:
+        - {label: "30 min", system: {precursors: {ARP: 20.0, Glutathione: 20.0}, temp_C: 120, ph: 7.5, water_activity: 0.98, time_min: 30, buffer: {kind: none, source: "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"}}}
+        - {label: "60 min", system: {precursors: {ARP: 20.0, Glutathione: 20.0}, temp_C: 120, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"}}}
+        - {label: "90 min", system: {precursors: {ARP: 20.0, Glutathione: 20.0}, temp_C: 120, ph: 7.5, water_activity: 0.98, time_min: 90, buffer: {kind: none, source: "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"}}}
+        - {label: "120 min", system: {precursors: {ARP: 20.0, Glutathione: 20.0}, temp_C: 120, ph: 7.5, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Zhou 2023c: aqueous, initial pH 7.5 set with 3 M NaOH, no buffer"}}}
+    expected_relation: peak
+    source:
+      ref: zhou2023c
+      quote: "2-Furfurylthiol | 1.24×10^2 | 3.83×10^2 | 2.70×10^2 | 1.16×10^2"
+      quote_form: table_row_reformatted
+      quote_form_note: "Figure 1 heat map, printed cell values in the ARP+GSH-30 / -60 / -90 / -120 min columns (ug/L), read on a 200 dpi render 2026-10-28; superscripts written with ^."
+    source_conditions: "As Z23C-GSH-01."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. No fit reads a glutathione pot or Zhou 2023c; the ARP half of the network was fitted on the sister paper Zhou 2023 (ARP +/- Cys, 60 min only), which constrains no time shape of a GSH pot. The same four cells are scored as levels in the mp_holdout_arp_glutathione_120C_*_Zhou2023c bundles."
+    model_scope_note: "Expressible: in_envelope on the sulfur lane at all four times (2026-10-28). MFT is not claimed as a shape: 59.1 / 64.1 / 57.1 at 30-90 min are not separable without an SD."
+
+  - claim_id: CHEN02-RANK-01
+    statement: "In unbuffered ribose + cysteine heated at 180 C for 2 h (initial pH 5.0, final 4.01), FFT is ~11x MORE abundant than MFT (0.895 vs 0.083 mg/g ribose) -- the inverse of the MFT >= FFT order at 140-145 C."
+    claim_type: ranking
+    category: ranking
+    observables: ["FFT", "MFT"]
+    conditions:
+      series:
+        - label: "ribose + cysteine, 180 C, 2 h, pH 5.0"
+          system: {precursors: {D-Ribose: 100.0, L-Cysteine: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Chen & Ho 2002: distilled water, pH adjusted to 5.0 before heating, no buffer"}}
+    expected_relation: ranking
+    source:
+      ref: chen2002
+      quote: "15.86 2-furfurylthiol 0.895 0.256 0.318 ; 14.30 2-methyl-3-furanthiol 0.083 0.040"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 2, columns RT | compound | RC pH 5 | RCC pH 5 | RC pH 8.5 | RCC pH 8.5 (mg/g ribose), blank cells (not detected) dropped as in the text layer: for MFT the two values are RC pH 5 and RC pH 8.5 (dossier, checked on a 200 dpi render)."
+    source_conditions: "'A mixture of 0.01 mol of L-cysteine and D-ribose' in 100 mL distilled water, 150 mL Hoke cylinder, oven 180 C, 2 h; CH2Cl2 extraction, tridecane internal standard, no response factors. Whether 0.01 mol is each or the total is not stated: the arm charges 100 mM each (the Ho-group house reading); the ranking does not depend on the normalisation."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. No fit reads Chen 2000 or 2002; 180 C is 35 K above every sulfur fit pot."
+    model_scope_note: "Expressible: in_envelope on the sulfur lane (2026-10-28). A high-temperature SHAPE test: the paired MFT/FFT order at 180 C. Levels are not benchmark quality (solvent extraction, no response factor, charge ambiguity), so no bundle was made."
+
+  - claim_id: CHEN02-PH-01
+    statement: "In the same 180 C / 2 h unbuffered ribose + cysteine pot, FFT is ~2.8x HIGHER at initial pH 5.0 than at 8.5 (0.895 vs 0.318 mg/g ribose; final pH 4.01 vs 4.96)."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "initial pH 5.0"
+        system: {precursors: {D-Ribose: 100.0, L-Cysteine: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Chen & Ho 2002: distilled water, pH adjusted before heating, no buffer"}}
+      B:
+        label: "initial pH 8.5"
+        system: {precursors: {D-Ribose: 100.0, L-Cysteine: 100.0}, temp_C: 180, ph: 8.5, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Chen & Ho 2002: distilled water, pH adjusted before heating, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: chen2002
+      quote: "A large amount of 2-furfurylthiol was formed at pH 5, and less than half of that was formed at pH 8.5."
+    source_conditions: "As CHEN02-RANK-01; Table 1 final pH 4.01 (from 5) and 4.96 (from 8.5)."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28; not in any fit."
+    model_scope_note: "Expressible: in_envelope at pH 5.0 and 8.5 (2026-10-28). The measured final pH lets the pH-state drift be read beside the verdict."
+
+  - claim_id: CHEN02-PH-02
+    statement: "In the same pots MFT is ~2.1x HIGHER at initial pH 5.0 than at 8.5 (0.083 vs 0.040 mg/g ribose)."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "initial pH 5.0"
+        system: {precursors: {D-Ribose: 100.0, L-Cysteine: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Chen & Ho 2002: distilled water, pH adjusted before heating, no buffer"}}
+      B:
+        label: "initial pH 8.5"
+        system: {precursors: {D-Ribose: 100.0, L-Cysteine: 100.0}, temp_C: 180, ph: 8.5, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Chen & Ho 2002: distilled water, pH adjusted before heating, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: chen2002
+      quote: "Similarly, the very important meaty flavor compound 2-methyl-3-furanthiol was produced in a relatively large amount at pH 5 and much less at pH 8.5."
+    source_conditions: "As CHEN02-PH-01."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28; not in any fit."
+    model_scope_note: "Expressible: in_envelope (2026-10-28)."
+
+  - claim_id: CHEN00-PH-01
+    statement: "Chen et al. 2000, the same laboratory's earlier run of the same pot (180 C, 2 h, unbuffered ribose + cysteine): FFT 1.55 mg/g ribose at initial pH 5 vs 0.22 at 8.5 (7x; final pH 3.86 vs 6.05)."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "initial pH 5.0"
+        system: {precursors: {D-Ribose: 100.0, L-Cysteine: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Chen et al. 2000: distilled water, pH adjusted before heating, no buffer"}}
+      B:
+        label: "initial pH 8.5"
+        system: {precursors: {D-Ribose: 100.0, L-Cysteine: 100.0}, temp_C: 180, ph: 8.5, water_activity: 0.98, time_min: 120, buffer: {kind: none, source: "Chen et al. 2000: distilled water, pH adjusted before heating, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: chen2000
+      quote: "2-furfurylthiol 1.55 0.22"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 2, row as in the text layer; cells placed in columns RC5 and RC8.5 from a 250 dpi render (dossier chen2000_extraction.md); the urea columns are blank for FFT."
+    source_conditions: "'A total of 0.01 mol of L-cysteine and D-ribose' in 100 mL distilled water, Hoke cylinder, oven 180 C, 2 h; duplicates; tridecane internal standard, FID."
+    fit_status: not_independent
+    fit_note: "Added blind 2026-10-28. DUPLICATE of CHEN02-PH-01's model cells (the identical arms): a second measurement of the same comparison corroborates the sign, but scoring it in the headline would count one model comparison twice. Counted in 'all claims' only."
+    model_scope_note: "Expressible: in_envelope (2026-10-28)."
+
+  - claim_id: XU07-PH-01
+    statement: "Ribose + cysteine 50/50 mM in 0.2 M pyrophosphate at 140 C for 1 h: MFT FALLS as the initial pH rises 5.6 -> 7.0 -> 8.0 (16.62 -> 2.63 -> below ~0.07 ng/mL; final pH 5.5 / 6.2 / 6.8)."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      series:
+        - {label: "initial pH 5.6", system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Xu 2008 (online 2007): '0.2 mol/L phosphate buffer' made from sodium pyrophosphate dibasic and tetrabasic"}}}
+        - {label: "initial pH 7.0", system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Xu 2008 (online 2007): '0.2 mol/L phosphate buffer' made from sodium pyrophosphate dibasic and tetrabasic"}}}
+        - {label: "initial pH 8.0", system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 8.0, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Xu 2008 (online 2007): '0.2 mol/L phosphate buffer' made from sodium pyrophosphate dibasic and tetrabasic"}}}
+    expected_relation: decreasing
+    source:
+      ref: xu2007
+      quote: "Initial pH 5.6 5.6 7.0 7.0 8.0 8.0 ; Final pH 5.5 5.5 6.2 6.0 6.8 6.3 ; 869 2-Methyl-3-furanthiol 16.62 34.42 2.63 25.84 − 7.06 ms + LRI"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 1, columns Acid Contr. | Acid SC-CO2 | Neutral Contr. | Neutral SC-CO2 | Alkaline Contr. | Alkaline SC-CO2 (ng/mL of mixture, headspace, response factor 1); the claim uses the three conventional (Contr.) columns; '−' = below detection (~0.07 ng/mL)."
+    source_conditions: "5 mmol ribose + 5 mmol cysteine in 100 mL, 300 mL stainless-steel reactor, conventional arm (no SC-CO2), 140 C, 1 h; HS-SPME against tridecane with response factor 1 (approximate headspace amounts, not aqueous concentrations, by the authors' own statement)."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. No fit reads Xu 2007/2008. Like Meynier & Mottram 1995 (PH-01/02) a pyrophosphate pH series at 140 C, but a different laboratory with measured final pH."
+    model_scope_note: "Expressible: in_envelope at all three pH values (2026-10-28)."
+
+  - claim_id: XU07-PH-02
+    statement: "In the same pots FFT is 22.09 ng/mL at initial pH 5.6 and below detection (~0.07) at pH 7.0."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "initial pH 5.6"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Xu 2008 (online 2007): sodium pyrophosphate 0.2 mol/L"}}
+      B:
+        label: "initial pH 7.0"
+        system: {precursors: {D-Ribose: 50.0, L-Cysteine: 50.0}, temp_C: 140, ph: 7.0, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Xu 2008 (online 2007): sodium pyrophosphate 0.2 mol/L"}}
+    expected_relation: "A>B"
+    source:
+      ref: xu2007
+      quote: "913 2-Furanmethanethiol 22.09 25.13 − 14.57 − 1.79 MS + LRI"
+      quote_form: table_row_reformatted
+      quote_form_note: "As XU07-PH-01 (2-furanmethanethiol = FFT)."
+    source_conditions: "As XU07-PH-01."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28; not in any fit."
+    model_scope_note: "Expressible: in_envelope (2026-10-28)."
+
+  - claim_id: WANG12-01
+    statement: "In unbuffered xylose (26.2 mM) + thiamine (1.19 mM) pots at 132 C / 90 min (pH 4.8), free cysteine + glycine (pot C, Cys 12.15 mM) gives ~5.6x MORE MFT than glutathione (pot A, GSH 7.42 mM): 0.118 vs 0.021."
+    claim_type: ordering
+    category: sulfur_donor
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "pot C: xylose + thiamine + cysteine + glycine"
+        system: {precursors: {D-Xylose: 26.2, Thiamine: 1.19, L-Cysteine: 12.15, Glycine: 9.80}, temp_C: 132, ph: 4.8, water_activity: 0.98, time_min: 90, buffer: {kind: none, source: "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"}}
+      B:
+        label: "pot A: xylose + thiamine + glutathione"
+        system: {precursors: {D-Xylose: 26.2, Thiamine: 1.19, Glutathione: 7.42}, temp_C: 132, ph: 4.8, water_activity: 0.98, time_min: 90, buffer: {kind: none, source: "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: wang2012
+      quote: "2 2-Methyl-3-furanthiol 865 Meaty, vitamin 0.021 0.082 0.118 0.179 0.034"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 2, columns No. | compound | RI | odour | A | B | C | D | E; unit printed 'ug ul' with no exponent, read as internal-standard-equivalent mg/L (dossier sec. 3); only the A vs C order is claimed."
+    source_conditions: "Table 1 masses in 25 mL (molarities computed in wang2012_extraction.md): xylose 100 mg (half [13C5]), thiamine HCl 10 mg, GSH 57 mg (A) or Cys 36.8 + Gly 18.4 mg (C); Parr steel reactor, 132 C, 90 min, stored 24 h at 4 C before purge-and-trap with one internal standard; >= 3 assays, max SD 10 %."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. No fit reads Wang 2012. The pots are not equimolar in sulfur (C carries 1.64x the S of A); the claim is about the paper's actual pots, which the arms reproduce."
+    model_scope_note: "Expressible: in_envelope on the sulfur lane for both pots (2026-10-28). By Wang's own isotope table MFT here is thiamine-carbon, so the claim also tests whether the thiamine route responds to the sulfur co-reactant."
+
+  - claim_id: WANG12-02
+    statement: "In the same pots FFT is ~3.5x HIGHER with free cysteine + glycine (pot C, 0.170) than with glutathione (pot A, 0.049)."
+    claim_type: ordering
+    category: sulfur_donor
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "pot C: xylose + thiamine + cysteine + glycine"
+        system: {precursors: {D-Xylose: 26.2, Thiamine: 1.19, L-Cysteine: 12.15, Glycine: 9.80}, temp_C: 132, ph: 4.8, water_activity: 0.98, time_min: 90, buffer: {kind: none, source: "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"}}
+      B:
+        label: "pot A: xylose + thiamine + glutathione"
+        system: {precursors: {D-Xylose: 26.2, Thiamine: 1.19, Glutathione: 7.42}, temp_C: 132, ph: 4.8, water_activity: 0.98, time_min: 90, buffer: {kind: none, source: "Wang 2012: 25 mL distilled water, pH 4.8, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: wang2012
+      quote: "3 2-Furfurylthiol 908 Roasted, coffee 0.049 0.066 0.170 – –"
+      quote_form: table_row_reformatted
+      quote_form_note: "As WANG12-01."
+    source_conditions: "As WANG12-01."
+    fit_status: independent
+    fit_note: "As WANG12-01."
+    model_scope_note: "Expressible: in_envelope (2026-10-28)."
+
+  - claim_id: HIN92-01
+    statement: "Thiamine heated with xylose (xylose:thiamine 20:1, pH held at 7, boiling, 1 h) gives a 4-5-fold higher absolute MFT yield than thiamine heated alone."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "thiamine HCl 0.05 mol + xylose 1 mol in 250 mL"
+        system: {precursors: {Thiamine: 200.0, D-Xylose: 4000.0}, temp_C: 100, ph: 7.0, water_activity: 0.98, time_min: 60, buffer: {kind: clamped, source: "Hincelin 1992: 'adjusted to and maintained at pH 7' with ~71 mL 3 M NaOH before and during heating (a pH-stat)"}}
+      B:
+        label: "thiamine HCl alone"
+        system: {precursors: {Thiamine: 200.0}, temp_C: 100, ph: 7.0, water_activity: 0.98, time_min: 60, buffer: {kind: clamped, source: "Hincelin 1992: pH control for the thiamine-only isolate NOT STATED; clamped at 7 as the mixture was (declared assumption)"}}
+    expected_relation: "A>B"
+    source:
+      ref: hincelin1992
+      quote: "In contrast, 2-methylfuran-3-thiol (Compound 21) accounted for 14% of the total xylose/thiamine isolate, but only 2% of that prepared from thiamine alone. This represents a 4-5-fold increase in absolute yield in the mixture."
+    source_conditions: "Modified Likens-Nickerson simultaneous distillation-extraction (an OPEN system that strips volatiles as they form), 1 h at the boiling flask (~100 C; temperature not printed), relative peak areas in triplicate, isolate strengths used for the absolute ratio. Concentrations are nominal: 150 g xylose cannot dissolve 'in 250 ml' without the volume growing (~4 M nominal)."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. No fit reads Hincelin 1992; the thiamine MFT route's constants come from Hofmann 1998 T8 (145 C, pH 5) and B50's measured H2S share."
+    model_scope_note: "Expressible but extrapolated: in_envelope_extrapolated with the clamped-pH warning on both arms (2026-10-28). The engine is a closed pot and the experiment strips continuously, so only the SIGN is claimed."
+
+  - claim_id: ZHG91-01
+    statement: "Glucose + cysteine gives ~3.4x more 2-acetylthiazole than glucose + glutathione at the same molarity (50/50 mM, 180 C, 1 h, pH 7.5 start): 73.77 vs 21.68 mg/mol."
+    claim_type: ordering
+    category: sulfur_donor
+    observables: ["2-acetylthiazole"]
+    conditions:
+      A:
+        label: "glucose + cysteine"
+        system: {precursors: {D-Glucose: 50.0, L-Cysteine: 50.0}, temp_C: 180, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhang & Ho 1991: 100 mL distilled water, pH 7.5 set with HCl/NaOH, no buffer"}}
+      B:
+        label: "glucose + glutathione"
+        system: {precursors: {D-Glucose: 50.0, Glutathione: 50.0}, temp_C: 180, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhang & Ho 1991: 100 mL distilled water, pH 7.5 set with HCl/NaOH, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: zhang1991b
+      quote: "On the other hand, about 3 times the amount of thiazoles and thiophenes, 4 times the amount of pyrazines, and 30 times the amount of polysulfur-containing compounds were produced in the CG system than in the GG."
+      quote_form: verbatim_ocr_spacing_restored
+      quote_form_note: "The scan's OCR layer drops spaces ('andthiophenes,4timesthe'); the words are verbatim with the spaces of the printed page restored. Table I: 2-acetylthiazole CG 73.77, GG 21.68 mg/mol."
+    source_conditions: "900 mg glucose + 600 mg Cys or 1500 mg GSH (0.005 mol each) in 100 mL, sealed 0.3 L Hoke cylinder, oil bath 180 C, 1 h; SDE, tridecane internal standard, FID, mg per mol of thiol; replicates not stated."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28; not in any fit."
+    model_scope_note: "Arm B REFUSED for this target by declare_envelope (2026-10-28): 2-acetylthiazole is unreachable from glucose + glutathione in the sulfur lane (GSH has only an H2S exit; the thiazole needs cysteine's amine). NOT EVALUABLE until GSH releases cysteine in the network; recorded as that gap's test."
+
+  - claim_id: ZHG91-02
+    statement: "In the same pots furfural is ~3x HIGHER with glutathione than with cysteine (9.95 vs 3.28 mg/mol): less H2S/amine to consume the sugar's furans."
+    claim_type: ordering
+    category: sulfur_donor
+    observables: ["furfural"]
+    conditions:
+      A:
+        label: "glucose + cysteine"
+        system: {precursors: {D-Glucose: 50.0, L-Cysteine: 50.0}, temp_C: 180, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhang & Ho 1991: 100 mL distilled water, pH 7.5 set with HCl/NaOH, no buffer"}}
+      B:
+        label: "glucose + glutathione"
+        system: {precursors: {D-Glucose: 50.0, Glutathione: 50.0}, temp_C: 180, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhang & Ho 1991: 100 mL distilled water, pH 7.5 set with HCl/NaOH, no buffer"}}
+    expected_relation: "A<B"
+    source:
+      ref: zhang1991b
+      quote: "furfural 96 802 3.28 9.95 a"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table I, columns compound | MW | I_K | CG | GG | I.D. (mg/mol); checked against the 200 dpi render in zhang1991b_extraction.md."
+    source_conditions: "As ZHG91-01."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28; not in any fit."
+    model_scope_note: "Expressible: in_envelope on the sulfur lane for both arms when asked for furfural (2026-10-28). The hexose's furfural route is the B9 floor-bound r_glc_fur; the ratio, not the level, is claimed."
+
+  - claim_id: ZHG88-01
+    statement: "Heated alone in water (~50 mM, pH 7.5, 180 C, 1 h), cysteine gives 2-acetylthiazole 13.4 mg/mol where glutathione gives only a trace, and 4.7x more volatiles overall (3.84 vs 0.82 g/mol)."
+    claim_type: ordering
+    category: sulfur_donor
+    observables: ["2-acetylthiazole"]
+    conditions:
+      A:
+        label: "cysteine alone"
+        system: {precursors: {L-Cysteine: 49.5}, temp_C: 180, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhang, Chien & Ho 1988: 100 mL distilled water, pH 7.5 with 1 N NaOH, no buffer"}}
+      B:
+        label: "glutathione alone"
+        system: {precursors: {Glutathione: 48.8}, temp_C: 180, ph: 7.5, water_activity: 0.98, time_min: 60, buffer: {kind: none, source: "Zhang, Chien & Ho 1988: 100 mL distilled water, pH 7.5 with 1 N NaOH, no buffer"}}
+    expected_relation: "A>B"
+    source:
+      ref: zhang1988
+      quote: "When cysteine was degraded in water at pH 7.5 for 1 h, 34 compounds were identified and the yield of the volatiles obtained was 3.84 g/mol of cysteine. Under the same conditions, only 17 compounds were identified from glutathione degradation and the yield of the volatiles obtained was 0.82 g/mol of glutathione."
+      quote_form: verbatim_ocr_spacing_restored
+      quote_form_note: "OCR layer drops spaces ('3.84g/mol', 'only 17compoundswere'); spaces restored. Table I: 2-acetylthiazole A 13.4, B tr (mg/mol). The paper prints '0.05 mol' for 600 mg cysteine and 1500 mg GSH; the masses give 4.95 and 4.88 mmol in 100 mL, which the arms use."
+    source_conditions: "Sealed 0.3 L Hoke cylinder, 180 C oil bath, 1 h; SDE with an internal standard, FID; replicates not stated."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28; not in any fit."
+    model_scope_note: "REFUSED on both arms by declare_envelope (2026-10-28): 'THIS POT CHARGES NO PRECURSOR THAT COULD MAKE 2-acetylthiazole' (the thiazole needs a dicarbonyl the lane makes only from sugar). The paper's headline observable (total sulfur volatiles) has no engine species. Kept as the evidence that cysteine alone makes thiazoles at 180 C."
+
+  - claim_id: FAR92-01
+    statement: "Beef triglyceride heated with cysteine (41 mM) + ribose (30 mM) in 0.5 M phosphate pH 5.6 at 140 C for 1 h gives about HALF the headspace hexanal of the lipid heated alone (3900 vs 8310 relative peak area, n = 4)."
+    claim_type: ordering
+    category: lipid_lane
+    observables: ["hexanal"]
+    conditions:
+      A:
+        label: "beef triglyceride alone"
+        system: {precursors: {Beef triglyceride: 17.4}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Farmer & Mottram 1992: 2 mL 0.5 M phosphate pH 5.6"}}
+      B:
+        label: "beef triglyceride + cysteine + ribose"
+        system: {precursors: {Beef triglyceride: 17.4, L-Cysteine: 41.3, D-Ribose: 30.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Farmer & Mottram 1992: 2 mL 0.5 M phosphate pH 5.6 with cysteine 5 mg/mL and ribose 4.5 mg/mL"}}
+    expected_relation: "A>B"
+    source:
+      ref: farmer1992
+      quote: "The thermal degradation products of these lipids were modified considerably in the presence of cysteine and ribose. The most pronounced alteration was a reduction in the amounts of aldehydes detected, especially unsaturated aldehydes."
+    source_conditions: "30 mg lipid in 2 mL (15 g/L; 17.4 mM is a NOMINAL molarity at a declared mean triglyceride mass of ~860 g/mol, since a fat has no single molar mass), N2-flushed flame-sealed ampoule, autoclave 140 C, 1 h; Tenax headspace, single-ion areas relative to 1 ng dichlorobenzene, n = 4. Table 1 hexanal BTG- 8310 (76), BTG+ 3900 (1870)."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28; not in any fit (the lipid lane's anchors are Frankel, Schroen and the matrix bundles)."
+    model_scope_note: "REFUSED by declare_envelope (2026-10-28): 'UNMAPPED PRECURSORS Beef triglyceride' and no lipid carrier. The evidence base for an aldehyde sink (amine/thiol + aldehyde) coupling the sulfur and lipid lanes."
+
+  - claim_id: FAR92-02
+    statement: "With egg phosphatidylcholine, cysteine + ribose cut tr,tr-2,4-decadienal ~20-fold (26400 -> 1330 relative peak area, n = 4) under the same conditions."
+    claim_type: ordering
+    category: lipid_lane
+    observables: ["2,4-decadienal"]
+    conditions:
+      A:
+        label: "egg PC alone"
+        system: {precursors: {Egg phosphatidylcholine: 19.5}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Farmer & Mottram 1992: 2 mL 0.5 M phosphate pH 5.6"}}
+      B:
+        label: "egg PC + cysteine + ribose"
+        system: {precursors: {Egg phosphatidylcholine: 19.5, L-Cysteine: 41.3, D-Ribose: 30.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.5, source: "Farmer & Mottram 1992: 2 mL 0.5 M phosphate pH 5.6 with cysteine 5 mg/mL and ribose 4.5 mg/mL"}}
+    expected_relation: "A>B"
+    source:
+      ref: farmer1992
+      quote: "18 tr,tr-2,4-Decadienal 839 (185) 184 (8) 815 (369) 478 (34) 26400 (3360) 1330 (560) 676 (288) 78 (40)"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 1, columns BTG- | BTG+ | BPL- | BPL+ | PC- | PC+ | PE- | PE+ (mean (SD), n = 4), read from the page images (the text layer drops the BTG- column; farmer1992_extraction.md flag 1)."
+    source_conditions: "As FAR92-01; 19.5 mM is NOMINAL at a declared mean egg-PC mass of ~770 g/mol."
+    fit_status: independent
+    fit_note: "As FAR92-01."
+    model_scope_note: "REFUSED as FAR92-01 (unmapped lipid, no carrier)."
+
+  - claim_id: ZHG23B-01
+    statement: "Methionine (2.5 mg/mL) heated at 115 C for 1 h in 0.01 M phosphate pH 4.9 gives ~2x MORE dimethyl disulfide alone than with cysteine 1:1 w/w (0.76 vs 0.37 ng/mL, Fig. 2c, read off the bars)."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["dimethyl disulfide"]
+    conditions:
+      A:
+        label: "methionine alone"
+        system: {precursors: {L-Methionine: 16.8}, temp_C: 115, ph: 4.9, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.01, source: "Zhang, Wang & Cao 2023: sodium phosphate pH 4.9, 0.01 M"}}
+      B:
+        label: "methionine + cysteine 1:1 w/w"
+        system: {precursors: {L-Methionine: 16.8, L-Cysteine: 20.6}, temp_C: 115, ph: 4.9, water_activity: 0.98, time_min: 60, buffer: {kind: phosphate, phosphate_mol_l: 0.01, source: "Zhang, Wang & Cao 2023: sodium phosphate pH 4.9, 0.01 M"}}
+    expected_relation: "A>B"
+    source:
+      ref: zhang2023b
+      quote: "Besides, the Met-Cys and Met-Lys model systems, which showed a comparable and positive impacts on Met degradation to the Met-Arg system, can even significantly (p < 0.05) suppress the development of DMDS and DMTS."
+    source_conditions: "30 mL sealed pressure vials, 115 C, 60 min; HS-SPME-GC-SIM with an isopropyl-disulfide internal standard and external curves (Table S2, not on disk); triplicate. Absolute levels disagree between the paper's figures by up to ~700x (dossier flag 1); only the within-figure direction is claimed."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. Not in any fit; B22's methionine chain (Pan 2025) did not ship."
+    model_scope_note: "REFUSED on both arms by declare_envelope (2026-10-28): the methionine chain did not ship and DMDS is unreachable on the sulfur lane ('METHIONINE CHAIN TARGETS ... run on the trunk lane only'). The sign constraint for any future coupling of cysteine to the methionine chain."
+
+  - claim_id: MOD08-PH-01
+    statement: "Aqueous cysteine + thiamine + ribose (41 / 15 / 30 mM) in 0.2 M pyrophosphate, N2-flushed, 130 C for 1 h: MFT is ~5x HIGHER at pH 6.5 than at pH 4.0 (peak areas 193.1 vs 37.4 x10^3, Duncan b vs a) -- the opposite sign to the thiamine-free Meynier pot."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "pH 6.5"
+        system: {precursors: {L-Cysteine: 41.3, Thiamine: 14.8, D-Ribose: 30.0}, temp_C: 130, ph: 6.5, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Modi, Linforth & Taylor 2008: 0.2 M pyrophosphate"}}
+      B:
+        label: "pH 4.0"
+        system: {precursors: {L-Cysteine: 41.3, Thiamine: 14.8, D-Ribose: 30.0}, temp_C: 130, ph: 4.0, water_activity: 0.98, time_min: 60, buffer: {kind: pyrophosphate, pyrophosphate_mol_l: 0.2, source: "Modi, Linforth & Taylor 2008: 0.2 M pyrophosphate"}}
+    expected_relation: "A>B"
+    source:
+      ref: modi2008
+      quote: "2-Methyl-3-furanthiol 37.400±11.30a 30.00±3.30a 196.30±20.30b 193.10±9.70b"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 4 (p. 75), columns pH 4.0 | 5.0 | 5.5 | 6.5, 'Peak areas x10^3, Mean+-SD (n = 4)'; the PDF has no text layer, so the row was read from the page image (re-checked on a 110 dpi render 2026-10-28)."
+    source_conditions: "Cysteine 5.0, thiamine 5.0, ribose 4.5 mg/mL (the Methods once print 'cystine'; every other mention says cysteine), 1 mL flame-sealed ampoule flushed with N2 2 min, autoclave 130 C, 1 h; dynamic headspace (Tenax), GC-MS SIR, peak areas only. The arms cannot carry the N2 atmosphere (the panel runner passes no atmosphere field)."
+    fit_status: independent
+    fit_note: "Added blind 2026-10-28. No fit reads Modi 2008."
+    model_scope_note: "Expressible: in_envelope at pH 4.0 and 6.5 on the sulfur lane (2026-10-28). pH 5.5 and 6.5 share a Duncan letter, so only the 4.0 vs 6.5 contrast is claimed."
+
+  # ---- recorded, NOT evaluable (no stated charge, an unrepresented matrix, or a design whose runs are not printed)
+  - claim_id: MOD08-AW-01
+    statement: "In washed beef fibre carrying cysteine + thiamine + ribose (130 C, 1 h, pyrophosphate pH 5.8), MFT RISES ~77-fold as a_w goes 0.60 -> 0.80 -> 0.90 (peak areas 0.50 -> 3.50 -> 38.5 x10^3; Duncan a < b < c)."
+    claim_type: monotonic_direction
+    category: moisture_aw
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: increasing
+    conditions: {}
+    source:
+      ref: modi2008
+      quote: "The formation of 2-methyl-3-furanthiol and the corresponding bis-(2-methyl-3-furyl) disulphide was favoured by higher a_w (Table 6) because both compounds posses meaty aroma and have extremely low odour threshold."
+      quote_form: transliterated
+      quote_form_note: "Subscript w written as a_w; otherwise exact (p. 75, read from the page image)."
+    source_conditions: "4 g freeze-dried washed beef fibre + 400 uL precursor solution + 400 / 1200 / 3000 uL buffer, ground under liquid N2, 0.5 g per N2-flushed ampoule; a_w measured (Aqualab). Confounded with a 3.5x precursor dilution and an unmeasured pH (modi2008_extraction.md sec. 4.2)."
+    fit_status: independent
+    model_scope_note: "NOT EVALUABLE: the beef-fibre matrix is not a chargeable precursor and the sulfur lane carries no a_w term. Recorded as the evidence base for a future sulfur-lane a_w term (sign test: MFT up with a_w, the opposite of a trunk-style browning peak)."
+
+  - claim_id: HAR84B-AW-01
+    statement: "In thiamine + cystine + ascorbic acid + MSG heated at 135 C for 30 min in water/propylene-glycol mixes, MFT is low at a_w <= 0.39, peaks at a_w ~0.72 and falls in the all-water system (TMP-equivalent ppm)."
+    claim_type: monotonic_direction
+    category: moisture_aw
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: peak
+    conditions: {}
+    source:
+      ref: hartman1984b
+      quote: "The presence of a greater number and amount of sulfur-containing products in the high moisture containing systems and the evidence that these components may be produced in systems containing hydrogen sulfide or hydrogen sulfide releasing components indicates that higher a_w favors release of hydrogen sulfide."
+      quote_form: transliterated
+      quote_form_note: "The OCR layer renders the subscripted a_w as 'a,'; written as a_w, otherwise exact."
+    source_conditions: "18.9 g MSG, 3.1 g thiamine HCl, 3.1 g ascorbic acid, 1.7 g L-cystine in 70 g water:PG (0-100 % water), pH 5.5, sealed 0.3 L Hoke cylinder, 135 C, 30 min; a_w computed from vessel pressures; FID response vs tetramethylpyrazine."
+    fit_status: independent
+    model_scope_note: "NOT EVALUABLE: cystine, ascorbic acid, glutamate and propylene glycol are not chargeable, and no lane carries a sulfur a_w term. Recorded beside MOD08-AW-01 as a second a_w series for MFT."
+
+  - claim_id: MAD95-01
+    statement: "In minced beef acidified with HCl (pH 5.6 / 5.0 / 4.5 / 4.0; 5.8 / 5.4 / 4.9 / 4.4 after cooking) and autoclaved at 140 C for 30 min, MFT rises from a trace to ~130 (>= 65x) as pH falls, while 2-furfurylthiol does not follow."
+    claim_type: monotonic_direction
+    category: ph
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: increasing
+    conditions: {}
+    source:
+      ref: madruga1995
+      quote: "Lower pH resulted in an increase in the quantities of compounds containing the 2-methyl-3-furanyl group, such as 2-methyl-3-furanthiol. However, compounds containing the 2-furanylmethyl group, such as 2-furanylmethanthiol, were largely unaffected by pH or were more abundant at pH 5.6."
+    source_conditions: "100 g beef M. psoas major + 12 mL water/1 M HCl, glass bottles, autoclave 140 C, 30 min; dynamic headspace (Tenax), GC-MS against 65 ng dichlorobenzene; >= 3 collections."
+    fit_status: independent
+    model_scope_note: "NOT EVALUABLE: real meat with no stated precursor charge. The only pH series in a real meat matrix in the corpus; its MFT sign agrees with Meynier (PH-01) and opposes Modi's thiamine-bearing aqueous pot (MOD08-PH-01)."
+
+  - claim_id: MAR10-CYS-01
+    statement: "Across a 32-run D-optimal design at 100 C, pH 6 (0.2 M pyrophosphate), cysteine has a significant NEGATIVE main effect on 5-HMF (---) and furfural (--)."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["HMF", "furfural"]
+    evaluable: false
+    expected_relation: "A<B"
+    conditions: {}
+    source:
+      ref: martins2010
+      quote: "Also, cysteine showed a clear significant effect, even if negative, in both 5-HMF and 2-furfural formation."
+      quote_form: verbatim_ocr_spacing_restored
+      quote_form_note: "The text layer runs words together ('cysteineshowedaclearsignificant'); spaces restored."
+    source_conditions: "Xylose 0.05-3 %, glucose 0-3.6 %, KGA 0-3 %, cysteine 0.05-0.75 %, glycine 0-1.5 %, glutamic acid 0-1.5 %, 0-3 h; 50 mL 0.2 M pyrophosphate pH 6, oil bath 100 C. Only significant effects are printed, as signs; no per-run composition or data."
+    fit_status: independent
+    model_scope_note: "NOT EVALUABLE: the design's run compositions are not printed, so no arm can be written without inventing a pot. Recorded as a sign constraint (cysteine suppresses sugar dehydration products)."
+
+  - claim_id: MAR10-GLY-01
+    statement: "In the same design glycine has a significant POSITIVE main effect on MFT (++) and FFT (++), with a positive cysteine x glycine interaction (+)."
+    claim_type: ordering
+    category: additive_amine
+    observables: ["MFT", "FFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: martins2010
+      quote: "However, a clear positive interaction between cysteine and glycine was also observed. MFT formation was strongly enhanced in the presence of glycine."
+    source_conditions: "As MAR10-CYS-01. MFT and FFT by HS-SPME with deuterated internal standards after 2 % DTT (total thiol, free + disulfide-bound)."
+    fit_status: independent
+    model_scope_note: "NOT EVALUABLE, as MAR10-CYS-01 (run compositions not printed)."

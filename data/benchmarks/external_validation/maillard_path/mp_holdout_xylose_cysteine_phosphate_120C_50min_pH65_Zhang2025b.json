@@ -1,0 +1,127 @@
+{
+  "benchmark_id": "mp_holdout_xylose_cysteine_phosphate_120C_50min_pH65_Zhang2025b",
+  "evidence_class": "external_validation_only",
+  "maillard_path_holdout": true,
+  "source_doi": "10.1016/j.foodchem.2024.142529",
+  "source_metadata": {
+    "citation": "Zhang, C.; Tan, J.; He, J.; Hu, Q.; Li, J.; Xie, J. Effect of lysine on the cysteine-xylose Maillard reaction to form flavor compounds. Food Chemistry 2025, 469, 142529.",
+    "citation_note": "Authors, title, venue and DOI transcribed from p. 1 of data/articles/zhang2025b.pdf; dossier data/lit/extraction_dossiers/zhang2025b_extraction.md (read 2026-10-27). Not the Zhang H. ... Ho 2025 ARP paper (zhang2025_extraction.md).",
+    "origin": "external_literature",
+    "evidence_class": "external_validation_only",
+    "notes": "MAILLARD-PATH HOLD-OUT (2026-10-28, FIT_HOLDOUT_DECLARATION.md Amendment 45). Added BLIND: no prediction, score or envelope integration was run on this pot before the bundle was frozen (engine.declare_envelope only, which refuses or accepts without integrating; verdict in_envelope). Never use for calibration, refitting, or any promotion decision."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "data/articles/zhang2025b.pdf (publisher PDF, 12 pp., gitignored), text layer re-read 2026-10-28 for the methods and Table 2 cells quoted here; dossier zhang2025b_extraction.md checked Table 2 against 150 dpi page images.",
+    "retrieval_date": "2026-10-28",
+    "quoted_method": "2.2 Model reaction, verbatim: 'In a 15-mL pressure glass vial, 0.2 mmol of cysteine, 0.2 mmol of xylose, lysine at 0, 1, 2, 4, 6, 8, or 16 times the amount of cysteine, and 5 mL of phosphate buffer (0.2 mol/L, pH 6.5) were added. The vials were heated at 120 C for a total of 50 mins on a Parallel Synthesis Poly-Block 4 system (HEL Co. Ltd., United Kingdom).' THIS BUNDLE SCORES THE BLANK (lysine 0) ONLY: lysine resolves to the acrylamide lane and the engine refuses a lysine + cysteine pot as a lane conflict (declare_envelope, 2026-10-28).",
+    "quoted_quantification": "2.3.1, verbatim: 'The reaction solutions were added with 1 uL of internal (1,2-dichlorobenzene, 73 ug/mL in methanol) and 2.0 g of sodium chloride. After pre-equilibrating at 50 C for 15 min, they were headspace adsorbed for 20 min using a 50/35 um carboxen/polydimethylsiloxane/divinylbenzene (CAR/PDMS/DVB) fiber'. No response factor, calibration curve or labelled standard is described for any volatile.",
+    "quoted_table": "Table 2 (pp. 4-5), 'Concentrations (ng/mL)', blank column (cysteine-xylose, no lysine), as printed: '8 1328 865 2-methyl-3-furanthiol 22.63 +/- 4.09b'; '11 1422 909 2-furfurylthiol 0.29 +/- 0.03a'; '15 1630 1020 2-acetylthiazole 114.13 +/- 15.98d'; '25 2145 1525 bis(2-methyl-3-furyl) disulfide 18.25 +/- 2.77b'. Footnote 2: 'The concentrations were the sums detected from both the DB-WAX and HP-5 MS capillary columns. Results were the means of three replicates.'",
+    "quantification_class": "hs_spme_gcms_semi_quantitative_internal_standard",
+    "quantification_verdict": "SEMI-QUANTITATIVE, DECLARED AS SUCH. One internal standard (1,2-dichlorobenzene) for every analyte, HS-SPME, no response factors; the values are internal-standard equivalents. The Table 2 footnote says the concentrations are 'the sums detected from both the DB-WAX and HP-5 MS capillary columns', whose meaning is not explained (two injections summed would double-count). The dossier's own reading: treat as order-of-magnitude, x3 at least. The headspace class carries the envelope's K_aw and HS-SPME bands (src/quantification.py).",
+    "what_is_deliberately_not_ingested": "(a) The six lysine arms (engine lane conflict; see quoted_method). (b) 3-mercapto-2-pentanone, 3-mercapto-2-butanone, thiophenes, thiazoles and pyrazines: no engine species. (c) Fig. 2 TTCA / Cys-Amadori / free cysteine time courses: figure-digitised, and TTCA is not a reportable engine target. (d) Furfural: not reported in any arm of Table 2."
+  },
+  "fit_holdout_status": "INDEPENDENT. No core fit generator (generate_kinetic_core_b*_fit.py, the B47 52-row objective the engine reads through B51) carries Zhang 2025b, the Xie group's cysteine-xylose pots, or this DOI; checked by grep on 2026-10-28. The system is cysteine + pentose like the Hofmann 1998 fit pots, but at 120 C, pH 6.5, 0.2 M phosphate and 50 min, a state no fit row integrates.",
+  "precursor_concentration_provenance": {
+    "status": "FULLY_STATED_IN_SOURCE",
+    "derivation": "0.2 mmol cysteine and 0.2 mmol xylose in 5 mL buffer = 40 mmol/L each. Moles and volume printed (quoted_method).",
+    "residual_caveats": "(a) Start pH only; no post-heating pH. (b) No come-up time for the heating block. (c) The paper's Fig. 2 puts ~45 % of the cysteine in TTCA by 30-50 min, which the engine does not form from Cys + pentose (recorded in tasks/data_restructure_plan.md, network gap (a)); that is part of what this row tests, not a reason to exclude it."
+  },
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "L-Cysteine": {
+      "concentration_mM": 40.0
+    },
+    "D-Xylose": {
+      "concentration_mM": 40.0
+    }
+  },
+  "conditions": {
+    "temp_C": 120.0,
+    "ph": 6.5,
+    "ph_basis": "initial",
+    "water_activity": 0.98,
+    "water_activity_note": "Not stated by the source; 0.98 is this repository's convention for a dilute aqueous pot (the Yiltirak and Hofmann hold-outs carry the same value).",
+    "time_min": 50.0,
+    "buffer": {
+      "species": "phosphate",
+      "concentration_M": 0.2,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Zhang, Tan, He, Hu, Li & Xie 2025, Food Chem. 469:142529, sec. 2.2 (Model reaction), read from data/articles/zhang2025b.pdf on 2026-10-28, verbatim: 'In a 15-mL pressure glass vial, 0.2 mmol of cysteine, 0.2 mmol of xylose, lysine at 0, 1, 2, 4, 6, 8, or 16 times the amount of cysteine, and 5 mL of phosphate buffer (0.2 mol/L, pH 6.5) were added.' The counter-ion (sodium or potassium) is not stated; the pH is the bench value before heating and no post-heating pH is reported. Dossier: zhang2025b_extraction.md."
+    },
+    "vessel": {
+      "fill_mL": 5.0,
+      "vessel_mL": 15.0,
+      "closure": "15 mL pressure glass vial, sealed, Poly-Block heating block",
+      "atmosphere": "air_by_default",
+      "water_source": "unstated",
+      "stirred": null,
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Zhang, Tan, He, Hu, Li & Xie 2025, Food Chem. 469:142529, read from data/articles/zhang2025b.pdf on 2026-10-28, sec. 2.2 verbatim: 'In a 15-mL pressure glass vial, 0.2 mmol of cysteine, 0.2 mmol of xylose, ... and 5 mL of phosphate buffer (0.2 mol/L, pH 6.5) were added. The vials were heated at 120 C for a total of 50 mins on a Parallel Synthesis Poly-Block 4 system'. No inert gas is mentioned (air_by_default); stirring and water source are not stated. Dossier: zhang2025b_extraction.md."
+    }
+  },
+  "metadata": {
+    "tier": "REFERENCE",
+    "family": "free_aa_sulfur",
+    "execution_path": "free_precursor",
+    "notes": "Cysteine + xylose 40/40 mM, 0.2 M phosphate pH 6.5, 120 C, 50 min, sealed 15 mL vial. The first pH-6.5 cysteine-pentose level row in the hold-out (the Hofmann bundles are pH 3/5/7 at 145 C; Yiltirak pH 5.5). Semi-quantitative: read the fold error against a x3 measurement band."
+  },
+  "reference_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 22.63,
+      "uncertainty_pct": 18.07
+    },
+    "2-Furfurylthiol (FFT)": {
+      "conc_ppb": 0.29,
+      "uncertainty_pct": 10.34
+    },
+    "Bis(2-methyl-3-furyl) disulfide": {
+      "conc_ppb": 18.25,
+      "uncertainty_pct": 15.18
+    },
+    "2-Acetylthiazole": {
+      "conc_ppb": 114.13,
+      "uncertainty_pct": 14.0
+    }
+  },
+  "holdout_targets": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "target_unit": "ppb",
+      "target_value": 22.63,
+      "target_uncertainty": 4.09,
+      "target_quote": "Table 2 (pp. 4-5), 'Concentrations (ng/mL)', blank column (cysteine-xylose, no lysine), as printed: '8 1328 865 2-methyl-3-furanthiol 22.63 +/- 4.09b'; '11 1422 909 2-furfurylthiol 0.29 +/- 0.03a'; '15 1630 1020 2-acetylthiazole 114.13 +/- 15.98d'; '25 2145 1525 bis(2-methyl-3-furyl) disulfide 18.25 +/- 2.77b'. Footnote 2: 'The concentrations were the sums detected from both the DB-WAX and HP-5 MS capillary columns. Results were the means of three replicates.'",
+      "molar_basis": "ng/mL of the 5 mL aqueous reaction solution = ug/L, read as ug/kg at 1 kg/L: numerically the model's ppb. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "Cc1occc1S"
+    },
+    "2-Furfurylthiol (FFT)": {
+      "target_unit": "ppb",
+      "target_value": 0.29,
+      "target_uncertainty": 0.03,
+      "target_quote": "Table 2 (pp. 4-5), 'Concentrations (ng/mL)', blank column (cysteine-xylose, no lysine), as printed: '8 1328 865 2-methyl-3-furanthiol 22.63 +/- 4.09b'; '11 1422 909 2-furfurylthiol 0.29 +/- 0.03a'; '15 1630 1020 2-acetylthiazole 114.13 +/- 15.98d'; '25 2145 1525 bis(2-methyl-3-furyl) disulfide 18.25 +/- 2.77b'. Footnote 2: 'The concentrations were the sums detected from both the DB-WAX and HP-5 MS capillary columns. Results were the means of three replicates.'",
+      "molar_basis": "ng/mL of the 5 mL aqueous reaction solution = ug/L, read as ug/kg at 1 kg/L: numerically the model's ppb. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "SCc1ccco1"
+    },
+    "Bis(2-methyl-3-furyl) disulfide": {
+      "target_unit": "ppb",
+      "target_value": 18.25,
+      "target_uncertainty": 2.77,
+      "target_quote": "Table 2 (pp. 4-5), 'Concentrations (ng/mL)', blank column (cysteine-xylose, no lysine), as printed: '8 1328 865 2-methyl-3-furanthiol 22.63 +/- 4.09b'; '11 1422 909 2-furfurylthiol 0.29 +/- 0.03a'; '15 1630 1020 2-acetylthiazole 114.13 +/- 15.98d'; '25 2145 1525 bis(2-methyl-3-furyl) disulfide 18.25 +/- 2.77b'. Footnote 2: 'The concentrations were the sums detected from both the DB-WAX and HP-5 MS capillary columns. Results were the means of three replicates.'",
+      "molar_basis": "ng/mL of the 5 mL aqueous reaction solution = ug/L, read as ug/kg at 1 kg/L: numerically the model's ppb. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "Cc1c(SSc2ccoc2C)cco1"
+    },
+    "2-Acetylthiazole": {
+      "target_unit": "ppb",
+      "target_value": 114.13,
+      "target_uncertainty": 15.98,
+      "target_quote": "Table 2 (pp. 4-5), 'Concentrations (ng/mL)', blank column (cysteine-xylose, no lysine), as printed: '8 1328 865 2-methyl-3-furanthiol 22.63 +/- 4.09b'; '11 1422 909 2-furfurylthiol 0.29 +/- 0.03a'; '15 1630 1020 2-acetylthiazole 114.13 +/- 15.98d'; '25 2145 1525 bis(2-methyl-3-furyl) disulfide 18.25 +/- 2.77b'. Footnote 2: 'The concentrations were the sums detected from both the DB-WAX and HP-5 MS capillary columns. Results were the means of three replicates.'",
+      "molar_basis": "ng/mL of the 5 mL aqueous reaction solution = ug/L, read as ug/kg at 1 kg/L: numerically the model's ppb. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "CC(=O)c1nccs1"
+    }
+  }
+}
